@@ -64,7 +64,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         case "module":
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE));
+                        AddCommand.MESSAGE_USAGE_MODULE));
             }
             moduleName = ParserUtil.parseModuleName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
@@ -72,20 +72,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         case "student":
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE));
+                        AddCommand.MESSAGE_USAGE_STUDENT));
             }
             name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
             phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
             email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
             moduleCodes = ParserUtil.parseMultipleModules(argMultimap.getAllValues(CliSyntax.PREFIX_MODULE));
-            Student student = new Student(name, phone, email, tagList, moduleList, moduleCodes);
-            return new AddCommand(student);
+            Student student = new Student(name, phone, email, tagList, moduleList);
+            return new AddCommand(student, moduleCodes);
         case "professor":
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE,
                     CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_OFFICE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE));
+                        AddCommand.MESSAGE_USAGE_PROFESSOR));
             }
             name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
             phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
@@ -93,8 +93,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             office = ParserUtil.parseOffice(argMultimap.getValue(CliSyntax.PREFIX_OFFICE).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
             moduleCodes = ParserUtil.parseMultipleModules(argMultimap.getAllValues(CliSyntax.PREFIX_MODULE));
-            Professor professor = new Professor(name, phone, email, tagList, office, moduleList, moduleCodes);
-            return new AddCommand(professor);
+            Professor professor = new Professor(name, phone, email, tagList, office, moduleList);
+            if (moduleCodes.isEmpty()) {
+                return new AddCommand(professor);
+            } else {
+                return new AddCommand(professor, moduleCodes);
+            }
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS_OPTION);
         }

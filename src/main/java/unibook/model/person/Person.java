@@ -8,6 +8,7 @@ import java.util.Set;
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.model.tag.Tag;
 
 /**
@@ -22,13 +23,10 @@ public class Person {
     private final Email email;
 
     // Module that is person is associated with
-    private final Set<Module> modules = new HashSet<>();
+    private Set<Module> modules = new HashSet<>();
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-
-    // Temporary field to store module codes that a person is associated with.
-    private final Set<ModuleCode> moduleCodes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -40,20 +38,6 @@ public class Person {
         this.phone = phone;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
-    }
-
-    /**
-     * Constructor of Person with extra ModuleCode parameter.
-     */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
-                  Set<Module> modules, Set<ModuleCode> moduleCodes) {
-        CollectionUtil.requireAllNonNull(name, phone, email, tags);
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.tags.addAll(tags);
-        this.modules.addAll(modules);
-        this.moduleCodes.addAll(moduleCodes);
     }
 
     /**
@@ -87,11 +71,10 @@ public class Person {
 
 
     /**
-     * Returns an immutable module set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a modifiable module set.
      */
     public Set<Module> getModules() {
-        return Collections.unmodifiableSet(modules);
+        return modules;
     }
 
     /**
@@ -112,6 +95,24 @@ public class Person {
     }
 
     /**
+     * Adds this person to all the modules that they are associated with, into the
+     * correct personnel list (professor/student) in module depending on the runtime type
+     * of this person.
+     *
+     */
+    public void addPersonToAllTheirModules() throws PersonNoSubtypeException {
+        for (Module module : this.getModules()) {
+            if (this instanceof Student) {
+                module.addStudent((Student) this);
+            } else if (this instanceof Professor) {
+                module.addProfessor((Professor) this);
+            } else {
+                throw new PersonNoSubtypeException();
+            }
+        }
+    }
+
+    /**
      * Returns a mutable module set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -120,11 +121,16 @@ public class Person {
     }
 
     /**
-     * Returns an immutable modulecode set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns true if the specified Module exists in the person's
+     * module list, otherwise returns false.
      */
-    public Set<ModuleCode> getModuleCodes() {
-        return Collections.unmodifiableSet(moduleCodes);
+    public boolean hasModule(ModuleCode moduleCode) {
+        for (Module m : modules) {
+            if (m.hasModuleCode(moduleCode)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -132,6 +138,13 @@ public class Person {
      */
     public void addModule(Module module) {
         modules.add(module);
+    }
+
+    /**
+     * Sets peron's modules
+     */
+    public void setModules(Set<Module> modules) {
+        this.modules = modules;
     }
 
     /**

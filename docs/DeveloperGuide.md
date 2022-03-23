@@ -150,7 +150,21 @@ Classes used by multiple components are in the `unibook.commons` package.
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+### List feature
+The list feature enables the user to customise which modules/people are currently visible. As an example, the sequence
+diagram below shows the flow using the input `list o/type ty/professors`.
+
+The command is first parsed with `execute("list o/type ty/professors", true, false)` where `true` and `false` are
+boolean variables indicating whether the `Person` view or `Module` view is currently active. Subsequently, the 
+`parseCommand` method in `UniBookParser` is called which will call `ListCommandParser`, which creates the 
+`ListCommand` for `ListCommandParser` to pass to `UniBookParser`. Subsequently the `ListCommand` is returned to 
+`LogicManager` and the `execute` method is run. In this case the `Model` instance is accessed to update the predicate
+which changes the view to the appropriate one (in this case showing all professors), 
+before finally returning the `CommandResult`.
+
+Note that the `List` command can also list modules and in this case the flow would be very similar, just that the 
+appropriate boolean variables will be flipped to represent the correct view. 
+![Interactions Inside the Logic Component for the `list` command](images/ListSequenceDiagram.png)
 
 
 ### Delete Command

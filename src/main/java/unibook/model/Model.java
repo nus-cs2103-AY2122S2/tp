@@ -1,6 +1,7 @@
 package unibook.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,8 @@ import unibook.commons.core.GuiSettings;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
+import unibook.model.person.Professor;
+import unibook.model.person.Student;
 
 
 /**
@@ -19,6 +22,9 @@ public interface Model {
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
+
+    Predicate<Person> PREDICATE_SHOW_ALL_PROFESSORS = p -> p instanceof Professor;
+    Predicate<Person> PREDICATE_SHOW_ALL_STUDENTS = p -> p instanceof Student;
 
     /**
      * Returns the user prefs.
@@ -122,7 +128,7 @@ public interface Model {
 
     void setModule(Module target, Module editedModule);
 
-    boolean isModuleExist(Person person);
+    boolean isModuleExist(Set<ModuleCode> moduleCodeSet);
 
     /**
      * Finds the corresponding module to the module code.
@@ -133,4 +139,5 @@ public interface Model {
     ObservableList<Module> getFilteredModuleList();
 
     void updateFilteredModuleList(Predicate<Module> predicate);
+
 }

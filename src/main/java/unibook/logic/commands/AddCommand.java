@@ -2,6 +2,7 @@ package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import unibook.logic.commands.exceptions.CommandException;
@@ -19,23 +20,87 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student/professor/module to the UniBook. "
-        + "Parameters: "
-        + CliSyntax.PREFIX_OPTION + "OPTION "
-        + CliSyntax.PREFIX_NAME + "NAME "
-        + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
-        + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-        + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
-        + "[" + CliSyntax.PREFIX_MODULE + "MODULE]...\n"
-        + "Example: " + COMMAND_WORD + " "
-        + CliSyntax.PREFIX_OPTION + "student "
-        + CliSyntax.PREFIX_NAME + "John Doe "
-        + CliSyntax.PREFIX_PHONE + "98765432 "
-        + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
-        + CliSyntax.PREFIX_TAG + "friends "
-        + CliSyntax.PREFIX_TAG + "owesMoney "
-        + CliSyntax.PREFIX_MODULE + "CS2103 "
-        + CliSyntax.PREFIX_MODULE + "CS2105";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a student/professor/module to the UniBook, depending on the option specified.\n"
+            + "Parameters: "
+            + CliSyntax.PREFIX_OPTION + "OPTION "
+            + CliSyntax.PREFIX_NAME + "NAME "
+            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
+            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
+            + "[" + CliSyntax.PREFIX_OFFICE + "OFFICE] "
+            + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
+            + "[" + CliSyntax.PREFIX_MODULE + "MODULE]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_OPTION + "student "
+            + CliSyntax.PREFIX_NAME + "John Doe "
+            + CliSyntax.PREFIX_PHONE + "98765432 "
+            + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
+            + CliSyntax.PREFIX_TAG + "friends "
+            + CliSyntax.PREFIX_TAG + "owesMoney "
+            + CliSyntax.PREFIX_MODULE + "CS2103 "
+            + CliSyntax.PREFIX_MODULE + "CS2105\n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_OPTION + "professor "
+            + CliSyntax.PREFIX_NAME + "Mary Jane "
+            + CliSyntax.PREFIX_PHONE + "98765412 "
+            + CliSyntax.PREFIX_EMAIL + "maryj@example.com "
+            + CliSyntax.PREFIX_OFFICE + "COM2 01-02 "
+            + CliSyntax.PREFIX_TAG + "strict "
+            + CliSyntax.PREFIX_TAG + "dean "
+            + CliSyntax.PREFIX_MODULE + "CS2103 "
+            + CliSyntax.PREFIX_MODULE + "CS2105\n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_OPTION + "module "
+            + CliSyntax.PREFIX_NAME + "Computer Organisation "
+            + CliSyntax.PREFIX_MODULE + "CS2100\n";
+    public static final String MESSAGE_USAGE_STUDENT = COMMAND_WORD
+            + ": To add a student to the UniBook, use the following format.\n"
+            + "Parameters: "
+            + CliSyntax.PREFIX_OPTION + "OPTION "
+            + CliSyntax.PREFIX_NAME + "NAME "
+            + CliSyntax.PREFIX_PHONE + "PHONE "
+            + CliSyntax.PREFIX_EMAIL + "EMAIL "
+            + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
+            + "[" + CliSyntax.PREFIX_MODULE + "MODULE]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_OPTION + "student "
+            + CliSyntax.PREFIX_NAME + "John Doe "
+            + CliSyntax.PREFIX_PHONE + "98765432 "
+            + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
+            + CliSyntax.PREFIX_TAG + "friends "
+            + CliSyntax.PREFIX_TAG + "owesMoney "
+            + CliSyntax.PREFIX_MODULE + "CS2103 "
+            + CliSyntax.PREFIX_MODULE + "CS2105\n";
+    public static final String MESSAGE_USAGE_MODULE = COMMAND_WORD
+            + ": To add a module to the UniBook, use the following format.\n"
+            + "Parameters: "
+            + CliSyntax.PREFIX_OPTION + "OPTION "
+            + CliSyntax.PREFIX_NAME + "NAME "
+            + CliSyntax.PREFIX_MODULE + "MODULE\n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_OPTION + "module "
+            + CliSyntax.PREFIX_NAME + "Computer Organisation "
+            + CliSyntax.PREFIX_MODULE + "CS2100\n";
+    public static final String MESSAGE_USAGE_PROFESSOR = COMMAND_WORD
+            + ": To add a professor to the UniBook, use the following format.\n"
+            + "Parameters: "
+            + CliSyntax.PREFIX_OPTION + "OPTION "
+            + CliSyntax.PREFIX_NAME + "NAME "
+            + CliSyntax.PREFIX_PHONE + "PHONE "
+            + CliSyntax.PREFIX_EMAIL + "EMAIL "
+            + CliSyntax.PREFIX_OFFICE + "OFFICE "
+            + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
+            + "[" + CliSyntax.PREFIX_MODULE + "MODULE]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_OPTION + "professor "
+            + CliSyntax.PREFIX_NAME + "Mary Jane "
+            + CliSyntax.PREFIX_PHONE + "98765412 "
+            + CliSyntax.PREFIX_EMAIL + "maryj@example.com "
+            + CliSyntax.PREFIX_OFFICE + "COM2 01-02 "
+            + CliSyntax.PREFIX_TAG + "strict "
+            + CliSyntax.PREFIX_TAG + "dean "
+            + CliSyntax.PREFIX_MODULE + "CS2103 "
+            + CliSyntax.PREFIX_MODULE + "CS2105\n";
 
     public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook";
@@ -48,6 +113,7 @@ public class AddCommand extends Command {
 
     private Person personToAdd = new Person();
     private Module moduleToAdd = new Module();
+    private Set<ModuleCode> moduleCodeSet = new HashSet<>();
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -55,6 +121,15 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         personToAdd = person;
+    }
+
+    /**
+     * Creates an AddCommand to add the specified {@code Person} with {@code moduleCodes}
+     */
+    public AddCommand(Person person, Set<ModuleCode> moduleCodes) {
+        requireNonNull(person);
+        personToAdd = person;
+        moduleCodeSet = moduleCodes;
     }
 
     /**
@@ -82,12 +157,11 @@ public class AddCommand extends Command {
         } else {
             if (model.hasPerson(personToAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            } else if (!model.isModuleExist(personToAdd)) {
+            } else if (!model.isModuleExist(moduleCodeSet)) {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
             }
-            Set<ModuleCode> personModuleCodes = personToAdd.getModuleCodes();
             Set<Module> personModules = personToAdd.getModulesModifiable();
-            for (ModuleCode moduleCode : personModuleCodes) {
+            for (ModuleCode moduleCode : moduleCodeSet) {
                 Module toAdd = model.getModuleByCode(moduleCode);
                 personModules.add(toAdd);
             }
