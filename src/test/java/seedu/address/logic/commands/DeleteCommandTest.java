@@ -9,6 +9,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -16,8 +19,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.common.Description;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -69,13 +76,19 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_deleteValidNameDifferentCase_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(new FriendName(personToDelete.getName().fullName.toLowerCase()));
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        Person person = new Person(new FriendName("Hilary Tan"), new Phone("97875337"),
+                new Email("ht@gmail.com"), new Address("Jurong East"), new Description("Has a cute dog!"),
+                new HashSet<>(), new ArrayList<>());
+
+        model.addPerson(person);
+
+        DeleteCommand deleteCommand = new DeleteCommand(new FriendName("HILARY TAN"));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, person);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deletePerson(person);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
