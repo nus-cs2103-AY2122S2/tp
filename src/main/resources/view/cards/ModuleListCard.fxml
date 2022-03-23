@@ -28,9 +28,9 @@
             </HBox>
             <Label fx:id="moduleName" styleClass="module-name" text="\$moduleCode"/>
             <Label fx:id="professorListHeading" styleClass="module-professor-list-heading" text="Professors"/>
-            <ListView fx:id="professors" VBox.vgrow="ALWAYS"/>
+            <VBox fx:id="professors" VBox.vgrow="ALWAYS"/>
             <Label fx:id="studentListHeading" styleClass="module-student-list-heading" text="Students"/>
-            <ListView fx:id="students" VBox.vgrow="ALWAYS"/>
+            <VBox fx:id="students" VBox.vgrow="ALWAYS"/>
         </VBox>
     </GridPane>
 </HBox>

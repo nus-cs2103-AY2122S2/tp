@@ -6,7 +6,9 @@ import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -21,8 +23,12 @@ import unibook.logic.commands.FindCommand;
 import unibook.logic.commands.HelpCommand;
 import unibook.logic.commands.ListCommand;
 import unibook.logic.parser.exceptions.ParseException;
+import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleName;
 import unibook.model.person.NameContainsKeywordsPredicate;
 import unibook.model.person.Person;
+import unibook.model.tag.Tag;
 import unibook.testutil.Assert;
 import unibook.testutil.EditPersonDescriptorBuilder;
 import unibook.testutil.PersonBuilder;
@@ -57,12 +63,28 @@ public class UniBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Set<Module> modSet = new HashSet<>();
+        Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag("friends"));
+        ModuleCode moduleCode = new ModuleCode("CS2103");
+        ModuleName moduleName = new ModuleName("Software Engineering");
+        descriptor.setTags(tagSet);
+        Module module = new Module(moduleName, moduleCode);
+        modSet.add(module);
+        descriptor.setModules(modSet);
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, descriptor, moduleCode);
         System.out.println(PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        System.out.println(EditCommand.COMMAND_WORD
+                + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased()
+                + " o/person "
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
             + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased()
             + " o/person "
             + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, descriptor), command);
+        EditCommand editCommand1 = command;
+
+        assertEquals(editCommand1, command);
     }
 
     @Test

@@ -74,77 +74,93 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a module/student/professor: `add`
 
-Adds a person to the UniBook.
+Adds a module/student/professor to the UniBook depending on the value defined in `o/OPTION`.
 
-Format: `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS][m/MODULE]…​`
+Format: `add o/OPTION...`  
+OPTION values:  
+1. module  
+Format: `add o/module n/MODULENAME m/MODULECODE`  
+This adds a Module with name: Discrete Mathematics and code: CS1231S to the UniBook.  
+
+
+2. student  
+Format: `add o/student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [m/MODULE]…​`  
+This adds a Student to the UniBook, it also adds the student into the student list of the corresponding Module objects (CS1231S and CS2103).  
+
+
+3. professor  
+Format: `add o/professor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [m/MODULE]…​`  
+This adds a Professor to the UniBook, it also adds the professor into the professor list of the corresponding Module objects (CS1231S and CS2100).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of modules (including 0)
+A student/professor can have any number of tags and modules (including 0)
 </div>
 
-* Adds the entity type defined by `o/OPTION` to UniBook, where `n/NAME` is its name. These are the only two compulsory fields.
-* 3 values for `o/OPTION`:
-  * `o/module`: add module to UniBook, `n/name` specifies module name, while `m/MODULE` is compulsory to specify the module code.
-  * `o/professor`: add professor to UniBook, compulsory `n/name` to specify their name, optional field `[m/MODULE]` to specify what module(s) that professor is handling.
-  * `o/student`: add student to UniBook, compulsory field `n/name` to specify their name, and optional field `[m/MODULE]` to specify what module(s) that student is enrolled in.
-
-Examples:
-* `add o/module n/Software Engineering m/cs2103` add the module with code 'cs2103' and name 'Software Engineering' to UniBook
-* `add o/professor n/John Doe p/98765432 e/johnd@example.com a/COM2-02-02 m/cs2103` add the professor 'John Doe' to UniBook
-* `add o/student n/Betsy Crowe e/betsycrowe@example.com m/cs2103 m/cs2100` add a student 'Betsy Crowe' to UniBook
+Examples:  
+`add o/module n/Discrete Mathematics m/CS1231S` adds a module "Discrete Mathematics" with module code CS1231S to the UniBook  
+`add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS1231S m/CS2103` adds a student named Johnston to the UniBook  
+`add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com a/COM2 01-15 t/smart m/CS1231S m/CS2100`  adds a professor named Aaron Tan to the UniBook  
 
 ### Listing entries: `list`
 
-Lists entries in UniBook according listing criteria.
+Lists entries in UniBook according to a specified listing criteria.
 
-Format: list [o/LISTING_CRITERIA CRITERIA_INFORMATION]…
+Format: `list o/OPTION [m/MODULE] [ty/TYPE]`, `list v/VIEW`
 
-* lists all contacts in UniBook in ordered alphabetically by name if no optional field is provided
-* if [o/LISTING_CRITERIA CRITERIA_INFORMATION] is provided, then only contacts with fields (defined by LISTING\_CRITERIA) matching the CRITERIA\_INFORMATION provided will be shown to user
-* listing criteria stack - so multiple listing criteria will further narrow the listing shown to user
+* Lists all entries in the UniBook based on the user specified option and criteria.
+* If no argument is provided, UniBook simply lists every entry depending on the currently active view.
 
-LISTING_CRITERIA values:
+OPTION values:
 
-* "module" -  lists all contacts that are participants of that module
+* `module` -  lists all contacts that are participants of a module which is specified by entering 
+`/m <MODULECODE>`.
 
-* "group" - lists all contacts that are participants of that group
+* `type` - lists all contacts by their contact type, specified by entering `ty/<TYPE>` where
+`<TYPE>` is either `professors` or `students`.
 
-* "type" - lists all contacts by their contact type (professor or student)
+* [NOT READY] `group` - lists all contacts that are participants of that group
+
+VIEW values:
+* `people` - switches to people view, automatically lists all persons
+* `modules` - switches to modules view, automatically list all modules
 
 Examples:
 
-* `list o/module CS2103` lists all contacts related to the module CS2103
+* `list` displays every entry depending on currently active view.
 
-* `list o/group W16-T1` lists all contacts that are related to the group W16-T1
+* `list o/module m/CS2103` lists all contacts related to the module CS2103
 
-* `list o/type professors` lists all professors
+* `list o/type ty/professors` lists all professors
 
-* `list o/module CS2103 o/type professors` lists all professors of the module CS2103
+* `list o/module m/CS2103 ty/professors` lists all professors of the module CS2103
 
-* `list o/module CS2104 o/type students` lists all students of the module CS2103
+* `list o/module m/CS2103 ty/students` lists all students of the module CS2103
 
+* `list v/modules` switches the UniBook to `modules` view.
+
+  
+* [NOT READY] `list o/group W16-T1` lists all contacts that are related to the group W16-T1
 
 ### Editing a person : `edit`
 
 Edits an existing person in UniBook.
 
-Format: `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
+Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
 
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
-* Depending on the entity type, certain fields will be compulsory.
-* Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list
-  * `list o/module` : To display list of modules with respective indexes
-  *  `list o/person` : To display list of persons with respective indexes 
+* Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list. User will not be allowed to edit if not on the correct page. 
+  * `list v/modules` : To display list of modules with respective indexes
+  * `list v/people` : To display list of persons with respective indexes 
 * 2 values for `OPTION`:
-    * `module`: Edits the module specified by compulsory field `m/MODULE`. Optional fields `[n/NAME] [nm/NEWMODULE]` to specify the new name or module code of the module.
-    * `person`: Edits the person at the specified by the compulsory field INDEX. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
+    * `module`: Edits the module specified by compulsory field `INDEX`. Optional fields `[n/NAME] [m/MODULECODE]` to specify the new name or module code of the module.
+    * `person`: Edits the person at the specified by the compulsory field `INDEX`. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit 1 o/person p/91234567 e/prof@example.com nm/CS2103` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively. Adds module CS2103 to the list of modules that this person is taking. 
-*  `edit 1 o/module m/CS2103 n/Software Engineering  ` Edits the module code of the 1st module with code `CS2103` to be named as `Software Engineering` and have a new code `CS2103T`
+*  `edit 1 o/module m/CS2103 n/Software Engineering  ` Edits the module code of the 1st module to code `CS2103` and name as `Software Engineering`. Edits the all instances of modules in each person taking the module. 
 
 ### Locating persons by name: `find`
 

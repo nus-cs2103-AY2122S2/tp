@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -203,7 +204,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean isModuleExist(Person person) {
+        public boolean isModuleExist(Set<ModuleCode> moduleCodeSet) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -265,8 +266,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean isModuleExist(Person person) {
-            requireNonNull(person);
+        public boolean isModuleExist(Set<ModuleCode> moduleCodeSet) {
+            requireNonNull(moduleCodeSet);
             return true;
         }
 
