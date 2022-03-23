@@ -7,8 +7,8 @@ title New state
 
 package State {
     class State1 as "__ta0:TAssist__"
-    class Student1 as "__s1:Student__"
+    class ClassGroup1 as "__c1:ClassGroup__"
 }
 
-State1 *--> Student1
+State1 *--> ClassGroup1
 @end
