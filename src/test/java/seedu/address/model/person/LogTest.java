@@ -39,7 +39,7 @@ public class LogTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Log(null, null));
+        assertThrows(NullPointerException.class, () -> new Log(null, "some description"));
     }
 
     @Test
