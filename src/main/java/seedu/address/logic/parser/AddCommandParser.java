@@ -37,7 +37,6 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_COURSE,
                         PREFIX_MATRICCARD, PREFIX_TELEGRAM);
@@ -52,9 +51,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-        MatricCard matricCard = ParserUtil.parseMatricCard(argMultimap.getValue(PREFIX_MATRICCARD).get());
-        Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
+        Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).orElse(""));
+        MatricCard matricCard = ParserUtil.parseMatricCard(argMultimap.getValue(PREFIX_MATRICCARD).orElse(""));
+        Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).orElse(""));
 
         Person person = new Person(name, phone, email, address, tagList, course, matricCard, telegram);
 

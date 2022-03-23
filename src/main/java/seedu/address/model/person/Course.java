@@ -35,7 +35,7 @@ public class Course {
      * Returns true if a given string is a valid courseName.
      */
     public static boolean isValidCourse(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
 
