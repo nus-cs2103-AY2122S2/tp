@@ -42,6 +42,7 @@ public class Price {
 
         price = removeDollarSign(price);
         this.price = Double.parseDouble(price);
+        assert this.price >= 0; // ensure that the price is not negative
     }
 
     /**
