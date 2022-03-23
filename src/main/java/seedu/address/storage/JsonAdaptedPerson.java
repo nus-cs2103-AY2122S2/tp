@@ -78,7 +78,7 @@ class JsonAdaptedPerson {
                 ? new JsonAdaptedPreference(source.getPreference().get()) : null;
         userType = source.getUserType().value;
         userImage = source.getUserImage().isPresent()
-                ? new JsonAdaptedUserImage(source.getUserImage().get()) : null;
+                ? new JsonAdaptedUserImage(source.getUserImage()) : null;
     }
 
     /**
@@ -96,8 +96,7 @@ class JsonAdaptedPerson {
         final Optional<Preference> modelPreference =
                 preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
 
-        final Optional<UserImage> modelUserImage = userImage != null
-                ? Optional.of(userImage.toModelType()) : Optional.empty();
+        final UserImage modelUserImage = userImage.toModelType();
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));

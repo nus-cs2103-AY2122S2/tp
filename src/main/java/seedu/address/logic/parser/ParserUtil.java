@@ -219,7 +219,10 @@ public class ParserUtil {
     }
 
     public static UserImage parseUserImage(String userImage) throws ParseException {
-        requireNonNull(userImage);
+        if (userImage == null) {
+            return new UserImage();
+        }
+
         String trimmedUserImage = userImage.trim();
         String[] splitUserImage = trimmedUserImage.split(":");
 

@@ -7,7 +7,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Pair;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * The API of the Model component.
@@ -81,8 +83,13 @@ public interface Model {
     /** Returns list of matching properties and preferences. */
     List<Pair<Person>> getMatchList();
 
+    UserImage getViewPersonImage();
+
     /** Updates the match list. */
     void updateMatchList();
+
+    /** Update the person to view associated images */
+    void updateViewPerson(UserImage userImage);
 
     /**
      * Toggles the Favourite status of the given person {@code personToFavourite}.

@@ -111,20 +111,10 @@ public class EditCommand extends Command {
         // preference cannot be edited
         Optional<Preference> updatedPreference = personToEdit.getPreference();
         UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
-        Optional<UserImage> updatedUserImage = setUserImage(personToEdit, editPersonDescriptor);
+        UserImage updatedUserImage = editPersonDescriptor.getUserImage().orElse(personToEdit.getUserImage());
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
                 updatedPreference, updatedUserType, updatedUserImage);
-    }
-
-    private static Optional<UserImage> setUserImage(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        Optional<UserImage> updatedUserImage = personToEdit.getUserImage();
-
-        if (editPersonDescriptor.getUserImage().isPresent()) {
-            updatedUserImage = editPersonDescriptor.getUserImage();
-        }
-
-        return updatedUserImage;
     }
 
     @Override
@@ -181,7 +171,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, userType);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, userType, userImage);
         }
 
         public void setName(Name name) {

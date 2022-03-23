@@ -22,6 +22,10 @@ public class FilePath {
         return file.exists();
     }
 
+    public String get() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value;

@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private MatchWindow matchWindow;
     private FavouriteWindow favouriteWindow;
+    private ViewImageWindow viewImageWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -70,6 +71,7 @@ public class MainWindow extends UiPart<Stage> {
         favouriteWindow = new FavouriteWindow(logic);
         helpWindow = new HelpWindow();
         matchWindow = new MatchWindow(logic);
+        viewImageWindow = new ViewImageWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -163,6 +165,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the view image window or focuses on it if it's already opened after refreshing its contents.
+     */
+    @FXML
+    public void handleViewImage() {
+        viewImageWindow.refresh();
+        if (!viewImageWindow.isShowing()) {
+            viewImageWindow.show();
+        } else {
+            viewImageWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -213,6 +228,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowMatch()) {
                 handleMatch();
+            }
+
+            if (commandResult.isShowImage()) {
+                handleViewImage();
             }
 
             if (commandResult.isExit()) {

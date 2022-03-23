@@ -26,7 +26,7 @@ public class Person {
     private final Set<Property> properties;
     private final Optional<Preference> preference;
     private final UserType userType;
-    private final Optional<UserImage> userImage;
+    private final UserImage userImage;
 
     /**
      * This constructor is used when editing a Client.
@@ -34,7 +34,7 @@ public class Person {
      * @param userImage user can be of null value since a person may have no image associated
      */
     public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
-            Set<Property> properties, Optional<Preference> preference, UserType userType, Optional<UserImage> userImage) {
+            Set<Property> properties, Optional<Preference> preference, UserType userType, UserImage userImage) {
         requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType, userImage);
         this.name = name;
         this.phone = phone;
@@ -53,7 +53,7 @@ public class Person {
      * @param userImage user can be empty since a person may have no image associated
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties,
-            Optional<Preference> preference, UserType userType, Optional<UserImage> userImage) {
+            Optional<Preference> preference, UserType userType, UserImage userImage) {
         requireAllNonNull(name, phone, email, address, properties, preference, userType, userImage);
         this.name = name;
         this.phone = phone;
@@ -110,7 +110,7 @@ public class Person {
         return userType;
     }
 
-    public Optional<UserImage> getUserImage() {
+    public UserImage getUserImage() {
         return userImage;
     }
 
@@ -207,9 +207,9 @@ public class Person {
 
         if (getUserImage().isPresent()) {
             builder.append("; UserImage: ");
-            builder.append(getUserImage().get().getFilePath());
+            builder.append(getUserImage().getFilePath());
             builder.append("; Description: ");
-            builder.append(getUserImage().get().getDescription());
+            builder.append(getUserImage().getDescription());
         }
         return builder.toString();
     }
