@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 import seedu.address.model.common.Description;
 
 
@@ -52,7 +54,9 @@ public class Log {
 
     @Override
     public String toString() {
-        return this.title + "\n" + this.description + "\n\n";
+        return this.title + "\n"
+                + (Objects.isNull(this.description.value) ? "" : this.description)
+                + "\n\n";
     }
 
     @Override
