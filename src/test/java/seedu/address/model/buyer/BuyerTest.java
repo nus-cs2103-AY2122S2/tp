@@ -103,28 +103,21 @@ public class BuyerTest {
         House h2 = new House(ht2, location2);
         House h3 = new House(ht3, location3);
 
-        try {
-            pr1 = new PriceRange(100000, 200000);
-            pr2 = new PriceRange(200000, 300000);
-            pr3 = new PriceRange(300000, 400000);
+        pr1 = new PriceRange(100000, 200000);
+        pr2 = new PriceRange(200000, 300000);
+        pr3 = new PriceRange(300000, 400000);
 
+        PropertyToBuy ptb1 = new PropertyToBuy(h1, pr1);
+        PropertyToBuy ptb2 = new PropertyToBuy(h2, pr2);
+        
+        // Same property
+        editedYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
+        Buyer testYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
+        assertEquals(editedYuqi, testYuqi);
 
-            PropertyToBuy ptb1 = new PropertyToBuy(h1, pr1);
-            PropertyToBuy ptb2 = new PropertyToBuy(h2, pr2);
-
-            // Same property
-            editedYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
-            Buyer testYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
-            assertEquals(editedYuqi, testYuqi);
-
-            // Different property
-            editedYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
-            testYuqi = new BuyerBuilder(YUQI).withProperty(ptb2).build();
-            assertNotEquals(editedYuqi, testYuqi);
-
-        } catch (IllegalValueException e) {
-            System.out.println(e.getMessage());
-        }
-
+        // Different property
+        editedYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
+        testYuqi = new BuyerBuilder(YUQI).withProperty(ptb2).build();
+        assertNotEquals(editedYuqi, testYuqi);
     }
 }
