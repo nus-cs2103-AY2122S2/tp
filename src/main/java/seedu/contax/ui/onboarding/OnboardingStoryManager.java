@@ -71,8 +71,8 @@ public class OnboardingStoryManager {
 
 
         test.addStory(new OnboardingStep(
-                "Follow the format 'addPerson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
-                        + "\n\nExample: addPerson n/Johnny p/91234567 e/Johnny@j.com a/Johnny street"
+                "Follow the format 'addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
+                        + "\n\nExample: addperson n/Johnny p/91234567 e/Johnny@j.com a/Johnny street"
                         + "\n\nHit enter when you are done",
                 0.2, 0.5,
                 OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
