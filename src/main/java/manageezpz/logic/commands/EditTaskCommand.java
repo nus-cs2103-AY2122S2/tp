@@ -1,16 +1,25 @@
 package manageezpz.logic.commands;
 
-import static manageezpz.commons.core.Messages.*;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
+import static manageezpz.commons.core.Messages.MESSAGE_TASK_UPDATE_SUCCESS;
+import static manageezpz.commons.core.Messages.MESSAGE_UNEXPECTED_ERROR;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+
+import java.util.ArrayList;
 
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.ParserUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
-import manageezpz.model.task.*;
-
-import java.util.ArrayList;
+import manageezpz.model.task.Date;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Description;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Time;
+import manageezpz.model.task.Todo;
 
 /**
  * Edits the details of an existing task in the address book.
@@ -98,7 +107,7 @@ public class EditTaskCommand extends Command {
         Time endTime = parseTime(end);
         ArrayList<Time> startEndTimeStorageArr = new ArrayList<>();
         if (endTime.getParsedTime().compareTo(startTime.getParsedTime()) < 0) {
-            throw new ParseException(MESSAGE_INVAlID_TIME_RANGE);
+            throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
         } else {
             startEndTimeStorageArr.add(startTime);
             startEndTimeStorageArr.add(endTime);
@@ -120,29 +129,29 @@ public class EditTaskCommand extends Command {
     private CommandResult handleDeadline(Deadline currentTask, Model model, String desc, String date, String time)
             throws ParseException {
 
-        Description dl_description;
-        Time dl_time;
-        Date dl_date;
+        Description dlDescription;
+        Time dlTime;
+        Date dlDate;
 
         if (desc.isEmpty()) {
-            dl_description = currentTask.getDescription();
+            dlDescription = currentTask.getDescription();
         } else {
-           dl_description = parseDesc(desc);
+            dlDescription = parseDesc(desc);
         }
 
         if (time.isEmpty()) {
-            dl_time = currentTask.getTime();
+            dlTime = currentTask.getTime();
         } else {
-            dl_time = parseTime(time);
+            dlTime = parseTime(time);
         }
 
         if (date.isEmpty()) {
-            dl_date = currentTask.getDate();
+            dlDate = currentTask.getDate();
         } else {
-            dl_date = parseDate(date);
+            dlDate = parseDate(date);
         }
 
-        Deadline newTask = new Deadline(dl_description, dl_date, dl_time);
+        Deadline newTask = new Deadline(dlDescription, dlDate, dlTime);
         model.setTask(currentTask, newTask);
         return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, newTask));
     }
