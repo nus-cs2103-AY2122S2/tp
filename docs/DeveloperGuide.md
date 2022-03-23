@@ -197,15 +197,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `ReversibleIBook` will be initialized, which in turn initializes `StateChangeRecorder` with a `stateChanges` list consisting of zero `StateChange` record.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<img src="images/UndoRedoState0.png" width="550" />
 
 Step 2. The user executes `delete 3` command to delete the 3rd product in the iBook. The `delete` command calls `Model#saveIBookChanges()` after its execution, causing changes made to iBook to be recorded as a `StateChange` and stored in the `stateChanges` list. The `currentStateChange` is now pointing to this most recent `StateChange`.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<img src="images/UndoRedoState1.png" width="550" />
 
 Step 3. The user executes `update 1 n~Maggie​` to add a new product. This command also calls `Model#saveIBookChanges()`, causing another `StateChange` to be saved into the `stateChanges` list.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<img src="images/UndoRedoState2.png" width="550" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#saveIBookChanges()`, so no `StateChange` will be saved into the `stateChanges` list.
 
@@ -213,7 +213,7 @@ Step 3. The user executes `update 1 n~Maggie​` to add a new product. This comm
 
 Step 4. The user now decides that adding the product was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoIBook()`, which will get and execute the actions needed to revert this change. `currentStateChange` will then move once to the left, pointing to the most recent `stateChange` (with respect to the state of `IBook` after the `undo` command).
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<img src="images/UndoRedoState3.png" width="550" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateChange` is not pointing to a valid `StateChange` (for example when there is no record in the `stateChanges` list), then there are no changes to revert. The `undo` command uses `Model#canUndoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
@@ -221,7 +221,7 @@ Step 4. The user now decides that adding the product was a mistake, and decides 
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<img src="images/UndoSequenceDiagram.png" width="950" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -235,11 +235,11 @@ The `redo` command does exactly the opposite — it calls `Model#redoIBook()
 
 Step 5. The user then decides to execute the command `list`. Commands that do not make any changes to `Ibook`, such as `list`, will usually not call `Model#saveIBookChanges()`, `Model#undoIBook()` or `Model#redoIBook()`. Thus, state change records in `StateChangeRecorder` remain unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<img src="images/UndoRedoState4.png" width="550" />
 
 Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges()` at the end of its execution. Since the `currentStateChange` is not pointing at the end of the `stateChanges` list, all state changes after the `currentStateChange` will be cleared. Reason: It does not make sense to redo the `update 1 n~Maggie​` command. This is the convention that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<img src="images/UndoRedoState5.png" width="550" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
