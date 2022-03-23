@@ -257,7 +257,10 @@ The following activity diagram summarizes what happens when a user executes a va
   - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
 
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
+
 ### Sort command feature
 
 #### What it does
@@ -294,6 +297,8 @@ The following sequence diagram summarizes what happens when a user executes a so
 - **Alternative 2:** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
     - Pros: Users have fewer prefixes to remember
     - Cons: Users need to remember valid inputs
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
