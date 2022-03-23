@@ -226,7 +226,7 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 * Use ssd/ to sort status in descending order.
 * If there are no prefix, it will sort by name in ascending order.
 * If both prefixes for ascending and descending are used for the same attribute, it will only sort by ascending.
-* If both prefixes for name and status are used,by default, it will sort by name then status.
+* If both prefixes for name and status are used, by default, it will sort by name then status.
 * Use so/ to sort by status then name.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
