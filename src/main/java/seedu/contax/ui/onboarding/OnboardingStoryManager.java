@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.AddPersonCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
@@ -87,14 +87,14 @@ public class OnboardingStoryManager {
                                     return INVALID_COMMAND;
                                 }
 
-                                if (!(command instanceof AddCommand)) {
+                                if (!(command instanceof AddPersonCommand)) {
                                     return "Please use a add command";
                                 }
 
                                 try {
                                     command.execute(model);
                                 } catch (CommandException e) {
-                                    if (e.getMessage().equals(AddCommand.MESSAGE_DUPLICATE_PERSON)) {
+                                    if (e.getMessage().equals(AddPersonCommand.MESSAGE_DUPLICATE_PERSON)) {
                                         return "Person name already exists! Add someone else";
                                     }
                                 }
