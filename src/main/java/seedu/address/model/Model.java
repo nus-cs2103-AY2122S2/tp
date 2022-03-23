@@ -85,10 +85,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Adds the given event.
-     * @param event to be added into the eventBook
-     */
-    void addEvent(Event event);
 }

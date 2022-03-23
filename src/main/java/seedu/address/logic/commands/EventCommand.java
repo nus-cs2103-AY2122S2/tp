@@ -29,7 +29,7 @@ public class EventCommand extends Command {
             + "number."
             + "\nParameters: INDEX (must be a positive integer) " + PREFIX_EVENT_NAME + "EVENT NAME " + PREFIX_INFO
             + "EVENT DETAILS " + PREFIX_DATE + "yyyy-MM-dd " + PREFIX_TIME + "HH:mm";
-    public static final String MESSAGE_ARGUMENTS = "Tagged following event to %n%1$s:" + "\n%2$s";
+    public static final String MESSAGE_ARGUMENTS = "Tagged following event to %1$s:" + "\n%2$s";
 
     private final Index[] indexes;
     private final EventName name;

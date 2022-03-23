@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an Event's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidEventName(String)}
  */
 public class EventName {
 
@@ -47,7 +47,7 @@ public class EventName {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof EventName
-                && value.equals(((EventName) other).value));
+                && value.equalsIgnoreCase(((EventName) other).value));
     }
 
     @Override

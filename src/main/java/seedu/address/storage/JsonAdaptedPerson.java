@@ -35,6 +35,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> educations = new ArrayList<>();
     private final List<JsonAdaptedTag> internships = new ArrayList<>();
     private final List<JsonAdaptedTag> modules = new ArrayList<>();
+    private final List<JsonAdaptedTag> events = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -61,6 +62,9 @@ class JsonAdaptedPerson {
         }
         if (ccas != null) {
             this.ccas.addAll(ccas);
+        }
+        if (events != null) {
+            this.events.addAll(events);
         }
     }
 
