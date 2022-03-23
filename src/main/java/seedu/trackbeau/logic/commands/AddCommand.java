@@ -3,6 +3,7 @@ package seedu.trackbeau.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
@@ -28,8 +29,9 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_SKINTYPE + "SKIN TYPE]\n"
-            + "[" + PREFIX_HAIRTYPE + "HAIR TYPE]\n"
+            + PREFIX_SKINTYPE + "SKIN TYPE"
+            + PREFIX_HAIRTYPE + "HAIR TYPE"
+            + PREFIX_BIRTHDATE + "BIRTHDAY"
             + "[" + PREFIX_STAFFS + "STAFFS]...\n"
             + "[" + PREFIX_SERVICES + "SERVICES]...\n"
             + "[" + PREFIX_ALLERGIES + "ALLERGIES]...\n"

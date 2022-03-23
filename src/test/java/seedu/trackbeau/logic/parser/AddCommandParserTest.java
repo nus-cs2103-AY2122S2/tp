@@ -5,6 +5,8 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.ALLERGY_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.ALLERGY_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.BIRTHDATE_DESC_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.BIRTHDATE_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.HAIR_TYPE_DESC_AMY;
@@ -70,38 +72,43 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB + BIRTHDATE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + BIRTHDATE_DESC_BOB + HAIR_TYPE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
-                + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
+                + STAFF_DESC_BOB + SERVICE_DESC_BOB
+                + ALLERGY_DESC_BOB + BIRTHDATE_DESC_BOB , new AddCommand(expectedCustomer));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB
+                + HAIR_TYPE_DESC_BOB + BIRTHDATE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB
+                + HAIR_TYPE_DESC_BOB + BIRTHDATE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
 
         // multiple skin types - last skin type accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SKIN_TYPE_DESC_AMY + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                + SKIN_TYPE_DESC_AMY + SKIN_TYPE_DESC_BOB
+                + HAIR_TYPE_DESC_BOB + BIRTHDATE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
 
         // multiple hair types - last hair type accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_AMY + HAIR_TYPE_DESC_BOB
+                + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_AMY
+                + HAIR_TYPE_DESC_BOB + BIRTHDATE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
 
         // multiple staffs tags - all accepted
@@ -111,7 +118,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
-                + STAFF_DESC_AMY + STAFF_DESC_BOB
+                + STAFF_DESC_AMY + STAFF_DESC_BOB + BIRTHDATE_DESC_BOB
                 + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomerMultipleStaffs));
 
         // multiple services tags - all accepted
@@ -123,7 +130,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB + STAFF_DESC_BOB
-                + SERVICE_DESC_AMY + SERVICE_DESC_BOB
+                + SERVICE_DESC_AMY + SERVICE_DESC_BOB + BIRTHDATE_DESC_BOB
                 + ALLERGY_DESC_BOB, new AddCommand(expectedCustomerMultipleServices));
 
 
@@ -135,7 +142,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
-                + STAFF_DESC_BOB + SERVICE_DESC_BOB
+                + STAFF_DESC_BOB + SERVICE_DESC_BOB + BIRTHDATE_DESC_BOB
                 + ALLERGY_DESC_AMY
                 + ALLERGY_DESC_BOB, new AddCommand(expectedCustomerMultipleAllergies));
     }
@@ -147,7 +154,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + HAIR_TYPE_DESC_AMY + STAFF_DESC_AMY
-                        + SERVICE_DESC_AMY + ALLERGY_DESC_AMY,
+                        + SERVICE_DESC_AMY + ALLERGY_DESC_AMY + BIRTHDATE_DESC_AMY,
                 new AddCommand(expectedCustomer));
     }
 
@@ -157,7 +164,7 @@ public class AddCommandParserTest {
         Customer expectedCustomer = new CustomerBuilder(AMY).withHairType(EMPTY_HAIR_TYPE).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + SKIN_TYPE_DESC_AMY + STAFF_DESC_AMY
+                        + SKIN_TYPE_DESC_AMY + BIRTHDATE_DESC_AMY + STAFF_DESC_AMY
                         + SERVICE_DESC_AMY + ALLERGY_DESC_AMY,
                 new AddCommand(expectedCustomer));
     }
@@ -168,7 +175,7 @@ public class AddCommandParserTest {
         Customer expectedCustomer = new CustomerBuilder(AMY).withStaffs().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY
+                        + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY + BIRTHDATE_DESC_AMY
                         + SERVICE_DESC_AMY + ALLERGY_DESC_AMY,
                 new AddCommand(expectedCustomer));
     }
@@ -179,7 +186,7 @@ public class AddCommandParserTest {
         Customer expectedCustomer = new CustomerBuilder(AMY).withServices().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY
+                        + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY + BIRTHDATE_DESC_AMY
                         + STAFF_DESC_AMY + ALLERGY_DESC_AMY,
                 new AddCommand(expectedCustomer));
     }
@@ -190,7 +197,7 @@ public class AddCommandParserTest {
         Customer expectedCustomer = new CustomerBuilder(AMY).withAllergies().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY
+                        + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY + BIRTHDATE_DESC_AMY
                         + STAFF_DESC_AMY + SERVICE_DESC_AMY,
                 new AddCommand(expectedCustomer));
     }

@@ -10,6 +10,7 @@ import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.StringUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
@@ -124,6 +125,21 @@ public class ParserUtil {
             throw new ParseException(HairType.MESSAGE_CONSTRAINTS);
         }
         return new HairType(trimmedHairType);
+    }
+
+    /**
+     * Parses a {@code String birthdate} into an {@code Birthdate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Birthdate} is invalid.
+     */
+    public static Birthdate parseBirthdate(String birthDate) throws ParseException {
+        requireNonNull(birthDate);
+        String trimmedbirthDate = birthDate.trim();
+        if (!Birthdate.isValidBirthdate(trimmedbirthDate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthdate(birthDate);
     }
 
     /**

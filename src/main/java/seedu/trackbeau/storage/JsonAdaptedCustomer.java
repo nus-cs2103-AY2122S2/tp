@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.trackbeau.commons.exceptions.IllegalValueException;
 import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
@@ -32,6 +33,7 @@ class JsonAdaptedCustomer {
     private final String address;
     private final String skinType;
     private final String hairType;
+    private final String birthDate;
     private final List<JsonAdaptedTag> staffs = new ArrayList<>();
     private final List<JsonAdaptedTag> services = new ArrayList<>();
     private final List<JsonAdaptedTag> allergies = new ArrayList<>();
@@ -46,13 +48,15 @@ class JsonAdaptedCustomer {
                                @JsonProperty("hairType") String hairType,
                                @JsonProperty("staffs") List<JsonAdaptedTag> staffs,
                                @JsonProperty("services") List<JsonAdaptedTag> services,
-                               @JsonProperty("allergies") List<JsonAdaptedTag> allergies) {
+                               @JsonProperty("allergies") List<JsonAdaptedTag> allergies,
+                               @JsonProperty("birthdate") String birthDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.skinType = skinType;
         this.hairType = hairType;
+        this.birthDate = birthDate;
         if (staffs != null) {
             this.staffs.addAll(staffs);
         }
@@ -74,6 +78,7 @@ class JsonAdaptedCustomer {
         address = source.getAddress().value;
         skinType = source.getSkinType().value;
         hairType = source.getHairType().value;
+        birthDate = source.getBirthdate().toString();
         staffs.addAll(source.getStaffs().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -173,6 +178,17 @@ class JsonAdaptedCustomer {
         return new HairType(hairType);
     }
 
+    Birthdate getModelBirthdate() throws IllegalValueException {
+        if (birthDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthdate.class.getSimpleName()));
+        }
+        if (!Birthdate.isValidBirthdate(birthDate)) {
+            throw new IllegalValueException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthdate(birthDate);
+    }
+
     /**
      * Converts this Jackson-friendly adapted customer object into the model's {@code Customer} object.
      *
@@ -188,8 +204,10 @@ class JsonAdaptedCustomer {
         final Address modelAddress = this.getModelAddress();
         final SkinType modelSkinType = this.getModelSkinType();
         final HairType modelHairType = this.getModelHairType();
+        final Birthdate modelBirthdate = this.getModelBirthdate();
         return new Customer(modelName, modelPhone, modelEmail,
-                modelAddress, modelSkinType, modelHairType, modelStaffs, modelServices, modelAllergies);
+                modelAddress, modelSkinType, modelHairType,
+                modelStaffs, modelServices, modelAllergies, modelBirthdate);
     }
 
 }

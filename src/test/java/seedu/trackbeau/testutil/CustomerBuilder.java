@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
@@ -24,11 +25,13 @@ public class CustomerBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     private static final String DEFAULT_SKIN_TYPE = "Normal";
     private static final String DEFAULT_HAIR_TYPE = "Normal";
+    private static final String DEFAULT_BIRTHDATE = "07-12-2001";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Birthdate birthdate;
     private SkinType skinType;
     private HairType hairType;
     private Set<Tag> staffs;
@@ -45,6 +48,7 @@ public class CustomerBuilder {
         address = new Address(DEFAULT_ADDRESS);
         skinType = new SkinType(DEFAULT_SKIN_TYPE);
         hairType = new HairType(DEFAULT_HAIR_TYPE);
+        birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         staffs = new HashSet<>();
         services = new HashSet<>();
         allergies = new HashSet<>();
@@ -60,6 +64,7 @@ public class CustomerBuilder {
         address = customerToCopy.getAddress();
         skinType = customerToCopy.getSkinType();
         hairType = customerToCopy.getHairType();
+        birthdate = customerToCopy.getBirthdate();
         staffs = new HashSet<>(customerToCopy.getStaffs());
         services = new HashSet<>(customerToCopy.getServices());
         allergies = new HashSet<>(customerToCopy.getAllergies());
@@ -137,8 +142,20 @@ public class CustomerBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Birthdate} of the {@code Customer} that we are building.
+     */
+    public CustomerBuilder withBirthdate(String birthdate) {
+        this.birthdate = new Birthdate(birthdate);
+        return this;
+    }
+
+    /**
+     * Builds a customer.
+     */
     public Customer build() {
-        return new Customer(name, phone, email, address, skinType, hairType, staffs, services, allergies);
+        return new Customer(name, phone, email, address, skinType,
+                hairType, staffs, services, allergies, birthdate);
     }
 
 }
