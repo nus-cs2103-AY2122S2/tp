@@ -33,8 +33,6 @@ skinparam classBackgroundColor MODEL_COLOR
 
 package LessonBook <<Rectangle>> {
     Class "{abstract}\nLesson"
-    Class TemporaryLesson
-    Class RecurringLesson
 
     Class LessonName
     Class Subject
@@ -42,17 +40,16 @@ package LessonBook <<Rectangle>> {
     Class DateTimeSlot
     Class EnrolledStudents
 
-    RecurringLesson -up-|> "{abstract}\nLesson"
-    TemporaryLesson -up-|> "{abstract}\nLesson"
-
     "{abstract}\nLesson" *-right-> LessonName
     "{abstract}\nLesson" *-left-> Subject
-    "{abstract}\nLesson" *-left-> LessonAddress
-    "{abstract}\nLesson" *-left-> DateTimeSlot
+    "{abstract}\nLesson" *-down-> LessonAddress
+    "{abstract}\nLesson" *-down-> DateTimeSlot
     "{abstract}\nLesson" *-down-> EnrolledStudents
 
     Class HiddenLB1 #FFFFFF
-    HiddenLB1 .down.>  "all ~* " "{abstract}\nLesson"
+    Class HiddenLB2 #FFFFFF
+    HiddenLB2 .down[hidden].>  HiddenLB1
+    HiddenLB2 .down.>  "all ~*   " "{abstract}\nLesson"
 
     ' ---------- padding ----------
     Class HiddenLB2 #FFFFFF
