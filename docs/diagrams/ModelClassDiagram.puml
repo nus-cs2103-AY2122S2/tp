@@ -42,5 +42,5 @@ Person *--> Email
 Person *--> Address
 
 ModelManager -->"~* filtered" Person
-ModelManager -->"~* filtered" TaskModel
+ModelManager --> TaskModel
 @enduml
