@@ -16,10 +16,34 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.index.Index;
-import seedu.contax.logic.commands.*;
+import seedu.contax.logic.commands.AddAppointmentCommand;
+import seedu.contax.logic.commands.AddPersonCommand;
+import seedu.contax.logic.commands.AddTagCommand;
+import seedu.contax.logic.commands.AppointmentsBetweenCommand;
+import seedu.contax.logic.commands.BatchCommand;
+import seedu.contax.logic.commands.ChainCommand;
+import seedu.contax.logic.commands.ClearCommand;
+import seedu.contax.logic.commands.Command;
+import seedu.contax.logic.commands.DeleteAppointmentCommand;
+import seedu.contax.logic.commands.DeletePersonCommand;
+import seedu.contax.logic.commands.DeleteTagCommand;
+import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
+import seedu.contax.logic.commands.EditPersonCommand;
 import seedu.contax.logic.commands.EditPersonCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
+import seedu.contax.logic.commands.ExitCommand;
+import seedu.contax.logic.commands.ExportCsvCommand;
+import seedu.contax.logic.commands.FindAppointmentCommand;
+import seedu.contax.logic.commands.FindByTagCommand;
+import seedu.contax.logic.commands.FindPersonCommand;
+import seedu.contax.logic.commands.HelpCommand;
+import seedu.contax.logic.commands.ImportCsvCommand;
+import seedu.contax.logic.commands.ListAppointmentCommand;
+import seedu.contax.logic.commands.ListPersonCommand;
+import seedu.contax.logic.commands.ListTagCommand;
+import seedu.contax.logic.commands.RangeCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.appointment.Appointment;
@@ -91,7 +115,8 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindAppointmentCommand command = (FindAppointmentCommand) parser.parseCommand(
                 FindAppointmentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindAppointmentCommand(new seedu.contax.model.appointment.NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindAppointmentCommand(new
+                seedu.contax.model.appointment.NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
