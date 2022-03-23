@@ -14,7 +14,7 @@ public class SimpleName {
             "Simple name should only contain alphanumeric characters and no spaces";
 
     /*
-     * The first character of the Module Name must not be a whitespace,
+     * The first character of the Simple Name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}]*";
@@ -33,7 +33,7 @@ public class SimpleName {
     }
 
     /**
-     * Returns true if a given string is a valid module name.
+     * Returns true if a given string is a valid simple name.
      */
     public static boolean isValidSimpleName(String test) {
         return test.matches(VALIDATION_REGEX);
