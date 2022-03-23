@@ -3,17 +3,17 @@ package seedu.address.testutil;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import seedu.address.logic.commands.PresentAttendanceCommand.PetAttendanceDescriptor;
+import seedu.address.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 
 /**
  * A utility class to help with building PresentAttendanceEntry objects.
  */
 public class PresentAttendanceDescriptorBuilder {
 
-    private PetAttendanceDescriptor descriptor;
+    private PresentAttendanceDescriptor descriptor;
 
     public PresentAttendanceDescriptorBuilder() {
-        descriptor = new PetAttendanceDescriptor();
+        descriptor = new PresentAttendanceDescriptor();
     }
 
     /**
@@ -40,7 +40,7 @@ public class PresentAttendanceDescriptorBuilder {
         return this;
     }
 
-    public PetAttendanceDescriptor build() {
+    public PresentAttendanceDescriptor build() {
         return descriptor;
     }
 }

@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AbsentAttendanceCommand;
-import seedu.address.logic.commands.AbsentAttendanceCommand.PetAttendanceDescriptor;
+import seedu.address.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -34,17 +34,17 @@ public class AbsentAttendanceCommandParser implements Parser<AbsentAttendanceCom
                     AbsentAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
-        PetAttendanceDescriptor petAttendanceDescriptor =
-                new PetAttendanceDescriptor();
+        AbsentAttendanceDescriptor absentAttendanceDescriptor =
+                new AbsentAttendanceDescriptor();
 
         if (argMultimap.getValue(PREFIX_DATE).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AbsentAttendanceCommand.MESSAGE_USAGE));
         }
 
-        petAttendanceDescriptor.setAttendanceDate(
+        absentAttendanceDescriptor.setAttendanceDate(
                 ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get()));
 
-        return new AbsentAttendanceCommand(index, petAttendanceDescriptor);
+        return new AbsentAttendanceCommand(index, absentAttendanceDescriptor);
     }
 }

@@ -44,17 +44,17 @@ public class PresentAttendanceCommand extends Command {
             "Seems like you have already marked %1$s as present on %2$s!";
 
     private final Index index;
-    private final PetAttendanceDescriptor petAttendanceDescriptor;
+    private final PresentAttendanceDescriptor presentAttendanceDescriptor;
 
     /**
      * @param index of the pet in the filtered pets list to mark as present.
-     * @param petAttendanceDescriptor the present attendance of the pet to be stored.
+     * @param presentAttendanceDescriptor the present attendance of the pet to be stored.
      */
-    public PresentAttendanceCommand(Index index, PetAttendanceDescriptor petAttendanceDescriptor) {
-        requireAllNonNull(index, petAttendanceDescriptor);
+    public PresentAttendanceCommand(Index index, PresentAttendanceDescriptor presentAttendanceDescriptor) {
+        requireAllNonNull(index, presentAttendanceDescriptor);
 
         this.index = index;
-        this.petAttendanceDescriptor = petAttendanceDescriptor;
+        this.presentAttendanceDescriptor = presentAttendanceDescriptor;
     }
 
     @Override
@@ -68,9 +68,9 @@ public class PresentAttendanceCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         AttendanceHashMap targetAttendanceHashMap = petToEdit.getAttendanceHashMap();
 
-        LocalDate attendanceDate = petAttendanceDescriptor.getAttendanceDate();
-        LocalTime pickUpTime = petAttendanceDescriptor.getPickUpTime().orElse(null);
-        LocalTime dropOffTime = petAttendanceDescriptor.getDropOffTime().orElse(null);
+        LocalDate attendanceDate = presentAttendanceDescriptor.getAttendanceDate();
+        LocalTime pickUpTime = presentAttendanceDescriptor.getPickUpTime().orElse(null);
+        LocalTime dropOffTime = presentAttendanceDescriptor.getDropOffTime().orElse(null);
 
         String attendanceDateString = attendanceDate.format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
 
@@ -108,27 +108,15 @@ public class PresentAttendanceCommand extends Command {
     }
 
     /**
-     * Stores the attendance details to edit the pet with.
+     * Stores the present attendance details to edit the pet with.
      */
-    public static class PetAttendanceDescriptor {
+    public static class PresentAttendanceDescriptor {
         private LocalDate attendanceDate;
         private LocalTime pickUpTime;
         private LocalTime dropOffTime;
 
-        public PetAttendanceDescriptor() {
+        public PresentAttendanceDescriptor() {
         }
-
-        /**
-         * Copy Constructor
-         *
-         * @param petAttendanceDescriptor takes in another PetAttendanceDescriptor class
-         */
-        public PetAttendanceDescriptor(PetAttendanceDescriptor petAttendanceDescriptor) {
-            setAttendanceDate(petAttendanceDescriptor.attendanceDate);
-            setPickUpTime(petAttendanceDescriptor.pickUpTime);
-            setDropOffTime(petAttendanceDescriptor.dropOffTime);
-        }
-
 
         public void setAttendanceDate(LocalDate attendanceDate) {
             this.attendanceDate = attendanceDate;
@@ -171,6 +159,6 @@ public class PresentAttendanceCommand extends Command {
         // state check
         PresentAttendanceCommand e = (PresentAttendanceCommand) other;
         return index.equals(e.index)
-                && petAttendanceDescriptor.equals(e.petAttendanceDescriptor);
+                && presentAttendanceDescriptor.equals(e.presentAttendanceDescriptor);
     }
 }

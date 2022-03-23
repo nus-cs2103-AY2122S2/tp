@@ -35,17 +35,17 @@ public class AbsentAttendanceCommand extends Command {
             "Seems like you have already marked %1$s as absent on %2$s!";
 
     private final Index index;
-    private final PetAttendanceDescriptor petAttendanceDescriptor;
+    private final AbsentAttendanceDescriptor absentAttendanceDescriptor;
 
     /**
      * @param index of the pet in the filtered pets list to mark as absent.
-     * @param petAttendanceDescriptor details of the absent attendance to be stored.
+     * @param absentAttendanceDescriptor details of the absent attendance to be stored.
      */
-    public AbsentAttendanceCommand(Index index, PetAttendanceDescriptor petAttendanceDescriptor) {
-        requireAllNonNull(index, petAttendanceDescriptor);
+    public AbsentAttendanceCommand(Index index, AbsentAttendanceDescriptor absentAttendanceDescriptor) {
+        requireAllNonNull(index, absentAttendanceDescriptor);
 
         this.index = index;
-        this.petAttendanceDescriptor = petAttendanceDescriptor;
+        this.absentAttendanceDescriptor = absentAttendanceDescriptor;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class AbsentAttendanceCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         AttendanceHashMap targetAttendanceHashMap = petToEdit.getAttendanceHashMap();
 
-        LocalDate attendanceDate = petAttendanceDescriptor.getAttendanceDate();
+        LocalDate attendanceDate = absentAttendanceDescriptor.getAttendanceDate();
         String attendanceDateString = attendanceDate.format(ATTENDANCE_DATE_FORMATTER);
         AbsentAttendanceEntry absentAttendance = new AbsentAttendanceEntry(attendanceDate);
 
@@ -82,21 +82,12 @@ public class AbsentAttendanceCommand extends Command {
     }
 
     /**
-     * Stores the attendance details to edit the pet with.
+     * Stores the absent attendance details to edit the pet with.
      */
-    public static class PetAttendanceDescriptor {
+    public static class AbsentAttendanceDescriptor {
         private LocalDate attendanceDate;
 
-        public PetAttendanceDescriptor() {
-        }
-
-        /**
-         * Copy Constructor
-         *
-         * @param petAttendanceDescriptor takes in another PetAttendanceDescriptor class
-         */
-        public PetAttendanceDescriptor(PetAttendanceDescriptor petAttendanceDescriptor) {
-            setAttendanceDate(petAttendanceDescriptor.attendanceDate);
+        public AbsentAttendanceDescriptor() {
         }
 
         public void setAttendanceDate(LocalDate attendanceDate) {
@@ -132,7 +123,7 @@ public class AbsentAttendanceCommand extends Command {
         // state check
         AbsentAttendanceCommand e = (AbsentAttendanceCommand) other;
         return index.equals(e.index)
-                && petAttendanceDescriptor.equals(e.petAttendanceDescriptor);
+                && absentAttendanceDescriptor.equals(e.absentAttendanceDescriptor);
     }
 
 

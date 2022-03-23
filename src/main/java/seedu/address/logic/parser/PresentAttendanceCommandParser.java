@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.PresentAttendanceCommand.PetAttendanceDescriptor;
+import static seedu.address.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
@@ -52,24 +52,24 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
                     PresentAttendanceCommand.MESSAGE_USAGE));
         }
 
-        PetAttendanceDescriptor petAttendanceDescriptor =
-                new PetAttendanceDescriptor();
+        PresentAttendanceDescriptor presentAttendanceDescriptor =
+                new PresentAttendanceDescriptor();
 
         if (argMultimap.getValue(PREFIX_PICKUP).isPresent()) {
-            petAttendanceDescriptor.setPickUpTime(
+            presentAttendanceDescriptor.setPickUpTime(
                     ParserUtil.parsePickUpTime(argMultimap.getValue(PREFIX_PICKUP).get())
             );
         }
 
         if (argMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
-            petAttendanceDescriptor.setDropOffTime(
+            presentAttendanceDescriptor.setDropOffTime(
                     ParserUtil.parseDropOffTime(argMultimap.getValue(PREFIX_DROPOFF).get())
             );
         }
 
-        petAttendanceDescriptor.setAttendanceDate(attendanceDate);
+        presentAttendanceDescriptor.setAttendanceDate(attendanceDate);
 
-        return new PresentAttendanceCommand(index, petAttendanceDescriptor);
+        return new PresentAttendanceCommand(index, presentAttendanceDescriptor);
     }
 
     /**

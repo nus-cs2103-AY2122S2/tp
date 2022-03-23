@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.AttendanceUtil;
-import seedu.address.logic.commands.PresentAttendanceCommand.PetAttendanceDescriptor;
+import seedu.address.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -37,7 +37,7 @@ public class PresentAttendanceCommandTest {
                 .withPresentAttendanceEntry(DATE_STUB, PICKUP_TIME_STUB, DROPOFF_TIME_STUB)
                 .build();
 
-        PetAttendanceDescriptor petAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
+        PresentAttendanceDescriptor presentAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
                 .withDate(DATE_STUB)
                 .withPickUpTime(PICKUP_TIME_STUB)
                 .withDropOffTime(DROPOFF_TIME_STUB)
@@ -45,7 +45,7 @@ public class PresentAttendanceCommandTest {
 
         PresentAttendanceCommand presentAttendanceCommand = new PresentAttendanceCommand(
                 INDEX_FIRST_PET,
-                petAttendanceDescriptor
+            presentAttendanceDescriptor
         );
 
         String expectedMessage = String.format(
@@ -67,7 +67,7 @@ public class PresentAttendanceCommandTest {
                 .withPresentAttendanceEntry(DATE_STUB, PICKUP_TIME_STUB, DROPOFF_TIME_STUB)
                 .build();
 
-        PetAttendanceDescriptor petAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
+        PresentAttendanceDescriptor presentAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
                 .withDate(DATE_STUB)
                 .withPickUpTime(PICKUP_TIME_STUB)
                 .withDropOffTime(DROPOFF_TIME_STUB)
@@ -75,7 +75,7 @@ public class PresentAttendanceCommandTest {
 
         PresentAttendanceCommand presentAttendanceCommand = new PresentAttendanceCommand(
                 INDEX_FIRST_PET,
-                petAttendanceDescriptor
+            presentAttendanceDescriptor
         );
 
         String expectedMessage = String.format(
@@ -92,7 +92,7 @@ public class PresentAttendanceCommandTest {
     public void execute_alreadyMarkedPresentUnfilteredList_failure() {
         Pet secondPet = model.getFilteredPetList().get(INDEX_SECOND_PET.getZeroBased());
 
-        PetAttendanceDescriptor petAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
+        PresentAttendanceDescriptor presentAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
                 .withDate(DATE_STUB)
                 .withPickUpTime(PICKUP_TIME_STUB)
                 .withDropOffTime(DROPOFF_TIME_STUB)
@@ -100,7 +100,7 @@ public class PresentAttendanceCommandTest {
 
         PresentAttendanceCommand presentAttendanceCommand = new PresentAttendanceCommand(
                 INDEX_SECOND_PET,
-                petAttendanceDescriptor
+            presentAttendanceDescriptor
         );
 
         String failureMessage = String.format(
