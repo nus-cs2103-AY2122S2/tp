@@ -99,12 +99,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && event == otherCommandResult.event;
+                && event == otherCommandResult.event
+                && showDetails == otherCommandResult.showDetails;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, event);
+        return Objects.hash(feedbackToUser, showHelp, exit, event, showDetails);
     }
 
 }

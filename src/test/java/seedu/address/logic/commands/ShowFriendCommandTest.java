@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertShowFriendCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -39,7 +39,7 @@ public class ShowFriendCommandTest {
 
         assert(expectedModel.getFilteredPersonList().size() == 1);
 
-        assertCommandSuccess(showFriendCommand, model, expectedMessage, expectedModel);
+        assertShowFriendCommandSuccess(showFriendCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ShowFriendCommandTest {
         assert (commandResult.isShowFriendCommand());
 
         assert (expectedModel.getFilteredPersonList().size() == 1);
-        assertCommandSuccess(showFriendCommand, model, expectedMessage, expectedModel);
+        assertShowFriendCommandSuccess(showFriendCommand, model, expectedMessage, expectedModel);
 
         //when that when a new command(not showfriend command) is made, the window is
         //switched from expanded to normal
