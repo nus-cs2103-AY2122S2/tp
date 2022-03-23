@@ -93,8 +93,6 @@ public class CommandTestUtil {
             + PREFIX_DATE + "25 March 2022";
     public static final String INVALID_LESSON_START_TIME_FORMAT_DESC = " " // start time must be given in "HH:mm" format
             + PREFIX_START_TIME + "6pm";
-    public static final String INVALID_LESSON_DATE_PASTDATE_DESC = " " // cannot create new lessons in the past
-            + PREFIX_DATE + "1-12-2020";
 
     // hours and minutes cannot both be zero as the duration of a lesson should not be zero
     public static final String INVALID_DURATION_MINUTES_ZERO_DESC = " "
