@@ -74,11 +74,11 @@ public class AttendanceUtil {
         LocalDate endDate = currentDate.plusDays(1); // the date tomorrow
 
         for (LocalDate d = startDate; d.isBefore(endDate); d = d.plusDays(1)) {
-            if (attendanceHashMap.hasAttendanceEntry(d)) {
-                weeklyAttendanceList.add(attendanceHashMap.getAttendance(d));
-            } else {
-                weeklyAttendanceList.add(new MissingAttendanceEntry(d));
-            }
+            weeklyAttendanceList.add(
+                attendanceHashMap
+                    .getAttendance(d)
+                    .orElse(new MissingAttendanceEntry(d))
+            );
         }
 
         return weeklyAttendanceList;

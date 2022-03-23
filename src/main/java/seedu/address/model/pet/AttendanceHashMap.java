@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Optional;
 
 import seedu.address.model.attendance.AttendanceEntry;
 
@@ -77,8 +78,13 @@ public class AttendanceHashMap {
         return new AttendanceHashMap(tempHashMap);
     }
 
-    public AttendanceEntry getAttendance(LocalDate attendanceDate) {
-        return attendanceHashMap.get(attendanceDate);
+    /**
+     * Retrieves the attendance entry at the specified date.
+     * @param attendanceDate the specified date.
+     * @return an {@code Optional} object containing the attendance entry, if any.
+     */
+    public Optional<AttendanceEntry> getAttendance(LocalDate attendanceDate) {
+        return Optional.ofNullable(attendanceHashMap.get(attendanceDate));
     }
 
     /**
