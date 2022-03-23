@@ -100,7 +100,6 @@ After all the existing lessons have been verified to not clash with the new less
 ![Add Lesson Object Diagram](images/AddLessonObjectDiagram_4.png)
 
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
