@@ -31,6 +31,7 @@ title: Developer Guide
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a show](#deleting-a-show)
     * [Editing a show](#editing-a-show)
+    * [Adding a comment](#adding-comment)
     * [Saving data](#saving-data)
     * [Finding a show](#finding-a-show)
 
@@ -650,9 +651,8 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
----
 
-### Adding a comment on the show
+### Adding comment
 
 1. Deleting a show while all shows are being shown
 
@@ -669,6 +669,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
