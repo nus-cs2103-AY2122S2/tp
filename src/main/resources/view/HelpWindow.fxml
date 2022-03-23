@@ -42,7 +42,7 @@
                             <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
                         </padding>
                     </HBox>
-                    <StackPane fx:id="commandSummaryPlaceholder" minHeight="200.0" prefHeight="200.0" VBox.vgrow="ALWAYS" />
+                    <StackPane fx:id="commandSummaryStackPane" minHeight="200.0" prefHeight="200.0" VBox.vgrow="ALWAYS" />
                 </children>
             </VBox>
         </Scene>

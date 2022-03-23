@@ -14,7 +14,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.commons.core.LogsCenter;
 
 /**
@@ -36,7 +35,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     @FXML
-    private StackPane commandSummaryPlaceholder;
+    private StackPane commandSummaryStackPane;
 
     /**
      * Creates a new HelpWindow.
@@ -48,7 +47,7 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.setText(HELP_MESSAGE);
 
         commandSummaryTableView = new TableView<>();
-        commandSummaryPlaceholder.getChildren().add(commandSummaryTableView);
+        commandSummaryStackPane.getChildren().add(commandSummaryTableView);
         buildTable(commandSummaryTableView, getCommandSummary());
     }
 
@@ -135,9 +134,12 @@ public class HelpWindow extends UiPart<Stage> {
 
         titleColumn.setStyle("-fx-alignment: CENTER;");
 
-        table.prefHeightProperty().bind(commandSummaryPlaceholder.heightProperty());
+        table.prefHeightProperty().bind(commandSummaryStackPane.heightProperty());
     }
 
+    /**
+     * Describes the command information.
+     */
     private static ObservableList<CommandBuilder> getCommandSummary() {
         return FXCollections.observableArrayList(
                 new CommandBuilder("Add", "add n/<NAME> s/<STATUS> [t/<TAG>]..."),
@@ -148,18 +150,6 @@ public class HelpWindow extends UiPart<Stage> {
                         + "[t/TAG]"),
                 new CommandBuilder("List", "list")
         );
-    }
-
-    /**
-     * Sets the default size based on {@code guiSettings}.
-     */
-    private void setWindowDefaultSize(Stage stage, GuiSettings guiSettings) {
-        stage.setHeight(guiSettings.getWindowHeight());
-        stage.setWidth(guiSettings.getWindowWidth());
-        if (guiSettings.getWindowCoordinates() != null) {
-            stage.setX(guiSettings.getWindowCoordinates().getX());
-            stage.setY(guiSettings.getWindowCoordinates().getY());
-        }
     }
 
 }
