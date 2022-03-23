@@ -285,6 +285,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         task.assignedTo(person);
     }
 
+    /**
+     * Checks if a given task has a priority tagged to it.
+     * @param task the task to be checked.
+     * @return true if the task is tagged with a prioirity, false otherwise.
+     */
     public boolean hasPriority(Task task) {
         requireNonNull(task);
         boolean returnValue;
