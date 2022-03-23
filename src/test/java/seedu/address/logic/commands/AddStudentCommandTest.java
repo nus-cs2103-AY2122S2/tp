@@ -163,7 +163,7 @@ public class AddStudentCommandTest {
 
         @Override
         public void setSelectedStudent(Student student) {
-            throw new AssertionError("This method should not be called.");
+            assertTrue(student != null);
         }
 
         @Override
