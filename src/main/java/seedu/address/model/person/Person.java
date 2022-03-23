@@ -27,12 +27,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final PrevDateMet prevDateMet;
     private final Info info;
+    private final Salary salary;
 
     /**
      * Constructor for Person object where every field is present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
-                  PrevDateMet prevDateMet, Info info) {
+                  PrevDateMet prevDateMet, Salary salary, Info info) {
         requireAllNonNull(name, phone, email, address, tags, prevDateMet, info);
         this.name = name;
         this.phone = phone;
@@ -41,13 +42,16 @@ public class Person {
         this.flag = flag;
         this.tags.addAll(tags);
         this.prevDateMet = prevDateMet;
+        this.salary = salary;
         this.info = info;
     }
 
     /**
-     * Constructor for Person object where every field is present and not null except prevDateMet.
+     * Constructor for Person object where every field is present and not null except prevDateMet
+     * and salary.
      * Previous date met will be set to the current date as the user might meet up with the client
      * for the first time.
+     * Salary will be set to the default value, "0".
      */
     public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, flag, tags);
@@ -58,6 +62,7 @@ public class Person {
         this.flag = flag;
         this.tags.addAll(tags);
         this.prevDateMet = new PrevDateMet(LocalDate.now().toString());
+        this.salary = new Salary();
         this.info = new Info("No further info");
     }
 
@@ -91,6 +96,10 @@ public class Person {
 
     public Info getInfo() {
         return info;
+    }
+    
+    public Salary getSalary() {
+        return this.salary;
     }
 
     /**
@@ -135,31 +144,27 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getPrevDateMet().equals(getPrevDateMet())
-                && otherPerson.getInfo().equals(getInfo());
+                && otherPerson.getInfo().equals(getInfo())
+                && otherPerson.getSalary().equals(getSalary());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, prevDateMet, info);
+        return Objects.hash(name, phone, email, address, tags, prevDateMet, info, salary);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Flag: ")
-                .append(getFlag())
-                .append("; Previous Date Met: ")
-                .append(getPrevDateMet())
-                .append("; Info: ")
-                .append(getInfo());
+                .append("; Phone: ").append(getPhone())
+                .append("; Email: ").append(getEmail())
+                .append("; Address: ").append(getAddress())
+                .append("; Flag: ").append(getFlag())
+                .append("; Previous Date Met: ").append(getPrevDateMet())
+                .append("; Salary: ").append(getSalary())
+                .append("; Info: ").append(getInfo());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
