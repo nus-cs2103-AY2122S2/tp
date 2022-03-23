@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters sort command;
+:Parse command arguments;
+:Creates Comparator based on prefixes;
+:Sort command;
+:Update show list;
+stop
+
+@enduml
