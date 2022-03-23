@@ -2,7 +2,9 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -18,6 +20,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Preference;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.Region;
 import seedu.address.storage.Storage;
 
 /**
@@ -80,6 +85,36 @@ public class LogicManager implements Logic {
             }
         }
         return favouritedList;
+    }
+
+    /**
+     * Iterate through the list of Persons and return number of persons in
+     * the region given
+     * @param region is the region where buyers have their preference
+     *               for their potential property and sellers have their property in
+     */
+    @Override
+    public int getPersonsBasedOnRegion(String region) {
+        int totalPersons = 0;
+        for (Person person : getFilteredPersonList()) {
+            if (person.getUserType().isBuyer()) { //if is buyer, check region in preference
+                Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
+                if (preference != null && preference.getRegion().toString().equals(region)) {
+                    totalPersons ++;
+                }
+            } else { //if is seller, check region in Property
+                Set<Property> setOfPropertyValues = person.getProperties();
+                if (!setOfPropertyValues.isEmpty()) {
+                    Iterator<Property> propertyIterator = setOfPropertyValues.iterator();
+                    while(propertyIterator.hasNext()) {
+                        if (propertyIterator.next().getRegion().toString().equals(region)) {
+                            totalPersons ++;
+                        }
+                    }
+                }
+            }
+        }
+        return totalPersons;
     }
 
     @Override

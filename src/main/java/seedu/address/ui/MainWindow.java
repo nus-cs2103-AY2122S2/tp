@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private MatchWindow matchWindow;
     private FavouriteWindow favouriteWindow;
     private StatisticsWindow statisticsWindow;
+    private int count = 0;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -71,7 +72,6 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
         matchWindow = new MatchWindow(logic);
         favouriteWindow = new FavouriteWindow(logic);
-        statisticsWindow = new StatisticsWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -182,11 +182,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleStatistics() {
-        if (!statisticsWindow.isShowing()) {
-            statisticsWindow.show();
-        } else {
-            statisticsWindow.focus();
+        if (statisticsWindow != null) {
+            statisticsWindow.close();
         }
+        statisticsWindow = new StatisticsWindow(logic);
+        statisticsWindow.fillPieChart();
+        statisticsWindow.show();
     }
 
     void show() {

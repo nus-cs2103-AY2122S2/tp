@@ -19,7 +19,7 @@
             </stylesheets>
             <VBox>
                 <children>
-                    <PieChart layoutX="-25.0" layoutY="107.0" prefHeight="386.0" prefWidth="500.0" title="Popular areas" fx:id="pieChart"/>
+                    <PieChart layoutX="-25.0" layoutY="107.0" prefHeight="386.0" prefWidth="500.0" title="Popular areas for buyers and sellers" fx:id="pieChart"/>
                 </children>
             </VBox>
         </Scene>
