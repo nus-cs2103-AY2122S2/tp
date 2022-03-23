@@ -73,7 +73,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.  
+Furthermore, `AddWindow` and `EditWindow` keeps a reference to `MainWindow`'s `Logic` component in order to execute commands.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -83,6 +84,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
 
 ### Logic component
 
@@ -101,6 +103,9 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+The Sequence Diagram below illustrates the interactions from the `Logic` component for the `execute("add")`
+![Interactions Inside the Logic Component for the `add` Command](images/AddNoParamsSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -154,6 +159,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
 ### Sort feature
 #### Implementation
 
@@ -187,6 +193,26 @@ Has to pass all `PersonComparator` that were chosen into `Model` one after anoth
 Each field implements a `Comparable` interface.
 - Pros: Easier to implement.
 - Cons: Less flexible. Passes only one `PersonComparator` which stores the fields within itself. Each comparison stops once field is not equivalent, therefore is more efficient.
+
+### GUI for Adding, Editing
+
+#### Implementation
+
+The GUI for `AddWindow` and `EditWindow` are done using JavaFX with SceneBuilder.  
+The adding and editing mechanism is driven by the CLI commands, `add` and `edit`, and both goes through their respective `Parser`
+
+User input is retrieved from their respective `TextField`  
+User input is strung together to follow the proper `Command` format, which is then passed to `Logic` to handle the rest of the execution  
+
+`AddWindow` allows for the execution of multiple commands within a single window.  
+Executing multiple commands (`status`, `addmodule`) is done by checking if the given inputs are valid. If they are valid, we pass the execution to `Logic` to handle the adding of a `Person`. After a `Person` is added, retrieve the last index from `PersonList`, then pass the user inputs for `status` and/or `addmodule` into `Logic` again to execute the commands
+
+The following activity diagram shows how a `Person` with `Status` and `Module` is added when the given command is `add` or when the user opens `AddWindow`
+![GuiAddActivityDiagram](images/GuiAddActivityDiagram.png)
+
+Editing through `EditWindow` is largely similar to the above.
+
+
 
 ### \[Proposed\] Undo/redo feature
 
