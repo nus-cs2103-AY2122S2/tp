@@ -258,22 +258,22 @@ The following activity diagram summarizes what happens when a user executes a va
 
 #### What it does
 
-Sort the list of shows according user's input prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, it will sort by name then by default.
+Sort the list of shows according user's input prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, by default it will sort by name then by status.
 
 #### Implementation
 After entering the sort command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax. Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `SortCommand` object will be created with `Comparator` according to the specified prefixes. Else, a `NameComparator` will be created which can be used to sort names in ascending order. `SortCommand` is a class that inherits the `Command` abstract class. `SortCommand` implements the `execute()` method from the `Command` abstract class where on execution, sort the model's list of shows according to the `Comparator`. The model is then updated with the sorted show list.
 
-Given below is an example usage scenario and the step-by-step flow of the find command.
+Given below is an example usage scenario and the step-by-step flow of the sort command.
 
 Step 1: The user launches Trackermon and enters `sort sna/ ssd/` to sort the list of shows.
 
-Step 2: The sort command parser will check for prefixes and generate the appropriated `Comparator` for the SortCommand. In this case in generate a `NameComparator().thenComparing(StatusComparator().reverse()))`
+Step 2: The sort command parser will check for prefixes and generate the appropriate `Comparator` for the SortCommand. In this case it generate a `NameComparator().thenComparing(StatusComparator().reverse()))`
 
-Step 3: when the sort command executes, it will call`Model#updateSortedShowList` method.
+Step 3: When the sort command executes, it will call`Model#updateSortedShowList` method.
 
-Step 4: the sorted list in model will apply the Comparator and model will be updated in order by ascending name then descending status.
+Step 4: The sorted list in model will apply the Comparator and model will be updated in order by ascending name then descending status.
 
-The following activity diagram summarizes what happens when a user executes a valid sort command:
+The following activity diagram summarizes what happens when a user executes a sort command:
 
 <img src="images/SortShowDiagram.png">
 
