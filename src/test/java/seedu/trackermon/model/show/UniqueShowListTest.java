@@ -7,8 +7,8 @@ import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_STATUS_WATCH
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_TAG_MOVIE;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_TAG_SERIES;
 import static seedu.trackermon.testutil.Assert.assertThrows;
-import static seedu.trackermon.testutil.TypicalShows.ME;
-import static seedu.trackermon.testutil.TypicalShows.YOU;
+import static seedu.trackermon.testutil.TypicalShows.HANCOCK;
+import static seedu.trackermon.testutil.TypicalShows.WEATHERING_WITH_YOU;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,19 +31,19 @@ public class UniqueShowListTest {
 
     @Test
     public void contains_showNotInList_returnsFalse() {
-        assertFalse(uniqueShowList.contains(ME));
+        assertFalse(uniqueShowList.contains(HANCOCK));
     }
 
     @Test
     public void contains_showInList_returnsTrue() {
-        uniqueShowList.add(ME);
-        assertTrue(uniqueShowList.contains(ME));
+        uniqueShowList.add(HANCOCK);
+        assertTrue(uniqueShowList.contains(HANCOCK));
     }
 
     @Test
     public void contains_showWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueShowList.add(ME);
-        Show editedMe = new ShowBuilder(ME).withTags(VALID_TAG_MOVIE)
+        uniqueShowList.add(HANCOCK);
+        Show editedMe = new ShowBuilder(HANCOCK).withTags(VALID_TAG_MOVIE)
                 .build();
         assertTrue(uniqueShowList.contains(editedMe));
     }
@@ -55,40 +55,40 @@ public class UniqueShowListTest {
 
     @Test
     public void add_duplicateShow_throwsDuplicateShowException() {
-        uniqueShowList.add(ME);
-        assertThrows(DuplicatedShowException.class, () -> uniqueShowList.add(ME));
+        uniqueShowList.add(HANCOCK);
+        assertThrows(DuplicatedShowException.class, () -> uniqueShowList.add(HANCOCK));
     }
 
     @Test
     public void setShow_nullTargetShow_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueShowList.setShow(null, ME));
+        assertThrows(NullPointerException.class, () -> uniqueShowList.setShow(null, HANCOCK));
     }
 
     @Test
     public void setShow_nullEditedShow_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueShowList.setShow(ME, null));
+        assertThrows(NullPointerException.class, () -> uniqueShowList.setShow(HANCOCK, null));
     }
 
     @Test
     public void setShow_targetShowNotInList_throwsShowNotFoundException() {
-        assertThrows(ShowNotFoundException.class, () -> uniqueShowList.setShow(ME, ME));
+        assertThrows(ShowNotFoundException.class, () -> uniqueShowList.setShow(HANCOCK, HANCOCK));
     }
 
     @Test
     public void setShow_editedShowIsSameShow_success() {
-        uniqueShowList.add(ME);
-        uniqueShowList.setShow(ME, ME);
+        uniqueShowList.add(HANCOCK);
+        uniqueShowList.setShow(HANCOCK, HANCOCK);
         UniqueShowList expectedUniqueShowList = new UniqueShowList();
-        expectedUniqueShowList.add(ME);
+        expectedUniqueShowList.add(HANCOCK);
         assertEquals(expectedUniqueShowList, uniqueShowList);
     }
 
     @Test
     public void setShow_editedShowHasSameIdentity_success() {
-        uniqueShowList.add(ME);
-        Show editedMe = new ShowBuilder(ME).withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_SERIES)
+        uniqueShowList.add(HANCOCK);
+        Show editedMe = new ShowBuilder(HANCOCK).withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_SERIES)
                 .build();
-        uniqueShowList.setShow(ME, editedMe);
+        uniqueShowList.setShow(HANCOCK, editedMe);
         UniqueShowList expectedUniqueShowList = new UniqueShowList();
         expectedUniqueShowList.add(editedMe);
         assertEquals(expectedUniqueShowList, uniqueShowList);
@@ -96,18 +96,18 @@ public class UniqueShowListTest {
 
     @Test
     public void setShow_editedShowHasDifferentIdentity_success() {
-        uniqueShowList.add(ME);
-        uniqueShowList.setShow(ME, YOU);
+        uniqueShowList.add(HANCOCK);
+        uniqueShowList.setShow(HANCOCK, WEATHERING_WITH_YOU);
         UniqueShowList expectedUniqueShowList = new UniqueShowList();
-        expectedUniqueShowList.add(YOU);
+        expectedUniqueShowList.add(WEATHERING_WITH_YOU);
         assertEquals(expectedUniqueShowList, uniqueShowList);
     }
 
     @Test
     public void setShow_editedShowHasNonUniqueIdentity_throwsDuplicateShowException() {
-        uniqueShowList.add(ME);
-        uniqueShowList.add(YOU);
-        assertThrows(DuplicatedShowException.class, () -> uniqueShowList.setShow(ME, YOU));
+        uniqueShowList.add(HANCOCK);
+        uniqueShowList.add(WEATHERING_WITH_YOU);
+        assertThrows(DuplicatedShowException.class, () -> uniqueShowList.setShow(HANCOCK, WEATHERING_WITH_YOU));
     }
 
     @Test
@@ -117,13 +117,13 @@ public class UniqueShowListTest {
 
     @Test
     public void remove_showDoesNotExist_throwsShowNotFoundException() {
-        assertThrows(ShowNotFoundException.class, () -> uniqueShowList.remove(ME));
+        assertThrows(ShowNotFoundException.class, () -> uniqueShowList.remove(HANCOCK));
     }
 
     @Test
     public void remove_existingShow_removesShow() {
-        uniqueShowList.add(ME);
-        uniqueShowList.remove(ME);
+        uniqueShowList.add(HANCOCK);
+        uniqueShowList.remove(HANCOCK);
         UniqueShowList expectedUniqueShowList = new UniqueShowList();
         assertEquals(expectedUniqueShowList, uniqueShowList);
     }
@@ -135,9 +135,9 @@ public class UniqueShowListTest {
 
     @Test
     public void setShows_uniqueShowList_replacesOwnListWithProvidedUniqueShowList() {
-        uniqueShowList.add(ME);
+        uniqueShowList.add(HANCOCK);
         UniqueShowList expectedUniqueShowList = new UniqueShowList();
-        expectedUniqueShowList.add(YOU);
+        expectedUniqueShowList.add(WEATHERING_WITH_YOU);
         uniqueShowList.setShows(expectedUniqueShowList);
         assertEquals(expectedUniqueShowList, uniqueShowList);
     }
@@ -149,17 +149,17 @@ public class UniqueShowListTest {
 
     @Test
     public void setShows_list_replacesOwnListWithProvidedList() {
-        uniqueShowList.add(ME);
-        List<Show> showList = Collections.singletonList(YOU);
+        uniqueShowList.add(HANCOCK);
+        List<Show> showList = Collections.singletonList(WEATHERING_WITH_YOU);
         uniqueShowList.setShows(showList);
         UniqueShowList expectedUniqueShowList = new UniqueShowList();
-        expectedUniqueShowList.add(YOU);
+        expectedUniqueShowList.add(WEATHERING_WITH_YOU);
         assertEquals(expectedUniqueShowList, uniqueShowList);
     }
 
     @Test
     public void setShows_listWithDuplicateShows_throwsDuplicateShowException() {
-        List<Show> listWithDuplicateShows = Arrays.asList(ME, ME);
+        List<Show> listWithDuplicateShows = Arrays.asList(HANCOCK, HANCOCK);
         assertThrows(DuplicatedShowException.class, () -> uniqueShowList.setShows(listWithDuplicateShows));
     }
 

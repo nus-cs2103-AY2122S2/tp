@@ -42,7 +42,7 @@ public class ShowList implements ReadOnlyShowList {
      */
     public void resetData(ReadOnlyShowList newData) {
         requireNonNull(newData);
-        setShows(newData.getShowList());
+        setShows(newData.getShows());
     }
 
     /**
@@ -88,7 +88,7 @@ public class ShowList implements ReadOnlyShowList {
     }
 
     @Override
-    public ObservableList<Show> getShowList() {
+    public ObservableList<Show> getShows() {
         return shows.asUnmodifiableObservableList();
     }
 
