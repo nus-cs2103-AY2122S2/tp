@@ -160,7 +160,7 @@ public class AddCommandTest {
         @Override
         public boolean hasProduct(Product product) {
             requireNonNull(product);
-            return this.product.isSameProduct(product);
+            return this.product.isSame(product);
         }
     }
 
@@ -173,7 +173,7 @@ public class AddCommandTest {
         @Override
         public boolean hasProduct(Product product) {
             requireNonNull(product);
-            return productsAdded.stream().anyMatch(product::isSameProduct);
+            return productsAdded.stream().anyMatch(product::isSame);
         }
 
         @Override
