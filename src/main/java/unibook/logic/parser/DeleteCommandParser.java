@@ -29,7 +29,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             System.out.println(args);
 
-            // todo: solve issue when command is only 'delete'
             // delete index case
             if (Character.isDigit(args.trim().charAt(0))) {
                 Index index = ParserUtil.parseIndex(args);
