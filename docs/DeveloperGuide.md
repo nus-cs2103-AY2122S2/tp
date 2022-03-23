@@ -17,7 +17,7 @@ title: Developer Guide
 * [**Implementation**](#implementation)
     * [Find command feature](#find-command-feature)
         * [What it does](#what-it-does)
-        * [Implementation](#implementation)
+        * [Implementation](#implementation-1)
         * [Design consideration](#design-considerations)
             * [How find executes](#aspect-how-find-executes)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
@@ -668,7 +668,7 @@ testers are expected to do more *exploratory* testing.
 
        Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`
 
-2. Find a show (Precise Find)
+2. Find a show (Precise Find)<br>
    1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
    
    2. Test case: `find n/shingeki`
