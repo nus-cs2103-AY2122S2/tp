@@ -3,7 +3,12 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+1. Acknowledgements
+2. Setting up
+3. Design
+   1. Architecture
+   2. UI Components
+4. Implementation
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -234,9 +239,24 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Membership functionality
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Proposed Implementation
+The proposed membership functionality will be to store all available memberships into a list and allow clients to be assigned a membership.
+
+Membership details will be created by users, user can then assign an existing membership to a client.
+
+#### Design considerations:
+
+**Aspect: How it executes:**
+
+* **Alternative 1 (current choice):** Create a list of Memberships, assign membership index to client.
+  * Pros: Allows for easy management of memberships
+  * Cons: Have to handle edge cases, what if user deletes a membership? etc.
+
+* **Alternative 2:** Create a new membership whenever assigning a membership to client.
+  * Pros: Easy to implement
+  * Cons: Harder to manage individual memberships, functions similar to a tag, but with extra variables.
 
 
 --------------------------------------------------------------------------------------------------------------------
