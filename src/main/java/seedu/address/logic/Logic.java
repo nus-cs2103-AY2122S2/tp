@@ -57,7 +57,6 @@ public interface Logic {
      */
     Path getSellerAddressBookFilePath();
 
-    //
     /**
      * Returns the BuyerAddressBook.
      *
@@ -72,9 +71,6 @@ public interface Logic {
      * Returns the user prefs' buyers address book file path.
      */
     Path getBuyerAddressBookFilePath();
-
-//
-
 
     /**
      * Returns the user prefs' GUI settings.

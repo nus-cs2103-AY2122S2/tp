@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
@@ -91,8 +92,8 @@ public class JsonAdaptedBuyer {
         final Appointment modelAppointment = new Appointment(appointment);
 
         final Set<Tag> modelTags = new HashSet<>(buyerTags);
-        final PropertyToBuy modelDesiredProperty = desiredProperty == null ?
-                null : new PropertyToBuy(desiredProperty.getHouse(), desiredProperty.getBuyRange());
+        final PropertyToBuy modelDesiredProperty = desiredProperty == null
+                ? null : new PropertyToBuy(desiredProperty.getHouse(), desiredProperty.getBuyRange());
         return new Buyer(modelName, modelPhone, modelAppointment, modelTags, modelDesiredProperty);
     }
 }

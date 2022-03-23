@@ -1,15 +1,16 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.House;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,17 +28,22 @@ public class BuyerBuilder {
     private Phone phone;
     private Set<Tag> tags;
     private Appointment appointment;
-    private List<PropertyToBuy> properties;
+    private PropertyToBuy desiredProperty;
 
     /**
      * Creates a {@code clientBuilder} with the default details.
      */
     public BuyerBuilder() {
-        name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        appointment = new Appointment(DEFAULT_APPOINTMENT);
-        tags = new HashSet<>();
-        properties = new ArrayList<>();
+        try {
+            name = new Name(DEFAULT_NAME);
+            phone = new Phone(DEFAULT_PHONE);
+            appointment = new Appointment(DEFAULT_APPOINTMENT);
+            tags = new HashSet<>();
+            desiredProperty = new PropertyToBuy(new House(HouseType.HDB_FLAT, "KR"),
+                    new PriceRange(0, 1));
+        } catch (IllegalValueException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -48,7 +54,7 @@ public class BuyerBuilder {
         phone = buyerToCopy.getPhone();
         appointment = buyerToCopy.getAppointment();
         tags = new HashSet<>(buyerToCopy.getTags());
-        properties = new ArrayList<>(buyerToCopy.getPropertiesToBuy());
+        desiredProperty = buyerToCopy.getDesiredProperty();
     }
 
     /**
@@ -87,13 +93,13 @@ public class BuyerBuilder {
     /**
      * Sets the {@code Properties} of the {@code buyer} that we are building.
      */
-    public BuyerBuilder withProperties(PropertyToBuy... properties) {
-        this.properties = new ArrayList<>(Arrays.asList(properties));
+    public BuyerBuilder withProperty(PropertyToBuy property) {
+        this.desiredProperty = property;
         return this;
     }
 
     public Buyer build() {
-        return new Buyer(name, phone, appointment, tags, properties);
+        return new Buyer(name, phone, appointment, tags, desiredProperty);
     }
 
 }

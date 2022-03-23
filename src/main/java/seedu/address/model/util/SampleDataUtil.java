@@ -53,8 +53,8 @@ public class SampleDataUtil {
 
     public static Buyer[] getSampleBuyers() {
         return new Buyer[] {
-                new Buyer(new Name("Jacky"), new Phone("2103"),
-                        NO_APPOINTMENT, getTagSet("friends"), NO_DESIRED_PROPERTY)
+            new Buyer(new Name("Jacky"), new Phone("2103"),
+            NO_APPOINTMENT, getTagSet("friends"), NO_DESIRED_PROPERTY)
         };
     }
 

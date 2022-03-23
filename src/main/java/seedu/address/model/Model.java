@@ -57,7 +57,7 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
-//======================Address Book methods for seller=========================//
+    //======================Address Book methods for seller=========================//
     /**
      * Returns the user prefs' seller address book file path.
      */
@@ -76,7 +76,7 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlySellerAddressBook getSellerAddressBook();
 
- //======================Address Book methods for buyer=========================//
+    //======================Address Book methods for buyer=========================//
     /**
      * Returns the user prefs' seller address book file path.
      */
