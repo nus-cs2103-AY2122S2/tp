@@ -153,7 +153,7 @@ public class ModuleList implements Iterable<Module> {
      * @return the module with matching moduleCode
      * @throws ModuleNotFoundException TODO write tests
      */
-    public Module getModuleByCode(ModuleCode moduleCode) throws ModuleNotFoundException {
+    public Module getModuleByCode(ModuleCode moduleCode) {
         requireAllNonNull(moduleCode);
         for (Module module : internalList) {
             if (module.hasModuleCode(moduleCode)) {

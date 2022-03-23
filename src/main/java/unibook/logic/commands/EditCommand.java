@@ -27,6 +27,7 @@ import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.module.exceptions.ModuleNotFoundException;
+import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Office;
@@ -266,7 +267,8 @@ public class EditCommand extends Command {
             Office updatedOffice = ((Professor) personToEdit).getOffice();
             return new Professor(updatedName, updatedPhone, updatedEmail, updatedTags, updatedOffice, updatedModules);
         }
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, updatedModules);
+        //TODO group edit function, left as null for now
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, updatedModules, null);
     }
 
     /**
@@ -280,8 +282,9 @@ public class EditCommand extends Command {
         ModuleCode updatedModuleCode = editModuleDescriptor.getModuleCode().orElse(moduleToEdit.getModuleCode());
         ObservableList<Professor> profs = moduleToEdit.getProfessors();
         ObservableList<Student> students = moduleToEdit.getStudents();
+        ObservableList<Group> groups = moduleToEdit.getGroups();
 
-        return new Module(updatedModuleName, updatedModuleCode, profs, students);
+        return new Module(updatedModuleName, updatedModuleCode, profs, students, groups);
     }
 
     @Override

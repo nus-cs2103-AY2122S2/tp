@@ -42,7 +42,8 @@ public class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<JsonAdaptedModuleCode> modules = new ArrayList<>();
+    private final Set<JsonAdaptedModuleCode> modules = new HashSet<>();
+    private final Set<JsonAdaptedGroupCode> groups = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -51,8 +52,8 @@ public class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("modules") List<JsonAdaptedModuleCode> modules) {
+                             @JsonProperty("tagged") Set<JsonAdaptedTag> tagged,
+                             @JsonProperty("modules") Set<JsonAdaptedModuleCode> modules) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -73,11 +74,11 @@ public class JsonAdaptedPerson {
         email = source.getEmail().value;
         tagged.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toSet()));
         modules.addAll(source.getModules().stream()
             .map(module -> module.getModuleCode())
             .map(JsonAdaptedModuleCode::new)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toSet()));
     }
 
     /**

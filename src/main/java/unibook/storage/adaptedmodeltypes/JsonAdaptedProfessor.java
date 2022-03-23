@@ -1,6 +1,7 @@
 package unibook.storage.adaptedmodeltypes;
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,8 +22,8 @@ public class JsonAdaptedProfessor extends JsonAdaptedPerson {
     public JsonAdaptedProfessor(@JsonProperty("name") String name,
                                 @JsonProperty("phone") String phone,
                                 @JsonProperty("email") String email,
-                                @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                                @JsonProperty("modules") List<JsonAdaptedModuleCode> modules,
+                                @JsonProperty("tagged") Set<JsonAdaptedTag> tagged,
+                                @JsonProperty("modules") Set<JsonAdaptedModuleCode> modules,
                                 @JsonProperty("office") String office) {
         super(name, phone, email, tagged, modules);
         this.office = office;

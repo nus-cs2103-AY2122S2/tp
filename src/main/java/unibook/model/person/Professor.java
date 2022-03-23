@@ -24,15 +24,6 @@ public class Professor extends Person {
     }
 
     /**
-     * Every field must be present and not null.
-     */
-    public Professor(Name name, Phone phone, Email email, Set<Tag> tags, Office office,
-                     Set<Module> modules, Set<ModuleCode> moduleCodes) {
-        super(name, phone, email, tags, modules, moduleCodes);
-        this.office = office;
-    }
-
-    /**
      * Constructor for creating a professor from a person class with additional field office.
      *
      * @param person person to create this professor from

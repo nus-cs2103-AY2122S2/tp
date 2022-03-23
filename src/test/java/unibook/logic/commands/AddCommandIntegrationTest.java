@@ -10,6 +10,7 @@ import unibook.model.ModelManager;
 import unibook.model.UserPrefs;
 import unibook.model.person.Person;
 import unibook.testutil.PersonBuilder;
+import unibook.testutil.StudentBuilder;
 import unibook.testutil.TypicalPersons;
 
 /**
@@ -25,8 +26,8 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_newStudent_success() {
+        Person validPerson = new StudentBuilder().build();
 
         Model expectedModel = new ModelManager(model.getUniBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);

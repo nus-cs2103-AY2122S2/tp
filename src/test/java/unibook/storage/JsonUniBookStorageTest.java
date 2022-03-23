@@ -49,7 +49,7 @@ public class JsonUniBookStorageTest {
 
     @Test
     public void readUniBook_invalidPersonUniBook_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readUniBook("invalidPersonUniBook.json"));
+        Assert.assertThrows(DataConversionException.class, () -> readUniBook("invalidUniBook.json"));
     }
 
     @Test

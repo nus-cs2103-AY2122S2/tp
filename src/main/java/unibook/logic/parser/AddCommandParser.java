@@ -79,7 +79,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
             moduleCodes = ParserUtil.parseMultipleModules(argMultimap.getAllValues(CliSyntax.PREFIX_MODULE));
-            Student student = new Student(name, phone, email, tagList, moduleList, moduleCodes);
+            //TODO instantiate student with actual modules, not codes
+            Student student = new Student(name, phone, email, tagList, moduleList, null);
             return new AddCommand(student);
         case "professor":
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE,
@@ -93,7 +94,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             office = ParserUtil.parseOffice(argMultimap.getValue(CliSyntax.PREFIX_OFFICE).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
             moduleCodes = ParserUtil.parseMultipleModules(argMultimap.getAllValues(CliSyntax.PREFIX_MODULE));
-            Professor professor = new Professor(name, phone, email, tagList, office, moduleList, moduleCodes);
+            //TODO instantiate prof with actual modules, not codes
+            Professor professor = new Professor(name, phone, email, tagList, office, moduleList);
             return new AddCommand(professor);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS_OPTION);

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleList;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
@@ -39,7 +40,7 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Creates a UniBook using the Persons in the {@code toBeCopied}
+     * Creates a UniBook using the data in {@code toBeCopied}
      */
     public UniBook(ReadOnlyUniBook toBeCopied) {
         this();
@@ -101,7 +102,8 @@ public class UniBook implements ReadOnlyUniBook {
      *
      * @param p person whos modules to add them to
      */
-    public void addPersonToAllTheirModules(Person p) throws PersonNoSubtypeException {
+    public void addPersonToAllTheirModules(Person p) {
+        requireNonNull(p);
         for (Module personsModule : p.getModules()) {
             Module module = modules.getModule(personsModule);
             if (p instanceof Student) {
@@ -114,25 +116,13 @@ public class UniBook implements ReadOnlyUniBook {
         }
     }
 
-    /**
-     * Adds this person to all the module codes that they are associated with, into the
-     * correct personnel list (professor/student) in module depending on the runtime type
-     * of this person.
-     *
-     * @param p person whos modules to add them to
-     */
-    public void addPersonToAllTheirModuleCodes(Person p) throws PersonNoSubtypeException {
-        for (ModuleCode personsModuleCodes : p.getModuleCodes()) {
-            Module module = modules.getModuleByCode(personsModuleCodes);
-            if (p instanceof Student) {
-                module.addStudent((Student) p);
-            } else if (p instanceof Professor) {
-                module.addProfessor((Professor) p);
-            } else {
-                throw new PersonNoSubtypeException();
-            }
+    public void addStudentToAllTheirGroups(Student s) {
+        requireNonNull(s);
+        for (Group group : s.getGroups()) {
+            group.addMember(s);
         }
     }
+
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
@@ -186,11 +176,22 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Adds a Module to the UniBook.
+     * Adds a Module to UniBook.
      * The Module must not already exist in the UniBook.
      */
     public void addModule(Module m) {
         modules.add(m);
+    }
+
+    /**
+     * Adds a group to a module of UniBook. Assumes that the module associated with the
+     * group is already inside the group object.
+     * @param g
+     */
+    public void addGroupToModule(Group g) {
+        Module moduleOfGroup = g.getModule();
+        requireNonNull(moduleOfGroup);
+        moduleOfGroup.addGroup(g);
     }
 
     /**

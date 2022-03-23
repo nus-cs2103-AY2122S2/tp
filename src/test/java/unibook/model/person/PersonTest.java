@@ -2,10 +2,6 @@ package unibook.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static unibook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static unibook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static unibook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static unibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 

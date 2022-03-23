@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static unibook.storage.adaptedmodeltypes.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -30,11 +32,11 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NAME = TypicalPersons.BENSON.getName().toString();
     private static final String VALID_PHONE = TypicalPersons.BENSON.getPhone().toString();
     private static final String VALID_EMAIL = TypicalPersons.BENSON.getEmail().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = TypicalPersons.BENSON.getTags().stream()
+    private static final Set<JsonAdaptedTag> VALID_TAGS = TypicalPersons.BENSON.getTags().stream()
         .map(JsonAdaptedTag::new)
-        .collect(Collectors.toList());
-    //TODO enhance this test, ma need to change UniBookBuilder
-    private static final List<JsonAdaptedModuleCode> VALID_MODULES = new ArrayList<>();
+        .collect(Collectors.toSet());
+    //TODO enhance this test, may need to change UniBookBuilder
+    private static final Set<JsonAdaptedModuleCode> VALID_MODULES = new HashSet<>();
 
     private UniBookBuilder uniBookBuilder = new UniBookBuilder();
 
@@ -98,7 +100,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        Set<JsonAdaptedTag> invalidTags = new HashSet<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
             new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, invalidTags, VALID_MODULES);

@@ -1,10 +1,15 @@
 package unibook.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static unibook.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 
 /**
@@ -13,29 +18,26 @@ import unibook.model.tag.Tag;
  */
 public class Student extends Person {
 
+    private final Set<Group> groups;
+
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags, Set<Module> modules) {
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags, Set<Module> modules, Set<Group> groups) {
         super(name, phone, email, tags, modules);
+        requireNonNull(groups);
+        this.groups = groups;
     }
 
     /**
-     * Every field must be present and not null.
-     */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags,
-                   Set<Module> modules, Set<ModuleCode> moduleCodes) {
-        super(name, phone, email, tags, modules, moduleCodes);
-    }
-
-    /**
-     * Another constructor to create a student from a given person.
+     * Another constructor to create a student from a given person and set of groups.
      *
-     * @param person person to create student from
+     * @param person person to create student from.
+     * @param groups list of groups student is in.
      */
-    public Student(Person person) {
+    public Student(Person person, Set<Group> groups) {
         this(person.getName(), person.getPhone(), person.getEmail(),
-            person.getTags(), person.getModules());
+            person.getTags(), person.getModules(), groups);
     }
 
 
@@ -55,6 +57,14 @@ public class Student extends Person {
             && otherPerson.getEmail().equals(getEmail())
             && otherPerson.getTags().equals(getTags())
             && otherPerson.getModules().equals(getModules());
+    }
+
+    /**
+     * Returns the groups this student is in.
+     * @return
+     */
+    public Set<Group> getGroups() {
+        return groups;
     }
 
     @Override
@@ -82,6 +92,11 @@ public class Student extends Person {
         if (!modules.isEmpty()) {
             builder.append("; Modules: ");
             modules.forEach(builder::append);
+        }
+
+        if (!groups.isEmpty()) {
+            builder.append("; Groups: ");
+            groups.forEach(builder::append);
         }
         return builder.toString();
     }

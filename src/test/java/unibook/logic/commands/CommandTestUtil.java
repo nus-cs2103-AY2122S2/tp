@@ -3,6 +3,7 @@ package unibook.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,46 +20,72 @@ import unibook.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
+ *
+ * Persons Alex, Bernice and Charlotte are already instantiated in Typical UniBook
+ * Student Amy and Professor Charles are for use in tests where a person needs to be created from scratch.
+ * see {@code StudentBuilder} and {@code ProfessorBuilder}
+ *
+ * Modules CS2103 and CS2106 are already instantiated in Typical UniBook.
+ * CS2100 is for use in tests where a group needs to be created from scratch.
+ * see {@code PersonBuilder}
+ *
+ * Group W16-1 is already instantiated in Typical UniBook.
+ * T12 is for use in tests where a group needs to be created from scratch.
+ * see {@code GroupBuilder}
  */
 public class CommandTestUtil {
 
+    //Data for objects already in typical unibook
+    public static final String VALID_MODULE_NAME_CS2103 = "Software Engineering";
+    public static final String VALID_MODULE_NAME_CS2106 = "Introduction to Operating Systems";
+    public static final String VALID_MODULE_CODE_CS2106 = "CS2106";
+    public static final String VALID_MODULE_CODE_CS2103 = "CS2103";
+    public static final String VALID_NAME_STUDENT_ALEX = "Alex Yeoh";
+    public static final String VALID_NAME_STUDENT_BERNICE = "Bernice Yu";
+    public static final String VALID_NAME_PROFESSOR_CHARLOTTE = "Charlotte Oliveiro";
+    public static final String VALID_PHONE_STUDENT_ALEX = "87438807";
+    public static final String VALID_PHONE_STUDENT_BERNICE = "99272758";
+    public static final String VALID_PHONE_PROFESSOR_CHARLOTTE = "93210283";
+    public static final String VALID_EMAIL_STUDENT_ALEX = "alexyeoh@example.com";
+    public static final String VALID_EMAIL_STUDENT_BERNICE = "berniceyu@example.com";
+    public static final String VALID_EMAIL_PROFESSOR_CHARLOTTE = "charlotte@example.com";
+    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_ROOMMATE = "roommate";
+    public static final String VALID_TAG_HELPFUL = "helpful";
+    public static final LocalDateTime VALID_MEETING_TIME =
+            LocalDateTime.of(2022, 5, 4, 13, 0);
+    public static final String VALID_GROUP_NAME = "W16-1";
+    public static final String VALID_OFFICE_1 = "COM1 02-10";
+
+    //Data for objects to be created from scratch for testing
+    public static final String VALID_MODULE_NAME_CS2100 = "Computer Organisation";
+    public static final String VALID_NAME_STUDENT_AMY = "Amy Beasley";
+    public static final String VALID_NAME_PROFESSOR_CHARLES = "Charles Tootkins";
+    public static final String VALID_PHONE_STUDENT_AMY = "89092807";
+    public static final String VALID_PHONE_PROFESSOR_CHARLES = "91230283";
+    public static final String VALID_EMAIL_STUDENT_AMY = "amybee@example.com";
+    public static final String VALID_EMAIL_PROFESSOR_CHARLES = "charles@example.com";
+    public static final String VALID_OFFICE_2 = "COM2 03-12";
+
+    //Option fields
     public static final String VALID_OPTION_MODULE = "module";
     public static final String VALID_OPTION_STUDENT = "student";
     public static final String VALID_OPTION_PROFESSOR = "professor";
-    public static final String VALID_MODULE_COMPORG = "Computer Organisation";
-    public static final String VALID_MODULE_DISMATH = "Discrete Mathematics";
-    public static final String VALID_MODULECODE_COMPORG = "CS2100";
-    public static final String VALID_MODULECODE_DISMATH = "CS1231S";
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_ADDRESS_PROFESSOR = "Block 312, Amy Street 1";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String OPTION_DESC_MODULE = " " + CliSyntax.PREFIX_OPTION + VALID_OPTION_MODULE;
     public static final String OPTION_DESC_STUDENT = " " + CliSyntax.PREFIX_OPTION + VALID_OPTION_STUDENT;
     public static final String OPTION_DESC_PROFESSOR = " " + CliSyntax.PREFIX_OPTION + VALID_OPTION_PROFESSOR;
-    public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
-    public static final String NAME_DESC_COMPORG = " " + CliSyntax.PREFIX_NAME + VALID_MODULE_COMPORG;
-    public static final String NAME_DESC_DISMATH = " " + CliSyntax.PREFIX_NAME + VALID_MODULE_DISMATH;
-    public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + CliSyntax.PREFIX_OFFICE + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + CliSyntax.PREFIX_OFFICE + VALID_ADDRESS_BOB;
-    public static final String ADDRESS_DESC_PROFESSOR = " " + CliSyntax.PREFIX_OFFICE + VALID_ADDRESS_PROFESSOR;
+    public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_STUDENT_AMY;
+    public static final String NAME_DESC_BERNICE = " " + CliSyntax.PREFIX_NAME + VALID_NAME_STUDENT_BERNICE;
+    public static final String MODULE_NAME_DESC_CS2103 = " " + CliSyntax.PREFIX_NAME + VALID_MODULE_NAME_CS2103;
+    public static final String MODULE_NAME_DESC_CS2106 = " " + CliSyntax.PREFIX_NAME + VALID_MODULE_NAME_CS2106;
+    public static final String PHONE_DESC_ALEX = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_STUDENT_ALEX;
+    public static final String PHONE_DESC_BERNICE = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_STUDENT_BERNICE;
+    public static final String EMAIL_DESC_ALEX = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_STUDENT_ALEX;
+    public static final String EMAIL_DESC_BERNICE = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_STUDENT_BERNICE;
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String MODULE_DESC_COMPORG = " " + CliSyntax.PREFIX_MODULE + VALID_MODULECODE_COMPORG;
-    public static final String MODULE_DESC_DISMATH = " " + CliSyntax.PREFIX_MODULE + VALID_MODULECODE_DISMATH;
+    public static final String MODULE_CODE_DESC_CS2103 = " " + CliSyntax.PREFIX_MODULE + VALID_MODULE_CODE_CS2103;
+    public static final String MODULE_CODE_DESC_CS2106 = " " + CliSyntax.PREFIX_MODULE + VALID_MODULE_CODE_CS2106;
 
     public static final String INVALID_OPTION_DESC = " "
             + CliSyntax.PREFIX_OPTION + "STUDENT"; // only 'student'/'module'/'professor' allowed in option
@@ -72,8 +99,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditPersonDescriptor DESC_ALEX;
+    public static final EditCommand.EditPersonDescriptor DESC_BERNICE;
 
     public static final Boolean PERSON_LIST_SHOWING = true;
     public static final Boolean PERSON_LIST_NOT_SHOWING = false;
@@ -81,12 +108,12 @@ public class CommandTestUtil {
     public static final Boolean MODULE_LIST_NOT_SHOWING = false;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+        DESC_ALEX = new EditPersonDescriptorBuilder().withName(VALID_NAME_STUDENT_ALEX)
+            .withPhone(VALID_PHONE_STUDENT_ALEX).withEmail(VALID_EMAIL_STUDENT_ALEX)
+            .withTags(VALID_TAG_FRIEND, VALID_TAG_HELPFUL).build();
+        DESC_BERNICE = new EditPersonDescriptorBuilder().withName(VALID_NAME_STUDENT_BERNICE)
+            .withPhone(VALID_PHONE_STUDENT_BERNICE).withEmail(VALID_EMAIL_STUDENT_BERNICE)
             .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

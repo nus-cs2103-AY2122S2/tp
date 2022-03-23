@@ -1,15 +1,19 @@
 package unibook.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.UniBook;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
+import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Office;
@@ -23,23 +27,32 @@ import unibook.model.tag.Tag;
  * Contains utility methods for populating {@code UniBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                getTagSet("friends"), getModuleSet("CS2106")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                getTagSet("colleagues", "friends"), getModuleSet("CS2103")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                getTagSet("neighbours"), getModuleSet("CS2103")),
-        };
-    }
 
+    /**
+     * Instantiates sample modules.
+     * @return
+     */
     public static Module[] getSampleModules() {
-        Module testModule1 = new Module(new ModuleName("Software Engineering"), new ModuleCode("CS2103"));
-        Module testModule2 = new Module(new ModuleName("Introduction to Operating Systems"), new ModuleCode("CS2106"));
+        Module sampleModule1 = new Module(new ModuleName("Software Engineering"), new ModuleCode("CS2103"));
+        Module sampleModule2 = new Module(new ModuleName("Introduction to Operating Systems"), new ModuleCode("CS2106"));
 
-        return new Module[] {testModule1, testModule2};
+        return new Module[] {sampleModule1, sampleModule2};
     }
+
+    /**
+     * Instantiates sample groups, using passed in modules array.
+     * @param sampleModules
+     * @return array of sample groups.
+     */
+    public static Group[] getSampleGroups(Module[] sampleModules) {
+        //Sample meeting time collection for group
+        ObservableList<LocalDateTime> sampleMeetingTimes1 = FXCollections.observableArrayList();
+        sampleMeetingTimes1.add(LocalDateTime.of(2022, 5, 4, 13, 0));
+        
+        Group sampleGroup1 = new Group("W16-1", sampleModules[0], sampleMeetingTimes1);
+        return new Group[] {sampleGroup1};
+    }
+
 
     public static ReadOnlyUniBook getSampleUniBook() {
         UniBook sampleAb = new UniBook();
@@ -47,41 +60,57 @@ public class SampleDataUtil {
         //modules[0] == cs2103, modules[1] == cs2106
         Module[] modules = getSampleModules();
 
-        //Initialising test module sets to pass into Student constructor
-        Set<Module> testModuleSet1 = new HashSet<>();
-        Set<Module> testModuleSet2 = new HashSet<>();
-        Set<Module> testModuleSet3 = new HashSet<>();
+        //groups[0] == W16-1
+        Group[] groups = getSampleGroups(modules);
 
-        //Test module sets for s1, s2, s3 respectively
-        testModuleSet1.add(modules[1]);
-        testModuleSet2.add(modules[0]);
-        testModuleSet3.add(modules[0]);
+        //Initialising sample module sets to pass into Student constructor
+        Set<Module> sampleModuleSet1 = new HashSet<>();
+        Set<Module> sampleModuleSet2 = new HashSet<>();
+        Set<Module> sampleModuleSet3 = new HashSet<>();
 
-        //Initialising student objects
+        //Sample module sets for s1, s2, p1 respectively
+        sampleModuleSet1.add(modules[1]);
+        sampleModuleSet2.add(modules[0]);
+        sampleModuleSet3.add(modules[0]);
+        
+        //Initialising sample group sets to pass into Student constructor
+        Set<Group> sampleGroupSet1 = new HashSet<>();
+
+        //Sample group sets for s1
+        sampleGroupSet1.add(groups[0]);
+
+        //Initialising students and professor objects
         Student s1 = new Student(new Name("Alex Yeoh"),
             new Phone("87438807"), new Email("alexyeoh@example.com"),
-            getTagSet("friends"), testModuleSet1);
+            getTagSet("friend", "roommate"), sampleModuleSet1, sampleGroupSet1);
         Student s2 = new Student(new Name("Bernice Yu"),
             new Phone("99272758"), new Email("berniceyu@example.com"),
-            getTagSet("colleagues", "friends"), testModuleSet2);
-        Professor s3 = new Professor(new Name("Charlotte Oliveiro"),
+            getTagSet("friend"), sampleModuleSet2, sampleGroupSet1);
+        Professor p1 = new Professor(new Name("Charlotte Oliveiro"),
             new Phone("93210283"), new Email("charlotte@example.com"),
-            getTagSet("neighbours"), new Office("COM1 02-10"),
-            testModuleSet3);
+            getTagSet("helpful"), new Office("COM1 02-10"),
+            sampleModuleSet3);
 
-        //Add students to module's student list
+        //Add persons to their module's list of associated people
         modules[1].addStudent(s1);
         modules[0].addStudent(s2);
-        modules[0].addProfessor(s3);
+        modules[0].addProfessor(p1);
 
-        //Add students to sample Unibook
+        //Add students to their groups
+        groups[0].addMember(s1);
+
+        //Add people to sample Unibook
         sampleAb.addPerson(s1);
         sampleAb.addPerson(s2);
-        sampleAb.addPerson(s3);
+        sampleAb.addPerson(p1);
 
         //Add modules to sample Unibook
         sampleAb.addModule(modules[0]);
         sampleAb.addModule(modules[1]);
+
+        //Add groups to sample Unibook
+        sampleAb.addGroupToModule(groups[0]);
+
         return sampleAb;
     }
 
