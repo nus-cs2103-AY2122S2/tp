@@ -84,11 +84,12 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Assigns the lesson to the student's enrolled lessons.
      * @param lesson the lesson that the student is enrolling in
-     * @param studentId the STUDENT_ID of the student being enrolled
+     * @param student the student that is being enrolled
      */
-    public void assignLesson(Lesson lesson, Index studentId) {
-        requireAllNonNull(lesson, studentId);
-        internalList.get(studentId.getZeroBased()).assignLesson(lesson);
+    public void assignLesson(Lesson lesson, Student student) {
+        requireAllNonNull(lesson, student);
+        assert internalList.contains(student) : "Cannot find student object in internal list.";
+        internalList.get(internalList.indexOf(student)).assignLesson(lesson);
     }
     /**
      * Unassigns the lesson from the student's enrolled lessons.

@@ -91,12 +91,13 @@ public class ConsistentLessonList implements Iterable<Lesson> {
 
     /**
      * Assigns the lesson to the student's enrolled lessons.
-     * @param student the lesson that the student is enrolling in
-     * @param lessonId the STUDENT_ID of the student being enrolled
+     * @param student the student that is enrolling in the lesson
+     * @param lesson the lesson that the student is enrolling in
      */
-    public void assignStudent(Student student, Index lessonId) {
-        requireAllNonNull(student, lessonId);
-        internalList.get(lessonId.getZeroBased()).assignStudent(student);
+    public void assignStudent(Student student, Lesson lesson) {
+        requireAllNonNull(student, lesson);
+        assert internalList.contains(lesson) : "Cannot find lesson object in internal list.";
+        internalList.get(internalList.indexOf(lesson)).assignStudent(student);
     }
 
     /**

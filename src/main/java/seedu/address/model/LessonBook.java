@@ -76,8 +76,8 @@ public class LessonBook implements ReadOnlyLessonBook {
         lessons.add(lesson);
     }
 
-    public void assignStudent(Student student, Index lessonId) {
-        lessons.assignStudent(student, lessonId);
+    public void assignStudent(Student student, Lesson lesson) {
+        lessons.assignStudent(student, lesson);
     }
 
     public void unasssignStudent(Student student) {

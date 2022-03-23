@@ -125,7 +125,7 @@ public interface Model {
     /**
      * Updates both filtered lesson and students list.
      */
-    void updateAssignment(Index studentId, Index lessonId);
+    void updateAssignment(Student student, Lesson lesson);
 
     /**
      * Sets the selected {@code Student} with the given {@code Student} for UI use.

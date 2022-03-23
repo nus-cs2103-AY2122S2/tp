@@ -96,8 +96,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
-    public void assignLesson(Lesson lesson, Index studentId) {
-        students.assignLesson(lesson, studentId);
+    public void assignLesson(Lesson lesson, Student student) {
+        students.assignLesson(lesson, student);
     }
 
     public void unassignLesson(Lesson lesson) {
