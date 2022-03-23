@@ -267,7 +267,7 @@ Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`.
 <br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enroled to the given class group.
 </div>
 
-### \[Proposed\] Grading Assessment feature
+### \[Proposed\] Grading Assessment Feature
 
 #### Proposed Implementation
 
