@@ -28,16 +28,28 @@ public class HelpWindow extends UiPart<Stage> {
     private int rowCounter = 1;
 
     @FXML
-    private GridPane page1;
+    private GridPane generalPage;
 
     @FXML
-    private GridPane page2;
+    private GridPane personsPage;
 
     @FXML
-    private Button firstPageBtn;
+    private GridPane appointmentsPage;
 
     @FXML
-    private Button secondPageBtn;
+    private GridPane tagsPage;
+
+    @FXML
+    private Button generalBtn;
+
+    @FXML
+    private Button personsBtn;
+
+    @FXML
+    private Button appointmentsBtn;
+
+    @FXML
+    private Button tagsBtn;
 
     /**
      * Creates a new HelpWindow.
@@ -108,53 +120,58 @@ public class HelpWindow extends UiPart<Stage> {
     private void init() {
 
         // set up table headers
-        page1.add(makeCell("Action", HEADER_COLOR), 0, 0);
-        page1.add(makeCell("Format", HEADER_COLOR), 1, 0);
-        page1.add(makeCell("Example", HEADER_COLOR), 2, 0);
-        page2.add(makeCell("Action", HEADER_COLOR), 0, 0);
-        page2.add(makeCell("Format", HEADER_COLOR), 1, 0);
-        page2.add(makeCell("Example", HEADER_COLOR), 2, 0);
+        insertHeaderRow("Action", "Format", "Example", generalPage);
+        insertHeaderRow("Action", "Format", "Example", personsPage);
+        insertHeaderRow("Action", "Format", "Example", appointmentsPage);
+        insertHeaderRow("Action", "Format", "Example", tagsPage);
 
-        // populate cells
-        insertRow("Add Person", "addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…   ",
-                "addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd t/friend t/colleague",
-                page1);
-        insertRow("Clear", "clear", "-", page1);
-        insertRow("Delete Person", "deleteperson INDEX", "delete 3", page1);
-        insertRow("Edit Person", "editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…",
-                "editperson 2 n/James Lee e/jameslee@example.com", page1);
-        insertRow("Find Person", "findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]",
-                "findperson James Jake by/name", page1);
-        insertRow("List Person", "listpersons", "-", page1);
-        insertRow("Add Tag", "addtag n/TAGNAME", "addtag n/Potential Clients", page1);
-        insertRow("Edit Tag", "edittag INDEX t/NEW_TAGNAME", "edittag 1 t/Prospective Clients", page1);
-        insertRow("List Tags", "listtags", "-", page1);
-        insertRow("Delete Tag", "deletetag INDEX", "deletetag 1", page1);
-        insertRow("Find Contacts By Tag", "findbytag t/TAGNAME", "findbytag t/friends", page1);
-        insertRow("Add Appointment", "addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON",
-                "addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60", page1);
-        insertRow("List Appointments", "listappointments", "-", page1);
-        insertRow("Delete Appointment", "deleteappointment INDEX", "deleteappointment 2", page1);
-
+        // populate general page
         rowCounter = 1;
-
-        insertRow("Edit Appointment", "editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
-                "editappointment 2 n/Call Juliet t/13:45", page2);
-        insertRow("List Appointments Within Period", "appointmentsbetween sd/STARTDATE st/STARTTIME ",
-                "ed/ENDDATE et/ENDTIME appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00", page2);
-        insertRow("Help", "help", "-", page2);
-        insertRow("Export CSV", "exportcsv", "-", page2);
+        insertRow("Clear", "clear", "-", generalPage);
+        insertRow("Help", "help", "-", generalPage);
+        insertRow("Export CSV", "exportcsv", "-", generalPage);
         insertRow("Import CSV", "importcsv f/FILEPATH [n/COLUMNNUM] "
                         + "[p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]",
-                "importCSV n/2 p/3 e/5 a/6 t/4", page2);
-        insertRow("Operate on Contacts by Conditional Clause", "batch COMMAND where/CONDITION",
-                "batch Edit p/87438806 where/ p/Phone = 87438807", page2);
-        insertRow("Operate on Contacts within Range", "range COMMAND from/INDEX to/INDEX",
-                "range editperson e/johndoe@example.com from/6 to/10", page2);
+                "importCSV n/2 p/3 e/5 a/6 t/4", generalPage);
         insertRow("Chaining Commands", "chain COMMAND_A && COMMAND_B",
-                "chain editappointment 6 l/360 && listappointments", page2);
+                "chain editappointment 6 l/360 && listappointments", generalPage);
 
-        setPage1();
+        // populate persons page
+        rowCounter = 1;
+        insertRow("Add Person", "addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…   ",
+                "addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd t/friend t/colleague",
+                personsPage);
+        insertRow("Delete Person", "deleteperson INDEX", "delete 3", personsPage);
+        insertRow("Edit Person", "editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…",
+                "editperson 2 n/James Lee e/jameslee@example.com", personsPage);
+        insertRow("List Person", "listpersons", "-", personsPage);
+        insertRow("Find Person", "findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]",
+                "findperson James Jake by/name", personsPage);
+        insertRow("Operate on Contacts by Conditional Clause", "batch COMMAND where/CONDITION",
+                "batch Edit p/87438806 where/ p/Phone = 87438807", personsPage);
+        insertRow("Operate on Contacts within Range", "range COMMAND from/INDEX to/INDEX",
+                "range editperson e/johndoe@example.com from/6 to/10", personsPage);
+
+        // populate appointments page
+        rowCounter = 1;
+        insertRow("Add Appointment", "addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON",
+                "addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60", appointmentsPage);
+        insertRow("List Appointments", "listappointments", "-", appointmentsPage);
+        insertRow("Delete Appointment", "deleteappointment INDEX", "deleteappointment 2", appointmentsPage);
+        insertRow("Edit Appointment", "editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
+                "editappointment 2 n/Call Juliet t/13:45", appointmentsPage);
+        insertRow("List Appointments Within Period", "appointmentsbetween sd/STARTDATE st/STARTTIME ",
+                "ed/ENDDATE et/ENDTIME appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+                appointmentsPage);
+
+        // populate tags page
+        insertRow("Add Tag", "addtag n/TAGNAME", "addtag n/Potential Clients", tagsPage);
+        insertRow("Edit Tag", "edittag INDEX t/NEW_TAGNAME", "edittag 1 t/Prospective Clients", tagsPage);
+        insertRow("Delete Tag", "deletetag INDEX", "deletetag 1", tagsPage);
+        insertRow("List Tags", "listtags", "-", tagsPage);
+        insertRow("Find Contacts By Tag", "findbytag t/TAGNAME", "findbytag t/friends", tagsPage);
+
+        setGeneralPage();
     }
 
     /**
@@ -170,6 +187,20 @@ public class HelpWindow extends UiPart<Stage> {
         table.add(makeCell(s2, CELL_COLOR), 1, rowCounter);
         table.add(makeCell(s3, CELL_COLOR), 2, rowCounter);
         rowCounter += 1;
+    }
+
+    /**
+     * Inserts a header row into the help window table at the 0 row
+     * The current row is indicated by rowCounter.
+     * @param s1 string for the first column
+     * @param s2 string for the second column
+     * @param s3 string for the third column
+     * @param table table for row to be inserted into
+     */
+    private void insertHeaderRow(String s1, String s2, String s3, GridPane table) {
+        table.add(makeCell("Action", HEADER_COLOR), 0, 0);
+        table.add(makeCell("Format", HEADER_COLOR), 1, 0);
+        table.add(makeCell("Example", HEADER_COLOR), 2, 0);
     }
 
 
@@ -198,24 +229,54 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets page 1 to be shown
+     * Sets general page to be shown
      */
-    public void setPage1() {
-        page1.setVisible(true);
-        page2.setVisible(false);
-        firstPageBtn.setStyle("-fx-border-color: #FFFFFF;");
-        secondPageBtn.setStyle("-fx-border-color: #555555;");
-
+    public void setGeneralPage() {
+        hideAllPages();
+        generalPage.setVisible(true);
+        generalBtn.setStyle("-fx-border-color: #FFFFFF;");
     }
 
     /**
-     * Sets page 2 to be shown
+     * Sets persons page to be shown
      */
-    public void setPage2() {
-        page1.setVisible(false);
-        page2.setVisible(true);
-        firstPageBtn.setStyle("-fx-border-color: #555555;");
-        secondPageBtn.setStyle("-fx-border-color: #FFFFFF;");
+    public void setPersonsPage() {
+        hideAllPages();
+        personsPage.setVisible(true);
+        personsBtn.setStyle("-fx-border-color: #FFFFFF;");
+    }
+
+
+    /**
+     * Sets appointments page to be shown
+     */
+    public void setAppointmentsPage() {
+        hideAllPages();
+        appointmentsPage.setVisible(true);
+        appointmentsBtn.setStyle("-fx-border-color: #FFFFFF;");
+    }
+
+    /**
+     * Sets tags page to be shown
+     */
+    public void setTagsPage() {
+        hideAllPages();
+        tagsPage.setVisible(true);
+        tagsBtn.setStyle("-fx-border-color: #FFFFFF;");
+    }
+
+    /**
+     * Sets all pages to be hidden
+     */
+    public void hideAllPages() {
+        generalPage.setVisible(false);
+        personsPage.setVisible(false);
+        appointmentsPage.setVisible(false);
+        tagsPage.setVisible(false);
+        generalBtn.setStyle("-fx-border-color: #555555;");
+        personsBtn.setStyle("-fx-border-color: #555555;");
+        appointmentsBtn.setStyle("-fx-border-color: #555555;");
+        tagsBtn.setStyle("-fx-border-color: #555555;");
     }
 
 }
