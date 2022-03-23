@@ -311,18 +311,18 @@ public class DisjointAppointmentListTest {
     public void findSlotsBetweenAppointments_nullInputs_throwsNullPointerException() {
         LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:30");
         assertThrows(NullPointerException.class, ()
-            -> new DisjointAppointmentList().findSlotsBetweenAppointments(null, refDateTime, 1));
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(null, refDateTime, 1));
         assertThrows(NullPointerException.class, ()
-            -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, null, 1));
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(refDateTime, null, 1));
     }
 
     @Test
     public void findSlotsBetweenAppointments_nonPositiveDuration_throwsIllegalArgumentException() {
         LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:30");
         assertThrows(IllegalArgumentException.class, ()
-            -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, 0));
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(refDateTime, refDateTime, 0));
         assertThrows(IllegalArgumentException.class, ()
-            -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, -1));
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(refDateTime, refDateTime, -1));
     }
 
     @Test
@@ -345,14 +345,14 @@ public class DisjointAppointmentListTest {
 
         List<TimeRange> expectedList = List.of(new TimeRange(exactRangeStart, exactRangeEnd));
 
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(exactRangeStart, exactRangeEnd, 120));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(exactRangeStart, exactRangeEnd, 60));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(exactRangeStart, exactRangeEnd, 1));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 60));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 1));
 
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(largerRangeStart, largerRangeEnd, 121));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(largerRangeStart, largerRangeEnd, 120));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(largerRangeStart, largerRangeEnd, 60));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(largerRangeStart, largerRangeEnd, 1));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 121));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 60));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 1));
     }
 
     @Test
@@ -377,26 +377,26 @@ public class DisjointAppointmentListTest {
 
         List<TimeRange> expectedList = List.of(new TimeRange(smallerRangeStart, exactRangeEnd));
 
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeStart, exactRangeEnd, 120));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(smallerRangeStart, exactRangeEnd, 119));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeStart, exactRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(smallerRangeStart, exactRangeEnd, 119));
 
         expectedList = List.of(new TimeRange(exactRangeStart, smallerRangeEnd));
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(exactRangeStart, smallerRangeEnd, 120));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(exactRangeStart, smallerRangeEnd, 119));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(exactRangeStart, smallerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, smallerRangeEnd, 119));
 
         expectedList = List.of(new TimeRange(smallerRangeStart, smallerRangeEnd));
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeStart, smallerRangeEnd, 119));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(smallerRangeStart, smallerRangeEnd, 118));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeStart, smallerRangeEnd, 119));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(smallerRangeStart, smallerRangeEnd, 118));
 
         expectedList = List.of(new TimeRange(smallerRangeStart, exactRangeEnd));
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeStart, largerRangeEnd, 120));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(smallerRangeStart, largerRangeEnd, 119));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeStart, largerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(smallerRangeStart, largerRangeEnd, 119));
 
         expectedList = List.of(new TimeRange(exactRangeStart, smallerRangeEnd));
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(largerRangeStart, smallerRangeEnd, 120));
-        assertEquals(expectedList, refList.findSlotsBetweenAppointments(largerRangeStart, smallerRangeEnd, 119));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(largerRangeStart, smallerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, smallerRangeEnd, 119));
 
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeEnd, smallerRangeStart, 1));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeEnd, smallerRangeStart, 1));
     }
 
     @Test
@@ -417,8 +417,39 @@ public class DisjointAppointmentListTest {
         refList.add(appointment1);
         refList.add(appointment2);
 
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(beforeRangeStart, beforeRangeEnd, 120));
-        assertEquals(List.of(), refList.findSlotsBetweenAppointments(afterRangeStart, afterRangeEnd, 120));
+        assertEquals(List.of(new TimeRange(beforeRangeStart, beforeRangeEnd)),
+                refList.findAvailableSlotsInRange(beforeRangeStart, beforeRangeEnd, 120));
+        assertEquals(List.of(new TimeRange(afterRangeStart, afterRangeEnd)),
+                refList.findAvailableSlotsInRange(afterRangeStart, afterRangeEnd, 120));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_leadingAndTrailingSlots_success() {
+        LocalDateTime rangeStart = LocalDateTime.parse("2022-12-12T11:30");
+        LocalDateTime rangeEnd = LocalDateTime.parse("2022-12-12T15:30");
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        refList.add(appointment1);
+        refList.add(appointment2);
+
+        List<TimeRange> expectedResult = List.of(
+                new TimeRange(rangeStart, LocalDateTime.parse("2022-12-12T12:00")),
+                new TimeRange(LocalDateTime.parse("2022-12-12T12:30"), LocalDateTime.parse("2022-12-12T14:30")),
+                new TimeRange(LocalDateTime.parse("2022-12-12T15:00"), rangeEnd)
+        );
+
+        assertEquals(expectedResult, refList.findAvailableSlotsInRange(rangeStart, rangeEnd, 30));
+        assertEquals(expectedResult, refList.findAvailableSlotsInRange(rangeStart, rangeEnd, 15));
+        assertEquals(List.of(
+                new TimeRange(LocalDateTime.parse("2022-12-12T12:30"), LocalDateTime.parse("2022-12-12T14:30"))
+        ), refList.findAvailableSlotsInRange(rangeStart, rangeEnd, 31));
     }
 
     @Test

@@ -103,7 +103,7 @@ public class Schedule implements ReadOnlySchedule {
     public List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
                                                         int minimumDuration) {
         requireAllNonNull(start, end, minimumDuration);
-        return appointments.findSlotsBetweenAppointments(start, end, minimumDuration);
+        return appointments.findAvailableSlotsInRange(start, end, minimumDuration);
     }
 
     // ====== Util Methods ===================================================================================
