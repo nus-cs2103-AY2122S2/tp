@@ -39,6 +39,22 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code indexAndWords} into an {@code Pair<Index, String>} and returns it. Leading and trailing
+     * whitespaces will be trimmed. Must contain a number at the beginning and then words.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Pair<Index, String> parseOutIndex(String indexAndWords) throws ParseException {
+        String trimmedInput = indexAndWords.trim();
+        // splitIndexAndRemainingString[0] contains index no., splitIndexAndRemainingString[2] contains remaining string
+        String[] splitIndexAndRemainingString = trimmedInput.split(" ", 2);
+        assert splitIndexAndRemainingString.length == 2;
+
+        Index index = parseIndex(splitIndexAndRemainingString[0]);
+        return new Pair<>(index, splitIndexAndRemainingString[1]);
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
