@@ -16,10 +16,10 @@
             <stylesheets>
                 <URL value="@HelpWindow.css" />
             </stylesheets>
-         <VBox>
+         <VBox fx:id="parentPane">
             <children>
                 <StackPane>
-                    <GridPane fx:id="generalPage" prefWidth="1000.0" style="-fx-background-color: #383838;" >
+                    <GridPane fx:id="generalPage" prefWidth="200.0" style="-fx-background-color: #383838;" >
                         <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />

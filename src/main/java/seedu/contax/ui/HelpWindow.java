@@ -8,11 +8,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
@@ -26,6 +23,9 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Paint CELL_COLOR = Paint.valueOf("#555555");
 
     private int rowCounter = 1;
+
+    @FXML
+    private VBox parentPane;
 
     @FXML
     private GridPane generalPage;
@@ -218,15 +218,18 @@ public class HelpWindow extends UiPart<Stage> {
         Label label = new Label();
         label.setWrapText(true);
         label.setPrefWidth(350);
-        label.setPrefHeight(text.length() > 60 ? 50 : 30);
-        label.setPadding(new Insets(0, 0, 0, 5));
+        label.setMinHeight(Region.USE_PREF_SIZE);
+        label.setPadding(new Insets(10, 0, 10, 5));
         label.setText(text);
         label.setTextFill(Paint.valueOf("#FFFFFF"));
+
 
         hbox.getChildren().add(label);
         hbox.setBackground(new Background(new BackgroundFill(paint, new CornerRadii(0), Insets.EMPTY)));
         return hbox;
     }
+
+
 
     /**
      * Sets general page to be shown
