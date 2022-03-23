@@ -51,15 +51,6 @@ public class AttendanceHashMap {
     }
 
     /**
-     * Checks if attendance has already been marked on a given date.
-     * @param date the target date.
-     * @return true if attendance has been marked, false otherwise.
-     */
-    public boolean hasAttendanceEntry(LocalDate date) {
-        return attendanceHashMap.containsKey(date);
-    }
-
-    /**
      * Checks if the attendance hash map is empty.
      * @return true if attendance hash map is empty, false otherwise.
      */

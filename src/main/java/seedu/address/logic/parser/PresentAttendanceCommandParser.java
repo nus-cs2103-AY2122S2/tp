@@ -27,47 +27,37 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
     public PresentAttendanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_PICKUP, PREFIX_DROPOFF);
+            ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_PICKUP, PREFIX_DROPOFF);
+
+        if (onlyOneTimePresent(argMultimap)) {
+            throw new ParseException("meme");
+        }
 
         Index index;
+        LocalDate attendanceDate;
+        PresentAttendanceDescriptor presentAttendanceDescriptor =
+            new PresentAttendanceDescriptor();
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    PresentAttendanceCommand.MESSAGE_USAGE), pe);
-        }
-
-        LocalDate attendanceDate;
-
-        try {
             attendanceDate = ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get());
+            presentAttendanceDescriptor.setAttendanceDate(attendanceDate);
+
+            if (argMultimap.getValue(PREFIX_PICKUP).isPresent()) {
+                presentAttendanceDescriptor.setPickUpTime(
+                    ParserUtil.parsePickUpTime(argMultimap.getValue(PREFIX_PICKUP).get())
+                );
+            }
+
+            if (argMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
+                presentAttendanceDescriptor.setDropOffTime(
+                    ParserUtil.parseDropOffTime(argMultimap.getValue(PREFIX_DROPOFF).get())
+                );
+            }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    PresentAttendanceCommand.MESSAGE_USAGE), pe);
+                PresentAttendanceCommand.MESSAGE_USAGE), pe);
         }
-
-        if (onlyOneTimePresent(argMultimap)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    PresentAttendanceCommand.MESSAGE_USAGE));
-        }
-
-        PresentAttendanceDescriptor presentAttendanceDescriptor =
-                new PresentAttendanceDescriptor();
-
-        if (argMultimap.getValue(PREFIX_PICKUP).isPresent()) {
-            presentAttendanceDescriptor.setPickUpTime(
-                    ParserUtil.parsePickUpTime(argMultimap.getValue(PREFIX_PICKUP).get())
-            );
-        }
-
-        if (argMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
-            presentAttendanceDescriptor.setDropOffTime(
-                    ParserUtil.parseDropOffTime(argMultimap.getValue(PREFIX_DROPOFF).get())
-            );
-        }
-
-        presentAttendanceDescriptor.setAttendanceDate(attendanceDate);
 
         return new PresentAttendanceCommand(index, presentAttendanceDescriptor);
     }
