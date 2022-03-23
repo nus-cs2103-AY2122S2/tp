@@ -646,9 +646,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Student Status**: A student detail that indicates whether the student has Covid-19
-* **Health Risk Warning**: A warning that informs school and students for high health risk
-* **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus.
-* **NUS IT**: The information technology department at the National University of Singapore
+* **Health Risk Notice**: Household members living with individuals diagnosed with Covid-19 are issued with this notice
+* **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus
+* **NUS Hall**: Hall of residence in the National University of Singapore
+* **Resident Fellow** Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
+* **Hall leaders** Student leaders in NUS halls
+
 
 --------------------------------------------------------------------------------------------------------------------
 
