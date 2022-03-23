@@ -22,8 +22,8 @@ import seedu.trackermon.logic.commands.FindCommand;
 import seedu.trackermon.logic.commands.HelpCommand;
 import seedu.trackermon.logic.commands.ListCommand;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
-import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
 import seedu.trackermon.model.show.Show;
+import seedu.trackermon.model.show.ShowContainsKeywordsPredicate;
 import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 import seedu.trackermon.testutil.ShowBuilder;
 import seedu.trackermon.testutil.ShowUtil;
@@ -66,7 +66,7 @@ public class TrackermonParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new ShowContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
