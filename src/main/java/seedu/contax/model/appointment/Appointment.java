@@ -20,7 +20,7 @@ public class Appointment implements Comparable<Appointment> {
     private final Name name;
     private final Duration duration;
     private final Person person;
-    private Priority priority;
+    private final Priority priority;
 
     /**
      * Constructs an {@code Appointment}.
@@ -40,6 +40,27 @@ public class Appointment implements Comparable<Appointment> {
         this.duration = duration;
         this.person = person;
         this.priority = Priority.LOW;
+    }
+
+    /**
+     * Additional Constructs an {@code Appointment}.
+     * The fields requirements follows the previous
+     * The fields {@code priority} must be present and not null.
+     *
+     * @param name A valid Appointment Name.
+     * @param startDateTime A valid Appointment Starting DateTime.
+     * @param duration A valid Appointment Duration.
+     * @param person A valid Person or null.
+     * @param priority A valid priority level.
+     */
+    public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
+        requireAllNonNull(name, startDateTime, duration, priority);
+
+        this.name = name;
+        this.startDateTime = startDateTime;
+        this.duration = duration;
+        this.person = person;
+        this.priority = priority;
     }
 
     public Name getName() {
@@ -63,8 +84,7 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     public Appointment setPriority(Priority priority) {
-        this.priority = priority;
-        return this;
+        return new Appointment(name, startDateTime, duration, person, priority);
     }
 
     /**
