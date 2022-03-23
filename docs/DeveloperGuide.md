@@ -159,6 +159,25 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### GUI for Adding, Editing
+
+#### Implementation
+
+The GUI for `AddWindow` and `EditWindow` are done using JavaFX with SceneBuilder.  
+The adding and editing mechanism is driven by the CLI commands, `add` and `edit`, and both goes through their respective `Parser`
+
+User input is retrieved from their respective `TextField`  
+User input is strung together to follow the proper `Command` format, which is then passed to `Logic` to handle the rest of the execution  
+
+`AddWindow` allows for the execution of multiple commands within a single window.  
+Executing multiple commands (`status`, `addmodule`) is done by checking if the given inputs are valid. If they are valid, we pass the execution to `Logic` to handle the adding of a `Person`. After a `Person` is added, retrieve the last index from `PersonList`, then pass the user inputs for `status` and/or `addmodule` into `Logic` again to execute the commands
+
+The following activity diagram shows how a `Person` with `Status` and `Module` is added when the given command is `add` or when the user opens `AddWindow`
+![GuiAddActivityDiagram](images/GuiAddActivityDiagram.png)
+
+Editing through `EditWindow` is largely similar to the above.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
