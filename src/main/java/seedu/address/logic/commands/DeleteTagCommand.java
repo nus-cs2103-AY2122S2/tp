@@ -51,7 +51,7 @@ public class DeleteTagCommand extends Command {
             Set<Tag> tagCopy = new HashSet<>(tempTags);
             tagCopy.removeIf(t -> t.isSameTag(tagToDelete));
             Person newPerson = new Person(currPerson.getName(), currPerson.getPhone(),
-                    currPerson.getEmail(), currPerson.getAddress(), tagCopy);
+                    currPerson.getEmail(), currPerson.getAddress(), tagCopy, currPerson.getCourse(), currPerson.getMatricCard(), currPerson.getTelegram());
             model.setPerson(currPerson, newPerson);
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete));
