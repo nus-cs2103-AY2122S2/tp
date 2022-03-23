@@ -5,14 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Person;
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 0d4a9d71 (Revert "Remove unused import")
-
 
 /**
  * Represents a list of unique Teams
