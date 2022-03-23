@@ -46,8 +46,8 @@ public class ModelManager implements Model {
 
         currentlyDisplayedListType = ListType.PERSON;
 
-        // Don't allow deleting/finding/editing on the companies or events list at the beginning
-        filteredCompanies.setPredicate(PREDICATE_SHOW_NO_COMPANIES);
+        // Don't allow deleting/finding/editing on the events or person list at the beginning
+        filteredPersons.setPredicate(PREDICATE_SHOW_NO_PERSONS);
         filteredEvents.setPredicate(PREDICATE_SHOW_NO_EVENTS);
     }
 

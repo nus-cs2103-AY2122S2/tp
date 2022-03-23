@@ -25,6 +25,8 @@ public class ListPersonCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showPerson(model);
+        showPerson(expectedModel);
         expectedCommandResult = new CommandResult(ListPersonCommand.MESSAGE_SUCCESS,
                 false, false, true, false, false);
     }
@@ -38,5 +40,11 @@ public class ListPersonCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListPersonCommand(), model, expectedCommandResult, expectedModel);
+    }
+
+    private void showPerson(Model model) {
+        model.updateFilteredCompanyList(p -> false);
+        model.updateFilteredEventList(p -> false);
+        model.updateFilteredPersonList(p -> true);
     }
 }
