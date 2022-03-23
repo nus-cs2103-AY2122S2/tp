@@ -80,7 +80,7 @@ class JsonAdaptedShow {
         if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
-        final Status modelStatus = Status.valueOf(status.toUpperCase());
+        final Status modelStatus = Status.getStatus(status.toUpperCase());
 
         final Comment modelComment = new Comment(comment);
 
