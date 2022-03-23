@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_DATETIME;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_PAST_DATETIME;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -226,7 +226,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_FORMAT_DATETIME);
         }
         if (!Interview.isValidDateTime(formattedDateTime)) {
-            throw new ParseException(MESSAGE_INVALID_DATETIME);
+            throw new ParseException(MESSAGE_INVALID_PAST_DATETIME);
         }
         return formattedDateTime;
     }
