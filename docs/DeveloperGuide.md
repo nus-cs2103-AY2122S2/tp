@@ -244,7 +244,7 @@ Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/SaveChangesActivityDiagram.png" width="300" />
 
 #### Design considerations:
 
