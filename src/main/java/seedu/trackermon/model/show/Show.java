@@ -97,4 +97,20 @@ public class Show {
         return builder.toString();
     }
 
+    /**
+     * Compare this name with other lexicographically
+     */
+    public int compareNames(Show other) {
+        return this.name.compareTo(other.name);
+    }
+
+    /**
+     * Compare this status with other lexicographically
+     */
+    public int compareStatus(Show other) {
+        return this.status.compareTo(other.status);
+    }
+
+
+
 }

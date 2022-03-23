@@ -15,6 +15,11 @@ title: Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 * [**Implementation**](#implementation)
+    * [Find command feature](#find-command-feature)
+        * [What it does](#what-it-does)
+        * [Implementation](#implementation-1)
+        * [Design consideration](#design-considerations)
+            * [How find executes](#aspect-how-find-executes)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -27,6 +32,7 @@ title: Developer Guide
     * [Deleting a show](#deleting-a-show)
     * [Editing a show](#editing-a-show)
     * [Saving data](#saving-data)
+    * [Finding a show](#finding-a-show)
 
 
 ---
@@ -205,6 +211,43 @@ Classes used by multiple components are in the `seedu.trackermon.commons` packag
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find command feature
+
+#### What it does 
+
+Looks for a show in a list of shows and displays all the shows that match the user's input. If the user's input contains no prefixes, `find` will do a general search through all fields in the `Show` class.
+
+#### Implementation
+After entering the find command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax.Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. `FindCommand` is a class that inherits the `Command` abstract class. `FindCommand` implements the `execute()` method from the `Command` abstract class where on execution, it will scan through the shows in the model's list of shows and check if any shows match the user's input. The model is then udpated with the filtered show list.
+
+Given below is an example usage scenario and the step-by-step flow of the find command.
+
+Step 1: The user launches Trackermon and enters `find n/Shingeki no Kyojin s/watching` to find a show.
+
+Step 2: The find command will check and see whether any shows contain the name `Shingeki no Kyojin` and the status `watching` using the `Model#updateFilteredShowList` method.
+
+Step 3:
+`Model#updateFilteredShowList` will be called and model will be udpated.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+`find Shingeki no Kyojin` will also work, however it will scan through the name, status and tag fields instead of the name field only
+</div>
+
+The following activity diagram summarizes what happens when a user executes a valid find command:
+
+<img src="images/FindShowDiagram.png">
+
+#### Design considerations:
+##### Aspect: How find executes
+- **Alternative 1 (current choice):** The `find` command checks for keywords after the prefix. If there are no prefixes, it will perform a general search using `ShowContainsKeywordsPredicate` which scans through the name, status and tag fields in the `Show` class. Else, `ArgumentMultimap#arePrefixesPresent` will check and return a new predicate for each value after each prefix if it is present and then generate a keyword predicate that will match values in that field. A for loop is implemented for the name and tag predicates. This will allow an `AND` search within a list of keywords within these two parameters. The user does not need to type in the full word for any find searches as each predicate uses a fragmented search.
+  - Pros: Abstraction of predicates and encapsulating the checking of shows allows the predicates to be used more flexibly elsewhere to match other shows.
+  - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.
+
+- **Alternative 2:** Directly check whether the show is in the show list in the find command parser without a predicate.
+  - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
+  - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -245,15 +288,17 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​   | I want to …​                | So that I can…​                                            |
-|----------|----------|----------------------------|-----------------------------------------------------------|
-| `* * *`  | user     | add shows                  | add new shows into the list                               |
-| `* * *`  | user     | delete shows  		   | delete wrong entries in the list                          |
-| `* * *`  | user     | find a show                | find whether a specific show is in the list               |
-| `* * *`  | user     | list out all of my shows   | see the details of all my shows in the list               |
-| `* *`    | new user | see usage instructions     | refer to instructions when I forget how to use the App |
-| `* * *`  | user     | edit show from the list    | edit the name or status or tag of my show in the list     |
-
+| Priority | As a …​        | I want to …​                                          | So that I can…​                                        |
+|----------|----------------|-------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | user           | add shows                                             | add new shows into the list                            |
+| `* * *`  | user           | delete shows  		                                      | delete wrong entries in the list                       |
+| `* * *`  | user           | find a show                                           | find whether a specific show is in the list            |
+| `* * *`  | user           | list out all of my shows                              | see the details of all my shows in the list            |
+| `* *`    | new user       | see usage instructions                                | refer to instructions when I forget how to use the App |
+| `* * *`  | user           | edit show from the list                               | edit the name or status or tag of my show in the list  |
+| `* * `   | long time user | find shows of specific genres                         | recommend those shows to my friends                    |
+| `* * `   | long time user | find a show I may or may not have watched             | decide whether to watch that show or not               |
+| `* * `   | long time user | find whether a show I am watching is completed or not | continue with it if it is not completed                |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -461,18 +506,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find shows.
-2.  Trackermon shows a list of shows that matches the keyword entered by user.
+1. User requests to find shows.
+2. Trackermon searches the existing show list.
+3. Trackermon shows a list of shows that matches the keyword entered by user.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User uses the command with the wrong syntax.
+* 1a. User enters the command with the wrong syntax.
 
     * 1a1. Trackermon shows an error message to user, indicating the format for finding shows is incorrect, and attaches the correct syntax format.
 
       Use case resumes at step 1.
+  
+* 3a. Trackermon shows an empty search result.
+    * 3a1. Trackermon shows a message informing the user that 0 shows are found.
+  
+    Use case ends.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -543,6 +594,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
     
+---
 
 ### Editing a show
 
@@ -579,6 +631,87 @@ testers are expected to do more *exploratory* testing.
     3. Testcase: `data/trackermon.json` is corrupted. <br> Expected: The app starts with a empty show list.
     4. Testcase: `data/trackermon.json` is deleted. <br> Expected: The app starts with the default list of show list.
 
+---
+
+### Finding a show
+1. Finding a show (General Find)
+    1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   
+    2. Test case: `find shingeki`
+
+       Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list.
+
+       E.g. `shingeki` from name, status, or tag fields will be matched.
+   
+    3. Test case: `find shing`
+   
+       Expected: Looks through the name, status and tag fields for any partial or full word of `shing` then displays them on the show list.
+   
+       E.g. `shing` from name, status, or tag fields will be matched.
+   
+    4. Test case: `find shingeki shutter`
+
+       Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list.
+
+       E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+   
+    5. Test case: `find 86 shutter`
+
+       Expected: Looks through the name, status and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list.
+
+       E.g. `86` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+   
+    6. Test case: `find` 
+
+       Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
+   
+    7. Test case: `find2`
+
+       Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`
 
 
+2. Find a show (Precise Find)<br>
+
+   1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   
+   2. Test case: `find n/shingeki`
+
+      Expected: Looks through the name field for any partial or full word of `shingeki` then displays them on the show list.
+
+      E.g. `shingeki` from the name field will be matched.
+   
+   3. Test case: `find n/shingeki s/completed`
+
+      Expected: Looks through the name field for any partial or full word of `shingeki` and the status field for any partial or full word of `completed` then displays them on the show list.
+
+      E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched. (`AND` search between multiple prefixes).
+   
+   4. Test case: `find n/shingeki t/seinen`
+
+      Expected: Looks through the name field for any partial or full word of `shingeki` and the tag field for any partial or full word of `seinen` then displays them on the show list.
+
+      E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched. (`AND` search between multiple prefixes).
+   
+   5. Test case: find `n/shingeki no kyojin`
+
+      Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list.
+
+      E.g. `shingeki` and `no` and `kyojin` from the name field will be matched. (`AND` search within a single prefix).
+   
+   6. Test case: `find n/shingeki no kyojin t/seinen` 
+   
+      Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` and the tag field for any partial or full word of `seinen` then displays them on the show list.
+
+      E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched. (`AND` search within a single prefix and `AND` search between multiple prefixes).
+   
+   7. Test case: `find n/`
+
+      Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
+   
+   8. Test case: `find n/shingeki n/shutter`
+
+      Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list. (Ignores the first instance of n/)
+
+      E.g. `shutter` from the name field will be matched.
+   
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
