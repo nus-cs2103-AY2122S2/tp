@@ -7,7 +7,6 @@ import java.util.List;
 
 import seedu.address.model.person.Person;
 
-
 /**
  * Represents a list of unique Teams
  */
