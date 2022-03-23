@@ -13,6 +13,7 @@ import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.CollectionUtil;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
+import seedu.ibook.model.item.UniqueItemList;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
@@ -66,7 +67,7 @@ public class UpdateCommand extends Command {
         Product productToUpdate = lastShownList.get(index.getZeroBased());
         Product updatedProduct = createUpdatedProduct(productToUpdate, updateProductDescriptor);
 
-        if (!productToUpdate.isSameProduct(updatedProduct) && model.hasProduct(updatedProduct)) {
+        if (!productToUpdate.isSame(updatedProduct) && model.hasProduct(updatedProduct)) {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
@@ -89,7 +90,12 @@ public class UpdateCommand extends Command {
                 updateProductDescriptor.getDescription().orElse(productToUpdate.getDescription());
         Price updatedPrice = updateProductDescriptor.getPrice().orElse(productToUpdate.getPrice());
 
-        return new Product(updatedName, updatedCategory, updatedDescription, updatedPrice);
+        UniqueItemList items = updateProductDescriptor.getItems().orElse(productToUpdate.getItems());
+
+        // Updates to items via this command is not available
+        assert items.equals(productToUpdate.getItems());
+
+        return new Product(updatedName, updatedCategory, updatedDescription, updatedPrice, items.asObservableList());
     }
 
     @Override
@@ -119,6 +125,7 @@ public class UpdateCommand extends Command {
         private Category category;
         private Description description;
         private Price price;
+        private UniqueItemList items;
 
         public UpdateProductDescriptor() {}
 
@@ -130,6 +137,7 @@ public class UpdateCommand extends Command {
             setCategory(toCopy.category);
             setDescription(toCopy.description);
             setPrice(toCopy.price);
+            setItems(toCopy.items);
         }
 
         /**
@@ -171,6 +179,14 @@ public class UpdateCommand extends Command {
             return Optional.ofNullable(price);
         }
 
+        public void setItems(UniqueItemList items) {
+            this.items = items;
+        }
+
+        public Optional<UniqueItemList> getItems() {
+            return Optional.ofNullable(items);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -189,7 +205,8 @@ public class UpdateCommand extends Command {
             return getName().equals(e.getName())
                     && getCategory().equals(e.getCategory())
                     && getDescription().equals(e.getDescription())
-                    && getPrice().equals(e.getPrice());
+                    && getPrice().equals(e.getPrice())
+                    && getItems().equals(e.getItems());
         }
     }
 

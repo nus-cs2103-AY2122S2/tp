@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.model.item.Item;
@@ -103,7 +102,7 @@ public class IBook implements ReadOnlyIBook {
      */
     public boolean hasItem(Item item) {
         requireNonNull(item);
-        return StreamSupport.stream(products.spliterator(), false) // Turn Iterable<Product> to Stream<Product>
+        return products.stream()
                 .anyMatch(product -> product.hasItem(item));
     }
 

@@ -14,6 +14,7 @@ import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.Quantity;
 
 public class AddItemCommandParser implements Parser<AddItemCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddItemCommand
      * and returns an AddItemCommand object for execution.
@@ -25,7 +26,7 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_EXPIRY_DATE, PREFIX_QUANTITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_EXPIRY_DATE, PREFIX_QUANTITY)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE));
         }
 
