@@ -9,9 +9,9 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
-import seedu.address.model.student.lab.Lab;
 
 /**
  * A list of Students that enforces uniqueness between its elements and does not allow nulls.

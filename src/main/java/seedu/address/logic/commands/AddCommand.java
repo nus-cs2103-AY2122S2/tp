@@ -10,9 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabList;
 
 /**
  * Adds a Student to the TAddressBook.

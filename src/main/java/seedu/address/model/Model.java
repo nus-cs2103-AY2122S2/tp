@@ -5,14 +5,16 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.lab.Lab;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
@@ -50,7 +52,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the TAddressBook */
+    /**
+     * Returns the TAddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -78,11 +82,14 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
-    /** Returns an unmodifiable view of the filtered student list */
+    /**
+     * Returns an unmodifiable view of the filtered student list
+     */
     ObservableList<Student> getFilteredStudentList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);

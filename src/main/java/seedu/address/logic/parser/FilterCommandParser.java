@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabStatus;
-import seedu.address.model.student.lab.StudentHasLabPredicate;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
+import seedu.address.model.lab.StudentHasLabPredicate;
 
 /**
  * Parses input arguments and creates a FilterCommand object
@@ -35,7 +35,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Lab lab = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
         LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
 
-        return new FilterCommand(new StudentHasLabPredicate(lab.thatIs(labStatus)));
+        return new FilterCommand(new StudentHasLabPredicate(lab.of(labStatus)));
 
     }
 

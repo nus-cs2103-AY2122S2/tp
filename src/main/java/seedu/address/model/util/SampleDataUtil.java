@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
 import javafx.util.Pair;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabList;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -20,13 +20,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lab.LabList;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.student.lab.LabList;
 import seedu.address.model.tag.Tag;
 
 /**

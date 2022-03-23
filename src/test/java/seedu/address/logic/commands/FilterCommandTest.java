@@ -20,10 +20,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabStatus;
-import seedu.address.model.student.lab.StudentHasLabPredicate;
-
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
+import seedu.address.model.lab.StudentHasLabPredicate;
 
 
 public class FilterCommandTest {
@@ -33,13 +32,13 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         StudentHasLabPredicate firstPredicate =
-                new StudentHasLabPredicate((new Lab("1")).thatIs(LabStatus.GRADED));
+                new StudentHasLabPredicate((new Lab("1")).of(LabStatus.GRADED));
         StudentHasLabPredicate secondPredicate =
-                new StudentHasLabPredicate((new Lab("1")).thatIs(LabStatus.UNSUBMITTED));
+                new StudentHasLabPredicate((new Lab("1")).of(LabStatus.UNSUBMITTED));
         StudentHasLabPredicate thirdPredicate =
-                new StudentHasLabPredicate((new Lab("3")).thatIs(LabStatus.GRADED));
+                new StudentHasLabPredicate((new Lab("3")).of(LabStatus.GRADED));
         StudentHasLabPredicate fourthPredicate =
-                new StudentHasLabPredicate((new Lab("4")).thatIs(LabStatus.SUBMITTED));
+                new StudentHasLabPredicate((new Lab("4")).of(LabStatus.SUBMITTED));
 
         FilterCommand firstFilterCommand = new FilterCommand(firstPredicate);
         FilterCommand secondFilterCommand = new FilterCommand(secondPredicate);
@@ -80,15 +79,17 @@ public class FilterCommandTest {
         Pattern pattern = Pattern.compile("\\s*l/(?<labNum>\\d+)\\s+s/(?<labStat>[usg])");
         Matcher matcher = pattern.matcher(userInput);
         assertTrue(matcher.matches());
-        Hashtable<String, LabStatus> mapper = new Hashtable<>() { {
+        Hashtable<String, LabStatus> mapper = new Hashtable<>() {
+            {
                 put("u", LabStatus.UNSUBMITTED);
                 put("s", LabStatus.SUBMITTED);
                 put("g", LabStatus.GRADED);
-            }};
+            }
+        };
 
         Lab lab = new Lab(matcher.group("labNum"));
         LabStatus labStatus = mapper.get(matcher.group("labStat"));
 
-        return new StudentHasLabPredicate(lab.thatIs(labStatus));
+        return new StudentHasLabPredicate(lab.of(labStatus));
     }
 }

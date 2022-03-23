@@ -1,13 +1,13 @@
-package seedu.address.model.student;
+package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
 import seedu.address.model.student.exceptions.LabNotFoundException;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabList;
 
 public class MasterLabList extends LabList {
 
@@ -42,6 +42,7 @@ public class MasterLabList extends LabList {
 
         return Index.fromZeroBased(super.asUnmodifiableObservableList().indexOf(toIndex));
     }
+
     /**
      * Returns a copy of the {@code masterList}.
      */

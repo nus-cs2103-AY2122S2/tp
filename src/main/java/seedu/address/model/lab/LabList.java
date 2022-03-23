@@ -1,4 +1,4 @@
-package seedu.address.model.student.lab;
+package seedu.address.model.lab;
 
 
 import static java.util.Objects.requireNonNull;
@@ -20,6 +20,7 @@ public class LabList implements Iterable<Lab> {
     private final ObservableList<Lab> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    //Comparator to sort the list by lab number
     private final Comparator<Lab> sortByLabNumber = new Comparator<>() {
         @Override
         public int compare(Lab l1, Lab l2) {
@@ -38,26 +39,30 @@ public class LabList implements Iterable<Lab> {
         return internalList.stream().anyMatch(toCheck::isSameLab);
     }
 
-    public Lab getLab(Lab labToGet) {
+    /**
+     * Searches for and returns a Lab that has the same lab number as the given {@code labToGet}
+     * (but potentially different LabStatus)
+     *
+     * @param labToGet The lab you are trying to find in the list.
+     * @return A copy of the Lab with the same lab number as the given {@code labToGet} from the internalList.
+     */
+    public Lab getLab(Lab labToGet) throws LabNotFoundException {
         requireNonNull(labToGet);
 
         if (!contains(labToGet)) {
             throw new LabNotFoundException(labToGet.labNumber);
         }
 
-        for (Lab l : internalList) {
-            if (l.isSameLab(labToGet)) {
-                return l;
-            }
-        }
-
-        throw new LabNotFoundException(labToGet.labNumber);
+        return getLab(labToGet.labNumber);
     }
 
     /**
      * Searches for and returns a Lab that has the given lab number (but potentially different LabStatus)
+     *
+     * @param labNumberToGet The lab number of the lab you are trying to find in the list.
+     * @return A copy of the Lab with the given lab number from the internalList.
      */
-    public Lab getLabByLabNumber(int labNumberToGet) throws LabNotFoundException {
+    public Lab getLab(int labNumberToGet) throws LabNotFoundException {
         requireNonNull(labNumberToGet);
 
         for (Lab l : internalList) {
@@ -78,9 +83,11 @@ public class LabList implements Iterable<Lab> {
      */
     public void add(Lab toAdd) throws DuplicateLabException {
         requireNonNull(toAdd);
+
         if (contains(toAdd)) {
             throw new DuplicateLabException();
         }
+
         internalList.add(toAdd);
         internalList.sort(sortByLabNumber);
     }
@@ -110,13 +117,17 @@ public class LabList implements Iterable<Lab> {
      * The Lab must exist in the list.
      * Maintains sorted by lab number invariant.
      *
-     * @param toRemove The Lab to remove from the list.
+     * @param toRemove The Lab to remove from the list. (has to have the same labNumber and labStatus
+     *                 as the lab you are trying to remove from the list)
      */
     public void remove(Lab toRemove) throws LabNotFoundException {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+
+        if (!internalList.contains(toRemove)) {
             throw new LabNotFoundException(toRemove.labNumber);
         }
+
+        remove(Index.fromZeroBased(internalList.indexOf(toRemove)));
         internalList.sort(sortByLabNumber);
     }
 
@@ -141,6 +152,7 @@ public class LabList implements Iterable<Lab> {
 
     /**
      * Replaces the contents of this list with {@code replacement}.
+     *
      * @param replacement is assumed to not contain duplicate Labs.
      */
     public void setLabs(LabList replacement) {

@@ -6,14 +6,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.RemoveLabCommand;
+import seedu.address.logic.commands.AddLabCommand;
 import seedu.address.model.lab.Lab;
 
-public class RemoveLabCommandParserTest {
+public class AddLabCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveLabCommand.MESSAGE_USAGE);
-    private RemoveLabCommandParser parser = new RemoveLabCommandParser();
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE);
+    private AddLabCommandParser parser = new AddLabCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -31,8 +31,8 @@ public class RemoveLabCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        RemoveLabCommand expectedCommand =
-                new RemoveLabCommand(new Lab("1"));
+        AddLabCommand expectedCommand =
+                new AddLabCommand(new Lab("1"));
 
         assertParseSuccess(parser, " l/1", expectedCommand);
     }

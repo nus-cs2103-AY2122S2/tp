@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.lab.Lab;
+import seedu.address.model.lab.Lab;
 
 /**
  * Deletes a Lab identified using its LAB_NUMBER from the TAddressBook.

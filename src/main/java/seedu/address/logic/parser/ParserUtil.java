@@ -9,13 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +28,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -189,7 +190,7 @@ public class ParserUtil {
             throw new ParseException(LabStatus.MESSAGE_CONSTRAINTS);
         }
 
-        switch(trimmedLabStatus) {
+        switch (trimmedLabStatus) {
         case "u":
             return LabStatus.UNSUBMITTED;
         case "s":

@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.student.lab.Lab;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +27,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedStudent.class);
 
     private final String name;
     private final String email;
@@ -89,31 +92,71 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> personTags = deserializeTags();
+
+        final List<Lab> personLabs = deserializeLabs();
+
+        final Name modelName = deserializeName();
+
+        final Email modelEmail = deserializeEmail();
+
+        final GithubUsername modelUsername = deserializeGithub();
+
+        final Telegram modelTelegram = deserializeTelegram();
+
+        final StudentId modelId = deserializeStudentId();
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        Student s = new Student(modelName, modelEmail, modelTags, modelUsername, modelTelegram, modelId);
+        s.getLabs().setLabs(personLabs);
+
+        return s;
+    }
+
+    private List<Lab> deserializeLabs() throws IllegalValueException {
+        List<Lab> personLabs = new ArrayList<>();
+        for (int i = 0; i < labNumbers.size(); i++) {
+            // Incase of wrong lab status format we will just add the lab with LabStatus.UNSUBMITTED
+            try {
+                personLabs.add(labNumbers.get(i).toModelType().of(labStatuses.get(i).getLabStatus()));
+            } catch (IllegalArgumentException e) {
+                logger.info("Illegal lab status found when converting labs " + e);
+                personLabs.add(labNumbers.get(i).toModelType());
+            }
+        }
+        return personLabs;
+    }
+
+    private List<Tag> deserializeTags() throws IllegalValueException {
+        List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final List<Lab> personLabs = new ArrayList<>();
-        for (int i = 0; i < labNumbers.size(); i++) {
-            personLabs.add(labNumbers.get(i).toModelType().of(labStatuses.get(i).getLabStatus()));
-        }
+        return personTags;
+    }
 
+    private Name deserializeName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    private Email deserializeEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return new Email(email);
+    }
 
+    private GithubUsername deserializeGithub() throws IllegalValueException {
         if (githubUsername == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     GithubUsername.class.getSimpleName()));
@@ -121,8 +164,10 @@ class JsonAdaptedStudent {
         if (!GithubUsername.isValidGithubUsername(githubUsername)) {
             throw new IllegalValueException(GithubUsername.MESSAGE_CONSTRAINTS);
         }
-        final GithubUsername modelUsername = new GithubUsername(githubUsername);
+        return new GithubUsername(githubUsername);
+    }
 
+    private Telegram deserializeTelegram() throws IllegalValueException {
         if (telegram == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Telegram.class.getSimpleName()));
@@ -130,8 +175,10 @@ class JsonAdaptedStudent {
         if (!Telegram.isValidTelegram(telegram)) {
             throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        final Telegram modelTelegram = new Telegram(telegram);
+        return new Telegram(telegram);
+    }
 
+    private StudentId deserializeStudentId() throws IllegalValueException {
         if (studentId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StudentId.class.getSimpleName()));
@@ -139,12 +186,7 @@ class JsonAdaptedStudent {
         if (!StudentId.isValidStudentId(studentId)) {
             throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        final StudentId modelId = new StudentId(studentId);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        Student s = new Student(modelName, modelEmail, modelTags, modelUsername, modelTelegram, modelId);
-        s.getLabs().setLabs(personLabs);
-        return s;
+        return new StudentId(studentId);
     }
 
 }

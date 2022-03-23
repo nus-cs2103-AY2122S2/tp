@@ -12,12 +12,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
+import seedu.address.model.lab.LabStatus;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.LabNotFoundException;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabList;
-import seedu.address.model.student.lab.LabStatus;
 
 /**
  * Edits the LabStatus of a Lab of a Student in the TAddressBook.
@@ -71,7 +71,7 @@ public class EditLabStatusCommand extends Command {
         LabList listToEdit = studentToEdit.getLabs();
 
         try {
-            listToEdit.setLab(listToEdit.getLabByLabNumber(labNumber),
+            listToEdit.setLab(listToEdit.getLab(labNumber),
                     new Lab(String.valueOf(labNumber)).of(newStatus.name()));
         } catch (LabNotFoundException e) {
             throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);

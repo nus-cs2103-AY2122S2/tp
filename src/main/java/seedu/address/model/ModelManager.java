@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.lab.Lab;
 
 /**
  * Represents the in-memory model of the TAddressBook data.

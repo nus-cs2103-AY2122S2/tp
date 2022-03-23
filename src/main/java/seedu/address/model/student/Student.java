@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabList;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,7 +33,7 @@ public class Student {
      * Every field must be present and not null.
      */
     public Student(Name name, Email email, Set<Tag> tags,
-                  GithubUsername githubUsername, Telegram telegram, StudentId studentId) {
+                   GithubUsername githubUsername, Telegram telegram, StudentId studentId) {
         requireAllNonNull(name, email, tags, githubUsername, studentId);
         this.name = name;
         this.email = email;

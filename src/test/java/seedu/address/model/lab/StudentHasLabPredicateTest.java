@@ -1,4 +1,4 @@
-package seedu.address.model.student.lab;
+package seedu.address.model.lab;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,8 +12,8 @@ public class StudentHasLabPredicateTest {
 
     @Test
     public void equals() {
-        Lab firstLab = (new Lab("1")).thatIs(LabStatus.SUBMITTED);
-        Lab secondLab = (new Lab("2")).thatIs(LabStatus.GRADED);
+        Lab firstLab = (new Lab("1")).of(LabStatus.SUBMITTED);
+        Lab secondLab = (new Lab("2")).of(LabStatus.GRADED);
 
         StudentHasLabPredicate firstPredicate = new StudentHasLabPredicate(firstLab);
         StudentHasLabPredicate secondPredicate = new StudentHasLabPredicate(secondLab);
@@ -38,7 +38,7 @@ public class StudentHasLabPredicateTest {
     @Test
     public void test_studentHasSpecifiedLab_returnsTrue() {
         StudentHasLabPredicate predicate =
-                new StudentHasLabPredicate((new Lab("1").thatIs(LabStatus.UNSUBMITTED)));
+                new StudentHasLabPredicate((new Lab("1").of(LabStatus.UNSUBMITTED)));
         assertTrue(predicate.test(new StudentBuilder()
                 .withLabs(new Pair<String, String>("1", "UNSUBMITTED"),
                         new Pair<String, String>("2", "SUBMITTED"),
@@ -49,14 +49,14 @@ public class StudentHasLabPredicateTest {
     public void test_studentDoesNotHaveSpecifiedLab_returnsFalse() {
         // Wrong LabStatus
         StudentHasLabPredicate predicate =
-                new StudentHasLabPredicate((new Lab("3").thatIs(LabStatus.SUBMITTED)));
+                new StudentHasLabPredicate((new Lab("3").of(LabStatus.SUBMITTED)));
         assertFalse(predicate.test(new StudentBuilder()
                 .withLabs(new Pair<String, String>("1", "UNSUBMITTED"),
                         new Pair<String, String>("2", "SUBMITTED"),
                         new Pair<String, String>("3", "GRADED")).build()));
 
         // Wrong LabNumber
-        predicate = new StudentHasLabPredicate((new Lab("4").thatIs(LabStatus.UNSUBMITTED)));
+        predicate = new StudentHasLabPredicate((new Lab("4").of(LabStatus.UNSUBMITTED)));
         assertFalse(predicate.test(new StudentBuilder()
                 .withLabs(new Pair<String, String>("1", "UNSUBMITTED"),
                         new Pair<String, String>("2", "SUBMITTED"),
