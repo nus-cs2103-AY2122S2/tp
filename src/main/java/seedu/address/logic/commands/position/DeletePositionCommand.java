@@ -13,7 +13,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
