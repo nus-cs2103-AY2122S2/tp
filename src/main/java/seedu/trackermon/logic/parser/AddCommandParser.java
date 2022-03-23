@@ -38,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get());
+        Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).orElse(""));
 
         Show show = new Show(name, status, tagList, comment);
 
