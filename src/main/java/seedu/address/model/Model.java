@@ -89,6 +89,13 @@ public interface Model {
     void assignTaskToPerson(StudentId studentId, Task task);
 
     /**
+     * Assigns {@code Task} to 1 or more {@code person} with taking the module with the {@code moduleCode}.
+     * 1 or more persons with {@code moduleCode} must exist in the address book.
+     * The {@code task} should be unique and not a duplicate of already assigned task.
+     */
+    void assignTaskToAllInModule(ModuleCode moduleCode, Task task);
+
+    /**
      * Marks {@code Task} to {@code person} with {@code studentId}.
      * A person with {@code studentId} must exist in the address book.
      * The {@code task} should be an existing unmarked assigned task.

@@ -150,6 +150,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void markTaskOfPerson(StudentId studentId, Index index) {
             throw new AssertionError("This method should not be called.");
         }

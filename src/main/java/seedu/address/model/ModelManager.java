@@ -124,6 +124,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
+        requireAllNonNull(moduleCode, task);
+        addressBook.assignTaskToAllInModule(moduleCode, task);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void markTaskOfPerson(StudentId studentId, Index index) {
         requireAllNonNull(studentId, index);
         addressBook.markTaskOfPerson(studentId, index);

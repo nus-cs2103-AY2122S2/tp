@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+title ManualCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ManualCommandParser" as ManualCommandParser LOGIC_COLOR
+participant "command:ManualCommand" as ManualCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser: parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create ManualCommandParser
+AddressBookParser -> ManualCommandParser
+activate ManualCommandParser LOGIC_COLOR
+ManualCommandParser --> AddressBookParser
+deactivate ManualCommandParser
+
+AddressBookParser -> ManualCommandParser: parse(arguments)
+activate ManualCommandParser LOGIC_COLOR
+
+create ManualCommand
+ManualCommandParser -> ManualCommand
+activate ManualCommand LOGIC_COLOR
+ManualCommand --> ManualCommandParser --
+deactivate ManualCommand
+
+ManualCommandParser --> AddressBookParser --
+deactivate ManualCommandParser
+
+AddressBookParser --> LogicManager --
+deactivate AddressBookParser
+
+LogicManager -> ManualCommand: execute(model)
+activate ManualCommand LOGIC_COLOR
+
+create CommandResult
+ManualCommand -> CommandResult :
+activate CommandResult LOGIC_COLOR
+CommandResult --> ManualCommand --:
+deactivate CommandResult
+
+ManualCommand --> LogicManager --: commandResult
+deactivate ManualCommand
+
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml

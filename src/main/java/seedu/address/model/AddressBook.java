@@ -112,6 +112,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Assigns {@code task} to {@code Person} with {@code moduleCode}.
+     *
+     * @param moduleCode the module code of the module of which all students are to be assigned a task.
+     * @param task the task to be assigned.
+     */
+    public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
+        requireNonNull(task);
+
+        persons.assignTaskToAllInModule(moduleCode, task);
+    }
+
+    /**
      * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as done.
      *
      * @param studentId the student id of the person who's task is to be marked.
