@@ -63,13 +63,11 @@ public class StateChangeRecorder {
      * Save the changes made to iBook.
      */
     public void saveStateChange() {
-        if (curStateChange != stateChanges.size() - LIST_OFFSET) {
-            stateChanges.subList(curStateChange + LIST_OFFSET, stateChanges.size() - LIST_OFFSET).clear();
-        }
-
         Collections.reverse(reverseActionList);
-        StateChange stateChange = new StateChange(forwardActionList, reverseActionList);
-        stateChanges.add(stateChange);
+        StateChange nextStateChange = new StateChange(forwardActionList, reverseActionList);
+
+        stateChanges.subList(curStateChange + LIST_OFFSET, stateChanges.size()).clear();
+        stateChanges.add(nextStateChange);
         curStateChange++;
 
         getNewWorkspace();
