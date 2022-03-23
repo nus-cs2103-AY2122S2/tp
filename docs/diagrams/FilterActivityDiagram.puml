@@ -1,0 +1,21 @@
+@startuml
+!pragma useVerticalIf on
+start
+:User executes filter command;
+switch ()
+case ( [keyword == "tags/"] )
+    :Filter pet list by tags given as search word;
+case ( [keyword == "date/"] )
+    :Filter pet list by date given as search word;
+case ( [keyword == "appointment/"] )
+    :Filter pet list by appointment date given as search word;
+case ( [keyword == "ownerName/"] )
+    :Filter pet list by owner name given as search word;
+case ( [keyword == "today"] )
+    :Filter pet list by today's attendance;
+endswitch
+
+:Return filtered list;
+stop
+
+@enduml
