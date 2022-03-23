@@ -154,6 +154,42 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities.
+
+List of new entities:
+1. `StudentId`
+2. `Course`
+3. `Seniority`
+4. `ApplicationStatus`
+5. `InterviewStatus`
+6. `Availability`
+
+Given below is an example usage scenario and how the `add` mechanism behaves at each step.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** The `.puml` TAlent Assistant™ comes with preloaded data, user can execute the `clear` command for a fresh state.
+
+</div>
+
+Step 1. The user launches the application for the first time. The program will be initialised with the preloaded data.
+
+Step 2. The user proceeds to add a candidate by running the `add` command with its necessary arguments. The image provides an example of this step.
+
+![AddStep2](images/AddStep2.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Tip:** Todo: Update image
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes an `add` command:
+
+<img src="images/AddActivityDiagram.png" width="250" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
