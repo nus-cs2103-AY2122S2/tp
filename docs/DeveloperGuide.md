@@ -663,7 +663,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a show
 
-1. Prerequisites: None, but if the list is empty, all deletion will result into error.
+1. Prerequisites: None, but if the list is empty, all deletions will result in an error.
    1. [Add shows](#adding-a-show) into the show list.
 2. List all shows using the `list` command.
 3. Test case: Deleting a show based on list index
@@ -681,7 +681,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a show
 
-1. Prerequisites: None, but if the list is empty, all edit will result into error.
+1. Prerequisites: None, but if the list is empty, all edits will result in an error.
    1. [Add shows](#adding-a-show) into the show list.
 2. List all shows using the `list` command.
    1. Test case: Edit show name
@@ -732,7 +732,7 @@ testers are expected to do more *exploratory* testing.
 ### Finding a show
 
 1. Finding a show (General Find)
-   1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
 
    2. Test case: Find single keyword
       1. Command: `find shingeki` <br>
@@ -758,7 +758,7 @@ testers are expected to do more *exploratory* testing.
 
 
 2. Find a show (Precise Find)
-   1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
    
    2. Test case: Finding with a single prefix
       1. Command: `find n/shingeki` <br>
@@ -798,38 +798,37 @@ testers are expected to do more *exploratory* testing.
 
 ### Sorting the list of shows
 
-1. Sorting the list of shows
+1. Prerequisites: None, but if the list is empty, all sorts will lead to no results.
+2. Test case: Sort with no prefix
+   1. Command: `sort` <br>
+      Expected: The list of shows will default to being sorted by name in ascending order.
 
-    1. Prerequisites: None, but if the list is empty, all sort will also lead to no results.
+3. Test case: Sort with single prefix 
+   1. Command: `sort sna/` <br>
+      Expected: The list of shows is sorted by name in ascending order.
+   
+   2. Command: `sort snd/` <br>
+      Expected: The list of shows is sorted by name in descending order.
 
-    2. Test case: `sort`<br>
-       Expected: The list of show sorted by name in ascending order.
-
-    3. Test case: `sort sna/`<br>
-       Expected:  The list of show sorted by name in ascending order.
+   3. Command: `sort ssa/` <br>
+      Expected: The list of shows is sorted by status in ascending order.
    
-    4. Test case: `sort snd/`<br>
-       Expected:  The list of show sorted by name in descending order.
+   4. Command: `sort ssd/` <br>
+      Expected: The list of shows is sorted by status in descending order.
    
-    5. Test case: `sort ssa/`<br>
-       Expected:  The list of show sorted by status in ascending order.
+4. Test case: Sort with multiple same prefixes 
+   1. Command: `sort sna/ snd/` <br>
+      Expected: The list of show sorted by name in ascending order.
    
-    6. Test case: `sort ssd/`<br>
-       Expected:  The list of show sorted by status in descending order.
+   2. Command: `sort ssa/ ssd/` <br>
+      Expected: The list of show sorted by status in ascending order. 
    
-    7. Test case: `sort sna/ snd/`<br>
-       Expected: The list of show sorted by name in ascending order.
+5. Test case: Sort with multiple different prefixes
+   1. Command: `sort sna/ ssd/` <br>
+      Expected: The list of shows is sorted by name in ascending order followed by status in descending order.
    
-    8. Test case: `sort ssa/ ssd/`<br>
-       Expected: The list of show sorted by status in ascending order. 
-   
-    9. Test case: `sort sna/ ssd/`<br>
-       Expected: The list of show sorted by name in ascending order followed by status in descending order.
-   
-    10.Test case: `sort sna/ ssd/ so/`<br>
-       Expected: The list of show sorted by status in descending order followed by name in ascending order.
-   
-
+   2. Command: `sort sna/ ssd/ so/`<br>
+      Expected: The list of shows is sorted by status in descending order followed by name in ascending order.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
