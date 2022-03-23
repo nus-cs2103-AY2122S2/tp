@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "list student c/2"
+
+package State {
+    class State1 as "__mm0:ModelManger__"
+    class Student2 as "__s2:Student__"
+    class ClassGroup2 as "__c2:ClassGroup__"
+}
+
+State1 *--> Student2
+State1 *--> ClassGroup2
+Student2 --> ClassGroup2
+
+@end

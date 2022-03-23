@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TAssistParser" as TAssistParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "list:ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("list student c/2")
+activate LogicManager
+
+LogicManager -> TAssistParser : parseCommand("list student c/2")
+activate TAssistParser
+
+create ListCommandParser
+TAssistParser -> ListCommandParser
+activate ListCommandParser
+
+ListCommandParser --> TAssistParser
+deactivate ListCommandParser
+
+TAssistParser -> ListCommandParser : parse(["student", "c/2"])
+activate ListCommandParser
+
+ListCommandParser -> ParserUtil : parseEntity("student")
+activate ParserUtil
+
+ParserUtil --> ListCommandParser
+deactivate ParserUtil
+
+ListCommandParser -> ParserUtil : parseClassGroup("c/2")
+activate ParserUtil
+
+ParserUtil --> ListCommandParser
+deactivate ParserUtil
+
+create ListCommand
+ListCommandParser -> ListCommand
+activate ListCommand
+
+ListCommand --> ListCommandParser : list
+deactivate ListCommand
+
+ListCommandParser --> TAssistParser : list
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> TAssistParser
+destroy ListCommandParser
+
+TAssistParser --> LogicManager : list
+deactivate TAssistParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
