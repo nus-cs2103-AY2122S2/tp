@@ -113,6 +113,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPersonToTheirModules(Person person) {
+        try {
+            uniBook.addPersonToAllTheirModules(person);
+        } catch (PersonNoSubtypeException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 

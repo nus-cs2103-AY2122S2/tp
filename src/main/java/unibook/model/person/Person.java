@@ -25,7 +25,6 @@ public abstract class Person {
     private final Email email;
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    // Module that person is associated with
     private Set<Module> modules = new HashSet<>();
 
     /**

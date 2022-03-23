@@ -94,9 +94,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             office = ParserUtil.parseOffice(argMultimap.getValue(CliSyntax.PREFIX_OFFICE).get());
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
             moduleCodes = ParserUtil.parseMultipleModules(argMultimap.getAllValues(CliSyntax.PREFIX_MODULE));
-            //TODO instantiate prof with actual modules, not codes
             Professor professor = new Professor(name, phone, email, tagList, office, moduleList);
-            return new AddCommand(professor);
+            if (moduleCodes.isEmpty()) {
+                return new AddCommand(professor);
+            } else {
+                return new AddCommand(professor, moduleCodes);
+            }
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS_OPTION);
         }
