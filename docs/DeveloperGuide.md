@@ -154,6 +154,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Delete multiple persons enhancement
+
+The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
+behaviour by extending the validity checks to the entire string of input. 
+
+Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
+in the contact list might change depending on the order of deletion. <br>
+
+For example: <br>
+`delete 1 2 3` will throw an exception as there is no longer an index 3 during the 3rd deletion. 
+
+The workaround is then to delete each person from the largest to the smallest index. The success message displays the details 
+of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion. 
+
+For example <br>
+`delete 1 2 3` extracts the information out of Person 1, Person 2 and Person 3 according to the last shown list.<br>
+Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process. 
+
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("delete 1 2 3") API call.
+
+![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
+
+
+
+
+### Tag/Removetag feature
+
+### Find/Find -s feature
+
+### Event feature
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

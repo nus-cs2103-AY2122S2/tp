@@ -67,6 +67,12 @@ public class DeleteCommand extends Command {
         return result;
     }
 
+    /**
+     * Extracts the information before deletion for the success message.
+     *
+     * @param lastShownList the last displayed list.
+     * @return a string containing all the information of the person(s) to be deleted.
+     */
     private String extractDeletedInfo(List<Person> lastShownList) {
         final StringBuilder deletedPersonOrPersons = new StringBuilder();
         for (int i = 0; i < targetIndexArr.length; i++) {
@@ -80,6 +86,15 @@ public class DeleteCommand extends Command {
         return deletedPersonOrPersons.toString();
     }
 
+    /**
+     * Deletes the persons specified in the targetIndexArr.
+     * A copy of targetIndexArr is created for defensive programming.
+     * targetIndexArrClone is sorted in descending order so that the deletion process will not delete the wrong person.
+     * Example: If index 1 is deleted first, the original index 2 becomes index 1.
+     *
+     * @param model the addressbook model
+     * @param lastShownList the last displayed list
+     */
     private void deleteFromList(Model model, List<Person> lastShownList) {
         Index[] targetIndexArrClone = targetIndexArr.clone();
         Arrays.sort(targetIndexArrClone);
