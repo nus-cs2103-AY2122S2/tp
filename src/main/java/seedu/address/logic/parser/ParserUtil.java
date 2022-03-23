@@ -143,7 +143,7 @@ public class ParserUtil {
         try {
             return LocalDateTime.parse(trimmedDateTime, formatter);
         } catch (Exception e) {
-            throw new ParseException("Appointment date and time entered the date-time in dd-MM-yyyy HH:mm format");
+            throw new ParseException("Appointment date and time should be entered in dd-MM-yyyy HH:mm format!");
         }
     }
 
