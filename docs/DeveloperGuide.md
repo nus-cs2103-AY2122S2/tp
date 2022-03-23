@@ -185,6 +185,41 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Cleaner code. Better for future scalability.
     * Cons: Contributes to more lines of code. Harder to set up initially.
 
+### \[Proposed\] Appointment feature
+
+#### Proposed Implementation
+
+The proposed appointment feature is facilitated by the `AppointmentCommand` class which extends `Command` class. The 
+`AppointmentCommand` takes in a valid mandatory index which specifics the pet that the command is to be used on, 
+followed by either **one** prefix (*clear*) or **two** prefixes (*dateTime* and *location*) based on the objective the 
+user is trying to accomplish. The fields are parsed by `AppointmentCommandParser` class.
+
+Appointment feature can be used to accomplish the following 2 tasks:
+1. Add and store pet's appointment details. (*dateTime and Location prefixes*)
+2. Clear and delete pet's appointment details. (*clear prefix*)
+
+The operation of updating the pet's appointment details and updating the pet filter list are done by methods in the 
+Model interface as Model#setPet() and Model#updateFilterPetList() respectively.
+
+The following sequence diagram below illustrates the interactions between the `Logic` component and `Model` component 
+for the `execute("app 1 clear")` API call:
+![AppointmentSequenceDiagram](images/AppointmentSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new Appointmentcommand:
+![AppointmentActivityDiagram](images/AppointmentActivityDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Currently the appointment command is responsible for both the adding and clearing
+of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only 
+by the prefixes / augments.
+    * Pros: Easy and simple to implement.
+    * Cons: User may struggle to get familiar with the command.
+
+* **Alternative 2:** Add a new `clear` command to clear and delete contents of variables based on input field. 
+    * Pros: Better for future scalability.
+    * Cons: Complex implementation. More lines of code. Harder to set up initially.
+
 ### \[Proposed\] Filter feature
 
 #### Proposed Implementation
@@ -203,6 +238,7 @@ The following sequence diagram shows how the filter operation works when `filter
 The following activity diagram summarizes what happens when a user executes a new `filter` command:
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 

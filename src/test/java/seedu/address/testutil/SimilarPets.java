@@ -14,13 +14,13 @@ public class SimilarPets {
             .withPhone("94351253")
             .withTags("friends")
             .withDiet("cute oranges")
-            .withAppointment("Mar-04-2022 09:30 AM at NUS Vet Clinic")
+            .withAppointment()
             .build();
     public static final Pet ANOTHER_WAFFLE = new PetBuilder().withName("Waffle").withAddress("4th street")
             .withOwnerName("Alice Pauline")
             .withPhone("88887778")
             .withDiet("cute apples")
-            .withAppointment("Dec-24-2022 19:30 PM at Zoo Clinic")
+            .withAppointment()
             .build();
 
     private SimilarPets() {} // prevents instantiation

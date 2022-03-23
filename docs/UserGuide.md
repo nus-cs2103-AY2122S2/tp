@@ -43,13 +43,14 @@ type fast, WoofAreYou can get your contact management tasks done faster than tra
 
 Add a pet to the database.
 
-Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
-* Each particular field is compulsory.
+Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]`
+* Each particular field is compulsory except for `TAG`.
+* `TAG` is an optional field.
 * Each particular entered must strictly correspond to its legal prefix.`e.g: p/Address is considered illegal`.
 * Phone number **must only contain numbers**.
 
 Examples:
-* `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`.
+* `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`.
 
 ### Sort pets: `sort`
 
@@ -86,23 +87,35 @@ Format: `diet INDEX d/remark`
 Examples:
 `diet 12 Only feed dry kibble` will store a dietary remark for pet 12 saying "Only feed dry kibble".
 
-### Adding pets' appointment details: `app` ###
+### Adding / Clearing pets' appointment details: `app` ###
 
-Given a pet ID, adds pet appointment details in the database.
+Given a pet ID, add or clear a pet appointment details in the database.
 
-Format: `app INDEX date/[yyyy-MM-dd HH:mm] at/[location]`
+**Add** Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 
 * ID is a unique identifier that each pet has in the database.
-* Date and time of appointment should be entered together with `date/` prefix.
-* Date and time should strictly follow `yyyy-MM-dd HH:mm` format.
+* Date and time of appointment should be entered together with `dt/` prefix.
+* Date and time should strictly follow `dd-MM-yyyy HH:mm` format.
 * Date and time should only contain numbers apart from `-` and `:` as per shown above.
 * Location of appointment should be entered with `at/` prefix.
 * Whitespaces, special characters and alphanumeric characters are allowed for location.
-* If both `date/` and `at/` are not present, the `app` will be deemed invalid.
+* If both `date/` and `at/` are not present, `app` will be deemed invalid.
 
 Examples:
-`app 1 date/2022-03-04 09:30 at/ NUS Vet Clinic` will store the appointment details for pet 1 as
-`Mar-04-2022 09:30 AM at NUS Vet Clinic`.
+`app 1 dt/04-03-2022 09:30 at/ NUS Vet Clinic` will store the appointment details for pet 1 as
+`Mar-04-2022 9:30 AM at NUS Vet Clinic`.
+
+**Clear** Format: `app INDEX clear`
+
+* ID is a unique identifier that each pet has in the database.
+* Keyword `clear` will instruct the application to clear the appointment details of pet corresponding to the index.
+* `clear` is case-sensitive.
+* Whitespaces, special characters and alphanumeric characters are allowed for location.
+* If `clear` is not present, `app` will be deemed invalid.
+
+Examples:
+`app 1 clear` will clear the appointment details for pet 1 and set it to be an empty field.
+
 
 ### Viewing pets’ pick-up and drop-off time: `time`
 
