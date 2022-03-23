@@ -60,12 +60,16 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    public FindCommand generateFindCommandAndFilterList(NameContainsKeywordsPredicate predicate) {
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        return command;
+    }
+
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate(" "));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -73,9 +77,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleNames_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate("Kurz Elle Kunz"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
@@ -83,9 +85,7 @@ public class FindCommandTest {
     @Test
     public void execute_singleTag_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        NameContainsKeywordsPredicate predicate = preparePredicate("owesmoney");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate("owesmoney"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
@@ -93,42 +93,31 @@ public class FindCommandTest {
     @Test
     public void execute_multipleTags_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("friends owesmoney");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate("friends owesmoney"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
     }
 
-
     @Test
     public void execute_singleLogSubstring_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        NameContainsKeywordsPredicate predicate = preparePredicate("2013");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate("2013"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(JAMES, MAVIS), model.getFilteredPersonList());
     }
 
-
     @Test
     public void execute_multipleLogSubstrings_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("2013 birthday");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate("2013 birthday"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(JAMES, LAUREN, MAVIS), model.getFilteredPersonList());
     }
 
-
     @Test
     public void execute_nameTagLogCombination_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 6);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Benson friends 2013 birthday");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate("Benson friends 2013 birthday"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, JAMES, LAUREN, MAVIS), model.getFilteredPersonList());
     }
@@ -138,25 +127,19 @@ public class FindCommandTest {
 
         //input 'benson' matches to a person named Benson Meier
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        NameContainsKeywordsPredicate predicate = preparePredicate("benson");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FindCommand command = generateFindCommandAndFilterList(preparePredicate("benson"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
 
         //input 'FRIENDS' matches to tag 'friends'
         expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        predicate = preparePredicate("FRIENDS");
-        command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        command = generateFindCommandAndFilterList(preparePredicate("FRIENDS"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
 
         //input 'birThDaY' matches to log title 'birthday coming up'
         expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        predicate = preparePredicate("birThDaY");
-        command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        command = generateFindCommandAndFilterList(preparePredicate("birThDay"));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(LAUREN, MAVIS), model.getFilteredPersonList());
     }
