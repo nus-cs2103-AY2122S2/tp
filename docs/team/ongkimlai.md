@@ -36,6 +36,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added user stories for `removetag` and `delete` multiple contacts
     * Added use cases for `removetag` and `find`
+    * Added implementation for delete multiple contacts and UML diagrams
 
 * **Tools**:
   * Integrated Codecov into team repo

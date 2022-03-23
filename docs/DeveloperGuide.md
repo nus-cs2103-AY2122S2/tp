@@ -2,15 +2,15 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* Referred to [CS2103T textbook](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/index.html) for fundamental knowledge on software development.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -153,6 +153,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Delete multiple persons enhancement
+
+The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
+behaviour by extending the validity checks to the entire string of input. 
+
+Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
+in the contact list might change depending on the order of deletion. <br>
+
+For example: <br>
+`delete 1 2 3` will throw an exception as there is no longer an index 3 during the 3rd deletion. 
+
+The workaround is then to delete each person from the largest to the smallest index. The success message displays the details 
+of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion. 
+
+For example <br>
+`delete 1 2 3` extracts the information out of Person 1, Person 2 and Person 3 according to the last shown list.<br>
+Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process. 
+
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("delete 1 2 3") API call.
+
+![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
+
+
+
+
+### Tag/Removetag feature
+
+### Find/Find -s feature
+
+### Event feature
 
 ### \[Proposed\] Undo/redo feature
 
@@ -234,10 +265,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -280,29 +307,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                      | edit an existing contact                         | update the information when needed                                                               |
 | `* * *`  | user                                                      | tag additional information to an existing contact | keep a memo of such details for future references                                                |
 | `* * `   | user                                                      | find a person by name                            | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                      | find a person by phone number                    | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                      | find a person by email address                   | locate details of persons without having to go through the entire list                           |
 | `* * `   | user                                                      | find a person by module                          | locate details of persons with identical modules, without having to go through the entire list   |
 | `* * `   | user                                                      | find a person by internship                      | locate details of persons with identical internship, without having to go through the entire list |
 | `* * `   | user                                                      | find a person by cca                             | locate details of persons with identical cca, without having to go through the entire list       |
 | `* * `   | user                                                      | find a person by education                       | locate details of persons with identical education, without having to go through the entire list |
 | `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                           | reset my contact list                                                                            |
 | `*`      | user that tagged a lot of information to the contacts     | remove a specific tag of a contact               | avoid going through the trouble of re-tagging all the information again                           |
-| `*`      | user with many persons in the contact list                | sort persons by name                             | locate a person easily                                                                           |
+| `*`      | user with many persons in the contact list                | sort persons by name in alphabetical order       | locate a person easily                                                                           |
 
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `NUSocials` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+###**Use case 1: Delete a person**
 
 **MSS**
 ````
 1.  User requests to list persons
 2.  NUSocials shows a list of persons
-3.  User requests to delete a specific person(s) in the list
-4.  AddressBook deletes the person(s)
+3.  User requests to delete a specific person in the list
+4.  AddressBook deletes the person
 
     Use case ends.
 ````
@@ -319,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 ````
 
-**Use case: Add a person**
+###**Use case 2: Add a person**
 
 **MSS**
 ````
@@ -330,14 +358,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ````
 **Extensions**
 ````
-3a. The given add command is invalid.
+2a. The given add command is invalid.
 
-    - 3a1. NUSocials shows an error message.
+    - 2a1. NUSocials shows an error message.
 
       Use case resumes at step 1.
 ````
 
-**Use case: Tag a person**
+###**Use case 3: Tag a person**
 
 **MSS**
 ````
@@ -364,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 ````
-**Use case: Edit a person**
+###**Use case 4: Edit a person**
 
 **MSS**
 ````
@@ -385,12 +413,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
+      
 3b. The given edit command is invalid.
     - 3b1. NUSocials shows an error message.
 
       Use case resumes at step 2.
 ````
-**Use case: Viewing all persons**
+###**Use case 5: Viewing all persons**
 
 **MSS**
 ````
@@ -399,28 +428,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 ````
-**Use case: Finding a person**
+###**Use case 6: Finding a person (any field)**
 
 **MSS**
 ````
-1. User requests to find a person using specific fields
-2. NUSocials shows a list of persons matching the fields
+1. User requests to find any person using specific fields
+2. NUSocials shows a list of persons matching any fields
     Use case ends. 
 ````
 ***Extensions***
 ````
-1a. User indicates for an AND search using a "-s" flag
-
-      Use case resumes at step 2.
-
-3b. The given find command is invalid.
-    - 3b1. NUSocials shows an error message.
+2a. The given find command is invalid.
+    - 2a1. NUSocials shows an error message.
     
       Use case resumes at step 1.
+````
+###**Use case 7: Finding a person (all fields)**
 
 ````
+Similar to Use case 6, except now:
+The user wants to find a person that has every field instead.
+````
 
-**Use case: Removing specific tags**
+###**Use case 8: Removing specific tags**
 
 **MSS**
 ````
@@ -441,17 +471,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
+      
 3b. The given removetag command is invalid.
     - 3b1. NUSocials shows an error message.
 
       Use case resumes at step 2.
+      
 3c. The request contains non-existent tags to be removed.
     - 3c1. NUSocials shows an error message.
     
       Use case resumes at step 2.
 ````
 
-*{More to be added}*
+###**Use case 9: Delete multiple persons**
+
+**MSS**
+````
+Similar to Use case 1, except now:
+The user wants to delete multiple persons instead.
+````
+**Extensions**
+````
+2a. The list is empty.
+
+  Use case ends.
+
+3a. One or more of given indexes are invalid.
+
+    - 3a1. NUSocials shows an error message.
+
+      Use case resumes at step 2.
+````
 
 ### Non-Functional Requirements
 
@@ -484,25 +534,30 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file<br>
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       Expected: The most recent window size and location are retained.
 
-1. _{ more test cases …​ }_
+3. Subsequent launch
+    1. Make some changes to the addressbook and close the application.
+       
+    1. Reopen the application by double-clicking the jar file<br>
+        Expected: Shows the GUI and loads contacts from the addressbook. Should reflect the changes made previously.
 
-### Deleting a person
+### Deleting person
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -510,7 +565,19 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting multiple persons while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    
+    1. Test case: `delete 1 2 3`<br>
+        Expected: First, second and third contacts are deleted from the list. Details of the deleted contacts shown in the status message.
+
+    1. Test case: `delete 1 0 2 3` , `delete 0 1 2 3`<br>
+      Expected: No persons are deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Test case: `delete 1 x 2 3`, `delete 1 2 3 x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+       
 
 ### Saving data
 
