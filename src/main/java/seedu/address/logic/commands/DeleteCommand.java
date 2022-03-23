@@ -18,6 +18,7 @@ import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
+//@@author EvaderFati
 /**
  * Deletes an entity identified using it's displayed index and entityType from TAssist.
  */
