@@ -204,6 +204,11 @@ public class ModelManager implements Model {
         addressBook.tagTask(task, person);
     }
 
+    @Override
+    public void untagTask(Task task, Person person) {
+        addressBook.untagTask(task, person);
+    }
+
     /**
      * {@inheritDoc}
      */

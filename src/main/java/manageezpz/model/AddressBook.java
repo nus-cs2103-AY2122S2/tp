@@ -305,6 +305,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         tasks.setTask(target, editedTask);
     }
+    public void untagTask(Task task, Person person) {
+        task.removeAssigned(person);
+    }
 
     //// person-level operations
 
