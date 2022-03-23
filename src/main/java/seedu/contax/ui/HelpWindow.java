@@ -8,8 +8,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
@@ -94,28 +99,28 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown
+     * Returns true if the help window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window
+     * Hides the help window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window
+     * Focuses on the help window.
      */
     public void focus() {
         getRoot().requestFocus();
     }
 
     /**
-     * Initializes the HelpWindow by populating it with data
+     * Initializes the HelpWindow by populating it with data.
      */
     private void init() {
 
