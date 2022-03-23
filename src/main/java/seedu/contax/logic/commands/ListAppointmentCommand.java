@@ -3,6 +3,8 @@ package seedu.contax.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
+import java.util.List;
+
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
 
@@ -20,6 +22,7 @@ public class ListAppointmentCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        model.setDisplayedAppointmentSlots(List.of());
         return new CommandResult(MESSAGE_SUCCESS, GuiListContentType.APPOINTMENT);
     }
 }
