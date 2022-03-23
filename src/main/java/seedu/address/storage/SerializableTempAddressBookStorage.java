@@ -13,27 +13,28 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AddressBookTempStorage {
+public class SerializableTempAddressBookStorage implements TempAddressBookStorage {
     private static final int LIMIT = 10;
 
     private final Path fileDirectory;
     private final List<Path> tempFiles;
 
-    public AddressBookTempStorage(String fileDirectory) {
-        this.fileDirectory = Paths.get(fileDirectory);
+    public SerializableTempAddressBookStorage(Path fileDirectory) {
+        this.fileDirectory = fileDirectory;
         tempFiles = new ArrayList<>();
     }
 
+    @Override
     public Path getTempAddressBookFilepath() {
         return fileDirectory;
     }
 
-    public void storeNewAddressbookTempFile(ReadOnlyAddressBook addressBook) throws IOException {
+    @Override
+    public void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws IOException {
         if (!Files.exists(fileDirectory)) {
             Files.createDirectory(fileDirectory);
         }
@@ -51,7 +52,8 @@ public class AddressBookTempStorage {
         //TODO:: HANDLE ERRORS WITH READING OR CREATING DIRECTORY
     }
 
-    public Optional<ReadOnlyAddressBook> getRemoveLatestAddressFileTempData() {
+    @Override
+    public Optional<ReadOnlyAddressBook> popTempAddressFileData() {
         Path prevDataTempFile;
         if (tempFiles.size() <= 0) {
             return Optional.empty();

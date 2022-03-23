@@ -25,6 +25,7 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.SerializableAddressBookStorage;
+import seedu.address.storage.SerializableTempAddressBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -57,7 +58,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new SerializableAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        SerializableTempAddressBookStorage tempAddressBookStorage = new SerializableTempAddressBookStorage(userPrefs.getTempAddressBookFileDirectoryPath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, tempAddressBookStorage);
 
         initLogging(config);
 

@@ -19,13 +19,15 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private TempAddressBookStorage tempAddressBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage, TempAddressBookStorage tempAddressBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.tempAddressBookStorage = tempAddressBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,4 +77,19 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ AddressBook Temp data storage methods ==============================
+    @Override
+    public Path getTempAddressBookFilepath() {
+        return tempAddressBookStorage.getTempAddressBookFilepath();
+    }
+
+    @Override
+    public void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws IOException {
+        tempAddressBookStorage.addNewTempAddressBookFile(addressBook);
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> popTempAddressFileData() {
+        return tempAddressBookStorage.popTempAddressFileData();
+    }
 }
