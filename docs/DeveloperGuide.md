@@ -17,7 +17,7 @@ title: Developer Guide
 * [**Implementation**](#implementation)
     * [Find command feature](#find-command-feature)
         * [What it does](#what-it-does)
-        * [Implementation](#implementation-1)
+        * [Implementation](#)
         * [Design consideration](#design-considerations)
             * [How find executes](#aspect-how-find-executes)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
@@ -32,7 +32,7 @@ title: Developer Guide
     * [Deleting a show](#deleting-a-show)
     * [Editing a show](#editing-a-show)
     * [Saving data](#saving-data)
-    * [Find a show](#finding-a-show)
+    * [Finding a show](#finding-a-show)
 
 
 ---
@@ -213,7 +213,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find command feature
 
-#### What it does
+#### What it does 
+
 Looks for a show in a list of shows and displays all the shows that match the user's input. If the user's input contains no prefixes, `find` will do a general search through all fields in the `Show` class.
 
 #### Implementation
@@ -668,7 +669,9 @@ testers are expected to do more *exploratory* testing.
 
        Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`
 
+
 2. Find a show (Precise Find)<br>
+
    1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
    
    2. Test case: `find n/shingeki`
