@@ -37,10 +37,11 @@ public class JsonSerializableScheduleTest {
     }
 
     @Test
-    public void toModelType_invalidAppointmentFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidAppointmentFile_recordSkipped() throws Exception {
         JsonSerializableSchedule dataFromFile = JsonUtil.readJsonFile(INVALID_APPOINTMENT_FILE,
                 JsonSerializableSchedule.class).get();
-        assertThrows(IllegalValueException.class, () -> dataFromFile.toModelType(GLOBAL_ADDRESSBOOK));
+        Schedule schedule = dataFromFile.toModelType(GLOBAL_ADDRESSBOOK);
+        assertEquals(TypicalAppointments.getTypicalSchedule(), schedule);
     }
 
     @Test
