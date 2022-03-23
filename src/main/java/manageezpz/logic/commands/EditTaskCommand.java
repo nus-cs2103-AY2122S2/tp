@@ -3,6 +3,7 @@ package manageezpz.logic.commands;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_TASK_UPDATE_SUCCESS;
 import static manageezpz.commons.core.Messages.MESSAGE_UNEXPECTED_ERROR;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
@@ -23,8 +24,11 @@ public class EditTaskCommand extends Command {
     public static final String COMMAND_WORD = "editTask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the displayed task list. "
-            + "Existing values will be overwritten by the input values.\n";
+            + "by the index number used in the displayed task list.\n"
+            + "Parameters: INDEX (must exist in the Address Book) "
+            + "[" + PREFIX_DESCRIPTION + " NAME] \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_DESCRIPTION + " Eat bananas ";
 
     private final Index index;
     private final String desc;
