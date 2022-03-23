@@ -55,6 +55,9 @@ public class DeleteApplicantCommand extends DeleteCommand {
                 getCommandDataType());
     }
 
+    /**
+     * Deletes interviews which are for the applicant to delete.
+     */
     private int deleteApplicantsInterview(Model model, Applicant applicantToDelete) {
         ObservableList<Interview> interviewList = model.getAddressBook().getInterviewList();
         ArrayList<Interview> interviewsToDelete = new ArrayList<>();
