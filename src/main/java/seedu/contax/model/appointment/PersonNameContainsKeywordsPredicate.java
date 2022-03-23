@@ -9,9 +9,9 @@ import seedu.contax.commons.util.StringUtil;
 /**
  * Tests that an {@code Appointment}'s {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class ClientNameContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Appointment> {
+public class PersonNameContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Appointment> {
 
-    public ClientNameContainsKeywordsPredicate(List<String> keywords) {
+    public PersonNameContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }
 
@@ -29,8 +29,8 @@ public class ClientNameContainsKeywordsPredicate extends ContainsKeywordsPredica
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ClientNameContainsKeywordsPredicate // instanceof handles nulls
-                && super.getKeywords().equals(((ClientNameContainsKeywordsPredicate) other)
+                || (other instanceof PersonNameContainsKeywordsPredicate // instanceof handles nulls
+                && super.getKeywords().equals(((PersonNameContainsKeywordsPredicate) other)
                 .getKeywords())); // state check
     }
 

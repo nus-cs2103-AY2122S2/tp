@@ -19,7 +19,7 @@ import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.appointment.Appointment;
-import seedu.contax.model.appointment.ClientNameContainsKeywordsPredicate;
+import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
 import seedu.contax.testutil.AppointmentBuilder;
 
@@ -55,10 +55,10 @@ public class FindAppointmentCommandTest {
 
     @Test
     public void clientName_equals() {
-        ClientNameContainsKeywordsPredicate firstPredicate =
-                new ClientNameContainsKeywordsPredicate(Collections.singletonList("client1"));
-        ClientNameContainsKeywordsPredicate secondPredicate =
-                new ClientNameContainsKeywordsPredicate(Collections.singletonList("client2"));
+        PersonNameContainsKeywordsPredicate firstPredicate =
+                new PersonNameContainsKeywordsPredicate(Collections.singletonList("client1"));
+        PersonNameContainsKeywordsPredicate secondPredicate =
+                new PersonNameContainsKeywordsPredicate(Collections.singletonList("client2"));
 
         FindAppointmentCommand findFirstCommand = new FindAppointmentCommand(firstPredicate);
         FindAppointmentCommand findSecondCommand = new FindAppointmentCommand(secondPredicate);

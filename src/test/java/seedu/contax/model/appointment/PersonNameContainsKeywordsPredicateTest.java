@@ -16,23 +16,23 @@ import seedu.contax.testutil.PersonBuilder;
 
 
 
-public class ClientNameContainsKeywordsPredicateTest {
+public class PersonNameContainsKeywordsPredicateTest {
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        ClientNameContainsKeywordsPredicate firstPredicate =
-                new ClientNameContainsKeywordsPredicate(firstPredicateKeywordList);
-        ClientNameContainsKeywordsPredicate secondPredicate =
-                new ClientNameContainsKeywordsPredicate(secondPredicateKeywordList);
+        PersonNameContainsKeywordsPredicate firstPredicate =
+                new PersonNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        PersonNameContainsKeywordsPredicate secondPredicate =
+                new PersonNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ClientNameContainsKeywordsPredicate firstPredicateCopy =
-                new ClientNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        PersonNameContainsKeywordsPredicate firstPredicateCopy =
+                new PersonNameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -48,14 +48,14 @@ public class ClientNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        ClientNameContainsKeywordsPredicate predicate =
-                new ClientNameContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        PersonNameContainsKeywordsPredicate predicate =
+                new PersonNameContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new AppointmentBuilder().withName("Play").withPerson(
                 new PersonBuilder().withName("Alice").build()
         ).build()));
 
         // Multiple keywords
-        predicate = new ClientNameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        predicate = new PersonNameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new AppointmentBuilder().withName("Play")
                 .withPerson(
                     new PersonBuilder().withName("Alice Bob").build()
@@ -63,13 +63,13 @@ public class ClientNameContainsKeywordsPredicateTest {
                 .build()));
 
         // Only one matching keyword
-        predicate = new ClientNameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        predicate = new PersonNameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new AppointmentBuilder().withPerson(
                 new PersonBuilder().withName("Alice Bob").build()
         ).withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new ClientNameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        predicate = new PersonNameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new AppointmentBuilder().withPerson(
                 new PersonBuilder().withName("Alice Bob").build()
         ).withName("Alice Bob").build()));
@@ -78,12 +78,12 @@ public class ClientNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        ClientNameContainsKeywordsPredicate predicate =
-                new ClientNameContainsKeywordsPredicate(Collections.emptyList());
+        PersonNameContainsKeywordsPredicate predicate =
+                new PersonNameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new AppointmentBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new ClientNameContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new PersonNameContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new AppointmentBuilder().withName("Play").withPerson(
                 new PersonBuilder().withName("Alice Bob").build()
         ).build()));
