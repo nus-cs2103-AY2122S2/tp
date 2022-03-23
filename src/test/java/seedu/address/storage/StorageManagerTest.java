@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalStudentBook;
 
 import java.nio.file.Path;
 
@@ -24,10 +24,10 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonStudentBookStorage addressBookStorage = new JsonStudentBookStorage(getTempFilePath("ab"));
+        JsonStudentBookStorage studentBookStorage = new JsonStudentBookStorage(getTempFilePath("ab"));
         JsonLessonBookStorage lessonBookStorage = new JsonLessonBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, lessonBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -49,20 +49,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void studentBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonStudentBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonStudentBookStorageTest} class.
          */
-        StudentBook original = getTypicalAddressBook();
+        StudentBook original = getTypicalStudentBook();
         storageManager.saveStudentBook(original);
         ReadOnlyStudentBook retrieved = storageManager.readStudentBook().get();
         assertEquals(original, new StudentBook(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getStudentBookFilePath() {
         assertNotNull(storageManager.getStudentBookFilePath());
     }
 
