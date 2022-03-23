@@ -36,17 +36,19 @@ public class EventCommandParser implements Parser<EventCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE));
         }
 
+        Index[] indexes;
+        try {
+            indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
+        } catch (ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE), e);
+        }
+
         EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
         Information info = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE).get(),
                 argMultimap.getValue(PREFIX_TIME).get());
 
-        try {
-            Index[] indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
-            return new EventCommand(indexes, eventName, info, dateTime);
-        } catch (ParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE), e);
-        }
+        return new EventCommand(indexes, eventName, info, dateTime);
     }
 
     /**

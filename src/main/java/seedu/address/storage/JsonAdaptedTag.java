@@ -60,5 +60,4 @@ class JsonAdaptedTag {
             throw new IllegalValueException(INVALID_TAGTYPE);
         }
     }
-
 }

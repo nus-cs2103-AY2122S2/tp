@@ -21,6 +21,7 @@ import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Information;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 public class EventCommand extends Command {
@@ -62,9 +63,9 @@ public class EventCommand extends Command {
     }
 
     private Event createEvent(List<Person> lst, Index[] indexes) {
-        Set<Person> tempList = new HashSet<>();
+        Set<Name> tempList = new HashSet<>();
         for (Index currIndex : indexes) {
-            tempList.add(lst.get(currIndex.getZeroBased()));
+            tempList.add(lst.get(currIndex.getZeroBased()).getName());
         }
         return new Event(this.name, this.information, new ArrayList<>(tempList), this.dateTime);
     }
@@ -86,10 +87,10 @@ public class EventCommand extends Command {
         for (Index currIndex : indexes) {
             Person currPerson = lastShownList.get(currIndex.getZeroBased());
             names.add(currPerson.getName().toString());
-            model.setPerson(currPerson, currPerson.addEvent(currEvent));
         }
 
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.addEvent(currEvent);
+        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_ARGUMENTS, names, currEvent));
     }
 

@@ -3,10 +3,9 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Name;
 
 /**
  * Represents an Event in the address book.
@@ -17,13 +16,13 @@ public class Event {
     // Identity fields
     private final EventName name;
     private final Information info;
-    private final List<Person> participants;
+    private final List<Name> participants;
     private final DateTime dateTime;
 
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName name, Information info, List<Person> participants, DateTime dateTime) {
+    public Event(EventName name, Information info, List<Name> participants, DateTime dateTime) {
         requireAllNonNull(name, info, participants, dateTime);
         this.name = name;
         this.info = info;
@@ -39,7 +38,7 @@ public class Event {
         return info;
     }
 
-    public List<Person> getParticipants() {
+    public List<Name> getParticipants() {
         return participants;
     }
 
@@ -74,7 +73,8 @@ public class Event {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getEventName())
+        builder.append("Event Name: ")
+                .append(getEventName())
                 .append("\nDetails: ")
                 .append(getEventInfo())
                 .append("\nDate & Time: ")
