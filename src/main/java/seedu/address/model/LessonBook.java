@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.ConsistentLessonList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
@@ -76,8 +75,8 @@ public class LessonBook implements ReadOnlyLessonBook {
         lessons.add(lesson);
     }
 
-    public void assignStudent(Student student, Index lessonId) {
-        lessons.assignStudent(student, lessonId);
+    public void assignStudent(Student student, Lesson lesson) {
+        lessons.assignStudent(student, lesson);
     }
 
     public void unasssignStudent(Student student) {
