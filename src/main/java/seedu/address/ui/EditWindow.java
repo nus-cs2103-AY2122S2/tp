@@ -117,7 +117,7 @@ public class EditWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing edit window of the application.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
