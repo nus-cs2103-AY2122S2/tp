@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/help_icon.png" />
     </icons>
@@ -18,8 +18,8 @@
             </stylesheets>
          <VBox fx:id="parentPane">
             <children>
-                <StackPane>
-                    <GridPane fx:id="generalPage" prefWidth="200.0" style="-fx-background-color: #383838;" >
+                <StackPane VBox.vgrow="ALWAYS">
+                    <GridPane fx:id="generalPage" prefWidth="500" style="-fx-background-color: #383838;">
                         <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />
@@ -28,7 +28,7 @@
                         <children>
                         </children>
                     </GridPane>
-                    <GridPane fx:id="personsPage" prefWidth="1000.0" style="-fx-background-color: #383838;" >
+                    <GridPane fx:id="personsPage" prefWidth="1000.0" style="-fx-background-color: #383838;">
                         <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />
@@ -37,7 +37,7 @@
                         <children>
                         </children>
                     </GridPane>
-                    <GridPane fx:id="appointmentsPage" prefWidth="1000.0" style="-fx-background-color: #383838;" >
+                    <GridPane fx:id="appointmentsPage" prefWidth="1000.0" style="-fx-background-color: #383838;">
                         <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />
@@ -46,7 +46,7 @@
                         <children>
                         </children>
                     </GridPane>
-                    <GridPane fx:id="tagsPage" prefWidth="1000.0" style="-fx-background-color: #383838;" >
+                    <GridPane fx:id="tagsPage" prefWidth="1000.0" style="-fx-background-color: #383838;">
                         <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />
@@ -56,12 +56,12 @@
                         </children>
                     </GridPane>
                 </StackPane>
-               <HBox alignment="CENTER" prefHeight="0.0" prefWidth="1000.0" style="-fx-background-color: #383838;">
+               <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" style="-fx-background-color: #383838;" VBox.vgrow="NEVER">
                   <children>
-                      <Button fx:id="generalBtn" styleClass="button" mnemonicParsing="false" onAction="#setGeneralPage" text="General" />
-                      <Button fx:id="personsBtn" styleClass="button" mnemonicParsing="false" onAction="#setPersonsPage" text="Persons" />
-                     <Button fx:id="appointmentsBtn" styleClass="button" mnemonicParsing="false" onAction="#setAppointmentsPage" text="Appointments" />
-                     <Button fx:id="tagsBtn" styleClass="button" mnemonicParsing="false" onAction="#setTagsPage" text="Tags" />
+                      <Button fx:id="generalBtn" mnemonicParsing="false" onAction="#setGeneralPage" styleClass="button" text="General" />
+                      <Button fx:id="personsBtn" mnemonicParsing="false" onAction="#setPersonsPage" styleClass="button" text="Persons" />
+                     <Button fx:id="appointmentsBtn" mnemonicParsing="false" onAction="#setAppointmentsPage" styleClass="button" text="Appointments" />
+                     <Button fx:id="tagsBtn" mnemonicParsing="false" onAction="#setTagsPage" styleClass="button" text="Tags" />
                   </children>
                </HBox>
             </children>
