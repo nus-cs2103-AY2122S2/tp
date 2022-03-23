@@ -44,6 +44,8 @@ public class PetCard extends UiPart<Region> {
     private Label appointment;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane attendanceTags;
 
 
     /**
@@ -62,6 +64,10 @@ public class PetCard extends UiPart<Region> {
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    public void setColour(String colour) {
+        cardPane.setStyle("-fx-background-color: " + colour);
     }
 
     @Override
