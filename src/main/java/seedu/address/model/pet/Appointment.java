@@ -55,7 +55,6 @@ public class Appointment implements Comparable<Appointment> {
             DateTimeFormatter formatOfRetrievedDateTime = DateTimeFormatter.ofPattern("MMM-dd-yyyy h:mm a");
             this.value = value;
             this.location = retrievedLocation;
-            System.out.println(retrievedDateTime);
             this.dateTime = LocalDateTime.parse(retrievedDateTime, formatOfRetrievedDateTime);
         }
     }
