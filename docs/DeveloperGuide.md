@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Trackermon Developer Guide
+title: Developer Guide
 ---
 
 ### Table of Contents

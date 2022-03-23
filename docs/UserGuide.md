@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Trackermon User Guide
+title: User Guide
 ---
 
 Trackermon is a **desktop app** for **tracking and managing shows, optimized for use via a
