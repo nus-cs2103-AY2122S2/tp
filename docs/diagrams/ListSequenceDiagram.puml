@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniBookParser" as UniBookParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "lc:ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list o/type ty/professors", true, false)
+activate LogicManager
+
+LogicManager -> UniBookParser : parseCommand("list o/type ty/professors")
+activate UniBookParser
+
+create ListCommandParser
+UniBookParser -> ListCommandParser
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand
+activate ListCommand
+
+ListCommand --> ListCommandParser : lc
+deactivate ListCommand
+
+ListCommandParser --> UniBookParser : lc
+
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> UniBookParser
+destroy ListCommandParser
+
+UniBookParser --> LogicManager : lc
+deactivate UniBookParser
+
+LogicManager -> ListCommand : execute(m, true, false)
+activate ListCommand
+
+ListCommand -> Model : m.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PROFESSORS)
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
