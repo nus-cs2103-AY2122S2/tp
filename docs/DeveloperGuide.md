@@ -256,12 +256,12 @@ Given below is an example usage scenario for the enrolment of a `Student` object
 
 Step 1. The user launches the application. The `TAssist` is already populated with data.
 
-![AddState0](images/AddState0.png)
+![EnrolState0](images/AddState0.png)
 
 Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`. The `enrol` command also calls `EnrolCommandParser#parse()`, which parses the input and returns a successful/unsuccessful output message.
 * An example of the `enrol` command: `enrol c/1 s/1,2,3,4,5,6`
 
-![AddState1](images/EnrolState1.png)
+![EnrolState0](images/EnrolState1.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enroled to a class group will automatically be linked to the module it belongs to. 
 <br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enroled to the given class group.
