@@ -217,7 +217,7 @@ public class ModelManager implements Model {
     @Override
     public void updateAssignment(Student studentToAssign, Lesson lessonToAssign) {
         lessonBook.assignStudent(studentToAssign, lessonToAssign);
-        addressBook.assignLesson(lessonToAssign, studentToAssign);
+        studentBook.assignLesson(lessonToAssign, studentToAssign);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
