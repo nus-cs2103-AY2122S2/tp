@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":StudentBookParser" as StudentBookParser LOGIC_COLOR
+participant ":TeachWhatParser" as TeachWhatParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
@@ -14,18 +14,18 @@ end box
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> StudentBookParser : parseCommand(undo)
-activate StudentBookParser
+LogicManager -> TeachWhatParser : parseCommand(undo)
+activate TeachWhatParser
 
 create UndoCommand
-StudentBookParser -> UndoCommand
+TeachWhatParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> StudentBookParser
+UndoCommand --> TeachWhatParser
 deactivate UndoCommand
 
-StudentBookParser --> LogicManager : u
-deactivate StudentBookParser
+TeachWhatParser --> LogicManager : u
+deactivate TeachWhatParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand

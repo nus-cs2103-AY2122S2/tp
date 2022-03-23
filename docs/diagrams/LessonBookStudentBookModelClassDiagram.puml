@@ -17,7 +17,7 @@ skinparam classBackgroundColor MODEL_COLOR
         Student *--> Name
         Student *--> Phone
         Student *--> Email
-        Student *--> Student
+        Student *--> Address
         Student *--> "*" Tag
 
         Class HiddenSB3 #FFFFFF
