@@ -66,7 +66,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         // if no prefix, find acts as a general search based on 1 keyword,
-        // otherwise it acts as a narrow search based on prefix and keywords
+        // otherwise it acts as a narrow search based on prefix and keywords and implements an AND search
+        // https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream
         if (!hasPrefix) {
             keywordsArr = getKeywords(args);
             return new FindCommand(new ShowContainsKeywordsPredicate(Arrays.asList(keywordsArr)));

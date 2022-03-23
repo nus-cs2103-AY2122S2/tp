@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: Trackermon User Guide
 ---
 
 Trackermon is a **desktop app** for **tracking and managing shows, optimized for use via a
@@ -22,6 +22,7 @@ They can easily look up the list of shows if they need to.
   * [Better Find [coming in v1.3]](#better-find-coming-in-v13)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
+* [**Glossary**](#glossary)
 
 
 ---
@@ -124,7 +125,7 @@ Format: `help`
 
 ### Finding a show: `find`
 
-**General Find**: Finds shows in Trackermon by matching the user's input across all parameters.
+**General Find**: Finds shows in Trackermon by matching the user's input across the name, status and tag parameters.
 
 Format: `find <KEYWORD>`
 * Find shows with the specified `<KEYWORD>`.
@@ -133,14 +134,14 @@ Format: `find <KEYWORD>`
 * There must be at **least one keyword** and it **must not be empty**.
 
 Examples:
-* `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name or tag.[put image here after ui update]
-* * `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name or tag.[put image here after ui update]
+* `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name, status or tag.[put image here after ui update]
+* * `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name, status or tag.[put image here after ui update]
 
-**Precise Find** Finds shows in Trackermon by matching the user's input across specific parameters with prefixes.
+**Precise Find** Finds shows in Trackermon by matching the user's input across name, status and tag parameters with prefixes.
 
 Format: `find n/[NAME] s/[STATUS] t/[TAG]`
-* **Within a single prefix**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all keywords that are input by the user.
-* **Across multiple prefixes**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all the keywords.
+* **Within a single prefix**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all keywords that are input by the user in the specific prefix.
+* **Across multiple prefixes**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all the keywords across all prefixes.
 * There must be at **least one prefix field** and it **must not be empty**.
 
 Examples:
@@ -224,14 +225,26 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples                                                               
---------|--------------------------------------------------------------------------------
-**Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime` 
-**Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
-**Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
-**Exit** | `exit`      
-**Find** | `find <KEYWORD>`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/<TAG>]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen`
-**List** |`list`                                                                                                               |
+| Action     | Format, Examples                                                                                                                                      |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                        |
+| **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                                                                                                 |
+| **Edit**   | `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                           |
+| **Exit**   | `exit`                                                                                                                                                |
+| **Find**   | `find <KEYWORD>`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/<TAG>]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
+| **List**   | `list`                                                                                                                                                |
 
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+## Glossary
+
+| Term          | Description                                                                                            |
+|---------------|--------------------------------------------------------------------------------------------------------|
+| **Parameter** | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)          |
+| **Prefix**    | Characters used to identify the following parameter (e.g. `n/` is the prefix for the parameter `NAME`) |
+| **JavaFX**    | JavaFX is a set of Java graphics libraries for creating Java GUI applications                          | 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
