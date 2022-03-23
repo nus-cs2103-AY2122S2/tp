@@ -267,6 +267,36 @@ The following activity diagram summarizes what happens when a user executes a de
 
 <img src="images/DeleteActivityDiagram.png" width="250" />
 
+### \[Proposed\] List feature
+
+The proposed list mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+
+* `ListCommandParser#parse()` — Parses the command arguments.
+* `ListCommand#execute()` — Executes `ModelManager#updateFiltered<ENTITY_NAME>List()` with the predicate that matches the filtering criteria.
+* `ModelManager#updateFiltered<ENTITY_NAME>List()` — Updates the predicate of the entity list so that only filtered entries will be shown in `TAssist`.
+
+Given below is an example usage scenario using `Student` objects and how the list mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![ListState0](images/ListState0.png)
+
+Step 2. The user executes `list student c/2` to filter out students from the 2nd class group in the list. The `list` command also calls `ListCommandParser#parse()`, which parses the input and return the entity type as well as the class group index or TA module index to filter by.
+
+![ListState1](images/ListState1.png)
+
+The following sequence diagram shows how the list operation works:
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a list command:
+
+![ListActivityDiagram](images/ListActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
