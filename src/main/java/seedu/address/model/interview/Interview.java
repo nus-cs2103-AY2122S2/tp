@@ -18,6 +18,7 @@ public class Interview {
     private final Applicant applicant;
     private final LocalDateTime date;
     private final Position position;
+    private final Status status;
 
     /**
      * Every field must be present and not null.
@@ -27,6 +28,7 @@ public class Interview {
         this.applicant = applicant;
         this.date = date;
         this.position = position;
+        this.status = new Status();
     }
 
     public Applicant getApplicant() {
@@ -40,6 +42,8 @@ public class Interview {
     public Position getPosition() {
         return position;
     }
+
+    public Status getStatus() { return status; }
 
     /**
      * Returns true if both interviews have the same data fields.
@@ -68,7 +72,8 @@ public class Interview {
                 .append("; Date: ")
                 .append(getDate())
                 .append("; Position: ")
-                .append(getPosition());
+                .append(position.getPositionName())
+                .append(getStatus());
         return builder.toString();
     }
 
