@@ -150,6 +150,13 @@ public class ModelManager implements Model {
         addressBook.removePosition(target);
     }
 
+    @Override
+    public void setPosition(Position target, Position editedPosition) {
+        requireAllNonNull(target, editedPosition);
+
+        addressBook.setPosition(target, editedPosition);
+    }
+
     //=========== Filtered Applicant List Accessors =============================================================
 
     /**

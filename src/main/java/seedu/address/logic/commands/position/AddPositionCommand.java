@@ -20,6 +20,7 @@ public class AddPositionCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " -p: Adds a position to the address book. "
             + "Parameters: "
+            + PREFIX_POSITION + "POSITION_NAME"
             + PREFIX_NUM_OPENINGS + "NUM_OPENINGS "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_REQUIREMENT + "REQUIREMENT]...\n"
