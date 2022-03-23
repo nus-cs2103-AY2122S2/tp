@@ -13,9 +13,10 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.DueDate;
+import seedu.address.model.transaction.Note;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
-import seedu.address.model.transaction.Note;
+
 
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "addTransaction";
@@ -27,11 +28,12 @@ public class AddTransactionCommand extends Command {
             + Amount.PREFIX + "AMOUNT "
             + TransactionDate.PREFIX + "TRANSACTION DATE "
             + DueDate.PREFIX + "DUE DATE <OPTIONAL> "
-            + Note.PREFIX + "NOTE <OPTIONAL>"
+            + Note.PREFIX + "NOTE <OPTIONAL>\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "a/123.456 "
             + "td/2022-11-11 "
-            + "dd/2022-11-11";
+            + "dd/2022-11-11 "
+            + "n/paid SGD 123.456 for haircut";
 
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
 
