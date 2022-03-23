@@ -365,35 +365,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                 | I want to …​                     | So that I can…​                                                |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | IT admin                                   | obtain student contact information | quickly contact students if required                               |
-| `* * *`  | IT admin                                   | get a list of students with covid  |  find out any possible hotspots                                    |
-| `* * *`  | IT admin                                   | save the data locally              | for easy dissemination of information to other admins              |
-| `* * *`  | IT admin                                   | find details of a particular student | follow up with checking on the student                           |
-| `* * *`  | IT admin                                   | add a student’s details into the system | store their details for reference                             |
+| `* * *`  | Hall admin                                 | obtain student contact information | quickly contact students if required                               |
+| `* * *`  | Hall admin                                 | get a list of students with covid  |  find out any possible hotspots                                    |
+| `* * *`  | Hall admin                                 | save the data locally              | for easy dissemination of information to other admins              |
+| `* * *`  | Hall admin                                 | find details of a particular student | follow up with checking on the student                           |
+| `* * *`  | Hall admin                                 | add a student’s details into the system | store their details for reference                             |
 | `* * *`  | First time user                            | add a list of students with their info into the system  | have a centralised hub for covid health status |
-| `* * *`  | IT admin                                   | delete a user from the system      | remove wrongly keyed in inputs from the system                     |
-| `* * *`  | IT admin                                   | clear the system database          | quickly restore the initial state of the system and to start on a clean slate again             |
-| `* * *`  | IT admin                                   | edit a contact’s information       | can modify any change in contact details regarding a user          |
-| `* * *`  | Professors                                 | get the statistics of covid cases among different groups of students | Can use for further medical research |
-| `* *`    | IT admin                                   | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system |
-| `* *`    | IT admin                                   | easily keep track and update  the covid status of students  | use data to inform relevant module lecturers and TAs |
-| `* *`    | IT admin                                   | see when a particular student started having covid symptoms | find who is the superspreader             |
-| `* *`    | IT admin                                   | store the date when the student tested positive for covid   | check the duration for which the student has to be isolated for                |
-| `* *`    | Busy admin                                 | mass send emails to specific students | check on their health                                           |
-| `* *`    | IT admin                                   | be notified of when a student’s status change   | follow up on their health                             |
-| `* *`    | OCD IT admin                               | categorise contacts according to faculty | I am happy                                                   |
-| `* *`    | IT admin                                   | filter out those students with covid easily     | write out future modules plan for different faculty   |
-| `* *`    | IT admin                                   | easily export data from the application  | To show my boss                                              |
-| `* *`    | User                                       | send contact info of someone    | his/her TA can contact the student only if TA is allowed to do so              |
-| `* *`    | IT admin                                   | mass send emails to the professors of affected students  | inform the relevant TAs and professors about their absence in class              |
+| `* * *`  | Hall admin                                 | delete a user from the system      | remove wrongly keyed in inputs from the system                     |
+| `* * *`  | Hall admin                                 | clear the system database          | quickly restore the initial state of the system and to start on a clean slate again             |
+| `* * *`  | Hall admin                                 | edit a contact’s information       | can modify any change in contact details regarding a user          |
+| `* * *`  | Professors                                 | get the statistics of covid cases among different groups of students | can use for further medical research |
+| `* *`    | Hall admin                                 | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system |
+| `* *`    | Hall admin                                 | easily keep track and update  the covid status of students  | monitor the block that has the highest incidences of Covid-19 |
+| `* *`    | Hall admin                                 | store the date when the student tested positive for covid   | check the duration for which the student has to be isolated for                |
+| `* *`    | Busy admin                                 | retrieve a list of all email addresses | email them to know their well-being                                           |
+| `* *`    | Hall admin                                 | categorise contacts according to faculty | I am happy                                                   |
+| `* *`    | Hall admin                                 | filter out those students with covid easily     | plan for hall events   |
+| `* *`    | Hall admin                                 | easily export data from the application  | to show my boss                                              |
 | `* *`    | UHC people                                 | get the number of students with covid    | prepare enough medical resources accordingly                 |
-| `* *`    | IT admin                                   | easy method to Import data into the app  | save the hassle                                              |
-| `* *`    | Hostel Management people                   | Retrieve the number of students with covid in the different hostel  | Can plan out the number of rooms for covid use like quarantine etc.                |
+| `* *`    | Hall admin                                 | easy method to Import data into the app  | save the hassle                                              |
+| `* *`    | Hostel Management people                   | retrieve the number of students with covid in the different hostel  | Can plan out the number of rooms for covid use like quarantine etc.                |
 | `* *`    | User                                       | have a quick keyword search     | to find a specific person if unsure of his full name or complete contact number                |
-| `* *`    | Professor                                  | be informed when one of my students are covid positive     | make arrangements for makeup class or examinations                |
-| `* *`    | IT admin                                   | add the last known location of where a particular student caught the virus     | manage the severity of the hotspot and choose to take follow up actions              |
-| `* `    | Parents                                     | get the name of students with covid      | check if their children or friends or neighbors’ children got covid or not               |
-| `* `    | NUS President                               | know covid status of students  and staffs     | come up with policies                                   |
+| `* `     | Hall leaders                               | get the name of students with covid     | check if their CCA members have Covid                                   |
+| `* `     | Residence Fellow                           | know covid status of students and staffs     | come up with hall policies                                   |
 
 *{More to be added}*
 
