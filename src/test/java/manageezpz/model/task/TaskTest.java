@@ -35,8 +35,6 @@ public class TaskTest {
     public void equals() {
         // same values -> returns true
         Task readBookCopy = new TaskBuilder(READ_BOOK).build();
-        System.out.println(readBookCopy);
-        System.out.println(READ_BOOK);
         assertTrue(READ_BOOK.equals(readBookCopy));
 
         // same object -> returns true

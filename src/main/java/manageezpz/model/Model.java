@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
+import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
@@ -119,6 +120,13 @@ public interface Model {
     void findTask(Task task);
 
     /**
+     * Tags the given task.
+     * The task must exist in the task list.
+     * @param task
+     */
+    void tagTask(Task task, Person person);
+
+    /**
      * Adds the given task.
      * {@code task} must not already exist in the task list
      */
@@ -152,22 +160,22 @@ public interface Model {
     ObservableList<Task> getFilteredTaskList();
 
     /**
-     * Returns true if a todo with the same identity as {@code todo} exists in the task list.
-     */
-    boolean hasTodo(Todo todo);
-
-    /**
-     * Returns true if an event with the same identity as {@code event} exists in the task list.
-     */
-    boolean hasEvent(Event event);
-
-    /**
-     * Returns true if a deadline with the same identity as {@code deadline} exists in the task list.
-     */
-    boolean hasDeadline(Deadline deadline);
-
-    /**
      * Returns true if a task with the same identity as {@code deadline} exists in the task list.
      */
     boolean hasTask(Task task);
+
+    /**
+     * Returns true if a {@code Task} is tagged.
+     */
+    boolean isTagged(Task task, Person p);
+
+    /**
+     * Returns a list of all tasks.
+     */
+    String listTasks();
+
+    /**
+     * Returns a list of tasks that satisfy the option given.
+     */
+    String listTasks(Prefix option);
 }

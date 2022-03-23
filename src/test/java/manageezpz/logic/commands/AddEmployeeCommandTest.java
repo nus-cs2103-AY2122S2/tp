@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.logic.commands.exceptions.CommandException;
+import manageezpz.logic.parser.Prefix;
 import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.ReadOnlyAddressBook;
@@ -184,23 +185,23 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public boolean hasTodo(Todo todo) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasDeadline(Deadline deadline) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isTagged(Task task, Person p) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String listTasks() {
+            return null;
+        }
+
+        @Override
+        public String listTasks(Prefix option) {
+            return null;
         }
 
         @Override
@@ -220,6 +221,11 @@ public class AddEmployeeCommandTest {
 
         @Override
         public void findTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void tagTask(Task task, Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

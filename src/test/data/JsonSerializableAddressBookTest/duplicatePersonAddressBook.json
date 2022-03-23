@@ -10,6 +10,32 @@
     "address": "4th street"
   } ],
   "tasks" : [ {
-    "description" : "Hello"
+    "type" : "todo",
+    "description" : "Play Genshin Impact",
+    "date" : "",
+    "deadlineTime" : "",
+    "eventStartTime" : "",
+    "eventEndTime" : ""
+  }, {
+    "type" : "deadline",
+    "description" : "Do Daily Commissions",
+    "date" : "2022-03-15",
+    "deadlineTime" : "0400",
+    "eventStartTime" : null,
+    "eventEndTime" : null
+  }, {
+    "type" : "event",
+    "description" : "Finish 160 Resins",
+    "date" : "2022-03-15",
+    "deadlineTime" : null,
+    "eventStartTime" : "1800",
+    "eventEndTime" : "2000"
+  }, {
+    "type" : "deadline",
+    "description" : "Do MY Commissions",
+    "date" : "2022-03-15",
+    "deadlineTime" : "0400",
+    "eventStartTime" : null,
+    "eventEndTime" : null
   } ]
 }

@@ -30,7 +30,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
    * **`clear`** : Deletes all Tasks.
    
-   * **`addTask todo/ desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
+   * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
    * **`exit`** : Exits the app.
    
@@ -79,15 +79,15 @@ Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
 * `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
 
-### Adding a Task: `addTask`
+### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
 Adds a Task into the Task list.
 
 Format:
 
-* `addTask todo/ desc/TASK_DESCRIPTION`
-* `addTask deadline/ desc/TASK_DESCRIPTION by/DATE TIME`
-* `addTask event/ desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
+* `addTodo desc/TASK_DESCRIPTION`
+* `addTDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
@@ -189,7 +189,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
-**Add Task** | `addTask TASK_TYPE/ desc/TASK_DESCRIPTION` <br> e.g., `addTask todo/  desc/read book`
+**Add Task** | `TASK_TYPE desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book` <br>`addDeadline desc/Use up resin /by 2022-15-03 0400` 
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find task/TASK_DESCRIPTION` <br> e.g., `find task/homework`
