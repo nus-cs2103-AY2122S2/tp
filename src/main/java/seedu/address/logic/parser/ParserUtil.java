@@ -121,4 +121,16 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static String parseTheme(String theme) throws ParseException {
+        requireNonNull(theme);
+        String trimmedTheme = theme.trim();
+        if (!(trimmedTheme.equals("dark") || trimmedTheme.equals("light"))) {
+            throw new ParseException("Theme should be either light or dark.");
+        }
+        return trimmedTheme;
+    }
 }

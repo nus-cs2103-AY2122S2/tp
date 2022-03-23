@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.io.FileNotFoundException;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -217,26 +216,6 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
-    }
-
-    /**
-     * Switch to light theme.
-     */
-    @FXML
-    public void handleLightTheme() {
-        String lightThemeUrl = Objects.requireNonNull(getClass().getResource("/view/LightTheme.css")).toExternalForm();
-        this.primaryStage.getScene().getStylesheets().clear();
-        this.primaryStage.getScene().getStylesheets().add(lightThemeUrl);
-    }
-
-    /**
-     * Switch to dark theme.
-     */
-    @FXML
-    public void handleDarkTheme() {
-        String darkThemeUrl = Objects.requireNonNull(getClass().getResource("/view/DarkTheme.css")).toExternalForm();
-        this.primaryStage.getScene().getStylesheets().clear();
-        this.primaryStage.getScene().getStylesheets().add(darkThemeUrl);
     }
 
     /**
