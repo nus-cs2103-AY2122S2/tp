@@ -24,8 +24,8 @@ public class FlagCommand extends Command {
 
     public static final String MESSAGE_USAGE = FLAG_COMMAND_WORD + "|" + UNFLAG_COMMAND_WORD
             + ": Flags the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + FLAG_COMMAND_WORD + " 1";
+            + "Parameters: NAME\n"
+            + "Example: " + UNFLAG_COMMAND_WORD + " Joe";
 
     public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Updated flag for Person: %1$s";
 
@@ -33,7 +33,7 @@ public class FlagCommand extends Command {
     private final Flag flag;
 
     /**
-     * @param targetName Index of person whose flag to replace.
+     * @param targetName Name of person whose flag to replace.
      * @param flag Flag to replace with.
      */
     public FlagCommand(Name targetName, Flag flag) {
