@@ -11,6 +11,9 @@ import seedu.address.model.attendance.AttendanceEntry;
  * A class that processes and produces attendance tags for the GUI.
  */
 public class AttendanceTag {
+    private static final String MISSING_ATTENDANCE_TAG_STYLE = "-fx-background-color: #c4c4c4";
+    private static final String PRESENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #95ff7a";
+    private static final String ABSENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #ff7e7e";
 
     /**
      * Private constructor to prevent creation.
@@ -34,14 +37,14 @@ public class AttendanceTag {
         Label attendanceTag = new Label(dateString);
 
         if (isPresent.isEmpty()) {
-            attendanceTag.setStyle("-fx-background-color: #c4c4c4");
-            return attendanceTag;
-        }
-
-        if (isPresent.get()) {
-            attendanceTag.setStyle("-fx-background-color: #95ff7a");
+            attendanceTag.setStyle(MISSING_ATTENDANCE_TAG_STYLE);
         } else {
-            attendanceTag.setStyle("-fx-background-color: #ff7e7e");
+            boolean present = isPresent.get();
+            attendanceTag.setStyle(
+                present
+                    ? PRESENT_ATTENDANCE_TAG_STYLE
+                    : ABSENT_ATTENDANCE_TAG_STYLE
+            );
         }
 
         return attendanceTag;
