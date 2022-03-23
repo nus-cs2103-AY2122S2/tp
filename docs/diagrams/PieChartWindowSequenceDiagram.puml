@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":PieChartWindow" as PieChartWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":SummariseCommand" as SummariseCommand LOGIC_COLOR
+end box
+
+[-> PieChartWindow : execute()
+activate PieChartWindow
+
+PieChartWindow -> SummariseCommand : getCovidStatsByBlockDataList()
+activate SummariseCommand
+
+SummariseCommand --> PieChartWindow
+deactivate SummariseCommand
+
+PieChartWindow -> SummariseCommand : getPositiveStatsByFacultyData()
+activate SummariseCommand
+
+SummariseCommand --> PieChartWindow
+deactivate SummariseCommand
+
+PieChartWindow -> PieChartWindow : execute()
+activate PieChartWindow
+
+PieChartWindow -> PieChartWindow : collateBlocksChart()
+activate PieChartWindow
+
+PieChartWindow -> PieChartWindow : makePieChart(treemap, string)
+activate PieChartWindow
+
+PieChartWindow --> PieChartWindow : pieChart
+deactivate PieChartWindow
+
+PieChartWindow --> PieChartWindow
+deactivate PieChartWindow
+
+PieChartWindow -> PieChartWindow : createFacultyChartPositive()
+activate PieChartWindow
+
+PieChartWindow -> PieChartWindow : makePieChart(treemap, string)
+activate PieChartWindow
+
+PieChartWindow --> PieChartWindow : pieChart
+deactivate PieChartWindow
+
+PieChartWindow --> PieChartWindow : hbox
+
+deactivate PieChartWindow
+
+PieChartWindow -> PieChartWindow : makePieChartScene(allPieCharts)
+activate PieChartWindow
+
+PieChartWindow --> PieChartWindow
+deactivate PieChartWindow
+
+PieChartWindow --> PieChartWindow
+deactivate PieChartWindow
+[<--PieChartWindow : pieChartWindow
+deactivate PieChartWindow
+
+
+[-> PieChartWindow : show()
+activate PieChartWindow
+
+[<--PieChartWindow : result
+deactivate PieChartWindow
+@enduml
