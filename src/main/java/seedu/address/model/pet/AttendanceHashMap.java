@@ -11,10 +11,10 @@ import seedu.address.model.attendance.AttendanceEntry;
 
 /**
  * Represents a Pet's attendance history in the address book.
- * Guarantees: immutable; is always valid.
+ * Guarantees: is always valid.
  */
 public class AttendanceHashMap {
-    public final HashMap<LocalDate, AttendanceEntry> attendanceHashMap;
+    private final HashMap<LocalDate, AttendanceEntry> attendanceHashMap;
 
     /**
      * Constructs an {@code AttendanceHashMap}.
@@ -36,7 +36,7 @@ public class AttendanceHashMap {
     /**
      * Checks if there is already an identical attendance entry in the table.
      * @param attendanceEntry the incoming attendance entry.
-     * @return true if entry with same absent attendance already exists, false otherwise.
+     * @return true if entry with same attendance already exists, false otherwise.
      */
     public boolean containsAttendance(AttendanceEntry attendanceEntry) {
         LocalDate dateKey = attendanceEntry.getAttendanceDate();
@@ -59,14 +59,11 @@ public class AttendanceHashMap {
     }
 
     /**
-     * Adds an attendance entry into a new attendance hash map containing the current attendance entries.
+     * Adds an attendance entry into the current attendance hash map.
      * @param attendanceEntry the attendance to be stored.
-     * @return an attendance hash map with the attendance marked present or absent.
      */
-    public AttendanceHashMap addAttendance(AttendanceEntry attendanceEntry) {
-        HashMap<LocalDate, AttendanceEntry> tempHashMap = new HashMap<>(attendanceHashMap);
-        tempHashMap.put(attendanceEntry.getAttendanceDate(), attendanceEntry);
-        return new AttendanceHashMap(tempHashMap);
+    public void addAttendance(AttendanceEntry attendanceEntry) {
+        attendanceHashMap.put(attendanceEntry.getAttendanceDate(), attendanceEntry);
     }
 
     /**
@@ -84,6 +81,17 @@ public class AttendanceHashMap {
      */
     public Collection<AttendanceEntry> toCollection() {
         return attendanceHashMap.values();
+    }
+
+    /**
+     * Returns a copy of the current attendance hash map.
+     * @return a copy of the {@code AttendanceHashMap}.
+     */
+    public AttendanceHashMap getCopy() {
+        return new AttendanceHashMap(
+            new HashMap<>(
+                this.attendanceHashMap)
+        );
     }
 
     @Override

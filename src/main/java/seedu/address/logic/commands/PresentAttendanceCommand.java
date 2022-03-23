@@ -86,12 +86,12 @@ public class PresentAttendanceCommand extends Command {
             throw new CommandException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 
-        AttendanceHashMap editedAttendanceHashMap = targetAttendanceHashMap.addAttendance(presentAttendance);
+        targetAttendanceHashMap.addAttendance(presentAttendance);
 
         Pet editedPet = new Pet(
                 petToEdit.getName(), petToEdit.getOwnerName(), petToEdit.getPhone(),
                 petToEdit.getAddress(), petToEdit.getTags(), petToEdit.getDiet(),
-                petToEdit.getAppointment(), editedAttendanceHashMap);
+                petToEdit.getAppointment(), targetAttendanceHashMap);
 
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);

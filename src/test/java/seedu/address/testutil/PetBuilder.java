@@ -37,7 +37,7 @@ public class PetBuilder {
     private Set<Tag> tags;
     private Diet diet;
     private Appointment appointment;
-    private AttendanceHashMap attendanceHashMap;
+    private final AttendanceHashMap attendanceHashMap;
 
     /**
      * Creates a {@code PetBuilder} with the default details.
@@ -127,7 +127,7 @@ public class PetBuilder {
      * Sets the {@code PresentAttendanceEntry} of the {@code Pet} that we are building.
      */
     public PetBuilder withPresentAttendanceEntry(String attendanceDate, String pickUpTime, String dropOffTime) {
-        this.attendanceHashMap = attendanceHashMap.addAttendance(
+        attendanceHashMap.addAttendance(
                 new PresentAttendanceEntry(
                         LocalDate.parse(attendanceDate),
                         LocalTime.parse(pickUpTime),
@@ -139,13 +139,18 @@ public class PetBuilder {
      * Sets the {@code AbsentAttendanceEntry} of the {@code Pet} that we are building.
      */
     public PetBuilder withAbsentAttendanceEntry(String attendanceDate) {
-        this.attendanceHashMap = attendanceHashMap.addAttendance(
+        attendanceHashMap.addAttendance(
                 new AbsentAttendanceEntry(
                         LocalDate.parse(attendanceDate)
                 )
         );
         return this;
     }
+
+    /**
+     * Builds the {@code Pet} object with the data in the builder.
+     * @return a Pet object.
+     */
     public Pet build() {
         return new Pet(name, ownerName, phone, address, tags, diet, appointment, attendanceHashMap);
     }

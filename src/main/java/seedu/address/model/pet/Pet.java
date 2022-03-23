@@ -69,7 +69,7 @@ public class Pet {
     }
 
     public AttendanceHashMap getAttendanceHashMap() {
-        return attendanceHashMap;
+        return attendanceHashMap.getCopy();
     }
 
     /**
