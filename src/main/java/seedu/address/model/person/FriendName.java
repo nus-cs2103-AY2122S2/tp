@@ -2,8 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Locale;
-
 import seedu.address.model.common.Name;
 
 
@@ -45,7 +43,7 @@ public class FriendName extends Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FriendName // instanceof handles nulls
-                && fullName.toLowerCase(Locale.ROOT)
-                .equals(((FriendName) other).fullName.toLowerCase(Locale.ROOT)));
+                && fullName
+                .equalsIgnoreCase(((FriendName) other).fullName));
     }
 }
