@@ -285,6 +285,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         task.assignedTo(person);
     }
 
+    public boolean hasPriority(Task task) {
+        requireNonNull(task);
+        boolean returnValue;
+        if (task.getPriority() != null) {
+            returnValue = true;
+        } else {
+            returnValue = false;
+        }
+        return returnValue;
+    }
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
+
     //// person-level operations
 
     /**
@@ -351,4 +367,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }
