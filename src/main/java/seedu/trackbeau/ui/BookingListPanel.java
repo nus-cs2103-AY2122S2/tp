@@ -1,5 +1,7 @@
 package seedu.trackbeau.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -8,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.trackbeau.commons.core.LogsCenter;
 import seedu.trackbeau.model.booking.Booking;
 
-import java.util.logging.Logger;
+
 
 public class BookingListPanel extends UiPart<Region> {
     private static final String FXML = "BookingListPanel.fxml";
