@@ -2,6 +2,7 @@ package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import unibook.logic.commands.exceptions.CommandException;
@@ -112,6 +113,7 @@ public class AddCommand extends Command {
 
     private Person personToAdd = new Person();
     private Module moduleToAdd = new Module();
+    private Set<ModuleCode> moduleCodeSet = new HashSet<>();
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -119,6 +121,15 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         personToAdd = person;
+    }
+
+    /**
+     * Creates an AddCommand to add the specified {@code Person} with {@code moduleCodes}
+     */
+    public AddCommand(Person person, Set<ModuleCode> moduleCodes) {
+        requireNonNull(person);
+        personToAdd = person;
+        moduleCodeSet = moduleCodes;
     }
 
     /**
@@ -146,12 +157,11 @@ public class AddCommand extends Command {
         } else {
             if (model.hasPerson(personToAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            } else if (!model.isModuleExist(personToAdd)) {
+            } else if (!model.isModuleExist(moduleCodeSet)) {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
             }
-            Set<ModuleCode> personModuleCodes = personToAdd.getModuleCodes();
             Set<Module> personModules = personToAdd.getModulesModifiable();
-            for (ModuleCode moduleCode : personModuleCodes) {
+            for (ModuleCode moduleCode : moduleCodeSet) {
                 Module toAdd = model.getModuleByCode(moduleCode);
                 personModules.add(toAdd);
             }

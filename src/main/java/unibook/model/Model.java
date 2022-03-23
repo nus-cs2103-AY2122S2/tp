@@ -1,6 +1,7 @@
 package unibook.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -127,7 +128,7 @@ public interface Model {
 
     void setModule(Module target, Module editedModule);
 
-    boolean isModuleExist(Person person);
+    boolean isModuleExist(Set<ModuleCode> moduleCodeSet);
 
     /**
      * Finds the corresponding module to the module code.

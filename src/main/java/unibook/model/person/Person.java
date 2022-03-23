@@ -28,9 +28,6 @@ public class Person {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
-    // Temporary field to store module codes that a person is associated with.
-    private final Set<ModuleCode> moduleCodes = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
@@ -41,20 +38,6 @@ public class Person {
         this.phone = phone;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
-    }
-
-    /**
-     * Constructor of Person with extra ModuleCode parameter.
-     */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
-                  Set<Module> modules, Set<ModuleCode> moduleCodes) {
-        CollectionUtil.requireAllNonNull(name, phone, email, tags);
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.tags.addAll(tags);
-        this.modules.addAll(modules);
-        this.moduleCodes.addAll(moduleCodes);
     }
 
     /**
@@ -135,14 +118,6 @@ public class Person {
      */
     public Set<Module> getModulesModifiable() {
         return modules;
-    }
-
-    /**
-     * Returns an immutable modulecode set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<ModuleCode> getModuleCodes() {
-        return Collections.unmodifiableSet(moduleCodes);
     }
 
     /**
