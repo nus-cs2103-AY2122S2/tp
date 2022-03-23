@@ -170,10 +170,16 @@ public class FindCommandTest {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
+    /**
+     * Parses {@code userInput} into a {@code StudentIdContainsKeywordsPredicate}.
+     */
     private StudentIdContainsKeywordsPredicate prepareStudentIdPredicate(String userInput) {
         return new StudentIdContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
+    /**
+     * Parses {@code userInput} into a {@code ModuleCodeContainsKeywordsPredicate}.
+     */
     private ModuleCodeContainsKeywordsPredicate prepareModuleCodePredicate(String userInput) {
         return new ModuleCodeContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
