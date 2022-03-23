@@ -17,6 +17,7 @@ public enum Status {
     }
     public static Status getStatus(String status) {
         status = status.trim().toUpperCase();
+        //find match pattern similar to "plan-to-watch" for example, user key in "plan to watch"
         if (status.matches(PATTERN)) {
             status = PLANTOWATCH.name();
         }
@@ -41,11 +42,11 @@ public enum Status {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidStatus(String status) {
-        //removes space in case user key in "plan to watch"
+        status = status.toUpperCase().trim();
+        //find match pattern similar to "plan-to-watch" for example, user key in "plan to watch"
         if (status.matches(PATTERN)) {
             return true;
         }
-        status = status.toUpperCase().trim();
         return status.equals(COMPLETED.name()) || status.equals(WATCHING.name())
             || status.equals(PLANTOWATCH.name());
     }
