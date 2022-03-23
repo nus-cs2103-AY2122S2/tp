@@ -29,15 +29,11 @@ public class TransactionDate extends TransactionField {
      *
      * @param  transactionDate A valid due date.
      */
-    public TransactionDate(String transactionDate) throws ParseException {
+    public TransactionDate(String transactionDate) {
         super(PREFIX);
         requireNonNull(transactionDate);
         transactionDate = transactionDate.trim();
-        try {
-            checkArgument(DueDate.isValid(transactionDate), MESSAGE_CONSTRAINTS);
-        } catch (Exception e) {
-            throw new ParseException(MESSAGE_CONSTRAINTS);
-        }
+        checkArgument(DueDate.isValid(transactionDate), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(transactionDate);
     }
 
@@ -45,6 +41,8 @@ public class TransactionDate extends TransactionField {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValid(String str) {
+        requireNonNull(str);
+
         try {
             LocalDate.parse(str);
         } catch (DateTimeParseException e) {

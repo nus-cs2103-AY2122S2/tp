@@ -1,10 +1,9 @@
 package seedu.address.model.transaction;
 
-import com.sun.nio.sctp.IllegalReceiveException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class AmountTest {
 
@@ -46,7 +45,12 @@ public class AmountTest {
         assertTrue(Amount.isValid("45"));
         assertTrue(Amount.isValid("2.33"));
         assertTrue(Amount.isValid("2.33f"));
-        assertTrue(Amount.isValid("0.0000000000000000000000000000000000000001"));
+        assertTrue(Amount.isValid("999999999999999999999999999999999999999999999"
+                + "999999999999999999999999999999999999999999999999999999999999999999999"
+                + "999999999999999999999999999999999999999999999999999999999999999999999"
+                + "9999999999999999999999999999999999999999999999999999999999999999999999"
+                + "9999999999999999999999999999999999999999999999999999999999999999999999"
+                + "99999999999999999999999999999999.999"));
         assertTrue(Amount.isValid("0.00123"));
         assertTrue(Amount.isValid("2."));
     }
