@@ -258,6 +258,40 @@ Membership details will be created by users, user can then assign an existing me
   * Pros: Easy to implement
   * Cons: Harder to manage individual memberships, functions similar to a tag, but with extra variables.
 
+### \[Proposed\] Transaction functionality
+
+#### Proposed Implementation
+The proposed Transaction Functionality will allow users to store a transaction and assign it to a client. 
+User will have to specify the client the transaction will be assigned to, and input all the transaction's attributes.
+
+The current implementation of `Transaction` class is similar to Person class. Every field/attribute of transaction needs to 
+extend from the `TransactionField` class. The `Transaction` class will have a list of `TransactionField`s in which all of it's 
+fields must be registered in the `TransactionFieldRegistry`. Each field is either a required field or an optional field. 
+
+Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and `Note`.
+
+#### Design considerations:
+
+**Aspect: How it executes:**
+
+* **Alternative 1:** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`. 
+    Everytime a user create a transaction, a new instance of transaction will be added to the list and a person/client
+  specified by it's unique identifier (`Email`) will be referenced by this transaction. To list all of the transactions 
+    of a particular person, the `FilteredList` should be updated to only contain `Transaction`
+    with a reference to the person's id. 
+    * Pros: Consistent design with the Person class.
+    * Cons: Have to handle cases when a user is updated/removed. The input specified by the users 
+    corresponds to the index of the displayed clients/users. Hence we need to retrieve the client's attributes 
+    before initializing the Transaction object.
+
+
+* **Alternative 2 (current implementation):** Every person object has a list of transactions which will be
+    initialized with an empty list. Each time a user add a transaction, the object will be 
+    added into the specified Person's Transaction List.
+    * Pros: Easy to implement
+    * Cons: Lower abstraction especially when displaying the transaction to the UI. Inconsistent design
+    in comparison to the `Person` class.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -298,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | business owner                                       | edit a client’s information                | keep my client’s information updated.                                   |
 | `* * *`  | business owner                                       | delete a client information  | remove those who are no longer customers. |
 | `* *`    | business owner                                       | find a client based on keywords   | easily find a specific client or group of clients.                |
-
+ | `* * *` | business owner                                 | Store a transaction of a particular client | easily keep track of unpaid transactions |
 *{More to be added}*
 
 ### Use cases
