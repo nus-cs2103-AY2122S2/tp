@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.ManualMessages;
-
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
