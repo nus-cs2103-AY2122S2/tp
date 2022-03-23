@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.trackermon.model.show.Show;
 
-
 /**
  * An UI component that displays information of a {@code Show}.
  */
