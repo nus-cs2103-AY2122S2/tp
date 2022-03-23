@@ -9,8 +9,10 @@ public enum Status {
     public static final String MESSAGE_CONSTRAINTS =
             "Status should only be completed or watching or plan to watch!";
 
-    private final String status;
     private static final String PATTERN = "PLAN.*TO.*WATCH";
+
+    private final String status;
+
 
     Status(String status) {
         this.status = status;
