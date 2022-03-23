@@ -1,11 +1,9 @@
 package seedu.address.model.property;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 
 class PropertyToSellTest {
 
@@ -17,10 +15,6 @@ class PropertyToSellTest {
     private PriceRange priceRangeStub2 = new PriceRange(0, 100);
     private PropertyToSell toSell2 = new PropertyToSell(houseStub2, priceRangeStub2, "postal 533333");
 
-    PropertyToSellTest() throws IllegalValueException {
-        assertThrows(IllegalValueException.class, () -> new PropertyToSell(houseStub1, new PriceRange(10, 9),
-            "postal 533333"));
-    }
 
     @Test
     public void equalsTest() {
