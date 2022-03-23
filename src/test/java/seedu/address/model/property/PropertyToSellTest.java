@@ -24,11 +24,6 @@ class PropertyToSellTest {
 
     @Test
     public void equalsTest() {
-        System.out.println(toSell1.getSellRange().equals(toSell2.getSellRange()));
-
-        System.out.println(toSell1.getHouse().equals(toSell2.getHouse()));
-
-        System.out.println(toSell2.getAddress().equals(toSell2.getAddress()));
         assertTrue(toSell1.equals(toSell2));
         assertTrue(toSell2.equals(toSell1));
     }

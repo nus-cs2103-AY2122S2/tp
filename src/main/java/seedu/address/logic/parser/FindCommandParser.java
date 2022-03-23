@@ -66,7 +66,6 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand findWithPrefix(String prefix, String[] keywords) throws ParseException {
         switch(prefix) {
         case "n/":
-            System.out.println("1");
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
             // Fallthrough
         case "p/":
