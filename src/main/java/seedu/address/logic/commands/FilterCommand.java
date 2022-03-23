@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 
@@ -21,10 +22,11 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who are of the specified health "
-            + "status (case-insensitive) and/or faculty (case-insensitive) and displays "
-            + "them as a list with index numbers.\n"
-            + "Parameters: " + PREFIX_COVID_STATUS + "[COVID STATUS] " + PREFIX_FACULTY + "[FACULTY]"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_COVID_STATUS + " positive " + PREFIX_FACULTY + "soc";
+            + "status, faculty, and/or block (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: " + PREFIX_COVID_STATUS + "[COVID STATUS] " + PREFIX_FACULTY + "[FACULTY] "
+            + PREFIX_BLOCK + "[BLOCK]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COVID_STATUS + "positive " + PREFIX_FACULTY + "soc "
+            + PREFIX_BLOCK + "e";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
