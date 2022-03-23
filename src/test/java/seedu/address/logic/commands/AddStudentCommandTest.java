@@ -204,7 +204,7 @@ public class AddStudentCommandTest {
 
         @Override
         public void updateAssignment(Index studentId, Index lessonId) {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 

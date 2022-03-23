@@ -56,6 +56,51 @@ This section describes some noteworthy details on how certain features are imple
 
 TODO
 
+### Assign student to lesson
+
+The feature assigns a `Student` to a `Lesson`. The `AssignCommand` class 
+extends the `Command` and overwrites the `Command#execute()` method.
+
+Using the `Model` object passed in as an argument of the `AssignCommand#execute()`
+method, the following methods are invoked in the `AssignCommand#execute()` method:
+* `Model#updateAssignment()`
+    * adds `Student` to the `enrolledStudents` attribute `Lesson`
+    * adds `Lesson` to the `enrolledLessons` attribute of the `Student`
+* `Model#setSelectedStudent()` - sets the `selectedStudent` attribute of `Model` to
+the `Student` that is being assigned. This is done to display the `Student` details
+in the `MainWindow#InfoPanel`.
+
+
+The `AssignCommand#execute()` method returns a `CommandResult` upon a
+successful assignment.
+
+
+Given below is an example usage scenario on how the assign command works.
+
+####Step 1: The user launches the application and executes the following
+* `addlesson -n Sec 2 Math...` which adds a `Lesson` named "Sec 2 Math".
+* `addstudent -n David...` which adds a `Student` named "David".
+
+![](../src/main/resources/images/AssignState0-Initial_state.png)
+
+#### Step 2: The user executes the following to find the respective IDs of the `Student` and `Lesson`.
+* `listlessons` command to see that the `Lesson` named "Sec 2 Math" has a `LESSON_ID` of 1.
+* `liststudents` command to see that the `Student` named "David" has a `STUDENT_ID` of 1.
+
+#### Step 3: The user executes the command `assign -s 1 -l 1`. The command does the following:
+* adds `Student` "David" to the `enrolledStudents` attribute of the `Lesson` "Sec 2 Math".
+* adds `Lesson` "Sec 2 Math" to the `enrolledLessons` attribute of the `Student` "David".
+
+![](../src/main/resources/images/AssignState1-Final_state.png)
+
+The following sequence diagram shows how the assign operation works.
+
+![](../src/main/resources/images/AssignSequenceDiagram.png)
+
+> **Note**: The lifeline for AssignCommandParser should end at the destroy marker (X) but due to a limitation of 
+> PlantUML, the lifeline reaches the end of diagram.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
