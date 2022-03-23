@@ -55,8 +55,8 @@
 
 .tab {
     -fx-background-color: #1d1d1d;
-    -fx-background-radius: 10 10 0 0, 9 9 0 0, 8 8 0 0;
-    -fx-border-radius: 10 10 0 0, 9 9 0 0, 8 8 0 0;
+    -fx-background-radius: 7 7 0 0;
+    -fx-border-radius: 7 7 0 0;
     -fx-border-color: white;
     -fx-border-style: solid solid none solid;
 }
@@ -65,10 +65,10 @@
 }
 .tab:selected {
     -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-radius: 10 10 0 0, 9 9 0 0, 8 8 0 0;
+    -fx-border-radius: 7 7 0 0;
 }
 .tab:selected .focus-indicator {
-    -fx-border-radius: 9 9 0 0, 8 8 0 0, 7 7 0 0;
+    -fx-border-radius: 6 6 0 0;
 }
 
 .table-view {
