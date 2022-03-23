@@ -39,9 +39,14 @@ public class PresentAttendanceCommand extends Command {
             + PREFIX_PICKUP + "09:15 "
             + PREFIX_DROPOFF + "18:00";
 
-    public static final String MESSAGE_PRESENT_ATTENDANCE_SUCCESS = "Successfully marked %1$s as present on %2$s!";
+    public static final String MESSAGE_PRESENT_ATTENDANCE_SUCCESS =
+        "Successfully marked %1$s as present on %2$s!\n"
+        + "New entry:\n"
+        + "%3$s";
     public static final String MESSAGE_PRESENT_ATTENDANCE_FAILURE =
-            "Seems like you have already marked %1$s as present on %2$s!";
+        "Seems like you have already marked %1$s as present on %2$s!\n"
+        + "Existing entry:\n"
+        + "%3$s";
 
     private final Index index;
     private final PresentAttendanceDescriptor presentAttendanceDescriptor;
@@ -78,8 +83,7 @@ public class PresentAttendanceCommand extends Command {
                 pickUpTime, dropOffTime);
 
         if (targetAttendanceHashMap.containsAttendance(presentAttendance)) {
-            throw new CommandException(String.format(MESSAGE_PRESENT_ATTENDANCE_FAILURE, petToEdit.getName(),
-                    attendanceDateString));
+            throw new CommandException(generateFailureMessage(petToEdit, attendanceDateString, presentAttendance));
         }
 
         if (!presentAttendance.isValidTimings()) {
@@ -96,21 +100,35 @@ public class PresentAttendanceCommand extends Command {
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
-        return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString));
+        return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString, presentAttendance));
     }
 
     /**
      * Generates a command execution success message based on the
      * {@code petToEdit}.
      */
-    private String generateSuccessMessage(Pet petToEdit, String attendanceDate) {
-        return String.format(MESSAGE_PRESENT_ATTENDANCE_SUCCESS, petToEdit.getName(), attendanceDate);
+    private String generateSuccessMessage(Pet petToEdit, String attendanceDate, PresentAttendanceEntry entry) {
+        return String.format(
+            MESSAGE_PRESENT_ATTENDANCE_SUCCESS, petToEdit.getName(), attendanceDate, entry.toString());
+    }
+
+    /**
+     * Generates a command execution failure message based on the
+     * {@code petToEdit}.
+     */
+    private String generateFailureMessage(Pet petToEdit, String attendanceDate, PresentAttendanceEntry entry) {
+        return String.format(
+            MESSAGE_PRESENT_ATTENDANCE_FAILURE, petToEdit.getName(), attendanceDate, entry.toString());
     }
 
     /**
      * Stores the present attendance details to edit the pet with.
      */
     public static class PresentAttendanceDescriptor {
+        private static final String PICKUP_STRING = "Pick-up: %1$s";
+        private static final String DROPOFF_STRING = "Drop-off: %1$s";
+        private static final String NO_PICKUP_DROPOFF_STRING = "No pick-up and drop-off times specified.";
+
         private LocalDate attendanceDate;
         private LocalTime pickUpTime;
         private LocalTime dropOffTime;
@@ -140,6 +158,22 @@ public class PresentAttendanceCommand extends Command {
 
         public Optional<LocalTime> getDropOffTime() {
             return Optional.ofNullable(dropOffTime);
+        }
+
+        private boolean hasPickUpDropOff() {
+            return getPickUpTime().isPresent() && getDropOffTime().isPresent();
+        }
+
+        public String toString() {
+            String date = getAttendanceDate().format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
+
+            if (hasPickUpDropOff()) {
+                String pickUp = String.format(PICKUP_STRING, pickUpTime.toString());
+                String dropOff = String.format(DROPOFF_STRING, dropOffTime.toString());
+                return "Present | " + date + " | " + pickUp + " | " + dropOff;
+            }
+
+            return "Present | " + date + " | " + NO_PICKUP_DROPOFF_STRING;
         }
     }
 

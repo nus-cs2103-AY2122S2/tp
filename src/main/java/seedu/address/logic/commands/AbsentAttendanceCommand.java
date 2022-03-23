@@ -30,9 +30,14 @@ public class AbsentAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "15-03-2022 ";
 
-    public static final String MESSAGE_ABSENT_ATTENDANCE_SUCCESS = "Successfully marked %1$s as absent on %2$s!";
+    public static final String MESSAGE_ABSENT_ATTENDANCE_SUCCESS =
+        "Successfully marked %1$s as absent on %2$s!\n"
+        + "New entry:\n"
+        + "%3$s";
     public static final String MESSAGE_ABSENT_ATTENDANCE_FAILURE =
-            "Seems like you have already marked %1$s as absent on %2$s!";
+        "Seems like you have already marked %1$s as absent on %2$s!\n"
+        + "Existing entry:\n"
+        + "%3$s";
 
     private final Index index;
     private final AbsentAttendanceDescriptor absentAttendanceDescriptor;
@@ -64,8 +69,7 @@ public class AbsentAttendanceCommand extends Command {
         AbsentAttendanceEntry absentAttendance = new AbsentAttendanceEntry(attendanceDate);
 
         if (targetAttendanceHashMap.containsAttendance(absentAttendance)) {
-            throw new CommandException(String.format(MESSAGE_ABSENT_ATTENDANCE_FAILURE, petToEdit.getName(),
-                    attendanceDateString));
+            throw new CommandException(generateFailureMessage(petToEdit, attendanceDateString, absentAttendance));
         }
 
         targetAttendanceHashMap.addAttendance(absentAttendance);
@@ -78,7 +82,7 @@ public class AbsentAttendanceCommand extends Command {
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
-        return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString));
+        return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString, absentAttendance));
     }
 
     /**
@@ -104,8 +108,18 @@ public class AbsentAttendanceCommand extends Command {
      * Generates a command execution success message based on the
      * {@code petToEdit}.
      */
-    private String generateSuccessMessage(Pet petToEdit, String attendanceDate) {
-        return String.format(MESSAGE_ABSENT_ATTENDANCE_SUCCESS, petToEdit.getName(), attendanceDate);
+    private String generateSuccessMessage(Pet petToEdit, String attendanceDate, AbsentAttendanceEntry entry) {
+        return String.format(
+            MESSAGE_ABSENT_ATTENDANCE_SUCCESS, petToEdit.getName(), attendanceDate, entry.toString());
+    }
+
+    /**
+     * Generates a command execution failure message based on the
+     * {@code petToEdit}.
+     */
+    private String generateFailureMessage(Pet petToEdit, String attendanceDate, AbsentAttendanceEntry entry) {
+        return String.format(
+            MESSAGE_ABSENT_ATTENDANCE_FAILURE, petToEdit.getName(), attendanceDate, entry.toString());
     }
 
     @Override

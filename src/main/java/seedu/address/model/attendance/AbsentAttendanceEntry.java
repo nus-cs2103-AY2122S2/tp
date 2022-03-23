@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import seedu.address.commons.util.AttendanceUtil;
+
 /**
  * Represents an absent attendance entry of a pet.
  *  * Guarantees: immutable; entry is valid.
@@ -48,5 +50,11 @@ public class AbsentAttendanceEntry extends AttendanceEntry {
         AbsentAttendanceEntry otherAttendanceEntry = (AbsentAttendanceEntry) other;
         return this.getAttendanceDate().equals(otherAttendanceEntry.getAttendanceDate())
                 && this.getIsPresent().equals(otherAttendanceEntry.getIsPresent()); // state check
+    }
+
+    @Override
+    public String toString() {
+        String date = getAttendanceDate().format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
+        return "Absent | " + date;
     }
 }

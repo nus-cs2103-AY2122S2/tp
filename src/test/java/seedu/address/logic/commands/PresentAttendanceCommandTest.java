@@ -34,23 +34,24 @@ public class PresentAttendanceCommandTest {
     public void execute_markPresentUnfilteredList_success() {
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet petToMarkPresent = new PetBuilder(firstPet)
-                .withPresentAttendanceEntry(DATE_STUB, PICKUP_TIME_STUB, DROPOFF_TIME_STUB)
-                .build();
+            .withPresentAttendanceEntry(DATE_STUB, PICKUP_TIME_STUB, DROPOFF_TIME_STUB)
+            .build();
 
         PresentAttendanceDescriptor presentAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
-                .withDate(DATE_STUB)
-                .withPickUpTime(PICKUP_TIME_STUB)
-                .withDropOffTime(DROPOFF_TIME_STUB)
-                .build();
+            .withDate(DATE_STUB)
+            .withPickUpTime(PICKUP_TIME_STUB)
+            .withDropOffTime(DROPOFF_TIME_STUB)
+            .build();
 
         PresentAttendanceCommand presentAttendanceCommand = new PresentAttendanceCommand(
-                INDEX_FIRST_PET,
+            INDEX_FIRST_PET,
             presentAttendanceDescriptor
         );
 
         String expectedMessage = String.format(
-                PresentAttendanceCommand.MESSAGE_PRESENT_ATTENDANCE_SUCCESS,
-                petToMarkPresent.getName(), FAILURE_DATE_STUB);
+            PresentAttendanceCommand.MESSAGE_PRESENT_ATTENDANCE_SUCCESS,
+            petToMarkPresent.getName(),
+            FAILURE_DATE_STUB, presentAttendanceDescriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
@@ -64,23 +65,25 @@ public class PresentAttendanceCommandTest {
 
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet petToMarkPresent = new PetBuilder(firstPet)
-                .withPresentAttendanceEntry(DATE_STUB, PICKUP_TIME_STUB, DROPOFF_TIME_STUB)
-                .build();
+            .withPresentAttendanceEntry(DATE_STUB, PICKUP_TIME_STUB, DROPOFF_TIME_STUB)
+            .build();
 
         PresentAttendanceDescriptor presentAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
-                .withDate(DATE_STUB)
-                .withPickUpTime(PICKUP_TIME_STUB)
-                .withDropOffTime(DROPOFF_TIME_STUB)
-                .build();
+            .withDate(DATE_STUB)
+            .withPickUpTime(PICKUP_TIME_STUB)
+            .withDropOffTime(DROPOFF_TIME_STUB)
+            .build();
 
         PresentAttendanceCommand presentAttendanceCommand = new PresentAttendanceCommand(
-                INDEX_FIRST_PET,
+            INDEX_FIRST_PET,
             presentAttendanceDescriptor
         );
 
         String expectedMessage = String.format(
-                PresentAttendanceCommand.MESSAGE_PRESENT_ATTENDANCE_SUCCESS,
-                petToMarkPresent.getName(), FAILURE_DATE_STUB);
+            PresentAttendanceCommand.MESSAGE_PRESENT_ATTENDANCE_SUCCESS,
+            petToMarkPresent.getName(),
+            FAILURE_DATE_STUB,
+            presentAttendanceDescriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
@@ -93,20 +96,21 @@ public class PresentAttendanceCommandTest {
         Pet secondPet = model.getFilteredPetList().get(INDEX_SECOND_PET.getZeroBased());
 
         PresentAttendanceDescriptor presentAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
-                .withDate(DATE_STUB)
-                .withPickUpTime(PICKUP_TIME_STUB)
-                .withDropOffTime(DROPOFF_TIME_STUB)
-                .build();
+            .withDate(DATE_STUB)
+            .withPickUpTime(PICKUP_TIME_STUB)
+            .withDropOffTime(DROPOFF_TIME_STUB)
+            .build();
 
         PresentAttendanceCommand presentAttendanceCommand = new PresentAttendanceCommand(
-                INDEX_SECOND_PET,
+            INDEX_SECOND_PET,
             presentAttendanceDescriptor
         );
 
         String failureMessage = String.format(
-                PresentAttendanceCommand.MESSAGE_PRESENT_ATTENDANCE_FAILURE,
-                secondPet.getName(),
-                FAILURE_DATE_STUB);
+            PresentAttendanceCommand.MESSAGE_PRESENT_ATTENDANCE_FAILURE,
+            secondPet.getName(),
+            FAILURE_DATE_STUB,
+            presentAttendanceDescriptor);
 
         assertCommandFailure(presentAttendanceCommand, model, failureMessage);
     }
