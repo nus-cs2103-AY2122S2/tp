@@ -70,6 +70,14 @@ public class Person {
         return status.toString();
     }
     /**
+     * Returns the block as a String instead of type Block.
+     *
+     * @return A string of the block
+     */
+    public String getBlockAsString() {
+        return block.toString();
+    }
+    /**
      * Predicate to check if the status of Person object matches the given CovidStatus.
      *
      * @param status given status to check if matched by status property in Person
