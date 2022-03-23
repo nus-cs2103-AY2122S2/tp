@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private EmailWindow emailWindow;
     private HelpWindow helpWindow;
 
     @FXML
@@ -123,7 +124,6 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -155,6 +155,31 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the email window or opens an updated window it if it's already opened.
+     */
+    @FXML
+    public void handleEmailWindow() {
+        if (emailWindow == null) {
+            createEmailWindow();
+        }
+
+        if (!emailWindow.isShowing()) {
+            createEmailWindow();
+        } else {
+            emailWindow.hide();
+            createEmailWindow();
+        }
+    }
+
+    /**
+     * Instantiates an EmailWindow and shows it.
+     */
+    public void createEmailWindow() {
+        emailWindow = new EmailWindow(logic.getFilteredPersonList());
+        emailWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -168,6 +193,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        emailWindow.hide();
         primaryStage.hide();
     }
 
