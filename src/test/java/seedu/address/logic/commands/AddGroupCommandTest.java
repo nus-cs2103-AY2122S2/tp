@@ -15,10 +15,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.ModelStub;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddGroupCommand}.
@@ -48,7 +46,8 @@ public class AddGroupCommandTest {
         AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
         ModelStub modelStub = new AddGroupCommandTest.ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () -> addGroupCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP,
+                () -> addGroupCommand.execute(modelStub));
     }
 
     @Test
@@ -76,7 +75,7 @@ public class AddGroupCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single group.
      */
     private class ModelStubWithGroup extends ModelStub {
         private final Group group;
