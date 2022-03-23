@@ -14,14 +14,16 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Task;
 
 /**
- * Displays the completion status of all students that are assigned to a particular task.
+ * Displays the completion status of all students who are taking a particular module
+ * and are assigned to a particular task.
  */
 public class ProgressCommand extends Command {
 
     public static final String COMMAND_WORD = "progress";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the completion status of all students that are assigned to a particular task. \n"
+            + ": Displays the completion status of all students who are taking a particular module "
+            + "and are assigned to a particular task. \n"
             + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE "
             + PREFIX_TASK_NAME + "TASK_NAME \n"

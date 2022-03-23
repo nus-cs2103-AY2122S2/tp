@@ -74,6 +74,11 @@ public class ManualMessages {
             + "Format : assign i/STUDENT_ID tn/TASK_NAME \n"
             + "Example: assign i/A6942069R tn/Watch Lecture";
 
+    public static final String MANUAL_MESSAGE_PROGRESS_COMMAND = "Displays the completion status of all students "
+            + "who are taking a particular module and are assigned to a particular task. \n"
+            + "Format : progress m/MODULE_CODE tn/TASK_NAME \n"
+            + "Example: progress m/CS2100 tn/Assignment 1";
+
     public static final String MANUAL_MESSAGE_ALL_COMMANDS = "Here are all the commands: \n"
             + "1. add \n"
             + "2. delete \n"
@@ -86,9 +91,10 @@ public class ManualMessages {
             + "9. archive \n"
             + "10. list \n"
             + "11. assign \n"
-            + "12. manual \n"
-            + "13. help \n"
-            + "14. exit \n"
+            + "12. progress \n"
+            + "13. manual \n"
+            + "14. help \n"
+            + "15. exit \n"
             + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";

@@ -19,11 +19,11 @@ import seedu.address.model.person.Task;
 public class ProgressCommandParser implements Parser<ProgressCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AssignCommand
-     * and returns an AssignCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ProgressCommand
+     * and returns an ProgressCommand object for execution.
      *
      * @param args String to parse.
-     * @return AssignCommand to execute.
+     * @return ProgressCommand to execute.
      * @throws ParseException if the user input does not conform the expected format.
      */
     public ProgressCommand parse(String args) throws ParseException {
