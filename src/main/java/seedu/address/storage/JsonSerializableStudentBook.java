@@ -16,7 +16,7 @@ import seedu.address.model.student.Student;
 /**
  * An Immutable StudentBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "studentbook")
 class JsonSerializableStudentBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
@@ -42,7 +42,7 @@ class JsonSerializableStudentBook {
     }
 
     /**
-     * Converts this address book into the model's {@code StudentBook} object.
+     * Converts this student book into the model's {@code StudentBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

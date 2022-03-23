@@ -15,7 +15,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the student book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -31,12 +31,12 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given studentBook and userPrefs.
      */
-    public ModelManager(ReadOnlyStudentBook addressBook, ReadOnlyLessonBook lessonBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyStudentBook studentBook, ReadOnlyLessonBook lessonBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(studentBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with student book: " + studentBook + " and user prefs " + userPrefs);
 
-        this.studentBook = new StudentBook(addressBook);
+        this.studentBook = new StudentBook(studentBook);
         this.lessonBook = new LessonBook(lessonBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
@@ -44,8 +44,8 @@ public class ModelManager implements Model {
     }
 
     // TODO: delete this constructor after updating testcases (creating TypicalLessons class etc)
-    public ModelManager(ReadOnlyStudentBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        this(addressBook, new LessonBook(), userPrefs);
+    public ModelManager(ReadOnlyStudentBook studentBook, ReadOnlyUserPrefs userPrefs) {
+        this(studentBook, new LessonBook(), userPrefs);
     }
 
     public ModelManager() {
@@ -77,25 +77,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getStudentBookFilePath() {
+        return userPrefs.getStudentBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setStudentBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setStudentBookFilePath(addressBookFilePath);
     }
 
     //=========== StudentBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyStudentBook addressBook) {
+    public void setStudentBook(ReadOnlyStudentBook addressBook) {
         this.studentBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyStudentBook getAddressBook() {
+    public ReadOnlyStudentBook getStudentBook() {
         return studentBook;
     }
 

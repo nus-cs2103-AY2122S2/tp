@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an student book
  */
 public interface ReadOnlyStudentBook {
 

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 /**
- * Represents a temporary lesson in the address book.
+ * Represents a temporary lesson in the student book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class TemporaryLesson extends Lesson {
