@@ -193,11 +193,6 @@ public class MainWindow extends UiPart<Stage> {
      * Changes the selected tab from the specified {@code contentType}.
      */
     private void changeTabFocus(GuiListContentType contentType) {
-        if (contentType == null) {
-            tabbedPanelPlaceholder.getTabs().clear();
-            return;
-        }
-
         if (contentType.equals(GuiListContentType.UNCHANGED) || contentType.equals(currentListType)) {
             return;
         }
