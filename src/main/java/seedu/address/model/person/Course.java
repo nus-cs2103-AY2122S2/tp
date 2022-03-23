@@ -55,5 +55,4 @@ public class Course {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

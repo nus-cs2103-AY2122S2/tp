@@ -108,7 +108,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -127,7 +128,8 @@ class JsonAdaptedPerson {
         final Course modelCourse = new Course(course);
 
         if (matricCard == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MatricCard.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MatricCard.class.getSimpleName()));
         }
         if (!MatricCard.isValidMatricCard(matricCard)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -136,7 +138,8 @@ class JsonAdaptedPerson {
         final MatricCard modelMatricCard = new MatricCard(matricCard);
 
         if (telegram == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Telegram.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Telegram.class.getSimpleName()));
         }
         if (!Telegram.isValidTelegramId(telegram)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -144,7 +147,8 @@ class JsonAdaptedPerson {
 
         final Telegram modelTelegram = new Telegram(telegram);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCourse, modelMatricCard, modelTelegram);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCourse,
+                modelMatricCard, modelTelegram);
     }
 
 }

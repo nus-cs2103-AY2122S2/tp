@@ -55,5 +55,4 @@ public class MatricCard {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

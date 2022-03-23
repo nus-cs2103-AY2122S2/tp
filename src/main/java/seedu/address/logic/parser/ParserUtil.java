@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -133,9 +132,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code courseName} is invalid.
      */
     public static Course parseCourse(String courseName) throws ParseException {
-//        if(isNull(courseName)) {
-//            return new Course("");
-//        }
         requireNonNull(courseName);
         String trimmedCourseName = courseName.trim();
         if (!Course.isValidCourse(trimmedCourseName)) {
@@ -151,9 +147,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code cardNumber} is invalid.
      */
     public static MatricCard parseMatricCard(String cardNumber) throws ParseException {
-//        if(isNull(cardNumber)) {
-//            return new MatricCard("");
-//        }
         requireNonNull(cardNumber);
         String trimmedMatricCard = cardNumber.trim();
         if (!MatricCard.isValidMatricCard(trimmedMatricCard)) {
@@ -169,9 +162,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code id} is invalid.
      */
     public static Telegram parseTelegram(String id) throws ParseException {
-//        if(isNull(id)) {
-//            return new Telegram("");
-//        }
         requireNonNull(id);
         String trimmedTelegram = id.trim();
         if (!Telegram.isValidTelegramId(trimmedTelegram)) {
