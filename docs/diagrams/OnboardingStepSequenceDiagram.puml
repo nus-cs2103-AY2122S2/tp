@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":OnboardingWindow" as OnboardingWindow UI_COLOR
+end box
+
+box OnboardingStoryManager LOGIC_COLOR_T1
+participant ":OnboardingStoryManager" as OnboardingStoryManager LOGIC_COLOR
+participant ":OnboardingStory" as OnboardingStory LOGIC_COLOR
+end box
+
+[-> OnboardingWindow : mouseClick()
+activate OnboardingWindow
+
+OnboardingWindow -> OnboardingStoryManager : handleMouseClick()
+activate OnboardingStoryManager
+
+OnboardingStoryManager -> OnboardingStory : getStep(currentIndex)
+activate OnboardingStory
+
+OnboardingStory --> OnboardingStoryManager : OnboardingStep
+deactivate OnboardingStory
+
+OnboardingStoryManager -> OnboardingStoryManager : stepForward()
+
+OnboardingStoryManager --> OnboardingWindow : OnboardingStep
+deactivate OnboardingStoryManager
+
+
+OnboardingWindow -> OnboardingWindow : processStep(OnboardingStep)
+
+[<--OnboardingWindow
+deactivate OnboardingWindow
+@enduml

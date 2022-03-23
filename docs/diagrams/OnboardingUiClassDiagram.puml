@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class OnboardingWindow
+Class ResultDisplay
+Class PersonListPanel
+Class PersonCard
+Class Overlay
+Class OnboardingCommandBox
+Class OnboardingInstruction
+}
+
+OnboardingWindow *-down-> "1" ResultDisplay
+OnboardingWindow *-down-> "1" PersonListPanel
+OnboardingWindow *-down-> "1" OnboardingCommandBox
+OnboardingWindow *-down-> "1" OnboardingInstruction
+OnboardingWindow *-down-> "1" Overlay
+
+PersonListPanel -down-> "*" PersonCard
+
+ResultDisplay --|> UiPart
+PersonListPanel --|> UiPart
+OnboardingCommandBox --|> UiPart
+OnboardingInstruction --|> UiPart
+Overlay --|> UiPart
+PersonCard -right-|> UiPart
+OnboardingWindow -[hidden]-|> UiPart
+@enduml
