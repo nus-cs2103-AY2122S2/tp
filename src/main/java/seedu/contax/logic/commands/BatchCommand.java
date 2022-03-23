@@ -3,8 +3,10 @@ package seedu.contax.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_END_WITH;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_START_WITH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
+import seedu.contax.logic.parser.ArgumentMultimap;
 import seedu.contax.logic.parser.ParserUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
@@ -39,7 +42,7 @@ public class BatchCommand extends Command {
 
     private final String commandInput;
     private final SearchType searchType;
-    private final String userInput;
+    private final ArgumentMultimap userInput;
 
     /**
      * Creates an BatchCommand base on specified {@code commandInput} {@code searchType} and {@code userInput}.
@@ -48,22 +51,35 @@ public class BatchCommand extends Command {
      * @param searchType                search type of field apply matcher
      * @param userInput                 regex provided by user
      */
-    public BatchCommand(String commandInput, SearchType searchType, String userInput) {
+    public BatchCommand(String commandInput, SearchType searchType, ArgumentMultimap userInput) {
         requireNonNull(commandInput);
         requireNonNull(searchType);
         requireNonNull(userInput);
         this.commandInput = commandInput;
         this.searchType = searchType;
-        this.userInput = userInput.trim();
+        this.userInput = userInput;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Index> indexList = matchInputStringToIndex(model, searchType, userInput);
+        String userValue = "";
+        List<Index> indexList = new ArrayList<>();
+        if (userInput.getValue(PREFIX_EQUALS).isPresent()) {
+            userValue = userInput.getValue(PREFIX_EQUALS).get();
+            indexList = matchInputStringToIndex(model, searchType, userValue, "=");
+        } else if (userInput.getValue(PREFIX_START_WITH).isPresent()) {
+            userValue = userInput.getValue(PREFIX_START_WITH).get();
+            indexList = matchInputStringToIndex(model, searchType, userValue, "^");
+        } else if (userInput.getValue(PREFIX_END_WITH).isPresent()) {
+            userValue = userInput.getValue(PREFIX_END_WITH).get();
+            indexList = matchInputStringToIndex(model, searchType, userValue, "$");
+        } else {
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchCommand.MESSAGE_USAGE));
+        }
         if (indexList.size() == 0) {
             return new CommandResult(COMMAND_WORD
-                    + ": No result matching \"" + userInput + "\"");
+                    + ": No result matching \"" + userValue + "\"");
         }
         List<CommandResult> commandResultList = new ArrayList<>();
         for (Index index: indexList) {
@@ -84,7 +100,7 @@ public class BatchCommand extends Command {
         return new CommandResult(resultOutput.toString());
     }
 
-    private List<Index> matchInputStringToIndex(Model model, SearchType searchType, String userInput)
+    private List<Index> matchInputStringToIndex(Model model, SearchType searchType, String userInput, String matchType)
             throws CommandException {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
@@ -107,10 +123,15 @@ public class BatchCommand extends Command {
                 targetField = person.getName().toString();
                 break;
             }
-            if (!targetField.isEmpty() && targetField.equals(userInput)) {
-                indexList.add(index);
+            if (!targetField.isEmpty()) {
+                if (matchType.equals("=") && targetField.equals(userInput)) {
+                    indexList.add(index);
+                } else if (matchType.equals("^") && targetField.startsWith(userInput)) {
+                    indexList.add(index);
+                } else if (matchType.equals("$") && targetField.endsWith(userInput)) {
+                    indexList.add(index);
+                }
             }
-
         }
         return indexList;
     }
@@ -121,6 +142,11 @@ public class BatchCommand extends Command {
                 || (other instanceof BatchCommand // instanceof handles nulls
                 && commandInput.equals(((BatchCommand) other).commandInput)
                 && searchType.equals(((BatchCommand) other).searchType)
-                && userInput.equals(((BatchCommand) other).userInput));
+                && userInput.getValue(PREFIX_EQUALS)
+                .equals(((BatchCommand) other).userInput.getValue(PREFIX_EQUALS))
+                && userInput.getValue(PREFIX_START_WITH)
+                .equals(((BatchCommand) other).userInput.getValue(PREFIX_START_WITH))
+                && userInput.getValue(PREFIX_END_WITH)
+                .equals(((BatchCommand) other).userInput.getValue(PREFIX_END_WITH)));
     }
 }
