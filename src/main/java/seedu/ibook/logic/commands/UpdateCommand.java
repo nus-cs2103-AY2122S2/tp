@@ -70,6 +70,7 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
+        model.prepareIBookForChanges();
         model.setProduct(productToUpdate, updatedProduct);
         model.updateProductFilters(PREDICATE_SHOW_ALL_PRODUCTS);
         model.saveIBookChanges();

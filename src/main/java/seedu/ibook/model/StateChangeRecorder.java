@@ -45,10 +45,13 @@ public class StateChangeRecorder {
         stateChanges = new ArrayList<>();
         curStateChange = INVALID_STATE_CHANGE;
 
-        getNewWorkspace();
+        prepareNewStateChange();
     }
 
-    private void getNewWorkspace() {
+    /**
+     * Gets a new workspace for recording next possible state change.
+     */
+    public void prepareNewStateChange() {
         forwardActionList = new ArrayList<>();
         reverseActionList = new ArrayList<>();
     }
@@ -62,15 +65,15 @@ public class StateChangeRecorder {
     }
 
     public List<Consumer<IBook>> getCurrentForwardActionList() {
-        return stateChanges.get(curStateChange).forwardActionList;
+        return forwardActionList;
     }
 
     public List<Consumer<IBook>> getCurrentReverseActionList() {
-        return stateChanges.get(curStateChange).reverseActionList;
+        return reverseActionList;
     }
 
     /**
-     * Save the changes made to iBook.
+     * Saves the changes made to iBook.
      */
     public void saveStateChange() {
         Collections.reverse(reverseActionList);
@@ -79,8 +82,6 @@ public class StateChangeRecorder {
         stateChanges.subList(curStateChange + LIST_OFFSET, stateChanges.size()).clear();
         stateChanges.add(nextStateChange);
         curStateChange++;
-
-        getNewWorkspace();
     }
 
     /**

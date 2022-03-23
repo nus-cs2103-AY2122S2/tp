@@ -118,6 +118,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void prepareIBookForChanges() {
+        reversibleIBook.prepareForChanges();
+    }
+
+    @Override
     public void saveIBookChanges() {
         reversibleIBook.saveChanges();
     }

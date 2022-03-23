@@ -24,6 +24,13 @@ public class ReversibleIBook extends IBook {
     }
 
     /**
+     * Prepares iBook for changes.
+     */
+    public void prepareForChanges() {
+        stateChangeRecorder.prepareNewStateChange();
+    }
+
+    /**
      * Saves the changes made to iBook.
      */
     public void saveChanges() {
@@ -102,12 +109,5 @@ public class ReversibleIBook extends IBook {
     @Override
     public String toString() {
         return "Reversible " + super.toString();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return super.equals(other)
-                && other instanceof ReversibleIBook
-                && this.stateChangeRecorder.equals(((ReversibleIBook) other).stateChangeRecorder);
     }
 }

@@ -107,6 +107,11 @@ public interface Model {
     ObservableList<AttributeFilter> getProductFilters();
 
     /**
+     * Prepares the iBook for changes.
+     */
+    void prepareIBookForChanges();
+
+    /**
      * Saves changes made to IBook.
      */
     void saveIBookChanges();
