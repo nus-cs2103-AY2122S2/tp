@@ -46,15 +46,15 @@ class JsonSerializableShowList {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public ShowList toModelType() throws IllegalValueException {
-        ShowList addressBook = new ShowList();
+        ShowList showList = new ShowList();
         for (JsonAdaptedShow jsonAdaptedShow : shows) {
             Show show = jsonAdaptedShow.toModelType();
-            if (addressBook.hasShow(show)) {
+            if (showList.hasShow(show)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SHOW);
             }
-            addressBook.addShow(show);
+            showList.addShow(show);
         }
-        return addressBook;
+        return showList;
     }
 
 }

@@ -3,7 +3,7 @@ package seedu.trackermon.model.show;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
-public class Name {
+public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -52,5 +52,9 @@ public class Name {
         return fullName.hashCode();
     }
 
+    @Override
+    public int compareTo(Name other) {
+        return this.fullName.compareTo(other.fullName);
+    }
 }
 

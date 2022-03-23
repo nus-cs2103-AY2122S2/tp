@@ -2,9 +2,11 @@ package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.model.Model;
-import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
+import seedu.trackermon.model.show.Show;
 
 /**
  * Finds and lists all shows in Trackermon whose name contains any of the argument keywords.
@@ -19,9 +21,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " hero kyojin academia";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Show> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(Predicate<Show> predicate) {
         this.predicate = predicate;
     }
 
@@ -30,7 +32,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredShowList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_SHOWS_LISTED_OVERVIEW, model.getFilteredShowList().size()));
+                String.format(Messages.MESSAGE_SHOWS_LISTED_OVERVIEW, model.getFilteredShowList().size()),
+                true);
     }
 
     @Override

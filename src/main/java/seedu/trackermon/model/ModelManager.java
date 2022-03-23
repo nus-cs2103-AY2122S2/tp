@@ -4,17 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.commons.core.LogsCenter;
 import seedu.trackermon.model.show.Show;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the show list data.
  */
 public class ModelManager implements Model {
 
@@ -23,6 +25,7 @@ public class ModelManager implements Model {
     private final ShowList showList;
     private final UserPrefs userPrefs;
     private final FilteredList<Show> filteredShows;
+    private final SortedList<Show> sortedShows;
 
     /**
      * Initializes a ModelManager with the given showList and userPrefs.
@@ -30,11 +33,12 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyShowList showList, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(showList, userPrefs);
 
-        logger.fine("Initializing with address book: " + showList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with show list: " + showList + " and user prefs " + userPrefs);
 
         this.showList = new ShowList(showList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredShows = new FilteredList<>(this.showList.getShows());
+        sortedShows = new SortedList<>(filteredShows);
     }
 
     public ModelManager() {
@@ -89,9 +93,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasShow(Show person) {
-        requireNonNull(person);
-        return showList.hasShow(person);
+    public boolean hasShow(Show show) {
+        requireNonNull(show);
+        return showList.hasShow(show);
     }
 
     @Override
@@ -100,9 +104,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addShow(Show person) {
-        showList.addShow(person);
+    public void addShow(Show show) {
+        showList.addShow(show);
         updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
+        updateSortedShowList(COMPARATOR_SHOW_ALL_SHOWS);
     }
 
     @Override
@@ -145,6 +150,22 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return showList.equals(other.showList)
                 && userPrefs.equals(other.userPrefs)
-                && filteredShows.equals(other.filteredShows);
+                && filteredShows.equals(other.filteredShows)
+                && sortedShows.equals(other.sortedShows);
     }
+
+    //=========== Sorted Show List Accessors =============================================================
+
+    @Override
+    public ObservableList<Show> getSortedShowList() {
+        return sortedShows;
+    }
+
+    @Override
+    public void updateSortedShowList(Comparator<Show> comparator) {
+        requireNonNull(comparator);
+        sortedShows.setComparator(comparator);
+        sortedShows.setComparator(COMPARATOR_SHOW_ALL_SHOWS);
+    }
+
 }
