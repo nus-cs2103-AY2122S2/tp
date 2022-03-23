@@ -532,6 +532,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC09 - Add a comment**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Comment of the show will be edited from Trackermon only if the user input matches the command format.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User requests to edit the comment of a specific show in the list.
+4.  Trackermon edits the comment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Trackermon shows an error message,  indicating the format for editing the comment of the show is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 3.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
