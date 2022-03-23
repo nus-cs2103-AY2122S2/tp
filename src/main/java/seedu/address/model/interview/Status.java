@@ -5,11 +5,8 @@ package seedu.address.model.interview;
  * Guarantees: is always initialized as "Pending" {@link #Status()}
  */
 public class Status {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Gender should be exactly one character and only M or F (case sensitive)";
 
-    public static final String VALIDATION_REGEX = "M|F";
-    public String value;
+    private String value;
 
     /**
      * Constructs a Status with default value of "Pending".
@@ -26,6 +23,9 @@ public class Status {
         value = "Failed";
     }
 
+    /**
+     * Marks an interview as accepted only if status is passed.
+     */
     public void markAsAccepted() {
         // Defensive programming to prevent acceptance before passing interview
         if (value != "Passed - Waiting for Applicant") {

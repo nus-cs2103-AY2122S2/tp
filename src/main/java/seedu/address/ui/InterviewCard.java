@@ -59,7 +59,7 @@ public class InterviewCard extends UiPart<Region> {
         name.setText(applicant.getName().fullName);
         interviewphone.setText(applicant.getPhone().value);
         interviewemail.setText(applicant.getEmail().value);
-        status.setText(interview.getStatus().value);
+        status.setText(interview.getStatus().toString());
     }
 
     @Override
