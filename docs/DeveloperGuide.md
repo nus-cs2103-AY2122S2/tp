@@ -199,7 +199,7 @@ The following activity diagram summarizes what happens when a user executes a de
 
 ### \[Proposed\] List feature
 
-The proposed add mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+The proposed list mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
 
 * `ListCommandParser#parse()` — Parses the command arguments.
 * `ListCommand#execute()` — Executes `ModelManager#updateFiltered<ENTITY_NAME>List()` with the predicate that matches the filtering criteria.
