@@ -102,11 +102,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasItem(Item item) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addItem(Product product, Item item) {
             throw new AssertionError("This method should not be called.");
         }

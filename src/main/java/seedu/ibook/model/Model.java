@@ -72,11 +72,6 @@ public interface Model {
     void addProduct(Product product);
 
     /**
-     * Returns true if an item with the same identity as {@code item} exists in the IBook.
-     */
-    boolean hasItem(Item item);
-
-    /**
      * Adds the given item to {@code product}.
      * {@code item} must not already exist in the IBook.
      */

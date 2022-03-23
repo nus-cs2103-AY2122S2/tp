@@ -121,13 +121,6 @@ public class ModelManager implements Model {
     //=========== Item ========================================================================================
 
     @Override
-    public boolean hasItem(Item item) {
-        requireNonNull(item);
-
-        return iBook.hasItem(item);
-    }
-
-    @Override
     public void addItem(Product product, Item item) {
         requireAllNonNull(product, item);
 

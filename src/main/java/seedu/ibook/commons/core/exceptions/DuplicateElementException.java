@@ -6,6 +6,6 @@ package seedu.ibook.commons.core.exceptions;
  */
 public class DuplicateElementException extends RuntimeException {
     public DuplicateElementException() {
-        super("Operation would result in duplicate products");
+        super("Operation would result in duplicate elements");
     }
 }

@@ -98,17 +98,7 @@ public class IBook implements ReadOnlyIBook {
     //// item-level operations
 
     /**
-     * Returns true if a product with the same identity as {@code product} exists in the iBook.
-     */
-    public boolean hasItem(Item item) {
-        requireNonNull(item);
-        return products.stream()
-                .anyMatch(product -> product.hasItem(item));
-    }
-
-    /**
-     * Adds a item to the iBook.
-     * The product must not already exist in the iBook.
+     * Adds {@code item} to a {@code product} in the iBook.
      */
     public void addItem(Product product, Item item) {
         requireAllNonNull(product, item);

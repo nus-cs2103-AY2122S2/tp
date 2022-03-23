@@ -5,7 +5,7 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
 public class Quantity {
 
-    public static final String MESSAGE_CONSTRAINTS = "Quantities should only be of positive integers";
+    public static final String MESSAGE_CONSTRAINTS = "Quantities should only be of non-negative integers";
     public static final String SMALLER_THAN_CONSTRAINT =
         "Subtracted quantity must be smaller than or equal to the current quantity";
 
