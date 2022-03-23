@@ -103,34 +103,28 @@ public class BuyerTest {
         House h2 = new House(ht2, location2);
         House h3 = new House(ht3, location3);
 
-        try {
-            pr1 = new PriceRange(100000, 200000);
-            pr2 = new PriceRange(200000, 300000);
-            pr3 = new PriceRange(300000, 400000);
+        pr1 = new PriceRange(100000, 200000);
+        pr2 = new PriceRange(200000, 300000);
+        pr3 = new PriceRange(300000, 400000);
 
+        PropertyToBuy ptb1 = new PropertyToBuy(h1, pr1);
+        PropertyToBuy ptb2 = new PropertyToBuy(h2, pr2);
+        PropertyToBuy ptb3 = new PropertyToBuy(h3, pr3);
 
-            PropertyToBuy ptb1 = new PropertyToBuy(h1, pr1);
-            PropertyToBuy ptb2 = new PropertyToBuy(h2, pr2);
-            PropertyToBuy ptb3 = new PropertyToBuy(h3, pr3);
+        // Same list of properties with different order
+        editedYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
+        Buyer testYuqi = new BuyerBuilder(YUQI).withProperties(ptb2, ptb3, ptb1).build();
+        assertEquals(editedYuqi, testYuqi);
 
-            // Same list of properties with different order
-            editedYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            Buyer testYuqi = new BuyerBuilder(YUQI).withProperties(ptb2, ptb3, ptb1).build();
-            assertEquals(editedYuqi, testYuqi);
+        // Same list of properties with same order
+        editedYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
+        testYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
+        assertEquals(editedYuqi, testYuqi);
 
-            // Same list of properties with same order
-            editedYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            testYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            assertEquals(editedYuqi, testYuqi);
-
-            // Different list of properties
-            editedYuqi = new BuyerBuilder(YUQI).withProperties(ptb1).build();
-            testYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            assertNotEquals(editedYuqi, testYuqi);
-
-        } catch (IllegalValueException e) {
-            System.out.println(e.getMessage());
-        }
+        // Different list of properties
+        editedYuqi = new BuyerBuilder(YUQI).withProperties(ptb1).build();
+        testYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
+        assertNotEquals(editedYuqi, testYuqi);
 
     }
 
@@ -152,26 +146,23 @@ public class BuyerTest {
         House h2 = new House(ht2, location2);
         House h3 = new House(ht3, location3);
 
-        try {
-            pr1 = new PriceRange(100000, 200000);
-            pr2 = new PriceRange(200000, 300000);
-            pr3 = new PriceRange(300000, 400000);
+        pr1 = new PriceRange(100000, 200000);
+        pr2 = new PriceRange(200000, 300000);
+        pr3 = new PriceRange(300000, 400000);
 
 
-            PropertyToBuy ptb1 = new PropertyToBuy(h1, pr1);
-            PropertyToBuy ptb2 = new PropertyToBuy(h2, pr2);
-            PropertyToBuy ptb3 = new PropertyToBuy(h3, pr3);
+        PropertyToBuy ptb1 = new PropertyToBuy(h1, pr1);
+        PropertyToBuy ptb2 = new PropertyToBuy(h2, pr2);
+        PropertyToBuy ptb3 = new PropertyToBuy(h3, pr3);
 
-            Buyer testBuyer = new BuyerBuilder().withProperties(ptb1).build();
-            Buyer testBuyer2 = new BuyerBuilder().withProperties(ptb1, ptb2).build();
-            Buyer testBuyer3 = new BuyerBuilder(testBuyer2).build();
-            Buyer testBuyer4 = new BuyerBuilder().withProperties(ptb2, ptb1).build();
+        Buyer testBuyer = new BuyerBuilder().withProperties(ptb1).build();
+        Buyer testBuyer2 = new BuyerBuilder().withProperties(ptb1, ptb2).build();
+        Buyer testBuyer3 = new BuyerBuilder(testBuyer2).build();
+        Buyer testBuyer4 = new BuyerBuilder().withProperties(ptb2, ptb1).build();
 
-            assertTrue(testBuyer2.hasSameProperties(testBuyer3));
-            assertFalse(testBuyer.hasSameProperties(testBuyer2));
-            assertTrue(testBuyer3.hasSameProperties(testBuyer4));
-        } catch (IllegalValueException e) {
-            System.out.println(e.getMessage());
-        }
+        assertTrue(testBuyer2.hasSameProperties(testBuyer3));
+        assertFalse(testBuyer.hasSameProperties(testBuyer2));
+        assertTrue(testBuyer3.hasSameProperties(testBuyer4));
+
     }
 }
