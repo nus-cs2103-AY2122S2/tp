@@ -186,6 +186,18 @@ Following this, `Logic Manager` will call the `execute()` method of the `AddComm
 
 The summarise mechanism implements the following sequence and interactions for the method call execute("summarise") on a LogicManager object.
 
+In order for this feature to be unique and not overlap what the List feature has to offer, summarise helps to calculate how many
+students are covid positive in each block of the hall, alongside those who are negative and on health risk notice.
+This helps the hall master determine if there is a spread of virus in any particular block.
+
+Tracey will then calculate those that are positive and which faculty they come from. This is helpful to determine if the superspreader
+comes from the faculty building itself. The hall masters and leaders can be more certain on their follow up actions to keep
+their hall safe.
+
+**Path Execution of Summarise Feature Activity Diagram is shown below:**
+![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
+
+**Sequence Diagram of Summarise Feature is shown below:**
 ![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -193,6 +205,39 @@ The summarise mechanism implements the following sequence and interactions for t
 </div>
 
 When execute is called on the SummariseCommand object, there are multiple call back to self to anaylse and produce the result back to the Logic Manager.
+
+When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`.
+If the input is valid, an `AddCommand` object will be instantiated.
+
+Following this, `Logic Manager` will call the `execute()` method of the `SummariseCommand` object. In this method,
+the `updatedFilteredPersonList` method and `getFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed.
+After getting the list of students, the `SummariseCommand` object will call its own `summariseAll` method to generate message regarding total number
+of covid cases in that hall. `filterByBlock` method is then called on the list again to generate statistics of covid statuses in each block of the hall.
+`filerByfaculty` is then called on the list once again to generate statistics of covid statuses in each faculty of students in the hall.
+
+Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
+A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
+
+**Sequence Diagram of Pie Chart Window Feature is shown below:**
+![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
+(to be continued)...
+
+### Clear feature
+
+The clear mechanism implements the following sequence and interactions for the method call execute("clear") on a LogicManager object.
+
+The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
+user to replace the list of students with an empty one. Previous data are swiped away.
+
+**Path Execution of Clear Feature Activity Diagram is shown below:**
+![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
+
+**Sequence Diagram of Clear Feature is shown below:**
+![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 ### \[Proposed\] Undo/redo feature
 
