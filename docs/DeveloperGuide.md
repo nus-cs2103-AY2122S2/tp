@@ -219,14 +219,14 @@ Finally, it returns a new `CommandResult` object containing a string that indica
 A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
 
 
-#### Pie Chart Window
+#### Pie Chart Window feature
 
-**Sequence Diagram of Pie Chart Window Feature is shown below:**
-![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
+#### <ins>How the feature is implemented<ins/>
 
-##### How the feature is implemented
-
-**New class** <br>
+This feature is implemented using a new class `PieChartWindow` and modifications to `SummariseCommand` and `MainWindow` (more information is shown below). When the user inputs `SummariseCommand`, `SummariseCommand#summariseFaculty()` and `SummariseCommand#summariseBlock()` will be invoked and puts the necessary data into a `TreeMap` that is a static variable of `SummariseCommand`. In `MainWindow#executeCommand()`, it will invoke `MainWindow#handleSummarise()` which calls `PieChartWindow#execute()` to create the pie chart and opens a new window. The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
+  
+**New class: `PieChartWindow`**
+  
 A `PieChartWindow` controller class and a `PieChartWindow` FXML class is created for this feature.
 The `PieChartWindow` controller class will create pie charts using data from `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
 
@@ -239,30 +239,35 @@ Addition of method(s) to `PieChartWindow` controller class:
 * `PieChartWindow#show()` show the pie chart window
 * `PieChartWindow#isShowing()` returns a boolean whether the pie chart window is showing
 * `PieChartWindow#hide()` hide the pie chart window
-  <br>
-  **Modifications to `SummariseCommand`** <br>
-  Addition of variable(s):
+  
+**Modifications to `SummariseCommand`**
+  
+Addition of variable(s):
 * `positiveStatsByFacultyData`, a private static variable of type `TreeMap<String, Double>`
 * `covidStatsByBlockDataList`, a private static variable of type `TreeMap<String, TreeMap<String, Double>>`
-  <br>
-  Modifications to existing method(s):
+  
+Modifications to existing method(s):
 * `SummariseCommand#summariseFaculty()` will put in `numberOfPositive` (percentage of covid-positive cases in its respective faculty) for each `facultyName` (pre-defined constants from the `Faculty` class) into `positiveStatsByFacultyData` for contacts that are present in Tracey.
 * `SummariseCommand#summariseBlock()` will put in `numberOfPositive`, `numberOfNegative` and `numberOfHrn` for each `blockLetter` (pre-defined constants from the `Block` class) into a local variable of type `TreeMap<String, Double>` and then puts into `covidStatsByBlockDataList` for each for contacts that are present in Tracey.
-  <br>
-  Addition of method(s):
+  
+Addition of method(s):
 * `SummariseCommand#getPositiveStatsByFacultyData()` getter method that returns `positiveStatsByFacultyData`
 * `SummariseCommand#getCovidStatsByBlockDataList()` getter method that returns `covidStatsByBlockDataList`
-  <br>
-  **Modifications to `MainWindow`**
-  Modifications to existing method(s):
+ 
+**Modifications to `MainWindow`**
+  
+Modifications to existing method(s):
 * `MainWindow#executeCommand()` will now check if the command is a `SummariseCommand`, if it is then `MainWindow#handleSummarise()` will be invoked
   Addition of method(s):
 * `MainWindow#handleSummarise()` shows the pie chart window if it is not already open, or else will reopen a new pie chart window
+  
+**Sequence Diagram of Pie Chart Window Feature is shown below:**
+![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
 
-##### Why it is implemented that way
+#### <ins>Why it is implemented that way<ins/>
 The data needed for the pie charts should be coupled with `SummariseCommand`, therefore it is necessary to implement this feature in such a way that the pie chart data is created upon invocation `SummariseCommand`. A `PieChartWindow` controller and FXML class is also needed to abstract the creation of the pie charts and opening a new window respectively. The `MainWindow` class is then modified accordingly.
 
-##### Alternatives considered
+#### <ins>Alternatives considered<ins/>
 
 **Aspect: How data is passed to the pie charts:**
 
@@ -270,7 +275,7 @@ The data needed for the pie charts should be coupled with `SummariseCommand`, th
     * Pros: Easy to implement.
     * Cons: Dependent on the `SummariseCommand` class to pass in correct inputs.
     * Other consideration(s):
-        * Use the Singleton design principle for the data structures.
+        ** Use the Singleton design principle for the data structures.
 
 * **Alternative 2:** Parse the feedback to user message from `SummariseCommand`
     * Pros: No modifications to the `SummariseCommand` class.
