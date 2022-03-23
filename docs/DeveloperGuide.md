@@ -163,6 +163,10 @@ To implement the feature, the below classes are created:
 * `FilterCommandParser`is implemented to parse the filter command entered by user. 
 * `PersonContainsTagPredicate` extends class Predicate<Person> to assist in filtering out the profiles that contains 
   the given tag
+
+The sequence diagram below illustrates how the filter command works, using `'filter family'` as the sample input.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
   
 Given below is an example usage scenario of filter command.
   
@@ -176,6 +180,9 @@ if there is no parse exception. In the creation of a new `FilterCommand` object,
 
 Step 4. During the execution of filter command, a `CommandException` is thrown if the tag does not exist in the model.
 Otherwise, the profile list is filtered using the predicate.
+
+The activity diagram below summarizes what happens when a filter command is executed.
+
 
 
 ####Design considerations 
