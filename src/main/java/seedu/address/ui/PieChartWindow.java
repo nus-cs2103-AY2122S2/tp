@@ -1,33 +1,33 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Faculty;
+import seedu.address.logic.commands.SummariseCommand;
 
 /**
- * Controller for a pie chart page
+ * Controller for a pie chart page.
  */
 public class PieChartWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(PieChartWindow.class);
     private static final String FXML = "PieChartWindow.fxml";
-    private ArrayList<String> faculties;
-    private ArrayList<Double> positiveStats;
+    private TreeMap<String, Double> covidStatsByBlockData;
     private TreeMap<String, Double> positiveStatsByFacultyData;
+    private TreeMap<String, TreeMap<String, Double>> covidStatsDataByBlocks;
     private PieChart pieChart;
-    private VBox pieChartContainer;
     private Scene pieChartScene;
+    private HBox charts;
 
     /**
      * Creates a new PieChartWindow.
@@ -40,84 +40,66 @@ public class PieChartWindow extends UiPart<Stage> {
 
     /**
      * Creates a new PieChartWindow.
+     * Obtain the organised covid statuses from SummariseCommand.
+     * Pie Charts by blocks and for faculties are created.
      */
-    public PieChartWindow(String message) {
+    public PieChartWindow() {
         this(new Stage());
-        faculties = parseFacultyName(message);
-        positiveStats = parsePositivePercentage(message);
-        positiveStatsByFacultyData = getPositiveStatsByFacultyData(faculties, positiveStats);
-        pieChart = makePieChart(positiveStatsByFacultyData);
-        pieChartScene = makePieChartScene(pieChart);
+        charts = new HBox();
+        covidStatsByBlockData = new TreeMap<>();
+        covidStatsDataByBlocks = SummariseCommand.getCovidStatsByBlockDataList();
+        positiveStatsByFacultyData = SummariseCommand.getPositiveStatsByFacultyData();
+        execute();
+    }
+
+    /**
+     * Organise the data into Pie Charts in a new window.
+     */
+    private void execute() {
+        collateBlocksChart();
+        HBox facultyChart = createFacultyChartPositive();
+        VBox allPieCharts = new VBox(charts);
+        allPieCharts.getChildren().add(facultyChart);
+        pieChartScene = makePieChartScene(allPieCharts);
         this.getRoot().setScene(pieChartScene);
     }
 
     /**
-     * Parse the output message from SummariseCommand and gets the list of student's faculty in Tracey.
-     *
-     * @param message Feedback message to user from SummariseCommand
-     * @return Array list containing student's faculty present in Tracey
+     * Collate the pie charts for each block into a H-box by stacking the charts together.
+     * Pie charts are created one at a time by blocks. ie, if there are 5 blocks, 5 pie charts are created.
      */
-    private ArrayList<String> parseFacultyName(String message) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] splitMessage = message.split(" ");
-        Stream.of(splitMessage).filter(string -> Faculty.isValidFaculty(string))
-                .forEach(string -> arrayList.add(string));
-        return arrayList;
-    }
-
-    /**
-     * Parse the output message from SummariseCommand and gets the list of covid positive percentage from each
-     * faculty present in Tracey.
-     *
-     * @param message Feedback message to user from SummariseCommand
-     * @return Array list containing covid positive percentage from each faculty present in Tracey.
-     */
-    private ArrayList<Double> parsePositivePercentage(String message) {
-        ArrayList<Double> arrayList = new ArrayList<>();
-        String[] splitMessage = message.split(" ");
-        String validationRegex = "[0-9]*\\.[0-9]{2}$";
-
-        // filters the index where the split message with REGEX ')' has length of 2 i.e. [student(s, 100.00]
-        Stream.of(splitMessage).filter(msg -> msg.split("\\)").length == 2)
-                // filters the index where the second element is a percentage i.e. 100.00
-                .filter(msg -> msg.split("\\)")[1].trim().matches(validationRegex))
-                // adds each percentage to the array list
-                .forEach(msg -> arrayList.add(Double.parseDouble(msg.split("\\)")[1])));
-
-        return arrayList;
-    }
-
-    /**
-     * Puts the parsed data from the two array lists of faculty and covid positive percentage of faculty present
-     * in Tracey into a treemap for processing of data for the pie chart.
-     *
-     * @param faculties     Array list containing student's faculty present in Tracey
-     * @param positiveStats Array list containing covid positive percentage from each faculty present in Tracey.
-     * @return A treemap containing key value a pair of faculty and covid positive percentage.
-     */
-    private TreeMap<String, Double> getPositiveStatsByFacultyData(
-            ArrayList<String> faculties, ArrayList<Double> positiveStats) {
-        assert faculties.size() == positiveStats.size();
-        int numberOfStudents = faculties.size();
-        TreeMap<String, Double> treeMap = new TreeMap<>();
-        for (int i = 0; i < numberOfStudents; i++) {
-            treeMap.put(faculties.get(i), positiveStats.get(i));
+    private void collateBlocksChart() {
+        for (Map.Entry<String, TreeMap<String, Double>> entry : covidStatsDataByBlocks.entrySet()) {
+            String title = entry.getKey(); // ie. A, B, C, D, E
+            covidStatsByBlockData = entry.getValue();
+            pieChart = makePieChart(covidStatsByBlockData, title);
+            charts.getChildren().add(pieChart);
         }
-        return treeMap;
     }
 
     /**
-     * A method to produce the pie chart that shows positive percentage by faculty.
+     * Create Pie Chart for hall containing Covid Positive statistics only, by Faculty.
+     */
+    private HBox createFacultyChartPositive() {
+        HBox facChart = new HBox();
+        pieChart = makePieChart(positiveStatsByFacultyData, "Hall");
+        facChart.getChildren().add(pieChart);
+        facChart.setAlignment(Pos.CENTER);
+        return facChart;
+    }
+
+    /**
+     * A method to produce the pie chart that shows covid status breakdown.
      *
      * @param data Covid positive percentage for each faculty present in Tracey
-     * @return A pie chart that shows covid positive percentage for each faculty
+     * @param title Label of this particular pie chart
+     * @return A pie chart that shows covid status breakdown
      */
-    private PieChart makePieChart(TreeMap<String, Double> data) {
+    private PieChart makePieChart(TreeMap<String, Double> data, String title) {
         TreeMap<String, Double> treeMap = data;
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList();
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         PieChart pieChart = new PieChart(pieChartData);
-        pieChart.setTitle("Covid positive percentage by faculty");
+        pieChart.setTitle("Covid overview in " + title);
         for (Map.Entry<String, Double> entry : treeMap.entrySet()) {
             pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
         }
@@ -126,17 +108,18 @@ public class PieChartWindow extends UiPart<Stage> {
 
     /**
      * Creates the scene which contains the pie chart.
-     * @param pieChart
+     *
+     * @param pieCharts collated group of charts to be displayed
      * @return Scene containing the pie chart
      */
-    private Scene makePieChartScene(PieChart pieChart) {
-        pieChartContainer = new VBox(pieChart);
-        pieChartScene = new Scene(pieChartContainer);
+    private Scene makePieChartScene(VBox pieCharts) {
+        pieChartScene = new Scene(pieCharts);
         return pieChartScene;
     }
 
     /**
      * Shows the pie chart window.
+     *
      * @throws IllegalStateException
      * <ul>
      *     <li>

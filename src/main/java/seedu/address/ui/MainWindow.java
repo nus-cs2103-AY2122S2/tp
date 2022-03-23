@@ -180,11 +180,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleSummarise(String message) {
         if (pieChartWindow == null || !pieChartWindow.isShowing()) {
-            pieChartWindow = new PieChartWindow(message);
+            pieChartWindow = new PieChartWindow();
             pieChartWindow.show();
         } else {
             pieChartWindow.hide();
-            pieChartWindow = new PieChartWindow(message);
+            pieChartWindow = new PieChartWindow();
             pieChartWindow.show();
         }
     }
