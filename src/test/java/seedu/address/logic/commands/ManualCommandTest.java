@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.commons.core.ManualMessages;
-
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMMAND_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.ManualMessages;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
