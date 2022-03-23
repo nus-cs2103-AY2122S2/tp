@@ -190,7 +190,7 @@ Step 3. The user executes `add student` command to add a student to `TAssist`. T
 
 The following sequence diagram shows how the add operation works:
 
-![DeleteSequenceDiagram](images/AddSequenceDiagram.png)
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
