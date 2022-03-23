@@ -37,10 +37,6 @@
 skinparam BackgroundColor #FFFFFFF
 
 skinparam Class {
-    FontColor<<Hidden>> #FFFFFF
-    StereotypeFontColor<<Hidden>> #FFFFFF
-    BorderColor<<Hidden>> #FFFFFF
-
     FontName Arial
     FontSize 15
     StereotypeFontSize 13
@@ -87,6 +83,7 @@ skinparam Package {
 skinparam MinClassWidth 50
 skinparam Shadowing false
 skinparam DefaultTextAlignment center
+skinparam TitleFontSize 25
 
 'Procedure to override colors and styles for class diagrams
 !procedure $OverrideTheme($theme_color)
@@ -96,6 +93,7 @@ skinparam DefaultTextAlignment center
         FontColor $theme_color
         StereotypeFontColor $theme_color
         BorderColor $theme_color
+
         FontColor<<Hidden>> #FFFFFF
         StereotypeFontColor<<Hidden>> #FFFFFF
         BorderColor<<Hidden>> #FFFFFF
