@@ -54,7 +54,7 @@ public class RemindCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_ALREADY_REMINDED);
         }
 
-        return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind), false, false, false, true, false);
-        //return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind));
+        return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind), false,
+                false, false, true, false);
     }
 }
