@@ -10,11 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -111,10 +107,10 @@ public class EditCommand extends Command {
         // preference cannot be edited
         Optional<Preference> updatedPreference = personToEdit.getPreference();
         UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
-        UserImage updatedUserImage = editPersonDescriptor.getUserImage().orElse(personToEdit.getUserImage());
+        Set<UserImage> updatedUserImages = editPersonDescriptor.getUserImages().orElse(personToEdit.getUserImages());
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
-                updatedPreference, updatedUserType, updatedUserImage);
+                updatedPreference, updatedUserType, updatedUserImages);
     }
 
     @Override
@@ -147,7 +143,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Property> properties;
         private UserType userType;
-        private UserImage userImage;
+        private Set<UserImage> userImages;
 
         public EditPersonDescriptor() {
         }
@@ -164,14 +160,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setProperties(toCopy.properties);
             setUserType(toCopy.userType);
-            setUserImage(toCopy.userImage);
+            setUserImages(toCopy.userImages);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, userType, userImage);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, userType, userImages);
         }
 
         public void setName(Name name) {
@@ -222,12 +218,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(userType);
         }
 
-        public void setUserImage(UserImage userImage) {
-            this.userImage = userImage;
+        public void setUserImages(Set<UserImage> userImages) {
+            this.userImages = (userImages == null)
+                ? null
+                : new LinkedHashSet<UserImage>(userImages);
         }
 
-        public Optional<UserImage> getUserImage() {
-            return Optional.ofNullable(userImage);
+        public Optional<Set<UserImage>> getUserImages() {
+            return Optional.ofNullable(userImages);
         }
 
         /**

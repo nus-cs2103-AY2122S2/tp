@@ -10,15 +10,9 @@ public class UserImage {
     public static final String MESSAGE_CONSTRAINTS =
                 "Image must be of the format: [File Path:Description(optional)]";
 
-    private String description;
-    private FilePath filePath;
-    private File image;
-
-    public UserImage() {
-        this.filePath = null;
-        this.description = null;
-        this.image = null;
-    }
+    private final String description;
+    private final FilePath filePath;
+    private final File image;
 
     public UserImage(FilePath filePath, String description) {
         this.filePath = filePath;
@@ -38,22 +32,12 @@ public class UserImage {
         return image;
     }
 
-    public void updateContents(UserImage newImage) {
-        this.description = newImage.getDescription();
-        this.filePath = newImage.getFilePath();
-        this.image = newImage.getImage();
-    }
-
     public boolean isImage() {
         try {
             return ImageIO.read(image) != null;
         } catch (IOException E) {
             return false;
         }
-    }
-
-    public boolean isPresent() {
-        return filePath != null;
     }
 
     @Override

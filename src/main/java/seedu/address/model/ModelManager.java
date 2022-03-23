@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -27,7 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private List<Pair<Person>> matchList;
-    private UserImage viewPersonImage;
+    private Set<UserImage> viewImageSet;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -129,8 +130,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public UserImage getViewPersonImage() {
-        return viewPersonImage;
+    public Set<UserImage> getViewImageSet() {
+        return viewImageSet;
     }
 
     @Override
@@ -139,8 +140,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateViewPerson(UserImage userImage) {
-        viewPersonImage = userImage;
+    public void updateViewPerson(Set<UserImage> userImages) {
+        viewImageSet = userImages;
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -9,6 +9,7 @@ import seedu.address.model.userimage.UserImage;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -38,10 +39,10 @@ public class ViewImageCommand extends Command{
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToViewImage = lastShownList.get(targetIndex.getZeroBased());
-        UserImage userImage = personToViewImage.getUserImage();
+        Set<UserImage> userImages = personToViewImage.getUserImages();
 
-        if (userImage.isPresent()) {
-            model.updateViewPerson(userImage);
+        if (!userImages.isEmpty()) {
+            model.updateViewPerson(userImages);
             return new CommandResult(MESSAGE_VIEW_SUCCESS, false, false, true, false);
         } else {
             throw new CommandException(MESSAGE_VIEW_FAILURE);

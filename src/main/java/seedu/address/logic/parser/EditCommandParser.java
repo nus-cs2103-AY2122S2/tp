@@ -56,7 +56,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setUserType(ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_USERIMAGE).isPresent()) {
-            editPersonDescriptor.setUserImage(ParserUtil.parseUserImage(argMultimap.getValue(PREFIX_USERIMAGE).get()));
+            editPersonDescriptor.setUserImages(ParserUtil.parseUserImages(argMultimap.getAllValues(PREFIX_USERIMAGE)));
         }
         parsePropertiesForEdit(argMultimap.getAllValues(PREFIX_PROPERTY)).ifPresent(
                 editPersonDescriptor::setProperties);

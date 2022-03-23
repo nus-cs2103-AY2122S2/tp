@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -90,8 +91,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public UserImage getViewPersonImage() {
-        return model.getViewPersonImage();
+    public Set<UserImage> getViewImageSet() {
+        return model.getViewImageSet();
     }
 
     @Override

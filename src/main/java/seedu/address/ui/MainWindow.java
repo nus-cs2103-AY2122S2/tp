@@ -170,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleViewImage() {
-        viewImageWindow.refresh();
+        viewImageWindow.setup();
         if (!viewImageWindow.isShowing()) {
             viewImageWindow.show();
         } else {

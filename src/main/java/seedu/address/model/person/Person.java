@@ -26,16 +26,15 @@ public class Person {
     private final Set<Property> properties;
     private final Optional<Preference> preference;
     private final UserType userType;
-    private final UserImage userImage;
+    private final Set<UserImage> userImages;
 
     /**
      * This constructor is used when editing a Client.
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
-     * @param userImage user can be of null value since a person may have no image associated
      */
     public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
-            Set<Property> properties, Optional<Preference> preference, UserType userType, UserImage userImage) {
-        requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType, userImage);
+            Set<Property> properties, Optional<Preference> preference, UserType userType, Set<UserImage> userImages) {
+        requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType, userImages);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,17 +43,16 @@ public class Person {
         this.preference = preference;
         this.address = address;
         this.userType = userType;
-        this.userImage = userImage;
+        this.userImages = userImages;
     }
 
     /**
      * Every field must be present and not null.
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
-     * @param userImage user can be empty since a person may have no image associated
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties,
-            Optional<Preference> preference, UserType userType, UserImage userImage) {
-        requireAllNonNull(name, phone, email, address, properties, preference, userType, userImage);
+            Optional<Preference> preference, UserType userType, Set<UserImage> userImages) {
+        requireAllNonNull(name, phone, email, address, properties, preference, userType, userImages);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -63,7 +61,7 @@ public class Person {
         this.properties = properties;
         this.preference = preference;
         this.userType = userType;
-        this.userImage = userImage;
+        this.userImages = userImages;
     }
 
     public Name getName() {
@@ -110,8 +108,8 @@ public class Person {
         return userType;
     }
 
-    public UserImage getUserImage() {
-        return userImage;
+    public Set<UserImage> getUserImages() {
+        return userImages;
     }
 
     /**
@@ -170,13 +168,13 @@ public class Person {
                 && otherPerson.getProperties().equals(getProperties())
                 && otherPerson.getPreference().equals(getPreference())
                 && otherPerson.getUserType().equals(getUserType())
-                && otherPerson.getUserImage().equals(getUserImage());
+                && otherPerson.getUserImages().equals(getUserImages());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, favourite, address, properties, preference, userType, userImage);
+        return Objects.hash(name, phone, email, favourite, address, properties, preference, userType, userImages);
     }
 
     @Override
@@ -205,11 +203,14 @@ public class Person {
 
         builder.append("; User Type: ").append(getUserType());
 
-        if (getUserImage().isPresent()) {
-            builder.append("; UserImage: ");
-            builder.append(getUserImage().getFilePath());
-            builder.append("; Description: ");
-            builder.append(getUserImage().getDescription());
+        Set<UserImage> userImages = getUserImages();
+        if (!getUserImages().isEmpty()) {
+            for (UserImage image : userImages) {
+                builder.append("; UserImage: ");
+                builder.append(image.getFilePath());
+                builder.append("; Description: ");
+                builder.append(image.getDescription());
+            }
         }
         return builder.toString();
     }

@@ -49,9 +49,9 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? Optional.of(ParserUtil.parsePreference(preferenceArg.get()))
                 : Optional.empty();
         UserType userType = ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get());
-        UserImage userImage = ParserUtil.parseUserImage(argMultimap.getValue(PREFIX_USERIMAGE).get());
+        Set<UserImage> userImages = ParserUtil.parseUserImages(argMultimap.getAllValues(PREFIX_USERIMAGE));
 
-        Person person = new Person(name, phone, email, address, properties, preference, userType, userImage);
+        Person person = new Person(name, phone, email, address, properties, preference, userType, userImages);
 
         return new AddCommand(person);
     }

@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -40,7 +41,7 @@ public interface Logic {
     List<Pair<Person>> getMatchList();
 
     /** Returns the images to be displayed in view image window */
-    UserImage getViewPersonImage();
+    Set<UserImage> getViewImageSet();
 
     /** Returns an unmodifiable view of the filtered list of favourited persons */
     ObservableList<Person> getFavouritedPersonList();

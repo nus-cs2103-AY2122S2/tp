@@ -12,7 +12,6 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Adds image of property to an existing person in the address book.
@@ -51,7 +50,7 @@ public class UploadCommand extends Command {
         }
 
         Person personToUpload = lastShownList.get(targetIndex.getZeroBased());
-        personToUpload.getUserImage().updateContents(userImage);
+        personToUpload.getUserImages().add(userImage);
         return new CommandResult(MESSAGE_UPLOAD_SUCCESS);
     }
 

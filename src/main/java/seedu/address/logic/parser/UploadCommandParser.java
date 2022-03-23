@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UploadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.userimage.FilePath;
 import seedu.address.model.userimage.UserImage;
 
 /**
@@ -19,7 +18,6 @@ public class UploadCommandParser implements Parser<UploadCommand> {
     public UploadCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_USERIMAGE);
-
         Index index;
 
         try {

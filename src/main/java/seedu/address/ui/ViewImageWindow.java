@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.userimage.UserImage;
+import seedu.address.ui.formats.HelpTable;
 
 
 /**
@@ -21,6 +24,8 @@ public class ViewImageWindow extends UiPart<Stage> {
     private static final String FXML = "ViewImageWindow.fxml";
 
     private Logic logic;
+    private ArrayList<UserImage> userImages;
+    private int index;
 
     @FXML
     private ImageView displayArea;
@@ -37,9 +42,10 @@ public class ViewImageWindow extends UiPart<Stage> {
      */
     public ViewImageWindow(Stage root, Logic logic) {
         super(FXML, root);
+        this.logic = logic;
+        index  = 0;
         displayArea.setFitHeight(400);
         displayArea.setFitWidth(600);
-        this.logic = logic;
         description.setEditable(false);
     }
 
@@ -95,10 +101,36 @@ public class ViewImageWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    public void refresh() {
-        UserImage userImage = logic.getViewPersonImage();
-        Image displayImage = new Image(this.getClass().getResourceAsStream("/" + userImage.getFilePath().get()));
+    public void setup() {
+        userImages = new ArrayList<>(logic.getViewImageSet());
+        refresh(userImages.get(index));
+    }
+
+    public void refresh(UserImage userImage) {
+        UserImage newImage = userImage;
+        System.out.println(System.getProperty("java.class.path"));
+        Image displayImage = new Image(
+                this.getClass().getResourceAsStream("/" + newImage.getFilePath().get()));
         displayArea.setImage(displayImage);
-        description.setText(userImage.getDescription());
+        description.setText(newImage.getDescription());
+    }
+
+    /**
+     * Changes the contents of pane in help window to command list page
+     */
+    @FXML
+    public void onNextClick() {
+        if (index + 1 != userImages.size()) {
+            index++;
+            refresh(userImages.get(index));
+        }
+    }
+
+    @FXML
+    public void onPreviousClick() {
+        if (index != 0) {
+            index--;
+            refresh(userImages.get(index));
+        }
     }
 }

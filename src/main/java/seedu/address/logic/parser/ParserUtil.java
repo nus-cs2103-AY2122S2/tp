@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -218,11 +219,16 @@ public class ParserUtil {
         return new UserType(trimmedUserType);
     }
 
-    public static UserImage parseUserImage(String userImage) throws ParseException {
-        if (userImage == null) {
-            return new UserImage();
+    public static Set<UserImage> parseUserImages(Collection<String> userImages) throws ParseException {
+        requireNonNull(userImages);
+        Set<UserImage> userImageSet = new LinkedHashSet<>();
+        for (String userImage : userImages) {
+            userImageSet.add(parseUserImage(userImage));
         }
+        return userImageSet;
+    }
 
+    public static UserImage parseUserImage(String userImage) throws ParseException {
         String trimmedUserImage = userImage.trim();
         String[] splitUserImage = trimmedUserImage.split(":");
 
