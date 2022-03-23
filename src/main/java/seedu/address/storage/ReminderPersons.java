@@ -41,4 +41,11 @@ public class ReminderPersons {
     public boolean remove(Person person) {
         return reminders.remove(person);
     }
+
+    /**
+     * Returns a shallow copy of the HashSet.
+     */
+    public Object clone() {
+        return reminders.clone();
+    }
 }

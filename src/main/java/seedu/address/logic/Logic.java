@@ -41,6 +41,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of favourited persons */
     ObservableList<Person> getFavouritedPersonList();
 
+    /** Returns an unmodifiable view of the filtered list of reminder persons */
+    ObservableList<Person> getReminderPersonList();
+
     /**
      * Returns the user prefs' address book file path.
      */

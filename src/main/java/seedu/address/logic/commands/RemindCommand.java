@@ -21,6 +21,11 @@ public class RemindCommand extends Command {
     private static final String MESSAGE_REMIND_PERSON_SUCCESS = "Reminder for Person: %1$s";
     private static final String MESSAGE_PERSON_ALREADY_REMINDED =
             "This person has already been added to your reminders list!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sets a reminder for the client "
+            + "by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 ";
     private static ReminderPersons reminderPersons;
     private final Index index;
 
@@ -45,12 +50,11 @@ public class RemindCommand extends Command {
         Person personToRemind = lastShownList.get(index.getZeroBased());
         boolean isPersonNotReminded = reminderPersons.add(personToRemind);
 
-        System.out.println("personToRemind: " + personToRemind);
-
         if (!isPersonNotReminded) {
             throw new CommandException(MESSAGE_PERSON_ALREADY_REMINDED);
         }
 
-        return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind));
+        return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind), false, false, false, true, false);
+        //return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind));
     }
 }

@@ -17,6 +17,6 @@ public class FavouritesWindowCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return new CommandResult(MESSAGE_FAVOURITE_WINDOW_SUCCESS, false, false, true, false);
+        return new CommandResult(MESSAGE_FAVOURITE_WINDOW_SUCCESS, false, false, true, false, false);
     }
 }
