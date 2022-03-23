@@ -75,6 +75,11 @@ The `UserType` represents an attribute that needs to be added to a `Person` & re
 
 Similar to other attributes of a `Person`, the `UserType` of a `Person` can be edited via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa. This can be done with the command: `edit INDEX t/seller`
 
+## Statistics feature/Window
+The `stats` opens a new `StatisticsWindow` that displays a pie chart with the information of the number of sellers & buyers in the 5 different regions namely {North, South, East, West, Central}.
+
+This allows the user to be visualize his/her client's data to make better business decisions.
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
@@ -108,18 +113,19 @@ Manage clients faster that a typical mouse/GUI driven app.
 
 ## User stories
 
-| Priority | As a ... | I want to ...                                               | So that i can...                                                                               |
-| --- | --- |-------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| High | User | Delete my client’s information on the app                   | Remove this redundant information after he/she is not my client anymore                        |
-| High | User | To edit my clients’ information on the app                  | Ensure all information of my clients are always up to date                                     |
-| High | User | To list out my clients’ information on the app              | View all of my clients’ information in one place                                               |
-| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers) | Know if a client is looking for a property to buy or is trying sell a property                 |
-| High | User | Add my clients’ information on the app                      | Gain access to all these information in one place                                              |
-| High | User | Favorite a client                                           | Separate clients based on whose information I frequent the most (favorited) and those that are not |
-| High | User | View favourited clients                                     | Have a compact display of clients that I frequent the most                                     |
-| High | User | To create a preference for a client who is a buyer          | Have information of potential properties that the buyer would want to buy                      |
-| High | User | Match my clients (e.g. buyer with seller)                   | Spot if there are any properties being sold by a seller that a buyer has a preference for.     |
-| High | User | Be able to understand how the app works from start to end   | Able to provide the necessary inputs to perform a particular action on the app                 |
+| Priority | As a ... | I want to ...                                                                                                                                                                      | So that i can...                                                                                   |
+| --- | --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| High | User | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                            |
+| High | User | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                         |
+| High | User | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                   |
+| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                     |
+| High | User | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                  |
+| High | User | Favorite a client                                                                                                                                                                  | Separate clients based on whose information I frequent the most (favorited) and those that are not |
+| High | User | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                         |
+| High | User | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                          |
+| High | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.         |
+| High | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                     |
+| High | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region   |
 
 ## Use cases
 
