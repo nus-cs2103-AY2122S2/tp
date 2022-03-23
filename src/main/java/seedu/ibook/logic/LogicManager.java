@@ -15,6 +15,7 @@ import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ReadOnlyIBook;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.storage.Storage;
 
 /**
@@ -62,6 +63,35 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Product> getFilteredIBook() {
         return model.getFilteredProductList();
+    }
+
+    /**
+     * Adds a filter to the product list.
+     */
+    @Override
+    public void addProductFilter(AttributeFilter filter) {
+        model.addProductFilter(filter);
+    }
+
+    /**
+     * Removes a filter from the product list.
+     */
+    @Override
+    public void removeProductFilter(AttributeFilter filter) {
+        model.removeProductFilter(filter);
+    }
+
+    /**
+     * Removes a filter from the product list.
+     */
+    @Override
+    public void clearProductFilters() {
+        model.clearProductFilters();
+    }
+
+    @Override
+    public ObservableList<AttributeFilter> getProductFilters() {
+        return model.getProductFilters();
     }
 
     @Override

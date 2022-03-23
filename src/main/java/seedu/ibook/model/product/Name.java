@@ -9,13 +9,6 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final Name WILD_NAME = new Name() {
-        @Override
-        public boolean equals(Object other) {
-            return other instanceof Name;
-        }
-    };
-
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 

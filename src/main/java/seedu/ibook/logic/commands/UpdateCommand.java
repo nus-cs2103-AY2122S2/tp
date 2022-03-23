@@ -71,7 +71,7 @@ public class UpdateCommand extends Command {
         }
 
         model.setProduct(productToUpdate, updatedProduct);
-        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
+        model.updateProductFilters(PREDICATE_SHOW_ALL_PRODUCTS);
         return new CommandResult(String.format(MESSAGE_UPDATE_PRODUCT_SUCCESS, updatedProduct));
     }
 

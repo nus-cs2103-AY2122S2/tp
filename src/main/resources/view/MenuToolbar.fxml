@@ -6,9 +6,13 @@
 
 <MenuBar styleClass="menu-bar" stylesheets="@css/menuToolbar.css">
     <Menu mnemonicParsing="false" text="File">
-        <MenuItem mnemonicParsing="false" text="Close"/>
+        <MenuItem mnemonicParsing="false" text="Close" onAction="#handleExit"/>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Actions">
+        <MenuItem mnemonicParsing="false" text="Find Expired"/>
+        <MenuItem mnemonicParsing="false" text="Find out of stock items"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Help">
-        <MenuItem mnemonicParsing="false" text="About"/>
+        <MenuItem mnemonicParsing="false" text="Help" onAction="#handleHelp"/>
     </Menu>
 </MenuBar>

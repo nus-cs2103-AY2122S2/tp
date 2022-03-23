@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.GuiSettings;
-import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 import seedu.ibook.testutil.IBookBuilder;
 
 public class ModelManagerTest {
@@ -115,11 +115,11 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentIBook, userPrefs)));
 
         // different filteredList -> returns false
-        modelManager.updateFilteredProductList(new ProductFulfillsFiltersPredicate(PRODUCT_B));
+        modelManager.updateProductFilters(new ProductFulfillsFiltersPredicate(PRODUCT_B));
         assertFalse(modelManager.equals(new ModelManager(iBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
+        modelManager.updateProductFilters(PREDICATE_SHOW_ALL_PRODUCTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ibook.model.item.exceptions.ItemNotFoundException;
+import seedu.ibook.model.product.exceptions.ProductNotFoundException;
 
 /**
  * A list of items that enforces uniqueness between its elements and does not allow nulls.
@@ -69,16 +70,72 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public void remove(Item toRemove) {
         requireNonNull(toRemove);
-        if (!contains(toRemove)) {
+        if (!internalList.remove(toRemove)) {
             throw new ItemNotFoundException();
         }
-        Item existingItem = getExisting(toRemove);
-        internalList.remove(existingItem);
-        Item newItem = existingItem.subtract(toRemove);
-        if (!newItem.getQuantity().isEmpty()) {
-            internalList.add(newItem);
+    }
+
+    /**
+     * Set the quantity of the specified item.
+     */
+    public void setItemCount(Item target, Quantity quantity) {
+        requireAllNonNull(target, quantity);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ProductNotFoundException();
         }
-        FXCollections.sort(internalList);
+
+        Item newItem = target.setQuantity(quantity);
+        internalList.set(index, newItem);
+    }
+
+    /**
+     * Increase the quantity of the specified item.
+     */
+    public void incrementItemCount(Item target, Quantity quantity) {
+        requireAllNonNull(target, quantity);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ProductNotFoundException();
+        }
+
+        Item newItem = target.increment(quantity);
+        internalList.set(index, newItem);
+    }
+
+    /**
+     * Increase the quantity of the specified item by 1.
+     */
+    public void incrementItemCount(Item target) {
+        incrementItemCount(target, new Quantity(1));
+    }
+
+    /**
+     * Decrease the quantity of the specified item.
+     */
+    public void decrementItemCount(Item target, Quantity quantity) {
+        requireAllNonNull(target, quantity);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ProductNotFoundException();
+        }
+
+        Item newItem = target.decrement(quantity);
+        if (newItem.isEmpty()) {
+            internalList.remove(index);
+        } else {
+            internalList.set(index, newItem);
+        }
+    }
+
+    /**
+     * Decrease the quantity of the specified item by 1.
+     */
+    public void decrementItemCount(Item target) {
+        decrementItemCount(target, new Quantity(1));
     }
 
     public Integer getTotalQuantity() {
