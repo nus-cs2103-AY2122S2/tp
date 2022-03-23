@@ -292,6 +292,10 @@ public class ParserUtil {
         return new ArrayList<>(tagSet);
     }
 
+    /**
+     * Parses {@code String name} into an {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
@@ -301,6 +305,10 @@ public class ParserUtil {
         return new EventName(trimmedName);
     }
 
+    /**
+     * Parses {@code String info} into an {@code Information}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
     public static Information parseInfo(String info) throws ParseException {
         requireNonNull(info);
         String trimmedInfo = info.trim();
@@ -310,6 +318,10 @@ public class ParserUtil {
         return new Information(trimmedInfo);
     }
 
+    /**
+     * Parses {@code String date} and {@code String time} into a {@code DateTime}.
+     * Returns a DateTime object that contains formatted date and time of the event.
+     */
     public static DateTime parseDateTime(String date, String time) throws ParseException {
         requireNonNull(date);
         requireNonNull(time);

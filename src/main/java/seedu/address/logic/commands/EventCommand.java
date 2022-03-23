@@ -38,6 +38,13 @@ public class EventCommand extends Command {
     private final DateTime dateTime;
     private final Set<String> names;
 
+    /**
+     * Constructor for EventCommand.
+     * @param indexes the indexes of the persons tagged to this event
+     * @param name the name of the event
+     * @param information the details of the event
+     * @param dateTime the date and time of the event
+     */
     public EventCommand(Index[] indexes, EventName name, Information information, DateTime dateTime) {
         requireAllNonNull(indexes, name, information, dateTime);
 

@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.DateTime;
@@ -16,7 +15,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Information;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -34,8 +32,10 @@ public class JsonAdaptedEvent {
      * Constructs a {@code JsonAdaptedEvent} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("name") String eventName, @JsonProperty("info") String info,
-            @JsonProperty("participants") List<JsonAdaptedName> participants, @JsonProperty("dateTime") String dateTime) {
+    public JsonAdaptedEvent(@JsonProperty("name") String eventName,
+                            @JsonProperty("info") String info,
+                            @JsonProperty("participants") List<JsonAdaptedName> participants,
+                            @JsonProperty("dateTime") String dateTime) {
         this.eventName = eventName;
         this.info = info;
         this.participants.addAll(participants);
@@ -104,6 +104,12 @@ public class JsonAdaptedEvent {
         return new Event(modelEventName, modelInfo, new ArrayList<>(modelParticipants), modelDateTime);
     }
 
+    /**
+     * Converts the date time into an int array that splits into year, month, day, hour and min.
+     * @param dateTime the string input of the date and time
+     * @return int array that contains year, month, day, hour and min
+     * @throws IllegalValueException if date or time is invalid
+     */
     public int[] convertDateTime(String dateTime) throws IllegalValueException {
         String[] tempDateTime = dateTime.split(" ");
         String date = tempDateTime[0];
