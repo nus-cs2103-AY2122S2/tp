@@ -98,9 +98,4 @@ public interface Model {
      */
     void updateSortedShowList(Comparator<Show> comparator);
 
-    /**
-     * save the sorted list to show list.
-     */
-    void saveSortedShowList();
-
 }
