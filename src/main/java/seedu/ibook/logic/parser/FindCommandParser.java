@@ -29,8 +29,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
-                        PREFIX_PRICE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE);
+
         Name name;
         Category category;
         Description description;

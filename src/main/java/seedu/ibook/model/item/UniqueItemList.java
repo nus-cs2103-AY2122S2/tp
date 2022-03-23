@@ -26,33 +26,12 @@ public class UniqueItemList extends UniqueList<Item> {
      * Gets the item in the list that is similar to the item as the given argument.
      */
     public Item getExisting(Item toAdd) {
-        for (Item item: asObservableList()) {
+        for (Item item: internalList()) {
             if (toAdd.isSame(item)) {
                 return item;
             }
         }
         return null;
-    }
-
-    public Integer getTotalQuantity() {
-        return stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
-    }
-
-    public void setItems(UniqueItemList replacement) {
-        requireNonNull(replacement);
-        setAll(replacement.asObservableList());
-    }
-
-    /**
-     * Replaces the contents of this list with {@code items}.
-     * @param items
-     */
-    public void setItems(List<Item> items) {
-        requireAllNonNull(items);
-        asObservableList().clear();
-        for (Item item: items) {
-            add(item);
-        }
     }
 
     /**
@@ -70,7 +49,7 @@ public class UniqueItemList extends UniqueList<Item> {
         } else {
             super.add(toAdd);
         }
-        FXCollections.sort(asObservableList());
+        FXCollections.sort(internalList());
     }
 
     /**
@@ -79,13 +58,13 @@ public class UniqueItemList extends UniqueList<Item> {
     public void setItemCount(Item target, Quantity quantity) {
         requireAllNonNull(target, quantity);
 
-        int index = internalList.indexOf(target);
+        int index = internalList().indexOf(target);
         if (index == -1) {
-            throw new ProductNotFoundException();
+            throw new ElementNotFoundException();
         }
 
         Item newItem = target.setQuantity(quantity);
-        internalList.set(index, newItem);
+        internalList().set(index, newItem);
     }
 
     /**
@@ -94,13 +73,13 @@ public class UniqueItemList extends UniqueList<Item> {
     public void incrementItemCount(Item target, Quantity quantity) {
         requireAllNonNull(target, quantity);
 
-        int index = internalList.indexOf(target);
+        int index = internalList().indexOf(target);
         if (index == -1) {
-            throw new ProductNotFoundException();
+            throw new ElementNotFoundException();
         }
 
         Item newItem = target.increment(quantity);
-        internalList.set(index, newItem);
+        internalList().set(index, newItem);
     }
 
     /**
@@ -116,16 +95,16 @@ public class UniqueItemList extends UniqueList<Item> {
     public void decrementItemCount(Item target, Quantity quantity) {
         requireAllNonNull(target, quantity);
 
-        int index = internalList.indexOf(target);
+        int index = internalList().indexOf(target);
         if (index == -1) {
-            throw new ProductNotFoundException();
+            throw new ElementNotFoundException();
         }
 
         Item newItem = target.decrement(quantity);
         if (newItem.isEmpty()) {
-            internalList.remove(index);
+            internalList().remove(index);
         } else {
-            internalList.set(index, newItem);
+            internalList().set(index, newItem);
         }
     }
 
@@ -137,12 +116,12 @@ public class UniqueItemList extends UniqueList<Item> {
     }
 
     public Integer getTotalQuantity() {
-        return internalList.stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
+        return stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
     }
 
     public void setItems(UniqueItemList replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        internalList().setAll(replacement.internalList());
     }
 
     /**
@@ -151,7 +130,7 @@ public class UniqueItemList extends UniqueList<Item> {
      */
     public void setItems(List<Item> items) {
         requireAllNonNull(items);
-        internalList.clear();
+        internalList().clear();
         for (Item item: items) {
             add(item);
         }

@@ -80,6 +80,14 @@ public class UniqueList<T extends Distinguishable> implements Iterable<T> {
         return internalList.stream();
     }
 
+    /**
+     * Returns the backing queue. This method returns the same as {@code asObservableList()}
+     * but is intended for subclasses to get {@code internalList} with a more intuitive name.
+     */
+    public ObservableList<T> internalList() {
+        return internalList;
+    }
+
     public T set(int index, T element) {
         return internalList.set(index, element);
     }

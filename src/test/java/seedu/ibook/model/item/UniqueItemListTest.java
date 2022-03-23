@@ -73,29 +73,15 @@ class UniqueItemListTest {
     }
 
     @Test
-    public void remove_existingItemWithSmallerQuantity_reduceQuantityOfExisting() {
+    public void remove_existingItemWithSmallerQuantity_throwsElementNotFoundException() {
         uniqueItemList.add(Q10_2022_03_01);
-        uniqueItemList.remove(Q5_2022_03_01);
-        Item expectedItem = Q5_2022_03_01;
-        assertEquals(expectedItem, uniqueItemList.getExisting(expectedItem));
+        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q5_2022_03_01));
     }
 
     @Test
-    public void remove_existingItemWithLargerQuantity_throwsIllegalArgumentException() {
+    public void remove_existingItemWithLargerQuantity_throwsElementNotFoundException() {
         uniqueItemList.add(Q5_2022_03_01);
-        assertThrows(IllegalArgumentException.class, () -> uniqueItemList.remove(Q10_2022_03_01));
-    }
-
-    @Test
-    public void remove_existingItemWithSmallerQuantity_throwsItemNotFoundException() {
-        uniqueItemList.add(Q10_2022_03_01);
-        assertThrows(ItemNotFoundException.class, () -> uniqueItemList.remove(Q5_2022_03_01));
-    }
-
-    @Test
-    public void remove_existingItemWithLargerQuantity_throwsItemNotFoundException() {
-        uniqueItemList.add(Q5_2022_03_01);
-        assertThrows(ItemNotFoundException.class, () -> uniqueItemList.remove(Q10_2022_03_01));
+        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q10_2022_03_01));
     }
 
     @Test
