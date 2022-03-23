@@ -16,7 +16,7 @@ public class ScheduleName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    private final String scheduleName;
+    public final String scheduleName;
 
     /**
      * Constructs a schedule name.

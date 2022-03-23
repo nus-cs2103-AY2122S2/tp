@@ -76,7 +76,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        lineups.addAll(source.getLineups().stream()
+        lineups.addAll(source.getLineupNames().stream()
                 .map(JsonAdaptedLineupName::new)
                 .collect(Collectors.toList()));
     }

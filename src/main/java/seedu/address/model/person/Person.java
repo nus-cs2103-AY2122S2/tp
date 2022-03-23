@@ -99,12 +99,8 @@ public class Person {
      * Returns an immutable lineup set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<LineupName> getLineups() {
-        return Collections.unmodifiableSet(this.lineups);
-    }
-
     public Set<LineupName> getLineupNames() {
-        return Collections.unmodifiableSet(lineups);
+        return Collections.unmodifiableSet(this.lineups);
     }
 
     public Set<LineupName> getModifiableLineupNames() {
@@ -187,13 +183,14 @@ public class Person {
                 && otherPerson.getHeight().equals(getHeight())
                 && otherPerson.getWeight().equals(getWeight())
                 && otherPerson.getJerseyNumber().equals(getJerseyNumber())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getLineupNames().equals(getLineupNames());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, jerseyNumber, height, tags, weight);
+        return Objects.hash(name, phone, email, jerseyNumber, height, tags, weight, lineups);
     }
 
     @Override
@@ -213,7 +210,7 @@ public class Person {
                 .append(getJerseyNumber());
 
         Set<Tag> tags = getTags();
-        Set<LineupName> lineups = getLineups();
+        Set<LineupName> lineups = getLineupNames();
 
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");

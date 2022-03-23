@@ -10,9 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -39,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_TEAM, PREFIX_NAME, PREFIX_PHONE,
+                ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP);
 
         Name targetPlayerName;
