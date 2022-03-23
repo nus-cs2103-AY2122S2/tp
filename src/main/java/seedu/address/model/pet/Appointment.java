@@ -1,16 +1,20 @@
 package seedu.address.model.pet;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Pet's upcoming appointment in the address book.
  * Guarantees: immutable; is always valid.
  */
 public class Appointment implements Comparable<Appointment> {
+
+    /** Regex to match value attribute. eg: "Mar-04-2022 09:30 AM at NUS VET".*/
+    public static final String VALIDATION_REGEX =
+            "\\w{3}-\\d{2}-\\d{4} \\d{1}:\\d{2} \\w{2} \\w+(\\s\\w+){1,}";
 
     /** Date and time of appointment in "dd-MM-yyyy HH:mm" format.*/
     public final LocalDateTime dateTime;
@@ -21,9 +25,6 @@ public class Appointment implements Comparable<Appointment> {
      * Format of value: dateTime + " at " + location. To be reflected in GUI.
      */
     public final String value;
-    /** Regex to match value attribute. eg: "Mar-04-2022 09:30 AM at NUS VET".*/
-    public static final String VALIDATION_REGEX =
-            "\\w{3}-\\d{2}-\\d{4} \\d{1}:\\d{2} \\w{2} \\w+(\\s\\w+){1,}";
 
     /**
      * Constructs an {@code Appointment} from the user input details.
@@ -31,7 +32,7 @@ public class Appointment implements Comparable<Appointment> {
      * @param location of appointment.
      */
     public Appointment(LocalDateTime dateTime, String location) {
-        requireAllNonNull(dateTime,location);
+        requireAllNonNull(dateTime, location);
         this.dateTime = dateTime;
         this.location = location;
         this.value = formatDateTime(dateTime) + " at " + location;
@@ -54,7 +55,7 @@ public class Appointment implements Comparable<Appointment> {
             DateTimeFormatter formatOfRetrievedDateTime = DateTimeFormatter.ofPattern("MMM-dd-yyyy h:mm a");
             this.value = value;
             this.location = retrievedLocation;
-            this.dateTime = LocalDateTime.parse(retrievedDateTime,formatOfRetrievedDateTime);
+            this.dateTime = LocalDateTime.parse(retrievedDateTime, formatOfRetrievedDateTime);
         }
     }
 
