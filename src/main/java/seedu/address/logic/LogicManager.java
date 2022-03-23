@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -23,6 +25,7 @@ import seedu.address.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String TEMP_FILE_OPS_ERROR_MESSAGE = "Could not save temp data to file: ";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -44,6 +47,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult = null;
         String[] commands = userInput.split("\\|");
+        ReadOnlyAddressBook addressBookBeforeCommand = new AddressBook(model.getAddressBook());
 
         for (String commandText : commands) {
             logger.info("----------------[USER COMMAND][" + commandText + "]");
@@ -57,12 +61,37 @@ public class LogicManager implements Logic {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
 
-            if (commandResult.isExit() || commandResult.isShowHelp()) {
+            if (commandResult.isExit() || commandResult.isShowHelp() || commandResult.isUndoPrevCommand()) {
                 break;
             }
         }
 
+        assert commandResult != null: "CommandResult is null, should not happen";
+        handleTempAddressBookFiles(addressBookBeforeCommand, commandResult.isUndoPrevCommand());
+
         return commandResult;
+    }
+
+    private void handleTempAddressBookFiles(ReadOnlyAddressBook addressBookBeforeCommand, boolean isUndoPrevCommand)
+            throws CommandException {
+
+        if (isUndoPrevCommand) {
+            Optional<ReadOnlyAddressBook> tempAddressFileData = storage.popTempAddressFileData();
+            if (tempAddressFileData.isPresent()) {
+                model.setAddressBook(tempAddressFileData.get());
+            } else {
+                throw new CommandException("PLACEHOLDER ISSUE, nothing to undo");
+            }
+
+            return;
+        }
+
+        //address book before command saved to temp file
+        try {
+            storage.addNewTempAddressBookFile(addressBookBeforeCommand);
+        } catch (IOException ioe) {
+            throw new CommandException(TEMP_FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
     }
 
     @Override

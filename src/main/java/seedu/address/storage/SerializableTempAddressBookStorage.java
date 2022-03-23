@@ -39,7 +39,7 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
             Files.createDirectory(fileDirectory);
         }
 
-        String tempFileName = "temp" + tempFiles.size();
+        String tempFileName = "temp";
         Path tempFile = Files.createTempFile(fileDirectory, tempFileName, ".tmp");
         tempFiles.add(tempFile);
 
