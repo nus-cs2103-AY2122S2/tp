@@ -13,7 +13,7 @@ import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
 
 /**
- * Flags a person identified using it's displayed index from the address book.
+ * Flags a person identified using it's displayed index from the hustle book.
  */
 public class FlagCommand extends Command {
 

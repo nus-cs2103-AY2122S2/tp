@@ -21,7 +21,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -34,7 +34,7 @@ import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in the hustle book.
  */
 public class EditCommand extends Command {
 
@@ -58,7 +58,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book.";
 
     private final Name targetName;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -79,8 +79,8 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        AddressBook tempAddressBook = new AddressBook();
-        Index targetIndex = tempAddressBook.getPersonListIndex(lastShownList, targetName);
+        HustleBook tempHustleBook = new HustleBook();
+        Index targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
