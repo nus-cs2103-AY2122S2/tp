@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label prevDateMet;
     @FXML
+    private Label salary;
+    @FXML
     private Label info;
 
     /**
@@ -60,6 +62,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText("Email: " + person.getEmail().value);
         flag.setText("Flag: " + person.getFlag().toString());
         prevDateMet.setText("Last met: " + person.getPrevDateMet().value.toString());
+        salary.setText("Salary: $" + person.getSalary().value);
         info.setText("Info: " + person.getInfo().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
