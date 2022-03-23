@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackermon.logic.commands.FindCommand;
-import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
+import seedu.trackermon.model.show.ShowContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -24,7 +24,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Gone")));
+                new FindCommand(new ShowContainsKeywordsPredicate(Arrays.asList("Gone")));
         assertParseSuccess(parser, "Gone", expectedFindCommand);
 
     }
