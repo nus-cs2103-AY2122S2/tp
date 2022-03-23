@@ -44,8 +44,4 @@
          <FlowPane fx:id="tags"/>
       </VBox>
    </VBox>
-   <StackPane alignment="TOP_RIGHT">
-      <Button mnemonicParsing="false" text="Edit" fx:id="edit" textAlignment="CENTER" wrapText="true"
-              minWidth="NaN" prefHeight="10" style="-fx-font-size:15" onMouseClicked="#handleEdit"/>
-   </StackPane>
 </StackPane>
