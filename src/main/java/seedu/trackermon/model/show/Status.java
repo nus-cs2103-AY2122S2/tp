@@ -39,4 +39,11 @@ public enum Status {
         String uppercaseTest = test.toUpperCase();
         return uppercaseTest.equals(COMPLETED.name()) || uppercaseTest.equals(WATCHING.name());
     }
+
+    /**
+     * Compare this status with other
+     */
+    public int compareStatus(Status other) {
+        return this.status.compareTo(other.status);
+    }
 }
