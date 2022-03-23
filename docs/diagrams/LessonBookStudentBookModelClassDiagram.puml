@@ -36,13 +36,13 @@ package LessonBook <<Rectangle>> {
 
     Class LessonName
     Class Subject
-    Class LessonStudent
+    Class LessonAddress
     Class DateTimeSlot
     Class EnrolledStudents
 
     "{abstract}\nLesson" *-right-> LessonName
     "{abstract}\nLesson" *-left-> Subject
-    "{abstract}\nLesson" *-down-> LessonStudent
+    "{abstract}\nLesson" *-down-> LessonAddress
     "{abstract}\nLesson" *-down-> DateTimeSlot
     "{abstract}\nLesson" *-down-> EnrolledStudents
 
