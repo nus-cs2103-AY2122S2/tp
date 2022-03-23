@@ -109,20 +109,21 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose specified attribute contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find ATTRIBUTE KEYWORD [MORE_KEYWORDS]`
 
+- `ATTRIBUTE` can be one of: `all` `name` `phone` `email` `address` `properties` `preference` `usertype`
+- If the specified attribute is `all`, search for the keywords in all attributes.
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
-- `find sam elon` returns `Sam Yeo`, `Elon Musk`
+- `find name John` returns `john` and `John Doe`
+- `find name sam elon` returns `Sam Yeo`, `Elon Musk`
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
@@ -219,22 +220,16 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 # FAQ
 
 # Command Summary
-                                                                                                  |
-| Action | Format, Examples  |
-| --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE
-e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller|
-| Clear | clear  |
-| Delete | delete INDEX
-e.g., delete 3  |
-| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
-e.g., edit 2 n/James Lee e/jameslee@example.com |
-| Find | find KEYWORD [MORE_KEYWORDS]
-e.g., find James Jake  |
-| List | list  |
-| Help | help  |
-|Match | match |
-| Favourite | favourite INDEX
-e.g., favourite 3  |
-| Open Favourites window                                                                                               | fw
+| Action | Format                             | Examples                                                                                                             |
+| --- |------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
+| Clear | clear                              | -                                                                                                                    |
+| Delete | delete INDEX | e.g. delete 3                                                                                                        |
+| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE] | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                       |
+| Find | find ATTRIBUTE KEYWORD [MORE KEYWORDS...] | e.g. find name James Jake                                                                                            |
+| List | list | -                                                                                                                    |
+| Help | help | -                                                                                                                    |
+|Match | match | -                                                                                                                    |
+| Favourite | favourite INDEX | e.g., favourite 3                                                                                                    |
+| Open Favourites window | fw  | - | 
 
