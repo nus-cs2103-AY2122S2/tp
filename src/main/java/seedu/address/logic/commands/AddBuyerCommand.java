@@ -18,7 +18,7 @@ public class AddBuyerCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Must include: n/ d/ p/ e/ e/ a/ r/, 't/' is optional\n"
+            + "Must include: n/ p/ , 't/' is optional\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
