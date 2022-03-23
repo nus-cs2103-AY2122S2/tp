@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showDetailsCard = new ShowDetailsCard(null);
+        showDetailsCard = new ShowDetailsCard();
 
         showDetailsPlaceholder.setContent(showDetailsCard.getRoot());
         showDetailsCard.getRoot().prefWidthProperty().bind(showDetailsPlaceholder.widthProperty());
