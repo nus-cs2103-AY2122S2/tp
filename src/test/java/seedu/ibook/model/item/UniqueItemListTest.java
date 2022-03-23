@@ -87,6 +87,18 @@ class UniqueItemListTest {
     }
 
     @Test
+    public void remove_existingItemWithSmallerQuantity_throwsItemNotFoundException() {
+        uniqueItemList.add(Q10_2022_03_01);
+        assertThrows(ItemNotFoundException.class, () -> uniqueItemList.remove(Q5_2022_03_01));
+    }
+
+    @Test
+    public void remove_existingItemWithLargerQuantity_throwsItemNotFoundException() {
+        uniqueItemList.add(Q5_2022_03_01);
+        assertThrows(ItemNotFoundException.class, () -> uniqueItemList.remove(Q10_2022_03_01));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueItemList.asUnmodifiableObservableList().remove(0));

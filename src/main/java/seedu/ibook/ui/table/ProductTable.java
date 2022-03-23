@@ -15,6 +15,8 @@ public class ProductTable extends UiComponent<VBox> {
 
     private static final String FXML = "Table/ProductTable.fxml";
 
+    private final ObservableList<Product> filteredIBook;
+
     @FXML
     private VBox content;
 
@@ -25,12 +27,15 @@ public class ProductTable extends UiComponent<VBox> {
      */
     public ProductTable(MainWindow mainWindow) {
         super(FXML, mainWindow);
+
+        filteredIBook = getMainWindow().getFilteredIBook();
+        filteredIBook.addListener(new Listener());
+
         populateField();
     }
 
     private void populateField() {
-        ObservableList<Product> filteredIBook = getMainWindow().getFilteredIBook();
-        filteredIBook.addListener(new Listener());
+        getMainWindow().populateFilters();
         content.getChildren().clear();
         for (int i = 0; i < filteredIBook.size(); i++) {
             Product product = filteredIBook.get(i);

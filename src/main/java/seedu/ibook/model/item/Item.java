@@ -53,13 +53,33 @@ public class Item implements Comparable<Item>, Distinguishable<Item> {
     }
 
     /**
-     * Subtracts two items.
-     * @param newItem Item to subtract.
+     * Set the quantity of the item.
      */
-    public Item subtract(Item newItem) {
-        checkArgument(this.isSame(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
-        Quantity newQuantity = quantity.subtract(newItem.getQuantity());
-        return new Item(expiryDate, newQuantity);
+    public Item setQuantity(Quantity newQuantity) {
+        return new Item(product, expiryDate, newQuantity);
+    }
+
+    /**
+     * Increase the quantity of the item.
+     */
+    public Item increment(Quantity quantity) {
+        Quantity newQuantity = this.quantity.add(quantity);
+        return setQuantity(newQuantity);
+    }
+
+    /**
+     * Decrease the quantity of the item.
+     */
+    public Item decrement(Quantity quantity) {
+        Quantity newQuantity = this.quantity.subtract(quantity);
+        return setQuantity(newQuantity);
+    }
+
+    /**
+     * Checks if the quantity of the item is zero.
+     */
+    public boolean isEmpty() {
+        return quantity.isEmpty();
     }
 
     public boolean isExpired() {

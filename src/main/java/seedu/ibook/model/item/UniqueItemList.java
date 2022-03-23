@@ -74,19 +74,86 @@ public class UniqueItemList extends UniqueList<Item> {
     }
 
     /**
-     * Removes the equivalent item from the list.
+     * Set the quantity of the specified item.
      */
-    public void remove(Item toRemove) {
-        requireNonNull(toRemove);
-        if (!contains(toRemove)) {
-            throw new ElementNotFoundException();
+    public void setItemCount(Item target, Quantity quantity) {
+        requireAllNonNull(target, quantity);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ProductNotFoundException();
         }
-        Item existingItem = getExisting(toRemove);
-        super.remove(existingItem);
-        Item newItem = existingItem.subtract(toRemove);
-        if (!newItem.getQuantity().isEmpty()) {
-            super.add(newItem);
+
+        Item newItem = target.setQuantity(quantity);
+        internalList.set(index, newItem);
+    }
+
+    /**
+     * Increase the quantity of the specified item.
+     */
+    public void incrementItemCount(Item target, Quantity quantity) {
+        requireAllNonNull(target, quantity);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ProductNotFoundException();
         }
-        FXCollections.sort(asObservableList());
+
+        Item newItem = target.increment(quantity);
+        internalList.set(index, newItem);
+    }
+
+    /**
+     * Increase the quantity of the specified item by 1.
+     */
+    public void incrementItemCount(Item target) {
+        incrementItemCount(target, new Quantity(1));
+    }
+
+    /**
+     * Decrease the quantity of the specified item.
+     */
+    public void decrementItemCount(Item target, Quantity quantity) {
+        requireAllNonNull(target, quantity);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ProductNotFoundException();
+        }
+
+        Item newItem = target.decrement(quantity);
+        if (newItem.isEmpty()) {
+            internalList.remove(index);
+        } else {
+            internalList.set(index, newItem);
+        }
+    }
+
+    /**
+     * Decrease the quantity of the specified item by 1.
+     */
+    public void decrementItemCount(Item target) {
+        decrementItemCount(target, new Quantity(1));
+    }
+
+    public Integer getTotalQuantity() {
+        return internalList.stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
+    }
+
+    public void setItems(UniqueItemList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code items}.
+     * @param items
+     */
+    public void setItems(List<Item> items) {
+        requireAllNonNull(items);
+        internalList.clear();
+        for (Item item: items) {
+            add(item);
+        }
     }
 }

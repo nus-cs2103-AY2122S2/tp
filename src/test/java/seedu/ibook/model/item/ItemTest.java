@@ -27,16 +27,6 @@ class ItemTest {
     }
 
     @Test
-    void subtract() {
-        // 10 - 5 = 5
-        Item newItem = Q10_2022_03_01.subtract(Q5_2022_03_01);
-        assertEquals(Q5_2022_03_01, newItem);
-
-        // subtracting Items with different expiry dates -> Exception
-        assertThrows(IllegalArgumentException.class, () -> Q5_2022_03_01.subtract(Q5_2022_03_02));
-    }
-
-    @Test
     void isExpired() {
         Item expiredItem = new ItemBuilder().withExpiryDate("2000-01-01").build();
         assertTrue(expiredItem.isExpired());
