@@ -15,6 +15,7 @@ import seedu.trackbeau.logic.commands.ExitCommand;
 import seedu.trackbeau.logic.commands.FindCommand;
 import seedu.trackbeau.logic.commands.HelpCommand;
 import seedu.trackbeau.logic.commands.ListCommand;
+import seedu.trackbeau.logic.commands.service.ListServicesCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 
 /**
@@ -43,7 +44,9 @@ public class TrackBeauParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-
+        case ListServicesCommand.COMMAND_WORD:
+            return new ListServicesCommand();
+            
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 

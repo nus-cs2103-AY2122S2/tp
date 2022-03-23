@@ -12,6 +12,7 @@ import seedu.trackbeau.commons.exceptions.IllegalValueException;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.service.Service;
 
 /**
  * An Immutable TrackBeau that is serializable to JSON format.
@@ -20,15 +21,19 @@ import seedu.trackbeau.model.customer.Customer;
 class JsonSerializableTrackBeau {
 
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
+    public static final String MESSAGE_DUPLICATE_SERVICE = "Services list contains duplicate service(s).";
 
     private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
+    private final List<JsonAdaptedService> services = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableTrackBeau} with the given customers.
      */
     @JsonCreator
-    public JsonSerializableTrackBeau(@JsonProperty("customers") List<JsonAdaptedCustomer> customers) {
+    public JsonSerializableTrackBeau(@JsonProperty("customers") List<JsonAdaptedCustomer> customers,
+                                     @JsonProperty("services") List<JsonAdaptedService> services) {
         this.customers.addAll(customers);
+        this.services.addAll(services);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableTrackBeau {
      */
     public JsonSerializableTrackBeau(ReadOnlyTrackBeau source) {
         customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
+        services.addAll(source.getServiceList().stream().map(JsonAdaptedService::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +59,14 @@ class JsonSerializableTrackBeau {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
             trackBeau.addCustomer(customer);
+        }
+
+        for (JsonAdaptedService jsonAdaptedService : services) {
+            Service service = jsonAdaptedService.toModelType();
+            if (trackBeau.hasService(service)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_SERVICE);
+            }
+            trackBeau.addService(service);
         }
         return trackBeau;
     }
