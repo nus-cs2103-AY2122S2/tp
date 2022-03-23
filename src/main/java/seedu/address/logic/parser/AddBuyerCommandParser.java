@@ -14,6 +14,9 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.House;
+import seedu.address.model.property.PriceRange;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
 
@@ -37,6 +40,7 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Appointment appointment = new Appointment("");
+        PropertyToBuy desiredProperty = ;
 
         Buyer buyer = new Buyer(name, phone, appointment, tagList, null);
         return new AddBuyerCommand(buyer);
