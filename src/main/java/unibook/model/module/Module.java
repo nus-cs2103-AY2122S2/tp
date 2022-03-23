@@ -1,5 +1,6 @@
 package unibook.model.module;
 
+import static java.util.Objects.requireNonNull;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -10,15 +11,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unibook.model.module.exceptions.DuplicateGroupException;
+import unibook.model.module.exceptions.GroupNotFoundException;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
+import unibook.model.person.exceptions.DuplicatePersonException;
+import unibook.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents a Module in the UniBook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-@JsonIgnoreProperties(value = {"students", "professors"})
 public class Module {
 
     // Identity fields
@@ -29,23 +34,11 @@ public class Module {
     // Data fields
     private final ObservableList<Professor> professors;
     private final ObservableList<Student> students;
+    private final ObservableList<Group> groups;
 
-    /**
-     * Default constructor taking in String for Jackson
-     */
-    @JsonCreator
-    public Module(@JsonProperty("moduleName") String moduleName, @JsonProperty("moduleCode") String moduleCode) {
-        requireAllNonNull(moduleName, moduleCode);
-        this.moduleName = new ModuleName(moduleName);
-        this.moduleCode = new ModuleCode(moduleCode);
-        this.professors = FXCollections.observableArrayList();
-        this.students = FXCollections.observableArrayList();
-    }
 
     /**
      * Constructor for a Module, assuming no students and no professor initially.
-     * can add if necessary.
-     *
      * @param moduleName
      * @param moduleCode
      */
@@ -55,10 +48,26 @@ public class Module {
         this.moduleCode = moduleCode;
         this.professors = FXCollections.observableArrayList();
         this.students = FXCollections.observableArrayList();
+        this.groups = FXCollections.observableArrayList();
     }
 
     /**
-     * Constructor for a Module, using a pre-existing list of students and professors.
+     * Contstructor for a Module, with a given name, code and groups.
+     * @param moduleName
+     * @param moduleCode
+     * @param groups
+     */
+    public Module(ModuleName moduleName, ModuleCode moduleCode, ObservableList<Group> groups) {
+        requireAllNonNull(moduleName, moduleCode, groups);
+        this.moduleName = moduleName;
+        this.moduleCode = moduleCode;
+        this.groups = groups;
+        this.students = FXCollections.observableArrayList();
+        this.professors = FXCollections.observableArrayList();
+    }
+
+    /**
+     * Constructor for a Module, using a pre-existing list of students, professors and groups.
      *
      * @param moduleName
      * @param moduleCode
@@ -66,12 +75,14 @@ public class Module {
      * @param students
      */
     public Module(ModuleName moduleName, ModuleCode moduleCode,
-                  ObservableList<Professor> professors, ObservableList<Student> students) {
-        requireAllNonNull(moduleName, moduleCode, professors, students);
+                  ObservableList<Professor> professors, ObservableList<Student> students,
+                  ObservableList<Group> groups) {
+        requireAllNonNull(moduleName, moduleCode, professors, students, groups);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
         this.professors = professors;
         this.students = students;
+        this.groups = groups;
     }
 
     /**
@@ -82,6 +93,7 @@ public class Module {
         this.moduleCode = null;
         this.professors = null;
         this.students = null;
+        this.groups = null;
     }
 
     /**
@@ -90,7 +102,7 @@ public class Module {
      * @return the name of the module.
      */
     public ModuleName getModuleName() {
-        return this.moduleName;
+        return moduleName;
     }
 
     /**
@@ -99,7 +111,7 @@ public class Module {
      * @return the code of the module.
      */
     public ModuleCode getModuleCode() {
-        return this.moduleCode;
+        return moduleCode;
     }
 
     /**
@@ -108,7 +120,7 @@ public class Module {
      * @return The observable list containing all professor objects.
      */
     public ObservableList<Professor> getProfessors() {
-        return this.professors;
+        return professors;
     }
 
     /**
@@ -117,25 +129,67 @@ public class Module {
      * @return The observable list containing all student objects.
      */
     public ObservableList<Student> getStudents() {
-        return this.students;
+        return students;
+    }
+
+    /**
+     * Returns the current list of groups.
+     * @return The observable list containing all the group objects.
+     */
+    public ObservableList<Group> getGroups() {
+        return groups;
+    }
+
+
+    /**
+     * Returns the group in the group list of this module that has the given unique name.
+     * @param grpName of the group to get.
+     * @return group that has the exact given grpname.
+     */
+    public Group getGroupByName(String grpName) {
+        requireNonNull(grpName);
+        for (Group grp : groups) {
+            if (grp.getGroupName().equals(grpName)) {
+                return grp;
+            }
+        }
+        throw new GroupNotFoundException();
     }
 
     /**
      * Adds a student {@code s} to the list of the students.
-     *
      * @param s
      */
     public void addStudent(Student s) {
-        this.students.add(s);
+        requireNonNull(s);
+        if (students.contains(s)) {
+            throw new DuplicatePersonException();
+        }
+        students.add(s);
     }
 
     /**
      * Adds a professor {@code p} to the list of the professors.
-     *
      * @param p
      */
     public void addProfessor(Professor p) {
-        this.professors.add(p);
+        requireNonNull(p);
+        if (professors.contains(p)) {
+            throw new DuplicatePersonException();
+        }
+        professors.add(p);
+    }
+
+    /**
+     * Adds a group {@code g} to the list of groups.
+     * @param g
+     */
+    public void addGroup(Group g) {
+        requireNonNull(g);
+        if (groups.contains(g)) {
+            throw new DuplicateGroupException();
+        }
+        groups.add(g);
     }
 
     /**
@@ -170,10 +224,26 @@ public class Module {
      */
     public void removePerson(Person person) {
         if (person instanceof Student) {
+            if (!students.contains(person)) {
+                throw new PersonNotFoundException();
+            }
             students.remove(person);
         } else {
+            if (!professors.contains(person)) {
+                throw new PersonNotFoundException();
+            }
             professors.remove(person);
         }
+    }
+
+    /**
+     * Remove a group from the list of groups under this module.
+     */
+    public void removeGroup(Group group) {
+        if (!groups.contains(group)) {
+            throw new GroupNotFoundException();
+        }
+        groups.remove(group);
     }
 
     /**

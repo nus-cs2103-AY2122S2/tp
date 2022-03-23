@@ -1,5 +1,7 @@
 package unibook.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -7,25 +9,29 @@ import org.junit.jupiter.api.Test;
 
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.commons.util.JsonUtil;
+import unibook.model.UniBook;
 import unibook.testutil.Assert;
+import unibook.testutil.TypicalUniBook;
 
 public class JsonSerializableUniBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableUniBookTest");
-    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsUniBook.json");
-    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonUniBook.json");
+    private static final Path TYPICAL_UNIBOOK_FILE = TEST_DATA_FOLDER.resolve("typicalUniBook.json");
+    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidUniBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonUniBook.json");
+    private static final Path DUPLICATE_MODULE_FILE = TEST_DATA_FOLDER.resolve("duplicateModuleUniBook.json");
+    private static final Path DUPLICATE_MODULE_CODE_FILE = TEST_DATA_FOLDER.resolve("duplicateModuleCodeUniBook.json");
+    private static final Path DUPLICATE_GROUP_FILE = TEST_DATA_FOLDER.resolve("duplicateGroupUniBook.json");
+    private static final Path DUPLICATE_GROUP_CODE_FILE = TEST_DATA_FOLDER.resolve("duplicateGroupCodeUniBook.json");
 
-    /** TODO -> need make new builders for new unibook layout
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
-        JsonSerializableUniBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+    public void toModelType_typicalUniBookFile_success() throws Exception {
+        JsonSerializableUniBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_UNIBOOK_FILE,
             JsonSerializableUniBook.class).get();
         UniBook uniBookFromFile = dataFromFile.toModelType();
-        UniBook typicalPersonsUniBook = TypicalPersons.getTypicalUniBook();
+        UniBook typicalPersonsUniBook = TypicalUniBook.getTypicalUniBook();
         assertEquals(uniBookFromFile, typicalPersonsUniBook);
     }
-     */
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {

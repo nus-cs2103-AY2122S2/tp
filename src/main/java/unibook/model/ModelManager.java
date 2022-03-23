@@ -115,15 +115,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPersonToTheirModules(Person person) {
-        try {
-            uniBook.addPersonToAllTheirModuleCodes(person);
-        } catch (PersonNoSubtypeException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
@@ -175,17 +166,6 @@ public class ModelManager implements Model {
         CollectionUtil.requireAllNonNull(target, editedModule);
 
         uniBook.setModule(target, editedModule);
-    }
-
-    @Override
-    public boolean isModuleExist(Person person) {
-        Set<ModuleCode> moduleCodes = person.getModuleCodes();
-        for (ModuleCode moduleCode : moduleCodes) {
-            if (!uniBook.hasModule(moduleCode)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override

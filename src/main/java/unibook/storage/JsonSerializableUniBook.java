@@ -56,10 +56,11 @@ class JsonSerializableUniBook {
             } else if (p instanceof Professor) {
                 persons.add(new JsonAdaptedProfessor((Professor) p));
             } else {
-                //regular person, just add to unibook as JsonAdaptedPerson
-                persons.add(new JsonAdaptedPerson(p));
+                //person should be either a student or a professor
+               throw new PersonNoSubtypeException();
             }
         }
+        //all JsonAdaptedGroups are instantiated within the instantiation of a JsonAdaptedModule
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
     }
 
@@ -71,17 +72,13 @@ class JsonSerializableUniBook {
     public UniBook toModelType() throws IllegalValueException, PersonNoSubtypeException {
         UniBook uniBook = new UniBook();
 
-        //set to use for adding person to correct module object
-        Set<Module> moduleSet = new HashSet<>();
-
-        //add all stored modules to unibook first
+        //add all stored modules and groups (part of module) to unibook first
         for (JsonAdaptedModule jsonAdaptedModule : modules) {
             Module module = jsonAdaptedModule.toModelType();
             if (uniBook.hasModule(module)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE);
             }
             uniBook.addModule(module);
-            moduleSet.add(module);
         }
 
         //add all stored people to unibook
@@ -94,8 +91,12 @@ class JsonSerializableUniBook {
         }
 
         //add all stored people to their associated modules in unibook
+        //add all students to their groups
         for (Person p : uniBook.getPersonList()) {
             uniBook.addPersonToAllTheirModules(p);
+            if (p instanceof Student) {
+                uniBook.addStudentToAllTheirGroups((Student) p);
+            }
         }
 
         return uniBook;

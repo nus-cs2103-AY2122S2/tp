@@ -33,6 +33,7 @@ import unibook.testutil.Assert;
 import unibook.testutil.EditPersonDescriptorBuilder;
 import unibook.testutil.PersonBuilder;
 import unibook.testutil.PersonUtil;
+import unibook.testutil.StudentBuilder;
 import unibook.testutil.TypicalIndexes;
 
 public class UniBookParserTest {
@@ -41,7 +42,7 @@ public class UniBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new StudentBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
@@ -61,7 +62,7 @@ public class UniBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new StudentBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         Set<Module> modSet = new HashSet<>();
         Set<Tag> tagSet = new HashSet<>();
