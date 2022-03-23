@@ -6,7 +6,7 @@ title: User Guide
 NUSocials is a **desktop app for university students to maintain a professional contact list, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,14 +14,14 @@ NUSocials is a **desktop app for university students to maintain a professional 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `nusocials.jar` from [here]() [coming soon].
+2. Download the latest `nusocials.jar` from [here]() [coming soon].
 
-1. Copy the file to the folder you want to use as the _home folder_ for NUSocials.
+3. Copy the file to the folder you want to use as the _home folder_ for NUSocials.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * **`list`** : Lists all contacts.
@@ -39,12 +39,14 @@ NUSocials is a **desktop app for university students to maintain a professional 
     * **`find`**`n/fred` : Finds persons that match the name 'fred'.
 
     * **`find -s`**`n/fred m/cs2040s edu/computer science` : Finds persons that match the name 'fred' AND takes the module 'cs2040s' AND is studying 'computer science'.
+     
+    * **`event`** `name/Lunch appointment info/Having lunch at Hai Di Lao d/2023-11-15 t/23:19`
 
     * **`clear`** : Deletes all contacts.
 
     * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +60,7 @@ NUSocials is a **desktop app for university students to maintain a professional 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Kim Lai`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [e/NUS]` can be used as `n/Kim Lai e/NUS` or as `n/Kim Lai`.
+  e.g `n/NAME [edu/EDUCATION]` can be used as `n/Kim Lai edu/computer science` or as `n/Kim Lai`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULES]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
@@ -80,7 +82,6 @@ Shows a message explaning how to access the help page.
 ![help message](images/help_message.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 Adds a person to the address book.
@@ -143,9 +144,8 @@ Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…�
 * Persons matching at least one tag of a particular type will be returned. For example, 'find m/cs2030s m/cs2040s' may return a person tagged with 'cs2030s' or 'cs2040s'
   e.g. `n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 * All arguments for tags provided must be an exact match to existing tags.
-    
+
 Examples:
-* `find n/John` returns `john`
 * `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find i/Shopee m/cs2040s cs2030s'](images/findShopeeCS2040sCS2030sResult.png)
 
@@ -164,7 +164,7 @@ Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]�
 * All arguments for tags provided must be an exact match to existing tags.
 
 Examples:
-* `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with 'cs2040s', 'cs2030s' and 'Shopee')<br>
+* `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with cs2040s, cs2030s and Shopee)<br>
   ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
 
 ### Deleting a person : `delete`
@@ -204,6 +204,22 @@ Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [e
 
 Examples:
 * `removetag 1 i/abc-company m/CS2100 m/CS2030S` Removes the internship company and 2 modules tags from the 1st person.
+
+### Adding an event: `event`
+Adds an event into the address book.
+
+Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
+
+* Tags the participating persons to the events based on the specified `INDEX…​`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* All fields must be provided.
+* Argument provided for `DATE` has to be in the format of `yyyy-MM-dd`.
+* Argument provided for `TIME` has to be in the format of `HH:mm`.
+* Arguments for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
+* `EVENT NAME` has a limit of 100 characters.
+* `EVENT DETAILS` has a limit of 300 characters.
+
+Examples:
+* `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15` Creates the Event and adds into the address book.
 
 ### Clearing all entries : `clear`
 
@@ -246,9 +262,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MODULE] [edu/EDUCATION] [c/CCA] [i/INTERNSHIP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
 **Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105 m/CS2106`
 **RemoveTag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
+**Event** | `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME` <br> e.g., `event 1 name/Dinner Date info/Having Dinner at Bread Street Kitchen by Gordon Ramsay d/2022-12-20 t/20:15`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​INDEX` <br> e.g. `delete 1 3 5`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`

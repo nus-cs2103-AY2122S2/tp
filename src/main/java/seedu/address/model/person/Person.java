@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -58,6 +59,21 @@ public class Person implements Comparable<Person> {
         this.ccas = ccas;
     }
 
+    /**
+     * Fourth constructor for Person.
+     */
+    public Person(Person person, Event event) {
+        requireAllNonNull(person, event);
+        this.name = person.name;
+        this.phone = person.phone;
+        this.email = person.email;
+        this.address = person.address;
+        this.educations = person.educations;
+        this.internships = person.internships;
+        this.modules = person.modules;
+        this.ccas = person.ccas;
+    }
+
     public Name getName() {
         return name;
     }
@@ -88,6 +104,10 @@ public class Person implements Comparable<Person> {
 
     public List<Tag> getCcas() {
         return ccas;
+    }
+
+    public Person addEvent(Event event) {
+        return new Person(this, event);
     }
 
     public List<String> getEducationStrings() {

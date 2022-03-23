@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,10 +32,10 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> ccas = new ArrayList<>();
-    private final List<JsonAdaptedTag> educations = new ArrayList<>();
-    private final List<JsonAdaptedTag> internships = new ArrayList<>();
-    private final List<JsonAdaptedTag> modules = new ArrayList<>();
+    private final Set<JsonAdaptedTag> ccas = new HashSet<>();
+    private final Set<JsonAdaptedTag> educations = new HashSet<>();
+    private final Set<JsonAdaptedTag> internships = new HashSet<>();
+    private final Set<JsonAdaptedTag> modules = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -92,10 +93,10 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> modelCcas = new ArrayList<>();
-        final List<Tag> modelEducations = new ArrayList<>();
-        final List<Tag> modelInternships = new ArrayList<>();
-        final List<Tag> modelModules = new ArrayList<>();
+        final Set<Tag> modelCcas = new HashSet<>();
+        final Set<Tag> modelEducations = new HashSet<>();
+        final Set<Tag> modelInternships = new HashSet<>();
+        final Set<Tag> modelModules = new HashSet<>();
 
         for (JsonAdaptedTag curr : educations) {
             if (!Education.isValidTagName(curr.getTagName())) {
@@ -157,7 +158,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEducations, modelInternships,
-                modelModules, modelCcas);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, new ArrayList<>(modelEducations),
+                new ArrayList<>(modelInternships), new ArrayList<>(modelModules), new ArrayList<>(modelCcas));
     }
 }

@@ -31,7 +31,7 @@ class JsonAdaptedTag {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+        this.tagName = source.tagName;
     }
 
     @JsonValue
@@ -59,5 +59,4 @@ class JsonAdaptedTag {
             throw new IllegalValueException(INVALID_TAGTYPE);
         }
     }
-
 }

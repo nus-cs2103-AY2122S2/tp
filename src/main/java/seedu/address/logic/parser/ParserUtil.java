@@ -11,6 +11,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.DateTime;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.Information;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Education;
@@ -30,7 +33,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX_MULTIPLE = "All indexes must be unique"
                 + " and a non-zero unsigned integer.";
     public static final String INVALID_TAGTYPE = "The tag type is invalid!";
-    public static final String INVLAID_FIELD_TYPE = "The single field type is invalid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -288,5 +290,63 @@ public class ParserUtil {
             }
         }
         return new ArrayList<>(tagSet);
+    }
+
+    /**
+     * Parses {@code String name} into an {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    /**
+     * Parses {@code String info} into an {@code Information}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Information parseInfo(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        if (!Information.isValidInformation(trimmedInfo)) {
+            throw new ParseException(Information.MESSAGE_CONSTRAINTS);
+        }
+        return new Information(trimmedInfo);
+    }
+
+    /**
+     * Parses {@code String date} and {@code String time} into a {@code DateTime}.
+     * Returns a DateTime object that contains formatted date and time of the event.
+     */
+    public static DateTime parseDateTime(String date, String time) throws ParseException {
+        requireNonNull(date);
+        requireNonNull(time);
+        String trimmedDate = date.trim();
+        String trimmedTime = time.trim();
+
+        if (!DateTime.isValidTime(trimmedTime)) {
+            throw new ParseException(DateTime.TIME_MESSAGE_CONSTRAINTS);
+        } else if (!DateTime.isValidDate(trimmedDate)) {
+            throw new ParseException(DateTime.DATE_MESSAGE_CONSTRAINTS);
+        }
+
+        String[] tempDate = trimmedDate.split("-");
+        String[] tempTime = trimmedTime.split(":");
+        int year = Integer.parseInt(tempDate[0]);
+        int month = Integer.parseInt(tempDate[1]);
+        int day = Integer.parseInt(tempDate[2]);
+        int hour = Integer.parseInt(tempTime[0]);
+        int min = Integer.parseInt(tempTime[1]);
+
+
+        if (!DateTime.isValidDateTime(year, month, day, hour, min)) {
+            throw new ParseException(DateTime.DATETIME_MESSAGE_CONSTRAINTS);
+        }
+
+        return new DateTime(year, month, day, hour, min);
     }
 }
