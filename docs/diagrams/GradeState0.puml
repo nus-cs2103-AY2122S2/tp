@@ -17,9 +17,13 @@ package State {
 State1 *--> Student1
 State1 *--> Student2
 State1 *--> Module1
+Module1 --> Student1
+Module1 --> Student2
 State1 *--> ClassGroup1
+ClassGroup1 --> Student1
+ClassGroup1 --> Student2
 State1 *--> Assessment1
 Module1 *--> ClassGroup1
 Module1 *--> Assessment1
-Student2 -right[hidden]-> Student1
+
 @end

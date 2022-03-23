@@ -22,15 +22,19 @@ package State {
 State1 *--> Student1
 State1 *--> Student2
 State1 *--> Module1
+Module1 --> Student1
+Module1 --> Student2
 State1 *--> ClassGroup1
 State1 *--> Assessment1
 Module1 *--> ClassGroup1
 Module1 *--> Assessment1
+ClassGroup1 --> Student1
+ClassGroup1 --> Student2
 Assessment1 --> Attempt1
 Assessment1 --> Attempt2
 Attempt1 --> Student1
 Attempt1 --> Grade1
 Attempt2 --> Student2
 Attempt2 --> Grade2
-Attempt1 -[hidden]-> Attempt2
+
 @end

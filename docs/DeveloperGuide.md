@@ -281,11 +281,15 @@ The `Assessment` entity will be tied to a specific module. Hence, when a `TaModu
 
 Given below is an example usage scenario of how the grading mechanism behaves at each step.
 
+<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module`, `ClassGroup` and `Assessment` objects are created beforehand. `Student` objects are enrolled to the `ClassGroup` as well.
+
+</div>
+
 Step 1. The user launches the application. The `TAssist` is already populated with data.
 
 ![GradeState0](images/GradeState0.png)
 
-Step 2. The user executes `grade a\1 s\1,2 g\1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students (`s1` and `s2` respectively) with grade 1 in the `TAssist`. the `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
+Step 2. The user executes `grade a\1 s\1,2 g\1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students enrolled in the module (`s1` and `s2` respectively) with grade 1 in the `TAssist`. the `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
 
 ![GradeState1](images/GradeState1.png)
 
