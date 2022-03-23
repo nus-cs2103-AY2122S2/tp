@@ -17,7 +17,7 @@ title: Developer Guide
 * [**Implementation**](#implementation)
     * [Find command feature](#find-command-feature)
         * [What it does](#what-it-does)
-        * [Implementation](#)
+        * [Implementation](#implementation-1)
         * [Design consideration](#design-considerations)
             * [How find executes](#aspect-how-find-executes)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
