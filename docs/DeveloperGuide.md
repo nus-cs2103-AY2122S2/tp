@@ -215,7 +215,7 @@ Step 2. The user executes `list student c/2` to filter out students from the 2nd
 
 ![ListState1](images/ListState1.png)
 
-The following sequence diagram shows how the delete operation works:
+The following sequence diagram shows how the list operation works:
 
 ![ListSequenceDiagram](images/ListSequenceDiagram.png)
 
