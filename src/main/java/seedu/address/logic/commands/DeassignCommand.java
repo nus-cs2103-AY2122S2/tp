@@ -16,7 +16,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Deassigns a student from a group in ArchDuke.
+ * Deassigns a student from an existing group in ArchDuke.
  */
 public class DeassignCommand extends Command {
 
@@ -29,8 +29,6 @@ public class DeassignCommand extends Command {
             + PREFIX_GROUP_NAME + "GROUP_NAME\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GROUP_NAME + "CS2103-W16-3";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Group: %2$s";
 
     public static final String MESSAGE_PERSON_DOES_NOT_EXIST = "%1$s does not exist in %2$s.";
 
