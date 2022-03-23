@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalBuyers.YUQI;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.PriceRange;
@@ -109,7 +108,7 @@ public class BuyerTest {
 
         PropertyToBuy ptb1 = new PropertyToBuy(h1, pr1);
         PropertyToBuy ptb2 = new PropertyToBuy(h2, pr2);
-        
+
         // Same property
         editedYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
         Buyer testYuqi = new BuyerBuilder(YUQI).withProperty(ptb1).build();
