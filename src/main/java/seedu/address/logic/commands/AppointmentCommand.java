@@ -25,9 +25,9 @@ public class AppointmentCommand extends Command {
             + "number used in the last pet listing.\n"
             + "To add appointment: \n"
             + "Parameters: INDEX (must be a positive integer)"
-            + "dt/[yyyy-MM-dd HH:mm] at/[location]\n"
+            + "dt/[dd-MM-yyyy HH:mm] at/[location]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "date/2022-03-04 09:30 at/ NUS Vet Clinic\n"
+            + "date/04-03-2022 09:30 at/ NUS Vet Clinic\n"
             + "To clear appointment: \n"
             + "Parameters: INDEX (must be a positive integer) clear"
             + "Example: " + COMMAND_WORD + " 1 clear";
