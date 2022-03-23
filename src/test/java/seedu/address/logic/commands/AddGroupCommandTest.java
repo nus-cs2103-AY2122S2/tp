@@ -46,8 +46,8 @@ public class AddGroupCommandTest {
         AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
         ModelStub modelStub = new AddGroupCommandTest.ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP,
-                () -> addGroupCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+            AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () -> addGroupCommand.execute(modelStub));
     }
 
     @Test
