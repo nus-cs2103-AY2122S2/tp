@@ -146,7 +146,7 @@ Format: `find n/[NAME] s/[STATUS] t/[TAG]`
 
 Examples:
 * `find n/shingeki s/watching t/seinen` displays all the shows in the Trackermon's show list that contain **shingeki** in NAME, **watching** in STATUS, and **seinen** in TAG. [put image here after ui update]
-* `find n/Shutter Island s/watching` displays all the shows in the Trackermon's show list that contain **Shutter AND Island** in NAME, and **watching** in STATUS. [put image here after ui update]
+* `find n/Shutter Island s/watching` displays all the shows in the Trackermon's show list that contains **Shutter Island** in NAME, and **watching** in STATUS. [put image here after ui update]
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `shing` will match `shingeki`.
