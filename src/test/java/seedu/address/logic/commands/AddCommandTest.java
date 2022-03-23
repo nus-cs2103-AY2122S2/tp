@@ -158,7 +158,7 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Transaction> getTransactionList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
     }
 
