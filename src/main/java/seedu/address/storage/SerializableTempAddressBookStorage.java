@@ -17,12 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A class to manage temporary files of AddressBook data.
+ */
 public class SerializableTempAddressBookStorage implements TempAddressBookStorage {
     private static final int LIMIT = 10;
 
     private final Path fileDirectory;
     private final List<Path> tempFiles;
 
+    /**
+     * Creates a Address Book Storage that manages temporary data.
+     * @param fileDirectory
+     */
     public SerializableTempAddressBookStorage(Path fileDirectory) {
         this.fileDirectory = fileDirectory;
         tempFiles = new ArrayList<>();
@@ -66,6 +73,12 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
         return getTempAddressBookFileData(prevDataTempFile);
     }
 
+    /**
+     * Gets the data from a temporary file based on the filepath provided.
+     *
+     * @param tempDataTempFile file path of the temporary files.
+     * @return The data read from the file path.
+     */
     public Optional<ReadOnlyAddressBook> getTempAddressBookFileData(Path tempDataTempFile) {
         try {
             ObjectInputStream objectInputStream =
