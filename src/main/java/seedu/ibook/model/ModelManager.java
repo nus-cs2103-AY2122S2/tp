@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -109,6 +110,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedProduct);
 
         iBook.setProduct(target, editedProduct);
+    }
+
+    @Override
+    public void deleteItem(Product targetProduct, Item target) {
+        requireAllNonNull(targetProduct, target);
+
+        iBook.removeItem(targetProduct, target);
     }
 
     //=========== Filtered Product List Accessors =============================================================

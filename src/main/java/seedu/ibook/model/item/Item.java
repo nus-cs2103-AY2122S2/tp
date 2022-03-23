@@ -15,16 +15,14 @@ public class Item implements Comparable<Item> {
 
     private static final String ITEMS_MUST_BE_EQUAL_CONSTRAINT = "Items must be equal";
 
-    private final Product product;
     private final ExpiryDate expiryDate;
     private final Quantity quantity;
 
     /**
      * Every field must be present and not null.
      */
-    public Item(Product product, ExpiryDate expiryDate) {
-        requireAllNonNull(product, expiryDate);
-        this.product = product;
+    public Item(ExpiryDate expiryDate) {
+        requireAllNonNull(expiryDate);
         this.expiryDate = expiryDate;
         this.quantity = new Quantity(1);
     }
@@ -32,15 +30,10 @@ public class Item implements Comparable<Item> {
     /**
      * Every field must be present and not null.
      */
-    public Item(Product product, ExpiryDate expiryDate, Quantity quantity) {
-        requireAllNonNull(product, expiryDate, quantity);
-        this.product = product;
+    public Item(ExpiryDate expiryDate, Quantity quantity) {
+        requireAllNonNull(expiryDate, quantity);
         this.expiryDate = expiryDate;
         this.quantity = quantity;
-    }
-
-    public Product getProduct() {
-        return product;
     }
 
     public ExpiryDate getExpiryDate() {
@@ -58,7 +51,7 @@ public class Item implements Comparable<Item> {
     public Item add(Item newItem) {
         checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
         Quantity newQuantity = quantity.add(newItem.getQuantity());
-        return new Item(product, expiryDate, newQuantity);
+        return new Item(expiryDate, newQuantity);
     }
 
     /**
@@ -68,7 +61,7 @@ public class Item implements Comparable<Item> {
     public Item subtract(Item newItem) {
         checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
         Quantity newQuantity = quantity.subtract(newItem.getQuantity());
-        return new Item(product, expiryDate, newQuantity);
+        return new Item(expiryDate, newQuantity);
     }
 
     public boolean isExpired() {
@@ -85,7 +78,6 @@ public class Item implements Comparable<Item> {
         }
 
         return otherItem != null
-            && otherItem.getProduct().equals(getProduct())
             && otherItem.getExpiryDate().equals(getExpiryDate());
     }
 
@@ -104,22 +96,20 @@ public class Item implements Comparable<Item> {
         }
 
         Item otherItem = (Item) other;
-        return otherItem.getProduct().equals(getProduct())
-            && otherItem.getExpiryDate().equals(getExpiryDate())
+        return otherItem.getExpiryDate().equals(getExpiryDate())
             && otherItem.getQuantity().equals(getQuantity());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(product, expiryDate, quantity);
+        return Objects.hash(expiryDate, quantity);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getProduct())
-            .append("; ExpiryDate: ")
+        builder.append("ExpiryDate: ")
             .append(getExpiryDate())
             .append("; Quantity: ")
             .append(getQuantity());
