@@ -185,7 +185,20 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Cleaner code. Better for future scalability.
     * Cons: Contributes to more lines of code. Harder to set up initially.
 
-    
+### \[Proposed\] Filter feature
+
+#### Proposed Implementation 
+The proposed filter mechanism is facilitated by `FilterCommand` class. It extends `Command` and takes in a keyword that the user wishes to filter the Address Book by followed by a given search word. The keyword is parsed by `FilterCommandParser`. A search word will follow after the keyword to indicate what the user wants to filter out specifically.
+
+Currently, pet list can be filtered by date, owner name, tag and pet's appointment date. Each class implements the `Comparable` interface in order to be compared and matched to the given search word.
+
+The following sequence diagram shows how the filter operation works when `filter tag/ beagle` is called:
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new `filter` command:
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
