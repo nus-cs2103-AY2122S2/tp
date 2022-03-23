@@ -20,6 +20,11 @@ title: Developer Guide
         * [Implementation](#implementation-1)
         * [Design consideration](#design-considerations)
             * [How find executes](#aspect-how-find-executes)
+    * [Sort command feature](#sort-command-feature)
+      * [What it does](#what-it-does-1)
+        * [Implementation](#implementation-2)
+        * [Design consideration](#design-considerations-1)
+            * [How sort executes](#aspect-how-sort-executes)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -230,7 +235,7 @@ Step 1: The user launches Trackermon and enters `find n/Shingeki no Kyojin s/wat
 Step 2: The find command will check and see whether any shows contain the name `Shingeki no Kyojin` and the status `watching` using the `Model#updateFilteredShowList` method.
 
 Step 3:
-`Model#updateFilteredShowList` will be called and model will be udpated.
+`Model#updateFilteredShowList` will be called and model will be updated.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -250,6 +255,44 @@ The following activity diagram summarizes what happens when a user executes a va
 - **Alternative 2:** Directly check whether the show is in the show list in the find command parser without a predicate.
   - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
+
+---
+### Sort command feature
+
+#### What it does
+
+Sort the list of shows according user's input prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, by default it will sort by name then by status.
+
+#### Implementation
+After entering the sort command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax. Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `SortCommand` object will be created with `Comparator` according to the specified prefixes. Else, a `NameComparator` will be created which can be used to sort names in ascending order. `SortCommand` is a class that inherits the `Command` abstract class. `SortCommand` implements the `execute()` method from the `Command` abstract class where on execution, sort the model's list of shows according to the `Comparator`. The model is then updated with the sorted show list.
+
+Given below is an example usage scenario and the step-by-step flow of the sort command.
+
+Step 1: The user launches Trackermon and enters `sort sna/ ssd/` to sort the list of shows.
+
+Step 2: The sort command parser will check for prefixes and generate the appropriate `Comparator` for the SortCommand. In this case it generate a `NameComparator().thenComparing(StatusComparator().reverse()))`
+
+Step 3: When the sort command executes, it will call`Model#updateSortedShowList` method.
+
+Step 4: The sorted list in model will apply the Comparator and model will be updated in order by ascending name then descending status.
+
+The following activity diagram summarizes what happens when a user executes a sort command:
+
+<img src="images/SortShowDiagram.png">
+
+The following sequence diagram summarizes what happens when a user executes a sort command, in this case sort with no prefix:
+<img src="images/SortSequenceDiagram.png">
+
+#### Design considerations:
+##### Aspect: How sort executes
+- **Alternative 1 (current choice):** The `sort` command checks for the optional prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, it will sort by name then by default.
+
+  - Pros: No invalid commands input by the user
+  - Cons: Users need to get use to the prefixes used.
+
+- **Alternative 2:** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
+    - Pros: Users have fewer prefixes to remember
+    - Cons: Users need to remember valid inputs
 
 ---
 
@@ -302,6 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | long time user | find shows of specific genres                         | recommend those shows to my friends                    |
 | `* * `   | long time user | find a show I may or may not have watched             | decide whether to watch that show or not               |
 | `* * `   | long time user | find whether a show I am watching is completed or not | continue with it if it is not completed                |
+| `* * `   | long time user | sort the list of show                                 | view the list in a organised manner                    |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -531,6 +575,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+**Use case: UC09 - Sort the list of shows**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: A list of sorted shows will be displayed for the user.**
+
+**MSS**
+
+1. User requests to sort the current list of shows.
+2. Trackermon sort the show list.
+3. Trackermon shows a list of shows in a sorted order.
+
+   Use case ends.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
 
 ### Non-Functional Requirements
 
@@ -722,3 +783,44 @@ testers are expected to do more *exploratory* testing.
       Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
    
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Sorting the list of shows
+
+1. Sorting the list of shows
+
+    1. Prerequisites: None, but if the list is empty, all sort will also lead to no results.
+
+    2. Test case: `sort`<br>
+       Expected: The list of show sorted by name in ascending order.
+
+    3. Test case: `sort sna/`<br>
+       Expected:  The list of show sorted by name in ascending order.
+   
+    4. Test case: `sort snd/`<br>
+       Expected:  The list of show sorted by name in descending order.
+   
+    5. Test case: `sort ssa/`<br>
+       Expected:  The list of show sorted by status in ascending order.
+   
+    6. Test case: `sort ssd/`<br>
+       Expected:  The list of show sorted by status in descending order.
+   
+    7. Test case: `sort sna/ snd/`<br>
+       Expected: The list of show sorted by name in ascending order.
+   
+    8. Test case: `sort ssa/ ssd/`<br>
+       Expected: The list of show sorted by status in ascending order. 
+   
+    9. Test case: `sort sna/ ssd/`<br>
+       Expected: The list of show sorted by name in ascending order followed by status in descending order.
+   
+    10.Test case: `sort sna/ ssd/ so/`<br>
+       Expected: The list of show sorted by status in descending order followed by name in ascending order.
+   
+
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
