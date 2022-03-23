@@ -336,29 +336,30 @@ Use case ends.
   * 1b1. MyGM displays failure.  
   Use case ends.
 
-**Use case: UC02 - Mark The Attendance of A Player**
+**Use case: UC02 - Create a new Lineup**
 
 **MSS**
 
-1. User requests to view the team schedule.
-2. MyGM displays the team schedule.
-3. User requests to mark the attendance of a player for an event
-4. MyGM displays the success message.  
+1. User adds a new lineup.
+2. MyGM displays the success message.
+3. User put a player into the lineup
+4. MyGM displays the success message.
+   Repeat 3 until the lineup is full.
    Use case ends.
 
 **Extensions**
 
-* 1a. MyGM cannot find the team. 
+* 1a. The lineup already exist in MyGM  
   * 1a1. MyGM displays the error message.   
-  Use case returns to the start of 1.
-
-* 3a. MyGM cannot find the player in the team. 
-  * 3a1. MyGM displays failure.   
   Use case returns to the start of 3.
 
-* 3b. MyGM cannot find the schedule based on the request. 
-  * 3b1. MyGM requests for correct details.  
+* 3a. MyGM cannot find the player. 
+  * 3a1. MyGM displays the error message.   
   Use case returns to the start of 3.
+
+* 3b. The lineup is already full. 
+  * 3b1. MyGM displays the error message.  
+  Use case ends.
 
 **Use case: UC03 - Tagging a Player’s Position**
 
