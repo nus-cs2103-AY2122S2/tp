@@ -1,0 +1,14 @@
+@startuml
+start
+:User executes Appointment command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([argument == Index dateTime location])
+    : Add and store appointment details in database;
+else ([argument == index clear])
+    : Clear and delete appointment details in database;
+endif
+stop
+@enduml
