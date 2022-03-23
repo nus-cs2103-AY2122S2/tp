@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ACADEMIC_MAJOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.NUS_FINTECH_SOCIETY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -22,6 +23,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -29,8 +31,13 @@ public class AddressBookTest {
     private final AddressBook addressBook = new AddressBook();
 
     @Test
-    public void constructor() {
+    public void constructorPerson() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+    }
+
+    @Test
+    public void constructorGroup() {
+        assertEquals(Collections.emptyList(), addressBook.getGroupList());
     }
 
     @Test
@@ -63,14 +70,30 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasGroup_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasGroup(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasGroup(NUS_FINTECH_SOCIETY));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupInAddressBook_returnsTrue() {
+        addressBook.addGroup(NUS_FINTECH_SOCIETY);
+        assertTrue(addressBook.hasGroup(NUS_FINTECH_SOCIETY));
     }
 
     @Test
@@ -83,8 +106,20 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasGroup_groupWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addGroup(NUS_FINTECH_SOCIETY);
+        Group editedNusFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY).build();
+        assertTrue(addressBook.hasGroup(editedNusFintechSociety));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void getGroupList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getGroupList().remove(0));
     }
 
     /**
