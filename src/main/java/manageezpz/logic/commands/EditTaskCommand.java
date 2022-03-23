@@ -1,8 +1,6 @@
 package manageezpz.logic.commands;
 
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static manageezpz.commons.core.Messages.MESSAGE_TASK_UPDATE_SUCCESS;
-import static manageezpz.commons.core.Messages.MESSAGE_UNEXPECTED_ERROR;
+import static manageezpz.commons.core.Messages.*;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import manageezpz.commons.core.index.Index;
@@ -11,6 +9,8 @@ import manageezpz.logic.parser.ParserUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
 import manageezpz.model.task.*;
+
+import java.util.ArrayList;
 
 /**
  * Edits the details of an existing task in the address book.
@@ -93,6 +93,19 @@ public class EditTaskCommand extends Command {
         }
     }
 
+    private ArrayList<Time> handleEventStartAndEndTime(String start, String end) throws ParseException {
+        Time startTime = parseTime(start);
+        Time endTime = parseTime(end);
+        ArrayList<Time> startEndTimeStorageArr = new ArrayList<>();
+        if (endTime.getParsedTime().compareTo(startTime.getParsedTime()) < 0) {
+            throw new ParseException(MESSAGE_INVAlID_TIME_RANGE);
+        } else {
+            startEndTimeStorageArr.add(startTime);
+            startEndTimeStorageArr.add(endTime);
+            return startEndTimeStorageArr;
+        }
+    }
+
     private CommandResult handleTodo(Todo currentTask, Model model, String desc) throws ParseException {
         try {
             Description taskDesc = ParserUtil.parseDescription(desc);
@@ -103,7 +116,6 @@ public class EditTaskCommand extends Command {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE), pe);
         }
     }
-
 
     private CommandResult handleDeadline(Deadline currentTask, Model model, String desc, String date, String time)
             throws ParseException {
@@ -135,21 +147,38 @@ public class EditTaskCommand extends Command {
         return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, newTask));
     }
 
-    private CommandResult handleEvent(Event currentTask, Model model, String desc, String time, String date)
+    private CommandResult handleEvent(Event currentTask, Model model, String desc, String date, String time)
             throws ParseException {
-        if (!desc.isEmpty() && time.isEmpty() && date.isEmpty()) {
-            try {
-                Description taskDesc = ParserUtil.parseDescription(desc);
-                Event newTask = new Event(taskDesc, currentTask.getDate(),
-                        currentTask.getStartTime(), currentTask.getEndTime());
-                model.setTask(currentTask, newTask);
-                return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, newTask));
-            } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditTaskCommand.MESSAGE_USAGE), pe);
-            }
+
+        Description eventDescription;
+        Time startTime;
+        Time endTime;
+        Date eventDate;
+
+        if (desc.isEmpty()) {
+            eventDescription = currentTask.getDescription();
         } else {
-            throw new ParseException("time and date update not supported yet.");
+            eventDescription = parseDesc(desc);
         }
+
+        if (time.isEmpty()) {
+            startTime = currentTask.getStartTime();
+            endTime = currentTask.getEndTime();
+        } else {
+            String[] splitStartEnd = time.split(" ");
+            ArrayList<Time> timeArr = handleEventStartAndEndTime(splitStartEnd[0], splitStartEnd[1]);
+            startTime = timeArr.get(0);
+            endTime = timeArr.get(1);
+        }
+
+        if (date.isEmpty()) {
+            eventDate = currentTask.getDate();
+        } else {
+            eventDate = parseDate(date);
+        }
+
+        Event newTask = new Event(eventDescription, eventDate, startTime, endTime);
+        model.setTask(currentTask, newTask);
+        return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, newTask));
     }
 }

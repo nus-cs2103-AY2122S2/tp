@@ -15,5 +15,6 @@ public class Messages {
     public static final String MESSAGE_TASK_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_TASK_UPDATE_SUCCESS = "Update task success: \n%1$s";
     public static final String MESSAGE_UNEXPECTED_ERROR = "An unexpected error has occurred.";
+    public static final String MESSAGE_INVAlID_TIME_RANGE = "The time range you provided is invalid.";
 
 }
