@@ -66,7 +66,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveBaseName.set('TeachWhat!.jar')
+    archiveBaseName.set('TeachWhat!')
 }
 
 run {
