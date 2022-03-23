@@ -285,6 +285,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         task.assignedTo(person);
     }
 
+    /**
+     * Checks if a given task has a priority tagged to it.
+     * @param task the task to be checked.
+     * @return true if the task is tagged with a prioirity, false otherwise.
+     */
+    public boolean hasPriority(Task task) {
+        requireNonNull(task);
+        boolean returnValue;
+        if (task.getPriority() != null) {
+            returnValue = true;
+        } else {
+            returnValue = false;
+        }
+        return returnValue;
+    }
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
     public void untagTask(Task task, Person person) {
         task.removeAssigned(person);
     }
@@ -355,4 +375,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }

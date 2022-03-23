@@ -15,6 +15,11 @@ import manageezpz.model.person.Person;
 public class Task {
     protected boolean isDone;
     protected String type;
+    protected Priority priority;
+
+    enum Priority {
+        LOW, MEDIUM, HIGH;
+    }
 
     // Identity fields
     private final Description taskDescription;
@@ -79,6 +84,14 @@ public class Task {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = Priority.valueOf(priority);
+    }
+
+    public Priority getPriority() {
+        return this.priority;
     }
 
     /**
