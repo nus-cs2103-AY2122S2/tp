@@ -18,8 +18,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 
+import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodeContainsKeywordsPredicate;
@@ -27,9 +28,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.StudentIdContainsKeywordsPredicate;
-
-
-import java.util.Arrays;
 
 public class FindCommandParserTest {
 
