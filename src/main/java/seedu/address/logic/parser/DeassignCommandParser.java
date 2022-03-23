@@ -7,35 +7,44 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AssignCommand;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.DeassignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
 /**
- * Parses input arguments and creates a new AssignCommand object.
+ * Parses input arguments and creates a new DeassignCommand object.
  */
-public class AssignCommandParser implements Parser<AssignCommand> {
+public class DeassignCommandParser implements Parser<DeassignCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code AssignCommand}
-     * and returns an {@code AssignCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code DeassignCommand}
+     * and returns an {@code DeassignCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
-    public AssignCommand parse(String args) throws ParseException {
+    public DeassignCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
                 || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeassignCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeassignCommand.MESSAGE_USAGE), ive);
+        }
+
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).orElse(""));
         Group group = new Group(groupName);
 
-        return new AssignCommand(index, group);
+        return new DeassignCommand(index, group);
     }
 
     /**

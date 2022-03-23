@@ -225,4 +225,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         group.assignPerson(personToAssign);
         setGroup(new Group(group.getGroupName()), group);
     }
+
+    /**
+     * Deassigns a {@code Person} from a {@code Group} in this {@code AddressBook}.
+     *
+     * @param personToDeassign The {@code Person} being deassigned.
+     * @param group The {@code Group} that the {@code Person} is being deassigned.
+     */
+    public void deassignPerson(Person personToDeassign, Group group) {
+        group.deassignPerson(personToDeassign);
+        setGroup(new Group(group.getGroupName()), group);
+    }
 }

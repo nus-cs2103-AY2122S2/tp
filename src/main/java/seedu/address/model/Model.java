@@ -156,6 +156,12 @@ public interface Model {
     void assignPerson(Person person, Group group);
 
     /**
+     * Deassigns a person from a group.
+     * {@code Group} must already exist in the address book.
+     */
+    void deassignPerson(Person person, Group group);
+
+    /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

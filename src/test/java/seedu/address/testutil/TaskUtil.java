@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.ViewTaskCommand;
 import seedu.address.model.group.Group;
@@ -11,7 +12,14 @@ import seedu.address.model.task.Task;
 public class TaskUtil {
 
     /**
-     * Returns an delete task command string for deleting the {@code task}.
+     * Returns an add task command string for adding the {@code task}.
+     */
+    public static String getAddTaskCommand(Task task, Group group) {
+        return AddTaskCommand.COMMAND_WORD + " " + getTaskDetails(task) + getGroupDetails(group);
+    }
+
+    /**
+     * Returns a delete task command string for deleting the {@code task}.
      */
     public static String getDeleteTaskCommand(Task task, Group group) {
         return DeleteTaskCommand.COMMAND_WORD + " " + getTaskDetails(task) + getGroupDetails(group);
