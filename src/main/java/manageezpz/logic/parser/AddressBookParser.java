@@ -6,23 +6,7 @@ import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import manageezpz.logic.commands.AddDeadlineTaskCommand;
-import manageezpz.logic.commands.AddEmployeeCommand;
-import manageezpz.logic.commands.AddEventTaskCommand;
-import manageezpz.logic.commands.AddTodoTaskCommand;
-import manageezpz.logic.commands.ClearCommand;
-import manageezpz.logic.commands.Command;
-import manageezpz.logic.commands.DeleteEmployeeCommand;
-import manageezpz.logic.commands.DeleteTaskCommand;
-import manageezpz.logic.commands.EditCommand;
-import manageezpz.logic.commands.ExitCommand;
-import manageezpz.logic.commands.FindCommand;
-import manageezpz.logic.commands.HelpCommand;
-import manageezpz.logic.commands.ListCommand;
-import manageezpz.logic.commands.MarkTaskCommand;
-import manageezpz.logic.commands.TagTaskCommand;
-import manageezpz.logic.commands.UnmarkTaskCommand;
-import manageezpz.logic.commands.UntagTaskCommand;
+import manageezpz.logic.commands.*;
 import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,6 +41,9 @@ public class AddressBookParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case EditTaskCommand.COMMAND_WORD:
+            return new EditTaskCommandParser().parse(arguments);
 
         case DeleteEmployeeCommand.COMMAND_WORD:
             return new DeleteEmployeeCommandParser().parse(arguments);
@@ -104,5 +91,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
