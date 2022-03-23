@@ -194,8 +194,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Lesson and Student Books ] ========================"
-                + "=====");
+        logger.info("============================ [ Stopping TeachWhat! ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
