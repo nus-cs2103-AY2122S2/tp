@@ -117,7 +117,7 @@ public class ModelManager implements Model {
     @Override
     public void addPersonToTheirModules(Person person) {
         try {
-            uniBook.addPersonToAllTheirModuleCodes(person);
+            uniBook.addPersonToAllTheirModules(person);
         } catch (PersonNoSubtypeException e) {
             e.printStackTrace();
         }
@@ -178,9 +178,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean isModuleExist(Person person) {
-        Set<ModuleCode> moduleCodes = person.getModuleCodes();
-        for (ModuleCode moduleCode : moduleCodes) {
+    public boolean isModuleExist(Set<ModuleCode> moduleCodeSet) {
+        for (ModuleCode moduleCode : moduleCodeSet) {
             if (!uniBook.hasModule(moduleCode)) {
                 return false;
             }

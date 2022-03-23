@@ -115,26 +115,6 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Adds this person to all the module codes that they are associated with, into the
-     * correct personnel list (professor/student) in module depending on the runtime type
-     * of this person.
-     *
-     * @param p person whos modules to add them to
-     */
-    public void addPersonToAllTheirModuleCodes(Person p) throws PersonNoSubtypeException {
-        for (ModuleCode personsModuleCodes : p.getModuleCodes()) {
-            Module module = modules.getModuleByCode(personsModuleCodes);
-            if (p instanceof Student) {
-                module.addStudent((Student) p);
-            } else if (p instanceof Professor) {
-                module.addProfessor((Professor) p);
-            } else {
-                throw new PersonNoSubtypeException();
-            }
-        }
-    }
-
-    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the UniBook.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the UniBook.

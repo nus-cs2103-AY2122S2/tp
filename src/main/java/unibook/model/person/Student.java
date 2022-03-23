@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import unibook.model.module.Module;
-import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
 /**
@@ -18,14 +17,6 @@ public class Student extends Person {
      */
     public Student(Name name, Phone phone, Email email, Set<Tag> tags, Set<Module> modules) {
         super(name, phone, email, tags, modules);
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags,
-                   Set<Module> modules, Set<ModuleCode> moduleCodes) {
-        super(name, phone, email, tags, modules, moduleCodes);
     }
 
     /**
