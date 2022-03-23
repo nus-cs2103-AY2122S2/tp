@@ -39,19 +39,19 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' show list file path.
      */
     Path getShowListFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' show list file path.
      */
-    void setShowListFilePath(Path addressBookFilePath);
+    void setShowListFilePath(Path showListFilePath);
 
     /**
      * Replaces show list data with the data in {@code showList}.
      */
-    void setShowList(ReadOnlyShowList addressBook);
+    void setShowList(ReadOnlyShowList showList);
 
     /** Returns the ShowList */
     ReadOnlyShowList getShowList();

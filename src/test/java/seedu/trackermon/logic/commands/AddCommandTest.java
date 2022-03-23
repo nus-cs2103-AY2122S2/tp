@@ -105,7 +105,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setShowListFilePath(Path addressBookFilePath) {
+        public void setShowListFilePath(Path showListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setShowList(ReadOnlyShowList newData) {
+        public void setShowList(ReadOnlyShowList showList) {
             throw new AssertionError("This method should not be called.");
         }
 
