@@ -35,8 +35,8 @@ public class StateChangeRecorder {
     // A variable acting as a pointer to most recent state change.
     private int curStateChange;
 
-    private List<Consumer<IBook>> forwardActionList;
-    private List<Consumer<IBook>> reverseActionList;
+    private List<Consumer<IBook>> nextForwardActionList;
+    private List<Consumer<IBook>> nextReverseActionList;
 
     /**
      * Class constructor.
@@ -52,32 +52,32 @@ public class StateChangeRecorder {
      * Gets a new workspace for recording next possible state change.
      */
     public void prepareNewStateChange() {
-        forwardActionList = new ArrayList<>();
-        reverseActionList = new ArrayList<>();
+        nextForwardActionList = new ArrayList<>();
+        nextReverseActionList = new ArrayList<>();
     }
 
     public void addForwardAction(Consumer<IBook> forwardAction) {
-        forwardActionList.add(forwardAction);
+        nextForwardActionList.add(forwardAction);
     }
 
     public void addReverseAction(Consumer<IBook> reverseAction) {
-        reverseActionList.add(reverseAction);
+        nextReverseActionList.add(reverseAction);
     }
 
     public List<Consumer<IBook>> getCurrentForwardActionList() {
-        return forwardActionList;
+        return stateChanges.get(curStateChange).forwardActionList;
     }
 
     public List<Consumer<IBook>> getCurrentReverseActionList() {
-        return reverseActionList;
+        return stateChanges.get(curStateChange).reverseActionList;
     }
 
     /**
      * Saves the changes made to iBook.
      */
     public void saveStateChange() {
-        Collections.reverse(reverseActionList);
-        StateChange nextStateChange = new StateChange(forwardActionList, reverseActionList);
+        Collections.reverse(nextReverseActionList);
+        StateChange nextStateChange = new StateChange(nextForwardActionList, nextReverseActionList);
 
         stateChanges.subList(curStateChange + LIST_OFFSET, stateChanges.size()).clear();
         stateChanges.add(nextStateChange);
