@@ -2,9 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Locale;
+
 import seedu.address.model.common.Name;
 
-import java.util.Locale;
+
 
 /**
  * Represents a Friend's name in the address book.

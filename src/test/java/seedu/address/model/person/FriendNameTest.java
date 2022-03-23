@@ -39,14 +39,14 @@ public class FriendNameTest {
     }
 
     public void isEqual() {
-       FriendName friendNameOne = new FriendName("Arthur Neo");
-       FriendName friendNameTwo = new FriendName("Bernice Teng");
+        FriendName friendNameOne = new FriendName("Arthur Neo");
+        FriendName friendNameTwo = new FriendName("Bernice Teng");
 
-       assertFalse(friendNameOne.equals(friendNameTwo));
+        assertFalse(friendNameOne.equals(friendNameTwo));
 
-       //Friend name is case insensitive. eg arthur neo is the same as Arthur Neo
-       assertTrue(friendNameOne.equals(new FriendName("arthur neo")));
+        //Friend name is case insensitive. eg arthur neo is the same as Arthur Neo
+        assertTrue(friendNameOne.equals(new FriendName("arthur neo")));
 
-       assertFalse(friendNameOne == null);
+        assertFalse(friendNameOne == null);
     }
 }

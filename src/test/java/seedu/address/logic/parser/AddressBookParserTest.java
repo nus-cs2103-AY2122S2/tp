@@ -57,7 +57,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommandByName_deletefriend() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand( DeleteCommand.COMMAND_WORD + " n/Dummy Name");
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " n/Dummy Name");
         assertEquals(new DeleteCommand(new FriendName("Dummy Name")), command);
     }
 

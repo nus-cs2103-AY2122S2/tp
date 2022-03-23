@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -15,7 +16,7 @@ import seedu.address.model.person.Person;
 
 public class CommandResultTest {
 
-    Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private static Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_eventsCommand_commandResultIsEvent() throws CommandException {
@@ -63,7 +64,7 @@ public class CommandResultTest {
         assertFalse(commandResult.isExit());
     }
 
-        @Test
+    @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
 
