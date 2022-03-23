@@ -48,7 +48,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Candidate expectedCandidate = new CandidateBuilder(BOB).withTags(VALID_TAG_FRIEND)
-                .withApplicationStatus("Pending").withInterviewStatus("Pending").build();
+                .withApplicationStatus("Pending").withInterviewStatus("Not Scheduled").build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB

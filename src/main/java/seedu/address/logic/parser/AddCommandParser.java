@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         ApplicationStatus applicationStatus = new ApplicationStatus(ApplicationStatus.PENDING_STATUS);
-        InterviewStatus interviewStatus = new InterviewStatus(InterviewStatus.PENDING_STATUS);
+        InterviewStatus interviewStatus = new InterviewStatus(InterviewStatus.NOT_SCHEDULED);
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
 
         Candidate candidate = new Candidate(id, name, phone, email, course, tagList,
