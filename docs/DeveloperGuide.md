@@ -16,7 +16,7 @@ title: Developer Guide
     * [Common classes](#common-classes)
 * [**Implementation**](#implementation)
     * [Find command feature](#find-command-feature)
-        * [What it does]()
+        * [What it does]() 
         * [Implementation]()
         * [Design consideration]()
             * [How find executes](#aspect-how-find-executes)
