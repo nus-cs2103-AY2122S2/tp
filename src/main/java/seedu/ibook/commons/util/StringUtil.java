@@ -76,7 +76,14 @@ public class StringUtil {
      */
     public static boolean isNonZeroUnsignedCompoundInteger(String s) {
         requireNonNull(s);
+
+        if (s.contains("-")) {
+            return false;
+        }
+
         String[] parts = s.split("-", 2);
+        assert parts.length >= 2; // Presence of "-" is assured by the guard clause above
+
         return isNonZeroUnsignedInteger(parts[0])
                 && isNonZeroUnsignedInteger(parts[1]);
     }
