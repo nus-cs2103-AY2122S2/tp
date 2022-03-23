@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -145,14 +146,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns a key-value pair between each {@code person} and the completion status of a task,
-     * if the person is being assigned with the specified task.
+     * if the person is taking the specified module and is being assigned with the specified task.
      *
+     *
+     * @param moduleCode target moduleCode to be compared with.
      * @param task target task to be compared with
      * @return LinkedHashMap containing valid person/completion status pair.
      */
-    public LinkedHashMap<Person, Boolean> checkProgress(Task task) {
+    public LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
         requireNonNull(task);
-        return persons.checkProgress(task);
+        return persons.checkProgress(moduleCode, task);
     }
 
     //// util methods

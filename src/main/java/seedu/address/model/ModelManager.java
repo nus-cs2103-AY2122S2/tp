@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -137,9 +138,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public LinkedHashMap<Person, Boolean> checkProgress(Task task) {
+    public LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
         requireNonNull(task);
-        return addressBook.checkProgress(task);
+        return addressBook.checkProgress(moduleCode, task);
     }
     //=========== Filtered Person List Accessors =============================================================
 

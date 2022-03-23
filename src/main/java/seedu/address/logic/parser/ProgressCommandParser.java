@@ -2,12 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ProgressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Task;
 
 
@@ -27,16 +29,18 @@ public class ProgressCommandParser implements Parser<ProgressCommand> {
     public ProgressCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_TASK_NAME);
 
         // Check if fields are present in the user input.
-        if (!arePrefixesPresent(argMultimap, PREFIX_TASK_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_TASK_NAME)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ProgressCommand.MESSAGE_USAGE));
         }
 
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK_NAME).get());
 
-        return new ProgressCommand(task);
+        return new ProgressCommand(moduleCode, task);
     }
 
     /**

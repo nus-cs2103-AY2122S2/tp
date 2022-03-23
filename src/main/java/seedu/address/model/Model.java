@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -103,10 +104,10 @@ public interface Model {
 
     /**
      * Returns a key-value pair between each {@code person} and the completion status of a task,
-     * if the person is being assigned with the specified task.
+     * if the person is taking the specified module and is being assigned with the specified task.
      * The {@code task} must not be null.
      */
-    LinkedHashMap<Person, Boolean> checkProgress(Task task);
+    LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

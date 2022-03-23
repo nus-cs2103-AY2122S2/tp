@@ -202,21 +202,25 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Iterates through each {@code Person}, and checks if the {@code Person} has the specified {@code Task} in
-     * his/her {@code TaskList}. If the specified {@Code Task} is present, the completion status will be extracted
-     * out into a resulting HashMap.
+     * Iterates through each {@code Person}, and checks if the {@code Person} who is taking {@code ModuleCode}
+     * has the specified {@code Task} in his/her {@code TaskList}. If the specified {@Code Task} is present,
+     * the completion status will be extracted out into a resulting HashMap.
      *
+     *
+     * @param moduleCode target moduleCode to be compared with.
      * @param task target task to be compared with.
      * @return LinkedHashMap containing valid person/completion status pair.
      */
-    public LinkedHashMap<Person, Boolean> checkProgress(Task task) {
+    public LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
         requireNonNull(task);
         LinkedHashMap<Person, Boolean> result = new LinkedHashMap<Person, Boolean>();
 
         // iterate through each student, and check if their respective TaskList contain the specified task
         for (Person currPerson: internalList) {
             TaskList currTaskList = currPerson.getTaskList();
-            if (currTaskList != null && currTaskList.isTaskAlreadyPresent(task)) { // task exist
+            if (currPerson.getModuleCode().equals(moduleCode)
+                    && currTaskList != null && currTaskList.isTaskAlreadyPresent(task)) {
                 result.put(currPerson, currTaskList.isTaskPresentAndCompleted(task));
             }
         }
