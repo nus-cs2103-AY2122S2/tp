@@ -92,9 +92,8 @@ alt user inputs studentId
     StudentId --> ParserUtil
     deactivate StudentId
     ParserUtil --> FindCommandParser -- MODEL_COLOR: studentId
-end
 
-alt user inputs name
+else user inputs name
     FindCommandParser -> ParserUtil ++ LOGIC_COLOR: parseName(name)
     create Name
     ParserUtil -> Name
@@ -102,9 +101,8 @@ alt user inputs name
     Name --> ParserUtil
     deactivate Name
     ParserUtil --> FindCommandParser -- MODEL_COLOR: name
-end
 
-alt user inputs moduleCode
+else user inputs moduleCode
     FindCommandParser -> ParserUtil ++ LOGIC_COLOR: parseModuleCode(moduleCode)
     create ModuleCode
     ParserUtil -> ModuleCode
