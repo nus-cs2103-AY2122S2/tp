@@ -11,6 +11,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
+/**
+ * Parses input arguments and creates a new ViewTaskCommand object.
+ */
 public class ViewTaskCommandParser implements Parser<ViewTaskCommand> {
 
     /**
