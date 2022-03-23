@@ -1,12 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.List;
+
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.DueDate;
 import seedu.address.model.transaction.Note;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
 
-import java.util.List;
+
 
 public class TransactionUtil {
     public static final String VALID_AMOUNT_ONE = "123.45";

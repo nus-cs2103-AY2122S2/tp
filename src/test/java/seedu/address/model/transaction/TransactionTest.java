@@ -1,20 +1,18 @@
 package seedu.address.model.transaction;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_COMPLETE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_INCOMPLETE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO_COMPLETE;
+import static seedu.address.testutil.TransactionUtil.VALID_AMOUNT_ONE;
+import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_ONE;
 
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TransactionUtil.VALID_AMOUNT_ONE;
-import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_ONE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_COMPLETE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO_COMPLETE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_INCOMPLETE;
+import org.junit.jupiter.api.Test;
 
 public class TransactionTest {
 
