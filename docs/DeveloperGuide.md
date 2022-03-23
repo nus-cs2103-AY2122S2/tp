@@ -659,10 +659,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
 
     1. Test case: `comment 1 c/Hello`<br>
-       Expected: Comment within the first show is edited to "Hello" from the list.
+       Expected: Comment of the first show in the list is edited to "Hello".
 
     1. Test case: `comment 1`<br>
-       Expected: Comment within the first show is deleted.
+       Expected: Comment of the first show in the list is deleted.
 
     1. Test case: `comment 0`<br>
        Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
