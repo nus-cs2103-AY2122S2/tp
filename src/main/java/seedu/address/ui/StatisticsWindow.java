@@ -74,7 +74,7 @@ public class StatisticsWindow extends UiPart<Stage> {
      */
     public void fillPieChart() {
         numberOfPersonsInNorth = logic.getPersonsBasedOnRegion("North");
-        numberOfPersonsInSouth= logic.getPersonsBasedOnRegion("South");
+        numberOfPersonsInSouth = logic.getPersonsBasedOnRegion("South");
         numberOfPersonsInEast = logic.getPersonsBasedOnRegion("East");
         numberOfPersonsInWest = logic.getPersonsBasedOnRegion("West");
         numberOfPersonsInCentral = logic.getPersonsBasedOnRegion("Central");
