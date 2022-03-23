@@ -289,7 +289,7 @@ Step 1. The user launches the application. The `TAssist` is already populated wi
 
 ![GradeState0](images/GradeState0.png)
 
-Step 2. The user executes `grade a\1 s\1,2 g\1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students enrolled in the module (`s1` and `s2` respectively) with grade 1 in the `TAssist`. the `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
+Step 2. The user executes `grade a/1 s/1,2 g/1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students enrolled in the module (`s1` and `s2` respectively) with grade 1 in the `TAssist`. the `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
 
 ![GradeState1](images/GradeState1.png)
 

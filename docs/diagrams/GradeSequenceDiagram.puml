@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute("grade a\1 s\1,2 g\1")
+[-> LogicManager : execute("grade a/1 s/1,2 g/1")
 activate LogicManager
 
-LogicManager -> TAssistParser : parseCommand("grade a\1 s\1,2 g\1")
+LogicManager -> TAssistParser : parseCommand("grade a/1 s/1,2 g/1")
 activate TAssistParser
 
 create GradeCommandParser
@@ -28,7 +28,7 @@ activate GradeCommandParser
 GradeCommandParser --> TAssistParser
 deactivate GradeCommandParser
 
-TAssistParser -> GradeCommandParser : parse(["a\1", "s\1,2", "g\1"])
+TAssistParser -> GradeCommandParser : parse(["a/1", "s/1,2", "g/1"])
 activate GradeCommandParser
 
 create GradeCommand
