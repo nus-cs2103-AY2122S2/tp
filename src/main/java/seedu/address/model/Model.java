@@ -95,7 +95,7 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<? super Person> predicate);
 
     /**
      * Returns true if a company with the {@code companyName} exists in the address book.
@@ -134,7 +134,7 @@ public interface Model {
      * Updates the filter of the filtered company list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredCompanyList(Predicate<Company> predicate);
+    void updateFilteredCompanyList(Predicate<? super Company> predicate);
 
     /**
      * Returns true if an event with the same identity as {@code event} exists in the address book.
