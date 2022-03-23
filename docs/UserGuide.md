@@ -201,14 +201,29 @@ Example:
 
 ### Assigning tasks to a particular student: `assign`
 
-Format: `assign i/STUDENT_ID tn/TASK_NAME`
+Assigns a task to a particular student.
 
-* Assigns a task to a particular student.
+Format: `assign i/STUDENT_ID tn/TASK_NAME`
 
 Example:
 * `assign i/AXXXXXXXR tn/assignment 1`
     * Assigns assignment 1 to student with id AXXXXXXXR.
 
+### Viewing the completion status of a particular task: `progress`
+
+Displays a list of students who are taking the specified module, and have been assigned with a particular task.
+The completion status of each student in the list will be displayed as well.
+
+Format: `progress m/MODULE_CODE tn/TASK_NAME`
+
+* The module code and task name are compulsory fields.
+
+Example:
+* `progress m/CS2103T tn/assignment 1`
+    * Displays all students who are taking "CS2103T" and have been assigned with "assignment 1".
+    * For each student in the output list, a "tick" symbol signifies that he/she has already
+      completed the assigned task.
+    * On the other hand, a "cross" symbol signifies that the student has not complete the assigned task.
 
 ### Displaying manual for a command: `manual`
 
@@ -264,6 +279,7 @@ Action      | Format, Examples
 **list**    | `list`
 **Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`
 **Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
+**Progress**| `progress m/MODULE_CODE tn/TASK_NAME` <br> e.g., `progress m/CS2103T tn/assignment 1`
 **Clear**   | `clear`
 **Archive** | `archive`
 **Help**    | `help`
