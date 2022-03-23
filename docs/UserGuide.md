@@ -60,13 +60,13 @@ NUSocials is a **desktop app for university students to maintain a professional 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Kim Lai`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/Kim Lai t/friend` or as `n/Kim Lai`.
+  e.g `n/NAME [e/NUS]` can be used as `n/Kim Lai e/NUS` or as `n/Kim Lai`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULES]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12345678 p/87654321`, onbly `p/87654321` will be taken.
+  e.g. if you specify `p/12345678 p/87654321`, only `p/87654321` will be taken.
 *
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -79,12 +79,12 @@ NUSocials is a **desktop app for university students to maintain a professional 
 
 Shows a message explaning how to access the help page.
 
-![help message]()
+![help message](images/help_message.png)
 
 Format: `help`
 
 
-### Adding a person: `add` [coming in V1.2]
+### Adding a person: `add`
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
@@ -92,7 +92,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `add n/Kim Lai p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
 
-### Tagging a person: `tag` [coming in V1.2]
+### Tagging a person: `tag`
 Tags additional information to an existing contact.
 
 Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
@@ -105,7 +105,7 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 Examples:
 * `tag 1 i/abc-company m/CS2100 m/CS2030S` Tags the internship company and 2 modules to the 1st person.
 
-### Listing all persons : `list` [coming in V1.2]
+### Listing all persons : `list`
 Shows a list of all persons in the address book.
 
 Format: `list`
@@ -115,7 +115,7 @@ Format: `list`
 * Personal details are listed in the following order: Phone number, Address, Email
 
 
-### Editing a person : `edit` [coming in V1.2]
+### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
@@ -132,7 +132,7 @@ Examples:
 * `edit 2 m/CS2040s` Clears all module tags of the 2nd person and tag `CS2040s` as a module.
 * `edit 2 edu/ m/` Clears all education and module tags of the 2nd person.
 
-### Locating persons: `find` [coming in v1.2]
+### Locating persons: `find`
 
 Finds persons that match any of the given fields and tags.
 
@@ -145,13 +145,13 @@ Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…�
 * Persons matching at least one tag of a particular type will be returned. For example, 'find m/cs2030s m/cs2040s' may return a person tagged with 'cs2030s' or 'cs2040s'
   e.g. `n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 * All arguments for tags provided must be an exact match to existing tags.
-
+    
 Examples:
 * `find n/John` returns `john`
 * `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
-  ![result for 'find i/Shopee m/cs2040s cs2030s']()
+  ![result for 'find i/Shopee m/cs2040s cs2030s'](images/findShopeeCS2040sCS2030sResult.png)
 
-### Locating specific persons: `find -s` [coming in v1.2]
+### Locating specific persons: `find -s`
 
 Finds persons that match all given fields and tags.
 
@@ -166,11 +166,10 @@ Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]�
 * All arguments for tags provided must be an exact match to existing tags.
 
 Examples:
-* `find -s n/John Doe` returns `John Doe`
-* `find -s n/David Li m/cs2040s m/cs2030s` returns `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
-  ![result for 'find -s n/David Li m/cs2040s cs2030s']()
+* `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with 'cs2040s', 'cs2030s' and 'Shopee')<br>
+  ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
 
-### Deleting a person : `delete` [coming in V1.2]
+### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
@@ -194,7 +193,7 @@ Alternate Format: `delete INDEX…​`
 Examples:
 * `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the address book.
 
-### Removing specific tags from person: `removetag` [coming in V1.2]
+### Removing specific tags from person: `removetag`
 Removes the specific tags of an existing contact.
 
 Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
@@ -249,7 +248,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MODULE] [edu/EDUCATION] [c/CCA] [i/INTERNSHIP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
 **Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105 m/CS2106`
 **RemoveTag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
 **Clear** | `clear`
