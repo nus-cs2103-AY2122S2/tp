@@ -22,6 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Preference;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Region;
 import seedu.address.storage.Storage;
 
 /**
@@ -95,19 +96,21 @@ public class LogicManager implements Logic {
     @Override
     public int getPersonsBasedOnRegion(String region) {
         int totalPersons = 0;
-        for (Person person : getFilteredPersonList()) {
-            if (person.getUserType().isBuyer()) { //if is buyer, check region in preference
-                Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
-                if (preference != null && preference.getRegion().toString().equals(region)) {
-                    totalPersons++;
-                }
-            } else { //if is seller, check region in Property
-                Set<Property> setOfPropertyValues = person.getProperties();
-                if (!setOfPropertyValues.isEmpty()) {
-                    Iterator<Property> propertyIterator = setOfPropertyValues.iterator();
-                    while (propertyIterator.hasNext()) {
-                        if (propertyIterator.next().getRegion().toString().equals(region)) {
-                            totalPersons++;
+        if (Region.isValidRegion(region)) {
+            for (Person person : getFilteredPersonList()) {
+                if (person.getUserType().isBuyer()) { //if is buyer, check region in preference
+                    Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
+                    if (preference != null && preference.getRegion().toString().equals(region)) {
+                        totalPersons++;
+                    }
+                } else { //if is seller, check region in Property
+                    Set<Property> setOfPropertyValues = person.getProperties();
+                    if (!setOfPropertyValues.isEmpty()) {
+                        Iterator<Property> propertyIterator = setOfPropertyValues.iterator();
+                        while (propertyIterator.hasNext()) {
+                            if (propertyIterator.next().getRegion().toString().equals(region)) {
+                                totalPersons++;
+                            }
                         }
                     }
                 }
