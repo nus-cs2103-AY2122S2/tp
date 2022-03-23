@@ -2,6 +2,7 @@
 package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,10 +37,12 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_COMMENT + "COMMENT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Attack on Titan "
-            + PREFIX_STATUS + "watching";
+            + PREFIX_STATUS + "watching"
+            + PREFIX_COMMENT + "This is not bad!";
 
     public static final String MESSAGE_EDIT_SHOW_SUCCESS = "Edited Show: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -135,13 +138,14 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setStatus(toCopy.status);
             setTags(toCopy.tags);
+            setComment(toCopy.comment);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, status, tags);
+            return CollectionUtil.isAnyNonNull(name, status, tags, comment);
         }
 
         public void setName(Name name) {
@@ -202,7 +206,8 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getStatus().equals(e.getStatus())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getComment().equals(e.getComment());
         }
     }
 }
