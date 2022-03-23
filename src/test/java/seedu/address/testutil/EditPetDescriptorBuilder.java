@@ -7,8 +7,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPetDescriptor;
 import seedu.address.model.pet.Address;
-import seedu.address.model.pet.Appointment;
-import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Pet;

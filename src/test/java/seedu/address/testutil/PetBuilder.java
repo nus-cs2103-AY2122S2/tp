@@ -121,7 +121,7 @@ public class PetBuilder {
      */
     public PetBuilder withAppointment(String dateTime, String location) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime formattedDateTime = LocalDateTime.parse(dateTime,formatter);
+        LocalDateTime formattedDateTime = LocalDateTime.parse(dateTime, formatter);
         this.appointment = new Appointment(formattedDateTime, location);
         return this;
     }
