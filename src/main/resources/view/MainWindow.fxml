@@ -51,8 +51,7 @@
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-<!--          <StackPane fx:id="contentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>-->
-              <TabPane fx:id="tabbedPanelPlaceholder" styleClass="background" tabClosingPolicy="UNAVAILABLE">
+              <TabPane fx:id="tabbedPanelPlaceholder" stylesheets="@DarkTheme.css" tabClosingPolicy="UNAVAILABLE">
                   <tabs>
                      <Tab fx:id="personTab" text="Person" />
                      <Tab fx:id="appointmentTab" text="Appointment" />

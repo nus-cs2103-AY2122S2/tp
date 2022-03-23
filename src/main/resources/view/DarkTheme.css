@@ -49,6 +49,28 @@
     -fx-max-height: 0;
 }
 
+.tab-header-background {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.tab {
+    -fx-background-color: #1d1d1d;
+    -fx-background-radius: 10 10 0 0, 9 9 0 0, 8 8 0 0;
+    -fx-border-radius: 10 10 0 0, 9 9 0 0, 8 8 0 0;
+    -fx-border-color: white;
+    -fx-border-style: solid solid none solid;
+}
+.tab-label {
+    -fx-text-fill: white;
+}
+.tab:selected {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-radius: 10 10 0 0, 9 9 0 0, 8 8 0 0;
+}
+.tab:selected .focus-indicator {
+    -fx-border-radius: 9 9 0 0, 8 8 0 0, 7 7 0 0;
+}
+
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;
