@@ -112,15 +112,6 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    @Override
-    public void addPersonToTheirModules(Person person) {
-        try {
-            uniBook.addPersonToAllTheirModules(person);
-        } catch (PersonNoSubtypeException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 

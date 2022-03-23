@@ -1,7 +1,6 @@
 package unibook.model;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
