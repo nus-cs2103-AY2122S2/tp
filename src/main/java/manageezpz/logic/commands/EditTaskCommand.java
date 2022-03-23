@@ -10,11 +10,7 @@ import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.ParserUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
-import manageezpz.model.task.Deadline;
-import manageezpz.model.task.Description;
-import manageezpz.model.task.Event;
-import manageezpz.model.task.Task;
-import manageezpz.model.task.Todo;
+import manageezpz.model.task.*;
 
 /**
  * Edits the details of an existing task in the address book.
@@ -64,6 +60,39 @@ public class EditTaskCommand extends Command {
         }
     }
 
+    private Description parseDesc(String desc) throws ParseException {
+        Description parseDescResult;
+        try {
+            parseDescResult = ParserUtil.parseDescription(desc);
+            return parseDescResult;
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditTaskCommand.MESSAGE_USAGE), pe);
+        }
+    }
+
+    private Time parseTime (String time) throws ParseException {
+        Time parseTimeResult;
+        try {
+            parseTimeResult = ParserUtil.parseTime(time);
+            return parseTimeResult;
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditTaskCommand.MESSAGE_USAGE), pe);
+        }
+    }
+
+    private Date parseDate(String date) throws ParseException {
+        Date parseDateResult;
+        try {
+            parseDateResult = ParserUtil.parseDate(date);
+            return parseDateResult;
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditTaskCommand.MESSAGE_USAGE), pe);
+        }
+    }
+
     private CommandResult handleTodo(Todo currentTask, Model model, String desc) throws ParseException {
         try {
             Description taskDesc = ParserUtil.parseDescription(desc);
@@ -75,21 +104,35 @@ public class EditTaskCommand extends Command {
         }
     }
 
-    private CommandResult handleDeadline(Deadline currentTask, Model model, String desc, String time, String date)
+
+    private CommandResult handleDeadline(Deadline currentTask, Model model, String desc, String date, String time)
             throws ParseException {
-        if (!desc.isEmpty() && time.isEmpty() && date.isEmpty()) {
-            try {
-                Description taskDesc = ParserUtil.parseDescription(desc);
-                Deadline newTask = new Deadline(taskDesc, currentTask.getDate(), currentTask.getTime());
-                model.setTask(currentTask, newTask);
-                return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, newTask));
-            } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditTaskCommand.MESSAGE_USAGE), pe);
-            }
+
+        Description dl_description;
+        Time dl_time;
+        Date dl_date;
+
+        if (desc.isEmpty()) {
+            dl_description = currentTask.getDescription();
         } else {
-            throw new ParseException("time and date update not supported yet.");
+           dl_description = parseDesc(desc);
         }
+
+        if (time.isEmpty()) {
+            dl_time = currentTask.getTime();
+        } else {
+            dl_time = parseTime(time);
+        }
+
+        if (date.isEmpty()) {
+            dl_date = currentTask.getDate();
+        } else {
+            dl_date = parseDate(date);
+        }
+
+        Deadline newTask = new Deadline(dl_description, dl_date, dl_time);
+        model.setTask(currentTask, newTask);
+        return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, newTask));
     }
 
     private CommandResult handleEvent(Event currentTask, Model model, String desc, String time, String date)
