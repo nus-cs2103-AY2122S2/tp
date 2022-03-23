@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyLessonBook;
@@ -203,8 +202,8 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void updateAssignment(Index studentId, Index lessonId) {
-
+        public void updateAssignment(Student student, Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

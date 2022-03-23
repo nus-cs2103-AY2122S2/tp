@@ -54,7 +54,7 @@ public class AssignCommand extends Command {
             throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName()));
         }
         model.setSelectedStudent(student);
-        model.updateAssignment(studentIndex, lessonIndex);
+        model.updateAssignment(student, lesson);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
                 true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
