@@ -1,18 +1,19 @@
 package seedu.contax.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.contax.logic.commands.FindAppointmentCommand;
-import seedu.contax.logic.commands.FindPersonCommand;
-import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.model.appointment.ClientNameContainsKeywordsPredicate;
-import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
-import seedu.contax.model.util.SearchType;
-
-import java.util.Arrays;
-
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.contax.logic.commands.FindAppointmentCommand;
+import seedu.contax.model.appointment.ClientNameContainsKeywordsPredicate;
+import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
+
+
+
 
 public class FindAppointmentCommandParserTest {
     private FindAppointmentCommandParser parser = new FindAppointmentCommandParser();

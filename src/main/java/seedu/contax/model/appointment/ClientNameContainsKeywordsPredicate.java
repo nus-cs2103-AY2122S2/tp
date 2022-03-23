@@ -1,13 +1,10 @@
 package seedu.contax.model.appointment;
 
-import seedu.contax.commons.util.StringUtil;
-import seedu.contax.model.person.NameContainsKeywordsPredicate;
-import seedu.contax.model.person.Person;
-
 import java.util.List;
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
+import seedu.contax.commons.util.StringUtil;
+
 
 /**
  * Tests that an {@code Appointment}'s {@code Person}'s {@code Name} matches any of the keywords given.
@@ -20,20 +17,21 @@ public class ClientNameContainsKeywordsPredicate extends ContainsKeywordsPredica
 
     @Override
     public boolean test(Appointment appointment) {
-        if(appointment.getPerson() == null) {
+        if (appointment.getPerson() == null) {
             return false;
         }
 
         return super.getKeywords().stream()
                 .anyMatch(keyword ->
-                        StringUtil.containsWordIgnoreCase(appointment.getPerson().getName().fullName,keyword));
+                        StringUtil.containsWordIgnoreCase(appointment.getPerson().getName().fullName, keyword));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ClientNameContainsKeywordsPredicate // instanceof handles nulls
-                && super.getKeywords().equals(((ClientNameContainsKeywordsPredicate) other).getKeywords())); // state check
+                && super.getKeywords().equals(((ClientNameContainsKeywordsPredicate) other)
+                .getKeywords())); // state check
     }
 
 }

@@ -1,9 +1,10 @@
 package seedu.contax.model.appointment;
 
-import seedu.contax.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.contax.commons.util.StringUtil;
+
 
 /**
  * Tests that an {@code Appointment}'s {@code Name} matches any of the keywords given.

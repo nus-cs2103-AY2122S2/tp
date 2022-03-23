@@ -3,12 +3,14 @@ package seedu.contax.logic.parser;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
+import java.util.Arrays;
+
 import seedu.contax.logic.commands.FindAppointmentCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.appointment.ClientNameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
 
-import java.util.Arrays;
+
 
 /**
  * Parses input arguments and creates a new FindAppointment object
@@ -23,7 +25,7 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
     public FindAppointmentCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        if(trimmedArgs.isEmpty()) {
+        if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAppointmentCommand.MESSAGE_USAGE));
         }
@@ -36,10 +38,11 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
             return new FindAppointmentCommand(new NameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
         } else {
             switch (argMultimap.getValue(PREFIX_SEARCH_TYPE).get()) {
-                case "person":
-                    return new FindAppointmentCommand(new ClientNameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
-                default:
-                    throw new ParseException("Search type should only be person");
+            case "person":
+                return new FindAppointmentCommand(new
+                        ClientNameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
+            default:
+                throw new ParseException("Search type should only be person");
             }
         }
     }

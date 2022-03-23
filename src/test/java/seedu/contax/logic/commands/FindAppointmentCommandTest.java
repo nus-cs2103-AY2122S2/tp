@@ -1,6 +1,18 @@
 package seedu.contax.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.commons.core.Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW;
+import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
+import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
@@ -9,19 +21,8 @@ import seedu.contax.model.UserPrefs;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.ClientNameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
-import seedu.contax.model.person.AddressContainsKeywordsPredicate;
-import seedu.contax.model.person.PhoneContainsKeywordsPredicate;
 import seedu.contax.testutil.AppointmentBuilder;
 
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.contax.commons.core.Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW;
-import static seedu.contax.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
-import static seedu.contax.testutil.TypicalPersons.*;
 
 public class FindAppointmentCommandTest {
 
@@ -95,7 +96,7 @@ public class FindAppointmentCommandTest {
     }
 
     @Test
-    public void execute_MatchingNameKeywords_noAppointmentFound() {
+    public void execute_matchingNameKeywords_noAppointmentFound() {
         Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
         Appointment a1 = new AppointmentBuilder(APPOINTMENT_ALICE).build();
