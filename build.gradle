@@ -69,4 +69,8 @@ shadowJar {
     archiveName = 'talentassistant.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
