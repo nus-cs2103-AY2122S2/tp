@@ -9,6 +9,7 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -104,7 +105,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setShowListFilePath(Path addressBookFilePath) {
+        public void setShowListFilePath(Path showListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setShowList(ReadOnlyShowList newData) {
+        public void setShowList(ReadOnlyShowList showList) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -147,6 +148,17 @@ public class AddCommandTest {
         public void updateFilteredShowList(Predicate<Show> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Show> getSortedShowList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedShowList(Comparator<Show> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

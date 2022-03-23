@@ -8,12 +8,14 @@ import java.util.regex.Pattern;
 
 import seedu.trackermon.logic.commands.AddCommand;
 import seedu.trackermon.logic.commands.Command;
+import seedu.trackermon.logic.commands.CommentCommand;
 import seedu.trackermon.logic.commands.DeleteCommand;
 import seedu.trackermon.logic.commands.EditCommand;
 import seedu.trackermon.logic.commands.ExitCommand;
 import seedu.trackermon.logic.commands.FindCommand;
 import seedu.trackermon.logic.commands.HelpCommand;
 import seedu.trackermon.logic.commands.ListCommand;
+import seedu.trackermon.logic.commands.SortCommand;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
 
 /**
@@ -64,6 +66,12 @@ public class TrackermonParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case CommentCommand.COMMAND_WORD:
+            return new CommentCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
