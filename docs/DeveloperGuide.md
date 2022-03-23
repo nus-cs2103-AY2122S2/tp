@@ -201,35 +201,6 @@ The following activity diagram summarizes what happens when a user executes an a
 
 <img src="images/AddActivityDiagram.png" width="250" />
 
-### \[Proposed\] Enrol Feature
-
-#### Proposed Implementation
-
-The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is only for student entity. Additionally, it implements the following operations:
-
-* `EnrolCommandParser#parse()` — Parses the command arguments.
-* `EnrolCommand#execute()` — Executes `ModelManager#enrolStudent()` with given student(s) and class group.
-* `ModelManager#enrolStudent()` — Enrols student(s) to a given class group.
-
-Given below is an example usage scenario for the enrolment of a `Student` object to a `ClassGroup` object and how the enrol mechanism behaves at each step.
-
-<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module` and `ClassGroup` objects are created beforehand.
-
-</div>
-
-Step 1. The user launches the application. The `TAssist` is already populated with data.
-
-![EnrolState0](images/AddState0.png)
-
-Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`. The `enrol` command also calls `EnrolCommandParser#parse()`, which parses the input and returns a successful/unsuccessful output message.
-* An example of the `enrol` command: `enrol c/1 s/1,2,3,4,5,6`
-
-![EnrolState1](images/EnrolState1.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enroled to a class group will automatically be linked to the module it belongs to. 
-<br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enroled to the given class group.
-</div>
-
 ### Delete feature
 
 The delete mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
@@ -266,6 +237,90 @@ The following sequence diagram shows how the delete operation works:
 The following activity diagram summarizes what happens when a user executes a delete command:
 
 <img src="images/DeleteActivityDiagram.png" width="250" />
+
+### \[Proposed\] Enrol Feature
+
+#### Proposed Implementation
+
+The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is only for student entity. Additionally, it implements the following operations:
+
+* `EnrolCommandParser#parse()` — Parses the command arguments.
+* `EnrolCommand#execute()` — Executes `ModelManager#enrolStudent()` with given student(s) and class group.
+* `ModelManager#enrolStudent()` — Enrols student(s) to a given class group.
+
+Given below is an example usage scenario for the enrolment of a `Student` object to a `ClassGroup` object and how the enrol mechanism behaves at each step.
+
+<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module` and `ClassGroup` objects are created beforehand.
+
+</div>
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![EnrolState0](images/AddState0.png)
+
+Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`. The `enrol` command also calls `EnrolCommandParser#parse()`, which parses the input and returns a successful/unsuccessful output message.
+* An example of the `enrol` command: `enrol c/1 s/1,2,3,4,5,6`
+
+![EnrolState0](images/EnrolState1.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enroled to a class group will automatically be linked to the module it belongs to. 
+<br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enroled to the given class group.
+</div>
+
+### \[Proposed\] Grading Assessment Feature
+
+#### Proposed Implementation
+
+The proposed grading assessment mechanism is facilitated by `TAssist`. Since there are various gradable components, a new entity `Assessment` will benefit the application. This entity will allow tutors to customize what are the different gradable components, from assignments to class participations. Tutors can add, delete and list this entity like the other entities. On top of that, they will be able to grade the assessment, using the `grade` command. The following operations will be implemented for the `grade` command:
+
+* `GradeCommandParser#parse()` — Parses the command arguments.
+* `GradeCommand#execute()` — Executes `ModelManager#gradeAssessment()` with the specified assessment, students and the grade they get.
+* `ModelManager#gradeAssessment()` — Grades the students for the specified assessment.
+
+The `Assessment` entity will be tied to a specific module. Hence, when a `TaModule` object is deleted, its associated `Assessment` objects are also deleted.
+
+Given below is an example usage scenario of how the grading mechanism behaves at each step.
+
+<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module`, `ClassGroup` and `Assessment` objects are created beforehand. `Student` objects are enrolled to the `ClassGroup` as well.
+
+</div>
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![GradeState0](images/GradeState0.png)
+
+Step 2. The user executes `grade a/1 s/1,2 g/1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students enrolled in the module (`s1` and `s2` respectively) with grade 1 in the `TAssist`. the `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
+
+![GradeState1](images/GradeState1.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `GradeCommand#execute()`, instead a `CommandException` will be thrown and no assessments will be graded.
+</div>
+
+The following sequence diagram shows how the grade operation works:
+
+![GradeSequenceDiagram](images/GradeSequenceDiagram.png)
+![GradeSequenceDiagram](images/GradeAssessmentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GradeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a grade command:
+
+<img src="images/GradeActivityDiagram.png" />
+
+#### Design considerations:
+
+**Aspect: How to grade assessments:**
+
+* **Alternative 1 (current choice):** Create `Assessment` entity and this entity will contain the students attempts.
+    * Pros: Easy to implement.
+    * Cons: Duplicate data in storage, and need to ensure data is deleted properly if student/module is deleted.
+
+* **Alternative 2:** Create `Assessment` entity and the `TaModule` entity will contain the student attempts.
+    * Pros: All module related data are in one class.
+    * Cons: Duplicate data in storage, hard to display assessments attempts.
+
 
 ### \[Proposed\] List feature
 
