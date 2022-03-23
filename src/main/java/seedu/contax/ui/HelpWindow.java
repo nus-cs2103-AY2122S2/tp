@@ -154,14 +154,14 @@ public class HelpWindow extends UiPart<Stage> {
 
         // populate appointments page
         rowCounter = 1;
-        insertRow("Add Appointment", "addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON",
+        insertRow("Add Appointment", "addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON      ",
                 "addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60", appointmentsPage);
         insertRow("List Appointments", "listappointments", "-", appointmentsPage);
         insertRow("Delete Appointment", "deleteappointment INDEX", "deleteappointment 2", appointmentsPage);
         insertRow("Edit Appointment", "editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
                 "editappointment 2 n/Call Juliet t/13:45", appointmentsPage);
-        insertRow("List Appointments Within Period", "appointmentsbetween sd/STARTDATE st/STARTTIME ",
-                "ed/ENDDATE et/ENDTIME appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+        insertRow("List Appointments Within Period", "appointmentsbetween sd/STARTDATE st/STARTTIME " +
+                "ed/ENDDATE et/ENDTIME" ,  "appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
                 appointmentsPage);
 
         // populate tags page
