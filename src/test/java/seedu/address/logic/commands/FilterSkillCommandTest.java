@@ -20,6 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PersonContainsSkillPredicate;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 
 class FilterSkillCommandTest {
 
@@ -28,14 +29,24 @@ class FilterSkillCommandTest {
 
     @Test
     public void equals() {
+
+        SkillSet skillSet1 = new SkillSet();
+        skillSet1.add(new Skill("skill1", 40));
+        SkillSet skillSet2 = new SkillSet();
+        skillSet2.add(new Skill("skill2"));
+        SkillSet skillSet3 = new SkillSet();
+        skillSet3.add(new Skill("skill1", 90));
+
         PersonContainsSkillPredicate firstPredicate =
-                new PersonContainsSkillPredicate(new Skill("skill1"));
+                new PersonContainsSkillPredicate(skillSet1);
         PersonContainsSkillPredicate secondPredicate =
-                new PersonContainsSkillPredicate(new Skill("skill2"));
+                new PersonContainsSkillPredicate(skillSet2);
+        PersonContainsSkillPredicate thirdPredicate =
+                new PersonContainsSkillPredicate(skillSet3);
 
         FilterSkillCommand filterFirstSkillCommand = new FilterSkillCommand(firstPredicate);
         FilterSkillCommand filterSecondSkillCommand = new FilterSkillCommand(secondPredicate);
-
+        FilterSkillCommand filterThirdSkillCommand = new FilterSkillCommand(thirdPredicate);
 
         // same object -> returns true
         assertTrue(filterFirstSkillCommand.equals(filterFirstSkillCommand));
@@ -43,6 +54,9 @@ class FilterSkillCommandTest {
         // same values -> returns true
         FilterSkillCommand filterFirstSkillCommandCopy = new FilterSkillCommand(firstPredicate);
         assertTrue(filterFirstSkillCommandCopy.equals(filterFirstSkillCommandCopy));
+
+        // same skills, different proficiency -> returns true
+        assertTrue(filterFirstSkillCommand.equals(filterThirdSkillCommand));
 
         // different types -> returns false
         assertFalse(filterFirstSkillCommand.equals(1));
@@ -75,9 +89,11 @@ class FilterSkillCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code PersonContainsSkillPredicate}.
      */
     private PersonContainsSkillPredicate preparePredicate(String userInput) {
-        return new PersonContainsSkillPredicate(new Skill(userInput));
+        SkillSet skillSet = new SkillSet();
+        skillSet.add(new Skill(userInput));
+        return new PersonContainsSkillPredicate(skillSet);
     }
 }

@@ -10,6 +10,7 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.model.person.PersonBySkillProficiencyComparator;
 import seedu.address.model.person.PersonContainsSkillPredicate;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 
 class SortCommandParserTest {
 
@@ -23,8 +24,11 @@ class SortCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSortCommand() {
+        SkillSet skillSet = new SkillSet();
         Skill skill = new Skill("Java");
-        SortCommand expectedSortCommand = new SortCommand(new PersonContainsSkillPredicate(skill),
+        skillSet.add(skill);
+
+        SortCommand expectedSortCommand = new SortCommand(new PersonContainsSkillPredicate(skillSet),
             new PersonBySkillProficiencyComparator(skill));
 
         assertParseSuccess(parser, "Java", expectedSortCommand);

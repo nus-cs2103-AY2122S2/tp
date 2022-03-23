@@ -21,6 +21,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PersonBySkillProficiencyComparator;
 import seedu.address.model.person.PersonContainsSkillPredicate;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
@@ -31,11 +32,17 @@ class SortCommandTest {
 
     @Test
     public void equals() {
+        SkillSet skillSet1 = new SkillSet();
+        SkillSet skillSet2 = new SkillSet();
+
         Skill firstSkill = new Skill("Java");
         Skill secondSkill = new Skill("C");
 
-        PersonContainsSkillPredicate firstPredicate = new PersonContainsSkillPredicate(firstSkill);
-        PersonContainsSkillPredicate secondPredicate = new PersonContainsSkillPredicate(secondSkill);
+        skillSet1.add(firstSkill);
+        skillSet2.add(secondSkill);
+
+        PersonContainsSkillPredicate firstPredicate = new PersonContainsSkillPredicate(skillSet1);
+        PersonContainsSkillPredicate secondPredicate = new PersonContainsSkillPredicate(skillSet2);
 
         PersonBySkillProficiencyComparator firstComp = new PersonBySkillProficiencyComparator(firstSkill);
         PersonBySkillProficiencyComparator secondComp = new PersonBySkillProficiencyComparator(secondSkill);
@@ -63,8 +70,11 @@ class SortCommandTest {
 
     @Test
     public void execute_invalidSkill_noPersonFound() {
+        SkillSet invalidSkillSet = new SkillSet();
         Skill invalidSkill = new Skill("abcdef");
-        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(invalidSkill);
+        invalidSkillSet.add(invalidSkill);
+
+        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(invalidSkillSet);
         PersonBySkillProficiencyComparator comp = new PersonBySkillProficiencyComparator(invalidSkill);
         SortCommand command = new SortCommand(predicate, comp);
 
@@ -76,8 +86,11 @@ class SortCommandTest {
 
     @Test
     public void execute_validSkill_filtersAndSortsDisplayPersonList() {
+        SkillSet skillSet = new SkillSet();
         Skill skill = new Skill("C");
-        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(skill);
+        skillSet.add(skill);
+
+        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(skillSet);
         PersonBySkillProficiencyComparator comp = new PersonBySkillProficiencyComparator(skill);
         SortCommand command = new SortCommand(predicate, comp);
 
