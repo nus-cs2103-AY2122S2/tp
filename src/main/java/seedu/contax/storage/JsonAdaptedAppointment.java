@@ -51,7 +51,7 @@ class JsonAdaptedAppointment {
      */
     public JsonAdaptedAppointment(Appointment source) {
         name = source.getName().name;
-        startDateTime = DATETIME_FORMATTER.format(source.getStartDateTime().value);
+        startDateTime = DATETIME_FORMATTER.format(source.getStartDateTimeObject().value);
         duration = source.getDuration().value;
         person = (source.getPerson() != null) ? source.getPerson().getName().fullName : null;
     }

@@ -9,7 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 
 public class CompositeScheduleItemList {
 

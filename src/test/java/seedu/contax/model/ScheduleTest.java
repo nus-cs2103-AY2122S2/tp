@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
@@ -87,7 +87,7 @@ public class ScheduleTest {
     public void resetData_withOverlappingAppointments_throwsOverlappingAppointmentException() {
         // Construct two appointments that have overlapping periods
         Appointment overlappingAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1))
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusMinutes(1))
                 .build();
         List<Appointment> newAppointments = Arrays.asList(APPOINTMENT_ALICE, overlappingAppointment);
         ScheduleStub newData = new ScheduleStub(newAppointments);
@@ -167,7 +167,7 @@ public class ScheduleTest {
         schedule.addAppointment(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusMinutes(1)).build();
 
         schedule.setAppointment(APPOINTMENT_ALICE, editedAppointment);
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(editedAppointment).build();
@@ -179,7 +179,7 @@ public class ScheduleTest {
         schedule.addAppointment(APPOINTMENT_ALICE);
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusYears(1)).build();
 
         schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(disjointAppointment).build();
@@ -190,7 +190,7 @@ public class ScheduleTest {
     public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusYears(1)).build();
         schedule.addAppointment(APPOINTMENT_ALICE);
         schedule.addAppointment(disjointAppointment);
 

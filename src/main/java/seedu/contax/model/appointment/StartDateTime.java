@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import seedu.contax.model.util.TemporalComparable;
+import seedu.contax.model.chrono.TemporalComparable;
 
 /**
  * Represents an {@link Appointment}'s starting DateTime in the schedule.

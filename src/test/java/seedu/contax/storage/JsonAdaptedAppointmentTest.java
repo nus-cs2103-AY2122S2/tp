@@ -28,7 +28,7 @@ public class JsonAdaptedAppointmentTest {
     private static final String VALID_NAME = APPOINTMENT_ALICE.getName().toString();
     private static final String VALID_START_DATETIME =
             DateTimeFormatter.ofPattern(JsonAdaptedAppointment.DATETIME_FORMAT)
-                    .format(APPOINTMENT_ALICE.getStartDateTime().value);
+                    .format(APPOINTMENT_ALICE.getStartDateTimeObject().value);
     private static final int VALID_DURATION = 30;
     private static final String VALID_PERSON = addressBook.getPersonList().get(0).getName().toString();
 

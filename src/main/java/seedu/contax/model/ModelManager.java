@@ -15,9 +15,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * Represents the in-memory model of the address book data.

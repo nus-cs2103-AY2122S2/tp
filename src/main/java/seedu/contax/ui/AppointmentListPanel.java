@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.contax.commons.core.LogsCenter;
-import seedu.contax.model.ScheduleItem;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 

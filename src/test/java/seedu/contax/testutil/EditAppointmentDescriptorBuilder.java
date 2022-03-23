@@ -30,8 +30,8 @@ public class EditAppointmentDescriptorBuilder {
         descriptor = new EditAppointmentDescriptor();
         descriptor.setName(appointment.getName());
         descriptor.setDuration(appointment.getDuration());
-        descriptor.setStartDate(appointment.getStartDateTime().value.toLocalDate());
-        descriptor.setStartTime(appointment.getStartDateTime().value.toLocalTime());
+        descriptor.setStartDate(appointment.getStartDateTime().toLocalDate());
+        descriptor.setStartTime(appointment.getStartDateTime().toLocalTime());
     }
 
     /**

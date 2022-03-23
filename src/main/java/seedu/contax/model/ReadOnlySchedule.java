@@ -5,7 +5,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * Unmodifiable view of a schedule.

@@ -53,7 +53,7 @@ public class AppointmentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(appointmentModel.getName().name);
 
-        LocalDateTime startDateTime = appointmentModel.getStartDateTime().value;
+        LocalDateTime startDateTime = appointmentModel.getStartDateTime();
         LocalDateTime endDateTime = appointmentModel.getEndDateTime();
         startDate.setText(startDateTime.format(DATE_FORMATTER));
         startTime.setText(startDateTime.format(TIME_FORMATTER));

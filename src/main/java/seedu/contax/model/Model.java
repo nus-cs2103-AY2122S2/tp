@@ -9,9 +9,10 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * The API of the Model component.

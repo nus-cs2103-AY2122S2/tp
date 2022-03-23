@@ -193,7 +193,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_appointmentsBetween() throws Exception {
-        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime();
         assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
                 + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
                 instanceof AppointmentsBetweenCommand);

@@ -1,4 +1,4 @@
-package seedu.contax.model.util;
+package seedu.contax.model.chrono;
 
 import static java.util.Objects.requireNonNull;
 

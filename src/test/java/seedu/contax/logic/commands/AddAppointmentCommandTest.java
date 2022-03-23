@@ -28,11 +28,11 @@ import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.Schedule;
-import seedu.contax.model.ScheduleItem;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.TypicalIndexes;
 
@@ -73,7 +73,7 @@ public class AddAppointmentCommandTest {
     public void execute_overlappingAppointment_throwsCommandException() {
         Appointment validAppointment = new AppointmentBuilder().build();
         Appointment appointmentToAdd = new AppointmentBuilder()
-                .withStartDateTime(validAppointment.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(validAppointment.getStartDateTime().plusMinutes(1)).build();
         AddAppointmentCommand addCommand = new AddAppointmentCommand(appointmentToAdd, null);
         ModelStub modelStub = new ModelStubWithAppointment(validAppointment);
 

@@ -27,12 +27,12 @@ import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.Schedule;
-import seedu.contax.model.ScheduleItem;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RangeCommand.

@@ -14,7 +14,7 @@ import java.util.List;
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
 import seedu.contax.model.appointment.DateRangePredicate;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * Lists all empty slots in the schedule of a minimum length within a period.

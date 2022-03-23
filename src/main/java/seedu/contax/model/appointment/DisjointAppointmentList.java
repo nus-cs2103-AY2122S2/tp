@@ -5,7 +5,6 @@ import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,11 +13,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * A list of appointments that enforces that its elements cannot have overlapping periods and does not allow
- * nulls. This check is performed using {@link Appointment#isOverlapping(Appointment)}, and will be performed
+ * nulls. This check is performed using {@link Appointment#isOverlapping(ScheduleItem)}, and will be performed
  * upon any modification to the list. It also enforces a chronological ordering of the appointments in the
  * list, done by sorting {@link Appointment#getStartDateTime()} since appointments are disjoint.
  *
@@ -206,7 +206,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
             Appointment earlierAppointment = appointments.get(i);
             Appointment laterAppointment = appointments.get(i + 1);
             LocalDateTime gapStart = earlierAppointment.getEndDateTime();
-            LocalDateTime gapEnd = laterAppointment.getStartDateTime().value;
+            LocalDateTime gapEnd = laterAppointment.getStartDateTime();
 
             if (!(gapEnd.isAfter(start))) {
                 continue;

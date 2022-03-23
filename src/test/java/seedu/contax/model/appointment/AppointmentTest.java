@@ -25,11 +25,11 @@ public class AppointmentTest {
         assertThrows(NullPointerException.class, () ->
                 new Appointment(null, null, null, null));
         assertThrows(NullPointerException.class, () ->
-                new Appointment(reference.getName(), reference.getStartDateTime(), null, null));
+                new Appointment(reference.getName(), reference.getStartDateTimeObject(), null, null));
         assertThrows(NullPointerException.class, () ->
                 new Appointment(reference.getName(), null, reference.getDuration(), null));
         assertThrows(NullPointerException.class, () ->
-                new Appointment(null, reference.getStartDateTime(), reference.getDuration(), null));
+                new Appointment(null, reference.getStartDateTimeObject(), reference.getDuration(), null));
     }
 
     @Test
@@ -169,7 +169,7 @@ public class AppointmentTest {
                 .withStartDateTime(startDate).withDuration(20).withPerson(ALICE).build();
         assertEquals(appointment.getName()
                 + "; Start Date Time: "
-                + appointment.getStartDateTime()
+                + appointment.getStartDateTimeObject()
                 + "; Duration: "
                 + appointment.getDuration()
                 + "; Person: "

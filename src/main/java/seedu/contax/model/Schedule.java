@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.DisjointAppointmentList;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * Wraps all data at the Schedule level.

@@ -36,7 +36,7 @@ public class AppointmentBuilder {
      */
     public AppointmentBuilder(Appointment appointmentToCopy) {
         name = appointmentToCopy.getName();
-        startDateTime = appointmentToCopy.getStartDateTime();
+        startDateTime = appointmentToCopy.getStartDateTimeObject();
         duration = appointmentToCopy.getDuration();
         person = appointmentToCopy.getPerson();
     }

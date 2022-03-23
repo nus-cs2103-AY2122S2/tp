@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
-import seedu.contax.model.util.TimeRange;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 
 public class DisjointAppointmentListTest {
@@ -70,7 +70,7 @@ public class DisjointAppointmentListTest {
     public void containsOverlapping_overlappingAppointmentsInList_returnsTrue() {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(10)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(10)).build();
         assertTrue(appointmentList.containsOverlapping(editedAppointment));
     }
 
@@ -92,13 +92,13 @@ public class DisjointAppointmentListTest {
 
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1)).build();
         assertThrows(OverlappingAppointmentException.class, () -> appointmentList.add(editedAppointment));
     }
 
     @Test
     public void add_unsortedNewAppointment_successSortsPosition() {
-        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime();
         appointmentList.add(APPOINTMENT_ALONE);
 
         Appointment beforeAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
@@ -148,7 +148,7 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1)).build();
 
         appointmentList.setAppointment(APPOINTMENT_ALICE, editedAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
@@ -161,7 +161,7 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusYears(1)).build();
 
         appointmentList.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
@@ -171,7 +171,7 @@ public class DisjointAppointmentListTest {
 
     @Test
     public void setAppointment_editedAppointmentDisjointDifferentOrdering_successSortsPosition() {
-        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime();
         Appointment modifiedAloneAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
                 .withStartDateTime(baseDateTime.minusDays(1)).build();
 
@@ -209,7 +209,7 @@ public class DisjointAppointmentListTest {
     public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusYears(1)).build();
         appointmentList.add(APPOINTMENT_ALICE);
         appointmentList.add(disjointAppointment);
 
@@ -254,7 +254,7 @@ public class DisjointAppointmentListTest {
     public void setAppointments_unsortedList_sortsListUponSetting() {
         appointmentList.add(APPOINTMENT_ALICE);
         List<Appointment> appointmentArrayList = new ArrayList<>();
-        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime();
         appointmentArrayList.add(APPOINTMENT_ALONE);
         appointmentArrayList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
                 .withStartDateTime(baseDateTime.minusDays(1)).build());
