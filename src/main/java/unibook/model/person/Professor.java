@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import unibook.model.module.Module;
-import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
 /**
@@ -49,11 +48,8 @@ public class Professor extends Person {
         }
 
         Professor otherPerson = (Professor) other;
-        return otherPerson.getName().equals(getName())
-            && otherPerson.getPhone().equals(getPhone())
-            && otherPerson.getEmail().equals(getEmail())
-            && otherPerson.getTags().equals(getTags())
-            && otherPerson.getOffice().equals(getOffice());
+
+        return super.equals(other) && otherPerson.getOffice().equals(getOffice());
     }
 
     @Override

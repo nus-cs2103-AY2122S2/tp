@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unibook.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static unibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +17,16 @@ import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.UserPrefs;
 import unibook.model.person.NameContainsKeywordsPredicate;
-import unibook.testutil.TypicalPersons;
+import unibook.model.person.Student;
+import unibook.testutil.builders.StudentBuilder;
+import unibook.testutil.typicalclasses.TypicalUniBook;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(TypicalPersons.getTypicalUniBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalPersons.getTypicalUniBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalUniBook.getTypicalUniBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalUniBook.getTypicalUniBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -63,13 +67,24 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+
+        //Multiple persons matching predicate
+        Student john = new StudentBuilder().withName("John Anes").build();
+        Student johnb = new StudentBuilder().withName("John Bones").build();
+        List<Student> multipleStudents = new ArrayList<>();
+        multipleStudents.add(john);
+        model.addPerson(john);
+        expectedModel.addPerson(john);
+        multipleStudents.add(johnb);
+        model.addPerson(johnb);
+        expectedModel.addPerson(johnb);
+
+        NameContainsKeywordsPredicate predicate = preparePredicate("John");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPersons.CARL, TypicalPersons.ELLE, TypicalPersons.FIONA),
-            model.getFilteredPersonList());
+        assertEquals(multipleStudents, model.getFilteredPersonList());
     }
 
     /**

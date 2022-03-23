@@ -17,7 +17,7 @@ import unibook.model.person.Name;
 import unibook.model.person.Phone;
 import unibook.model.tag.Tag;
 import unibook.testutil.Assert;
-import unibook.testutil.TypicalIndexes;
+import unibook.testutil.typicalclasses.TypicalIndexes;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

@@ -108,7 +108,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "One or more of the modules entered"
         + " does not exist in the UniBook";
 
-    private Person personToAdd = new Person();
+    private Person personToAdd;
     private Module moduleToAdd = new Module();
 
     /**
@@ -171,3 +171,4 @@ public class AddCommand extends Command {
             && personToAdd.equals(((AddCommand) other).personToAdd));
     }
 }
+

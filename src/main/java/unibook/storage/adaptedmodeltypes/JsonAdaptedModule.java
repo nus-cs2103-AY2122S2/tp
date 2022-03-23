@@ -7,15 +7,10 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
-import unibook.model.module.group.Group;
-import unibook.model.person.Name;
-import unibook.model.person.Phone;
 
 
 /**
@@ -31,6 +26,7 @@ public class JsonAdaptedModule {
 
     /**
      * Creates a JsonAdaptedModule object using json properties.
+     *
      * @param moduleName
      * @param moduleCode
      * @param groups
@@ -46,14 +42,15 @@ public class JsonAdaptedModule {
 
     /**
      * Creates a JsonAdaptedModule object using module object.
+     *
      * @param source
      */
     public JsonAdaptedModule(Module source) {
         this.moduleName = source.getModuleName().toString();
         this.moduleCode = source.getModuleCode().toString();
         this.groups = new HashSet<>(source.getGroups().stream()
-                .map(grp -> new JsonAdaptedGroup(grp.getGroupName(), new HashSet<>(grp.getMeetingTimes())))
-                .collect(Collectors.toSet()));
+            .map(grp -> new JsonAdaptedGroup(grp.getGroupName(), new HashSet<>(grp.getMeetingTimes())))
+            .collect(Collectors.toSet()));
     }
 
 
@@ -65,10 +62,12 @@ public class JsonAdaptedModule {
     public Module toModelType() throws IllegalValueException {
 
         if (moduleName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName()));
         }
         if (moduleCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
         if (groups == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Groups"));

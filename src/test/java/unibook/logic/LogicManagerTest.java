@@ -11,9 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import unibook.logic.commands.AddCommand;
 import unibook.logic.commands.CommandResult;
-import unibook.logic.commands.CommandTestUtil;
 import unibook.logic.commands.ListCommand;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
@@ -21,7 +19,6 @@ import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.UserPrefs;
-import unibook.model.person.Person;
 import unibook.storage.JsonUniBookStorage;
 import unibook.storage.JsonUserPrefsStorage;
 import unibook.storage.StorageManager;
@@ -150,7 +147,7 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage, Model expectedModel) {
         Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand,
-                PERSON_LIST_SHOWING, MODULE_LIST_SHOWING));
+            PERSON_LIST_SHOWING, MODULE_LIST_SHOWING));
         assertEquals(expectedModel, model);
     }
 

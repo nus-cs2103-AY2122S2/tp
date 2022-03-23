@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import unibook.commons.core.LogsCenter;
 import unibook.commons.exceptions.DataConversionException;
@@ -37,7 +38,8 @@ public class JsonUtil {
         .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
         .registerModule(new SimpleModule("SimpleModule")
             .addSerializer(Level.class, new ToStringSerializer())
-            .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
+            .addDeserializer(Level.class, new LevelDeserializer(Level.class)))
+        .registerModule(new JavaTimeModule());
 
     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));

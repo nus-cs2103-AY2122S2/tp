@@ -1,4 +1,4 @@
-package unibook.testutil;
+package unibook.testutil.typicalclasses;
 
 import unibook.commons.core.index.Index;
 

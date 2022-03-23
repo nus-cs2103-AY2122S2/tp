@@ -3,7 +3,6 @@ package unibook.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static unibook.logic.commands.CommandTestUtil.VALID_TAG_HELPFUL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,16 +14,13 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import unibook.logic.commands.CommandTestUtil;
 import unibook.model.module.Module;
 import unibook.model.person.Person;
-import unibook.model.person.Student;
 import unibook.model.person.exceptions.DuplicatePersonException;
 import unibook.testutil.Assert;
-import unibook.testutil.PersonBuilder;
-import unibook.testutil.StudentBuilder;
-import unibook.testutil.TypicalPersons;
-import unibook.testutil.TypicalUniBook;
+import unibook.testutil.builders.StudentBuilder;
+import unibook.testutil.typicalclasses.TypicalStudents;
+import unibook.testutil.typicalclasses.TypicalUniBook;
 
 public class UniBookTest {
 
@@ -69,16 +65,10 @@ public class UniBookTest {
 
     @Test
     public void hasPerson_personInUniBook_returnsTrue() {
-        uniBook.addPerson(studentBuilder.build());
-        assertTrue(uniBook.hasPerson(TypicalPersons.ALICE));
+        uniBook.addPerson(TypicalStudents.ALICE);
+        assertTrue(uniBook.hasPerson(TypicalStudents.ALICE));
     }
 
-    @Test
-    public void hasPerson_personWithSameIdentityFieldsInUniBook_returnsTrue() {
-        uniBook.addPerson(studentBuilder.build());
-        Person editedAlice = studentBuilder.withTags(VALID_TAG_HELPFUL).build();
-        assertTrue(uniBook.hasPerson(editedAlice));
-    }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {

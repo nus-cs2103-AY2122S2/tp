@@ -6,17 +6,13 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javafx.collections.FXCollections;
 import unibook.commons.exceptions.IllegalValueException;
+import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.person.Name;
 import unibook.model.person.Phone;
-import unibook.storage.util.LocalDateTimeDeserializer;
-import unibook.storage.util.LocalDateTimeSerializer;
-import unibook.model.module.Module;
 
 
 /**
@@ -27,12 +23,11 @@ public class JsonAdaptedGroup {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String groupName;
-    @JsonSerialize(contentUsing = LocalDateTimeSerializer.class)
-    @JsonDeserialize(contentUsing = LocalDateTimeDeserializer.class)
     private final Set<LocalDateTime> meetingTimes;
 
     /**
      * Creates a JsonAdaptedGroup object using json properties.
+     *
      * @param groupName
      * @param meetingTimes
      */
@@ -45,6 +40,7 @@ public class JsonAdaptedGroup {
 
     /**
      * Creates a JsonAdaptedGroup object using group object.
+     *
      * @param source
      */
     public JsonAdaptedGroup(Group source) {

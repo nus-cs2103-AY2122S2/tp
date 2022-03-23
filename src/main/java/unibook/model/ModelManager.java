@@ -3,7 +3,6 @@ package unibook.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,7 +14,6 @@ import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
-import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.ui.Ui;
 import unibook.ui.UiManager;
 
@@ -205,12 +203,12 @@ public class ModelManager implements Model {
         filteredModules.setPredicate(predicate);
     }
 
-    public void setUi(Ui ui) {
-        this.ui = ui;
-    }
-
     public UiManager getUi() {
         return (UiManager) this.ui;
+    }
+
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
 
     @Override

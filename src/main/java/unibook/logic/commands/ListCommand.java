@@ -28,39 +28,30 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS_MODULE = "Listed all modules with specified code.";
     public static final String MESSAGE_SUCCESS_TYPE = "Listed all persons with specified type.";
     public static final String MESSAGE_SUCCESS_MODULEANDTYPE = "Listed all persons with specified type "
-            + "in specified module.";
+        + "in specified module.";
     public static final String MESSAGE_SUCCESS_VIEW = "Switched view successfully.";
     public static final String MESSAGE_USAGE_TYPE = "The acceptable arguments for type are students/professors.";
     public static final String MESSAGE_WRONG_VIEW = "The command requires you to switch views.";
     public static final String MESSAGE_USAGE_OPTION = "The acceptable arguments for option are module/type.";
     public static final String MESSAGE_TYPE_MISSING = "You did not enter a type argument. The acceptable"
-            + " arguments for type are students/professors.";
+        + " arguments for type are students/professors.";
     public static final String MESSAGE_MODULE_MISSING = "You did not enter a Module argument.";
     public static final String MESSAGE_USAGE_VIEW = "The acceptable arguments for view are modules/people.";
-
-
-    private enum ListCommandType {
-        ALL, MODULE, TYPE, MODULEANDTYPE, VIEW
-    };
-
-    public enum ListView {
-        PEOPLE, MODULES
-    };
-
     private ModuleCode moduleCode;
+
     private String type;
+
     private ListCommandType commandType;
     private ListView viewType;
-
     /**
      * Constructor for a ListCommand to list everything.
      */
     public ListCommand() {
         this.commandType = ListCommandType.ALL;
     }
-
     /**
      * Constructor for a ListCommand to change the current view.
+     *
      * @param viewType
      */
     public ListCommand(ListView viewType) {
@@ -70,6 +61,7 @@ public class ListCommand extends Command {
 
     /**
      * Constructor for a ListCommand to list people with specific module.
+     *
      * @param moduleCode
      */
     public ListCommand(ModuleCode moduleCode) {
@@ -79,6 +71,7 @@ public class ListCommand extends Command {
 
     /**
      * Constructor for a ListCommand to list people with specific type.
+     *
      * @param type
      */
     public ListCommand(String type) {
@@ -89,6 +82,7 @@ public class ListCommand extends Command {
     /**
      * Constructor for a ListCommand to list people with specific type in a
      * specific module.
+     *
      * @param moduleCode
      * @param type
      */
@@ -101,6 +95,7 @@ public class ListCommand extends Command {
     /**
      * Utility method to quickly show everything. Used to reset before narrowing
      * to specific criteria.
+     *
      * @param model
      */
     private void showAll(Model model) {
@@ -161,11 +156,11 @@ public class ListCommand extends Command {
                 }
                 if (type.equals("professors")) {
                     Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)
-                            && (p instanceof Professor);
+                        && (p instanceof Professor);
                     model.updateFilteredPersonList(showSpecificProfessorPredicate);
                 } else if (type.equals("students")) {
                     Predicate<Person> showSpecificStudentPredicate = p -> p.hasModule(this.moduleCode)
-                            && (p instanceof Student);
+                        && (p instanceof Student);
                     model.updateFilteredPersonList(showSpecificStudentPredicate);
                 } else {
                     return new CommandResult(MESSAGE_USAGE_TYPE);
@@ -184,5 +179,13 @@ public class ListCommand extends Command {
         default:
             return new CommandResult("");
         }
+    }
+
+    private enum ListCommandType {
+        ALL, MODULE, TYPE, MODULEANDTYPE, VIEW
+    }
+
+    public enum ListView {
+        PEOPLE, MODULES
     }
 }

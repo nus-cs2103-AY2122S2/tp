@@ -1,14 +1,11 @@
 package unibook.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
 import unibook.model.module.Module;
-import unibook.model.module.ModuleCode;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 
@@ -41,6 +38,12 @@ public class Student extends Person {
     }
 
 
+    /**
+     * Returns true only if the other student has all the same fields.
+     *
+     * @param other
+     * @return
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -52,15 +55,13 @@ public class Student extends Person {
         }
 
         Student otherPerson = (Student) other;
-        return otherPerson.getName().equals(getName())
-            && otherPerson.getPhone().equals(getPhone())
-            && otherPerson.getEmail().equals(getEmail())
-            && otherPerson.getTags().equals(getTags())
-            && otherPerson.getModules().equals(getModules());
+
+        return super.equals(other);
     }
 
     /**
      * Returns the groups this student is in.
+     *
      * @return
      */
     public Set<Group> getGroups() {
