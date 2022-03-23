@@ -6,9 +6,14 @@ import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.model.Model;
 import seedu.contax.model.appointment.ClientNameContainsKeywordsPredicate;
+import seedu.contax.model.appointment.ContainsKeywordsPredicate;
 import seedu.contax.model.appointment.HasClientPredicate;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
 
+/**
+ * Finds and lists all appointments in address book whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
+ */
 public class FindAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "findappointment";
 
@@ -17,19 +22,16 @@ public class FindAppointmentCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate namePredicate;
-    private final ClientNameContainsKeywordsPredicate clientNamePredicate;
+    private final ContainsKeywordsPredicate predicate;
 
-    public FindAppointmentCommand(NameContainsKeywordsPredicate namePredicate,
-                                  ClientNameContainsKeywordsPredicate clientNamePredicate) {
-        this.namePredicate = namePredicate;
-        this.clientNamePredicate = clientNamePredicate;
+    public FindAppointmentCommand(ContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-//        model.updateFilteredAppointmentList(predicate);
+        model.updateFilteredAppointmentList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW,
                 model.getFilteredAppointmentList().size()), GuiListContentType.APPOINTMENT);
     }
@@ -44,8 +46,7 @@ public class FindAppointmentCommand extends Command {
             return false;
         }
 
-//        return ((FindAppointmentCommand) o).predicate.equals(predicate);
-        return true;
+        return ((FindAppointmentCommand) o).predicate.equals(predicate);
     }
 
 
