@@ -149,14 +149,14 @@ public class ModelManager implements Model {
     //========== For addbuyer============//
     @Override
     public void addBuyer(Buyer buyer) {
-        addressBook.addBuyer(buyer);
-        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        buyerAddressBook.addBuyer(buyer);
+        updateFilteredBuyerList(PREDICATE_SHOW_ALL_BUYERS);
     }
 
     @Override
     public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.hasBuyer(buyer);
+        return buyerAddressBook.hasBuyer(buyer);
     }
 
     @Override
