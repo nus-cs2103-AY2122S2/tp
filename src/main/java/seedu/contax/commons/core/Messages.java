@@ -18,4 +18,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_TIME = "The time provided is invalid!";
 
     public static final String MESSAGE_INVALID_INPUT = "=/ provided is invalid";
+
+    public static final String MESSAGE_INVALID_PRIORITY_INDEX = "Invalid index for editpriority";
+    public static final String MESSAGE_INVALID_PRIORITY_LEVEL = "Invalid priority level for editpriority \n%1$s";
 }

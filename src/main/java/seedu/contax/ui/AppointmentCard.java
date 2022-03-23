@@ -41,6 +41,9 @@ public class AppointmentCard extends UiPart<Region> {
     private Label personAddress;
     @FXML
     private Label withLabel;
+    @FXML
+    private Label priority;
+
 
     /**
      * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
@@ -52,6 +55,38 @@ public class AppointmentCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         name.setText(appointmentModel.getName().name);
+        switch (appointmentModel.getPriority()) {
+        case HIGH:
+            priority.setText("High");
+            priority.setStyle(
+                    "-fx-background-color: lightpink; "
+                    + "-fx-text-fill: black;"
+                    + "-fx-padding: 5 20;"
+                    + "-fx-background-radius: 50"
+            );
+            break;
+        case MEDIUM:
+            priority.setText("Medium");
+            priority.setStyle(
+                    "-fx-background-color: lightyellow; "
+                    + "-fx-text-fill: black;"
+                    + "-fx-padding: 5 20;"
+                    + "-fx-background-radius: 50"
+            );
+            break;
+        case LOW:
+            priority.setText("Low");
+            priority.setStyle(
+                    "-fx-background-color: lightgreen; "
+                    + "-fx-text-fill: black;"
+                    + "-fx-padding: 5 20;"
+                    + "-fx-background-radius: 50"
+            );
+            break;
+        default:
+            priority.setText("");
+        }
+
 
         LocalDateTime startDateTime = appointmentModel.getStartDateTime().value;
         LocalDateTime endDateTime = appointmentModel.getEndDateTime();

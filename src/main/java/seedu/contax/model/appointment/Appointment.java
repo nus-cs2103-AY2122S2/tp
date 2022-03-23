@@ -20,6 +20,7 @@ public class Appointment implements Comparable<Appointment> {
     private final Name name;
     private final Duration duration;
     private final Person person;
+    private Priority priority;
 
     /**
      * Constructs an {@code Appointment}.
@@ -38,6 +39,7 @@ public class Appointment implements Comparable<Appointment> {
         this.startDateTime = startDateTime;
         this.duration = duration;
         this.person = person;
+        this.priority = Priority.LOW;
     }
 
     public Name getName() {
@@ -54,6 +56,15 @@ public class Appointment implements Comparable<Appointment> {
 
     public Person getPerson() {
         return person;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public Appointment setPriority(Priority priority) {
+        this.priority = priority;
+        return this;
     }
 
     /**
