@@ -2,8 +2,10 @@ package seedu.address.logic.commands.applicant;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -12,6 +14,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.interview.Interview;
 
 /**
  * Deletes a applicant identified using it's displayed index from the address book.
@@ -24,6 +27,8 @@ public class DeleteApplicantCommand extends DeleteCommand {
             + "Example: " + COMMAND_WORD + " -a 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Applicant: %1$s";
+
+    public static final String MESSAGE_DELETE_INTERVIEWS = "Deleted %d related interview(s)";
 
     private final Index targetIndex;
 
@@ -41,9 +46,32 @@ public class DeleteApplicantCommand extends DeleteCommand {
         }
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
+        int deleteInterviewCount = deleteApplicantsInterview(model, applicantToDelete);
+
         model.deletePerson(applicantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete),
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
+                        + String.format(MESSAGE_DELETE_INTERVIEWS, deleteInterviewCount),
                 getCommandDataType());
+    }
+
+    private int deleteApplicantsInterview(Model model, Applicant applicantToDelete) {
+        ObservableList<Interview> interviewList = model.getAddressBook().getInterviewList();
+        ArrayList<Interview> interviewsToDelete = new ArrayList<>();
+
+        int deleteCount = 0;
+        for (Interview i : interviewList) {
+            if (i.isInterviewForApplicant(applicantToDelete)) {
+                interviewsToDelete.add(i);
+                deleteCount++;
+            }
+        }
+
+        for (Interview i : interviewsToDelete) {
+            model.deleteInterview(i);
+        }
+
+        return deleteCount;
     }
 
     @Override

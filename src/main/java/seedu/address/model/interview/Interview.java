@@ -43,7 +43,23 @@ public class Interview {
         return position;
     }
 
-    public Status getStatus() { return status; }
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * Checks if the interview is for the specified applicant.
+     */
+    public boolean isInterviewForApplicant(Applicant a) {
+        return applicant.isSamePerson(a);
+    }
+
+    /**
+     * Checks if the interview is for the specified position.
+     */
+    public boolean isInterviewForPosition(Position p) {
+        return position.equals(p);
+    }
 
     /**
      * Returns true if both interviews have the same data fields.
