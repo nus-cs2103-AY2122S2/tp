@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,7 +79,7 @@ public class PetBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Pet} that we are building.
      */
-    public PetBuilder withTags(String ... tags) {
+    public PetBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -139,10 +139,10 @@ public class PetBuilder {
      */
     public PetBuilder withPresentAttendanceEntry(String attendanceDate, String pickUpTime, String dropOffTime) {
         attendanceHashMap.addAttendance(
-                new PresentAttendanceEntry(
-                        LocalDate.parse(attendanceDate),
-                        LocalTime.parse(pickUpTime),
-                        LocalTime.parse(dropOffTime)));
+            new PresentAttendanceEntry(
+                LocalDate.parse(attendanceDate),
+                LocalTime.parse(pickUpTime),
+                LocalTime.parse(dropOffTime)));
         return this;
     }
 
@@ -151,15 +151,16 @@ public class PetBuilder {
      */
     public PetBuilder withAbsentAttendanceEntry(String attendanceDate) {
         attendanceHashMap.addAttendance(
-                new AbsentAttendanceEntry(
-                        LocalDate.parse(attendanceDate)
-                )
+            new AbsentAttendanceEntry(
+                LocalDate.parse(attendanceDate)
+            )
         );
         return this;
     }
 
     /**
      * Builds the {@code Pet} object with the data in the builder.
+     *
      * @return a Pet object.
      */
     public Pet build() {

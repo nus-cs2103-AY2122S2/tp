@@ -164,6 +164,7 @@ public class PresentAttendanceCommand extends Command {
             return getPickUpTime().isPresent() && getDropOffTime().isPresent();
         }
 
+        @Override
         public String toString() {
             String date = getAttendanceDate().format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
 
