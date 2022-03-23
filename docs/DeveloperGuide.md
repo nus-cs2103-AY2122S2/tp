@@ -650,6 +650,27 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+---
+
+### Adding a comment on the show
+
+1. Deleting a show while all shows are being shown
+
+    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
+
+    1. Test case: `comment 1 c/Hello`<br>
+       Expected: Comment within the first show is edited to "Hello" from the list.
+
+    1. Test case: `comment 1`<br>
+       Expected: Comment within the first show is deleted.
+
+    1. Test case: `comment 0`<br>
+       Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+---
 
 ### Saving data
 1. Saving data between sessions
