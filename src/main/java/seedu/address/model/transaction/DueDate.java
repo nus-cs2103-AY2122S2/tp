@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Due date of the transaction.
