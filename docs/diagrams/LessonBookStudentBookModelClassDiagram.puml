@@ -9,7 +9,7 @@ skinparam classBackgroundColor MODEL_COLOR
         Class Student
 
         Class Name
-        Class Address
+        Class Student
         Class Email
         Class Phone
         Class Tag
@@ -17,7 +17,7 @@ skinparam classBackgroundColor MODEL_COLOR
         Student *--> Name
         Student *--> Phone
         Student *--> Email
-        Student *--> Address
+        Student *--> Student
         Student *--> "*" Tag
 
         Class HiddenSB3 #FFFFFF
@@ -36,13 +36,13 @@ package LessonBook <<Rectangle>> {
 
     Class LessonName
     Class Subject
-    Class LessonAddress
+    Class LessonStudent
     Class DateTimeSlot
     Class EnrolledStudents
 
     "{abstract}\nLesson" *-right-> LessonName
     "{abstract}\nLesson" *-left-> Subject
-    "{abstract}\nLesson" *-down-> LessonAddress
+    "{abstract}\nLesson" *-down-> LessonStudent
     "{abstract}\nLesson" *-down-> DateTimeSlot
     "{abstract}\nLesson" *-down-> EnrolledStudents
 
