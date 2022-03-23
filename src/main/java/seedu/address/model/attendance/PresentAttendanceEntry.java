@@ -46,16 +46,20 @@ public class PresentAttendanceEntry extends AttendanceEntry {
     }
 
     /**
-     * Checks to see if the pick up time is before the drop off time.
+     * Checks to see if the timings in the entry are valid.
+     * A valid timing is when either both timings are null,
+     * or both timings are present, with the pick-up time before the drop-off time.
      *
-     * @return true if the pick up time is before the drop off time, false otherwise.
+     * @return true if the timings are valid, false otherwise.
      */
     public boolean isValidTimings() {
-        if (getPickUpTime().isPresent() && getDropOffTime().isPresent()) {
+        if (getPickUpTime().isPresent() ^ getDropOffTime().isPresent()) {
+            return false; // if only one timing is present
+        } else if (getPickUpTime().isPresent() && getDropOffTime().isPresent()) {
             return pickUpTime.isBefore(dropOffTime);
         }
 
-        return true;
+        return true; // both timings are not present
     }
 
     @Override

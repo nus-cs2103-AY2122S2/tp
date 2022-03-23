@@ -50,6 +50,7 @@ public class AttendanceUtil {
      * @throws DateTimeParseException if the date string is invalid.
      */
     public static LocalTime convertToModelTime(String jsonTime) throws DateTimeParseException {
+        // No time specified.
         if (jsonTime.isEmpty()) {
             return null;
         }

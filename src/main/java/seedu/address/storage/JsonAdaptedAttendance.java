@@ -68,18 +68,33 @@ public class JsonAdaptedAttendance {
      * @throws IllegalValueException if there were any data constraints violated in the adapted attendance object.
      */
     public AttendanceEntry toModelType() throws IllegalValueException {
-
-        LocalDate modelAttendanceDate;
-        Boolean modelIsPresent;
-        LocalTime modelPickUpTime;
-        LocalTime modelDropOffTime;
-        PresentAttendanceEntry presentAttendanceEntry;
-
         if (!isValidIsPresentString(isPresent)) {
             throw new IllegalValueException(AttendanceEntry.MESSAGE_INVALID_ISPRESENT);
         }
 
-        modelIsPresent = Boolean.parseBoolean(isPresent);
+        boolean modelIsPresent = Boolean.parseBoolean(isPresent);
+
+        if (!modelIsPresent) {
+            return convertToAbsentEntry(attendanceDate); // absent attendance entry
+        }
+
+        PresentAttendanceEntry presentAttendanceEntry = convertToPresentEntry(attendanceDate, pickUpTime, dropOffTime);
+
+        if (!presentAttendanceEntry.isValidTimings()) {
+            throw new IllegalValueException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
+        }
+
+        return presentAttendanceEntry; // present attendance entry
+    }
+
+    /**
+     * Creates an {@code AbsentAttendanceEntry} object for model use.
+     * @param attendanceDate the attendance date in string format.
+     * @return an {@code AbsentAttendanceEntry} object.
+     * @throws IllegalValueException if the given attendance date string is invalid.
+     */
+    private AbsentAttendanceEntry convertToAbsentEntry(String attendanceDate) throws IllegalValueException {
+        LocalDate modelAttendanceDate;
 
         try {
             modelAttendanceDate = AttendanceUtil.convertToModelDate(attendanceDate);
@@ -87,26 +102,29 @@ public class JsonAdaptedAttendance {
             throw new IllegalValueException(pe.getMessage());
         }
 
-        if (!modelIsPresent) {
-            return new AbsentAttendanceEntry(modelAttendanceDate);
-        }
+        return new AbsentAttendanceEntry(modelAttendanceDate);
+    }
+
+    /**
+     * Creates a {@code PresentAttendanceEntry} object for model use.
+     * @param attendanceDate the attendance date in string format.
+     * @param pickUpTime the pick-up time in string format.
+     * @param dropOffTime the drop-off time in string format.
+     * @return a {@code PresentAttendanceEntry} object.
+     * @throws IllegalValueException if the given attendance date, pick-up time or drop-off time string is invalid.
+     */
+    private PresentAttendanceEntry convertToPresentEntry(String attendanceDate, String pickUpTime, String dropOffTime)
+        throws IllegalValueException {
+        LocalDate modelAttendanceDate;
+        LocalTime modelPickUpTime;
+        LocalTime modelDropOffTime;
 
         try {
+            modelAttendanceDate = AttendanceUtil.convertToModelDate(attendanceDate);
             modelPickUpTime = AttendanceUtil.convertToModelTime(pickUpTime);
-        } catch (DateTimeParseException pe) {
-            throw new IllegalValueException(pe.getMessage());
-        }
-
-        try {
             modelDropOffTime = AttendanceUtil.convertToModelTime(dropOffTime);
         } catch (DateTimeParseException pe) {
             throw new IllegalValueException(pe.getMessage());
-        }
-
-        presentAttendanceEntry = new PresentAttendanceEntry(modelAttendanceDate, modelPickUpTime, modelDropOffTime);
-
-        if (!presentAttendanceEntry.isValidTimings()) {
-            throw new IllegalValueException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 
         return new PresentAttendanceEntry(modelAttendanceDate, modelPickUpTime, modelDropOffTime);
