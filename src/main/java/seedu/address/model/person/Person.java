@@ -93,12 +93,32 @@ public class Person {
     }
 
     /**
+     * Predicate to check if the faculty of Person object matches the given faculty.
+     *
+     * @param faculty given faculty to check if matched by faculty property in Person
+     * @return boolean value to show if there is a match
+     */
+    public boolean isFaculty(Faculty faculty) {
+        return this.faculty.equals(faculty);
+    }
+
+    /**
      * Returns the Faculty of this person as a String instead of type Faculty.
      *
      * @return a string of the faculty
      */
     public String getFacultyAsString() {
         return faculty.toString();
+    }
+
+    /**
+     * Predicate to check if the block of Person object matches the given block.
+     *
+     * @param block given block to check if matched by block property in Person
+     * @return boolean value to show if there is a match
+     */
+    public boolean isBlock(Block block) {
+        return this.block.equals(block);
     }
 
     public Address getAddress() {
