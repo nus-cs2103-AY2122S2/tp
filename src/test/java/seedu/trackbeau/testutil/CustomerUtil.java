@@ -7,6 +7,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
@@ -42,6 +43,7 @@ public class CustomerUtil {
         sb.append(PREFIX_SKINTYPE + customer.getSkinType().value + " ");
         sb.append(PREFIX_HAIRTYPE + customer.getHairType().value + " ");
         sb.append(PREFIX_BIRTHDATE + customer.getBirthdate().toString() + " ");
+        sb.append(PREFIX_REGDATE + customer.getRegDate().toString() + " ");
         customer.getStaffs().stream().forEach(
             s -> sb.append(PREFIX_STAFFS + s.tagName + " ")
         );
@@ -65,6 +67,8 @@ public class CustomerUtil {
         descriptor.getHairType().ifPresent(hairType -> sb.append(PREFIX_HAIRTYPE).append(hairType.value).append(" "));
         descriptor.getBirthdate().ifPresent(birthdate -> sb.append(PREFIX_BIRTHDATE)
                 .append(birthdate.toString()).append(" "));
+        descriptor.getRegistrationDate().ifPresent(regDate -> sb.append(PREFIX_REGDATE)
+                .append(regDate.toString()).append(" "));
         if (descriptor.getStaffs().isPresent()) {
             Set<Tag> tags = descriptor.getStaffs().get();
             if (tags.isEmpty()) {

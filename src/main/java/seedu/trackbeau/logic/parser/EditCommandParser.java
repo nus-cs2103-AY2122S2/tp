@@ -9,6 +9,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
@@ -39,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_BIRTHDATE,
-                        PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
+                        PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES, PREFIX_REGDATE);
 
         Index index;
 
@@ -71,6 +72,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_BIRTHDATE).isPresent()) {
             editCustomerDescriptor.setBirthdate(ParserUtil
                     .parseBirthdate(argMultimap.getValue(PREFIX_BIRTHDATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_REGDATE).isPresent()) {
+            editCustomerDescriptor.setRegistrationDate(ParserUtil
+                    .parseRegistrationDate(argMultimap.getValue(PREFIX_REGDATE).get()));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editCustomerDescriptor::setStaffs);

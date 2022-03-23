@@ -8,6 +8,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
@@ -29,9 +30,10 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_REGDATE + "REGISTRATION DATE "
+            + PREFIX_BIRTHDATE + "BIRTHDAY "
             + PREFIX_SKINTYPE + "SKIN TYPE"
-            + PREFIX_HAIRTYPE + "HAIR TYPE"
-            + PREFIX_BIRTHDATE + "BIRTHDAY"
+            + PREFIX_HAIRTYPE + "HAIR TYPE \n"
             + "[" + PREFIX_STAFFS + "STAFFS]...\n"
             + "[" + PREFIX_SERVICES + "SERVICES]...\n"
             + "[" + PREFIX_ALLERGIES + "ALLERGIES]...\n"
@@ -40,6 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_REGDATE + "23-03-2022"
             + PREFIX_SKINTYPE + "oily "
             + PREFIX_HAIRTYPE + "coiled "
             + PREFIX_STAFFS + "Jason "

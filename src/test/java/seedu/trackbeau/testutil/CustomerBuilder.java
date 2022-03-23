@@ -10,6 +10,7 @@ import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.model.util.SampleDataUtil;
@@ -26,12 +27,14 @@ public class CustomerBuilder {
     private static final String DEFAULT_SKIN_TYPE = "Normal";
     private static final String DEFAULT_HAIR_TYPE = "Normal";
     private static final String DEFAULT_BIRTHDATE = "07-12-2001";
+    private static final String DEFAULT_REGDATE = "23-03-2022";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Birthdate birthdate;
+    private RegistrationDate regDate;
     private SkinType skinType;
     private HairType hairType;
     private Set<Tag> staffs;
@@ -49,6 +52,7 @@ public class CustomerBuilder {
         skinType = new SkinType(DEFAULT_SKIN_TYPE);
         hairType = new HairType(DEFAULT_HAIR_TYPE);
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
+        regDate = new RegistrationDate(DEFAULT_REGDATE);
         staffs = new HashSet<>();
         services = new HashSet<>();
         allergies = new HashSet<>();
@@ -65,6 +69,7 @@ public class CustomerBuilder {
         skinType = customerToCopy.getSkinType();
         hairType = customerToCopy.getHairType();
         birthdate = customerToCopy.getBirthdate();
+        regDate = customerToCopy.getRegDate();
         staffs = new HashSet<>(customerToCopy.getStaffs());
         services = new HashSet<>(customerToCopy.getServices());
         allergies = new HashSet<>(customerToCopy.getAllergies());
@@ -151,11 +156,20 @@ public class CustomerBuilder {
     }
 
     /**
+     * Sets the {@code RegistrationDate} of the {@code Customer} that we are building.
+     */
+    public CustomerBuilder withRegistrationDate(String regDate) {
+        this.regDate = new RegistrationDate(regDate);
+        return this;
+    }
+
+
+    /**
      * Builds a customer.
      */
     public Customer build() {
         return new Customer(name, phone, email, address, skinType,
-                hairType, staffs, services, allergies, birthdate);
+                hairType, staffs, services, allergies, birthdate, regDate);
     }
 
 }

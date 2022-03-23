@@ -17,6 +17,7 @@ import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
@@ -34,6 +35,7 @@ class JsonAdaptedCustomer {
     private final String skinType;
     private final String hairType;
     private final String birthDate;
+    private final String regDate;
     private final List<JsonAdaptedTag> staffs = new ArrayList<>();
     private final List<JsonAdaptedTag> services = new ArrayList<>();
     private final List<JsonAdaptedTag> allergies = new ArrayList<>();
@@ -49,7 +51,8 @@ class JsonAdaptedCustomer {
                                @JsonProperty("staffs") List<JsonAdaptedTag> staffs,
                                @JsonProperty("services") List<JsonAdaptedTag> services,
                                @JsonProperty("allergies") List<JsonAdaptedTag> allergies,
-                               @JsonProperty("birthdate") String birthDate) {
+                               @JsonProperty("birthdate") String birthDate,
+                               @JsonProperty("regDate") String regDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +60,7 @@ class JsonAdaptedCustomer {
         this.skinType = skinType;
         this.hairType = hairType;
         this.birthDate = birthDate;
+        this.regDate = regDate;
         if (staffs != null) {
             this.staffs.addAll(staffs);
         }
@@ -79,6 +83,7 @@ class JsonAdaptedCustomer {
         skinType = source.getSkinType().value;
         hairType = source.getHairType().value;
         birthDate = source.getBirthdate().toString();
+        regDate = source.getRegDate().toString();
         staffs.addAll(source.getStaffs().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -189,6 +194,17 @@ class JsonAdaptedCustomer {
         return new Birthdate(birthDate);
     }
 
+    RegistrationDate getModelRegistrationDate() throws IllegalValueException {
+        if (regDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    RegistrationDate.class.getSimpleName()));
+        }
+        if (!RegistrationDate.isValidRegistrationDate(regDate)) {
+            throw new IllegalValueException(RegistrationDate.MESSAGE_CONSTRAINTS);
+        }
+        return new RegistrationDate(regDate);
+    }
+
     /**
      * Converts this Jackson-friendly adapted customer object into the model's {@code Customer} object.
      *
@@ -205,9 +221,10 @@ class JsonAdaptedCustomer {
         final SkinType modelSkinType = this.getModelSkinType();
         final HairType modelHairType = this.getModelHairType();
         final Birthdate modelBirthdate = this.getModelBirthdate();
+        final RegistrationDate modelRegistrationDate = this.getModelRegistrationDate();
         return new Customer(modelName, modelPhone, modelEmail,
                 modelAddress, modelSkinType, modelHairType,
-                modelStaffs, modelServices, modelAllergies, modelBirthdate);
+                modelStaffs, modelServices, modelAllergies, modelBirthdate, modelRegistrationDate);
     }
 
 }

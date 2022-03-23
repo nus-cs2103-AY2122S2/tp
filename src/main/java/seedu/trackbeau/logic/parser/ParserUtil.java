@@ -15,6 +15,7 @@ import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
@@ -140,6 +141,21 @@ public class ParserUtil {
             throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
         }
         return new Birthdate(birthDate);
+    }
+
+    /**
+     * Parses a {@code String regDate} into an {@code RegistrationDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code RegistrationDate} is invalid.
+     */
+    public static RegistrationDate parseRegistrationDate(String regDate) throws ParseException {
+        requireNonNull(regDate);
+        String trimmedRegDate = regDate.trim();
+        if (!RegistrationDate.isValidRegistrationDate(trimmedRegDate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new RegistrationDate(regDate);
     }
 
     /**

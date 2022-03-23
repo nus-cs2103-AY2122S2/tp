@@ -14,6 +14,8 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_REG_DATE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_REG_DATE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_AMY;
@@ -37,28 +39,34 @@ public class TypicalCustomers {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withSkinType("oily").withHairType("dry")
             .withStaffs("Jason").withAllergies("Nickel").withServices("Acne treatment")
-            .withBirthdate("01-01-2000").build();
+            .withBirthdate("01-01-2000").withRegistrationDate("23-03-2022").build();
     public static final Customer BENSON = new CustomerBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withSkinType("oily").withHairType("dry")
-            .withStaffs("Jason").withServices("Chemical Peel").withBirthdate("01-01-2000").build();
+            .withStaffs("Jason").withServices("Chemical Peel")
+            .withBirthdate("01-01-2000").withRegistrationDate("23-03-2022").build();
     public static final Customer CARL = new CustomerBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withSkinType("oily").withHairType("dry").withBirthdate("01-05-2000").build();
+            .withSkinType("oily").withHairType("dry").withBirthdate("01-05-2000")
+            .withRegistrationDate("23-03-2022").build();
     public static final Customer DANIEL = new CustomerBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withSkinType("oily").withHairType("dry").withAllergies("Cocoa Butter")
-            .withBirthdate("01-01-1990").build();
+            .withBirthdate("01-01-1990")
+            .withRegistrationDate("23-03-2022").build();
     public static final Customer ELLE = new CustomerBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withSkinType("oily").withHairType("dry").withBirthdate("01-01-2000").build();
+            .withSkinType("oily").withHairType("dry")
+            .withRegistrationDate("23-03-2022").withBirthdate("01-01-2000").build();
     public static final Customer FIONA = new CustomerBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withSkinType("oily").withHairType("dry").withBirthdate("01-01-2000").build();
+            .withSkinType("oily").withHairType("dry")
+            .withRegistrationDate("23-03-2022").withBirthdate("01-01-2000").build();
     public static final Customer GEORGE = new CustomerBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
-            .withSkinType("oily").withHairType("dry").withBirthdate("01-01-2000").build();
+            .withSkinType("oily").withHairType("dry").withBirthdate("01-01-2000")
+            .withRegistrationDate("23-03-2022").build();
 
     // Manually added
     public static final Customer HOON = new CustomerBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -72,6 +80,7 @@ public class TypicalCustomers {
             .withSkinType(VALID_SKIN_TYPE_AMY)
             .withHairType(VALID_HAIR_TYPE_AMY)
             .withBirthdate(VALID_BIRTHDATE_AMY)
+            .withRegistrationDate(VALID_REG_DATE_AMY)
             .withStaffs(VALID_STAFF_AMY)
             .withServices(VALID_SERVICE_AMY)
             .withAllergies(VALID_ALLERGY_AMY)
@@ -83,6 +92,7 @@ public class TypicalCustomers {
             .withSkinType(VALID_SKIN_TYPE_BOB)
             .withHairType(VALID_HAIR_TYPE_BOB)
             .withBirthdate(VALID_BIRTHDATE_BOB)
+            .withRegistrationDate(VALID_REG_DATE_BOB)
             .withStaffs(VALID_STAFF_BOB)
             .withServices(VALID_SERVICE_BOB)
             .withAllergies(VALID_ALLERGY_BOB)
