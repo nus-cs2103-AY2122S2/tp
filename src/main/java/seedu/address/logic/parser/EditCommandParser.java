@@ -7,6 +7,7 @@ import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.applicants.EditApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.position.EditPositionCommandParser;
 
 /**
  * Parses edit command and calls the respective EditXCommandParsers according to the flag.
@@ -27,9 +28,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         } else if (flag == FLAG_INTERVIEW) {
             // TO ADD: EDIT INTERVIEW PARSER
         } else if (flag == FLAG_POSITION) {
-            // TO ADD: EDIT POSITION PARSER
+            return new EditPositionCommandParser().parse(argsWithoutFlag);
         }
-
         return null;
     }
 }

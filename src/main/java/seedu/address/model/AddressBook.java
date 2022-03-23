@@ -173,6 +173,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         positions.remove(key);
     }
 
+    /**
+     * Replaces the given position {@code target} in the list with {@code editedPosition}.
+     * {@code target} must exist in the address book.
+     * The position identity of {@code editedPosition} must not be the same as another existing position
+     *  in the address book.
+     */
+    public void setPosition(Position target, Position editedPosition) {
+        requireNonNull(editedPosition);
+
+        positions.setPosition(target, editedPosition);
+    }
+
     //// util methods
 
     @Override

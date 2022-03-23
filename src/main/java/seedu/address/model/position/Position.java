@@ -47,12 +47,12 @@ public class Position {
     public Position(PositionName positionName, Description description, PositionOpenings positionOpenings,
                     PositionOffers positionOffers, Set<Requirement> requirements) {
         requireAllNonNull(positionName, description, positionOpenings, positionOffers, requirements);
-        checkArgument(isValidOpeningsToOffers(), MESSAGE_CONSTRAINTS);
         this.positionName = positionName;
         this.description = description;
         this.positionOpenings = positionOpenings;
         this.requirements.addAll(requirements);
         this.positionOffers = positionOffers;
+        checkArgument(isValidOpeningsToOffers(), MESSAGE_CONSTRAINTS);
     }
 
     public PositionName getPositionName() {
