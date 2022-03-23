@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
+import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
+import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 import seedu.address.testutil.TemporaryLessonBuilder;
 
-public class UniqueLessonListTest {
+public class ConsistentLessonListTest {
     private final LocalDateTime sameLessonDateTime = LocalDateTime.of(
             2022, 1, 25, 18, 0, 0);
 
@@ -39,15 +40,15 @@ public class UniqueLessonListTest {
             nonConflictingLessonOne, nonConflictingLessonTwo);
 
     @Test
-    public void setLessons_settingConflictingLessons_throwsConflictsWithLessonException() {
-        UniqueLessonList l = new UniqueLessonList();
+    public void setLessons_settingConflictingLessons_throwsContainsConflictingLessonsException() {
+        ConsistentLessonList l = new ConsistentLessonList();
 
-        assertThrows(ConflictsWithLessonException.class, () -> l.setLessons(listWithConflictingLessons));
+        assertThrows(ContainsConflictingLessonsException.class, () -> l.setLessons(listWithConflictingLessons));
     }
 
     @Test
     public void setLessons_addingConflictingLesson_throwsConflictsWithLessonException() {
-        UniqueLessonList l = new UniqueLessonList();
+        ConsistentLessonList l = new ConsistentLessonList();
         l.setLessons(listWithNonConflictingLessons);
 
         LocalDateTime conflictingStartingDateTime = differentLessonDateTimeOne;
@@ -56,6 +57,6 @@ public class UniqueLessonListTest {
                 .withDateTimeSlot(conflictingStartingDateTime, 0, 50)
                         .build();
 
-        assertThrows(ConflictsWithLessonException.class, () -> l.add(conflictingLesson));
+        assertThrows(ConflictsWithLessonsException.class, () -> l.add(conflictingLesson));
     }
 }

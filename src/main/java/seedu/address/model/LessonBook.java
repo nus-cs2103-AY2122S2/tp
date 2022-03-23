@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.ConsistentLessonList;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.student.Student;
 
 /**
@@ -16,7 +16,7 @@ import seedu.address.model.student.Student;
  */
 public class LessonBook implements ReadOnlyLessonBook {
 
-    private final UniqueLessonList lessons;
+    private final ConsistentLessonList lessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,7 +26,7 @@ public class LessonBook implements ReadOnlyLessonBook {
      *   among constructors.
      */
     {
-        lessons = new UniqueLessonList();
+        lessons = new ConsistentLessonList();
     }
 
     public LessonBook() {}

@@ -10,6 +10,11 @@ import seedu.address.model.student.Student;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Lesson {
+    private static final String PADDING = "   ";
+    private static final String NAME_DESCRIPTOR = "[NAME]: ";
+    private static final String SUBJECT_DESCRIPTOR = "[SUBJECT]: ";
+    private static final String ADDRESS_DESCRIPTOR = "[ADDRESS]: ";
+    private static final String DATETIMESLOT_DESCRIPTOR = "[AT]: ";
 
     // Identity fields
     private final LessonName name;
@@ -154,4 +159,19 @@ public abstract class Lesson {
      */
     public abstract boolean isConflictingWithLesson(Lesson otherLesson);
 
+    @Override
+    public String toString() {
+        StringBuilder lessonString = new StringBuilder();
+
+        lessonString
+                .append(NAME_DESCRIPTOR).append(getName().toString())
+                .append(System.getProperty("line.separator"))
+                .append(SUBJECT_DESCRIPTOR).append(getSubject().toString())
+                .append(System.getProperty("line.separator"))
+                .append(ADDRESS_DESCRIPTOR).append(getLessonAddress().toString())
+                .append(System.getProperty("line.separator"))
+                .append(DATETIMESLOT_DESCRIPTOR).append(getDateTimeSlot().toString());
+
+        return lessonString.toString();
+    }
 }
