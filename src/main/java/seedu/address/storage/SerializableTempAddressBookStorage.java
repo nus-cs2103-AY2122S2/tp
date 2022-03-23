@@ -1,11 +1,13 @@
 package seedu.address.storage;
 
+import seedu.address.commons.util.FileUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -60,7 +63,7 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> popTempAddressFileData() {
+    public Optional<ReadOnlyAddressBook> popTempAddressFileData() throws IOException {
         Path prevDataTempFile;
         if (tempFiles.size() <= 0) {
             return Optional.empty();
@@ -70,7 +73,10 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
         prevDataTempFile = tempFiles.get(lastIndex);
         tempFiles.remove(lastIndex);
 
-        return getTempAddressBookFileData(prevDataTempFile);
+        Optional<ReadOnlyAddressBook> addressBookData = getTempAddressBookFileData(prevDataTempFile);
+        Files.delete(prevDataTempFile);
+
+        return addressBookData;
     }
 
     /**
@@ -88,6 +94,17 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
             return Optional.of(new AddressBook(personList));
         } catch (Exception e) {
             return Optional.empty();
+        }
+    }
+
+    @Override
+    public void deleteAllTempFilesData() throws Exception {
+        if (!Files.exists(fileDirectory)) {
+            return;
+        }
+
+        for (File file : Objects.requireNonNull(fileDirectory.toFile().listFiles())) {
+            file.delete();
         }
     }
 }

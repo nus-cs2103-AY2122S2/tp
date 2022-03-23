@@ -29,5 +29,11 @@ public interface TempAddressBookStorage {
      *
      * @return the last added temporary addressBook file data stored.
      */
-    Optional<ReadOnlyAddressBook> popTempAddressFileData();
+    Optional<ReadOnlyAddressBook> popTempAddressFileData() throws IOException;
+
+    /**
+     * Deletes temporary files in application.
+     * @throws Exception If there are any issues with deleting the files.
+     */
+    void deleteAllTempFilesData() throws Exception;
 }

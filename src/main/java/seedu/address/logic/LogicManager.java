@@ -42,7 +42,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String userInput) throws CommandException, ParseException, IllegalArgumentException {
+    public CommandResult execute(String userInput)
+            throws CommandException, ParseException, IllegalArgumentException {
         logger.info("----------------[USER INPUT][" + userInput + "]");
 
         CommandResult commandResult = null;
@@ -76,7 +77,13 @@ public class LogicManager implements Logic {
             throws CommandException {
 
         if (isUndoPrevCommand) {
-            Optional<ReadOnlyAddressBook> tempAddressFileData = storage.popTempAddressFileData();
+            Optional<ReadOnlyAddressBook> tempAddressFileData = Optional.empty();
+            try {
+                tempAddressFileData = storage.popTempAddressFileData();
+            } catch (IOException exception) {
+                return;
+            }
+
             if (tempAddressFileData.isPresent()) {
                 model.setAddressBook(tempAddressFileData.get());
             } else {

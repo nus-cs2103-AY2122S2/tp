@@ -181,5 +181,11 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+
+        try {
+            storage.deleteAllTempFilesData();
+        } catch (Exception e) {
+            logger.severe("Unable to delete temporary files." + StringUtil.getDetails(e));
+        }
     }
 }

@@ -89,7 +89,12 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> popTempAddressFileData() {
+    public Optional<ReadOnlyAddressBook> popTempAddressFileData() throws IOException {
         return tempAddressBookStorage.popTempAddressFileData();
+    }
+
+    @Override
+    public void deleteAllTempFilesData() throws Exception {
+        tempAddressBookStorage.deleteAllTempFilesData();
     }
 }
