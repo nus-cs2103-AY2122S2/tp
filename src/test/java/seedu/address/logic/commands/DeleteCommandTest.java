@@ -28,7 +28,7 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_deleteValidName_success() {
+    public void execute_deleteValidNameFilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
 
@@ -39,6 +39,47 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_deleteValidNameUnfilteredList_success() {
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        //filter the typical person list in the addressbook to only display Alice
+        model.updateFilteredPersonList(person -> person.isSamePerson(new Person(new FriendName("Alice Pauline"))));
+        expectedModel.updateFilteredPersonList(person -> person.isSamePerson(new Person(new FriendName("Alice Pauline"))));
+
+        assert(model.getFilteredPersonList().size() == 1);
+        assert(expectedModel.getFilteredPersonList().size() == 1);
+
+        Person personToDelete = model.getAddressBook().getPersonList().get(3);
+
+        //ensures that person to delete is not in the filtered person list
+        assert(!personToDelete.hasSameName(new Person(new FriendName("Alice Pauline"))));
+
+        //deletes the person that is not in the filtered person list
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteValidNameDifferentCase_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(new FriendName(personToDelete.getName().fullName.toLowerCase()));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
 
     @Test
     public void execute_deleteInvalidName_throwsCommandException() {
