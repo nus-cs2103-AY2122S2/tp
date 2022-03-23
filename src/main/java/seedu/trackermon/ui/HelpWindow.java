@@ -142,13 +142,19 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private static ObservableList<CommandBuilder> getCommandSummary() {
         return FXCollections.observableArrayList(
-                new CommandBuilder("Add", "add n/<NAME> s/<STATUS> [t/<TAG>]..."),
+                new CommandBuilder("Add", "add n/<NAME> s/<STATUS> [t/<TAG>]... [c/COMMENT]"),
+                new CommandBuilder("Comment", ""),
                 new CommandBuilder("Delete", "delete <INDEX>"),
                 new CommandBuilder("Edit", "edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…"),
                 new CommandBuilder("Exit", "exit"),
+                new CommandBuilder("Export", ""),
                 new CommandBuilder("Find", "find <KEYWORD> OR find [n/NAME] [s/STATUS]"
                         + "[t/TAG]"),
-                new CommandBuilder("List", "list")
+                new CommandBuilder("Help", "help"),
+                new CommandBuilder("Import", ""),
+                new CommandBuilder("List", "list"),
+                new CommandBuilder("Rate", ""),
+                new CommandBuilder("Sort", "sort [sna/] [snd/] [ssa/] [ssd/] [so/]…")
         );
     }
 
