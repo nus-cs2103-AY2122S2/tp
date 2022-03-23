@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGroups.NUS_FINTECH_SOCIETY;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,7 @@ public class DeassignCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeassignCommand(null,
-                new GroupBuilder(NUS_FINTECH_SOCIETY).build()));
+                new GroupBuilder().build()));
     }
 
     @Test
