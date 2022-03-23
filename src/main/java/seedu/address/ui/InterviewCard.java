@@ -41,6 +41,8 @@ public class InterviewCard extends UiPart<Region> {
     private Label interviewphone;
     @FXML
     private Label interviewemail;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code InterviewCard} with the given {@code Interview} and index to display.
@@ -57,6 +59,7 @@ public class InterviewCard extends UiPart<Region> {
         name.setText(applicant.getName().fullName);
         interviewphone.setText(applicant.getPhone().value);
         interviewemail.setText(applicant.getEmail().value);
+        status.setText(interview.getStatus().toString());
     }
 
     @Override
