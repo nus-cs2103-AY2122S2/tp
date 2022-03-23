@@ -32,7 +32,7 @@ public class ViewStudentInfoCommandTest {
 
         String expectedMessage = String.format(ViewStudentInfoCommand.MESSAGE_VIEW_SUCCESS, selectedStudent.getName());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
         expectedModel.setSelectedStudent(selectedStudent);
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);

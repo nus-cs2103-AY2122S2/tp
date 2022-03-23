@@ -27,9 +27,9 @@ public interface Logic {
     /**
      * Returns the StudentBook.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getStudentBook()
      */
-    ReadOnlyStudentBook getAddressBook();
+    ReadOnlyStudentBook getStudentBook();
 
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
@@ -38,9 +38,9 @@ public interface Logic {
     ObservableList<Lesson> getFilteredLessonList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' student book file path.
      */
-    Path getAddressBookFilePath();
+    Path getStudentBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

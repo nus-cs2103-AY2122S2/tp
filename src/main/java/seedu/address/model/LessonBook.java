@@ -85,7 +85,7 @@ public class LessonBook implements ReadOnlyLessonBook {
 
     /**
      * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the student book.
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the lesson book.
      */
     public void setLesson(Lesson target, Lesson editedLesson) {

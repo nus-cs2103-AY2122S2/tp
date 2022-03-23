@@ -114,7 +114,8 @@ TODO
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
+### Add student
+Adding a `Student` to the `StudentBook` 
 ### Add temporary/recurring lesson
 Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
 
