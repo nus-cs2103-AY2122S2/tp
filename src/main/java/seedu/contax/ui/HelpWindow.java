@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
 
 
-
 public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -195,7 +194,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Inserts a header row into the help window table at the 0 row
+     * Inserts a header row into the help window table at the 0 row.
      * The current row is indicated by rowCounter.
      * @param s1 string for the first column
      * @param s2 string for the second column
@@ -237,7 +236,7 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     /**
-     * Sets general page to be shown
+     * Sets general page to be shown.
      */
     public void setGeneralPage() {
         hideAllPages();
@@ -246,7 +245,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets persons page to be shown
+     * Sets persons page to be shown.
      */
     public void setPersonsPage() {
         hideAllPages();
@@ -256,7 +255,7 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     /**
-     * Sets appointments page to be shown
+     * Sets appointments page to be shown.
      */
     public void setAppointmentsPage() {
         hideAllPages();
@@ -265,7 +264,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets tags page to be shown
+     * Sets tags page to be shown.
      */
     public void setTagsPage() {
         hideAllPages();
@@ -274,7 +273,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets all pages to be hidden
+     * Sets all pages to be hidden.
      */
     public void hideAllPages() {
         generalPage.setVisible(false);
