@@ -8,13 +8,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
     // Identity fields
     private final Name name;
     private final Block block;
@@ -22,12 +20,10 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final MatriculationNumber number;
-
     // Data fields
     private final Address address;
     private final CovidStatus status;
     private final Set<Tag> tags = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
@@ -44,35 +40,27 @@ public class Person {
         this.status = status;
         this.tags.addAll(tags);
     }
-
     public Name getName() {
         return name;
     }
-
     public Block getBlock() {
         return block;
     }
-
     public Faculty getFaculty() {
         return faculty;
     }
-
     public Phone getPhone() {
         return phone;
     }
-
     public Email getEmail() {
         return email;
     }
-
     public MatriculationNumber getMatriculationNumber() {
         return number;
     }
-
     public CovidStatus getStatus() {
         return status;
     }
-
     /**
      * Returns the Covid Status as a String instead of type CovidStatus.
      *
@@ -81,7 +69,6 @@ public class Person {
     public String getStatusAsString() {
         return status.toString();
     }
-
     /**
      * Predicate to check if the status of Person object matches the given CovidStatus.
      *
@@ -93,7 +80,17 @@ public class Person {
     }
 
     /**
-     * Returns the faculty of this person as a String instead of type Faculty.
+     * Predicate to check if the faculty of Person object matches the given faculty.
+     *
+     * @param faculty given faculty to check if matched by faculty property in Person
+     * @return boolean value to show if there is a match
+     */
+    public boolean isFaculty(Faculty faculty) {
+        return this.faculty.equals(faculty);
+    }
+
+    /**
+     * Returns the Faculty of this person as a String instead of type Faculty.
      *
      * @return A string of the faculty
      */
@@ -102,18 +99,18 @@ public class Person {
     }
 
     /**
-     * Returns the block of this person as a String instead of type Block.
+     * Predicate to check if the block of Person object matches the given block.
      *
-     * @return A string of the block
+     * @param block given block to check if matched by block property in Person
+     * @return Boolean value to show if there is a match
      */
-    public String getBlockAsString() {
-        return block.toString();
+    public boolean isBlock(Block block) {
+        return this.block.equals(block);
     }
 
     public Address getAddress() {
         return address;
     }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -121,7 +118,6 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
     /**
      * Returns true if both persons have the same phone number or matriculation number or email
      * This defines a stronger notion of equality between two persons.
@@ -130,13 +126,11 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
                 && (otherPerson.getPhone().equals(getPhone())
                 || otherPerson.getMatriculationNumber().equals(getMatriculationNumber())
                 || otherPerson.getEmail().equals(getEmail()));
     }
-
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -146,11 +140,9 @@ public class Person {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Person)) {
             return false;
         }
-
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getBlock().equals(getBlock())
@@ -162,13 +154,11 @@ public class Person {
                 && otherPerson.getStatus().equals(getStatus())
                 && otherPerson.getTags().equals(getTags());
     }
-
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, block, faculty, phone, email, address, number, status, tags);
     }
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -187,7 +177,6 @@ public class Person {
                 .append(getMatriculationNumber())
                 .append("; Covid Status: ")
                 .append(getStatus());
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
@@ -195,5 +184,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
