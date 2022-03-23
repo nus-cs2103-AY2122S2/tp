@@ -10,17 +10,16 @@ import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
-import seedu.contax.model.chrono.TimeRange;
 
 public class CompositeScheduleItemList {
 
     private final ObservableList<Appointment> backingAppointmentList;
-    private final ObservableList<TimeRange> backingSlotList;
+    private final ObservableList<AppointmentSlot> backingSlotList;
     private final ObservableList<ScheduleItem> scheduleItemList;
     private final ObservableList<ScheduleItem> unmodifiableScheduleItemList;
 
     public CompositeScheduleItemList(ObservableList<Appointment> backingAppointmentList,
-                                     ObservableList<TimeRange> backingSlotList) {
+                                     ObservableList<AppointmentSlot> backingSlotList) {
         requireNonNull(backingAppointmentList);
         requireNonNull(backingSlotList);
         this.backingAppointmentList = backingAppointmentList;
@@ -56,7 +55,7 @@ public class CompositeScheduleItemList {
                 mergedList.add(backingAppointmentList.get(apptListIdx));
                 apptListIdx++;
             } else {
-                mergedList.add(new AppointmentSlot(backingSlotList.get(slotListIdx)));
+                mergedList.add(backingSlotList.get(slotListIdx));
                 slotListIdx++;
             }
         }
@@ -65,7 +64,7 @@ public class CompositeScheduleItemList {
             apptListIdx++;
         }
         while (slotListIdx < backingSlotList.size()) {
-            mergedList.add(new AppointmentSlot(backingSlotList.get(slotListIdx)));
+            mergedList.add(backingSlotList.get(slotListIdx));
             slotListIdx++;
         }
 

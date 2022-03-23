@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -37,6 +38,7 @@ import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.FindByTagCommand;
 import seedu.contax.logic.commands.FindPersonCommand;
+import seedu.contax.logic.commands.FreeBetweenCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
@@ -197,6 +199,15 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
                 + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
                 instanceof AppointmentsBetweenCommand);
+    }
+
+    @Test
+    public void parseCommand_freeBetween() throws Exception {
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime();
+        assertTrue(parser.parseCommand(FreeBetweenCommand.COMMAND_WORD
+                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50))
+                + " " + PREFIX_DURATION + "1")
+                instanceof FreeBetweenCommand);
     }
 
     //Import/Export csv tests

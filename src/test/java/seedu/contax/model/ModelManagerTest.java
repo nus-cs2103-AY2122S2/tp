@@ -21,13 +21,20 @@ import static seedu.contax.testutil.TypicalTags.FAMILY;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.model.tag.exceptions.TagNotFoundException;
@@ -359,6 +366,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getScheduleItemList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, ()
+                -> modelManager.getScheduleItemList().remove(0));
+    }
+
+    @Test
     public void updateFilteredAppointmentList_predicateChange_throwsUnsupportedOperationException() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
         modelManager.addAppointment(APPOINTMENT_ALONE);
@@ -367,6 +380,28 @@ public class ModelManagerTest {
         modelManager.updateFilteredAppointmentList(appointment -> !appointment.equals(APPOINTMENT_ALONE));
         assertEquals(APPOINTMENT_EXTRA, modelManager.getFilteredAppointmentList().get(0));
         assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(1));
+    }
+
+    @Test
+    public void setDisplayedAppointmentSlots_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setDisplayedAppointmentSlots(null));
+    }
+
+    @Test
+    public void setDisplayedAppointmentSlots_validList_success() {
+        List<AppointmentSlot> sampleSlots = List.of(
+                new AppointmentSlot(new TimeRange(LocalDate.of(2022,1,1).atStartOfDay(),
+                        LocalDate.of(2022,1, 1).atTime(23, 59))),
+                new AppointmentSlot(new TimeRange(LocalDate.of(2022,1,2).atStartOfDay(),
+                        LocalDate.of(2022,1,2).atTime(23, 59))),
+                new AppointmentSlot(new TimeRange(LocalDate.of(2022,2,3).atStartOfDay(),
+                        LocalDate.of(2022,2,3).atTime(23, 59)))
+        );
+        assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
+        modelManager.setDisplayedAppointmentSlots(sampleSlots);
+        assertEquals(sampleSlots, modelManager.getDisplayedAppointmentSlots());
+        modelManager.clearDisplayedAppointmentSlots();
+        assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
     }
 
     @Test
@@ -414,5 +449,13 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, schedule, differentUserPrefs)));
+
+        // different displayedAppointmentSlots -> returns false
+        ObservableList<AppointmentSlot> differentAppointmentSlots = FXCollections.observableArrayList(
+                new AppointmentSlot(new TimeRange(LocalDateTime.MIN, LocalDateTime.MAX))
+        );
+        ModelManager differentModelManager = new ModelManager();
+        differentModelManager.setDisplayedAppointmentSlots(differentAppointmentSlots);
+        assertFalse(modelManager.equals(differentModelManager));
     }
 }

@@ -23,6 +23,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.ReadOnlyUserPrefs;
+import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
@@ -194,12 +195,12 @@ class AddTagCommandTest {
         }
 
         @Override
-        public ObservableList<TimeRange> getDisplayedAppointmentSlots() {
+        public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setDisplayedAppointmentSlots(List<TimeRange> items) {
+        public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
             throw new AssertionError("This method should not be called.");
         }
 

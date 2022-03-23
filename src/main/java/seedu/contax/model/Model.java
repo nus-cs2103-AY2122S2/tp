@@ -1,7 +1,5 @@
 package seedu.contax.model;
 
-import static java.util.Objects.requireNonNull;
-
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
@@ -9,10 +7,10 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.model.chrono.TimeRange;
 
 /**
  * The API of the Model component.
@@ -157,7 +155,7 @@ public interface Model {
 
     /**
      * Returns true if an overlapping {@code appointment} exists in the schedule.
-     * See {@link Appointment#isOverlapping(Appointment)} for the overlap checking logic.
+     * See {@link Appointment#isOverlapping(ScheduleItem)} for the overlap checking logic.
      */
     boolean hasOverlappingAppointment(Appointment appointment);
 
@@ -191,14 +189,14 @@ public interface Model {
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 
     /** Returns an unmodifiable view of the slots between appointments to be highlighted */
-    ObservableList<TimeRange> getDisplayedAppointmentSlots();
+    ObservableList<AppointmentSlot> getDisplayedAppointmentSlots();
 
     /**
      * Sets the list of slots between appointments to highlight.
      *
      * @param items A list containing the ranges between appointments to highlight.
      */
-    void setDisplayedAppointmentSlots(List<TimeRange> items);
+    void setDisplayedAppointmentSlots(List<AppointmentSlot> items);
 
     /**
      * Clears the slots between appointments that should be highlighted.

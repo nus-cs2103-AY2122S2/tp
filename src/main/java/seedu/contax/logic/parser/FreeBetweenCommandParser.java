@@ -34,7 +34,6 @@ public class FreeBetweenCommandParser implements Parser<FreeBetweenCommand> {
 
         if (!argMultimap.arePrefixesPresent(PREFIX_DATE_START, PREFIX_TIME_START, PREFIX_DATE_END,
                 PREFIX_TIME_END, PREFIX_DURATION) || !argMultimap.getPreamble().isEmpty()) {
-            System.out.println("here");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FreeBetweenCommand.MESSAGE_USAGE));
         }
@@ -47,9 +46,6 @@ public class FreeBetweenCommandParser implements Parser<FreeBetweenCommand> {
                 .orElseThrow(() -> new ParseException(FreeBetweenCommand.MESSAGE_END_DATE_INVALID));
         LocalTime endTime = argMultimap.getValue(PREFIX_TIME_END).flatMap(DateUtil::parseTime)
                 .orElseThrow(() -> new ParseException(FreeBetweenCommand.MESSAGE_END_TIME_INVALID));
-        if (argMultimap.getValue(PREFIX_DURATION).isEmpty()) {
-            throw new ParseException(FreeBetweenCommand.MESSAGE_DURATION_INVALID);
-        }
         int duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()).value;
 
         LocalDateTime startDateTime = DateUtil.combineDateTime(startDate, startTime);

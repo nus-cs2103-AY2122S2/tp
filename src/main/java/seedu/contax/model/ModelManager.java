@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
@@ -33,8 +34,8 @@ public class ModelManager implements Model {
     private final FilteredList<Appointment> filteredAppointments;
     private final FilteredList<Tag> filteredTags;
 
-    private final ObservableList<TimeRange> displayedAppointmentSlots;
-    private final ObservableList<TimeRange> unmodifiableDisplayedAppointmentSlots;
+    private final ObservableList<AppointmentSlot> displayedAppointmentSlots;
+    private final ObservableList<AppointmentSlot> unmodifiableDisplayedAppointmentSlots;
     private final CompositeScheduleItemList scheduleItemList;
 
     /**
@@ -288,15 +289,15 @@ public class ModelManager implements Model {
         filteredAppointments.setPredicate(predicate);
     }
 
-    //=========== Filtered Appointment List Accessors ========================================================
+    //=========== Appointment Slot List Operations ===========================================================
 
     @Override
-    public ObservableList<TimeRange> getDisplayedAppointmentSlots() {
+    public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
         return unmodifiableDisplayedAppointmentSlots;
     }
 
     @Override
-    public void setDisplayedAppointmentSlots(List<TimeRange> items) {
+    public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
         requireNonNull(items);
         displayedAppointmentSlots.setAll(items);
     }
@@ -330,7 +331,8 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredAppointments.equals(other.filteredAppointments)
-                && filteredTags.equals(other.filteredTags);
+                && filteredTags.equals(other.filteredTags)
+                && displayedAppointmentSlots.equals(other.displayedAppointmentSlots);
     }
 
 }

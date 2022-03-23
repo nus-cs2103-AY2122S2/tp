@@ -10,9 +10,11 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
+import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.appointment.DateRangePredicate;
 import seedu.contax.model.chrono.TimeRange;
 
@@ -44,7 +46,6 @@ public class FreeBetweenCommand extends Command {
     public static final String MESSAGE_END_TIME_INVALID = "The end time provided is invalid!";
     public static final String MESSAGE_END_BEFORE_START = "The end date time provided is before the"
             + " start date time!";
-    public static final String MESSAGE_DURATION_INVALID = "The duration provided is invalid!";
     private static final String DATETIME_DISPLAY_FORMAT = "dd LLL yyyy hh:mm a";
 
     private final LocalDateTime rangeStart;
@@ -69,7 +70,10 @@ public class FreeBetweenCommand extends Command {
         model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
         List<TimeRange> slotsFound = model.getSchedule()
                 .findSlotsBetweenAppointments(rangeStart, rangeEnd, duration);
-        model.setDisplayedAppointmentSlots(slotsFound);
+        List<AppointmentSlot> slotList = slotsFound.stream()
+                .map(AppointmentSlot::new)
+                .collect(Collectors.toList());
+        model.setDisplayedAppointmentSlots(slotList);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
         return new CommandResult(
@@ -82,6 +86,7 @@ public class FreeBetweenCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof FreeBetweenCommand // instanceof handles nulls
                 && rangeStart.equals(((FreeBetweenCommand) other).rangeStart)
-                && rangeEnd.equals(((FreeBetweenCommand) other).rangeEnd));
+                && rangeEnd.equals(((FreeBetweenCommand) other).rangeEnd)
+                && duration == (((FreeBetweenCommand) other).duration));
     }
 }
