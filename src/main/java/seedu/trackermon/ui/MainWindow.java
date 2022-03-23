@@ -141,6 +141,8 @@ public class MainWindow extends UiPart<Stage> {
 
         primaryStage.widthProperty().addListener(stageSizeListener);
         primaryStage.heightProperty().addListener(stageSizeListener);
+
+        handleUpdateList();
     }
 
     /**
@@ -183,7 +185,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleModifyList() {
+    private void handleUpdateList() {
         showListPanel.handleUpdatedList();
     }
 
@@ -210,9 +212,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isModifyList()) {
-                handleModifyList();
-            }
+            handleUpdateList();
 
             return commandResult;
         } catch (CommandException | ParseException e) {
