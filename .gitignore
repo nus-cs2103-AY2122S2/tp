@@ -8,8 +8,8 @@ src/main/resources/docs/
 /out/
 /*.iml
 
-# bin folder from gradle
-/bin/
+# Gradle run bin (on VS code)
+/bin
 
 # Storage/log files
 /data/
