@@ -63,12 +63,13 @@ extends the `Command` and overwrites the `Command#execute()` method.
 
 Using the `Model` object passed in as an argument of the `AssignCommand#execute()`
 method, the following methods are invoked in the `AssignCommand#execute()` method:
-* `ModeManagerl#setSelectedStudent()` - sets the `selectedStudent` attribute of `Model` to
+* `Model#updateAssignment()`
+    * adds `Student` to the `enrolledStudents` attribute `Lesson`
+    * adds `Lesson` to the `enrolledLessons` attribute of the `Student`
+* `Model#setSelectedStudent()` - sets the `selectedStudent` attribute of `Model` to
 the `Student` that is being assigned. This is done to display the `Student` details
 in the `MainWindow#InfoPanel`.
-* `ModelManager#updateAssignment()`
-  * adds `Student` to the `enrolledStudents` attribute `Lesson`
-  * adds `Lesson` to the `enrolledLessons` attribute of the `Student`
+
 
 The `AssignCommand#execute()` method returns a `CommandResult` upon a
 successful assignment.
@@ -82,8 +83,7 @@ Given below is an example usage scenario on how the assign command works.
 
 ![](../src/main/resources/images/AssignState0-Initial_state.png)
 
-#### Step 2: The user executes the following to find the respective IDs of the `Student` 
-and `Lesson`.
+#### Step 2: The user executes the following to find the respective IDs of the `Student` and `Lesson`.
 * `listlessons` command to see that the `Lesson` named "Sec 2 Math" has a `LESSON_ID` of 1.
 * `liststudents` command to see that the `Student` named "David" has a `STUDENT_ID` of 1.
 
@@ -93,7 +93,12 @@ and `Lesson`.
 
 ![](../src/main/resources/images/AssignState1-Final_state.png)
 
+The following sequence diagram shows how the assign operation works.
 
+![](../src/main/resources/images/AssignSequenceDiagram.png)
+
+> **Note**: The lifeline for AssignCommandParser should end at the destroy marker (X) but due to a limitation of 
+> PlantUML, the lifeline reaches the end of diagram.
 
 
 --------------------------------------------------------------------------------------------------------------------

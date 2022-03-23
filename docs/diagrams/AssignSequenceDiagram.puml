@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachWhatParser" as TeachWhatParser LOGIC_COLOR
+participant ":AssignCommandParser" as AssignCommandParser LOGIC_COLOR
+participant ":AssignCommand" as AssignCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("assign -s 1 -l 1")
+activate LogicManager
+
+LogicManager -> TeachWhatParser : parseCommand("assign -s 1 -l 1")
+activate TeachWhatParser
+
+create AssignCommandParser
+TeachWhatParser -> AssignCommandParser
+activate AssignCommandParser
+
+AssignCommandParser --> TeachWhatParser
+deactivate AssignCommandParser
+
+TeachWhatParser -> AssignCommandParser : parse("-s 1 -l 1")
+activate AssignCommandParser
+
+create AssignCommand
+AssignCommandParser -> AssignCommand
+activate AssignCommand
+
+AssignCommand --> AssignCommandParser
+deactivate AssignCommand
+
+AssignCommandParser --> TeachWhatParser
+deactivate AssignCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AssignCommandParser -[hidden]-> TeachWhatParser
+destroy AssignCommandParser
+
+TeachWhatParser --> LogicManager
+deactivate TeachWhatParser
+
+LogicManager -> AssignCommand : execute()
+activate AssignCommand
+
+AssignCommand -> Model : setSelectedStudent(student)
+activate Model
+deactivate Model
+
+AssignCommand -> Model : updateAssignment(student, lesson)
+activate Model
+deactivate Model
+
+create CommandResult
+AssignCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AssignCommand : result
+deactivate CommandResult
+
+AssignCommand --> LogicManager : result
+deactivate AssignCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml
