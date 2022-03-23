@@ -89,8 +89,7 @@ public class IBook implements ReadOnlyIBook {
 
     @Override
     public String toString() {
-        return products.asUnmodifiableObservableList().size() + " products";
-        // TODO: refine later
+        return "IBook with " + products.asUnmodifiableObservableList().size() + " products";
     }
 
     @Override

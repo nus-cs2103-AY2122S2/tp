@@ -21,6 +21,11 @@ public class StateChangeRecorder {
             this.forwardActionList = forwardActionList;
             this.reverseActionList = reverseActionList;
         }
+
+        @Override
+        public String toString() {
+            return String.format("A state change comprising of %d actions", forwardActionList.size());
+        }
     }
 
     private static final int INVALID_STATE_CHANGE = -1;
@@ -41,6 +46,11 @@ public class StateChangeRecorder {
         curStateChange = INVALID_STATE_CHANGE;
 
         getNewWorkspace();
+    }
+
+    private void getNewWorkspace() {
+        forwardActionList = new ArrayList<>();
+        reverseActionList = new ArrayList<>();
     }
 
     public void addForwardAction(Consumer<IBook> forwardAction) {
@@ -103,9 +113,8 @@ public class StateChangeRecorder {
         curStateChange++;
     }
 
-    private void getNewWorkspace() {
-        forwardActionList = new ArrayList<>();
-        reverseActionList = new ArrayList<>();
+    @Override
+    public String toString() {
+        return String.format("A state change recorder which has %d records of state change", stateChanges.size());
     }
-
 }

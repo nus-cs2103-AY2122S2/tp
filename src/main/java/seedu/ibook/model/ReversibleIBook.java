@@ -98,4 +98,16 @@ public class ReversibleIBook extends IBook {
         stateChangeRecorder.addForwardAction(iBook -> iBook.setProduct(target, updatedProduct));
         stateChangeRecorder.addReverseAction(iBook -> iBook.setProduct(updatedProduct, target));
     }
+
+    @Override
+    public String toString() {
+        return "Reversible " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return super.equals(other)
+                && other instanceof ReversibleIBook
+                && this.stateChangeRecorder.equals(((ReversibleIBook) other).stateChangeRecorder);
+    }
 }
