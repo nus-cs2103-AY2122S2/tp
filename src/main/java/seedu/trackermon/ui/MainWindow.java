@@ -2,9 +2,11 @@ package seedu.trackermon.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private ShowListPanel showListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ShowDetailsCard showDetailsCard;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private ScrollPane showDetailsPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -111,8 +117,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showListPanel = new ShowListPanel(logic.getFilteredShowList());
+        showDetailsCard = new ShowDetailsCard(null);
+
+        showDetailsPlaceholder.setContent(showDetailsCard.getRoot());
+        showDetailsCard.getRoot().prefWidthProperty().bind(showDetailsPlaceholder.widthProperty());
+
+        showListPanel = new ShowListPanel(logic.getSortedShowList(), showDetailsCard);
         showListPanelPlaceholder.getChildren().add(showListPanel.getRoot());
+
+        showDetailsPlaceholder.focusTraversableProperty().setValue(false);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -122,6 +135,12 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->
+                showListPanel.handleUpdatedList();
+
+        primaryStage.widthProperty().addListener(stageSizeListener);
+        primaryStage.heightProperty().addListener(stageSizeListener);
     }
 
     /**
@@ -164,6 +183,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleModifyList() {
+        showListPanel.handleUpdatedList();
+    }
+
     public ShowListPanel getShowListPanel() {
         return showListPanel;
     }
@@ -185,6 +208,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isModifyList()) {
+                handleModifyList();
             }
 
             return commandResult;

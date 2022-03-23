@@ -15,6 +15,7 @@ import seedu.trackermon.logic.commands.ExitCommand;
 import seedu.trackermon.logic.commands.FindCommand;
 import seedu.trackermon.logic.commands.HelpCommand;
 import seedu.trackermon.logic.commands.ListCommand;
+import seedu.trackermon.logic.commands.SortCommand;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
 
 /**
@@ -68,6 +69,9 @@ public class TrackermonParser {
 
         case CommentCommand.COMMAND_WORD:
             return new CommentCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
