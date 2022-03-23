@@ -120,6 +120,10 @@ public class Task {
         assignees.add(person);
     }
 
+    public void removeAssigned(Person person) {
+        assignees.remove(person);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
