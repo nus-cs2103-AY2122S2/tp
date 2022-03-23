@@ -31,31 +31,49 @@ deactivate AddressBookParser
 LogicManager -> SummariseCommand : execute()
 activate SummariseCommand
 
+SummariseCommand -> Model : updatedFilteredPersonList(m)
+activate Model
+
+Model --> SummariseCommand
+deactivate Model
+
 SummariseCommand -> Model : getFilteredList()
 activate Model
 
 Model --> SummariseCommand
 deactivate Model
 
-SummariseCommand -> SummariseCommand : filterByFaculty(z)
-activate SummariseCommand
-
-SummariseCommand -> SummariseCommand : summariseFaculty(x, y)
+SummariseCommand -> SummariseCommand : summariseAll(x)
 activate SummariseCommand
 
 SummariseCommand --> SummariseCommand
 deactivate SummariseCommand
 
+SummariseCommand -> SummariseCommand : filterByBlock(x)
+activate SummariseCommand
+
 SummariseCommand --> SummariseCommand
 deactivate SummariseCommand
 
+SummariseCommand -> SummariseCommand : filterByFaculty(x)
+activate SummariseCommand
 
-create CommandResult
-SummariseCommand -> CommandResult
-activate CommandResult
+SummariseCommand --> SummariseCommand
+deactivate SummariseCommand
 
-CommandResult --> SummariseCommand
-deactivate CommandResult
+alt no answer
+    create CommandResult
+    SummariseCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> SummariseCommand
+    deactivate CommandResult
+else there's an answer
+    create CommandResult
+    SummariseCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> SummariseCommand
+    deactivate CommandResult
+end
 
 SummariseCommand --> LogicManager : result
 deactivate SummariseCommand

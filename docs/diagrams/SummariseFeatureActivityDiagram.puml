@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+(*)--> "User inputs Summarise Command without any tags"
+-right-> "Tracey collates total number of students with covid"
+--> "Tracey collates number of students in each\nhall block under each covid status category"
+-left-> "Tracey collates number of\ncovid positive students in each faculty"
+
+If "There is an address book\nto collect data" then
+    --> [true] "Create pie charts with the data"
+    --> "Create pop up window with pie chart(s)"
+else
+    --> [false] "Form a FAIL message"
+    --> "Create pop up window with pie chart(s)"
+--> "Return response to user"
+
+-->(*)
+
+@enduml

@@ -186,6 +186,18 @@ Following this, `Logic Manager` will call the `execute()` method of the `AddComm
 
 The summarise mechanism implements the following sequence and interactions for the method call execute("summarise") on a LogicManager object.
 
+In order for this feature to be unique and not overlap what the List feature has to offer, summarise helps to calculate how many
+students are covid positive in each block of the hall, alongside those who are negative and on health risk notice.
+This helps the hall master determine if there is a spread of virus in any particular block.
+
+Tracey will then calculate those that are positive and which faculty they come from. This is helpful to determine if the superspreader
+comes from the faculty building itself. The hall masters and leaders can be more certain on their follow up actions to keep
+their hall safe.
+
+**Path Execution of Summarise Feature Activity Diagram is shown below:**
+![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
+
+**Sequence Diagram of Summarise Feature is shown below:**
 ![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -193,6 +205,39 @@ The summarise mechanism implements the following sequence and interactions for t
 </div>
 
 When execute is called on the SummariseCommand object, there are multiple call back to self to anaylse and produce the result back to the Logic Manager.
+
+When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`.
+If the input is valid, an `AddCommand` object will be instantiated.
+
+Following this, `Logic Manager` will call the `execute()` method of the `SummariseCommand` object. In this method,
+the `updatedFilteredPersonList` method and `getFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed.
+After getting the list of students, the `SummariseCommand` object will call its own `summariseAll` method to generate message regarding total number
+of covid cases in that hall. `filterByBlock` method is then called on the list again to generate statistics of covid statuses in each block of the hall.
+`filerByfaculty` is then called on the list once again to generate statistics of covid statuses in each faculty of students in the hall.
+
+Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
+A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
+
+**Sequence Diagram of Pie Chart Window Feature is shown below:**
+![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
+(to be continued)...
+
+### Clear feature
+
+The clear mechanism implements the following sequence and interactions for the method call execute("clear") on a LogicManager object.
+
+The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
+user to replace the list of students with an empty one. Previous data are swiped away.
+
+**Path Execution of Clear Feature Activity Diagram is shown below:**
+![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
+
+**Sequence Diagram of Clear Feature is shown below:**
+![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -320,35 +365,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                 | I want to …​                     | So that I can…​                                                |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | IT admin                                   | obtain student contact information | quickly contact students if required                               |
-| `* * *`  | IT admin                                   | get a list of students with covid  |  find out any possible hotspots                                    |
-| `* * *`  | IT admin                                   | save the data locally              | for easy dissemination of information to other admins              |
-| `* * *`  | IT admin                                   | find details of a particular student | follow up with checking on the student                           |
-| `* * *`  | IT admin                                   | add a student’s details into the system | store their details for reference                             |
+| `* * *`  | Hall admin                                 | obtain student contact information | quickly contact students if required                               |
+| `* * *`  | Hall admin                                 | get a list of students with covid  |  find out any possible hotspots                                    |
+| `* * *`  | Hall admin                                 | save the data locally              | for easy dissemination of information to other admins              |
+| `* * *`  | Hall admin                                 | find details of a particular student | follow up with checking on the student                           |
+| `* * *`  | Hall admin                                 | add a student’s details into the system | store their details for reference                             |
 | `* * *`  | First time user                            | add a list of students with their info into the system  | have a centralised hub for covid health status |
-| `* * *`  | IT admin                                   | delete a user from the system      | remove wrongly keyed in inputs from the system                     |
-| `* * *`  | IT admin                                   | clear the system database          | quickly restore the initial state of the system and to start on a clean slate again             |
-| `* * *`  | IT admin                                   | edit a contact’s information       | can modify any change in contact details regarding a user          |
-| `* * *`  | Professors                                 | get the statistics of covid cases among different groups of students | Can use for further medical research |
-| `* *`    | IT admin                                   | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system |
-| `* *`    | IT admin                                   | easily keep track and update  the covid status of students  | use data to inform relevant module lecturers and TAs |
-| `* *`    | IT admin                                   | see when a particular student started having covid symptoms | find who is the superspreader             |
-| `* *`    | IT admin                                   | store the date when the student tested positive for covid   | check the duration for which the student has to be isolated for                |
-| `* *`    | Busy admin                                 | mass send emails to specific students | check on their health                                           |
-| `* *`    | IT admin                                   | be notified of when a student’s status change   | follow up on their health                             |
-| `* *`    | OCD IT admin                               | categorise contacts according to faculty | I am happy                                                   |
-| `* *`    | IT admin                                   | filter out those students with covid easily     | write out future modules plan for different faculty   |
-| `* *`    | IT admin                                   | easily export data from the application  | To show my boss                                              |
-| `* *`    | User                                       | send contact info of someone    | his/her TA can contact the student only if TA is allowed to do so              |
-| `* *`    | IT admin                                   | mass send emails to the professors of affected students  | inform the relevant TAs and professors about their absence in class              |
+| `* * *`  | Hall admin                                 | delete a user from the system      | remove wrongly keyed in inputs from the system                     |
+| `* * *`  | Hall admin                                 | clear the system database          | quickly restore the initial state of the system and to start on a clean slate again             |
+| `* * *`  | Hall admin                                 | edit a contact’s information       | can modify any change in contact details regarding a user          |
+| `* * *`  | Professors                                 | get the statistics of covid cases among different groups of students | can use for further medical research |
+| `* *`    | Hall admin                                 | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system |
+| `* *`    | Hall admin                                 | easily keep track and update  the covid status of students  | monitor the block that has the highest incidences of Covid-19 |
+| `* *`    | Hall admin                                 | store the date when the student tested positive for covid   | check the duration for which the student has to be isolated for                |
+| `* *`    | Busy admin                                 | retrieve a list of all email addresses | email them to know their well-being                                           |
+| `* *`    | Hall admin                                 | categorise contacts according to faculty | I am happy                                                   |
+| `* *`    | Hall admin                                 | filter out those students with covid easily     | plan for hall events   |
+| `* *`    | Hall admin                                 | easily export data from the application  | to show my boss                                              |
 | `* *`    | UHC people                                 | get the number of students with covid    | prepare enough medical resources accordingly                 |
-| `* *`    | IT admin                                   | easy method to Import data into the app  | save the hassle                                              |
-| `* *`    | Hostel Management people                   | Retrieve the number of students with covid in the different hostel  | Can plan out the number of rooms for covid use like quarantine etc.                |
+| `* *`    | Hall admin                                 | easy method to Import data into the app  | save the hassle                                              |
+| `* *`    | Hostel Management people                   | retrieve the number of students with covid in the different hostel  | Can plan out the number of rooms for covid use like quarantine etc.                |
 | `* *`    | User                                       | have a quick keyword search     | to find a specific person if unsure of his full name or complete contact number                |
-| `* *`    | Professor                                  | be informed when one of my students are covid positive     | make arrangements for makeup class or examinations                |
-| `* *`    | IT admin                                   | add the last known location of where a particular student caught the virus     | manage the severity of the hotspot and choose to take follow up actions              |
-| `* `    | Parents                                     | get the name of students with covid      | check if their children or friends or neighbors’ children got covid or not               |
-| `* `    | NUS President                               | know covid status of students  and staffs     | come up with policies                                   |
+| `* `     | Hall leaders                               | get the name of students with covid     | check if their CCA members have Covid                                   |
+| `* `     | Residence Fellow                           | know covid status of students and staffs     | come up with hall policies                                   |
 
 *{More to be added}*
 
