@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Diet diet = new Diet("");
-        Appointment appointment = new Appointment("");
+        Appointment appointment = new Appointment();
         AttendanceHashMap attendanceHashMap = new AttendanceHashMap();
 
         Pet pet = new Pet(name, ownerName, phone, address, tagList, diet, appointment, attendanceHashMap);

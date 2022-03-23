@@ -20,13 +20,17 @@ public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "app";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the appointment of the pet identified "
-            + "by the index number used in the last pet listing.\n"
-            + "Existing appointment will be overwritten by the input.\n"
+            + ": Edits the appointment by either adding or clearing the "
+            + "appointment details of the pet identified by the index "
+            + "number used in the last pet listing.\n"
+            + "To add appointment: \n"
             + "Parameters: INDEX (must be a positive integer)"
-            + "date/ [yyyy-MM-dd HH:mm] at/ [location]\n"
+            + "dt/[dd-MM-yyyy HH:mm] at/[location]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "date/2022-03-04 09:30 at/ NUS Vet Clinic";
+            + "date/04-03-2022 09:30 at/ NUS Vet Clinic\n"
+            + "To clear appointment: \n"
+            + "Parameters: INDEX (must be a positive integer) clear"
+            + "Example: " + COMMAND_WORD + " 1 clear";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Pet: %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Removed appointment from Pet: %1$s";
