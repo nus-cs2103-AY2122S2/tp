@@ -15,7 +15,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable StudentBook that is serializable to JSON format.
  */
 @JsonRootName(value = "lessonbook")
 class JsonSerializableLessonBook {

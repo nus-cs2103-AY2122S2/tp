@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
@@ -55,7 +56,8 @@ public class AddStudentCommand extends Command {
         }
 
         model.addStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        model.setSelectedStudent(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
 
     @Override
