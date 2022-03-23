@@ -10,8 +10,11 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_START_WITH;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.core.index.Index;
+import seedu.contax.logic.LogicManager;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ArgumentMultimap;
@@ -28,6 +31,7 @@ import seedu.contax.model.util.SearchType;
  * Batch edit or delete a person identified using base on string =/ provided.
  */
 public class BatchCommand extends Command {
+
     public static final String COMMAND_WORD = "batch";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Perform command in batch \n"
@@ -39,6 +43,8 @@ public class BatchCommand extends Command {
             + PREFIX_ADDRESS + "new address "
             + PREFIX_SEARCH_TYPE + "phone "
             + PREFIX_EQUALS + "123 ";
+
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final String commandInput;
     private final SearchType searchType;
@@ -87,6 +93,7 @@ public class BatchCommand extends Command {
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(
                         commandInput, Integer.toString(index.getOneBased()));
+                logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
