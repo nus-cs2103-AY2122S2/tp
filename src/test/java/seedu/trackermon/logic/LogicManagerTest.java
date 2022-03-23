@@ -81,7 +81,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED
                 + COMMENT_DESC_BAD;
-        Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withTags().withComment().build();
+        Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addShow(expectedShow);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

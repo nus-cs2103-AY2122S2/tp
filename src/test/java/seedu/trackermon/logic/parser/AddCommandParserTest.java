@@ -54,16 +54,17 @@ public class AddCommandParserTest {
                 + STATUS_DESC_COMPLETED + COMMENT_DESC_BAD + TAG_DESC_MOVIE, new AddCommand(expectedShow));
 
         // multiple tags - all accepted
-        Show expectedShowMultipleTags = new ShowBuilder(GONE).withTags(VALID_TAG_YURI, VALID_TAG_HENTAI)
-                .build();
+        Show expectedShowMultipleTags = new ShowBuilder(GONE).withComment(VALID_COMMENT_BAD)
+                .withTags(VALID_TAG_YURI, VALID_TAG_HENTAI).build();
+
         assertParseSuccess(parser, NAME_DESC_GONE + STATUS_DESC_WATCHING + COMMENT_DESC_BAD
-                + VALID_COMMENT_BAD + TAG_DESC_YURI + TAG_DESC_HENTAI, new AddCommand(expectedShowMultipleTags));
+                + TAG_DESC_YURI + TAG_DESC_HENTAI, new AddCommand(expectedShowMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withTags().withComment().build();
-        assertParseSuccess(parser, NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED + COMMENT_DESC_BAD,
+        assertParseSuccess(parser, NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED,
                 new AddCommand(expectedShow));
     }
 
