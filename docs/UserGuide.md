@@ -133,10 +133,10 @@ Format: `find <KEYWORD>`
 * There must be at **least one keyword** and it **must not be empty**.
 
 Examples:
-* `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name or tag.
-[put image here after ui update]
+* `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name or tag.[put image here after ui update]
+* * `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name or tag.[put image here after ui update]
 
-**Precise Find** Finds shows in Trackermon by matching the user's input across specific parameters using prefixes.
+**Precise Find** Finds shows in Trackermon by matching the user's input across specific parameters with prefixes.
 
 Format: `find n/[NAME] s/[STATUS] t/[TAG]`
 * **Within a single prefix**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all keywords that are input by the user.
@@ -152,7 +152,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 </div>
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**
-find `find n/shingeki n/no n/2` does not mean `find n/shingeki no 2` The former will only find show names that match with **2**(as mentioned in [features](#features)) while the latter will find all show names that match **shingeki and no and 2**. This applies across the name and tag parameters.
+find `find n/shingeki n/no n/2` does not mean `find n/shingeki no 2` The former will only find show names that match with **2**(as mentioned in [features](#features)) while the latter will find all show names that match **shingeki, no and 2**. This applies across the name and tag parameters.
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -214,14 +214,6 @@ Trackermon data are saved in the hard disk automatically after any command that 
 
 ---
 
-### Better Find `[coming in v1.3]`
-
-_Details coming soon ..._
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-
 ## FAQ
 
 _Details coming soon ..._
@@ -238,7 +230,7 @@ Action | Format, Examples
 **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
 **Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
 **Exit** | `exit`      
-**Find** | `find <KEYWORD>`<br> e.g., `find hero`
+**Find** | `find <KEYWORD>`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/<TAG>]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen`
 **List** |`list`                                                                                                               |
 
 
