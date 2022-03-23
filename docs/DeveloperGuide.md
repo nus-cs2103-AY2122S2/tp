@@ -29,8 +29,56 @@ TODO
 TODO
 
 ### UI component
+The **API** of this component is specified in `Ui.java`
 
-TODO
+![](images/UiPhotos/UiClassDiagram.png)
+
+The UI consists of a `MainWindow` that is made up of multiple parts eg. `CommandBox`, `ResultDisplay`, 
+`StudentListPanel`, `InfoPanel` etc. All these components, including the `MainWindow` inherits from the abstract
+`UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in 
+[`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
+
+The `UI` component,
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` component to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<img src="images/UiPhotos/BottomHalf.png" height="300" />
+
+The bottom half of the `UI` component is split into two parts using a `SplitPane` component from 
+the JavaFX UI framework. 
+
+The left pane contains a `TabPane` that contains two tabs which hold a 
+[`LessonListPanel`](../src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) and a
+[`StudentListPanel`](../src/main/java/seedu/address/ui/listpanel/StudentListPanel.java).
+The **_Lessons_** tab contains a 
+[`LessonListPanel`](../src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) which lists out `Lesson` entries 
+while the **_Students_** tab contains a 
+[`StudentListPanel`](../src/main/java/seedu/address/ui/listpanel/StudentListPanel.java) which lists out `Student`
+entries.
+
+[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
+To switch between the tabs, the methods `MainWindow#toggleLessonTab()` and `MainWindow#toggleStudentTab()` can be used 
+to switch between the **_Lesson_** tab and **_Student_** tab respectively. Switching the tabs by using user commands is 
+done by the method `MainWindow#toggleTab()`.
+
+![img.png](images/UiPhotos/InfoPanelClassDiagram.png)
+
+The right pane contains an [`InfoPanel`](../src/main/java/seedu/address/ui/infopanel/InfoPanel.java) 
+component can either show the details of a `Lesson` entry or `Student` entry. A
+[`LessonInfoPanel`](../src/main/java/seedu/address/ui/infopanel/LessonInfoPanel.java) is used to show the details of a 
+`Lesson` entry, while a [`StudentInfoPanel`](../src/main/java/seedu/address/ui/infopanel/StudentInfoPanel.java) is used
+to show the details of a `Student` entry.
+
+[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
+The methods `MainWindow#populateInfoPanelWithLesson()` and `MainWindow#populateInfoPanelWithStudent()` can be used to
+populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
+method `MainWindow#handleInfoPanelUpdate()`.
 
 ### Logic component
 

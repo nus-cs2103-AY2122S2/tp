@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.card;
 
 import java.util.Comparator;
 
@@ -6,13 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
 
 /**
  * An UI component that displays information of a {@code Student}.
  */
-public class StudentCard extends UiPart<Region> {
+public class StudentCard extends Card {
 
     private static final String FXML = "StudentListCard.fxml";
 

@@ -73,4 +73,9 @@ run {
     enableAssertions = true
 }
 
+tasks.withType(Test) {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
+

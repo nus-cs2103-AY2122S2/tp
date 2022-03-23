@@ -11,7 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
-import seedu.address.ui.LessonCard;
+import seedu.address.ui.card.LessonCard;
 
 public class StudentInfoPanel extends InfoPanel {
     private static final String FXML = "StudentInfoPanel.fxml";
