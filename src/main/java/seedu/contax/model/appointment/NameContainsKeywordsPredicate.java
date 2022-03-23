@@ -5,6 +5,9 @@ import seedu.contax.commons.util.StringUtil;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * Tests that an {@code Appointment}'s {@code Name} matches any of the keywords given.
+ */
 public class NameContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Appointment> {
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
