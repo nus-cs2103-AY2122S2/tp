@@ -134,6 +134,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String viewContact(Group group) {
+        return addressBook.viewContact(group);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
