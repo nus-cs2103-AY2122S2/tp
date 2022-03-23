@@ -219,10 +219,10 @@ public class ScheduleTest {
     @Test
     public void findSlotsBetweenAppointments_nullInputs_throwsNullPointerException() {
         LocalDateTime dummyTime = LocalDateTime.parse("2022-12-12T12:30");
-        assertThrows(NullPointerException.class,
-            () -> schedule.findSlotsBetweenAppointments(null, dummyTime, 1));
-        assertThrows(NullPointerException.class,
-            () -> schedule.findSlotsBetweenAppointments(dummyTime, null, 1));
+        assertThrows(NullPointerException.class, ()
+            -> schedule.findSlotsBetweenAppointments(null, dummyTime, 1));
+        assertThrows(NullPointerException.class, ()
+            -> schedule.findSlotsBetweenAppointments(dummyTime, null, 1));
     }
 
     @Test

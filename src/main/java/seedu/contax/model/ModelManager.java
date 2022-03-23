@@ -19,7 +19,6 @@ import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.model.chrono.TimeRange;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -36,7 +35,7 @@ public class ModelManager implements Model {
 
     private final ObservableList<AppointmentSlot> displayedAppointmentSlots;
     private final ObservableList<AppointmentSlot> unmodifiableDisplayedAppointmentSlots;
-    private final CompositeScheduleItemList scheduleItemList;
+    private final CompositeTemporalObservableList<ScheduleItem> scheduleItemList;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -58,7 +57,7 @@ public class ModelManager implements Model {
         displayedAppointmentSlots = FXCollections.observableArrayList();
         unmodifiableDisplayedAppointmentSlots =
                 FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
-        scheduleItemList = new CompositeScheduleItemList(filteredAppointments,
+        scheduleItemList = new CompositeTemporalObservableList<>(filteredAppointments,
                 unmodifiableDisplayedAppointmentSlots);
     }
 

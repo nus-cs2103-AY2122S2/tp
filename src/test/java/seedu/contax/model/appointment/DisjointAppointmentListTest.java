@@ -310,19 +310,19 @@ public class DisjointAppointmentListTest {
     @Test
     public void findSlotsBetweenAppointments_nullInputs_throwsNullPointerException() {
         LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:30");
-        assertThrows(NullPointerException.class,
-            () -> new DisjointAppointmentList().findSlotsBetweenAppointments(null, refDateTime, 1));
-        assertThrows(NullPointerException.class,
-            () -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, null, 1));
+        assertThrows(NullPointerException.class, ()
+            -> new DisjointAppointmentList().findSlotsBetweenAppointments(null, refDateTime, 1));
+        assertThrows(NullPointerException.class, ()
+            -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, null, 1));
     }
 
     @Test
     public void findSlotsBetweenAppointments_nonPositiveDuration_throwsIllegalArgumentException() {
         LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:30");
-        assertThrows(IllegalArgumentException.class,
-            () -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, 0));
-        assertThrows(IllegalArgumentException.class,
-            () -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, -1));
+        assertThrows(IllegalArgumentException.class, ()
+            -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, 0));
+        assertThrows(IllegalArgumentException.class, ()
+            -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, -1));
     }
 
     @Test

@@ -368,7 +368,7 @@ public class ModelManagerTest {
     @Test
     public void getScheduleItemList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> modelManager.getScheduleItemList().remove(0));
+            -> modelManager.getScheduleItemList().remove(0));
     }
 
     @Test
@@ -390,12 +390,12 @@ public class ModelManagerTest {
     @Test
     public void setDisplayedAppointmentSlots_validList_success() {
         List<AppointmentSlot> sampleSlots = List.of(
-                new AppointmentSlot(new TimeRange(LocalDate.of(2022,1,1).atStartOfDay(),
-                        LocalDate.of(2022,1, 1).atTime(23, 59))),
-                new AppointmentSlot(new TimeRange(LocalDate.of(2022,1,2).atStartOfDay(),
-                        LocalDate.of(2022,1,2).atTime(23, 59))),
-                new AppointmentSlot(new TimeRange(LocalDate.of(2022,2,3).atStartOfDay(),
-                        LocalDate.of(2022,2,3).atTime(23, 59)))
+                new AppointmentSlot(new TimeRange(LocalDate.of(2022, 1, 1).atStartOfDay(),
+                        LocalDate.of(2022, 1, 1).atTime(23, 59))),
+                new AppointmentSlot(new TimeRange(LocalDate.of(2022, 1, 2).atStartOfDay(),
+                        LocalDate.of(2022, 1, 2).atTime(23, 59))),
+                new AppointmentSlot(new TimeRange(LocalDate.of(2022, 2, 3).atStartOfDay(),
+                        LocalDate.of(2022, 2, 3).atTime(23, 59)))
         );
         assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
         modelManager.setDisplayedAppointmentSlots(sampleSlots);

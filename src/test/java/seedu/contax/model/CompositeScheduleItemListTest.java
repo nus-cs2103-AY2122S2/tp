@@ -20,18 +20,18 @@ public class CompositeScheduleItemListTest {
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-            -> new CompositeScheduleItemList(null, null));
+            -> new CompositeTemporalObservableList(null, null));
         assertThrows(NullPointerException.class, ()
-            -> new CompositeScheduleItemList(FXCollections.emptyObservableList(), null));
+            -> new CompositeTemporalObservableList(FXCollections.emptyObservableList(), null));
         assertThrows(NullPointerException.class, ()
-            -> new CompositeScheduleItemList(null, FXCollections.emptyObservableList()));
+            -> new CompositeTemporalObservableList(null, FXCollections.emptyObservableList()));
     }
 
     @Test
     public void testListChangeNotify() {
         ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
         ObservableList<AppointmentSlot> slotList = FXCollections.observableArrayList();
-        CompositeScheduleItemList compositeList = new CompositeScheduleItemList(appointmentList, slotList);
+        CompositeTemporalObservableList compositeList = new CompositeTemporalObservableList(appointmentList, slotList);
         LocalDateTime refTime = APPOINTMENT_ALONE.getStartDateTime();
         AppointmentSlot slot = new AppointmentSlot(
                 new TimeRange(refTime.plusMinutes(120), refTime.plusMinutes(180)));

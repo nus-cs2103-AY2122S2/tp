@@ -46,7 +46,7 @@ public class Appointment extends ScheduleItem {
     public Name getName() {
         return this.name;
     }
-    
+
     public LocalDateTime getStartDateTime() {
         return this.startDateTime.value;
     }
