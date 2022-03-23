@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+hide method
+
+skinparam class {
+    BackgroundColor<<Hidden>> #FFFFFF
+    BorderColor<<Hidden>> #FFFFFF
+    FontColor<<Hidden>> #FFFFFF
+}
+
+package ConsistentLessonList <<Rectangle>> {
+    class Lesson2 as "__lesson2:RecurringLesson__" {
+       startDate = 21 March 2022
+       startTime = 10pm
+       duration = 1 hour 30 mins
+    }
+
+    class Lesson1 as "__lesson1:TemporaryLesson__" {
+        startDate = 20 March 2022
+        startTime = 12pm
+        duration = 1 hour
+    }
+}
+
+class Lesson3 as "__lessonToBeAdded:RecurringLesson__" {
+   startDate = 21 March 2022
+   startTime = 2pm
+   duration = 1 hour
+}
+
+Lesson3 -[hidden]up-> Lesson1
+Lesson3 -up-> Lesson2
+
+@enduml
