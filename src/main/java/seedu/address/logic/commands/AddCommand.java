@@ -56,7 +56,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_ADD_LINEUP_SUCCESS = "New lineup added: %1$s.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in MyGM.";
     public static final String MESSAGE_DUPLICATE_LINEUP_NAME = "This lineup already exists in MyGM.";
-    public static final String MESSAGE_DUPLICATE_JERSEY_NUMBER = "This Jersey number already exists in MyGM.\n"
+    public static final String MESSAGE_DUPLICATE_JERSEY_NUMBER = "This jersey number already exists in MyGM.\n"
             + "You may consider these available ones:\n%1$s";
     public static final String MESSAGE_FULL_CAPACITY_REACHED = "MyGM has reached its full capacity with 100 players.";
     // can consider adding in a list of available jersey number
@@ -113,6 +113,7 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_ADD_PERSON_SUCCESS, toAddPerson));
         }
 
+        //assert toAddLineup != null;
         if (model.hasLineupName(toAddLineup.getLineupName())) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_LINEUP_NAME, toAddLineup.getLineupName()));
         }

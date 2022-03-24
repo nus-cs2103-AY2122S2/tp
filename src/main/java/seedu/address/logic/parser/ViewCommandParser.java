@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +13,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -33,51 +33,48 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
         boolean hasLSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP); // L/
 
-        //brute force other scenario
+        //impossible scenario
         boolean hasLSlashAndPSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP, PREFIX_PLAYER); // L/ P/
 
-        Name name = new Name("Player");
-        LineupName lineupName = new LineupName("Lineup");
-        String playerNameArg = "empty";
-        String lineupNameArg = "empty";
-
-        // both P/ and L/ are missing -> false, L/ and P/ cannot coexist
+        // both P/ and L/ are missing -> false or L/ and P/ coexist -> false
         if ((!hasLSlash && !hasPSlash) || hasLSlashAndPSlash) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
         // view P/[PLAYER_NAME...]
         if (hasPSlash) {
+            // capture the type of view
+            List<String> prefixAndArgument = new ArrayList<>();
+            prefixAndArgument.add(PREFIX_PLAYER.toString());
+
             // view P/ --> view all player
-            List<String> keywords = new ArrayList<>();
-            keywords.add(PREFIX_PLAYER.toString());
-            if (args.equals("P/")) {
-                return new ViewCommand(PREDICATE_SHOW_ALL_PERSONS, keywords);
+            if (args.equals(" P/")) {
+                return new ViewCommand(PREDICATE_SHOW_ALL_PERSONS, prefixAndArgument);
             }
 
-            // check has preamble. check here because arg = "P/", preamble = "P/" as well
+            // check has preamble. check here because if arg = "P/", preamble = "P/" as well
             if (!argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
 
             // view P/[PLAYER_NAME...]
-            playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
+            String playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
             if (!playerNameArg.equals("")) {
-                name = ParserUtil.parseName(playerNameArg);
-                String trimmedArgs = name.toString().trim();
-                keywords.add(trimmedArgs);
+                String trimmedArgs = playerNameArg.trim();
+                prefixAndArgument.add(trimmedArgs);
                 String[] nameKeywords = trimmedArgs.split("\\s+");
-                return new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), keywords);
+                return new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                        prefixAndArgument);
             }
         }
 
         // view L/[LINEUP_NAME...]
         if (hasLSlash) {
-            List<String> keywords = new ArrayList<>();
-            keywords.add(PREFIX_LINEUP.toString());
+            List<String> prefixAndArgument = new ArrayList<>();
+            prefixAndArgument.add(PREFIX_LINEUP.toString());
             // view L/ -> view all lineups
-            if (args.equals("L/")) {
-                return new ViewCommand(PREDICATE_SHOW_ALL_PERSONS, keywords); // should be SHOW_ALL_LINEUP
+            if (args.equals(" L/")) {
+                return new ViewCommand(PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP, prefixAndArgument);
             }
 
             // check has preamble. check here because arg = "L/", preamble = "L/" as well
@@ -86,17 +83,16 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             }
 
             // view L/[LINEUP_NAME...]
-            lineupNameArg = argMultimap.getValue(PREFIX_LINEUP).get();
-            if (!playerNameArg.equals("")) {
-                lineupName = ParserUtil.parseLineupName(lineupNameArg);
-                String trimmedArgs = lineupName.toString().trim();
-                keywords.add(trimmedArgs);
+            String lineupNameArg = argMultimap.getValue(PREFIX_LINEUP).get();
+            if (!lineupNameArg.equals("")) {
+                String trimmedArgs = lineupNameArg.trim();
+                prefixAndArgument.add(trimmedArgs);
                 String[] nameKeywords = trimmedArgs.split("\\s+");
-                return new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), keywords);
+                return new ViewCommand(new LineupNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                        prefixAndArgument);
             }
         }
-
-        return new ViewCommand(PREDICATE_SHOW_ALL_PERSONS, new ArrayList<>());
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
