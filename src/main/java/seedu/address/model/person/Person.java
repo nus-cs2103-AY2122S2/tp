@@ -27,6 +27,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final PrevDateMet prevDateMet;
     private final Info info;
+    private final ScheduledMeeting scheduledMeeting;
 
     /**
      * Constructor for Person object where every field is present and not null.
@@ -42,6 +43,7 @@ public class Person {
         this.tags.addAll(tags);
         this.prevDateMet = prevDateMet;
         this.info = info;
+        this.scheduledMeeting = new ScheduledMeeting();
     }
 
     /**
@@ -59,6 +61,7 @@ public class Person {
         this.tags.addAll(tags);
         this.prevDateMet = new PrevDateMet(LocalDate.now().toString());
         this.info = new Info("No further info");
+        this.scheduledMeeting = new ScheduledMeeting();
     }
 
     public Name getName() {
@@ -91,6 +94,10 @@ public class Person {
 
     public Info getInfo() {
         return info;
+    }
+
+    public ScheduledMeeting getScheduledMeeting() {
+        return scheduledMeeting;
     }
 
     /**
@@ -128,6 +135,7 @@ public class Person {
             return false;
         }
 
+        // Todo Add scheduled meeting check
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
@@ -136,12 +144,13 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getPrevDateMet().equals(getPrevDateMet())
                 && otherPerson.getInfo().equals(getInfo());
+        // && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, prevDateMet, info);
+        return Objects.hash(name, phone, email, address, tags, prevDateMet, info, scheduledMeeting);
     }
 
     @Override
@@ -159,7 +168,9 @@ public class Person {
                 .append("; Previous Date Met: ")
                 .append(getPrevDateMet())
                 .append("; Info: ")
-                .append(getInfo());
+                .append(getInfo())
+                .append("; Next Meeting:")
+                .append(getScheduledMeeting());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
