@@ -58,6 +58,8 @@ public class Appointment extends ScheduleItem {
      * @param priority A valid priority level.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
+        super(Appointment.getStartDateTimeOrThrow(startDateTime),
+                Appointment.getEndDateTimeOrThrow(startDateTime, duration));
         requireAllNonNull(name, startDateTime, duration, priority);
 
         this.name = name;
@@ -134,7 +136,8 @@ public class Appointment extends ScheduleItem {
         return otherAppointment.getName().equals(getName())
                 && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
                 && otherAppointment.getDuration().equals(getDuration())
-                && Objects.equals(otherAppointment.getPerson(), getPerson());
+                && Objects.equals(otherAppointment.getPerson(), getPerson())
+                && otherAppointment.getPriority().equals(getPriority());
     }
 
     @Override
