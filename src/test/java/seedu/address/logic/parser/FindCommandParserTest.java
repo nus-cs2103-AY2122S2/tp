@@ -118,7 +118,7 @@ public class FindCommandParserTest {
                         new NameContainsKeywordsPredicate(
                                 Arrays.asList(VALID_NAME_BOB.split("\\s+"))));
 
-        // no white space before name
+        // no whitespace before name
         assertParseSuccess(parser, NAME_DESC_BOB, expectedFindCommand);
 
         // whitespace before name
