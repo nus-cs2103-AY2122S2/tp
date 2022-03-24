@@ -225,11 +225,11 @@ Tags and their values: `n:NAME` `c:CATEGORY` `p:PRICE` `d:DESCRIPTION`
 
 Examples:
 
-`list n:Water` lists all products that has Water as name.
+`find n:Water` lists all products that has Water as name.
 
-`list n:Bread c:Food` lists all products that has Bread as name and category as Food.
+`find n:Bread c:Food` lists all products that has Bread as name and category as Food.
 
-`list c:Food` lists all products that has category as Food.
+`find c:Food` lists all products that has category as Food.
 
 ### 4.2 Item Commands *[coming soon]*
 
