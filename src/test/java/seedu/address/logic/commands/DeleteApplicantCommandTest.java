@@ -32,7 +32,9 @@ public class DeleteApplicantCommandTest {
         Applicant applicantToDelete = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
+        String expectedMessage =
+                String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
+                        + String.format(DeleteApplicantCommand.MESSAGE_DELETE_INTERVIEWS, 0);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(applicantToDelete);
@@ -55,7 +57,9 @@ public class DeleteApplicantCommandTest {
         Applicant applicantToDelete = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
+        String expectedMessage =
+                String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
+                        + String.format(DeleteApplicantCommand.MESSAGE_DELETE_INTERVIEWS, 0);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(applicantToDelete);
