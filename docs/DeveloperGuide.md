@@ -742,8 +742,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: Find single keyword
       1. Command: `find shingeki` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list. <br>
-         E.g. `shingeki` from name, status, or tag fields will be matched.
-
+         E.g. `shingeki` from name, status, or tag fields will be matched.<br>
+      
    3. Test case: Find multiple keywords
       1. Command: `find shingeki shutter` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list. <br>
@@ -755,11 +755,11 @@ testers are expected to do more *exploratory* testing.
    
    4. Test case: Invalid command format
       1. Command: `find` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
    
    5. Test case: Unknown command
       1. Command: `find2` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Unknown command`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`
 
 
 2. Find a show (Precise Find)
@@ -788,9 +788,9 @@ testers are expected to do more *exploratory* testing.
    
    4. Test case: Invalid command format
       1. Command: `find n/` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
       2. Command: `find t/Action Anime` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
    
    5. Test case: Multiple same prefix
       1. Command: `find n/shingeki n/shutter` <br>
