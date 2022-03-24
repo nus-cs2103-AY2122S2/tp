@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 /**
  * Stores a list of previously executed commands.
  */
@@ -24,6 +26,15 @@ public class CommandHistory {
      */
     public void addToHistory(String str) {
         commands.add(str);
+    }
+
+    /**
+     * Returns the latest command used and removes it from history.
+     */
+    public String popPreviousCommand() {
+        int previousCommandIndex = commands.size() - 1;
+        String previousCommand = commands.remove(previousCommandIndex);
+        return previousCommand;
     }
 
     /**

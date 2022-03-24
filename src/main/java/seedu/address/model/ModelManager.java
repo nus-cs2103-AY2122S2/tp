@@ -28,6 +28,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final CommandHistory commandHistory;
+    private final AddressBookHistory addressBookHistory;
+    private boolean isPrevCommandUndo;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,7 +42,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.commandHistory = new CommandHistory();
+        this.addressBookHistory = new AddressBookHistory(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.isPrevCommandUndo = false;
     }
 
     public ModelManager() {
@@ -92,6 +96,43 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public AddressBook getPreviousAddressBook() {
+        return addressBookHistory.getPreviousAddressBook();
+    }
+
+    @Override
+    public AddressBook getPreviousAddressBookAfterChainedUndo() {
+        return addressBookHistory.getPreviousAddressBookAfterChainedUndo();
+    }
+
+    @Override
+    public void saveCurrentAddressBookToHistory() {
+        addressBookHistory.addAddressBook(addressBook);
+    }
+
+    @Override
+    public AddressBookHistory getAddressBookHistory() {
+        return addressBookHistory;
+    }
+
+    @Override
+    public boolean isAddressBookHistoryEmpty() {
+        return addressBookHistory.isEmpty();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        setAddressBook(getPreviousAddressBook());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void chainUndoAddressBook() {
+        setAddressBook(getPreviousAddressBookAfterChainedUndo());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -152,10 +193,32 @@ public class ModelManager implements Model {
         requireNonNull(task);
         return addressBook.checkProgress(moduleCode, task);
     }
+
     //=========== Command History ============================================================================
+
     @Override
     public CommandHistory getCommandHistory() {
         return commandHistory;
+    }
+
+    @Override
+    public String getPreviousCommandText() {
+        return commandHistory.popPreviousCommand();
+    }
+
+    @Override
+    public boolean isPrevCommandUndo() {
+        return isPrevCommandUndo;
+    }
+
+    @Override
+    public void markPrevCommandAsUndo() {
+        isPrevCommandUndo = true;
+    }
+
+    @Override
+    public void unmarkPrevCommandAsUndo() {
+        isPrevCommandUndo = false;
     }
 
     @Override
@@ -167,6 +230,7 @@ public class ModelManager implements Model {
     public void addToCommandHistory(String commandText) {
         commandHistory.addToHistory(commandText);
     }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

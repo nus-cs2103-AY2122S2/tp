@@ -58,6 +58,43 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the AddressBook that was saved before the last user command was executed.
+     */
+    ReadOnlyAddressBook getPreviousAddressBook();
+
+    /**
+     * Returns the AddressBook that was saved before the last user command (that was not undo) was executed
+     * in a chain of undo commands.
+     */
+    ReadOnlyAddressBook getPreviousAddressBookAfterChainedUndo();
+
+    /**
+     * Adds AddressBook to the list of address books that are saved with each user command.
+     */
+    void saveCurrentAddressBookToHistory();
+
+    /**
+     * Returns the history of address books following the user's commands.
+     */
+    AddressBookHistory getAddressBookHistory();
+
+    /**
+     * Returns true if the address book history is empty.
+     */
+    boolean isAddressBookHistoryEmpty();
+
+    /**
+     * Replaces the current address book with one that was saved before the last user command was executed.
+     */
+    void undoAddressBook();
+
+    /**
+     * Replaces the current address book with one that was saved before the last user command was executed.
+     * (If the undo command was the last command used.)
+     */
+    void chainUndoAddressBook();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -125,13 +162,27 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Sorts the list of persons in alphabetical order by their names */
+    /** Sorts the list of persons in alphabetical order by their names. */
     void sortFilteredPersonList();
+
+    /** Returns true if the user's last command was the undo command. */
+    public boolean isPrevCommandUndo();
+
+    /** Marks the isPrevCommandUndo flag as true. */
+    public void markPrevCommandAsUndo();
+
+    /** Marks the isPrevCommandUndo flag as false. */
+    public void unmarkPrevCommandAsUndo();
 
     /**
      * Returns the user's command history.
      */
     CommandHistory getCommandHistory();
+
+    /**
+     * Returns the user's previously executed command (represented as a String).
+     */
+    String getPreviousCommandText();
 
     /**
      * Returns true if the command history is empty.
