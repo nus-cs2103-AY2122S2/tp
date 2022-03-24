@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.ViewContactCommand;
-import seedu.address.logic.commands.ViewTaskCommand;
 import seedu.address.model.group.Group;
 
 public class GroupUtil {
