@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.trackermon.logic.commands.AddCommand;
+import seedu.trackermon.logic.commands.ClearCommand;
 import seedu.trackermon.logic.commands.Command;
 import seedu.trackermon.logic.commands.CommentCommand;
 import seedu.trackermon.logic.commands.DeleteCommand;
@@ -80,6 +81,9 @@ public class TrackermonParser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
