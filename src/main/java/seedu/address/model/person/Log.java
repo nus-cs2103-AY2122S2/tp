@@ -31,6 +31,18 @@ public class Log {
         this.description = new Description(description);
     }
 
+    /**
+     * Constructs a Log object.
+     *
+     * @param title       Title of the log.
+     * @param description Description tied to the log. Can be null.
+     */
+    public Log(LogName title, Description description) {
+        requireNonNull(title);
+        this.title = title;
+        this.description = description == null ? new Description(null) : description;
+    }
+
     public Description getDescription() {
         requireNonNull(this.description);
         return this.description;
