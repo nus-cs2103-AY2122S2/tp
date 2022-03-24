@@ -17,7 +17,7 @@ import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.ProductFilter;
 
 /**
- * Represents the in-memory model of the ibook data.
+ * Represents the in-memory model of the iBook data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final IBook iBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Product> filteredProducts;
-    private ProductFilter productFilter;
+    private final ProductFilter productFilter;
 
     /**
      * Initializes a ModelManager with the given iBook and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyIBook iBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(iBook, userPrefs);
 
-        logger.fine("Initializing with ibook: " + iBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with iBook: " + iBook + " and user prefs " + userPrefs);
 
         this.iBook = new IBook(iBook);
         this.userPrefs = new UserPrefs(userPrefs);
