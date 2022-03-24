@@ -9,9 +9,12 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_TO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
+import seedu.contax.logic.LogicManager;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ParserUtil;
@@ -33,6 +36,8 @@ public class RangeCommand extends Command {
             + "Example: " + COMMAND_WORD + " edit "
             + PREFIX_PHONE + "12345678 "
             + PREFIX_ADDRESS + "new address ";
+
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Index fromIndex;
     private final Index toIndex;
@@ -61,6 +66,9 @@ public class RangeCommand extends Command {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(commandInput, Integer.toString(i));
+
+                logger.info("----------------[RANGE COMMAND][" + commandText + "]");
+
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
