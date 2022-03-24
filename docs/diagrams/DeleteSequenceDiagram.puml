@@ -17,7 +17,7 @@ end box
 activate LogicManager
 
 LogicManager -> UniBookBookParser : parseCommand("delete 1")
-activate UniBookParser
+activate UniBookBookParser
 
 create DeleteCommandParser
 UniBookBookParser -> DeleteCommandParser
