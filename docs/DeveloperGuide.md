@@ -171,6 +171,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Adding optional attributes to fit for Client
+
+When handling clients, it would be beneficial to track the previous date met with the client, and additional information
+regarding the clients. Therefore, these two new attributes need to be added to the current Person class. The new prefix used
+are `d/` and `i/` for date previous met and additional info respectively.
+
+On top of that, modifications to add and edit command are needed to handle the two new attributes. Since both attributes
+are optional, `d/` and `i/` may be omitted when using the add command, a default value is given to each attribute. This
+decision was made to avoid the use of null values. For date attribute, the date of the client being added would be its
+default value, whereas "No further info" will be the default value for additional info attribute. 
+
+The following sequence diagram shows how adding a new person without any previous date met and additional info specified.
+
+(WILL BE ADDED IN THE FUTURE)
+
+The following activity diagram summarizes the different possible paths when adding a client to HustleBook.
+
+(WILL BE ADDED IN THE FUTURE)
+
+#### Design considerations:
+
+**Aspect: Default value of optional data:**
+
+* **Alternative 1 (current choice):** Non-null values.
+    * Pros: Less likely to face any errors as no null values are used.
+    * Cons: Considerations of non-null values as the default value has to make sense for users.
+
+* **Alternative 2:** Use null values are default values.
+    * Pros: Easier and faster to implement.
+    * Cons: Code wise is more prone to errors and more defensive approach have to be used when handling the new attributes.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
