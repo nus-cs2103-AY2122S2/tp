@@ -55,8 +55,8 @@ public class HustleBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case FlagCommand.COMMAND_WORD:
-            return new FlagCommandParser().parse(arguments);
+        case FlagCommand.FLAG_COMMAND_WORD: case FlagCommand.UNFLAG_COMMAND_WORD:
+            return new FlagCommandParser().setCommand(commandWord).parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
