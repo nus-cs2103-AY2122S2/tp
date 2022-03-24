@@ -158,15 +158,15 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed sorting mechanism is facilitated by `SortCommand` class. It extends `Command` 
-and takes in a field that the user wishes to sort the Address Book by. The field is parsed by 
+The proposed sorting mechanism is facilitated by `SortCommand` class. It extends `Command`
+and takes in a field that the user wishes to sort the Address Book by. The field is parsed by
 `SortCommandParser`.
 
 The primary sorting operation that takes place in the SortCommand class is sortPetList. This operation is exposed
 in the `Model` interface as Model#sortPetList().
 
 Currently, pet list can only be sorted by pet name or owner name. Each class implements the `Comparable` interface so that
-they can be compared and sorted alphabetically. 
+they can be compared and sorted alphabetically.
 
 The following sequence diagram shows how the sort operation works:
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
@@ -176,12 +176,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-* **Alternative 1 (current choice):** Currently the comparator classes for both owner name and pet name are generated 
-  within the `sortPetList` method in `UniquePetList`. 
+* **Alternative 1 (current choice):** Currently the comparator classes for both owner name and pet name are generated
+  within the `sortPetList` method in `UniquePetList`.
     * Pros: Easy to implement.
-    * Cons: May be confusing to edit if there are more comparator classes in the future. 
+    * Cons: May be confusing to edit if there are more comparator classes in the future.
 
-* **Alternative 2:** Generate a new package containing the various comparator classes. 
+* **Alternative 2:** Generate a new package containing the various comparator classes.
     * Pros: Cleaner code. Better for future scalability.
     * Cons: Contributes to more lines of code. Harder to set up initially.
 
@@ -220,7 +220,61 @@ The following sequence diagram shows how the charge operation works:
     * Pros: Easier to get charge.
     * Cons: Will use more memory and require more code to maintain it.
 
-_{more aspects and alternatives to be added}_
+
+### \[Proposed\] Appointment feature
+
+#### Proposed Implementation
+
+The proposed appointment feature is facilitated by the `AppointmentCommand` class which extends `Command` class. The 
+`AppointmentCommand` takes in a valid mandatory index which specifics the pet that the command is to be used on, 
+followed by either **one** prefix (*clear*) or **two** prefixes (*dateTime* and *location*) based on the objective the 
+user is trying to accomplish. The fields are parsed by `AppointmentCommandParser` class.
+
+Appointment feature can be used to accomplish the following 2 tasks:
+1. Add and store pet's appointment details. (*dateTime and Location prefixes*)
+2. Clear and delete pet's appointment details. (*clear prefix*)
+
+The operation of updating the pet's appointment details and updating the pet filter list are done by methods in the 
+Model interface as Model#setPet() and Model#updateFilterPetList() respectively.
+
+The following sequence diagram below illustrates the interactions between the `Logic` component and `Model` component 
+for the `execute("app 1 clear")` API call:
+![AppointmentSequenceDiagram](images/AppointmentSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new Appointmentcommand:
+![AppointmentActivityDiagram](images/AppointmentActivityDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Currently the appointment command is responsible for both the adding and clearing
+of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only 
+by the prefixes / augments.
+    * Pros: Easy and simple to implement.
+    * Cons: User may struggle to get familiar with the command.
+
+* **Alternative 2:** Add a new `clear` command to clear and delete contents of variables based on input field. 
+    * Pros: Better for future scalability.
+    * Cons: Complex implementation. More lines of code. Harder to set up initially.
+
+### \[Proposed\] Filter feature
+
+#### Proposed Implementation
+The proposed filter mechanism is facilitated by `FilterCommand` class.
+It extends `Command` and takes in a keyword that the user wishes to filter the Address Book by followed by
+a given search word. The keyword is parsed by `FilterCommandParser`. A search word will follow after the keyword to
+indicate what the user wants to filter out specifically.
+
+Currently, pet list can be filtered by date, owner name, tag and pet's appointment date. 
+Each class implements the `Comparable` interface in order to be compared and matched to the given search word.
+
+The following sequence diagram shows how the filter operation works when `filter tag/ beagle` is called:
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new `filter` command:
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
 
 
 ### \[Proposed\] Undo/redo feature
@@ -451,8 +505,8 @@ Use case ends.
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
-    
-     
+
+
 **Use case: Get pet owner details**
 
 **MSS**

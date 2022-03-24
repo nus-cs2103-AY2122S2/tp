@@ -46,7 +46,7 @@ public class AttendanceCommand extends Command {
             + PREFIX_DROP_OFF + "18:00";
 
     public static final String MESSAGE_ATTENDANCE_SUCCESS = "Attendance updated for %1$s!";
-    public static final String MESSAGE_PET_NOT_ADDED = "Seems like this pet is not in the address book yet! "
+    public static final String MESSAGE_PET_FILE_ERROR = "Seems like this pet is not in the address book yet! "
                                                         + "Make sure to add the pet in first!";
 
     private final Index index;
@@ -118,7 +118,7 @@ public class AttendanceCommand extends Command {
             sortTextFile(file, sortAttendance);
             createJsonFile(file, jsonFilePath);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_PET_NOT_ADDED);
+            throw new CommandException(MESSAGE_PET_FILE_ERROR);
         }
 
     }

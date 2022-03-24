@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLEAR;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -26,15 +28,9 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_APPOINTMENT_DATE, PREFIX_APPOINTMENT_LOCATION);
+                PREFIX_APPOINTMENT_DATE_TIME, PREFIX_APPOINTMENT_LOCATION, PREFIX_CLEAR);
 
         Index index;
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT_DATE, PREFIX_APPOINTMENT_LOCATION)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AppointmentCommand.MESSAGE_USAGE));
-        }
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -42,10 +38,22 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
                     AppointmentCommand.MESSAGE_USAGE), pe);
         }
 
-        Appointment appointment = ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT_DATE).get(),
-                argMultimap.getValue(PREFIX_APPOINTMENT_LOCATION).get());
-
-        return new AppointmentCommand(index, appointment);
+        Boolean isClearPresent = argMultimap.getValue(PREFIX_CLEAR).isPresent();
+        Boolean areDateTimeAndLocationPresent = arePrefixesPresent(argMultimap,
+                PREFIX_APPOINTMENT_DATE_TIME, PREFIX_APPOINTMENT_LOCATION);
+        if (isClearPresent && !areDateTimeAndLocationPresent) {
+            Appointment clearAppointment = new Appointment();
+            return new AppointmentCommand(index, clearAppointment);
+        } else if (areDateTimeAndLocationPresent && !isClearPresent) {
+            LocalDateTime dateTime = ParserUtil.parseAppointmentDateTime(
+                    argMultimap.getValue(PREFIX_APPOINTMENT_DATE_TIME).get());
+            String location = argMultimap.getValue(PREFIX_APPOINTMENT_LOCATION).get();
+            Appointment appointment = new Appointment(dateTime, location);
+            return new AppointmentCommand(index, appointment);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AppointmentCommand.MESSAGE_USAGE));
+        }
     }
 
     /**
