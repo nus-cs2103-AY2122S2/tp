@@ -154,6 +154,29 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Customer Attributes
+
+#### Add new data fields relevant to customers at beauty salons
+
+##### Overview
+- Data fields such as birthday, sign-up date, skin type, hair type, allergies, preferred staff and services are to be added.
+
+##### Implementation
+- Allergies, Staff and Services were added as tags as one customer can have multiple of these data fields
+- The rest were added as attributes 
+
+##### Design Considerations
+
+* **Alternative 1 (current choice):** Implement only allergies,staffs and services as tags 
+  * Pros: Harder to implement
+  * Cons: Less direct to access allergies, staffs and services as compared to if a list was used
+
+* **Alternative 2:** Implement all additional fields as tags 
+  itself.
+  * Pros: Easy to implement
+  * Cons: Could be harder to access the necessary data for other functions like creating summary statistics
+  * Cons: Does not make sense to have multiple of certain data fields, e.g. multiple skin types, multiple birthdays
+  
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
