@@ -1,11 +1,14 @@
 package seedu.address.model.person;
 
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
 
 /**
  * Represents a Person's name in the address book.
@@ -44,8 +47,8 @@ public class Name {
      */
     public String addNameFormat (String name) {
         List<String> combinationArray = new ArrayList<>();
-        for(int i = 0; i < name.length(); i++) {
-            combinationArray.add(" " + name.substring(0, i+1) + " ");
+        for (int i = 0; i < name.length(); i++) {
+            combinationArray.add(" " + name.substring(0, i + 1) + " ");
         }
         return Arrays.toString(combinationArray.toArray());
     }

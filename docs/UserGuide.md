@@ -60,12 +60,14 @@ Find a particular contact in Tracey.
 
 Format: `find NAME`
 * Returns the student(s) with the given details: `covid-positive`, `covid-negative`, `close-contact`
-* The search is case-sensitive. e.g `johnDoe` will not match `Johndoe`
+* The search is case-insensitive. e.g `johnDoe` will match `Johndoe`
+* The search does not require full name. e.g. `jo` will match `Joe` and `John`
 
 Examples of usages:
 
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh` and`David Li`
+* `find J` returns `john` and`jay`
 
 ### Adding a contact: `add`
 Add a student with relevant details into Tracey.
