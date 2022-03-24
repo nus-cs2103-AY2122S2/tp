@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.exceptions.DuplicateCustomerException;
+import seedu.trackbeau.model.service.Service;
 import seedu.trackbeau.testutil.CustomerBuilder;
 
 public class TrackBeauTest {
@@ -47,9 +48,10 @@ public class TrackBeauTest {
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(VALID_STAFF_BOB)
-                .build();
+            .build();
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
-        TrackBeauStub newData = new TrackBeauStub(newCustomers);
+        List<Service> services = Arrays.asList();
+        TrackBeauStub newData = new TrackBeauStub(newCustomers, services);
 
         assertThrows(DuplicateCustomerException.class, () -> trackBeau.resetData(newData));
     }
@@ -74,8 +76,8 @@ public class TrackBeauTest {
     public void hasCustomer_customerWithSameIdentityFieldsInTrackBeau_returnsTrue() {
         trackBeau.addCustomer(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withStaffs(VALID_STAFF_BOB)
-                .build();
+            .withStaffs(VALID_STAFF_BOB)
+            .build();
         assertTrue(trackBeau.hasCustomer(editedAlice));
     }
 
@@ -85,18 +87,25 @@ public class TrackBeauTest {
     }
 
     /**
-     * A stub ReadOnlyTrackBeau whose customer list can violate interface constraints.
+     * A stub ReadOnlyTrackBeau whose customer list, service list can violate interface constraints.
      */
     private static class TrackBeauStub implements ReadOnlyTrackBeau {
         private final ObservableList<Customer> customers = FXCollections.observableArrayList();
+        private final ObservableList<Service> services = FXCollections.observableArrayList();
 
-        TrackBeauStub(Collection<Customer> customers) {
+        TrackBeauStub(Collection<Customer> customers, Collection<Service> services) {
             this.customers.setAll(customers);
+            this.services.setAll(services);
         }
 
         @Override
         public ObservableList<Customer> getCustomerList() {
             return customers;
+        }
+
+        @Override
+        public ObservableList<Service> getServiceList() {
+            return services;
         }
     }
 
