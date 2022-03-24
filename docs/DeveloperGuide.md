@@ -82,6 +82,27 @@ The `UserType` represents an attribute that is added to a `Person` & represents 
 
 Unlike other attributes of a `Person`, the `UserType` of a `Person` cannot be edited _directly_ via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa if the person's property or preference is changed. This can be done with the command: `edit INDEX pr/PROPERTY_DETAILS` or `edit INDEX pf/PREFERENCE_DETAILS`. This means editing a `Person` to have a `Property` instead of a `Preference` will change them from a `buyer` (had a `Preference` initially) to a `seller` (now has a `Property`). In other cases where other attributes of a `Person` are being edited, e.g. phone number, address, the `UserType` of that `Person` being edited will remain the same.
 
+## [Proposed] Remind feature
+The remind feature is implemented by storing a static list of Persons the user wants to be reminded of. 
+
+- `ReminderTask` -- Schedules and handles the work of activating the Reminders window. 
+- `ReminderPersons` -- Stores a `HashSet` of `Person`s, because only 1 reminder can be set per person & thus only 1 occurrence of a Person in this data structure is allowed.
+- `ReminderWindow` --  A Window to display all `Person`s the client set reminders for.
+- Both `ReminderTask` and `ReminderWindow` classes are singletons as there can only ever be 1 occurrence of these classes.
+
+The remind feature can be activated by typing `remind INDEX` where INDEX is the `Person` the user wants to set a reminder for.
+
+Given below is an example usage scenarios and the behavior of the program specific to this feature.
+
+Step 1: The user launches the app. Within 5 seconds, a Reminder window pops up & displays any reminders the user has actively set. As the User does not have any active reminders set, they can add a reminder.
+
+Step 2: User executes the `remind` command by typing in `remind 1`, as the user wants to set a reminder for the client with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `Person` corresponding to the `Index` from `Model`. This `Person` is then added to the HashSet in `ReminderPersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by MainWindow and the `ReminderWindow` is launched. 
+
+Step 3: The User will be prompted with the Reminder window, containing the client the user just set a `Reminder` for.
+
+Step 4: The User uses the app for their normal use, after 1 minute of the Reminder window popping up, the Reminder window launches again to actively remind the User of any reminders.
+
+
 ## [Proposed] Upload Image
 The upload image feature is implemented by storing a set of `UserImage` containing
 a `FilePath` to an image file and optional `description` of the image. A `LinkedHashSet` in order
