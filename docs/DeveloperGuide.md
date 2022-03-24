@@ -164,6 +164,66 @@ This section describes some noteworthy details on how certain features are imple
 
 ##### Implementation
 
+The implementation of adding a friend into Amigos is facilitated by the 'AddCommand', 'AddCommandParser' in the `Logic` component,
+`UniquePersonList` and `Person` classes in the `Model` component, and `JsonAdaptedPerson` in the `Storage` component.
+
+A friend is a `Person` containing attributes - `FriendName`, `Phone`, `Address`, `Email`, `Description`, `Set<Tag>`
+containing a set of `Tag` objects and a `UniqueLogList` containing a list of `Log` objects.
+
+Given below is an example usage scenario and how the `Logic` and `Model` components behave at every
+step.
+
+1. User keys in a valid `AddCommand` `e.g. addfriend n/John Doe t/Friend` into the command box of the GUI.
+2. `AddressBookParser` calls `AddCommandParser::parse` and parses the input.
+   - `AddCommandParser::parse` converts the arguments entered by user into `Person` attributes by calling 
+       the`ParserUtil`class. It then instantiates a new `Person` with the given attributes returned by `ParserUtil`. 
+       (`ParserUtil` checks for the validity of the inputs according to the respective attribute constraints.
+       Next, an `AddCommand` is created with the new `Person` passed into it.
+3. When `AddCommand::execute` is called, the `Model` component will check if the `Person` to be added already
+   exists in Amigos. This check is done using `Model::hasPerson` which ultimately uses `Person::isSamePerson`
+   to check if two `Person` are equal by name only. 
+4. If no duplicate person exists, then `Model::addPerson` will be called and the newly created `Person` will 
+   be set into the `model` and added into the `UniquePersonList`.
+
+A sequence diagram showing the interactions between `AddCommand`, `AddCommandParser`, `ParserUtil` and `model`, 
+after the user has entered a valid `FriendName`, `Phone`, and `Email`.
+![AddFriendSequenceDiagram](images/AddFriendSequenceDiagram.png)
+
+##### Design Considerations
+
+**Aspect**: How to store optional fields in a Person
+Minimally, the `AddCommand` requires the user to enter the `FriendName` of the new `Person` to be added using the `n/` prefix. 
+The other fields are optional. This is to allow flexibility for the user to add a friend into Amigos even if the user is unsure 
+about certain particulars (e.g `Address`/ `Email`) of a friend.
+
+* Current implementation
+  - To allow this, we place a `null` value into the value of the optional attribute that was not provided by the user.
+   For example, if an address is not given, then for the newly created `Person` object `p`, `p.address.value` will be `null`.
+  - Whenever a `Person` object is instantiated, we ensure that all the attributes are non-null.
+  
+* Alternative implementation
+  - An alternative way is to simply pass `null` directly into the `Person` attributes. For example, if an address is not given,
+    then simply make `p.address` to be `null`. 
+  - While this may seem more convenient, it is error-prone because we would be passing null values around which
+    makes the occurrence of exceptions such as `NullPointerException` highly likely.
+ 
+**Aspect**: How to check that a `Person` already exists in Amigos
+Similar to AB3, Amigos prevents a user from adding a duplicate `Person`. 
+
+* Current implementation
+  - We check whether a `Person` is already in Amigos by `Person::isSamePerson` which makes use of `FriendName::equals`.
+    Furthermore, we made `FriendName::equals` case-insensitive, thus disallowing users from adding a person with the same 
+    name but in different capitalisation. 
+
+* Alternative implementations 
+  - An alternative way is to define equality of 2 `Person` objects in a stricter way - to make sure that all the attributes
+    are the same (not just the `FriendName`) for 2 `Person` objects to be considered as duplicates. This means that more
+    checks must be done. 
+  - Another alternative way to define equality of 2 `Person` objects would be by using case-sensitive `FriendName`, but
+    we decided that our current implementation makes more logical sense. 
+
+    
+
 #### 1.2 Delete friend
 
 ##### Implementation
