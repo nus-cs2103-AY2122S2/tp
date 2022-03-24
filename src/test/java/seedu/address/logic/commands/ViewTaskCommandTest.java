@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,11 @@ import seedu.address.testutil.GroupBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for {@code ViewTaskCommand}.
  */
 public class ViewTaskCommandTest {
+
+    @Test
+    public void constructor_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ViewTaskCommand(null));
+    }
 
     @Test
     public void equals() {
