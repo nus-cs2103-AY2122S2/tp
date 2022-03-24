@@ -39,8 +39,8 @@ MainWindow *-right-> "1" ShowDetailsCard
 MainWindow --> "0..1" HelpWindow
 
 ShowListPanel -down-> "*" ShowCard
-ShowListPanel ..> ShowDetailsCard
-ShowDetailsCard ..> ShowCard
+ShowListPanel --> ShowDetailsCard
+ShowDetailsCard --> ShowCard
 
 MainWindow --|> UiPart
 ResultDisplay --|> UiPart
