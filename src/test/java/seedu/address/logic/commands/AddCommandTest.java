@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -146,8 +148,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public Set<UserImage> getViewImageSet() {
+            throw new AssertionError("this method should not be called.");
+        }
+
+        @Override
         public void updateMatchList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateViewPerson(Set<UserImage> userImages) {
+            throw new AssertionError("this method should not be called.");
         }
 
         public void setFavouriteStatus(Person personToFavourite) {

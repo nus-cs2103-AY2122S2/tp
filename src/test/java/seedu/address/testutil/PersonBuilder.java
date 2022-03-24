@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,7 +26,6 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_USERTYPE = "buyer";
-    public static final UserImage DEFAULT_USERIMAGE = null;
 
     private Name name;
     private Phone phone;
@@ -35,7 +35,7 @@ public class PersonBuilder {
     private Favourite favourite;
     private Optional<Preference> preference;
     private UserType userType;
-    private UserImage userImage;
+    private Set<UserImage> userImages;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,7 +49,7 @@ public class PersonBuilder {
         properties = new HashSet<>();
         preference = Optional.empty();
         userType = new UserType(DEFAULT_USERTYPE);
-        userImage = DEFAULT_USERIMAGE;
+        userImages = new LinkedHashSet<>();
     }
 
     /**
@@ -64,7 +64,7 @@ public class PersonBuilder {
         properties = personToCopy.getProperties();
         preference = personToCopy.getPreference();
         userType = personToCopy.getUserType();
-        userImage = personToCopy.getUserImage();
+        userImages = personToCopy.getUserImages();
     }
 
     /**
@@ -116,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, favourite, address, properties, preference, userType, userImage);
+        return new Person(name, phone, email, favourite, address, properties, preference, userType, userImages);
     }
 
 }

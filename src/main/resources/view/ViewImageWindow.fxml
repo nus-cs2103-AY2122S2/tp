@@ -25,7 +25,7 @@
                         <children>
                            <TextArea fx:id="description" layoutX="40.0" layoutY="6.0" prefHeight="129.0" prefWidth="667.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0" />
                            <Button layoutY="26.0" mnemonicParsing="false" onMouseClicked="#onPreviousClick" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="690.0" AnchorPane.topAnchor="0.0" />
-                           <Button layoutX="687.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#onNextClick" text="&lt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="690.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           <Button layoutX="687.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#onNextClick" text=">" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="690.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         </children>
                      </AnchorPane>
                  </items>

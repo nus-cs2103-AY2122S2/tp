@@ -13,3 +13,8 @@
 .text-area .viewport {
     -fx-background-color: transparent;
 }
+
+.button {
+    -fx-padding: 5 7 5 7;
+    -fx-background-color: dimgray;
+}

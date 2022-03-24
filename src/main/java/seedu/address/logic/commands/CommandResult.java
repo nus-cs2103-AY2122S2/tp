@@ -77,12 +77,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && showMatch == otherCommandResult.showMatch
+                && showImage == otherCommandResult.showImage
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showMatch, exit);
+        return Objects.hash(feedbackToUser, showHelp, showMatch, showImage, exit);
     }
 
     @Override
