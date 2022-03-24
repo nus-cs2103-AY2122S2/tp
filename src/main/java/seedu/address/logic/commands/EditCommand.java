@@ -10,7 +10,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -44,7 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_PROPERTY + "PROPERTY]..."
-            + "[" + PREFIX_USERTYPE + "USERTYPE]\n"
+            + "[" + PREFIX_USERTYPE + "USERTYPE] "
             + "[" + PREFIX_USERIMAGE + "FILEPATH:DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "

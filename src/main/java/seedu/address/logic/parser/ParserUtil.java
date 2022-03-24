@@ -219,6 +219,9 @@ public class ParserUtil {
         return new UserType(trimmedUserType);
     }
 
+    /**
+     * Parses a {@code Collection<String> userImage} into a {@code Set<UserImage>}.
+     */
     public static Set<UserImage> parseUserImages(Collection<String> userImages) throws ParseException {
         requireNonNull(userImages);
         Set<UserImage> userImageSet = new LinkedHashSet<>();
@@ -228,6 +231,12 @@ public class ParserUtil {
         return userImageSet;
     }
 
+    /**
+     * Parses a {@code String userImage} into a {@code UserImage}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userImage} is invalid.
+     */
     public static UserImage parseUserImage(String userImage) throws ParseException {
         String trimmedUserImage = userImage.trim();
         String[] splitUserImage = trimmedUserImage.split(":");
@@ -240,6 +249,12 @@ public class ParserUtil {
         return new UserImage(filePath, description);
     }
 
+    /**
+     * Parses a {@code String filePath} into a {@code FilePath}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filePath} is invalid.
+     */
     public static FilePath parseFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
@@ -249,9 +264,12 @@ public class ParserUtil {
         return new FilePath(trimmedFilePath);
     }
 
-    public static String parseDescription(String description) throws ParseException {
+    /**
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDescription(String description) {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        return description;
+        return trimmedDescription;
     }
 }

@@ -6,6 +6,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+/**
+ * Parses input arguments and creates a new ViewImageCommand object
+ */
 public class ViewImageCommandParser implements Parser<ViewImageCommand> {
 
     @Override

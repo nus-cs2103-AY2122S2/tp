@@ -8,12 +8,14 @@ import seedu.address.model.person.Person;
 import seedu.address.model.userimage.UserImage;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Opens viewimagewindow with images associated to person at index
+ */
 public class ViewImageCommand extends Command{
     public static final String COMMAND_WORD = "viewimage";
     public static final String MESSAGE_VIEW_SUCCESS = "Image displayed";

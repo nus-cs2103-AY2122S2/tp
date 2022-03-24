@@ -5,6 +5,9 @@ import java.io.File;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Creates a new FilePath object from a valid filePath
+ */
 public class FilePath {
 
     public static final String MESSAGE_CONSTRAINTS = "File not found. Please check your file path";
@@ -17,6 +20,9 @@ public class FilePath {
         value = filePath;
     }
 
+    /**
+     * Checks to ensure that the given filepath leads to an existing file
+     */
     public static boolean isValidFilePath(String filePath) {
         File file = new File(filePath);
         return file.exists();

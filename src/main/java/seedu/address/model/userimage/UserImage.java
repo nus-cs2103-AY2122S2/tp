@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Creates a UserImage object that contains an image file with description
+ */
 public class UserImage {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -32,6 +35,9 @@ public class UserImage {
         return image;
     }
 
+    /**
+     * Checks to ensure that file in filepath is an image file
+     */
     public boolean isImage() {
         try {
             return ImageIO.read(image) != null;

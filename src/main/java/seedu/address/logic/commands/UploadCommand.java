@@ -14,7 +14,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
- * Adds image of property to an existing person in the address book.
+ * Adds image to an existing person in the address book.
  */
 public class UploadCommand extends Command {
 
@@ -59,6 +59,6 @@ public class UploadCommand extends Command {
         return other == this // short circuit if same object
           || (other instanceof UploadCommand // instanceof handles nulls
           && targetIndex.equals(((UploadCommand) other).targetIndex))
-          && userImage.equals((((UploadCommand) other).userImage)); // state check
+          && userImage.equals((((UploadCommand) other).userImage));
     }
 }

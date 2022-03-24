@@ -17,7 +17,7 @@ public class CommandResult {
     /** Match information should be shown to the user. */
     private final boolean showMatch;
 
-    /** Image associated to client should be shown to the user. */
+    /** Images associated to client should be shown to the user. */
     private final boolean showImage;
 
     /** The application should exit. */
