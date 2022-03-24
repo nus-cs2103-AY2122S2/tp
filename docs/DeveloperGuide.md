@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
 * Referred to [CS2103T textbook](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/index.html) for fundamental knowledge on software development.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,23 +157,28 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Delete multiple persons enhancement
 
-The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
-behaviour by extending the validity checks to the entire string of input.
-
+### Original implementation
 Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
 in the contact list might change depending on the order of deletion. <br>
 
 **For example:** <br>
-`delete 1 2 3` will throw an exception as there is no longer an index 3 during the 3rd deletion.
+In a list with only 3 contacts, `delete 1 2 3` will not be allowed as there is no longer an index 3 during the 3rd deletion.
+
+### Current implementation
+
+The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
+behaviour by extending the validity checks on the entire string of input.
 
 The workaround is then to delete each person from the largest to the smallest index. The success message displays the details
 of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion. 
 
 **For example:** <br>
-`delete 1 2 3` extracts the information out of Person 1, Person 2 and Person 3 according to the last shown list.<br>
-Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process.
+Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
-The Sequence Diagram below illustrates the interactions within the Logic component for the execute("delete 1 2 3") API call.
+First, information about Person 1, Person 2 and Person 3 will be extracted according to the last shown list.<br>
+Then, Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process.
+
+The Sequence Diagram below illustrates the interactions within the Logic component for the `execute("delete 1 2 3")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
 
