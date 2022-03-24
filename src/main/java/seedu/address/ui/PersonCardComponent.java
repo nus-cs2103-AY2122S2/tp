@@ -46,8 +46,7 @@ public class PersonCardComponent extends UiPart<Region> {
     private FlowPane modules;
     @FXML
     private FlowPane ccas;
-    @FXML
-    private Label l;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -63,7 +62,6 @@ public class PersonCardComponent extends UiPart<Region> {
         person.getEducations().stream()
                 .sorted(Comparator.comparing(edu -> edu.tagName))
                 .forEach(edu -> educations.getChildren().add(new Label(edu.tagName)));
-
         person.getInternships().stream()
                 .sorted(Comparator.comparing(intern -> intern.tagName))
                 .forEach(intern -> internships.getChildren().add(new Label(intern.tagName)));
