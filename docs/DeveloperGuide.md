@@ -95,18 +95,18 @@ There are two commands that are associated with the feature which are namely `up
 Below is an example usage scenerio and the behaviour of the program:
 
 Step 1: User calls the `upload` command.
-`UploadCommandParser` would then be used to parse the command inputted to obtain the `index` of the `Person` to add 
-the image with, the `filepath` to the file which is checked whether it is an existing file and 
+`UploadCommandParser` would then be used to parse the command inputted to obtain the `index` of the `Person` to add
+the image with, the `filepath` to the file which is checked whether it is an existing file and
 the `description` if provided.
 
-Step 2: A `UserImage` is created from the parameters obtained from `UploadCommandParser` that checks to ensure that the 
+Step 2: A `UserImage` is created from the parameters obtained from `UploadCommandParser` that checks to ensure that the
 file `FilePath` leads to is an image before adding it to the
 `Person`.
 
-Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parsers to get the `index` of the `Person` to 
+Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parsers to get the `index` of the `Person` to
 view the all the `UserImage` in the `Person`.
 
-Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`. 
+Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`.
 The `viewImageWindow` is the displayed after it retrieves the set from `model`
 
 Step 5: The set of `UserImage` is then converted into a `ArrayList` and the first image is displayed in the window.
