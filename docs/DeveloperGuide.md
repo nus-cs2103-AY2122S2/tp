@@ -278,11 +278,11 @@ user to replace the list of students with an empty one. Previous data are swiped
 
 The edit mechanism implements the following sequence for the method call execute("edit").
 
-This feature is enhance so that if the field values for the tag is the same as the field value of the corresponding person in the address book, then an exception will be thrown.
+This feature is enhanced so that if the field values for the tag is the same as the field value of the corresponding person in the address book, then an exception will be thrown.
 
 eg.
 Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`<br>
-`edit 1 f/SOC` will throw an exception since the field value to be edited is the same, while `edit 1 f/FASS` will proceed to update the field value of the perosn.
+`edit 1 f/SOC` will throw an exception since the field value to be edited is the same, while `edit 1 f/FASS` will proceed to update the field value of the person.
 
 **Path Execution of Edit Feature Activity Diagram is shown below:**
 ![ClearFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
@@ -290,6 +290,30 @@ Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
+
+### Filter feature
+
+The filter mechanism implements the following sequence for the method call execute("filter").
+
+#### What is the filter feature
+
+The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block. 
+
+The `filter` command is as follows:
+
+`filter cs/[COVID STATUS] f/[FACULTY] b/[BLOCK]`
+
+The user can choose whether to input filter criteria for some or all of the fields. However, at least one field must be specified. <br>
+
+The user can thus choose different combinations of filter criteria depending on the motive. For example, if a block head wants to cater to the covid-positive students in a certain block, the user can simply filter by both covid status and block to find out the details of this group of people. 
+
+eg.
+`filter cs/positive f/soc` <br>
+This is still a valid input even though the filter criteria for block was not specified. The resultant list will contain students who are both covid-positive and from the faculty "SOC". 
+
+**Path Execution of Filter Feature Activity Diagram is shown below:**
+![FilterFeatureActivityDiagram](images/FilterFeatureActivityDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 
