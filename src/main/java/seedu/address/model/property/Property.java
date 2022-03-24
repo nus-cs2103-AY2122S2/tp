@@ -35,6 +35,10 @@ public class Property {
         return region;
     }
 
+    public String getRegionInString() {
+        return region.toString();
+    }
+
     public Address getAddress() {
         return address;
     }

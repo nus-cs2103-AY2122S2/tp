@@ -178,7 +178,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the statistics window or focuses on it if it's already opened.
+     * Fills data of pie chart and opens the statistics window.
      */
     @FXML
     public void handleStatistics() {

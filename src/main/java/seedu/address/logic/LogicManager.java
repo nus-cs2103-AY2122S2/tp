@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Iterator;
@@ -78,6 +80,8 @@ public class LogicManager implements Logic {
      */
     @Override
     public ObservableList<Person> getFavouritedPersonList() {
+        //Resets to full list of Persons to prevent any logical error after `find` command
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         ObservableList<Person> favouritedList = FXCollections.observableArrayList();
         for (Person person : getFilteredPersonList()) {
             if (person.getFavourite().getStatus()) {
@@ -96,19 +100,22 @@ public class LogicManager implements Logic {
     @Override
     public int getPersonsBasedOnRegion(String region) {
         int totalPersons = 0;
-        if (Region.isValidRegion(region)) {
+        //Resets to full list of Persons to prevent any logical error after `find` command
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (Region.isValidRegion(region)) { //defensive code
             for (Person person : getFilteredPersonList()) {
                 if (person.getUserType().isBuyer()) { //if is buyer, check region in preference
                     Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
-                    if (preference != null && preference.getRegion().toString().equals(region)) {
+                    if (preference != null && preference.getRegionInString().equals(region)) {
                         totalPersons++;
                     }
                 } else { //if is seller, check region in Property
                     Set<Property> setOfPropertyValues = person.getProperties();
                     if (!setOfPropertyValues.isEmpty()) {
                         Iterator<Property> propertyIterator = setOfPropertyValues.iterator();
-                        while (propertyIterator.hasNext()) {
-                            if (propertyIterator.next().getRegion().toString().equals(region)) {
+                        while (propertyIterator.hasNext()) { //Iterate through every property seller holds
+                            Property property = propertyIterator.next();
+                            if (property != null && property.getRegionInString().equals(region)) {
                                 totalPersons++;
                             }
                         }
