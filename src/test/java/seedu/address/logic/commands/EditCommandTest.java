@@ -1,9 +1,14 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_ACCEPTED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_PENDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_COMPLETED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -25,7 +30,9 @@ import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.testutil.CandidateBuilder;
 import seedu.address.testutil.EditCandidateDescriptorBuilder;
 
@@ -149,6 +156,25 @@ public class EditCommandTest {
                 new EditCandidateDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_trigger_success() {
+        EditPersonDescriptor editPersonDescriptor = new EditCandidateDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withApplicationStatus(VALID_APPLICATION_PENDING)
+                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+                .build();
+        assertEquals(editPersonDescriptor.getApplicationStatus().get(),
+                new ApplicationStatus(VALID_APPLICATION_PENDING));
+        assertEquals(editPersonDescriptor.getInterviewStatus().get(),
+                new InterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED));
+
+        editPersonDescriptor.setApplicationStatus(new ApplicationStatus(VALID_APPLICATION_ACCEPTED));
+        assertEquals(editPersonDescriptor.getApplicationStatus().get(),
+                new ApplicationStatus(VALID_APPLICATION_ACCEPTED));
+        assertEquals(editPersonDescriptor.getInterviewStatus().get(),
+                new InterviewStatus(VALID_INTERVIEW_COMPLETED));
     }
 
     @Test
