@@ -37,7 +37,7 @@ ShowList *--> "1" UniqueShowList
 UniqueShowList --> "~* all" Show
 Show *--> "1" Name
 Show *--> "1" Status
-Show *--> "0 ... 1" Comment
+Show *--> "1" Comment
 Show *--> "*" Tag
 
 Name -[hidden]right-> Status

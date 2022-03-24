@@ -254,6 +254,29 @@ The following activity diagram summarizes what happens when a user executes a va
 
 ---
 
+### Status feature
+
+#### What it does it do
+`Status` class is an attribute within the `Show` class. `Status` represents the 
+watched status of the show which can be represented by `completed` and `watching`. 
+
+#### Implementation
+
+`Status` class is implemented as a `enum` class. Enumerations 
+are a list of named constants, where the named constants are `completed` and `watching`.
+It is also possible to implement `Status` as a normal class encapsulating a String or Integer which would 
+represent the status of the show (`watching` & `completed`). However, the former implementation
+is chosen due to certain advantages that it offers.
+
+#### Design considerations:
+
+1. Enumerations offer compile time type safety, reducing the risk of runtime errors.
+2. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would 
+reference the same `enum` class. However, for the class implementation, a new `Status` instance is
+instantiated each time a `Show` object is created.
+
+---
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
