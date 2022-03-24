@@ -69,6 +69,7 @@ public class FindEventCommandTest {
                                               List<Event> expectedFilteredList) {
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
+        Collections.sort(expectedFilteredList);
         assertEventCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedFilteredList, model.getFilteredEventList());
     }
@@ -101,7 +102,7 @@ public class FindEventCommandTest {
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         predicate = new EventFilterPredicateBuilder().withNameSubstring(MATCHING_EVENT_NAME_ENTIRE)
                 .clearDate().withFriendNameSubstrings().build();
-        expectedFilteredList = List.of(EVENT_WITH_DESCRIPTION);
+        expectedFilteredList = Arrays.asList(EVENT_WITH_DESCRIPTION);
         assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
     }
 
@@ -190,7 +191,7 @@ public class FindEventCommandTest {
                 .withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING)
                 .withDate(MATCHING_DATE).withFriendNameSubstrings(MATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2)
                 .build();
-        List<Event> expectedFilteredList = List.of(EVENT_WITH_DIFF_DESCRIPTION);
+        List<Event> expectedFilteredList = Arrays.asList(EVENT_WITH_DIFF_DESCRIPTION);
 
         assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
     }
