@@ -6,12 +6,13 @@ import java.util.Objects;
 
 /**
  * Represents a Client's upcoming meeting.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present field values are validated, immutable, else the isMeetingScheduled will be false.
  */
 public class ScheduledMeeting {
 
     private final MeetingDate date;
     private final MeetingTime time;
+    private final boolean isMeetingScheduled;
 
     /**
      * Constructs an upcoming meeting with the specified date and time.
@@ -22,6 +23,17 @@ public class ScheduledMeeting {
         requireAllNonNull(date, time);
         this.date = date;
         this.time = time;
+        this.isMeetingScheduled = true;
+    }
+
+    /**
+     * Constructs a temporary empty upcoming meeting for each person if there
+     * is no upcoming meeting.
+     */
+    public ScheduledMeeting() {
+        this.date = null;
+        this.time = null;
+        this.isMeetingScheduled = false;
     }
 
     public MeetingDate getDate() {
@@ -63,7 +75,7 @@ public class ScheduledMeeting {
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, time);
+        return Objects.hash(date, time, isMeetingScheduled);
     }
 
     @Override

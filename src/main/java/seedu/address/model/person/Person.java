@@ -43,7 +43,7 @@ public class Person {
         this.tags.addAll(tags);
         this.prevDateMet = prevDateMet;
         this.info = info;
-        this.scheduledMeeting = null;
+        this.scheduledMeeting = new ScheduledMeeting();
     }
 
     /**
@@ -61,7 +61,7 @@ public class Person {
         this.tags.addAll(tags);
         this.prevDateMet = new PrevDateMet(LocalDate.now().toString());
         this.info = new Info("No further info");
-        this.scheduledMeeting = null;
+        this.scheduledMeeting = new ScheduledMeeting();
     }
 
     public Name getName() {
@@ -144,6 +144,7 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getPrevDateMet().equals(getPrevDateMet())
                 && otherPerson.getInfo().equals(getInfo());
+                // && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
     }
 
     @Override
