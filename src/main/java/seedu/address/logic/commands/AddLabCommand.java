@@ -22,6 +22,9 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New Lab added: %1$s";
     public static final String MESSAGE_DUPLICATE_LAB = "This Lab already exists in the TAddressBook";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "Note that the student list is currently empty. "
+            + "But Lab %1$s has been added to the Master Lab List.\n"
+            + "Subsequent additions of Students will include Lab %1$s.";
 
     private final Lab toAdd;
 
@@ -36,13 +39,18 @@ public class AddLabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        String resultString = MESSAGE_SUCCESS;
 
         if (model.hasLab(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LAB);
         }
 
+        if (model.getAddressBook().getStudentList().isEmpty()) {
+            resultString = MESSAGE_EMPTY_STUDENT_LIST;
+        }
+
         model.addLab(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.labNumber));
+        return new CommandResult(String.format(resultString, toAdd.labNumber));
     }
 
     @Override
