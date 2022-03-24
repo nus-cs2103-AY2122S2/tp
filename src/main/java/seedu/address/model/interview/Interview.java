@@ -58,7 +58,7 @@ public class Interview {
      * Checks if the interview is for the specified position.
      */
     public boolean isInterviewForPosition(Position p) {
-        return position.equals(p);
+        return position.isSamePosition(p);
     }
 
     /**
