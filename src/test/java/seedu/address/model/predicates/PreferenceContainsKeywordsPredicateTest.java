@@ -28,7 +28,8 @@ public class PreferenceContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PreferenceContainsKeywordsPredicate firstPredicateCopy = new PreferenceContainsKeywordsPredicate(firstPredicateKeywordList);
+        PreferenceContainsKeywordsPredicate firstPredicateCopy =
+                new PreferenceContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
