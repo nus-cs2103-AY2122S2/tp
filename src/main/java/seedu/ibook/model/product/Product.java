@@ -2,11 +2,13 @@ package seedu.ibook.model.product;
 
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.ibook.commons.core.Distinguishable;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.item.UniqueItemList;
@@ -15,7 +17,7 @@ import seedu.ibook.model.item.UniqueItemList;
  * Represents a Product in the ibook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Product {
+public class Product implements Distinguishable<Product> {
 
     // Identity fields
     private final Name name;
@@ -31,19 +33,14 @@ public class Product {
      * Every field must be present and not null.
      */
     public Product(Name name, Category category, Description description, Price price) {
-        requireAllNonNull(name, category, description, price);
-        this.name = name;
-        this.category = category;
-        this.description = description;
-        this.price = price;
-        filteredItems = new FilteredList<>(this.items.asUnmodifiableObservableList());
+        this(name, category, description, price, new ArrayList<>()); // Any empty implementation of List<Item> would do.
     }
 
     /**
      * Every field must be present and not null.
      */
     public Product(Name name, Category category, Description description, Price price, List<Item> items) {
-        requireAllNonNull(name, category, description, price);
+        requireAllNonNull(name, category, description, price, items);
         this.name = name;
         this.category = category;
         this.description = description;
@@ -89,6 +86,13 @@ public class Product {
     }
 
     /**
+     * Returns true if the {@code Item} is in the current viewed list.
+     */
+    public boolean hasItem(Item i) {
+        return filteredItems.contains(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code items}.
      * {@code key} must exist in items.
      */
@@ -121,7 +125,7 @@ public class Product {
      * Returns true if both products have the same name and expiry date.
      * This defines a weaker notion of equality between two products.
      */
-    public boolean isSameProduct(Product otherProduct) {
+    public boolean isSame(Product otherProduct) {
         if (otherProduct == this) {
             return true;
         }
