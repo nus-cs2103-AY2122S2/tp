@@ -281,7 +281,7 @@ The edit mechanism implements the following sequence for the method call execute
 This feature is enhance so that if the field values for the tag is the same as the field value of the corresponding person in the address book, then an exception will be thrown.
 
 eg.
-Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`
+Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`<br>
 `edit 1 f/SOC` will throw an exception since the field value to be edited is the same, while `edit 1 f/FASS` will proceed to update the field value of the perosn.
 
 **Path Execution of Edit Feature Activity Diagram is shown below:**
