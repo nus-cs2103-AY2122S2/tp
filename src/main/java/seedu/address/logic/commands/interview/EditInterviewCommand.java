@@ -158,7 +158,7 @@ public class EditInterviewCommand extends EditCommand {
         public EditInterviewDescriptor(EditInterviewDescriptor toCopy) {
             setApplicantIndex(toCopy.applicantIndex);
             setDate(toCopy.date);
-            setApplicantIndex(toCopy.applicantIndex);
+            setPositionIndex(toCopy.positionIndex);
         }
 
         /**
