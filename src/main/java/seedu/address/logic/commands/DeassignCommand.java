@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.AssignCommand.MESSAGE_GROUP_DOES_NOT_EXIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.List;
@@ -33,6 +32,8 @@ public class DeassignCommand extends Command {
     public static final String MESSAGE_PERSON_DOES_NOT_EXIST = "%1$s does not exist in %2$s.";
 
     public static final String MESSAGE_DEASSIGN_SUCCESS = "Student %1$s deassigned from %2$s";
+
+    public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in ArchDuke";
 
     private final Index index;
     private final Group group;
