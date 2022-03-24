@@ -174,8 +174,6 @@ A `Task` contains the following attributes,
 6. can be marked/unmarked based on whether the task is done or not.
 7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
 
-#### Design considerations:
-
 #### Aspect: How the components within Task are added or changed
 - **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
   * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
@@ -184,14 +182,79 @@ A `Task` contains the following attributes,
   * Pros: Less overhead as fewer objects are created
   * Cons: Prone to error as a Component might not be correctly changed
 
+### Task Adding feature
+
+#### What is Task Adding feature about?
+
+The Add Task mechanism is facilitated by `AddressBook`. This feature enhances `AddressBook` by allowing to store not only `Person`, but also `Task`. This is stored internally as a `UniquePersonList` and `UniqueTaskList`. Additionally, the feature implements the following operations:
+
+* `AddressBook#addTodo(Todo)` —  Adds the `Todo` Task to `UniqueTaskList`
+* `AddressBook#addDeadline(Deadline)` — Adds the `Deadline` Task to `UniqueTaskList`
+* `AddressBook#addEvent(Event)` — Adds the `Event` Task to `UniqueTaskList`
+
+For the command, the feature extends `command`, and is implemented as such:
+* `addTodo desc/TASK_DESCRIPTION` 
+* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
+
+#### Implementation Flow of Task Adding feature
+
+Given below is an example usage scenario and how the Task Adding mechanism behaves at each step.
+
+Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
+
+Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
+
+Step 2. The user executes `addTodo desc/Watch Netflix with Mum` command to create a new `Todo` Task.
+![AddTodo1](images/AddTodo.png)
+
+#### Design considerations:
+- The Task adding commands are straight-to-the-point and efficient for users to add Tasks to ManageEZPZ.
+- The prefixes allow users to understand what the different types of Task need in order to be created.
+
+#### UML Diagram for Adding Todo Task
+
+The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
+
+<img src="images/AddTaskActivityDiagram.png" width="250" />
+
+### Tagging Task to Employee feature
+
+#### What is Tagging Task to Employee feature about?
+
+The Tag Task mechanism is facilitated by `AddressBook`. 
+This feature enhances `AddressBook` by allowing users to assign multiple `Person` to a `Task`. Additionally, the feature implements the following operations:
+
+* `AddressBook#tagTask(Task,Person)` —  Assign `Person` to `Task`
+* `AddressBook#untagTask(Task,Person)` —  Deallocate the `Person` from `Task`
+
+For the command, the feature extends `command`, and is implemented as such:
+* `tagTask INDEX name/PERSON_NAME`
+* `untagTask INDEX name/PERSON_NAME`
+
+#### Implementation Flow of Tagging Task to Employee feature
+
+Given below is an example usage scenario and how the Tagging Task to Employee mechanism behaves at each step.
+
+Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
+
+Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
+
+Step 2. The user executes `tagTask 4 n/Alex Yeoh` command to assign `Alex Yeoh` to the 4th `Task`.
+![AddTodo1](images/TagTask.png)
+
+#### Design considerations:
+- The Tagging commands are efficient for users to assign a `Person` to be in-charge of a `Task`.
+- The Prefix allow users to simply input the name of the `Person` from ManageEZPZ.
+- Users will be able to see the `Task` assigned to `Person` immediately after tagging.
+
+#### UML Diagram for tagTask Command
+
+The following activity diagram summarizes what happens when a user executes a new `tagTask` command:
+
+<img src="images/TagTaskActivityDiagram.png" width="250" />
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
