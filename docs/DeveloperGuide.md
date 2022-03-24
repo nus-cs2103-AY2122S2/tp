@@ -48,7 +48,7 @@ Step 3. User can access the Favourites window by navigating to the menu item as 
 The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
 The left column shows the sellers, while the right column shows the buyers.
 
-Two `Person` make a match if one has at least one `property` that matches the other's `preference`.
+Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
 
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
