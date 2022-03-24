@@ -71,9 +71,12 @@ public class EventFilterPredicate implements Predicate<Event> {
         }
 
         EventFilterPredicate otherPredicate = (EventFilterPredicate) other;
-        return otherPredicate.eventNameSubstring.equals(eventNameSubstring)
-                && otherPredicate.date.equals(date)
+        boolean result = otherPredicate.eventNameSubstring.equals(eventNameSubstring)
                 && otherPredicate.isFilteredByDate == isFilteredByDate
                 && otherPredicate.friendNameSubstrings.equals(friendNameSubstrings);
+        if (isFilteredByDate) {
+            result = result && otherPredicate.date.equals(date);
+        }
+        return result;
     }
 }
