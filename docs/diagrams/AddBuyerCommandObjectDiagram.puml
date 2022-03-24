@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+show members
+
+object Buyer
+object AddBuyerCommand
+object Name {
+    name = "David"
+}
+object Phone {
+    phone = "12345678"
+}
+object PropertyToBuy
+
+AddBuyerCommand --> Buyer
+Buyer--> Name
+Buyer --> Phone
+Buyer --> PropertyToBuy
+@enduml
