@@ -36,19 +36,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
-     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_OPTION,
-                PREFIX_NAME,
-                PREFIX_PHONE,
-                PREFIX_EMAIL,
-                PREFIX_TAG,
-                PREFIX_MODULE,
-                PREFIX_NEWMOD);
+                ArgumentTokenizer.tokenize(args, PREFIX_OPTION,
+                                                 PREFIX_NAME,
+                                                 PREFIX_PHONE,
+                                                 PREFIX_EMAIL,
+                                                 PREFIX_TAG,
+                                                 PREFIX_MODULE,
+                                                 PREFIX_NEWMOD);
 
         Index index;
 
@@ -56,16 +55,30 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             logger.info(index.toString());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCommand.MODULE_MESSAGE_USAGE), pe);
+            if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
+                throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.MESSAGE_OPTION_NOT_FOUND));
+            } else {
+                if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.PERSON_MESSAGE_USAGE, pe);
+                } else {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.MODULE_MESSAGE_USAGE, pe);
+                }
+            }
+
+        }
+
+        if (index.getOneBased() <= 0) {
+            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.PERSON_MESSAGE_USAGE));
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
 
         if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.PERSON_MESSAGE_USAGE));
+            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.PERSON_MESSAGE_USAGE));
         }
+
+
 
         if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -81,8 +94,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
             Optional<Set<ModuleCode>> module = argMultimap.getValue(PREFIX_NEWMOD).isPresent()
-                ? parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get())
-                : Optional.empty();
+                    ? parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get())
+                    : Optional.empty();
             if (module.isEmpty() && !editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
@@ -100,7 +113,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
                 editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap
-                    .getValue(PREFIX_MODULE).get()));
+                                                                              .getValue(PREFIX_MODULE).get()));
             }
 
             if (!editModuleDescriptor.isAnyFieldEdited()) {
