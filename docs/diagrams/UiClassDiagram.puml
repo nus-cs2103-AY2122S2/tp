@@ -37,6 +37,8 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 ShowListPanel -down-> "*" ShowCard
+ShowListPanel --> ShowDetailsCard
+ShowDetailsCard --> ShowCard
 
 MainWindow -left-|> UiPart
 

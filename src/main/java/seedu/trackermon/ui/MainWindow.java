@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showDetailsCard = new ShowDetailsCard(null);
+        showDetailsCard = new ShowDetailsCard();
 
         showDetailsPlaceholder.setContent(showDetailsCard.getRoot());
         showDetailsCard.getRoot().prefWidthProperty().bind(showDetailsPlaceholder.widthProperty());
@@ -141,6 +141,8 @@ public class MainWindow extends UiPart<Stage> {
 
         primaryStage.widthProperty().addListener(stageSizeListener);
         primaryStage.heightProperty().addListener(stageSizeListener);
+
+        handleUpdateList();
     }
 
     /**
@@ -183,7 +185,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleModifyList() {
+    private void handleUpdateList() {
         showListPanel.handleUpdatedList();
     }
 
@@ -210,9 +212,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isModifyList()) {
-                handleModifyList();
-            }
+            handleUpdateList();
 
             return commandResult;
         } catch (CommandException | ParseException e) {

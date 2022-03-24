@@ -20,7 +20,6 @@ They can easily look up the list of shows if they need to.
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Sorting the data](#sorting-the-data)
-  * [Better Find [coming in v1.3]](#better-find-coming-in-v13)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)

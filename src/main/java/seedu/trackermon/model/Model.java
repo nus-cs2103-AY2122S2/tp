@@ -15,8 +15,8 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Show> PREDICATE_SHOW_ALL_SHOWS = unused -> true;
 
-    /** {@code Comparator} that always evaluate to 0 */
-    Comparator<Show> COMPARATOR_SHOW_ALL_SHOWS = (unused, unused2) -> 0;
+    /** {@code Comparator} that always evaluate to -1 */
+    Comparator<Show> COMPARATOR_SHOW_ALL_SHOWS = (unused, unused2) -> -1;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
