@@ -1,0 +1,17 @@
+@startuml
+start
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+:User executes mark command;
+
+if () then ([no flag specified])
+    :Display error message;
+else ([else])
+    :Find students with ids specified in flag;
+    :Create list of StudentAttendance objects for each student;
+    :Find lesson with matching class group id and week id;
+    :Update lesson with student attendance list;
+endif
+stop
+@enduml
