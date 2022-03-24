@@ -11,7 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PREV_DATE_MET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
@@ -21,7 +24,15 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Flag;
+import seedu.address.model.person.Info;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,9 +60,10 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "More than 1 person exists with that name. Please look at the"
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the"
             + "list below and enter the index of the client you wish to edit \n"
             + "Example: 1, 2, 3 ...";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book.";
     public static final String MESSAGE_INVALID_INDEX = "This index does not exist!";
 
     private final Name targetName;
@@ -84,7 +96,7 @@ public class EditCommand extends Command {
             lastShownList.setPredicate(predicate);
 
             if (lastShownList.size() > 1) {
-                return new CommandResult(MESSAGE_DUPLICATE_PERSON);
+                return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
 
             HustleBook tempHustleBook = new HustleBook();
