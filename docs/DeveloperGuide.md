@@ -238,6 +238,36 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Adding tasks to a group feature
+
+#### Proposed implementation
+
+The proposed `addTask` is implemented by adding enhancements to the current `Group` in the `AddressBook`.
+Similar to how a `Person` stores identities such as `Name` or `Phone`, this feature enables `Group` to stores
+`Task`. 
+
+### \[Proposed\] Upgrade the feature of FindCommand
+
+#### Proposed Implementation
+
+The current FindCommand allows the search of a contact through keywords.
+The keywords used are of `Name` of a `Person` and hence are facilitated by a class `NameContainsKeywordsPredicate`.
+The enhanced FindCommand allows the users to search a contact through keywords 
+which are the attributes of a person such as `Phone`, `Email`, `AcademicMajor` and `Tag`.
+
+The new feature is made possible through introducing an `AttributeContainsKeywordsPredicate` interface which is
+implemented by all the `Person`'s attributes. Hence, there are more classes being introduced -
+`NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate` and so on.
+
+Given below is the example usage scenario and how the FindCommand behaves at each step
+
+Step 1. How the initial FindCommand works with the `NameContainsKeywordsPredicate`
+
+Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
+
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -418,6 +448,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
        Use case resumes from step 1.
 
+* 2a. The task format is invalid.
+    * 2a1. ArchDuke shows an error message.
+
+      Use case resumes from step 1.
+
 **Use case: UC08 - Delete a task in a group**
 
 **MSS:**
@@ -453,6 +488,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The group index is invalid.
+
+    * 1a1. ArchDuke shows an error message.
+
+      Use case resumes from step 1.
+
+**Use case: UC10 - Find people from the contact list**
+
+**MSS:**
+
+1. User requests to find the contacts by inputting keywords based on the attribute prefix.
+2. ArchDuke displays all the contacts which have the keywords.
+   Use case ends.
+
+**Extensions**
+
+* 1a. The student contact attribute(s) input is/are in an invalid format.
 
     * 1a1. ArchDuke shows an error message.
 
