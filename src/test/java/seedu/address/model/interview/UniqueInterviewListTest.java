@@ -9,8 +9,11 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_CARL;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_NO_MATCHING_AVAILABILITY;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -73,6 +76,16 @@ public class UniqueInterviewListTest {
     public void containsConflictingInterview_interviewWithSameDateTimeInList_returnsTrue() {
         uniqueInterviewList.add(INTERVIEW_AMY_TYPICAL);
         assertTrue(uniqueInterviewList.containsConflictingInterview(INTERVIEW_BOB_TYPICAL));
+    }
+
+    @Test
+    public void checkCandidateAvailability_interviewDayMatchesCandidateAvailability_returnsTrue() {
+        assertTrue(uniqueInterviewList.checkCandidateAvailability(INTERVIEW_AMY_TYPICAL));
+    }
+
+    @Test
+    public void checkCandidateAvailability_interviewDayMatchesCandidateAvailability_returnsFalse() {
+        assertFalse(uniqueInterviewList.checkCandidateAvailability(INTERVIEW_NO_MATCHING_AVAILABILITY));
     }
 
     @Test

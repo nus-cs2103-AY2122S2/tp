@@ -42,6 +42,9 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_CONFLICTING_INTERVIEW =
             "Interview for another candidate clashes with the proposed time slot!";
 
+    public static final String MESSAGE_CANDIDATE_NOT_AVAILABLE =
+            "Candidate is not available on the proposed interview day!";
+
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;
 
@@ -75,6 +78,10 @@ public class ScheduleCommand extends Command {
 
         if (model.hasConflictingInterview(toAdd)) {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+        }
+
+        if (!model.hasMatchingAvailability(toAdd)) {
+            throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
         }
 
         model.addInterview(toAdd);

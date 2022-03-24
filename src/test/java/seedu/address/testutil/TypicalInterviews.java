@@ -19,6 +19,9 @@ import seedu.address.model.interview.Interview;
  */
 public class TypicalInterviews {
     public static final LocalDateTime TYPICAL_INTERVIEW_DATE_TIME = LocalDateTime.of(2022, Month.DECEMBER, 23, 10, 00);
+    public static final LocalDateTime THURSDAY_INTERVIEW_DATE_TIME = LocalDateTime.of(2080, Month.APRIL, 25, 10, 00);
+    public static final LocalDateTime TUESDAY_INTERVIEW_DATE_TIME = LocalDateTime.of(2080, Month.APRIL, 23, 10, 00);
+
 
     public static final Interview INTERVIEW_ALICE = new InterviewBuilder().withCandidate(TypicalPersons.ALICE)
             .withInterviewDateTime(VALID_ALICE_INTERVIEW_DATE_TIME).build();
@@ -30,6 +33,9 @@ public class TypicalInterviews {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Interview INTERVIEW_AMY_TYPICAL = new InterviewBuilder().withCandidate(TypicalPersons.AMY)
             .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
+    public static final Interview INTERVIEW_NO_MATCHING_AVAILABILITY =
+            new InterviewBuilder().withCandidate(TypicalPersons.ALICE)
+            .withInterviewDateTime(THURSDAY_INTERVIEW_DATE_TIME).build();
     public static final Interview INTERVIEW_BOB_TYPICAL = new InterviewBuilder().withCandidate(TypicalPersons.BOB)
             .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
 

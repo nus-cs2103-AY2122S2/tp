@@ -18,6 +18,7 @@ public class Interview {
     private final Candidate candidate;
     private final LocalDateTime interviewDateTime;
     private final LocalDateTime interviewEndDateTime;
+    private final int interviewDay;
 
     /**
      * Every field must be present and not null.
@@ -27,6 +28,7 @@ public class Interview {
         this.candidate = candidate;
         this.interviewDateTime = interviewDateTime;
         this.interviewEndDateTime = interviewDateTime.plusMinutes(INTERVIEW_DURATION_IN_MINUTES);
+        this.interviewDay = interviewDateTime.getDayOfWeek().getValue();
     }
 
     /**
@@ -67,6 +69,10 @@ public class Interview {
 
     public LocalDateTime getInterviewDateTime() {
         return this.interviewDateTime;
+    }
+
+    public int getInterviewDay() {
+        return this.interviewDay;
     }
 
     public LocalTime getInterviewStartTime() {

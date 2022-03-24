@@ -59,6 +59,16 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }
 
     /**
+     * Returns true if the day for {@code interview} matches an available day of the candidate.
+     * @param interview contains the details of the interview to be scheduled and candidate.
+     * @return true if the check finds a matching availability and false otherwise.
+     */
+    public boolean hasMatchingAvailability(Interview interview) {
+        requireNonNull(interview);
+        return interviews.checkCandidateAvailability(interview);
+    }
+
+    /**
      * Adds an interview to the interview schedule.
      * The interview must not already exist in the interview schedule.
      */
