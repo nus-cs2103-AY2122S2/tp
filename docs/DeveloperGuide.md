@@ -759,9 +759,8 @@ testers are expected to do more *exploratory* testing.
    
    5. Test case: Unknown command
       1. Command: `find2` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`.
-
-
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`.<br><br>
+      
 2. Find a show (Precise Find)
    1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
    
