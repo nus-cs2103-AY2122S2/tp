@@ -34,7 +34,8 @@ public class EditPositionCommandParser implements Parser<EditPositionCommand> {
     public EditPositionCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_POSITION, PREFIX_NUM_OPENINGS, PREFIX_DESCRIPTION);
+                ArgumentTokenizer.tokenize(args, PREFIX_POSITION, PREFIX_NUM_OPENINGS, PREFIX_DESCRIPTION,
+                        PREFIX_REQUIREMENT);
 
         Index index;
 
