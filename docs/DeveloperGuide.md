@@ -69,11 +69,11 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/ui/Ui.java))
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Task` object residing in the `Model`.
 
 ### Logic component
 
@@ -154,6 +154,88 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Task Marking feature
+
+#### What is Task Marking feature about?
+
+The Mark Task mechanism is facilitated by `AddressBook`. This feature allows the user to mark a task as done.
+
+For the command, the feature extends `command`, and is implemented as such:
+* `mark INDEX`
+
+#### Implementation Flow of Task Marking feature
+
+Given below is an example usage scenario and how the Mark Task mechanism behaves at each step.
+
+Step 1. The user lists all the task by listing the task with the 'list' command.
+
+Step 2. The user executes `mark 4` command to mark the task `Watch Netflix with Mum` as done.
+
+![](images/MarkTask.png)
+
+#### Design considerations
+
+- The user is able to mark a task as done through the index specified in the list view.
+
+#### UML Diagram for Task Marking
+
+![](images/MarkClassDiagram.png)
+
+### Task Unmarking feature
+
+#### What is Task Unmarking feature about?
+
+The Unmark Task mechanism is facilitated by `AddressBook`. This feature allows the user to mark a task as not done yet.
+
+For the command, the feature extends `command`, and is implemented as such:
+* `unmark INDEX`
+
+#### Implementation Flow of Task Unmarking feature
+
+Given below is an example usage scenario and how the Unmark Task mechanism behaves at each step.
+
+Step 1. The user lists all the task by listing the task with the 'list' command.
+
+Step 2. The user executes `unmark 4` command to mark the task `Watch Netflix with Mum` as not done yet.
+
+![](images/UnmarkTask.png)
+
+#### Design considerations
+
+- The user is able to mark a task as not done yet through the index specified in the list view.
+
+#### UML Diagram for Task Unmarking
+
+![](images/UnmarkClassDiagram.png)
+
+### Task Deleting feature
+
+#### What is Task Deleting feature about?
+
+The Delete Task mechanism is facilitated by `AddressBook`. This feature allows the user to delete a task.
+
+For the command, the feature extends `command`, and is implemented as such:
+* `delete INDEX`
+
+#### Implementation Flow of Task Deleting feature
+
+Given below is an example usage scenario and how the Delete Task mechanism behaves at each step.
+
+Step 1. The user lists all the task by listing the task with the 'list' command.
+
+Step 2. The user executes `delete 4` command to delete the task `Watch Netflix with Mum`.
+
+![](images/DeleteTask.png)
+
+#### Design considerations
+
+- The user is able to delete a task as through the index specified in the list view.
+
+#### UML Diagram for Task Deleting
+
+![](images/DeleteClassDiagram.png)
+
 
 ### **Task Components**
 - Added Classes into the model Component to encapsulate a Task.
