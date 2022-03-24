@@ -2,9 +2,7 @@ package seedu.address.model.common;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.person.FriendName;
-
-public abstract class Name {
+public abstract class Name implements Comparable<Name> {
 
     public final String fullName;
 
@@ -13,7 +11,7 @@ public abstract class Name {
      *
      * @param name a valid name
      */
-    protected Name(String name) {
+    public Name(String name) {
         requireNonNull(name);
         this.fullName = name;
     }
@@ -26,8 +24,8 @@ public abstract class Name {
         return fullName.hashCode();
     }
 
-
-    public int compareTo(FriendName name) {
+    @Override
+    public int compareTo(Name name) {
         return this.fullName.compareTo(name.fullName);
     }
 }
