@@ -2,17 +2,20 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.fxml.FXML;
-import javafx.stage.Stage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.ui.UiManager;
+import seedu.address.model.theme.DarkTheme;
+import seedu.address.model.theme.LightTheme;
+import seedu.address.model.theme.Theme;
 
 /**
  * Switch the current theme to either light or dark.
  */
 public class SwitchThemeCommand extends Command {
-    public static final String COMMAND_WORD = "switch_theme";
+    public static final String COMMAND_WORD = "theme";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switch the current theme. "
             + "Parameters: "
@@ -20,47 +23,31 @@ public class SwitchThemeCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "light";
 
-    public static final String MESSAGE_SUCCESS = "Switched theme to %1$s";
+    public static final String MESSAGE_SUCCESS = "Switched to %1$s";
+    public static final String MESSAGE_THEME_ALREADY_IN_USE = "You are using %1$s already";
 
-    private final Stage stage = UiManager.getMainWindow().getPrimaryStage();
+    private static final Logger logger = Logger.getLogger(SwitchThemeCommand.class.getName());
 
-    private final String theme;
+    private final Theme theme;
 
-    public SwitchThemeCommand(String theme) {
+    public SwitchThemeCommand(Theme theme) {
         this.theme = theme;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (theme.equals("dark")) {
-            switchDarkTheme();
-        } else {
-            switchLightTheme();
+        logger.log(Level.INFO, this.theme.toString());
+        if (theme.currentTheme().equals(theme)) {
+            throw new CommandException(String.format(MESSAGE_THEME_ALREADY_IN_USE, theme));
+        }
+        if (theme instanceof DarkTheme) {
+            new DarkTheme().applyTheme();
+        }
+        if (theme instanceof LightTheme) {
+            new LightTheme().applyTheme();
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, theme));
-    }
-
-    /**
-     * Switch to light theme.
-     */
-    @FXML
-    public void switchLightTheme() {
-        String lightThemeUrl = requireNonNull(getClass().getResource("/view/LightTheme.css"))
-                .toExternalForm();
-        this.stage.getScene().getStylesheets().clear();
-        this.stage.getScene().getStylesheets().add(lightThemeUrl);
-    }
-
-    /**
-     * Switch to dark theme.
-     */
-    @FXML
-    public void switchDarkTheme() {
-        String darkThemeUrl = requireNonNull(getClass().getResource("/view/DarkTheme.css"))
-                .toExternalForm();
-        this.stage.getScene().getStylesheets().clear();
-        this.stage.getScene().getStylesheets().add(darkThemeUrl);
     }
 
     @Override

@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.SwitchThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.theme.Theme;
 
 public class SwitchThemeCommandParser implements Parser<SwitchThemeCommand> {
     /**
@@ -13,7 +14,7 @@ public class SwitchThemeCommandParser implements Parser<SwitchThemeCommand> {
      */
     public SwitchThemeCommand parse(String args) throws ParseException {
         try {
-            String theme = ParserUtil.parseTheme(args);
+            Theme theme = ParserUtil.parseTheme(args);
             return new SwitchThemeCommand(theme);
         } catch (ParseException pe) {
             throw new ParseException(
