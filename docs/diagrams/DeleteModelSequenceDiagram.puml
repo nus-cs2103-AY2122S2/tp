@@ -9,13 +9,13 @@ end box
 
 title Delete ClassGroup
 
-[--> ModelManager : deleteEntity(CLASS)
+[--> ModelManager : deleteEntity(entityToDelete)
 activate ModelManager
 
-ModelManager -> TAssist : removeClassGroup(CLASS)
+ModelManager -> TAssist : removeClassGroup(entityToDelete)
 activate TAssist
 
-TAssist -> UniqueClassGroupList : remove(key)
+TAssist -> UniqueClassGroupList : remove(entityToDelete)
 activate UniqueClassGroupList
 
 UniqueClassGroupList --> TAssist
