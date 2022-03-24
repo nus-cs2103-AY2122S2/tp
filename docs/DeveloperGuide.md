@@ -157,7 +157,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Find feature
 
 #### What is the feature about?
-The `find` mechanism is facilitated by `AddressBook3`. The `find` command in `TAlent Assistant™`
+The `find` mechanism is facilitated by `AddressBook`. The `find` command in `TAlent Assistant™`
 has been enhanced based on the initial implementation of the `find` command in `AddressBook3`.
 
 The enhancement works by adding a new prefix in the `CliSyntax` class `k/`, which allows the
@@ -206,7 +206,34 @@ checks for the specific related entity, and should not have any other reason to 
 #### UML Diagrams
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens when a user executes a `find` command: <br>
-<img src="images/FindActivityDiagram.png" width="250" />
+<img src="images/FindActivityDiagram.png" width="550" />
+
+### Delete feature
+
+#### What is the feature about?
+The `delete` feature allows the user to delete a Candidate from the system.
+This feature has been enhanced based on the initial implementation of the `delete` command in `AddressBook`.
+
+#### How is the feature implemented?
+The main logic is implemented within `DeleteCommand` (which extends from `Command`) and `DeleteCommandParser`. 
+A minor enhancement was added to `DeleteCommand` such that if the candidate list is empty, a message indicating that 
+there are no candidates in the system is shown to the user (instead of invalid index),
+improving the accuracy of the feedback.
+
+
+#### Why is the feature implemented as such?
+**1. Deleting a candidate by `INDEX`** <br>
+The team's original idea was to delete a candidate by its attribute `StudentId` instead of `INDEX`
+as every candidate has their own unique `StudentId`. However, upon careful consideration, we realised
+that there are two possible problems that could arise from this alternative implementation:
+1. App requirements - TAlent Assistant should be faster than GUI
+2. Performance - Each time a delete command is executed, the system will be required to iterate through the entire candidate
+list to search for the candidate with the matching `StudentId`. 
+
+#### UML Diagrams
+**Activity Diagram**<br>
+The following activity diagram summarizes what happens when a user executes a `delete` command: <br>
+<img src="images/DeleteActivityDiagram.png" width="550" />
 
 ### \[Proposed\] Undo/redo feature
 
