@@ -177,6 +177,27 @@ This section describes some noteworthy details on how certain features are imple
   * Cons: Could be harder to access the necessary data for other functions like creating summary statistics
   * Cons: Does not make sense to have multiple of certain data fields, e.g. multiple skin types, multiple birthdays
  
+#### Delete multiple customers in a single command
+
+#### Overview
+- Delete command can allow multiple indexes, this allows for faster deletion of customer profiles.
+
+#### Implementation
+- Current implementation allows user to enter multiple indexes seperated by comma. All the indexes will be checked if
+they are integers and is a valid index. 
+- If any indexes fail the check, the command with be aborted. Only if all indexes pass the check, then command with be 
+executed.
+
+##### Design Considerations
+
+* **Option 1:** Does not abort command when an index fail the check and delete customer from valid indexes.
+  * Pros: Lenient on user error.
+  * Cons: User might be confused of the intended behavior of the command where different input can produce same effect.
+  * Cons: Difficult to decide what error should be allowed and not allowed.
+* **Option 2 (Current choice):** Only if all indexes pass the check, then command with be executed.
+  * Pros: Straightforward to implement.
+  * Pros: It is clear about how the command is intended to be used.
+  * Cons: Minor error will cause command to be aborted.
 
 ### Services
 
