@@ -339,9 +339,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. TA provides non-existent lab
 
     * 1a1. TAB shows error message
-    * 1a2. TAB requests for valid lab
 
-      Use case resumes from step 1
+      Use case ends
 
 * 1b. TA tries to filter an empty list
 
