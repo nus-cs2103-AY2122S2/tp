@@ -105,6 +105,14 @@ public class Product implements Distinguishable<Product> {
     }
 
     /**
+     * Updates {@code target} to {@code updatedItem}
+     * {@code target} must exist in items.
+     */
+    public void setItem(Item target, Item updatedItem) {
+        items.setItem(target, updatedItem);
+    }
+
+    /**
      * Sets the quantity of the specified item.
      */
     public void setItemCount(Item i, Quantity quantity) {

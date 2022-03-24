@@ -61,22 +61,16 @@ public interface Model {
     boolean hasProduct(Product product);
 
     /**
-     * Deletes the given product.
-     * The product must exist in the IBook.
-     */
-    void deleteProduct(Product target);
-
-    /**
      * Adds the given product.
      * {@code product} must not already exist in the IBook.
      */
     void addProduct(Product product);
 
     /**
-     * Adds the given item to {@code product}.
-     * {@code item} must not already exist in the IBook.
+     * Deletes the given product.
+     * The product must exist in the IBook.
      */
-    void addItem(Product product, Item item);
+    void deleteProduct(Product target);
 
     /**
      * Replaces the given product {@code target} with {@code editedProduct}.
@@ -86,13 +80,30 @@ public interface Model {
     void setProduct(Product target, Product editedProduct);
 
     /**
+     * Adds the given item to {@code product}.
+     * {@code item} must not already exist in the IBook.
+     */
+    void addItem(Product product, Item item);
+
+    /**
      * Deletes the given item from the product.
      * The product must exist in the iBook, and the item must exist in the product.
      */
     void deleteItem(Product targetProduct, Item target);
 
+    /**
+     * Updates the given item of a product.
+     * The product must exist in the iBook, and the item must exist in the product.
+     */
+    void updateItem(Product targetProduct, Item targetItem, Item updatedItem);
+
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
+
+    /**
+     * Gets the predicate of the current filter.
+     */
+    ObservableList<AttributeFilter> getProductFilters();
 
     /**
      * Adds a filter to the product list.
@@ -120,10 +131,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null
      */
     void updateFilteredItemListForProducts(Predicate<Item> predicate);
-
-
-    /**
-     * Gets the predicate of the current filter.
-     */
-    ObservableList<AttributeFilter> getProductFilters();
 }
