@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+(*)--> "User inputs Clear Command without any tags"
+--> "Tracey replace the existing address book\nwith an empty one"
+--> "All existing data are not retrievable"
+--> "Tracey tells user address book is cleared"
+-->(*)
+
+@enduml
