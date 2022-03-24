@@ -79,6 +79,10 @@ public class ManualMessages {
             + "Format : progress m/MODULE_CODE tn/TASK_NAME \n"
             + "Example: progress m/CS2100 tn/Assignment 1";
 
+        public static final String MANUAL_MESSAGE_HISTORY_COMMAND = "Displays a list of previously executed commands. \n"
+            + "Format : history \n"
+            + "Example: history";
+
     public static final String MANUAL_MESSAGE_ALL_COMMANDS = "Here are all the commands: \n"
             + "1. add \n"
             + "2. delete \n"
@@ -92,9 +96,10 @@ public class ManualMessages {
             + "10. list \n"
             + "11. assign \n"
             + "12. progress \n"
-            + "13. manual \n"
-            + "14. help \n"
-            + "15. exit \n"
+            + "13. history \n"
+            + "14. manual \n"
+            + "15. help \n"
+            + "16. exit \n"
             + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";

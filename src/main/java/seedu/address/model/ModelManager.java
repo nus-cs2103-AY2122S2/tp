@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final CommandHistory commandHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +39,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.commandHistory = new CommandHistory();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -149,6 +151,21 @@ public class ModelManager implements Model {
         requireNonNull(moduleCode);
         requireNonNull(task);
         return addressBook.checkProgress(moduleCode, task);
+    }
+    //=========== Command History ============================================================================
+    @Override
+    public CommandHistory getCommandHistory() {
+        return commandHistory;
+    }
+
+    @Override
+    public boolean isCommandHistoryEmpty() {
+        return commandHistory.isEmpty();
+    }
+
+    @Override
+    public void addToCommandHistory(String commandText) {
+        commandHistory.addToHistory(commandText);
     }
     //=========== Filtered Person List Accessors =============================================================
 

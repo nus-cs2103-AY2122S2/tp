@@ -127,4 +127,20 @@ public interface Model {
 
     /** Sorts the list of persons in alphabetical order by their names */
     void sortFilteredPersonList();
+
+    /**
+     * Returns the user's command history.
+     */
+    CommandHistory getCommandHistory();
+
+    /**
+     * Returns true if the command history is empty.
+     */
+    boolean isCommandHistoryEmpty();
+
+    /**
+     * Adds the command (as a {@code String}) to command history.
+     * @param commandText
+     */
+    void addToCommandHistory(String commandText);
 }
