@@ -140,6 +140,14 @@ public interface Model {
      */
     void addPosition(Position position);
 
+    /**
+     * Replaces the given position {@code target} with {@code editedPosition}.
+     * {@code target} must exist in the address book.
+     * The position identity of {@code editedPosition} must not be the same as another existing position
+     * in the address book.
+     */
+    void setPosition(Position target, Position editedPosition);
+
     /** Returns an unmodifiable view of the filtered position list */
     ObservableList<Position> getFilteredPositionList();
 }
