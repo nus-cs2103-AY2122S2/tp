@@ -8,10 +8,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import manageezpz.logic.parser.Prefix;
 import manageezpz.model.Model;
-import manageezpz.model.task.Task;
-import manageezpz.model.task.Todo;
-
-import java.util.function.Predicate;
 
 /**
  * Lists all persons in the address book to the user.

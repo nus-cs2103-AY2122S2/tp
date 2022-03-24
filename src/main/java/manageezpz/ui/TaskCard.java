@@ -1,5 +1,8 @@
 package manageezpz.ui;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -10,9 +13,6 @@ import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
-
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * An UI component that displays information of a {@code Task}.
