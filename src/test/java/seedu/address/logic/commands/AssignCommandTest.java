@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -44,5 +45,15 @@ public class AssignCommandTest {
         AssignCommand command = new AssignCommand(INDEX_FIRST_PERSON, groupToAssign);
 
         assertCommandFailure(command, model, AssignCommand.MESSAGE_GROUP_DOES_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Group groupToAssign = new GroupBuilder().build();
+
+        AssignCommand assignCommand = new AssignCommand(outOfBoundIndex, groupToAssign);
+
+        assertCommandFailure(assignCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 }
