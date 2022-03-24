@@ -62,5 +62,4 @@ CommandResult --> FindCommand : :CommandResult
 deactivate CommandResult
 
 FindCommand --> LogicManager : :CommandResult
-
 @enduml
