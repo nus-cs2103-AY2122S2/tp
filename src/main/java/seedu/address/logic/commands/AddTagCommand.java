@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -23,6 +26,8 @@ public class AddTagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";
 
+    private static Logger logger = Logger.getLogger("AddTag");
+
     private final Tag toAdd;
 
     /**
@@ -38,6 +43,7 @@ public class AddTagCommand extends Command {
         requireNonNull(model);
 
         if (model.hasTag(toAdd)) {
+            logger.log(Level.WARNING, "Add tag error: duplicate tag");
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
