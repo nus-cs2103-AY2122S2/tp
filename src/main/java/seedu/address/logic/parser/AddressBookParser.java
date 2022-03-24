@@ -98,9 +98,6 @@ public class AddressBookParser {
         case ProgressCommand.COMMAND_WORD:
             return new ProgressCommandParser().parse(arguments);
 
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
