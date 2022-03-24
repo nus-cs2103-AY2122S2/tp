@@ -153,6 +153,14 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Upload an Image : `upload`
+
+Uploads an image and description to be associated with a person.
+
+### View image of person: `viewimage`
+
+View images that are associated with a person in another window.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -200,8 +208,6 @@ Format: `help`
 1. Link to the full user guide
 2. Buttons to access the different help sections
 3. Help contents
-
-### User onboarding [Coming soon]
 
 ### Saving the data
 
