@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
             viewImageWindow.focus();
         }
     }
-      
+
     /**
      * Opens the favourites window or focuses on it if it's already opened.
      */

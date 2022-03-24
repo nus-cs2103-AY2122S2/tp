@@ -33,7 +33,7 @@ public class CommandResultTest {
 
         // different showImage value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, false, false)));
-      
+
         // different showFavourites value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true, false)));
 
@@ -56,10 +56,10 @@ public class CommandResultTest {
 
         // different showImage value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false, false).hashCode());
-      
+
         // different showFavourites value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true, false).hashCode());
-      
+        
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, false, true).hashCode());
     }

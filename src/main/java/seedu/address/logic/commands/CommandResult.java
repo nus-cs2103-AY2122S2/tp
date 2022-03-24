@@ -19,7 +19,7 @@ public class CommandResult {
 
     /** Images associated to client should be shown to the user. */
     private final boolean showImage;
-  
+
     /** Favourites information should be shown to the user. */
     private final boolean showFavourites;
 
@@ -30,7 +30,7 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showMatch, boolean showImage, 
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showMatch, boolean showImage,
                          boolean showFavourites, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
