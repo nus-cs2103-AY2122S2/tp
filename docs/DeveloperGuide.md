@@ -84,7 +84,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays various `Entity` objects residing in the `Model`.
 
 ### Logic component
 
@@ -379,9 +379,10 @@ Step 4. The user executes `mark attend c/1 w/1 s/1,2` to mark attendance for a l
 
 ![MarkUnmarkState1](images/MarkUnmarkState1.png)
 
-The following sequence diagram shows how the list operation works:
+The following sequence diagram shows how the mark operation works:
 
 ![MarkUnmarkSequenceDiagram](images/MarkUnmarkSequenceDiagram.png)
+![MarkUnmarkSequenceDiagram](images/MarkUnmarkModelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 

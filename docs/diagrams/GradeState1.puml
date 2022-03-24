@@ -30,11 +30,11 @@ Module1 *--> ClassGroup1
 Module1 *--> Assessment1
 ClassGroup1 --> Student1
 ClassGroup1 --> Student2
-Assessment1 --> Attempt1
-Assessment1 --> Attempt2
+Assessment1 *--> Attempt1
+Assessment1 *--> Attempt2
 Attempt1 --> Student1
-Attempt1 --> Grade1
+Attempt1 *--> Grade1
 Attempt2 --> Student2
-Attempt2 --> Grade2
+Attempt2 *--> Grade2
 
 @end

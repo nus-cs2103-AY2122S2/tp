@@ -23,7 +23,7 @@ ClassGroup1 --> Student2
 ClassGroup1 *--> Lesson1
 Lesson1 *--> StudentAttendance1
 Lesson1 *--> StudentAttendance2
-StudentAttendance1 *--> Student1
-StudentAttendance2 *--> Student2
+StudentAttendance1 --> Student1
+StudentAttendance2 --> Student2
 
 @end
