@@ -33,7 +33,7 @@ public class BuyerBuilder {
     public BuyerBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        appointment = new Appointment(DEFAULT_APPOINTMENT);
+        appointment = new Appointment("");
         tags = new HashSet<>();
         desiredProperty = NullPropertyToBuy.getNullPropertyToBuy();
     }

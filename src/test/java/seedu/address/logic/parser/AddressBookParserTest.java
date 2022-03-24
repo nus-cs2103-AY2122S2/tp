@@ -97,7 +97,8 @@ public class AddressBookParserTest {
     public void parseCommand_addbuyer() throws Exception {
         Buyer buyer = new BuyerBuilder().build();
         AddBuyerCommand command = (AddBuyerCommand) parser.parseCommand(ClientUtil.getAddBuyerCommand(buyer));
-        assertEquals(new AddBuyerCommand(buyer), command);
+        AddBuyerCommand c = new AddBuyerCommand(buyer);
+        assertEquals(c, command);
     }
 
     @Test
