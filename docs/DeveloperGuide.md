@@ -98,8 +98,9 @@ the `ModelManager` component also,
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * similarly, it stores the currently 'selected' `Lesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Lesson>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
-![Model Class Diagram](images/LessonBookStudentBookModelClassDiagram.png)
 Each `Lesson` has an association with a list of `EnrolledStudents`, which contains references to each `Student` assigned to the lesson.
+
+![Model Class Diagram](images/LessonBookStudentBookModelClassDiagram.png)
 
 ### Storage component
 
@@ -249,6 +250,8 @@ After all the existing lessons have been verified to not clash with the new less
 
 ![Add Lesson Object Diagram](images/AddLessonObjectDiagram_4.png)
 
+The following sequence diagram shows how the add lesson operation works:
+![Add Lesson Sequence Diagram](images/AddLessonSequenceDiagram.png)
 
 ### Assign student to lesson
 
