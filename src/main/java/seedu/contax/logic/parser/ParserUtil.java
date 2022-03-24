@@ -251,7 +251,7 @@ public class ParserUtil {
         StringBuilder output = new StringBuilder();
         commandInput = commandInput.trim();
         String[] splitCommand = commandInput.split(" ");
-        output.append(splitCommand[0]).append(" ").append(index).append(" ");
+        output.append(splitCommand[0]).append(" ").append(index);
         if (commandInput.contains(" ")) {
             output.append(commandInput.substring(splitCommand[0].length()));
         }
