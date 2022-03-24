@@ -155,13 +155,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### `addbuyer` feature
-The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](###-logic-component). Mainly, it can be broken down into these steps:
+The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
 
-Step 1:
+**Step 1:**
 
-The user types input E.g. `addbuyer n/David p/12345678` into the `CommandBox`
+The user types input E.g. `addbuyer n/David p/12345678` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
 
-Step 2:
+**Step 2:**
 
 The `execute(input)` method of `LogicManager`, a subclass of the Logic component, is called with the given input.
 An instance of the `AddressBookParser` will begin to parse the input into 2 main sections: the **command**
@@ -171,32 +171,40 @@ The main job of `AddressBookParser` at this step is to identify the `addbuyer` *
 
 After which, control is handed over to the `AddBuyerCommandParser` component by calling its `AddBuyerCommandParser#parse(body)` method to parse the **body** which was separated out.
 
-Step 3:
+**Step 3:**
 
-`AddBuyerCommandParser#parse(body)` will handle the **body** of the input string by verifying that the required fields: `name` and `phone` are indicated in the message body.
+`AddBuyerCommandParser#parse(body)` verifies if required fields for `addbuyer` are present.
 
-In our example, since `n/David p/12345678` was included, the component will verify that all required fields are present.
+In our example, since `n/David p/12345678` was included, all required fields are present.
 
-At this step, the new `Buyer` will have been successfully created and its fields verified for correctness. A new `AddBuyerCommand` with the new Buyer is returned to the `AddressBookParser` to the `LogicManager`
+At this step, the new `Buyer` will have been successfully created. A new `AddBuyerCommand` with the Buyer is returned to the `AddressBookParser` to the `LogicManager`
 
-Step 4:
+![AddBuyerCommandObjectDiagram](images/AddBuyerCommandObjectDiagram.png)
 
-The `LogicManager` component then calls `AddBuyerCommand#execute(model)`method of the new `AddBuyerCommand`instance containing the Buyer, with the `Model`component created from [Model component](###-model-component).
+**Step 4:**
 
-In this method, if the Buyer does not currently already reside in the application, he/she is added into the Model through the `Model#addBuyer(Buyer)` command and stored in the Model (Refer to [Model component](###-model-component) to see how Buyers are stored into the model)
-. A new `CommandResult` representing the successful `addbuyer` command is initialized and returned.
+The `LogicManager` component then calls `AddBuyerCommand#execute(model)`method of the new `AddBuyerCommand`instance containing the Buyer, with the `Model`component created from [Model component](#model-component).
 
-Step 5:
+In this method, if the Buyer does not currently already reside in the application, he/she is added into the Model through the `Model#addBuyer(Buyer)` command and stored in the Model.
+
+(Refer to [Model component](#model-component) to see how Buyers are stored into the model)
+
+A new `CommandResult` representing the successful `addbuyer` command is initialized and returned.
+
+**Step 5:**
 
 `LogicManager` component will then attempt to update the storage with this new `Model` through the `Storage#saveBuyerAddressBook()` method.
 
-Step 6:
+**Step 6:**
 
-Finally, the `CommandResult`is returned to be displayed by `UI` component (Refer to [Architecture](###-architecture))
+Finally, the `CommandResult`is returned to be displayed by `UI` component (Refer to [Architecture](#architecture))
 
 The following Sequence Diagrams summarizes the various steps involved:
 
-![AddBuyerSequenceDiagram](iamges/AddBuyerSequenceDiagram.png)
+![AddBuyerSequenceDiagram](images/AddBuyerSequenceDiagram.png)
+
+For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
