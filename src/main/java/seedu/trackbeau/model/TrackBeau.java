@@ -117,8 +117,8 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     }
 
     /**
-     * Adds a customer to trackBeau.
-     * The customer must not already exist in trackBeau.
+     * Adds a service to trackBeau.
+     * The service must not already exist in trackBeau.
      */
     public void addService(Service s) {
         services.add(s);

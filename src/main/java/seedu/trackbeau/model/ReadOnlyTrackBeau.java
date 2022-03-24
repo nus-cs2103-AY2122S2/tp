@@ -16,8 +16,8 @@ public interface ReadOnlyTrackBeau {
     ObservableList<Customer> getCustomerList();
 
     /**
-     * Returns an unmodifiable view of the customers list.
-     * This list will not contain any duplicate customers.
+     * Returns an unmodifiable view of the services list.
+     * This list will not contain any duplicate services.
      */
     ObservableList<Service> getServiceList();
 }
