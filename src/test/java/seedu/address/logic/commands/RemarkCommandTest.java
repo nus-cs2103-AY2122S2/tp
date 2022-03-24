@@ -19,7 +19,7 @@ class RemarkCommandTest {
     @Test
     void execute_addRemarkUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = firstPerson.addField(new Remark("Some remark."));
+        Person editedPerson = firstPerson.addFields(new Remark("Some remark."));
 
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON,
                 new Remark(editedPerson.getField(Remark.PREFIX).orElse(Remark.EMPTY_REMARK).getValue()));

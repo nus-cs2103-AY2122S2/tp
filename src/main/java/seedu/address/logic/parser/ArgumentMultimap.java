@@ -57,4 +57,12 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Returns all the prefixes in the multimap.
+     * @return all the prefixes in the multimap.
+     */
+    public List<Prefix> getPrefixes() {
+        return new ArrayList<>(argMultimap.keySet());
+    }
 }

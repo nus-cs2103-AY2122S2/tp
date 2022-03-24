@@ -42,7 +42,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(AMY);
-        Person editedPerson = AMY.addField(new Address(VALID_ADDRESS_BOB)).setTags(new Tag(VALID_TAG_COWORKER));
+        Person editedPerson = AMY.addFields(new Address(VALID_ADDRESS_BOB)).setTags(new Tag(VALID_TAG_COWORKER));
         assertTrue(uniquePersonList.contains(editedPerson));
     }
 
@@ -84,7 +84,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(AMY);
-        Person editedPerson = AMY.addField(new Address(VALID_ADDRESS_BOB)).setTags(new Tag(VALID_TAG_COWORKER));
+        Person editedPerson = AMY.addFields(new Address(VALID_ADDRESS_BOB)).setTags(new Tag(VALID_TAG_COWORKER));
         uniquePersonList.setPerson(AMY, editedPerson);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(editedPerson);

@@ -54,8 +54,8 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         Person editedPerson = lastPerson
-                .addField(new Name(PersonUtil.VALID_NAME_BOB))
-                .addField(new Phone(PersonUtil.VALID_PHONE_BOB))
+                .addFields(new Name(PersonUtil.VALID_NAME_BOB))
+                .addFields(new Phone(PersonUtil.VALID_PHONE_BOB))
                 .setTags(new Tag(PersonUtil.VALID_TAG_COWORKER));
 
         ArrayList<Field> fields = new ArrayList<>();
@@ -91,7 +91,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = personInFilteredList.addField(new Name(PersonUtil.VALID_NAME_BOB));
+        Person editedPerson = personInFilteredList.addFields(new Name(PersonUtil.VALID_NAME_BOB));
 
         ArrayList<Field> fields = new ArrayList<>();
         fields.add(new Name(PersonUtil.VALID_NAME_BOB));

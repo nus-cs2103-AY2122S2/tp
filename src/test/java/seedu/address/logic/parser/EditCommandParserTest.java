@@ -139,7 +139,7 @@ public class EditCommandParserTest {
         ArrayList<Field> fields = new ArrayList<>();
         fields.add(new Email(VALID_EMAIL_AMY));
         fields.add(new Phone(VALID_PHONE_BOB));
-        EditCommand expectedCommand = new EditCommand(targetIndex, fields, new HashSet<>());
+        EditCommand expectedCommand = new EditCommand(targetIndex, fields, null);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -148,47 +148,45 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        HashSet<Tag> tags = new HashSet<>();
 
         // name
         ArrayList<Field> fields = new ArrayList<>();
         fields.add(new Name(VALID_NAME_AMY));
-        EditCommand expectedCommand = new EditCommand(targetIndex, fields, tags);
+        EditCommand expectedCommand = new EditCommand(targetIndex, fields, null);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
         fields = new ArrayList<>();
         fields.add(new Phone(VALID_PHONE_AMY));
-        expectedCommand = new EditCommand(targetIndex, fields, tags);
+        expectedCommand = new EditCommand(targetIndex, fields, null);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
         fields = new ArrayList<>();
         fields.add(new Email(VALID_EMAIL_AMY));
-        expectedCommand = new EditCommand(targetIndex, fields, tags);
+        expectedCommand = new EditCommand(targetIndex, fields, null);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
         fields = new ArrayList<>();
         fields.add(new Address(VALID_ADDRESS_AMY));
-        expectedCommand = new EditCommand(targetIndex, fields, tags);
+        expectedCommand = new EditCommand(targetIndex, fields, null);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         //remark
         userInput = targetIndex.getOneBased() + REMARK_DESC_AMY;
         fields = new ArrayList<>();
         fields.add(new Remark(VALID_REMARK_AMY));
-        expectedCommand = new EditCommand(targetIndex, fields, tags);
+        expectedCommand = new EditCommand(targetIndex, fields, null);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         fields = new ArrayList<>();
-        tags.addAll(Tag.createSet(VALID_TAG_FRIEND));
-        expectedCommand = new EditCommand(targetIndex, fields, tags);
+        expectedCommand = new EditCommand(targetIndex, fields, Tag.createSet(VALID_TAG_FRIEND));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -218,16 +216,15 @@ public class EditCommandParserTest {
 
         ArrayList<Field> fields = new ArrayList<>();
         fields.add(new Phone(VALID_PHONE_BOB));
-        Set<Tag> tags = new HashSet<>();
 
-        EditCommand expectedCommand = new EditCommand(targetIndex, fields, tags);
+        EditCommand expectedCommand = new EditCommand(targetIndex, fields, null);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB + PHONE_DESC_BOB;
         fields.add(new Email(VALID_EMAIL_BOB));
         fields.add(new Address(VALID_ADDRESS_BOB));
-        expectedCommand = new EditCommand(targetIndex, fields, tags);
+        expectedCommand = new EditCommand(targetIndex, fields, null);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

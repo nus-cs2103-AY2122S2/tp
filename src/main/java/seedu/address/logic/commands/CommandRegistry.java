@@ -7,12 +7,14 @@ import java.util.Map;
 import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.AddMembershipParser;
 import seedu.address.logic.parser.AddTransactionParser;
+import seedu.address.logic.parser.AppendCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.ListTransactionCommandParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.RemarkCommandParser;
+import seedu.address.logic.parser.RemoveCommandParser;
 import seedu.address.logic.parser.SortCommandParser;
 
 
@@ -25,6 +27,8 @@ public class CommandRegistry {
 
         parsers.put(AddCommand.COMMAND_WORD, new AddCommandParser());
         parsers.put(EditCommand.COMMAND_WORD, new EditCommandParser());
+        parsers.put(AppendCommand.COMMAND_WORD, new AppendCommandParser());
+        parsers.put(RemoveCommand.COMMAND_WORD, new RemoveCommandParser());
         parsers.put(DeleteCommand.COMMAND_WORD, new DeleteCommandParser());
         parsers.put(ClearCommand.COMMAND_WORD, (String args) -> new ClearCommand());
         parsers.put(FindCommand.COMMAND_WORD, new FindCommandParser());

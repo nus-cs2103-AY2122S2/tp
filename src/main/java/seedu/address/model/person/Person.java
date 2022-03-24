@@ -80,30 +80,52 @@ public class Person implements Serializable {
     }
 
     /**
-     * Add a field to the person. If the field already exists, it is replaced.
-     * @param field the field to add
-     * @return a person with the field added
+     * Add fields to the person. If the field already exists, it is replaced.
+     * @param fields the fields to add
+     * @return a person with the fields added
      */
-    public Person addField(Field field) {
-        requireAllNonNull(field);
-        Map<Prefix, Field> updatedFields = new HashMap<>(fields);
-        updatedFields.put(field.prefix, field);
+    public Person addFields(Field... fields) {
+        return addFields(List.of(fields));
+    }
+
+    /**
+     * Add fields to the person. If the field already exists, it is replaced.
+     * @param fields the fields to add
+     * @return a person with the fields added
+     */
+    public Person addFields(Collection<Field> fields) {
+        requireAllNonNull(fields);
+        Map<Prefix, Field> updatedFields = new HashMap<>(this.fields);
+        for (Field f : fields) {
+            requireAllNonNull(f);
+            updatedFields.put(f.prefix, f);
+        }
         return new Person(updatedFields.values(), tags);
     }
 
     /**
-     * Remove a field from the person. If the field does not exists, this does nothing.
-     * @param prefix the prefix of the field to remove
-     * @return a person with the field removed
+     * Remove fields from the person. If the field does not exist, this does nothing.
+     * @param prefixes the prefixes of the fields to remove
+     * @return a person with the fields removed
      */
-    public Person removeField(Prefix prefix) {
-        requireAllNonNull(prefix);
-        if (hasField(prefix)) {
-            Map<Prefix, Field> updatedFields = new HashMap<>(fields);
-            updatedFields.remove(prefix);
-            return new Person(updatedFields.values(), tags);
+    public Person removeFields(Prefix prefixes) {
+        return removeFields(List.of(prefixes));
+    }
+
+    /**
+     * Remove fields from the person. If the field does not exist, this does nothing.
+     * @param prefixes the prefixes of the fields to remove
+     * @return a person with the fields removed
+     */
+    public Person removeFields(Collection<Prefix> prefixes) {
+        requireAllNonNull(prefixes);
+        Map<Prefix, Field> updatedFields = new HashMap<>(this.fields);
+        for (Prefix p : prefixes) {
+            requireAllNonNull(p);
+            updatedFields.remove(p);
         }
-        return this;
+        boolean noChange = updatedFields.size() == this.fields.size();
+        return noChange ? this : new Person(updatedFields.values(), tags);
     }
 
     public Optional<Field> getField(Prefix prefix) {
