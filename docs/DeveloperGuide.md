@@ -71,9 +71,9 @@ among which the first two is explained in the previous sector.
 The latter two specifies the expected range of money the buyer would like to pay.
 
 ## UserType
-The `UserType` represents an attribute that needs to be added to a `Person` & represents the `Person` as a `buyer` or `seller`. A `Person` is only either a `buyer` or `seller` at a given time. They cannot be both or none.
+The `UserType` represents an attribute that is added to a `Person` & represents the `Person` as a `buyer` or `seller`. A `Person` is only either a `buyer` or `seller` at a given time. They cannot be both or none. The `UserType` of a `Person` is derived from the presence of a `Property` or `Preference`. If the `Person` has a `Property`, then they are a `seller`, but if the person has a `Preference`, then they are a `buyer`.
 
-Similar to other attributes of a `Person`, the `UserType` of a `Person` can be edited via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa. This can be done with the command: `edit INDEX t/seller`
+Unlike other attributes of a `Person`, the `UserType` of a `Person` cannot be edited _directly_ via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa if the person's property or preference is changed. This can be done with the command: `edit INDEX pr/PROPERTY_DETAILS` or `edit INDEX pf/PREFERENCE_DETAILS`. This means editing a `Person` to have a `Property` instead of a `Preference` will change them from a `buyer` (had a `Preference` initially) to a `seller` (now has a `Property`). In other cases where other attributes of a `Person` are being edited, e.g. phone number, address, the `UserType` of that `Person` being edited will remain the same.
 
 # Documentation, logging, testing, configuration, dev-ops
 
