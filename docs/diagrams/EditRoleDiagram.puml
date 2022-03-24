@@ -18,7 +18,7 @@ Class EditRoleDescriptor
 Class "<<interface>>\nParser" as Parser
 Class "{abstract}\nCommand" as Command
 
-EditRoleCommand -right-> EditRoleDescriptor
+EditRoleCommand -right-> "1" EditRoleDescriptor
 EditRoleCommand -up-|> Command
 
 EditRoleCommandParser -up-|> Parser
