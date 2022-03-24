@@ -89,6 +89,7 @@ public class Interview {
                 .append(getDate())
                 .append("; Position: ")
                 .append(position.getPositionName())
+                .append("; Status: ")
                 .append(getStatus());
         return builder.toString();
     }
