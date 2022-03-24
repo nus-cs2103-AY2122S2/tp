@@ -230,20 +230,35 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
 
 ### 2. Events Feature
 
-- Add event
-- Delete event
-- Show events
-- Edit event
+Events in Amigos are implemented in a similar fashion to Persons in AB3, for the sake of consistency in the codebase. Thus, we have a `UniqueEventList` in the `AddressBook`, which is the analogue of `UniquePersonList`. The UI will then refer to a filtered event list contained within `ModelManager` to get the Events to be displayed.
 
-#### 2.1 Add Event
+Each event contains a `Name`, `DateTime`, `Description`, and a `FriendName` set. The latter represents the Friends that are linked to this event.
 
-##### Implementation
+#### 2.1 Implementing Event-Person relationships
+Key Consideration: How to implement the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
 
-#### 2.2 Delete event
+* **Current Implementation**
+  * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. Validity checks
+  * are performed on initializing an `Event`, editing an `Event`, and when editing/deleting a `Person` to make sure that all `FriendName` objects in `Event` refer to actual `Person` objects in the `AddressBook`.
+  * Pros:
+    * Reduce coupling between the `Event` and `Person` classes by making it a one-way dependency.
+    * Reduce dependency further by only storing the `FriendName` object and not the entire `Person` object.
+  * Cons:
+    * Need to ensure that each `FriendName` is valid and remains valid after changes to the `Model` e.g. if a friend's name is edited, or when a friend is deleted. Prone to mistakes if this is overlooked.
+    * Not terribly efficient, because to check validity there is a need to cycle through the entire list of `Person` objects for each `FriendName` stored. Similarly, it is inefficient when querying which `Event` objects contain a specific `Person`.
+    * Need to either constantly mutate or replace an `Event` to change `FriendName`, which can be troublesome.
 
-##### Implementation
+* **Alternative Implementation**
+  * The relationship could alternatively be represented using an association class between `Event` and `Person`. This `EventPersonAssociation` could then be stored in a list in the `AddressBook`.
+  * Pros:
+    * Improve abstraction and cohesion by storing and handling the details of the Event-Person relationship in a separate class.
+    * This allows us to avoid modifications to the `Event` and `Person` classes, and reduce coupling between them as the dependency is one-way from the `EventPersonAssociation` class.
+    * Could be easier to ensure that the relationships remain valid.
+  * Cons:
+    * Additional overhead as new class(es) will have to be created and tested.
+    * If implemented using a `EventPersonAssociation` list, will not be very efficient as well when making queries/changes,especially if there are a large number of associations in the list
 
-#### 2.3 Show event
+#### 2.2 Show event
 
 #### Implementation
 
@@ -266,7 +281,7 @@ The following sequence diagram summarizes what happens when a user executes the 
 - Alternate Implementations
   - Another possibility is to have a list representing which commands refer to the Friends tab and which commands refer to the Events tab, this list can be checked once a command is entered and the tab can accordingly be switched. However, this implementation involves a lot of maintenance as everytime a new commands is created it will need to be added here, thus we did not choose to proceed with this implementation.
 
-#### 2.4 Edit event
+#### 2.3 Edit event
 
 ##### Implementation
 
