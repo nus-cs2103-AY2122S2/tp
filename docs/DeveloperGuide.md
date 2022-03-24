@@ -171,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-We are currently implementing to implement a Match feature. In implements the following operation:
+We are currently implementing a Match feature. In implements the following operation:
 
 * `match` —  Matches a Buyer to a List of Seller.
 
