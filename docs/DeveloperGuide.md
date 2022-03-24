@@ -246,6 +246,20 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Filter Feature
+
+#### Proposed Implementation
+
+The Filter feature is implemented by updating the `listOfStudents` using `StudentHasLabPredicate` which extends 
+`Predicate`. `StudentHasLabPredicate` contains the attribute `Lab` and overrides the `Predicate#test()` method to 
+determine if a `Student` has a specific `Lab` in its `LabList`. 
+
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user executes `filter l/1 s/s` command. 
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -335,9 +349,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. TA provides non-existent lab.
     * 1a1. TAB shows error message.
-    * 1a2. TAB requests for valid lab.
 
-      Use case resumes from step 1.
+      Use case ends
 
 * 1b. TA tries to filter an empty list.
     * 1b1. TAB shows error message.
