@@ -243,8 +243,13 @@ After checking that both input player and lineup are valid, the lineup's name wi
 #### Design Consideration
 
 ### 5. Put feature
+Puts a `Person` into a `Lineup`
 
 #### Proposed implementation
+
+Stores the `LineupName` in `Person`
+
+Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
 #### Design Consideration
 **Aspect: How to navigate from player to lineup:**
 
@@ -255,6 +260,21 @@ After checking that both input player and lineup are valid, the lineup's name wi
 * **Alternative 2:** Iterate through lineups to find the ones a player belongs to.
   * Pros: No multiple source of truth.
   * Cons: Iteration might be time-consuming.
+
+**Aspect: How to keep track the `Lineup` a `Person` belongs to**
+
+**Alternative 1: (Current choice)** Attributes of `Person`
+
+Pros: Efficient and easy to find `Lineup` of `Person`
+
+Cons: Need to update both `Person` and `Lineup`
+
+**Alternative 2: Using `Lineup` Only
+
+Pros: Only need to update `Lineup`
+
+Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` belongs to
+
 
 ### 6. Clear feature
 
