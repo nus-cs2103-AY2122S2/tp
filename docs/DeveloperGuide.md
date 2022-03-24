@@ -383,12 +383,11 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage. 
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should have a _friendly user interface_.
 5. The system should respond within `2` seconds.
 6. Should there be any invalid command, the part of the command that causes this issue should be **highlighted**.
-
 
 ### Glossary
 
