@@ -39,46 +39,91 @@ public class BatchCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
-        argumentMultimap.put(PREFIX_EQUALS, "123");
-        argumentMultimap.put(PREFIX_SEARCH_TYPE, "name");
-        argumentMultimap.put(new Prefix(""), "editperson p/321");
         String sampleUserInput = "editperson p/321 by/name =/123";
         BatchCommand expectedBatchCommand =
-                new BatchCommand("editperson p/321", new SearchType(SearchType.TYPE_NAME), argumentMultimap);
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_NAME), "123", "", "");
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
     }
 
     @Test
-    public void parse_byDifferentSearchType_success() {
+    public void parse_byDifferentSearchTypeEquals_success() {
         String sampleUserInput = "editperson p/321 by/name =/123";
-        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
-        argumentMultimap.put(PREFIX_EQUALS, "123");
         BatchCommand expectedBatchCommand =
-                new BatchCommand("editperson p/321", new SearchType(SearchType.TYPE_NAME), argumentMultimap);
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_NAME), "123", "", "");
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/phone =/123";
         expectedBatchCommand =
-                new BatchCommand("editperson p/321", new SearchType(SearchType.TYPE_PHONE), argumentMultimap);
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_PHONE), "123", "", "");
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/email =/123";
         expectedBatchCommand =
-                new BatchCommand("editperson p/321", new SearchType(SearchType.TYPE_EMAIL), argumentMultimap);
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_EMAIL), "123", "", "");
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/address =/123";
         expectedBatchCommand =
-                new BatchCommand("editperson p/321", new SearchType(SearchType.TYPE_ADDRESS), argumentMultimap);
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_ADDRESS), "123", "", "");
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+    }
 
+    @Test
+    public void parse_byDifferentSearchTypeStart_success() {
+        String sampleUserInput = "editperson p/321 by/name start/123";
+        BatchCommand expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_NAME), "", "123", "");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+        sampleUserInput = "editperson p/321 by/phone start/123";
+        expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_PHONE), "", "123", "");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+        sampleUserInput = "editperson p/321 by/email start/123";
+        expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_EMAIL), "", "123", "");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+        sampleUserInput = "editperson p/321 by/address start/123";
+        expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_ADDRESS), "", "123", "");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+    }
+
+    @Test
+    public void parse_byDifferentSearchTypeEnd_success() {
+        String sampleUserInput = "editperson p/321 by/name end/123";
+        BatchCommand expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_NAME), "", "", "123");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+        sampleUserInput = "editperson p/321 by/phone end/123";
+        expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_PHONE), "", "", "123");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+        sampleUserInput = "editperson p/321 by/email end/123";
+        expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_EMAIL), "", "", "123");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
+        sampleUserInput = "editperson p/321 by/address end/123";
+        expectedBatchCommand =
+                new BatchCommand("editperson p/321",
+                        new SearchType(SearchType.TYPE_ADDRESS), "", "", "123");
+        assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
     }
 
     @Test
     public void parse_someFieldsSpecified_invalidCommand() {
-        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
-        argumentMultimap.put(PREFIX_EQUALS, "123");
         String sampleUserInput = "list";
         BatchCommand expectedBatchCommand =
-                new BatchCommand("list", new SearchType(SearchType.TYPE_NAME), argumentMultimap);
+                new BatchCommand("list",
+                        new SearchType(SearchType.TYPE_NAME), "123", "", "");
         assertParseFailure(parser, sampleUserInput, MESSAGE_INVALID_FORMAT);
 
     }

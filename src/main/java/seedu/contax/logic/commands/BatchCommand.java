@@ -27,7 +27,7 @@ import seedu.contax.model.util.SearchType;
 
 
 /**
- * Batch edit or delete a person identified using base on string =/ provided.
+ * Batch edits or deletes a person identified using base on string =/ provided.
  */
 public class BatchCommand extends Command {
 
@@ -47,22 +47,29 @@ public class BatchCommand extends Command {
 
     private final String commandInput;
     private final SearchType searchType;
-    private final ArgumentMultimap userInput;
+    private final String equalsText;
+    private final String startText;
+    private final String endText;
 
     /**
      * Creates an BatchCommand base on specified {@code commandInput} {@code searchType} and {@code userInput}.
      *
      * @param commandInput              details to word of command
      * @param searchType                search type of field apply matcher
-     * @param userInput                 regex provided by user
+     * @param equalsText                equals provided by user
+     * @param startText                equals provided by user
+     * @param endText                equals provided by user
      */
-    public BatchCommand(String commandInput, SearchType searchType, ArgumentMultimap userInput) {
+    public BatchCommand(String commandInput, SearchType searchType,
+                        String equalsText, String startText, String endText) {
         requireNonNull(commandInput);
         requireNonNull(searchType);
-        requireNonNull(userInput);
+
         this.commandInput = commandInput;
         this.searchType = searchType;
-        this.userInput = userInput;
+        this.equalsText = equalsText;
+        this.startText = startText;
+        this.endText = endText;
     }
 
     @Override
@@ -70,15 +77,15 @@ public class BatchCommand extends Command {
         requireNonNull(model);
         String userValue = "";
         List<Index> indexList = new ArrayList<>();
-        if (userInput.getValue(PREFIX_EQUALS).isPresent()) {
-            userValue = userInput.getValue(PREFIX_EQUALS).get();
+        if (!equalsText.isEmpty()) {
+            userValue = equalsText;
             indexList = matchInputStringToIndex(model, searchType, userValue, "=");
-        } else if (userInput.getValue(PREFIX_START_WITH).isPresent()) {
-            userValue = userInput.getValue(PREFIX_START_WITH).get();
-            indexList = matchInputStringToIndex(model, searchType, userValue, "^");
-        } else if (userInput.getValue(PREFIX_END_WITH).isPresent()) {
-            userValue = userInput.getValue(PREFIX_END_WITH).get();
-            indexList = matchInputStringToIndex(model, searchType, userValue, "$");
+        } else if (!startText.isEmpty()) {
+            userValue = startText;
+            indexList = matchInputStringToIndex(model, searchType, userValue, "start");
+        } else if (!endText.isEmpty()) {
+            userValue = endText;
+            indexList = matchInputStringToIndex(model, searchType, userValue, "end");
         } else {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchCommand.MESSAGE_USAGE));
         }
@@ -106,8 +113,17 @@ public class BatchCommand extends Command {
         return new CommandResult(resultOutput.toString());
     }
 
+    /**
+     * Matches base on user input value and return the index list that matched the condition given.
+     *
+     * @param model         model passed from execution
+     * @param searchType    the field that user search to compare for
+     * @param userValue     user input value
+     * @param matchType     equals, start or end with
+     * @return              list of index that match given condition
+     */
     private List<Index> matchInputStringToIndex(Model model,
-                                                SearchType searchType, String userInput, String matchType) {
+                                                SearchType searchType, String userValue, String matchType) {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
         for (int i = 0; i < personList.size(); i++) {
@@ -130,11 +146,11 @@ public class BatchCommand extends Command {
                 break;
             }
             if (!targetField.isEmpty()) {
-                if (matchType.equals("=") && targetField.equals(userInput)) {
+                if (matchType.equals("=") && targetField.equals(userValue)) {
                     indexList.add(index);
-                } else if (matchType.equals("^") && targetField.startsWith(userInput)) {
+                } else if (matchType.equals("start") && targetField.startsWith(userValue)) {
                     indexList.add(index);
-                } else if (matchType.equals("$") && targetField.endsWith(userInput)) {
+                } else if (matchType.equals("end") && targetField.endsWith(userValue)) {
                     indexList.add(index);
                 }
             }
@@ -148,11 +164,8 @@ public class BatchCommand extends Command {
                 || (other instanceof BatchCommand // instanceof handles nulls
                 && commandInput.equals(((BatchCommand) other).commandInput)
                 && searchType.equals(((BatchCommand) other).searchType)
-                && userInput.getValue(PREFIX_EQUALS)
-                .equals(((BatchCommand) other).userInput.getValue(PREFIX_EQUALS))
-                && userInput.getValue(PREFIX_START_WITH)
-                .equals(((BatchCommand) other).userInput.getValue(PREFIX_START_WITH))
-                && userInput.getValue(PREFIX_END_WITH)
-                .equals(((BatchCommand) other).userInput.getValue(PREFIX_END_WITH)));
+                && equalsText.equals(((BatchCommand) other).equalsText)
+                && startText.equals(((BatchCommand) other).startText)
+                && endText.equals(((BatchCommand) other).endText));
     }
 }
