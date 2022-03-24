@@ -76,6 +76,7 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyHustleBook> hustleBookOptional;
         ReadOnlyHustleBook initialData;
+
         try {
             hustleBookOptional = storage.readHustleBook();
             if (!hustleBookOptional.isPresent()) {
