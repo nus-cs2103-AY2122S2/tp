@@ -17,7 +17,8 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
 /**
- * Deletes a applicant identified using it's displayed index from the address book.
+ * Deletes an applicant identified using it's displayed index from the address book,
+ * and the interviews associated with the applicant as well.
  */
 public class DeleteApplicantCommand extends DeleteCommand {
 
@@ -57,16 +58,16 @@ public class DeleteApplicantCommand extends DeleteCommand {
 
     /**
      * Deletes interviews which are for the applicant to delete.
+     *
+     * @return Number of interviews deleted.
      */
     private int deleteApplicantsInterview(Model model, Applicant applicantToDelete) {
         ObservableList<Interview> interviewList = model.getAddressBook().getInterviewList();
         ArrayList<Interview> interviewsToDelete = new ArrayList<>();
 
-        int deleteCount = 0;
         for (Interview i : interviewList) {
             if (i.isInterviewForApplicant(applicantToDelete)) {
                 interviewsToDelete.add(i);
-                deleteCount++;
             }
         }
 
@@ -74,7 +75,7 @@ public class DeleteApplicantCommand extends DeleteCommand {
             model.deleteInterview(i);
         }
 
-        return deleteCount;
+        return interviewsToDelete.size();
     }
 
     @Override

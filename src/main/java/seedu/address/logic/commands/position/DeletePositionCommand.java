@@ -16,6 +16,10 @@ import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
+/**
+ * Deletes a position identified using it's displayed index from the address book,
+ * and the interviews associated with the position as well.
+ */
 public class DeletePositionCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -53,16 +57,16 @@ public class DeletePositionCommand extends DeleteCommand {
 
     /**
      * Deletes interviews which are for the position to delete.
+     *
+     * @return Number of interviews deleted.
      */
     private int deletePositionsInterview(Model model, Position positionToDelete) {
         ObservableList<Interview> interviewList = model.getAddressBook().getInterviewList();
         ArrayList<Interview> interviewsToDelete = new ArrayList<>();
 
-        int deleteCount = 0;
         for (Interview i : interviewList) {
             if (i.isInterviewForPosition(positionToDelete)) {
                 interviewsToDelete.add(i);
-                deleteCount++;
             }
         }
 
@@ -70,7 +74,7 @@ public class DeletePositionCommand extends DeleteCommand {
             model.deleteInterview(i);
         }
 
-        return deleteCount;
+        return interviewsToDelete.size();
     }
 
     @Override
