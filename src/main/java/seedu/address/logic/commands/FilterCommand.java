@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsModulePredicate;
 
@@ -10,7 +12,7 @@ import seedu.address.model.person.NameContainsModulePredicate;
  * Searches persons by their corresponding modules. This allows filtering by modules for users within ModuleMateFinder
  * Keyword matching is case insensitive.
  */
-public class FilterCommand extends Command {
+public class FilterCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_CONSTRAINTS = "Modules names should have 2-3 letters prefix "
@@ -27,7 +29,8 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult executeUndoableCommand(Model model, CommandHistory commandHistory,
+                                                StackUndoRedo undoRedoStack) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

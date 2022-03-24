@@ -9,6 +9,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.StackUndoRedo;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -27,6 +29,8 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final CommandHistory commandHistory;
+    private final StackUndoRedo undoRedoStack;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,6 +38,9 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
+        this.commandHistory = new CommandHistory();
+        this.undoRedoStack = new StackUndoRedo();
+
         addressBookParser = new AddressBookParser();
     }
 
@@ -43,16 +50,25 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        commandResult = command.execute(model, commandHistory, undoRedoStack);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+
+            commandHistory.add(commandText);
+            undoRedoStack.push(command);
+
+            if (command instanceof UndoableCommand) {
+                UndoableCommand undoableCommand = ((UndoableCommand) command);
+                undoableCommand.saveSuccessMessage(commandResult.getFeedbackToUser());
+            }
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 
         return commandResult;
     }
+
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {

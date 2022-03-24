@@ -13,6 +13,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -25,7 +26,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
 
-public class AddModuleCommand extends Command {
+public class AddModuleCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "addmodule";
 
@@ -65,7 +66,8 @@ public class AddModuleCommand extends Command {
      * @throws CommandException If an error occurs during command execution.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model, CommandHistory commandHistory,
+                                                StackUndoRedo undoRedoStack) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 

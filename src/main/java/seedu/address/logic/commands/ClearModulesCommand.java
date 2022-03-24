@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -20,7 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
-public class ClearModulesCommand extends Command {
+public class ClearModulesCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "clearmodules";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -37,7 +38,8 @@ public class ClearModulesCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model, CommandHistory commandHistory,
+                                                StackUndoRedo undoRedoStack) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 

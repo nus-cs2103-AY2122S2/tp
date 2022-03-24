@@ -8,6 +8,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Comment;
@@ -17,7 +18,7 @@ import seedu.address.model.person.Person;
  * Adds a comment to an existing person in the address book.
  * AddCommentCommand is adapted from https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html
  */
-public class CommentCommand extends Command {
+public class CommentCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "comment";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a comment to the person identified "
@@ -42,25 +43,6 @@ public class CommentCommand extends Command {
 
         this.index = index;
         this.comment = comment;
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getStatus(),
-                personToEdit.getModules(), comment);
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
@@ -92,5 +74,25 @@ public class CommentCommand extends Command {
         CommentCommand e = (CommentCommand) other;
         return index.equals(e.index)
                 && comment.equals(e.comment);
+    }
+
+    @Override
+    protected CommandResult executeUndoableCommand(Model model, CommandHistory commandHistory,
+                                                   StackUndoRedo undoRedoStack) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getStatus(),
+                personToEdit.getModules(), comment);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 }

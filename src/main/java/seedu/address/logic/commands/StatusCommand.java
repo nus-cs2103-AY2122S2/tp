@@ -8,6 +8,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -16,7 +17,7 @@ import seedu.address.model.person.Status;
 /**
  * Changes the status of an existing person in the address book.
  */
-public class StatusCommand extends Command {
+public class StatusCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "status";
 
@@ -44,23 +45,6 @@ public class StatusCommand extends Command {
         this.index = index;
         this.status = status;
     }
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(editedPerson));
-    }
 
     /**
      * Generates a command execution success message based on whether the status is added to or removed from
@@ -87,5 +71,25 @@ public class StatusCommand extends Command {
         StatusCommand e = (StatusCommand) other;
         return index.equals(e.index)
                 && status.equals(e.status);
+    }
+
+    @Override
+    protected CommandResult executeUndoableCommand(Model model,
+                                                   CommandHistory commandHistory,
+                                                   StackUndoRedo undoRedoStack) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 }

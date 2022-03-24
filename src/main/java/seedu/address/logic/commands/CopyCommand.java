@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
@@ -73,8 +74,28 @@ public class CopyCommand extends Command {
         this.formatPersonUtil = formatPersonUtil;
     }
 
+
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CopyCommand)) {
+            return false;
+        }
+
+        // state check
+        CopyCommand e = (CopyCommand) other;
+        return index.equals(e.index)
+                && prefixes.equals(e.prefixes);
+    }
+
+    @Override
+    public CommandResult execute(Model model,
+                                 CommandHistory commandHistory, StackUndoRedo undoRedoStack) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -100,23 +121,5 @@ public class CopyCommand extends Command {
         }
 
         return new CommandResult(copiedFields, false, false, false, false, true);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof CopyCommand)) {
-            return false;
-        }
-
-        // state check
-        CopyCommand e = (CopyCommand) other;
-        return index.equals(e.index)
-                && prefixes.equals(e.prefixes);
     }
 }
