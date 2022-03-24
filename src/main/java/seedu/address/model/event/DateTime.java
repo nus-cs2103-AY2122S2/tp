@@ -50,8 +50,12 @@ public class DateTime implements Comparable<DateTime> {
         return true;
     }
 
-    public LocalDate getDate() {
-        return value.toLocalDate();
+    public boolean hasSameDate(LocalDate date) {
+        return value.toLocalDate().equals(date);
+    }
+
+    public boolean hasSameDate(DateTime dateTime) {
+        return value.toLocalDate().equals(dateTime.value.toLocalDate());
     }
 
     /**

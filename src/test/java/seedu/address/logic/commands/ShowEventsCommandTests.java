@@ -49,7 +49,7 @@ public class ShowEventsCommandTests {
 
         // Model has persons but no events, thus event list should be empty.
         assertFalse(noEventModel.getFilteredPersonList().isEmpty());
-        assertTrue(noEventModel.getEventsList().isEmpty());
+        assertTrue(noEventModel.getFilteredEventList().isEmpty());
     }
 
     /**

@@ -21,7 +21,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Event> getEventsList() {
+    public ObservableList<Event> getFilteredEventList() {
         throw new AssertionError("This method should not be called.");
     }
 

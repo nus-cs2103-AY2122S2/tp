@@ -25,9 +25,10 @@ public class DeleteEventCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBookWithEvents(), new UserPrefs());
 
+    // TODO: Add tests that test the delete command when the list has been filtered by findevent.
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Event eventToDelete = model.getEventsList().get(INDEX_FIRST_EVENT.getZeroBased());
+    public void execute_validIndexFilteredList_success() {
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
@@ -39,8 +40,8 @@ public class DeleteEventCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getEventsList().size() + 1);
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
