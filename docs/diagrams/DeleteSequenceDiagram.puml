@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":UniBookBookParser" as UniBookBookParser LOGIC_COLOR
+participant ":UniBookParser" as UniBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> UniBookBookParser : parseCommand("delete 1")
-activate UniBookBookParser
+LogicManager -> UniBookParser : parseCommand("delete 1")
+activate UniBookParser
 
 create DeleteCommandParser
-UniBookBookParser -> DeleteCommandParser
+UniBookParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> UniBookBookParser
+DeleteCommandParser --> UniBookParser
 deactivate DeleteCommandParser
 
-UniBookBookParser -> DeleteCommandParser : parse("1")
+UniBookParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -36,14 +36,14 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> UniBookBookParser : d
+DeleteCommandParser --> UniBookParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> UniBookBookParser
+DeleteCommandParser -[hidden]-> UniBookParser
 destroy DeleteCommandParser
 
-UniBookBookParser --> LogicManager : d
-deactivate UniBookBookParser
+UniBookParser --> LogicManager : d
+deactivate UniBookParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
