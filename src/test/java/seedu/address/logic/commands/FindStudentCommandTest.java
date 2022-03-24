@@ -18,30 +18,30 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.NameOrTagsContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindStudentCommand}.
  */
-public class FindCommandTest {
+public class FindStudentCommandTest {
     private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalStudentBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameOrTagsContainsKeywordsPredicate firstPredicate =
+                new NameOrTagsContainsKeywordsPredicate(Collections.singletonList("first"));
+        NameOrTagsContainsKeywordsPredicate secondPredicate =
+                new NameOrTagsContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindStudentCommand findFirstCommand = new FindStudentCommand(firstPredicate);
+        FindStudentCommand findSecondCommand = new FindStudentCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindStudentCommand findFirstCommandCopy = new FindStudentCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -57,8 +57,8 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        NameOrTagsContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindStudentCommand command = new FindStudentCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
@@ -67,17 +67,17 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        NameOrTagsContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        FindStudentCommand command = new FindStudentCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameOrTagsContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private NameOrTagsContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameOrTagsContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
