@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes list command;
+if () then ([list is empty])
+:Retrieves empty list;
+:Show empty list and \nempty message;
+else ([list is not empty])
+:Retrieves list of Candidates;
+:Show list of Candidates and\n success message ;
+endif
+stop
+@enduml
