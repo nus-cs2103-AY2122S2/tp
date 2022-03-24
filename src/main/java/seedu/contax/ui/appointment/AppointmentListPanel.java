@@ -10,8 +10,8 @@ import javafx.scene.layout.Region;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.ui.UiPart;
-import seedu.contax.ui.appointment.factory.AppointmentListRowFactory;
 import seedu.contax.ui.appointment.factory.AppointmentListRow;
+import seedu.contax.ui.appointment.factory.AppointmentListRowFactory;
 
 /**
  * Panel containing a list of appointments.
