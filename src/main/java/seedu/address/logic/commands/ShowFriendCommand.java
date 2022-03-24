@@ -18,7 +18,7 @@ public class ShowFriendCommand extends Command {
             + " the address book. "
             + "Parameters: "
             + PREFIX_NAME + " NAME \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe";
 
 

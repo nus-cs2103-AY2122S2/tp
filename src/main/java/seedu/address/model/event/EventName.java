@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.model.common.Name;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents an Event's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEventName(String)}
  */
 public class EventName extends Name {
@@ -41,6 +41,6 @@ public class EventName extends Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EventName // instanceof handles nulls
-                && fullName.equals(((EventName) other).fullName)); // state check
+                && fullName.equalsIgnoreCase(((EventName) other).fullName)); // state check
     }
 }

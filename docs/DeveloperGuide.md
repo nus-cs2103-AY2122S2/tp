@@ -317,9 +317,88 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ##### Implementation
 
+
+The mechanism for adding logs is facilitated by the 'ByIndexByNameCommand', 'AddLogCommand', 'AddLogCommandParser' in the `Logic` component,
+`UniqueLogList` and `Person` classes in the `Model` component, and `JsonAdaptedLog` in the `Storage` component.
+In particular:
+1. In the model, `Person` now has an additional `UniqueLogList` field encapsulating some number
+   of `Log` objects.
+
+![LogFeaturesModelClassDiagram](images/LogFeaturesModelClassDiagram.png)
+
+2. 'JsonAdaptedLog' objects are used to save `Log` objects to json format, in an implementation analogous to that of
+   'JsonAdaptedTag'.
+
+![LogFeaturesStorageClassDiagram](images/LogFeaturesStorageClassDiagram.png)
+
+3. To support adding logs by the name of a friend or the index in `Amigos`, `ByIndexByNameCommand` is implemented as
+   a parent class that encapsulates methods useful to find the specified `Person` in the model to add logs to.
+4. As in `AB3`, `AddLogCommand` executes the logic of adding a specified log to a specified person, while `AddLogCommandParser`
+   parses the user input to create a relevant `AddLogCommand` object. Note that `AddLogCommand` has a nested class that encapsulates
+   most of the logic of adding a new log to the specified person.
+
+
+
+Given below is an example usage scenario and how the `Logic`, `Model` and `Storage` components behave at every
+step.
+
+1. User keys in a valid `addlog` command.`e.g. addlog JOHN DOE ttl/some log title`
+2. `AddressBookParser` calls `AddLogCommandParser::parse` and parses the input. 
+   1. `AddLogCommandParser::parse`wraps the log title and (optional) log description into an `AddLogDescriptor` object 
+   and instantiates a new `AddLogCommand` object with it.
+3. When `AddLogCommand::execute` is called, the parent method `getPersonByName` or `getPersonByIndex` is called, 
+    returning the specified `Person` object.
+   1. `AddLogCommand::createAddedLogPerson` is called, which calls `AddLogCommandDescriptor::getLogsAfterAdd`, and the 
+   latter takes the specified person and duplicates him, instantiates a new `Log` and appends it to the existing list, 
+   before returning it.
+   2. Then the new `Person` object with the new `Log` is set in the `model`.
+
+A sequence diagram shows, clearly, the interactions between `AddLogCommand`, `AddLogCommandParser`, `AddLogDescriptor` and `model`.
+
+![AddLogSequenceDiagram](images/AddLogSequenceDiagram.png)
+
+#### Design considerations
+
+**Aspect: How `Log` objects should be represented in `Amigos`:**
+* **Alternative 1 (current choice):** Store `Log` objects inside a `List`, inside a `Person`.
+    * Pros: Easy to implement, intuitive, easy to maintain and test.
+    * Cons: Downstream features such as `find` applied to logs may be more tedious, having to iterate through all `Person` objects.
+* **Alternative 2:** Store `Log` objects inside a `List`, in some global data field part of the `AddressBook`.
+    * Pros: Easier access to logs, since searching through a unified list in a single location.
+    * Cons: Tedious to implement and maintain, higher degree of coupling.
+
+**Aspect: Uniqueness of a `Log` object:**
+* Intuitively, it makes sense that a `Log` has a title and description.
+* **Alternative 1 (current choice):** No two logs can have the same title.
+    * Pros: Easy to implement, intuitive, easy to maintain and test.
+    * Cons: Some users may want logs with the same title, but different descriptions.
+* **Alternative 2:** No two logs can have the same title and same description
+    * Pros: Stricter notion of equality that makes intuitive sense.
+    * Cons: Checks for uniqueness require two degrees of checking, and user is less likely to be able to
+      look at and find logs easily.
+
+**Aspect: How to support `Index` and `Name` based addition of logs:**
+* **Alternative 1 (current choice):** Implement a parent class that has methods for retrieving specified person
+  based on `Index` or `Name` from the model.
+    * Pros: Easy to implement, intuitive, easy to maintain and test.
+    * Cons: Lower degree of freedom for downstream changes, if desired.
+* **Alternative 2:** Implement selection of `Person` from model at the command level.
+    * Pros: Command-specific implementation of searching for people allows for later changes if switching from `Index` or
+      `Name` based search to some other basis.
+    * Cons: Duplication of code.
+
+**Aspect: How to implement `AddLogCommand`:**
+* **Alternative 1 (current choice):** Implement a nested class to encapsulate details of the new log.
+    * Pros: Better encapsulation, easier to understand.
+    * Cons: Longer code, higher complexity.
+* **Alternative 2:** Implement logic within `Command::execute`.
+    * Pros: Easy to implement.
+    * Cons: Verbose code, poor extendability.
+
 #### 3.2 Delete log
 
 ##### Implementation
+##### Design considerations
 
 ### 4. Tabs Feature
 
@@ -345,8 +424,6 @@ The following images show how the Tabs feature look when the `Friends` tab is se
 
 - Alternative implementation Considered
   - Create a new window for `Friends` and `Events`, however we decided against this as it would result in duplication of the commandBox and other artifacts in the mainwindow.
-
-
 
 
 --------------------------------------------------------------------------------------------------------------------

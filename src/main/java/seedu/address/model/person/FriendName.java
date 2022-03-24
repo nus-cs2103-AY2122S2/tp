@@ -4,6 +4,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.model.common.Name;
 
+
+
 /**
  * Represents a Friend's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidFriendName(String)}
@@ -41,6 +43,7 @@ public class FriendName extends Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FriendName // instanceof handles nulls
-                && fullName.equals(((FriendName) other).fullName)); // state check
+                && fullName
+                .equalsIgnoreCase(((FriendName) other).fullName));
     }
 }

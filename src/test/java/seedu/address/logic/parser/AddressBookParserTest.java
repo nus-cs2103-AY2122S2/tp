@@ -8,7 +8,14 @@ import static seedu.address.logic.commands.CommandTestUtil.LOG_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LOG_TITLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.EventFilterPredicateBuilder.DEFAULT_DATE;
+import static seedu.address.testutil.EventFilterPredicateBuilder.DEFAULT_FRIEND_NAME_SUBSTRING_1;
+import static seedu.address.testutil.EventFilterPredicateBuilder.DEFAULT_FRIEND_NAME_SUBSTRING_2;
+import static seedu.address.testutil.EventFilterPredicateBuilder.DEFAULT_NAME_SUBSTRING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -29,16 +36,20 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ShowFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventFilterPredicate;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventFilterPredicateBuilder;
 import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -56,7 +67,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommandByName_deletefriend() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand("deletefriend n/Dummy Name");
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " n/Dummy Name");
         assertEquals(new DeleteCommand(new FriendName("Dummy Name")), command);
     }
 
@@ -119,6 +130,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_showFriend() throws Exception {
+        Person person = new PersonBuilder().build();
+        ShowFriendCommand command = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_WORD
+                + " n/" + person.getName().fullName);
+        assertEquals(new ShowFriendCommand(person), command);
+    }
+
+    @Test
     public void parseCommand_addLog() throws Exception {
         Index targetIndex = INDEX_FIRST_PERSON;
 
@@ -159,6 +178,17 @@ public class AddressBookParserTest {
         DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
                 DeleteEventCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
         assertEquals(new DeleteEventCommand(INDEX_FIRST_EVENT), command);
+    }
+
+    @Test
+    public void parseCommand_findevent() throws Exception {
+        EventFilterPredicate predicate = new EventFilterPredicateBuilder().build();
+
+        FindEventCommand command = (FindEventCommand) parser.parseCommand(
+                FindEventCommand.COMMAND_WORD + " " + PREFIX_NAME + DEFAULT_NAME_SUBSTRING
+                + " " + PREFIX_DATE + DEFAULT_DATE + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_1
+                + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_2);
+        assertEquals(new FindEventCommand(predicate), command);
     }
 
     @Test

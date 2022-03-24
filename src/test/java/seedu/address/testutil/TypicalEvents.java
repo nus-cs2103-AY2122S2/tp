@@ -33,10 +33,10 @@ public class TypicalEvents {
 
     public static final Event EVENT_NO_FRIENDS = new EventBuilder().withName("3rd Birthday")
             .withDateTime("11-5-2022 1520")
-            .withDescription("This is a description").build();
+            .withDescription("This is a description").withNames().build();
 
     public static final Event EVENT_WITH_DIFF_DESCRIPTION = new EventBuilder().withName("4th Birthday")
-            .withDateTime("17-5-2022 2020")
+            .withDateTime("12-5-2022 2020")
             .withDescription("This is a another description")
             .withNames(AMY_NAME, ALEX_NAME).build();
 
@@ -57,7 +57,7 @@ public class TypicalEvents {
     }
 
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_NO_FRIENDS, EVENT_WITH_DESCRIPTION,
+        return new ArrayList<>(Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DESCRIPTION, EVENT_NO_FRIENDS,
                 EVENT_WITH_DIFF_DESCRIPTION));
     }
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_FRIENDNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -67,7 +68,8 @@ public class CommandTestUtil {
     public static final String VALID_EVENT_DATETIME_OTHER = "15-12-2020 1400";
     public static final String VALID_EVENT_DESCRIPTION = "Some valid description";
     public static final String VALID_EVENT_DESCRIPTION_OTHER = "Some other valid description";
-
+    public static final String VALID_DATE = "15-02-2022";
+    public static final String VALID_DATE_OTHER = "12-10-2020";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NEW_NAME_DESC_AMY = " " + PREFIX_NEW_NAME + VALID_NAME_AMY;
@@ -109,7 +111,8 @@ public class CommandTestUtil {
     public static final String EVENT_ADDFRIEND_DESC_B = " " + PREFIX_ADD_FRIENDNAME + VALID_NAME_BOB;
     public static final String EVENT_REMOVEFRIEND_DESC_A = " " + PREFIX_REMOVE_FRIENDNAME + VALID_NAME_AMY;
     public static final String EVENT_REMOVEFRIEND_DESC_B = " " + PREFIX_REMOVE_FRIENDNAME + VALID_NAME_BOB;
-
+    public static final String EVENT_DATE_DESC_A = " " + PREFIX_DATE + VALID_DATE;
+    public static final String EVENT_DATE_DESC_B = " " + PREFIX_DATE + VALID_DATE_OTHER;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NEW_NAME_DESC = " " + PREFIX_NEW_NAME + "James&";
@@ -127,6 +130,7 @@ public class CommandTestUtil {
     public static final String INVALID_LOG_TITLE_ONLY_SPACES_DESC = " " + PREFIX_TITLE + "     ";
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "James\nBirthday";
     public static final String INVALID_EVENT_DATETIME_DESC = " " + PREFIX_DATETIME + "1400-20-10 %%";
+    public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_DATE + "12-15-2020 %%";
     public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "";
     public static final String INVALID_EVENT_FRIENDNAME_DESC = " " + PREFIX_FRIEND_NAME + "Tom $% Arthur";
     public static final String INVALID_EVENT_ADDFRIEND_DESC = " " + PREFIX_ADD_FRIENDNAME + "Jack,Hilary";
@@ -193,6 +197,16 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
+    public static void assertShowFriendCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                 Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, false, true);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
     public static void assertEventCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
@@ -212,12 +226,12 @@ public class CommandTestUtil {
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedPersonList = new ArrayList<>(actualModel.getFilteredPersonList());
-        List<Event> expectedEventList = new ArrayList<>(actualModel.getEventsList());
+        List<Event> expectedEventList = new ArrayList<>(actualModel.getFilteredEventList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedPersonList, actualModel.getFilteredPersonList());
-        assertEquals(expectedEventList, actualModel.getEventsList());
+        assertEquals(expectedEventList, actualModel.getFilteredEventList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
