@@ -1,13 +1,13 @@
 @startuml
 !include style.puml
 
+title Delete ClassGroup
+
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":TAssist" as TAssist MODEL_COLOR
 participant ":UniqueClassGroupList" as UniqueClassGroupList MODEL_COLOR
 end box
-
-title Delete ClassGroup
 
 [--> ModelManager : deleteEntity(entityToDelete)
 activate ModelManager
