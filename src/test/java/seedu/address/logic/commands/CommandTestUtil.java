@@ -61,6 +61,7 @@ public class CommandTestUtil {
     public static final String INVALID_TELEGRAM_HANDLE_DESC = " " + PREFIX_TELEGRAM_HANDLE
             + "xxx"; // telegramHandles should have 5 to 32 characters
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_COMMAND_NAME = "poop";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

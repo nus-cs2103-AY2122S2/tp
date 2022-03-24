@@ -15,7 +15,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to TAPA's [Quick Start Guide](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#quick-start).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -177,6 +177,190 @@ The following sequence diagram shows how the manual command works:
 
 ![ManualCommandSequenceDiagram](images/ManualCommandSequenceDiagram.png)
 
+### Add Command
+
+#### Description
+
+The `add` command allows users to add a particular student into TAPA.
+Since not all fields are compulsory during the execution of the `add` command,
+the user's input is being parsed in `AddressBookParser`. After which, a new `AddCommand`
+object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "add", `AddCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("add").
+4. In the `AddCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+    </div> 
+
+5. The `AddCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseStudentId(String studentId)`
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div> 
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `StudentId` object will be created and returned to the `AddCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+8. Step 5 to 7 will be repeated for the other compulsory fields (name, moduleCode)
+   and optional fields (phone, telegramHandle, email), by using their respective parse methods in `ParserUtil`.
+
+
+![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** If an optional field is not supplied (i.e. not found in the ArgumentMultimap), 
+   the extra parsing process in steps 5 to 7 will be skipped. 
+   Instead, the respective object will be created and initialized to `null`.
+    </div> 
+
+9. The `AddCommandParser` will create a new `Person`.
+10. A new `AddCommand` will be created (using the `Person` in Step 9) and returned to the `LogicManager`.
+11. The `LogicManager` will then call `AddCommand#execute(Model model)`.
+12. In the `AddCommand`, the `model#hasPerson(Person person)` will be invoked. If the `Person` already exist
+    in TAPA, a `CommandException` will be thrown.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** In TAPA, two Person are equal only if they have the same studentId.
+    </div> 
+
+13. The `AddCommand` will call `model.addPerson(Person person)`, which adds the `Person` into the `AddressBook`.
+14. Lastly, the `AddCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the add operation works:
+
+![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
+
+![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
+
+### Task Command
+
+#### Description
+
+The `task` command allows users to check and view all the tasks belonging to a particular student.
+During the execution of the `task` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `TaskCommand` object will be created, and is subsequently executed by the LogicManager.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "task", `TaskCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("task").
+4. In the `TaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
+   </div>
+
+5. The `TaskCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseStudentId(String studentId).`
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+   </div>
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new StudentId object will be created and returned to the `TaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+8. A new `TaskCommand` will be created (using the `StudentId` object created in Step 7) and returned to the `LogicManager`.
+9. The `LogicManager` will then call `TaskCommand#execute(Model model)`.
+10. In the `TaskCommand`, a `StudentIdContainsKeywordsPredicate` is created using the studentId.
+11. The `model#updateFilteredPersonList(predicate)` is then invoked such that the list is filtered by the predicate created.
+12. The `model#getFilteredPersonList()` is then called.
+    The size of the resulting list determines if there is any `Person` that corresponds to the specified `studentId`.
+    If the size is equals to 0, a `CommandException` will be thrown.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** The studentId is a UNIQUE field in TAPA.
+    </div>
+
+13. The `Person` object in the filtered list is then extracted out using `model#getFilteredPersonList().get(0)`.
+14. The `TaskList` belong to this `Person` can then be retrieved using `Person#getTaskList()`.
+15. If this `TaskList` is null or empty, a `CommandException` will be thrown.
+16. The `TaskCommand` iterates through this `TaskList`, and categorises the tasks into two new `TaskList`
+    according to the task's completion status.
+17. Lastly, the `TaskCommand` will create a new `CommandResult` by using the `TaskList` in Step 16.
+    This `CommandResult` will then be returned to `LogicManager`.
+
+![TaskCommandSequenceDiagram-1](images/TaskCommandSequenceDiagram-1.png)
+
+![TaskCommandSequenceDiagram-2](images/TaskCommandSequenceDiagram-2.png)
+
+![TaskCommandSequenceDiagram-3](images/TaskCommandSequenceDiagram-3.png)
+
+### Find Command
+
+#### Description
+
+The `find` command allows users to add a particular student into TAPA.
+Since not all fields are compulsory during the execution of the `find` command,
+the user's input is being parsed in `AddressBookParser`. After which, a new `FindCommand`
+object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "find", `FindCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("find").
+4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+    </div> 
+
+5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseStudentId(String studentId)`
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div> 
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `StudentId` object will be created and returned to the `AddCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
+   Depending on the type of input field used (studentId, name, moduleCode), Steps 5 to 7 will 
+   be executed using the parse methods in `ParserUtil` that are specific to the field.
+    </div> 
+
+![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+
+8. The `FindCommandParser` will create a new `Predicate`.
+9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
+10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
+11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
+    updates the filter of the person list to filter by the given `Predicate`.
+12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the find operation works:
+
+![FindCommandSequenceDiagram-1](images/FindCommandSequenceDiagram-1.png)
+
+![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
+
 ### Mark Command
 
 #### Description
@@ -265,6 +449,26 @@ The following sequence diagrams shows how the unmark command works:
 
 ![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-2.png)
 
+### Clear Command
+
+#### Description
+
+The `clear` command deletes all students currently stored in TAPA. During the execution of the `clear` command, a new `ClearCommand` object will be created, and is executed by the `LogicManager`. The `MainWindow` changes the `commandBox` to only recognise a followup `confirm` command. If the user executes a `confirm` command, a new `ConfirmClearCommand` object is created and executed by the `LogicManager`. Subsequently, `ModelManager` clears the students currently stored in TAPA.
+
+#### Implementation
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. A new `ClearCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
+3. The `LogicManager` will then call `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`
+4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
+5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A CommandException will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` then returns to accepting all commands as described in the user guide.
+    </div>
+6. If the user inputs `confirm`, `LogicManager` parses the given input text using `AddressBookParser#parseCommand()` and a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
+7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
+8. In the `ConfirmClearCommand`, `model.setAddressBook(new AddressBook())` is invoked, resetting the current list of students stored in TAPA to an empty list.
+9. Lastly, the `ConfirmClearCommand` will create a new `CommandResult`, which will be returned to the `LogicManager`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -348,190 +552,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
-### Add Command 
-
-#### Description
-
-The `add` command allows users to add a particular student into TAPA. 
-Since not all fields are compulsory during the execution of the `add` command,
-the user's input is being parsed in `AddressBookParser`. After which, a new `AddCommand`
-object will be created, and is subsequently executed by the `LogicManager`.
-
-#### Implementation
-
-1. Upon receiving the user input, 
-   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "add", `AddCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("add").
-4. In the `AddCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`, 
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
-   
-    <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
-    </div> 
-
-5. The `AddCommandParser` will pass the studentId input (found in the `ArgumentMultimap`) 
-   into `ParserUtil#parseStudentId(String studentId)`
-   
-   <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
-    </div> 
-   
-6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-7. `StudentId#isValidId(String studentId)` will then be invoked, 
-   which checks if the trimmed argument is valid (according to the Regex supplied).
-   If the argument is valid, a new `StudentId` object will be created and returned to the `AddCommandParser`.
-   If the argument is not valid, a `ParseException` will be thrown.
-8. Step 5 to 7 will be repeated for the other compulsory fields (name, moduleCode) 
-   and optional fields (phone, telegramHandle, email), by using their respective parse methods in `ParserUtil`.
-   
-
-   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
-
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** If an optional field is not supplied (i.e. not found in the ArgumentMultimap), 
-   the extra parsing process in steps 5 to 7 will be skipped. 
-   Instead, the respective object will be created and initialized to `null`.
-    </div> 
-
-9. The `AddCommandParser` will create a new `Person`.
-10. A new `AddCommand` will be created (using the `Person` in Step 9) and returned to the `LogicManager`.
-11. The `LogicManager` will then call `AddCommand#execute(Model model)`.
-12. In the `AddCommand`, the `model#hasPerson(Person person)` will be invoked. If the `Person` already exist
-    in TAPA, a `CommandException` will be thrown.
-
-    <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** In TAPA, two Person are equal only if they have the same studentId.
-    </div> 
-    
-13. The `AddCommand` will call `model.addPerson(Person person)`, which adds the `Person` into the `AddressBook`.
-14. Lastly, the `AddCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
-
-The following sequence diagram shows how the add operation works:
-
-![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
-
-![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
-
-### Task Command
-
-#### Description
-
-The `task` command allows users to check and view all the tasks belonging to a particular student.
-During the execution of the `task` command, the user's input is being parsed in `AddressBookParser`.
-After which, a new `TaskCommand` object will be created, and is subsequently executed by the LogicManager.
-
-#### Implementation
-
-1. Upon receiving the user input,
-   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "task", `TaskCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("task").
-4. In the `TaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
-   </div>
-
-5. The `TaskCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId).`
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
-   </div>
-
-6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-7. `StudentId#isValidId(String studentId)` will then be invoked,
-   which checks if the trimmed argument is valid (according to the Regex supplied).
-   If the argument is valid, a new StudentId object will be created and returned to the `TaskCommandParser`.
-   If the argument is not valid, a `ParseException` will be thrown.
-8. A new `TaskCommand` will be created (using the `StudentId` object created in Step 7) and returned to the `LogicManager`.
-9. The `LogicManager` will then call `TaskCommand#execute(Model model)`.
-10. In the `TaskCommand`, a `StudentIdContainsKeywordsPredicate` is created using the studentId.
-11. The `model#updateFilteredPersonList(predicate)` is then invoked such that the list is filtered by the predicate created.
-12. The `model#getFilteredPersonList()` is then called. 
-    The size of the resulting list determines if there is any `Person` that corresponds to the specified `studentId`. 
-    If the size is equals to 0, a `CommandException` will be thrown.
-
-    <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** The studentId is a UNIQUE field in TAPA.
-    </div>
-
-13. The `Person` object in the filtered list is then extracted out using `model#getFilteredPersonList().get(0)`.
-14. The `TaskList` belong to this `Person` can then be retrieved using `Person#getTaskList()`.
-15. If this `TaskList` is null or empty, a `CommandException` will be thrown.
-16. The `TaskCommand` iterates through this `TaskList`, and categorises the tasks into two new `TaskList`
-    according to the task's completion status.
-17. Lastly, the `TaskCommand` will create a new `CommandResult` by using the `TaskList` in Step 16.
-    This `CommandResult` will then be returned to `LogicManager`.
-
-![TaskCommandSequenceDiagram-1](images/TaskCommandSequenceDiagram-1.png)
-
-![TaskCommandSequenceDiagram-2](images/TaskCommandSequenceDiagram-2.png)
-
-![TaskCommandSequenceDiagram-3](images/TaskCommandSequenceDiagram-3.png)
-
-### Find Command
-
-#### Description
-
-The `find` command allows users to add a particular student into TAPA.
-Since not all fields are compulsory during the execution of the `find` command,
-the user's input is being parsed in `AddressBookParser`. After which, a new `FindCommand`
-object will be created, and is subsequently executed by the `LogicManager`.
-
-#### Implementation
-
-1. Upon receiving the user input,
-   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "find", `FindCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("find").
-4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
-
-    <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
-    </div> 
-
-5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId)`
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
-    </div> 
-
-6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-7. `StudentId#isValidId(String studentId)` will then be invoked,
-   which checks if the trimmed argument is valid (according to the Regex supplied).
-   If the argument is valid, a new `StudentId` object will be created and returned to the `AddCommandParser`.
-   If the argument is not valid, a `ParseException` will be thrown.
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
-   Depending on the type of input field used (studentId, name, moduleCode), Steps 5 to 7 will 
-   be executed using the parse methods in `ParserUtil` that are specific to the field.
-    </div> 
-
-![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
-
-8. The `FindCommandParser` will create a new `Predicate`.
-9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
-10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
-11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
-    updates the filter of the person list to filter by the given `Predicate`.
-12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
-
-The following sequence diagram shows how the find operation works:
-
-![FindCommandSequenceDiagram-1](images/FindCommandSequenceDiagram-1.png)
-
-![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
