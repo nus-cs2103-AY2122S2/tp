@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -165,6 +166,11 @@ public class AddApplicantCommandTest {
 
         @Override
         public void addInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setInterview(Interview target, Interview editedInterview) {
             throw new AssertionError("This method should not be called.");
         }
 
