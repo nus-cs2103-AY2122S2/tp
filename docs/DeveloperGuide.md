@@ -232,14 +232,9 @@ The data needed for the pie chart is obtained using `SummariseCommand#getPositiv
 
 
 Below are links for implementation of the classes and its methods:
-<br>
 * [`PieChartWindow`](../src/main/java/seedu/address/ui/PieChartWindow.java)
-<br>
 * [`SummariseCommand`](../src/main/java/seedu/address/logic/commands/SummariseCommand.java)
-<br>
 * [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java)
-
-
 
 **Sequence Diagram of Pie Chart Window Feature is shown below:**
 
@@ -255,8 +250,7 @@ The data needed for the pie charts should be coupled with `SummariseCommand`, th
 * **Alternative 1 (current choice):** `SummariseCommand` will pass in necessary data into data structures (`TreeMap` in this case) upon invocation which then can be obtained using getter methods
     * Pros: Easy to implement.
     * Cons: Dependent on the `SummariseCommand` class to pass in correct inputs.
-    * Other consideration(s):
-      ** Use the Singleton design principle for the data structures.
+    * Other consideration(s): Use the Singleton design principle for the data structures.
 
 * **Alternative 2:** Parse the feedback to user message from `SummariseCommand`
     * Pros: No modifications to the `SummariseCommand` class.
