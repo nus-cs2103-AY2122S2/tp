@@ -12,7 +12,7 @@ import seedu.address.model.event.Event;
 /**
  * An UI component that displays information of an {@code Event}.
  */
-public class EventCardComponent extends UiPart<Region>{
+public class EventCardComponent extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
 
