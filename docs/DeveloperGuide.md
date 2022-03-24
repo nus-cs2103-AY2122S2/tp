@@ -234,10 +234,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] View detailed profile
+In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
+limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
+height of a `PersonCard`, less person will be displayed of the same window size.
+
+Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
+conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more 
+information about a person.
+
 
 ### \[Proposed\] Enhanced Add Profile Feature 
 
-In the original add profile feature in the AB3 address book, all the profiles are being stored in the `AddressBook`.
+In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
 
 Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and 
 ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
@@ -263,6 +272,10 @@ This is a sample of the `Person` object diagram.
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
 
 
+### \[Proposed\] Theme choosing
+In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
+that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
+dark theme, so that the application fits better to the vibrant energy of a university.
 
 ### \[Proposed\] Data archiving
 
@@ -406,6 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Profile**: A page with more detailed information about a person
 
 --------------------------------------------------------------------------------------------------------------------
 
