@@ -12,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setSalary(person.getSalary());
         descriptor.setInfo(person.getInfo());
         descriptor.setPrevDateMet(person.getPrevDateMet());
     }
@@ -90,6 +92,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withPrevDateMet(String date) {
         descriptor.setPrevDateMet(new PrevDateMet(date));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Salary} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSalary(String salary) {
+        descriptor.setSalary(new Salary(salary));
         return this;
     }
 
