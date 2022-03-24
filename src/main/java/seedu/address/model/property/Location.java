@@ -7,9 +7,9 @@ import java.util.Objects;
  */
 public class Location {
 
-    private String location;
-
     public static final String MESSAGE_CONSTRAINTS = "Location should not be empty";
+
+    private String location;
 
     public Location(String location) {
         this.location = location;
@@ -39,6 +39,6 @@ public class Location {
      * @return False if string is empty, True otherwise.
      */
     public static boolean isValidLocation(String location) {
-        return location.isEmpty();
+        return !location.isEmpty();
     }
 }

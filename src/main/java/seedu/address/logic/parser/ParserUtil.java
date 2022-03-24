@@ -106,10 +106,10 @@ public class ParserUtil {
     public static PriceRange parsePriceRange(String priceRange) throws ParseException {
         requireNonNull(priceRange);
         String trimmedPriceRange = priceRange.trim();
-        if (!PriceRange.isValidPriceRange(priceRange)) {
+        if (!PriceRange.isValidPriceRange(trimmedPriceRange)) {
             throw new ParseException(PriceRange.MESSAGE_CONSTRAINTS);
         }
-        return new PriceRange(priceRange);
+        return new PriceRange(trimmedPriceRange);
     }
 
     /**

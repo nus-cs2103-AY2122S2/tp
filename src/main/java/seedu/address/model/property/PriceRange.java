@@ -11,8 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class PriceRange {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "PriceRange: lower should be lower than upper(inclusive), all values should be non-negative, and please" +
-                "use numerical values";
+        "PriceRange: lower should be lower than upper(inclusive), all values should be non-negative, and please"
+                + "use numerical values";
 
     /**
      * The lower and upper bounds are inclusive, meaning the lower bound includes the lower and higher value itself,
@@ -45,6 +45,21 @@ public class PriceRange {
     }
 
     /**
+     * Retrieves the numerical values from the String priceRange.
+     *
+     * @param priceRange The string.
+     * @return An int[] containing lower and upper bounds.
+     */
+    private int[] getValuesFromString(String priceRange) {
+        String[] values = priceRange.split(",");
+        values[0] = values[0].trim();
+        values[1] = values[1].trim();
+        int lower = Integer.parseInt(values[0]);
+        int upper = Integer.parseInt(values[1]);
+        return new int[] {lower, upper};
+    }
+
+    /**
      * Checks if the given string can be converted to a numerical price range.
      *
      * @param priceRange The string.
@@ -56,25 +71,14 @@ public class PriceRange {
             if (numbers.length != 2) {
                 return false;
             }
+            numbers[0] = numbers[0].trim();
+            numbers[1] = numbers[1].trim();
             int lower = Integer.parseInt(numbers[0]);
             int upper = Integer.parseInt(numbers[1]);
             return isValidPriceRange(lower, upper);
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    /**
-     * Retrieves the numerical values from the String priceRange.
-     *
-     * @param priceRange The string.
-     * @return An int[] containing lower and upper bounds.
-     */
-    private int[] getValuesFromString(String priceRange) {
-        String[] values = priceRange.split(",");
-        int lower = Integer.parseInt(values[0]);
-        int upper = Integer.parseInt(values[1]);
-        return new int[] {lower, upper};
     }
 
     /**

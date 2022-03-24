@@ -18,7 +18,7 @@ import seedu.address.model.property.HouseType;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
 
-public class AddPropertyToBuyCommandParser {
+public class AddPropertyToBuyCommandParser implements Parser<AddPropertyToBuyCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code AddPropertyToBuyCommand}
      * and returns a {@code AddPropertyToBuyCommand} object for execution.

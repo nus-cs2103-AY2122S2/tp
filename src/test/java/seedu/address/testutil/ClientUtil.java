@@ -42,7 +42,8 @@ public class ClientUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_LOCATION + buyer.getDesiredProperty().getHouse().getLocation().toString() + " ");
         sb.append(PREFIX_HOUSE_TYPE + buyer.getDesiredProperty().getHouse().getHouseTypeToString() + " ");
-        sb.append(PREFIX_PRICE_RANGE + buyer.getDesiredProperty().getPriceRange().toString() + " ");
+        sb.append(PREFIX_PRICE_RANGE +
+                buyer.getDesiredProperty().getPriceRange().toString().split("]")[0].substring(1) + " ");
         return sb.toString();
     }
 

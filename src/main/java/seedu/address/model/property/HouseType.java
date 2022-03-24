@@ -54,27 +54,27 @@ public enum HouseType {
             return "Mansion";
         }
     },
-    NULLHOUSETYPE("nullhousetype") {
+    NULLHOUSETYPE("nullhouse") {
         @Override
         public String toString() {
-            return "Not a house type";
+            return "Nullhouse";
         }
     };
+
+    public static final String MESSAGE_CONSTRAINTS = "Only the following house types are available: "
+            + HouseType.ANY + " "
+            + HouseType.APARTMENT + " "
+            + HouseType.BUNGALOW + " "
+            + HouseType.COLONIA + " "
+            + HouseType.CONDOMINIUM + " "
+            + HouseType.HDB_FLAT + " "
+            + HouseType.MANSION + " "
+            + HouseType.SEMIDETACHED;
 
     /**
      * A HashMap to map a possible string interpretation of the HouseType to the actual HouseType.
      */
     private final HashMap<String, HouseType> houseMappings = new HashMap<>();
-
-    public static final String MESSAGE_CONSTRAINTS = "Only the following house types are available: " +
-            HouseType.ANY + " " +
-            HouseType.APARTMENT + " " +
-            HouseType.BUNGALOW + " " +
-            HouseType.COLONIA + " " +
-            HouseType.CONDOMINIUM + " " +
-            HouseType.HDB_FLAT + " " +
-            HouseType.MANSION + " " +
-            HouseType.SEMIDETACHED;
 
     /**
      * Constructor of the enum.

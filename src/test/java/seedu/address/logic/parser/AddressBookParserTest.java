@@ -106,8 +106,10 @@ public class AddressBookParserTest {
         AddPropertyToBuyCommand command = (AddPropertyToBuyCommand)
                 parser.parseCommand(AddPropertyToBuyCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getPropertyToBuyCommand(buyer));
-        assertEquals(new AddPropertyToBuyCommand(INDEX_FIRST_CLIENT,
-                NullPropertyToBuy.getNullPropertyToBuy()), command);
+        AddPropertyToBuyCommand c = new AddPropertyToBuyCommand(INDEX_FIRST_CLIENT,
+                NullPropertyToBuy.getNullPropertyToBuy());
+        boolean a = c.equals(command);
+        assertTrue(a);
     }
 
     @Test

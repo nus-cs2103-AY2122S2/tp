@@ -28,6 +28,14 @@ class PriceRangeTest {
         //positive test cases.
         assertTrue(PriceRange.isValidPriceRange(0, 100));
         assertTrue(PriceRange.isValidPriceRange(1, 2));
+
+        assertFalse(PriceRange.isValidPriceRange("a,b,c"));
+        assertFalse(PriceRange.isValidPriceRange("1,2,3"));
+        assertFalse(PriceRange.isValidPriceRange(",,"));
+        assertFalse(PriceRange.isValidPriceRange("100,10"));
+        assertTrue(PriceRange.isValidPriceRange("0,0"));
+        assertTrue(PriceRange.isValidPriceRange("0,100"));
+
     }
 
     @Test
