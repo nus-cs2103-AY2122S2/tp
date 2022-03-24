@@ -27,6 +27,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final HustleBookParser hustleBookParser;
+    private Command lastCommand;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -42,8 +43,9 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = hustleBookParser.parseCommand(commandText);
+        Command command = hustleBookParser.parseCommand(commandText, lastCommand);
         commandResult = command.execute(model);
+        lastCommand = command;
 
         try {
             storage.saveHustleBook(model.getHustleBook());

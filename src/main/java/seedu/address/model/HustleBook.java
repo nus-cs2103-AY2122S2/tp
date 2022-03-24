@@ -20,6 +20,7 @@ public class HustleBook implements ReadOnlyHustleBook {
 
     private final UniquePersonList persons;
 
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html

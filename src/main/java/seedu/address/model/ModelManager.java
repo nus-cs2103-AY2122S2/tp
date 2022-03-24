@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
 
@@ -121,6 +122,7 @@ public class ModelManager implements Model {
     public void sortPersonListByDate() {
         hustleBook.sortPersonByDate();
     }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

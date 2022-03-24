@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
 
@@ -87,6 +88,7 @@ public interface Model {
      * Sorts the person list.
      */
     void sortPersonListByDate();
+
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

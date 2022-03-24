@@ -37,10 +37,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PREV_DATE_MET, PREFIX_INFO);
 
-        Name name;
+        String name;
 
         try {
-            name = ParserUtil.parseName(argMultimap.getPreamble());
+            name = ParserUtil.parseNameString(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
