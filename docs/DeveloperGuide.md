@@ -121,17 +121,31 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `client` objects (which are contained in a `UniqueclientList` object).
-* stores the currently 'selected' `client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+<div markdown="span" class="alert alert-info">:information_source: Note that the usage of the term `CLIENT` is abstract, and represents each Client entity: Buyer, Seller
+</div>  
+
+* stores the address book data i.e., all `CLIENT` objects (which are contained in a `UniqueCLIENTList` object).
+* stores the currently 'selected' `CLIENT` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `client` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `client` needing their own `Tag` objects.<br>
+Let's take a look at the internal structure of the `CLIENT` entity.
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+* all abstract `CLIENT` objects (Buyer or Seller) have a name and phone number.
+* `Buyer` has `PropertyToBuy` while `Seller` has `PropertyToSell`.
 
-</div>
+  <img src="images/ClientClassDiagram.png" width="450" />
 
+Now, what PropertyToBuy and PropertyToSell classes encapsulate:
+
+<img src="images/PropertyClassDiagram.png" width="450" />
+
+
+<div markdown="span" class="alert alert-info">:information_source: Note that We have decided to separate these 2 fields and NOT make them inherit an abstract `Property` class.
+* This is because sellers know the exact property(and address of the property) that they are selling.
+
+* We can hence extend the code base more flexibly in the future if we remove some fields from PropertyToBuy or add more fields to PropertyToSell.
+</div>  
 
 ### Storage component
 
@@ -154,6 +168,70 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Match feature
+
+#### Proposed Implementation
+
+We are currently implementing to implement a Match feature. In implements the following operation:
+
+* `match` —  Matches a Buyer to a List of Seller.
+
+Format: `match buyer_index`
+* The fields are:
+    * `buyer_index` - index of the Buyer that the user is trying to match with Sellers.
+    
+Result:
+* The list of sellers that match the buyer's demands are displayed in the UI.
+
+#### How match is going to be implemented
+
+* The match command will match a Buyer with Sellers that have a `PropertyToSell` that matches the demands of the `PropertyToBuy` of the buyer.
+
+* How does match filter the sellers (How does `PropertyToBuy` match with `PropertyToSell`:
+
+    -  If there exists a price where a buyer is willing to buy and seller is willing to sell for in their respective `buyRange` and `sellRange`, **AND**
+    - Their House are equal (i.e, the Location and HouseType of the house matches)
+
+* An example:
+    - buyer's `PropertyToBuy`(after `edit` or `add`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
+        - `Name`: *Janald*
+    
+        - PropertyToBuy: 
+            - `HouseType`: `BUNGALOW`,
+            - `Location`: `Serangoon` and 
+            - `PriceRange`:(50 000, 100 000) in dollars
+
+    - a certain seller has
+        - `Name`: *Junhong*
+        - `ProperyToSell`: 
+            - `House` with `HouseType`: `BUNGALOW` and `Location`: `Serangoon` as well
+            - His `PriceRange` that he is willing to sell the property for is (99 999, 200 000)
+    - In this case, the PropertyToBuy and PropertyToSell can match(same House, and 99 999 - 100 000 dollars is a matching price)
+    - `match 2` will display the list of sellers that match the buyer *Janald*. As a result, *Junhong* will be one of the sellers displayed.
+    
+#### Why match is going to be implemented
+
+* So far, our AgentSee application helps housing agents to keep track of their clients in an efficient manner.
+
+* Since there are so many buyers and sellers to keep track of, it would be useful for agents to automate the matching of buyers to sellers.
+* The match feature will help agents filter and find a matching property that a buyer wants to buy and a seller wants to sell, which is of great convenience for agents to liase buyers with sellers.
+* What buyers look for when buying a Property is its `Location`, `HouseType`, and they have a `PriceRange` they are willing to pay for. Therefore, we are implementing `match` such that these conditions are met.
+
+#### \[Proposed\]  Alternatives considered
+
+* We can match buyers with other less strict conditions as well.
+* For example, we can match buyers and sellers with only match:
+    - HouseTypes only (example: `COLONIAL`, Since buyers may be looking only for a specific HouseType, regardless of Location)
+    - Location only (example: `Toa Payoh`, Since some buyers may like to buy a Property at a specific area, regardless of other conditions)
+    - PriceRange only (Since buyers may just be looking for properties in their buy range)
+
+* As such, we have a more flexible match feature which would be ideal for agents to match based on their dynamic client demands.
+
+### \[Proposed\] Bargain/Negotiate feature
+
+* An additional feature that could be implemented in the future.
+    
+=======
 ### `addbuyer` feature
 The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
 
@@ -204,6 +282,7 @@ The following Sequence Diagrams summarizes the various steps involved:
 ![AddBuyerSequenceDiagram](images/AddBuyerSequenceDiagram.png)
 
 For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
+
 
 ### \[Proposed\] Undo/redo feature
 
