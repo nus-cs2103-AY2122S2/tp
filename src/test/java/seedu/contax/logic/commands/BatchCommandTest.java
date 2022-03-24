@@ -7,12 +7,12 @@ import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.logic.commands.BatchCommand.BatchType;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
-import seedu.contax.logic.commands.BatchCommand.BatchType;
 import seedu.contax.model.util.SearchType;
 
 /**
