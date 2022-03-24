@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -160,6 +161,11 @@ public class AddCommandTest {
 
         @Override
         public void unmarkTaskOfPerson(StudentId studentId, Index index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task) {
             throw new AssertionError("This method should not be called.");
         }
 

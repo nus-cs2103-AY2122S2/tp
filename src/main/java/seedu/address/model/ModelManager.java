@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -143,6 +144,12 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
+        requireNonNull(task);
+        return addressBook.checkProgress(moduleCode, task);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
