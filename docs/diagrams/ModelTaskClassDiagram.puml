@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package TaskModel <<Rectangle>>{
+Class Task
+Class Todo
+Class Event
+Class Deadline
+Class Date
+Class Time
+Class Description
+Class UniqueTaskList
+
+}
+
+UniqueTaskList --> "~* all" Task
+AddressBook *--> "1" UniqueTaskList
+Task *-> Description
+Todo .up.|> Task
+Event .up.|> Task
+Deadline .up.|> Task
+Event *-->  "2" Time
+Event *-->  Date
+Deadline *-->  Date
+Deadline *-->  Time
+Todo *--> Description
+Event *--> Description
+Deadline *--> Description
+
+ModelManager -->"~* filtered" Task
+Task -->"~* assigned" Person
+@enduml
