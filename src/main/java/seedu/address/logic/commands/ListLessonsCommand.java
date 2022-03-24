@@ -7,6 +7,7 @@ import seedu.address.model.Model;
 
 public class ListLessonsCommand extends Command {
     public static final String COMMAND_WORD = "listlessons";
+    public static final String SHORTENED_COMMAND_WORD = "ll";
 
     public static final String MESSAGE_SUCCESS = "Listed all lessons";
 

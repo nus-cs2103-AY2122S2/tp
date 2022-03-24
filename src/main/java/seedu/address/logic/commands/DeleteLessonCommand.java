@@ -16,6 +16,7 @@ import seedu.address.model.lesson.Lesson;
 public class DeleteLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "rmlesson";
+    public static final String SHORTENED_COMMAND_WORD = "rml";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
