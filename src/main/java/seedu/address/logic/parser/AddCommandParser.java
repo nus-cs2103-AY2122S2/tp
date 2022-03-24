@@ -4,16 +4,16 @@ import static seedu.address.commons.core.DataTypeFlags.FLAG_APPLICANT;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_INTERVIEW;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.applicants.AddApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.interview.AddInterviewCommandParser;
 import seedu.address.logic.parser.position.AddPositionCommandParser;
-import seedu.address.ui.PositionListPanel;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Parses add command and calls the respective AddXCommandParsers according to the flag.
