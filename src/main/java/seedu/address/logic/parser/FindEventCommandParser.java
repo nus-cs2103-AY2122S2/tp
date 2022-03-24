@@ -10,6 +10,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventFilterPredicate;
 
 /**
  * Parses input arguments and creates a new FindEventCommand object
@@ -49,6 +50,13 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
 
         List<String> friendNameSubstrings = argMultimap.getAllValues(PREFIX_FRIEND_NAME);
 
-        return new FindEventCommand(eventNameSubstring, searchDate, friendNameSubstrings);
+        EventFilterPredicate predicate;
+        if (searchDate != null) {
+            predicate = new EventFilterPredicate(eventNameSubstring, searchDate, friendNameSubstrings);
+        } else {
+            predicate = new EventFilterPredicate(eventNameSubstring, friendNameSubstrings);
+        }
+
+        return new FindEventCommand(predicate);
     }
 }

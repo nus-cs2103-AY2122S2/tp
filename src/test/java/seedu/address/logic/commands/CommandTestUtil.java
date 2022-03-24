@@ -212,12 +212,12 @@ public class CommandTestUtil {
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedPersonList = new ArrayList<>(actualModel.getFilteredPersonList());
-        List<Event> expectedEventList = new ArrayList<>(actualModel.getEventsList());
+        List<Event> expectedEventList = new ArrayList<>(actualModel.getFilteredEventList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedPersonList, actualModel.getFilteredPersonList());
-        assertEquals(expectedEventList, actualModel.getEventsList());
+        assertEquals(expectedEventList, actualModel.getFilteredEventList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the

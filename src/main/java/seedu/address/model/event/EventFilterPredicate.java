@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Event}'s {@code name, date, friend names} matches the given arguments.
+ * Tests that a {@code Event}'s {@code name, date, friend names} matches the given arguments. Matching is
+ * case-insensitive.
  */
 public class EventFilterPredicate implements Predicate<Event> {
     private final String eventNameSubstring;
@@ -16,7 +17,7 @@ public class EventFilterPredicate implements Predicate<Event> {
     private final List<String> friendNameSubstrings;
 
     /**
-     * Creates an EventFilterPredicate that filters by the given parameters.
+     * Creates an EventFilterPredicate that filters by all the given parameters.
      *
      * @param eventNameSubstring Substring that the event name must contain.
      * @param date Date that the Event must be on.
@@ -31,7 +32,7 @@ public class EventFilterPredicate implements Predicate<Event> {
     }
 
     /**
-     * Creates an EventFilterPredicate that filters by the given parameters.
+     * Creates an EventFilterPredicate that filters by all the given parameters.
      *
      * @param eventNameSubstring Substring that the event name must contain.
      * @param friendNameSubstrings Substring that must be found in the event's friend names.
@@ -53,9 +54,9 @@ public class EventFilterPredicate implements Predicate<Event> {
 
         if (isFilteredByDate) {
             boolean eventDateMatch = event.isOnDate(date);
-            return (eventNameMatch || eventDateMatch || friendNamesMatch);
+            return (eventNameMatch && eventDateMatch && friendNamesMatch);
         } else {
-            return (eventNameMatch || friendNamesMatch);
+            return (eventNameMatch && friendNamesMatch);
         }
     }
 

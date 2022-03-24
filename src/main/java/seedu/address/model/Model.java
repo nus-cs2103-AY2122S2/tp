@@ -16,7 +16,6 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -118,8 +117,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of the events list */
-    ObservableList<Event> getEventsList();
+    /** Returns an unmodifiable view of the filtered event list */
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Updates the filter of the filtered events list to filter by the given {@code predicate}.
