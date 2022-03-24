@@ -203,6 +203,29 @@ There are 3 levels to the parsing of the add command from user input.
     * Pros: Fewer levels of parsers is required.
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Deleting of Data
+
+#### Implementation
+The implementation of deleting data is similar to adding data, where deleting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface. 
+
+The parsing of a delete command from user input is also done through the 3 levels system, with `AddressBookParser`, `DeleteCommandParser`, and `DeleteXYZCommandParser` which eventually creates the `DeleteXYZCommand`.
+
+However, when deleting an applicant or a position, an additional step of cascading to delete interview is required. Since every interview is associated with an applicant and a position, we cannot have an interview exist without the corresponding applicant or position. 
+Hence, it is important to delete the associated interview(s) when deleting an applicant or a position.
+
+#### Design considerations:
+
+#### Aspect: How to cascade when deleting applicant/position to delete interview:
+
+* **Alternative 1 (current choice):** Loop through all interviews in `DeleteXYZCommand`
+    * Pros: Less coupling as a data type does not store another data type as an attribute.
+    * Cons: May be less efficient as we have to loop through the whole list of interviews everytime when deleting applicant/position.
+
+
+* **Alternative 2:** Keep relevant list of interviews for each applicant and position.
+    * Pros: More efficient when deleting since all the associated interviews are already available.
+    * Cons: Increased coupling between applicant, position, and interview which make it more bug-prone.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
