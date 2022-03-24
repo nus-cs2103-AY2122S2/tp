@@ -16,7 +16,7 @@ import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 public class FindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private final FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_validArgs_returnsFindCommand() {

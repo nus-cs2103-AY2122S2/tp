@@ -19,8 +19,12 @@ public class TypicalItems {
         new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_5).build();
     public static final Item Q10_2022_03_01 =
         new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_10).build();
+    public static final Item Q5_2020_01_01 =
+        new ItemBuilder().withExpiryDate("2020-01-01").withQuantity(QUANTITY_5).build();
+    public static final Item Q5_2200_01_01 =
+            new ItemBuilder().withExpiryDate("2200-01-01").withQuantity(QUANTITY_5).build();
     public static final Item Q5_2022_03_02 =
-        new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_5).build();
+            new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_5).build();
 
     public static final Item ITEM_A =
         new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).withQuantity(VALID_QUANTITY_A).build();
@@ -31,6 +35,14 @@ public class TypicalItems {
     private TypicalItems() {} // prevents instantiation
 
     public static List<Item> getTypicalItems() {
-        return new ArrayList<>(Arrays.asList(Q5_2022_03_01, Q10_2022_03_01, Q5_2022_03_02));
+        return new ArrayList<>(Arrays.asList(Q5_2022_03_01, Q5_2020_01_01, Q5_2200_01_01));
+    }
+
+    public static List<Item> getOnlyExpiredItems() {
+        return new ArrayList<>(Arrays.asList(Q5_2020_01_01, Q5_2022_03_01));
+    }
+
+    public static List<Item> getOnlyNonExpiredItems() {
+        return new ArrayList<>(Arrays.asList(Q5_2200_01_01));
     }
 }

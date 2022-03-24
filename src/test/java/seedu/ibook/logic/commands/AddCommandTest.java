@@ -8,6 +8,7 @@ import static seedu.ibook.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,6 @@ import seedu.ibook.model.ReadOnlyUserPrefs;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class AddCommandTest {
@@ -163,12 +163,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateProductFilters(ProductFulfillsFiltersPredicate predicate) {
+        public void updateProductFilters(Predicate<Product> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<AttributeFilter> getProductFilters() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

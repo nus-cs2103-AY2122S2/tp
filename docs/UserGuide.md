@@ -112,7 +112,7 @@ Alternatively, you can also interact with the application through buttons, such 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `exit`, `list`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
@@ -214,6 +214,22 @@ Format: `delete [TAG:VALUE ...]`
 * Must include at least one (tag, value) pair.
 
 Example: `delete n:Bread`
+
+#### 4.1.1 Finding certain products : `find`
+
+Finds products that fit a certain filter in the application.
+
+Format: `find [TAG:VALUE ...]`
+
+Tags and their values: `n:NAME` `c:CATEGORY` `p:PRICE` `d:DESCRIPTION`
+
+Examples:
+
+`find n:Water` lists all products that has Water as name.
+
+`find n:Bread c:Food` lists all products that has Bread as name and category as Food.
+
+`find c:Food` lists all products that has category as Food.
 
 ### 4.2 Item Commands *[coming soon]*
 

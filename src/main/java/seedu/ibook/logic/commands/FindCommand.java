@@ -14,7 +14,7 @@ import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all products that matches with the key value pair "
@@ -24,7 +24,12 @@ public class FindCommand extends Command {
 
     private final ProductFulfillsFiltersPredicate predicate;
 
+    /**
+     * Creates a Find Command with the filters of the {@code predicate}
+     * @param predicate
+     */
     public FindCommand(ProductFulfillsFiltersPredicate predicate) {
+        assert predicate != null;
         this.predicate = predicate;
     }
 

@@ -17,6 +17,7 @@ import seedu.ibook.logic.commands.AddCommand;
 import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.logic.commands.ExitCommand;
+import seedu.ibook.logic.commands.ExpiredCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
@@ -87,6 +88,12 @@ public class IBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + "  ") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_expired() throws Exception {
+        assertTrue(parser.parseCommand(ExpiredCommand.COMMAND_WORD) instanceof ExpiredCommand);
+        assertTrue(parser.parseCommand(ExpiredCommand.COMMAND_WORD + " ") instanceof ExpiredCommand);
     }
 
     @Test

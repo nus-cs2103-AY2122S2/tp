@@ -11,7 +11,7 @@ import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.UniqueProductList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the ibook level
  * Duplicates are not allowed (by .isSameProduct comparison)
  */
 public class IBook implements ReadOnlyIBook {
