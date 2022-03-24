@@ -21,6 +21,7 @@ Location location
 }
 
 enum HouseType {
+ANY,
 APARTMENT,
 BUNGALOW,
 CONDOMINIUM,

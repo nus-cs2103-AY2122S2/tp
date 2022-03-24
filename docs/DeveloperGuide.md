@@ -121,20 +121,31 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `client` objects (which are contained in a `UniqueclientList` object).
-* stores the currently 'selected' `client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+<div markdown="span" class="alert alert-info">:information_source: Note that the usage of the term `CLIENT` is abstract, and represents each Client entity: Buyer, Seller
+</div>  
+
+* stores the address book data i.e., all `CLIENT` objects (which are contained in a `UniqueCLIENTList` object).
+* stores the currently 'selected' `CLIENT` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 Let's take a look at the internal structure of the `CLIENT` entity.
 
-<img src="images/ClientClassDiagram.png" width="450" />
+* all abstract `CLIENT` objects (Buyer or Seller) have a name and phone number.
+* `Buyer` has `PropertyToBuy` while `Seller` has `PropertyToSell`.
 
-Now, the PropertyToBuy and PropertyToSell low-level details.
+  <img src="images/ClientClassDiagram.png" width="450" />
+
+Now, what PropertyToBuy and PropertyToSell classes encapsulate:
 
 <img src="images/PropertyClassDiagram.png" width="450" />
 
-NOTE: We have decided to separate these 2 fields and NOT make them inherit an abstract `Property` class, because sellers know the exact property(and address of the property) that they are selling. We can extend the code base more flexibly in the future if we remove some fields from PropertyToBuy or add more fields to PropertyToSell
+
+<div markdown="span" class="alert alert-info">:information_source: Note that We have decided to separate these 2 fields and NOT make them inherit an abstract `Property` class.
+* This is because sellers know the exact property(and address of the property) that they are selling.
+
+* We can hence extend the code base more flexibly in the future if we remove some fields from PropertyToBuy or add more fields to PropertyToSell.
+</div>  
 
 ### Storage component
 
