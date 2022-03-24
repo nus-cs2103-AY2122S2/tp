@@ -37,9 +37,11 @@ Given below are my contributions to the project.
     * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
     * Added documentation for the `match` feature
     * Added documentation for the `Preference` attribute
+    * Updated documentation for the `find` feature
   * Developer Guide:
     * Added implementation details of the `match` feature
     * Added implementation details of the `Preference` attribute
+    * Added implementation details of the enhanced `find` feature
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
