@@ -154,7 +154,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<<<<<<< HEAD
+### Candidate model
+
+#### Previous Implementation
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+#### Current Implementation
+
+To suit the direction of where TAlent Assistant™ is headed to, the previous `Person` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
+
+List of new entities:
+1. `StudentId`
+2. `Course`
+3. `Seniority`
+4. `ApplicationStatus`
+5. `InterviewStatus`
+6. `Availability`
+
+<img src="images/CandidateModelClassDiagram.png" />
+
 ### Find feature
 
 #### What is the feature about?
@@ -208,26 +227,6 @@ checks for the specific related entity, and should not have any other reason to 
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens when a user executes a `find` command: <br>
 <img src="images/FindActivityDiagram.png" width="250" />
-=======
-### Candidate model
-
-#### Previous Implementation
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-#### Current Implementation
-
-To suit the direction of where TAlent Assistant™ is headed to, the previous `Person` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
-
-List of new entities:
-1. `StudentId`
-2. `Course`
-3. `Seniority`
-4. `ApplicationStatus`
-5. `InterviewStatus`
-6. `Availability`
-
-<img src="images/CandidateModelClassDiagram.png" />
 
 ### Add feature
 
@@ -272,8 +271,6 @@ The following activity diagram summarizes what happens when a user executes an `
 <br>
 
 <img src="images/AddActivityDiagram.png" width="250" />
-
->>>>>>> b1bec0a1ff1ab25d7325a6189005c0e1bc82bda8
 
 ### \[Proposed\] Undo/redo feature
 
