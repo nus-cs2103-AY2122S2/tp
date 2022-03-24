@@ -18,7 +18,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindEventCommand;

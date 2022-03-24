@@ -173,7 +173,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findevent() throws Exception {
-        EventFilterPredicate predicate =  new EventFilterPredicateBuilder().build();
+        EventFilterPredicate predicate = new EventFilterPredicateBuilder().build();
 
         FindEventCommand command = (FindEventCommand) parser.parseCommand(
                 FindEventCommand.COMMAND_WORD + " " + PREFIX_NAME + DEFAULT_NAME_SUBSTRING

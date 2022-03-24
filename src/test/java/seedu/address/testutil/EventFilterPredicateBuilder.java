@@ -63,6 +63,9 @@ public class EventFilterPredicateBuilder {
         return this;
     }
 
+    /**
+     * Builds and returns the EventFilterPredicate with the data in the builder.
+     */
     public EventFilterPredicate build() {
         if (date == null) {
             return new EventFilterPredicate(nameSubstring, friendNameSubstrings);
