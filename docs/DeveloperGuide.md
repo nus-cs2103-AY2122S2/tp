@@ -331,6 +331,27 @@ wrap it into a comparator and pass to `Model#sortPersonList()`.
     * Cons: Will clutter `SortCommand` and may not be manageable once there are a lot of fields.
 
 
+### \[Proposed\] Command chaining
+**Proposed implementation**
+
+The proposed command chaining mechanism is facilitated in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
+
+To facilitate multiple commands, the program will split the given user input by a specified delimiter - in this case `|` will be used to seperate multiple commands. Once the input has been split, the program can then evaluate each command sequentially by iterating through the individual commands collected.
+
+#### Design considerations:
+
+**Aspect: Handling of special commands and errors:**
+
+* **Alternative 1 (current choice):** The special commands `help` and `exit` and command errors will break the chain of execution.
+    * Pros: Intuitive as `help` and `exit` often require immediate action thus subsequent commands are unlikely to be executed anyway even in normal circumstances. Errors in preceding commands may also affect subsequent commands and thus should stop execution to be rectified.
+    * Cons: Will not allow the execution of the following commands which may cause some confusion.
+
+
+* **Alternative 2:** Ignore special commands and errors in the middle of the command chain and execute the following commands regardless.
+    * Pros: Allows all commands to be executed which may be expected by some. May even make more sense as calling `help` or `exit` in the command chain does not make much sense and may more often or not be an error.
+    * Cons: Calling `help` or `exit` in the middle of a chain will be useless and some commands may be incorrectly run if preceding commands are invalid.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

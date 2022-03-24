@@ -9,7 +9,7 @@
 }
 
 .list-cell:filled {
-    -fx-background-color: #FCF3E5;
+    -fx-background-color: #FCF2E4;
 }
 
 .list-cell:filled:odd {
@@ -21,13 +21,13 @@
 }
 
 .result-display {
-    -fx-background-color: #FCF3E5;
+    -fx-background-color: #FCF2E4;
     -fx-text-fill: #222;
-    -fx-border-color: #FCF3E5;
+    -fx-border-color: #FCF2E4;
 }
 
 .result-display .content {
-    -fx-background-color: #FCF3E5;
+    -fx-background-color: #FCF2E4;
 }
 
 .status-bar .label {
@@ -51,7 +51,7 @@
 }
 
 #resultPane {
-    -fx-border-color: #FCF3E5;
+    -fx-border-color: #FCF2E4;
 }
 
 #commandTextField {
