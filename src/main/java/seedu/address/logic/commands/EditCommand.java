@@ -298,9 +298,9 @@ public class EditCommand extends Command {
             String executedTrigger = InterviewStatus.COMPLETED;
 
             if (getApplicationStatus().isPresent()) {
-                if (applicationStatus.toString().equals(acceptedTrigger)
-                        || applicationStatus.toString().equals(rejectedTrigger)) {
-                    setInterviewStatus(new InterviewStatus(executedTrigger));
+                if (applicationStatus.toString().equals(ACCEPTED_STATUS)
+                        || applicationStatus.toString().equals(REJECTED_STATUS)) {
+                    setInterviewStatus(new InterviewStatus(COMPLETED_STATUS));
                 }
             }
         }
