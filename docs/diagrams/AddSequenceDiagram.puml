@@ -12,8 +12,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
-participant ":TAssist" as TAssist MODEL_COLOR
-participant ":UniqueStudentList" as UniqueStudentList MODEL_COLOR
 end box
 
 [-> LogicManager : execute(ADD_STUDENT_COMMAND)
@@ -58,23 +56,7 @@ deactivate TAssistParser
 LogicManager -> AddCommand : execute()
 activate AddCommand
 
-AddCommand -> ModelManager : addEntity(student)
-activate ModelManager
-
-ModelManager -> TAssist : addStudent(student)
-activate TAssist
-
-TAssist -> UniqueStudentList : add(student)
-activate UniqueStudentList
-
-UniqueStudentList --> TAssist
-deactivate UniqueStudentList
-
-TAssist --> ModelManager
-deactivate TAssist
-
-ModelManager --> AddCommand
-deactivate ModelManager
+ref over AddCommand, ModelManager : Add Student
 
 create CommandResult
 AddCommand -> CommandResult

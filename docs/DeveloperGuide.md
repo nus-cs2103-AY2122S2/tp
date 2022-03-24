@@ -192,6 +192,7 @@ Step 3. The user executes `add student` command to add a student to `TAssist`. T
 The following sequence diagram shows how the add operation works:
 
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
+![AddModelSequenceDiagram](images/AddModelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -229,6 +230,7 @@ Step 3. The user executes `delete class 2` to delete the 2nd class group in the 
 The following sequence diagram shows how the delete operation works:
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+![DeleteModelSequenceDiagram](images/DeleteModelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
