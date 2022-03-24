@@ -158,12 +158,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add group feature
-to be updated
+explanation to be updated...
+![](images/AddGroupSequenceDiagram.png)
+![](images/AddGroupCommandActivityDiagram.png)
+
 
 ### Delete group feature
-to be updated
+to be updated...
 
-### Delete task feature
+
+### Add task feature to an existing group feature
+
+### Delete task from an existing group feature
 to be updated
 
 ### View task feature
