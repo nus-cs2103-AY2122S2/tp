@@ -8,10 +8,6 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
-
-
-
-
 public class ExpiredCommand extends Command {
 
     public static final String COMMAND_WORD = "expired";
@@ -23,7 +19,7 @@ public class ExpiredCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredProductList(expiredPredicate);
+        model.updateProductFilters(expiredPredicate);
         model.updateFilteredItemListForProducts(Item::isExpired);
         return new CommandResult(MESSAGE_SUCCESS);
     }

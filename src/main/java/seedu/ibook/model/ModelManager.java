@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -170,9 +171,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateProductFilters(ProductFulfillsFiltersPredicate predicate) {
+    public void updateProductFilters(Predicate<Product> predicate) {
         requireNonNull(predicate);
-        productFulfillsFiltersPredicate = predicate;
         filteredProducts.setPredicate(predicate);
     }
 
