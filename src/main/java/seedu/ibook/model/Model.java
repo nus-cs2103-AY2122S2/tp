@@ -55,21 +55,27 @@ public interface Model {
     ReadOnlyIBook getIBook();
 
     /**
-     * Returns true if a product with the same identity as {@code product} exists in the iBook.
+     * Returns true if a product with the same identity as {@code product} exists in the IBook.
      */
     boolean hasProduct(Product product);
 
     /**
      * Deletes the given product.
-     * The product must exist in the iBook.
+     * The product must exist in the IBook.
      */
     void deleteProduct(Product target);
 
     /**
      * Adds the given product.
-     * {@code product} must not already exist in the iBook.
+     * {@code product} must not already exist in the IBook.
      */
     void addProduct(Product product);
+
+    /**
+     * Adds the given item to {@code product}.
+     * {@code item} must not already exist in the IBook.
+     */
+    void addItem(Product product, Item item);
 
     /**
      * Replaces the given product {@code target} with {@code editedProduct}.

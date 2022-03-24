@@ -5,11 +5,13 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.ibook.commons.core.Distinguishable;
+
 /**
- * Represents an Item in the ibook.
+ * Encapsulates Product information about {@code ExpiryDate} and {@code Quantity}.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Item implements Comparable<Item> {
+public class Item implements Comparable<Item>, Distinguishable<Item> {
 
     private static final String ITEMS_MUST_BE_EQUAL_CONSTRAINT = "Items must be equal";
 
@@ -47,7 +49,7 @@ public class Item implements Comparable<Item> {
      * @param newItem Item to add.
      */
     public Item add(Item newItem) {
-        checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
+        checkArgument(this.isSame(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
         Quantity newQuantity = quantity.add(newItem.getQuantity());
         return new Item(expiryDate, newQuantity);
     }
@@ -90,7 +92,7 @@ public class Item implements Comparable<Item> {
      * Returns true if both items have the same product and expiry date.
      * This defines a weaker notion of equality between two items.
      */
-    public boolean isSameItem(Item otherItem) {
+    public boolean isSame(Item otherItem) {
         if (otherItem == this) {
             return true;
         }
@@ -100,7 +102,7 @@ public class Item implements Comparable<Item> {
     }
 
     /**
-     * Returns true if both items have the same product and expiry date.
+     * Returns true if both items have the same product, expiry date, and quantity.
      * This defines a stronger notion of equality between two items.
      */
     @Override
@@ -127,6 +129,7 @@ public class Item implements Comparable<Item> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+
         builder.append("ExpiryDate: ")
             .append(getExpiryDate())
             .append("; Quantity: ")

@@ -1,6 +1,7 @@
 package seedu.ibook.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -94,14 +95,23 @@ public class IBook implements ReadOnlyIBook {
         products.remove(key);
     }
 
+    //// item-level operations
+
+    /**
+     * Adds {@code item} to a {@code product} in the iBook.
+     */
+    public void addItem(Product product, Item item) {
+        requireAllNonNull(product, item);
+        product.addItem(item);
+    }
+  
     /**
      * Removes {@code key} from {@targetProduct}.
      * {@code targetProduct} must exist in the iBook and {@code key} must exist in {@code targetProduct}.
      */
-    public void removeItem(Product targetProduct, Item key) {
+    public void removeItem(Product product, Item key) {
         requireNonNull(key);
-
-        targetProduct.removeItem(key);
+        product.removeItem(key);
     }
 
     //// util methods

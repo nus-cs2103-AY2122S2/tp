@@ -28,7 +28,7 @@ public class FindCommandParserTest {
                         new Category("noodles"),
                         new Description("tasty"),
                         new Price("3.00"))));
-        assertParseSuccess(parser, " n: Maggi c: noodles d: tasty p: 3.00", expectedFindCommand);
+        assertParseSuccess(parser, " n~Maggi c~noodles d~tasty p~3.00", expectedFindCommand);
 
         // with null values
         ProductFulfillsFiltersPredicate predicate = new ProductFulfillsFiltersPredicate();
@@ -37,7 +37,7 @@ public class FindCommandParserTest {
 
         FindCommand expectedFindCommand2 = new FindCommand(predicate);
 
-        assertParseSuccess(parser, " n: Maggi p: 3.00", expectedFindCommand2);
+        assertParseSuccess(parser, " n~Maggi p~3.00", expectedFindCommand2);
     }
 
 }

@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.ibook.commons.core.exceptions.DuplicateElementException;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.exceptions.DuplicateProductException;
 import seedu.ibook.testutil.ProductBuilder;
 
 
@@ -53,7 +53,7 @@ public class IBookTest {
         List<Product> newProducts = Arrays.asList(PRODUCT_A, editedProduct);
         IBookStub newData = new IBookStub(newProducts);
 
-        assertThrows(DuplicateProductException.class, () -> iBook.resetData(newData));
+        assertThrows(DuplicateElementException.class, () -> iBook.resetData(newData));
     }
 
     @Test
