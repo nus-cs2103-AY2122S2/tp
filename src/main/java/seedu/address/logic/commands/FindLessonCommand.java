@@ -34,16 +34,6 @@ public class FindLessonCommand extends Command {
                 String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()));
     }
 
-    /**
-     * Returns true if the command word entered inside the user-input matches any of the
-     * specified keywords identified with this command.
-     */
-    public boolean matchesCommandWord(String commandWord) {
-        String lowerCaseCommandWord = commandWord.toLowerCase();
-
-        return commandWord.equals(COMMAND_WORD) || commandWord.equals(SHORTENED_COMMAND_WORD);
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
