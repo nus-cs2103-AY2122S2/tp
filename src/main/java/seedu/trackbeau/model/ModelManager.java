@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.trackbeau.commons.core.GuiSettings;
 import seedu.trackbeau.commons.core.LogsCenter;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.service.Service;
 
 /**
  * Represents the in-memory model of TrackBeau data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final TrackBeau trackBeau;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
+    private final FilteredList<Service> services;
 
     /**
      * Initializes a ModelManager with the given trackBeau and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.trackBeau = new TrackBeau(trackBeau);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
+        services = new FilteredList<>(this.trackBeau.getServiceList());
     }
 
     public ModelManager() {
@@ -87,6 +90,8 @@ public class ModelManager implements Model {
         return trackBeau;
     }
 
+    //=========== Customers ================================================================================
+
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
@@ -107,7 +112,6 @@ public class ModelManager implements Model {
     @Override
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
-
         trackBeau.setCustomer(target, editedCustomer);
     }
 
@@ -128,6 +132,42 @@ public class ModelManager implements Model {
         filteredCustomers.setPredicate(predicate);
     }
 
+    //=========== Services =============================================================
+
+    @Override
+    public boolean hasService(Service service) {
+        requireNonNull(service);
+        return trackBeau.hasService(service);
+    }
+
+    @Override
+    public void deleteService(Service target) {
+        trackBeau.removeService(target);
+    }
+
+    @Override
+    public void addService(Service service) {
+        trackBeau.addService(service);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+    }
+
+    @Override
+    public void setService(Service target, Service editedService) {
+        requireAllNonNull(target, editedService);
+        trackBeau.setService(target, editedService);
+    }
+
+    @Override
+    public ObservableList<Service> getServiceList() {
+        return services;
+    }
+
+    @Override
+    public void updateServiceList(Predicate<Service> predicate) {
+        requireNonNull(predicate);
+        services.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -143,8 +183,9 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return trackBeau.equals(other.trackBeau)
-                && userPrefs.equals(other.userPrefs)
-                && filteredCustomers.equals(other.filteredCustomers);
+            && userPrefs.equals(other.userPrefs)
+            && filteredCustomers.equals(other.filteredCustomers)
+            && services.equals(other.services);
     }
 
 }

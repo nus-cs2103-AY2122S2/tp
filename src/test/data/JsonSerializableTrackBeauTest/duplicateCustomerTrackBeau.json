@@ -6,6 +6,8 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
     "staffs":  ["John"],
     "services" : [],
     "allergies": []
@@ -16,8 +18,12 @@
     "address": "4th street",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
     "staffs":  [],
     "services" : [],
     "allergies": []
-  } ]
+  } ],
+  "services": []
+
 }

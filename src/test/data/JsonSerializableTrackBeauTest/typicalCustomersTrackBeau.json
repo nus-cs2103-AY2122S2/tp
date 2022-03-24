@@ -7,6 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
     "staffs" : [ "Jason" ],
     "services" : ["Acne treatment"],
     "allergies" : ["Nickel"]
@@ -17,6 +19,8 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
     "staffs" : [ "Jason" ],
     "services" : ["Chemical Peel"],
     "allergies" : []
@@ -27,6 +31,8 @@
     "address" : "wall street",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-05-2000",
+    "regDate": "23-03-2022",
     "staffs" : [],
     "services" : [],
     "allergies" : []
@@ -37,6 +43,8 @@
     "address" : "10th street",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-1990",
+    "regDate": "23-03-2022",
     "staffs" : [],
     "services" : [],
     "allergies" : ["Cocoa Butter"]
@@ -47,6 +55,8 @@
     "address" : "michegan ave",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
     "staffs" : [],
     "services" : [],
     "allergies" : []
@@ -57,6 +67,8 @@
     "address" : "little tokyo",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
     "staffs" : [],
     "services" : [],
     "allergies" : []
@@ -67,8 +79,12 @@
     "address" : "4th street",
     "skinType": "oily",
     "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
     "staffs" : [],
     "services" : [],
     "allergies" : []
-  } ]
+  } ],
+  "services": []
+
 }

@@ -3,10 +3,12 @@ package seedu.trackbeau.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
@@ -24,11 +26,13 @@ import seedu.trackbeau.commons.util.CollectionUtil;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
@@ -47,8 +51,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_REGDATE + "REGISTRATION DATE] "
             + "[" + PREFIX_SKINTYPE + "SKIN TYPE] "
             + "[" + PREFIX_HAIRTYPE + "HAIR TYPE] "
+            + "[" + PREFIX_BIRTHDATE + "BIRTHDAY] "
             + "[" + PREFIX_STAFFS + "STAFFS]... "
             + "[" + PREFIX_SERVICES + "SERVICES]... "
             + "[" + PREFIX_ALLERGIES + "ALLERGIES]...\n"
@@ -113,9 +119,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedStaffs = editCustomerDescriptor.getStaffs().orElse(customerToEdit.getStaffs());
         Set<Tag> updatedServices = editCustomerDescriptor.getServices().orElse(customerToEdit.getServices());
         Set<Tag> updatedAllergies = editCustomerDescriptor.getAllergies().orElse(customerToEdit.getAllergies());
-
+        Birthdate updatedBirthdate = editCustomerDescriptor.getBirthdate().orElse(customerToEdit.getBirthdate());
+        RegistrationDate updatedRegistrationDate = editCustomerDescriptor
+                .getRegistrationDate().orElse(customerToEdit.getRegDate());
         return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSkinType, updatedHairType,
-                updatedStaffs, updatedServices, updatedAllergies);
+                updatedStaffs, updatedServices, updatedAllergies, updatedBirthdate, updatedRegistrationDate);
     }
 
     @Override
@@ -147,6 +155,8 @@ public class EditCommand extends Command {
         private Address address;
         private SkinType skinType;
         private HairType hairType;
+        private Birthdate birthdate;
+        private RegistrationDate regDate;
         private Set<Tag> staffs;
         private Set<Tag> services;
         private Set<Tag> allergies;
@@ -167,6 +177,8 @@ public class EditCommand extends Command {
             setStaffs(toCopy.staffs);
             setServices(toCopy.services);
             setAllergies(toCopy.allergies);
+            setBirthdate(toCopy.birthdate);
+            setRegistrationDate(toCopy.regDate);
         }
 
         /**
@@ -174,7 +186,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address,
-                    skinType, hairType, staffs, services, allergies);
+                    skinType, hairType, staffs, services, allergies, birthdate, regDate);
         }
 
         public void setName(Name name) {
@@ -223,6 +235,22 @@ public class EditCommand extends Command {
 
         public Optional<HairType> getHairType() {
             return Optional.ofNullable(hairType);
+        }
+
+        public void setBirthdate(Birthdate birthdate) {
+            this.birthdate = birthdate;
+        }
+
+        public Optional<Birthdate> getBirthdate() {
+            return Optional.ofNullable(birthdate);
+        }
+
+        public void setRegistrationDate(RegistrationDate regDate) {
+            this.regDate = regDate;
+        }
+
+        public Optional<RegistrationDate> getRegistrationDate() {
+            return Optional.ofNullable(regDate);
         }
 
         /**
@@ -297,6 +325,8 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getSkinType().equals(e.getSkinType())
                     && getHairType().equals(e.getHairType())
+                    && getBirthdate().equals(e.getBirthdate())
+                    && getRegistrationDate().equals(e.getRegistrationDate())
                     && getStaffs().equals(e.getStaffs())
                     && getServices().equals(e.getServices())
                     && getAllergies().equals(e.getAllergies());

@@ -10,11 +10,16 @@ import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.StringUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
+import seedu.trackbeau.model.service.Duration;
+import seedu.trackbeau.model.service.Price;
+import seedu.trackbeau.model.service.ServiceName;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -127,6 +132,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String birthdate} into an {@code Birthdate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Birthdate} is invalid.
+     */
+    public static Birthdate parseBirthdate(String birthDate) throws ParseException {
+        requireNonNull(birthDate);
+        String trimmedbirthDate = birthDate.trim();
+        if (!Birthdate.isValidBirthdate(trimmedbirthDate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthdate(birthDate);
+    }
+
+    /**
+     * Parses a {@code String regDate} into an {@code RegistrationDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code RegistrationDate} is invalid.
+     */
+    public static RegistrationDate parseRegistrationDate(String regDate) throws ParseException {
+        requireNonNull(regDate);
+        String trimmedRegDate = regDate.trim();
+        if (!RegistrationDate.isValidRegistrationDate(trimmedRegDate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new RegistrationDate(regDate);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -151,5 +186,50 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String serviceName} into a {@code ServiceName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code serviceName} is invalid.
+     */
+    public static ServiceName parseServiceName(String serviceName) throws ParseException {
+        requireNonNull(serviceName);
+        String trimmedName = serviceName.trim();
+        if (!ServiceName.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new ServiceName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code price} is invalid.
+     */
+    public static Price parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+        return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String duration} into a {@code Duration}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code duration} is invalid.
+     */
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        if (!Duration.isValidDuration(trimmedDuration)) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+        }
+        return new Duration(trimmedDuration);
     }
 }

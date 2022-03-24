@@ -21,7 +21,7 @@ public class CustomerCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on addressbook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on Addressbook level 4</a>
      */
 
     public final Customer customer;
@@ -43,6 +43,10 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label hairType;
     @FXML
+    private Label birthDate;
+    @FXML
+    private Label regDate;
+    @FXML
     private FlowPane staffs;
     @FXML
     private FlowPane services;
@@ -62,6 +66,8 @@ public class CustomerCard extends UiPart<Region> {
         email.setText(customer.getEmail().value);
         skinType.setText("Skin Type: " + customer.getSkinType().value);
         hairType.setText("Hair Type: " + customer.getHairType().value);
+        birthDate.setText("Birthday: " + customer.getBirthdate().toString());
+        regDate.setText("Registration Date: " + customer.getRegDate().toString());
         customer.getServices().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> services.getChildren().add(new Label(tag.tagName)));
