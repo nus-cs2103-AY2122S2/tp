@@ -791,7 +791,7 @@ testers are expected to do more *exploratory* testing.
       2. Command: `find t/Action Anime` <br>
          Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
    
-   5. Test case: Multiple same prefix
+   5. Test case: Multiple of the same prefix
       1. Command: `find n/shingeki n/shutter` <br>
          Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list (Ignores the first instance of n/) <br>
          E.g. `shutter` from the name field will be matched.
