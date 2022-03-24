@@ -11,68 +11,70 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "p1:Person" as Person MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("tag 1 \nedu/computer science \nm/cs2030s m/cs2040s")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("tag 1 \nedu/computer science \nm/cs2030s m/cs2040s")
 activate AddressBookParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+AddressBookParser -> TagCommandParser : parse("1")
+activate TagCommandParser
 
-DeleteCommandParser -> ParserUtil : parseIndexes("1")
+TagCommandParser -> ParserUtil : parseTags("computer science")
 activate ParserUtil
-create DeleteCommand
-ParserUtil -> DeleteCommand
-activate DeleteCommand
+TagCommandParser -> ParserUtil : parseTags("cs2030s, cs2040s")
+create TagCommand
+ParserUtil -> TagCommand
+activate TagCommand
 
-DeleteCommand --> ParserUtil : d
-deactivate DeleteCommand
-ParserUtil --> DeleteCommandParser : d
+TagCommand --> ParserUtil : t
+deactivate TagCommand
+ParserUtil --> TagCommandParser : t
 deactivate ParserUtil
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+TagCommandParser --> AddressBookParser : t
+deactivate TagCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+TagCommandParser -[hidden]-> AddressBookParser
+destroy TagCommandParser
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : t
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> TagCommand : execute()
+activate TagCommand
 
-DeleteCommand -> DeleteCommand : deleteFromList()
-activate DeleteCommand
+create Person
+TagCommand -> Person
+activate Person
+Person --> TagCommand : p1
+deactivate Person
 
-DeleteCommand -> Model : deletePerson(Person1)
+TagCommand -> Model : setPerson(oldp1, p1)
 activate Model
-Model --> DeleteCommand
+Model --> TagCommand
 deactivate Model
 
-DeleteCommand --> DeleteCommand
-deactivate DeleteCommand
-
 create CommandResult
-DeleteCommand -> CommandResult
+TagCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> TagCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+TagCommand --> LogicManager : result
+deactivate TagCommand
 
 [<--LogicManager
 deactivate LogicManager

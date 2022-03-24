@@ -160,23 +160,28 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Delete multiple persons enhancement
 
-The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
-behaviour by extending the validity checks to the entire string of input.
-
+### Original implementation
 Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
 in the contact list might change depending on the order of deletion. <br>
 
 **For example:** <br>
-`delete 1 2 3` will throw an exception as there is no longer an index 3 during the 3rd deletion.
+In a list with only 3 contacts, `delete 1 2 3` will not be allowed as there is no longer an index 3 during the 3rd deletion.
+
+### Current implementation
+
+The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
+behaviour by extending the validity checks on the entire string of input.
 
 The workaround is then to delete each person from the largest to the smallest index. The success message displays the details
 of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion. 
 
 **For example:** <br>
-`delete 1 2 3` extracts the information out of Person 1, Person 2 and Person 3 according to the last shown list.<br>
-Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process.
+Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
-The Sequence Diagram below illustrates the interactions within the Logic component for the execute("delete 1 2 3") API call.
+First, information about Person 1, Person 2 and Person 3 will be extracted according to the last shown list.<br>
+Then, Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process.
+
+The Sequence Diagram below illustrates the interactions within the Logic component for the `execute("delete 1 2 3")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
 
@@ -198,12 +203,50 @@ allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of su
 
 ![Class diagram for Tag](images/TagClassDiagram.png)
 
+Given below is an example usage scenario and how the tagging mechanism behaves at each step.
 
+Step 1. The user enters the following valid `TagCommand`: `tag 1 edu/computer science m/cs2030s m/cs2040s` and `LogicManager`
+would execute it.
+
+Step 2. `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as a `TagCommand`.
+It will then pass the arguments to `TagCommandParser` to handle the parsing for the identified `TagCommand`.
+
+Step 3. `TagCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to tag to.
+Afterwards, `TagCommandParser` would parse the tag arguments provided using `ParserUtil#parseTags()` to identify the individual
+tag types for the arguments provided. 
+
+Step 4. After parsing the arguments, the control is handed over to `TagCommand` where it will return a `TagCommand` object. It
+will eventually return to `LogicManager` which will call `TagCommand#execute()` to execute the command.
+
+Step 5. Upon execution, the person will be fetched and tagged using `Model#setPerson`. The edited person would then be updated
+and stored in the addressbook.`CommandResult` would then generate a success message to inform the user the person has been tagged
+successfully.
+
+![The following sequence diagram shows how the tag operation works:](images/TagSequenceDiagram.png)
+
+### Edit Feature
+
+### Original implementation
+The edit command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
+`EditCommandParser` parses the information input and then creates an `EditPersonDescriptor` where the unchanged fields
+are copied over from the existing person and the fields to be overwritten are changed. The Find command then takes in
+the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
+
+### Current Implementation
+The edit command has now been upgraded to support the functionality for overwriting multiple tag lists.
 
 
 ### Removetag feature
 
 ### Find/Find -s feature
+The existing Find feature in ab3 only allowed contacts to be searched for by name. We added additional functionalities 
+to allow for greater flexibility when filtering large contacts lists according to specific predicates. The `Find` and
+`Find -s` command now allow the user to search for specific contact details (name, phone number, email and address) or
+specific tags. 
+
+The `Find`command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches 
+for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
+each tag field (see User Guide for more details).
 
 ### Event feature
 
@@ -319,25 +362,26 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                   | I want to …​                                     | So that I can…​                                                                                  |
-|----------|-----------------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                                  | see usage instructions                           | refer to instructions when I forget how to use the App                                           |
-| `* * *`  | user                                                      | view all of my contacts                          |                                                                                                  |
-| `* * *`  | user                                                      | add a new contact                                |
-| `* * *`  | user                                                      | delete a contact                                 | remove entries that I no longer need                                                             |
-| `* * *`  | user                                                      | delete multiple contacts at once                 | delete unwanted entries faster                                                                   |
-| `* * *`  | user                                                      | edit an existing contact                         | update the information when needed                                                               |
-| `* * *`  | user                                                      | tag additional information to an existing contact | keep a memo of such details for future references                                                |
-| `* * `   | user                                                      | find a person by name                            | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                      | find a person by phone number                    | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                      | find a person by email address                   | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                      | find a person by module                          | locate details of persons with identical modules, without having to go through the entire list   |
-| `* * `   | user                                                      | find a person by internship                      | locate details of persons with identical internship, without having to go through the entire list |
-| `* * `   | user                                                      | find a person by cca                             | locate details of persons with identical cca, without having to go through the entire list       |
-| `* * `   | user                                                      | find a person by education                       | locate details of persons with identical education, without having to go through the entire list |
-| `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                           | reset my contact list                                                                            |
-| `*`      | user that tagged a lot of information to the contacts     | remove a specific tag of a contact               | avoid going through the trouble of re-tagging all the information again                           |
-| `*`      | user with many persons in the contact list                | sort persons by name in alphabetical order       | locate a person easily                                                                           |
+| Priority | As a …​                                                  | I want to …​                                             | So that I can…​                                                                                  |
+|----------|----------------------------------------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                                 | see usage instructions                                   | refer to instructions when I forget how to use the App                                           |
+| `* * *`  | user                                                     | view all of my contacts                                  |                                                                                                  |
+| `* * *`  | user                                                     | add a new contact                                        |
+| `* * *`  | user                                                     | delete a contact                                         | remove entries that I no longer need                                                             |
+| `* * *`  | user                                                     | delete multiple contacts at once                         | delete unwanted entries faster                                                                   |
+| `* * *`  | user                                                     | edit an existing contact                                 | update the information when needed                                                               |
+| `* * *`  | user                                                     | tag additional information to an existing contact        | keep a memo of such details for future references                                                |
+| `* * `   | user                                                     | add an event and tag relevant persons in my contact list | keep a memo of such upcoming events with my contacts for future references                       |
+| `* * `   | user                                                     | find a person by name                                    | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                     | find a person by phone number                            | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                     | find a person by email address                           | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                     | find a person by module                                  | locate details of persons with identical modules, without having to go through the entire list   |
+| `* * `   | user                                                     | find a person by internship                              | locate details of persons with identical internship, without having to go through the entire list |
+| `* * `   | user                                                     | find a person by cca                                     | locate details of persons with identical cca, without having to go through the entire list       |
+| `* * `   | user                                                     | find a person by education                               | locate details of persons with identical education, without having to go through the entire list |
+| `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                                   | reset my contact list                                                                            |
+| `*`      | user that tagged a lot of information to the contacts    | remove a specific tag of a contact                       | avoid going through the trouble of re-tagging all the information again                          |
+| `*`      | user with many persons in the contact list               | sort persons by name in alphabetical order               | locate a person easily                                                                           |
 
 
 
@@ -523,6 +567,17 @@ The user wants to delete multiple persons instead.
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
+````
+
+###**Use case 10: Adding events**
+
+**MSS**
+````
+
+````
+**Extensions**
+````
+
 ````
 
 ### Non-Functional Requirements
