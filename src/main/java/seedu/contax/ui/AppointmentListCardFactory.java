@@ -17,6 +17,11 @@ public class AppointmentListCardFactory {
     private final ObservableList<ScheduleItem> scheduleItemList;
     private final ArrayList<Integer> indexMap;
 
+    /**
+     * Constructs an AppointmentListCardFactory.
+     *
+     * @param scheduleItemList The list of models that the factory is creating cards for.
+     */
     public AppointmentListCardFactory(ObservableList<ScheduleItem> scheduleItemList) {
         this.scheduleItemList = scheduleItemList;
         this.indexMap = new ArrayList<>(scheduleItemList.size());
