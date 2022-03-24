@@ -1,20 +1,92 @@
 {
   "persons": [
     {
-      "type" : "Student",
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "alice@example.com",
+      "type": "Student",
+      "name": "Alex Yeoh",
+      "phone": "87438807",
+      "email": "alexyeoh@example.com",
       "tagged": [
         "friends"
+      ],
+      "modules": [
+        "CS2106"
+      ],
+      "groups": [
+        {
+          "moduleCode": "CS2103",
+          "groupName": "W16-1"
+        }
       ]
     },
     {
-      "type" : "Student",
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "pauline@example.com"
+      "type": "Student",
+      "name": "Alex Yeoh",
+      "phone": "87438807",
+      "email": "alexyeoh@example.com",
+      "tagged": [
+        "friends"
+      ],
+      "modules": [
+        "CS2106"
+      ],
+      "groups": [
+        {
+          "moduleCode": "CS2103",
+          "groupName": "W16-1"
+        }
+      ]
+    },
+    {
+      "type": "Student",
+      "name": "Bernice Yu",
+      "phone": "99272758",
+      "email": "berniceyu@example.com",
+      "tagged": [
+        "colleagues",
+        "friends"
+      ],
+      "modules": [
+        "CS2103"
+      ],
+      "groups": [
+        {
+          "moduleCode": "CS2103",
+          "groupName": "W16-1"
+        }
+      ]
+    },
+    {
+      "type": "Professor",
+      "name": "Charlotte Oliveiro",
+      "phone": "93210283",
+      "email": "charlotte@example.com",
+      "tagged": [
+        "neighbours"
+      ],
+      "modules": [
+        "CS2103"
+      ],
+      "office": "COM1 02-10",
+      "groups": []
     }
   ],
-  "modules" : [ ]
+  "modules": [
+    {
+      "moduleName": "Software Engineering",
+      "moduleCode": "CS2103",
+      "groups": [
+        {
+          "groupName": "W16-1",
+          "meetingTimes": [
+            "2022-05-04T13:00:00"
+          ]
+        }
+      ]
+    },
+    {
+      "moduleName": "Introduction to Operating Systems",
+      "moduleCode": "CS2106",
+      "groups": []
+    }
+  ]
 }

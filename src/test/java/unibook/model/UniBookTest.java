@@ -14,17 +14,18 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import unibook.logic.commands.CommandTestUtil;
 import unibook.model.module.Module;
 import unibook.model.person.Person;
 import unibook.model.person.exceptions.DuplicatePersonException;
 import unibook.testutil.Assert;
-import unibook.testutil.PersonBuilder;
-import unibook.testutil.TypicalPersons;
+import unibook.testutil.builders.StudentBuilder;
+import unibook.testutil.typicalclasses.TypicalStudents;
+import unibook.testutil.typicalclasses.TypicalUniBook;
 
 public class UniBookTest {
 
     private final UniBook uniBook = new UniBook();
+    private final StudentBuilder studentBuilder = new StudentBuilder();
 
     @Test
     public void constructor() {
@@ -38,17 +39,15 @@ public class UniBookTest {
 
     @Test
     public void resetData_withValidReadOnlyUniBook_replacesData() {
-        UniBook newData = TypicalPersons.getTypicalUniBook();
+        UniBook newData = TypicalUniBook.getTypicalUniBook();
         uniBook.resetData(newData);
         assertEquals(newData, uniBook);
     }
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withTags(CommandTestUtil.VALID_TAG_HUSBAND)
-            .build();
-        List<Person> newPersons = Arrays.asList(TypicalPersons.ALICE, editedAlice);
+        // Two default persons created with studentBuilder
+        List<Person> newPersons = Arrays.asList(studentBuilder.build(), studentBuilder.build());
         List<Module> newModules = new ArrayList<>();
         UniBookStub newData = new UniBookStub(newPersons, newModules);
         Assert.assertThrows(DuplicatePersonException.class, () -> uniBook.resetData(newData));
@@ -61,22 +60,15 @@ public class UniBookTest {
 
     @Test
     public void hasPerson_personNotInUniBook_returnsFalse() {
-        assertFalse(uniBook.hasPerson(TypicalPersons.ALICE));
+        assertFalse(uniBook.hasPerson(studentBuilder.build()));
     }
 
     @Test
     public void hasPerson_personInUniBook_returnsTrue() {
-        uniBook.addPerson(TypicalPersons.ALICE);
-        assertTrue(uniBook.hasPerson(TypicalPersons.ALICE));
+        uniBook.addPerson(TypicalStudents.ALICE);
+        assertTrue(uniBook.hasPerson(TypicalStudents.ALICE));
     }
 
-    @Test
-    public void hasPerson_personWithSameIdentityFieldsInUniBook_returnsTrue() {
-        uniBook.addPerson(TypicalPersons.ALICE);
-        Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withTags(CommandTestUtil.VALID_TAG_HUSBAND)
-            .build();
-        assertTrue(uniBook.hasPerson(editedAlice));
-    }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {

@@ -1,16 +1,13 @@
-package unibook.testutil;
+package unibook.testutil.builders;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
-import unibook.model.person.Email;
-import unibook.model.person.Name;
-import unibook.model.person.Office;
-import unibook.model.person.Phone;
+import unibook.model.module.group.Group;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 
@@ -19,17 +16,14 @@ import unibook.model.person.Student;
  */
 public class ModuleBuilder {
 
-    public static final String DEFAULT_CODE = "CS2103";
-    public static final String DEFAULT_NAME = "Software Engineering";
-    public static final String DEFAULT_PROFESSOR = "Damith";
-    public static final Phone DEFAULT_PHONE_NUMBER = new Phone("12345678");
-    public static final Email DEFAULT_EMAIL = new Email("damith@nus.edu.sg");
-    public static final Office DEFAULT_OFFICE = new Office("COM1-1");
+    public static final String DEFAULT_CODE = "CS2107";
+    public static final String DEFAULT_NAME = "Introduction to Information Security";
 
     private ModuleName moduleName;
     private ModuleCode moduleCode;
     private ObservableList<Professor> professors;
     private ObservableList<Student> students;
+    private ObservableList<Group> groups;
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.
@@ -38,26 +32,26 @@ public class ModuleBuilder {
         moduleName = new ModuleName(DEFAULT_NAME);
         moduleCode = new ModuleCode(DEFAULT_CODE);
         professors = FXCollections.observableArrayList();
-        professors.add(new Professor(new Name(DEFAULT_PROFESSOR),
-            new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC"), new HashSet<>()));
         students = FXCollections.observableArrayList();
+        groups = FXCollections.observableArrayList();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the ModuleBuilder with the data of {@code moduleToCopy}.
      */
     public ModuleBuilder(Module moduleToCopy) {
         moduleName = moduleToCopy.getModuleName();
         moduleCode = moduleToCopy.getModuleCode();
         professors = moduleToCopy.getProfessors();
         students = moduleToCopy.getStudents();
+        groups = moduleToCopy.getGroups();
     }
 
     /**
      * Sets the {@code moduleName} of the {@code Module} that we are building.
      */
     public ModuleBuilder withModuleName(String name) {
-        this.moduleName = new ModuleName(name);
+        moduleName = new ModuleName(name);
         return this;
     }
 
@@ -65,22 +59,36 @@ public class ModuleBuilder {
      * Sets the {@code moduleCode} of the {@code Module} that we are building.
      */
     public ModuleBuilder withModuleCode(String code) {
-        this.moduleCode = new ModuleCode(code);
+        moduleCode = new ModuleCode(code);
         return this;
     }
 
     /**
-     * Sets the {@code professor} of the {@code Module} that we are building.
+     * Sets the {@code professors} of the {@code Module} that we are building.
      */
-    public ModuleBuilder withProfessor(String profName) {
-        this.professors = FXCollections.observableArrayList();
-        professors.add(new Professor(new Name(profName), DEFAULT_PHONE_NUMBER,
-                DEFAULT_EMAIL, new HashSet<>(), DEFAULT_OFFICE, new HashSet<>()));
+    public ModuleBuilder withProfessors(ObservableList<Professor> professors) {
+        this.professors = professors;
+        return this;
+    }
+
+    /**
+     * Sets the {@code students} of the {@code Module} that we are building.
+     */
+    public ModuleBuilder withStudents(ObservableList<Student> students) {
+        this.students = students;
+        return this;
+    }
+
+    /**
+     * Sets the {@code groups} of the {@code Module} that we are building.
+     */
+    public ModuleBuilder withGroups(Set<Group> groupName) {
+        groups = FXCollections.observableArrayList(groupName);
         return this;
     }
 
     public Module build() {
-        return new Module(moduleName, moduleCode, professors, students);
+        return new Module(moduleName, moduleCode, professors, students, groups);
     }
 
 }

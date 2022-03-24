@@ -15,79 +15,56 @@ import unibook.model.UniBook;
 import unibook.model.person.NameContainsKeywordsPredicate;
 import unibook.model.person.Person;
 import unibook.testutil.Assert;
-import unibook.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
+ * Also contains static text fields for testing parsing of commands.
  */
 public class CommandTestUtil {
 
+
+    //Data for objects to be created from scratch for testing
+    public static final String VALID_MODULE_NAME_CS2100 = "Computer Organisation";
+    public static final String VALID_MODULE_CODE_CS2100 = "CS2100";
+    public static final String VALID_NAME_STUDENT_AMY = "Amy Beasley";
+    public static final String VALID_NAME_PROFESSOR_CHARLES = "Charles Tootkins";
+    public static final String VALID_PHONE_STUDENT_AMY = "89092807";
+    public static final String VALID_PHONE_PROFESSOR_CHARLES = "91230283";
+    public static final String VALID_EMAIL_STUDENT_AMY = "amybee@example.com";
+    public static final String VALID_EMAIL_PROFESSOR_CHARLES = "charles@example.com";
+    public static final String VALID_OFFICE_2 = "COM2 03-12";
+
+    //Option fields
     public static final String VALID_OPTION_MODULE = "module";
     public static final String VALID_OPTION_STUDENT = "student";
     public static final String VALID_OPTION_PROFESSOR = "professor";
-    public static final String VALID_MODULE_COMPORG = "Computer Organisation";
-    public static final String VALID_MODULE_DISMATH = "Discrete Mathematics";
-    public static final String VALID_MODULECODE_COMPORG = "CS2100";
-    public static final String VALID_MODULECODE_DISMATH = "CS1231S";
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_ADDRESS_PROFESSOR = "Block 312, Amy Street 1";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String OPTION_DESC_MODULE = " " + CliSyntax.PREFIX_OPTION + VALID_OPTION_MODULE;
     public static final String OPTION_DESC_STUDENT = " " + CliSyntax.PREFIX_OPTION + VALID_OPTION_STUDENT;
     public static final String OPTION_DESC_PROFESSOR = " " + CliSyntax.PREFIX_OPTION + VALID_OPTION_PROFESSOR;
-    public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
-    public static final String NAME_DESC_COMPORG = " " + CliSyntax.PREFIX_NAME + VALID_MODULE_COMPORG;
-    public static final String NAME_DESC_DISMATH = " " + CliSyntax.PREFIX_NAME + VALID_MODULE_DISMATH;
-    public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + CliSyntax.PREFIX_OFFICE + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + CliSyntax.PREFIX_OFFICE + VALID_ADDRESS_BOB;
-    public static final String ADDRESS_DESC_PROFESSOR = " " + CliSyntax.PREFIX_OFFICE + VALID_ADDRESS_PROFESSOR;
-    public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String MODULE_DESC_COMPORG = " " + CliSyntax.PREFIX_MODULE + VALID_MODULECODE_COMPORG;
-    public static final String MODULE_DESC_DISMATH = " " + CliSyntax.PREFIX_MODULE + VALID_MODULECODE_DISMATH;
+    public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_STUDENT_AMY;
+    public static final String MODULE_NAME_DESC_CS2100 = " " + CliSyntax.PREFIX_NAME + VALID_MODULE_NAME_CS2100;
+    public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_STUDENT_AMY;
+    public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_STUDENT_AMY;
+    public static final String MODULE_CODE_DESC_CS2100 = " " + CliSyntax.PREFIX_MODULE + VALID_MODULE_CODE_CS2100;
 
     public static final String INVALID_OPTION_DESC = " "
-            + CliSyntax.PREFIX_OPTION + "STUDENT"; // only 'student'/'module'/'professor' allowed in option
+        + CliSyntax.PREFIX_OPTION + "STUDENT"; // only 'student'/'module'/'professor' allowed in option
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " "
-            + CliSyntax.PREFIX_OFFICE + " "; // empty string not allowed for addresses
+        + CliSyntax.PREFIX_OFFICE + " "; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     public static final Boolean PERSON_LIST_SHOWING = true;
     public static final Boolean PERSON_LIST_NOT_SHOWING = false;
     public static final Boolean MODULE_LIST_SHOWING = true;
     public static final Boolean MODULE_LIST_NOT_SHOWING = false;
 
-    static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -105,7 +82,7 @@ public class CommandTestUtil {
         }
     }
 
-    /**
+    /**d
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
@@ -122,7 +99,8 @@ public class CommandTestUtil {
      * Meant to test result on calling Methods on a certain correct page
      */
     public static void assertCommandSuccessPage(Command command, Model actualModel, CommandResult expectedCommandResult,
-                                            Model expectedModel, boolean personListShowing, boolean moduleListShowing) {
+                                                Model expectedModel, boolean personListShowing,
+                                                boolean moduleListShowing) {
         try {
             CommandResult result = command.execute(actualModel, personListShowing, moduleListShowing);
             assertEquals(expectedCommandResult, result);
@@ -138,10 +116,11 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccessPage(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel, boolean personListShowing, boolean moduleListShowing) {
+                                                Model expectedModel, boolean personListShowing,
+                                                boolean moduleListShowing) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccessPage(command, actualModel, expectedCommandResult,
-                expectedModel, personListShowing, moduleListShowing);
+            expectedModel, personListShowing, moduleListShowing);
     }
 
     /**
@@ -157,7 +136,7 @@ public class CommandTestUtil {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         Assert.assertThrows(CommandException.class,
-                expectedMessage, () -> command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING));
+            expectedMessage, () -> command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING));
         assertEquals(expectedUniBook, actualModel.getUniBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
@@ -176,7 +155,7 @@ public class CommandTestUtil {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         Assert.assertThrows(CommandException.class,
-                expectedMessage, () -> command.execute(actualModel, personListShowing, moduleListShowing));
+            expectedMessage, () -> command.execute(actualModel, personListShowing, moduleListShowing));
         assertEquals(expectedUniBook, actualModel.getUniBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }

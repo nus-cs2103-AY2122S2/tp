@@ -1,11 +1,11 @@
 {
   "persons": [
     {
-      "type" : "Student",
+      "type": "Student",
       "name": "Hans Muster",
       "phone": "9482424",
       "email": "invalid@email!3e"
     }
   ],
-  "modules" : [ ]
+  "modules": []
 }

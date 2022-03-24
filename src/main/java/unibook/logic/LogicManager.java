@@ -48,8 +48,8 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = uniBookParser.parseCommand(commandText);
         commandResult = command.execute(model,
-                isPersonListShowing,
-                isModuleListShowing);
+            isPersonListShowing,
+            isModuleListShowing);
 
         try {
             storage.saveUniBook(model.getUniBook());

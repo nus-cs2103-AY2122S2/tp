@@ -61,8 +61,8 @@ public class PersonUtil {
                 sb.append(CliSyntax.PREFIX_NEWMOD).append(" ");
             } else {
                 modules.forEach(s -> sb.append(CliSyntax.PREFIX_NEWMOD)
-                                       .append(s.getModuleCode().toString())
-                                       .append(" "));
+                    .append(s.getModuleCode().toString())
+                    .append(" "));
             }
         }
         return sb.toString();

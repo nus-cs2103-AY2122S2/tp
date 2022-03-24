@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleList;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
@@ -39,7 +40,7 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Creates a UniBook using the Persons in the {@code toBeCopied}
+     * Creates a UniBook using the data in {@code toBeCopied}
      */
     public UniBook(ReadOnlyUniBook toBeCopied) {
         this();
@@ -75,9 +76,6 @@ public class UniBook implements ReadOnlyUniBook {
         setModules(newData.getModuleList());
     }
 
-
-    //// person-level operations
-
     /**
      * Returns true if a person with the same identity as {@code person} exists in the UniBook.
      */
@@ -101,7 +99,8 @@ public class UniBook implements ReadOnlyUniBook {
      *
      * @param p person whos modules to add them to
      */
-    public void addPersonToAllTheirModules(Person p) throws PersonNoSubtypeException {
+    public void addPersonToAllTheirModules(Person p) {
+        requireNonNull(p);
         for (Module personsModule : p.getModules()) {
             Module module = modules.getModule(personsModule);
             if (p instanceof Student) {
@@ -115,6 +114,18 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
+     * Adds a student to all of the groups they are associated with.
+     * @param s
+     */
+    public void addStudentToAllTheirGroups(Student s) {
+        requireNonNull(s);
+        for (Group group : s.getGroups()) {
+            group.addMember(s);
+        }
+    }
+
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the UniBook.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the UniBook.
@@ -125,13 +136,6 @@ public class UniBook implements ReadOnlyUniBook {
         persons.setPerson(target, editedPerson);
     }
 
-    /**
-     * Removes person {@code key} from this {@code UniBook}.
-     * {@code key} must exist in the UniBook.
-     */
-    public void removePerson(Person key) {
-        persons.remove(key);
-    }
 
     //// module-level operations
 
@@ -166,11 +170,23 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Adds a Module to the UniBook.
+     * Adds a Module to UniBook.
      * The Module must not already exist in the UniBook.
      */
     public void addModule(Module m) {
         modules.add(m);
+    }
+
+    /**
+     * Adds a group to a module of UniBook. Assumes that the module associated with the
+     * group is already inside the group object.
+     *
+     * @param g
+     */
+    public void addGroupToModule(Group g) {
+        Module moduleOfGroup = g.getModule();
+        requireNonNull(moduleOfGroup);
+        moduleOfGroup.addGroup(g);
     }
 
     /**
@@ -195,12 +211,52 @@ public class UniBook implements ReadOnlyUniBook {
         modules.removeByModuleCode(key);
     }
 
+    /**
+     * Removes person {@code key} from this {@code UniBook}.
+     * {@code key} must exist in the UniBook.
+     * Removes all references to the person from associated modules.
+     */
+    public void removePerson(Person key) {
+        persons.remove(key);
+        removePersonFromModules(key);
+    }
+
+    /**
+     * Removes Student {@code key} from this {@code UniBook}.
+     * {@code key} must exist in the UniBook.
+     * Removes all references to the student from associated modules and groups.
+     */
+    public void removePerson(Student key) {
+        persons.remove(key);
+        removePersonFromModules(key);
+        removeStudentFromGroups(key);
+    }
+
+
+    /**
+     * Removes module from all persons that are associated with the module.
+     * @param moduleCode
+     */
     public void removeModuleFromAllPersons(ModuleCode moduleCode) {
         persons.removeModuleFromAllPersons(moduleCode);
     }
 
+    /**
+     * Removes person from all moduels that are associated with the module.
+     * @param person
+     */
     public void removePersonFromModules(Person person) {
         modules.removePersonFromModule(person);
+    }
+
+    /**
+     * Removes the student from all the groups they are in.
+     * @param student
+     */
+    public void removeStudentFromGroups(Student student) {
+        for (Group group: student.getGroups()) {
+            group.removeMember(student);
+        }
     }
 
     //// util methods
