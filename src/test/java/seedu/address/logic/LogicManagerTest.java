@@ -134,7 +134,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getLessonBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -160,7 +160,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException {
+        public void saveStudentBook(ReadOnlyStudentBook studentBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

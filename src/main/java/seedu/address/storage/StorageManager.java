@@ -53,30 +53,30 @@ public class StorageManager implements Storage {
     // ================ StudentBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return studentBookStorage.getAddressBookFilePath();
+    public Path getStudentBookFilePath() {
+        return studentBookStorage.getStudentBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyStudentBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(studentBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyStudentBook> readStudentBook() throws DataConversionException, IOException {
+        return readStudentBook(studentBookStorage.getStudentBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyStudentBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyStudentBook> readStudentBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return studentBookStorage.readAddressBook(filePath);
+        return studentBookStorage.readStudentBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyStudentBook addressBook) throws IOException {
-        saveAddressBook(addressBook, studentBookStorage.getAddressBookFilePath());
+    public void saveStudentBook(ReadOnlyStudentBook studentBook) throws IOException {
+        saveStudentBook(studentBook, studentBookStorage.getStudentBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException {
+    public void saveStudentBook(ReadOnlyStudentBook studentBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        studentBookStorage.saveAddressBook(addressBook, filePath);
+        studentBookStorage.saveStudentBook(studentBook, filePath);
     }
 
     // ================ LessonBook methods ==============================
