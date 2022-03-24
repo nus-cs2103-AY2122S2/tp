@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -77,7 +77,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 *`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`).
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -343,7 +343,7 @@ The following activity diagram summarizes what happens when a user executes a gr
 
 <img src="images/GradeActivityDiagram.png" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How to grade assessments:**
 
