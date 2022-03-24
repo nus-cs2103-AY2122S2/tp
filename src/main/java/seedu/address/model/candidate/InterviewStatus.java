@@ -4,9 +4,9 @@ public class InterviewStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Interview Status should be Pending, Interviewing or Not Interviewed";
-    public static final String PENDING_STATUS = "Pending";
-    public static final String INTERVIEWING_STATUS = "Interviewing";
-    public static final String NOT_INTERVIEWED_STATUS = "Not Interviewed";
+    public static final String NOT_SCHEDULED = "Not Scheduled";
+    public static final String SCHEDULED = "Scheduled";
+    public static final String COMPLETED = "Completed";
 
     public final String interviewStatus;
 
@@ -20,20 +20,20 @@ public class InterviewStatus {
         String statusTemp = "";
         input = input.replaceAll(" ", "");
 
-        if (input.equals(PENDING_STATUS.toLowerCase())) {
-            statusTemp = PENDING_STATUS;
-        } else if (input.equals(INTERVIEWING_STATUS.toLowerCase())) {
-            statusTemp = INTERVIEWING_STATUS;
-        } else if (input.equals(NOT_INTERVIEWED_STATUS
+        if (input.equals(SCHEDULED.toLowerCase())) {
+            statusTemp = SCHEDULED;
+        } else if (input.equals(COMPLETED.toLowerCase())) {
+            statusTemp = COMPLETED;
+        } else if (input.equals(NOT_SCHEDULED
                 .replaceAll(" ", "").toLowerCase())) {
-            statusTemp = NOT_INTERVIEWED_STATUS;
+            statusTemp = NOT_SCHEDULED;
         }
 
         this.interviewStatus = statusTemp;
     }
 
     /**
-     * Check if the status is a valid status.
+     * Check if the status is a valid status.`
      *
      * @param interviewStatusType the status type.
      * @return true if it is valid, false if not valid.
@@ -43,11 +43,10 @@ public class InterviewStatus {
         String input = interviewStatusType.toLowerCase();
         input = input.replaceAll(" ", "");
 
-        if (input.equals(PENDING_STATUS.toLowerCase())
-                || input.equals(INTERVIEWING_STATUS.toLowerCase())
-                || input.equals(NOT_INTERVIEWED_STATUS.replaceAll(" ", "")
+        if (input.equals(SCHEDULED.toLowerCase())
+                || input.equals(COMPLETED.toLowerCase())
+                || input.equals(NOT_SCHEDULED.replaceAll(" ", "")
                 .toLowerCase())) {
-
             return true;
         } else {
             return false;

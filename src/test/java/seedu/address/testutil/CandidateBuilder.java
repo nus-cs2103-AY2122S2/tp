@@ -26,7 +26,7 @@ public class CandidateBuilder {
     public static final String DEFAULT_EMAIL = "E0123456@u.nus.edu";
     public static final String DEFAULT_COURSE = "Computer Science";
     public static final String DEFAULT_APPLICATION_STATUS = "Pending";
-    public static final String DEFAULT_INTERVIEW_STATUS = "Pending";
+    public static final String DEFAULT_INTERVIEW_STATUS = " Not Scheduled";
     public static final String DEFAULT_AVAILABILITY = "1,2,3,4,5,6,7";
 
     private StudentId studentId;

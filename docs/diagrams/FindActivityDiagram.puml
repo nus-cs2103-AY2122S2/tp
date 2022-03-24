@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes find command;
+:System parses in the user command;
+if () then ([Valid command format parsed in])
+  :System checks through the full list of candidates containing the keyword;
+  :System returns list of candidates found;
+else ([Invalid command format parsed in])
+  :System returns invalid command error;
+endif
+
+stop
+
+@enduml

@@ -21,7 +21,9 @@ import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_PENDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -48,7 +50,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Candidate expectedCandidate = new CandidateBuilder(BOB).withTags(VALID_TAG_FRIEND)
-                .withApplicationStatus("Pending").withInterviewStatus("Pending").build();
+                .withApplicationStatus(VALID_APPLICATION_PENDING)
+                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB

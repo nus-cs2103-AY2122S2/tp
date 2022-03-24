@@ -154,6 +154,151 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Candidate model
+
+#### Previous Implementation
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+#### Current Implementation
+
+To suit the direction of where TAlent Assistant™ is headed to, the previous `Person` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
+
+List of new entities:
+1. `StudentId`
+2. `Course`
+3. `Seniority`
+4. `ApplicationStatus`
+5. `InterviewStatus`
+6. `Availability`
+
+<img src="images/CandidateModelClassDiagram.png" />
+
+### Find feature
+
+#### What is the feature about?
+The `find` mechanism is facilitated by `AddressBook`. The `find` command in `TAlent Assistant™`
+has been enhanced based on the initial implementation of the `find` command in `AddressBook3`.
+
+The enhancement works by adding a new prefix in the `CliSyntax` class `k/`, which allows the
+user to separate multiple keywords. and `f/` which allows the user to specify which field the
+`find` command should search for keywords under.
+
+#### How is the feature implemented?
+The main logic for `find` command is still implemented within `FindCommand` (which extends from `Command`) and
+`FindCommandParser`.
+
+The `FindCommandParser` class has been extended to include a switch-case block to validate
+which field the user is trying to search across:
+1. `studentId`
+2. `course`
+3. `seniority`
+4. `name`
+5. `email`
+6. `phone`
+7. `applicationStatus` (WIP)
+8. `interviewStatus` (WIP)
+9. `availability` (WIP)
+10. `candidate` (i.e. search across all fields)
+
+Based on the field validated by the switch-case block, a `new findCommand(new ContainsKeywordsPredicate(keywords))`
+will be created. The implementation of the original `NameContainsKeywordsPredicate` has been enhanced here.
+There is now a `ContainsKeywordsPredicate` parent abstract class extended by each of the above listed fields as subclasses
+(e.g. `StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicate`).
+
+#### Why is the feature implemented as such?
+**1. Switch-case block in `FindCommandParser`** <br>
+Other alternatives considered included creating a separate class to execute the logic of checking for which field the
+user had entered and return the new `ContainsKeywordsPredicate` subclass *or* to utilise `if`-`else` statements.
+In the end, the implementation was done using the switch-case block within the `FindCommandParser` class, as the
+class should contain all the necessary logic to parse in the user's input. The syntax for the switch-case block was
+also more efficient than `if`-`else` statements and was more relevant for this usage.
+
+**2. Inheritance of `ContainsKeywordsPredicate` to child classes**
+Other alternatives considered included creating one single `ContainsKeywordsPredicate` class to implement all the
+equality and keyword match checks for each and every field.
+However, this would not meet good design principles - this would make it difficult to isolate and resolve bugs during
+testing and make scalability and maintainability more complicated.
+Further, since all the child classes implement similar logic and methods, it would make sense to create an
+(abstract) parent class. This establishes the SRP principle, such that each subclass is only responsible for
+checks for the specific related entity, and should not have any other reason to change otherwise.
+
+#### UML Diagrams
+**Activity Diagram**<br>
+The following activity diagram summarizes what happens when a user executes a `find` command: <br>
+<img src="images/FindActivityDiagram.png" width="550" />
+
+### Delete feature
+
+#### What is the feature about?
+The `delete` feature allows the user to delete a Candidate from the system.
+This feature has been enhanced based on the initial implementation of the `delete` command in `AddressBook`.
+
+#### How is the feature implemented?
+The main logic is implemented within `DeleteCommand` (which extends from `Command`) and `DeleteCommandParser`. 
+A minor enhancement was added to `DeleteCommand` such that if the candidate list is empty, a message indicating that 
+there are no candidates in the system is shown to the user (instead of invalid index),
+improving the accuracy of the feedback.
+
+
+#### Why is the feature implemented as such?
+**1. Deleting a candidate by `INDEX`** <br>
+The team's original idea was to delete a candidate by its attribute `StudentId` instead of `INDEX`
+as every candidate has their own unique `StudentId`. However, upon careful consideration, we realised
+that there are two possible problems that could arise from this alternative implementation:
+1. App requirements - TAlent Assistant should be faster than GUI
+2. Performance - Each time a delete command is executed, the system will be required to iterate through the entire candidate
+list to search for the candidate with the matching `StudentId`. 
+
+#### UML Diagrams
+**Activity Diagram**<br>
+The following activity diagram summarizes what happens when a user executes a `delete` command: <br>
+<img src="images/DeleteActivityDiagram.png" width="550" />
+
+### Add feature
+
+#### What is the feature about?
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities (Refer to [TODO: UPDATE LINK]).
+
+The enhancement works by adding additional prefixes i.e. `id/[StudentId] `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned to the entities.
+
+#### How is the feature implemented?
+
+Given below is an example usage scenario and how the `add` mechanism behaves at each step.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** TAlent Assistant™ comes with preloaded data, user can execute the `clear` command for a fresh state.
+
+</div>
+
+Step 1. The user launches the application for the first time. The program will be initialised with the preloaded data.
+
+Step 2. The user proceeds to add a candidate by running the `add` command with its necessary arguments. The image provides an example of this step.
+
+![AddStep2](images/AddStep2.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Tip:** Todo: Update image
+
+</div>
+
+#### Why is the feature implemented as such?
+
+The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input. 
+
+#### UML Diagrams
+**Activity Diagram**
+
+<br>
+
+The following activity diagram summarizes what happens when a user executes an `add` command:
+
+<br>
+
+<img src="images/AddActivityDiagram.png" width="250" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -238,6 +383,68 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+
+### Edit Feature
+
+#### What is this feature about? 
+The `edit` feature allows the user to change the attributes of the Candidate in the system though the CLI.
+This feature has been enhanced based on the initial implementation of the `edit` command in `AddressBook`.
+
+#### How is this feature implemented?
+
+The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrieve the attributes that can be edited. 
+
+The user is able to edit key attributes of the Candidate, such as 
+* Phone Number
+* ApplicationStatus 
+* InterviewStatus
+
+Based on the fields that are edited by the user, the EditCommandParser will retreive the information, and update the attributes accordingly.
+There are also some attributes that are dependent on another attribute, and we will introduce `Triggers` to update the attributes automatically.
+One of such is the `InterviewStatus`. It makes sense that if the application is accepted or rejected, it also means that the interview has been completed.
+Hence the `ApplicationStatus` will trigger `InterviewStatus` if the user is changing the `ApplicationStatus` from `Pending` to `Accepted` or `Rejected`.
+The `trigger mechanism` (WIP) is currently handled by `EditCommand#triggerInterviewStatus()`. 
+
+#### Why is the feature implemented as such?
+
+**1. Triggers for `ApplicationStatus` and `InterviewStatus` <br> 
+For the `ApplicationStatus` and `InterviewStatus`, we initially thought of allowing the user to manually update individual statuses.
+(Eg. Updating `ApplicationStatus` to `Accepted` will not trigger `InterviewStatus`).
+We initially thought that this would be a cleaner way, and to also make sure there is no wrong information in the system. 
+In the end, we went ahead with the triggers as it would make sense for the user to have all the statuses updated automatically, 
+and we just need to make more checks in our code. 
+The downside to this implementation is that the user will not be able to individually allocate the `InterviewStatus`, but we believe this 
+will not be an use case for any user. 
+
+#### UML Diagram 
+The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
+<img src="images/StatusActivityDiagram.png" width="250" />
+
+
+### Help Window Feature 
+
+#### What is this feature about?
+The `help` feature allows the user see the available commands on the system. 
+This feature has been enhanced based on the initial implementation of the `help` command in `AddressBook3`.
+
+#### How is this feature implemented?
+
+The proposed `help` mechanism is facilitated by `HelpWindow`. It is supported by `HelpWindowUtil` where it will help the user open the User Guide on their desktop. 
+We used the existing implementation, and we modified it that the user can view the full user guide on their personal desktop with the click of a button. 
+For this feature, we used the [Desktop API](https://docs.oracle.com/javase/9/docs/api/java/awt/Desktop.html) from Java 9. 
+
+#### Why is the feature implemented as such?
+
+**1. Why allow user to visit full user guide? <br>
+We initially proposed to put the full list of commands and tips on the Help Window. However, we think that this does not improve user experience as 
+there will be too many commands available in the window. Hence we decided that we should streamline the important commands on the `HelpWindow`, and the 
+other information will be available on the User Guide. 
+
+As the user will not be able to remember the link to our User Guide, we hyperlinked it using the Desktop API that was available from Java.
+
+#### UML Diagram
+The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
+<img src="images/HelpWindowActivityDiagram.png" width="250" />
 
 --------------------------------------------------------------------------------------------------------------------
 

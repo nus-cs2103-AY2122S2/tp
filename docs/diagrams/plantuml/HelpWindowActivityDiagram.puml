@@ -1,0 +1,18 @@
+@startuml
+ 'https://plantuml.com/activity-diagram-beta
+
+ start
+ :User keys in the help command;
+ if () then ([Valid command])
+    :show Help Window;
+    switch ( )
+    case ([User press Open User Guide])
+    :open User Guide in Browser;
+    case()
+    endswitch
+ else ([Invalid prefix or status entered])
+   :System returns invalid command error;
+ endif
+ stop
+
+ @enduml
