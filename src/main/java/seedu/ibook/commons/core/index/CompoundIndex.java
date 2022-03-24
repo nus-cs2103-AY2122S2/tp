@@ -53,7 +53,7 @@ public class CompoundIndex {
             return true;
         }
 
-        if (!(other instanceof  CompoundIndex)) {
+        if (!(other instanceof CompoundIndex)) {
             return false;
         }
 

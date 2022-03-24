@@ -5,8 +5,6 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.ibook.model.product.Product;
-
 /**
  * Represents an Item in the ibook.
  * Guarantees: details are present and not null, field values are validated, immutable.

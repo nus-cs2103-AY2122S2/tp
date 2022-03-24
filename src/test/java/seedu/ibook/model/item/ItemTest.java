@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.testutil.TypicalItems.KAYA_BREAD_1_Q10;
 import static seedu.ibook.testutil.TypicalItems.KAYA_BREAD_1_Q5;
-import static seedu.ibook.testutil.TypicalItems.PEANUT_BUTTER_BREAD_1_Q5;
 import static seedu.ibook.testutil.TypicalItems.QUANTITY_10;
 
 import org.junit.jupiter.api.Test;
@@ -59,9 +58,6 @@ class ItemTest {
 
         // different type -> returns false
         assertNotEquals(5, KAYA_BREAD_1_Q5);
-
-        // different person -> returns false
-        assertNotEquals(KAYA_BREAD_1_Q5, PEANUT_BUTTER_BREAD_1_Q5);
     }
 
     @Test

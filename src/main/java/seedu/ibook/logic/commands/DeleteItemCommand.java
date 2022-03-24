@@ -1,15 +1,15 @@
 package seedu.ibook.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class DeleteItemCommand extends Command {
 
