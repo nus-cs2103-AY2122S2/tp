@@ -166,6 +166,29 @@ Note that the `List` command can also list modules and in this case the flow wou
 appropriate boolean variables will be flipped to represent the correct view. 
 ![Interactions Inside the Logic Component for the `list` command](images/ListSequenceDiagram.png)
 
+### Edit feature
+The edit feature enables the user to edit certain attributes of a module or a person (professor or student).
+
+
+![Interactions Inside the Logic Component for the `edit` command](images/EditCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of the edit command. There are 2 commands that the edit can do:
+1. edit INDEX o/module [n/NAME] [m/MODULECODE]
+2. edit INDEX o/student [n/NAME] [p/PHONE] [e/EMAIL]...
+
+For both types of commands listed above, the command is first parsed by the `EditCommandParser`. Depending on whether
+the user is editing a person or a module, `EditCommandParser`, the sequence will either go into the Option edit person
+path or the Option edit module path respectively. For the first path on the sequence diagram, an `EditPersonDescriptor`
+object will be instantiated. For the alternative path, an `EditModuleDescriptor` will be instantiated instead. At the 
+same time, `LogicManager` will call `execute(Model)` to create a `EditCommand` object. Depending on the path chosen, 
+the `Descriptor` object will be passed into `EditCommand`. For editing a person, the `EditCommand` will call `setPerson(personToEdit, editedPerson)`, 
+while for editing a module, the `EditCommand` will call `setModule(moduleToEdit, editedModule)` to update the person and module list 
+respectively in the `Model`. Lastly in both cases, a `CommandResult` will be returned.
+
+Note that before using the `Edit` command, the user must change to the correct viewpage. For example, if a user wants to 
+edit a module, (s)he must first enter `list v/modules` to change to the module viewpage.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
