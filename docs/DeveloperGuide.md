@@ -188,7 +188,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 
 #### Current Implementation
 The current tagging feature is originally a functionality in the `Add` command. However, it was extracted out and made
-into its own command in order to help facilitate a clearer distinction between those features. The `Tag` command would
+into its own command in order to help facilitate a clearer distinction between those features. The `tag` command would
 allow users to tag additional information to existing persons in the address book.
 
 With this new introduction of the Tag Command, it led to the creation of the abstract class `Tag`. The idea was to only
@@ -199,6 +199,18 @@ allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of su
 * `Internship` - stores information about the person's internship
 
 ![Class diagram for Tag](images/TagClassDiagram.png)
+
+### Edit Feature
+
+### Original implementation
+The edit command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
+`EditCommandParser` parses the information input and then creates an `EditPersonDescriptor` where the unchanged fields
+are copied over from the existing person and the fields to be overwritten are changed. The Find command then takes in
+the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
+
+### Current Implementation
+The edit command has now been upgraded to support the functionality for overwriting multiple tag lists.
+
 
 ### Removetag feature
 
