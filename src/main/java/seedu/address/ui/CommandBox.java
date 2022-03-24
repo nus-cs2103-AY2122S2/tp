@@ -1,8 +1,13 @@
 package seedu.address.ui;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +22,8 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private ArrayList<String> commandHistory;
+    private int commandHistoryPointerIndex;
 
     @FXML
     private TextField commandTextField;
@@ -28,6 +35,8 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+        this.commandHistory = new ArrayList<>();
+        this.commandHistoryPointerIndex = -1;
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
@@ -43,10 +52,70 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            commandHistory.add(commandText);
+            commandHistoryPointerIndex = commandHistory.size();
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles arrow key (up and down) pressed event.
+     */
+    @FXML
+    private void handleArrowKeyPressed(KeyEvent keyEvent) {
+        KeyCode keyPressed = keyEvent.getCode();
+        switch (keyPressed) {
+        case UP:
+            keyEvent.consume();
+            showPreviousCommand();
+            break;
+        case DOWN:
+            keyEvent.consume();
+            showNextCommand();
+            break;
+        default:
+        }
+    }
+
+    private void showPreviousCommand() {
+        if (commandHistoryPointerIndex < 0) {
+            return;
+        }
+        try {
+            commandHistoryPointerIndex--;
+            String previousCommand = commandHistory.get(commandHistoryPointerIndex);
+            setCommandBoxText(previousCommand);
+        } catch(IndexOutOfBoundsException e) {
+            return; //Nothing needs to be done for requests beyond what is stored in history.
+        }
+    }
+
+    private void showNextCommand() {
+        if (commandHistoryPointerIndex >= commandHistory.size() - 1) {
+            setCommandBoxText("");
+            commandHistoryPointerIndex = commandHistory.size();
+            return;
+        }
+        try {
+            commandHistoryPointerIndex++;
+            String nextCommand = commandHistory.get(commandHistoryPointerIndex);
+            setCommandBoxText(nextCommand);
+        } catch(IndexOutOfBoundsException e) {
+            return; //Nothing needs to be done for requests beyond what is stored in history.
+        }
+    }
+
+    /**
+     * Sets the text in command box with the input string
+     * and positions the cursor at the end of the text.
+     * @param str
+     */
+    private void setCommandBoxText(String str) {
+        commandTextField.setText(str);
+        int newCursorPosition = commandTextField.getLength();
+        commandTextField.positionCaret(newCursorPosition);
     }
 
     /**
