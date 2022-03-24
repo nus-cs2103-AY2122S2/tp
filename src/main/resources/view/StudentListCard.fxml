@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ListView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -28,7 +29,7 @@
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
             </HBox>
             <FlowPane fx:id="tags" />
-            <FlowPane fx:id="labCard" GridPane.halignment="RIGHT" />
+            <ListView fx:id="labCard" />
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
             <Label fx:id="github" styleClass="cell_small_label" text="\$github" />
             <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" />
