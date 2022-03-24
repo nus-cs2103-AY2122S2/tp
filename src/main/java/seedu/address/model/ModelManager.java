@@ -16,7 +16,6 @@ import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
-import seedu.address.model.schedule.ScheduleName;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -47,7 +46,7 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    //=========== UserPrefs (Start) ===========================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -71,6 +70,9 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
+    //=========== UserPrefs (End) =============================================================================
+
+    //=========== MyGM (Start) ================================================================================
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
@@ -82,8 +84,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
-
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
@@ -94,12 +94,36 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== MyGM (End) =================================================================================
+
+    //=========== MyGM Player (Start) ========================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
 
+    @Override
+    public void deletePerson(Person target) {
+        addressBook.removePerson(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addPerson(Person person) {
+        addressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+        addressBook.setPerson(target, editedPerson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    // Added to fit MyGM needs.
     @Override
     public boolean hasPersonName(Name targetName) {
         requireNonNull(targetName);
@@ -167,33 +191,6 @@ public class ModelManager implements Model {
         return addressBook.isFull();
     }
 
-    /**
-     * Refreshes the model to display the change in GUI.
-     */
-    @Override
-    public void refresh() {
-        addressBook.refresh();
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
     @Override
     public void setLineup(Lineup target, Lineup editedLineup) {
         requireAllNonNull(target, editedLineup);
@@ -208,7 +205,17 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    //=========== Schedule
+    /**
+     * Refreshes the model to display the change in GUI.
+     */
+    @Override
+    public void refresh() {
+        addressBook.refresh();
+    }
+
+    //=========== MyGM Player (End) ========================================================================
+
+    //=========== MyGM Schedule (Start) =====================================================================
     @Override
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);
@@ -216,40 +223,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasScheduleName(ScheduleName targetName) {
-        requireNonNull(targetName);
-        return addressBook.hasScheduleName(targetName);
-    }
-
-
-    @Override
-    public Person getPerson(Name targetName) {
-        requireNonNull(targetName);
-        return addressBook.getPerson(targetName);
-    }
-
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteSchedule(Schedule target) {
+        addressBook.removeSchedule(target);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addSchedule(Schedule person) {
+        addressBook.addSchedule(person);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireAllNonNull(target, editedSchedule);
+        addressBook.setSchedule(target, editedSchedule);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== MyGM Schedule (End) =======================================================================
 
+    //=========== Filtered Person List Accessors (Start) ====================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -264,6 +258,26 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    //=========== Filtered Person List Accessors (End) ====================================================
+
+    //=========== Filtered Schedule List Accessors (Start) ====================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Schedule} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
+    }
+
+    @Override
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
+    }
+
+    //=========== Filtered Schedule List Accessors (End) ====================================================
 
     @Override
     public boolean equals(Object obj) {
@@ -281,7 +295,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredSchedules.equals(other.filteredSchedules);
     }
 
 }

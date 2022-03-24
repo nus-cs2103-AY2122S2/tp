@@ -16,6 +16,9 @@ import seedu.address.model.person.JerseyNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.schedule.ScheduleDateTime;
+import seedu.address.model.schedule.ScheduleDescription;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.tag.Tag;
 
 
@@ -139,7 +142,6 @@ public class ParserUtil {
         return new JerseyNumber(trimmedJerseyNumber);
     }
 
-
     /**
      * Parses a {@code String LineupName} into an {@code LineupName}.
      * Leading and trailing whitespaces will be trimmed.
@@ -170,13 +172,47 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
+    // Parse Schedule related attributes
     /**
-     * Parses a string.
+     * Parses a {@code String scheduleName} into a {@code ScheduleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleName} is invalid.
      */
-    public static String parseString(String str) {
-        requireNonNull(str);
-        String trimmedStr = str.trim();
-        return trimmedStr;
+    public static ScheduleName parseScheduleName(String scheduleName) throws ParseException {
+        requireNonNull(scheduleName);
+        String trimmedName = scheduleName.trim();
+        if (!ScheduleName.isValidScheduleName(trimmedName)) {
+            throw new ParseException(ScheduleName.MESSAGE_CONSTRAINTS);
+        }
+        return new ScheduleName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String scheduleDescription} into a {@code ScheduleDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleDescription} is invalid.
+     */
+    public static ScheduleDescription parseScheduleDescription(String scheduleDescription) throws ParseException {
+        requireNonNull(scheduleDescription);
+        String trimmedDescription = scheduleDescription.trim();
+        if (!ScheduleDescription.isValidScheduleDescription(trimmedDescription)) {
+            throw new ParseException(ScheduleDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new ScheduleDescription(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String scheduleDateTime} into a {@code ScheduleDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleDateTime} is invalid.
+     */
+    public static ScheduleDateTime parseScheduleDateTime(String scheduleDateTime) throws ParseException {
+        requireNonNull(scheduleDateTime);
+        String trimmedDateTime = scheduleDateTime.trim();
+        if (!ScheduleDateTime.isValidScheduleDateTime(trimmedDateTime)) {
+            throw new ParseException(ScheduleDateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new ScheduleDateTime(trimmedDateTime);
     }
 
     /**

@@ -12,7 +12,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Schedule;
-import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.schedule.UniqueScheduleList;
 
 /**
@@ -78,70 +77,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if {@code targetName} is taken by some player.
-     */
-    public boolean hasPersonName(Name targetName) {
-        requireNonNull(targetName);
-        return this.persons.containsName(targetName);
-    }
-
-    /**
-     * Checks for the existence of a lineup name
-     * @param targetName The lineup name to check
-     * @return Boolean represents the existecne of the lineup name
-     */
-    public boolean hasLineupName(LineupName targetName) {
-        requireNonNull(targetName);
-        return this.lineups.containsLineupName(targetName);
-    }
-
-    /**
-     * Deletes the lineup from all players and lineup lists.
-     */
-    public void deleteLineup(Lineup lineup) {
-        this.lineups.deleteLineupFromList(lineup);
-        this.persons.removeAllPlayerFromLineup(lineup);
-    }
-
-    /**
-     * Returns the person with {@code targetName};
-     */
-    public Person getPerson(Name targetName) {
-        return persons.getPerson(targetName);
-    }
-
-    public Lineup getLineup(LineupName targetName) {
-        return lineups.getLineup(targetName);
-    }
-
-    public void addPersonToLineup(Person person, Lineup lineup) {
-        lineup.addPlayer(person);
-    }
-
-    /**
-     * Returns true if the person to add has a duplicate jersey number.
-     */
-    public boolean hasJerseyNumber(Person player) {
-        return persons.containsJerseyNumber(player.getJerseyNumber());
-    }
-
-    /**
-     * Returns true if MyGM has reached maximum capacity.
-     */
-    public boolean isFull() {
-        return persons.isFull();
-    }
-
-    /**
-     * Returns a list of jersey number that are still available.
-     * @return
-     */
-    public String getAvailableJerseyNumber() {
-        return persons.getAvailableJerseyNumber();
-    }
-
-
-    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -160,11 +95,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         lineups.replacePlayerInAllLineups(editedPerson, target);
     }
 
-    public void setLineup(Lineup target, Lineup editedLineup) {
-        requireNonNull(editedLineup);
-        lineups.replaceLineup(target, editedLineup);
-    }
-
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -172,6 +102,68 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
         lineups.deletePlayerFromALlLineups(key);
+    }
+
+    //// Added to fit MyGM needs
+    /**
+     * Returns true if {@code targetName} is taken by some player.
+     */
+    public boolean hasPersonName(Name targetName) {
+        requireNonNull(targetName);
+        return this.persons.containsName(targetName);
+    }
+
+    /**
+     * Returns the person with {@code targetName};
+     */
+    public Person getPerson(Name targetName) {
+        return persons.getPerson(targetName);
+    }
+
+    /**
+     * Returns true if the person to add has a duplicate jersey number.
+     */
+    public boolean hasJerseyNumber(Person player) {
+        return persons.containsJerseyNumber(player.getJerseyNumber());
+    }
+
+    /**
+     * Returns a list of jersey number that are still available.
+     */
+    public String getAvailableJerseyNumber() {
+        return persons.getAvailableJerseyNumber();
+    }
+
+    //// lineup-level operations
+    /**
+     * Checks for the existence of a lineup name
+     * @param targetName The lineup name to check
+     * @return Boolean represents the existecne of the lineup name
+     */
+    public boolean hasLineupName(LineupName targetName) {
+        requireNonNull(targetName);
+        return this.lineups.containsLineupName(targetName);
+    }
+
+    /**
+     * Deletes the lineup from all players and lineup lists.
+     */
+    public void deleteLineup(Lineup lineup) {
+        this.lineups.deleteLineupFromList(lineup);
+        this.persons.removeAllPlayerFromLineup(lineup);
+    }
+
+    public void setLineup(Lineup target, Lineup editedLineup) {
+        requireNonNull(editedLineup);
+        lineups.replaceLineup(target, editedLineup);
+    }
+
+    public Lineup getLineup(LineupName targetName) {
+        return lineups.getLineup(targetName);
+    }
+
+    public void addPersonToLineup(Person person, Lineup lineup) {
+        lineup.addPlayer(person);
     }
 
     /**
@@ -183,8 +175,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         lineups.addLineupToList(lineup);
     }
 
-    //// list overwrite operations (Schedule)
+    /**
+     * Returns true if MyGM has reached maximum capacity.
+     */
+    public boolean isFull() {
+        return persons.isFull();
+    }
 
+    //// schedule-level operations
     /**
      * Replaces the contents of the schedule list with {@code schedules}.
      * {@code schedules} must not contain duplicate schedules.
@@ -193,8 +191,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.schedules.setSchedules(schedules);
     }
 
-    //// person-level operations
-
     /**
      * Returns true if a schedule with the same identity as {@code schedule} exists in MyGM.
      */
@@ -202,22 +198,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(schedule);
         return schedules.contains(schedule);
     }
-
-    /**
-     * Returns true if {@code targetName} is schedule name exists.
-     */
-    public boolean hasScheduleName(ScheduleName targetName) {
-        requireNonNull(targetName);
-        return this.schedules.containsScheduleName(targetName);
-    }
-
-    /**
-     * Returns the schedule with {@code targetName};
-     */
-    public Schedule getSchedule(ScheduleName targetName) {
-        return schedules.getSchedule(targetName);
-    }
-
 
     /**
      * Adds a schedule to MyGM.
@@ -249,7 +229,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons\n"
+                + schedules.asUnmodifiableObservableList().size() + " schedules\n";
         // TODO: refine later
     }
 
@@ -278,6 +259,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return persons.hashCode() + lineups.hashCode() + schedules.hashCode();
     }
 }
