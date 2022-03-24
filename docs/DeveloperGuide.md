@@ -231,6 +231,58 @@ Result:
 
 * An additional feature that could be implemented in the future.
     
+=======
+### `addbuyer` feature
+The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
+
+**Step 1:**
+
+The user types input E.g. `addbuyer n/David p/12345678` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
+
+**Step 2:**
+
+The `execute(input)` method of `LogicManager`, a subclass of the Logic component, is called with the given input.
+An instance of the `AddressBookParser` will begin to parse the input into 2 main sections: the **command**
+and the **body** of the command.
+
+The main job of `AddressBookParser` at this step is to identify the `addbuyer` **command** which was supplied as the 1st word in the input string.
+
+After which, control is handed over to the `AddBuyerCommandParser` component by calling its `AddBuyerCommandParser#parse(body)` method to parse the **body** which was separated out.
+
+**Step 3:**
+
+`AddBuyerCommandParser#parse(body)` verifies if required fields for `addbuyer` are present.
+
+In our example, since `n/David p/12345678` was included, all required fields are present.
+
+At this step, the new `Buyer` will have been successfully created. A new `AddBuyerCommand` with the Buyer is returned to the `AddressBookParser` to the `LogicManager`
+
+![AddBuyerCommandObjectDiagram](images/AddBuyerCommandObjectDiagram.png)
+
+**Step 4:**
+
+The `LogicManager` component then calls `AddBuyerCommand#execute(model)`method of the new `AddBuyerCommand`instance containing the Buyer, with the `Model`component created from [Model component](#model-component).
+
+In this method, if the Buyer does not currently already reside in the application, he/she is added into the Model through the `Model#addBuyer(Buyer)` command and stored in the Model.
+
+(Refer to [Model component](#model-component) to see how Buyers are stored into the model)
+
+A new `CommandResult` representing the successful `addbuyer` command is initialized and returned.
+
+**Step 5:**
+
+`LogicManager` component will then attempt to update the storage with this new `Model` through the `Storage#saveBuyerAddressBook()` method.
+
+**Step 6:**
+
+Finally, the `CommandResult`is returned to be displayed by `UI` component (Refer to [Architecture](#architecture))
+
+The following Sequence Diagrams summarizes the various steps involved:
+
+![AddBuyerSequenceDiagram](images/AddBuyerSequenceDiagram.png)
+
+For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
+
 
 ### \[Proposed\] Undo/redo feature
 
