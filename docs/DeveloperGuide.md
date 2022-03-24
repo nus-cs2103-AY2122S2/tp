@@ -130,7 +130,8 @@ The `Model` component,
 * An `Entity` object is a generic object that can be used to represent instances of  `Student`/`TaModule`/`ClassGroup`/`Assessment`.
 * Module are named `TaModule` due to conflict with Java classes.
 
-<div class="alert alert-info">:information_source: <B>Note:</B> Alternative (arguably, more OOP) models are given below.<br>
+<div class="alert alert-info">:information_source: <B>Note:</B> Alternative (arguably, more OOP) models are given below.<br><br>
+<br>
 <div class="datatable-container">
     <table class="c20">
         <tbody>
