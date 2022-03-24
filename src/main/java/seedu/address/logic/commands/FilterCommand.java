@@ -1,12 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.RemoveLabCommand.MESSAGE_LAB_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.StudentHasLabPredicate;
+import seedu.address.model.student.exceptions.LabNotFoundException;
 
 public class FilterCommand extends Command {
 
@@ -27,8 +31,12 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Lab toFilter = predicate.getLab();
+        if (!model.hasLab(toFilter)) {
+            throw new CommandException(String.format(MESSAGE_LAB_NOT_FOUND, toFilter.labNumber));
+        }
         model.updateFilteredStudentList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
