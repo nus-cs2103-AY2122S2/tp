@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  * Represents an Event in Amigos.
  * Guarantees: fields are present and not null, field values are validated, immutable. (except for friendNames)
  */
-public class Event {
+public class Event implements Comparable<Event> {
 
     // Identity fields
     private final EventName name;
@@ -171,5 +171,10 @@ public class Event {
             friendNames.forEach(name -> builder.append(name).append(" "));
         }
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return this.dateTime.compareTo(o.dateTime);
     }
 }
