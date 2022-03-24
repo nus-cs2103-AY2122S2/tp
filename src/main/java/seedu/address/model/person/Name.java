@@ -38,9 +38,6 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public int compare(Name otherName) {
-        return this.fullName.compareToIgnoreCase(otherName.fullName);
-    }
 
     @Override
     public String toString() {
