@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.userimage.UserImage;
-import seedu.address.ui.formats.HelpTable;
 
 
 /**
@@ -43,7 +41,7 @@ public class ViewImageWindow extends UiPart<Stage> {
     public ViewImageWindow(Stage root, Logic logic) {
         super(FXML, root);
         this.logic = logic;
-        index  = 0;
+        index = 0;
         displayArea.setFitHeight(400);
         displayArea.setFitWidth(600);
         description.setEditable(false);
@@ -106,6 +104,10 @@ public class ViewImageWindow extends UiPart<Stage> {
         refresh(userImages.get(index));
     }
 
+    /**
+     * Changes the image being displayed in the window
+     * @param userImage image to switch to
+     */
     public void refresh(UserImage userImage) {
         UserImage newImage = userImage;
         System.out.println(System.getProperty("java.class.path"));
@@ -116,7 +118,7 @@ public class ViewImageWindow extends UiPart<Stage> {
     }
 
     /**
-     * Changes the contents of pane in help window to command list page
+     * Change image to the next image if not last image
      */
     @FXML
     public void onNextClick() {
@@ -126,6 +128,9 @@ public class ViewImageWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Change image to the previous image if not first image
+     */
     @FXML
     public void onPreviousClick() {
         if (index != 0) {

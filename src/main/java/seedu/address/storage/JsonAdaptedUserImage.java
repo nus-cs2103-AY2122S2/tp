@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.Region;
 import seedu.address.model.userimage.FilePath;
@@ -18,6 +19,9 @@ public class JsonAdaptedUserImage {
     private final String filePath;
     private final String description;
 
+    /**
+     * Constructs a {@code JsonAdapterUserImage} with the given UserImage details.
+     */
     @JsonCreator
     public JsonAdaptedUserImage(@JsonProperty("filePath") String filePath,
                                @JsonProperty("description") String description) {

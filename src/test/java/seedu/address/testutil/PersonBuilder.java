@@ -13,11 +13,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
-import seedu.address.model.userimage.UserImage;
 import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * A utility class to help with building Person objects.

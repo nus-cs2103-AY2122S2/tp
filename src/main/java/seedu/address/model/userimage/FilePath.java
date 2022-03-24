@@ -1,9 +1,9 @@
 package seedu.address.model.userimage;
 
-import java.io.File;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.io.File;
 
 /**
  * Creates a new FilePath object from a valid filePath
@@ -14,6 +14,9 @@ public class FilePath {
 
     public final String value;
 
+    /**
+     * @param filePath filePath to check if it leads to a existing file
+     */
     public FilePath(String filePath) {
         requireNonNull(filePath);
         checkArgument(isValidFilePath(filePath), MESSAGE_CONSTRAINTS);

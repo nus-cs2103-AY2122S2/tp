@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,16 +13,10 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.userimage.UserImage;
 
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 /**
  * Opens viewimagewindow with images associated to person at index
  */
-public class ViewImageCommand extends Command{
+public class ViewImageCommand extends Command {
     public static final String COMMAND_WORD = "viewimage";
     public static final String MESSAGE_VIEW_SUCCESS = "Image displayed";
     public static final String MESSAGE_VIEW_FAILURE = "User has no image to display";
@@ -28,6 +28,9 @@ public class ViewImageCommand extends Command{
 
     private final Index targetIndex;
 
+    /**
+     * @param targetIndex person to view images associated with
+     */
     public ViewImageCommand(Index targetIndex) {
         requireAllNonNull(targetIndex);
         this.targetIndex = targetIndex;
@@ -54,7 +57,7 @@ public class ViewImageCommand extends Command{
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-          || (other instanceof ViewImageCommand // instanceof handles nulls
-          && targetIndex.equals(((ViewImageCommand) other).targetIndex));
+            || (other instanceof ViewImageCommand // instanceof handles nulls
+            && targetIndex.equals(((ViewImageCommand) other).targetIndex));
     }
 }

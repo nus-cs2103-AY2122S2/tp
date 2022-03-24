@@ -14,7 +14,8 @@ public class MatchCommandTest {
 
     @Test
     public void execute_match_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_MATCH_MESSAGE, false, true, false, false, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_MATCH_MESSAGE, false, true, false,
+            false, false);
         assertCommandSuccess(new MatchCommand(), model, expectedCommandResult, expectedModel);
     }
 }

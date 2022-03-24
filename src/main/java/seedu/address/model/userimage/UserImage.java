@@ -1,9 +1,9 @@
 package seedu.address.model.userimage;
 
-import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import javax.imageio.ImageIO;
 
 /**
  * Creates a UserImage object that contains an image file with description
@@ -17,6 +17,10 @@ public class UserImage {
     private final FilePath filePath;
     private final File image;
 
+    /**
+     * @param filePath filePath to an existing file
+     * @param description description to be attached to image
+     */
     public UserImage(FilePath filePath, String description) {
         this.filePath = filePath;
         this.description = description;
@@ -27,7 +31,8 @@ public class UserImage {
         return description;
     }
 
-    public FilePath getFilePath(){
+
+    public FilePath getFilePath() {
         return filePath;
     }
 

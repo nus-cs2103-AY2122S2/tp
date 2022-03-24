@@ -12,7 +12,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UserType;
-import seedu.address.model.userimage.UserImage;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

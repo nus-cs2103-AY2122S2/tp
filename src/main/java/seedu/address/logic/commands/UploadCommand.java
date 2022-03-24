@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,11 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.userimage.UserImage;
 
-import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Adds image to an existing person in the address book.
@@ -32,6 +34,10 @@ public class UploadCommand extends Command {
     private final Index targetIndex;
     private final UserImage userImage;
 
+    /**
+     * @param targetIndex index of person to upload to
+     * @param userImage Image to be associated to person
+     */
     public UploadCommand(Index targetIndex, UserImage userImage) {
         requireAllNonNull(targetIndex, userImage);
         this.targetIndex = targetIndex;
@@ -57,8 +63,8 @@ public class UploadCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-          || (other instanceof UploadCommand // instanceof handles nulls
-          && targetIndex.equals(((UploadCommand) other).targetIndex))
-          && userImage.equals((((UploadCommand) other).userImage));
+            || (other instanceof UploadCommand // instanceof handles nulls
+            && targetIndex.equals(((UploadCommand) other).targetIndex))
+            && userImage.equals((((UploadCommand) other).userImage));
     }
 }
