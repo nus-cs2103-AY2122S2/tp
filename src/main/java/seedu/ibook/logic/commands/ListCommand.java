@@ -19,6 +19,8 @@ public class ListCommand extends Command {
         requireNonNull(model);
         model.updateFilteredProductList(Model.PREDICATE_SHOW_ALL_PRODUCTS);
         model.updateFilteredItemListForProducts(Product.PREDICATE_SHOW_ALL_ITEMS);
+        
+        //model.updateProductFilters(Model.PREDICATE_SHOW_ALL_PRODUCTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

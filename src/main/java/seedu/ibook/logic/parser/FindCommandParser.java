@@ -1,6 +1,5 @@
 package seedu.ibook.logic.parser;
 
-import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -8,13 +7,15 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
-import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
-import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.CategoryFilter;
+import seedu.ibook.model.product.filters.DescriptionFilter;
+import seedu.ibook.model.product.filters.NameFilter;
+import seedu.ibook.model.product.filters.PriceFilter;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -28,52 +29,36 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
-                        PREFIX_PRICE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE);
+
         Name name;
         Category category;
-        ExpiryDate expiryDate;
         Description description;
         Price price;
 
-        int wildCard = 4;
+        ProductFulfillsFiltersPredicate predicate = new ProductFulfillsFiltersPredicate();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        } else {
-            name = Name.WILD_NAME;
-            wildCard--;
+            predicate.addFilter(new NameFilter(name));
         }
 
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        } else {
-            category = Category.WILD_CATEGORY;
-            wildCard--;
+            predicate.addFilter(new CategoryFilter(category));
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        } else {
-            description = Description.WILD_DESCRIPTION;
-            wildCard--;
+            predicate.addFilter(new DescriptionFilter(description));
         }
 
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
-        } else {
-            price = Price.WILD_PRICE;
-            wildCard--;
+            predicate.addFilter(new PriceFilter(price));
         }
 
-        if (wildCard == 0) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
-            );
-        }
-
-        return new FindCommand(
-                new ProductFulfillsFiltersPredicate(new Product(name, category, description, price)));
+        return new FindCommand(predicate);
     }
 
 }

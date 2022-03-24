@@ -9,6 +9,7 @@ import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.ReadOnlyIBook;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.filters.AttributeFilter;
 
 /**
  * API of the Logic component
@@ -31,6 +32,24 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of products */
     ObservableList<Product> getFilteredIBook();
+
+    /**
+     * Adds a filter to the product list.
+     */
+    void addProductFilter(AttributeFilter filter);
+
+    /**
+     * Removes a filter from the product list.
+     */
+    void removeProductFilter(AttributeFilter filter);
+
+    /**
+     * Clear all filters.
+     */
+    void clearProductFilters();
+
+    /** Returns an unmodifiable view of the list of filters */
+    ObservableList<AttributeFilter> getProductFilters();
 
     /**
      * Returns the user prefs' ibook file path.

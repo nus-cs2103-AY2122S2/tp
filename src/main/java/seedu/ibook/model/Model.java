@@ -1,19 +1,20 @@
 package seedu.ibook.model;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.filters.AttributeFilter;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
+    ProductFulfillsFiltersPredicate PREDICATE_SHOW_ALL_PRODUCTS = new ProductFulfillsFiltersPredicate();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,21 +55,27 @@ public interface Model {
     ReadOnlyIBook getIBook();
 
     /**
-     * Returns true if a product with the same identity as {@code product} exists in the Ibook.
+     * Returns true if a product with the same identity as {@code product} exists in the IBook.
      */
     boolean hasProduct(Product product);
 
     /**
      * Deletes the given product.
-     * The product must exist in the Ibook.
+     * The product must exist in the IBook.
      */
     void deleteProduct(Product target);
 
     /**
      * Adds the given product.
-     * {@code product} must not already exist in the Ibook.
+     * {@code product} must not already exist in the IBook.
      */
     void addProduct(Product product);
+
+    /**
+     * Adds the given item to {@code product}.
+     * {@code item} must not already exist in the IBook.
+     */
+    void addItem(Product product, Item item);
 
     /**
      * Replaces the given product {@code target} with {@code editedProduct}.
@@ -81,6 +88,21 @@ public interface Model {
     ObservableList<Product> getFilteredProductList();
 
     /**
+     * Adds a filter to the product list.
+     */
+    void addProductFilter(AttributeFilter filter);
+
+    /**
+     * Removes a filter from the product list.
+     */
+    void removeProductFilter(AttributeFilter filter);
+
+    /**
+     * Clear all filters.
+     */
+    void clearProductFilters();
+
+    /**
      * Updates the filter of the filtered product list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
@@ -91,4 +113,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null
      */
     void updateFilteredItemListForProducts(Predicate<Item> predicate);
+    void updateProductFilters(ProductFulfillsFiltersPredicate predicate);
+
+    /**
+     * Gets the predicate of the current filter.
+     */
+    ObservableList<AttributeFilter> getProductFilters();
 }
