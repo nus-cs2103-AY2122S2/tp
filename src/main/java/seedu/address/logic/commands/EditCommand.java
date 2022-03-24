@@ -5,9 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
+
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -32,6 +33,8 @@ import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 import seedu.address.model.userimage.UserImage;
+import seedu.address.model.util.UserTypeUtil;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -48,8 +51,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_PREFERENCE + "PREFERENCE]"
             + "[" + PREFIX_PROPERTY + "PROPERTY]..."
-            + "[" + PREFIX_USERTYPE + "USERTYPE] "
             + "[" + PREFIX_USERIMAGE + "FILEPATH:DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -108,14 +111,70 @@ public class EditCommand extends Command {
         //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(personToEdit.getProperties());
-        // preference cannot be edited
-        Optional<Preference> updatedPreference = personToEdit.getPreference();
-        UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
+        // set value of edited person's properties
+        Set<Property> updatedProperties = setProperties(personToEdit, editPersonDescriptor);
+        // set value of edited person's preference
+        Optional<Preference> updatedPreference = setPreference(personToEdit, editPersonDescriptor);
+        // set value of edited person's user type
+        UserType updatedUserType = setUserType(updatedProperties, updatedPreference);
         Set<UserImage> updatedUserImages = editPersonDescriptor.getUserImages().orElse(personToEdit.getUserImages());
+
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
                 updatedPreference, updatedUserType, updatedUserImages);
+    }
+
+    private static Set<Property> setProperties(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        // default value of edited person's properties
+        Set<Property> updatedProperties = personToEdit.getProperties();
+
+        // check if person to edit contains Properties
+        if (!personToEdit.getProperties().isEmpty()) {
+            // if edit command contains properties
+            if (editPersonDescriptor.getProperties().isPresent()) {
+                updatedProperties = editPersonDescriptor.getProperties().get();
+            // if edit command contains Preference
+            } else if (editPersonDescriptor.getPreference().isPresent()) {
+                updatedProperties = new HashSet<>();
+            }
+        } else if (editPersonDescriptor.getProperties().isPresent()) {
+            updatedProperties = editPersonDescriptor.getProperties().get();
+        }
+
+        return updatedProperties;
+    }
+
+    private static Optional<Preference> setPreference(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        // default value of edited person's preference
+        Optional<Preference> updatedPreference = personToEdit.getPreference();
+
+        // check if person to edit contains Preference
+        if (personToEdit.getPreference().isPresent()) {
+            // if edit command contains Preference
+            if (editPersonDescriptor.getPreference().isPresent()) {
+                updatedPreference = editPersonDescriptor.getPreference();
+                // if edit command contains Properties
+            } else if (!editPersonDescriptor.getProperties().isEmpty()) {
+                updatedPreference = Optional.ofNullable(null);
+            }
+        } else if (editPersonDescriptor.getPreference().isPresent()) {
+            updatedPreference = editPersonDescriptor.getPreference();
+        }
+
+        return updatedPreference;
+    }
+
+    private static UserType setUserType(Set<Property> updatedProperties, Optional<Preference> updatedPreference) {
+        if (!updatedProperties.isEmpty()) {
+            return UserTypeUtil.createSeller();
+        } else {
+            return UserTypeUtil.createBuyer();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return index.toString() + editPersonDescriptor.toString();
     }
 
     @Override
@@ -146,6 +205,7 @@ public class EditCommand extends Command {
         private Email email;
         private Favourite favourite;
         private Address address;
+        private Preference preference;
         private Set<Property> properties;
         private UserType userType;
         private Set<UserImage> userImages;
@@ -163,6 +223,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setFavourite(toCopy.favourite);
             setAddress(toCopy.address);
+            setPreference(toCopy.preference);
             setProperties(toCopy.properties);
             setUserType(toCopy.userType);
             setUserImages(toCopy.userImages);
@@ -172,7 +233,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, userType, userImages);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, preference, userType, userImages);
         }
 
         public void setName(Name name) {
@@ -233,6 +294,18 @@ public class EditCommand extends Command {
             return Optional.ofNullable(userImages);
         }
 
+        public Optional<Preference> getPreference() {
+            return Optional.ofNullable(preference);
+        }
+
+        public void setPreference(Preference preference) {
+            this.preference = preference;
+        }
+
+        public void clearPreference() {
+            this.preference = null;
+        }
+
         /**
          * Sets {@code properties} to this object's {@code properties}.
          * A defensive copy of {@code properties} is used internally.
@@ -248,6 +321,19 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Property>> getProperties() {
             return (properties != null) ? Optional.of(Collections.unmodifiableSet(properties)) : Optional.empty();
+        }
+
+        /**
+         * Clears all of this object's {@code properties}.
+         */
+        public void clearProperties() {
+            this.properties = null; // alternatively, set properties to be an empty HashSet
+        }
+
+        @Override
+        public String toString() {
+            return name + "|" + phone + "|" + email + "|" + favourite + "|" + address + "|" + preference + "|"
+                    + properties + "|" + userType;
         }
 
         @Override
@@ -269,8 +355,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getProperties().equals(e.getProperties())
-                    && getUserType().equals(e.getUserType());
+                    && getPreference().equals(e.getPreference())
+                    && getProperties().equals(e.getProperties());
         }
     }
 }

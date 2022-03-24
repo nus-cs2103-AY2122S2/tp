@@ -19,18 +19,24 @@ public class CommandResult {
 
     /** Images associated to client should be shown to the user. */
     private final boolean showImage;
+  
+    /** Favourites information should be shown to the user. */
+    private final boolean showFavourites;
 
     /** The application should exit. */
     private final boolean exit;
 
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showMatch, boolean showImage, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showMatch, boolean showImage, 
+                         boolean showFavourites, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showMatch = showMatch;
         this.showImage = showImage;
+        this.showFavourites = showFavourites;
         this.exit = exit;
     }
 
@@ -39,7 +45,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false , false);
+        this(feedbackToUser, false, false, false , false, false);
     }
 
     public String getFeedbackToUser() {
@@ -54,8 +60,13 @@ public class CommandResult {
         return showMatch;
     }
 
+
     public boolean isShowImage() {
         return showImage;
+
+    public boolean isShowFavourites() {
+        return showFavourites;
+
     }
 
     public boolean isExit() {
@@ -78,12 +89,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && showMatch == otherCommandResult.showMatch
                 && showImage == otherCommandResult.showImage
+                && showFavourites == otherCommandResult.showFavourites
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showMatch, showImage, exit);
+        return Objects.hash(feedbackToUser, showHelp, showMatch, showImage, showFavourites, exit);
     }
 
     @Override

@@ -185,10 +185,12 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Favourite: ")
-                .append(getFavourite())
                 .append("; Address: ")
                 .append(getAddress());
+
+        if (getFavourite() != null) {
+            builder.append("; Favourite: Favourited");
+        }
 
         Set<Property> properties = getProperties();
         if (!properties.isEmpty()) {

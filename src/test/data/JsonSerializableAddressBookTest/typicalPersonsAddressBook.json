@@ -6,6 +6,13 @@
     "email" : "alice@example.com",
     "favourite" : true,
     "address" : "123, Jurong West Ave 6, #08-111",
+    "properties" : [],
+    "preference" : {
+      "region" : "West",
+      "size" : "4-room",
+      "lowPrice" : "$100000",
+      "highPrice" : "$200000"
+    },
     "userType" : "buyer"
   }, {
     "name" : "Benson Meier",
@@ -13,20 +20,41 @@
     "email" : "johnd@example.com",
     "favourite" : false,
     "address" : "311, Clementi Ave 2, #02-25",
-    "userType" : "seller"
+    "properties" : [],
+    "preference" : {
+      "region" : "West",
+      "size" : "4-room",
+      "lowPrice" : "$100000",
+      "highPrice" : "$200000"
+    },
+    "userType" : "buyer"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "favourite" : true,
     "address" : "wall street",
-    "userType" : "seller"
+    "properties" : [],
+    "preference" : {
+      "region" : "West",
+      "size" : "4-room",
+      "lowPrice" : "$100000",
+      "highPrice" : "$200000"
+    },
+    "userType" : "buyer"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "favourite" : true,
     "address" : "10th street",
+    "properties" : [],
+    "preference" : {
+      "region" : "West",
+      "size" : "4-room",
+      "lowPrice" : "$100000",
+      "highPrice" : "$200000"
+    },
     "userType" : "buyer"
   }, {
     "name" : "Elle Meyer",
@@ -34,13 +62,27 @@
     "email" : "werner@example.com",
     "favourite" : false,
     "address" : "michegan ave",
-    "userType" : "seller"
+    "properties" : [],
+    "preference" : {
+      "region" : "West",
+      "size" : "4-room",
+      "lowPrice" : "$100000",
+      "highPrice" : "$200000"
+    },
+    "userType" : "buyer"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "favourite" : false,
     "address" : "little tokyo",
+    "properties" : [],
+    "preference" : {
+      "region" : "West",
+      "size" : "4-room",
+      "lowPrice" : "$100000",
+      "highPrice" : "$200000"
+    },
     "userType" : "buyer"
   }, {
     "name" : "George Best",
@@ -48,6 +90,13 @@
     "email" : "anna@example.com",
     "favourite" : true,
     "address" : "4th street",
+    "properties" : [],
+    "preference" : {
+      "region" : "West",
+      "size" : "4-room",
+      "lowPrice" : "$100000",
+      "highPrice" : "$200000"
+    },
     "userType" : "buyer"
   } ]
 }

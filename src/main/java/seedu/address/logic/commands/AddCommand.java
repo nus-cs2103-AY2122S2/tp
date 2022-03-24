@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,8 +28,8 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_PROPERTY + "PROPERTY]... "
             + "[" + PREFIX_PREFERENCE + "Preference] "
-            + PREFIX_USERTYPE + "USERTYPE"
             + PREFIX_USERIMAGE + "FILEPATH:DESCRIPTION\n"
+            + "[" + PREFIX_PREFERENCE + "PREFERENCE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -39,7 +38,6 @@ public class AddCommand extends Command {
             + PREFIX_PROPERTY + "north,123 North Street,1-room,$300000 "
             + PREFIX_PROPERTY + "south,123 South Street,3-room,$700000 "
             + PREFIX_PREFERENCE + "north, 2-room, $200000, $600000 "
-            + PREFIX_USERTYPE + "buyer"
             + PREFIX_USERIMAGE + "room.png:photo of living room";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
