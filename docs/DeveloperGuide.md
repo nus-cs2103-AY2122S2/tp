@@ -203,6 +203,12 @@ allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of su
 ### Removetag feature
 
 ### Find/Find -s feature
+The existing Find feature in ab3 only allowed contacts to be searched for by name. We added additional functionalities 
+to allow for greater flexibility when filtering large contacts lists according to specific predicates. The `Find` and
+`Find -s` command now allow the user to search for specific contact details (name, phone number, email and address) or
+specific tags. 
+
+The `Find`feature searches for contacts that satisfy any of the given predicates while the `Find -s` feature 
 
 ### Event feature
 
