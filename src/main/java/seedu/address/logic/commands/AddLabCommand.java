@@ -23,7 +23,8 @@ public class AddLabCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New Lab added: %1$s";
     public static final String MESSAGE_DUPLICATE_LAB = "This Lab already exists in the TAddressBook";
     public static final String MESSAGE_EMPTY_STUDENT_LIST = "The student list is currently empty. "
-            + "Please try again after adding at least 1 student to the list.";
+            + "Please try again after adding at least 1 student to the list using the add command.\n\n"
+            + AddCommand.MESSAGE_USAGE;
 
     private final Lab toAdd;
 
