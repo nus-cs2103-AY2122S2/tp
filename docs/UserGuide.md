@@ -86,11 +86,11 @@ Possible tags:
 | **Tag** | **Meaning** | **Pre-defined constants** |
 | - | - | - |
 | `n/`  | Name | - |
-| `p/` | Phone Number | - | 
+| `p/` | Phone Number | - |
 | `e/` | Email | - |
 | `a/` | Address | - |
 | `f/` | Faculty |  `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS` |
-| `mc/` | Matriculation Number | - | 
+| `mc/` | Matriculation Number | - |
 | `cs`/ | Covid Status | Positive, Negative, HRN |
 
 
