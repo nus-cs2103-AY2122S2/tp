@@ -25,13 +25,14 @@ public class Pet {
     private final Set<Tag> tags = new HashSet<>();
     private final Diet diet;
     private final Appointment appointment;
+    private final AttendanceHashMap attendanceHashMap;
 
     /**
      * Every field must be present and not null.
      */
     public Pet(Name name, OwnerName ownerName, Phone phone, Address address,
-               Set<Tag> tags, Diet diet, Appointment appointment) {
-        requireAllNonNull(name, ownerName, phone, address, tags, appointment);
+               Set<Tag> tags, Diet diet, Appointment appointment, AttendanceHashMap attendanceHashMap) {
+        requireAllNonNull(name, ownerName, phone, address, tags, appointment, attendanceHashMap);
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
@@ -39,7 +40,9 @@ public class Pet {
         this.diet = diet;
         this.appointment = appointment;
         this.tags.addAll(tags);
+        this.attendanceHashMap = attendanceHashMap;
     }
+
 
     public Name getName() {
         return name;
@@ -63,6 +66,10 @@ public class Pet {
 
     public Appointment getAppointment() {
         return appointment;
+    }
+
+    public AttendanceHashMap getAttendanceHashMap() {
+        return attendanceHashMap.getCopy();
     }
 
     /**

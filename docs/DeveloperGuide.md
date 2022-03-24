@@ -185,6 +185,41 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Cleaner code. Better for future scalability.
     * Cons: Contributes to more lines of code. Harder to set up initially.
 
+### \[Proposed\] Appointment feature
+
+#### Proposed Implementation
+
+The proposed appointment feature is facilitated by the `AppointmentCommand` class which extends `Command` class. The 
+`AppointmentCommand` takes in a valid mandatory index which specifics the pet that the command is to be used on, 
+followed by either **one** prefix (*clear*) or **two** prefixes (*dateTime* and *location*) based on the objective the 
+user is trying to accomplish. The fields are parsed by `AppointmentCommandParser` class.
+
+Appointment feature can be used to accomplish the following 2 tasks:
+1. Add and store pet's appointment details. (*dateTime and Location prefixes*)
+2. Clear and delete pet's appointment details. (*clear prefix*)
+
+The operation of updating the pet's appointment details and updating the pet filter list are done by methods in the 
+Model interface as Model#setPet() and Model#updateFilterPetList() respectively.
+
+The following sequence diagram below illustrates the interactions between the `Logic` component and `Model` component 
+for the `execute("app 1 clear")` API call:
+![AppointmentSequenceDiagram](images/AppointmentSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new Appointmentcommand:
+![AppointmentActivityDiagram](images/AppointmentActivityDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Currently the appointment command is responsible for both the adding and clearing
+of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only 
+by the prefixes / augments.
+    * Pros: Easy and simple to implement.
+    * Cons: User may struggle to get familiar with the command.
+
+* **Alternative 2:** Add a new `clear` command to clear and delete contents of variables based on input field. 
+    * Pros: Better for future scalability.
+    * Cons: Complex implementation. More lines of code. Harder to set up initially.
+
 ### \[Proposed\] Filter feature
 
 #### Proposed Implementation
@@ -203,6 +238,7 @@ The following sequence diagram shows how the filter operation works when `filter
 The following activity diagram summarizes what happens when a user executes a new `filter` command:
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -284,6 +320,44 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] Attendance feature
+
+#### Proposed Implementation
+The proposed attendance feature is facilitated by `AttendanceCommand`. `AttendanceCommand` consists of two subclasses,
+`PresentAttendanceCommand` and `AbsentAttendanceCommand`, which allows users to either mark a pet as present or absent
+on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off 
+time (if applicable), is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into 
+the command classes above. The command classes are then passed on to the Model component for execution.
+
+The data from the input is stored into the `AttendanceHashMap` class in pets, which consists of mappings of dates to 
+`Attendance` objects. The class hence acts as an "attendance sheet", and is the main repository of data within the 
+Model component that facilitates `Attendance` functionalities.
+
+The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods 
+in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
+supported by the methods in `AttendanceTag` and `AttendanceUtil` classes.
+
+The activity diagram below illustrates the workflow of attendance commands.
+
+![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
+
+The following sequence diagram below models the interactions between the Logic as well as the Model components to 
+update the backend and frontend of the application.
+
+![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Attendance data within `Model` component**
+
+* **Alternative 1 (current choice):** Attendance entries in every pets' HashMaps.
+  * Pros: Better OOP and performance.
+  * Cons: Higher memory usage.
+* **Alternative 2:** All attendance entries in a single HashMap.
+  * Pros: Lesser memory usage, easier to implement.
+  * Cons: May have performance issues due to nested data structure.
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -327,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                    |
 | `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                              |
 | `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                     |
-| `* * *`  | pet daycare owner | track the attendance of pets                                      | charge pet owners the correct amount depending on pets attendance |
+| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                      | charge pet owners the correct amount depending on pets attendanceEntry |
 | `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                           |
 | `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                            |
 | `* * *`  | pet daycare owner | find pets bu their ID                                             | retrieve the pet information accordingly                          |
@@ -347,10 +421,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments             |
 | `*`      | pet daycare owner | sort the pets by their type                                       | order their necessary supplies accordingly                        |
 | `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                            |
-| `*`      | pet daycare owner | change the attendance of pets anytime I want                      | I can allow for last minute scheduling                            |
+| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                      | I can allow for last minute scheduling                            |
 | `*`      | pet daycare owner | update pet's information                                          |                                                                   |
 | `*`      | pet daycare owner | update pet owner's information                                    |                                                                   |
-| `*`      | pet daycare owner | access the previous attendance of pets                            | update owners if they were to enquire                             |
+| `*`      | pet daycare owner | access the previous attendanceEntry of pets                            | update owners if they were to enquire                             |
 | `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                    |
 | `*`      | pet daycare owner | get a list of pets which will be staying overnight in the daycare | arrange the necessary manpower                                    |
 

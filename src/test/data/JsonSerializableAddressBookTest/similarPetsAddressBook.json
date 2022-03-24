@@ -6,13 +6,13 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "tagged": [ "friends" ],
     "diet": "cute oranges",
-    "appointment": "Mar-04-2022 09:30 AM at NUS Vet Clinic"
+    "appointment": ""
   }, {
     "name": "Waffle",
     "phone": "88887778",
     "ownerName": "Alice Pauline",
     "address": "4th street",
     "diet": "cute apples",
-    "appointment": "Dec-24-2022 19:30 PM at Zoo Clinic"
+    "appointment": ""
   } ]
 }

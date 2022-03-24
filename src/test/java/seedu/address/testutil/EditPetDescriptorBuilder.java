@@ -7,8 +7,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPetDescriptor;
 import seedu.address.model.pet.Address;
-import seedu.address.model.pet.Appointment;
-import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Pet;
@@ -84,22 +82,6 @@ public class EditPetDescriptorBuilder {
     public EditPetDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Diet} of the {@code EditPetDescriptor} that we are building.
-     */
-    public EditPetDescriptorBuilder withDiet(String diet) {
-        descriptor.setDiet(new Diet(diet));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Appointment} of the {@code EditPetDescriptor} that we are building.
-     */
-    public EditPetDescriptorBuilder withAppointment(String appointment) {
-        descriptor.setAppointment(new Appointment(appointment));
         return this;
     }
 
