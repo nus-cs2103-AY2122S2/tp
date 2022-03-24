@@ -48,7 +48,7 @@ The `UI` component,
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` component to execute commands.
 - depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-<img src="images/UiPhotos/BottomHalf.png" height="300" />
+<img src="images/UiPhotos/BottomHalf.png" width="600" />
 
 The bottom half of the `UI` component is split into two parts using a `SplitPane` component from 
 the JavaFX UI framework. 
@@ -114,8 +114,75 @@ TODO
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Viewing a Lesson or Student's details
+
+[//]: # (maybe add Lesson and Student's definition in the glossary)
+
+Viewing details of a `Lesson` or `Student` on the `InfoPanel` component in the `UI` is done through the `lesson` or 
+`student` command.
+
+When the command is entered, the `TeachWhatParser` class would **parse** the given user input and return either a 
+`ViewLessonInfoCommand` or `ViewStudentInfoCommand` object, depending on which command was used. 
+
+When the Command is executed by `Logic`, the executed command would make some attribute changes to `Model` (which holds
+the data of the App in memory) and also update the `InfoPanel` component of the `UI` with detailed information of the 
+selected `Lesson` or `Student`. A more detailed explanation is shown below.
+
+Given below is an example where a user inputs `student 1` as a command to view the details of the first student on the 
+list.
+
+Step 1: User inputs `student 1` into the `CommandBox` and hits enter.
+
+`MainWindow` receives the user input through the `MainWindow#executeCommand()` method. `MainWindow` then sends the user
+input to `LogicManager` and retrieves the result.
+
+Step 2: `LogicManager` parses the user's input and returns the result
+
+![](images/viewing-details/ViewStudentParseSequenceDiagram.png)
+
+`LogicManager` parses the user's input through multiple `Parser` classes as shown in the sequence diagram above. User
+input is first sent to the `TeachWhatParser` where it looks for the main command `student`. It passes the arguments to
+the relevant **Command Parser** which in this case is `ViewStudentInfoParser`.
+
+`ViewStudentInfoParser` takes in the provided index and creates a `ViewStudentInfoCommand`. This `Command` is returned
+back to `LogicManager` where it is executed with the `ViewStudentInfoCommand#execute()` method.
+
+Step 3: Executing the command
+
+[//]: # (Might split the above diagram into two, show the parsing section and execution)
+
+As shown in the diagram above, when `ViewStudentInfoCommand#execute()` is called, `ViewStudentInfoCommand` retrieves
+the filtered list (the current list shown in the UI) from `Model` and picks out the selected student based on the index
+provided by the user's input. It then sets `ModelManager#selectedStudent` using the `ModelManager#setSelectedStudent()`
+method, which will be used by `MainWindow` later on.
+
+[//]: # (Insert object diagram here to show what attributes CommandResult have.
+Also explain why certain attributes are set and how they will be used by MainWindow to
+show certain elements)
+
+`ViewStudentInfoCommand` creates a `CommandResult` object, with the attributes shown above. This is then returned back
+to `LogicManager` which returns it back to `MainWindow`.
+
+Step 4: Updating the UI
+
+![](images/viewing-details/ViewStudentSequenceDiagram.png)
+
+Once `MainWindow` receives the `CommandResult` object, it checks for the `CommandResult#updateInfoPanel` boolean. If the
+boolean is true, it runs the `MainWindow#handleInfoPanelUpdate()` method which updates the `InfoPanel`. It does this by
+retrieving the selected student from `ModelManager#selectedStudent` and creates a new `StudentInfoPanel` with the 
+selected student and its details. The newly created `StudentInfoPanel` is shown on the right side of the application.
+
+The execution of the command is complete and the result is shown in the image below, where the right side of the
+application is updated with the details of the selected `Student`.
+
+<img src="images/viewing-details/UiExample.png" width="550" />
+
+A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
+
 ### Add student
 Adding a `Student` to the `StudentBook` 
+
 ### Add temporary/recurring lesson
 Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
 
