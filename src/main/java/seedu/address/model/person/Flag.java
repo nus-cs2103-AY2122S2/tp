@@ -8,14 +8,14 @@ public class Flag {
     public final boolean isFlagged;
 
     /**
-     * Constructs a {@code Flag} with given boolean.
+     * Constructs a false {@code Flag}.
      */
-    public Flag(boolean bool) {
-        isFlagged = bool;
+    public Flag() {
+        isFlagged = false;
     }
 
     /**
-     * Constructs a {@code Flag} with given String boolean.
+     * Constructs a {@code Flag} with given boolean.
      *
      * @param bool If the person is flagged.
      */

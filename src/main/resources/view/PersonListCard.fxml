@@ -32,7 +32,6 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="prevDateMet" styleClass="cell_small_label" text="\$prevDateMet" />
-      <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
       <Label fx:id="info" styleClass="cell_small_label" text="\$info" />
       <Label fx:id="flag" styleClass="cell_small_label" text="\$flag" />
     </VBox>

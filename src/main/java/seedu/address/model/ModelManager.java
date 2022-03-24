@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -118,8 +119,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortPersonListByDate() {
-        hustleBook.sortPersonByDate();
+    public void sortPersonListBy(Comparator<Person> sortComparator) {
+
+        hustleBook.sortPersonBy(sortComparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================

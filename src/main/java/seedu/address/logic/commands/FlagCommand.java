@@ -8,10 +8,8 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Flag;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,25 +17,24 @@ import seedu.address.model.person.Person;
  */
 public class FlagCommand extends Command {
 
-    public static final String FLAG_COMMAND_WORD = "flag";
-    public static final String UNFLAG_COMMAND_WORD = "unflag";
+    public static final String COMMAND_WORD = "flag";
 
-    public static final String MESSAGE_USAGE = FLAG_COMMAND_WORD + "|" + UNFLAG_COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Flags the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: NAME\n"
-            + "Example: " + UNFLAG_COMMAND_WORD + " Joe";
+            + "Parameters: INDEX (must be a positive integer), FLAG (must be true or false)\n"
+            + "Example: " + COMMAND_WORD + " 1" + " f/true";
 
-    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Updated flag for Person: %1$s";
+    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Flagged Person: %1$s";
 
-    private final Name targetName;
+    private final Index targetIndex;
     private final Flag flag;
 
     /**
-     * @param targetName Name of person whose flag to replace.
+     * @param targetIndex Index of person whose flag to replace.
      * @param flag Flag to replace with.
      */
-    public FlagCommand(Name targetName, Flag flag) {
-        this.targetName = targetName;
+    public FlagCommand(Index targetIndex, Flag flag) {
+        this.targetIndex = targetIndex;
         this.flag = flag;
     }
 
@@ -45,8 +42,6 @@ public class FlagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        HustleBook tempHustleBook = new HustleBook();
-        Index targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -62,6 +57,6 @@ public class FlagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FlagCommand // instanceof handles nulls
-                && targetName.equals(((FlagCommand) other).targetName)); // state check
+                && targetIndex.equals(((FlagCommand) other).targetIndex)); // state check
     }
 }
