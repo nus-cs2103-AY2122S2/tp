@@ -133,8 +133,8 @@ Let's take a look at the internal structure of the `CLIENT` entity.
 
 * all abstract `CLIENT` objects (Buyer or Seller) have a name and phone number.
 * `Buyer` has `PropertyToBuy` while `Seller` has `PropertyToSell`.
-
-  <img src="images/ClientClassDiagram.png" width="450" />
+  
+<img src="images/ClientClassDiagram.png" width="450" />
 
 Now, what PropertyToBuy and PropertyToSell classes encapsulate:
 
@@ -168,9 +168,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Match feature
+### Match feature
 
-#### Proposed Implementation
+#### Implementation
 
 We are currently implementing to implement a Match feature. In implements the following operation:
 
