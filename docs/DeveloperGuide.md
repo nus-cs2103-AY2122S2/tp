@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Delete multiple persons enhancement
 
 ### Original implementation
-Originally, the idea was to simply call `deletePerson` on each index, but this will not work as the indexes of each person
+Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
 in the contact list might change depending on the order of deletion. <br>
 
 **For example:** <br>
@@ -170,7 +170,7 @@ The delete command now has to accept multiple indexes as a valid input. The Pars
 behaviour by extending the validity checks on the entire string of input.
 
 The workaround is then to delete each person from the largest to the smallest index. The success message displays the details
-of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion.
+of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion. 
 
 **For example:** <br>
 `delete 1 2 3` extracts the information out of Person 1, Person 2 and Person 3 according to the last shown list.<br>
@@ -197,9 +197,6 @@ allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of su
 * `Internship` - stores information about the person's internship
 
 ![Class diagram for Tag](images/TagClassDiagram.png)
-
-
-
 
 ### Removetag feature
 
