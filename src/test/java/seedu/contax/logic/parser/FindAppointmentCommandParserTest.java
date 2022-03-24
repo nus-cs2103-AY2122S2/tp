@@ -60,4 +60,6 @@ public class FindAppointmentCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "\n John \n \t Bob  \t by/" + "person", expectedFindPersonCommand);
     }
+
+
 }
