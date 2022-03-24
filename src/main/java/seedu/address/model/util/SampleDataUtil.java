@@ -19,6 +19,7 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.PositionName;
+import seedu.address.model.position.PositionOffers;
 import seedu.address.model.position.PositionOpenings;
 import seedu.address.model.position.Requirement;
 import seedu.address.model.tag.Tag;
@@ -51,6 +52,8 @@ public class SampleDataUtil {
     }
 
     public static Position[] getSamplePositions() {
+        PositionOffers samplePos = new PositionOffers();
+        samplePos.increment();
         return new Position[]{
             new Position(new PositionName("Senior Software Developer"),
                     new Description("The highest paying job in the company\nMore than 5 years experience"),
@@ -66,7 +69,7 @@ public class SampleDataUtil {
             new Position(new PositionName("Admin Officer"),
                     new Description("Degree or Postgraduate holder with Major in Information Technology, "
                             + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
-                    new PositionOpenings("1"), getRequirementSet("Hardworking", "Good with people"))
+                    new PositionOpenings("2"), samplePos, getRequirementSet("Hardworking", "Good with people"))
         };
     }
 
