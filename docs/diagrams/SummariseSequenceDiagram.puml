@@ -31,7 +31,7 @@ deactivate AddressBookParser
 LogicManager -> SummariseCommand : execute()
 activate SummariseCommand
 
-SummariseCommand -> Model : updatedFilteredPersonList(m)
+SummariseCommand -> Model : updateFilteredPersonList(m)
 activate Model
 
 Model --> SummariseCommand
