@@ -162,7 +162,21 @@ This section describes some noteworthy details on how certain features are imple
 
 #### 1.2 Add lineup
 #### Proposed implementation
+The proposed add lineup functionality will create a new lineup and store it inside `UniqueLineupList`.
+
+The following sequence diagram shows how the undo operation works:
+![AddLineup](images/AddLineupSequenceDiagram.png)
+
 #### Design Consideration
+**Aspect: Where to store lineup data:**
+
+* **Alternative 1 (current choice):** Store its name as person's attributes.
+  * Pros: Easy to implement. No need to have another json file for storage.
+  * Cons: Need to search through all players to create all lineups for each relaunch of the application.
+
+* **Alternative 2:** Store lineups in the same json file as person.
+  * Pros: Easy to implement load data.
+  * Cons: Troublesome to save all data.
 
 #### 1.3 Add schedule 
 #### Proposed implementation
@@ -176,9 +190,27 @@ This section describes some noteworthy details on how certain features are imple
 
 #### 2.2 Delete lineup
 #### Proposed implementation
-#### Design Consideration
+The proposed add lineup functionality will delete an existing lineup from `UniqueLineupList` and remove all players from the lineup.
 
-#### 2.3 Delete schedule
+#### Design Consideration
+**Aspect: How to remove lineup from `UniqueLineupList`:**
+
+* **Alternative 1 (current choice):** Remove directly from the internal list.
+  * Pros: Easy to implement.
+  * Cons: The status of AddressBook is not modified and `updateItem()` of GUI needs to be triggered manually.
+
+* **Alternative 2:** Create another list without the player to be removed.
+  * Pros: The `updateItem()` of GUI will be automatically triggered.
+  * Cons: Troublesome to implement and time expensive.
+
+#### 2.3 Delete player from lineup
+#### Proposed implementation
+After checking that both input player and lineup are valid, the lineup's name will be removed from player's `LineupName` list. Then the player will be removed from lineup's `Person` list.
+
+#### Design Consideration
+**Aspect: NA**
+
+#### 2.4 Delete schedule
 #### Proposed implementation
 #### Design Consideration
 
@@ -214,6 +246,15 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed implementation
 #### Design Consideration
+**Aspect: How to navigate from player to lineup:**
+
+* **Alternative 1 (current choice):** Store `LineupName` as an attribute of player.
+  * Pros: Easy to Implement. Easy to navigate.
+  * Cons: Risk of multiple source of truth. More prone to bugs.
+
+* **Alternative 2:** Iterate through lineups to find the ones a player belongs to.
+  * Pros: No multiple source of truth.
+  * Cons: Iteration might be time-consuming.
 
 ### 6. Clear feature
 
