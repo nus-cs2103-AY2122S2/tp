@@ -22,15 +22,15 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Schedules the candidate identified by the index number for an interview on given date and time.\n"
-            + "Time and date given must not be in the past.\n"
+            + "Date and time given must not be in the past.\n"
             + "Parameters: INDEX (must be a positive integer) + /at + DATE (in dd/mm/yyyy format)"
             + "TIME (in hh:mm format)\n"
-            + "Example: " + COMMAND_WORD + " 1 /at 23-03-2022 13:30";
+            + "Example: " + COMMAND_WORD + " 1 /at 23/03/2022 13:30";
 
     public static final String MESSAGE_INVALID_FORMAT_DATETIME =
             "Date and/or Time is not in the following format: dd/MM/yyyy HH:mm";
 
-    public static final String MESSAGE_INVALID_DATETIME =
+    public static final String MESSAGE_INVALID_PAST_DATETIME =
             "Date and/or Time must not be in the past!";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
@@ -78,9 +78,8 @@ public class ScheduleCommand extends Command {
         }
 
         model.addInterview(toAdd);
-        return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
-                toAdd.getCandidate().getName(), toAdd.getCandidate().getStudentId(),
-                toAdd.getInterviewDate(), toAdd.getInterviewStartTime()));
+        return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate().getName(),
+                toAdd.getCandidate().getStudentId(), toAdd.getInterviewDate(), toAdd.getInterviewStartTime()));
     }
 
     @Override
