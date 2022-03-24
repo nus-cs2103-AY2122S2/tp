@@ -174,6 +174,16 @@ A `Task` contains the following attributes,
 6. can be marked/unmarked based on whether the task is done or not.
 7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
 
+#### Design considerations:
+
+#### Aspect: How the components within Task are added or changed
+- **Current Choice**: [Proposed] Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
+    * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
+    * Cons: Less flexible, more steps needed in editing Task objects
+- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
+    * Pros: Less overhead as fewer objects are created
+    * Cons: Prone to error as a Component might not be correctly changed
+
 #### Aspect: How the components within Task are added or changed
 - **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
   * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
@@ -217,6 +227,72 @@ Step 2. The user executes `addTodo desc/Watch Netflix with Mum` command to creat
 The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
 
 <img src="images/AddTaskActivityDiagram.png" width="250" />
+
+
+### Editing details of a task
+
+The edit mechanism is facilitated by `EditTaskCommandParser` and `EditTaskCommand`. <br/>
+`EditTaskCommandParser.parse()` - parses the input by the user and returns a `EditTaskCommand` object. <br/>
+`EditTaskCommand.execute()` - creates a new `Task` object based on the parsed user input and calls `Model.setTask()`
+to replace the old `Task` object with the new `Task` object.
+
+The command is as follows: taskEdit [TASK_INDEX] desc/ [DESC] at/ [TIME] date/ [DATE]
+
+- [TASK_INDEX] must not be empty.
+- At least one of [DESC], [TIME] and [DATE] should not be empty.
+- desc/ [DESC], at/ [TIME] or date/ [DATE] may be omitted but all of them cannot be omitted at the same time.
+
+Below is a sequence diagram of the editing of a task.
+
+![EditTaskSequenceDiagram](images/EditTaskSequenceDiagram.png)
+
+Step 1. The user executes a `editTask 1 desc/ eat` to edit the 1st task in the address book. The `editTask` command
+in `AddressBookParser` calls `EditTaskCommandParser.parse()`
+and parses the task index which is given as 1 and the task description that the
+user wants to edit his task with is parsed as a String with value eat.
+
+If either the description or the date or time was not provided by the user, then the default value
+would be an empty String. Otherwise, it would be parsed as a String with value provided by the user.
+It is not the responsibility of `EditTaskCommandParser.parse()` to ensure that the input provided by the user is valid.
+It will however ensure that a `Task` index is provided and
+at least the description or date or time has a corresponding value.
+
+Step 2.  
+In `LogicManager`, `EditTaskCommand.execute()` is called. This `EditTaskCommand` object is the one that was returned
+by `EditTaskCommandParser.parse()`. Within the `execute()` method,  there are 3 cases to consider.
+
+1. The task is of type Todo.
+2. The task is of type Deadline.
+3. The task is of type Event.
+
+Each case is being handled separately by its corresponding handler method.
+
+In general, what each handler method will do is to ensure that the input provided
+by the user is valid and if so, create a new `Task` object with the given input and
+call `model.setTask()` to replace the old `Task` object
+with the new `Task` object. If there are some input which is not provided, then the default value would be the
+same value as the old `Task` object. If any input is not valid, a `ParseException` is thrown.
+
+For `editTask 1 desc/ eat`, in step 1, we have obtained the task index which is given as 1.
+Using `model.getFilteredTaskList().get(index)` we obtain a copy of the task that the user wants to edit.
+Next, depending on what type the obtained task is, the corresponding handler method is called.
+
+If the task is of type Todo, then the handler method will create a new `Todo` object with the description value as
+"eat", call `model.setTask()` and return a CommandResult showing that the update has been successful.
+
+If the task is of type Deadline, then the handler method will create a new `Deadline` object with the description
+value as "eat", and the date and time values set to be the same
+values from the copy obtained using `model.getFilteredTaskList().get(index)`. Then, `model.setTask()` is called and
+return a CommandResult showing that the update has been successful.
+
+If the task is of type Event, then the handler method will create a new `Event` object with the description
+value as "eat", and the date and time values set to be the same
+value from the copy obtained using `model.getFilteredTaskList().get(index)`. Then, `model.setTask()` is called and
+return a CommandResult showing that the update has been successful.
+
+<b>Note:</b> For the Event type, a String value with two time values corresponding to be the start and end time
+separated with an **empty space** must be provided. Other than the time values being valid,
+the range between the start and end time must be valid as well. For example, 1700 2000 is valid while 2000 1700 is not.
 
 ### Tagging Task to Employee feature
 
@@ -278,7 +354,7 @@ _{more aspects and alternatives to be added}_
 * Prefers typing commands instead of clicking buttons
 * Needs a local database to store all tasks
 
-**Value proposition**: 
+**Value proposition**:
 
 * An application to show all the tasks assigned to the employees
 * Tasks should be assigned to the employees as well
@@ -324,27 +400,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User uses the appropriate command to add Task.
 4. ManageEZPZ adds the task & confirms with a successful message that the task is added.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the three `addTask` commands: 
-    * 3a1. User uses `addTask /todo` command 
+* 3a. User uses one of the three `addTask` commands:
+    * 3a1. User uses `addTask /todo` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-    * 3a2. User uses `addTask /event` command 
+    * 3a2. User uses `addTask /event` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-    * 3a3. User uses `addTask /deadline` command 
+    * 3a3. User uses `addTask /deadline` command
 
-      Use case resumes from step 4. 
-    
-* 3b. User uses Add Task Commands with the wrong syntax 
+      Use case resumes from step 4.
+
+* 3b. User uses Add Task Commands with the wrong syntax
 
     * 3b1. ManageEZPZ sends an error message to User, indicating the
-      format for adding Task is incorrect, attached with the correct syntax format. 
+      format for adding Task is incorrect, attached with the correct syntax format.
 
       Use case ends.
 
@@ -357,15 +433,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User uses the appropriate command to delete a Task
-4. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted. 
+4. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. (Invalid index) 
+* 3a. ManageEZPZ detects an error in the entered data. (Invalid index)
     * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for the delete
-      command is incorrect, attached with the correct syntax format. 
+      command is incorrect, attached with the correct syntax format.
 
       Use case ends.
 
@@ -384,30 +460,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User uses one of the five `list` Task commands: 
-    * 3a1. User uses `list /all` command 
+* 3a. User uses one of the five `list` Task commands:
+    * 3a1. User uses `list /all` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-    * 3a2. User uses `list /todo` command 
+    * 3a2. User uses `list /todo` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-    * 3a3. User uses `list /deadline` command 
+    * 3a3. User uses `list /deadline` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-    * 3a2. User uses `list /event` command 
+    * 3a2. User uses `list /event` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-    * 3a3. User uses `list /today` command 
+    * 3a3. User uses `list /today` command
 
-      Use case resumes from step 4. 
-    
-* 3b. User uses list Task commands with the wrong syntax. 
+      Use case resumes from step 4.
+
+* 3b. User uses list Task commands with the wrong syntax.
     * 3b1. ManageEZPZ sends an error message to User, that the list
-      command is incorrect, attached with the correct syntax format. 
+      command is incorrect, attached with the correct syntax format.
 
       Use case ends.
 
@@ -428,11 +504,11 @@ Preconditions: User is currently using ManageEZPZ.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. (Invalid Index) 
+* 3a. ManageEZPZ detects an error in the entered data. (Invalid Index)
 
     * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for
-      the Mark command is incorrect, attached with the correct syntax format. 
-      
+      the Mark command is incorrect, attached with the correct syntax format.
+
       Use Case ends.
 
 ****
@@ -447,17 +523,17 @@ Preconditions: User is currently using ManageEZPZ.
 2. ManageEZPZ displays the Tasks.
 3. User realises that Task is marked as done, but is actually not done.
 4. User enters command to unmark Task for the specific Task Number.
-5. ManageEZPZ unmarks the Task & confirms with a successful message that the task is unmarked. 
+5. ManageEZPZ unmarks the Task & confirms with a successful message that the task is unmarked.
 
    Use case ends.
 
 **Extensions**
 
-* 4a. ManageEZPZ detects an error in the entered data. (Invalid Index) 
+* 4a. ManageEZPZ detects an error in the entered data. (Invalid Index)
 
     * 4a1. ManageEZPZ sends an error message to User, indicating the Index used for
-      the unmark command is incorrect, attached with the correct syntax format. 
-      
+      the unmark command is incorrect, attached with the correct syntax format.
+
       Use Case ends.
 
 ****
@@ -469,27 +545,27 @@ Preconditions: User is currently using ManageEZPZ.
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User enters the command to find Tasks.
-4. ManageEZPZ displays the Task(s) which matches the search keyword. 
+4. ManageEZPZ displays the Task(s) which matches the search keyword.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the two Find Task commands: 
+* 3a. User uses one of the two Find Task commands:
 
-    * 3a1. User uses `find /task TASK_DESCRIPTION` command 
+    * 3a1. User uses `find /task TASK_DESCRIPTION` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-    * 3a2. User uses `find /date DD-MM-YYYY` command 
+    * 3a2. User uses `find /date DD-MM-YYYY` command
 
-      Use case resumes from step 4. 
+      Use case resumes from step 4.
 
-* 3b. User uses find Task commands with the wrong syntax 
+* 3b. User uses find Task commands with the wrong syntax
 
     * 3b1. ManageEZPZ sends an error message to User, indicating syntax used for
-      the find Task command is incorrect, attached with the correct syntax format. 
-      
+      the find Task command is incorrect, attached with the correct syntax format.
+
       Use Case ends.
 
 ****
@@ -500,18 +576,18 @@ Preconditions: User is currently using ManageEZPZ.
 1. User starts up ManageEZPZ.
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User wants to add a new Employee, enters command to add Employee.
-4. ManageEZPZ adds the Employee & confirms with a successful message that the task is marked 
+4. ManageEZPZ adds the Employee & confirms with a successful message that the task is marked
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. 
+* 3a. ManageEZPZ detects an error in the entered data.
 
     * 3a1. ManageEZPZ sends an error message to User, indicating the
       format for the add Employee command is incorrect, attached with the
-      correct syntax format. 
-      
+      correct syntax format.
+
       Use Case ends.
 
 ****
@@ -521,8 +597,8 @@ Preconditions: User is currently using ManageEZPZ.
 **MSS**
 
 1. User enters the command to clear all Tasks
-2. ManageEZPZ clears all Tasks & confirms with a successful 
-message that all Task are cleared. 
+2. ManageEZPZ clears all Tasks & confirms with a successful
+   message that all Task are cleared.
 
    Use case ends.
 
@@ -534,7 +610,7 @@ message that all Task are cleared.
 
 1. User enters a command to exit ManageEZPZ.
 2. ManageEZPZ confirms with a successful exit message.
-3. ManageEZPZ saves all changes to disk. 
+3. ManageEZPZ saves all changes to disk.
 
    Use case ends.
 
@@ -554,8 +630,8 @@ message that all Task are cleared.
 #### Performance Requirements
 
 1. ManageEZPZ should respond within two seconds for any queries.
-   * ManageEZPZ should be closed/terminated within 2 seconds.
-2. ManageEZPZ should work well under both normal and high workloads. 
+    * ManageEZPZ should be closed/terminated within 2 seconds.
+2. ManageEZPZ should work well under both normal and high workloads.
 3. ManageEZPZ should be scalable.
 4. ManageEZPZ should be able to load huge amounts of data in a short amount of time.
 
