@@ -9,18 +9,18 @@ import javafx.collections.ObservableList;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.exceptions.FilterNotFoundException;
 
-public class ProductFulfillsFiltersPredicate implements Predicate<Product> {
+public class ProductFilter implements Predicate<Product> {
     private final ObservableList<AttributeFilter> filters = FXCollections.observableArrayList();
 
     /**
      * Instantiate with no conditions. Matches all products.
      */
-    public ProductFulfillsFiltersPredicate() {}
+    public ProductFilter() {}
 
     /**
      * Instantiate with a specific product.
      */
-    public ProductFulfillsFiltersPredicate(Product product) {
+    public ProductFilter(Product product) {
         addFilter(new NameFilter(product.getName()));
         addFilter(new CategoryFilter(product.getCategory()));
         addFilter(new DescriptionFilter(product.getDescription()));
@@ -46,6 +46,13 @@ public class ProductFulfillsFiltersPredicate implements Predicate<Product> {
     }
 
     /**
+     * Clear all filters.
+     */
+    public void clearFilters() {
+        filters.clear();
+    }
+
+    /**
      * Returns a list of {@code AttributeFilters}.
      */
     public ObservableList<AttributeFilter> getFilters() {
@@ -65,11 +72,11 @@ public class ProductFulfillsFiltersPredicate implements Predicate<Product> {
             return true;
         }
 
-        if (!(other instanceof ProductFulfillsFiltersPredicate)) {
+        if (!(other instanceof ProductFilter)) {
             return false;
         }
 
-        ProductFulfillsFiltersPredicate otherPredicate = (ProductFulfillsFiltersPredicate) other;
+        ProductFilter otherPredicate = (ProductFilter) other;
         return filters.equals(otherPredicate.getFilters());
     }
 }

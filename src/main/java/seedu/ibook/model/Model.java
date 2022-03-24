@@ -8,14 +8,11 @@ import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    ProductFulfillsFiltersPredicate PREDICATE_SHOW_ALL_PRODUCTS = new ProductFulfillsFiltersPredicate();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

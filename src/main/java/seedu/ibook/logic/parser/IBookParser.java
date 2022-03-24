@@ -76,6 +76,7 @@ public class IBookParser {
 
         case ExpiredCommand.COMMAND_WORD:
             return new ExpiredCommand();
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 

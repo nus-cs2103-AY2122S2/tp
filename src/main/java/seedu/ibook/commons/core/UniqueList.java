@@ -60,6 +60,13 @@ public class UniqueList<T extends Distinguishable> implements Iterable<T> {
         }
     }
 
+    /**
+     * Gets the size of the list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
     public ObservableList<T> asObservableList() {
         return internalList;
     }

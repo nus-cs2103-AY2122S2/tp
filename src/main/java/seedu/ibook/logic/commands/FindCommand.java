@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
+import java.util.List;
+
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.AttributeFilter;
 
 /**
  * Finds and lists all persons in Ibook whose name contains any of the argument keywords.
@@ -22,30 +24,46 @@ public class FindCommand extends Command {
             + "Parameters: PREFIX: VALUE [MORE_PREFIX: VALUE]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + ": bottle " + PREFIX_PRICE + ": 3.00";
 
-    private final ProductFulfillsFiltersPredicate predicate;
+    private final List<AttributeFilter> filterList;
 
     /**
-     * Creates a Find Command with the filters of the {@code predicate}
-     * @param predicate
+     * Creates a Find Command with no filters.
      */
-    public FindCommand(ProductFulfillsFiltersPredicate predicate) {
-        assert predicate != null;
-        this.predicate = predicate;
+    public FindCommand() {
+        // allow no filters, i.e. null
+        this.filterList = null;
+    }
+
+    /**
+     * Creates a Find Command with the filters of the {@code filterList}
+     * @param filterList
+     */
+    public FindCommand(List<AttributeFilter> filterList) {
+        requireNonNull(filterList);
+        this.filterList = filterList;
     }
 
     @Override
     public CommandResult execute(Model model) {
-
         requireNonNull(model);
-        model.updateProductFilters(predicate);
+        if (!(filterList == null)) {
+            filterList.forEach(model::addProductFilter);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof FindCommand)) {
+            return false;
+        }
+
+        assert filterList != null;
+        return filterList.equals(((FindCommand) other).filterList);
     }
 }

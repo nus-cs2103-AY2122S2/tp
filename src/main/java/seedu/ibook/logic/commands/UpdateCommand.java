@@ -3,7 +3,6 @@ package seedu.ibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ibook.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -72,7 +71,7 @@ public class UpdateCommand extends Command {
         }
 
         model.setProduct(productToUpdate, updatedProduct);
-        model.updateProductFilters(PREDICATE_SHOW_ALL_PRODUCTS);
+        model.clearProductFilters();
         return new CommandResult(String.format(MESSAGE_UPDATE_PRODUCT_SUCCESS, updatedProduct));
     }
 
