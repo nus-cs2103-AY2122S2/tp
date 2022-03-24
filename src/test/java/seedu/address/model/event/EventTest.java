@@ -97,4 +97,23 @@ class EventTest {
         assertNotEquals(EVENT_AMY_BIRTHDAY, editedEvent);
     }
 
+    @Test
+    void testOrder() {
+        Event firstEvent = new EventBuilder().withName("DateTime test").withDateTime("14-04-2000 0000").build();
+        Event secondEvent = new EventBuilder().withName("DateTime test").withDateTime("14-04-2000 0001").build();
+        Event thirdEvent = new EventBuilder().withName("DateTime test").withDateTime("15-04-2000 0000").build();
+        Event fourthEvent = new EventBuilder().withName("DateTime test").withDateTime("14-05-2000 0000").build();
+        Event fifthEvent = new EventBuilder().withName("DateTime test").withDateTime("14-05-2001 0000").build();
+        Event equalsFirstEvent = new EventBuilder().withName("DateTime test").withDateTime("14-04-2000 0000").build();
+
+        assertTrue(firstEvent.compareTo(secondEvent) < 0);
+        assertTrue(firstEvent.compareTo(thirdEvent) < 0);
+        assertTrue(firstEvent.compareTo(fourthEvent) < 0);
+        assertTrue(firstEvent.compareTo(fifthEvent) < 0);
+        assertTrue(firstEvent.compareTo(equalsFirstEvent) == 0);
+        assertTrue(secondEvent.compareTo(firstEvent) > 0);
+        assertTrue(fifthEvent.compareTo(fourthEvent) > 0);
+
+    }
+
 }

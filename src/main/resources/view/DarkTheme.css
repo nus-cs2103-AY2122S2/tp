@@ -24,13 +24,15 @@
     -fx-opacity: 1;
 }
 
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
-}
-
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-opacity: 1;
+.text-area .content{
+    -fx-background-color: #383838 transparent #383838;
+    -fx-background-insets: 0;
+    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
 }
 
 .tab-pane {
@@ -44,7 +46,11 @@
     -fx-min-height: 0;
     -fx-max-height: 0;
     -fx-alignment: center;
-    -fx-background-color: green;
+    -fx-background-color: #383838;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 1;
 }
 
 .tab-pane .tab {
@@ -53,12 +59,14 @@
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #3c3c3c;
+    -fx-background-color: #383838;
 }
 
 .tab:selected .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: #96b946;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .tab .tab-label {
@@ -66,6 +74,8 @@
     -fx-text-fill: #828282;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Light";
+
 }
 
 .table-view {
@@ -358,10 +368,9 @@
     -fx-text-fill: #F70D1A;
 }
 
-#commandTextField {
+#commandTextArea {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";

@@ -3,10 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.ArgumentMultimap.arePrefixesPresent;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLogCommand;
@@ -28,12 +28,12 @@ public class EditLogCommandParser implements Parser<EditLogCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args,
                         PREFIX_NAME, PREFIX_LOG_INDEX,
-                        PREFIX_NEW_TITLE, PREFIX_NEW_DESCRIPTION);
+                        PREFIX_TITLE, PREFIX_DESCRIPTION);
 
         // check that log index, and at least one of new title/description is present
         if (!arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX)
-            || (!arePrefixesPresent(argMultimap, PREFIX_NEW_DESCRIPTION)
-                && !arePrefixesPresent(argMultimap, PREFIX_NEW_TITLE))) {
+            || (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)
+                && !arePrefixesPresent(argMultimap, PREFIX_TITLE))) {
             throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
@@ -66,13 +66,13 @@ public class EditLogCommandParser implements Parser<EditLogCommand> {
         if (argMultimap.getValue(PREFIX_LOG_INDEX).isPresent()) {
             logIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LOG_INDEX).get());
         }
-        if (argMultimap.getValue(PREFIX_NEW_TITLE).isPresent()) {
+        if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
             descriptor.setNewTitle(ParserUtil.parseTitle(
-                    argMultimap.getValue(PREFIX_NEW_TITLE).get()));
+                    argMultimap.getValue(PREFIX_TITLE).get()));
         }
-        if (argMultimap.getValue(PREFIX_NEW_DESCRIPTION).isPresent()) {
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             descriptor.setNewDescription(ParserUtil.parseDescription(
-                    argMultimap.getValue(PREFIX_NEW_DESCRIPTION).get()));
+                    argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
 
         // check that an actual edit has taken place
