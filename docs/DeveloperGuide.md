@@ -285,6 +285,41 @@ The following Sequence Diagrams summarizes the various steps involved:
 For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
 
 
+
+### `sort` feature
+The `sort` command mechanism can be broken down into the following steps:
+
+**Step 1:**
+The user types input E.g.  `sort` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
+
+**Step 2:**
+The `execute(input)` method of `LogicManager`, a subclass of the Logic component, is called with the given input.
+
+**Step 3:**
+The `sortFilteredClientList()` method of `model` is being called
+
+**Step 4:**
+The `Addressbook.sortPersons() ` method is being called.
+
+**Step 5:** 
+The `UniqueClientList.sortPersons() ` method is being called.
+
+**Step 6:**
+`UniqueClientList`'s `internalList` is being modified permanently by the order of their names alphabetically.
+
+The following Sequence Diagrams summarizes the various steps involved:
+
+`To be added later`
+
+**Pros:**
+It alters the internal list completely, so that the app 'saves' users last sorting option.
+
+**Cons:**
+Some people might not want the sorted result to be saved. 
+Currently we are exploring other options to sort the list besides modifying the structure of internal list directly.
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
