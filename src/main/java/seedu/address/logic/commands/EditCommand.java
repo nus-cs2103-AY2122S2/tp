@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PREV_DATE_MET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
@@ -29,10 +30,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -67,7 +68,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_INVALID_INDEX = "This index does not exist!";
 
     private final Name targetName;
-    private final String targetNameString;
+    private final String targetNameStr;
     private final EditPersonDescriptor editPersonDescriptor;
     private int index = 0;
 
@@ -79,7 +80,7 @@ public class EditCommand extends Command {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
 
-        this.targetNameString = name;
+        this.targetNameStr = name;
         this.targetName = new Name(name);
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
@@ -92,7 +93,8 @@ public class EditCommand extends Command {
         FilteredList<Person> lastShownList = (FilteredList<Person>) model.getFilteredPersonList();
         Index targetIndex;
         if (index == 0) {
-            Predicate<Person> predicate = new NameContainsKeywordsPredicate(Collections.singletonList(targetNameString));
+            String[] nameKeywords = targetNameStr.split("\\s+");
+            Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
             lastShownList.setPredicate(predicate);
 
             if (lastShownList.size() > 1) {
@@ -115,21 +117,6 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
-    }
-
-    public CommandResult executeByIndex(Model model, int index) throws CommandException {
-        Index targetIndex = Index.fromOneBased(index);
-        FilteredList<Person> lastShownList = (FilteredList<Person>) model.getFilteredPersonList();
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
