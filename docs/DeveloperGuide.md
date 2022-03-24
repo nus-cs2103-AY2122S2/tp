@@ -154,6 +154,60 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature
+
+#### What is the feature about?
+The `find` mechanism is facilitated by `AddressBook3`. The `find` command in `TAlent Assistant™`
+has been enhanced based on the initial implementation of the `find` command in `AddressBook3`.
+
+The enhancement works by adding a new prefix in the `CliSyntax` class `k/`, which allows the
+user to separate multiple keywords. and `f/` which allows the user to specify which field the
+`find` command should search for keywords under.
+
+#### How is the feature implemented?
+The main logic for `find` command is still implemented within `FindCommand` (which extends from `Command`) and
+`FindCommandParser`.
+
+The `FindCommandParser` class has been extended to include a switch-case block to validate
+which field the user is trying to search across:
+1. `studentId`
+2. `course`
+3. `seniority`
+4. `mame`
+5. `email`
+6. `phone`
+7. `applicationStatus` (WIP)
+8. `interviewStatus` (WIP)
+9. `availability` (WIP)
+10. `candidate` (i.e. search across all fields)
+
+Based on the field validated by the switch-case block, a `new findCommand(new ContainsKeywordsPredicate(keywords))`
+will be created. The implementation of the original `NameContainsKeywordsPredicate` has been enhanced here.
+There is now a `ContainsKeywordsPredicate` parent abstract class extended by each of the above listed fields as subclasses
+(e.g. `StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicate`).
+
+#### Why is the feature implemented as such?
+**1. Switch-case block in `FindCommandParser`** <br>
+Other alternatives considered included creating a separate class to execute the logic of checking for which field the
+user had entered and return the new `ContainsKeywordsPredicate` subclass *or* to utilise `if`-`else` statements.
+In the end, the implementation was done using the switch-case block within the `FindCommandParser` class, as the
+class should contain all the necessary logic to parse in the user's input. The syntax for the switch-case block was
+also more efficient than `if`-`else` statements and was more relevant for this usage.
+
+**2. Inheritance of `ContainsKeywordsPredicate` to child classes**
+Other alternatives considered included creating one single `ContainsKeywordsPredicate` class to implement all the
+equality and keyword match checks for each and every field.
+However, this would not meet good design principles - this would make it difficult to isolate and resolve bugs during
+testing and make scalability and maintainability more complicated.
+Further, since all the child classes implement similar logic and methods, it would make sense to create an
+(abstract) parent class. This establishes the SRP principle, such that each subclass is only responsible for
+checks for the specific related entity, and should not have any other reason to change otherwise.
+
+#### UML Diagrams
+**Activity Diagram**<br>
+The following activity diagram summarizes what happens when a user executes a `find` command: <br>
+<img src="images/FindActivityDiagram.png" width="250" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
