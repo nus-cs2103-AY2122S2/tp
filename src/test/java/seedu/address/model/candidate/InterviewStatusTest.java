@@ -23,19 +23,20 @@ public class InterviewStatusTest {
         assertFalse(InterviewStatus.isValidStatus("interviewe"));
         assertFalse(InterviewStatus.isValidStatus("not interview"));
         assertFalse(InterviewStatus.isValidStatus("pend"));
+        assertFalse(InterviewStatus.isValidStatus("completes"));
+        assertFalse(InterviewStatus.isValidStatus("schedules"));
+        assertFalse(InterviewStatus.isValidStatus("schedule"));
 
 
-        assertTrue(InterviewStatus.isValidStatus("interviewing"));
-        assertTrue(InterviewStatus.isValidStatus("Interviewing"));
-        assertTrue(InterviewStatus.isValidStatus("not interviewed"));
-        assertTrue(InterviewStatus.isValidStatus("Not Interviewed"));
-        assertTrue(InterviewStatus.isValidStatus("Not interviewed"));
-        assertTrue(InterviewStatus.isValidStatus("not Interviewed"));
-        assertTrue(InterviewStatus.isValidStatus("notinterviewed"));
-        assertTrue(InterviewStatus.isValidStatus("NotInterviewed"));
-        assertTrue(InterviewStatus.isValidStatus("Notinterviewed"));
-        assertTrue(InterviewStatus.isValidStatus("notInterviewed"));
-        assertTrue(InterviewStatus.isValidStatus("pending"));
-        assertTrue(InterviewStatus.isValidStatus("Pending"));
+
+        assertTrue(InterviewStatus.isValidStatus("not scheduled"));
+        assertTrue(InterviewStatus.isValidStatus("notscheduled"));
+        assertTrue(InterviewStatus.isValidStatus("Not Scheduled"));
+        assertTrue(InterviewStatus.isValidStatus("notScheduled"));
+        assertTrue(InterviewStatus.isValidStatus("Notscheduled"));
+        assertTrue(InterviewStatus.isValidStatus("Scheduled"));
+        assertTrue(InterviewStatus.isValidStatus("scheduled"));
+        assertTrue(InterviewStatus.isValidStatus("Completed"));
+        assertTrue(InterviewStatus.isValidStatus("completed"));
     }
 }

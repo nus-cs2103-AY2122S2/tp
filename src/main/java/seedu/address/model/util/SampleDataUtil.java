@@ -25,28 +25,28 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     private static final ApplicationStatus PENDING = new ApplicationStatus("pending");
-    private static final InterviewStatus INTERVIEW_PENDING = new InterviewStatus("pending");
+    private static final InterviewStatus INTERVIEW_NOT_SCHEDULED = new InterviewStatus("Not Scheduled");
 
     public static Candidate[] getSamplePersons() {
         return new Candidate[] {
             new Candidate(new StudentId("E0123456"), new Name("Alex Yeoh"), new Phone("87438807"),
                 new Email("E0123456@u.nus.edu"), new Course("Business Analytics"),
-                    getTagSet("friends"), PENDING, INTERVIEW_PENDING, new Availability("1,2,3,4,5,6,7")),
+                    getTagSet("friends"), PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("1,2,3,4,5,6,7")),
             new Candidate(new StudentId("E0234567"), new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("E0234567@u.nus.edu"), new Course("Computer Engineering"),
-                getTagSet("colleagues", "friends"), PENDING, INTERVIEW_PENDING, new Availability("1,2,3,4,5")),
+                getTagSet("colleagues", "friends"), PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("1,2,3,4,5")),
             new Candidate(new StudentId("E0345678"), new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("E0345678@u.nus.edu"), new Course("Computer Science"), getTagSet("neighbours"),
-                    PENDING, INTERVIEW_PENDING, new Availability("1,2,3")),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("1,2,3")),
             new Candidate(new StudentId("E0456789"), new Name("David Li"), new Phone("91031282"),
                 new Email("E0456789@u.nus.edu"), new Course("Information Security"), getTagSet("family"),
-                    PENDING, INTERVIEW_PENDING, new Availability("3,4,5")),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("3,4,5")),
             new Candidate(new StudentId("E0567890"), new Name("Irfan Ibrahim"), new Phone("92492021"),
                 new Email("E0567890@u.nus.edu"), new Course("Information Systems"), getTagSet("classmates"),
-                    PENDING, INTERVIEW_PENDING, new Availability("4,5,6")),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("4,5,6")),
             new Candidate(new StudentId("E0678901"), new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("E0678901@u.nus.edu"), new Course("Computer Science"), getTagSet("colleagues"),
-                    PENDING, INTERVIEW_PENDING, new Availability("3,5,7"))
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("3,5,7"))
         };
     }
 
@@ -74,10 +74,6 @@ public class SampleDataUtil {
 
     public static ApplicationStatus getPending() {
         return PENDING;
-    }
-
-    public static InterviewStatus getInterviewPending() {
-        return INTERVIEW_PENDING;
     }
 
 }
