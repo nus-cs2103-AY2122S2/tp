@@ -26,7 +26,8 @@ public class StorageManagerTest {
     public void setUp() {
         SerializableAddressBookStorage addressBookStorage = new SerializableAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        SerializableTempAddressBookStorage addressBookTempStorage = new SerializableTempAddressBookStorage(getTempFilePath("temp ab"));
+        SerializableTempAddressBookStorage addressBookTempStorage = new SerializableTempAddressBookStorage(
+                getTempFilePath("temp ab"));
     }
 
     private Path getTempFilePath(String fileName) {

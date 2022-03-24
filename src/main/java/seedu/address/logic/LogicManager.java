@@ -70,7 +70,7 @@ public class LogicManager implements Logic {
             }
         }
 
-        assert commandResult != null: "CommandResult is null, should not happen";
+        assert commandResult != null : "CommandResult is null, should not happen";
         handleTempAddressBookFiles(addressBookBeforeCommand, commandResult.isUndoPrevCommand());
 
         return commandResult;

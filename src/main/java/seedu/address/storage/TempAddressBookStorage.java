@@ -1,10 +1,9 @@
 package seedu.address.storage;
 
-import seedu.address.model.ReadOnlyAddressBook;
-
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+
+import seedu.address.model.ReadOnlyAddressBook;
 
 /**
  * Represents a temporary files storage for {@link seedu.address.model.AddressBook}.
