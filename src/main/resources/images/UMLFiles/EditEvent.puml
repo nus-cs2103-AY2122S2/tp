@@ -4,23 +4,23 @@
 start
 :User executes EditEventCommand;
 :EditEventParser parses the command provided by user;
-if (Command is valid) then (true)
+if () then ([Command is valid])
     :EditEventCommand is executed;
-    if (Index is valid) then (true)
-        if (Edited Event is Duplicate) then (true)
+    if () then ([Index is valid])
+        if () then ([Edited Event is Duplicate])
             :Show duplicate event message;
-        else (false)
-            if (Edited friend names are valid) then (true)
+        else ([else])
+            if () then ([Edited friend names are valid])
                 :Event at index is replaced with edited event;
                 :Show EditEventCommand success message;
-            else (false)
+            else ([else])
                 :Show invalid friend error;
             endif
         endif
-    else (false)
+    else ([Index is invalid])
         :Show invalid index error;
     endif
-else (false)
+else ([Command is invalid])
     :Show parse error message;
 endif
 stop

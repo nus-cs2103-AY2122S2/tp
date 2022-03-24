@@ -194,6 +194,10 @@ The following is a detailed explanation of the operations which take place when 
 3. The GUI contains a pointer to the `FilteredList` present in the `ModelManager`, thus it is able to retrieve all the events present in the addressbook and represent them as a `EventCard` class which is a JavaFX UI feature which visually depicts the event's name, date and time, description and the names of any friends associated with the event.
 4. The `MainWindow` class receives the `CommandResult` after `ShowEventsCommand::execute` is done executing, a boolean `event` within `CommandResult` decides whether `MainWindow::changeInterface` is called which changes the tab from `Friends` tab to `Events` or vice versa.
 
+The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`
+
+![ShowEventSequenceDiagram.png](C:\Users\aryan\Desktop\Sem 6\CS2103\tP\src\main\resources\images\ShowEventsSequenceDiagram.png)
+
 #### Design Considerations
 
 - Current Implementation
