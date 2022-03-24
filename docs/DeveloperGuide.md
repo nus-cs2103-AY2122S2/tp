@@ -179,11 +179,14 @@ step.
        the`ParserUtil`class. It then instantiates a new `Person` with the given attributes returned by `ParserUtil`. 
        (`ParserUtil` checks for the validity of the inputs according to the respective attribute constraints.
        Next, an `AddCommand` is created with the new `Person` passed into it.
-3. When `AddCommand::execute` is called, the `Model` component will check if the `Person` to be added already exists in Amigos. 
-   This check is done using `Model::hasPerson` which ultimately uses `Person::isSamePerson` to check if two `Person` are equal by name only. 
-4. If no duplicate person exists, then `Model::addPerson` will be called and the newly created `Person` will be set into the `model` and added into the `UniquePersonList`.
+3. When `AddCommand::execute` is called, the `Model` component will check if the `Person` to be added already
+   exists in Amigos. This check is done using `Model::hasPerson` which ultimately uses `Person::isSamePerson`
+   to check if two `Person` are equal by name only. 
+4. If no duplicate person exists, then `Model::addPerson` will be called and the newly created `Person` will 
+   be set into the `model` and added into the `UniquePersonList`.
 
-A sequence diagram showing the interactions between `AddCommand`, `AddCommandParser`, `ParserUtil` and `model`. 
+A sequence diagram showing the interactions between `AddCommand`, `AddCommandParser`, `ParserUtil` and `model`, 
+after the user has entered a valid `FriendName`, `Phone`, and `Email`.
 ![AddFriendSequenceDiagram](images/AddFriendSequenceDiagram.png)
 
 ##### Design Considerations
