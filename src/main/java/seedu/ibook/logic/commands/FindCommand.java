@@ -24,6 +24,10 @@ public class FindCommand extends Command {
 
     private final ProductFulfillsFiltersPredicate predicate;
 
+    /**
+     * Creates a Find Command with the filters of the {@code predicate}
+     * @param predicate
+     */
     public FindCommand(ProductFulfillsFiltersPredicate predicate) {
         assert predicate != null;
         this.predicate = predicate;
