@@ -56,6 +56,9 @@ public class UndoCommandTest {
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    /**
+     * Test method that checks for a successful undo of an appointment command
+     */
     @Test
     public void execute_listIsFiltered_undoAppointmentCommand() {
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
@@ -68,6 +71,10 @@ public class UndoCommandTest {
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+
+    /**
+     * Test method that checks for a successful undo of a diet command
+     */
     @Test
     public void execute_listIsFiltered_undoDietCommand() {
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
@@ -79,6 +86,10 @@ public class UndoCommandTest {
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+
+    /**
+     * Test method that checks for a successful undo of a sort command
+     */
     @Test
     public void execute_listIsFiltered_undoSortCommand() {
         model.sortPetList("/o");
