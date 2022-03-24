@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_MISSING_DROPOFF_TIME;
+import static seedu.address.commons.core.Messages.MESSAGE_MISSING_PICKUP_TIME;
 import static seedu.address.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
@@ -29,9 +31,7 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_PICKUP, PREFIX_DROPOFF);
 
-        if (onlyOneTimePresent(argMultimap)) {
-            throw new ParseException("meme");
-        }
+        checkIfOnlyOneTimePresent(argMultimap);
 
         Index index;
         LocalDate attendanceDate;
@@ -64,13 +64,17 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
 
     /**
      * Checks to see if only pick up or only drop off time for the command is present.
-     *
      * @param argumentMultimap the arguments of the command.
-     * @return true if only one of the time arguments are present, false otherwise.
+     * @throws ParseException if one and only one out of the two timings are provided.
      */
-    private boolean onlyOneTimePresent(ArgumentMultimap argumentMultimap) {
-        return argumentMultimap.getValue(PREFIX_PICKUP).isPresent()
-            ^ argumentMultimap.getValue(PREFIX_DROPOFF).isPresent(); // exclusive OR
+    private void checkIfOnlyOneTimePresent(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (argumentMultimap.getValue(PREFIX_PICKUP).isEmpty()
+            && argumentMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
+            throw new ParseException(MESSAGE_MISSING_PICKUP_TIME);
+        } else if (argumentMultimap.getValue(PREFIX_PICKUP).isPresent()
+            && argumentMultimap.getValue(PREFIX_DROPOFF).isEmpty()) {
+            throw new ParseException(MESSAGE_MISSING_DROPOFF_TIME);
+        }
     }
 }
 
