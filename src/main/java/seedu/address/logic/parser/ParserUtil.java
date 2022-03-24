@@ -144,12 +144,20 @@ public class ParserUtil {
      * @throws ParseException if the given {@code seniority} is invalid.
      */
     public static Seniority parseSeniority(String seniority) throws ParseException {
-        int seniorityInt = Integer.parseInt(seniority.substring(seniority.length() - 1));
+        requireNonNull(seniority);
+        String trimmedSeniority = seniority.trim();
 
-        if (!Seniority.isValidSeniority(seniorityInt)) {
+        try {
+            int seniorityInt = Integer.parseInt(trimmedSeniority.substring(trimmedSeniority.length() - 1));
+
+            if (!Seniority.isValidSeniority(seniorityInt)) {
+                throw new ParseException(Seniority.MESSAGE_CONSTRAINTS);
+            }
+
+            return new Seniority(seniorityInt);
+        } catch (NumberFormatException e) {
             throw new ParseException(Seniority.MESSAGE_CONSTRAINTS);
         }
-        return new Seniority(seniorityInt);
     }
 
     /**
