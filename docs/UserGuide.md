@@ -39,122 +39,169 @@ later.">
 
 ## Features
 
-### Create Contact Information: `/create -t contact`
+<div markdown="block" class="alert alert-info">
 
-Adds a patient's contact to the Medbook
+**:information_source: Notes about the command format:**<br>
 
-Format: `/create -t contact -i NRIC -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS`
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…`  after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]… ` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
+
+### Viewing help
+
+Shows a message explaining how to access the help page.
+
+<img src="images/helpMessage.png" alt="Unable to load image! Try again later.">
+
+Format: help
+
+### Adding a patient: `add`
+
+Adds a patient to the address book.
+
+Format" `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+
+Examples: 
+* add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+
+### Listing all patients: 'view'
+
+Shows a list of patients in MedBook
+
+Format: `view`
+
+### Adding Contact Information: `add t/contact`
+
+Adds a patient's emergency contact to Medbook
+
+Format: `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 Examples:
-* `/create -t contact -i S1234567P -n John Doe -p 80008000 -e johndoe@gmail.com -a COM1`
+* `add t/contact i/S1234567L n/Rihanna r/Mother p/80008000 e/rihanna@gmail.com a/COM1`
 
-<img src = "images/user-guide/feature2_1.png" width = "350" alt="Unable to load image! Try again later.">
 
-### View Contact Information: `/view -t contact`
+### Viewing Contact Information: `view t/contact`
 
-Views a patient’s details from the MedBook
+Views a patient’s emergency contacts from the MedBook
 
-Format: `/view -t contact [-i NRIC] [-n NAME] [-p PHONE_NUMBER] [-e EMAIL]`
-
-Note: Optional fields allow users to have a more refined search.
+Format: `view t/contact i/NRIC`
 
 Examples:
-* `/view -t contact` to show all patients’ contact information
-* `/view -t contact -i S1234567P` to view the contact information of the patient with this NRIC
-* `/view -t contact -n John Smith` to view all contact information of patients with this name
+* `/view t/contact i/S1234567L`
 
-<img src = "images/user-guide/feature2_2.png" width = "350" alt="Unable to load image! Try again later.">
-
-### Delete Contact Information: `/delete -t contact`
-
-Deletes a patient from the MedBook
-
-Format: `/delete -t contact -i NRIC`
-
-Note: Only NRIC can be used to uniquely identify the contact owner.
-
-Examples:
-* `/delete -t contact -i S1234567P`
-
-### Create Medical Information: `/create -t medical`
+### Adding Medical Information: `add t/medical`
 Adds a patient's medical information to the MedBook.
 
-Format: `/create -t medical -i NRIC [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]...`
+Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION]...`
 
 Optional fields and associated flags:
-- Age `-a`
-- Blood type `-bt`
-- Medication `-md`
-- Height `-ht`
-- Weight `-wt`
-- List of illnesses `-il`
-- List of surgeries `-su`
-- Family history `-fh`
-- Immunization history `-ih`
-- Gender `-gd`
-- Ethnicity `-et`
+- Age `a/`
+- Blood type `bt/`
+- Medication `md/`
+- Height `ht/`
+- Weight `wt/`
+- List of illnesses `il/`
+- List of surgeries `su/`
+- Family history `fh/`
+- Immunization history `ih/`
+- Gender `gd/`
+- Ethnicity `et/`
 
 Examples:
-* `/create -t medical -i S1234567P -bt O -ht 185 cm`
+* `add t/medical i/S1234567L bt/O ht/185 cm`
 
-<img src = "images/user-guide/feature2_4.png" width = "350" alt="Unable to load image! Try again later.">
+### Viewing Medical Information `view t/medical`
 
-### View Medical Information `/view -t medical`
-Displays medical information of a patient from the MedBook. If no NRIC number is included, displays a list of current medical information records.
+Displays medical information of a patient from MedBook.
 
-Format:  `/view -t medical [-i NRIC]`
-
-Examples:
-* `/view -t medical`
-* `/view -t medical -i S1234567P`
-
-<img src = "images/user-guide/feature2_5.png" width = "350" alt="Unable to load image! Try again later.">
-
-### Delete Medical Information: `/delete -t medical`
-Deletes all medical information of a patient from the MedBook
-
-Format: `/delete -t medical -i NRIC`
+Format:  `view t/medical i/NRIC`
 
 Examples:
-* `/delete -t medical -i S1234567P`
+* `view t/medical i/S1234567L`
 
-### Create Consultation Information: `/create -t consultation`
-Adds a consultation report of a patient to the MedBook.
+### Adding Consultation Information: `add t/consultation`
 
-Format: `/create -t consultation -i NRIC [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS]`
+Adds a consultation report of a patient to MedBook.
 
-NOTE: [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
-
-Examples:
-* `/create -t consultation -i S1234567P -dt 15-09-2021 -tm 18-00 -n Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. -p Augmentin Antibiotics 625mg - twice a day; Paracetamol 500mg - twice a day. -tt Stethoscope. Found short and laboured breathing.`
-
-### View Past Consultations: `/view -t consultation`
-View all past consultations in the MedBook that fit search parameters. All fields are optional.
-
-Format: `/view -t consultation  -i NRIC [-dt DATE][-tm TIME]`
-
-NOTE:  [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
+Format: `add t/consultation i/NRIC dt/DATE tm/TIME -n/NOTES`
 
 Examples:
-* `/view -t consultation`
-  * Shows all the consultations for all patients
-* `/view -t consultation -i S1234567P`
-  * Shows all the consultations for patient with id S1234567P
-* `/view -t consultation -i S1234567P -dt -09-2021`
-  * Shows all consultations for patients with id S1234567P that occurred in Sept 2021
-* `/view -t consultation -dt 15-09-2021 -tm 18-00`
-  * Shows consultation that occurred on Sept 15 2021 1800hrs
+* `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 n/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection.`
 
-<img src = "images/user-guide/feature2_8_1.png" width = "350" alt="Unable to load image! Try again later.">
-<img src = "images/user-guide/feature2_8_2.png" width = "350" alt="Unable to load image! Try again later.">
+### Viewing Past Consultations: `view t/consultation`
 
-### Delete Consultation Information: `/delete -t consultation`
-Deletes a consultation of a patient from the MedBook.
+Views all past consultations of a patient in the MedBook. 
 
-Format: `/delete -t consultation -i NRIC [-dt DATE] [-tm TIME]`
+Format: `view t/consultation i/NRIC`
 
 Examples:
-* `/delete -t consultation -i S1234567P  -dt 15-09-2021 -tm 18-00`
+* `view t/consultation i/S1234567L`
+
+### Adding Prescription: `add t/prescription`
+
+Adds a medical prescription of a patient in the MedBook.
+
+Format: `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`
+
+Examples:
+* `add t/prescription i/S1234567L n/Amoxicillin dt/2021-09-15 s/2 tablets after meal everyday.`
+
+### Viewing Prescription: `view t/prescription`
+
+Views a medical prescription of a patient in the MedBook.
+
+Format: `view t/prescription i/NRIC`
+
+Examples:
+* `view t/prescription i/S1234567L`
+
+### Adding Test Result: `add t/test`
+
+Adds a test result taken by a patient in the MedBook.
+
+Format: `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT`
+
+Examples:
+* `add t/test i/S1234567L dt/2019-09-15 mt/CT Scan r/Brain Cancer`
+
+### Viewing Test Result: `view t/test`
+
+Views all the test results taken by a patient in the MedBook.
+
+Format: `view t/test i/NRIC`
+
+Examples:
+* `view t/test i/S1234567L`
+
+### Deleting any Fields: `delete`
+
+Deletes the display field from the MedBook
+
+Format: delete INDEX
+
+* We can only delete the field only if the panel is displaying the field
+* The index refers to the index number shown in the displayed panel list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `view t/prescription i/S1234567L` followed by `delete 2` deletes the 2nd prescription of the patient in the MedBook.
+* `view` followed by `delete 1` deletes the first patient 
 
 ## FAQ
 Q: How do I transfer my data to another Computer?
