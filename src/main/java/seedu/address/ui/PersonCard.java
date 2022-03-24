@@ -77,7 +77,23 @@ public class PersonCard extends UiPart<Region> {
             .forEach(team -> teams.getChildren().add(new Label(team.teamName)));
         person.getSkillSet().getSkillSetInStream()
             .sorted(Comparator.comparing(skill -> skill.skillName))
-            .forEach(skill -> skillSet.getChildren().add(new Label(skill.skillName)));
+            .forEach(skill -> {
+                Label skillLabel = new Label(skill.skillName);
+                if (skill.skillProficiency > 80) {
+                    skillLabel.setStyle("-fx-background-color: #00ff00");
+                } else if (skill.skillProficiency > 50) {
+                    skillLabel.setStyle("-fx-background-color: #33cc33");
+                } else if (skill.skillProficiency > 20) {
+                    skillLabel.setStyle("-fx-background-color: #248f24");
+                } else {
+                    skillLabel.setStyle("-fx-background-color: #006622");
+                }
+                skillSet.getChildren().add(skillLabel);
+            });
+    }
+
+    public void mouseOver() {
+
     }
 
     @Override
