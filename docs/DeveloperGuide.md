@@ -16,7 +16,16 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+## **User Activity Flow**
 
+<img src="images/OverallActivityDiagram.png" width="700" />
+
+The image above is an activity diagram of when a User uses the application. After the User opens Unibook, the user can
+choose what they want to do with the app, whether it be modifying or viewing the data. The command given then executes.
+If the user has more commands to give, they can keep repeating the process. Otherwise, they can use the Exit command to
+close the application.
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
