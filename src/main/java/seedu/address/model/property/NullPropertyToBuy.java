@@ -18,12 +18,4 @@ public class NullPropertyToBuy extends PropertyToBuy {
         return nullPropertyToBuy;
     }
 
-    // TODO: Add special properties for this property type since we do not want to
-    // misuse
-
-
-    @Override
-    public boolean equals(Object other) {
-        return (other == this || other instanceof NullPropertyToBuy);
-    }
 }
