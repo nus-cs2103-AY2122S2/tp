@@ -286,6 +286,22 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Edit/Delete Feature
+
+#### Implementation
+Initially, the edit and delete features of AddressBook only worked on one person in the list - the first one.
+We wanted to add a feature that allowed our users to specify the client they wished to perfom an action on, in the case
+of multiple clients with similar names.
+
+Firstly, we added a `lastCommand` variable to store the last command that the user requested. This will be useful to us
+when we are asking the user to perform an action with multiple inputs.
+
+When `edit` is first called, the `EditCommand` first makes a copy of the `FilteredPersonList`. Then a `Predicate` is
+set to filter the list of clients with matching names as the search term given. If that is the case, we will then show 
+the list of clients with similar names, and ask the user to input the index of the client they wish to edit. With that
+additional input, we can specify which client the user wants to edit based on the index given.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
