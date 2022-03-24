@@ -3,24 +3,32 @@ layout: page
 title: User Guide
 ---
 
-**HackNet** is a desktop application used for people to manage contact details of potential team members to work on a technical project or hackathon with. It has a simple Graphical User Interface (GUI) which displays details of your potential teammates, and works mainly via a Command Line Interface (GUI) through text commands.
+Welcome to the User Guide for **HackNet**, where we will guide you through all you need to know to get started!
 
-* Quick Start
-* Features
-  * Viewing help: help
-  * Adding a person: add
-    * Name
-    * Technical Skills
-    * Contact Information
-    * Github Profile
-    * Team
-  * Filter for past teammates: filterteam
-  * Add/remove contact as potential teammate: team/unteam
-  * Listing all persons: list
-  * Deleting a person: delete
-  * Saving the data
-* FAQ
-* Command summary
+**HackNet** is a desktop application that can help you manage contact details of potential team members to work on a technical project or participate in a Hackathon with. It has a simple Graphical User Interface (GUI) which displays details of your potential teammates, and works mainly via a Command Line Interface (GUI) through text commands.
+
+## Table of Contents
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [Viewing help: help](#viewing-help-help)
+    * [Contact Management](#contact-management)
+      * [Adding a person: add](#adding-a-person-add)
+      * [Editing details for existing contact: edit](#editing-a-person-edit)
+      * [Add/remove person as potential teammate: team/unteam](#addremove-potential-teammates-teamunteam)
+      * [Deleting a person: delete](#deleting-a-person-delete)
+      * [Remove all contacts: clear](#clearing-all-entries-clear)
+    * [Team Forming](#team-forming)
+      * [List all contacts: list](#listing-all-persons-list)
+      * [Find person by name: find](#locating-persons-by-name-find)
+      * [Filter person by technical skills: filter](#filter-for-past-teammates-filterteam)
+      * [Sort person by technical skill: sort](#sorting-persons-by-skill-proficiency-sort)
+      * [Show past teammates: filterteam](#filter-for-past-teammates-filterteam)
+      * [Show potential teammates: show](#show-all-potential-teammates-show)
+    * [Exiting HackNet](#exiting-the-program-exit)
+* [Data](#data)
+* [Future Updates](#future-updates)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +36,7 @@ title: User Guide
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `HackNet.jar` from [here](https://github.com/se-edu/addressbook-level3/releases) (coming soon).
+1. Download the latest `HackNet.jar` from [here](https://github.com/AY2122S2-CS2103T-W13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for HackNet.
 
@@ -81,7 +89,7 @@ title: User Guide
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -89,6 +97,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+## Contact Management
+
+This section contains commands that can help you manage the details of your contacts within **HackNet**.
 
 ### Adding a person: `add`
 
@@ -104,19 +115,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur s/java_80`
 
-### Filter for past teammates : `filterteam`
-
-Shows a list of past teammates in HackNet.
-
-Format: `list`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in HackNet.
-
-Format: `list`
-
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in HackNet.
 
@@ -127,11 +126,56 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…
 * Existing values will be updated to the input values.
 * When editing teams, the existing teams of the person will be removed i.e adding of teams is not cumulative.
 * You can remove all the person’s teams by typing `t/` without
-    specifying any teams after it. Same concept applies with the skill field with prefix `s/`
+  specifying any teams after it. Same concept applies with the skill field with prefix `s/`
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
+
+### Add/remove potential teammates: `team/unteam`
+
+Format:
+* `team INDEX`
+* `unteam INDEX`
+    * Adds/removes the person at `INDEX`as potential teammate
+    * The index refers to the index number shown in the displayed person list
+    * The index **must be a positive integer** 1, 2, 3, …​
+    * Redundant adding/removal (e.g. adding someone who is already a potential teammate) is not allowed
+
+Examples:
+* `team 1` adds the first person as a potential teammate
+
+![result for 'team 1'](images/teamCommandResult.png)
+
+### Deleting a person: `delete`
+
+Deletes the specified person from HackNet.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Clearing all entries: `clear`
+
+Clears all existing contacts from HackNet.
+
+Format: `clear`
+
+## Team Forming
+
+This section contains commands that will aid you to find people with the technical skills you need, to form your dream team.
+
+### Listing all persons: `list`
+
+Shows a list of all persons in HackNet.
+
+Format: `list`
 
 ### Locating persons by name: `find`
 
@@ -150,20 +194,6 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from HackNet.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Locating persons by skills: `filter`
 
@@ -191,40 +221,27 @@ Format: `sort SKILL`
 * The list will be shown in descending level of skill proficiency
 
 Examples:
-* `sort Python` shows persons with `Python` as a skill in descending order of proficiency <br>
+* `sort Python` shows persons with `Python` as a skill in descending order of proficiency
 
-### Add/remove potential teammates : `team/unteam`
+### Filter for past teammates: `filterteam`
 
-Format:
-* `team INDEX`
-* `unteam INDEX`
-  * Adds/removes the person at `INDEX`as potential teammate
-  * The index refers to the index number shown in the displayed person list
-  * The index **must be a positive integer** 1, 2, 3, …​
-  * Redundant adding/removal (e.g. adding someone who is already a potential teammate) is not allowed
+Shows a list of past teammates in HackNet.
 
-Examples:
-* `team 1` adds the first person as a potential teammate
+Format: `list`
 
-![result for 'team 1'](images/teamCommandResult.png)
-
-### Show all potential teammates : `show`
+### Show all potential teammates: `show`
 
 Shows the list of all persons marked as potential teammates
 
 Format: `show`
 
-### Clearing all entries : `clear`
-
-Clears all entries from HackNet.
-
-Format: `clear`
-
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
+
+## Data
 
 ### Saving the data
 
@@ -242,7 +259,7 @@ If your changes to the data file makes its format invalid, HackNet will discard 
 
 _Details coming soon ..._
 
-### Future updates
+## Future updates
 
 Input validation for skills<br>
 update skills<br>
@@ -261,15 +278,16 @@ filter by multiple skills<br>
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/jameshooo t/friend t/colleague s/java_70`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Make Team** | `team`, `unteam` <br> e.g., `team1`
+**Make Team** | `team`, `unteam` <br> e.g., `team 1`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
+**List** | `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter SKILL`<br> e.g. `filter c`
-**Filter Past Teammates** | `filterteam` 
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
-**List** | `list`
+**Filter Past Teammates** | `filterteam` 
 **Show potential teammates** | `show`
-**Help** | `help`
+**Exit HackNet** | `exit`
