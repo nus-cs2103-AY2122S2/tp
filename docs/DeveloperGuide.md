@@ -75,6 +75,10 @@ The `UserType` represents an attribute that needs to be added to a `Person` & re
 
 Similar to other attributes of a `Person`, the `UserType` of a `Person` can be edited via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa. This can be done with the command: `edit INDEX t/seller`
 
+## Feature `find` enhanced
+In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
+They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute. 
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
