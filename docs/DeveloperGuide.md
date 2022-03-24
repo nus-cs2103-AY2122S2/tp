@@ -154,9 +154,15 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add feature
+### Candidate model
 
-The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities.
+#### Previous Implementation
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+#### Current Implementation
+
+To suit the direction of where TAlent Assistant™ is headed to, the previous `Person` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
 
 List of new entities:
 1. `StudentId`
@@ -165,6 +171,12 @@ List of new entities:
 4. `ApplicationStatus`
 5. `InterviewStatus`
 6. `Availability`
+
+<img src="images/CandidateModelClassDiagram.png" />
+
+### Add feature
+
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities (Refer to [TODO: UPDATE LINK]).
 
 Given below is an example usage scenario and how the `add` mechanism behaves at each step.
 
