@@ -8,7 +8,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
+* https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components {Documentation idea of splitting the Model component into 2, to prevent cramping of image}
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -114,28 +114,28 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagramUpdated.png" width="450" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the task list data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `TaskList`, which `Task` references. This allows `TaskList` to only require one `Tag` object per unique tag, instead of each `Task` needing their own `Tag` objects.<br>
+<img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -143,6 +143,7 @@ The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* `JsonAddressBookStorage` has a `JsonSerializableAddressBook`, which have `JsonAdaptedPerson` and `JsonAdaptedTask` to store and load both Persons and Tasks.
 
 ### Common classes
 
@@ -171,7 +172,7 @@ A `Task` contains the following attributes,
 4. can be assigned/Tagged to multiple different `Person`
 5. a type, to differentiate between the different types of task
 6. can be marked/unmarked based on whether the task is done or not.
-7. [Proposed] can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
+7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
 
 #### Design considerations:
 
@@ -183,16 +184,54 @@ A `Task` contains the following attributes,
     * Pros: Less overhead as fewer objects are created
     * Cons: Prone to error as a Component might not be correctly changed
 
+#### Aspect: How the components within Task are added or changed
+- **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
+  * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
+  * Cons: Less flexible, more steps needed in editing Task objects
+- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
+  * Pros: Less overhead as fewer objects are created
+  * Cons: Prone to error as a Component might not be correctly changed
 
-_{more aspects and alternatives to be added}_
+### Task Adding feature
 
-### \[Proposed\] Data archiving
+#### What is Task Adding feature about?
 
-_{Explain here how the data archiving feature will be implemented}_
+The Add Task mechanism is facilitated by `AddressBook`. This feature enhances `AddressBook` by allowing to store not only `Person`, but also `Task`. This is stored internally as a `UniquePersonList` and `UniqueTaskList`. Additionally, the feature implements the following operations:
 
-### \[Proposed\] Editing details of a task
+* `AddressBook#addTodo(Todo)` —  Adds the `Todo` Task to `UniqueTaskList`
+* `AddressBook#addDeadline(Deadline)` — Adds the `Deadline` Task to `UniqueTaskList`
+* `AddressBook#addEvent(Event)` — Adds the `Event` Task to `UniqueTaskList`
 
-The proposed edit mechanism is facilitated by `EditTaskCommandParser` and `EditTaskCommand`. <br/>
+For the command, the feature extends `command`, and is implemented as such:
+* `addTodo desc/TASK_DESCRIPTION` 
+* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
+
+#### Implementation Flow of Task Adding feature
+
+Given below is an example usage scenario and how the Task Adding mechanism behaves at each step.
+
+Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
+
+Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
+
+Step 2. The user executes `addTodo desc/Watch Netflix with Mum` command to create a new `Todo` Task.
+![AddTodo1](images/AddTodo.png)
+
+#### Design considerations:
+- The Task adding commands are straight-to-the-point and efficient for users to add Tasks to ManageEZPZ.
+- The prefixes allow users to understand what the different types of Task need in order to be created.
+
+#### UML Diagram for Adding Todo Task
+
+The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
+
+<img src="images/AddTaskActivityDiagram.png" width="250" />
+
+
+### Editing details of a task
+
+The edit mechanism is facilitated by `EditTaskCommandParser` and `EditTaskCommand`. <br/>
 `EditTaskCommandParser.parse()` - parses the input by the user and returns a `EditTaskCommand` object. <br/>
 `EditTaskCommand.execute()` - creates a new `Task` object based on the parsed user input and calls `Model.setTask()`
 to replace the old `Task` object with the new `Task` object.
@@ -202,7 +241,6 @@ The command is as follows: taskEdit [TASK_INDEX] desc/ [DESC] at/ [TIME] date/ [
 - [TASK_INDEX] must not be empty.
 - At least one of [DESC], [TIME] and [DATE] should not be empty.
 - desc/ [DESC], at/ [TIME] or date/ [DATE] may be omitted but all of them cannot be omitted at the same time.
-
 
 Below is a sequence diagram of the editing of a task.
 
@@ -256,6 +294,43 @@ return a CommandResult showing that the update has been successful.
 separated with an **empty space** must be provided. Other than the time values being valid,
 the range between the start and end time must be valid as well. For example, 1700 2000 is valid while 2000 1700 is not.
 
+### Tagging Task to Employee feature
+
+#### What is Tagging Task to Employee feature about?
+
+The Tag Task mechanism is facilitated by `AddressBook`. 
+This feature enhances `AddressBook` by allowing users to assign multiple `Person` to a `Task`. Additionally, the feature implements the following operations:
+
+* `AddressBook#tagTask(Task,Person)` —  Assign `Person` to `Task`
+* `AddressBook#untagTask(Task,Person)` —  Deallocate the `Person` from `Task`
+
+For the command, the feature extends `command`, and is implemented as such:
+* `tagTask INDEX name/PERSON_NAME`
+* `untagTask INDEX name/PERSON_NAME`
+
+#### Implementation Flow of Tagging Task to Employee feature
+
+Given below is an example usage scenario and how the Tagging Task to Employee mechanism behaves at each step.
+
+Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
+
+Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
+
+Step 2. The user executes `tagTask 4 n/Alex Yeoh` command to assign `Alex Yeoh` to the 4th `Task`.
+![AddTodo1](images/TagTask.png)
+
+#### Design considerations:
+- The Tagging commands are efficient for users to assign a `Person` to be in-charge of a `Task`.
+- The Prefix allow users to simply input the name of the `Person` from ManageEZPZ.
+- Users will be able to see the `Task` assigned to `Person` immediately after tagging.
+
+#### UML Diagram for tagTask Command
+
+The following activity diagram summarizes what happens when a user executes a new `tagTask` command:
+
+<img src="images/TagTaskActivityDiagram.png" width="250" />
+
+_{more aspects and alternatives to be added}_
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
