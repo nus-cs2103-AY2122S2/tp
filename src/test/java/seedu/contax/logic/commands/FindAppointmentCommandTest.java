@@ -103,7 +103,8 @@ public class FindAppointmentCommandTest {
                 GuiListContentType.APPOINTMENT);
         model.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).build());
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).build());
-        PersonNameContainsKeywordsPredicate predicate = new PersonNameContainsKeywordsPredicate(Arrays.asList("bob", "charlie"));
+        PersonNameContainsKeywordsPredicate predicate =
+                new PersonNameContainsKeywordsPredicate(Arrays.asList("bob", "charlie"));
         FindAppointmentCommand command = new FindAppointmentCommand(predicate);
         expectedModel.updateFilteredAppointmentList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
@@ -111,17 +112,18 @@ public class FindAppointmentCommandTest {
     }
 
     @Test
-    public void execute_matchingPersonNameKeywords_AppointmentFound() {
+    public void execute_matchingPersonNameKeywords_appointmentFound() {
         Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
         Appointment a1 = new AppointmentBuilder(APPOINTMENT_ALICE).build();
         model.addAppointment(a1);
-        PersonNameContainsKeywordsPredicate predicate = new PersonNameContainsKeywordsPredicate(Arrays.asList("Alice"));;
+        PersonNameContainsKeywordsPredicate predicate =
+                new PersonNameContainsKeywordsPredicate(Arrays.asList("Alice"));;
         model.updateFilteredAppointmentList(predicate);
         assertEquals(Arrays.asList(a1), model.getFilteredAppointmentList());
     }
 
     @Test
-    public void execute_matchingNameKeywords_AppointmentFound() {
+    public void execute_matchingNameKeywords_appointmentFound() {
         Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
         Appointment a1 = new AppointmentBuilder(APPOINTMENT_ALICE).build();
         model.addAppointment(a1);
