@@ -2,7 +2,6 @@ package seedu.address.model.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalPersons.PREF;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,43 +45,45 @@ public class PreferenceContainsKeywordsPredicateTest {
     public void test_preferenceContainsKeywords_returnsTrue() {
         // One keyword
         PreferenceContainsKeywordsPredicate predicate =
-                new PreferenceContainsKeywordsPredicate(Collections.singletonList("east"));
-        assertTrue(predicate.test(PREF));
+                new PreferenceContainsKeywordsPredicate(Collections.singletonList("West"));
+        assertTrue(predicate.test(new PersonBuilder().build()));
 
-        predicate = new PreferenceContainsKeywordsPredicate(Collections.singletonList("2-room"));
-        assertTrue(predicate.test(PREF));
+        predicate = new PreferenceContainsKeywordsPredicate(Collections.singletonList("4-room"));
+        assertTrue(predicate.test(new PersonBuilder().build()));
 
-        predicate = new PreferenceContainsKeywordsPredicate(Collections.singletonList("$50000"));
-        assertTrue(predicate.test(PREF));
+        predicate = new PreferenceContainsKeywordsPredicate(Collections.singletonList("$100000"));
+        assertTrue(predicate.test(new PersonBuilder().build()));
 
-        predicate = new PreferenceContainsKeywordsPredicate(Collections.singletonList("$500000"));
-        assertTrue(predicate.test(PREF));
+        predicate = new PreferenceContainsKeywordsPredicate(Collections.singletonList("$200000"));
+        assertTrue(predicate.test(new PersonBuilder().build()));
 
         // Multiple keywords
-        predicate = new PreferenceContainsKeywordsPredicate(Arrays.asList("east", "2-room"));
-        assertTrue(predicate.test(PREF));
+        predicate = new PreferenceContainsKeywordsPredicate(Arrays.asList("West", "4-room"));
+        assertTrue(predicate.test(new PersonBuilder().build()));
 
         // Only one matching keyword
-        predicate = new PreferenceContainsKeywordsPredicate(Arrays.asList("west", "2-room"));
-        assertTrue(predicate.test(PREF));
+        predicate = new PreferenceContainsKeywordsPredicate(Arrays.asList("East", "4-room"));
+        assertTrue(predicate.test(new PersonBuilder().build()));
 
         // Mixed-case keywords
-        predicate = new PreferenceContainsKeywordsPredicate(Arrays.asList("eASt", "2-rOOm"));
-        assertTrue(predicate.test(PREF));
+        predicate = new PreferenceContainsKeywordsPredicate(Arrays.asList("wESt", "4-rOoM"));
+        assertTrue(predicate.test(new PersonBuilder().build()));
     }
 
     @Test
     public void test_preferenceDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        PreferenceContainsKeywordsPredicate predicate =
+                new PreferenceContainsKeywordsPredicate(Collections.emptyList());
+        assertFalse(predicate.test(new PersonBuilder().build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        predicate = new PreferenceContainsKeywordsPredicate(Arrays.asList("east", "1-room", "$50", "Alice"));
+        assertFalse(predicate.test(new PersonBuilder().build()));
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        // Keywords match name, phone, email and address, but does not match preference
+        predicate = new PreferenceContainsKeywordsPredicate(
+                Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
