@@ -8,6 +8,7 @@
     "flag": "false",
     "tagged" : [ "friends" ],
     "prevDateMet" : "2022-01-12",
+    "salary" : "5300",
     "info" : "Salary of $5300"
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "flag": "true",
     "tagged" : [ "owesMoney", "friends" ],
     "prevDateMet" : "2022-01-05",
+    "salary" : "4000",
     "info" : "Salary of $4000"
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2021-08-05",
+    "salary" : "2500",
     "info" : "Salary of $2500"
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "flag": "false",
     "tagged" : [ "friends" ],
     "prevDateMet" : "2021-12-12",
+    "salary" : "3500",
     "info" : "Salary of $3500"
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2021-11-02",
+    "salary" : "6200",
     "info" : "Salary of $6200"
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2022-03-12",
+    "salary" : "3100",
     "info" : "Salary of $3100"
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2021-04-25",
+    "salary" : "4800",
     "info" : "Salary of $4800"
   } ]
 }

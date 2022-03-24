@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREV_DATE_MET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -33,6 +34,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+
+import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,6 +54,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_FLAG + "FLAG] "
+            + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_PREV_DATE_MET + "DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -153,11 +157,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Flag updatedFlag = editPersonDescriptor.getFlag().orElse(personToEdit.getFlag());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
         PrevDateMet updatedPrevDateMet = editPersonDescriptor.getPrevDateMet().orElse(personToEdit.getPrevDateMet());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFlag,
-                updatedTags, updatedPrevDateMet, updatedInfo);
+                updatedTags, updatedPrevDateMet, updatedSalary, updatedInfo);
     }
 
     @Override
@@ -189,6 +194,7 @@ public class EditCommand extends Command {
         private Address address;
         private Flag flag;
         private Set<Tag> tags;
+        private Salary salary;
         private Info info;
         private PrevDateMet prevDateMet;
 
@@ -207,6 +213,7 @@ public class EditCommand extends Command {
             setInfo(toCopy.info);
             setPrevDateMet(toCopy.prevDateMet);
             setTags(toCopy.tags);
+            setSalary(toCopy.salary);
             setInfo(toCopy.info);
             setPrevDateMet(toCopy.prevDateMet);
         }
@@ -216,7 +223,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, email, address, tags, info, prevDateMet);
+                    name, phone, email, address, tags, salary, info, prevDateMet);
         }
 
         public void setName(Name name) {
@@ -257,6 +264,14 @@ public class EditCommand extends Command {
 
         public Optional<Flag> getFlag() {
             return Optional.ofNullable(flag);
+        }
+
+        public void setSalary(Salary salary) {
+            this.salary = salary;
+        }
+
+        public Optional<Salary> getSalary() {
+            return Optional.ofNullable(salary);
         }
 
         public void setInfo(Info info) {
