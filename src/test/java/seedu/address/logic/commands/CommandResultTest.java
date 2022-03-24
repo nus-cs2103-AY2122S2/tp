@@ -19,7 +19,7 @@ public class CommandResultTest {
     private static Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_eventsCommand_commandResultIsEvent() throws CommandException {
+    public void execute_forEvent_commandResultIsEvent() throws CommandException {
         Command eventCommand = new ShowEventsCommand();
         CommandResult commandResult = eventCommand.execute(model);
 
@@ -30,7 +30,7 @@ public class CommandResultTest {
     }
 
     @Test
-    public void execute_showFriendCommand_commandResultIsShowFriend() throws CommandException {
+    public void execute_forShowFriend_commandResultIsShowFriend() throws CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Command showFriendCommand = new ShowFriendCommand(person);
         CommandResult commandResult = showFriendCommand.execute(model);
