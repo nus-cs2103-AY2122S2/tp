@@ -35,7 +35,7 @@ deactivate ParserUtil
 MarkCommandParser -> ParserUtil : parseClassGroup("c/1")
 activate ParserUtil
 
-MarkCommandParser -> ParserUtil : parseWeekId("w/1")
+MarkCommandParser -> ParserUtil : parseWeekId("w/3")
 activate ParserUtil
 
 MarkCommandParser -> ParserUtil : parseStudentIds("s/1,2,3,4,5,6")

@@ -326,6 +326,8 @@ The following activity diagram summarizes what happens when a user executes a gr
 
 ### \[Proposed\] Mark/Unmark feature
 
+#### Proposed Implementation
+
 The proposed mark/unmark mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is currently exclusive to `StudentAttendance`. Additionally, it implements the following operations:
 
 * `MarkCommandParser#parse()` — Parses the command arguments.
@@ -340,7 +342,7 @@ Step 1. The user launches the application. The `TAssist` is already populated wi
 
 Step 2. The user executes `list class` command to list the class groups in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
 
-Step 3. The user executes `list students c/1` command to list all the students in the class group with index 1.
+Step 3. The user executes `list student c/1` command to list all the students in the class group with index 1.
 
 Step 4. The user executes `mark attend c/1 w/3 s/1,2,3,4,5,6` to mark attendance for a lesson which belongs to a class group with index 1 and occurs in week 3. Students with indexes 1,2,3,4,5, and 6 are marked as having attended. The `mark` command also calls `MarkCommandParser#parse()`, which parses the input and returns a successful/unsuccessful message.
 
