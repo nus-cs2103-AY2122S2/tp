@@ -184,6 +184,7 @@ Step 4:
 The `LogicManager` component then calls `AddBuyerCommand#execute(model)`method of the new `AddBuyerCommand`instance containing the Buyer, with the `Model`component created from [Model component](###-model-component).
 
 In this method, if the Buyer does not currently already reside in the application, he/she is added into the Model through the `Model#addBuyer(Buyer)` command and stored in the Model (Refer to [Model component](###-model-component) to see how Buyers are stored into the model)
+. A new `CommandResult` representing the successful `addbuyer` command is initialized and returned.
 
 Step 5:
 
@@ -191,8 +192,11 @@ Step 5:
 
 Step 6:
 
-Finally, a `CommandResult` representing the successful `addbuyer` command is returned to be displayed by `UI` component (Refer to [Architecture](###-architecture))
+Finally, the `CommandResult`is returned to be displayed by `UI` component (Refer to [Architecture](###-architecture))
 
+The following Sequence Diagrams summarizes the various steps involved:
+
+![AddBuyerSequenceDiagram](iamges/AddBuyerSequenceDiagram.png)
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
