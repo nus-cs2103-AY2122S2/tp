@@ -25,6 +25,7 @@ public class FindCommand extends Command {
     private final ProductFulfillsFiltersPredicate predicate;
 
     public FindCommand(ProductFulfillsFiltersPredicate predicate) {
+        assert predicate != null;
         this.predicate = predicate;
     }
 
