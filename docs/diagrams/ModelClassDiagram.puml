@@ -14,7 +14,6 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
@@ -39,7 +38,6 @@ AddressBook *--> "1" UniquePersonList
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
 
 ModelManager -->"~* filtered" Person
 ModelManager --> TaskModel

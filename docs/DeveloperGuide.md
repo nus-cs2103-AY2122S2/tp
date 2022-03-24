@@ -172,7 +172,7 @@ A `Task` contains the following attributes,
 4. can be assigned/Tagged to multiple different `Person`
 5. a type, to differentiate between the different types of task
 6. can be marked/unmarked based on whether the task is done or not.
-7. [Proposed] can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
+7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
 
 #### Design considerations:
 
