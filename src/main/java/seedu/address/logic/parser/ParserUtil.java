@@ -258,7 +258,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String assessmentName} into a {@code Name}.
+     * Parses a {@code String assessmentName} into a {@code AssessmentName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code assessmentName} is invalid.
@@ -273,10 +273,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String assessmentName} into a {@code Name}.
+     * Parses a {@code String simpleName} into a {@code SimpleName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code assessmentName} is invalid.
+     * @throws ParseException if the given {@code simpleName} is invalid.
      */
     public static Optional<SimpleName> parseSimpleName(Optional<String> simpleName) throws ParseException {
         if (simpleName.isEmpty()) {
