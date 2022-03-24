@@ -140,7 +140,6 @@ public class Group {
 
     /**
      * Retrieves the UniqueTaskList from this specific group.
-     *
      */
     public UniqueTaskList getTaskList() {
         return tasks;
