@@ -42,6 +42,9 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
             case "person":
                 return new FindAppointmentCommand(new
                         PersonNameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
+            case "name":
+                return new FindAppointmentCommand(new
+                        NameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
             default:
                 throw new ParseException("Search type should only be person");
             }
