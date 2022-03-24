@@ -13,7 +13,6 @@ import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.ui.UiPart;
-import unibook.ui.cards.PersonCard;
 import unibook.ui.cards.ProfessorCard;
 import unibook.ui.cards.StudentCard;
 
