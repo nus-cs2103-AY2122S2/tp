@@ -23,7 +23,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "For a full comprehensive guide, please refer to " + USERGUIDE_URL
             + "\n"
 
-            + "\n1. FIND a particular contact in Tracey."
+            + "\n1. FIND a particular contact in Tracey. The input keywords does not require the full name of a contact"
             + NEWLINE_AND_INDENTATION
             + "Format: find NAME"
             + NEWLINE_AND_INDENTATION
