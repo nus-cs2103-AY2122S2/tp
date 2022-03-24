@@ -24,20 +24,20 @@ import seedu.contax.model.chrono.TimeRange;
 public class FreeBetweenCommand extends Command {
 
     public static final String COMMAND_WORD = "freebetween";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": all empty slots in the schedule of a minimum length within a period. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`"
+            + ": **Lists all empty slots in the schedule of a minimum length within a period.** "
+            + "Parameters: *"
             + PREFIX_DATE_START + "STARTDATE "
             + PREFIX_TIME_START + "STARTTIME "
             + PREFIX_DATE_END + "ENDDATE "
             + PREFIX_TIME_END + "ENDTIME "
-            + PREFIX_DURATION + "DURATION"
-            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DURATION + "DURATION* \n"
+            + "Example: `" + COMMAND_WORD + " "
             + PREFIX_DATE_START + "22-10-2022 "
             + PREFIX_TIME_START + "12:30 "
             + PREFIX_DATE_END + "22-10-2022 "
             + PREFIX_TIME_END + "16:30"
-            + PREFIX_DURATION + "45";
+            + PREFIX_DURATION + "45`";
 
     public static final String MESSAGE_SUCCESS = "Listed all slots of at least %d minutes from %s to %s.";
     public static final String MESSAGE_START_DATE_INVALID = "The start date provided is invalid!";
