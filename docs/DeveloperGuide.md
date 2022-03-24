@@ -173,7 +173,7 @@ which field the user is trying to search across:
 1. `studentId`
 2. `course`
 3. `seniority`
-4. `mame`
+4. `name`
 5. `email`
 6. `phone`
 7. `applicationStatus` (WIP)
