@@ -28,6 +28,7 @@ public class Person {
     private final PrevDateMet prevDateMet;
     private final Info info;
     private final Salary salary;
+    private final ScheduledMeeting scheduledMeeting;
 
     /**
      * Constructor for Person object where every field is present and not null.
@@ -44,6 +45,7 @@ public class Person {
         this.prevDateMet = prevDateMet;
         this.salary = salary;
         this.info = info;
+        this.scheduledMeeting = new ScheduledMeeting();
     }
 
     /**
@@ -64,6 +66,7 @@ public class Person {
         this.prevDateMet = new PrevDateMet(LocalDate.now().toString());
         this.salary = new Salary();
         this.info = new Info("No further info");
+        this.scheduledMeeting = new ScheduledMeeting();
     }
 
     public Name getName() {
@@ -102,6 +105,10 @@ public class Person {
         return this.salary;
     }
 
+    public ScheduledMeeting getScheduledMeeting() {
+        return scheduledMeeting;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -137,6 +144,7 @@ public class Person {
             return false;
         }
 
+        // Todo Add scheduled meeting check
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
@@ -146,12 +154,13 @@ public class Person {
                 && otherPerson.getPrevDateMet().equals(getPrevDateMet())
                 && otherPerson.getInfo().equals(getInfo())
                 && otherPerson.getSalary().equals(getSalary());
+        // && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, prevDateMet, info, salary);
+        return Objects.hash(name, phone, email, address, tags, prevDateMet, info, salary, scheduledMeeting);
     }
 
     @Override
@@ -164,7 +173,8 @@ public class Person {
                 .append("; Flag: ").append(getFlag())
                 .append("; Previous Date Met: ").append(getPrevDateMet())
                 .append("; Salary: ").append(getSalary())
-                .append("; Info: ").append(getInfo());
+                .append("; Info: ").append(getInfo())
+                .append(": Next Meeting: ").append(getScheduledMeeting());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
