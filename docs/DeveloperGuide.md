@@ -6,6 +6,142 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Design**
+
+### Architecture
+
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/momentum/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/momentum/MainApp.java). It is responsible for,
+
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+The rest of the App consists of four components.
+
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+Each of the four components,
+
+* defines its _API_ in an `interface` with the same name as the Component.
+* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
+
+![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+
+**How the architecture components interact with each other**
+
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1` when in project view.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+
+The sections below give more details of each component.
+
+### UI Component
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+**API** :
+[`Ui.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/ui/Ui.java)
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CompanyListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `CommandBox` and `ResultDisplay` appear at the top of the application for the user
+to interact with the application.
+
+The `CompanyListPanel` appears at the center of the application displaying key information of `Company`
+from `CompanyCard`.
+
+The `RoleListPanel` appears at the bottom of `CompanyCard` displaying key information of `Role` from `RoleCard`.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
+
+The `UI` component,
+* executes user commands using the `Logic` component.
+* listens for changes to `Model` data so that the `UI` can be updated with the modified data.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `Company` and `Role` objects residing in the `Model`.
+
+### Logic Component
+
+![Structure of the Logic Component](images/LogicClassDiagram.png)
+
+**API** : 
+[`Logic.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/logic/Logic.java)
+
+
+### Model Component
+
+![Structure of the Model Component](images/ModelClassDiagram.png)
+
+Breakdown of the Company and RoleManager packages:
+
+![Structure of the Company and RoleManager Classes](images/CompanyRoleManagerClassDiagram.png)
+
+**API** : 
+[`Model.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/model/Model.java)
+
+The `Model` component,
+
+* stores the company list data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object). 
+* stores the currently selected `Company` and `Role` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects. 
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+### Storage Component
+
+![Structure of the Storage Component](images/StorageClassDiagram.png)
+
+**API** : 
+[`Storage.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/storage/Storage.java)
+
+The `Storage` component,
+
+* can save `UserPref` objects in json format and read it back.
+* can save `JsonAdaptedCompany` objects in `JsonSerializableCompanyList` in json format and read it back.
+* can save `JsonAdaptedRole` objects in `JsonAdaptedCompany` in json format and read it back
+* inherits from both `CompanyListStorage` and `UserPrefStorage`,meaning that it can be 
+  treated as either one (if the functionality of only one is required)
+* depends on classes like `Company` and `Role` in the `Model` component (as it is the `Storage` component's
+  job to save/retrieve objects that belong to the `Model`)
+
+The `JsonAdaptedCompany` also contains a list of roles in `List<JsonAdaptedRole>` format, as show in the class diagram above.
+
+### Common Classes
+
+---
+## **Implementation**
+
+### Edit role feature
+The `editRole` command for the `Role` item allows the user to update any fields by specifying
+the company index, role index and prefixes of the fields to be updated.
+
+#### Implementation
+The `editRole` command is primarily implemented by `EditRoleCommandParser` a class that extends `Parser`, and `EditRoleCommand` is a class that extends `Command`. The `EditRoleCommand` has an inner class `EditRoleDescriptor` that holds the changes to the `Role`.
+
+* Upon a valid user's input using the `editRole` command, the `EditRoleCommandParser#parse()`
+  creates an `EditRoleDescriptor` with the edited changes to the `Role` fields.
+* The `EditRoleCommandParser#parse()` then use the `EditRoleDescriptor` object to instantiate the `EditRoleCommand`.
+* Then invoking the `EditRoleCommand#execute()` method will update the `Role` with the new changes.
+
+
+![UML diagram of the EditRole feature](images/EditRoleDiagram.png)
+
+The following sequence diagram shows how the `editRole` command operation works with the user input `editRole 1 1 d/react js`:
+
+![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)
+
+1. The user will first enter the input `editRole 1 1 d/react js`, the `CompayListParser#parseCommand()` method will parse the information `1 1 d/react js` to `EditRoleCommandParser` using the method `parse()` based on the keyword `editRole`.
+2. The `EditRoleCommandParser#parse()` method will create an `EditRoleDescriptor` object with all the non-empty fields with the fields' prefixes that are specified by the user such as `s/`,  `b/`, `d/`, etc. In this example, `EditRoleDescriptor#setDescription()` will be used as the description `d/` is a non-empty field with `react js`.
+3. Then the `EditRoleCommandParser#parse()` method will create an `EditRoleCommand` object with the company index `1`, role index `1` and the `EditRoleDescriptor` object.
+4. The `EditRoleCommand` object will be returned to the `LogicManager` and will then invoke the `EditRoleCommand#execute()` method to implement the changes.
+5. The  `EditRoleCommand#execute()` will check the validity of both the indexes, and invoke the `Model#setRole` method.
+6. The  `Model#setRole()` with the company index will set the role to be edited with a new role containing the changes. Then the `Model#updateFilteredRoleList()` filters the list of roles such that the application only displays the edited `Role` to the User.
+7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
+
 
 ## Requirements
 
