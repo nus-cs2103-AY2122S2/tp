@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Find Command with person name;
+
+if () then ([Field value matches the name of \n a person in the existing database])
+    :Names matching the field picked;
+        :Returns Message to user indicating Success;
+        :ResultDisplay prints result to user;
+
+else ([else])
+    :CommandException;
+endif
+stop
+@enduml
