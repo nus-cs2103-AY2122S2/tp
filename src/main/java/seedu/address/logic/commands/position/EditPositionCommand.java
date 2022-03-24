@@ -13,8 +13,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.DataType;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
@@ -31,6 +34,7 @@ import seedu.address.model.position.Requirement;
  * Edits the details of an existing position in the address book.
  */
 public class EditPositionCommand extends EditCommand {
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + " -" + FLAG_POSITION
             + ": Edits the details of the position identified "
             + "by the index number used in the displayed position list. "
@@ -50,6 +54,8 @@ public class EditPositionCommand extends EditCommand {
             + "number of openings.";
     public static final String MESSAGE_DUPLICATE_POSITION = "This position already exists in HireLah.";
     public static final String MESSAGE_EDIT_POSITION_SUCCESS = "Edited Position: %1$s";
+
+    private static final Logger logger = LogsCenter.getLogger(EditPositionCommand.class);
 
     private final Index index;
     private final EditPositionDescriptor editPositionDescriptor;
@@ -86,6 +92,7 @@ public class EditPositionCommand extends EditCommand {
         Position updatedPosition = new Position(updatedPositionName, updatedDescription,
                 updatedOpenings, positionToEdit.getPositionOffers(), updatedRequirements);
         if (!updatedPosition.isValidOpeningsToOffers()) {
+            logger.log(Level.WARNING, "Editing position to have less openings than offers is not allowed");
             throw new CommandException(MESSAGE_NOT_VALID_OPENINGS);
         }
         return updatedPosition;
