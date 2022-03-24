@@ -45,7 +45,7 @@ public class ViewImageCommand extends Command{
 
         if (!userImages.isEmpty()) {
             model.updateViewPerson(userImages);
-            return new CommandResult(MESSAGE_VIEW_SUCCESS, false, false, true, false);
+            return new CommandResult(MESSAGE_VIEW_SUCCESS, false, false, true, false, false);
         } else {
             throw new CommandException(MESSAGE_VIEW_FAILURE);
         }

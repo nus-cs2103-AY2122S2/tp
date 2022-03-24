@@ -63,10 +63,10 @@ public class CommandResult {
 
     public boolean isShowImage() {
         return showImage;
+    }
 
     public boolean isShowFavourites() {
         return showFavourites;
-
     }
 
     public boolean isExit() {
