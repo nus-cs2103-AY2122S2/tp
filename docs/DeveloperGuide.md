@@ -34,6 +34,7 @@ title: Developer Guide
     * [Glossary](#glossary)
 * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
+    * [Adding a show](#adding-a-show)
     * [Deleting a show](#deleting-a-show)
     * [Editing a show](#editing-a-show)
     * [Saving data](#saving-data)
@@ -256,7 +257,10 @@ The following activity diagram summarizes what happens when a user executes a va
   - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
 
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
+
 ### Sort command feature
 
 #### What it does
@@ -293,6 +297,8 @@ The following sequence diagram summarizes what happens when a user executes a so
 - **Alternative 2:** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
     - Pros: Users have fewer prefixes to remember
     - Cons: Users need to remember valid inputs
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -624,20 +630,37 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Launching the app
+   1. Prerequisites: Have a copy of `Trackermon.jar` in your computer.
+      1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
+   2. Double-click the jar file.
+   3. Test case: Initial launch <br> 
+      Expected: Application launched with a set of sample shows.
+   4. Test case: Subsequent Launch <br> 
+      Expected: Application launched with user saved shows.
 
-    1. Download the jar file and copy into an empty folder
+2. Saving window preferences
+   1. Launch the app. <br> 
+      Expected: The window size may not be optimum.
+   2. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   3. Re-launch the app. <br> 
+      Expected: The most recent window size and location is retained.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-1. Saving window preferences
+---
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Adding a show
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+1. Prerequisites: None.
+2. Test case: Adding a valid show
+   1. Condition: Show named `Inception` must not exist in the show list.
+   2. Command: `add n/Inception s/watching` <br> 
+      Expected: Show is added into the show list. Added show details shown in the result display.
+3. Test case: Adding an invalid show
+   1. Condition: Show named `"Inception"` exists in the show list.
+   2. Command: `add n/Inception s/watching` <br> 
+      Expected: Show is not added into the show list. Error details shown in the result display.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -645,181 +668,172 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a show
 
-1. Deleting a show while all shows are being shown
+1. Prerequisites: None, but if the list is empty, all deletions will result in an error.
+   1. [Add shows](#adding-a-show) into the show list.
+2. List all shows using the `list` command.
+3. Test case: Deleting a show based on list index
+   1. Condition: Range of shows must be within size of show list.
+   2. Command: `delete 1` <br> 
+      Expected: Show at specified index is deleted from the list. Deleted show details shown in the result display.
+4. Test case: Invalid delete index
+   1. Condition: Range of shows must be outside of list size.
+   2. Command: `delete 0` `delete` `delete <out_of_bound_integer>` <br> 
+      Expected: No show is deleted. Error details shown in the result display.
 
-    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-    1. Test case: `delete 1`<br>
-       Expected: First show is deleted from the list. Details of the deleted show shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `delete 0`<br>
-       Expected: No show is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-    
 ---
 
 ### Editing a show
 
-1. Editing a show while all shows are being shown
+1. Prerequisites: None, but if the list is empty, all edits will result in an error.
+   1. [Add shows](#adding-a-show) into the show list.
+2. List all shows using the `list` command.
+   1. Test case: Edit show name
+      1. Condition: Show named `One Piece` must not exist in the show list.
+      2. Command: `edit 1 n/One Piece` <br>
+         Expected: Name of show at specified index is changed to `One Piece`. Edited show details shown in the result display.
+3. Test case: Edit show status
+   1. Condition: None, if show status is already `completed`, expected output will be the same.
+   2. Command: `edit 1 s/completed` <br>
+      Expected: Status of show at specified index is changed to `completed`. Edited show details shown in the result display.
 
-    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
+4. Test case: Invalid edit index
+   1. Condition: Range of shows must be outside of list size.
+   2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
+      Expected: No show is edited. Error details shown in the result display.
 
-    1. Test case: `edit 1 n/pepe`<br>
-       Expected: First show's name from the list is edited to pepe. Details of the edited show shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `edit 0`<br>
-       Expected: No show is edited. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit x` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-    
+5. Test case: Invalid edit name
+   1. Condition: Show named `Inception` exists in the show list.
+   2. Command: `edit n/Inception` <br>
+      Expected: No show is edited. Error details shown in the result display.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Saving data
+
 1. Saving data between sessions
-    1. Launch the app.
-    2. Modify the show list with a valid add command.
-    3. Close the app.
-    4. Relaunch the app and ensure that the modification still exist
-   
+   1. Launch the app.
+   2. Modify the show list using any commands that affects the details of a show.
+   3. Relaunch the app. <br> 
+      Expected: The most recent changes made to the shows is retained.
+    
+2. Dealing with missing files
+   1. Prerequisites: JSON file is missing.
+      1. Delete the `data/trackermon.json` file to simulate a missing file.
+   2. Relaunch the app. <br> Expected: The app starts with the default list of show list.
 
-1. Dealing with missing/corrupted data files
+3. Dealing with corrupted files
+   1. Prerequisites: JSON file is corrupted.
+      1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file.
+   2. Relaunch the app. <br> Expected: The app starts with an empty show list.
 
-    1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file. Alternatively, you can delete the file to simulate a missing file.
-    2. Relaunch the app.
-    3. Testcase: `data/trackermon.json` is corrupted. <br> Expected: The app starts with a empty show list.
-    4. Testcase: `data/trackermon.json` is deleted. <br> Expected: The app starts with the default list of show list.
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Finding a show
+
 1. Finding a show (General Find)
-    1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
+
+   2. Test case: Find single keyword
+      1. Command: `find shingeki` <br>
+         Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list. <br>
+         E.g. `shingeki` from name, status, or tag fields will be matched.
+
+   3. Test case: Find multiple keywords
+      1. Command: `find shingeki shutter` <br>
+         Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list. <br>
+         E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
    
-    2. Test case: `find shingeki`
-
-       Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list.
-
-       E.g. `shingeki` from name, status, or tag fields will be matched.
+      2. Command: `find 86 shutter` <br>
+         Expected: Looks through the name, status and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list. <br>
+         E.g. `86` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
    
-    3. Test case: `find shing`
+   4. Test case: Invalid command format
+      1. Command: `find` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
    
-       Expected: Looks through the name, status and tag fields for any partial or full word of `shing` then displays them on the show list.
+   5. Test case: Unknown command
+      1. Command: `find2` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Unknown command`
+
+
+2. Find a show (Precise Find)
+   1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
    
-       E.g. `shing` from name, status, or tag fields will be matched.
+   2. Test case: Finding with a single prefix
+      1. Command: `find n/shingeki` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` then displays them on the show list. <br>
+         E.g. `shingeki` from the name field will be matched.
+      2. Command: `find n/shingeki no kyojin` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list. <br>
+         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched. (`AND` search within a single prefix).
    
-    4. Test case: `find shingeki shutter`
-
-       Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list.
-
-       E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+   3. Test case: Finding with multiple prefixes
+      1. Command: `find n/shingeki s/completed` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and the status field for any partial or full word of `completed` then displays them on the show list. <br>
+         E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched. (`AND` search between multiple prefixes).
    
-    5. Test case: `find 86 shutter`
-
-       Expected: Looks through the name, status and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list.
-
-       E.g. `86` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+      2. Command: `find n/shingeki t/seinen` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
+         E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched. (`AND` search between multiple prefixes).
    
-    6. Test case: `find` 
-
-       Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
+      3. Command: `find n/shingeki no kyojin t/seinen` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
+         E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched. (`AND` search within a single prefix and `AND` search between multiple prefixes).
    
-    7. Test case: `find2`
-
-       Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`
-
-
-2. Find a show (Precise Find)<br>
-
-   1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   4. Test case: Invalid command format
+      1. Command: `find n/` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
+      2. Command: `find t/Action Anime` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
    
-   2. Test case: `find n/shingeki`
+   5. Test case: Multiple same prefix
+      1. Command: `find n/shingeki n/shutter` <br>
+         Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list. (Ignores the first instance of n/) <br>
+         E.g. `shutter` from the name field will be matched.
 
-      Expected: Looks through the name field for any partial or full word of `shingeki` then displays them on the show list.
-
-      E.g. `shingeki` from the name field will be matched.
-   
-   3. Test case: `find n/shingeki s/completed`
-
-      Expected: Looks through the name field for any partial or full word of `shingeki` and the status field for any partial or full word of `completed` then displays them on the show list.
-
-      E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched. (`AND` search between multiple prefixes).
-   
-   4. Test case: `find n/shingeki t/seinen`
-
-      Expected: Looks through the name field for any partial or full word of `shingeki` and the tag field for any partial or full word of `seinen` then displays them on the show list.
-
-      E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched. (`AND` search between multiple prefixes).
-   
-   5. Test case: find `n/shingeki no kyojin`
-
-      Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list.
-
-      E.g. `shingeki` and `no` and `kyojin` from the name field will be matched. (`AND` search within a single prefix).
-   
-   6. Test case: `find n/shingeki no kyojin t/seinen` 
-   
-      Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` and the tag field for any partial or full word of `seinen` then displays them on the show list.
-
-      E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched. (`AND` search within a single prefix and `AND` search between multiple prefixes).
-   
-   7. Test case: `find n/`
-
-      Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
-   
-   8. Test case: `find n/shingeki n/shutter`
-
-      Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list. (Ignores the first instance of n/)
-
-      E.g. `shutter` from the name field will be matched.
-   
-   9. Test case: `find t/Action Anime`
-
-      Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
-   
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Sorting the list of shows
 
-1. Sorting the list of shows
+1. Prerequisites: None, but if the list is empty, all sorts will lead to no results.
+2. Test case: Sort with no prefix
+   1. Command: `sort` <br>
+      Expected: The list of shows will default to being sorted by name in ascending order.
 
-    1. Prerequisites: None, but if the list is empty, all sort will also lead to no results.
+3. Test case: Sort with single prefix 
+   1. Command: `sort sna/` <br>
+      Expected: The list of shows is sorted by name in ascending order.
+   
+   2. Command: `sort snd/` <br>
+      Expected: The list of shows is sorted by name in descending order.
 
-    2. Test case: `sort`<br>
-       Expected: The list of show sorted by name in ascending order.
-
-    3. Test case: `sort sna/`<br>
-       Expected:  The list of show sorted by name in ascending order.
+   3. Command: `sort ssa/` <br>
+      Expected: The list of shows is sorted by status in ascending order.
    
-    4. Test case: `sort snd/`<br>
-       Expected:  The list of show sorted by name in descending order.
+   4. Command: `sort ssd/` <br>
+      Expected: The list of shows is sorted by status in descending order.
    
-    5. Test case: `sort ssa/`<br>
-       Expected:  The list of show sorted by status in ascending order.
+4. Test case: Sort with multiple same prefixes 
+   1. Command: `sort sna/ snd/` <br>
+      Expected: The list of shows is sorted by name in ascending order.
    
-    6. Test case: `sort ssd/`<br>
-       Expected:  The list of show sorted by status in descending order.
+   2. Command: `sort ssa/ ssd/` <br>
+      Expected: The list of shows is sorted by status in ascending order. 
    
-    7. Test case: `sort sna/ snd/`<br>
-       Expected: The list of show sorted by name in ascending order.
+5. Test case: Sort with multiple different prefixes
+   1. Command: `sort sna/ ssd/` <br>
+      Expected: The list of shows is sorted by name in ascending order followed by status in descending order.
    
-    8. Test case: `sort ssa/ ssd/`<br>
-       Expected: The list of show sorted by status in ascending order. 
-   
-    9. Test case: `sort sna/ ssd/`<br>
-       Expected: The list of show sorted by name in ascending order followed by status in descending order.
-   
-    10.Test case: `sort sna/ ssd/ so/`<br>
-       Expected: The list of show sorted by status in descending order followed by name in ascending order.
-   
-
+   2. Command: `sort sna/ ssd/ so/`<br>
+      Expected: The list of shows is sorted by status in descending order followed by name in ascending order.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
