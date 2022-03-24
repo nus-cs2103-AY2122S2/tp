@@ -186,11 +186,23 @@ The following sequence diagram shows how the undo operation works:
 
 #### 2.1 Delete player
 #### Proposed implementation
+The proposed delete player functionality will delete an existing player from `UniquePlayerList`, 
+as well as from all lineups in `UniqueLineupList` that contains the player.
+
 #### Design Consideration
+
+**Aspect: How to delete a person from `UniquePersonList` by its name?**
+* **Alternative 1 (current choice):** Iterate through `internalList` to find the person, then delete it.
+  * Pros: Easy to implement.
+  * Cons: Slower for large quantity of players, but acceptable within our requirement.
+* **Alternative 2:** Create a HashMap from `Name` to each person, then access it quickly.
+  * Pros: More efficient.
+  * Cons: Hard to implement and time-consuming.
+
 
 #### 2.2 Delete lineup
 #### Proposed implementation
-The proposed add lineup functionality will delete an existing lineup from `UniqueLineupList` and remove all players from the lineup.
+The proposed delete lineup functionality will delete an existing lineup from `UniqueLineupList` and remove all players from the lineup.
 
 #### Design Consideration
 **Aspect: How to remove lineup from `UniqueLineupList`:**
@@ -222,7 +234,19 @@ After checking that both input player and lineup are valid, the lineup's name wi
 
 #### 3.2 Edit lineup
 #### Proposed implementation
+The proposed edit lineup functionality will update the name of a lineup. 
+Meanwhile, the `lineups` attribute of each person should also be updated if the person is in the lineup.
+
 #### Design Consideration
+**Aspect: How to locate lineup in `UniqueLineupList`:**
+
+* **Alternative 1 (current choice):** Iterate through all lineups to locate it.
+    * Pros: Easy to implement.
+    * Cons: Slower for large quantity of lineups, but sufficient within our requirement.
+
+* **Alternative 2:** Use a HashMap to store the mappings between `LineupName` and `Lineup`.
+    * Pros: Time efficient.
+    * Cons: Troublesome to implement.
 
 #### 2.3 Edit schedule
 #### Proposed implementation
