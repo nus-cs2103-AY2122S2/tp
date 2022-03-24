@@ -326,6 +326,46 @@ user to replace the list of students with an empty one. Previous data are swiped
 
 </div>
 
+<br>
+
+### Find feature
+
+#### Current Implementation
+
+The activity diagram below illustrates the flow of a `find` command.
+
+![FindFeatureActivityDiagram](images/FindFeatureActivityDiagram.png)
+
+#### Usage Scenario
+
+Given below is an example usage scenario and how `find` react and act at each step.
+
+**1**) The user launches the application for the first time.
+
+**2**) The user inputs `find alex` in the CLI to sort all contacts by name. This calls `LogicManager::execute`
+to parse the given input.
+
+**3**) `LogicManager` will notice that a find command is called and will call `FindCommandParser::parse`. From the given input,
+`FindCommandParser` will create the corresponding `NameContainsKeywordsPredicate` Predicate and return a `FindCommand`.
+
+**4**) After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that lists
+out the persons with the `NameContainsKeywordsPredicate`.
+
+**5**) Through a series of method invocations, a lists of persons that matches the input is generated with their personal details.
+
+The sequence diagram below illustrates the execution of `find alex`.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+
+#### Design Considerations
+
+**Aspect: How `find` executes**
+
+{to be decided}
+
+<br>
+
 ### Edit feature
 
 The edit mechanism implements the following sequence for the method call execute("edit").
