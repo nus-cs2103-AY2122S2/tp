@@ -176,7 +176,7 @@ A `Task` contains the following attributes,
 #### Design considerations:
 
 #### Aspect: How the components within Task are added or changed
-- **Current Choice**: [Proposed] Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
+- **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
   * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
   * Cons: Less flexible, more steps needed in editing Task objects
 - Alternative 1: Allow certain components within Task, like Time and Date to be mutable
