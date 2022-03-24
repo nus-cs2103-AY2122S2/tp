@@ -38,6 +38,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+
     private static final List<JsonAdaptedLineupName> VALID_LINEUP = BENSON.getLineupNames().stream()
             .map(JsonAdaptedLineupName::new)
             .collect(Collectors.toList());
@@ -169,5 +170,4 @@ public class JsonAdaptedPersonTest {
                         VALID_HEIGHT, VALID_JERSEY_NUMBER, VALID_TAGS, invalidLineups, VALID_WEIGHT);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
-
 }

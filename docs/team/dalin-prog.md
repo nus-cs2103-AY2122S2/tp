@@ -36,7 +36,7 @@ Given below are my contributions to the project.
 
 * **Community**:
     * _To be added soon_: [\#12](), [\#32](), [\#19](), [\#42]()
-    
+
 * **Tools**:
     * _To be added soon_ ([\#42]())
 

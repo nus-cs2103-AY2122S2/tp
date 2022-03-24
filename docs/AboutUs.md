@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Brandon R. Han
 
-<img src="images/brandonrhan.png" width="200"/> 
+<img src="images/brandonrhan.png" width="200"/>
 
 [[github](http://github.com/brandonrhan)] [[portfolio](team/brandonrhan.md)]
 
@@ -27,7 +27,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Tian Xiao
 
-<img src="images/snoidetx.png" width="200"/> 
+<img src="images/snoidetx.png" width="200"/>
 
 [[github](https://github.com/snoidetx)] [[portfolio](team/snoidetx.md)]
 
