@@ -14,9 +14,8 @@ import seedu.address.logic.Logic;
  */
 public class ReminderWindow extends UiPart<Stage> {
     private static final String FXML = "ReminderWindow.fxml";
-
+    private static ReminderWindow reminderWindow;
     private final Logger logger = LogsCenter.getLogger(getClass());
-
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
@@ -28,9 +27,20 @@ public class ReminderWindow extends UiPart<Stage> {
     /**
      * Sets up Logic instance in ReminderWindow
      */
-    public ReminderWindow(Logic logic) {
+    private ReminderWindow(Logic logic) {
         super(FXML);
         this.logic = logic;
+    }
+
+    public static ReminderWindow getInstance(Logic logic) {
+        if (reminderWindow == null) {
+            reminderWindow = new ReminderWindow(logic);
+        }
+        return reminderWindow;
+    }
+
+    public static ReminderWindow getInstance() {
+        return reminderWindow;
     }
 
     /**
