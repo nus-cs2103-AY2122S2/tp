@@ -2,6 +2,7 @@ package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -19,6 +20,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_INVALID_COMPOUND_INDEX =
+            "Index is not a non-zero unsigned integer pair separated by \"-\".";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -31,6 +34,24 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndices} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified compound index is invalid (not non-zero unsigned integer pair).
+     */
+    public static CompoundIndex parseCompoundIndex(String oneBasedIndices) throws ParseException {
+        String trimmedIndices = oneBasedIndices.trim();
+        if (!StringUtil.isNonZeroUnsignedCompoundInteger(trimmedIndices)) {
+            throw new ParseException(MESSAGE_INVALID_COMPOUND_INDEX);
+        }
+
+        String[] parts = trimmedIndices.split("-");
+
+        return CompoundIndex.fromOneBased(
+                Integer.parseInt(parts[0]),
+                Integer.parseInt(parts[1]));
     }
 
     /**

@@ -37,21 +37,21 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' Ibook file path.
+     * Returns the user prefs' iBook file path.
      */
     Path getIBookFilePath();
 
     /**
-     * Sets the user prefs' Ibook file path.
+     * Sets the user prefs' iBook file path.
      */
     void setIBookFilePath(Path iBookFilePath);
 
     /**
-     * Replaces Ibook data with the data in {@code IBook}.
+     * Replaces iBook data with the data in {@code iBook}.
      */
     void setIBook(ReadOnlyIBook iBook);
 
-    /** Returns the IBook */
+    /** Returns the iBook */
     ReadOnlyIBook getIBook();
 
     /**
@@ -79,10 +79,16 @@ public interface Model {
 
     /**
      * Replaces the given product {@code target} with {@code editedProduct}.
-     * {@code target} must exist in the Ibook.
+     * {@code target} must exist in the iBook.
      * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
      */
     void setProduct(Product target, Product editedProduct);
+
+    /**
+     * Deletes the given item from the product.
+     * The product must exist in the iBook, and the item must exist in the product.
+     */
+    void deleteItem(Product targetProduct, Item target);
 
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();

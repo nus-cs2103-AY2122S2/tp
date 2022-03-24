@@ -105,6 +105,15 @@ public class IBook implements ReadOnlyIBook {
         product.addItem(item);
     }
 
+    /**
+     * Removes {@code key} from {@targetProduct}.
+     * {@code targetProduct} must exist in the iBook and {@code key} must exist in {@code targetProduct}.
+     */
+    public void removeItem(Product product, Item key) {
+        requireNonNull(key);
+        product.removeItem(key);
+    }
+
     //// util methods
 
     @Override

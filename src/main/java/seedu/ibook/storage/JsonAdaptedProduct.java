@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ibook.commons.exceptions.IllegalValueException;
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.UniqueItemList;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
@@ -105,7 +106,12 @@ class JsonAdaptedProduct {
         }
         final Price modelPrice = new Price(price);
 
-        return new Product(modelName, modelCategory, modelDescription, modelPrice, productItems);
+        final UniqueItemList modelItems = new UniqueItemList();
+        modelItems.setItems(productItems);
+
+        List<Item> modelItemList = modelItems.asUnmodifiableObservableList();
+
+        return new Product(modelName, modelCategory, modelDescription, modelPrice, modelItemList);
     }
 
 }

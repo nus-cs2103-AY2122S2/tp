@@ -77,7 +77,7 @@ public class StringUtil {
     public static boolean isNonZeroUnsignedCompoundInteger(String s) {
         requireNonNull(s);
 
-        if (s.contains("-")) {
+        if (!s.contains("-")) {
             return false;
         }
 

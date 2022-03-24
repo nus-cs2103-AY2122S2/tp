@@ -22,7 +22,9 @@ public class Item implements Comparable<Item>, Distinguishable<Item> {
      * Every field must be present and not null.
      */
     public Item(ExpiryDate expiryDate) {
-        this(expiryDate, new Quantity(1));
+        requireAllNonNull(expiryDate);
+        this.expiryDate = expiryDate;
+        this.quantity = new Quantity(1);
     }
 
     /**
@@ -127,7 +129,8 @@ public class Item implements Comparable<Item>, Distinguishable<Item> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("; ExpiryDate: ")
+
+        builder.append("ExpiryDate: ")
             .append(getExpiryDate())
             .append("; Quantity: ")
             .append(getQuantity());

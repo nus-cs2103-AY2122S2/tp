@@ -114,7 +114,6 @@ public class ModelManager implements Model {
     @Override
     public void setProduct(Product target, Product editedProduct) {
         requireAllNonNull(target, editedProduct);
-
         iBook.setProduct(target, editedProduct);
     }
 
@@ -123,8 +122,13 @@ public class ModelManager implements Model {
     @Override
     public void addItem(Product product, Item item) {
         requireAllNonNull(product, item);
-
         iBook.addItem(product, item);
+    }
+
+    @Override
+    public void deleteItem(Product targetProduct, Item target) {
+        requireAllNonNull(targetProduct, target);
+        iBook.removeItem(targetProduct, target);
     }
 
     //=========== Filtered Product List Accessors =============================================================
