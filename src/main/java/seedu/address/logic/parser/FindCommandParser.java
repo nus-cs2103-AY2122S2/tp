@@ -34,6 +34,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         String[] arguments = trimmedArgs.split("\\s+");
+        if (arguments.length < 2) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
         String commandWord = arguments[0];
         List<String> keywords = Arrays.asList(Arrays.copyOfRange(arguments, 1, arguments.length));
 
