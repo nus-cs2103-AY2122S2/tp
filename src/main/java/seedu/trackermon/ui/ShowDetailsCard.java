@@ -44,8 +44,16 @@ public class ShowDetailsCard extends UiPart<Region> {
     /**
      * Creates a {@code ShowCard} with the given {@code Show} and index to display.
      */
+    public ShowDetailsCard() {
+        this(null);
+    }
+
+    /**
+     * Creates a {@code ShowCard} with the given {@code Show} and index to display.
+     */
     public ShowDetailsCard(Show show) {
         super(FXML);
+        this.show = show;
         name.setOpaqueInsets(Insets.EMPTY);
     }
 
@@ -63,6 +71,8 @@ public class ShowDetailsCard extends UiPart<Region> {
         if (!isShowExists) {
             return;
         }
+
+        assert show != null;
 
         this.show = show;
         name.setText(show.getName().fullName);
