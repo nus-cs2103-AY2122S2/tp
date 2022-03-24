@@ -423,7 +423,7 @@
 }
 
 #interviewstatus {
-    -fx-text-fill: #white;
+    -fx-text-fill: white;
     -fx-background-color: #9f8331;
     -fx-padding: 3 3 3 3;
     -fx-border-radius: 3;
