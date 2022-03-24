@@ -8,6 +8,10 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import manageezpz.logic.parser.Prefix;
 import manageezpz.model.Model;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
+
+import java.util.function.Predicate;
 
 /**
  * Lists all persons in the address book to the user.
@@ -57,13 +61,24 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         String list;
         if (option == null) {
             list = model.listTasks();
+            model.updateFilteredTaskList(model.PREDICATE_SHOW_ALL_TASKS);
         } else {
             list = model.listTasks(option);
+
+            /*if (option.toString().equals("todo/")) {
+                model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TODOS);
+            } else if (option.toString().equals("deadline/")) {
+                model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_DEADLINES);
+            } else if (option.toString().equals("event/")) {
+                model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_EVENTS);
+            }*/
         }
         String result = String.join("\n", messageSuccess, list);
+
         return new CommandResult(result);
     }
 

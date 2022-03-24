@@ -153,16 +153,19 @@ public class ModelManager implements Model {
     @Override
     public void addTodo(Todo todo) {
         addressBook.addTodo(todo);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void addDeadline(Deadline deadline) {
         addressBook.addDeadline(deadline);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
@@ -250,7 +253,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                /*&& filteredPersons.equals(other.filteredPersons)*/
+                && filteredPersons.equals(other.filteredPersons)
                 && filteredTasks.equals(other.filteredTasks);
     }
 }
