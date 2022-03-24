@@ -389,7 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `NUSocials` and the **Actor** is the `user`, unless specified otherwise)
 
-###**Use case 1: Delete a person**
+### Use case 1: Delete a person
 
 **MSS**
 ````
@@ -413,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 ````
 
-###**Use case 2: Add a person**
+### Use case 2: Add a person
 
 **MSS**
 ````
@@ -431,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 ````
 
-###**Use case 3: Tag a person**
+### Use case 3: Tag a person
 
 **MSS**
 ````
@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 ````
-###**Use case 4: Edit a person**
+### Use case 4: Edit a person
 
 **MSS**
 ````
@@ -485,7 +485,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 ````
-###**Use case 5: Viewing all persons**
+### Use case 5: Viewing all persons
 
 **MSS**
 ````
@@ -494,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 ````
-###**Use case 6: Finding a person (any field)**
+### Use case 6: Finding a person (any field)
 
 **MSS**
 ````
@@ -502,21 +502,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. NUSocials shows a list of persons matching any fields
     Use case ends. 
 ````
-***Extensions***
+**Extensions**
 ````
 2a. The given find command is invalid.
     - 2a1. NUSocials shows an error message.
     
       Use case resumes at step 1.
 ````
-###**Use case 7: Finding a person (all fields)**
+### Use case 7: Finding a person (all fields)
 
 ````
 Similar to Use case 6, except now:
 The user wants to find a person that has every field instead.
 ````
 
-###**Use case 8: Removing specific tags**
+### Use case 8: Removing specific tags
 
 **MSS**
 ````
@@ -527,7 +527,7 @@ The user wants to find a person that has every field instead.
     
     Use case ends. 
 ````
-***Extensions***
+**Extensions**
 ````
 2a. The list is empty.
 
@@ -549,7 +549,7 @@ The user wants to find a person that has every field instead.
       Use case resumes at step 2.
 ````
 
-###**Use case 9: Delete multiple persons**
+### Use case 9: Delete multiple persons
 
 **MSS**
 ````
@@ -569,7 +569,7 @@ The user wants to delete multiple persons instead.
       Use case resumes at step 2.
 ````
 
-###**Use case 10: Adding events**
+### Use case 10: Adding events
 
 **MSS**
 ````
