@@ -5,20 +5,26 @@ title: User Guide
 
 <img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again
 later.">
-## Table of Contents
+
+## **Table of Contents**
 - [Quick start](#quick-start)
   - [Requirement](#requirement)
   - [Setup](#setup)
 - [Features](#features)
-  - [Create Contact Information: `/create -t contact`](#create-contact-information-create--t-contact)
-  - [View Contact Information: `/view -t contact`](#view-contact-information-view--t-contact)
-  - [Delete Contact Information: `/delete -t contact`](#delete-contact-information-delete--t-contact)
-  - [Create Medical Information: `/create -t medical`](#create-medical-information-create--t-medical)
-  - [View Medical Information `/view -t medical`](#view-medical-information-view--t-medical)
-  - [Delete Medical Information: `/delete -t medical`](#delete-medical-information-delete--t-medical)
-  - [Create Consultation Information: `/create -t consultation`](#create-consultation-information-create--t-consultation)
-  - [View Past Consultations: `/view -t consultation`](#view-past-consultations-view--t-consultation)
-  - [Delete Consultation Information: `/delete -t consultation`](#delete-consultation-information-delete--t-consultation)
+  - [Viewing help](#viewing-help)
+  - [Adding a patient: `add`](#adding-a-patient-add)
+  - [Listing all patients: 'view'](#listing-all-patients-view)
+  - [Deleting any Fields: `delete`](#deleting-any-fields-delete)
+  - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
+  - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
+  - [Adding Medical Information: `add t/medical`](#adding-medical-information-add-tmedical)
+  - [Viewing Medical Information `view t/medical`](#viewing-medical-information-view-tmedical)
+  - [Adding Consultation Information: `add t/consultation`](#adding-consultation-information-add-tconsultation)
+  - [Viewing Past Consultations: `view t/consultation`](#viewing-past-consultations-view-tconsultation)
+  - [Adding Prescription: `add t/prescription`](#adding-prescription-add-tprescription)
+  - [Viewing Prescription: `view t/prescription`](#viewing-prescription-view-tprescription)
+  - [Adding Test Result: `add t/test`](#adding-test-result-add-ttest)
+  - [Viewing Test Result: `view t/test`](#viewing-test-result-view-ttest)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -85,6 +91,20 @@ Examples:
 Shows a list of patients in MedBook
 
 Format: `view`
+
+### Deleting any Fields: `delete`
+
+Deletes the display field from the MedBook
+
+Format: delete INDEX
+
+* We can only delete the field only if the panel is displaying the field
+* The index refers to the index number shown in the displayed panel list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
+* `view` followed by `delete 1` deletes the first patient displayed on the screen.
 
 ### Adding Contact Information: `add t/contact`
 
@@ -189,19 +209,6 @@ Format: `view t/test i/NRIC`
 Examples:
 * `view t/test i/S1234567L`
 
-### Deleting any Fields: `delete`
-
-Deletes the display field from the MedBook
-
-Format: delete INDEX
-
-* We can only delete the field only if the panel is displaying the field
-* The index refers to the index number shown in the displayed panel list.
-* The index must be a positive integer 1, 2, 3, …​
-
-Examples:
-* `view t/prescription i/S1234567L` followed by `delete 2` deletes the 2nd prescription of the patient in the MedBook.
-* `view` followed by `delete 1` deletes the first patient 
 
 ## FAQ
 Q: How do I transfer my data to another Computer?
