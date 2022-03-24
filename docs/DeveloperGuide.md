@@ -130,11 +130,12 @@ The `Model` component,
 * An `Entity` object is a generic object that can be used to represent instances of  `Student`/`TaModule`/`ClassGroup`/`Assessment`.
 * Module are named `TaModule` due to conflict with Java classes.
 
-<div class="alert alert-info">:information_source: <B>Note:</B> Alternative (arguably, more OOP) models are given below.<br><br>
+<div class="alert alert-info">:information_source: <B>Note:</B> Alternative (arguably, more OOP) models are given below.<br>
 <br>
 <div class="datatable-container">
     <table class="c20">
         <tbody>
+            <tr></tr>
             <tr class="c11">
                 <td class="c16" colspan="1" rowspan="1">
                    <B>Entity</B>
@@ -143,6 +144,7 @@ The `Model` component,
                    <B>Class Diagram</B>
                 </td>
             </tr>
+            <tr></tr>
             <tr class="c11">
                 <td class="c16" colspan="1" rowspan="1">
                    Student
@@ -151,6 +153,7 @@ The `Model` component,
                    <img src="images/BetterModelStudentClassDiagram.png" width="450" />
                 </td>
             </tr>
+            <tr></tr>
             <tr class="c11">
                 <td class="c16" colspan="1" rowspan="1">
                    TaModule
@@ -159,6 +162,7 @@ The `Model` component,
                    <img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
                 </td>
             </tr>
+            <tr></tr>
             <tr class="c11">
                 <td class="c16" colspan="1" rowspan="1">
                    Class Group
@@ -167,6 +171,7 @@ The `Model` component,
                    <img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
                 </td>
             </tr>
+            <tr></tr>
             <tr class="c11">
                 <td class="c16" colspan="1" rowspan="1">
                    Assessment
