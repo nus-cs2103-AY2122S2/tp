@@ -14,10 +14,16 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(userInput)
+[-> LogicManager : execute(**userInput**)
+note left of LogicManager
+**userInput = ** "addlesson
+-n Sec 2 Biology Lesson
+-s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04
+-d 17-04-2022 -t 18:00 -h 1"
+end note
 activate LogicManager
 
-LogicManager -> TeachWhatParser : parseCommand(userInput)
+LogicManager -> TeachWhatParser : parseCommand(**userInput**)
 activate TeachWhatParser
 
 create AddLessonCommandParser
@@ -27,13 +33,26 @@ activate AddLessonCommandParser
 AddLessonCommandParser --> TeachWhatParser
 deactivate AddLessonCommandParser
 
-TeachWhatParser -> AddLessonCommandParser : parse(commandArguments)
+TeachWhatParser -> AddLessonCommandParser : parse(**commandArguments**)
+note right of AddLessonCommandParser
+**commandArguments** = "-n Sec 2 Biology Lesson
+-s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04
+-d 17-04-2022 -t 18:00 -h 1"
+end note
 activate AddLessonCommandParser
 
 alt is recurring lesson
-    AddLessonCommandParser -> Lesson : makeRecurringLesson(name, subject, address, date, hours, minutes)
+    AddLessonCommandParser -> Lesson : makeRecurringLesson(**name**, **subject**, **address**, **dateTimeSlot)**
+
 else else
-    AddLessonCommandParser -> Lesson : makeTemporaryLesson(name, subject, address, date, hours, minutes)
+    AddLessonCommandParser -> Lesson : makeTemporaryLesson(**name**, **subject**, **address**, **dateTimeSlot**)
+
+    note right of AddLessonCommandParser
+    **name** = "Sec 2 Biology Lesson"
+    **subject** = "Biology"
+    **address** = "Blk 11 Ang Mo Kio Street 74, #11-04"
+    **dateTimeSlot** = "17-04-2022 18:00 1 hour 0 minutes"
+    end note
 end
 
 AddLessonCommandParser <-- Lesson : lessonToBeAdded
