@@ -185,7 +185,43 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Cleaner code. Better for future scalability.
     * Cons: Contributes to more lines of code. Harder to set up initially.
 
-    
+
+### \[Proposed\] Charge feature
+
+#### Proposed Implementation
+
+The proposed charge mechanism is facilitated by `ChargeCommand` class. It extends `Command`. It takes in a pet and month the user would like to charge. These fields are parsed by `ChargeCommandParser`. Additionally, it implements the following operations:
+
+* `ChargeCommand#generateSuccessMessage()` — Generates a message containing the total amount chargeable to be shown to the user.
+* `ChargeCommand#execute()` — Fetches attendance details of a pet and computes a month's total amount chargeable.
+* `ChargeCommand#equals()` — Checks if a `ChargeCommand` equates another.
+
+Given below is an example usage scenario and how the charge mechanism behaves at each step.
+
+Step 1. The user executes command `charge 1 /m03` to compute amount chargeable to the pet at index 1 in March. The `charge` command is parsed by `ChargeCommandParser` which then sends the pet index and month to create a new `ChargeCommand` instance.
+
+
+The following sequence diagram shows how the charge operation works:
+
+![ChargeSequenceDiagram](images/charge.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ChargeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+
+#### Design considerations:
+
+**Aspect: How charge executes:**
+
+* **Alternative 1 (current choice):** Gets attendance from a pet's attendanceHashMap and compute charge.
+    * Pros: Saves memory.
+    * Cons: May have performance issues in terms of recomputing the same pet's monthly charge.
+
+* **Alternative 2:** Save charge as an attribute for each pet.
+    * Pros: Easier to get charge.
+    * Cons: Will use more memory and require more code to maintain it.
+
+_{more aspects and alternatives to be added}_
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -483,9 +519,7 @@ Use case ends.
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
-
-</div>
+testers are expected to do more *exploratory* testing.</div>
 
 ### Launch and shutdown
 
