@@ -1,6 +1,7 @@
 package unibook.storage;
 
 //import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
@@ -14,7 +15,10 @@ import unibook.commons.exceptions.DataConversionException;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.UniBook;
 //import unibook.model.person.Person;
+import unibook.model.person.Person;
 import unibook.testutil.Assert;
+import unibook.testutil.typicalclasses.TypicalStudents;
+import unibook.testutil.typicalclasses.TypicalUniBook;
 //import unibook.testutil.typicalclasses.TypicalStudents;
 //import unibook.testutil.typicalclasses.TypicalUniBook;
 
@@ -59,7 +63,6 @@ public class JsonUniBookStorageTest {
         Assert.assertThrows(DataConversionException.class, () -> readUniBook("invalidAndValidPersonUniBook.json"));
     }
 
-    /*
     @Test
     public void readAndSaveUniBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempUniBook.json");
@@ -92,7 +95,6 @@ public class JsonUniBookStorageTest {
         assertEquals(original, new UniBook(readBack));
 
     }
-    */
 
     @Test
     public void saveUniBook_nullUniBook_throwsNullPointerException() {

@@ -168,7 +168,7 @@ public class Group {
         final StringBuilder builder = new StringBuilder();
         builder.append(getGroupName())
                 .append("; Module: ")
-                .append(getModule());
+                .append(getModule().getModuleCode());
         return builder.toString();
     }
 }
