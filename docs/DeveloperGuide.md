@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-##Table of Contents
+## Table of Contents
 | Quick Links                                                                                                     |
 |-----------------------------------------------------------------------------------------------------------------|
 | [Acknowledgements](#acknowledgements)                                                                           |
@@ -252,6 +252,13 @@ _{more aspects and alternatives to be added}_
 The implemented status label is facilitated by `Status` attribute. This label is an additional attribute for each person within the application
 and is implemented as a separate file within the `Person` Package.
 
+The `Status` attribute of each `Person` will take either `"Positive"`, `"Negative"` or `"Close Contact"`.
+- `"Positive"` denotes that the `Person` is labelled as COVID positive.
+- `"Negative"` denotes that the `Person` is labelled as COVID negative.
+- `"Close Contact"` denotes that the `Person` is labelled as having close contact to another `Person` who is COVID positive.
+
+The `Status` class is facilitated by using `execute()` command in the `EditCommand` and `AddCommand` classes.
+
 #### Design considerations:
 
 **Aspect: Abstracting `Status` attribute**
@@ -281,6 +288,13 @@ Classes added for this feature:
 * `FindStatusCommand`
 * `FindStatusCommandParser`
 
+Given below is an example usage scenario and how the find by status mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
+Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
+Step 4. The filtered list of perons is displayed to the user.
+
 #### Design considerations:
 
 **Aspect: Abstracting into different classes**
@@ -288,24 +302,28 @@ Classes added for this feature:
 * **Alternative 1 (current choice):** Abstracted classes.
     * Pros:
         * Higher Level of abstraction
-        * Changes can be made easily from this class
-        * Different classes serve different lower-level purposes and are organised into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
     * Cons:
-        * Adding files to the currently already large amount of files within
-        * Changes to this method may require going through all the different files being abstracted depending on what kind of changes are being made
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
 
 * **Alternative 2:** Single command that executed upon reading from parser
     * Pros:
-        * Single file where changes can be made
+        * Single class file where changes can be made
     * Cons:
-        * Lesser level of abstraction, file may become exceptionally long to accommodate all the smaller features required
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
 
 ### \[Implemented\] Class Code feature
 
 #### Implementation
 
 The implemented Class Code label is facilitated by `ClassCode`. It extends `AddressBook` with a Class Code, tied to each person.
-* Group students by using `ClassCode` and used as an identifier for contact-tracing
+* Group students by using `ClassCode` and used as an identifier for contact-tracing.
+
+The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denoting their class groups.
 
 ### \[Implemented\] Find By Class Code feature
 
@@ -313,12 +331,48 @@ The implemented Class Code label is facilitated by `ClassCode`. It extends `Addr
 
 The implemented find by class code mechanism is facilitated by `FindByClassCode`. It extends `AddressBook` with a Find By Class Code, allowing users to find persons by their current statuses.
 
+Classes added for this feature: 
+* `ClassCodeContainsKeywordsPredicate`
+* `FindClassCodeCommand`
+* `FindClassCodeCommandParser`
+
+Given below is an example usage scenario and how the find by class code mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
+Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
+Step 4. The filtered list of perons is displayed to the user.
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
 ### \[Implemented\] Activity feature
 
 #### Implementation
 
 The implemented status label is facilitated by `Activity` attribute. This label is an additional attribute for each person within the application
 and is implemented as a separate package within the `activity` Package. A `person` will have a Set of `activity` as an attribute.
+
+The `Activity` attribute of each `Person` will take a `String` _(Java)_ denoting their different activities
+* Each `Person` can hold multiple `Activity` attributes.
 
 #### Design considerations:
 
@@ -344,6 +398,39 @@ and is implemented as a separate package within the `activity` Package. A `perso
 #### Implementation
 
 The implemented find by activity mechanism is facilitated by `FindByActivity`. It extends `AddressBook` with a Find By Activity, allowing users to find persons by their Activity.
+
+Classes added for this feature: 
+* `ActivityContainsKeywordsPredicate`
+* `FindActivityCommand`
+* `FindActivityCommandParser`
+
+Given below is an example usage scenario and how the find by activity mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
+Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
+Step 4. The filtered list of perons is displayed to the user.
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindActivityCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
 
 ### \[Updated\] Adding a person feature
 
