@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -66,6 +67,7 @@ public class EditEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Event> lastShownList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -77,6 +79,10 @@ public class EditEventCommand extends Command {
 
         if (!eventToEdit.isSameEntry(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
+        if (!model.hasCompany(editedEvent.getCompanyName())) {
+            throw new CommandException(MESSAGE_NONEXISTENT_COMPANY);
         }
 
         model.setEvent(eventToEdit, editedEvent);

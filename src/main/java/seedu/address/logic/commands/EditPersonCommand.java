@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -78,6 +79,10 @@ public class EditPersonCommand extends Command {
 
         if (!personToEdit.isSameEntry(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (!model.hasCompany(editedPerson.getCompanyName())) {
+            throw new CommandException(MESSAGE_NONEXISTENT_COMPANY);
         }
 
         model.setPerson(personToEdit, editedPerson);
