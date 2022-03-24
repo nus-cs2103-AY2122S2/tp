@@ -4,8 +4,9 @@ title: User Guide
 ---
 
 Amigos is a desktop application to help tech-savvy university students manage their friendships by helping them to keep track of important details. It is optimized for use via a Command Line interface while still having the benefits of a Graphical User Interface (GUI).
+
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,8 +206,8 @@ Adds a new event, which can be optionally linked to any number of existing frien
 **Format**: `addevent n/EVENT_NAME dt/DATE_TIME [d/DESCRIPTION] [f/FRIEND_NAME]...`
 
 * There **cannot** be any duplicate events with the same name and date.
+* The `DATE_TIME` must be given in the following format: `DD-MM-YYYY hhmm`
 * All given `FRIEND_NAME` values must match the `NAME` of an existing friend in Amigos.
-
 
 **Examples**:
 * `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
@@ -242,6 +243,28 @@ Delete existing event(s).
 Shows all events stored in Amigos. Switches GUI to the events tab.
 
 **Format**: `showevents`
+
+### Find events : `findevent`
+
+Find events in Amigos whose properties match the given search criteria.
+
+**Format**: `findevent [n/EVENT_NAME_SUBSTRING] [dt/DATE] [f/FRIEND_NAME_SUBSTRING]...`
+
+* For search by `EVENT_NAME_KEYWORD`/`FRIEND_NAME_KEYWORD`:
+  * The search is **case-insensitive**. e.g john will match John
+  * For each search field, an event is a match if the search substring matches.
+    * e.g n/Birthday will match events with names John's Birthday, Bob's Birthday
+    * e.g. f/joe will match events containing either Joe Maggio or Joe Allen in the friends list.
+
+* For search by `DATE`:
+  * The date must be given as follows: `DD-MM-YYYY`
+  * (COMING SOON) Filter by time period???
+* At least one of the optional fields must be provided
+* If more than one field is given, only events with matches for **all** search criteria will be shown.
+
+**Examples**:
+* `findevent n/dinner dt/20-03-2022` returns events on 20 Mar 2022 with an event name containing 'dinner' 
+* `findevent f/Joe f/John` will return events with a friends list containing both 'joe' and 'john'
 
 
 ## Miscellaneous
@@ -302,6 +325,7 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 | **Edit Event**             | `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...` <br> e.g., `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo`                                                                 |
 | **Delete Event**           | `deleteevent INDEX` <br> e.g., `deleteevent 2`                                                                                                                                                                                                                         |
 | **Show all events**        | `showevents`                                                                                                                                                                                                                                                           |
+| **Find an event**          | `findevent [n/EVENT_NAME_SUBSTRING] [dt/DATE] [f/FRIEND_NAME_SUBSTRING]...` <br> e.g.,`findevent n/dinner dt/20-03-2022 f/Maggie`                                                                                                                                      |
 | **Help**                   | `help`                                                                                                                                                                                                                                                                 |
 | **Clear**                  | `clear`                                                                                                                                                                                                                                                                |
 | **Exit**                   | `exit`                                                                                                                                                                                                                                                                 |
