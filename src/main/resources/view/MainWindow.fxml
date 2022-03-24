@@ -27,6 +27,7 @@
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleFavourites" text="Favourites" />
+            <MenuItem mnemonicParsing="false" onAction="#handleReminders" text="Reminders" />
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
