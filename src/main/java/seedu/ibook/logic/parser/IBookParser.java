@@ -17,6 +17,7 @@ import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.HelpCommand;
 import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
+import seedu.ibook.logic.commands.UpdateItemCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 
 /**
@@ -61,6 +62,9 @@ public class IBookParser {
 
         case DeleteItemCommand.COMMAND_WORD:
             return new DeleteItemCommandParser().parse(arguments);
+
+        case UpdateItemCommand.COMMAND_WORD:
+            return new UpdateItemCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
