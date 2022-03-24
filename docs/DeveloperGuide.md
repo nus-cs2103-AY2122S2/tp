@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -219,49 +219,30 @@ Finally, it returns a new `CommandResult` object containing a string that indica
 A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
 
 
-#### Pie Chart Window feature
+### Pie Chart Window feature
 
 #### <ins>How the feature is implemented<ins/>
 
-This feature is implemented using a new class `PieChartWindow` and modifications to `SummariseCommand` and `MainWindow` (more information is shown below). When the user inputs `SummariseCommand`, `SummariseCommand#summariseFaculty()` and `SummariseCommand#summariseBlock()` will be invoked and puts the necessary data into a `TreeMap` that is a static variable of `SummariseCommand`. In `MainWindow#executeCommand()`, it will invoke `MainWindow#handleSummarise()` which calls `PieChartWindow#execute()` to create the pie chart and opens a new window. The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
- 
-**New class: `PieChartWindow`**
- 
-A `PieChartWindow` controller class and a `PieChartWindow` FXML class is created for this feature.
-The `PieChartWindow` controller class will create pie charts using data from `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
+This feature is implemented using a new class `PieChartWindow` and modifications to `SummariseCommand` and `MainWindow`.
+When the user inputs `SummariseCommand`, `SummariseCommand#summariseFaculty()` and `SummariseCommand#summariseBlock()` will
+be invoked and puts the necessary data into a `TreeMap` that is a static variable of `SummariseCommand`. In `MainWindow#executeCommand()`,
+it will invoke `MainWindow#handleSummarise()` which first check whether the pie chart window is to be display by calling `SummariseCommand#shouldOpenPieChartWindow()`.
+If true, `MainWindow#handleSummarise()` will call `PieChartWindow#execute()` to create the pie chart and opens a new window.
+The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
 
-Addition of method(s) to `PieChartWindow` controller class:
-* `PieChartWindow#execute()` puts all of the pie chart into a `VBox` and set the scene for the `PieChartWindow` FXML class
-* `PieChartWindow#makePieChart()` creates a pie chart
-* `PieChartWindow#collateBlocksChart()` creates a pie chart using `PieChartWindow#makePieChart()` for each block that shows covid positive, negative and HRN percentage for contacts present in Tracey and adds it to a `HBox`
-* `PieChartWindow#createFacultyChartPositive()` creates a pie chart using `PieChartWindow#makePieChart()` that shows the covid positive percentage for all faculties for each contact present in Tracey and adds it to a `HBox`
-* `PieChartWindow#makePieChartScene()` creates the scene for the pie charts
-* `PieChartWindow#show()` show the pie chart window
-* `PieChartWindow#isShowing()` returns a boolean whether the pie chart window is showing
-* `PieChartWindow#hide()` hide the pie chart window
 
-**Modifications to `SummariseCommand`**
+Below are links for implementation of the classes and its methods:
+<br>
+* [`PieChartWindow`](../src/main/java/seedu/address/ui/PieChartWindow.java)
+<br>
+* [`SummariseCommand`](../src/main/java/seedu/address/logic/commands/SummariseCommand.java)
+<br>
+* [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java)
 
-Addition of variable(s):
-* `positiveStatsByFacultyData`, a private static variable of type `TreeMap<String, Double>`
-* `covidStatsByBlockDataList`, a private static variable of type `TreeMap<String, TreeMap<String, Double>>`
 
-Modifications to existing method(s):
-* `SummariseCommand#summariseFaculty()` will put in `numberOfPositive` (percentage of covid-positive cases in its respective faculty) for each `facultyName` (pre-defined constants from the `Faculty` class) into `positiveStatsByFacultyData` for contacts that are present in Tracey.
-* `SummariseCommand#summariseBlock()` will put in `numberOfPositive`, `numberOfNegative` and `numberOfHrn` for each `blockLetter` (pre-defined constants from the `Block` class) into a local variable of type `TreeMap<String, Double>` and then puts into `covidStatsByBlockDataList` for each for contacts that are present in Tracey.
-
-Addition of method(s):
-* `SummariseCommand#getPositiveStatsByFacultyData()` getter method that returns `positiveStatsByFacultyData`
-* `SummariseCommand#getCovidStatsByBlockDataList()` getter method that returns `covidStatsByBlockDataList`
- 
-**Modifications to `MainWindow`**
-
-Modifications to existing method(s):
-* `MainWindow#executeCommand()` will now check if the command is a `SummariseCommand`, if it is then `MainWindow#handleSummarise()` will be invoked
-  Addition of method(s):
-* `MainWindow#handleSummarise()` shows the pie chart window if it is not already open, or else will reopen a new pie chart window
 
 **Sequence Diagram of Pie Chart Window Feature is shown below:**
+
 ![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
 
 #### <ins>Why it is implemented that way<ins/>
@@ -275,7 +256,7 @@ The data needed for the pie charts should be coupled with `SummariseCommand`, th
     * Pros: Easy to implement.
     * Cons: Dependent on the `SummariseCommand` class to pass in correct inputs.
     * Other consideration(s):
-        ** Use the Singleton design principle for the data structures.
+      ** Use the Singleton design principle for the data structures.
 
 * **Alternative 2:** Parse the feedback to user message from `SummariseCommand`
     * Pros: No modifications to the `SummariseCommand` class.
@@ -369,13 +350,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -519,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The student to be added already exist in the list by Tracey.
 
     * 1b1. Tracey inform user that the contact exist in her.
-  
+
 * 1c. User adds multiple students in one go.
 
     * 1c1. Tracey will list out a list of new students added with their info.
@@ -673,15 +654,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -690,16 +671,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -707,8 +688,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 
 1. _{ more test cases …​ }_
-
