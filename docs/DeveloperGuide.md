@@ -239,6 +239,68 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### Edit Feature
+
+#### What is this feature about? 
+The `edit` feature allows the user to change the attributes of the Candidate in the system though the CLI.
+This feature has been enhanced based on the initial implementation of the `edit` command in `AddressBook3`.
+
+#### How is this feature implemented?
+
+The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrive the attributes that can be edited. 
+
+The user is able to edit key attributes of the Candidate, such as 
+* Phone Number
+* ApplicationStatus 
+* InterviewStatus
+
+Based on the fields that are edited by the user, the EditCommandParser will retreive the information, and update the attributes accordingly.
+There are also some attributes that are dependent on another attribute, and we will introduce `Triggers` to update the attributes automatically.
+One of such is the `InterviewStatus`. It makes sense that if the application is accepted or rejected, it also means that the interview has been completed.
+Hence the `ApplicationStatus` will trigger `InterviewStatus` if the user is changing the `ApplicationStatus` from `Pending` to `Accepted` or `Rejected`.
+The trigger mechanism is currently handled by `EditCommand#triggerInterviewStatus()`. 
+
+#### Why is the feature implemented as such?
+
+**1. Triggers for `ApplicationStatus` and `InterviewStatus` <br> 
+For the `ApplicationStatus` and `InterviewStatus`, we initially thought of allowing the user to manually update individual statuses.
+(Eg. Updating `ApplicationStatus` to `Accepted` will not trigger `InterviewStatus`).
+We initially thought that this would be a cleaner way, and to also make sure there is no wrong information in the system. 
+In the end, we went ahead with the triggers as it would make sense for the user to have all the statuses updated automatically, 
+and we just need to make more checks in our code. 
+The downside to this implementation is that the user will not be able to individually allocate the `InterviewStatus`, but we believe this 
+will not be an use case for any user. 
+
+#### UML Diagram 
+The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
+<img src="images/StatusActivityDiagram.png" width="250" />
+
+
+### Help Window Feature 
+
+#### What is this feature about?
+The `help` feature allows the user see the available commands on the system. 
+This feature has been enhanced based on the initial implementation of the `help` command in `AddressBook3`.
+
+#### How is this feature implemented?
+
+The proposed `help` mechanism is facilitated by `HelpWindow`. It is supported by `HelpWindowUtil` where it will help the user open the User Guide on their desktop. 
+We used the existing implementation, and we modified it that the user can view the full user guide on their personal desktop with the click of a button. 
+For this feature, we used the [Desktop API](https://docs.oracle.com/javase/9/docs/api/java/awt/Desktop.html) from Java 9. 
+
+#### Why is the feature implemented as such?
+
+**1. Why allow user to visit full user guide? <br>
+We initially proposed to put the full list of commands and tips on the Help Window. However, we think that this does not improve user experience as 
+there will be too many commands available in the window. Hence we decided that we should streamline the important commands on the `HelpWindow`, and the 
+other information will be available on the User Guide. 
+
+As the user will not be able to remember the link to our User Guide, we hyperlinked it using the Desktop API that was available from Java. 
+
+#### UML Diagram
+The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
+<img src="images/HelpWindowActivityDiagram.png" width="250" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
