@@ -51,7 +51,6 @@ public class EditCommand extends Command {
     private final Index index;
     private final List<Field> fields;
     private final Set<Tag> tags;
-    private final boolean replaceTags;
 
     /**
      * Creates an EditCommand to edit the specified {@code Person}.
@@ -63,8 +62,7 @@ public class EditCommand extends Command {
         requireAllNonNull(index, fields);
         this.index = index;
         this.fields = Collections.unmodifiableList(fields);
-        this.tags = tags == null ? Collections.emptySet() : Collections.unmodifiableSet(tags);
-        this.replaceTags = !(tags == null);
+        this.tags = tags;
     }
 
     @Override
@@ -77,15 +75,10 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-
-        // Update fields.
-        Person editedPerson = personToEdit;
-        for (Field f : fields) {
-            editedPerson = editedPerson.addField(f);
-        }
+        Person editedPerson = personToEdit.addFields(this.fields);
 
         // Update tags.
-        if (replaceTags) {
+        if (tags != null) {
             editedPerson = editedPerson.setTags(tags);
         }
 
@@ -110,8 +103,13 @@ public class EditCommand extends Command {
             return false;
         }
 
-        // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index) && new HashSet<>(fields).equals(new HashSet<>(e.fields)) && tags.equals(e.tags);
+
+        // Compare tags.
+        if (tags != null && !tags.equals(e.tags)) {
+            return false;
+        }
+
+        return index.equals(e.index) && new HashSet<>(fields).equals(new HashSet<>(e.fields));
     }
 }

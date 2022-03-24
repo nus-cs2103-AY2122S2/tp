@@ -32,11 +32,11 @@ public class PersonTest {
         assertFalse(AMY.isSamePerson(null));
 
         // same email, all other attributes different -> returns true
-        Person editedPerson = BOB.addField(new Email(VALID_EMAIL_AMY));
+        Person editedPerson = BOB.addFields(new Email(VALID_EMAIL_AMY));
         assertTrue(AMY.isSamePerson(editedPerson));
 
         // different email, all other attributes same -> returns false
-        editedPerson = AMY.addField(new Email(VALID_EMAIL_BOB));
+        editedPerson = AMY.addFields(new Email(VALID_EMAIL_BOB));
         assertFalse(AMY.isSamePerson(editedPerson));
     }
 
@@ -59,19 +59,19 @@ public class PersonTest {
         assertFalse(AMY.equals(BOB));
 
         // different name -> returns false
-        Person editedPerson = AMY.addField(new Name(VALID_NAME_BOB));
+        Person editedPerson = AMY.addFields(new Name(VALID_NAME_BOB));
         assertFalse(AMY.equals(editedPerson));
 
         // different phone -> returns false
-        editedPerson = AMY.addField(new Phone(VALID_PHONE_BOB));
+        editedPerson = AMY.addFields(new Phone(VALID_PHONE_BOB));
         assertFalse(AMY.equals(editedPerson));
 
         // different email -> returns false
-        editedPerson = AMY.addField(new Email(VALID_EMAIL_BOB));
+        editedPerson = AMY.addFields(new Email(VALID_EMAIL_BOB));
         assertFalse(AMY.equals(editedPerson));
 
         // different address -> returns false
-        editedPerson = AMY.addField(new Address(VALID_ADDRESS_BOB));
+        editedPerson = AMY.addFields(new Address(VALID_ADDRESS_BOB));
         assertFalse(AMY.equals(editedPerson));
 
         // different tags -> returns false
