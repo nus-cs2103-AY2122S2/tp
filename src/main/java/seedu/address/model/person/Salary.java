@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Salary {
 
     public static final String MESSAGE_CONSTRAINTS = "Salary should only contain numbers";
-    private static final String VALIDATION_REGEX = "\\d";
+    private static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
     /**

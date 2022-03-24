@@ -16,6 +16,7 @@ import seedu.address.model.person.Info;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -150,6 +151,23 @@ public class ParserUtil {
             throw new ParseException(PrevDateMet.MESSAGE_CONSTRAINTS);
         }
         return new PrevDateMet(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String salary} into a {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param salary A string representing the salary value.
+     * @return A salary object with the salary value.
+     * @throws ParseException is thrown if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
     }
 
     /**

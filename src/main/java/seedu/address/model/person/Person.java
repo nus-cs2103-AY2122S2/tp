@@ -100,7 +100,6 @@ public class Person {
     public Info getInfo() {
         return info;
     }
-    
     public Salary getSalary() {
         return this.salary;
     }

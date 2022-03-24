@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String flag;
     private String prevDateMet;
+    private final String salary;
     private String info;
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -44,7 +46,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("flag") String flag, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("info") String info) {
+            @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("salary") String salary,
+            @JsonProperty("info") String info) {
 
         this.name = name;
         this.phone = phone;
@@ -52,6 +55,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.flag = flag;
         this.prevDateMet = prevDateMet;
+        this.salary = salary;
         this.info = info;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -68,6 +72,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         flag = source.getFlag().toString();
         prevDateMet = source.getPrevDateMet().toString();
+        salary = source.getSalary().value;
         info = source.getInfo().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -135,6 +140,14 @@ class JsonAdaptedPerson {
         }
         final PrevDateMet modelPrevDateMet = new PrevDateMet(prevDateMet);
 
+        if (salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
+        }
+        if (!Salary.isValidSalary(salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        final Salary modelSalary = new Salary(salary);
+
         if (info == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
@@ -144,7 +157,7 @@ class JsonAdaptedPerson {
         final Info modelInfo = new Info(info);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
-                modelTags, modelPrevDateMet, modelInfo);
+                modelTags, modelPrevDateMet, modelSalary, modelInfo);
     }
 
 }
