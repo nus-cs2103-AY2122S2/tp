@@ -40,6 +40,26 @@ public class TypicalProducts {
         .withCategory("Waffle")
         .withDescription("Waffles")
         .withPrice("1.99").build();
+    public static final Product KAYA_BREAD_WITH_ITEMS = new ProductBuilder().withName("Kaya Bread")
+            .withCategory("Bread")
+            .withDescription("Kaya on bread")
+            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+    public static final Product PEANUT_BUTTER_BREAD_WITH_ITEMS = new ProductBuilder().withName("Peanut Butter Bread")
+            .withCategory("Bread")
+            .withDescription("Peanut Butter on bread")
+            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+    public static final Product CHOCOLATE_BREAD_WITH_ITEMS = new ProductBuilder().withName("Chocolate Bread")
+            .withCategory("Bread")
+            .withDescription("Chocolate on bread")
+            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+    public static final Product VANILLA_CAKE_WITH_ITEMS = new ProductBuilder().withName("Vanilla Cake")
+            .withCategory("Cake")
+            .withDescription("Vanilla Cake")
+            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+    public static final Product WAFFLES_WITH_ITEMS = new ProductBuilder().withName("Waffles")
+            .withCategory("Waffle")
+            .withDescription("Waffles")
+            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
 
     // Manually added - Product's details found in {@code CommandTestUtil}
     public static final Product PRODUCT_A = new ProductBuilder().withName(VALID_NAME_A).withCategory(VALID_CATEGORY_A)
@@ -63,7 +83,32 @@ public class TypicalProducts {
         return ab;
     }
 
+    public static IBook getTypicalIBookWithCustomList(List<Product> productList) {
+        IBook ab = new IBook();
+        for (Product product: productList) {
+            ab.addProduct(product);
+        }
+        return ab;
+    }
+
+    public static IBook getTypicalIBookWithItems() {
+        IBook ab = new IBook();
+        for (Product product : getTypicalProductsWithItems()) {
+            ab.addProduct(product);
+        }
+        return ab;
+    }
+
     public static List<Product> getTypicalProducts() {
         return new ArrayList<>(Arrays.asList(KAYA_BREAD, PEANUT_BUTTER_BREAD, CHOCOLATE_BREAD, VANILLA_CAKE, WAFFLES));
+    }
+
+    public static List<Product> getTypicalProductsWithItems() {
+        return new ArrayList<>(
+                Arrays.asList(KAYA_BREAD_WITH_ITEMS,
+                        PEANUT_BUTTER_BREAD_WITH_ITEMS,
+                        CHOCOLATE_BREAD_WITH_ITEMS,
+                        VANILLA_CAKE_WITH_ITEMS,
+                        WAFFLES_WITH_ITEMS));
     }
 }
