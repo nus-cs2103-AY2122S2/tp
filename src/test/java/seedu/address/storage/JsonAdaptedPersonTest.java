@@ -137,7 +137,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidWeight_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        VALID_HEIGHT, VALID_JERSEY_NUMBER, VALID_TAGS, VALID_LINEUPS,INVALID_WEIGHT);
+                        VALID_HEIGHT, VALID_JERSEY_NUMBER, VALID_TAGS, VALID_LINEUPS, INVALID_WEIGHT);
         String expectedMessage = Weight.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -145,7 +145,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullWeight_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_HEIGHT, VALID_JERSEY_NUMBER, VALID_TAGS, VALID_LINEUPS,null);
+                VALID_HEIGHT, VALID_JERSEY_NUMBER, VALID_TAGS, VALID_LINEUPS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -156,7 +156,7 @@ public class JsonAdaptedPersonTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        VALID_HEIGHT, VALID_JERSEY_NUMBER, invalidTags, VALID_LINEUPS,VALID_WEIGHT);
+                        VALID_HEIGHT, VALID_JERSEY_NUMBER, invalidTags, VALID_LINEUPS, VALID_WEIGHT);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 }

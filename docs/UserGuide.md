@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 MyGM is a **desktop app for high school basketball team trainers to manage players’ contacts and data, optimized for use
-via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). 
+via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, MyGM can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -12,20 +12,20 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
   * Quick Start
   * Features
     * Adding a player/ team/ lineup/ schedule: add
-    * Deleting a player/ team/ lineup/ schedule: delete 
-    * Filtering players by position: filter 
-    * Marking the attendance of player: mark 
-    * Unmarking the attendance of players: unmark 
-    * Tagging players by their position: tag 
-    * Viewing the summary: view 
-    * Finding a lineup or player: find 
-    * Putting a player to a team/ lineup: put 
-    * Updating a player/ team/ lineup/ schedule: update 
-    * Saving the data: save 
-    * Loading data from user-specified file: load 
+    * Deleting a player/ team/ lineup/ schedule: delete
+    * Filtering players by position: filter
+    * Marking the attendance of player: mark
+    * Unmarking the attendance of players: unmark
+    * Tagging players by their position: tag
+    * Viewing the summary: view
+    * Finding a lineup or player: find
+    * Putting a player to a team/ lineup: put
+    * Updating a player/ team/ lineup/ schedule: update
+    * Saving the data: save
+    * Loading data from user-specified file: load
     * Clearing all data: clear
   * FAQ
-  * Command Summary 
+  * Command Summary
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -63,17 +63,17 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.  
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional.  
+* Items in square brackets are optional.
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
-* Parameters can be in any order.  
+* Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
-* If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.  
+* If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.  
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as help.
 
 </div>
@@ -91,21 +91,19 @@ Format: `help`
 
 Adds a player/ lineup/ schedule to MyGM.
 
-**To add a player:**  
+**To add a player:**
 Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`
 
 * Adds a player with the specified attributes to the player list in MyGM.
 
 Examples:
-* `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com` Adds a player by the name of John Doe, 
-who is age of 17, jersey number of 3, weight of 69kg, height of 188cm, handphone number of 98765432
+* `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com` Adds a player by the name of John Doe, who is age of 17, jersey number of 3, weight of 69kg, height of 188cm, handphone number of 98765432
 and email of johnd@example.com to the player list.`
 
-**To add a lineup:**  
+**To add a lineup:**
 Format: `add L/ n/LINEUP_NAME [P/PLAYER]…​`
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
-* If `n/LINEUP_NAME` and `P/PLAYER` are specified, a lineup with the specified `LINEUP_NAME` 
-with the specified `PLAYER` added to this lineup.
+* If `n/LINEUP_NAME` and `P/PLAYER` are specified, a lineup with the specified `LINEUP_NAME` with the specified `PLAYER` added to this lineup.
 * Multiple `PLAYER` can be specified but it will be **capped at 5**.
 * Tthe `PLAYER` specified **must already exist** in MyGM.
 
@@ -113,7 +111,7 @@ Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
 * `add L/ n/starting five P/James P/Curry P/Harden P/Durant P/Embiid` Players `James`, `Curry`, `Harden`, `Durant` and `Embiid` are also added to the lineup `starting five`.
 
-**To add a schedule:**  
+**To add a schedule:**
 Format: `add S/ r/DESCRIPTION d/DATETIME`
 * Adds a schedule with the description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a date time format.
@@ -215,7 +213,7 @@ Format: `view L/[LINEUP]`
 * Displays the summarised information of the specified `LINEUP` in the specified ``.
   - All the players in the specified `LINEUP` will be displayed.
 * If no `LINEUP` is provided, the summarised information of all lineups in the specified `` will be displayed.
-  - All the `LINEUP` in the specified team will be displayed. 
+  - All the `LINEUP` in the specified team will be displayed.
 * The specified `LINEUP` and specified `` must be **valid** to be viewed.
 
 Examples:
