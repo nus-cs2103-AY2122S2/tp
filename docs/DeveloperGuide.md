@@ -37,6 +37,7 @@ title: Developer Guide
     * [Adding a show](#adding-a-show)
     * [Deleting a show](#deleting-a-show)
     * [Editing a show](#editing-a-show)
+    * [Edit a comment](#edit-comment)
     * [Saving data](#saving-data)
     * [Finding a show](#finding-a-show)
 
@@ -299,6 +300,29 @@ The following sequence diagram summarizes what happens when a user executes a so
     - Cons: Users need to remember valid inputs
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Status feature
+
+#### What it does it do
+`Status` class is an attribute within the `Show` class. `Status` represents the 
+watched status of the show which can be represented by `completed` and `watching`. 
+
+#### Implementation
+
+`Status` class is implemented as a `enum` class. Enumerations 
+are a list of named constants, where the named constants are `completed` and `watching`.
+It is also possible to implement `Status` as a normal class encapsulating a String or Integer which would 
+represent the status of the show (`watching` & `completed`). However, the former implementation
+is chosen due to certain advantages that it offers.
+
+#### Design considerations:
+
+1. Enumerations offer compile time type safety, reducing the risk of runtime errors.
+2. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would 
+reference the same `enum` class. However, for the class implementation, a new `Status` instance is
+instantiated each time a `Show` object is created.
 
 ---
 
@@ -599,6 +623,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC09 - Add a comment**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Comment of the show will be edited from Trackermon only if the user input matches the command format.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User requests to edit the comment of a specific show in the list.
+4.  Trackermon edits the comment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Trackermon shows an error message,  indicating the format for editing the comment of the show is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 3.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -707,6 +763,28 @@ testers are expected to do more *exploratory* testing.
    1. Condition: Show named `Inception` exists in the show list.
    2. Command: `edit n/Inception` <br>
       Expected: No show is edited. Error details shown in the result display.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Edit comment
+
+1. Edit comment show while all shows are being shown
+
+    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
+
+    1. Test case: `comment 1 c/Hello`<br>
+       Expected: Comment of the first show in the list is edited to "Hello".
+
+    1. Test case: `comment 1`<br>
+       Expected: Comment of the first show in the list is deleted.
+
+    1. Test case: `comment 0`<br>
+       Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect comment commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
