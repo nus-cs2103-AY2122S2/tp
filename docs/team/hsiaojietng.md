@@ -17,10 +17,13 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added a favourite command.
   * What it does: Allows the user to favourite a client, thus the client appears in a filtered list of favourited clients in another personalized window.
-  * Justification: This feature improves the product significantly because it allows the user to have a list of clients that the user thinks are potentially always going to be contacted. Having another list simplifies the need to remember them and find them through their information (eg. Name).
+  * Justification: This feature improves the product significantly because it allows the user to have a list of clients that the user thinks are potentially always going to be contacted, thus being favourited by him/her. Having another list simplifies the need to remember them and find them through their information (eg. Name).
   * Highlights: This enhancement does not affect existing commands but the existing GUI and user experience. It did require an in-depth analysis of design alternatives as the team decided on how to obtain the list of favourited clients from the existing list.
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: Added a Favourites window command.
+  * What it does: Allows the user open up a new window that displays the compacted list of favourited client.
+  * Justification: This feature improves the product significantly because it allows the user to view the list of clients that the user thinks are potentially always going to be contacted, thus being favourited by him/her.
+  * Highlights: This enhancement does not affect existing commands but the existing GUI and user experience.
 
 * **Project management**:
   * Acted as repository master for the first iteration
@@ -33,17 +36,15 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
+    * Added documentation for the features `delete`, `find`, `favourite`, `Favourites window`[\#72]()
     * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
   * Developer Guide:
     * Added user stories for RealEstatePro
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#5](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/5), [\#11](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/11/)
-  * Created UI mockup for RealEstatePro
+  * Created Ui mockup for RealEstatePro
   * Contributed to forum discussions:
-  * Reported bugs and suggestions for other teams in the class:
-  * Some parts of the history feature I added was adopted by several other class mates:
 
 * **Tools**:
   * Introduced Trello for brainstorming process of User Stories

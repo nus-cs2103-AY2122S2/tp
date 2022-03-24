@@ -4,8 +4,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 
 import java.util.Set;
 
@@ -35,7 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_USERTYPE + person.getUserType().value + " ");
+        sb.append(PREFIX_PREFERENCE + person.getPreference().get().toParseValue() + " ");
         person.getProperties().stream().forEach(
             s -> sb.append(PREFIX_PROPERTY).append(s.getRegion().value).append(",").append(s.getAddress().value)
                     .append(",").append(s.getSize().value).append(",").append(s.getPrice().value).append(" ")
@@ -52,7 +52,8 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getUserType().ifPresent(userType -> sb.append(PREFIX_USERTYPE).append(userType.value).append(" "));
+        descriptor.getPreference().ifPresent(preference -> sb.append(PREFIX_PREFERENCE)
+                .append(preference.toParseValue()).append(" "));
         if (descriptor.getProperties().isPresent()) {
             Set<Property> properties = descriptor.getProperties().get();
             if (properties.isEmpty()) {

@@ -25,28 +25,30 @@ Take a look at our design which is mostly based off on [AddressBook Level 3 (AB3
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## Favourite feature/Window
+## Favourite feature and Favourites window
 
 ### Proposed Implementation
 
-The proposed `favourite` mechanism will make use of a new attribute called ‘Favourite’ under a ‘Person’. How we went about creating this function is by going through the list of Persons and check if their attribute ‘Favourite’ returns “Favourited” when `toString()` is called.
+The proposed `favourite` mechanism will make use of a new attribute called `Favourite` under a `Person`. How we went about creating this mechanism is by going through the list of Persons and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
 
-We decided on this design for now because the sole purpose of it now is just to display Persons that are favourited, thus we made use of an attribute to do that.
-
-Given below is an example of how the `favourite`mechanism behaves with the `favourite`window.
+Given below is an example of how the `favourite` mechanism behaves with the Favourites window.
 
 Step 1. The user starts the application with pre-loaded data of Persons.
 
-Step 2. Assuming there is a Person with the number 1. User then executes `favourite 1` command to favourite the first Person in the application. The system will create a new Person with the ‘favourite’ attribute set as true. Then calls `Model#setPerson()` to set Person 1 to be a favourited Person.
+Step 2. Assuming there is a Person with the number 1. User then executes `favourite 1` command to favourite the first Person in the application. The system will create a new Person with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set Person 1 to be a favourited Person.
 
 <aside>
-💡 **Note:** Every newly added Person will have the default value of `False` for ‘Favourite’ attribute, thus will never appear in the FavouriteWindow before the `favourite` command is called on them.
+💡 **Note:** Every newly added Person will have the default value of `False` for `Favourite` attribute, thus will never appear in the Favourites window before the `favourite` command is called on them.
 
 </aside>
 
-Step 3. User can access the `Favourite`Window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those Persons that have ‘Favourite’ attribute set as True.
+Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those Persons that have ‘Favourite’ instance's value set as True or can input the command `fw` to open up the Favourites window through this CLI command.
 
-![FavouriteWindow](images/developer-guide/FavouriteWindowAccess.png)
+## Match feature/Window
+The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
+The left column shows the sellers, while the right column shows the buyers.
+
+Two `Person` make a match if one has at least one `property` that matches the other's `preference`.
 
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
@@ -60,6 +62,13 @@ The `Property` itself consists of the following attributes: `Region`, `Address`,
 - `Size` represents the size of the `Property` in terms of the number of rooms it has. It is an enum that can be one of the following: `ONE_ROOM`, `TWO_ROOM`, `THREE_ROOM`, `FOUR_ROOM`, `FIVE_ROOM`.
 
 - `Price` represents the price of the `Property`. It's `toString()` method returns the price in the form of `$###` or `$###.#K` or `$###.#M` depending on the value of the `Price` for easier readability.
+
+## Preference
+The `Preference` is a new attribute that can be added to a `Person`. A `Person` can either have a `Preference` or not.
+
+A `Preference` contains the following attributes: `Region`, `Size`, `lowPrice`, `highPrice`,
+among which the first two is explained in the previous sector.
+The latter two specifies the expected range of money the buyer would like to pay.
 
 ## UserType
 The `UserType` represents an attribute that needs to be added to a `Person` & represents the `Person` as a `buyer` or `seller`. A `Person` is only either a `buyer` or `seller` at a given time. They cannot be both or none.
@@ -99,17 +108,18 @@ Manage clients faster that a typical mouse/GUI driven app.
 
 ## User stories
 
-| Priority | As a ... | I want to ... | So that i can... |
-| --- | --- | --- | --- |
-| High | User | Delete my client’s information on the app | Remove this redundant information after he/she is not my client anymore |
-| High | User | To edit my clients’ information on the app | Ensure all information of my clients are always up to date |
-| High | User | To list out my clients’ information on the app | View all of my clients’ information in one place |
-| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers) | Know if a client is looking for a property to buy or is trying sell a property |
-| High | User | Add my clients’ information on the app | Gain access to all these information in one place   |
-| High | User | Favorite a client | Separate clients based on whose information I frequent the most (favorited) and those that are not |
-| High | User | To create a preference for a client who is a buyer | Have information of potential properties that the buyer would want to buy |
-| High | User | Match my clients (e.g. buyer with seller) | Spot if there are any properties being sold by a seller that a buyer has a preference for. |
-| High | User | Be able to understand how the app works from start to end | Able to provide the necessary inputs to perform a particular action on the app |
+| Priority | As a ... | I want to ...                                               | So that i can...                                                                               |
+| --- | --- |-------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| High | User | Delete my client’s information on the app                   | Remove this redundant information after he/she is not my client anymore                        |
+| High | User | To edit my clients’ information on the app                  | Ensure all information of my clients are always up to date                                     |
+| High | User | To list out my clients’ information on the app              | View all of my clients’ information in one place                                               |
+| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers) | Know if a client is looking for a property to buy or is trying sell a property                 |
+| High | User | Add my clients’ information on the app                      | Gain access to all these information in one place                                              |
+| High | User | Favorite a client                                           | Separate clients based on whose information I frequent the most (favorited) and those that are not |
+| High | User | View favourited clients                                     | Have a compact display of clients that I frequent the most                                     |
+| High | User | To create a preference for a client who is a buyer          | Have information of potential properties that the buyer would want to buy                      |
+| High | User | Match my clients (e.g. buyer with seller)                   | Spot if there are any properties being sold by a seller that a buyer has a preference for.     |
+| High | User | Be able to understand how the app works from start to end   | Able to provide the necessary inputs to perform a particular action on the app                 |
 
 ## Use cases
 

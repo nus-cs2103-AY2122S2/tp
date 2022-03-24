@@ -15,7 +15,11 @@ Given below are my contributions to the project.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
   * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added `match` command.
+  * What it does: allows the real estate agent to see potential matching sellers and buyers.
+
+* **New Component**: Added `Preference` class
+  * What it does: a new field of a `Person`. Specifies the preference of a potential buyer.
 
 * **Code contributed**: [RepoSense link]()
 
@@ -30,6 +34,8 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `delete` and `find` [\#72]()
     * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the feature `command`
+    * Added documentation for the attribute `Preference`
   * Developer Guide:
     * Added implementation details of the `delete` feature.
 
