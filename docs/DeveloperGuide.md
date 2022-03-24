@@ -194,8 +194,26 @@ allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of su
 
 ![Class diagram for Tag](images/TagClassDiagram.png)
 
+Given below is an example usage scenario and how the tagging mechanism behaves at each step.
 
+Step 1. The user enters the following valid `TagCommand`: `tag 1 edu/computer science m/cs2030s m/cs2040s` and `LogicManager`
+would execute it.
 
+Step 2. `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as a `TagCommand`.
+It will then pass the arguments to `TagCommandParser` to handle the parsing for the identified `TagCommand`.
+
+Step 3. `TagCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to tag to.
+Afterwards, `TagCommandParser` would parse the tag arguments provided using `ParserUtil#parseTags()` to identify the individual
+tag types for the arguments provided. 
+
+Step 4. After parsing the arguments, the control is handed over to `TagCommand` where it will return a `TagCommand` object. It
+will eventually return to `LogicManager` which will call `TagCommand#execute()` to execute the command.
+
+Step 5. Upon execution, the person will be fetched and tagged using `Model#setPerson`. The edited person would then be updated
+and stored in the addressbook.`CommandResult` would then generate a success message to inform the user the person has been tagged
+successfully.
+
+![The following sequence diagram shows how the tag operation works:](images/TagSequenceDiagram.png)
 
 ### Removetag feature
 
@@ -315,25 +333,26 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                   | I want to …​                                     | So that I can…​                                                                                  |
-|----------|-----------------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                                  | see usage instructions                           | refer to instructions when I forget how to use the App                                           |
-| `* * *`  | user                                                      | view all of my contacts                          |                                                                                                  |
-| `* * *`  | user                                                      | add a new contact                                |
-| `* * *`  | user                                                      | delete a contact                                 | remove entries that I no longer need                                                             |
-| `* * *`  | user                                                      | delete multiple contacts at once                 | delete unwanted entries faster                                                                   |
-| `* * *`  | user                                                      | edit an existing contact                         | update the information when needed                                                               |
-| `* * *`  | user                                                      | tag additional information to an existing contact | keep a memo of such details for future references                                                |
-| `* * `   | user                                                      | find a person by name                            | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                      | find a person by phone number                    | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                      | find a person by email address                   | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                      | find a person by module                          | locate details of persons with identical modules, without having to go through the entire list   |
-| `* * `   | user                                                      | find a person by internship                      | locate details of persons with identical internship, without having to go through the entire list |
-| `* * `   | user                                                      | find a person by cca                             | locate details of persons with identical cca, without having to go through the entire list       |
-| `* * `   | user                                                      | find a person by education                       | locate details of persons with identical education, without having to go through the entire list |
-| `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                           | reset my contact list                                                                            |
-| `*`      | user that tagged a lot of information to the contacts     | remove a specific tag of a contact               | avoid going through the trouble of re-tagging all the information again                           |
-| `*`      | user with many persons in the contact list                | sort persons by name in alphabetical order       | locate a person easily                                                                           |
+| Priority | As a …​                                                  | I want to …​                                             | So that I can…​                                                                                  |
+|----------|----------------------------------------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                                 | see usage instructions                                   | refer to instructions when I forget how to use the App                                           |
+| `* * *`  | user                                                     | view all of my contacts                                  |                                                                                                  |
+| `* * *`  | user                                                     | add a new contact                                        |
+| `* * *`  | user                                                     | delete a contact                                         | remove entries that I no longer need                                                             |
+| `* * *`  | user                                                     | delete multiple contacts at once                         | delete unwanted entries faster                                                                   |
+| `* * *`  | user                                                     | edit an existing contact                                 | update the information when needed                                                               |
+| `* * *`  | user                                                     | tag additional information to an existing contact        | keep a memo of such details for future references                                                |
+| `* * `   | user                                                     | add an event and tag relevant persons in my contact list | keep a memo of such upcoming events with my contacts for future references                       |
+| `* * `   | user                                                     | find a person by name                                    | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                     | find a person by phone number                            | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                     | find a person by email address                           | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                     | find a person by module                                  | locate details of persons with identical modules, without having to go through the entire list   |
+| `* * `   | user                                                     | find a person by internship                              | locate details of persons with identical internship, without having to go through the entire list |
+| `* * `   | user                                                     | find a person by cca                                     | locate details of persons with identical cca, without having to go through the entire list       |
+| `* * `   | user                                                     | find a person by education                               | locate details of persons with identical education, without having to go through the entire list |
+| `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                                   | reset my contact list                                                                            |
+| `*`      | user that tagged a lot of information to the contacts    | remove a specific tag of a contact                       | avoid going through the trouble of re-tagging all the information again                          |
+| `*`      | user with many persons in the contact list               | sort persons by name in alphabetical order               | locate a person easily                                                                           |
 
 
 
@@ -519,6 +538,17 @@ The user wants to delete multiple persons instead.
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
+````
+
+###**Use case 10: Adding events**
+
+**MSS**
+````
+
+````
+**Extensions**
+````
+
 ````
 
 ### Non-Functional Requirements
