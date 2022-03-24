@@ -8,7 +8,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Introduction**
-Tracey is a free and open-source desktop app for University housing committee (Hall Masters) to manage their students and premises.
+Tracey is a desktop app for University housing committee (Hall Masters) to manage their students and premises.
 Tracey is optimized for those that work well with Command Line Interface (CLI). She is equipped with Graphical User Interface (GUI) for an effective user experience.
 
 This is a Developer Guide written to help developers get a deeper understanding of how Tracey is implemented and the reasons this project is done a certain way.
@@ -541,7 +541,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC03 - Add a student into Tracey
+### Use case: UC03 - Add a student into Tracey
 
 **MSS**
 
@@ -610,7 +610,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC05 - Summarize the system database for number of Covid patient
+### Use case: UC06 - Summarize the system database for number of Covid patient
 
 **MSS**
 
@@ -625,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC06 - List all students
+### Use case: UC07 - List all students
 
 **MSS**
 
@@ -640,7 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Request for help from Tracey**
+### Use case: UC08 - Request for help from Tracey
 
 **MSS**
 
@@ -655,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC07 - Filter the system database for list overview by keyword
+### Use case: UC09 - Filter the system database for list overview by keyword
 
 **MSS**
 
@@ -670,7 +670,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC08 - Summarise all students for some overview of covid situation
+### Use case: UC10 - Summarise all students for some overview of covid situation
 
 **MSS**
 
