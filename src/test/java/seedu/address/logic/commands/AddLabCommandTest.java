@@ -55,14 +55,18 @@ class AddLabCommandTest {
     }
 
     @Test
-    public void execute_emptyStudentList_failure() {
+    public void execute_emptyStudentList_success() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
 
         AddLabCommand command = new AddLabCommand(new Lab("1"));
 
-        String expectedMessage = AddLabCommand.MESSAGE_EMPTY_STUDENT_LIST;
+        String expectedMessage = String.format(AddLabCommand.MESSAGE_EMPTY_STUDENT_LIST, 1);
 
-        assertCommandFailure(command, model, expectedMessage);
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+
+        expectedModel.addLab(new Lab("1"));
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
