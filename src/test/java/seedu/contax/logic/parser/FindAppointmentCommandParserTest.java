@@ -40,7 +40,7 @@ public class FindAppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_findByName_returnsFindCommand() {
+    public void parse_findDefault_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindAppointmentCommand expectedFindPersonCommand =
                 new FindAppointmentCommand(new NameContainsKeywordsPredicate(Arrays.asList("John", "Bob")));
@@ -51,7 +51,7 @@ public class FindAppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_findByClientName_returnsFindCommand() {
+    public void parse_findByPersonName_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindAppointmentCommand expectedFindPersonCommand =
                 new FindAppointmentCommand(new PersonNameContainsKeywordsPredicate(Arrays.asList("John", "Bob")));
@@ -59,6 +59,17 @@ public class FindAppointmentCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "\n John \n \t Bob  \t by/" + "person", expectedFindPersonCommand);
+    }
+
+    @Test
+    public void parse_findByName_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindAppointmentCommand expectedFindPersonCommand =
+                new FindAppointmentCommand(new NameContainsKeywordsPredicate(Arrays.asList("John", "Bob")));
+        assertParseSuccess(parser, "John Bob by/" + "name", expectedFindPersonCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "\n John \n \t Bob  \t by/" + "name", expectedFindPersonCommand);
     }
 
 
