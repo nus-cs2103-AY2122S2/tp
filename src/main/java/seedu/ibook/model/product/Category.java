@@ -9,13 +9,6 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Category {
 
-    public static final Category WILD_CATEGORY = new Category() {
-        @Override
-        public boolean equals(Object other) {
-            return other instanceof Category;
-        }
-    };
-
     public static final String DEFAULT_CATEGORY = "Miscellaneous";
 
     public static final String MESSAGE_CONSTRAINTS =

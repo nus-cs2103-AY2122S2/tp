@@ -1,8 +1,10 @@
 package seedu.ibook.testutil;
 
+import java.util.List;
+
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -14,19 +16,11 @@ public class ProductBuilder {
 
     public static final String DEFAULT_NAME = "Maggie Mee";
     public static final String DEFAULT_CATEGORY = "Noodles";
-    public static final String DEFAULT_EXPIRY_DATE = "2022-12-13";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final String DEFAULT_PRICE = "1.99";
 
-    public static final Name WILDCARD_NAME = Name.WILD_NAME;
-    public static final Category WILDCARD_CATEGORY = Category.WILD_CATEGORY;
-    public static final ExpiryDate WILDCARD_EXPIRY_DATE = ExpiryDate.WILD_EXPIRY_DATE;
-    public static final Description WILDCARD_DESCRIPTION = Description.WILD_DESCRIPTION;
-    public static final Price WILDCARD_PRICE = Price.WILD_PRICE;
-
     private Name name;
     private Category category;
-    private ExpiryDate expiryDate;
     private Description description;
     private Price price;
 
@@ -36,7 +30,6 @@ public class ProductBuilder {
     public ProductBuilder() {
         name = new Name(DEFAULT_NAME);
         category = new Category(DEFAULT_CATEGORY);
-        expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
         description = new Description(DEFAULT_DESCRIPTION);
         price = new Price(DEFAULT_PRICE);
     }
@@ -47,7 +40,6 @@ public class ProductBuilder {
     public ProductBuilder(Product productToCopy) {
         name = productToCopy.getName();
         category = productToCopy.getCategory();
-        expiryDate = productToCopy.getExpiryDate();
         description = productToCopy.getDescription();
         price = productToCopy.getPrice();
     }
@@ -77,14 +69,6 @@ public class ProductBuilder {
     }
 
     /**
-     * Sets the {@code ExpiryDate} of the {@code Product} that we are building.
-     */
-    public ProductBuilder withExpiryDate(String expiryDate) {
-        this.expiryDate = new ExpiryDate(expiryDate);
-        return this;
-    }
-
-    /**
      * Sets the {@code Price} of the {@code Product} that we are building.
      */
     public ProductBuilder withPrice(String price) {
@@ -93,18 +77,10 @@ public class ProductBuilder {
     }
 
     public Product build() {
-        return new Product(name, category, expiryDate, description, price);
+        return new Product(name, category, description, price);
     }
 
-    /**
-     * Sets the various fields of the {@code Product} to their wildcard counterpart.
-     */
-    public ProductBuilder toWildProduct() {
-        name = WILDCARD_NAME;
-        category = WILDCARD_CATEGORY;
-        expiryDate = WILDCARD_EXPIRY_DATE;
-        description = WILDCARD_DESCRIPTION;
-        price = WILDCARD_PRICE;
-        return this;
+    public Product buildWithItems(List<Item> items) {
+        return new Product(name, category, description, price, items);
     }
 }

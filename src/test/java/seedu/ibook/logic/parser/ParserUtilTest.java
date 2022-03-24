@@ -8,9 +8,9 @@ import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 
@@ -122,11 +122,6 @@ public class ParserUtilTest {
     @Test
     public void parseDescription_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
-    }
-
-    @Test
-    public void parseDescription_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
     }
 
     @Test

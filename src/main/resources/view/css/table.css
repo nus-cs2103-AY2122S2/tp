@@ -10,7 +10,7 @@
     -fx-border-style: solid;
     -fx-border-width: 0 0 0.1 0;
     -fx-spacing: 5;
-    -fx-padding: 10;
+    -fx-padding: 12;
 }
 
 .table-header .table-column-long {
@@ -25,6 +25,10 @@
     -fx-text-fill: #AEAEAE;
 }
 
+.expand-column {
+    -fx-pref-width: 40;
+}
+
 .table-column-short {
     -fx-padding: 0 10;
     -fx-pref-width: 70;
@@ -36,7 +40,7 @@
 
 .table-column-long {
     -fx-padding: 0 10;
-    -fx-pref-width: 100;
+    -fx-pref-width: 150;
     -fx-max-width: Infinity;
     -fx-max-height: Infinity;
     -fx-text-overrun: CLIP;
@@ -53,29 +57,25 @@
     -fx-border-style: solid;
     -fx-border-width: 0 0 0.1 0;
     -fx-spacing: 5;
-    -fx-padding: 10;
+    -fx-padding: 12;
 }
 
-.table-row .edit {
+.table-row:hover {
+    -fx-background-color: #FAFBFD;
+}
+
+.table-row .action-button {
     -fx-background-color: transparent;
 }
 
-.table-row .edit:hover {
-    -fx-background-color: #F4F5F6;
+.table-row .action-button:hover {
+    -fx-background-color: #F4F5F7;
 }
 
-.table-row .edit:pressed {
-    -fx-background-color: #F1F2F3;
+.table-row .action-button:pressed {
+    -fx-background-color: #F1F2F4;
 }
 
-.table-row .delete {
-    -fx-background-color: transparent;
-}
-
-.table-row .delete:hover {
-    -fx-background-color: #F4F5F6;
-}
-
-.table-row .delete:pressed {
-    -fx-background-color: #F1F2F3;
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
 }
