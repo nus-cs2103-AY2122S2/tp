@@ -89,6 +89,34 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Sort clients list: `sort`
+
+Sorts the client list based on the order of the fields specified.
+
+Fields that can be sorted:
+* Name [n/]
+* Phone number [p/]
+* Email [e/]
+* Address [a/]
+* Remark [r/]
+* Birthday [b/]
+
+Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br>
+`desc` keyword: Specifying it after a field means that particular field is to be sorted in descending order.
+
+Examples:
+* `sort n/ desc p/`: Clients will be sorted in descending order of their name. Clients with the same name will be then sorted 
+based on their phone numbers in ascending order.
+* `sort b/ a/`: Clients will be sorted in ascending order of their birthday. Clients with the same birthday will then be sorted
+based on their addresses in ascending order.
+
+Notes:
+* The fields are to be specified in their prefix. They can be specified in any order, however, priority will be given
+  based on the order specified.
+* Clients with null values in the fields to be sorted will have lesser priority. 
+  * For example `sort n/ b/`, 'Alice' will be at the top of the list. However, if there are multiple clients with the same name 'Alice',
+  the client who's birthday field is empty, will be sorted to the bottom of the other clients named 'Alice'.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -203,6 +231,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Sort**| `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br> e.g., `sort n/ desc p/`, `sort b/ a/`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **DeleteFiltered** | `deleteFiltered`
@@ -210,3 +239,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+

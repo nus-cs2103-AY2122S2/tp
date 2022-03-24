@@ -292,6 +292,44 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and
     * Cons: Lower abstraction especially when displaying the transaction to the UI. Inconsistent design
     in comparison to the `Person` class.
 
+### \[Proposed\] Sort functionality
+**Proposed implementation**
+
+The proposed sort mechanism is facilitated by `SortCommand`. It extends `Command` and the main logic of sort is in it's
+`execute` function which returns a `CommandResult` object.
+
+The `SortCommand#execute()` function would first parse the user's inputs. For every field parsed, the function would create a 
+`comparator` for that field using either of the functions:
+
+* `SortCommand#getComparatorDefault()` --- Creates a comparator with the field specified in ascending order
+* `SortCommand#getComparatorDescending()` --- Creates a comparator with the field specified in descending order
+
+One sort command allows for sorting multiple fields at a time in the order specified. Stating `sort n/ a/` means 
+sort the list by name in ascending order followed by the client's addresses. Clients with same name would be then
+sorted based on their addresses. 
+
+Thus, after creating the `comparator` for a particular field, it'll be added upon a previously created comparator using.
+
+To be able to sort the client's list, we exposed an operation in the `Model` interface as `Model#sortPersonList()`.
+We then passed the `comparator` created and passed it to `Model#sortPersonList()` in `SortCommand#execute()`.
+
+Java's `list` library will then handle the sorting based on the `comparator`.
+
+#### Design considerations:
+
+**Aspect: How it executes:**
+
+* **Alternative 1 (current choice):** Each field class will handle how to sort its own data, `SortCommand` will then
+wrap it into a comparator and pass to `Model#sortPersonList()`.
+  * Pros: Easy to implement, each field class can handle their own sorting of its data. Will not clutter `SortCommand`.
+  * Cons: Does not allow for more complicated chaining of fields since the way each field is being sorted is independent of the other.
+  
+
+* **Alternative 2:** `SortCommand` will determine how the fields are to be sorted.
+    * Pros: Allows `SortCommand` to have full flexibility in deciding how the fields are to be sorted and may allow for
+  more complicated chaining of fields.
+    * Cons: Will clutter `SortCommand` and may not be manageable once there are a lot of fields.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -325,14 +363,17 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- |--------------------------------------------| ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | business owner                                   | list all my clients information         | see my clients information.                 |
-| `* * *`  | business owner                                       | add a new client to CinnamonBun               |                                                                        |
-| `* * *`  | business owner                                       | edit a client’s information                | keep my client’s information updated.                                   |
-| `* * *`  | business owner                                       | delete a client information  | remove those who are no longer customers. |
-| `* *`    | business owner                                       | find a client based on keywords   | easily find a specific client or group of clients.                |
- | `* * *` | business owner                                 | Store a transaction of a particular client | easily keep track of unpaid transactions |
+| Priority | As a …​                                    | I want to …​                               | So that I can…​                                                       |
+| ------- |--------------------------------------------|--------------------------------------------| --------------------------------------------------------------------- |
+| `* * *` | business owner                                   | list all my clients information            | see my clients information.                 |
+| `* * *` | business owner                                       | add a new client to CinnamonBun            |                                                                       |
+| `* * *` | business owner                                       | edit a client’s information                | keep my client’s information updated.                                  |
+| `* * *` | business owner                                       | delete a client information                | remove those who are no longer customers. |
+| `* *`   | business owner                                       | find a client based on keywords            | easily find a specific client or group of clients.               |
+ | `* * *` | business owner                                 | store a transaction of a particular client | easily keep track of unpaid transactions |
+| `* * ` | business owner                                 | sort my clients based on certain field                        | easily sort and see the customers based on the field I want |
+
+
 *{More to be added}*
 
 ### Use cases
@@ -411,6 +452,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Sort customer list**
+
+**MSS**
+1. User inputs the fields the list is to be sorted on.
+2. AddressBook sorts the person list accordingly in order of the fields specified.
+3. The sorted list is displayed.
+
+**Extensions**
+* 1a. User inputs no fields
+  * 1a1. An error message is shown.
+
+    Use case resumes at step 1.
+* 1b. User inputs non-existent/not supported fields
+  * 1b1. An error message is shown
+  
+     Use case resumes at step 1
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -469,6 +528,18 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Sorting client's list
+1. Sorting the client's list based on certain fields
+   1. Prerequisites: There needs to be existing client data in the client's list.
+   2. Test case: `sort n/`<br>
+       Expected: The client's list will display the clients in ascending alphabetical order.
+   3. Test case: `sort n/ a/ p/ desc`<br>
+       Expected: The client's list will display the clients in ascending alphabetical order. Clients with the same name will
+       then be displayed according to their addresses in ascending order. And if they also have the same address, they'll be 
+        displayed based on their phone number in descending order.
+   4. Test case: `sort l:)/ djewijw p/`<br>
+      Expected: An error would be thrown as the fields specified do not exist.
 
 ### Saving data
 
