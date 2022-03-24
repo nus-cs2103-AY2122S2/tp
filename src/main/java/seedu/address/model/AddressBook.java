@@ -179,6 +179,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.getGroup(g).viewTask();
     }
 
+    /**
+     * Views student contacts from a specified group from the address book.
+     * The group must already exist in the address book.
+     */
+    public String viewContact(Group g) {
+        return groups.getGroup(g).viewContact();
+    }
+
     //// util methods
 
     @Override

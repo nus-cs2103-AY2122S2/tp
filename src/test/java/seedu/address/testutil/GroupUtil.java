@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.model.group.Group;
 
 public class GroupUtil {
@@ -16,7 +17,7 @@ public class GroupUtil {
     }
 
     /**
-     * Returns an delgroup command string for adding the {@code group}.
+     * Returns a delgroup command string for adding the {@code group}.
      */
     public static String getDeleteGroupCommand(Group group) {
         return DeleteGroupCommand.COMMAND_WORD + " " + getGroupDetails(group);
@@ -29,5 +30,12 @@ public class GroupUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_GROUP_NAME + group.getGroupName().groupName + " ");
         return sb.toString();
+    }
+
+    /**
+     * Returns a view contact command string for viewing student contacts the {@code group}.
+     */
+    public static String getViewContactCommand(Group group) {
+        return ViewContactCommand.COMMAND_WORD + " " + getGroupDetails(group);
     }
 }

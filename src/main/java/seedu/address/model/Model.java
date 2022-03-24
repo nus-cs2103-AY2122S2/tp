@@ -122,6 +122,13 @@ public interface Model {
     String viewTask(Group group);
 
     /**
+     * Views the student contacts into the specified group.
+     * {@code group} must exists in the address book.
+     *
+     */
+    String viewContact(Group group);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

@@ -19,7 +19,7 @@ import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCommand object.
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
