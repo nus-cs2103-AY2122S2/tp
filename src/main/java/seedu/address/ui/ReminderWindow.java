@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -21,7 +22,7 @@ public class ReminderWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
 
-    @javafx.fxml.FXML
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     /**
