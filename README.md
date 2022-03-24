@@ -4,10 +4,10 @@
 
 # Tracey
 
-* Tracey is a desktop app for **managing health statuses** of NUS students by administrative staffs, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tracey can get your student health status management tasks done faster than traditional GUI apps.
+* Tracey is a desktop app for **managing health statuses** of NUS Hall Residents by hall administrative staffs, resident fellows or CCA Leaders, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
 ## Example Usages
-* To facilitate the management of covid status tracking amongst the NUS population
+* To facilitate the management of covid status tracking amongst the Halls of NUS population
 
 ## Features
 Here are some of the current and upcoming features that Tracey can do!
@@ -16,7 +16,7 @@ Here are some of the current and upcoming features that Tracey can do!
 * Edit: editing a student's information in the system
 * Find: finding a student via keywords
 * Clear: clearing the system database
-* Summarise: Summarise data into a list for a comprehensive overview
+* Summarise: Summarise data into a list and pie-chart for a comprehensive overview
 * List: produces a list of students
 * Help: provide beneficial information for the user to use the app effectively
 * Saving: Automatically saves the data for you
