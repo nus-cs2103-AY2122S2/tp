@@ -292,7 +292,11 @@ The `editbuyer` / `editseller` command mechanism uses a similar interactions as 
 
 Note: All the prefix (like n/, p/, ...) are <b>optional</b>, you could omit any of them but at least one prefix should be provided, and the <b>order</b> of prefix does not matter.
 
-Below are some detailed steps while executing `editbuyer` / `editseller` command
+Below are some detailed steps while executing `editbuyer` / `editseller` command: 
+
+**We use ```addbuyer``` command as an example, the other command's flow are similar to this command as well.**
+
+---
 
 **Step 1:**
 
@@ -333,7 +337,12 @@ and the edit command will not be executed.
 
 Finally, the `CommandResult` is returned to be displayed by `UI` component (Refer to [Architecture](#architecture))
 
+The Sequence Diagrams below summarizes the various steps involved:
 
+
+![EditBuyerCommandDuagram](diagrams/EditBuyerCommandDiagram.png)
+
+---
 
 
 
