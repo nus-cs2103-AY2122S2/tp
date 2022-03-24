@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.DataType;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -32,6 +35,8 @@ public class DeleteApplicantCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_INTERVIEWS = "Deleted %d related interview(s)";
 
     private final Index targetIndex;
+
+    private final Logger logger = LogsCenter.getLogger(DeleteApplicantCommand.class);
 
     public DeleteApplicantCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -73,6 +78,7 @@ public class DeleteApplicantCommand extends DeleteCommand {
 
         for (Interview i : interviewsToDelete) {
             model.deleteInterview(i);
+            logger.log(Level.INFO, String.format("Deleted interview: %1$s", i));
         }
 
         return interviewsToDelete.size();
