@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-
-import javax.swing.*;
+import javax.swing.JFrame;
 
 import seedu.trackermon.model.Model;
+
 
 /**
  * Lists all shows in Trackermon to the user.
@@ -31,7 +31,10 @@ public class ExportCommand extends Command {
             this.model = model;
         }
 
-        public void run(){
+        /**
+         * Executes the FileExportThread for FileDialog to appear.
+         */
+        public void run() {
             System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
             System.setProperty("apple.awt.fileDialogForDirectories", "true");
 
