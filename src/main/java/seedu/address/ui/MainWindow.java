@@ -151,6 +151,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void useLightTheme() {
         Scene scene = primaryStage.getScene();
+        assert lightThemeUrl != null;
+        assert darkThemeUrl != null;
         if (scene.getStylesheets().contains(darkThemeUrl)) {
             scene.getStylesheets().remove(darkThemeUrl);
             scene.getStylesheets().add(lightThemeUrl);
@@ -163,6 +165,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void useDarkTheme() {
         Scene scene = primaryStage.getScene();
+        assert lightThemeUrl != null;
+        assert darkThemeUrl != null;
         if (scene.getStylesheets().contains(lightThemeUrl)) {
             scene.getStylesheets().remove(lightThemeUrl);
             scene.getStylesheets().add(darkThemeUrl);
