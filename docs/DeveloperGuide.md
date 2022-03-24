@@ -47,8 +47,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* The find feature was adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://github.com/AY2021S2-CS2103T-T12-4/tp) and [Stackoverflow](https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream).
-* The documentation was adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html) and [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+* The find feature and documentation were adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html), [stackoverflow](https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream) and [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 * The help window feature was adopted from the video [here](https://youtu.be/vego72w5kPU).
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -228,25 +227,31 @@ This section describes some noteworthy details on how certain features are imple
 Looks for a show in a list of shows and displays all the shows that match the user's input. If the user's input contains no prefixes, `find` will do a general search through all fields in the `Show` class.
 
 #### Implementation
-After entering the find command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax.Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. `FindCommand` is a class that inherits the `Command` abstract class. `FindCommand` implements the `execute()` method from the `Command` abstract class where on execution, it will scan through the shows in the model's list of shows and check if any shows match the user's input. The model is then udpated with the filtered show list.
+After entering the find command, the `ArgumentTokenizer` will map any prefixes in the user's input to Trackermon's prefix syntax.Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. `FindCommand` is a class that inherits the `Command` abstract class. `FindCommand` implements the `execute()` method from the `Command` abstract class where on execution, it will scan through the shows in the model's list of shows and check if any shows match the user's input. The model is then udpated with the filtered show list.
 
 Given below is an example usage scenario and the step-by-step flow of the find command.
 
-Step 1: The user launches Trackermon and enters `find n/Shingeki no Kyojin s/watching` to find a show.
+Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from local storage `Trackermon.json`.
 
-Step 2: The find command will check and see whether any shows contain the name `Shingeki no Kyojin` and the status `watching` using the `Model#updateFilteredShowList` method.
+Step 2: The user executes `find t/Anime t/Action` to find a show.
 
-Step 3:
-`Model#updateFilteredShowList` will be called and model will be updated.
+Step 3: The find command will check and see whether any shows contain the tags `Anime` and `Action` using the `Model#updateFilteredShowList` method.
+
+Step 4:
+`Model#updateFilteredShowList` will be called and model will be updated without modifying the original show list. If no shows match the keywords given by the user, an empty list will be displayed.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 `find Shingeki no Kyojin` will also work, however it will scan through the name, status and tag fields instead of the name field only
 </div>
 
+The following sequence diagram summarizes what happens when a user executes a valid find command on tags only: (Zoom in to view the sequence diagram)
+
+<img src="images/FindSequenceDiagram.png" width="2500px">
+
 The following activity diagram summarizes what happens when a user executes a valid find command:
 
-<img src="images/FindShowDiagram.png">
+<img src="images/FindShowDiagram.png" >
 
 #### Design considerations:
 ##### Aspect: How find executes
@@ -255,7 +260,7 @@ The following activity diagram summarizes what happens when a user executes a va
   - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.
 
 - **Alternative 2:** Directly check whether the show is in the show list in the find command parser without a predicate.
-  - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
+  - Pros: Developers can easily understand the code and its functionality as all the code is consolidated in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -820,59 +825,58 @@ testers are expected to do more *exploratory* testing.
    2. Test case: Find single keyword
       1. Command: `find shingeki` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list. <br>
-         E.g. `shingeki` from name, status, or tag fields will be matched.
-
+         E.g. `shingeki` from name, status, or tag fields will be matched.<br><br>
+      
    3. Test case: Find multiple keywords
       1. Command: `find shingeki shutter` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list. <br>
-         E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+         E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched (`OR` search).
    
       2. Command: `find 86 shutter` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list. <br>
-         E.g. `86` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+         E.g. `86` or `shutter` from name, status, or tag fields will be matched (`OR` search).
    
    4. Test case: Invalid command format
       1. Command: `find` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
    
    5. Test case: Unknown command
       1. Command: `find2` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Unknown command`
-
-
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`.<br><br>
+      
 2. Find a show (Precise Find)
    1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
    
    2. Test case: Finding with a single prefix
       1. Command: `find n/shingeki` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` then displays them on the show list. <br>
-         E.g. `shingeki` from the name field will be matched.
+         E.g. `shingeki` from the name field will be matched.<br><br>
       2. Command: `find n/shingeki no kyojin` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list. <br>
-         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched. (`AND` search within a single prefix).
+         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched (`AND` search within a single prefix).<br><br>
    
    3. Test case: Finding with multiple prefixes
       1. Command: `find n/shingeki s/completed` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and the status field for any partial or full word of `completed` then displays them on the show list. <br>
-         E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched. (`AND` search between multiple prefixes).
+         E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched (`AND` search between multiple prefixes).
    
       2. Command: `find n/shingeki t/seinen` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
-         E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched. (`AND` search between multiple prefixes).
+         E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched (`AND` search between multiple prefixes).
    
       3. Command: `find n/shingeki no kyojin t/seinen` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
-         E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched. (`AND` search within a single prefix and `AND` search between multiple prefixes).
+         E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched (`AND` search within a single prefix and `AND` search between multiple prefixes).
    
    4. Test case: Invalid command format
       1. Command: `find n/` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
       2. Command: `find t/Action Anime` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying <br> `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
    
-   5. Test case: Multiple same prefix
+   5. Test case: Multiple of the same prefix
       1. Command: `find n/shingeki n/shutter` <br>
-         Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list. (Ignores the first instance of n/) <br>
+         Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list (Ignores the first instance of n/) <br>
          E.g. `shutter` from the name field will be matched.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
