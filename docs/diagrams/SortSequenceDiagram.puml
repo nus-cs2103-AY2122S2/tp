@@ -68,6 +68,8 @@ deactivate CommandResult
 
 SortCommand --> LogicManager
 deactivate SortCommand
+
+SortCommand -[hidden]-> LogicManager
 destroy SortCommand
 
 [<--LogicManager
