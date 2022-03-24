@@ -1,11 +1,9 @@
 package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.trackermon.model.Model.PREDICATE_SHOW_ALL_SHOWS;
 
 import java.awt.FileDialog;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,15 +39,18 @@ public class ExportCommand extends Command {
             FileDialog fd = new FileDialog(F, "Choose a location to save Trackermon data: ", FileDialog.SAVE);
             fd.setFile("trackermon.json");
             fd.setVisible(true);
-            File f = new File(fd.getFile());
-            Path exportPath = Path.of(fd.getDirectory(), f.getName());
-            Path dataPath = model.getShowListFilePath();
-            System.out.println(exportPath);
-            try {
-                Files.copy(dataPath, exportPath, StandardCopyOption.REPLACE_EXISTING);
-                isSuccess = true;
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            if (fd.getFile() != null) {
+                File f = new File(fd.getFile());
+                Path exportPath = Path.of(fd.getDirectory(), f.getName());
+                Path dataPath = model.getShowListFilePath();
+                System.out.println(exportPath);
+                try {
+                    Files.copy(dataPath, exportPath, StandardCopyOption.REPLACE_EXISTING);
+                    isSuccess = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -72,9 +73,6 @@ public class ExportCommand extends Command {
             e.printStackTrace();
             test.interrupt();
         }
-//        if (test.getSuccess()) {
-//            return new CommandResult(MESSAGE_SUCCESS);
-//        }
         return new CommandResult(MESSAGE_FAIL);
     }
 }

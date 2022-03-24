@@ -43,19 +43,21 @@ public class ImportCommand extends Command {
             FileDialog fd = new FileDialog(F, "Choose a file to import Trackermon data: ", FileDialog.LOAD);
             fd.setFile("Trackermon.json");
             fd.setVisible(true);
-            File f = new File(fd.getFile());
-            if (!f.getName().toLowerCase().endsWith(".json")) {
-                isCorrectFileType = false;
-                return;
-            }
+            if (fd.getFile() != null) {
+                File f = new File(fd.getFile());
+                if (!f.getName().toLowerCase().endsWith(".json")) {
+                    isCorrectFileType = false;
+                    return;
+                }
 
-            Path importPath = Path.of(fd.getDirectory(), f.getName());
-            Path dataPath = model.getShowListFilePath();
-            try {
-                Files.copy(importPath, dataPath, StandardCopyOption.REPLACE_EXISTING);
-                isSuccess = true;
-            } catch (IOException e) {
-                e.printStackTrace();
+                Path importPath = Path.of(fd.getDirectory(), f.getName());
+                Path dataPath = model.getShowListFilePath();
+                try {
+                    Files.copy(importPath, dataPath, StandardCopyOption.REPLACE_EXISTING);
+                    isSuccess = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -83,12 +85,9 @@ public class ImportCommand extends Command {
             e.printStackTrace();
             test.interrupt();
         }
-//        if (test.getSuccess()) {
-//            return new CommandResult(MESSAGE_SUCCESS, false, false, true);
-//        }
-//        if (!test.getCorrectFileType()) {
-//            return new CommandResult(MESSAGE_FAIL_WRONG_FILETYPE);
-//        }
+        if (!test.getCorrectFileType()) {
+            return new CommandResult(MESSAGE_FAIL_WRONG_FILETYPE);
+        }
         return new CommandResult(MESSAGE_FAIL);
     }
 }
