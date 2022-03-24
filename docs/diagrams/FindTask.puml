@@ -63,3 +63,4 @@ deactivate CommandResult
 
 FindCommand --> LogicManager : :CommandResult
 @enduml
+
