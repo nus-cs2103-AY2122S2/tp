@@ -274,6 +274,23 @@ user to replace the list of students with an empty one. Previous data are swiped
 
 </div>
 
+### Edit feature
+
+The edit mechanism implements the following sequence for the method call execute("edit").
+
+This feature is enhance so that if the field values for the tag is the same as the field value of the corresponding person in the address book, then an exception will be thrown.
+
+eg.
+Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`
+`edit 1 f/SOC` will throw an exception since the field value to be edited is the same, while `edit 1 f/FASS` will proceed to update the field value of the perosn.
+
+**Path Execution of Edit Feature Activity Diagram is shown below:**
+![ClearFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
