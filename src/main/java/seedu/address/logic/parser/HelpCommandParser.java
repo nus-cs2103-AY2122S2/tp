@@ -22,8 +22,11 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args);
 
+        if (argMultimap.getPreamble().length() == 0) {
+            return new HelpCommand();
+        }
+        System.out.println(argMultimap.getPreamble());
         Command.CommandEnum command;
-
         try {
             command = ParserUtil.parseCommand(argMultimap.getPreamble());
         } catch (ParseException pe) {
