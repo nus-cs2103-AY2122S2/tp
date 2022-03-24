@@ -1,0 +1,21 @@
+@startuml
+start
+:User executes addgroup command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+else ([else])
+    if () then ([Group name already exists in ArchDuke])
+    : Show duplicate group error message;
+    else([else])
+    : Add group to the group list;
+    : Displays group in the GUI;
+    endif
+
+endif
+stop
+@enduml
