@@ -45,7 +45,7 @@ class JsonAdaptedService {
     ServiceName getModelName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ServiceName.class.getSimpleName()));
+                ServiceName.class.getSimpleName()));
         }
         if (!ServiceName.isValidName(name)) {
             throw new IllegalValueException(ServiceName.MESSAGE_CONSTRAINTS);
@@ -63,7 +63,8 @@ class JsonAdaptedService {
 
     Duration getModelDuration() throws IllegalValueException {
         if (duration == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Duration.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Duration.class.getSimpleName()));
         }
 
         return new Duration(duration);
