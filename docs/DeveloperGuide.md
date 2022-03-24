@@ -75,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EntityListPanel`*, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-*`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`).
+*`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`, `Assessment`).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -123,19 +123,58 @@ How the parsing works:
 The `Model` component,
 
 * stores the TAssist data i.e., all `Student`, `TaModule`, `ClassGroup`, `Assessment` objects (which are contained in `UniqueStudentList`, `UniqueModuleList`, `UniqueClassGroupList`, `UniqueAssessmentList` objects respectively).
-* stores the currently 'selected' `Student`/`TaModule`/`ClassGroup`/`Assessment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>`/`ObservableList<TaModule>`/`ObservableList<ClassGroup>`/`ObservableList<Assessment>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Student`/`TaModule`/`ClassGroup`/`Assessment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>`/`ObservableList<TaModule>`
+/`ObservableList<ClassGroup>`/`ObservableList<Assessment>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+* An `Entity` object is a generic object that can be used to represent instances of  `Student`/`TaModule`/`ClassGroup`/`Assessment`.
+* Module are named `TaModule` due to conflict with Java classes.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Alternative (arguably, more OOP) models are given below.<br>
-
-<img src="images/BetterModelStudentClassDiagram.png" width="450" />
-
-<img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
-
-<img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
-
-<img src="images/BetterModelAssessmentClassDiagram.png" width="450" />
+<table class="c20">
+    <tbody>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+               <B>Entity</B>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+               <B>Class Diagram</B>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+               Student
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+               <img src="images/BetterModelStudentClassDiagram.png" width="450" />
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+               TaModule
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+               <img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+               Class Group
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+               <img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+               Assessment
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+               <img src="images/BetterModelAssessmentClassDiagram.png" width="450" />
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
 
@@ -829,6 +868,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **NUS**: The National University of Singapore
 * **Student**: A student in NUS
 * **TA**: A Teaching Assistant in NUS SoC
+* **TaModule**: Represents a Module. Named differently due to conflict with Java class.
 
 --------------------------------------------------------------------------------------------------------------------
 
