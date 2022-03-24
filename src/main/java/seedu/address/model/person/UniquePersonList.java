@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -237,6 +238,32 @@ public class UniquePersonList implements Iterable<Person> {
         if (!isPersonFound) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Iterates through each {@code Person}, and checks if the {@code Person} who is taking {@code ModuleCode}
+     * has the specified {@code Task} in his/her {@code TaskList}. If the specified {@Code Task} is present,
+     * the completion status will be extracted out into a resulting HashMap.
+     *
+     *
+     * @param moduleCode target moduleCode to be compared with.
+     * @param task target task to be compared with.
+     * @return LinkedHashMap containing valid person/completion status pair.
+     */
+    public LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
+        requireNonNull(task);
+        LinkedHashMap<Person, Boolean> result = new LinkedHashMap<Person, Boolean>();
+
+        // iterate through each student, and check if their respective TaskList contain the specified task
+        for (Person currPerson: internalList) {
+            TaskList currTaskList = currPerson.getTaskList();
+            if (currPerson.getModuleCode().equals(moduleCode)
+                    && currTaskList != null && currTaskList.isTaskAlreadyPresent(task)) {
+                result.put(currPerson, currTaskList.isTaskPresentAndCompleted(task));
+            }
+        }
+        return result;
     }
 
     /**

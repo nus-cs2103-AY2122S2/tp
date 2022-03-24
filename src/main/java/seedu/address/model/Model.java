@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -100,12 +101,20 @@ public interface Model {
      * The {@code task} should be an existing unmarked assigned task.
      */
     void markTaskOfPerson(StudentId studentId, Index index);
+
     /**
      * Unmarks {@code Task} to {@code person} with {@code studentId}.
      * A person with {@code studentId} must exist in the address book.
      * The {@code task} should be an existing marked assigned task.
      */
     void unmarkTaskOfPerson(StudentId studentId, Index index);
+
+    /**
+     * Returns a key-value pair between each {@code person} and the completion status of a task,
+     * if the person is taking the specified module and is being assigned with the specified task.
+     * The {@code task} must not be null.
+     */
+    LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
