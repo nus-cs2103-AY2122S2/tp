@@ -10,6 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.candidate.ApplicationStatus.ACCEPTED_STATUS;
+import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
+import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -222,6 +225,7 @@ public class EditCommand extends Command {
 
         public void setApplicationStatus(ApplicationStatus applicationStatus) {
             this.applicationStatus = applicationStatus;
+            triggerInterviewStatus(applicationStatus);
         }
 
         public Optional<ApplicationStatus> getApplicationStatus() {
@@ -285,6 +289,19 @@ public class EditCommand extends Command {
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getInterviewStatus().equals(e.getInterviewStatus())
                     && getAvailability().equals(e.getAvailability());
+        }
+
+
+        /**
+         * Allows the {@code InterviewStatus} to be triggered by ApplicationStatus.
+         */
+        public void triggerInterviewStatus(ApplicationStatus applicationStatus) {
+            if (getApplicationStatus().isPresent()) {
+                if (applicationStatus.toString().equals(ACCEPTED_STATUS)
+                        || applicationStatus.toString().equals(REJECTED_STATUS)) {
+                    setInterviewStatus(new InterviewStatus(COMPLETED));
+                }
+            }
         }
     }
 }
