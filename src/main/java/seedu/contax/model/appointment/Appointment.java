@@ -10,7 +10,7 @@ import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 
 /**
- * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass
+ * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass.
  * {@link ScheduleItem}.
  */
 public class Appointment extends ScheduleItem {
@@ -34,7 +34,8 @@ public class Appointment extends ScheduleItem {
      * @param person A valid Person or null.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
-        super(getStartDateTimeOrThrow(startDateTime), getEndDateTimeOrThrow(startDateTime, duration));
+        super(Appointment.getStartDateTimeOrThrow(startDateTime),
+                Appointment.getEndDateTimeOrThrow(startDateTime, duration));
         requireNonNull(name);
 
         this.name = name;
@@ -47,6 +48,7 @@ public class Appointment extends ScheduleItem {
         return this.name;
     }
 
+    @Override
     public LocalDateTime getStartDateTime() {
         return this.startDateTime.value;
     }
@@ -78,6 +80,7 @@ public class Appointment extends ScheduleItem {
      *
      * @return The end DateTime of this appointment.
      */
+    @Override
     public LocalDateTime getEndDateTime() {
         return getStartDateTimeObject().value.plusMinutes(getDuration().value);
     }
@@ -96,11 +99,11 @@ public class Appointment extends ScheduleItem {
             return false;
         }
 
-        Appointment otherPerson = (Appointment) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getStartDateTimeObject().equals(getStartDateTimeObject())
-                && otherPerson.getDuration().equals(getDuration())
-                && Objects.equals(otherPerson.getPerson(), getPerson());
+        Appointment otherAppointment = (Appointment) other;
+        return otherAppointment.getName().equals(getName())
+                && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
+                && otherAppointment.getDuration().equals(getDuration())
+                && Objects.equals(otherAppointment.getPerson(), getPerson());
     }
 
     @Override

@@ -316,14 +316,24 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         }
     }
 
+    /**
+     * Returns the earlier of the 2 supplied {@code LocalDateTime} objects.
+     */
     private LocalDateTime getEarlier(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        requireNonNull(dateTime1);
+        requireNonNull(dateTime2);
         if (dateTime1.isAfter(dateTime2)) {
             return dateTime2;
         }
         return dateTime1;
     }
 
+    /**
+     * Returns the later of the 2 supplied {@code LocalDateTime} objects.
+     */
     private LocalDateTime getLater(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        requireNonNull(dateTime1);
+        requireNonNull(dateTime2);
         if (dateTime1.isAfter(dateTime2)) {
             return dateTime1;
         }

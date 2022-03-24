@@ -75,7 +75,7 @@ public class AppointmentSlotCard extends UiPart<Region> {
     }
 
     /**
-     * Translates a numeric minutes into a more human-readable format.
+     * Translates a numeric minutes into a human-readable format.
      *
      * @param minutes The number of minutes to translate.
      * @return A string representing the supplied number of minutes.
@@ -84,19 +84,19 @@ public class AppointmentSlotCard extends UiPart<Region> {
         long computedHours = minutes / 60;
         long computedMinutes = minutes % 60;
 
-        if (computedHours > 2400) {
+        if (computedHours > 240) {
             return "More than 10 days";
         }
 
         String displayDuration = "";
         if (computedHours > 0) {
-            displayDuration = computedHours + " Hours ";
+            displayDuration = computedHours + (computedHours > 1 ? " Hours " : " Hour ");
         }
         if (computedHours > 0 && computedMinutes > 0) {
             displayDuration += "and ";
         }
         if (computedMinutes > 0) {
-            displayDuration += computedMinutes + " Minutes";
+            displayDuration += computedMinutes + (computedMinutes > 1 ? " Minutes" : " Minute");
         }
         return displayDuration;
     }

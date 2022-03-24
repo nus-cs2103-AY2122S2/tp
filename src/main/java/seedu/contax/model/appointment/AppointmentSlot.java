@@ -8,6 +8,11 @@ import seedu.contax.model.chrono.TimeRange;
  */
 public class AppointmentSlot extends ScheduleItem {
 
+    /**
+     * Constructs an {@code AppointmentSlot} object.
+     *
+     * @param slotRange The time period of the AppointmentSlot.
+     */
     public AppointmentSlot(TimeRange slotRange) {
         super(slotRange);
     }

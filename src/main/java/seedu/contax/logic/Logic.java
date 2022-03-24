@@ -18,6 +18,7 @@ import seedu.contax.model.tag.Tag;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
@@ -32,13 +33,13 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of persons. */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the list of appointments and highlighted empty slots */
+    /** Returns an unmodifiable view of the list of appointments and highlighted empty slots. */
     ObservableList<ScheduleItem> getScheduleItemList();
 
-    /** Returns an unmodifiable view of the filtered list of tags */
+    /** Returns an unmodifiable view of the filtered list of tags. */
     ObservableList<Tag> getFilteredTagList();
 
     /**

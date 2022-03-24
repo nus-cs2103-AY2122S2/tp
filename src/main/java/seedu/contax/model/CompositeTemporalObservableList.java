@@ -49,17 +49,17 @@ public class CompositeTemporalObservableList<T extends TemporalComparable> {
      */
     private void attachListeners() {
         this.backingList1.addListener((InvalidationListener) (change) -> {
-            this.onChangeListener();
+            this.refreshCombinedList();
         });
         this.backingList2.addListener((InvalidationListener) (change) -> {
-            this.onChangeListener();
+            this.refreshCombinedList();
         });
     }
 
     /**
      * Merges the 2 backing lists into a single resultant list using the Merge operation from MergeSort.
      */
-    private void onChangeListener() {
+    private void refreshCombinedList() {
         // Merge sorted lists
         int apptListIdx = 0;
         int slotListIdx = 0;

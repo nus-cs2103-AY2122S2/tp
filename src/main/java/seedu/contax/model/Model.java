@@ -179,7 +179,7 @@ public interface Model {
      */
     void setAppointment(Appointment target, Appointment editedAppointment);
 
-    /** Returns an unmodifiable view of the filtered appointment list */
+    /** Returns an unmodifiable view of the filtered appointment list. */
     ObservableList<Appointment> getFilteredAppointmentList();
 
     /**
@@ -188,7 +188,7 @@ public interface Model {
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 
-    /** Returns an unmodifiable view of the slots between appointments to be highlighted */
+    /** Returns an unmodifiable view of the slots between appointments to be highlighted. */
     ObservableList<AppointmentSlot> getDisplayedAppointmentSlots();
 
     /**
@@ -199,12 +199,12 @@ public interface Model {
     void setDisplayedAppointmentSlots(List<AppointmentSlot> items);
 
     /**
-     * Clears the slots between appointments that should be highlighted.
+     * Clears all the highlighted empty slots in the Schedule.
      */
     void clearDisplayedAppointmentSlots();
 
     /**
-     * Returns a list of {@code ScheduleItems}.
+     * Returns a list of {@code ScheduleItems} currently in the Schedule.
      */
     ObservableList<ScheduleItem> getScheduleItemList();
 

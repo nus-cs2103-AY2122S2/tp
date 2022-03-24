@@ -8,7 +8,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
@@ -62,7 +61,7 @@ public class AppointmentsBetweenCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
-        model.setDisplayedAppointmentSlots(List.of());
+        model.clearDisplayedAppointmentSlots();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, rangeStart.format(formatter), rangeEnd.format(formatter)),

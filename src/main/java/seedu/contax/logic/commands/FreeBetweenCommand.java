@@ -36,7 +36,7 @@ public class FreeBetweenCommand extends Command {
             + PREFIX_DATE_START + "22-10-2022 "
             + PREFIX_TIME_START + "12:30 "
             + PREFIX_DATE_END + "22-10-2022 "
-            + PREFIX_TIME_END + "16:30"
+            + PREFIX_TIME_END + "16:30 "
             + PREFIX_DURATION + "45`";
 
     public static final String MESSAGE_SUCCESS = "Listed all slots of at least %d minutes from %s to %s.";
