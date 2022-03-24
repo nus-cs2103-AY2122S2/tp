@@ -1,10 +1,12 @@
 package seedu.address.model.person.comparators;
 
-import seedu.address.model.person.Person;
-
 import java.util.Comparator;
 
+import seedu.address.model.person.Person;
+
 public class PersonFlagComparator implements Comparator<Person> {
+
+    @Override
     public int compare(Person person1, Person person2) {
         boolean person1IsFlagged = person1.getFlag().isFlagged;
         boolean person2IsFlagged = person2.getFlag().isFlagged;

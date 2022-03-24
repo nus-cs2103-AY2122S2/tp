@@ -1,9 +1,9 @@
 package seedu.address.model.person.comparators;
 
+import java.util.Comparator;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
-import java.util.Comparator;
 
 public class PersonNameComparator extends PersonFlagComparator implements Comparator<Person> {
     @Override
