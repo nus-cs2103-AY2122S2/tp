@@ -42,7 +42,7 @@ public class PriceRange {
      * @return True if PriceRange is valid, False otherwise.
      */
     public static boolean isValidPriceRange(int lower, int upper) {
-        return lower >= 0 && upper >= 0 && lower <= upper;  //valid as long as positive and lower is lower than upper
+        return lower >= 0 && upper >= 0 && lower <= upper; //valid as long as positive and lower is lower than upper
     }
 
     public int getLower() {
