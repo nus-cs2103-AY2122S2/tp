@@ -7,6 +7,7 @@ import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.BatchCommand;
+import seedu.contax.model.util.BatchType;
 import seedu.contax.model.util.SearchType;
 
 /**
@@ -40,7 +41,7 @@ public class BatchCommandParserTest {
         String sampleUserInput = "editperson p/321 by/name =/123";
         BatchCommand expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_NAME), "123", "", "");
+                        new SearchType(SearchType.TYPE_NAME), "123", BatchType.EQUALS);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
     }
 
@@ -49,22 +50,22 @@ public class BatchCommandParserTest {
         String sampleUserInput = "editperson p/321 by/name =/123";
         BatchCommand expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_NAME), "123", "", "");
+                        new SearchType(SearchType.TYPE_NAME), "123", BatchType.EQUALS);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/phone =/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_PHONE), "123", "", "");
+                        new SearchType(SearchType.TYPE_PHONE), "123", BatchType.EQUALS);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/email =/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_EMAIL), "123", "", "");
+                        new SearchType(SearchType.TYPE_EMAIL), "123", BatchType.EQUALS);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/address =/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_ADDRESS), "123", "", "");
+                        new SearchType(SearchType.TYPE_ADDRESS), "123", BatchType.EQUALS);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
     }
 
@@ -73,22 +74,22 @@ public class BatchCommandParserTest {
         String sampleUserInput = "editperson p/321 by/name start/123";
         BatchCommand expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_NAME), "", "123", "");
+                        new SearchType(SearchType.TYPE_NAME), "123", BatchType.START);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/phone start/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_PHONE), "", "123", "");
+                        new SearchType(SearchType.TYPE_PHONE), "123", BatchType.START);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/email start/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_EMAIL), "", "123", "");
+                        new SearchType(SearchType.TYPE_EMAIL), "123", BatchType.START);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/address start/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_ADDRESS), "", "123", "");
+                        new SearchType(SearchType.TYPE_ADDRESS), "123", BatchType.START);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
     }
 
@@ -97,22 +98,22 @@ public class BatchCommandParserTest {
         String sampleUserInput = "editperson p/321 by/name end/123";
         BatchCommand expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_NAME), "", "", "123");
+                        new SearchType(SearchType.TYPE_NAME), "123", BatchType.END);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/phone end/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_PHONE), "", "", "123");
+                        new SearchType(SearchType.TYPE_PHONE), "123", BatchType.END);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/email end/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_EMAIL), "", "", "123");
+                        new SearchType(SearchType.TYPE_EMAIL), "123", BatchType.END);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
         sampleUserInput = "editperson p/321 by/address end/123";
         expectedBatchCommand =
                 new BatchCommand("editperson p/321",
-                        new SearchType(SearchType.TYPE_ADDRESS), "", "", "123");
+                        new SearchType(SearchType.TYPE_ADDRESS), "123", BatchType.END);
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
     }
 
@@ -121,7 +122,7 @@ public class BatchCommandParserTest {
         String sampleUserInput = "list";
         BatchCommand expectedBatchCommand =
                 new BatchCommand("list",
-                        new SearchType(SearchType.TYPE_NAME), "123", "", "");
+                        new SearchType(SearchType.TYPE_NAME), "123", null);
         assertParseFailure(parser, sampleUserInput, MESSAGE_INVALID_FORMAT);
 
     }

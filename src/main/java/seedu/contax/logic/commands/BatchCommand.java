@@ -18,6 +18,7 @@ import seedu.contax.logic.parser.ParserUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.util.BatchType;
 import seedu.contax.model.util.SearchType;
 
 
@@ -44,48 +45,33 @@ public class BatchCommand extends Command {
 
     private final String commandInput;
     private final SearchType searchType;
-    private final String equalsText;
-    private final String startText;
-    private final String endText;
+    private final String userValue;
+    private final BatchType batchType;
 
     /**
      * Creates an BatchCommand base on specified {@code commandInput} {@code searchType} and {@code userInput}.
      *
      * @param commandInput              details to word of command
      * @param searchType                search type of field apply matcher
-     * @param equalsText                equals provided by user
-     * @param startText                equals provided by user
-     * @param endText                equals provided by user
+     * @param userValue                 value provided by user
+     * @param batchType                 match type by user
      */
     public BatchCommand(String commandInput, SearchType searchType,
-                        String equalsText, String startText, String endText) {
+                        String userValue, BatchType batchType) {
         requireNonNull(commandInput);
         requireNonNull(searchType);
 
         this.commandInput = commandInput;
         this.searchType = searchType;
-        this.equalsText = equalsText;
-        this.startText = startText;
-        this.endText = endText;
+        this.userValue = userValue;
+        this.batchType = batchType;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        String userValue = "";
-        List<Index> indexList = new ArrayList<>();
-        if (!equalsText.isEmpty()) {
-            userValue = equalsText;
-            indexList = matchInputStringToIndex(model, searchType, userValue, "=");
-        } else if (!startText.isEmpty()) {
-            userValue = startText;
-            indexList = matchInputStringToIndex(model, searchType, userValue, "start");
-        } else if (!endText.isEmpty()) {
-            userValue = endText;
-            indexList = matchInputStringToIndex(model, searchType, userValue, "end");
-        } else {
-            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchCommand.MESSAGE_USAGE));
-        }
+
+        List<Index> indexList = matchInputStringToIndex(model, searchType, userValue, batchType);
         if (indexList.size() == 0) {
             return new CommandResult(COMMAND_WORD
                     + ": No result matching \"" + userValue + "\"");
@@ -116,11 +102,12 @@ public class BatchCommand extends Command {
      * @param model         model passed from execution
      * @param searchType    the field that user search to compare for
      * @param userValue     user input value
-     * @param matchType     equals, start or end with
+     * @param batchType     equals, start or end with
      * @return              list of index that match given condition
      */
-    private List<Index> matchInputStringToIndex(Model model,
-                                                SearchType searchType, String userValue, String matchType) {
+    private List<Index> matchInputStringToIndex(
+            Model model, SearchType searchType, String userValue, BatchType batchType)
+            throws CommandException {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
         for (int i = 0; i < personList.size(); i++) {
@@ -143,12 +130,25 @@ public class BatchCommand extends Command {
                 break;
             }
             if (!targetField.isEmpty()) {
-                if (matchType.equals("=") && targetField.equals(userValue)) {
-                    indexList.add(index);
-                } else if (matchType.equals("start") && targetField.startsWith(userValue)) {
-                    indexList.add(index);
-                } else if (matchType.equals("end") && targetField.endsWith(userValue)) {
-                    indexList.add(index);
+                switch (batchType) {
+                case EQUALS:
+                    if (targetField.equals(userValue)) {
+                        indexList.add(index);
+                    }
+                    break;
+                case START:
+                    if (targetField.startsWith(userValue)) {
+                        indexList.add(index);
+                    }
+                    break;
+                case END:
+                    if (targetField.endsWith(userValue)) {
+                        indexList.add(index);
+                    }
+                    break;
+                default:
+                    throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            BatchCommand.MESSAGE_USAGE));
                 }
             }
         }
@@ -161,8 +161,7 @@ public class BatchCommand extends Command {
                 || (other instanceof BatchCommand // instanceof handles nulls
                 && commandInput.equals(((BatchCommand) other).commandInput)
                 && searchType.equals(((BatchCommand) other).searchType)
-                && equalsText.equals(((BatchCommand) other).equalsText)
-                && startText.equals(((BatchCommand) other).startText)
-                && endText.equals(((BatchCommand) other).endText));
+                && userValue.equals(((BatchCommand) other).userValue)
+                && batchType.equals(((BatchCommand) other).batchType));
     }
 }
