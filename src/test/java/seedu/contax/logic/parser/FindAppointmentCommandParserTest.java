@@ -25,7 +25,7 @@ public class FindAppointmentCommandParserTest {
     @Test
     public void parse_invalidSearchType_throwsParseException() {
         // multiple whitespaces between keywords
-        assertParseFailure(parser, "\n John \n \t Bob  \t by/" + "phone", "Search type should only be person");
+        assertParseFailure(parser, "\n John \n \t Bob  \t by/" + "phone", "Search type should only be person or name");
     }
 
     @Test
