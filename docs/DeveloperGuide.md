@@ -50,6 +50,13 @@ The left column shows the sellers, while the right column shows the buyers.
 
 Two `Person` make a match if one has at least one `property` that matches the other's `preference`.
 
+## Help Feature and Window
+The `help` command and selecting help from the dropdown opens the `helpwindow`.
+
+The contents of `helpPanePlaceHolder` is then replaced according to which tab
+that the user has selected to view more details about a specific feature or general features
+of Realestatepro
+
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
 
@@ -74,6 +81,35 @@ The latter two specifies the expected range of money the buyer would like to pay
 The `UserType` represents an attribute that is added to a `Person` & represents the `Person` as a `buyer` or `seller`. A `Person` is only either a `buyer` or `seller` at a given time. They cannot be both or none. The `UserType` of a `Person` is derived from the presence of a `Property` or `Preference`. If the `Person` has a `Property`, then they are a `seller`, but if the person has a `Preference`, then they are a `buyer`.
 
 Unlike other attributes of a `Person`, the `UserType` of a `Person` cannot be edited _directly_ via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa if the person's property or preference is changed. This can be done with the command: `edit INDEX pr/PROPERTY_DETAILS` or `edit INDEX pf/PREFERENCE_DETAILS`. This means editing a `Person` to have a `Property` instead of a `Preference` will change them from a `buyer` (had a `Preference` initially) to a `seller` (now has a `Property`). In other cases where other attributes of a `Person` are being edited, e.g. phone number, address, the `UserType` of that `Person` being edited will remain the same.
+
+## [Proposed] Upload Image
+The upload image feature is implemented by storing a set of `UserImage` containing
+a `FilePath` to an image file and optional `description` of the image. A `LinkedHashSet` in order
+to retain order based on the order of insertion.
+
+- `UserImage` -- Contains all information needed to display the image that has been associated with the person
+- `FilePath` -- Leads to a file that is located in the user's system
+
+There are two commands that are associated with the feature which are namely `upload` and `viewimage`.
+
+Below is an example usage scenerio and the behaviour of the program:
+
+Step 1: User calls the `upload` command.
+`UploadCommandParser` would then be used to parse the command inputted to obtain the `index` of the `Person` to add
+the image with, the `filepath` to the file which is checked whether it is an existing file and
+the `description` if provided.
+
+Step 2: A `UserImage` is created from the parameters obtained from `UploadCommandParser` that checks to ensure that the
+file `FilePath` leads to is an image before adding it to the
+`Person`.
+
+Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parsers to get the `index` of the `Person` to
+view the all the `UserImage` in the `Person`.
+
+Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`.
+The `viewImageWindow` is the displayed after it retrieves the set from `model`
+
+Step 5: The set of `UserImage` is then converted into a `ArrayList` and the first image is displayed in the window.
 
 # Documentation, logging, testing, configuration, dev-ops
 
