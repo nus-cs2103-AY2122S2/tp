@@ -44,8 +44,16 @@ public class ShowDetailsCard extends UiPart<Region> {
     /**
      * Creates a {@code ShowCard} with the given {@code Show} and index to display.
      */
+    public ShowDetailsCard() {
+        this(null);
+    }
+
+    /**
+     * Creates a {@code ShowCard} with the given {@code Show} and index to display.
+     */
     public ShowDetailsCard(Show show) {
         super(FXML);
+        this.show = show;
         name.setOpaqueInsets(Insets.EMPTY);
     }
 
@@ -63,6 +71,8 @@ public class ShowDetailsCard extends UiPart<Region> {
         if (!isShowExists) {
             return;
         }
+
+        assert show != null;
 
         this.show = show;
         name.setText(show.getName().fullName);
@@ -96,22 +106,5 @@ public class ShowDetailsCard extends UiPart<Region> {
         int count = (int) Math.ceil(rowHeight / singleHeight);
 
         textArea.setPrefHeight(count * fontHeight);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ShowDetailsCard)) {
-            return false;
-        }
-
-        // state check
-        ShowDetailsCard card = (ShowDetailsCard) other;
-        return show.equals(card.show);
     }
 }

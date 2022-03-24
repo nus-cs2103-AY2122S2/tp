@@ -12,14 +12,14 @@ They can easily look up the list of shows if they need to.
 * [**Quick Start**](#quick-start)
 * [**Features**](#features)
   * [Adding a show: `add`](#adding-a-show-add)
-  * [Listing a show: `list`](#listing-all-shows-list)
+  * [Listing all shows: `list`](#listing-all-shows-list)
   * [Requesting help URL: `help`](#requesting-help-url-help)
   * [Finding a show: `find`](#finding-a-show-find)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
   * [Editing a show: `edit`](#editing-a-show-edit)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
-  * [Better Find [coming in v1.3]](#better-find-coming-in-v13)
+  * [Sorting the data](#sorting-the-data)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
@@ -135,7 +135,7 @@ Format: `find <KEYWORD>`
 
 Examples:
 * `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name, status or tag.[put image here after ui update]
-* * `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name, status or tag.[put image here after ui update]
+* `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name, status or tag.[put image here after ui update]
 
 **Precise Find** Finds shows in Trackermon by matching the user's input across name, status and tag parameters with prefixes.
 
@@ -214,6 +214,23 @@ Trackermon data are saved in the hard disk automatically after any command that 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+### Sorting the data
+
+Sort shows based on the input prefix. 
+
+Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
+* Use sna/ to sort name in ascending order.
+* Use snd/ to sort name in descending order.
+* Use ssa/ to sort status in ascending order.
+* Use ssd/ to sort status in descending order.
+* If there are no prefix, it will sort by name in ascending order.
+* If both prefixes for ascending and descending are used for the same attribute, it will only sort by ascending.
+* If both prefixes for name and status are used, by default, it will sort by name then status.
+* Use so/ to sort by status then name.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
 
 ## FAQ
 
@@ -246,5 +263,17 @@ _Details coming soon ..._
 | **Parameter** | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)          |
 | **Prefix**    | Characters used to identify the following parameter (e.g. `n/` is the prefix for the parameter `NAME`) |
 | **JavaFX**    | JavaFX is a set of Java graphics libraries for creating Java GUI applications                          | 
+
+## Command summary
+
+Action | Format, Examples                                                               
+--------|--------------------------------------------------------------------------------
+**Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime` 
+**Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
+**Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
+**Exit** | `exit`      
+**Find** | `find <KEYWORD>`<br> e.g., `find hero`
+**List** |`list`                                                                                                               |
+**Sort** | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
