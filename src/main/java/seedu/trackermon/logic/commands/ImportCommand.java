@@ -2,16 +2,15 @@ package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.trackermon.model.Model;
-
 import java.awt.FileDialog;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-
 import javax.swing.JFrame;
+
+import seedu.trackermon.model.Model;
 
 
 /**
@@ -35,6 +34,9 @@ public class ImportCommand extends Command {
             this.model = model;
         }
 
+        /**
+         * Executes the FileExportThread for FileDialog to appear.
+         */
         public void run() {
             System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
             System.setProperty("apple.awt.fileDialogForDirectories", "true");
