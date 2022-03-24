@@ -17,8 +17,8 @@ public class Task {
     protected String type;
     protected Priority priority;
 
-    enum Priority {
-        LOW, MEDIUM, HIGH;
+    public enum Priority {
+        NONE, LOW, MEDIUM, HIGH;
     }
 
     // Identity fields
@@ -40,6 +40,7 @@ public class Task {
         this.isDone = false;
         this.type = "";
         this.assignees = new ArrayList<>();
+        this.priority = Priority.NONE;
     }
 
     /**
