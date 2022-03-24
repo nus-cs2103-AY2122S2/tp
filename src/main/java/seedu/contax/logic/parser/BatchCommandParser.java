@@ -8,8 +8,8 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_START_WITH;
 
 import seedu.contax.logic.commands.BatchCommand;
+import seedu.contax.logic.commands.BatchCommand.BatchType;
 import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.model.util.BatchType;
 import seedu.contax.model.util.SearchType;
 
 

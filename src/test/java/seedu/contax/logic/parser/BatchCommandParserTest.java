@@ -7,7 +7,7 @@ import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.BatchCommand;
-import seedu.contax.model.util.BatchType;
+import seedu.contax.logic.commands.BatchCommand.BatchType;
 import seedu.contax.model.util.SearchType;
 
 /**

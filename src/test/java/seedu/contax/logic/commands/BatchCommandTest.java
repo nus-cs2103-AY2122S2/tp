@@ -12,7 +12,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
-import seedu.contax.model.util.BatchType;
+import seedu.contax.logic.commands.BatchCommand.BatchType;
 import seedu.contax.model.util.SearchType;
 
 /**

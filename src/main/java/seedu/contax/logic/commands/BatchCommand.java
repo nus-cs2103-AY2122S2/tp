@@ -18,9 +18,7 @@ import seedu.contax.logic.parser.ParserUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
-import seedu.contax.model.util.BatchType;
 import seedu.contax.model.util.SearchType;
-
 
 
 
@@ -28,6 +26,13 @@ import seedu.contax.model.util.SearchType;
  * Batch edits or deletes a person identified using base on string =/ provided.
  */
 public class BatchCommand extends Command {
+
+    public enum BatchType {
+        EQUALS,
+        START,
+        END,
+        UNDEFINED
+    }
 
     public static final String COMMAND_WORD = "batch";
 
