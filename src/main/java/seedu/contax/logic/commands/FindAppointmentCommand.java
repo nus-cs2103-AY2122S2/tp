@@ -19,7 +19,7 @@ public class FindAppointmentCommand extends Command {
             + "contain any of the specified keywords (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: *KEYWORDS [MORE_KEYWORDS]... [by/person]*\n"
-            + "`Example: " + COMMAND_WORD + "Contract Alice Meeting`";
+            + "Example: `" + COMMAND_WORD + "Contract Alice Meeting`";
 
     private final ContainsKeywordsPredicate predicate;
 

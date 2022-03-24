@@ -14,13 +14,13 @@ import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 
 
 /**
- * Parses input arguments and creates a new FindAppointment object
+ * Parses input arguments and creates a new FindAppointmentCommand  object
  */
 public class FindAppointmentCommandParser implements Parser<FindAppointmentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindAppointment
-     * and returns a FindAppointment object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindAppointmentCommand
+     * and returns a FindAppointmentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindAppointmentCommand parse(String args) throws ParseException {
