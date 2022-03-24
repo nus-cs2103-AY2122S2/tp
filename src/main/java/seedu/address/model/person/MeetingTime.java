@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 /**
  * Represents a Person's upcoming meeting time.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
 public class MeetingTime {
 
@@ -19,7 +19,7 @@ public class MeetingTime {
     /**
      * Constructs a {@code MeetingDate}.
      *
-     * @param time A valid meeting date.
+     * @param time A valid meeting time.
      */
     public MeetingTime(String time) {
         requireNonNull(time);
@@ -28,7 +28,7 @@ public class MeetingTime {
     }
 
     /**
-     * Returns true if a given string is a valid previous date met.
+     * Returns true if a given string is a valid time.
      */
     public static boolean isValidTime(String test) {
         return true;

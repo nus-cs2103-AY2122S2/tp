@@ -28,7 +28,7 @@ public class MeetingDate {
     }
 
     /**
-     * Returns true if a given string is a valid previous date met.
+     * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         return test.matches(VALIDATION_REGEX);
