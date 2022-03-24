@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -26,7 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ObservableList<Transaction> transactionObservableList;
+    private final FilteredList<Transaction> filteredTransactions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        transactionObservableList = FXCollections.observableArrayList();
+        filteredTransactions = new FilteredList<>(this.addressBook.getTransactionList());
     }
 
     public ModelManager() {
@@ -117,6 +115,26 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void deleteTransaction(Transaction target) {
+        addressBook.removeTransaction(target);
+    };
+
+    @Override
+    public void addTransaction(Transaction transaction) {
+        requireNonNull(transaction);
+
+        addressBook.addTransaction(transaction);
+        updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+    };
+
+    @Override
+    public void setTransaction(Transaction target, Transaction editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        addressBook.setTransaction(target, editedPerson);
+    };
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -140,17 +158,18 @@ public class ModelManager implements Model {
         addressBook.sortPersonList(comparator);
     }
 
-    //=========== Transaction List Accessors =============================================================
+    //=========== Filtered Transaction List Accessors ==========================================================
 
     @Override
-    public ObservableList<Transaction> getTransactionList() {
-        return transactionObservableList;
-    }
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return addressBook.getTransactionList();
+    };
+
 
     @Override
-    public void updateTransactionList(Collection<Transaction> transactions) {
-        requireNonNull(transactions);
-        transactionObservableList.setAll(transactions);
+    public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+        requireNonNull(predicate);
+        filteredTransactions.setPredicate(predicate);
     }
 
     @Override
@@ -169,7 +188,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredTransactions.equals(other.filteredTransactions);
     }
 
 }

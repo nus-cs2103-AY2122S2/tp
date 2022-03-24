@@ -17,5 +17,8 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns an unmodifiable view of the transactions list.
+     */
     ObservableList<Transaction> getTransactionList();
 }
