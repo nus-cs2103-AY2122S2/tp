@@ -15,7 +15,6 @@ Class ShowListPanel
 Class ShowCard
 Class StatusBarFooter
 Class CommandBox
-Class ShowDetailsCard
 }
 
 package Model <<Rectangle>> {
@@ -35,22 +34,18 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" ShowListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow *-right-> "1" ShowDetailsCard
 MainWindow --> "0..1" HelpWindow
 
 ShowListPanel -down-> "*" ShowCard
-ShowListPanel ..> ShowDetailsCard
-ShowDetailsCard ..> ShowCard
 
-MainWindow --|> UiPart
+MainWindow -left-|> UiPart
+
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 ShowListPanel --|> UiPart
 ShowCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
-ShowDetailsCard -left-|> UiPart
-
 
 ShowCard ..> Model
 UiManager -right-> Logic
