@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -79,7 +78,6 @@ public class EditLabStatusCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_STATUS_CHANGE);
         }
 
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_LAB_STATUS_SUCCESS, labNumber, studentToEdit.getName(), newStatus.name()));
     }
