@@ -6,12 +6,21 @@ package seedu.address.model.property;
  */
 public class NullPropertyToBuy extends PropertyToBuy {
 
-    public NullPropertyToBuy(House house, PriceRange price) {
-        super(house, price);
+    private static final NullPropertyToBuy nullPropertyToBuy =
+            new NullPropertyToBuy(new House(HouseType.NULLHOUSETYPE, "NullHouseLocation"),
+                    new PriceRange(0, 0));
+
+    public NullPropertyToBuy(House house, PriceRange priceRange) {
+        super(house, priceRange);
+    }
+
+    public static NullPropertyToBuy getNullPropertyToBuy() {
+        return nullPropertyToBuy;
     }
 
     // TODO: Add special properties for this property type since we do not want to
     // misuse
+
 
     @Override
     public boolean equals(Object other) {

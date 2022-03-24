@@ -15,6 +15,7 @@ import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.NullPropertyToBuy;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.seller.Seller;
 import seedu.address.model.tag.Tag;
@@ -25,7 +26,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     public static final Appointment NO_APPOINTMENT = new Appointment("");
-    public static final PropertyToBuy NO_DESIRED_PROPERTY = null;
+    public static final PropertyToBuy NO_DESIRED_PROPERTY = NullPropertyToBuy.getNullPropertyToBuy();
 
     public static Client[] getSampleclients() {
         return new Client[] {
