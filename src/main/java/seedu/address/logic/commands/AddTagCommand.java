@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -66,7 +66,7 @@ public class AddTagCommand extends Command {
 
     private Person addTagToPerson(Person personToEdit, Tag tag) {
         Person newPerson = Person.copyPerson(personToEdit);
-        Set<Tag> tagList = newPerson.getTags();
+        ArrayList<Tag> tagList = newPerson.getTags();
         tagList.add(tag);
 
         newPerson.setTags(tagList);
