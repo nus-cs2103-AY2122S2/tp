@@ -1,0 +1,42 @@
+@startuml
+!include ../style.puml
+
+Actor User as user USER_COLOR
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":StudentInfoPanel" as StudentInfoPanel UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+user -> MainWindow : executeCommand("student 1")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("student 1")
+activate LogicManager
+LogicManager --> MainWindow : result
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleInfoPanelUpdate()
+activate MainWindow
+
+MainWindow -> LogicManager : getSelectedStudent()
+activate LogicManager
+LogicManager --> MainWindow : selectedStudent
+deactivate LogicManager
+
+create StudentInfoPanel
+MainWindow -> StudentInfoPanel
+activate StudentInfoPanel
+StudentInfoPanel -> MainWindow
+deactivate StudentInfoPanel
+
+deactivate MainWindow
+MainWindow --> user
+deactivate MainWindow
+
+
+@enduml

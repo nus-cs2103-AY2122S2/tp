@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
@@ -127,6 +128,11 @@ public interface Model {
     void updateAssignment(Student student, Lesson lesson);
 
     /**
+     * Updates both filtered lesson and students list.
+     */
+    void updateUnassignment(Student student, Lesson lesson);
+
+    /**
      * Sets the selected {@code Student} with the given {@code Student} for UI use.
      * @param student The given {@code Student}.
      */
@@ -143,4 +149,14 @@ public interface Model {
 
     /** Returns the selected {@code Lesson} */
     Lesson getSelectedLesson();
+
+    /**
+     * Checks if the {@code Index} provided is out of bounds of the {@code filteredStudentList}
+     */
+    boolean checkStudentListIndex(Index studentId);
+
+    /**
+     * Checks if the {@code Index} provided is out of bounds of the {@code filteredLessonList}
+     */
+    boolean checkLessonListIndex(Index lessonId);
 }

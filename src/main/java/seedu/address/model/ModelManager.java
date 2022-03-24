@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
@@ -213,13 +214,28 @@ public class ModelManager implements Model {
         filteredLessons.setPredicate(predicate);
     }
 
-    // TODO: add the remaining functions for LessonList too
     @Override
     public void updateAssignment(Student studentToAssign, Lesson lessonToAssign) {
         lessonBook.assignStudent(studentToAssign, lessonToAssign);
         studentBook.assignLesson(lessonToAssign, studentToAssign);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void updateUnassignment(Student student, Lesson lesson) {
+        student.unassignLesson(lesson);
+        lesson.unassignStudent(student);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    public boolean checkStudentListIndex(Index studentId) {
+        return filteredStudents.size() < studentId.getOneBased();
+    }
+
+    public boolean checkLessonListIndex(Index lessonId) {
+        return filteredLessons.size() < lessonId.getOneBased();
     }
 
     //=========== Selected Student and Lesson Accessors and Setter ============================================
@@ -239,4 +255,5 @@ public class ModelManager implements Model {
     public Lesson getSelectedLesson() {
         return selectedLesson;
     }
+
 }
