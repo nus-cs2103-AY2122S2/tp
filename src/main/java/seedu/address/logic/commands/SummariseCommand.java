@@ -60,6 +60,11 @@ public class SummariseCommand extends Command {
         // Summarises the contact list by Block first then by Faculty
         String answer = summariseAll(lastShownList) + filterByBlock(lastShownList) + filterByFaculty(lastShownList);
 
+        if (lastShownList.isEmpty()) {
+            covidStatsByBlockDataList.clear();
+            positiveStatsByFacultyData.clear();
+        }
+
         if (answer.isEmpty()) {
             // Returns a message indicating Tracey is unable to summarise her contact list.
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_FAILURE);
@@ -172,7 +177,7 @@ public class SummariseCommand extends Command {
     }
 
     /**
-     * Returns a the relevant data present in a Block.
+     * Returns all the relevant data present in a Block.
      *
      * @return A TreeMap with the block and its students categorised by covid statuses
      */
@@ -181,12 +186,20 @@ public class SummariseCommand extends Command {
     }
 
     /**
-     * Returns a the relevant data present in a Faculty.
+     * Returns all the relevant data present in a Faculty.
      *
      * @return A TreeMap with the faculty and its number of Covid Positive students
      */
     public static TreeMap<String, Double> getPositiveStatsByFacultyData() {
         return positiveStatsByFacultyData;
+    }
+
+    /**
+     * Returns true if both tree map are not empty and the pie chart window should be open, returns false otherwise.
+     * @return boolean for whether the pie chart window should be opened
+     */
+    public static boolean shouldOpenPieChartWindow() {
+        return !(positiveStatsByFacultyData.isEmpty() && covidStatsByBlockDataList.isEmpty());
     }
 }
 

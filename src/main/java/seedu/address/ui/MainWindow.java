@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -205,13 +206,19 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSummarise(String message) {
-        if (pieChartWindow == null || !pieChartWindow.isShowing()) {
-            pieChartWindow = new PieChartWindow();
-            pieChartWindow.show();
+        if (SummariseCommand.shouldOpenPieChartWindow()) {
+            if (pieChartWindow == null || !pieChartWindow.isShowing()) {
+                pieChartWindow = new PieChartWindow();
+                pieChartWindow.show();
+                logger.info("Pie chart window is not yet initialised or not showing!");
+            } else {
+                pieChartWindow.hide();
+                pieChartWindow = new PieChartWindow();
+                pieChartWindow.show();
+                logger.info("Pie chart window already showing, proceeding to reopen it!");
+            }
         } else {
-            pieChartWindow.hide();
-            pieChartWindow = new PieChartWindow();
-            pieChartWindow.show();
+            logger.info("Pie chart window not opened because address book is empty!");
         }
     }
 
