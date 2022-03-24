@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 
 /**
@@ -38,11 +39,17 @@ public class ClientCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label appointment;
+    @FXML
+    private Label propertyType;
+    @FXML
+    private Label propertyLocation;
+    @FXML
+    private Label propertyRange;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ClientCard(Client client, int displayedIndex) {
+    public ClientCard(Buyer client, int displayedIndex) {
         super(FXML);
         this.client = client;
         id.setText(displayedIndex + ". ");
@@ -52,6 +59,9 @@ public class ClientCard extends UiPart<Region> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        propertyType.setText(client.getDesiredProperty().getHouse().getHouseType().toString());
+        propertyLocation.setText(client.getDesiredProperty().getHouse().getLocation().toString());
+        propertyRange.setText(client.getDesiredProperty().getBuyRange().toString());
     }
 
     @Override

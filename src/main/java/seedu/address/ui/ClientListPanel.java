@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.client.Client;
+import seedu.address.model.buyer.Buyer;
 
 /**
  * Panel containing the list of clients.
@@ -18,12 +18,12 @@ public class ClientListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ClientListPanel.class);
 
     @FXML
-    private ListView<Client> clientListView;
+    private ListView<Buyer> clientListView;
 
     /**
      * Creates a {@code clientListPanel} with the given {@code ObservableList}.
      */
-    public ClientListPanel(ObservableList<Client> clientList) {
+    public ClientListPanel(ObservableList<Buyer> clientList) {
         super(FXML);
         clientListView.setItems(clientList);
         clientListView.setCellFactory(listView -> new ClientListViewCell());
@@ -32,9 +32,9 @@ public class ClientListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code client} using a {@code clientCard}.
      */
-    class ClientListViewCell extends ListCell<Client> {
+    class ClientListViewCell extends ListCell<Buyer> {
         @Override
-        protected void updateItem(Client client, boolean empty) {
+        protected void updateItem(Buyer client, boolean empty) {
             super.updateItem(client, empty);
 
             if (empty || client == null) {
