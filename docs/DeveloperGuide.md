@@ -19,19 +19,19 @@ This section describes some noteworthy details on how certain features are imple
 <img src = "images/medical/MedicalSequenceDiagram.png" width = "350" alt="Unable to load image! Try again later.">
 
 ### Add medical information (`add t/medical`) feature
-* `AddMedicalCommandParser` parses input and build needed `nric` and `Medical` objects. It returns a `AddMedicalCommand` with needed `nric` and `Medical` objects as parameters.
+* `AddMedicalCommandParser` parses input and builds needed `nric` and `Medical` objects. It returns an `AddMedicalCommand` with needed `nric` and `Medical` objects as parameters.
 * Model does needful processing to save the medical information in temporary and persistent storage.
-* UI is updated accordingly
+* UI is updated accordingly.
 
 ### View medical information (`view t/medical`) feature
-* `ViewMedicalCommandParser` parses input and return a `ViewMedicalCommand` with optional `nric` parameter.
-* `ViewMedicalCommand`, which extends `Command`, is executed. FilteredMedicalList is updated accordingly.
-* UI is updated accordingly
+* `ViewMedicalCommandParser` parses input and returns a `ViewMedicalCommand` with optional `nric` parameter.
+* `ViewMedicalCommand`, which extends `Command`, is executed. `FilteredMedicalList` is updated accordingly.
+* UI is updated accordingly.
 
 ### Delete medical information (`delete 1`) feature
-* `DeleteMedicalCommandParser` parses input and return a `DeleteMedicalCommand` with index to delete as parameter.
-* Model deletes the medical information
-* UI is updated accordingly
+* `DeleteMedicalCommandParser` parses input and returns a `DeleteMedicalCommand` with index to delete as parameter.
+* Model deletes the medical information.
+* UI is updated accordingly.
 
 ## Requirements
 
