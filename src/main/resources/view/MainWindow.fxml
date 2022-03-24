@@ -59,14 +59,12 @@
                   </AnchorPane>
                 <AnchorPane minWidth="420.0">
                      <children>
-                        <VBox fx:id="personList1" alignment="CENTER" styleClass="pane-with-border">
-                           <padding>
-                              <Insets bottom="10" left="10" right="10" top="10" />
-                           </padding>
-                           <children>
-                              <StackPane fx:id="personListPanelPlaceholder1" VBox.vgrow="ALWAYS" />
-                           </children>
-                        </VBox>
+                         <VBox fx:id="eventList" alignment="CENTER" styleClass="pane-with-border">
+                             <padding>
+                                 <Insets bottom="10" left="10" right="10" top="10"/>
+                             </padding>
+                             <StackPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                         </VBox>
                      </children>
                   </AnchorPane>
               </items>
