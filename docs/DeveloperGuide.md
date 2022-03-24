@@ -213,7 +213,26 @@ This section describes some noteworthy details on how certain features are imple
 ### 5. Put feature
 
 #### Proposed implementation
+
+Stores the `LineupName` in `Person`
+
+Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
 #### Design Consideration
+
+**Aspect: How to keep track the `Lineup` a `Person` belongs to**
+
+**Alternative 1: (Current choice)** Attributes of `Person`
+
+Pros: Efficient and easy to find `Lineup` of `Person`
+
+Cons: Need to update both `Person` and `Lineup`
+
+**Alternative 2: Using `Lineup` Only
+
+Pros: Only need to update `Lineup`
+
+Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` belongs to
+
 
 ### 6. Clear feature
 
