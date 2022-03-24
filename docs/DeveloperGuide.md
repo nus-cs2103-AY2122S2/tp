@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -157,20 +157,20 @@ This section describes some noteworthy details on how certain features are imple
 ### Delete multiple persons enhancement
 
 The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
-behaviour by extending the validity checks to the entire string of input. 
+behaviour by extending the validity checks to the entire string of input.
 
 Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
 in the contact list might change depending on the order of deletion. <br>
 
-For example: <br>
-`delete 1 2 3` will throw an exception as there is no longer an index 3 during the 3rd deletion. 
+**For example:** <br>
+`delete 1 2 3` will throw an exception as there is no longer an index 3 during the 3rd deletion.
 
-The workaround is then to delete each person from the largest to the smallest index. The success message displays the details 
+The workaround is then to delete each person from the largest to the smallest index. The success message displays the details
 of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion. 
 
-For example <br>
+**For example:** <br>
 `delete 1 2 3` extracts the information out of Person 1, Person 2 and Person 3 according to the last shown list.<br>
-Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process. 
+Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process.
 
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("delete 1 2 3") API call.
 
@@ -178,8 +178,26 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 
 
 
+### Tag feature
 
-### Tag/Removetag feature
+#### Current Implementation
+The current tagging feature is originally a functionality in the `Add` command. However, it was extracted out and made
+into its own command in order to help facilitate a clearer distinction between those features. The `Tag` command would
+allow users to tag additional information to existing persons in the address book.
+
+With this new introduction of the Tag Command, it led to the creation of the abstract class `Tag`. The idea was to only
+allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of such subclasses that extends from `Tag`:
+* `Cca` - stores information about the person's cca
+* `Education` - stores information about the person's degree course
+* `Module` - stores information about the person's module
+* `Internship` - stores information about the person's internship
+
+![Class diagram for Tag](images/TagClassDiagram.png)
+
+
+
+
+### Removetag feature
 
 ### Find/Find -s feature
 
@@ -351,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1. User adds a new person in the given command format (see User Guide) 
+1. User adds a new person in the given command format (see User Guide)
 2. NUSocials adds the new person to the list
 
     Use case ends.
@@ -378,7 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ````
 **Extensions**
 ````
-2a. The list is empty. 
+2a. The list is empty.
 
   Use case ends
 
@@ -386,10 +404,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 3a1. NUSocials shows an error message.
 
     Use case resumes at step 2.
-    
+
 3b. The given tag command is invalid.
   - 3b1. NUSocials shows an error message.
-    
+
     Use case resumes at step 2.
 ````
 ###**Use case 4: Edit a person**
@@ -413,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
-      
+
 3b. The given edit command is invalid.
     - 3b1. NUSocials shows an error message.
 
