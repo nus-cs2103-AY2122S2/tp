@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalSellers.YUQI;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.PriceRange;
