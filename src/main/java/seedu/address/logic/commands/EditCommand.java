@@ -222,6 +222,7 @@ public class EditCommand extends Command {
 
         public void setApplicationStatus(ApplicationStatus applicationStatus) {
             this.applicationStatus = applicationStatus;
+            triggerInterviewStatus(applicationStatus);
         }
 
         public Optional<ApplicationStatus> getApplicationStatus() {
@@ -285,6 +286,22 @@ public class EditCommand extends Command {
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getInterviewStatus().equals(e.getInterviewStatus())
                     && getAvailability().equals(e.getAvailability());
+        }
+
+
+        /**
+         * Allows the {@code InterviewStatus} to be triggered by ApplicationStatus.
+         */
+        public void triggerInterviewStatus(ApplicationStatus applicationStatus) {
+            String acceptedTrigger = "Accepted";
+            String rejectedTrigger = "Rejected";
+            String executedTrigger = "Completed";
+            if (getApplicationStatus().isPresent()) {
+                if (applicationStatus.toString().equals(acceptedTrigger)
+                        || applicationStatus.toString().equals(rejectedTrigger)) {
+                    setInterviewStatus(new InterviewStatus(executedTrigger));
+                }
+            }
         }
     }
 }
