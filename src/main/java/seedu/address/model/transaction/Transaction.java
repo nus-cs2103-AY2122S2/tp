@@ -20,6 +20,7 @@ import seedu.address.logic.parser.Prefix;
  */
 public class Transaction implements Serializable {
     private final HashMap<Prefix, TransactionField> fields = new HashMap<>();
+    private final String personIdentifier;
 
     /**
      * Person constructor
@@ -38,10 +39,27 @@ public class Transaction implements Serializable {
         for (Prefix p : TransactionFieldRegistry.REQUIRED_PREFIXES) {
             checkArgument(this.fields.containsKey(p), "All required fields must be given.");
         }
+
+        // Set dummy identifier
+        this.personIdentifier = "dummy@gmail.com";
+    }
+
+    public Transaction(HashMap<Prefix, TransactionField> fields, String personIdentifier) {
+        requireAllNonNull(fields);
+
+        // Add fields.
+        this.fields.putAll(fields);
+
+        // Set person identifier
+        this.personIdentifier = personIdentifier;
     }
 
     public Transaction(Transaction otherTransaction) {
         this(otherTransaction.getFields());
+    }
+
+    public Transaction setIdentifier(String personIdentifier) {
+        return new Transaction( fields, personIdentifier);
     }
 
     /**
@@ -91,6 +109,15 @@ public class Transaction implements Serializable {
     }
 
     /**
+     * Gets the person identifier of the transaction
+     *
+     * @return person's identifier (email)
+     */
+    public String getIdentifier() {
+        return this.personIdentifier;
+    }
+
+    /**
      * Gets the note of the transaction
      *
      * @return Optional note of the transaction
@@ -131,7 +158,9 @@ public class Transaction implements Serializable {
         builder.append("Amount: ")
                 .append(getAmount())
                 .append("; Transaction date: ")
-                .append(getTransactionDate());
+                .append(getTransactionDate())
+                .append("; Person email: ")
+                .append(getIdentifier());
 
         if (getDueDate().isPresent()) {
             builder.append("; Due date: ")

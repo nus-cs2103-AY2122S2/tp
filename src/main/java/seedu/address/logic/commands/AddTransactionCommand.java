@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import java.util.List;
 
@@ -62,13 +63,15 @@ public class AddTransactionCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = personToEdit.addTransaction(transaction);
+        Person person = lastShownList.get(index.getZeroBased());
+        String personIdentifier = person.getEmail().getValue();
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Transaction editedTransaction = transaction.setIdentifier(personIdentifier);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.toString()));
+        model.addTransaction(editedTransaction);
+        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedTransaction.toString()));
     }
 
     @Override

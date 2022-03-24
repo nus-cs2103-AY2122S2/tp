@@ -11,7 +11,6 @@ import seedu.address.logic.parser.AppendCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.ListTransactionCommandParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.RemarkCommandParser;
 import seedu.address.logic.parser.RemoveCommandParser;
@@ -40,7 +39,7 @@ public class CommandRegistry {
         parsers.put(AddMembershipCommand.COMMAND_WORD, new AddMembershipParser());
         parsers.put(SortCommand.COMMAND_WORD, new SortCommandParser());
         parsers.put(AddTransactionCommand.COMMAND_WORD, new AddTransactionParser());
-        parsers.put(ListTransactionCommand.COMMAND_WORD, new ListTransactionCommandParser());
+        parsers.put(ListTransactionCommand.COMMAND_WORD, (String args) -> new ListTransactionCommand());
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
         PARSERS = Collections.unmodifiableMap(parsers);
