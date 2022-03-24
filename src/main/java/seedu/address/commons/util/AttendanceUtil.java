@@ -25,6 +25,12 @@ public class AttendanceUtil {
     public static final DateTimeFormatter ATTENDANCE_DATE_FORMATTER =
         DateTimeFormatter.ofPattern(ATTENDANCE_DATE_FORMAT);
 
+    /**
+     * Checks if a given string is in the valid format to be parsed into a {@code Boolean}.
+     *
+     * @param isPresent the given isPresent string.
+     * @return true if string is valid, false otherwise.
+     */
     public static boolean isValidIsPresentString(String isPresent) {
         return isPresent.equals("true") || isPresent.equals("false");
     }

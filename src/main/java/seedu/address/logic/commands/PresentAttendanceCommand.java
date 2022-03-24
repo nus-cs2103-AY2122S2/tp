@@ -86,7 +86,7 @@ public class PresentAttendanceCommand extends Command {
             throw new CommandException(generateFailureMessage(petToEdit, attendanceDateString, presentAttendance));
         }
 
-        if (!presentAttendance.isValidTimings()) {
+        if (!PresentAttendanceEntry.isValidTimings(pickUpTime, dropOffTime)) {
             throw new CommandException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 

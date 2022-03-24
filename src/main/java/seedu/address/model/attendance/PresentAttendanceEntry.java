@@ -52,18 +52,11 @@ public class PresentAttendanceEntry extends AttendanceEntry {
 
     /**
      * Checks if both pick-up and drop-off times have been specified.
+     *
      * @return true if both specified, false otherwise.
      */
     private boolean hasPickUpDropOff() {
         return getPickUpTime().isPresent() && getDropOffTime().isPresent();
-    }
-
-    /**
-     * Checks if either only pick-up or only drop-off time has been specified.
-     * @return true if one and only one specified, false otherwise
-     */
-    private boolean onlyOnlyTimePresent() {
-        return getPickUpTime().isPresent() ^ getDropOffTime().isPresent();
     }
 
     /**
@@ -73,14 +66,19 @@ public class PresentAttendanceEntry extends AttendanceEntry {
      *
      * @return true if the timings are valid, false otherwise.
      */
-    public boolean isValidTimings() {
-        if (onlyOnlyTimePresent()) {
+    public static boolean isValidTimings(LocalTime pickUpTime, LocalTime dropOffTime) {
+        Optional<LocalTime> optionalPickUp = Optional.ofNullable(pickUpTime);
+        Optional<LocalTime> optionalDropOff = Optional.ofNullable(dropOffTime);
+
+        if (optionalPickUp.isPresent() ^ optionalDropOff.isPresent()) {
             return false;
-        } else if (hasPickUpDropOff()) {
-            return pickUpTime.isBefore(dropOffTime);
         }
 
-        return true; // both timings are not present
+        if (optionalPickUp.isEmpty() && optionalDropOff.isEmpty()) {
+            return true;
+        }
+
+        return optionalPickUp.get().isBefore(optionalDropOff.get());
     }
 
     @Override

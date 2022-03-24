@@ -78,13 +78,7 @@ public class JsonAdaptedAttendance {
             return convertToAbsentEntry(attendanceDate); // absent attendance entry
         }
 
-        PresentAttendanceEntry presentAttendanceEntry = convertToPresentEntry(attendanceDate, pickUpTime, dropOffTime);
-
-        if (!presentAttendanceEntry.isValidTimings()) {
-            throw new IllegalValueException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
-        }
-
-        return presentAttendanceEntry; // present attendance entry
+        return convertToPresentEntry(attendanceDate, pickUpTime, dropOffTime); // present attendance entry
     }
 
     /**
@@ -125,6 +119,10 @@ public class JsonAdaptedAttendance {
             modelDropOffTime = AttendanceUtil.convertToModelTime(dropOffTime);
         } catch (DateTimeParseException pe) {
             throw new IllegalValueException(pe.getMessage());
+        }
+
+        if (!PresentAttendanceEntry.isValidTimings(modelPickUpTime, modelDropOffTime)) {
+            throw new IllegalValueException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 
         return new PresentAttendanceEntry(modelAttendanceDate, modelPickUpTime, modelDropOffTime);
