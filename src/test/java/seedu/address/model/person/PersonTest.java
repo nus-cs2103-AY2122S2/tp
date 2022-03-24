@@ -169,6 +169,22 @@ public class PersonTest {
     }
 
     @Test
+    void compareFriends() {
+        Person first = new PersonBuilder().withName("A").build();
+        Person second = new PersonBuilder().withName("B").build();
+        Person third = new PersonBuilder().withName("C").build();
+        Person fourth = new PersonBuilder().withName("D").build();
+        Person equalsFirst = new PersonBuilder().withName("A").build();
+
+        assertTrue(first.compareTo(second) < 0);
+        assertTrue(first.compareTo(third) < 0);
+        assertTrue(first.compareTo(fourth) < 0);
+        assertTrue(first.compareTo(equalsFirst) == 0);
+        assertTrue(second.compareTo(first) > 0);
+        assertFalse(fourth.compareTo(third) < 0);
+    }
+
+    @Test
     public void hasName() {
 
         // return true

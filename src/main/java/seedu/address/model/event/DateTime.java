@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  * Represents an Event's date-time.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
  */
-public class DateTime {
+public class DateTime implements Comparable<DateTime> {
     public static final String MESSAGE_CONSTRAINTS = "The date & time needs to be in the following format: "
             + "DD-MM-YYYY hhmm\n"
             + "Tip: 0s can be omitted where ambiguity will not be created.\n"
@@ -83,5 +83,10 @@ public class DateTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(DateTime dateTime) {
+        return this.value.compareTo(dateTime.value);
     }
 }
