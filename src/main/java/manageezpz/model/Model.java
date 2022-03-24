@@ -120,6 +120,22 @@ public interface Model {
     void findTask(Task task);
 
     /**
+     * Tags the given task.
+     * The task must exist in the task list.
+     * @param task
+     * @param person
+     */
+    void tagTask(Task task, Person person);
+
+    /**
+     * Untags the given task.
+     * The task must exist in the task list.
+     * @param task
+     * @param person
+     */
+    void untagTask(Task task, Person person);
+
+    /**
      * Adds the given task.
      * {@code task} must not already exist in the task list
      */
@@ -153,24 +169,14 @@ public interface Model {
     ObservableList<Task> getFilteredTaskList();
 
     /**
-     * Returns true if a todo with the same identity as {@code todo} exists in the task list.
-     */
-    boolean hasTodo(Todo todo);
-
-    /**
-     * Returns true if an event with the same identity as {@code event} exists in the task list.
-     */
-    boolean hasEvent(Event event);
-
-    /**
-     * Returns true if a deadline with the same identity as {@code deadline} exists in the task list.
-     */
-    boolean hasDeadline(Deadline deadline);
-
-    /**
      * Returns true if a task with the same identity as {@code deadline} exists in the task list.
      */
     boolean hasTask(Task task);
+
+    /**
+     * Returns true if a {@code Task} is tagged.
+     */
+    boolean isTagged(Task task, Person p);
 
     /**
      * Returns a list of all tasks.
@@ -181,4 +187,19 @@ public interface Model {
      * Returns a list of tasks that satisfy the option given.
      */
     String listTasks(Prefix option);
+
+    /**
+     * Returns true if a {@code Task} is allocated with a priority.
+     */
+    boolean hasPriority(Task task);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the task list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
+     */
+    void setTask(Task target, Task editedTask);
+
+
+
 }

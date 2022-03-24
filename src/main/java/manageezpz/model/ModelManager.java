@@ -199,6 +199,16 @@ public class ModelManager implements Model {
         addressBook.findTask(task);
     }
 
+    @Override
+    public void tagTask(Task task, Person person) {
+        addressBook.tagTask(task, person);
+    }
+
+    @Override
+    public void untagTask(Task task, Person person) {
+        addressBook.untagTask(task, person);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -214,42 +224,38 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return addressBook.hasEvent(event);
-    }
-
-    @Override
-    public boolean hasDeadline(Deadline deadline) {
-        requireNonNull(deadline);
-        return addressBook.hasDeadline(deadline);
-    }
-
-    @Override
-    public boolean hasTodo(Todo todo) {
-        requireNonNull(todo);
-        return addressBook.hasTodo(todo);
-    }
-
-    @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return addressBook.hasTask(task);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
+    public boolean isTagged(Task task, Person person) {
+        requireNonNull(task);
+        requireNonNull(person);
+        return task.getAssignees().contains(person);
+    }
+
     @Override
     public String listTasks() {
         return addressBook.listTask();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String listTasks(Prefix option) {
         return addressBook.listTask(option);
+    }
+
+    @Override
+    public boolean hasPriority(Task task) {
+        return addressBook.hasPriority(task);
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        addressBook.setTask(target, editedTask);
+
     }
 }

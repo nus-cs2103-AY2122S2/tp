@@ -2,6 +2,7 @@ package manageezpz.model.task;
 
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,12 +15,18 @@ import manageezpz.model.person.Person;
 public class Task {
     protected boolean isDone;
     protected String type;
+    protected Priority priority;
+
+    enum Priority {
+        LOW, MEDIUM, HIGH;
+    }
 
     // Identity fields
     private final Description taskDescription;
 
     // Data fields
     private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
+    //private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructor for the Task class.
@@ -32,6 +39,7 @@ public class Task {
         this.taskDescription = taskDescription;
         this.isDone = false;
         this.type = "";
+        this.assignees = new ArrayList<>();
     }
 
     /**
@@ -39,11 +47,19 @@ public class Task {
      * @return the string representation of the status of the task.
      */
     public String getStatusIcon() {
-        if (this.isDone) {
+        if (this.isDone()) {
             return "X";
         } else {
             return " ";
         }
+    }
+
+    public List<Person> getAssignees() {
+        return this.assignees;
+    }
+
+    public void addAssignees(Person person) {
+        this.assignees.add(person);
     }
 
     public void setTaskDone() {
@@ -70,6 +86,14 @@ public class Task {
         return isDone;
     }
 
+    public void setPriority(String priority) {
+        this.priority = Priority.valueOf(priority);
+    }
+
+    public Priority getPriority() {
+        return this.priority;
+    }
+
     /**
      * Returns the string representation of the task.
      * @return a string representation of the task, consisting of its description and whether its done or not.
@@ -90,6 +114,14 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getDescription().equals(getDescription());
+    }
+
+    public void assignedTo(Person person) {
+        assignees.add(person);
+    }
+
+    public void removeAssigned(Person person) {
+        assignees.remove(person);
     }
 
     @Override

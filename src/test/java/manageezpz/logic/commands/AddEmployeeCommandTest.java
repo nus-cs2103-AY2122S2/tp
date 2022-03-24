@@ -185,22 +185,12 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public boolean hasTodo(Todo todo) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasDeadline(Deadline deadline) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isTagged(Task task, Person p) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -212,6 +202,16 @@ public class AddEmployeeCommandTest {
         @Override
         public String listTasks(Prefix option) {
             return null;
+        }
+
+        @Override
+        public boolean hasPriority(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -231,6 +231,16 @@ public class AddEmployeeCommandTest {
 
         @Override
         public void findTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void tagTask(Task task, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void untagTask(Task task, Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
