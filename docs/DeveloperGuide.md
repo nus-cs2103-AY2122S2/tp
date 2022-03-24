@@ -747,19 +747,19 @@ testers are expected to do more *exploratory* testing.
    3. Test case: Find multiple keywords
       1. Command: `find shingeki shutter` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list. <br>
-         E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+         E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched (`OR` search).
    
       2. Command: `find 86 shutter` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list. <br>
-         E.g. `86` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+         E.g. `86` or `shutter` from name, status, or tag fields will be matched (`OR` search).
    
    4. Test case: Invalid command format
       1. Command: `find` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.
    
    5. Test case: Unknown command
       1. Command: `find2` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`.
 
 
 2. Find a show (Precise Find)
@@ -771,30 +771,30 @@ testers are expected to do more *exploratory* testing.
          E.g. `shingeki` from the name field will be matched.
       2. Command: `find n/shingeki no kyojin` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list. <br>
-         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched. (`AND` search within a single prefix).
+         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched (`AND` search within a single prefix).
    
    3. Test case: Finding with multiple prefixes
       1. Command: `find n/shingeki s/completed` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and the status field for any partial or full word of `completed` then displays them on the show list. <br>
-         E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched. (`AND` search between multiple prefixes).
+         E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched (`AND` search between multiple prefixes).
    
       2. Command: `find n/shingeki t/seinen` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
-         E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched. (`AND` search between multiple prefixes).
+         E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched (`AND` search between multiple prefixes).
    
       3. Command: `find n/shingeki no kyojin t/seinen` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
-         E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched. (`AND` search within a single prefix and `AND` search between multiple prefixes).
+         E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched (`AND` search within a single prefix and `AND` search between multiple prefixes).
    
    4. Test case: Invalid command format
       1. Command: `find n/` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.
       2. Command: `find t/Action Anime` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.
    
    5. Test case: Multiple same prefix
       1. Command: `find n/shingeki n/shutter` <br>
-         Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list. (Ignores the first instance of n/) <br>
+         Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list (Ignores the first instance of n/) <br>
          E.g. `shutter` from the name field will be matched.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
