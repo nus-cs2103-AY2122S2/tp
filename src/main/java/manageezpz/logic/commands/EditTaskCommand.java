@@ -69,42 +69,9 @@ public class EditTaskCommand extends Command {
         }
     }
 
-    private Description parseDesc(String desc) throws ParseException {
-        Description parseDescResult;
-        try {
-            parseDescResult = ParserUtil.parseDescription(desc);
-            return parseDescResult;
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditTaskCommand.MESSAGE_USAGE), pe);
-        }
-    }
-
-    private Time parseTime (String time) throws ParseException {
-        Time parseTimeResult;
-        try {
-            parseTimeResult = ParserUtil.parseTime(time);
-            return parseTimeResult;
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditTaskCommand.MESSAGE_USAGE), pe);
-        }
-    }
-
-    private Date parseDate(String date) throws ParseException {
-        Date parseDateResult;
-        try {
-            parseDateResult = ParserUtil.parseDate(date);
-            return parseDateResult;
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditTaskCommand.MESSAGE_USAGE), pe);
-        }
-    }
-
     private ArrayList<Time> handleEventStartAndEndTime(String start, String end) throws ParseException {
-        Time startTime = parseTime(start);
-        Time endTime = parseTime(end);
+        Time startTime = ParserUtil.parseTime(start);
+        Time endTime = ParserUtil.parseTime(end);
         ArrayList<Time> startEndTimeStorageArr = new ArrayList<>();
         if (endTime.getParsedTime().compareTo(startTime.getParsedTime()) < 0) {
             throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
@@ -136,19 +103,19 @@ public class EditTaskCommand extends Command {
         if (desc.isEmpty()) {
             dlDescription = currentTask.getDescription();
         } else {
-            dlDescription = parseDesc(desc);
+            dlDescription = ParserUtil.parseDescription(desc);
         }
 
         if (time.isEmpty()) {
             dlTime = currentTask.getTime();
         } else {
-            dlTime = parseTime(time);
+            dlTime = ParserUtil.parseTime(time);
         }
 
         if (date.isEmpty()) {
             dlDate = currentTask.getDate();
         } else {
-            dlDate = parseDate(date);
+            dlDate = ParserUtil.parseDate(date);
         }
 
         Deadline newTask = new Deadline(dlDescription, dlDate, dlTime);
@@ -167,7 +134,7 @@ public class EditTaskCommand extends Command {
         if (desc.isEmpty()) {
             eventDescription = currentTask.getDescription();
         } else {
-            eventDescription = parseDesc(desc);
+            eventDescription = ParserUtil.parseDescription(desc);
         }
 
         if (time.isEmpty()) {
@@ -183,7 +150,7 @@ public class EditTaskCommand extends Command {
         if (date.isEmpty()) {
             eventDate = currentTask.getDate();
         } else {
-            eventDate = parseDate(date);
+            eventDate = ParserUtil.parseDate(date);
         }
 
         Event newTask = new Event(eventDescription, eventDate, startTime, endTime);
