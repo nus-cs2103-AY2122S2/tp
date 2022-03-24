@@ -432,21 +432,53 @@ Step 4. The filtered list of perons is displayed to the user.
         * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
         * May violate SLAP principles, as every thing is done in a single class
 
-### \[Changed\] Adding a person feature
+### \[Updated\] Adding a person feature
 
-#### Changes
+#### Updates
 
-### \[Changed\] Editing a person feature
+`AddCommand` is updated to accommodate the addition of the following attributes:
 
-#### Changes
+* `Status`
+  * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Positive`).
+* `ClassCode`
+  * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4A`).
+* `Activity`
+  * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
+  * A student can have ANY number of activities, including zero (optional).
+
+### \[Updated\] Editing a person feature
+
+#### Updates
+
+`EditCommand` is updated to accommodate the addition of the following attributes:
+
+* `Status`
+    * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Negative`).
+* `ClassCode`
+    * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4B`).
+* `Activity`
+    * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/badminton`).
+    * When editing a student's activities, the user has to list out all activities even if the activities 
+have already been added.
 
 ### \[Updated\] User Interface
 
 #### Updates
 
+The User Interface is updated to display the newly added attributes:
+* `Status`
+* `ClassCode`
+* `Activity`
+    * The list of activities will be displayed horizontally under the name where each
+acitivity is contained in a blue box.
+
+
 ### \[Updated\] Storage
 
 #### Updates
+
+The flow of saving and loading the data storage is updated to accommodate the addtion of
+`Status`, `ClassCode`, and `Activity`.
 
 ### \[Enhancement\] Batch update
 
@@ -516,13 +548,21 @@ will be omitted from the read process.
 
 #### Proposed Enhancement:
 
+### \[Proposed Update\] User Interface
 
+The purpose of updating the user interface is to create a more user-friendly and 
+seamless application.
+
+#### Design considerations:
+
+* Create a light themed display.
+* The display of a person card, along with its attributes, could be enhanced.
 
 ### \[Testing\] JUnit tests
 
 #### JUnit tests
 
-
+Proper JUnit tests have been added as a means to check if the features listed above are correctly implemented.
 
 --------------------------------------------------------------------------------------------------------------------
 
