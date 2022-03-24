@@ -8,7 +8,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
+* https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components {Documentation idea of splitting the Model component into 2, to prevent cramping of image}
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -114,28 +114,28 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagramUpdated.png" width="450" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the task list data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `TaskList`, which `Task` references. This allows `TaskList` to only require one `Tag` object per unique tag, instead of each `Task` needing their own `Tag` objects.<br>
+<img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -143,6 +143,7 @@ The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* `JsonAddressBookStorage` has a `JsonSerializableAddressBook`, which have `JsonAdaptedPerson` and `JsonAdaptedTask` to store and load both Persons and Tasks.
 
 ### Common classes
 
@@ -153,6 +154,33 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### **Task Components**
+- Added Classes into the model Component to encapsulate a Task.
+
+#### **Implementation**
+<img src="images/ModelTaskClassDiagram.png" width="450" />
+
+A `Task`,
+- is stored in `uniqueTaskList` of the Model
+- can be represented by a `Todo`, `Event`, or `Deadline`
+
+A `Task` contains the following attributes,
+1. a `Description`, which represent the details of the Task to be stored in the `uniqueTaskList`
+2. a `Date`, which represent the day, month and year as specified by a number of the Task
+3. a `Time`, which represent the period during the Task exists or happens
+4. can be assigned/Tagged to multiple different `Person`
+5. a type, to differentiate between the different types of task
+6. can be marked/unmarked based on whether the task is done or not.
+7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
+
+#### Aspect: How the components within Task are added or changed
+- **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
+  * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
+  * Cons: Less flexible, more steps needed in editing Task objects
+- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
+  * Pros: Less overhead as fewer objects are created
+  * Cons: Prone to error as a Component might not be correctly changed
 
 ### Task Adding feature
 
@@ -222,10 +250,11 @@ Step 2. The user executes `tagTask 4 n/Alex Yeoh` command to assign `Alex Yeoh` 
 
 #### UML Diagram for tagTask Command
 
-The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
+The following activity diagram summarizes what happens when a user executes a new `tagTask` command:
 
 <img src="images/TagTaskActivityDiagram.png" width="250" />
 
+_{more aspects and alternatives to be added}_
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
