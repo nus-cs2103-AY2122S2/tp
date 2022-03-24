@@ -27,15 +27,15 @@ import seedu.contax.model.util.SearchType;
 public class BatchCommand extends Command {
     public static final String COMMAND_WORD = "batch";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Perform command in batch \n"
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in batch** \n"
+            + "Parameters: *"
             + "COMMAND (must be valid command without index) "
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
-            + PREFIX_EQUALS + "VALUE \n"
-            + "Example: " + COMMAND_WORD + " edit "
+            + PREFIX_EQUALS + "VALUE*\n"
+            + "Example: `" + COMMAND_WORD + " edit "
             + PREFIX_ADDRESS + "new address "
             + PREFIX_SEARCH_TYPE + "phone "
-            + PREFIX_EQUALS + "123 ";
+            + PREFIX_EQUALS + "123 `";
 
     private final String commandInput;
     private final SearchType searchType;

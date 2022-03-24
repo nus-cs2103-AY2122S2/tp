@@ -18,9 +18,9 @@ import seedu.contax.model.tag.Tag;
 public class EditTagCommand extends Command {
     public static final String COMMAND_WORD = "edittag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the specified tag.\n"
-            + "Parameters: INDEX t/NEW_TAGNAME\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "t/Prospective Clients";
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Edits the details of the specified tag.**\n"
+            + "Parameters: *INDEX t/NEW_TAGNAME*\n"
+            + "Example: `" + COMMAND_WORD + " 1 " + "t/Prospective Clients`";
 
     public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited Tag: %s";
     public static final String MESSAGE_TAG_EXISTS = "Specified tag name already exists in the address book.";

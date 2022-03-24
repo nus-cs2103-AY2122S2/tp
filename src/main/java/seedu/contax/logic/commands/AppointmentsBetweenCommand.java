@@ -19,17 +19,17 @@ import seedu.contax.model.appointment.DateRangePredicate;
 public class AppointmentsBetweenCommand extends Command {
 
     public static final String COMMAND_WORD = "appointmentsbetween";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists appointments within a period. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Lists appointments within a period.** "
+            + "Parameters: *"
             + PREFIX_DATE_START + "STARTDATE "
             + PREFIX_TIME_START + "STARTTIME "
             + PREFIX_DATE_END + "ENDDATE "
-            + PREFIX_TIME_END + "ENDTIME "
-            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TIME_END + "ENDTIME*\n"
+            + "Example: `" + COMMAND_WORD + " "
             + PREFIX_DATE_START + "22-10-2022 "
             + PREFIX_TIME_START + "12:30 "
             + PREFIX_DATE_END + "22-10-2022 "
-            + PREFIX_TIME_END + "16:30";
+            + PREFIX_TIME_END + "16:30`";
 
     public static final String MESSAGE_SUCCESS = "Listed appointments from %s to %s.";
     public static final String MESSAGE_START_DATE_INVALID = "The start date provided is invalid!";
