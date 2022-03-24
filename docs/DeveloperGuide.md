@@ -25,6 +25,10 @@ title: Developer Guide
         * [Implementation](#implementation-2)
         * [Design consideration](#design-considerations-1)
             * [How sort executes](#aspect-how-sort-executes)
+    * [Status feature](#status-feature)
+      * [What it does](#what-it-does-2)
+        * [Implementation](#implementation-3)
+        * [Design considerations](#design-considerations-2)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -40,6 +44,8 @@ title: Developer Guide
     * [Edit a comment](#edit-comment)
     * [Saving data](#saving-data)
     * [Finding a show](#finding-a-show)
+    * [Importing Trackermon data](#importing-trackermon-data)
+    * [Exporting Trackermon data](#exporting-trackermon-data)
 
 
 ---
@@ -305,7 +311,7 @@ The following sequence diagram summarizes what happens when a user executes a so
 
 ### Status feature
 
-#### What it does it do
+#### What it does
 `Status` class is an attribute within the `Show` class. `Status` represents the 
 watched status of the show which can be represented by `completed` and `watching`. 
 
@@ -323,6 +329,10 @@ is chosen due to certain advantages that it offers.
 2. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would 
 reference the same `enum` class. However, for the class implementation, a new `Status` instance is
 instantiated each time a `Show` object is created.
+
+---
+
+### Import and Export feature
 
 ---
 
@@ -376,7 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | long time user | find a show I may or may not have watched             | decide whether to watch that show or not               |
 | `* * `   | long time user | find whether a show I am watching is completed or not | continue with it if it is not completed                |
 | `* * `   | long time user | sort the list of shows                                | view the list in an organised manner                   |
-| `* * `   | user with multiple computers | quickly import or export the show data  | keep up to date copies of the show data quickly        |
+| `* * `   | user with multiple computers | import or export the show data easily   | keep updated copies of the show data quickly           |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -628,9 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC10 - Quickly import shows**
 
-**Preconditions:**
-**1. Trackermon application is started.**
-**2. There is pre-existing Trackermon data to import.**
+**Preconditions: Trackermon application is started and there is pre-existing Trackermon data to import.**
 
 **Guarantees: User's current Trackermon data will be replaced with imported Trackermon data.**
 
@@ -638,7 +646,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to import Trackermon data.
 2. Trackermon opens the file explorer GUI.
-3. The user selects the desired file to import.
+3. User selects the desired file to import.
 4. Trackermon closes the file explorer GUI.
 5. Trackermon imports the chosen file data.
 6. Trackermon displays imported list of shows.
@@ -679,7 +687,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to export Trackermon data.
 2. Trackermon displays the file explorer GUI.
-3. The user navigates to the desired directory or file to export Trackermon data to.
+3. User navigates to the desired directory or file to export Trackermon data to.
 4. Trackermon closes the file explorer GUI.
 5. Trackermon exports the chosen file data.
 
@@ -694,8 +702,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 3a. User changes default name to save exported data.
+  <br>Use case resumes at step 4.
 
-      Use case resumes from step 4.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -970,16 +978,16 @@ testers are expected to do more *exploratory* testing.
    2. Ensure that current Trackermon data is different from data we plan to import.
    3. Import chosen data.
        1. Test case: Select valid data to import.
-          Expected: Trackermon's data reflects imported data.
+          <br>Expected: Trackermon's data reflects imported data.
        2. Test case: Select invalid data to import. An example would be any non JSON file.
-           Expected: Trackermon displays an error messsage stating that the imported file has to be of type JSON.
+          <br>Expected: Trackermon displays an error messsage stating that the imported file has to be of type JSON.
        3. Test case: Click on cancel in the file explorer GUI.
-          Expected: File explorer GUI closes, Trackermon displays an error message stating that the file import has failed.
+          <br>Expected: File explorer GUI closes, Trackermon displays an error message stating that the file import has failed.
 2. Dealing with corrupted data
    1. Prerequisite: Data must be corrupted.
    2. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
    3. Test case: `data/trackermon.json` was corrupted.
-      Expeccted: Trackermon displays an error message stating that the imported file may be corrupted.
+      <br>Expected: Trackermon displays an error message stating that the imported file may be corrupted.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -992,19 +1000,19 @@ testers are expected to do more *exploratory* testing.
     2. Take note of current Trackermon data.
     3. Export the data.
        1. Test case: Exporting to any directory
-          Expected: Data is exported as `trackermon.json`.
+          <br>Expected: Data is exported as `trackermon.json`.
        2. Test case: Exporting to directory with preexisting `trackermon.json`
           1. A popup appears asking if you want to replace the old file.
           2. Test case: Click on `No`
-             Expected: Popup closes, user brought back to file explorer GUI.
+             <br>Expected: Popup closes, user brought back to file explorer GUI.
           3. Test case: Click on `Yes`
-             Expected: Popup and file explorer GUI closes. Old file is replaced.
+             <br>Expected: Popup and file explorer GUI closes. Old file is replaced.
        3. Test case: Renaming the exported file in the file explorer GUI.
-          Expected: Trackermon data exported as chosen filename in chosen directory.
+          <br>Expected: Trackermon data exported as chosen filename in chosen directory.
        4. Test case: Renaming the exported file in the file explorer GUI to `filename`, and exporting to directory with preexisting new `filename`.
-          Expected: Same as Test case: Exporting to directory with preexisting `trackermon.json`
+          <br>Expected: Same as Test case: Exporting to directory with preexisting `trackermon.json`
        5. Test case: Click on cancel in the file explorer GUI.
-          Expected: File explorer GUI closes, Trackermon displays error message stating file export has failed.
+          <br>Expected: File explorer GUI closes, Trackermon displays error message stating file export has failed.
        
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
