@@ -31,7 +31,7 @@ title: Developer Guide
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a show](#deleting-a-show)
     * [Editing a show](#editing-a-show)
-    * [Adding a comment](#adding-comment)
+    * [Edit a comment](#edit-comment)
     * [Saving data](#saving-data)
     * [Finding a show](#finding-a-show)
 
@@ -652,9 +652,9 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### Adding comment
+### Edit comment
 
-1. Deleting a show while all shows are being shown
+1. Edit comment show while all shows are being shown
 
     1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
 
@@ -667,7 +667,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `comment 0`<br>
        Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
+    1. Other incorrect comment commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
