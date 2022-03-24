@@ -13,7 +13,7 @@ import unibook.commons.core.GuiSettings;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.UniBook;
 import unibook.model.UserPrefs;
-import unibook.testutil.TypicalPersons;
+import unibook.testutil.typicalclasses.TypicalUniBook;
 
 public class StorageManagerTest {
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonUniBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonUniBookStorageTest} class.
          */
-        UniBook original = TypicalPersons.getTypicalUniBook();
+        UniBook original = TypicalUniBook.getTypicalUniBook();
         storageManager.saveUniBook(original);
         ReadOnlyUniBook retrieved = storageManager.readUniBook().get();
         assertEquals(original, new UniBook(retrieved));

@@ -30,11 +30,11 @@ public class UniquePersonList implements Iterable<Person> {
         FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent person (using equals) as the given argument.
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -82,6 +82,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Remove module that matches with moduleCode from every person in UniquePersonList
+     *
      * @param moduleCode
      */
     public void removeModuleFromAllPersons(ModuleCode moduleCode) {

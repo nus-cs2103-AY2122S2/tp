@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
@@ -12,24 +13,19 @@ import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.model.tag.Tag;
 
 /**
- * Represents a Person in the UniBook.
+ * Represents a Person in the UniBook. Class is abstract as only its subtypes {@code Student} and {@code Professor}
+ * should be instantiable.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Module that is person is associated with
-    private Set<Module> modules = new HashSet<>();
-
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-
-    // Temporary field to store module codes that a person is associated with.
-    private final Set<ModuleCode> moduleCodes = new HashSet<>();
+    private Set<Module> modules = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -41,20 +37,6 @@ public class Person {
         this.phone = phone;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
-    }
-
-    /**
-     * Constructor of Person with extra ModuleCode parameter.
-     */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
-                  Set<Module> modules, Set<ModuleCode> moduleCodes) {
-        CollectionUtil.requireAllNonNull(name, phone, email, tags);
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.tags.addAll(tags);
-        this.modules.addAll(modules);
-        this.moduleCodes.addAll(moduleCodes);
     }
 
     /**
@@ -95,6 +77,13 @@ public class Person {
     }
 
     /**
+     * Sets peron's modules
+     */
+    public void setModules(Set<Module> modules) {
+        this.modules = modules;
+    }
+
+    /**
      * Deletes a module from the set of modules the person has by checking through each module
      * in the set and removing it from the set if the module code matches.
      *
@@ -115,7 +104,6 @@ public class Person {
      * Adds this person to all the modules that they are associated with, into the
      * correct personnel list (professor/student) in module depending on the runtime type
      * of this person.
-     *
      */
     public void addPersonToAllTheirModules() throws PersonNoSubtypeException {
         for (Module module : this.getModules()) {
@@ -135,14 +123,6 @@ public class Person {
      */
     public Set<Module> getModulesModifiable() {
         return modules;
-    }
-
-    /**
-     * Returns an immutable modulecode set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<ModuleCode> getModuleCodes() {
-        return Collections.unmodifiableSet(moduleCodes);
     }
 
     /**
@@ -166,28 +146,15 @@ public class Person {
     }
 
     /**
-     * Sets peron's modules
-     */
-    public void setModules(Set<Module> modules) {
-        this.modules = modules;
-    }
-
-    /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * returns true if both persons contain the exact same fields.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-            && otherPerson.getName().equals(getName());
+        return otherPerson.equals(this);
     }
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Checks that the module codes of the modules associated with the persons are equivalent.
      */
     @Override
     public boolean equals(Object other) {
@@ -199,12 +166,16 @@ public class Person {
             return false;
         }
 
+        Set<ModuleCode> moduleCodes = getModules().stream().map(Module::getModuleCode).collect(Collectors.toSet());
+        Set<ModuleCode> otherModuleCodes = ((Person) other).getModules().stream().map(Module::getModuleCode)
+            .collect(Collectors.toSet());
+
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
             && otherPerson.getPhone().equals(getPhone())
             && otherPerson.getEmail().equals(getEmail())
             && otherPerson.getTags().equals(getTags())
-            && otherPerson.getModules().equals(getModules());
+            && otherModuleCodes.equals(moduleCodes);
     }
 
     @Override

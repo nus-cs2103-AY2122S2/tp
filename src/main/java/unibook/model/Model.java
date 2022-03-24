@@ -83,12 +83,6 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Adds the given person to all of its modules.
-     * {@code person} must exist in the UniBook.
-     */
-    void addPersonToTheirModules(Person person);
-
-    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the UniBook.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the UniBook.
@@ -127,10 +121,9 @@ public interface Model {
 
     void setModule(Module target, Module editedModule);
 
-    boolean isModuleExist(Person person);
-
     /**
      * Finds the corresponding module to the module code.
+     *
      * @return Module belonging to the ModuleCode
      */
     Module getModuleByCode(ModuleCode moduleCode);

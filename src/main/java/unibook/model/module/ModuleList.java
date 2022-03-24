@@ -85,6 +85,7 @@ public class ModuleList implements Iterable<Module> {
 
     /**
      * Removes a module from ModuleList if it matches toRemove.
+     *
      * @param toRemove
      */
     public void removeByModuleCode(ModuleCode toRemove) {
@@ -100,6 +101,7 @@ public class ModuleList implements Iterable<Module> {
 
     /**
      * Remove person from every module in ModuleList if present
+     *
      * @param person
      */
     public void removePersonFromModule(Person person) {
@@ -149,11 +151,10 @@ public class ModuleList implements Iterable<Module> {
      * Returns the module with given moduleCode if it exists in module list.
      * If not, throws ModuleNotExistException.
      *
-     * @param moduleCode moudleCode of intended module
-     * @return the module with matching moduleCode
-     * @throws ModuleNotFoundException TODO write tests
+     * @param moduleCode moudleCode of intended module.
+     * @return the module with matching moduleCode.
      */
-    public Module getModuleByCode(ModuleCode moduleCode) throws ModuleNotFoundException {
+    public Module getModuleByCode(ModuleCode moduleCode) {
         requireAllNonNull(moduleCode);
         for (Module module : internalList) {
             if (module.hasModuleCode(moduleCode)) {

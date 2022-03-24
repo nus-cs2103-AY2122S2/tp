@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a Delete Command Object that will delete a person at targetIndex.
+     *
      * @param targetIndex Index object that describes the person at that index to delete
      */
     public DeleteCommand(Index targetIndex) {
@@ -42,6 +43,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a Delete Command Object that will delete a module that has moduleCode
+     *
      * @param moduleCode
      */
     public DeleteCommand(ModuleCode moduleCode) {
@@ -50,6 +52,7 @@ public class DeleteCommand extends Command {
     }
 
     // execute will delete the specified index of person or module depending on what is currently showing
+    //TODO remove person from
     @Override
     public CommandResult execute(Model model,
                                  Boolean isPersonListShowing,
@@ -74,11 +77,13 @@ public class DeleteCommand extends Command {
 
             // Bi-directionality
             model.deletePerson(personToDelete); // delete person from UniquePersonList
-            model.removePersonFromAllModules(personToDelete); // delete person from each module in ModuleList
+            //model.removePersonFromAllModules(personToDelete); // delete person from each module in ModuleList
+            //removed this as this shld be implemented on the UniBook side, not here, for consistency (else testing
+            //quite tough)
 
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
 
-        // delete module by code case
+            // delete module by code case
         } else if (targetIndex == null && moduleCode != null) {
 
             // if not on module page, throw exception telling users to change page
