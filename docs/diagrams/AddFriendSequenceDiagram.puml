@@ -1,0 +1,100 @@
+@startuml
+!include style.puml
+
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "d:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:Person" as Person MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addfriend \n n/John Doe p/97367116 \n e/john_doe@test.com")
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addfriend \n n/John Doe p/97367116 \n e/john_doe@test.com")
+activate AddressBookParser
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser : parse("n/John Doe \n p/97367116 \n e/john_doe@test.com")
+activate AddCommandParser
+
+AddCommandParser -> ParserUtil : parseName("John Doe")
+activate ParserUtil
+ParserUtil --> AddCommandParser
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parsePhone("97367116")
+activate ParserUtil
+ParserUtil --> AddCommandParser
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parseEmail("john_doe@test.com")
+activate ParserUtil
+ParserUtil --> AddCommandParser
+deactivate ParserUtil
+
+create Person
+AddCommandParser -> Person
+activate Person
+Person --> AddCommandParser : p
+deactivate Person
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Person -[hidden]-> AddCommandParser
+destroy Person
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand
+
+AddCommand --> AddCommandParser : d
+deactivate AddCommand
+
+AddCommandParser --> AddressBookParser : d
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+AddCommand -> Model : addPerson(p)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+
