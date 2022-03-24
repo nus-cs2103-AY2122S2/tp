@@ -250,6 +250,9 @@ Puts a `Person` into a `Lineup`
 Stores the `LineupName` in `Person`
 
 Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
+
+![put](images/Put.png)
+
 #### Design Consideration
 **Aspect: How to navigate from player to lineup:**
 
