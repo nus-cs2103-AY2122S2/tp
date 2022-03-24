@@ -449,6 +449,37 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+1. _{ more test cases …​ }_
+
+### Deleting a tag
+1. Deleting a tag while all tags are being shown
+
+    1. Prerequisites: List all tags using the `list_tag` command. Multiple tags in the tag list.
+
+    1. Test case: `delete_tag 1`<br>
+       Expected: First tag is deleted from the list. Details of the deleted tag are shown in the status message. Tag in the profile will be updated.
+
+    1. Test case: `delete_tag 0`<br>
+       Expected: No tag is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete_tag`, `delete_tag x`, (where x is larger than the list size),`delete_tag abc`, `...`, (where abc is not integer) <br>
+       Expected: Similar to previous.
+        
+1. _{ more test cases …​ }_
+
+### Detach a tag from a profile
+1.  Detach a tag from a profile in index
+
+    1. Prerequisites: Create profile with tags using `add`
+
+    1. Test case: `detach t/TAGNAME i/1`<br>
+       Expected: TAGNAME is detached from the profile in index 1. Details of the deleted tag and the profile operated on are shown in the status message. Tag in the profile will be updated.
+
+    1. Test case: `detach t/INVALID_NAME i/1`<br>
+       Expected: No tag is detached. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect detach commands to try: `detach`, `detach t/TAGNAME i/x`, (where x is larger than the list size), `...`<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
