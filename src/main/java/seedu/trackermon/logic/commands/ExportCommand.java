@@ -34,10 +34,8 @@ public class ExportCommand extends Command {
         }
 
         public void run(){
-            if (System.getProperty("os.name").contains("Mac")) {
-                System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
-                System.setProperty("apple.awt.fileDialogForDirectories", "true");
-            }
+            System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
+            System.setProperty("apple.awt.fileDialogForDirectories", "true");
 
             JFrame F = new JFrame();
             FileDialog fd = new FileDialog(F, "Choose a location to save Trackermon data: ", FileDialog.SAVE);
@@ -68,11 +66,15 @@ public class ExportCommand extends Command {
         try {
             test.join();
             if (test.getSuccess()) {
-                return new CommandResult(MESSAGE_SUCCESS, false);
+                return new CommandResult(MESSAGE_SUCCESS);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+            test.interrupt();
         }
-        return new CommandResult(MESSAGE_FAIL, false);
+//        if (test.getSuccess()) {
+//            return new CommandResult(MESSAGE_SUCCESS);
+//        }
+        return new CommandResult(MESSAGE_FAIL);
     }
 }

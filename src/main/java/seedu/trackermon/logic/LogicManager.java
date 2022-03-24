@@ -2,11 +2,13 @@ package seedu.trackermon.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.commons.core.LogsCenter;
+import seedu.trackermon.commons.exceptions.DataConversionException;
 import seedu.trackermon.logic.commands.Command;
 import seedu.trackermon.logic.commands.CommandResult;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
@@ -15,6 +17,7 @@ import seedu.trackermon.logic.parser.exceptions.ParseException;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.show.Show;
+import seedu.trackermon.model.util.SampleDataUtil;
 import seedu.trackermon.storage.Storage;
 
 
@@ -47,9 +50,16 @@ public class LogicManager implements Logic {
         Command command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+
         try {
+            if (commandResult.isImport()) {
+                Optional<ReadOnlyShowList> showListOptional = storage.readShowList();
+                ReadOnlyShowList currentData = model.getShowList();
+
+                model.setShowList(showListOptional.orElse(currentData));
+            }
             storage.saveShowList(model.getShowList());
-        } catch (IOException ioe) {
+        } catch (IOException | DataConversionException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 

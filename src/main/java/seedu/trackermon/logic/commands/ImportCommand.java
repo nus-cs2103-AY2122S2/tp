@@ -36,10 +36,8 @@ public class ImportCommand extends Command {
         }
 
         public void run() {
-            if (System.getProperty("os.name").contains("Mac")) {
-                System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
-                System.setProperty("apple.awt.fileDialogForDirectories", "true");
-            }
+            System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
+            System.setProperty("apple.awt.fileDialogForDirectories", "true");
 
             JFrame F = new JFrame();
             FileDialog fd = new FileDialog(F, "Choose a file to import Trackermon data: ", FileDialog.LOAD);
@@ -53,11 +51,8 @@ public class ImportCommand extends Command {
 
             Path importPath = Path.of(fd.getDirectory(), f.getName());
             Path dataPath = model.getShowListFilePath();
-            Path dataPathtest = Path.of(System.getProperty("user.dir"), "/data/trackermontest.json");
             try {
-                System.out.println(importPath);
-                System.out.println(dataPath.toAbsolutePath());
-                Files.copy(importPath, dataPathtest, StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(importPath, dataPath, StandardCopyOption.REPLACE_EXISTING);
                 isSuccess = true;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,14 +77,18 @@ public class ImportCommand extends Command {
         try {
             test.join();
             if (test.getSuccess()) {
-                return new CommandResult(MESSAGE_SUCCESS, false);
+                return new CommandResult(MESSAGE_SUCCESS, false, false, true);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+            test.interrupt();
         }
-        if (!test.getCorrectFileType()) {
-            return new CommandResult(MESSAGE_FAIL_WRONG_FILETYPE, false);
-        }
-        return new CommandResult(MESSAGE_FAIL, false);
+//        if (test.getSuccess()) {
+//            return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+//        }
+//        if (!test.getCorrectFileType()) {
+//            return new CommandResult(MESSAGE_FAIL_WRONG_FILETYPE);
+//        }
+        return new CommandResult(MESSAGE_FAIL);
     }
 }
