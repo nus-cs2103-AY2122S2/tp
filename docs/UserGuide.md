@@ -243,14 +243,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                      |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                        |
-| **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                                                                                                 |
-| **Edit**   | `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                           |
-| **Exit**   | `exit`                                                                                                                                                |
-| **Find**   | `find <KEYWORD>`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/<TAG>]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
-| **List**   | `list`                                                                                                                                                |
+| Action      | Format, Examples                                                                                                                                      |
+|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/<NAME> s/<STATUS> [c/<COMMENT>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching c/Good Show t/Anime`                                              |
+| **Delete**  | `delete <INDEX>`<br> e.g., `delete 3`                                                                                                                 |
+| **Edit**    | `edit <INDEX> [n/<NAME>] [s/<STATUS>] [c/<COMMENT>] [t/<TAG>]…​` <br> e.g., `edit 1 n/ReZero s/watching c/Good Show t/Anime`                          |
+| **Comment** | `comment <INDEX> [c/<COMMENT>]`  eg., `comment 2 c/Bad`                                                                                               |
+| **Exit**    | `exit`                                                                                                                                                |
+| **Find**    | `find <KEYWORD>`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/<TAG>]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
+| **List**    | `list`                                                                                                                                                |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
