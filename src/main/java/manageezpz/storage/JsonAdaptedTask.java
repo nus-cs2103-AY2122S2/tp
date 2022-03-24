@@ -33,7 +33,7 @@ class JsonAdaptedTask {
     private String eventEndTime;
     private String status;
     private String tag;
-
+    private String priority;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given person details.
@@ -44,7 +44,8 @@ class JsonAdaptedTask {
                            @JsonProperty("date") String date, @JsonProperty("deadlineTime") String deadlineTime,
                            @JsonProperty("eventStartTime") String eventStartTime,
                            @JsonProperty("eventEndTime") String eventEndTime,
-                           @JsonProperty("tag") String tag) {
+                           @JsonProperty("tag") String tag,
+                           @JsonProperty("priority") String priority) {
         this.description = new Description(description).toString();
         this.status = status;
         this.type = type;
@@ -53,6 +54,7 @@ class JsonAdaptedTask {
         this.eventStartTime = eventStartTime;
         this.eventEndTime = eventEndTime;
         this.tag = tag;
+        this.priority = priority;
     }
 
     /**
@@ -63,6 +65,7 @@ class JsonAdaptedTask {
         description = source.getDescription().toString(); // Generally for all tasks
         type = source.getType(); // Generally for all tasks
         status = source.getStatusIcon(); // Generally for all tasks
+        this.priority = source.getPriority().name(); // Generally for all tasks
         if (source instanceof Deadline) {
             this.date = ((Deadline) source).getDate().getDate(); // For Deadline
             this.deadlineTime = ((Deadline) source).getTime().getTime(); // For Deadline
@@ -80,6 +83,7 @@ class JsonAdaptedTask {
         StringJoiner joiner = new StringJoiner(", ");
         personList.forEach(item -> joiner.add(item.getName().toString()));
         this.tag = joiner.toString();
+
     }
 
     /**
@@ -110,7 +114,9 @@ class JsonAdaptedTask {
             if (isDone) {
                 newTodo.setTaskDone();
             }
-
+            if (priority != null && !priority.isEmpty()) {
+                newTodo.setPriority(priority);
+            }
             String[] tagList = tag.split(",");
             for (int i = 0; i < tagList.length; i++) {
                 String currentTag = tagList[i].trim();
@@ -131,6 +137,9 @@ class JsonAdaptedTask {
             if (isDone) {
                 newDeadline.setTaskDone();
             }
+            if (priority != null && !priority.isEmpty()) {
+                newDeadline.setPriority(priority);
+            }
             String[] tagList = tag.split(",");
             for (int i = 0; i < tagList.length; i++) {
                 String currentTag = tagList[i].trim();
@@ -150,6 +159,9 @@ class JsonAdaptedTask {
             Event newEvent = new Event(desc, currEventDate, currEventStartTime, currEventEndTime);
             if (isDone) {
                 newEvent.setTaskDone();
+            }
+            if (priority != null && !priority.isEmpty()) {
+                newEvent.setPriority(priority);
             }
             String[] tagList = tag.split(",");
             for (int i = 0; i < tagList.length; i++) {
