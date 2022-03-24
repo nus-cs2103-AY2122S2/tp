@@ -1,8 +1,6 @@
 package seedu.contax.logic.parser;
 
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 

@@ -3,10 +3,8 @@ package seedu.contax.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_END_WITH;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_START_WITH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,6 @@ import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
-import seedu.contax.logic.parser.ArgumentMultimap;
 import seedu.contax.logic.parser.ParserUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
