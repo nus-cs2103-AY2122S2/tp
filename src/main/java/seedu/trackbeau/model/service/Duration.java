@@ -1,4 +1,5 @@
 package seedu.trackbeau.model.service;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 
@@ -10,8 +11,8 @@ public class Duration {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Duration should only contain numbers, at most 2 decimal places and it is positive.";
-    public static final String VALIDATION_REGEX = "^[+]?[0-9]{1,9}(?:\\.[0-9]{1,2})?$";
+        "Duration should only contain positive numbers and have a value that is greater than 0";
+    public static final String VALIDATION_REGEX = "^\\s*(?=.*[1-9])\\d*$";
     public final Integer value;
 
     /**
@@ -50,8 +51,8 @@ public class Duration {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Duration // instanceof handles nulls
-                && value.equals(((Duration) other).value)); // state check
+            || (other instanceof Duration // instanceof handles nulls
+            && value.equals(((Duration) other).value)); // state check
     }
 
     @Override

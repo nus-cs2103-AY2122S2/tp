@@ -15,4 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_STAFFS = new Prefix("stp/");
     public static final Prefix PREFIX_SERVICES = new Prefix("sep/");
     public static final Prefix PREFIX_ALLERGIES = new Prefix("al/");
+    public static final Prefix PREFIX_PRICE = new Prefix("pr/");
+    public static final Prefix PREFIX_DURATION = new Prefix("d/");
 }

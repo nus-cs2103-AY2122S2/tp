@@ -15,8 +15,10 @@ import seedu.trackbeau.logic.commands.ExitCommand;
 import seedu.trackbeau.logic.commands.FindCommand;
 import seedu.trackbeau.logic.commands.HelpCommand;
 import seedu.trackbeau.logic.commands.ListCommand;
+import seedu.trackbeau.logic.commands.service.AddServiceCommand;
 import seedu.trackbeau.logic.commands.service.ListServicesCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
+import seedu.trackbeau.logic.parser.service.AddServiceCommandParser;
 
 /**
  * Parses user input.
@@ -46,7 +48,10 @@ public class TrackBeauParser {
         switch (commandWord) {
         case ListServicesCommand.COMMAND_WORD:
             return new ListServicesCommand();
-            
+
+        case AddServiceCommand.COMMAND_WORD:
+            return new AddServiceCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 

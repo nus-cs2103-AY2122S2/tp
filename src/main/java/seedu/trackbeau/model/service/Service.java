@@ -2,6 +2,8 @@ package seedu.trackbeau.model.service;
 
 import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -80,10 +82,13 @@ public class Service {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+        Locale locale = new Locale("en", "SG");
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
+        String priceString = formatter.format(getPrice().value);
         builder.append(getName())
-                .append("; Price: $")
-                .append(getPrice())
-                .append("; Duration (in hours): ")
+                .append("; Price: ")
+                .append(priceString)
+                .append("; Duration (in minutes): ")
                 .append(getDuration());
 
         return builder.toString();

@@ -10,8 +10,8 @@ public class Price {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Price should only contain numbers, at most 2 decimal places and it is positive.";
-    public static final String VALIDATION_REGEX = "^[+]?[0-9]{1,9}(?:\\.[0-9]{1,2})?$\n";
+            "Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.";
+    public static final String VALIDATION_REGEX = "^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$";
     public final Double value;
 
     /**
