@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
@@ -47,16 +48,47 @@ public class Event {
         return name;
     }
 
-    private LocalDate getDate() {
-        return dateTime.getDate();
-    }
-
     public DateTime getDateTime() {
         return dateTime;
     }
 
     public Description getDescription() {
         return description;
+    }
+
+    /**
+     * Returns true if the given {@code substring} is contained within this event's name.
+     * Case-insensitive.
+     *
+     * @param substring Substring to search for in this event's name.
+     * @return True if given substring is contained within this event's name.
+     */
+    public boolean hasNameSubstring(String substring) {
+        requireNonNull(substring);
+        return getName().containsIgnoreCase(substring);
+    }
+
+    /**
+     * Returns true if the given {@code substring} is contained within this event's friend names.
+     * Case-insensitive.
+     *
+     * @param substring Substring to search for in this event's friend names.
+     * @return True if the given substring is contained within this event's friend names.
+     */
+    public boolean hasFriendNameSubstring(String substring) {
+        requireNonNull(substring);
+        return getFriendNames().stream().anyMatch(name -> name.containsIgnoreCase(substring));
+    }
+
+    /**
+     * Returns true if the given {@code date} matches this event's date.
+     *
+     * @param date Date to check this event's date against.
+     * @return True if given date matches this event's date.
+     */
+    public boolean isOnDate(LocalDate date) {
+        requireNonNull(date);
+        return getDateTime().hasSameDate(date);
     }
 
     /**
@@ -127,7 +159,7 @@ public class Event {
 
         return otherEvent != null
                 && otherEvent.getName().equals(getName())
-                && otherEvent.getDate().equals(getDate());
+                && otherEvent.getDateTime().hasSameDate(getDateTime());
     }
 
     /**
