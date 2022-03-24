@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 0.5
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" UniqueInterviewList
+UniqueInterviewList -[hidden]down- UniqueInterviewList
+
+UniqueInterviewList *-right-> "*" Interview
+UniquePersonList -right-> Candidate
+
+Candidate -up-> "1" Interview
+
+Candidate *--> StudentId
+Candidate *--> Name
+Candidate *--> Phone
+Candidate *--> Email
+Candidate *--> Course
+Candidate *--> Seniority
+Candidate *--> ApplicationStatus
+Candidate *--> InterviewStatus
+Candidate *--> Availability
+@enduml

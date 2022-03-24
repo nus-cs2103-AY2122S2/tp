@@ -154,6 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<<<<<<< HEAD
 ### Find feature
 
 #### What is the feature about?
@@ -207,6 +208,72 @@ checks for the specific related entity, and should not have any other reason to 
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens when a user executes a `find` command: <br>
 <img src="images/FindActivityDiagram.png" width="250" />
+=======
+### Candidate model
+
+#### Previous Implementation
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+#### Current Implementation
+
+To suit the direction of where TAlent Assistant™ is headed to, the previous `Person` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
+
+List of new entities:
+1. `StudentId`
+2. `Course`
+3. `Seniority`
+4. `ApplicationStatus`
+5. `InterviewStatus`
+6. `Availability`
+
+<img src="images/CandidateModelClassDiagram.png" />
+
+### Add feature
+
+#### What is the feature about?
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities (Refer to [TODO: UPDATE LINK]).
+
+The enhancement works by adding additional prefixes i.e. `id/[StudentId] `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned to the entities.
+
+#### How is the feature implemented?
+
+Given below is an example usage scenario and how the `add` mechanism behaves at each step.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** TAlent Assistant™ comes with preloaded data, user can execute the `clear` command for a fresh state.
+
+</div>
+
+Step 1. The user launches the application for the first time. The program will be initialised with the preloaded data.
+
+Step 2. The user proceeds to add a candidate by running the `add` command with its necessary arguments. The image provides an example of this step.
+
+![AddStep2](images/AddStep2.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Tip:** Todo: Update image
+
+</div>
+
+#### Why is the feature implemented as such?
+
+The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input. 
+
+#### UML Diagrams
+**Activity Diagram**
+
+<br>
+
+The following activity diagram summarizes what happens when a user executes an `add` command:
+
+<br>
+
+<img src="images/AddActivityDiagram.png" width="250" />
+
+>>>>>>> b1bec0a1ff1ab25d7325a6189005c0e1bc82bda8
 
 ### \[Proposed\] Undo/redo feature
 

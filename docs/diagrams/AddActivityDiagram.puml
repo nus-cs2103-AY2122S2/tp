@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes add command;
+
+if () then ([candidate does not exist in system])
+    :Save candidate to system;
+else ([else])
+endif
+stop
+
+@enduml
