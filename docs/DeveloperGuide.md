@@ -156,9 +156,9 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add feature
 
-The add mechanism implements the following sequence and interactions for the method call execute("add NEW_PERSON_TAGS") on a LogicManager object where NEW_PERSON_TAGS refers to the tags of a person to be added. 
+The add mechanism implements the following sequence and interactions for the method call execute("add NEW_PERSON_TAGS") on a LogicManager object where NEW_PERSON_TAGS refers to the tags of a person to be added.
 
-The original AB3 implementation of the add feature only had a selected general few tags to be used (name, email, address, phone, email). To address our target users for this application, we added the tags block, faculty, matriculation number and covid status. 
+The original AB3 implementation of the add feature only had a selected general few tags to be used (name, email, address, phone, email). To address our target users for this application, we added the tags block, faculty, matriculation number and covid status.
 
 In order to accommodate this new fields, we added new attributes into the `Person` Class and also created `Block`, `Faculty`, `MatriculationNumber` and `CovidStatus` classes.
 
@@ -177,9 +177,9 @@ Modelling the workflow of the `Add` Command, when the user inputs an **Add Comma
 :information_source: **Note** Replace `NEW_PERSON_TAGS` in the sequence diagram with the tags stated in the notes shown in the sequence diagram.
 </div>
 
-When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `AddCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `Person` object is instantiated and this object is subsequently used as a parameter to instantiate an `AddCommand` object. 
+When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `AddCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `Person` object is instantiated and this object is subsequently used as a parameter to instantiate an `AddCommand` object.
 
-Following this, `Logic Manager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person exists, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it returns a new `CommandResult` object containing a string that indicates success of Add Command.  
+Following this, `Logic Manager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person exists, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it returns a new `CommandResult` object containing a string that indicates success of Add Command.
 
 
 ### Summarise feature
@@ -218,9 +218,69 @@ of covid cases in that hall. `filterByBlock` method is then called on the list a
 Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
 A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
 
+
+#### Pie Chart Window feature
+
+#### <ins>How the feature is implemented<ins/>
+
+This feature is implemented using a new class `PieChartWindow` and modifications to `SummariseCommand` and `MainWindow` (more information is shown below). When the user inputs `SummariseCommand`, `SummariseCommand#summariseFaculty()` and `SummariseCommand#summariseBlock()` will be invoked and puts the necessary data into a `TreeMap` that is a static variable of `SummariseCommand`. In `MainWindow#executeCommand()`, it will invoke `MainWindow#handleSummarise()` which calls `PieChartWindow#execute()` to create the pie chart and opens a new window. The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
+ 
+**New class: `PieChartWindow`**
+ 
+A `PieChartWindow` controller class and a `PieChartWindow` FXML class is created for this feature.
+The `PieChartWindow` controller class will create pie charts using data from `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
+
+Addition of method(s) to `PieChartWindow` controller class:
+* `PieChartWindow#execute()` puts all of the pie chart into a `VBox` and set the scene for the `PieChartWindow` FXML class
+* `PieChartWindow#makePieChart()` creates a pie chart
+* `PieChartWindow#collateBlocksChart()` creates a pie chart using `PieChartWindow#makePieChart()` for each block that shows covid positive, negative and HRN percentage for contacts present in Tracey and adds it to a `HBox`
+* `PieChartWindow#createFacultyChartPositive()` creates a pie chart using `PieChartWindow#makePieChart()` that shows the covid positive percentage for all faculties for each contact present in Tracey and adds it to a `HBox`
+* `PieChartWindow#makePieChartScene()` creates the scene for the pie charts
+* `PieChartWindow#show()` show the pie chart window
+* `PieChartWindow#isShowing()` returns a boolean whether the pie chart window is showing
+* `PieChartWindow#hide()` hide the pie chart window
+
+**Modifications to `SummariseCommand`**
+
+Addition of variable(s):
+* `positiveStatsByFacultyData`, a private static variable of type `TreeMap<String, Double>`
+* `covidStatsByBlockDataList`, a private static variable of type `TreeMap<String, TreeMap<String, Double>>`
+
+Modifications to existing method(s):
+* `SummariseCommand#summariseFaculty()` will put in `numberOfPositive` (percentage of covid-positive cases in its respective faculty) for each `facultyName` (pre-defined constants from the `Faculty` class) into `positiveStatsByFacultyData` for contacts that are present in Tracey.
+* `SummariseCommand#summariseBlock()` will put in `numberOfPositive`, `numberOfNegative` and `numberOfHrn` for each `blockLetter` (pre-defined constants from the `Block` class) into a local variable of type `TreeMap<String, Double>` and then puts into `covidStatsByBlockDataList` for each for contacts that are present in Tracey.
+
+Addition of method(s):
+* `SummariseCommand#getPositiveStatsByFacultyData()` getter method that returns `positiveStatsByFacultyData`
+* `SummariseCommand#getCovidStatsByBlockDataList()` getter method that returns `covidStatsByBlockDataList`
+ 
+**Modifications to `MainWindow`**
+
+Modifications to existing method(s):
+* `MainWindow#executeCommand()` will now check if the command is a `SummariseCommand`, if it is then `MainWindow#handleSummarise()` will be invoked
+  Addition of method(s):
+* `MainWindow#handleSummarise()` shows the pie chart window if it is not already open, or else will reopen a new pie chart window
+
 **Sequence Diagram of Pie Chart Window Feature is shown below:**
 ![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
-(to be continued)...
+
+#### <ins>Why it is implemented that way<ins/>
+The data needed for the pie charts should be coupled with `SummariseCommand`, therefore it is necessary to implement this feature in such a way that the pie chart data is created upon invocation `SummariseCommand`. A `PieChartWindow` controller and FXML class is also needed to abstract the creation of the pie charts and opening a new window respectively. The `MainWindow` class is then modified accordingly.
+
+#### <ins>Alternatives considered<ins/>
+
+**Aspect: How data is passed to the pie charts:**
+
+* **Alternative 1 (current choice):** `SummariseCommand` will pass in necessary data into data structures (`TreeMap` in this case) upon invocation which then can be obtained using getter methods
+    * Pros: Easy to implement.
+    * Cons: Dependent on the `SummariseCommand` class to pass in correct inputs.
+    * Other consideration(s):
+        ** Use the Singleton design principle for the data structures.
+
+* **Alternative 2:** Parse the feedback to user message from `SummariseCommand`
+    * Pros: No modifications to the `SummariseCommand` class.
+    * Cons: Dependent on the feedback message, need to implement complicated methods to parse the message, parsing methods need to be modified if the format of the feedback message is changed.
+
 
 ### Clear feature
 
@@ -459,9 +519,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The student to be added already exist in the list by Tracey.
 
     * 1b1. Tracey inform user that the contact exist in her.
-    
-* 1c. User adds multiple students in one go.
   
+* 1c. User adds multiple students in one go.
+
     * 1c1. Tracey will list out a list of new students added with their info.
 
 * 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
@@ -469,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. Tracey will provide a list of pre-defined constants for the user.
 
     * 1d2. User use the correct pre-defined constants for the respective tags.
-    
+
 **Use case: Edit information of a student**
 
 **MSS**
@@ -591,9 +651,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Student Status**: A student detail that indicates whether the student has Covid-19
-* **Health Risk Warning**: A warning that informs school and students for high health risk
-* **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus.
-* **NUS IT**: The information technology department at the National University of Singapore
+* **Health Risk Notice**: Household members living with individuals diagnosed with Covid-19 are issued with this notice
+* **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus
+* **NUS Hall**: Hall of residence in the National University of Singapore
+* **Resident Fellow** Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
+* **Hall leaders** Student leaders in NUS halls
+
 
 --------------------------------------------------------------------------------------------------------------------
 
