@@ -24,7 +24,7 @@ public class PreferenceContainsKeywordsPredicate implements Predicate<Person> {
         if (person.getPreference().isEmpty()) {
             return false;
         } else {
-            String preference = person.getPreference().get().toParseValue();
+            String preference = person.getPreference().get().toPlainString();
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(preference, keyword));
         }

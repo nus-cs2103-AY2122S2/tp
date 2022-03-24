@@ -23,7 +23,7 @@ public class PropertiesContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream().anyMatch(keyword ->
                 person.getProperties().stream().anyMatch(property ->
-                        StringUtil.containsWordIgnoreCase(property.toParseValue(), keyword)));
+                        StringUtil.containsWordIgnoreCase(property.toPlainString(), keyword)));
     }
 
     @Override

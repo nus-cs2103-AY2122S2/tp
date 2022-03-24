@@ -54,6 +54,14 @@ public class Property {
         return region + "," + address + "," + size + "," + price.value;
     }
 
+    /**
+     * Returns a plain string representation of this {@code Property}
+     * which concatenates all attributes with spaces.
+     */
+    public String toPlainString() {
+        return region + " " + address + " " + size + " " + price.value;
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

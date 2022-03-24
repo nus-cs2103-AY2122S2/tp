@@ -7,10 +7,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
-//import static seedu.address.testutil.TypicalPersons.FEREN;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.PERTY;
-//import static seedu.address.testutil.TypicalPersons.PREF;
+import static seedu.address.testutil.TypicalPersons.PREF;
 import static seedu.address.testutil.TypicalPersons.PROTY;
 import static seedu.address.testutil.TypicalPersons.getVariousAddressBook;
 
@@ -176,7 +175,6 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
-    /*
     @Test
     public void execute_multiplePropertiesKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
@@ -187,7 +185,6 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(PROTY, PERTY), model.getFilteredPersonList());
     }
-    */
 
     @Test
     public void execute_zeroPreferenceKeywords_noPersonFound() {
@@ -199,18 +196,16 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
-    /*
     @Test
     public void execute_multiplePreferenceKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         PreferenceContainsKeywordsPredicate predicate =
-                preparePreferencePredicate("west $50000");
+                preparePreferencePredicate("east $50000");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(PREF, FEREN), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(PREF), model.getFilteredPersonList());
     }
-    */
 
     @Test
     public void execute_zeroUserTypeKeywords_noPersonFound() {

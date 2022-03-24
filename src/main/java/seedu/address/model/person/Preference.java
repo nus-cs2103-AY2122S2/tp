@@ -64,6 +64,14 @@ public class Preference {
         return region + "," + size + "," + lowPrice.value + "," + highPrice.value;
     }
 
+    /**
+     * Returns a plain string representation of this {@code Preference}
+     * which concatenates all attributes with spaces.
+     */
+    public String toPlainString() {
+        return region + " " + size + " " + lowPrice.value + " " + highPrice.value;
+    }
+
     @Override
     public String toString() {
         return "[Region: " + region
