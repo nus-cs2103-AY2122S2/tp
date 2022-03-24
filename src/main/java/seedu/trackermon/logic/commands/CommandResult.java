@@ -17,13 +17,24 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean isExit;
 
+    /** The application is importing a file. */
+    private final boolean isImport;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.isShowHelp = isShowHelp;
+        this.isExit = isExit;
+        this.isImport = isImport;
+    }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.isShowHelp = isShowHelp;
-        this.isExit = isExit;
+        this(feedbackToUser, isShowHelp, isExit, false);
     }
 
     /**
@@ -44,6 +55,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return isExit;
+    }
+
+    public boolean isImport() {
+        return isImport;
     }
 
     @Override
@@ -67,5 +82,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, isShowHelp, isExit);
     }
-
 }

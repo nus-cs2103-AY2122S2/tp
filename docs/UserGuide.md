@@ -135,7 +135,7 @@ Format: `find <KEYWORD>`
 
 Examples:
 * `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name, status or tag.[put image here after ui update]
-* * `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name, status or tag.[put image here after ui update]
+* `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name, status or tag.[put image here after ui update]
 
 **Precise Find** Finds shows in Trackermon by matching the user's input across name, status and tag parameters with prefixes.
 
