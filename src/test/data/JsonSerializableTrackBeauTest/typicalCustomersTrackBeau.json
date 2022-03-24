@@ -1,74 +1,95 @@
 {
-  "_comment": "TrackBeau save file which contains the same Customer values as in TypicalCustomers#getTypicalTarckBeau()",
-  "customers" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "skinType": "oily",
-    "hairType": "dry",
-    "staffs" : [ "Jason" ],
-    "services" : ["Acne treatment"],
-    "allergies" : ["Nickel"]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "skinType": "oily",
-    "hairType": "dry",
-    "staffs" : [ "Jason" ],
-    "services" : ["Chemical Peel"],
-    "allergies" : []
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "skinType": "oily",
-    "hairType": "dry",
-    "staffs" : [],
-    "services" : [],
-    "allergies" : []
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "skinType": "oily",
-    "hairType": "dry",
-    "staffs" : [],
-    "services" : [],
-    "allergies" : ["Cocoa Butter"]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "skinType": "oily",
-    "hairType": "dry",
-    "staffs" : [],
-    "services" : [],
-    "allergies" : []
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "skinType": "oily",
-    "hairType": "dry",
-    "staffs" : [],
-    "services" : [],
-    "allergies" : []
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "skinType": "oily",
-    "hairType": "dry",
-    "staffs" : [],
-    "services" : [],
-    "allergies" : []
-  } ]
+  "_comment": "TrackBeau save file which contains the same Customer values as in TypicalCustomers#getTypicalTrackBeau()",
+  "customers": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "skinType": "oily",
+      "hairType": "dry",
+      "staffs": [
+        "Jason"
+      ],
+      "services": [
+        "Acne treatment"
+      ],
+      "allergies": [
+        "Nickel"
+      ]
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "skinType": "oily",
+      "hairType": "dry",
+      "staffs": [
+        "Jason"
+      ],
+      "services": [
+        "Chemical Peel"
+      ],
+      "allergies": []
+    },
+    {
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "heinz@example.com",
+      "address": "wall street",
+      "skinType": "oily",
+      "hairType": "dry",
+      "staffs": [],
+      "services": [],
+      "allergies": []
+    },
+    {
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "address": "10th street",
+      "skinType": "oily",
+      "hairType": "dry",
+      "staffs": [],
+      "services": [],
+      "allergies": [
+        "Cocoa Butter"
+      ]
+    },
+    {
+      "name": "Elle Meyer",
+      "phone": "9482224",
+      "email": "werner@example.com",
+      "address": "michegan ave",
+      "skinType": "oily",
+      "hairType": "dry",
+      "staffs": [],
+      "services": [],
+      "allergies": []
+    },
+    {
+      "name": "Fiona Kunz",
+      "phone": "9482427",
+      "email": "lydia@example.com",
+      "address": "little tokyo",
+      "skinType": "oily",
+      "hairType": "dry",
+      "staffs": [],
+      "services": [],
+      "allergies": []
+    },
+    {
+      "name": "George Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "address": "4th street",
+      "skinType": "oily",
+      "hairType": "dry",
+      "staffs": [],
+      "services": [],
+      "allergies": []
+    }
+  ],
+  "services": []
 }

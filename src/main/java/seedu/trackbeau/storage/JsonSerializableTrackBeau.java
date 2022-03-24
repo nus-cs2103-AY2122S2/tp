@@ -27,7 +27,7 @@ class JsonSerializableTrackBeau {
     private final List<JsonAdaptedService> services = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTrackBeau} with the given customers.
+     * Constructs a {@code JsonSerializableTrackBeau} with the given customers and services.
      */
     @JsonCreator
     public JsonSerializableTrackBeau(@JsonProperty("customers") List<JsonAdaptedCustomer> customers,

@@ -23,9 +23,9 @@ public class ServiceListPanel extends UiPart<Region> {
     /**
      * Creates a {@code CustomerListPanel} with the given {@code ObservableList}.
      */
-    public ServiceListPanel(ObservableList<Service> customerList) {
+    public ServiceListPanel(ObservableList<Service> serviceList) {
         super(FXML);
-        serviceListView.setItems(customerList);
+        serviceListView.setItems(serviceList);
         serviceListView.setCellFactory(listView -> new ServiceListViewCell());
     }
 
