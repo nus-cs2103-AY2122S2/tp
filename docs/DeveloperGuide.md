@@ -172,6 +172,8 @@ Step 1. The user lists all the task by listing the task with the 'list' command.
 
 Step 2. The user executes `mark 4` command to mark the task `Watch Netflix with Mum` as done.
 
+![](images/MarkTask.png)
+
 #### Design considerations
 
 - The user is able to mark a task as done through the index specified in the list view.
@@ -197,6 +199,8 @@ Step 1. The user lists all the task by listing the task with the 'list' command.
 
 Step 2. The user executes `unmark 4` command to mark the task `Watch Netflix with Mum` as not done yet.
 
+![](images/UnmarkTask.png)
+
 #### Design considerations
 
 - The user is able to mark a task as not done yet through the index specified in the list view.
@@ -221,6 +225,8 @@ Given below is an example usage scenario and how the Delete Task mechanism behav
 Step 1. The user lists all the task by listing the task with the 'list' command.
 
 Step 2. The user executes `delete 4` command to delete the task `Watch Netflix with Mum`.
+
+![](images/DeleteTask.png)
 
 #### Design considerations
 
