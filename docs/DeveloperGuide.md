@@ -154,6 +154,58 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### 1. Add feature
+
+#### 1.1 Add Player
+#### Proposed implementation
+#### Design Consideration
+
+#### 1.2 Add lineup
+#### Proposed implementation
+#### Design Consideration
+
+### 2. Delete feature
+
+#### 2.1 Delete player
+#### Proposed implementation
+#### Design Consideration
+
+#### 2.2 Delete lineup
+#### Proposed implementation
+#### Design Consideration
+
+### 3. Edit feature
+
+#### 3.1 Edit player
+#### Proposed implementation
+#### Design Consideration
+
+#### 3.2 Edit lineup
+#### Proposed implementation
+#### Design Consideration
+
+### 4. View feature
+
+#### 4.1 View player
+#### Proposed implementation
+#### Design Consideration
+
+#### 4.2 View lineup
+#### Proposed implementation
+#### Design Consideration
+
+### 5. Put feature
+
+#### Proposed implementation
+#### Design Consideration
+
+### 6. Clear feature
+
+#### Proposed implementation
+#### Design Consideration
+
+### Below are to be removed
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
