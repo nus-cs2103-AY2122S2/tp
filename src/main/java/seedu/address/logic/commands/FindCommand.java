@@ -75,8 +75,9 @@ public class FindCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        boolean isEquals = false;
         if (other == this) { // short circuit if same object
-            return true;
+            isEquals = true;
         } else {
             boolean isInstanceOf = other instanceof FindCommand;
             if (!isInstanceOf) { // instanceof handles nulls
@@ -85,18 +86,17 @@ public class FindCommand extends Command {
             FindCommand commandToCompare = (FindCommand) other;
             // only idPredicate present
             if (this.namePredicate == null && this.idPredicate != null && this.modCodePredicate == null) {
-                return idPredicate.equals(commandToCompare.idPredicate); // state check
+                isEquals = idPredicate.equals(commandToCompare.idPredicate); // state check
             }
             // only namePredicate present
-            else if (this.idPredicate == null && this.namePredicate != null && this.modCodePredicate == null) {
-                return namePredicate.equals(commandToCompare.namePredicate); // state check
+            if (this.idPredicate == null && this.namePredicate != null && this.modCodePredicate == null) {
+                isEquals = namePredicate.equals(commandToCompare.namePredicate); // state check
             }
             // only modCodePredicate present
-            else if (this.idPredicate == null && this.namePredicate == null && this.modCodePredicate != null) {
-                return modCodePredicate.equals(commandToCompare.modCodePredicate); // state check
-            } else {
-                return false;
+            if (this.idPredicate == null && this.namePredicate == null && this.modCodePredicate != null) {
+                isEquals = modCodePredicate.equals(commandToCompare.modCodePredicate); // state check
             }
         }
+        return isEquals;
     }
 }
