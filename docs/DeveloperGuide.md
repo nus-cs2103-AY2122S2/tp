@@ -77,7 +77,7 @@ successful assignment.
 
 Given below is an example usage scenario on how the assign command works.
 
-####Step 1: The user launches the application and executes the following
+#### Step 1: The user launches the application and executes the following
 * `addlesson -n Sec 2 Math...` which adds a `Lesson` named "Sec 2 Math".
 * `addstudent -n David...` which adds a `Student` named "David".
 
