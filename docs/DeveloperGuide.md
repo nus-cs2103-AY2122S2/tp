@@ -202,6 +202,38 @@ The following activity diagram summarizes the different possible paths when addi
     * Pros: Easier and faster to implement.
     * Cons: Code wise is more prone to errors and more defensive approach have to be used when handling the new attributes.
 
+### Flagging important clients
+
+The feature is implemented to provide functionality and visual representation of important clients. 
+Feature is needed for several user stories involving important clients. A new attribute is thus added to the current 
+Person class. Flag command is created to shorten the process of flagging a client, instead of needing to use the edit 
+command. 
+
+Additionally, a new prefix, `f/`, can be used in the add and edit command to specify the flag status directly. 
+This prefix is optional and can be left out during the creation of a new client contact. 
+
+All new clients will adopt a default `unflagged` state when the flag status is not specified. 
+
+The following sequence diagram shows how the `flag`/`unflag` command works:
+
+**[COMING SOON]**
+
+The following activity diagram summarizes how to flag a client.
+
+**[COMING SOON]**
+
+#### Design considerations:
+
+**Aspect: Ease of use of flag commands:**
+
+* **Alternative 1 (current choice):** `flag` and `unflag` split into separate commands. 
+    * Pros: More intuitive to use as compared to alternative 2 for any user.
+    * Cons: More commands to test and maintain.
+
+* **Alternative 2:** Single `flag` command and use an `f/` prefix to set new flag.
+    * Pros: Only one command for both scenarios and fewer tests needed.
+    * Cons: Usage is not very intuitive to a user.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
