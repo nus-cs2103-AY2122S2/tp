@@ -180,7 +180,8 @@ public class AddWindow extends UiPart<Stage> {
 
     /**
      * Retrieves the last index in {@code ReadOnlyAddressBook}'s list of Person.
-     * @return last index
+     * Indexing starts from 1.
+     * @return last 1-based index
      */
     private int getAbLastIndex() {
         ReadOnlyAddressBook ab = logic.getAddressBook();
