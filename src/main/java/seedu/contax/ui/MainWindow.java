@@ -19,6 +19,7 @@ import seedu.contax.logic.Logic;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.ui.appointment.AppointmentListPanel;
 import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
@@ -139,7 +140,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        appointmentListPanel = new AppointmentListPanel(logic.getScheduleItemList());
         tagListPanel = new TagListPanel(logic.getFilteredTagList());
 
         fillTabsFromPanels();

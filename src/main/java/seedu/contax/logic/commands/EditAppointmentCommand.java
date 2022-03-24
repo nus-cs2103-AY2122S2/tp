@@ -116,10 +116,10 @@ public class EditAppointmentCommand extends Command {
         Duration updatedDuration = editAppointmentDescriptor.getDuration()
                 .orElse(appointmentToEdit.getDuration());
 
-        StartDateTime updatedStartDateTime = appointmentToEdit.getStartDateTime();
+        StartDateTime updatedStartDateTime = appointmentToEdit.getStartDateTimeObject();
         if (editAppointmentDescriptor.isDateTimeUpdated()) {
             // Final modifier is required for lambda expressions
-            final LocalDateTime originalDateTime = appointmentToEdit.getStartDateTime().value;
+            final LocalDateTime originalDateTime = appointmentToEdit.getStartDateTime();
             final LocalDateTime updatedDate = editAppointmentDescriptor.getStartDate()
                     .map(date -> DateUtil.updateDate(originalDateTime, date)).orElse(originalDateTime);
             LocalDateTime updatedDateTime = editAppointmentDescriptor.getStartTime()

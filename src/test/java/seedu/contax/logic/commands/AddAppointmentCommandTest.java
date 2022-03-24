@@ -29,6 +29,8 @@ import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
@@ -71,7 +73,7 @@ public class AddAppointmentCommandTest {
     public void execute_overlappingAppointment_throwsCommandException() {
         Appointment validAppointment = new AppointmentBuilder().build();
         Appointment appointmentToAdd = new AppointmentBuilder()
-                .withStartDateTime(validAppointment.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(validAppointment.getStartDateTime().plusMinutes(1)).build();
         AddAppointmentCommand addCommand = new AddAppointmentCommand(appointmentToAdd, null);
         ModelStub modelStub = new ModelStubWithAppointment(validAppointment);
 
@@ -276,6 +278,26 @@ public class AddAppointmentCommandTest {
 
         @Override
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ScheduleItem> getScheduleItemList() {
             throw new AssertionError("This method should not be called.");
         }
     }

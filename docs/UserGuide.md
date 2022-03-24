@@ -359,6 +359,29 @@ Example:
 
 ![Appointments Between Wireframe](images/AppointmentsBetween.png)
 
+### Listing Empty Slots in Schedule Within A Period : `freebetween`
+
+Lists all empty slots in the schedule of a certain minimum duration, within the specified starting time to ending time.
+An appointment of the specified minimum duration can be inserted into each of the listed slots without causing any overlapping appointments in the schedule.
+
+Format: `freebetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME l/DURATION`
+
+* The starting time **must be before** the ending time.
+* The `STARTDATE` parameter denotes the *starting date* of the period.
+* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
+* The `ENDDATE` parameter denotes the *ending date* of the period.
+* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
+* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
+* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
+* The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
+
+Example:
+* `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60` Lists all empty slots in the schedule that are at least *60 minutes (1 hour)* long between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
+
+**Example Output:**
+
+![Appointments Between Wireframe](images/FreeBetween.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -513,6 +536,7 @@ Action | Format, Examples
 **Delete Appointment** | `deleteappointment INDEX`<br> e.g., `deleteappointment 2`
 **Edit Appointment** | `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappointment 2 n/Call Juliet t/13:45`
 **List Appointments Within Period** | `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
+**List Available Slots Within Period*** | `freebetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME l/DURATION` <br> e.g. `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60`
 **Help** | `help`
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
