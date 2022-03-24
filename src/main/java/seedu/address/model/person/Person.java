@@ -27,6 +27,7 @@ public class Person implements Serializable {
     private final HashMap<Prefix, Field> fields = new HashMap<>();
     private final HashSet<Tag> tags = new HashSet<>();
     private final ArrayList<Transaction> transactions = new ArrayList<>();
+    public static final String MAP_PREFIX = "P";
 
     /**
      * Person constructor

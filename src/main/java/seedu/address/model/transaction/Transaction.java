@@ -21,6 +21,7 @@ import seedu.address.logic.parser.Prefix;
 public class Transaction implements Serializable {
     private final HashMap<Prefix, TransactionField> fields = new HashMap<>();
     private final String personIdentifier;
+    public static final String MAP_PREFIX = "T";
 
     /**
      * Person constructor

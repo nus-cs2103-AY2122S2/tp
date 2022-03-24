@@ -3,10 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.transaction.Transaction;
@@ -48,6 +48,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(List<Person> persons, List<Transaction> transactions) {
         setPersons(persons);
         setTransactions(transactions);
+    }
+
+    public AddressBook(Map<String, Object> storageMap) {
+        List<Person> personList = (List<Person>) storageMap.get(Person.MAP_PREFIX);
+        List<Transaction> transactionList = (List<Transaction>) storageMap.get(Transaction.MAP_PREFIX);
+
+        setPersons(personList);
+        setTransactions(transactionList);
     }
 
     //// list overwrite operations
@@ -154,6 +162,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// util methods
+
+    @Override
+    public Map<String, List<Object>> generateStorageMap() {
+        Map<String, List<Object>> storageMap = new HashMap<>();
+
+        storageMap.put(Person.MAP_PREFIX, new ArrayList<>(persons.asUnmodifiableObservableList()));
+        storageMap.put(Transaction.MAP_PREFIX, new ArrayList<>(transactions.asUnmodifiableObservableList()));
+
+        return Collections.unmodifiableMap(storageMap);
+    }
 
     @Override
     public String toString() {

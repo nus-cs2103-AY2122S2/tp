@@ -11,8 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -45,9 +44,10 @@ public class SerializableAddressBookStorage implements AddressBookStorage {
         try {
             ObjectInputStream objectInputStream =
                 new ObjectInputStream(new BufferedInputStream(new FileInputStream(filePath.toString())));
-            ArrayList<Person> personList = (ArrayList<Person>) objectInputStream.readObject();
+            Map<String, Object> storageMap = (Map<String, Object>) objectInputStream.readObject();
             objectInputStream.close();
-            return Optional.of(new AddressBook(personList));
+
+            return Optional.of(new AddressBook(storageMap));
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -73,7 +73,7 @@ public class SerializableAddressBookStorage implements AddressBookStorage {
 
         ObjectOutputStream objectOutputStream =
             new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file, false)));
-        objectOutputStream.writeObject(new ArrayList<>(addressBook.getPersonList()));
+        objectOutputStream.writeObject(addressBook.generateStorageMap());
         objectOutputStream.flush();
         objectOutputStream.close();
     }
