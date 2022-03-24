@@ -447,14 +447,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Tracey` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a student**
+**Use case: UC01 - Delete a student**
 
 **MSS**
 
-1.  User requests to list students
-2.  Tracey shows a list of students
-3.  User requests to delete a specific student in the list
-4.  Tracey deletes the person
+1.  User requests to list students.
+2.  Tracey shows a list of students.
+3.  User requests to delete a specific student in the list.
+4.  Tracey deletes the person.
 
     Use case ends.
 
@@ -470,12 +470,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Search for a student**
+**Use case: UC02 - Search for a student**
 
 **MSS**
 
-1.  User requests to search for student
-2.  Tracey shows the info of student with that matching name
+1.  User requests to search for student.
+2.  Tracey shows the info of student with that matching name.
 
     Use case ends.
 
@@ -491,12 +491,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Add a student into Tracey**
+**Use case: UC03 - Add a student into Tracey**
 
 **MSS**
 
-1.  User requests to add the student with his/her details such as year, faculty, covid status
-2.  Tracey shows the info of student with that matching name
+1.  User requests to add the student with his/her details such as year, faculty, covid status.
+2.  Tracey adds the student with all his/her details into its database. 
+3.  Tracey shows the info of student with that matching name.
 
     Use case ends.
 
@@ -507,90 +508,90 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Tracey will inform user that he/she did not provide the correct information.
 
     * 1a2. User provide the correct details in the correct format.
+    
+        Use case ends. 
 
-* 1b. The student to be added already exist in the list by Tracey.
+* 1b. The student to be added already exists in the list by Tracey.
 
-    * 1b1. Tracey inform user that the contact exist in her.
+    * 1b1. Tracey inform user that the contact exists in her database.
+      
+        Use case ends.
 
 * 1c. User adds multiple students in one go.
 
     * 1c1. Tracey will list out a list of new students added with their info.
+      
+        Use case ends.
 
 * 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
 
     * 1d1. Tracey will provide a list of pre-defined constants for the user.
+  
+        Use case ends.
 
-    * 1d2. User use the correct pre-defined constants for the respective tags.
-
-**Use case: Edit information of a student**
+**Use case: UC04 - Edit information of a student**
 
 **MSS**
 
-1.  User requests to list students
-2.  Tracey shows a list of students
-3.  User requests to edit a specific student in the list
-4.  Tracey updates details of the person
+1.  User requests to list students.
+2.  Tracey shows a list of students.
+3.  User requests to edit a specific student in the list.
+4.  Tracey updates details of the person.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list does not contain student(s) of that name.
+* 1a. The list is empty.
+  
+    * 1a1. Tracey shows an empty list. 
 
-  Use case ends.
+        Use case ends.
 
-* 2b. The given student name exists multiple places on the list.
+* 2a. The given student name exists multiple places on the list.
 
-    * 2b1. Tracey will inform user that he/she did not provide the correct information formatting.
+    * 2a1. Tracey will inform user that he/she did not provide the information in the correct format.
 
-    * 2b2. User will key in the correct format to edit student.
+    * 2a2. User will key in the correct format to edit the student's details.
 
-**Use case: Clear the system database**
+        Use case ends.
+    
+**Use case: UC05 - Clear the system database**
 
 **MSS**
 
-1.  User requests to clear all students
-2.  Tracey shows an empty list of students
+1.  User requests to clear all students. 
+2.  Tracey deletes all students from its database. 
+3.  Tracey shows an empty list. 
+
+    Use case ends.
+
+**Use case: UC06 - Provide a summary for the number of covid patients**
+
+**MSS**
+
+1.  User requests to summarise the number of students with covid. 
+2.  Tracey shows a pie chart and statements showing the proportion of students with different covid statuses. 
+
+    Use case ends.
+
+**Use case: UC07 - List all students**
+
+**MSS**
+
+1.  User requests to list all students. 
+2.  Tracey shows a list of students. 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list does not contain student(s) of that name.
+* 1a. The list is empty.
+    * 1a1. Tracey shows an empty list. 
 
   Use case ends.
 
-**Use case: Summarize the system database for number of covid patient**
-
-**MSS**
-
-1.  User requests to summarise number of students with covid
-2.  Tracey shows lists of students of that with the covid positive status
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list with that tag does not contain student(s) of that name.
-
-  Use case ends.
-
-**Use case: List all students**
-
-**MSS**
-
-1.  User requests to list all students
-2.  Tracey shows a list of students
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list does not contain student(s) of that name.
-
-  Use case ends.
-
-**Use case: Request for help from Tracey**
+**Use case: UC08 - Request for help from Tracey**
 
 **MSS**
 
@@ -605,20 +606,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Filter the system database for list overview by filter**
+**Use case: UC09 - Filter a list of students of specified covid status, and/or faculty, and/or block**
 
 **MSS**
 
-1.  User requests to filter all students by a tag (ie. year)
-2.  Tracey shows a list of students of that specific tag with the covid status
+1. User wants to filter a list of students of a specified covid status, faculty and block.
+2. User keys in the details of students to filter out.
+3. Tracey returns a list of students of the specified covid status, faculty and block.
 
-    Use case ends.
+    Use case ends. 
 
 **Extensions**
 
-* 2a. The list with that tag does not contain student(s) of that name.
-
-  Use case ends.
+* 2a. Tracey detects invalid or empty arguments in user input.
+    * 2a1. Tracey displays a error message and shows the correct input format. 
+    
+        Use case ends. 
+  
+* 2b. User only inputs details for one or two of the fields (covid status, faculty or block). 
+    * 2b1. Tracey returns a list of students of the specified details.
+    
+        Use case ends.
 
 ### Non-Functional Requirements
 
@@ -642,12 +650,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student Status**: A student detail that indicates whether the student has Covid-19
+* **Covid Status**: A student detail that indicates whether the student has Covid-19
 * **Health Risk Notice**: Household members living with individuals diagnosed with Covid-19 are issued with this notice
 * **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus
 * **NUS Hall**: Hall of residence in the National University of Singapore
-* **Resident Fellow** Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
-* **Hall leaders** Student leaders in NUS halls
+* **Resident Fellow**: Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
+* **Hall leaders**: Student leaders in NUS halls
 
 
 --------------------------------------------------------------------------------------------------------------------
