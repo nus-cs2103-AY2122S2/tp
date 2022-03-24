@@ -193,7 +193,31 @@ public class ModelManager implements Model {
     @Override
     public void tagTask(Task task, Person person) {
         addressBook.tagTask(task, person);
-        // updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void untagTask(Task task, Person person) {
+        addressBook.untagTask(task, person);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
     }
 
     @Override
@@ -203,18 +227,11 @@ public class ModelManager implements Model {
         return task.getAssignees().contains(person);
     }
 
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String listTasks() {
         return addressBook.listTask();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String listTasks(Prefix option) {
         return addressBook.listTask(option);
@@ -255,5 +272,17 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredTasks.equals(other.filteredTasks);
+    }
+  
+    @Override
+    public boolean hasPriority(Task task) {
+        return addressBook.hasPriority(task);
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        addressBook.setTask(target, editedTask);
     }
 }
