@@ -742,7 +742,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: Find single keyword
       1. Command: `find shingeki` <br>
          Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list. <br>
-         E.g. `shingeki` from name, status, or tag fields will be matched.<br>
+         E.g. `shingeki` from name, status, or tag fields will be matched.<br><br>
       
    3. Test case: Find multiple keywords
       1. Command: `find shingeki shutter` <br>
@@ -755,7 +755,7 @@ testers are expected to do more *exploratory* testing.
    
    4. Test case: Invalid command format
       1. Command: `find` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
    
    5. Test case: Unknown command
       1. Command: `find2` <br>
@@ -767,10 +767,10 @@ testers are expected to do more *exploratory* testing.
    2. Test case: Finding with a single prefix
       1. Command: `find n/shingeki` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` then displays them on the show list. <br>
-         E.g. `shingeki` from the name field will be matched.
+         E.g. `shingeki` from the name field will be matched.<br><br>
       2. Command: `find n/shingeki no kyojin` <br>
          Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list. <br>
-         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched (`AND` search within a single prefix).
+         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched (`AND` search within a single prefix).<br><br>
    
    3. Test case: Finding with multiple prefixes
       1. Command: `find n/shingeki s/completed` <br>
@@ -787,9 +787,9 @@ testers are expected to do more *exploratory* testing.
    
    4. Test case: Invalid command format
       1. Command: `find n/` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
       2. Command: `find t/Action Anime` <br>
-         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
    
    5. Test case: Multiple same prefix
       1. Command: `find n/shingeki n/shutter` <br>
