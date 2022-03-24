@@ -17,13 +17,25 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should toggle visibility of right panel to events. */
+    private final boolean isListCommand;
+
+    /** The application should toggle visibility of right panel to events. */
+    private final boolean isViewCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isList, boolean isView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.isListCommand = isList;
+        this.isViewCommand = isView;
+    }
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, false, false);
     }
 
     /**
@@ -31,7 +43,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +56,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isListCommand() {
+        return isListCommand;
+    }
+
+    public boolean isViewCommand() {
+        return isViewCommand;
     }
 
     @Override

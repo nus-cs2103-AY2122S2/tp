@@ -196,7 +196,7 @@ public class Person implements Comparable<Person> {
     }
 
     @Override
-    public int compareTo(Person o) {
-        return name.fullName.compareToIgnoreCase(o.getName().fullName);
+    public int compareTo(Person other) {
+        return name.fullName.compareToIgnoreCase(other.getName().fullName);
     }
 }
