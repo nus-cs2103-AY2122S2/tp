@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -33,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private EmailWindow emailWindow;
     private HelpWindow helpWindow;
 
     @FXML
@@ -69,7 +71,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-
+        emailWindow = new EmailWindow(logic.getFilteredPersonList());
     }
 
     public Stage getPrimaryStage() {
@@ -123,7 +125,6 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -155,6 +156,27 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the email window or opens an updated window it if it's already opened.
+     */
+    @FXML
+    public void handleEmailWindow() {
+        if (!emailWindow.isShowing()) {
+            createEmailWindow();
+        } else {
+            emailWindow.hide();
+            createEmailWindow();
+        }
+    }
+
+    /**
+     * Instantiates a new EmailWindow and shows it.
+     */
+    public void createEmailWindow() {
+        emailWindow = new EmailWindow(logic.getFilteredPersonList());
+        emailWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -168,6 +190,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        emailWindow.hide();
         primaryStage.hide();
     }
 
@@ -179,13 +202,19 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSummarise(String message) {
-        if (pieChartWindow == null || !pieChartWindow.isShowing()) {
-            pieChartWindow = new PieChartWindow();
-            pieChartWindow.show();
+        if (SummariseCommand.shouldOpenPieChartWindow()) {
+            if (pieChartWindow == null || !pieChartWindow.isShowing()) {
+                pieChartWindow = new PieChartWindow();
+                pieChartWindow.show();
+                logger.info("Pie chart window is not yet initialised or not showing!");
+            } else {
+                pieChartWindow.hide();
+                pieChartWindow = new PieChartWindow();
+                pieChartWindow.show();
+                logger.info("Pie chart window already showing, proceeding to reopen it!");
+            }
         } else {
-            pieChartWindow.hide();
-            pieChartWindow = new PieChartWindow();
-            pieChartWindow.show();
+            logger.info("Pie chart window not opened because address book is empty!");
         }
     }
 

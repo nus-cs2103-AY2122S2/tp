@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Edit Command with index and tags;
+
+if () then ([tags with wrong prefix || \n index is out of range || \n tags parameters with\n wrong format])
+    :Throws ParseException;
+    else ([else])
+
+    if () then ([Field value to be \n edited is the same as the \n coresponding field \n value of the person])
+        :CommandException;
+
+    else ([else])
+        :Field values of person in \n the addressbook is updated;
+        :Returns Message to user indicating Success;
+        :ResultDisplay prints result to user;
+   endif
+endif
+stop
+@enduml

@@ -5,7 +5,7 @@ title: User Guide
 
 # Tracey
 
-Tracey is a **desktop app for managing health statuses of NUS students, optimized for use via a Command Line
+Tracey is a **desktop app for managing health statuses of NUS Hall Residents, optimized for use via a Command Line
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
@@ -23,6 +23,7 @@ Tracey can get your student health status management tasks done faster than trad
     * [Viewing help](#viewing-help-help)
     * [Filtering contacts](#filtering-contacts-filter)
     * [Saving](#saving)
+    * [Copying Emails](#copying-emails)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -88,11 +89,11 @@ Possible tags:
 | **Tag** | **Meaning** | **Pre-defined constants** |
 | - | - | - |
 | `n/`  | Name | - |
-| `p/` | Phone Number | - | 
+| `p/` | Phone Number | - |
 | `e/` | Email | - |
 | `a/` | Address | - |
 | `f/` | Faculty |  `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS` |
-| `mc/` | Matriculation Number | - | 
+| `mc/` | Matriculation Number | - |
 | `cs`/ | Covid Status | Positive, Negative, HRN |
 
 
@@ -149,11 +150,13 @@ List the full record, which displays all the student's data that are logged into
 Format: `list`
 
 ### Viewing help: `help`
-Shows a message explaining how to access the help page.
+The `help` command opens a pop-up window that includes a summary to briefly explain all the commands that Tracey offers.
 
-<div align="center">
-<img src="./images/helpMessage.png" alt="help message" width=600px/>
-</div>
+The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide. 
+
+This is a sample screenshot of what you can expect from the `help` command.
+
+![help](images/HelpScreenshot.png)
 
 Format: `help`
 
@@ -174,10 +177,15 @@ Examples of usage:
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to `Tracey`.
 
---------------------------------------------------------------------------------------------------------------------
+### Copying emails
+The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals. 
+`Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
+![Email](images/CopyEmailScreenshot.png)
+
+---------------------------------------------------------------------------------------------------------------
 
 ### FAQ
-**Q**: How do I transfer my data to another computer? <br>
+**Q**: How do I----- transfer my data to another computer? <br>
 **A**: Copy the file from [ROOT]/data/tracey.txt over to your other computer. <br>
 
 **Q**: What is the difference between the `list` command and `summarise` command? <br>
