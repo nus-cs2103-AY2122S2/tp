@@ -233,7 +233,7 @@ Result:
 
 * An additional feature that could be implemented in the future.
 
-### `addbuyer` feature
+### Add Buyer feature
 The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
 
 **Step 1:**
@@ -284,6 +284,32 @@ The following Sequence Diagrams summarizes the various steps involved:
 
 For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
 
+### Add property for buyer feature
+The `add-ptb` command uses a similar mechanism as the `addbuyer` command mentioned [above](#add-buyer-feature), with the following differences:
+
+1. An index needs to be specified along with the necessary fields
+    E.g. `add-ptb 1 h/condo l/Serangoon pr/400000,900000`
+2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 0 and Smaller than or equal to the size of the Buyer list).
+3. The updated buyer remains in the same position as before, while a new buyer is added to the end of the list
+
+**\[Proposed\]** Alternatives considered:
+
+- Given the time, the add property to buy feature can be integrated with the `addbuyer` command to allow users to add properties with the buyer,
+instead of doing it in 2 commands. 
+  - Pros:
+    - More flexibility for experienced users
+  - Cons:
+    - More code to implement and test
+- Allow for certain fields to be **optional** if a buyer is yet to give the user the information, but they still wish to add a property first
+  - Pros:
+    - More flexible design
+  - Cons:
+    - Hard to implement
+    - Error prone
+
+### \[Proposed\] Add Property to sell feature
+The `add-pts` command is very similar to the above command with only slight differences:
+1. An additional field is required: `address` of the seller's house
 
 
 ### `sort` feature
