@@ -17,6 +17,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should undo the effects of the prev command. */
+    private final boolean undoPrevCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -24,6 +27,17 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.undoPrevCommand = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean undoPrevCommand) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.undoPrevCommand = undoPrevCommand;
     }
 
     /**
@@ -46,6 +60,10 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isUndoPrevCommand() {
+        return undoPrevCommand;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -60,7 +78,8 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && undoPrevCommand == otherCommandResult.undoPrevCommand;
     }
 
     @Override

@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path tempAddressBookFileDirectoryPath = Paths.get("data\\.tempdata");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setTempAddressBookFileDirectoryPath(newUserPrefs.getTempAddressBookFileDirectoryPath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -51,9 +53,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return addressBookFilePath;
     }
 
+    public Path getTempAddressBookFileDirectoryPath() {
+        return tempAddressBookFileDirectoryPath;
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setTempAddressBookFileDirectoryPath(Path tempAddressBookFileDirectoryPath) {
+        requireNonNull(tempAddressBookFileDirectoryPath);
+        this.tempAddressBookFileDirectoryPath = tempAddressBookFileDirectoryPath;
     }
 
     @Override

@@ -41,6 +41,7 @@ public class CommandRegistry {
         parsers.put(SortCommand.COMMAND_WORD, new SortCommandParser());
         parsers.put(AddTransactionCommand.COMMAND_WORD, new AddTransactionParser());
         parsers.put(ListTransactionCommand.COMMAND_WORD, new ListTransactionCommandParser());
+        parsers.put(UndoCommand.COMMAND_WORD, (String args) -> new UndoCommand());
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
         PARSERS = Collections.unmodifiableMap(parsers);
