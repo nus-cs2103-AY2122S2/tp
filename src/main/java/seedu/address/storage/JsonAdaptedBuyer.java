@@ -96,7 +96,8 @@ public class JsonAdaptedBuyer {
         final Set<Tag> modelTags = new HashSet<>(buyerTags);
 
         final PropertyToBuy modelDesiredProperty = propertyToBuy == null
-                ? NullPropertyToBuy.getNullPropertyToBuy() : new PropertyToBuy(propertyToBuy.getHouse(), propertyToBuy.getPriceRange());
+                ? NullPropertyToBuy.getNullPropertyToBuy() : new PropertyToBuy(propertyToBuy.getHouse(),
+                propertyToBuy.getPriceRange());
         return new Buyer(modelName, modelPhone, modelAppointment, modelTags, modelDesiredProperty);
     }
 }

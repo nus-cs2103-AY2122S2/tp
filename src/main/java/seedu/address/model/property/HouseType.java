@@ -40,13 +40,13 @@ public enum HouseType {
             return "HDB Flat";
         }
     },
-    SEMIDETACHED{
+    SEMIDETACHED {
         @Override
         public String toString() {
             return "Semi-Detached";
         }
     },
-    MANSION{
+    MANSION {
         @Override
         public String toString() {
             return "Mansion";

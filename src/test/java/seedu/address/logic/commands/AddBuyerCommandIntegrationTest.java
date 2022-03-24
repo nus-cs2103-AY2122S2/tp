@@ -33,7 +33,7 @@ public class AddBuyerCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
-        expectedModel.addClient(validBuyer);
+        expectedModel.addBuyer(validBuyer);
 
         assertCommandSuccess(new AddBuyerCommand(validBuyer), model,
                 String.format(AddBuyerCommand.MESSAGE_SUCCESS, validBuyer), expectedModel);

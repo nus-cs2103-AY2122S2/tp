@@ -7,10 +7,7 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.property.House;
-import seedu.address.model.property.HouseType;
 import seedu.address.model.property.NullPropertyToBuy;
-import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -38,8 +35,7 @@ public class BuyerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
-        desiredProperty = new NullPropertyToBuy(new House(HouseType.ANY, ""),
-                new PriceRange(0, 0));
+        desiredProperty = NullPropertyToBuy.getNullPropertyToBuy();
     }
 
     /**
