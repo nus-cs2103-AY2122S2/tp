@@ -211,6 +211,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Design Consideration
 
 ### 5. Put feature
+Puts a `Person` into a `Lineup`
 
 #### Proposed implementation
 
