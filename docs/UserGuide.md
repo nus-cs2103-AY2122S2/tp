@@ -17,6 +17,7 @@ They can easily look up the list of shows if they need to.
   * [Finding a show: `find`](#finding-a-show-find)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
   * [Editing a show: `edit`](#editing-a-show-edit)
+  * [Editing a comment: `comment`](#editing-a-comment-comment)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Better Find [coming in v1.3]](#better-find-coming-in-v13)
@@ -65,7 +66,7 @@ Some example commands you can try:
   e.g. in `add n/<NAME>`, `<NAME>` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/<NAME> s/<STATUS> [t/<TAG>]` can be used as `n/ReZero s/completed t/Anime` or as `n/ReZero s/completed`.
+  e.g `n/<NAME> s/<STATUS> [c/<COMMENT>] [t/<TAG>]` can be used as `n/ReZero s/completed c/What a Simp t/Anime` or as `n/ReZero s/completed`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/<TAG>]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
@@ -89,7 +90,7 @@ Some example commands you can try:
 
 Adds a new show to Trackermon. Note that the name of the show can only contain alphanumeric characters.
 
-Format: `add n/<NAME> s/<STATUS> [t/<TAG>]…​`
+Format: `add n/<NAME> s/<STATUS> [t/<COMMENT>] [t/<TAG>]…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -97,7 +98,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/All of us are dead s/completed`
-* `add n/All of us are dead s/completed t/Kdrama`
+* `add n/All of us are dead s/completed c/Giyu is cute t/Kdrama`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -180,7 +181,7 @@ Examples:
 
 Edit the specified show from Trackermon.
 
-Format: `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​`
+Format: `edit <INDEX> [n/<NAME>] [s/<STATUS>] [c/<COMMENT>] [t/<TAG>]…​`
 * Edit the show at the specified `<INDEX>`.
 * The index refers to the index number shown in the displayed show list. (not overall)
 * The index **must be a positive integer** 1,2,3,..
@@ -190,6 +191,23 @@ Format: `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​`
 Examples:
 * `list` followed by `edit 2 n/Sailor Moo` edit 2nd show's name in Trackermon to Sailor Moo.
 * `find ghibli` followed by `edit 1 n/Cowman s/completed t/awesome` edits 1st show in results of `find` command.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+### Editing a comment: `comment`
+
+Edit comment of a specific show from Trackermon.
+
+Format: `comment <INDEX> [c/<COMMENT>]`
+* Edit comment of the show at the specified `<INDEX>`.
+* The index refers to the index number shown in the displayed show list. (not overall)
+* The index **must be a positive integer** 1,2,3,...
+* Omitting the `[c/<COMMENT>]` would remove the comment of that specific show.
+
+Examples:
+* `list` followed by `comment 2 c/Shags` edit 2nd show's comment in Trackermon to "Shags".
+* `find ghibli` followed by `comment 1` deletes the comment of the 1st show in results of `find` command.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
