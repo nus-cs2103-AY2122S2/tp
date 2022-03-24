@@ -1,14 +1,14 @@
 package manageezpz.logic.parser;
 
-import manageezpz.logic.commands.TagTaskPriorityCommand;
-import manageezpz.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
-
 import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_PRIORITY;
 import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_TASK_NUMBER;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
+
+import java.util.stream.Stream;
+
+import manageezpz.logic.commands.TagTaskPriorityCommand;
+import manageezpz.logic.parser.exceptions.ParseException;
 
 public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityCommand> {
 

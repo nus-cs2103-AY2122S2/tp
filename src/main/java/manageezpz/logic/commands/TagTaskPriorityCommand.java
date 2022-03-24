@@ -44,10 +44,10 @@ public class TagTaskPriorityCommand extends Command {
         try {
             task.setPriority(priority);
             return new CommandResult(String.format(MESSAGE_SUCCESS, task));
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             throw new CommandException("Priority cannot be NULL! \r\n"
                     + MESSAGE_USAGE);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw new CommandException("Priority is invalid, Valid Priorities are: NONE/LOW/MEDIUM/HIGH \r\n"
                     + MESSAGE_USAGE);
         }
