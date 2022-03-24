@@ -58,7 +58,7 @@ public class Item implements Comparable<Item> {
      * Set the quantity of the item.
      */
     public Item setQuantity(Quantity newQuantity) {
-        return new Item(product, expiryDate, newQuantity);
+        return new Item(expiryDate, newQuantity);
     }
 
     /**
