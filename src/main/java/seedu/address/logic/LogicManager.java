@@ -4,7 +4,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -102,24 +101,20 @@ public class LogicManager implements Logic {
         int totalPersons = 0;
         //Resets to full list of Persons to prevent any logical error after `find` command
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        if (Region.isValidRegion(region)) { //defensive code
-            for (Person person : getFilteredPersonList()) {
-                if (person.getUserType().isBuyer()) { //if is buyer, check region in preference
-                    Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
-                    if (preference != null && preference.getRegionInString().equals(region)) {
-                        totalPersons++;
-                    }
-                } else { //if is seller, check region in Property
-                    Set<Property> setOfPropertyValues = person.getProperties();
-                    if (!setOfPropertyValues.isEmpty()) {
-                        Iterator<Property> propertyIterator = setOfPropertyValues.iterator();
-                        while (propertyIterator.hasNext()) { //Iterate through every property seller holds
-                            Property property = propertyIterator.next();
-                            if (property != null && property.getRegionInString().equals(region)) {
-                                totalPersons++;
-                            }
-                        }
-                    }
+        if (!Region.isValidRegion(region)) { //defensive code
+            return totalPersons;
+        }
+        for (Person person : getFilteredPersonList()) {
+            Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
+            if (person.getUserType().isBuyer() && preference != null && preference.getRegionInString().equals(region)) {
+                totalPersons++;
+                continue;
+            }
+            //If usertype is seller
+            Set<Property> setOfPropertyValues = person.getProperties();
+            for (Property p : setOfPropertyValues) {
+                if (p.getRegionInString().equals(region)) {
+                    totalPersons++;
                 }
             }
         }
