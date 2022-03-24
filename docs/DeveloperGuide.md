@@ -228,8 +228,8 @@ The following sequence diagram shows how the undo operation works:
 </div>
 <br>
 The `redo` command does exactly the opposite — it calls `Model#redoIBook()`, which moves the `currentStateChange` once to the right, pointing to the previously reverted changes, then perform the actions needed to restore them back.
-  
-  
+
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateChange` is pointing at the latest record of the `stateChanges` list, then there are no reverted changes to restore. The `redo` command uses `Model#canRedoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
@@ -358,7 +358,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. Optional fields like Category is missing.
 
     * 1c1. IBook automatically sets the category to miscellaneous.
-    
       Use case resumes at step 1.
 
 #### UC3: Delete a product
@@ -386,7 +385,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list products ([UC1](#uc1-listing-products))
 2. User requests to update a product in the list specified by the index 
 3. IBook updates the product
-
     Use case ends.
 
 **Extensions**
@@ -403,9 +401,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to find products 
 2. IBook updates the list to show the requested products
-
-   Use case ends.
-
+Use case ends.
+   
 **Extensions**
 
 * 2a. Requested fields are invalid.
