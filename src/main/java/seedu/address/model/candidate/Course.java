@@ -3,6 +3,10 @@ package seedu.address.model.candidate;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Candidate's course in TAlent Assistant™.
+ * Guarantees: immutable; is valid as declared in {@link #isValidCourse(String)}
+ */
 public class Course {
     public static final String MESSAGE_CONSTRAINTS =
             "Courses should only contain alphabets, and it should not be blank\n"

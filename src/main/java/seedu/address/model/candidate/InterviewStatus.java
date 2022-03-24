@@ -1,5 +1,9 @@
 package seedu.address.model.candidate;
 
+/**
+ * Represents a Candidate's interview status in TAlent Assistant™.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
+ */
 public class InterviewStatus {
 
     public static final String MESSAGE_CONSTRAINTS =

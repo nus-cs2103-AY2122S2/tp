@@ -3,6 +3,10 @@ package seedu.address.model.candidate;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Candidate's Student ID in TAlent Assistant™.
+ * Guarantees: immutable; is valid as declared in {@link #isValidId(String)}
+ */
 public class StudentId {
     public static final String MESSAGE_CONSTRAINTS =
             "IDs should only contain E and 7 digits/numbers e.g. E0123456, and it should not be blank";
