@@ -7,6 +7,16 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+Tracey is a free and open-source desktop app for University housing committee (Hall Masters) to manage their students and premises.
+Tracey is optimized for those that work well with Command Line Interface (CLI). She is equipped with Graphical User Interface (GUI) for an effective user experience.
+
+This is a Developer Guide written to help developers get a deeper understanding of how Tracey is implemented and the reasons this project is done a certain way.
+It explains the internal structure and how components in the architecture work together to allow users to command Tracey.
+Our team will like to welcome you by means of allowing you admire our work.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -20,6 +30,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
+
+Find out more on the structure and architecture of **Tracey** in this section.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -69,6 +81,8 @@ The sections below give more details of each component.
 
 ### UI component
 
+The structure of the UI component will be explained here.
+
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
@@ -86,6 +100,8 @@ The `UI` component,
 
 ### Logic component
 
+The structure of the Logic component will be explained here.
+
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
@@ -94,9 +110,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -114,6 +130,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
+The structure of the Model component will be explained here.
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagramUpdated.png" width="450" />
@@ -135,6 +154,8 @@ The `Model` component,
 
 ### Storage component
 
+The structure of the Storage component will be explained here.
+
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
@@ -153,6 +174,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Tracking feature
+
+#### Current Implementation
+Currently, **Tracey** helps with 9 different types of command:
+1. `add student`
+2. `edit student data`
+3. `delete student`
+4. `find student`
+5. `filter statuses`
+6. `summarise all data`
+7. `help user`
+8. `list all data`
+9. `clear all data`
+
+This 9 features allow users of **Tracey** to be able to manage the covid situation in the hall.
+All 9 features extends from the `abstract` `Command` class.  <br>
+
+The table below summarises the 9 different tracking commands:
+
+| Command      | Command Word | Purpose |
+| ----------- | ----------- | ----- |
+| `add student` | `add` | Adds a new student profile. |
+| `edit student data` | `edit` | Edits an existing student. |
+| `delete student` | `delete` | Delete an existing student.|
+| `find student` | `find` | Find an existing student.|
+| `filter statuses` | `filter` | Filter out a list of students by covid status. |
+| `summarise all data` | `summarise` | Make pie charts out of the data. |
+| `help user` | `help` | Provide a how-to-use on this app. |
+| `list all data` | `list` | List out all students in Tracey. |
+| `clear all data` | `clear` | Empty the database. |
 
 ### Add feature
 
@@ -187,8 +239,8 @@ Following this, `Logic Manager` will call the `execute()` method of the `AddComm
 The summarise mechanism implements the following sequence and interactions for the method call execute("summarise") on a LogicManager object.
 
 In order for this feature to be unique and not overlap what the List feature has to offer, summarise helps to calculate how many
-students are covid positive in each block of the hall, alongside those who are negative and on health risk notice.
-This helps the hall master determine if there is a spread of virus in any particular block.
+students who are covid positive in each block of the hall, alongside those who are negative and on health risk notice.
+This helps the hall masters determine if there is a spread of virus in any particular block.
 
 Tracey will then calculate those that are positive and which faculty they come from. This is helpful to determine if the superspreader
 comes from the faculty building itself. The hall masters and leaders can be more certain on their follow up actions to keep
@@ -441,13 +493,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | Hall leaders                               | get the name of students with covid     | check if their CCA members have Covid                                   |
 | `* `     | Residence Fellow                           | know covid status of students and staffs     | come up with hall policies                                   |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `Tracey` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a student**
+### Use case: UC01 - Delete a student
 
 **MSS**
 
@@ -470,7 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Search for a student**
+### Use case: UC02 - Search for a student
 
 **MSS**
 
@@ -491,7 +541,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Add a student into Tracey**
+#### Use case: UC03 - Add a student into Tracey
 
 **MSS**
 
@@ -522,7 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1d2. User use the correct pre-defined constants for the respective tags.
 
-**Use case: Edit information of a student**
+### Use case: UC04 - Edit information of a student
 
 **MSS**
 
@@ -545,7 +595,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b2. User will key in the correct format to edit student.
 
-**Use case: Clear the system database**
+### Use case: UC05 - Clear the system database
 
 **MSS**
 
@@ -560,7 +610,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Summarize the system database for number of covid patient**
+### Use case: UC05 - Summarize the system database for number of Covid patient
 
 **MSS**
 
@@ -575,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: List all students**
+### Use case: UC06 - List all students
 
 **MSS**
 
@@ -605,11 +655,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Filter the system database for list overview by filter**
+### Use case: UC07 - Filter the system database for list overview by keyword
 
 **MSS**
 
-1.  User requests to filter all students by a tag (ie. year)
+1.  User requests to filter all students by a tag (ie. positive)
 2.  Tracey shows a list of students of that specific tag with the covid status
 
     Use case ends.
@@ -617,6 +667,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list with that tag does not contain student(s) of that name.
+
+  Use case ends.
+
+### Use case: UC08 - Summarise all students for some overview of covid situation
+
+**MSS**
+
+1.  User requests to summarise all students to get how the hall is doing with covid
+2.  Tracey shows a pop-up window of pie charts representing the covid situation in each hall block
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There is no data in database for Tracey to form a helpful response.
 
   Use case ends.
 
