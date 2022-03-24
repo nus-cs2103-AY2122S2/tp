@@ -28,6 +28,8 @@ public class StorageManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         SerializableTempAddressBookStorage addressBookTempStorage = new SerializableTempAddressBookStorage(
                 getTempFilePath("temp ab"));
+
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
     }
 
     private Path getTempFilePath(String fileName) {
