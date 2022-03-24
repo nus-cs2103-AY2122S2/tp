@@ -184,6 +184,51 @@ A `Task` contains the following attributes,
   * Cons: Prone to error as a Component might not be correctly changed
 
 
+### **The `Find` command**
+- The ``Find`` command has two seperate arguments `task/` and `day/`
+- The `task/` argument has an additional `desc/` as a keyword which is the search term to search for all the tasks that 
+contains the keyword
+- `day/` arguments searches for either the deadline or the event that has this date as the deadline/ event that will 
+be held
+
+#### How it is implemented
+1. When the user enters the find command, the FindCommandParser searches for either the `task/` or the `day/` argument
+2. Then, the FindCommandParser will self invoke either the `findCommandTask()` or `findCommandDate()` respectively.
+3. `findCommandTask()` will return the FindCommand that searches for all the task which contains the given keyword whereas `findCommandDate()` searches for deadline/event with the given date
+4. The FindCommand will execute and update the Model with the updateFilteredTaskList where the filtered task list will be updated with the tasks that statisfy the predicate
+5. After execution, the FindCommand will return the CommandResult that contains a string of the outcome of the command.
+
+#### Sequence diagram when a user enters the command `find task/ desc/ Genshin`
+
+<img src="images/FindTask.png" width="450" />
+
+#### Improvements needed
+* As we are also listing employees as well, we also need an argument that searches for the number of people instead
+* In v1.3, as priority tagging is implemented for all tasks, we also need an argument to find all tasks.
+* For employee searching, we can also implement more arguments to search for an employee using the employee's components
+as the search term.
+
+
+### **The `List` command**
+- The `List` command shows all the tasks in the list.
+- It has arguments such as `todo/`, `deadline/` and `event/` which searches for all todos, deadlines and events respectively.
+
+#### How it is implemented
+1. When the user enters `List`, the ListCommandParser will simply return a ListCommand
+2. If the user enters additional options such as `todo/`, `deadline/` and `events/`, ListCommandParse will then check if the user enters a valid option. ListCommandParse will throw an ParseException if the user enters an invalid option, or more than 1 option.
+3. When the ListCommand is executed, it will update the model to show all the task in the task list
+4. If options are provided, the command will update the model with all tasks with the specified task type.
+5. After execution, ListCommand will return a CommandResult that contains the message of the outcome of the command
+
+
+#### Sequence diagram when the user enters `list todo/`
+
+<img src="images/List.png" width="450"/>
+
+#### Improvements to be added
+* We feel that the options may be better suited for the find option
+* The tasks needs to be updated into the UI.
+
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
