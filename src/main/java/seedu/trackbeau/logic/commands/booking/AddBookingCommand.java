@@ -24,8 +24,8 @@ public class AddBookingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Booking to TrackBeau. "
             + "Parameters: "
-            + PREFIX_CUSTOMER + "NAME "
-            + PREFIX_STARTTIME + "NAME "
+            + PREFIX_CUSTOMER + "CUSTOMERID "
+            + PREFIX_STARTTIME + "APPOINTMENTTIME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CUSTOMER + "1 "
             + PREFIX_STARTTIME + "10-10-2022 10 ";
@@ -48,10 +48,10 @@ public class AddBookingCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Customer> lastShownList = model.getFilteredCustomerList();
-        if (customerID >= lastShownList.size()) {
+        if (customerID > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
-        Customer customer = lastShownList.get(customerID);
+        Customer customer = lastShownList.get(customerID - 1);
         Booking booking = new Booking(customer, startTime);
         model.addBooking(booking);
         return new CommandResult(String.format(MESSAGE_SUCCESS, booking));

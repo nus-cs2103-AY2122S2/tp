@@ -183,7 +183,7 @@ public class ParserUtil {
     public static LocalDateTime parseStartTime(String startTime) throws DateTimeException {
         requireNonNull(startTime);
         String trimmedAddress = startTime.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime dateTime;
         try {
             dateTime = LocalDateTime.parse(trimmedAddress, formatter);

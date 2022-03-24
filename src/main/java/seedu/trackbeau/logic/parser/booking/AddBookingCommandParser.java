@@ -20,9 +20,6 @@ import seedu.trackbeau.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddBookingCommandParser implements Parser<AddBookingCommand> {
-    protected static final String EMPTY_SKIN_TYPE = "Skin type data not available";
-    protected static final String EMPTY_HAIR_TYPE = "Hair type data not available";
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.

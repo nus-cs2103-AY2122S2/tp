@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     @Override
     public void addBooking(Booking booking) {
         trackBeau.addBooking(booking);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
     }
 
     @Override
@@ -134,6 +134,12 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Booking> getFilteredBookingList() {
         return filteredBookings;
+    }
+
+    @Override
+    public void updateFilteredBookingList(Predicate<Booking> predicate) {
+        requireNonNull(predicate);
+        filteredBookings.setPredicate(predicate);
     }
 
     //=========== Filtered Customer List Accessors =============================================================
