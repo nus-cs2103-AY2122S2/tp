@@ -220,6 +220,21 @@ public class Module {
     }
 
     /**
+     * Returns true if this module has contains the group with the given group name.
+     *
+     * @param groupName group name to check if in this module
+     * @return boolean variable indicating if the group name exists in this module
+     */
+    public boolean hasGroupName(String groupName) {
+        for (Group group : groups) {
+            if (group.getGroupName().equals(groupName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Remove a person from students or professors list depending on whether person is a student or professor
      * and if present
      *

@@ -52,6 +52,19 @@ public class Group {
     }
 
     /**
+     * Instantiates a group object, with an empty list of meeting times and associated students.
+     *
+     * @param name         of the group.
+     * @param module       that the group is in.
+     */
+    public Group(String name, Module module) {
+        this.name = name;
+        this.module = module;
+        this.meetingTimes = FXCollections.observableArrayList();
+        this.members = FXCollections.observableArrayList();
+    }
+
+    /**
      * Returns the group name of the group object.
      *
      * @return group name of the group object.
@@ -148,5 +161,14 @@ public class Group {
      */
     public ObservableList<LocalDateTime> getMeetingTimes() {
         return meetingTimes;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getGroupName())
+                .append("; Module: ")
+                .append(getModule());
+        return builder.toString();
     }
 }

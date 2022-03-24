@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import unibook.model.ReadOnlyUserPrefs;
 import unibook.model.UniBook;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 
 public class AddCommandTest {
@@ -145,12 +147,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonToTheirGroups(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -166,6 +178,11 @@ public class AddCommandTest {
 
         @Override
         public void deleteModule(Module target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonToTheirModules(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -187,6 +204,11 @@ public class AddCommandTest {
         @Override
         public void setModule(Module target, Module editedModule) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isModuleExist(Set<ModuleCode> moduleCodeSet) {
+            return false;
         }
 
         @Override

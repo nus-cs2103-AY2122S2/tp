@@ -1,12 +1,14 @@
 package unibook.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import unibook.commons.core.GuiSettings;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
@@ -89,6 +91,9 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    //=========== Groups =====================================================================================
+    void addGroup(Group group);
+
     /**
      * Returns an unmodifiable view of the filtered person list
      */
@@ -101,6 +106,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void addPersonToTheirGroups(Person person);
+
     boolean hasModule(Module module);
 
     boolean hasModule(ModuleCode moduleCode);
@@ -108,6 +115,8 @@ public interface Model {
     void deleteByModuleCode(ModuleCode moduleCode);
 
     void deleteModule(Module module);
+
+    void addPersonToTheirModules(Person person);
 
     void removeModuleFromAllPersons(ModuleCode moduleCode);
 
@@ -120,6 +129,8 @@ public interface Model {
     void addModule(Module module);
 
     void setModule(Module target, Module editedModule);
+
+    boolean isModuleExist(Set<ModuleCode> moduleCodeSet);
 
     /**
      * Finds the corresponding module to the module code.
