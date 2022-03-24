@@ -257,7 +257,10 @@ The following activity diagram summarizes what happens when a user executes a va
   - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
 
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
+
 ### Sort command feature
 
 #### What it does
@@ -294,6 +297,8 @@ The following sequence diagram summarizes what happens when a user executes a so
 - **Alternative 2:** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
     - Pros: Users have fewer prefixes to remember
     - Cons: Users need to remember valid inputs
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -629,9 +634,9 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Have a copy of `Trackermon.jar` in your computer.
       1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
    2. Double-click the jar file.
-   3. Test case: Initial launch. <br> 
+   3. Test case: Initial launch <br> 
       Expected: Application launched with a set of sample shows.
-   4. Test case: Subsequent Launch. <br> 
+   4. Test case: Subsequent Launch <br> 
       Expected: Application launched with user saved shows.
 
 2. Saving window preferences
@@ -667,11 +672,11 @@ testers are expected to do more *exploratory* testing.
    1. [Add shows](#adding-a-show) into the show list.
 2. List all shows using the `list` command.
 3. Test case: Deleting a show based on list index
-   1. Condition: Range of show must be within range of size of show list.
+   1. Condition: Range of shows must be within size of show list.
    2. Command: `delete 1` <br> 
       Expected: Show at specified index is deleted from the list. Deleted show details shown in the result display.
 4. Test case: Invalid delete index
-   1. Condition: Range of show must be outside of list size.
+   1. Condition: Range of shows must be outside of list size.
    2. Command: `delete 0` `delete` `delete <out_of_bound_integer>` <br> 
       Expected: No show is deleted. Error details shown in the result display.
 
@@ -694,7 +699,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Status of show at specified index is changed to `completed`. Edited show details shown in the result display.
 
 4. Test case: Invalid edit index
-   1. Condition: Range of show must be outside of list size or 
+   1. Condition: Range of shows must be outside of list size.
    2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
       Expected: No show is edited. Error details shown in the result display.
 
@@ -818,10 +823,10 @@ testers are expected to do more *exploratory* testing.
    
 4. Test case: Sort with multiple same prefixes 
    1. Command: `sort sna/ snd/` <br>
-      Expected: The list of show sorted by name in ascending order.
+      Expected: The list of shows is sorted by name in ascending order.
    
    2. Command: `sort ssa/ ssd/` <br>
-      Expected: The list of show sorted by status in ascending order. 
+      Expected: The list of shows is sorted by status in ascending order. 
    
 5. Test case: Sort with multiple different prefixes
    1. Command: `sort sna/ ssd/` <br>
