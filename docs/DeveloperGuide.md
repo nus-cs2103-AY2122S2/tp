@@ -634,9 +634,9 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Have a copy of `Trackermon.jar` in your computer.
       1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
    2. Double-click the jar file.
-   3. Test case: Initial launch. <br> 
+   3. Test case: Initial launch <br> 
       Expected: Application launched with a set of sample shows.
-   4. Test case: Subsequent Launch. <br> 
+   4. Test case: Subsequent Launch <br> 
       Expected: Application launched with user saved shows.
 
 2. Saving window preferences
