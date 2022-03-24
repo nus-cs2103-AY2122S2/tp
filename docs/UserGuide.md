@@ -248,7 +248,7 @@ Shows all events stored in Amigos. Switches GUI to the events tab.
 
 Find events in Amigos whose properties match the given search criteria.
 
-**Format**: `findevent [n/EVENT_NAME_SUBSTRING] [dt/DATE] [f/FRIEND_NAME_SUBSTRING]...`
+**Format**: `findevent [n/EVENT_NAME_SUBSTRING] [da/DATE] [f/FRIEND_NAME_SUBSTRING]...`
 
 * For search by `EVENT_NAME_KEYWORD`/`FRIEND_NAME_KEYWORD`:
   * The search is **case-insensitive**. e.g john will match John
@@ -263,7 +263,7 @@ Find events in Amigos whose properties match the given search criteria.
 * If more than one field is given, only events with matches for **all** search criteria will be shown.
 
 **Examples**:
-* `findevent n/dinner dt/20-03-2022` returns events on 20 Mar 2022 with an event name containing 'dinner' 
+* `findevent n/dinner da/20-03-2022` returns events on 20 Mar 2022 with an event name containing 'dinner' 
 * `findevent f/Joe f/John` will return events with a friends list containing both 'joe' and 'john'
 
 
@@ -325,7 +325,7 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 | **Edit Event**             | `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...` <br> e.g., `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo`                                                                 |
 | **Delete Event**           | `deleteevent INDEX` <br> e.g., `deleteevent 2`                                                                                                                                                                                                                         |
 | **Show all events**        | `showevents`                                                                                                                                                                                                                                                           |
-| **Find an event**          | `findevent [n/EVENT_NAME_SUBSTRING] [dt/DATE] [f/FRIEND_NAME_SUBSTRING]...` <br> e.g.,`findevent n/dinner dt/20-03-2022 f/Maggie`                                                                                                                                      |
+| **Find events**            | `findevent [n/EVENT_NAME_SUBSTRING] [da/DATE] [f/FRIEND_NAME_SUBSTRING]...` <br> e.g.,`findevent n/dinner da/20-03-2022 f/Maggie`                                                                                                                                      |
 | **Help**                   | `help`                                                                                                                                                                                                                                                                 |
 | **Clear**                  | `clear`                                                                                                                                                                                                                                                                |
 | **Exit**                   | `exit`                                                                                                                                                                                                                                                                 |
