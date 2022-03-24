@@ -15,6 +15,8 @@ import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleName;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Schedule> filteredSchedules;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -32,11 +35,12 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with MyGM: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
     }
 
     public ModelManager() {
@@ -201,6 +205,46 @@ public class ModelManager implements Model {
     public void putPersonIntoLineup(Person player, Lineup lineup) {
         player.addLineupName(lineup);
         addressBook.addPersonToLineup(player, lineup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    //=========== Schedule
+    @Override
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return addressBook.hasSchedule(schedule);
+    }
+
+    @Override
+    public boolean hasScheduleName(ScheduleName targetName) {
+        requireNonNull(targetName);
+        return addressBook.hasScheduleName(targetName);
+    }
+
+
+    @Override
+    public Person getPerson(Name targetName) {
+        requireNonNull(targetName);
+        return addressBook.getPerson(targetName);
+    }
+
+
+    @Override
+    public void deletePerson(Person target) {
+        addressBook.removePerson(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addPerson(Person person) {
+        addressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+        addressBook.setPerson(target, editedPerson);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

@@ -11,6 +11,8 @@ import seedu.address.model.lineup.UniqueLineupList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.schedule.UniqueScheduleList;
 
 /**
@@ -61,8 +63,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
+        setSchedules(newData.getScheduleList());
     }
 
     //// person-level operations
@@ -181,6 +183,68 @@ public class AddressBook implements ReadOnlyAddressBook {
         lineups.addLineupToList(lineup);
     }
 
+    //// list overwrite operations (Schedule)
+
+    /**
+     * Replaces the contents of the schedule list with {@code schedules}.
+     * {@code schedules} must not contain duplicate schedules.
+     */
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules.setSchedules(schedules);
+    }
+
+    //// person-level operations
+
+    /**
+     * Returns true if a schedule with the same identity as {@code schedule} exists in MyGM.
+     */
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return schedules.contains(schedule);
+    }
+
+    /**
+     * Returns true if {@code targetName} is schedule name exists.
+     */
+    public boolean hasScheduleName(ScheduleName targetName) {
+        requireNonNull(targetName);
+        return this.schedules.containsScheduleName(targetName);
+    }
+
+    /**
+     * Returns the schedule with {@code targetName};
+     */
+    public Schedule getSchedule(ScheduleName targetName) {
+        return schedules.getSchedule(targetName);
+    }
+
+
+    /**
+     * Adds a schedule to MyGM.
+     * The schedule must not already exist in MyGM.
+     */
+    public void addSchedule(Schedule s) {
+        schedules.add(s);
+    }
+
+    /**
+     * Replaces the given schedule {@code target} in the list with {@code editedSchedule}.
+     * {@code target} must exist in MyGM.
+     * The schedule identity of {@code editedSchedule} must not be the same as another existing schedule in MyGM.
+     */
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireNonNull(editedSchedule);
+        schedules.setSchedule(target, editedSchedule);
+    }
+
+    /**
+     * Removes {@code key} from this {@code MyGM}.
+     * {@code key} must exist in MyGM.
+     */
+    public void removeSchedule(Schedule key) {
+        schedules.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -194,6 +258,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Schedule> getScheduleList() {
+        return schedules.asUnmodifiableObservableList();
+    }
+
     public void refresh() {
         persons.refresh();
     }
@@ -202,7 +271,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons))
+                && lineups.equals(((AddressBook) other).lineups)
+                && schedules.equals(((AddressBook) other).schedules);
     }
 
     @Override

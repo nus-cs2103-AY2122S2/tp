@@ -1,8 +1,11 @@
 package seedu.address.model.schedule;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.model.person.Name;
 
 /**
  * Represents a schedule in MyGM
@@ -33,6 +36,14 @@ public class Schedule {
 
     public ScheduleDateTime getScheduleDateTime() {
         return scheduleDateTime;
+    }
+
+    /**
+     * Returns true if some schedule's name is {@code targetName}.
+     */
+    public boolean isMatchName(ScheduleName targetName) {
+        requireNonNull(targetName);
+        return getScheduleName().equals(targetName);
     }
 
     /**

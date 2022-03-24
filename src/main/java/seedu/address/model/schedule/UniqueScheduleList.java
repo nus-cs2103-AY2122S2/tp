@@ -5,9 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.schedule.exceptions.DuplicateScheduleException;
 import seedu.address.model.schedule.exceptions.ScheduleNotFoundException;
 
@@ -25,6 +28,16 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public boolean contains(Schedule toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
+     * Return true if some schedule with {@code targetName}
+     * @param targetName
+     * @return
+     */
+    public boolean containsScheduleName(ScheduleName targetName) {
+        requireNonNull(targetName);
+        return internalList.stream().anyMatch(schedule -> schedule.isMatchName(targetName));
     }
 
     /**
@@ -82,6 +95,16 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         internalList.setAll(schedules);
+    }
+
+    /**
+     * Returns the schedule with {@code targetName};
+     */
+    public Schedule getSchedule(ScheduleName targetName) {
+        requireNonNull(targetName);
+        return internalList.stream()
+                .filter(person -> person.isMatchName(targetName))
+                .collect(Collectors.toList()).get(0);
     }
 
     /**
