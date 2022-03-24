@@ -23,7 +23,7 @@ public abstract class Name {
      * @param substring Substring to match this Name against.
      * @return True if given substring is part of this Name.
      */
-    public Boolean containsIgnoreCase(String substring) {
+    public boolean containsIgnoreCase(String substring) {
         requireNonNull(substring);
         return fullName.toLowerCase().contains(substring.toLowerCase());
     }
