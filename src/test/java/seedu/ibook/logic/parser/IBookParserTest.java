@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_A;
 import static seedu.ibook.testutil.Assert.assertThrows;
 import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
+import static seedu.ibook.testutil.TypicalProductFilters.CATEGORY_FILTER_A;
+import static seedu.ibook.testutil.TypicalProductFilters.NAME_FILTER_A;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +25,8 @@ import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.logic.parser.exceptions.ParseException;
-import seedu.ibook.model.product.Category;
-import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.filters.CategoryFilter;
-import seedu.ibook.model.product.filters.NameFilter;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.testutil.ProductBuilder;
 import seedu.ibook.testutil.ProductUtil;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
@@ -77,11 +75,8 @@ public class IBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + NAME_FULL_A + CATEGORY_FULL_A);
 
-        ProductFulfillsFiltersPredicate predicate = new ProductFulfillsFiltersPredicate();
-        predicate.addFilter(new NameFilter(new Name(VALID_NAME_A)));
-        predicate.addFilter(new CategoryFilter(new Category(VALID_CATEGORY_A)));
-
-        assertEquals(new FindCommand(predicate), command);
+        List<AttributeFilter> filterList = List.of(NAME_FILTER_A, CATEGORY_FILTER_A);
+        assertEquals(new FindCommand(filterList), command);
     }
 
     @Test

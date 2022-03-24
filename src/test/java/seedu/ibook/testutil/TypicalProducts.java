@@ -8,6 +8,7 @@ import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_B;
+import static seedu.ibook.testutil.TypicalItems.getTypicalItems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,31 +44,29 @@ public class TypicalProducts {
     public static final Product KAYA_BREAD_WITH_ITEMS = new ProductBuilder().withName("Kaya Bread")
             .withCategory("Bread")
             .withDescription("Kaya on bread")
-            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+            .withPrice("1.99").buildWithItems(getTypicalItems());
     public static final Product PEANUT_BUTTER_BREAD_WITH_ITEMS = new ProductBuilder().withName("Peanut Butter Bread")
             .withCategory("Bread")
             .withDescription("Peanut Butter on bread")
-            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+            .withPrice("1.99").buildWithItems(getTypicalItems());
     public static final Product CHOCOLATE_BREAD_WITH_ITEMS = new ProductBuilder().withName("Chocolate Bread")
             .withCategory("Bread")
             .withDescription("Chocolate on bread")
-            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+            .withPrice("1.99").buildWithItems(getTypicalItems());
     public static final Product VANILLA_CAKE_WITH_ITEMS = new ProductBuilder().withName("Vanilla Cake")
             .withCategory("Cake")
             .withDescription("Vanilla Cake")
-            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+            .withPrice("1.99").buildWithItems(getTypicalItems());
     public static final Product WAFFLES_WITH_ITEMS = new ProductBuilder().withName("Waffles")
             .withCategory("Waffle")
             .withDescription("Waffles")
-            .withPrice("1.99").buildWithItems(TypicalItems.getTypicalItems());
+            .withPrice("1.99").buildWithItems(getTypicalItems());
 
     // Manually added - Product's details found in {@code CommandTestUtil}
     public static final Product PRODUCT_A = new ProductBuilder().withName(VALID_NAME_A).withCategory(VALID_CATEGORY_A)
             .withDescription(VALID_DESCRIPTION_A).withPrice(VALID_PRICE_A).build();
     public static final Product PRODUCT_B = new ProductBuilder().withName(VALID_NAME_B).withCategory(VALID_CATEGORY_B)
             .withDescription(VALID_DESCRIPTION_B).withPrice(VALID_PRICE_B).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalProducts() {} // prevents instantiation
 

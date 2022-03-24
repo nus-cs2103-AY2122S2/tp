@@ -18,7 +18,7 @@ import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.ProductFilter;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
 /**
@@ -57,7 +57,6 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Bread&"; // '&' not allowed in names
     public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "Bread&"; // '&' not allowed in category
-    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "Bread&"; // '&' not allowed
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "-1"; // price must be a positive amount
     public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE + "2022 03 08"; // incorrect format
     public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "-2"; // quantity must be non-negative
@@ -133,7 +132,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredProductList().size());
 
         Product product = model.getFilteredProductList().get(targetIndex.getZeroBased());
-        model.updateProductFilters(new ProductFulfillsFiltersPredicate(product));
+        model.updateProductFilters(new ProductFilter(product));
 
         assertEquals(1, model.getFilteredProductList().size());
     }

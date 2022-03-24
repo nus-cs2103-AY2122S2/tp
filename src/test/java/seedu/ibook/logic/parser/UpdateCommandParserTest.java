@@ -6,7 +6,6 @@ import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_EXPIRY_DATE_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_PRICE_DESC;
@@ -34,7 +33,6 @@ import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Category;
-import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
@@ -79,8 +77,6 @@ public class UpdateCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
         // invalid category
         assertParseFailure(parser, "1" + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
-        // invalid description
-        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
         // invalid price
         assertParseFailure(parser, "1" + INVALID_PRICE_DESC, Price.MESSAGE_CONSTRAINTS);
 

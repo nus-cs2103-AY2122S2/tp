@@ -65,14 +65,6 @@ public class JsonAdaptedProductTest {
     }
 
     @Test
-    public void toModelType_invalidDescription_throwsIllegalValueException() {
-        JsonAdaptedProduct product =
-                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, INVALID_DESCRIPTION, VALID_PRICE, null);
-        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
-    }
-
-    @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedProduct product =
                 new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, null, VALID_PRICE, null);
