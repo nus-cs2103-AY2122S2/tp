@@ -133,7 +133,7 @@ public class FindCommandParserTest {
                         new ModuleCodeContainsKeywordsPredicate(
                                 Arrays.asList(VALID_MODULE_CODE_BOB.split("\\s+"))));
 
-        // no white space before module code
+        // no whitespace before module code
         assertParseSuccess(parser, MODULE_CODE_DESC_BOB, expectedFindCommand);
 
         // whitespace before module code
