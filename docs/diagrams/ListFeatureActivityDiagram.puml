@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+(*)--> "User inputs List Command without any tags"
+--> "Tracey will show the user a list of\nstudents with their particulars"
+--> "Tracey will respond with a SUCCESS message"
+-->(*)
+
+@enduml
