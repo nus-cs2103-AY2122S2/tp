@@ -17,7 +17,6 @@ import seedu.trackermon.logic.parser.exceptions.ParseException;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.show.Show;
-import seedu.trackermon.model.util.SampleDataUtil;
 import seedu.trackermon.storage.Storage;
 
 
@@ -26,7 +25,8 @@ import seedu.trackermon.storage.Storage;
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
-    public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String FILE_OPS_SAVE_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String FILE_OPS_READ_ERROR_MESSAGE = "Could not read import data: File may be corrupted.";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -59,8 +59,10 @@ public class LogicManager implements Logic {
                 model.setShowList(showListOptional.orElse(currentData));
             }
             storage.saveShowList(model.getShowList());
-        } catch (IOException | DataConversionException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_SAVE_ERROR_MESSAGE + ioe, ioe);
+        } catch (DataConversionException dce) {
+            throw new CommandException(FILE_OPS_READ_ERROR_MESSAGE, dce);
         }
 
         return commandResult;
