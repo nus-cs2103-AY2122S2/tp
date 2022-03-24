@@ -176,13 +176,18 @@ List of new entities:
 
 ### Add feature
 
+#### What is the feature about?
 The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities (Refer to [TODO: UPDATE LINK]).
+
+The enhancement works by adding additional prefixes i.e. `id/[StudentId] `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned to the entities.
+
+#### How is the feature implemented?
 
 Given below is an example usage scenario and how the `add` mechanism behaves at each step.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` TAlent Assistant™ comes with preloaded data, user can execute the `clear` command for a fresh state.
+:bulb: **Tip:** TAlent Assistant™ comes with preloaded data, user can execute the `clear` command for a fresh state.
 
 </div>
 
@@ -198,9 +203,21 @@ Step 2. The user proceeds to add a candidate by running the `add` command with i
 
 </div>
 
+#### Why is the feature implemented as such?
+
+The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input. 
+
+#### UML Diagrams
+**Activity Diagram**
+
+<br>
+
 The following activity diagram summarizes what happens when a user executes an `add` command:
 
+<br>
+
 <img src="images/AddActivityDiagram.png" width="250" />
+
 
 ### \[Proposed\] Undo/redo feature
 
