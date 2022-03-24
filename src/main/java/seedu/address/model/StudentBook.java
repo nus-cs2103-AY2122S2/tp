@@ -10,7 +10,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the student-book level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class StudentBook implements ReadOnlyStudentBook {
@@ -60,7 +60,7 @@ public class StudentBook implements ReadOnlyStudentBook {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the student book.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -68,8 +68,8 @@ public class StudentBook implements ReadOnlyStudentBook {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to the student book.
+     * The student must not already exist in the student book.
      */
     public void addStudent(Student p) {
         students.add(p);
@@ -77,9 +77,9 @@ public class StudentBook implements ReadOnlyStudentBook {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the student book.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * student book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -89,7 +89,7 @@ public class StudentBook implements ReadOnlyStudentBook {
 
     /**
      * Removes {@code key} from this {@code StudentBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the student book.
      */
     public void removeStudent(Student key) {
         students.remove(key);

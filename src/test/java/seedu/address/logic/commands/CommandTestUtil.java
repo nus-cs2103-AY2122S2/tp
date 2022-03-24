@@ -93,8 +93,6 @@ public class CommandTestUtil {
             + PREFIX_DATE + "25 March 2022";
     public static final String INVALID_LESSON_START_TIME_FORMAT_DESC = " " // start time must be given in "HH:mm" format
             + PREFIX_START_TIME + "6pm";
-    public static final String INVALID_LESSON_DATE_PASTDATE_DESC = " " // cannot create new lessons in the past
-            + PREFIX_DATE + "1-12-2020";
 
     // hours and minutes cannot both be zero as the duration of a lesson should not be zero
     public static final String INVALID_DURATION_MINUTES_ZERO_DESC = " "
@@ -147,21 +145,21 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered student list and selected student in {@code actualModel} remain unchanged
+     * - the student book, filtered student list and selected student in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        StudentBook expectedStudentBook = new StudentBook(actualModel.getAddressBook());
+        StudentBook expectedStudentBook = new StudentBook(actualModel.getStudentBook());
         List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedStudentBook, actualModel.getAddressBook());
+        assertEquals(expectedStudentBook, actualModel.getStudentBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s student book.
      */
     public static void showStudentAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());

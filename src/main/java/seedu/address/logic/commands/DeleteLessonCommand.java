@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 
 /**
- * Deletes a lesson identified using it's displayed index from the address book.
+ * Deletes a lesson identified using it's displayed index from the lesson book.
  */
 public class DeleteLessonCommand extends Command {
 

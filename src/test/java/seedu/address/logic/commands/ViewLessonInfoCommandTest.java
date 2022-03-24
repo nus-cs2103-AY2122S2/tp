@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalStudentBook;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -11,7 +11,7 @@ import seedu.address.model.UserPrefs;
  * {@code ViewLessonInfoCommand}
  */
 public class ViewLessonInfoCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
 
     // TODO: Can't test for lesson as TypicalStudents.java does not include lessons yet
     /*  @Test

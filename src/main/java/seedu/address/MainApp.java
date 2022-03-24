@@ -60,7 +60,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        StudentBookStorage studentBookStorage = new JsonStudentBookStorage(userPrefs.getAddressBookFilePath());
+        StudentBookStorage studentBookStorage = new JsonStudentBookStorage(userPrefs.getStudentBookFilePath());
         LessonBookStorage lessonBookStorage = new JsonLessonBookStorage(userPrefs.getLessonBookFilePath());
         storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
 
@@ -74,9 +74,12 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s student book, lesson book
+     * and {@code userPrefs}. <br>
+     * The data from the sample student book and lesson book will be used instead if {@code storage}'s lesson book and
+     * student book is not found,
+     * or an empty lesson book and student book will be used instead if errors occur when reading
+     * {@code storage}'s lesson book and student book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyStudentBook> addressBookOptional;
@@ -85,7 +88,7 @@ public class MainApp extends Application {
         ReadOnlyLessonBook initialDataLessonBook;
 
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readStudentBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file for students not found. Will be starting with sample data.");
             }
@@ -191,7 +194,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TeachWhat! ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

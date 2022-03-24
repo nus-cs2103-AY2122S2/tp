@@ -180,13 +180,16 @@ application is updated with the details of the selected `Student`.
 
 A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
 
+### Add student
+Adding a `Student` to the `StudentBook` 
+
 ### Add temporary/recurring lesson
 Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
 
-This is achieved by enforcing ***consistency*** between existing lessons stored in the application.
+This is achieved by enforcing ***consistency*** between existing lessons stored in the list.
 
-A lesson list is considered ***consistent*** when no lessons in the list clash with one another. In particular, the following two conditions are enforced by the `ConsistentLessonList`:
-- no two temporary lessons should have overlapping timeslots (ie: a lesson should start when another lesson has not ended)
+A list of lessons is considered ***consistent*** when no lessons clash with each another. In particular, the following two conditions are enforced by the `ConsistentLessonList`:
+- no two temporary lessons should have overlapping timeslots (ie: a lesson should ***not*** start when another lesson has not ended)
 - no recurring lesson should have overlapping timeslots with any temporary lesson or recurring lesson that falls on the same weekday as it
 
 This is done with the method `ConsistentLessonList#hasConflictingLesson()`, which takes in a `Lesson` that is to be added to the list and returns true if any existing lessons clashes with it.

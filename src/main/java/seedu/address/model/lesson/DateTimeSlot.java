@@ -94,8 +94,7 @@ public class DateTimeSlot {
         LocalDateTime otherTimeSlotStart = otherDateTimeSlot.dateOfLesson;
         LocalDateTime otherTimeSlotEnd = otherDateTimeSlot.getEndingDateTime();
 
-        return (currentTimeSlotStart.isBefore(otherTimeSlotEnd) || currentTimeSlotStart.equals(otherTimeSlotEnd))
-                && (currentTimeSlotEnd.isAfter(otherTimeSlotStart) || currentTimeSlotEnd.equals(otherTimeSlotStart));
+        return (currentTimeSlotStart.isBefore(otherTimeSlotEnd) && currentTimeSlotEnd.isAfter(otherTimeSlotStart));
     }
 
     public LocalDateTime getDateOfLesson() {
