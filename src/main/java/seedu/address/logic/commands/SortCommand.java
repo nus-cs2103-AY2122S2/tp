@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -102,6 +103,12 @@ public class SortCommand extends Command {
 
                 } else if (PREFIX_STATUS.equals(field)) {
                     result = o1.getStatus().compareTo(o2.getStatus());
+
+                } else if (PREFIX_COMMENT.equals(field)) {
+                    result = o1.getComment().compareTo(o2.getComment());
+
+                } else {
+                    assert false;
                 }
 
                 if (order.equals("desc")) {

@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,6 +20,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.module.Module;
+
+
 
 public class FormatPersonUtil {
     private static final String JSON_FORMAT = "json";
@@ -62,6 +65,7 @@ public class FormatPersonUtil {
 
         } else if (format.equals(CSV_FORMAT)) {
             return formatPersonCsv(person, prefixes);
+
         } else {
             return formatPersonDefault(person, prefixes);
         }
@@ -174,7 +178,11 @@ public class FormatPersonUtil {
         } else if (prefix.equals(PREFIX_MODULE)) {
             return person.getModules().toString();
 
+        } else if (prefix.equals(PREFIX_COMMENT)) {
+            return person.getComment().toString();
+
         } else {
+            assert false;
             return "";
         }
     }
