@@ -29,7 +29,7 @@ public class BookingListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Customer} using a {@code CustomerCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Booking} using a {@code BookingCard}.
      */
     class BookingListViewCell extends ListCell<Booking> {
         @Override

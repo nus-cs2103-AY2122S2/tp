@@ -18,7 +18,7 @@ public class BookingCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on TrackBeau level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on addressbook level 4</a>
      */
 
     public final Booking booking;
@@ -35,7 +35,7 @@ public class BookingCard extends UiPart<Region> {
     private Label startTime;
 
     /**
-     * Creates a {@code CustomerCard} with the given {@code Customer} and index to display.
+     * Creates a {@code BookingCard} with the given {@code Booking} and index to display.
      */
     public BookingCard(Booking booking, int displayedIndex) {
         super(FXML);
