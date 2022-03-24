@@ -22,6 +22,8 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New Lab added: %1$s";
     public static final String MESSAGE_DUPLICATE_LAB = "This Lab already exists in the TAddressBook";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "The student list is currently empty. "
+            + "Please try again after adding at least 1 student to the list.";
 
     private final Lab toAdd;
 
@@ -39,6 +41,10 @@ public class AddLabCommand extends Command {
 
         if (model.hasLab(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LAB);
+        }
+
+        if (model.getAddressBook().getStudentList().isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_STUDENT_LIST);
         }
 
         model.addLab(toAdd);
