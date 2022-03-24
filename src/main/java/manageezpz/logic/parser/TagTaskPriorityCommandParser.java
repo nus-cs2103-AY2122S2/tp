@@ -35,7 +35,7 @@ public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityComma
         }
         String[] argsArr = args.trim().split(" ");
         int index = ParserUtil.parseIndex(argsArr[0]).getZeroBased();
-        return new TagTaskPriorityCommand(index, enumString);
+        return new TagTaskPriorityCommand(index, enumString.toUpperCase());
     }
 
 

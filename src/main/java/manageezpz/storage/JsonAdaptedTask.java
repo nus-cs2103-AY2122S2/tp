@@ -35,7 +35,6 @@ class JsonAdaptedTask {
     private String tag;
     private String priority;
 
-
     /**
      * Constructs a {@code JsonAdaptedTask} with the given person details.
      */
@@ -66,7 +65,7 @@ class JsonAdaptedTask {
         description = source.getDescription().toString(); // Generally for all tasks
         type = source.getType(); // Generally for all tasks
         status = source.getStatusIcon(); // Generally for all tasks
-        this.priority = String.valueOf(source.getPriority()); // Generally for all tasks
+        this.priority = source.getPriority().name(); // Generally for all tasks
         if (source instanceof Deadline) {
             this.date = ((Deadline) source).getDate().getDate(); // For Deadline
             this.deadlineTime = ((Deadline) source).getTime().getTime(); // For Deadline

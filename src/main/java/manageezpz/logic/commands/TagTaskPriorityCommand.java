@@ -11,13 +11,12 @@ public class TagTaskPriorityCommand extends Command {
     public static final String COMMAND_WORD = "tagPriority";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tag the Task to your specified Priority "
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_PRIORITY + "LOW/MEDIUM/HIGH" + " (This must be strictly followed!)"
+            + PREFIX_PRIORITY + "NONE/LOW/MEDIUM/HIGH"
             + "\r\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_PRIORITY + "HIGH";
     public static final String MESSAGE_SUCCESS = "Task has been tagged with the appropriate priority!";
-    public static final String MESSAGE_DUPLICATE_TASK = "This Task has already been assigned to the same person!";
 
     private int index;
     private String priority;
@@ -42,21 +41,15 @@ public class TagTaskPriorityCommand extends Command {
             throw new CommandException("This Task Number is invalid. \r\n"
                     + MESSAGE_USAGE);
         }
-
-        String currTaskPriority = task.getPriority().name();
-        if(currTaskPriority.equals(Task.Priority.NONE.name())) {
-            try {
-                task.setPriority(priority);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, task));
-            } catch(NullPointerException e) {
-                throw new CommandException("Priority cannot be NULL! \r\n"
-                        + MESSAGE_USAGE);
-            } catch(IllegalArgumentException e) {
-                throw new CommandException("Priority is invalid, Please use one of the three Priority! \r\n"
-                        + MESSAGE_USAGE);
-            }
+        try {
+            task.setPriority(priority);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, task));
+        } catch(NullPointerException e) {
+            throw new CommandException("Priority cannot be NULL! \r\n"
+                    + MESSAGE_USAGE);
+        } catch(IllegalArgumentException e) {
+            throw new CommandException("Priority is invalid, Valid Priorities are: NONE/LOW/MEDIUM/HIGH \r\n"
+                    + MESSAGE_USAGE);
         }
-        return new CommandResult("Tag Priority Command did not go through, try again :( \r\n" + MESSAGE_USAGE);
     }
-
 }
