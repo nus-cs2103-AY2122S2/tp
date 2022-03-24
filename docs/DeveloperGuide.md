@@ -340,22 +340,14 @@ instantiated each time a `Show` object is created.
 `import` and `export` allows the user to quickly import/ export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
 
 ### Implementation
-When the enters the import/ export command, a FileDialog is created and shown on screen. 
+When the import/ export command is executed, a `JsonFileManager` is created with the default filename. The `JsonFileManager` handles the creation of the File Explorer GUI along with the logic behind import/ export. The `importFile` and `exportFile` methods return an integer used to represent the status of the process.
 
-`import`
-
-The user has to navigate to and find a JSON file they wish to import into Trackermon. After the file has been selected, a preliminary check is run on it to ensure it is a JSON file. If it is not a JSON file, Trackermon will return an error message. Once the check passes, Trackermon will obtain the paths of the target location (`showListFilePath`) and data to import. Trackermon then uses the `Files` libary to copy the data from the selected location to the target location. 
-
-After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
-
-`export`
-
-The user has to navigate to and find a directory or file they wish to export Trackermon data into. After the user selects a location to export Trackermon data into, Trackermon will obtain the paths of the target location and the source location (`showListFilePath`). The `Files` library will then be used to copy the data from the source location to the target location.
+For `import`: After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
 
 ### Design considerations:
 ##### Aspect: How the File Explorer looks
-- **Alternative 1 (current choice):** Using the FileDialog library. The FileDialog library achieves a similar look as the JFileChooser library, but it is recommended by for use on MacOS, so we decided to go with it, as it also works on Windows.
-- **Alternative 2:** Using the JFileChooser library. While this library works on Windows, and achieves the desired look, there were issues implementing it on MacOS, which would cause Trackermon to freeze whenever it had to show the File Explorer. Therefore, we decided to go with the FileDialog library.
+- **Alternative 1 (current choice):** Using the JFileChooser library. This library manages to create a File Explorer GUI similar to Windows' native File Explorer's GUI. There were issues implementing this for MacOS but since the other library had issues with the MacOS implementation too, we decided to go with this as it offered more customisation for the GUI.
+- **Alternative 2:** Using the FileDialog library. The FileDialog library achieves a similar look as the JFileChooser library, but lacked customisation. There were also issues with its implementation for MacOS.
 
 ---
 
