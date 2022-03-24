@@ -3,9 +3,6 @@
 
 box UI UI_COLOR_T1
 participant ":MainWindow" as MainWindow UI_COLOR
-end box
-
-box UI UI_COLOR_T2
 participant ":PieChartWindow" as PieChartWindow UI_COLOR
 end box
 
