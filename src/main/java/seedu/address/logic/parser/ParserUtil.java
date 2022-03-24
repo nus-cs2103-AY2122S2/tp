@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -167,5 +168,22 @@ public class ParserUtil {
             throw new ParseException(Info.MESSAGE_CONSTRAINTS);
         }
         return new Info(trimmedInfo);
+    }
+
+    /**
+     * Parses a {@code String command} into a {@code CommandEnum}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param command A string of the command that have help requested.
+     * @return CommonEnum object that is parsed.
+     * @throws ParseException if the given {@code command} is invalid.
+     */
+    public static Command.CommandEnum parseCommand(String command) throws ParseException {
+        requireNonNull(command);
+        String trimmedCommand = command.trim();
+        if (!Command.CommandEnum.isValidCommand(trimmedCommand)) {
+            throw new ParseException(Command.CommandEnum.MESSAGE_CONSTRAINTS);
+        }
+        return Command.CommandEnum.valueOf(trimmedCommand);
     }
 }

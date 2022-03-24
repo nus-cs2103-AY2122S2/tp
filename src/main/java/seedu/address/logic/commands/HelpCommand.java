@@ -14,8 +14,22 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private final CommandEnum commandToPrint;
+
+    public HelpCommand() {
+        this.commandToPrint = null;
+    }
+
+    public HelpCommand(CommandEnum commandToPrint) {
+        this.commandToPrint = commandToPrint;
+    }
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        if (commandToPrint == null) {
+            return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        } else {
+            return new CommandResult(commandToPrint.getMessageUsage(), false, false);
+        }
     }
 }

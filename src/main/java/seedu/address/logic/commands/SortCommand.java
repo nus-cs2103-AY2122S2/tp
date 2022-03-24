@@ -10,6 +10,8 @@ import seedu.address.model.Model;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
+    public static final String MESSAGE_USAGE = "";
+
     public static final String MESSAGE_SUCCESS = "Persons are now sorted by date";
 
 
