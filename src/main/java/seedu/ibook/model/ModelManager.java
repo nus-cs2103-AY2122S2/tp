@@ -132,6 +132,12 @@ public class ModelManager implements Model {
         iBook.removeItem(targetProduct, target);
     }
 
+    @Override
+    public void updateItem(Product targetProduct, Item targetItem, Item updatedItem) {
+        requireAllNonNull(targetProduct, targetItem, updatedItem);
+        iBook.setItem(targetProduct, targetItem, updatedItem);
+    }
+
     //=========== Filtered Product List Accessors =============================================================
 
     /**

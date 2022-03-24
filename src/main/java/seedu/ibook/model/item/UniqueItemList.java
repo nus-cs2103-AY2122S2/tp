@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import seedu.ibook.commons.core.UniqueList;
+import seedu.ibook.commons.core.exceptions.DuplicateElementException;
 import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
 
 /**
@@ -50,6 +51,24 @@ public class UniqueItemList extends UniqueList<Item> {
             super.add(toAdd);
         }
         FXCollections.sort(internalList());
+    }
+
+    /**
+     * Sets the target to the updated item.
+     */
+    public void setItem(Item target, Item updatedItem) {
+        requireAllNonNull(target, updatedItem);
+
+        int index = asObservableList().indexOf(target);
+        if (index == -1) {
+            throw new ElementNotFoundException();
+        }
+
+        if (!target.isSame(updatedItem) && contains(updatedItem)) {
+            throw new DuplicateElementException();
+        }
+
+        set(index, updatedItem);
     }
 
     /**
