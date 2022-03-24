@@ -37,7 +37,8 @@
     "deadlineTime" : "",
     "eventStartTime" : "",
     "eventEndTime" : "",
-    "tag" : ""
+    "tag" : "",
+    "priority" : ""
   }, {
     "type" : "deadline",
     "status": "",
@@ -46,7 +47,8 @@
     "deadlineTime" : "0400",
     "eventStartTime" : null,
     "eventEndTime" : null,
-    "tag" : ""
+    "tag" : "",
+    "priority" : ""
   }, {
     "type" : "event",
     "status": "",
@@ -55,7 +57,8 @@
     "deadlineTime" : null,
     "eventStartTime" : "1800",
     "eventEndTime" : "2000",
-    "tag" : ""
+    "tag" : "",
+    "priority" : ""
   }, {
     "type" : "deadline",
     "status": "",
@@ -64,6 +67,7 @@
     "deadlineTime" : "0400",
     "eventStartTime" : null,
     "eventEndTime" : null,
-    "tag" : ""
+    "tag" : "",
+    "priority" : ""
   } ]
 }
