@@ -10,6 +10,12 @@ participant "mark:MarkCommand" as MarkCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":TAssist" as TAssist MODEL_COLOR
+participant ":UniqueClassGroupList" as UniqueClassGroupList MODEL_COLOR
+end box
+
 [-> LogicManager : execute("mark attend c/1 w/3 s/1,2,3,4,5,6")
 activate LogicManager
 
@@ -35,8 +41,14 @@ deactivate ParserUtil
 MarkCommandParser -> ParserUtil : parseClassGroup("c/1")
 activate ParserUtil
 
+ParserUtil --> MarkCommandParser
+deactivate ParserUtil
+
 MarkCommandParser -> ParserUtil : parseWeekId("w/3")
 activate ParserUtil
+
+ParserUtil --> MarkCommandParser
+deactivate ParserUtil
 
 MarkCommandParser -> ParserUtil : parseStudentIds("s/1,2,3,4,5,6")
 activate ParserUtil
@@ -62,6 +74,24 @@ deactivate TAssistParser
 
 LogicManager -> MarkCommand : execute()
 activate MarkCommand
+
+MarkCommand-> ModelManager : markAttendance(lesson)
+activate ModelManager
+
+ModelManager -> TAssist : markAttendance(lesson)
+activate TAssist
+
+TAssist -> UniqueClassGroupList : markAttendance(lesson)
+activate UniqueClassGroupList
+
+UniqueClassGroupList --> TAssist
+deactivate UniqueClassGroupList
+
+TAssist --> ModelManager
+deactivate TAssist
+
+MarkCommand <--ModelManager
+deactivate ModelManager
 
 create CommandResult
 MarkCommand -> CommandResult
