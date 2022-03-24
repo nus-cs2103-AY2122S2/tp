@@ -57,5 +57,4 @@ CommandResult --> ListCommand : :CommandResult
 deactivate CommandResult
 
 ListCommand --> LogicManager : :CommandResult
-
 @enduml
