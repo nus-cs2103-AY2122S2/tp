@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private CustomerListPanel customerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ServiceListPanel serviceListPanel;
     private BookingListPanel bookingListPanel;
     private StatisticsPanel statisticsPanel;
 
@@ -58,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Label customersLabel;
+
+    @FXML
+    private Label servicesLabel;
 
     @FXML
     private Label bookingsLabel;
@@ -86,6 +90,7 @@ public class MainWindow extends UiPart<Stage> {
 
         this.labels = new ArrayList<>();
         this.labels.add(customersLabel);
+        this.labels.add(servicesLabel);
         this.labels.add(bookingsLabel);
         this.labels.add(statisticsLabel);
 
@@ -103,26 +108,35 @@ public class MainWindow extends UiPart<Stage> {
                     l.getStyleClass().remove("selected");
                 }
                 label.getStyleClass().add("selected");
-                detailsPanelPlaceholder.getChildren().clear();
-                switch (label.getId()) {
-                case "customersLabel":
-                    customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
-                    detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
-                    break;
-                case "bookingsLabel":
-                    bookingListPanel = new BookingListPanel();
-                    detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
-                    break;
-                case "statisticsLabel":
-                    statisticsPanel = new StatisticsPanel();
-                    detailsPanelPlaceholder.getChildren().add(statisticsPanel.getRoot());
-                    break;
-                default:
-                    // nothing to add to details panel placeholder
-                    break;
-                }
+                switchPanel(label.getId());
             }
         });
+    }
+
+    private void switchPanel(String labelId) {
+        detailsPanelPlaceholder.getChildren().clear();
+
+        switch (labelId) {
+        case "customersLabel":
+            customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
+            detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+            break;
+        case "servicesLabel":
+            serviceListPanel = new ServiceListPanel(logic.getServiceList());
+            detailsPanelPlaceholder.getChildren().add(serviceListPanel.getRoot());
+            break;
+        case "bookingsLabel":
+            bookingListPanel = new BookingListPanel();
+            detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
+            break;
+        case "statisticsLabel":
+            statisticsPanel = new StatisticsPanel();
+            detailsPanelPlaceholder.getChildren().add(statisticsPanel.getRoot());
+            break;
+        default:
+            // nothing to add to details panel placeholder
+            break;
+        }
     }
 
     public Stage getPrimaryStage() {

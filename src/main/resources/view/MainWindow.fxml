@@ -60,6 +60,11 @@
                                         <Region fx:constant="USE_PREF_SIZE" />
                                     </minWidth>
                                 </Label>
+                                <Label styleClass="sideBarToggleLabel" fx:id="servicesLabel" text="Services">
+                                    <minWidth>
+                                        <Region fx:constant="USE_PREF_SIZE" />
+                                    </minWidth>
+                                </Label>
                                 <Label styleClass="sideBarToggleLabel" fx:id="bookingsLabel" text="Bookings">
                                     <minWidth>
                                         <Region fx:constant="USE_PREF_SIZE" />

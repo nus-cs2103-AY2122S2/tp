@@ -24,7 +24,7 @@ import seedu.trackbeau.model.tag.Tag;
  */
 class JsonAdaptedCustomer {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Customer's %s field is missing!";
 
     private final String name;
     private final String phone;
