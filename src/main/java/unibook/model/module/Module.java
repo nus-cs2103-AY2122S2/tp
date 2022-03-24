@@ -5,13 +5,10 @@ import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.exceptions.DuplicateGroupException;
+import unibook.model.module.exceptions.DuplicateKeyEventException;
 import unibook.model.module.exceptions.GroupNotFoundException;
 import unibook.model.module.group.Group;
 import unibook.model.person.Person;
@@ -35,6 +32,7 @@ public class Module {
     private final ObservableList<Professor> professors;
     private final ObservableList<Student> students;
     private final ObservableList<Group> groups;
+    private final ObservableList<ModuleKeyEvent> keyEvents;
 
 
     /**
@@ -49,6 +47,7 @@ public class Module {
         this.professors = FXCollections.observableArrayList();
         this.students = FXCollections.observableArrayList();
         this.groups = FXCollections.observableArrayList();
+        this.keyEvents = FXCollections.observableArrayList();
     }
 
     /**
@@ -64,6 +63,7 @@ public class Module {
         this.groups = groups;
         this.students = FXCollections.observableArrayList();
         this.professors = FXCollections.observableArrayList();
+        this.keyEvents = FXCollections.observableArrayList();
     }
 
     /**
@@ -83,6 +83,28 @@ public class Module {
         this.professors = professors;
         this.students = students;
         this.groups = groups;
+        this.keyEvents = FXCollections.observableArrayList();
+    }
+
+    /**
+     * Constructor for a Module, using a pre-existing list of students, professors and groups and key dates.
+     *
+     * @param moduleName
+     * @param moduleCode
+     * @param professors
+     * @param students
+     * @param keyEvents
+     */
+    public Module(ModuleName moduleName, ModuleCode moduleCode,
+                  ObservableList<Professor> professors, ObservableList<Student> students,
+                  ObservableList<Group> groups, ObservableList<ModuleKeyEvent> keyEvents) {
+        requireAllNonNull(moduleName, moduleCode, professors, students, groups);
+        this.moduleName = moduleName;
+        this.moduleCode = moduleCode;
+        this.professors = professors;
+        this.students = students;
+        this.groups = groups;
+        this.keyEvents = keyEvents;
     }
 
     /**
@@ -94,6 +116,7 @@ public class Module {
         this.professors = null;
         this.students = null;
         this.groups = null;
+        this.keyEvents = null;
     }
 
     /**
@@ -193,6 +216,18 @@ public class Module {
     }
 
     /**
+     * Adds key event to the correct module.
+     * @param k
+     */
+    public void addKeyEvent(ModuleKeyEvent k) {
+        requireNonNull(k);
+        if (keyEvents.contains(k)) {
+            throw new DuplicateKeyEventException();
+        }
+        keyEvents.add(k);
+    }
+
+    /**
      * Returns true if both modules have the same name and code.
      * This defines a weaker notion of equality between two modules.
      */
@@ -246,6 +281,10 @@ public class Module {
         groups.remove(group);
     }
 
+    public ObservableList<ModuleKeyEvent> getKeyEvents() {
+        return this.keyEvents;
+    }
+
     /**
      * Returns true if both modules have the same identity and data fields.
      * This defines a stronger notion of equality between two modules.
@@ -265,7 +304,9 @@ public class Module {
         return otherModule.getModuleName().equals(getModuleName())
             && otherModule.getModuleCode().equals(getModuleCode())
             && otherModule.getProfessors().equals(getProfessors())
-            && otherModule.getStudents().equals(getStudents());
+            && otherModule.getStudents().equals(getStudents())
+            && otherModule.getGroups().equals(getGroups())
+            && otherModule.getKeyEvents().equals(getKeyEvents());
 
     }
 
@@ -284,7 +325,11 @@ public class Module {
                 .append("; Module Code: ")
                 .append(getModuleCode())
                 .append("; Professors: ")
-                .append(getProfessors());
+                .append(getProfessors())
+                .append("; Groups: ")
+                .append(getGroups())
+                .append("; Key Events: ")
+                .append(getKeyEvents());
         return builder.toString();
     }
 

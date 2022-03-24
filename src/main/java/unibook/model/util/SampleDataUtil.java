@@ -12,12 +12,12 @@ import unibook.model.ReadOnlyUniBook;
 import unibook.model.UniBook;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Office;
-import unibook.model.person.Person;
 import unibook.model.person.Phone;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
@@ -34,7 +34,8 @@ public class SampleDataUtil {
      */
     public static Module[] getSampleModules() {
         Module sampleModule1 = new Module(new ModuleName("Software Engineering"), new ModuleCode("CS2103"));
-        Module sampleModule2 = new Module(new ModuleName("Introduction to Operating Systems"), new ModuleCode("CS2106"));
+        Module sampleModule2 = new Module(new ModuleName("Introduction to Operating Systems"),
+                new ModuleCode("CS2106"));
 
         return new Module[] {sampleModule1, sampleModule2};
     }
@@ -48,9 +49,21 @@ public class SampleDataUtil {
         //Sample meeting time collection for group
         ObservableList<LocalDateTime> sampleMeetingTimes1 = FXCollections.observableArrayList();
         sampleMeetingTimes1.add(LocalDateTime.of(2022, 5, 4, 13, 0));
-        
         Group sampleGroup1 = new Group("W16-1", sampleModules[0], sampleMeetingTimes1);
         return new Group[] {sampleGroup1};
+    }
+
+    /**
+     * Instantiates sample key events, using passed in modules array.
+     * @param sampleModules
+     * @return array of key events
+     */
+
+    public static ModuleKeyEvent[] getSampleEvents(Module[] sampleModules) {
+        LocalDateTime sampleTime = LocalDateTime.of(2022, 5, 4, 14, 0);
+        ModuleKeyEvent sampleModuleKeyEvent1 = new ModuleKeyEvent(ModuleKeyEvent.KeyEventType.EXAM, sampleTime,
+                sampleModules[0]);
+        return new ModuleKeyEvent[] {sampleModuleKeyEvent1};
     }
 
 
@@ -63,6 +76,9 @@ public class SampleDataUtil {
         //groups[0] == W16-1
         Group[] groups = getSampleGroups(modules);
 
+        //keyEvents[0] = exam on May 4th, 2022 at 2PM
+        ModuleKeyEvent[] keyEvents = getSampleEvents(modules);
+
         //Initialising sample module sets to pass into Student constructor
         Set<Module> sampleModuleSet1 = new HashSet<>();
         Set<Module> sampleModuleSet2 = new HashSet<>();
@@ -72,7 +88,6 @@ public class SampleDataUtil {
         sampleModuleSet1.add(modules[1]);
         sampleModuleSet2.add(modules[0]);
         sampleModuleSet3.add(modules[0]);
-        
         //Initialising sample group sets to pass into Student constructor
         Set<Group> sampleGroupSet1 = new HashSet<>();
 
@@ -110,6 +125,9 @@ public class SampleDataUtil {
 
         //Add groups to sample Unibook
         sampleAb.addGroupToModule(groups[0]);
+
+        //Add key events to sample Unibook
+        sampleAb.addKeyEventToModule(keyEvents[0]);
 
         return sampleAb;
     }

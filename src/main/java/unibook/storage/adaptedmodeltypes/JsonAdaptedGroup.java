@@ -11,16 +11,15 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javafx.collections.FXCollections;
 import unibook.commons.exceptions.IllegalValueException;
+import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.person.Name;
 import unibook.model.person.Phone;
 import unibook.storage.util.LocalDateTimeDeserializer;
 import unibook.storage.util.LocalDateTimeSerializer;
-import unibook.model.module.Module;
-
 
 /**
- * Jackson-friendly version of {@link Module}.
+ * Jackson-friendly version of Group.
  */
 public class JsonAdaptedGroup {
 

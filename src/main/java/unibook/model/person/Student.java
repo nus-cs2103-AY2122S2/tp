@@ -1,14 +1,11 @@
 package unibook.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
 import unibook.model.module.Module;
-import unibook.model.module.ModuleCode;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 

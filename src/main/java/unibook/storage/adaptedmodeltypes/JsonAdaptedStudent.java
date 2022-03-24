@@ -1,7 +1,6 @@
 package unibook.storage.adaptedmodeltypes;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -9,10 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.UniBook;
+import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Student;
-import unibook.model.module.Module;
+
 
 public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Professor's %s field is missing!";

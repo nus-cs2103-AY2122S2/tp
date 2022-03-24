@@ -12,6 +12,9 @@ public class JsonAdaptedGroupCode {
     private final JsonAdaptedModuleCode moduleCode;
     private final String groupName;
 
+    /**
+     * Constructor for a Jackson Friendly Group code.
+     */
     @JsonCreator
     public JsonAdaptedGroupCode(@JsonProperty("moduleCode") JsonAdaptedModuleCode moduleCode,
                                 @JsonProperty("groupName") String groupName) {

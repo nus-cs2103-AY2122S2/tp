@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import unibook.model.module.Module;
-import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
 /**

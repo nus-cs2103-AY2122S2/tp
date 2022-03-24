@@ -1,9 +1,7 @@
 package unibook.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -57,7 +55,7 @@ class JsonSerializableUniBook {
                 persons.add(new JsonAdaptedProfessor((Professor) p));
             } else {
                 //person should be either a student or a professor
-               throw new PersonNoSubtypeException();
+                throw new PersonNoSubtypeException();
             }
         }
         //all JsonAdaptedGroups are instantiated within the instantiation of a JsonAdaptedModule

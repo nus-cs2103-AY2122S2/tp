@@ -1,6 +1,5 @@
 package unibook.storage.adaptedmodeltypes;
 
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;

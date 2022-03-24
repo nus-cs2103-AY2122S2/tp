@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleList;
 import unibook.model.module.group.Group;
 import unibook.model.person.Person;
@@ -116,6 +117,10 @@ public class UniBook implements ReadOnlyUniBook {
         }
     }
 
+    /**
+     * Adds a student to all their module groups.
+     * @param s
+     */
     public void addStudentToAllTheirGroups(Student s) {
         requireNonNull(s);
         for (Group group : s.getGroups()) {
@@ -192,6 +197,16 @@ public class UniBook implements ReadOnlyUniBook {
         Module moduleOfGroup = g.getModule();
         requireNonNull(moduleOfGroup);
         moduleOfGroup.addGroup(g);
+    }
+
+    /**
+     * Adds a key event to a module of UniBook.
+     * @param k
+     */
+    public void addKeyEventToModule(ModuleKeyEvent k) {
+        Module moduleOfEvent = k.getModule();
+        requireNonNull(moduleOfEvent);
+        moduleOfEvent.addKeyEvent(k);
     }
 
     /**
