@@ -15,6 +15,10 @@ import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
 import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
+import seedu.trackbeau.model.service.Duration;
+import seedu.trackbeau.model.service.Price;
+import seedu.trackbeau.model.service.Service;
+import seedu.trackbeau.model.service.ServiceName;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -22,16 +26,16 @@ import seedu.trackbeau.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Customer[] getSampleCustomers() {
-        return new Customer[] {
+        return new Customer[]{
             new Customer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new SkinType("oily"), new HairType("dry"),
-                    getTagSet("Jason"), getTagSet("Acne", "Balding"), getTagSet("Nickel"),
-                    new Birthdate("01-12-2001"), new RegistrationDate("23-03-2022")),
+                getTagSet("Jason"), getTagSet("Acne", "Balding"), getTagSet("Nickel"),
+                new Birthdate("01-12-2001"), new RegistrationDate("23-03-2022")),
             new Customer(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new SkinType("sensitive"), new HairType("oily"),
+                new SkinType("sensitive"), new HairType("oily"),
                 getTagSet("Jane", "Lee"), getTagSet("Blackheads"), getTagSet("Steroids"),
-                    new Birthdate("01-12-1996"), new RegistrationDate("23-03-2022")),
+                new Birthdate("01-12-1996"), new RegistrationDate("23-03-2022")),
             new Customer(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new SkinType("combination"), new HairType("dry"),
                 getTagSet("Lee"),
@@ -52,8 +56,19 @@ public class SampleDataUtil {
                     new Birthdate("23-05-2001"), new RegistrationDate("23-03-2022")),
             new Customer(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new SkinType("combination"), new HairType("dry"),
-                    getTagSet("Lee"), getTagSet("Acne"), getTagSet("Cocoa butter"),
-                    new Birthdate("01-08-2001"), new RegistrationDate("23-03-2022")),
+                getTagSet("Lee"), getTagSet("Acne"), getTagSet("Cocoa butter"),
+                new Birthdate("01-08-2001"), new RegistrationDate("23-03-2022")),
+        };
+    }
+
+    public static Service[] getSampleServices() {
+        return new Service[]{
+            new Service(new ServiceName("Organic Radiance Facial"), new Price(168.00), new Duration(60)),
+            new Service(new ServiceName("Bio Ageless Facial"), new Price(268.00), new Duration(90)),
+            new Service(new ServiceName("Lymphatic Flow Facial"), new Price(198.00), new Duration(90)),
+            new Service(new ServiceName("Student Facial"), new Price(30.00), new Duration(45)),
+            new Service(new ServiceName("Anti-Aging Eye Treatment"), new Price(58.00), new Duration(30)),
+            new Service(new ServiceName("Eyebrow Shaping"), new Price(15.00), new Duration(30))
         };
     }
 
@@ -61,6 +76,9 @@ public class SampleDataUtil {
         TrackBeau sampleTb = new TrackBeau();
         for (Customer sampleCustomer : getSampleCustomers()) {
             sampleTb.addCustomer(sampleCustomer);
+        }
+        for (Service sampleService : getSampleServices()) {
+            sampleTb.addService(sampleService);
         }
         return sampleTb;
     }
@@ -70,8 +88,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
 }

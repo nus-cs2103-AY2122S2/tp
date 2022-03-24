@@ -23,5 +23,7 @@
     "staffs":  [],
     "services" : [],
     "allergies": []
-  } ]
+  } ],
+  "services": []
+
 }
