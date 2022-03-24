@@ -293,9 +293,10 @@ public class EditCommand extends Command {
          * Allows the {@code InterviewStatus} to be triggered by ApplicationStatus.
          */
         public void triggerInterviewStatus(ApplicationStatus applicationStatus) {
-            String acceptedTrigger = "Accepted";
-            String rejectedTrigger = "Rejected";
-            String executedTrigger = "Completed";
+            String acceptedTrigger = ApplicationStatus.ACCEPTED_STATUS;
+            String rejectedTrigger = ApplicationStatus.REJECTED_STATUS;
+            String executedTrigger = InterviewStatus.COMPLETED;
+
             if (getApplicationStatus().isPresent()) {
                 if (applicationStatus.toString().equals(acceptedTrigger)
                         || applicationStatus.toString().equals(rejectedTrigger)) {
