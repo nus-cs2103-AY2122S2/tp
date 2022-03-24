@@ -2,7 +2,9 @@ package seedu.contax.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_END_WITH;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_START_WITH;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -53,8 +55,8 @@ public class BatchCommandTest {
     }
 
     @Test
-    public void execute_rangeEditWithDifferentType_success() throws Exception {
-        String sampleCommand = "range editperson p/12345678 by/phone =/9 ";
+    public void execute_batchEditWithDifferentTypeEquals_success() throws Exception {
+        String sampleCommand = "batch editperson p/12345678 by/phone =/9 ";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         argumentMultimap.put(PREFIX_EQUALS, "94351253");
 
@@ -84,9 +86,80 @@ public class BatchCommandTest {
     }
 
     @Test
+    public void execute_batchEditWithDifferentTypeStart_success() throws Exception {
+        String sampleCommand = "batch editperson p/12345678 by/phone =/9 ";
+        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
+        argumentMultimap.put(PREFIX_START_WITH, "94351253");
+
+        BatchCommand expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_PHONE), argumentMultimap);
+        CommandResult commandResult = expectedBatchCommand.execute(model);
+        assertTrue(commandResult.getFeedbackToUser().equals(
+                "Edited Person: Alice Pauline; Phone: 12345678; "
+                        + "Email: alice@example.com; Address: 123, Jurong West Ave 6, #08-111; Tags: [friends]\n"));
+        argumentMultimap.put(PREFIX_START_WITH, "1234567890");
+        expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_ADDRESS), argumentMultimap);
+        CommandResult commandResult2 = expectedBatchCommand.execute(model);
+        assertTrue(commandResult2.getFeedbackToUser().equals("batch: No result matching \"1234567890\""));
+        expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_EMAIL), argumentMultimap);
+        CommandResult commandResult3 = expectedBatchCommand.execute(model);
+        assertTrue(commandResult3.getFeedbackToUser().equals("batch: No result matching \"1234567890\""));
+        expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_NAME), argumentMultimap);
+        CommandResult commandResult4 = expectedBatchCommand.execute(model);
+        assertTrue(commandResult4.getFeedbackToUser().equals("batch: No result matching \"1234567890\""));
+    }
+
+    @Test
+    public void execute_batchEditWithDifferentTypeEnd_success() throws Exception {
+        String sampleCommand = "batch editperson p/12345678 by/phone =/9 ";
+        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
+        argumentMultimap.put(PREFIX_END_WITH, "94351253");
+
+        BatchCommand expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_PHONE), argumentMultimap);
+        CommandResult commandResult = expectedBatchCommand.execute(model);
+        assertTrue(commandResult.getFeedbackToUser().equals(
+                "Edited Person: Alice Pauline; Phone: 12345678; "
+                        + "Email: alice@example.com; Address: 123, Jurong West Ave 6, #08-111; Tags: [friends]\n"));
+        argumentMultimap.put(PREFIX_END_WITH, "1234567890");
+        expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_ADDRESS), argumentMultimap);
+        CommandResult commandResult2 = expectedBatchCommand.execute(model);
+        assertTrue(commandResult2.getFeedbackToUser().equals("batch: No result matching \"1234567890\""));
+        expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_EMAIL), argumentMultimap);
+        CommandResult commandResult3 = expectedBatchCommand.execute(model);
+        assertTrue(commandResult3.getFeedbackToUser().equals("batch: No result matching \"1234567890\""));
+        expectedBatchCommand =
+                new BatchCommand("editperson p/12345678",
+                        new SearchType(SearchType.TYPE_NAME), argumentMultimap);
+        CommandResult commandResult4 = expectedBatchCommand.execute(model);
+        assertTrue(commandResult4.getFeedbackToUser().equals("batch: No result matching \"1234567890\""));
+    }
+
+    @Test
     public void execute_parseAndCreateNewCommandInvalidValue_throwsCommandException() throws CommandException {
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         argumentMultimap.put(PREFIX_EQUALS, "94351253");
+        BatchCommand expectedBatchCommand =
+                new BatchCommand("",
+                        new SearchType(SearchType.TYPE_PHONE), argumentMultimap);
+        assertThrows(CommandException.class, () -> expectedBatchCommand.execute(model));
+    }
+
+    @Test
+    public void execute_parseMissingField_throwsCommandException() throws CommandException {
+        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         BatchCommand expectedBatchCommand =
                 new BatchCommand("",
                         new SearchType(SearchType.TYPE_PHONE), argumentMultimap);
