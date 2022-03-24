@@ -63,20 +63,20 @@ public class AttachTagCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TAG);
         }
 
-        Person personToAttach = lastShownList.get(targetIndex.getZeroBased());
-        logger.log(Level.INFO, personToAttach.getName().toString());
-        Set<Tag> tempTags = personToAttach.getTags();
+        Person personToAttachNewTag = lastShownList.get(targetIndex.getZeroBased());
+        logger.log(Level.INFO, personToAttachNewTag.getName().toString());
+        Set<Tag> tempTags = personToAttachNewTag.getTags();
         Set<Tag> tagCopy = new HashSet<>(tempTags);
         tagCopy.add(toAttach);
 
-        Person newPerson = new Person(personToAttach.getName(), personToAttach.getPhone(),
-                    personToAttach.getEmail(), personToAttach.getAddress(), tagCopy);
+        Person personWithNewTag = new Person(personToAttachNewTag.getName(), personToAttachNewTag.getPhone(),
+                    personToAttachNewTag.getEmail(), personToAttachNewTag.getAddress(), tagCopy);
 
-        if (personToAttach.equals(newPerson)) {
+        if (personToAttachNewTag.equals(personWithNewTag)) {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
-        model.setPerson(personToAttach, newPerson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAttach, personToAttach.getName()));
+        model.setPerson(personToAttachNewTag, personWithNewTag);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAttach, personToAttachNewTag.getName()));
     }
 
 

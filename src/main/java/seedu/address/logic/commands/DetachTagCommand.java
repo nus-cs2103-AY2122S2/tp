@@ -63,9 +63,9 @@ public class DetachTagCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TAG);
         }
 
-        Person personToDetach = lastShownList.get(targetIndex.getZeroBased());
-        logger.log(Level.INFO, personToDetach.getName().toString());
-        Set<Tag> tempTags = personToDetach.getTags();
+        Person personToDetachTagFrom = lastShownList.get(targetIndex.getZeroBased());
+        logger.log(Level.INFO, personToDetachTagFrom.getName().toString());
+        Set<Tag> tempTags = personToDetachTagFrom.getTags();
         Set<Tag> tagCopy = new HashSet<>(tempTags);
 
         if (!tagCopy.contains(toDetach)) {
@@ -73,11 +73,12 @@ public class DetachTagCommand extends Command {
         }
         tagCopy.removeIf(t -> t.isSameTag(toDetach));
 
-        Person newPerson = new Person(personToDetach.getName(), personToDetach.getPhone(),
-                personToDetach.getEmail(), personToDetach.getAddress(), tagCopy);
+        Person personAfterDetach = new Person(personToDetachTagFrom.getName(), personToDetachTagFrom.getPhone(),
+                personToDetachTagFrom.getEmail(), personToDetachTagFrom.getAddress(), tagCopy);
 
-        model.setPerson(personToDetach, newPerson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toDetach, personToDetach.getName()));
+        model.setPerson(personToDetachTagFrom, personAfterDetach);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toDetach,
+                personToDetachTagFrom.getName()));
     }
 
 
