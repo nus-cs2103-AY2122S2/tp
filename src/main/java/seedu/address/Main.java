@@ -1,7 +1,7 @@
 package seedu.address;
 
 import javafx.application.Application;
-//test
+
 /**
  * The main entry point to the application.
  *

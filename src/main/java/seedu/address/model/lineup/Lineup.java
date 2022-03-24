@@ -18,7 +18,7 @@ public class Lineup {
     private final LineupPlayersList playersList;
 
     /**
-     * Constructs a {@code LIneup}
+     * Constructs a {@code Lineup}
      *
      * @param lineupName The name of the lineup
      */
