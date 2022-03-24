@@ -164,6 +164,10 @@ This section describes some noteworthy details on how certain features are imple
 #### Proposed implementation
 #### Design Consideration
 
+#### 1.3 Add schedule 
+#### Proposed implementation
+#### Design Consideration
+
 ### 2. Delete feature
 
 #### 2.1 Delete player
@@ -171,6 +175,10 @@ This section describes some noteworthy details on how certain features are imple
 #### Design Consideration
 
 #### 2.2 Delete lineup
+#### Proposed implementation
+#### Design Consideration
+
+#### 2.3 Delete schedule
 #### Proposed implementation
 #### Design Consideration
 
@@ -184,6 +192,10 @@ This section describes some noteworthy details on how certain features are imple
 #### Proposed implementation
 #### Design Consideration
 
+#### 2.3 Edit schedule
+#### Proposed implementation
+#### Design Consideration
+
 ### 4. View feature
 
 #### 4.1 View player
@@ -191,6 +203,10 @@ This section describes some noteworthy details on how certain features are imple
 #### Design Consideration
 
 #### 4.2 View lineup
+#### Proposed implementation
+#### Design Consideration
+
+#### 4.3 View schedule
 #### Proposed implementation
 #### Design Consideration
 
