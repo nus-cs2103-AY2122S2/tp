@@ -342,11 +342,11 @@ Step 3. The user executes `list students c/1` command to list all the students i
 
 Step 4. The user executes `mark attend c/1 w/3 s/1,2,3,4,5,6` to mark attendance for a lesson which belongs to a class group with ID 1 and occurs in week 3. Students with IDs 1,2,3,4,5, and 6 are marked as having attended. The `mark` command also calls `MarkCommandParser#parse()`, which parses the input and returns a successful/unsuccessful message.
 
-![ListState1](images/ListState1.png)
+![MarkUnmarkState1](images/MarkUnmarkState1.png)
 
 The following sequence diagram shows how the list operation works:
 
-![ListSequenceDiagram](images/ListSequenceDiagram.png)
+![MarkUnmarkSequenceDiagram](images/MarkUnmarkSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -354,7 +354,7 @@ The following sequence diagram shows how the list operation works:
 
 The following activity diagram summarizes what happens when a user executes a mark command:
 
-![ListActivityDiagram](images/ListActivityDiagram.png)
+![MarkUnmarkActivityDiagram](images/MarkUnmarkActivityDiagram.png)
 
 
 ### \[Proposed\] List feature
