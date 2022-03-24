@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_WITH_SPACES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OWNER_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -44,10 +45,15 @@ public class PetTest {
         Pet editedBob = new PetBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePet(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PetBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePet(editedBob));
+        assertTrue(BOB.isSamePet(editedBob));
+
+        // name has duplicate spaces, all other attributes same -> returns true
+        String nameWithDuplicateSpaces = VALID_NAME_BOB_WITH_SPACES;
+        editedBob = new PetBuilder(BOB).withName(nameWithDuplicateSpaces).build();
+        assertTrue(BOB.isSamePet(editedBob));
     }
 
     @Test

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.AttendanceUtil.getPastWeekAttendance;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -64,6 +66,12 @@ public class PetCard extends UiPart<Region> {
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        getPastWeekAttendance(pet.getAttendanceHashMap())
+                .forEach(attendance -> {
+                    attendanceTags
+                            .getChildren()
+                            .add(AttendanceTag.createAttendanceTag(attendance));
+                });
     }
 
     public void setColour(String colour) {

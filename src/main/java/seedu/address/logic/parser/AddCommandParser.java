@@ -14,6 +14,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.pet.Address;
 import seedu.address.model.pet.Appointment;
+import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -24,7 +25,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
@@ -49,9 +50,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Diet diet = new Diet("");
-        Appointment appointment = new Appointment("");
+        Appointment appointment = new Appointment();
+        AttendanceHashMap attendanceHashMap = new AttendanceHashMap();
 
-        Pet pet = new Pet(name, ownerName, phone, address, tagList, diet, appointment);
+        Pet pet = new Pet(name, ownerName, phone, address, tagList, diet, appointment, attendanceHashMap);
 
         return new AddCommand(pet);
     }
