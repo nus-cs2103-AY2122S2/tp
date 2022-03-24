@@ -1,4 +1,6 @@
-package seedu.contax.ui;
+package seedu.contax.ui.appointment;
+
+import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -8,9 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.ui.UiPart;
 
 /**
- * An UI component that displays the information in an {@code Appointment}.
+ * An UI component that displays the information in an {@code AppointmentSlot}.
  */
 public class AppointmentSlotCard extends UiPart<Region> {
 
@@ -20,7 +23,7 @@ public class AppointmentSlotCard extends UiPart<Region> {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
-    public final AppointmentSlot appointmentSlotModel;
+    private AppointmentSlot appointmentSlotModel;
 
     @FXML
     private Label duration;
@@ -34,10 +37,23 @@ public class AppointmentSlotCard extends UiPart<Region> {
     private Label endTime;
 
     /**
-     * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
+     * Creates an empty instance of {@code AppointmentSlotCard}.
      */
-    public AppointmentSlotCard(AppointmentSlot appointmentSlotModel) {
+    public AppointmentSlotCard() {
         super(FXML);
+    }
+
+    /**
+     * Updates the data in this {@code AppointmentSlotCard} with the given {@code AppointmentSlot} to display.
+     *
+     * @param appointmentSlotModel The AppointmentSlot model to display in this card.
+     */
+    public void updateModel(AppointmentSlot appointmentSlotModel) {
+        requireNonNull(appointmentSlotModel);
+        if (appointmentSlotModel.equals(this.appointmentSlotModel)) {
+            return;
+        }
+
         this.appointmentSlotModel = appointmentSlotModel;
 
         LocalDateTime startDateTime = appointmentSlotModel.getStartDateTime();
@@ -58,9 +74,19 @@ public class AppointmentSlotCard extends UiPart<Region> {
                 && appointmentSlotModel.equals(((AppointmentSlotCard) other).appointmentSlotModel));
     }
 
+    /**
+     * Translates a numeric minutes into a more human-readable format.
+     *
+     * @param minutes The number of minutes to translate.
+     * @return A string representing the supplied number of minutes.
+     */
     private String getReadableDuration(long minutes) {
         long computedHours = minutes / 60;
         long computedMinutes = minutes % 60;
+
+        if (computedHours > 2400) {
+            return "More than 10 days";
+        }
 
         String displayDuration = "";
         if (computedHours > 0) {
