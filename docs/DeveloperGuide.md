@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -154,90 +154,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Services
 
-#### Proposed Implementation
+#### Add service feature
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+##### Overview
+The add service feature allows users to add services into TrackBeau.
+Each new service must have the data fields `ServiceName`, `Price` and `Duration`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+##### Implementation of feature
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+##### Design considerations
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Edit service feature
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+##### Overview
+The edit service feature allows users to edit existing services in TrackBeau.
+For each edit, at least one of the data fields `ServiceName`, `Price` and `Duration` must be modified.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+##### Implementation of feature
 
-Step 2. The user executes `delete 5` command to delete the 5th customer in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+##### Design considerations
 
-![UndoRedoState1](images/UndoRedoState1.png)
+#### Delete service feature
 
-Step 3. The user executes `add n/David …​` to add a new customer. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+##### Overview
+The delete services feature allows users to remove existing services in TrackBeau.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+##### Implementation of feature
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the customer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+##### Design considerations
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -273,34 +219,43 @@ It can also keep track of performance metrics, like total new memberships.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                                             | So that I can…​                                                                  |
+| Priority | As a …​        | I want to …​                                                                          | So that I can…​                                                               |
 |----------|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | new user          | view the user guide easily                                                               | refer to instructions when I forget how to use the App                           |
-| `* * *`  | new user          | see where to key in information easily                                                   |                                                                                  |
-| `* * *`  | new user          | easily see the format to follow for commands for the system to understand                | key in customer information easily                                               |
-| `* * *`  | new user          | add name of customer                                                                     |                                                                                  |
+| `* * *`  | new user          | view the user guide easily                                                               | know what kind of commands that I can use                                        |
+| `* * *`  | new user          | see where to key in information easily                                                   | be clear of how to use the interface                                             |
+| `* * *`  | new user          | see the format to follow for commands when I type incorrect command                      | rectify the command                                                              |
+| `* * *`  | new user          | add name of customer                                                                     | identify the customer correctly                                                  |
 | `* * *`  | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                              |
-| `* * *`  | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
-| `* * *`  | new user          | add allergy information of customer                                                      | make sure I do not affect their health by applying products they are allergic to |
-| `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hairType                             |
-| `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skinType                         |
-| `* * *`  | new user          | view a customer profile                                                                  | know the details of a customer                         |
-| `* * *`  | new user          | view a list of customer profile associated with a keyword                                | view the profiles of customers that i am interest in                                               |
-| `* * *`  | new user          | delete a customer profile                                                                | get rid of sample data I used to explore the app                                 |
-| `* * *`  | new user          | edit a customer profile                                                                  | update details when needed                                                       |
-| `* * *`  | new user          | find a customer profile                                                                  | locate a customer easily                                                         |
-| `* *`    | intermediate user | view customers based on when they are coming to the salon                                | do appropriate preparations based on customer profile                            |
-| `* *`    | intermediate user | add the birth date of a customer                                                         | know when to sent birthday wishes to customers                                   |
-| `* *`    | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
+| `* *`    | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
+| `* * *`  | new user          | add allergy information of customer                                                      | avoid using or promoting products that the customer is allergic to               |
+| `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hair                             |
+| `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skin                         |
+| `* *`    | new user          | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
+| `* `     | new user          | add name of staff                                                                        | keep track of the personal details of my staffs                                  |
 | `*`      | new user          | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                            |
-| `*`      | new user          | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
-| `*`      | new user          | add photo of customer                                                                    | remember new customers more easily                                               |
-| `*`      | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
-| `*`      | expert user       | keep track of number of customers on a specific day                                      | better allocate manpower                                                         |
-| `*`      | expert user       | keep track of how many new customers gained                                              | review and improve my company's performance                                      |
-| `*`      | expert user       | keep track of expected spending of customer                                              | review and improve my company's performance                                      |
-| `*`      | expert user       | get summary statistics on my customer profile (age)                                      | review and improve my choice of services and products                            |
-| `*`      | expert user       | get summary statistics on my customer profile (preferred staff)                          | identify the best staff and let the team learn from them                         |
+| `* * *`  | new user          | view a customer profile                                                                  | know the details of a customer                                                   |
+| `* * *`  | new user          | view a list of customer profile associated with a keyword                                | view the profiles of customers that i am interest in                             |
+| `* * *`  | new user          | delete a customer                                                                        | remove a customer that does not visit our salon anymore                          |
+| `* * *`  | new user          | edit a customer                                                                          | update details when needed                                                       |
+| `* * *`  | new user          | find a customer                                                                          | locate a customer's profile faster                                               |
+| `* *`    | intermediate user | check if facilities are available based on bookings of the day                           | know if the facility is available for booking                                    |
+| `* *`    | intermediate user | add the birth date of a customer                                                         | know when is the birthday of the customer                                        |
+| `* *`    | intermediate user | add the signup date of a customer                                                        | track the customers gained per month                                             |
+| `* *`    | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
+| `* * *`  | intermediate user | add a new service                                                                        | keep track of the services that our salon provides                               |
+| `* * *`  | intermediate user | edit a service                                                                           | update the details of the service                                                |
+| `* * *`  | intermediate user | delete a service                                                                         | remove service that is not offered anymore                                       |
+| `* * *`  | intermediate user | view all services                                                                        | see all the services and their details that our salon provides                   |
+| `* *`    | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
+| `* * *`  | expert user       | add a customer booking                                                                   | keep track of the customer's upcoming appointments and make preparations         |
+| `* * *`  | expert user       | view all the bookings                                                                    | better allocate my manpower as I can know when the salon is the busiest          |
+| `* * *`  | expert user       | delete a customer booking                                                                | remove the booking if there is any cancellation                                  |
+| `* * *`  | expert user       | edit a customer booking                                                                  | update the details of the booking                                                |
+| `* * *`  | expert user       | see statistics of how many new customers gained by month                                 | review and improve my company's performance                                      |
+| `* * *`  | expert user       | keep track of expected earnings of the salon by month                                    | review and improve my company's performance                                      |
+| `* *`    | expert user       | get summary statistics on customer profiles (preferred services)                         | review and improve my choice of services and products                            |
+| `* *`    | expert user       | get summary statistics on customer profile (preferred staffs)                            | identify the best staff and let the team learn from them                         |
+| `* *`    | expert user       | sort customers based on membership tier                                                  | promote certain facilities or products to the customer to help raise the membership tier of that customer                         |
 
 *{More to be added}*
 
