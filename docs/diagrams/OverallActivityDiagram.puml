@@ -2,7 +2,9 @@
 
 start
 
-repeat : User opens Unibook;
+: User opens Unibook;
+
+repeat : User wants to \n modify / view data
 switch ()
 case ( Add )
   :Type add command \n with options;
