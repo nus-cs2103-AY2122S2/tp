@@ -245,7 +245,7 @@ Step 4:
 `find Shingeki no Kyojin` will also work, however it will scan through the name, status and tag fields instead of the name field only
 </div>
 
-The following sequence diagram summarizes what happens when a user executes a valid find command on tags only:
+The following sequence diagram summarizes what happens when a user executes a valid find command on tags only: (Zoom in to view the sequence diagram)
 
 <img src="images/FindSequenceDiagram.png" width="2500px">
 
@@ -260,7 +260,7 @@ The following activity diagram summarizes what happens when a user executes a va
   - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.
 
 - **Alternative 2:** Directly check whether the show is in the show list in the find command parser without a predicate.
-  - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
+  - Pros: Developers can easily understand the code and its functionality as all the code is consolidated in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
