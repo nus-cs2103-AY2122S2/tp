@@ -110,7 +110,6 @@ public class ViewImageWindow extends UiPart<Stage> {
      */
     public void refresh(UserImage userImage) {
         UserImage newImage = userImage;
-        System.out.println(System.getProperty("java.class.path"));
         Image displayImage = new Image(
                 this.getClass().getResourceAsStream("/" + newImage.getFilePath().get()));
         displayArea.setImage(displayImage);
