@@ -132,6 +132,30 @@ The `viewImageWindow` is the displayed after it retrieves the set from `model`
 
 Step 5: The set of `UserImage` is then converted into a `ArrayList` and the first image is displayed in the window.
 
+## [Proposed] Sorting
+
+The sorting feature allows the user to sort the list of `Person` displayed.
+
+The following table shows the attributes that the list can be sorted by and their corresponding keywords.
+
+| Attribute            | Keyword        |
+|----------------------|----------------|
+| `Name`               | `name`         |
+| `Phone`              | `phone`        |
+| `Email`              | `email`        |
+| `Favourite`          | `favourite`    |
+| `Address`            | `address`      |
+| `UserType`           | `usertype`     |
+| Number of `Property` | `num_property` |
+
+Sorting the list is done by using the `sort` command, which has the following syntax: `sort [KEYWORD]...`.
+
+If multiple attributes are specified, the first attribute is given the highest priority, while the last attribute is given the lowest priority. For example, `sort address name` will sort the list by `Address` first, followed by `Name` if `Address` is equal.
+
+The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`.
+
+Whenever the underlying application data is modified, the `FilteredList<Person>` is notified first and will filter the data. If there is any change in the `FilteredList<Person>`, the `SortedList<Person>` is notified and will sort the filtered data.
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
@@ -165,18 +189,18 @@ Manage clients faster that a typical mouse/GUI driven app.
 
 ## User stories
 
-| Priority | As a ... | I want to ...                                               | So that i can...                                                                               |
-| --- | --- |-------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| High | User | Delete my client’s information on the app                   | Remove this redundant information after he/she is not my client anymore                        |
-| High | User | To edit my clients’ information on the app                  | Ensure all information of my clients are always up to date                                     |
-| High | User | To list out my clients’ information on the app              | View all of my clients’ information in one place                                               |
-| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers) | Know if a client is looking for a property to buy or is trying sell a property                 |
-| High | User | Add my clients’ information on the app                      | Gain access to all these information in one place                                              |
-| High | User | Favorite a client                                           | Separate clients based on whose information I frequent the most (favorited) and those that are not |
-| High | User | View favourited clients                                     | Have a compact display of clients that I frequent the most                                     |
-| High | User | To create a preference for a client who is a buyer          | Have information of potential properties that the buyer would want to buy                      |
-| High | User | Match my clients (e.g. buyer with seller)                   | Spot if there are any properties being sold by a seller that a buyer has a preference for.     |
-| High | User | Be able to understand how the app works from start to end   | Able to provide the necessary inputs to perform a particular action on the app                 |
+| Priority | As a ... | I want to ...                                               | So that i can...                                                                                   |
+|----------|----------|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| High     | User     | Delete my client’s information on the app                   | Remove this redundant information after he/she is not my client anymore                            |
+| High     | User     | To edit my clients’ information on the app                  | Ensure all information of my clients are always up to date                                         |
+| High     | User     | To list out my clients’ information on the app              | View all of my clients’ information in one place                                                   |
+| High     | User     | Differentiate my clients’ on the app (e.g. buyers, sellers) | Know if a client is looking for a property to buy or is trying sell a property                     |
+| High     | User     | Add my clients’ information on the app                      | Gain access to all these information in one place                                                  |
+| High     | User     | Favorite a client                                           | Separate clients based on whose information I frequent the most (favorited) and those that are not |
+| High     | User     | View favourited clients                                     | Have a compact display of clients that I frequent the most                                         |
+| High     | User     | To create a preference for a client who is a buyer          | Have information of potential properties that the buyer would want to buy                          |
+| High     | User     | Match my clients (e.g. buyer with seller)                   | Spot if there are any properties being sold by a seller that a buyer has a preference for.         |
+| High     | User     | Be able to understand how the app works from start to end   | Able to provide the necessary inputs to perform a particular action on the app                     |
 
 ## Use cases
 
