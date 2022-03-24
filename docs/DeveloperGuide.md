@@ -215,7 +215,7 @@ Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student
 Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
 
 The following sequence diagram shows how the add student command works.
-![](../src/main/resources/images/AddStudentSequenceDiagram.png)
+![](images/AddStudentSequenceDiagram.png)
 
 ### Add temporary/recurring lesson
 Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
@@ -271,11 +271,11 @@ successful assignment.
 
 Given below is an example usage scenario on how the assign command works.
 
-####Step 1: The user launches the application and executes the following
+#### Step 1: The user launches the application and executes the following
 * `addlesson -n Sec 2 Math...` which adds a `Lesson` named "Sec 2 Math".
 * `addstudent -n David...` which adds a `Student` named "David".
 
-![](../src/main/resources/images/AssignState0-Initial_state.png)
+![](images/AssignState0-Initial_state.png)
 
 #### Step 2: The user executes the following to find the respective IDs of the `Student` and `Lesson`.
 * `listlessons` command to see that the `Lesson` named "Sec 2 Math" has a `LESSON_ID` of 1.
@@ -285,11 +285,11 @@ Given below is an example usage scenario on how the assign command works.
 * adds `Student` "David" to the `enrolledStudents` attribute of the `Lesson` "Sec 2 Math".
 * adds `Lesson` "Sec 2 Math" to the `enrolledLessons` attribute of the `Student` "David".
 
-![](../src/main/resources/images/AssignState1-Final_state.png)
+![](images/AssignState1-Final_state.png)
 
 The following sequence diagram shows how the assign operation works.
 
-![](../src/main/resources/images/AssignSequenceDiagram.png)
+![](images/AssignSequenceDiagram.png)
 
 > **Note**: The lifeline for AssignCommandParser should end at the destroy marker (X) but due to a limitation of 
 > PlantUML, the lifeline reaches the end of diagram.
