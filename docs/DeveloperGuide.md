@@ -131,13 +131,52 @@ The `Model` component,
 * Module are named `TaModule` due to conflict with Java classes.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Alternative (arguably, more OOP) models are given below.<br>
- | **Entity** | **Class Diagram** |
- | --- | --- |
- | Student | <img src="images/BetterModelStudentClassDiagram.png" width="450" /> |
- | TaModule | <img src="images/BetterModelTaModuleClassDiagram.png" width="450" /> |
- | Class Group | <img src="images/BetterModelClassGroupClassDiagram.png" width="450" /> |
- | Assessment | <img src="images/BetterModelAssessmentClassDiagram.png" width="450" /> |
-
+<div class="datatable-container">
+    <table class="c20">
+        <tbody>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   <B>Entity</B>
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <B>Class Diagram</B>
+                </td>
+            </tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   Student
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelStudentClassDiagram.png" width="450" />
+                </td>
+            </tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   TaModule
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
+                </td>
+            </tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   Class Group
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
+                </td>
+            </tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   Assessment
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelAssessmentClassDiagram.png" width="450" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 
 
