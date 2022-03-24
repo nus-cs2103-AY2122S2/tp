@@ -2,6 +2,7 @@ package unibook.storage.adaptedmodeltypes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -9,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.UniBook;
+import unibook.model.module.Module;
 import unibook.model.module.exceptions.GroupNotFoundException;
 import unibook.model.module.exceptions.ModuleNotFoundException;
-import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;

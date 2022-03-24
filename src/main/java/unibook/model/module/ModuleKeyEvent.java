@@ -48,4 +48,20 @@ public class ModuleKeyEvent {
         return this.module;
     }
 
+    @Override
+    public String toString() {
+        return this.keyEventType + " (" + this.keyEventTiming + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ModuleKeyEvent)) {
+            return false;
+        }
+        ModuleKeyEvent other = (ModuleKeyEvent) o;
+
+        return other.getKeyEventTiming().equals(this.keyEventTiming)
+                && other.getKeyEventType().equals(this.keyEventType);
+    }
+
 }

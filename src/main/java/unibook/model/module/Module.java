@@ -305,16 +305,10 @@ public class Module {
 
         return otherModule.getModuleName().equals(getModuleName())
             && otherModule.getModuleCode().equals(getModuleCode())
-            && otherModule.getGroups().equals(getGroups())
             && otherModule.getProfessors().equals(getProfessors())
-<<<<<<< HEAD
             && otherModule.getStudents().equals(getStudents())
             && otherModule.getGroups().equals(getGroups())
             && otherModule.getKeyEvents().equals(getKeyEvents());
-
-=======
-            && otherModule.getStudents().equals(getStudents());
->>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
     }
 
     @Override
@@ -327,7 +321,6 @@ public class Module {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getModuleCode())
-<<<<<<< HEAD
                 .append("; Name: ")
                 .append(getModuleName())
                 .append("; Module Code: ")
@@ -338,14 +331,6 @@ public class Module {
                 .append(getGroups())
                 .append("; Key Events: ")
                 .append(getKeyEvents());
-=======
-            .append("; Name: ")
-            .append(getModuleName())
-            .append("; Module Code: ")
-            .append(getModuleCode())
-            .append("; Professors: ")
-            .append(getProfessors());
->>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
         return builder.toString();
     }
 

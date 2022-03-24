@@ -35,13 +35,8 @@ public class SampleDataUtil {
      */
     public static Module[] getSampleModules() {
         Module sampleModule1 = new Module(new ModuleName("Software Engineering"), new ModuleCode("CS2103"));
-<<<<<<< HEAD
         Module sampleModule2 = new Module(new ModuleName("Introduction to Operating Systems"),
                 new ModuleCode("CS2106"));
-=======
-        Module sampleModule2 =
-            new Module(new ModuleName("Introduction to Operating Systems"), new ModuleCode("CS2106"));
->>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
 
         return new Module[] {sampleModule1, sampleModule2};
     }
@@ -56,10 +51,6 @@ public class SampleDataUtil {
         //Sample meeting time collection for group
         ObservableList<LocalDateTime> sampleMeetingTimes1 = FXCollections.observableArrayList();
         sampleMeetingTimes1.add(LocalDateTime.of(2022, 5, 4, 13, 0));
-<<<<<<< HEAD
-=======
-
->>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
         Group sampleGroup1 = new Group("W16-1", sampleModules[0], sampleMeetingTimes1);
         return new Group[] {sampleGroup1};
     }
@@ -69,7 +60,6 @@ public class SampleDataUtil {
      * @param sampleModules
      * @return array of key events
      */
-
     public static ModuleKeyEvent[] getSampleEvents(Module[] sampleModules) {
         LocalDateTime sampleTime = LocalDateTime.of(2022, 5, 4, 14, 0);
         ModuleKeyEvent sampleModuleKeyEvent1 = new ModuleKeyEvent(ModuleKeyEvent.KeyEventType.EXAM, sampleTime,
@@ -99,10 +89,7 @@ public class SampleDataUtil {
         sampleModuleSet1.add(modules[1]);
         sampleModuleSet2.add(modules[0]);
         sampleModuleSet3.add(modules[0]);
-<<<<<<< HEAD
-=======
 
->>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
         //Initialising sample group sets to pass into Student constructor
         Set<Group> sampleGroupSet1 = new HashSet<>();
 

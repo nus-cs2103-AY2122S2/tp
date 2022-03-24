@@ -4,14 +4,11 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleKeyEvent;
-import unibook.storage.util.LocalDateTimeDeserializer;
-import unibook.storage.util.LocalDateTimeSerializer;
+
 
 /**
  * Jackson friendly version of ModuleKeyEvent.
@@ -21,8 +18,6 @@ public class JsonAdaptedModuleKeyEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String keyEventType;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private final LocalDateTime keyEventTiming;
 
     /**

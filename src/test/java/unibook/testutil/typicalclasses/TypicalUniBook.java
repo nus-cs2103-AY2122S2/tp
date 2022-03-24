@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import unibook.model.UniBook;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;
@@ -50,6 +51,9 @@ public class TypicalUniBook {
         LocalDateTime.of(2022, 5, 4, 13, 0);
     public static final String VALID_GROUP_NAME = "W16-1";
     public static final String VALID_OFFICE_1 = "COM1 02-10";
+    public static final ModuleKeyEvent.KeyEventType VALID_EVENT_TYPE = ModuleKeyEvent.KeyEventType.valueOf("EXAM");
+    public static final LocalDateTime VALID_EVENT_TIME =
+            LocalDateTime.of(2022, 5, 4, 14, 0);
 
     /**
      * Generate the typical modules.
@@ -81,6 +85,17 @@ public class TypicalUniBook {
     }
 
     /**
+     * Instantiates sample key events, using passed in modules array.
+     * @param sampleModules
+     * @return array of key events
+     */
+    public static ModuleKeyEvent[] getSampleEvents(Module[] sampleModules) {
+        ModuleKeyEvent sampleModuleKeyEvent1 = new ModuleKeyEvent(VALID_EVENT_TYPE, VALID_EVENT_TIME,
+                sampleModules[0]);
+        return new ModuleKeyEvent[] {sampleModuleKeyEvent1};
+    }
+
+    /**
      * Generate a typical instance of UniBook.
      */
     public static UniBook getTypicalUniBook() {
@@ -91,6 +106,9 @@ public class TypicalUniBook {
 
         //groups[0] == W16-1
         Group[] groups = generateTypicalGroups(modules);
+
+        //keyEvents[0] = exam on May 4th, 2022 at 2PM
+        ModuleKeyEvent[] keyEvents = getSampleEvents(modules);
 
         //Initialising sample module sets to pass into Student constructor
         Set<Module> typicalModuleSet1 = new HashSet<>();
@@ -140,6 +158,8 @@ public class TypicalUniBook {
         //Add groups to sample Unibook
         typicalUniBook.addGroupToModule(groups[0]);
 
+        //Add key events to modules in sample Unibook
+        typicalUniBook.addKeyEventToModule(keyEvents[0]);
         return typicalUniBook;
     }
 

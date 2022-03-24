@@ -115,11 +115,8 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-<<<<<<< HEAD
      * Adds a student to all their module groups.
-=======
      * Adds a student to all of the groups they are associated with.
->>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
      * @param s
      */
     public void addStudentToAllTheirGroups(Student s) {
