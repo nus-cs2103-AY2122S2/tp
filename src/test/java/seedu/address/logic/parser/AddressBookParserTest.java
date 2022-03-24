@@ -137,6 +137,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_editLog() throws Exception {
+        // todo
+    }
+
+    @Test
+    public void parseCommand_deleteLog() throws Exception {
+        // todo
+
+    }
+
+    @Test
     public void parseCommand_addevent() throws Exception {
         Event event = new EventBuilder().build();
         AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));

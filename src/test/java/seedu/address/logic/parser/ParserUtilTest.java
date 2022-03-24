@@ -14,10 +14,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.common.Description;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
+import seedu.address.model.person.LogName;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -244,5 +246,31 @@ public class ParserUtilTest {
                 new HashSet<FriendName>(Arrays.asList(new FriendName(VALID_NAME_1), new FriendName(VALID_NAME_2)));
 
         assertEquals(expectedFriendNameSet, actualFriendNameSet);
+    }
+
+    // ===== DESCRIPTION =====
+    @Test
+    public void parseDescription_validDescription_success() throws Exception {
+        assertEquals(new Description("some valid description"), ParserUtil.parseDescription("some valid description"));
+    }
+
+    @Test
+    public void parseDescription_invalidDescription_success() {
+        assertThrows(ParseException.class, () ->ParserUtil.parseDescription("")); // empty string
+        assertThrows(ParseException.class, () ->ParserUtil.parseDescription("   ")); // only spaces
+
+    }
+
+    // ===== LOG TITLE =====
+    @Test
+    public void parseTitle_validTitle_success() throws Exception {
+        assertEquals(new LogName("some valid title"), ParserUtil.parseTitle("some valid title"));
+    }
+
+    @Test
+    public void parseTitle_invalidTitle_failure() {
+        assertThrows(ParseException.class, () ->ParserUtil.parseTitle("")); // empty string
+        assertThrows(ParseException.class, () ->ParserUtil.parseTitle("   ")); // only spaces
+
     }
 }

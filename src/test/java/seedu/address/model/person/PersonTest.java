@@ -133,4 +133,18 @@ public class PersonTest {
         assertTrue(second.compareTo(first) > 0);
         assertFalse(fourth.compareTo(third) < 0);
     }
+
+    @Test
+    public void hasName() {
+
+        // return true
+        FriendName name = new FriendName("some valid name");
+        FriendName repeatedName = new FriendName("some valid name");
+
+        Person person = new Person(name);
+        assertTrue(person.hasName(repeatedName));
+
+        // returns false
+        assertFalse(ALICE.hasName(BOB.getName()));
+    }
 }
