@@ -52,24 +52,46 @@ Refer to the [Features](#features) below for details of each command.
 
 </div>
 
+### Add a new tag : `add_tag`
+
+Add a new tag to the addressbook
+
+Format: `add_tag t/TAG_NAME`
+
+### Delete an existing tag : `delete_tag`
+
+Delete an existing tag from the addressbook
+* Deletes the tag at the specified `INDEX`.
+* The index refers to the index number shown in the displayed tag list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Format: `delete_tag INDEX`
+
 ### Listing all tags : `list_tag`
 
 Listing all existing tags
 
 Format: `list_tag`
 
-
-### Attach tag to a profile: `tag`
+### Attach tag to a profile: `attach`
 
 Add an existing tag to a profile
 
-Format: `tag PROFILE_INDEX TAG_INDEX`
+* Attach to the person at the specified `PROFILE_INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
-### Remove tag from a profile : `detag`
+Format: `attach t/TAG_NAME i/PROFILE_INDEX`
 
-Remove the nth tag from a profile’s tags
+### Detach a tag from a profile : `detach`
 
-Format: `detag PROFILE_INDEX TAG_INDEX_IN_PROFILE`
+Remove the tag from a profile’s tags
+
+* Remove from the person at the specified `PROFILE_INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Format: `detach t/TAG_NAME i/PROFILE_INDEX`
 
 ### View a tag : `showTag`
 
@@ -151,15 +173,16 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add_tag**| `add_tag t/TAG_NAME`
+**Attach** | `attach [t/TAGNAME] [i/PERSON_INDEX]`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3`
+**Detach** | `detach [t/TAGNAME] [i/PERSON_INDEX]`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
 **List_tag** | `list_tag`
 **showTag** | `showTag INDEX`
-**tag** | `tag PROFILE_INDEX TAG_INDEX`
-**detag** | `detag PROFILE_INDEX TAG_INDEX_IN_PROFILE`
-
 
