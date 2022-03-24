@@ -672,11 +672,11 @@ testers are expected to do more *exploratory* testing.
    1. [Add shows](#adding-a-show) into the show list.
 2. List all shows using the `list` command.
 3. Test case: Deleting a show based on list index
-   1. Condition: Range of show must be within range of size of show list.
+   1. Condition: Range of shows must be within size of show list.
    2. Command: `delete 1` <br> 
       Expected: Show at specified index is deleted from the list. Deleted show details shown in the result display.
 4. Test case: Invalid delete index
-   1. Condition: Range of show must be outside of list size.
+   1. Condition: Range of shows must be outside of list size.
    2. Command: `delete 0` `delete` `delete <out_of_bound_integer>` <br> 
       Expected: No show is deleted. Error details shown in the result display.
 
@@ -699,7 +699,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Status of show at specified index is changed to `completed`. Edited show details shown in the result display.
 
 4. Test case: Invalid edit index
-   1. Condition: Range of show must be outside of list size or 
+   1. Condition: Range of shows must be outside of list size.
    2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
       Expected: No show is edited. Error details shown in the result display.
 
@@ -823,10 +823,10 @@ testers are expected to do more *exploratory* testing.
    
 4. Test case: Sort with multiple same prefixes 
    1. Command: `sort sna/ snd/` <br>
-      Expected: The list of show sorted by name in ascending order.
+      Expected: The list of shows is sorted by name in ascending order.
    
    2. Command: `sort ssa/ ssd/` <br>
-      Expected: The list of show sorted by status in ascending order. 
+      Expected: The list of shows is sorted by status in ascending order. 
    
 5. Test case: Sort with multiple different prefixes
    1. Command: `sort sna/ ssd/` <br>
