@@ -36,13 +36,6 @@ public class UniqueItemList extends UniqueList<Item> {
     }
 
     /**
-     * Checks if an item is present in the list.
-     */
-    public boolean hasItem(Item item) {
-        return getExisting(item) != null;
-    }
-
-    /**
      * Adds an item to the list.
      * If the item is already in the list, combine it with the existing one.
      */
