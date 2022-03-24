@@ -180,85 +180,84 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `ReversibleIBook`. It extends `IBook` with versions of methods that are reversible and uses `StateChangeRecorder` to record all changes made to `IBook`, which internally store changes as a `StateChange`. `ReversibleIBook` implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current ibook state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous ibook state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone ibook state from its history.
+* `ReversibleIBook#prepareForChanges()` — Prepares a clean workspace to record next possible changes.
+* `ReversibleIBook#saveChanges()` — Saves all changes made to `Ibook` as a `StateChange` (recorded and stored in `StateChangeRecorder`).
+* `ReversibleIBook#undo()` — Reverts the most currently changes.
+* `ReversibleIBook#redo()` — Restores the most currently undone changes.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#prepareIBookForChanges()`, `Model#saveIBookChanges()`, `Model#undoIBook()` and `Model#redoIBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial ibook state, and the `currentStatePointer` pointing to that single ibook state.
+Step 1. The user launches the application for the first time. The `ReversibleIBook` will be initialized, which in turn initializes `StateChangeRecorder` with a `stateChanges` list consisting of zero `StateChange` record.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<img src="images/UndoRedoState0.png" width="550" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the ibook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the ibook after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted ibook state.
+Step 2. The user executes `delete 3` command to delete the 3rd product in the iBook. The `delete` command calls `Model#saveIBookChanges()` after its execution, causing changes made to iBook to be recorded as a `StateChange` and stored in the `stateChanges` list. The `currentStateChange` is now pointing to this most recent `StateChange`.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<img src="images/UndoRedoState1.png" width="550" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified ibook state to be saved into the `addressBookStateList`.
+Step 3. The user executes `update 1 n~Maggie​` to add a new product. This command also calls `Model#saveIBookChanges()`, causing another `StateChange` to be saved into the `stateChanges` list.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<img src="images/UndoRedoState2.png" width="550" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the ibook state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous ibook state, and restores the ibook to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#saveIBookChanges()`, so no `StateChange` will be saved into the `stateChanges` list.
 
 </div>
+<br>
+Step 4. The user now decides that adding the product was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoIBook()`, which will get and execute the actions needed to revert this change. `currentStateChange` will then move once to the left, pointing to the most recent `stateChange` (with respect to the state of `IBook` after the `undo` command).
 
+<img src="images/UndoRedoState3.png" width="550" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateChange` is not pointing to a valid `StateChange` (for example when there is no record in the `stateChanges` list), then there are no changes to revert. The `undo` command uses `Model#canUndoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+
+</div>
+<br>
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<img src="images/UndoSequenceDiagram.png" width="950" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the ibook to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest ibook state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<br>
+The `redo` command does exactly the opposite — it calls `Model#redoIBook()`, which moves the `currentStateChange` once to the right, pointing to the previously reverted changes, then perform the actions needed to restore them back.
+  
+  
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateChange` is pointing at the latest record of the `stateChanges` list, then there are no reverted changes to restore. The `redo` command uses `Model#canRedoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
+<br>
+Step 5. The user then decides to execute the command `list`. Commands that do not make any changes to `Ibook`, such as `list`, will usually not call `Model#saveIBookChanges()`, `Model#undoIBook()` or `Model#redoIBook()`. Thus, state change records in `StateChangeRecorder` remain unchanged.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the ibook, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+<img src="images/UndoRedoState4.png" width="550" />
 
-![UndoRedoState4](images/UndoRedoState4.png)
+Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges()` at the end of its execution. Since the `currentStateChange` is not pointing at the end of the `stateChanges` list, all state changes after the `currentStateChange` will be cleared. Reason: It does not make sense to redo the `update 1 n~Maggie​` command. This is the convention that most modern desktop applications follow.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all ibook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
+<img src="images/UndoRedoState5.png" width="550" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/SaveChangesActivityDiagram.png" width="300" />
 
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire ibook.
+* **Alternative 1:** Saves the entire `Ibook`.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2 (current choice):** Individual method that makes changes to `IBook` knows how to undo/redo by itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the product being deleted).
+  * Cons: We must ensure that the implementation of each individual method are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
