@@ -19,6 +19,7 @@ import seedu.address.model.pet.Pet;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private final VersionedAddressBook versionedAddressBook;
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Pet> filteredPets;
@@ -28,11 +29,11 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
-
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.versionedAddressBook = new VersionedAddressBook(this.addressBook);
         filteredPets = new FilteredList<>(this.addressBook.getPetList());
     }
 
@@ -96,27 +97,39 @@ public class ModelManager implements Model {
     @Override
     public void deletePet(Pet target) {
         addressBook.removePet(target);
+        this.versionedAddressBook.commit(this.getAddressBook());
     }
 
     @Override
     public void addPet(Pet pet) {
         addressBook.addPet(pet);
+        this.versionedAddressBook.commit(this.getAddressBook());
         updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
     }
 
     @Override
     public void setPet(Pet target, Pet editedPet) {
         requireAllNonNull(target, editedPet);
-
         addressBook.setPet(target, editedPet);
+        this.versionedAddressBook.commit(this.getAddressBook());
+        updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
     }
 
     /** Method that sorts the pet list via the sortPets() command in addressBook. **/
     @Override
     public void sortPetList(String field) {
         addressBook.sortPets(field);
+        this.versionedAddressBook.commit(this.getAddressBook());
         updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
     }
+
+
+    //============= Undo Command accessors ================//
+    @Override
+    public ReadOnlyAddressBook undo() throws Exception {
+        return versionedAddressBook.undo();
+    }
+
     //=========== Filtered Pet List Accessors =============================================================
 
     /**

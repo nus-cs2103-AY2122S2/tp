@@ -59,7 +59,6 @@ public class DietCommand extends Command {
                 petToEdit.getAddress(), petToEdit.getTags(), diet, petToEdit.getAppointment());
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
         return new CommandResult(generateSuccessMessage(editedPet));
     }
