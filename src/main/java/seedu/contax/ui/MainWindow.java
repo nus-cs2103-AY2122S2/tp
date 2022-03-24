@@ -190,8 +190,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Changes the selected tab from the specified {@code contentType}.
-     */
+     * Changes the type of model being displayed in the tab pane.
+     *
+     * @param contentType The specified tab the UI should display.
+     * */
     private void changeTabFocus(GuiListContentType contentType) {
         if (contentType.equals(GuiListContentType.UNCHANGED) || contentType.equals(currentListType)) {
             return;
