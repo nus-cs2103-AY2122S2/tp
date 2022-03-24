@@ -16,7 +16,7 @@ public class Description {
      * Empty strings are allowed. Otherwise, the first character of the description
      * must not be a whitespace
      */
-    public static final String VALIDATION_REGEX = "(|[\\p{Alnum}][\\p{Alnum} ]*)";
+    public static final String VALIDATION_REGEX = "(.*)";
 
     public final String fullDescription;
 

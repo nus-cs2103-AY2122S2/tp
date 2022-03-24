@@ -6,7 +6,6 @@ import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_PRICE_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_A;
@@ -26,7 +25,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.commands.AddCommand;
 import seedu.ibook.model.product.Category;
-import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -86,10 +84,6 @@ public class AddCommandParserTest {
         // invalid category
         assertParseFailure(parser, NAME_FULL_B + INVALID_CATEGORY_DESC + DESCRIPTION_FULL_B
             + PRICE_FULL_B, Category.MESSAGE_CONSTRAINTS);
-
-        // invalid description
-        assertParseFailure(parser, NAME_FULL_B + CATEGORY_FULL_B + INVALID_DESCRIPTION_DESC
-            + PRICE_FULL_B, Description.MESSAGE_CONSTRAINTS);
 
         // invalid price
         assertParseFailure(parser, NAME_FULL_B + CATEGORY_FULL_B + DESCRIPTION_FULL_B
