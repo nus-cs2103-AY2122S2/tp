@@ -8,6 +8,7 @@ participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "companyPredicate\n:CompanyNameContains\nKeywordsPredicate" as CompanyNameContainsKeywordsPredicate LOGIC_COLOR
 participant "rolePredicate\n:RoleNameContains\nKeywordsPredicate" as RoleNameContainsKeywordsPredicate LOGIC_COLOR
 participant "findCommand:FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -68,6 +69,13 @@ activate Model
 
 Model --> FindCommand
 deactivate Model
+
+create CommandResult
+FindCommand-> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
 
 FindCommand --> LogicManager : result
 deactivate FindCommand
