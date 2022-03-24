@@ -1,35 +1,5 @@
 package unibook.logic.parser;
 
-import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static unibook.logic.commands.CommandTestUtil.EMAIL_DESC_ALEX;
-import static unibook.logic.commands.CommandTestUtil.EMAIL_DESC_BERNICE;
-import static unibook.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static unibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static unibook.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static unibook.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static unibook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static unibook.logic.commands.CommandTestUtil.PHONE_DESC_ALEX;
-import static unibook.logic.commands.CommandTestUtil.PHONE_DESC_BERNICE;
-import static unibook.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static unibook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
-import static unibook.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static unibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static unibook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static unibook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static unibook.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-
-import org.junit.jupiter.api.Test;
-
-import unibook.commons.core.index.Index;
-import unibook.logic.commands.EditCommand;
-import unibook.logic.commands.EditCommand.EditPersonDescriptor;
-import unibook.model.person.Email;
-import unibook.model.person.Name;
-import unibook.model.person.Phone;
-import unibook.model.tag.Tag;
-import unibook.testutil.EditPersonDescriptorBuilder;
-
 /*
 public class EditCommandParserTest {
 
@@ -77,11 +47,13 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + " o/person " + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + " o/person " + INVALID_PHONE_DESC + EMAIL_DESC_ALEX, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + " o/person "
+                + INVALID_PHONE_DESC + EMAIL_DESC_ALEX, Phone.MESSAGE_CONSTRAINTS);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + " o/person " + PHONE_DESC_BERNICE + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + " o/person " + PHONE_DESC_BERNICE
+                + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error

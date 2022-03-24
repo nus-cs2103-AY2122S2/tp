@@ -1,20 +1,13 @@
 package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import unibook.commons.core.GuiSettings;
-import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.ReadOnlyUserPrefs;
@@ -22,8 +15,6 @@ import unibook.model.UniBook;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
-import unibook.testutil.Assert;
-import unibook.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
@@ -254,7 +245,6 @@ public class AddCommandTest {
         public ReadOnlyUniBook getUniBook() {
             return new UniBook();
         }
-
     }
 
 }

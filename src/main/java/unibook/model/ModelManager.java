@@ -112,7 +112,6 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    @Override
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
@@ -203,12 +202,12 @@ public class ModelManager implements Model {
         filteredModules.setPredicate(predicate);
     }
 
-    public void setUi(Ui ui) {
-        this.ui = ui;
-    }
-
     public UiManager getUi() {
         return (UiManager) this.ui;
+    }
+
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package unibook.testutil;
+package unibook.testutil.builders;
 
 import static unibook.logic.commands.CommandTestUtil.VALID_EMAIL_PROFESSOR_CHARLES;
 import static unibook.logic.commands.CommandTestUtil.VALID_NAME_PROFESSOR_CHARLES;
@@ -93,6 +93,7 @@ public class ProfessorBuilder {
 
     /**
      * Sets the {@code Office} of the {@code Office} that we are building.
+     *
      * @return
      */
     public ProfessorBuilder withOffice(String officeStr) {

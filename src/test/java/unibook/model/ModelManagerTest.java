@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 import unibook.commons.core.GuiSettings;
 import unibook.model.person.NameContainsKeywordsPredicate;
 import unibook.testutil.Assert;
-import unibook.testutil.TypicalPersons;
 import unibook.testutil.UniBookBuilder;
+import unibook.testutil.typicalclasses.TypicalStudents;
 
 public class ModelManagerTest {
 
@@ -78,13 +78,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInUniBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(TypicalPersons.ALICE));
+        assertFalse(modelManager.hasPerson(TypicalStudents.ALICE));
     }
 
     @Test
     public void hasPerson_personInUniBook_returnsTrue() {
-        modelManager.addPerson(TypicalPersons.ALICE);
-        assertTrue(modelManager.hasPerson(TypicalPersons.ALICE));
+        modelManager.addPerson(TypicalStudents.ALICE);
+        assertTrue(modelManager.hasPerson(TypicalStudents.ALICE));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         UniBook uniBook =
-            new UniBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(TypicalPersons.BENSON).build();
+            new UniBookBuilder().withPerson(TypicalStudents.ALICE).withPerson(TypicalStudents.BENSON).build();
         UniBook differentUniBook = new UniBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentUniBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = TypicalPersons.ALICE.getName().fullName.split("\\s+");
+        String[] keywords = TypicalStudents.ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(uniBook, userPrefs)));
 

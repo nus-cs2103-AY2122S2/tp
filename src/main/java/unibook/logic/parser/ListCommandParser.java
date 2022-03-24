@@ -15,6 +15,7 @@ public class ListCommandParser implements Parser<ListCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
      * and returns a ListCommand object for execution.
@@ -24,8 +25,8 @@ public class ListCommandParser implements Parser<ListCommand> {
     public ListCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_TYPE,
-                            CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_VIEW);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_TYPE,
+                    CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_VIEW);
 
             //Change View command
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_VIEW)) {
@@ -36,7 +37,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                     return new ListCommand(ListCommand.ListView.PEOPLE);
                 } else {
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_USAGE_VIEW));
+                        ListCommand.MESSAGE_USAGE_VIEW));
                 }
             }
 
@@ -51,7 +52,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             case "module":
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_MODULE_MISSING));
+                        ListCommand.MESSAGE_MODULE_MISSING));
                 }
 
                 ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get()
@@ -61,7 +62,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                     String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
                     if (!(type.equals("professors") || type.equals("students"))) {
                         throw new ParseException(
-                                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
+                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
                     }
                     return new ListCommand(moduleCode, type);
                 } else {
@@ -70,17 +71,17 @@ public class ListCommandParser implements Parser<ListCommand> {
             case "type":
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_TYPE_MISSING));
+                        ListCommand.MESSAGE_TYPE_MISSING));
                 }
                 String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
                 if (!(type.equals("professors") || type.equals("students"))) {
                     throw new ParseException(
-                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
                 }
                 return new ListCommand(type);
             default:
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListCommand.MESSAGE_USAGE_OPTION));
+                    ListCommand.MESSAGE_USAGE_OPTION));
 
             }
         } catch (ParseException pe) {

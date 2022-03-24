@@ -19,7 +19,7 @@ public interface Logic {
     /**
      * Executes the command and returns the result.
      *
-     * @param commandText The command as entered by the user.
+     * @param commandText         The command as entered by the user.
      * @param isPersonListShowing boolean value of whether person list is showing.
      * @param isModuleListShowing boolean value of whether module list is showing.
      * @return the result of the command execution.

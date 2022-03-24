@@ -15,7 +15,6 @@ import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.person.exceptions.DuplicatePersonException;
-import unibook.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents a Module in the UniBook.
@@ -37,6 +36,7 @@ public class Module {
 
     /**
      * Constructor for a Module, assuming no students and no professor initially.
+     *
      * @param moduleName
      * @param moduleCode
      */
@@ -52,6 +52,7 @@ public class Module {
 
     /**
      * Contstructor for a Module, with a given name, code and groups.
+     *
      * @param moduleName
      * @param moduleCode
      * @param groups
@@ -157,6 +158,7 @@ public class Module {
 
     /**
      * Returns the current list of groups.
+     *
      * @return The observable list containing all the group objects.
      */
     public ObservableList<Group> getGroups() {
@@ -166,6 +168,7 @@ public class Module {
 
     /**
      * Returns the group in the group list of this module that has the given unique name.
+     *
      * @param grpName of the group to get.
      * @return group that has the exact given grpname.
      */
@@ -181,6 +184,7 @@ public class Module {
 
     /**
      * Adds a student {@code s} to the list of the students.
+     *
      * @param s
      */
     public void addStudent(Student s) {
@@ -193,6 +197,7 @@ public class Module {
 
     /**
      * Adds a professor {@code p} to the list of the professors.
+     *
      * @param p
      */
     public void addProfessor(Professor p) {
@@ -205,6 +210,7 @@ public class Module {
 
     /**
      * Adds a group {@code g} to the list of groups.
+     *
      * @param g
      */
     public void addGroup(Group g) {
@@ -255,21 +261,17 @@ public class Module {
     /**
      * Remove a person from students or professors list depending on whether person is a student or professor
      * and if present
+     *
      * @param person
      */
     public void removePerson(Person person) {
         if (person instanceof Student) {
-            if (!students.contains(person)) {
-                throw new PersonNotFoundException();
-            }
             students.remove(person);
         } else {
-            if (!professors.contains(person)) {
-                throw new PersonNotFoundException();
-            }
             professors.remove(person);
         }
     }
+
 
     /**
      * Remove a group from the list of groups under this module.
@@ -303,11 +305,16 @@ public class Module {
 
         return otherModule.getModuleName().equals(getModuleName())
             && otherModule.getModuleCode().equals(getModuleCode())
+            && otherModule.getGroups().equals(getGroups())
             && otherModule.getProfessors().equals(getProfessors())
+<<<<<<< HEAD
             && otherModule.getStudents().equals(getStudents())
             && otherModule.getGroups().equals(getGroups())
             && otherModule.getKeyEvents().equals(getKeyEvents());
 
+=======
+            && otherModule.getStudents().equals(getStudents());
+>>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
     }
 
     @Override
@@ -320,6 +327,7 @@ public class Module {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getModuleCode())
+<<<<<<< HEAD
                 .append("; Name: ")
                 .append(getModuleName())
                 .append("; Module Code: ")
@@ -330,6 +338,14 @@ public class Module {
                 .append(getGroups())
                 .append("; Key Events: ")
                 .append(getKeyEvents());
+=======
+            .append("; Name: ")
+            .append(getModuleName())
+            .append("; Module Code: ")
+            .append(getModuleCode())
+            .append("; Professors: ")
+            .append(getProfessors());
+>>>>>>> 88d66d946156608467ddc68f96a05195cb585afa
         return builder.toString();
     }
 

@@ -11,7 +11,7 @@ import unibook.commons.exceptions.IllegalValueException;
 import unibook.commons.util.JsonUtil;
 import unibook.model.UniBook;
 import unibook.testutil.Assert;
-import unibook.testutil.TypicalUniBook;
+import unibook.testutil.typicalclasses.TypicalUniBook;
 
 public class JsonSerializableUniBookTest {
 
@@ -47,5 +47,7 @@ public class JsonSerializableUniBookTest {
         Assert.assertThrows(IllegalValueException.class, JsonSerializableUniBook.MESSAGE_DUPLICATE_PERSON,
             dataFromFile::toModelType);
     }
+
+    //TODO add other duplicate tests
 
 }

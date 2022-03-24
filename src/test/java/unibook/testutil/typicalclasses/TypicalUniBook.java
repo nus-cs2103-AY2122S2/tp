@@ -1,24 +1,4 @@
-package unibook.testutil;
-
-import static unibook.logic.commands.CommandTestUtil.VALID_EMAIL_PROFESSOR_CHARLOTTE;
-import static unibook.logic.commands.CommandTestUtil.VALID_EMAIL_STUDENT_ALEX;
-import static unibook.logic.commands.CommandTestUtil.VALID_EMAIL_STUDENT_BERNICE;
-import static unibook.logic.commands.CommandTestUtil.VALID_GROUP_NAME;
-import static unibook.logic.commands.CommandTestUtil.VALID_MEETING_TIME;
-import static unibook.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2103;
-import static unibook.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2106;
-import static unibook.logic.commands.CommandTestUtil.VALID_MODULE_NAME_CS2103;
-import static unibook.logic.commands.CommandTestUtil.VALID_MODULE_NAME_CS2106;
-import static unibook.logic.commands.CommandTestUtil.VALID_NAME_PROFESSOR_CHARLOTTE;
-import static unibook.logic.commands.CommandTestUtil.VALID_NAME_STUDENT_ALEX;
-import static unibook.logic.commands.CommandTestUtil.VALID_NAME_STUDENT_BERNICE;
-import static unibook.logic.commands.CommandTestUtil.VALID_OFFICE_1;
-import static unibook.logic.commands.CommandTestUtil.VALID_PHONE_PROFESSOR_CHARLOTTE;
-import static unibook.logic.commands.CommandTestUtil.VALID_PHONE_STUDENT_ALEX;
-import static unibook.logic.commands.CommandTestUtil.VALID_PHONE_STUDENT_BERNICE;
-import static unibook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static unibook.logic.commands.CommandTestUtil.VALID_TAG_HELPFUL;
-import static unibook.logic.commands.CommandTestUtil.VALID_TAG_ROOMMATE;
+package unibook.testutil.typicalclasses;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,21 +24,50 @@ import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.tag.Tag;
 
+/**
+ * Contains method to instantiate a typical instance of UniBook.
+ */
 public class TypicalUniBook {
+
+    //Data for objects already in typical unibook
+    public static final String VALID_MODULE_NAME_CS2103 = "Software Engineering";
+    public static final String VALID_MODULE_NAME_CS2106 = "Introduction to Operating Systems";
+    public static final String VALID_MODULE_CODE_CS2106 = "CS2106";
+    public static final String VALID_MODULE_CODE_CS2103 = "CS2103";
+    public static final String VALID_NAME_STUDENT_ALEX = "Alex Yeoh";
+    public static final String VALID_NAME_STUDENT_BERNICE = "Bernice Yu";
+    public static final String VALID_NAME_PROFESSOR_CHARLOTTE = "Charlotte Oliveiro";
+    public static final String VALID_PHONE_STUDENT_ALEX = "87438807";
+    public static final String VALID_PHONE_STUDENT_BERNICE = "99272758";
+    public static final String VALID_PHONE_PROFESSOR_CHARLOTTE = "93210283";
+    public static final String VALID_EMAIL_STUDENT_ALEX = "alexyeoh@example.com";
+    public static final String VALID_EMAIL_STUDENT_BERNICE = "berniceyu@example.com";
+    public static final String VALID_EMAIL_PROFESSOR_CHARLOTTE = "charlotte@example.com";
+    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_ROOMMATE = "roommate";
+    public static final String VALID_TAG_HELPFUL = "helpful";
+    public static final LocalDateTime VALID_MEETING_TIME =
+        LocalDateTime.of(2022, 5, 4, 13, 0);
+    public static final String VALID_GROUP_NAME = "W16-1";
+    public static final String VALID_OFFICE_1 = "COM1 02-10";
 
     /**
      * Generate the typical modules.
+     *
      * @return array of typical modules
      */
     public static Module[] generateTypicalModules() {
-        Module sampleModule1 = new Module(new ModuleName(VALID_MODULE_NAME_CS2103), new ModuleCode(VALID_MODULE_CODE_CS2103));
-        Module sampleModule2 = new Module(new ModuleName(VALID_MODULE_NAME_CS2106), new ModuleCode(VALID_MODULE_CODE_CS2106));
+        Module sampleModule1 =
+            new Module(new ModuleName(VALID_MODULE_NAME_CS2103), new ModuleCode(VALID_MODULE_CODE_CS2103));
+        Module sampleModule2 =
+            new Module(new ModuleName(VALID_MODULE_NAME_CS2106), new ModuleCode(VALID_MODULE_CODE_CS2106));
 
         return new Module[] {sampleModule1, sampleModule2};
     }
 
     /**
      * Generate the typical groups.
+     *
      * @param typicalModules typical modules that typical groups are under.
      * @return array of typical groups.
      */
@@ -152,6 +161,7 @@ public class TypicalUniBook {
 
     /**
      * Returns the typical persons in typical unibook as a list.
+     *
      * @return
      */
     public static List<Person> getTypicalPersons() {

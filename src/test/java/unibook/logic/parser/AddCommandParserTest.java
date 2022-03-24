@@ -1,21 +1,5 @@
 package unibook.logic.parser;
 
-import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static unibook.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static unibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import org.junit.jupiter.api.Test;
-
-import unibook.logic.commands.AddCommand;
-import unibook.logic.commands.CommandTestUtil;
-import unibook.model.person.Email;
-import unibook.model.person.Name;
-import unibook.model.person.Person;
-import unibook.model.person.Phone;
-import unibook.model.tag.Tag;
-import unibook.testutil.PersonBuilder;
-import unibook.testutil.TypicalPersons;
-
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
     /*

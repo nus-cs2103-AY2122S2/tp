@@ -27,6 +27,7 @@ public class JsonAdaptedModule {
 
     /**
      * Creates a JsonAdaptedModule object using json properties.
+     *
      * @param moduleName
      * @param moduleCode
      * @param groups
@@ -44,6 +45,7 @@ public class JsonAdaptedModule {
 
     /**
      * Creates a JsonAdaptedModule object using module object.
+     *
      * @param source
      */
     public JsonAdaptedModule(Module source) {
@@ -55,6 +57,7 @@ public class JsonAdaptedModule {
         this.keyEvents = new HashSet<>(source.getKeyEvents().stream()
                 .map(k -> new JsonAdaptedModuleKeyEvent(k))
                 .collect(Collectors.toSet()));
+
     }
 
 
@@ -73,6 +76,7 @@ public class JsonAdaptedModule {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ModuleCode.class.getSimpleName()));
         }
+
         if (groups == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Groups"));
         }

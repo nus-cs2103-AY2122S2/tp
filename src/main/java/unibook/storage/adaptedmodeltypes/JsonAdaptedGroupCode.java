@@ -13,7 +13,9 @@ public class JsonAdaptedGroupCode {
     private final String groupName;
 
     /**
-     * Constructor for a Jackson Friendly Group code.
+     * Instantiates a JsonAdaptedGroupCode class.
+     * @param moduleCode module code of the module that contains the group.
+     * @param groupName name of the group.
      */
     @JsonCreator
     public JsonAdaptedGroupCode(@JsonProperty("moduleCode") JsonAdaptedModuleCode moduleCode,
@@ -24,6 +26,7 @@ public class JsonAdaptedGroupCode {
 
     /**
      * Returns the json adapted module code of the module group is associated with.
+     *
      * @return json adapted module code.
      */
     public JsonAdaptedModuleCode getModuleCode() {
@@ -32,6 +35,7 @@ public class JsonAdaptedGroupCode {
 
     /**
      * Returns the name of the group.
+     *
      * @return name of the group.
      */
     public String getGroupName() {

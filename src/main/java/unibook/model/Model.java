@@ -123,6 +123,7 @@ public interface Model {
 
     /**
      * Finds the corresponding module to the module code.
+     *
      * @return Module belonging to the ModuleCode
      */
     Module getModuleByCode(ModuleCode moduleCode);

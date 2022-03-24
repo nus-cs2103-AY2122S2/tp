@@ -5,7 +5,7 @@ import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import org.junit.jupiter.api.Test;
 
 import unibook.logic.commands.DeleteCommand;
-import unibook.testutil.TypicalIndexes;
+import unibook.testutil.typicalclasses.TypicalIndexes;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

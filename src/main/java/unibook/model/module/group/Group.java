@@ -124,6 +124,24 @@ public class Group {
     }
 
     /**
+     * Returns true only if the name of the group, its meeting times, and the module code of the module it is linked to
+     * are the same.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (other instanceof Group) {
+            Group otherGroup = (Group) other;
+            return getGroupName().equals(otherGroup.getGroupName())
+                && meetingTimes.equals(otherGroup.getMeetingTimes())
+                && getModule().getModuleCode().equals(otherGroup.getModule().getModuleCode());
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns the list of meeting times for a group.
      *
      * @return list of meeting times for a group.

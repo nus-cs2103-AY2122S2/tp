@@ -1,8 +1,4 @@
-package unibook.testutil;
-
-import static unibook.logic.commands.CommandTestUtil.VALID_EMAIL_STUDENT_AMY;
-import static unibook.logic.commands.CommandTestUtil.VALID_NAME_STUDENT_AMY;
-import static unibook.logic.commands.CommandTestUtil.VALID_PHONE_STUDENT_AMY;
+package unibook.testutil.builders;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,11 +17,11 @@ import unibook.model.util.SampleDataUtil;
  * Recommended to use default fields where possible.
  */
 public class StudentBuilder {
-    public static final String DEFAULT_NAME = VALID_NAME_STUDENT_AMY;
-    public static final String DEFAULT_PHONE = VALID_PHONE_STUDENT_AMY;
-    public static final String DEFAULT_EMAIL = VALID_EMAIL_STUDENT_AMY;
+    public static final String DEFAULT_NAME = "James";
+    public static final String DEFAULT_PHONE = "91893940";
+    public static final String DEFAULT_EMAIL = "bond@m16.com";
 
-    private String option;
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -34,7 +30,7 @@ public class StudentBuilder {
     private Set<Group> groups;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code StudentBuilder} with the default details.
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -46,7 +42,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the StudentBuilder with the data of {@code personToCopy}.
      */
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
@@ -58,7 +54,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Student} that we are building.
      */
     public StudentBuilder withName(String name) {
         this.name = new Name(name);
@@ -66,7 +62,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -74,7 +70,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Student} that we are building.
      */
     public StudentBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -82,7 +78,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Student} that we are building.
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
