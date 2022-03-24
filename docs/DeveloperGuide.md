@@ -157,9 +157,11 @@ the filtered list (the current list shown in the UI) from `Model` and picks out 
 provided by the user's input. It then sets `ModelManager#selectedStudent` using the `ModelManager#setSelectedStudent()`
 method, which will be used by `MainWindow` later on.
 
-[//]: # (Insert object diagram here to show what attributes CommandResult have.
-Also explain why certain attributes are set and how they will be used by MainWindow to
-show certain elements)
+[//]: # (Insert object diagram here to show what attributes CommandResult have. )
+
+[//]: # (Also explain why certain attributes are set and how they will be used by MainWindow to)
+
+[//]: # (show certain elements&#41;)
 
 `ViewStudentInfoCommand` creates a `CommandResult` object, with the attributes shown above. This is then returned back
 to `LogicManager` which returns it back to `MainWindow`.
@@ -181,7 +183,41 @@ application is updated with the details of the selected `Student`.
 A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
 
 ### Add student
-Adding a `Student` to the `StudentBook` 
+Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the `TeachWhatParser` into a `Command`
+which is executed by `LogicManager#execute()`.
+
+Given below is an example scenario:
+
+Step 1. The user requests to add a student that has the following details,
+- `name`: Samuel
+- `phone number`: 64874982
+- `email`: simp4raiden@gmail.com
+- `address`: 6 Raffles Quay Singapore, 048580 Singapore
+- `tag`: struggling in math, good in cs
+
+Step 2. The user enters the command
+
+``addstudent -n Samuel -p 64874982 -e simp4raiden@gmail.com -a 6 Raffles Quay Singapore, 048580 Singapore -t struggling in math -t good in cs``
+
+Step 3. The user input is passed into `LogicManager#execute(commandText)`.
+
+Step 4. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
+
+Step 5. The `TeachWhatParser` detects the command word `addstudent` and passes the student details to `AddStudentCommandParser#parse(args)`.
+
+Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`, and constructs a new `Student` and passes the `Student` to
+`AddStudentCommand` which it then returns.
+
+* Constraints
+    * Multiple `tag` prefixes can be given but only one `name`, `phone`, `email` and `address` can be given.
+    * All the prefixes are optional except for `name` and `phone`
+
+      `ParseException` will be thrown if the constraints are violated
+
+Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
+
+The following sequence diagram shows how the add student command works.
+![](images/AddStudentSequenceDiagram.png)
 
 ### Add temporary/recurring lesson
 Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
@@ -237,11 +273,11 @@ successful assignment.
 
 Given below is an example usage scenario on how the assign command works.
 
-####Step 1: The user launches the application and executes the following
+#### Step 1: The user launches the application and executes the following
 * `addlesson -n Sec 2 Math...` which adds a `Lesson` named "Sec 2 Math".
 * `addstudent -n David...` which adds a `Student` named "David".
 
-![](../src/main/resources/images/AssignState0-Initial_state.png)
+![](images/AssignState0-Initial_state.png)
 
 #### Step 2: The user executes the following to find the respective IDs of the `Student` and `Lesson`.
 * `listlessons` command to see that the `Lesson` named "Sec 2 Math" has a `LESSON_ID` of 1.
@@ -251,11 +287,11 @@ Given below is an example usage scenario on how the assign command works.
 * adds `Student` "David" to the `enrolledStudents` attribute of the `Lesson` "Sec 2 Math".
 * adds `Lesson` "Sec 2 Math" to the `enrolledLessons` attribute of the `Student` "David".
 
-![](../src/main/resources/images/AssignState1-Final_state.png)
+![](images/AssignState1-Final_state.png)
 
 The following sequence diagram shows how the assign operation works.
 
-![](../src/main/resources/images/AssignSequenceDiagram.png)
+![](images/AssignSequenceDiagram.png)
 
 > **Note**: The lifeline for AssignCommandParser should end at the destroy marker (X) but due to a limitation of 
 > PlantUML, the lifeline reaches the end of diagram.
