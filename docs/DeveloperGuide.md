@@ -292,6 +292,27 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### List Feature
+
+### What is this feature about?
+The `list` feature allows the user to view all available Candidates in the system through the CLI.
+
+This feature in TAlent Assistant™ has been enhanced based on the initial implementation of the `list` command in `AddressBook`.
+
+### How is this feature implemented?
+The proposed `list` feature is implemented within `ListCommand` (which extends from `Command`) in `AddressBook`.
+
+A minor enhancement was added to this `list` feature to produce another message to indicate that there are no Candidates
+in the system.
+
+### Why is the feature implemented as such?
+Instead of the same message being produced in both scenarios, when there are Candidates in the system, or when there are
+no Candidates in the system, a new message would allow the user to differentiate between the two. The user would not be
+confused in possibly thinking that the TAlent Assistant™ program is unresponsive.
+
+### UML Diagram
+The following activity diagram summarizes what happens when a user executes a `list` command: <br>
+<img src="images/ListActivityDiagram.png" width="250" />
 
 --------------------------------------------------------------------------------------------------------------------
 
