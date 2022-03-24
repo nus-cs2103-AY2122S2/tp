@@ -1,4 +1,4 @@
-package seedu.address.model.util;
+package seedu.address.model.person.comparators;
 
 import java.util.Comparator;
 
@@ -9,7 +9,7 @@ import seedu.address.model.person.PrevDateMet;
  * Comparator which compares the PrevDateMet of two persons.
  * Used to sort {@code UniquePersonList} by PrevDateMet.
  */
-public class PersonPrevDateMetComparator implements Comparator<Person> {
+public class PersonPrevDateMetComparator extends PersonFlagComparator implements Comparator<Person> {
 
     /**
      * Method to determine the order of two persons after sorting.
@@ -18,21 +18,18 @@ public class PersonPrevDateMetComparator implements Comparator<Person> {
      *
      * @param person1 First person to compare
      * @param person2 Second person to compare
-     * @return Integer representing if PrevDateMet of person 1 is equal, before or after person2.
+     * @return Integer representing if PrevDateMet of person 1 is equal, before or after person 2.
      */
+    @Override
     public int compare(Person person1, Person person2) {
-        Boolean person1IsFlagged = person1.getFlag().isFlagged;
-        Boolean person2IsFlagged = person2.getFlag().isFlagged;
-        if (person1IsFlagged == person2IsFlagged) {
+        int flagCompare = super.compare(person1, person2);
+        if (flagCompare == 0) {
             PrevDateMet person1PrevDateMet = person1.getPrevDateMet();
             PrevDateMet person2PrevDateMet = person2.getPrevDateMet();
             return person1PrevDateMet.compare(person2PrevDateMet);
-        } else if (person1IsFlagged) {
-            return -1;
         } else {
-            return 1;
+            return flagCompare;
         }
-
     }
 
 }
