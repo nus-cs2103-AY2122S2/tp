@@ -6,10 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.ibook.logic.commands.AddCommand;
+import seedu.ibook.logic.commands.AddItemCommand;
 import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.DeleteCommand;
+import seedu.ibook.logic.commands.DeleteItemCommand;
 import seedu.ibook.logic.commands.ExitCommand;
+import seedu.ibook.logic.commands.HelpCommand;
 import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -51,6 +54,12 @@ public class IBookParser {
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommandParser().parse(arguments);
 
+        case AddItemCommand.COMMAND_WORD:
+            return new AddItemCommandParser().parse(arguments);
+
+        case DeleteItemCommand.COMMAND_WORD:
+            return new DeleteItemCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {
                 return new ListCommand();
@@ -63,6 +72,9 @@ public class IBookParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

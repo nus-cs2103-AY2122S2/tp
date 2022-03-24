@@ -22,8 +22,6 @@ public class PopupUpdate extends Popup {
     @FXML
     private TextField category;
     @FXML
-    private TextField expiryDate;
-    @FXML
     private TextField price;
     @FXML
     private TextArea description;
@@ -48,7 +46,6 @@ public class PopupUpdate extends Popup {
         this.index = index;
         name.setText(product.getName().toString());
         category.setText(product.getCategory().toString());
-        expiryDate.setText(product.getExpiryDate().toString());
         price.setText(product.getPrice().toString());
         description.setText(product.getDescription().toString());
     }
@@ -61,8 +58,6 @@ public class PopupUpdate extends Popup {
                 + name.getText()
                 + " " + CliSyntax.PREFIX_CATEGORY.getPrefix()
                 + category.getText()
-                + " " + CliSyntax.PREFIX_EXPIRY_DATE.getPrefix()
-                + expiryDate.getText()
                 + " " + CliSyntax.PREFIX_PRICE.getPrefix()
                 + price.getText()
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()

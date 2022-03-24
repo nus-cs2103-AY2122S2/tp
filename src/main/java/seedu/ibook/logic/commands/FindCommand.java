@@ -6,7 +6,7 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 /**
  * Finds and lists all persons in Ibook whose name contains any of the argument keywords.
@@ -32,7 +32,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
 
         requireNonNull(model);
-        model.updateFilteredProductList(predicate);
+        model.updateProductFilters(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
     }

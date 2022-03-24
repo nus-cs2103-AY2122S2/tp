@@ -8,7 +8,6 @@ import static seedu.ibook.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,10 @@ import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ReadOnlyIBook;
 import seedu.ibook.model.ReadOnlyUserPrefs;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.filters.AttributeFilter;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class AddCommandTest {
@@ -100,6 +102,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addItem(Product product, Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setIBook(ReadOnlyIBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -125,12 +132,43 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteItem(Product targetProduct, Item target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Product> getFilteredProductList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredProductList(Predicate<Product> predicate) {
+        public void addProductFilter(AttributeFilter filter) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Removes a filter from the product list.
+         */
+        @Override
+        public void removeProductFilter(AttributeFilter filter) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Removes a filter from the product list.
+         */
+        @Override
+        public void clearProductFilters() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateProductFilters(ProductFulfillsFiltersPredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<AttributeFilter> getProductFilters() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -149,7 +187,7 @@ public class AddCommandTest {
         @Override
         public boolean hasProduct(Product product) {
             requireNonNull(product);
-            return this.product.isSameProduct(product);
+            return this.product.isSame(product);
         }
     }
 
@@ -162,7 +200,7 @@ public class AddCommandTest {
         @Override
         public boolean hasProduct(Product product) {
             requireNonNull(product);
-            return productsAdded.stream().anyMatch(product::isSameProduct);
+            return productsAdded.stream().anyMatch(product::isSame);
         }
 
         @Override

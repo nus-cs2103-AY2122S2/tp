@@ -6,7 +6,6 @@ import static seedu.ibook.logic.commands.CommandTestUtil.DESC_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESC_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_B;
 
@@ -41,10 +40,6 @@ public class UpdateProductDescriptorTest {
 
         // different category -> returns false
         editedA = new UpdateProductDescriptorBuilder(DESC_A).withCategory(VALID_CATEGORY_B).build();
-        assertFalse(DESC_A.equals(editedA));
-
-        // different expiry date -> returns false
-        editedA = new UpdateProductDescriptorBuilder(DESC_A).withExpiryDate(VALID_EXPIRY_DATE_B).build();
         assertFalse(DESC_A.equals(editedA));
 
         // different description -> returns false
