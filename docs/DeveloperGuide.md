@@ -203,8 +203,8 @@ Step 4. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to par
 
 Step 5. The `TeachWhatParser` detects the command word `addstudent` and passes the student details to `AddStudentCommandParser#parse(args)`.
 
-Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`
-and returns `AddStudentCommand`.
+Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`, and constructs a new `Student` and passes the `Student` to
+`AddStudentCommand` which it then returns.
 
 * Constraints
     * Multiple `tag` prefixes can be given but only one `name`, `phone`, `email` and `address` can be given.
@@ -212,7 +212,7 @@ and returns `AddStudentCommand`.
 
       `ParseException` will be thrown if the constraints are violated
 
-Step 7. The `LogicManager` then executes the `AddStudentCommand` and the new `Student` is added to the `Student Book`.
+Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
 
 The following sequence diagram shows how the add student command works.
 ![](../src/main/resources/images/AddStudentSequenceDiagram.png)
