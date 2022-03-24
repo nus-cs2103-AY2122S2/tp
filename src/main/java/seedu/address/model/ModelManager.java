@@ -16,12 +16,12 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the student book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final StudentBook studentBook;
     private final LessonBook lessonBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
@@ -30,27 +30,27 @@ public class ModelManager implements Model {
     private Lesson selectedLesson;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given studentBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyLessonBook lessonBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyStudentBook studentBook, ReadOnlyLessonBook lessonBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(studentBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with student book: " + studentBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.studentBook = new StudentBook(studentBook);
         this.lessonBook = new LessonBook(lessonBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
         filteredLessons = new FilteredList<>(this.lessonBook.getLessonList());
     }
 
     // TODO: delete this constructor after updating testcases (creating TypicalLessons class etc)
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        this(addressBook, new LessonBook(), userPrefs);
+    public ModelManager(ReadOnlyStudentBook studentBook, ReadOnlyUserPrefs userPrefs) {
+        this(studentBook, new LessonBook(), userPrefs);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new LessonBook(), new UserPrefs());
+        this(new StudentBook(), new LessonBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -78,43 +78,43 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getStudentBookFilePath() {
+        return userPrefs.getStudentBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setStudentBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setStudentBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== StudentBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setStudentBook(ReadOnlyStudentBook addressBook) {
+        this.studentBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyStudentBook getStudentBook() {
+        return studentBook;
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasStudent(student);
+        return studentBook.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+        studentBook.removeStudent(target);
         lessonBook.unasssignStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
-        addressBook.addStudent(student);
+        studentBook.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
@@ -122,7 +122,7 @@ public class ModelManager implements Model {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        addressBook.setStudent(target, editedStudent);
+        studentBook.setStudent(target, editedStudent);
     }
 
     //=========== LessonBook =================================================================================
@@ -150,7 +150,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteLesson(Lesson lesson) {
         lessonBook.deleteLesson(lesson);
-        addressBook.unassignLesson(lesson);
+        studentBook.unassignLesson(lesson);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
@@ -192,7 +192,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return studentBook.equals(other.studentBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents);
     }
@@ -214,15 +214,28 @@ public class ModelManager implements Model {
         filteredLessons.setPredicate(predicate);
     }
 
-    // TODO: add the remaining functions for LessonList too
     @Override
-    public void updateAssignment(Index studentId, Index lessonId) {
-        Student studentToAssign = addressBook.getStudentList().get(studentId.getZeroBased());
-        Lesson lessonToAssign = lessonBook.getLessonList().get(lessonId.getZeroBased());
-        lessonBook.assignStudent(studentToAssign, lessonId);
-        addressBook.assignLesson(lessonToAssign, studentId);
+    public void updateAssignment(Student studentToAssign, Lesson lessonToAssign) {
+        lessonBook.assignStudent(studentToAssign, lessonToAssign);
+        studentBook.assignLesson(lessonToAssign, studentToAssign);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void updateUnassignment(Student student, Lesson lesson) {
+        student.unassignLesson(lesson);
+        lesson.unassignStudent(student);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    public boolean checkStudentListIndex(Index studentId) {
+        return filteredStudents.size() < studentId.getOneBased();
+    }
+
+    public boolean checkLessonListIndex(Index lessonId) {
+        return filteredLessons.size() < lessonId.getOneBased();
     }
 
     //=========== Selected Student and Lesson Accessors and Setter ============================================
@@ -242,4 +255,5 @@ public class ModelManager implements Model {
     public Lesson getSelectedLesson() {
         return selectedLesson;
     }
+
 }

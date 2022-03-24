@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
@@ -33,8 +34,7 @@ public class AssignCommand extends Command {
      * @param lessonIndex the index of the lesson that the student should be added to
      */
     public AssignCommand(Index studentIndex, Index lessonIndex) {
-        requireNonNull(studentIndex);
-        requireNonNull(lessonIndex);
+        requireAllNonNull(studentIndex, lessonIndex);
         this.studentIndex = studentIndex;
         this.lessonIndex = lessonIndex;
     }
@@ -42,10 +42,10 @@ public class AssignCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.getFilteredLessonList().size() < lessonIndex.getOneBased()) {
+        if (model.checkStudentListIndex(studentIndex)) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonIndex.getOneBased()));
         }
-        if (model.getFilteredStudentList().size() < studentIndex.getOneBased()) {
+        if (model.checkLessonListIndex(lessonIndex)) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "student", studentIndex.getOneBased()));
         }
         Lesson lesson = model.getFilteredLessonList().get(lessonIndex.getZeroBased());
@@ -54,9 +54,9 @@ public class AssignCommand extends Command {
             throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName()));
         }
         model.setSelectedStudent(student);
-        model.updateAssignment(studentIndex, lessonIndex);
+        model.updateAssignment(student, lesson);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
-                true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
+                true, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
 }

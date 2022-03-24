@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.ui.LessonCard;
+import seedu.address.ui.card.LessonCard;
 
 /**
  * Panel containing the list of lessons.

@@ -12,14 +12,15 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.LessonBook;
 import seedu.address.model.ReadOnlyLessonBook;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable StudentBook that is serializable to JSON format.
  */
 @JsonRootName(value = "lessonbook")
 class JsonSerializableLessonBook {
 
-    public static final String MESSAGE_CONFLICTING_LESSONS = "Lesson list contains duplicate lesson(s).";
+    public static final String MESSAGE_CONFLICTING_LESSONS = "Lesson list contains conflicting lesson(s).";
 
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
@@ -48,14 +49,27 @@ class JsonSerializableLessonBook {
      */
     public LessonBook toModelType() throws IllegalValueException {
         LessonBook lessonBook = new LessonBook();
+        List<Lesson> lessonList = new ArrayList<>();
 
+        /*
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
-            Lesson lesson = jsonAdaptedLesson.toModelType(); //get boolean
+            Lesson lesson = jsonAdaptedLesson.toModelType();
             if (lessonBook.hasConflictingLesson(lesson)) {
                 throw new IllegalValueException(MESSAGE_CONFLICTING_LESSONS);
             }
 
             lessonBook.addLesson(lesson);
+        }
+        */
+
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            lessonList.add(jsonAdaptedLesson.toModelType());
+        }
+
+        try {
+            lessonBook.setLessons(lessonList);
+        } catch (ContainsConflictingLessonsException e) {
+            throw new IllegalValueException(e.getMessage());
         }
 
         return lessonBook;

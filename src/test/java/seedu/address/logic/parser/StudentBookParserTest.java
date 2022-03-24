@@ -30,7 +30,7 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
 
-public class AddressBookParserTest {
+public class StudentBookParserTest {
 
     private final TeachWhatParser parser = new TeachWhatParser();
 

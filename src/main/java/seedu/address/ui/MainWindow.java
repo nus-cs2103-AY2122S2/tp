@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -46,8 +48,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ListPanel lessonListPanel;
-    private ListPanel personListPanel;
+    private LessonListPanel lessonListPanel;
+    private StudentListPanel studentListPanel;
     //    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -139,18 +141,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-
         updateAndPopulateLessonList();
         updateAndPopulatePersonList();
-
-        // Temporary lesson placeholder
-        //Lesson tempLesson = logic.getFilteredLessonList().get(0);
-        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredStudentList());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStudentBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -170,10 +166,16 @@ public class MainWindow extends UiPart<Stage> {
      * @param toggleTo Provided {@code ViewTab} to toggle to
      */
     public void toggleTab(ViewTab toggleTo) {
+        requireNonNull(toggleTo);
         if (toggleTo.equals(ViewTab.LESSON)) {
+            logger.info("Toggling to Lesson Tab");
             toggleLessonTab();
-        } else {
+        } else if (toggleTo.equals(ViewTab.STUDENT)) {
+            logger.info("Toggling to Student Tab");
             toggleStudentTab();
+        } else {
+            logger.severe("Something went wrong when toggling the tabs");
+            assert false;
         }
     }
 
@@ -237,23 +239,22 @@ public class MainWindow extends UiPart<Stage> {
      * Updates the InfoPanel.
      */
     private void handleInfoPanelUpdate(InfoPanelTypes infoPanelTypes) {
+        requireNonNull(infoPanelTypes);
         switch (infoPanelTypes) {
         case STUDENT:
-            logger.info("INFO: Updating InfoPanel with selected student");
+            logger.info("Updating InfoPanel with selected student");
             Student selectedStudent = logic.getSelectedStudent();
             populateInfoPanelWithStudent(selectedStudent);
             break;
         case LESSON:
-            logger.info("INFO: Updating InfoPanel with selected lesson");
+            logger.info("Updating InfoPanel with selected lesson");
             Lesson selectedLesson = logic.getSelectedLesson();
             populateInfoPanelWithLesson(selectedLesson);
             break;
         default:
-            logger.severe("WARNING: Something went wrong with handling the InfoPanels");
+            logger.severe("Something went wrong with handling the InfoPanels");
+            assert false;
         }
-    }
-    public ListPanel getLessonListPanel() {
-        return lessonListPanel;
     }
 
     /**
@@ -292,6 +293,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    // List Panel Methods
     private void populateListPanelWithLessons(ObservableList<Lesson> list) {
         lessonListPanel = new LessonListPanel(list);
         populateLessonListPanel(lessonListPanel);
@@ -302,22 +304,24 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void populateListPanelWithStudents(ObservableList<Student> list) {
-        personListPanel = new StudentListPanel(list);
-        populatePersonListPanel(personListPanel);
+        studentListPanel = new StudentListPanel(list);
+        populatePersonListPanel(studentListPanel);
     }
 
     private void populatePersonListPanel(ListPanel newListPanel) {
         personListPanelPlaceholder.getChildren().add(newListPanel.getRoot());
     }
 
-
+    // Info Panel Methods
     private void populateInfoPanelWithStudent(Student selectedStudent) {
+        requireNonNull(selectedStudent);
         infoPanel = new StudentInfoPanel(selectedStudent);
         StudentInfoPanel studentInfoPanel = (StudentInfoPanel) this.infoPanel;
         populateInfoPanel(studentInfoPanel);
     }
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
+        requireNonNull(selectedLesson);
         infoPanel = new LessonInfoPanel(selectedLesson);
         LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
         populateInfoPanel(lessonInfoPanel);

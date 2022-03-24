@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.LessonBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.ReadOnlyStudentBook;
+import seedu.address.model.StudentBook;
 import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAddress;
@@ -22,7 +22,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code StudentBook} with sample data.
  */
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
@@ -69,8 +69,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyStudentBook getSampleAddressBook() {
+        StudentBook sampleAb = new StudentBook();
         for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
         }

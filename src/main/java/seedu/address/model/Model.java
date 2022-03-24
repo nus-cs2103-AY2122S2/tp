@@ -40,45 +40,45 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' student book file path.
      */
-    Path getAddressBookFilePath();
+    Path getStudentBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' student book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setStudentBookFilePath(Path studentBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces student book data with the data in {@code studentBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setStudentBook(ReadOnlyStudentBook studentBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the StudentBook */
+    ReadOnlyStudentBook getStudentBook();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the student book.
      */
     boolean hasStudent(Student student);
 
     /**
      * Deletes the given student.
-     * The student must exist in the address book.
+     * The student must exist in the student book.
      */
     void deleteStudent(Student target);
 
     /**
      * Adds the given student.
-     * {@code student} must not already exist in the address book.
+     * {@code student} must not already exist in the student book.
      */
     void addStudent(Student student);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the student book.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * student book.
      */
     void setStudent(Student target, Student editedStudent);
 
@@ -125,7 +125,12 @@ public interface Model {
     /**
      * Updates both filtered lesson and students list.
      */
-    void updateAssignment(Index studentId, Index lessonId);
+    void updateAssignment(Student student, Lesson lesson);
+
+    /**
+     * Updates both filtered lesson and students list.
+     */
+    void updateUnassignment(Student student, Lesson lesson);
 
     /**
      * Sets the selected {@code Student} with the given {@code Student} for UI use.
@@ -144,4 +149,14 @@ public interface Model {
 
     /** Returns the selected {@code Lesson} */
     Lesson getSelectedLesson();
+
+    /**
+     * Checks if the {@code Index} provided is out of bounds of the {@code filteredStudentList}
+     */
+    boolean checkStudentListIndex(Index studentId);
+
+    /**
+     * Checks if the {@code Index} provided is out of bounds of the {@code filteredLessonList}
+     */
+    boolean checkLessonListIndex(Index lessonId);
 }

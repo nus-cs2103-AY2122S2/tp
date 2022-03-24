@@ -17,11 +17,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.ReadOnlyStudentBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.StudentBook;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
@@ -103,12 +103,12 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getStudentBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setStudentBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -118,12 +118,12 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setStudentBook(ReadOnlyStudentBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyStudentBook getStudentBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -164,7 +164,7 @@ public class AddStudentCommandTest {
 
         @Override
         public void setSelectedStudent(Student student) {
-            throw new AssertionError("This method should not be called.");
+            assertTrue(student != null);
         }
 
         @Override
@@ -203,7 +203,22 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void updateAssignment(Index studentId, Index lessonId) {
+        public void updateAssignment(Student student, Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateUnassignment(Student student, Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkLessonListIndex(Index lessonId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkStudentListIndex(Index studentId) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -245,8 +260,8 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyStudentBook getStudentBook() {
+            return new StudentBook();
         }
     }
 

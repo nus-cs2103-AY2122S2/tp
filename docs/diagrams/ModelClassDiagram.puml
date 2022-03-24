@@ -4,47 +4,81 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+package Model <<Rectangle>> {
+    Class "<<interface>>\nModel" as Model
+    Class ModelManager
 
-Class UniqueStudentList
-Class Student
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    package #line:white {
+        package StudentBook <<Rectangle>> {
+            Class "<<interface>>\nReadOnlyStudentBook" as ReadOnlyStudentBook
+            Class StudentBook
+            Class UniqueStudentsList
+            Class Student
 
+            StudentBook -down-> UniqueStudentsList
+            UniqueStudentsList --> "all ~*" Student
+
+
+            ' ---------- padding ----------
+            Class HiddenSB1 #FFFFFF
+            Class HiddenSB2 #FFFFFF
+            HiddenSB1 .down[hidden].> Student
+            HiddenSB2 .down[hidden].> Student
+            ' -----------------------------
+        }
+
+        package UserPrefs <<Rectangle>> {
+            Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+            Class UserPrefs
+
+            ' ---------- padding ----------
+            Class HiddenUserPref #FFFFFF
+            HiddenUserPref -up[hidden]- UserPrefs
+            ' -----------------------------
+        }
+
+        ReadOnlyStudentBook -up[hidden]- UserPrefs
+    }
+
+    package LessonBook <<Rectangle>> {
+        Class "<<interface>>\nReadOnlyLessonBook" as ReadOnlyLessonBook
+        Class LessonBook
+        Class ConsistentLessonsList
+        Class "{abstract}\nLesson"
+        Class TemporaryLesson
+        Class RecurringLesson
+
+        LessonBook -down-> ConsistentLessonsList
+        ConsistentLessonsList --> "~* all" "{abstract}\nLesson"
+
+        RecurringLesson -up-|> "{abstract}\nLesson"
+        TemporaryLesson -up-|> "{abstract}\nLesson"
+    }
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
-
-AddressBook .up.|> ReadOnlyAddressBook
-
+LessonBook .up.|> ReadOnlyLessonBook
+StudentBook .up.|> ReadOnlyStudentBook
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueStudentList
-UniqueStudentList --> "~* all" Student
-Student *--> Name
-Student *--> Phone
-Student *--> Email
-Student *--> Address
-Student *--> "*" Tag
+Model .left.> ReadOnlyStudentBook
+Model .left.> ReadOnlyUserPrefs
+Model .right.> ReadOnlyLessonBook
+ModelManager -right-> "1" StudentBook
+ModelManager -right-> "1" LessonBook
+ModelManager -left-> "1" UserPrefs
+ModelManager -right-> "~* filtered" Student
+ModelManager -right-> "filtered ~*" "{abstract}\nLesson"
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+' ---------- padding ----------
+Class HiddenOutside1 #FFFFFF
+HiddenOutside1 ..> Model
 
-ModelManager -->"~* filtered" Student
+Class HiddenOutside2 #FFFFFF
+HiddenOutside2 .[hidden].> Student
+
+ReadOnlyLessonBook -right[Hidden]- ReadOnlyUserPrefs
+ReadOnlyStudentBook -left[Hidden]- ReadOnlyUserPrefs
+' -----------------------------
+
 @enduml

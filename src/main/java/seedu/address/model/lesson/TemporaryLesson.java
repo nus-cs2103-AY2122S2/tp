@@ -5,10 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 /**
- * Represents a temporary lesson in the address book.
+ * Represents a temporary lesson in the student book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class TemporaryLesson extends Lesson {
+    private static final String TEMPORARY_LESSON_DESCRIPTOR = "============== [TEMPORARY LESSON] ==============";
 
     /**
      * Every field must be present and not null.
@@ -72,7 +73,12 @@ public class TemporaryLesson extends Lesson {
 
     @Override
     public String toString() {
-        // TODO: come up with string representation for a lesson
-        return this.getName().toString();
+        StringBuilder lessonString = new StringBuilder();
+
+        lessonString.append(TEMPORARY_LESSON_DESCRIPTOR)
+                .append(System.getProperty("line.separator"))
+                .append(super.toString());
+
+        return lessonString.toString();
     }
 }

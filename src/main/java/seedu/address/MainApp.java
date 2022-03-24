@@ -15,22 +15,22 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.LessonBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.ReadOnlyStudentBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.StudentBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonLessonBookStorage;
+import seedu.address.storage.JsonStudentBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.LessonBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.StudentBookStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -52,7 +52,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing StudentBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -60,9 +60,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        StudentBookStorage studentBookStorage = new JsonStudentBookStorage(userPrefs.getStudentBookFilePath());
         LessonBookStorage lessonBookStorage = new JsonLessonBookStorage(userPrefs.getLessonBookFilePath());
-        storage = new StorageManager(addressBookStorage, lessonBookStorage, userPrefsStorage);
+        storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,18 +74,21 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s student book, lesson book
+     * and {@code userPrefs}. <br>
+     * The data from the sample student book and lesson book will be used instead if {@code storage}'s lesson book and
+     * student book is not found,
+     * or an empty lesson book and student book will be used instead if errors occur when reading
+     * {@code storage}'s lesson book and student book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyStudentBook> addressBookOptional;
         Optional<ReadOnlyLessonBook> lessonBookOptional;
-        ReadOnlyAddressBook initialDataAddressBook;
+        ReadOnlyStudentBook initialDataAddressBook;
         ReadOnlyLessonBook initialDataLessonBook;
 
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readStudentBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file for students not found. Will be starting with sample data.");
             }
@@ -100,11 +103,11 @@ public class MainApp extends Application {
 
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty record.");
-            initialDataAddressBook = new AddressBook();
+            initialDataAddressBook = new StudentBook();
             initialDataLessonBook = new LessonBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty record.");
-            initialDataAddressBook = new AddressBook();
+            initialDataAddressBook = new StudentBook();
             initialDataLessonBook = new LessonBook();
         }
 
@@ -169,7 +172,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty StudentBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -185,13 +188,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting StudentBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TeachWhat! ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

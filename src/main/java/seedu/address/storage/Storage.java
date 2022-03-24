@@ -3,6 +3,6 @@ package seedu.address.storage;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, LessonBookStorage, UserPrefsStorage {
+public interface Storage extends StudentBookStorage, LessonBookStorage, UserPrefsStorage {
     // nothing here
 }

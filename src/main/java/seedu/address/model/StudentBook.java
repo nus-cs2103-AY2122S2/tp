@@ -5,16 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the student-book level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class StudentBook implements ReadOnlyStudentBook {
 
     private final UniqueStudentList students;
 
@@ -29,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         students = new UniqueStudentList();
     }
 
-    public AddressBook() {}
+    public StudentBook() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an StudentBook using the Students in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public StudentBook(ReadOnlyStudentBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code StudentBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyStudentBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -61,7 +60,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the student book.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -69,8 +68,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to the student book.
+     * The student must not already exist in the student book.
      */
     public void addStudent(Student p) {
         students.add(p);
@@ -78,9 +77,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the student book.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * student book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -89,15 +88,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code StudentBook}.
+     * {@code key} must exist in the student book.
      */
     public void removeStudent(Student key) {
         students.remove(key);
     }
 
-    public void assignLesson(Lesson lesson, Index studentId) {
-        students.assignLesson(lesson, studentId);
+    public void assignLesson(Lesson lesson, Student student) {
+        students.assignLesson(lesson, student);
     }
 
     public void unassignLesson(Lesson lesson) {
@@ -119,8 +118,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students));
+                || (other instanceof StudentBook // instanceof handles nulls
+                && students.equals(((StudentBook) other).students));
     }
 
     @Override

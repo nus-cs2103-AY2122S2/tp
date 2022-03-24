@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalStudentBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.StudentBuilder;
 
-public class AddressBookTest {
+public class StudentBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final StudentBook studentBook = new StudentBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getStudentList());
+        assertEquals(Collections.emptyList(), studentBook.getStudentList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> studentBook.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        StudentBook newData = getTypicalStudentBook();
+        studentBook.resetData(newData);
+        assertEquals(newData, studentBook);
     }
 
     @Test
@@ -49,47 +49,47 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents);
+        StudentBookStub newData = new StudentBookStub(newStudents);
 
-        assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateStudentException.class, () -> studentBook.resetData(newData));
     }
 
     @Test
     public void hasStudent_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
+        assertThrows(NullPointerException.class, () -> studentBook.hasStudent(null));
     }
 
     @Test
     public void hasStudent_studentNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasStudent(ALICE));
+        assertFalse(studentBook.hasStudent(ALICE));
     }
 
     @Test
     public void hasStudent_studentInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
-        assertTrue(addressBook.hasStudent(ALICE));
+        studentBook.addStudent(ALICE);
+        assertTrue(studentBook.hasStudent(ALICE));
     }
 
     @Test
     public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
+        studentBook.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasStudent(editedAlice));
+        assertTrue(studentBook.hasStudent(editedAlice));
     }
 
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> studentBook.getStudentList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose students list can violate interface constraints.
+     * A stub ReadOnlyStudentBook whose students list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class StudentBookStub implements ReadOnlyStudentBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students) {
+        StudentBookStub(Collection<Student> students) {
             this.students.setAll(students);
         }
 

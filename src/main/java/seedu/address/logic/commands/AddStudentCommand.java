@@ -8,17 +8,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Adds a student to the address book.
+ * Adds a student to the student book.
  */
 public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "addstudent";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the student book. "
             + "Parameters: "
             + PREFIX_STUDENT_NAME + " NAME "
             + PREFIX_STUDENT_PHONE + " PHONE "
@@ -34,7 +35,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_STUDENT_TAG + " owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the student book";
 
     private final Student toAdd;
 
@@ -55,7 +56,8 @@ public class AddStudentCommand extends Command {
         }
 
         model.addStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        model.setSelectedStudent(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
 
     @Override

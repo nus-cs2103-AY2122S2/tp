@@ -11,8 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 
 public class AddLessonCommand extends Command {
     public static final String COMMAND_WORD = "addlesson";
@@ -63,12 +65,13 @@ public class AddLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasConflictingLesson(toAdd)) {
-            throw new CommandException(MESSAGE_CONFLICTING_LESSON);
+        try {
+            model.addLesson(toAdd);
+        } catch (ConflictsWithLessonsException e) {
+            throw new CommandException(e.getMessage());
         }
-
-        model.addLesson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        model.setSelectedLesson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
 
     @Override

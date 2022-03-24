@@ -18,6 +18,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListLessonsCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
+import seedu.address.logic.commands.UnassignCommand;
 import seedu.address.logic.commands.ViewLessonInfoCommand;
 import seedu.address.logic.commands.ViewStudentInfoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -87,6 +88,9 @@ public class TeachWhatParser {
 
         case DeleteLessonCommand.COMMAND_WORD:
             return new DeleteLessonCommandParser().parse(arguments);
+
+        case UnassignCommand.COMMAND_WORD:
+            return new UnassignCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

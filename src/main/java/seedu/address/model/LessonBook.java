@@ -5,9 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.ConsistentLessonList;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.student.Student;
 
 /**
@@ -16,7 +15,7 @@ import seedu.address.model.student.Student;
  */
 public class LessonBook implements ReadOnlyLessonBook {
 
-    private final UniqueLessonList lessons;
+    private final ConsistentLessonList lessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,13 +25,13 @@ public class LessonBook implements ReadOnlyLessonBook {
      *   among constructors.
      */
     {
-        lessons = new UniqueLessonList();
+        lessons = new ConsistentLessonList();
     }
 
     public LessonBook() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an StudentBook using the Students in the {@code toBeCopied}
      */
     public LessonBook(ReadOnlyLessonBook toBeCopied) {
         this();
@@ -76,8 +75,8 @@ public class LessonBook implements ReadOnlyLessonBook {
         lessons.add(lesson);
     }
 
-    public void assignStudent(Student student, Index lessonId) {
-        lessons.assignStudent(student, lessonId);
+    public void assignStudent(Student student, Lesson lesson) {
+        lessons.assignStudent(student, lesson);
     }
 
     public void unasssignStudent(Student student) {
@@ -86,7 +85,7 @@ public class LessonBook implements ReadOnlyLessonBook {
 
     /**
      * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the student book.
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the lesson book.
      */
     public void setLesson(Lesson target, Lesson editedLesson) {

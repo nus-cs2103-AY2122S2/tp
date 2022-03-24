@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+
+    package StudentBook <<Rectangle>> {
+        Class Student
+
+        Class Name
+        Class Address
+        Class Email
+        Class Phone
+        Class Tag
+
+        Student *--> Name
+        Student *--> Phone
+        Student *--> Email
+        Student *--> Address
+        Student *--> "*" Tag
+
+        Class HiddenSB3 #FFFFFF
+        HiddenSB3 .down.>  "all ~*" Student
+
+        ' ---------- padding ----------
+        Class HiddenSB1 #FFFFFF
+        Class HiddenSB2 #FFFFFF
+        HiddenSB1 .down[hidden].> Student
+        HiddenSB2 .down[hidden].> Student
+        ' -----------------------------
+    }
+
+package LessonBook <<Rectangle>> {
+    Class "{abstract}\nLesson"
+
+    Class LessonName
+    Class Subject
+    Class LessonAddress
+    Class DateTimeSlot
+    Class EnrolledStudents
+
+    "{abstract}\nLesson" *-right-> LessonName
+    "{abstract}\nLesson" *-left-> Subject
+    "{abstract}\nLesson" *-down-> LessonAddress
+    "{abstract}\nLesson" *-down-> DateTimeSlot
+    "{abstract}\nLesson" *-down-> EnrolledStudents
+
+    Class HiddenLB1 #FFFFFF
+    Class HiddenLB2 #FFFFFF
+    HiddenLB2 .down[hidden].>  HiddenLB1
+    HiddenLB2 .down.>  "all ~*   " "{abstract}\nLesson"
+
+    ' ---------- padding ----------
+    Class HiddenLB2 #FFFFFF
+'    HiddenLB2 .up.>
+}
+
+EnrolledStudents --> "~* enrolled"Student
+
+Class HiddenOutside1 #FFFFFF
+Class HiddenOutside2 #FFFFFF
+HiddenOutside1 .down.> "          ~* filtered" Student
+HiddenOutside2 .down.> "             ~* filtered" "{abstract}\nLesson"
+
+
+@enduml

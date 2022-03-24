@@ -29,16 +29,77 @@ TODO
 TODO
 
 ### UI component
+The **API** of this component is specified in `Ui.java`
 
-TODO
+![](images/UiPhotos/UiClassDiagram.png)
+
+The UI consists of a `MainWindow` that is made up of multiple parts eg. `CommandBox`, `ResultDisplay`, 
+`StudentListPanel`, `InfoPanel` etc. All these components, including the `MainWindow` inherits from the abstract
+`UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in 
+[`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
+
+The `UI` component,
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` component to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<img src="images/UiPhotos/BottomHalf.png" width="600" />
+
+The bottom half of the `UI` component is split into two parts using a `SplitPane` component from 
+the JavaFX UI framework. 
+
+The left pane contains a `TabPane` that contains two tabs which hold a 
+[`LessonListPanel`](../src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) and a
+[`StudentListPanel`](../src/main/java/seedu/address/ui/listpanel/StudentListPanel.java).
+The **_Lessons_** tab contains a 
+[`LessonListPanel`](../src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) which lists out `Lesson` entries 
+while the **_Students_** tab contains a 
+[`StudentListPanel`](../src/main/java/seedu/address/ui/listpanel/StudentListPanel.java) which lists out `Student`
+entries.
+
+[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
+To switch between the tabs, the methods `MainWindow#toggleLessonTab()` and `MainWindow#toggleStudentTab()` can be used 
+to switch between the **_Lesson_** tab and **_Student_** tab respectively. Switching the tabs by using user commands is 
+done by the method `MainWindow#toggleTab()`.
+
+![img.png](images/UiPhotos/InfoPanelClassDiagram.png)
+
+The right pane contains an [`InfoPanel`](../src/main/java/seedu/address/ui/infopanel/InfoPanel.java) 
+component can either show the details of a `Lesson` entry or `Student` entry. A
+[`LessonInfoPanel`](../src/main/java/seedu/address/ui/infopanel/LessonInfoPanel.java) is used to show the details of a 
+`Lesson` entry, while a [`StudentInfoPanel`](../src/main/java/seedu/address/ui/infopanel/StudentInfoPanel.java) is used
+to show the details of a `Student` entry.
+
+[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
+The methods `MainWindow#populateInfoPanelWithLesson()` and `MainWindow#populateInfoPanelWithStudent()` can be used to
+populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
+method `MainWindow#handleInfoPanelUpdate()`.
 
 ### Logic component
 
 TODO
 
 ### Model component
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-TODO
+![Model Class Diagram](images/ModelClassDiagram.png)
+
+The `ModelManager` component,
+* stores the student book data i.e., all `Student` objects (which are contained in a `UniquePersonList` object).
+* stores the lesson book data i.e., all `Lesson` objects (which are contained in a `ConsistentLessonList` object).
+* stores a `UserPref` object that represents the user’s preferences.
+
+the `ModelManager` component also,
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* similarly, it stores the currently 'selected' `Lesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Lesson>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+
+![Model Class Diagram](images/LessonBookStudentBookModelClassDiagram.png)
+Each `Lesson` has an association with a list of `EnrolledStudents`, which contains references to each `Student` assigned to the lesson.
 
 ### Storage component
 
@@ -54,7 +115,140 @@ TODO
 
 This section describes some noteworthy details on how certain features are implemented.
 
-TODO
+### Viewing a Lesson or Student's details
+
+[//]: # (maybe add Lesson and Student's definition in the glossary)
+
+Viewing details of a `Lesson` or `Student` on the `InfoPanel` component in the `UI` is done through the `lesson` or 
+`student` command.
+
+When the command is entered, the `TeachWhatParser` class would **parse** the given user input and return either a 
+`ViewLessonInfoCommand` or `ViewStudentInfoCommand` object, depending on which command was used. 
+
+When the Command is executed by `Logic`, the executed command would make some attribute changes to `Model` (which holds
+the data of the App in memory) and also update the `InfoPanel` component of the `UI` with detailed information of the 
+selected `Lesson` or `Student`. A more detailed explanation is shown below.
+
+Given below is an example where a user inputs `student 1` as a command to view the details of the first student on the 
+list.
+
+Step 1: User inputs `student 1` into the `CommandBox` and hits enter.
+
+`MainWindow` receives the user input through the `MainWindow#executeCommand()` method. `MainWindow` then sends the user
+input to `LogicManager` and retrieves the result.
+
+Step 2: `LogicManager` parses the user's input and returns the result
+
+![](images/viewing-details/ViewStudentParseSequenceDiagram.png)
+
+`LogicManager` parses the user's input through multiple `Parser` classes as shown in the sequence diagram above. User
+input is first sent to the `TeachWhatParser` where it looks for the main command `student`. It passes the arguments to
+the relevant **Command Parser** which in this case is `ViewStudentInfoParser`.
+
+`ViewStudentInfoParser` takes in the provided index and creates a `ViewStudentInfoCommand`. This `Command` is returned
+back to `LogicManager` where it is executed with the `ViewStudentInfoCommand#execute()` method.
+
+Step 3: Executing the command
+
+[//]: # (Might split the above diagram into two, show the parsing section and execution)
+
+As shown in the diagram above, when `ViewStudentInfoCommand#execute()` is called, `ViewStudentInfoCommand` retrieves
+the filtered list (the current list shown in the UI) from `Model` and picks out the selected student based on the index
+provided by the user's input. It then sets `ModelManager#selectedStudent` using the `ModelManager#setSelectedStudent()`
+method, which will be used by `MainWindow` later on.
+
+[//]: # (Insert object diagram here to show what attributes CommandResult have.
+Also explain why certain attributes are set and how they will be used by MainWindow to
+show certain elements)
+
+`ViewStudentInfoCommand` creates a `CommandResult` object, with the attributes shown above. This is then returned back
+to `LogicManager` which returns it back to `MainWindow`.
+
+Step 4: Updating the UI
+
+![](images/viewing-details/ViewStudentSequenceDiagram.png)
+
+Once `MainWindow` receives the `CommandResult` object, it checks for the `CommandResult#updateInfoPanel` boolean. If the
+boolean is true, it runs the `MainWindow#handleInfoPanelUpdate()` method which updates the `InfoPanel`. It does this by
+retrieving the selected student from `ModelManager#selectedStudent` and creates a new `StudentInfoPanel` with the 
+selected student and its details. The newly created `StudentInfoPanel` is shown on the right side of the application.
+
+The execution of the command is complete and the result is shown in the image below, where the right side of the
+application is updated with the details of the selected `Student`.
+
+<img src="images/viewing-details/UiExample.png" width="550" />
+
+A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
+
+### Add student
+Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the `TeachWhatParser` into a `Command`
+which is executed by `LogicManager#execute()`.
+
+Given below is an example scenario:
+
+Step 1. The user requests to add a student that has the following details,
+- `name`: Samuel
+- `phone number`: 64874982
+- `email`: simp4raiden@gmail.com
+- `address`: 6 Raffles Quay Singapore, 048580 Singapore
+- `tag`: struggling in math, good in cs
+
+Step 2. The user enters the command
+
+``addstudent -n Samuel -p 64874982 -e simp4raiden@gmail.com -a 6 Raffles Quay Singapore, 048580 Singapore -t struggling in math -t good in cs``
+
+Step 3. The user input is passed into `LogicManager#execute(commandText)`.
+
+Step 4. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
+
+Step 5. The `TeachWhatParser` detects the command word `addstudent` and passes the student details to `AddStudentCommandParser#parse(args)`.
+
+Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`, and constructs a new `Student` and passes the `Student` to
+`AddStudentCommand` which it then returns.
+
+* Constraints
+    * Multiple `tag` prefixes can be given but only one `name`, `phone`, `email` and `address` can be given.
+    * All the prefixes are optional except for `name` and `phone`
+
+      `ParseException` will be thrown if the constraints are violated
+
+Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
+
+The following sequence diagram shows how the add student command works.
+![](../src/main/resources/images/AddStudentSequenceDiagram.png)
+
+### Add temporary/recurring lesson
+Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
+
+This is achieved by enforcing ***consistency*** between existing lessons stored in the list.
+
+A list of lessons is considered ***consistent*** when no lessons clash with each another. In particular, the following two conditions are enforced by the `ConsistentLessonList`:
+- no two temporary lessons should have overlapping timeslots (ie: a lesson should ***not*** start when another lesson has not ended)
+- no recurring lesson should have overlapping timeslots with any temporary lesson or recurring lesson that falls on the same weekday as it
+
+This is done with the method `ConsistentLessonList#hasConflictingLesson()`, which takes in a `Lesson` that is to be added to the list and returns true if any existing lessons clashes with it.
+
+Given below is an example scenario:
+
+Step 1. The user requests to add a lesson that,
+- is on 20 March 2022
+- starts at 12 pm
+- lasts for 1 hour
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_1.png)
+
+Step 2. The method `ConsistentLessonList#add()` is called, with the new lesson passed in as the argument. The method `ConsistentLessonList#hasConflictingLesson()` is then called, which checks if the first existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_2.png)
+
+Step 3. The method then moves down the list and checks if the second existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_3.png)
+
+After all the existing lessons have been verified to not clash with the new lesson, it is added to the list of lessons.
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_4.png)
+
 
 ### Assign student to lesson
 

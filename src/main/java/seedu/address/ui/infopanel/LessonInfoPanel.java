@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
-import seedu.address.ui.StudentCard;
+import seedu.address.ui.card.StudentCard;
 
 public class LessonInfoPanel extends InfoPanel {
     private static final String FXML = "LessonInfoPanel.fxml";

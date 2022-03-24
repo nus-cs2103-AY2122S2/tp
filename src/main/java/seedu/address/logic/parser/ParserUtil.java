@@ -33,8 +33,6 @@ public class ParserUtil {
     public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format! Date must be in DD-MM-YYYY\n"
             + "[EXAMPLE]: to specify that a lesson is on 25th March 2022, include the following\n"
             + "-d 25-03-2022";
-    public static final String INVALID_DATE_PASTDATE_MESSAGE = "Retroactively creating lessons "
-            + "for past dates is not allowed!";
 
     public static final String INVALID_HOURS_FORMAT_MESSAGE = "Invalid duration in hours format! "
             + "Hours must be a non-negative integer.\n"
@@ -248,11 +246,6 @@ public class ParserUtil {
             lessonDate = LocalDate.parse(trimmedDateString, acceptedDateTimeFormat);
         } catch (DateTimeParseException exception) {
             throw new ParseException(INVALID_DATE_FORMAT_MESSAGE);
-        }
-
-        LocalDate today = LocalDate.now();
-        if (lessonDate.isBefore(today)) {
-            throw new ParseException(INVALID_DATE_PASTDATE_MESSAGE);
         }
 
         return lessonDate;
