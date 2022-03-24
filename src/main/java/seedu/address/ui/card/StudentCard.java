@@ -41,7 +41,7 @@ public class StudentCard extends Card {
     private FlowPane tags;
 
     /**
-     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
+     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
@@ -57,7 +57,7 @@ public class StudentCard extends Card {
     }
 
     /**
-     * Creates a {@code StudentCode} with the given {@code Student} with no index.
+     * Creates a {@code StudentCard} with the given {@code Student} with no index.
      */
     public StudentCard(Student student) {
         super(FXML);

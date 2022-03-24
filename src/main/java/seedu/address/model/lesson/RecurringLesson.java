@@ -60,6 +60,11 @@ public class RecurringLesson extends Lesson {
         }
     }
 
+    @Override
+    public boolean isRecurring() {
+        return true;
+    }
+
     /**
      * Returns true if both lessons have the same identity and data fields.
      */

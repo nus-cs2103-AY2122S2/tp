@@ -9,9 +9,9 @@ import seedu.address.model.lesson.Lesson;
 /**
  * An UI component that displays information of a {@code Student}.
  */
-public class LessonCard extends Card {
+public class RecurringLessonCard extends Card {
 
-    private static final String FXML = "LessonListCard.fxml";
+    private static final String FXML = "RecurringLessonListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -35,11 +35,13 @@ public class LessonCard extends Card {
     private Label date;
     @FXML
     private Label time;
+    @FXML
+    private Label day;
 
     /**
-     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
+     * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
      */
-    public LessonCard(Lesson lesson, int displayedIndex) {
+    public RecurringLessonCard(Lesson lesson, int displayedIndex) {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
@@ -47,12 +49,13 @@ public class LessonCard extends Card {
         subject.setText(lesson.getSubject().subjectName);
         date.setText(lesson.getDateTimeSlot().getDateString());
         time.setText(lesson.getDateTimeSlot().getTimeString());
+        day.setText(lesson.getDateTimeSlot().getDayString());
     }
 
     /**
-     * Creates a {@code StudentCode} with the given {@code Student} with no index.
+     * Creates a {@code LessonCard} with the given {@code Lesson} with no index.
      */
-    public LessonCard(Lesson lesson) {
+    public RecurringLessonCard(Lesson lesson) {
         super(FXML);
         this.lesson = lesson;
         id.setText("");
@@ -60,6 +63,7 @@ public class LessonCard extends Card {
         subject.setText(lesson.getSubject().subjectName);
         date.setText(lesson.getDateTimeSlot().getDateString());
         time.setText(lesson.getDateTimeSlot().getTimeString());
+        day.setText(lesson.getDateTimeSlot().getDayString());
     }
 
     @Override
@@ -70,12 +74,12 @@ public class LessonCard extends Card {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof LessonCard)) {
+        if (!(other instanceof RecurringLessonCard)) {
             return false;
         }
 
         // state check
-        LessonCard card = (LessonCard) other;
+        RecurringLessonCard card = (RecurringLessonCard) other;
         return id.getText().equals(card.id.getText())
                 && lesson.equals(card.lesson);
     }
