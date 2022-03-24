@@ -1,30 +1,22 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.MarkCommand.INVALID_TASK_INDEX;
 import static seedu.address.logic.commands.MarkCommand.MARKED_TASK_SUCCESS;
 import static seedu.address.logic.commands.MarkCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.commands.MarkCommand.TASK_ALREADY_DONE;
-
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Task;
 import seedu.address.testutil.TypicalPersons;
 
 
