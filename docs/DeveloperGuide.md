@@ -330,9 +330,32 @@ is chosen due to certain advantages that it offers.
 reference the same `enum` class. However, for the class implementation, a new `Status` instance is
 instantiated each time a `Show` object is created.
 
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Import and Export feature
+
+### What it does
+`import` and `export` allows the user to quickly import/ export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
+
+### Implementation
+When the enters the import/ export command, a FileDialog is created and shown on screen. 
+
+`import`
+
+The user has to navigate to and find a JSON file they wish to import into Trackermon. After the file has been selected, a preliminary check is run on it to ensure it is a JSON file. If it is not a JSON file, Trackermon will return an error message. Once the check passes, Trackermon will obtain the paths of the target location (`showListFilePath`) and data to import. Trackermon then uses the `Files` libary to copy the data from the selected location to the target location. 
+
+After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
+
+`export`
+
+The user has to navigate to and find a directory or file they wish to export Trackermon data into. After the user selects a location to export Trackermon data into, Trackermon will obtain the paths of the target location and the source location (`showListFilePath`). The `Files` library will then be used to copy the data from the source location to the target location.
+
+### Design considerations:
+##### Aspect: How the File Explorer looks
+- **Alternative 1 (current choice):** Using the FileDialog library. The FileDialog library achieves a similar look as the JFileChooser library, but it is recommended by for use on MacOS, so we decided to go with it, as it also works on Windows.
+- **Alternative 2:** Using the JFileChooser library. While this library works on Windows, and achieves the desired look, there were issues implementing it on MacOS, which would cause Trackermon to freeze whenever it had to show the File Explorer. Therefore, we decided to go with the FileDialog library.
 
 ---
 
@@ -1004,7 +1027,7 @@ testers are expected to do more *exploratory* testing.
        2. Test case: Exporting to directory with preexisting `trackermon.json`
           1. A popup appears asking if you want to replace the old file.
           2. Test case: Click on `No`
-             <br>Expected: Popup closes, user brought back to file explorer GUI.
+             <br>Expected: Popup closes, you are brought back to file explorer GUI.
           3. Test case: Click on `Yes`
              <br>Expected: Popup and file explorer GUI closes. Old file is replaced.
        3. Test case: Renaming the exported file in the file explorer GUI.

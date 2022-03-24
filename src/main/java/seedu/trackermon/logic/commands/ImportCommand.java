@@ -39,8 +39,8 @@ public class ImportCommand extends Command {
             System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
             System.setProperty("apple.awt.fileDialogForDirectories", "true");
 
-            JFrame F = new JFrame();
-            FileDialog fd = new FileDialog(F, "Choose a file to import Trackermon data: ", FileDialog.LOAD);
+            JFrame frame = new JFrame();
+            FileDialog fd = new FileDialog(frame, "Choose a file to import Trackermon data: ", FileDialog.LOAD);
             fd.setFile("Trackermon.json");
             fd.setVisible(true);
             if (fd.getFile() != null) {
@@ -74,18 +74,18 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        FileImportThread test = new FileImportThread(model);
-        test.start();
+        FileImportThread thread = new FileImportThread(model);
+        thread.start();
         try {
-            test.join();
-            if (test.getSuccess()) {
+            thread.join();
+            if (thread.getSuccess()) {
                 return new CommandResult(MESSAGE_SUCCESS, false, false, true);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
-            test.interrupt();
+            thread.interrupt();
         }
-        if (!test.getCorrectFileType()) {
+        if (!thread.getCorrectFileType()) {
             return new CommandResult(MESSAGE_FAIL_WRONG_FILETYPE);
         }
         return new CommandResult(MESSAGE_FAIL);

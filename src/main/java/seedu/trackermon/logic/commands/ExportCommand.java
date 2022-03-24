@@ -35,8 +35,8 @@ public class ExportCommand extends Command {
             System.setProperty("com.apple.macos.use-file-dialog-packages", "true");
             System.setProperty("apple.awt.fileDialogForDirectories", "true");
 
-            JFrame F = new JFrame();
-            FileDialog fd = new FileDialog(F, "Choose a location to save Trackermon data: ", FileDialog.SAVE);
+            JFrame frame = new JFrame();
+            FileDialog fd = new FileDialog(frame, "Choose a location to save Trackermon data: ", FileDialog.SAVE);
             fd.setFile("trackermon.json");
             fd.setVisible(true);
 
@@ -62,16 +62,16 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        FileExportThread test = new FileExportThread(model);
-        test.start();
+        FileExportThread thread = new FileExportThread(model);
+        thread.start();
         try {
-            test.join();
-            if (test.getSuccess()) {
+            thread.join();
+            if (thread.getSuccess()) {
                 return new CommandResult(MESSAGE_SUCCESS);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
-            test.interrupt();
+            thread.interrupt();
         }
         return new CommandResult(MESSAGE_FAIL);
     }
