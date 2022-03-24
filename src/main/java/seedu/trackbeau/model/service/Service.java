@@ -23,6 +23,8 @@ public class Service {
      */
     public Service(ServiceName name, Price price, Duration duration) {
         requireAllNonNull(name, price, duration);
+        assert price.value > 0 : "price should be greater than 0";
+        assert duration.value > 0 : "duration should be greater than 0";
         this.name = name;
         this.price = price;
         this.duration = duration;
