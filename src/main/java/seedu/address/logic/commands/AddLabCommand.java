@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -43,7 +42,6 @@ public class AddLabCommand extends Command {
         }
 
         model.addLab(toAdd);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.labNumber));
     }
 

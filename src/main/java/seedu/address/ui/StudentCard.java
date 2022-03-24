@@ -3,10 +3,14 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Student;
 
 /**
@@ -43,7 +47,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane labCard;
+    private ListView<Lab> labCard;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,9 +64,21 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        student.getLabs()
-                .asUnmodifiableObservableList()
-                .forEach(lab -> labCard.getChildren().add(new LabLabel(lab)));
+        initLabCard(student);
+    }
+
+    /**
+     * Initializes the ListView {@code labCard}.
+     *
+     * @param student The Student object that this StudentCard belongs to.
+     */
+    private void initLabCard(Student student) {
+        // labCard related settings
+        labCard.setItems(student.getLabs().asUnmodifiableObservableList());
+        labCard.setCellFactory(listView -> new LabListViewCell());
+        labCard.setOrientation(Orientation.HORIZONTAL);
+        // this is hardcoded, might need to be changed.
+        labCard.setMaxHeight(30);
     }
 
     @Override
@@ -81,5 +97,22 @@ public class StudentCard extends UiPart<Region> {
         StudentCard card = (StudentCard) other;
         return id.getText().equals(card.id.getText())
                 && student.equals(card.student);
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
+     */
+    private static class LabListViewCell extends ListCell<Lab> {
+        @Override
+        protected void updateItem(Lab lab, boolean empty) {
+            super.updateItem(lab, empty);
+
+            if (empty || lab == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new LabLabel(lab));
+            }
+        }
     }
 }
