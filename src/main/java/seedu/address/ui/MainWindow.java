@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Timer;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ReminderTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,6 +39,8 @@ public class MainWindow extends UiPart<Stage> {
     private MatchWindow matchWindow;
     private FavouriteWindow favouriteWindow;
     private ReminderWindow reminderWindow;
+    // timer to track & launch reminders
+    private Timer timer;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -71,7 +75,10 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
         matchWindow = new MatchWindow(logic);
         favouriteWindow = new FavouriteWindow(logic);
-        reminderWindow = new ReminderWindow(logic);
+        reminderWindow = ReminderWindow.getInstance(logic);
+
+        // start the reminders
+        launchReminders();
     }
 
     public Stage getPrimaryStage() {
@@ -206,10 +213,21 @@ public class MainWindow extends UiPart<Stage> {
         favouriteWindow.hide();
         reminderWindow.hide();
         primaryStage.hide();
+        closeReminders();
     }
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    private void launchReminders() {
+        timer = new Timer();
+        ReminderTask tasks = new ReminderTask();
+        timer.scheduleAtFixedRate(tasks, 5_000, 60_000);
+    }
+
+    private void closeReminders() {
+        timer.cancel();
     }
 
     /**
