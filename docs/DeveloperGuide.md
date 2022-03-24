@@ -73,7 +73,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EntityListPanel`*, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+*`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -353,7 +355,41 @@ The following activity diagram summarizes what happens when a user executes a gr
     * Pros: All module related data are in one class.
     * Cons: Duplicate data in storage, hard to display assessments attempts.
 
+### \[Proposed\] Mark/Unmark feature
 
+#### Proposed Implementation
+
+The proposed mark/unmark mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is currently exclusive to `StudentAttendance`. Additionally, it implements the following operations:
+
+* `MarkCommandParser#parse()` — Parses the command arguments.
+* `MarkCommand#execute()` — Executes `ModelManager#markAttendance()` or `ModelManager#unmarkAttendance` based on a specified class group index and week number.
+* `ModelManager#markAttendance()` — Updates the specified `Lesson` object with a list of `StudentAttendance` objects.
+
+Given below is an example usage scenario using `mark` which illustrates how the mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![MarkUnmarkState0](images/MarkUnmarkState0.png)
+
+Step 2. The user executes `list class` command to list the class groups in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
+
+Step 3. The user executes `list student c/1` command to list all the students in the class group with index 1.
+
+Step 4. The user executes `mark attend c/1 w/3 s/1,2,3,4,5,6` to mark attendance for a lesson which belongs to a class group with index 1 and occurs in week 3. Students with indexes 1,2,3,4,5, and 6 are marked as having attended. The `mark` command also calls `MarkCommandParser#parse()`, which parses the input and returns a successful/unsuccessful message.
+
+![MarkUnmarkState1](images/MarkUnmarkState1.png)
+
+The following sequence diagram shows how the list operation works:
+
+![MarkUnmarkSequenceDiagram](images/MarkUnmarkSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a mark command:
+
+![MarkUnmarkActivityDiagram](images/MarkUnmarkActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
