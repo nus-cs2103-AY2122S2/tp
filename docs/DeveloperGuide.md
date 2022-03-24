@@ -243,11 +243,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### What is this feature about? 
 The `edit` feature allows the user to change the attributes of the Candidate in the system though the CLI.
-This feature has been enhanced based on the initial implementation of the `edit` command in `AddressBook3`.
+This feature has been enhanced based on the initial implementation of the `edit` command in `AddressBook`.
 
 #### How is this feature implemented?
 
-The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrive the attributes that can be edited. 
+The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrieve the attributes that can be edited. 
 
 The user is able to edit key attributes of the Candidate, such as 
 * Phone Number
@@ -258,7 +258,7 @@ Based on the fields that are edited by the user, the EditCommandParser will retr
 There are also some attributes that are dependent on another attribute, and we will introduce `Triggers` to update the attributes automatically.
 One of such is the `InterviewStatus`. It makes sense that if the application is accepted or rejected, it also means that the interview has been completed.
 Hence the `ApplicationStatus` will trigger `InterviewStatus` if the user is changing the `ApplicationStatus` from `Pending` to `Accepted` or `Rejected`.
-The trigger mechanism is currently handled by `EditCommand#triggerInterviewStatus()`. 
+The `trigger mechanism` (WIP) is currently handled by `EditCommand#triggerInterviewStatus()`. 
 
 #### Why is the feature implemented as such?
 
