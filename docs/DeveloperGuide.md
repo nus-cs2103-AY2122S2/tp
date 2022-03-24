@@ -295,7 +295,7 @@ We initially proposed to put the full list of commands and tips on the Help Wind
 there will be too many commands available in the window. Hence we decided that we should streamline the important commands on the `HelpWindow`, and the 
 other information will be available on the User Guide. 
 
-As the user will not be able to remember the link to our User Guide, we hyperlinked it using the Desktop API that was available from Java. 
+As the user will not be able to remember the link to our User Guide, we hyperlinked it using the Desktop API that was available from Java.
 
 #### UML Diagram
 The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
