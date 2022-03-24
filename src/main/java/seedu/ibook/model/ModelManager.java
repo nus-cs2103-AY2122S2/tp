@@ -124,7 +124,7 @@ public class ModelManager implements Model {
         requireAllNonNull(product, item);
         iBook.addItem(product, item);
     }
-  
+
     @Override
     public void deleteItem(Product targetProduct, Item target) {
         requireAllNonNull(targetProduct, target);

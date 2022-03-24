@@ -104,7 +104,7 @@ public class IBook implements ReadOnlyIBook {
         requireAllNonNull(product, item);
         product.addItem(item);
     }
-  
+
     /**
      * Removes {@code key} from {@targetProduct}.
      * {@code targetProduct} must exist in the iBook and {@code key} must exist in {@code targetProduct}.

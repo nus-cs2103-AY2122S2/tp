@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ibook.commons.exceptions.IllegalValueException;
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.UniqueItemList;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
