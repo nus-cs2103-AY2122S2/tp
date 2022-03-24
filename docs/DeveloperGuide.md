@@ -159,6 +159,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Modules Feature
+#### Implementation
+
+The add modules mechanism is facilitated by `AddModuleCommand`. Its functionality is implemented in the `AddModuleCommand.java` class which follows the `Command` interface. It extends `Command` with a list of modules `List<Module>` that is to be added to an existing person, stored internally as `modulesToAdd`.
+
+Additionally, it implements the following operations: 
+* `Command#execute(Model model)` - Returns the feedback message containing information about module(s) added to a target person, for eventual displays in the GUI.
+* `createEditedPerson(Person personToEdit, List<Module> modulesToAdd)` - Creates and returns a Person with `modulesToAdd` added to the existing details of `personToEdit`.
+* `hasModulesInCommon(Person personToEdit, List<Module> proposedModules)` - Returns true if `personToEdit` contains any modules in `proposedModules`.
+* `getNewModules(Person personToEdit, List<Module> proposedModules)` - Returns List of non-duplicated modules, which may be empty if no unique modules exist.
+* `getCommandResult(...)` - Returns a `CommandResult` with the appropriate feedback depending on if any new modules are added.
+
 
 ### Sort feature
 #### Implementation
