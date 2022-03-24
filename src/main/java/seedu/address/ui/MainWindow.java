@@ -205,6 +205,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         matchWindow.hide();
         favouriteWindow.hide();
+        viewImageWindow.hide();
         primaryStage.hide();
     }
 
