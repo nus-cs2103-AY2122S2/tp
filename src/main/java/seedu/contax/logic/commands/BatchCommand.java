@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.core.index.Index;
-import seedu.contax.logic.LogicManager;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ArgumentMultimap;
@@ -44,7 +43,7 @@ public class BatchCommand extends Command {
             + PREFIX_SEARCH_TYPE + "phone "
             + PREFIX_EQUALS + "123 ";
 
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private final Logger logger = LogsCenter.getLogger(BatchCommand.class);
 
     private final String commandInput;
     private final SearchType searchType;
@@ -107,8 +106,7 @@ public class BatchCommand extends Command {
         return new CommandResult(resultOutput.toString());
     }
 
-    private List<Index> matchInputStringToIndex(Model model, SearchType searchType, String userInput, String matchType)
-            throws CommandException {
+    private List<Index> matchInputStringToIndex(Model model, SearchType searchType, String userInput, String matchType) {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
         for (int i = 0; i < personList.size(); i++) {
