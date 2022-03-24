@@ -106,7 +106,8 @@ public class BatchCommand extends Command {
         return new CommandResult(resultOutput.toString());
     }
 
-    private List<Index> matchInputStringToIndex(Model model, SearchType searchType, String userInput, String matchType) {
+    private List<Index> matchInputStringToIndex(Model model,
+                                                SearchType searchType, String userInput, String matchType) {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
         for (int i = 0; i < personList.size(); i++) {
