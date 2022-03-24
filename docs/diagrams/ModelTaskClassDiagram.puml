@@ -13,7 +13,6 @@ Class Date
 Class Time
 Class Description
 Class UniqueTaskList
-
 }
 
 UniqueTaskList --> "~* all" Task
