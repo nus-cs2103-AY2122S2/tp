@@ -145,7 +145,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addTask(Task task) {
-        // requireNonNull(task);
+        requireNonNull(task);
         addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
@@ -176,13 +176,11 @@ public class ModelManager implements Model {
     @Override
     public void markTask(Task task) {
         addressBook.markTask(task);
-        // updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void unmarkTask(Task task) {
         addressBook.unmarkTask(task);
-        // updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
@@ -198,26 +196,6 @@ public class ModelManager implements Model {
     @Override
     public void untagTask(Task task, Person person) {
         addressBook.untagTask(task, person);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateFilteredTaskList(Predicate<Task> predicate) {
-        requireNonNull(predicate);
-        filteredTasks.setPredicate(predicate);
-    }
-
-    @Override
-    public ObservableList<Task> getFilteredTaskList() {
-        return filteredTasks;
-    }
-
-    @Override
-    public boolean hasTask(Task task) {
-        requireNonNull(task);
-        return addressBook.hasTask(task);
     }
 
     @Override
@@ -273,7 +251,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredTasks.equals(other.filteredTasks);
     }
-  
+
     @Override
     public boolean hasPriority(Task task) {
         return addressBook.hasPriority(task);

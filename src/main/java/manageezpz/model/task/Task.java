@@ -89,7 +89,7 @@ public class Task {
     public String getDateTime() {
         return "";
     }
- 
+
     public void setPriority(String priority) {
         this.priority = Priority.valueOf(priority);
     }
