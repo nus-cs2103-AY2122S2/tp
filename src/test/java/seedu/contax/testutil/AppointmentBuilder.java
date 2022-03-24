@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.Name;
+import seedu.contax.model.appointment.Priority;
 import seedu.contax.model.appointment.StartDateTime;
 import seedu.contax.model.person.Person;
 
@@ -20,6 +21,7 @@ public class AppointmentBuilder {
     private StartDateTime startDateTime;
     private Duration duration;
     private Person person;
+    private Priority priority;
 
     /**
      * Creates a {@code AppointmentBuilder} with the default details.
@@ -29,6 +31,7 @@ public class AppointmentBuilder {
         startDateTime = new StartDateTime(DEFAULT_START_DATETIME);
         duration = new Duration(DEFAULT_DURATION);
         person = null;
+        priority = Priority.LOW;
     }
 
     /**
@@ -39,6 +42,7 @@ public class AppointmentBuilder {
         startDateTime = appointmentToCopy.getStartDateTimeObject();
         duration = appointmentToCopy.getDuration();
         person = appointmentToCopy.getPerson();
+        priority = appointmentToCopy.getPriority();
     }
 
     /**
@@ -73,7 +77,19 @@ public class AppointmentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Priority} of the {@code Appointment} that we are building.
+     */
+    public AppointmentBuilder withPriority(Priority priority) {
+        this.priority = priority;
+        return this;
+    }
+
     public Appointment build() {
         return new Appointment(name, startDateTime, duration, person);
+    }
+
+    public Appointment buildWithPriority() {
+        return new Appointment(name, startDateTime, duration, person, priority);
     }
 }

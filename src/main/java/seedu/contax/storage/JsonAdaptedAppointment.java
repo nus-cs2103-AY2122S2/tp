@@ -12,6 +12,7 @@ import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.Name;
+import seedu.contax.model.appointment.Priority;
 import seedu.contax.model.appointment.StartDateTime;
 import seedu.contax.model.person.Person;
 
@@ -31,6 +32,7 @@ class JsonAdaptedAppointment {
     private final String startDateTime;
     private final int duration;
     private final String person;
+    private final String priority;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,11 +41,13 @@ class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(@JsonProperty("name") String name,
                                   @JsonProperty("startDateTime") String startDateTime,
                                   @JsonProperty("duration") int duration,
-                                  @JsonProperty("person") String person) {
+                                  @JsonProperty("person") String person,
+                                  @JsonProperty("priority") String priority) {
         this.name = name;
         this.startDateTime = startDateTime;
         this.duration = duration;
         this.person = person;
+        this.priority = priority;
     }
 
     /**
@@ -54,6 +58,7 @@ class JsonAdaptedAppointment {
         startDateTime = DATETIME_FORMATTER.format(source.getStartDateTimeObject().value);
         duration = source.getDuration().value;
         person = (source.getPerson() != null) ? source.getPerson().getName().fullName : null;
+        priority = source.getPriority().toString();
     }
 
     /**
@@ -100,7 +105,21 @@ class JsonAdaptedAppointment {
                     .findFirst().orElseThrow(() -> new IllegalValueException(INVALID_PERSON_MESSAGE));
         }
 
-        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson);
+        Priority modelPriority = Priority.LOW;
+        if (priority != null) {
+            switch (priority) {
+            case "HIGH":
+                modelPriority = Priority.HIGH;
+                break;
+            case "MEDIUM":
+                modelPriority = Priority.MEDIUM;
+                break;
+            default:
+                break;
+            }
+        }
+
+        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson, modelPriority);
     }
 
 }

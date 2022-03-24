@@ -93,6 +93,8 @@ public class EditAppointmentCommand extends Command {
         Appointment editedAppointment = createEditedAppointment(appointmentToEdit,
                 model.getFilteredPersonList(), editAppointmentDescriptor);
 
+        editedAppointment = editedAppointment.setPriority(appointmentToEdit.getPriority());
+
         try {
             model.setAppointment(appointmentToEdit, editedAppointment);
         } catch (OverlappingAppointmentException ex) {
