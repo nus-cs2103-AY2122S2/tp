@@ -28,9 +28,9 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         String userValue = "";
         BatchType batchType = BatchType.EQUALS;
         if (!argMultimap.arePrefixesPresent(PREFIX_SEARCH_TYPE) || argMultimap.getPreamble().isEmpty()
-            || (!argMultimap.arePrefixesPresent(PREFIX_EQUALS)
-                && !argMultimap.arePrefixesPresent(PREFIX_START_WITH)
-                && !argMultimap.arePrefixesPresent(PREFIX_END_WITH))) {
+            || (argMultimap.getValue(PREFIX_EQUALS).isEmpty()
+                && argMultimap.getValue(PREFIX_START_WITH).isEmpty()
+                && argMultimap.getValue(PREFIX_END_WITH).isEmpty())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchCommand.MESSAGE_USAGE));
         }
