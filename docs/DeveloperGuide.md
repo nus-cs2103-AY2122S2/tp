@@ -334,7 +334,8 @@ The data from the input is stored into the `AttendanceHashMap` class in pets, wh
 Model component that facilitates `Attendance` functionalities.
 
 The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods 
-in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively.
+in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
+supported by the methods in `AttendanceTag` and `AttendanceUtil` classes.
 
 The activity diagram below illustrates the workflow of attendance commands.
 
