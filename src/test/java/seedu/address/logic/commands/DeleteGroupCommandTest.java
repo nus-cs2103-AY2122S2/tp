@@ -32,8 +32,8 @@ public class DeleteGroupCommandTest {
 
     @Test
     public void execute_invalidGroup_throwsCommandException() {
-        Group groupToView = new GroupBuilder().withGroupName(NON_EXISTENT_GROUP_NAME).build();
-        ViewTaskCommand command = new ViewTaskCommand(groupToView);
+        Group groupToDelete = new GroupBuilder().withGroupName(NON_EXISTENT_GROUP_NAME).build();
+        ViewTaskCommand command = new ViewTaskCommand(groupToDelete);
 
         assertCommandFailure(command, model, Messages.MESSAGE_NON_EXISTENT_GROUP);
     }
