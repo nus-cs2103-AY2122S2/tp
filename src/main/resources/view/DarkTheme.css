@@ -158,6 +158,15 @@
      -fx-border-top-width: 1px;
 }
 
+.scroll-pane {
+    -fx-background: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
+    -fx-fill: derive(#1d1d1d, 20%);
+}
+
+
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
@@ -167,6 +176,7 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-padding: 5 10 5 10;
 }
 
 .result-display .label {
