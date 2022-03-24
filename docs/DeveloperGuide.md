@@ -194,17 +194,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### What is Tagging Task to Employee feature about?
 
-The Add Task mechanism is facilitated by `AddressBook`. 
-This feature enhances `AddressBook` by allowing to Additionally, the feature implements the following operations:
+The Tag Task mechanism is facilitated by `AddressBook`. 
+This feature enhances `AddressBook` by allowing users to assign multiple `Person` to a `Task`. Additionally, the feature implements the following operations:
 
 * `AddressBook#tagTask(Task,Person)` —  Assign `Person` to `Task`
-* `AddressBook#unTagTask(Task,Person)` —  Deallocate the `Person` from `Task`
+* `AddressBook#untagTask(Task,Person)` —  Deallocate the `Person` from `Task`
 
 For the command, the feature extends `command`, and is implemented as such:
 * `tagTask INDEX name/PERSON_NAME`
 * `untagTask INDEX name/PERSON_NAME`
 
-#### Implementation Flow of Task Adding feature
+#### Implementation Flow of Tagging Task to Employee feature
 
 Given below is an example usage scenario and how the Tagging Task to Employee mechanism behaves at each step.
 
@@ -218,9 +218,9 @@ Step 2. The user executes `tagTask 4 n/Alex Yeoh` command to assign `Alex Yeoh` 
 #### Design considerations:
 - The Tagging commands are efficient for users to assign a `Person` to be in-charge of a `Task`.
 - The Prefix allow users to simply input the name of the `Person` from ManageEZPZ.
-- At one glance, users will be able to see the `Task` assigned with the `Person` immediately after tagging.
+- Users will be able to see the `Task` assigned to `Person` immediately after tagging.
 
-#### UML Diagram for Adding Todo Task
+#### UML Diagram for tagTask Command
 
 The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
 
