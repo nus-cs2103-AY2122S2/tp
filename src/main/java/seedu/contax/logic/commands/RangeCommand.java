@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
-import seedu.contax.logic.LogicManager;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ParserUtil;
