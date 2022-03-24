@@ -76,17 +76,29 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    /**
+     * Handles managing reading and writing address book temporary files.
+     *
+     * @param addressBookBeforeCommand Data of the address book before modification.
+     * @param isUndoPrevCommand If it's undo command, read from the temporary files. If not write to it.
+     * @throws CommandException If there are any issues reading and writing the address book temporary files.
+     */
     private void handleTempAddressBookFiles(ReadOnlyAddressBook addressBookBeforeCommand, boolean isUndoPrevCommand)
             throws CommandException {
 
         if (isUndoPrevCommand) {
-            undoPrevCommand();
+            undoPrevModification();
         } else {
             savePrevAddressBookDataInTemp(addressBookBeforeCommand);
         }
     }
 
-    public void undoPrevCommand() throws CommandException {
+    /**
+     * Undos previous modification made to the address book data.
+     *
+     * @throws CommandException If there are any issues reading previous address book data or no undos can be done.
+     */
+    public void undoPrevModification() throws CommandException {
         Optional<ReadOnlyAddressBook> tempAddressFileData;
         try {
             tempAddressFileData = storage.popTempAddressFileData();
@@ -101,6 +113,12 @@ public class LogicManager implements Logic {
         }
     }
 
+    /**
+     *  Saves address book data before the data modification made into a temporary file.
+     *
+     * @param addressBookBeforeCommand Data of the address book before modification.
+     * @throws CommandException If there are issues saving the data into the temporary file.
+     */
     public void savePrevAddressBookDataInTemp(ReadOnlyAddressBook addressBookBeforeCommand) throws CommandException {
         if (addressBookBeforeCommand.equals(model.getAddressBook())) {
             return;
