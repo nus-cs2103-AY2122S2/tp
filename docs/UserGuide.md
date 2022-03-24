@@ -90,7 +90,7 @@ Some example commands you can try:
 
 Adds a new show to Trackermon. Note that the name of the show can only contain alphanumeric characters.
 
-Format: `add n/<NAME> s/<STATUS> [t/<COMMENT>] [t/<TAG>]…​`
+Format: `add n/<NAME> s/<STATUS> [c/<COMMENT>] [t/<TAG>]…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 A person can have any number of tags (including 0)
