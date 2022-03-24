@@ -196,7 +196,7 @@ The following is a detailed explanation of the operations which take place when 
 
 The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`
 
-![ShowEventSequenceDiagram.png](C:\Users\aryan\Desktop\Sem 6\CS2103\tP\src\main\resources\images\ShowEventsSequenceDiagram.png)
+![ShowEventSequenceDiagram.png](..\src\main\resources\images\ShowEventsSequenceDiagram.png)
 
 #### Design Considerations
 
