@@ -2,6 +2,7 @@ package manageezpz.model.task;
 
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -81,6 +82,10 @@ public class Task {
         return isDone;
     }
 
+    public String getDateTime() {
+        return "";
+    }
+
     /**
      * Returns the string representation of the task.
      * @return a string representation of the task, consisting of its description and whether its done or not.
@@ -127,5 +132,4 @@ public class Task {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(taskDescription);
     }
-
 }

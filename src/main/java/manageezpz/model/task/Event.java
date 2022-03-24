@@ -19,6 +19,26 @@ public class Event extends Task {
         this.endTime = endTime;
         super.setType("event");
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Time getStartTime() {
+        return startTime;
+    }
+
+    public Time getEndTime() {
+        return endTime;
+    }
+
+    @Override
+    public String getDateTime() {
+        return "at " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " " + startTime.format(DateTimeFormatter.ofPattern("h:mm a")) + " to"
+                + " " + endTime.format(DateTimeFormatter.ofPattern("h:mm a"));
+    }
+
     /**
      * Returns the string representation of an event.
      * @return a string representation of the event, consisting of its description, formatted date,
@@ -30,17 +50,4 @@ public class Event extends Task {
                 + " " + startTime.format(DateTimeFormatter.ofPattern("h:mm a")) + " to"
                 + " " + endTime.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
-
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
 }

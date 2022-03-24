@@ -9,6 +9,7 @@ import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.ReadOnlyAddressBook;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
 
 /**
  * API of the Logic component
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Returns the user prefs' address book file path.
