@@ -9,10 +9,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.FindAppointmentCommand;
-import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
-
-
+import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 
 
 public class FindAppointmentCommandParserTest {

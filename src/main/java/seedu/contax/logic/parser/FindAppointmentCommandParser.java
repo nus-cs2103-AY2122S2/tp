@@ -7,8 +7,9 @@ import java.util.Arrays;
 
 import seedu.contax.logic.commands.FindAppointmentCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
+import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
+
 
 
 

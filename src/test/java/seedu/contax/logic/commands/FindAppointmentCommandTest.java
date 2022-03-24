@@ -19,8 +19,8 @@ import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.appointment.Appointment;
-import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
+import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 import seedu.contax.testutil.AppointmentBuilder;
 
 
