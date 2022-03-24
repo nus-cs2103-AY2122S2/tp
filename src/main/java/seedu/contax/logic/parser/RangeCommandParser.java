@@ -25,7 +25,7 @@ public class RangeCommandParser implements Parser<RangeCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_RANGE_FROM, PREFIX_RANGE_TO);
 
-        String commandInput = args.split("from/")[0];
+        String commandInput = argMultimap.getPreamble();
 
         Index fromIndex;
         Index toIndex;

@@ -13,8 +13,8 @@ import seedu.contax.storage.CsvManager;
  */
 public class ExportCsvCommand extends Command {
     public static final String COMMAND_WORD = "exportcsv";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports contacts to CSV file"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Exports contacts to CSV file**"
+            + "Example: `" + COMMAND_WORD + "`";
     public static final String MESSAGE_SUCCESS = "Exported successfully";
     public static final String MESSAGE_FAILURE = "Export failed. Please try again";
     private static final String EXPORT_FILEPATH = "data/addressbook.csv";

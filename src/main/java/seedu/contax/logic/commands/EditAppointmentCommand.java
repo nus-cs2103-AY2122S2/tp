@@ -33,19 +33,19 @@ public class EditAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "editappointment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
-            + "by the index number used in the displayed appointment list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Edits the details of the appointment "
+            + "identified by the index number used in the displayed appointment list. "
+            + "Existing values will be overwritten by the input values.**\n"
+            + "Parameters: *INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "TIME] "
             + "[" + PREFIX_DURATION + "DURATION] "
-            + "[" + PREFIX_PERSON + "PERSON]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_PERSON + "PERSON]*\n"
+            + "Example: `" + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Product Meeting with John "
             + PREFIX_DURATION + "60 "
-            + PREFIX_PERSON + "2";
+            + PREFIX_PERSON + "2`";
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "No fields supplied, nothing was changed.";
@@ -116,10 +116,10 @@ public class EditAppointmentCommand extends Command {
         Duration updatedDuration = editAppointmentDescriptor.getDuration()
                 .orElse(appointmentToEdit.getDuration());
 
-        StartDateTime updatedStartDateTime = appointmentToEdit.getStartDateTime();
+        StartDateTime updatedStartDateTime = appointmentToEdit.getStartDateTimeObject();
         if (editAppointmentDescriptor.isDateTimeUpdated()) {
             // Final modifier is required for lambda expressions
-            final LocalDateTime originalDateTime = appointmentToEdit.getStartDateTime().value;
+            final LocalDateTime originalDateTime = appointmentToEdit.getStartDateTime();
             final LocalDateTime updatedDate = editAppointmentDescriptor.getStartDate()
                     .map(date -> DateUtil.updateDate(originalDateTime, date)).orElse(originalDateTime);
             LocalDateTime updatedDateTime = editAppointmentDescriptor.getStartTime()

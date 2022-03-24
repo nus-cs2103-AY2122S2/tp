@@ -14,9 +14,9 @@ import seedu.contax.model.tag.Tag;
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addtag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " : Adds a tag in ContaX. "
-            + "Parameters: " + PREFIX_NAME + "TAGNAME \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Potential Clients";
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "` : **Adds a tag in ContaX.** "
+            + "Parameters: *" + PREFIX_NAME + "TAGNAME* \n"
+            + "Example: `" + COMMAND_WORD + " " + PREFIX_NAME + "Potential Clients`";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %s";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";

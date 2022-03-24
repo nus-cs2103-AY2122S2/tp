@@ -117,7 +117,7 @@ public class JsonScheduleStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         Appointment edittedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.minusDays(1))
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().minusDays(1))
                 .withName("Different Meeting").build();
         original.addAppointment(edittedAppointment);
         jsonScheduleStorage.saveSchedule(original, filePath);

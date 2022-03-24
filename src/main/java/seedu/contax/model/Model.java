@@ -1,11 +1,14 @@
 package seedu.contax.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -152,7 +155,7 @@ public interface Model {
 
     /**
      * Returns true if an overlapping {@code appointment} exists in the schedule.
-     * See {@link Appointment#isOverlapping(Appointment)} for the overlap checking logic.
+     * See {@link Appointment#isOverlapping(ScheduleItem)} for the overlap checking logic.
      */
     boolean hasOverlappingAppointment(Appointment appointment);
 
@@ -176,7 +179,7 @@ public interface Model {
      */
     void setAppointment(Appointment target, Appointment editedAppointment);
 
-    /** Returns an unmodifiable view of the filtered appointment list */
+    /** Returns an unmodifiable view of the filtered appointment list. */
     ObservableList<Appointment> getFilteredAppointmentList();
 
     /**
@@ -184,5 +187,25 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    /** Returns an unmodifiable view of the slots between appointments to be highlighted. */
+    ObservableList<AppointmentSlot> getDisplayedAppointmentSlots();
+
+    /**
+     * Sets the list of slots between appointments to highlight.
+     *
+     * @param items A list containing the ranges between appointments to highlight.
+     */
+    void setDisplayedAppointmentSlots(List<AppointmentSlot> items);
+
+    /**
+     * Clears all the highlighted empty slots in the Schedule.
+     */
+    void clearDisplayedAppointmentSlots();
+
+    /**
+     * Returns a list of {@code ScheduleItems} currently in the Schedule.
+     */
+    ObservableList<ScheduleItem> getScheduleItemList();
 
 }

@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 
 public class DisjointAppointmentListTest {
@@ -69,7 +70,7 @@ public class DisjointAppointmentListTest {
     public void containsOverlapping_overlappingAppointmentsInList_returnsTrue() {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(10)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(10)).build();
         assertTrue(appointmentList.containsOverlapping(editedAppointment));
     }
 
@@ -91,13 +92,13 @@ public class DisjointAppointmentListTest {
 
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1)).build();
         assertThrows(OverlappingAppointmentException.class, () -> appointmentList.add(editedAppointment));
     }
 
     @Test
     public void add_unsortedNewAppointment_successSortsPosition() {
-        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime();
         appointmentList.add(APPOINTMENT_ALONE);
 
         Appointment beforeAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
@@ -147,7 +148,7 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1)).build();
 
         appointmentList.setAppointment(APPOINTMENT_ALICE, editedAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
@@ -160,7 +161,7 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusYears(1)).build();
 
         appointmentList.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
@@ -170,7 +171,7 @@ public class DisjointAppointmentListTest {
 
     @Test
     public void setAppointment_editedAppointmentDisjointDifferentOrdering_successSortsPosition() {
-        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime();
         Appointment modifiedAloneAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
                 .withStartDateTime(baseDateTime.minusDays(1)).build();
 
@@ -208,7 +209,7 @@ public class DisjointAppointmentListTest {
     public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusYears(1)).build();
         appointmentList.add(APPOINTMENT_ALICE);
         appointmentList.add(disjointAppointment);
 
@@ -253,7 +254,7 @@ public class DisjointAppointmentListTest {
     public void setAppointments_unsortedList_sortsListUponSetting() {
         appointmentList.add(APPOINTMENT_ALICE);
         List<Appointment> appointmentArrayList = new ArrayList<>();
-        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime();
         appointmentArrayList.add(APPOINTMENT_ALONE);
         appointmentArrayList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
                 .withStartDateTime(baseDateTime.minusDays(1)).build());
@@ -304,6 +305,151 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALONE);
         appointmentList.remove(APPOINTMENT_ALONE);
         assertEquals(new DisjointAppointmentList(), appointmentList);
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_nullInputs_throwsNullPointerException() {
+        LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:30");
+        assertThrows(NullPointerException.class, ()
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(null, refDateTime, 1));
+        assertThrows(NullPointerException.class, ()
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(refDateTime, null, 1));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_nonPositiveDuration_throwsIllegalArgumentException() {
+        LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:30");
+        assertThrows(IllegalArgumentException.class, ()
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(refDateTime, refDateTime, 0));
+        assertThrows(IllegalArgumentException.class, ()
+            -> new DisjointAppointmentList().findAvailableSlotsInRange(refDateTime, refDateTime, -1));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_rangeLargerThanOrEqualToSlot_success() {
+        LocalDateTime exactRangeStart = LocalDateTime.parse("2022-12-12T12:30");
+        LocalDateTime exactRangeEnd = LocalDateTime.parse("2022-12-12T14:30");
+        LocalDateTime largerRangeStart = exactRangeStart.minusMinutes(1);
+        LocalDateTime largerRangeEnd = exactRangeEnd.plusMinutes(1);
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        refList.add(appointment1);
+        refList.add(appointment2);
+
+        List<TimeRange> expectedList = List.of(new TimeRange(exactRangeStart, exactRangeEnd));
+
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 60));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 1));
+
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 121));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 60));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, largerRangeEnd, 1));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_rangeSmallerThanSlot_success() {
+        LocalDateTime exactRangeStart = LocalDateTime.parse("2022-12-12T12:30");
+        LocalDateTime exactRangeEnd = LocalDateTime.parse("2022-12-12T14:30");
+        LocalDateTime smallerRangeStart = exactRangeStart.plusMinutes(1);
+        LocalDateTime smallerRangeEnd = exactRangeEnd.minusMinutes(1);
+        LocalDateTime largerRangeStart = exactRangeStart.minusMinutes(1);
+        LocalDateTime largerRangeEnd = exactRangeEnd.plusMinutes(1);
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        refList.add(appointment1);
+        refList.add(appointment2);
+
+        List<TimeRange> expectedList = List.of(new TimeRange(smallerRangeStart, exactRangeEnd));
+
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeStart, exactRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(smallerRangeStart, exactRangeEnd, 119));
+
+        expectedList = List.of(new TimeRange(exactRangeStart, smallerRangeEnd));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(exactRangeStart, smallerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, smallerRangeEnd, 119));
+
+        expectedList = List.of(new TimeRange(smallerRangeStart, smallerRangeEnd));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeStart, smallerRangeEnd, 119));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(smallerRangeStart, smallerRangeEnd, 118));
+
+        expectedList = List.of(new TimeRange(smallerRangeStart, exactRangeEnd));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeStart, largerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(smallerRangeStart, largerRangeEnd, 119));
+
+        expectedList = List.of(new TimeRange(exactRangeStart, smallerRangeEnd));
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(largerRangeStart, smallerRangeEnd, 120));
+        assertEquals(expectedList, refList.findAvailableSlotsInRange(largerRangeStart, smallerRangeEnd, 119));
+
+        assertEquals(List.of(), refList.findAvailableSlotsInRange(smallerRangeEnd, smallerRangeStart, 1));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_rangeDisjointFromSlot_success() {
+        LocalDateTime beforeRangeStart = LocalDateTime.parse("2022-12-11T12:30");
+        LocalDateTime beforeRangeEnd = LocalDateTime.parse("2022-12-11T14:30");
+        LocalDateTime afterRangeStart = LocalDateTime.parse("2022-12-13T12:30");
+        LocalDateTime afterRangeEnd = LocalDateTime.parse("2022-12-13T14:30");
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        refList.add(appointment1);
+        refList.add(appointment2);
+
+        assertEquals(List.of(new TimeRange(beforeRangeStart, beforeRangeEnd)),
+                refList.findAvailableSlotsInRange(beforeRangeStart, beforeRangeEnd, 120));
+        assertEquals(List.of(new TimeRange(afterRangeStart, afterRangeEnd)),
+                refList.findAvailableSlotsInRange(afterRangeStart, afterRangeEnd, 120));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_leadingAndTrailingSlots_success() {
+        LocalDateTime rangeStart = LocalDateTime.parse("2022-12-12T11:30");
+        LocalDateTime rangeEnd = LocalDateTime.parse("2022-12-12T15:30");
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        refList.add(appointment1);
+        refList.add(appointment2);
+
+        List<TimeRange> expectedResult = List.of(
+                new TimeRange(rangeStart, LocalDateTime.parse("2022-12-12T12:00")),
+                new TimeRange(LocalDateTime.parse("2022-12-12T12:30"), LocalDateTime.parse("2022-12-12T14:30")),
+                new TimeRange(LocalDateTime.parse("2022-12-12T15:00"), rangeEnd)
+        );
+
+        assertEquals(expectedResult, refList.findAvailableSlotsInRange(rangeStart, rangeEnd, 30));
+        assertEquals(expectedResult, refList.findAvailableSlotsInRange(rangeStart, rangeEnd, 15));
+        assertEquals(List.of(
+                new TimeRange(LocalDateTime.parse("2022-12-12T12:30"), LocalDateTime.parse("2022-12-12T14:30"))
+        ), refList.findAvailableSlotsInRange(rangeStart, rangeEnd, 31));
     }
 
     @Test

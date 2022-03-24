@@ -1,12 +1,15 @@
 package seedu.contax.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.DisjointAppointmentList;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * Wraps all data at the Schedule level.
@@ -49,22 +52,6 @@ public class Schedule implements ReadOnlySchedule {
     }
 
     /**
-     * Returns true if an appointment that is equals to {@code target} exists in the schedule.
-     */
-    public boolean hasAppointment(Appointment target) {
-        requireNonNull(target);
-        return appointments.contains(target);
-    }
-
-    /**
-     * Returns true if an appointment that overlaps with {@code target} exists in the schedule.
-     */
-    public boolean hasOverlappingAppointment(Appointment target) {
-        requireNonNull(target);
-        return appointments.containsOverlapping(target);
-    }
-
-    /**
      * Adds an appointment to the schedule.
      * There must not exist any appointment in the schedule that overlaps with {@code target}.
      */
@@ -93,15 +80,37 @@ public class Schedule implements ReadOnlySchedule {
         appointments.remove(target);
     }
 
+    // ====== Read Methods ===================================================================================
+
+    @Override
+    public ObservableList<Appointment> getAppointmentList() {
+        return appointments.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment target) {
+        requireNonNull(target);
+        return appointments.contains(target);
+    }
+
+    @Override
+    public boolean hasOverlappingAppointment(Appointment target) {
+        requireNonNull(target);
+        return appointments.containsOverlapping(target);
+    }
+
+    @Override
+    public List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                        int minimumDuration) {
+        requireAllNonNull(start, end, minimumDuration);
+        return appointments.findAvailableSlotsInRange(start, end, minimumDuration);
+    }
+
     // ====== Util Methods ===================================================================================
 
     @Override
     public String toString() {
         return appointments.size() + " appointments";
-    }
-
-    public ObservableList<Appointment> getAppointmentList() {
-        return appointments.asUnmodifiableObservableList();
     }
 
     @Override

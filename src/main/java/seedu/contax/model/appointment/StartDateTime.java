@@ -5,11 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.contax.model.chrono.TemporalComparable;
+
 /**
  * Represents an {@link Appointment}'s starting DateTime in the schedule.
  * Guarantees: Immutable; is always a valid {@link LocalDateTime}; Seconds field is always zeroed.
  */
-public class StartDateTime implements Comparable<StartDateTime> {
+public class StartDateTime implements TemporalComparable {
     public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
     public static final String MESSAGE_CONSTRAINTS = "DateTime has to be valid";
@@ -44,7 +46,12 @@ public class StartDateTime implements Comparable<StartDateTime> {
     }
 
     @Override
-    public int compareTo(StartDateTime o) {
-        return this.value.compareTo(o.value);
+    public LocalDateTime getComparableDateTime() {
+        return this.value;
+    }
+
+    @Override
+    public int compareTo(TemporalComparable o) {
+        return this.value.compareTo(o.getComparableDateTime());
     }
 }
