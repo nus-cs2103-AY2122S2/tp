@@ -159,6 +159,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Sort feature
+#### Implementation
+
+The sort mechanism is facilitated by `PersonComparator`. It compares `Person` objects and stores internally the list of fields to be ordered on as well as the order on each field ("ascending" vs "descending"). 
+`PersonComparator` then is passed to `Model`.
+
+Within Model component, 'Model' then passes it into `AddressBook`, and which is then passed into `UniquePersonList` and finally to `ObservableList`. `ObservableList` then sorts itself based on the comparator.
+
+Below is a sequence diagram showing how sort operation works:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+`PersonComparator` implements the `Comparator<Person>` interface. 
+For a comparator c: 
+1. If x < y, `c.compare(x, y) < 0`
+2. If x > y, `c.compare(x, y) > 0`
+3. If x == y, `c.compare(x, y) == 0`
+
+Within the `PersonComparator`, it compares both persons based on the first field in the list of fields. If they are not equivalent, it returns an Integer depending on the comparison. 
+Else, it will check the next field. It returns a `0` when there are no fields left to compare. If `desc` was called on a field, return value will be multipled by `-1`, to invert the ordering.
+
+### Alternatives
+#### Aspect: How to compare: `Comparator` vs `Comparable`
+####1. Alternative 1
+Create many comparators for `Person` depending on what field to compare on and how to compare that field.
+- Pros: More flexibility for ways to compare each field. E.g. can compare`Module` field based on number of modules, lexicographic ordering, etc.
+- Cons: More complexity for user syntax. Less encapsulation as `Person` has to know the details of it's fields and how it desires to sort them. 
+Has to pass all `PersonComparator` that were chosen into `Model` one after another so less efficient.
+
+####2. Alternative 2 (Current)
+Each field implements a `Comparable` interface.
+- Pros: Easier to implement.
+- Cons: Less flexible. Passes only one `PersonComparator` which stores the fields within itself. Each comparison stops once field is not equivalent, therefore is more efficient.
+
 ### GUI for Adding, Editing
 
 #### Implementation
@@ -176,6 +211,7 @@ The following activity diagram shows how a `Person` with `Status` and `Module` i
 ![GuiAddActivityDiagram](images/GuiAddActivityDiagram.png)
 
 Editing through `EditWindow` is largely similar to the above.
+
 
 
 ### \[Proposed\] Undo/redo feature
