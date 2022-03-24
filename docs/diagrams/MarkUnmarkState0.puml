@@ -6,18 +6,18 @@ skinparam ClassBorderColor #000000
 title Initial state
 
 package State {
-    class State1 as "__mm0:ModelManger__"
-    class Lesson1 as "__l1:Lesson__"
-    class Lesson2 as "__l2:Lesson__"
+    class State1 as "__ta0:TAssist__"
+    class Student1 as "__s1:Student__"
+    class Student2 as "__s2:Student__"
     class ClassGroup1 as "__c1:ClassGroup__"
-    class ClassGroup2 as "__c2:ClassGroup__"
+    class Lesson1 as "__l1:Lesson__"
 }
 
-State1 *--> Lesson1
-State1 *--> Lesson2
 State1 *--> ClassGroup1
-State1 *--> ClassGroup2
-Lesson1 --> ClassGroup1
-Lesson2 --> ClassGroup2
+State1 *--> Student1
+State1 *--> Student2
+ClassGroup1 --> Student1
+ClassGroup1 --> Student2
+ClassGroup1 *--> Lesson1
 
 @end
