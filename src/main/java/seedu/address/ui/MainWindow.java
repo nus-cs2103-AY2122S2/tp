@@ -70,7 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-
+        emailWindow = new EmailWindow(logic.getFilteredPersonList());
     }
 
     public Stage getPrimaryStage() {
@@ -160,10 +160,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleEmailWindow() {
-        if (emailWindow == null) {
-            createEmailWindow();
-        }
-
         if (!emailWindow.isShowing()) {
             createEmailWindow();
         } else {
@@ -173,7 +169,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Instantiates an EmailWindow and shows it.
+     * Instantiates a new EmailWindow and shows it.
      */
     public void createEmailWindow() {
         emailWindow = new EmailWindow(logic.getFilteredPersonList());
