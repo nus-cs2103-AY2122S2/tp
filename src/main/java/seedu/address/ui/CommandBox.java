@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
@@ -87,7 +86,7 @@ public class CommandBox extends UiPart<Region> {
             commandHistoryPointerIndex--;
             String previousCommand = commandHistory.get(commandHistoryPointerIndex);
             setCommandBoxText(previousCommand);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return; //Nothing needs to be done for requests beyond what is stored in history.
         }
     }
@@ -102,7 +101,7 @@ public class CommandBox extends UiPart<Region> {
             commandHistoryPointerIndex++;
             String nextCommand = commandHistory.get(commandHistoryPointerIndex);
             setCommandBoxText(nextCommand);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return; //Nothing needs to be done for requests beyond what is stored in history.
         }
     }
