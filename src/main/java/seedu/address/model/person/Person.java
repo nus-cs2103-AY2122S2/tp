@@ -144,7 +144,7 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getPrevDateMet().equals(getPrevDateMet())
                 && otherPerson.getInfo().equals(getInfo());
-                // && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
+        // && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
     }
 
     @Override
