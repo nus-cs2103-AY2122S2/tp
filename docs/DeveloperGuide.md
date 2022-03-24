@@ -157,9 +157,11 @@ the filtered list (the current list shown in the UI) from `Model` and picks out 
 provided by the user's input. It then sets `ModelManager#selectedStudent` using the `ModelManager#setSelectedStudent()`
 method, which will be used by `MainWindow` later on.
 
-[//]: # (Insert object diagram here to show what attributes CommandResult have.
-Also explain why certain attributes are set and how they will be used by MainWindow to
-show certain elements)
+[//]: # (Insert object diagram here to show what attributes CommandResult have. )
+
+[//]: # (Also explain why certain attributes are set and how they will be used by MainWindow to)
+
+[//]: # (show certain elements&#41;)
 
 `ViewStudentInfoCommand` creates a `CommandResult` object, with the attributes shown above. This is then returned back
 to `LogicManager` which returns it back to `MainWindow`.
