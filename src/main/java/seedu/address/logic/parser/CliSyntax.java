@@ -22,7 +22,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_NEW_TAG = new Prefix("nt/");
 
     public static final Prefix PREFIX_TITLE = new Prefix("ttl/");
-    public static final Prefix PREFIX_NEW_TITLE = new Prefix("nttl/");
     public static final Prefix PREFIX_LOG_INDEX = new Prefix("id/");
     public static final Prefix FLAG_ALL = new Prefix("-a");
 

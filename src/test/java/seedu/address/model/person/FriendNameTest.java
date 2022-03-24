@@ -37,4 +37,20 @@ public class FriendNameTest {
         assertTrue(FriendName.isValidFriendName("Capital Tan")); // with capital letters
         assertTrue(FriendName.isValidFriendName("David Roger Jackson Ray Jr 2nd")); // long names
     }
+
+    @Test
+    void compareName() {
+        FriendName first = new FriendName("A");
+        FriendName second = new FriendName("B");
+        FriendName third = new FriendName("C");
+        FriendName fourth = new FriendName("D");
+        FriendName equalsFirst = new FriendName("A");
+
+        assertTrue(first.compareTo(second) < 0);
+        assertTrue(first.compareTo(third) < 0);
+        assertTrue(first.compareTo(fourth) < 0);
+        assertTrue(first.compareTo(equalsFirst) == 0);
+        assertTrue(second.compareTo(first) > 0);
+        assertFalse(fourth.compareTo(third) < 0);
+    }
 }

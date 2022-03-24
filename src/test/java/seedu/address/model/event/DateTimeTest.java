@@ -35,6 +35,25 @@ class DateTimeTest {
     }
 
     @Test
+    void compareDateTime() {
+        DateTime first = new DateTime("14-04-2000 0000");
+        DateTime second = new DateTime("14-04-2000 0001");
+        DateTime third = new DateTime("15-04-2000 0000");
+        DateTime fourth = new DateTime("14-05-2000 0000");
+        DateTime fifth = new DateTime("14-05-2001 0000");
+        DateTime equalsFirst = new DateTime("14-04-2000 0000");
+
+        // Check ordering of datetimes
+        assertTrue(first.compareTo(second) < 0);
+        assertTrue(first.compareTo(third) < 0);
+        assertTrue(first.compareTo(fourth) < 0);
+        assertTrue(first.compareTo(fifth) < 0);
+        assertTrue(first.compareTo(equalsFirst) == 0);
+        assertTrue(second.compareTo(first) > 0);
+        assertTrue(fifth.compareTo(fourth) > 0);
+    }
+
+    @Test
     void toInputFormat() {
         String validInput = "15-12-2020 2359";
         DateTime dateTime = new DateTime(validInput);

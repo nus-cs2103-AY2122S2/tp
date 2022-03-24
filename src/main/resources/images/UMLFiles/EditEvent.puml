@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes EditEventCommand;
+:EditEventParser parses the command provided by user;
+if () then ([Command is valid])
+    :EditEventCommand is executed;
+    if () then ([Index is valid])
+        if () then ([Edited Event is Duplicate])
+            :Show duplicate event message;
+        else ([else])
+            if () then ([Edited friend names are valid])
+                :Event at index is replaced with edited event;
+                :Show EditEventCommand success message;
+            else ([else])
+                :Show invalid friend error;
+            endif
+        endif
+    else ([Index is invalid])
+        :Show invalid index error;
+    endif
+else ([Command is invalid])
+    :Show parse error message;
+endif
+stop
+
+@enduml
