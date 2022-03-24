@@ -73,6 +73,13 @@ public class AddPropertyToBuyCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, buyerWithProperty));
     }
 
+    /**
+     * Creates a Buyer instance with the updated PropertyToBuy.
+     *
+     * @param buyer The original buyer.
+     * @param property The new PropertyToBuy.
+     * @return A new Buyer.
+     */
     public Buyer createPropertyForBuyer(Buyer buyer, PropertyToBuy property) {
         assert buyer != null;
 
@@ -83,6 +90,7 @@ public class AddPropertyToBuyCommand extends Command {
 
         return new Buyer(buyerName, buyerPhone, buyerAppointment, buyerTags, property);
     }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

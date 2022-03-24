@@ -43,6 +43,7 @@ public class AddPropertyToBuyCommandParser {
         String location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         PriceRange priceRange = ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_PRICE_RANGE).get());
         PropertyToBuy propertyToBuy = new PropertyToBuy(new House(houseType, location), priceRange);
+
         return new AddPropertyToBuyCommand(index, propertyToBuy);
     }
 

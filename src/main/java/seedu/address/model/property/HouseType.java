@@ -61,6 +61,9 @@ public enum HouseType {
         }
     };
 
+    /**
+     * A HashMap to map a possible string interpretation of the HouseType to the actual HouseType.
+     */
     private final HashMap<String, HouseType> houseMappings = new HashMap<>();
 
     public static final String MESSAGE_CONSTRAINTS = "Only the following house types are available: " +
@@ -73,12 +76,23 @@ public enum HouseType {
             HouseType.MANSION + " " +
             HouseType.SEMIDETACHED;
 
+    /**
+     * Constructor of the enum.
+     *
+     * @param houseTypes The set of possible HouseType interpretations.
+     */
     HouseType(String... houseTypes) {
         for (String s : houseTypes) {
             houseMappings.put(s, this);
         }
     }
 
+    /**
+     * Checks if the given string matches any of the HouseTypes.
+     *
+     * @param house The string.
+     * @return True if it matches, False otherwise.
+     */
     public static boolean isValidHouseType(String house) {
         for (HouseType h : HouseType.values()) {
             HouseType houseType = h.houseMappings.get(house.toLowerCase());
@@ -89,6 +103,12 @@ public enum HouseType {
         return false;
     }
 
+    /**
+     * Retrieves the HouseType from a given string.
+     *
+     * @param house The string.
+     * @return A HouseType.
+     */
     public static HouseType getHouseType(String house) {
         for (HouseType h : HouseType.values()) {
             HouseType houseType = h.houseMappings.get(house.toLowerCase());

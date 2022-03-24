@@ -32,6 +32,12 @@ public class Location {
             && location.equals(((Location) other).location)); // state check
     }
 
+    /**
+     * Checks if the location string is empty or not.
+     *
+     * @param location The string.
+     * @return False if string is empty, True otherwise.
+     */
     public static boolean isValidLocation(String location) {
         return location.isEmpty();
     }

@@ -64,6 +64,12 @@ public class PriceRange {
         }
     }
 
+    /**
+     * Retrieves the numerical values from the String priceRange.
+     *
+     * @param priceRange The string.
+     * @return An int[] containing lower and upper bounds.
+     */
     private int[] getValuesFromString(String priceRange) {
         String[] values = priceRange.split(",");
         int lower = Integer.parseInt(values[0]);
