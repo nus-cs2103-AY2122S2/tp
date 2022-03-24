@@ -154,6 +154,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### `addbuyer` feature
+The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](###-logic-component). Mainly, it can be broken down into these steps:
+
+Step 1:
+
+The user types input E.g. `addbuyer n/David p/12345678` into the `CommandBox`
+
+Step 2:
+
+The `execute(input)` method of `LogicManager`, a subclass of the Logic component, is called with the given input.
+An instance of the `AddressBookParser` will begin to parse the input into 2 main sections: the **command**
+and the **body** of the command.
+
+The main job of `AddressBookParser` at this step is to identify the `addbuyer` **command** which was supplied as the 1st word in the input string.
+
+After which, control is handed over to the `AddBuyerCommandParser` component by calling its `AddBuyerCommandParser#parse(body)` method to parse the **body** which was separated out.
+
+Step 3:
+
+`AddBuyerCommandParser#parse(body)` will handle the **body** of the input string by verifying that the required fields: `name` and `phone` are indicated in the message body.
+
+In our example, since `n/David p/12345678` was included, the component will verify that all required fields are present.
+
+At this step, the new `Buyer` will have been successfully created and its fields verified for correctness. A new `AddBuyerCommand` with the new Buyer is returned to the `AddressBookParser` to the `LogicManager`
+
+Step 4:
+
+The `LogicManager` component then calls `AddBuyerCommand#execute(model)`method of the new `AddBuyerCommand`instance containing the Buyer, with the `Model`component created from [Model component](###-model-component).
+
+In this method, if the Buyer does not currently already reside in the application, he/she is added into the Model through the `Model#addBuyer(Buyer)` command and stored in the Model (Refer to [Model component](###-model-component) to see how Buyers are stored into the model)
+
+Step 5:
+
+`LogicManager` component will then attempt to update the storage with this new `Model` through the `Storage#saveBuyerAddressBook()` method.
+
+Step 6:
+
+Finally, a `CommandResult` representing the successful `addbuyer` command is returned to be displayed by `UI` component (Refer to [Architecture](###-architecture))
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
