@@ -60,6 +60,24 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withUserType(VALID_USERTYPE_BUYER)
             .withPreference(VALID_PREFERENCE_BOB).build();
 
+    // Sellers with properties
+    public static final Person PROTY = new PersonBuilder().withName("Proty Per").withPhone("35748962")
+            .withEmail("hastwo@property.com").withAddress("orchard").withUserType("seller")
+            .withProperties("East,4th street,1-room,$100000").withProperties("West,5th street,2-room,$300000")
+            .build();
+    public static final Person PERTY = new PersonBuilder().withName("Perty Pro").withPhone("45693286")
+            .withEmail("hassome@property.com").withAddress("somerset").withUserType("seller")
+            .withProperties("North,6th street,3-room,$500000").withProperties("South,7th street,4-room,$700000")
+            .build();
+
+    // Buyers with preference
+    public static final Person PREF = new PersonBuilder().withName("Pref Fen").withPhone("37586624")
+            .withEmail("hasa@preference.com").withAddress("newton").withUserType("buyer")
+            .withPreference("East,2-room,$50000,$500000").build();
+    public static final Person FEREN = new PersonBuilder().withName("Feren Nence").withPhone("25594936")
+            .withEmail("hasanother@preference.com").withAddress("novena").withUserType("buyer")
+            .withPreference("West,3-room,$100000,$1000000").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -77,5 +95,21 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    /**
+     * Returns an {@code AddressBook} with various types of persons.
+     */
+    public static AddressBook getVariousAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getVariousPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    public static List<Person> getVariousPersons() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE,
+                PROTY, PERTY, PREF, FEREN));
     }
 }
