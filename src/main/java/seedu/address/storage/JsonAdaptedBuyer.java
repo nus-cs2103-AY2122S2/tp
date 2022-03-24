@@ -14,6 +14,7 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.NullPropertyToBuy;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
@@ -25,23 +26,24 @@ public class JsonAdaptedBuyer {
     private final String phone;
     private final String appointment;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final PropertyToBuy desiredProperty;
+    private final JsonAdaptedPropertyToBuy propertyToBuy;
 
     /**
      * Constructs a {@code JsonAdaptedclient} with the given client details.
      */
     @JsonCreator
     public JsonAdaptedBuyer(@JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone, @JsonProperty("appointment") String appointment,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                            @JsonProperty("property") PropertyToBuy desiredProperty) {
+                            @JsonProperty("phone") String phone,
+                            @JsonProperty("appointment") String appointment,
+                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                            @JsonProperty("property") JsonAdaptedPropertyToBuy propertyToBuy) {
         this.name = name;
         this.phone = phone;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
         this.appointment = appointment;
-        this.desiredProperty = desiredProperty;
+        this.propertyToBuy = propertyToBuy;
     }
 
     /**
@@ -54,7 +56,7 @@ public class JsonAdaptedBuyer {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         appointment = source.getAppointment().value;
-        desiredProperty = source.getDesiredProperty();
+        propertyToBuy = new JsonAdaptedPropertyToBuy(source.getDesiredProperty());
     }
 
     /**
@@ -92,8 +94,9 @@ public class JsonAdaptedBuyer {
         final Appointment modelAppointment = new Appointment(appointment);
 
         final Set<Tag> modelTags = new HashSet<>(buyerTags);
-        final PropertyToBuy modelDesiredProperty = desiredProperty == null
-                ? null : new PropertyToBuy(desiredProperty.getHouse(), desiredProperty.getBuyRange());
+
+        final PropertyToBuy modelDesiredProperty = propertyToBuy == null
+                ? NullPropertyToBuy.getNullPropertyToBuy() : new PropertyToBuy(propertyToBuy.getHouse(), propertyToBuy.getPriceRange());
         return new Buyer(modelName, modelPhone, modelAppointment, modelTags, modelDesiredProperty);
     }
 }

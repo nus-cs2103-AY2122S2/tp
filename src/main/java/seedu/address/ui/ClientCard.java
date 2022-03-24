@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
+import seedu.address.model.property.NullPropertyToBuy;
 
 /**
  * An UI component that displays information of a {@code client}.
@@ -59,9 +60,14 @@ public class ClientCard extends UiPart<Region> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        propertyType.setText(client.getDesiredProperty().getHouse().getHouseType().toString());
-        propertyLocation.setText(client.getDesiredProperty().getHouse().getLocation().toString());
-        propertyRange.setText(client.getDesiredProperty().getBuyRange().toString());
+        if (client.getDesiredProperty() instanceof NullPropertyToBuy) {
+            System.out.println("The NullPropertyToBuy is accessed");
+
+        } else {
+            propertyType.setText(client.getDesiredProperty().getHouse().getHouseType().toString());
+            propertyLocation.setText(client.getDesiredProperty().getHouse().getLocation().toString());
+            propertyRange.setText(client.getDesiredProperty().getPriceRange().toString());
+        }
     }
 
     @Override
