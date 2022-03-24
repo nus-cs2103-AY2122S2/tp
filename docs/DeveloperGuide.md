@@ -17,9 +17,13 @@ title: Developer Guide
 * [**Implementation**](#implementation)
     * [Find command feature](#find-command-feature)
         * [What it does](#what-it-does)
-        * [Implementation](#implementation-1)
+        * [Implementation](#implementation)
         * [Design consideration](#design-considerations)
             * [How find executes](#aspect-how-find-executes)
+    * [Status Feature](#status-feature)
+        * [What it does](#what-it-does)
+        * [Implementation](#implementation)
+        * [Design consideration](#design-considerations)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -255,8 +259,7 @@ The following activity diagram summarizes what happens when a user executes a va
 ---
 
 ### Status feature
-
-#### What it does it do
+#### What it does
 `Status` class is an attribute within the `Show` class. `Status` represents the 
 watched status of the show which can be represented by `completed` and `watching`. 
 
