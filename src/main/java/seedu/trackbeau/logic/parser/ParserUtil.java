@@ -10,10 +10,12 @@ import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.StringUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.service.Duration;
 import seedu.trackbeau.model.service.Price;
@@ -127,6 +129,36 @@ public class ParserUtil {
             throw new ParseException(HairType.MESSAGE_CONSTRAINTS);
         }
         return new HairType(trimmedHairType);
+    }
+
+    /**
+     * Parses a {@code String birthdate} into an {@code Birthdate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Birthdate} is invalid.
+     */
+    public static Birthdate parseBirthdate(String birthDate) throws ParseException {
+        requireNonNull(birthDate);
+        String trimmedbirthDate = birthDate.trim();
+        if (!Birthdate.isValidBirthdate(trimmedbirthDate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthdate(birthDate);
+    }
+
+    /**
+     * Parses a {@code String regDate} into an {@code RegistrationDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code RegistrationDate} is invalid.
+     */
+    public static RegistrationDate parseRegistrationDate(String regDate) throws ParseException {
+        requireNonNull(regDate);
+        String trimmedRegDate = regDate.trim();
+        if (!RegistrationDate.isValidRegistrationDate(trimmedRegDate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new RegistrationDate(regDate);
     }
 
     /**

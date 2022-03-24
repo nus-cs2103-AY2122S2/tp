@@ -1,29 +1,29 @@
 {
-  "customers": [
-    {
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "alice@example.com",
-      "address": "123, Jurong West Ave 6, #08-111",
-      "skinType": "oily",
-      "hairType": "dry",
-      "staffs": [
-        "John"
-      ],
-      "services": [],
-      "allergies": []
-    },
-    {
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "pauline@example.com",
-      "address": "4th street",
-      "skinType": "oily",
-      "hairType": "dry",
-      "staffs": [],
-      "services": [],
-      "allergies": []
-    }
-  ],
+  "customers": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "skinType": "oily",
+    "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
+    "staffs":  ["John"],
+    "services" : [],
+    "allergies": []
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "address": "4th street",
+    "skinType": "oily",
+    "hairType": "dry",
+    "birthdate": "01-01-2000",
+    "regDate": "23-03-2022",
+    "staffs":  [],
+    "services" : [],
+    "allergies": []
+  } ],
   "services": []
+
 }

@@ -43,6 +43,10 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label hairType;
     @FXML
+    private Label birthDate;
+    @FXML
+    private Label regDate;
+    @FXML
     private FlowPane staffs;
     @FXML
     private FlowPane services;
@@ -62,6 +66,8 @@ public class CustomerCard extends UiPart<Region> {
         email.setText(customer.getEmail().value);
         skinType.setText("Skin Type: " + customer.getSkinType().value);
         hairType.setText("Hair Type: " + customer.getHairType().value);
+        birthDate.setText("Birthday: " + customer.getBirthdate().toString());
+        regDate.setText("Registration Date: " + customer.getRegDate().toString());
         customer.getServices().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> services.getChildren().add(new Label(tag.tagName)));

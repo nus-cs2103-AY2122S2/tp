@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.trackbeau.logic.commands.EditCommand;
 import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
 import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
@@ -41,6 +42,7 @@ public class EditCustomerDescriptorBuilder {
         descriptor.setAddress(customer.getAddress());
         descriptor.setSkinType(customer.getSkinType());
         descriptor.setHairType(customer.getHairType());
+        descriptor.setBirthdate(customer.getBirthdate());
         descriptor.setStaffs(customer.getStaffs());
         descriptor.setServices(customer.getServices());
         descriptor.setAllergies(customer.getAllergies());
@@ -91,6 +93,14 @@ public class EditCustomerDescriptorBuilder {
      */
     public EditCustomerDescriptorBuilder withHairType(String hairType) {
         descriptor.setHairType(new HairType(hairType));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Birthdate} of the {@code EditCustomerDescriptor} that we are building.
+     */
+    public EditCustomerDescriptorBuilder withBirthdate(String birthdate) {
+        descriptor.setBirthdate(new Birthdate(birthdate));
         return this;
     }
 
