@@ -129,12 +129,12 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-Let's take a look at the internal structure of the `CLIENT` entity.
+Let's take a look at the internal structure of the `CLIENT` entity:
+
+<img src="images/ClientClassDiagram.png" width="450" />
 
 * all abstract `CLIENT` objects (Buyer or Seller) have a name and phone number.
 * `Buyer` has `PropertyToBuy` while `Seller` has `PropertyToSell`.
-  
-<img src="images/ClientClassDiagram.png" width="450" />
 
 Now, what PropertyToBuy and PropertyToSell classes encapsulate:
 
@@ -142,9 +142,8 @@ Now, what PropertyToBuy and PropertyToSell classes encapsulate:
 
 
 <div markdown="span" class="alert alert-info">:information_source: Note that We have decided to separate these 2 fields and NOT make them inherit an abstract `Property` class.
-* This is because sellers know the exact property(and address of the property) that they are selling.
-
-* We can hence extend the code base more flexibly in the future if we remove some fields from PropertyToBuy or add more fields to PropertyToSell.
+ This is because sellers know the exact property (and address of the property) that they are selling.
+ We can hence extend the code base more flexibly in the future if we remove some fields from PropertyToBuy or add more fields to PropertyToSell.
 </div>  
 
 ### Storage component
@@ -180,16 +179,18 @@ Format: `match buyer_index`
 * The fields are:
     * `buyer_index` - index of the Buyer that the user is trying to match with Sellers.
     
+Example: `match 2`
+    
 Result:
 * The list of sellers that match the buyer's demands are displayed in the UI.
 
 #### How match is going to be implemented
 
-* The match command will match a Buyer with Sellers that have a `PropertyToSell` that matches the demands of the `PropertyToBuy` of the buyer.
+* The match command will match a Buyer with Sellers whose `PropertyToSell` matches the demands of the `PropertyToBuy` of the buyer.
 
 * How does match filter the sellers (How does `PropertyToBuy` match with `PropertyToSell`:
 
-    -  If there exists a price where a buyer is willing to buy and seller is willing to sell for in their respective `buyRange` and `sellRange`, **AND**
+    -  If there exists a **price** where a buyer is willing to buy and seller is willing to sell for in their respective `buyRange` and `sellRange`, **AND**
     - Their House are equal (i.e, the Location and HouseType of the house matches)
 
 * An example:
@@ -206,12 +207,13 @@ Result:
         - `ProperyToSell`: 
             - `House` with `HouseType`: `BUNGALOW` and `Location`: `Serangoon` as well
             - His `PriceRange` that he is willing to sell the property for is (99 999, 200 000)
+      
     - In this case, the PropertyToBuy and PropertyToSell can match(same House, and 99 999 - 100 000 dollars is a matching price)
     - `match 2` will display the list of sellers that match the buyer *Janald*. As a result, *Junhong* will be one of the sellers displayed.
     
-#### Why match is going to be implemented
+#### Why match should be implemented
 
-* So far, our AgentSee application helps housing agents to keep track of their clients in an efficient manner.
+* Our AgentSee application helps housing agents to keep track of their clients in an efficient manner.
 
 * Since there are so many buyers and sellers to keep track of, it would be useful for agents to automate the matching of buyers to sellers.
 * The match feature will help agents filter and find a matching property that a buyer wants to buy and a seller wants to sell, which is of great convenience for agents to liase buyers with sellers.
@@ -230,8 +232,7 @@ Result:
 ### \[Proposed\] Bargain/Negotiate feature
 
 * An additional feature that could be implemented in the future.
-    
-=======
+
 ### `addbuyer` feature
 The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
 
