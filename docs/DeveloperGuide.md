@@ -126,12 +126,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `client` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `client` needing their own `Tag` objects.<br>
+Let's take a look at the internal structure of the `CLIENT` entity.
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/ClientClassDiagram.png" width="450" />
 
-</div>
+Now, the PropertyToBuy and PropertyToSell low-level details.
 
+<img src="images/PropertyClassDiagram.png" width="450" />
+
+NOTE: We have decided to separate these 2 fields and NOT make them inherit an abstract `Property` class, because sellers know the exact property(and address of the property) that they are selling. We can extend the code base more flexibly in the future if we remove some fields from PropertyToBuy or add more fields to PropertyToSell
 
 ### Storage component
 
