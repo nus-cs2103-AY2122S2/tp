@@ -101,6 +101,8 @@ public class LogicManager implements Logic {
         int totalPersons = 0;
         //Resets to full list of Persons to prevent any logical error after `find` command
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //@flairekq
+        //Author provided code to help with arrow code issue: https://github.com/nus-cs2103-AY2122S2/forum/issues/233
         if (!Region.isValidRegion(region)) { //defensive code
             return totalPersons;
         }
@@ -119,6 +121,7 @@ public class LogicManager implements Logic {
             }
         }
         return totalPersons;
+        //@flairekq
     }
 
     @Override
