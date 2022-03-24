@@ -93,7 +93,7 @@ public class Product implements Distinguishable<Product> {
      * Returns true if the {@code Item} is in the current viewed list.
      */
     public boolean hasItem(Item i) {
-        return filteredItems.contains(i);
+        return items.hasItem(i);
     }
 
     /**
