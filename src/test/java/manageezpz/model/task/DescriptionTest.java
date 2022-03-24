@@ -27,8 +27,6 @@ public class DescriptionTest {
         // invalid description
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
-        assertFalse(Description.isValidDescription("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidDescription("peter*")); // contains non-alphanumeric characters
 
         // valid description
         assertTrue(Description.isValidDescription("read book")); // alphabets only
@@ -36,5 +34,7 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("read 3 books")); // alphanumeric characters
         assertTrue(Description.isValidDescription("Go Run")); // with capital letters
         assertTrue(Description.isValidDescription("Read 50 books in the library non stop")); // long descriptions
+        assertTrue(Description.isValidDescription("^!@#$%%^%&^*&(*&(")); // only non-alphanumeric characters
+        assertTrue(Description.isValidDescription("peter*")); // contains non-alphanumeric characters
     }
 }

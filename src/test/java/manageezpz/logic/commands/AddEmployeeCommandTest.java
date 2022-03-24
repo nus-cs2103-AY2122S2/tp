@@ -205,6 +205,16 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
+        public boolean hasPriority(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -226,6 +236,11 @@ public class AddEmployeeCommandTest {
 
         @Override
         public void tagTask(Task task, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void untagTask(Task task, Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
