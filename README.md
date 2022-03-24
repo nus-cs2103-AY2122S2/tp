@@ -7,7 +7,7 @@
   Example usages:
   * keep track of pet administrative details
   * keep track of pet dietary requirements
-  * keep track of pet attendance
+  * keep track of pet attendanceEntry
 * The project simulates an ongoing software project for a desktop application (called _WoofAreYou_) used for managing pet administrative details.
   * It is **written in OOP fashion**.
   * It comes with a **reasonable level of user and developer documentation**.

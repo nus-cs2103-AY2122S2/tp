@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,8 +12,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.AttendanceUtil;
+import seedu.address.model.attendance.AttendanceEntry;
 import seedu.address.model.pet.Address;
 import seedu.address.model.pet.Appointment;
+import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -32,6 +37,7 @@ class JsonAdaptedPet {
     private final String address;
     private final String diet;
     private final String appointment;
+    private final List<JsonAdaptedAttendance> attendance = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,7 +47,8 @@ class JsonAdaptedPet {
     public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("ownerName") String ownerName,
                           @JsonProperty("phone") String phone, @JsonProperty("address") String address,
                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("diet") String diet,
-                          @JsonProperty("appointment") String appointment) {
+                          @JsonProperty("appointment") String appointment,
+                          @JsonProperty("attendance") List<JsonAdaptedAttendance> attendance) {
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
@@ -51,6 +58,9 @@ class JsonAdaptedPet {
         }
         this.diet = diet;
         this.appointment = appointment;
+        if (attendance != null) {
+            this.attendance.addAll(attendance);
+        }
     }
 
     /**
@@ -66,6 +76,11 @@ class JsonAdaptedPet {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        attendance.addAll(source.getAttendanceHashMap()
+                .toCollection()
+                .stream()
+                .map(JsonAdaptedAttendance::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -77,6 +92,12 @@ class JsonAdaptedPet {
         final List<Tag> petTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             petTags.add(tag.toModelType());
+        }
+
+        final HashMap<LocalDate, AttendanceEntry> attendanceList = new HashMap<>();
+        for (JsonAdaptedAttendance attendance : attendance) {
+            LocalDate attendanceDateKey = AttendanceUtil.convertToModelDate(attendance.attendanceDate);
+            attendanceList.put(attendanceDateKey, attendance.toModelType());
         }
 
         if (name == null) {
@@ -124,7 +145,11 @@ class JsonAdaptedPet {
         final Appointment modelAppointment = new Appointment(appointment);
 
         final Set<Tag> modelTags = new HashSet<>(petTags);
-        return new Pet(modelName, modelOwnerName, modelPhone, modelAddress, modelTags, modelDiet, modelAppointment);
+
+        final AttendanceHashMap modelAttendanceHashMap = new AttendanceHashMap(attendanceList);
+
+        return new Pet(modelName, modelOwnerName, modelPhone, modelAddress, modelTags, modelDiet, modelAppointment,
+                modelAttendanceHashMap);
     }
 
 }

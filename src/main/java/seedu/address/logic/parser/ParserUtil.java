@@ -152,7 +152,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @return Parsed local date.
-     * @throws ParseException if the given {@code Diet} is invalid.
+     * @throws ParseException if the given attendance date is invalid.
 
      */
     public static LocalDate parseAttendanceDate(String attendanceDate) throws ParseException {

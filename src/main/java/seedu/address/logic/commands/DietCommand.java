@@ -13,9 +13,8 @@ import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Pet;
 
 
-
 /**
- * Adds diet details to a pet identified using it's displayed index from the address book.
+ * Adds diet details to a pet identified using its displayed index from the address book.
  */
 public class DietCommand extends Command {
 
@@ -56,7 +55,8 @@ public class DietCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         Pet editedPet = new Pet(
                 petToEdit.getName(), petToEdit.getOwnerName(), petToEdit.getPhone(),
-                petToEdit.getAddress(), petToEdit.getTags(), diet, petToEdit.getAppointment());
+                petToEdit.getAddress(), petToEdit.getTags(), diet, petToEdit.getAppointment(),
+                petToEdit.getAttendanceHashMap());
 
         model.setPet(petToEdit, editedPet);
 

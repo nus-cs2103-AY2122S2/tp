@@ -52,6 +52,23 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]`
 Examples:
 * `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`.
 
+### Editting a pet : `edit`
+
+Edits an existing pet in the address book.
+
+Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]`
+* Edits the pet at the specified `INDEX`. The index refers to the index number shown in the displayed pet list. The index **must be a positive integar**.
+* All of the fields are optional but at least one of the fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the pet will be removed i.e adding of tags is not cumulative.
+* You can remove all the pet's tags by typing t/ without specifying any tags after it.
+
+### List all pets : `list`
+
+Shows a list of all pet in the address book.
+
+Format:`list`
+
 ### Sort pets: `sort`
 
 Retrieves a sorted list of pets. Users can choose to either sort them by owner name or pet name.
@@ -61,7 +78,6 @@ Format: `sort [FIRST_LETTER_OF_COLUMN]`
 
 Examples:
 * `sort /o`
-
 
 ### Find pet details: `find`
 
@@ -91,7 +107,9 @@ Examples:
 
 Given a pet ID, add or clear a pet appointment details in the database.
 
-**Add** Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
+**Add Appointment** 
+
+Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 
 * ID is a unique identifier that each pet has in the database.
 * Date and time of appointment should be entered together with `dt/` prefix.
@@ -105,7 +123,9 @@ Examples:
 `app 1 dt/04-03-2022 09:30 at/ NUS Vet Clinic` will store the appointment details for pet 1 as
 `Mar-04-2022 9:30 AM at NUS Vet Clinic`.
 
-**Clear** Format: `app INDEX clear`
+**Clear Appointment** 
+
+Format: `app INDEX clear`
 
 * ID is a unique identifier that each pet has in the database.
 * Keyword `clear` will instruct the application to clear the appointment details of pet corresponding to the index.
@@ -116,33 +136,33 @@ Examples:
 Examples:
 `app 1 clear` will clear the appointment details for pet 1 and set it to be an empty field.
 
+### Marking a pet as present: `present`
 
-### Viewing pets’ pick-up and drop-off time: `time`
+Mark a pet as present on a given date, with a pick-up time and drop-off time (if any).
 
-Views pets’ pick-up and drop-off time
+Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 
-Format: `time INDEX`
-
-* Views pick-up and drop-off time of the pet at the specified `INDEX`.
-* The index refers to the index number shown in the displayed getId list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `time 12` returns pet 12’s pickup and dropoff times.
-
-### Adding pet’s attendance, pick-up and drop-off time: `attd`
-
-Add pet’s attendance date, pick-up and drop-off time
-
-Format: `attd INDEX att/dd-MM-yyyy pu/HH:mm do/HH:mm`
-
-* Adds attendance date, pick-up and drop-off time of the pet at the specified `INDEX`.
-* The index refers to the index number shown in the displayed getId list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Date and time must follow the specified format
+* Adds a present attendance entry with the attendance date, pick-up and drop-off time to the pet at the specified `INDEX`.
+* The index refers to the index number shown in the current list of pets.
+* The index **must be a positive integer** 1, 2, 3, ...
+* Date and time **must follow the specified format**
 
 Examples:
-* `attd 1 att/16-03-2022 pu/08:00 do/19:00` indicates that pet 1 is coming for daycare on `16-03-2022`, requires to be picked up at `08:00` and dropped off at `19:00`
+* `present 1 date/16-03-2022 pu/08:00 do/19:00` indicates that pet 1 is present for daycare on `16-03-2022`, requires to be picked up at `08:00` and dropped off at `19:00`
+
+### Marking a pet as absent: `absent`
+
+Mark a pet as absent on a given date.
+
+Format: `absent INDEX date/dd-MM-yyyy`
+
+* Adds an absent attendance entry with the attendance date to the pet at the specified `INDEX`.
+* The index refers to the index number shown in the current list of pets.
+* The index **must be a positive integer** 1, 2, 3, ...
+* Date **must follow the specified format**
+
+Examples:
+* `absent 1 date/17-03-2022` indicates that pet 1 is absent for daycare on `17-03-2022`
 
 ### Deleting a pet: `delete`
 
@@ -157,21 +177,37 @@ Format: `delete INDEX`
 Examples:
 * `delete 2` deletes the 2nd pet in the list.
 
+### Clearing all entries : `clear`
+
+Clear all entries from the address book.
+
+Format: `clear`
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+### Viewing help : `help`
+
+Shows a message explaing how to access the help page.
+
+Format: `help`
+
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                                                  |
-|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`                                                                     |
-| **Delete**         | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                                                                    |
-| **Find**           | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                                                                                          |
-| **Diet**           | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                                                                                               |
-| **Add Attendance** | `attd INDEX att/dd-MM-yyyy pu/HH:mm do/HH:mm` <br> e.g. `attd 1 att/16-03-2022 pu/08:00 do/17:00` (indicates that pet 1 will be attending daycare on 16 March 2022, requires pick up at 8 am and drop off at 5 pm |
-| **Time**           | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                                                                                             |
-| **App**            | `app INDEX date/[yyyy-MM-dd HH:mm] at/[location]` <br> e.g., `app 1 date/2022-03-04 09:30 at/ NUS Vet Clinic`                                                                                                     |
-| **Exit**           | `exit`                                                                                                                                                                                                            |
+| Action              | Format, Examples                                                                                                                                                                                                          |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`                                                                             |
+| **Edit**            | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]` <br> e.g, `edit 1 p/98247076 t/bulldog`                                                                                                         |
+| **Delete**          | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                                                                            |
+| **Find**            | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                                                                                                  |
+| **Diet**            | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                                                                                                       |
+| **Present** | `present INDEX date/dd-MM-yyyy pu/HH:mm do/HH:mm` <br> e.g., `present 1 date/16-03-2022 pu/08:00 do/17:00` <br>(indicates that pet 1 will be attending daycare on 16 March 2022, requires pick up at 8 am and drop off at 5 pm) |
+| **Absent**  | `absent INDEX date/dd-MM-yyyy` <br> e.g., `absent 1 date/17-03-2022` (indicates that pet 1 was absent on 17 March 2022)                                                                                                    |
+| **App**         | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]` e.g., `app 1 date/04-03-2022 09:30 at/ NUS Vet Clinic` <br> `app INDEX clear` e.g., `app 1 clear`                                                                                                            |
+| **List**            | `list` |
+| **Clear**           | `clear`|
+| **Exit**            | `exit` |
+| **Help**            | `help` |
