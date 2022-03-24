@@ -162,10 +162,8 @@ explanation to be updated...
 ![](images/AddGroupSequenceDiagram.png)
 ![](images/AddGroupCommandActivityDiagram.png)
 
-
 ### Delete group feature
 to be updated...
-
 
 ### Add task feature to an existing group feature
 
