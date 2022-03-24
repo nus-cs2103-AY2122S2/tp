@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("editRole 1 1 d/react js")
 activate LogicManager
 
-LogicManager ->CompanyListParser : parseCommand("delete 1")
+LogicManager -> CompanyListParser : parseCommand("editRole 1 1 d/react js")
 activate CompanyListParser
 
 create EditRoleCommandParser
