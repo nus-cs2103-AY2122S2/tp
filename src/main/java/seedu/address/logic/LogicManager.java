@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,6 +27,8 @@ import seedu.address.storage.Storage;
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
     public static final String TEMP_FILE_OPS_ERROR_MESSAGE = "Could not save temp data to file: ";
+    public static final String TEMP_FILE_READ_ERROR_MESSAGE = "Could not read temp file data, might be corrupted: ";
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -77,27 +80,37 @@ public class LogicManager implements Logic {
             throws CommandException {
 
         if (isUndoPrevCommand) {
-            Optional<ReadOnlyAddressBook> tempAddressFileData = Optional.empty();
-            try {
-                tempAddressFileData = storage.popTempAddressFileData();
-            } catch (IOException exception) {
-                return;
-            }
+            undoPrevCommand();
+        } else {
+            savePrevAddressBookDataInTemp(addressBookBeforeCommand);
+        }
+    }
 
-            if (tempAddressFileData.isPresent()) {
-                model.setAddressBook(tempAddressFileData.get());
-            } else {
-                throw new CommandException("PLACEHOLDER ISSUE, nothing to undo");
-            }
+    public void undoPrevCommand() throws CommandException {
+        Optional<ReadOnlyAddressBook> tempAddressFileData;
+        try {
+            tempAddressFileData = storage.popTempAddressFileData();
+        } catch (Exception exception) {
+            throw new CommandException(TEMP_FILE_READ_ERROR_MESSAGE + exception, exception);
+        }
 
+        if (tempAddressFileData.isPresent()) {
+            model.setAddressBook(tempAddressFileData.get());
+        } else {
+            throw new CommandException(UndoCommand.REACHED_UNDO_LIMIT);
+        }
+    }
+
+    public void savePrevAddressBookDataInTemp(ReadOnlyAddressBook addressBookBeforeCommand) throws CommandException {
+        if (addressBookBeforeCommand.equals(model.getAddressBook())) {
             return;
         }
 
-        //address book before command saved to temp file
+        //address book data before command saved to temp file
         try {
             storage.addNewTempAddressBookFile(addressBookBeforeCommand);
-        } catch (IOException ioe) {
-            throw new CommandException(TEMP_FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        } catch (Exception exception) {
+            throw new CommandException(TEMP_FILE_OPS_ERROR_MESSAGE + exception, exception);
         }
     }
 

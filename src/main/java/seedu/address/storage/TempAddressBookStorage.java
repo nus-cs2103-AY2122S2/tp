@@ -20,16 +20,17 @@ public interface TempAddressBookStorage {
      * Adds a new temporary file of addressBook data.
      *
      * @param addressBook AddressBook data
-     * @throws IOException if there was any problem adding a new temp file to storage.
+     * @throws Exception if there was any problem creating a new temp file.
      */
-    void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws IOException;
+    void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws Exception;
 
     /**
      * Gets the last added temporary addressBook file data.
      *
      * @return the last added temporary addressBook file data stored.
+     * @throws Exception If there are any issues reading data from the temporary file.
      */
-    Optional<ReadOnlyAddressBook> popTempAddressFileData() throws IOException;
+    Optional<ReadOnlyAddressBook> popTempAddressFileData() throws Exception;
 
     /**
      * Deletes temporary files in application.

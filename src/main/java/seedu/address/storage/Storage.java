@@ -33,8 +33,8 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, TempAddre
     Path getTempAddressBookFilepath();
 
     @Override
-    void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws IOException;
+    void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws Exception;
 
     @Override
-    Optional<ReadOnlyAddressBook> popTempAddressFileData() throws IOException;
+    Optional<ReadOnlyAddressBook> popTempAddressFileData() throws Exception;
 }

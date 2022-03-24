@@ -24,14 +24,14 @@ import java.util.Optional;
  * A class to manage temporary files of AddressBook data.
  */
 public class SerializableTempAddressBookStorage implements TempAddressBookStorage {
-    private static final int LIMIT = 10;
+    private static final int SAVE_LIMIT = 10;
 
     private final Path fileDirectory;
     private final List<Path> tempFiles;
 
     /**
      * Creates a Address Book Storage that manages temporary data.
-     * @param fileDirectory
+     * @param fileDirectory directory of where the temp files would be stored
      */
     public SerializableTempAddressBookStorage(Path fileDirectory) {
         this.fileDirectory = fileDirectory;
@@ -44,9 +44,17 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
     }
 
     @Override
-    public void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws IOException {
+    public void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws Exception {
         if (!Files.exists(fileDirectory)) {
             Files.createDirectory(fileDirectory);
+        }
+
+        //delete earliest temp file created
+        if (tempFiles.size() >= SAVE_LIMIT) {
+            Path earliestFileData = tempFiles.get(0);
+            tempFiles.remove(0);
+
+            earliestFileData.toFile().delete();
         }
 
         String tempFileName = "temp";
@@ -58,12 +66,10 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
         objectOutputStream.writeObject(new ArrayList<>(addressBook.getPersonList()));
         objectOutputStream.flush();
         objectOutputStream.close();
-
-        //TODO:: HANDLE ERRORS WITH READING OR CREATING DIRECTORY
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> popTempAddressFileData() throws IOException {
+    public Optional<ReadOnlyAddressBook> popTempAddressFileData() throws Exception {
         Path prevDataTempFile;
         if (tempFiles.size() <= 0) {
             return Optional.empty();
@@ -85,16 +91,13 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
      * @param tempDataTempFile file path of the temporary files.
      * @return The data read from the file path.
      */
-    public Optional<ReadOnlyAddressBook> getTempAddressBookFileData(Path tempDataTempFile) {
-        try {
-            ObjectInputStream objectInputStream =
-                    new ObjectInputStream(new BufferedInputStream(new FileInputStream(tempDataTempFile.toString())));
-            ArrayList<Person> personList = (ArrayList<Person>) objectInputStream.readObject();
-            objectInputStream.close();
-            return Optional.of(new AddressBook(personList));
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+    public Optional<ReadOnlyAddressBook> getTempAddressBookFileData(Path tempDataTempFile) throws Exception {
+        ObjectInputStream objectInputStream =
+                new ObjectInputStream(new BufferedInputStream(new FileInputStream(tempDataTempFile.toString())));
+        ArrayList<Person> personList = (ArrayList<Person>) objectInputStream.readObject();
+        objectInputStream.close();
+
+        return Optional.of(new AddressBook(personList));
     }
 
     @Override
