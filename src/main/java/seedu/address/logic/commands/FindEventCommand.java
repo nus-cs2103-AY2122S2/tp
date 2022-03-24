@@ -40,8 +40,8 @@ public class FindEventCommand extends Command {
         requireNonNull(model);
         model.updateFilteredEventList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size())
-                ,false, false, true);
+                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()),
+                false, false, true);
     }
 
     @Override

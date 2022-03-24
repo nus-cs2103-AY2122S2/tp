@@ -26,9 +26,9 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_FRIEND_NAME);
 
-        boolean isAnyArgumentGiven = argMultimap.arePrefixesPresent(PREFIX_NAME) ||
-                argMultimap.arePrefixesPresent(PREFIX_DATE) ||
-                argMultimap.arePrefixesPresent(PREFIX_FRIEND_NAME);
+        boolean isAnyArgumentGiven = argMultimap.arePrefixesPresent(PREFIX_NAME)
+                || argMultimap.arePrefixesPresent(PREFIX_DATE)
+                || argMultimap.arePrefixesPresent(PREFIX_FRIEND_NAME);
 
         if (!isAnyArgumentGiven || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
