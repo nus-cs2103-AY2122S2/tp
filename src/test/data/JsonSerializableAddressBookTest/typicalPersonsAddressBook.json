@@ -9,7 +9,7 @@
     "email" : "aliceee@u.nus.edu",
     "taskList" : {
       "taskList" : [ {
-        "taskName" : "task a",
+        "taskName" : "Task A",
         "isComplete" : false
       } ]
     }
@@ -22,7 +22,7 @@
     "email" : "bensonnn@u.nus.edu",
     "taskList" : {
       "taskList" : [ {
-        "taskName" : "task b",
+        "taskName" : "Task B",
         "isComplete" : true
       } ]
     }

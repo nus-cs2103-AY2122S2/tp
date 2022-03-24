@@ -26,6 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -76,24 +77,24 @@ public class AddCommandParserTest {
                 + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB, new AddCommand(expectedPerson));
 
     }
-    // TODO: Fix this testcase
-    //    @Test
-    //    public void parse_optionalFieldsMissing_success() {
-    //        // missing phone
-    //        Person expectedPerson = new PersonBuilder().withStudentId(VALID_ID_AMY).withName(VALID_NAME_AMY)
-    //                .withModuleCode(VALID_MODULE_CODE_AMY).withPhone(null)
-    //                .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withEmail(VALID_EMAIL_AMY).build();
-    //        assertParseSuccess(parser, ID_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_AMY
-    //                + TELEGRAM_HANDLE_DESC_AMY + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
-    //
-    //        // missing telegramHandle
-    //        assertParseSuccess(parser, ID_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_AMY + PHONE_DESC_AMY
-    //                + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
-    //
-    //        // missing email
-    //        assertParseSuccess(parser, ID_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_AMY + PHONE_DESC_AMY
-    //                + TELEGRAM_HANDLE_DESC_AMY, new AddCommand(expectedPerson));
-    //    }
+
+    @Test
+    public void parse_optionalFieldsMissing_success() {
+        // missing phone
+        Person expectedPerson = new PersonBuilder(AMY).withPhone(null).build();
+        assertParseSuccess(parser, ID_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_AMY
+                + TELEGRAM_HANDLE_DESC_AMY + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
+
+        // missing telegramHandle
+        expectedPerson = new PersonBuilder(AMY).withTelegramHandle(null).build();
+        assertParseSuccess(parser, ID_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY, new AddCommand(expectedPerson));
+
+        // missing email
+        expectedPerson = new PersonBuilder(AMY).withEmail(null).build();
+        assertParseSuccess(parser, ID_DESC_AMY + NAME_DESC_AMY + MODULE_CODE_DESC_AMY + PHONE_DESC_AMY
+                + TELEGRAM_HANDLE_DESC_AMY, new AddCommand(expectedPerson));
+    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {

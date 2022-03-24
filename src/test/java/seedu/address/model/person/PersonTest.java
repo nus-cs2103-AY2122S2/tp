@@ -16,36 +16,30 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
-    // TODO: Fix this testcase
-    //    @Test
-    //    public void isSamePerson() {
-    //        // same object -> returns true
-    //        assertTrue(ALICE.isSamePerson(ALICE));
-    //
-    //        // null -> returns false
-    //        assertFalse(ALICE.isSamePerson(null));
-    //
-    //        // same id, all other attributes different -> returns true
-    //        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB)
-    //                .withModuleCode(VALID_MODULE_CODE_BOB)
-    //                .withPhone(VALID_PHONE_BOB).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
-    //                .withEmail(VALID_EMAIL_BOB)
-    //                .build();
-    //        assertTrue(ALICE.isSamePerson(editedAlice));
-    //
-    //        // different id, all other attributes same -> returns false
-    //        editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_ID_BOB).build();
-    //        assertFalse(ALICE.isSamePerson(editedAlice));
-    //
-    //        // id differs in case, all other attributes same -> returns false
-    //        Person editedBob = new PersonBuilder(BOB).withStudentId(VALID_ID_BOB.toLowerCase()).build();
-    //        assertFalse(BOB.isSamePerson(editedBob));
-    //
-    //        // id has trailing spaces, all other attributes same -> returns false
-    //        String idWithTrailingSpaces = VALID_ID_BOB + " ";
-    //        editedBob = new PersonBuilder(BOB).withStudentId(idWithTrailingSpaces).build();
-    //        assertFalse(BOB.isSamePerson(editedBob));
-    //    }
+    @Test
+    public void isSamePerson() {
+        // same object -> returns true
+        assertTrue(ALICE.isSamePerson(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.isSamePerson(null));
+
+        // same id, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withModuleCode(VALID_MODULE_CODE_BOB)
+                .withPhone(VALID_PHONE_BOB).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different id, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_ID_BOB).build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // id differs in case, all other attributes same -> returns false
+        Person editedBob = new PersonBuilder(BOB).withStudentId(VALID_ID_BOB.toLowerCase()).build();
+        assertFalse(BOB.isSamePerson(editedBob));
+    }
 
     @Test
     public void equals() {
