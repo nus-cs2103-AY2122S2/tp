@@ -224,15 +224,56 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
+
+### \[Proposed\] Clear buyer list/Clear seller list
+
+#### Proposed Implementation
+
+We are currently implementing a clear buyer list and clear seller list function.
+####Syntax:
+- `clearb` - clears the buyer list
+- `clears` - clears the seller list
+
+####Result:
+- specified list is cleared without affecting the other list
+
+#### Implementation of clear buyer and clear seller
+The contents of buyerlist or sellerlist in `BuyerAddressBook.java` or `SellerAddressBook.java` is cleared.
+
+#### Why is it implemented this way
+The content of the uncleared list can be kept as such without reloading a fresh new book as seen in the AB3 command `clear`.
+
+#### Alternatives
+A copy of the uncleared list is kept, next the content of the whole addressbook can be cleared by `clear`, followed by loading of the uncleared content.
+
+### Find buyer/Find seller
+
+####Syntax:
+- `findb /KEYWORD [MORE_KEYWORDS]`
+- `finds D/KEYWORD [MORE_KEYWORDS]`
+
+Examples:
+- `findb junhong junheng`
+- `finds hdb 5room`
+
+####Result:
+returns a filtered list of sellers of buyers
+
+####Implementation of find buyer and find seller
+The finds and findb command calls `updateFilteredSellerList` of `model` and filters the list based on the keywords. The commands then calls `getFilteredSellerList` 
+in order to return the filtered list of sellers.
+
+####Why is it implemented this way
+Having a seperate buyer and seller list means we need to seperate the find command into find buyer and find seller in order to filter the desired list. Having seperate address books helps in this regard as the version of `getFilteredClientList` can be used.
 
 ### \[Proposed\] Data archiving
 
