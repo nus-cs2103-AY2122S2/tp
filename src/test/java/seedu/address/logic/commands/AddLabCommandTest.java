@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBookWithou
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -49,6 +50,17 @@ class AddLabCommandTest {
         AddLabCommand command = new AddLabCommand(new Lab("1"));
 
         String expectedMessage = String.format(AddLabCommand.MESSAGE_DUPLICATE_LAB, "1");
+
+        assertCommandFailure(command, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_emptyStudentList_failure() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        // TypicalAddressBook already has Lab 1
+        AddLabCommand command = new AddLabCommand(new Lab("1"));
+
+        String expectedMessage = AddLabCommand.MESSAGE_EMPTY_STUDENT_LIST;
 
         assertCommandFailure(command, model, expectedMessage);
     }
