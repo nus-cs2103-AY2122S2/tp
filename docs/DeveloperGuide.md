@@ -3,7 +3,12 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+1. Acknowledgements
+2. Setting up
+3. Design
+   1. Architecture
+   2. UI Components
+4. Implementation
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -234,9 +239,117 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Membership functionality
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Proposed Implementation
+The proposed membership functionality will be to store all available memberships into a list and allow clients to be assigned a membership.
+
+Membership details will be created by users, user can then assign an existing membership to a client.
+
+#### Design considerations:
+
+**Aspect: How it executes:**
+
+* **Alternative 1 (current choice):** Create a list of Memberships, assign membership index to client.
+  * Pros: Allows for easy management of memberships
+  * Cons: Have to handle edge cases, what if user deletes a membership? etc.
+
+* **Alternative 2:** Create a new membership whenever assigning a membership to client.
+  * Pros: Easy to implement
+  * Cons: Harder to manage individual memberships, functions similar to a tag, but with extra variables.
+
+### \[Proposed\] Transaction functionality
+
+#### Proposed Implementation
+The proposed Transaction Functionality will allow users to store a transaction and assign it to a client. 
+User will have to specify the client the transaction will be assigned to, and input all the transaction's attributes.
+
+The current implementation of `Transaction` class is similar to Person class. Every field/attribute of transaction needs to 
+extend from the `TransactionField` class. The `Transaction` class will have a list of `TransactionField`s in which all of it's 
+fields must be registered in the `TransactionFieldRegistry`. Each field is either a required field or an optional field. 
+
+Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and `Note`.
+
+#### Design considerations:
+
+**Aspect: How it executes:**
+
+* **Alternative 1:** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`. 
+    Everytime a user create a transaction, a new instance of transaction will be added to the list and a person/client
+  specified by it's unique identifier (`Email`) will be referenced by this transaction. To list all of the transactions 
+    of a particular person, the `FilteredList` should be updated to only contain `Transaction`
+    with a reference to the person's id. 
+    * Pros: Consistent design with the Person class.
+    * Cons: Have to handle cases when a user is updated/removed. The input specified by the users 
+    corresponds to the index of the displayed clients/users. Hence we need to retrieve the client's attributes 
+    before initializing the Transaction object.
+
+
+* **Alternative 2 (current implementation):** Every person object has a list of transactions which will be
+    initialized with an empty list. Each time a user add a transaction, the object will be 
+    added into the specified Person's Transaction List.
+    * Pros: Easy to implement
+    * Cons: Lower abstraction especially when displaying the transaction to the UI. Inconsistent design
+    in comparison to the `Person` class.
+
+### \[Proposed\] Sort functionality
+**Proposed implementation**
+
+The proposed sort mechanism is facilitated by `SortCommand`. It extends `Command` and the main logic of sort is in it's
+`execute` function which returns a `CommandResult` object.
+
+The `SortCommand#execute()` function would first parse the user's inputs. For every field parsed, the function would create a 
+`comparator` for that field using either of the functions:
+
+* `SortCommand#getComparatorDefault()` --- Creates a comparator with the field specified in ascending order
+* `SortCommand#getComparatorDescending()` --- Creates a comparator with the field specified in descending order
+
+One sort command allows for sorting multiple fields at a time in the order specified. Stating `sort n/ a/` means 
+sort the list by name in ascending order followed by the client's addresses. Clients with same name would be then
+sorted based on their addresses. 
+
+Thus, after creating the `comparator` for a particular field, it'll be added upon a previously created comparator using.
+
+To be able to sort the client's list, we exposed an operation in the `Model` interface as `Model#sortPersonList()`.
+We then passed the `comparator` created and passed it to `Model#sortPersonList()` in `SortCommand#execute()`.
+
+Java's `list` library will then handle the sorting based on the `comparator`.
+
+#### Design considerations:
+
+**Aspect: How it executes:**
+
+* **Alternative 1 (current choice):** Each field class will handle how to sort its own data, `SortCommand` will then
+wrap it into a comparator and pass to `Model#sortPersonList()`.
+  * Pros: Easy to implement, each field class can handle their own sorting of its data. Will not clutter `SortCommand`.
+  * Cons: Does not allow for more complicated chaining of fields since the way each field is being sorted is independent of the other.
+  
+
+* **Alternative 2:** `SortCommand` will determine how the fields are to be sorted.
+    * Pros: Allows `SortCommand` to have full flexibility in deciding how the fields are to be sorted and may allow for
+  more complicated chaining of fields.
+    * Cons: Will clutter `SortCommand` and may not be manageable once there are a lot of fields.
+
+
+### \[Proposed\] Command chaining
+**Proposed implementation**
+
+The proposed command chaining mechanism is facilitated in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
+
+To facilitate multiple commands, the program will split the given user input by a specified delimiter - in this case `|` will be used to seperate multiple commands. Once the input has been split, the program can then evaluate each command sequentially by iterating through the individual commands collected.
+
+#### Design considerations:
+
+**Aspect: Handling of special commands and errors:**
+
+* **Alternative 1 (current choice):** The special commands `help` and `exit` and command errors will break the chain of execution.
+    * Pros: Intuitive as `help` and `exit` often require immediate action thus subsequent commands are unlikely to be executed anyway even in normal circumstances. Errors in preceding commands may also affect subsequent commands and thus should stop execution to be rectified.
+    * Cons: Will not allow the execution of the following commands which may cause some confusion.
+
+
+* **Alternative 2:** Ignore special commands and errors in the middle of the command chain and execute the following commands regardless.
+    * Pros: Allows all commands to be executed which may be expected by some. May even make more sense as calling `help` or `exit` in the command chain does not make much sense and may more often or not be an error.
+    * Cons: Calling `help` or `exit` in the middle of a chain will be useless and some commands may be incorrectly run if preceding commands are invalid.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -271,13 +384,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- |--------------------------------------------| ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | business owner                                   | list all my clients information         | see my clients information.                 |
-| `* * *`  | business owner                                       | add a new client to CinnamonBun               |                                                                        |
-| `* * *`  | business owner                                       | edit a client’s information                | keep my client’s information updated.                                   |
-| `* * *`  | business owner                                       | delete a client information  | remove those who are no longer customers. |
-| `* *`    | business owner                                       | find a client based on keywords   | easily find a specific client or group of clients.                |
+| Priority | As a …​                                    | I want to …​                               | So that I can…​                                                       |
+| ------- |--------------------------------------------|--------------------------------------------| --------------------------------------------------------------------- |
+| `* * *` | business owner                                   | list all my clients information            | see my clients information.                 |
+| `* * *` | business owner                                       | add a new client to CinnamonBun            |                                                                       |
+| `* * *` | business owner                                       | edit a client’s information                | keep my client’s information updated.                                  |
+| `* * *` | business owner                                       | delete a client information                | remove those who are no longer customers. |
+| `* *`   | business owner                                       | find a client based on keywords            | easily find a specific client or group of clients.               |
+ | `* * *` | business owner                                 | store a transaction of a particular client | easily keep track of unpaid transactions |
+| `* * ` | business owner                                 | sort my clients based on certain field                        | easily sort and see the customers based on the field I want |
+
 
 *{More to be added}*
 
@@ -357,6 +473,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Sort customer list**
+
+**MSS**
+1. User inputs the fields the list is to be sorted on.
+2. AddressBook sorts the person list accordingly in order of the fields specified.
+3. The sorted list is displayed.
+
+**Extensions**
+* 1a. User inputs no fields
+  * 1a1. An error message is shown.
+
+    Use case resumes at step 1.
+* 1b. User inputs non-existent/not supported fields
+  * 1b1. An error message is shown
+  
+     Use case resumes at step 1
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -415,6 +549,18 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Sorting client's list
+1. Sorting the client's list based on certain fields
+   1. Prerequisites: There needs to be existing client data in the client's list.
+   2. Test case: `sort n/`<br>
+       Expected: The client's list will display the clients in ascending alphabetical order.
+   3. Test case: `sort n/ a/ p/ desc`<br>
+       Expected: The client's list will display the clients in ascending alphabetical order. Clients with the same name will
+       then be displayed according to their addresses in ascending order. And if they also have the same address, they'll be 
+        displayed based on their phone number in descending order.
+   4. Test case: `sort l:)/ djewijw p/`<br>
+      Expected: An error would be thrown as the fields specified do not exist.
 
 ### Saving data
 

@@ -16,7 +16,7 @@ Given below are my contributions to the project.
     * To be added soon
 
 * **Enhancements to existing features**:
-    * Updated list feature
+    * added transaction
 
 * **Documentation**:
     * User Guide:

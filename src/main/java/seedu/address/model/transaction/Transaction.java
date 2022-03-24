@@ -40,6 +40,10 @@ public class Transaction implements Serializable {
         }
     }
 
+    public Transaction(Transaction otherTransaction) {
+        this(otherTransaction.getFields());
+    }
+
     /**
      * Returns true if the person contains the specified field.
      * @param prefix the field prefix
