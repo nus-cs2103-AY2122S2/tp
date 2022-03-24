@@ -17,6 +17,8 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP = person -> !person.getLineupNames().isEmpty();
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
