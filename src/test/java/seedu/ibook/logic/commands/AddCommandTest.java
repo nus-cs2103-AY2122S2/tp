@@ -137,6 +137,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateItem(Product targetProduct, Item targetItem, Item updatedItem) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Product> getFilteredProductList() {
             throw new AssertionError("This method should not be called.");
         }
