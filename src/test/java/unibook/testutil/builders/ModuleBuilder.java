@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.module.group.Group;
 import unibook.model.person.Professor;
@@ -24,6 +25,7 @@ public class ModuleBuilder {
     private ObservableList<Professor> professors;
     private ObservableList<Student> students;
     private ObservableList<Group> groups;
+    private ObservableList<ModuleKeyEvent> keyEvents;
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.
@@ -34,6 +36,7 @@ public class ModuleBuilder {
         professors = FXCollections.observableArrayList();
         students = FXCollections.observableArrayList();
         groups = FXCollections.observableArrayList();
+        keyEvents = FXCollections.observableArrayList();
     }
 
     /**
@@ -45,6 +48,7 @@ public class ModuleBuilder {
         professors = moduleToCopy.getProfessors();
         students = moduleToCopy.getStudents();
         groups = moduleToCopy.getGroups();
+        keyEvents = moduleToCopy.getKeyEvents();
     }
 
     /**
@@ -87,8 +91,16 @@ public class ModuleBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code keyEvents} of the {@code Module} that we are building.
+     */
+    public ModuleBuilder withKeyEvents(Set<ModuleKeyEvent> keyEventSet) {
+        keyEvents = FXCollections.observableArrayList(keyEventSet);
+        return this;
+    }
+
     public Module build() {
-        return new Module(moduleName, moduleCode, professors, students, groups);
+        return new Module(moduleName, moduleCode, professors, students, groups, keyEvents);
     }
 
 }

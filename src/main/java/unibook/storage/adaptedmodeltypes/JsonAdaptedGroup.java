@@ -14,9 +14,8 @@ import unibook.model.module.group.Group;
 import unibook.model.person.Name;
 import unibook.model.person.Phone;
 
-
 /**
- * Jackson-friendly version of {@link Module}.
+ * Jackson-friendly version of Group.
  */
 public class JsonAdaptedGroup {
 

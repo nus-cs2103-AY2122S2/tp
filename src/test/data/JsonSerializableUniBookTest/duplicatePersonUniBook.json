@@ -81,12 +81,17 @@
             "2022-05-04T13:00:00"
           ]
         }
-      ]
+      ],
+      "keyEvents" : [ {
+      "keyEventType" : "EXAM",
+      "keyEventTiming" : "2022-05-04T14:00:00"
+    } ]
     },
     {
       "moduleName": "Introduction to Operating Systems",
       "moduleCode": "CS2106",
-      "groups": []
+      "groups": [],
+      "keyEvents" : []
     }
   ]
 }
