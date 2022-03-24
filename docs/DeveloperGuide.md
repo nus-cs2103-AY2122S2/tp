@@ -221,6 +221,18 @@ successfully.
 
 ![The following sequence diagram shows how the tag operation works:](images/TagSequenceDiagram.png)
 
+### Edit Feature
+
+### Original implementation
+The edit command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
+`EditCommandParser` parses the information input and then creates an `EditPersonDescriptor` where the unchanged fields
+are copied over from the existing person and the fields to be overwritten are changed. The Find command then takes in
+the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
+
+### Current Implementation
+The edit command has now been upgraded to support the functionality for overwriting multiple tag lists.
+
+
 ### Removetag feature
 
 ### Find/Find -s feature
