@@ -6,12 +6,14 @@ import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 
 /**
- * Represents an appointment in the schedule.
+ * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass.
+ * {@link ScheduleItem}.
  */
-public class Appointment implements Comparable<Appointment> {
+public class Appointment extends ScheduleItem {
 
     // Appointment identification fields
     private final StartDateTime startDateTime;
@@ -33,7 +35,9 @@ public class Appointment implements Comparable<Appointment> {
      * @param person A valid Person or null.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
-        requireAllNonNull(name, startDateTime, duration);
+        super(Appointment.getStartDateTimeOrThrow(startDateTime),
+                Appointment.getEndDateTimeOrThrow(startDateTime, duration));
+        requireNonNull(name);
 
         this.name = name;
         this.startDateTime = startDateTime;
@@ -67,7 +71,12 @@ public class Appointment implements Comparable<Appointment> {
         return this.name;
     }
 
-    public StartDateTime getStartDateTime() {
+    @Override
+    public LocalDateTime getStartDateTime() {
+        return this.startDateTime.value;
+    }
+
+    public StartDateTime getStartDateTimeObject() {
         return this.startDateTime;
     }
 
@@ -102,35 +111,9 @@ public class Appointment implements Comparable<Appointment> {
      *
      * @return The end DateTime of this appointment.
      */
+    @Override
     public LocalDateTime getEndDateTime() {
-        return getStartDateTime().value.plusMinutes(getDuration().value);
-    }
-
-    /**
-     * Returns true if both appointments overlap, that is, the start time of an appointment is strictly before
-     * the (start time + duration) of the other appointment. Note that false will be returned if the start
-     * time of the other appointment is exactly the end time of this appointment.
-     *
-     * @param other The other {@code Appointment} to compare against.
-     * @return True if both appointments overlap, otherwise false.
-     */
-    public boolean isOverlapping(Appointment other) {
-        requireNonNull(other);
-        if (this.equals(other)) {
-            return true;
-        }
-
-        final LocalDateTime otherStartDateTime = other.getStartDateTime().value;
-        final LocalDateTime selfStartDateTime = getStartDateTime().value;
-
-        if (otherStartDateTime.isAfter(selfStartDateTime.minusSeconds(1))) {
-            // In this case, other.startDateTime is after this.startDateTime.
-            return otherStartDateTime.isBefore(getEndDateTime());
-        }
-
-        // other.startDateTime is strictly before this.startDateTime, need to check if other.endDateTime
-        // overflows into this.startDateTime
-        return (other.getEndDateTime().isAfter(selfStartDateTime));
+        return getStartDateTimeObject().value.plusMinutes(getDuration().value);
     }
 
     /**
@@ -147,11 +130,11 @@ public class Appointment implements Comparable<Appointment> {
             return false;
         }
 
-        Appointment otherPerson = (Appointment) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getStartDateTime().equals(getStartDateTime())
-                && otherPerson.getDuration().equals(getDuration())
-                && Objects.equals(otherPerson.getPerson(), getPerson());
+        Appointment otherAppointment = (Appointment) other;
+        return otherAppointment.getName().equals(getName())
+                && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
+                && otherAppointment.getDuration().equals(getDuration())
+                && Objects.equals(otherAppointment.getPerson(), getPerson());
     }
 
     @Override
@@ -163,15 +146,33 @@ public class Appointment implements Comparable<Appointment> {
     public String toString() {
         return getName()
                 + "; Start Date Time: "
-                + getStartDateTime()
+                + getStartDateTimeObject()
                 + "; Duration: "
                 + getDuration()
                 + "; Person: "
                 + getPerson();
     }
 
-    @Override
-    public int compareTo(Appointment o) {
-        return this.getStartDateTime().compareTo(o.getStartDateTime());
+    /**
+     * Extracts the LocalDateTime object from the supplied StartDateTime object.
+     *
+     * @param startDateTimeObject The StartDateTime container to extract from.
+     * @return The extracted LocalDateTime object.
+     */
+    private static LocalDateTime getStartDateTimeOrThrow(StartDateTime startDateTimeObject) {
+        requireNonNull(startDateTimeObject);
+        return startDateTimeObject.value;
+    }
+
+    /**
+     * Computes the ending time from the {@code StartDateTime} and {@code Duration}.
+     *
+     * @param startDateTime The StartDateTime container use.
+     * @param duration The Duration container to use.
+     * @return The computed end date-time.
+     */
+    private static LocalDateTime getEndDateTimeOrThrow(StartDateTime startDateTime, Duration duration) {
+        requireAllNonNull(startDateTime, duration);
+        return startDateTime.value.plusMinutes(duration.value);
     }
 }

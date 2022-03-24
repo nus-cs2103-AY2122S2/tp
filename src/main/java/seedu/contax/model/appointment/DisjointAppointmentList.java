@@ -3,6 +3,10 @@ package seedu.contax.model.appointment;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,10 +14,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
+import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 
 /**
  * A list of appointments that enforces that its elements cannot have overlapping periods and does not allow
- * nulls. This check is performed using {@link Appointment#isOverlapping(Appointment)}, and will be performed
+ * nulls. This check is performed using {@link Appointment#isOverlapping(ScheduleItem)}, and will be performed
  * upon any modification to the list. It also enforces a chronological ordering of the appointments in the
  * list, done by sorting {@link Appointment#getStartDateTime()} since appointments are disjoint.
  *
@@ -175,6 +181,45 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         return readOnlyAppointments;
     }
 
+    /**
+     * Returns a list of slots within the supplied start and end DateTime search window which are of at least
+     * {@code minimumDuration} minutes that are not occupied by any appointments.
+     *
+     * @param start The start of the search window.
+     * @param end The end of the search window.
+     * @param minimumDuration The minimum size of the empty slot.
+     * @return A list of slots between appointments that are of at least {@code minimumDuration} minutes.
+     */
+    public List<TimeRange> findAvailableSlotsInRange(LocalDateTime start, LocalDateTime end,
+                                                     int minimumDuration) {
+        requireAllNonNull(start, end, minimumDuration);
+        if (minimumDuration <= 0) {
+            throw new IllegalArgumentException("Duration has to be a positive integer");
+        }
+
+        ArrayList<TimeRange> slotsFound = new ArrayList<>();
+        if (!(start.isBefore(end))) {
+            return slotsFound;
+        }
+
+        if (size() == 0) {
+            slotsFound.add(new TimeRange(start, end));
+            return slotsFound;
+        }
+
+        Appointment firstAppointment = appointments.get(0);
+        Appointment lastAppointment = appointments.get(size() - 1);
+        if (Duration.between(start, firstAppointment.getStartDateTime()).toMinutes() >= minimumDuration) {
+            slotsFound.add(new TimeRange(start, getEarlier(firstAppointment.getStartDateTime(), end)));
+        }
+        findAvailableSlotsBetweenAppointments(slotsFound, start, end, minimumDuration);
+        if (Duration.between(lastAppointment.getEndDateTime(), end).toMinutes() >= minimumDuration) {
+            slotsFound.add(new TimeRange(getLater(start, lastAppointment.getEndDateTime()), end));
+        }
+
+        return slotsFound;
+    }
+
     @Override
     public Iterator<Appointment> iterator() {
         return appointments.iterator();
@@ -241,5 +286,57 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
             }
             appointments.set(otherIndex - 1, target);
         }
+    }
+
+    /**
+     * Returns a list of slots between appointments, within the supplied start and end DateTime search window,
+     * that are of at least {@code minimumDuration} minutes.
+     *
+     * @param resultList The list that slots found should be added to.
+     * @param start The start of the search window.
+     * @param end The end of the search window.
+     * @param minimumDuration The minimum size of the empty slot.
+     */
+    private void findAvailableSlotsBetweenAppointments(ArrayList<TimeRange> resultList, LocalDateTime start,
+                                           LocalDateTime end, long minimumDuration) {
+        for (int i = 0; i < size() - 1; i++) {
+            LocalDateTime gapStart = getLater(appointments.get(i).getEndDateTime(), start);
+            LocalDateTime gapEnd = getEarlier(appointments.get(i + 1).getStartDateTime(), end);
+
+            if (!(gapEnd.isAfter(start))) {
+                continue;
+            } else if (gapStart.isAfter(end)) {
+                return;
+            }
+
+            long minutesBetween = gapStart.until(gapEnd, ChronoUnit.MINUTES);
+            if (minutesBetween >= minimumDuration) {
+                resultList.add(new TimeRange(gapStart, gapEnd));
+            }
+        }
+    }
+
+    /**
+     * Returns the earlier of the 2 supplied {@code LocalDateTime} objects.
+     */
+    private LocalDateTime getEarlier(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        requireNonNull(dateTime1);
+        requireNonNull(dateTime2);
+        if (dateTime1.isAfter(dateTime2)) {
+            return dateTime2;
+        }
+        return dateTime1;
+    }
+
+    /**
+     * Returns the later of the 2 supplied {@code LocalDateTime} objects.
+     */
+    private LocalDateTime getLater(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        requireNonNull(dateTime1);
+        requireNonNull(dateTime2);
+        if (dateTime1.isAfter(dateTime2)) {
+            return dateTime1;
+        }
+        return dateTime2;
     }
 }

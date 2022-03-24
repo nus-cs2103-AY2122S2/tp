@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -17,6 +19,7 @@ import seedu.contax.logic.Logic;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.ui.appointment.AppointmentListPanel;
 import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
@@ -54,7 +57,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem onboardingMenuItem;
 
     @FXML
-    private StackPane contentListPanelPlaceholder;
+    private TabPane tabbedPanelPlaceholder;
+
+    @FXML
+    private Tab appointmentTab;
+
+    @FXML
+    private Tab tagTab;
+
+    @FXML
+    private Tab personTab;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -128,15 +140,42 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        appointmentListPanel = new AppointmentListPanel(logic.getScheduleItemList());
         tagListPanel = new TagListPanel(logic.getFilteredTagList());
-        changeListContentType(GuiListContentType.PERSON);
+
+        fillTabsFromPanels();
+
+        changeTabFocus(GuiListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Creates the tabs and sets it in the Tab Pane.
+     */
+    private void fillTabsFromPanels() {
+        appointmentTab.setContent(appointmentListPanel.getRoot());
+        personTab.setContent(personListPanel.getRoot());
+        tagTab.setContent(tagListPanel.getRoot());
+        tabbedPanelPlaceholder.getTabs().add(personTab);
+        tabbedPanelPlaceholder.getTabs().add(appointmentTab);
+        tabbedPanelPlaceholder.getTabs().add(tagTab);
+
+        // Event listener to synchronise selected tab when user clicks on it
+        tabbedPanelPlaceholder.getSelectionModel().selectedItemProperty().addListener((
+                observableValue, oldTab, newTab) -> {
+            if (newTab.equals(appointmentTab)) {
+                currentListType = GuiListContentType.APPOINTMENT;
+            } else if (newTab.equals(personTab)) {
+                currentListType = GuiListContentType.PERSON;
+            } else if (newTab.equals(tagTab)) {
+                currentListType = GuiListContentType.TAG;
+            }
+        });
     }
 
     /**
@@ -152,31 +191,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Changes the type of model being displayed in the content list.
+     * Changes the type of model being displayed in the tab pane.
      *
-     * @param contentType The type of content the UI should display.
-     */
-    private void changeListContentType(GuiListContentType contentType) {
-        if (contentType == null) {
-            contentListPanelPlaceholder.getChildren().clear();
-            return;
-        }
-
+     * @param contentType The specified tab the UI should display.
+     * */
+    private void changeTabFocus(GuiListContentType contentType) {
         if (contentType.equals(GuiListContentType.UNCHANGED) || contentType.equals(currentListType)) {
             return;
         }
 
-        contentListPanelPlaceholder.getChildren().clear();
         currentListType = contentType;
 
         if (contentType == GuiListContentType.PERSON) {
-            contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            tabbedPanelPlaceholder.getSelectionModel().select(0);
         } else if (contentType == GuiListContentType.APPOINTMENT) {
-            contentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+            tabbedPanelPlaceholder.getSelectionModel().select(1);
         } else if (contentType == GuiListContentType.TAG) {
-            contentListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+            tabbedPanelPlaceholder.getSelectionModel().select(2);
         }
         changeFooterContentType(contentType);
+
     }
 
     /**
@@ -229,10 +263,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -243,7 +273,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            changeListContentType(commandResult.getUiContentType());
+            changeTabFocus(commandResult.getUiContentType());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

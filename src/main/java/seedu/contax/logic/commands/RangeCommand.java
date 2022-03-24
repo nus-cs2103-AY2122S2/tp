@@ -9,7 +9,9 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_TO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
@@ -24,15 +26,17 @@ import seedu.contax.model.Model;
 public class RangeCommand extends Command {
     public static final String COMMAND_WORD = "range";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Perform command in range"
-            + "by the index number used in the displayed person list. \n"
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in range"
+            + "by the index number used in the displayed person list.**\n"
+            + "Parameters: *"
             + "COMMAND (must be valid command without index) "
             + PREFIX_RANGE_FROM + "FROM "
-            + PREFIX_RANGE_TO + "TO \n"
-            + "Example: " + COMMAND_WORD + " edit "
+            + PREFIX_RANGE_TO + "TO *\n"
+            + "Example: `" + COMMAND_WORD + " edit "
             + PREFIX_PHONE + "12345678 "
-            + PREFIX_ADDRESS + "new address ";
+            + PREFIX_ADDRESS + "New Address `";
+
+    private final Logger logger = LogsCenter.getLogger(RangeCommand.class);
 
     private final Index fromIndex;
     private final Index toIndex;
@@ -61,6 +65,9 @@ public class RangeCommand extends Command {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(commandInput, Integer.toString(i));
+
+                logger.info("----------------[RANGE COMMAND][" + commandText + "]");
+
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {

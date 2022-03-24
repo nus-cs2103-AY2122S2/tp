@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -29,6 +32,10 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Appointment> filteredAppointments;
     private final FilteredList<Tag> filteredTags;
+
+    private final ObservableList<AppointmentSlot> displayedAppointmentSlots;
+    private final ObservableList<AppointmentSlot> unmodifiableDisplayedAppointmentSlots;
+    private final CompositeTemporalObservableList<ScheduleItem> scheduleItemList;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -47,6 +54,11 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+        displayedAppointmentSlots = FXCollections.observableArrayList();
+        unmodifiableDisplayedAppointmentSlots =
+                FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
+        scheduleItemList = new CompositeTemporalObservableList<>(filteredAppointments,
+                unmodifiableDisplayedAppointmentSlots);
     }
 
     /**
@@ -276,6 +288,29 @@ public class ModelManager implements Model {
         filteredAppointments.setPredicate(predicate);
     }
 
+    //=========== Appointment Slot List Operations ===========================================================
+
+    @Override
+    public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
+        return unmodifiableDisplayedAppointmentSlots;
+    }
+
+    @Override
+    public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
+        requireNonNull(items);
+        displayedAppointmentSlots.setAll(items);
+    }
+
+    @Override
+    public void clearDisplayedAppointmentSlots() {
+        displayedAppointmentSlots.clear();
+    }
+
+    @Override
+    public ObservableList<ScheduleItem> getScheduleItemList() {
+        return this.scheduleItemList.getUnmodifiableList();
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -295,7 +330,8 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredAppointments.equals(other.filteredAppointments)
-                && filteredTags.equals(other.filteredTags);
+                && filteredTags.equals(other.filteredTags)
+                && displayedAppointmentSlots.equals(other.displayedAppointmentSlots);
     }
 
 }

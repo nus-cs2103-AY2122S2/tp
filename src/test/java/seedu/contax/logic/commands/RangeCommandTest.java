@@ -9,6 +9,7 @@ import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,8 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -263,6 +266,26 @@ public class RangeCommandTest {
 
         @Override
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ScheduleItem> getScheduleItemList() {
             throw new AssertionError("This method should not be called.");
         }
 

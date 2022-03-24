@@ -31,7 +31,7 @@ public class DateRangePredicate implements Predicate<Appointment> {
 
     @Override
     public boolean test(Appointment appointment) {
-        LocalDateTime appointmentStart = appointment.getStartDateTime().value;
+        LocalDateTime appointmentStart = appointment.getStartDateTime();
         LocalDateTime appointmentEnd = appointment.getEndDateTime();
 
         return (DateUtil.isBeforeOrEqual(appointmentStart, start) && DateUtil.isAfterOrEqual(appointmentEnd, end))

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -35,8 +36,10 @@ import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
+import seedu.contax.logic.commands.FindAppointmentCommand;
 import seedu.contax.logic.commands.FindByTagCommand;
 import seedu.contax.logic.commands.FindPersonCommand;
+import seedu.contax.logic.commands.FreeBetweenCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
@@ -107,6 +110,15 @@ public class AddressBookParserTest {
         FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
                 FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findAppointment() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindAppointmentCommand command = (FindAppointmentCommand) parser.parseCommand(
+                FindAppointmentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindAppointmentCommand(new
+                seedu.contax.model.appointment.NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -193,10 +205,19 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_appointmentsBetween() throws Exception {
-        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime();
         assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
                 + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
                 instanceof AppointmentsBetweenCommand);
+    }
+
+    @Test
+    public void parseCommand_freeBetween() throws Exception {
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime();
+        assertTrue(parser.parseCommand(FreeBetweenCommand.COMMAND_WORD
+                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50))
+                + " " + PREFIX_DURATION + "1")
+                instanceof FreeBetweenCommand);
     }
 
     //Import/Export csv tests

@@ -123,8 +123,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getAppointmentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getAppointmentList().remove(0));
+    public void getScheduleItemList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getScheduleItemList().remove(0));
     }
 
     @Test

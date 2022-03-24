@@ -21,7 +21,7 @@ import seedu.contax.testutil.AppointmentBuilder;
 
 public class AppointmentsBetweenCommandTest {
 
-    private static final LocalDateTime BASE_DATE_TIME = APPOINTMENT_ALONE.getStartDateTime().value;
+    private static final LocalDateTime BASE_DATE_TIME = APPOINTMENT_ALONE.getStartDateTime();
     private static final Appointment APPOINTMENT1 = new AppointmentBuilder(APPOINTMENT_ALONE)
             .withStartDateTime(BASE_DATE_TIME).withDuration(30).build();
     private static final Appointment APPOINTMENT2 = new AppointmentBuilder(APPOINTMENT_ALONE)
