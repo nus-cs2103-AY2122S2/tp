@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
 import seedu.address.testutil.TypicalPersons;
@@ -29,10 +30,8 @@ import seedu.address.testutil.TypicalPersons;
 
 public class MarkCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    private final StudentId studentIdAlice = new StudentId(TypicalPersons.ALICE.getStudentId().toString());
-    private final StudentId studentIdBenson = new StudentId(TypicalPersons.BENSON.getStudentId().toString());
+    private final StudentId studentIdAlice = TypicalPersons.ALICE.getStudentId();
+    private final StudentId studentIdBenson = TypicalPersons.BENSON.getStudentId();
     private final StudentId notPresentStudentId = new StudentId("A0000000Z");
 
     private final Index indexOne = Index.fromOneBased(1);
@@ -52,30 +51,40 @@ public class MarkCommandTest {
 
     @Test
     public void execute_studentNotPresent_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         MarkCommand markCommand = new MarkCommand(notPresentStudentId, indexOne);
         assertCommandFailure(markCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         MarkCommand markCommand = new MarkCommand(studentIdAlice, invalidIndex);
         assertCommandFailure(markCommand, model, INVALID_TASK_INDEX);
     }
 
     @Test
     public void execute_taskAlreadyComplete_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         MarkCommand markCommand = new MarkCommand(studentIdBenson, indexOne);
         assertCommandFailure(markCommand, model, TASK_ALREADY_DONE);
     }
 
     @Test
     public void execute_taskMarkAsDone_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         MarkCommand markCommand = new MarkCommand(studentIdAlice, indexOne);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        //Marks Bob's first task as done in the expected model.
-        expectedModel.markTaskOfPerson(studentIdAlice, indexOne);
+        Person bensonCopy = expectedModel.getFilteredPersonList().get(1);
+
+        //Marks Benson's first task as done in the expected model.
+        bensonCopy.markTaskAsComplete(0);
 
         assertCommandSuccess(markCommand, model, String.format(MARKED_TASK_SUCCESS, studentIdAlice), expectedModel);
     }
