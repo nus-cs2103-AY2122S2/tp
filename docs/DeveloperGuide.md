@@ -378,6 +378,23 @@ Use case ends.
   * 3a1. MyGM displays the invalid tag message and the appropriate tags.   
   Use case ends.
 
+**Use case: UC04 - Editing a Player’s Details**
+
+**MSS**
+
+1. Find a player (UC01)
+2. User input the new details of the player.
+3. MyGM displays the success message.   
+   Use case ends.
+
+**Extensions**
+* 1a. User entered a player that does not exist.
+    * 1a1. MyGM displays the invalid player message.   
+      Use case ends.
+* 3a. User entered an invalid input for any of the fields.
+    * 3a1. MyGM displays the invalid input message and the appropriate command.   
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
