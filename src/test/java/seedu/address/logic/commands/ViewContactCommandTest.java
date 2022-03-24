@@ -21,9 +21,8 @@ import seedu.address.testutil.GroupBuilder;
  */
 public class ViewContactCommandTest {
 
+    public static final String NON_EXISTENT_GROUP_NAME = "Invalid Group Name";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    private final String NON_EXISTENT_GROUP_NAME = "Invalid Group Name";
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
