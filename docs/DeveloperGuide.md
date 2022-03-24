@@ -320,6 +320,44 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] Attendance feature
+
+#### Proposed Implementation
+The proposed attendance feature is facilitated by `AttendanceCommand`. `AttendanceCommand` consists of two subclasses,
+`PresentAttendanceCommand` and `AbsentAttendanceCommand`, which allows users to either mark a pet as present or absent
+on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off 
+time (if applicable), is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into 
+the command classes above. The command classes are then passed on to the Model component for execution.
+
+The data from the input is stored into the `AttendanceHashMap` class in pets, which consists of mappings of dates to 
+`Attendance` objects. The class hence acts as an "attendance sheet", and is the main repository of data within the 
+Model component that facilitates `Attendance` functionalities.
+
+The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods 
+in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
+supported by the methods in `AttendanceTag` and `AttendanceUtil` classes.
+
+The activity diagram below illustrates the workflow of attendance commands.
+
+![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
+
+The following sequence diagram below models the interactions between the Logic as well as the Model components to 
+update the backend and frontend of the application.
+
+![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Attendance data within `Model` component**
+
+* **Alternative 1 (current choice):** Attendance entries in every pets' HashMaps.
+  * Pros: Better OOP and performance.
+  * Cons: Higher memory usage.
+* **Alternative 2:** All attendance entries in a single HashMap.
+  * Pros: Lesser memory usage, easier to implement.
+  * Cons: May have performance issues due to nested data structure.
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -363,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                    |
 | `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                              |
 | `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                     |
-| `* * *`  | pet daycare owner | track the attendance of pets                                      | charge pet owners the correct amount depending on pets attendance |
+| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                      | charge pet owners the correct amount depending on pets attendanceEntry |
 | `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                           |
 | `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                            |
 | `* * *`  | pet daycare owner | find pets bu their ID                                             | retrieve the pet information accordingly                          |
@@ -383,10 +421,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments             |
 | `*`      | pet daycare owner | sort the pets by their type                                       | order their necessary supplies accordingly                        |
 | `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                            |
-| `*`      | pet daycare owner | change the attendance of pets anytime I want                      | I can allow for last minute scheduling                            |
+| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                      | I can allow for last minute scheduling                            |
 | `*`      | pet daycare owner | update pet's information                                          |                                                                   |
 | `*`      | pet daycare owner | update pet owner's information                                    |                                                                   |
-| `*`      | pet daycare owner | access the previous attendance of pets                            | update owners if they were to enquire                             |
+| `*`      | pet daycare owner | access the previous attendanceEntry of pets                            | update owners if they were to enquire                             |
 | `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                    |
 | `*`      | pet daycare owner | get a list of pets which will be staying overnight in the daycare | arrange the necessary manpower                                    |
 

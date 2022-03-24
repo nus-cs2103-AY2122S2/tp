@@ -36,5 +36,14 @@
                 <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" />
             </VBox>
         </VBox>
+        <VBox id="attendancePane" alignment="CENTER" minHeight="105" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="5"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT">
+                <Label styleClass="cell_small_label" text="Attendance"/>
+            </HBox>
+            <FlowPane fx:id="attendanceTags" alignment="CENTER_LEFT"/>
+        </VBox>
     </GridPane>
 </HBox>

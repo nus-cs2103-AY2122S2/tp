@@ -1,0 +1,19 @@
+@startuml
+start
+:User executes attendance command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([not marked])
+:update attendance;
+else ([already marked])
+if () then ([same entry])
+:show error message;
+else ([different entry])
+:update attendance;
+
+endif
+endif
+stop
+@enduml

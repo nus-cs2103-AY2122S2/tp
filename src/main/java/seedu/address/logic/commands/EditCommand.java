@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.pet.Address;
 import seedu.address.model.pet.Appointment;
+import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -102,9 +103,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPetDescriptor.getTags().orElse(petToEdit.getTags());
         Diet updatedDiet = editPetDescriptor.getDiet().orElse(petToEdit.getDiet());
         Appointment updatedAppointment = editPetDescriptor.getAppointment().orElse(petToEdit.getAppointment());
+        AttendanceHashMap sameAttendanceHashMap = petToEdit.getAttendanceHashMap();
 
         return new Pet(updatedName, updatedOwnerName, updatedPhone, updatedAddress,
-                updatedTags, updatedDiet, updatedAppointment);
+                updatedTags, updatedDiet, updatedAppointment, sameAttendanceHashMap);
     }
 
     @Override

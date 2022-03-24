@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Represents a Pet's upcoming appointment in the address book.
@@ -52,7 +53,8 @@ public class Appointment implements Comparable<Appointment> {
             String[] appointmentDetails = value.split(" at ");
             String retrievedDateTime = appointmentDetails[0];
             String retrievedLocation = appointmentDetails[1];
-            DateTimeFormatter formatOfRetrievedDateTime = DateTimeFormatter.ofPattern("MMM-dd-yyyy h:mm a");
+            DateTimeFormatter formatOfRetrievedDateTime = DateTimeFormatter.ofPattern("MMM-dd-yyyy h:mm a")
+                .withLocale(Locale.ENGLISH);
             this.value = value;
             this.location = retrievedLocation;
             this.dateTime = LocalDateTime.parse(retrievedDateTime, formatOfRetrievedDateTime);
@@ -84,7 +86,8 @@ public class Appointment implements Comparable<Appointment> {
      * @return String representation of dateTime in "MMM-dd-yyyy h:mm a".
      */
     private String formatDateTime(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy h:mm a")
+            .withLocale(Locale.ENGLISH);
         String formattedDateTime = dateTime.format(formatter);
         return formattedDateTime;
     }
