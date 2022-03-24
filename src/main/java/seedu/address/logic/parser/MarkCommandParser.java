@@ -40,7 +40,6 @@ public class MarkCommandParser implements Parser<MarkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         } else {
             try {
-                System.out.println(argMultimap.getValue(PREFIX_ID));
                 StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
                 markCommand = new MarkCommand(studentId, index);
