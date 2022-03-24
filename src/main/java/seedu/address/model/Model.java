@@ -18,6 +18,8 @@ public interface Model {
 
     Predicate<Seller> PREDICATE_SHOW_ALL_SELLERS = unused -> true;
 
+    Predicate<Buyer> PREDICATE_SHOW_ALL_BUYERS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -55,7 +57,7 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
-
+    //======================Address Book methods for seller=========================//
     /**
      * Returns the user prefs' seller address book file path.
      */
@@ -73,6 +75,25 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlySellerAddressBook getSellerAddressBook();
+
+    //======================Address Book methods for buyer=========================//
+    /**
+     * Returns the user prefs' seller address book file path.
+     */
+    Path getBuyerAddressBookFilePath();
+
+    /**
+     * Sets the user prefs' address book file path.
+     */
+    void setBuyerAddressBookFilePath(Path BuyerAddressBookFilePath);
+
+    /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setBuyerAddressBook(ReadOnlyBuyerAddressBook buyerAddressBook);
+
+    /** Returns the AddressBook */
+    ReadOnlyBuyerAddressBook getBuyerAddressBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -126,6 +147,29 @@ public interface Model {
      * @param buyer The buyer to be added.
      */
     void addBuyer(Buyer buyer);
+
+    /**
+     * Deletes the given buyer.
+     * The buyer must exist in the address book.
+     */
+    void deleteBuyer(Buyer target);
+
+    /**
+     * Replaces the given buyer {@code target} with {@code editedBuyer}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedBuyer} must not be the same as another existing buyer in the address book.
+     */
+    void setBuyer(Buyer target, Buyer editedBuyer);
+
+    /** Returns an unmodifiable view of the filtered buyer list */
+    ObservableList<Buyer> getFilteredBuyerList();
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+
+    void updateFilteredBuyerList(Predicate<Buyer> predicate);
 
     //========== For addseller============//
 
