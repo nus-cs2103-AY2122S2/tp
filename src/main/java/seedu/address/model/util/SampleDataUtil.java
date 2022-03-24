@@ -5,13 +5,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerAddressBook;
 import seedu.address.model.ReadOnlySellerAddressBook;
 import seedu.address.model.SellerAddressBook;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.seller.Seller;
 import seedu.address.model.tag.Tag;
 
@@ -21,6 +25,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     public static final Appointment NO_APPOINTMENT = new Appointment("");
+    public static final PropertyToBuy NO_DESIRED_PROPERTY = null;
 
     public static Client[] getSampleclients() {
         return new Client[] {
@@ -46,6 +51,13 @@ public class SampleDataUtil {
         };
     }
 
+    public static Buyer[] getSampleBuyers() {
+        return new Buyer[] {
+            new Buyer(new Name("Jacky"), new Phone("2103"),
+            NO_APPOINTMENT, getTagSet("friends"), NO_DESIRED_PROPERTY)
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Client sampleClient : getSampleclients()) {
@@ -58,6 +70,14 @@ public class SampleDataUtil {
         SellerAddressBook sampleSab = new SellerAddressBook();
         for (Seller sampleSeller : getSampleSellers()) {
             sampleSab.addSeller(sampleSeller);
+        }
+        return sampleSab;
+    }
+
+    public static ReadOnlyBuyerAddressBook getSampleBuyerAddressBook() {
+        BuyerAddressBook sampleSab = new BuyerAddressBook();
+        for (Buyer sampleBuyer : getSampleBuyers()) {
+            sampleSab.addBuyer(sampleBuyer);
         }
         return sampleSab;
     }
