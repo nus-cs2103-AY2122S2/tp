@@ -322,6 +322,41 @@ The following activity diagram summarizes what happens when a user executes a gr
     * Cons: Duplicate data in storage, hard to display assessments attempts.
 
 
+### \[Proposed\] Mark/Unmark feature
+
+The proposed mark/unmark mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is currently exclusive to `StudentAttendance`. Additionally, it implements the following operations:
+
+* `MarkCommandParser#parse()` — Parses the command arguments.
+* `MarkCommand#execute()` — Executes `ModelManager#markAttendance()` or `ModelManager#unmarkAttendance` based on a specified class group ID and week number.
+* `ModelManager#markAttendance()` — Updates the specified `Lesson` object with a list of `StudentAttendance` objects.
+
+Given below is an example usage scenario using `mark` which illustrates how the mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![MarkUnmarkState0](images/MarkUnmarkState0.png)
+
+Step 2. The user executes `list class` command to list the class groups in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
+
+Step 3. The user executes `list students c/1` command to list all the students in the class group with ID 1.
+
+Step 4. The user executes `mark attend c/1 w/3 s/1,2,3,4,5,6` to mark attendance for a lesson which belongs to a class group with ID 1 and occurs in week 3. Students with IDs 1,2,3,4,5, and 6 are marked as having attended. The `mark` command also calls `MarkCommandParser#parse()`, which parses the input and returns a successful/unsuccessful message.
+
+![ListState1](images/ListState1.png)
+
+The following sequence diagram shows how the list operation works:
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a mark command:
+
+![ListActivityDiagram](images/ListActivityDiagram.png)
+
+
 ### \[Proposed\] List feature
 
 The proposed list mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
@@ -351,6 +386,7 @@ The following sequence diagram shows how the list operation works:
 The following activity diagram summarizes what happens when a user executes a list command:
 
 ![ListActivityDiagram](images/ListActivityDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 
