@@ -168,6 +168,70 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Match feature
+
+#### Proposed Implementation
+
+We are currently implementing to implement a Match feature. In implements the following operation:
+
+* `match` —  Matches a Buyer to a List of Seller.
+
+Format: `match buyer_index`
+* The fields are:
+    * `buyer_index` - index of the Buyer that the user is trying to match with Sellers.
+    
+Result:
+* The list of sellers that match the buyer's demands are displayed in the UI.
+
+#### How match is going to be implemented
+
+* The match command will match a Buyer with Sellers that have a `PropertyToSell` that matches the demands of the `PropertyToBuy` of the buyer.
+
+* How does match filter the sellers (How does `PropertyToBuy` match with `PropertyToSell`:
+
+    -  If there exists a price where a buyer is willing to buy and seller is willing to sell for in their respective `buyRange` and `sellRange`, **AND**
+    - Their House are equal (i.e, the Location and HouseType of the house matches)
+
+* An example:
+    - buyer's `PropertyToBuy`(after `edit` or `add`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
+        - `Name`: *Janald*
+    
+        - PropertyToBuy: 
+            - `HouseType`: `BUNGALOW`,
+            - `Location`: `Serangoon` and 
+            - `PriceRange`:(50 000, 100 000) in dollars
+
+    - a certain seller has
+        - `Name`: *Junhong*
+        - `ProperyToSell`: 
+            - `House` with `HouseType`: `BUNGALOW` and `Location`: `Serangoon` as well
+            - His `PriceRange` that he is willing to sell the property for is (99 999, 200 000)
+    - In this case, the PropertyToBuy and PropertyToSell can match(same House, and 99 999 - 100 000 dollars is a matching price)
+    - `match 2` will display the list of sellers that match the buyer *Janald*. As a result, *Junhong* will be one of the sellers displayed.
+    
+#### Why match is going to be implemented
+
+* So far, our AgentSee application helps housing agents to keep track of their clients in an efficient manner.
+
+* Since there are so many buyers and sellers to keep track of, it would be useful for agents to automate the matching of buyers to sellers.
+* The match feature will help agents filter and find a matching property that a buyer wants to buy and a seller wants to sell, which is of great convenience for agents to liase buyers with sellers.
+* What buyers look for when buying a Property is its `Location`, `HouseType`, and they have a `PriceRange` they are willing to pay for. Therefore, we are implementing `match` such that these conditions are met.
+
+#### \[Proposed\]  Alternatives considered
+
+* We can match buyers with other less strict conditions as well.
+* For example, we can match buyers and sellers with only match:
+    - HouseTypes only (example: `COLONIAL`, Since buyers may be looking only for a specific HouseType, regardless of Location)
+    - Location only (example: `Toa Payoh`, Since some buyers may like to buy a Property at a specific area, regardless of other conditions)
+    - PriceRange only (Since buyers may just be looking for properties in their buy range)
+
+* As such, we have a more flexible match feature which would be ideal for agents to match based on their dynamic client demands.
+
+### \[Proposed\] Bargain/Negotiate feature
+
+* An additional feature that could be implemented in the future.
+    
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
