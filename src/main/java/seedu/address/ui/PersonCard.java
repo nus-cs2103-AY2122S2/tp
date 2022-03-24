@@ -88,13 +88,8 @@ public class PersonCard extends UiPart<Region> {
                 } else {
                     skillLabel.setStyle("-fx-background-color: #006622");
                 }
-
                 skillSet.getChildren().add(skillLabel);
             });
-    }
-
-    public void mouseOver() {
-
     }
 
     @Override
