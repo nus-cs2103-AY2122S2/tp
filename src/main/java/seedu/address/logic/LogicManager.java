@@ -93,29 +93,30 @@ public class LogicManager implements Logic {
     /**
      * Iterate through the list of Persons and return number of persons in
      * the region given
-     * @param region is the region where buyers have their preference
+     * @param strRegion is the region where buyers have their preference
      *               for their potential property and sellers have their property in
      */
     @Override
-    public int getPersonsBasedOnRegion(String region) {
+    public int getPersonsBasedOnRegion(String strRegion) {
         int totalPersons = 0;
         //Resets to full list of Persons to prevent any logical error after `find` command
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         //@flairekq
         //Author provided code to help with arrow code issue: https://github.com/nus-cs2103-AY2122S2/forum/issues/233
-        if (!Region.isValidRegion(region)) { //defensive code
+        if (!Region.isValidRegion(strRegion)) { //defensive code
             return totalPersons;
         }
+        Region region = Region.fromString(strRegion);
         for (Person person : getFilteredPersonList()) {
             Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
-            if (person.getUserType().isBuyer() && preference != null && preference.getRegionInString().equals(region)) {
+            if (person.getUserType().isBuyer() && preference != null && preference.getRegion().equals(region)) {
                 totalPersons++;
                 continue;
             }
             //If usertype is seller
             Set<Property> setOfPropertyValues = person.getProperties();
             for (Property p : setOfPropertyValues) {
-                if (p.getRegionInString().equals(region)) {
+                if (p.getRegion().equals(region)) {
                     totalPersons++;
                 }
             }

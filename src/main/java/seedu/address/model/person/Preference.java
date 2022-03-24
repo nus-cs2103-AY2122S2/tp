@@ -45,10 +45,6 @@ public class Preference {
         return region;
     }
 
-    public String getRegionInString() {
-        return region.toString();
-    }
-
     public Size getSize() {
         return size;
     }
