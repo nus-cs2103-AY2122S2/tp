@@ -29,7 +29,7 @@ This section describes some noteworthy details on how certain features are imple
 * UI is updated accordingly
 
 ### Delete medical information (`delete 1`) feature
-* `ViewMedicalCommandParser` parses input and return a `DeleteMedicalCommand` with index to delete as parameter.
+* `DeleteMedicalCommandParser` parses input and return a `DeleteMedicalCommand` with index to delete as parameter.
 * Model deletes the medical information
 * UI is updated accordingly
 
