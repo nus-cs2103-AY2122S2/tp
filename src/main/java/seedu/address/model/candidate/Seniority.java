@@ -1,16 +1,15 @@
 package seedu.address.model.candidate;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Candidate's seniority in TAlent Assistant™.
- * Guarantees: immutable; is valid as declared in {@link #isValidSeniority(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidSeniority(int)}
  */
 public class Seniority {
     public static final String MESSAGE_CONSTRAINTS =
             "Seniority should only either be COM1, COM2, COM3 or COM4, and it should not be blank";
-    public static final String VALIDATION_REGEX = "COM[1|2|3|4]";
+    public static final String COM_VALUE = "COM";
     public final String seniority;
 
     /**
@@ -18,17 +17,17 @@ public class Seniority {
      *
      * @param seniority A valid seniority.
      */
-    public Seniority(String seniority) {
-        requireNonNull(seniority);
+    public Seniority(int seniority) {
         checkArgument(isValidSeniority(seniority), MESSAGE_CONSTRAINTS);
-        this.seniority = seniority;
+
+        this.seniority = COM_VALUE + seniority;
     }
 
     /**
      * Returns true if a given string is a valid seniority.
      */
-    public static boolean isValidSeniority(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidSeniority(int test) {
+        return test >= 1 && test <= 4;
     }
 
     @Override

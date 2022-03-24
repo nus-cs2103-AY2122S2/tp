@@ -22,6 +22,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
@@ -134,6 +135,21 @@ public class ParserUtil {
             throw new ParseException(Course.MESSAGE_CONSTRAINTS);
         }
         return new Course(trimmedCourse);
+    }
+
+    /**
+     * Parses a {@code String seniority} into a {@code Seniority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code seniority} is invalid.
+     */
+    public static Seniority parseSeniority(String seniority) throws ParseException {
+        int seniorityInt = Integer.parseInt(seniority.substring(seniority.length() - 1));
+
+        if (!Seniority.isValidSeniority(seniorityInt)) {
+            throw new ParseException(Seniority.MESSAGE_CONSTRAINTS);
+        }
+        return new Seniority(seniorityInt);
     }
 
     /**

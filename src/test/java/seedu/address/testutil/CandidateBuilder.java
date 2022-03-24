@@ -11,6 +11,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -25,6 +26,7 @@ public class CandidateBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "E0123456@u.nus.edu";
     public static final String DEFAULT_COURSE = "Computer Science";
+    public static final String DEFAULT_SENIORITY = "COM2";
     public static final String DEFAULT_APPLICATION_STATUS = "Pending";
     public static final String DEFAULT_INTERVIEW_STATUS = " Not Scheduled";
     public static final String DEFAULT_AVAILABILITY = "1,2,3,4,5,6,7";
@@ -34,6 +36,7 @@ public class CandidateBuilder {
     private Phone phone;
     private Email email;
     private Course course;
+    private Seniority seniority;
     private Set<Tag> tags;
     private ApplicationStatus applicationStatus;
     private InterviewStatus interviewStatus;
@@ -48,6 +51,7 @@ public class CandidateBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         course = new Course(DEFAULT_COURSE);
+        seniority = new Seniority(Integer.parseInt(DEFAULT_SENIORITY.substring(DEFAULT_SENIORITY.length() - 1)));
         tags = new HashSet<>();
         applicationStatus = new ApplicationStatus(DEFAULT_APPLICATION_STATUS);
         interviewStatus = new InterviewStatus(DEFAULT_INTERVIEW_STATUS);
@@ -63,6 +67,7 @@ public class CandidateBuilder {
         phone = candidateToCopy.getPhone();
         email = candidateToCopy.getEmail();
         course = candidateToCopy.getCourse();
+        seniority = candidateToCopy.getSeniority();
         tags = new HashSet<>(candidateToCopy.getTags());
         applicationStatus = candidateToCopy.getApplicationStatus();
         interviewStatus = candidateToCopy.getInterviewStatus();
@@ -78,7 +83,7 @@ public class CandidateBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Candidate} that we are building.
      */
     public CandidateBuilder withName(String name) {
         this.name = new Name(name);
@@ -94,7 +99,7 @@ public class CandidateBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Candidate} that we are building.
      */
     public CandidateBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -102,7 +107,7 @@ public class CandidateBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Candidate} that we are building.
      */
     public CandidateBuilder withEmail(String email) {
         this.email = new Email(email);
@@ -114,6 +119,14 @@ public class CandidateBuilder {
      */
     public CandidateBuilder withCourse(String course) {
         this.course = new Course(course);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Seniority} of the {@code Candidate} that we are building.
+     */
+    public CandidateBuilder withSeniority(String seniority) {
+        this.seniority = new Seniority(Integer.parseInt(seniority.substring(seniority.length() - 1)));
         return this;
     }
 
@@ -134,7 +147,7 @@ public class CandidateBuilder {
     }
 
     /**
-     * Sets the {@code Availability} of the {@code Person} that we are building.
+     * Sets the {@code Availability} of the {@code Candidate} that we are building.
      */
     public CandidateBuilder withAvailability(String availability) {
         this.availability = new Availability(availability);
@@ -142,11 +155,11 @@ public class CandidateBuilder {
     }
 
     /**
-     * Returns a new Person with specific fields.
-     * @return a new Person.
+     * Returns a new Candidate with specific fields.
+     * @return a new Candidate.
      */
     public Candidate build() {
-        return new Candidate(studentId, name, phone, email, course, tags,
+        return new Candidate(studentId, name, phone, email, course, seniority, tags,
                 applicationStatus, interviewStatus, availability);
     }
 

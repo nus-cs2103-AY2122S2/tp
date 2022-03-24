@@ -5,6 +5,7 @@
     "phone": "94351253",
     "email": "E0123456@u.nus.edu",
     "course": "Business Analytics",
+    "seniority": "COM2",
     "tagged": [ "friends" ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
@@ -15,6 +16,7 @@
     "phone": "94351253",
     "email": "E0123456@u.nus.edu",
     "course": "Business Analytics",
+    "seniority": "COM2",
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
     "availability": "1,2,3,4,5,6,7"

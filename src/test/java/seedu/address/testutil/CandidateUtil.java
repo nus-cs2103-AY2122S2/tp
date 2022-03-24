@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -38,6 +39,7 @@ public class CandidateUtil {
         sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
         sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
         sb.append(PREFIX_COURSE + candidate.getCourse().course + " ");
+        sb.append(PREFIX_SENIORITY + candidate.getSeniority().seniority + " ");
         sb.append(PREFIX_AVAILABILITY + candidate.getAvailability().availability + " ");
         candidate.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -55,6 +57,8 @@ public class CandidateUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(PREFIX_COURSE).append(course.course).append(" "));
+        descriptor.getSeniority().ifPresent(seniority ->
+                sb.append(PREFIX_SENIORITY).append(seniority.seniority).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
