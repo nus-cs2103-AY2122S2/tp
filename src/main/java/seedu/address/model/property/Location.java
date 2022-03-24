@@ -9,6 +9,8 @@ public class Location {
 
     private String location;
 
+    public static final String MESSAGE_CONSTRAINTS = "Location should not be empty";
+
     public Location(String location) {
         this.location = location;
     }
@@ -28,5 +30,9 @@ public class Location {
         return other == this // short circuit if same object
             || (other instanceof Location // instanceof handles nulls
             && location.equals(((Location) other).location)); // state check
+    }
+
+    public static boolean isValidLocation(String location) {
+        return location.isEmpty();
     }
 }

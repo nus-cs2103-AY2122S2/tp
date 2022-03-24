@@ -1,62 +1,103 @@
 package seedu.address.model.property;
 
+import java.util.HashMap;
+
 /**
  * All types of houses are listed here
  */
 public enum HouseType {
-    ANY {
+    ANY("any") {
         @Override
         public String toString() {
             return "Any";
         }
     },
-    APARTMENT {
+    APARTMENT("apartment") {
         @Override
         public String toString() {
             return "Apartment";
         }
     },
-    BUNGALOW {
+    BUNGALOW("bungalow") {
         @Override
         public String toString() {
             return "Bungalow";
         }
     },
-    CONDOMINIUM {
+    CONDOMINIUM("condominium", "condo") {
         @Override
         public String toString() {
             return "Condomunium";
         }
     },
-    COLONIA {
+    COLONIA("colonia") {
         @Override
         public String toString() {
             return "Colonia";
         }
     },
-    HDB_FLAT {
+    HDB_FLAT("hdb, hdb_flat") {
         @Override
         public String toString() {
             return "HDB Flat";
         }
     },
-    SEMIDETACHED {
+    SEMIDETACHED("semidetached", "semid", "semi-detached", "semi-d") {
         @Override
         public String toString() {
             return "Semi-Detached";
         }
     },
-    MANSION {
+    MANSION("mansion") {
         @Override
         public String toString() {
             return "Mansion";
         }
     },
-    NULLHOUSETYPE {
+    NULLHOUSETYPE("nullhousetype") {
         @Override
         public String toString() {
             return "Not a house type";
         }
+    };
+
+    private final HashMap<String, HouseType> houseMappings = new HashMap<>();
+
+    public static final String MESSAGE_CONSTRAINTS = "Only the following house types are available: " +
+            HouseType.ANY + " " +
+            HouseType.APARTMENT + " " +
+            HouseType.BUNGALOW + " " +
+            HouseType.COLONIA + " " +
+            HouseType.CONDOMINIUM + " " +
+            HouseType.HDB_FLAT + " " +
+            HouseType.MANSION + " " +
+            HouseType.SEMIDETACHED;
+
+    HouseType(String... houseTypes) {
+        for (String s : houseTypes) {
+            houseMappings.put(s, this);
+        }
+    }
+
+    public static boolean isValidHouseType(String house) {
+        for (HouseType h : HouseType.values()) {
+            HouseType houseType = h.houseMappings.get(house.toLowerCase());
+            if (houseType != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static HouseType getHouseType(String house) {
+        for (HouseType h : HouseType.values()) {
+            HouseType houseType = h.houseMappings.get(house.toLowerCase());
+            if (houseType != null) {
+                return houseType;
+            }
+        }
+        return HouseType.ANY;
     }
 }
+
 

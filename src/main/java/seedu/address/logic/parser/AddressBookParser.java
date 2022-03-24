@@ -87,6 +87,7 @@ public class AddressBookParser {
 
         case AddBuyerCommand.COMMAND_WORD:
             return new AddBuyerCommandParser().parse(arguments);
+            
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

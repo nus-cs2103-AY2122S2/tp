@@ -12,6 +12,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
+import seedu.address.model.property.PriceRange;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -77,6 +80,51 @@ public class ParserUtil {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
         return new Appointment(trimmedAppointment);
+    }
+
+    /**
+     * Parses a {@code String Location} into an {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static String parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedLocation;
+    }
+
+    /**
+     * Parses a {@code String priceRange} into an {@code PriceRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static PriceRange parsePriceRange(String priceRange) throws ParseException {
+        requireNonNull(priceRange);
+        String trimmedPriceRange = priceRange.trim();
+        if (!PriceRange.isValidPriceRange(priceRange)) {
+            throw new ParseException(PriceRange.MESSAGE_CONSTRAINTS);
+        }
+        return new PriceRange(priceRange);
+    }
+
+    /**
+     * Parses a {@code String houseType} into an {@code HouseType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code houseType} is invalid.
+     */
+    public static HouseType parseHouseType(String houseType) throws ParseException {
+        requireNonNull(houseType);
+        String trimmedAppointment = houseType.trim();
+        if (!HouseType.isValidHouseType(houseType)) {
+            throw new ParseException(HouseType.MESSAGE_CONSTRAINTS);
+        }
+        return HouseType.getHouseType(houseType);
     }
 
     /**
