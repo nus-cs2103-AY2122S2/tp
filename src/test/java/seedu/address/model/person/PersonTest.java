@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -10,6 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +26,38 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void create_personWithoutOptionalFields_allFieldsAreNonNull() {
+        Person person = new Person(new FriendName("Alex Teo"));
+        assertTrue(person.getAddress() != null);
+        assertTrue(person.getDescription() != null);
+        assertTrue(person.getEmail() != null);
+        assertTrue(person.getPhone() != null);
+        assertTrue(person.getTags() != null);
+        assertTrue(person.getLogs() != null);
+    }
+
+    @Test
+    public void create_personWithoutOptionalFields_valuesInFieldsAreNull() {
+        Person person = new Person(new FriendName("Alex Teo"));
+        assertTrue(person.getAddress().value == null);
+        assertTrue(person.getDescription().value == null);
+        assertTrue(person.getEmail().value == null);
+        assertTrue(person.getPhone().value == null);
+        assertTrue(person.getTags().size() == 0);
+        assertTrue(person.getLogs().size() == 0);
+    }
+
+    @Test
+    public void create_personUsingConstructorWithoutDescription_success() {
+        Person person = new Person(new FriendName("Brandon Tan"), new Phone("98765252"),
+                new Email("test@yahoo.com.sg"), new Address("Kings Drive"),
+                new HashSet<>(), new ArrayList<>());
+
+        assertTrue(person.getDescription() != null);
+        assertTrue(person.getDescription().value == null);
     }
 
     @Test
@@ -41,9 +77,13 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // name differs in case, all other attributes different -> returns true
+        editedBob = new PersonBuilder(ALICE).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -85,9 +125,14 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        //different descriptions -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDescription(VALID_DESCRIPTION_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
 
         // different logs (titles && description must match) -> returns false
         editedAlice = new PersonBuilder(ALICE).withLogs(TypicalLogs.getTypicalLogs()).build();
@@ -112,6 +157,11 @@ public class PersonTest {
         // returns true even with different attributes
         Person editedAlice = new PersonBuilder(ALICE).withLogs(TypicalLogs.getTypicalLogs()).build();
         assertTrue(ALICE.hasSameName(editedAlice));
+
+        //returns true even if cases are different
+        FriendName repeatedNameDifferentCase = new FriendName("Some Valid Name");
+        otherPerson = new Person(repeatedNameDifferentCase);
+        assertTrue(person.hasSameName(otherPerson));
 
         // returns false
         assertFalse(ALICE.hasSameName(BOB));

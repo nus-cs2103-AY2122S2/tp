@@ -31,6 +31,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ShowFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.FriendName;
@@ -56,7 +57,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommandByName_deletefriend() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand("deletefriend n/Dummy Name");
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " n/Dummy Name");
         assertEquals(new DeleteCommand(new FriendName("Dummy Name")), command);
     }
 
@@ -116,6 +117,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_showFriend() throws Exception {
+        Person person = new PersonBuilder().build();
+        ShowFriendCommand command = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_WORD
+                + " n/" + person.getName().fullName);
+        assertEquals(new ShowFriendCommand(person), command);
     }
 
     @Test
