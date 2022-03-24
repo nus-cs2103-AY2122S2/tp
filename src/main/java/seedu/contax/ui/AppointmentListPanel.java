@@ -27,7 +27,7 @@ public class AppointmentListPanel extends UiPart<Region> {
      */
     public AppointmentListPanel(ObservableList<ScheduleItem> appointmentList) {
         super(FXML);
-        this.cardFactory = new AppointmentListCardFactory();
+        this.cardFactory = new AppointmentListCardFactory(appointmentList);
         appointmentListView.setItems(appointmentList);
         appointmentListView.setCellFactory(listView -> new AppointmentListPanel.AppointmentListViewCell());
     }
@@ -45,7 +45,7 @@ public class AppointmentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(cardFactory.createCard(scheduleItem, getIndex() + 1));
+                setGraphic(cardFactory.createCard(scheduleItem, getIndex()));
             }
         }
     }
