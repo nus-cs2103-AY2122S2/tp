@@ -142,17 +142,6 @@
     -fx-text-fill: #010504;
 }
 
-.currently_displaying {
-    -fx-font-family: "sans-serif";
-    -fx-font-size: 16px;
-    -fx-text-fill: #b6b6b6;
-}
-
-.currently_displaying_pane {
-    -fx-padding: 0 0 10 0;
-    -fx-alignment: center-left;
-}
-
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -416,7 +405,7 @@
     -fx-font-size: 11;
 }
 
-#openings {
+#openings, #offered {
     -fx-text-fill: #d0d0d0;
 }
 
@@ -429,10 +418,15 @@
     -fx-font-size: 12;
 }
 
-#interview_phone {
+#interviewphone, #interviewemail {
     -fx-text-fill: #d0d0d0;
 }
 
-#interview_email {
-    -fx-text-fill: #d0d0d0;
+#interviewstatus {
+    -fx-text-fill: #white;
+    -fx-background-color: #9f8331;
+    -fx-padding: 3 3 3 3;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-font-size: 12;
 }

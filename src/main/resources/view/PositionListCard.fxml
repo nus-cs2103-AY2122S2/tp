@@ -30,7 +30,12 @@
       </HBox>
       <FlowPane fx:id="requirements" />
       <Label fx:id="description" styleClass="cell_medium_label" text="\$description" wrapText="true"/>
-        <Label fx:id="openings" styleClass="cell_small_label" text="\$openings" />
+        <HBox spacing="20">
+            <Label fx:id="openings" styleClass="cell_small_label" text="\$openings" />
+            <Label fx:id="offered" styleClass="cell_small_label" text="\$offered" />
+        </HBox>
+
+
     </VBox>
       <rowConstraints>
          <RowConstraints />
