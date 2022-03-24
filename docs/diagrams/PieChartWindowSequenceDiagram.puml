@@ -2,6 +2,7 @@
 !include style.puml
 
 box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
 participant ":PieChartWindow" as PieChartWindow UI_COLOR
 end box
 
@@ -9,7 +10,24 @@ box Logic LOGIC_COLOR_T1
 participant ":SummariseCommand" as SummariseCommand LOGIC_COLOR
 end box
 
-[-> PieChartWindow : execute()
+[-> MainWindow : executeCommand()
+activate MainWindow
+
+MainWindow -> MainWindow : handleSummarise()
+activate MainWindow
+
+MainWindow -> SummariseCommand : shouldOpenPieChartWindow()
+activate SummariseCommand
+
+SummariseCommand --> MainWindow : Should display window
+deactivate SummariseCommand
+
+alt#Gold #LightBlue Should display window
+
+create PieChartWindow
+MainWindow -> PieChartWindow : new
+
+
 activate PieChartWindow
 
 PieChartWindow -> SummariseCommand : getCovidStatsByBlockDataList()
@@ -60,13 +78,20 @@ deactivate PieChartWindow
 
 PieChartWindow --> PieChartWindow
 deactivate PieChartWindow
-[<--PieChartWindow : pieChartWindow
+PieChartWindow --> MainWindow: pieChartWindow
 deactivate PieChartWindow
 
 
-[-> PieChartWindow : show()
+MainWindow -> PieChartWindow : show()
 activate PieChartWindow
 
-[<--PieChartWindow : result
+MainWindow <--PieChartWindow : result
 deactivate PieChartWindow
+
+else #Pink Else
+
+end
+deactivate MainWindow
+[<--MainWindow : feedback to user
+deactivate MainWindow
 @enduml
