@@ -57,7 +57,7 @@ class AddLabCommandTest {
     @Test
     public void execute_emptyStudentList_failure() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
-        // TypicalAddressBook already has Lab 1
+
         AddLabCommand command = new AddLabCommand(new Lab("1"));
 
         String expectedMessage = AddLabCommand.MESSAGE_EMPTY_STUDENT_LIST;
