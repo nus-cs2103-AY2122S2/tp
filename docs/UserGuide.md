@@ -154,7 +154,7 @@ Edits an existing student's details in the address book by the Index provided an
 <div markdown="span" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
-> - Filter the student list via _find_ commands to make finding the index easier  
+> - Filter the student list via __*find*__ commands to make finding the index easier  
 > - Leave other attributes of the student as is by omitting parameters from the command
 
 </div>
@@ -171,7 +171,7 @@ Deletes the specified person from the address book.
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-> :bulb: **Tip:** filter the student list via _find_ commands to make finding the index easier
+> :bulb: **Tip:** filter the student list via __*find*__ commands to make finding the index easier
 
 </div>
 
