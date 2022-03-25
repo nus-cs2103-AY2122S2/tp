@@ -43,8 +43,8 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 <div markdown="block" class="alert alert-info">
 
 > :information_source: **Installation notes:**  
-- Application data will be stored in the same folder containing the application executable.  
-- Currently only officially supported for x64 Windows platforms.
+> - Application data will be stored in the same folder containing the application executable.  
+> - Currently only officially supported for x64 Windows platforms.
 
 </div>
 
