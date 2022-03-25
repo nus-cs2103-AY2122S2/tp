@@ -122,7 +122,6 @@ public class ModelManager implements Model {
         hustleBook.sortPersonByDate();
     }
 
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**

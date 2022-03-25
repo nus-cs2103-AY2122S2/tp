@@ -64,7 +64,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the"
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
             + "list below and enter the index of the client you wish to edit \n"
             + "Example: 1, 2, 3 ...";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book.";
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Person> lastShownList = (FilteredList<Person>) model.getFilteredPersonList();
+        FilteredList<Person> lastShownList = new FilteredList<Person>(model.getFilteredPersonList());
         Index targetIndex;
         if (index == 0) {
             String[] nameKeywords = targetNameStr.split("\\s+");

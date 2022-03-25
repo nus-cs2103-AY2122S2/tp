@@ -88,7 +88,6 @@ public interface Model {
      */
     void sortPersonListByDate();
 
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

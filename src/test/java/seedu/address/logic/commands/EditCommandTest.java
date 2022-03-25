@@ -13,13 +13,13 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNames.FULL_NAME_FIRST_PERSON;
-// import static seedu.address.testutil.TypicalNames.NAME_INVALID_PERSON;
+import static seedu.address.testutil.TypicalNames.NAME_INVALID_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalHustleBook;
 
 import org.junit.jupiter.api.Test;
 
-// import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.HustleBook;
@@ -102,14 +102,14 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    //    @Test
-    //    public void execute_duplicatePersonUnfilteredList_failure() {
-    //        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
-    //        EditCommand editCommand = new EditCommand(NAME_SECOND_PERSON.toString(), descriptor);
-    //
-    //        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    //    }
+    @Test
+    public void execute_duplicatePersonUnfilteredList_failure() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+        EditCommand editCommand = new EditCommand(NAME_SECOND_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
@@ -122,25 +122,27 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
-    //    @Test
-    //    public void execute_invalidPersonNameUnfilteredList_failure() {
-    //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
-    //        EditCommand editCommand = new EditCommand(NAME_INVALID_PERSON.toString(), descriptor);
-    //
-    //        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
-    //    }
 
-    //    /**
-    //     * Edit filtered list with invalid name.
-    //     */
-    //    @Test
-    //    public void execute_invalidPersonNameFilteredList_failure() {
-    //        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-    //
-    //        EditCommand editCommand = new EditCommand(NAME_INVALID_PERSON.toString(),
-    //                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
-    //
-    //        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);//    }
+    @Test
+    public void execute_invalidPersonNameUnfilteredList_failure() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(NAME_INVALID_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
+    }
+
+    /**
+     * Edit filtered list with invalid name.
+     */
+    @Test
+    public void execute_invalidPersonNameFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        EditCommand editCommand = new EditCommand(NAME_INVALID_PERSON,
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
+    }
 
     @Test
     public void equals() {
