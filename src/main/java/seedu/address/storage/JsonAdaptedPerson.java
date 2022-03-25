@@ -166,23 +166,29 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
         ScheduledMeeting meeting;
-        if (scheduledMeeting.toString().equals("No meeting scheduled")) {
+        if (scheduledMeeting.equals("No meeting scheduled")) {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
                     modelTags, modelPrevDateMet, modelSalary, modelInfo);
         } else {
-            String[] meetingSplit = scheduledMeeting.split(" at: ");
-            String meetingDate = meetingSplit[0];
-            String meetingTime = meetingSplit[1];
-            if (!MeetingDate.isValidDate(meetingDate)) {
-                throw new IllegalValueException(MeetingDate.MESSAGE_CONSTRAINTS);
-            }
-            if (!MeetingTime.isValidTime(meetingTime)) {
-                throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);
-            }
-            meeting = new ScheduledMeeting(new MeetingDate(meetingDate), new MeetingTime(meetingTime));
+            meeting = parseScheduledMeeting();
         }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
                 modelTags, modelPrevDateMet, modelSalary, modelInfo, meeting);
+    }
+
+    private ScheduledMeeting parseScheduledMeeting() throws IllegalValueException {
+        ScheduledMeeting meeting;
+        String[] meetingSplit = scheduledMeeting.split(" ");
+        String meetingDate = meetingSplit[0];
+        String meetingTime = meetingSplit[1];
+        if (!MeetingDate.isValidDate(meetingDate)) {
+            throw new IllegalValueException(MeetingDate.MESSAGE_CONSTRAINTS);
+        }
+        if (!MeetingTime.isValidTime(meetingTime)) {
+            throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);
+        }
+        meeting = new ScheduledMeeting(new MeetingDate(meetingDate), new MeetingTime(meetingTime));
+        return meeting;
     }
 
 }

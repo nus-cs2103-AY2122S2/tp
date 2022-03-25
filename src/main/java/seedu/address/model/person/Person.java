@@ -50,7 +50,7 @@ public class Person {
     }
 
     /**
-     * Constructor for Person object where every field is present and not null.
+     * Constructor for Person object where every field is present and not null except scheduled meeting.
      */
     public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
                   PrevDateMet prevDateMet, Salary salary, Info info) {
@@ -68,8 +68,8 @@ public class Person {
     }
 
     /**
-     * Constructor for Person object where every field is present and not null except prevDateMet
-     * and salary.
+     * Constructor for Person object where every field is present and not null except prevDateMet, salary, info
+     * and scheduled meeting.
      * Previous date met will be set to the current date as the user might meet up with the client
      * for the first time.
      * Salary will be set to the default value, "0".
@@ -175,8 +175,8 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getPrevDateMet().equals(getPrevDateMet())
                 && otherPerson.getInfo().equals(getInfo())
-                && otherPerson.getSalary().equals(getSalary());
-        // && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
+                && otherPerson.getSalary().equals(getSalary())
+                && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
     }
 
     @Override

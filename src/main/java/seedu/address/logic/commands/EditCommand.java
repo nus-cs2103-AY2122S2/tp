@@ -33,6 +33,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -117,9 +118,10 @@ public class EditCommand extends Command {
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
         PrevDateMet updatedPrevDateMet = editPersonDescriptor.getPrevDateMet().orElse(personToEdit.getPrevDateMet());
+        ScheduledMeeting scheduledMeeting = personToEdit.getScheduledMeeting();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFlag,
-                updatedTags, updatedPrevDateMet, updatedSalary, updatedInfo);
+                updatedTags, updatedPrevDateMet, updatedSalary, updatedInfo, scheduledMeeting);
     }
 
     @Override
