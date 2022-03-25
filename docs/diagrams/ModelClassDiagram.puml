@@ -14,24 +14,18 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
-Class Task
-Class Date
-Class Time
-Class Description
-Class UniqueTaskList
 
+Package TaskModel {
+}
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
-
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
@@ -39,26 +33,12 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-
-AddressBook *--> "1" UniquePersonList
-AddressBook *--> "1" UniqueTaskList
 UniquePersonList --> "~* all" Person
-UniqueTaskList --> "~* all" Task
+AddressBook *--> "1" UniquePersonList
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Task *--> Description
-Task *--> Time
-Task *--> Date
-
-
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
-ModelManager -->"~* filtered" Task
+ModelManager --> TaskModel
 @enduml
