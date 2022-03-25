@@ -21,9 +21,9 @@ public class TypicalInterviews {
     public static final LocalDateTime TYPICAL_INTERVIEW_DATE_TIME = LocalDateTime.of(2022, Month.DECEMBER, 23, 10, 00);
     public static final LocalDateTime THURSDAY_INTERVIEW_DATE_TIME = LocalDateTime.of(2080, Month.APRIL, 25, 10, 00);
     public static final LocalDateTime TUESDAY_INTERVIEW_DATE_TIME = LocalDateTime.of(2080, Month.APRIL, 23, 10, 00);
-    public static final LocalDateTime AFTER_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23,17, 31);
-    public static final LocalDateTime BEFORE_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23,7, 59);
-    public static final LocalDateTime ON_WEEKEND = LocalDateTime.of(2080, Month.APRIL, 20,8, 30);
+    public static final LocalDateTime AFTER_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23, 17, 31);
+    public static final LocalDateTime BEFORE_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23, 7, 59);
+    public static final LocalDateTime ON_WEEKEND = LocalDateTime.of(2080, Month.APRIL, 20, 8, 30);
 
     public static final Interview INTERVIEW_ALICE = new InterviewBuilder().withCandidate(TypicalPersons.ALICE)
             .withInterviewDateTime(VALID_ALICE_INTERVIEW_DATE_TIME).build();
