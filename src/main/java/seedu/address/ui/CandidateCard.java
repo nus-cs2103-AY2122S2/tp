@@ -7,8 +7,6 @@ import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
 import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
 import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -66,7 +64,6 @@ public class CandidateCard extends UiPart<Region> {
     private FlowPane statusPane;
     @FXML
     private FlowPane availableDays;
-  
     /**
      * Creates a {@code CandidateCode} with the given {@code Candidate} and index to display.
      */
@@ -78,9 +75,6 @@ public class CandidateCard extends UiPart<Region> {
         phone.setText(candidate.getPhone().value);
         course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
         email.setText(candidate.getEmail().value);
-        /*candidate.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));*/ 
         applicationStatus.setText(APPLICATION_STATUS_MSG + candidate.getApplicationStatus().toString());
         interviewStatus.setText(INTERVIEW_STATUS_MSG + candidate.getInterviewStatus().toString());
         availability.setText(AVAILABILITY_MSG);
