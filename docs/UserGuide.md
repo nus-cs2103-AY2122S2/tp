@@ -109,7 +109,7 @@ Examples:
 
 Given a pet ID, add or clear a pet appointment details in the database.
 
-**Add Appointment** 
+**Add Appointment**
 
 Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 
@@ -125,7 +125,7 @@ Examples:
 `app 1 dt/04-03-2022 09:30 at/ NUS Vet Clinic` will store the appointment details for pet 1 as
 `Mar-04-2022 9:30 AM at NUS Vet Clinic`.
 
-**Clear Appointment** 
+**Clear Appointment**
 
 Format: `app INDEX clear`
 

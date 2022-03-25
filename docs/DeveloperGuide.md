@@ -189,19 +189,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Proposed Implementation
 
-The proposed appointment feature is facilitated by the `AppointmentCommand` class which extends `Command` class. The 
-`AppointmentCommand` takes in a valid mandatory index which specifics the pet that the command is to be used on, 
-followed by either **one** prefix (*clear*) or **two** prefixes (*dateTime* and *location*) based on the objective the 
+The proposed appointment feature is facilitated by the `AppointmentCommand` class which extends `Command` class. The
+`AppointmentCommand` takes in a valid mandatory index which specifics the pet that the command is to be used on,
+followed by either **one** prefix (*clear*) or **two** prefixes (*dateTime* and *location*) based on the objective the
 user is trying to accomplish. The fields are parsed by `AppointmentCommandParser` class.
 
 Appointment feature can be used to accomplish the following 2 tasks:
 1. Add and store pet's appointment details. (*dateTime and Location prefixes*)
 2. Clear and delete pet's appointment details. (*clear prefix*)
 
-The operation of updating the pet's appointment details and updating the pet filter list are done by methods in the 
+The operation of updating the pet's appointment details and updating the pet filter list are done by methods in the
 Model interface as Model#setPet() and Model#updateFilterPetList() respectively.
 
-The following sequence diagram below illustrates the interactions between the `Logic` component and `Model` component 
+The following sequence diagram below illustrates the interactions between the `Logic` component and `Model` component
 for the `execute("app 1 clear")` API call:
 ![AppointmentSequenceDiagram](images/AppointmentSequenceDiagram.png)
 
@@ -211,12 +211,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Design considerations:
 
 * **Alternative 1 (current choice):** Currently the appointment command is responsible for both the adding and clearing
-of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only 
+of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only
 by the prefixes / augments.
     * Pros: Easy and simple to implement.
     * Cons: User may struggle to get familiar with the command.
 
-* **Alternative 2:** Add a new `clear` command to clear and delete contents of variables based on input field. 
+* **Alternative 2:** Add a new `clear` command to clear and delete contents of variables based on input field.
     * Pros: Better for future scalability.
     * Cons: Complex implementation. More lines of code. Harder to set up initially.
 
@@ -234,8 +234,8 @@ entered.
 
 `FilterCommandParser` parses the arguments and classifies the fields into the three different classes as represented by
 `DateContainsFilterDatePredicate`, `OwnerNameContainsFilterWordPredicate` and `TagContainsFilterWordPredicate` classes.
-Each class extends the `FilterByContainsFilterWordPredicate` class, which implements the `Predicate<Pet>` interface, 
-in order for `FindCommand` to handle different fields appropriately and consequently test each pet differently for a 
+Each class extends the `FilterByContainsFilterWordPredicate` class, which implements the `Predicate<Pet>` interface,
+in order for `FindCommand` to handle different fields appropriately and consequently test each pet differently for a
 match in the specified field.
 
 `FindCommand` then updates the address book using one of the three classes (`Predicates`). Each class has a different
@@ -345,15 +345,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Proposed Implementation
 The proposed attendance feature is facilitated by `AttendanceCommand`. `AttendanceCommand` consists of two subclasses,
 `PresentAttendanceCommand` and `AbsentAttendanceCommand`, which allows users to either mark a pet as present or absent
-on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off 
-time (if applicable), is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into 
+on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off
+time (if applicable), is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into
 the command classes above. The command classes are then passed on to the Model component for execution.
 
-The data from the input is stored into the `AttendanceHashMap` class in pets, which consists of mappings of dates to 
-`Attendance` objects. The class hence acts as an "attendance sheet", and is the main repository of data within the 
+The data from the input is stored into the `AttendanceHashMap` class in pets, which consists of mappings of dates to
+`Attendance` objects. The class hence acts as an "attendance sheet", and is the main repository of data within the
 Model component that facilitates `Attendance` functionalities.
 
-The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods 
+The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods
 in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
 supported by the methods in `AttendanceTag` and `AttendanceUtil` classes.
 
@@ -361,7 +361,7 @@ The activity diagram below illustrates the workflow of attendance commands.
 
 ![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
 
-The following sequence diagram below models the interactions between the Logic as well as the Model components to 
+The following sequence diagram below models the interactions between the Logic as well as the Model components to
 update the backend and frontend of the application.
 
 ![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
