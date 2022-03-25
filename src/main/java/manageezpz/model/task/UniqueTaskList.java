@@ -11,8 +11,6 @@ import javafx.collections.ObservableList;
 import manageezpz.model.task.exceptions.DuplicateTaskException;
 import manageezpz.model.task.exceptions.TaskNotFoundException;
 
-
-
 public class UniqueTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
@@ -55,6 +53,34 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         internalList.set(index, editedTask);
+    }
+
+    /**
+     * Marks a task in the list as done.
+     * The task must not already exist in the list.
+     */
+    public void markTask(Task toMark) {
+        requireNonNull(toMark);
+
+        for (Task value : internalList) {
+            if (value.equals(toMark)) {
+                value.setTaskDone();
+            }
+        }
+    }
+
+    /**
+     * Unmarks a task in the list as not done yet.
+     * The task must not already exist in the list.
+     */
+    public void unmarkTask(Task toUnmark) {
+        requireNonNull(toUnmark);
+
+        for (Task value : internalList) {
+            if (value.equals(toUnmark)) {
+                value.setTaskNotDone();
+            }
+        }
     }
 
     /**

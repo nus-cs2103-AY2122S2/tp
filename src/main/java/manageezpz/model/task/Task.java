@@ -17,8 +17,8 @@ public class Task {
     protected String type;
     protected Priority priority;
 
-    enum Priority {
-        LOW, MEDIUM, HIGH;
+    public enum Priority {
+        NONE, LOW, MEDIUM, HIGH;
     }
 
     // Identity fields
@@ -40,6 +40,7 @@ public class Task {
         this.isDone = false;
         this.type = "";
         this.assignees = new ArrayList<>();
+        this.priority = Priority.NONE;
     }
 
     /**
@@ -84,6 +85,10 @@ public class Task {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public String getDateTime() {
+        return "";
     }
 
     public void setPriority(String priority) {
@@ -144,5 +149,4 @@ public class Task {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(taskDescription);
     }
-
 }

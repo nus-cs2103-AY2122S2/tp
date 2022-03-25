@@ -69,11 +69,11 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/ui/Ui.java))
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,11 +82,11 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Task` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -155,6 +155,88 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Task Marking feature
+
+#### What is Task Marking feature about?
+
+The Mark Task mechanism is facilitated by `AddressBook`. This feature allows the user to mark a task as done.
+
+For the command, the feature extends `command`, and is implemented as such:
+* `mark INDEX`
+
+#### Implementation Flow of Task Marking feature
+
+Given below is an example usage scenario and how the Mark Task mechanism behaves at each step.
+
+Step 1. The user lists all the task by listing the task with the 'list' command.
+
+Step 2. The user executes `mark 4` command to mark the task `Watch Netflix with Mum` as done.
+
+![](images/MarkTask.png)
+
+#### Design considerations
+
+- The user is able to mark a task as done through the index specified in the list view.
+
+#### UML Diagram for Task Marking
+
+![](images/MarkClassDiagram.png)
+
+### Task Unmarking feature
+
+#### What is Task Unmarking feature about?
+
+The Unmark Task mechanism is facilitated by `AddressBook`. This feature allows the user to mark a task as not done yet.
+
+For the command, the feature extends `command`, and is implemented as such:
+* `unmark INDEX`
+
+#### Implementation Flow of Task Unmarking feature
+
+Given below is an example usage scenario and how the Unmark Task mechanism behaves at each step.
+
+Step 1. The user lists all the task by listing the task with the 'list' command.
+
+Step 2. The user executes `unmark 4` command to mark the task `Watch Netflix with Mum` as not done yet.
+
+![](images/UnmarkTask.png)
+
+#### Design considerations
+
+- The user is able to mark a task as not done yet through the index specified in the list view.
+
+#### UML Diagram for Task Unmarking
+
+![](images/UnmarkClassDiagram.png)
+
+### Task Deleting feature
+
+#### What is Task Deleting feature about?
+
+The Delete Task mechanism is facilitated by `AddressBook`. This feature allows the user to delete a task.
+
+For the command, the feature extends `command`, and is implemented as such:
+* `delete INDEX`
+
+#### Implementation Flow of Task Deleting feature
+
+Given below is an example usage scenario and how the Delete Task mechanism behaves at each step.
+
+Step 1. The user lists all the task by listing the task with the 'list' command.
+
+Step 2. The user executes `delete 4` command to delete the task `Watch Netflix with Mum`.
+
+![](images/DeleteTask.png)
+
+#### Design considerations
+
+- The user is able to delete a task as through the index specified in the list view.
+
+#### UML Diagram for Task Deleting
+
+![](images/DeleteClassDiagram.png)
+
+
 ### **Task Components**
 - Added Classes into the model Component to encapsulate a Task.
 
@@ -175,14 +257,6 @@ A `Task` contains the following attributes,
 7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
 
 #### Design considerations:
-
-#### Aspect: How the components within Task are added or changed
-- **Current Choice**: [Proposed] Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
-    * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
-    * Cons: Less flexible, more steps needed in editing Task objects
-- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
-    * Pros: Less overhead as fewer objects are created
-    * Cons: Prone to error as a Component might not be correctly changed
 
 #### Aspect: How the components within Task are added or changed
 - **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
@@ -293,6 +367,51 @@ return a CommandResult showing that the update has been successful.
 <b>Note:</b> For the Event type, a String value with two time values corresponding to be the start and end time
 separated with an **empty space** must be provided. Other than the time values being valid,
 the range between the start and end time must be valid as well. For example, 1700 2000 is valid while 2000 1700 is not.
+
+### **The `Find` command**
+- The ``Find`` command has two seperate arguments `task/` and `day/`
+- The `task/` argument has an additional `desc/` as a keyword which is the search term to search for all the tasks that
+  contains the keyword
+- `day/` arguments searches for either the deadline or the event that has this date as the deadline/ event that will
+  be held
+
+#### How it is implemented
+1. When the user enters the find command, the FindCommandParser searches for either the `task/` or the `day/` argument
+2. Then, the FindCommandParser will self invoke either the `findCommandTask()` or `findCommandDate()` respectively.
+3. `findCommandTask()` will return the FindCommand that searches for all the task which contains the given keyword whereas `findCommandDate()` searches for deadline/event with the given date
+4. The FindCommand will execute and update the Model with the updateFilteredTaskList where the filtered task list will be updated with the tasks that statisfy the predicate
+5. After execution, the FindCommand will return the CommandResult that contains a string of the outcome of the command.
+
+#### Sequence diagram when a user enters the command `find task/ desc/ Genshin`
+
+<img src="images/FindTask.png" width="450" />
+
+#### Improvements needed
+* As we are also listing employees as well, we also need an argument that searches for the number of people instead
+* In v1.3, as priority tagging is implemented for all tasks, we also need an argument to find all tasks.
+* For employee searching, we can also implement more arguments to search for an employee using the employee's components
+  as the search term.
+
+
+### **The `List` command**
+- The `List` command shows all the tasks in the list.
+- It has arguments such as `todo/`, `deadline/` and `event/` which searches for all todos, deadlines and events respectively.
+
+#### How it is implemented
+1. When the user enters `List`, the ListCommandParser will simply return a ListCommand
+2. If the user enters additional options such as `todo/`, `deadline/` and `events/`, ListCommandParse will then check if the user enters a valid option. ListCommandParse will throw an ParseException if the user enters an invalid option, or more than 1 option.
+3. When the ListCommand is executed, it will update the model to show all the task in the task list
+4. If options are provided, the command will update the model with all tasks with the specified task type.
+5. After execution, ListCommand will return a CommandResult that contains the message of the outcome of the command
+
+
+#### Sequence diagram when the user enters `list todo/`
+
+<img src="images/List.png" width="450"/>
+
+#### Improvements to be added
+* We feel that the options may be better suited for the find option
+* The tasks needs to be updated into the UI.
 
 ### Tagging Task to Employee feature
 

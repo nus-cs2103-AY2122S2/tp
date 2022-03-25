@@ -271,11 +271,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void markTask(Task task) {
-        task.setTaskDone();
+        tasks.markTask(task);
     }
 
     public void unmarkTask(Task task) {
-        task.setTaskNotDone();
+        tasks.unmarkTask(task);
     }
 
     public void findTask(Task task) {
@@ -368,7 +368,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && tasks.equals(((AddressBook) other).tasks));
     }
 
     @Override
