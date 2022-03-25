@@ -29,7 +29,6 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final CommandHistory commandHistory;
     private final AddressBookHistory addressBookHistory;
-    private boolean isPrevCommandUndo;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,7 +43,6 @@ public class ModelManager implements Model {
         this.commandHistory = new CommandHistory();
         this.addressBookHistory = new AddressBookHistory(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.isPrevCommandUndo = false;
     }
 
     public ModelManager() {
@@ -104,11 +102,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public AddressBook getPreviousAddressBookAfterChainedUndo() {
-        return addressBookHistory.getPreviousAddressBookAfterChainedUndo();
-    }
-
-    @Override
     public void saveCurrentAddressBookToHistory() {
         addressBookHistory.addAddressBook(addressBook);
     }
@@ -126,12 +119,6 @@ public class ModelManager implements Model {
     @Override
     public void undoAddressBook() {
         setAddressBook(getPreviousAddressBook());
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void chainUndoAddressBook() {
-        setAddressBook(getPreviousAddressBookAfterChainedUndo());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -204,21 +191,6 @@ public class ModelManager implements Model {
     @Override
     public String getPreviousCommandText() {
         return commandHistory.popPreviousCommand();
-    }
-
-    @Override
-    public boolean isPrevCommandUndo() {
-        return isPrevCommandUndo;
-    }
-
-    @Override
-    public void markPrevCommandAsUndo() {
-        isPrevCommandUndo = true;
-    }
-
-    @Override
-    public void unmarkPrevCommandAsUndo() {
-        isPrevCommandUndo = false;
     }
 
     @Override

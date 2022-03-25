@@ -45,12 +45,9 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        if (!commandResult.isUndoRequest()) {
+        if (!commandResult.isUndoRequest()) { //Do not add undo and its respective AB to history (or else it will loop)
             model.addToCommandHistory(commandText);
             model.saveCurrentAddressBookToHistory();
-            model.unmarkPrevCommandAsUndo();
-        } else { //Do not add undo and its respective AB to history (or else it will loop)
-            model.markPrevCommandAsUndo();
         }
 
         try {

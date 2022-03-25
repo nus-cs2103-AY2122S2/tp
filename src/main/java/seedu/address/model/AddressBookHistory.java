@@ -35,21 +35,7 @@ public class AddressBookHistory {
 
         //AB state before previous command is restored.
         int previousAddressBookIndex = addressBooks.size() - 1;
-        AddressBook previousAddressBook = addressBooks.remove(previousAddressBookIndex);
-        return previousAddressBook;
-    }
-
-    /**
-     * Returns AddressBook before execution of previous command (that was not undo), if undo was the previous command.
-     */
-    public AddressBook getPreviousAddressBookAfterChainedUndo() {
-        if (addressBooks.size() == 1) {
-            return addressBooks.get(0);
-        }
-
-        //AB state before previous command (that was not undo) is restored.
-        int previousAddressBookIndex = addressBooks.size() - 1;
-        AddressBook previousAddressBook = addressBooks.remove(previousAddressBookIndex);
+        AddressBook previousAddressBook = addressBooks.get(previousAddressBookIndex);
         return previousAddressBook;
     }
 

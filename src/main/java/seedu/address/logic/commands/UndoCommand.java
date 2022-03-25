@@ -23,11 +23,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_COMMAND_TO_UNDO);
         }
 
-        if (model.isPrevCommandUndo()) {
-            model.chainUndoAddressBook(); //Case where undo commands are being chained must be dealt with separately.
-        } else {
-            model.undoAddressBook();
-        }
+        model.undoAddressBook();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, previousCommand),
                 false, false, false, true);
