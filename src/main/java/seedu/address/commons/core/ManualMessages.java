@@ -27,7 +27,7 @@ public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_CLEAR_COMMAND = "Clears all students from TAPA. "
             + "Additionally, the user will be prompted to confirm clear command. \n"
-            + "*Warning* Clearing TAPA cannot be undone!"
+            + "*Warning* Clearing TAPA cannot be undone! \n"
             + "Format : clear \n"
             + "Example: clear";
 
