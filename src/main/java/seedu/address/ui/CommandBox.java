@@ -87,7 +87,7 @@ public class CommandBox extends UiPart<Region> {
             String previousCommand = commandHistory.get(commandHistoryPointerIndex);
             setCommandBoxText(previousCommand);
         } catch (IndexOutOfBoundsException e) {
-            return; //Nothing needs to be done for requests beyond what is stored in history.
+            return; // Nothing needs to be done for requests beyond what is stored in history.
         }
     }
 
@@ -102,7 +102,7 @@ public class CommandBox extends UiPart<Region> {
             String nextCommand = commandHistory.get(commandHistoryPointerIndex);
             setCommandBoxText(nextCommand);
         } catch (IndexOutOfBoundsException e) {
-            return; //Nothing needs to be done for requests beyond what is stored in history.
+            return; // Nothing needs to be done for requests beyond what is stored in history.
         }
     }
 

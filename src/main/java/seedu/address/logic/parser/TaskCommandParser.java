@@ -26,7 +26,7 @@ public class TaskCommandParser implements Parser<TaskCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID);
 
-        if (arePrefixesPresent(argMultimap, PREFIX_ID)) { // studentId was used
+        if (arePrefixesPresent(argMultimap, PREFIX_ID) || !argMultimap.getPreamble().isEmpty()) {
             StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
             taskCommand = new TaskCommand(studentId);
         } else {

@@ -30,10 +30,10 @@ public class TypicalPersons {
      */
     public static final Person ALICE = new PersonBuilder().withStudentId("A1000000Z").withName("Alice")
             .withModuleCode("CS2101").withPhone("10000000").withTelegramHandle("aliceee")
-            .withEmail("aliceee@u.nus.edu").withTaskList("task a", false).build();
+            .withEmail("aliceee@u.nus.edu").withTaskList("Task A", false).build();
     public static final Person BENSON = new PersonBuilder().withStudentId("A2000000Z").withName("Benson")
             .withModuleCode("CS2102").withPhone("20000000").withTelegramHandle("bensonnn")
-            .withEmail("bensonnn@u.nus.edu").withTaskList("task b", true).build();
+            .withEmail("bensonnn@u.nus.edu").withTaskList("Task B", true).build();
     public static final Person CARL = new PersonBuilder().withStudentId("A3000000Z").withName("Carl")
             .withModuleCode("CS2103").withPhone("30000000").withTelegramHandle("carlll")
             .withEmail("carlll@u.nus.edu").build();

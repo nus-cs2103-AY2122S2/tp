@@ -165,12 +165,49 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
+        boolean isPhoneEqual;
+
+        if (otherPerson.getPhone() == null && getPhone() == null) {
+            isPhoneEqual = true;
+        } else if (otherPerson.getPhone() == null) {
+            isPhoneEqual = false;
+        } else if (getPhone() == null) {
+            isPhoneEqual = false;
+        } else {
+            isPhoneEqual = otherPerson.getPhone().equals(getPhone());
+        }
+
+        boolean isTelegramHandleEqual;
+
+        if (otherPerson.getTelegramHandle() == null && getTelegramHandle() == null) {
+            isTelegramHandleEqual = true;
+        } else if (otherPerson.getTelegramHandle() == null) {
+            isTelegramHandleEqual = false;
+        } else if (getTelegramHandle() == null) {
+            isTelegramHandleEqual = false;
+        } else {
+            isTelegramHandleEqual = otherPerson.getTelegramHandle().equals(getTelegramHandle());
+        }
+
+        boolean isEmailEqual;
+
+        if (otherPerson.getEmail() == null && getEmail() == null) {
+            isEmailEqual = true;
+        } else if (otherPerson.getEmail() == null) {
+            isEmailEqual = false;
+        } else if (getEmail() == null) {
+            isEmailEqual = false;
+        } else {
+            isEmailEqual = otherPerson.getEmail().equals(getEmail());
+        }
+
         return otherPerson.getStudentId().equals(getStudentId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getModuleCode().equals(getModuleCode())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getTelegramHandle().equals(getTelegramHandle())
-                && otherPerson.getEmail().equals(getEmail())
+                && isPhoneEqual
+                && isTelegramHandleEqual
+                && isEmailEqual
                 && otherPerson.getTaskList().equals(getTaskList());
     }
 
@@ -190,24 +227,20 @@ public class Person {
                 .append(getModuleCode());
 
         Phone currentPhone = getPhone();
-        if (currentPhone != null) {
-            builder.append("; Phone Number: ").append(currentPhone);
-        }
+        builder.append("; Phone Number: ").append(currentPhone);
+
 
         TelegramHandle currentTelegramHandle = getTelegramHandle();
-        if (currentTelegramHandle != null) {
-            builder.append("; Telegram Handle: @").append(currentTelegramHandle);
-        }
+        builder.append("; Telegram Handle: @").append(currentTelegramHandle);
+
 
         Email currentEmail = getEmail();
-        if (currentEmail != null) {
-            builder.append("; Email: ").append(currentEmail);
-        }
+        builder.append("; Email: ").append(currentEmail);
+
 
         TaskList currentTaskList = getTaskList();
-        if (currentTaskList != null) {
-            builder.append("; Tasks: ").append(currentTaskList);
-        }
+        builder.append("; Tasks: ").append(currentTaskList);
+
 
         return builder.toString();
     }
