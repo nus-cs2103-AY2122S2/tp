@@ -3,20 +3,24 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.UnmarkCommand.INVALID_TASK_INDEX;
-import static seedu.address.logic.commands.UnmarkCommand.MARKED_TASK_SUCCESS;
 import static seedu.address.logic.commands.UnmarkCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.commands.UnmarkCommand.TASK_ALREADY_NOT_DONE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
+import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 
@@ -58,7 +62,19 @@ public class UnmarkCommandTest {
 
     @Test
     public void execute_taskAlreadyNotComplete_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Person aliceCopy = new PersonBuilder()
+                .withStudentId(ALICE.getStudentId().id)
+                .withName(ALICE.getName().toString())
+                .withModuleCode(ALICE.getModuleCode().moduleCode)
+                .withPhone(ALICE.getPhone().value)
+                .withTelegramHandle(ALICE.getTelegramHandle().telegramHandle)
+                .withEmail(ALICE.getEmail().value)
+                .withTaskList("Task A", false)
+                .build();
+
+        AddressBook aliceCopyAb = new AddressBookBuilder().withPerson(aliceCopy).build();
+
+        Model model = new ModelManager(aliceCopyAb, new UserPrefs());
 
         UnmarkCommand unmarkCommand = new UnmarkCommand(studentIdAlice, indexOne);
         assertCommandFailure(unmarkCommand, model, TASK_ALREADY_NOT_DONE);
@@ -66,17 +82,25 @@ public class UnmarkCommandTest {
 
     @Test
     public void execute_taskMarkAsNotDone_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
         UnmarkCommand unmarkCommand = new UnmarkCommand(studentIdBenson, indexOne);
+        Person benson = new PersonBuilder(BENSON).build();
+        Person expectedBensonCopy = new PersonBuilder()
+                .withStudentId(BENSON.getStudentId().id)
+                .withName(BENSON.getName().toString())
+                .withModuleCode(BENSON.getModuleCode().moduleCode)
+                .withPhone(BENSON.getPhone().value)
+                .withTelegramHandle(BENSON.getTelegramHandle().telegramHandle)
+                .withEmail(BENSON.getEmail().value)
+                .withTaskList("Task B", false)
+                .build();
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        AddressBook bensonAb = new AddressBookBuilder().withPerson(benson).build();
+        AddressBook expectedBensonCopyAb = new AddressBookBuilder().withPerson(expectedBensonCopy).build();
 
-        Person bensonCopy = expectedModel.getFilteredPersonList().get(1);
+        Model model = new ModelManager(bensonAb, new UserPrefs());
+        Model expectedModel = new ModelManager(expectedBensonCopyAb, new UserPrefs());
 
-        //Marks Benson's first task as done in the expected model.
-        bensonCopy.markTaskAsNotComplete(0);
-
-        assertCommandSuccess(unmarkCommand, model, String.format(MARKED_TASK_SUCCESS, studentIdBenson), expectedModel);
+        assertCommandSuccess(unmarkCommand, model, String.format(UnmarkCommand.MARKED_TASK_SUCCESS, studentIdBenson),
+                expectedModel);
     }
 }

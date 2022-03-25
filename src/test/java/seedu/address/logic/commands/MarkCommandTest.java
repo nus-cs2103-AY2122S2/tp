@@ -7,16 +7,21 @@ import static seedu.address.logic.commands.MarkCommand.MARKED_TASK_SUCCESS;
 import static seedu.address.logic.commands.MarkCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.commands.MarkCommand.TASK_ALREADY_DONE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
+import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 
@@ -58,7 +63,19 @@ public class MarkCommandTest {
 
     @Test
     public void execute_taskAlreadyComplete_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Person bensonCopy = new PersonBuilder()
+                .withStudentId(BENSON.getStudentId().id)
+                .withName(BENSON.getName().toString())
+                .withModuleCode(BENSON.getModuleCode().moduleCode)
+                .withPhone(BENSON.getPhone().value)
+                .withTelegramHandle(BENSON.getTelegramHandle().telegramHandle)
+                .withEmail(BENSON.getEmail().value)
+                .withTaskList("Task B", true)
+                .build();
+
+        AddressBook bensonCopyAb = new AddressBookBuilder().withPerson(bensonCopy).build();
+
+        Model model = new ModelManager(bensonCopyAb, new UserPrefs());
 
         MarkCommand markCommand = new MarkCommand(studentIdBenson, indexOne);
         assertCommandFailure(markCommand, model, TASK_ALREADY_DONE);
@@ -66,17 +83,23 @@ public class MarkCommandTest {
 
     @Test
     public void execute_taskMarkAsDone_success() {
-
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-        Person aliceCopy = expectedModel.getFilteredPersonList().get(1);
-
-        //Marks Benson's first task as done in the expected model.
-        aliceCopy.markTaskAsComplete(0);
-
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
         MarkCommand markCommand = new MarkCommand(studentIdAlice, indexOne);
+        Person alice = new PersonBuilder(ALICE).build();
+        Person expectedAliceCopy = new PersonBuilder()
+                .withStudentId(ALICE.getStudentId().id)
+                .withName(ALICE.getName().toString())
+                .withModuleCode(ALICE.getModuleCode().moduleCode)
+                .withPhone(ALICE.getPhone().value)
+                .withTelegramHandle(ALICE.getTelegramHandle().telegramHandle)
+                .withEmail(ALICE.getEmail().value)
+                .withTaskList("Task A", true)
+                .build();
+
+        AddressBook aliceAb = new AddressBookBuilder().withPerson(alice).build();
+        AddressBook expectedAliceCopyAb = new AddressBookBuilder().withPerson(expectedAliceCopy).build();
+
+        Model model = new ModelManager(aliceAb, new UserPrefs());
+        Model expectedModel = new ModelManager(expectedAliceCopyAb, new UserPrefs());
 
         assertCommandSuccess(markCommand, model, String.format(MARKED_TASK_SUCCESS, studentIdAlice), expectedModel);
     }
