@@ -9,8 +9,6 @@ import seedu.address.model.property.House;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
 
-import java.util.List;
-
 /**
  * Jackson-friendly version of {@link PropertyToBuy}.
  */
@@ -18,31 +16,6 @@ class JsonAdaptedPropertyToBuy {
 
     private final JsonAdaptedHouse house;
     private final JsonAdaptedPriceRange priceRange;
-//    /**
-//     * Constructs a {@code JsonAdaptedclient} with the given client details.
-//     */
-//    @JsonCreator
-//    public JsonAdaptedBuyer(@JsonProperty("name") String name,
-//                            @JsonProperty("phone") String phone,
-//                            @JsonProperty("appointment") String appointment,
-//                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-//                            @JsonProperty("property") JsonAdaptedPropertyToBuy propertyToBuy) {
-//        this.name = name;
-//        this.phone = phone;
-//        if (tagged != null) {
-//            this.tagged.addAll(tagged);
-//        }
-//        this.appointment = appointment;
-//        this.propertyToBuy = propertyToBuy;
-//    }
-//    /**
-//     * Constructs a {@code JsonAdaptedPropertyToBuy} with the given property details.
-//     */
-//    @JsonCreator
-//    public JsonAdaptedPropertyToBuy(House house, PriceRange priceRange) {
-//        this.house = house;
-//        this.priceRange = priceRange;
-//    }
 
     /**
      * Constructs a {@code JsonAdaptedPropertyToBuy} with the given property details.

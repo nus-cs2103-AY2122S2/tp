@@ -1,12 +1,13 @@
 package seedu.address.storage;
 
+import java.util.Locale;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
-
-import java.util.Locale;
 
 public class JsonAdaptedHouse {
 
