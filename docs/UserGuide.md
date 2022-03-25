@@ -112,7 +112,7 @@ Alternatively, you can also interact with the application through buttons, such 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `exit`, `list`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
@@ -138,21 +138,6 @@ Alternatively, you can also interact with the application through buttons, such 
 Shows a list of all products in the application.
 
 Format: `list`
-
-*Alternatively*, we are able to show only products that match one or more (tag, value) pairs.
-Values are case-sensitive.
-
-Tags and their values: `n:NAME` `c:CATEGORY` `e:EXPIRY_DATE` `p:PRICE` `d:DESCRIPTION`
-
-Format: `list [TAG:VALUE ...]`
-
-Examples:
-
-`list n:Water` lists all products that has Water as name.
-
-`list n:Bread e:01/04/2022` lists all products that has Bread as name and expiry date on 01/04/2022.
-
-`list e:01/05/2022` lists all products that has expiry date on 01/05/2022.
 
 #### 4.1.2 Adding a product : `add`
 
@@ -215,7 +200,7 @@ Format: `delete [TAG:VALUE ...]`
 
 Example: `delete n:Bread`
 
-#### 4.1.1 Finding certain products : `find`
+#### 4.1.5 Finding certain products : `find`
 
 Finds products that fit a certain filter in the application.
 
@@ -230,6 +215,18 @@ Examples:
 `find n:Bread c:Food` lists all products that has Bread as name and category as Food.
 
 `find c:Food` lists all products that has category as Food.
+
+#### 4.1.6 Looking for expired certain products : `expired`
+
+Finds products that contain expired items.
+
+Format: `expired`
+
+#### 4.1.7 Looking for products that are out of stock : `out-of-stock`
+
+Lists products that are out of stock.
+
+Format: `out-of-stock`
 
 ### 4.2 Item Commands *[coming soon]*
 
@@ -272,12 +269,15 @@ _Details coming soon ..._
 
 ### 7.1 Product
 
-| Action     | Format, Examples                                                                                                                      |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles` |
-| **List**   | `list`                                                                                                                                |
-| **Update** | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                       |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                   |
+| Action           | Format, Examples                                                                                                                      |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles` |
+| **List**         | `list`                                                                                                                                |
+| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                       |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                   |
+| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                    |
+| **Expired**      | `expired`                                                                                                                             |
+| **Out of Stock** | `out-of-stock`                                                                                                                        |
 
 ### 7.2 Item *[Coming soon]*
 
