@@ -32,6 +32,10 @@ NUSocials is a **desktop app for university students to maintain a professional 
 
     * **`removetag`**`2 m/cs2100 i/Shopee` : Removes the specified tags of the 2nd contact shown in the current list.
 
+    * **`cancelevent`**`1`: Deletes the 1st event shown in the current event list.
+   
+    * **`cancelevent`**`1 4`: Deletes the 1st and fourth event shown in the current event list.
+
     * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
     * **`delete`**`3 5` : Deletes the 3rd and 5th contact shown in the current list.
@@ -220,6 +224,29 @@ Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
 
 Examples:
 * `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15` Creates the Event and adds into the address book.
+
+### Cancelling an event : `cancelevent`
+
+Deletes the specified event from the address book.
+
+Format: `cancelevent INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `cancelevent 2` deletes the 2nd event in the address book.
+
+Alternate Format: `cancelevent INDEX…​`
+
+* Deletes multiple events at the specified `INDEX`'s.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Each index **must be separated by a whitespace**
+
+Examples:
+* `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the address book.
 
 ### Clearing all entries : `clear`
 

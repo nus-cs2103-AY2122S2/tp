@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -17,6 +18,16 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+
+    Predicate<Event> PREDICATE_SHOW_UPCOMING_EVENTS = event -> {
+        LocalDateTime now = LocalDateTime.now();
+        return event.getDateTime().value.isAfter(now);
+    };
+
+    Predicate<Event> PREDICATE_SHOW_PAST_EVENTS = event -> {
+        LocalDateTime now = LocalDateTime.now();
+        return event.getDateTime().value.isBefore(now);
+    };
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

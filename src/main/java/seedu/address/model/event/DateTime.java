@@ -1,7 +1,5 @@
 package seedu.address.model.event;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -26,9 +24,7 @@ public class DateTime implements Comparable<DateTime> {
      * @param min the event min
      */
     public DateTime(int year, int month, int day, int hour, int min) {
-        checkArgument(isValidDateTime(year, month, day, hour, min), DATETIME_MESSAGE_CONSTRAINTS);
-        LocalDateTime temp = LocalDateTime.of(year, month, day, hour, min);
-        value = temp;
+        value = LocalDateTime.of(year, month, day, hour, min);
     }
 
     /**
