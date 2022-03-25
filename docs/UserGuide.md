@@ -250,6 +250,7 @@ _Details coming soon ..._
 | **Exit**   | `exit`                                                                                                                                                |
 | **Find**   | `find <KEYWORD>`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/<TAG>]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
 | **List**   | `list`                                                                                                                                                |
+| **Sort**   | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]` |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -264,16 +265,5 @@ _Details coming soon ..._
 | **Prefix**    | Characters used to identify the following parameter (e.g. `n/` is the prefix for the parameter `NAME`) |
 | **JavaFX**    | JavaFX is a set of Java graphics libraries for creating Java GUI applications                          | 
 
-## Command summary
-
-Action | Format, Examples                                                               
---------|--------------------------------------------------------------------------------
-**Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime` 
-**Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
-**Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
-**Exit** | `exit`      
-**Find** | `find <KEYWORD>`<br> e.g., `find hero`
-**List** |`list`                                                                                                               |
-**Sort** | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
