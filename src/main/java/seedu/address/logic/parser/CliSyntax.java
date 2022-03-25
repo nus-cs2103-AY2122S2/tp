@@ -18,4 +18,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_INFO = new Prefix("info/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("t/");
+    public static final Prefix PREFIX_PARTICIPANTS = new Prefix("part/");
+    public static final Prefix PREFIX_DATETIME = new Prefix("dt/");
+
+
 }
