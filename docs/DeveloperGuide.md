@@ -234,7 +234,7 @@ Aspect: How add executes:
   * Cons: commands that aim to do the same thing (add records to the `MedBook`) are not grouped together and this may
     not be an intuitive approach to OOP
 #### Implementation
-WIP - Insert UML and activity diagram
+<img src="images/AllAddCommandsClassDiagram.png" width="550" />
 
 #### Usage
 Given below is an activity diagram which shows the example usage scenario for when a user adds the `Medical` information
