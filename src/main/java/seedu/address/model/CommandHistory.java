@@ -2,8 +2,6 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 
-import seedu.address.logic.commands.CommandResult;
-
 /**
  * Stores a list of previously executed commands.
  */
