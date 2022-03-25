@@ -310,16 +310,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to find a customer related to a keyword
 2.  TrackBeau shows a list of customers with matching keyword with their customer Index
 
-
-
-
 **Extensions**
 
 * 2a. The list is empty.
 
   Use case ends.
-
-
 
 **Use case: Add a customer**
 
@@ -365,6 +360,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook closes the application
 
     Use case ends.
+
+**Use case: add a booking**
+
+**MSS**
+
+1.  User requests to add a booking of a customer at a specific time
+2.  TrackBeau adds the customer to the booking list
+
+    Use case ends.
+
+**Extensions**
+
+**Use case: delete a booking**
+
+**MSS**
+
+1.  User requests to delete a booking of a customer using a booking ID
+2.  TrackBeau deletes the booking at the specified index
+
+**Extensions**
+
+* 2a. Booking ID does not exist.
+    * 2a1. TrackBeau shows an error message.
+
+      Use case resumes at step 1.
+
 
 ### Non-Functional Requirements
 

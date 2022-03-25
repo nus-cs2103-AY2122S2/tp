@@ -67,6 +67,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasCustomer(toAdd)) {
+            assert false;
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
