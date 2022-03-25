@@ -34,5 +34,9 @@ public class SeniorityTest {
         assertTrue(Seniority.isValidSeniority(2));
         assertTrue(Seniority.isValidSeniority(3));
         assertTrue(Seniority.isValidSeniority(4));
+
+        // NumberFormatException
+        String invalidSeniority = "year one";
+        assertThrows(NumberFormatException.class, () -> Seniority.isValidSeniority(Integer.parseInt(invalidSeniority)));
     }
 }
