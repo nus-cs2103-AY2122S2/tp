@@ -10,61 +10,64 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.seller.Seller;
+import seedu.address.model.property.NullPropertyToBuy;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
-/**
- * Jackson-friendly version of {@link Seller}.
- */
-class JsonAdaptedSeller {
+public class JsonAdaptedBuyer {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "seller's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "buyer's %s field is missing!";
 
     private final String name;
     private final String phone;
     private final String appointment;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final JsonAdaptedPropertyToBuy propertyToBuy;
 
     /**
      * Constructs a {@code JsonAdaptedclient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedSeller(@JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone,
-                             @JsonProperty("appointment") String appointment,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedBuyer(@JsonProperty("name") String name,
+                            @JsonProperty("phone") String phone,
+                            @JsonProperty("appointment") String appointment,
+                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                            @JsonProperty("property") JsonAdaptedPropertyToBuy propertyToBuy) {
         this.name = name;
         this.phone = phone;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
         this.appointment = appointment;
+        this.propertyToBuy = propertyToBuy;
     }
 
     /**
      * Converts a given {@code client} into this class for Jackson use.
      */
-    public JsonAdaptedSeller(Seller source) {
+    public JsonAdaptedBuyer(Buyer source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         appointment = source.getAppointment().value;
+        propertyToBuy = new JsonAdaptedPropertyToBuy(source.getDesiredProperty());
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Seller} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Buyer} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Seller toModelType() throws IllegalValueException {
-        final List<Tag> sellerTags = new ArrayList<>();
+    public Buyer toModelType() throws IllegalValueException {
+        final List<Tag> buyerTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            sellerTags.add(tag.toModelType());
+            buyerTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -90,8 +93,11 @@ class JsonAdaptedSeller {
 
         final Appointment modelAppointment = new Appointment(appointment);
 
-        final Set<Tag> modelTags = new HashSet<>(sellerTags);
-        return new Seller(modelName, modelPhone, modelAppointment, modelTags);
-    }
+        final Set<Tag> modelTags = new HashSet<>(buyerTags);
 
+        final PropertyToBuy modelDesiredProperty = propertyToBuy == null
+                ? NullPropertyToBuy.getNullPropertyToBuy() : new PropertyToBuy(propertyToBuy.getHouse(),
+                propertyToBuy.getPriceRange());
+        return new Buyer(modelName, modelPhone, modelAppointment, modelTags, modelDesiredProperty);
+    }
 }

@@ -18,8 +18,8 @@ public class PriceRange {
      * The lower and upper bounds are inclusive, meaning the lower bound includes the lower and higher value itself,
      * respectively.
      */
-    private int lower;
-    private int upper;
+    private final int lower;
+    private final int upper;
 
     /**
      * Constructor
@@ -42,15 +42,24 @@ public class PriceRange {
      * @return True if PriceRange is valid, False otherwise.
      */
     public static boolean isValidPriceRange(int lower, int upper) {
-        return lower >= 0 && upper >= 0 && lower <= upper; //valid as long as positive and lower is lower than upper
+        //valid as long as positive and lower is lower than upper
+        return lower >= 0 && upper >= 0 && lower <= upper;
     }
 
     public int getLower() {
         return this.lower;
     }
 
+    public String getLowerToString() {
+        return Integer.toString(this.lower);
+    }
+
     public int getUpper() {
         return this.upper;
+    }
+
+    public String getUpperToString() {
+        return Integer.toString(this.upper);
     }
 
     /**
@@ -69,7 +78,7 @@ public class PriceRange {
      * is within the toSell PriceRange.
      * @param buyRange the priceRange a buyer is willing to buy a Property for.
      * @param sellRange the priceRange a seller is willing to sell a Property for.
-     * @return True if the a price in the buyRange can match one in the sellRange, false otherwise.
+     * @return True if the price in the buyRange can match one in the sellRange, false otherwise.
      */
     public static boolean canMatchPrice(PriceRange buyRange, PriceRange sellRange) {
         // [50, 100] , [99, 200] should match.

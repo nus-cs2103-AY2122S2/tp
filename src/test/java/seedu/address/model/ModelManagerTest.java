@@ -100,8 +100,9 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, new SellerAddressBook());
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, new SellerAddressBook());
+        modelManager = new ModelManager(addressBook, userPrefs, new SellerAddressBook(), new BuyerAddressBook());
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, new SellerAddressBook(),
+                new BuyerAddressBook());
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,12 +115,14 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new SellerAddressBook())));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new SellerAddressBook(),
+                new BuyerAddressBook())));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new SellerAddressBook())));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new SellerAddressBook(),
+                new BuyerAddressBook())));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
@@ -127,6 +130,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new SellerAddressBook())));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new SellerAddressBook(),
+                new BuyerAddressBook())));
     }
 }
