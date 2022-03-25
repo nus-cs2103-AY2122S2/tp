@@ -47,7 +47,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         course = new Course(DEFAULT_COURSE);
         matricCard = new MatricCard(DEFAULT_MATRICCARD);
-        telegram =  new Telegram(DEFAULT_TELEGRAM);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
     }
 
     /**

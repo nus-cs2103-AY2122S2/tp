@@ -77,7 +77,9 @@
     -->
     <module name="UnusedImports"/>
 
-    <module name="AvoidStarImport"/>
+    <module name="AvoidStarImport">
+      <property name="allowStaticMemberImports" value="true"/>
+    </module>
 
     <!--
     NAMING CHECKS
