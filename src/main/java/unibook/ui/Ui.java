@@ -1,6 +1,8 @@
 package unibook.ui;
 
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import unibook.model.module.group.Group;
 
 /**
  * API of UI component
@@ -35,4 +37,21 @@ public interface Ui {
      * @return boolean variable indicating if person list being shown
      */
     boolean isPersonListShowing();
+
+    /**
+     * Set the view to show list of modules.
+     */
+    void setModuleListPanel();
+
+    /**
+     * Set the view to show list of persons.
+     */
+    void setPersonListPanel();
+
+    /**
+     * Set the view to show given list of groups.
+     *
+     * @param group list of groups to show.
+     */
+    void setGroupListPanel(ObservableList<Group> group);
 }

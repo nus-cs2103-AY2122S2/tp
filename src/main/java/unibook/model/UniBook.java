@@ -119,6 +119,7 @@ public class UniBook implements ReadOnlyUniBook {
     /**
      * Adds a student to all their module groups.
      * Adds a student to all of the groups they are associated with.
+     *
      * @param s
      */
     public void addStudentToAllTheirGroups(Student s) {
@@ -195,6 +196,7 @@ public class UniBook implements ReadOnlyUniBook {
 
     /**
      * Adds a key event to a module of UniBook.
+     *
      * @param k
      */
     public void addKeyEventToModule(ModuleKeyEvent k) {
@@ -268,9 +270,9 @@ public class UniBook implements ReadOnlyUniBook {
         return groups;
     }
 
-
     /**
      * Removes module from all persons that are associated with the module.
+     *
      * @param moduleCode
      */
     public void removeModuleFromAllPersons(ModuleCode moduleCode) {
@@ -279,6 +281,7 @@ public class UniBook implements ReadOnlyUniBook {
 
     /**
      * Removes person from all moduels that are associated with the module.
+     *
      * @param person
      */
     public void removePersonFromModules(Person person) {
@@ -287,10 +290,11 @@ public class UniBook implements ReadOnlyUniBook {
 
     /**
      * Removes the student from all the groups they are in.
+     *
      * @param student
      */
     public void removeStudentFromGroups(Student student) {
-        for (Group group: student.getGroups()) {
+        for (Group group : student.getGroups()) {
             group.removeMember(student);
         }
     }

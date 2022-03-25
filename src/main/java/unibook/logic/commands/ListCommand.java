@@ -48,6 +48,7 @@ public class ListCommand extends Command {
     private ListView viewType;
 
     private String group;
+
     /**
      * Constructor for a ListCommand to list everything.
      */

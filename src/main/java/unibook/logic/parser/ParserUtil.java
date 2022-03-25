@@ -187,7 +187,7 @@ public class ParserUtil {
      * Parses {@code Collection<String> modules} into a {@code Set<ModuleCode>}.
      */
     public static Set<ModuleCode> parseMultipleModulesAndGroups(Collection<String> moduleCodesAndGroups)
-            throws ParseException {
+        throws ParseException {
         requireNonNull(moduleCodesAndGroups);
         final Set<ModuleCode> moduleSet = new LinkedHashSet<>();
         ModuleCode mc;
@@ -222,7 +222,7 @@ public class ParserUtil {
      * Parses {@code Collection<String> modules} into a {@code Set<ModuleCode>}.
      */
     public static ArrayList<LinkedHashSet<String>> parseMultipleGroups(Collection<String> moduleCodesAndGroups)
-            throws ParseException {
+        throws ParseException {
         requireNonNull(moduleCodesAndGroups);
         final ArrayList<LinkedHashSet<String>> groupList = new ArrayList<LinkedHashSet<String>>();
         if (moduleCodesAndGroups.toArray().length == 0) {

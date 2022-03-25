@@ -2,6 +2,7 @@ package unibook.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,8 @@ import unibook.logic.Logic;
 import unibook.logic.commands.CommandResult;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
+import unibook.model.module.group.Group;
+import unibook.ui.listpanels.GroupListPanel;
 import unibook.ui.listpanels.ModuleListPanel;
 import unibook.ui.listpanels.PersonListPanel;
 
@@ -35,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ModuleListPanel moduleListPanel;
+    private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     /**
@@ -141,6 +145,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Replaces the child of listPanelPlaceholder with groupListPanel.
+     *
+     * @param groups the list of groups to show.
+     */
+    public void setGroupListPanel(ObservableList<Group> groups) {
+        logger.info("Changing the view of list panel to show a given list of groups.");
+        groupListPanel = new GroupListPanel(groups);
+        listPaneFlag = ListPaneFlag.GROUPS;
+        listPanelPlaceholder.getChildren().setAll(groupListPanel.getRoot());
+    }
+
+
+    /**
      * Replaces the child of the listPanelPlaceholder with personListPanel.
      */
     public void setPersonListPanel() {
@@ -164,12 +181,20 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Utility method for checking if module list currently being shown.
      *
-     * @return boolean value indicating if module list being shown
+     * @return boolean value indicating if module list being shown.
      */
     public boolean isModuleListShowing() {
         return listPaneFlag == ListPaneFlag.MODULES;
     }
 
+    /**
+     * Utility method for showing if a group list is currently being shown.
+     *
+     * @return boolean value indicating if group list being shown.
+     */
+    public boolean isGroupListShowing() {
+        return listPaneFlag == ListPaneFlag.GROUPS;
+    }
 
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -217,8 +242,6 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Executes the command and returns the result.
-     *
-     * @see Logic#execute(String, MainWindow)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
@@ -248,7 +271,7 @@ public class MainWindow extends UiPart<Stage> {
      * Enum definition for flag to indicate when list panel is showing modules or people.
      */
     private enum ListPaneFlag {
-        PEOPLE, MODULES;
+        PEOPLE, MODULES, GROUPS;
     }
 
 }

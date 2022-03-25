@@ -6,18 +6,13 @@ import java.time.LocalDateTime;
 
 
 public class ModuleKeyEvent {
-    public enum KeyEventType {
-        //More can be added later
-        EXAM, QUIZ, ASSIGNMENT_RELEASE, ASSIGNMENT_DUE
-    }
-
     private LocalDateTime keyEventTiming;
     private KeyEventType keyEventType;
 
     private Module module;
-
     /**
      * Constructor for a ModuleKeyEvent.
+     *
      * @param keyEventType
      * @param localDateTime
      * @param module
@@ -62,7 +57,12 @@ public class ModuleKeyEvent {
         ModuleKeyEvent other = (ModuleKeyEvent) o;
 
         return other.getKeyEventTiming().equals(this.keyEventTiming)
-                && other.getKeyEventType().equals(this.keyEventType);
+            && other.getKeyEventType().equals(this.keyEventType);
+    }
+
+    public enum KeyEventType {
+        //More can be added later
+        EXAM, QUIZ, ASSIGNMENT_RELEASE, ASSIGNMENT_DUE
     }
 
 }
