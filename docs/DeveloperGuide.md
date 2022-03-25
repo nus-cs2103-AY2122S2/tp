@@ -162,7 +162,21 @@ This section describes some noteworthy details on how certain features are imple
 
 #### 1.2 Add lineup
 #### Proposed implementation
+The proposed add lineup functionality will create a new lineup and store it inside `UniqueLineupList`.
+
+The following sequence diagram shows how the undo operation works:
+![AddLineup](images/AddLineupSequenceDiagram.png)
+
 #### Design Consideration
+**Aspect: Where to store lineup data:**
+
+* **Alternative 1 (current choice):** Store its name as person's attributes.
+  * Pros: Easy to implement. No need to have another json file for storage.
+  * Cons: Need to search through all players to create all lineups for each relaunch of the application.
+
+* **Alternative 2:** Store lineups in the same json file as person.
+  * Pros: Easy to implement load data.
+  * Cons: Troublesome to save all data.
 
 #### 1.3 Add schedule 
 #### Proposed implementation
@@ -172,13 +186,43 @@ This section describes some noteworthy details on how certain features are imple
 
 #### 2.1 Delete player
 #### Proposed implementation
+The proposed delete player functionality will delete an existing player from `UniquePlayerList`, 
+as well as from all lineups in `UniqueLineupList` that contains the player.
+
 #### Design Consideration
+
+**Aspect: How to delete a person from `UniquePersonList` by its name?**
+* **Alternative 1 (current choice):** Iterate through `internalList` to find the person, then delete it.
+  * Pros: Easy to implement.
+  * Cons: Slower for large quantity of players, but acceptable within our requirement.
+* **Alternative 2:** Create a HashMap from `Name` to each person, then access it quickly.
+  * Pros: More efficient.
+  * Cons: Hard to implement and time-consuming.
+
 
 #### 2.2 Delete lineup
 #### Proposed implementation
-#### Design Consideration
+The proposed delete lineup functionality will delete an existing lineup from `UniqueLineupList` and remove all players from the lineup.
 
-#### 2.3 Delete schedule
+#### Design Consideration
+**Aspect: How to remove lineup from `UniqueLineupList`:**
+
+* **Alternative 1 (current choice):** Remove directly from the internal list.
+  * Pros: Easy to implement.
+  * Cons: The status of AddressBook is not modified and `updateItem()` of GUI needs to be triggered manually.
+
+* **Alternative 2:** Create another list without the player to be removed.
+  * Pros: The `updateItem()` of GUI will be automatically triggered.
+  * Cons: Troublesome to implement and time expensive.
+
+#### 2.3 Delete player from lineup
+#### Proposed implementation
+After checking that both input player and lineup are valid, the lineup's name will be removed from player's `LineupName` list. Then the player will be removed from lineup's `Person` list.
+
+#### Design Consideration
+**Aspect: NA**
+
+#### 2.4 Delete schedule
 #### Proposed implementation
 #### Design Consideration
 
@@ -190,7 +234,19 @@ This section describes some noteworthy details on how certain features are imple
 
 #### 3.2 Edit lineup
 #### Proposed implementation
+The proposed edit lineup functionality will update the name of a lineup. 
+Meanwhile, the `lineups` attribute of each person should also be updated if the person is in the lineup.
+
 #### Design Consideration
+**Aspect: How to locate lineup in `UniqueLineupList`:**
+
+* **Alternative 1 (current choice):** Iterate through all lineups to locate it.
+    * Pros: Easy to implement.
+    * Cons: Slower for large quantity of lineups, but sufficient within our requirement.
+
+* **Alternative 2:** Use a HashMap to store the mappings between `LineupName` and `Lineup`.
+    * Pros: Time efficient.
+    * Cons: Troublesome to implement.
 
 #### 2.3 Edit schedule
 #### Proposed implementation
@@ -211,9 +267,38 @@ This section describes some noteworthy details on how certain features are imple
 #### Design Consideration
 
 ### 5. Put feature
+Puts a `Person` into a `Lineup`
 
 #### Proposed implementation
+
+Stores the `LineupName` in `Person`
+
+Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
 #### Design Consideration
+**Aspect: How to navigate from player to lineup:**
+
+* **Alternative 1 (current choice):** Store `LineupName` as an attribute of player.
+  * Pros: Easy to Implement. Easy to navigate.
+  * Cons: Risk of multiple source of truth. More prone to bugs.
+
+* **Alternative 2:** Iterate through lineups to find the ones a player belongs to.
+  * Pros: No multiple source of truth.
+  * Cons: Iteration might be time-consuming.
+
+**Aspect: How to keep track the `Lineup` a `Person` belongs to**
+
+**Alternative 1: (Current choice)** Attributes of `Person`
+
+Pros: Efficient and easy to find `Lineup` of `Person`
+
+Cons: Need to update both `Person` and `Lineup`
+
+**Alternative 2: Using `Lineup` Only
+
+Pros: Only need to update `Lineup`
+
+Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` belongs to
+
 
 ### 6. Clear feature
 
@@ -323,13 +408,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: 
+**Target user profile**:
 
 This product is for competitive team sports manager to manage players in their clubs
 (i.e. roles, player attributes, trainings), lineup formation during practice as well
 as scheduling of events (i.e. trainings, competitions, etc.).
 
-**Value proposition**: 
+**Value proposition**:
 
 This product solves:
 * the issues of managing large quantity of players;
@@ -389,17 +474,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find a player.
-2. MyGM displays details about the player.  
+2. MyGM displays details about the player.
 Use case ends.
 
 **Extensions**
 
 * 1a. MyGM detects an error in the entered command.
-  * 1a1. MyGM displays the error message  
+  * 1a1. MyGM displays the error message.
   Use case ends.
 
 * 1b. MyGM cannot find the player.
-  * 1b1. MyGM displays failure.  
+  * 1b1. MyGM displays failure.
   Use case ends.
 
 **Use case: UC02 - Create a new Lineup**
@@ -415,16 +500,16 @@ Use case ends.
 
 **Extensions**
 
-* 1a. The lineup already exist in MyGM  
-  * 1a1. MyGM displays the error message.   
+* 1a. The lineup already exist in MyGM
+  * 1a1. MyGM displays the error message.
   Use case returns to the start of 3.
 
-* 3a. MyGM cannot find the player. 
-  * 3a1. MyGM displays the error message.   
+* 3a. MyGM cannot find the player.
+  * 3a1. MyGM displays the error message.
   Use case returns to the start of 3.
 
-* 3b. The lineup is already full. 
-  * 3b1. MyGM displays the error message.  
+* 3b. The lineup is already full.
+  * 3b1. MyGM displays the error message.
   Use case ends.
 
 **Use case: UC03 - Tagging a Player’s Position**
@@ -433,12 +518,12 @@ Use case ends.
 
 1. Find a player (UC01)
 2. User adds a tag to the player.
-3. MyGM displays the success message.   
+3. MyGM displays the success message.
    Use case ends.
 
 **Extensions**
-* 3a. User entered an invalid tag. 
-  * 3a1. MyGM displays the invalid tag message and the appropriate tags.   
+* 3a. User entered an invalid tag.
+  * 3a1. MyGM displays the invalid tag message and the appropriate tags.
   Use case ends.
 
 **Use case: UC04 - Editing a Player’s Details**
@@ -463,12 +548,11 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage. 
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should have a _friendly user interface_. 
+4. Should have a _friendly user interface_.
 5. The system should respond within `2` seconds.
 6. Should there be any invalid command, the part of the command that causes this issue should be **highlighted**.
-
 
 ### Glossary
 
