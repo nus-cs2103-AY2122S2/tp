@@ -24,7 +24,7 @@ public class ListTransactionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.updateFilteredTransactionList((t) -> false);
+        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
