@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.trackbeau.model.booking.Booking;
+import seedu.trackbeau.model.booking.UniqueBookingList;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.UniqueCustomerList;
 import seedu.trackbeau.model.service.Service;
@@ -12,12 +14,13 @@ import seedu.trackbeau.model.service.UniqueServiceList;
 
 /**
  * Wraps all data at the trackBeau level
- * Duplicates are not allowed (by .isSameCustomer or .isSameService comparison)
+ * Duplicates are not allowed (by .isSameCustomer or .isSameBooking or .isSameService comparison)
  */
 public class TrackBeau implements ReadOnlyTrackBeau {
 
     private final UniqueCustomerList customers;
     private final UniqueServiceList services;
+    private final UniqueBookingList bookings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,12 +32,13 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     {
         customers = new UniqueCustomerList();
         services = new UniqueServiceList();
+        bookings = new UniqueBookingList();
     }
 
     public TrackBeau() {}
 
     /**
-     * Creates a TrackBeau using the Customers and Services in the {@code toBeCopied}
+     * Creates a TrackBeau using the Customers, Bookings and Services in the {@code toBeCopied}
      */
     public TrackBeau(ReadOnlyTrackBeau toBeCopied) {
         this();
@@ -134,6 +138,20 @@ public class TrackBeau implements ReadOnlyTrackBeau {
 
         services.setService(target, editedService);
     }
+    /**
+     * Adds a booking to trackBeau.
+     * The customer must not already exist in trackBeau.
+     */
+    public void addBooking(Booking b) {
+        bookings.add(b);
+    }
+    /**
+     * Removes {@code key} from this {@code TrackBeau}.
+     * {@code key} must exist in trackBeau.
+     */
+    public void removeBooking(Booking key) {
+        bookings.remove(key);
+    }
 
     /**
      * Removes {@code key} from this {@code TrackBeau}.
@@ -158,10 +176,14 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public ObservableList<Customer> getCustomerList() {
         return customers.asUnmodifiableObservableList();
     }
-
     @Override
     public ObservableList<Service> getServiceList() {
         return services.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Booking> getBookingList() {
+        return bookings.asUnmodifiableObservableList();
     }
 
     @Override
@@ -169,11 +191,12 @@ public class TrackBeau implements ReadOnlyTrackBeau {
         return other == this // short circuit if same object
                 || (other instanceof TrackBeau // instanceof handles nulls
                 && customers.equals(((TrackBeau) other).customers)
-                && services.equals(((TrackBeau) other).services));
+                && services.equals(((TrackBeau) other).services)
+                && bookings.equals(((TrackBeau) other).bookings));
     }
 
     @Override
     public int hashCode() {
-        return customers.hashCode() + services.hashCode();
+        return customers.hashCode() + bookings.hashCode() + services.hashCode();
     }
 }

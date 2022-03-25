@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.exceptions.DuplicateCustomerException;
 import seedu.trackbeau.model.service.Service;
@@ -87,11 +88,12 @@ public class TrackBeauTest {
     }
 
     /**
-     * A stub ReadOnlyTrackBeau whose customer list, service list can violate interface constraints.
+     * A stub ReadOnlyTrackBeau whose customer list, booking list, service list can violate interface constraints.
      */
     private static class TrackBeauStub implements ReadOnlyTrackBeau {
         private final ObservableList<Customer> customers = FXCollections.observableArrayList();
         private final ObservableList<Service> services = FXCollections.observableArrayList();
+        private final ObservableList<Booking> bookings = FXCollections.observableArrayList();
 
         TrackBeauStub(Collection<Customer> customers, Collection<Service> services) {
             this.customers.setAll(customers);
@@ -102,10 +104,13 @@ public class TrackBeauTest {
         public ObservableList<Customer> getCustomerList() {
             return customers;
         }
-
         @Override
         public ObservableList<Service> getServiceList() {
             return services;
+        }
+        @Override
+        public ObservableList<Booking> getBookingList() {
+            return bookings;
         }
     }
 
