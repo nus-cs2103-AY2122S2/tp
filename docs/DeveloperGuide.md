@@ -238,8 +238,9 @@ WIP - Insert UML and activity diagram
 
 #### Usage
 Given below is an activity diagram which shows the example usage scenario for when a user adds the `Medical` information
-for a `Patient` and how the add mechanism behaves at each step.
-WIP
+for a `Patient` and how the add mechanism behaves at each step:
+
+<img src="images/AddMedicalActivityDiagram.png" width="550" />
 
 <!-- Justin -->
 ### View
