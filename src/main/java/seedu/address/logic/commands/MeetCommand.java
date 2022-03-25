@@ -23,7 +23,7 @@ public class MeetCommand extends Command {
             + "Parameters: NAME (must be found in HustleBook), DATE (YYYY-MM-DD format), TIME (24HR Format)\n"
             + "Example: " + COMMAND_WORD + " NAME" + " m/2022-02-23" + " t/1530";
 
-    public static final String MESSAGE_SCHEDULE_MEETING_PERSON_SUCCESS = "Scheduled a meeting: %1$s";
+    public static final String MESSAGE_SCHEDULE_MEETING_PERSON_SUCCESS = "Updated a meeting with %1$s";
 
     private final Name targetName;
     private final ScheduledMeeting scheduledMeeting;

@@ -14,8 +14,8 @@ public class MeetingTime {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting should only contain numbers and hyphens, in the format of YYYY-MM-DD";
-    //public static final String VALIDATION_REGEX = "^([0-9]{4})(-)(0[1-9]|1[0-2])(-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$";
+            "Meeting time should only contain numbers, in the 24hr format of HHmm";
+    public static final String VALIDATION_REGEX = "^(0[0-9]|1[0-9]|2[0-3])([0-5][0-9])$";
     public final LocalTime value;
 
     /**
@@ -33,8 +33,7 @@ public class MeetingTime {
      * Returns true if a given string is a valid time.
      */
     public static boolean isValidTime(String test) {
-        return true;
-        // return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
