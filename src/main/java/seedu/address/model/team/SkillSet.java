@@ -64,6 +64,18 @@ public class SkillSet {
     }
 
     /**
+     * Returns true if the current SkillSet has all the skills inside the provided SkillSet.
+     *
+     * @param skillset The SkillSet that contains all the skills that this SkillSet must possess.
+     * @return True if this SkillSet contains all the skills, false otherwise.
+     */
+    public boolean hasSkills(SkillSet skillset) {
+        requireAllNonNull(skillset);
+        return skillset.getSkillSetInStream()
+                .allMatch((this::hasSkill));
+    }
+
+    /**
      * Adds all of provided skillSet into this skillSet
      * @param additionalSkill skillSet to be added
      */

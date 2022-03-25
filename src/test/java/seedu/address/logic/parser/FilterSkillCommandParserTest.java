@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FilterSkillCommand;
 import seedu.address.model.person.PersonContainsSkillPredicate;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 
 class FilterSkillCommandParserTest {
 
@@ -23,8 +24,11 @@ class FilterSkillCommandParserTest {
     @Test
     public void parse_validArgs_returnsFilterSkillCommand() {
         // no leading and trailing whitespaces
+        SkillSet skillSet = new SkillSet();
+        skillSet.add(new Skill("C"));
+
         FilterSkillCommand expectedFilterSkillCommand =
-                new FilterSkillCommand(new PersonContainsSkillPredicate(new Skill("C")));
+                new FilterSkillCommand(new PersonContainsSkillPredicate(skillSet));
         assertParseSuccess(parser, "C", expectedFilterSkillCommand);
     }
 }

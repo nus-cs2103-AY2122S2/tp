@@ -7,6 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonBySkillProficiencyComparator;
 import seedu.address.model.person.PersonContainsSkillPredicate;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -26,7 +27,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         Skill skillToFilter = new Skill(trimmedArgs);
-        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(skillToFilter);
+        SkillSet skillSet = new SkillSet();
+        skillSet.add(skillToFilter);
+        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(skillSet);
         PersonBySkillProficiencyComparator comparator = new PersonBySkillProficiencyComparator(skillToFilter);
 
         return new SortCommand(predicate, comparator);

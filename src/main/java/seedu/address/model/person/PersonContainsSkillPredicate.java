@@ -2,28 +2,32 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 
 /**
  * Tests that a {@code Person}'s {@code Skill} matches any of the keywords given.
  */
 public class PersonContainsSkillPredicate implements Predicate<Person> {
-    private final Skill skill;
+    private final SkillSet skillSet;
 
-    public PersonContainsSkillPredicate(Skill skill) {
-        this.skill = skill;
+    /**
+     *
+     * @param skillSet
+     */
+    public PersonContainsSkillPredicate(SkillSet skillSet) {
+        this.skillSet = skillSet;
     }
 
     @Override
     public boolean test(Person person) {
-        return person.hasSkill(this.skill);
+        return person.getSkillSet().hasSkills(this.skillSet);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PersonContainsSkillPredicate // instanceof handles nulls
-                && skill.equals(((PersonContainsSkillPredicate) other).skill)); // state check
+                && skillSet.hasSameSkillSet(((PersonContainsSkillPredicate) other).skillSet)); // state check
     }
 
 }
