@@ -3,11 +3,6 @@ layout: page
 title: User Guide
 ---
 
-Trackermon is a **desktop app** for **tracking and managing shows, optimized for use via a
-Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**.
-The app allows the user to track and remember what shows they have watched or currently watching.
-They can easily look up the list of shows if they need to.
-
 ### Table of Contents
 * [**Quick Start**](#quick-start)
 * [**Features**](#features)
@@ -24,6 +19,28 @@ They can easily look up the list of shows if they need to.
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
 
+---
+
+## Introduction
+
+Always accessing MyAnimeList or IMDB to record down the shows you watched? Or finding it difficult to search the different websites that stored your show information? Fret not because **Trackermon** is the app just for you! But hold on, you may be wondering what is Trackermon?
+
+Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch.
+
+---
+
+## User guide navigation
+
+Before you continue reading the rest of our user guide, the table below displays some important syntax to facilitate your reading.
+
+| Syntax                                                                             | Description                                            |
+|------------------------------------------------------------------------------------|--------------------------------------------------------|
+| **Bold**                                                                           | Important words to note                                |
+| `GFM`                                                                              | Command word/prefix/parameter                          |
+| <div markdown="span" class="alert alert-warning">:bulb: **Tip:**</div>             | A small but useful piece of information                |
+| <div markdown="span" class="alert alert-info">:information_source: **Note:**</div> | Additional information                                 |
+| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**</div>   | Important information to watch out for                 |
+| [Optional Parameters]                                                              | Indicates the parameters/prefixes that may be optional |
 
 ---
 
@@ -35,10 +52,11 @@ They can easily look up the list of shows if they need to.
 
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
-4. Double-click the file to start the app.
+4. Double-click the file to start the app. A [GUI](#glossary) containing the annotated 4 main components should show up as below:
+
+[**IMAGE HERE**]
 
 5. Start communicating with Trackermon using the command box.
-
 
 Some example commands you can try:
 
@@ -50,6 +68,9 @@ Some example commands you can try:
 
 * **`exit`** : Exits the app.
 
+6. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
+
+7. For details of each command, please proceed to the [Features](#features) section.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -259,11 +280,12 @@ _Details coming soon ..._
 
 ## Glossary
 
-| Term          | Description                                                                                            |
-|---------------|--------------------------------------------------------------------------------------------------------|
-| **Parameter** | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)          |
-| **Prefix**    | Characters used to identify the following parameter (e.g. `n/` is the prefix for the parameter `NAME`) |
-| **JavaFX**    | JavaFX is a set of Java graphics libraries for creating Java GUI applications                          | 
-
+| Term                               | Description                                                                                                                                                                            |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Command Line Interface (CLI)**   | A Command Line Interface connects a user to a computer program or operating system. Through the CLI, users interact with a system or application by typing in text (commands).         | 
+| **Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
+| **Parameter**                      | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)                                                                                          |
+| **Prefix**                         | Characters used to identify the following parameter (e.g. `n/` is the prefix for the parameter `NAME`)                                                                                 |
+| **JavaFX**                         | JavaFX is a set of Java graphics libraries for creating Java GUI applications                                                                                                          |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
