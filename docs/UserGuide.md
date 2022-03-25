@@ -156,7 +156,7 @@ Examples:
 
 ### Taking student attendance
 
-#### Marking attendance
+#### Marking attendance: `mark`
 
 Marks student(s)' attendance(s).
 
@@ -173,7 +173,7 @@ Examples:
 * `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `mark attend c/1 w/3 s/e0123456,e0234567` marks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
-#### Unmarking attendance
+#### Unmarking attendance: `unmark`
 
 Unmarks student(s)' attendance(s).
 
