@@ -57,7 +57,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (targetIndices != null) { // index was used for the command
+        if (targetIndices != null) { // indices were used for the command
             int numberOfDeletions = 0;
             ArrayList<Person> personsToDelete = new ArrayList<>();
             for (Index currIndex : targetIndices) {
