@@ -62,4 +62,26 @@ public class MarkCommand extends Command {
 
         return new CommandResult(String.format(MARKED_TASK_SUCCESS, studentId));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        boolean isEquals = false;
+
+        if (other == this) {
+            isEquals = true;
+        } else {
+            boolean isInstanceOf = other instanceof MarkCommand;
+            if (!isInstanceOf) {
+                return false;
+            }
+            MarkCommand commandToCompare = (MarkCommand) other;
+
+            // check both student id and index
+            if (this.studentId != null && this.index != null) {
+                isEquals = studentId.equals(commandToCompare.studentId) && index.equals(commandToCompare.index);
+            }
+        }
+        return isEquals;
+    }
+
 }
