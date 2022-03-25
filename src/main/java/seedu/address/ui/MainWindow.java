@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         interviewListPanel = new InterviewListPanel(logic.getInterviewSchedule().getInterviewList());
         interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
 
-        focusListPanel = new FocusListPanel(logic.getInterviewSchedule().getInterviewList());
+        focusListPanel = new FocusListPanel(logic.getFilteredCandidateList());
         focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

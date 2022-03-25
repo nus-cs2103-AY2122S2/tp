@@ -8,40 +8,40 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.interview.Interview;
+import seedu.address.model.candidate.Candidate;
 
 /**
- * Panel containing the list of interviews.
+ * Panel containing the list of candidates.
  */
 public class FocusListPanel extends UiPart<Region> {
     private static final String FXML = "FocusListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(FocusListPanel.class);
 
     @FXML
-    private ListView<Interview> focusListView;
+    private ListView<Candidate> focusListView;
 
     /**
-     * Creates a {@code InterviewListPanel} with the given {@code ObservableList}.
+     * Creates a {@code CandidateListPanel} with the given {@code ObservableList}.
      */
-    public FocusListPanel(ObservableList<Interview> interviewList) {
+    public FocusListPanel(ObservableList<Candidate> candidateList) {
         super(FXML);
-        focusListView.setItems(interviewList);
+        focusListView.setItems(candidateList);
         focusListView.setCellFactory(listView -> new FocusListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Interview} using a {@code InterviewCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code CandidateCard}.
      */
-    class FocusListViewCell extends ListCell<Interview> {
+    class FocusListViewCell extends ListCell<Candidate> {
         @Override
-        protected void updateItem(Interview interview, boolean empty) {
-            super.updateItem(interview, empty);
+        protected void updateItem(Candidate candidate, boolean empty) {
+            super.updateItem(candidate, empty);
 
-            if (empty || interview == null) {
+            if (empty || candidate == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new FocusCard(interview, getIndex() + 1).getRoot());
+                setGraphic(new FocusCard(candidate, getIndex() + 1).getRoot());
             }
         }
     }

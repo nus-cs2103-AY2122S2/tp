@@ -7,10 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.interview.Interview;
+import seedu.address.model.candidate.Candidate;
 
 /**
- * An UI component that displays information of a {@code Interview}.
+ * An UI component that displays information of a {@code Candidate}.
  */
 public class FocusCard extends UiPart<Region> {
 
@@ -24,7 +24,7 @@ public class FocusCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Interview interview;
+    public final Candidate candidate;
 
     @FXML
     private HBox cardPane;
@@ -41,19 +41,17 @@ public class FocusCard extends UiPart<Region> {
     @FXML
     private Label applicationStatus;
     @FXML
-    private Label interviewStatus;
+    private Label candidateStatus;
     @FXML
     private Label availability;
     @FXML
     private FlowPane tags;
     /**
-     * Creates a {@code InterviewCode} with the given {@code Interview} and index to display.
+     * Creates a {@code CandidateCode} with the given {@code Candidate} and index to display.
      */
-    public FocusCard(Interview interview, int displayedIndex) {
+    public FocusCard(Candidate candidate, int displayedIndex) {
         super(FXML);
-        this.interview = interview;
-        id.setText(displayedIndex + ". ");
-        name.setText(interview.getInterviewDate().toString());
+        this.candidate = candidate;
     }
 
     @Override
@@ -71,6 +69,6 @@ public class FocusCard extends UiPart<Region> {
         // state check
         FocusCard card = (FocusCard) other;
         return id.getText().equals(card.id.getText())
-                && interview.equals(card.interview);
+                && candidate.equals(card.candidate);
     }
 }
