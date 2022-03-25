@@ -306,6 +306,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code List<String> } into a {@code List<EventName>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word.
+     */
+    public static List<EventName> parseEventNames(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<EventName> set = new HashSet<>();
+        for (String value : list) {
+            if (value.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
+            set.add(parseEventName(value));
+        }
+        return new ArrayList<>(set);
+    }
+
+    /**
      * Parses {@code String info} into an {@code Information}.
      * Leading and trailing whitespaces will be trimmed.
      */
@@ -316,6 +334,24 @@ public class ParserUtil {
             throw new ParseException(Information.MESSAGE_CONSTRAINTS);
         }
         return new Information(trimmedInfo);
+    }
+
+    /**
+     * Parses a {@code List<String> } into a {@code List<Information>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word.
+     */
+    public static List<Information> parseInfos(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Information> set = new HashSet<>();
+        for (String value : list) {
+            if (value.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
+            set.add(parseInfo(value));
+        }
+        return new ArrayList<>(set);
     }
 
     /**
