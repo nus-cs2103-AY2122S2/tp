@@ -20,8 +20,7 @@ public class Messages {
             "The prescription index provided is invalid";
     public static final String MESSAGE_TEST_RESULTS_LISTED_OVERVIEW = "%1$d test results listed! Belongs to: %2$s";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "Duplicate consultation found!";
-    public static final String MESSAGE_INVALID_TEST_RESULT_DISPLAYED_INDEX =
-            "The test result index provided is invalid";
+    public static final String MESSAGE_INVALID_TEST_RESULT_INDEX = "The test result index provided is invalid";
     public static final String MESSAGE_INVALID_MEDICAL_INFORMATION_INDEX =
             "The medical information index provided is invalid";
 
