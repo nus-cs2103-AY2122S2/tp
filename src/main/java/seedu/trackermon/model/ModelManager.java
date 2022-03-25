@@ -165,18 +165,7 @@ public class ModelManager implements Model {
     public void updateSortedShowList(Comparator<Show> comparator) {
         requireNonNull(comparator);
         sortedShows.setComparator(comparator);
-        saveSortedShowList();
         sortedShows.setComparator(COMPARATOR_SHOW_ALL_SHOWS);
     }
-
-    @Override
-    public void saveSortedShowList() {
-        ShowList newShowList = new ShowList();
-        for (int i = 0; i < sortedShows.size(); i++) {
-            newShowList.addShow(sortedShows.get(i));
-        }
-        showList.resetData(newShowList);
-    }
-
 
 }

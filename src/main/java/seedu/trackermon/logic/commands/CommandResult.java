@@ -17,17 +17,24 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean isExit;
 
-    /** The list will be modified **/
-    private final boolean isModifyList;
+    /** The application is importing a file. */
+    private final boolean isImport;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isModifyList) {
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowHelp = isShowHelp;
         this.isExit = isExit;
-        this.isModifyList = isModifyList;
+        this.isImport = isImport;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit) {
+        this(feedbackToUser, isShowHelp, isExit, false);
     }
 
     /**
@@ -35,15 +42,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * , modifying the list and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser, boolean isModifyList) {
-        this(feedbackToUser, false, false, isModifyList);
+        this(feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -54,12 +53,12 @@ public class CommandResult {
         return isShowHelp;
     }
 
-    public boolean isModifyList() {
-        return isModifyList;
-    }
-
     public boolean isExit() {
         return isExit;
+    }
+
+    public boolean isImport() {
+        return isImport;
     }
 
     @Override
@@ -83,5 +82,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, isShowHelp, isExit);
     }
-
 }

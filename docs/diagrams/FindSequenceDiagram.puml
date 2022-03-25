@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackermonParser" as TrackermonParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":TagsContainsKeywordsPredicate" as TagsContainsKeywordsPredicate LOGIC_COLOR
+participant "fc:FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find t/Anime t/Action")
+activate LogicManager
+
+LogicManager -> TrackermonParser : parseCommand("find t/Anime t/Action")
+activate TrackermonParser
+
+create FindCommandParser
+TrackermonParser -> FindCommandParser :FindCommandParser("find t/Anime t/Action")
+activate FindCommandParser
+
+FindCommandParser --> TrackermonParser
+deactivate FindCommandParser
+
+TrackermonParser -> FindCommandParser :parse("t/Anime t/Action")
+activate FindCommandParser
+
+FindCommandParser -> ArgumentTokenizer : tokenize(args, PREFIX_TAG)
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> FindCommandParser : argumentMultimap
+deactivate ArgumentTokenizer
+
+create TagsContainsKeywordsPredicate
+FindCommandParser -> TagsContainsKeywordsPredicate : TagsContainsKeywordsPredicate(predicates)
+activate TagsContainsKeywordsPredicate
+
+TagsContainsKeywordsPredicate --> FindCommandParser : predicates
+deactivate TagsContainsKeywordsPredicate
+
+create FindCommand
+FindCommandParser -> FindCommand : FindCommand(predicates)
+activate FindCommand
+
+FindCommand --> FindCommandParser : fc
+deactivate FindCommand
+
+FindCommandParser --> TrackermonParser : fc
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> TrackermonParser
+destroy FindCommandParser
+
+TrackermonParser --> LogicManager : fc
+deactivate TrackermonParser
+
+LogicManager -> FindCommand : execute(model)
+activate FindCommand
+
+FindCommand -> Model : updateFilteredShowList(predicates)
+activate Model
+
+Model --> FindCommand
+deactivate Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
