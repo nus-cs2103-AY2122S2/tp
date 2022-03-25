@@ -154,6 +154,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Filter feature
+
+The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
+To implement the feature, the below classes are created: 
+
+* `FilterCommand` extending class `Command` is implemented to let the system understand the command
+* `FilterCommandParser`is implemented to parse the filter command entered by user. 
+* `PersonContainsTagPredicate` extends class Predicate<Person> to assist in filtering out the profiles that contains 
+  the given tag
+
+The sequence diagram below illustrates how the filter command works, using `'filter family'` as the sample input.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+  
+Given below is an example usage scenario of filter command.
+  
+Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `filter family`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.AddressBookParser` which creates a `FilterCommandParser` object.
+
+Step 3. The `FilterCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `FilterCommand` object 
+if there is no parse exception. In the creation of a new `FilterCommand` object, the tag name is parsed out and a new 
+`PersonContainsTagPredicate` object is created.
+
+Step 4. During the execution of filter command, a `CommandException` is thrown if the tag does not exist in the model.
+Otherwise, the profile list is filtered using the predicate.
+
+The activity diagram below summarizes what happens when a filter command is executed.
+
+
+
+####Design considerations 
+The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

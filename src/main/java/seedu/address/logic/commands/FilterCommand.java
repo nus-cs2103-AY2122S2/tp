@@ -32,13 +32,11 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!model.hasTag(tag)) {
-            throw new CommandException("tag does not exist");
+            throw new CommandException(Messages.MESSAGE_INVALID_TAG_NAME);
         }
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-
-        //return new CommandResult("Hello from filter");
     }
 
     @Override
