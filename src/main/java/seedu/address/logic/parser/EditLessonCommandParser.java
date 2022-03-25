@@ -12,8 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
