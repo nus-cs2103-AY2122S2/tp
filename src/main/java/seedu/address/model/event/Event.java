@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Name;
 
@@ -40,6 +41,11 @@ public class Event implements Comparable<Event> {
 
     public List<Name> getParticipants() {
         return participants;
+    }
+
+    public List<String> getParticipantStrings() {
+        return getParticipants().stream().map(participant -> participant.fullName)
+                .collect(Collectors.toList());
     }
 
     public DateTime getDateTime() {

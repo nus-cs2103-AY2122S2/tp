@@ -43,7 +43,9 @@ NUSocials is a **desktop app for university students to maintain a professional 
     * **`find`**`n/fred` : Finds persons that match the name 'fred'.
 
     * **`find -s`**`n/fred m/cs2040s edu/computer science` : Finds persons that match the name 'fred' AND takes the module 'cs2040s' AND is studying 'computer science'.
-     
+
+    * **`find -e`**`name/lunch info/lunch at UTown dt/2022-05-05 12:00` : Finds events that match the name 'lunch' OR the info 'lunch at UTown' OR the date and time '2022-05-05 12:00'
+
     * **`event`** `name/Lunch appointment info/Having lunch at Hai Di Lao d/2023-11-15 t/23:19`
 
     * **`clear`** : Deletes all contacts.
@@ -81,7 +83,7 @@ NUSocials is a **desktop app for university students to maintain a professional 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/help_message.png)
 
@@ -170,6 +172,20 @@ Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]�
 Examples:
 * `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with cs2040s, cs2030s and Shopee)<br>
   ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
+
+### Locating an event: `find -e`
+
+Finds an event that matches any of the given details
+
+Format: `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICPANT]…​ [dt/DATE AND TIME]…​`
+
+* The search is case-insensitive. e.g `lunch` will match `Lunch`
+* At least one of the optional fields must be provided.
+* Only full words will be matched e.g. `lunch` will not match `Lunch`
+* Events matching at least one of the field will be returned (i.e. `OR` search).
+
+Examples:
+* `find -e name/lunch part/alex` returns all lunch events and events involving Alex<br>
 
 ### Deleting a person : `delete`
 
