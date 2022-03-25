@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredEventList(PREDICATE_SHOW_UPCOMING_EVENTS); // TODO: change predicate to after current time
+        model.updateFilteredEventList(PREDICATE_SHOW_UPCOMING_EVENTS);
 
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
