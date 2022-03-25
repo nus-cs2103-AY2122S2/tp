@@ -10,9 +10,9 @@ layout: page title: User Guide
 | [Command Summary](#Command-Summary) |
 
 
-**Ultimate DivocTracker (UDT)** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ultimate DivocTracker can get your contact management tasks done faster than traditional GUI apps.
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via a Command Line Interface _(CLI)_ while still having the benefits of a Graphical User Interface _(GUI)_. If you can type fast, Ultimate DivocTracker can get your contact management tasks done faster than traditional GUI apps.
 
-School administrators (like teachers) can use UDT to easily track COVID amongst the student population with ease and concentrate on what matters most, the education of the students.
+School administrators _(like teachers)_ can use UDT to easily track COVID amongst the student population with ease and concentrate on what matters most, the education of the students.
 
 # Content Page
 
@@ -127,7 +127,7 @@ Finds an existing student in the address book by their class
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-> :bulb: **Tip:** if student class contains their levels _(Eg. 3A, 3B, 4A, 4B)_, `findclasscode 4` finds all students in level 4 _(students in 4A and 4B)_
+> :bulb: **Tip:** if students' classes contains their levels _(Eg. 3A, 3B, 4A, 4B)_, `findclasscode 4` finds all students in level 4 _(students in 4A and 4B)_
 
 </div>
 
