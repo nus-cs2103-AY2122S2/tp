@@ -68,11 +68,34 @@ The `UI` component,
 
 ### Logic Component
 
-![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** : 
 [`Logic.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/logic/Logic.java)
 
+![Structure of the Logic Component](images/LogicClassDiagram.png)
+
+How the `Logic` component works:
+
+* When `Logic` is called upon to execute a command, it uses the `CompanyListParser` class to parse the user command.
+* This results in a `Command` object (or more precisely, an object of one of its subclasses e.g., `AddCompanyCommand`) which is executed by the `LogicManager`.
+* The command can communicate with the `Model` when it is executed (e.g. to add a company).
+* The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteCompany 1")` API call.
+
+![Interactions Inside the Logic Component for the `deleteCompany 1` Command](images/DeleteCompanySequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCompanyCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command can be represented as follows:
+
+<img src="images/ParserClasses.png" width="600"/>
+
+How the parsing works:
+
+* When called upon to parse a user command, the `CompanyListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCompanyCommandParser`) which uses the other classes shown above (e.g. `ArgumentMultimap`, `ParserUtil`, etc.) to parse the user command and create a `XYZCommand` object (e.g., `AddCompanyCommand`) which the `CompanyListParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCompanyCommandParser`, `DeleteCompanyCommandParser`, …) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model Component
 
