@@ -55,6 +55,18 @@ public class TaModule implements Entity {
                 && otherTaModule.getAcademicYear().equals(getAcademicYear());
     }
 
+    /**
+     * Returns a String representation of the module code and academic year.
+     * These are the minimum fields required to uniquely represent a module class.
+     */
+    public String toUniqueRepresentation() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getModuleCode())
+                .append(",")
+                .append(getAcademicYear());
+        return builder.toString();
+    }
+
     @Override
     public EntityType getEntityType() {
         return EntityType.TA_MODULE;
@@ -79,6 +91,8 @@ public class TaModule implements Entity {
                 && otherTaModule.getAcademicYear().equals(getAcademicYear())
                 && otherTaModule.getModuleCode().equals(getModuleCode());
     }
+
+
 
     @Override
     public int hashCode() {

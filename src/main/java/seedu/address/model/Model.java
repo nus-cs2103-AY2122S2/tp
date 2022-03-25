@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.student.Student;
@@ -88,6 +89,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered class group list. */
     ObservableList<ClassGroup> getFilteredClassGroupList();
 
+    /** Returns an unmodifiable view of the filtered assessment list. */
+    ObservableList<Assessment> getFilteredAssessmentList();
+
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -105,4 +109,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClassGroupList(Predicate<? super ClassGroup> predicate);
+
+    /**
+     * Updates the filter of the filtered assessment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAssessmentList(Predicate<? super Assessment> predicate);
 }

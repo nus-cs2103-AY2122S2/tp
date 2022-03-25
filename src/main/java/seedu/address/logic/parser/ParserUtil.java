@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
@@ -16,6 +17,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.SimpleName;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.entity.EntityType;
@@ -247,9 +250,44 @@ public class ParserUtil {
             return EntityType.TA_MODULE;
         case TYPE_CLASS:
             return EntityType.CLASS_GROUP;
+        case TYPE_ASSESSMENT:
+            return EntityType.ASSESSMENT;
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_ENTITY);
         }
+    }
+
+    /**
+     * Parses a {@code String assessmentName} into a {@code AssessmentName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code assessmentName} is invalid.
+     */
+    public static AssessmentName parseAssessmentName(String assessmentName) throws ParseException {
+        requireNonNull(assessmentName);
+        String trimmedName = assessmentName.trim();
+        if (!AssessmentName.isValidAssessmentName(trimmedName)) {
+            throw new ParseException(AssessmentName.MESSAGE_CONSTRAINTS);
+        }
+        return new AssessmentName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String simpleName} into a {@code SimpleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code simpleName} is invalid.
+     */
+    public static Optional<SimpleName> parseSimpleName(Optional<String> simpleName) throws ParseException {
+        if (simpleName.isEmpty()) {
+            return Optional.empty();
+        }
+        requireNonNull(simpleName);
+        String trimmedName = simpleName.get().trim();
+        if (!SimpleName.isValidSimpleName(trimmedName)) {
+            throw new ParseException(SimpleName.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new SimpleName(trimmedName));
     }
 
     /**

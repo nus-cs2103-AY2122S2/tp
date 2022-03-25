@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
@@ -19,5 +20,7 @@ public interface ReadOnlyTAssist {
     ObservableList<TaModule> getModuleList();
 
     ObservableList<ClassGroup> getClassGroupList();
+
+    ObservableList<Assessment> getAssessmentList();
 
 }
