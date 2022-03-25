@@ -45,20 +45,20 @@ Add a pet to the database.
 
 Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]`
 * Each particular field is compulsory except for `TAG`.
-* `TAG` is an optional field.
+* `TAG` is an optional field which could be used to indicate the breed of a pet.
 * Each particular entered must strictly correspond to its legal prefix.`e.g: p/Address is considered illegal`.
 * Phone number **must only contain numbers**.
 
 Examples:
 * `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`.
 
-### Editting a pet : `edit`
+### Editing a pet : `edit`
 
 Edits an existing pet in the address book.
 
 Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]`
 * Edits the pet at the specified `INDEX`. The index refers to the index number shown in the displayed pet list. The index **must be a positive integar**.
-* All of the fields are optional but at least one of the fields must be provided.
+* All the fields are optional but at least one of the fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the pet will be removed i.e adding of tags is not cumulative.
 * You can remove all the pet's tags by typing t/ without specifying any tags after it.
@@ -71,7 +71,7 @@ Format:`list`
 
 ### Sort pets: `sort`
 
-Retrieves a sorted list of pets. Users can choose to either sort them by owner name or pet name.
+Retrieves a sorted list of pets. Users can choose to either sort alphabetically by owner name or pet name.
 
 Format: `sort [FIRST_LETTER_OF_COLUMN]`
 * Since we can only sort the pet list by owner name or pet name, the only commands available currently are `sort /o` and `sort /n`.
@@ -87,6 +87,7 @@ Format: `find n/NAME_OF_PET [Keywords]`
 * The name of pet is case-insensitive e.g: `find Mojo` will match `find mojo`.
 * Only the name is searched.
 * Search returns partial name matches e.g.: `find mo` will return Mojo as a result.
+* Can search for multiple pet names.
 
 Examples:
 * `find Peepee Waffle Bagel`
@@ -99,6 +100,7 @@ Format: `diet INDEX d/remark`
 
 * Adds `d/remark` as a dietary requirement for pet with `INDEX`.
 * ID is a unique identifier that each pet has in the database.
+* Entering `diet INDEX d/` will remove the dietary requirements of pet at `INDEX`.
 
 Examples:
 `diet 12 Only feed dry kibble` will store a dietary remark for pet 12 saying "Only feed dry kibble".
@@ -138,7 +140,7 @@ Examples:
 
 ### Marking a pet as present: `present`
 
-Mark a pet as present on a given date, with a pick-up time and drop-off time (if any).
+Mark a pet as present on a given date, with school bus pick-up time and drop-off time (if any).
 
 Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 
@@ -163,6 +165,24 @@ Format: `absent INDEX date/dd-MM-yyyy`
 
 Examples:
 * `absent 1 date/17-03-2022` indicates that pet 1 is absent for daycare on `17-03-2022`
+
+### Filtering pet list: `filter`
+
+Filters the pet address book by a specified field.
+
+Format: `filter FIELD/FilterWord`
+
+* Can only filter by date specified, owner's name and tags of pets
+* Specified `FIELD/` only consists of: `byDate/`, `byTags/` and `byOwner/`
+* `FilterWord` if user uses `byDate/` has to be in `dd-MM-yyyy` format, or `today`. This filters the address book by showing pets present on the given date.
+* `FilterWord` if user uses `byOwner/` has to be a single word. Usage is similar to `find` except filter allows users to filter out multiple pets with same owner.
+* `FilterWord` if user uses `byTags/` can be any length. Show pets that are of the same breed or tag similar to `FilterWord` given.
+  * Able to filter with a partial match in `FilterWord`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`
+
+Examples:
+* `filter byDate/22-03-2022` show pets present on 22 March 2022.
+* `filter byOwner/Lily` show pets owned by any all Lily(s).
+* `filter byTags/Retriever` sho pets with `Retriever` in their tags.
 
 ### Deleting a pet: `delete`
 
@@ -197,17 +217,19 @@ Format: `help`
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                                                          |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`                                                                             |
-| **Edit**            | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]` <br> e.g, `edit 1 p/98247076 t/bulldog`                                                                                                         |
-| **Delete**          | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                                                                            |
-| **Find**            | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                                                                                                  |
-| **Diet**            | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                                                                                                       |
+| Action      | Format, Examples                                                                                                                                                                                                                |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`                                                                                   |
+| **Edit**    | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]` <br> e.g, `edit 1 p/98247076 t/bulldog`                                                                                                        |
+| **Delete**  | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                                                                                  |
+| **Sort**    | `sort [FIRST_LETTER_OF_COLUMN]` <br> e.g. `sort /o` (sorts address book alphabetically by owners' names)                                                                                                                        |
+| **Find**    | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                                                                                                        |
+| **Diet**    | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                                                                                                             |
 | **Present** | `present INDEX date/dd-MM-yyyy pu/HH:mm do/HH:mm` <br> e.g., `present 1 date/16-03-2022 pu/08:00 do/17:00` <br>(indicates that pet 1 will be attending daycare on 16 March 2022, requires pick up at 8 am and drop off at 5 pm) |
-| **Absent**  | `absent INDEX date/dd-MM-yyyy` <br> e.g., `absent 1 date/17-03-2022` (indicates that pet 1 was absent on 17 March 2022)                                                                                                    |
-| **App**         | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]` e.g., `app 1 date/04-03-2022 09:30 at/ NUS Vet Clinic` <br> `app INDEX clear` e.g., `app 1 clear`                                                                                                            |
-| **List**            | `list` |
-| **Clear**           | `clear`|
-| **Exit**            | `exit` |
-| **Help**            | `help` |
+| **Absent**  | `absent INDEX date/dd-MM-yyyy` <br> e.g., `absent 1 date/17-03-2022` (indicates that pet 1 was absent on 17 March 2022)                                                                                                         |
+| **App**     | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]` e.g., `app 1 date/04-03-2022 09:30 at/ NUS Vet Clinic` <br> `app INDEX clear` e.g., `app 1 clear`                                                                             |
+| **Filter**  | `filter FIELD/FIlterWord` <br> e.g. `filter byDate/22-03-2022` (returns information of all pets present on 22 March 2022)                                                                                                       |
+| **List**    | `list`                                                                                                                                                                                                                          |
+| **Clear**   | `clear`                                                                                                                                                                                                                         |
+| **Exit**    | `exit`                                                                                                                                                                                                                          |
+| **Help**    | `help`                                                                                                                                                                                                                          |
