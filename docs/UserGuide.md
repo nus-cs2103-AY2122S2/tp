@@ -1,3 +1,6 @@
+---
+layout: page title: User Guide
+---
 
 | Quick Links                         |
 |-------------------------------------|
@@ -25,9 +28,8 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
   - [Find student by class](#find-student-by-class-findclasscode): `findclasscode`
   - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
-  - [Delete student](#delete-student-delete): `delete`
+  - [Delete a student](#delete-student-delete): `delete`
   - [Exit the application](#exit-the-application-exit): `exit`
-
 
 </div>
 
@@ -40,8 +42,8 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: **Installation notes:**
-- Application data will be stored in the same folder containing the application executable.
+> :information_source: **Installation notes:**  
+- Application data will be stored in the same folder containing the application executable.  
 - Currently only officially supported for x64 Windows platforms.
 
 </div>
@@ -67,10 +69,10 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 | [Find student by class](#find-student-by-class-findclasscode) | `findclasscode CLASS` | `findclasscode 4A`       |
 | [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY` | `findactivity choir`   |
 | [Edit student details](#edit-student-details-edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`  |
-| [Delete student](#delete-student-delete) | `delete INDEX` | `delete 3`                      |
+| [Delete a student](#delete-student-delete) | `delete INDEX` | `delete 3`                      |
 | [Exit the application](#exit-the-application-exit)          | `exit`                   | `exit` |
 
-## Adding a person: `add`
+## Add a student: `add`
 Adds a student to the tracking list
 - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ c/CLASS s/STATUS [act/ACTIVITY] [MORE ACTIVITIES]`
   - `NAME`, `ADDRESS`, `CLASS`, `ACTIVITY` takes a string of characters
@@ -171,7 +173,7 @@ Edits an existing student's details in the address book by the Index provided an
 
 </div>
 
-## Delete student : `delete`
+## Delete a student : `delete`
 Deletes the specified person from the address book.
 - Format: `delete INDEX`
   - Deletes the student at the specified `INDEX`
@@ -207,7 +209,13 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tip:** Advanced users are welcome to update data directly by editing that data file.
+:bulb: **Tip:** Advanced users are welcome to update data directly by editing that data file
+
+</div>
+
+<div markdown="span" class="alert alert-warning" role="alert">
+
+:warning: **Warning:** Deleting the data file will result in all data being lost
 
 </div>
 
@@ -215,5 +223,5 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 
 # FAQ
 
-Q: Manual insertion of students takes time, is there a faster way to do it?
+Q: Manual insertion of students takes time, is there a faster way to do it?  
 A: We are working on a feature to allow importing of **.csv** files into UDT!
