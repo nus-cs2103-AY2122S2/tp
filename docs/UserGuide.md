@@ -36,14 +36,14 @@ Trackermon is a **desktop application** for **tracking and managing shows, optim
 
 Before you continue reading the rest of our user guide, the table below displays some important syntax to facilitate your reading.
 
-| Syntax                                                                              | Description                                            |
-|-------------------------------------------------------------------------------------|--------------------------------------------------------|
-| **Bold**                                                                            | Important words to note                                |
-| `GFM`                                                                               | Command word/prefix/parameter                          |
-| <div markdown="span" class="alert alert-warning">:bulb: **Tip:** </div>             | A small but useful piece of information                |
-| <div markdown="span" class="alert alert-info">:information_source: **Note:** </div> | Additional information                                 |
-| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:** </div>   | Important information to watch out for                 |
-| [Optional Parameters]                                                               | Indicates the parameters/prefixes that may be optional |
+| Syntax                                                                    | Description                                            |
+|---------------------------------------------------------------------------|--------------------------------------------------------|
+| **Bold**                                                                  | Important words to note                                |
+| `GFM`                                                                     | Command word/prefix/parameter                          |
+| <div markdown="span" class="alert alert-warning">:bulb: </div>            | A small but useful piece of information                |
+| <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                 |
+| <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                 |
+| [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional |
 
 ---
 
@@ -93,7 +93,7 @@ For exmaple, a command to find a show could look like this:
 
 `find` `n/` `Django` 
 
-In the example above , `find` is the **command word** while `n\` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
+In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
 | Component | Prefix | Description                                           |
 |-----------|--------|-------------------------------------------------------|
