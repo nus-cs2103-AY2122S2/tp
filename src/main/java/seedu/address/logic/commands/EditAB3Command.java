@@ -29,7 +29,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends AB3Command {
+public class EditAB3Command extends AB3Command {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -57,7 +57,7 @@ public class EditCommand extends AB3Command {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditAB3Command(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -110,12 +110,12 @@ public class EditCommand extends AB3Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditAB3Command)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditAB3Command e = (EditAB3Command) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
