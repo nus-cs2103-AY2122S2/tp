@@ -217,6 +217,11 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 </aside>
 
+### Displaying statistics `stats`
+
+Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
+#### By Command: `stats`
+
 # FAQ
 
 # Command Summary
@@ -231,5 +236,5 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 | Help | help | -                                                                                                                    |
 |Match | match | -                                                                                                                    |
 | Favourite | favourite INDEX | e.g., favourite 3                                                                                                    |
-| Open Favourites window | fw  | - | 
-
+| Favourites window | fw  | - | 
+| Statistics window | stats | - | 
