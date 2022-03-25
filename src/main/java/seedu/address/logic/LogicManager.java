@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_UPCOMING_EVENTS;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -66,6 +68,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Event> getFilteredEventList() {
+        model.updateFilteredEventList(PREDICATE_SHOW_UPCOMING_EVENTS);
         return model.getFilteredEventList();
     }
 

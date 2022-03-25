@@ -85,9 +85,6 @@ public class JsonAdaptedEvent {
                     DateTime.class.getSimpleName()));
         }
         int[] dateTimeArr = convertDateTime(dateTime);
-        if (!DateTime.isValidDateTime(dateTimeArr[0], dateTimeArr[1], dateTimeArr[2], dateTimeArr[3], dateTimeArr[4])) {
-            throw new IllegalValueException(DateTime.DATETIME_MESSAGE_CONSTRAINTS);
-        }
         final DateTime modelDateTime = new DateTime(dateTimeArr[0], dateTimeArr[1], dateTimeArr[2], dateTimeArr[3],
                 dateTimeArr[4]);
 

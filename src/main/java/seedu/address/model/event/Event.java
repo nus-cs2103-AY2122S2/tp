@@ -52,6 +52,10 @@ public class Event implements Comparable<Event> {
         return dateTime;
     }
 
+    public boolean isParticipantsEmpty() {
+        return participants.isEmpty();
+    }
+
     /**
      * Returns true if both events have the same identity fields.
      */
@@ -69,6 +73,21 @@ public class Event implements Comparable<Event> {
                 && otherEvent.getEventInfo().equals(getEventInfo())
                 && otherEvent.getParticipants().equals(getParticipants())
                 && otherEvent.getDateTime().equals(getDateTime());
+    }
+
+    /**
+     * Displays the formatted details for cancel event command
+     */
+    public String displayForCancelEvent() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getEventName())
+                .append(" | Details: ")
+                .append(getEventInfo())
+                .append(" | Date & Time: ")
+                .append(getDateTime())
+                .append(" | Participants: ")
+                .append(getParticipants());
+        return builder.toString();
     }
 
     @Override
