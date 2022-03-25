@@ -101,11 +101,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             if (module.isPresent()) {
-                System.out.println("here");
                 System.out.println(module.get().iterator().next().getClass().getName());
                 return new EditCommand(index, editPersonDescriptor, module.get().iterator().next());
             }
-            System.out.println("there");
             return new EditCommand(index, editPersonDescriptor);
         } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -121,6 +119,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             return new EditCommand(index, editModuleDescriptor);
         } else {
+            System.out.println(argMultimap.getValue(PREFIX_OPTION).get());
             throw new ParseException(EditCommand.MESSAGE_OPTION_NOT_FOUND);
         }
     }
