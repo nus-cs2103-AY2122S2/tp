@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-##Table of Contents
+## Table of Contents
 | Quick Links                                                                                                     |
 |-----------------------------------------------------------------------------------------------------------------|
 | [Acknowledgements](#acknowledgements)                                                                           |
@@ -252,6 +252,13 @@ _{more aspects and alternatives to be added}_
 The implemented status label is facilitated by `Status` attribute. This label is an additional attribute for each person within the application
 and is implemented as a separate file within the `Person` Package.
 
+The `Status` attribute of each `Person` will take either `"Positive"`, `"Negative"` or `"Close Contact"`.
+- `"Positive"` denotes that the `Person` is labelled as COVID positive.
+- `"Negative"` denotes that the `Person` is labelled as COVID negative.
+- `"Close Contact"` denotes that the `Person` is labelled as having close contact to another `Person` who is COVID positive.
+
+The `Status` class is facilitated by using `execute()` command in the `EditCommand` and `AddCommand` classes.
+
 #### Design considerations:
 
 **Aspect: Abstracting `Status` attribute**
@@ -281,6 +288,13 @@ Classes added for this feature:
 * `FindStatusCommand`
 * `FindStatusCommandParser`
 
+Given below is an example usage scenario and how the find by status mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
+Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
+Step 4. The filtered list of perons is displayed to the user.
+
 #### Design considerations:
 
 **Aspect: Abstracting into different classes**
@@ -288,23 +302,28 @@ Classes added for this feature:
 * **Alternative 1 (current choice):** Abstracted classes.
     * Pros:
         * Higher Level of abstraction
-        * Changes can be made easily from this class
-        * Different classes serve different lower-level purposes and are organised into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
     * Cons:
-        * Adding files to the currently already large amount of files within
-        * Changes to this method may require going through all the different files being abstracted depending on what kind of changes are being made
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
 
 * **Alternative 2:** Single command that executed upon reading from parser
     * Pros:
-        * Single file where changes can be made
+        * Single class file where changes can be made
     * Cons:
-        * Lesser level of abstraction, file may become exceptionally long to accommodate all the smaller features required
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
 
 ### \[Implemented\] Class Code feature
 
 #### Implementation
 
 The implemented Class Code label is facilitated by `ClassCode`. It extends `AddressBook` with a Class Code, tied to each person.
+* Group students by using `ClassCode` and used as an identifier for contact-tracing.
+
+The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denoting their class groups.
 
 ### \[Implemented\] Find By Class Code feature
 
@@ -312,12 +331,48 @@ The implemented Class Code label is facilitated by `ClassCode`. It extends `Addr
 
 The implemented find by class code mechanism is facilitated by `FindByClassCode`. It extends `AddressBook` with a Find By Class Code, allowing users to find persons by their current statuses.
 
+Classes added for this feature: 
+* `ClassCodeContainsKeywordsPredicate`
+* `FindClassCodeCommand`
+* `FindClassCodeCommandParser`
+
+Given below is an example usage scenario and how the find by class code mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
+Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
+Step 4. The filtered list of perons is displayed to the user.
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
 ### \[Implemented\] Activity feature
 
 #### Implementation
 
 The implemented status label is facilitated by `Activity` attribute. This label is an additional attribute for each person within the application
 and is implemented as a separate package within the `activity` Package. A `person` will have a Set of `activity` as an attribute.
+
+The `Activity` attribute of each `Person` will take a `String` _(Java)_ denoting their different activities
+* Each `Person` can hold multiple `Activity` attributes.
 
 #### Design considerations:
 
@@ -344,35 +399,170 @@ and is implemented as a separate package within the `activity` Package. A `perso
 
 The implemented find by activity mechanism is facilitated by `FindByActivity`. It extends `AddressBook` with a Find By Activity, allowing users to find persons by their Activity.
 
-### \[Changed\] Adding a person feature
+Classes added for this feature: 
+* `ActivityContainsKeywordsPredicate`
+* `FindActivityCommand`
+* `FindActivityCommandParser`
 
-#### Changes
+Given below is an example usage scenario and how the find by activity mechanism behaves at each step.
 
-### \[Changed\] Editing a person feature
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
+Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
+Step 4. The filtered list of perons is displayed to the user.
 
-#### Changes
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindActivityCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
+### \[Updated\] Adding a person feature
+
+#### Updates
+
+`AddCommand` is updated to accommodate the addition of the following attributes:
+
+* `Status`
+  * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Positive`).
+* `ClassCode`
+  * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4A`).
+* `Activity`
+  * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
+  * A student can have ANY number of activities, including zero (optional).
+
+### \[Updated\] Editing a person feature
+
+#### Updates
+
+`EditCommand` is updated to accommodate the addition of the following attributes:
+
+* `Status`
+    * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Negative`).
+* `ClassCode`
+    * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4B`).
+* `Activity`
+    * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/badminton`).
+    * When editing a student's activities, the user has to list out all activities even if the activities 
+have already been added.
 
 ### \[Updated\] User Interface
 
 #### Updates
 
+The User Interface is updated to display the newly added attributes:
+* `Status`
+* `ClassCode`
+* `Activity`
+    * The list of activities will be displayed horizontally under the name where each
+acitivity is contained in a blue box.
+
+
 ### \[Updated\] Storage
 
 #### Updates
+
+The flow of saving and loading the data storage is updated to accommodate the addtion of
+`Status`, `ClassCode`, and `Activity`.
 
 ### \[Enhancement\] Batch update
 
 #### Enhancements
 
-### \[Proposed Enhancement\] Implementing CSV compatibility
+The purpose of the batch update enhancement is update all students by `ClassCode` when the `Status` of a student in that `ClassCode` changes from `Negative` -> `Positive` and vice-versa.
 
-#### Proposed Enhancements
+The batch update enhancement is facilitated by using `execute()` command in the `EditCommand` class.
+
+Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
+
+How the batch update works:
+
+* When `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
+  * If true, a filtered `List` of students with the same `ClassCode`, students who are not `Positive`, not the current student being edited would be created.
+  * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+* Conversely, when a student's `Status` changes from `Positive` -> `Negative`, `execute()` will check the current student being edited that there are no `Positive` statuses in `ClassCode`.
+  * If true, all students `Status` in the filtered `List`will be switched to `Negative`.
+  
+### \[Proposed Enhancement\] Implementing CSV compatibility
+The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
+from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes
+that can be found in the `Person` Class.
+
+The proposed CSV support mechanism is facilitated by `AddressBook`. It performs read/write on a target Excel file,
+stored internally as an `addressBookContactList`. Additionally, it supports the following operations:
+
+* `AddressBook#readCSV()` — Reads the target Excel file and streams the information into a `Person` list.
+* `VersionedAddressBook#writeCSV()` — Writes `Person` information to a target Excel file.
+
+These operations are exposed in the `Model` interface as `Model#readCSV()` and `Model#writeCSV()` respectively.
+
+#### Design considerations:
+
+**Aspect: How reading of CSV executes:**
+
+* **Alternative 1 (current choice):** Automatically attempt to read from a target CSV file.
+    * Pros: Automated process of importing contacts.
+    * Cons: May have performance issues due to constant execution read operation.
+
+* **Alternative 2:** Individual command to execute read by
+  itself.
+    * Pros: Will use less memory (e.g. create another UI component to a user to input the CSV file).
+    * Cons: More components to implement (e.g. an Upload file component on JavaFX).
+
+_{more aspects and alternatives to be added}_
+
+Given below is an example usage scenario and how read mechanism behaves at each step.
+
+1. The user launches the application for the first time. The Addressbook will be initialized with the initial
+address book state, and the `addressBookContactList` initialized as an empty list.
+2. The AddressBook then attempts to execute `Model#readCSV()`, reading the target CSV file that the administrator
+has _uploaded into the same directory_ as the file.
+3. The User Interface will prompt the administrator that the information from the CSV file is being processed and it
+will require time to complete the import process.
+4. `addressBookContactList` is populated by `Model#readCSV()` and changes the state of the User Interface.
+5. Administrator can interact with the Addressbook, with all the relevant contacts being updated on the list.
+
+Given below is an example usage scenario and how write mechanism behaves at each step.
+_To be Continued_
+
+#### Limitations:
+
+* Data accepted is scoped to the `Person` model. Other information deemed important
+will be omitted from the read process.
+* File size will affect the performance of the application.
+
+#### Proposed Enhancement:
+
+### \[Proposed Update\] User Interface
+
+The purpose of updating the user interface is to create a more user-friendly and 
+seamless application.
+
+#### Design considerations:
+
+* Create a light themed display.
+* The display of a person card, along with its attributes, could be enhanced.
 
 ### \[Testing\] JUnit tests
 
 #### JUnit tests
 
-
+Proper JUnit tests have been added as a means to check if the features listed above are correctly implemented.
 
 --------------------------------------------------------------------------------------------------------------------
 

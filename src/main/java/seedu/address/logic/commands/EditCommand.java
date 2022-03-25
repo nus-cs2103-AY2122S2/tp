@@ -15,12 +15,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.activity.Activity;
@@ -38,6 +41,10 @@ import seedu.address.model.person.Status;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -53,10 +60,6 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -110,29 +113,34 @@ public class EditCommand extends Command {
             }
         }
 
-        if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
-                && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
+        try {
+            if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
+                    && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
 
-            List<Person> filteredByClassCodeList = studentList.stream()
-                    .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
-                            && !student.isSamePerson(editedPerson))
-                    .collect(Collectors.toList());
+                List<Person> filteredByClassCodeList = studentList.stream()
+                        .filter(student -> student.getClassCode().toString()
+                                .equals(editedPerson.getClassCode().toString())
+                                && !student.isSamePerson(editedPerson))
+                        .collect(Collectors.toList());
 
-            List<Person> filteredByPositiveStatusInClass = filteredByClassCodeList.stream()
-                    .filter(student -> student.getStatus().toString().equals(Status.POSITIVE))
-                    .collect(Collectors.toList());
+                List<Person> filteredByPositiveStatusInClass = filteredByClassCodeList.stream()
+                        .filter(student -> student.getStatus().toString().equals(Status.POSITIVE))
+                        .collect(Collectors.toList());
 
-            if (filteredByPositiveStatusInClass.size() == 0) {
-                for (int i = 0; i < filteredByClassCodeList.size(); i++) {
-                    Person currentPerson = filteredByClassCodeList.get(i);
-                    EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
-                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                    model.setPerson(currentPerson, editedPersonStatus);
+                if (filteredByPositiveStatusInClass.size() == 0) {
+                    for (int i = 0; i < filteredByClassCodeList.size(); i++) {
+                        Person currentPerson = filteredByClassCodeList.get(i);
+                        EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
+                        tempDescriptor.setStatus(new Status(Status.NEGATIVE));
+                        Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
+                        model.setPerson(currentPerson, editedPersonStatus);
+                    }
                 }
             }
-
+        } catch (Exception ex) {
+            logger.severe("Batch update failed: " + StringUtil.getDetails(ex));
         }
+
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
