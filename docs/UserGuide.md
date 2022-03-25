@@ -201,15 +201,23 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 
 <div markdown="span" class="alert alert-warning" role="alert">
 
-> :warning: **Warning:** Editing the data file erroneously may result in the entire data becoming unreadable by UDT
+> :warning: **Warning:** Editing the data file erroneously may result in the entire data file becoming unreadable by UDT
 
 </div>
 
 ----------------
 # FAQ
 
-> Q: Manual insertion of students takes time, is there a faster way to do it?  
-> A: We are working on a feature to allow importing of **.csv** files into UDT!
+Q: How do I transfer my data to another Computer?  
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UDT.
+
+Q: I edited my data file directly and now the application does not work properly!  
+A: Delete the data folder to allow UDT to create a new data file. Your previous data has unfortunately been lost to time.
+
+Q: Manual insertion of students takes time, is there a faster way to do it?  
+A: We are working on a feature to allow importing of **.csv** files into UDT!
+
+
 
 ----------------
 ## Command Summary
