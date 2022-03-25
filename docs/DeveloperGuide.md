@@ -160,14 +160,14 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Delete multiple persons enhancement
 
-### Original implementation
+#### Original implementation
 Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
 in the contact list might change depending on the order of deletion. <br>
 
 **For example:** <br>
 In a list with only 3 contacts, `delete 1 2 3` will not be allowed as there is no longer an index 3 during the 3rd deletion.
 
-### Current implementation
+#### Current implementation
 
 The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
 behaviour by extending the validity checks on the entire string of input.
@@ -178,8 +178,16 @@ of those deleted, so in order to show them in the same order as the input, all t
 **For example:** <br>
 Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
-First, information about Person 1, Person 2 and Person 3 will be extracted according to the last shown list.<br>
-Then, Person 3 gets deleted first followed by Person 2, then Person 1. This ensures correctness in the deletion process.
+Step 1. User enters `delete 1 2 3` and `LogicManager` would execute it.
+
+Step 2. `LogicManager` would pass the arguments to `AddressBookParser` to parse the command as a `DeleteCommand`.
+
+Step 3. The arguments `1 2 3` would be passed into `DeleteCommandParser` to detect if the deletion is for multiple persons using `ParserUtil`.
+
+Step 4. Information about Person 1, Person 2 and Person 3 will be extracted according to the last shown list.<br>
+
+Step 5. The deletion process starts sequentially. Person 3 gets deleted followed by Person 2, then Person 1. This ensures correctness in the deletion process.
+
 
 The Sequence Diagram below illustrates the interactions within the Logic component for the `execute("delete 1 2 3")` API call.
 
