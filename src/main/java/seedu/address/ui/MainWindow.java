@@ -46,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane singlePersonPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -174,6 +177,16 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    private void showEventsInRightPanel(boolean isList) {
+        if (isList) {
+            eventListPanelPlaceholder.setVisible(true);
+            singlePersonPanelPlaceholder.setVisible(false);
+        } else {
+            eventListPanelPlaceholder.setVisible(false);
+            singlePersonPanelPlaceholder.setVisible(true);
+        }
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -184,6 +197,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isListCommand() || commandResult.isViewCommand()) {
+                showEventsInRightPanel(commandResult.isListCommand());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
