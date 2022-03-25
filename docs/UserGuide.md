@@ -114,6 +114,7 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 
 ## Command Summary
 
+  
 | Action           | Format, Examples                               |                    
 |-----|------------------------------------------------|
 | Add a student    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS act/ACTIVITIES`<br/>e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
