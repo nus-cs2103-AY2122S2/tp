@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -44,13 +45,22 @@ public class FocusCard extends UiPart<Region> {
     private Label availability;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ImageView displayPicture;
     /**
      * Creates a {@code CandidateCode} with the given {@code Candidate} and index to display.
      */
-    public FocusCard(Candidate candidate, int displayedIndex) {
+
+    public FocusCard(Candidate candidate) {
         super(FXML);
         this.candidate = candidate;
+        name.setText(candidate.getName().fullName);
+        phone.setText(candidate.getPhone().value);
+        course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
+        email.setText(candidate.getEmail().value);
+        displayPicture.setImage(null);
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -69,4 +79,6 @@ public class FocusCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && candidate.equals(card.candidate);
     }
+
+
 }

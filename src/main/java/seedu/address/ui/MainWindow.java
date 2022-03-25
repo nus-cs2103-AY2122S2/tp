@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private CandidateListPanel candidateListPanel;
     private InterviewListPanel interviewListPanel;
-    private FocusListPanel focusListPanel;
+    private FocusCard focusListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -124,9 +124,6 @@ public class MainWindow extends UiPart<Stage> {
         interviewListPanel = new InterviewListPanel(logic.getInterviewSchedule().getInterviewList());
         interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
 
-        focusListPanel = new FocusListPanel(logic.getFilteredCandidateList());
-        focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -177,6 +174,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleFocus(CommandResult commandResult) {
+        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+            focusListPanelPlaceholder.getChildren().remove(0);
+        }
+        focusListPanel = new FocusCard(logic.getFilteredCandidateList().get(commandResult.getIndexFocus()));
+        focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
+    }
+
     public CandidateListPanel getCandidateListPanel() {
         return candidateListPanel;
     }
@@ -185,7 +190,7 @@ public class MainWindow extends UiPart<Stage> {
         return interviewListPanel;
     }
 
-    public FocusListPanel getFocusListPanel() {
+    public FocusCard getFocusCard() {
         return focusListPanel;
     }
 
@@ -206,6 +211,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowFocus()) {
+                handleFocus(commandResult);
             }
 
             return commandResult;

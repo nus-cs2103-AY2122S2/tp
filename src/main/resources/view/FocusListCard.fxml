@@ -9,12 +9,18 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <ImageView fx:id="displayPicture" fitWidth="200" fitHeight="200"/>
+            <Label fx:id="name" styleClass="focusStyle" text="\$phone" />
+            <Label fx:id="phone" styleClass="focusStyle" text="\$phone" />
+            <Label fx:id="course" styleClass="focusStyle" text="\$course" />
+            <Label fx:id="email" styleClass="focusStyle" text="\$email" />
         </VBox>
     </GridPane>
 </HBox>
