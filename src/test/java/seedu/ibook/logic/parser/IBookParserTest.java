@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_A;
 import static seedu.ibook.testutil.Assert.assertThrows;
 import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
@@ -17,11 +18,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.commands.AddCommand;
 import seedu.ibook.logic.commands.ClearCommand;
+import seedu.ibook.logic.commands.DeleteAllCommand;
 import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.logic.commands.ExitCommand;
 import seedu.ibook.logic.commands.ExpiredCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.ListCommand;
+import seedu.ibook.logic.commands.UpdateAllCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -43,9 +46,21 @@ public class IBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    public void parseCommand_update() throws Exception {
+        Product product = new ProductBuilder().withPrice(VALID_PRICE_A).build();
+        UpdateProductDescriptor descriptor = new UpdateProductDescriptorBuilder(product).build();
+        UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PRODUCT.getOneBased() + " " + ProductUtil.getUpdateProductDescriptorDetails(descriptor));
+        assertEquals(new UpdateCommand(INDEX_FIRST_PRODUCT, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_updateAll() throws Exception {
+        Product product = new ProductBuilder().withName(VALID_NAME_A).build();
+        UpdateProductDescriptor descriptor = new UpdateProductDescriptorBuilder(product).build();
+        UpdateAllCommand command = (UpdateAllCommand) parser.parseCommand(UpdateAllCommand.COMMAND_WORD
+                + " " + ProductUtil.getUpdateProductDescriptorDetails(descriptor));
+        assertEquals(new UpdateAllCommand(descriptor), command);
     }
 
     @Test
@@ -56,18 +71,9 @@ public class IBookParserTest {
     }
 
     @Test
-    public void parseCommand_update() throws Exception {
-        Product product = new ProductBuilder().withPrice(VALID_PRICE_A).build();
-        UpdateProductDescriptor descriptor = new UpdateProductDescriptorBuilder(product).build();
-        UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PRODUCT.getOneBased() + " " + ProductUtil.getUpdateProductDescriptorDetails(descriptor));
-        assertEquals(new UpdateCommand(INDEX_FIRST_PRODUCT, descriptor), command);
-    }
-
-    @Test
-    public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    public void parseCommand_deleteAll() throws Exception {
+        DeleteAllCommand command = (DeleteAllCommand) parser.parseCommand(DeleteAllCommand.COMMAND_WORD);
+        assertEquals(new DeleteAllCommand(), command);
     }
 
     @Test
@@ -89,6 +95,18 @@ public class IBookParserTest {
     public void parseCommand_expired() throws Exception {
         assertTrue(parser.parseCommand(ExpiredCommand.COMMAND_WORD) instanceof ExpiredCommand);
         assertTrue(parser.parseCommand(ExpiredCommand.COMMAND_WORD + " ") instanceof ExpiredCommand);
+    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
+    public void parseCommand_exit() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test

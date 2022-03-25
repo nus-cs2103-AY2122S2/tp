@@ -43,4 +43,9 @@ public class DeleteAllCommand extends Command {
 
         return new CommandResult(MESSAGE_DELETE_ALL_PRODUCT_SUCCESS + deletedProductDescription);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof DeleteAllCommand;
+    }
 }
