@@ -23,17 +23,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Course course;
+    private final MatricCard matricCard;
+    private final Telegram telegram;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Course course, MatricCard matricCard, Telegram telegram) {
+        requireAllNonNull(name, phone, email, address, tags, course, matricCard, telegram);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.course = course;
+        this.matricCard = matricCard;
+        this.telegram = telegram;
     }
 
     public Name getName() {
@@ -50,6 +57,18 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public MatricCard getMatricCard() {
+        return matricCard;
+    }
+
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     /**
@@ -88,17 +107,21 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getCourse().equals(getCourse())
+                && otherPerson.getMatricCard().equals(getMatricCard())
+                && otherPerson.getTelegram().equals(getTelegram());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, course, matricCard, telegram);
     }
 
     @Override
@@ -117,6 +140,26 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        Course course = getCourse();
+        if (!course.equals("")) {
+            builder.append("; Course: ");
+            builder.append(getCourse());
+        }
+
+        MatricCard matricCard = getMatricCard();
+        if (!matricCard.equals("")) {
+            builder.append("; Matric Card: ");
+            builder.append(getMatricCard());
+        }
+
+        Telegram telegram = getTelegram();
+
+        if (!telegram.equals("")) {
+            builder.append("; Telegram: ");
+            builder.append(getTelegram());
+        }
+
         return builder.toString();
     }
 

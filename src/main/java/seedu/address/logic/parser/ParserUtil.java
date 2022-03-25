@@ -10,9 +10,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MatricCard;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.theme.DarkTheme;
 import seedu.address.model.theme.LightTheme;
@@ -138,5 +141,49 @@ public class ParserUtil {
             return new LightTheme();
         }
         throw new ParseException("Theme should be either light or dark.");
+
+    /**
+     * Parses a {@code String courseName} into an {@code Course}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code courseName} is invalid.
+     */
+    public static Course parseCourse(String courseName) throws ParseException {
+        requireNonNull(courseName);
+        String trimmedCourseName = courseName.trim();
+        if (!Course.isValidCourse(trimmedCourseName)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        return new Course(courseName);
+    }
+
+    /**
+     * Parses a {@code String cardNumber} into an {@code MatricCard}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cardNumber} is invalid.
+     */
+    public static MatricCard parseMatricCard(String cardNumber) throws ParseException {
+        requireNonNull(cardNumber);
+        String trimmedMatricCard = cardNumber.trim();
+        if (!MatricCard.isValidMatricCard(trimmedMatricCard)) {
+            throw new ParseException(MatricCard.MESSAGE_CONSTRAINTS);
+        }
+        return new MatricCard(trimmedMatricCard);
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code id} is invalid.
+     */
+    public static Telegram parseTelegram(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedTelegram = id.trim();
+        if (!Telegram.isValidTelegramId(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return new Telegram(trimmedTelegram);
     }
 }
