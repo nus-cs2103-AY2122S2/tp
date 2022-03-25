@@ -88,10 +88,10 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
 
+        // Update expected AddressBookHistory and CommandHistory
         AddressBook expectedAddressBook = new AddressBook();
         expectedAddressBook.addPerson(expectedPerson);
         expectedModel.getAddressBookHistory().addAddressBook(expectedAddressBook);
-
         String expectedCommandText = addCommand;
         expectedModel.addToCommandHistory(expectedCommandText);
 
