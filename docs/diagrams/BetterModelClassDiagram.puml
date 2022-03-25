@@ -15,7 +15,5 @@ UniqueShowList -right-> Show
 Show -up-> "*" Tag
 
 Show *--> Name
-Show *--> Phone
-Show *--> Email
-Show *--> Address
+Show *--> Status
 @enduml
