@@ -370,11 +370,11 @@ The sequence diagram below illustrates the execution of `find alex`.
 
 The edit mechanism implements the following sequence for the method call execute("edit").
 
-This feature is enhance so that if the field values for the tag is the same as the field value of the corresponding person in the address book, then an exception will be thrown.
+This feature is enhanced so that if the field values for the tag is the same as the field value of the corresponding person in the address book, then an exception will be thrown.
 
 eg.
 Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`<br>
-`edit 1 f/SOC` will throw an exception since the field value to be edited is the same, while `edit 1 f/FASS` will proceed to update the field value of the perosn.
+`edit 1 f/SOC` will throw an exception since the field value to be edited is the same, while `edit 1 f/FASS` will proceed to update the field value of the person.
 
 **Path Execution of Edit Feature Activity Diagram is shown below:**
 ![ClearFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
@@ -382,6 +382,51 @@ Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
+
+### Filter feature
+
+The filter mechanism implements the following sequence for the method call execute("filter").
+
+#### What is the filter feature
+
+The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block. 
+
+The `filter` command is as follows:
+
+`filter cs/[COVID STATUS] f/[FACULTY] b/[BLOCK]`
+
+The user can choose whether to input filter criteria for some or all of the fields. However, at least one field must be specified. <br>
+
+The user can thus choose different combinations of filter criteria depending on the motive. For example, if a block head wants to cater to the covid-positive students in a certain block, the user can simply filter by both covid status and block to find out the details of this group of people. 
+
+eg.
+`filter cs/positive f/soc` <br>
+This is still a valid input even though the filter criteria for block was not specified. The resultant list will contain students who are both covid-positive and from the faculty "SOC". 
+
+The activity diagram shows the possible execution paths for the `filter` command. 
+
+**Path Execution of Filter Feature Activity Diagram is shown below:**
+![FilterFeatureActivityDiagram](images/FilterFeatureActivityDiagram.png)
+
+There are two possible execution paths for this command.
+
+1. User inputs the `filter` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
+2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria. 
+
+The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
+
+**Sequence Diagram of Filter Feature is shown below:**
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The arguments typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will then be parsed by the `parseCommmand` function in the `AddressBookParser` object. 
+
+A `FilterCommandParser` object will then be created to parse this input, with its `parse` function. A `FilterDescriptor` object is then created, containing the filter criteria that the user has entered. This `FilterDescriptor` object is then used to create a `FilterCommand` object. 
+
+Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying a success message and a list of the filtered students. 
+
+The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in. 
+
+The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate. 
 
 ### \[Proposed\] Undo/redo feature
 
@@ -541,10 +586,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list students
-2.  Tracey shows a list of students
-3.  User requests to delete a specific student in the list
-4.  Tracey deletes the person
+1.  User requests to list students.
+2.  Tracey shows a list of students.
+3.  User requests to delete a specific student in the list.
+4.  Tracey deletes the person.
 
     Use case ends.
 
@@ -564,8 +609,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to search for student
-2.  Tracey shows the info of student with that matching name
+1.  User requests to search for student.
+2.  Tracey shows the info of student with that matching name.
 
     Use case ends.
 
@@ -585,8 +630,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add the student with his/her details such as year, faculty, covid status
-2.  Tracey shows the info of student with that matching name
+1.  User requests to add the student with his/her details such as year, faculty, covid status.
+2.  Tracey adds the student with all his/her details into its database. 
+3.  Tracey shows the info of student with that matching name.
 
     Use case ends.
 
@@ -597,86 +643,88 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Tracey will inform user that he/she did not provide the correct information.
 
     * 1a2. User provide the correct details in the correct format.
+    
+        Use case ends. 
 
-* 1b. The student to be added already exist in the list by Tracey.
+* 1b. The student to be added already exists in the list by Tracey.
 
-    * 1b1. Tracey inform user that the contact exist in her.
+    * 1b1. Tracey inform user that the contact exists in her database.
+      
+        Use case ends.
 
 * 1c. User adds multiple students in one go.
 
     * 1c1. Tracey will list out a list of new students added with their info.
+      
+        Use case ends.
 
 * 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
 
     * 1d1. Tracey will provide a list of pre-defined constants for the user.
-
-    * 1d2. User use the correct pre-defined constants for the respective tags.
+  
+        Use case ends.
 
 ### Use case: UC04 - Edit information of a student
 
 **MSS**
 
-1.  User requests to list students
-2.  Tracey shows a list of students
-3.  User requests to edit a specific student in the list
-4.  Tracey updates details of the person
+1.  User requests to list students.
+2.  Tracey shows a list of students.
+3.  User requests to edit a specific student in the list.
+4.  Tracey updates details of the person.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list does not contain student(s) of that name.
+* 1a. The list is empty.
+  
+    * 1a1. Tracey shows an empty list. 
 
-  Use case ends.
+        Use case ends.
 
-* 2b. The given student name exists multiple places on the list.
+* 2a. The given student name exists multiple places on the list.
 
-    * 2b1. Tracey will inform user that he/she did not provide the correct information formatting.
+    * 2a1. Tracey will inform user that he/she did not provide the information in the correct format.
 
-    * 2b2. User will key in the correct format to edit student.
+    * 2a2. User will key in the correct format to edit the student's details.
+
+        Use case ends.
 
 ### Use case: UC05 - Clear the system database
 
 **MSS**
 
-1.  User requests to clear all students
-2.  Tracey shows an empty list of students
+1.  User requests to clear all students. 
+2.  Tracey deletes all students from its database. 
+3.  Tracey shows an empty list. 
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The list does not contain student(s) of that name.
-
-  Use case ends.
 
 ### Use case: UC06 - Summarize the system database for number of Covid patient
 
 **MSS**
 
-1.  User requests to summarise number of students with covid
-2.  Tracey shows lists of students of that with the covid positive status
+1.  User requests to summarise the number of students with covid. 
+2.  Tracey shows a pie chart and statements showing the proportion of students with different covid statuses. 
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The list with that tag does not contain student(s) of that name.
-
-  Use case ends.
 
 ### Use case: UC07 - List all students
 
 **MSS**
 
-1.  User requests to list all students
-2.  Tracey shows a list of students
+1.  User requests to list all students. 
+2.  Tracey shows a list of students. 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list does not contain student(s) of that name.
+* 1a. The list is empty.
+    * 1a1. Tracey shows an empty list. 
 
   Use case ends.
 
@@ -695,20 +743,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC09 - Filter the system database for list overview by keyword
+### Use case: UC09 - Filter a list of students of specified covid status, and/or faculty, and/or block
 
 **MSS**
 
-1.  User requests to filter all students by a tag (ie. positive)
-2.  Tracey shows a list of students of that specific tag with the covid status
+1. User wants to filter a list of students of a specified covid status, faculty and block.
+2. User keys in the details of students to filter out.
+3. Tracey returns a list of students of the specified covid status, faculty and block.
 
-    Use case ends.
+    Use case ends. 
 
 **Extensions**
 
-* 2a. The list with that tag does not contain student(s) of that name.
-
-  Use case ends.
+* 2a. Tracey detects invalid or empty arguments in user input.
+    * 2a1. Tracey displays a error message and shows the correct input format. 
+    
+        Use case ends. 
+  
+* 2b. User only inputs details for one or two of the fields (covid status, faculty or block). 
+    * 2b1. Tracey returns a list of students of the specified details.
+    
+        Use case ends.
 
 ### Use case: UC10 - Summarise all students for some overview of covid situation
 
@@ -747,12 +802,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student Status**: A student detail that indicates whether the student has Covid-19
+* **Covid Status**: A student detail that indicates whether the student has Covid-19
 * **Health Risk Notice**: Household members living with individuals diagnosed with Covid-19 are issued with this notice
 * **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus
 * **NUS Hall**: Hall of residence in the National University of Singapore
-* **Resident Fellow** Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
-* **Hall leaders** Student leaders in NUS halls
+* **Resident Fellow**: Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
+* **Hall leaders**: Student leaders in NUS halls
 
 
 --------------------------------------------------------------------------------------------------------------------

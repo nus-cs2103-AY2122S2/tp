@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs filter command with specified fields;
+:Tracey parses filter command and inputs;
+if () then ([input is in wrong format or blank])
+: Tracey throws a ParseException;
+: Tracey displays an error message and the right format of inputs;
+else ([input is in the correct format])
+: Tracey stores the input values for the respective fields;
+: Tracey displays only the details of students that fit the specified criteria;
+endif
+
+stop
+
+@enduml
