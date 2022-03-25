@@ -34,6 +34,6 @@ public class ExpiredFilter extends AttributeFilter {
             return true;
         }
 
-        return other instanceof NameFilter;
+        return other instanceof ExpiredFilter;
     }
 }
