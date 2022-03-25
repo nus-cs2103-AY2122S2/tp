@@ -599,7 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a list of clients
 3.  User requests to delete a specific client in the list
 4.  AddressBook deletes the client
-=======
+
 **Use case: Add a client**
 
 **MSS**
@@ -640,7 +640,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-=======
 1.  Essential: Technical: Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Typical: Performance: Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  Typical: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
