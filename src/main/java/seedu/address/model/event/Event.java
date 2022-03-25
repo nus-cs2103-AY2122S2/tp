@@ -11,7 +11,7 @@ import seedu.address.model.person.Name;
  * Represents an Event in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Event {
+public class Event implements Comparable<Event> {
 
     // Identity fields
     private final EventName name;
@@ -82,5 +82,10 @@ public class Event {
                 .append("\nParticipants: ")
                 .append(getParticipants());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        return dateTime.compareTo(other.dateTime);
     }
 }

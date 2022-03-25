@@ -39,7 +39,7 @@ public class EventCardComponent extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         eventname.setText(event.getEventName().toString());
-        datetime.setText(event.getDateTime().toString());
+        datetime.setText(event.getDateTime().displayDateTime());
         info.setText("Additional info: " + event.getEventInfo().toString());
         event.getParticipants().stream()
                 .sorted(Comparator.comparing(p -> p.fullName))

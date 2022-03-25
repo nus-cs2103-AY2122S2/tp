@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DateTime {
+public class DateTime implements Comparable<DateTime> {
     public static final String DATETIME_MESSAGE_CONSTRAINTS = "Date and Time has to be valid!";
     public static final String DATE_MESSAGE_CONSTRAINTS = "Date has to be in the format of yyyy-MM-DD!";
     public static final String TIME_MESSAGE_CONSTRAINTS = "Time has to be in the format of HH:mm!";
@@ -47,7 +47,7 @@ public class DateTime {
         return test.matches(TIME_VALIDATION_REGEX);
     }
 
-    public String getDateTime() {
+    public String displayDateTime() {
         return value.format(DISPLAY_FORMATTER);
     }
 
@@ -66,5 +66,10 @@ public class DateTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(DateTime other) {
+        return value.compareTo(other.value);
     }
 }
