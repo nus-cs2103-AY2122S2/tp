@@ -220,7 +220,7 @@ person at the particular index, in this case the first person, will be removed
 - Cons: Not consistent with how the other fields like `Module` and `Person` are removed. These fields are removed 
   via an additional command that specifically handles their deletion (i.e. `deletemodule` and `delete`).
 
-####2. Alternative 2 (Current)
+####2. Alternative 2 
 Implement a separate command to handle the removal of `comment`.
 - Pros: An empty comment command (`comment 1`) will now show an error message, which is more intuitive.
 - Cons: Results in excessive code duplication, as `delete` and `deletemodule` are implemented in a very similar way 
