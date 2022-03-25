@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
@@ -10,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,6 +21,7 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.Lesson;
@@ -56,9 +59,15 @@ public class EditLessonCommand extends Command {
     public static final String MESSAGE_SUCCESS = "%1$s successfully edited!";
     public static final String MESSAGE_CONFLICTING_LESSON = "Editing the time/date of this lesson conflicts "
             + "with an existing lesson in the schedule";
+    public static final String MESSAGE_DID_NOT_EDIT = "No details were provided to edit %1$s!";
 
     private final Index lessonId;
     private final EditLessonDescriptor editLessonDescriptor;
+
+    /**
+     * @param lessonId of the lesson to be edited in the filtered lesson list
+     * @param editLessonDescriptor details to be edited
+     */
     public EditLessonCommand(Index lessonId, EditLessonDescriptor editLessonDescriptor) {
         requireAllNonNull(lessonId, editLessonDescriptor);
         this.lessonId = lessonId;
@@ -70,11 +79,24 @@ public class EditLessonCommand extends Command {
         requireNonNull(model);
         List<Lesson> lastShownList = model.getFilteredLessonList();
         if (lastShownList.size() < lessonId.getOneBased()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
         Lesson lessonToEdit = lastShownList.get(lessonId.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-        return null;
+        if (lessonToEdit.equals(editedLesson)) {
+            throw new CommandException(String.format(MESSAGE_DID_NOT_EDIT, lessonToEdit.getName()));
+        }
+        model.deleteLesson(lessonToEdit);
+        if (model.hasConflictingLesson(editedLesson)) {
+            model.addLesson(lessonToEdit);
+            model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+            throw new CommandException(MESSAGE_CONFLICTING_LESSON);
+        }
+        model.addLesson(editedLesson);
+        model.setSelectedLesson(editedLesson);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedLesson.getName()), true,
+                InfoPanelTypes.LESSON, ViewTab.NONE);
     }
 
     private Lesson createEditedLesson(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
@@ -90,14 +112,14 @@ public class EditLessonCommand extends Command {
                 .orElse(toEdit.getDateTimeSlot().getHours());
         Integer durationMinutes = editLessonDescriptor.getDurationMinutes()
                 .orElse(toEdit.getDateTimeSlot().getMinutes());
-        DateTimeSlot updatedDTS = new DateTimeSlot(updatedStartDate.atTime(updatedStartTime),
+        DateTimeSlot updatedDateTimeSlot = new DateTimeSlot(updatedStartDate.atTime(updatedStartTime),
                 durationHours, durationMinutes);
 
         return toEdit instanceof RecurringLesson
                 ? Lesson.makeRecurringLesson(updatedName, updatedSubject,
-                updatedAddress, updatedDTS, toEdit.getEnrolledStudents())
+                updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents())
                 : Lesson.makeTemporaryLesson(updatedName, updatedSubject,
-                updatedAddress, updatedDTS, toEdit.getEnrolledStudents());
+                updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents());
     }
 
     public static class EditLessonDescriptor {

@@ -20,11 +20,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_SUBJECT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.INVALID_DATE_FORMAT_MESSAGE;
+import static seedu.address.logic.parser.ParserUtil.INVALID_DURATION_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.INVALID_START_TIME_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.MINUTES_GREATER_THAN_59_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.NEGATIVE_HOURS_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.NEGATIVE_MINUTES_MESSAGE;
-import static seedu.address.logic.parser.ParserUtil.INVALID_DURATION_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
