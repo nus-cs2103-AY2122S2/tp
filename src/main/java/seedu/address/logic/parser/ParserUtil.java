@@ -186,6 +186,25 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into an {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param date Date in String format of dd-MM-yyyy HH:mm.
+     * @return Parsed LocalDateTime representation of input.
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseFilterAppointmentDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            return LocalDate.parse(trimmedDate, formatter);
+        } catch (Exception e) {
+            throw new ParseException("Appointment date provided for filter should be entered in dd-MM-yyyy format!");
+        }
+    }
+
+    /**
      * Parses a {@code String pickUpTime} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *

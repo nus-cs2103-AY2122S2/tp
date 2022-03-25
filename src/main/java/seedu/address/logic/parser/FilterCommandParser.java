@@ -6,13 +6,15 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_OWNER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_TAGS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_APPOINTMENT;
 
 import seedu.address.commons.util.FilterUtil;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.pet.DateContainsFilterDatePredicate;
-import seedu.address.model.pet.OwnerNameContainsFilterWordPredicate;
-import seedu.address.model.pet.TagContainsFilterWordPredicate;
+import seedu.address.model.filter.AppointmentContainsFilterWordPredicate;
+import seedu.address.model.filter.DateContainsFilterDatePredicate;
+import seedu.address.model.filter.OwnerNameContainsFilterWordPredicate;
+import seedu.address.model.filter.TagContainsFilterWordPredicate;
 
 
 
@@ -40,7 +42,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_FILTER_BY_DATE, PREFIX_FILTER_BY_TAGS,
-                        PREFIX_FILTER_BY_OWNER_NAME);
+                        PREFIX_FILTER_BY_OWNER_NAME, PREFIX_FILTER_BY_APPOINTMENT);
 
         String[] argSplitter = trimmedArgs.split("/");
         String filterWord = argSplitter[1];
@@ -51,6 +53,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             return new FilterCommand(new TagContainsFilterWordPredicate(filterWord));
         } else if (argMultimap.getValue(PREFIX_FILTER_BY_OWNER_NAME).isPresent()) {
             return new FilterCommand(new OwnerNameContainsFilterWordPredicate(filterWord));
+        } else if (argMultimap.getValue(PREFIX_FILTER_BY_APPOINTMENT).isPresent()) {
+            return new FilterCommand(new AppointmentContainsFilterWordPredicate(filterWord));
         } else {
             throw new ParseException(FilterCommand.INVALID_FILTER_FIELD);
         }

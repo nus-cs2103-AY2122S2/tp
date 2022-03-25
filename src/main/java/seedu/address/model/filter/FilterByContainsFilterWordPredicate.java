@@ -1,4 +1,6 @@
-package seedu.address.model.pet;
+package seedu.address.model.filter;
+
+import seedu.address.model.pet.Pet;
 
 import java.util.function.Predicate;
 

@@ -172,9 +172,9 @@ Filters the pet address book by a specified field.
 
 Format: `filter FIELD/FilterWord`
 
-* Can only filter by date specified, owner's name and tags of pets
-* Specified `FIELD/` only consists of: `byDate/`, `byTags/` and `byOwner/`
-* `FilterWord` if user uses `byDate/` has to be in `dd-MM-yyyy` format, or `today`. This filters the address book by showing pets present on the given date.
+* Can only filter by date specified, owner's name and tags of pets (choose one out of three, else error will be shown)
+* Specified `FIELD/` only consists of: `byDate/`, `byApp/`, `byTags/` and `byOwner/`.
+* `FilterWord` if user uses `byDate/` or `byApp/` has to be in `dd-MM-yyyy` format, or `today`. This filters the address book by showing pets present on the given date or pets with appointments on the given date.
 * `FilterWord` if user uses `byOwner/` has to be a single word. Usage is similar to `find` except filter allows users to filter out multiple pets with same owner.
 * `FilterWord` if user uses `byTags/` can be any length. Show pets that are of the same breed or tag similar to `FilterWord` given.
   * Able to filter with a partial match in `FilterWord`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`

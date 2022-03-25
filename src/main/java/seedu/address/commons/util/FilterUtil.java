@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Set;
 
+import seedu.address.model.filter.DateContainsFilterDatePredicate;
+import seedu.address.model.filter.FilterByContainsFilterWordPredicate;
+import seedu.address.model.filter.OwnerNameContainsFilterWordPredicate;
+import seedu.address.model.filter.TagContainsFilterWordPredicate;
 import seedu.address.model.tag.Tag;
 
 public class FilterUtil {
@@ -35,9 +39,26 @@ public class FilterUtil {
      * @return Returns true if argument provided is valid, else false
      */
     public static boolean isValidFilterArg(String args) {
-        String[] separateFilterCommand = args.split("\\s+");
+        String[] separateFilterCommand = args.split("/");
 
-        return separateFilterCommand.length <= 1;
+        return separateFilterCommand.length <= 2;
+    }
+
+    /**
+     * Matches predicate with its type to return a String message.
+     * @param predicate Predicate that is to be matched.
+     * @return String message to be used in filter success message.
+     */
+    public static String successMessageMatch(FilterByContainsFilterWordPredicate predicate) {
+        if (predicate instanceof DateContainsFilterDatePredicate) {
+            return "date";
+        } else if (predicate instanceof TagContainsFilterWordPredicate) {
+            return "tags";
+        } else if (predicate instanceof OwnerNameContainsFilterWordPredicate) {
+            return "owner's name";
+        } else {
+            return "appointment date";
+        }
     }
 
 }

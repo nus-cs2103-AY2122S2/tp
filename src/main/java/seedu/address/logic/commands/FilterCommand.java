@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.FilterUtil;
 import seedu.address.model.Model;
-import seedu.address.model.pet.FilterByContainsFilterWordPredicate;
+import seedu.address.model.filter.FilterByContainsFilterWordPredicate;
 
 /**
  * Filters all pets in address book by field provided.
@@ -19,8 +20,8 @@ public class FilterCommand extends Command {
             + "the specified field followed by filter/ search word (case-insensitive)"
             + "and displays them as a list with index numbers.\n"
             + "PARAMETERS: FIELD [FILTER WORD] \n"
-            + "FIELD = { 'byDate/', 'byOwner/', 'byTag/' } \n"
-            + "Filter word following 'byDate/' can be 'today' or 'dd-MM-yyyy'.\n"
+            + "FIELD = { 'byDate/', 'byOwner/', 'byTag/', byApp/ } \n"
+            + "Filter word following 'byDate/' or 'byApp/' can be 'today' or 'dd-MM-yyyy'.\n"
             + "Example: " + COMMAND_WORD + " tag/" + "golden retriever\n"
             + "Example: " + COMMAND_WORD + " byDate/today";
 
@@ -37,7 +38,8 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPetList(predicate);
         return new CommandResult(
-                String.format(Messages.FILTER_MESSAGE_SUCCESS, model.getFilteredPetList().size()));
+                String.format(Messages.FILTER_MESSAGE_SUCCESS, model.getFilteredPetList().size(),
+                        FilterUtil.successMessageMatch(predicate)));
     }
 
 }

@@ -21,4 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_FILTER_BY_DATE = new Prefix("byDate/");
     public static final Prefix PREFIX_FILTER_BY_TAGS = new Prefix("byTags/");
     public static final Prefix PREFIX_FILTER_BY_OWNER_NAME = new Prefix("byOwner/");
+    public static final Prefix PREFIX_FILTER_BY_APPOINTMENT = new Prefix("byApp/");
+
 }

@@ -1,4 +1,4 @@
-package seedu.address.model.pet;
+package seedu.address.model.filter;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -6,6 +6,8 @@ import java.util.Optional;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attendance.AttendanceEntry;
+import seedu.address.model.pet.AttendanceHashMap;
+import seedu.address.model.pet.Pet;
 
 /**
  * Tests that a {@code Pet}'s {@code attendance} matches the filter date given.

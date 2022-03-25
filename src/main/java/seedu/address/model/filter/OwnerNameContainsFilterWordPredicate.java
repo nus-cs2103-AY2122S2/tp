@@ -1,6 +1,7 @@
-package seedu.address.model.pet;
+package seedu.address.model.filter;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.pet.Pet;
 
 public class OwnerNameContainsFilterWordPredicate extends FilterByContainsFilterWordPredicate {
 
