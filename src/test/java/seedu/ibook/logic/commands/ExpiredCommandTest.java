@@ -30,10 +30,10 @@ public class ExpiredCommandTest {
     private Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getTypicalItems());
     private Product peanutButterBreadWithAllExpired =
             new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getOnlyExpiredItems());
-    private Product chocalateBreadWithAllNotExpired =
+    private Product chocolateBreadWithAllNotExpired =
             new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(getOnlyNonExpiredItems());
     private List<Product> products = Arrays.asList(kayaBreadWithAllItems,
-            peanutButterBreadWithAllExpired, chocalateBreadWithAllNotExpired);
+            peanutButterBreadWithAllExpired, chocolateBreadWithAllNotExpired);
 
     private Model model = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
