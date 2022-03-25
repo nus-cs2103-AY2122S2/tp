@@ -47,8 +47,8 @@ public class Telegram {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof MatricCard // instanceof handles nulls
-                && id.equals(((MatricCard) other).value)); // state check
+                || (other instanceof Telegram // instanceof handles nulls
+                && id.equals(((Telegram) other).id)); // state check
     }
 
     @Override

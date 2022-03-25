@@ -46,7 +46,8 @@ public class DeleteTagCommandTest {
             Set<Tag> tagCopy = new HashSet<>(tempTags);
             tagCopy.removeIf(t -> t.isSameTag(tagToDelete));
             Person newPerson = new Person(currPerson.getName(), currPerson.getPhone(),
-                    currPerson.getEmail(), currPerson.getAddress(), tagCopy);
+                    currPerson.getEmail(), currPerson.getAddress(), tagCopy, currPerson.getCourse(),
+                    currPerson.getMatricCard(), currPerson.getTelegram());
             expectedModel.setPerson(currPerson, newPerson);
         }
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);

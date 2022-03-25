@@ -122,7 +122,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
         }
         if (!Course.isValidCourse(course)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
         }
 
         final Course modelCourse = new Course(course);
@@ -132,7 +132,7 @@ class JsonAdaptedPerson {
                     MatricCard.class.getSimpleName()));
         }
         if (!MatricCard.isValidMatricCard(matricCard)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MatricCard.MESSAGE_CONSTRAINTS);
         }
 
         final MatricCard modelMatricCard = new MatricCard(matricCard);
@@ -142,7 +142,7 @@ class JsonAdaptedPerson {
                     Telegram.class.getSimpleName()));
         }
         if (!Telegram.isValidTelegramId(telegram)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
 
         final Telegram modelTelegram = new Telegram(telegram);
