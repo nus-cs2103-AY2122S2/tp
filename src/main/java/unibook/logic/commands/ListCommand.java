@@ -4,13 +4,17 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.commons.core.Messages;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
 import unibook.model.ModelManager;
+import unibook.model.UniBook;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.exceptions.GroupNotFoundException;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
@@ -24,73 +28,78 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed everything.";
-    public static final String MESSAGE_SUCCESS_PEOPLE_MODULE = "Listed all persons with specified module.";
-    public static final String MESSAGE_SUCCESS_MODULE = "Listed all modules with specified code.";
-    public static final String MESSAGE_SUCCESS_TYPE = "Listed all persons with specified type.";
-    public static final String MESSAGE_SUCCESS_MODULEANDTYPE = "Listed all persons with specified type "
-        + "in specified module.";
-    public static final String MESSAGE_SUCCESS_VIEW = "Switched view successfully.";
-    public static final String MESSAGE_USAGE_TYPE = "The acceptable arguments for type are students/professors.";
-    public static final String MESSAGE_WRONG_VIEW = "The command requires you to switch views.";
-    public static final String MESSAGE_USAGE_OPTION = "The acceptable arguments for option are module/type.";
-    public static final String MESSAGE_TYPE_MISSING = "You did not enter a type argument. The acceptable"
-        + " arguments for type are students/professors.";
-    public static final String MESSAGE_MODULE_MISSING = "You did not enter a Module argument.";
-    public static final String MESSAGE_USAGE_VIEW = "The acceptable arguments for view are modules/people.";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists entries based on specified conditions. \n"
+            + "Format examples: \n"
+            + "list (displays all entries)\n"
+            + "list o/type ty/<TYPE> (displays all people with the specified type (students/professors))\n"
+            + "list o/module m/<MODULENAME> (displays all entries associated with the given module)\n"
+            + "list o/module m/<MODULENAME> ty/<TYPE> " +
+            "(displays all entries of a specific type associated with the module)\n"
+            + "list o/view v/<VIEWTYPE> (Switches the UniBook to the specified view (people/modules))";
+
+
     private ModuleCode moduleCode;
 
     private String type;
 
     private ListCommandType commandType;
     private ListView viewType;
+
+    private String group;
     /**
      * Constructor for a ListCommand to list everything.
      */
     public ListCommand() {
         this.commandType = ListCommandType.ALL;
     }
+
     /**
      * Constructor for a ListCommand to change the current view.
-     *
      * @param viewType
      */
-    public ListCommand(ListView viewType) {
+    public ListCommand(ListView viewType, ListCommandType commandType) {
+        assert commandType == ListCommandType.VIEW;
         this.commandType = ListCommandType.VIEW;
         this.viewType = viewType;
     }
 
     /**
-     * Constructor for a ListCommand to list people with specific module.
-     *
-     * @param moduleCode
+     * Constructor for a ListCommand with 1 option and 1 field
+     * eg list o/module m/cs2103 list o/type ty/professors list o/group g/groupname
      */
-    public ListCommand(ModuleCode moduleCode) {
-        this.commandType = ListCommandType.MODULE;
-        this.moduleCode = moduleCode;
+    public ListCommand(String field, ListCommandType commandType) {
+        switch (commandType) {
+        case MODULE:
+            this.commandType = ListCommandType.MODULE;
+            this.moduleCode = new ModuleCode(field);
+            break;
+        case TYPE:
+            this.commandType = ListCommandType.TYPE;
+            this.type = field;
+            break;
+        case GROUP:
+            this.commandType = ListCommandType.GROUP;
+            this.group = field;
+        }
     }
 
     /**
-     * Constructor for a ListCommand to list people with specific type.
-     *
-     * @param type
+     * Constructor for a ListCommand with 1 option and 2 fields
+     * eg list o/module m/cs2103 ty/professors
      */
-    public ListCommand(String type) {
-        this.commandType = ListCommandType.TYPE;
-        this.type = type;
+    public ListCommand(String field1, String field2, ListCommandType commandType) {
+        switch (commandType) {
+        case MODULEANDTYPE:
+            this.commandType = ListCommandType.MODULEANDTYPE;
+            this.moduleCode = new ModuleCode(field1);
+            this.type = field2;
+            break;
+        }
     }
 
-    /**
-     * Constructor for a ListCommand to list people with specific type in a
-     * specific module.
-     *
-     * @param moduleCode
-     * @param type
-     */
-    public ListCommand(ModuleCode moduleCode, String type) {
-        this.commandType = ListCommandType.MODULEANDTYPE;
-        this.moduleCode = moduleCode;
-        this.type = type;
-    }
+
 
     /**
      * Utility method to quickly show everything. Used to reset before narrowing
@@ -118,74 +127,128 @@ public class ListCommand extends Command {
         requireNonNull(model);
         showAll(model);
         ModelManager modelManager = (ModelManager) model;
-        switch (commandType) {
+        switch (this.commandType) {
         case ALL:
+            //List everything.
             return new CommandResult(MESSAGE_SUCCESS);
         case MODULE:
             if (!moduleCodeExists(model.getUniBook().getModuleList())) {
+                //The given module does not exist in UniBook.
                 throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
             }
             if (modelManager.getUi().isPersonListShowing()) {
+                //Module command given in person page. Displays all people with given module
                 Predicate<Person> showSpecificPeoplePredicate = p -> p.hasModule(this.moduleCode);
                 model.updateFilteredPersonList(showSpecificPeoplePredicate);
-                return new CommandResult(MESSAGE_SUCCESS_PEOPLE_MODULE);
+                return new CommandResult(
+                        String.format(Messages.MESSAGE_LISTED_PEOPLE_WITH_MODULE, moduleCode.toString()));
             } else {
+                //Module command given in modules page. Displays specified module.
                 Predicate<Module> showSpecificModulePredicate = m -> m.hasModuleCode(this.moduleCode);
                 model.updateFilteredModuleList(showSpecificModulePredicate);
-                return new CommandResult(MESSAGE_SUCCESS_MODULE);
+                return new CommandResult(String.format(Messages.MESSAGE_LISTED_MODULE, moduleCode.toString()));
             }
 
         case TYPE:
             if (modelManager.getUi().isPersonListShowing()) {
                 if (type.equals("professors")) {
+                    //Displays all professors.
                     model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PROFESSORS);
+                    return new CommandResult(Messages.MESSAGE_LISTED_ALL_PROFESSORS);
                 } else if (type.equals("students")) {
+                    //Displays all students.
                     model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+                    return new CommandResult(Messages.MESSAGE_LISTED_ALL_STUDENTS);
                 } else {
-                    return new CommandResult(MESSAGE_USAGE_TYPE);
+                    //Invalid type argument.
+                    throw new CommandException(Messages.MESSAGE_WRONG_TYPE);
                 }
             } else {
-                return new CommandResult(MESSAGE_WRONG_VIEW);
+                //Type command given in (wrong) modules view.
+                throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "People"));
             }
-
-            return new CommandResult(MESSAGE_SUCCESS_TYPE);
         case MODULEANDTYPE:
             if (modelManager.getUi().isPersonListShowing()) {
                 if (!moduleCodeExists(model.getUniBook().getModuleList())) {
+                    //The given module does not exist in UniBook.
                     throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
                 }
                 if (type.equals("professors")) {
+                    //Displays all professors in the given module.
                     Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)
                         && (p instanceof Professor);
                     model.updateFilteredPersonList(showSpecificProfessorPredicate);
+                    return new CommandResult(
+                            String.format(Messages.MESSAGE_LISTED_ALL_TYPE_IN_MODULE,
+                                    "professors", moduleCode.toString()));
                 } else if (type.equals("students")) {
+                    //Displays all students in the given module.
                     Predicate<Person> showSpecificStudentPredicate = p -> p.hasModule(this.moduleCode)
                         && (p instanceof Student);
                     model.updateFilteredPersonList(showSpecificStudentPredicate);
+                    return new CommandResult(
+                            String.format(Messages.MESSAGE_LISTED_ALL_TYPE_IN_MODULE,
+                                    "students", moduleCode.toString()));
                 } else {
-                    return new CommandResult(MESSAGE_USAGE_TYPE);
+                    //Invalid type argument.
+                    throw new CommandException(Messages.MESSAGE_WRONG_TYPE);
                 }
-                return new CommandResult(MESSAGE_SUCCESS_MODULEANDTYPE);
             } else {
-                return new CommandResult(MESSAGE_WRONG_VIEW);
+                //Type command given in (wrong) modules view.
+                throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "People"));
             }
         case VIEW:
             if (this.viewType == ListView.MODULES) {
-                modelManager.getUi().setModuleListPanel();
+                //Switch view to modules
+                if (isModuleListShowing) {
+                    return new CommandResult(Messages.MESSAGE_ALREADY_ON_MODULE_PAGE);
+                } else {
+                    modelManager.getUi().setModuleListPanel();
+                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                }
             } else {
-                modelManager.getUi().setPersonListPanel();
+                //Switch view to people
+                if (isPersonListShowing) {
+                    return new CommandResult(Messages.MESSAGE_ALREADY_ON_PEOPLE_PAGE);
+                } else {
+                    modelManager.getUi().setPersonListPanel();
+                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+                }
             }
-            return new CommandResult(MESSAGE_SUCCESS_VIEW);
+
+        case GROUP:
+/*
+            if (modelManager.getUi().isModuleListShowing() && modelManager.getFilteredModuleList().size() == 1) {
+                //Only 1 module is being viewed
+                ObservableList<Group> groups = modelManager.getFilteredModuleList().get(0).getGroups();
+                Group group = groups.get(0);
+                if (group.getGroupName().equals(this.group)) {
+                    modelManager.getUi().setGroupListPanel(groups);
+                } else {
+                    throw new CommandResult("The group does not exist in the displayed module!");
+                }
+            } else {
+                try {
+                    ObservableList<Group> groups =
+                            ((UniBook)(modelManager.getUniBook())).getGroupsWithGroupName(this.group);
+                    modelManager.getUi().setGroupListPanel(groups);
+                } catch (GroupNotFoundException g) {
+                    throw new CommandException("The group entered does not exist in the UniBook!");
+                }
+
+            }
+*/
+
         default:
             return new CommandResult("");
         }
     }
 
-    private enum ListCommandType {
-        ALL, MODULE, TYPE, MODULEANDTYPE, VIEW
+    public enum ListCommandType {
+        ALL, MODULE, TYPE, MODULEANDTYPE, VIEW, GROUP
     }
 
     public enum ListView {
-        PEOPLE, MODULES
+        PEOPLE, MODULES, GROUPS
     }
 }

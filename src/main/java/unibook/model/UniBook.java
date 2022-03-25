@@ -1,6 +1,7 @@
 package unibook.model;
 
 import static java.util.Objects.requireNonNull;
+import javafx.collections.FXCollections;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
@@ -255,7 +256,17 @@ public class UniBook implements ReadOnlyUniBook {
         return group;
     }
 
-
+    /**
+     *
+     */
+    public ObservableList<Group> getGroupsWithGroupName(String groupName) {
+        requireNonNull(groupName);
+        ObservableList<Group> groups = FXCollections.observableArrayList();
+        for (Module m : modules) {
+            groups.add(m.getGroupByName(groupName));
+        }
+        return groups;
+    }
 
 
     /**

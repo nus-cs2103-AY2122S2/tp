@@ -13,6 +13,7 @@ public class ModuleKeyEvent {
 
     private LocalDateTime keyEventTiming;
     private KeyEventType keyEventType;
+
     private Module module;
 
     /**
