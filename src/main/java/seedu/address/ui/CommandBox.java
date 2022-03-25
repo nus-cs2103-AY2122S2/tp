@@ -3,9 +3,13 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.InputHistoryResult;
+import seedu.address.logic.inputhistory.UserInputString;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -17,6 +21,8 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final RetrievePreviousHistoryExecutor previousHistoryExecutor;
+    private final RetrieveNextHistoryExecutor nextHistoryExecutor;
 
     @FXML
     private TextField commandTextField;
@@ -24,9 +30,12 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, RetrievePreviousHistoryExecutor previousHistoryExecutor,
+                      RetrieveNextHistoryExecutor nextHistoryExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.previousHistoryExecutor = previousHistoryExecutor;
+        this.nextHistoryExecutor = nextHistoryExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -47,6 +56,49 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Action handler which processes which key is pressed and runs the appropriate method.
+     * @param event KeyEvent object.
+     */
+    @FXML
+    private void handleOnKeyPressed(KeyEvent event) {
+        KeyCode keyPressed = event.getCode();
+        switch (keyPressed) {
+        case UP:
+            handlePreviousHistoryInput();
+            break;
+        case DOWN:
+            handleNextHistoryInput();
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Handles the Up button pressed event.
+     */
+    private void handlePreviousHistoryInput() {
+        InputHistoryResult userInputResult = previousHistoryExecutor.getPreviousUserInput();
+        if (!userInputResult.isChanged()) {
+            return;
+        }
+        UserInputString previousUserInput = userInputResult.getUserInputString();
+        commandTextField.setText(previousUserInput.toString());
+    }
+
+    /**
+     * Handles the Down button pressed event.
+     */
+    private void handleNextHistoryInput() {
+        InputHistoryResult userInputResult = nextHistoryExecutor.getNextUserInput();
+        if (!userInputResult.isChanged()) {
+            return;
+        }
+        UserInputString nextUserInput = userInputResult.getUserInputString();
+        commandTextField.setText(nextUserInput.toString());
     }
 
     /**
@@ -82,4 +134,29 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Represents a function to retrieve the previous user's input from {@code Logic}.
+     */
+    @FunctionalInterface
+    public interface RetrievePreviousHistoryExecutor {
+        /**
+         * Retrieves the previous user's input from {@code Logic}.
+         *
+         * @return Previous user's input in {@code InputHistoryResult} format.
+         */
+        InputHistoryResult getPreviousUserInput();
+    }
+
+    /**
+     * Represents a function to retrieve the following user's input from {@code Logic}.
+     */
+    @FunctionalInterface
+    public interface RetrieveNextHistoryExecutor {
+        /**
+         * Retrieves the following user's input from {@code Logic}.
+         *
+         * @return Following user's input in {@code InputHistoryResult} format.
+         */
+        InputHistoryResult getNextUserInput();
+    }
 }

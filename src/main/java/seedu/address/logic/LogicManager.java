@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.InputHistoryResult;
 import seedu.address.logic.inputhistory.UserInputHistory;
 import seedu.address.logic.parser.TeachWhatParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -97,5 +98,20 @@ public class LogicManager implements Logic {
     @Override
     public Lesson getSelectedLesson() {
         return model.getSelectedLesson();
+    }
+
+    @Override
+    public void addNewUserInputToHistory(String userInput) {
+        userInputHistory.addToHistory(userInput);
+    }
+
+    @Override
+    public InputHistoryResult getPreviousInput() {
+        return userInputHistory.getPreviousInput();
+    }
+
+    @Override
+    public InputHistoryResult getNextInput() {
+        return userInputHistory.getNextInput();
     }
 }
