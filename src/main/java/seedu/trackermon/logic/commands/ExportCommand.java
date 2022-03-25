@@ -16,14 +16,9 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Exported data file.";
     public static final String MESSAGE_FAIL = "Data file export failed.";
     public static final String MESSAGE_ABORT = "Export data aborted.";
-    public static final String MESSAGE_MACOS_UNSUPPORTED = "Export is currently not supported on MacOS.";
 
     @Override
     public CommandResult execute(Model model) {
-        if (System.getProperty("os.name").contains("Mac")) {
-            return new CommandResult(MESSAGE_MACOS_UNSUPPORTED);
-        }
-
         requireNonNull(model);
         JsonFileManager jfm = new JsonFileManager("trackermon.json");
 
