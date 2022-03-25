@@ -350,3 +350,16 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#statusPane {
+    -fx-hgap: 7;
+    -fx-vgap: 10;
+}
+
+#statusPane .label {
+    -fx-text-fill: white;
+    -fx-padding: 2 5 2 5;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}

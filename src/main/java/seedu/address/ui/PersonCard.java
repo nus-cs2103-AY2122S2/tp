@@ -1,13 +1,21 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import static seedu.address.model.candidate.ApplicationStatus.ACCEPTED_STATUS;
+import static seedu.address.model.candidate.ApplicationStatus.PENDING_STATUS;
+import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
+import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
+import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
+import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.InterviewStatus;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -18,6 +26,10 @@ public class PersonCard extends UiPart<Region> {
     private static final String APPLICATION_STATUS_MSG = "Application Status : ";
     private static final String INTERVIEW_STATUS_MSG = "Interview Status : ";
     private static final String AVAILABILITY_MSG = "Availability: ";
+    private static final String RED = "#800000";
+    private static final String GREEN = "#006100";
+    private static final String YELLOW = "#CBA92B";
+    private static final String CHANGE_COLOUR = "-fx-background-color: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -49,6 +61,9 @@ public class PersonCard extends UiPart<Region> {
     private Label availability;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane statusPane;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -60,12 +75,11 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(candidate.getPhone().value);
         course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
         email.setText(candidate.getEmail().value);
-        candidate.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         applicationStatus.setText(APPLICATION_STATUS_MSG + candidate.getApplicationStatus().toString());
         interviewStatus.setText(INTERVIEW_STATUS_MSG + candidate.getInterviewStatus().toString());
         availability.setText(AVAILABILITY_MSG + candidate.getAvailability().availability);
+        setApplicationStatus(candidate.getApplicationStatus());
+        setInterviewStatus(candidate.getInterviewStatus());
     }
 
     @Override
@@ -85,4 +99,37 @@ public class PersonCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && candidate.equals(card.candidate);
     }
+
+    public void setApplicationStatus(ApplicationStatus applicationStatus) {
+        String applicationString = applicationStatus.toString();
+        Label applicationLabel = new Label(applicationString);
+
+        if (applicationString.equals(REJECTED_STATUS)) {
+            applicationLabel.setStyle(CHANGE_COLOUR + RED);
+            statusPane.getChildren().add(applicationLabel);
+        } else if (applicationString.equals(ACCEPTED_STATUS)) {
+            applicationLabel.setStyle(CHANGE_COLOUR + GREEN);
+            statusPane.getChildren().add(applicationLabel);
+        } else if (applicationString.equals(PENDING_STATUS)) {
+            applicationLabel.setStyle(CHANGE_COLOUR + YELLOW);
+            statusPane.getChildren().add(applicationLabel);
+        }
+    }
+
+    public void setInterviewStatus(InterviewStatus interviewStatus) {
+        String interviewString = interviewStatus.toString();
+        Label interviewLabel = new Label(interviewString);
+
+        if (interviewString.equals(NOT_SCHEDULED)) {
+            interviewLabel.setStyle(CHANGE_COLOUR + RED);
+            statusPane.getChildren().add(interviewLabel);
+        } else if (interviewString.equals(COMPLETED)) {
+            interviewLabel.setStyle(CHANGE_COLOUR + GREEN);
+            statusPane.getChildren().add(interviewLabel);
+        } else if (interviewString.equals(SCHEDULED)) {
+            interviewLabel.setStyle(CHANGE_COLOUR + YELLOW);
+            statusPane.getChildren().add(interviewLabel);
+        }
+    }
+
 }
