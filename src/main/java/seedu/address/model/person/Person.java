@@ -167,6 +167,54 @@ public class Person implements Comparable<Person> {
                 && otherPerson.getCcas().equals(getCcas());
     }
 
+    /**
+     * Displays the formatted details for delete command
+     */
+    public String displayPersonForDelete() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" | Phone: ")
+                .append(getPhone())
+                .append(" | Email: ")
+                .append(getEmail())
+                .append(" | Address: ")
+                .append(getAddress())
+                .append(" | Educations: ")
+                .append(getEducations())
+                .append(" | Internships: ")
+                .append(getInternships())
+                .append(" | Modules: ")
+                .append(getModules())
+                .append(" | Ccas: ")
+                .append(getCcas());
+
+        return builder.toString();
+    }
+
+    /**
+     * Displays the formatted details for add command
+     */
+    public String displayPersonForAdd() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("\nPhone: ")
+                .append(getPhone())
+                .append("\nEmail: ")
+                .append(getEmail())
+                .append("\nAddress: ")
+                .append(getAddress())
+                .append("\nEducations: ")
+                .append(getEducations())
+                .append("\nInternships: ")
+                .append(getInternships())
+                .append("\nModules: ")
+                .append(getModules())
+                .append("\nCcas: ")
+                .append(getCcas());
+
+        return builder.toString();
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

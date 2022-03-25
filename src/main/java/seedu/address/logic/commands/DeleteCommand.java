@@ -83,7 +83,7 @@ public class DeleteCommand extends Command {
             if (i > 0) {
                 deletedPersonOrPersons.append(System.lineSeparator());
             }
-            deletedPersonOrPersons.append(personToDelete.toString());
+            deletedPersonOrPersons.append(personToDelete.displayPersonForDelete());
         }
         return deletedPersonOrPersons.toString();
     }

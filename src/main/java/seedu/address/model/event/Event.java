@@ -69,6 +69,21 @@ public class Event implements Comparable<Event> {
                 && otherEvent.getDateTime().equals(getDateTime());
     }
 
+    /**
+     * Displays the formatted details for cancel event command
+     */
+    public String displayForCancelEvent() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getEventName())
+                .append(" | Details: ")
+                .append(getEventInfo())
+                .append(" | Date & Time: ")
+                .append(getDateTime())
+                .append(" | Participants: ")
+                .append(getParticipants());
+        return builder.toString();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, info, participants, dateTime);
