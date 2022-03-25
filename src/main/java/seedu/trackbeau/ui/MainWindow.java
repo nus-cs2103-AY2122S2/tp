@@ -3,7 +3,6 @@ package seedu.trackbeau.ui;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,7 +20,6 @@ import seedu.trackbeau.logic.Logic;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
-import seedu.trackbeau.model.booking.Booking;
 
 /**
  * The Main Window. Provides the basic application layout containing

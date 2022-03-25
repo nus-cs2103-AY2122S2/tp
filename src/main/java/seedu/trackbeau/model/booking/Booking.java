@@ -1,6 +1,7 @@
 package seedu.trackbeau.model.booking;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.trackbeau.model.customer.Customer;
 
@@ -26,7 +27,7 @@ public class Booking {
     }
 
     public String getDateTime() {
-        return startDateTime.toString();
+        return startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' h:mm a"));
     }
 
     /**
