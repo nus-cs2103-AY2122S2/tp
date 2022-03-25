@@ -173,8 +173,7 @@ The delete command now has to accept multiple indexes as a valid input. The Pars
 behaviour by extending the validity checks on the entire string of input.
 
 The workaround is then to delete each person from the largest to the smallest index. The success message displays the details
-of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion. 
-
+of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion.
 **For example:** <br>
 Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
