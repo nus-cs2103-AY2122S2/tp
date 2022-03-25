@@ -14,11 +14,14 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
+import seedu.address.model.person.MeetingDate;
+import seedu.address.model.person.MeetingTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,9 +36,10 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String flag;
-    private String prevDateMet;
+    private final String prevDateMet;
     private final String salary;
-    private String info;
+    private final String info;
+    private final String scheduledMeeting;
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -47,7 +51,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("flag") String flag, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("salary") String salary,
-            @JsonProperty("info") String info) {
+            @JsonProperty("info") String info, @JsonProperty("scheduledMeeting") String scheduledMeeting) {
 
         this.name = name;
         this.phone = phone;
@@ -57,6 +61,7 @@ class JsonAdaptedPerson {
         this.prevDateMet = prevDateMet;
         this.salary = salary;
         this.info = info;
+        this.scheduledMeeting = scheduledMeeting;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -74,6 +79,7 @@ class JsonAdaptedPerson {
         prevDateMet = source.getPrevDateMet().toString();
         salary = source.getSalary().value;
         info = source.getInfo().value;
+        scheduledMeeting = source.getScheduledMeeting().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -156,8 +162,27 @@ class JsonAdaptedPerson {
         }
         final Info modelInfo = new Info(info);
 
+        if (scheduledMeeting == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        ScheduledMeeting meeting;
+        if (scheduledMeeting.toString().equals("No meeting scheduled")) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
+                    modelTags, modelPrevDateMet, modelSalary, modelInfo);
+        } else {
+            String[] meetingSplit = scheduledMeeting.split(" at: ");
+            String meetingDate = meetingSplit[0];
+            String meetingTime = meetingSplit[1];
+            if (!MeetingDate.isValidDate(meetingDate)) {
+                throw new IllegalValueException(MeetingDate.MESSAGE_CONSTRAINTS);
+            }
+            if (!MeetingTime.isValidTime(meetingTime)) {
+                throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);
+            }
+            meeting = new ScheduledMeeting(new MeetingDate(meetingDate), new MeetingTime(meetingTime));
+        }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
-                modelTags, modelPrevDateMet, modelSalary, modelInfo);
+                modelTags, modelPrevDateMet, modelSalary, modelInfo, meeting);
     }
 
 }

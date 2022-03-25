@@ -80,10 +80,13 @@ public class ScheduledMeeting {
 
     @Override
     public String toString() {
+        if (date == null || time == null) {
+            return "No meeting scheduled";
+        }
         final StringBuilder builder = new StringBuilder();
         builder.append(getDate())
                 .append(" at: ")
-                .append(getTime());
+                .append(getTime().toString());
 
         return builder.toString();
     }

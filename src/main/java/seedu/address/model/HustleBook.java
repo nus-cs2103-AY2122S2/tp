@@ -10,8 +10,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.person.UniquePersonList;
-
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -97,6 +97,17 @@ public class HustleBook implements ReadOnlyHustleBook {
         requireNonNull(flag);
 
         persons.flagPerson(target, flag);
+    }
+
+    /**
+     * Schedules a meeting date and time with the targetted person.
+     * @param target The person to be scheduled a meeting with.
+     * @param scheduledMeeting The meeting details.
+     */
+    public void scheduleMeeting(Person target, ScheduledMeeting scheduledMeeting) {
+        requireNonNull(scheduledMeeting);
+
+        persons.scheduleMeeting(target, scheduledMeeting);
     }
 
     /**

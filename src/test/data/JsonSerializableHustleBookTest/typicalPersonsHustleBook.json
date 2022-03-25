@@ -9,7 +9,8 @@
     "tagged" : [ "friends" ],
     "prevDateMet" : "2022-01-12",
     "salary" : "5300",
-    "info" : "Salary of $5300"
+    "info" : "Salary of $5300",
+    "scheduledMeeting" : "No meeting scheduled"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -19,7 +20,8 @@
     "tagged" : [ "owesMoney", "friends" ],
     "prevDateMet" : "2022-01-05",
     "salary" : "4000",
-    "info" : "Salary of $4000"
+    "info" : "Salary of $4000",
+    "scheduledMeeting" : "2022-05-13 at: 1545"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -29,7 +31,8 @@
     "tagged" : [ ],
     "prevDateMet" : "2021-08-05",
     "salary" : "2500",
-    "info" : "Salary of $2500"
+    "info" : "Salary of $2500",
+    "scheduledMeeting" : "No meeting scheduled"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -39,7 +42,8 @@
     "tagged" : [ "friends" ],
     "prevDateMet" : "2021-12-12",
     "salary" : "3500",
-    "info" : "Salary of $3500"
+    "info" : "Salary of $3500",
+    "scheduledMeeting" : "No meeting scheduled"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -49,7 +53,8 @@
     "tagged" : [ ],
     "prevDateMet" : "2021-11-02",
     "salary" : "6200",
-    "info" : "Salary of $6200"
+    "info" : "Salary of $6200",
+    "scheduledMeeting" : "No meeting scheduled"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -59,7 +64,8 @@
     "tagged" : [ ],
     "prevDateMet" : "2022-03-12",
     "salary" : "3100",
-    "info" : "Salary of $3100"
+    "info" : "Salary of $3100",
+    "scheduledMeeting" : "No meeting scheduled"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -69,6 +75,7 @@
     "tagged" : [ ],
     "prevDateMet" : "2021-04-25",
     "salary" : "4800",
-    "info" : "Salary of $4800"
+    "info" : "Salary of $4800",
+    "scheduledMeeting" : "No meeting scheduled"
   } ]
 }

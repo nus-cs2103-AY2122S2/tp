@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 
 /**
  * Represents the in-memory model of the hustle book data.
@@ -102,6 +103,11 @@ public class ModelManager implements Model {
     @Override
     public void flagPerson(Person target, Flag flag) {
         hustleBook.flagPerson(target, flag);
+    }
+
+    @Override
+    public void scheduleMeetingPerson(Person target, ScheduledMeeting scheduledMeeting) {
+        hustleBook.scheduleMeeting(target, scheduledMeeting);
     }
 
     @Override

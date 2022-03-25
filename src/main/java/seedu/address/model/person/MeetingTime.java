@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Person's upcoming meeting time.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
 public class MeetingTime {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting should only contain numbers and hyphens, in the format of YYYY-MM-DD";
@@ -24,7 +26,7 @@ public class MeetingTime {
     public MeetingTime(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        value = LocalTime.parse(time);
+        value = LocalTime.parse(time, FORMATTER);
     }
 
     /**
@@ -37,7 +39,7 @@ public class MeetingTime {
 
     @Override
     public String toString() {
-        return value.toString();
+        return value.format(FORMATTER);
     }
 
     @Override

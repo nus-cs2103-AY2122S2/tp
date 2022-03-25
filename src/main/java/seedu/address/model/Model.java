@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 
 /**
  * The API of the Model component.
@@ -69,6 +70,13 @@ public interface Model {
      * The person must exist in the hustle book.
      */
     void flagPerson(Person target, Flag flag);
+
+    /**
+     * Schedule a meeting with the given person.
+     * @param target Person to be scheduled meeting with.
+     * @param scheduledMeeting The meeting scheduled details.
+     */
+    void scheduleMeetingPerson(Person target, ScheduledMeeting scheduledMeeting);
 
     /**
      * Adds the given person.

@@ -10,11 +10,14 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
+import seedu.address.model.person.MeetingDate;
+import seedu.address.model.person.MeetingTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,7 +29,7 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Flag("true"),
                 getTagSet("friends"), new PrevDateMet("2022-01-01"), new Salary("4000"),
-                new Info("Prefers Bonds")),
+                new Info("High Risk"), new ScheduledMeeting(new MeetingDate("2022-04-15"), new MeetingTime("1430"))),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Flag("false"),
                 getTagSet("colleagues", "friends")),

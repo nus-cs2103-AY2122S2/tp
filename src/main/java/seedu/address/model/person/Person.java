@@ -28,7 +28,26 @@ public class Person {
     private final PrevDateMet prevDateMet;
     private final Info info;
     private final Salary salary;
-    private final ScheduledMeeting scheduledMeeting;
+    private ScheduledMeeting scheduledMeeting;
+
+
+    /**
+     * Constructor for Person object where every field is present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
+                  PrevDateMet prevDateMet, Salary salary, Info info, ScheduledMeeting scheduledMeeting) {
+        requireAllNonNull(name, phone, email, address, tags, prevDateMet, info, scheduledMeeting);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.flag = flag;
+        this.tags.addAll(tags);
+        this.prevDateMet = prevDateMet;
+        this.salary = salary;
+        this.info = info;
+        this.scheduledMeeting = scheduledMeeting;
+    }
 
     /**
      * Constructor for Person object where every field is present and not null.
@@ -106,6 +125,10 @@ public class Person {
 
     public ScheduledMeeting getScheduledMeeting() {
         return scheduledMeeting;
+    }
+
+    public void setScheduledMeeting(ScheduledMeeting scheduledMeeting) {
+        this.scheduledMeeting = scheduledMeeting;
     }
 
     /**

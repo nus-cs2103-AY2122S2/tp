@@ -48,6 +48,8 @@ public class PersonCard extends UiPart<Region> {
     private Label salary;
     @FXML
     private Label info;
+    @FXML
+    private Label scheduledMeeting;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,6 +66,7 @@ public class PersonCard extends UiPart<Region> {
         prevDateMet.setText("Last met: " + person.getPrevDateMet().value.toString());
         salary.setText("Salary: $" + person.getSalary().value);
         info.setText("Info: " + person.getInfo().value);
+        scheduledMeeting.setText("Scheduled meeting: " + person.getScheduledMeeting().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
