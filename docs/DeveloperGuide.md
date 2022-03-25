@@ -3,13 +3,15 @@ layout: page
 title: Developer Guide
 ---
 
-Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**. Trackermon allows people who want to track and remember what shows they have watched or are currently watching.
-
 ### Table of Contents
 
 * [**Acknowledgements**](#acknowledgements)
+* [**Introduction**](#introduction)
 * [**Setting up, getting started**](#setting-up-getting-started)
 * [**About**](#about)
+  * [Purpose](#purpose)
+  * [Scope](#scope)
+  * [Developer guide navigation](#developer-guide-navigation)
 * [**Design**](#design)
   * [Architecture](#architecture)
   * [UI component](#ui-component)
@@ -35,13 +37,13 @@ Trackermon is a **desktop application** for **tracking and managing shows, optim
       * [Implementation](#implementation-4)
       * [Design considerations](#design-considerations-3)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-* [**Appendix: Requirements**](#appendix-requirements)
+* [**Appendix A: Requirements**](#appendix-a-requirements)
   * [Product scope](#product-scope)
   * [User stories](#user-stories)
   * [Use cases](#use-cases)
   * [Non-Functional Requirements](#non-functional-requirements)
-  * [Glossary](#glossary)
-* [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+* [**Appendix B: Glossary**](#appendix-b-glossary)
+* [**Appendix C: Instructions for manual testing**](#appendix-c-instructions-for-manual-testing)
   * [Launch and shutdown](#launch-and-shutdown)
   * [Adding a show](#adding-a-show)
   * [Deleting a show](#deleting-a-show)
@@ -65,6 +67,12 @@ Trackermon is a **desktop application** for **tracking and managing shows, optim
 
 ---
 
+## **Introduction**
+
+Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**. Trackermon allows people who want to track and remember what shows they have watched, are currently watching, or plan to watch.
+
+---
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -77,7 +85,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Purpose
 
-This document specified architecture and software design decisions for the application, Trackermon.
+This document specifies architecture and software design decisions for the application, Trackermon.
 
 ### Scope
 
@@ -395,7 +403,7 @@ Using the FileChooser library, it manages to create a File Explorer GUI similar 
 
 ---
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -765,7 +773,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Glossary
+## Appendix B: Glossary
 
 | Term              | Description                                                                                            |
 |-------------------|--------------------------------------------------------------------------------------------------------|
@@ -776,7 +784,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Appendix: Instructions for manual testing**
+## **Appendix C: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
