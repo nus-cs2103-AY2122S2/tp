@@ -16,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -65,6 +66,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastEventList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -78,9 +80,31 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-
+        updateEvent(model, personToEdit, editedPerson, lastEventList);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.displayPersonForAdd()));
+    }
+
+    /**
+     * Updates the event to reflect the new participants
+     * @param model the current model
+     * @param personToEdit the person that is being edited
+     * @param editedPerson the person that has been edited
+     * @param lastEventList the event list
+     */
+    public void updateEvent(Model model, Person personToEdit, Person editedPerson, List<Event> lastEventList) {
+        Name oldName = personToEdit.getName();
+        Name newName = editedPerson.getName();
+
+        for (int i = 0; i < lastEventList.size(); i++) {
+            Event currEvent = lastEventList.get(i);
+            List<Name> participants = currEvent.getParticipants();
+            if (participants.remove(oldName)) {
+                participants.add(newName);
+            }
+            model.setEvent(currEvent, new Event(currEvent.getEventName(), currEvent.getEventInfo(), participants,
+                    currEvent.getDateTime()));
+        }
     }
 
     /**
