@@ -93,10 +93,10 @@ public class Candidate {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both candidates have the same name.
      * This defines a weaker notion of equality between two candidates.
      */
-    public boolean isSamePerson(Candidate otherCandidate) {
+    public boolean isSameCandidate(Candidate otherCandidate) {
         if (otherCandidate == this) {
             return true;
         }
@@ -106,7 +106,7 @@ public class Candidate {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both candidates have the same identity and data fields.
      * This defines a stronger notion of equality between two candidates.
      */
     @Override
