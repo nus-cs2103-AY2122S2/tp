@@ -15,4 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_STUDENTID = new Prefix("i/");
     public static final Prefix PREFIX_LAB = new Prefix("l/");
     public static final Prefix PREFIX_LABSTATUS = new Prefix("s/");
+    public static final Prefix PREFIX_LABMARK = new Prefix("m/");
 }
