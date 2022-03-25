@@ -10,7 +10,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.StudentHasLabPredicate;
-import seedu.address.model.student.exceptions.LabNotFoundException;
 
 public class FilterCommand extends Command {
 

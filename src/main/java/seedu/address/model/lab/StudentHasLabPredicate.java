@@ -3,7 +3,6 @@ package seedu.address.model.lab;
 import java.util.function.Predicate;
 
 import seedu.address.model.student.Student;
-import seedu.address.model.student.exceptions.LabNotFoundException;
 
 /**
  * Tests that a {@code Student} has a {@code Lab} that matches the specified one
