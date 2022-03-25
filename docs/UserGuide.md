@@ -34,9 +34,9 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 </div>
 
 # Quick start
-- Ensure you have Java 11 or above installed in your Computer.
-- Download the latest ultimatedivoctracker.jar from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
-- Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker.
+- Ensure you have **Java 11** or above installed in your Computer.
+- Download the latest _ultimatedivoctracker.jar_ from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
+- Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
 - Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 - Refer to the Features below for details of each command.
 
@@ -44,7 +44,7 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 
 > :information_source: **Installation notes:**  
 > - Application data will be stored in the same folder containing the application executable.  
-> - Currently only officially supported for x64 Windows platforms.
+> - Currently only officially supported for **x64 Windows** platforms.
 
 </div>
 
@@ -52,9 +52,9 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: **Formatting notes:**
-- Words in `UPPER_CASE` are the parameters to be supplied.
-- Items in square brackets are optional.
+> :information_source: **Formatting notes:**  
+> - Words in `UPPER_CASE` are the parameters to be supplied.  
+> - Items in square brackets are optional.
 
 </div>
 
@@ -83,11 +83,11 @@ Adds a student to the tracking list
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tips:** 
-- Multiple activity tags can be added to a single student
-  - Eg. `act/choir dance`
-- A student can also have no activity tags
-- Parameters can be in any order
+> :bulb: **Tips:**  
+> - Multiple activity tags can be added to a single student  
+>   - Eg. `act/choir dance`  
+> - A student can also have no activity tags  
+> - Parameters can be in any order
 
 </div>
 
@@ -97,7 +97,7 @@ Adds a student to the tracking list
 
 <div markdown="span" class="alert alert-warning" role="alert">
 
-:warning: **Warning:** Capitalization of text will be reflected in the User Interface
+> :warning: **Warning:** Capitalization of text will be reflected in the User Interface
 
 </div>
 
@@ -108,7 +108,7 @@ Shows a list of all students in the address book.
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tip:** For a filtered list, use the other __*find*__ commands
+> :bulb: **Tip:** For a filtered list, use the other __*find*__ commands
 
 </div>
 
@@ -141,7 +141,7 @@ Finds an existing student in the address book by their class
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tip:** if student class contains their levels _(Eg. 3A, 3B, 4A, 4B)_, `findclasscode 4` finds all students in level 4 _(students in 4A and 4B)_
+> :bulb: **Tip:** if student class contains their levels _(Eg. 3A, 3B, 4A, 4B)_, `findclasscode 4` finds all students in level 4 _(students in 4A and 4B)_
 
 </div>
 
@@ -167,9 +167,9 @@ Edits an existing student's details in the address book by the Index provided an
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tips:** 
-- Filter the student list via _find_ commands to make finding the index easier
-- Leave other attributes of the student as is by omitting parameters from the command
+> :bulb: **Tips:**  
+> - Filter the student list via _find_ commands to make finding the index easier  
+> - Leave other attributes of the student as is by omitting parameters from the command
 
 </div>
 
@@ -185,7 +185,7 @@ Deletes the specified person from the address book.
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tip:** filter the student list via _find_ commands to make finding the index easier
+> :bulb: **Tip:** filter the student list via _find_ commands to make finding the index easier
 
 </div>
 
@@ -195,7 +195,7 @@ Format: `exit`
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tip:** You can also close the application directly as it is functionally identical
+> :bulb: **Tip:** You can also close the application directly as it is functionally identical
 
 </div>
 
@@ -209,13 +209,13 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-:bulb: **Tip:** Advanced users are welcome to update data directly by editing that data file
+> :bulb: **Tip:** Advanced users are welcome to update data directly by editing that data file
 
 </div>
 
 <div markdown="span" class="alert alert-warning" role="alert">
 
-:warning: **Warning:** Deleting the data file will result in all data being lost
+> :warning: **Warning:** Deleting the data file will result in all data being lost
 
 </div>
 
@@ -223,5 +223,5 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 
 # FAQ
 
-Q: Manual insertion of students takes time, is there a faster way to do it?  
-A: We are working on a feature to allow importing of **.csv** files into UDT!
+> Q: Manual insertion of students takes time, is there a faster way to do it?  
+> A: We are working on a feature to allow importing of **.csv** files into UDT!
