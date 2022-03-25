@@ -22,7 +22,8 @@ public class SortCommand extends Command {
             + " The search can be conducted only on a specific field in persons' description by specifying the"
             + PREFIX_SORTKEY + " SORTKEY argument.\n"
             + "Parameters: " + PREFIX_SORTKEY + "SORTKEY \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_SORTKEY + "name";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SORTKEY + "name\n"
+            + "Allowable fields to be sorted by include course, email, phone, name, studentid.";
 
     private final Comparator<Candidate> sortComparator;
     private final String sortKey;

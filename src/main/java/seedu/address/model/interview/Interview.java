@@ -18,6 +18,7 @@ public class Interview {
     private final Candidate candidate;
     private final LocalDateTime interviewDateTime;
     private final LocalDateTime interviewEndDateTime;
+    private final int interviewDay;
 
     /**
      * Every field must be present and not null.
@@ -27,6 +28,7 @@ public class Interview {
         this.candidate = candidate;
         this.interviewDateTime = interviewDateTime;
         this.interviewEndDateTime = interviewDateTime.plusMinutes(INTERVIEW_DURATION_IN_MINUTES);
+        this.interviewDay = interviewDateTime.getDayOfWeek().getValue();
     }
 
     /**
@@ -55,6 +57,35 @@ public class Interview {
     }
 
     /**
+     * Returns true if the candidate is available on the propsoed interview day
+     */
+    public boolean hasMatchingAvailability() {
+        String candidateAvailabilities = this.candidate.getAvailability().toString();
+        String interviewDayString = Integer.toString(this.interviewDay);
+        return candidateAvailabilities.contains(interviewDayString);
+    }
+
+    /**
+     * Returns true if the candidate is available on the proposed interview day
+     */
+    public boolean isDuringOfficeHour() {
+        int interviewHour = this.interviewDateTime.getHour();
+        int interviewMin = this.interviewDateTime.getMinute();
+
+        if (this.interviewDay > 5) {
+            return false;
+        }
+
+        if (interviewHour < 8) {
+            return false;
+        } else if (interviewHour >= 17 && interviewMin > 30) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Returns true if the given date and time is not in the past.
      */
     public static boolean isValidDateTime(LocalDateTime localDateTime) {
@@ -67,6 +98,10 @@ public class Interview {
 
     public LocalDateTime getInterviewDateTime() {
         return this.interviewDateTime;
+    }
+
+    public int getInterviewDay() {
+        return this.interviewDay;
     }
 
     public LocalTime getInterviewStartTime() {

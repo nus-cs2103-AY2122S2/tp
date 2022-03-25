@@ -38,7 +38,6 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
      */
     public void resetData(ReadOnlyInterviewSchedule newData) {
         requireNonNull(newData);
-
         setInterviews(newData.getInterviewList());
     }
 

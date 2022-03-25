@@ -178,7 +178,7 @@ List of new entities:
 
 #### What is the feature about?
 The `find` mechanism is facilitated by `AddressBook`. The `find` command in `TAlent Assistant™`
-has been enhanced based on the initial implementation of the `find` command in `AddressBook3`.
+has been enhanced based on the initial implementation of the `find` command in `AddressBook`.
 
 The enhancement works by adding a new prefix in the `CliSyntax` class `k/`, which allows the
 user to separate multiple keywords. and `f/` which allows the user to specify which field the

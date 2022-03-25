@@ -5,11 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_CANDIDATE_NOT_AVAILABLE;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_NOT_OFFICE_HOUR;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalInterviews.AFTER_OFFICE_HOURS;
+import static seedu.address.testutil.TypicalInterviews.BEFORE_OFFICE_HOURS;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
+import static seedu.address.testutil.TypicalInterviews.ON_WEEKEND;
+import static seedu.address.testutil.TypicalInterviews.THURSDAY_INTERVIEW_DATE_TIME;
+import static seedu.address.testutil.TypicalInterviews.TUESDAY_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -34,7 +42,7 @@ public class ScheduleCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Candidate candidateToInterview = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
+        LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, interviewDateTime);
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
@@ -61,10 +69,10 @@ public class ScheduleCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, TYPICAL_INTERVIEW_DATE_TIME);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, TUESDAY_INTERVIEW_DATE_TIME);
 
         Candidate candidateToInterview = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
+        LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 candidateToInterview.getName(), candidateToInterview.getStudentId(),
@@ -116,6 +124,38 @@ public class ScheduleCommandTest {
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, interviewDateTime);
 
         assertCommandFailure(scheduleCommand, model, MESSAGE_CONFLICTING_INTERVIEW);
+    }
+
+    @Test
+    public void execute_hasNoMatchingAvailability_throwsCommandException() {
+        LocalDateTime interviewDateTime = THURSDAY_INTERVIEW_DATE_TIME;
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, interviewDateTime);
+
+        assertCommandFailure(scheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
+    }
+
+    @Test
+    public void execute_beforeOfficeHours_throwsCommandException() {
+        LocalDateTime interviewDateTime = BEFORE_OFFICE_HOURS;
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, interviewDateTime);
+
+        assertCommandFailure(scheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
+    }
+
+    @Test
+    public void execute_afterOfficeHours_throwsCommandException() {
+        LocalDateTime interviewDateTime = AFTER_OFFICE_HOURS;
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, interviewDateTime);
+
+        assertCommandFailure(scheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
+    }
+
+    @Test
+    public void execute_interviewDuringWeekend_throwsCommandException() {
+        LocalDateTime interviewDateTime = ON_WEEKEND;
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FOURTH_PERSON, interviewDateTime);
+
+        assertCommandFailure(scheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
     }
 
     @Test
