@@ -53,6 +53,8 @@ public class TaskCard extends UiPart<Region> {
     private Label employeesTag;
     @FXML
     private Label statusIsDone;
+    @FXML
+    private Label priorityTag;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -94,6 +96,12 @@ public class TaskCard extends UiPart<Region> {
         } else {
             statusIsDone.setText("Not Done");
             statusIsDone.getStyleClass().add("cell_status_not_done_label");
+        }
+
+        if (task.getPriority().name().equals("NONE")) {
+            priorityTag.setVisible(false);
+        } else {
+            priorityTag.setText(task.getPriority().name());
         }
     }
 
