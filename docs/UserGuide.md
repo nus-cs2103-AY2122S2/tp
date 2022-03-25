@@ -36,14 +36,14 @@ Trackermon is a **desktop application** for **tracking and managing shows, optim
 
 Before you continue reading the rest of our user guide, the table below displays some important syntax to facilitate your reading.
 
-| Syntax                                                                             | Description                                            |
-|------------------------------------------------------------------------------------|--------------------------------------------------------|
-| **Bold**                                                                           | Important words to note                                |
-| `GFM`                                                                              | Command word/prefix/parameter                          |
-| <div markdown="span" class="alert alert-warning">:bulb: **Tip:**</div>             | A small but useful piece of information                |
-| <div markdown="span" class="alert alert-info">:information_source: **Note:**</div> | Additional information                                 |
-| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**</div>   | Important information to watch out for                 |
-| [Optional Parameters]                                                              | Indicates the parameters/prefixes that may be optional |
+| Syntax                                                                              | Description                                            |
+|-------------------------------------------------------------------------------------|--------------------------------------------------------|
+| **Bold**                                                                            | Important words to note                                |
+| `GFM`                                                                               | Command word/prefix/parameter                          |
+| <div markdown="span" class="alert alert-warning">:bulb: **Tip:** </div>             | A small but useful piece of information                |
+| <div markdown="span" class="alert alert-info">:information_source: **Note:** </div> | Additional information                                 |
+| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:** </div>   | Important information to watch out for                 |
+| [Optional Parameters]                                                               | Indicates the parameters/prefixes that may be optional |
 
 ---
 
@@ -56,8 +56,6 @@ Before you continue reading the rest of our user guide, the table below displays
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
 4. Double-click the file to start the app. A [GUI](#glossary) containing the annotated 4 main components should show up as below:
-
-[**IMAGE HERE**]
 
 5. Start communicating with Trackermon using the command box.
 
@@ -74,6 +72,8 @@ Some example commands you can try:
 6. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
 7. For details of each command, please proceed to the [Commands](#commands) section below.
+
+[INSERT IMAGE HERE]
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
