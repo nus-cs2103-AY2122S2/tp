@@ -193,7 +193,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-The sections below give more details on how the following features are implement.
+The sections below give more details on how the following features are implemented.
 * Dynamic Ui Rendering
 * Create
 * View
@@ -210,14 +210,35 @@ WIP
 WIP - Insert UML
 
 <!-- Joey -->
-### Create
-#### Design Consideration
-WIP
+### Add
+The add mechanism is facilitated by `MedBook`. It allows users to create and store records belonging to a patient.
+These records include a `Patient`'s `Contact` details, `Medical` information, `Consultation` notes,`Prescription` and
+`TestResult`. For each of the records, there is a corresponding class to add the record into the `MedBook`. 
 
+Example: `TestResult` can be added into the `MedBook` using the `AddTestResultCommand` which allows users to add a new 
+and unique record regarding the results of a medical test taken if this record is not a duplicate.
+
+It extends the abstract class `Command` and has additional fields to store the patient's `NRIC` and their
+corresponding records.
+
+It implements the abstract method `execute` to add and store the record in `MedBook` and this operation is exposed in
+the `LogicManager` class.
+#### Design Consideration
+Aspect: How add executes:
+* Alternative 1: Extends `AddCommand` class
+  * Pros: easy to follow AB3's OOP design
+  * Cons: more code is needed to make the subclasses compatible with `AddCommand` and this design may also violate the
+    Liskov Substitution Principle since the subclasses are more restrictive
+* Alternative 2 (current choice): Extends `Command` class
+  * Pros: easy to implement because the abstract class `Command` only has one abstract method
+  * Cons: commands that aim to do the same thing (add records to the `MedBook`) are not grouped together and this may
+    not be an intuitive approach to OOP
 #### Implementation
 WIP - Insert UML and activity diagram
 
 #### Usage
+Given below is an activity diagram which shows the example usage scenario for when a user adds the `Medical` information
+for a `Patient` and how the add mechanism behaves at each step.
 WIP
 
 <!-- Justin -->
