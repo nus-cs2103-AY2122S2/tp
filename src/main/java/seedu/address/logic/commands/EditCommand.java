@@ -33,6 +33,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -118,8 +119,11 @@ public class EditCommand extends Command {
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
         PrevDateMet updatedPrevDateMet = editPersonDescriptor.getPrevDateMet().orElse(personToEdit.getPrevDateMet());
 
+        // Schedule meeting remains unchanged through edit commands. MeetCommand handles CRUD for meetings.
+        ScheduledMeeting scheduledMeeting = personToEdit.getScheduledMeeting();
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFlag,
-                updatedTags, updatedPrevDateMet, updatedSalary, updatedInfo);
+                updatedTags, updatedPrevDateMet, updatedSalary, updatedInfo, scheduledMeeting);
     }
 
     @Override

@@ -28,10 +28,29 @@ public class Person {
     private final PrevDateMet prevDateMet;
     private final Info info;
     private final Salary salary;
-    private final ScheduledMeeting scheduledMeeting;
+    private ScheduledMeeting scheduledMeeting;
+
 
     /**
      * Constructor for Person object where every field is present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
+                  PrevDateMet prevDateMet, Salary salary, Info info, ScheduledMeeting scheduledMeeting) {
+        requireAllNonNull(name, phone, email, address, tags, prevDateMet, info, scheduledMeeting);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.flag = flag;
+        this.tags.addAll(tags);
+        this.prevDateMet = prevDateMet;
+        this.salary = salary;
+        this.info = info;
+        this.scheduledMeeting = scheduledMeeting;
+    }
+
+    /**
+     * Constructor for Person object where every field is present and not null except scheduled meeting.
      */
     public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
                   PrevDateMet prevDateMet, Salary salary, Info info) {
@@ -49,8 +68,8 @@ public class Person {
     }
 
     /**
-     * Constructor for Person object where every field is present and not null except prevDateMet
-     * and salary.
+     * Constructor for Person object where every field is present and not null except prevDateMet, salary, info
+     * and scheduled meeting.
      * Previous date met will be set to the current date as the user might meet up with the client
      * for the first time.
      * Salary will be set to the default value, "0".
@@ -108,6 +127,10 @@ public class Person {
         return scheduledMeeting;
     }
 
+    public void setScheduledMeeting(ScheduledMeeting scheduledMeeting) {
+        this.scheduledMeeting = scheduledMeeting;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -152,8 +175,8 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getPrevDateMet().equals(getPrevDateMet())
                 && otherPerson.getInfo().equals(getInfo())
-                && otherPerson.getSalary().equals(getSalary());
-        // && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
+                && otherPerson.getSalary().equals(getSalary())
+                && otherPerson.getScheduledMeeting().equals(getScheduledMeeting());
     }
 
     @Override

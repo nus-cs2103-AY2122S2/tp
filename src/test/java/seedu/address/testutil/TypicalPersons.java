@@ -41,7 +41,8 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withPrevDateMet("2022-01-05")
             .withSalary("4000")
-            .withInfo("Salary of $4000").build();
+            .withInfo("Salary of $4000")
+            .withScheduledMeeting("2022-05-13", "1545").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withPrevDateMet("2021-08-05")

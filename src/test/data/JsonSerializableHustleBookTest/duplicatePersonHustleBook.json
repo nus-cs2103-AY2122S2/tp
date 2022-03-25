@@ -8,7 +8,8 @@
     "tagged": [ "friends" ],
     "prevDateMet" : "2022-01-12",
     "salary" : "5300",
-    "info" : "Salary of $5300"
+    "info" : "Salary of $5300",
+    "scheduledMeeting" : "No meeting scheduled"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -17,6 +18,7 @@
     "flag": "true",
     "prevDateMet" : "2022-01-12",
     "salary" : "5300",
-    "info" : "Salary of $5300"
+    "info" : "Salary of $5300",
+    "scheduledMeeting" : "No meeting scheduled"
   } ]
 }

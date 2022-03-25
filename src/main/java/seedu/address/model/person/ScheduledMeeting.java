@@ -44,6 +44,10 @@ public class ScheduledMeeting {
         return time;
     }
 
+    public boolean hasMeetingScheduled() {
+        return isMeetingScheduled;
+    }
+
     /**
      * Returns true if this scheduled meeting has the exact same date and time as the other meeting.
      * @param otherMeeting The other meeting to check against.
@@ -69,6 +73,11 @@ public class ScheduledMeeting {
         }
 
         ScheduledMeeting otherMeeting = (ScheduledMeeting) other;
+        // Check if both does not have any scheduled meetings
+        if (!otherMeeting.hasMeetingScheduled() && !this.hasMeetingScheduled()) {
+            return true;
+        }
+
         return otherMeeting.getDate().equals(getDate())
                 && otherMeeting.getTime().equals(getTime());
     }
@@ -80,10 +89,13 @@ public class ScheduledMeeting {
 
     @Override
     public String toString() {
+        if (date == null || time == null) {
+            return "No meeting scheduled";
+        }
         final StringBuilder builder = new StringBuilder();
         builder.append(getDate())
-                .append(" at: ")
-                .append(getTime());
+                .append(" ")
+                .append(getTime().toString());
 
         return builder.toString();
     }
