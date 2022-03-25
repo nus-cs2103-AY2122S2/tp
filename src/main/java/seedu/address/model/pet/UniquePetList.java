@@ -2,9 +2,9 @@ package seedu.address.model.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.SORT_BY_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.SORT_BY_NAME;
 import static seedu.address.logic.parser.CliSyntax.SORT_BY_OWNER;
-import static seedu.address.logic.parser.CliSyntax.SORT_BY_APPOINTMENT;
 
 import java.util.Comparator;
 import java.util.Iterator;
