@@ -2,8 +2,10 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
 
@@ -182,6 +184,29 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> modules} into a {@code Set<ModuleCode>}.
+     */
+    public static Set<ModuleCode> parseMultipleModulesAndGroups(Collection<String> moduleCodesAndGroups)
+            throws ParseException {
+        requireNonNull(moduleCodesAndGroups);
+        final Set<ModuleCode> moduleSet = new LinkedHashSet<>();
+        ModuleCode mc;
+        if (moduleCodesAndGroups.toArray().length == 0) {
+            return moduleSet;
+        }
+        for (String moduleCode : moduleCodesAndGroups) {
+            if (moduleCode.contains(" g/")) {
+                String[] strArr = moduleCode.split(" g/");
+                mc = new ModuleCode(strArr[0].toUpperCase());
+            } else {
+                mc = new ModuleCode(moduleCode.toUpperCase());
+            }
+            moduleSet.add(mc);
+        }
+        return moduleSet;
+    }
+
+    /**
      * Parses {@code String office} into an {@code Office}.
      */
     public static Office parseOffice(String office) throws ParseException {
@@ -191,5 +216,28 @@ public class ParserUtil {
             throw new ParseException(Office.MESSAGE_CONSTRAINTS);
         }
         return new Office(trimmedOffice);
+    }
+
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<ModuleCode>}.
+     */
+    public static ArrayList<LinkedHashSet<String>> parseMultipleGroups(Collection<String> moduleCodesAndGroups)
+            throws ParseException {
+        requireNonNull(moduleCodesAndGroups);
+        final ArrayList<LinkedHashSet<String>> groupList = new ArrayList<LinkedHashSet<String>>();
+        if (moduleCodesAndGroups.toArray().length == 0) {
+            return groupList;
+        }
+        for (String moduleCodeAndGroup : moduleCodesAndGroups) {
+            LinkedHashSet<String> groupNamesSet = new LinkedHashSet<>();
+            if (moduleCodeAndGroup.contains("g/")) {
+                String[] strArr = moduleCodeAndGroup.split(" g/");
+                for (int i = 1; i < strArr.length; i++) {
+                    groupNamesSet.add(strArr[i]);
+                }
+            }
+            groupList.add(groupNamesSet);
+        }
+        return groupList;
     }
 }

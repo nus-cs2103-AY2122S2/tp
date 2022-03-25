@@ -2,7 +2,10 @@ package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import unibook.logic.commands.exceptions.CommandException;
@@ -11,7 +14,9 @@ import unibook.model.Model;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
+import unibook.model.person.Student;
 
 /**
  * Adds a person or module to the UniBook.
@@ -21,7 +26,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a student/professor/module to the UniBook, depending on the option specified.\n"
+        + ": Adds a student/professor/module/group to the UniBook, depending on the option specified.\n"
         + "Parameters: "
         + CliSyntax.PREFIX_OPTION + "OPTION "
         + CliSyntax.PREFIX_NAME + "NAME "
@@ -29,7 +34,8 @@ public class AddCommand extends Command {
         + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
         + "[" + CliSyntax.PREFIX_OFFICE + "OFFICE] "
         + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
-        + "[" + CliSyntax.PREFIX_MODULE + "MODULE]...\n"
+        + "[" + CliSyntax.PREFIX_MODULE + "MODULE]... "
+        + "[" + CliSyntax.PREFIX_GROUP + "GROUP]...\n"
         + "Example: " + COMMAND_WORD + " "
         + CliSyntax.PREFIX_OPTION + "student "
         + CliSyntax.PREFIX_NAME + "John Doe "
@@ -52,11 +58,35 @@ public class AddCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + CliSyntax.PREFIX_OPTION + "module "
         + CliSyntax.PREFIX_NAME + "Computer Organisation "
+        + CliSyntax.PREFIX_MODULE + "CS2100\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "group "
+        + CliSyntax.PREFIX_NAME + "Study Group "
+        + CliSyntax.PREFIX_MODULE + "CS2100\n";
+    public static final String MESSAGE_USAGE_MODULE = COMMAND_WORD
+        + ": To add a module to the UniBook, use the following format.\n"
+        + "Parameters: "
+        + CliSyntax.PREFIX_OPTION + "module "
+        + CliSyntax.PREFIX_NAME + "NAME "
+        + CliSyntax.PREFIX_MODULE + "MODULE\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "module "
+        + CliSyntax.PREFIX_NAME + "Computer Organisation "
+        + CliSyntax.PREFIX_MODULE + "CS2100\n";
+    public static final String MESSAGE_USAGE_GROUP = COMMAND_WORD
+        + ": To add a group to the UniBook, use the following format.\n"
+        + "Parameters: "
+        + CliSyntax.PREFIX_OPTION + "group "
+        + CliSyntax.PREFIX_NAME + "NAME "
+        + CliSyntax.PREFIX_MODULE + "MODULE\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "group "
+        + CliSyntax.PREFIX_NAME + "Study Group "
         + CliSyntax.PREFIX_MODULE + "CS2100\n";
     public static final String MESSAGE_USAGE_STUDENT = COMMAND_WORD
         + ": To add a student to the UniBook, use the following format.\n"
         + "Parameters: "
-        + CliSyntax.PREFIX_OPTION + "OPTION "
+        + CliSyntax.PREFIX_OPTION + "student "
         + CliSyntax.PREFIX_NAME + "NAME "
         + CliSyntax.PREFIX_PHONE + "PHONE "
         + CliSyntax.PREFIX_EMAIL + "EMAIL "
@@ -71,20 +101,10 @@ public class AddCommand extends Command {
         + CliSyntax.PREFIX_TAG + "owesMoney "
         + CliSyntax.PREFIX_MODULE + "CS2103 "
         + CliSyntax.PREFIX_MODULE + "CS2105\n";
-    public static final String MESSAGE_USAGE_MODULE = COMMAND_WORD
-        + ": To add a module to the UniBook, use the following format.\n"
-        + "Parameters: "
-        + CliSyntax.PREFIX_OPTION + "OPTION "
-        + CliSyntax.PREFIX_NAME + "NAME "
-        + CliSyntax.PREFIX_MODULE + "MODULE\n"
-        + "Example: " + COMMAND_WORD + " "
-        + CliSyntax.PREFIX_OPTION + "module "
-        + CliSyntax.PREFIX_NAME + "Computer Organisation "
-        + CliSyntax.PREFIX_MODULE + "CS2100\n";
     public static final String MESSAGE_USAGE_PROFESSOR = COMMAND_WORD
         + ": To add a professor to the UniBook, use the following format.\n"
         + "Parameters: "
-        + CliSyntax.PREFIX_OPTION + "OPTION "
+        + CliSyntax.PREFIX_OPTION + "professor "
         + CliSyntax.PREFIX_NAME + "NAME "
         + CliSyntax.PREFIX_PHONE + "PHONE "
         + CliSyntax.PREFIX_EMAIL + "EMAIL "
@@ -101,6 +121,18 @@ public class AddCommand extends Command {
         + CliSyntax.PREFIX_TAG + "dean "
         + CliSyntax.PREFIX_MODULE + "CS2103 "
         + CliSyntax.PREFIX_MODULE + "CS2105\n";
+    public static final String MESSAGE_MISSING_MODULES = "You cannot add a student to a group"
+        + "without the student being in any modules first.\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "student "
+        + CliSyntax.PREFIX_NAME + "John Doe "
+        + CliSyntax.PREFIX_PHONE + "98765432 "
+        + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
+        + CliSyntax.PREFIX_TAG + "friends "
+        + CliSyntax.PREFIX_TAG + "owesMoney "
+        + CliSyntax.PREFIX_MODULE + "CS2103 "
+        + CliSyntax.PREFIX_MODULE + "CS2105 "
+        + CliSyntax.PREFIX_GROUP + "CS2103 G16\n";
 
     public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook";
@@ -108,12 +140,22 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS_MODULE = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook";
 
+    public static final String MESSAGE_SUCCESS_GROUP = "New group added: %1$s";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the specified"
+        + "module in the UniBook";
+
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "One or more of the modules entered"
+        + " does not exist in the UniBook";
+    public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "One or more of the groups entered"
         + " does not exist in the UniBook";
 
     private Person personToAdd;
-    private Module moduleToAdd = new Module();
+    private Module moduleToAdd;
+    private Group groupToAdd;
+    private String groupName;
+    private ModuleCode moduleCode;
     private Set<ModuleCode> moduleCodeSet = new HashSet<>();
+    private ArrayList<LinkedHashSet<String>> groupNamesList;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -133,6 +175,16 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Creates an AddCommand to add the specified {@code Person} with {@code moduleCodes} into {@code groups}
+     */
+    public AddCommand(Person person, Set<ModuleCode> moduleCodes, ArrayList<LinkedHashSet<String>> groups) {
+        requireNonNull(person);
+        personToAdd = person;
+        moduleCodeSet = moduleCodes;
+        groupNamesList = groups;
+    }
+
+    /**
      * Creates an AddCommand to add the specified {@code Module}
      */
     public AddCommand(ModuleName moduleName, ModuleCode moduleCode) {
@@ -142,38 +194,76 @@ public class AddCommand extends Command {
         moduleToAdd = module;
     }
 
+    /**
+     * Creates an AddCommand to add a Group to UniBook with {@code groupName} to {@code moduleCode}
+     */
+    public AddCommand(String groupNameToAdd, ModuleCode moduleCodeOfGroup) {
+        requireNonNull(groupNameToAdd);
+        requireNonNull(moduleCodeOfGroup);
+        groupName = groupNameToAdd;
+        moduleCode = moduleCodeOfGroup;
+    }
+
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) throws CommandException {
+                             Boolean isModuleListShowing) throws CommandException {
         requireNonNull(model);
 
-        if (personToAdd.getName() == null) {
+        if (moduleToAdd != null) {
             if (model.hasModule(moduleToAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_MODULE);
             }
-
             model.addModule(moduleToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_MODULE, moduleToAdd));
-        } else {
-            /*
+        } else if (personToAdd != null) {
             if (model.hasPerson(personToAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             } else if (!model.isModuleExist(moduleCodeSet)) {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
-            } /* TODO need to change this, dont store module codes inside person,
-                 instead just go through their codes straight from the parsing,
-                 and add modules from there. I've removed module codes from person
-                 already
-             *//*
-            Set<ModuleCode> personModuleCodes = personToAdd.getModuleCodes();
+            }
             Set<Module> personModules = personToAdd.getModulesModifiable();
-            for (ModuleCode moduleCode : moduleCodeSet) {
-                Module toAdd = model.getModuleByCode(moduleCode);
-                personModules.add(toAdd);
+            if (groupNamesList != null) {
+                Set<Group> studentGroups = ((Student) personToAdd).getGroups();
+                Iterator<LinkedHashSet<String>> groupNamesListItr = groupNamesList.iterator();
+                for (ModuleCode moduleCode : moduleCodeSet) {
+                    Module moduleToAdd = model.getModuleByCode(moduleCode);
+                    personModules.add(moduleToAdd);
+                    LinkedHashSet<String> groupSet = groupNamesListItr.next();
+                    if (groupSet.isEmpty()) {
+                        continue;
+                    }
+                    for (String groupName : groupSet) {
+                        if (!moduleToAdd.hasGroupName(groupName)) {
+                            throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
+                        } else {
+                            Group currGroup = moduleToAdd.getGroupByName(groupName);
+                            studentGroups.add(currGroup);
+                        }
+                    }
+                }
+            } else {
+                for (ModuleCode moduleCode : moduleCodeSet) {
+                    Module moduleToAdd = model.getModuleByCode(moduleCode);
+                    personModules.add(moduleToAdd);
+                }
             }
             model.addPersonToTheirModules(personToAdd);
-            model.addPerson(personToAdd); */
+            if (personToAdd instanceof Student) {
+                model.addPersonToTheirGroups(personToAdd);
+            }
+            model.addPerson(personToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_PERSON, personToAdd));
+        } else {
+            if (!model.hasModule(moduleCode)) {
+                throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
+            }
+            Module moduleToAddGroupTo = model.getModuleByCode(moduleCode);
+            if (moduleToAddGroupTo.hasGroupName(groupName)) {
+                throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+            }
+            Group groupToAdd = new Group(groupName, moduleToAddGroupTo);
+            model.addGroup(groupToAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS_GROUP, groupToAdd));
         }
     }
 

@@ -3,6 +3,7 @@ package unibook.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,7 +14,10 @@ import unibook.commons.core.LogsCenter;
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
+import unibook.model.person.Student;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.ui.Ui;
 import unibook.ui.UiManager;
 
@@ -118,6 +122,24 @@ public class ModelManager implements Model {
         uniBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void addPersonToTheirModules(Person person) {
+        try {
+            uniBook.addPersonToAllTheirModules(person);
+        } catch (PersonNoSubtypeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addPersonToTheirGroups(Person person) {
+        try {
+            uniBook.addStudentToAllTheirGroups((Student) person);
+        } catch (PersonNoSubtypeException e) {
+            e.printStackTrace();
+        }
+    }
+
     //=========== Modules ================================================================================
     @Override
     public boolean hasModule(Module module) {
@@ -166,8 +188,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isModuleExist(Set<ModuleCode> moduleCodeSet) {
+        for (ModuleCode moduleCode : moduleCodeSet) {
+            if (!uniBook.hasModule(moduleCode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
     public Module getModuleByCode(ModuleCode moduleCode) {
         return uniBook.getModuleByCode(moduleCode);
+    }
+
+    //=========== Groups =====================================================================================
+    @Override
+    public void addGroup(Group group) {
+        uniBook.addGroupToModule(group);
     }
 
     //=========== Filtered Person List Accessors =============================================================
