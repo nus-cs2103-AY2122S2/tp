@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":CommentCommandParser" as CommentCommandParser LOGIC_COLOR
-participant "d:CommentCommand" as CommentCommand LOGIC_COLOR
+participant "c:CommentCommand" as CommentCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -33,16 +33,16 @@ create CommentCommand
 CommentCommandParser -> CommentCommand
 activate CommentCommand
 
-CommentCommand --> CommentCommandParser : d
+CommentCommand --> CommentCommandParser : c
 deactivate CommentCommand
 
-CommentCommandParser --> AddressBookParser : d
+CommentCommandParser --> AddressBookParser : c
 deactivate CommentCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 CommentCommandParser -[hidden]-> AddressBookParser
 destroy CommentCommandParser
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 
 LogicManager -> CommentCommand : execute()
