@@ -11,6 +11,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 public class ViewCommand extends Command {
 
@@ -33,6 +34,7 @@ public class ViewCommand extends Command {
     private static String successMessage = "Listed all persons!";
 
     private final Predicate<Person> predicate;
+    private final Predicate<Schedule> predicateSchedule;
     private final List<String> keywords;
 
     /**
@@ -40,9 +42,10 @@ public class ViewCommand extends Command {
      * @param predicate the view criteria.
      * @param keywords the keywords that define this type of view.
      */
-    public ViewCommand(Predicate<Person> predicate, List<String> keywords) {
-        requireNonNull(predicate);
+    public ViewCommand(Predicate<Person> predicate, Predicate<Schedule> predicateSchedule, List<String> keywords) {
+        //requireNonNull(predicate);
         this.predicate = predicate;
+        this.predicateSchedule = predicateSchedule;
         this.keywords = keywords;
     }
 
@@ -56,15 +59,23 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        if (predicate != null) {
+            model.updateFilteredPersonList(predicate);
+        }
+        if (predicateSchedule != null) {
+            model.updateFilteredScheduleList(predicateSchedule);
+        }
         changeSuccessMessage(model);
         return new CommandResult(successMessage);
     }
 
     private void changeSuccessMessage(Model model) {
-        if (keywords.size() > 1 || keywords.contains("L/")) {
+        if (keywords.size() > 1 && (keywords.contains("L/") || keywords.contains("P/"))) {
             successMessage = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
+        } else if (keywords.contains("S/")) {
+            successMessage = String.format(
+                    Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
         } else {
             successMessage = "Listed all persons!";
         }

@@ -77,6 +77,9 @@ public class DeleteCommand extends Command {
         this.targetIndex = null;
     }
 
+    /**
+     * Overloaded constructor for delete command.
+     */
     public DeleteCommand(Index targetIndex) {
         this.type = DeleteCommandType.SCHEDULE;
         this.player = null;
