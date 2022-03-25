@@ -14,7 +14,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Command undone:\n\"%1$s\"";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException{
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.isCommandHistoryEmpty() || model.getCommandHistory() == null) {
