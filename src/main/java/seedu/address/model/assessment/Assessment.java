@@ -34,13 +34,23 @@ public class Assessment implements Entity {
 
     /**
      * Every field must be present and not null.
+     * Used to initialize a new Assessment with no attempts.
      */
     public Assessment(AssessmentName assessmentName, TaModule module, Optional<SimpleName> simpleName) {
+        this(assessmentName, module, simpleName, FXCollections.observableHashMap());
+    }
+
+    /**
+     * Every field must be present and not null.
+     * Used to initialize an Assessment from storage file.
+     */
+    public Assessment(AssessmentName assessmentName, TaModule module, Optional<SimpleName> simpleName,
+                      Map<Student, Grade> attempts) {
         requireAllNonNull(assessmentName, module);
         this.assessmentName = assessmentName;
         this.simpleName = simpleName;
         this.module = module;
-        attempts = FXCollections.observableHashMap();
+        this.attempts = FXCollections.observableMap(attempts);
     }
 
     public AssessmentName getAssessmentName() {
