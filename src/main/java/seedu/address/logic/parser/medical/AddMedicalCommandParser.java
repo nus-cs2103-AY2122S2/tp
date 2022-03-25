@@ -54,7 +54,6 @@ public class AddMedicalCommandParser implements Parser<AddMedicalCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMedicalCommand parse(String args) throws ParseException {
-
         ArgumentMultimap argMultimap;
         argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_TYPE,
