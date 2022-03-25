@@ -20,14 +20,14 @@ School administrators _(like teachers)_ can use UDT to easily track COVID amongs
 
 - [Quick start](#quick-start)
 - [Features](#features)
-  - [Add a student](#adding-a-person-add): `add`
+  - [Add a student](#add-a-student-add): `add`
   - [List all students](#list-all-students-list): `list`
   - [Find student by name](#find-student-by-name-find): `find`
   - [Find student by status](#find-student-by-status-findstatus):  `findstatus`
   - [Find student by class](#find-student-by-class-findclasscode): `findclasscode`
   - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
-  - [Delete a student](#delete-student-delete): `delete`
+  - [Delete a student](#delete-a-student-delete): `delete`
   - [Exit the application](#exit-the-application-exit): `exit`
 - [Frequently Asked Questions](#faq)
 - [Command summary](#command-summary)
@@ -224,14 +224,14 @@ A: We are working on a feature to allow importing of **.csv** files into UDT!
 
 | Action   | Format   | Example |
 |-----|-----|-----|
-| [Add a student](#adding-a-person-add)  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS [act/ACTIVITIES]` | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
+| [Add a student](#add-a-student-add)  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS [act/ACTIVITIES]` | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
 | [List all students](#list-all-students-list) | `list`       | `list` |
 | [Find student by name](#find-student-by-name-find) | `find NAME [MORE_NAME]` | `find James Jake`      |
 | [Find student by status](#find-student-by-status-findstatus) | `findstatus STATUS` | `findstatus positive`      |
 | [Find student by class](#find-student-by-class-findclasscode) | `findclasscode CLASS` | `findclasscode 4A`       |
 | [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY` | `findactivity choir`   |
 | [Edit student details](#edit-student-details-edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`  |
-| [Delete a student](#delete-student-delete) | `delete INDEX` | `delete 3`                      |
+| [Delete a student](#delete-a-student-delete) | `delete INDEX` | `delete 3`                      |
 | [Exit the application](#exit-the-application-exit)          | `exit`                   | `exit` |
 
 ----------------
