@@ -21,7 +21,7 @@ public class TypicalInterviews {
     public static final LocalDateTime TYPICAL_INTERVIEW_DATE_TIME = LocalDateTime.of(2022, Month.DECEMBER, 23, 10, 00);
     public static final LocalDateTime THURSDAY_INTERVIEW_DATE_TIME = LocalDateTime.of(2080, Month.APRIL, 25, 10, 00);
     public static final LocalDateTime TUESDAY_INTERVIEW_DATE_TIME = LocalDateTime.of(2080, Month.APRIL, 23, 10, 00);
-    public static final LocalDateTime AFTER_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23,19, 00);
+    public static final LocalDateTime AFTER_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23,17, 31);
     public static final LocalDateTime BEFORE_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23,7, 00);
 
 
@@ -35,9 +35,6 @@ public class TypicalInterviews {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Interview INTERVIEW_AMY_TYPICAL = new InterviewBuilder().withCandidate(TypicalPersons.AMY)
             .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
-    public static final Interview INTERVIEW_NO_MATCHING_AVAILABILITY =
-            new InterviewBuilder().withCandidate(TypicalPersons.ALICE)
-            .withInterviewDateTime(THURSDAY_INTERVIEW_DATE_TIME).build();
     public static final Interview INTERVIEW_BOB_TYPICAL = new InterviewBuilder().withCandidate(TypicalPersons.BOB)
             .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
 
