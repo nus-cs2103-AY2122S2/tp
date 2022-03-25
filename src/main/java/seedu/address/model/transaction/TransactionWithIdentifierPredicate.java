@@ -9,10 +9,6 @@ public class TransactionWithIdentifierPredicate implements Predicate<Transaction
         this.identifier = identifier;
     }
 
-    public TransactionWithIdentifierPredicate setIdentifier(String identifier) {
-        return new TransactionWithIdentifierPredicate(identifier);
-    }
-
     @Override
     public boolean test(Transaction transaction) {
         return transaction.hasIdentifier(identifier);

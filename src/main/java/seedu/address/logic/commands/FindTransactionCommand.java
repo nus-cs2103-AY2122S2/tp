@@ -42,7 +42,7 @@ public class FindTransactionCommand extends Command {
         String personIdentifier = person.getEmail().getValue();
 
         TransactionWithIdentifierPredicate predicate = predicateProducer.apply(personIdentifier);
-        model.updateFilteredTransactionList(predicate);
+        model.updateFilteredTransactionList((t) -> false);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, model.getFilteredTransactionList().size()));

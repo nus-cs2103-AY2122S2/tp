@@ -21,6 +21,7 @@
             <Label fx:id="amount" styleClass="cell_small_label" text="\\$amount" />
             <Label fx:id="transactionDate" styleClass="cell_small_label" text="\\$transactionDate" />
             <Label fx:id="dueDate" styleClass="cell_small_label" text="\\$dueDate" />
+            <Label fx:id="identifier" styleClass="cell_small_label" text="\\$identifier" />
          <Label fx:id="note" text="\\$note" />
         </VBox>
       <rowConstraints>
