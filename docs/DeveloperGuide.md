@@ -153,16 +153,30 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+# **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add group feature
-explanation to be updated...
+## Add group feature
+The `addgroup` command mechanism is facilitated by the `AddGroupCommand` and the `AddGroupCommandParser`.
+It allows users to add a not already existing group to the ArchDuke student group list. 
+It uses the `AddressBook#addGroup(Group group)` which is exposed in the `Model` 
+interface as `Model#addGroup(Group group)`. Then, the `add(Group groupToAdd)` is called on the `UniqueGroupList`
+in `AddressBook` to add the group to the `UniqueGroupList`.
+
+The following sequence diagram shows how the `addgroup` mechanism works:
+
 ![](images/AddGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `addgroup` command:
+
 ![](images/AddGroupCommandActivityDiagram.png)
 
-### Delete group feature
+## Delete group feature
 to be updated...
 
 ### Add task feature to an existing group feature
