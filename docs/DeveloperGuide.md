@@ -159,7 +159,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Modules Feature
+#### Implementation
 
+The add modules mechanism is facilitated by `AddModuleCommand`. Its functionality is implemented in the `AddModuleCommand.java` class which follows the `Command` interface. It extends `Command` with a list of modules `List<Module>` that is to be added to an existing person, as well as the index of the person to add the modules to, stored internally as `modulesToAdd` and `targetIndex` respectively.
+
+Additionally, it implements the following operations: 
+* `Command#execute(Model model)` - Returns the feedback message containing information about module(s) added to a target person, for eventual displays in the GUI.
+* `createEditedPerson(Person personToEdit, List<Module> modulesToAdd)` - Creates and returns a Person with `modulesToAdd` added to the existing details of `personToEdit`.
+* `hasModulesInCommon(Person personToEdit, List<Module> proposedModules)` - Returns true if `personToEdit` contains any modules in `proposedModules`.
+* `getNewModules(Person personToEdit, List<Module> proposedModules)` - Returns List of non-duplicated modules, which may be empty if no unique modules exist.
+* `getCommandResult(...)` - Returns a `CommandResult` with the appropriate feedback depending on if any new modules are added.
+
+Below is a sequence diagram showing the overview of how add modules works:
+
+[TODD: AddModuleSequenceDiagram]
+
+Each `Person` has a `Set<Module>` that represents the Collection of `Modules` associated with that `Person`.
+Hence, we utilize the behaviour of the `Set` data structure to both store and add modules to a person, automatically adding any new unique Modules while ignoring Modules that already exist, without requiring any further duplicate-checking on our part.
+
+While this underlying implementation works, we need to capture exactly what new modules were added on top of existing modules, so that we can display a meaningful feedback to our user.
+This can be achieved using the `hasNewModules()` and `getNewModules()` internal helper functions.
+
+`getCommandResult()` of `execute()` utilizes these helper functions to create a `CommandResult` object containing varied feedback messages depending on the following possibilities:
+1. Case 1: Modules from user input contain only new modules
+   * Shows new modules added
+2. Case 2: Modules from user input contain only new modules
+   * Shows new modules added, with warning that some modules already exist
+3. Case 3: Modules from user input contain no new modules
+   * Shows warning that modules already exist, no new modules added, along with list of existing modules (to show the user that despite the "error", no further actions associated with typical failed commands need to be taken)
+   
 ### Sort feature
 #### Implementation
 
@@ -193,6 +222,39 @@ Has to pass all `PersonComparator` that were chosen into `Model` one after anoth
 Each field implements a `Comparable` interface.
 - Pros: Easier to implement.
 - Cons: Less flexible. Passes only one `PersonComparator` which stores the fields within itself. Each comparison stops once field is not equivalent, therefore is more efficient.
+
+### Comment feature
+#### Implementation
+
+The comment mechanism is facilitated by `CommentCommand`. It adds a field of type `Comment` to a `Person` object. 
+The `CommentCommand.java` class extends `Command` with the index of the person to add the module to and also a 
+`Comment` object which holds the comment that will be given to the person. Additionally, it implements the following 
+operations:
+* `Command#execute(Model model)` - Returns a message that informs users on the comment that was added to the 
+  specific person. 
+* `generateSuccessMessage(Person personToEdit)` - Creates and returns the message that informs users if a new comment 
+  was added or deleted from `personToEdit`.
+
+Below is a sequence diagram showing how comment operation works:
+
+![CommentSequenceDiagram](images/CommentSequenceDiagram.png)
+
+### Design Considerations
+#### Aspect: How to remove a comment 
+####1. Alternative 1 (Current choice)
+Similar to how `Status` was implemented, upon user input of an empty comment (i.e `comment 1`), the comment of the 
+person at the particular index, in this case the first person, will be removed 
+- Pros: Can contain all logic related to adding and removing a `comment` all in the `CommentCommand` and 
+  `CommentCommandParser` classes. 
+- Cons: Not consistent with how the other fields like `Module` and `Person` are removed. These fields are removed 
+  via an additional command that specifically handles their deletion (i.e. `deletemodule` and `delete`).
+
+####2. Alternative 2 
+Implement a separate command to handle the removal of `comment`.
+- Pros: An empty comment command (`comment 1`) will now show an error message, which is more intuitive.
+- Cons: Results in excessive code duplication, as `delete` and `deletemodule` are implemented in a very similar way 
+  to how a proposed `deletecomment` command will be implemented.
+
 
 ### GUI for Adding, Editing
 

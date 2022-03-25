@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddModuleCommandParser" as AddModuleCommandParser LOGIC_COLOR
+participant "a:AddModuleCommand" as AddModuleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute("AddModule 1 m/CS2103T")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("AddModule 1 m/CS2103T")
+activate AddressBookParser
+
+create AddModuleCommandParser
+AddressBookParser -> AddModuleCommandParser
+activate AddModuleCommandParser
+
+AddModuleCommandParser --> AddressBookParser
+deactivate AddModuleCommandParser
+
+AddressBookParser -> AddModuleCommandParser : parse("1 m/CS2103T")
+activate AddModuleCommandParser
+
+create AddModuleCommand
+AddModuleCommandParser -> AddModuleCommand : AddModuleCommand(1, List<Module>(CS2103T))
+activate AddModuleCommand
+
+AddModuleCommand -> AddModuleCommand : createEditedPerson(personToEdit, modulesToAdd)
+activate AddModuleCommand
+
+AddModuleCommand -> AddModuleCommand : getCommandResult(personToEdit, editedPerson, modulesToAddActual)
+activate AddModuleCommand
+
+AddModuleCommand -> AddModuleCommand : hasModulesInCommon(Person personToEdit, List<Module> proposedModules)
+activate AddModuleCommand
+
+alt has modules in common
+    AddModuleCommand -> AddModuleCommand : getNewModules(Person personToEdit, List<Module> proposedModules)
+    activate AddModuleCommand
+    deactivate AddModuleCommand
+end
+
+create CommandResult
+AddModuleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddModuleCommand
+deactivate CommandResult
+
+AddModuleCommand --> AddModuleCommandParser:
+deactivate AddModuleCommand
+
+AddModuleCommandParser --> AddressBookParser:
+deactivate AddModuleCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+destroy AddModuleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
