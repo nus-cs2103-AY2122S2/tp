@@ -52,6 +52,13 @@ public class LabMark {
     }
 
     /**
+     * Returns true if the marks have not been initialized.
+     */
+    public boolean isEmpty() {
+        return this.marks.equals(Optional.empty());
+    }
+
+    /**
      * Returns a String of the numerical value of {@code marks} if
      * it is not empty, otherwise returns a placeholder String.
      */

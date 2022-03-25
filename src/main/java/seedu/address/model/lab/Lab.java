@@ -87,8 +87,8 @@ public class Lab {
     }
 
     /**
-     * Returns a new immutable lab with the same lab number as {@code this} and the given lab status.
-     * The {@code LabMark} of the returned Lab is initialized based on the given LabStatus.
+     * Returns a new immutable Lab with the same lab number as {@code this} and the given lab status.
+     * The {@code LabMark} of the returned Lab is left uninitialized.
      *
      * @throws DuplicateLabException If the given {@code LabStatus} is equal to the existing {@code LabStatus}.
      * @throws InvalidLabStatusException If the given {@code LabStatus} is equal to LabStatus.GRADED.
@@ -100,6 +100,21 @@ public class Lab {
             throw new InvalidLabStatusException();
         }
         return new Lab(String.valueOf(labNumber), status);
+    }
+
+    /**
+     * Returns a new immutable Lab with the same lab number as {@code this}, a status of "GRADED" and the given marks.
+     *
+     * @throws DuplicateLabException If the given {@code LabMark} is equal to the existing {@code LabMark}.
+     * @throws InvalidLabStatusException If the existing LabStatus is not equal to LabStatus.GRADED.
+     */
+    public Lab editLabMark(LabMark mark) throws DuplicateLabException, InvalidLabStatusException {
+        if (!labStatus.equals(LabStatus.GRADED)) {
+            throw new InvalidLabStatusException();
+        } else if (mark.equals(labMark)) {
+            throw new DuplicateLabException();
+        }
+        return new Lab(String.valueOf(labNumber), mark);
     }
 
     /**

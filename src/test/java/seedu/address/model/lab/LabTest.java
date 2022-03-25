@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.student.exceptions.DuplicateLabException;
+import seedu.address.model.student.exceptions.InvalidLabStatusException;
 
 public class LabTest {
 
@@ -63,15 +64,13 @@ public class LabTest {
     }
 
     @Test
-    public void editLabStatus_sameStatusGraded_throwDuplicateLabException() {
+    public void editLabStatus_statusGraded_throwInvalidLabStatusException() {
         Lab stub = new Lab("1");
-        stub = stub.editLabStatus(LabStatus.GRADED);
-        Lab finalStub = stub;
-        assertThrows(DuplicateLabException.class, () -> finalStub.editLabStatus(LabStatus.GRADED));
+        assertThrows(InvalidLabStatusException.class, () -> stub.editLabStatus(LabStatus.GRADED));
     }
 
     @Test
-    public void editLabStatus_changeStatusToSubmitted_success() {
+    public void editLabStatus_changeStatusFromUnsubmittedToSubmitted_success() {
         Lab stub = new Lab("1");
         stub = stub.editLabStatus(LabStatus.SUBMITTED);
 
@@ -80,12 +79,50 @@ public class LabTest {
     }
 
     @Test
-    public void editLabStatus_changeStatusToGraded_success() {
-        Lab stub = new Lab("1");
-        stub = stub.editLabStatus(LabStatus.GRADED);
+    public void editLabStatus_changeStatusFromGradedToSubmitted_success() {
+        Lab stub = new Lab("1").of(new LabMark("10")); // graded Lab
+        stub = stub.editLabStatus(LabStatus.SUBMITTED);
 
-        assertEquals(new Lab("1").of(LabStatus.GRADED.name()), stub);
-        assertNotEquals(new Lab("1"), stub);
+        assertEquals(new Lab("1").of(LabStatus.SUBMITTED.name()), stub);
+        assertNotEquals(new Lab("1").of(new LabMark("10")), stub);
+    }
+
+    @Test
+    public void editLabMark_statusNotGraded_throwsInvalidLabStatusException() {
+        Lab stub = new Lab("1");
+        assertThrows(InvalidLabStatusException.class, () -> stub.editLabMark(new LabMark("10")));
+    }
+
+    @Test
+    public void editLabMark_sameMarksProvided_throwsDuplicateLabException() {
+        Lab stub = new Lab("1");
+        Lab gradedStub = stub.of(new LabMark("10"));
+        assertThrows(DuplicateLabException.class, () -> gradedStub.editLabMark(new LabMark("10")));
+    }
+
+    @Test
+    public void editLabMark_differentMarksProvided_success() {
+        Lab stub = new Lab("1");
+        Lab gradedStub = stub.of(new LabMark("10"));
+        stub = gradedStub.editLabMark(new LabMark("20"));
+
+        assertEquals(new Lab("1").of(new LabMark("20")), stub);
+        assertNotEquals(gradedStub, stub);
+    }
+
+    @Test
+    public void of_statusSubmitted_success() {
+        Lab stub = new Lab("1");
+        Lab submittedStub = stub.of(LabStatus.SUBMITTED);
+
+        assertNotEquals(stub, submittedStub);
+        assertEquals(submittedStub, new Lab("1").of("SUBMITTED"));
+    }
+
+    @Test
+    public void of_statusGraded_throwsInvalidLabStatusException() {
+        Lab stub = new Lab("1");
+        assertThrows(InvalidLabStatusException.class, () -> stub.of(LabStatus.GRADED));
     }
 
     @Test
@@ -111,24 +148,31 @@ public class LabTest {
     }
 
     @Test
-    public void equals_success() {
+    public void equals_sameLab_success() {
         Lab lab1 = (new Lab("1")).of("SUBMITTED");
-        Lab lab1copy = (new Lab("1")).of("SUBMITTED");
-        assertTrue(lab1.equals(lab1copy));
+        Lab lab2 = (new Lab("1")).of("SUBMITTED");
+        assertNotEquals(lab1, lab2);
     }
 
     @Test
     public void equals_differentLabNumber_failure() {
         Lab lab1 = (new Lab("1")).of("SUBMITTED");
         Lab lab2 = (new Lab("2")).of("SUBMITTED");
-        assertFalse(lab1.equals(lab2));
+        assertNotEquals(lab1, lab2);
     }
 
     @Test
     public void equals_differentLabStatus_failure() {
         Lab lab1 = (new Lab("1")).of("SUBMITTED");
-        Lab lab1copy = (new Lab("1")).of("UNSUBMITTED");
-        assertFalse(lab1.equals(lab1copy));
+        Lab lab2 = (new Lab("1")).of("UNSUBMITTED");
+        assertNotEquals(lab1, lab2);
+    }
+
+    @Test
+    public void equals_differentLabMark_failure() {
+        Lab lab1 = (new Lab("1")).of(new LabMark("10"));
+        Lab lab2 = (new Lab("1")).of(new LabMark("20"));
+        assertNotEquals(lab1, lab2);
     }
 
 }
