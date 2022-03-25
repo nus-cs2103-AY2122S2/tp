@@ -107,7 +107,7 @@ Format: `help`
 
 ### Onboarding guide
 
-#### Prompt on first run
+Prompt on first run
 
 When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions. You will be taken to the onboarding guide window if you select yes. If you choose no, the prompt will just close.
 
@@ -118,7 +118,7 @@ When going through the onboarding guide, instructions such as the one shown belo
 
 ![](images/OnboardingInstruction.jpg)
 
-#### Basic features covered
+Basic features covered
 The onboarding guide will cover the following:
 - Add person
 - List person
