@@ -57,6 +57,27 @@ public class Interview {
     }
 
     /**
+     * Returns true if the candidate is available on the propsoed interview day
+     */
+    public boolean hasMatchingAvailability() {
+        String candidateAvailabilities = this.candidate.getAvailability().toString();
+        String interviewDayString = Integer.toString(this.interviewDay);
+        return candidateAvailabilities.contains(interviewDayString);
+    }
+
+    /**
+     * Returns true if the candidate is available on the proposed interview day
+     */
+    public boolean isDuringOfficeHour() {
+        int interviewHour = this.interviewDateTime.getHour();
+        if (interviewHour < 8 || interviewHour > 18) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Returns true if the given date and time is not in the past.
      */
     public static boolean isValidDateTime(LocalDateTime localDateTime) {

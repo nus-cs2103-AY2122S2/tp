@@ -45,6 +45,10 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_CANDIDATE_NOT_AVAILABLE =
             "Candidate is not available on the proposed interview day!";
 
+    public static final String MESSAGE_NOT_OFFICE_HOUR =
+            "You are trying to schedule the interview outside of your office hours!\n"
+            + "Your office hours are Mon-Fri, 8am - 6pm.";
+
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;
 
@@ -71,8 +75,7 @@ public class ScheduleCommand extends Command {
 
         Candidate candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
-        String candidateAvailabilities = candidateToInterview.getAvailability().toString();
-        String interviewDay = Integer.toString(toAdd.getInterviewDay());
+
 
         if (model.hasInterviewCandidate(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
@@ -82,8 +85,12 @@ public class ScheduleCommand extends Command {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
 
-        if (!candidateAvailabilities.contains(interviewDay)) {
+        if (!toAdd.hasMatchingAvailability()) {
             throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
+        }
+
+        if (!toAdd.isDuringOfficeHour()) {
+            throw new CommandException(MESSAGE_NOT_OFFICE_HOUR);
         }
 
         model.addInterview(toAdd);
