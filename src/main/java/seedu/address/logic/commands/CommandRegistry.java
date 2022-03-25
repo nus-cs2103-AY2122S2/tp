@@ -4,7 +4,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import seedu.address.logic.parser.*;
+import seedu.address.logic.parser.AddCommandParser;
+import seedu.address.logic.parser.AddMembershipParser;
+import seedu.address.logic.parser.AddTransactionParser;
+import seedu.address.logic.parser.AppendCommandParser;
+import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.DeleteTransactionCommandParser;
+import seedu.address.logic.parser.EditCommandParser;
+import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.logic.parser.FindTransactionCommandParser;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.RemarkCommandParser;
+import seedu.address.logic.parser.RemoveCommandParser;
+import seedu.address.logic.parser.SortCommandParser;
 
 public class CommandRegistry {
     public static final Map<String, Parser<? extends Command>> PARSERS;
