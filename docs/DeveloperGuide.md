@@ -121,8 +121,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the TAddressBook data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -131,6 +131,14 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
+
+#### Lab Component
+
+The `Lab` Component is a subcomponent of the `Model` component.
+
+* stores all Lab related data.
+* stores all `Lab` objects related to a `Student` object in `LabList`. (each `Student` object has its own copy of a `LabList`).
+* the `MasterLabList` stores all the labs added into the system thus far to act as a control list (there should only be 1 `MasterLabList` in the system at any one time).
 
 
 ### Storage component
@@ -238,6 +246,20 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Filter Feature
+
+#### Proposed Implementation
+
+The Filter feature is implemented by updating the `listOfStudents` using `StudentHasLabPredicate` which extends
+`Predicate`. `StudentHasLabPredicate` contains the attribute `Lab` and overrides the `Predicate#test()` method to
+determine if a `Student` has a specific `Lab` in its `LabList`.
+
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user executes `filter l/1 s/s` command.
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,129 +296,147 @@ has graded and what grade was given for every lab.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                          | So that I can…​                                                                                             |
-|----------|---------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| `* * *`  | TA      | add a student to my class list                        | begin keeping track of their lab assignments                                                                |
-| `* * *`  | TA      | edit a student's information                          | fix any errors I made during the initial adding phase or add information that was not provided to me before |
-| `* * *`  | TA      | delete a student from my class list                   | my list will be reflective of who is currently in my class                                                  |
-| `* * *`  | TA      | list all students                                     | have an overview of all the students in my class                                                            |
-| `* * *`  | TA      | locate students by name                               | easily find students whose names contain certain keywords                                                   |
-| `* * *`  | TA      | filter students based on the status of their lab tags | quickly filter out the students that possess the same tags                                                  |
-| `* * *`  | TA      | add a new lab assignment to the assignment list       | keep track of which lab assignments have been released to students                                          |
-| `* * *`  | TA      | update status of a lab tag                            | keep track of which labs I have graded, and which lab grades I have submitted to the system                 |
+| Priority | As a …​ | I want to …​                                                     | So that I can…​                                                                                             |
+|----------|---------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `* * *`  | TA      | add a student to my class list                                   | begin keeping track of their lab assignments                                                                |
+| `* * *`  | TA      | edit a student's information                                     | fix any errors I made during the initial adding phase or add information that was not provided to me before |
+| `* * *`  | TA      | delete a student from my class list                              | my list will be reflective of who is currently in my class                                                  |
+| `* * *`  | TA      | list all students                                                | have an overview of all the students in my class                                                            |
+| `* * *`  | TA      | locate students by name                                          | easily find students whose names contain certain keywords                                                   |
+| `* * *`  | TA      | filter students based on the status of their labs                | quickly filter out the students that possess the same tags                                                  |
+| `* * *`  | TA      | add a new lab assignment to the assignment list                  | keep track of which lab assignments have been released to students                                          |
+| `* * *`  | TA      | update status of a lab when a student has submitted it           | keep track of which labs students have submitted                                                            |
+| `* * *`  | TA      | update status of a lab and add marks to it when I have graded it | keep track of what labs I have graded and how I have graded them                                            |
+| `* * *`  | TA      | edit status and marks of a lab                                   | edit lab statuses and marks I changed or entered by mistake                                                 |
+| `* *`    | TA      | add students without filling in all attributes                   | keep track of students even if I do not know all their details                                              |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TAddressBook` and the **Actor** is the `Teaching Assistant (TA)`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAddressBook (TAB)` and the **Actor** is the `Teaching Assistant (TA)`, unless otherwise specified)
 
-**Use case: Add Labs**
+**Use case UC1: Add a new lab to the list of labs**
 
 **MSS**
-1. TA request to add new lab
-2. TAB adds a new lab to every student
-3. TAB shows updated list of labs
-4. TAB displays success message
+1. TA requests to add new lab.
+2. TAB adds a new lab to every student.
+3. TAB shows updated list of labs.
+4. TAB displays success message.
 
    Use case ends.
 
 **Extensions**
-* 2a. TAB detects that the student list is empty
-    * 2a1. TAB displays warning message to user (that there are no students yet)
+* 2a. TAB detects that the student list is empty.
+    * 2a1. TAB displays warning message to user (that there are no students yet).
 
-      Use case ends
+      Use case ends.
 * 2b. TAB detects that an identical lab already exists.
-    * 2b1. TAB displays error message (that lab already exists)
+    * 2b1. TAB displays error message (that lab already exists).
 
-      Use case ends
+      Use case ends.
 
-**Use case: Filter Students**
+**Use case UC2: Filter students by status of a specified lab**
 
 **MSS**
 
-1.  TA requests to filter students by a specific lab
-2.  TAB displays list of students based on filter criteria
+1.  TA requests to filter students by a specific lab and lab status.
+2.  TAB displays list of students based on filter criteria.
 
-    Use case ends
+    Use case ends.
 
 **Extensions**
 
-* 1a. TA provides non-existent lab
-
-    * 1a1. TAB shows error message
-    * 1a2. TAB requests for valid lab
-
-      Use case resumes from step 1
-
-* 1b. TA tries to filter an empty list
-
-    * 1b1. TAB shows error message
+* 1a. TA provides non-existent lab.
+    * 1a1. TAB shows error message.
 
       Use case ends
 
-**Use case: Mark Student Lab as Graded**
+* 1b. TA tries to filter an empty list.
+    * 1b1. TAB shows error message.
+
+      Use case ends.
+
+**Use case UC3: Mark student's lab as submitted**
 
 **MSS**
-1. TA requests to change a student’s lab status to “Graded”
-2. TAB changes the student’s lab status from “Submitted” to “Graded”
-3. TAB shows updated lab status
-4. TAB displays success message
+1. TA requests to change a student’s lab status to "Submitted".
+2. TAB changes the student’s lab status from "Unsubmitted" to "Submitted".
+3. TAB displays updated lab status and success message.
 
    Use case ends.
 
 **Extensions**
 
-- 1a. TA provides invalid student index
-    - 1a1. TAB shows error message that student index is invalid
-    - 1a2. TAB requests for valid student index
+* 1a. TA provides invalid student index.
+    * 1a1. TAB shows error message that student index is invalid.
 
-  Use case resumes from step 1
-- 1b. TA provides lab that is already "Graded"
-    - 1b1. TAB shows error message stating that lab is already "Graded"
-    - 1b2. TAB requests for valid lab
+      Use case ends.
+* 1b. TA provides non-existent lab.
+    * 1b1. TAB shows error message stating that the lab does not exist.
 
-  Use case resumes from step 1
-- 1c. TA provides lab that has not been "Submitted"
-    - 1c1. TAB shows error message that lab status has to be “Submitted” first
-    - 1c2. TAB requests for valid lab
+      Use case ends.
+* 1c. TA provides lab that is already "Submitted" or "Graded".
+    * 1c1. TAB shows error message stating that lab must be "Unsubmitted".
 
-  Use case resumes from step 1
-- 1d. TA provides lab that does not exist
-    - 1d1. TAB shows error message stating that lab does not exist
-    - 1d2. TAB requests for valid lab
+      Use case ends.
 
-  Use case resumes from step 1
-
-**Use case: Mark Student Lab as Submitted**
+**Use case UC4: Mark student's lab as graded**
 
 **MSS**
-
-1. TA requests to change a student’s lab status to “Submitted”
-2. TAB changes the student’s lab status from “Unsubmitted” to “Submitted”
-3. TAB shows updated lab status
-4. TAB displays success message
+1. TA requests to change a student’s lab status to "Graded" and specifies a grade.
+2. TAB changes the student’s lab status from either "Unsubmitted" or "Submitted" to "Graded".
+3. TAB adds the specified grade to the student's lab.
+4. TAB displays updated lab status, grade and success message.
 
    Use case ends.
 
 **Extensions**
 
-- 1a. TA provides invalid student index
-    - 1a1. TAB shows error message that student index is invalid
-    - 1a2. TAB requests for valid student index
+* 1a. TA provides invalid student index.
+    * 1a1. TAB shows error message that student index is invalid.
 
-  Use case resumes from step 1.
-- 1b. TA provides lab that is already "Submitted"
-    - 1b1. TAB shows error message stating that the lab for the particular student has already been "Submitted"
-    - 1b2. TAB requests for valid lab and student
+      Use case ends.
+* 1b. TA provides non-existent lab.
+    * 1b1. TAB shows error message stating that the lab does not exist.
 
-  Use case resumes from step 1
+      Use case ends.
+* 1c. TA provides lab that is already "Graded".
+    * 1c1. TAB shows error message stating that lab is already "Graded".
 
-- 1c. TA provides lab that does not exist
-    - 1c1. TAB shows error message stating that lab does not exist
-    - 1c2. TAB requests for valid lab
+      Use case ends.
+* 1d. TA provides an invalid grade (e.g. a negative number).
+    * 1d1. TAB shows error message stating that grade provided is invalid.
 
-  Use case resumes from step 1
+      Use case ends.
+
+**Use case UC5: Edit a student's lab**
+
+**MSS**
+1. TA requests to edit a specified student lab's status and/or grade.
+2. TAB edits the specified student lab's status and/or grade.
+3. TAB displays updated lab status, grade and success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TA provides invalid student index.
+    * 1a1. TAB shows error message that student index is invalid.
+
+      Use case ends.
+* 1b. TA provides non-existent lab.
+    * 1b1. TAB shows error message stating that the lab does not exist.
+
+      Use case ends.
+* 1c. TA provides invalid status and grade combination e.g. providing a grade when the updated status is "Unsubmitted".
+    * 1c1. TAB shows error message stating that the given combination is invalid.
+
+      Use case ends.
+* 1d. TA provides an invalid grade (e.g. a negative number).
+    * 1d1. TAB shows error message stating that grade provided is invalid.
+
+      Use case ends.
 
 *{More to be added}*
 
@@ -413,10 +453,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Unsubmiited**: Status to indicate that the student has not submitted the lab assignment or it is overdue.
-* **Submitted**: Status to indicate that the student has submitted the lab assignment to his github repository.
-* **Graded**: Status to indicate that the User (TA) has graded the student's lab assignment.
 * **Lab**: Refers to Lab assignments from the module CS2030S offered by The National University of Singapore.
+* **Lab Status**: Refers to possible statuses of Lab assignments.
+  * **UNSUBMITTED**: Status to indicate that the student has not submitted the Lab assignment.
+  * **SUBMITTED**: Status to indicate that the student has submitted the Lab assignment to his GitHub repository.
+  * **GRADED**: Status to indicate that the User (TA) has graded the student's Lab assignment.
 
 --------------------------------------------------------------------------------------------------------------------
 
