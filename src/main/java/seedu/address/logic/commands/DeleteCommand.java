@@ -44,6 +44,7 @@ public class DeleteCommand extends Command {
 
         Candidate candidateToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(candidateToDelete);
+        model.deleteInterview(candidateToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete));
     }
 

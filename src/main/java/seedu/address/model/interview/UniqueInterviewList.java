@@ -70,13 +70,15 @@ public class UniqueInterviewList implements Iterable<Interview> {
         internalList.set(index, editedInterview);
     }
 
-    // Remove function not implemented yet, code commented out to reduce test coverage.
-    /* public void remove(Interview toRemove) {
+    /**
+     * Remove an interview from the list.
+     */
+    public void remove(Interview toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new InterviewNotFoundException();
         }
-    } */
+    }
 
     public void setInterviews(UniqueInterviewList replacement) {
         requireNonNull(replacement);

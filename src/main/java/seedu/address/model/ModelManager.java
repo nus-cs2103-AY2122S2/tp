@@ -154,10 +154,16 @@ public class ModelManager implements Model {
         return interviewSchedule.hasConflictingInterview(interview);
     }
 
-    /*@Override
-    public void deleteInterview(Interview target) {
-        interviewSchedule.removeInterview(target);
-    }*/
+    @Override
+    public void deleteInterview(Candidate target) {
+        requireNonNull(target);
+        for (Interview interview: interviewSchedule.getInterviewList()) {
+            if (interview.getCandidate().equals(target)) {
+                interviewSchedule.removeInterview(interview);
+                break;
+            }
+        }
+    }
 
     @Override
     public void addInterview(Interview interview) {

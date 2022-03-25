@@ -104,7 +104,7 @@ public interface Model {
 
     boolean hasConflictingInterview(Interview interview);
 
-    //void deleteInterview(Interview target);
+    void deleteInterview(Candidate target);
 
     void addInterview(Interview interview);
 
