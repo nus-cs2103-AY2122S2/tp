@@ -282,7 +282,68 @@ The following Sequence Diagrams summarizes the various steps involved:
 
 ![AddBuyerSequenceDiagram](images/AddBuyerSequenceDiagram.png)
 
-For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
+
+### 2. `editbuyer` / `For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
+editseller` feature
+The `editbuyer` / `editseller` command mechanism uses a similar interactions as shown in the [Logic Component](). Mainly, it can be broken down into these steps:
+####Syntax:
+```editbuyer [index] n/... p/... t/... prop/ h/... l/... pr/...```
+
+```editseller [index] n/... p/... t/... prop/ h/... l/... pr/...```
+
+Note: All the prefix (like n/, p/, ...) are <b>optional</b>, you could omit any of them but at least one prefix should be provided, and the <b>order</b> of prefix does not matter.
+
+Below are some detailed steps while executing `editbuyer` / `editseller` command: 
+
+**We use ```editbuyer``` command as an example, the other command's flow are similar to this command as well.**
+
+---
+
+**Step 1:**
+
+The user types input E.g. `editbuyer 1 n/Chua` into the `CommandBox`
+
+**Step 2:**
+
+Once the user hit Enter,  the  `LogicManager` calls `execute` that takes in everything user typed. 
+Then, `AddressBookParser` will investigate the user's input. It will takes the first keyword: `editbuyer` and 
+call the corresponding `EditBuyerCommandParser::parse` by providing the **arguments** (anything after than first word) from user input
+
+**Step 3:**
+
+`EditBuyerCommandParser` parse the argument provided and check the validity of the arguments. If any argument provided 
+is not valid, an error will be shown the command won't be executed.
+
+In our example, `1 n/Chua` was provided, the index and at least one require prefix are given, so it is a valid argument.
+
+**Step 4:**
+
+Now the `AddressBookParser` returns `EditBuyerCommand` as ``CommandResult``, the `LogicManager` then calls 
+`CommandResult::execute`.
+
+**Step 5:**
+
+Now the `EditBuyerCommand` will execute and do the work, that is updating the corresponding information from the given
+index. A `CommandResult` containing the successful execution result is returned.
+
+**Note:** The validity of the index will be check at this time, if the index is out of bound, the error will be shown 
+and the edit command will not be executed.
+
+**Step 6:**
+
+`LogicManager` component will then update the storage with the edited `Model` through the 
+`Storage#saveBuyerAddressBook()` method.
+
+**Step 7:**
+
+Finally, the `CommandResult` is returned to be displayed by `UI` component (Refer to [Architecture](#architecture))
+
+The Sequence Diagrams below summarizes the various steps involved:
+
+
+![EditBuyerCommandDiagram](diagrams/EditBuyerCommandDiagram.png)
+
+---
 
 ### Add property for buyer feature
 The `add-ptb` command uses a similar mechanism as the `addbuyer` command mentioned [above](#add-buyer-feature), with the following differences:
@@ -343,8 +404,6 @@ It alters the internal list completely, so that the app 'saves' users last sorti
 **Cons:**
 Some people might not want the sorted result to be saved. 
 Currently we are exploring other options to sort the list besides modifying the structure of internal list directly.
-
-
 
 ### \[Proposed\] Undo/redo feature
 
