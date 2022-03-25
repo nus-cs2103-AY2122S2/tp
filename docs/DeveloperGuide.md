@@ -341,10 +341,10 @@ instantiated each time a `Show` object is created.
 ### Import and Export feature
 
 ### What it does
-`import` and `export` allows the user to quickly import/ export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
+`import` and `export` allows the user to quickly import/export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
 
 ### Implementation
-When the import/ export command is executed, a `JsonFileManager` is created with the default filename. The `JsonFileManager` handles the creation of the File Explorer GUI along with the logic behind import/ export. The `importFile` and `exportFile` methods return an integer used to represent the status of the process.
+When the import/export command is executed, a `JsonFileManager` is created with the default filename. The `JsonFileManager` handles the creation of the File Explorer GUI along with the logic behind import/export. The `importFile` and `exportFile` methods return an integer used to represent the status of the process.
 
 For `import`: After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
 

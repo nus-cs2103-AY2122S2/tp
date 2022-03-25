@@ -8,7 +8,7 @@ import java.nio.file.StandardCopyOption;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileFilter;s
+import javax.swing.filechooser.FileFilter;
 
 public class JsonFileManager {
 
