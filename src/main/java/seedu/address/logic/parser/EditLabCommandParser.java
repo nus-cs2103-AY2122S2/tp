@@ -45,20 +45,16 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
 
         int labNumber = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get()).labNumber;
 
-        try {
-            if (ArgumentTokenizer.arePrefixesPresent(argMultimap, PREFIX_LABSTATUS, PREFIX_LABMARK)) {
-                LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
-                LabMark labMark = ParserUtil.parseLabMark(argMultimap.getValue(PREFIX_LABMARK).get());
-                return new EditLabCommand(index, labNumber, labStatus, labMark);
-            } else if (ArgumentTokenizer.isPrefixPresent(argMultimap, PREFIX_LABSTATUS)) {
-                LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
-                return new EditLabCommand(index, labNumber, labStatus);
-            } else {
-                LabMark labMark = ParserUtil.parseLabMark(argMultimap.getValue(PREFIX_LABMARK).get());
-                return new EditLabCommand(index, labNumber, labMark);
-            }
-        } catch (IllegalArgumentException e) { // Not a valid EditLabCommand
-            throw new ParseException(e.getMessage(), e);
+        if (ArgumentTokenizer.arePrefixesPresent(argMultimap, PREFIX_LABSTATUS, PREFIX_LABMARK)) {
+            LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
+            LabMark labMark = ParserUtil.parseLabMark(argMultimap.getValue(PREFIX_LABMARK).get());
+            return new EditLabCommand(index, labNumber, labStatus, labMark);
+        } else if (ArgumentTokenizer.isPrefixPresent(argMultimap, PREFIX_LABSTATUS)) {
+            LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
+            return new EditLabCommand(index, labNumber, labStatus);
+        } else {
+            LabMark labMark = ParserUtil.parseLabMark(argMultimap.getValue(PREFIX_LABMARK).get());
+            return new EditLabCommand(index, labNumber, labMark);
         }
     }
 
