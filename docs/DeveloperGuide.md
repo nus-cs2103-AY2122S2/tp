@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PetListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Pet` object residing in the `Model`.
 
 ### Logic component
 
@@ -121,12 +121,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Pet` objects (which are contained in a `UniquePetList` object).
+* stores the currently 'selected' `Pet` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Pet>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Pet` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Pet` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -224,14 +224,27 @@ by the prefixes / augments.
 
 #### Proposed Implementation
 The proposed filter mechanism is facilitated by `FilterCommand` class.
-It extends `Command` and takes in a keyword that the user wishes to filter the Address Book by followed by
-a given search word. The keyword is parsed by `FilterCommandParser`. A search word will follow after the keyword to
+It extends `Command` and takes in a field that the user wishes to filter the Address Book by followed by
+a given filter word. The field is parsed by `FilterCommandParser`. A filter word will follow after the keyword to
 indicate what the user wants to filter out specifically.
 
-Currently, pet list can be filtered by date, owner name, tag and pet's appointment date. 
-Each class implements the `Comparable` interface in order to be compared and matched to the given search word.
+Currently, pet list can be filtered by date, owner name and tag. Users can only filter the address book by one field at
+a time only. `FilterCommandParser` ensure this by throwing a `ParseException` when more than one filter field is
+entered.
 
-The following sequence diagram shows how the filter operation works when `filter tag/ beagle` is called:
+`FilterCommandParser` parses the arguments and classifies the fields into the three different classes as represented by
+`DateContainsFilterDatePredicate`, `OwnerNameContainsFilterWordPredicate` and `TagContainsFilterWordPredicate` classes.
+Each class extends the `FilterByContainsFilterWordPredicate` class, which implements the `Predicate<Pet>` interface, 
+in order for `FindCommand` to handle different fields appropriately and consequently test each pet differently for a 
+match in the specified field.
+
+`FindCommand` then updates the address book using one of the three classes (`Predicates`). Each class has a different
+way of testing `Pet`. If user filters by date, test will go through attendance of pet and determines if pet is present
+on the specified date (entered as `filterWord` by user). If user filters by owner name, test will go through owner name
+of pet and finds a partial/ full match with `filterWord` provided. Similarly, if user filters by tags, test will go
+through tags of pet and find match with `filterWord` provided.
+
+The following sequence diagram shows how the filter operation works when `filter byTags/ beagle` is called:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
@@ -239,6 +252,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Currently each filter field extends its own `FilterByContainsFilterWordPredicate` class.
+  * Pros: Easy to implement and increases flexibility when testing using a `Predicate`.
+  * Cons: May generate a lot more classes if filter fields were to expand in the future.
+
+* **Alternative 2:** Generate a new package containing the various predicate and methods to identify different fields.
+  * Pros: Cleaner code. Better for future scalability.
+  * Cons: Requires more lines of code. Harder to set up initially. Risk being messy if not careful.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -318,8 +340,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the pet being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 ### \[Proposed\] Attendance feature
 
 #### Proposed Implementation
@@ -395,40 +415,38 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                      | So that I can…​                                                   |
-|----------|-------------------|-------------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`  | pet daycare owner | retrieve pet owner's contact                                      | contact pet owners                                                |
-| `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                    |
-| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                              |
-| `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                     |
-| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                      | charge pet owners the correct amount depending on pets attendanceEntry |
-| `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                           |
-| `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                            |
-| `* * *`  | pet daycare owner | find pets bu their ID                                             | retrieve the pet information accordingly                          |
-| `* * *`  | pet daycare owner | delete pet's information from the system                          | information of pets that are in the system will be up to date     |
-| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                          | bill owners accordingly                                           |
-| `* *`    | pet daycare owner | track the times that the pets will arrive                         | plan out my manpower allocation for the day                       |
-| `* *`    | pet daycare owner | track the weight of pets                                          | inform the owner of any changes in weight                         |
-| `* *`    | pet daycare owner | track pets' grooming appointments                                 | remember to bring them for grooming                               |
-| `* *`    | pet daycare owner | track the allergies that each pet has                             | avoid giving them food they may be allergic to                    |
-| `* *`    | pet daycare owner | order pets chronologically by there name                          | easily search for their name in the system                        |
-| `* *`    | pet daycare owner | order pets' appointments chronologically                          | know what is the next appointment I should take note of           |
-| `* *`    | pet daycare owner | keep track of pets' birthdays                                     | throw a celebration with their friends                            |
-| `* *`    | pet daycare owner | alert when it is time to feed the pets                            | ensure pets are well-fed and healthy                              |
-| `* *`    | pet daycare owner | keep track of basic logistics like leash and waste bags           | replace when they are running low                                 |
-| `* *`    | pet daycare owner | alert one day before appointment                                  | remember a particular pet's appointment schedule                  |
-| `* *`    | pet daycare owner | alert when pets arrive                                            | prepare relevant logistics needed to take care of the pet         |
-| `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments             |
-| `*`      | pet daycare owner | sort the pets by their type                                       | order their necessary supplies accordingly                        |
-| `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                            |
-| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                      | I can allow for last minute scheduling                            |
-| `*`      | pet daycare owner | update pet's information                                          |                                                                   |
-| `*`      | pet daycare owner | update pet owner's information                                    |                                                                   |
-| `*`      | pet daycare owner | access the previous attendanceEntry of pets                            | update owners if they were to enquire                             |
-| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                    |
-| `*`      | pet daycare owner | get a list of pets which will be staying overnight in the daycare | arrange the necessary manpower                                    |
-
-*{More to be added}*
+| Priority | As a …​           | I want to …​                                                        | So that I can…​                                                        |
+|----------|-------------------|---------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | pet daycare owner | retrieve pet owner's contact                                        | contact pet owners                                                     |
+| `* * *`  | pet daycare owner | tag different types of pets                                         | easily differentiate between the types of pets                         |
+| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                          | schedule the school bus for each day                                   |
+| `* * *`  | pet daycare owner | track the different food preferences required by different pets     | make sure the pets are served the right foods                          |
+| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                   | charge pet owners the correct amount depending on pets attendanceEntry |
+| `* * *`  | pet daycare owner | add pets in the daycare to system                                   | I have a consolidated information sheet                                |
+| `* * *`  | pet daycare owner | retrieve the pets addresses                                         | inform the school bus driver correctly                                 |
+| `* * *`  | pet daycare owner | find pets bu their ID                                               | retrieve the pet information accordingly                               |
+| `* * *`  | pet daycare owner | delete pet's information from the system                            | information of pets that are in the system will be up to date          |
+| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                            | bill owners accordingly                                                |
+| `* *`    | pet daycare owner | track the times that the pets will arrive                           | plan out my manpower allocation for the day                            |
+| `* *`    | pet daycare owner | track the weight of pets                                            | inform the owner of any changes in weight                              |
+| `* *`    | pet daycare owner | track pets' grooming appointments                                   | remember to bring them for grooming                                    |
+| `* *`    | pet daycare owner | track the allergies that each pet has                               | avoid giving them food they may be allergic to                         |
+| `* *`    | pet daycare owner | order pets chronologically by there name                            | easily search for their name in the system                             |
+| `* *`    | pet daycare owner | order pets' appointments chronologically                            | know what is the next appointment I should take note of                |
+| `* *`    | pet daycare owner | keep track of pets' birthdays                                       | throw a celebration with their friends                                 |
+| `* *`    | pet daycare owner | alert when it is time to feed the pets                              | ensure pets are well-fed and healthy                                   |
+| `* *`    | pet daycare owner | keep track of basic logistics like leash and waste bags             | replace when they are running low                                      |
+| `* *`    | pet daycare owner | alert one day before appointment                                    | remember a particular pet's appointment schedule                       |
+| `* *`    | pet daycare owner | alert when pets arrive                                              | prepare relevant logistics needed to take care of the pet              |
+| `*`      | pet daycare owner | track the vet appointments of pets                                  | make sure pets do not miss their medical appointments                  |
+| `*`      | pet daycare owner | sort the pets by their type                                         | order their necessary supplies accordingly                             |
+| `*`      | pet daycare owner | track the medicine that pets need to take                           | i can feed them medicine appropriately                                 |
+| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                   | I can allow for last minute scheduling                                 |
+| `*`      | pet daycare owner | update pet's information                                            |                                                                        |
+| `*`      | pet daycare owner | update pet owner's information                                      |                                                                        |
+| `*`      | pet daycare owner | access the previous attendanceEntry of pets                         | update owners if they were to enquire                                  |
+| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day          | arrange the necessary manpower                                         |
+| `*`      | pet daycare owner | get a list of pets which will be staying overnight in the daycare   | arrange the necessary manpower                                         |
 
 ### Use cases
 
