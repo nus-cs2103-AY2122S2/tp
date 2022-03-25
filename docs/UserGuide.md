@@ -32,7 +32,7 @@ School administrators _(like teachers)_ can use UDT to easily track COVID amongs
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
 - [Frequently Asked Questions](#faq)
-- [Command summary](#command-summary)
+- [Command Summary](#command-summary)
 
 </div>
 
