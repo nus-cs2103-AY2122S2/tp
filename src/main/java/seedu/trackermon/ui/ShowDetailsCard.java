@@ -3,7 +3,6 @@ package seedu.trackermon.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
@@ -40,6 +39,8 @@ public class ShowDetailsCard extends UiPart<Region> {
     private Label status;
     @FXML
     private FlowPane tags;
+    @FXML
+    private TextArea comment;
 
     /**
      * Creates a {@code ShowCard} with the given {@code Show} and index to display.
@@ -54,7 +55,6 @@ public class ShowDetailsCard extends UiPart<Region> {
     public ShowDetailsCard(Show show) {
         super(FXML);
         this.show = show;
-        name.setOpaqueInsets(Insets.EMPTY);
     }
 
     /**
@@ -67,6 +67,7 @@ public class ShowDetailsCard extends UiPart<Region> {
         name.setVisible(isShowExists);
         status.setVisible(isShowExists);
         tags.setVisible(isShowExists);
+        comment.setVisible(isShowExists);
 
         if (!isShowExists) {
             return;
@@ -76,12 +77,16 @@ public class ShowDetailsCard extends UiPart<Region> {
 
         this.show = show;
         name.setText(show.getName().fullName);
-        status.setText(show.getStatus().toString());
+
+        String statusString = show.getStatus().toString();
+        String statusMessage = "Status: " + statusString.substring(0, 1).toUpperCase()
+                + statusString.substring(1);
+        status.setText(statusMessage);
         tags.getChildren().clear();
         show.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
+        comment.setText(show.getComment().comment);
         updateTextArea(name);
     }
 
