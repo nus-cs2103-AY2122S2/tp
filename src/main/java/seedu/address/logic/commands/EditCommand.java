@@ -118,6 +118,8 @@ public class EditCommand extends Command {
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
         PrevDateMet updatedPrevDateMet = editPersonDescriptor.getPrevDateMet().orElse(personToEdit.getPrevDateMet());
+
+        // Schedule meeting remains unchanged through edit commands. MeetCommand handles CRUD for meetings.
         ScheduledMeeting scheduledMeeting = personToEdit.getScheduledMeeting();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFlag,

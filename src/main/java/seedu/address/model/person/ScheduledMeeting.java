@@ -73,8 +73,8 @@ public class ScheduledMeeting {
         }
 
         ScheduledMeeting otherMeeting = (ScheduledMeeting) other;
-        if (otherMeeting.hasMeetingScheduled() == false
-                && this.hasMeetingScheduled() == false) {
+        // Check if both does not have any scheduled meetings
+        if (!otherMeeting.hasMeetingScheduled() && !this.hasMeetingScheduled()) {
             return true;
         }
 
