@@ -50,6 +50,7 @@ public class ProfessorCard extends UiPart<Region> {
      */
     public ProfessorCard(Professor professor, int displayedIndex) {
         super(FXML);
+        logger.info(String.format("Instantiating professor card with index %s", displayedIndex));
         this.professor = professor;
         id.setText(displayedIndex + ". ");
         name.setText(professor.getName().fullName);

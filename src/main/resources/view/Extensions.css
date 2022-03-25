@@ -44,6 +44,10 @@
     -fx-text-fill: #010504;
 }
 
+.module-student-list-heading:hover {
+    -fx-background-color: blue;
+}
+
 .module-groups-list-heading {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28px;
@@ -57,9 +61,10 @@
 }
 
 /* GroupCard related classes */
-.group-headings.label {
+.group-headings {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 32px;
+    -fx-text-fill: #010504;
 }
 
 .group-module-code.label {
@@ -71,7 +76,7 @@
     -fx-padding: 2 2 2 2
 }
 
-.group-name.label {
+.group-name {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 32px;
     -fx-padding: 0 0 0 5;
@@ -82,4 +87,23 @@
     -fx-font-size: 28px;
     -fx-text-fill: #010504;
     -fx-underline: true;
+}
+
+/* ModuleKeyEventCard related classes */
+.module-key-event-index {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
+}
+
+.module-key-event-type {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
+}
+
+.module-key-event-time {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
 }
