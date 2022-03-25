@@ -79,7 +79,7 @@ public class UpdateCommand extends Command {
      * Creates and returns a {@code Product} with the details of {@code productToUpdate}
      * updated with {@code updateProductDescriptor}.
      */
-    private static Product createUpdatedProduct(
+    public static Product createUpdatedProduct(
             Product productToUpdate, UpdateProductDescriptor updateProductDescriptor) {
         assert productToUpdate != null;
 
