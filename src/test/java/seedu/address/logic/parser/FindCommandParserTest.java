@@ -16,6 +16,7 @@ import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.InterviewStatusContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.SeniorityContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.StudentIdContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -94,6 +95,14 @@ public class FindCommandParserTest {
                 new FindCommand(new ApplicationStatusContainsKeywordsPredicate(Arrays.asList("pending", "reject")));
         assertParseSuccess(parser, " k/  pending    k/  reject   f/     applicationstatus",
                 expectedFindApplicationStatusCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindSeniorityCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindSeniorityCommand =
+                new FindCommand(new SeniorityContainsKeywordsPredicate(Arrays.asList("2", "com1")));
+        assertParseSuccess(parser, " k/2 k/com1 f/seniority", expectedFindSeniorityCommand);
     }
 
     @Test
