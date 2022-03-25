@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 
+
 /**
  * A ui for the status bar that is displayed at the header of the application.
+ * Display Box is flexible to the length of text
  */
 public class ResultDisplay extends UiPart<Region> {
 
@@ -23,6 +25,7 @@ public class ResultDisplay extends UiPart<Region> {
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
+        resultDisplay.setWrapText(true);
     }
 
 }
