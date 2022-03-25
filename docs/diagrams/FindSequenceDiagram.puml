@@ -13,20 +13,20 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find t/Anime t/Action")
+[-> LogicManager : execute("find t/Anime")
 activate LogicManager
 
-LogicManager -> TrackermonParser : parseCommand("find t/Anime t/Action")
+LogicManager -> TrackermonParser : parseCommand("find t/Anime")
 activate TrackermonParser
 
 create FindCommandParser
-TrackermonParser -> FindCommandParser :FindCommandParser("find t/Anime t/Action")
+TrackermonParser -> FindCommandParser :FindCommandParser("find t/Anime")
 activate FindCommandParser
 
 FindCommandParser --> TrackermonParser
 deactivate FindCommandParser
 
-TrackermonParser -> FindCommandParser :parse("t/Anime t/Action")
+TrackermonParser -> FindCommandParser :parse("t/Anime")
 activate FindCommandParser
 
 ref over FindCommandParser, FindCommand : Parsing implementation
