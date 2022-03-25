@@ -73,10 +73,10 @@ public class EditMedicalCommand extends Command {
     private final EditMedicalDescriptor editMedicalDescriptor;
 
     /**
-     * @param index of the medical information in the filtered medical information list to edit
+     * @param targetIndex of the medical information in the filtered medical information list to edit
      * @param editMedicalDescriptor details to edit the medical information with
      */
-    public EditMedicalCommand(Index targetIndex, EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor) {
+    public EditMedicalCommand(Index targetIndex, EditMedicalDescriptor editMedicalDescriptor) {
         this.targetIndex = targetIndex;
         this.editMedicalDescriptor = editMedicalDescriptor;
     }
