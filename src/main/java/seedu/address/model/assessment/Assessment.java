@@ -104,7 +104,7 @@ public class Assessment implements Entity {
         return otherAssessment.getAssessmentName().equals(getAssessmentName())
                 && otherAssessment.getTaModule().equals(getTaModule())
                 && otherAssessment.getSimpleName().equals(getSimpleName())
-                && otherAssessment.getSimpleName().equals(getSimpleName());
+                && otherAssessment.getAttempts().equals(getAttempts());
     }
 
     @Override
@@ -121,7 +121,7 @@ public class Assessment implements Entity {
                 .append("; Module: ")
                 .append(getTaModule().toUniqueRepresentation());
         getSimpleName().ifPresent(simpleName ->
-                builder.append("; Simple name: ")
+                builder.append("; Simple Name: ")
                 .append(simpleName));
         return builder.toString();
     }

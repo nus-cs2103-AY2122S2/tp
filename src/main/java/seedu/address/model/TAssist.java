@@ -217,7 +217,7 @@ public class TAssist implements ReadOnlyTAssist {
     //// assessment-level operations
 
     /**
-     * Returns true if a assessment with the same identity as {@code assessment} exists in the TAssist.
+     * Returns true if an assessment with the same identity as {@code assessment} exists in the TAssist.
      */
     public boolean hasAssessment(Assessment assessment) {
         requireNonNull(assessment);
@@ -225,7 +225,7 @@ public class TAssist implements ReadOnlyTAssist {
     }
 
     /**
-     * Adds a assessment to the TAssist.
+     * Adds an assessment to the TAssist.
      * The assessment must not already exist in the TAssist.
      */
     public void addAssessment(Assessment assessment) {
