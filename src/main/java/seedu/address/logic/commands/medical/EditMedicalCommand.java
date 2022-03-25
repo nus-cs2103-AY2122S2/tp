@@ -70,7 +70,7 @@ public class EditMedicalCommand extends Command {
     public static final String MESSAGE_EDIT_MEDICAL_SUCCESS = "Edited Medical Information: %1$s";
 
     private final Index targetIndex;
-    private final EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor;
+    private final EditMedicalDescriptor editMedicalDescriptor;
 
     /**
      * @param index of the medical information in the filtered medical information list to edit
