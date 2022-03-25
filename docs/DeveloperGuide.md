@@ -286,7 +286,7 @@ The following Sequence Diagrams summarizes the various steps involved:
 ### 2. `editbuyer` / `For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
 editseller` feature
 The `editbuyer` / `editseller` command mechanism uses a similar interactions as shown in the [Logic Component](). Mainly, it can be broken down into these steps:
-####Syntax:
+#### Syntax:
 ```editbuyer [index] n/... p/... t/... prop/ h/... l/... pr/...```
 
 ```editseller [index] n/... p/... t/... prop/ h/... l/... pr/...```
@@ -490,11 +490,11 @@ _{more aspects and alternatives to be added}_
 #### Proposed Implementation
 
 We are currently implementing a clear buyer list and clear seller list function.
-####Syntax:
+#### Syntax:
 - `clearb` - clears the buyer list
 - `clears` - clears the seller list
 
-####Result:
+#### Result:
 - specified list is cleared without affecting the other list
 
 #### Implementation of clear buyer and clear seller
@@ -508,7 +508,7 @@ A copy of the uncleared list is kept, next the content of the whole addressbook 
 
 ### Find buyer/Find seller
 
-####Syntax:
+#### Syntax:
 - `findb /KEYWORD [MORE_KEYWORDS]`
 - `finds D/KEYWORD [MORE_KEYWORDS]`
 
@@ -516,14 +516,14 @@ Examples:
 - `findb junhong junheng`
 - `finds hdb 5room`
 
-####Result:
+#### Result:
 returns a filtered list of sellers of buyers
 
-####Implementation of find buyer and find seller
+#### Implementation of find buyer and find seller
 The finds and findb command calls `updateFilteredSellerList` of `model` and filters the list based on the keywords. The commands then calls `getFilteredSellerList` 
 in order to return the filtered list of sellers.
 
-####Why is it implemented this way
+#### Why is it implemented this way
 Having a seperate buyer and seller list means we need to seperate the find command into find buyer and find seller in order to filter the desired list. Having seperate address books helps in this regard as the version of `getFilteredClientList` can be used.
 
 ### \[Proposed\] Data archiving
