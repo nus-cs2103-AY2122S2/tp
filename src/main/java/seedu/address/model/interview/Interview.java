@@ -71,6 +71,11 @@ public class Interview {
     public boolean isDuringOfficeHour() {
         int interviewHour = this.interviewDateTime.getHour();
         int interviewMin = this.interviewDateTime.getMinute();
+
+        if (this.interviewDay > 5) {
+            return false;
+        }
+
         if (interviewHour < 8) {
             return false;
         } else if (interviewHour >= 17 && interviewMin > 30) {
