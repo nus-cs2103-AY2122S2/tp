@@ -1,10 +1,8 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-
 import java.util.List;
 
-public class EventNameContainsKeywordsPredicate extends EventFieldContainsKeywordsPredicate{
+public class EventNameContainsKeywordsPredicate extends EventFieldContainsKeywordsPredicate {
     public EventNameContainsKeywordsPredicate(List<String> keywords) {
         super(keywords, event -> event.getEventName().value);
     }

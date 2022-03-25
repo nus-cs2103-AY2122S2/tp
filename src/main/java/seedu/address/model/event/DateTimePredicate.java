@@ -8,6 +8,10 @@ public class DateTimePredicate implements Predicate<Event> {
     private final List<DateTime> keywords;
     private final Function<Event, DateTime> field;
 
+    /**
+     * Constructor for DateTimePredicate
+     * @param keywords
+     */
     public DateTimePredicate(List<DateTime> keywords) {
         this.keywords = keywords;
         this.field = event -> event.getDateTime();

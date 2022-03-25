@@ -4,26 +4,24 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANTS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.List;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindCommand.FindPersonDescriptor;
-import seedu.address.logic.commands.FindEventCommand.FindEventDescriptor;
 import seedu.address.logic.commands.FindEventCommand;
+import seedu.address.logic.commands.FindEventCommand.FindEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -37,8 +35,8 @@ public class FindCommandParser implements Parser<Command> {
     public static final String MULTIPLE_WORDS = "Each value must be limited to one word\n"
             + "Eg: find n/Alex n/Ho instead of n/Alex Ho";
 
-    public static final String DATE_TIME_FORMAT = "Please provide the date followed by time\n" +
-            "Eg: find -e dt/2022-08-08 03:00";
+    public static final String DATE_TIME_FORMAT = "Please provide the date followed by time\n"
+            + "Eg: find -e dt/2022-08-08 03:00";
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -58,13 +56,13 @@ public class FindCommandParser implements Parser<Command> {
 
         if (argMultimap.getPreamble().equals("-s")) {
             isAndSearch = true;
-        } else if(argMultimap.getPreamble().equals("-e")) {
+        } else if (argMultimap.getPreamble().equals("-e")) {
             isEventSearch = true;
         } else if (!argMultimap.getPreamble().equals("")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if(!isEventSearch) {
+        if (!isEventSearch) {
             FindPersonDescriptor personDescriptor = new FindCommand.FindPersonDescriptor();
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 personDescriptor.setNames(ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_NAME)));
@@ -106,20 +104,18 @@ public class FindCommandParser implements Parser<Command> {
             } else {
                 return new FindOrPredicateParser().parse(personDescriptor);
             }
-        }
-
-        else {
+        } else {
             FindEventDescriptor eventDescriptor = new FindEventCommand.FindEventDescriptor();
-            if(argMultimap.getValue(PREFIX_EVENT_NAME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_EVENT_NAME).isPresent()) {
                 eventDescriptor.setNames(ParserUtil.parseEventNames(argMultimap.getAllValues(PREFIX_EVENT_NAME)));
             }
-            if(argMultimap.getValue(PREFIX_INFO).isPresent()) {
+            if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
                 eventDescriptor.setInformations(ParserUtil.parseInfos(argMultimap.getAllValues(PREFIX_INFO)));
             }
-            if(argMultimap.getValue(PREFIX_PARTICIPANTS).isPresent()) {
+            if (argMultimap.getValue(PREFIX_PARTICIPANTS).isPresent()) {
                 eventDescriptor.setParticipants(ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_PARTICIPANTS)));
             }
-            if(argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
                 eventDescriptor.setDateTimes(ParserUtil.parseDateTimes(argMultimap.getAllValues(PREFIX_DATETIME)));
             }
 

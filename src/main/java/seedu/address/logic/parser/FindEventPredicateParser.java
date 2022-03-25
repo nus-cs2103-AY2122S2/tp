@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.model.event.DateTimePredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventInfoContainsKeywordsPredicate;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.event.EventParticipantsContainsKeywordsPredicate;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 
 public class FindEventPredicateParser {
     /**

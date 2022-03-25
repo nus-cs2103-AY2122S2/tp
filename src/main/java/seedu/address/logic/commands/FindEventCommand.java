@@ -1,5 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.Model;
@@ -9,15 +16,7 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Information;
 import seedu.address.model.person.Name;
 
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
-
-public class FindEventCommand extends Command{
+public class FindEventCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose details contain any of "
