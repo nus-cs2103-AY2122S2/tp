@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class AddressBookHistory {
     private final ArrayList<AddressBook> addressBooks;
 
+    /**
+     * Creates an AddressBookHistory which stores AddressBooks after each
+     * successful user command.
+     */
     public AddressBookHistory(ReadOnlyAddressBook addressBook) {
         addressBooks = new ArrayList<>();
         addressBooks.add(new AddressBook(addressBook));
