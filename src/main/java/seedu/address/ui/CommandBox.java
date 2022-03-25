@@ -52,7 +52,7 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
+            clearCommandBoxText();
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -86,7 +86,8 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
         UserInputString previousUserInput = userInputResult.getUserInputString();
-        commandTextField.setText(previousUserInput.toString());
+        setCommandBoxText(previousUserInput.toString());
+        setCaretPositionToEnd();
     }
 
     /**
@@ -98,7 +99,30 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
         UserInputString nextUserInput = userInputResult.getUserInputString();
-        commandTextField.setText(nextUserInput.toString());
+        setCommandBoxText(nextUserInput.toString());
+        setCaretPositionToEnd();
+    }
+
+    /**
+     * Sets the caret position to the end.
+     */
+    private void setCaretPositionToEnd() {
+        commandTextField.positionCaret(commandTextField.getLength());
+    }
+
+    /**
+     * Sets the command box text to the provided String.
+     * @param newText New text to be set.
+     */
+    private void setCommandBoxText(String newText) {
+        commandTextField.setText(newText);
+    }
+
+    /**
+     * Clears the text from the command box.
+     */
+    private void clearCommandBoxText() {
+        commandTextField.setText("");
     }
 
     /**

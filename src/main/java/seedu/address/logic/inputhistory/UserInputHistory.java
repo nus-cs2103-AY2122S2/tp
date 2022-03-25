@@ -11,8 +11,8 @@ import seedu.address.commons.core.LogsCenter;
 public class UserInputHistory {
     private final ArrayList<UserInputString> inputHistory;
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private final boolean isLogging = true;
-    private UserInputIndex selectedIndex;
+    private final boolean isLogging = false;
+    private final UserInputIndex selectedIndex;
 
     /**
      * Creates a {@code UserInputHistory} object that holds past user inputs
@@ -50,7 +50,8 @@ public class UserInputHistory {
         }
         assert selectedIndex.currentIndex() >= -1; // Sanity check
         selectedIndex.increment();
-        UserInputString selectedInput = inputHistory.get(selectedIndex.currentIndex());
+        int calculatedIndex = inputHistory.size() - 1 - selectedIndex.currentIndex();
+        UserInputString selectedInput = inputHistory.get(calculatedIndex);
         getLog();
         return new InputHistoryResult(selectedInput);
     }
@@ -71,7 +72,8 @@ public class UserInputHistory {
         }
         assert selectedIndex.currentIndex() >= -1; // Sanity check
         selectedIndex.decrement();
-        UserInputString selectedInput = inputHistory.get(selectedIndex.currentIndex());
+        int calculatedIndex = inputHistory.size() - 1 - selectedIndex.currentIndex();
+        UserInputString selectedInput = inputHistory.get(calculatedIndex);
         getLog();
         return new InputHistoryResult(selectedInput);
     }
