@@ -91,4 +91,21 @@ public class UpdateAllCommand extends Command {
         model.clearProductFilters();
         return new CommandResult(MESSAGE_UPDATE_ALL_PRODUCT_SUCCESS + updatedProductDescription);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UpdateAllCommand)) {
+            return false;
+        }
+
+        // state check
+        UpdateAllCommand e = (UpdateAllCommand) other;
+        return updateProductDescriptor.equals(e.updateProductDescriptor);
+    }
 }
