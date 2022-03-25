@@ -1,4 +1,6 @@
-package seedu.address.model.transaction;
+package seedu.address.model.transaction.util;
+
+import seedu.address.model.transaction.Transaction;
 
 import java.util.function.Predicate;
 

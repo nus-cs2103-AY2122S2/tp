@@ -23,7 +23,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.person.util.PersonContainsKeywordsPredicate;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {

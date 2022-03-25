@@ -50,6 +50,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         setTransactions(transactions);
     }
 
+    /**
+     * Creates an Address book using the Persons list and Transactions list
+     * stored in a Map.
+     *
+     */
     public AddressBook(Map<String, Object> storageMap) {
         List<Person> personList = (List<Person>) storageMap.get(Person.MAP_PREFIX);
         List<Transaction> transactionList = (List<Transaction>) storageMap.get(Transaction.MAP_PREFIX);
