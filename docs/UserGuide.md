@@ -67,6 +67,9 @@ Adds a student to the tracking list
     - eg. `johntan@example.com`
   - `PHONE_NUMBER` takes a sequence of numbers
   - `STATUS` takes either of these strings `POSITIVE`, `NEGATIVE`, `CLOSE CONTACT`
+- Examples:
+  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 c/5A s/NEGATIVE`
+  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 p/1234567 c/2B s/POSITIVE act/choir dance`
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
@@ -83,10 +86,6 @@ Adds a student to the tracking list
 > :warning: **Warning:** Capitalization of text will be reflected in the User Interface
 
 </div>
-
-- Examples:
-  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 c/5A s/NEGATIVE`
-  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 p/1234567 c/2B s/POSITIVE act/choir dance`
 
 ## List all students : `list`
 Shows a list of all students in the address book.
