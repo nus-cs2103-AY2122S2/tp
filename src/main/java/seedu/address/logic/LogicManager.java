@@ -50,8 +50,6 @@ public class LogicManager implements Logic {
             model.saveCurrentAddressBookToHistory();
         }
 
-        System.out.println(model.getAddressBookHistory().toString());
-
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (IOException ioe) {

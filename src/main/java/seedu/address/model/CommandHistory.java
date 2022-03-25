@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 
+import seedu.address.logic.commands.CommandResult;
+
 /**
  * Stores a list of previously executed commands.
  */
@@ -20,10 +22,9 @@ public class CommandHistory {
 
     /**
      * Adds the specified command to command history.
-     * @param str command to be added to command history
      */
-    public void addToHistory(String str) {
-        commands.add(str);
+    public void addToHistory(String commandText) {
+        commands.add(commandText);
     }
 
     /**
@@ -40,6 +41,20 @@ public class CommandHistory {
      */
     public void clearHistory() {
         commands.clear();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof CommandHistory)) { //this handles null as well.
+            return false;
+        }
+
+        CommandHistory otherCommandHistory = (CommandHistory) obj;
+        return commands.equals(otherCommandHistory.commands);
     }
 
     /**

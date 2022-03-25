@@ -19,6 +19,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.AddressBookHistory;
+import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -115,17 +117,47 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getPreviousAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveCurrentAddressBookToHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public AddressBookHistory getAddressBookHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isAddressBookHistoryEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAddressBookHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -181,6 +213,31 @@ public class AddCommandTest {
 
         @Override
         public void sortFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandHistory getCommandHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousCommandText() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isCommandHistoryEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToCommandHistory(String commandText) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearCommandHistory() {
             throw new AssertionError("This method should not be called.");
         }
     }

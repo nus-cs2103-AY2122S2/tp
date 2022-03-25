@@ -27,6 +27,7 @@ public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_CLEAR_COMMAND = "Clears all students from TAPA. "
             + "Additionally, the user will be prompted to confirm clear command. \n"
+            + "*Warning* Clearing TAPA cannot be undone! \n"
             + "Format : clear \n"
             + "Example: clear";
 
@@ -87,9 +88,11 @@ public class ManualMessages {
             + "10. list \n"
             + "11. assign \n"
             + "12. progress \n"
-            + "13. manual \n"
-            + "14. help \n"
-            + "15. exit \n"
+            + "13. history \n"
+            + "14. undo \n"
+            + "15. manual \n"
+            + "16. help \n"
+            + "17. exit \n"
             + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";

@@ -52,6 +52,20 @@ public class AddressBookHistory {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof AddressBookHistory)) { //this handles null as well.
+            return false;
+        }
+
+        AddressBookHistory otherAddressBookHistory = (AddressBookHistory) obj;
+        return addressBooks.equals(otherAddressBookHistory.addressBooks);
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 0;

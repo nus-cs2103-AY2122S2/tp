@@ -102,12 +102,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && clearRequest == otherCommandResult.clearRequest;
+                && clearRequest == otherCommandResult.clearRequest
+                && undoRequest == otherCommandResult.undoRequest;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, clearRequest);
+        return Objects.hash(feedbackToUser, showHelp, exit, clearRequest, undoRequest);
     }
 
 }

@@ -175,7 +175,6 @@ public interface Model {
 
     /**
      * Adds the command (as a {@code String}) to command history.
-     * @param commandText
      */
     void addToCommandHistory(String commandText);
 
