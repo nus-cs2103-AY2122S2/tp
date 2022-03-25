@@ -70,7 +70,9 @@ public class AttachTagCommand extends Command {
         tagCopy.add(toAttach);
 
         Person personWithNewTag = new Person(personToAttachNewTag.getName(), personToAttachNewTag.getPhone(),
-                    personToAttachNewTag.getEmail(), personToAttachNewTag.getAddress(), tagCopy);
+                    personToAttachNewTag.getEmail(), personToAttachNewTag.getAddress(), tagCopy,
+                    personToAttachNewTag.getCourse(), personToAttachNewTag.getMatricCard(),
+                    personToAttachNewTag.getTelegram());
 
         if (personToAttachNewTag.equals(personWithNewTag)) {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
