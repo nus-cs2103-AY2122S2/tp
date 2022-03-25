@@ -30,7 +30,9 @@ public class SortCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_MODULE + "MODULE] "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE + "/asc " + PREFIX_NAME + "/desc " + "\n";
+            + "[" + PREFIX_COMMENT + "COMMENT] "
+            + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE + "asc " + PREFIX_NAME + "desc " + "\n";
 
     public static final String MESSAGE_SUCCESS = "Sorted successfully: %s";
 
