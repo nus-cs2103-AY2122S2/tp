@@ -226,6 +226,26 @@ Hence, it is important to delete the associated interview(s) when deleting an ap
     * Pros: More efficient when deleting since all the associated interviews are already available.
     * Cons: Increased coupling between applicant, position, and interview which make it more bug-prone.
 
+### Sorting of Data
+
+#### Implementation
+The implementation of sorting data is similar to list data, where sorting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface.
+
+The parsing of a sorting command from user input is also done through the 3 levels system, with `AddressBookParser`, `SortCommandParser`, and `SortXYZCommandParser` which eventually creates the `SortXYZCommand`.
+
+#### Design considerations:
+
+#### Aspect: How to sort data without affect the original dataset
+
+* **Alternative 1 (current choice):** Store an additional full dataset in `ModelManager`
+    * Pros: Easier to implement, less chance of error occurs when modify the displayed data.
+    * Cons: Less optimal in space as we need to store a copy of the database
+
+
+* **Alternative 2:** Mark an integer represent the position of the original data 
+    * Pros: More efficient in memory space
+    * Cons: Increased the complexity of the relevant code, which make it more bug-prone.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
