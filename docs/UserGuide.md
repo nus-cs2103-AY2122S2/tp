@@ -1,128 +1,219 @@
 
 | Quick Links                         |
 |-------------------------------------|
-| [Glossary](#Glossary)               |
+| [Content Page](#Content-Page)       |
 | [Quick start](#Quick-start)         |
 | [Features](#Features)               |
 | [Command Summary](#Command-Summary) |
 
 
-Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school admin, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ultimate DivocTracker can get your contact management tasks done faster than traditional GUI apps.
+**Ultimate DivocTracker (UDT)** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ultimate DivocTracker can get your contact management tasks done faster than traditional GUI apps.
 
-# Glossary
-- Quick start
-- Features
-  - Adding a student: `add`
-  - Listing all students: `list`
-  - Find students by name: `find`
-  - Find student by status:  `findstatus`
-  - Find student by class: `findclasscode`
-  - Find student by activity: `findactivity`
-  - Editing student’s personal details: `edit`
-  - Deleting a student: `delete`
-  - Exiting the program : `exit`
-- Command summary
+School administrators (like teachers) can use UDT to easily track COVID amongst the student population with ease and concentrate on what matters most, the education of the students.
+
+# Content Page
+
+<div markdown="block" class="alert alert-info">
+
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Command summary](#command-summary)
+  - [Add a student](#adding-a-person-add): `add`
+  - [List all students](#list-all-students-list): `list`
+  - [Find student by name](#find-student-by-name-find): `find`
+  - [Find student by status](#find-student-by-status-findstatus):  `findstatus`
+  - [Find student by class](#find-student-by-class-findclasscode): `findclasscode`
+  - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
+  - [Edit student’s personal details](#edit-student-details-edit): `edit`
+  - [Delete student](#delete-student-delete): `delete`
+  - [Exit the application](#exit-the-application-exit): `exit`
+
+
+</div>
 
 # Quick start
 - Ensure you have Java 11 or above installed in your Computer.
-- Download the latest ultimatedivoctracker.jar from <website link>.
+- Download the latest ultimatedivoctracker.jar from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 - Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker.
 - Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 - Refer to the Features below for details of each command.
 
+<div markdown="block" class="alert alert-info">
 
+:information_source: **Installation notes:**
+- Application data will be stored in the same folder containing the application executable.
+- Currently only officially supported for x64 Windows platforms.
+
+</div>
 
 # Features
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Formatting notes:**
+- Words in `UPPER_CASE` are the parameters to be supplied.
+- Items in square brackets are optional.
+
+</div>
+
+## Command Summary
+
+| Action   | Format   | Example |
+|-----|-----|-----|
+| [Add a student](#adding-a-person-add)  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS [act/ACTIVITIES]` | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
+| [List all students](#list-all-students-list) | `list`       | `list` |
+| [Find student by name](#find-student-by-name-find) | `find NAME [MORE_NAME]` | `find James Jake`      |
+| [Find student by status](#find-student-by-status-findstatus) | `findstatus STATUS` | `findstatus positive`      |
+| [Find student by class](#find-student-by-class-findclasscode) | `findclasscode CLASS` | `findclasscode 4A`       |
+| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY` | `findactivity choir`   |
+| [Edit student details](#edit-student-details-edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`  |
+| [Delete student](#delete-student-delete) | `delete INDEX` | `delete 3`                      |
+| [Exit the application](#exit-the-application-exit)          | `exit`                   | `exit` |
+
 ## Adding a person: `add`
 Adds a student to the tracking list
-- Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ c/CLASS s/STATUS act/ACTIVITY [MORE ACTIVITIES]`
-- Examples:
-  - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE`
-  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Newgate Prison p/1234567 c/2B s/POSITIVE act/choir dance`
+- Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ c/CLASS s/STATUS [act/ACTIVITY] [MORE ACTIVITIES]`
+  - `NAME`, `ADDRESS`, `CLASS`, `ACTIVITY` takes a string of characters
+  - `EMAIL` follows the standard email formatting 
+    - eg. `johntan@example.com`
+  - `PHONE_NUMBER` takes a sequence of numbers
+  - `STATUS` takes either of these strings `POSITIVE`, `NEGATIVE`, `CLOSE CONTACT`
 
-## Listing all persons : `list`
+<div markdown="span" class="alert alert-primary" role="alert">
+
+:bulb: **Tips:** 
+- Multiple activity tags can be added to a single student
+  - Eg. `act/choir dance`
+- A student can also have no activity tags
+- Parameters can be in any order
+
+</div>
+
+- Examples:
+  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 c/5A s/NEGATIVE`
+  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 p/1234567 c/2B s/POSITIVE act/choir dance`
+
+<div markdown="span" class="alert alert-warning" role="alert">
+
+:warning: **Warning:** Capitalization of text will be reflected in the User Interface
+
+</div>
+
+## List all students : `list`
 Shows a list of all students in the address book.
 - Format: `list`
+  - Any parameter after `list` is ignored
 
-## Find a student by name: `find`
+<div markdown="span" class="alert alert-primary" role="alert">
+
+:bulb: **Tip:** For a filtered list, use the other __*find*__ commands
+
+</div>
+
+## Find student by name: `find`
 Find an existing student in the application by their name
 - Format: `find NAME`
   - Returns a list of students with the specified `NAME`
   - `NAME` is case-insensitive
-  - Searching for the first or last name would return a list of names that corresponds to the search input provided
+  - Searching for name returns a list of names contains the provided name
+    - `find john` can find students "john tan" and "john lee"
 - Example:
-  - `find john`
+  - `find john tan zi wei` will find student "john tan zi wei"
 
-## Find a student by status: `findstatus`
+## Find student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
 - Format: `findstatus STATUS`
   - Returns a list of students with the specified `STATUS`
   - `STATUS` is case-insensitive
 - Example:
-  - `findstatus positive`
-  - `findstatus negative`
+  - `findstatus positive` finds all students that are labelled COVID positive
+  - `findstatus negative` finds all students that are labelled COVID negative
 
 ## Find student by class: `findclasscode`
-Finds an existing student in the address book by their class.
+Finds an existing student in the address book by their class
 - Format: `findclasscode CLASS`
-  - Returns a list of students with the specified `CLASS`.
+  - Returns a list of students with the specified `CLASS`
   - `CLASS` is case-insensitive
 - Example:
-  - `findclasscode 4A`
+  - `findclasscode 4A` finds all students in the class 4A
+
+<div markdown="span" class="alert alert-primary" role="alert">
+
+:bulb: **Tip:** if student class contains their levels _(Eg. 3A, 3B, 4A, 4B)_, `findclasscode 4` finds all students in level 4 _(students in 4A and 4B)_
+
+</div>
 
 ## Find student by class: `findactivity`
-Finds an existing student in the address book by the activities they are participating in.
+Finds an existing student in the address book by the activities they are participating in
 - Format: `findactivity ACTIVITIY`
-  - Returns a list of students with the specified `ACTIVITY`.
+  - Returns a list of students with the specified `ACTIVITY`
+    - Matches based on students that have specified `ACTIVITY` and not just exactly those activities only
   - `ACTIVITY` is case-insensitive
 - Example:
-  - `findactivity badminton`
+  - `findactivity badminton` finds all students that have the activity "badminton"
 
-## Edit a student's details: `edit`
+## Edit student details: `edit`
 Edits an existing student's details in the address book by the Index provided and the areas that the user wants to edit
 - Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]`
-  - Index of the person in the list is defined by `INDEX`
-  - `INDEX` must be a positive integer, otherwise the command would return an error
-  - Only add the fields that the user would like to change
+  - Edits the student at the specified `INDEX`
+  - `INDEX` denotes the list index of the student in the displayed list
+  - `INDEX` must be a _positive integer (1, 2, 3...)_
+  - Only listed fields will be changed
 - Examples:
-  - John in INDEX 1 is now COVID-19 Positive
-    - `edit 1 s/Positive`
-  - Mary in INDEX 5 now has a new phone number and email address
-    - `edit 5 p/98641865 e/maryjane@yahoo.com`
+  - `edit 1 s/Positive` edits 1st student to COVID-19 Positive
+  - `edit 5 p/98641865 e/maryjane@yahoo.com` edits 5th student to a new phone number and email address
 
-## Deleting a person : `delete`
+<div markdown="span" class="alert alert-primary" role="alert">
+
+:bulb: **Tips:** 
+- Filter the student list via _find_ commands to make finding the index easier
+- Leave other attributes of the student as is by omitting parameters from the command
+
+</div>
+
+## Delete student : `delete`
 Deletes the specified person from the address book.
 - Format: `delete INDEX`
-  - Deletes the student at the specified `INDEX`.
-  - The index refers to the index number shown in the displayed student list.
-  - The index must be a **positive integer** 1, 2, 3, ...
+  - Deletes the student at the specified `INDEX`
+  - `INDEX` denotes the list index of the student in the displayed list
+  - `INDEX` must be a _positive integer (1, 2, 3...)_ 
 - Examples:
-  - `list` followed by `delete 2` deletes the 2nd person in the address book.
-  - find Betsy followed by `delete 1` deletes the 1st student in the results of the `find` command.
+  - `list` followed by `delete 2` deletes the 2nd person in the student list
+  - `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command
 
+<div markdown="span" class="alert alert-primary" role="alert">
 
-## Exiting the program: `exit`
+:bulb: **Tip:** filter the student list via _find_ commands to make finding the index easier
+
+</div>
+
+## Exit the application: `exit`
 Exits the program.
 Format: `exit`
+
+<div markdown="span" class="alert alert-primary" role="alert">
+
+:bulb: **Tip:** You can also close the application directly as it is functionally identical
+
+</div>
+
 ## Saving the data
-AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+UDT data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+- Data is saved to the same location as the application executable
 
 ## Editing the data file
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
+- Data is saved to the same location as the application executable
+
+<div markdown="span" class="alert alert-primary" role="alert">
+
+:bulb: **Tip:** Advanced users are welcome to update data directly by editing that data file.
+
+</div>
 
 ----------------
 
-## Command Summary
+# FAQ
 
-  
-| Action           | Format, Examples                               |                    
-|-----|------------------------------------------------|
-| Add a student    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS act/ACTIVITIES`<br/>e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
-| Delete a student | `delete INDEX`<br/>e.g., `delete 3`                      |
-| Edit             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]`<br/>e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                       |
-| Find by name     | `find NAME [MORE_NAME]`<br/>e.g., `find James Jake`      |
-| Find by status   | `findstatus STATUS`<br/>e.g., `findstatus positive`      |
-| Find by class    | `findclasscode CLASS`<br/>e.g., `findclasscode 4A`       |
-| Find by activity | `findactivity ACTIVITY`<br/>e.g., `findactivity choir`   |
-| List             | `list`                                                   |
-| Exit             | `exit`                                                   |
+Q: Manual insertion of students takes time, is there a faster way to do it?
+A: We are working on a feature to allow importing of **.csv** files into UDT!
