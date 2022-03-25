@@ -92,10 +92,6 @@ public class PersonCard extends UiPart<Region> {
             });
     }
 
-    public void mouseOver() {
-
-    }
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
