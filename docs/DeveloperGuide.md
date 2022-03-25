@@ -263,6 +263,37 @@ The following activity diagram summarizes how to flag a client.
     * Pros: Only one command for both scenarios and fewer tests needed.
     * Cons: Usage is not very intuitive to a user.
 
+### Sort Command
+
+The `sort` command sorts clients based on the parameter provided by the user input.
+
+The `sort` mechanism is facilitated by `HustleBook`. It is implemented by `SortCommand` that extends `Command` and parsed
+by `SortCommandParser`. SortCommand accepts a Comparator<Person> and uses FXCollections.sort to sort
+`UniquePersonsList`. The parameters `SortCommand` currently accepts are `name`, `prev`, `salary` and `meeting`.
+
+Given below is an example usage scenario and how the `sort` mechanism behaves at each step.
+
+Step 1. The user inputs `sort name`. `LogicManager#excute` calls `HustleBookParser#parseCommand`.
+
+Step 2. `HustleBookParser#parseCommand` then passes the user input and calls `SortComandParser#parse`.
+
+Step 3. `SortComandParser#parse` calls `SortCommandParser#parseComparatorForSort` to determine the Comparator
+required and returns a `PersonNameComparator` object to `SortComandParser#parse`.
+
+Step 4. `SortComandParser#parse` then returns a `SortCommand` containing `PersonNameComparator` to `LogicManager`.
+
+Step 5.  `LogicManager#execute` executes the `SortCommand` which calls `model#sortPersonListBy` and sorts the
+`UniquePersonList` using FXCollections.sort and `PersonNameComparator`.
+
+
+The following sequence diagram shows how the `sort` command works:
+
+**[COMING SOON]**
+
+The following activity diagram summarizes how to sort all clients.
+
+**[COMING SOON]**
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
