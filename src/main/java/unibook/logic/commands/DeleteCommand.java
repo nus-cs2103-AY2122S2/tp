@@ -56,7 +56,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model,
                                  Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) throws CommandException {
+                                 Boolean isModuleListShowing, Boolean isGroupListShowing) throws CommandException {
         requireNonNull(model);
 
         // delete person by index case

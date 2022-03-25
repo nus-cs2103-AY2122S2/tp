@@ -35,8 +35,8 @@ public class ListCommand extends Command {
             + "list (displays all entries)\n"
             + "list o/type ty/<TYPE> (displays all people with the specified type (students/professors))\n"
             + "list o/module m/<MODULENAME> (displays all entries associated with the given module)\n"
-            + "list o/module m/<MODULENAME> ty/<TYPE> " +
-            "(displays all entries of a specific type associated with the module)\n"
+            + "list o/module m/<MODULENAME> ty/<TYPE> "
+            + "(displays all entries of a specific type associated with the module)\n"
             + "list o/view v/<VIEWTYPE> (Switches the UniBook to the specified view (people/modules))";
 
 
@@ -83,6 +83,9 @@ public class ListCommand extends Command {
         case GROUP:
             this.commandType = ListCommandType.GROUP;
             this.group = field;
+            break;
+        default:
+            break;
         }
     }
 
@@ -97,7 +100,10 @@ public class ListCommand extends Command {
             this.moduleCode = new ModuleCode(field1);
             this.type = field2;
             break;
+        default:
+            break;
         }
+
     }
 
 
@@ -124,13 +130,14 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) throws CommandException {
+                                 Boolean isModuleListShowing, Boolean isGroupListShowing) throws CommandException {
         requireNonNull(model);
-        showAll(model);
         ModelManager modelManager = (ModelManager) model;
+
         switch (this.commandType) {
         case ALL:
             //List everything.
+            showAll(model);
             return new CommandResult(MESSAGE_SUCCESS);
         case MODULE:
             if (!moduleCodeExists(model.getUniBook().getModuleList())) {
@@ -141,13 +148,16 @@ public class ListCommand extends Command {
                 //Module command given in person page. Displays all people with given module
                 Predicate<Person> showSpecificPeoplePredicate = p -> p.hasModule(this.moduleCode);
                 model.updateFilteredPersonList(showSpecificPeoplePredicate);
-                return new CommandResult(
-                        String.format(Messages.MESSAGE_LISTED_PEOPLE_WITH_MODULE, moduleCode.toString()));
-            } else {
+                return new
+                        CommandResult(String.format(Messages.MESSAGE_LISTED_PEOPLE_WITH_MODULE, moduleCode.toString()));
+
+            } else if (modelManager.getUi().isModuleListShowing()) {
                 //Module command given in modules page. Displays specified module.
                 Predicate<Module> showSpecificModulePredicate = m -> m.hasModuleCode(this.moduleCode);
                 model.updateFilteredModuleList(showSpecificModulePredicate);
                 return new CommandResult(String.format(Messages.MESSAGE_LISTED_MODULE, moduleCode.toString()));
+            } else {
+                return new CommandResult(String.format(Messages.MESSAGE_WRONG_VIEW, "Modules or People"));
             }
 
         case TYPE:
@@ -165,7 +175,7 @@ public class ListCommand extends Command {
                     throw new CommandException(Messages.MESSAGE_WRONG_TYPE);
                 }
             } else {
-                //Type command given in (wrong) modules view.
+                //Type command given in (wrong) modules view or groups view.
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "People"));
             }
         case MODULEANDTYPE:
@@ -195,7 +205,7 @@ public class ListCommand extends Command {
                     throw new CommandException(Messages.MESSAGE_WRONG_TYPE);
                 }
             } else {
-                //Type command given in (wrong) modules view.
+                //Type command given in (wrong) modules or group view.
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "People"));
             }
         case VIEW:
@@ -207,7 +217,7 @@ public class ListCommand extends Command {
                     modelManager.getUi().setModuleListPanel();
                     return new CommandResult(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
                 }
-            } else {
+            } else if (this.viewType == ListView.PEOPLE) {
                 //Switch view to people
                 if (isPersonListShowing) {
                     return new CommandResult(Messages.MESSAGE_ALREADY_ON_PEOPLE_PAGE);
@@ -215,30 +225,54 @@ public class ListCommand extends Command {
                     modelManager.getUi().setPersonListPanel();
                     return new CommandResult(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
                 }
+            } else {
+                //Switch view to groups
+                assert this.viewType == ListView.GROUPS;
+                if (isGroupListShowing) {
+                    return new CommandResult(Messages.MESSAGE_ALREADY_ON_GROUP_PAGE);
+                } else {
+                    ObservableList<Module> modules = ((UniBook) modelManager.getUniBook())
+                            .getModuleList();
+                    ObservableList<Group> groups = FXCollections.observableArrayList();
+                    for (Module m : modules) {
+                        ObservableList<Group> moduleGroups = m.getGroups();
+                        for (Group mg : moduleGroups) {
+                            groups.add(mg);
+                        }
+                    }
+                    modelManager.getUi().setGroupListPanel(groups);
+                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_GROUP_PAGE);
+                }
+
             }
 
         case GROUP:
-/*
             if (modelManager.getUi().isModuleListShowing() && modelManager.getFilteredModuleList().size() == 1) {
-                //Only 1 module is being viewed
+                //The case where 1 module is showing, allow to focus into 1 group
+                //Shows all groups that match given name in aforementioned module.
                 ObservableList<Group> groups = modelManager.getFilteredModuleList().get(0).getGroups();
                 Group group = groups.get(0);
-                if (group.getGroupName().equals(this.group)) {
+                if (group.getGroupName().toLowerCase().equals(this.group)) {
                     modelManager.getUi().setGroupListPanel(groups);
+                    return new CommandResult(String.format(Messages.MESSAGE_LISTED_MODULE_GROUP,
+                            group.getGroupName(), group.getModule().getModuleName().toString()));
                 } else {
-                    throw new CommandResult("The group does not exist in the displayed module!");
+                    throw new CommandException("The group does not exist in the displayed module!");
                 }
             } else {
                 try {
-                    ObservableList<Group> groups =
-                            ((UniBook)(modelManager.getUniBook())).getGroupsWithGroupName(this.group);
+                    //The case where the user is in people list, or modules list with >1 module showing
+                    //Shows all groups that match given name.
+                    ObservableList<Group> groups = ((UniBook) modelManager.getUniBook())
+                            .getGroupsWithGroupName(this.group);
                     modelManager.getUi().setGroupListPanel(groups);
+                    return new CommandResult(String.format(Messages.MESSAGE_LISTED_GROUP_WITH_NAME,
+                            groups.get(0).getGroupName()));
                 } catch (GroupNotFoundException g) {
                     throw new CommandException("The group entered does not exist in the UniBook!");
                 }
 
             }
-*/
 
         default:
             return new CommandResult("");

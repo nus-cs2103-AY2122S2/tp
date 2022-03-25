@@ -175,11 +175,11 @@ public class Module {
     public Group getGroupByName(String grpName) {
         requireNonNull(grpName);
         for (Group grp : groups) {
-            if (grp.getGroupName().equals(grpName)) {
+            if ((grp.getGroupName().toLowerCase()).equals(grpName.toLowerCase())) {
                 return grp;
             }
         }
-        throw new GroupNotFoundException();
+        return null;
     }
 
     /**

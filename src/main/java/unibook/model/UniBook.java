@@ -1,11 +1,11 @@
 package unibook.model;
 
 import static java.util.Objects.requireNonNull;
-import javafx.collections.FXCollections;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
@@ -265,8 +265,12 @@ public class UniBook implements ReadOnlyUniBook {
         requireNonNull(groupName);
         ObservableList<Group> groups = FXCollections.observableArrayList();
         for (Module m : modules) {
-            groups.add(m.getGroupByName(groupName));
+            Group g = m.getGroupByName(groupName);
+            if (g != null) {
+                groups.add(m.getGroupByName(groupName));
+            }
         }
+
         return groups;
     }
 
@@ -317,6 +321,8 @@ public class UniBook implements ReadOnlyUniBook {
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
+
+
 
     @Override
     public boolean equals(Object other) {

@@ -1,12 +1,11 @@
 package unibook.logic.parser;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.stream.Stream;
 
 import unibook.commons.core.Messages;
 import unibook.logic.commands.ListCommand;
 import unibook.logic.parser.exceptions.ParseException;
-import unibook.model.module.ModuleCode;
+
 
 /**
  * Parses input arguments and creates a new ListCommand object
@@ -51,6 +50,8 @@ public class ListCommandParser implements Parser<ListCommand> {
                     } else if (view.equals("people")) {
                         //Change to people view
                         return new ListCommand(ListCommand.ListView.PEOPLE, ListCommand.ListCommandType.VIEW);
+                    } else if (view.equals("groups")) {
+                        return new ListCommand(ListCommand.ListView.GROUPS, ListCommand.ListCommandType.VIEW);
                     } else {
                         //Invalid view argument given
                         throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
@@ -96,7 +97,6 @@ public class ListCommandParser implements Parser<ListCommand> {
                 }
                 return new ListCommand(type, ListCommand.ListCommandType.TYPE);
             case "group":
-
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
                     throw new ParseException(
                             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,

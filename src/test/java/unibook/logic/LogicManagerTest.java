@@ -30,6 +30,8 @@ public class LogicManagerTest {
     public static final Boolean PERSON_LIST_NOT_SHOWING = false;
     public static final Boolean MODULE_LIST_SHOWING = true;
     public static final Boolean MODULE_LIST_NOT_SHOWING = false;
+    public static final Boolean GROUP_LIST_SHOWING = true;
+    public static final Boolean GROUP_LIST_NOT_SHOWING = false;
 
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
 
@@ -102,7 +104,8 @@ public class LogicManagerTest {
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
                                       Model expectedModel) throws CommandException, ParseException {
-        CommandResult result = logic.execute(inputCommand, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING);
+        CommandResult result =
+                logic.execute(inputCommand, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING, GROUP_LIST_SHOWING);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
@@ -147,7 +150,7 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage, Model expectedModel) {
         Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand,
-            PERSON_LIST_SHOWING, MODULE_LIST_SHOWING));
+            PERSON_LIST_SHOWING, MODULE_LIST_SHOWING, GROUP_LIST_SHOWING));
         assertEquals(expectedModel, model);
     }
 

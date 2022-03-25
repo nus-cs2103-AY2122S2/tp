@@ -28,7 +28,8 @@ public interface Logic {
      */
     CommandResult execute(String commandText,
                           Boolean isPersonListShowing,
-                          Boolean isModuleListShowing) throws CommandException, ParseException;
+                          Boolean isModuleListShowing,
+                          Boolean isGroupListShowing) throws CommandException, ParseException;
 
     /**
      * Returns the UniBook.

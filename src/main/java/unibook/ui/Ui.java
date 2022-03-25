@@ -39,6 +39,14 @@ public interface Ui {
     boolean isPersonListShowing();
 
     /**
+     * Check if group list showing in gui.
+     *
+     * @return boolean variable indicating if person list being shown
+     */
+    boolean isGroupListShowing();
+
+
+    /**
      * Set the view to show list of modules.
      */
     void setModuleListPanel();

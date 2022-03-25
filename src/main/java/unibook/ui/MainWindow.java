@@ -247,7 +247,8 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText,
                 this.isPersonListShowing(),
-                this.isModuleListShowing());
+                this.isModuleListShowing(),
+                    this.isGroupListShowing());
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

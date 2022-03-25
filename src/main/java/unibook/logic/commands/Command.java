@@ -21,5 +21,6 @@ public abstract class Command {
     // execute will delete the specified index of person or module depending on what is currently showing
     public abstract CommandResult execute(Model model,
                                           Boolean isPersonListShowing,
-                                          Boolean isModuleListShowing) throws CommandException;
+                                          Boolean isModuleListShowing,
+                                          Boolean isGroupListShowing) throws CommandException;
 }
