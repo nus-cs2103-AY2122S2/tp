@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LAB;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABMARK;
@@ -20,6 +19,7 @@ import seedu.address.model.lab.LabMark;
 import seedu.address.model.lab.LabStatus;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateLabException;
+import seedu.address.model.student.exceptions.InvalidLabStatusException;
 import seedu.address.model.student.exceptions.LabNotFoundException;
 
 /**
@@ -84,10 +84,10 @@ public class EditLabCommand extends Command {
      * Returns true if the given EditLabCommand is a valid EditLabCommand.
      */
     public boolean isValidCommand(EditLabCommand e) {
-        if (e.newStatus == LabStatus.GRADED && e.newMark.equals(new LabMark())) {
+        if (e.newStatus == LabStatus.GRADED && e.newMark.isEmpty()) {
             return false;
         }
-        if (e.newStatus != LabStatus.GRADED && !e.newMark.equals(new LabMark())) {
+        if (e.newStatus != LabStatus.GRADED && !e.newMark.isEmpty()) {
             return false;
         }
         return true;
@@ -121,12 +121,18 @@ public class EditLabCommand extends Command {
         LabList listToEdit = studentToEdit.getLabs();
 
         try {
-            listToEdit.setLab(listToEdit.getLab(labNumber),
-                    new Lab(String.valueOf(labNumber)).of(newStatus.name()));
+            Lab labToEdit = listToEdit.getLab(labNumber);
+            if (newMark.isEmpty()) {
+                listToEdit.setLab(labToEdit, labToEdit.editLabStatus(newStatus));
+            } else {
+                listToEdit.setLab(labToEdit, labToEdit.editLabMark(newMark));
+            }
         } catch (LabNotFoundException e) {
             throw new CommandException(MESSAGE_INVALID_LAB);
         } catch (DuplicateLabException e) {
             throw new CommandException(MESSAGE_IDENTICAL_LAB);
+        } catch (InvalidLabStatusException e) {
+            throw new CommandException(e.getMessage());
         }
 
         return new CommandResult(
