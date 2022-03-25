@@ -47,10 +47,6 @@ public class DeleteCommand extends Command {
         model.deleteInterview(candidateToDelete);
         model.deleteCandidate(candidateToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, candidateToDelete));
-
-        model.deleteCandidate(candidateToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, candidateToDelete));
-
     }
 
     @Override
