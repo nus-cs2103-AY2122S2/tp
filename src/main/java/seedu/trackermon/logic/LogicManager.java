@@ -50,7 +50,6 @@ public class LogicManager implements Logic {
         Command command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-
         try {
             if (commandResult.isImport()) {
                 Optional<ReadOnlyShowList> showListOptional = storage.readShowList();
