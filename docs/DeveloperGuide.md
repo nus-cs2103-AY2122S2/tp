@@ -3,10 +3,15 @@ layout: page
 title: Developer Guide
 ---
 
+Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a
+Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**.
+Trackermon allows people who want to track and remember what shows they have watched or are currently watching.
+
 ### Table of Contents
 
 * [**Acknowledgements**](#acknowledgements)
 * [**Setting up, getting started**](#setting-up-getting-started)
+* [**About**](#about)
 * [**Design**](#design)
     * [Architecture](#architecture)
     * [UI component](#ui-component)
@@ -69,6 +74,20 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+## About
+
+The purpose of this developer guide is to allow developers who want to work on Trackermon to gain a better understanding on the application's implementation.
+
+### Developer guide navigation
+
+| Action                                                        | Format, Examples                                                                                                                                      |
+|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <div markdown="span" class="alert alert-warning">:bulb:</div> | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                        |
+
+
 
 ---
 

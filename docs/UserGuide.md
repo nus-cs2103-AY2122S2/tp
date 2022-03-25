@@ -3,10 +3,9 @@ layout: page
 title: User Guide
 ---
 
-Trackermon is a **desktop app** for **tracking and managing shows, optimized for use via a
+Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a
 Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**.
-The app allows the user to track and remember what shows they have watched or currently watching.
-They can easily look up the list of shows if they need to.
+Trackermon allows people who want to track and remember what shows they have watched or are currently watching.
 
 ### Table of Contents
 * [**Quick Start**](#quick-start)
