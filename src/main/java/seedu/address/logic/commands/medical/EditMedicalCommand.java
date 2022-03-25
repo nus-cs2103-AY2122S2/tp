@@ -1,17 +1,6 @@
 package seedu.address.logic.commands.medical;
 
 import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-import java.util.Optional;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETHNICITY;
@@ -24,6 +13,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SURGERIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+
+import java.util.List;
+import java.util.Optional;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.medical.Age;
 import seedu.address.model.medical.BloodType;
@@ -46,7 +46,8 @@ public class EditMedicalCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final CommandType COMMAND_TYPE = CommandType.MEDICAL;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the medical information identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the medical information identified "
             + "by the index number used in the displayed medical information list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -71,6 +72,10 @@ public class EditMedicalCommand extends Command {
     private final Index targetIndex;
     private final EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor;
 
+    /**
+     * @param index of the medical information in the filtered medical information list to edit
+     * @param editMedicalDescriptor details to edit the medical information with
+     */
     public EditMedicalCommand(Index targetIndex, EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor) {
         this.targetIndex = targetIndex;
         this.editMedicalDescriptor = editMedicalDescriptor;
@@ -87,37 +92,37 @@ public class EditMedicalCommand extends Command {
 
         Medical medicalToEdit = lastShownList.get(targetIndex.getZeroBased());
         Medical editedMedical = createEditedMedical(medicalToEdit, editMedicalDescriptor);
-        
         model.setMedical(medicalToEdit, editedMedical);
-        
+
         return new CommandResult(String.format(MESSAGE_EDIT_MEDICAL_SUCCESS, editedMedical), COMMAND_TYPE);
     }
 
-    private static Medical createEditedMedical(Medical medicalToEdit, EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor) {
+    private static Medical createEditedMedical(Medical medicalToEdit,
+                                               EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor) {
         assert medicalToEdit != null;
 
         Nric updatedNric = editMedicalDescriptor.getNric().orElse(medicalToEdit.getPatientNric());
         Age updatedAge = editMedicalDescriptor.getAge().orElse(medicalToEdit.getAge());
-        BloodType updatedBloodType
-                = editMedicalDescriptor.getBloodType().orElse(medicalToEdit.getBloodType());
-        Medication updatedMedication
-                = editMedicalDescriptor.getMedication().orElse(medicalToEdit.getMedication());
-        Height updatedHeight
-                = editMedicalDescriptor.getHeight().orElse(medicalToEdit.getHeight());
-        Weight updatedWeight
-                = editMedicalDescriptor.getWeight().orElse(medicalToEdit.getWeight());
-        Illnesses updatedIllnesses
-                = editMedicalDescriptor.getIllnesses().orElse(medicalToEdit.getIllnesses());
-        Surgeries updatedSurgeries
-                = editMedicalDescriptor.getSurgeries().orElse(medicalToEdit.getSurgeries());
-        FamilyHistory updatedFamilyHistory
-                = editMedicalDescriptor.getFamilyHistory().orElse(medicalToEdit.getFamilyHistory());
-        ImmunizationHistory updatedImmunizationHistory
-                = editMedicalDescriptor.getImmunizationHistory().orElse(medicalToEdit.getImmunizationHistory());
-        Gender updatedGender
-                = editMedicalDescriptor.getGender().orElse(medicalToEdit.getGender());
-        Ethnicity updatedEthnicity
-                = editMedicalDescriptor.getEthnicity().orElse(medicalToEdit.getEthnicity());
+        BloodType updatedBloodType =
+                editMedicalDescriptor.getBloodType().orElse(medicalToEdit.getBloodType());
+        Medication updatedMedication =
+                editMedicalDescriptor.getMedication().orElse(medicalToEdit.getMedication());
+        Height updatedHeight =
+                editMedicalDescriptor.getHeight().orElse(medicalToEdit.getHeight());
+        Weight updatedWeight =
+                editMedicalDescriptor.getWeight().orElse(medicalToEdit.getWeight());
+        Illnesses updatedIllnesses =
+                editMedicalDescriptor.getIllnesses().orElse(medicalToEdit.getIllnesses());
+        Surgeries updatedSurgeries =
+                editMedicalDescriptor.getSurgeries().orElse(medicalToEdit.getSurgeries());
+        FamilyHistory updatedFamilyHistory =
+                editMedicalDescriptor.getFamilyHistory().orElse(medicalToEdit.getFamilyHistory());
+        ImmunizationHistory updatedImmunizationHistory =
+                editMedicalDescriptor.getImmunizationHistory().orElse(medicalToEdit.getImmunizationHistory());
+        Gender updatedGender =
+                editMedicalDescriptor.getGender().orElse(medicalToEdit.getGender());
+        Ethnicity updatedEthnicity =
+                editMedicalDescriptor.getEthnicity().orElse(medicalToEdit.getEthnicity());
 
         return new Medical(updatedNric,
                 updatedAge,

@@ -2,11 +2,6 @@ package seedu.address.logic.parser.medical;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.medical.EditMedicalCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETHNICITY;
@@ -19,6 +14,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SURGERIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.medical.EditMedicalCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -51,7 +51,8 @@ public class EditMedicalCommandParser {
 
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
-            EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor = new EditMedicalCommand.EditMedicalDescriptor();
+            EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor =
+                    new EditMedicalCommand.EditMedicalDescriptor();
 
             if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
                 editMedicalDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
@@ -60,10 +61,12 @@ public class EditMedicalCommandParser {
                 editMedicalDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
             }
             if (argMultimap.getValue(PREFIX_BLOODTYPE).isPresent()) {
-                editMedicalDescriptor.setBloodType(ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).get()));
+                editMedicalDescriptor.setBloodType(
+                        ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).get()));
             }
             if (argMultimap.getValue(PREFIX_MEDICATION).isPresent()) {
-                editMedicalDescriptor.setMedication(ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get()));
+                editMedicalDescriptor.setMedication(
+                        ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get()));
             }
             if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
                 editMedicalDescriptor.setHeight(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get()));
@@ -72,22 +75,27 @@ public class EditMedicalCommandParser {
                 editMedicalDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get()));
             }
             if (argMultimap.getValue(PREFIX_ILLNESSES).isPresent()) {
-                editMedicalDescriptor.setIllnesses(ParserUtil.parseIllnesses(argMultimap.getValue(PREFIX_ILLNESSES).get()));
+                editMedicalDescriptor.setIllnesses(
+                        ParserUtil.parseIllnesses(argMultimap.getValue(PREFIX_ILLNESSES).get()));
             }
             if (argMultimap.getValue(PREFIX_SURGERIES).isPresent()) {
-                editMedicalDescriptor.setSurgeries(ParserUtil.parseSurgeries(argMultimap.getValue(PREFIX_SURGERIES).get()));
+                editMedicalDescriptor.setSurgeries(
+                        ParserUtil.parseSurgeries(argMultimap.getValue(PREFIX_SURGERIES).get()));
             }
             if (argMultimap.getValue(PREFIX_FAMILY_HISTORY).isPresent()) {
-                editMedicalDescriptor.setFamilyHistory(ParserUtil.parseFamilyHistory(argMultimap.getValue(PREFIX_FAMILY_HISTORY).get()));
+                editMedicalDescriptor.setFamilyHistory(
+                        ParserUtil.parseFamilyHistory(argMultimap.getValue(PREFIX_FAMILY_HISTORY).get()));
             }
             if (argMultimap.getValue(PREFIX_IMMUNIZATION_HISTORY).isPresent()) {
-                editMedicalDescriptor.setImmunizationHistory(ParserUtil.parseImmunizationHistory(argMultimap.getValue(PREFIX_IMMUNIZATION_HISTORY).get()));
+                editMedicalDescriptor.setImmunizationHistory(
+                        ParserUtil.parseImmunizationHistory(argMultimap.getValue(PREFIX_IMMUNIZATION_HISTORY).get()));
             }
             if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
                 editMedicalDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
             }
             if (argMultimap.getValue(PREFIX_ETHNICITY).isPresent()) {
-                editMedicalDescriptor.setEthnicity(ParserUtil.parseEthnicity(argMultimap.getValue(PREFIX_ETHNICITY).get()));
+                editMedicalDescriptor.setEthnicity(
+                        ParserUtil.parseEthnicity(argMultimap.getValue(PREFIX_ETHNICITY).get()));
             }
 
             return new EditMedicalCommand(index, editMedicalDescriptor);

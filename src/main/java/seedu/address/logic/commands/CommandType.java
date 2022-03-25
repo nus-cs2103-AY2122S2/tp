@@ -67,7 +67,7 @@ public enum CommandType {
      * Returns command related to adding information to patients in Medbook.
      *
      * @param commandType user input command type
-     * @param arguments user input arguments
+     * @param arguments   user input arguments
      * @return the command based on the user input
      */
     public static Command parseAddCommandType(String commandType, String arguments) throws ParseException {
@@ -124,12 +124,11 @@ public enum CommandType {
             return new ViewTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
-
         }
     }
 
     /**
-     * Returns command related to deleting information to patients in MedBook.
+     * Returns command related to editing information in MedBook.
      *
      * @param arguments user input arguments
      * @return the command based on the user input
@@ -161,18 +160,18 @@ public enum CommandType {
     public static Command parseDeleteCommandType(String arguments) throws ParseException {
         requireNonNull(arguments);
         switch (viewCommandType) {
-            case CONTACT:
-                return new DeleteContactCommandParser().parse(arguments);
-            case MEDICAL:
-                return new DeleteMedicalCommandParser().parse(arguments);
-            case CONSULTATION:
-                return new DeleteConsultationCommandParser().parse(arguments);
-            case PRESCRIPTION:
-                return new DeletePrescriptionCommandParser().parse(arguments);
-            case TEST:
-                return new DeleteTestResultCommandParser().parse(arguments);
-            default:
-                return new DeleteCommandParser().parse(arguments);
+        case CONTACT:
+            return new DeleteContactCommandParser().parse(arguments);
+        case MEDICAL:
+            return new DeleteMedicalCommandParser().parse(arguments);
+        case CONSULTATION:
+            return new DeleteConsultationCommandParser().parse(arguments);
+        case PRESCRIPTION:
+            return new DeletePrescriptionCommandParser().parse(arguments);
+        case TEST:
+            return new DeleteTestResultCommandParser().parse(arguments);
+        default:
+            return new DeleteCommandParser().parse(arguments);
         }
     }
 }
