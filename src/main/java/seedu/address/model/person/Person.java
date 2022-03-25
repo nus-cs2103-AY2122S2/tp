@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import seedu.address.commons.core.index.Index;
 
 /**
  * Represents a Person in the address book.
@@ -91,12 +92,12 @@ public class Person {
     }
 
     /**
-     * Removes the task at {@code index} from the list of tasks.
+     * Deletes the task at {@code index} from the list of tasks.
      *
      * @param index the index of the task to be removed.
      */
-    public void removeTask(int index) {
-        taskList.removeTask(index);
+    public void deleteTask(Index index) {
+        taskList.deleteTask(index);
     }
 
     /**

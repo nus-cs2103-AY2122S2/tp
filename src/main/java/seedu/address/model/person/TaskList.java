@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
 import java.util.ArrayList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.exceptions.InvalidTaskIndexException;
 
 /**
  * Maintains the list of tasks assigned to a student.
@@ -44,12 +46,17 @@ public class TaskList {
     }
 
     /**
-     * Removes the task at {@code index} from the list of tasks.
+     * Deletes the task at {@code index} from the list of tasks.
      *
      * @param index the index of the task to be removed.
      */
-    public void removeTask(int index) {
-        taskList.remove(index);
+    public void deleteTask(Index index) {
+        int numberOfTasks = getNumberOfTasks();
+        if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+            taskList.remove(index.getZeroBased());
+        } else {
+            throw new InvalidTaskIndexException();
+        }
     }
 
     /**

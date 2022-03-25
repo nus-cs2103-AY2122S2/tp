@@ -125,9 +125,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Deletes task with {@code index} belonging to {@code Person} with {@code studentId}.
+     *
+     * @param studentId the student id of the person whose task is to be deleted.
+     * @param index the index of the task to be deleted.
+     */
+    public void deleteTaskOfPerson(StudentId studentId, Index index) {
+        requireNonNull(studentId);
+        requireNonNull(index);
+
+        persons.deleteTaskOfPerson(studentId, index);
+    }
+
+    /**
      * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as done.
      *
-     * @param studentId the student id of the person who's task is to be marked.
+     * @param studentId the student id of the person whose task is to be marked.
      * @param index the task to be marked as done.
      */
     public void markTaskOfPerson(StudentId studentId, Index index) {
@@ -140,7 +153,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as undone.
      *
-     * @param studentId the student id of the person who's task is to be marked.
+     * @param studentId the student id of the person whose task is to be marked.
      * @param index the task to be marked as undone.
      */
     public void unmarkTaskOfPerson(StudentId studentId, Index index) {
