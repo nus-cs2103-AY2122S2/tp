@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.Entity;
@@ -18,6 +20,7 @@ import seedu.address.model.entity.EntityConverter;
 import seedu.address.model.entity.exceptions.DifferentEntityException;
 import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.tamodule.TaModule;
 
 /**
@@ -219,6 +222,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Assessment> getFilteredAssessmentList() {
         return filteredAssessments;
+    }
+
+    @Override
+    public ObservableList<Student> getStudentListByIndexes(List<Index> indexes) {
+        return tAssist.getStudentListByIndexes(indexes);
+    }
+
+    @Override
+    public ObservableList<Student> getStudentListByStudentIds(List<StudentId> studentIds) {
+        return tAssist.getStudentByIDs(studentIds);
     }
 
     @Override

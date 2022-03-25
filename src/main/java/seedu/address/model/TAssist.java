@@ -4,14 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.UniqueClassGroupList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tamodule.TaModule;
 import seedu.address.model.tamodule.UniqueModuleList;
 
@@ -266,6 +271,25 @@ public class TAssist implements ReadOnlyTAssist {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Student> getStudentListByIndexes(List<Index> indexes) {
+        if (indexes.stream().anyMatch(x -> x.getZeroBased() >= getStudentList().size())) {
+            throw new StudentNotFoundException();
+        }
+        return FXCollections.unmodifiableObservableList(
+                FXCollections.observableArrayList(indexes.stream()
+                .map(index -> getStudentList().get(index.getZeroBased()))
+                .collect(Collectors.toList())));
+    }
+
+    public ObservableList<Student> getStudentByIDs(List<StudentId> studentIds) {
+        if (studentIds.stream().anyMatch(x -> !students.contains(x))) {
+            throw new StudentNotFoundException();
+        }
+        return FXCollections.unmodifiableObservableList(
+                FXCollections.observableArrayList(getStudentList().stream()
+                .filter(student -> studentIds.contains(student.getStudentId())).collect(Collectors.toList())));
     }
 
     @Override
