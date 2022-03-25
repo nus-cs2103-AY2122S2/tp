@@ -48,6 +48,16 @@ public class Lab {
     }
 
     /**
+     * Constructs a graded {@code Lab} with initialized {@code labMark}.
+     *
+     * @param labNumber A valid lab number.
+     * @param labMark The score given to this Lab.
+     */
+    private Lab(String labNumber, LabMark labMark) {
+        this(labNumber, LabStatus.GRADED, labMark);
+    }
+
+    /**
      * Constructs an {@code Lab} with initialized {@code labMark}.
      *
      * @param labNumber A valid lab number.
@@ -119,7 +129,7 @@ public class Lab {
      */
     public Lab of(LabMark labMark) {
         requireNonNull(labMark);
-        return new Lab(String.valueOf(labNumber), LabStatus.GRADED, labMark);
+        return new Lab(String.valueOf(labNumber), labMark);
     }
 
     /**
