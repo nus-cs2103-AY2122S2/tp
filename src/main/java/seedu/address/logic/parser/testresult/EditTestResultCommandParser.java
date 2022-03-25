@@ -1,16 +1,18 @@
 package seedu.address.logic.parser.testresult;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALTEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.testresult.EditTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
 
 /**
  * Parses input arguments and creates a new EditTestResultCommand object

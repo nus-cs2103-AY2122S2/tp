@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
