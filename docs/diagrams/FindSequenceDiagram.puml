@@ -20,7 +20,7 @@ LogicManager -> TrackermonParser : parseCommand("find t/Anime")
 activate TrackermonParser
 
 create FindCommandParser
-TrackermonParser -> FindCommandParser :FindCommandParser("find t/Anime")
+TrackermonParser -> FindCommandParser
 activate FindCommandParser
 
 FindCommandParser --> TrackermonParser
