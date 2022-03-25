@@ -161,7 +161,7 @@ Edits an existing student's details in the address book by the Index provided an
 
 </div>
 
-## Delete a student : `delete`
+## Delete a student: `delete`
 Deletes the specified person from the address book.
 - Format: `delete INDEX`
   - Deletes the student at the specified `INDEX`
