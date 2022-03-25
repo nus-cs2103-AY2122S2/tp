@@ -428,6 +428,35 @@ The `ArgumentMultimap` class is used to parse the user input and store the filte
 
 The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate. 
 
+### Exit Feature
+
+The exit mechanism implements the following sequence for the method call execute("exit").
+
+#### What is the exit feature
+
+The exit feature allows users to exit from Tracey after they finish with it. 
+
+The `exit` command is as follows:
+
+`exit`
+
+The user can choose when to exit the programme <br>
+
+The activity diagram shows the possible execution paths for the `exit` command.
+
+**Path Execution of Exit Feature Activity Diagram is shown below:**
+![ExitFeatureActivityDiagram](images/ExitFeatureActivityDiagram.png)
+
+There is one possible execution path for this command.
+
+1. User inputs the `exit` command, triggering Tracey to close its programme
+
+The sequence diagram below shows the interactions between objects during the execution of a `exit` command.
+
+**Sequence Diagram of Exit Feature is shown below:**
+![ExitSequenceDiagram](images/ExitFeatureSequenceDiagram.jpg)
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
