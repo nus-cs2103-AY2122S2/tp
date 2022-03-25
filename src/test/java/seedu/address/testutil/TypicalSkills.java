@@ -8,7 +8,7 @@ import seedu.address.model.team.Skill;
 public class TypicalSkills {
     public static final Skill SKILL_JAVA_50 = new Skill("Java", 50);
     public static final Skill SKILL_JAVA_40 = new Skill("Java", 40);
-    public static final Skill SKILL_C_NULL = new Skill("C");
+    public static final Skill SKILL_C_20 = new Skill("C", 20);
     public static final Skill SKILL_C_0 = new Skill("C", 0);
     public static final Skill SKILL_PYTHON_30 = new Skill("PYTHON", 30);
 }

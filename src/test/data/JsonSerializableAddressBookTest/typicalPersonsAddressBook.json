@@ -7,7 +7,7 @@
     "username" : "alice-paul",
     "isPotentialTeammate": false,
     "teams" : [ "friends" ],
-    "skillSet" : [ "C_20" ]
+    "skillSet" : [ "C_20" , "Python_40"]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",

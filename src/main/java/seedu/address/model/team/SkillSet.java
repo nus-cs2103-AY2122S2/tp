@@ -71,8 +71,8 @@ public class SkillSet {
      */
     public boolean hasSkills(SkillSet skillset) {
         requireAllNonNull(skillset);
-        return skillset.skillSet.stream()
-                .allMatch(x -> this.hasSkill(x));
+        return skillset.getSkillSetInStream()
+                .allMatch((this::hasSkill));
     }
 
     /**

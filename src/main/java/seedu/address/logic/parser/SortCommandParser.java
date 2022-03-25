@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.HashSet;
-
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonBySkillProficiencyComparator;
@@ -29,9 +27,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         Skill skillToFilter = new Skill(trimmedArgs);
-        HashSet<Skill> skillSet = new HashSet<>();
+        SkillSet skillSet = new SkillSet();
         skillSet.add(skillToFilter);
-        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(new SkillSet(skillSet));
+        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(skillSet);
         PersonBySkillProficiencyComparator comparator = new PersonBySkillProficiencyComparator(skillToFilter);
 
         return new SortCommand(predicate, comparator);

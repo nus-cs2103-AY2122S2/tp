@@ -29,7 +29,7 @@ public class TypicalPersons {
             .withGithubUsername("alice-paul").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTeams("friends")
-            .withSkillSet("C_20")
+            .withSkillSet("C_20", "Python_40")
             .isPotentialTeammate(false)
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
