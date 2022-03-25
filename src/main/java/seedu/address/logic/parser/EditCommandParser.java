@@ -19,6 +19,7 @@ import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,10 +39,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PREV_DATE_MET, PREFIX_SALARY,
                         PREFIX_INFO);
 
-        String name;
+        Name name;
 
         try {
-            name = ParserUtil.parseNameString(argMultimap.getPreamble());
+            name = ParserUtil.parseName(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }

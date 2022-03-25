@@ -79,12 +79,13 @@ public class EditCommand extends Command {
      * @param name name of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(String name, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Name name, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
 
-        this.targetNameStr = name;
-        this.targetName = new Name(name);
+
+        this.targetName = name;
+        this.targetNameStr = name.fullName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 

@@ -59,7 +59,7 @@ public class HustleBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + FULL_NAME_FIRST_PERSON + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor), null);
-        assertEquals(new EditCommand(FULL_NAME_FIRST_PERSON.toString(), descriptor), command);
+        assertEquals(new EditCommand(FULL_NAME_FIRST_PERSON, descriptor), command);
     }
 
     @Test
