@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_CARL;
-import static seedu.address.testutil.TypicalInterviews.INTERVIEW_NO_MATCHING_AVAILABILITY;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 
 import java.util.Arrays;

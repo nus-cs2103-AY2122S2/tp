@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
-import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
-import static seedu.address.testutil.TypicalInterviews.INTERVIEW_NO_MATCHING_AVAILABILITY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
