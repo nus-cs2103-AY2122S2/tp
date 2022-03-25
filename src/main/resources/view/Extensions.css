@@ -27,18 +27,59 @@
 
 .module-name {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 20px;
+    -fx-font-size: 32px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 0 0 5;
 }
 
 .module-professor-list-heading {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 24px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 28px;
     -fx-text-fill: #010504;
 }
 
 .module-student-list-heading {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 24px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 28px;
     -fx-text-fill: #010504;
+}
+
+.module-groups-list-heading {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
+}
+
+.module-key-events-list-heading {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
+}
+
+/* GroupCard related classes */
+.group-headings.label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 32px;
+}
+
+.group-module-code.label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 32px;
+    -fx-text-fill: black;
+    -fx-background-color: #C1CAD6;
+    -fx-background-radius: 2;
+    -fx-padding: 2 2 2 2
+}
+
+.group-name.label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 32px;
+    -fx-padding: 0 0 0 5;
+}
+
+.group-subheadings {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
+    -fx-underline: true;
 }

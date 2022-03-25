@@ -1,12 +1,14 @@
 package unibook.ui.cards;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import unibook.commons.core.LogsCenter;
 import unibook.model.person.Student;
 import unibook.ui.UiPart;
 
@@ -14,7 +16,7 @@ import unibook.ui.UiPart;
  * A UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends UiPart<Region> {
-    private static final String FXML = "cards/StudentListCard.fxml";
+    private static final String FXML = "cards/StudentCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -39,16 +41,35 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    private final Logger logger = LogsCenter.getLogger(StudentCard.class);
+
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
+        logger.info("Instantiating student card with index " + displayedIndex);
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
-        email.setText(student.getEmail().value);
+
+        if (student.getPhone().value.isEmpty()) {
+            logger.info("Student has no phone number, making phone label invisible");
+            //no phone number, dont show phone field
+            phone.setVisible(false);
+            phone.setManaged(false);
+        } else {
+            phone.setText("Phone: " + student.getPhone().value);
+        }
+
+        if (student.getEmail().value.isEmpty()) {
+            logger.info("Student has no email, making email label invisible");
+            //no email, dont show email field
+            email.setManaged(false);
+            email.setVisible(false);
+        } else {
+            email.setText("Email: " + student.getEmail().value);
+        }
         student.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

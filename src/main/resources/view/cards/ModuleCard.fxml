@@ -5,31 +5,28 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" id="modulePane" fx:id="modulePane" xmlns="http://javafx.com/javafx/8">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-            <padding>
-                <Insets top="5" right="5" bottom="5" left="15"/>
-            </padding>
+        <VBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="module-code">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE"/>
-                    </minWidth>
-                </Label>
+                <Label fx:id="id" styleClass="module-code"/>
                 <Label fx:id="moduleCode" text="\$moduleCode" styleClass="module-code"/>
+                <Label fx:id="moduleName" styleClass="module-name" text="\$moduleCode"/>
             </HBox>
-            <Label fx:id="moduleName" styleClass="module-name" text="\$moduleCode"/>
-            <Label fx:id="professorListHeading" styleClass="module-professor-list-heading" text="Professors"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label fx:id="professorsTab" styleClass="module-professor-list-heading" text="Professors"/>
+                <Label fx:id="studentsTab" styleClass="module-student-list-heading" text="Students"/>
+                <Label fx:id="groupsTab" styleClass="module-groups-list-heading" text="Groups"/>
+                <Label fx:id="keyEventsTab" styleClass="module-key-events-list-heading" text="Key Events"/>
+            </HBox>
             <VBox fx:id="professors" VBox.vgrow="ALWAYS"/>
-            <Label fx:id="studentListHeading" styleClass="module-student-list-heading" text="Students"/>
             <VBox fx:id="students" VBox.vgrow="ALWAYS"/>
+            <VBox fx:id="keyEvents" VBox.vgrow="ALWAYS"/>
+            <VBox fx:id="groups" VBox.vgrow="ALWAYS" />
         </VBox>
     </GridPane>
 </HBox>
