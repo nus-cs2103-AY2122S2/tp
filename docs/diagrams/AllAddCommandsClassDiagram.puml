@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Logic {
+
+Class AddConsultationCommand {
+    {method} CommandResult execute(Model)
+}
+
+Class AddContactCommand
+Class AddMedicalCommand
+Class AddPrescriptionCommand
+Class AddTestResultCommand
+Class "{abstract}\nCommand" as Command
+
+Class "<<interface>>\nLogic" as Logic
+Class LogicManager
+}
+
+AddConsultationCommand -up-|> Command
+AddContactCommand -up-|> Command
+AddMedicalCommand -up-|> Command
+AddPrescriptionCommand -up-|> Command
+AddTestResultCommand -up-|> Command
+LogicManager .left.> Command : executes >
+LogicManager .right.|> Logic
+
+@enduml
