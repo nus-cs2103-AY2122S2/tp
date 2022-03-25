@@ -94,7 +94,7 @@ public class LogicManager implements Logic {
     public ObservableList<Person> getReminderPersonList() {
         ObservableList<Person> reminderList = FXCollections.observableArrayList();
         ReminderPersons reminderPersons = ReminderPersons.getInstance();
-        @SuppressWarnings("unchecked") HashSet<Person> reminderPersonsList = (HashSet<Person>) reminderPersons.clone();
+        HashSet<Person> reminderPersonsList = reminderPersons.clone();
         reminderList.addAll(reminderPersonsList);
         return reminderList;
     }

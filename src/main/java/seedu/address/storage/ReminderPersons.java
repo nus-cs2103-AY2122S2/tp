@@ -45,7 +45,7 @@ public class ReminderPersons {
     /**
      * Returns a shallow copy of the HashSet.
      */
-    public Object clone() {
-        return reminders.clone();
+    public HashSet<Person> clone() {
+        return new HashSet<>(reminders);
     }
 }
