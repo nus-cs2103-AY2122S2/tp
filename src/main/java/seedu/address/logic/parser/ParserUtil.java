@@ -167,6 +167,25 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String filterDate} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return Parsed local date.
+     * @throws ParseException if the given filter date is invalid.
+
+     */
+    public static LocalDate parseFilterDate(String filterDate) throws ParseException {
+        requireNonNull(filterDate);
+        String trimmedAttendanceDate = filterDate.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            return LocalDate.parse(trimmedAttendanceDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Filter date provided should be in dd-MM-yyyy format!");
+        }
+    }
+
+    /**
      * Parses a {@code String pickUpTime} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *

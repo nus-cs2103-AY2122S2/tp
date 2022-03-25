@@ -15,11 +15,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("date/");
     public static final Prefix PREFIX_DROPOFF = new Prefix("do/");
     public static final Prefix PREFIX_PICKUP = new Prefix("pu/");
-    public static final Prefix PREFIX_ATTENDANCE_DATE = new Prefix("att/");
     public static final Prefix PREFIX_APPOINTMENT_DATE_TIME = new Prefix("dt/");
     public static final Prefix PREFIX_APPOINTMENT_LOCATION = new Prefix("at/");
     public static final Prefix PREFIX_CLEAR = new Prefix("clear");
-    public static final Prefix PREFIX_FILTER_TODAY = new Prefix("today/");
     public static final Prefix PREFIX_FILTER_BY_DATE = new Prefix("byDate/");
     public static final Prefix PREFIX_FILTER_BY_TAGS = new Prefix("byTags/");
     public static final Prefix PREFIX_FILTER_BY_OWNER_NAME = new Prefix("byOwner/");
