@@ -9,8 +9,8 @@ UniqueClassGroupList -right-> ClassGroup
 
 ClassGroup *--> ClassGroupId
 ClassGroup *--> ClassGroupType
-ClassGroup *--> TaModule
-ClassGroup *--> "~*" Student
+ClassGroup --> TaModule
+ClassGroup --> "~*" Student
 ClassGroup *--> "~*" Lesson
 
 Lesson *--> WeekId

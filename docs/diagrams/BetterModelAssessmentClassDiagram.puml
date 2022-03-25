@@ -9,9 +9,9 @@ UniqueAssessmentList -right-> Assessment
 
 Assessment *--> AssessmentName
 Assessment *--> "0..1" SimpleName
-Assessment *--> TaModule
+Assessment --> TaModule
 Assessment *--> "~*" Attempt
 
-Attempt *--> Student
+Attempt --> Student
 Attempt *--> Grade
 @enduml
