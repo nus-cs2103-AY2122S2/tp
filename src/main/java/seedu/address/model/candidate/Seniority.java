@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Seniority {
     public static final String MESSAGE_CONSTRAINTS =
-            "Seniority input should only either be COM[1], COM[2], COM[3] or COM[4], and it should not be blank";
+            "Seniority input should only either be 1, 2, 3 or 4, and it should not be blank";
     public static final String COM_VALUE = "COM";
     public static final int MIN_SENIORITY = 1;
     public static final int MAX_SENIORITY = 4;
