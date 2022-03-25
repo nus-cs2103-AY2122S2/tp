@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.UniqueBuyerList;
 import seedu.address.model.seller.hasMatchWithBuyerPredicate;
 
@@ -31,10 +33,10 @@ public class MatchCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        UniqueBuyerList buyerList = model.getFilteredBuyerList();
+        ObservableList<Buyer> buyerList = model.getFilteredBuyerList();
         Buyer buyer = buyerList.get(index.getZeroBased());
 
-        model.updateFilteredSellerList(hasMatchWithBuyerPredicate(buyer));
+        model.updateFilteredSellerList(new hasMatchWithBuyerPredicate(buyer));
 
         return new CommandResult(
             String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredSellerList().size()));
