@@ -37,7 +37,8 @@ public class ListCommand extends Command {
             + "list o/module m/<MODULENAME> (displays all entries associated with the given module)\n"
             + "list o/module m/<MODULENAME> ty/<TYPE> "
             + "(displays all entries of a specific type associated with the module)\n"
-            + "list o/view v/<VIEWTYPE> (Switches the UniBook to the specified view (people/modules))";
+            + "list o/view v/<VIEWTYPE> (Switches the UniBook to the specified view (people/modules))"
+            + "list o/group g/<GROUPNAME> (Dsiplays groups with the given groupname)";
 
 
     private ModuleCode moduleCode;
@@ -115,8 +116,23 @@ public class ListCommand extends Command {
      * @param model
      */
     private void showAll(Model model) {
+        ModelManager mm = (ModelManager) model;
+
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
+
+        if (!(mm.getUi() == null) && mm.getUi().isGroupListShowing()) {
+            ObservableList<Group> allGroups = FXCollections.observableArrayList();
+            for (Module m : model.getUniBook().getModuleList()) {
+                ObservableList<Group> moduleGroups = m.getGroups();
+                for (Group mg : moduleGroups) {
+                    allGroups.add(mg);
+                }
+            }
+            mm.getUi().setGroupListPanel(allGroups);
+        }
+
+
     }
 
     private boolean moduleCodeExists(ObservableList<Module> modules) {
@@ -253,27 +269,51 @@ public class ListCommand extends Command {
                 ObservableList<Group> groups = modelManager.getFilteredModuleList().get(0).getGroups();
                 Group group = groups.get(0);
                 if (group.getGroupName().toLowerCase().equals(this.group)) {
+                    if (groups.size() == 0) {
+                        throw new CommandException(
+                                String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group.toUpperCase()));
+                    }
                     modelManager.getUi().setGroupListPanel(groups);
                     return new CommandResult(String.format(Messages.MESSAGE_LISTED_MODULE_GROUP,
                             group.getGroupName(), group.getModule().getModuleName().toString()));
                 } else {
-                    throw new CommandException("The group does not exist in the displayed module!");
+                    throw new CommandException(Messages.MESSAGE_GROUP_NOT_IN_MODULE);
                 }
+            } else if (modelManager.getUi().isGroupListShowing()) {
+                ObservableList<Group> groups = FXCollections.observableArrayList();
+                for (Module m : model.getUniBook().getModuleList()) {
+                    ObservableList<Group> moduleGroups = m.getGroups();
+                    for (Group mg : moduleGroups) {
+                        if (mg.getGroupName().toLowerCase().equals(this.group)) {
+                            groups.add(mg);
+                        }
+                    }
+                }
+                if (groups.size() == 0) {
+                    throw new CommandException(
+                            String.format(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK, this.group.toUpperCase()));
+                }
+                ModelManager mm = (ModelManager) model;
+                mm.getUi().setGroupListPanel(groups);
+                return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_GROUPS_WITH_NAME,
+                        this.group.toUpperCase()));
             } else {
                 try {
                     //The case where the user is in people list, or modules list with >1 module showing
                     //Shows all groups that match given name.
                     ObservableList<Group> groups = ((UniBook) modelManager.getUniBook())
                             .getGroupsWithGroupName(this.group);
+                    if (groups.size() == 0) {
+                        throw new CommandException(
+                                String.format(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK, this.group.toUpperCase()));
+                    }
                     modelManager.getUi().setGroupListPanel(groups);
                     return new CommandResult(String.format(Messages.MESSAGE_LISTED_GROUP_WITH_NAME,
                             groups.get(0).getGroupName()));
                 } catch (GroupNotFoundException g) {
-                    throw new CommandException("The group entered does not exist in the UniBook!");
+                    throw new CommandException(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK);
                 }
-
             }
-
         default:
             return new CommandResult("");
         }
