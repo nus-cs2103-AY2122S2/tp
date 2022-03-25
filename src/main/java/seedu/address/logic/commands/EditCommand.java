@@ -94,14 +94,16 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Person> lastShownList = new FilteredList<Person>(model.getFilteredPersonList());
+        FilteredList<Person> lastShownList = (FilteredList<Person>) model.getFilteredPersonList();
         Index targetIndex;
         if (index == 0) {
+            FilteredList<Person> tempList = new FilteredList<Person>(lastShownList);
             String[] nameKeywords = targetNameStr.split("\\s+");
             Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-            lastShownList.setPredicate(predicate);
+            tempList.setPredicate(predicate);
 
-            if (lastShownList.size() > 1) {
+            if (tempList.size() > 1) {
+                lastShownList.setPredicate(predicate);
                 return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
 

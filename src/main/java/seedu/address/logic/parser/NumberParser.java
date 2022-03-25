@@ -7,15 +7,17 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
-
+/**
+ * Parses number inputs. Used for confirming which clients the user is referring to
+ * in edit and delete scenarios where clients have similar names
+ */
 public class NumberParser {
 
     private final int index;
     private final Command lastCommand;
 
     /**
-     * Parses number inputs. Used for confirming which clients the user is referring to
-     * in edit and delete scenarios with clients with similar names
+     * Constructor of NumberParser.
      *
      * @param userInput
      * @param lastCommand

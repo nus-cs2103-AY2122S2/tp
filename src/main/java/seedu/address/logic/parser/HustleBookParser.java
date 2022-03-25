@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -38,7 +39,7 @@ public class HustleBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput, Command lastCommand) throws ParseException {
-        if (isNumeric(userInput)) {
+        if (StringUtil.isNonZeroUnsignedInteger(userInput)) {
             return new NumberParser(userInput, lastCommand).parse();
         }
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -84,9 +85,4 @@ public class HustleBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
-    private boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");
-    }
-
 }
