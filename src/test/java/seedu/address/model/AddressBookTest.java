@@ -9,10 +9,13 @@ import static seedu.address.testutil.PersonUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.PersonUtil.VALID_TAG_COWORKER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +25,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Transaction;
 
 public class AddressBookTest {
 
@@ -88,14 +92,29 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Transaction> transactions = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
         @Override
+        public Map<String, List<Object>> generateStorageMap() {
+            HashMap<String, List<Object>> storageMap = new HashMap<>();
+            storageMap.put(Person.MAP_PREFIX, new ArrayList<>(persons));
+            storageMap.put(Transaction.MAP_PREFIX, new ArrayList<>(transactions));
+
+            return storageMap;
+        }
+
+        @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Transaction> getTransactionList() {
+            return transactions;
         }
     }
 

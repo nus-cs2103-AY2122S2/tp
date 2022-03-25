@@ -34,7 +34,8 @@ class SortCommandTest {
                         TypicalPersons.HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByNameDescending), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByNameDescending,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -50,7 +51,8 @@ class SortCommandTest {
                         TypicalPersons.IDA));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -66,7 +68,8 @@ class SortCommandTest {
                         TypicalPersons.CARL));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -82,7 +85,8 @@ class SortCommandTest {
                         TypicalPersons.DANIEL));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -98,7 +102,8 @@ class SortCommandTest {
                         TypicalPersons.IDA));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -114,7 +119,8 @@ class SortCommandTest {
                         TypicalPersons.ALICE));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -130,7 +136,8 @@ class SortCommandTest {
                         TypicalPersons.BENSON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -146,7 +153,8 @@ class SortCommandTest {
                         TypicalPersons.HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -162,7 +170,8 @@ class SortCommandTest {
                         TypicalPersons.HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -178,7 +187,8 @@ class SortCommandTest {
                         TypicalPersons.HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -195,7 +205,8 @@ class SortCommandTest {
                         TypicalPersons.HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -211,7 +222,8 @@ class SortCommandTest {
                         TypicalPersons.HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -227,7 +239,8 @@ class SortCommandTest {
                         TypicalPersons.ELLE, TypicalPersons.HOON, TypicalPersons.DANIEL, TypicalPersons.FIONA,
                         TypicalPersons.IDA));
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
-        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName,
+                model.getFilteredTransactionList()), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }

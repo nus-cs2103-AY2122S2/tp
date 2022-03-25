@@ -19,16 +19,18 @@ import seedu.address.logic.parser.Prefix;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Transaction implements Serializable {
+    public static final String MAP_PREFIX = "T";
+
     private final HashMap<Prefix, TransactionField> fields = new HashMap<>();
     private final String personIdentifier;
-    public static final String MAP_PREFIX = "T";
+
 
     /**
      * Person constructor
      * @param fields A collection of all the person's attributes
      */
     public Transaction(Collection<TransactionField> fields, String personIdentifier) {
-        requireAllNonNull(fields);
+        requireAllNonNull(fields, personIdentifier);
 
         // Add fields.
         for (TransactionField f : fields) {

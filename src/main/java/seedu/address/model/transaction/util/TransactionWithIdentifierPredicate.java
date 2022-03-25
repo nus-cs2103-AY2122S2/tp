@@ -1,8 +1,9 @@
 package seedu.address.model.transaction.util;
 
+import java.util.function.Predicate;
+
 import seedu.address.model.transaction.Transaction;
 
-import java.util.function.Predicate;
 
 public class TransactionWithIdentifierPredicate implements Predicate<Transaction> {
     private final String identifier;

@@ -24,10 +24,12 @@ import seedu.address.model.transaction.Transaction;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person implements Serializable {
+    public static final String MAP_PREFIX = "P";
+
     private final HashMap<Prefix, Field> fields = new HashMap<>();
     private final HashSet<Tag> tags = new HashSet<>();
     private final ArrayList<Transaction> transactions = new ArrayList<>();
-    public static final String MAP_PREFIX = "P";
+
 
     /**
      * Person constructor
