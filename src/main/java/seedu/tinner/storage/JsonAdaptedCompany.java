@@ -15,6 +15,9 @@ import seedu.tinner.model.company.Email;
 import seedu.tinner.model.company.FavouriteStatus;
 import seedu.tinner.model.company.Phone;
 import seedu.tinner.model.company.RoleList;
+import seedu.tinner.model.reminder.Reminder;
+import seedu.tinner.model.reminder.UniqueReminderList;
+import seedu.tinner.model.role.Role;
 
 /**
  * Jackson-friendly version of {@link Company}.
@@ -69,11 +72,6 @@ class JsonAdaptedCompany {
      * @throws IllegalValueException if there were any data constraints violated in the adapted company.
      */
     public Company toModelType() throws IllegalValueException {
-        final RoleList companyRoles = new RoleList();
-        for (JsonAdaptedRole role : roles) {
-            companyRoles.addRole(role.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CompanyName.class.getSimpleName()));
@@ -118,6 +116,16 @@ class JsonAdaptedCompany {
             throw new IllegalValueException(FavouriteStatus.MESSAGE_CONSTRAINTS);
         }
         final FavouriteStatus modelFavouriteStatus = new FavouriteStatus(Boolean.parseBoolean(favouriteStatus));
+
+        final RoleList companyRoles = new RoleList();
+        for (JsonAdaptedRole role : roles) {
+            Role currRole = role.toModelType();
+            companyRoles.addRole(currRole);
+            if (currRole.getDeadline().isOneWeekAway()) {
+                Reminder reminder = new Reminder(modelName, currRole.getName(), currRole.getDeadline());
+                UniqueReminderList.getReminderList().add(reminder);
+            }
+        }
 
         final RoleList modelRoles = new RoleList(companyRoles);
 

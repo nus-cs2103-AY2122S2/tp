@@ -44,17 +44,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' company list file path.
      */
     Path getCompanyListFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' company list file path.
      */
-    void setCompanyListFilePath(Path addressBookFilePath);
+    void setCompanyListFilePath(Path companyListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces company list data with the data in {@code companyList}.
      */
     void setCompanyList(ReadOnlyCompanyList companyList);
 
@@ -64,27 +64,27 @@ public interface Model {
     ReadOnlyCompanyList getCompanyList();
 
     /**
-     * Returns true if a company with the same identity as {@code company} exists in the address book.
+     * Returns true if a company with the same identity as {@code company} exists in the company list.
      */
     boolean hasCompany(Company company);
 
     /**
      * Deletes the given company.
-     * The company must exist in the address book.
+     * The company must exist in the company list.
      */
     void deleteCompany(Company target);
 
     /**
      * Adds the given company.
-     * {@code company} must not already exist in the address book.
+     * {@code company} must not already exist in the company list.
      */
     void addCompany(Company company);
 
     /**
      * Replaces the given company {@code target} with {@code editedCompany}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the company list.
      * The company identity of {@code editedCompany} must not be the same as another existing company in the
-     * address book.
+     * company list.
      */
     void setCompany(Company target, Company editedCompany);
 
