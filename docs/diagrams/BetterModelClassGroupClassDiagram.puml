@@ -16,6 +16,6 @@ ClassGroup *--> "~*" Lesson
 Lesson *--> WeekId
 Lesson *--> "~*" StudentAttendance
 
-StudentAttendance *--> Student
+StudentAttendance --> Student
 StudentAttendance *--> Attendance
 @enduml
