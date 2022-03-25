@@ -36,28 +36,48 @@
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 5 0 5;
+    -fx-background-color: #5B4B49;
+}
+
+.module-professor-list-heading:hover {
+    -fx-background-color: #493c3a;
 }
 
 .module-student-list-heading {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 5 0 5;
+    -fx-background-color: #8DA7BE;
 }
 
 .module-student-list-heading:hover {
-    -fx-background-color: blue;
+    -fx-background-color: #718698;
 }
 
 .module-groups-list-heading {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 5 0 5;
+    -fx-background-color: #5E8C61;
+}
+
+.module-groups-list-heading:hover {
+    -fx-background-color: #4b704e;
 }
 
 .module-key-events-list-heading {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28px;
     -fx-text-fill: #010504;
+    -fx-background-color: #CA895F;
+    -fx-padding: 0 5 0 5;
+}
+
+.module-key-events-list-heading:hover {
+    -fx-background-color: #a26e4c;
 }
 
 /* GroupCard related classes */

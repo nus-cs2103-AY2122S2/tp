@@ -38,7 +38,8 @@ public class ModuleCard extends UiPart<Region> {
      */
 
     public final Module module;
-
+    private final List<Node> allTabContents;
+    private final Logger logger = LogsCenter.getLogger(ModuleCard.class);
     @FXML
     private HBox modulePane;
     @FXML
@@ -55,7 +56,6 @@ public class ModuleCard extends UiPart<Region> {
     private VBox keyEvents;
     @FXML
     private VBox groups;
-
     //tab headings of module card
     @FXML
     private Label professorsTab;
@@ -65,18 +65,7 @@ public class ModuleCard extends UiPart<Region> {
     private Label groupsTab;
     @FXML
     private Label keyEventsTab;
-
-    private final List<Node> allTabContents;
-
-
-    //Tracks which field of Module is visible at a time
-    public enum ModuleCardTab {
-        STUDENTS, PROFESSORS, GROUPS, KEY_EVENTS, NONE;
-    }
-
     private ModuleCardTab currentTab = ModuleCardTab.NONE;
-
-    private final Logger logger = LogsCenter.getLogger(ModuleCard.class);
 
     /**
      * Creates a {@code ModuleCode} with the given {@code Module} and index to display.
@@ -84,7 +73,7 @@ public class ModuleCard extends UiPart<Region> {
     public ModuleCard(Module module, int displayedIndex) {
         super(FXML);
         logger.info(String.format("Instantiating module card with code %s at index %s", module.getModuleCode(),
-                displayedIndex));
+            displayedIndex));
         this.module = module;
         id.setText(displayedIndex + ". ");
         moduleCode.setText(module.getModuleCode().toString());
@@ -122,7 +111,8 @@ public class ModuleCard extends UiPart<Region> {
             new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent e) {
-                    logger.info(String.format("Professors tab clicked. Professors of module %s now showing.", module.getModuleCode()));
+                    logger.info(String.format("Professors tab clicked. Professors of module %s now showing.",
+                        module.getModuleCode()));
                     changeTab(ModuleCardTab.PROFESSORS);
                 }
             });
@@ -136,7 +126,8 @@ public class ModuleCard extends UiPart<Region> {
             new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    logger.info(String.format("Students tab clicked. Students of module %s now showing.", module.getModuleCode()));
+                    logger.info(String.format("Students tab clicked. Students of module %s now showing.",
+                        module.getModuleCode()));
                     changeTab(ModuleCardTab.STUDENTS);
                 }
             });
@@ -150,7 +141,8 @@ public class ModuleCard extends UiPart<Region> {
             new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    logger.info(String.format("Groups tab clicked. Groups of module %s now showing.", module.getModuleCode()));
+                    logger.info(
+                        String.format("Groups tab clicked. Groups of module %s now showing.", module.getModuleCode()));
                     changeTab(ModuleCardTab.GROUPS);
                 }
             });
@@ -164,7 +156,8 @@ public class ModuleCard extends UiPart<Region> {
             new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    logger.info(String.format("Key events tab clicked. Key events of module %s now showing.", module.getModuleCode()));
+                    logger.info(String.format("Key events tab clicked. Key events of module %s now showing.",
+                        module.getModuleCode()));
                     changeTab(ModuleCardTab.KEY_EVENTS);
                 }
             });
@@ -172,6 +165,7 @@ public class ModuleCard extends UiPart<Region> {
 
     /**
      * Triggers switch to show correct tab based on the tab clicked.
+     *
      * @param tab the tab heading that was clicked.
      */
     private void changeTab(ModuleCardTab tab) {
@@ -329,6 +323,11 @@ public class ModuleCard extends UiPart<Region> {
         ModuleCard card = (ModuleCard) other;
         return id.getText().equals(card.id.getText())
             && module.equals(card.module);
+    }
+
+    //Tracks which field of Module is visible at a time
+    public enum ModuleCardTab {
+        STUDENTS, PROFESSORS, GROUPS, KEY_EVENTS, NONE;
     }
 
 }

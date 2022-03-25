@@ -36,7 +36,7 @@ public class SampleDataUtil {
     public static Module[] getSampleModules() {
         Module sampleModule1 = new Module(new ModuleName("Software Engineering"), new ModuleCode("CS2103"));
         Module sampleModule2 = new Module(new ModuleName("Introduction to Operating Systems"),
-                new ModuleCode("CS2106"));
+            new ModuleCode("CS2106"));
 
         return new Module[] {sampleModule1, sampleModule2};
     }
@@ -57,13 +57,14 @@ public class SampleDataUtil {
 
     /**
      * Instantiates sample key events, using passed in modules array.
+     *
      * @param sampleModules
      * @return array of key events
      */
     public static ModuleKeyEvent[] getSampleEvents(Module[] sampleModules) {
         LocalDateTime sampleTime = LocalDateTime.of(2022, 5, 4, 14, 0);
         ModuleKeyEvent sampleModuleKeyEvent1 = new ModuleKeyEvent(ModuleKeyEvent.KeyEventType.EXAM, sampleTime,
-                sampleModules[0]);
+            sampleModules[0]);
         return new ModuleKeyEvent[] {sampleModuleKeyEvent1};
     }
 

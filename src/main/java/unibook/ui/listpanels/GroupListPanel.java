@@ -8,21 +8,17 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import unibook.commons.core.LogsCenter;
-import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.ui.UiPart;
 import unibook.ui.cards.GroupCard;
-import unibook.ui.cards.ModuleCard;
 
 public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "listpanels/GroupListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(GroupListPanel.class);
-
+    //Flag that indicates if only a single group is being shown
+    private boolean singleGroupFlag = false;
     @FXML
     private ListView<Group> groupListView;
-
-    //Flag that indicates if only a single group is being shown
-    boolean singleGroupFlag = false;
 
     /**
      * Creates a {@code GroupListPanel} with the given {@code ObservableList}.

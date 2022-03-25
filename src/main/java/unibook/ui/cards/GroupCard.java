@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -20,7 +21,6 @@ import unibook.commons.core.LogsCenter;
 import unibook.model.module.group.Group;
 import unibook.model.person.Student;
 import unibook.ui.UiPart;
-import javafx.scene.input.MouseEvent;
 
 /**
  * A class that displays the information of a {@code Group}.
@@ -37,7 +37,7 @@ public class GroupCard extends UiPart<Region> {
      */
 
     public final Group group;
-
+    private final Logger logger = LogsCenter.getLogger(GroupCard.class);
     @FXML
     private HBox groupPane;
     @FXML
@@ -52,15 +52,14 @@ public class GroupCard extends UiPart<Region> {
     private VBox membersList;
     @FXML
     private VBox meetingTimesList;
-
     //flag that indicates if the additional details - members and meeting times are being shown
     private boolean additionalDetailsVisible = true;
-    private final Logger logger = LogsCenter.getLogger(GroupCard.class);
 
     /**
      * Creates a {@code GroupCode} with the given {@code Group} and index to display.
-     * @param group to display.
-     * @param displayedIndex index to display with the group.
+     *
+     * @param group           to display.
+     * @param displayedIndex  index to display with the group.
      * @param singleGroupFlag indicates if only this group being displayed in view.
      */
     public GroupCard(Group group, int displayedIndex, boolean singleGroupFlag) {
@@ -79,14 +78,14 @@ public class GroupCard extends UiPart<Region> {
         if (!singleGroupFlag) {
             groupPane.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent e) {
-                    logger.info("Group card clicked. Mouse Event fired.");
-                    additionalDetailsVisible = !additionalDetailsVisible;
-                    moreGroupDetails.setVisible(additionalDetailsVisible);
-                    moreGroupDetails.setManaged(additionalDetailsVisible);
-                }
-            });
+                    @Override
+                    public void handle(MouseEvent e) {
+                        logger.info("Group card clicked. Mouse Event fired.");
+                        additionalDetailsVisible = !additionalDetailsVisible;
+                        moreGroupDetails.setVisible(additionalDetailsVisible);
+                        moreGroupDetails.setManaged(additionalDetailsVisible);
+                    }
+                });
             additionalDetailsVisible = false;
         }
 
@@ -137,8 +136,8 @@ public class GroupCard extends UiPart<Region> {
         ArrayList<Node> meetingTimeLabels = new ArrayList<>();
         for (LocalDateTime dateTime : modelMeetingTimeList) {
             index++;
-            meetingTimeLabels.add(new Label(index + ".    " +
-                    dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))));
+            meetingTimeLabels.add(new Label(index + ".    "
+                + dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))));
         }
         meetingTimesList.getChildren().setAll(meetingTimeLabels);
     }

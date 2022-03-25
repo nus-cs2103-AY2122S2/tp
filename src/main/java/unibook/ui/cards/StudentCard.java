@@ -27,7 +27,7 @@ public class StudentCard extends UiPart<Region> {
      */
 
     public final Student student;
-
+    private final Logger logger = LogsCenter.getLogger(StudentCard.class);
     @FXML
     private HBox cardPane;
     @FXML
@@ -40,8 +40,6 @@ public class StudentCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
-
-    private final Logger logger = LogsCenter.getLogger(StudentCard.class);
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.

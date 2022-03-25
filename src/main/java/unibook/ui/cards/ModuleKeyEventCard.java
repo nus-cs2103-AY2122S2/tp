@@ -24,7 +24,7 @@ public class ModuleKeyEventCard extends UiPart<Region> {
      */
 
     public final ModuleKeyEvent moduleKeyEvent;
-
+    private final Logger logger = LogsCenter.getLogger(ModuleKeyEventCard.class);
     @FXML
     private HBox cardPane;
     @FXML
@@ -33,8 +33,6 @@ public class ModuleKeyEventCard extends UiPart<Region> {
     private Label moduleKeyEventType;
     @FXML
     private Label moduleKeyEventTime;
-
-    private final Logger logger = LogsCenter.getLogger(ModuleKeyEventCard.class);
 
     /**
      * Creates a {@code ProfessorCard} with the given {@code Professor} and index to display.

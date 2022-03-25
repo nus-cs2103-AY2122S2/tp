@@ -22,18 +22,20 @@ public class JsonAdaptedModuleKeyEvent {
 
     /**
      * Creates a JsonAdaptedModuleKeyEvent using a keyEventType string and keyEventTiming.
+     *
      * @param keyEventType
      * @param keyEventTiming
      */
     @JsonCreator
     public JsonAdaptedModuleKeyEvent(@JsonProperty("keyEventType") String keyEventType,
-                            @JsonProperty("keyEventTiming") LocalDateTime keyEventTiming) {
+                                     @JsonProperty("keyEventTiming") LocalDateTime keyEventTiming) {
         this.keyEventType = keyEventType;
         this.keyEventTiming = keyEventTiming;
     }
 
     /**
      * Creates a JsonAdaptedModuleKeyEvent from a source ModuleKeyEvent.
+     *
      * @param source
      */
     public JsonAdaptedModuleKeyEvent(ModuleKeyEvent source) {
@@ -43,6 +45,7 @@ public class JsonAdaptedModuleKeyEvent {
 
     /**
      * Converts a JsonAdaptedModuleKeyEvent to its respective model-compatible ModuleKeyEvent.
+     *
      * @param module
      * @return the module key event.
      * @throws IllegalValueException

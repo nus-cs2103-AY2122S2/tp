@@ -52,11 +52,11 @@ public class JsonAdaptedModule {
         this.moduleName = source.getModuleName().toString();
         this.moduleCode = source.getModuleCode().toString();
         this.groups = new HashSet<>(source.getGroups().stream()
-                .map(grp -> new JsonAdaptedGroup(grp.getGroupName(), new HashSet<>(grp.getMeetingTimes())))
-                .collect(Collectors.toSet()));
+            .map(grp -> new JsonAdaptedGroup(grp.getGroupName(), new HashSet<>(grp.getMeetingTimes())))
+            .collect(Collectors.toSet()));
         this.keyEvents = new HashSet<>(source.getKeyEvents().stream()
-                .map(k -> new JsonAdaptedModuleKeyEvent(k))
-                .collect(Collectors.toSet()));
+            .map(k -> new JsonAdaptedModuleKeyEvent(k))
+            .collect(Collectors.toSet()));
 
     }
 
@@ -70,11 +70,11 @@ public class JsonAdaptedModule {
 
         if (moduleName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ModuleName.class.getSimpleName()));
+                ModuleName.class.getSimpleName()));
         }
         if (moduleCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ModuleCode.class.getSimpleName()));
+                ModuleCode.class.getSimpleName()));
         }
 
         if (groups == null) {
@@ -90,7 +90,7 @@ public class JsonAdaptedModule {
             module.getGroups().add(jsonGroup.toModelType(module));
         }
 
-        for (JsonAdaptedModuleKeyEvent jsonKeyEvent: keyEvents) {
+        for (JsonAdaptedModuleKeyEvent jsonKeyEvent : keyEvents) {
             module.getKeyEvents().add(jsonKeyEvent.toModelType(module));
         }
 

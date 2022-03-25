@@ -50,6 +50,7 @@ public interface Ui {
 
     /**
      * Set the view to show given list of groups.
+     *
      * @param group list of groups to show.
      */
     void setGroupListPanel(ObservableList<Group> group);

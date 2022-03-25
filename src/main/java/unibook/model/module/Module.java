@@ -223,6 +223,7 @@ public class Module {
 
     /**
      * Adds key event to the correct module.
+     *
      * @param k
      */
     public void addKeyEvent(ModuleKeyEvent k) {
@@ -336,16 +337,16 @@ public class Module {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getModuleCode())
-                .append("; Name: ")
-                .append(getModuleName())
-                .append("; Module Code: ")
-                .append(getModuleCode())
-                .append("; Professors: ")
-                .append(getProfessors())
-                .append("; Groups: ")
-                .append(getGroups())
-                .append("; Key Events: ")
-                .append(getKeyEvents());
+            .append("; Name: ")
+            .append(getModuleName())
+            .append("; Module Code: ")
+            .append(getModuleCode())
+            .append("; Professors: ")
+            .append(getProfessors())
+            .append("; Groups: ")
+            .append(getGroups())
+            .append("; Key Events: ")
+            .append(getKeyEvents());
         return builder.toString();
     }
 

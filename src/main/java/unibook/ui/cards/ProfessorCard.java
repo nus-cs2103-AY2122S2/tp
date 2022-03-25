@@ -27,7 +27,7 @@ public class ProfessorCard extends UiPart<Region> {
      */
 
     public final Professor professor;
-
+    private final Logger logger = LogsCenter.getLogger(ProfessorCard.class);
     @FXML
     private HBox cardPane;
     @FXML
@@ -42,8 +42,6 @@ public class ProfessorCard extends UiPart<Region> {
     private Label office;
     @FXML
     private FlowPane tags;
-
-    private final Logger logger = LogsCenter.getLogger(ProfessorCard.class);
 
     /**
      * Creates a {@code ProfessorCard} with the given {@code Professor} and index to display.

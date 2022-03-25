@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,7 +16,7 @@
                 <Label fx:id="moduleCode" text="\$moduleCode" styleClass="module-code"/>
                 <Label fx:id="moduleName" styleClass="module-name" text="\$moduleCode"/>
             </HBox>
-            <HBox spacing="10" alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT">
                 <Label fx:id="professorsTab" styleClass="module-professor-list-heading" text="Professors"/>
                 <Label fx:id="studentsTab" styleClass="module-student-list-heading" text="Students"/>
                 <Label fx:id="groupsTab" styleClass="module-groups-list-heading" text="Groups"/>
@@ -26,7 +25,7 @@
             <VBox fx:id="professors" VBox.vgrow="ALWAYS"/>
             <VBox fx:id="students" VBox.vgrow="ALWAYS"/>
             <VBox fx:id="keyEvents" VBox.vgrow="ALWAYS"/>
-            <VBox fx:id="groups" VBox.vgrow="ALWAYS" />
+            <VBox fx:id="groups" VBox.vgrow="ALWAYS"/>
         </VBox>
     </GridPane>
 </HBox>

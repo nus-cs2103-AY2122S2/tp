@@ -122,12 +122,6 @@ public class MainWindow extends UiPart<Stage> {
         //by default the listPanel holds person list on startup
         listPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
 
-        //TODO temp to see modules
-        setModuleListPanel();
-
-        //TODO temp to see groups
-        //setGroupListPanel(logic.getFilteredModuleList().get(0).getGroups());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -152,6 +146,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Replaces the child of listPanelPlaceholder with groupListPanel.
+     *
      * @param groups the list of groups to show.
      */
     public void setGroupListPanel(ObservableList<Group> groups) {
@@ -247,8 +242,6 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Executes the command and returns the result.
-     *
-     * @see Logic.execute(String, MainWindow)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
