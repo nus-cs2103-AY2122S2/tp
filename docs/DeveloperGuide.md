@@ -79,21 +79,27 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## About
 
-The purpose of this developer guide is to allow developers who want to work on Trackermon to gain a better understanding on the application's implementation.
+### Purpose
+
+This document specified architecture and software design decisions for the application, Trackermon.
+
+### Scope
+
+The developer guide allows developers who want to work on Trackermon to gain a better understanding on the application's implementation.
 
 ### Developer guide navigation
 
-| Action                                                        | Format, Examples                                                                                                                                      |
-|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <div markdown="span" class="alert alert-warning">:bulb:</div> | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                        |
-
-
+| Syntax                                                                             | Description                             |
+|------------------------------------------------------------------------------------|-----------------------------------------|
+| <div markdown="span" class="alert alert-warning">:bulb: **Tip:**</div>             | A small but useful piece of information |
+| <div markdown="span" class="alert alert-info">:information_source: **Note:**</div> | Additional information                  |
+| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**</div> | Important information to take note
 
 ---
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-warning">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
@@ -251,20 +257,29 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find command feature
 
-#### What it does 
-
+#### What it does
 Looks for a show in a list of shows and displays all the shows that match the user's input. If the user's input contains no prefixes, `find` will do a general search through all fields in the `Show` class.
 
 #### Implementation
-After entering the find command, the `ArgumentTokenizer` will map any prefixes in the user's input to Trackermon's prefix syntax.Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. `FindCommand` is a class that inherits the `Command` abstract class. `FindCommand` implements the `execute()` method from the `Command` abstract class where on execution, it will scan through the shows in the model's list of shows and check if any shows match the user's input. The model is then udpated with the filtered show list.
+<img src="images/FindSequenceDiagram.png">
+
+After executing the find command, `FindCommandParser` will map any prefixes in the user's input to Trackermon's prefix syntax. Then, it will do a check whether there are any prefixes in the input. 
+- If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. 
+- Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. 
+
+Then, `LogicManager` will execute the given `findCommand` object and scan through the shows in the model's list of shows while checking if any shows matches the user's input. The model is then updated with the filtered show list.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the parsing implementation of `FindCommandParser`.
+<img src="images/FindSequenceReferenceDiagram.png">
+</div>
 
 Given below is an example usage scenario and the step-by-step flow of the find command.
 
 Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from local storage `Trackermon.json`.
 
-Step 2: The user executes `find t/Anime t/Action` to find a show.
+Step 2: The user executes `find t/Anime` to find a show.
 
-Step 3: The find command will check and see whether any shows contain the tags `Anime` and `Action` using the `Model#updateFilteredShowList` method.
+Step 3: The find command will check and see whether any shows contain the tag `Anime` using the `Model#updateFilteredShowList` method.
 
 Step 4:
 `Model#updateFilteredShowList` will be called and model will be updated without modifying the original show list. If no shows match the keywords given by the user, an empty list will be displayed.
@@ -274,22 +289,20 @@ Step 4:
 `find Shingeki no Kyojin` will also work, however it will scan through the name, status and tag fields instead of the name field only
 </div>
 
-The following sequence diagram summarizes what happens when a user executes a valid find command on tags only: (Zoom in to view the sequence diagram)
-
-<img src="images/FindSequenceDiagram.png">
-
-<img src="images/FindSequenceReferenceDiagram.png">
-
 The following activity diagram summarizes what happens when a user executes a valid find command:
 
 <img src="images/FindShowDiagram.png" >
 
 #### Design considerations:
 ##### Aspect: How find executes
-- **Alternative 1 (current choice):** The `find` command checks for keywords after the prefix. If there are no prefixes, it will perform a general search using `ShowContainsKeywordsPredicate` which scans through the name, status and tag fields in the `Show` class. Else, `ArgumentMultimap#arePrefixesPresent` will check and return a new predicate for each value after each prefix if it is present and then generate a keyword predicate that will match values in that field. A for loop is implemented for the name and tag predicates. This will allow an `AND` search within a list of keywords within these two parameters. The user does not need to type in the full word for any find searches as each predicate uses a fragmented search.
-  - Pros: Abstraction of predicates and encapsulating the checking of shows allows the predicates to be used more flexibly elsewhere to match other shows.
-  - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.
+- **Alternative 1 (current choice):** The `find` command checks for keywords after the prefix. 
+  - If there are no prefixes, it will perform a general search using `ShowContainsKeywordsPredicate` which scans through the name, status and tag fields in the `Show` class. 
+  - Else, `ArgumentMultimap#arePrefixesPresent` will check and return a new predicate for each value after each prefix if it is present and then generate a keyword predicate that will match values in that field.
 
+  A for loop is implemented for the name and tag predicates. This will allow an `AND` search within a list of keywords within these two parameters. The user does not need to type in the full word for any find searches as each predicate uses a fragmented search.
+  - Pros: Abstraction of predicates and encapsulating the checking of shows allows the predicates to be used more flexibly elsewhere to match other shows.
+  - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.<br><br>
+  
 - **Alternative 2:** Directly check whether the show is in the show list in the find command parser without a predicate.
   - Pros: Developers can easily understand the code and its functionality as all the code is consolidated in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
