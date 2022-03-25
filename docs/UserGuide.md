@@ -113,14 +113,14 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 ----------------
 
 ## Command Summary
-| Action           | Format, Examples                                                                                                                                                                                       |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action           | Format, Examples                               |                    
+|------------------|------------------------------------------------|
 | Add a student    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS act/ACTIVITIES`<br/>e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
-| Delete a student | `delete INDEX`<br/>e.g., `delete 3`                                                                                                                                                                    |
-| Edit             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]`<br/>e.g., `edit 2 n/James Lee e/jameslee@example.com`                                               |
-| Find by name     | `find NAME [MORE_NAME]`<br/>e.g., `find James Jake`                                                                                                                                                    |
-| Find by status   | `findstatus STATUS`<br/>e.g., `findstatus positive`                                                                                                                                                    |
-| Find by class    | `findclasscode CLASS`<br/>e.g., `findclasscode 4A`                                                                                                                                                     |
-| Find by activity | `findactivity ACTIVITY`<br/>e.g., `findactivity choir`                                                                                                                                                 |
-| List             | `list`                                                                                                                                                                                                 |
-| Exit             | `exit`                                                                                                                                                                                                 |
+| Delete a student | `delete INDEX`<br/>e.g., `delete 3`                      |
+| Edit             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]`<br/>e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                       |
+| Find by name     | `find NAME [MORE_NAME]`<br/>e.g., `find James Jake`      |
+| Find by status   | `findstatus STATUS`<br/>e.g., `findstatus positive`      |
+| Find by class    | `findclasscode CLASS`<br/>e.g., `findclasscode 4A`       |
+| Find by activity | `findactivity ACTIVITY`<br/>e.g., `findactivity choir`   |
+| List             | `list`                                                   |
+| Exit             | `exit`                                                   |
