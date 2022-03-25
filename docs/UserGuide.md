@@ -20,7 +20,6 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 
 - [Quick start](#quick-start)
 - [Features](#features)
-  - [Command summary](#command-summary)
   - [Add a student](#adding-a-person-add): `add`
   - [List all students](#list-all-students-list): `list`
   - [Find student by name](#find-student-by-name-find): `find`
@@ -30,12 +29,14 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
   - [Delete a student](#delete-student-delete): `delete`
   - [Exit the application](#exit-the-application-exit): `exit`
+- [Frequently Asked Questions](#faq)
+- [Command summary](#command-summary)
 
 </div>
 
 # Quick start
 - Ensure you have **Java 11** or above installed in your Computer.
-- Download the latest _ultimatedivoctracker.jar_ from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
+- Download the latest **ultimatedivoctracker.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 - Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
 - Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 - Refer to the Features below for details of each command.
@@ -58,20 +59,6 @@ School administrators (like teachers) can use UDT to easily track COVID amongst 
 
 </div>
 
-## Command Summary
-
-| Action   | Format   | Example |
-|-----|-----|-----|
-| [Add a student](#adding-a-person-add)  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS [act/ACTIVITIES]` | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
-| [List all students](#list-all-students-list) | `list`       | `list` |
-| [Find student by name](#find-student-by-name-find) | `find NAME [MORE_NAME]` | `find James Jake`      |
-| [Find student by status](#find-student-by-status-findstatus) | `findstatus STATUS` | `findstatus positive`      |
-| [Find student by class](#find-student-by-class-findclasscode) | `findclasscode CLASS` | `findclasscode 4A`       |
-| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY` | `findactivity choir`   |
-| [Edit student details](#edit-student-details-edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`  |
-| [Delete a student](#delete-student-delete) | `delete INDEX` | `delete 3`                      |
-| [Exit the application](#exit-the-application-exit)          | `exit`                   | `exit` |
-
 ## Add a student: `add`
 Adds a student to the tracking list
 - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ c/CLASS s/STATUS [act/ACTIVITY] [MORE ACTIVITIES]`
@@ -91,15 +78,15 @@ Adds a student to the tracking list
 
 </div>
 
-- Examples:
-  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 c/5A s/NEGATIVE`
-  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 p/1234567 c/2B s/POSITIVE act/choir dance`
-
 <div markdown="span" class="alert alert-warning" role="alert">
 
 > :warning: **Warning:** Capitalization of text will be reflected in the User Interface
 
 </div>
+
+- Examples:
+  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 c/5A s/NEGATIVE`
+  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 p/1234567 c/2B s/POSITIVE act/choir dance`
 
 ## List all students : `list`
 Shows a list of all students in the address book.
@@ -108,7 +95,7 @@ Shows a list of all students in the address book.
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-> :bulb: **Tip:** For a filtered list, use the other __*find*__ commands
+> :bulb: **Tip:** For a filtered list, use the __*find*__ commands
 
 </div>
 
@@ -118,16 +105,16 @@ Find an existing student in the application by their name
   - Returns a list of students with the specified `NAME`
   - `NAME` is case-insensitive
   - Searching for name returns a list of names contains the provided name
-    - `find john` can find students "john tan" and "john lee"
+    - `find john` can find students _"John Tan"_ and _"John Lee"_
 - Example:
-  - `find john tan zi wei` will find student "john tan zi wei"
+  - `find john tan zi wei` will find student _"John Tan Zi Wei"_
 
 ## Find student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
 - Format: `findstatus STATUS`
   - Returns a list of students with the specified `STATUS`
   - `STATUS` is case-insensitive
-- Example:
+- Examples:
   - `findstatus positive` finds all students that are labelled COVID positive
   - `findstatus negative` finds all students that are labelled COVID negative
 
@@ -152,7 +139,7 @@ Finds an existing student in the address book by the activities they are partici
     - Matches based on students that have specified `ACTIVITY` and not just exactly those activities only
   - `ACTIVITY` is case-insensitive
 - Example:
-  - `findactivity badminton` finds all students that have the activity "badminton"
+  - `findactivity badminton` finds all students that have the activity _"Badminton"_
 
 ## Edit student details: `edit`
 Edits an existing student's details in the address book by the Index provided and the areas that the user wants to edit
@@ -162,7 +149,7 @@ Edits an existing student's details in the address book by the Index provided an
   - `INDEX` must be a _positive integer (1, 2, 3...)_
   - Only listed fields will be changed
 - Examples:
-  - `edit 1 s/Positive` edits 1st student to COVID-19 Positive
+  - `edit 1 s/Positive` edits 1st student to be _COVID-19 Positive_
   - `edit 5 p/98641865 e/maryjane@yahoo.com` edits 5th student to a new phone number and email address
 
 <div markdown="span" class="alert alert-primary" role="alert">
@@ -215,13 +202,30 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 
 <div markdown="span" class="alert alert-warning" role="alert">
 
-> :warning: **Warning:** Deleting the data file will result in all data being lost
+> :warning: **Warning:** Editing the data file erroneously may result in the entire data becoming unreadable by UDT
 
 </div>
 
 ----------------
-
 # FAQ
 
 > Q: Manual insertion of students takes time, is there a faster way to do it?  
 > A: We are working on a feature to allow importing of **.csv** files into UDT!
+
+----------------
+## Command Summary
+
+| Action   | Format   | Example |
+|-----|-----|-----|
+| [Add a student](#adding-a-person-add)  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS [act/ACTIVITIES]` | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
+| [List all students](#list-all-students-list) | `list`       | `list` |
+| [Find student by name](#find-student-by-name-find) | `find NAME [MORE_NAME]` | `find James Jake`      |
+| [Find student by status](#find-student-by-status-findstatus) | `findstatus STATUS` | `findstatus positive`      |
+| [Find student by class](#find-student-by-class-findclasscode) | `findclasscode CLASS` | `findclasscode 4A`       |
+| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY` | `findactivity choir`   |
+| [Edit student details](#edit-student-details-edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`  |
+| [Delete a student](#delete-student-delete) | `delete INDEX` | `delete 3`                      |
+| [Exit the application](#exit-the-application-exit)          | `exit`                   | `exit` |
+
+----------------
+
