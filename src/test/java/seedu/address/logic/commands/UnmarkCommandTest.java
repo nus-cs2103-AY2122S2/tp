@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.UnmarkCommand.INVALID_TASK_INDEX;
@@ -38,20 +38,20 @@ public class UnmarkCommandTest {
     @Test
     public void equals_sameObject_success() {
         UnmarkCommand unmarkCommand = new UnmarkCommand(studentIdBenson, indexOne);
-        assertTrue(unmarkCommand.equals(unmarkCommand));
+        assertEquals(unmarkCommand, unmarkCommand);
     }
 
     @Test
     public void equals_sameValues_success() {
         UnmarkCommand unmarkCommand = new UnmarkCommand(studentIdBenson, indexOne);
         UnmarkCommand unmarkCommandCopy = new UnmarkCommand(studentIdBenson, indexOne);
-        assertTrue(unmarkCommand.equals(unmarkCommandCopy));
+        assertEquals(unmarkCommandCopy, unmarkCommand);
     }
 
     @Test
     public void equals_differentType_failure() {
         UnmarkCommand unmarkCommand = new UnmarkCommand(studentIdBenson, indexOne);
-        assertFalse(unmarkCommand.equals(1));
+        assertNotEquals(unmarkCommand, 1);
     }
 
     @Test

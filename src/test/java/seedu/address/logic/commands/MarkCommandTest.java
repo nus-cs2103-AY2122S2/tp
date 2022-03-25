@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.MarkCommand.INVALID_TASK_INDEX;
@@ -39,20 +39,20 @@ public class MarkCommandTest {
     @Test
     public void equals_sameObject_success() {
         MarkCommand markCommand = new MarkCommand(studentIdAlice, indexOne);
-        assertTrue(markCommand.equals(markCommand));
+        assertEquals(markCommand, markCommand);
     }
 
     @Test
     public void equals_sameValues_success() {
         MarkCommand markCommand = new MarkCommand(studentIdAlice, indexOne);
         MarkCommand markCommandCopy = new MarkCommand(studentIdAlice, indexOne);
-        assertTrue(markCommand.equals(markCommandCopy));
+        assertEquals(markCommandCopy, markCommand);
     }
 
     @Test
     public void equals_differentType_failure() {
         MarkCommand markCommand = new MarkCommand(studentIdAlice, indexOne);
-        assertFalse(markCommand.equals(1));
+        assertNotEquals(markCommand, 1);
     }
 
     @Test
