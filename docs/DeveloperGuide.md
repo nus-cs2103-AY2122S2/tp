@@ -246,7 +246,7 @@ The edit command has now been upgraded to support the functionality for overwrit
 
 ### Removetag feature
 
-### Find/Find -s feature
+### Find/Find -s/Find -e feature
 
 ### Original implementation
 The existing Find feature in ab3 only allowed contacts to be searched for by name. We added additional functionalities 
