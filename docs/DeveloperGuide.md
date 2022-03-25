@@ -570,9 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find a client by name          | locate details of clients without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many clients in the address book | sort clients by name           | locate a client easily                                                 |
-=======
-| Priority | As a …​                             | I want to …​                                                                     | So that I can…​                                     |
-|--------|-------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------|
+| Priority | As a …​                             | I want to …​                                                                     | So that I can…​                         
 | `* * *` | housing agent with many clients     | view client details fast                                                         | can deal with customers easily when they contact me |
 | `* * *` | housing agent                       | add a new client quickly with a quick description                                | update my client list efficiently                   |
 | `* * *` | housing agent                       | see relevant information about my clients                                        | understand their needs                              |
