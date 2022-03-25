@@ -62,20 +62,20 @@ public class TypicalPersons {
 
     // Sellers with properties
     public static final Person PROTY = new PersonBuilder().withName("Proty Per").withPhone("35748962")
-            .withEmail("hastwo@property.com").withAddress("orchard").withUserType("seller")
+            .withEmail("hastwo@property.com").withAddress("331, Clementi Ave, #02-25").withUserType("seller")
             .withProperties("East,4th street,1-room,$100000").withProperties("West,5th street,2-room,$300000")
             .build();
     public static final Person PERTY = new PersonBuilder().withName("Perty Pro").withPhone("45693286")
-            .withEmail("hassome@property.com").withAddress("somerset").withUserType("seller")
+            .withEmail("hassome@property.com").withAddress("22, Boston Street, #01-19").withUserType("seller")
             .withProperties("North,6th street,3-room,$500000").withProperties("South,7th street,4-room,$700000")
             .build();
 
     // Buyers with preference
     public static final Person PREF = new PersonBuilder().withName("Pref Fen").withPhone("37586624")
-            .withEmail("hasa@preference.com").withAddress("newton").withUserType("buyer")
+            .withEmail("hasa@preference.com").withAddress("10, West Coast Plaza, #02-28").withUserType("buyer")
             .withPreference("East,2-room,$50000,$500000").build();
     public static final Person FEREN = new PersonBuilder().withName("Feren Nence").withPhone("25594936")
-            .withEmail("hasanother@preference.com").withAddress("novena").withUserType("buyer")
+            .withEmail("hasanother@preference.com").withAddress("223, Mew York Rd, #04-35").withUserType("buyer")
             .withPreference("West,3-room,$100000,$1000000").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
