@@ -24,6 +24,8 @@ public class SeniorityTest {
         // Invalid seniority
         assertFalse(Seniority.isValidSeniority(0));
         assertFalse(Seniority.isValidSeniority(5));
+        assertFalse(Seniority.isValidSeniority(-10));
+        assertFalse(Seniority.isValidSeniority(10));
 
         // Invalid seniority (extreme values)
         assertFalse(Seniority.isValidSeniority(Integer.MIN_VALUE));
