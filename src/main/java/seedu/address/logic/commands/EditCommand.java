@@ -85,6 +85,13 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.displayPersonForAdd()));
     }
 
+    /**
+     * Updates the event to reflect the new participants
+     * @param model the current model
+     * @param personToEdit the person that is being edited
+     * @param editedPerson the person that has been edited
+     * @param lastEventList the event list
+     */
     public void updateEvent(Model model, Person personToEdit, Person editedPerson, List<Event> lastEventList) {
         Name oldName = personToEdit.getName();
         Name newName = editedPerson.getName();
