@@ -447,7 +447,7 @@ This feature has been enhanced based on the initial implementation of the `help`
 #### How is this feature implemented?
 
 The proposed `help` mechanism is facilitated by `HelpWindow`. It is supported by `HelpWindowUtil` where it will help the user open the User Guide on their desktop. 
-We used the existing implementation, and we modified it that the user can view the full user guide on their candidateal desktop with the click of a button. 
+We used the existing implementation, and we modified it that the user can view the full user guide on their personal desktop with the click of a button. 
 For this feature, we used the [Desktop API](https://docs.oracle.com/javase/9/docs/api/java/awt/Desktop.html) from Java 9. 
 
 #### Why is the feature implemented as such?
