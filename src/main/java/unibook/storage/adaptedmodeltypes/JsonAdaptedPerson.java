@@ -164,6 +164,7 @@ public abstract class JsonAdaptedPerson {
     /**
      * Returns the Set of {@code Module} objects to use for the converted model.
      * Performs checks on the validity of the field in the Json before returning.
+     *
      * @param uniBook reference to UniBook instance in model, to check if module with given code exists.
      * @throws IllegalValueException if any module is invalid (invalid name, or module does not exist in UniBook).
      */

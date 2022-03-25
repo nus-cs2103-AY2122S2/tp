@@ -43,12 +43,14 @@ public class ListCommand extends Command {
 
     private ListCommandType commandType;
     private ListView viewType;
+
     /**
      * Constructor for a ListCommand to list everything.
      */
     public ListCommand() {
         this.commandType = ListCommandType.ALL;
     }
+
     /**
      * Constructor for a ListCommand to change the current view.
      *

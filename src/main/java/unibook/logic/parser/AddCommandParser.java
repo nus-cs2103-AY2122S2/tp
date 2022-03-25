@@ -70,7 +70,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         case "group":
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE_GROUP));
+                    AddCommand.MESSAGE_USAGE_GROUP));
             }
             groupName = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
@@ -86,12 +86,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         case "student":
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE_STUDENT));
+                    AddCommand.MESSAGE_USAGE_STUDENT));
             }
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)
-                    && !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+                && !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE_STUDENT));
+                    AddCommand.MESSAGE_USAGE_STUDENT));
             }
             name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE)) {
@@ -115,7 +115,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 return new AddCommand(student);
             } else if (moduleCodes.isEmpty()) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_MISSING_MODULES));
+                    AddCommand.MESSAGE_MISSING_MODULES));
             } else if (!hasGroups) {
                 return new AddCommand(student, moduleCodes);
             } else {
@@ -124,7 +124,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         case "professor":
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE_PROFESSOR));
+                    AddCommand.MESSAGE_USAGE_PROFESSOR));
             }
             name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE)) {
