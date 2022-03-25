@@ -241,6 +241,9 @@ Given below is an activity diagram which shows the example usage scenario for wh
 for a `Patient` and how the add mechanism behaves at each step.
 WIP
 
+
+
+
 <!-- Justin -->
 ### View
 #### Design Consideration
@@ -248,7 +251,6 @@ WIP
 * Alternative 1 (current choice): type in the type, along with the arguments that specify view boundaries
     * Pros: Straightforward to implement, works well.
     * Cons: Cumbersome to type out, esp if a lot of parameters are needed.
-
 
 
 #### Implementation
