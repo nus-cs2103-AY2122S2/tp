@@ -22,6 +22,7 @@ import seedu.trackbeau.model.ReadOnlyUserPrefs;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.service.Service;
 import seedu.trackbeau.testutil.CustomerBuilder;
 
 public class AddCommandTest {
@@ -49,7 +50,7 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithCustomer(validCustomer);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> addCommand.execute(modelStub));
+            AddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -167,6 +168,36 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredCustomerList(Predicate<Customer> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasService(Service service) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteService(Service target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addService(Service service) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setService(Service target, Service editedService) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Service> getServiceList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateServiceList(Predicate<Service> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

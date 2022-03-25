@@ -26,12 +26,16 @@ public class Customer {
     private final Set<Tag> staffs = new HashSet<>();
     private final Set<Tag> services = new HashSet<>();
     private final Set<Tag> allergies = new HashSet<>();
+    private final Birthdate birthdate;
+    private final RegistrationDate regDate;
 
     /**
      * Every field must be present and not null.
      */
     public Customer(Name name, Phone phone, Email email, Address address,
-                    SkinType skinType, HairType hairType, Set<Tag> staffs, Set<Tag> services, Set<Tag> allergies) {
+                    SkinType skinType, HairType hairType,
+                    Set<Tag> staffs, Set<Tag> services, Set<Tag> allergies,
+                    Birthdate birthdate, RegistrationDate regDate) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -42,6 +46,8 @@ public class Customer {
         this.staffs.addAll(staffs);
         this.services.addAll(services);
         this.allergies.addAll(allergies);
+        this.birthdate = birthdate;
+        this.regDate = regDate;
     }
 
     public Name getName() {
@@ -66,6 +72,14 @@ public class Customer {
 
     public HairType getHairType() {
         return hairType;
+    }
+
+    public Birthdate getBirthdate() {
+        return birthdate;
+    }
+
+    public RegistrationDate getRegDate() {
+        return regDate;
     }
 
     /**
@@ -118,7 +132,9 @@ public class Customer {
                 && otherCustomer.getAddress().equals(getAddress())
                 && otherCustomer.getStaffs().equals(getStaffs())
                 && otherCustomer.getServices().equals(getServices())
-                && otherCustomer.getAllergies().equals(getAllergies());
+                && otherCustomer.getAllergies().equals(getAllergies())
+                && otherCustomer.getBirthdate().equals(getBirthdate())
+                && otherCustomer.getRegDate().equals(getRegDate());
     }
 
     @Override
@@ -140,7 +156,11 @@ public class Customer {
                 .append("; Skin Type: ")
                 .append(getSkinType())
                 .append("; Hair Type: ")
-                .append(getHairType());
+                .append(getHairType())
+                .append("; Birthday: ")
+                .append(getBirthdate())
+                .append("; Registration Date: ")
+                .append(getRegDate());
 
         Set<Tag> staffs = getStaffs();
         if (!staffs.isEmpty()) {

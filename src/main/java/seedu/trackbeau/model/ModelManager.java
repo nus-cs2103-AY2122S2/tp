@@ -13,6 +13,7 @@ import seedu.trackbeau.commons.core.GuiSettings;
 import seedu.trackbeau.commons.core.LogsCenter;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.service.Service;
 
 /**
  * Represents the in-memory model of TrackBeau data.
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final TrackBeau trackBeau;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
+    private final FilteredList<Service> services;
     private final FilteredList<Booking> filteredBookings;
 
     /**
@@ -36,6 +38,7 @@ public class ModelManager implements Model {
         this.trackBeau = new TrackBeau(trackBeau);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
+        services = new FilteredList<>(this.trackBeau.getServiceList());
         filteredBookings = new FilteredList<>(this.trackBeau.getBookingList());
     }
 
@@ -90,6 +93,8 @@ public class ModelManager implements Model {
         return trackBeau;
     }
 
+    //=========== Customers ================================================================================
+
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
@@ -97,19 +102,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteBooking(Booking target) {
-        trackBeau.removeBooking(target);
-    }
-
-    @Override
     public void deleteCustomer(Customer target) {
         trackBeau.removeCustomer(target);
-    }
-
-    @Override
-    public void addBooking(Booking booking) {
-        trackBeau.addBooking(booking);
-        updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
     }
 
     @Override
@@ -123,8 +117,20 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedCustomer);
 
         trackBeau.setCustomer(target, editedCustomer);
+
     }
 
+    //=========== Bookings ================================================================================
+
+    @Override
+    public void addBooking(Booking booking) {
+        trackBeau.addBooking(booking);
+        updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
+    }
+    @Override
+    public void deleteBooking(Booking target) {
+        trackBeau.removeBooking(target);
+    }
     //=========== Filtered Booking List Accessors =============================================================
 
     /**
@@ -140,6 +146,42 @@ public class ModelManager implements Model {
     public void updateFilteredBookingList(Predicate<Booking> predicate) {
         requireNonNull(predicate);
         filteredBookings.setPredicate(predicate);
+    }
+
+    //=========== Services =============================================================
+
+    @Override
+    public boolean hasService(Service service) {
+        requireNonNull(service);
+        return trackBeau.hasService(service);
+    }
+
+    @Override
+    public void deleteService(Service target) {
+        trackBeau.removeService(target);
+    }
+
+    @Override
+    public void addService(Service service) {
+        trackBeau.addService(service);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+    }
+
+    @Override
+    public void setService(Service target, Service editedService) {
+        requireAllNonNull(target, editedService);
+        trackBeau.setService(target, editedService);
+    }
+
+    @Override
+    public ObservableList<Service> getServiceList() {
+        return services;
+    }
+
+    @Override
+    public void updateServiceList(Predicate<Service> predicate) {
+        requireNonNull(predicate);
+        services.setPredicate(predicate);
     }
 
     //=========== Filtered Customer List Accessors =============================================================
@@ -174,8 +216,9 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return trackBeau.equals(other.trackBeau)
-                && userPrefs.equals(other.userPrefs)
-                && filteredCustomers.equals(other.filteredCustomers);
+            && userPrefs.equals(other.userPrefs)
+            && filteredCustomers.equals(other.filteredCustomers)
+            && services.equals(other.services);
     }
 
 }

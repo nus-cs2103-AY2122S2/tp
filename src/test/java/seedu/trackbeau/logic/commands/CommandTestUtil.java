@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
@@ -49,6 +51,12 @@ public class CommandTestUtil {
     public static final String VALID_HAIR_TYPE_AMY = "Oily";
     public static final String VALID_HAIR_TYPE_BOB = "Dry";
 
+    public static final String VALID_BIRTHDATE_AMY = "07-12-2001";
+    public static final String VALID_BIRTHDATE_BOB = "02-10-1990";
+
+    public static final String VALID_REG_DATE_AMY = "23-02-2022";
+    public static final String VALID_REG_DATE_BOB = "02-10-2021";
+
     public static final String VALID_STAFF_AMY = "Jane";
     public static final String VALID_STAFF_BOB = "John";
 
@@ -75,6 +83,12 @@ public class CommandTestUtil {
 
     public static final String HAIR_TYPE_DESC_AMY = " " + PREFIX_HAIRTYPE + VALID_HAIR_TYPE_AMY;
     public static final String HAIR_TYPE_DESC_BOB = " " + PREFIX_HAIRTYPE + VALID_HAIR_TYPE_BOB;
+
+    public static final String BIRTHDATE_DESC_AMY = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_AMY;
+    public static final String BIRTHDATE_DESC_BOB = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_BOB;
+
+    public static final String REG_DATE_DESC_AMY = " " + PREFIX_REGDATE + VALID_REG_DATE_AMY;
+    public static final String REG_DATE_DESC_BOB = " " + PREFIX_REGDATE + VALID_REG_DATE_BOB;
 
     public static final String STAFF_DESC_AMY = " " + PREFIX_STAFFS + VALID_STAFF_AMY;
     public static final String STAFF_DESC_BOB = " " + PREFIX_STAFFS + VALID_STAFF_BOB;
