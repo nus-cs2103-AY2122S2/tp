@@ -73,7 +73,7 @@ The `UI` component,
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
-**API** : 
+**API** :
 [`Logic.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/logic/Logic.java)
 
 
@@ -85,20 +85,20 @@ Breakdown of the Company and RoleManager packages:
 
 ![Structure of the Company and RoleManager Classes](images/CompanyRoleManagerClassDiagram.png)
 
-**API** : 
+**API** :
 [`Model.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/model/Model.java)
 
 The `Model` component,
 
-* stores the company list data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object). 
+* stores the company list data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object).
 * stores the currently selected `Company` and `Role` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects. 
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 ### Storage Component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : 
+**API** :
 [`Storage.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/storage/Storage.java)
 
 The `Storage` component,
@@ -106,7 +106,7 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save `JsonAdaptedCompany` objects in `JsonSerializableCompanyList` in json format and read it back.
 * can save `JsonAdaptedRole` objects in `JsonAdaptedCompany` in json format and read it back
-* inherits from both `CompanyListStorage` and `UserPrefStorage`,meaning that it can be 
+* inherits from both `CompanyListStorage` and `UserPrefStorage`,meaning that it can be
   treated as either one (if the functionality of only one is required)
 * depends on classes like `Company` and `Role` in the `Model` component (as it is the `Storage` component's
   job to save/retrieve objects that belong to the `Model`)
@@ -123,7 +123,7 @@ The `JsonAdaptedCompany` also contains a list of roles in `List<JsonAdaptedRole>
 The `find` feature allows users to filter the company list by specifying company name keywords and role name keywords.
 
 #### Implementation
-The `find` command is primarily implemented by `FindCommandParser` a class that extends `Parser`, and `FindCommand`, which is a class that extends `Command`. For each `find` command, a `Predicate<Company>` object and a `Predicate<Role>` object will be created. Both `Predicate` objects contain a `test` function to determine whether the given company or role matches the keywords provided in the user input. 
+The `find` command is primarily implemented by `FindCommandParser` a class that extends `Parser`, and `FindCommand`, which is a class that extends `Command`. For each `find` command, a `Predicate<Company>` object and a `Predicate<Role>` object will be created. Both `Predicate` objects contain a `test` function to determine whether the given company or role matches the keywords provided in the user input.
 
 * Upon a valid user's input using the `find` command, the `FindCommandParser#parse()`creates a `CompanyNameContainsKeywordsPredicate` which extends `Predicate<Company>`, and a `RoleNameContainsKeywordsPredicate` which extends `Predicate<Role>`.
 * The `FindCommandParser#parse()` then uses the `CompanyNameContainsKeywordsPredicate` object and the `RoleNameContainsKeywordsPredicate` object to instantiate the `FindCommand`.
@@ -142,10 +142,10 @@ Note that the lifeline of FindCommandParser should end at the destroy marker but
 2. The `FindCommandParser#parse()` method will create a `CompanyNameContainsKeywordsPredicate` object with the company name keywords specified after the prefix `c/` and the role name keywords specified after the prefix `r/`. The `RoleNameContainsKeywordsPredicate` is also created using the role name keywords specified after the prefix `r/`. If a prefix is present, keywords that follow the prefix must be present or else it would be deemed an invalid command.
 3. Note that the `CompanyNameContainsKeywordsPredicate` is created using both company name keywords and role name keywords because companies are only displayed if they contain at least one role which matches the role name keywords
 4. Either prefix `c/` or `r/` can be absent. Both cannot be absent within the same command or else it would give rise to an invalid command. If absent, an empty array is passed as input in the creation of either or both `CompanyNameContainsKeywordsPredicate` and `RoleNameContainsKeywordsPredicate`.
-5. Then the `FindCommandParser#parse()` method will create an `FindCommand` object with the `CompanyNameContainsKeywordsPredicate` object and the `RoleNameContainsKeywordsPredicate` object.  
+5. Then the `FindCommandParser#parse()` method will create an `FindCommand` object with the `CompanyNameContainsKeywordsPredicate` object and the `RoleNameContainsKeywordsPredicate` object. 
 6. The `FindCommand` object will be returned to the `LogicManager` and will then invoke the `FindCommand#execute()` method to implement the changes.
 7. The `Model#updateFilteredRoleList()` is invoked and filters the list of companies to display only companies which match the company name keywords.
-8. Similarly, the `Model#updateFilteredRoleList()` also filters the list of roles within each company to display only roles which match the role name keywords.   
+8. Similarly, the `Model#updateFilteredRoleList()` also filters the list of roles within each company to display only roles which match the role name keywords.  
 9. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
 ### Edit role feature
@@ -191,7 +191,7 @@ Students who...
 * prefer typing to mouse interactions
 * are reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 * Track (View all your internship applications at a glance)
 * Remind (Be reminded of your upcoming assessments)
