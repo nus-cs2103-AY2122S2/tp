@@ -107,21 +107,4 @@ public class ShowDetailsCard extends UiPart<Region> {
 
         textArea.setPrefHeight(count * fontHeight);
     }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ShowDetailsCard)) {
-            return false;
-        }
-
-        // state check
-        ShowDetailsCard card = (ShowDetailsCard) other;
-        return show.equals(card.show);
-    }
 }
