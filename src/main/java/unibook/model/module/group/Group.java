@@ -54,8 +54,8 @@ public class Group {
     /**
      * Instantiates a group object, with an empty list of meeting times and associated students.
      *
-     * @param name         of the group.
-     * @param module       that the group is in.
+     * @param name   of the group.
+     * @param module that the group is in.
      */
     public Group(String name, Module module) {
         this.name = name;
@@ -167,8 +167,8 @@ public class Group {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getGroupName())
-                .append("; Module: ")
-                .append(getModule().getModuleCode());
+            .append("; Module: ")
+            .append(getModule().getModuleCode());
         return builder.toString();
     }
 }
