@@ -2,6 +2,9 @@ package seedu.address.model.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.SORT_BY_NAME;
+import static seedu.address.logic.parser.CliSyntax.SORT_BY_OWNER;
+import static seedu.address.logic.parser.CliSyntax.SORT_BY_APPOINTMENT;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -39,17 +42,22 @@ public class UniquePetList implements Iterable<Pet> {
 
     /**
      * Sort list of pets by field using the comparators in the respective fields.
-     * As of now, the field can either be "/o" (owner name) or "/n" (pet name).
+     * As of now, the field can be name, owner and appointment date.
+     * @param field of the pet to be sorted by.
      */
     public void sortPetList(String field) {
-        Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);
-        Comparator<Pet> petOwnerNameComparator = Comparator.comparing(Pet::getOwnerName);
         switch (field) {
-        case "/o":
+        case SORT_BY_NAME:
+            Comparator<Pet> petOwnerNameComparator = Comparator.comparing(Pet::getOwnerName);
             FXCollections.sort(internalList, petOwnerNameComparator);
             break;
-        case "/n":
+        case SORT_BY_OWNER:
+            Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);
             FXCollections.sort(internalList, petNameComparator);
+            break;
+        case SORT_BY_APPOINTMENT:
+            Comparator<Pet> petAppointmentComparator = Comparator.comparing(Pet::getAppointment);
+            FXCollections.sort(internalList, petAppointmentComparator);
             break;
         default:
             assert false;
