@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.Model;
+import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Information;
@@ -39,7 +40,7 @@ public class FindEventCommand extends Command{
         model.updateFilteredEventList(predicate);
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
     }
 
     @Override
@@ -57,6 +58,7 @@ public class FindEventCommand extends Command{
         private List<EventName> names;
         private List<Information> informations;
         private List<Name> participants;
+        private List<DateTime> dateTimes;
 
         public FindEventDescriptor() {
         }
@@ -68,13 +70,14 @@ public class FindEventCommand extends Command{
             setNames(toCopy.names);
             setInformations(toCopy.informations);
             setParticipants(toCopy.participants);
+            setDateTimes(toCopy.dateTimes);
         }
 
         /**
          * Returns true if at least one field is searched for.
          */
         public boolean isAnyFieldPresent() {
-            return CollectionUtil.isAnyNonNull(names, informations, participants);
+            return CollectionUtil.isAnyNonNull(names, informations, participants, dateTimes);
         }
 
         public void setNames(List<EventName> names) {
@@ -116,7 +119,13 @@ public class FindEventCommand extends Command{
                     list.stream().map(participants -> participants.fullName).collect(Collectors.toList()));
         }
 
+        public void setDateTimes(List<DateTime> dateTimes) {
+            this.dateTimes = dateTimes;
+        }
 
+        public Optional<List<DateTime>> getDateTimes() {
+            return Optional.ofNullable(dateTimes);
+        }
 
         @Override
         public boolean equals(Object other) {

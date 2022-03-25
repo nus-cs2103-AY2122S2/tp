@@ -13,6 +13,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+
 
 
 import java.util.List;
@@ -35,6 +37,8 @@ public class FindCommandParser implements Parser<Command> {
     public static final String MULTIPLE_WORDS = "Each value must be limited to one word\n"
             + "Eg: find n/Alex n/Ho instead of n/Alex Ho";
 
+    public static final String DATE_TIME_FORMAT = "Please provide the date followed by time\n" +
+            "Eg: find -e dt/2022-08-08 03:00";
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -47,7 +51,7 @@ public class FindCommandParser implements Parser<Command> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_CCA, PREFIX_EDUCATION, PREFIX_MODULE, PREFIX_INTERNSHIP, PREFIX_EVENT_NAME,
-                        PREFIX_INFO, PREFIX_PARTICIPANTS);
+                        PREFIX_INFO, PREFIX_PARTICIPANTS, PREFIX_DATETIME);
 
         boolean isAndSearch = false;
         boolean isEventSearch = false;
@@ -114,6 +118,9 @@ public class FindCommandParser implements Parser<Command> {
             }
             if(argMultimap.getValue(PREFIX_PARTICIPANTS).isPresent()) {
                 eventDescriptor.setParticipants(ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_PARTICIPANTS)));
+            }
+            if(argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+                eventDescriptor.setDateTimes(ParserUtil.parseDateTimes(argMultimap.getAllValues(PREFIX_DATETIME)));
             }
 
             if (!eventDescriptor.isAnyFieldPresent()) {

@@ -315,10 +315,9 @@ public class ParserUtil {
         requireNonNull(list);
         final Set<EventName> set = new HashSet<>();
         for (String value : list) {
-            if (value.split(" ").length > 1) {
-                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            for(String s : value.split(" ")) {
+                set.add(parseEventName(s.trim()));
             }
-            set.add(parseEventName(value));
         }
         return new ArrayList<>(set);
     }
@@ -346,10 +345,9 @@ public class ParserUtil {
         requireNonNull(list);
         final Set<Information> set = new HashSet<>();
         for (String value : list) {
-            if (value.split(" ").length > 1) {
-                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            for(String s : value.split(" ")) {
+                set.add(parseInfo(s.trim()));
             }
-            set.add(parseInfo(value));
         }
         return new ArrayList<>(set);
     }
@@ -384,5 +382,22 @@ public class ParserUtil {
         }
 
         return new DateTime(year, month, day, hour, min);
+    }
+
+    public static DateTime parseDateTimeForFind(String dateTime) throws ParseException {
+        String trimmedDateTime = dateTime.trim();
+        if(trimmedDateTime.split(" ").length != 2) {
+            throw new ParseException(FindCommandParser.DATE_TIME_FORMAT);
+        }
+        return parseDateTime(trimmedDateTime.split(" ")[0], trimmedDateTime.split(" ")[1]);
+    }
+
+    public static List<DateTime> parseDateTimes(List<String> stringDateTimes) throws ParseException {
+        requireNonNull(stringDateTimes);
+        final Set<DateTime> set = new HashSet<>();
+        for (String value : stringDateTimes) {
+            set.add(parseDateTimeForFind(value.trim()));
+        }
+        return new ArrayList<>(set);
     }
 }
