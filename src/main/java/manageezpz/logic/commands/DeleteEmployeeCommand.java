@@ -47,7 +47,7 @@ public class DeleteEmployeeCommand extends Command {
         for (int i = 0; i < lastShownTaskList.size(); i++) {
             Task currentTask = lastShownTaskList.get(i);
             List<Person> assigneeList = currentTask.getAssignees();
-            for(int j = 0; j < assigneeList.size(); j++) {
+            for (int j = 0; j < assigneeList.size(); j++) {
                 if (assigneeList.get(j).equals(personToDelete)) {
                     taskList.add(currentTask);
                 }
