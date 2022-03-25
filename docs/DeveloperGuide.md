@@ -137,6 +137,30 @@ The `stats` opens a new `StatisticsWindow` that displays a pie chart with the in
 
 This allows the user to be visualize his/her client's data to make better business decisions.
 
+## [Proposed] Sorting
+
+The sorting feature allows the user to sort the list of `Person` displayed.
+
+The following table shows the attributes that the list can be sorted by and their corresponding keywords.
+
+| Attribute            | Keyword        |
+|----------------------|----------------|
+| `Name`               | `name`         |
+| `Phone`              | `phone`        |
+| `Email`              | `email`        |
+| `Favourite`          | `favourite`    |
+| `Address`            | `address`      |
+| `UserType`           | `usertype`     |
+| Number of `Property` | `num_property` |
+
+Sorting the list is done by using the `sort` command, which has the following syntax: `sort [KEYWORD]...`.
+
+If multiple attributes are specified, the first attribute is given the highest priority, while the last attribute is given the lowest priority. For example, `sort address name` will sort the list by `Address` first, followed by `Name` if `Address` is equal.
+
+The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`.
+
+Whenever the underlying application data is modified, the `FilteredList<Person>` is notified first and will filter the data. If there is any change in the `FilteredList<Person>`, the `SortedList<Person>` is notified and will sort the filtered data.
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
