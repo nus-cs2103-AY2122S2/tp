@@ -5,18 +5,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import javax.swing.JFileChooser;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileFilter;
+
+import javafx.stage.FileChooser;
 
 public class JsonFileManager {
 
     public static final int SUCCESS = 0;
     public static final int CANCEL = 1;
     public static final int ERROR = 2;
+    private static final String IMPORT_TITLE = "Choose a JSON file to load into Trackermon";
+    private static final String EXPORT_TITLE = "Choose a location to save Trackermon's data";
 
-    private JFileChooser jfc;
+    private FileChooser fileChooser;
 
     /**
      * Creates a {@code FileManager} that handles import and export without baseFileName.
@@ -30,37 +30,16 @@ public class JsonFileManager {
      * @param baseFileName default file name in JFileChooser
      */
     public JsonFileManager(String baseFileName) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-        jfc = new JFileChooser();
+        fileChooser = new FileChooser();
 
         if (!baseFileName.isBlank()) {
             baseFileName = (baseFileName.endsWith(".json")) ? baseFileName : baseFileName + ".json";
-            jfc.setSelectedFile(new File(baseFileName));
+            fileChooser.setInitialFileName(baseFileName);
         }
 
-        jfc.setCurrentDirectory(new File(System.getProperty("user.home")));
-        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        jfc.setFileFilter(new FileFilter() {
-            @Override
-            public boolean accept(File f) {
-                if (f.isDirectory()) {
-                    return true;
-                } else {
-                    return f.getName().toLowerCase().endsWith(".json");
-                }
-            }
-
-            @Override
-            public String getDescription() {
-                return "JSON file (*.json)";
-            }
-        });
-        jfc.setAcceptAllFileFilterUsed(true);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("JSON file", "*.json"));
     }
 
     /**
@@ -70,16 +49,15 @@ public class JsonFileManager {
      * @return int value representing outcome.
      */
     public int exportFile(Path dataPath) {
-        jfc.setMultiSelectionEnabled(false);
-        int result = jfc.showOpenDialog(null);
+        fileChooser.setTitle(EXPORT_TITLE);
+        File selectedFile = fileChooser.showSaveDialog(null);
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File f = new File(jfc.getSelectedFile().getAbsolutePath());
-            if (!f.getAbsolutePath().endsWith(".json")) {
-                f = new File(jfc.getSelectedFile().getAbsolutePath() + ".json");
+        if (selectedFile != null) {
+            if (!selectedFile.getAbsolutePath().endsWith(".json")) {
+                selectedFile = new File(selectedFile.getAbsolutePath() + ".json");
             }
-            System.out.println(f);
-            Path exportPath = f.toPath();
+
+            Path exportPath = selectedFile.toPath();
             try {
                 Files.copy(dataPath, exportPath, StandardCopyOption.REPLACE_EXISTING);
                 return SUCCESS;
@@ -98,12 +76,11 @@ public class JsonFileManager {
      * @return int value representing outcome.
      */
     public int importFile(Path dataPath) {
-        jfc.setMultiSelectionEnabled(false);
-        int result = jfc.showOpenDialog(null);
+        fileChooser.setTitle(IMPORT_TITLE);
+        File selectedFile = fileChooser.showOpenDialog(null);
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File f = new File(jfc.getSelectedFile().getAbsolutePath());
-            Path importPath = f.toPath();
+        if (selectedFile != null) {
+            Path importPath = selectedFile.toPath();
             try {
                 Files.copy(importPath, dataPath, StandardCopyOption.REPLACE_EXISTING);
                 return SUCCESS;
