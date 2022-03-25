@@ -15,6 +15,7 @@ import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
 import manageezpz.model.ReadOnlyAddressBook;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
 import manageezpz.storage.Storage;
 
 /**
@@ -62,6 +63,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 
     @Override

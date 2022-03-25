@@ -135,27 +135,13 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
-    }
-
-
     //=========== ManageEZPZ ==================================================================================
+
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
 
     @Override
     public void addTask(Task task) {
@@ -167,16 +153,19 @@ public class ModelManager implements Model {
     @Override
     public void addTodo(Todo todo) {
         addressBook.addTodo(todo);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void addDeadline(Deadline deadline) {
         addressBook.addDeadline(deadline);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
@@ -209,26 +198,6 @@ public class ModelManager implements Model {
         addressBook.untagTask(task, person);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateFilteredTaskList(Predicate<Task> predicate) {
-        requireNonNull(predicate);
-        filteredTasks.setPredicate(predicate);
-    }
-
-    @Override
-    public ObservableList<Task> getFilteredTaskList() {
-        return filteredTasks;
-    }
-
-    @Override
-    public boolean hasTask(Task task) {
-        requireNonNull(task);
-        return addressBook.hasTask(task);
-    }
-
     @Override
     public boolean isTagged(Task task, Person person) {
         requireNonNull(task);
@@ -246,6 +215,43 @@ public class ModelManager implements Model {
         return addressBook.listTask(option);
     }
 
+    //=========== Filtered Task List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ModelManager)) {
+            return false;
+        }
+
+        // state check
+        ModelManager other = (ModelManager) obj;
+        return addressBook.equals(other.addressBook)
+                && userPrefs.equals(other.userPrefs)
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredTasks.equals(other.filteredTasks);
+    }
+
     @Override
     public boolean hasPriority(Task task) {
         return addressBook.hasPriority(task);
@@ -256,6 +262,5 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedTask);
 
         addressBook.setTask(target, editedTask);
-
     }
 }

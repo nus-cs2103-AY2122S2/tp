@@ -29,45 +29,5 @@
     "phone" : "9482442",
     "email" : "anna@example.com"
   } ],
-  "tasks" : [ {
-    "type" : "todo",
-    "status": "",
-    "description" : "Play Genshin Impact",
-    "date" : "",
-    "deadlineTime" : "",
-    "eventStartTime" : "",
-    "eventEndTime" : "",
-    "tag" : "",
-    "priority" : ""
-  }, {
-    "type" : "deadline",
-    "status": "",
-    "description" : "Do Daily Commissions",
-    "date" : "2022-03-15",
-    "deadlineTime" : "0400",
-    "eventStartTime" : null,
-    "eventEndTime" : null,
-    "tag" : "",
-    "priority" : ""
-  }, {
-    "type" : "event",
-    "status": "",
-    "description" : "Finish 160 Resins",
-    "date" : "2022-03-15",
-    "deadlineTime" : null,
-    "eventStartTime" : "1800",
-    "eventEndTime" : "2000",
-    "tag" : "",
-    "priority" : ""
-  }, {
-    "type" : "deadline",
-    "status": "",
-    "description" : "Do MY Commissions",
-    "date" : "2022-03-15",
-    "deadlineTime" : "0400",
-    "eventStartTime" : null,
-    "eventEndTime" : null,
-    "tag" : "",
-    "priority" : ""
-  } ]
+  "tasks" : [ ]
 }
