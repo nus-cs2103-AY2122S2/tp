@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_PAST_DATETIME;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.ApplicationStatus;
@@ -45,6 +47,23 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static String parseTimePeriod(String timePeriod) throws ParseException {
+        String trimmedTimePeriod = timePeriod.trim();
+        if (trimmedTimePeriod.equalsIgnoreCase("today")
+                && trimmedTimePeriod.equalsIgnoreCase("week")
+                && trimmedTimePeriod.equalsIgnoreCase("month")
+                && trimmedTimePeriod.equalsIgnoreCase("all")
+                && trimmedTimePeriod.equalsIgnoreCase("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        }
+        return timePeriod;
     }
 
     /**
