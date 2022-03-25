@@ -288,10 +288,25 @@ prescription. It will then delete the 2nd prescription from prescription model a
 
 <!-- Si Binh -->
 ### Find
+The `Find` command is used to find the patient whose names contain any of the given keywords. 
+
+
+
 #### Design Consideration
 WIP
 
 #### Implementation
+
+`FindCommandParser` parses input, builds a `NameContainsKeywordsPredicate` and returns a `FindCommand` with needed name predicate.
+
+`FindCommand` extends the abstract class `Command`. 
+
+It implements the abstract method `execute` to invoke `Model` and update the list of displayed patients in `MedBook`. 
+
+This operation is exposed in the `LogicManager` class. 
+
+`UI` is then updated accordingly.
+
 WIP - Insert UML and activity diagram
 
 #### Usage
