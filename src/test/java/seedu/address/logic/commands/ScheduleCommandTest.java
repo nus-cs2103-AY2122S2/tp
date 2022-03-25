@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_CANDIDATE_NOT
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW;
 import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_NOT_OFFICE_HOUR;
+import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CANDIDATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CANDIDATE;
@@ -19,7 +20,6 @@ import static seedu.address.testutil.TypicalInterviews.ON_WEEKEND;
 import static seedu.address.testutil.TypicalInterviews.THURSDAY_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.TUESDAY_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
-import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
 
@@ -161,13 +161,15 @@ public class ScheduleCommandTest {
     @Test
     public void equals() {
         ScheduleCommand scheduleFirstCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
-        ScheduleCommand scheduleSecondCommand = new ScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        ScheduleCommand scheduleSecondCommand =
+                new ScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
 
         // same object -> returns true
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommand));
 
         // same values -> returns true
-        ScheduleCommand scheduleFirstCommandcopy = new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        ScheduleCommand scheduleFirstCommandcopy =
+                new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommandcopy));
 
         // different types -> returns false

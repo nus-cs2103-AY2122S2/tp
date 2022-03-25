@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
-import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalCandidates.ALICE;
 import static seedu.address.testutil.TypicalCandidates.BENSON;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

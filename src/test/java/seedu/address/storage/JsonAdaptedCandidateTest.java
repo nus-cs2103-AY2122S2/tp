@@ -52,9 +52,9 @@ public class JsonAdaptedCandidateTest {
 
     @Test
     public void toModelType_invalidStudentId_throwsIllegalValueException() {
-        JsonAdaptedCandidate candidate = new JsonAdaptedCandidate(INVALID_STUDENT_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_COURSE, VALID_SENIORITY, VALID_TAGS, VALID_APPLICATION_STATUS, VALID_INTERVIEW_STATUS,
-                VALID_AVAILABILITY);
+        JsonAdaptedCandidate candidate = new JsonAdaptedCandidate(
+                INVALID_STUDENT_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSE, VALID_SENIORITY,
+                VALID_TAGS, VALID_APPLICATION_STATUS, VALID_INTERVIEW_STATUS, VALID_AVAILABILITY);
         String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, candidate::toModelType);
     }
