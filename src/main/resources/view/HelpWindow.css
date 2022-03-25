@@ -23,7 +23,25 @@
     -fx-vgap: 3;
 }
 
-#listCommand.label, #exitCommand.label ,#addCommand.label, #addGroupCommand.label, #assignCommand.label, #addTaskCommand.label, #viewTaskCommand.label {
+#listCommand.label, #exitCommand.label, #clearCommand.label, #addCommand.label, #deleteCommand.label {
+    -fx-text-fill: white;
+    -fx-background-color: #8A88FF;
+    -fx-padding: 2 10 2 10;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-size: 14;
+}
+
+#addGroupCommand.label, #delGroupCommand.label, #assignCommand.label, #deassignCommand.label, #addTaskCommand.label {
+    -fx-text-fill: white;
+    -fx-background-color: #8A88FF;
+    -fx-padding: 2 10 2 10;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-size: 14;
+}
+
+#delTaskCommand.label, #viewTaskCommand.label, #viewContactCommand.label {
     -fx-text-fill: white;
     -fx-background-color: #8A88FF;
     -fx-padding: 2 10 2 10;
