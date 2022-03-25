@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.group.Group;
 import unibook.model.person.exceptions.DuplicatePersonException;
 import unibook.model.person.exceptions.PersonNotFoundException;
 
@@ -91,6 +92,32 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Delete all students and professors from unique person list if they exist in the 2 list provided
+     *
+     * @param listOfStudents
+     * @param listOfProfessors
+     */
+    public void deleteStudentsAndProfs(List<Student> listOfStudents, List<Professor> listOfProfessors) {
+        for (Student student: listOfStudents) {
+            internalList.remove(student);
+        }
+        for (Professor professor: listOfProfessors) {
+            internalList.remove(professor);
+        }
+    }
+
+    /**
+     * Delete all professors from unique person list if they exist in the list provided
+     *
+     * @param listOfProfessors
+     */
+    public void deleteProfs(List<Professor> listOfProfessors) {
+        for (Professor professor: listOfProfessors) {
+            internalList.remove(professor);
+        }
+    }
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -145,5 +172,14 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    public void deleteGroupFromAllPersons(ModuleCode moduleCode, Group group) {
+        for (Person person : internalList) {
+            if (person instanceof Student && person.hasModule(moduleCode)) {
+                Student student = (Student) person;
+                student.removeGroup(moduleCode, group);
+            }
+        }
     }
 }

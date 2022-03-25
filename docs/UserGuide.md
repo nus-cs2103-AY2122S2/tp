@@ -187,18 +187,17 @@ Removes the specified modules, module subgroup, student or professor profile fro
 Format:
 
 `delete [INDEX]`
-* Deletes the person at that index
-* Only can be used on Person view
+* Deletes the person or module at that index
+* The GUI will display the index before the person or module
 
 `delete m/MODULECODE [o/OPTION]`
 
 * Deletes the module with the specified `MODULECODE`.
 * Only can be used on module view
 * The module must already exist in the system.
-* [NOT READY] Option is optional, and can take the following values: 
-  - `ALL` -> Delete everything associated with the module, including profiles.
+* Option is optional, and can take the following values: 
+  - `ALL` -> Delete module and persons if the only module that person has matches the modulecode provided.
   - `MOD` -> Delete only the module
-  - `PROF` -> Delete the Professor associated with the module.
 * If the option field is left blank, the `MOD` setting is assumed.    
 
 Example:

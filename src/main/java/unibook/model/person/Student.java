@@ -2,10 +2,12 @@ package unibook.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 
@@ -66,6 +68,18 @@ public class Student extends Person {
      */
     public Set<Group> getGroups() {
         return groups;
+    }
+
+    public void removeGroup(ModuleCode moduleCode, Group group) {
+        Set<Group> toBeDeleted = new HashSet<>();
+        for (Group g : groups) {
+            if (g.sameGroupNameAndModule(moduleCode.toString(), group.getGroupName())) {
+                toBeDeleted.add(g);
+            }
+        }
+        for (Group g : toBeDeleted) {
+            groups.remove(g);
+        }
     }
 
     @Override

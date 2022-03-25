@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.module.exceptions.DuplicateMeetingTimeException;
 import unibook.model.module.exceptions.MeetingTimeNotFoundException;
 import unibook.model.person.Student;
@@ -60,6 +61,16 @@ public class Group {
     public Group(String name, Module module) {
         this.name = name;
         this.module = module;
+        this.meetingTimes = FXCollections.observableArrayList();
+        this.members = FXCollections.observableArrayList();
+    }
+
+    /**
+     * Instantiates a group object with only the name, to be used to match groups to delete
+     */
+    public Group(String name) {
+        this.name = name;
+        this.module = null;
         this.meetingTimes = FXCollections.observableArrayList();
         this.members = FXCollections.observableArrayList();
     }
@@ -134,6 +145,21 @@ public class Group {
             throw new MeetingTimeNotFoundException();
         }
         meetingTimes.remove(meetingTime);
+    }
+
+    /**
+     * Returns true only if the name of the group provided and this group name
+     * are the same.
+     */
+    public boolean sameGroupName(Group group) {
+        return this.name.equals(group.getGroupName());
+    }
+
+    public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
+        if (moduleCode.equals(this.module.getModuleCode().toString()) && groupName.equals(this.getGroupName())) {
+            return true;
+        }
+        return false;
     }
 
     /**

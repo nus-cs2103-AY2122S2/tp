@@ -15,6 +15,7 @@ import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
+import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Office;
@@ -239,5 +240,14 @@ public class ParserUtil {
             groupList.add(groupNamesSet);
         }
         return groupList;
+    }
+
+    /**
+     * Parses {@code String groupName} into a {@code Group}.
+     */
+    public static Group parseGroup(String groupName)
+            throws ParseException {
+
+        return new Group(groupName);
     }
 }

@@ -101,6 +101,25 @@ public abstract class Person {
     }
 
     /**
+     * Returns true if this person object only has 1 module which has the same module code as
+     * the one provided
+     *
+     * @param moduleCode
+     * @return
+     */
+    public boolean onlyHasModule(ModuleCode moduleCode) {
+        if (modules.size() != 1) {
+            return false;
+        }
+        for (Module module : modules) {
+            if (module.hasModuleCode(moduleCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds this person to all the modules that they are associated with, into the
      * correct personnel list (professor/student) in module depending on the runtime type
      * of this person.

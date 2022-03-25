@@ -13,5 +13,7 @@ public class Messages {
     public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Change page to Module Page!";
     public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Change page to Person Page!";
     public static final String MESSAGE_MODULE_CODE_NOT_EXIST = "Module Code does not exist: %1$s";
+    public static final String MESSAGE_GROUP_NOT_EXIST = "Group does not exist: %1$s";
+
 
 }

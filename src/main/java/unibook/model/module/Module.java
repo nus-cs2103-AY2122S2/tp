@@ -167,6 +167,38 @@ public class Module {
 
 
     /**
+     * Returns true if group has same name as one of the groups in this module
+     *
+     * @param group
+     * @return
+     */
+    public boolean hasGroup(Group group) {
+        for (Group g : groups) {
+            if (group.sameGroupName(g)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Remove provided group from the list of groups
+     *
+     * @param group
+     * @return
+     */
+    public Group removeGroupByName(Group group) {
+        Group tobeDeleted = null;
+        for (Group g : groups) {
+            if (group.sameGroupName(g)) {
+                tobeDeleted = g;
+            }
+        }
+        groups.remove(tobeDeleted);
+        return tobeDeleted;
+    }
+
+    /**
      * Returns the group in the group list of this module that has the given unique name.
      *
      * @param grpName of the group to get.

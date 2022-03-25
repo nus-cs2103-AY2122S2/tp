@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.exceptions.DuplicateModuleException;
 import unibook.model.module.exceptions.ModuleNotFoundException;
+import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 
 /**
@@ -201,4 +202,5 @@ public class ModuleList implements Iterable<Module> {
         }
         return true;
     }
+
 }
