@@ -191,7 +191,7 @@ public class ModelManager implements Model {
     @Override
     public void updateSortedCandidateList(Comparator<Candidate> sortComparator) {
         requireNonNull(sortComparator);
-        addressBook.sortCandidates(filteredCandidates, sortComparator);
+        addressBook.sortCandidates(addressBook.getCandidateList(), sortComparator);
     }
 
     @Override
