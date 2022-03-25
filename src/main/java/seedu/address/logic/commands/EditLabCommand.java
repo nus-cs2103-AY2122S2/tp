@@ -83,11 +83,11 @@ public class EditLabCommand extends Command {
     /**
      * Returns true if the given EditLabCommand is a valid EditLabCommand.
      */
-    public boolean isValidCommand(EditLabCommand e) {
-        if (e.newStatus == LabStatus.GRADED && e.newMark.isEmpty()) {
+    public boolean isValidCommand() {
+        if (newStatus == LabStatus.GRADED && newMark.isEmpty()) {
             return false;
         }
-        if (e.newStatus != LabStatus.GRADED && !e.newMark.isEmpty()) {
+        if (newStatus != LabStatus.GRADED && !newMark.isEmpty()) {
             return false;
         }
         return true;
@@ -113,7 +113,7 @@ public class EditLabCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        if (!isValidCommand(this)) {
+        if (!isValidCommand()) {
             throw new CommandException(getInvalidCommandMessage());
         }
 

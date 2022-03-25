@@ -27,8 +27,8 @@ public class GradeLabCommand extends EditLabCommand {
     }
 
     @Override
-    public boolean isValidCommand(EditLabCommand e) {
-        return e.newStatus != LabStatus.GRADED;
+    public boolean isValidCommand() {
+        return newStatus != LabStatus.GRADED && !newMark.isEmpty();
     }
 
     @Override

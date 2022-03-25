@@ -24,8 +24,8 @@ public class SubmitLabCommand extends EditLabCommand {
     }
 
     @Override
-    public boolean isValidCommand(EditLabCommand e) {
-        return e.newStatus == LabStatus.SUBMITTED && e.newMark.isEmpty();
+    public boolean isValidCommand() {
+        return newStatus == LabStatus.SUBMITTED && newMark.isEmpty();
     }
 
     @Override
