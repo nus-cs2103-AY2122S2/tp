@@ -162,7 +162,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
-        return addressBook.getTransactionList();
+        return filteredTransactions;
     };
 
 
