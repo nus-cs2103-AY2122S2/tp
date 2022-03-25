@@ -39,13 +39,12 @@ class LabListTest {
 
     @Test
     public void contains_listEmpty_failure() {
-        LabList labs = new LabList();
+        assertTrue(labs.asUnmodifiableObservableList().isEmpty());
         assertFalse(labs.contains(new Lab("2")));
     }
 
     @Test
     public void getLab_labInList_success() {
-        LabList labs = new LabList();
         Lab l = new Lab("1");
         labs.add(l);
         assertEquals(l, labs.getLab(l));
@@ -61,6 +60,7 @@ class LabListTest {
 
     @Test
     public void getLab_listEmpty_throwsLabNotFoundException() {
+        assertTrue(labs.asUnmodifiableObservableList().isEmpty());
         assertThrows(LabNotFoundException.class, () -> labs.getLab(new Lab("2")));
         assertThrows(LabNotFoundException.class, () -> labs.getLab(2));
     }
