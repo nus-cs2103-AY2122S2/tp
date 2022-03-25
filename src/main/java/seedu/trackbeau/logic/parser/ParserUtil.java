@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.StringUtil;
+import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
@@ -215,7 +217,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code startTime} is invalid.
      */
-    public static LocalDateTime parseStartTime(String startTime) throws DateTimeException {
+    public static LocalDateTime parseStartTime(String startTime) throws ParseException {
         requireNonNull(startTime);
         String trimmedAddress = startTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -223,7 +225,7 @@ public class ParserUtil {
         try {
             dateTime = LocalDateTime.parse(trimmedAddress, formatter);
         } catch (DateTimeException e) {
-            throw e;
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBookingCommand.MESSAGE_USAGE));
         }
 
         return dateTime;

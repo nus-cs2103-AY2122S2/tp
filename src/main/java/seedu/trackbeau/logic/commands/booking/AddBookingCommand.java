@@ -28,7 +28,7 @@ public class AddBookingCommand extends Command {
             + PREFIX_STARTTIME + "APPOINTMENTTIME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CUSTOMER + "1 "
-            + PREFIX_STARTTIME + "10-10-2022 10 ";
+            + PREFIX_STARTTIME + "10-10-2022 10:30 ";
 
     public static final String MESSAGE_SUCCESS = "New Booking added: \n%1$s";
 

@@ -41,9 +41,9 @@ public class BookingCard extends UiPart<Region> {
         super(FXML);
         this.booking = booking;
         id.setText(displayedIndex + ". ");
-        //name.setText(booking.getCustomerName());
-        //phone.setText(booking.getPhone());
-        //startTime.setText(booking.getDateTime());
+        name.setText(booking.getCustomerName());
+        phone.setText(booking.getCustomerPhone());
+        startTime.setText(booking.getDateTime());
     }
 
     @Override
