@@ -16,7 +16,6 @@ import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.InterviewStatus;
 
-
 /**
  * An UI component that displays information of a {@code Candidate}.
  */
