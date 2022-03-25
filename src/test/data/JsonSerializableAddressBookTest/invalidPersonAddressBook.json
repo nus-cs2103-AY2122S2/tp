@@ -4,6 +4,8 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street",
+    "course": "Computer Science",
+    "seniority": "COM2",
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
     "availability": "1,2,9"

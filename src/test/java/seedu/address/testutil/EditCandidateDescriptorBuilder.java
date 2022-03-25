@@ -13,6 +13,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
@@ -41,6 +42,7 @@ public class EditCandidateDescriptorBuilder {
         descriptor.setPhone(candidate.getPhone());
         descriptor.setEmail(candidate.getEmail());
         descriptor.setCourse(candidate.getCourse());
+        descriptor.setSeniority(candidate.getSeniority());
         descriptor.setTags(candidate.getTags());
         descriptor.setApplicationStatus(candidate.getApplicationStatus());
         descriptor.setInterviewStatus(candidate.getInterviewStatus());
@@ -84,6 +86,14 @@ public class EditCandidateDescriptorBuilder {
      */
     public EditCandidateDescriptorBuilder withCourse(String course) {
         descriptor.setCourse(new Course(course));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Seniority} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditCandidateDescriptorBuilder withSeniority(String seniority) {
+        descriptor.setSeniority(new Seniority(Integer.parseInt(seniority.substring(seniority.length() - 1))));
         return this;
     }
 

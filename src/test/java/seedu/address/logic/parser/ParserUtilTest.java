@@ -28,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_SENIORITY = "one";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_TIME = "01/01/2000 12:00";
     private static final String INVALID_FORMAT_DATE_TIME = "2025/03/01 10PM";
@@ -176,6 +177,11 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseSeniority_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSeniority(INVALID_SENIORITY));
     }
 
     @Test

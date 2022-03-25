@@ -291,11 +291,7 @@ The `add` command is done up with the goals of being as convenient and efficient
 #### UML Diagrams
 **Activity Diagram**
 
-<br>
-
 The following activity diagram summarizes what happens when a user executes an `add` command:
-
-<br>
 
 <img src="images/AddActivityDiagram.png" width="250" />
 

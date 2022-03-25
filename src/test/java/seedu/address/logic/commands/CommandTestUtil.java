@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -42,6 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "E0234567@u.nus.edu";
     public static final String VALID_COURSE_AMY = "Business Analytics";
     public static final String VALID_COURSE_BOB = "Computer Engineering";
+    public static final String VALID_SENIORITY_AMY = "2";
+    public static final String VALID_SENIORITY_BOB = "2";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -61,7 +64,6 @@ public class CommandTestUtil {
     public static final LocalDateTime VALID_CARL_INTERVIEW_DATE_TIME =
             VALID_ALICE_INTERVIEW_DATE_TIME.plusMinutes(15);
 
-
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_ID + VALID_STUDENT_ID_AMY;
     public static final String STUDENT_ID_DESC_BOB = " " + PREFIX_ID + VALID_STUDENT_ID_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -72,6 +74,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String COURSE_DESC_AMY = " " + PREFIX_COURSE + VALID_COURSE_AMY;
     public static final String COURSE_DESC_BOB = " " + PREFIX_COURSE + VALID_COURSE_BOB;
+    public static final String SENIORITY_DESC_AMY = " " + PREFIX_SENIORITY + VALID_SENIORITY_AMY;
+    public static final String SENIORITY_DESC_BOB = " " + PREFIX_SENIORITY + VALID_SENIORITY_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String APPLICATION_STATUS_PENDING = " " + PREFIX_APPLICATION_STATUS + VALID_APPLICATION_PENDING;
@@ -84,6 +88,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE; // empty string not allowed for courses
+    public static final String INVALID_SENIORITY_DESC = " " + PREFIX_SENIORITY + "0"; // Must be a number 1,2,3 or 4
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_AVAILABILITY_DESC = " "
             + PREFIX_AVAILABILITY + "1,,1"; // double commas ',' not allowed in availability
@@ -101,11 +106,13 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditCandidateDescriptorBuilder().withStudentId(VALID_STUDENT_ID_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withCourse(VALID_COURSE_AMY)
-                .withTags(VALID_TAG_FRIEND).withApplicationStatus(APPLICATION_STATUS_PENDING)
+                .withSeniority(VALID_SENIORITY_AMY).withTags(VALID_TAG_FRIEND)
+                .withApplicationStatus(APPLICATION_STATUS_PENDING)
                 .withInterviewStatus(INTERVIEW_STATUS_PENDING).withAvailability(VALID_AVAILABILITY_AMY).build();
         DESC_BOB = new EditCandidateDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withCourse(VALID_COURSE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withApplicationStatus(APPLICATION_STATUS_PENDING)
+                .withSeniority(VALID_SENIORITY_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withApplicationStatus(APPLICATION_STATUS_PENDING)
                 .withInterviewStatus(INTERVIEW_STATUS_PENDING).withAvailability(VALID_AVAILABILITY_BOB).build();
     }
 

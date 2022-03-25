@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.candidate.ApplicationStatus.ACCEPTED_STATUS;
 import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
@@ -33,6 +34,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
@@ -52,6 +54,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_COURSE + "COURSE] "
+            + "[" + PREFIX_SENIORITY + "SENIORITY] "
             + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION STATUS] "
             + "[" + PREFIX_INTERVIEW_STATUS + "INTERVIEW STATUS] "
             + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]...\n"
@@ -100,7 +103,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code candidateToEdit}
+     * Creates and returns a {@code Candidate} with the details of {@code candidateToEdit}
      * edited with {@code editPersonDescriptor}.
      */
     private static Candidate createEditedPerson(Candidate candidateToEdit, EditPersonDescriptor editPersonDescriptor) {
@@ -111,6 +114,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(candidateToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(candidateToEdit.getEmail());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(candidateToEdit.getCourse());
+        Seniority updatedSeniority = editPersonDescriptor.getSeniority().orElse(candidateToEdit.getSeniority());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(candidateToEdit.getTags());
         ApplicationStatus applicationStatus = editPersonDescriptor.getApplicationStatus()
                 .orElse(candidateToEdit.getApplicationStatus());
@@ -120,7 +124,8 @@ public class EditCommand extends Command {
                 .orElse(candidateToEdit.getAvailability());
 
         return new Candidate(updatedID, updatedName, updatedPhone, updatedEmail,
-                updatedCourse, updatedTags, applicationStatus, interviewStatus, updatedAvailability);
+                updatedCourse, updatedSeniority, updatedTags,
+                applicationStatus, interviewStatus, updatedAvailability);
     }
 
     @Override
@@ -151,6 +156,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Course course;
+        private Seniority seniority;
 
         private Set<Tag> tags;
         private ApplicationStatus applicationStatus;
@@ -169,6 +175,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setCourse(toCopy.course);
+            setSeniority(toCopy.seniority);
             setTags(toCopy.tags);
             setApplicationStatus(toCopy.applicationStatus);
             setInterviewStatus(toCopy.interviewStatus);
@@ -221,6 +228,14 @@ public class EditCommand extends Command {
 
         public Optional<Course> getCourse() {
             return Optional.ofNullable(course);
+        }
+
+        public void setSeniority(Seniority seniority) {
+            this.seniority = seniority;
+        }
+
+        public Optional<Seniority> getSeniority() {
+            return Optional.ofNullable(seniority);
         }
 
         public void setApplicationStatus(ApplicationStatus applicationStatus) {
@@ -285,6 +300,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getCourse().equals(e.getCourse())
+                    && getSeniority().equals(e.getSeniority())
                     && getTags().equals(e.getTags())
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getInterviewStatus().equals(e.getInterviewStatus())

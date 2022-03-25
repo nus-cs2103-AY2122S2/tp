@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SENIORITY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SENIORITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -35,6 +37,7 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withEmail("E0123456@u.nus.edu")
             .withCourse("Business Analytics")
+            .withSeniority("COM2")
             .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
@@ -46,6 +49,7 @@ public class TypicalPersons {
             .withPhone("98765432")
             .withEmail("E0234567@u.nus.edu")
             .withCourse("Computer Engineering")
+            .withSeniority("COM2")
             .withTags("owesMoney", "friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
@@ -57,6 +61,7 @@ public class TypicalPersons {
             .withPhone("95352563")
             .withEmail("E0345678@u.nus.edu")
             .withCourse("Computer Science")
+            .withSeniority("COM2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("3,4,5")
@@ -67,6 +72,7 @@ public class TypicalPersons {
             .withPhone("87652533")
             .withEmail("E0456789@u.nus.edu")
             .withCourse("Information Security")
+            .withSeniority("COM2")
             .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
@@ -78,6 +84,7 @@ public class TypicalPersons {
             .withPhone("94822240")
             .withEmail("E0567890@u.nus.edu")
             .withCourse("Information Systems")
+            .withSeniority("COM2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("1,3,5,7")
@@ -88,6 +95,7 @@ public class TypicalPersons {
             .withPhone("94824270")
             .withEmail("E0678901@u.nus.edu")
             .withCourse("Business Analytics")
+            .withSeniority("COM2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("2,4,6")
@@ -98,6 +106,7 @@ public class TypicalPersons {
             .withPhone("94824420")
             .withEmail("E0789012@u.nus.edu")
             .withCourse("Computer Engineering")
+            .withSeniority("COM2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("2,3,4,5,6")
@@ -110,6 +119,7 @@ public class TypicalPersons {
             .withPhone("84824240")
             .withEmail("E0890123@u.nus.edu")
             .withCourse("Computer Science")
+            .withSeniority("COM2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("1,4,7")
@@ -120,6 +130,7 @@ public class TypicalPersons {
             .withPhone("84821310")
             .withEmail("E0901234@u.nus.edu")
             .withCourse("Information Security")
+            .withSeniority("COM2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("3,4,5,6,7")
@@ -132,6 +143,7 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
             .withCourse(VALID_COURSE_AMY)
+            .withSeniority(VALID_SENIORITY_AMY)
             .withTags(VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
@@ -143,6 +155,7 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withCourse(VALID_COURSE_BOB)
+            .withSeniority(VALID_SENIORITY_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
