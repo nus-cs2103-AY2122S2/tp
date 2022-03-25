@@ -124,6 +124,7 @@ public class AddressBookParser {
         }
 
         final String commandWord = matcher.group("commandWord");
+
         switch (commandWord) {
 
         case ConfirmClearCommand.COMMAND_WORD:

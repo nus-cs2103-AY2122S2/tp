@@ -123,6 +123,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearAddressBookHistory() {
+        addressBookHistory.clearHistory();
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -201,6 +206,11 @@ public class ModelManager implements Model {
     @Override
     public void addToCommandHistory(String commandText) {
         commandHistory.addToHistory(commandText);
+    }
+
+    @Override
+    public void clearCommandHistory() {
+        commandHistory.clearHistory();
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -82,6 +82,10 @@ public interface Model {
      */
     void undoAddressBook();
 
+    /**
+     * Clears the user's address book history.
+     */
+    void clearAddressBookHistory();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -174,4 +178,9 @@ public interface Model {
      * @param commandText
      */
     void addToCommandHistory(String commandText);
+
+    /**
+     * Clears the user's command history.
+     */
+    void clearCommandHistory();
 }

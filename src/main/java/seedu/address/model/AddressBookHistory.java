@@ -29,14 +29,22 @@ public class AddressBookHistory {
             return addressBooks.get(0);
         }
 
-        //AB state after previous command must be removed first.
+        // AB state after previous command must be removed first.
         int undoneCommandAddressBookIndex = addressBooks.size() - 1;
         addressBooks.remove(undoneCommandAddressBookIndex);
 
-        //AB state before previous command is restored.
+        // AB state before previous command is restored.
         int previousAddressBookIndex = addressBooks.size() - 1;
         AddressBook previousAddressBook = addressBooks.get(previousAddressBookIndex);
         return previousAddressBook;
+    }
+
+    /**
+     * Clears address book history and sets the initial address book in history to an empty address book.
+     */
+    public void clearHistory() {
+        addressBooks.clear();
+        addressBooks.add(new AddressBook());
     }
 
     @Override

@@ -38,6 +38,13 @@ public class CommandHistory {
     }
 
     /**
+     * Clears the command history.
+     */
+    public void clearHistory() {
+        commands.clear();
+    }
+
+    /**
      * Displays the commands in command history as a String.
      * @return String representing the commands in command history
      */
