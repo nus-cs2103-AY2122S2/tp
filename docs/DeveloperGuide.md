@@ -223,6 +223,39 @@ Each field implements a `Comparable` interface.
 - Pros: Easier to implement.
 - Cons: Less flexible. Passes only one `PersonComparator` which stores the fields within itself. Each comparison stops once field is not equivalent, therefore is more efficient.
 
+### Comment feature
+#### Implementation
+
+The comment mechanism is facilitated by `CommentCommand`. It adds a field of type `Comment` to a `Person` object. 
+The `CommentCommand.java` class extends `Command` with the index of the person to add the module to and also a 
+`Comment` object which holds the comment that will be given to the person. Additionally, it implements the following 
+operations:
+* `Command#execute(Model model)` - Returns a message that informs users on the comment that was added to the 
+  specific person. 
+* `generateSuccessMessage(Person personToEdit)` - Creates and returns the message that informs users if a new comment 
+  was added or deleted from `personToEdit`.
+
+Below is a sequence diagram showing how comment operation works:
+
+![CommentSequenceDiagram](images/CommentSequenceDiagram.png)
+
+### Design Considerations
+#### Aspect: How to remove a comment 
+####1. Alternative 1 (Current choice)
+Similar to how `Status` was implemented, upon user input of an empty comment (i.e `comment 1`), the comment of the 
+person at the particular index, in this case the first person, will be removed 
+- Pros: Can contain all logic related to adding and removing a `comment` all in the `CommentCommand` and 
+  `CommentCommandParser` classes. 
+- Cons: Not consistent with how the other fields like `Module` and `Person` are removed. These fields are removed 
+  via an additional command that specifically handles their deletion (i.e. `deletemodule` and `delete`).
+
+####2. Alternative 2 
+Implement a separate command to handle the removal of `comment`.
+- Pros: An empty comment command (`comment 1`) will now show an error message, which is more intuitive.
+- Cons: Results in excessive code duplication, as `delete` and `deletemodule` are implemented in a very similar way 
+  to how a proposed `deletecomment` command will be implemented.
+
+
 ### GUI for Adding, Editing
 
 #### Implementation
