@@ -26,25 +26,50 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String EXIT_COMMAND = "exit";
     public static final String EXIT_COMMAND_EXAMPLE = "Exits the program.";
 
+    public static final String CLEAR_COMMAND_DESC = "Clearing all the data: ";
+    public static final String CLEAR_COMMAND = "clear";
+    public static final String CLEAR_COMMAND_EXAMPLE = "Clears the data.";
+
     public static final String ADD_COMMAND_DESC = "Add student contact information: ";
     public static final String ADD_COMMAND = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]";
     public static final String ADD_COMMAND_EXAMPLE = "Adds a student contact information to ArchDuke.";
+
+    public static final String DELETE_COMMAND_DESC = "Delete student contact information: ";
+    public static final String DELETE_COMMAND = "delete INDEX";
+    public static final String DELETE_COMMAND_EXAMPLE = "Deletes a student contact information from ArchDuke.";
 
     public static final String ADD_GROUP_COMMAND_DESC = "Create a group: ";
     public static final String ADD_GROUP_COMMAND = "addgroup g/GROUP_NAME";
     public static final String ADD_GROUP_COMMAND_EXAMPLE = "Creates a group in ArchDuke.";
 
+    public static final String DELETE_GROUP_COMMAND_DESC = "Delete a group: ";
+    public static final String DELETE_GROUP_COMMAND = "delgroup g/GROUP_NAME";
+    public static final String DELETE_GROUP_COMMAND_EXAMPLE = "Deletes a group in ArchDuke.";
+
     public static final String ASSIGN_COMMAND_DESC = "Assign a student to a group: ";
     public static final String ASSIGN_COMMAND = "assign INDEX g/GROUP_NAME";
     public static final String ASSIGN_COMMAND_EXAMPLE = "Assigns a student to an existing group in ArchDuke.";
 
+    public static final String DEASSIGN_COMMAND_DESC = "Deassign a student from a group: ";
+    public static final String DEASSIGN_COMMAND = "deassign INDEX g/GROUP_NAME";
+    public static final String DEASSIGN_COMMAND_EXAMPLE = "Deassigns a student from an existing group in ArchDuke.";
+
     public static final String ADD_TASK_COMMAND_DESC = "Add a task to a group: ";
-    public static final String ADD_TASK_COMMAND = "addtask t/TASK_NAME g/GROUP_NAME";
+    public static final String ADD_TASK_COMMAND = "addtask task/TASK_NAME g/GROUP_NAME";
     public static final String ADD_TASK_COMMAND_EXAMPLE = "Adds a task to the specified existing group.";
+
+    public static final String DELETE_TASK_COMMAND_DESC = "Delete a task from a group: ";
+    public static final String DELETE_TASK_COMMAND = "deltask task/TASK_NAME g/GROUP_NAME";
+    public static final String DELETE_TASK_COMMAND_EXAMPLE = "Deletes a task from the specified existing group.";
 
     public static final String VIEW_TASK_COMMAND_DESC = "Displays the tasks in a group: ";
     public static final String VIEW_TASK_COMMAND = "viewtask g/GROUP_NAME";
     public static final String VIEW_TASK_COMMAND_EXAMPLE = "Displays the tasks from the specified existing group.";
+
+    public static final String VIEW_CONTACT_COMMAND_DESC = "Displays the student contacts in a group: ";
+    public static final String VIEW_CONTACT_COMMAND = "viewcontact g/GROUP_NAME";
+    public static final String VIEW_CONTACT_COMMAND_EXAMPLE = "Displays the student "
+            + "contacts from the specified existing group.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -74,6 +99,15 @@ public class HelpWindow extends UiPart<Stage> {
     private Label exitCommandExample;
 
     @FXML
+    private Label clearCommandDesc;
+
+    @FXML
+    private Label clearCommand;
+
+    @FXML
+    private Label clearCommandExample;
+
+    @FXML
     private Label addCommandDesc;
 
     @FXML
@@ -81,6 +115,15 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label addCommandExample;
+
+    @FXML
+    private Label deleteCommandDesc;
+
+    @FXML
+    private Label deleteCommand;
+
+    @FXML
+    private Label deleteCommandExample;
 
     @FXML
     private Label addGroupCommandDesc;
@@ -92,6 +135,15 @@ public class HelpWindow extends UiPart<Stage> {
     private Label addGroupCommandExample;
 
     @FXML
+    private Label delGroupCommandDesc;
+
+    @FXML
+    private Label delGroupCommand;
+
+    @FXML
+    private Label delGroupCommandExample;
+
+    @FXML
     private Label assignCommandDesc;
 
     @FXML
@@ -99,6 +151,15 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label assignCommandExample;
+
+    @FXML
+    private Label deassignCommandDesc;
+
+    @FXML
+    private Label deassignCommand;
+
+    @FXML
+    private Label deassignCommandExample;
 
     @FXML
     private Label addTaskCommandDesc;
@@ -110,6 +171,15 @@ public class HelpWindow extends UiPart<Stage> {
     private Label addTaskCommandExample;
 
     @FXML
+    private Label delTaskCommandDesc;
+
+    @FXML
+    private Label delTaskCommand;
+
+    @FXML
+    private Label delTaskCommandExample;
+
+    @FXML
     private Label viewTaskCommandDesc;
 
     @FXML
@@ -117,6 +187,15 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label viewTaskCommandExample;
+
+    @FXML
+    private Label viewContactCommandDesc;
+
+    @FXML
+    private Label viewContactCommand;
+
+    @FXML
+    private Label viewContactCommandExample;
 
     /**
      * Creates a new HelpWindow.
@@ -129,24 +208,54 @@ public class HelpWindow extends UiPart<Stage> {
         listCommandDesc.setText(LIST_COMMAND_DESC);
         listCommand.setText(LIST_COMMAND);
         listCommandExample.setText(LIST_COMMAND_EXAMPLE);
+
         exitCommandDesc.setText(EXIT_COMMAND_DESC);
         exitCommand.setText(EXIT_COMMAND);
         exitCommandExample.setText(EXIT_COMMAND_EXAMPLE);
+
+        clearCommandDesc.setText(CLEAR_COMMAND_DESC);
+        clearCommand.setText(CLEAR_COMMAND);
+        clearCommandExample.setText(CLEAR_COMMAND_EXAMPLE);
+
         addCommandDesc.setText(ADD_COMMAND_DESC);
         addCommand.setText(ADD_COMMAND);
         addCommandExample.setText(ADD_COMMAND_EXAMPLE);
+
+        deleteCommandDesc.setText(DELETE_COMMAND_DESC);
+        deleteCommand.setText(DELETE_COMMAND);
+        deleteCommandExample.setText(DELETE_COMMAND_EXAMPLE);
+
         addGroupCommandDesc.setText(ADD_GROUP_COMMAND_DESC);
         addGroupCommand.setText(ADD_GROUP_COMMAND);
         addGroupCommandExample.setText(ADD_GROUP_COMMAND_EXAMPLE);
+
+        delGroupCommandDesc.setText(DELETE_GROUP_COMMAND_DESC);
+        delGroupCommand.setText(DELETE_GROUP_COMMAND);
+        delGroupCommandExample.setText(DELETE_GROUP_COMMAND_EXAMPLE);
+
         assignCommandDesc.setText(ASSIGN_COMMAND_DESC);
         assignCommand.setText(ASSIGN_COMMAND);
         assignCommandExample.setText(ASSIGN_COMMAND_EXAMPLE);
+
+        deassignCommandDesc.setText(DEASSIGN_COMMAND_DESC);
+        deassignCommand.setText(DEASSIGN_COMMAND);
+        deassignCommandExample.setText(DEASSIGN_COMMAND_EXAMPLE);
+
         addTaskCommandDesc.setText(ADD_TASK_COMMAND_DESC);
         addTaskCommand.setText(ADD_TASK_COMMAND);
         addTaskCommandExample.setText(ADD_TASK_COMMAND_EXAMPLE);
+
+        delTaskCommandDesc.setText(DELETE_TASK_COMMAND_DESC);
+        delTaskCommand.setText(DELETE_TASK_COMMAND);
+        delTaskCommandExample.setText(DELETE_TASK_COMMAND_EXAMPLE);
+
         viewTaskCommandDesc.setText(VIEW_TASK_COMMAND_DESC);
         viewTaskCommand.setText(VIEW_TASK_COMMAND);
         viewTaskCommandExample.setText(VIEW_TASK_COMMAND_EXAMPLE);
+
+        viewContactCommandDesc.setText(VIEW_CONTACT_COMMAND_DESC);
+        viewContactCommand.setText(VIEW_CONTACT_COMMAND);
+        viewContactCommandExample.setText(VIEW_CONTACT_COMMAND_EXAMPLE);
     }
 
     /**
