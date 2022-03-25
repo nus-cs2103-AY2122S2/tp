@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
@@ -20,6 +19,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
@@ -37,6 +37,7 @@ class JsonAdaptedInterview {
     private final String phone;
     private final String email;
     private final String course;
+    private final int seniority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String applicationStatus;
     private final String interviewStatus;
@@ -44,12 +45,12 @@ class JsonAdaptedInterview {
     private final String interviewDateTime;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedInterview} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedInterview(@JsonProperty("studentID") String studentID, @JsonProperty("name") String name,
                                 @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                                @JsonProperty("course") String course,
+                                @JsonProperty("course") String course, @JsonProperty("seniority") String seniority,
                                 @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                                 @JsonProperty("applicationStatus") String applicationStatus,
                                 @JsonProperty("interviewStatus") String interviewStatus,
@@ -60,6 +61,7 @@ class JsonAdaptedInterview {
         this.phone = phone;
         this.email = email;
         this.course = course;
+        this.seniority = Integer.parseInt(seniority.substring(seniority.length() - 1));
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -78,6 +80,10 @@ class JsonAdaptedInterview {
         phone = source.getCandidate().getPhone().value;
         email = source.getCandidate().getEmail().value;
         course = source.getCandidate().getCourse().course;
+
+        String seniorityValue = source.getCandidate().getSeniority().seniority;
+        seniority = Integer.parseInt(seniorityValue.substring(seniorityValue.length() - 1));
+
         tagged.addAll(source.getCandidate().getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -135,9 +141,14 @@ class JsonAdaptedInterview {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
         }
         if (!Course.isValidCourse(course)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
         }
         final Course modelCourse = new Course(course);
+
+        if (!Seniority.isValidSeniority(seniority)) {
+            throw new IllegalValueException(Seniority.MESSAGE_CONSTRAINTS);
+        }
+        final Seniority modelSeniority = new Seniority(seniority);
 
         if (availability == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -150,7 +161,9 @@ class JsonAdaptedInterview {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Candidate candidate = new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags,
+
+        Candidate candidate = new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse,
+                modelSeniority, modelTags,
                 new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus), modelAvailability);
 
         if (interviewDateTime == null) {

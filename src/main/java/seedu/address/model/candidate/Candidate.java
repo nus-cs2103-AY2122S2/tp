@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Candidate in TAlent Assistant™.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Candidate {
@@ -21,6 +21,7 @@ public class Candidate {
     private final Phone phone;
     private final Email email;
     private final Course course;
+    private final Seniority seniority;
     private final ApplicationStatus applicationStatus;
     private final InterviewStatus interviewStatus;
     private final Availability availability;
@@ -31,14 +32,16 @@ public class Candidate {
     /**
      * Every field must be present and not null.
      */
-    public Candidate(StudentId studentId, Name name, Phone phone, Email email, Course course, Set<Tag> tags,
-            ApplicationStatus applicationStatus, InterviewStatus interviewStatus, Availability availability) {
-        requireAllNonNull(studentId, name, phone, email, course, tags, availability);
+    public Candidate(StudentId studentId, Name name, Phone phone, Email email, Course course, Seniority seniority,
+            Set<Tag> tags, ApplicationStatus applicationStatus, InterviewStatus interviewStatus,
+            Availability availability) {
+        requireAllNonNull(studentId, name, phone, email, course, seniority, tags, availability);
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.course = course;
+        this.seniority = seniority;
         this.tags.addAll(tags);
         this.applicationStatus = applicationStatus;
         this.interviewStatus = interviewStatus;
@@ -65,6 +68,10 @@ public class Candidate {
         return course;
     }
 
+    public Seniority getSeniority() {
+        return seniority;
+    }
+
     public ApplicationStatus getApplicationStatus() {
         return applicationStatus;
     }
@@ -87,7 +94,7 @@ public class Candidate {
 
     /**
      * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two candidates.
      */
     public boolean isSamePerson(Candidate otherCandidate) {
         if (otherCandidate == this) {
@@ -100,7 +107,7 @@ public class Candidate {
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two candidates.
      */
     @Override
     public boolean equals(Object other) {
@@ -118,6 +125,7 @@ public class Candidate {
                 && otherCandidate.getPhone().equals(getPhone())
                 && otherCandidate.getEmail().equals(getEmail())
                 && otherCandidate.getCourse().equals(getCourse())
+                && otherCandidate.getSeniority().equals(getSeniority())
                 && otherCandidate.getTags().equals(getTags())
                 && otherCandidate.getApplicationStatus().equals(getApplicationStatus())
                 && otherCandidate.getInterviewStatus().equals(getInterviewStatus())
@@ -126,8 +134,8 @@ public class Candidate {
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, name, phone, email, course, tags, applicationStatus, interviewStatus,
-                availability);
+        return Objects.hash(studentId, name, phone, email, course, seniority, tags,
+                applicationStatus, interviewStatus, availability);
     }
 
     @Override
@@ -141,7 +149,9 @@ public class Candidate {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Course: ")
-                .append(getCourse());
+                .append(getCourse())
+                .append("; Seniority: ")
+                .append(getSeniority());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

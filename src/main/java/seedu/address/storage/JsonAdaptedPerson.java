@@ -19,6 +19,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
@@ -27,13 +28,14 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Candidate's %s field is missing!";
 
     private final String studentId;
     private final String name;
     private final String phone;
     private final String email;
     private final String course;
+    private final int seniority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String applicationStatus;
     private final String interviewStatus;
@@ -45,7 +47,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("studentId") String studentId, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("course") String course, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("course") String course, @JsonProperty("seniority") String seniority,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("applicationStatus") String applicationStatus,
             @JsonProperty("interviewStatus") String interviewStatus,
             @JsonProperty("availability") String availability) {
@@ -54,6 +57,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.course = course;
+        this.seniority = Integer.parseInt(seniority.substring(seniority.length() - 1));
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -63,7 +67,7 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Candidate} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Candidate source) {
         studentId = source.getStudentId().studentId;
@@ -71,6 +75,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         course = source.getCourse().course;
+
+        String seniorityValue = source.getSeniority().seniority;
+        seniority = Integer.parseInt(seniorityValue.substring(seniorityValue.length() - 1));
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -131,6 +139,11 @@ class JsonAdaptedPerson {
         }
         final Course modelCourse = new Course(course);
 
+        if (!Seniority.isValidSeniority(seniority)) {
+            throw new IllegalValueException(Seniority.MESSAGE_CONSTRAINTS);
+        }
+        final Seniority modelSeniority = new Seniority(seniority);
+
         if (availability == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Availability.class.getSimpleName()));
@@ -141,7 +154,8 @@ class JsonAdaptedPerson {
         final Availability modelAvailability = new Availability(availability);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags,
+        return new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelSeniority,
+                modelTags,
                 new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus), modelAvailability);
     }
 }

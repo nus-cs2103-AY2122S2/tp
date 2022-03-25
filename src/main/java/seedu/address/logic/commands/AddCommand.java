@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,12 +25,14 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_COURSE + "COURSE "
+            + PREFIX_SENIORITY + "SENIORITY "
             + PREFIX_AVAILABILITY + "AVAILABILITY \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "E0123456 "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_COURSE + "Computer Science "
+            + PREFIX_SENIORITY + "2 "
             + PREFIX_AVAILABILITY + "1,2,3,4,5,6,7";
 
     public static final String MESSAGE_SUCCESS = "New candidate added: %1$s";

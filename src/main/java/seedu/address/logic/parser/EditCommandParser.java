@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -37,8 +38,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_COURSE, PREFIX_TAG, PREFIX_APPLICATION_STATUS, PREFIX_INTERVIEW_STATUS,
-                        PREFIX_AVAILABILITY);
+                        PREFIX_EMAIL, PREFIX_COURSE, PREFIX_SENIORITY, PREFIX_TAG, PREFIX_APPLICATION_STATUS,
+                        PREFIX_INTERVIEW_STATUS, PREFIX_AVAILABILITY);
 
         Index index;
 
@@ -64,6 +65,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
             editPersonDescriptor.setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SENIORITY).isPresent()) {
+            editPersonDescriptor.setSeniority(ParserUtil.parseSeniority(argMultimap.getValue(PREFIX_SENIORITY).get()));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
