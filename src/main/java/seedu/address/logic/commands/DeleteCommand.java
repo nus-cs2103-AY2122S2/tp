@@ -9,6 +9,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -93,14 +95,35 @@ public class DeleteCommand extends Command {
      * Example: If index 1 is deleted first, the original index 2 becomes index 1.
      *
      * @param model the addressbook model
-     * @param lastShownList the last displayed list
+     * @param lastShownList the last displayed person list
+     * @param lastEventList the last display event list
      */
-    private void deleteFromList(Model model, List<Person> lastShownList) {
+    private void deleteFromList(Model model, List<Person> lastShownList, List<Event> lastEventList) {
         Index[] targetIndexArrClone = targetIndexArr.clone();
         Arrays.sort(targetIndexArrClone);
         for (Index target : targetIndexArrClone) {
             Person personToDelete = lastShownList.get(target.getZeroBased());
+            updateEvents(model, personToDelete, lastEventList);
             model.deletePerson(personToDelete);
+        }
+    }
+
+    private void updateEvents(Model model, Person person, List<Event> lastEventList) {
+        Name name = person.getName();
+        Index[] targetIndexArrClone = targetIndexArr.clone();
+        Arrays.sort(targetIndexArrClone);
+
+        for (Index target : targetIndexArrClone) {
+            Event currEvent = lastEventList.get(target.getZeroBased());
+            List<Name> editedParticipants = currEvent.getParticipants();
+            if (editedParticipants.contains(name) && editedParticipants.size() == 1) {
+                model.deleteEvent(currEvent);
+            } else if (editedParticipants.contains(name) && editedParticipants.size() > 1) {
+                editedParticipants.remove(name);
+                Event editedEvent = new Event(currEvent.getEventName(), currEvent.getEventInfo(), editedParticipants,
+                        currEvent.getDateTime());
+                model.setEvent(currEvent, editedEvent);
+            }
         }
     }
 
@@ -108,13 +131,14 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastEventList = model.getFilteredEventList();
         int lastShownListSize = lastShownList.size();
 
         if (!checkIndexRange(lastShownListSize)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         String deletedPersonOrPersons = extractDeletedInfo(lastShownList);
-        deleteFromList(model, lastShownList);
+        deleteFromList(model, lastShownList, lastEventList);
 
         return targetIndexArr.length == 1
                 ? new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersonOrPersons))
