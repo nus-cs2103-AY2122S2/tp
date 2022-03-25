@@ -110,18 +110,6 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Checks if the day for {@code interview} matches an available day of the candidate.
-     * @param toCheck contains the datetime of the interview to be scheduled and candidate.
-     * @return true if there is a matching availability and false otherwise.
-     */
-    public boolean checkCandidateAvailability(Interview toCheck) {
-        requireNonNull(toCheck);
-        String candidateAvailabilities = toCheck.getCandidate().getAvailability().toString();
-        String interviewDay = Integer.toString(toCheck.getInterviewDay());
-        return candidateAvailabilities.contains(interviewDay);
-    }
-
-    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Interview> asUnmodifiableObservableList() {

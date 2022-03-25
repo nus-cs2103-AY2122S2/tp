@@ -154,12 +154,6 @@ public class ModelManager implements Model {
         return interviewSchedule.hasConflictingInterview(interview);
     }
 
-    @Override
-    public boolean hasMatchingAvailability(Interview interview) {
-        requireNonNull(interview);
-        return interviewSchedule.hasMatchingAvailability(interview);
-    }
-
     /*@Override
     public void deleteInterview(Interview target) {
         interviewSchedule.removeInterview(target);

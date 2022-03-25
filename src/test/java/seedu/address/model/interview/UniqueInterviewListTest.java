@@ -77,16 +77,6 @@ public class UniqueInterviewListTest {
     }
 
     @Test
-    public void checkCandidateAvailability_interviewDayMatchesCandidateAvailability_returnsTrue() {
-        assertTrue(uniqueInterviewList.checkCandidateAvailability(INTERVIEW_AMY_TYPICAL));
-    }
-
-    @Test
-    public void checkCandidateAvailability_interviewDayMatchesCandidateAvailability_returnsFalse() {
-        assertFalse(uniqueInterviewList.checkCandidateAvailability(INTERVIEW_NO_MATCHING_AVAILABILITY));
-    }
-
-    @Test
     public void add_nullInterview_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueInterviewList.add(null));
     }

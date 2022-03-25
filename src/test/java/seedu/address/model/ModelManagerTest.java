@@ -145,16 +145,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasMatchingAvailability_interviewDayMatchesCandidateAvailability_returnsTrue() {
-        assertTrue(modelManager.hasMatchingAvailability(INTERVIEW_AMY_TYPICAL));
-    }
-
-    @Test
-    public void hasMatchingAvailability_interviewDayMatchesCandidateAvailability_returnsFalse() {
-        assertFalse(modelManager.hasMatchingAvailability(INTERVIEW_NO_MATCHING_AVAILABILITY));
-    }
-
-    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE)

@@ -71,6 +71,8 @@ public class ScheduleCommand extends Command {
 
         Candidate candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
+        String candidateAvailabilities = candidateToInterview.getAvailability().toString();
+        String interviewDay = Integer.toString(toAdd.getInterviewDay());
 
         if (model.hasInterviewCandidate(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
@@ -80,7 +82,7 @@ public class ScheduleCommand extends Command {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
 
-        if (!model.hasMatchingAvailability(toAdd)) {
+        if (!candidateAvailabilities.contains(interviewDay)) {
             throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
         }
 

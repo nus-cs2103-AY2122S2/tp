@@ -38,7 +38,6 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
      */
     public void resetData(ReadOnlyInterviewSchedule newData) {
         requireNonNull(newData);
-
         setInterviews(newData.getInterviewList());
     }
 
@@ -56,16 +55,6 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     public boolean hasConflictingInterview(Interview interview) {
         requireNonNull(interview);
         return interviews.containsConflictingInterview(interview);
-    }
-
-    /**
-     * Returns true if the day for {@code interview} matches an available day of the candidate.
-     * @param interview contains the details of the interview to be scheduled and candidate.
-     * @return true if the check finds a matching availability and false otherwise.
-     */
-    public boolean hasMatchingAvailability(Interview interview) {
-        requireNonNull(interview);
-        return interviews.checkCandidateAvailability(interview);
     }
 
     /**

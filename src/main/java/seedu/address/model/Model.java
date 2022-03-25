@@ -106,8 +106,6 @@ public interface Model {
 
     //void deleteInterview(Interview target);
 
-    boolean hasMatchingAvailability(Interview interview);
-
     void addInterview(Interview interview);
 
     //void setInterview(Interview target, Interview editedInterview);

@@ -7,7 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
-import static seedu.address.testutil.TypicalInterviews.INTERVIEW_NO_MATCHING_AVAILABILITY;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -118,16 +117,6 @@ public class InterviewScheduleTest {
         Interview editedAliceInterview = new InterviewBuilder(INTERVIEW_ALICE)
                 .withCandidate(BOB).build();
         assertTrue(interviewSchedule.hasConflictingInterview(editedAliceInterview));
-    }
-
-    @Test
-    public void hasMatchingAvailability_interviewDayMatchesCandidateAvailability_returnsTrue() {
-        assertTrue(interviewSchedule.hasMatchingAvailability(INTERVIEW_AMY_TYPICAL));
-    }
-
-    @Test
-    public void hasMatchingAvailability_interviewDayMatchesCandidateAvailability_returnsFalse() {
-        assertFalse(interviewSchedule.hasMatchingAvailability(INTERVIEW_NO_MATCHING_AVAILABILITY));
     }
 
     /**
