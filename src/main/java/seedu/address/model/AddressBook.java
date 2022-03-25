@@ -350,7 +350,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
-    public void setMedicals(Medical target, Medical editedMedical) {
+    public void setMedical(Medical target, Medical editedMedical) {
         requireNonNull(editedMedical);
         medicals.setMedical(target, editedMedical);
     }
