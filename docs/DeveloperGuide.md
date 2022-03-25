@@ -3,9 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a
-Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**.
-Trackermon allows people who want to track and remember what shows they have watched or are currently watching.
+Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**. Trackermon allows people who want to track and remember what shows they have watched or are currently watching.
 
 ### Table of Contents
 
@@ -91,7 +89,7 @@ The developer guide allows developers who want to work on Trackermon to gain a b
 |------------------------------------------------------------------------------------|-----------------------------------------|
 | <div markdown="span" class="alert alert-warning">:bulb: **Tip:**</div>             | A small but useful piece of information |
 | <div markdown="span" class="alert alert-info">:information_source: **Note:**</div> | Additional information                  |
-| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**</div> | Important information to take note
+| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**</div>   | Important information to take note      |
 
 ---
 
@@ -268,6 +266,7 @@ After executing the `find` command, `FindCommandParser` will map any prefixes in
 Then, `LogicManager` will execute the given `findCommand` object and scan through the shows in the model's list of shows while checking if any shows matches the user's input. The model is then updated with the filtered show list.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the parsing implementation of `FindCommandParser`.
+
 <img src="images/FindSequenceReferenceDiagram.png">
 </div>
 
