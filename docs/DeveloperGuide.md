@@ -257,7 +257,9 @@ Step 4:
 
 The following sequence diagram summarizes what happens when a user executes a valid find command on tags only: (Zoom in to view the sequence diagram)
 
-<img src="images/FindSequenceDiagram.png" width="2500px">
+<img src="images/FindSequenceDiagram.png">
+
+<img src="images/FindSequenceReferenceDiagram.png">
 
 The following activity diagram summarizes what happens when a user executes a valid find command:
 
