@@ -132,7 +132,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
 
         return new EditCommand(index, editScheduleDescriptor);
-        
+
 
     }
 
