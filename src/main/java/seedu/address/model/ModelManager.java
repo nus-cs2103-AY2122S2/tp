@@ -231,7 +231,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Student> getStudentListByStudentIds(List<StudentId> studentIds) {
-        return tAssist.getStudentByIDs(studentIds);
+        return tAssist.getStudentListByStudentIds(studentIds);
     }
 
     @Override

@@ -283,7 +283,7 @@ public class TAssist implements ReadOnlyTAssist {
                 .collect(Collectors.toList())));
     }
 
-    public ObservableList<Student> getStudentByIDs(List<StudentId> studentIds) {
+    public ObservableList<Student> getStudentListByStudentIds(List<StudentId> studentIds) {
         if (studentIds.stream().anyMatch(x -> !students.contains(x))) {
             throw new StudentNotFoundException();
         }
