@@ -141,7 +141,7 @@ Examples:
 *  `editbuyer 1 n/Hong` Edits only the name of the 1st buyer to be `Chua`.
 *  `editbuyer 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
-### Editing a seller : `edit seller`
+### Editing a seller : `editseller`
 
 Edits an existing seller in the contact list.
 
@@ -248,11 +248,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**AddBuyer** | `addbuyer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**AddBuyer** | `addbuyer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addbuyer n/James Ho p/22224444`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**EditBuyer** | `editbuyer n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `edit 2 n/James Ho p/22224444 `
 **Find** | `find prefix/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
 **List** | `list`
 **Help** | `help`
