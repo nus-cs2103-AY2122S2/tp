@@ -1,5 +1,14 @@
 package seedu.address.logic.commands.testresult;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALTEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
+
+import java.util.Optional;
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -13,12 +22,6 @@ import seedu.address.model.testresult.MedicalTest;
 import seedu.address.model.testresult.Result;
 import seedu.address.model.testresult.TestDate;
 import seedu.address.model.testresult.TestResult;
-
-import java.util.List;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Edits the details of an existing test result information in MedBook.
