@@ -1,7 +1,7 @@
 package unibook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor.MISSING_FIELD_MESSAGE_FORMAT;
+import static unibook.storage.adaptedmodeltypes.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.util.HashSet;
 import java.util.Set;

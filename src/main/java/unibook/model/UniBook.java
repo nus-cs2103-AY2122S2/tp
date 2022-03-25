@@ -1,6 +1,7 @@
 package unibook.model;
 
 import static java.util.Objects.requireNonNull;
+import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -164,7 +165,7 @@ public class UniBook implements ReadOnlyUniBook {
      * Returns module with given code that is in unibook.
      *
      * @param moduleCode
-     * @return
+     * @return module with given code.
      */
     public Module getModuleByCode(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
@@ -243,6 +244,18 @@ public class UniBook implements ReadOnlyUniBook {
         removePersonFromModules(key);
         removeStudentFromGroups(key);
     }
+
+    /**
+     * Gets a Group in Unibook with given modulecode (indicating module it is in) and groupName.
+     */
+    public Group getGroupByModuleCodeAndGroupName(ModuleCode moduleCode, String groupName) {
+        requireAllNonNull(moduleCode, groupName);
+        Module moduleOfGroup = getModuleByCode(moduleCode);
+        Group group = moduleOfGroup.getGroupByName(groupName);
+        return group;
+    }
+
+
 
 
     /**
