@@ -12,12 +12,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -29,6 +31,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
@@ -62,10 +65,16 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
+            + "list below and enter the index of the client you wish to edit \n"
+            + "Example: 1, 2, 3 ...";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book.";
+    public static final String MESSAGE_INVALID_INDEX = "This index does not exist!";
 
     private final Name targetName;
+    private final String targetNameStr;
     private final EditPersonDescriptor editPersonDescriptor;
+    private int index = 0;
 
     /**
      * @param name name of the person in the filtered person list to edit
@@ -75,16 +84,35 @@ public class EditCommand extends Command {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
 
+
         this.targetName = name;
+        this.targetNameStr = name.fullName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
+
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        HustleBook tempHustleBook = new HustleBook();
-        Index targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
+        FilteredList<Person> lastShownList = (FilteredList<Person>) model.getFilteredPersonList();
+        Index targetIndex;
+        if (index == 0) {
+            FilteredList<Person> tempList = new FilteredList<Person>(lastShownList);
+            String[] nameKeywords = targetNameStr.split("\\s+");
+            Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+            tempList.setPredicate(predicate);
+
+            if (tempList.size() > 1) {
+                lastShownList.setPredicate(predicate);
+                return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+            }
+
+            HustleBook tempHustleBook = new HustleBook();
+            targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
+        } else {
+            targetIndex = Index.fromOneBased(index);
+        }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
@@ -100,6 +128,10 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     /**
