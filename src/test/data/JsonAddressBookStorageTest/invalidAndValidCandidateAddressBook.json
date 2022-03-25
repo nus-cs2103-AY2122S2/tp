@@ -1,24 +1,23 @@
 {
-  "persons": [ {
+  "candidates": [ {
     "studentId": "E0123456",
-    "name": "Alice Pauline",
-    "phone": "94351253",
+    "name": "Valid Candidate",
+    "phone": "94824240",
     "email": "E0123456@u.nus.edu",
-    "course": "Business Analytics",
+    "course": "Computer Science",
     "seniority": "COM2",
-    "tagged": [ "friends" ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
     "availability": "1,2,3,4,5"
   }, {
     "studentId": "E0123456",
-    "name": "Alice Pauline",
-    "phone": "94351253",
+    "name": "Candidate With Invalid Phone Field",
+    "phone": "948asdf2424",
     "email": "E0123456@u.nus.edu",
-    "course": "Business Analytics",
+    "course": "Computer Science",
     "seniority": "COM2",
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "1,2,3,4,5"
+    "availability": "1,2,9"
   } ]
 }
