@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
 
 /**
@@ -18,11 +17,8 @@ import seedu.address.model.person.Person;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Undo command executed successfully!";
-    public static final String MESSAGE_FAILURE = "There is no more command to undo!";
-
-
-    private ReadOnlyAddressBook<Person> previousAddressBook;
+    public static final String MESSAGE_USAGE_SUCCESS = "Successfully Undo";
+    public static final String MESSAGE_USAGE_FAILURE = "There is no more command left in stack to undo";
 
 
     @Override
@@ -30,18 +26,19 @@ public class UndoCommand extends Command {
                                  StackUndoRedo undoRedoStack) throws CommandException {
         requireAllNonNull(model, undoRedoStack);
 
-        if (!undoRedoStack.canUndo()) {
-            throw new CommandException(MESSAGE_FAILURE);
+        //Check if whether there is a command exist in the stack
+        if (undoRedoStack.canUndo()) {
+            ReadOnlyAddressBook previousAddressBook = new AddressBook(model.getAddressBook());
+            Model prevModel = new ModelManager(previousAddressBook, new UserPrefs());
+
+            RedoableCommand undoCommand = undoRedoStack.popUndo();
+            undoCommand.undo(model);
+
+            undoCommand.save(prevModel);
+            return new CommandResult(String.format(MESSAGE_USAGE_SUCCESS, undoCommand.getSuccessMessage()));
         }
 
-        previousAddressBook = new AddressBook(model.getAddressBook());
-
-        UndoableCommand toUndoCommand = undoRedoStack.popUndo();
-        toUndoCommand.undo(model);
-
-        Model oldModel = new ModelManager(previousAddressBook, new UserPrefs());
-        toUndoCommand.save(oldModel);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toUndoCommand.getSuccessMessage()));
+        throw new CommandException(MESSAGE_USAGE_FAILURE);
     }
 
 }

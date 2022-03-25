@@ -8,34 +8,48 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
 
+/**
+ * This class enables command to be able to undo / redo
+ */
+public abstract class RedoableCommand extends Command {
+    private ReadOnlyAddressBook previousPersonBook;
 
-public abstract class UndoableCommand extends Command {
-    private ReadOnlyAddressBook<Person> previousPersonBook;
-
-    private String successMessage = "";
+    private String message = "";
 
     protected abstract CommandResult executeUndoableCommand(Model model, CommandHistory commandHistory,
                                                             StackUndoRedo undoRedoStack) throws CommandException;
 
+    /**
+     * Save the snapshot of the address book
+     * @param model
+     */
     private void saveAddressBookSnapshot(Model model) {
         requireNonNull(model);
         this.previousPersonBook = new AddressBook(model.getAddressBook());
     }
 
+
+    /**
+     *
+     * @param command
+     * Redo the command
+     */
+    protected final void redo(Model model) {
+        requireNonNull(model);
+        undo(model);
+    }
+
+
+    /**
+     * Undo the command.
+     */
     protected final void undo(Model model) {
         requireAllNonNull(model, previousPersonBook);
 
         model.setAddressBook(previousPersonBook);
 
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    protected final void redo(Model model) {
-        requireNonNull(model);
-
-        undo(model);
     }
 
 
@@ -46,12 +60,20 @@ public abstract class UndoableCommand extends Command {
         saveAddressBookSnapshot(model);
     }
 
+    /**
+     * Print successful message
+     * @param feedbackToUser
+     */
     public void saveSuccessMessage(String feedbackToUser) {
-        this.successMessage = feedbackToUser;
+        this.message = feedbackToUser;
     }
 
+    /**
+     * Get successful message
+     * @return
+     */
     public String getSuccessMessage() {
-        return this.successMessage;
+        return this.message;
     }
 
     @Override

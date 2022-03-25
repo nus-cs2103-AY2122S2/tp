@@ -9,8 +9,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RedoableCommand;
 import seedu.address.logic.commands.StackUndoRedo;
-import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -58,9 +58,9 @@ public class LogicManager implements Logic {
             commandHistory.add(commandText);
             undoRedoStack.push(command);
 
-            if (command instanceof UndoableCommand) {
-                UndoableCommand undoableCommand = ((UndoableCommand) command);
-                undoableCommand.saveSuccessMessage(commandResult.getFeedbackToUser());
+            if (command instanceof RedoableCommand) {
+                RedoableCommand redoableCommand = ((RedoableCommand) command);
+                redoableCommand.saveSuccessMessage(commandResult.getFeedbackToUser());
             }
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);

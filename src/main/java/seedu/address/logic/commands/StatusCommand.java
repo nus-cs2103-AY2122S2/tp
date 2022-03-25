@@ -17,7 +17,7 @@ import seedu.address.model.person.Status;
 /**
  * Changes the status of an existing person in the address book.
  */
-public class StatusCommand extends UndoableCommand {
+public class StatusCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "status";
 

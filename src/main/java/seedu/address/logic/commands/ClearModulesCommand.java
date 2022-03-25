@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
-public class ClearModulesCommand extends UndoableCommand {
+public class ClearModulesCommand extends RedoableCommand {
     public static final String COMMAND_WORD = "clearmodules";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

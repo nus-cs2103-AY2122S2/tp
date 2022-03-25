@@ -1,19 +1,19 @@
 package seedu.address.logic.commands;
 
-import java.util.LinkedList;
+import java.util.Stack;
 
 public class StackUndoRedo {
 
-    private LinkedList<UndoableCommand> undoStack;
-    private LinkedList<UndoableCommand> redoStack;
+    private Stack<RedoableCommand> undoStack;
+    private Stack<RedoableCommand> redoStack;
 
     /**
      * Pushes {@code command} onto the undo-stack if it is of type {@code UndoableCommand}. Clears the redo-stack
      * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
      */
     public StackUndoRedo() {
-        undoStack = new LinkedList<>();
-        redoStack = new LinkedList<>();
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
     }
 
     /**
@@ -30,7 +30,7 @@ public class StackUndoRedo {
      * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
      */
     public void push(Command command) {
-        if (!(command instanceof UndoableCommand)) {
+        if (!(command instanceof RedoableCommand)) {
             return;
         }
 
@@ -39,56 +39,58 @@ public class StackUndoRedo {
         }
 
 
-        undoStack.addFirst((UndoableCommand) command);
+        undoStack.add((RedoableCommand) command);
     }
 
     /**
      * Pops and returns the next {@code UndoableCommand} to be undone in the stack.
      */
-    public UndoableCommand popUndo() {
-        UndoableCommand toUndo = undoStack.removeFirst();
-        redoStack.addFirst(toUndo);
+    public RedoableCommand popUndo() {
+        RedoableCommand toUndo = undoStack.remove(0);
+        redoStack.add(toUndo);
         return toUndo;
     }
 
     /**
      * Pops and returns the next {@code UndoableCommand} to be redone in the stack.
      */
-    public UndoableCommand popRedo() {
-        UndoableCommand toRedo = redoStack.removeFirst();
-        undoStack.addFirst(toRedo);
+    public RedoableCommand popRedo() {
+        RedoableCommand toRedo = redoStack.remove(0);
+        undoStack.add(toRedo);
         return toRedo;
     }
 
     /**
-     * Returns true if there are more commands that can be undone.
+     * Returns true if can undo
      */
     public boolean canUndo() {
         return undoStack.size() > 0;
     }
 
     /**
-     * Returns true if there are more commands that can be redone.
+     * Returns true if can redo
      */
     public boolean canRedo() {
         return redoStack.size() > 0;
     }
 
+    /**
+     *
+     * @param other
+     * @return boolean whether the command are the same
+     */
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof StackUndoRedo)) {
             return false;
         }
 
         StackUndoRedo stack = (StackUndoRedo) other;
 
-        // state check
         return undoStack.equals(stack.undoStack)
                 && redoStack.equals(stack.redoStack);
     }

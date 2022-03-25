@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
-public class DeleteModuleCommand extends UndoableCommand {
+public class DeleteModuleCommand extends RedoableCommand {
     public static final String COMMAND_WORD = "deletemodule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

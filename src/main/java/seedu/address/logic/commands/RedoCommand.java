@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
 
 /**
@@ -18,32 +17,28 @@ import seedu.address.model.person.Person;
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
-    public static final String MESSAGE_SUCCESS = "Redo Command";
-    public static final String MESSAGE_FAILURE = "There is no more command to redo";
-
-
-
-    private ReadOnlyAddressBook<Person> previousAddressBook;
-
+    public static final String MESSAGE_USAGE_SUCCESS = "Successfully Redo";
+    public static final String MESSAGE_USAGE_FAILURE = "No command left to redo";
 
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory,
                                  StackUndoRedo undoRedoStack) throws CommandException {
         requireAllNonNull(model, undoRedoStack);
 
-        if (!undoRedoStack.canRedo()) {
-            throw new CommandException(MESSAGE_FAILURE);
+        if (undoRedoStack.canRedo()) {
+
+            ReadOnlyAddressBook previousAddressBook = new AddressBook(model.getAddressBook());
+            Model oldModel = new ModelManager(previousAddressBook, new UserPrefs());
+
+            RedoableCommand redoCommand = undoRedoStack.popRedo();
+            redoCommand.redo(model);
+
+            redoCommand.save(oldModel);
+
+            return new CommandResult(String.format(MESSAGE_USAGE_SUCCESS, redoCommand.getSuccessMessage()));
         }
 
-        previousAddressBook = new AddressBook(model.getAddressBook());
-
-        UndoableCommand toRedoCommand = undoRedoStack.popRedo();
-        toRedoCommand.redo(model);
-
-        Model oldModel = new ModelManager(previousAddressBook, new UserPrefs());
-        toRedoCommand.save(oldModel);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toRedoCommand.getSuccessMessage()));
+        throw new CommandException(MESSAGE_USAGE_FAILURE);
     }
 
 }

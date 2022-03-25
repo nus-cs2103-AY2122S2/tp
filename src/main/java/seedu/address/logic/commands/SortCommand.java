@@ -17,7 +17,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-public class SortCommand extends UndoableCommand {
+public class SortCommand extends RedoableCommand {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

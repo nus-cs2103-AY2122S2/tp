@@ -20,10 +20,6 @@ public class CommandHistory {
 
     }
 
-    public CommandHistory(CommandHistory commandHistory) {
-        setList(commandHistory);
-    }
-
     /**
      * Adds an {code commandString} string to the list.
      */
@@ -47,17 +43,6 @@ public class CommandHistory {
     public void setList(CommandHistory replacement) {
         requireNonNull(replacement);
         historyList.setAll(replacement.historyList);
-    }
-
-    public void clear() {
-        setList(new CommandHistory());
-    }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<String> getCommandHistoryList() {
-        return unmodifiableHistoryList;
     }
 
     @Override

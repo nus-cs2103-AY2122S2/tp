@@ -32,7 +32,7 @@ import seedu.address.model.person.Status;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends UndoableCommand {
+public class EditCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 

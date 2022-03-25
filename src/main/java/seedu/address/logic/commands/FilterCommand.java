@@ -12,7 +12,7 @@ import seedu.address.model.person.NameContainsModulePredicate;
  * Searches persons by their corresponding modules. This allows filtering by modules for users within ModuleMateFinder
  * Keyword matching is case insensitive.
  */
-public class FilterCommand extends UndoableCommand {
+public class FilterCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_CONSTRAINTS = "Modules names should have 2-3 letters prefix "

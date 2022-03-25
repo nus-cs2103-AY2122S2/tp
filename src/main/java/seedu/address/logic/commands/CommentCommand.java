@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  * Adds a comment to an existing person in the address book.
  * AddCommentCommand is adapted from https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html
  */
-public class CommentCommand extends UndoableCommand {
+public class CommentCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "comment";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a comment to the person identified "

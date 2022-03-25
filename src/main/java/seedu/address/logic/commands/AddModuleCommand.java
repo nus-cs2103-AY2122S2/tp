@@ -26,7 +26,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
 
-public class AddModuleCommand extends UndoableCommand {
+public class AddModuleCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "addmodule";
 
