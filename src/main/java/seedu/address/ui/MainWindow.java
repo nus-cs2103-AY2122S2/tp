@@ -36,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private MatchWindow matchWindow;
     private FavouriteWindow favouriteWindow;
+    private StatisticsWindow statisticsWindow;
+    private int count = 0;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -175,6 +177,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Fills data of pie chart and opens the statistics window.
+     */
+    @FXML
+    public void handleStatistics() {
+        if (statisticsWindow != null) {
+            statisticsWindow.close();
+        }
+        statisticsWindow = new StatisticsWindow(logic);
+        statisticsWindow.fillPieChart();
+        statisticsWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -190,6 +205,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         matchWindow.hide();
         favouriteWindow.hide();
+        statisticsWindow.hide();
         primaryStage.hide();
     }
 
@@ -218,6 +234,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowFavourites()) {
                 handleFavourites();
+            }
+
+            if (commandResult.isShowStatistics()) {
+                handleStatistics();
             }
 
             if (commandResult.isExit()) {
