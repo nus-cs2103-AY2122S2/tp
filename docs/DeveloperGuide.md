@@ -244,13 +244,56 @@ WIP
 <!-- Justin -->
 ### View
 #### Design Consideration
-WIP
+##### Aspects: How view executes:
+* Alternative 1 (current choice): type in the type, along with the arguments that specify view boundaries
+    * Pros: Straightforward to implement, works well.
+    * Cons: Cumbersome to type out, esp if a lot of parameters are needed.
+
+
 
 #### Implementation
-WIP - Insert UML and activity diagram
+The view mechanism is facilitated by `MedBook`. It allows users to view various items within the provided parameters 
+issued in the command. This is achieved by using a filtered list for each type, and then filtering the list 
+according to the given parameters. These types include a `Patient`'s `Contact` details, `Medical` information, 
+`Consultation` notes,`Prescription` and `TestResult`. For each of the records types, there is a corresponding class 
+to view the record types into the `MedBook`.
+
+The view mechanism is facilitated by `CommandType`. It implements `CommandType#parseViewCommandType()` which parse the
+type of view command, and the arguments passed in the command string, which specify the boundaries of which elements to
+include in the filtered list. From here, let `XXX` be the type determined from `CommandType#parseViewCommandType()`.
+It then creates a new instance of `ViewXXXCommandParser`, which parses the view command
+according to how the type in meant to be parsed, and then creates a new instance of `ViewXXXCommand`, which extends
+Command. It implements the abstract method `execute` to invoke `Model` and update `filteredXXXList` in `MedBook`.
+This operation is exposed in the `LogicManager` class. `UI` is then updated accordingly, displaying in the Main Window
+the desired filtered list.
+
+Example: `view t/consultation i/S1234567L` makes `MedBook` display the `filteredConsultationList` which
+has been filtered beforehand according to the given parameter of patient ID S1234567L.
+
+The following sequence diagram shows view consultation works:
+<img src="images/ViewSequenceDiagram.png" />
+
 
 #### Usage
-WIP
+Given below is an example usage scenario about how `view t/consultation` works:
+
+Step 1: The user launches the application for the first time, The `CommandType` will be
+initialized with default state, the is viewing the patient panel list.
+
+Step 2: The user types in view t/consultation i/S1234567L. This command  will call `CommandType#parseVewCommandType` 
+to parse what is the current type, which is consultation. 
+
+From here, let `XXX` be the type determined in `CommandType#parseViewCommandType()`.
+
+Step 3: It then creates a new instance of `ViewXXXCommandParser` and passes the arguments into the new instance.
+
+Step 4: This then creates a new instance of `ViewXXXCommand`, which extends Command. Its `execute` method invokes 
+Model's `Model#updateFilteredXXXList` to update the `filteredXXXList` according to the argument passed into the method.
+
+Step 5: `UI` is then updated accordingly, displaying in the Main Window the desired filtered list.
+
+
+
 
 <!-- Chee Kean -->
 ### Safe Delete
