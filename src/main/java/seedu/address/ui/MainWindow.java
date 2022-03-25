@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private CandidateListPanel candidateListPanel;
+    private InterviewListPanel interviewListPanel;
+    private FocusListPanel focusListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +45,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane candidateListPanelPlaceholder;
+
+    @FXML
+    private StackPane interviewListPanelPlaceholder;
+
+    @FXML
+    private StackPane focusListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +121,12 @@ public class MainWindow extends UiPart<Stage> {
         candidateListPanel = new CandidateListPanel(logic.getFilteredCandidateList());
         candidateListPanelPlaceholder.getChildren().add(candidateListPanel.getRoot());
 
+        interviewListPanel = new InterviewListPanel(logic.getInterviewSchedule().getInterviewList());
+        interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
+
+        focusListPanel = new FocusListPanel(logic.getFilteredCandidateList());
+        focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -165,6 +179,14 @@ public class MainWindow extends UiPart<Stage> {
 
     public CandidateListPanel getCandidateListPanel() {
         return candidateListPanel;
+    }
+
+    public InterviewListPanel getInterviewListPanel() {
+        return interviewListPanel;
+    }
+
+    public FocusListPanel getFocusListPanel() {
+        return focusListPanel;
     }
 
     /**
