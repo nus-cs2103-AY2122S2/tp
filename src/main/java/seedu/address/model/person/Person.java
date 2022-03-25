@@ -17,7 +17,6 @@ import java.util.Set;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.transaction.Transaction;
 
 /**
  * Represents a Person in the address book.
@@ -28,7 +27,6 @@ public class Person implements Serializable {
 
     private final HashMap<Prefix, Field> fields = new HashMap<>();
     private final HashSet<Tag> tags = new HashSet<>();
-    private final ArrayList<Transaction> transactions = new ArrayList<>();
 
 
     /**
@@ -58,18 +56,6 @@ public class Person implements Serializable {
 
     public Person(Person otherPerson) {
         this(otherPerson.getFields(), otherPerson.getTags());
-    }
-
-    /**
-     * Constructs a Person object with fields, tags, and transactions
-     *
-     * @param fields fields of the person
-     * @param tags tags of the person
-     * @param transactions transactions of the person
-     */
-    public Person(Collection<Field> fields, Collection<Tag> tags, Collection<Transaction> transactions) {
-        this(fields, tags);
-        this.transactions.addAll(transactions);
     }
 
     /**
@@ -234,32 +220,6 @@ public class Person implements Serializable {
     }
 
     /**
-     * Adds a transaction to the person
-     *
-     * @param transaction transaction to add
-     * @return A new person with added transaction
-     */
-    public Person addTransaction(Transaction transaction) {
-        ArrayList<Transaction> newTransactions = new ArrayList<>(this.transactions);
-        newTransactions.add(transaction);
-        return new Person(getFields(), getTags(), newTransactions);
-    }
-
-    /**
-     * Gets the list of all transactions
-     *
-     * @return All transactions associated with
-     * the person.
-     */
-    public List<Transaction> getTransactions() {
-        return Collections.unmodifiableList(transactions);
-    }
-
-    public boolean hasTransaction() {
-        return !getTransactions().isEmpty();
-    }
-
-    /**
      * Returns true if both persons have the same email.
      * This defines a weaker notion of equality between two persons.
      */
@@ -289,14 +249,13 @@ public class Person implements Serializable {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getTransactions().equals(getTransactions());
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags, transactions);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
     }
 
     @Override
