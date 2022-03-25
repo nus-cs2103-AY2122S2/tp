@@ -59,4 +59,25 @@ public class UnmarkCommand extends Command {
 
         return new CommandResult(String.format(MARKED_TASK_SUCCESS, studentId));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        boolean isEquals = false;
+
+        if (other == this) {
+            isEquals = true;
+        } else {
+            boolean isInstanceOf = other instanceof UnmarkCommand;
+            if (!isInstanceOf) {
+                return false;
+            }
+            UnmarkCommand commandToCompare = (UnmarkCommand) other;
+
+            // check both student id and index
+            if (this.studentId != null && this.index != null) {
+                isEquals = studentId.equals(commandToCompare.studentId) && index.equals(commandToCompare.index);
+            }
+        }
+        return isEquals;
+    }
 }

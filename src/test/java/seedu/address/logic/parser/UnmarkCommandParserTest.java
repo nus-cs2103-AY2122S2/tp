@@ -23,7 +23,7 @@ public class UnmarkCommandParserTest {
     private static final String MARK_MESSAGE_INVALID_COMMAND_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             UnmarkCommand.MESSAGE_USAGE);
 
-    private final StudentId studentIdAlice = TypicalPersons.ALICE.getStudentId();
+    private final StudentId studentIdAmy = TypicalPersons.AMY.getStudentId();
 
     private final Index indexOne = Index.fromOneBased(1);
 
@@ -60,8 +60,8 @@ public class UnmarkCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        UnmarkCommand expectedUnmarkCommand = new UnmarkCommand(studentIdAlice, indexOne);
-        String userInputValid = ID_DESC_BOB + INDEX_DESC;
+        UnmarkCommand expectedUnmarkCommand = new UnmarkCommand(studentIdAmy, indexOne);
+        String userInputValid = ID_DESC_AMY + INDEX_DESC;
         assertParseSuccess(parser, userInputValid, expectedUnmarkCommand);
     }
 }
