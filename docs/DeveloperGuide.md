@@ -187,6 +187,18 @@ to be updated
 ### View task feature
 to be updated
 
+## Assign feature
+
+The `assign` command assigns an existing `Person` to an existing `Group` in ArchDuke,
+through the `AssignCommandParser` and `AssignCommand`.
+It uses the `AddressBook#assignPerson(Person personToAssign, Group group)` which is exposed in the `Model`
+interface as `Model#assignPerson(Person person, Group group)`. Subsequently, `setGroup(Group target, Group editedGroup)`
+is called on `UniqueGroupList` to update the `Group` with the assigned `Person`.
+
+The following sequence diagram shows how the `assign` mechanism works:
+
+To be updated...
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
