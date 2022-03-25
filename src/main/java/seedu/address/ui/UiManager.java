@@ -21,9 +21,9 @@ public class UiManager implements Ui {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static MainWindow mainWindow;
 
     private Logic logic;
-    private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -85,4 +85,7 @@ public class UiManager implements Ui {
         System.exit(1);
     }
 
+    public static MainWindow getMainWindow() {
+        return UiManager.mainWindow;
+    }
 }

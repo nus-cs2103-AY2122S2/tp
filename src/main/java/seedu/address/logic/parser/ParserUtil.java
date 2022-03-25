@@ -17,6 +17,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.theme.DarkTheme;
+import seedu.address.model.theme.LightTheme;
+import seedu.address.model.theme.Theme;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -124,6 +127,20 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static Theme parseTheme(String theme) throws ParseException {
+        requireNonNull(theme);
+        String trimmedTheme = theme.trim();
+        if (trimmedTheme.equals("dark")) {
+            return new DarkTheme();
+        }
+        if (trimmedTheme.equals("light")) {
+            return new LightTheme();
+        }
+        throw new ParseException("Theme should be either light or dark.");
 
     /**
      * Parses a {@code String courseName} into an {@code Course}.

@@ -154,6 +154,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Filter feature
+
+The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
+To implement the feature, the below classes are created: 
+
+* `FilterCommand` extending class `Command` is implemented to let the system understand the command
+* `FilterCommandParser`is implemented to parse the filter command entered by user. 
+* `PersonContainsTagPredicate` extends class Predicate<Person> to assist in filtering out the profiles that contains 
+  the given tag
+
+The sequence diagram below illustrates how the filter command works, using `'filter family'` as the sample input.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+  
+Given below is an example usage scenario of filter command.
+  
+Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `filter family`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.AddressBookParser` which creates a `FilterCommandParser` object.
+
+Step 3. The `FilterCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `FilterCommand` object 
+if there is no parse exception. In the creation of a new `FilterCommand` object, the tag name is parsed out and a new 
+`PersonContainsTagPredicate` object is created.
+
+Step 4. During the execution of filter command, a `CommandException` is thrown if the tag does not exist in the model.
+Otherwise, the profile list is filtered using the predicate.
+
+The activity diagram below summarizes what happens when a filter command is executed.
+
+
+
+####Design considerations 
+The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -234,10 +269,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] View detailed profile
+In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
+limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
+height of a `PersonCard`, less person will be displayed of the same window size.
+
+Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
+conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more 
+information about a person.
+
 
 ### \[Proposed\] Enhanced Add Profile Feature 
 
-In the original add profile feature in the AB3 address book, all the profiles are being stored in the `AddressBook`.
+In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
 
 Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and 
 ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
@@ -263,6 +307,10 @@ This is a sample of the `Person` object diagram.
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
 
 
+### \[Proposed\] Theme choosing
+In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
+that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
+dark theme, so that the application fits better to the vibrant energy of a university.
 
 ### \[Proposed\] Data archiving
 
@@ -406,6 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Profile**: A page with more detailed information about a person
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -449,6 +498,37 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+1. _{ more test cases …​ }_
+
+### Deleting a tag
+1. Deleting a tag while all tags are being shown
+
+    1. Prerequisites: List all tags using the `list_tag` command. Multiple tags in the tag list.
+
+    1. Test case: `delete_tag 1`<br>
+       Expected: First tag is deleted from the list. Details of the deleted tag are shown in the status message. Tag in the profile will be updated.
+
+    1. Test case: `delete_tag 0`<br>
+       Expected: No tag is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete_tag`, `delete_tag x`, (where x is larger than the list size),`delete_tag abc`, `...`, (where abc is not integer) <br>
+       Expected: Similar to previous.
+        
+1. _{ more test cases …​ }_
+
+### Detach a tag from a profile
+1.  Detach a tag from a profile in index
+
+    1. Prerequisites: Create profile with tags using `add`
+
+    1. Test case: `detach t/TAGNAME i/1`<br>
+       Expected: TAGNAME is detached from the profile in index 1. Details of the deleted tag and the profile operated on are shown in the status message. Tag in the profile will be updated.
+
+    1. Test case: `detach t/INVALID_NAME i/1`<br>
+       Expected: No tag is detached. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect detach commands to try: `detach`, `detach t/TAGNAME i/x`, (where x is larger than the list size), `...`<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
