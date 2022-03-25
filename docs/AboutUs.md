@@ -52,10 +52,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Justin Lam
 
-<img src="images/justinlam19.png" width="200px">
+<img src="images/juslam19.png" width="200px">
 
-[[github](http://github.com/justinlam19)]
-[[portfolio](team/justinlam19.md)]
+[[github](http://github.com/juslam19)]
+[[portfolio](team/juslam19.md)]
 
 
 * Role: Documentation
