@@ -2,11 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
@@ -25,13 +23,13 @@ public class Person {
     // Data fields
     private final InsurancePackage insurancePackage;
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private ArrayList<Tag> tags = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email,
-                  InsurancePackage insurancePackage, Address address, Set<Tag> tags) {
+                  InsurancePackage insurancePackage, Address address, ArrayList<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -50,7 +48,7 @@ public class Person {
         Email copiedEmail = personToCopy.getEmail();
         InsurancePackage copiedInsurancePackage = personToCopy.getInsurancePackage();
         Address copiedAddress = personToCopy.getAddress();
-        Set<Tag> copiedTags = new HashSet<>();
+        ArrayList<Tag> copiedTags = new ArrayList<>();
         copiedTags.addAll(personToCopy.getTags());
         return new Person(copiedName, copiedPhone, copiedEmail, copiedInsurancePackage, copiedAddress, copiedTags);
     }
@@ -75,12 +73,12 @@ public class Person {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public void setTags(ArrayList<Tag> tagList) {
+        this.tags = tagList;
+    }
+
+    public ArrayList<Tag> getTags() {
+        return tags;
     }
 
     /**
@@ -88,7 +86,7 @@ public class Person {
      * @return String of tagnames separated by spaces
      */
     public String getTagsInString() {
-        Set<Tag> tags = getTags();
+        ArrayList<Tag> tags = getTags();
         List<String> tagsListInString = tags.stream().map(tag -> tag.tagName).collect(Collectors.toList());
         return String.join(" ", tagsListInString);
     }
@@ -148,7 +146,7 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress());
 
-        Set<Tag> tags = getTags();
+        ArrayList<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -153,7 +152,7 @@ public class CsvAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final ArrayList<Tag> modelTags = new ArrayList<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelInsurancePackage, modelAddress, modelTags);
     }
 
