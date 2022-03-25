@@ -233,14 +233,37 @@ WIP
 
 <!-- Chee Kean -->
 ### Safe Delete
-#### Design Consideration
-WIP
+#### Design Considerations
+
+##### Aspects: How delete executes:
+* Alternative 1 (current choice): delete the index with the current view
+  * Pros: Easy to implement
+  * Cons: The user needs to view the field before he/she can perform the delete actions.
+* Alternative 2: delete the field by specifying the NRIC, index and the type of field.
+  * Pros: The user can delete any field at any page.
+  * Cons: Harder to implement, it is not very intuitive for a user to delete a field without viewing it.
 
 #### Implementation
-WIP - Insert UML and activity diagram
+The delete mechanism is facilitated bby `CommandType`. It extends MedBook
+with the latest view state, stored internally as a currentViewType.
+It implements `CommandType#parseDeleteCommandType()` which parse the type
+of delete command according to the latest view type.
+
+The following sequence diagram shows delete prescription works:
+<img src="images/DeleteSequenceDiagram.png" />
 
 #### Usage
-WIP
+Given below is an example usage scenario and how the delete prescription works:
+
+Step 1: The user launches the application for the first time, The `CommandType` will be
+initialized with default state, the is viewing the patient panel list.
+
+Step 2: The user view t/prescription i/S1234567L, `Command Type` will change the `viewCommandType` to prescription type.
+
+Step 3: The user decide to delete the 2nd prescription of this patient, The user executes `delete 2`
+command. This command  will call `CommandType#parseDeleteCommandType` to parse what is the current type, which is
+prescription. It will then delete the 2nd prescription from prescription model and save to storage
+
 
 <!-- Si Binh -->
 ### Find
