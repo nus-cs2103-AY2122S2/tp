@@ -7,6 +7,9 @@ import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.ExpiredFilter;
 
+/**
+ * Displays all products that has expired.
+ */
 public class ExpiredCommand extends Command {
 
     public static final String COMMAND_WORD = "expired";

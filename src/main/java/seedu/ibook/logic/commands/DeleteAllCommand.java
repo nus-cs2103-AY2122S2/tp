@@ -9,6 +9,9 @@ import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Deletes from the ibook all products shown in the displayed list.
+ */
 public class DeleteAllCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-all";

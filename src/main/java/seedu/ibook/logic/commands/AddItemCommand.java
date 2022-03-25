@@ -14,6 +14,9 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Adds an item to a specified product in the ibook.
+ */
 public class AddItemCommand extends Command {
 
     public static final String COMMAND_WORD = "add-item";

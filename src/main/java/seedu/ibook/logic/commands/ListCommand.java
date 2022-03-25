@@ -6,7 +6,7 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
 /**
- * Lists all persons in the ibook to the user.
+ * Lists all products in the ibook to the user.
  */
 public class ListCommand extends Command {
 

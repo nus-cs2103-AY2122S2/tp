@@ -11,7 +11,7 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
 /**
- * Deletes a person identified using it's displayed index from the ibook.
+ * Deletes a product identified using it's displayed index from the ibook.
  */
 public class DeleteCommand extends Command {
 

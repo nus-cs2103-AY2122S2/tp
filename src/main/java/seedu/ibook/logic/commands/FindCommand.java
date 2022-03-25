@@ -11,7 +11,7 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.filters.AttributeFilter;
 
 /**
- * Finds and lists all persons in Ibook whose name contains any of the argument keywords.
+ * Finds and lists all products in ibook which has details matching the searching criteria.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {

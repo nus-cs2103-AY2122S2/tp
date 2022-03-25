@@ -10,6 +10,9 @@ import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Updates the details of all products shown in the displayed list.
+ */
 public class UpdateAllCommand extends Command {
 
     public static final String COMMAND_WORD = "update-all";

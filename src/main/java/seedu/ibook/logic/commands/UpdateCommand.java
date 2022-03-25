@@ -19,7 +19,6 @@ import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 
-
 /**
  * Updates the details of an existing product in the ibook.
  */

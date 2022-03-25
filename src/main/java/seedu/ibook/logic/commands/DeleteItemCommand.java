@@ -11,6 +11,9 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Deletes an item of a specified product in the ibook.
+ */
 public class DeleteItemCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-item";
