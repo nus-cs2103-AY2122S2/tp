@@ -131,7 +131,8 @@ public class Transaction implements Serializable {
         Transaction otherTr = (Transaction) other;
         return otherTr.getAmount().equals(getAmount())
                 && otherTr.getDueDate().equals(getDueDate())
-                && otherTr.getTransactionDate().equals(getTransactionDate());
+                && otherTr.getTransactionDate().equals(getTransactionDate())
+                && otherTr.getIdentifier().equals(getIdentifier());
     }
 
     @Override
