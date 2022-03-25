@@ -42,7 +42,6 @@ public class EditLabCommand extends Command {
     public static final String MESSAGE_EDIT_LAB_SUCCESS = "Edited Lab %1$s of %2$s";
 
     public static final String MESSAGE_IDENTICAL_LAB = "Edited lab would be identical to previous";
-    public static final String MESSAGE_MARKS_REQUIRED = "Marks have to be provided to edit lab status to GRADED";
     public static final String MESSAGE_INVALID_COMBINATION = "Invalid combination of lab status and marks";
 
     protected final Index index;
@@ -61,7 +60,6 @@ public class EditLabCommand extends Command {
     public EditLabCommand(Index index, int labNumber, LabStatus newStatus, LabMark newMark)
             throws IllegalArgumentException {
         requireAllNonNull(index, labNumber, newStatus);
-        checkArgument(isValidCommand(this), MESSAGE_INVALID_COMBINATION);
         this.index = index;
         this.labNumber = labNumber;
         this.newStatus = newStatus;
@@ -85,7 +83,7 @@ public class EditLabCommand extends Command {
     /**
      * Returns true if the given EditLabCommand is a valid EditLabCommand.
      */
-    public static boolean isValidCommand(EditLabCommand e) {
+    public boolean isValidCommand(EditLabCommand e) {
         if (e.newStatus == LabStatus.GRADED && e.newMark.equals(new LabMark())) {
             return false;
         }
@@ -93,6 +91,17 @@ public class EditLabCommand extends Command {
             return false;
         }
         return true;
+    }
+
+    /**
+     * This is represented by a method so it can be overridden by subclasses.
+     */
+    public String getInvalidCommandMessage() {
+        return MESSAGE_INVALID_COMBINATION;
+    }
+
+    public String getExecutionSuccessMessage() {
+        return MESSAGE_EDIT_LAB_SUCCESS;
     }
 
     @Override
@@ -104,8 +113,8 @@ public class EditLabCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        if (newStatus.equals(LabStatus.GRADED) && newMark.equals(new LabMark())) {
-            throw new CommandException(MESSAGE_MARKS_REQUIRED);
+        if (!isValidCommand(this)) {
+            throw new CommandException(getInvalidCommandMessage());
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
@@ -121,7 +130,7 @@ public class EditLabCommand extends Command {
         }
 
         return new CommandResult(
-                String.format(MESSAGE_EDIT_LAB_SUCCESS, labNumber, studentToEdit.getName()));
+                String.format(getExecutionSuccessMessage(), labNumber, studentToEdit.getName()));
     }
 
     @Override
