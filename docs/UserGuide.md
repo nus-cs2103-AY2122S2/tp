@@ -29,6 +29,8 @@ School administrators _(like teachers)_ can use UDT to easily track COVID amongs
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
   - [Delete a student](#delete-a-student-delete): `delete`
   - [Exit the application](#exit-the-application-exit): `exit`
+- [Saving the data](#saving-the-data)
+- [Editing the data file](#editing-the-data-file)
 - [Frequently Asked Questions](#faq)
 - [Command summary](#command-summary)
 
@@ -87,7 +89,7 @@ Adds a student to the tracking list
 
 </div>
 
-## List all students : `list`
+## List all students: `list`
 Shows a list of all students in the address book.
 - Format: `list`
   - Any parameter after `list` is ignored
@@ -131,7 +133,7 @@ Finds an existing student in the address book by their class
 
 </div>
 
-## Find student by class: `findactivity`
+## Find student by activity: `findactivity`
 Finds an existing student in the address book by the activities they are participating in
 - Format: `findactivity ACTIVITIY`
   - Returns a list of students with the specified `ACTIVITY`
