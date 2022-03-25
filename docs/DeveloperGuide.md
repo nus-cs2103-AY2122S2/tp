@@ -13,48 +13,46 @@ Trackermon allows people who want to track and remember what shows they have wat
 * [**Setting up, getting started**](#setting-up-getting-started)
 * [**About**](#about)
 * [**Design**](#design)
-    * [Architecture](#architecture)
-    * [UI component](#ui-component)
-    * [Logic component](#logic-component)
-    * [Model component](#model-component)
-    * [Storage component](#storage-component)
-    * [Common classes](#common-classes)
-* [**Implementation**](#implementation)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+  * [**Implementation**](#implementation)
     * [Find command feature](#find-command-feature)
-        * [What it does](#what-it-does)
-        * [Implementation](#implementation-1)
-        * [Design consideration](#design-considerations)
-            * [How find executes](#aspect-how-find-executes)
+      * [What it does](#what-it-does)
+      * [Implementation](#implementation-1)
+      * [Design consideration](#design-considerations)
     * [Sort command feature](#sort-command-feature)
       * [What it does](#what-it-does-1)
-        * [Implementation](#implementation-2)
-        * [Design consideration](#design-considerations-1)
-            * [How sort executes](#aspect-how-sort-executes)
-    * [Status feature](#status-feature)
-        * [What it does](#what-it-does-2)
-            * [Implementation](#implementation-3)
-            * [Design considerations](#design-considerations-2)
+      * [Implementation](#implementation-2)
+      * [Design consideration](#design-considerations-1)
     * [Import and Export feature](#import-and-export-feature)
-        * [What it does](#what-it-does-3)
-            * [Implementation](#implementation-4)
-            * [Design considerations](#design-considerations-3)
+      * [What it does](#what-it-does-2)
+      * [Implementation](#implementation-3)
+      * [Design considerations](#design-considerations-2)
+    * [Show status](#show-status)
+      * [What it does](#what-it-does-3)
+      * [Implementation](#implementation-4)
+      * [Design considerations](#design-considerations-3)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
-    * [Product scope](#product-scope)
-    * [User stories](#user-stories)
-    * [Use cases](#use-cases)
-    * [Non-Functional Requirements](#non-functional-requirements)
-    * [Glossary](#glossary)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
 * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
-    * [Launch and shutdown](#launch-and-shutdown)
-    * [Adding a show](#adding-a-show)
-    * [Deleting a show](#deleting-a-show)
-    * [Editing a show](#editing-a-show)
-    * [Edit a comment](#edit-comment)
-    * [Saving data](#saving-data)
-    * [Finding a show](#finding-a-show)
-    * [Importing Trackermon data](#importing-trackermon-data)
-    * [Exporting Trackermon data](#exporting-trackermon-data)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Adding a show](#adding-a-show)
+  * [Deleting a show](#deleting-a-show)
+  * [Editing a show](#editing-a-show)
+  * [Edit a comment](#edit-comment)
+  * [Saving data](#saving-data)
+  * [Finding a show](#finding-a-show)
+  * [Importing Trackermon data](#importing-trackermon-data)
+  * [Exporting Trackermon data](#exporting-trackermon-data)
 
 
 ---
@@ -263,7 +261,7 @@ Looks for a show in a list of shows and displays all the shows that match the us
 #### Implementation
 <img src="images/FindSequenceDiagram.png">
 
-After executing the find command, `FindCommandParser` will map any prefixes in the user's input to Trackermon's prefix syntax. Then, it will do a check whether there are any prefixes in the input. 
+After executing the `find` command, `FindCommandParser` will map any prefixes in the user's input to Trackermon's prefix syntax. Then, it will do a check whether there are any prefixes in the input. 
 - If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. 
 - Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. 
 
@@ -279,14 +277,14 @@ Step 1: The user launches Trackermon and is presented with a list of all shows r
 
 Step 2: The user executes `find t/Anime` to find a show.
 
-Step 3: The find command will check and see whether any shows contain the tag `Anime` using the `Model#updateFilteredShowList` method.
+Step 3: The `find` command will check and see whether any shows contain the tag `Anime` using the `Model#updateFilteredShowList` method.
 
 Step 4:
 `Model#updateFilteredShowList` will be called and model will be updated without modifying the original show list. If no shows match the keywords given by the user, an empty list will be displayed.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-`find Shingeki no Kyojin` will also work, however it will scan through the name, status and tag fields instead of the name field only
+`find Shingeki no Kyojin` will also work, however it will scan through the name, status and tag fields instead of the name field only.
 </div>
 
 The following activity diagram summarizes what happens when a user executes a valid find command:
@@ -294,7 +292,6 @@ The following activity diagram summarizes what happens when a user executes a va
 <img src="images/FindShowDiagram.png" >
 
 #### Design considerations:
-##### Aspect: How find executes
 - **Alternative 1 (current choice):** The `find` command checks for keywords after the prefix. 
   - If there are no prefixes, it will perform a general search using `ShowContainsKeywordsPredicate` which scans through the name, status and tag fields in the `Show` class. 
   - Else, `ArgumentMultimap#arePrefixesPresent` will check and return a new predicate for each value after each prefix if it is present and then generate a keyword predicate that will match values in that field.
@@ -303,7 +300,7 @@ The following activity diagram summarizes what happens when a user executes a va
   - Pros: Abstraction of predicates and encapsulating the checking of shows allows the predicates to be used more flexibly elsewhere to match other shows.
   - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.<br><br>
   
-- **Alternative 2:** Directly check whether the show is in the show list in the find command parser without a predicate.
+- **Alternative 2:** Directly check whether the show is in the show list in `FindCommandParser` without a predicate.
   - Pros: Developers can easily understand the code and its functionality as all the code is consolidated in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
 
@@ -314,8 +311,7 @@ The following activity diagram summarizes what happens when a user executes a va
 ### Sort command feature
 
 #### What it does
-
-Sort the list of shows according user's input prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, by default it will sort by name then by status.
+Sorts the list of shows according to the user's input prefix. If the input contains no prefixes, sort will default to organizing the shows in ascending order by name. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, by default it will sort by name then by status.
 
 #### Implementation
 After entering the sort command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax. Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `SortCommand` object will be created with `Comparator` according to the specified prefixes. Else, a `NameComparator` will be created which can be used to sort names in ascending order. `SortCommand` is a class that inherits the `Command` abstract class. `SortCommand` implements the `execute()` method from the `Command` abstract class where on execution, sort the model's list of shows according to the `Comparator`. The model is then updated with the sorted show list.
@@ -338,7 +334,6 @@ The following sequence diagram summarizes what happens when a user executes a so
 <img src="images/SortSequenceDiagram.png">
 
 #### Design considerations:
-##### Aspect: How sort executes
 - **Alternative 1 (current choice):** The `sort` command checks for the optional prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, it will sort by name then by default.
 
   - Pros: No invalid commands input by the user
@@ -352,45 +347,40 @@ The following sequence diagram summarizes what happens when a user executes a so
 
 ---
 
-### Status feature
-
-#### What it does
-`Status` class is an attribute within the `Show` class. `Status` represents the 
-watched status of the show which can be represented by `completed` and `watching`. 
-
-#### Implementation
-
-`Status` class is implemented as a `enum` class. Enumerations 
-are a list of named constants, where the named constants are `completed` and `watching`.
-It is also possible to implement `Status` as a normal class encapsulating a String or Integer which would 
-represent the status of the show (`watching` & `completed`). However, the former implementation
-is chosen due to certain advantages that it offers.
-
-#### Design considerations:
-
-1. Enumerations offer compile time type safety, reducing the risk of runtime errors.
-2. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would 
-reference the same `enum` class. However, for the class implementation, a new `Status` instance is
-instantiated each time a `Show` object is created.
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-
 ### Import and Export feature
 
 ### What it does
-`import` and `export` allows the user to quickly import/export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
+Allows the user to quickly import/export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
 
 ### Implementation
-When the import/export command is executed, a `JsonFileManager` is created with the default filename. The `JsonFileManager` handles the creation of the File Explorer GUI along with the logic behind import/export. The `importFile` and `exportFile` methods return an integer used to represent the status of the process.
+When the import/export command is executed, a `JsonFileManager` is created with the default filename. The `JsonFileManager` handles the creation of the File Explorer GUI along with the logic behind import/export. The `importFile()` and `exportFile()` methods return an integer used to represent the status of the process.
 
 For `import`: After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
 
 ### Design considerations:
-##### Aspect: How the File Explorer looks
-- **Alternative 1 (current choice):** Using the JFileChooser library. This library manages to create a File Explorer GUI similar to Windows' native File Explorer's GUI. There were issues implementing this for MacOS but since the other library had issues with the MacOS implementation too, we decided to go with this as it offered more customisation for the GUI.
-- **Alternative 2:** Using the FileDialog library. The FileDialog library achieves a similar look as the JFileChooser library, but lacked customisation. There were also issues with its implementation for MacOS.
+Using the FileChooser library, it manages to create a File Explorer GUI similar to Windows' native File Explorer's GUI.
+
+---
+
+### Show status
+
+#### What it does
+`Status` class is an attribute within the `Show` class. `Status` represents the watched status of the show which can be represented by `completed`, `watching`, or `plan-to-watch`. 
+
+#### Implementation
+
+`Status` class is implemented as a `enum` class. Enumerations are a list of named constants, where the named constants are `completed`, `watching` and `plan-to-watch`. 
+
+#### Design considerations:
+
+- **Alternative 1 (current choice):** Enum class
+  - Pros: Enumerations offer compile time type safety, reducing the risk of runtime errors. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would reference the same `enum` class. However, for the class implementation, a new `Status` instance is  instantiated each time a `Show` object is created.
+  - Cons: 
+- **Alternative 2 :** Normal class, it is also possible to implement `Status` as a normal class encapsulating a String or Integer which would represent the status of the show (`watching`, `completed` and `plan-to-watch`). However, the former implementation is chosen due to certain advantages that it offers.
+  - Pro: 
+  - Cons:
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -412,8 +402,8 @@ For `import`: After the copying is completed, `ImportCommand` sends a `CommandRe
 
 **Target user profile**:
 
-* wants to keep track of their shows
-* prefer desktop apps over other interfaces
+* wants to keep track of their shows.
+* prefers desktop applications over other interfaces.
 * can type fast and prefers typing to mouse interactions.
 * wants to be able to maintain a local copy of their list of shows
 
@@ -432,19 +422,19 @@ For `import`: After the copying is completed, `ImportCommand` sends a `CommandRe
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                          | So that I can…​                                        |
-|----------|----------------|-------------------------------------------------------|--------------------------------------------------------|
-| `* * *`  | user           | add shows                                             | add new shows into the list                            |
-| `* * *`  | user           | delete shows  		                                | delete wrong entries in the list                       |
-| `* * *`  | user           | find a show                                           | find whether a specific show is in the list            |
-| `* * *`  | user           | list out all of my shows                              | see the details of all my shows in the list            |
-| `* *`    | new user       | see usage instructions                                | refer to instructions when I forget how to use the App |
-| `* * *`  | user           | edit show from the list                               | edit the name or status or tag of my show in the list  |
-| `* * `   | long time user | find shows of specific genres                         | recommend those shows to my friends                    |
-| `* * `   | long time user | find a show I may or may not have watched             | decide whether to watch that show or not               |
-| `* * `   | long time user | find whether a show I am watching is completed or not | continue with it if it is not completed                |
-| `* * `   | long time user | sort the list of shows                                | view the list in an organised manner                   |
-| `* * `   | user with multiple computers | import or export the show data easily   | keep updated copies of the show data quickly           |
+| Priority | As a…​                       | I want to…​                                           | So that I can…​                                                |
+|----------|------------------------------|-------------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | user                         | add shows                                             | add new shows into the list                                    |
+| `* * *`  | user                         | delete shows  		                                      | remove wrong entries in the list                               |
+| `* * *`  | user                         | find a show                                           | search whether a specific show is in the list                  |
+| `* * *`  | user                         | list out all of my shows                              | see the details of all my shows in the list                    |
+| `* * *`  | user                         | edit a show from the list                             | change the name or status or tag of my show in the list        |
+| `* *`    | new user                     | see usage instructions                                | refer to instructions when I forget how to use the application |
+| `* * `   | long time user               | find shows of specific genres                         | recommend those shows to my friends                            |
+| `* * `   | long time user               | find a show I may or may not have watched             | decide whether to watch that show or not                       |
+| `* * `   | long time user               | find whether a show I am watching is completed or not | continue watching if it is not completed                       |
+| `* * `   | long time user               | sort the list of shows                                | view the list in an organised manner                           |
+| `* * `   | user with multiple computers | import or export the show data easily                 | keep updated copies of the show data                           |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -714,7 +704,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User closes the file explorer GUI.
-
     * 2a1. Trackermon shows an error message to user, indicating the import has failed.
 
       Use case ends.
@@ -769,7 +758,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1.  Should work on any [_Mainstream OS_](#glossary) as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 shows without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -779,7 +768,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+| Term              | Description                                                                                            |
+|-------------------|--------------------------------------------------------------------------------------------------------|
+| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                                             |
+| **Parameter**     | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)          |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -802,7 +794,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Have a copy of `Trackermon.jar` in your computer.
       1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
    2. Double-click the jar file.
-   3. Test case: Initial launch <br> 
+   3. Test case: Initial launch <br>
       Expected: Application launched with a set of sample shows.
    4. Test case: Subsequent Launch <br> 
       Expected: Application launched with user saved shows.
@@ -857,21 +849,21 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites: None, but if the list is empty, all edits will result in an error.
    1. [Add shows](#adding-a-show) into the show list.
 2. List all shows using the `list` command.
-   1. Test case: Edit show name
-      1. Condition: Show named `One Piece` must not exist in the show list.
-      2. Command: `edit 1 n/One Piece` <br>
-         Expected: Name of show at specified index is changed to `One Piece`. Edited show details shown in the result display.
-3. Test case: Edit show status
+3. Test case: Edit show name
+   1. Condition: Show named `One Piece` must not exist in the show list.
+   2. Command: `edit 1 n/One Piece` <br>
+      Expected: Name of show at specified index is changed to `One Piece`. Edited show details shown in the result display.
+4. Test case: Edit show status
    1. Condition: None, if show status is already `completed`, expected output will be the same.
    2. Command: `edit 1 s/completed` <br>
       Expected: Status of show at specified index is changed to `completed`. Edited show details shown in the result display.
 
-4. Test case: Invalid edit index
+5. Test case: Invalid edit index
    1. Condition: Range of shows must be outside of list size.
    2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
       Expected: No show is edited. Error details shown in the result display.
 
-5. Test case: Invalid edit name
+6. Test case: Invalid edit name
    1. Condition: Show named `Inception` exists in the show list.
    2. Command: `edit n/Inception` <br>
       Expected: No show is edited. Error details shown in the result display.
@@ -882,21 +874,23 @@ testers are expected to do more *exploratory* testing.
 
 ### Edit comment
 
-1. Edit comment show while all shows are being shown
+1. Prerequisites: None, but if the list is empty, all edits will result in an error.
 
-    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
+2. List all shows using the `list` command.
+3. Test case: 
+   1. Command: `comment 1 c/Hello`<br> 
+      Expected: Comment of the first show in the list is edited to "Hello".
 
-    1. Test case: `comment 1 c/Hello`<br>
-       Expected: Comment of the first show in the list is edited to "Hello".
+4. Test case: 
+   1. Command: `comment 1`<br>
+      Expected: Comment of the first show in the list is deleted.
 
-    1. Test case: `comment 1`<br>
-       Expected: Comment of the first show in the list is deleted.
+5. Test case: 
+   1. Command: `comment 0`<br>
+      Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
 
-    1. Test case: `comment 0`<br>
-       Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect comment commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+6. Other incorrect comment commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -906,7 +900,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Saving data between sessions
    1. Launch the app.
-   2. Modify the show list using any commands that affects the details of a show.
+   2. Modify the show list using any commands that affect the details of a show.
    3. Relaunch the app. <br> 
       Expected: The most recent changes made to the shows is retained.
     
@@ -1031,16 +1025,16 @@ testers are expected to do more *exploratory* testing.
 ### Importing Trackermon data
 
 1. Import Trackermon data.
-   1. Launch the app.
-   2. Ensure that current Trackermon data is different from data we plan to import.
-   3. Import chosen data.
+   2. Launch the app.
+   3. Ensure that current Trackermon data is different from data we plan to import.
+   4. Import chosen data.
        1. Test case: Select valid data to import.
           <br>Expected: Trackermon's data reflects imported data.
        2. Test case: Select invalid data to import. An example would be any non JSON file.
           <br>Expected: Trackermon displays an error messsage stating that the imported file has to be of type JSON.
        3. Test case: Click on cancel in the file explorer GUI.
           <br>Expected: File explorer GUI closes, Trackermon displays an error message stating that the file import has failed.
-2. Dealing with corrupted data
+3. Dealing with corrupted data
    1. Prerequisite: Data must be corrupted.
    2. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
    3. Test case: `data/trackermon.json` was corrupted.
