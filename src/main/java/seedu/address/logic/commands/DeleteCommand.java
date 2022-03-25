@@ -110,11 +110,9 @@ public class DeleteCommand extends Command {
 
     private void updateEvents(Model model, Person person, List<Event> lastEventList) {
         Name name = person.getName();
-        Index[] targetIndexArrClone = targetIndexArr.clone();
-        Arrays.sort(targetIndexArrClone);
 
-        for (Index target : targetIndexArrClone) {
-            Event currEvent = lastEventList.get(target.getZeroBased());
+        for (int i = 0; i < lastEventList.size(); i++) {
+            Event currEvent = lastEventList.get(i);
             List<Name> editedParticipants = currEvent.getParticipants();
             if (editedParticipants.contains(name) && editedParticipants.size() == 1) {
                 model.deleteEvent(currEvent);
