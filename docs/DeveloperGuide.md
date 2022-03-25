@@ -251,6 +251,18 @@ The following activity diagram summarizes how to flag a client.
 
 **[COMING SOON]**
 
+#### Design considerations:
+
+**Aspect: Ease of use of flag commands:**
+
+* **Alternative 1 (current choice):** `flag` and `unflag` split into separate commands. 
+    * Pros: More intuitive to use as compared to alternative 2 for any user.
+    * Cons: More commands to test and maintain.
+
+* **Alternative 2:** Single `flag` command and use an `f/` prefix to set new flag.
+    * Pros: Only one command for both scenarios and fewer tests needed.
+    * Cons: Usage is not very intuitive to a user.
+
 ### Sort Command
 
 The `sort` command sorts clients based on the parameter provided by the user input.
@@ -281,18 +293,6 @@ The following sequence diagram shows how the `sort` command works:
 The following activity diagram summarizes how to sort all clients.
 
 **[COMING SOON]**
-
-#### Design considerations:
-
-**Aspect: Ease of use of flag commands:**
-
-* **Alternative 1 (current choice):** `flag` and `unflag` split into separate commands. 
-    * Pros: More intuitive to use as compared to alternative 2 for any user.
-    * Cons: More commands to test and maintain.
-
-* **Alternative 2:** Single `flag` command and use an `f/` prefix to set new flag.
-    * Pros: Only one command for both scenarios and fewer tests needed.
-    * Cons: Usage is not very intuitive to a user.
 
 ### \[Proposed\] Undo/redo feature
 
