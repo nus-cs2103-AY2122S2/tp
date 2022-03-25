@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandType.parseAddCommandType;
 import static seedu.address.logic.commands.CommandType.parseDeleteCommandType;
+import static seedu.address.logic.commands.CommandType.parseEditCommandType;
 import static seedu.address.logic.commands.CommandType.parseViewCommandType;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
@@ -57,7 +58,7 @@ public class AddressBookParser {
             }
             return new AddCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return parseEditCommandType(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return parseDeleteCommandType(arguments);

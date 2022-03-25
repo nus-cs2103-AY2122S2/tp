@@ -308,6 +308,10 @@ public class AddCommandTest {
 
 
         @Override
+        public void setMedical(Medical target, Medical editedContact) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void deleteMedical(Medical target) {
             throw new AssertionError("This method should not be called.");
         }

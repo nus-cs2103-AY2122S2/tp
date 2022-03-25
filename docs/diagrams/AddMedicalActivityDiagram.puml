@@ -1,0 +1,14 @@
+@startuml
+(*) --> "User enters add t/medical command"
+if "NRIC exists in MedBook" then
+  --> if "No medical record found for this patient" then
+        --> "Add medical information"
+        --> "Stores it in MedBook"
+        --> (*)
+      else
+        --> "Duplicate found, don't add"
+        --> [Ending Process] (*)
+else
+  --> "No patient found, don't add"
+  --> [Ending Process] (*)
+@enduml

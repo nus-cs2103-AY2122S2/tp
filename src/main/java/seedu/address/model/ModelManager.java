@@ -175,6 +175,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setMedical(Medical target, Medical editedMedical) {
+        requireAllNonNull(target, editedMedical);
+
+        addressBook.setMedical(target, editedMedical);
+    }
+
+    @Override
     public ObservableList<Medical> getFilteredMedicalList() {
         return filteredMedicals;
     }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.consultations.AddConsultationCommandParser;
 import seedu.address.logic.parser.consultations.DeleteConsultationCommandParser;
 import seedu.address.logic.parser.consultations.ViewConsultationCommandParser;
@@ -12,12 +13,14 @@ import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.medical.AddMedicalCommandParser;
 import seedu.address.logic.parser.medical.DeleteMedicalCommandParser;
+import seedu.address.logic.parser.medical.EditMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
 import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
+import seedu.address.logic.parser.testresult.EditTestResultCommandParser;
 import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 
@@ -65,7 +68,7 @@ public enum CommandType {
      * Returns command related to adding information to patients in Medbook.
      *
      * @param commandType user input command type
-     * @param arguments user input arguments
+     * @param arguments   user input arguments
      * @return the command based on the user input
      */
     public static Command parseAddCommandType(String commandType, String arguments) throws ParseException {
@@ -122,7 +125,30 @@ public enum CommandType {
             return new ViewTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
+    }
 
+    /**
+     * Returns command related to editing information in MedBook.
+     *
+     * @param arguments user input arguments
+     * @return the command based on the user input
+     */
+    public static Command parseEditCommandType(String arguments) throws ParseException {
+        requireNonNull(arguments);
+        switch (viewCommandType) {
+        case CONTACT:
+            throw new ParseException("To be implemented");
+        case MEDICAL:
+            return new EditMedicalCommandParser().parse(arguments);
+        case CONSULTATION:
+            throw new ParseException("To be implemented");
+        case PRESCRIPTION:
+            throw new ParseException("To be implemented");
+        case TEST:
+            return new EditTestResultCommandParser().parse(arguments);
+        default:
+            return new EditCommandParser().parse(arguments);
         }
     }
 

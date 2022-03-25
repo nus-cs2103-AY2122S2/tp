@@ -40,7 +40,7 @@ public class DeleteTestResultCommand extends Command {
         List<TestResult> lastShownList = model.getFilteredTestResultList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TEST_RESULT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TEST_RESULT_INDEX);
         }
 
         TestResult testResultToDelete = lastShownList.get(targetIndex.getZeroBased());

@@ -234,6 +234,8 @@ public interface Model {
 
     void deleteMedical(Medical medical);
 
+    void setMedical(Medical target, Medical editedMedical);
+
     /**
      * Updates the filter of the filtered medical list to filter by the given {@code predicate}. s
      * @throws NullPointerException if {@code predicate} is null.
