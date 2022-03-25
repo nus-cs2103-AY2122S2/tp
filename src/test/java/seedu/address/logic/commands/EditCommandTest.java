@@ -15,10 +15,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCandidateAtIndex;
+import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CANDIDATE;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
-import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -125,7 +125,8 @@ public class EditCommandTest {
         showCandidateAtIndex(model, INDEX_FIRST_CANDIDATE);
 
         // edit candidate in filtered list into a duplicate in address book
-        Candidate candidateInList = model.getAddressBook().getCandidateList().get(INDEX_SECOND_CANDIDATE.getZeroBased());
+        Candidate candidateInList = model.getAddressBook().getCandidateList()
+                .get(INDEX_SECOND_CANDIDATE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CANDIDATE,
                 new EditCandidateDescriptorBuilder(candidateInList).build());
 

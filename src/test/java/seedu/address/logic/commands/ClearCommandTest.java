@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
 import org.junit.jupiter.api.Test;
 

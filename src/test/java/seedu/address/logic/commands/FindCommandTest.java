@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CANDIDATES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 import static seedu.address.testutil.TypicalCandidates.CARL;
 import static seedu.address.testutil.TypicalCandidates.ELLE;
 import static seedu.address.testutil.TypicalCandidates.FIONA;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
 import java.util.Arrays;
 import java.util.Collections;

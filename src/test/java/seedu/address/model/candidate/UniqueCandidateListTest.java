@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.candidate.exceptions.DuplicateCandidateException;
 import seedu.address.model.candidate.exceptions.CandidateNotFoundException;
+import seedu.address.model.candidate.exceptions.DuplicateCandidateException;
 import seedu.address.testutil.CandidateBuilder;
 
 public class UniqueCandidateListTest {
@@ -159,7 +159,8 @@ public class UniqueCandidateListTest {
     @Test
     public void setCandidates_listWithDuplicateCandidates_throwsDuplicateCandidateException() {
         List<Candidate> listWithDuplicateCandidates = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateCandidateException.class, () -> uniqueCandidateList.setCandidates(listWithDuplicateCandidates));
+        assertThrows(DuplicateCandidateException.class, () -> uniqueCandidateList
+                .setCandidates(listWithDuplicateCandidates));
     }
 
     @Test

@@ -9,10 +9,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CourseContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
-import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.StudentIdContainsKeywordsPredicate;
 
@@ -88,7 +88,8 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " k/Amy k/computer science f/candidate", expectedFindCandidateCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  f/candidate \t", expectedFindCandidateCommand);
+        assertParseSuccess(parser,
+                "    k/Amy \t  k/computer science  \t  f/candidate \t", expectedFindCandidateCommand);
 
         // no field specified
         assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  f/ \t", expectedFindCandidateCommand);
