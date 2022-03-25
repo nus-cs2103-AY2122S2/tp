@@ -34,6 +34,7 @@ public class CompositeTemporalObservableList<T extends TemporalComparable> {
         this.scheduleItemList = FXCollections.observableArrayList();
         this.unmodifiableScheduleItemList = FXCollections.unmodifiableObservableList(scheduleItemList);
 
+        refreshCombinedList();
         attachListeners();
     }
 
