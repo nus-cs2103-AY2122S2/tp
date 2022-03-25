@@ -9,7 +9,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
@@ -81,7 +80,7 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.displayPersonForAdd()));
     }
 
     /**
@@ -90,18 +89,26 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
+        List<Tag> updatedEducations = editPersonDescriptor.getEducations().isEmpty()
+                ? personToEdit.getEducations()
+                : editPersonDescriptor.getEducations();
+        List<Tag> updatedCcas = editPersonDescriptor.getCcas().isEmpty()
+                ? personToEdit.getCcas()
+                : editPersonDescriptor.getCcas();
+        List<Tag> updatedInternships = editPersonDescriptor.getInternships().isEmpty()
+                ? personToEdit.getInternships()
+                : editPersonDescriptor.getInternships();
+        List<Tag> updatedModules = editPersonDescriptor.getModules().isEmpty()
+                ? personToEdit.getModules()
+                : editPersonDescriptor.getModules();
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        List<Tag> updatedEducation = editPersonDescriptor.getEducations().orElse(personToEdit.getEducations());
-        List<Tag> updatedInternship = editPersonDescriptor.getInternships().orElse(personToEdit.getInternships());
-        List<Tag> updatedModule = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
-        List<Tag> updatedCca = editPersonDescriptor.getCcas().orElse(personToEdit.getCcas());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedEducation, updatedInternship, updatedModule, updatedCca);
+                updatedEducations, updatedInternships, updatedModules, updatedCcas);
     }
 
     @Override
@@ -131,10 +138,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private List<Tag> educations;
-        private List<Tag> internships;
-        private List<Tag> modules;
-        private List<Tag> ccas;
+        private List<Tag> educations = new ArrayList<>();
+        private List<Tag> internships = new ArrayList<>();
+        private List<Tag> modules = new ArrayList<>();
+        private List<Tag> ccas = new ArrayList<>();
 
         public EditPersonDescriptor() {}
 
@@ -157,8 +164,11 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address,
-                    educations, internships, modules, ccas);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address)
+                    && educations.isEmpty()
+                    && internships.isEmpty()
+                    && modules.isEmpty()
+                    && ccas.isEmpty();
         }
 
         public void setName(Name name) {
@@ -194,35 +204,35 @@ public class EditCommand extends Command {
         }
 
         public void setEducations(List<Tag> tags) {
-            this.educations = Objects.requireNonNullElseGet(tags, ArrayList::new);
+            this.educations = tags;
         }
 
-        public Optional<List<Tag>> getEducations() {
-            return Optional.ofNullable(educations);
+        public List<Tag> getEducations() {
+            return educations;
         }
 
         public void setInternships(List<Tag> tags) {
-            this.internships = Objects.requireNonNullElseGet(tags, ArrayList::new);
+            this.internships = tags;
         }
 
-        public Optional<List<Tag>> getInternships() {
-            return Optional.ofNullable(internships);
+        public List<Tag> getInternships() {
+            return internships;
         }
 
         public void setModules(List<Tag> tags) {
-            this.modules = Objects.requireNonNullElseGet(tags, ArrayList::new);
+            this.modules = tags;
         }
 
-        public Optional<List<Tag>> getModules() {
-            return Optional.ofNullable(modules);
+        public List<Tag> getModules() {
+            return modules;
         }
 
         public void setCcas(List<Tag> tags) {
-            this.ccas = Objects.requireNonNullElseGet(tags, ArrayList::new);
+            this.ccas = tags;
         }
 
-        public Optional<List<Tag>> getCcas() {
-            return Optional.ofNullable(ccas);
+        public List<Tag> getCcas() {
+            return ccas;
         }
 
         @Override

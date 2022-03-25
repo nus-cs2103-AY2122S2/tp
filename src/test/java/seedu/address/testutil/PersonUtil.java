@@ -50,10 +50,18 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getEducations().ifPresent(educations -> sb.append(tagsToString(educations, PREFIX_EDUCATION)));
-        descriptor.getInternships().ifPresent(internships -> sb.append(tagsToString(internships, PREFIX_INTERNSHIP)));
-        descriptor.getModules().ifPresent(modules -> sb.append(tagsToString(modules, PREFIX_MODULE)));
-        descriptor.getCcas().ifPresent(ccas -> sb.append(tagsToString(ccas, PREFIX_CCA)));
+        descriptor.getEducations().stream().map(education -> sb.append(PREFIX_EDUCATION)
+                .append(education.tagName)
+                .append(" "));
+        descriptor.getInternships().stream().map(internship -> sb.append(PREFIX_INTERNSHIP)
+                .append(internship.tagName)
+                .append(" "));
+        descriptor.getModules().stream().map(module -> sb.append(PREFIX_MODULE)
+                .append(module.tagName)
+                .append(" "));
+        descriptor.getCcas().stream().map(cca -> sb.append(PREFIX_CCA)
+                .append(cca.tagName)
+                .append(" "));
 
         return sb.toString();
     }
