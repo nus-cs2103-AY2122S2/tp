@@ -14,6 +14,7 @@ import seedu.trackbeau.logic.parser.TrackBeauParser;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
 import seedu.trackbeau.storage.Storage;
@@ -63,6 +64,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Customer> getFilteredCustomerList() {
         return model.getFilteredCustomerList();
+    }
+
+    @Override
+    public ObservableList<Booking> getFilteredBookingList() {
+        return model.getFilteredBookingList();
     }
 
     @Override

@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
             detailsPanelPlaceholder.getChildren().add(serviceListPanel.getRoot());
             break;
         case "bookingsLabel":
-            bookingListPanel = new BookingListPanel();
+            bookingListPanel = new BookingListPanel(logic.getFilteredBookingList());
             detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
             break;
         case "statisticsLabel":
