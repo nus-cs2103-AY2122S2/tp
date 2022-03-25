@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_CARL;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -163,5 +164,11 @@ public class UniqueInterviewListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueInterviewList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void removeInterviews_throwsInterviewNotFoundException() {
+        assertThrows(InterviewNotFoundException.class, () -> uniqueInterviewList.remove(
+                new InterviewBuilder().build()));
     }
 }
