@@ -1,6 +1,8 @@
 package seedu.ibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,11 @@ public class UpdateAllCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates all products in the displayed list.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: [TAG:NEW_VALUE ...]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_CATEGORY + "bread "
+            + PREFIX_EXPIRY_DATE + "2022-02-14";
 
     public static final String MESSAGE_UPDATE_ALL_PRODUCT_SUCCESS = "All products updated.\n";
     public static final String MESSAGE_UPDATED_PRODUCT = "Updated Product: %1$s\n";

@@ -1,8 +1,8 @@
 package seedu.ibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,10 +29,10 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the product identified "
             + "by the index number(a positive integer) used in the displayed product list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX | [TAG:NEW_VALUE ...]\n"
+            + "Parameters: INDEX [TAG:NEW_VALUE ...]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "potato bread "
-            + PREFIX_EXPIRY_DATE + "2022-02-14";
+            + PREFIX_PRICE + "12.70";
 
     public static final String MESSAGE_UPDATE_PRODUCT_SUCCESS = "Updated Product: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
