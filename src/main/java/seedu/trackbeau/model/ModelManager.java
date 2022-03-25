@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.trackbeau.commons.core.GuiSettings;
 import seedu.trackbeau.commons.core.LogsCenter;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Service> services;
+    private final FilteredList<Booking> filteredBookings;
 
     /**
      * Initializes a ModelManager with the given trackBeau and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
         services = new FilteredList<>(this.trackBeau.getServiceList());
+        filteredBookings = new FilteredList<>(this.trackBeau.getBookingList());
     }
 
     public ModelManager() {
@@ -112,24 +115,37 @@ public class ModelManager implements Model {
     @Override
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
+
         trackBeau.setCustomer(target, editedCustomer);
+
     }
 
-    //=========== Filtered Customer List Accessors =============================================================
+    //=========== Bookings ================================================================================
+
+    @Override
+    public void addBooking(Booking booking) {
+        trackBeau.addBooking(booking);
+        updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
+    }
+    @Override
+    public void deleteBooking(Booking target) {
+        trackBeau.removeBooking(target);
+    }
+    //=========== Filtered Booking List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Booking} backed by the internal list of
      * {@code versionedTrackBeau}
      */
     @Override
-    public ObservableList<Customer> getFilteredCustomerList() {
-        return filteredCustomers;
+    public ObservableList<Booking> getFilteredBookingList() {
+        return filteredBookings;
     }
 
     @Override
-    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
+    public void updateFilteredBookingList(Predicate<Booking> predicate) {
         requireNonNull(predicate);
-        filteredCustomers.setPredicate(predicate);
+        filteredBookings.setPredicate(predicate);
     }
 
     //=========== Services =============================================================
@@ -166,6 +182,23 @@ public class ModelManager implements Model {
     public void updateServiceList(Predicate<Service> predicate) {
         requireNonNull(predicate);
         services.setPredicate(predicate);
+    }
+
+    //=========== Filtered Customer List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
+     * {@code versionedTrackBeau}
+     */
+    @Override
+    public ObservableList<Customer> getFilteredCustomerList() {
+        return filteredCustomers;
+    }
+
+    @Override
+    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
+        requireNonNull(predicate);
+        filteredCustomers.setPredicate(predicate);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.trackbeau.commons.core.GuiSettings;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
 
@@ -13,6 +14,7 @@ import seedu.trackbeau.model.service.Service;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
+    Predicate<Booking> PREDICATE_SHOW_ALL_BOOKINGS = unused -> true;
     Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
@@ -62,10 +64,22 @@ public interface Model {
     boolean hasCustomer(Customer customer);
 
     /**
+     * Deletes the given booking.
+     * The booking must exist in trackBeau.
+     */
+    void deleteBooking(Booking target);
+
+    /**
      * Deletes the given customer.
      * The customer must exist in trackBeau.
      */
     void deleteCustomer(Customer target);
+
+    /**
+     * Adds the given booking.
+     * {@code booking} must not already exist in trackBeau.
+     */
+    void addBooking(Booking booking);
 
     /**
      * Adds the given customer.
@@ -79,6 +93,15 @@ public interface Model {
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackBeau.
      */
     void setCustomer(Customer target, Customer editedCustomer);
+
+    /** Returns an unmodifiable view of the filtered booking list */
+    ObservableList<Booking> getFilteredBookingList();
+
+    /**
+     * Updates the filter of the filtered booking list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBookingList(Predicate<Booking> predicate);
 
     /** Returns an unmodifiable view of the filtered customer list */
     ObservableList<Customer> getFilteredCustomerList();
