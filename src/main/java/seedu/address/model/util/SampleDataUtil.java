@@ -31,7 +31,7 @@ public class SampleDataUtil {
     public static Candidate[] getSamplePersons() {
         return new Candidate[] {
             new Candidate(new StudentId("E0123456"), new Name("Alex Yeoh"), new Phone("87438807"),
-                new Email("E0123456@u.nus.edu"), new Course("Business Analytics"), new Seniority(1)
+                new Email("E0123456@u.nus.edu"), new Course("Business Analytics"), new Seniority(1),
                     getTagSet("friends"), PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("1,2,3,4,5")),
             new Candidate(new StudentId("E0234567"), new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("E0234567@u.nus.edu"), new Course("Computer Engineering"), new Seniority(2),
