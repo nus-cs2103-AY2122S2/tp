@@ -232,6 +232,7 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -263,4 +264,5 @@ public class ModelManager implements Model {
 
         addressBook.setTask(target, editedTask);
     }
+
 }
