@@ -138,7 +138,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.add(e);
     }
 
-
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
      * {@code target} must exist in the address book.

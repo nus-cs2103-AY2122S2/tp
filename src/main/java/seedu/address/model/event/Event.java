@@ -46,6 +46,10 @@ public class Event implements Comparable<Event> {
         return dateTime;
     }
 
+    public boolean isParticipantsEmpty() {
+        return participants.isEmpty();
+    }
+
     /**
      * Returns true if both events have the same identity fields.
      */
