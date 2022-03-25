@@ -4,7 +4,10 @@ title: User Guide
 ---
 
 ### Table of Contents
+* [**Introduction**](#introduction)
+* [**User guide navigation**](#user-guide-navigation)
 * [**Quick Start**](#quick-start)
+* [**Commands**](#commands)
 * [**Features**](#features)
   * [Adding a show: `add`](#adding-a-show-add)
   * [Listing all shows: `list`](#listing-all-shows-list)
@@ -70,20 +73,43 @@ Some example commands you can try:
 
 6. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
-7. For details of each command, please proceed to the [Features](#features) section.
+7. For details of each command, please proceed to the [Commands](#commands) section below.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
-## Features
+## Commands
+
+Let us look at what makes up a command:
+
+| Component    | Description                                                           |
+|--------------|-----------------------------------------------------------------------|
+| Command Word | The keyword representing the action of the command                    |
+| Prefix       | The keyword to recognise command parameters                           |
+| Parameters   | Follows directly behind a prefix and contains the corresponding value |
+
+For exmaple, a command to find a show could look like this:
+
+`find` `n/` `Django` 
+
+In the example above , `find` is the **command word** while `n\` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
+
+| Component | Prefix | Description                                           |
+|-----------|--------|-------------------------------------------------------|
+| INDEX     | None   | The index of the show as shown in the show panel list |
+| NAME      | n/     | The name to use for a show                            |
+| STATUS    | s/     | The status to label for a show                        |
+| TAG       | t/     | The tag to label a show                               |
+| COMMENT   | c/     | The comment to describe a show                        |
+| RATE      | r/     | The rating to give a show                             |
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/<NAME>`, `<NAME>` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/<NAME>`, `<NAME>` is a parameter which can be used as `add n/Sex and the City`.
 
 * Items in square brackets are optional.<br>
   e.g `n/<NAME> s/<STATUS> [t/<TAG>]` can be used as `n/ReZero s/completed t/Anime` or as `n/ReZero s/completed`.
@@ -91,20 +117,31 @@ Some example commands you can try:
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/<TAG>]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
 
+* A whitespace must be included before every prefix.<br>
+  e.g. `n/Knives Out t/Suspense` is acceptable but `n/Knives Outt/Suspense` is not.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/<NAME> [t/<TAG>]`, `[t/<TAG>] n/<NAME>` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `n/You n/Me`, only `n/Me` will be taken.
+* All **names must be unique** and duplicates will be ignored.<br>
+  e.g. if you try to add `n/Inception` into the show list that already contains that show, there will be a message telling you that this show already exists in the list.
+
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `n/Batman n/Superman`, only `n/Superman` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `list` ) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
+
+* The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s `int` data type. On top of that, the index should be within the bounds of the show list.<br>
+  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5. 
 
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+## Features
 
 ### Adding a show: `add`
 
@@ -287,5 +324,6 @@ _Details coming soon ..._
 | **Parameter**                      | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)                                                                                          |
 | **Prefix**                         | Characters used to identify the following parameter (e.g. `n/` is the prefix for the parameter `NAME`)                                                                                 |
 | **JavaFX**                         | JavaFX is a set of Java graphics libraries for creating Java GUI applications                                                                                                          |
+| **int**                            | A primitive data type of Java that has the maximum value of (2^31)-1 and the minimum value of -(2^31)                                                                                  |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
