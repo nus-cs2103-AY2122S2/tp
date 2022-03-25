@@ -58,8 +58,7 @@ public class AddTransactionParser implements Parser<AddTransactionCommand> {
             transactionFields.add(field);
         }
 
-        Transaction transaction = new Transaction(transactionFields);
-        return new AddTransactionCommand(index, transaction);
+        return new AddTransactionCommand(index, (String identifier) -> new Transaction(transactionFields, identifier));
     }
 
     /**

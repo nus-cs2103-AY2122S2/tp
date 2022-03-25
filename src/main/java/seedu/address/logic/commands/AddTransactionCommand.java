@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import java.util.List;
+import java.util.function.Function;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -39,19 +40,19 @@ public class AddTransactionCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
 
     private final Index index;
-    private final Transaction transaction;
+    private final Function<String, Transaction> transactionProducer;
 
     /**
      * Constructs AddTransaction command with the specified index
      * of the person and the transaction.
      *
      * @param index
-     * @param transaction
+     * @param transactionProducer</String,>
      */
-    public AddTransactionCommand(Index index, Transaction transaction) {
-        requireAllNonNull(index, transaction);
+    public AddTransactionCommand(Index index, Function<String, Transaction> transactionProducer) {
+        requireAllNonNull(index, transactionProducer);
         this.index = index;
-        this.transaction = transaction;
+        this.transactionProducer = transactionProducer;
     }
 
     @Override
@@ -66,18 +67,11 @@ public class AddTransactionCommand extends Command {
         Person person = lastShownList.get(index.getZeroBased());
         String personIdentifier = person.getEmail().getValue();
 
-        Transaction editedTransaction = transaction.setIdentifier(personIdentifier);
+        Transaction transaction = transactionProducer.apply(personIdentifier);
 
-        model.addTransaction(editedTransaction);
+        model.addTransaction(transaction);
         model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedTransaction.toString()));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddTransactionCommand // instanceof handles nulls
-                && transaction.equals(((AddTransactionCommand) other).transaction));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.toString()));
     }
 }

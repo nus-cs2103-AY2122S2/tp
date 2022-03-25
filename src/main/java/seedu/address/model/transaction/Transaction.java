@@ -27,7 +27,7 @@ public class Transaction implements Serializable {
      * Person constructor
      * @param fields A collection of all the person's attributes
      */
-    public Transaction(Collection<TransactionField> fields) {
+    public Transaction(Collection<TransactionField> fields, String personIdentifier) {
         requireAllNonNull(fields);
 
         // Add fields.
@@ -41,26 +41,11 @@ public class Transaction implements Serializable {
             checkArgument(this.fields.containsKey(p), "All required fields must be given.");
         }
 
-        // Set dummy identifier
-        this.personIdentifier = "dummy@gmail.com";
-    }
-
-    public Transaction(HashMap<Prefix, TransactionField> fields, String personIdentifier) {
-        requireAllNonNull(fields);
-
-        // Add fields.
-        this.fields.putAll(fields);
-
-        // Set person identifier
         this.personIdentifier = personIdentifier;
     }
 
     public Transaction(Transaction otherTransaction) {
-        this(otherTransaction.getFields());
-    }
-
-    public Transaction setIdentifier(String personIdentifier) {
-        return new Transaction( fields, personIdentifier);
+        this(otherTransaction.getFields(), otherTransaction.getIdentifier());
     }
 
     /**
@@ -174,6 +159,10 @@ public class Transaction implements Serializable {
         }
 
         return builder.toString();
+    }
+
+    public boolean hasIdentifier(String identifier) {
+        return this.personIdentifier.equals(identifier);
     }
 }
 
