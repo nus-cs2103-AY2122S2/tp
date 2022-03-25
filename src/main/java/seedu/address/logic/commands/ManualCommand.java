@@ -74,9 +74,11 @@ public class ManualCommand extends Command {
         case HistoryCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_HISTORY_COMMAND);
 
+        case UndoCommand.COMMAND_WORD:
+            return new CommandResult(ManualMessages.MANUAL_MESSAGE_UNDO_COMMAND);
+
         default:
             throw new CommandException(ManualMessages.MANUAL_MESSAGE_UNKNOWN_COMMANDS);
         }
-
     }
 }
