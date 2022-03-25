@@ -172,14 +172,11 @@ Additionally, it implements the following operations:
 * `getCommandResult(...)` - Returns a `CommandResult` with the appropriate feedback depending on if any new modules are added.
 
 Below is a sequence diagram showing the overview of how add modules works:
-![AddModuleSequenceDiagram](images/AddModuleSequenceDiagram.png)
 
-In `AddCommand#execute()`, the internal `createEditedPerson(Person personToEdit, List<Module> modulesToAdd)` is executed. Each `Person` has a `Set<Module>` that represents the Collection of `Modules` associated with that `Person`.
-Hence, we utilize the behaviour of the `Set` data structure to both store and add modules to a person, taking advantage of the fact that Sets contain unique, non-duplicated elements.
+[TODD: AddModuleSequenceDiagram]
 
-Since `Set` is an interface in Java, we instantiate the Set of Modules a person is taking as a `HashSet`.
-
-We then use `HashSet.addAll()` to add the List of New Modules parsed from user input, into the Set of existing Modules. This operation automatically adds any new unique Modules while ignoring Modules that already exist, without requiring any further duplicate-checking on our part.
+Each `Person` has a `Set<Module>` that represents the Collection of `Modules` associated with that `Person`.
+Hence, we utilize the behaviour of the `Set` data structure to both store and add modules to a person, automatically adding any new unique Modules while ignoring Modules that already exist, without requiring any further duplicate-checking on our part.
 
 While this underlying implementation works, we need to capture exactly what new modules were added on top of existing modules, so that we can display a meaningful feedback to our user.
 This can be achieved using the `hasNewModules()` and `getNewModules()` internal helper functions.
