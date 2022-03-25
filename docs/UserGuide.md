@@ -29,7 +29,8 @@ AgentSee is a **desktop app for managing house selling clients and for quick fil
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the AgenSee contacts.
+   * **`addbuyer`**`n/John Doe p/98765432: 
+   Adds a client named `John Doe` to the AgenSee contacts.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -69,38 +70,31 @@ AgentSee is a **desktop app for managing house selling clients and for quick fil
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-
-### Adding a client: `add`
-
-Adds a client to the contact list.
-
-Format: `add n/NAME d/DESCRIPTION p/PHONE_NUMBER e/EMAIL a/ADDRESS r/REMARK [t/TAG]...`
-
-Note: Must include n/ d/ p/ e/ a/ r/, t/ is optional
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe d/A student in NUS p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Forgetful`
-* `add n/Betsy Crowe d/From Malaysia t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/Dangerous t/criminal`
-
 ### Adding a buyer: `addbuyer`
 
 Adds a client as a Buyer to the contact list.
 
-Format: `addbuyer n/NAME d/DESCRIPTION p/PHONE_NUMBER e/EMAIL a/ADDRESS r/REMARK [t/TAG]...
+Format: `addbuyer n/NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]...
 
 Examples:
-* `add n/Yu Qi d/A baller p/98765432 e/johnd@example.com a/Tampines street 66, block 123, #01-01 r/Cool`
-* `add n/Janald d/From Singapore t/friend e/betsycrowe@example.com a/Bishan Ave 1, #04-12 p/1234567 r/Smart t/criminal`
+* `addbuyer n/Yu Qi p/98765432
+* `addbuyer n/Janald t/friend t/criminal`
+
+### Adding a seller: `addseller`
+
+Adds a client as a Seller to the contact list.
+
+Format: `addseller n/NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]...
+
+Examples:
+* `addseller n/Yu Qi p/98765432
+* `addseller n/Janald t/friend t/criminal`
 
 ### Listing all clients : `list`
 
@@ -178,8 +172,6 @@ Finds clients whose selected field contain any of the given keywords.
 Format: `find field/KEYWORD1 [MORE_KEYWORDS]`
 
 * The fields are:
-  * address `a/`
-  * email `e/`
   * name `n/`
   * phone `p/`
 * The search is **case-insensitive**. e.g `hans` will match `Hans`
@@ -191,7 +183,6 @@ Format: `find field/KEYWORD1 [MORE_KEYWORDS]`
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-* `find e/alex david` returns `alex123@gmail.com`, `david456@abc.com`<br>
 
 ### Creating an appointment: `appointment`
 
