@@ -155,7 +155,7 @@ public class ScheduleCommandTest {
         LocalDateTime interviewDateTime = ON_WEEKEND;
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FOURTH_PERSON, interviewDateTime);
 
-        assertCommandFailure(scheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
+        assertCommandFailure(scheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
     }
 
     @Test
