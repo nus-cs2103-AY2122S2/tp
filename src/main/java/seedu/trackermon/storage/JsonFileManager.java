@@ -8,8 +8,7 @@ import java.nio.file.StandardCopyOption;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileFilter;
-//import javax.swing.filechooser.FileSystemView;
+import javax.swing.filechooser.FileFilter;s
 
 public class JsonFileManager {
 
@@ -20,16 +19,15 @@ public class JsonFileManager {
     private JFileChooser jfc;
 
     /**
-     * Creates a {@code FileManager} that handles import and export.
+     * Creates a {@code FileManager} that handles import and export without baseFileName.
      */
-
     public JsonFileManager() {
         this("");
     }
 
     /**
      * Creates a {@code FileManager} that handles import and export.
-     * @param baseFileName
+     * @param baseFileName default file name in JFileChooser
      */
     public JsonFileManager(String baseFileName) {
         try {
@@ -39,16 +37,6 @@ public class JsonFileManager {
             e.printStackTrace();
         }
         jfc = new JFileChooser();
-
-        // Check if more people face freezing issues when clicking on Network drive
-        //        jfc = new JFileChooser(new FileSystemView() {
-        //            @Override
-        //            public File createNewFolder(File containingDir) throws IOException {
-        //                File folder = new File(containingDir, "New Folder");
-        //                folder.mkdir();
-        //                return folder;
-        //            }
-        //        });
 
         if (!baseFileName.isBlank()) {
             baseFileName = (baseFileName.endsWith(".json")) ? baseFileName : baseFileName + ".json";

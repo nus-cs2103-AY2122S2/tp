@@ -16,15 +16,16 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Imported data file.";
     public static final String MESSAGE_FAIL = "Data file import failed.";
     public static final String MESSAGE_ABORT = "Import data aborted.";
-    public static final String MESSAGE_FAIL_WRONG_FILETYPE = "Incorrect file type selected. "
-            + "Only JSON(.json) files can be imported into Trackermon!";
+    public static final String MESSAGE_MACOS_UNSUPPORTED = "Export is currently not supported on MacOS.";
 
     @Override
     public CommandResult execute(Model model) {
+        if (System.getProperty("os.name").contains("Mac")) {
+            return new CommandResult(MESSAGE_MACOS_UNSUPPORTED);
+        }
+
         requireNonNull(model);
-
         JsonFileManager jfm = new JsonFileManager();
-
         int result = jfm.importFile(model.getShowListFilePath());
 
         if (result == JsonFileManager.SUCCESS) {
