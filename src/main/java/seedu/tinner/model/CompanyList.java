@@ -9,7 +9,7 @@ import seedu.tinner.model.company.Company;
 import seedu.tinner.model.company.UniqueCompanyList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the company-list level
  * Duplicates are not allowed (by .isSameCompany comparison)
  */
 public class CompanyList implements ReadOnlyCompanyList {
@@ -61,7 +61,7 @@ public class CompanyList implements ReadOnlyCompanyList {
     //// company-level operations
 
     /**
-     * Returns true if a company with the same identity as {@code company} exists in the address book.
+     * Returns true if a company with the same identity as {@code company} exists in the company list.
      */
     public boolean hasCompany(Company company) {
         requireNonNull(company);
@@ -69,8 +69,8 @@ public class CompanyList implements ReadOnlyCompanyList {
     }
 
     /**
-     * Adds a company to the address book.
-     * The company must not already exist in the address book.
+     * Adds a company to the company list.
+     * The company must not already exist in the company list.
      */
     public void addCompany(Company p) {
         companies.add(p);
@@ -78,9 +78,9 @@ public class CompanyList implements ReadOnlyCompanyList {
 
     /**
      * Replaces the given company {@code target} in the list with {@code editedCompany}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the company list.
      * The company identity of {@code editedCompany} must not be the same as another existing company
-     * in the address book.
+     * in the company list.
      */
     public void setCompany(Company target, Company editedCompany) {
         requireNonNull(editedCompany);
@@ -90,7 +90,7 @@ public class CompanyList implements ReadOnlyCompanyList {
 
     /**
      * Removes {@code key} from this {@code CompanyList}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the company list.
      */
     public void removeCompany(Company key) {
         companies.remove(key);

@@ -47,6 +47,16 @@ public class Deadline {
     }
 
     /**
+     * Returns true if the deadline is within a week from the current {@code LocalDateTime}.
+     *
+     * @return true if is within a week from the current date.
+     */
+    public boolean isOneWeekAway() {
+        LocalDateTime oneWeekAway = LocalDateTime.now().plusDays(7);
+        return !this.value.isBefore(LocalDateTime.now()) && oneWeekAway.isAfter(this.value);
+    }
+
+    /**
      * Returns true if a given string, when parsed into {@code LocalDateTime} is after the current time.
      *
      * @param test User input to be tested.
