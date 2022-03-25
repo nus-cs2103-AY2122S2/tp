@@ -162,8 +162,9 @@ Examples:
 
 ### Locating clients by name: `find`
 
-Finds clients whose names contain any of the given keywords.
-=======
+#### Finds clients whose names contain any of the given keywords.
+
+
 ### Locating clients: `find`
 
 Finds clients whose selected field contain any of the given keywords.
