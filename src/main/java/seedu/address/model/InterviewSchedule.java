@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
-
 import java.util.List;
 
 import javafx.collections.ObservableList;
