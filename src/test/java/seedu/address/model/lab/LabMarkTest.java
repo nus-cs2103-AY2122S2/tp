@@ -16,7 +16,7 @@ public class LabMarkTest {
     }
 
     @Test
-    public void constructor_invalidLabScore_throwsIllegalArgumentException() {
+    public void constructor_invalidLabMark_throwsIllegalArgumentException() {
         String invalidMark = "A";
         assertThrows(IllegalArgumentException.class, () -> new LabMark(invalidMark));
     }

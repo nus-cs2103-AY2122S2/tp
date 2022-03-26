@@ -52,7 +52,7 @@ public class LabMark {
      * Returns true if the marks have not been initialized.
      */
     public boolean isEmpty() {
-        return this.marks.equals(Optional.empty());
+        return marks.isPresent();
     }
 
     /**
@@ -68,7 +68,7 @@ public class LabMark {
     }
 
     /**
-     * Returns true if both LabScores have scores with the same value.
+     * Returns true if both LabMarks have marks with the same value.
      */
     @Override
     public boolean equals(Object other) {

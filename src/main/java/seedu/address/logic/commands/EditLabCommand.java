@@ -59,9 +59,8 @@ public class EditLabCommand extends Command {
      * @param newStatus The new LabStatus of the Lab
      * @param newMark The new LabMark of the Lab
      */
-    public EditLabCommand(Index index, int labNumber, LabStatus newStatus, LabMark newMark)
-            throws IllegalArgumentException {
-        requireAllNonNull(index, labNumber, newStatus);
+    public EditLabCommand(Index index, int labNumber, LabStatus newStatus, LabMark newMark) {
+        requireAllNonNull(index, labNumber, newStatus, newMark);
         this.index = index;
         this.labNumber = labNumber;
         this.newStatus = newStatus;
