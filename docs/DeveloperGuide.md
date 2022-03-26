@@ -93,11 +93,11 @@ The developer guide allows developers who want to work on Trackermon to gain a b
 
 ### Developer guide navigation
 
-| Syntax                                                                             | Description                             |
-|------------------------------------------------------------------------------------|-----------------------------------------|
-| <div markdown="span" class="alert alert-warning">:bulb: **Tip:**</div>             | A small but useful piece of information |
-| <div markdown="span" class="alert alert-info">:information_source: **Note:**</div> | Additional information                  |
-| <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**</div>   | Important information to take note      |
+| Syntax                                                                    | Description                             |
+|---------------------------------------------------------------------------|-----------------------------------------|
+| <div markdown="span" class="alert alert-warning">:bulb: </div>            | A small but useful piece of information |
+| <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                  |
+| <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to take note      |
 
 ---
 
