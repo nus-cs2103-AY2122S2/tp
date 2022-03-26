@@ -63,7 +63,7 @@ public class JsonAdaptedProfessor extends JsonAdaptedPerson {
     @Override
     public Professor toModelType(UniBook uniBook) throws IllegalValueException {
         return new Professor(getModelName(), getModelPhone(), getModelEmail(),
-                getModelTags(), getModelOffice(), getModelModules(uniBook));
+            getModelTags(), getModelOffice(), getModelModules(uniBook));
     }
 
 }
