@@ -52,7 +52,7 @@ public class LabMark {
      * Returns true if the marks have not been initialized.
      */
     public boolean isEmpty() {
-        return marks.isPresent();
+        return !marks.isPresent();
     }
 
     /**
