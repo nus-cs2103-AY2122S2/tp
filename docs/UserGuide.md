@@ -342,7 +342,7 @@ Examples:
 Lists all appointments from a starting time to an ending time inclusive of both ends of the range.
 It will list all appointments that contain any sub-range of the provided period.
 
-Format: `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME`
+Format: `appointmentsbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
 * The starting time **must be before** the ending time.
 * The `STARTDATE` parameter denotes the *starting date* of the period.
@@ -351,6 +351,10 @@ Format: `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME`
 * The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
 * Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
+* If `STARTDATE` is specified without `STARTTIME`, it defaults to `00:00` of `STARTDATE`.
+* If `STARTTIME` is specified without `STARTDATE`, it defaults to `STARTTIME` of today.
+* If `ENDDATE` is specified without `ENDTIME`, it defaults to `23:59` of `ENDDATE`.
+* If `ENDTIME` is specified, then `ENDDATE` must be specified.
 
 Example:
 * `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
@@ -364,7 +368,7 @@ Example:
 Lists all empty slots in the schedule of a certain minimum duration, within the specified starting time to ending time.
 An appointment of the specified minimum duration can be inserted into each of the listed slots without causing any overlapping appointments in the schedule.
 
-Format: `freebetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME l/DURATION`
+Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
 * The starting time **must be before** the ending time.
 * The `STARTDATE` parameter denotes the *starting date* of the period.
@@ -373,6 +377,10 @@ Format: `freebetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME l/DURATION`
 * The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
 * Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
+* If `STARTDATE` is specified without `STARTTIME`, it defaults to `00:00` of `STARTDATE`.
+* If `STARTTIME` is specified without `STARTDATE`, it defaults to `STARTTIME` of today.
+* If `ENDDATE` is specified without `ENDTIME`, it defaults to `23:59` of `ENDDATE`.
+* If `ENDTIME` is specified, then `ENDDATE` must be specified.
 * The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
 
 Example:
@@ -535,8 +543,8 @@ Action | Format, Examples
 **List Appointments** | `listappointments`
 **Delete Appointment** | `deleteappointment INDEX`<br> e.g., `deleteappointment 2`
 **Edit Appointment** | `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappointment 2 n/Call Juliet t/13:45`
-**List Appointments Within Period** | `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
-**List Available Slots Within Period*** | `freebetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME l/DURATION` <br> e.g. `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60`
+**List Appointments Within Period** | `appointmentsbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
+**List Available Slots Within Period*** | `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60`
 **Help** | `help`
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
