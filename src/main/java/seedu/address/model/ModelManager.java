@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -163,6 +164,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setGroup(Group target, Group editedGroup) {
+        requireAllNonNull(target, editedGroup);
+        addressBook.setGroup(target, editedGroup);
+    }
+
+    @Override
     public void assignPerson(Person person, Group group) {
         addressBook.assignPerson(person, group);
     }
@@ -170,6 +177,23 @@ public class ModelManager implements Model {
     @Override
     public void deassignPerson(Person person, Group group) {
         addressBook.deassignPerson(person, group);
+    }
+
+    @Override
+    public Group getGroup(Group groupToGet) {
+        requireNonNull(groupToGet);
+
+        try {
+            for (int i = 0; i < filteredGroups.size(); i++) {
+                System.out.println(filteredGroups.get(i));
+                if (filteredGroups.get(i).equals(groupToGet)) {
+                    return filteredGroups.get(i);
+                }
+            }
+        } catch (GroupNotFoundException e) {
+            System.out.println("Group is not found in the list.");
+        }
+        return null;
     }
 
     //=========== Filtered Person List Accessors =============================================================
