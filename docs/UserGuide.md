@@ -351,9 +351,10 @@ Format: `appointmentsbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTI
 * The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
 * Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `STARTDATE` is specified without `STARTTIME`, it defaults to `00:00` of `STARTDATE`.
-* If `STARTTIME` is specified without `STARTDATE`, it defaults to `STARTTIME` of today.
-* If `ENDDATE` is specified without `ENDTIME`, it defaults to `23:59` of `ENDDATE`.
+* If `STARTTIME` is unspecified, it defaults to `00:00`.
+* If `STARTDATE` is unspecified, it defaults to today.
+* If `ENDDATE` is unspecified, there will be no upper limit to the appointments listed.
+* If `ENDTIME` is unspecified, it defaults to `23:59`.
 * If `ENDTIME` is specified, then `ENDDATE` must be specified.
 
 Example:
@@ -377,9 +378,10 @@ Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/EN
 * The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
 * Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `STARTDATE` is specified without `STARTTIME`, it defaults to `00:00` of `STARTDATE`.
-* If `STARTTIME` is specified without `STARTDATE`, it defaults to `STARTTIME` of today.
-* If `ENDDATE` is specified without `ENDTIME`, it defaults to `23:59` of `ENDDATE`.
+* If `STARTTIME` is unspecified, it defaults to `00:00`.
+* If `STARTDATE` is unspecified, it defaults to today.
+* If `ENDDATE` is unspecified, there will be no upper limit to the appointments listed.
+* If `ENDTIME` is unspecified, it defaults to `23:59`.
 * If `ENDTIME` is specified, then `ENDDATE` must be specified.
 * The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
 
