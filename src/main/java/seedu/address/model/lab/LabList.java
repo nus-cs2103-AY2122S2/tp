@@ -180,6 +180,12 @@ public class LabList implements Iterable<Lab> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns true if the {@code internalList} is empty and false otherwise.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
     @Override
     public Iterator<Lab> iterator() {
         return internalList.iterator();
