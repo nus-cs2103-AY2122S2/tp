@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-### Table of Contents
+## Table of Contents
 * [**Introduction**](#introduction)
 * [**User guide navigation**](#user-guide-navigation)
 * [**Quick start**](#quick-start)
@@ -89,7 +89,7 @@ Let us look at what makes up a command:
 | Prefix       | The keyword to recognise command parameters                           |
 | Parameters   | Follows directly behind a prefix and contains the corresponding value |
 
-For exmaple, a command to find a show could look like this:
+For example, a command to find a show could look like this:
 
 `find` `n/` `Django` 
 
@@ -196,7 +196,7 @@ A show can have any number of tags (including 0)
 
 **Format (General Find):** `find KEYWORD`
 
-Example & Output: `find attack on titan`
+**Example & Output:** `find attack on titan`
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
@@ -207,27 +207,43 @@ Example & Output: `find attack on titan`
 * `find` must be followed with a space before entering the `KEYWORD`.
 * The `KEYWORD` **can be a word or number** such as hero, S1,...
 * The `KEYWORD` must contain **at least one word** and it **must not be empty**.
-* `find attack on titan` displays all the shows in the list that contain the keyword `attack`, `on` or `titan`, whether it is a name, status or tag.
+* `find attack on titan` displays all the shows in the list that contain the keywords `attack`, `on` or `titan`, whether it is a name, status or tag.
 
 </div>
 
-**Precise Find** Finds shows in Trackermon by matching the user's input across name, status and tag parameters with prefixes.
+**Description (Precise Find):** Searching for a show across specific parameters? Find shows containing the search words based on [prefix](#command-structure).
 
-Format: `find n/[NAME] s/[STATUS] t/[TAG]`
-* **Within a single prefix**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all keywords that are input by the user in the specific prefix.
-* **Across multiple prefixes**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all the keywords across all prefixes.
-* There must be at **least one prefix field** and it **must not be empty**.
+**Format (Precise Find):** `find n/[NAME] s/[STATUS] t/[TAG]`
 
-Examples:
-* `find n/shingeki s/watching t/seinen` displays all the shows in the Trackermon's show list that contain **shingeki** in NAME, **watching** in STATUS, and **seinen** in TAG. [put image here after ui update]
-* `find n/Shutter Island s/watching` displays all the shows in the Trackermon's show list that contains **Shutter Island** in NAME, and **watching** in STATUS. [put image here after ui update]
+**Example & Output:** `find n/Shutter Island`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
+**Example & Output:** `find n/Django s/completed t/Action`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about precise find:**<br>
+* **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an **AND** search is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
+* There must be at **least one [prefix](#command-structure) field** and it **must not be empty**.
+* `find n/Shutter Island` displays all the shows in the Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
+* `find n/Django s/completed t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, and **Action** in the `TAG` parameter.
+
+</div>
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
-Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `shing` will match `shingeki`.
+Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
 </div>
 
-<div markdown="span" class="alert alert-danger">:exclamation: **Caution:**
-find `find n/shingeki n/no n/2` does not mean `find n/shingeki no 2` The former will only find show names that match with **2**(as mentioned in [features](#features)) while the latter will find all show names that match **shingeki, no and 2**. This applies across the name and tag parameters.
+
+<div markdown="block" class="alert alert-danger">:exclamation:
+
+**Caution: Multiple of the same prefixes:**<br>
+* find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2**(as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
+* find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
+
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
