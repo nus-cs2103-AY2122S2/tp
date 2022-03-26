@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_NAME_NUS_FINTECH_SOCIETY = "NUS Fintech Society";
     public static final String VALID_GROUP_NAME_NUS_DATA_SCIENCE_SOCIETY = "NUS Data Science Society";
 
+    public static final String VALID_TASK_NAME_NUS_FINTECH_SOCIETY = "Meeting";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -56,6 +59,8 @@ public class CommandTestUtil {
             + VALID_GROUP_NAME_NUS_FINTECH_SOCIETY;
     public static final String GROUP_DESC_NUS_DATA_SCIENCE_SOCIETY = " " + PREFIX_GROUP_NAME
             + VALID_GROUP_NAME_NUS_DATA_SCIENCE_SOCIETY;
+
+    public static final String TASK_DESC_NUS_FINTECH_SOCIETY = " " + PREFIX_TASK + VALID_TASK_NAME_NUS_FINTECH_SOCIETY;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
