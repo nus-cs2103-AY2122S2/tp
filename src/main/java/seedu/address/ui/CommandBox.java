@@ -86,7 +86,7 @@ public class CommandBox extends UiPart<Region> {
             setPreviousCommand();
         } else if (event.getCode() == KeyCode.DOWN) {
             setNextCommand();
-        } else if (event.getCode() == KeyCode.TAB) {
+        } else if (event.getCode() == KeyCode.CONTROL) {
             autocomplete(commandTextField.getText());
         }
     }
@@ -106,7 +106,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void autocomplete(String input) {
-        String[] values = input.split("[ |]");
+        String[] values = input.split("[ |]"); // splits on spaces and '|' pipe delimiters
         String last = values[values.length - 1];
 
         if (!commands.contains(last)) {
@@ -122,31 +122,32 @@ public class CommandBox extends UiPart<Region> {
             }
 
             commandTextField.setText(input.substring(0, input.length() - last.length()) + completed);
+            commandTextField.end();
         }
     }
 
+    // Levenshtein distance (matrix size bounded by length of str2 aka the one of the program commands)
     private int editDistance(String str1, String str2) {
-        int len1 = str1.length();
-        int len2 = str2.length();
-        int [][]dp = new int[2][len1 + 1];
+        int m = str1.length();
+        int n = str2.length();
+        int[][] dp = new int[2][n + 1];
 
-        for (int i = 0; i <= len1; i++) {
+        for (int i = 0; i <= n; i++) {
             dp[0][i] = i;
         }
 
-        for (int i = 1; i <= len2; i++) {
-            for (int j = 0; j <= len1; j++) {
+        for (int i = 1; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
                 if (j == 0) {
                     dp[i % 2][j] = i;
-                } else if (str1.charAt(j - 1) == str2.charAt(i - 1)) {
-                    dp[i % 2][j] = dp[(i - 1) % 2][j - 1];
                 } else {
-                    dp[i % 2][j] = 1 + Math.min(dp[(i - 1) % 2][j], Math.min(dp[i % 2][j - 1], dp[(i - 1) % 2][j - 1]));
+                    dp[i % 2][j] = Math.min(dp[(i - 1) % 2][j - 1] + (str1.charAt(i - 1) == str2.charAt(j - 1) ? 0 : 1),
+                            Math.min(dp[i % 2][j - 1] + 1, dp[(i - 1) % 2][j] + 1));
                 }
             }
         }
 
-        return dp[len2 % 2][len1];
+        return dp[m % 2][n];
     }
 
     /**
