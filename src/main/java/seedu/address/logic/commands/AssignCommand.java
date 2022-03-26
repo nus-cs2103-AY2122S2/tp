@@ -15,6 +15,9 @@ import seedu.address.model.student.Student;
 public class AssignCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
+    public static final String COMMAND_DESCRIPTION = "Assign a student to a lesson";
+    public static final String SHORTENED_COMMAND_WORD = "";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student to a lesson\n"
             + "Parameters: "
             + PREFIX_STUDENT + " STUDENT_ID "
@@ -60,4 +63,5 @@ public class AssignCommand extends Command {
                 String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
                 true, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
+
 }

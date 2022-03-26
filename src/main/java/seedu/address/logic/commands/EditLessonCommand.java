@@ -33,6 +33,8 @@ public class EditLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "editlesson";
     public static final String SHORTENED_COMMAND_WORD = "el";
+    public static final String COMMAND_DESCRIPTION = "Edit a lesson";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lesson from the list of lessons "
             + "\n"

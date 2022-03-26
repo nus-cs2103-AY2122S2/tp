@@ -14,6 +14,8 @@ public class FindLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "findlessons";
     public static final String SHORTENED_COMMAND_WORD = "fl";
+    public static final String COMMAND_DESCRIPTION = "Find lessons";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all lessons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

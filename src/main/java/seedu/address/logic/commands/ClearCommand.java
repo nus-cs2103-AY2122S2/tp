@@ -11,7 +11,9 @@ import seedu.address.model.StudentBook;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Student book has been cleared!";
+    public static final String COMMAND_DESCRIPTION = "Assign a student to a lesson";
+    public static final String SHORTENED_COMMAND_WORD = "";
+    public static final String MESSAGE_SUCCESS = "TeachWhat! has been cleared!";
 
 
     @Override
@@ -20,4 +22,5 @@ public class ClearCommand extends Command {
         model.setStudentBook(new StudentBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
 }

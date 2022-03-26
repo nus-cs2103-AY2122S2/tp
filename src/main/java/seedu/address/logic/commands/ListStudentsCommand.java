@@ -12,6 +12,7 @@ public class ListStudentsCommand extends Command {
 
     public static final String COMMAND_WORD = "liststudents";
     public static final String SHORTENED_COMMAND_WORD = "ls";
+    public static final String COMMAND_DESCRIPTION = "List students";
 
     public static final String MESSAGE_SUCCESS = "Listed all students";
 
@@ -22,4 +23,5 @@ public class ListStudentsCommand extends Command {
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_SUCCESS, ViewTab.STUDENT);
     }
+
 }
