@@ -6,12 +6,12 @@ title: User Guide
 ### Table of Contents
 * [**Introduction**](#introduction)
 * [**User guide navigation**](#user-guide-navigation)
-* [**Quick Start**](#quick-start)
-* [**Commands**](#commands)
+* [**Quick start**](#quick-start)
+* [**Command structure**](#command-structure)
 * [**Features**](#features)
   * [Adding a show: `add`](#adding-a-show-add)
   * [Listing all shows: `list`](#listing-all-shows-list)
-  * [Requesting help URL: `help`](#requesting-help-url-help)
+  * [View help: `help`](#view-help-help)
   * [Finding a show: `find`](#finding-a-show-find)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
   * [Editing a show: `edit`](#editing-a-show-edit)
@@ -39,7 +39,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | Syntax                                                                    | Description                                            |
 |---------------------------------------------------------------------------|--------------------------------------------------------|
 | **Bold**                                                                  | Important words to note                                |
-| `GFM`                                                                     | Command word/prefix/parameter                          |
+| `Git Flavoured Markdown`                                                  | Command word/prefix/parameter                          |
 | <div markdown="span" class="alert alert-warning">:bulb: </div>            | A small but useful piece of information                |
 | <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                 |
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                 |
@@ -79,7 +79,7 @@ Some example commands you can try:
 
 ---
 
-## Commands
+## Command structure
 
 Let us look at what makes up a command:
 
@@ -97,6 +97,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 | Component | Prefix | Description                                           |
 |-----------|--------|-------------------------------------------------------|
+| KEYWORD   | None   | The input after the command word                      |
 | INDEX     | None   | The index of the show as shown in the show panel list |
 | NAME      | n/     | The name to use for a show                            |
 | STATUS    | s/     | The status to label for a show                        |
@@ -108,20 +109,20 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/<NAME>`, `<NAME>` is a parameter which can be used as `add n/Sex and the City`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/<NAME> s/<STATUS> [t/<TAG>]` can be used as `n/ReZero s/completed t/Anime` or as `n/ReZero s/completed`.
+  e.g `n/NAME s/STATUS [t/TAG]` can be used as `n/ReZero s/completed t/Anime` or as `n/ReZero s/completed`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/<TAG>]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
 
 * A whitespace must be included before every prefix.<br>
   e.g. `n/Knives Out t/Suspense` is acceptable but `n/Knives Outt/Suspense` is not.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/<NAME> [t/<TAG>]`, `[t/<TAG>] n/<NAME>` is also acceptable.
+  e.g. if the command specifies `n/NAME [t/TAG]`, `[t/TAG] n/NAME` is also acceptable.
 
 * All **names must be unique** and duplicates will be ignored.<br>
   e.g. if you try to add `n/Inception` into the show list that already contains that show, there will be a message telling you that this show already exists in the list.
@@ -145,17 +146,17 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 ### Adding a show: `add`
 
-Adds a new show to Trackermon. Note that the name of the show can only contain alphanumeric characters.
+**Description:** Planning to watch a show and want to store its details? Add a show to Trackermon's show list!
 
-Format: `add n/<NAME> s/<STATUS> [t/<TAG>]…​`
+**Format:** `add n/NAME s/STATUS [c/COMMENT] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A show can have any number of tags (including 0)
 </div>
 
-Examples:
-* `add n/All of us are dead s/completed`
-* `add n/All of us are dead s/completed t/Kdrama`
+**Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -163,19 +164,27 @@ Examples:
 
 ### Listing all shows: `list`
 
-Shows a list of all shows in Trackermon.
+**Description:** Want to view all your shows at once? Display a list of shows in Trackermon's show list!
 
-Format: `list`
+**Format:** `list`
+
+**Example & Output:** `list`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
-### Requesting help URL: `help`
+### View help: `help`
 
-Shows a URL that redirects the user to Trackermon's user guide.
+**Description:** Are you new or confused with the commands? View the command summary and user guide through a quick pop up window!
 
-Format: `help`
+**Format:** `help`
+
+**Example & Output:** `help`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -183,17 +192,24 @@ Format: `help`
 
 ### Finding a show: `find`
 
-**General Find**: Finds shows in Trackermon by matching the user's input across the name, status and tag parameters.
+**Description (General Find):** Searching for a show across all parameters? Find shows containing the search words.
 
-Format: `find <KEYWORD>`
-* Find shows with the specified `<KEYWORD>`.
-* The keyword refers to the input entered by the user after `find`.
-* The keyword **can be a word or number** such as hero, S1,...
-* There must be at **least one keyword** and it **must not be empty**.
+**Format (General Find):** `find KEYWORD`
 
-Examples:
-* `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name, status or tag.[put image here after ui update]
-* `find shingeki no kyojin` displays all the shows in the list that contain the keyword `shingeki` **or** `no` **or** `kyojin` whether it is a name, status or tag.[put image here after ui update]
+Example & Output: `find attack on titan`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about general find:**<br>
+* The `KEYWORD` refers to the input you enter after `find`.
+* `find` must be followed with a space before entering the `KEYWORD`.
+* The `KEYWORD` **can be a word or number** such as hero, S1,...
+* The `KEYWORD` must contain **at least one word** and it **must not be empty**.
+* `find attack on titan` displays all the shows in the list that contain the keyword `attack`, `on` or `titan`, whether it is a name, status or tag.
+
+</div>
 
 **Precise Find** Finds shows in Trackermon by matching the user's input across name, status and tag parameters with prefixes.
 
@@ -238,7 +254,7 @@ Examples:
 
 Edit the specified show from Trackermon.
 
-Format: `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​`
+Format: `edit <INDEX> [n/NAME] [s/STATUS] [t/TAG]…​`
 * Edit the show at the specified `<INDEX>`.
 * The index refers to the index number shown in the displayed show list. (not overall)
 * The index **must be a positive integer** 1,2,3,..
@@ -300,14 +316,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                      |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                        |
-| **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                                                                                                 |
-| **Edit**   | `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                           |
-| **Exit**   | `exit`                                                                                                                                                |
-| **Find**   | `find <KEYWORD>`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/<TAG>]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
-| **List**   | `list`                                                                                                                                                |
+| Action     | Format, Examples                                                                                                                          |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME s/STATUS [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                  |
+| **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                                                                                     |
+| **Edit**   | `edit <INDEX> [n/NAME] [s/STATUS] [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                     |
+| **Exit**   | `exit`                                                                                                                                    |
+| **Find**   | `find KEYWORD`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
+| **List**   | `list`                                                                                                                                    |
 | **Sort**   | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]` |
 
 
