@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -43,12 +44,21 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static MainApp mainInstance;
 
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
     protected Config config;
+
+    /**
+     * Getter to pass HostServices to UI elements.
+     * @return HostServices
+     */
+    public static HostServices getInstance() {
+        return mainInstance.getHostServices();
+    }
 
     @Override
     public void init() throws Exception {
@@ -71,6 +81,7 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+        mainInstance = this;
     }
 
     /**
