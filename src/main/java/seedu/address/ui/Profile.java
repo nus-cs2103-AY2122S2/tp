@@ -23,36 +23,28 @@ public class Profile extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label telegram;
+    @FXML
+    private Label matriculation;
+    @FXML
+    private Label course;
+    @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code Profile}.
      */
-    public Profile() {
+    public Profile(Person person) {
         super(FXML);
-    }
-
-    /**
-     * Set all the profile elements with the given person.
-     *
-     * @param person the person of the selected person card
-     */
-    public void setProfile(Person person) {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        telegram.setText(person.getTelegram().id);
+        matriculation.setText(person.getMatricCard().value);
+        course.setText(person.getCourse().value);
+        address.setText(person.getAddress().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    /**
-     * Remove the tags displayed in the previous profile, since FlowPane elements seems to retain even when
-     * the profile changes.
-     *
-     */
-    public void clearPreviousTags() {
-        tags.getChildren().clear();
     }
 }

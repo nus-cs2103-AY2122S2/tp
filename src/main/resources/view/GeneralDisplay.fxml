@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" snapToPixel="false" styleClass="scroll-pane-general" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+      <StackPane fx:id="profileDisplayPlaceholder" styleClass="general-display-content">
+      </StackPane>
+</ScrollPane>

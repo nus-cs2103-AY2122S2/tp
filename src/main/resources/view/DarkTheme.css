@@ -381,3 +381,16 @@
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
+
+.scroll-pane-general {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane-general .viewport {
+    -fx-background-color: #383838;
+}
+
+.general-display-content {
+     -fx-background-color: derive(#1d1d1d, 20%);
+}
+

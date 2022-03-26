@@ -11,9 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
-<?import javafx.scene.control.ComboBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="680" minHeight="720" onCloseRequest="#handleExit">
+         title="Address App" minWidth="850" minHeight="720" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -48,7 +47,7 @@
         </HBox>
 
         <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" prefWidth="400">
-          <StackPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="307" prefWidth="NaN">
+          <StackPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="400" prefWidth="NaN">
             <VBox fx:id="personList">
               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
@@ -57,24 +56,26 @@
             </padding>
           </StackPane>
 
-          <StackPane fx:id="profileDisplayPlaceholder"
-                     VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="340" prefWidth="NaN">
+          <StackPane fx:id="generalDisplayPlaceholder"
+                     VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="400" prefWidth="NaN">
             <padding>
               <Insets top="5" right="10" bottom="5"/>
             </padding>
           </StackPane>
         </HBox>
 
-        <HBox HBox.hgrow="NEVER" alignment="BOTTOM_CENTER" prefWidth="400">
+        <HBox HBox.hgrow="NEVER" alignment="BOTTOM_CENTER" prefWidth="NaN">
             <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border"
-                       minHeight="100" prefHeight="100" maxHeight="100" prefWidth="NaN" HBox.hgrow="SOMETIMES">
+                       minHeight="100" prefHeight="100" maxHeight="100" prefWidth="NaN" HBox.hgrow="SOMETIMES"
+                       minWidth="400">
               <padding>
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
             </StackPane>
 
             <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                       minHeight="100" prefHeight="100" maxHeight="100" prefWidth="NaN" HBox.hgrow="SOMETIMES">
+                       minHeight="100" prefHeight="100" maxHeight="100" prefWidth="NaN" HBox.hgrow="SOMETIMES"
+                       minWidth="400">
               <padding>
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>

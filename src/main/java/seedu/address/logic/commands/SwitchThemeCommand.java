@@ -23,7 +23,7 @@ public class SwitchThemeCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "light";
 
-    public static final String MESSAGE_SUCCESS = "Switched to %1$s";
+    public static final String MESSAGE_SWITCH_THEME_SUCCESS = "Switched to %1$s";
     public static final String MESSAGE_THEME_ALREADY_IN_USE = "You are using %1$s already";
 
     private static final Logger logger = Logger.getLogger(SwitchThemeCommand.class.getName());
@@ -47,7 +47,7 @@ public class SwitchThemeCommand extends Command {
         if (theme instanceof LightTheme) {
             new LightTheme().applyTheme();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, theme));
+        return new CommandResult(String.format(MESSAGE_SWITCH_THEME_SUCCESS, theme));
     }
 
     @Override

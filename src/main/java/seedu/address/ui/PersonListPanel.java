@@ -10,8 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ProfileCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -63,8 +65,11 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Handles the event whenever the selected person card changes.
      */
-    public void handleSelect() {
-        MainWindow.setSelectedProfile(getPersonListView());
+    public void handleSelect() throws CommandException {
+        int personSelected = personListView.getSelectionModel().getSelectedIndex();
+        ProfileCommand profileCommand = new ProfileCommand(Index.fromZeroBased(personSelected));
+        CommandResult commandResult = profileCommand.execute(logic.getModel());
+        UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
     }
 
     /**
@@ -77,9 +82,9 @@ public class PersonListPanel extends UiPart<Region> {
             try {
                 int personToDeleteIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
                 String deleteCommand = "delete " + personToDeleteIndex;
-                CommandResult result = logic.execute(deleteCommand);
+                logic.execute(deleteCommand);
             } catch (ParseException | CommandException e) {
-                resultDisplay.setFeedbackToUser(e.getMessage());
+                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
             }
         });
         contextMenu.getItems().addAll(delete);
