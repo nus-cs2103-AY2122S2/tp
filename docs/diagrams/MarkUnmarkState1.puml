@@ -13,6 +13,8 @@ package State {
     class Lesson1 as "__l1:Lesson__"
     class StudentAttendance1 as "__sa1:StudentAttendance__"
     class StudentAttendance2 as "__sa2:StudentAttendance__"
+    class Attendance1 as "__a1:Attendance__"
+    class Attendance2 as "__a2:Attendance__"
 }
 
 State1 *--> ClassGroup1
@@ -23,7 +25,9 @@ ClassGroup1 --> Student2
 ClassGroup1 *--> Lesson1
 Lesson1 *--> StudentAttendance1
 Lesson1 *--> StudentAttendance2
-StudentAttendance1 *--> Student1
-StudentAttendance2 *--> Student2
+StudentAttendance1 --> Student1
+StudentAttendance2 --> Student2
+StudentAttendance1 *--> Attendance1
+StudentAttendance2 *--> Attendance2
 
 @end

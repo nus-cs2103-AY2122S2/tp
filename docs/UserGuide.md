@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TAssist is a **desktop app for managing students and their participation in lessons, optimized for use via a Command Line Interface** (CLI). If you are a TA  who prefer CLI to GUI while having a GUI to view the student data, TAssist is the app for you.
+TAssist is a **desktop app for managing students and their participation in lessons, optimized for use via a Command Line Interface** (CLI). If you are a TA who prefers CLI to GUI while having a GUI to view the student data, TAssist is the app for you.
 
 * Table of Contents
 {:toc}
@@ -109,7 +109,7 @@ Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
 
-#### Adding an assessment: `add assessment` [coming in v1.3]
+#### Adding an assessment: `add assessment`
 
 Adds an assessment to TAssist.
 
@@ -118,7 +118,7 @@ Format: `add assessment n/ASSESSMENT_NAME m/MODULE_INDEX [sn/SIMPLE_NAME]`
 Examples:
 * `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
 
-### Enrolling students [coming in v1.3]
+### Enrolling students
 
 #### Enrolling students: `enrol`
 
@@ -128,7 +128,7 @@ Format: `enrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Enrols the specified students to the class group at the specified `CLASS_GROUP_INDEX`.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
-* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` **should be separated with commas** (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -145,7 +145,7 @@ Format: `disenrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Disenrols the specified students from the class group at the specified `CLASS_GROUP_INDEX`.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`; they should already be enrolled in the specified class group.
-* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` **should be separated with commas** (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -154,9 +154,9 @@ Examples:
 * `disenrol c/1 s/1,2,3,4,5,6` disenrols the 1st 6 students belonging to the 1st class group shown when `list class` is run.
 * `disenrol c/1 s/e0123456,e0234567` disenrols the students with student IDs `E0123456` and `E0234567` from the 1st class group shown when `list class` is run.
 
-### Taking student attendance [coming in v1.3]
+### Taking student attendance
 
-#### Marking attendance
+#### Marking attendance: `mark`
 
 Marks student(s)' attendance(s).
 
@@ -164,7 +164,7 @@ Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUD
 
 * Marks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
-* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` **should be separated with commas** (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -173,7 +173,7 @@ Examples:
 * `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `mark attend c/1 w/3 s/e0123456,e0234567` marks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
-#### Unmarking attendance
+#### Unmarking attendance: `unmark`
 
 Unmarks student(s)' attendance(s).
 
@@ -181,7 +181,7 @@ Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|ST
 
 * Unmarks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
-* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` **should be separated with commas** (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -190,7 +190,7 @@ Examples:
 * `unmark attend c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `unmark attend c/1 w/3 s/e0123456,e0234567` unmarks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
-### Grading assessments: `grade` [coming in v1.3]
+### Grading assessments: `grade`
 
 Grades student's assessment.
 
@@ -198,7 +198,7 @@ Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|STUDEN
 
 * The assessment can be specified with either the `ASSESSMENT_INDEX` or the `SIMPLE_NAME` and `MODULE_INDEX`.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`; they should already be enrolled in the module tied to the assessment.
-* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` **should be separated with commas** (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed assessment or module list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If the grade is omitted, the value of the student's attempt will simply be incremented (i.e. `0` will be incremented to `1`).
@@ -222,21 +222,21 @@ Shows a list of all modules.
 
 Format: `list module`
 
-#### Listing all students: `list class`
+#### Listing all class groups: `list class`
 
 Shows a list of all class groups.
 
 Format: `list class`
 
-#### Listing all assessments: `list assessment` [coming in v1.3]
+#### Listing all assessments: `list assessment`
 
 Shows a list of all assessments.
 
 Format: `list assessment`
 
-### Filtering entries [coming in v1.3]
+#### Filtering entries
 
-#### Filtering students
+##### Filtering students
 
 Shows a list of students belonging to either module or class group.
 
@@ -250,7 +250,7 @@ Examples:
 * `list student m/1` displays the students belonging to the 1st module shown when `list module` is run.
 * `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is run.
 
-#### Filtering class groups
+##### Filtering class groups
 
 Shows a list of class groups belonging to a module.
 
@@ -263,7 +263,7 @@ Format: `list class m/MODULE_INDEX`
 Examples:
 * `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
 
-#### Filtering assessments
+##### Filtering assessments
 
 Shows a list of all assessments belonging to a particular module.
 
@@ -313,7 +313,7 @@ Format: `delete class INDEX`
 Examples:
 * `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
 
-#### Deleting an assessment: `delete assessment` [coming in v1.3]
+#### Deleting an assessment: `delete assessment`
 
 Deletes the specified assessment from TAssist.
 

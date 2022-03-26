@@ -10,5 +10,5 @@ UniqueModuleList -right-> TaModule
 TaModule *--> ModuleName
 TaModule *--> ModuleCode
 TaModule *--> AcademicYear
-TaModule *--> "~*" Student
+TaModule --> "~*" Student
 @enduml

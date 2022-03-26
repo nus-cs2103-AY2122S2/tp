@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+
+title Delete ClassGroup
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":TAssist" as TAssist MODEL_COLOR
+participant ":UniqueClassGroupList" as UniqueClassGroupList MODEL_COLOR
+end box
+
+[--> ModelManager : deleteEntity(entityToDelete)
+activate ModelManager
+
+ModelManager -> TAssist : removeClassGroup(entityToDelete)
+activate TAssist
+
+TAssist -> UniqueClassGroupList : remove(entityToDelete)
+activate UniqueClassGroupList
+
+UniqueClassGroupList --> TAssist
+deactivate UniqueClassGroupList
+
+TAssist --> ModelManager
+deactivate TAssist
+
+[<--ModelManager
+deactivate ModelManager
+
+@enduml

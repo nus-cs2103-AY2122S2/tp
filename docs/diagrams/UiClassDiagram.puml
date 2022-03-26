@@ -32,18 +32,18 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" EntityListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-EntityListPanel -down-> "*" PersonCard
+EntityListPanel -down-> "*" EntityCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+EntityListPanel --|> UiPart
+EntityCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 

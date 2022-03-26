@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete class 2`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -69,40 +69,40 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EntityListPanel`*, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-*`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`).
+*`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`, `Assessment`).
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays various `Entity` objects residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `TAssistParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete class 2")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete class 2` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -112,48 +112,94 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `TAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TAssistParser` returns back as a `Command` object.
+* All `TAssistParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
 The `Model` component,
 
 * stores the TAssist data i.e., all `Student`, `TaModule`, `ClassGroup`, `Assessment` objects (which are contained in `UniqueStudentList`, `UniqueModuleList`, `UniqueClassGroupList`, `UniqueAssessmentList` objects respectively).
-* stores the currently 'selected' `Student`/`TaModule`/`ClassGroup`/`Assessment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`/`ObservableList<TaModule>`/`ObservableList<ClassGroup>`/`ObservableList<Assessment>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Student`/`TaModule`/`ClassGroup`/`Assessment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>`/`ObservableList<TaModule>`
+/`ObservableList<ClassGroup>`/`ObservableList<Assessment>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+* An `Entity` object is a generic object that can be used to represent instances of  `Student`/`TaModule`/`ClassGroup`/`Assessment`.
+* Module are named `TaModule` due to conflict with Java classes.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Alternative (arguably, more OOP) models are given below.<br>
-
-<img src="images/BetterModelStudentClassDiagram.png" width="450" />
-
-<img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
-
-<img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
-
-<img src="images/BetterModelAssessmentClassDiagram.png" width="450" />
-
+<div class="alert alert-info">:information_source: <B>Note:</B> Alternative (arguably, more OOP) models are given below.<br>
+<br>
+<div class="datatable-container">
+    <table class="c20">
+        <tbody>
+            <tr></tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   <B>Entity</B>
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <B>Class Diagram</B>
+                </td>
+            </tr>
+            <tr></tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   Student
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelStudentClassDiagram.png" width="450" />
+                </td>
+            </tr>
+            <tr></tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   TaModule
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
+                </td>
+            </tr>
+            <tr></tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   Class Group
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
+                </td>
+            </tr>
+            <tr></tr>
+            <tr class="c11">
+                <td class="c16" colspan="1" rowspan="1">
+                   Assessment
+                </td>
+                <td class="c9" colspan="1" rowspan="1">
+                   <img src="images/BetterModelAssessmentClassDiagram.png" width="450" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both TAssist data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `TAssistStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -194,6 +240,7 @@ Step 3. The user executes `add student` command to add a student to `TAssist`. T
 The following sequence diagram shows how the add operation works:
 
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
+<img src="images/AddModelSequenceDiagram.png" width="250" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -203,7 +250,7 @@ The following activity diagram summarizes what happens when a user executes an a
 
 <img src="images/AddActivityDiagram.png" width="250" />
 
-### Delete feature
+### Delete Feature
 
 The delete mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
 
@@ -231,6 +278,7 @@ Step 3. The user executes `delete class 2` to delete the 2nd class group in the 
 The following sequence diagram shows how the delete operation works:
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+<img src="images/DeleteModelSequenceDiagram.png" width="250" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -239,6 +287,36 @@ The following sequence diagram shows how the delete operation works:
 The following activity diagram summarizes what happens when a user executes a delete command:
 
 <img src="images/DeleteActivityDiagram.png" width="250" />
+
+### List Feature
+
+The list mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+
+* `ListCommandParser#parse()` — Parses the command arguments.
+* `ListCommand#execute()` — Executes `ModelManager#updateFiltered<ENTITY_NAME>List()` with the predicate that matches the filtering criteria.
+* `ModelManager#updateFiltered<ENTITY_NAME>List()` — Updates the predicate of the entity list so that only filtered entries will be shown in `TAssist`.
+
+Given below is an example usage scenario using `Student` objects and how the list mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![ListState0](images/ListState0.png)
+
+Step 2. The user executes `list student c/2` to filter out students from the 2nd class group in the list. The `list` command also calls `ListCommandParser#parse()`, which parses the input and return the entity type as well as the class group index or TA module index to filter by.
+
+![ListState1](images/ListState1.png)
+
+The following sequence diagram shows how the list operation works:
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a list command:
+
+![ListActivityDiagram](images/ListActivityDiagram.png)
 
 ### \[Proposed\] Enrol Feature
 
@@ -265,8 +343,8 @@ Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`.
 
 ![EnrolState0](images/EnrolState1.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enroled to a class group will automatically be linked to the module it belongs to. 
-<br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enroled to the given class group.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enrolled to a class group will automatically be linked to the module it belongs to. 
+<br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enrolled to the given class group.
 </div>
 
 ### \[Proposed\] Grading Assessment Feature
@@ -311,7 +389,7 @@ The following activity diagram summarizes what happens when a user executes a gr
 
 <img src="images/GradeActivityDiagram.png" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How to grade assessments:**
 
@@ -322,7 +400,6 @@ The following activity diagram summarizes what happens when a user executes a gr
 * **Alternative 2:** Create `Assessment` entity and the `TaModule` entity will contain the student attempts.
     * Pros: All module related data are in one class.
     * Cons: Duplicate data in storage, hard to display assessments attempts.
-
 
 ### \[Proposed\] Mark/Unmark feature
 
@@ -348,9 +425,10 @@ Step 4. The user executes `mark attend c/1 w/1 s/1,2` to mark attendance for a l
 
 ![MarkUnmarkState1](images/MarkUnmarkState1.png)
 
-The following sequence diagram shows how the list operation works:
+The following sequence diagram shows how the mark operation works:
 
 ![MarkUnmarkSequenceDiagram](images/MarkUnmarkSequenceDiagram.png)
+<img src="images/MarkUnmarkModelSequenceDiagram.png" width="250" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -359,123 +437,6 @@ The following sequence diagram shows how the list operation works:
 The following activity diagram summarizes what happens when a user executes a mark command:
 
 ![MarkUnmarkActivityDiagram](images/MarkUnmarkActivityDiagram.png)
-
-
-### \[Proposed\] List feature
-
-The proposed list mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
-
-* `ListCommandParser#parse()` — Parses the command arguments.
-* `ListCommand#execute()` — Executes `ModelManager#updateFiltered<ENTITY_NAME>List()` with the predicate that matches the filtering criteria.
-* `ModelManager#updateFiltered<ENTITY_NAME>List()` — Updates the predicate of the entity list so that only filtered entries will be shown in `TAssist`.
-
-Given below is an example usage scenario using `Student` objects and how the list mechanism behaves at each step.
-
-Step 1. The user launches the application. The `TAssist` is already populated with data.
-
-![ListState0](images/ListState0.png)
-
-Step 2. The user executes `list student c/2` to filter out students from the 2nd class group in the list. The `list` command also calls `ListCommandParser#parse()`, which parses the input and return the entity type as well as the class group index or TA module index to filter by.
-
-![ListState1](images/ListState1.png)
-
-The following sequence diagram shows how the list operation works:
-
-![ListSequenceDiagram](images/ListSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes a list command:
-
-![ListActivityDiagram](images/ListActivityDiagram.png)
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -896,7 +857,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 entities without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should not depend on external/remote servers.
 5.  Should not depend on a Database Management System (DBMS).
@@ -905,6 +866,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Class Group**: The different types of classes a module has. E.g. T01, T02, B01, B02
 * **CLI**: Command line interface
+* **Entity**: A generic object used in TAssist, which can be an instance of Assessment, ClassGroup, Module, or Student
 * **GUI**: Graphical user interface
 * **Lesson**: The weekly lesson that students turn up for
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -913,6 +875,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **NUS**: The National University of Singapore
 * **Student**: A student in NUS
 * **TA**: A Teaching Assistant in NUS SoC
+* **TaModule**: Represents a Module. Named differently due to conflict with Java class.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -942,19 +905,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete student 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete student 0`<br>
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
