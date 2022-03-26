@@ -236,9 +236,11 @@ A: Delete the data folder to allow _**UDT**_ to create a new data file. Your pre
 Q: Manual insertion of students takes time, is there a faster way to do it?  
 A: We are working on a feature to allow importing of **.csv** files into _**UDT**_!
 
-Q: What if I key in the wrong command?
+Q: What if I key in the wrong command?  
 A: An error message colored in red will appear stating that you have typed an unknown command.
 ![invalid command](images/user-guide/invalidcommand.png)
+
+
 ----------------
 ## Command Summary
 
