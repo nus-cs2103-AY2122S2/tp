@@ -44,7 +44,7 @@ deactivate AddressBook
 Model --> PutCommand
 deactivate Model
 
-PutCommand --> LogicManager
+PutCommand --> LogicManager : result
 deactivate PutCommand
 
 @enduml
