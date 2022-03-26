@@ -35,10 +35,10 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="regDate" styleClass="cell_small_label" text="\$regDate" />
       <Label fx:id="skinType" styleClass="cell_small_label" text="\$skinType" />
       <Label fx:id="hairType" styleClass="cell_small_label" text="\$hairType" />
       <Label fx:id="birthDate" styleClass="cell_small_label" text="\$birthDate" />
-      <Label fx:id="regDate" styleClass="cell_small_label" text="\$regDate" />
     </VBox>
   </GridPane>
 </HBox>
