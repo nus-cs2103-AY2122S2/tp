@@ -61,6 +61,10 @@ public class TransactionList implements Iterable<Transaction> {
         }
     }
 
+    /**
+     * Removes all the transactions from the list
+     * with the specified identifier
+     */
     public void removeWithId(long id) {
         Collection<Transaction> toRemove = internalList.stream()
                                             .filter(t -> t.hasIdentifier(id))
