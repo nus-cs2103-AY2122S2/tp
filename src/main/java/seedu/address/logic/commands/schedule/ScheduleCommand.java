@@ -21,7 +21,8 @@ public abstract class ScheduleCommand extends Command {
 
     public static final String MESSAGE_NOT_OFFICE_HOUR =
             "You are trying to schedule the interview outside of your office hours!\n"
-                    + "Your office hours are Mon-Fri, 8am - 6pm.";
+                    + "Your office hours are Mon-Fri, 8am - 6pm. The latest interview for the day "
+                    + "is to be scheduled at 5.30PM";
 
     public static final String MESSAGE_INVALID_FORMAT_DATETIME =
             "Date and/or Time is not in the following format: dd-MM-yyyy HH:mm";
