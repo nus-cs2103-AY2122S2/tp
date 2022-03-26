@@ -72,7 +72,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 targetPlayerName = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
                 // System.out.println(targetPlayerName);
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER), pe);
             }
 
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -104,12 +104,19 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditCommand(targetPlayerName, editPersonDescriptor);
         }
 
+        if (arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
+            }
+        }
 
         //Schedule level
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
