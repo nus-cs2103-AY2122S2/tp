@@ -256,7 +256,27 @@ Meanwhile, the `lineups` attribute of each person should also be updated if the 
 
 #### 4.1 View player
 #### Proposed implementation
+The proposed view player functionality queries players from the existing UniquePersonList. The players returned is 
+dependent on the keywords specified in the command. The proposed view mechanism is facilitated by ModelManger which keeps 
+a FilteredList of players. Note that this FilteredList of players is updated via a specified Predicate.
+Additionally, it implements the following operations:
+- `ModelManager#updateFilteredPersonList(Predicate<Person>) - Filters internal storage via a Predicate<Person> specification`
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user wants to view player name with james in its name.
+
+Step 3. The user executes `view P/james`. The view command will check if the inputs are valid, and then parsed 
+(similar to the other CRUD commands) before using these inputs to create conditional `Predicate<>` instances (eg. NameContainsKeywordsPredicate). 
+The predicates are then combined and used to filter the `FilteredList<Person>`. The GUI will then display the player items in the filtered list.
+
+The following sequence diagram shows how the find operation works:
+Sequence Diagram:
+__TO BE ADDED__
 #### Design Consideration
+For future development (v1.3b), may consider to enter more flags so that user can perform more specific view task.
 
 #### 4.2 View lineup
 #### Proposed implementation
