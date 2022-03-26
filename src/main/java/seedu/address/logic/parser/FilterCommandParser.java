@@ -3,10 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.FILTER_COMMAND_MORE_THAN_ONE_FIELD;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_OWNER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_TAGS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_APPOINTMENT;
 
 import seedu.address.commons.util.FilterUtil;
 import seedu.address.logic.commands.FilterCommand;

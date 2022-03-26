@@ -166,6 +166,12 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Checks if a keyword follows after the filter field. Returns keyword as String.
+     * @param trimmedArgs Arguments to be parsed.
+     * @return keyword as String.
+     * @throws ParseException Throws exception if keyword is absent.
+     */
     public static String parseFilterArgs(String trimmedArgs) throws ParseException {
         String[] argSplitter = trimmedArgs.split("/");
         if (argSplitter.length != 2) {

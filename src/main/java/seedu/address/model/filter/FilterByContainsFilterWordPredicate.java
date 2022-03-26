@@ -1,8 +1,8 @@
 package seedu.address.model.filter;
 
-import seedu.address.model.pet.Pet;
-
 import java.util.function.Predicate;
+
+import seedu.address.model.pet.Pet;
 
 public abstract class FilterByContainsFilterWordPredicate implements Predicate<Pet> {
     private final String filterWord;

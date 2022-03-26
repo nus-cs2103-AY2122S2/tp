@@ -1,7 +1,6 @@
 package seedu.address.model.filter;
 
 import seedu.address.commons.util.FilterUtil;
-import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
 
 public class TagContainsFilterWordPredicate extends FilterByContainsFilterWordPredicate {
