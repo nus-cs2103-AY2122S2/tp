@@ -3,6 +3,7 @@ package unibook.ui;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -11,6 +12,7 @@ import unibook.MainApp;
 import unibook.commons.core.LogsCenter;
 import unibook.commons.util.StringUtil;
 import unibook.logic.Logic;
+import unibook.model.module.group.Group;
 
 /**
  * The manager of the UI component.
@@ -90,13 +92,19 @@ public class UiManager implements Ui {
         return mainWindow.isModuleListShowing();
     }
 
-
+    @Override
     public void setModuleListPanel() {
         mainWindow.setModuleListPanel();
     }
 
+    @Override
     public void setPersonListPanel() {
         mainWindow.setPersonListPanel();
+    }
+
+    @Override
+    public void setGroupListPanel(ObservableList<Group> groups) {
+        mainWindow.setGroupListPanel(groups);
     }
 
     private Image getImage(String imagePath) {

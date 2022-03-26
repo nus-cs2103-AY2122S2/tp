@@ -44,6 +44,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     /**
      * Returns the Set of {@code Group} objects to use for the converted model.
      * Performs checks on the validity of the field in the Json before returning.
+     *
      * @param uniBook reference to UniBook instance in group, to check if group with given code exists.
      * @throws IllegalValueException if any module is invalid (invalid name, or group does not exist in UniBook).
      */
@@ -63,6 +64,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     @Override
     public Student toModelType(UniBook uniBook) throws IllegalValueException {
         return new Student(getModelName(), getModelPhone(), getModelEmail(),
-                getModelTags(), getModelModules(uniBook), getModelGroups(uniBook));
+            getModelTags(), getModelModules(uniBook), getModelGroups(uniBook));
     }
 }
