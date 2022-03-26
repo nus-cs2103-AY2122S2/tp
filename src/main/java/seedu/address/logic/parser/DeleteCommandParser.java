@@ -3,10 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lineup.LineupName;
@@ -23,7 +24,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP);
+                ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP, PREFIX_SCHEDULE);
 
         if (arePrefixesPresent(argMultimap, PREFIX_PLAYER, PREFIX_LINEUP)) {
             // delete player from lineup
@@ -37,8 +38,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } else if (arePrefixesPresent(argMultimap, PREFIX_LINEUP)) {
             LineupName lineup = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
             return new DeleteCommand(lineup);
+        } else if (arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
+            try {
+                Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SCHEDULE).get());
+                return new DeleteCommand(index);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            }
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
     }
 

@@ -13,11 +13,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 //import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,6 +33,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleDateTime;
+import seedu.address.model.schedule.ScheduleDescription;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -62,18 +68,19 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_LINEUP = "This lineup already exists in MyGM.";
 
     private enum EditCommandType {
-        PLAYER, LINEUP
+        PLAYER, LINEUP, SCHEDULE
     }
 
     private final EditCommandType type;
     private final Name targetPlayerName;
+    private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final EditScheduleDescriptor editScheduleDescriptor;
     private final LineupName targetLineupName;
     private final LineupName editLineupName;
 
     /**
      * Constructs an EditCommand for Person
-     *
      * @param targetPlayerName     of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -84,13 +91,14 @@ public class EditCommand extends Command {
         this.type = EditCommandType.PLAYER;
         this.targetPlayerName = targetPlayerName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editScheduleDescriptor = null;
+        this.index = null;
         this.targetLineupName = null;
         this.editLineupName = null;
     }
 
     /**
      * Constructs an EditCommand for Lineup
-     *
      * @param targetLineupName The target LineupName to edit
      * @param editLineupName The new LineupName
      */
@@ -101,8 +109,29 @@ public class EditCommand extends Command {
         this.type = EditCommandType.LINEUP;
         this.targetPlayerName = null;
         this.editPersonDescriptor = null;
+        this.editScheduleDescriptor = null;
+        this.index = null;
         this.targetLineupName = targetLineupName;
         this.editLineupName = editLineupName;
+    }
+
+    /**
+     * Constructs an EditCommand for Person
+     *
+     * @param index     of the schedule in the filtered schedule list to edit
+     * @param editScheduleDescriptor details to edit the person with
+     */
+    public EditCommand(Index index, EditScheduleDescriptor editScheduleDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editScheduleDescriptor);
+
+        this.type = EditCommandType.SCHEDULE;
+        this.targetPlayerName = null;
+        this.editPersonDescriptor = null;
+        this.index = index;
+        this.editScheduleDescriptor = new EditScheduleDescriptor(editScheduleDescriptor);
+        this.targetLineupName = null;
+        this.editLineupName = null;
     }
 
     /**
@@ -130,7 +159,7 @@ public class EditCommand extends Command {
 
             model.setPerson(personToEdit, editedPerson);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
-        } else {
+        } else if (this.type == EditCommandType.LINEUP) {
             if (!model.hasLineupName(targetLineupName)) { // check if UPL name to person have targetPerson
                 throw new CommandException(Messages.MESSAGE_INVALID_LINEUP);
             }
@@ -144,6 +173,24 @@ public class EditCommand extends Command {
 
             model.setLineup(lineupToEdit, editedLineup);
             return new CommandResult(String.format(MESSAGE_EDIT_LINEUP_SUCCESS, editedLineup));
+        } else {
+            List<Schedule> lastShownList = model.getFilteredScheduleList();
+
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+            }
+
+            Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
+            Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
+
+            // ok to have same schedule name, but not ok to have the description and date to be the same
+            if (model.hasSchedule(editedSchedule)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.setSchedule(scheduleToEdit, editedSchedule);
+            model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ALL_SCHEDULES);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedSchedule));
         }
     }
 
@@ -179,6 +226,24 @@ public class EditCommand extends Command {
         playersList.replaceLineup(lineupToEdit.getLineupName(), updatedName);
 
         return new Lineup(updatedName, playersList);
+    }
+
+    /**
+     * Creates and returns a {@code Schedule} with the details of {@code scheduleToEdit}
+     * edited with {@code editScheduleDescriptor}.
+     */
+    private static Schedule createEditedSchedule(Schedule scheduleToEdit,
+                                                 EditScheduleDescriptor editScheduleDescriptor) {
+        assert scheduleToEdit != null;
+
+        ScheduleName updatedScheduleName =
+                editScheduleDescriptor.getScheduleName().orElse(scheduleToEdit.getScheduleName());
+        ScheduleDescription updatedScheduleDescription =
+                editScheduleDescriptor.getScheduleDescription().orElse(scheduleToEdit.getScheduleDescription());
+        ScheduleDateTime updatedScheduleDateTime =
+                editScheduleDescriptor.getScheduleDateTime().orElse(scheduleToEdit.getScheduleDateTime());
+
+        return new Schedule(updatedScheduleName, updatedScheduleDescription, updatedScheduleDateTime);
     }
 
     @Override
@@ -322,6 +387,80 @@ public class EditCommand extends Command {
                     && getJerseyNumber().equals(e.getJerseyNumber())
                     && getWeight().equals(e.getWeight())
                     && getTags().equals(e.getTags());
+        }
+    }
+
+    /**
+     * Stores the details to edit the schedule with. Each non-empty field value will replace the
+     * corresponding field value of the schedule.
+     */
+    public static class EditScheduleDescriptor {
+        private ScheduleName scheduleName;
+        private ScheduleDescription scheduleDescription;
+        private ScheduleDateTime scheduleDateTime;
+
+        public EditScheduleDescriptor() {
+        }
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditScheduleDescriptor(EditScheduleDescriptor toCopy) {
+            setScheduleName(toCopy.scheduleName);
+            setScheduleDescription(toCopy.scheduleDescription);
+            setScheduleDateTime(toCopy.scheduleDateTime);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(scheduleName, scheduleDescription, scheduleDateTime);
+        }
+
+        public void setScheduleName(ScheduleName scheduleName) {
+            this.scheduleName = scheduleName;
+        }
+
+        public Optional<ScheduleName> getScheduleName() {
+            return Optional.ofNullable(scheduleName);
+        }
+
+        public void setScheduleDescription(ScheduleDescription scheduleDescription) {
+            this.scheduleDescription = scheduleDescription;
+        }
+
+        public Optional<ScheduleDescription> getScheduleDescription() {
+            return Optional.ofNullable(scheduleDescription);
+        }
+
+        public void setScheduleDateTime(ScheduleDateTime scheduleDateTime) {
+            this.scheduleDateTime = scheduleDateTime;
+        }
+
+        public Optional<ScheduleDateTime> getScheduleDateTime() {
+            return Optional.ofNullable(scheduleDateTime);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditScheduleDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditScheduleDescriptor e = (EditScheduleDescriptor) other;
+
+            return getScheduleName().equals(e.getScheduleName())
+                    && getScheduleDescription().equals(e.getScheduleDescription())
+                    && getScheduleDateTime().equals(e.getScheduleDateTime());
         }
     }
 }

@@ -6,7 +6,7 @@
 
 * MyGM is a desktop app for high school basketball team trainers to manage players’ contacts and data.
   * **Optimized** for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
-  * **Written in OOP fashion**. 
+  * **Written in OOP fashion**.
   * **Well-written** code base.
   * **Reasonable level of user and developer documentation**.
 

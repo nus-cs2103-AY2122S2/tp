@@ -14,6 +14,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleDateTime;
+import seedu.address.model.schedule.ScheduleDescription;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,19 +28,19 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Height("172"), new JerseyNumber("23"),
-                getTagSet("PG", "SG"), new Weight("60"), getLineupSet("starting 5", "death lineup")),
+                getTagSet("PG", "SG"), new Weight("60")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Height("181"), new JerseyNumber("11"),
-                getTagSet("SG"), new Weight("85"), getLineupSet("starting 5", "need for speed")),
+                getTagSet("SG"), new Weight("85")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Height("175"), new JerseyNumber("0"),
-                getTagSet("PG", "SG"), new Weight("60"), getLineupSet("small ball", "shooters")),
+                getTagSet("PG", "SG"), new Weight("60")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Height("190"), new JerseyNumber("15"),
-                getTagSet("PF", "C"), new Weight("90"), getLineupSet("shooters", "slow game")),
+                getTagSet("PF", "C"), new Weight("90")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Height("213"), new JerseyNumber("1"),
-                getTagSet("C"), new Weight("110"), getLineupSet("slow game")),
+                getTagSet("C"), new Weight("110")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Height("188"), new JerseyNumber("3"),
                 getTagSet("SF", "PF"), new Weight("90")),
@@ -58,10 +62,33 @@ public class SampleDataUtil {
         };
     }
 
+    public static Schedule[] getSampleSchedules() {
+        return new Schedule[] {
+            new Schedule(new ScheduleName("Championship Match"),
+                new ScheduleDescription("Against Clippers\n LeGM needs to stop passing"),
+                new ScheduleDateTime("2020-06-01 1200")),
+            new Schedule(new ScheduleName("All star game"),
+                new ScheduleDescription("LBJ and KD participating"),
+                new ScheduleDateTime("2020-02-01 1200")),
+            new Schedule(new ScheduleName("Skills challenge"),
+                new ScheduleDescription("Practice for this"),
+                new ScheduleDateTime("2020-01-18 1200")),
+            new Schedule(new ScheduleName("Three point shoot out"),
+                new ScheduleDescription("Steph practice 3 pointer"),
+                new ScheduleDateTime("2020-02-19 1200")),
+            new Schedule(new ScheduleName("Free throw practice"),
+                new ScheduleDescription("Dwight needs to improve free throws"),
+                new ScheduleDateTime("2020-06-19 1200"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Schedule sampleSchedule : getSampleSchedules()) {
+            sampleAb.addSchedule(sampleSchedule);
         }
         return sampleAb;
     }

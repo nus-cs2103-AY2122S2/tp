@@ -67,8 +67,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
+        setSchedules(newData.getScheduleList());
         setLineups(newData.getLineupList());
     }
 
@@ -83,6 +83,35 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addPerson(Person p) {
+        persons.add(p);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setPerson(Person target, Person editedPerson) {
+        requireNonNull(editedPerson);
+        persons.setPerson(target, editedPerson);
+        lineups.replacePlayerInAllLineups(editedPerson, target);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePerson(Person key) {
+        persons.remove(key);
+        lineups.deletePlayerFromALlLineups(key);
+    }
+
+    //// Added to fit MyGM needs
+    /**
      * Returns true if {@code targetName} is taken by some player.
      */
     public boolean hasPersonName(Name targetName) {
@@ -90,6 +119,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.persons.containsName(targetName);
     }
 
+    /**
+     * Returns the person with {@code targetName};
+     */
+    public Person getPerson(Name targetName) {
+        return persons.getPerson(targetName);
+    }
+
+    /**
+     * Returns true if the person to add has a duplicate jersey number.
+     */
+    public boolean hasJerseyNumber(Person player) {
+        return persons.containsJerseyNumber(player.getJerseyNumber());
+    }
+
+    /**
+     * Returns a list of jersey number that are still available.
+     */
+    public String getAvailableJerseyNumber() {
+        return persons.getAvailableJerseyNumber();
+    }
+
+    //// lineup-level operations
     /**
      * Checks for the existence of a lineup name
      * @param targetName The lineup name to check
@@ -108,11 +159,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.removeAllPlayerFromLineup(lineup);
     }
 
-    /**
-     * Returns the person with {@code targetName};
-     */
-    public Person getPerson(Name targetName) {
-        return persons.getPerson(targetName);
+    public void setLineup(Lineup target, Lineup editedLineup) {
+        requireNonNull(editedLineup);
+        lineups.replaceLineup(target, editedLineup);
     }
 
     public Lineup getLineup(LineupName targetName) {
@@ -124,10 +173,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if the person to add has a duplicate jersey number.
+     * Adds a Lineup to MyGM
+     *
+     * @param lineup The Lineup to be added
      */
-    public boolean hasJerseyNumber(Person player) {
-        return persons.containsJerseyNumber(player.getJerseyNumber());
+    public void addLineup(Lineup lineup) {
+        lineups.addLineupToList(lineup);
     }
 
     /**
@@ -137,22 +188,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.isFull();
     }
 
+    //// schedule-level operations
     /**
-     * Returns a list of jersey number that are still available.
-     * @return
+     * Replaces the contents of the schedule list with {@code schedules}.
+     * {@code schedules} must not contain duplicate schedules.
      */
-    public String getAvailableJerseyNumber() {
-        return persons.getAvailableJerseyNumber();
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules.setSchedules(schedules);
     }
 
-
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Returns true if a schedule with the same identity as {@code schedule} exists in MyGM.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return schedules.contains(schedule);
     }
+
 
     /**
      * Add a person and update the respective lineups
@@ -166,31 +218,23 @@ public class AddressBook implements ReadOnlyAddressBook {
             lineups.putPlayerToLineup(p, lineup);
         }
     }
-
-
+  
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Adds a schedule to MyGM.
+     * The schedule must not already exist in MyGM.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
-        persons.setPerson(target, editedPerson);
-        lineups.replacePlayerInAllLineups(editedPerson, target);
-    }
-
-    public void setLineup(Lineup target, Lineup editedLineup) {
-        requireNonNull(editedLineup);
-        lineups.replaceLineup(target, editedLineup);
+    public void addSchedule(Schedule s) {
+        schedules.add(s);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Replaces the given schedule {@code target} in the list with {@code editedSchedule}.
+     * {@code target} must exist in MyGM.
+     * The schedule identity of {@code editedSchedule} must not be the same as another existing schedule in MyGM.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
-        lineups.deletePlayerFromALlLineups(key);
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireNonNull(editedSchedule);
+        schedules.setSchedule(target, editedSchedule);
     }
 
     public boolean hasSchedule(Schedule schedule) {
@@ -198,19 +242,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a Lineup to MyGM
-     *
-     * @param lineup The Lineup to be added
+     * Removes {@code key} from this {@code MyGM}.
+     * {@code key} must exist in MyGM.
      */
-    public void addLineup(Lineup lineup) {
-        lineups.addLineupToList(lineup);
+    public void removeSchedule(Schedule key) {
+        schedules.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons\n"
+                + schedules.asUnmodifiableObservableList().size() + " schedules\n";
         // TODO: refine later
     }
 
@@ -237,12 +281,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons))
+                && lineups.equals(((AddressBook) other).lineups)
+                && schedules.equals(((AddressBook) other).schedules);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return persons.hashCode() + lineups.hashCode() + schedules.hashCode();
     }
 
 }

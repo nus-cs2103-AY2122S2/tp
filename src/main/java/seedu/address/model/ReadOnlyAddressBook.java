@@ -4,8 +4,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
-
 import java.util.List;
+
 
 /**
  * Unmodifiable view of an address book
@@ -18,6 +18,12 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
     List<Lineup> getLineupList();
+    ObservableList<Schedule> getScheduleList();
+
+    /**
+     * Returns an unmodifiable view of the schedule list.
+     * This list will not contain any duplicate schedules.
+     */
     ObservableList<Schedule> getScheduleList();
 
 }

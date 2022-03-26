@@ -1,13 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX;
 
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 
 /**
@@ -30,15 +35,17 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_IN_LINEUP = "Player is not inside the lineup";
     public static final String MESSAGE_DELETE_PERSON_FROM_LINEUP_SUCCESS = "Person deleted from lineup %s: %s";
     public static final String MESSAGE_DELETE_LINEUP_SUCCESS = "Deleted Lineup: %s";
+    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Schedule: %1%s";
     public static final String MESSAGE_DELETE_FAILURE = "Delete cannot be executed.";
 
     private enum DeleteCommandType {
-        PLAYER, LINEUP, PLAYER_LINEUP
+        PLAYER, LINEUP, PLAYER_LINEUP, SCHEDULE
     }
 
     private final DeleteCommandType type;
     private final Name player;
     private final LineupName lineup;
+    private final Index targetIndex;
 
     /**
      * Constructs a new delete command.
@@ -47,6 +54,7 @@ public class DeleteCommand extends Command {
         this.type = DeleteCommandType.PLAYER;
         this.player = player;
         this.lineup = null;
+        this.targetIndex = null;
     }
 
     /**
@@ -56,6 +64,7 @@ public class DeleteCommand extends Command {
         this.type = DeleteCommandType.PLAYER_LINEUP;
         this.player = player;
         this.lineup = lineup;
+        this.targetIndex = null;
     }
 
     /**
@@ -65,6 +74,17 @@ public class DeleteCommand extends Command {
         this.type = DeleteCommandType.LINEUP;
         this.player = null;
         this.lineup = lineup;
+        this.targetIndex = null;
+    }
+
+    /**
+     * Overloaded constructor for delete command.
+     */
+    public DeleteCommand(Index targetIndex) {
+        this.type = DeleteCommandType.SCHEDULE;
+        this.player = null;
+        this.lineup = null;
+        this.targetIndex = targetIndex;
     }
 
     /**
@@ -113,6 +133,16 @@ public class DeleteCommand extends Command {
             model.deleteLineup(toDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_LINEUP_SUCCESS, this.lineup));
             // to be added
+        case SCHEDULE:
+            List<Schedule> lastShownList = model.getFilteredScheduleList();
+
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+            }
+
+            Schedule personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deleteSchedule(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS, personToDelete));
         default:
             throw new CommandException(MESSAGE_DELETE_FAILURE);
         }

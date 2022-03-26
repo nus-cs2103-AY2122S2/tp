@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -153,6 +153,179 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### 1. Add feature
+
+#### 1.1 Add Player
+#### Proposed implementation
+#### Design Consideration
+
+#### 1.2 Add lineup
+#### Proposed implementation
+The proposed add lineup functionality will create a new lineup and store it inside `UniqueLineupList`.
+
+The following sequence diagram shows how the undo operation works:
+![AddLineup](images/AddLineupSequenceDiagram.png)
+
+#### Design Consideration
+**Aspect: Where to store lineup data:**
+
+* **Alternative 1 (current choice):** Store its name as person's attributes.
+  * Pros: Easy to implement. No need to have another json file for storage.
+  * Cons: Need to search through all players to create all lineups for each relaunch of the application.
+
+* **Alternative 2:** Store lineups in the same json file as person.
+  * Pros: Easy to implement load data.
+  * Cons: Troublesome to save all data.
+
+#### 1.3 Add schedule 
+#### Proposed implementation
+#### Design Consideration
+
+### 2. Delete feature
+
+#### 2.1 Delete player
+#### Proposed implementation
+The proposed delete player functionality will delete an existing player from `UniquePlayerList`, 
+as well as from all lineups in `UniqueLineupList` that contains the player.
+
+#### Design Consideration
+
+**Aspect: How to delete a person from `UniquePersonList` by its name?**
+* **Alternative 1 (current choice):** Iterate through `internalList` to find the person, then delete it.
+  * Pros: Easy to implement.
+  * Cons: Slower for large quantity of players, but acceptable within our requirement.
+* **Alternative 2:** Create a HashMap from `Name` to each person, then access it quickly.
+  * Pros: More efficient.
+  * Cons: Hard to implement and time-consuming.
+
+
+#### 2.2 Delete lineup
+#### Proposed implementation
+The proposed delete lineup functionality will delete an existing lineup from `UniqueLineupList` and remove all players from the lineup.
+
+#### Design Consideration
+**Aspect: How to remove lineup from `UniqueLineupList`:**
+
+* **Alternative 1 (current choice):** Remove directly from the internal list.
+  * Pros: Easy to implement.
+  * Cons: The status of AddressBook is not modified and `updateItem()` of GUI needs to be triggered manually.
+
+* **Alternative 2:** Create another list without the player to be removed.
+  * Pros: The `updateItem()` of GUI will be automatically triggered.
+  * Cons: Troublesome to implement and time expensive.
+
+#### 2.3 Delete player from lineup
+#### Proposed implementation
+After checking that both input player and lineup are valid, the lineup's name will be removed from player's `LineupName` list. Then the player will be removed from lineup's `Person` list.
+
+#### Design Consideration
+**Aspect: NA**
+
+#### 2.4 Delete schedule
+#### Proposed implementation
+#### Design Consideration
+
+### 3. Edit feature
+
+#### 3.1 Edit player
+#### Proposed implementation
+#### Design Consideration
+
+#### 3.2 Edit lineup
+#### Proposed implementation
+The proposed edit lineup functionality will update the name of a lineup. 
+Meanwhile, the `lineups` attribute of each person should also be updated if the person is in the lineup.
+
+#### Design Consideration
+**Aspect: How to locate lineup in `UniqueLineupList`:**
+
+* **Alternative 1 (current choice):** Iterate through all lineups to locate it.
+    * Pros: Easy to implement.
+    * Cons: Slower for large quantity of lineups, but sufficient within our requirement.
+
+* **Alternative 2:** Use a HashMap to store the mappings between `LineupName` and `Lineup`.
+    * Pros: Time efficient.
+    * Cons: Troublesome to implement.
+
+#### 2.3 Edit schedule
+#### Proposed implementation
+#### Design Consideration
+
+### 4. View feature
+
+#### 4.1 View player
+#### Proposed implementation
+The proposed view player functionality queries players from the existing UniquePersonList. The players returned is 
+dependent on the keywords specified in the command. The proposed view mechanism is facilitated by ModelManger which keeps 
+a FilteredList of players. Note that this FilteredList of players is updated via a specified Predicate.
+Additionally, it implements the following operations:
+- `ModelManager#updateFilteredPersonList(Predicate<Person>) - Filters internal storage via a Predicate<Person> specification`
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user wants to view player name with james in its name.
+
+Step 3. The user executes `view P/james`. The view command will check if the inputs are valid, and then parsed 
+(similar to the other CRUD commands) before using these inputs to create conditional `Predicate<>` instances (eg. NameContainsKeywordsPredicate). 
+The predicates are then combined and used to filter the `FilteredList<Person>`. The GUI will then display the player items in the filtered list.
+
+The following sequence diagram shows how the find operation works:
+Sequence Diagram:
+__TO BE ADDED__
+#### Design Consideration
+For future development (v1.3b), may consider to enter more flags so that user can perform more specific view task.
+
+#### 4.2 View lineup
+#### Proposed implementation
+#### Design Consideration
+
+#### 4.3 View schedule
+#### Proposed implementation
+#### Design Consideration
+
+### 5. Put feature
+Puts a `Person` into a `Lineup`
+
+#### Proposed implementation
+
+Stores the `LineupName` in `Person`
+
+Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
+#### Design Consideration
+**Aspect: How to navigate from player to lineup:**
+
+* **Alternative 1 (current choice):** Store `LineupName` as an attribute of player.
+  * Pros: Easy to Implement. Easy to navigate.
+  * Cons: Risk of multiple source of truth. More prone to bugs.
+
+* **Alternative 2:** Iterate through lineups to find the ones a player belongs to.
+  * Pros: No multiple source of truth.
+  * Cons: Iteration might be time-consuming.
+
+**Aspect: How to keep track the `Lineup` a `Person` belongs to**
+
+**Alternative 1: (Current choice)** Attributes of `Person`
+
+Pros: Efficient and easy to find `Lineup` of `Person`
+
+Cons: Need to update both `Person` and `Lineup`
+
+**Alternative 2: Using `Lineup` Only
+
+Pros: Only need to update `Lineup`
+
+Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` belongs to
+
+
+### 6. Clear feature
+
+#### Proposed implementation
+#### Design Consideration
+
+### Below are to be removed
 
 ### \[Proposed\] Undo/redo feature
 
@@ -255,13 +428,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: 
+**Target user profile**:
 
 This product is for competitive team sports manager to manage players in their clubs
 (i.e. roles, player attributes, trainings), lineup formation during practice as well
 as scheduling of events (i.e. trainings, competitions, etc.).
 
-**Value proposition**: 
+**Value proposition**:
 
 This product solves:
 * the issues of managing large quantity of players;
@@ -278,42 +451,37 @@ This product is not able to:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                                                              | So that I can…​                                                                                                                  |
-|----------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | potential user                             | look through the app description                                                                                          | I can roughly know what the app can help me to do                                                                                |
-| `* *`    | potential user                             | look at the sample players provided in the app                                                                            | I can quickly visualise the functions of this app                                                                                |
-| `* *`    | potential user                             | purge the mock data                                                                                                       | I can adopt it for my own use                                                                                                    |
-| `* * *`  | new user                                   | add one new player                                                                                                        | I can keep track of players' progress and conditions                                                                             |
-| `* * *`  | new user                                   | add one new training date                                                                                                 | I can keep track of training dates                                                                                               |
-| `* *`    | new user                                   | quickly add multiple/recurring training dates at once by import                                                           | I don't have to add the dates one by one for every week                                                                          |
-| `* *`    | new user                                   | quickly add information of all my players at once by import                                                               | I don't have to add the players in one by one                                                                                    |
-| `* * *`  | new user                                   | tag each player with labels (green for strength, red for weakness, e.g. (green) defend)                                   | the condition of each player is more explicitly represented                                                                      |
-| `* * *`  | new user                                   | tag my players by their position                                                                                          | I know what are the number of players in that position                                                                           |
-| `*`      | new user                                   | tag my players by 'fit to play'                                                                                           | I know which are the available players for competition                                                                           |
-| `* *`    | new user                                   | update my players detail (eg attendance, tags) by their jersey number                                                     | I can quickly perform update operations to my players on the app                                                                 |
-| `*`      | new user                                   | key in the first few letters to see what commands starting with thse letters are available                                | I can know the correct spelling of valid commands                                                                                |
-| `* *`    | new user                                   | key in "help" to see all available commands                                                                               | I don't need to refer to user mannual from time to time                                                                          |
-| `* *`    | new user                                   | view the number of fouls for my player during competition                                                                 | I know when to substitute him when he gets into foul trouble                                                                     |
-| `* *`    | new user                                   | upload the score after the matc                                                                                           | `***`                                                                                                                            |I can keep track of result of previous match
-| `* * *`  | expert user                                | view aggregate data of the tea                                                                                            | `**`                                                                                                                             |I can know how the team is doing as a whole
-| `* * *`  | expert user                                | add my players to a lineup                                                                                                | I can keep track of the performance of this lineup                                                                               |
-| `* *`    | expert user                                | view the past lineup performance                                                                                          | I can decide what are the best potential lineups for competition                                                                 |
-| `* * *`  | expert user                                | update player's ability score                                                                                             | I can keep track of my players                                                                                                   |
-| `* *`    | expert user                                | view my player's progression                                                                                              | I can see if I need to make changes to his training schedule/routine                                                             |
-| `* * *`  | expert user                                | mark the attendence of daily training                                                                                     | I don't have to write it on paper and keep it in office and can directly view each player's attendace rate over a period of time |
-| `* *`    | expert user                                | add the areas of improvement to each player                                                                               | I can curate a training for that player                                                                                          |
-| `* * *`  | expert user                                | delete player details that are no longer part of the tea                                                                  | `**`                                                                                                                             |I can keep track a list of valid players
-| `*`      | expert user                                | send mass reminders to each players one day before training dates                                                         | I don't need to remind every player or mannualy send announcements                                                               |
-| `*`      | expert user                                | analyze which position each player is most suitable for based on my own formula ( 90% accuracy in defending for Defender) | I don't need to read everyone's data                                                                                             |
-| `* * *`  | expert user                                | quickly jot down notes about my player                                                                                    | I don't have to edit their data every time                                                                                       |
-| `* *`    | expert user                                | add shortcuts (for listing lineups etc) to my application                                                                 | I could save a lot of time by accessing to the commonly used commands                                                            |
-| `* *`    | expert user                                | search for my players quickly                                                                                             | I don't need to scroll through the whole list                                                                                    |
-| `* *`    | expert user                                | upload the boxscore of the competition                                                                                    | I can keep a historical record of the performance of my team                                                                     |
-| `* *`    | long-term user                             | archive the players' data for those who have quited the tea                                                               | `**`                                                                                                                             |I won't be confused about which players are valid
-| `* * *`  | long-term user                             | mark down competition date, venue, opponent etc.                                                                          | I won't forget important information about the competition                                                                       |
-| `* *`    | long-term user                             | archive players' data by batch (graduation)                                                                               | I don't need to archive each player one by one                                                                                   |
-| `* * *`  | user                                       | save all existing data to my hard disk                                                                                    | I won't lose all my data                                                                                                         |
-| `* * *`  | user                                       | retrieve all saved data from my hard disk                                                                                 | I can retrieve all my data                                                                                                       |
+| Priority | As a …​        | I want to …​                                                                                   | So that I can…​                                                                                    |
+|----------|----------------|------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| `* * *`  | potential user | look at the sample data provided such as sample players and schedule                           | quickly visualise the functions of this app                                                        |
+| `* * *`  | new user       | see usage instructions                                                                         | refer to instructions when I forget how to use the app                                             |
+| `* * *`  | user           | add a new player                                                                               | keep track of players' progress and conditions                                                     |
+| `* * *`  | user           | add a new training date                                                                        | keep track of training dates                                                                       |
+| `* * *`  | user           | tag my players by their position                                                               | know the number of players in that position                                                        |
+| `* * *`  | user           | see the list of available jersey number                                                        | no need to remember the jersey numbers that has been taken                                         |
+| `* * *`  | user           | see the players that belongs to certain lineup                                                 | quickly assign these players to start a match                                                      |
+| `* * *`  | user           | update my players details (eg phone number or position tags)                                   | keep my players information up to date on the app                                                  |
+| `* * *`  | expert user    | add my players to a lineup                                                                     | keep track of the lineups that I have played                                                       |
+| `* * *`  | expert user    | add the areas of improvement to each player                                                    | curate a training for that player                                                                  |
+| `* * *`  | expert user    | delete player details that are no longer part of the team                                      | keep track a list of valid players that I need                                                     |
+| `* * *`  | expert user    | quickly jot down notes about my player                                                         | remember my thoughts of a certain player                                                           |
+| `* * *`  | user           | save all existing data to my hard disk                                                         | avoid losing all my data                                                                           |
+| `* * *`  | user           | retrieve all saved data from my hard disk                                                      | retrieve all my data                                                                               |
+| `* *`    | potential user | purge the mock data                                                                            | adopt it for my own use                                                                            |
+| `* *`    | expert user    | quickly add multiple/recurring training dates at once by import                                | add all the forecasted training dates at once                                                      |
+| `* *`    | expert user    | quickly add information of all my players at once by import                                    | add all the players I have at once                                                                 |
+| `* *`    | user           | tag the strength and weakness of each of my player (e.g. green for strength, red for weakness) | know the strength and weakness of each player is more explicitly represented                       |
+| `* *`    | user           | filter my players according to their position                                                  | quickly see the players that plays that position                                                   |
+| `* *`    | user           | upload the score after a competition                                                           | keep track of the result of previous matches                                                       |
+| `* *`    | expert user    | view aggregated data of the team (e.g number of players for each position)                     | have a summary of overview of my team                                                              |
+| `* *`    | expert user    | add shortcuts (for listing lineups etc) to my application                                      | save a lot of time by accessing to the commonly used commands                                      |
+| `* *`    | expert user    | search for my players quickly                                                                  | avoid scrolling through the whole list to look for a player                                        |
+| `* *`    | long-term user | archive the players' data for those who have quited the tea                                    | clear about which players are still part of the my club                                            |
+| `* *`    | expert user    | mark the attendance of daily training                                                          | avoid using pen and paper and can directly view each player's attendace rate over a period of time |
+| `*`      | user           | tag my players by 'fit to play'                                                                | know which are the available healthy players for competition                                       |
+| `*`      | new user       | key in the first few letters to see what commands starting with these letters are available    | know the potential commands that starts with these letters                                         |
+| `*`      | expert user    | send mass reminders to each players one day before the training date                           | automate the sending of announcements to my players                                                |
+
 
 *{More to be added}*
 
@@ -326,17 +494,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find a player.
-2. MyGM displays details about the player.  
+2. MyGM displays details about the player.
 Use case ends.
 
 **Extensions**
 
 * 1a. MyGM detects an error in the entered command.
-  * 1a1. MyGM displays the error message  
+  * 1a1. MyGM displays the error message.
   Use case ends.
 
 * 1b. MyGM cannot find the player.
-  * 1b1. MyGM displays failure.  
+  * 1b1. MyGM displays failure.
   Use case ends.
 
 **Use case: UC02 - Create a new Lineup**
@@ -352,16 +520,16 @@ Use case ends.
 
 **Extensions**
 
-* 1a. The lineup already exist in MyGM  
-  * 1a1. MyGM displays the error message.   
+* 1a. The lineup already exist in MyGM
+  * 1a1. MyGM displays the error message.
   Use case returns to the start of 3.
 
-* 3a. MyGM cannot find the player. 
-  * 3a1. MyGM displays the error message.   
+* 3a. MyGM cannot find the player.
+  * 3a1. MyGM displays the error message.
   Use case returns to the start of 3.
 
-* 3b. The lineup is already full. 
-  * 3b1. MyGM displays the error message.  
+* 3b. The lineup is already full.
+  * 3b1. MyGM displays the error message.
   Use case ends.
 
 **Use case: UC03 - Tagging a Player’s Position**
@@ -370,25 +538,41 @@ Use case ends.
 
 1. Find a player (UC01)
 2. User adds a tag to the player.
+3. MyGM displays the success message.
+   Use case ends.
+
+**Extensions**
+* 3a. User entered an invalid tag.
+  * 3a1. MyGM displays the invalid tag message and the appropriate tags.
+  Use case ends.
+
+**Use case: UC04 - Editing a Player’s Details**
+
+**MSS**
+
+1. Find a player (UC01)
+2. User input the new details of the player.
 3. MyGM displays the success message.   
    Use case ends.
 
 **Extensions**
-* 3a. User entered an invalid tag. 
-  * 3a1. MyGM displays the invalid tag message and the appropriate tags.   
-  Use case ends.
+* 1a. User entered a player that does not exist.
+    * 1a1. MyGM displays the invalid player message.   
+      Use case ends.
+* 3a. User entered an invalid input for any of the fields.
+    * 3a1. MyGM displays the invalid input message and the appropriate command.   
+      Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage. 
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should have a _friendly user interface_. 
+4. Should have a _friendly user interface_.
 5. The system should respond within `2` seconds.
 6. Should there be any invalid command, the part of the command that causes this issue should be **highlighted**.
-
 
 ### Glossary
 

@@ -63,17 +63,14 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
     }
 
-    /**
-     * Sets the internalList with a new replacement list
-     */
     public void setSchedules(UniqueScheduleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code schedules}.
+     * {@code schedules} must not contain duplicate persons.
      */
     public void setSchedules(List<Schedule> schedules) {
         requireAllNonNull(schedules);
