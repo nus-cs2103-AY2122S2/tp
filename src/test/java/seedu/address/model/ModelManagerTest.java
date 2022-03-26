@@ -12,12 +12,16 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.predicate.AllWithinTimePeriodPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.InterviewScheduleBuilder;
 
@@ -143,6 +147,22 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredInterviewSchedule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredInterviewSchedule().remove(0));
+    }
+
+    @Test
+    public void getFilteredInterviewSchedule_alwaysSorted_returnsEqual() {
+        AllWithinTimePeriodPredicate predicate = new AllWithinTimePeriodPredicate(LocalDateTime.now());
+        modelManager.addInterview(INTERVIEW_BENSON);
+        modelManager.addInterview(INTERVIEW_ALICE);
+        ObservableList<Interview> notSorted = modelManager.getFilteredInterviewSchedule();
+        modelManager.updateFilteredInterviewSchedule(predicate);
+        ObservableList<Interview> sorted = modelManager.getFilteredInterviewSchedule();
+        assertEquals(notSorted, sorted);
+    }
+
+    @Test
     public void deleteInterviewSuccess() {
         AddressBook addressBook = new AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).build();
         InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE).build();
@@ -167,6 +187,7 @@ public class ModelManagerTest {
         modelManager.deleteInterviewForCandidate(ALICE);
 
         assertEquals(modelManager, modelManagerCopy);
+
     }
 
     @Test
