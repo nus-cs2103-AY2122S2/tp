@@ -17,17 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditCandidateDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -112,6 +103,12 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(AddScheduleCommand.COMMAND_WORD + " " + PREFIX_CANDIDATE
                 + INDEX_FIRST_CANDIDATE.getOneBased() + " " + PREFIX_DATETIME + "01-01-2023 10:00")
                 instanceof ScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_focus() throws Exception {
+        assertTrue(parser.parseCommand(FocusCommand.COMMAND_WORD + " 1")
+                instanceof FocusCommand);
     }
 
     @Test

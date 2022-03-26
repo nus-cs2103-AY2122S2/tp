@@ -35,6 +35,18 @@ public class CommandResultTest {
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback",
                 false, true, false, -1)));
+
+        assertTrue((new CommandResult("feedback",
+                false, false, true, 1)).isShowFocus());
+
+        assertTrue((new CommandResult("feedback",
+                true, false, false, 1)).isShowHelp());
+
+        assertTrue((new CommandResult("feedback",
+                false, true, false, 1)).isExit());
+
+        assertEquals((new CommandResult("feedback",
+                false, true, false, 1).getIndexFocus()), 1);
     }
 
     @Test
