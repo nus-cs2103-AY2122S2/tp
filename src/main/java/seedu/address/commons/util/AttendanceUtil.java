@@ -9,7 +9,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.attendance.AttendanceEntry;
 import seedu.address.model.attendance.MissingAttendanceEntry;
 import seedu.address.model.pet.AttendanceHashMap;
