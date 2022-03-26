@@ -19,7 +19,7 @@ import seedu.ibook.ui.table.item.ItemTable;
  */
 public class ProductCard extends UiComponent<HBox> {
 
-    private static final String FXML = "Table/ProductCard.fxml";
+    private static final String FXML = "table/ProductCard.fxml";
 
     private final int index;
     private final Product product;
@@ -97,13 +97,18 @@ public class ProductCard extends UiComponent<HBox> {
     }
 
     @FXML
-    private void handlePopupUpdate() {
-        getMainWindow().showPopupUpdate(index, product);
+    private void handlePopupUpdateProduct() {
+        getMainWindow().showPopupUpdateProduct(index, product);
     }
 
     @FXML
-    private void handlePopupDelete() {
-        getMainWindow().showPopupDelete(index, product);
+    private void handlePopupDeleteProduct() {
+        getMainWindow().showPopupDeleteProduct(index, product);
+    }
+
+    @FXML
+    private void handlePopupAddItem() {
+        getMainWindow().showPopupAddItem(index, product);
     }
 
     private class EventExpand implements EventHandler<ActionEvent> {

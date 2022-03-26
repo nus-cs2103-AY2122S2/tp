@@ -9,9 +9,9 @@ import seedu.ibook.ui.MainWindow;
 /**
  * Popup responsible to delete product.
  */
-public class PopupDelete extends Popup {
+public class PopupDeleteProduct extends Popup {
 
-    private static final String FXML = "popup/PopupDelete.fxml";
+    private static final String FXML = "popup/PopupDeleteProduct.fxml";
 
     private int index;
 
@@ -19,11 +19,11 @@ public class PopupDelete extends Popup {
     private Label message;
 
     /**
-     * Initializes a new {@code popupDelete} window.
+     * Initializes a new {@code PopupDeleteProduct} window.
      *
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    public PopupDelete(MainWindow mainWindow) {
+    public PopupDeleteProduct(MainWindow mainWindow) {
         super(FXML, mainWindow);
     }
 

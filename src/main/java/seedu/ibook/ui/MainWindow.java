@@ -12,9 +12,10 @@ import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
-import seedu.ibook.ui.filters.FilterList;
+import seedu.ibook.ui.control.ControlBox;
 import seedu.ibook.ui.popup.PopupHandler;
 import seedu.ibook.ui.table.ProductTable;
 
@@ -34,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuToolbar menuToolbar;
     private CommandBox commandBox;
     private ResultWindow resultWindow;
-    private FilterList filterList;
+    private ControlBox controlBox;
     private ProductTable productTable;
 
     private PopupHandler popupHandler;
@@ -96,8 +97,8 @@ public class MainWindow extends UiPart<Stage> {
         resultWindow = new ResultWindow(this);
         children.add(resultWindow.getRoot());
 
-        filterList = new FilterList(this);
-        children.add(filterList.getRoot());
+        controlBox = new ControlBox(this);
+        children.add(controlBox.getRoot());
 
         productTable = new ProductTable(this);
         children.add(productTable.getRoot());
@@ -133,28 +134,43 @@ public class MainWindow extends UiPart<Stage> {
      * Populate the filters used for the product list.
      */
     public void populateFilters() {
-        filterList.populateFilters();
+        controlBox.populateFilters();
     }
 
     /**
      * Shows the popup window for adding product.
      */
-    public void showPopupAdd() {
-        popupHandler.showPopupAdd();
+    public void showPopupAddProduct() {
+        popupHandler.showPopupAddProduct();
     }
 
     /**
      * Shows the popup window for updating product.
      */
-    public void showPopupUpdate(int index, Product product) {
-        popupHandler.showPopupUpdate(index, product);
+    public void showPopupUpdateProduct(int index, Product product) {
+        popupHandler.showPopupUpdateProduct(index, product);
     }
 
     /**
      * Shows the popup window for deleting product.
      */
-    public void showPopupDelete(int index, Product product) {
-        popupHandler.showPopupDelete(index, product);
+    public void showPopupDeleteProduct(int index, Product product) {
+        popupHandler.showPopupDeleteProduct(index, product);
+    }
+
+    /**
+     * Shows the popup window for adding item.
+     */
+    public void showPopupAddItem(int index, Product product) {
+        popupHandler.showPopupAddItem(index, product);
+    }
+
+    /**
+     * Shows the popup window for managing item.
+     */
+    public void showPopupManageItem(int productIndex, int itemIndex,
+                                    Product product, Item item) {
+        popupHandler.showPopupManageItem(productIndex, itemIndex, product, item);
     }
 
     /**

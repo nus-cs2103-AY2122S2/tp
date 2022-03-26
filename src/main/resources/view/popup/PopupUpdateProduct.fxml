@@ -97,7 +97,7 @@
                        <Insets top="20.0" bottom="10.0"/>
                     </VBox.margin>
                     <Text fx:id="error" wrappingWidth="445" fill="#F84748" />
-                    <Button onMouseClicked="#handleUpdateProduct" alignment="CENTER_RIGHT"
+                    <Button onMouseClicked="#handleUpdateProduct"
                             mnemonicParsing="false" styleClass="edit-button" text="Update">
                        <graphic>
                           <ImageView fitHeight="14.0" opacity="0.45" fitWidth="14.0"

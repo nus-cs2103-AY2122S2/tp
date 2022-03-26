@@ -25,23 +25,24 @@
         <Label fx:id="price" styleClass="table-column-short"/>
         <Label fx:id="description" styleClass="table-column-long" HBox.hgrow="ALWAYS"/>
         <HBox styleClass="table-column-long" alignment="CENTER">
-            <Button alignment="CENTER" mnemonicParsing="false" styleClass="action-button">
+            <Button alignment="CENTER" onMouseClicked="#handlePopupAddItem"
+                    mnemonicParsing="false" styleClass="action-button">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../../images/file-plus.png"/>
+                        <Image url="@../../images/file-plus-color.png"/>
                     </ImageView>
                 </graphic>
             </Button>
-            <Button alignment="CENTER" onMouseClicked="#handlePopupUpdate" mnemonicParsing="false"
-                    styleClass="action-button">
+            <Button alignment="CENTER" onMouseClicked="#handlePopupUpdateProduct"
+                    mnemonicParsing="false" styleClass="action-button">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../../images/edit-color.png"/>
                     </ImageView>
                 </graphic>
             </Button>
-            <Button alignment="CENTER" onMouseClicked="#handlePopupDelete" mnemonicParsing="false"
-                    styleClass="action-button">
+            <Button alignment="CENTER" onMouseClicked="#handlePopupDeleteProduct"
+                    mnemonicParsing="false" styleClass="action-button">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../../images/trash-2-color.png"/>

@@ -11,7 +11,8 @@
     <Label fx:id="expiryDate" styleClass="table-column-short" HBox.hgrow="ALWAYS"/>
     <Label fx:id="quantity" styleClass="table-column-short" HBox.hgrow="ALWAYS"/>
     <HBox styleClass="table-column-long" HBox.hgrow="NEVER" alignment="CENTER_RIGHT">
-        <Button mnemonicParsing="false" styleClass="modify-button" text="Manage Item">
+        <Button mnemonicParsing="false" onMouseClicked="#handlePopupManageItem"
+                styleClass="modify-button" text="Manage Item">
             <padding>
                 <Insets bottom="8.0" left="15.0" right="15.0" top="8.0"/>
             </padding>

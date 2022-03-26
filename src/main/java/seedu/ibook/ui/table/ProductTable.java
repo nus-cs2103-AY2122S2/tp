@@ -9,11 +9,11 @@ import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 
 /**
- * The {@code Product} table that is containing {@code ProductCard}.
+ * The {@code ProductTable} that is containing {@code ProductCard}.
  */
 public class ProductTable extends UiComponent<VBox> {
 
-    private static final String FXML = "Table/ProductTable.fxml";
+    private static final String FXML = "table/ProductTable.fxml";
 
     private final ObservableList<Product> filteredIBook;
 
@@ -50,5 +50,4 @@ public class ProductTable extends UiComponent<VBox> {
             populateField();
         }
     }
-
 }

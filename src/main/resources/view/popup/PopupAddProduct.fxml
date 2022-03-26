@@ -94,7 +94,7 @@
                        <Insets top="20.0" bottom="10.0"/>
                     </VBox.margin>
                     <Text fx:id="error" wrappingWidth="465" fill="#F84748"/>
-                    <Button onMouseClicked="#handleCreateProduct" alignment="CENTER_RIGHT"
+                    <Button onMouseClicked="#handleAddProduct"
                             mnemonicParsing="false" styleClass="primary-button" text="Add">
                        <graphic>
                           <ImageView fitHeight="14.0" fitWidth="14.0"
