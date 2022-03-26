@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.InputHistoryResult;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyStudentBook;
 import seedu.address.model.lesson.Lesson;
@@ -61,4 +62,25 @@ public interface Logic {
      * Returns the selected lesson from {@code Model}.
      */
     Lesson getSelectedLesson();
+
+    /**
+     * Add a new user input to the history.
+     *
+     * @param userInput The new user input.
+     */
+    void addNewUserInputToHistory(String userInput);
+
+    /**
+     * Retrieve the previous user's input from {@code UserInputHistory}.
+     *
+     * @return The previous user's input as a {@code InputHistoryResult} object.
+     */
+    InputHistoryResult getPreviousInput();
+
+    /**
+     * Retrieve the following user's input from {@code UserInputHistory}.
+     *
+     * @return The following user's input as a {@code InputHistoryResult} object.
+     */
+    InputHistoryResult getNextInput();
 }

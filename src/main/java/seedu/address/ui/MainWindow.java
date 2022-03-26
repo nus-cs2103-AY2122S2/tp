@@ -23,6 +23,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ViewTab;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.inputhistory.InputHistoryResult;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
@@ -149,50 +150,9 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStudentBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::getPreviousUserInput,
+                this::getNextUserInput);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    private void updateAndPopulatePersonList() {
-        populateListPanelWithStudents(logic.getFilteredStudentList());
-    }
-
-    private void updateAndPopulateLessonList() {
-        populateListPanelWithLessons(logic.getFilteredLessonList());
-    }
-
-    /**
-     * Toggles to the tab provided by the enum value.
-     * @param toggleTo Provided {@code ViewTab} to toggle to
-     */
-    public void toggleTab(ViewTab toggleTo) {
-        requireNonNull(toggleTo);
-        if (toggleTo.equals(ViewTab.LESSON)) {
-            logger.info("Toggling to Lesson Tab");
-            toggleLessonTab();
-        } else if (toggleTo.equals(ViewTab.STUDENT)) {
-            logger.info("Toggling to Student Tab");
-            toggleStudentTab();
-        } else {
-            logger.severe("Something went wrong when toggling the tabs");
-            assert false;
-        }
-    }
-
-    /**
-     * Toggles to student tab.
-     */
-    public void toggleStudentTab() {
-        updateAndPopulatePersonList();
-        listPane.getSelectionModel().select(studentTab);
-    }
-
-    /**
-     * Toggles to student tab.
-     */
-    public void toggleLessonTab() {
-        updateAndPopulateLessonList();
-        listPane.getSelectionModel().select(lessonTab);
     }
 
     /**
@@ -236,28 +196,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the InfoPanel.
-     */
-    private void handleInfoPanelUpdate(InfoPanelTypes infoPanelTypes) {
-        requireNonNull(infoPanelTypes);
-        switch (infoPanelTypes) {
-        case STUDENT:
-            logger.info("Updating InfoPanel with selected student");
-            Student selectedStudent = logic.getSelectedStudent();
-            populateInfoPanelWithStudent(selectedStudent);
-            break;
-        case LESSON:
-            logger.info("Updating InfoPanel with selected lesson");
-            Lesson selectedLesson = logic.getSelectedLesson();
-            populateInfoPanelWithLesson(selectedLesson);
-            break;
-        default:
-            logger.severe("Something went wrong with handling the InfoPanels");
-            assert false;
-        }
-    }
-
-    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -285,6 +223,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleInfoPanelUpdate(infoPanelType);
             }
 
+            addNewUserInputToHistory(commandText);
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
@@ -293,7 +233,62 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Toggles to the tab provided by the enum value.
+     * @param toggleTo Provided {@code ViewTab} to toggle to
+     */
+    public void toggleTab(ViewTab toggleTo) {
+        requireNonNull(toggleTo);
+        if (toggleTo.equals(ViewTab.LESSON)) {
+            logger.info("Toggling to Lesson Tab");
+            toggleLessonTab();
+        } else if (toggleTo.equals(ViewTab.STUDENT)) {
+            logger.info("Toggling to Student Tab");
+            toggleStudentTab();
+        } else {
+            logger.severe("Something went wrong when toggling the tabs");
+            assert false;
+        }
+    }
+
+    /**
+     * Toggles to student tab.
+     */
+    public void toggleStudentTab() {
+        updateAndPopulatePersonList();
+        listPane.getSelectionModel().select(studentTab);
+    }
+
+    /**
+     * Toggles to student tab.
+     */
+    public void toggleLessonTab() {
+        updateAndPopulateLessonList();
+        listPane.getSelectionModel().select(lessonTab);
+    }
+
+    // User Input History methods
+    private void addNewUserInputToHistory(String userInput) {
+        logic.addNewUserInputToHistory(userInput);
+    }
+
+    private InputHistoryResult getPreviousUserInput() {
+        return logic.getPreviousInput();
+    }
+
+    private InputHistoryResult getNextUserInput() {
+        return logic.getNextInput();
+    }
+
     // List Panel Methods
+    private void updateAndPopulatePersonList() {
+        populateListPanelWithStudents(logic.getFilteredStudentList());
+    }
+
+    private void updateAndPopulateLessonList() {
+        populateListPanelWithLessons(logic.getFilteredLessonList());
+    }
+
     private void populateListPanelWithLessons(ObservableList<Lesson> list) {
         lessonListPanel = new LessonListPanel(list);
         populateLessonListPanel(lessonListPanel);
@@ -313,6 +308,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     // Info Panel Methods
+    /**
+     * Updates the InfoPanel.
+     */
+    private void handleInfoPanelUpdate(InfoPanelTypes infoPanelTypes) {
+        requireNonNull(infoPanelTypes);
+        switch (infoPanelTypes) {
+        case STUDENT:
+            logger.info("Updating InfoPanel with selected student");
+            Student selectedStudent = logic.getSelectedStudent();
+            populateInfoPanelWithStudent(selectedStudent);
+            break;
+        case LESSON:
+            logger.info("Updating InfoPanel with selected lesson");
+            Lesson selectedLesson = logic.getSelectedLesson();
+            populateInfoPanelWithLesson(selectedLesson);
+            break;
+        default:
+            logger.severe("Something went wrong with handling the InfoPanels");
+            assert false;
+        }
+    }
+
     private void populateInfoPanelWithStudent(Student selectedStudent) {
         requireNonNull(selectedStudent);
         infoPanel = new StudentInfoPanel(selectedStudent);
