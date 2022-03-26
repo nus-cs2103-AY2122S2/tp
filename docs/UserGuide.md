@@ -206,7 +206,7 @@ Format: `comment <INDEX> [c/<COMMENT>]`
 * Omitting the `[c/<COMMENT>]` would remove the comment of that specific show.
 
 Examples:
-* `list` followed by `comment 2 c/Shags` edit 2nd show's comment in Trackermon to "Shags".
+* `list` followed by `comment 2 c/Shags` edits the 2nd show's comment in Trackermon to "Shags".
 * `find ghibli` followed by `comment 1` deletes the comment of the 1st show in results of `find` command.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
