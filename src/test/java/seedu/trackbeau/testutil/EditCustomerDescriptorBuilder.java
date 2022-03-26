@@ -4,8 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.trackbeau.logic.commands.EditCommand;
-import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
+import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Customer;
@@ -21,7 +20,7 @@ import seedu.trackbeau.model.tag.Tag;
  */
 public class EditCustomerDescriptorBuilder {
 
-    private EditCommand.EditCustomerDescriptor descriptor;
+    private EditCustomerDescriptor descriptor;
 
     public EditCustomerDescriptorBuilder() {
         descriptor = new EditCustomerDescriptor();
@@ -42,10 +41,11 @@ public class EditCustomerDescriptorBuilder {
         descriptor.setAddress(customer.getAddress());
         descriptor.setSkinType(customer.getSkinType());
         descriptor.setHairType(customer.getHairType());
-        descriptor.setBirthdate(customer.getBirthdate());
         descriptor.setStaffs(customer.getStaffs());
         descriptor.setServices(customer.getServices());
         descriptor.setAllergies(customer.getAllergies());
+        descriptor.setBirthdate(customer.getBirthdate());
+        descriptor.setRegistrationDate(customer.getRegDate());
     }
 
     /**

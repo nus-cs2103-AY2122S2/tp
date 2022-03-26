@@ -20,22 +20,22 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.trackbeau.commons.core.index.Index;
-import seedu.trackbeau.logic.commands.EditCommand;
-import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
+import seedu.trackbeau.logic.commands.customer.EditCustomerCommand;
+import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditCustomerCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditCommandParser implements Parser<EditCustomerCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditCustomerCommand
+     * and returns an EditCustomerCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditCustomerCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -47,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCustomerCommand.MESSAGE_USAGE), pe);
         }
 
         EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
@@ -83,10 +83,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editCustomerDescriptor::setAllergies);
 
         if (!editCustomerDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCustomerCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editCustomerDescriptor);
+        return new EditCustomerCommand(index, editCustomerDescriptor);
     }
 
     /**

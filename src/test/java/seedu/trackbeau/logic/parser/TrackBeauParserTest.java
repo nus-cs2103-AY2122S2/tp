@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.index.Index;
-import seedu.trackbeau.logic.commands.AddCommand;
+import seedu.trackbeau.logic.commands.customer.AddCustomerCommand;
 import seedu.trackbeau.logic.commands.ClearCommand;
-import seedu.trackbeau.logic.commands.DeleteCommand;
+import seedu.trackbeau.logic.commands.customer.DeleteCustomerCommand;
 import seedu.trackbeau.logic.commands.ExitCommand;
-import seedu.trackbeau.logic.commands.FindCommand;
+import seedu.trackbeau.logic.commands.customer.FindCustomerCommand;
 import seedu.trackbeau.logic.commands.HelpCommand;
-import seedu.trackbeau.logic.commands.ListCommand;
+import seedu.trackbeau.logic.commands.customer.ListCustomersCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
@@ -36,8 +36,8 @@ public class TrackBeauParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Customer customer = new CustomerBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(CustomerUtil.getAddCommand(customer));
-        assertEquals(new AddCommand(customer), command);
+        AddCustomerCommand command = (AddCustomerCommand) parser.parseCommand(CustomerUtil.getAddCommand(customer));
+        assertEquals(new AddCustomerCommand(customer), command);
     }
 
     @Test
@@ -48,14 +48,14 @@ public class TrackBeauParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CUSTOMER.getOneBased());
+        DeleteCustomerCommand command = (DeleteCustomerCommand) parser.parseCommand(
+                DeleteCustomerCommand.COMMAND_WORD + " " + INDEX_FIRST_CUSTOMER.getOneBased());
         ArrayList<Index> firstCustomer = new ArrayList<>() {
             {
                 add(INDEX_FIRST_CUSTOMER);
             }
         };
-        assertEquals(new DeleteCommand(firstCustomer), command);
+        assertEquals(new DeleteCustomerCommand(firstCustomer), command);
     }
 
     /*ToDo uncomment when edit command is fixed
@@ -63,9 +63,9 @@ public class TrackBeauParserTest {
     public void parseCommand_edit() throws Exception {
         Customer customer = new CustomerBuilder().build();
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder(customer).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditCustomerCommand command = (EditCustomerCommand) parser.parseCommand(EditCustomerCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + CustomerUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditCustomerCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
     */
 
@@ -80,9 +80,9 @@ public class TrackBeauParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
         prefixArr.add(0, keywords);
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " /n" + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new SearchContainsKeywordsPredicate(prefixArr)), command);
+        FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
+                FindCustomerCommand.COMMAND_WORD + " /n" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCustomerCommand(new SearchContainsKeywordsPredicate(prefixArr)), command);
     }
 
     @Test
@@ -93,8 +93,8 @@ public class TrackBeauParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCustomersCommand.COMMAND_WORD) instanceof ListCustomersCommand);
+        assertTrue(parser.parseCommand(ListCustomersCommand.COMMAND_WORD + " 3") instanceof ListCustomersCommand);
     }
 
     @Test

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.commons.core.index.Index;
+import seedu.trackbeau.logic.commands.customer.DeleteCustomerCommand;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
@@ -24,9 +25,9 @@ import seedu.trackbeau.model.customer.Customer;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code DeleteCustomerCommand}.
  */
-public class DeleteCommandTest {
+public class DeleteCustomerCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackBeau(), new UserPrefs());
 
@@ -38,16 +39,16 @@ public class DeleteCommandTest {
                 add(INDEX_FIRST_CUSTOMER);
             }
         };
-        DeleteCommand deleteCommand = new DeleteCommand(firstCustomer);
+        DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(firstCustomer);
 
         StringBuilder sb = new StringBuilder();
         sb.append(customerToDelete).append("\n");
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
+        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
 
         ModelManager expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -58,9 +59,9 @@ public class DeleteCommandTest {
             }
         };
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCustomerCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
@@ -74,18 +75,18 @@ public class DeleteCommandTest {
                 add(INDEX_SECOND_CUSTOMER);
             }
         };
-        DeleteCommand deleteCommand = new DeleteCommand(customers);
+        DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(customers);
 
         StringBuilder sb = new StringBuilder();
         sb.append(customerToDelete1).append("\n");
         sb.append(customerToDelete2).append("\n");
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
+        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
 
         ModelManager expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete1);
         expectedModel.deleteCustomer(customerToDelete2);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -96,9 +97,9 @@ public class DeleteCommandTest {
                 add(Index.fromOneBased(model.getFilteredCustomerList().size() + 1));
             }
         };
-        DeleteCommand deleteCommand = new DeleteCommand(customers);
+        DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(customers);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCustomerCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
@@ -111,17 +112,17 @@ public class DeleteCommandTest {
                 add(INDEX_FIRST_CUSTOMER);
             }
         };
-        DeleteCommand deleteCommand = new DeleteCommand(firstCustomer);
+        DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(firstCustomer);
 
         StringBuilder sb = new StringBuilder();
         sb.append(customerToDelete).append("\n");
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
+        String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
 
         Model expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
         showNoCustomer(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -136,9 +137,9 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of trackBeau list
         assertTrue(outOfBoundIndex.get(0).getZeroBased() < model.getTrackBeau().getCustomerList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCustomerCommand deleteCustomerCommand = new DeleteCustomerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCustomerCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
@@ -153,14 +154,14 @@ public class DeleteCommandTest {
                 add(INDEX_SECOND_CUSTOMER);
             }
         };
-        DeleteCommand deleteFirstCommand = new DeleteCommand(firstCustomer);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(secondCustomer);
+        DeleteCustomerCommand deleteFirstCommand = new DeleteCustomerCommand(firstCustomer);
+        DeleteCustomerCommand deleteSecondCommand = new DeleteCustomerCommand(secondCustomer);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstCustomer);
+        DeleteCustomerCommand deleteFirstCommandCopy = new DeleteCustomerCommand(firstCustomer);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
