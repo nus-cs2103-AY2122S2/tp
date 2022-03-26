@@ -62,14 +62,11 @@ public class ClientCard extends UiPart<Region> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (client.getDesiredProperty() instanceof NullPropertyToBuy) {
-            System.out.println("The NullPropertyToBuy is accessed");
-
-        } else {
-            propertyType.setText(client.getDesiredProperty().getHouse().getHouseTypeToString());
-            propertyLocation.setText(client.getDesiredProperty().getHouse().getLocationToString());
-            propertyLowerPrice.setText(client.getDesiredProperty().getPriceRange().getLowerToString());
-            propertyUpperPrice.setText(client.getDesiredProperty().getPriceRange().getUpperToString());
+        if (!(client.getPropertyToBuy() instanceof NullPropertyToBuy)) {
+            propertyType.setText(client.getPropertyToBuy().getHouse().getHouseTypeToString());
+            propertyLocation.setText(client.getPropertyToBuy().getHouse().getLocationToString());
+            propertyLowerPrice.setText(client.getPropertyToBuy().getPriceRange().getLowerToString());
+            propertyUpperPrice.setText(client.getPropertyToBuy().getPriceRange().getUpperToString());
         }
     }
 

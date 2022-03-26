@@ -63,7 +63,7 @@ public class AddPropertyToBuyCommand extends Command {
 
         Buyer buyerToUpdate = lastShownList.get(index.getZeroBased());
 
-        if (buyerToUpdate.getDesiredProperty().equals(propertyToBuy)) {
+        if (buyerToUpdate.getPropertyToBuy().equals(propertyToBuy)) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
         Buyer buyerWithProperty = createPropertyForBuyer(buyerToUpdate, propertyToBuy);

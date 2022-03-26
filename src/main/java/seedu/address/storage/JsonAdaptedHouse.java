@@ -18,7 +18,7 @@ public class JsonAdaptedHouse {
      * Constructs a {@code JsonAdaptedHouse} with the given house details.
      */
     @JsonCreator
-    public JsonAdaptedHouse(@JsonProperty("housetype") String houseType,
+    public JsonAdaptedHouse(@JsonProperty("houseType") String houseType,
                             @JsonProperty("location") String location) {
         this.houseType = houseType;
         this.location = location;
@@ -38,6 +38,6 @@ public class JsonAdaptedHouse {
      * @throws IllegalValueException if there were any data constraints violated in the adapted house.
      */
     public House toModelType() throws IllegalValueException {
-        return new House(HouseType.valueOf(houseType.toUpperCase(Locale.ROOT)), location);
+        return new House(HouseType.getHouseType(houseType), location);
     }
 }

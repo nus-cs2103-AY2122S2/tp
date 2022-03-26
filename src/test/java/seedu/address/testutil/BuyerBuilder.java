@@ -46,7 +46,7 @@ public class BuyerBuilder {
         phone = buyerToCopy.getPhone();
         appointment = buyerToCopy.getAppointment();
         tags = new HashSet<>(buyerToCopy.getTags());
-        desiredProperty = buyerToCopy.getDesiredProperty();
+        desiredProperty = buyerToCopy.getPropertyToBuy();
     }
 
     /**
