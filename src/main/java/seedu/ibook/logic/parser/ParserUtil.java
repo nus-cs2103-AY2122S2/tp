@@ -21,7 +21,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     public static final String MESSAGE_INVALID_COMPOUND_INDEX =
-            "Index is not a non-zero unsigned integer pair separated by \"-\".";
+            "Index is not a non-zero unsigned integer pair separated by \""
+                    + CompoundIndex.SEPARATOR
+                    + "\".";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -47,7 +49,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_COMPOUND_INDEX);
         }
 
-        String[] parts = trimmedIndices.split("-");
+        String[] parts = trimmedIndices.split(CompoundIndex.SEPARATOR);
 
         return CompoundIndex.fromOneBased(
                 Integer.parseInt(parts[0]),
