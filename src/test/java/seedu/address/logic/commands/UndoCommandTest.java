@@ -102,7 +102,7 @@ public class UndoCommandTest {
      */
     @Test
     public void execute_listIsFiltered_undoSortCommand() {
-        model.sortPetList("/o");
+        model.sortPetList("owner");
 
         UndoCommand undoCommand = new UndoCommand();
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);

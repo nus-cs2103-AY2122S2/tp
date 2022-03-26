@@ -52,15 +52,15 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]`
 Examples:
 * `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`.
 
-### Editting a pet : `edit`
+### Edit a pet : `edit`
 
 Edits an existing pet in the address book.
 
 Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]`
-* Edits the pet at the specified `INDEX`. The index refers to the index number shown in the displayed pet list. The index **must be a positive integar**.
-* All of the fields are optional but at least one of the fields must be provided.
+* Edits the pet at the specified `INDEX`. The index refers to the index number shown in the displayed pet list. The index **must be a positive integer**.
+* All the fields are optional but at least one of the fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the pet will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.
 * You can remove all the pet's tags by typing t/ without specifying any tags after it.
 
 ### List all pets : `list`
@@ -71,13 +71,17 @@ Format:`list`
 
 ### Sort pets: `sort`
 
-Retrieves a sorted list of pets. Users can choose to either sort them by owner name or pet name.
+Retrieves and return a sorted list of pets. 
 
-Format: `sort [FIRST_LETTER_OF_COLUMN]`
+Format: `sort SORT_BY`
+* Currently, users can sort the address book in 3 ways, pet name, owners and appointment date.
+* The valid `SORT_BY` parameters corresponding to 3 ways mentioned above is `name` , `owner` and `app` respectively.
+* The parameters are case-sensitive.
+* Only parameter is to be used when the command is used. If none or more than one parameter is used, command will throw an error.
 * Since we can only sort the pet list by owner name or pet name, the only commands available currently are `sort /o` and `sort /n`.
 
 Examples:
-* `sort /o`
+* `sort owner`
 
 ### Find pet details: `find`
 
@@ -173,7 +177,7 @@ Format: `undo`
 
 
 Examples:
-* If the user choses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted. 
+* If the user chooses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted. 
 
 ### Deleting a pet: `delete`
 
@@ -202,24 +206,25 @@ Format: `exit`
 
 ### Viewing help : `help`
 
-Shows a message explaing how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                                                          |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`                                                                             |
-| **Edit**            | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]` <br> e.g, `edit 1 p/98247076 t/bulldog`                                                                                                         |
-| **Delete**          | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                                                                            |
-| **Find**            | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                                                                                                  |
-| **Diet**            | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                                                                                                       |
+| Action      | Format, Examples                                                                                                                                                                                                                |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`                                                                                   |
+| **Edit**    | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]` <br> e.g, `edit 1 p/98247076 t/bulldog`                                                                                                        |
+| **Delete**  | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                                                                                  |
+| **Find**    | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                                                                                                        |
+| **Diet**    | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                                                                                                             |
 | **Present** | `present INDEX date/dd-MM-yyyy pu/HH:mm do/HH:mm` <br> e.g., `present 1 date/16-03-2022 pu/08:00 do/17:00` <br>(indicates that pet 1 will be attending daycare on 16 March 2022, requires pick up at 8 am and drop off at 5 pm) |
-| **Absent**  | `absent INDEX date/dd-MM-yyyy` <br> e.g., `absent 1 date/17-03-2022` (indicates that pet 1 was absent on 17 March 2022)                                                                                                    |
-| **App**         | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]` e.g., `app 1 date/04-03-2022 09:30 at/ NUS Vet Clinic` <br> `app INDEX clear` e.g., `app 1 clear`                                                                                                            |
-| **List**            | `list` |
-| **Clear**           | `clear`|
-| **Exit**            | `exit` |
-| **Help**            | `help` |
-| **undo**            | `undo` |
+| **Absent**  | `absent INDEX date/dd-MM-yyyy` <br> e.g., `absent 1 date/17-03-2022` (indicates that pet 1 was absent on 17 March 2022)                                                                                                         |
+| **App**     | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]` e.g., `app 1 date/04-03-2022 09:30 at/ NUS Vet Clinic` <br> `app INDEX clear` e.g., `app 1 clear`                                                                             |
+| **Sort**    | `sort SORT_BY` <br> e.g., `sort name`                                                                                                                                                                                           |
+| **List**    | `list`                                                                                                                                                                                                                          |
+| **Clear**   | `clear`                                                                                                                                                                                                                         |
+| **Exit**    | `exit`                                                                                                                                                                                                                          |
+| **Help**    | `help`                                                                                                                                                                                                                          |
+| **undo**    | `undo`                                                                                                                                                                                                                          |
