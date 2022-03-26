@@ -40,19 +40,25 @@ alt does not conflict with any existing lessons
     create CommandResult
     AddLessonCommand -> CommandResult
     activate CommandResult
-    CommandResult --> AddLessonCommand : commandResult
+    CommandResult --> AddLessonCommand : commandResultSuccess
     deactivate CommandResult
 
-    LogicManager <-- AddLessonCommand : commandResult
+    LogicManager <-- AddLessonCommand : commandResultSuccess
 
-    [<--LogicManager : commandResult
+    [<--LogicManager : commandResultSuccess
 else else
      AddLessonCommand <-- Model : conflictsWithLessonException
      deactivate Model
-     LogicManager <-- AddLessonCommand : commandException
+
+     create CommandResult
+     AddLessonCommand -> CommandResult
+     activate CommandResult
+     CommandResult --> AddLessonCommand : commandResultError
+     deactivate CommandResult
+     LogicManager <-- AddLessonCommand : commandResultError
      deactivate AddLessonCommand
 
-     [<--LogicManager : commandException
+     [<--LogicManager : commandResultError
      deactivate LogicManager
 end
 note left of LogicManager
