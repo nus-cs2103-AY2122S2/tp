@@ -19,8 +19,8 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons or events in address book whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -210,7 +210,7 @@ public class FindCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
+            if (!(other instanceof FindCommand.FindPersonDescriptor)) {
                 return false;
             }
 

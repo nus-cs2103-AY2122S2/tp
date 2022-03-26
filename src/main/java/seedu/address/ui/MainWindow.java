@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private PersonListPanel personListPanel1;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -46,13 +46,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane singlePersonPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane personListPanelPlaceholder1;
+    private StackPane eventListPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -117,8 +120,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        personListPanel1 = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder1.getChildren().add(personListPanel1.getRoot());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -174,6 +177,16 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    private void showEventsInRightPanel(boolean isList) {
+        if (isList) {
+            eventListPanelPlaceholder.setVisible(true);
+            singlePersonPanelPlaceholder.setVisible(false);
+        } else {
+            eventListPanelPlaceholder.setVisible(false);
+            singlePersonPanelPlaceholder.setVisible(true);
+        }
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -184,6 +197,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isListCommand() || commandResult.isViewCommand()) {
+                showEventsInRightPanel(commandResult.isListCommand());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

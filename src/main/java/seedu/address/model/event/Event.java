@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Name;
 
@@ -11,7 +12,7 @@ import seedu.address.model.person.Name;
  * Represents an Event in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Event {
+public class Event implements Comparable<Event> {
 
     // Identity fields
     private final EventName name;
@@ -42,8 +43,17 @@ public class Event {
         return participants;
     }
 
+    public List<String> getParticipantStrings() {
+        return getParticipants().stream().map(participant -> participant.fullName)
+                .collect(Collectors.toList());
+    }
+
     public DateTime getDateTime() {
         return dateTime;
+    }
+
+    public boolean isParticipantsEmpty() {
+        return participants.isEmpty();
     }
 
     /**
@@ -65,6 +75,21 @@ public class Event {
                 && otherEvent.getDateTime().equals(getDateTime());
     }
 
+    /**
+     * Displays the formatted details for cancel event command
+     */
+    public String displayForCancelEvent() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getEventName())
+                .append(" | Details: ")
+                .append(getEventInfo())
+                .append(" | Date & Time: ")
+                .append(getDateTime())
+                .append(" | Participants: ")
+                .append(getParticipants());
+        return builder.toString();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, info, participants, dateTime);
@@ -82,5 +107,10 @@ public class Event {
                 .append("\nParticipants: ")
                 .append(getParticipants());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        return dateTime.compareTo(other.dateTime);
     }
 }
