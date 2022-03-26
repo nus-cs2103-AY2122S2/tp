@@ -20,6 +20,19 @@ title: Developer Guide
         * [Implementation](#implementation-1)
         * [Design consideration](#design-considerations)
             * [How find executes](#aspect-how-find-executes)
+    * [Sort command feature](#sort-command-feature)
+      * [What it does](#what-it-does-1)
+        * [Implementation](#implementation-2)
+        * [Design consideration](#design-considerations-1)
+            * [How sort executes](#aspect-how-sort-executes)
+    * [Status feature](#status-feature)
+        * [What it does](#what-it-does-2)
+            * [Implementation](#implementation-3)
+            * [Design considerations](#design-considerations-2)
+    * [Import and Export feature](#import-and-export-feature)
+        * [What it does](#what-it-does-3)
+            * [Implementation](#implementation-4)
+            * [Design considerations](#design-considerations-3)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -29,10 +42,14 @@ title: Developer Guide
     * [Glossary](#glossary)
 * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
+    * [Adding a show](#adding-a-show)
     * [Deleting a show](#deleting-a-show)
     * [Editing a show](#editing-a-show)
+    * [Edit a comment](#edit-comment)
     * [Saving data](#saving-data)
     * [Finding a show](#finding-a-show)
+    * [Importing Trackermon data](#importing-trackermon-data)
+    * [Exporting Trackermon data](#exporting-trackermon-data)
 
 
 ---
@@ -40,6 +57,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The find feature and documentation were adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html), [stackoverflow](https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream) and [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+* The help window feature was adopted from the video [here](https://youtu.be/vego72w5kPU).
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -218,25 +237,31 @@ This section describes some noteworthy details on how certain features are imple
 Looks for a show in a list of shows and displays all the shows that match the user's input. If the user's input contains no prefixes, `find` will do a general search through all fields in the `Show` class.
 
 #### Implementation
-After entering the find command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax.Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. `FindCommand` is a class that inherits the `Command` abstract class. `FindCommand` implements the `execute()` method from the `Command` abstract class where on execution, it will scan through the shows in the model's list of shows and check if any shows match the user's input. The model is then udpated with the filtered show list.
+After entering the find command, the `ArgumentTokenizer` will map any prefixes in the user's input to Trackermon's prefix syntax.Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. Else, a general show predicate will be created by scanning through the name, status and tag fields of the `Show` class. `FindCommand` is a class that inherits the `Command` abstract class. `FindCommand` implements the `execute()` method from the `Command` abstract class where on execution, it will scan through the shows in the model's list of shows and check if any shows match the user's input. The model is then udpated with the filtered show list.
 
 Given below is an example usage scenario and the step-by-step flow of the find command.
 
-Step 1: The user launches Trackermon and enters `find n/Shingeki no Kyojin s/watching` to find a show.
+Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from local storage `Trackermon.json`.
 
-Step 2: The find command will check and see whether any shows contain the name `Shingeki no Kyojin` and the status `watching` using the `Model#updateFilteredShowList` method.
+Step 2: The user executes `find t/Anime t/Action` to find a show.
 
-Step 3:
-`Model#updateFilteredShowList` will be called and model will be udpated.
+Step 3: The find command will check and see whether any shows contain the tags `Anime` and `Action` using the `Model#updateFilteredShowList` method.
+
+Step 4:
+`Model#updateFilteredShowList` will be called and model will be updated without modifying the original show list. If no shows match the keywords given by the user, an empty list will be displayed.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 `find Shingeki no Kyojin` will also work, however it will scan through the name, status and tag fields instead of the name field only
 </div>
 
+The following sequence diagram summarizes what happens when a user executes a valid find command on tags only: (Zoom in to view the sequence diagram)
+
+<img src="images/FindSequenceDiagram.png" width="2500px">
+
 The following activity diagram summarizes what happens when a user executes a valid find command:
 
-<img src="images/FindShowDiagram.png">
+<img src="images/FindShowDiagram.png" >
 
 #### Design considerations:
 ##### Aspect: How find executes
@@ -245,8 +270,93 @@ The following activity diagram summarizes what happens when a user executes a va
   - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.
 
 - **Alternative 2:** Directly check whether the show is in the show list in the find command parser without a predicate.
-  - Pros: Developers can easily understand the code and its functionality as all of the code is condensed in a single class.
+  - Pros: Developers can easily understand the code and its functionality as all the code is consolidated in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Sort command feature
+
+#### What it does
+
+Sort the list of shows according user's input prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, by default it will sort by name then by status.
+
+#### Implementation
+After entering the sort command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax. Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `SortCommand` object will be created with `Comparator` according to the specified prefixes. Else, a `NameComparator` will be created which can be used to sort names in ascending order. `SortCommand` is a class that inherits the `Command` abstract class. `SortCommand` implements the `execute()` method from the `Command` abstract class where on execution, sort the model's list of shows according to the `Comparator`. The model is then updated with the sorted show list.
+
+Given below is an example usage scenario and the step-by-step flow of the sort command.
+
+Step 1: The user launches Trackermon and enters `sort sna/ ssd/` to sort the list of shows.
+
+Step 2: The sort command parser will check for prefixes and generate the appropriate `Comparator` for the SortCommand. In this case it generate a `NameComparator().thenComparing(StatusComparator().reverse()))`
+
+Step 3: When the sort command executes, it will call`Model#updateSortedShowList` method.
+
+Step 4: The sorted list in model will apply the Comparator and model will be updated in order by ascending name then descending status.
+
+The following activity diagram summarizes what happens when a user executes a sort command:
+
+<img src="images/SortShowDiagram.png">
+
+The following sequence diagram summarizes what happens when a user executes a sort command, in this case sort with no prefix:
+<img src="images/SortSequenceDiagram.png">
+
+#### Design considerations:
+##### Aspect: How sort executes
+- **Alternative 1 (current choice):** The `sort` command checks for the optional prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, it will sort by name then by default.
+
+  - Pros: No invalid commands input by the user
+  - Cons: Users need to get use to the prefixes used.
+
+- **Alternative 2:** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
+    - Pros: Users have fewer prefixes to remember
+    - Cons: Users need to remember valid inputs
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Status feature
+
+#### What it does
+`Status` class is an attribute within the `Show` class. `Status` represents the 
+watched status of the show which can be represented by `completed` and `watching`. 
+
+#### Implementation
+
+`Status` class is implemented as a `enum` class. Enumerations 
+are a list of named constants, where the named constants are `completed` and `watching`.
+It is also possible to implement `Status` as a normal class encapsulating a String or Integer which would 
+represent the status of the show (`watching` & `completed`). However, the former implementation
+is chosen due to certain advantages that it offers.
+
+#### Design considerations:
+
+1. Enumerations offer compile time type safety, reducing the risk of runtime errors.
+2. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would 
+reference the same `enum` class. However, for the class implementation, a new `Status` instance is
+instantiated each time a `Show` object is created.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Import and Export feature
+
+### What it does
+`import` and `export` allows the user to quickly import/export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
+
+### Implementation
+When the import/export command is executed, a `JsonFileManager` is created with the default filename. The `JsonFileManager` handles the creation of the File Explorer GUI along with the logic behind import/export. The `importFile` and `exportFile` methods return an integer used to represent the status of the process.
+
+For `import`: After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
+
+### Design considerations:
+##### Aspect: How the File Explorer looks
+- **Alternative 1 (current choice):** Using the JFileChooser library. This library manages to create a File Explorer GUI similar to Windows' native File Explorer's GUI. There were issues implementing this for MacOS but since the other library had issues with the MacOS implementation too, we decided to go with this as it offered more customisation for the GUI.
+- **Alternative 2:** Using the FileDialog library. The FileDialog library achieves a similar look as the JFileChooser library, but lacked customisation. There were also issues with its implementation for MacOS.
 
 ---
 
@@ -291,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​        | I want to …​                                          | So that I can…​                                        |
 |----------|----------------|-------------------------------------------------------|--------------------------------------------------------|
 | `* * *`  | user           | add shows                                             | add new shows into the list                            |
-| `* * *`  | user           | delete shows  		                                      | delete wrong entries in the list                       |
+| `* * *`  | user           | delete shows  		                                | delete wrong entries in the list                       |
 | `* * *`  | user           | find a show                                           | find whether a specific show is in the list            |
 | `* * *`  | user           | list out all of my shows                              | see the details of all my shows in the list            |
 | `* *`    | new user       | see usage instructions                                | refer to instructions when I forget how to use the App |
@@ -299,6 +409,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | long time user | find shows of specific genres                         | recommend those shows to my friends                    |
 | `* * `   | long time user | find a show I may or may not have watched             | decide whether to watch that show or not               |
 | `* * `   | long time user | find whether a show I am watching is completed or not | continue with it if it is not completed                |
+| `* * `   | long time user | sort the list of shows                                | view the list in an organised manner                   |
+| `* * `   | user with multiple computers | import or export the show data easily   | keep updated copies of the show data quickly           |
+
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -529,6 +642,97 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC09 - Sort the list of shows**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: A list of sorted shows will be displayed for the user.**
+
+**MSS**
+
+1. User requests to sort the current list of shows.
+2. Trackermon sort the show list.
+3. Trackermon shows a list of shows in a sorted order.
+
+   Use case ends.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+**Use case: UC10 - Quickly import shows**
+
+**Preconditions: Trackermon application is started and there is pre-existing Trackermon data to import.**
+
+**Guarantees: User's current Trackermon data will be replaced with imported Trackermon data.**
+
+**MSS**
+
+1. User requests to import Trackermon data.
+2. Trackermon opens the file explorer GUI.
+3. User selects the desired file to import.
+4. Trackermon closes the file explorer GUI.
+5. Trackermon imports the chosen file data.
+6. Trackermon displays imported list of shows.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User closes the file explorer GUI.
+
+    * 2a1. Trackermon shows an error message to user, indicating the import has failed.
+
+      Use case ends.
+
+* 5a. Chosen file is not a JSON file.
+
+    * 5a1. Trackermon shows a message informing the user that only JSON files can be imported.
+
+      Use case ends.
+    
+* 5b. Chosen file is a corrupted JSON file.
+
+    * 5b1. Trackermon shows a message informing the user that the chosen file may be corrupted.
+
+      Use case ends.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+**Use case: UC11 - Quickly export shows**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: User's current Trackermon data will replace contents of selected file.**
+
+**MSS**
+
+1. User requests to export Trackermon data.
+2. Trackermon displays the file explorer GUI.
+3. User navigates to the desired directory or file to export Trackermon data to.
+4. Trackermon closes the file explorer GUI.
+5. Trackermon exports the chosen file data.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User closes the file explorer GUI.
+
+    * 2a1. Trackermon shows an error message to user, indicating the export has failed.
+
+      Use case ends.
+
+* 3a. User changes default name to save exported data.
+  <br>Use case resumes at step 4.
+
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -560,20 +764,37 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Launching the app
+   1. Prerequisites: Have a copy of `Trackermon.jar` in your computer.
+      1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
+   2. Double-click the jar file.
+   3. Test case: Initial launch <br> 
+      Expected: Application launched with a set of sample shows.
+   4. Test case: Subsequent Launch <br> 
+      Expected: Application launched with user saved shows.
 
-    1. Download the jar file and copy into an empty folder
+2. Saving window preferences
+   1. Launch the app. <br> 
+      Expected: The window size may not be optimum.
+   2. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   3. Re-launch the app. <br> 
+      Expected: The most recent window size and location is retained.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-1. Saving window preferences
+---
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Adding a show
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+1. Prerequisites: None.
+2. Test case: Adding a valid show
+   1. Condition: Show named `Inception` must not exist in the show list.
+   2. Command: `add n/Inception s/watching` <br> 
+      Expected: Show is added into the show list. Added show details shown in the result display.
+3. Test case: Adding an invalid show
+   1. Condition: Show named `"Inception"` exists in the show list.
+   2. Command: `add n/Inception s/watching` <br> 
+      Expected: Show is not added into the show list. Error details shown in the result display.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -581,137 +802,242 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a show
 
-1. Deleting a show while all shows are being shown
+1. Prerequisites: None, but if the list is empty, all deletions will result in an error.
+   1. [Add shows](#adding-a-show) into the show list.
+2. List all shows using the `list` command.
+3. Test case: Deleting a show based on list index
+   1. Condition: Range of shows must be within size of show list.
+   2. Command: `delete 1` <br> 
+      Expected: Show at specified index is deleted from the list. Deleted show details shown in the result display.
+4. Test case: Invalid delete index
+   1. Condition: Range of shows must be outside of list size.
+   2. Command: `delete 0` `delete` `delete <out_of_bound_integer>` <br> 
+      Expected: No show is deleted. Error details shown in the result display.
 
-    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-    1. Test case: `delete 1`<br>
-       Expected: First show is deleted from the list. Details of the deleted show shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `delete 0`<br>
-       Expected: No show is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-    
 ---
 
 ### Editing a show
 
-1. Editing a show while all shows are being shown
+1. Prerequisites: None, but if the list is empty, all edits will result in an error.
+   1. [Add shows](#adding-a-show) into the show list.
+2. List all shows using the `list` command.
+   1. Test case: Edit show name
+      1. Condition: Show named `One Piece` must not exist in the show list.
+      2. Command: `edit 1 n/One Piece` <br>
+         Expected: Name of show at specified index is changed to `One Piece`. Edited show details shown in the result display.
+3. Test case: Edit show status
+   1. Condition: None, if show status is already `completed`, expected output will be the same.
+   2. Command: `edit 1 s/completed` <br>
+      Expected: Status of show at specified index is changed to `completed`. Edited show details shown in the result display.
+
+4. Test case: Invalid edit index
+   1. Condition: Range of shows must be outside of list size.
+   2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
+      Expected: No show is edited. Error details shown in the result display.
+
+5. Test case: Invalid edit name
+   1. Condition: Show named `Inception` exists in the show list.
+   2. Command: `edit n/Inception` <br>
+      Expected: No show is edited. Error details shown in the result display.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Edit comment
+
+1. Edit comment show while all shows are being shown
 
     1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
 
-    1. Test case: `edit 1 n/pepe`<br>
-       Expected: First show's name from the list is edited to pepe. Details of the edited show shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `comment 1 c/Hello`<br>
+       Expected: Comment of the first show in the list is edited to "Hello".
 
-    1. Test case: `edit 0`<br>
-       Expected: No show is edited. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `comment 1`<br>
+       Expected: Comment of the first show in the list is deleted.
 
-    1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit x` (where x is larger than the list size)<br>
+    1. Test case: `comment 0`<br>
+       Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect comment commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-    
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Saving data
+
 1. Saving data between sessions
-    1. Launch the app.
-    2. Modify the show list with a valid add command.
-    3. Close the app.
-    4. Relaunch the app and ensure that the modification still exist
-   
+   1. Launch the app.
+   2. Modify the show list using any commands that affects the details of a show.
+   3. Relaunch the app. <br> 
+      Expected: The most recent changes made to the shows is retained.
+    
+2. Dealing with missing files
+   1. Prerequisites: JSON file is missing.
+      1. Delete the `data/trackermon.json` file to simulate a missing file.
+   2. Relaunch the app. <br> Expected: The app starts with the default list of show list.
 
-1. Dealing with missing/corrupted data files
+3. Dealing with corrupted files
+   1. Prerequisites: JSON file is corrupted.
+      1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file.
+   2. Relaunch the app. <br> Expected: The app starts with an empty show list.
 
-    1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file. Alternatively, you can delete the file to simulate a missing file.
-    2. Relaunch the app.
-    3. Testcase: `data/trackermon.json` is corrupted. <br> Expected: The app starts with a empty show list.
-    4. Testcase: `data/trackermon.json` is deleted. <br> Expected: The app starts with the default list of show list.
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Finding a show
+
 1. Finding a show (General Find)
-    1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
+
+   2. Test case: Find single keyword
+      1. Command: `find shingeki` <br>
+         Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list. <br>
+         E.g. `shingeki` from name, status, or tag fields will be matched.<br><br>
+      
+   3. Test case: Find multiple keywords
+      1. Command: `find shingeki shutter` <br>
+         Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list. <br>
+         E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched (`OR` search).
    
-    2. Test case: `find shingeki`
-
-       Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` then displays them on the show list.
-
-       E.g. `shingeki` from name, status, or tag fields will be matched.
+      2. Command: `find 86 shutter` <br>
+         Expected: Looks through the name, status and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list. <br>
+         E.g. `86` or `shutter` from name, status, or tag fields will be matched (`OR` search).
    
-    3. Test case: `find shing`
+   4. Test case: Invalid command format
+      1. Command: `find` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
    
-       Expected: Looks through the name, status and tag fields for any partial or full word of `shing` then displays them on the show list.
+   5. Test case: Unknown command
+      1. Command: `find2` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`.<br><br>
+      
+2. Find a show (Precise Find)
+   1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
    
-       E.g. `shing` from name, status, or tag fields will be matched.
+   2. Test case: Finding with a single prefix
+      1. Command: `find n/shingeki` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` then displays them on the show list. <br>
+         E.g. `shingeki` from the name field will be matched.<br><br>
+      2. Command: `find n/shingeki no kyojin` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list. <br>
+         E.g. `shingeki` and `no` and `kyojin` from the name field will be matched (`AND` search within a single prefix).<br><br>
    
-    4. Test case: `find shingeki shutter`
-
-       Expected: Looks through the name, status and tag fields for any partial or full word of `shingeki` or `shutter` then displays them on the show list.
-
-       E.g. `shingeki` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+   3. Test case: Finding with multiple prefixes
+      1. Command: `find n/shingeki s/completed` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and the status field for any partial or full word of `completed` then displays them on the show list. <br>
+         E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched (`AND` search between multiple prefixes).
    
-    5. Test case: `find 86 shutter`
-
-       Expected: Looks through the name, status and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list.
-
-       E.g. `86` or `shutter` from name, status, or tag fields will be matched. (`OR` search)
+      2. Command: `find n/shingeki t/seinen` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
+         E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched (`AND` search between multiple prefixes).
    
-    6. Test case: `find` 
-
-       Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
+      3. Command: `find n/shingeki no kyojin t/seinen` <br>
+         Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` and the tag field for any partial or full word of `seinen` then displays them on the show list. <br>
+         E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched (`AND` search within a single prefix and `AND` search between multiple prefixes).
    
-    7. Test case: `find2`
-
-       Expected: No show is found. Error details shown in the result display, with a result message saying `Unknown command`
-
-
-2. Find a show (Precise Find)<br>
-
-   1. Prerequisites: None, but if the list is empty, all searches will also lead to no results.
+   4. Test case: Invalid command format
+      1. Command: `find n/` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
+      2. Command: `find t/Action Anime` <br>
+         Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
    
-   2. Test case: `find n/shingeki`
+   5. Test case: Multiple of the same prefix
+      1. Command: `find n/shingeki n/shutter` <br>
+         Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list (Ignores the first instance of n/) <br>
+         E.g. `shutter` from the name field will be matched.
 
-      Expected: Looks through the name field for any partial or full word of `shingeki` then displays them on the show list.
-
-      E.g. `shingeki` from the name field will be matched.
-   
-   3. Test case: `find n/shingeki s/completed`
-
-      Expected: Looks through the name field for any partial or full word of `shingeki` and the status field for any partial or full word of `completed` then displays them on the show list.
-
-      E.g. **Both** `shingeki` from the name field and `completed` from the status field must be present to be matched. (`AND` search between multiple prefixes).
-   
-   4. Test case: `find n/shingeki t/seinen`
-
-      Expected: Looks through the name field for any partial or full word of `shingeki` and the tag field for any partial or full word of `seinen` then displays them on the show list.
-
-      E.g. **Both** `shingeki` from the name field and `seinen` from the tag field must be present to be matched. (`AND` search between multiple prefixes).
-   
-   5. Test case: find `n/shingeki no kyojin`
-
-      Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` then displays them on the show list.
-
-      E.g. `shingeki` and `no` and `kyojin` from the name field will be matched. (`AND` search within a single prefix).
-   
-   6. Test case: `find n/shingeki no kyojin t/seinen` 
-   
-      Expected: Looks through the name field for any partial or full word of `shingeki` and `no` and `kyojin` and the tag field for any partial or full word of `seinen` then displays them on the show list.
-
-      E.g. `shingeki` and `no` and `kyojin` from the name field and `seinen` from the tag field will be matched. (`AND` search within a single prefix and `AND` search between multiple prefixes).
-   
-   7. Test case: `find n/`
-
-      Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`
-   
-   8. Test case: `find n/shingeki n/shutter`
-
-      Expected: Looks through the name field for any partial or full word of `shutter` then displays them on the show list. (Ignores the first instance of n/)
-
-      E.g. `shutter` from the name field will be matched.
-   
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Sorting the list of shows
+
+1. Prerequisites: None, but if the list is empty, all sorts will lead to no results.
+2. Test case: Sort with no prefix
+   1. Command: `sort` <br>
+      Expected: The list of shows will default to being sorted by name in ascending order.
+
+3. Test case: Sort with single prefix 
+   1. Command: `sort sna/` <br>
+      Expected: The list of shows is sorted by name in ascending order.
+   
+   2. Command: `sort snd/` <br>
+      Expected: The list of shows is sorted by name in descending order.
+
+   3. Command: `sort ssa/` <br>
+      Expected: The list of shows is sorted by status in ascending order.
+   
+   4. Command: `sort ssd/` <br>
+      Expected: The list of shows is sorted by status in descending order.
+   
+4. Test case: Sort with multiple same prefixes 
+   1. Command: `sort sna/ snd/` <br>
+      Expected: The list of shows is sorted by name in ascending order.
+   
+   2. Command: `sort ssa/ ssd/` <br>
+      Expected: The list of shows is sorted by status in ascending order. 
+   
+5. Test case: Sort with multiple different prefixes
+   1. Command: `sort sna/ ssd/` <br>
+      Expected: The list of shows is sorted by name in ascending order followed by status in descending order.
+   
+   2. Command: `sort sna/ ssd/ so/`<br>
+      Expected: The list of shows is sorted by status in descending order followed by name in ascending order.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Importing Trackermon data
+
+1. Import Trackermon data.
+   1. Launch the app.
+   2. Ensure that current Trackermon data is different from data we plan to import.
+   3. Import chosen data.
+       1. Test case: Select valid data to import.
+          <br>Expected: Trackermon's data reflects imported data.
+       2. Test case: Select invalid data to import. An example would be any non JSON file.
+          <br>Expected: Trackermon displays an error messsage stating that the imported file has to be of type JSON.
+       3. Test case: Click on cancel in the file explorer GUI.
+          <br>Expected: File explorer GUI closes, Trackermon displays an error message stating that the file import has failed.
+2. Dealing with corrupted data
+   1. Prerequisite: Data must be corrupted.
+   2. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
+   3. Test case: `data/trackermon.json` was corrupted.
+      <br>Expected: Trackermon displays an error message stating that the imported file may be corrupted.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Exporting Trackermon data
+
+1. Export Trackermon data.
+    1. Launch the app.
+    2. Take note of current Trackermon data.
+    3. Export the data.
+       1. Test case: Exporting to any directory
+          <br>Expected: Data is exported as `trackermon.json`.
+       2. Test case: Exporting to directory with preexisting `trackermon.json`
+          1. A popup appears asking if you want to replace the old file.
+          2. Test case: Click on `No`
+             <br>Expected: Popup closes, you are brought back to file explorer GUI.
+          3. Test case: Click on `Yes`
+             <br>Expected: Popup and file explorer GUI closes. Old file is replaced.
+       3. Test case: Renaming the exported file in the file explorer GUI.
+          <br>Expected: Trackermon data exported as chosen filename in chosen directory.
+       4. Test case: Renaming the exported file in the file explorer GUI to `filename`, and exporting to directory with preexisting new `filename`.
+          <br>Expected: Same as Test case: Exporting to directory with preexisting `trackermon.json`
+       5. Test case: Click on cancel in the file explorer GUI.
+          <br>Expected: File explorer GUI closes, Trackermon displays error message stating file export has failed.
+       
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---

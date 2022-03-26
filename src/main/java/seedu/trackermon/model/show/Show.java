@@ -17,16 +17,18 @@ public class Show {
 
     //Data field
     private final Set<Tag> tags = new HashSet<>();
+    private final Comment comment;
     private final Rating rating;
 
     /**
      * Every field must be present and not null.
      */
-    public Show(Name name, Status status, Set<Tag> tags, Rating rating) {
-        requireAllNonNull(name, status, tags);
+    public Show(Name name, Status status, Set<Tag> tags, Comment comment) {
+        requireAllNonNull(name, status, tags, comment, rating);
         this.name = name;
         this.status = status;
         this.tags.addAll(tags);
+        this.comment = comment;
         this.rating = rating;
     }
 
@@ -48,6 +50,10 @@ public class Show {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Comment getComment() {
+        return comment;
     }
 
     /**
@@ -81,7 +87,8 @@ public class Show {
         return otherShow.getName().equals(getName())
                 && otherShow.getTags().equals(getTags())
                     && otherShow.getStatus().equals(getStatus())
-                        && otherShow.getRating().equals(getRating());
+                        && otherShow.getComment().equals(getComment());
+                            && otherShow.getComment.equals(getRating());
     }
 
     @Override
@@ -102,6 +109,7 @@ public class Show {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+        builder.append(getComment().toString());
         return builder.toString();
     }
 

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.trackermon.commons.exceptions.IllegalValueException;
+import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
 import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
@@ -26,19 +27,23 @@ class JsonAdaptedShow {
     private final String name;
     private final String status;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String comment;
     private final String rating;
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedShow(@JsonProperty("name") String name, @JsonProperty("status") String status,
-                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("rating") String rating) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("comment") String comment,
+                            @JsonProperty("rating") Rating rating) {
         this.name = name;
         this.status = status;
         this.rating = rating;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.comment = comment;
+        this.rating = rating;
     }
 
     /**
@@ -51,6 +56,7 @@ class JsonAdaptedShow {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        comment = source.getComment().comment;
     }
 
     /**
@@ -79,19 +85,16 @@ class JsonAdaptedShow {
         if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
+        final Status modelStatus = Status.getStatus(status.toUpperCase());
+
+        final Comment modelComment = new Comment(comment);
 
         if (rating == null) {
             throw new IllegalValueException("Rating Failed");
         }
-
         if (!Rating.isValidScore(rating)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
-
-
-        final Status modelStatus = Status.valueOf(status.toUpperCase());
-        //Can be improved
-        final Rating modelRating = new Rating(Integer.parseInt(rating));
         final Set<Tag> modelTags = new HashSet<>(showTags);
         return new Show(modelName, modelStatus, modelTags, modelRating);
     }

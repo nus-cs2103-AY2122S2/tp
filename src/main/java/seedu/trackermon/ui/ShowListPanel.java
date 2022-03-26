@@ -50,14 +50,10 @@ public class ShowListPanel extends UiPart<Region> {
      * Updates the GUI of the list to select the first item.
      */
     public void handleUpdatedList() {
-        if (!showListView.getItems().isEmpty()) {
-
-            if (showListView.getSelectionModel().getSelectedItem() == null) {
-                showListView.getSelectionModel().selectFirst();
-            }
-
-            showDetailsCard.updateShowDetails(showListView.getSelectionModel().getSelectedItem());
+        if (showListView.getSelectionModel().getSelectedItem() == null) {
+            showListView.getSelectionModel().selectFirst();
         }
+        showDetailsCard.updateShowDetails(showListView.getSelectionModel().getSelectedItem());
     }
 
     /**
