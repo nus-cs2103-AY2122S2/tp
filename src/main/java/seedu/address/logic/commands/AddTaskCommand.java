@@ -69,6 +69,6 @@ public class AddTaskCommand extends Command {
 
         // state check
         AddTaskCommand e = (AddTaskCommand) other;
-        return taskToAdd.equals(e.taskToAdd);
+        return taskToAdd.equals(e.taskToAdd) && specificGroup.equals(e.specificGroup);
     }
 }

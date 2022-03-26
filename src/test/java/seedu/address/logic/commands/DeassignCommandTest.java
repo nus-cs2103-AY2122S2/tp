@@ -1,12 +1,16 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -46,4 +50,38 @@ public class DeassignCommandTest {
         assertCommandFailure(command, model, DeassignCommand.MESSAGE_GROUP_DOES_NOT_EXIST);
     }
 
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Group groupToDeassign = new GroupBuilder().build();
+
+        DeassignCommand deassignCommand = new DeassignCommand(outOfBoundIndex, groupToDeassign);
+
+        assertCommandFailure(deassignCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        Group nusFintechSociety = new GroupBuilder().withGroupName("Nus Fintech Society").build();
+        Group nusDataScienceSociety = new GroupBuilder().withGroupName("Nus Data Science Society").build();
+
+        DeassignCommand deassignFirstCommand = new DeassignCommand(INDEX_FIRST_PERSON, nusFintechSociety);
+        DeassignCommand deassignSecondCommand = new DeassignCommand(INDEX_SECOND_PERSON, nusDataScienceSociety);
+
+        // same object -> returns true
+        assertTrue(deassignFirstCommand.equals(deassignFirstCommand));
+
+        // same values -> returns true
+        DeassignCommand deassignFirstCommandCopy = new DeassignCommand(INDEX_FIRST_PERSON, nusFintechSociety);
+        assertTrue(deassignFirstCommand.equals(deassignFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deassignFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deassignFirstCommand.equals(null));
+
+        // different group -> returns false
+        assertFalse(deassignFirstCommand.equals(deassignSecondCommand));
+    }
 }
