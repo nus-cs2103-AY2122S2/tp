@@ -71,6 +71,8 @@ public class TeachWhatParser {
             return new DeleteLessonCommandParser().parse(arguments);
 
         case EditStudentCommand.COMMAND_WORD:
+            // Fallthrough
+        case EditStudentCommand.SHORTENED_COMMAND_WORD:
             return new EditStudentCommandParser().parse(arguments);
 
         case FindStudentCommand.COMMAND_WORD:
