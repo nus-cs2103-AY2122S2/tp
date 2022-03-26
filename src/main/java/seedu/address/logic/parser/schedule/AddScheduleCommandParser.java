@@ -31,8 +31,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_CANDIDATE, PREFIX_DATETIME);
         if (!arePrefixesPresent(argMultimap, PREFIX_CANDIDATE, PREFIX_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddScheduleCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
         }
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CANDIDATE).get());
         final LocalDateTime interviewSlot = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());

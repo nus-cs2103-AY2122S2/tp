@@ -16,9 +16,19 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCandidateDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
@@ -97,13 +107,26 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_schedule() throws Exception {
+    public void parseCommand_addSchedule() throws Exception {
         AddScheduleCommand command = (AddScheduleCommand) parser.parseCommand(
-                AddScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_CANDIDATE.getOneBased()
-                        + " /at 01/01/2023 10:00");
+                AddScheduleCommand.COMMAND_WORD + " " + "candidate/" + INDEX_FIRST_CANDIDATE.getOneBased()
+                        + " at/01-01-2023 10:00");
         assertEquals(new AddScheduleCommand(INDEX_FIRST_CANDIDATE,
                 LocalDateTime.of(2023, 01, 01, 10, 00)), command);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddScheduleCommand.MESSAGE_USAGE), () -> parser.parseCommand(AddScheduleCommand.COMMAND_WORD + " 2"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ScheduleCommand.MESSAGE_USAGE), () -> parser.parseCommand(AddScheduleCommand.COMMAND_WORD + "2"));
     }
+
+    /*@Test
+    public void parseCommand_schedule() throws Exception {
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+                AddScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_CANDIDATE.getOneBased()
+                        + " at/01-01-2023 10:00");
+        assertEquals(new AddScheduleCommand(INDEX_FIRST_CANDIDATE,
+                LocalDateTime.of(2023, 01, 01, 10, 00)), command);
+    }*/
 
     @Test
     public void parseCommand_view() throws Exception {

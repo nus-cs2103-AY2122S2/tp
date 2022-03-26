@@ -13,7 +13,7 @@ import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class ScheduleCommandParser implements Parser<AddScheduleCommand> {
+public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANDIDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
 
 
 /**
@@ -21,19 +24,13 @@ import seedu.address.logic.commands.schedule.AddScheduleCommand;
  */
 public class AddScheduleCommandParserTest {
 
-    private ScheduleCommandParser parser = new ScheduleCommandParser();
+    private final AddScheduleCommandParser parser = new AddScheduleCommandParser();
     private LocalDateTime interviewDateTime = LocalDateTime.of(2023, 03, 20, 10, 00);
 
     @Test
-    public void parse_validArgs_returnsScheduleCommand() {
-        assertParseSuccess(parser, "1 /at 20/03/2023 10:00", new AddScheduleCommand(INDEX_FIRST_CANDIDATE,
-                interviewDateTime));
-    }
-
-    @Test
-    public void parse_invalidDelimiter_throwsParseException() {
-        assertParseFailure(parser, "1 /by 20/03/2023 10:00", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddScheduleCommand.MESSAGE_USAGE));
+    public void parse_validArgs_returnsAddScheduleCommand() {
+        assertParseSuccess(parser, " " + PREFIX_CANDIDATE + "1  " + PREFIX_DATETIME + "20-03-2023 10:00",
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime));
     }
 
     @Test
