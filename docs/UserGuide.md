@@ -221,7 +221,7 @@ A show can have any number of comments or tags (including 0)
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
-<div markdown="block" class="alert alert-danger"> **:exclamation: Caution** 
+<div markdown="block" class="alert alert-danger"> **:exclamation: Caution:** 
 The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
@@ -243,7 +243,7 @@ The **index** parameter provided should be a [non-zero unsigned integer](https:/
 
 <div markdown="block" class="alert alert-danger">
 
-**:exclamation: Caution**<br>
+**:exclamation: Caution:**<br>
 * **At least one field** to edit must be provided.
 * Editing to an existing name is **not allowed**.
 * The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
@@ -306,7 +306,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 :exclamation:**Caution:**<br>
 * There must be at **least one [prefix](#command-structure) field** and it **must not be empty**.
 
-:exclamation:**Caution: Multiple of the same prefixes:**<br>
+:exclamation:**Multiple of the same prefixes:**<br>
 * find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
 * find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
 
