@@ -2,6 +2,8 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -239,5 +241,15 @@ public class ParserUtil {
             groupList.add(groupNamesSet);
         }
         return groupList;
+    }
+
+    /**
+     * Parses {@code String dateTime} into a {@code LocalDateTime}.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(trimmedDateTime, formatter);
     }
 }
