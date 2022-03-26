@@ -107,6 +107,11 @@ public class UiManager implements Ui {
         mainWindow.setGroupListPanel(groups);
     }
 
+    @Override
+    public ObservableList<Group> getShowingGroupList() {
+        return mainWindow.getShowingGroups();
+    }
+
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }

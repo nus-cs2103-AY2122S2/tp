@@ -19,6 +19,7 @@ public class GroupListPanel extends UiPart<Region> {
     private boolean singleGroupFlag = false;
     @FXML
     private ListView<Group> groupListView;
+    private ObservableList<Group> groupList;
 
     /**
      * Creates a {@code GroupListPanel} with the given {@code ObservableList}.
@@ -26,11 +27,19 @@ public class GroupListPanel extends UiPart<Region> {
     public GroupListPanel(ObservableList<Group> groupList) {
         super(FXML);
         logger.info("Instantiating a new group list panel");
+        groupList = groupList;
         groupListView.setItems(groupList);
         groupListView.setCellFactory(listView -> new GroupListPanel.GroupListViewCell());
         if (groupList.size() == 1) {
             singleGroupFlag = true;
         }
+    }
+
+    /**
+     * Returns the list of groups showing in this list panel.
+     */
+    public ObservableList<Group> getGroupsList() {
+        return groupList;
     }
 
     /**
