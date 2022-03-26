@@ -160,6 +160,7 @@ public class ModelManagerTest {
         modelManager.updateFilteredInterviewSchedule(predicate);
         ObservableList<Interview> sorted = modelManager.getFilteredInterviewSchedule();
         assertEquals(notSorted, sorted);
+    }
 
     @Test
     public void deleteInterviewSuccess() {
