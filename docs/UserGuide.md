@@ -17,7 +17,8 @@ title: User Guide
   * [Editing a show: `edit`](#editing-a-show-edit)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
-  * [Sorting the data](#sorting-the-data)
+  * [Sorting the shows](#sorting-the-shows)
+  * [Clearing all shows](#clear-all-shows)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
@@ -151,7 +152,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 **Format:** `add n/NAME s/STATUS [c/COMMENT] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
-A show can have any number of tags (including 0)
+A show can have any number of comments or tags (including 0)
 </div>
 
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
@@ -241,7 +242,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 <div markdown="block" class="alert alert-danger">
 
 :exclamation:**Caution: Multiple of the same prefixes:**<br>
-* find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2**(as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
+* find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
 * find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
 
 </div>
@@ -252,34 +253,34 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ### Deleting a show: `delete`
 
-Deletes the specified show from Trackermon.
+**Description:** Want to delete an unwanted show? Delete the show at the specified index shown in Trackermon's show list!
 
-Format: `delete <INDEX>`
-* Deletes the show at the specified `<INDEX>`.
-* The index refers to the index number shown in the displayed show list. (not overall)
-* The index **must be a positive integer** 1,2,3,..
+**Format:** `delete INDEX`
 
-Examples:
-* `list` followed by `delete 2` removes 2nd show in Trackermon.
-* `find ghibli` followed by `delete 1` removes 1st show in results of `find` command.
+**Example & Output:** `delete 2`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-### Editing a show: `Edit`
+### Editing a show: `edit`
 
-Edit the specified show from Trackermon.
+**Description:** Want to modify a show? Edit a show at the specified index shown in Trackermon's show list!
 
-Format: `edit <INDEX> [n/NAME] [s/STATUS] [t/TAG]…​`
-* Edit the show at the specified `<INDEX>`.
-* The index refers to the index number shown in the displayed show list. (not overall)
-* The index **must be a positive integer** 1,2,3,..
-* At least one field to edit must be provided
-* Editing to an existing name is not allowed
+**Format:** `edit INDEX [n/NAME] [s/STATUS] [c/COMMENT] [t/TAG]…​`
 
-Examples:
-* `list` followed by `edit 2 n/Sailor Moo` edit 2nd show's name in Trackermon to Sailor Moo.
-* `find ghibli` followed by `edit 1 n/Cowman s/completed t/awesome` edits 1st show in results of `find` command.
+**Example & Output:** `edit 2 n/Sailor Moo`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about edit:**<br>
+* **At least one field** to edit must be provided.
+* Editing to an existing name is **not allowed**.
+
+</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -287,11 +288,11 @@ Examples:
 
 ### Exiting the program: `exit`
 
-Exits the program. 
+**Description:** Wanting to exit the application? This simple command is what you are looking for!
 
-Format: `exit`
+**Format:** `exit`
 
-* Displays error message and exits the program after 3 seconds.
+**Example:** `exit`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -304,7 +305,8 @@ Trackermon data are saved in the hard disk automatically after any command that 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-### Sorting the data
+### Sorting the shows
+[TO CHANGE AFTER REWORK]
 
 Sort shows based on the input prefix. 
 
@@ -322,6 +324,16 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 ---
 
+### Clear all shows
+
+**Description:** Wanting to reset your current show list? Clear all shows in Trackermon's show list!
+
+Format: `clear`
+
+**Example & Output:** `clear`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
 ## FAQ
 
 _Details coming soon ..._
@@ -332,15 +344,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                          |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME s/STATUS [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                  |
-| **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                                                                                     |
-| **Edit**   | `edit <INDEX> [n/NAME] [s/STATUS] [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                     |
-| **Exit**   | `exit`                                                                                                                                    |
+| Action     | Format, Examples                                                                                                                                  |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME s/STATUS [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                          |
+| **Clear**  | `clear`                                                                                                                                           |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                               |
+| **Edit**   | `edit INDEX [n/NAME] [s/STATUS] [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                               |
+| **Exit**   | `exit`                                                                                                                                            |
 | **Find**   | `find KEYWORD`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
-| **List**   | `list`                                                                                                                                    |
-| **Sort**   | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]` |
+| **List**   | `list`                                                                                                                                            |
+| **Sort**   | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                                          |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
