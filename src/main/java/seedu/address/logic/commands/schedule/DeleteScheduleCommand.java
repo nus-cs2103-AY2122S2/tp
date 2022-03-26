@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.ViewCommand.MESSAGE_NO_INTERVIEWS_IN_SYSTEM;
 
 import java.util.List;
 
@@ -42,11 +41,11 @@ public class DeleteScheduleCommand extends ScheduleCommand {
         requireNonNull(model);
         List<Interview> lastShownList = model.getFilteredInterviewSchedule();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_NO_INTERVIEWS_IN_SYSTEM));
+            throw new CommandException(String.format(Messages.MESSAGE_NO_INTERVIEWS_IN_SYSTEM));
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException("yo");//Messages.MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX);
         }
 
         Interview interviewToDelete = lastShownList.get(targetIndex.getZeroBased());

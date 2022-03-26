@@ -20,6 +20,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to false */
     Predicate<Candidate> PREDICATE_SHOW_EMPTY_LIST = unused -> false;
 
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Interview> PREDICATE_SHOW_EMPTY_INTERVIEW_SCHEDULE = unused -> false;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
