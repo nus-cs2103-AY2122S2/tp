@@ -225,6 +225,7 @@ public class ListCommand extends Command {
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "People"));
             }
         case VIEW:
+            showAll(model);
             if (this.viewType == ListView.MODULES) {
                 //Switch view to modules
                 if (isModuleListShowing) {
@@ -267,18 +268,20 @@ public class ListCommand extends Command {
                 //The case where 1 module is showing, allow to focus into 1 group
                 //Shows all groups that match given name in aforementioned module.
                 ObservableList<Group> groups = modelManager.getFilteredModuleList().get(0).getGroups();
-                Group group = groups.get(0);
-                if (group.getGroupName().toLowerCase().equals(this.group)) {
-                    if (groups.size() == 0) {
-                        throw new CommandException(
-                                String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group.toUpperCase()));
+                for (Group g : groups) {
+                    if (g.getGroupName().toLowerCase().equals(this.group)) {
+                        if (groups.size() == 0) {
+                            throw new CommandException(
+                                    String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group.toUpperCase()));
+                        }
+                        modelManager.getUi().setGroupListPanel(FXCollections.observableArrayList(g));
+                        return new CommandResult(String.format(Messages.MESSAGE_LISTED_MODULE_GROUP,
+                                g.getGroupName(), g.getModule().getModuleCode().toString()));
                     }
-                    modelManager.getUi().setGroupListPanel(groups);
-                    return new CommandResult(String.format(Messages.MESSAGE_LISTED_MODULE_GROUP,
-                            group.getGroupName(), group.getModule().getModuleName().toString()));
-                } else {
-                    throw new CommandException(Messages.MESSAGE_GROUP_NOT_IN_MODULE);
                 }
+                throw new CommandException(String.format(
+                            Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group));
+
             } else if (modelManager.getUi().isGroupListShowing()) {
                 ObservableList<Group> groups = FXCollections.observableArrayList();
                 for (Module m : model.getUniBook().getModuleList()) {
