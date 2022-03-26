@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a student/professor/module/group/event to the UniBook, depending on the option specified.\n"
+        + ": Adds a student/professor/module/group/event/meeting to the UniBook, depending on the option specified.\n"
         + "Parameters: "
         + CliSyntax.PREFIX_OPTION + "OPTION "
         + CliSyntax.PREFIX_NAME + "NAME "
@@ -71,6 +71,11 @@ public class AddCommand extends Command {
         + CliSyntax.PREFIX_OPTION + "event "
         + CliSyntax.PREFIX_MODULE + "CS2100 "
         + CliSyntax.PREFIX_KEYEVENT + "1 "
+        + CliSyntax.PREFIX_DATETIME + "2022-05-04 13:00\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "meeting "
+        + CliSyntax.PREFIX_MODULE + "CS2100 "
+        + CliSyntax.PREFIX_GROUP + "Project Work "
         + CliSyntax.PREFIX_DATETIME + "2022-05-04 13:00\n";
     public static final String MESSAGE_USAGE_MODULE = COMMAND_WORD
         + ": To add a module to the UniBook, use the following format.\n"
