@@ -29,8 +29,8 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedListByOwnerName() {
-        expectedModel.sortPetList("/o");
-        assertCommandSuccess(new SortCommand("/o"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.sortPetList("owner");
+        assertCommandSuccess(new SortCommand("owner"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     /**
@@ -38,7 +38,16 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetName() {
-        expectedModel.sortPetList("/n");
-        assertCommandSuccess(new SortCommand("/n"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.sortPetList("name");
+        assertCommandSuccess(new SortCommand("name"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    /**
+     * Test method that checks if the pet list gets sorted by pet appointment after calling the sort command.
+     */
+    @Test
+    public void execute_listIsNotFiltered_showsSortedListByPetAppointment() {
+        expectedModel.sortPetList("app");
+        assertCommandSuccess(new SortCommand("app"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
