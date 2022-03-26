@@ -1,9 +1,9 @@
 package manageezpz.model;
 
 import static manageezpz.testutil.Assert.assertThrows;
-import static manageezpz.testutil.TypcialTasks.READ_BOOK;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+import static manageezpz.testutil.TypicalTasks.READ_BOOK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

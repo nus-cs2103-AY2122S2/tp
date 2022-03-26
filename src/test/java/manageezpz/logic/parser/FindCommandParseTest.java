@@ -1,8 +1,8 @@
 package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static manageezpz.logic.commands.CommandTestUtil.DESCRIPTION;
 import static manageezpz.logic.commands.CommandTestUtil.LIST_DESCRIPTIONS;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -36,7 +36,7 @@ public class FindCommandParseTest {
     @Test
     void findParser_withTaskOption_findTaskCommand() {
         String userInput = String.join(" ", FindCommand.COMMAND_WORD, PREFIX_TODO.toString(),
-                PREFIX_DESCRIPTION.toString(), DESCRIPTION);
+                PREFIX_DESCRIPTION.toString(), VALID_TASK_DESCRIPTION);
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(PREFIX_TODO, LIST_DESCRIPTIONS, null,
                 null, null, null);
         FindCommand expectedCommand = new FindTaskCommand(expectedPredicate);

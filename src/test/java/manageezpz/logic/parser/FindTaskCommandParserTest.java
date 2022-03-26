@@ -1,6 +1,5 @@
 package manageezpz.logic.parser;
 
-import static manageezpz.logic.commands.CommandTestUtil.DESCRIPTION;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_BOOLEAN;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_DATE;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_PRIORITY;
@@ -9,6 +8,7 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_BOOLEAN;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_DATE;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_PRIORITY;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_ASSIGNEES;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DEADLINE;
@@ -65,7 +65,7 @@ class FindTaskCommandParserTest {
     @Test
     void findTaskCommandParserTest_withDescription_findTaskCommand() {
         String userInput = String.join(" ", FindCommand.COMMAND_WORD, PREFIX_TASK.toString(),
-                PREFIX_DESCRIPTION.toString(), DESCRIPTION);
+                PREFIX_DESCRIPTION.toString(), VALID_TASK_DESCRIPTION);
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(PREFIX_TASK, LIST_DESCRIPTIONS, null,
                 null, null, null);
         FindCommand expectedCommand = new FindTaskCommand(expectedPredicate);
@@ -184,7 +184,7 @@ class FindTaskCommandParserTest {
     @Test
     void findTaskCommandParser_multipleArguments_findCommand() {
         String userInput = String.join(" ", FindCommand.COMMAND_WORD, PREFIX_DEADLINE.toString(),
-                PREFIX_DESCRIPTION.toString(), DESCRIPTION, PREFIX_DATE.toString(), VALID_DATE,
+                PREFIX_DESCRIPTION.toString(), VALID_TASK_DESCRIPTION, PREFIX_DATE.toString(), VALID_DATE,
                 PREFIX_PRIORITY.toString(), VALID_PRIORITY, PREFIX_ASSIGNEES.toString(), VALID_NAME_AMY,
                 PREFIX_IS_MARKED.toString(), VALID_BOOLEAN);
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(PREFIX_DEADLINE, LIST_DESCRIPTIONS,

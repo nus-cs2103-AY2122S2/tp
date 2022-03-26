@@ -36,7 +36,6 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_TASK_DESCRIPTION = "get a drink";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,8 +54,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     // Attributes pertaining tasks
-    public static final String DESCRIPTION = "Play Genshin";
-    public static final List<String> LIST_DESCRIPTIONS = List.of("Play", "Genshin");
+    public static final String VALID_TASK_DESCRIPTION = "get a drink";
+    public static final List<String> LIST_DESCRIPTIONS = List.of(VALID_TASK_DESCRIPTION.split(" "));
     public static final String VALID_DATE = "2022-01-01"; // Date are in YYYY-MM-DD
     public static final String VALID_PRIORITY = "LOW"; // Valid priority are none, low, medium, high
     public static final String INVALID_PRIORITY = "H1GH";
