@@ -6,9 +6,9 @@ import seedu.address.model.transaction.Transaction;
 
 
 public class TransactionWithIdentifierPredicate implements Predicate<Transaction> {
-    private final String identifier;
+    private final long identifier;
 
-    public TransactionWithIdentifierPredicate(String identifier) {
+    public TransactionWithIdentifierPredicate(long identifier) {
         this.identifier = identifier;
     }
 

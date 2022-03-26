@@ -64,7 +64,7 @@ public class AddTransactionCommand extends Command {
         }
 
         Person person = lastShownList.get(index.getZeroBased());
-        String personIdentifier = person.getEmail().getValue();
+        long personIdentifier = person.getUniqueId();
 
         Transaction transaction = transactionProducer.createTransaction(personIdentifier);
 

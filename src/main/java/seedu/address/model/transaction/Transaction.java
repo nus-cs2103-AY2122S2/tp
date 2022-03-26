@@ -22,15 +22,15 @@ public class Transaction implements Serializable {
     public static final String MAP_PREFIX = "T";
 
     private final HashMap<Prefix, TransactionField> fields = new HashMap<>();
-    private final String personIdentifier;
+    private final long personId;
 
 
     /**
      * Person constructor
      * @param fields A collection of all the person's attributes
      */
-    public Transaction(Collection<TransactionField> fields, String personIdentifier) {
-        requireAllNonNull(fields, personIdentifier);
+    public Transaction(Collection<TransactionField> fields, long personId) {
+        requireAllNonNull(fields, personId);
 
         // Add fields.
         for (TransactionField f : fields) {
@@ -43,17 +43,17 @@ public class Transaction implements Serializable {
             checkArgument(this.fields.containsKey(p), "All required fields must be given.");
         }
 
-        this.personIdentifier = personIdentifier;
+        this.personId = personId;
     }
 
     public Transaction(Transaction otherTransaction) {
-        this(otherTransaction.getFields(), otherTransaction.getIdentifier());
+        this(otherTransaction.getFields(), otherTransaction.getPersonId());
     }
 
     /**
      * Returns true if the person contains the specified field.
      * @param prefix the field prefix
-     * @return return true if the person contains the specified field
+     * @return return true if the transaction contains the specified field
      */
     public boolean hasField(Prefix prefix) {
         requireAllNonNull(prefix);
@@ -99,10 +99,19 @@ public class Transaction implements Serializable {
     /**
      * Gets the person identifier of the transaction
      *
-     * @return person's identifier (email)
+     * @return person's identifier (uniqueId)
      */
-    public String getIdentifier() {
-        return this.personIdentifier;
+    public long getPersonId() {
+        return this.personId;
+    }
+
+    /**
+     * Gets the person unique identifier of the transaction
+     * in the string representation
+     *
+     */
+    public String getPersonIdString() {
+        return String.format("Person unique id: %d", getPersonId());
     }
 
     /**
@@ -132,7 +141,7 @@ public class Transaction implements Serializable {
         return otherTr.getAmount().equals(getAmount())
                 && otherTr.getDueDate().equals(getDueDate())
                 && otherTr.getTransactionDate().equals(getTransactionDate())
-                && otherTr.getIdentifier().equals(getIdentifier());
+                && (otherTr.getPersonId() == getPersonId());
     }
 
     @Override
@@ -149,7 +158,7 @@ public class Transaction implements Serializable {
                 .append("; Transaction date: ")
                 .append(getTransactionDate())
                 .append("; Person email: ")
-                .append(getIdentifier());
+                .append(getPersonId());
 
         if (getDueDate().isPresent()) {
             builder.append("; Due date: ")
@@ -164,8 +173,8 @@ public class Transaction implements Serializable {
         return builder.toString();
     }
 
-    public boolean hasIdentifier(String identifier) {
-        return this.personIdentifier.equals(identifier);
+    public boolean hasIdentifier(long identifier) {
+        return this.getPersonId() == identifier;
     }
 }
 
