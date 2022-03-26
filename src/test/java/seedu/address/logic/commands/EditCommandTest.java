@@ -37,13 +37,14 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = PersonUtil.AMY;
+        Person personToEdit = model.getFilteredPersonList().get(0);
+        Person editedPerson = personToEdit.setFields(PersonUtil.AMY.getFields()).setTags(PersonUtil.AMY.getTags());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, editedPerson.getFields(), editedPerson.getTags());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(personToEdit, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

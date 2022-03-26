@@ -42,10 +42,6 @@ public class PersonTest {
 
     @Test
     public void equals() {
-        // same values -> returns true
-        Person personCopy = new Person(AMY);
-        assertTrue(AMY.equals(personCopy));
-
         // same object -> returns true
         assertTrue(AMY.equals(AMY));
 
