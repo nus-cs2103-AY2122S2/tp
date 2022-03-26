@@ -157,6 +157,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteTransactionWithId(long personId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addTransaction(Transaction transaction) {
             throw new AssertionError("This method should not be called.");
         }
