@@ -55,12 +55,22 @@ public class SortCommandParserTest {
         Comparator<Candidate> sortComparatorStudentId = Comparator.comparing(l -> l.getName().toString().toLowerCase());
         Comparator<Candidate> sortComparatorPhone = Comparator.comparing(l -> l.getName().toString().toLowerCase());
         Comparator<Candidate> sortComparatorEmail = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorInterviewStatus =
+                Comparator.comparing(l -> l.getInterviewStatus().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorApplicationStatus =
+                Comparator.comparing(l -> l.getApplicationStatus().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorSeniority =
+                Comparator.comparing(l -> l.getSeniority().toString().toLowerCase());
 
         SortCommand expectedCommandName = new SortCommand(sortComparatorName, "name");
         SortCommand expectedCommandCourse = new SortCommand(sortComparatorCourse, "course");
         SortCommand expectedCommandStudentId = new SortCommand(sortComparatorStudentId, "studentid");
         SortCommand expectedCommandPhone = new SortCommand(sortComparatorPhone, "phone");
         SortCommand expectedCommandEmail = new SortCommand(sortComparatorEmail, "email");
+        SortCommand expectedCommandApplicationStatus = new SortCommand(sortComparatorApplicationStatus,
+                "applicationstatus");
+        SortCommand expectedCommandInterviewStatus = new SortCommand(sortComparatorInterviewStatus, "interviewstatus");
+        SortCommand expectedCommandSeniority = new SortCommand(sortComparatorSeniority, "seniority");
 
         assertParseSuccess(parser, SORT_EMPTY + "name", expectedCommandName);
         assertParseSuccess(parser, " " + PREFIX_SORTKEY + "name", expectedCommandName);
@@ -68,6 +78,9 @@ public class SortCommandParserTest {
         assertParseSuccess(parser, SORT_EMPTY + "studentid", expectedCommandStudentId);
         assertParseSuccess(parser, SORT_EMPTY + "phone", expectedCommandPhone);
         assertParseSuccess(parser, SORT_EMPTY + "email", expectedCommandEmail);
+        assertParseSuccess(parser, SORT_EMPTY + "applicationstatus", expectedCommandApplicationStatus);
+        assertParseSuccess(parser, SORT_EMPTY + "interviewstatus", expectedCommandInterviewStatus);
+        assertParseSuccess(parser, SORT_EMPTY + "seniority", expectedCommandSeniority);
     }
 
     @Test
