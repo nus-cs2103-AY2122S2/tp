@@ -141,6 +141,7 @@ public class ParserUtil {
             return new LightTheme();
         }
         throw new ParseException("Theme should be either light or dark.");
+    }
 
     /**
      * Parses a {@code String courseName} into an {@code Course}.
