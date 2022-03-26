@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook addressBook;
     private final UserPrefs userPrefs;
     /** Internal list of filtered persons, wrapped by sortedPersons */
     private final FilteredList<Person> filteredPersons;
@@ -36,7 +36,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         // A sorted list wrapping over the internal filtered list
@@ -44,7 +44,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new VersionedAddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -103,19 +103,35 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        addressBook.commit();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.commit();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    public boolean canUndoAddressBook() {
+        return addressBook.canUndo();
+    }
+
+    public void undoAddressBook(){
+        addressBook.undo();
+    }
+
+    public boolean canRedoAddressBook() {
+        return addressBook.canRedo();
+    }
+
+    public void redoAddressBook(){
+        addressBook.redo();
     }
 
     //=========== Filtered & Sorted Person List Accessors ==========================================================
