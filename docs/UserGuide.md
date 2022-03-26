@@ -68,7 +68,7 @@ Commands in CinnamonBun can be broken down into several components.
 | `PREFIX`       | Commands may have one more or arguments. The prefix specifies which arguments to map to the parameters. All prefixes end with a `/`. |
  | `ARGUMENT`     | The argument to pass to the command.                                                                                                 |
 
-<div markdown="block" class="alert alert-primary">:bulb:
+<div markdown="block" class="alert alert-primary">:bulb:**Attention**
 
 * Commands and their arguments are case-sensitive
 * Parameters can be in any order.<br>
@@ -105,10 +105,6 @@ Adds a client to CinnamonBun.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-Examples:
-* `add n/Andy Lau p/98765432 e/andy_lau@example.com a/Pasir Ris Grove, Block 73, #02-38, Singapore 518206`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
 <div markdown="block" class="alert alert-info">:information_source:
 
 A client can have many fields, including both optional and compulsory ones.
@@ -125,6 +121,10 @@ A client can have many fields, including both optional and compulsory ones.
 
 </div>
 
+Examples:
+* `add n/Andy Lau p/98765432 e/andy_lau@example.com a/Pasir Ris Grove, Block 73, #02-38, Singapore 518206`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
 ### Sort client list: `sort`
 
 Sorts the client list based on the order of the fields specified.
@@ -139,7 +139,7 @@ Fields that can be sorted:
 
 Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]`  
 
-<div markdown="block" class="alert alert-info">:information_source:
+<div markdown="block" class="alert alert-info">:information_source:**Info**
 
 * At least one of the above fields must be specified.
 * Specifying `desc` it after a field means that particular field is to be sorted in descending order. By default, they are sorted in ascending order.
@@ -169,7 +169,7 @@ Edits an existing person in CinnamonBun.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">:information_source:
+<div markdown="block" class="alert alert-info">:information_source:**Info**
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -192,7 +192,7 @@ Finds clients whose name, phone, email, address or tags contain any of the given
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-<div markdown="block" class="alert alert-info">:information_source:
+<div markdown="block" class="alert alert-info">:information_source:**Info**
 
 * The search is case-insensitive. e.g. `bob` will match `Bob`
 * The order of the keywords does not matter. e.g. `Hans Bob` will match `Bob Hans`
@@ -215,7 +215,7 @@ Deletes a customer in CinnamonBun.
 
 Format: `delete INDEX`
 
-<div markdown="block" class="alert alert-info">:information_source:
+<div markdown="block" class="alert alert-info">:information_source:**Info**
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
