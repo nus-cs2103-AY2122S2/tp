@@ -164,4 +164,10 @@ public class UniqueInterviewListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueInterviewList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void removeInterviews_throwsInterviewNotFoundException() {
+        assertThrows(InterviewNotFoundException.class, () -> uniqueInterviewList.remove(
+                new InterviewBuilder().build()));
+    }
 }

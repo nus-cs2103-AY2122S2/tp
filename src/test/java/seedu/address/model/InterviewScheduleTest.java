@@ -66,10 +66,18 @@ public class InterviewScheduleTest {
                         .build();
         List<Interview> newInterviews = Arrays.asList(INTERVIEW_AMY_TYPICAL, editedAliceInterview);
         InterviewScheduleStub newData = new InterviewScheduleStub(newInterviews);
-
         assertThrows(ConflictingInterviewException.class, () -> interviewSchedule.resetData(newData));
     }
 
+    @Test
+    public void setInterviews_withDuplicateInterviewCandidates_throwsDuplicateCandidateException() {
+        // Two interviews with the same candidate
+        Interview editedAliceInterview =
+                new InterviewBuilder(INTERVIEW_ALICE).withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME)
+                        .build();
+        List<Interview> newInterviews = Arrays.asList(INTERVIEW_ALICE, editedAliceInterview);
+        assertThrows(DuplicateCandidateException.class, () -> new InterviewSchedule().setInterviews(newInterviews));
+    }
 
     @Test
     public void hasCandidate_nullInterview_throwsNullPointerException() {
@@ -117,6 +125,17 @@ public class InterviewScheduleTest {
         Interview editedAliceInterview = new InterviewBuilder(INTERVIEW_ALICE)
                 .withCandidate(BOB).build();
         assertTrue(interviewSchedule.hasConflictingInterview(editedAliceInterview));
+    }
+
+    @Test
+    public void removeInterviewSuccess() {
+        Interview interviewAlice = new InterviewBuilder(INTERVIEW_ALICE)
+                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
+        InterviewSchedule schedule = new InterviewSchedule();
+        schedule.addInterview(interviewAlice);
+        schedule.removeInterview(interviewAlice);
+
+        assertEquals(schedule, interviewSchedule);
     }
 
     /**
