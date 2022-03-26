@@ -30,7 +30,10 @@ import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 
 public class EditLessonCommand extends Command {
+
     public static final String COMMAND_WORD = "editlesson";
+    public static final String SHORTENED_COMMAND_WORD = "el";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lesson from the list of lessons "
             + "\n"
             + "Parameters: LESSON_ID "

@@ -76,6 +76,11 @@ public class TeachWhatParser {
         case EditStudentCommand.SHORTENED_COMMAND_WORD:
             return new EditStudentCommandParser().parse(arguments);
 
+        case EditLessonCommand.COMMAND_WORD:
+            // Fallthrough
+        case EditLessonCommand.SHORTENED_COMMAND_WORD:
+            return new EditLessonCommandParser().parse(arguments);
+
         case FindStudentCommand.COMMAND_WORD:
             // Fallthrough
         case FindStudentCommand.SHORTENED_COMMAND_WORD:
@@ -117,8 +122,6 @@ public class TeachWhatParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-        case EditLessonCommand.COMMAND_WORD:
-            return new EditLessonCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

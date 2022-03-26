@@ -15,6 +15,7 @@ import seedu.address.model.lesson.Lesson;
  * Views the details of a class identified using it's displayed index.
  */
 public class ViewLessonInfoCommand extends Command {
+
     public static final String COMMAND_WORD = "lesson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View details of a selected Lesson.\n"

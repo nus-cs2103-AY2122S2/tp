@@ -15,6 +15,7 @@ import seedu.address.model.student.Student;
  * Views the details of a student identified using it's displayed index.
  */
 public class ViewStudentInfoCommand extends Command {
+
     public static final String COMMAND_WORD = "student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View details of a selected Student.\n"
