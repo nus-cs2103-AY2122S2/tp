@@ -10,7 +10,7 @@ CinnamonBun is a **desktop app for managing client information, optimized for us
 
 ---
 
-# CinnamonBun - As good as it sounds.
+## CinnamonBun - As good as it sounds.
 
 Are you a small business owner or freelancer? Want an easy way to store your client's information, but there's no free and easy solution available?
 No worries, CinnamonBun has got you covered! CinnamonBun enables you to keep track of your clients and their transaction records.
