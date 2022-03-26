@@ -370,6 +370,6 @@ _Details coming soon ..._
 | **Parameter**                      | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)                                                                                          |
 | **Prefix**                         | Characters used to identify the following parameter (e.g. `n/` is the prefix for the parameter `NAME`)                                                                                 |
 | **JavaFX**                         | JavaFX is a set of Java graphics libraries for creating Java GUI applications                                                                                                          |
-| **int**                            | A primitive data type of Java that has the maximum value of (2^31)-1 and the minimum value of -(2^31)                                                                                  |
+| **int**                            | A primitive data type of Java that has the maximum value of 2<sup>31</sup>-1 and the minimum value of -2<sup>31</sup>                                                                  |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
