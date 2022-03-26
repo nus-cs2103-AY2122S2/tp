@@ -151,7 +151,7 @@ public class ModelManagerTest {
 
         modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
-        modelManager.deleteInterview(ALICE);
+        modelManager.deleteInterviewForCandidate(ALICE);
 
         assertEquals(modelManager, modelManagerCopy);
     }
@@ -164,7 +164,7 @@ public class ModelManagerTest {
 
         modelManager = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
-        modelManager.deleteInterview(ALICE);
+        modelManager.deleteInterviewForCandidate(ALICE);
 
         assertEquals(modelManager, modelManagerCopy);
     }
