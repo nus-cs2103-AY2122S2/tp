@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.AttendanceUtil;
+import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -48,6 +50,8 @@ public class PetCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane attendanceTags;
+    @FXML
+    private FlowPane transportTags;
 
 
     /**
@@ -66,12 +70,19 @@ public class PetCard extends UiPart<Region> {
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        getPastWeekAttendance(pet.getAttendanceHashMap())
+        AttendanceHashMap attendanceHashMap = pet.getAttendanceHashMap();
+        getPastWeekAttendance(attendanceHashMap)
                 .forEach(attendance -> {
                     attendanceTags
                             .getChildren()
                             .add(AttendanceTag.createAttendanceTag(attendance));
                 });
+        AttendanceUtil.getNextTwoDaysTransport(attendanceHashMap)
+            .forEach(attendance -> {
+                transportTags
+                    .getChildren()
+                    .add(TransportTag.createTransportTag(attendance));
+            });
     }
 
     public void setColour(String colour) {

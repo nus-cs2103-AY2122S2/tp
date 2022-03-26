@@ -38,6 +38,11 @@ public class AbsentAttendanceEntry extends AttendanceEntry {
     }
 
     @Override
+    public boolean hasTransportArrangement() {
+        return false;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true; // short circuit if same object

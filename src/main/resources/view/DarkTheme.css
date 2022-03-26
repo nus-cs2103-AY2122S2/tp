@@ -367,3 +367,17 @@
 #attendancePane {
     -fx-background-radius: 15px;
 }
+
+#transportTags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#transportTags .label {
+    -fx-text-fill: black;
+    -fx-background-color: #bffcc6;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
