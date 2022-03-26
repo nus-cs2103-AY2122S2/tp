@@ -157,11 +157,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteInterview(Candidate target) {
         requireNonNull(target);
-        for (Interview interview: interviewSchedule.getInterviewList()) {
-            if (interview.getCandidate().equals(target)) {
-                interviewSchedule.removeInterview(interview);
-                break;
+        Interview interview = null;
+        for (Interview i: interviewSchedule.getInterviewList()) {
+            if (i.getCandidate().equals(target)) {
+                interview = i;
             }
+        }
+        if (interview != null) {
+            interviewSchedule.removeInterview(interview);
         }
     }
 
