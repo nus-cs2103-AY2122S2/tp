@@ -24,7 +24,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                                     StringUtil.containsWordIgnoreCase(field.getValue(), keyword)
                                     || person.getTags().stream().map(tag -> tag.value)
                                             .anyMatch(keyword::equalsIgnoreCase)
-                            ));
+                    ));
     }
 
     @Override
