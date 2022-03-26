@@ -10,6 +10,7 @@ public class Seniority {
     public static final String MESSAGE_CONSTRAINTS =
             "Seniority input should only either be 1, 2, 3 or 4, and it should not be blank";
     public static final String COM_VALUE = "COM";
+    public static final String VALIDATION_REGEX = "[1|2|3|4]";
     public static final int MIN_SENIORITY = 1;
     public static final int MAX_SENIORITY = 4;
     public final String seniority;
@@ -19,17 +20,17 @@ public class Seniority {
      *
      * @param seniority A valid seniority.
      */
-    public Seniority(int seniority) {
+    public Seniority(String seniority) {
         checkArgument(isValidSeniority(seniority), MESSAGE_CONSTRAINTS);
 
-        this.seniority = COM_VALUE + seniority;
+        this.seniority = seniority;
     }
 
     /**
      * Returns true if a given string is a valid seniority.
      */
-    public static boolean isValidSeniority(int test) {
-        return test >= MIN_SENIORITY && test <= MAX_SENIORITY;
+    public static boolean isValidSeniority(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

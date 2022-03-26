@@ -146,18 +146,10 @@ public class ParserUtil {
     public static Seniority parseSeniority(String seniority) throws ParseException {
         requireNonNull(seniority);
         String trimmedSeniority = seniority.trim();
-
-        try {
-            int seniorityInt = Integer.parseInt(trimmedSeniority.substring(trimmedSeniority.length() - 1));
-
-            if (!Seniority.isValidSeniority(seniorityInt)) {
-                throw new ParseException(Seniority.MESSAGE_CONSTRAINTS);
-            }
-
-            return new Seniority(seniorityInt);
-        } catch (NumberFormatException e) {
+        if (!Seniority.isValidSeniority(trimmedSeniority)) {
             throw new ParseException(Seniority.MESSAGE_CONSTRAINTS);
         }
+        return new Seniority(trimmedSeniority);
     }
 
     /**

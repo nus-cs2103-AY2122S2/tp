@@ -36,12 +36,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalCandidates.AMY;
 import static seedu.address.testutil.TypicalCandidates.BOB;
 
-import java.util.logging.Logger;
-
 import org.junit.jupiter.api.Test;
 
-import seedu.address.MainApp;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
@@ -138,12 +134,6 @@ public class AddCommandParserTest {
                 + AVAILABILITY_DESC_BOB, Course.MESSAGE_CONSTRAINTS);
 
         // invalid seniority
-        Logger logger = LogsCenter.getLogger(MainApp.class);
-
-        logger.info(STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + INVALID_SENIORITY_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
-                + AVAILABILITY_DESC_BOB);
-
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
                 + COURSE_DESC_BOB + INVALID_SENIORITY_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                 + AVAILABILITY_DESC_BOB, Seniority.MESSAGE_CONSTRAINTS);
