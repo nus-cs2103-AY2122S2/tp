@@ -37,4 +37,13 @@
 #commandView .table-column {
   -fx-alignment: CENTER;
   -fx-font-size: 14;
+  -fx-text-fill: white;
+}
+
+#commandView .table-row-cell {
+     -fx-background: derive(#1d1d1d, 20%);
  }
+
+#commandView .table-row-cell:selected {
+   -fx-background-color: -fx-focus-color;
+}
