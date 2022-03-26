@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -33,6 +33,8 @@ public class ParserUtil {
     public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format! Date must be in DD-MM-YYYY\n"
             + "[EXAMPLE]: to specify that a lesson is on 25th March 2022, include the following\n"
             + "-d 25-03-2022";
+
+    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson cannot be zero.";
 
     public static final String INVALID_HOURS_FORMAT_MESSAGE = "Invalid duration in hours format! "
             + "Hours must be a non-negative integer.\n"
@@ -200,6 +202,18 @@ public class ParserUtil {
     }
 
     /**
+     * Checks that the lesson has does not have a total duration of zero minutes.
+     */
+    public static void checkDurationIsValid(int hours, int minutes) throws ParseException {
+        boolean isValidHoursAndMinutes = ((hours > 0 && minutes >= 0 && minutes <= 60)
+                || (hours == 0 && minutes > 0 && minutes <= 60));
+
+        if (!isValidHoursAndMinutes) {
+            throw new ParseException(INVALID_DURATION_MESSAGE);
+        }
+    }
+
+    /**
      * Parses a {@code String dateOfLesson}, a {@code startTime}, a {@code duration hour-field}
      * and a {@code duration minute-field} into a {@code DateTimeSlot}
      *
@@ -209,22 +223,9 @@ public class ParserUtil {
     public static DateTimeSlot parseDateTimeSlot(String dateOfLesson, String startTime,
                                                  int durationHours, int durationMinutes) throws ParseException {
         LocalDate lessonDate = parseDate(dateOfLesson);
-        String lessonStartTime = parseStartTime(startTime);
+        LocalTime lessonStartTime = parseStartTime(startTime);
 
-        String[] hourAndMinuteOfStartTime = startTime.split(":");
-        Integer hour;
-        Integer minute;
-        LocalDateTime lessonDateTime;
-
-        try {
-            hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
-            minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
-            lessonDateTime = lessonDate.atTime(hour, minute);
-        } catch (NumberFormatException | DateTimeException exception) {
-            throw new ParseException(String.format("Invalid lesson start time: %s", startTime));
-        }
-
-        return new DateTimeSlot(lessonDateTime, durationHours, durationMinutes);
+        return new DateTimeSlot(lessonDate.atTime(lessonStartTime), durationHours, durationMinutes);
     }
 
     /**
@@ -256,15 +257,20 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dateOfLesson} is invalid.
      */
-    public static String parseStartTime(String startTime) throws ParseException {
+    public static LocalTime parseStartTime(String startTime) throws ParseException {
         requireNonNull(startTime);
         String trimmedStartTimeString = startTime.trim();
-
         if (!DateTimeSlot.isValidStartTime(trimmedStartTimeString)) {
             throw new ParseException(INVALID_START_TIME_MESSAGE);
         }
+        String[] hourAndMinuteOfStartTime = trimmedStartTimeString.split(":");
+        try {
+            return LocalTime.of(Integer.parseInt(hourAndMinuteOfStartTime[0]),
+                    Integer.parseInt(hourAndMinuteOfStartTime[1]));
+        } catch (NumberFormatException | DateTimeException exception) {
+            throw new ParseException(String.format("Invalid lesson start time: %s", startTime));
+        }
 
-        return trimmedStartTimeString;
     }
 
     /**

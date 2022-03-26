@@ -22,7 +22,6 @@ import seedu.address.model.lesson.Subject;
  * Parses input arguments and creates a new AddStudentCommand object
  */
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
-    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson cannot be zero.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddStudentCommand
@@ -50,7 +49,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Integer durationMinutes = hasDurationMinutesField(argMultimap)
                 ? ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get())
                 : 0;
-        checkDurationIsValid(durationHours, durationMinutes);
+
+        ParserUtil.checkDurationIsValid(durationHours, durationMinutes);
 
         DateTimeSlot dateTimeSlot = ParserUtil.parseDateTimeSlot(
                 argMultimap.getValue(PREFIX_DATE).get(),
@@ -87,15 +87,5 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         return !argumentMultimap.getValue(PREFIX_DURATION_MINUTES).isEmpty();
     }
 
-    /**
-     * Checks that the lesson has does not have a total duration of zero minutes.
-     */
-    private static void checkDurationIsValid(int hours, int minutes) throws ParseException {
-        boolean isValidHoursAndMinutes = ((hours > 0 && minutes >= 0 && minutes <= 60)
-                || (hours == 0 && minutes > 0 && minutes <= 60));
 
-        if (!isValidHoursAndMinutes) {
-            throw new ParseException(INVALID_DURATION_MESSAGE);
-        }
-    }
 }

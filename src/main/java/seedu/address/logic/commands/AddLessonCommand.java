@@ -43,7 +43,7 @@ public class AddLessonCommand extends Command {
             + "\n     "
             + PREFIX_LESSON_ADDRESS + " Blk 11 Ang Mo Kio Street 74, #11-04 "
             + "\n     "
-            + PREFIX_DATE + "19-12-2022 "
+            + PREFIX_DATE + " 19-12-2022 "
             + PREFIX_START_TIME + " 18:00 "
             + PREFIX_DURATION_HOURS + " 2 "
             + PREFIX_DURATION_MINUTES + " 15 ";
