@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.AddressContainsKeywordsPredicateAnd;
 import seedu.address.model.person.CcaContainsKeywordsPredicateAnd;
 import seedu.address.model.person.EducationContainsKeywordsPredicateAnd;
-import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicateAnd;
 import seedu.address.model.person.InternshipContainsKeywordsPredicateAnd;
 import seedu.address.model.person.ModuleContainsKeywordsPredicateAnd;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicateAnd;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicateAnd;
 
 public class FindAndPredicateParser {
 
@@ -29,13 +29,13 @@ public class FindAndPredicateParser {
         List<Predicate<Person>> predicateList = new ArrayList<>();
 
         personDescriptor.getStringNames().ifPresent(names ->
-                predicateList.add(new NameContainsKeywordsPredicate(names)));
+                predicateList.add(new NameContainsKeywordsPredicateAnd(names)));
         personDescriptor.getStringPhones().ifPresent(phones ->
-                predicateList.add(new PhoneContainsKeywordsPredicate(phones)));
+                predicateList.add(new PhoneContainsKeywordsPredicateAnd(phones)));
         personDescriptor.getStringEmails().ifPresent(emails ->
-                predicateList.add(new EmailContainsKeywordsPredicate(emails)));
+                predicateList.add(new EmailContainsKeywordsPredicateAnd(emails)));
         personDescriptor.getStringAddresses().ifPresent(list ->
-                predicateList.add(new AddressContainsKeywordsPredicate(list)));
+                predicateList.add(new AddressContainsKeywordsPredicateAnd(list)));
 
         personDescriptor.getStringEducations().ifPresent(list ->
                 predicateList.add(new EducationContainsKeywordsPredicateAnd(list)));
