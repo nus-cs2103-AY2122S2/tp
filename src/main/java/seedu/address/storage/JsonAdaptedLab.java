@@ -54,14 +54,21 @@ class JsonAdaptedLab {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lab.
      */
     public Lab toModelType() throws IllegalValueException {
-        if (!Lab.isValidLab(labNumber)) {
+        if (labNumber == null || !Lab.isValidLab(labNumber)) {
             throw new IllegalValueException(Lab.MESSAGE_CONSTRAINTS);
         }
         try {
-            return new Lab(labNumber).of(labStatus, labMark);
+            return new Lab(labNumber).of(orElse(labStatus, "UNSUBMITTED"), orElse(labMark, "Unknown"));
         } catch (InvalidLabStatusException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
+    }
+
+    private String orElse(String str, String alt) {
+        if (str == null) {
+            return alt;
+        }
+        return str;
     }
 
 }
