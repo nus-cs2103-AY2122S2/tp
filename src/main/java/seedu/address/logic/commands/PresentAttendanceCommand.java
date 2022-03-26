@@ -176,6 +176,26 @@ public class PresentAttendanceCommand extends Command {
 
             return "Present | " + date + " | " + NO_PICKUP_DROPOFF_STRING;
         }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof PresentAttendanceDescriptor)) {
+                return false;
+            }
+
+            // state check
+            PresentAttendanceDescriptor otherDescriptor = (PresentAttendanceDescriptor) other;
+
+            return attendanceDate.equals(otherDescriptor.attendanceDate)
+                && getPickUpTime().equals(otherDescriptor.getPickUpTime())
+                && getDropOffTime().equals(otherDescriptor.getDropOffTime());
+        }
     }
 
 
