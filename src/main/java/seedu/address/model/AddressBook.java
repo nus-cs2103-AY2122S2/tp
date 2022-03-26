@@ -218,7 +218,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             lineups.putPlayerToLineup(p, lineup);
         }
     }
-  
+
     /**
      * Adds a schedule to MyGM.
      * The schedule must not already exist in MyGM.
