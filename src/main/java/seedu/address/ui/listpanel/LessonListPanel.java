@@ -1,7 +1,10 @@
 package seedu.address.ui.listpanel;
 
+import java.util.Comparator;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -25,7 +28,9 @@ public class LessonListPanel extends ListPanel {
      */
     public LessonListPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
-        lessonListView.setItems(lessonList);
+        lessonListView.setItems(FXCollections.observableList(lessonList.stream()
+                .sorted(Comparator.comparing(x -> x.getDateTimeSlot().getDateOfLesson()))
+                .collect(Collectors.toList())));
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
