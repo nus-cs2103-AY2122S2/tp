@@ -164,6 +164,17 @@ Format: `absent INDEX date/dd-MM-yyyy`
 Examples:
 * `absent 1 date/17-03-2022` indicates that pet 1 is absent for daycare on `17-03-2022`
 
+### Undoing changes : `undo`
+
+Undoes previous commands that the user has keyed in. 
+
+Format: `undo`
+* Users should not be able to undo Clear, Exit, Find, Help and List Commands. 
+
+
+Examples:
+* If the user choses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted. 
+
 ### Deleting a pet: `delete`
 
 Deletes the specified pet from the address book.
@@ -211,3 +222,4 @@ Format: `help`
 | **Clear**           | `clear`|
 | **Exit**            | `exit` |
 | **Help**            | `help` |
+| **undo**            | `undo` |
