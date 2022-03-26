@@ -136,6 +136,15 @@ public class PresentAttendanceCommand extends Command {
         public PresentAttendanceDescriptor() {
         }
 
+        /**
+         * Copy constructor.
+         */
+        public PresentAttendanceDescriptor(PresentAttendanceDescriptor toCopy) {
+            setAttendanceDate(toCopy.attendanceDate);
+            setPickUpTime(toCopy.pickUpTime);
+            setDropOffTime(toCopy.dropOffTime);
+        }
+
         public void setAttendanceDate(LocalDate attendanceDate) {
             this.attendanceDate = attendanceDate;
         }

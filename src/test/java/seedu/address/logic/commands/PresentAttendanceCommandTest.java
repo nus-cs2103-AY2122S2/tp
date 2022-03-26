@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_WITHOUT_TRANSPORT_ARRANGEMENT;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_WITH_TRANSPORT_ARRANGEMENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
@@ -367,5 +371,33 @@ public class PresentAttendanceCommandTest {
             presentAttendanceDescriptor);
 
         assertCommandFailure(presentAttendanceCommand, model, failureMessage);
+    }
+
+    @Test
+    public void equals() {
+        final PresentAttendanceCommand standardCommand = new PresentAttendanceCommand(INDEX_FIRST_PET,
+            DESC_WITH_TRANSPORT_ARRANGEMENT);
+
+        // same values -> returns true
+        PresentAttendanceDescriptor copyDescriptor = new PresentAttendanceDescriptor(DESC_WITH_TRANSPORT_ARRANGEMENT);
+        PresentAttendanceCommand commandWithSameValues = new PresentAttendanceCommand(INDEX_FIRST_PET, copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(
+            new PresentAttendanceCommand(INDEX_SECOND_PET, DESC_WITH_TRANSPORT_ARRANGEMENT)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(
+            new PresentAttendanceCommand(INDEX_FIRST_PET, DESC_WITHOUT_TRANSPORT_ARRANGEMENT)));
     }
 }
