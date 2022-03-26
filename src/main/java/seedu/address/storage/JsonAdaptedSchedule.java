@@ -36,10 +36,10 @@ public class JsonAdaptedSchedule {
      * Converts a given {@code Schedule} into this class for Jackson use.
      */
     public JsonAdaptedSchedule(Schedule source) {
-        name = source.getScheduleName().scheduleName;
-        description = source.getScheduleDescription().description;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy hhmm");
-        dateTime = source.getScheduleDateTime().getScheduleDateTime().format(formatter);
+        this.name = source.getScheduleName().scheduleName;
+        this.description = source.getScheduleDescription().description;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
+        this.dateTime = source.getScheduleDateTime().getScheduleDateTime().format(formatter);
     }
 
     /**
