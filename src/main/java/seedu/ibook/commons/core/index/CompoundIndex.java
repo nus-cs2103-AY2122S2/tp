@@ -1,8 +1,11 @@
 package seedu.ibook.commons.core.index;
 
 public class CompoundIndex {
-    private Index first;
-    private Index second;
+
+    public static final String SEPARATOR = "-";
+
+    private final Index first;
+    private final Index second;
 
     /**
      * CompoundIndex can only be created by calling {@link CompoundIndex#fromZeroBased(int, int)} or
