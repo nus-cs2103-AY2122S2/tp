@@ -13,6 +13,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 public class AssignCommand extends Command {
+
     public static final String COMMAND_WORD = "assign";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student to a lesson\n"
             + "Parameters: "

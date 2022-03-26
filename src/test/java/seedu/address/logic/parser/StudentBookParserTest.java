@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
@@ -54,7 +53,6 @@ public class StudentBookParserTest {
         assertEquals(new DeleteStudentCommand(INDEX_FIRST_STUDENT), command);
     }
 
-    @Disabled
     @Test
     public void parseCommand_edit() throws Exception {
         Student student = new StudentBuilder().build();

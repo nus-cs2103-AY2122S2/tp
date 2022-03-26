@@ -13,11 +13,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.ConflictingLessonsPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 
 public class AddLessonCommand extends Command {
+
     public static final String COMMAND_WORD = "addlesson";
+    public static final String SHORTENED_COMMAND_WORD = "al";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the schedule"
             + "\n"
@@ -42,7 +45,7 @@ public class AddLessonCommand extends Command {
             + "\n     "
             + PREFIX_LESSON_ADDRESS + " Blk 11 Ang Mo Kio Street 74, #11-04 "
             + "\n     "
-            + PREFIX_DATE + "19-12-2022 "
+            + PREFIX_DATE + " 19-12-2022 "
             + PREFIX_START_TIME + " 18:00 "
             + PREFIX_DURATION_HOURS + " 2 "
             + PREFIX_DURATION_MINUTES + " 15 ";
@@ -68,8 +71,12 @@ public class AddLessonCommand extends Command {
         try {
             model.addLesson(toAdd);
         } catch (ConflictsWithLessonsException e) {
-            throw new CommandException(e.getMessage());
+            model.updateFilteredLessonList(new ConflictingLessonsPredicate(toAdd));
+
+            return new CommandResult(ConflictsWithLessonsException.ERROR_MESSAGE,
+                    true, InfoPanelTypes.LESSON, ViewTab.LESSON);
         }
+
         model.setSelectedLesson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }

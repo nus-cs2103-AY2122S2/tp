@@ -159,6 +159,11 @@ public abstract class Lesson {
      */
     public abstract boolean isConflictingWithLesson(Lesson otherLesson);
 
+    /**
+     * Returns true if the lesson is recurring.
+     */
+    public abstract boolean isRecurring();
+
     @Override
     public String toString() {
         StringBuilder lessonString = new StringBuilder();

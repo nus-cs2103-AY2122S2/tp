@@ -1,14 +1,18 @@
 package seedu.address.ui.listpanel;
 
+import java.util.Comparator;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.ui.card.LessonCard;
+import seedu.address.ui.card.RecurringLessonCard;
+import seedu.address.ui.card.TemporaryLessonCard;
 
 /**
  * Panel containing the list of lessons.
@@ -25,12 +29,14 @@ public class LessonListPanel extends ListPanel {
      */
     public LessonListPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
-        lessonListView.setItems(lessonList);
+        lessonListView.setItems(FXCollections.observableList(lessonList.stream()
+                .sorted(Comparator.comparing(x -> x.getDateTimeSlot().getDateOfLesson()))
+                .collect(Collectors.toList())));
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code TemporaryLessonCard}.
      */
     class LessonListViewCell extends ListCell<Lesson> {
         @Override
@@ -40,8 +46,14 @@ public class LessonListPanel extends ListPanel {
             if (empty || lesson == null) {
                 setGraphic(null);
                 setText(null);
+
+                return;
+            }
+
+            if (lesson.isRecurring()) {
+                setGraphic(new RecurringLessonCard(lesson, getIndex() + 1).getRoot());
             } else {
-                setGraphic(new LessonCard(lesson, getIndex() + 1).getRoot());
+                setGraphic(new TemporaryLessonCard(lesson, getIndex() + 1).getRoot());
             }
         }
     }

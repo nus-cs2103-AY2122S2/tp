@@ -11,7 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
-import seedu.address.ui.card.LessonCard;
+import seedu.address.ui.card.TemporaryLessonCard;
 
 public class StudentInfoPanel extends InfoPanel {
     private static final String FXML = "StudentInfoPanel.fxml";
@@ -64,7 +64,7 @@ public class StudentInfoPanel extends InfoPanel {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code TemporaryLessonCard}.
      */
     class LessonListViewCell extends ListCell<Lesson> {
         @Override
@@ -75,7 +75,7 @@ public class StudentInfoPanel extends InfoPanel {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LessonCard(lesson).getRoot());
+                setGraphic(new TemporaryLessonCard(lesson).getRoot());
             }
         }
     }

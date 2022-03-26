@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Represents the time in which a lesson takes place in the LessonBook.
@@ -130,6 +132,15 @@ public class DateTimeSlot {
         return String.format("%s - %s",
                 displayedTimeFormat.format(this.dateOfLesson),
                 displayedTimeFormat.format(this.getEndingDateTime()));
+    }
+
+    /**
+     * Returns a string representation of which day of the week the lesson falls on.
+     * @return
+     */
+    public String getDayString() {
+        return String.format("every %s",
+                dateOfLesson.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()));
     }
 
     /**
@@ -262,7 +273,8 @@ public class DateTimeSlot {
 
         DateTimeSlot otherDateTimeSlot = (DateTimeSlot) other;
         return this.dateOfLesson.equals(otherDateTimeSlot.dateOfLesson)
-                && this.hours == (otherDateTimeSlot.hours);
+                && this.hours == (otherDateTimeSlot.hours)
+                && this.minutes == otherDateTimeSlot.minutes;
     }
 
     @Override
