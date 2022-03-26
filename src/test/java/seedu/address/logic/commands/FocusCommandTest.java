@@ -26,6 +26,8 @@ public class FocusCommandTest {
     public void equals() {
         FocusCommand fc1 = new FocusCommand(Index.fromZeroBased(1));
         FocusCommand fc2 = new FocusCommand(Index.fromZeroBased(1));
+        FocusCommand fc3 = new FocusCommand(Index.fromZeroBased(2));
+        HelpCommand hc = new HelpCommand();
 
         // same object -> returns true
         assertTrue(fc1.equals(fc2));
@@ -33,8 +35,11 @@ public class FocusCommandTest {
         // null -> returns false
         assertFalse(fc1.equals(null));
 
-        // different sort key -> returns false
+        // null -> returns false
         assertFalse(fc2.equals(null));
-    }
 
+        //different index -> returns false
+        assertFalse(fc1.equals(fc3));
+        assertFalse(fc2.equals(fc3));
+    }
 }
