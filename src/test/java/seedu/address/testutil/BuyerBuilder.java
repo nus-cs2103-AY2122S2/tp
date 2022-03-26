@@ -25,7 +25,8 @@ public class BuyerBuilder {
     private Phone phone;
     private Set<Tag> tags;
     private Appointment appointment;
-    private PropertyToBuy desiredProperty;
+    private PropertyToBuy desiredProperty = NullPropertyToBuy.getNullPropertyToBuy();
+
 
     /**
      * Creates a {@code clientBuilder} with the default details.

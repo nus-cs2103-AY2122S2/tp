@@ -57,7 +57,7 @@ public enum HouseType {
     NULLHOUSETYPE("Nullhouse") {
         @Override
         public String toString() {
-            return "Nullhouse";
+            return "";
         }
     };
 

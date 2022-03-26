@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.property.NullPropertyToBuy;
 import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.seller.Seller;
 

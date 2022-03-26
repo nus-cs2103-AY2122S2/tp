@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.util.Locale;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -38,6 +36,9 @@ public class JsonAdaptedHouse {
      * @throws IllegalValueException if there were any data constraints violated in the adapted house.
      */
     public House toModelType() throws IllegalValueException {
-        return new House(HouseType.getHouseType(houseType), location);
+        if (houseType.equals("")) {
+            return new House(HouseType.NULLHOUSETYPE, "");
+        }
+        return new House(HouseType.valueOf(houseType.toUpperCase()), location);
     }
 }

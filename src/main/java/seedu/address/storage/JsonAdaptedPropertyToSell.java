@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.House;
@@ -49,13 +48,9 @@ class JsonAdaptedPropertyToSell {
         }
     }
 
-    @JsonValue
+
     public House getHouse() throws IllegalValueException {
-//        if (!(this instanceof NullPropertyToSell)) {
-            return house.toModelType();
-//        } else {
-//            return new House(HouseType.NULLHOUSETYPE, "");
-//        }
+        return house.toModelType();
     }
 
     public PriceRange getPriceRange() throws IllegalValueException {
