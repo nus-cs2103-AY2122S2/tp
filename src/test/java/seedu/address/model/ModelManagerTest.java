@@ -143,6 +143,33 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteInterviewSuccess() {
+        AddressBook addressBook = new AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).build();
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE).build();
+        InterviewSchedule emptyInterviewSchedule = new InterviewScheduleBuilder().build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        modelManager.deleteInterviewForCandidate(ALICE);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
+    public void deleteCandidate_withNoInterviewScheduled() {
+        AddressBook addressBook = new AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).build();
+        InterviewSchedule emptyInterviewSchedule = new InterviewScheduleBuilder().build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        modelManager.deleteInterviewForCandidate(ALICE);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).build();
         InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE)

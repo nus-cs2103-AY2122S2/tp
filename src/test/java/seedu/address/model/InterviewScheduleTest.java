@@ -119,6 +119,17 @@ public class InterviewScheduleTest {
         assertTrue(interviewSchedule.hasConflictingInterview(editedAliceInterview));
     }
 
+    @Test
+    public void removeInterviewSuccess() {
+        Interview interviewAlice = new InterviewBuilder(INTERVIEW_ALICE)
+                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
+        InterviewSchedule schedule = new InterviewSchedule();
+        schedule.addInterview(interviewAlice);
+        schedule.removeInterview(interviewAlice);
+
+        assertEquals(schedule, interviewSchedule);
+    }
+
     /**
      * A stub ReadOnlyInterviewSchedule whose candidates list can violate interface constraints.
      */

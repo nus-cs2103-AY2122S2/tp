@@ -48,6 +48,7 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         requireNonNull(interview);
         return interviews.containsSameCandidate(interview);
     }
+
     /**
      * Returns true if an interview with the same date and time slot as {@code interview}
      * exists in the interview schedule.
@@ -72,10 +73,10 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         interviews.setInterview(target, editedInterview);
     }*/
 
-    // Delete function not implemented yet, code commented out to reduce test coverage.
-    /* public void removeInterview(Interview key) {
+
+    public void removeInterview(Interview key) {
         interviews.remove(key);
-    }*/
+    }
 
     @Override
     public String toString() {
