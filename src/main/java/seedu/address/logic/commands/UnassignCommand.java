@@ -15,6 +15,9 @@ import seedu.address.model.student.Student;
 public class UnassignCommand extends Command {
 
     public static final String COMMAND_WORD = "unassign";
+    public static final String SHORTENED_COMMAND_WORD = "";
+    public static final String COMMAND_DESCRIPTION = "Unassign student from a lesson";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a student from a lesson \n"
             + "Parameters: "
             + PREFIX_STUDENT + " STUDENT_ID "
@@ -61,4 +64,5 @@ public class UnassignCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
                 true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
+
 }

@@ -33,6 +33,7 @@ public class EditStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "editstudent";
     public static final String SHORTENED_COMMAND_WORD = "es";
+    public static final String COMMAND_DESCRIPTION = "Edit a student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed student list. "

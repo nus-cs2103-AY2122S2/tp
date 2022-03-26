@@ -17,6 +17,8 @@ import seedu.address.model.student.Student;
 public class ViewStudentInfoCommand extends Command {
 
     public static final String COMMAND_WORD = "student";
+    public static final String SHORTENED_COMMAND_WORD = "";
+    public static final String COMMAND_DESCRIPTION = "View a student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View details of a selected Student.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
@@ -44,6 +46,7 @@ public class ViewStudentInfoCommand extends Command {
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, studentToSelect.getName()),
                 true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
+
 
     @Override
     public boolean equals(Object other) {

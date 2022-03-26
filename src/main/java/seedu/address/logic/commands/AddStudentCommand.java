@@ -19,6 +19,7 @@ public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "addstudent";
     public static final String SHORTENED_COMMAND_WORD = "as";
+    public static final String COMMAND_DESCRIPTION = "Add a student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the student book. "
             + "Parameters: "
@@ -34,6 +35,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_STUDENT_ADDRESS + " 311, Clementi Ave 2, #02-25 "
             + PREFIX_STUDENT_TAG + " friends "
             + PREFIX_STUDENT_TAG + " owesMoney";
+
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the student book";

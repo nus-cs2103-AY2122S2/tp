@@ -17,6 +17,9 @@ import seedu.address.model.lesson.Lesson;
 public class ViewLessonInfoCommand extends Command {
 
     public static final String COMMAND_WORD = "lesson";
+    public static final String SHORTENED_COMMAND_WORD = "";
+    public static final String COMMAND_DESCRIPTION = "View a lesson";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View details of a selected Lesson.\n"
             + "Parameters: INDEX (must be a positive integer)\n"

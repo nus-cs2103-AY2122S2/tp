@@ -14,6 +14,7 @@ public class FindStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "findstudents";
     public static final String SHORTENED_COMMAND_WORD = "fs";
+    public static final String COMMAND_DESCRIPTION = "Find students";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
