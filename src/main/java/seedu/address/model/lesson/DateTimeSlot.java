@@ -60,8 +60,6 @@ public class DateTimeSlot {
      * @param startTime Starting time of the lesson.
      * @param hours Duration of the lesson, hours.
      * @param minutes Duration of the lesson, minutes.
-     *
-     * TODO: REMOVE THIS CONSTRUCTOR
      */
     public DateTimeSlot(LocalDate date, String startTime, int hours, int minutes) {
         requireNonNull(date);
@@ -126,21 +124,21 @@ public class DateTimeSlot {
     }
 
     /**
-     * Returns a string representation of the starting and ending time of the lesson.
-     */
-    public String getTimeString() {
-        return String.format("%s - %s",
-                displayedTimeFormat.format(this.dateOfLesson),
-                displayedTimeFormat.format(this.getEndingDateTime()));
-    }
-
-    /**
      * Returns a string representation of which day of the week the lesson falls on.
      * @return
      */
     public String getDayString() {
         return String.format("every %s",
                 dateOfLesson.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()));
+    }
+
+    /**
+     * Returns a string representation of the starting and ending time of the lesson.
+     */
+    public String getTimeString() {
+        return String.format("%s - %s",
+                displayedTimeFormat.format(this.dateOfLesson),
+                displayedTimeFormat.format(this.getEndingDateTime()));
     }
 
     /**
@@ -200,7 +198,7 @@ public class DateTimeSlot {
             return false;
         }
 
-        if (durationMinutes < 0) {
+        if (durationMinutes < 0 || durationMinutes >= 60) {
             return false;
         }
 
