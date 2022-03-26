@@ -40,14 +40,20 @@
             <padding>
                 <Insets top="5" right="5" bottom="5" left="5"/>
             </padding>
-            <HBox alignment="CENTER_LEFT">
+            <VBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="5" bottom="5"/>
+                </padding>
                 <Label styleClass="cell_small_label" text="Attendance"/>
-            </HBox>
-            <FlowPane fx:id="attendanceTags" alignment="CENTER_LEFT"/>
-            <HBox alignment="CENTER_LEFT">
+                <FlowPane fx:id="attendanceTags" alignment="CENTER_LEFT"/>
+            </VBox>
+            <VBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="5" bottom="5"/>
+                </padding>
                 <Label styleClass="cell_small_label" text="Transport"/>
-            </HBox>
-            <FlowPane fx:id="transportTags" alignment="CENTER_LEFT"/>
+                <FlowPane fx:id="transportTags" alignment="CENTER_LEFT"/>
+            </VBox>
         </VBox>
     </GridPane>
 </HBox>
