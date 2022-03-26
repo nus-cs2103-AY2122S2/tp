@@ -44,17 +44,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_FILTER_BY_DATE, PREFIX_FILTER_BY_TAGS,
                         PREFIX_FILTER_BY_OWNER_NAME, PREFIX_FILTER_BY_APPOINTMENT);
 
-        String[] argSplitter = trimmedArgs.split("/");
-        String filterWord = argSplitter[1];
+        String keyword = ParserUtil.parseFilterArgs(trimmedArgs);
 
         if (argMultimap.getValue(PREFIX_FILTER_BY_DATE).isPresent()) {
-            return new FilterCommand(new DateContainsFilterDatePredicate(filterWord));
+            return new FilterCommand(new DateContainsFilterDatePredicate(keyword));
         } else if (argMultimap.getValue(PREFIX_FILTER_BY_TAGS).isPresent()) {
-            return new FilterCommand(new TagContainsFilterWordPredicate(filterWord));
+            return new FilterCommand(new TagContainsFilterWordPredicate(keyword));
         } else if (argMultimap.getValue(PREFIX_FILTER_BY_OWNER_NAME).isPresent()) {
-            return new FilterCommand(new OwnerNameContainsFilterWordPredicate(filterWord));
+            return new FilterCommand(new OwnerNameContainsFilterWordPredicate(keyword));
         } else if (argMultimap.getValue(PREFIX_FILTER_BY_APPOINTMENT).isPresent()) {
-            return new FilterCommand(new AppointmentContainsFilterWordPredicate(filterWord));
+            return new FilterCommand(new AppointmentContainsFilterWordPredicate(keyword));
         } else {
             throw new ParseException(FilterCommand.INVALID_FILTER_FIELD);
         }

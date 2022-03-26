@@ -166,6 +166,14 @@ public class ParserUtil {
         }
     }
 
+    public static String parseFilterArgs(String trimmedArgs) throws ParseException {
+        String[] argSplitter = trimmedArgs.split("/");
+        if (argSplitter.length != 2) {
+            throw new ParseException("You did not provide a keyword!");
+        }
+        return argSplitter[1];
+    }
+
     /**
      * Parses a {@code String filterDate} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.

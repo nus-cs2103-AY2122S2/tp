@@ -46,4 +46,11 @@ public class DateContainsFilterDatePredicate extends FilterByContainsFilterWordP
         }
         return false;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DateContainsFilterDatePredicate// instanceof handles nulls
+                && getFilterWord().equals(((DateContainsFilterDatePredicate) other).getFilterWord())); // state check
+    }
 }

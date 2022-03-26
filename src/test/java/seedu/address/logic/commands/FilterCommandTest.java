@@ -6,11 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.commons.core.Messages.FILTER_MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PET;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
+
+import java.time.LocalDate;
+import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.util.FilterUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -22,9 +28,6 @@ import seedu.address.model.filter.OwnerNameContainsFilterWordPredicate;
 import seedu.address.model.filter.TagContainsFilterWordPredicate;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PetBuilder;
-
-import java.time.LocalDate;
-import java.util.Collections;
 
 public class FilterCommandTest {
     private static final String DATE_STUB = LocalDate.now().toString();
@@ -39,10 +42,10 @@ public class FilterCommandTest {
     @Test
     public void equals_date_predicate() {
         try {
-            DateContainsFilterDatePredicate firstDatePredicate
-                    = new DateContainsFilterDatePredicate("today");
-            DateContainsFilterDatePredicate secondDatePredicate
-                    = new DateContainsFilterDatePredicate("22-03-2022");
+            DateContainsFilterDatePredicate firstDatePredicate =
+                    new DateContainsFilterDatePredicate("today");
+            DateContainsFilterDatePredicate secondDatePredicate =
+                    new DateContainsFilterDatePredicate("22-03-2022");
 
             FilterCommand filterFirstCommand = new FilterCommand(firstDatePredicate);
             FilterCommand filterSecondCommand = new FilterCommand(secondDatePredicate);
@@ -70,10 +73,10 @@ public class FilterCommandTest {
     @Test
     public void equals_app_predicate() {
         try {
-            AppointmentContainsFilterWordPredicate firstAppPredicate
-                    = new AppointmentContainsFilterWordPredicate("today");
-            AppointmentContainsFilterWordPredicate secondAppPredicate
-                    = new AppointmentContainsFilterWordPredicate("22-03-2022");
+            AppointmentContainsFilterWordPredicate firstAppPredicate =
+                    new AppointmentContainsFilterWordPredicate("today");
+            AppointmentContainsFilterWordPredicate secondAppPredicate =
+                    new AppointmentContainsFilterWordPredicate("22-03-2022");
 
             FilterCommand filterFirstCommand = new FilterCommand(firstAppPredicate);
             FilterCommand filterSecondCommand = new FilterCommand(secondAppPredicate);
@@ -100,10 +103,10 @@ public class FilterCommandTest {
 
     @Test
     public void equals_owner_predicate() {
-        OwnerNameContainsFilterWordPredicate firstOwnerPredicate
-                = new OwnerNameContainsFilterWordPredicate("first");
-        OwnerNameContainsFilterWordPredicate secondOwnerPredicate
-                = new OwnerNameContainsFilterWordPredicate("Second");
+        OwnerNameContainsFilterWordPredicate firstOwnerPredicate =
+                new OwnerNameContainsFilterWordPredicate("first");
+        OwnerNameContainsFilterWordPredicate secondOwnerPredicate =
+                new OwnerNameContainsFilterWordPredicate("Second");
 
         FilterCommand filterFirstCommand = new FilterCommand(firstOwnerPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondOwnerPredicate);
@@ -127,10 +130,10 @@ public class FilterCommandTest {
 
     @Test
     public void equals_tags_predicate() {
-        TagContainsFilterWordPredicate firstTagPredicate
-                = new TagContainsFilterWordPredicate("first");
-        TagContainsFilterWordPredicate secondTagPredicate
-                = new TagContainsFilterWordPredicate("second");
+        TagContainsFilterWordPredicate firstTagPredicate =
+                new TagContainsFilterWordPredicate("first");
+        TagContainsFilterWordPredicate secondTagPredicate =
+                new TagContainsFilterWordPredicate("second");
 
         FilterCommand filterFirstCommand = new FilterCommand(firstTagPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondTagPredicate);
@@ -174,9 +177,10 @@ public class FilterCommandTest {
     @Test
     public void execute_noFilteredDateMatch_noPetsFound() {
         try {
-            DateContainsFilterDatePredicate predicate
-                    = new DateContainsFilterDatePredicate("22-03-2021");
-            String expectedMessage = String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
+            DateContainsFilterDatePredicate predicate =
+                    new DateContainsFilterDatePredicate("22-03-2021");
+            String expectedMessage =
+                    String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
             FilterCommand command = new FilterCommand(predicate);
             expectedModel.updateFilteredPetList(predicate);
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -187,12 +191,12 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_AttendanceDateMatch_multiplePetsFound() {
-        try{
-            DateContainsFilterDatePredicate predicate
-                    = new DateContainsFilterDatePredicate("today");
-            String expectedMessage
-                    = String.format(FILTER_MESSAGE_SUCCESS, 2, FilterUtil.successMessageMatch(predicate));
+    public void execute_attendanceDateMatch_multiplePetsFound() {
+        try {
+            DateContainsFilterDatePredicate predicate =
+                    new DateContainsFilterDatePredicate("today");
+            String expectedMessage =
+                    String.format(FILTER_MESSAGE_SUCCESS, 2, FilterUtil.successMessageMatch(predicate));
             FilterCommand command = new FilterCommand(predicate);
             expectedModel.updateFilteredPetList(predicate);
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -204,8 +208,8 @@ public class FilterCommandTest {
     @Test
     public void execute_ownerNameMatch_noPetsFound() {
         OwnerNameContainsFilterWordPredicate predicate = new OwnerNameContainsFilterWordPredicate("Poopoo");
-        String expectedMessage
-                = String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
+        String expectedMessage =
+                String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -215,8 +219,8 @@ public class FilterCommandTest {
     @Test
     public void execute_ownerNameMatch_onePetFound() {
         OwnerNameContainsFilterWordPredicate predicate = new OwnerNameContainsFilterWordPredicate("Alice Paul");
-        String expectedMessage
-                = String.format(FILTER_MESSAGE_SUCCESS, 1, FilterUtil.successMessageMatch(predicate));
+        String expectedMessage =
+                String.format(FILTER_MESSAGE_SUCCESS, 1, FilterUtil.successMessageMatch(predicate));
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -240,8 +244,8 @@ public class FilterCommandTest {
     @Test
     public void execute_tagMatch_zeroPetsFound() {
         TagContainsFilterWordPredicate predicate = new TagContainsFilterWordPredicate("Nothing");
-        String expectedMessage
-                = String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
+        String expectedMessage =
+                String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -251,8 +255,8 @@ public class FilterCommandTest {
     @Test
     public void execute_tagMatch_multiplePetsFound() {
         TagContainsFilterWordPredicate predicate = new TagContainsFilterWordPredicate("Golden Retriever");
-        String expectedMessage
-                = String.format(FILTER_MESSAGE_SUCCESS, 2, FilterUtil.successMessageMatch(predicate));
+        String expectedMessage =
+                String.format(FILTER_MESSAGE_SUCCESS, 2, FilterUtil.successMessageMatch(predicate));
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -279,8 +283,8 @@ public class FilterCommandTest {
     public void execute_appMatch_zeroPetsFound() {
         try {
             AppointmentContainsFilterWordPredicate predicate = new AppointmentContainsFilterWordPredicate("today");
-            String expectedMessage
-                    = String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
+            String expectedMessage =
+                    String.format(FILTER_MESSAGE_SUCCESS, 0, FilterUtil.successMessageMatch(predicate));
             FilterCommand command = new FilterCommand(predicate);
             expectedModel.updateFilteredPetList(predicate);
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -294,8 +298,8 @@ public class FilterCommandTest {
     public void execute_appMatch_multiplePetsFound () {
         try {
             AppointmentContainsFilterWordPredicate predicate = new AppointmentContainsFilterWordPredicate("02-04-2022");
-            String expectedMessage
-                    = String.format(FILTER_MESSAGE_SUCCESS, 2, FilterUtil.successMessageMatch(predicate));
+            String expectedMessage =
+                    String.format(FILTER_MESSAGE_SUCCESS, 2, FilterUtil.successMessageMatch(predicate));
             FilterCommand command = new FilterCommand(predicate);
             expectedModel.updateFilteredPetList(predicate);
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
