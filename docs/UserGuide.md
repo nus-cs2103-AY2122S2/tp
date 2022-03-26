@@ -112,6 +112,7 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 A client can have many fields, including both optional and compulsory ones.
 
 | Field    | Prefix   | Constraints                                                                                                                         | Compulsory   | Example                                   |
@@ -123,6 +124,7 @@ A client can have many fields, including both optional and compulsory ones.
 | Birthday | `b/`     | Must be in *YYYY-MM-DD* format and a valid date.                                                                                    |              | `b/2022-03-12`                            |
 | Remark   | 'r/`     | No constraints.                                                                                                                     |              | `r/Foreman of Project Zero Dawn.`         |       
 | Tags     | `t/`     | Alphanumeric only. No spaces allowed. Multiple tags are allowed per client.                                                       |              | `t/Frequentclient t/AppointmentOverdue` | 
+
 </div>
 
 ### Sort client list: `sort`
@@ -139,7 +141,9 @@ Fields that can be sorted:
 
 Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]`  
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 * At least one of the above fields must be specified.
 * Specifying `desc` it after a field means that particular field is to be sorted in descending order. By default, they are sorted in ascending order.
 * The fields are to be specified in their prefix. They can be specified in any order, however, priority will be given
@@ -147,6 +151,7 @@ Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [
 * Clients with null values in the fields to be sorted will have lesser priority. 
   * For example `sort n/ b/`, 'Alice' will be at the top of the list. However, if there are multiple clients with the same name 'Alice',
   the client whose birthday field is empty, will be sorted to the bottom of the other clients named 'Alice'.
+
 </div>
 
 Examples:
@@ -167,7 +172,9 @@ Edits an existing person in CinnamonBun.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -176,6 +183,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 * You can also remove a person's remarks by typing `r/` without anything else.
+
 </div>
 
 Examples:
@@ -188,13 +196,16 @@ Finds clients whose name, phone, email, address or tags contain any of the given
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 * The search is case-insensitive. e.g. `bob` will match `Bob`
 * The order of the keywords does not matter. e.g. `Hans Bob` will match `Bob Hans`
 * The name, phone, email, address and tags are searched.
 * Only full words will be matched e.g. `Bob` will not match `Bobs`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bob` will return `Hans Zimmer`, `Bob Morrison`
+
 </div>
 
 Examples:
@@ -209,10 +220,13 @@ Deletes a customer in CinnamonBun.
 
 Format: `delete INDEX`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
 </div>
 
 Examples:
