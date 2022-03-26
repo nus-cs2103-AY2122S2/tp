@@ -49,7 +49,7 @@ This guide aims to be the one-stop shop to get you from noob to expert in record
 
 ## Graphical User Interface (GUI) Overview
 
-Coming soon
+//TODO
 
 ---
 
@@ -68,7 +68,7 @@ Commands in CinnamonBun can be broken down into several components.
 | `PREFIX`       | Commands may have one more or arguments. The prefix specifies which arguments to map to the parameters. All prefixes end with a `/`. |
  | `ARGUMENT`     | The argument to pass to the command.                                                                                                 |
 
-<div markdown="1" class="alert alert-primary">:bulb: **Attention**
+<div markdown="1" class="alert alert-primary">:bangbang: **Attention**
 
 * Commands and their arguments are case-sensitive
 * Parameters can be in any order.<br>
@@ -105,15 +105,31 @@ A client can have many fields & tags, including both optional and compulsory one
 | Remark   | 'r/`     | No constraints.                                                                                                                            |                    | `r/Foreman of Project Zero Dawn.`         |       
 | Tags     | `t/`     | Alphanumeric only.<br/><br/> No spaces allowed.<br/><br/> Multiple tags are allowed per client.                                            |                    | `t/Frequentclient t/AppointmentOverdue`   | 
 
-### Viewing help: `help`
+### Command Summary
+
+| Action                                                     | Format, Examples                                                                                                                                                      |
+|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Help](#getting-help-help)                                 | `help`                                                                                                                                                                |
+| [Add](#add-client-add)                                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| [Edit](#edit-client-edit)                                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                | 
+| [Delete](#delete-client-delete)                            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| [Clear](#delete-all-entries-clear)                         | `clear`                                                                                                                                                               |
+| [List](#list-all-clients-list)                             | `list`                                                                                                                                                                |
+| [Sort](#sort-client-list-sort)                             | `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br> e.g., `sort n/ desc p/`, `sort b/ a/`                                             |
+| [Find](#find-client-by-keyword-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            | 
+| [Delete Filtered](#delete-filtered-clients-deletefiltered) | `deleteFiltered`                                                                                                                                                      |
+| [Undo](#undo-last-command-undo)                            | `undo`                                                                                                                                                                |
+ | [Exit](#exit-program-exit)                                 | `exit`                                                                                                                                                                |
+
+### Getting Help (`help`)
 
 Opens a window that includes a link to this user guide.
 
-![help message](images/helpMessage.png)
+![Help Message](images/helpMessage.png)
 
 Format: `help`
 
-### Adding a client: `add`
+### Add Client (`add`)
 
 Adds a client to CinnamonBun.
 
@@ -123,7 +139,60 @@ Examples:
 * `add n/Andy Lau p/98765432 e/andy_lau@example.com a/Pasir Ris Grove, Block 73, #02-38, Singapore 518206`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Sort client list: `sort`
+### Edit Client (`edit`)
+
+Edits an existing person in CinnamonBun.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+    * Note: Editing email value to an existing email in the addressBook is not allowed.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+  specifying any tags after it.
+* You can also remove a person's remarks by typing `r/` without anything else.
+
+</div>
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+### Delete Client (`delete`)
+
+Deletes a client in CinnamonBun.
+
+Format: `delete INDEX`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Delete All Entries (`clear`)
+
+Clears all entries from CinnamonBun.
+
+Format: `clear`
+
+### List All Clients (`list`)
+
+Shows a list of all clients in CinnamonBun.
+
+Format: `list`
+
+### Sort Client List (`sort`)
 
 Sorts the client list based on the order of the fields specified.
 
@@ -154,36 +223,7 @@ based on their phone numbers in ascending order.
 * `sort b/ a/`: Clients will be sorted in ascending order of their birthday. Clients with the same birthday will then be sorted
 based on their addresses in ascending order.
 
-### Show all clients : `list`
-
-Shows a list of all clients in CinnamonBun.
-
-Format: `list`
-
-### Editing a client : `edit`
-
-Edits an existing person in CinnamonBun.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
-
-<div markdown="1" class="alert alert-info">:information_source: **Info**
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-  * Note: Editing email value to an existing email in the addressBook is not allowed.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* You can also remove a person's remarks by typing `r/` without anything else.
-
-</div>
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
+### Find Client by Keyword (`find`)
 
 Finds clients whose name, phone, email, address or tags contain any of the given keywords.
 
@@ -206,25 +246,7 @@ Examples:
 * `find kent ridge` returns clients with an address containing `kent` or `ridge`
 * `find manager hr` returns clients with the `manager` or `hr` tags
 
-### Deleting a person : `delete`
-
-Deletes a customer in CinnamonBun.
-
-Format: `delete INDEX`
-
-<div markdown="1" class="alert alert-info">:information_source: **Info**
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-</div>
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Deleting all filtered people : `deleteFiltered`
+### Delete Filtered Clients (`deleteFiltered`)
 
 Deletes the clients filtered after using the `find` function.
 
@@ -233,13 +255,11 @@ Format: `deleteFiltered`
 Examples:
 * `find Bob` followed by `deleteFiltered` deletes all people named Bob. Alternatively, `find Bob | deleteFiltered` does the same thing.
 
-### Clearing all entries : `clear`
+### Undo Last Command (`undo`)
 
-Clears all entries from the address book.
+//TODO
 
-Format: `clear`
-
-### Exiting the program : `exit`
+### Exit Program (`exit`)
 
 Exits the program.
 
@@ -277,17 +297,3 @@ CinnamonBun's data are saved in the hard disk automatically after any command th
 **A**: Because we like Cinnamon Buns.
 
 ---
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Sort**| `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br> e.g., `sort n/ desc p/`, `sort b/ a/`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**DeleteFiltered** | `deleteFiltered`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
