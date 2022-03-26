@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import seedu.address.model.transaction.DueDate;
 import seedu.address.model.transaction.Note;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
+import seedu.address.model.transaction.util.TransactionProducer;
 
 
 public class AddTransactionCommand extends Command {
@@ -38,19 +39,19 @@ public class AddTransactionCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
 
     private final Index index;
-    private final Transaction transaction;
+    private final TransactionProducer transactionProducer;
 
     /**
      * Constructs AddTransaction command with the specified index
      * of the person and the transaction.
      *
      * @param index
-     * @param transaction
+     * @param transactionProducer
      */
-    public AddTransactionCommand(Index index, Transaction transaction) {
-        requireAllNonNull(index, transaction);
+    public AddTransactionCommand(Index index, TransactionProducer transactionProducer) {
+        requireAllNonNull(index, transactionProducer);
         this.index = index;
-        this.transaction = transaction;
+        this.transactionProducer = transactionProducer;
     }
 
     @Override
@@ -62,11 +63,13 @@ public class AddTransactionCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = personToEdit.addTransaction(transaction);
+        Person person = lastShownList.get(index.getZeroBased());
+        String personIdentifier = person.getEmail().getValue();
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Transaction transaction = transactionProducer.createTransaction(personIdentifier);
+
+        model.addTransaction(transaction);
+        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.toString()));
     }
@@ -75,6 +78,7 @@ public class AddTransactionCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddTransactionCommand // instanceof handles nulls
-                && transaction.equals(((AddTransactionCommand) other).transaction));
+                && index.equals(((AddTransactionCommand) other).index))
+                && transactionProducer.equals(((AddTransactionCommand) other).transactionProducer);
     }
 }

@@ -35,6 +35,8 @@ public class TransactionCard extends UiPart<Region> {
     private Label dueDate;
     @FXML
     private Label note;
+    @FXML
+    private Label identifier;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -46,6 +48,7 @@ public class TransactionCard extends UiPart<Region> {
         // Required fields.
         amount.setText(transaction.getAmount().toString());
         transactionDate.setText(transaction.getTransactionDate().toString());
+        identifier.setText(transaction.getIdentifier());
 
         // Optional fields.
         dueDate.setText(transaction.getDueDate()

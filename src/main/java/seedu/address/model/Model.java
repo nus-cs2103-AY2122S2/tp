@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -16,6 +15,9 @@ import seedu.address.model.transaction.Transaction;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Transaction> PREDICATE_SHOW_ALL_TRANSACTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -97,16 +99,27 @@ public interface Model {
     void sortPersonList(Comparator<Person> comparator);
 
     /**
-     * Update the transaction list shown with the given
-     * list of transactions
-     *
-     * @param transactions of the selected person.
+     * Deletes the given transaction.
      */
-    void updateTransactionList(Collection<Transaction> transactions);
+    void deleteTransaction(Transaction target);
 
     /**
-     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Adds the given transaction.
      */
-    ObservableList<Transaction> getTransactionList();
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Replaces the given transaction {@code target} with {@code editedTransaction}.
+     * {@code target} must exist in the address book.
+     */
+    void setTransaction(Transaction target, Transaction editedPerson);
+
+    /** Returns an unmodifiable view of the filtered transaction list */
+    ObservableList<Transaction> getFilteredTransactionList();
+
+    /**
+     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }

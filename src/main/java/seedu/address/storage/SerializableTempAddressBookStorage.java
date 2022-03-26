@@ -11,12 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
 
 /**
  * A class to manage temporary files of AddressBook data.
@@ -61,7 +61,7 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
 
         ObjectOutputStream objectOutputStream =
                 new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile.toFile(), false)));
-        objectOutputStream.writeObject(new ArrayList<>(addressBook.getPersonList()));
+        objectOutputStream.writeObject(addressBook.generateStorageMap());
         objectOutputStream.flush();
         objectOutputStream.close();
     }
@@ -92,10 +92,10 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
     public Optional<ReadOnlyAddressBook> getTempAddressBookFileData(Path tempDataTempFile) throws Exception {
         ObjectInputStream objectInputStream =
                 new ObjectInputStream(new BufferedInputStream(new FileInputStream(tempDataTempFile.toString())));
-        ArrayList<Person> personList = (ArrayList<Person>) objectInputStream.readObject();
+        Map<String, Object> storageMap = (Map<String, Object>) objectInputStream.readObject();
         objectInputStream.close();
 
-        return Optional.of(new AddressBook(personList));
+        return Optional.of(new AddressBook(storageMap));
     }
 
     @Override

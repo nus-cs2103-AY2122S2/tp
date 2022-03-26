@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -112,7 +113,11 @@ public class TypicalPersons {
      * Returns an {@code AddressBook} with all the typical persons.
      */
     public static AddressBook getTypicalAddressBook() {
-        return new AddressBook(getTypicalPersons());
+        return new AddressBook(getTypicalPersons(), getEmptyTransactions());
+    }
+
+    public static List<Transaction> getEmptyTransactions() {
+        return new ArrayList<>();
     }
 
     public static List<Person> getTypicalPersons() {

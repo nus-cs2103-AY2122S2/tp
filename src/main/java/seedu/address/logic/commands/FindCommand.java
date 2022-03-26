@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.person.util.PersonContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name, phone, email, address or tags

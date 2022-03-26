@@ -19,14 +19,18 @@ import seedu.address.logic.parser.Prefix;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Transaction implements Serializable {
+    public static final String MAP_PREFIX = "T";
+
     private final HashMap<Prefix, TransactionField> fields = new HashMap<>();
+    private final String personIdentifier;
+
 
     /**
      * Person constructor
      * @param fields A collection of all the person's attributes
      */
-    public Transaction(Collection<TransactionField> fields) {
-        requireAllNonNull(fields);
+    public Transaction(Collection<TransactionField> fields, String personIdentifier) {
+        requireAllNonNull(fields, personIdentifier);
 
         // Add fields.
         for (TransactionField f : fields) {
@@ -38,10 +42,12 @@ public class Transaction implements Serializable {
         for (Prefix p : TransactionFieldRegistry.REQUIRED_PREFIXES) {
             checkArgument(this.fields.containsKey(p), "All required fields must be given.");
         }
+
+        this.personIdentifier = personIdentifier;
     }
 
     public Transaction(Transaction otherTransaction) {
-        this(otherTransaction.getFields());
+        this(otherTransaction.getFields(), otherTransaction.getIdentifier());
     }
 
     /**
@@ -91,6 +97,15 @@ public class Transaction implements Serializable {
     }
 
     /**
+     * Gets the person identifier of the transaction
+     *
+     * @return person's identifier (email)
+     */
+    public String getIdentifier() {
+        return this.personIdentifier;
+    }
+
+    /**
      * Gets the note of the transaction
      *
      * @return Optional note of the transaction
@@ -116,7 +131,8 @@ public class Transaction implements Serializable {
         Transaction otherTr = (Transaction) other;
         return otherTr.getAmount().equals(getAmount())
                 && otherTr.getDueDate().equals(getDueDate())
-                && otherTr.getTransactionDate().equals(getTransactionDate());
+                && otherTr.getTransactionDate().equals(getTransactionDate())
+                && otherTr.getIdentifier().equals(getIdentifier());
     }
 
     @Override
@@ -131,7 +147,9 @@ public class Transaction implements Serializable {
         builder.append("Amount: ")
                 .append(getAmount())
                 .append("; Transaction date: ")
-                .append(getTransactionDate());
+                .append(getTransactionDate())
+                .append("; Person email: ")
+                .append(getIdentifier());
 
         if (getDueDate().isPresent()) {
             builder.append("; Due date: ")
@@ -144,6 +162,10 @@ public class Transaction implements Serializable {
         }
 
         return builder.toString();
+    }
+
+    public boolean hasIdentifier(String identifier) {
+        return this.personIdentifier.equals(identifier);
     }
 }
 

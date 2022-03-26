@@ -1,21 +1,29 @@
 package seedu.address.model;
 
+import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.TransactionList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePerson comparison) for Person object
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final TransactionList transactions;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +34,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        transactions = new TransactionList();
     }
 
     public AddressBook() {}
@@ -40,8 +49,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons in the {@code persons}
      */
-    public AddressBook(List<Person> persons) {
+    public AddressBook(List<Person> persons, List<Transaction> transactions) {
         setPersons(persons);
+        setTransactions(transactions);
+    }
+
+    /**
+     * Creates an Address book using the Persons list and Transactions list
+     * stored in a Map.
+     *
+     */
+    public AddressBook(Map<String, Object> storageMap) {
+        List<Person> personList = (List<Person>) storageMap.get(Person.MAP_PREFIX);
+        List<Transaction> transactionList = (List<Transaction>) storageMap.get(Transaction.MAP_PREFIX);
+
+        setPersons(personList);
+        setTransactions(transactionList);
     }
 
     //// list overwrite operations
@@ -55,12 +78,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the transaction list with {@code transactions}.
+     */
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions.setTransactions(transactions);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTransactions(newData.getTransactionList());
     }
 
     //// person-level operations
@@ -110,7 +141,46 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sortPersonList(comparator);
     }
 
+    /// transaction methods
+
+
+    /**
+     * Adds a transaction to the address book.
+     */
+    public void addTransaction(Transaction t) {
+        transactions.add(t);
+    }
+
+    /**
+     * Replaces the given transaction {@code target} in the list with {@code editedTransaction}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setTransaction(Transaction target, Transaction editedTransaction) {
+        requireNonNull(editedTransaction);
+
+        transactions.setTransaction(target, editedTransaction);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTransaction(Transaction key) {
+        transactions.remove(key);
+    }
+
     //// util methods
+
+    @Override
+    public Map<String, List<Object>> generateStorageMap() {
+        Map<String, List<Object>> storageMap = new HashMap<>();
+
+        storageMap.put(Person.MAP_PREFIX, new ArrayList<>(persons.asUnmodifiableObservableList()));
+        storageMap.put(Transaction.MAP_PREFIX, new ArrayList<>(transactions.asUnmodifiableObservableList()));
+
+        return Collections.unmodifiableMap(storageMap);
+    }
 
     @Override
     public String toString() {
@@ -124,14 +194,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Transaction> getTransactionList() {
+        return transactions.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons))
+                && transactions.equals(((AddressBook) other).transactions);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return hash(persons, transactions);
     }
 }
