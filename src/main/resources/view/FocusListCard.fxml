@@ -17,7 +17,7 @@
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="120" GridPane.columnIndex="0">
             <SplitPane fx:id="focusSplitPane">
-                <ImageView fx:id="displayPicture" fitWidth="100" fitHeight="120"/>
+                <ImageView fx:id="displayPicture" fitWidth="120" fitHeight="120"/>
                 <VBox fx:id="keyAttributes" styleClass="keyAttributesVBox" VBox.vgrow="ALWAYS">
                     <Label fx:id="name" styleClass="focusStyleName" text="\$phone" />
                     <Label fx:id="id" styleClass="focusStyleName" text="\$id" />

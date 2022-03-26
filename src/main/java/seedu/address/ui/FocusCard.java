@@ -36,11 +36,7 @@ public class FocusCard extends UiPart<Region> {
     private static final String GREEN = "#006100";
     private static final String YELLOW = "#8B8000";
     private static final String CHANGE_COLOUR = "-fx-background-color: ";
-    private static final String PHONE = "Phone Number: ";
-    private static final String EMAIL = "Email Address: ";
-    private static final String ADDRESS = "Address: ";
-    private static final String SENIORITY = "Seniority: ";
-    private static final String COURSE = "Course: ";
+    private static final String BLANK_PICTURE_PATH = "docs/images/blankprofile.png";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -93,7 +89,7 @@ public class FocusCard extends UiPart<Region> {
         phone.setText(candidate.getPhone().value);
         email.setText(candidate.getEmail().value);
         course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
-        displayPicture.setImage(new Image(new FileInputStream("docs/images/leeenen.png")));
+        displayPicture.setImage(new Image(new FileInputStream(BLANK_PICTURE_PATH)));
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
         candidate.getAvailability().getList()
