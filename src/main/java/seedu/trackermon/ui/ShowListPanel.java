@@ -2,6 +2,8 @@ package seedu.trackermon.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -11,7 +13,6 @@ import seedu.trackermon.commons.core.LogsCenter;
 import seedu.trackermon.model.show.Show;
 
 
-
 /**
  * Panel containing the list of shows.
  */
@@ -19,16 +20,40 @@ public class ShowListPanel extends UiPart<Region> {
     private static final String FXML = "ShowListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ShowListPanel.class);
 
+    private final ShowDetailsCard showDetailsCard;
+
     @FXML
     private ListView<Show> showListView;
 
     /**
      * Creates a {@code ShowListPanel} with the given {@code ObservableList}.
      */
-    public ShowListPanel(ObservableList<Show> showList) {
+    public ShowListPanel(ObservableList<Show> showList, ShowDetailsCard showDetailsCard) {
         super(FXML);
+        this.showDetailsCard = showDetailsCard;
+
         showListView.setItems(showList);
         showListView.setCellFactory(listView -> new ShowListViewCell());
+
+        showListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Show>() {
+            @Override
+            public void changed(ObservableValue<? extends Show> observable, Show oldValue, Show newValue) {
+                // Your action here
+                showDetailsCard.updateShowDetails(newValue);
+            }
+        });
+
+        handleUpdatedList();
+    }
+
+    /**
+     * Updates the GUI of the list to select the first item.
+     */
+    public void handleUpdatedList() {
+        if (showListView.getSelectionModel().getSelectedItem() == null) {
+            showListView.getSelectionModel().selectFirst();
+        }
+        showDetailsCard.updateShowDetails(showListView.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -47,5 +72,6 @@ public class ShowListPanel extends UiPart<Region> {
             }
         }
     }
+
 
 }

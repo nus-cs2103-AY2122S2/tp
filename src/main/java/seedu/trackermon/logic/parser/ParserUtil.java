@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.trackermon.commons.core.index.Index;
 import seedu.trackermon.commons.util.StringUtil;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
+import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
@@ -60,7 +61,7 @@ public class ParserUtil {
         if (!Status.isValidStatus(trimmedStatus)) {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
-        return Status.valueOf(trimmedStatus);
+        return Status.getStatus(trimmedStatus);
     }
 
 
@@ -89,5 +90,14 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String comment} into a {@code Comment}
+     */
+    public static Comment parseComment(String comment) {
+        requireNonNull(comment);
+        Comment validComment = new Comment(comment);
+        return validComment;
     }
 }

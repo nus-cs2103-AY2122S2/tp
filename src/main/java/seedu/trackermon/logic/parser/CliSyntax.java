@@ -9,5 +9,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_STATUS = new Prefix("s/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_COMMENT = new Prefix("c/");
+    public static final Prefix PREFIX_SORT_NAME_ACS = new Prefix("sna/");
+    public static final Prefix PREFIX_SORT_STATUS_ACS = new Prefix("ssa/");
+    public static final Prefix PREFIX_SORT_NAME_DES = new Prefix("snd/");
+    public static final Prefix PREFIX_SORT_STATUS_DES = new Prefix("ssd/");
+    public static final Prefix PREFIX_SORT_STATUS_ORD = new Prefix("so/");
 
 }
