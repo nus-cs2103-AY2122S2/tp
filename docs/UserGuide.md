@@ -9,16 +9,16 @@ title: User Guide
 * [**Quick start**](#quick-start)
 * [**Command structure**](#command-structure)
 * [**Features**](#features)
-  * [Adding a show: `add`](#adding-a-show-add)
+  * [Clearing all shows](#clearing-all-shows)
   * [Listing all shows: `list`](#listing-all-shows-list)
-  * [View help: `help`](#view-help-help)
-  * [Finding a show: `find`](#finding-a-show-find)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Adding a show: `add`](#adding-a-show-add)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
   * [Editing a show: `edit`](#editing-a-show-edit)
-  * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Finding a show: `find`](#finding-a-show-find)
   * [Saving the data](#saving-the-data)
   * [Sorting the shows](#sorting-the-shows)
-  * [Clearing all shows](#clear-all-shows)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
@@ -92,19 +92,19 @@ Let us look at what makes up a command:
 
 For example, a command to find a show could look like this:
 
-`find` `n/` `Django` 
+`find n/ Django` 
 
 In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
-| Component | Prefix | Description                                           |
-|-----------|--------|-------------------------------------------------------|
-| KEYWORD   | None   | The input after the command word                      |
-| INDEX     | None   | The index of the show as shown in the show panel list |
-| NAME      | n/     | The name to use for a show                            |
-| STATUS    | s/     | The status to label for a show                        |
-| TAG       | t/     | The tag to label a show                               |
-| COMMENT   | c/     | The comment to describe a show                        |
-| RATE      | r/     | The rating to give a show                             |
+| Component | Prefix | Description                                                                                                            |
+|-----------|--------|------------------------------------------------------------------------------------------------------------------------|
+| KEYWORD   | None   | The input after the command word                                                                                       |
+| INDEX     | None   | The index of the show as shown in the show panel list                                                                  |
+| NAME      | n/     | The name to use for a show                                                                                             |
+| STATUS    | s/     | The three statuses to label for a show<br>  <ul><li>_COMPLETED_ </li><li>_WATCHING_ </li><li>_PLAN-TO-WATCH_</li></ul> |
+| TAG       | t/     | The tag to label a show                                                                                                |
+| COMMENT   | c/     | The comment to describe a show                                                                                         |
+| RATE      | r/     | The rating to give a show                                                                                              |
 
 <div markdown="block" class="alert alert-info">
 
@@ -114,7 +114,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME s/STATUS [t/TAG]` can be used as `n/ReZero s/completed t/Anime` or as `n/ReZero s/completed`.
+  e.g `n/NAME s/STATUS [t/TAG]…​` can be used as `n/ReZero s/completed t/Anime` or as `n/ReZero s/completed`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
@@ -123,7 +123,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
   e.g. `n/Knives Out t/Suspense` is acceptable but `n/Knives Outt/Suspense` is not.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME [t/TAG]`, `[t/TAG] n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME [t/TAG]…​`, `[t/TAG]…​ n/NAME` is also acceptable.
 
 * All **names must be unique** and duplicates will be ignored.<br>
   e.g. if you try to add `n/Inception` into the show list that already contains that show, there will be a message telling you that this show already exists in the list.
@@ -145,6 +145,54 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 ## Features
 
+### Clearing all shows
+
+**Description:** Wanting to reset your current show list? Clear all shows in Trackermon's show list!
+
+Format: `clear`
+
+**Example:** `clear`
+
+---
+
+### Listing all shows: `list`
+
+**Description:** Wanting to view all your shows at once? Display a list of shows in Trackermon's show list!
+
+**Format:** `list`
+
+**Example:** `list`
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Exiting the program: `exit`
+
+**Description:** Wanting to exit the application? This simple command is what you are looking for!
+
+**Format:** `exit`
+
+**Example:** `exit`
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Viewing help: `help`
+
+**Description:** Are you new or confused with the commands? View the command summary and user guide through a quick pop up window!
+
+**Format:** `help`
+
+**Example & Output:** `help`
+
+[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
 ### Adding a show: `add`
 
 **Description:** Planning to watch a show and want to store its details? Add a show to Trackermon's show list!
@@ -163,29 +211,47 @@ A show can have any number of comments or tags (including 0)
 
 ---
 
-### Listing all shows: `list`
+### Deleting a show: `delete`
 
-**Description:** Wanting to view all your shows at once? Display a list of shows in Trackermon's show list!
+**Description:** Wanting to remove an unwanted show? Delete the show at the specified index shown in Trackermon's show list!
 
-**Format:** `list`
+**Format:** `delete INDEX`
 
-**Example & Output:** `list`
+**Example & Output:** `delete 2`
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
+<div markdown="block" class="alert alert-danger">
+
+**:information_source: Notes about edit:**<br>
+* The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
+  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
+
+</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
-### View help: `help`
+### Editing a show: `edit`
 
-**Description:** Are you new or confused with the commands? View the command summary and user guide through a quick pop up window!
+**Description:** Wanting to modify a show? Edit a show at the specified index shown in Trackermon's show list!
 
-**Format:** `help`
+**Format:** `edit INDEX [n/NAME] [s/STATUS] [c/COMMENT] [t/TAG]…​`
 
-**Example & Output:** `help`
+**Example & Output:** `edit 2 n/Sailor Moo`
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+
+<div markdown="block" class="alert alert-danger">
+
+**:information_source: Notes about edit:**<br>
+* **At least one field** to edit must be provided.
+* Editing to an existing name is **not allowed**.
+* The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
+  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
+
+</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -203,7 +269,7 @@ A show can have any number of comments or tags (including 0)
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about general find:**<br>
+**:information_source: Notes about General Find:**<br>
 * The `KEYWORD` refers to the input you enter after `find`.
 * `find` must be followed with a space before entering the `KEYWORD`.
 * The `KEYWORD` **can be a word or number** such as hero, S1,...
@@ -214,7 +280,7 @@ A show can have any number of comments or tags (including 0)
 
 **Description (Precise Find):** Searching for a show across specific parameters? Find shows containing the search words based on [prefix](#command-structure).
 
-**Format (Precise Find):** `find n/[NAME] s/[STATUS] t/[TAG]`
+**Format (Precise Find):** `find [n/NAME] [s/STATUS] [t/TAG]…​`
 
 **Example & Output:** `find n/Shutter Island`
 
@@ -226,9 +292,8 @@ A show can have any number of comments or tags (including 0)
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about precise find:**<br>
+**:information_source: Notes about Precise Find:**<br>
 * **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an [**AND search**](#glossary) is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
-* There must be at **least one [prefix](#command-structure) field** and it **must not be empty**.
 * `find n/Shutter Island` displays all the shows in the Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
 * `find n/Django s/completed t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, and **Action** in the `TAG` parameter.
 
@@ -238,6 +303,12 @@ A show can have any number of comments or tags (including 0)
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
 </div>
 
+<div markdown="block" class="alert alert-danger">
+
+:exclamation:**General Caution:**<br>
+* There must be at **least one [prefix](#command-structure) field** and it **must not be empty**.
+
+</div>
 
 <div markdown="block" class="alert alert-danger">
 
@@ -246,53 +317,6 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 * find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
 
 </div>
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-
-### Deleting a show: `delete`
-
-**Description:** Wanting to remove an unwanted show? Delete the show at the specified index shown in Trackermon's show list!
-
-**Format:** `delete INDEX`
-
-**Example & Output:** `delete 2`
-
-[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-### Editing a show: `edit`
-
-**Description:** Wanting to modify a show? Edit a show at the specified index shown in Trackermon's show list!
-
-**Format:** `edit INDEX [n/NAME] [s/STATUS] [c/COMMENT] [t/TAG]…​`
-
-**Example & Output:** `edit 2 n/Sailor Moo`
-
-[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about edit:**<br>
-* **At least one field** to edit must be provided.
-* Editing to an existing name is **not allowed**.
-
-</div>
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-
-### Exiting the program: `exit`
-
-**Description:** Wanting to exit the application? This simple command is what you are looking for!
-
-**Format:** `exit`
-
-**Example:** `exit`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -323,16 +347,6 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-
-### Clear all shows
-
-**Description:** Wanting to reset your current show list? Clear all shows in Trackermon's show list!
-
-Format: `clear`
-
-**Example & Output:** `clear`
-
-[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
 ## FAQ
 
