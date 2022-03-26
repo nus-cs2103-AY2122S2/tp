@@ -5,7 +5,7 @@ import seedu.address.logic.commands.Command;
 public abstract class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Only the following formats are supported: \n"
+    public static final String MESSAGE_USAGE = "The following formats are supported for " + COMMAND_WORD + ":\n"
             + COMMAND_WORD + " add candidate/CANDIDATE_INDEX at/DATE_TIME \n"
             + COMMAND_WORD + " edit INDEX DATE_TIME \n"
             + COMMAND_WORD + " delete INDEX";
