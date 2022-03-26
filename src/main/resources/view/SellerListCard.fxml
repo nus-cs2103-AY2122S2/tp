@@ -45,6 +45,7 @@
             <Label fx:id="propertyLowerPrice" styleClass="cell_big_label" />
             <Label fx:id="propertyUpperPrice" styleClass="cell_big_label"  />
             <Label fx:id="propertyAddress" styleClass="cell_big_label"  />
+            <Label></Label>
             <FlowPane fx:id="tags" />
             <HBox>
                 <children>

@@ -64,11 +64,13 @@ public class SellerCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (!(seller.getPropertyToSell() instanceof NullPropertyToSell)) {
-            propertyType.setText(seller.getPropertyToSell().getHouse().getHouseTypeToString());
-            propertyLocation.setText(seller.getPropertyToSell().getHouse().getLocationToString());
-            propertyLowerPrice.setText(seller.getPropertyToSell().getPriceRange().getLowerToString());
-            propertyUpperPrice.setText(seller.getPropertyToSell().getPriceRange().getUpperToString());
-            propertyAddress.setText(seller.getPropertyToSell().getAddress());
+            propertyType.setText("Type: " + seller.getPropertyToSell().getHouse().getHouseTypeToString());
+            propertyLocation.setText("Location: " + seller.getPropertyToSell().getHouse().getLocationToString());
+            propertyLowerPrice.setText("Price: " + seller.getPropertyToSell().getPriceRange().getLowerToString()
+                                    + " to " + seller.getPropertyToSell().getPriceRange().getUpperToString());
+            //propertyLowerPrice.setText(seller.getPropertyToSell().getPriceRange().getLowerToString());
+            //propertyUpperPrice.setText(seller.getPropertyToSell().getPriceRange().getUpperToString());
+            propertyAddress.setText("Address: " + seller.getPropertyToSell().getAddress());
         }
     }
 
@@ -80,7 +82,7 @@ public class SellerCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClientCard)) {
+        if (!(other instanceof BuyerCard)) {
             return false;
         }
 
