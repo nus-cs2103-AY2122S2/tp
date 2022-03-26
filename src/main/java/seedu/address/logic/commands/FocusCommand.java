@@ -56,8 +56,12 @@ public class FocusCommand extends Command {
         }
         if (other == this) {
             return true;
-        } else if (((FocusCommand) other).targetIndex.equals(this.targetIndex) && other instanceof FocusCommand) {
-            return true;
+        } else if (other instanceof FocusCommand) {
+            if (((FocusCommand) other).targetIndex.equals(this.targetIndex)) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
