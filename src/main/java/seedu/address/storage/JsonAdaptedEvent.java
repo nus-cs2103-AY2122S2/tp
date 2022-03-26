@@ -56,8 +56,8 @@ class JsonAdaptedEvent {
     public JsonAdaptedEvent(Event source) {
         name = source.getName().fullName;
         company = source.getCompanyName().fullName;
-        date = source.getDate().date;
-        time = source.getTime().time;
+        date = source.getDate().date.toString();
+        time = source.getTime().time.toString();
         location = source.getLocation().location;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
