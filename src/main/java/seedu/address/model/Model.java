@@ -76,6 +76,7 @@ public interface Model {
      */
     void setPet(Pet target, Pet editedPet);
 
+
     /** Returns an unmodifiable view of the filtered pet list */
     ObservableList<Pet> getFilteredPetList();
 
@@ -89,4 +90,10 @@ public interface Model {
      * Sorts the pet list based on the field provided.
      */
     void sortPetList(String field);
+
+    /**
+     * Restores the previous address book state from its history.
+     */
+    ReadOnlyAddressBook undo() throws Exception;
+
 }
