@@ -22,14 +22,14 @@ public class PutCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Puts the specified player into a specified lineup.\n"
-            + "Parameters: " + PREFIX_PLAYER + "PLAYER_NAME"
-            + PREFIX_LINEUP + "LIENUP_NAME" + "\n"
+            + "Parameters: " + PREFIX_PLAYER + "NAME"
+            + PREFIX_LINEUP + "LINEUP NAME" + "\n"
             + "Example: put P/Alex Chua L/starting five";
 
     public static final String MESSAGE_NO_SUCH_PERSON = "Player does not exist.";
     public static final String MESSAGE_NO_SUCH_LINEUP = "Lineup does not exist.";
     public static final String MESSAGE_LINEUP_FULL = "Lineup is already full (max 5).";
-    public static final String MESSAGE_PUT_PERSON_SUCCESS = "Successfully put %s into %s$s";
+    public static final String MESSAGE_PUT_PERSON_SUCCESS = "Successfully put %s into %s";
 
     private final Name playerName;
     private final LineupName lineupName;

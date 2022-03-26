@@ -58,7 +58,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_LINEUP));
             } else {
                 targetLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
                 LineupName editLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
@@ -109,7 +109,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
         }
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();

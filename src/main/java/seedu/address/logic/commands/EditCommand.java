@@ -1,12 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 //import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -46,8 +50,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD + ": Edits the details of the player identified "
+            + "by the name of the player. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_PLAYER + "PERSON_NAME "
             + "[" + PREFIX_NAME + "NAME] "
@@ -57,9 +61,40 @@ public class EditCommand extends Command {
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_JERSEY_NUMBER + "JERSEY_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PLAYER + " Jone Doe "
+            + PREFIX_PHONE + "12349999 "
+            + PREFIX_EMAIL + "newjohndoe@example.com";
+
+    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ": Edits the details of the lineup identified "
+            + "by the name of the lineup."
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: " + PREFIX_LINEUP + "LINEUP_NAME "
+            + PREFIX_NAME + "LINEUP NAME\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_LINEUP + " starting five "
+            + PREFIX_NAME + "substitutes";
+
+    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ": Edits the details of the schedule identified "
+            + "by the index of the schedule."
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: " + "INDEX "
+            + PREFIX_SCHEDULE + " "
+            + "[" + PREFIX_NAME + "SCHEDULE NAME] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_DATE + "DATE TIME]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "1 "
+            + PREFIX_SCHEDULE + " "
+            + PREFIX_NAME + "finals "
+            + PREFIX_DESCRIPTION + "nba finals "
+            + PREFIX_DATE + "06/06/2022 2100";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of player, lineup or schedule.\n"
+            + MESSAGE_USAGE_PLAYER + "\n"
+            + MESSAGE_USAGE_LINEUP + "\n"
+            + MESSAGE_USAGE_SCHEDULE;
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_LINEUP_SUCCESS = "Edited Lineup: %1$s";

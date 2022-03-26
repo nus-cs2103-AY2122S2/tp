@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 
 import java.util.List;
 
@@ -24,10 +28,36 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD
+            + ": Deletes a player from MyGM."
+            + "\nParameters: "
+            + PREFIX_PLAYER + "NAME \n"
+            + "[" + PREFIX_LINEUP + "LINEUP NAME]"
+            + "Example: "
+            + COMMAND_WORD
+            + PREFIX_PLAYER + "John Doe ";
+
+    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD
+            + ": Deletes a lineup from MyGM."
+            + "\nParameters: "
+            + PREFIX_LINEUP + "LINEUP NAME \n"
+            + "Example: "
+            + COMMAND_WORD
+            + PREFIX_LINEUP + "Starting 5";
+
+    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD
+            + ": Deletes a schedule from MyGM."
+            + "\nParameters: "
+            + PREFIX_SCHEDULE + "INDEX \n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_SCHEDULE + "1";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes a player, lineup or schedule from MyGM\n"
+            + MESSAGE_USAGE_PLAYER + "\n"
+            + MESSAGE_USAGE_LINEUP + "\n"
+            + MESSAGE_USAGE_SCHEDULE;
 
     public static final String MESSAGE_NO_SUCH_LINEUP = "Lineup does not exist.";
     public static final String MESSAGE_NO_SUCH_PERSON = "Player does not exist.";

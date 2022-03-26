@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
@@ -25,8 +27,8 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": \nAdds a person to the MyGM. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a player to MyGM. "
+            + "\nParameters: "
             + PREFIX_PLAYER + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -45,22 +47,25 @@ public class AddCommand extends Command {
             + PREFIX_WEIGHT + "80 "
             + PREFIX_TAG + "PG "
             + PREFIX_TAG + "SG";
-    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ":\nAdds a lineup to MyGM."
-            + "Parameters: "
+    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ":Adds a lineup to MyGM."
+            + "\nParameters: "
             + PREFIX_LINEUP + " "
             + PREFIX_NAME + "LINEUP NAME"
             + "[" + PREFIX_PLAYER + "PLAYER]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LINEUP + " "
             + PREFIX_NAME + "Starting 5";
-    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ":\nAdds a schedule to MyGM."
-            + "Parameters: "
+    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ":Adds a schedule to MyGM."
+            + "\nParameters: "
             + PREFIX_SCHEDULE + " "
             + PREFIX_NAME + "SCHEDULE NAME"
-            + "[" + PREFIX_PLAYER + "PLAYER]...\n"
+            + PREFIX_DESCRIPTION + "SCHEDULE NAME "
+            + PREFIX_DATE + "DATE TIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SCHEDULE + " "
-            + PREFIX_NAME + "Starting 5";
+            + PREFIX_NAME + "finals"
+            + PREFIX_DESCRIPTION + "nba finals"
+            + PREFIX_DATE + "01/01/2022 2000";
 
     public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s.";
     public static final String MESSAGE_ADD_LINEUP_SUCCESS = "New lineup added: %1$s.";
