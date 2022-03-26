@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Name;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleDateTime;
 import seedu.address.model.schedule.ScheduleDescription;
@@ -48,7 +47,7 @@ public class JsonAdaptedSchedule {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ScheduleName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
+        if (!ScheduleName.isValidScheduleName(name)) {
             throw new IllegalValueException(ScheduleName.MESSAGE_CONSTRAINTS);
         }
         final ScheduleName modelName = new ScheduleName(name);
