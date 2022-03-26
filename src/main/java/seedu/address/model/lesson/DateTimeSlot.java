@@ -262,7 +262,8 @@ public class DateTimeSlot {
 
         DateTimeSlot otherDateTimeSlot = (DateTimeSlot) other;
         return this.dateOfLesson.equals(otherDateTimeSlot.dateOfLesson)
-                && this.hours == (otherDateTimeSlot.hours);
+                && this.hours == (otherDateTimeSlot.hours)
+                && this.minutes == otherDateTimeSlot.minutes;
     }
 
     @Override
