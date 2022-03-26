@@ -234,15 +234,6 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Undoing last command: `undo`
-
-Undo the last executed command.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-* This command undoes the last executed command by loading a temporarily saved version of CinnamonBun.
-* The state of any commands that did not alter the data in CinnamonBun is also undone. e.g. `find`, `sort` etc.
-</div>
-
 ### Exiting the program : `exit`
 
 Exits the program.
