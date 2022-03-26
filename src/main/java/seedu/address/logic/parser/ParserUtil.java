@@ -55,15 +55,15 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static String parseTimePeriod(String timePeriod) throws ParseException {
-        String trimmedTimePeriod = timePeriod.trim();
-        if (trimmedTimePeriod.equalsIgnoreCase("today")
-                && trimmedTimePeriod.equalsIgnoreCase("week")
-                && trimmedTimePeriod.equalsIgnoreCase("month")
-                && trimmedTimePeriod.equalsIgnoreCase("all")
-                && trimmedTimePeriod.equalsIgnoreCase("")) {
+        String trimmedTimePeriod = timePeriod.trim().toLowerCase();
+        if (!trimmedTimePeriod.equalsIgnoreCase("today")
+                && !trimmedTimePeriod.equalsIgnoreCase("week")
+                && !trimmedTimePeriod.equalsIgnoreCase("month")
+                && !trimmedTimePeriod.equalsIgnoreCase("all")
+                && !trimmedTimePeriod.equalsIgnoreCase("")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
-        return timePeriod;
+        return trimmedTimePeriod;
     }
 
     /**

@@ -14,15 +14,13 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all scheduled interviews "
-            + " within a specific time period.\n"
+            + " scheduled within a specific time period.\n"
             + "Parameters: TIME_PERIOD\n"
             + "Example: " + COMMAND_WORD + " today\n"
-            + "Allowable time periods include today (i.e. next 24 hours), week (i.e. this week), "
+            + "Allowable time periods include today (i.e. the same day), week (i.e. this week), "
             + "month (i.e. this month)";
 
     public static final String MESSAGE_NO_INTERVIEWS_IN_SYSTEM = "No interviews scheduled yet!";
-
-    public static final String MESSAGE_SUCCESS = "Listed below are your upcoming interviews: \n";
 
     private final WithinTimePeriodPredicate predicate;
 

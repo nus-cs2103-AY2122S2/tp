@@ -12,12 +12,16 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.predicate.AllWithinTimePeriodPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.InterviewScheduleBuilder;
 
@@ -140,6 +144,22 @@ public class ModelManagerTest {
     public void hasConflictingInterview_interviewInInterviewSchedule_returnsTrue() {
         modelManager.addInterview(INTERVIEW_ALICE);
         assertTrue(modelManager.hasConflictingInterview(INTERVIEW_ALICE));
+    }
+
+    @Test
+    public void getFilteredInterviewSchedule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredInterviewSchedule().remove(0));
+    }
+
+    @Test
+    public void getFilteredInterviewSchedule_alwaysSorted_returnsEqual() {
+        AllWithinTimePeriodPredicate predicate = new AllWithinTimePeriodPredicate(LocalDateTime.now());
+        modelManager.addInterview(INTERVIEW_BENSON);
+        modelManager.addInterview(INTERVIEW_ALICE);
+        ObservableList<Interview> notSorted = modelManager.getFilteredInterviewSchedule();
+        modelManager.updateFilteredInterviewSchedule(predicate);
+        ObservableList<Interview> sorted = modelManager.getFilteredInterviewSchedule();
+        assertEquals(notSorted, sorted);
     }
 
     @Test

@@ -26,6 +26,4 @@ public abstract class WithinTimePeriodPredicate implements Predicate<Interview> 
                 || (other instanceof WithinTimePeriodPredicate // instanceof handles nulls
                 && endDateTime.equals(((WithinTimePeriodPredicate) other).endDateTime)); // state check
     }
-
-
 }

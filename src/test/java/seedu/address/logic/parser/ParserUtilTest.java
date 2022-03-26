@@ -32,6 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_TIME = "01/01/2000 12:00";
     private static final String INVALID_FORMAT_DATE_TIME = "2025/03/01 10PM";
+    private static final String INVALID_TIME_PERIOD = "A0123456";
 
     private static final String VALID_STUDENT_ID = "E0123456";
     private static final String VALID_NAME = "Rachel Walker";
@@ -41,6 +42,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_DATE_TIME = "20/03/2025 10:00";
+    private static final String VALID_TIME_PERIOD = "TODAY";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -65,8 +67,30 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTimePeriod_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTimePeriod((String) null));
+    }
+
+    @Test
+    public void parseTimePeriod_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTimePeriod(INVALID_TIME_PERIOD));
+    }
+
+    @Test
+    public void parseTimePeriod_validValueWithoutWhitespace_returnsString() throws Exception {
+        String expectedTimePeriod = "today";
+        assertEquals(expectedTimePeriod, ParserUtil.parseTimePeriod(VALID_TIME_PERIOD));
+    }
+
+    @Test
+    public void parseTimePeriod_validValueWithWhitespace_returnsTrimmedString() throws Exception {
+        String expectedTimePeriod = "today";
+        assertEquals(expectedTimePeriod, ParserUtil.parseTimePeriod(VALID_TIME_PERIOD + WHITESPACE));
+    }
+
+    @Test
     public void parseId_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStudentId((String) null));
     }
 
     @Test

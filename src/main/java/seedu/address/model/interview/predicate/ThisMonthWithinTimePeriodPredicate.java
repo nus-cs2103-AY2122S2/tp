@@ -10,6 +10,7 @@ import seedu.address.model.interview.Interview;
  */
 public class ThisMonthWithinTimePeriodPredicate extends WithinTimePeriodPredicate implements Predicate<Interview> {
     private final LocalDateTime endDateTime;
+    private final LocalDateTime currentDateTime;
 
     /**
      * Creates a new {@link ThisMonthWithinTimePeriodPredicate} object with the
@@ -19,6 +20,7 @@ public class ThisMonthWithinTimePeriodPredicate extends WithinTimePeriodPredicat
     public ThisMonthWithinTimePeriodPredicate(LocalDateTime currentDateTime) {
         super(currentDateTime.plusMonths(1));
         this.endDateTime = currentDateTime.plusMonths(1);
+        this.currentDateTime = currentDateTime;
     }
 
     /**
@@ -28,7 +30,8 @@ public class ThisMonthWithinTimePeriodPredicate extends WithinTimePeriodPredicat
      */
     @Override
     public boolean test(Interview interview) {
-        return interview.getInterviewEndDateTime().isBefore(endDateTime);
+        return interview.getInterviewDateTime().isBefore(endDateTime)
+                && interview.getInterviewDateTime().isAfter(currentDateTime);
     }
 
     /**
