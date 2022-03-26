@@ -14,7 +14,6 @@ title: Developer Guide
 ```
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 ```
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -173,7 +172,8 @@ The delete command now has to accept multiple indexes as a valid input. The Pars
 behaviour by extending the validity checks on the entire string of input.
 
 The workaround is then to delete each person from the largest to the smallest index. The success message displays the details
-of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion.
+of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion.<br>
+
 **For example:** <br>
 Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
@@ -233,13 +233,13 @@ successfully.
 
 ### Edit Feature
 
-### Original implementation
+#### Original implementation
 The edit command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
 `EditCommandParser` parses the information input and then creates an `EditPersonDescriptor` where the unchanged fields
 are copied over from the existing person and the fields to be overwritten are changed. The Find command then takes in
 the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
 
-### Current Implementation
+#### Current Implementation
 The edit command has now been upgraded to support the functionality for overwriting multiple tag lists.
 
 
@@ -247,14 +247,14 @@ The edit command has now been upgraded to support the functionality for overwrit
 
 ### Find/Find -s/Find -e feature
 
-### Original implementation
+#### Original implementation
 The existing Find feature in ab3 only allowed contacts to be searched for by name. We added additional functionalities
 to allow for greater flexibility when filtering large contacts lists according to specific predicates. The `Find` and
 `Find -s` command now allow the user to search for specific contact details (name, phone number, email and address) or
 specific tags.
 
-### Current Implementation
-The `Find`command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches 
+#### Current Implementation
+The `Find`command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
 
@@ -510,13 +510,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ````
 1. User requests to find any person using specific fields
 2. NUSocials shows a list of persons matching any fields
-    Use case ends. 
+    Use case ends.
 ````
 **Extensions**
 ````
 2a. The given find command is invalid.
     - 2a1. NUSocials shows an error message.
-    
+
       Use case resumes at step 1.
 ````
 ### Use case 7: Finding a person (all fields)
@@ -534,8 +534,8 @@ The user wants to find a person that has every field instead.
 2. NUSocials shows a list of all persons
 3. User requests to remove certain tags from the person
 4. NUSocials removes the specific tags
-    
-    Use case ends. 
+
+    Use case ends.
 ````
 **Extensions**
 ````
@@ -547,15 +547,15 @@ The user wants to find a person that has every field instead.
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
-      
+
 3b. The given removetag command is invalid.
     - 3b1. NUSocials shows an error message.
 
       Use case resumes at step 2.
-      
+
 3c. The request contains non-existent tags to be removed.
     - 3c1. NUSocials shows an error message.
-    
+
       Use case resumes at step 2.
 ````
 
@@ -633,7 +633,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Subsequent launch
     1. Make some changes to the addressbook and close the application.
-       
+
     1. Reopen the application by double-clicking the jar file<br>
         Expected: Shows the GUI and loads contacts from the addressbook. Should reflect the changes made previously.
 
@@ -655,7 +655,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting multiple persons while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-    
+
     1. Test case: `delete 1 2 3`<br>
         Expected: First, second and third contacts are deleted from the list. Details of the deleted contacts shown in the status message.
 
@@ -664,7 +664,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `delete 1 x 2 3`, `delete 1 2 3 x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-       
+
 
 ### Saving data
 

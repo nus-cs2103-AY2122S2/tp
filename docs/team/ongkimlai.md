@@ -31,7 +31,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `add` and `tag`
-    * Added documentation for feature `delete` enhancement 
+    * Added documentation for feature `delete` enhancement
     * Added documentation for new feature `removetag`
     * Updated documentation for exact tag names for `find` and `tag`
     * Added screenshots for `find` and `find -s` examples
