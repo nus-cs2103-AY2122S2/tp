@@ -70,7 +70,8 @@ public class AddScheduleCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         showCandidateAtIndex(model, INDEX_FIRST_CANDIDATE);
-        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TUESDAY_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand =
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TUESDAY_INTERVIEW_DATE_TIME);
 
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
@@ -95,7 +96,8 @@ public class AddScheduleCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_CANDIDATE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCandidateList().size());
-        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand =
+                new AddScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
         assertCommandFailure(addScheduleCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
     }
 
@@ -113,7 +115,8 @@ public class AddScheduleCommandTest {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         model.addInterview(new InterviewBuilder().withCandidate(candidateToInterview)
                 .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build());
-        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand =
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
 
         assertCommandFailure(addScheduleCommand, model, MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
     }
@@ -161,7 +164,8 @@ public class AddScheduleCommandTest {
 
     @Test
     public void equals() {
-        AddScheduleCommand scheduleFirstCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand scheduleFirstCommand =
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
         AddScheduleCommand scheduleSecondCommand =
                 new AddScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
 
