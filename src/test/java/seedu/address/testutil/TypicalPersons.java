@@ -73,7 +73,6 @@ public class TypicalPersons {
                 }
             }
         }
-        ab.addTag(new Tag("family"));
         return ab;
     }
 
