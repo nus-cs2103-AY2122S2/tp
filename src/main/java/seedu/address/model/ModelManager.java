@@ -121,6 +121,11 @@ public class ModelManager implements Model {
     };
 
     @Override
+    public void deleteTransactionWithId(long personId) {
+        addressBook.removeTransactionWithId(personId);
+    }
+
+    @Override
     public void addTransaction(Transaction transaction) {
         requireNonNull(transaction);
 

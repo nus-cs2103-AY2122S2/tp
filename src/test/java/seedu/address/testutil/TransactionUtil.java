@@ -11,7 +11,7 @@ import seedu.address.model.transaction.TransactionDate;
 
 
 public class TransactionUtil {
-    public static final String VALID_EMAIL = "test@example.com";
+    public static final long VALID_ID = 12345678;
 
     public static final String VALID_AMOUNT_ONE = "123.45";
     public static final String VALID_TRANSACTION_DATE_ONE = "2020-11-11";
@@ -30,7 +30,7 @@ public class TransactionUtil {
                     new DueDate(VALID_DUE_DATE_ONE),
                     new Note(VALID_NOTE_ONE)
             ),
-            VALID_EMAIL
+            VALID_ID
     );
 
     public static final Transaction TRANSACTION_ONE_INCOMPLETE = new Transaction(
@@ -38,7 +38,7 @@ public class TransactionUtil {
                     new Amount(VALID_AMOUNT_ONE),
                     new TransactionDate(VALID_TRANSACTION_DATE_ONE)
             ),
-            VALID_EMAIL
+            VALID_ID
     );
 
     public static final Transaction TRANSACTION_TWO_COMPLETE = new Transaction(
@@ -48,6 +48,6 @@ public class TransactionUtil {
                     new DueDate(VALID_DUE_DATE_TWO),
                     new Note(VALID_NOTE_TWO)
             ),
-            VALID_EMAIL
+            VALID_ID
     );
 }
