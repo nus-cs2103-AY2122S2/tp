@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook addressBook;
+    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     /** Internal list of filtered persons, wrapped by sortedPersons */
     private final FilteredList<Person> filteredPersons;
@@ -103,13 +103,12 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
-        addressBook.commit();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        addressBook.commit();
+        updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -119,19 +118,41 @@ public class ModelManager implements Model {
     }
 
     public boolean canUndoAddressBook() {
-        return addressBook.canUndo();
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            return versionedAddressBook.canUndo();
+        }
+
+        return false;
     }
 
     public void undoAddressBook(){
-        addressBook.undo();
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            versionedAddressBook.undo();
+        }
     }
 
     public boolean canRedoAddressBook() {
-        return addressBook.canRedo();
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            return versionedAddressBook.canRedo();
+        }
+        return false;
     }
 
     public void redoAddressBook(){
-        addressBook.redo();
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            versionedAddressBook.redo();
+        }
+    }
+
+    public void commitAddressBook() {
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            versionedAddressBook.commit();
+        }
     }
 
     //=========== Filtered & Sorted Person List Accessors ==========================================================

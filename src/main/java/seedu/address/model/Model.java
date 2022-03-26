@@ -110,11 +110,18 @@ public interface Model {
      */
     void updateDisplayPersonList(Predicate<Person> predicate, Comparator<Person> comparator);
 
+    /** Returns whether the AddressBook has commands that can be undone. */
     boolean canUndoAddressBook();
 
+    /** Un-do the last command that modified the AddressBook, provided that the AddressBook supports it. */
     void undoAddressBook();
 
+    /** Returns whether the AddressBook has commands that can be redone. */
     boolean canRedoAddressBook();
 
+    /** Re-do the last command that modified the AddressBook, provided that the AddressBook supports it. */
     void redoAddressBook();
+
+    /** Commits a version of the current AddressBook into its history, provided that the AddressBook supports it. */
+    void commitAddressBook();
 }
