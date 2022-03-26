@@ -6,11 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.trackbeau.model.booking.Booking;
-import seedu.trackbeau.model.booking.UniqueBookingList;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.UniqueCustomerList;
 import seedu.trackbeau.model.service.Service;
-import seedu.trackbeau.model.service.UniqueServiceList;
+import seedu.trackbeau.model.uniquelist.UniqueList;
 
 /**
  * Wraps all data at the trackBeau level
@@ -18,9 +16,9 @@ import seedu.trackbeau.model.service.UniqueServiceList;
  */
 public class TrackBeau implements ReadOnlyTrackBeau {
 
-    private final UniqueCustomerList customers;
-    private final UniqueServiceList services;
-    private final UniqueBookingList bookings;
+    private final UniqueList<Customer> customers;
+    private final UniqueList<Service> services;
+    private final UniqueList<Booking> bookings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,9 +28,9 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      *   among constructors.
      */
     {
-        customers = new UniqueCustomerList();
-        services = new UniqueServiceList();
-        bookings = new UniqueBookingList();
+        customers = new UniqueList<>();
+        services = new UniqueList<>();
+        bookings = new UniqueList<>();
     }
 
     public TrackBeau() {}
@@ -52,7 +50,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * {@code customers} must not contain duplicate customers.
      */
     public void setCustomers(List<Customer> customers) {
-        this.customers.setCustomers(customers);
+        this.customers.setItems(customers);
     }
 
     /**
@@ -60,7 +58,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * {@code services} must not contain duplicate services.
      */
     public void setServices(List<Service> services) {
-        this.services.setServices(services);
+        this.services.setItems(services);
     }
 
     /**
@@ -99,7 +97,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);
 
-        customers.setCustomer(target, editedCustomer);
+        customers.setItem(target, editedCustomer);
     }
 
     /**
@@ -136,7 +134,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public void setService(Service target, Service editedService) {
         requireNonNull(editedService);
 
-        services.setService(target, editedService);
+        services.setItem(target, editedService);
     }
     /**
      * Adds a booking to trackBeau.

@@ -3,9 +3,10 @@ package seedu.trackbeau.model.booking;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.trackbeau.model.uniquelist.UniqueListItem;
 import seedu.trackbeau.model.customer.Customer;
 
-public class Booking {
+public class Booking implements UniqueListItem {
     //private final Service Service;
     private final Customer customer;
     private final LocalDateTime startDateTime;
@@ -34,7 +35,8 @@ public class Booking {
      * Returns true if both bookings have the same name.
      * This defines a weaker notion of equality between two bookings.
      */
-    public boolean isSameBooking(Booking otherBooking) {
+    @Override
+    public boolean isSameItem(UniqueListItem otherBooking) {
         return otherBooking == this;
     }
 
@@ -42,10 +44,10 @@ public class Booking {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ")
-                .append(getCustomerName())
-                .append("; Appointment Time: ")
-                .append(getDateTime())
-                .append(";");
+            .append(getCustomerName())
+            .append("; Appointment Time: ")
+            .append(getDateTime())
+            .append(";");
 
         return builder.toString();
     }
