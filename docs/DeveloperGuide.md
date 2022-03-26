@@ -221,9 +221,21 @@ The following sequence diagram shows how the add student command works.
 ![](images/AddStudentSequenceDiagram.png)
 
 ### Add temporary/recurring lesson
-Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
+The following sequence diagram shows how the add lesson operation works:
 
-This is achieved by enforcing ***consistency*** between existing lessons stored in the list.
+![Add Lesson Sequence Diagram 1](images/AddLessonSequenceDiagram_1.png)
+
+The following sequence diagram complements the above one and shows,
+- how an `AddLessonCommand` is instantiated from the given user input
+- how a new instance of a `TemporaryLesson` or `RecurringLesson` is instantiated from the arguments given by the user
+
+![Add Lesson Sequence Diagram 2](images/AddLessonSequenceDiagram_2.png)
+
+#### Determining if a lesson clashes with any existing lessons
+
+When a user requests to add a new lesson to the list, it is important to check that the new lesson ***does not clash with any existing lessons in the list.***
+
+This is done by the `ConsistentLessonList` class, which enforces ***consistency*** between existing lessons stored in the list.
 
 A list of lessons is considered ***consistent*** when no lessons clash with each another. In particular, the following two conditions are enforced by the `ConsistentLessonList`:
 - no two temporary lessons should have overlapping timeslots (ie: a lesson should ***not*** start when another lesson has not ended)
@@ -231,29 +243,27 @@ A list of lessons is considered ***consistent*** when no lessons clash with each
 
 This is done with the method `ConsistentLessonList#hasConflictingLesson()`, which takes in a `Lesson` that is to be added to the list and returns true if any existing lessons clashes with it.
 
-Given below is an example scenario:
+To illustrate how it works, here's an example scenario:
 
-Step 1. The user requests to add a lesson that,
+##### Step 1. The user requests to add a lesson that,
 - is on 20 March 2022
 - starts at 12 pm
 - lasts for 1 hour
 
 ![Add Lesson Object Diagram](images/AddLessonObjectDiagram_1.png)
 
-Step 2. The method `ConsistentLessonList#add()` is called, with the new lesson passed in as the argument. The method `ConsistentLessonList#hasConflictingLesson()` is then called, which checks if the first existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
+##### Step 2. The method `ConsistentLessonList#add()` is called, with the new lesson passed in as the argument.
+The method `ConsistentLessonList#hasConflictingLesson()` is then called, which checks if the first existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
 
 ![Add Lesson Object Diagram](images/AddLessonObjectDiagram_2.png)
 
-Step 3. The method then moves down the list and checks if the second existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
+##### Step 3. The method then moves down the list and checks if the second existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
 
 ![Add Lesson Object Diagram](images/AddLessonObjectDiagram_3.png)
 
-After all the existing lessons have been verified to not clash with the new lesson, it is added to the list of lessons.
+##### Step 4. Finally, only after all the existing lessons have been verified to not clash with the new lesson, it is added to the list of lessons.
 
 ![Add Lesson Object Diagram](images/AddLessonObjectDiagram_4.png)
-
-The following sequence diagram shows how the add lesson operation works:
-![Add Lesson Sequence Diagram](images/AddLessonSequenceDiagram.png)
 
 ### Assign student to lesson
 

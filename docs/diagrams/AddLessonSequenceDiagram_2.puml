@@ -1,4 +1,5 @@
 @startuml
+mainframe **sd**  parse add lesson command
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
@@ -10,17 +11,6 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant ":Lesson" as Lesson LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-end box
-
-[-> LogicManager : execute(**userInput**)
-note left of LogicManager
-**userInput = ** "addlesson
--n Sec 2 Biology Lesson
--s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04
--d 17-04-2022 -t 18:00 -h 1"
-end note
 activate LogicManager
 
 LogicManager -> TeachWhatParser : parseCommand(**userInput**)
@@ -44,10 +34,16 @@ activate AddLessonCommandParser
 alt is recurring lesson
     AddLessonCommandParser -> Lesson : makeRecurringLesson(**name**, **subject**, **address**, **dateTimeSlot)**
 
+    note right of Lesson
+    **name** = "Sec 2 Biology Lesson"
+    **subject** = "Biology"
+    **address** = "Blk 11 Ang Mo Kio Street 74, #11-04"
+    **dateTimeSlot** = "17-04-2022 18:00 1 hour 0 minutes"
+    end note
 else else
     AddLessonCommandParser -> Lesson : makeTemporaryLesson(**name**, **subject**, **address**, **dateTimeSlot**)
 
-    note right of AddLessonCommandParser
+    note right of Lesson
     **name** = "Sec 2 Biology Lesson"
     **subject** = "Biology"
     **address** = "Blk 11 Ang Mo Kio Street 74, #11-04"
@@ -70,32 +66,4 @@ deactivate AddLessonCommandParser
 TeachWhatParser --> LogicManager : addLessonCommand
 deactivate TeachWhatParser
 
-LogicManager -> AddLessonCommand : execute()
-activate AddLessonCommand
-
-AddLessonCommand -> Model : addLesson(lessonToBeAdded)
-activate Model
-alt does not conflict with any existing lessons
-    AddLessonCommand <-- Model
-    AddLessonCommand -> Model : setSelectedLesson(lessonToBeAdded)
-
-    create CommandResult
-    AddLessonCommand -> CommandResult
-    activate CommandResult
-    CommandResult --> AddLessonCommand : commandResult
-    deactivate CommandResult
-
-    LogicManager <-- AddLessonCommand : commandResult
-
-    [<--LogicManager : commandResult
-else else
-     AddLessonCommand <-- Model : conflictsWithLessonException
-     deactivate Model
-     LogicManager <-- AddLessonCommand : commandException
-     deactivate AddLessonCommand
-
-     [<--LogicManager : commandException
-     deactivate LogicManager
-
-end
 @enduml
