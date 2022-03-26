@@ -3,7 +3,12 @@ layout: page
 title: User Guide
 ---
 
-InternBuddy is a **desktop app for managing companies for internships, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).** If you can type fast, InternBuddy can get your internship management deliverables done faster than traditional GUI apps.
+InternBuddy is a **desktop app to help students manage the events, companies, and contact people encountered during the internship search.
+The app is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).**
+If you can type fast, InternBuddy can help you organize your internship search faster than traditional GUI apps.
+
+The purpose of this User Guide is to assist you in learning and using InternBuddy. Whether you're a new user looking for
+a place to start or a veteran needing a quick reference, this guide is here to answer your questions.
 
 * Table of Contents
 {:toc}
@@ -13,32 +18,34 @@ InternBuddy is a **desktop app for managing companies for internships, optimized
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+   * If you don't have it installed, you can follow [Orcale's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
+   for your operating system.
 
-1. Download the latest `InternBuddy.jar` from [here (link to be added)]().
+2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/tag/v1.2.0).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your InternBuddy.
+3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    (UI Image to be added)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`listc`** : Lists all companies.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the list of contact people.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all entries.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#current-features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Current Features
+## Features
 
 <div markdown="block" class="alert alert-info">
 
