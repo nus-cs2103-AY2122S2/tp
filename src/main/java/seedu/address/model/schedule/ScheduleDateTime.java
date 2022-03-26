@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the date and time of a schedule
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class ScheduleDateTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Please check the format of schedule date and time, and it should not be blank";
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     // solution below adapted from
     // https://stackoverflow.com/questions/
@@ -37,6 +39,7 @@ public class ScheduleDateTime {
     public LocalDateTime getScheduleDateTime() {
         return scheduleDateTime;
     }
+
 
     public static boolean isValidScheduleDateTime(String test) {
         return test.matches(VALIDATION_REGEX);

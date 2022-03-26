@@ -112,7 +112,7 @@ public class UniquePersonList implements Iterable<Person> {
         for (Person person : this.internalList) {
             if (person.isInLineup(lineup)) {
                 person.removeFromLineup(lineup);
-                System.out.printf("%s has been removed from lineup %s\n", person.getName(), lineup.getLineupName());
+                //System.out.printf("%s has been removed from lineup %s\n", person.getName(), lineup.getLineupName());
             }
         }
     }

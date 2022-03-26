@@ -216,5 +216,4 @@ public interface Model {
     void updateFilteredScheduleList(Predicate<Schedule> predicate);
 
     //=========== MyGM ScheduleList (End) ==================================================================
-
 }

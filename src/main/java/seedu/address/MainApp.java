@@ -63,6 +63,8 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
+        System.out.println(model.getAddressBook().getLineupList());
+
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);

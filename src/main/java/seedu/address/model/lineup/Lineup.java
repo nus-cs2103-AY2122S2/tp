@@ -2,6 +2,7 @@ package seedu.address.model.lineup;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
@@ -54,6 +55,10 @@ public class Lineup {
      */
     public Person getPlayer(int index) {
         return playersList.get(index);
+    }
+
+    public ArrayList<Person> getPlayerList() {
+        return playersList.getPlayersList();
     }
 
     public void addPlayer(Person player) {

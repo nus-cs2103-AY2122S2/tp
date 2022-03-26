@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.lineup.UniqueLineupList;
@@ -57,6 +58,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setLineups(List<Lineup> lineups) {
+        this.lineups.setLineups(lineups);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -64,6 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
         setSchedules(newData.getScheduleList());
+        setLineups(newData.getLineupList());
     }
 
     //// person-level operations
@@ -199,6 +205,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         return schedules.contains(schedule);
     }
 
+
+    /**
+     * Add a person and update the respective lineups
+     * The person must not already exist in the address book and the lineups must exist.
+     */
+    public void initalizePerson(Person p) {
+        persons.add(p);
+
+        for (LineupName lineupName : p.getLineupNames()) {
+            Lineup lineup = lineups.getLineup(lineupName);
+            lineups.putPlayerToLineup(p, lineup);
+        }
+    }
+  
     /**
      * Adds a schedule to MyGM.
      * The schedule must not already exist in MyGM.
@@ -215,6 +235,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setSchedule(Schedule target, Schedule editedSchedule) {
         requireNonNull(editedSchedule);
         schedules.setSchedule(target, editedSchedule);
+    }
+
+    public boolean hasSchedule(Schedule schedule) {
+        return false;
     }
 
     /**
@@ -240,6 +264,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public List<Lineup> getLineupList() {
+        return lineups.getList();
+    }
+
+    @Override
     public ObservableList<Schedule> getScheduleList() {
         return schedules.asUnmodifiableObservableList();
     }
@@ -261,4 +290,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode() + lineups.hashCode() + schedules.hashCode();
     }
+
 }
