@@ -1,11 +1,16 @@
 package seedu.address.model;
 
+import static java.util.logging.Level.INFO;
+
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class VersionedAddressBook extends AddressBook {
 
     private static final ArrayList<ReadOnlyAddressBook> addressBookStateList = new ArrayList<>();
     private Integer currentStatePointer = 0;
+    private final Logger logger = Logger.getLogger(VersionedAddressBook.class.getName());
+
 
     public VersionedAddressBook() {}
 
@@ -35,6 +40,7 @@ public class VersionedAddressBook extends AddressBook {
             throw new Exception("No commands to undo");
         }
 
+        logger.log(INFO, String.valueOf(addressBookStateList.size()));
         this.currentStatePointer -= 1;
         addressBookStateList.remove(this.currentStatePointer + 1);
         return addressBookStateList.get(this.currentStatePointer);
