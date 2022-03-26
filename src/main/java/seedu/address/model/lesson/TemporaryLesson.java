@@ -29,9 +29,6 @@ public class TemporaryLesson extends Lesson {
         requireAllNonNull(dateTimeSlot);
     }
 
-    /**
-     * Returns true if both lessons clash.
-     */
     @Override
     public boolean isConflictingWithLesson(Lesson otherLesson) {
         if (otherLesson == this) {
@@ -42,6 +39,11 @@ public class TemporaryLesson extends Lesson {
         } else {
             return getDateTimeSlot().isConflictingWith(otherLesson.getDateTimeSlot());
         }
+    }
+
+    @Override
+    public boolean isRecurring() {
+        return false;
     }
 
     /**
