@@ -1,8 +1,11 @@
 package seedu.address.storage;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lab.Lab;
 import seedu.address.model.student.exceptions.InvalidLabStatusException;
@@ -12,9 +15,12 @@ import seedu.address.model.student.exceptions.InvalidLabStatusException;
  */
 class JsonAdaptedLab {
 
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedLab.class);
+
     private final String labNumber;
     private final String labStatus;
     private final String labMark;
+
 
     /**
      * Constructs a {@code JsonAdaptedLab} with the given {@code labNumber}.
@@ -54,16 +60,28 @@ class JsonAdaptedLab {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lab.
      */
     public Lab toModelType() throws IllegalValueException {
-        if (labNumber == null || !Lab.isValidLab(labNumber)) {
-            throw new IllegalValueException(Lab.MESSAGE_CONSTRAINTS);
-        }
+        checkLabNumber();
+        return handleLabCreation();
+    }
+
+    private Lab handleLabCreation() {
         try {
             return new Lab(labNumber).of(orElse(labStatus, "UNSUBMITTED"), orElse(labMark, "Unknown"));
-        } catch (InvalidLabStatusException e) {
-            throw new IllegalArgumentException(e.getMessage());
+        } catch (InvalidLabStatusException | IllegalArgumentException e) {
+            logger.info("Illegal lab attributes found when converting labs " + e);
+            return new Lab(labNumber);
         }
     }
 
+    private void checkLabNumber() throws IllegalValueException {
+        if (labNumber == null || !Lab.isValidLab(labNumber)) {
+            throw new IllegalValueException(Lab.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Returns an alternate String {@code alt} if the String {@code str} is null.
+     */
     private String orElse(String str, String alt) {
         if (str == null) {
             return alt;

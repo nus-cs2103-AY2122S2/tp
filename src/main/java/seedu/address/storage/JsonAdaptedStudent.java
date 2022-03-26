@@ -107,14 +107,8 @@ class JsonAdaptedStudent {
 
     private List<Lab> deserializeLabs() throws IllegalValueException {
         List<Lab> personLabs = new ArrayList<>();
-        for (int i = 0; i < labs.size(); i++) {
-            // Incase of wrong lab status format we will just add the lab with LabStatus.UNSUBMITTED
-            try {
-                personLabs.add(labs.get(i).toModelType());
-            } catch (IllegalArgumentException e) {
-                logger.info("Illegal lab attributes found when converting labs " + e);
-                personLabs.add(new Lab(labs.get(i).getLabNumber()));
-            }
+        for (JsonAdaptedLab lab : labs) {
+            personLabs.add(lab.toModelType());
         }
         return personLabs;
     }

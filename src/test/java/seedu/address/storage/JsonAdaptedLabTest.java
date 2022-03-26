@@ -72,7 +72,12 @@ class JsonAdaptedLabTest {
     @Test
     public void toModelType_invalidLabStatusNoMarkAndNullMark_throwsIllegalArgumentException() {
         JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, INVALID_LABSTATUS, VALID_NO_LABMARK);
-        assertThrows(IllegalArgumentException.class, () -> js.toModelType());
+        Lab expectedLab = new Lab("1");
+        try {
+            assertEquals(expectedLab, js.toModelType());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
@@ -89,12 +94,22 @@ class JsonAdaptedLabTest {
     @Test
     public void toModelType_nullLabMarkStatusGraded_throwIllegalArgumentException() {
         JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, VALID_LABSTATUS, null);
-        assertThrows(IllegalArgumentException.class, () -> js.toModelType());
+        Lab expectedLab = new Lab("1");
+        try {
+            assertEquals(expectedLab, js.toModelType());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
     public void toModelType_invalidLabMark_throwIllegalArgumentException() {
         JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, VALID_LABSTATUS, INVALID_LABMARK);
-        assertThrows(IllegalArgumentException.class, () -> js.toModelType());
+        Lab expectedLab = new Lab("1");
+        try {
+            assertEquals(expectedLab, js.toModelType());
+        } catch (Exception e) {
+            fail();
+        }
     }
 }
