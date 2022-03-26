@@ -69,4 +69,8 @@ shadowJar {
     archiveName = 'WoofAreYou.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'

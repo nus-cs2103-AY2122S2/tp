@@ -20,4 +20,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_APPOINTMENT_LOCATION = new Prefix("at/");
     public static final Prefix PREFIX_CLEAR = new Prefix("clear");
 
+    /* Valid parameters for sort command */
+    public static final String SORT_BY_NAME = "name";
+    public static final String SORT_BY_OWNER = "owner";
+    public static final String SORT_BY_APPOINTMENT = "app";
+
 }
