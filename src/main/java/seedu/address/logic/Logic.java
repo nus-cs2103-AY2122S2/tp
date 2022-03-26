@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
 
 /**
  * API of the Logic component
@@ -31,12 +32,14 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    ReadOnlyInterviewSchedule getInterviewSchedule();
+
     /**
      * Returns the InterviewSchedule.
      *
      * @see seedu.address.model.Model#getAddressBook()
      */
-    ReadOnlyInterviewSchedule getInterviewSchedule();
+    ObservableList<Interview> getFilteredInterviewSchedule();
 
     /** Returns an unmodifiable view of the filtered list of candidates */
     ObservableList<Candidate> getFilteredCandidateList();

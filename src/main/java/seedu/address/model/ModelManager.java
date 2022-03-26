@@ -26,13 +26,15 @@ public class ModelManager implements Model {
     private final InterviewSchedule interviewSchedule;
     private final UserPrefs userPrefs;
     private final FilteredList<Candidate> filteredCandidates;
+    private final FilteredList<Interview> filteredInterviewSchedule;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyInterviewSchedule interviewList,
                         ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, interviewList, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + ", InterviewSchedule: " + interviewList
                 + " and user prefs " + userPrefs);
@@ -42,6 +44,7 @@ public class ModelManager implements Model {
 
         this.interviewSchedule = new InterviewSchedule(interviewList);
         filteredCandidates = new FilteredList<>(this.addressBook.getCandidateList());
+        filteredInterviewSchedule = new FilteredList<>(this.interviewSchedule.getInterviewList());
     }
 
     public ModelManager() {
@@ -135,6 +138,7 @@ public class ModelManager implements Model {
     @Override
     public void setInterviewSchedule(ReadOnlyInterviewSchedule interviewList) {
         this.interviewSchedule.resetData(interviewList);
+        interviewSchedule.sortInterviews();
     }
 
     @Override
@@ -154,14 +158,24 @@ public class ModelManager implements Model {
         return interviewSchedule.hasConflictingInterview(interview);
     }
 
-    /*@Override
-    public void deleteInterview(Interview target) {
-        interviewSchedule.removeInterview(target);
-    }*/
+    @Override
+    public void deleteInterviewForCandidate(Candidate target) {
+        requireNonNull(target);
+        Interview interview = null;
+        for (Interview i: interviewSchedule.getInterviewList()) {
+            if (i.getCandidate().equals(target)) {
+                interview = i;
+            }
+        }
+        if (interview != null) {
+            interviewSchedule.removeInterview(interview);
+        }
+    }
 
     @Override
     public void addInterview(Interview interview) {
         interviewSchedule.addInterview(interview);
+        interviewSchedule.sortInterviews();
         //updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
     }
 
@@ -171,6 +185,21 @@ public class ModelManager implements Model {
 
         interviewSchedule.setInterview(target, editedInterview);
     }*/
+
+    //=========== Interview Schedule Accessors =============================================================
+    @Override
+    public ObservableList<Interview> getFilteredInterviewSchedule() {
+        interviewSchedule.sortInterviews();
+        return filteredInterviewSchedule;
+    }
+
+    @Override
+    public void updateFilteredInterviewSchedule(Predicate<Interview> predicate) {
+        requireNonNull(predicate);
+        interviewSchedule.sortInterviews();
+        filteredInterviewSchedule.setPredicate(predicate);
+    }
+
 
     //=========== Filtered/Sort Candidate List Accessors =============================================================
     /**
@@ -191,7 +220,7 @@ public class ModelManager implements Model {
     @Override
     public void updateSortedCandidateList(Comparator<Candidate> sortComparator) {
         requireNonNull(sortComparator);
-        addressBook.sortCandidates(filteredCandidates, sortComparator);
+        addressBook.sortCandidates(sortComparator);
     }
 
     @Override

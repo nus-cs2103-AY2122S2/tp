@@ -69,7 +69,7 @@ public class AddressBookTest {
         Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
         candidatesCopy.sort(sortComparator);
         addressBook.setCandidates(newData);
-        addressBook.sortCandidates(newData, sortComparator);
+        addressBook.sortCandidates(sortComparator);
 
         assertEquals(candidatesCopy, addressBook.getCandidateList());
     }
