@@ -66,10 +66,17 @@ public class PersonCard extends UiPart<Region> {
         prevDateMet.setText("Last met: " + person.getPrevDateMet().value.toString());
         salary.setText("Salary: $" + person.getSalary().value);
         info.setText("Info: " + person.getInfo().value);
-        String[] meetingSplit = person.getScheduledMeeting().toString().split(" ");
-        String meetingDate = meetingSplit[0];
-        String meetingTime = meetingSplit[1];
-        scheduledMeeting.setText("Scheduled meeting: " + meetingDate + " at " + meetingTime);
+
+        String meetingDetails = person.getScheduledMeeting().toString();
+        if (meetingDetails.equals("No meeting scheduled")) {
+            scheduledMeeting.setText(meetingDetails);
+        } else {
+            String[] meetingSplit = person.getScheduledMeeting().toString().split(" ");
+            String meetingDate = meetingSplit[0];
+            String meetingTime = meetingSplit[1];
+            scheduledMeeting.setText("Scheduled meeting: " + meetingDate + " at " + meetingTime);
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

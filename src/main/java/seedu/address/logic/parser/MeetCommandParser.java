@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TIME;
 
@@ -26,9 +27,18 @@ public class MeetCommandParser implements Parser<MeetCommand> {
     public MeetCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MEETING_DATE, PREFIX_MEETING_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_MEETING_DATE, PREFIX_MEETING_TIME, PREFIX_CANCEL_MEETING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MEETING_DATE, PREFIX_MEETING_TIME)) {
+        boolean isClearPresent = arePrefixesPresent(argMultimap, PREFIX_CANCEL_MEETING);
+        boolean isDatePresent = arePrefixesPresent(argMultimap, PREFIX_MEETING_DATE);
+        boolean isTimePresent = arePrefixesPresent(argMultimap, PREFIX_MEETING_TIME);
+
+        if (isClearPresent && (isDatePresent || isTimePresent)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE));
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_MEETING_DATE, PREFIX_MEETING_TIME)
+                && !isClearPresent) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE));
         }
 
@@ -40,10 +50,16 @@ public class MeetCommandParser implements Parser<MeetCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE), pe);
         }
 
-        MeetingDate date = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE).get());
-        MeetingTime time = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_MEETING_TIME).get());
+        ScheduledMeeting newMeeting;
 
-        ScheduledMeeting newMeeting = new ScheduledMeeting(date, time);
+        if (isClearPresent) {
+            newMeeting = new ScheduledMeeting();
+        } else {
+            MeetingDate date = ParserUtil.parseMeetingDate(argMultimap.getValue(PREFIX_MEETING_DATE).get());
+            MeetingTime time = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_MEETING_TIME).get());
+            newMeeting = new ScheduledMeeting(date, time);
+        }
+
         return new MeetCommand(name, newMeeting);
     }
 

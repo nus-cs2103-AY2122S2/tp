@@ -17,5 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_INFO = new Prefix("i/");
     public static final Prefix PREFIX_MEETING_DATE = new Prefix("d/");
     public static final Prefix PREFIX_MEETING_TIME = new Prefix("t/");
+    public static final Prefix PREFIX_CANCEL_MEETING = new Prefix("c/");
 
 }
