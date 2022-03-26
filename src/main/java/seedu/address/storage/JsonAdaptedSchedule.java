@@ -9,6 +9,9 @@ import seedu.address.model.schedule.ScheduleDateTime;
 import seedu.address.model.schedule.ScheduleDescription;
 import seedu.address.model.schedule.ScheduleName;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class JsonAdaptedSchedule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
@@ -22,8 +25,8 @@ public class JsonAdaptedSchedule {
      */
     @JsonCreator
     public JsonAdaptedSchedule(@JsonProperty("name") String name,
-                               @JsonProperty("phone") String description,
-                               @JsonProperty("email") String dateTime) {
+                               @JsonProperty("description") String description,
+                               @JsonProperty("dateTime") String dateTime) {
         this.name = name;
         this.description = description;
         this.dateTime = dateTime;
@@ -35,7 +38,8 @@ public class JsonAdaptedSchedule {
     public JsonAdaptedSchedule(Schedule source) {
         name = source.getScheduleName().scheduleName;
         description = source.getScheduleDescription().description;
-        dateTime = source.getScheduleDateTime().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy hhmm");
+        dateTime = source.getScheduleDateTime().getScheduleDateTime().format(formatter);
     }
 
     /**

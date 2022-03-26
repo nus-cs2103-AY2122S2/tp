@@ -237,10 +237,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         schedules.setSchedule(target, editedSchedule);
     }
 
-    public boolean hasSchedule(Schedule schedule) {
-        return false;
-    }
-
     /**
      * Removes {@code key} from this {@code MyGM}.
      * {@code key} must exist in MyGM.

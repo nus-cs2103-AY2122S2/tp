@@ -80,7 +80,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }
-            //addressBook.addSchedule(schedule);
+            addressBook.addSchedule(schedule);
         }
 
         return addressBook;
