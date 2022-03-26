@@ -40,7 +40,7 @@ This guide aims to be the one-stop shop to get you from noob to expert in record
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to CinnamonBun.
    * **`delete`**`3` : Deletes the 3rd client shown in the current list.
    * **`clear`** : Deletes all client records.
-   * **`undo`** : Undos the last command.
+   * **`undo`** : Undo the last executed command.
    * **`exit`** : Exits the app.
     
 6. Refer to the [Commands](#Commands) below for details of each command.
@@ -68,7 +68,17 @@ Commands in CinnamonBun can be broken down into several components.
 | `PREFIX`       | Commands may have one more or arguments. The prefix specifies which arguments to map to the parameters. All prefixes end with a `/`. |
  | `ARGUMENT`     | The argument to pass to the command.                                                                                                 |
 
-<b>Commands and their arguments are case-sensitive<b/>.
+<div markdown="block" class="alert alert-primary">:bulb:
+
+* Commands and their arguments are case-sensitive
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
 
 ### User Guide Syntax
 
@@ -80,18 +90,6 @@ Commands in CinnamonBun can be broken down into several components.
 
 * Items with `…`​ after them can be used zero or more times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family t/colleague` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* Multiple commands can be chained by separating each command with the '|' character. Each command is run sequentially from first to last. Invalid commands and special commands `help` and `exit` will break the chain and stop further command execution.<br>
-  e.g `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
 
 ### Viewing help: `help`
 
@@ -111,7 +109,7 @@ Examples:
 * `add n/Andy Lau p/98765432 e/andy_lau@example.com a/Pasir Ris Grove, Block 73, #02-38, Singapore 518206`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">:information_source:
 
 A client can have many fields, including both optional and compulsory ones.
 
@@ -141,9 +139,8 @@ Fields that can be sorted:
 
 Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]`  
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">:information_source:
 
-:bulb: **Tip:**
 * At least one of the above fields must be specified.
 * Specifying `desc` it after a field means that particular field is to be sorted in descending order. By default, they are sorted in ascending order.
 * The fields are to be specified in their prefix. They can be specified in any order, however, priority will be given
@@ -172,9 +169,8 @@ Edits an existing person in CinnamonBun.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">:information_source:
 
-:bulb: **Tip:**
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -196,9 +192,8 @@ Finds clients whose name, phone, email, address or tags contain any of the given
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">:information_source:
 
-:bulb: **Tip:**
 * The search is case-insensitive. e.g. `bob` will match `Bob`
 * The order of the keywords does not matter. e.g. `Hans Bob` will match `Bob Hans`
 * The name, phone, email, address and tags are searched.
@@ -220,9 +215,8 @@ Deletes a customer in CinnamonBun.
 
 Format: `delete INDEX`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">:information_source:
 
-:bulb: **Tip:**
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -256,9 +250,17 @@ Format: `exit`
 
 ---
 
-## Shortcuts
+## Special Features
 
-WIP
+### Command Chains
+Multiple commands can be chained by separating each command with the `|` character.
+Each command is run sequentially from first to last.
+Invalid commands and special commands `help` and `exit` will break the chain and stop further command execution.  
+e.g `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
+
+### Command History
+You can navigate through your command history by using the up and down arrow keys.
+The command history works similarly to the Linux bash terminal.
 
 ---
 
