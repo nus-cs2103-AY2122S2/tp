@@ -11,6 +11,7 @@ import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.tamodule.TaModule;
 
+//@@author jxt00
 /**
  * Jackson-friendly version of {@link ClassGroup}.
  */
@@ -18,6 +19,7 @@ class JsonAdaptedClassGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ClassGroup's %s field is missing!";
     public static final String NONEXISTENT_MODULE = "Module does not exist!";
+
     private final String classGroupId;
     private final String classGroupType;
     private final JsonAdaptedTaModule module;
