@@ -1,18 +1,16 @@
 package seedu.address.commons.util;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.filter.AppointmentContainsFilterWordPredicate;
 import seedu.address.model.filter.DateContainsFilterDatePredicate;
@@ -21,14 +19,15 @@ import seedu.address.model.filter.TagContainsFilterWordPredicate;
 import seedu.address.model.tag.Tag;
 
 public class FilterUtilTest {
-    public static String ownerName = "ABC";
-    public static String dateWord = "today";
-    public static String tagWord = "def";
-    public static OwnerNameContainsFilterWordPredicate ownerPredicate;
-    public static DateContainsFilterDatePredicate datePredicate;
-    public static AppointmentContainsFilterWordPredicate appPredicate;
-    public static TagContainsFilterWordPredicate tagPredicate;
-    public static Set<Tag> tags = new HashSet<>();
+    private static final String ownerName = "ABC";
+    private static final String dateWord = "today";
+    private static final String tagWord = "def";
+    private static final Set<Tag> tags = new HashSet<>();
+
+    private static OwnerNameContainsFilterWordPredicate ownerPredicate;
+    private static DateContainsFilterDatePredicate datePredicate;
+    private static AppointmentContainsFilterWordPredicate appPredicate;
+    private static TagContainsFilterWordPredicate tagPredicate;
 
     //---------------- Tests for isValidFilterArg --------------------------------------
     @Test
@@ -88,7 +87,10 @@ public class FilterUtilTest {
 
         //Lower case partial match "GHI JKL"
         assertTrue(FilterUtil.tagContainFilterWord(tags, "gh jk"));
+    }
 
-
+    @Test
+    public void tagContainsFilterWord_failure() {
+        assertFalse(FilterUtil.tagContainFilterWord(tags, "MNO"));
     }
 }

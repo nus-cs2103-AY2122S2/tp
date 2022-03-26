@@ -50,6 +50,46 @@ public class StringUtil {
      *       tagContainsWordIgnoreCase("ABc def", "AB de") == true //a partial word match
      *       tagContainsWordIgnoreCase("AbC def", "AcB") == false //no match
      *       </pre>
+     * @param ownerName cannot be null
+     * @param word cannot be null, cannot be empty
+     */
+    public static boolean nameContainsWordsIgnoreCase(String ownerName, String word) {
+        requireNonNull(ownerName);
+        requireNonNull(word);
+
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Filter word parameter cannot be empty");
+
+        String preppedSentence = ownerName.toLowerCase();
+        String preppedKeyword = preppedWord.toLowerCase();
+
+        if (!preppedSentence.contains(preppedKeyword)) {
+            String[] separateSentence = preppedSentence.split("\\s+");
+            String[] separateKeyword = preppedKeyword.split("\\s+");
+
+            int minLength = Math.min(separateKeyword.length, separateSentence.length);
+
+            for (int i = 0; i < minLength; i++) {
+                if (!separateSentence[i].contains(separateKeyword[i])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the {@code tagString} contains the {@code word}.
+     *   Ignores case, and a partial or full word match is required.
+     *   <br>examples:<pre>
+     *       tagContainsWordIgnoreCase("ABc def", "abc") == true //a full word match
+     *       tagContainsWordIgnoreCase("ABc def", "DEF") == true //a full word match
+     *       tagContainsWordIgnoreCase("ABc def", "Abc Def") == true //a full word match
+     *       tagContainsWordIgnoreCase("ABc def", "AB") == true //a partial word match
+     *       tagContainsWordIgnoreCase("ABc def", "ABc de") == true //a partial word match
+     *       tagContainsWordIgnoreCase("ABc def", "AB de") == true //a partial word match
+     *       tagContainsWordIgnoreCase("AbC def", "AcB") == false //no match
+     *       </pre>
      * @param tagString cannot be null
      * @param word cannot be null, cannot be empty
      */

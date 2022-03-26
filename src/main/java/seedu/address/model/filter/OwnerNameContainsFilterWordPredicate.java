@@ -11,7 +11,7 @@ public class OwnerNameContainsFilterWordPredicate extends FilterByContainsFilter
 
     @Override
     public boolean test(Pet pet) {
-        return StringUtil.containsWordIgnoreCase(pet.getOwnerName().toString(), getFilterWord());
+        return StringUtil.nameContainsWordsIgnoreCase(pet.getOwnerName().toString(), getFilterWord());
     }
 
     @Override

@@ -42,4 +42,11 @@ public class FilterCommand extends Command {
                         FilterUtil.successMessageMatch(predicate)));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FilterCommand // instanceof handles nulls
+                && predicate.equals(((FilterCommand) other).predicate)); // state check
+    }
+
 }
