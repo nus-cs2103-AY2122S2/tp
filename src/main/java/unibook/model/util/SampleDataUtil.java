@@ -88,14 +88,17 @@ public class SampleDataUtil {
 
         //Sample module sets for s1, s2, p1 respectively
         sampleModuleSet1.add(modules[1]);
+        sampleModuleSet1.add(modules[0]);
         sampleModuleSet2.add(modules[0]);
         sampleModuleSet3.add(modules[0]);
 
         //Initialising sample group sets to pass into Student constructor
         Set<Group> sampleGroupSet1 = new HashSet<>();
+        Set<Group> sampleGroupSet2 = new HashSet<>();
 
         //Sample group sets for s1
         sampleGroupSet1.add(groups[0]);
+        sampleGroupSet2.add(groups[0]);
 
         //Initialising students and professor objects
         Student s1 = new Student(new Name("Alex Yeoh"),
@@ -103,19 +106,21 @@ public class SampleDataUtil {
             getTagSet("friend", "roommate"), sampleModuleSet1, sampleGroupSet1);
         Student s2 = new Student(new Name("Bernice Yu"),
             new Phone("99272758"), new Email("berniceyu@example.com"),
-            getTagSet("friend"), sampleModuleSet2, sampleGroupSet1);
+            getTagSet("friend"), sampleModuleSet2, sampleGroupSet2);
         Professor p1 = new Professor(new Name("Charlotte Oliveiro"),
             new Phone("93210283"), new Email("charlotte@example.com"),
             getTagSet("helpful"), new Office("COM1 02-10"),
             sampleModuleSet3);
 
         //Add persons to their module's list of associated people
+        modules[0].addStudent(s1);
         modules[1].addStudent(s1);
         modules[0].addStudent(s2);
         modules[0].addProfessor(p1);
 
         //Add students to their groups
         groups[0].addMember(s1);
+        groups[0].addMember(s2);
 
         //Add people to sample Unibook
         sampleAb.addPerson(s1);
