@@ -45,7 +45,7 @@ public class AddCustomerCommandTest {
         assertEquals(Arrays.asList(validCustomer), modelStub.customersAdded);
     }
 
-    @Testl
+    @Test
     public void execute_duplicateCustomer_throwsCommandException() {
         Customer validCustomer = new CustomerBuilder().build();
         AddCustomerCommand addCustomerCommand = new AddCustomerCommand(validCustomer);
