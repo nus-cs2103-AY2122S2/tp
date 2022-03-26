@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.GradeLabCommand;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.LabMark;
 
 public class GradeLabCommandParserTest {
@@ -46,13 +47,13 @@ public class GradeLabCommandParserTest {
         assertParseFailure(parser, "0 " + VALID_LAB_DESC + VALID_LABMARK_DESC, MESSAGE_INVALID_FORMAT);
 
         // invalid lab
-        assertParseFailure(parser, VALID_INDEX + "l/a " + VALID_LABMARK_DESC, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, VALID_INDEX + "l/-1 " + VALID_LABMARK_DESC, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, VALID_INDEX + "l/0001 " + VALID_LABMARK_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_INDEX + "l/a " + VALID_LABMARK_DESC, Lab.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_INDEX + "l/-1 " + VALID_LABMARK_DESC, Lab.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_INDEX + "l/0001 " + VALID_LABMARK_DESC, Lab.MESSAGE_CONSTRAINTS);
 
         // invalid marks
-        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/-1", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/01", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/-1", LabMark.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/01", LabMark.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -61,6 +62,6 @@ public class GradeLabCommandParserTest {
                 Index.fromOneBased(Integer.parseInt(VALID_INDEX.trim())), Integer.parseInt(VALID_LABNUMBER.trim()),
                 new LabMark(VALID_LABMARK.trim()));
 
-        assertParseSuccess(parser, VALID_INDEX + VALID_LAB_DESC, expectedCommand);
+        assertParseSuccess(parser, VALID_INDEX + VALID_LAB_DESC + VALID_LABMARK_DESC, expectedCommand);
     }
 }

@@ -22,7 +22,7 @@ public class LabMarkTest {
     }
 
     @Test
-    public void isValidLabScore() {
+    public void isValidLabMark() {
         // null lab score
         assertThrows(NullPointerException.class, () -> LabMark.isValidLabMark(null));
 
@@ -44,13 +44,13 @@ public class LabMarkTest {
     @Test
     public void toString_noScoreInitialized_returnsUnknown() {
         LabMark marks = new LabMark();
-        assertEquals(marks, LabMark.MARKS_UNKNOWN);
+        assertEquals(marks.toString(), LabMark.MARKS_UNKNOWN);
     }
 
     @Test
     public void toString_scoreInitialized_returnsScore() {
         LabMark marks = new LabMark("10");
-        assertEquals(marks, String.valueOf(10));
+        assertEquals(marks.toString(), String.valueOf(10));
     }
 
     @Test

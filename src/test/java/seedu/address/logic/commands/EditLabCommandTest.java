@@ -29,7 +29,6 @@ import seedu.address.testutil.StudentBuilder;
 public class EditLabCommandTest {
 
     private static final int VALID_LABNUMBER = 1;
-    private static final LabStatus VALID_SUBMITTED_LABSTATUS = LabStatus.SUBMITTED;
     private static final LabMark VALID_LABMARK = new LabMark("10");
     private static final LabMark VALID_EDITED_LABMARK = new LabMark("20");
 
@@ -43,9 +42,9 @@ public class EditLabCommandTest {
         Student editedStudent = new StudentBuilder(studentToEdit).build();
         LabList listToEdit = editedStudent.getLabs();
         listToEdit.setLab(listToEdit.getLab(VALID_LABNUMBER),
-                new Lab(String.valueOf(VALID_LABNUMBER)).of(VALID_SUBMITTED_LABSTATUS.name()));
+                new Lab(String.valueOf(VALID_LABNUMBER)).of(LabStatus.SUBMITTED));
 
-        EditLabCommand command = new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_SUBMITTED_LABSTATUS);
+        EditLabCommand command = new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED);
 
         String expectedMessage = String.format(EditLabCommand.MESSAGE_EDIT_LAB_SUCCESS, VALID_LABNUMBER,
                 studentToEdit.getName());
@@ -92,8 +91,8 @@ public class EditLabCommandTest {
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedStudent = new StudentBuilder(studentToEdit).build();
         LabList listToEdit = editedStudent.getLabs();
-        listToEdit.setLab(listToEdit.getLab(VALID_LABNUMBER),
-                new Lab(String.valueOf(VALID_LABNUMBER)).of(VALID_LABMARK));
+        Lab labToEdit = listToEdit.getLab(VALID_LABNUMBER);
+        listToEdit.setLab(labToEdit, labToEdit.of(VALID_LABMARK));
 
         EditLabCommand command = new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER,
                 LabStatus.GRADED, VALID_LABMARK);
@@ -112,7 +111,7 @@ public class EditLabCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        EditLabCommand command = new EditLabCommand(outOfBoundIndex, VALID_LABNUMBER, VALID_SUBMITTED_LABSTATUS);
+        EditLabCommand command = new EditLabCommand(outOfBoundIndex, VALID_LABNUMBER, LabStatus.SUBMITTED);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
@@ -125,17 +124,26 @@ public class EditLabCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
 
-        EditLabCommand command = new EditLabCommand(outOfBoundIndex, VALID_LABNUMBER, VALID_SUBMITTED_LABSTATUS);
+        EditLabCommand command = new EditLabCommand(outOfBoundIndex, VALID_LABNUMBER, LabStatus.SUBMITTED);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_invalidCommand_throwsCommandException() {
+    public void execute_invalidCommandSubmitWithMarks_throwsCommandException() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        EditLabCommand command = new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_SUBMITTED_LABSTATUS,
+        EditLabCommand command = new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED,
                 VALID_LABMARK);
+
+        assertCommandFailure(command, model, MESSAGE_INVALID_COMBINATION);
+    }
+
+    @Test
+    public void execute_invalidCommandGradeWithoutMarks_throwsCommandException() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+
+        EditLabCommand command = new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.GRADED);
 
         assertCommandFailure(command, model, MESSAGE_INVALID_COMBINATION);
     }
@@ -169,13 +177,29 @@ public class EditLabCommandTest {
     }
 
     @Test
+    public void isValidCommand() {
+        EditLabCommand stub = new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_LABMARK);
+
+        assertTrue(stub.isValidCommand(new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.GRADED,
+                VALID_LABMARK)));
+        assertTrue(stub.isValidCommand(new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED)));
+
+        // marks not initialized -> returns false
+        assertFalse(stub.isValidCommand(new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.GRADED)));
+
+        // not graded but marks initialized -> returns false
+        assertFalse(stub.isValidCommand(new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED,
+                new LabMark("10"))));
+    }
+
+    @Test
     public void equals() {
         EditLabCommand standardCommand =
-                new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_SUBMITTED_LABSTATUS);
+                new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED);
         EditLabCommand changeIndexCommand =
-                new EditLabCommand(INDEX_SECOND_STUDENT, VALID_LABNUMBER, VALID_SUBMITTED_LABSTATUS);
+                new EditLabCommand(INDEX_SECOND_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED);
         EditLabCommand changeLabCommand =
-                new EditLabCommand(INDEX_FIRST_STUDENT, 2, VALID_SUBMITTED_LABSTATUS);
+                new EditLabCommand(INDEX_FIRST_STUDENT, 2, LabStatus.SUBMITTED);
         EditLabCommand changeStatusCommand =
                 new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.UNSUBMITTED);
         EditLabCommand changeMarksCommand =

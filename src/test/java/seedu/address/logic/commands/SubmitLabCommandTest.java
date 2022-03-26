@@ -20,7 +20,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.LabList;
-import seedu.address.model.lab.LabMark;
 import seedu.address.model.lab.LabStatus;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
@@ -85,23 +84,13 @@ public class SubmitLabCommandTest {
 
     @Test
     public void execute_labStatusNotUnsubmitted_throwsCommandException() {
-        model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased())
-                .getLabs().getLab(VALID_LABNUMBER).editLabStatus(LabStatus.SUBMITTED);
+        LabList listToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()).getLabs();
+        Lab labToEdit = listToEdit.getLab(VALID_LABNUMBER);
+        listToEdit.setLab(labToEdit, labToEdit.editLabStatus(LabStatus.SUBMITTED));
         SubmitLabCommand command = new SubmitLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER);
 
-        assertCommandFailure(command, model, SubmitLabCommand.MESSAGE_LAB_NOT_UNSUBMITTED);
-    }
-
-    @Test
-    public void isValidCommand() {
-        assertTrue((new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED)).isValidCommand());
-
-        // marks initialized -> returns false
-        assertFalse((new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED,
-                new LabMark("10"))).isValidCommand());
-
-        // status not SUBMITTED -> returns false
-        assertFalse((new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.UNSUBMITTED)).isValidCommand());
+        assertCommandFailure(command, model, String.format(EditLabCommand.MESSAGE_CURRENT_LABSTATUS_INVALID,
+                labToEdit.labNumber, LabStatus.SUBMITTED));
     }
 
     @Test

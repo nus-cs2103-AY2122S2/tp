@@ -85,35 +85,15 @@ public class GradeLabCommandTest {
     }
 
     @Test
-    public void execute_invalidMark_throwsCommandException() {
-        String invalidMark = "01";
-        GradeLabCommand command = new GradeLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, new LabMark(invalidMark));
-
-        assertCommandFailure(command, model, LabMark.MESSAGE_CONSTRAINTS);
-    }
-
-    @Test
     public void execute_labStatusAlreadyGraded_throwsCommandException() {
-        Lab labToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased())
-                .getLabs().getLab(VALID_LABNUMBER);
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Lab labToEdit = studentToEdit.getLabs().getLab(VALID_LABNUMBER);
         Lab gradedLab = labToEdit.of(VALID_LABMARK);
         model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()).getLabs().setLab(labToEdit, gradedLab);
         GradeLabCommand command = new GradeLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_LABMARK);
 
-        assertCommandFailure(command, model, GradeLabCommand.MESSAGE_LAB_ALREADY_GRADED);
-    }
-
-    @Test
-    public void isValidCommand() {
-        assertTrue((new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.GRADED,
-                VALID_LABMARK)).isValidCommand());
-
-        // marks not initialized -> returns false
-        assertFalse((new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.GRADED,
-                new LabMark())).isValidCommand());
-
-        // status not GRADED -> returns false
-        assertFalse((new EditLabCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.SUBMITTED)).isValidCommand());
+        assertCommandFailure(command, model, String.format(EditLabCommand.MESSAGE_CURRENT_LABSTATUS_INVALID,
+                gradedLab.labNumber, gradedLab.labStatus));
     }
 
     @Test

@@ -91,19 +91,6 @@ public class EditLabCommandParserTest {
     }
 
     @Test
-    public void parse_invalidStatusMarkCombination_failure() {
-        // lab status "GRADED" but no marks
-        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + PREFIX_LABSTATUS + LABSTATUS_GRADED,
-                EditLabCommand.MESSAGE_INVALID_COMBINATION);
-
-        // lab status not "GRADED" but marks present
-        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + PREFIX_LABSTATUS + LABSTATUS_UNSUBMITTED
-                + VALID_LABMARK_DESC, EditLabCommand.MESSAGE_INVALID_COMBINATION);
-        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + PREFIX_LABSTATUS + LABSTATUS_SUBMITTED
-                + VALID_LABMARK_DESC, EditLabCommand.MESSAGE_INVALID_COMBINATION);
-    }
-
-    @Test
     public void parse_editLabStatus_success() {
         EditLabCommand expectedCommand =
                 new EditLabCommand(Index.fromOneBased(Integer.parseInt(VALID_INDEX.trim())),

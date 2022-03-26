@@ -12,12 +12,9 @@ import java.util.Optional;
 public class LabMark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lab score should be a non-negative integer.";
+            "Lab mark should be a non-negative integer.";
 
-    /*
-     * Lab mark has to be a non-negative integer.
-     */
-    public static final String VALIDATION_REGEX = "[0][[1-9]\\d*]";
+    public static final String VALIDATION_REGEX = "0|([1-9]\\d*)";
 
     /*
      * A placeholder value to represent that the marks have not been initialized.
@@ -65,7 +62,7 @@ public class LabMark {
     @Override
     public String toString() {
         if (marks.isPresent()) {
-            return String.valueOf(marks);
+            return String.valueOf(marks.get());
         }
         return MARKS_UNKNOWN;
     }

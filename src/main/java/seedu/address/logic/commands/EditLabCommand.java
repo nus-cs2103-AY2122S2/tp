@@ -43,6 +43,8 @@ public class EditLabCommand extends Command {
 
     public static final String MESSAGE_IDENTICAL_LAB = "Edited lab would be identical to previous";
     public static final String MESSAGE_INVALID_COMBINATION = "Invalid combination of lab status and marks";
+    public static final String MESSAGE_CURRENT_LABSTATUS_INVALID =
+            "Command cannot be used as current status of Lab %1$s is %2$s.";
 
     protected final Index index;
     protected final int labNumber;
@@ -83,23 +85,34 @@ public class EditLabCommand extends Command {
     /**
      * Returns true if the given EditLabCommand is a valid EditLabCommand.
      */
-    public boolean isValidCommand() {
-        if (newStatus == LabStatus.GRADED && newMark.isEmpty()) {
+    public boolean isValidCommand(EditLabCommand e) {
+        if (e.newStatus == LabStatus.GRADED && e.newMark.isEmpty()) {
             return false;
         }
-        if (newStatus != LabStatus.GRADED && !newMark.isEmpty()) {
+        if (e.newStatus != LabStatus.GRADED && !e.newMark.isEmpty()) {
             return false;
         }
         return true;
     }
 
     /**
-     * This is represented by a method so it can be overridden by subclasses.
+     * Returns true if the Lab in its current state is valid to be edited using the given edit.
+     * More relevant for SubmitLabCommand.
+     */
+    public boolean isLabEditableByCurrentCommand(Lab l) {
+        return true;
+    }
+
+    /**
+     * Message to show when status/mark combination is invalid.
      */
     public String getInvalidCommandMessage() {
         return MESSAGE_INVALID_COMBINATION;
     }
 
+    /**
+     * Message to show when command is executed successfully.
+     */
     public String getExecutionSuccessMessage() {
         return MESSAGE_EDIT_LAB_SUCCESS;
     }
@@ -113,7 +126,7 @@ public class EditLabCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        if (!isValidCommand()) {
+        if (!isValidCommand(this)) {
             throw new CommandException(getInvalidCommandMessage());
         }
 
@@ -122,6 +135,10 @@ public class EditLabCommand extends Command {
 
         try {
             Lab labToEdit = listToEdit.getLab(labNumber);
+            if (!isLabEditableByCurrentCommand(labToEdit)) {
+                throw new CommandException(String.format(MESSAGE_CURRENT_LABSTATUS_INVALID,
+                        labToEdit.labNumber, labToEdit.labStatus));
+            }
             if (newMark.isEmpty()) {
                 listToEdit.setLab(labToEdit, labToEdit.editLabStatus(newStatus));
             } else {
@@ -153,6 +170,9 @@ public class EditLabCommand extends Command {
 
         // state check
         EditLabCommand e = (EditLabCommand) other;
-        return index.equals(e.index) && labNumber == e.labNumber && newStatus.equals(e.newStatus);
+        return index.equals(e.index)
+                && labNumber == e.labNumber
+                && newStatus.equals(e.newStatus)
+                && newMark.equals(e.newMark);
     }
 }

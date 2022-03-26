@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.InvalidLabStatusException;
+import seedu.address.model.util.LabTriplet;
 
 /**
  * Represents a Lab entry.
@@ -106,12 +107,9 @@ public class Lab {
      * Returns a new immutable Lab with the same lab number as {@code this}, a status of "GRADED" and the given marks.
      *
      * @throws DuplicateLabException If the given {@code LabMark} is equal to the existing {@code LabMark}.
-     * @throws InvalidLabStatusException If the existing LabStatus is not equal to LabStatus.GRADED.
      */
-    public Lab editLabMark(LabMark mark) throws DuplicateLabException, InvalidLabStatusException {
-        if (!labStatus.equals(LabStatus.GRADED)) {
-            throw new InvalidLabStatusException();
-        } else if (mark.equals(labMark)) {
+    public Lab editLabMark(LabMark mark) throws DuplicateLabException {
+        if (mark.equals(labMark)) {
             throw new DuplicateLabException();
         }
         return new Lab(String.valueOf(labNumber), mark);
@@ -145,6 +143,18 @@ public class Lab {
     public Lab of(LabMark labMark) {
         requireNonNull(labMark);
         return new Lab(String.valueOf(labNumber), labMark);
+    }
+
+    /**
+     * Returns a new immutable {@code Lab} with the specified {@code LabMark}.
+     * Mainly used in {@link seedu.address.model.util.SampleDataUtil}.
+     */
+    public Lab of(String labStatus, String labMark) {
+        requireAllNonNull(labStatus, labMark);
+        if (labMark.equals(LabTriplet.EMPTY_MARK)) {
+            return (new Lab(String.valueOf(labNumber))).of(labStatus);
+        }
+        return (new Lab(String.valueOf(labNumber))).of(new LabMark(labMark));
     }
 
     /**

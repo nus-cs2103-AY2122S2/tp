@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SubmitLabCommand;
+import seedu.address.model.lab.Lab;
 
 public class SubmitLabCommandParserTest {
 
@@ -38,9 +39,9 @@ public class SubmitLabCommandParserTest {
         assertParseFailure(parser, "0 " + VALID_LAB_DESC, MESSAGE_INVALID_FORMAT);
 
         // invalid lab
-        assertParseFailure(parser, VALID_INDEX + "l/a ", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, VALID_INDEX + "l/-1 ", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, VALID_INDEX + "l/0001 ", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_INDEX + "l/a ", Lab.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_INDEX + "l/-1 ", Lab.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_INDEX + "l/0001 ", Lab.MESSAGE_CONSTRAINTS);
 
         // invalid index and lab
         assertParseFailure(parser, "-1 " + "l/a ", MESSAGE_INVALID_FORMAT);
