@@ -13,6 +13,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindLessonCommand;
 import seedu.address.logic.commands.FindStudentCommand;
@@ -52,8 +53,6 @@ public class TeachWhatParser {
         switch (commandWord) {
 
         case AddStudentCommand.COMMAND_WORD:
-            // Fallthrough
-        case AddStudentCommand.SHORTENED_COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
         case DeleteStudentCommand.COMMAND_WORD:
@@ -70,6 +69,9 @@ public class TeachWhatParser {
             // Fallthrough
         case DeleteLessonCommand.SHORTENED_COMMAND_WORD:
             return new DeleteLessonCommandParser().parse(arguments);
+
+        case EditStudentCommand.COMMAND_WORD:
+            return new EditStudentCommandParser().parse(arguments);
 
         case FindStudentCommand.COMMAND_WORD:
             // Fallthrough
