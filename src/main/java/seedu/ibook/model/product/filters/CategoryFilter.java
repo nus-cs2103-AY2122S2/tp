@@ -30,7 +30,7 @@ public class CategoryFilter extends AttributeFilter {
 
     @Override
     public boolean test(Product otherProduct) {
-        return this.category.equals(otherProduct.getCategory());
+        return otherProduct.getCategory().contains(category);
     }
 
     @Override

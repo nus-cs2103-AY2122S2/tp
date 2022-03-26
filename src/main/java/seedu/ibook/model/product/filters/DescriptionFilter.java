@@ -30,7 +30,7 @@ public class DescriptionFilter extends AttributeFilter {
 
     @Override
     public boolean test(Product otherProduct) {
-        return this.description.equals(otherProduct.getDescription());
+        return otherProduct.getDescription().contains(description);
     }
 
     @Override

@@ -50,6 +50,12 @@ public class Category {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if the category contains the keyword.
+     */
+    public boolean contains(Category keyword) {
+        return fullCategoryName.contains(keyword.toString());
+    }
 
     @Override
     public String toString() {

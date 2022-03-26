@@ -31,7 +31,7 @@ public class NameFilter extends AttributeFilter {
 
     @Override
     public boolean test(Product otherProduct) {
-        return this.name.equals(otherProduct.getName());
+        return otherProduct.getName().contains(name);
     }
 
     @Override
