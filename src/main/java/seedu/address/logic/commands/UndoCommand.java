@@ -16,14 +16,17 @@ public class UndoCommand extends Command {
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_NO_UNDO = "No commands to undo!";
 
+    /**
+     * Constructor for the UndoCommand
+     */
     public UndoCommand() {}
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         try {
-            ReadOnlyAddressBook currentAddressBook = model.undo();
-            model.setAddressBook(new AddressBook(currentAddressBook));
+            ReadOnlyAddressBook currentAddressBook = new AddressBook(model.undo());
+            model.setAddressBook(currentAddressBook);
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (Exception e) {
             throw new CommandException(MESSAGE_NO_UNDO);

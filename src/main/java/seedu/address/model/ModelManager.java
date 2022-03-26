@@ -112,7 +112,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPet);
         addressBook.setPet(target, editedPet);
         this.versionedAddressBook.commit(this.getAddressBook());
-        updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
     }
 
     /** Method that sorts the pet list via the sortPets() command in addressBook. **/

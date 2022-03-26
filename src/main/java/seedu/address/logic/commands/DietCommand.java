@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.util.List;
 
@@ -58,6 +59,7 @@ public class DietCommand extends Command {
                 petToEdit.getAttendanceHashMap());
 
         model.setPet(petToEdit, editedPet);
+        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
         return new CommandResult(generateSuccessMessage(editedPet));
     }
