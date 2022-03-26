@@ -39,8 +39,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList().sorted());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList().sorted());
     }
 
     public ModelManager() {
