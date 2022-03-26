@@ -222,7 +222,7 @@ Shows a list of all modules.
 
 Format: `list module`
 
-#### Listing all students: `list class`
+#### Listing all class groups: `list class`
 
 Shows a list of all class groups.
 
