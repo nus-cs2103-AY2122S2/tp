@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.ConflictingLessonsPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 
@@ -70,8 +71,12 @@ public class AddLessonCommand extends Command {
         try {
             model.addLesson(toAdd);
         } catch (ConflictsWithLessonsException e) {
-            throw new CommandException(e.getMessage());
+            model.updateFilteredLessonList(new ConflictingLessonsPredicate(toAdd));
+
+            return new CommandResult(ConflictsWithLessonsException.ERROR_MESSAGE,
+                    true, InfoPanelTypes.LESSON, ViewTab.LESSON);
         }
+
         model.setSelectedLesson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
