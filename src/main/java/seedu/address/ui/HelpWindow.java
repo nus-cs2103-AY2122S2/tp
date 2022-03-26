@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.application.HostServices;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
