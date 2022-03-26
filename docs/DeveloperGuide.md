@@ -463,6 +463,27 @@ As the user will not be able to remember the link to our User Guide, we hyperlin
 The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
 <img src="images/HelpWindowActivityDiagram.png" width="250" />
 
+### Focus Feature
+
+#### What is this feature about?
+The 'focus' feature utilises the different panels in our application. It will bring up the intended Candidate's information, 
+such as course, email into the middle panel for the user to see. 
+
+#### How is this feature implemented?
+This feature is implemented with the similar implementation of `CandidateListCard`, as we utilise the JavaFX codes to 
+create the `view`. We also introduced new features such as `ImageView`, where the extra information will consist of a display
+picture for the Candidate (WIP). 
+
+#### Why is the feature implemented as such?
+We created a new return value in `CommandResult` to get the `Index` of the intended Candidate. We implemented it this way 
+to not alter the existing database, as the intended purpose of this feature was not to edit the candidate's information. 
+We considered creating another database for this feature, by fetching more details from the secondary database, but we considered 
+that this will be a heavy headway for our application. 
+
+#### UML Diagram
+The following activity diagram summarizes what happens when a user executes a `focus` command.<br>
+<img src="images/FocusCommandDiagram.png" width="250" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
