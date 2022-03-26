@@ -172,7 +172,8 @@ The delete command now has to accept multiple indexes as a valid input. The Pars
 behaviour by extending the validity checks on the entire string of input.
 
 The workaround is then to delete each person from the largest to the smallest index. The success message displays the details
-of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion.
+of those deleted, so in order to show them in the same order as the input, all the details are first extracted out before deletion.<br>
+
 **For example:** <br>
 Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
@@ -232,13 +233,13 @@ successfully.
 
 ### Edit Feature
 
-### Original implementation
+#### Original implementation
 The edit command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
 `EditCommandParser` parses the information input and then creates an `EditPersonDescriptor` where the unchanged fields
 are copied over from the existing person and the fields to be overwritten are changed. The Find command then takes in
 the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
 
-### Current Implementation
+#### Current Implementation
 The edit command has now been upgraded to support the functionality for overwriting multiple tag lists.
 
 
@@ -246,13 +247,13 @@ The edit command has now been upgraded to support the functionality for overwrit
 
 ### Find/Find -s/Find -e feature
 
-### Original implementation
+#### Original implementation
 The existing Find feature in ab3 only allowed contacts to be searched for by name. We added additional functionalities
 to allow for greater flexibility when filtering large contacts lists according to specific predicates. The `Find` and
 `Find -s` command now allow the user to search for specific contact details (name, phone number, email and address) or
 specific tags.
 
-### Current Implementation
+#### Current Implementation
 The `Find`command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches 
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).

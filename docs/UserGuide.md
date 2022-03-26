@@ -6,7 +6,7 @@ title: User Guide
 NUSocials is a **desktop app for university students to maintain a professional contact list, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,33 +24,35 @@ NUSocials is a **desktop app for university students to maintain a professional 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`** : Lists all contacts.
+    * **`list`**<br>Lists all contacts.
 
-    * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01` : Adds a contact named `fred` to the Address Book.
+    * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01`<br>Adds a contact named `fred` to the Address Book.
 
-    * **`tag`** `2 edu/computer science m/CS2040S` : Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
+    * **`tag`** `2 edu/computer science m/CS2040S`<br>Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
 
-    * **`removetag`**`2 m/cs2100 i/Shopee` : Removes the specified tags of the 2nd contact shown in the current list.
-
-    * **`cancelevent`**`1`: Deletes the 1st event shown in the current event list.
-   
-    * **`cancelevent`**`1 4`: Deletes the 1st and fourth event shown in the current event list.
-
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-    * **`delete`**`3 5` : Deletes the 3rd and 5th contact shown in the current list.
-
-    * **`find`**`n/fred` : Finds persons that match the name 'fred'.
-
-    * **`find -s`**`n/fred m/cs2040s edu/computer science` : Finds persons that match the name 'fred' AND takes the module 'cs2040s' AND is studying 'computer science'.
-
-    * **`find -e`**`name/lunch info/lunch at UTown dt/2022-05-05 12:00` : Finds events that match the name 'lunch' OR the info 'lunch at UTown' OR the date and time '2022-05-05 12:00'
-
+    * **`removetag`**`2 m/cs2100 i/Shopee`<br>Removes the specified tags of the 2nd contact shown in the current list.
+    
+    * **`edit`**`2 n/Alice edu/computer engineering m/cs2100`<br>Edits the name to `Alice`, overwrites both the education and module tag to `computer engineering` and `cs2100` respectively.  
+    
     * **`event`** `name/Lunch appointment info/Having lunch at Hai Di Lao d/2023-11-15 t/23:19`
+      
+    * **`cancelevent`**`1`<br>Deletes the 1st event shown in the current event list.
 
-    * **`clear`** : Deletes all contacts.
+    * **`cancelevent`**`1 4`<br>Deletes the 1st and fourth event shown in the current event list.
 
-    * **`exit`** : Exits the app.
+    * **`delete`**`3`<br>Deletes the 3rd contact shown in the current list.
+
+    * **`delete`**`3 5`<br>Deletes the 3rd and 5th contact shown in the current list.
+
+    * **`find`**`n/fred`<br>Finds persons that match the name 'fred'.
+
+    * **`find -s`**`n/fred m/cs2040s edu/computer science`<br>Finds persons that match the name 'fred' AND takes the module 'cs2040s' AND is studying 'computer science'.
+
+    * **`find -e`**`name/lunch info/lunch at UTown dt/2022-05-05 12:00`<br>Finds events that match the name 'lunch' OR the info 'lunch at UTown' OR the date and time '2022-05-05 12:00'
+
+    * **`clear`**<br>Deletes all contacts.
+
+    * **`exit`**<br>Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -89,6 +91,15 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Listing all persons : `list`
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+* All existing persons are automatically rendered when the application is launched
+* The different tags are listed as follows: yellow for education, blue for modules, orange for CCAs and red for internships
+* Personal details are listed in the following order: Phone number, Address, Email
+
 ### Adding a person: `add`
 Adds a person to the address book.
 
@@ -110,15 +121,19 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 Examples:
 * `tag 1 i/abc-company m/CS2100 m/CS2030S` Tags the internship company and 2 modules to the 1st person.
 
-### Listing all persons : `list`
-Shows a list of all persons in the address book.
+### Removing specific tags from person: `removetag`
+Removes the specific tags of an existing contact.
 
-Format: `list`
+Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
-* All existing persons are automatically rendered when the application is launched
-* The different tags are listed as follows: yellow for education, blue for modules, orange for CCAs and red for internships
-* Personal details are listed in the following order: Phone number, Address, Email
+* Removes the tags from the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the prefixes must be provided.
+* If a prefix is used, the input after must not be blank.
+* All arguments for tags provided must be an exact match to existing tags.
+* Input tag values will be removed from the existing tags.
 
+Examples:
+* `removetag 1 i/abc-company m/CS2100 m/CS2030S` Removes the internship company and 2 modules tags from the 1st person.
 
 ### Editing a person : `edit`
 
@@ -137,6 +152,71 @@ Examples:
 * `edit 2 m/CS2040s` Clears all module tags of the 2nd person and tag `CS2040s` as a module.
 * `edit 2 edu/ m/` Clears all education and module tags of the 2nd person.
 
+### Adding an event: `event`
+Adds an event into the address book.
+
+Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
+
+* Tags the participating persons to the events based on the specified `INDEX…​`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* All fields must be provided.
+* Argument provided for `DATE` has to be in the format of `yyyy-MM-dd`.
+* Argument provided for `TIME` has to be in the format of `HH:mm`.
+* Arguments for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
+* `EVENT NAME` has a limit of 100 characters.
+* `EVENT DETAILS` has a limit of 300 characters.
+
+Examples:
+* `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15` Creates the Event and adds into the address book.
+
+### Cancelling an event : `cancelevent`
+
+Deletes the specified event from the address book.
+
+Format: `cancelevent INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `cancelevent 2` deletes the 2nd event in the address book.
+
+Alternate Format: `cancelevent INDEX…​`
+
+* Deletes multiple events at the specified `INDEX`'s.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Each index **must be separated by a whitespace**
+
+Examples:
+* `list` followed by `cancelevent 2 5 7` deletes the 2nd, 5th and 7th events in the address book.
+
+
+### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+Alternate Format: `delete INDEX…​`
+
+* Deletes multiple persons at the specified `INDEX`'s.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Each index **must be separated by a whitespace**
+
+Examples:
+* `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the address book.
+
+
 ### Locating persons: `find`
 
 Finds persons that match any of the given fields and tags.
@@ -147,8 +227,10 @@ Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…�
 * At least one of the optional fields must be provided.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one of the field will be returned (i.e. `OR` search).
-* Persons matching at least one tag of a particular type will be returned. For example, 'find m/cs2030s m/cs2040s' may return a person tagged with 'cs2030s' or 'cs2040s'
-  e.g. `n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
+* Persons matching at least one tag of a particular type of tag will be returned. <br>
+  For example:<br>
+  `find m/cs2030s m/cs2040s` returns anyone tagged with either `cs2030s` or `cs2040s` or both <br>
+  `find n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 * All arguments for tags provided must be an exact match to existing tags.
 
 Examples:
@@ -186,83 +268,6 @@ Format: `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICPA
 
 Examples:
 * `find -e name/lunch part/alex` returns all lunch events and events involving Alex<br>
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-Alternate Format: `delete INDEX…​`
-
-* Deletes multiple persons at the specified `INDEX`'s.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Each index **must be separated by a whitespace**
-
-Examples:
-* `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the address book.
-
-### Removing specific tags from person: `removetag`
-Removes the specific tags of an existing contact.
-
-Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
-
-* Removes the tags from the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the prefixes must be provided.
-* If a prefix is used, the input after must not be blank.
-* All arguments for tags provided must be an exact match to existing tags.
-* Input tag values will be removed from the existing tags.
-
-Examples:
-* `removetag 1 i/abc-company m/CS2100 m/CS2030S` Removes the internship company and 2 modules tags from the 1st person.
-
-### Adding an event: `event`
-Adds an event into the address book.
-
-Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
-
-* Tags the participating persons to the events based on the specified `INDEX…​`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* All fields must be provided.
-* Argument provided for `DATE` has to be in the format of `yyyy-MM-dd`.
-* Argument provided for `TIME` has to be in the format of `HH:mm`.
-* Arguments for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
-* `EVENT NAME` has a limit of 100 characters.
-* `EVENT DETAILS` has a limit of 300 characters.
-
-Examples:
-* `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15` Creates the Event and adds into the address book.
-
-### Cancelling an event : `cancelevent`
-
-Deletes the specified event from the address book.
-
-Format: `cancelevent INDEX`
-
-* Deletes the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed event list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `cancelevent 2` deletes the 2nd event in the address book.
-
-Alternate Format: `cancelevent INDEX…​`
-
-* Deletes multiple events at the specified `INDEX`'s.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Each index **must be separated by a whitespace**
-
-Examples:
-* `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the address book.
 
 ### Clearing all entries : `clear`
 
