@@ -45,7 +45,7 @@ Add a pet to the database.
 
 Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]`
 * Each particular field is compulsory except for `TAG`.
-* `TAG` is an optional field.
+* `TAG` is an optional field which could be used to indicate the breed of a pet.
 * Each particular entered must strictly correspond to its legal prefix.`e.g: p/Address is considered illegal`.
 * Phone number **must only contain numbers**.
 
@@ -71,7 +71,7 @@ Format:`list`
 
 ### Sort pets: `sort`
 
-Retrieves and return a sorted list of pets. 
+Retrieves and return a sorted list of pets. Users can choose to either sort alphabetically by owner name or pet name.
 
 Format: `sort SORT_BY`
 * Currently, users can sort the address book in 3 ways, pet name, owners and appointment date.
@@ -91,11 +91,12 @@ Format: `find n/NAME_OF_PET [Keywords]`
 * The name of pet is case-insensitive e.g: `find Mojo` will match `find mojo`.
 * Only the name is searched.
 * Search returns partial name matches e.g.: `find mo` will return Mojo as a result.
+* Can search for multiple pet names.
 
 Examples:
 * `find Peepee Waffle Bagel`
 
-### Adding pets' dietary requirements: `diet` ###
+### Add pets' dietary requirements: `diet` ###
 
 Given a pet ID, add any dietary requirement the pet may have to database.
 
@@ -103,15 +104,16 @@ Format: `diet INDEX d/remark`
 
 * Adds `d/remark` as a dietary requirement for pet with `INDEX`.
 * ID is a unique identifier that each pet has in the database.
+* Entering `diet INDEX d/` will remove the dietary requirements of pet at `INDEX`.
 
 Examples:
 `diet 12 Only feed dry kibble` will store a dietary remark for pet 12 saying "Only feed dry kibble".
 
-### Adding / Clearing pets' appointment details: `app` ###
+### Add / Clear pets' appointment details: `app` ###
 
 Given a pet ID, add or clear a pet appointment details in the database.
 
-**Add Appointment** 
+**Add Appointment**
 
 Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 
@@ -127,7 +129,7 @@ Examples:
 `app 1 dt/04-03-2022 09:30 at/ NUS Vet Clinic` will store the appointment details for pet 1 as
 `Mar-04-2022 9:30 AM at NUS Vet Clinic`.
 
-**Clear Appointment** 
+**Clear Appointment**
 
 Format: `app INDEX clear`
 
@@ -140,9 +142,9 @@ Format: `app INDEX clear`
 Examples:
 `app 1 clear` will clear the appointment details for pet 1 and set it to be an empty field.
 
-### Marking a pet as present: `present`
+### Mark a pet as present: `present`
 
-Mark a pet as present on a given date, with a pick-up time and drop-off time (if any).
+Mark a pet as present on a given date, with school bus pick-up time and drop-off time (if any).
 
 Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 
@@ -154,7 +156,7 @@ Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 Examples:
 * `present 1 date/16-03-2022 pu/08:00 do/19:00` indicates that pet 1 is present for daycare on `16-03-2022`, requires to be picked up at `08:00` and dropped off at `19:00`
 
-### Marking a pet as absent: `absent`
+### Mark a pet as absent: `absent`
 
 Mark a pet as absent on a given date.
 
@@ -168,18 +170,35 @@ Format: `absent INDEX date/dd-MM-yyyy`
 Examples:
 * `absent 1 date/17-03-2022` indicates that pet 1 is absent for daycare on `17-03-2022`
 
-### Undoing changes : `undo`
+### Undo changes : `undo`
 
 Undoes previous commands that the user has keyed in. 
 
 Format: `undo`
 * Users should not be able to undo Clear, Exit, Find, Help and List Commands. 
 
-
 Examples:
 * If the user chooses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted. 
 
-### Deleting a pet: `delete`
+### Filter pet list: `filter`
+
+Filters the pet address book by a specified field.
+
+Format: `filter FIELD/FilterWord`
+
+* Can only filter by date specified, owner's name and tags of pets (choose one out of three, else error will be shown)
+* Specified `FIELD/` only consists of: `byDate/`, `byApp/`, `byTags/` and `byOwner/`.
+* `FilterWord` if user uses `byDate/` or `byApp/` has to be in `dd-MM-yyyy` format, or `today`. This filters the address book by showing pets present on the given date or pets with appointments on the given date.
+* `FilterWord` if user uses `byOwner/` has to be a single word. Usage is similar to `find` except filter allows users to filter out multiple pets with same owner.
+* `FilterWord` if user uses `byTags/` can be any length. Show pets that are of the same breed or tag similar to `FilterWord` given.
+  * Able to filter with a partial match in `FilterWord`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`
+
+Examples:
+* `filter byDate/22-03-2022` show pets present on 22 March 2022.
+* `filter byOwner/Lily` show pets owned by any all Lily(s).
+* `filter byTags/Retriever` sho pets with `Retriever` in their tags.
+
+### Delete a pet: `delete`
 
 Deletes the specified pet from the address book.
 
@@ -223,6 +242,7 @@ Format: `help`
 | **Absent**  | `absent INDEX date/dd-MM-yyyy` <br> e.g., `absent 1 date/17-03-2022` (indicates that pet 1 was absent on 17 March 2022)                                                                                                         |
 | **App**     | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]` e.g., `app 1 date/04-03-2022 09:30 at/ NUS Vet Clinic` <br> `app INDEX clear` e.g., `app 1 clear`                                                                             |
 | **Sort**    | `sort SORT_BY` <br> e.g., `sort name`                                                                                                                                                                                           |
+| **Filter**  | `filter FIELD/FIlterWord` <br> e.g. `filter byDate/22-03-2022` (returns information of all pets present on 22 March 2022)                                                                                                       |
 | **List**    | `list`                                                                                                                                                                                                                          |
 | **Clear**   | `clear`                                                                                                                                                                                                                         |
 | **Exit**    | `exit`                                                                                                                                                                                                                          |
