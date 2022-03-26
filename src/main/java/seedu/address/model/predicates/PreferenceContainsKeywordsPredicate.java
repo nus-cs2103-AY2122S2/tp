@@ -21,10 +21,10 @@ public class PreferenceContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        if (person.getPreference().isEmpty()) {
+        String preference = person.preferenceToPlainString();
+        if (preference.isEmpty()) {
             return false;
         } else {
-            String preference = person.getPreference().get().toPlainString();
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(preference, keyword));
         }
