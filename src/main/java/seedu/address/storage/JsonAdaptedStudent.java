@@ -37,6 +37,7 @@ class JsonAdaptedStudent {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedLabNumber> labNumbers = new ArrayList<>();
     private final List<JsonAdaptedLabStatus> labStatuses = new ArrayList<>();
+    private final List<JsonAdaptedLabMark> labMarks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given student details.
@@ -46,7 +47,8 @@ class JsonAdaptedStudent {
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("github") String githubUsername,
             @JsonProperty("telegram") String telegram, @JsonProperty("studentId") String studentId,
             @JsonProperty("labNames") List<JsonAdaptedLabNumber> labNumbers,
-            @JsonProperty("labStatuses") List<JsonAdaptedLabStatus> labStatuses) {
+            @JsonProperty("labStatuses") List<JsonAdaptedLabStatus> labStatuses,
+            @JsonProperty("labMarks") List<JsonAdaptedLabMark> labMarks) {
         this.name = name;
         this.email = email;
         this.githubUsername = githubUsername;
@@ -63,6 +65,10 @@ class JsonAdaptedStudent {
 
         if (labStatuses != null) {
             this.labStatuses.addAll(labStatuses);
+        }
+
+        if (labMarks != null) {
+            this.labMarks.addAll(labMarks);
         }
     }
 
@@ -83,6 +89,9 @@ class JsonAdaptedStudent {
                 .collect(Collectors.toList()));
         labStatuses.addAll(source.getLabs().asUnmodifiableObservableList().stream()
                 .map(JsonAdaptedLabStatus::new)
+                .collect(Collectors.toList()));
+        labMarks.addAll(source.getLabs().asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedLabMark::new)
                 .collect(Collectors.toList()));
     }
 
@@ -119,9 +128,10 @@ class JsonAdaptedStudent {
         for (int i = 0; i < labNumbers.size(); i++) {
             // Incase of wrong lab status format we will just add the lab with LabStatus.UNSUBMITTED
             try {
-                personLabs.add(labNumbers.get(i).toModelType().of(labStatuses.get(i).getLabStatus()));
+                personLabs.add(labNumbers.get(i).toModelType().of(
+                        labStatuses.get(i).getLabStatus(), labMarks.get(i).getLabMark()));
             } catch (IllegalArgumentException e) {
-                logger.info("Illegal lab status found when converting labs " + e);
+                logger.info("Illegal lab attributes found when converting labs " + e);
                 personLabs.add(labNumbers.get(i).toModelType());
             }
         }

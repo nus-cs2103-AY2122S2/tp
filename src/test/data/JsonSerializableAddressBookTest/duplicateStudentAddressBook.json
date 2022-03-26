@@ -7,15 +7,17 @@
       "telegram": "alice_P",
       "studentId": "A0123457C",
       "tagged": [ "friends" ],
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
-    }, {
+      "labMarks": [ "Unknown" ]
+  }, {
       "name": "Alice Pauline",
       "email": "pauline@example.com",
       "github": "aliceP",
       "telegram": "alice_P",
       "studentId": "A0123457C",
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
+      "labMarks": [ "Unknown" ]
     } ]
 }

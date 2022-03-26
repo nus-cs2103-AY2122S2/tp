@@ -6,7 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.InvalidLabStatusException;
-import seedu.address.model.util.LabTriplet;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Represents a Lab entry.
@@ -147,11 +147,11 @@ public class Lab {
 
     /**
      * Returns a new immutable {@code Lab} with the specified {@code LabMark}.
-     * Mainly used in {@link seedu.address.model.util.SampleDataUtil}.
+     * Mainly used in {@link SampleDataUtil} and JsonAdaptedStudent.
      */
     public Lab of(String labStatus, String labMark) {
         requireAllNonNull(labStatus, labMark);
-        if (labMark.equals(LabTriplet.EMPTY_MARK)) {
+        if (labMark.equals(LabMark.MARKS_UNKNOWN)) {
             return (new Lab(String.valueOf(labNumber))).of(labStatus);
         }
         return (new Lab(String.valueOf(labNumber))).of(new LabMark(labMark));

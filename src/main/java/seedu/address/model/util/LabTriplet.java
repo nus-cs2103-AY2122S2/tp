@@ -1,7 +1,8 @@
 package seedu.address.model.util;
 
+import seedu.address.model.lab.LabMark;
+
 public class LabTriplet {
-    public static final String EMPTY_MARK = "Unknown";
 
     private String labNumber;
     private String labStatus;
@@ -23,7 +24,7 @@ public class LabTriplet {
     public LabTriplet(String number, String status) {
         labNumber = number;
         labStatus = status;
-        labMark = EMPTY_MARK;
+        labMark = LabMark.MARKS_UNKNOWN;
     }
 
     public String getLabNumber() {

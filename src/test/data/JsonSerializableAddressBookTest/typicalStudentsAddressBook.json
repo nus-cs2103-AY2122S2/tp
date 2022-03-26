@@ -8,17 +8,19 @@
       "telegram": "alice_P",
       "studentId": "A0123456B",
       "tagged": [ "friends" ],
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
-    }, {
+      "labMarks": [ "Unknown" ]
+  }, {
       "name": "Benson Meier",
       "email": "johnd@example.com",
       "github": "bensonM",
       "telegram": "benson_M",
       "studentId": "A0123457C",
       "tagged": [ "owesMoney", "friends" ],
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
+      "labMarks": [ "Unknown" ]
     }, {
       "name": "Carl Kurz",
       "email": "heinz@example.com",
@@ -26,8 +28,9 @@
       "telegram": "carl_K",
       "studentId": "A0123458D",
       "tagged": [],
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
+      "labMarks": [ "Unknown" ]
     }, {
       "name": "Daniel Meier",
       "email": "cornelia@example.com",
@@ -35,8 +38,9 @@
       "telegram": "daniel_M",
       "studentId": "A0123459E",
       "tagged": [ "friends" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
+      "labNumbers": [ "1" ],
+     "labStatuses": [ "UNSUBMITTED" ],
+      "labMarks": [ "Unknown" ]
     }, {
       "name": "Elle Meyer",
       "email": "werner@example.com",
@@ -44,8 +48,9 @@
       "telegram": "elle_M",
       "studentId": "A0123411A",
       "tagged": [],
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
+      "labMarks": [ "Unknown" ]
     }, {
       "name": "Fiona Kunz",
       "email": "lydia@example.com",
@@ -53,8 +58,9 @@
       "telegram": "fiona_K",
       "studentId": "A0123412B",
       "tagged": [],
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
+      "labMarks": [ "Unknown" ]
     }, {
       "name": "George Best",
       "email": "anna@example.com",
@@ -62,7 +68,8 @@
       "telegram": "george_B",
       "studentId": "A0123413C",
       "tagged": [],
+      "labNumbers": [ "1" ],
       "labStatuses": [ "UNSUBMITTED" ],
-      "labNumbers": [ "1" ]
+      "labMarks": [ "Unknown" ]
     } ]
 }
