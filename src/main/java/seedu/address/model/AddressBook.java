@@ -143,6 +143,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
      */
     public void setGroup(Group target, Group editedGroup) {
+        requireNonNull(editedGroup);
         groups.setGroup(target, editedGroup);
     }
 

@@ -56,11 +56,28 @@ public class DeleteTaskCommand extends Command {
             if (!model.hasTask(task, group)) {
                 throw new CommandException(MESSAGE_NON_EXISTENT_TASK);
             }
-            model.deleteTask(task, group);
+
+            Group groupToDeleteTask = group;
+            Group groupDeletedTask = createDeletedTaskGroup(groupToDeleteTask, task, model);
+
+            model.setGroup(group, groupDeletedTask);
+
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, task));
         } else {
             throw new CommandException(MESSAGE_NON_EXISTENT_GROUP);
         }
+    }
+
+    /**
+     * Creates and returns a {@code Group} with the details of {@code groupToDeleteTask}
+     */
+    private static Group createDeletedTaskGroup(Group groupToDeleteTask, Task taskToDelete, Model model) {
+        assert groupToDeleteTask != null;
+
+        model.deleteTask(taskToDelete, groupToDeleteTask);
+        Group groupDeletedTask = model.getGroup(groupToDeleteTask);
+
+        return groupDeletedTask;
     }
 
     @Override

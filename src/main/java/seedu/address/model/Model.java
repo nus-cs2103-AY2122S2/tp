@@ -135,6 +135,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given group {@code target} with {@code editedGroup}.
+     * {@code target} must exist in the address book.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
+     */
+    void setGroup(Group target, Group editedGroup);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -167,6 +174,12 @@ public interface Model {
      * {@code Group} must already exist in the address book.
      */
     void deassignPerson(Person person, Group group);
+
+    /**
+     * Gets a group from the filtered group list.
+     * {@code Group} must already exist in the address book.
+     */
+    public Group getGroup(Group groupToGet);
 
     /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.

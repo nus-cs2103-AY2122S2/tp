@@ -17,7 +17,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeassignCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
@@ -101,6 +103,26 @@ public class AddressBookParserTest {
         Group group = new GroupBuilder().build();
         ViewTaskCommand command = (ViewTaskCommand) parser.parseCommand(TaskUtil.getViewTaskCommand(group));
         assertEquals(new ViewTaskCommand(group), command);
+    }
+
+    @Test
+    public void parseCommand_assign() throws Exception {
+        Group group = new GroupBuilder().build();
+        AssignCommand command = (AssignCommand) parser.parseCommand(
+            AssignCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                    + " " + GroupUtil.getGroupDetails(group)
+        );
+        assertEquals(new AssignCommand(INDEX_FIRST_PERSON, group), command);
+    }
+
+    @Test
+    public void parseCommand_deassign() throws Exception {
+        Group group = new GroupBuilder().build();
+        DeassignCommand command = (DeassignCommand) parser.parseCommand(
+                DeassignCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + GroupUtil.getGroupDetails(group)
+        );
+        assertEquals(new DeassignCommand(INDEX_FIRST_PERSON, group), command);
     }
 
     @Test
