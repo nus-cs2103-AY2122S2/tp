@@ -72,11 +72,11 @@ public class SkillTest {
     }
 
     @Test void isValidSkillProficiency() {
-        assertTrue(Skill.isValidSkillProficiency(100));
-        assertTrue(Skill.isValidSkillProficiency(10));
-        assertTrue(Skill.isValidSkillProficiency(0));
-        assertFalse(Skill.isValidSkillProficiency(101));
-        assertFalse(Skill.isValidSkillProficiency(-1));
+        assertTrue(Skill.isValidSkillProficiencyRange(100));
+        assertTrue(Skill.isValidSkillProficiencyRange(10));
+        assertTrue(Skill.isValidSkillProficiencyRange(0));
+        assertFalse(Skill.isValidSkillProficiencyRange(101));
+        assertFalse(Skill.isValidSkillProficiencyRange(-1));
     }
 
 }

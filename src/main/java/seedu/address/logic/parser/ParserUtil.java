@@ -121,13 +121,19 @@ public class ParserUtil {
     public static Skill parseSkill(String skill) throws ParseException {
         requireNonNull(skill);
         String[] trimmedSkill = skill.trim().split("_");
+        if (trimmedSkill.length != 2) {
+            throw new ParseException(Skill.SKILL_INPUT_CONSTRAINTS);
+        }
         String skillName = trimmedSkill[0];
+        if (!Skill.isValidSkillProficiencyInteger(trimmedSkill[1])) {
+            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_INTEGER);
+        }
         int skillProficiency = Integer.parseInt(trimmedSkill[1]);
         if (!Skill.isValidSkillName(skillName)) {
             throw new ParseException(Skill.NAME_CONSTRAINTS);
         }
-        if (!Skill.isValidSkillProficiency(skillProficiency)) {
-            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS);
+        if (!Skill.isValidSkillProficiencyRange(skillProficiency)) {
+            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_RANGE);
         }
         return new Skill(skillName, skillProficiency);
     }

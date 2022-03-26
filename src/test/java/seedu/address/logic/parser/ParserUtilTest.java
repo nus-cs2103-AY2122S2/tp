@@ -26,6 +26,8 @@ public class ParserUtilTest {
     private static final String INVALID_USERNAME = "rach_el";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TEAM = "#friend";
+    private static final String INVALID_SKILL_PROFICIENCY_TYPE = "good";
+    private static final String INVALID_SKILL_PROFICIENCY_RANGE = "500";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +35,10 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TEAM_1 = "friend";
     private static final String VALID_TEAM_2 = "neighbour";
+    private static final String VALID_SKILL = "Python";
+    private static final String VALID_SKILL_PREFIX = "_";
+    private static final String VALID_SKILL_PROFICIENCY = "5";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +198,21 @@ public class ParserUtilTest {
         Set<Team> expectedTeamSet = new HashSet<Team>(Arrays.asList(new Team(VALID_TEAM_1), new Team(VALID_TEAM_2)));
 
         assertEquals(expectedTeamSet, actualTeamSet);
+    }
+
+    @Test
+    public void parseSkill_throwsParseException() throws Exception {
+        String invalidProficiencyRange = VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_RANGE;
+        String invalidProficiencyType = VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_TYPE;
+        String invalidSkillInput1 = VALID_SKILL + VALID_SKILL_PREFIX + VALID_SKILL_PROFICIENCY
+                + VALID_SKILL_PREFIX + VALID_SKILL;
+        String invalidSkillInput2 = VALID_SKILL + VALID_SKILL_PREFIX;
+        String invalidSkillInput3 = VALID_SKILL;
+
+        assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidProficiencyRange));
+        assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidProficiencyType));
+        assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput1));
+        assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput2));
+        assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput3));
     }
 }
