@@ -9,6 +9,10 @@ import seedu.address.model.student.Student;
 
 public class MarkCommand extends Command {
 
+    public static final String COMMAND_WORD = "mark";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD;
+
     private Index classGroupIndex;
     private Index weekIndex;
     private Optional<List<Student>> students;

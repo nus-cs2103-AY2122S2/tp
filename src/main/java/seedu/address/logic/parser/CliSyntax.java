@@ -18,8 +18,12 @@ public class CliSyntax {
     public static final Prefix PREFIX_TYPE = new Prefix("t/");
     public static final Prefix PREFIX_MODULE_INDEX = new Prefix("m/");
     public static final Prefix PREFIX_SIMPLE_NAME = new Prefix("sn/");
+    public static final Prefix PREFIX_CLASS_INDEX = new Prefix("c/");
+    public static final Prefix PREFIX_WEEK = new Prefix("w/");
+    public static final Prefix PREFIX_STUDENT = new Prefix("s/");
     public static final String TYPE_STUDENT = "student";
     public static final String TYPE_MODULE = "module";
     public static final String TYPE_CLASS = "class";
     public static final String TYPE_ASSESSMENT = "assessment";
+    public static final String PARAM_STUDENTS = "all";
 }
