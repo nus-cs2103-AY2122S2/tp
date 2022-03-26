@@ -18,12 +18,6 @@ import manageezpz.model.task.Todo;
 public interface Model {
     /** {@code Predicate} that always evaluate to true to show all tasks */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
-    /** {@code Predicate} that always evaluate to true to show all tasks */
-    Predicate<Task> PREDICATE_SHOW_ALL_TODOS = unused -> true;
-    /** {@code Predicate} that always evaluate to true to show all tasks */
-    Predicate<Deadline> PREDICATE_SHOW_ALL_DEADLINES = unused -> true;
-    /** {@code Predicate} that always evaluate to true to show all tasks */
-    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
@@ -205,7 +199,4 @@ public interface Model {
      * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     void setTask(Task target, Task editedTask);
-
-
-
 }

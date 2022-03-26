@@ -99,11 +99,7 @@ View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for
 
 Format:
 
-* `list all/`
-* `list todo/`
-* `list deadline/`
-* `list event/`
-* `list today/`
+* `list`
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
@@ -195,5 +191,5 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find task/TASK_DESCRIPTION` <br> e.g., `find task/homework`
-**List** | `list` <br> e.g. `list all/` or `list event/` or `list deadline/`
+**List** | `list`
 **Help** | `help`
