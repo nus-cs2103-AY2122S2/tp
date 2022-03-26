@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
@@ -43,16 +44,8 @@ public class DeleteEmployeeCommand extends Command {
         }
 
         Person personToDelete = lastShownPersonList.get(targetIndex.getZeroBased());
-        List<Task> taskList = new ArrayList<>();
-        for (int i = 0; i < lastShownTaskList.size(); i++) {
-            Task currentTask = lastShownTaskList.get(i);
-            List<Person> assigneeList = currentTask.getAssignees();
-            for (int j = 0; j < assigneeList.size(); j++) {
-                if (assigneeList.get(j).equals(personToDelete)) {
-                    taskList.add(currentTask);
-                }
-            }
-        }
+        List<Task> taskList = lastShownTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToDelete)).collect(Collectors.toList());
 
         for (int j = 0; j < taskList.size(); j++) {
             model.untagTask(taskList.get(j), personToDelete);
