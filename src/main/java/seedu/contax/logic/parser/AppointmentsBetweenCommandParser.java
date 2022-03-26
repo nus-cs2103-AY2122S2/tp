@@ -10,6 +10,8 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
+import java.util.function.Function;
 
 import seedu.contax.commons.util.DateUtil;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
@@ -31,20 +33,19 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE_START, PREFIX_TIME_START,
                         PREFIX_DATE_END, PREFIX_TIME_END);
 
-        if (!argMultimap.arePrefixesPresent(PREFIX_DATE_START, PREFIX_TIME_START, PREFIX_DATE_END,
-                PREFIX_TIME_END) || !argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentsBetweenCommand.MESSAGE_USAGE));
         }
 
-        LocalDate startDate = argMultimap.getValue(PREFIX_DATE_START).flatMap(DateUtil::parseDate)
-                .orElseThrow(() -> new ParseException(AppointmentsBetweenCommand.MESSAGE_START_DATE_INVALID));
-        LocalTime startTime = argMultimap.getValue(PREFIX_TIME_START).flatMap(DateUtil::parseTime)
-                .orElseThrow(() -> new ParseException(AppointmentsBetweenCommand.MESSAGE_START_TIME_INVALID));
-        LocalDate endDate = argMultimap.getValue(PREFIX_DATE_END).flatMap(DateUtil::parseDate)
-                .orElseThrow(() -> new ParseException(AppointmentsBetweenCommand.MESSAGE_END_DATE_INVALID));
-        LocalTime endTime = argMultimap.getValue(PREFIX_TIME_END).flatMap(DateUtil::parseTime)
-                .orElseThrow(() -> new ParseException(AppointmentsBetweenCommand.MESSAGE_END_TIME_INVALID));
+        LocalDate startDate = getArgumentOrElse(LocalDate.now(), argMultimap.getValue(PREFIX_DATE_START),
+                DateUtil::parseDate, AppointmentsBetweenCommand.MESSAGE_START_DATE_INVALID);
+        LocalTime startTime = getArgumentOrElse(LocalTime.of(0, 0), argMultimap.getValue(PREFIX_TIME_START),
+                DateUtil::parseTime, AppointmentsBetweenCommand.MESSAGE_START_TIME_INVALID);
+        LocalDate endDate = getArgumentOrElse(LocalDate.MAX, argMultimap.getValue(PREFIX_DATE_END),
+                DateUtil::parseDate, AppointmentsBetweenCommand.MESSAGE_END_DATE_INVALID);
+        LocalTime endTime = getArgumentOrElse(LocalTime.of(23, 59), argMultimap.getValue(PREFIX_TIME_END),
+                DateUtil::parseTime, AppointmentsBetweenCommand.MESSAGE_END_TIME_INVALID);
 
         LocalDateTime startDateTime = DateUtil.combineDateTime(startDate, startTime);
         LocalDateTime endDateTime = DateUtil.combineDateTime(endDate, endTime);
@@ -54,5 +55,29 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
         }
 
         return new AppointmentsBetweenCommand(startDateTime, endDateTime);
+    }
+
+    /**
+     * Parses a String argument into an object using the supplied {@code parserFunction}.
+     * Returns the supplied default value if the String argument is empty.
+     *
+     * @param defaultValue The default value to use if the argument was not supplied.
+     * @param argument An optional containing a String argument to parse, if supplied.
+     * @param parserFunction The function for parsing the supplied String argument into an object.
+     * @param parseErrorMessage The error message to throw if {@code parserFunction} fails.
+     * @param <T> The parsed type of the argument.
+     * @return An object of type {@code T} if parsing is successful.
+     * @throws ParseException If an error occurs during parsing.
+     */
+    private <T> T getArgumentOrElse(T defaultValue,
+                                    Optional<String> argument,
+                                    Function<String, Optional<T>> parserFunction,
+                                    String parseErrorMessage) throws ParseException {
+        if (argument.isEmpty()) {
+            return defaultValue;
+        }
+
+        return argument.flatMap(parserFunction)
+                .orElseThrow(() -> new ParseException(parseErrorMessage));
     }
 }
