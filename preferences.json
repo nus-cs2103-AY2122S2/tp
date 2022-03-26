@@ -1,10 +1,10 @@
 {
   "guiSettings" : {
-    "windowWidth" : 1920.0,
-    "windowHeight" : 1048.0,
+    "windowWidth" : 1085.0,
+    "windowHeight" : 718.0,
     "windowCoordinates" : {
-      "x" : 1920,
-      "y" : 32
+      "x" : 163,
+      "y" : 183
     }
   },
   "addressBookFilePath" : "data/CinnamonBun.save",
