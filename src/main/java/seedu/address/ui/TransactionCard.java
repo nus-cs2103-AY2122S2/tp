@@ -48,7 +48,7 @@ public class TransactionCard extends UiPart<Region> {
         // Required fields.
         amount.setText(transaction.getAmount().toString());
         transactionDate.setText(transaction.getTransactionDate().toString());
-        identifier.setText(transaction.getIdentifier());
+        identifier.setText(transaction.getPersonIdString());
 
         // Optional fields.
         dueDate.setText(transaction.getDueDate()

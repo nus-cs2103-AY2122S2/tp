@@ -45,7 +45,7 @@ public class FindTransactionCommand extends Command {
         }
 
         Person person = lastShownList.get(index.getZeroBased());
-        String personIdentifier = person.getEmail().getValue();
+        long personIdentifier = person.getUniqueId();
 
         TransactionWithIdentifierPredicate predicate = predicateProducer.createTransactionPredicate(personIdentifier);
         model.updateFilteredTransactionList(predicate);

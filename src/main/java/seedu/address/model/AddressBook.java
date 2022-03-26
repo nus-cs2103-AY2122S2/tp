@@ -170,6 +170,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         transactions.remove(key);
     }
 
+    /**
+     * Removes all transactions from person with personId
+     */
+    public void removeTransactionWithId(long personId) {
+        transactions.removeWithId(personId);
+    }
+
     //// util methods
 
     @Override
@@ -210,4 +217,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return hash(persons, transactions);
     }
+
 }
