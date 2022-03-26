@@ -22,7 +22,7 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
         try {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_LAB);
-            if (!isPrefixPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
+            if (!ArgumentTokenizer.isPrefixPresent(argMultimap, PREFIX_LAB) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE));
             }
             Lab toAdd = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
@@ -31,14 +31,6 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE), pe);
         }
-    }
-
-    /**
-     * Returns true if PREFIX_LAB does not contain {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap) {
-        return argumentMultimap.getValue(PREFIX_LAB).isPresent();
     }
 
 }

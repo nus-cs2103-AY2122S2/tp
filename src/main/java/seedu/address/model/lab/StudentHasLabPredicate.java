@@ -15,6 +15,13 @@ public class StudentHasLabPredicate implements Predicate<Student> {
         this.lab = lab;
     }
 
+    /**
+     * @return lab contained in the predicate
+     */
+    public Lab getLab() {
+        return this.lab;
+    }
+
     @Override
     public boolean test(Student student) {
         if (!student.getLabs().contains(lab)) { // student does not have lab -> return false

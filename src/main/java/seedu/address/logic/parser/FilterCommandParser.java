@@ -4,8 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
 
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lab.Lab;
@@ -27,7 +25,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LAB, PREFIX_LABSTATUS);
-        if (!arePrefixesPresent(argMultimap, PREFIX_LAB, PREFIX_LABSTATUS)
+        if (!ArgumentTokenizer.arePrefixesPresent(argMultimap, PREFIX_LAB, PREFIX_LABSTATUS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
@@ -37,14 +35,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         return new FilterCommand(new StudentHasLabPredicate(lab.of(labStatus)));
 
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

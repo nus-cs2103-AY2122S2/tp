@@ -95,7 +95,7 @@ class LabListTest {
 
     @Test
     public void setLab_targetLabNotInList_throwsLabNotFoundException() {
-        labs.add(new Lab("1").of(LabStatus.GRADED));
+        labs.add(new Lab("1").of(LabStatus.SUBMITTED));
         assertThrows(LabNotFoundException.class, () -> labs.setLab(new Lab("1"), new Lab("2")));
     }
 
@@ -150,7 +150,7 @@ class LabListTest {
     public void setLabs_labList_replacesOwnListWithProvidedLabList() {
         labs.add(new Lab("1"));
         LabList expectedLabList = new LabList();
-        expectedLabList.add(new Lab("2").of(LabStatus.GRADED));
+        expectedLabList.add(new Lab("2").of(LabStatus.SUBMITTED));
         labs.setLabs(expectedLabList);
         assertEquals(expectedLabList, labs);
     }

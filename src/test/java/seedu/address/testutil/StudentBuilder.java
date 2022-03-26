@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.util.Pair;
 import seedu.address.model.lab.LabList;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
@@ -12,6 +11,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.LabTriplet;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -111,7 +111,7 @@ public class StudentBuilder {
      * Parses the {@code labs} into a {@code LabList} and set it to the {@code Student} that we are building.
      */
     @SafeVarargs
-    public final StudentBuilder withLabs(Pair<String, String>... labs) {
+    public final StudentBuilder withLabs(LabTriplet... labs) {
         this.labs = SampleDataUtil.getLabSet(labs);
         return this;
     }
