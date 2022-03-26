@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
@@ -37,6 +38,8 @@ public class AddGroupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
         if (model.hasGroup(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
