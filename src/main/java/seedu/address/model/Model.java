@@ -1,14 +1,17 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.tamodule.TaModule;
 
 /**
@@ -91,6 +94,12 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered assessment list. */
     ObservableList<Assessment> getFilteredAssessmentList();
+
+    /** Returns an unmodifiable view of the student list given by the list of indexes. */
+    ObservableList<Student> getStudentListByIndexes(List<Index> indexes);
+
+    /** Returns an unmodifiable view of the student list given by the list of studentIds. */
+    ObservableList<Student> getStudentListByStudentIds(List<StudentId> studentIds);
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
