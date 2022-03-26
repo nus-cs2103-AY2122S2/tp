@@ -106,27 +106,35 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void autocomplete(String input) {
-        String[] values = input.split("[ |]"); // splits on spaces and '|' pipe delimiters
-        String last = values[values.length - 1];
+        String trimmed = input.trim();
 
-        if (!commands.contains(last)) {
-            String completed = last;
-            int min = Integer.MAX_VALUE;
+        // hardcoded to add "add" to empty commands since that'll be the result anyway after running through the algo
+        if (trimmed.length() == 0 || trimmed.charAt(trimmed.length() - 1) == '|') {
+            commandTextField.setText(input + "add");
+        } else {
+            String[] values = trimmed.split("[ |]");
+            String last = values[values.length - 1];
 
-            for (String command : commands) {
-                int distance = editDistance(last, command);
-                if (distance < min) {
-                    completed = command;
-                    min = distance;
+            if (!commands.contains(last)) {
+                String completed = last;
+                int min = Integer.MAX_VALUE;
+
+                for (String command : commands) {
+                    int distance = editDistance(last, command);
+                    if (distance < min) {
+                        completed = command;
+                        min = distance;
+                    }
                 }
-            }
 
-            commandTextField.setText(input.substring(0, input.length() - last.length()) + completed);
-            commandTextField.end();
+                commandTextField.setText(trimmed.substring(0, trimmed.length() - last.length()) + completed);
+            }
         }
+
+        commandTextField.end();
     }
 
-    // Levenshtein distance (matrix size bounded by length of str2 aka the one of the program commands)
+    // Levenshtein distance (matrix size bounded by length of str2 aka one of the program commands)
     private int editDistance(String str1, String str2) {
         int m = str1.length();
         int n = str2.length();
