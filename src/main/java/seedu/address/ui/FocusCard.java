@@ -118,7 +118,6 @@ public class FocusCard extends UiPart<Region> {
                 && candidate.equals(card.candidate);
     }
 
-
     public void setApplicationStatus(ApplicationStatus applicationStatus) {
         String applicationString = applicationStatus.toString();
         Label applicationLabel = new Label(applicationString);
