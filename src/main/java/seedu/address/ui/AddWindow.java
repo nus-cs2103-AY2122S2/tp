@@ -145,6 +145,9 @@ public class AddWindow extends UiPart<Stage> {
         statField.setText("");
         modulesField.setText("");
         errorLabel.setText("");
+
+        // Set the focus on nameField so that it will be back on nameField after closing/submitting
+        nameField.requestFocus();
     }
 
     /**

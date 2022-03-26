@@ -132,6 +132,9 @@ public class EditWindow extends UiPart<Stage> {
         addressField.setText("");
         emailField.setText("");
         errorLabel.setText("");
+
+        // Set the focus on indexField so that it will be back on indexField after closing/submitting.
+        indexField.requestFocus();
     }
 
     /**
