@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
+import seedu.address.model.lineup.LineupPlayersList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -62,32 +64,44 @@ public class SampleDataUtil {
         };
     }
 
+    public static Lineup[] getSampleLineups() {
+        return new Lineup[] {
+                new Lineup(new LineupName("snake")),
+                new Lineup(new LineupName("all star")),
+                new Lineup(new LineupName("freak"))
+        };
+    }
+
     public static Schedule[] getSampleSchedules() {
         return new Schedule[] {
             new Schedule(new ScheduleName("Championship Match"),
-                new ScheduleDescription("Against Clippers\n LeGM needs to stop passing"),
-                new ScheduleDateTime("2020-06-01 1200")),
+                new ScheduleDescription("Against Clippers LeGM needs to stop passing"),
+                new ScheduleDateTime("06/01/2022 1200")),
             new Schedule(new ScheduleName("All star game"),
                 new ScheduleDescription("LBJ and KD participating"),
-                new ScheduleDateTime("2020-02-01 1200")),
+                new ScheduleDateTime("02/01/2020 1200")),
             new Schedule(new ScheduleName("Skills challenge"),
                 new ScheduleDescription("Practice for this"),
-                new ScheduleDateTime("2020-01-18 1200")),
+                new ScheduleDateTime("18/01/2021 1200")),
             new Schedule(new ScheduleName("Three point shoot out"),
                 new ScheduleDescription("Steph practice 3 pointer"),
-                new ScheduleDateTime("2020-02-19 1200")),
+                new ScheduleDateTime("19/02/2020 1200")),
             new Schedule(new ScheduleName("Free throw practice"),
                 new ScheduleDescription("Dwight needs to improve free throws"),
-                new ScheduleDateTime("2020-06-19 1200"))
+                new ScheduleDateTime("19/06/2021 1200"))
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
+        for (Lineup sampleLineup : getSampleLineups()) {
+            sampleAb.addLineup(sampleLineup);
+        }
         for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+            sampleAb.initalizePerson(samplePerson);
         }
         for (Schedule sampleSchedule : getSampleSchedules()) {
+            System.out.println(sampleSchedule);
             sampleAb.addSchedule(sampleSchedule);
         }
         return sampleAb;

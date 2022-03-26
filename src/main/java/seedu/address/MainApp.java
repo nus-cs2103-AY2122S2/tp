@@ -63,8 +63,6 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        System.out.println(model.getAddressBook().getLineupList());
-
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
@@ -91,7 +89,6 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty MyGM");
             initialData = new AddressBook();
         }
-
         return new ModelManager(initialData, userPrefs);
     }
 

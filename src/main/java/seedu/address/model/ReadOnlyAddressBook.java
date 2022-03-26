@@ -17,8 +17,11 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Person> getPersonList();
+    /**
+     * Returns the lineups list.
+     * This list will not contain any duplicate lineups.
+     */
     List<Lineup> getLineupList();
-    ObservableList<Schedule> getScheduleList();
 
     /**
      * Returns an unmodifiable view of the schedule list.
