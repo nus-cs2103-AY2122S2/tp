@@ -14,6 +14,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleDateTime;
+import seedu.address.model.schedule.ScheduleDescription;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -58,10 +62,33 @@ public class SampleDataUtil {
         };
     }
 
+    public static Schedule[] getSampleSchedules() {
+        return new Schedule[] {
+            new Schedule(new ScheduleName("Championship Match"),
+                new ScheduleDescription("Against Clippers\n LeGM needs to stop passing"),
+                new ScheduleDateTime("2020-06-01 1200")),
+            new Schedule(new ScheduleName("All star game"),
+                new ScheduleDescription("LBJ and KD participating"),
+                new ScheduleDateTime("2020-02-01 1200")),
+            new Schedule(new ScheduleName("Skills challenge"),
+                new ScheduleDescription("Practice for this"),
+                new ScheduleDateTime("2020-01-18 1200")),
+            new Schedule(new ScheduleName("Three point shoot out"),
+                new ScheduleDescription("Steph practice 3 pointer"),
+                new ScheduleDateTime("2020-02-19 1200")),
+            new Schedule(new ScheduleName("Free throw practice"),
+                new ScheduleDescription("Dwight needs to improve free throws"),
+                new ScheduleDateTime("2020-06-19 1200"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Schedule sampleSchedule : getSampleSchedules()) {
+            sampleAb.addSchedule(sampleSchedule);
         }
         return sampleAb;
     }

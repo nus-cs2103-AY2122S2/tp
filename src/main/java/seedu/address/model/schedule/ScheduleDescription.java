@@ -25,14 +25,14 @@ public class ScheduleDescription {
      */
     public ScheduleDescription(String description) {
         requireNonNull(description);
-        checkArgument(isValidName(description), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidScheduleDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid description.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidScheduleDescription(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -45,7 +45,7 @@ public class ScheduleDescription {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.person.Name // instanceof handles nulls
+                || (other instanceof ScheduleDescription // instanceof handles nulls
                 && description.equals(((ScheduleDescription) other).description)); // state check
     }
 

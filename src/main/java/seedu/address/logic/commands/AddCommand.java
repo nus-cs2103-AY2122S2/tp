@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * Adds a person to the address book.
@@ -51,11 +53,21 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LINEUP + " "
             + PREFIX_NAME + "Starting 5";
+    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ":\nAdds a schedule to MyGM."
+            + "Parameters: "
+            + PREFIX_SCHEDULE + " "
+            + PREFIX_NAME + "SCHEDULE NAME"
+            + "[" + PREFIX_PLAYER + "PLAYER]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_SCHEDULE + " "
+            + PREFIX_NAME + "Starting 5";
 
     public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s.";
     public static final String MESSAGE_ADD_LINEUP_SUCCESS = "New lineup added: %1$s.";
+    public static final String MESSAGE_ADD_SCHEDULE_SUCCESS = "New schedule added: %1$s.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in MyGM.";
     public static final String MESSAGE_DUPLICATE_LINEUP_NAME = "This lineup already exists in MyGM.";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule already exists in MyGM.";
     public static final String MESSAGE_DUPLICATE_JERSEY_NUMBER = "This jersey number already exists in MyGM.\n"
             + "You may consider these available ones:\n%1$s";
     public static final String MESSAGE_FULL_CAPACITY_REACHED = "MyGM has reached its full capacity with 100 players.";
@@ -63,6 +75,7 @@ public class AddCommand extends Command {
 
     private final Person toAddPerson;
     private final Lineup toAddLineup;
+    private final Schedule toAddSchedule;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -71,6 +84,7 @@ public class AddCommand extends Command {
         requireNonNull(person);
         toAddPerson = person;
         toAddLineup = null;
+        toAddSchedule = null;
     }
 
     /**
@@ -80,6 +94,17 @@ public class AddCommand extends Command {
         requireNonNull(lineup);
         toAddLineup = lineup;
         toAddPerson = null;
+        toAddSchedule = null;
+    }
+
+    /**
+     * Creates an AddCommand to add the specified {@code Schedule}
+     */
+    public AddCommand(Schedule schedule) {
+        requireNonNull(schedule);
+        toAddSchedule = schedule;
+        toAddPerson = null;
+        toAddLineup = null;
     }
 
     /* to add: add lineup */
@@ -111,22 +136,40 @@ public class AddCommand extends Command {
 
             model.addPerson(toAddPerson);
             return new CommandResult(String.format(MESSAGE_ADD_PERSON_SUCCESS, toAddPerson));
-        }
+        } else if (toAddLineup != null) {
+            //assert toAddLineup != null;
+            if (model.hasLineupName(toAddLineup.getLineupName())) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_LINEUP_NAME, toAddLineup.getLineupName()));
+            }
+            model.addLineup(toAddLineup);
+            return new CommandResult(String.format(MESSAGE_ADD_LINEUP_SUCCESS, toAddLineup));
+        } else {
+            if (model.hasSchedule(toAddSchedule)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
 
-        //assert toAddLineup != null;
-        if (model.hasLineupName(toAddLineup.getLineupName())) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_LINEUP_NAME, toAddLineup.getLineupName()));
+            model.addSchedule(toAddSchedule);
+            return new CommandResult(String.format(MESSAGE_ADD_SCHEDULE_SUCCESS, toAddSchedule));
         }
-        model.addLineup(toAddLineup);
-        return new CommandResult(String.format(MESSAGE_ADD_LINEUP_SUCCESS, toAddLineup));
-
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAddPerson.equals(((AddCommand) other).toAddPerson)
-                && toAddLineup.equals(((AddCommand) other).toAddLineup));
+        if (toAddPerson != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof AddCommand // instanceof handles nulls
+                    && toAddPerson.equals(((AddCommand) other).toAddPerson));
+        }
+        if (toAddLineup != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof AddCommand // instanceof handles nulls
+                    && toAddLineup.equals(((AddCommand) other).toAddLineup));
+        }
+        if (toAddSchedule != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof AddCommand // instanceof handles nulls
+                    && toAddSchedule.equals(((AddCommand) other).toAddSchedule));
+        }
+        return false;
     }
 }

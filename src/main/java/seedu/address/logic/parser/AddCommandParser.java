@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
@@ -8,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
@@ -25,6 +28,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleDateTime;
+import seedu.address.model.schedule.ScheduleDescription;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,7 +48,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP);
+                        PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP,
+                        PREFIX_SCHEDULE, PREFIX_DATE, PREFIX_DESCRIPTION);
 
         if (arePrefixesPresent(argMultimap, PREFIX_LINEUP)
                 && !arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL,
@@ -60,6 +68,21 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
         }
 
+        // Case when add player
+        if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
+            return parseAddPlayer(argMultimap);
+        }
+
+        // Case when add schedule
+        if (arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
+            return parseAddSchedule(argMultimap);
+        }
+
+        // this return statement should be unreachable
+        return null;
+    }
+
+    private AddCommand parseAddPlayer(ArgumentMultimap argMultimap) throws ParseException {
         if (!arePrefixesPresent(argMultimap, PREFIX_PLAYER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_JERSEY_NUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -77,6 +100,22 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person person = new Person(name, phone, email, height, jerseyNumber, tagList, weight);
 
         return new AddCommand(person);
+    }
+
+    private AddCommand parseAddSchedule(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_SCHEDULE, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_DATE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE_SCHEDULE));
+        } else {
+            ScheduleName scheduleName = ParserUtil.parseScheduleName(argMultimap.getValue(PREFIX_NAME).get());
+            ScheduleDescription scheduleDescription = ParserUtil.parseScheduleDescription(
+                    argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            ScheduleDateTime scheduleDateTime = ParserUtil.parseScheduleDateTime(
+                    argMultimap.getValue(PREFIX_DATE).get());
+            Schedule schedule = new Schedule(scheduleName, scheduleDescription, scheduleDateTime);
+            return new AddCommand(schedule);
+        }
     }
 
     /**
