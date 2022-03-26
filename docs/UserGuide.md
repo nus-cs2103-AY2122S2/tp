@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: CinnamonBun User Guide
 ---
 
 CinnamonBun is a **desktop app for managing client information, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
@@ -68,7 +68,7 @@ Commands in CinnamonBun can be broken down into several components.
 | `PREFIX`       | Commands may have one more or arguments. The prefix specifies which arguments to map to the parameters. All prefixes end with a `/`. |
  | `ARGUMENT`     | The argument to pass to the command.                                                                                                 |
 
-<div markdown="block" class="alert alert-primary">:bulb:**Attention**
+<div class="alert alert-primary">:bulb: **Attention**
 
 * Commands and their arguments are case-sensitive
 * Parameters can be in any order.<br>
@@ -105,19 +105,19 @@ Adds a client to CinnamonBun.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">:information_source:
+<div class="alert alert-info">:information_source: **Info**
 
 A client can have many fields, including both optional and compulsory ones.
 
-| Field    | Prefix   | Constraints                                                                                                                         | Compulsory   | Example                                   |
-|----------|----------|-------------------------------------------------------------------------------------------------------------------------------------|--------------|-------------------------------------------|
-| Name     | `n/`     | Alphanumeric and spaces only.                                                                                                       | :tick:       | `n/Regina Lee`                            |
-| Email    | `e/`     | Must be in *username@domain.suffix* format and unique to each client.<br/><br/> Alphanumeric and special characters, *+_.-* only. | :tick:       | `n/lovelee@mailinator.com`                |
-| Phone    | `p/`     | Minimum 3 numeric characters.                                                                                                       | :tick:       | `p/81312224`                              |
-| Address  | `a/`     | No constraints.                                                                                                                     | :tick:       | `a/123 Sesame Street`                     |
-| Birthday | `b/`     | Must be in *YYYY-MM-DD* format and a valid date.                                                                                    |              | `b/2022-03-12`                            |
-| Remark   | 'r/`     | No constraints.                                                                                                                     |              | `r/Foreman of Project Zero Dawn.`         |       
-| Tags     | `t/`     | Alphanumeric only. No spaces allowed. Multiple tags are allowed per client.                                                       |              | `t/Frequentclient t/AppointmentOverdue` | 
+| Field    | Prefix   | Constraints                                                                                                                                | Compulsory         | Example                                   |
+|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------------------------------------------|
+| Name     | `n/`     | Alphanumeric and spaces only.                                                                                                              | :heavy_check_mark: | `n/Regina Lee`                            |
+| Email    | `e/`     | Must be in *username@domain.suffix* format and unique to each client.<br/><br/> Alphanumeric and special characters, *+_.-* only.          | :heavy_check_mark: | `n/lovelee@mailinator.com`                |
+| Phone    | `p/`     | Minimum 3 numeric characters.                                                                                                              | :heavy_check_mark: | `p/81312224`                              |
+| Address  | `a/`     | No constraints.                                                                                                                            | :heavy_check_mark: | `a/123 Sesame Street`                     |
+| Birthday | `b/`     | Must be in *YYYY-MM-DD* format and a valid date.                                                                                           |                    | `b/2022-03-12`                            |
+| Remark   | 'r/`     | No constraints.                                                                                                                            |                    | `r/Foreman of Project Zero Dawn.`         |       
+| Tags     | `t/`     | Alphanumeric only.<br/><br/> No spaces allowed.<br/><br/> Multiple tags are allowed per client.                                            |                    | `t/Frequentclient t/AppointmentOverdue`   | 
 
 </div>
 
@@ -129,18 +129,17 @@ Examples:
 
 Sorts the client list based on the order of the fields specified.
 
-Fields that can be sorted:
-* Name `n/`
-* Phone number `p/`
-* Email `e/`
-* Address `a/`
-* Birthday `b/`
-* Remark `r/`
-
 Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]`  
 
-<div markdown="block" class="alert alert-info">:information_source:**Info**
+<div class="alert alert-info">:information_source: **Info**
 
+* Fields that can be sorted:
+  * Name `n/`
+  * Phone number `p/`
+  * Email `e/`
+  * Address `a/`
+  * Birthday `b/`
+  * Remark `r/`
 * At least one of the above fields must be specified.
 * Specifying `desc` it after a field means that particular field is to be sorted in descending order. By default, they are sorted in ascending order.
 * The fields are to be specified in their prefix. They can be specified in any order, however, priority will be given
@@ -169,7 +168,7 @@ Edits an existing person in CinnamonBun.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">:information_source:**Info**
+<div class="alert alert-info">:information_source: **Info**
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -192,7 +191,7 @@ Finds clients whose name, phone, email, address or tags contain any of the given
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-<div markdown="block" class="alert alert-info">:information_source:**Info**
+<div class="alert alert-info">:information_source: **Info**
 
 * The search is case-insensitive. e.g. `bob` will match `Bob`
 * The order of the keywords does not matter. e.g. `Hans Bob` will match `Bob Hans`
@@ -215,7 +214,7 @@ Deletes a customer in CinnamonBun.
 
 Format: `delete INDEX`
 
-<div markdown="block" class="alert alert-info">:information_source:**Info**
+<div class="alert alert-info">:information_source: **Info**
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -256,6 +255,7 @@ Format: `exit`
 Multiple commands can be chained by separating each command with the `|` character.
 Each command is run sequentially from first to last.
 Invalid commands and special commands `help` and `exit` will break the chain and stop further command execution.  
+
 e.g `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
 
 ### Command History

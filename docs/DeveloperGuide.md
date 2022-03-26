@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Developer Guide
+title: CinnamonBun Developer Guide
 ---
 * Table of Contents
 1. Acknowledgements
