@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
+import seedu.address.logic.parser.schedule.DeleteScheduleCommandParser;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -31,9 +32,9 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         case "add":
             return new AddScheduleCommandParser().parse(arguments);
         /*case "edit":
-            return new EditScheduleCommandParser().parse(arguments);
+            return new EditScheduleCommandParser().parse(arguments);*/
         case "delete":
-            return new DeleteScheduleCommandParser().parse(arguments);*/
+            return new DeleteScheduleCommandParser().parse(arguments);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }

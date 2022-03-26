@@ -107,6 +107,8 @@ public interface Model {
 
     void deleteInterviewForCandidate(Candidate target);
 
+    void deleteInterview(Interview interviewToDelete);
+
     void addInterview(Interview interview);
 
     //void setInterview(Interview target, Interview editedInterview);
