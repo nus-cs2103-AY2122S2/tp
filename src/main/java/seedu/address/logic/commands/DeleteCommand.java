@@ -102,7 +102,7 @@ public class DeleteCommand extends Command {
                 return false;
             }
             DeleteCommand commandToCompare = (DeleteCommand) other;
-            if (this.targetId == null && this.targetIndices != null) { // only targetIndex present
+            if (this.targetId == null && this.targetIndices != null) { // only targetIndices present
                 return Arrays.equals(targetIndices, commandToCompare.targetIndices); // state check
             } else if (this.targetIndices == null && this.targetId != null) { // only targetId present
                 return targetId.equals(commandToCompare.targetId); // state check
