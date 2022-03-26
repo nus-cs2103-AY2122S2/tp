@@ -11,7 +11,7 @@ ModuleMateFinder (MMF) is a **desktop app for managing contacts in your educatio
 - [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-## Quick Jump to Specific Features
+## Shortcut to Specific Features
 
 This section lists down all the features available in MMF. You can click on any of them to jump to the features.
 
