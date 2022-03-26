@@ -17,4 +17,15 @@ class LocationTest {
 
         assertFalse(location.equals(location3));
     }
+
+    @Test
+    public void isValidLocationTest() {
+        assertTrue(Location.isValidLocation("Serangoon"));
+        assertTrue(Location.isValidLocation("random gibberish"));
+        assertTrue(Location.isValidLocation("       "));
+
+        assertFalse(Location.isValidLocation(""));
+
+
+    }
 }

@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
+import seedu.address.model.property.NullPropertyToBuy;
 
 /**
  * An UI component that displays information of a {@code client}.
@@ -38,11 +40,19 @@ public class ClientCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label appointment;
+    @FXML
+    private Label propertyType;
+    @FXML
+    private Label propertyLocation;
+    @FXML
+    private Label propertyLowerPrice;
+    @FXML
+    private Label propertyUpperPrice;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ClientCard(Client client, int displayedIndex) {
+    public ClientCard(Buyer client, int displayedIndex) {
         super(FXML);
         this.client = client;
         id.setText(displayedIndex + ". ");
@@ -52,6 +62,15 @@ public class ClientCard extends UiPart<Region> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (client.getDesiredProperty() instanceof NullPropertyToBuy) {
+            System.out.println("The NullPropertyToBuy is accessed");
+
+        } else {
+            propertyType.setText(client.getDesiredProperty().getHouse().getHouseTypeToString());
+            propertyLocation.setText(client.getDesiredProperty().getHouse().getLocationToString());
+            propertyLowerPrice.setText(client.getDesiredProperty().getPriceRange().getLowerToString());
+            propertyUpperPrice.setText(client.getDesiredProperty().getPriceRange().getUpperToString());
+        }
     }
 
     @Override

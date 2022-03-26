@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerAddressBook;
 import seedu.address.model.ReadOnlySellerAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -21,15 +22,18 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private SellerAddressBookStorage sellerAddressBookStorage;
+    private BuyerAddressBookStorage buyerAddressBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage,
-                          UserPrefsStorage userPrefsStorage, SellerAddressBookStorage sellerAddressBookStorage) {
+                          UserPrefsStorage userPrefsStorage, SellerAddressBookStorage sellerAddressBookStorage,
+                          BuyerAddressBookStorage buyerAddressBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.sellerAddressBookStorage = sellerAddressBookStorage;
+        this.buyerAddressBookStorage = buyerAddressBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -89,7 +93,7 @@ public class StorageManager implements Storage {
     @Override
     public Optional<ReadOnlySellerAddressBook> readSellerAddressBook(Path filePath)
             throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read seller data from file: " + filePath);
         return sellerAddressBookStorage.readSellerAddressBook(filePath);
     }
 
@@ -100,7 +104,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveSellerAddressBook(ReadOnlySellerAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write to seller data file: " + filePath);
         sellerAddressBookStorage.saveSellerAddressBook(addressBook, filePath);
     }
 
@@ -109,5 +113,34 @@ public class StorageManager implements Storage {
         saveSellerAddressBook(addressBook, sellerAddressBookStorage.getSellerAddressBookFilePath());
     }
 
+    // ================ BuyerAddressBook methods ==============================
+
+    @Override
+    public Optional<ReadOnlyBuyerAddressBook> readBuyerAddressBook() throws DataConversionException, IOException {
+        return readBuyerAddressBook(buyerAddressBookStorage.getBuyerAddressBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyBuyerAddressBook> readBuyerAddressBook(Path filePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read buyer data from file: " + filePath);
+        return buyerAddressBookStorage.readBuyerAddressBook(filePath);
+    }
+
+    @Override
+    public Path getBuyerAddressBookFilePath() {
+        return buyerAddressBookStorage.getBuyerAddressBookFilePath();
+    }
+
+    @Override
+    public void saveBuyerAddressBook(ReadOnlyBuyerAddressBook addressBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to buyer data file: " + filePath);
+        buyerAddressBookStorage.saveBuyerAddressBook(addressBook, filePath);
+    }
+
+    @Override
+    public void saveBuyerAddressBook(ReadOnlyBuyerAddressBook addressBook) throws IOException {
+        saveBuyerAddressBook(addressBook, buyerAddressBookStorage.getBuyerAddressBookFilePath());
+    }
 
 }
