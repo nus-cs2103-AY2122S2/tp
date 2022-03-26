@@ -23,7 +23,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Property> properties;
-    private final Optional<Property> preference;
+    private final Optional<Preference> preference;
     private final UserType userType;
 
     /**
@@ -31,7 +31,7 @@ public class Person {
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
     public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
-            Set<Property> properties, Optional<Property> preference, UserType userType) {
+            Set<Property> properties, Optional<Preference> preference, UserType userType) {
         requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType);
         this.name = name;
         this.phone = phone;
@@ -48,7 +48,7 @@ public class Person {
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties,
-            Optional<Property> preference, UserType userType) {
+            Optional<Preference> preference, UserType userType) {
         requireAllNonNull(name, phone, email, address, properties, preference, userType);
         this.name = name;
         this.phone = phone;
@@ -96,7 +96,7 @@ public class Person {
         return Collections.unmodifiableSet(properties);
     }
 
-    public Optional<Property> getPreference() {
+    public Optional<Preference> getPreference() {
         return preference;
     }
 
@@ -119,7 +119,7 @@ public class Person {
 
     /**
      * Returns true if the given {@code buyer}'s {@code preference}
-     * matches with {@code this} person's {@code property}.
+     * matches with at least one of {@code this} person's {@code properties}.
      */
     public boolean matches(Person buyer) {
         if (properties.isEmpty()) {
@@ -130,7 +130,7 @@ public class Person {
         }
 
         for (Property p : properties) {
-            if (p.matches(buyer.preference.get())) {
+            if (buyer.preference.get().matches(p)) {
                 return true;
             }
         }
@@ -176,10 +176,12 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Favourite: ")
-                .append(getFavourite())
                 .append("; Address: ")
                 .append(getAddress());
+
+        if (getFavourite() != null) {
+            builder.append("; Favourite: Favourited");
+        }
 
         Set<Property> properties = getProperties();
         if (!properties.isEmpty()) {

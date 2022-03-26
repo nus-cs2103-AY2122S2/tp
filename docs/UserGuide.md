@@ -1,12 +1,13 @@
-# User Guide
+---
+layout: page
+title: User Guide
+---
+
+RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their clients’ contacts and sales of properties.
 
 # Reference
 
 Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html)
-
-# User Guide
-
-RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their clients’ contacts and sales of properties.
 
 ## Quick start
 
@@ -50,11 +51,14 @@ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 Notes about the property format:
 - Properties must be specified in the following format: `pr/REGION,ADDRESS,SIZE,PRICE`. Whitespace between parameters is ignored.<br>
-  e.g. Both `pr/East,Block 123,2-room,$550000` and `pr/East, Block 123, 2-room, $550000` are acceptable. `pr/Block 123, East, 2-room, $550000` is not acceptable.
+  e.g. Both `pr/East,Pasir Ris Drive 1 Block 123,2-room,$550000` and `pr/East, Pasir Ris Drive 1 Block 123, 2-room, $550000` are acceptable. `pr/Pasir Ris Drive 1 Block 123, East, 2-room, $550000` is not acceptable.
+
+Notes about the preference format:
+- Preference must be specified in the following format: `pf/REGION,SIZE,LOWPRICE,HIGHPRICE`. Whitespace between parameters is ignored.<br>
 
 Parameter formats:
 - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
-- ADDRESS: Any non-empty string that does not contain `,`. e.g. `Block 123`
+- ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
 - SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
 - PRICE: `$` followed by a positive integer. e.g. `$150000`
 
@@ -68,14 +72,16 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]…, t/USER_TYPE`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] t/USER_TYPE`
 
 **Tip**: A person can be tagged as either a `buyer`, or `seller`.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000, t/buyer`
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pr/West, Newgate Prison, 1-room, $100000, t/seller`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000 t/buyer`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 t/seller`
+
+    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
 
 ### Listing all persons : `list`
 
@@ -92,14 +98,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+- You may change the type of the user, from `buyer` to `seller` & vice versa
 - You can remove all the person’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit 2 n/Betsy Crower t/seller` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person's user type to `seller`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
 
 ### Locating persons by name: `find`
@@ -117,9 +122,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`
+- `find sam elon` returns `Sam Yeo`, `Elon Musk`
 
-    ![https://se-education.org/addressbook-level3/images/findAlexDavidResult.png](https://se-education.org/addressbook-level3/images/findAlexDavidResult.png)
+    ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
 ### Deleting a person: `delete`
 
@@ -136,6 +141,12 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Matching properties and preferences: `match`
+
+Opens a new window and shows all sellers and buyers with matching property and preference.
+
+Format: `match`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -148,25 +159,47 @@ Exits the program.
 
 Format: `exit`
 
-### Favourite a person: `favorite`
+### Favourite a person: `favourite`
 
-Favorites the specified person from the application. The user (real estate agent) will be able to view the more compact list of favorited persons in a new window that can be opened up through the ‘Favourite’ menu item.
+Favourites the specified client from the application represented by a star as show below. The user (real estate agent) will be able to view the more compact list of favorited clients in a new window called the Favourites window.
+
+![images/Favouritestar.png](images/Favouritestar.png)
 
 Format: `favourite INDEX`
 
-- Favorites the person at the specified `INDEX`.
+- Favourites the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …
 
-### Open Favourite Window:
+### Open Favourites window:
 
-This opens up a new window that lists Persons that have been favourited.
+Opens a new window that displays compacted list of clients that have been favourited.
 
-1)  Navigate to the ‘File’ menu item and click on it.
+#### By Command: `fw`
 
-2) Under it, click on ‘Favourite’
+Format: `fw`
 
-3) The system will pop up the window that contains a list of Persons favourited by the user.
+#### By Ui:
+
+1)  Navigate to the `File` menu and click on it.
+
+2) Under it, click on `Favourites`
+
+3) The system will pop up the Favourites window that contains a list of Persons favourited by the user.
+
+### Open Help Window: `help`
+
+Opens a new window that displays information on how to use the app and a URL to the user guide of the app.
+
+Format: `help`
+
+## Navigating the help window
+
+<img src="images/user-guide/helpWindowUi.png" width="600px">
+
+1. Link to the full user guide
+2. Buttons to access the different help sections
+3. Help contents
 
 ### User onboarding [Coming soon]
 
@@ -183,23 +216,32 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 </aside>
 
+### Displaying statistics `stats`
+
+Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
+#### By Command: `stats`
+
 # FAQ
 
 # Command Summary
+                                                                                                  |
+| Action                                                                                                      | Format, Examples  |
+|-------------------------------------------------------------------------------------------------------------| --- |
+| Add                                                                                                         | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE
+ e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
+| Clear                                                                                                       | clear  |
+| Delete                                                                                                      | delete INDEX
+ e.g., delete 3                                                                                              |
+| Edit                                                                                                        | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
+ e.g., edit 2 n/James Lee e/jameslee@example.com                                                             |
+| Find                                                                                                        | find KEYWORD [MORE_KEYWORDS]
+ e.g., find James Jake                                                                                       |
+| List                                                                                                        | list  |
+| Help                                                                                                        | help  |
+| Match                                                                                                       | match |
+| Favourite                                                                                                   | favourite INDEX
+ e.g., favourite 3                                                                                           |
+| Favourites window                                                                                           | fw
+| Statistics window                                                                                           | stats
 
-| Action | Format, Examples  |
-| --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY], t/USER_TYPE
-e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/Buyer    |
-| Clear | clear  |
-| Delete | delete INDEX
-e.g., delete 3  |
-| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
-e.g., edit 2 n/James Lee e/jameslee@example.com |
-| Find | find KEYWORD [MORE_KEYWORDS]
-e.g., find James Jake  |
-| List | list  |
-| Help | help  |
-| Favourite | favourite INDEX
-e.g., favourite 3  |
 

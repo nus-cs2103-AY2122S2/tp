@@ -120,6 +120,10 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void setFavouriteStatus(Person personToFavourite) {
+        addressBook.setFavouriteStatus(personToFavourite);
+    }
 
     @Override
     public List<Pair<Person>> getMatchList() {
@@ -129,11 +133,6 @@ public class ModelManager implements Model {
     @Override
     public void updateMatchList() {
         matchList = addressBook.match();
-    }
-
-    @Override
-    public void setFavouriteStatus(Person personToFavourite) {
-        addressBook.setFavouriteStatus(personToFavourite);
     }
 
     //=========== Filtered Person List Accessors =============================================================

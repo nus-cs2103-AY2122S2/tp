@@ -1,10 +1,13 @@
 package seedu.address.ui;
 
+import java.util.StringJoiner;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
 
 public class DoublePersonCard extends UiPart<Region> {
 
@@ -57,11 +60,9 @@ public class DoublePersonCard extends UiPart<Region> {
         address.setText(seller.getAddress().value);
         email.setText(seller.getEmail().value);
 
-        if (!seller.getProperties().isEmpty()) {
-            property.setText(seller.getProperties().toString());
-        } else {
-            property.setVisible(false);
-        }
+        StringJoiner propertyJoiner = new StringJoiner("\n");
+        seller.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
+        property.setText(propertyJoiner.toString());
 
         if (seller.getPreference().isPresent()) {
             preference.setText(seller.getPreference().get().toString());
@@ -77,11 +78,9 @@ public class DoublePersonCard extends UiPart<Region> {
         address2.setText(buyer.getAddress().value);
         email2.setText(buyer.getEmail().value);
 
-        if (!buyer.getProperties().isEmpty()) {
-            property2.setText(buyer.getProperties().toString());
-        } else {
-            property2.setVisible(false);
-        }
+        StringJoiner propertyJoiner2 = new StringJoiner("\n");
+        buyer.getProperties().stream().map(Property::toString).forEach(propertyJoiner2::add);
+        property2.setText(propertyJoiner2.toString());
 
         if (buyer.getPreference().isPresent()) {
             preference2.setText(buyer.getPreference().get().toString());

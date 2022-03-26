@@ -10,14 +10,11 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PROPERTY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERTYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PROPERTY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PROPERTY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.USERTYPE_DESC_BUYER;
-import static seedu.address.logic.commands.CommandTestUtil.USERTYPE_DESC_SELLER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -27,10 +24,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BUYER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_SELLER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -46,13 +41,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String USERTYPE_EMPTY = " " + PREFIX_USERTYPE;
     private static final String PROPERTY_EMPTY = " " + PREFIX_PROPERTY;
 
     private static final String MESSAGE_INVALID_FORMAT =
@@ -94,7 +87,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_PROPERTY_DESC, Property.MESSAGE_CONSTRAINTS); // invalid property
-        assertParseFailure(parser, "1" + INVALID_USERTYPE_DESC, UserType.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -102,15 +94,6 @@ public class EditCommandParserTest {
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
-
-        // while parsing {@code USERTYPE_DESC_SELLER or @code USERTYPE_DESC_BUYER} alone will reset the user type of
-        // the {@code Person} being edited, parsing it together with an invalid usertype results in error
-        assertParseFailure(parser, "1" + USERTYPE_DESC_SELLER + USERTYPE_DESC_BUYER + USERTYPE_EMPTY,
-                UserType.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + USERTYPE_DESC_SELLER + USERTYPE_EMPTY,
-                UserType.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + USERTYPE_DESC_BUYER + USERTYPE_DESC_SELLER + USERTYPE_EMPTY,
-                UserType.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_PROPERTY} alone will reset the properties of the {@code Person} being edited,
         // parsing it together with a valid property results in error
@@ -130,7 +113,7 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + NAME_DESC_AMY + USERTYPE_DESC_SELLER + PROPERTY_DESC_AMY + PROPERTY_DESC_BOB;
+                + NAME_DESC_AMY + PROPERTY_DESC_AMY + PROPERTY_DESC_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -180,15 +163,10 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // user types
-        userInput = targetIndex.getOneBased() + USERTYPE_DESC_SELLER;
-        descriptor = new EditPersonDescriptorBuilder().withUserType(VALID_USERTYPE_SELLER).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // properties
+        // properties - adding a property to a person makes them a seller
         userInput = targetIndex.getOneBased() + PROPERTY_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withProperties(VALID_PROPERTY_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withProperties(VALID_PROPERTY_AMY)
+                .withUserType(VALID_USERTYPE_SELLER).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -197,12 +175,11 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + USERTYPE_DESC_SELLER + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + USERTYPE_DESC_SELLER
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + USERTYPE_DESC_BUYER + PROPERTY_DESC_AMY
-                + PROPERTY_DESC_BOB + PROPERTY_DESC_AMY;
+                + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + PHONE_DESC_BOB + ADDRESS_DESC_BOB
+                + EMAIL_DESC_BOB + PROPERTY_DESC_AMY + PROPERTY_DESC_BOB + PROPERTY_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withUserType(VALID_USERTYPE_BUYER)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withUserType(VALID_USERTYPE_SELLER)
                 .withProperties(VALID_PROPERTY_AMY, VALID_PROPERTY_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -227,25 +204,4 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    @Test
-    public void parse_changeUserType_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + USERTYPE_DESC_SELLER;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withUserType(VALID_USERTYPE_SELLER).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_resetProperties_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + PROPERTY_EMPTY;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withProperties().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
 }

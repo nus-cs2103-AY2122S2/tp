@@ -4,7 +4,6 @@ import java.util.StringJoiner;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -46,7 +45,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label favourite;
     @FXML
-    private FlowPane userType;
+    private Label buyer;
+    @FXML
+    private Label seller;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -60,16 +61,35 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         favourite.setText(person.getFavourite().toString());
-        userType.getChildren().add(new Label(person.getUserType().value));
+        // create the buyer/seller label, depending on the user's type
+        if (person.getUserType().isBuyer()) {
+            buyer.setText(person.getUserType().value);
+            seller.setVisible(false);
+            seller.setManaged(false);
+        } else {
+            seller.setText(person.getUserType().value);
+            buyer.setVisible(false);
+            buyer.setManaged(false);
+        }
 
-        StringJoiner propertyJoiner = new StringJoiner("\n");
-        person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
-        property.setText(propertyJoiner.toString());
+        if (!person.getFavourite().isUnfavourited()) {
+            favourite.setText(person.getFavourite().toString());
+        } else {
+            favourite.setManaged(false);
+        }
+
+        if (person.getProperties().isEmpty()) {
+            property.setManaged(false);
+        } else {
+            StringJoiner propertyJoiner = new StringJoiner("\n");
+            person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
+            property.setText(propertyJoiner.toString());
+        }
 
         if (person.getPreference().isPresent()) {
             preference.setText(person.getPreference().get().toString());
         } else {
-            preference.setVisible(false);
+            preference.setManaged(false);
         }
     }
 

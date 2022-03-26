@@ -8,7 +8,7 @@
 <?import java.net.URL?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Match Window" minWidth="450" minHeight="600" >
+         title="Match Window" minWidth="600" minHeight="600" >
 <icons>
    <Image url="@/images/address_book_32.png" />
 </icons>

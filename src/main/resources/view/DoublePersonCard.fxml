@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <VBox prefWidth="200.0" HBox.hgrow="ALWAYS">
       <children>
          <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
@@ -19,7 +19,7 @@
    </VBox>
    <VBox prefWidth="200.0" HBox.hgrow="ALWAYS">
       <children>
-         <Label fx:id="name2" styleClass="cell_big_label" text="\$first" />
+         <Label fx:id="name2" styleClass="cell_big_label" text="\$second" />
          <FlowPane fx:id="userType2" />
          <Label fx:id="phone2" styleClass="cell_small_label" text="\$phone" />
          <Label fx:id="address2" styleClass="cell_small_label" text="\$address" />

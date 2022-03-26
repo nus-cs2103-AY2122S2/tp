@@ -18,6 +18,6 @@ public class MatchCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateMatchList();
-        return new CommandResult(SHOWING_MATCH_MESSAGE, false, true, false);
+        return new CommandResult(SHOWING_MATCH_MESSAGE, false, true, false, false, false);
     }
 }

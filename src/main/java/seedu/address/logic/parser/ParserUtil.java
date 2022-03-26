@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
@@ -176,6 +177,28 @@ public class ParserUtil {
             propertySet.add(parseProperty(property));
         }
         return propertySet;
+    }
+
+    /**
+     * Parses a {@code String preference} into an {@code Preference}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code preference} is invalid.
+     */
+    public static Preference parsePreference(String preference) throws ParseException {
+        requireNonNull(preference);
+        String trimmedPreference = preference.trim();
+        String[] preferenceSplit = trimmedPreference.split(",");
+
+        if (preferenceSplit.length != 4) {
+            throw new ParseException(Preference.MESSAGE_CONSTRAINTS);
+        }
+
+        Region region = parseRegion(preferenceSplit[0]);
+        Size size = parseSize(preferenceSplit[1]);
+        Price lowPrice = parsePrice(preferenceSplit[2]);
+        Price highPrice = parsePrice(preferenceSplit[3]);
+        return new Preference(region, size, lowPrice, highPrice);
     }
 
     /**

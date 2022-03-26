@@ -41,6 +41,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of favourited persons */
     ObservableList<Person> getFavouritedPersonList();
 
+    /** Returns the number of persons in specified region*/
+    int getPersonsBasedOnRegion(String region);
+
     /**
      * Returns the user prefs' address book file path.
      */
