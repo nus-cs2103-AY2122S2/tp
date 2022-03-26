@@ -12,7 +12,6 @@ import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 
-// TODO: Create test after GUI for task settled.
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */

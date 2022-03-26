@@ -13,6 +13,7 @@ import java.util.List;
 
 import manageezpz.model.AddressBook;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

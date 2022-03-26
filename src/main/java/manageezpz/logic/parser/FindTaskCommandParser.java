@@ -157,11 +157,15 @@ class FindTaskCommandParser extends FindCommandParser {
     private boolean checkIfEitherTrueOrFalse(String booleanString) {
         if (booleanString.isEmpty()) {
             addErrorMessage(FindTaskCommand.EMPTY_BOOLEAN);
-        } else if (!booleanString.equals("ture") && !booleanString.equals("false")) {
+            return false;
+        } else if (booleanString.equals("true") || booleanString.equals("false")) {
+            return true;
+        } else if (!booleanString.equals("true") && !booleanString.equals("false")) {
             addErrorMessage(FindTaskCommand.INVALID_BOOLEAN);
             return false;
         }
-        return true;
+        assert false : "Error in checkIfEitherTrueOrFalse";
+        return false;
     }
 
     private void addErrorMessage(String errorMessage) {

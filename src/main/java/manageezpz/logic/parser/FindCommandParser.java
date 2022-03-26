@@ -33,6 +33,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
+    /**
+     *
+     * @param argMultiMap
+     * @return
+     */
     private boolean checkForTaskTypeOption(ArgumentMultimap argMultiMap) {
         for (Prefix prefix : TASK_PREFIXES) {
             if (argMultiMap.isPrefixExist(prefix)) {

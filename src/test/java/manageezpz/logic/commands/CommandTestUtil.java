@@ -4,6 +4,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +21,7 @@ import manageezpz.model.Model;
 import manageezpz.model.person.NameContainsKeywordsPredicate;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Task;
-import manageezpz.model.task.TaskContainsKeywordsPredicate;
+import manageezpz.model.task.TaskMultiplePredicate;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -59,6 +60,8 @@ public class CommandTestUtil {
     public static final String VALID_DATE = "2022-01-01"; // Date are in YYYY-MM-DD
     public static final String VALID_PRIORITY = "LOW"; // Valid priority are none, low, medium, high
     public static final String INVALID_PRIORITY = "H1GH";
+    public static final String VALID_BOOLEAN = "true";
+    public static final String INVALID_BOOLEAN = "t";
 
     public static final String INVALID_DATE = "2022 01 01";
 
@@ -140,7 +143,15 @@ public class CommandTestUtil {
 
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getDescription().toString().split("\\s+");
-        model.updateFilteredTaskList(new TaskContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(
+                PREFIX_TASK,
+                Arrays.asList(splitName[0]),
+                null,
+                null,
+                null,
+                null
+        );
+        model.updateFilteredTaskList(predicate);
 
         assertEquals(1, model.getFilteredTaskList().size());
     }
