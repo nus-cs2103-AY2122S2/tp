@@ -2,6 +2,7 @@ package unibook.ui.listpanels;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -19,6 +20,7 @@ public class GroupListPanel extends UiPart<Region> {
     private boolean singleGroupFlag = false;
     @FXML
     private ListView<Group> groupListView;
+    private ObservableList<Group> groupList;
 
     /**
      * Creates a {@code GroupListPanel} with the given {@code ObservableList}.
@@ -26,11 +28,19 @@ public class GroupListPanel extends UiPart<Region> {
     public GroupListPanel(ObservableList<Group> groupList) {
         super(FXML);
         logger.info("Instantiating a new group list panel");
+        groupList = groupList;
         groupListView.setItems(groupList);
         groupListView.setCellFactory(listView -> new GroupListPanel.GroupListViewCell());
         if (groupList.size() == 1) {
             singleGroupFlag = true;
         }
+    }
+
+    /**
+     * Returns the list of groups showing in this list panel.
+     */
+    public ObservableList<Group> getGroupsList() {
+        return groupList;
     }
 
     /**
