@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.EditLessonCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -34,13 +33,18 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
 
     @Override
     public EditLessonCommand parse(String userInput) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_LESSON, PREFIX_LESSON_NAME,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_LESSON_NAME,
                 PREFIX_SUBJECT, PREFIX_LESSON_ADDRESS, PREFIX_DATE, PREFIX_START_TIME,
                 PREFIX_DURATION_HOURS, PREFIX_DURATION_MINUTES);
-        if (argMultimap.getValue(PREFIX_LESSON).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
+
+        Index lessonId;
+
+        try {
+            lessonId = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
-        Index lessonId = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON).get());
+
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
         if (argMultimap.getValue(PREFIX_LESSON_NAME).isPresent()) {
             editLessonDescriptor.setName(ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LESSON_NAME).get()));
@@ -55,13 +59,13 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
 
         if (argMultimap.getValue(PREFIX_DURATION_HOURS).isPresent()) {
             ParserUtil.checkDurationIsValid(
-                    getDurationHours(argMultimap).orElse(0), getDurationMinutes(argMultimap).orElse(0));
+                    getDurationHours(argMultimap).get(), 0);
             editLessonDescriptor.setDurationHours(
                     ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get()));
         }
         if (argMultimap.getValue(PREFIX_DURATION_MINUTES).isPresent()) {
             ParserUtil.checkDurationIsValid(
-                    getDurationHours(argMultimap).orElse(0), getDurationMinutes(argMultimap).orElse(0));
+                    0, getDurationMinutes(argMultimap).get());
             editLessonDescriptor.setDurationMinutes(
                     ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get()));
         }

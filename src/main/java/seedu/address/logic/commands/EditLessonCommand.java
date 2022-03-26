@@ -31,10 +31,9 @@ import seedu.address.model.lesson.Subject;
 
 public class EditLessonCommand extends Command {
     public static final String COMMAND_WORD = "editlesson";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the schedule"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lesson from the list of lessons "
             + "\n"
-            + "Parameters: "
-            + PREFIX_LESSON + " LESSON_ID "
+            + "Parameters: LESSON_ID "
             + PREFIX_LESSON_NAME + " NAME "
             + PREFIX_SUBJECT + " SUBJECT "
             + PREFIX_LESSON_ADDRESS + " ADDRESS "
@@ -107,10 +106,16 @@ public class EditLessonCommand extends Command {
                 .orElse(toEdit.getDateTimeSlot().getDateOfLesson().toLocalTime());
         LocalDate updatedStartDate = editLessonDescriptor.getStartDate()
                 .orElse(toEdit.getDateTimeSlot().getDateOfLesson().toLocalDate());
-        Integer durationHours = editLessonDescriptor.getDurationHours()
-                .orElse(toEdit.getDateTimeSlot().getHours());
-        Integer durationMinutes = editLessonDescriptor.getDurationMinutes()
-                .orElse(toEdit.getDateTimeSlot().getMinutes());
+        Integer durationHours;
+        Integer durationMinutes;
+        if (editLessonDescriptor.getDurationHours().isPresent()
+                || editLessonDescriptor.getDurationMinutes().isPresent()) {
+            durationHours = editLessonDescriptor.getDurationHours().orElse(0);
+            durationMinutes = editLessonDescriptor.getDurationMinutes().orElse(0);
+        } else {
+            durationHours = toEdit.getDateTimeSlot().getHours();
+            durationMinutes = toEdit.getDateTimeSlot().getMinutes();
+        }
         DateTimeSlot updatedDateTimeSlot = new DateTimeSlot(updatedStartDate.atTime(updatedStartTime),
                 durationHours, durationMinutes);
 
