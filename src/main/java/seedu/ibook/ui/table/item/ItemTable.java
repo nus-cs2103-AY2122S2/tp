@@ -8,6 +8,7 @@ import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
+import seedu.ibook.ui.table.ProductCard;
 
 /**
  * The {@code ItemTable} that is containing {@code ItemCard}

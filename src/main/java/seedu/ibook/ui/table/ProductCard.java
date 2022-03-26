@@ -43,6 +43,8 @@ public class ProductCard extends UiComponent<HBox> {
     private Label price;
     @FXML
     private Label description;
+    @FXML
+    private Label quantity;
 
     @FXML
     private VBox itemTableContainer;
@@ -83,6 +85,7 @@ public class ProductCard extends UiComponent<HBox> {
         category.setText(product.getCategory().toString());
         price.setText(product.getPrice().toString());
         description.setText(product.getDescription().toString());
+        quantity.setText(product.getTotalQuantity().toString());
     }
 
     @FXML

@@ -134,8 +134,8 @@ public class UniqueItemList extends UniqueList<Item> {
         decrementItemCount(target, new Quantity(1));
     }
 
-    public Integer getTotalQuantity() {
-        return stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
+    public Quantity getTotalQuantity() {
+        return stream().map(Item::getQuantity).reduce(new Quantity(0), Quantity::add);
     }
 
     public void setItems(UniqueItemList replacement) {
