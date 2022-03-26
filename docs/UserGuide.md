@@ -101,6 +101,8 @@ Shows a list of all students in the address book.
 
 </div>
 
+![list command](images/user-guide/list.png)
+
 ## Find student by name: `find`
 Find an existing student in the application by their name
 - Format: `find NAME`
@@ -113,6 +115,8 @@ Find an existing student in the application by their name
 - Example:
   - `find john tan zi wei` will find student _"John Tan Zi Wei"_
 
+![find command](images/user-guide/find.png)
+
 ## Find student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
 - Format: `findstatus STATUS`
@@ -121,6 +125,8 @@ Find an existing student in the application by their Covid-19 Status
 - Examples:
   - `findstatus positive` finds all students that are labelled COVID positive
   - `findstatus negative` finds all students that are labelled COVID negative
+
+![find status command](images/user-guide/findstatus.png)
 
 ## Find student by class: `findclasscode`
 Finds an existing student in the address book by their class
@@ -134,6 +140,8 @@ Finds an existing student in the address book by their class
 
 </div>
 
+![find classcode command](images/user-guide/findclasscode.png)
+
 ## Find student by activity: `findactivity`
 Finds an existing student in the address book by the activities they are participating in
 - Format: `findactivity ACTIVITIY [MORE ACTIVITIES]`
@@ -144,6 +152,8 @@ Finds an existing student in the address book by the activities they are partici
 - Example:
   - `findactivity badminton` finds all students that have the activity _"Badminton"_
   - `findactivity badminton choir` finds all students that have the activity _"Badminton"_, _"choir"_ or **both**
+
+![find activity command](images/user-guide/findactivity.png)
 
 ## Edit student details: `edit`
 Edits an existing student's details in the address book by the Index provided and the areas that the user wants to edit
@@ -164,6 +174,8 @@ Edits an existing student's details in the address book by the Index provided an
 
 </div>
 
+![edit command](images/user-guide/edit.png)
+
 ## Delete a student: `delete`
 Deletes the specified person from the address book.
 - Format: `delete INDEX`
@@ -179,6 +191,8 @@ Deletes the specified person from the address book.
 > :bulb: **Tip:** filter the student list via __*find*__ commands to make finding the index easier
 
 </div>
+
+![delete command](images/user-guide/delete.png)
 
 ## Exit the application: `exit`
 Exits the program.
@@ -222,8 +236,9 @@ A: Delete the data folder to allow _**UDT**_ to create a new data file. Your pre
 Q: Manual insertion of students takes time, is there a faster way to do it?  
 A: We are working on a feature to allow importing of **.csv** files into _**UDT**_!
 
-
-
+Q: What if I key in the wrong command?
+A: An error message colored in red will appear stating that you have typed an unknown command.
+![invalid command](images/user-guide/invalidcommand.png)
 ----------------
 ## Command Summary
 
