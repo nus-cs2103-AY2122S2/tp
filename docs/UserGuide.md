@@ -133,7 +133,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `list` ) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
-* The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s `int` data type. On top of that, the index should be within the bounds of the show list.<br>
+* The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5. 
 
 </div>
@@ -226,7 +226,7 @@ A show can have any number of tags (including 0)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about precise find:**<br>
-* **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an **AND** search is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
+* **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an [**AND search**](#glossary) is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
 * There must be at **least one [prefix](#command-structure) field** and it **must not be empty**.
 * `find n/Shutter Island` displays all the shows in the Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
 * `find n/Django s/completed t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, and **Action** in the `TAG` parameter.
@@ -238,9 +238,9 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 </div>
 
 
-<div markdown="block" class="alert alert-danger">:exclamation:
+<div markdown="block" class="alert alert-danger">
 
-**Caution: Multiple of the same prefixes:**<br>
+:exclamation:**Caution: Multiple of the same prefixes:**<br>
 * find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2**(as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
 * find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
 
@@ -351,6 +351,7 @@ _Details coming soon ..._
 
 | Term                               | Description                                                                                                                                                                            |
 |------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **AND search**                     | AND search finds all of the keywords.  For example, searching on Shutter AND Island returns only results that contain all two search terms.  It offers very limited results.           |
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a user to a computer program or operating system. Through the CLI, users interact with a system or application by typing in text (commands).         | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
 | **Parameter**                      | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)                                                                                          |
