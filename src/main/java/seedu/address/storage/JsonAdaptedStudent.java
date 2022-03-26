@@ -35,9 +35,7 @@ class JsonAdaptedStudent {
     private final String telegram;
     private final String studentId;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<JsonAdaptedLabNumber> labNumbers = new ArrayList<>();
-    private final List<JsonAdaptedLabStatus> labStatuses = new ArrayList<>();
-    private final List<JsonAdaptedLabMark> labMarks = new ArrayList<>();
+    private final List<JsonAdaptedLab> labs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given student details.
@@ -46,9 +44,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("email") String email,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("github") String githubUsername,
             @JsonProperty("telegram") String telegram, @JsonProperty("studentId") String studentId,
-            @JsonProperty("labNames") List<JsonAdaptedLabNumber> labNumbers,
-            @JsonProperty("labStatuses") List<JsonAdaptedLabStatus> labStatuses,
-            @JsonProperty("labMarks") List<JsonAdaptedLabMark> labMarks) {
+            @JsonProperty("labs") List<JsonAdaptedLab> labs) {
         this.name = name;
         this.email = email;
         this.githubUsername = githubUsername;
@@ -59,16 +55,8 @@ class JsonAdaptedStudent {
             this.tagged.addAll(tagged);
         }
 
-        if (labNumbers != null) {
-            this.labNumbers.addAll(labNumbers);
-        }
-
-        if (labStatuses != null) {
-            this.labStatuses.addAll(labStatuses);
-        }
-
-        if (labMarks != null) {
-            this.labMarks.addAll(labMarks);
+        if (labs != null) {
+            this.labs.addAll(labs);
         }
     }
 
@@ -84,14 +72,8 @@ class JsonAdaptedStudent {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        labNumbers.addAll(source.getLabs().asUnmodifiableObservableList().stream()
-                .map(JsonAdaptedLabNumber::new)
-                .collect(Collectors.toList()));
-        labStatuses.addAll(source.getLabs().asUnmodifiableObservableList().stream()
-                .map(JsonAdaptedLabStatus::new)
-                .collect(Collectors.toList()));
-        labMarks.addAll(source.getLabs().asUnmodifiableObservableList().stream()
-                .map(JsonAdaptedLabMark::new)
+        labs.addAll(source.getLabs().asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedLab::new)
                 .collect(Collectors.toList()));
     }
 
@@ -125,14 +107,13 @@ class JsonAdaptedStudent {
 
     private List<Lab> deserializeLabs() throws IllegalValueException {
         List<Lab> personLabs = new ArrayList<>();
-        for (int i = 0; i < labNumbers.size(); i++) {
+        for (int i = 0; i < labs.size(); i++) {
             // Incase of wrong lab status format we will just add the lab with LabStatus.UNSUBMITTED
             try {
-                personLabs.add(labNumbers.get(i).toModelType().of(
-                        labStatuses.get(i).getLabStatus(), labMarks.get(i).getLabMark()));
+                personLabs.add(labs.get(i).toModelType());
             } catch (IllegalArgumentException e) {
                 logger.info("Illegal lab attributes found when converting labs " + e);
-                personLabs.add(labNumbers.get(i).toModelType());
+                personLabs.add(new Lab(labs.get(i).getLabNumber()));
             }
         }
         return personLabs;
