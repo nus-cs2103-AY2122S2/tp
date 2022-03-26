@@ -39,7 +39,8 @@ public class EditCustomerCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Customer editedCustomer = new CustomerBuilder().build();
-        EditCustomerCommand.EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder(editedCustomer).build();
+        EditCustomerCommand.EditCustomerDescriptor descriptor =
+            new EditCustomerDescriptorBuilder(editedCustomer).build();
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(INDEX_FIRST_CUSTOMER, descriptor);
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
@@ -57,10 +58,10 @@ public class EditCustomerCommandTest {
 
         CustomerBuilder customerInList = new CustomerBuilder(lastCustomer);
         Customer editedCustomer = customerInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withStaffs(VALID_STAFF_AMY).withServices(VALID_SERVICE_BOB).build();
+            .withStaffs(VALID_STAFF_AMY).withServices(VALID_SERVICE_BOB).build();
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_AMY).withServices(VALID_SERVICE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_AMY).withServices(VALID_SERVICE_BOB).build();
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(indexLastCustomer, descriptor);
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
@@ -91,7 +92,8 @@ public class EditCustomerCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCustomerCommand editCustomerCommand = new EditCustomerCommand(INDEX_FIRST_CUSTOMER, new EditCustomerCommand.EditCustomerDescriptor());
+        EditCustomerCommand editCustomerCommand =
+            new EditCustomerCommand(INDEX_FIRST_CUSTOMER, new EditCustomerCommand.EditCustomerDescriptor());
         Customer editedCustomer = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
@@ -108,7 +110,7 @@ public class EditCustomerCommandTest {
         Customer customerInFilteredList = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         Customer editedCustomer = new CustomerBuilder(customerInFilteredList).withName(VALID_NAME_BOB).build();
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(INDEX_FIRST_CUSTOMER,
-                new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());
+            new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
 
@@ -121,7 +123,8 @@ public class EditCustomerCommandTest {
     @Test
     public void execute_duplicateCustomerUnfilteredList_failure() {
         Customer firstCustomer = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        EditCustomerCommand.EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder(firstCustomer).build();
+        EditCustomerCommand.EditCustomerDescriptor descriptor =
+            new EditCustomerDescriptorBuilder(firstCustomer).build();
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(INDEX_SECOND_CUSTOMER, descriptor);
 
         assertCommandFailure(editCustomerCommand, model, EditCustomerCommand.MESSAGE_DUPLICATE_CUSTOMER);
@@ -134,7 +137,7 @@ public class EditCustomerCommandTest {
         // edit customer in filtered list into a duplicate trackBeau
         Customer customerInList = model.getTrackBeau().getCustomerList().get(INDEX_SECOND_CUSTOMER.getZeroBased());
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(INDEX_FIRST_CUSTOMER,
-                new EditCustomerDescriptorBuilder(customerInList).build());
+            new EditCustomerDescriptorBuilder(customerInList).build());
 
         assertCommandFailure(editCustomerCommand, model, EditCustomerCommand.MESSAGE_DUPLICATE_CUSTOMER);
     }
@@ -160,7 +163,7 @@ public class EditCustomerCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackBeau().getCustomerList().size());
 
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(outOfBoundIndex,
-                new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());
+            new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCustomerCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }

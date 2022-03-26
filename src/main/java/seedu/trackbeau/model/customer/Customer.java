@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.trackbeau.model.uniquelist.UniqueListItem;
 import seedu.trackbeau.model.tag.Tag;
+import seedu.trackbeau.model.uniquelist.UniqueListItem;
 
 /**
  * Represents a Customer trackBeau.

@@ -40,11 +40,12 @@ public class AddCustomerCommandTest {
 
         CommandResult commandResult = new AddCustomerCommand(validCustomer).execute(modelStub);
 
-        assertEquals(String.format(AddCustomerCommand.MESSAGE_SUCCESS, validCustomer), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCustomerCommand.MESSAGE_SUCCESS, validCustomer),
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.customersAdded);
     }
 
-    @Test
+    @Testl
     public void execute_duplicateCustomer_throwsCommandException() {
         Customer validCustomer = new CustomerBuilder().build();
         AddCustomerCommand addCustomerCommand = new AddCustomerCommand(validCustomer);

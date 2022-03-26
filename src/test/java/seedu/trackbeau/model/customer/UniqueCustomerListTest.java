@@ -16,8 +16,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.model.uniquelist.UniqueList;
-import seedu.trackbeau.model.uniquelist.exceptions.ItemNotFoundException;
 import seedu.trackbeau.model.uniquelist.exceptions.DuplicateItemException;
+import seedu.trackbeau.model.uniquelist.exceptions.ItemNotFoundException;
 import seedu.trackbeau.testutil.CustomerBuilder;
 
 public class UniqueCustomerListTest {

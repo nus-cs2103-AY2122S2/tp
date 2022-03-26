@@ -3,8 +3,8 @@ package seedu.trackbeau.model.booking;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import seedu.trackbeau.model.uniquelist.UniqueListItem;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.uniquelist.UniqueListItem;
 
 public class Booking implements UniqueListItem {
     //private final Service Service;

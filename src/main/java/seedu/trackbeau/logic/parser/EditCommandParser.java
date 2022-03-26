@@ -33,21 +33,23 @@ public class EditCommandParser implements Parser<EditCustomerCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCustomerCommand
      * and returns an EditCustomerCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCustomerCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_BIRTHDATE,
-                        PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES, PREFIX_REGDATE);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_BIRTHDATE,
+                PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES, PREFIX_REGDATE);
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCustomerCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCustomerCommand.MESSAGE_USAGE), pe);
         }
 
         EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
@@ -71,11 +73,11 @@ public class EditCommandParser implements Parser<EditCustomerCommand> {
         }
         if (argMultimap.getValue(PREFIX_BIRTHDATE).isPresent()) {
             editCustomerDescriptor.setBirthdate(ParserUtil
-                    .parseBirthdate(argMultimap.getValue(PREFIX_BIRTHDATE).get()));
+                .parseBirthdate(argMultimap.getValue(PREFIX_BIRTHDATE).get()));
         }
         if (argMultimap.getValue(PREFIX_REGDATE).isPresent()) {
             editCustomerDescriptor.setRegistrationDate(ParserUtil
-                    .parseRegistrationDate(argMultimap.getValue(PREFIX_REGDATE).get()));
+                .parseRegistrationDate(argMultimap.getValue(PREFIX_REGDATE).get()));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editCustomerDescriptor::setStaffs);
