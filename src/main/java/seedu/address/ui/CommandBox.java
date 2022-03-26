@@ -128,7 +128,6 @@ public class CommandBox extends UiPart<Region> {
     private int editDistance(String str1, String str2) {
         int len1 = str1.length();
         int len2 = str2.length();
-
         int [][]DP = new int[2][len1 + 1];
 
         for (int i = 0; i <= len1; i++)
@@ -141,9 +140,7 @@ public class CommandBox extends UiPart<Region> {
                 } else if (str1.charAt(j - 1) == str2.charAt(i - 1)) {
                     DP[i % 2][j] = DP[(i - 1) % 2][j - 1];
                 } else {
-                    DP[i % 2][j] = 1 + Math.min(DP[(i - 1) % 2][j],
-                            Math.min(DP[i % 2][j - 1],
-                                    DP[(i - 1) % 2][j - 1]));
+                    DP[i % 2][j] = 1 + Math.min(DP[(i - 1) % 2][j], Math.min(DP[i % 2][j - 1], DP[(i - 1) % 2][j - 1]));
                 }
             }
         }
