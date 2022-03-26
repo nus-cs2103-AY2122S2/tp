@@ -40,7 +40,7 @@ public class TypicalPets {
             .withAbsentAttendanceEntry(DATE_TODAY).build();
     public static final Pet DANIEL = new PetBuilder().withName("Peepee").withPhone("87652533")
             .withOwnerName("Daniel Meier").withAddress("10th street").withTags("friends")
-            .withDiet("").withAppointment().build();
+            .withDiet("").withAppointment().withPresentAttendanceEntry(DATE_TODAY).build();
     public static final Pet PANCAKE = new PetBuilder().withName("Pancake").withPhone("9482224")
             .withOwnerName("Elle Meyer").withAddress("michegan ave").withDiet("").withAppointment().build();
     public static final Pet WAFFLE = new PetBuilder().withName("Waffle").withPhone("9482427")
