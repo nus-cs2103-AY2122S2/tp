@@ -534,7 +534,7 @@ The user wants to find a person that has every field instead.
 2. NUSocials shows a list of all persons
 3. User requests to remove certain tags from the person
 4. NUSocials removes the specific tags
-  
+
     Use case ends.
 ````
 **Extensions**
@@ -633,7 +633,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Subsequent launch
     1. Make some changes to the addressbook and close the application.
-  
+
     1. Reopen the application by double-clicking the jar file<br>
         Expected: Shows the GUI and loads contacts from the addressbook. Should reflect the changes made previously.
 
