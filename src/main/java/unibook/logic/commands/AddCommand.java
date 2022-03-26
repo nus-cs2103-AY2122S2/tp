@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.CliSyntax;
 import unibook.model.Model;
@@ -157,6 +158,18 @@ public class AddCommand extends Command {
         + CliSyntax.PREFIX_MODULE + "CS2100 "
         + CliSyntax.PREFIX_KEYEVENT + "1 "
         + CliSyntax.PREFIX_DATETIME + "2022-05-04 13:00\n";
+    public static final String MESSAGE_USAGE_MEETING = COMMAND_WORD
+        + ": To add a meeting to a group, use the following format.\n"
+        + "Parameters: "
+        + CliSyntax.PREFIX_OPTION + "meeting "
+        + CliSyntax.PREFIX_MODULE + "MODULE "
+        + CliSyntax.PREFIX_GROUP + "GROUPNAME "
+        + CliSyntax.PREFIX_DATETIME + "DATETIME\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "meeting "
+        + CliSyntax.PREFIX_MODULE + "CS2100 "
+        + CliSyntax.PREFIX_GROUP + "Project Work "
+        + CliSyntax.PREFIX_DATETIME + "2022-05-04 13:00\n";
 
     public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook";
@@ -165,8 +178,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook";
 
     public static final String MESSAGE_SUCCESS_GROUP = "New group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the specified"
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the specified "
         + "module in the UniBook";
+
+    public static final String MESSAGE_SUCCESS_MEETING = "New meeting time added.";
+    public static final String MESSAGE_DUPLICATE_MEETING = "This meeting time already exists in the specified "
+            + "group in the UniBook";
 
     public static final String MESSAGE_SUCCESS_EVENT = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the module specified.";
@@ -185,6 +202,8 @@ public class AddCommand extends Command {
     private ArrayList<LinkedHashSet<String>> groupNamesList;
     private ModuleKeyEvent.KeyEventType keyEvent;
     private LocalDateTime dateTime;
+    private ArrayList<LocalDateTime> dateTimeList;
+    private Boolean isAddMeetingTime = false;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -222,13 +241,24 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates an AddCommand to add the specified {@code Module}
+     * Creates an AddCommand to add the {@code ModuleKeyEvent} into the specified {@code Module}
      */
     public AddCommand(ModuleCode moduleCode, ModuleKeyEvent.KeyEventType keyEvent, LocalDateTime dateTime) {
         requireNonNull(moduleCode);
         this.moduleCode = moduleCode;
         this.keyEvent = keyEvent;
         this.dateTime = dateTime;
+    }
+
+    /**
+     * Creates an AddCommand to add {@code LocalDateTime meetings} into the specified {@code Group}
+     */
+    public AddCommand(ModuleCode moduleCode, String groupName, ArrayList<LocalDateTime> dateTimes) {
+        requireNonNull(moduleCode);
+        this.moduleCode = moduleCode;
+        this.groupName = groupName;
+        dateTimeList = dateTimes;
+        isAddMeetingTime = true;
     }
 
     /**
@@ -239,6 +269,18 @@ public class AddCommand extends Command {
         requireNonNull(moduleCodeOfGroup);
         groupName = groupNameToAdd;
         moduleCode = moduleCodeOfGroup;
+    }
+
+    /**
+     * Creates an AddCommand to add a Group to UniBook with {@code String groupName}
+     * and meetings {@code ArrayList<LocalDateTime> dateTimes} to {@code moduleCode}
+     */
+    public AddCommand(String groupNameToAdd, ModuleCode moduleCodeOfGroup, ArrayList<LocalDateTime> dateTimes) {
+        requireNonNull(groupNameToAdd);
+        requireNonNull(moduleCodeOfGroup);
+        groupName = groupNameToAdd;
+        moduleCode = moduleCodeOfGroup;
+        dateTimeList = dateTimes;
     }
 
     @Override
@@ -301,6 +343,20 @@ public class AddCommand extends Command {
             ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEvent, dateTime, moduleToAddEventTo);
             moduleToAddEventTo.addKeyEvent(moduleKeyEvent);
             return new CommandResult(String.format(MESSAGE_SUCCESS_EVENT, moduleKeyEvent));
+        } else if (isAddMeetingTime) {
+            if (!model.hasModule(moduleCode)) {
+                throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
+            }
+            Module moduleGroupIsIn = model.getModuleByCode(moduleCode);
+            Group groupToUpdate = moduleGroupIsIn.getGroupByName(groupName);
+            for (LocalDateTime dateTime : dateTimeList) {
+                try {
+                    groupToUpdate.addMeetingTime(dateTime);
+                } catch (Exception e) {
+                    throw new CommandException(MESSAGE_DUPLICATE_MEETING);
+                }
+            }
+            return new CommandResult(MESSAGE_SUCCESS_MEETING);
         } else {
             if (!model.hasModule(moduleCode)) {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
@@ -309,7 +365,12 @@ public class AddCommand extends Command {
             if (moduleToAddGroupTo.hasGroupName(groupName)) {
                 throw new CommandException(MESSAGE_DUPLICATE_GROUP);
             }
-            Group groupToAdd = new Group(groupName, moduleToAddGroupTo);
+            if (dateTimeList != null) {
+                groupToAdd = new Group(groupName, moduleToAddGroupTo,
+                    FXCollections.observableArrayList(dateTimeList));
+            } else {
+                groupToAdd = new Group(groupName, moduleToAddGroupTo);
+            }
             model.addGroup(groupToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_GROUP, groupToAdd));
         }

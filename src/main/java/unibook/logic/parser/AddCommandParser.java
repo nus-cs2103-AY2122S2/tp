@@ -61,6 +61,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArrayList<ModuleKeyEvent> keyEventsList = new ArrayList<>();
         ModuleKeyEvent.KeyEventType keyEvent;
         LocalDateTime dateTime;
+        ArrayList<LocalDateTime> dateTimeList;
         Name name;
         Phone phone = new Phone();
         Email email = new Email();
@@ -75,12 +76,18 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         switch (option) {
         case "group":
+            argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_NAME,
+                    CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_DATETIME);
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_MODULE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE_GROUP));
             }
             groupName = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
+            if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME)) {
+                dateTimeList = ParserUtil.parseAllDateTimes(argMultimap.getAllValues(CliSyntax.PREFIX_DATETIME));
+                return new AddCommand(groupName, moduleCode, dateTimeList);
+            }
             return new AddCommand(groupName, moduleCode);
         case "module":
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_MODULE)) {
@@ -98,13 +105,25 @@ public class AddCommandParser implements Parser<AddCommand> {
             } else {
                 return new AddCommand(module);
             }
+        case "meeting":
+            argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_MODULE,
+                CliSyntax.PREFIX_GROUP, CliSyntax.PREFIX_DATETIME);
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE,
+                CliSyntax.PREFIX_GROUP, CliSyntax.PREFIX_DATETIME)) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE_MEETING));
+            }
+            moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
+            groupName = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get();
+            dateTimeList = ParserUtil.parseAllDateTimes(argMultimap.getAllValues(CliSyntax.PREFIX_DATETIME));
+            return new AddCommand(moduleCode, groupName, dateTimeList);
         case "event":
             argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_MODULE,
-                CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME);
+                    CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME);
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE,
-                CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME)) {
+                    CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCommand.MESSAGE_USAGE_EVENT));
+                        AddCommand.MESSAGE_USAGE_EVENT));
             }
 
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -302,5 +303,20 @@ public class ParserUtil {
         default:
             throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_TYPE);
         }
+    }
+
+    /**
+     * Parses {@code List<String> allDateTimes} into an {@code ArrayList<LocalDateTime>}.
+     */
+    public static ArrayList<LocalDateTime> parseAllDateTimes(List<String> allDateTimes) throws ParseException {
+        ArrayList<LocalDateTime> dateTimeList = new ArrayList<>();
+        for (String dateTimeStr : allDateTimes) {
+            LocalDateTime dateTime = parseDateTime(dateTimeStr);
+            if (dateTimeList.contains(dateTime)) {
+                throw new ParseException("You cannot add duplicate meeting times to the group!");
+            }
+            dateTimeList.add(dateTime);
+        }
+        return dateTimeList;
     }
 }
