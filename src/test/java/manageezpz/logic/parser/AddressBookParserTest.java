@@ -22,11 +22,12 @@ import manageezpz.logic.commands.EditCommand;
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
 import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindCommand;
+import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.commands.HelpCommand;
 import manageezpz.logic.commands.ListCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Person;
-import manageezpz.model.task.TaskContainsKeywordsPredicate;
+import manageezpz.model.task.TaskMultiplePredicate;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 import manageezpz.testutil.PersonBuilder;
 import manageezpz.testutil.PersonUtil;
@@ -77,7 +78,7 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD
                         + " " + PREFIX_TASK.toString() + " " + PREFIX_DESCRIPTION
                         + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new TaskContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindTaskCommand(new TaskMultiplePredicate(PREFIX_TASK, keywords, null, null, null, null)), command);
     }
 
     @Test

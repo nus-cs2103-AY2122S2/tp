@@ -26,6 +26,7 @@ import manageezpz.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // All attributes pertaining to employees
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -49,6 +50,15 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    // Attributes pertaining tasks
+    public static final String DESCRIPTION = "Play Genshin";
+    public static final List<String> LIST_DESCRIPTIONS = List.of("Play", "Genshin");
+    public static final String VALID_DATE = "2022-01-01"; // Date are in YYYY-MM-DD
+    public static final String VALID_PRIORITY = "LOW"; // Valid priority are none, low, medium, high
+    public static final String INVALID_PRIORITY = "H1GH";
+
+    public static final String INVALID_DATE = "2022 01 01";
 
     // Multiple arguments not allowed for list command
     public static final String INVALID_LIST_MULTIPLE_ARGUMENTS = " " + PREFIX_TODO + " " + PREFIX_EVENT;

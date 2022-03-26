@@ -1,6 +1,7 @@
 package manageezpz.logic.commands;
 
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
@@ -9,15 +10,34 @@ import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 import manageezpz.model.person.NameContainsKeywordsPredicate;
 
+class FindTaskCommandTest {
+
+}
+/*
+
+package manageezpz.logic.commands;
+
+        import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+
+        import java.util.Arrays;
+
+        import manageezpz.model.Model;
+        import manageezpz.model.ModelManager;
+        import manageezpz.model.UserPrefs;
+        import manageezpz.model.person.NameContainsKeywordsPredicate;
+
 // TODO: Do test for find command after GUI settled
+*/
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
- */
+ *//*
+
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    /*
+    */
+/*
     @Test
     public void equals() {
         NameContainsKeywordsPredicate firstPredicate =
@@ -63,12 +83,16 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
-    }*/
+    }*//*
 
-    /**
+
+    */
+/**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
+     *//*
+
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
+*/

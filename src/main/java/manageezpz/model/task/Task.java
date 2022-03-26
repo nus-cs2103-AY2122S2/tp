@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import manageezpz.commons.util.StringUtil;
 import manageezpz.model.person.Person;
 
 /**
@@ -142,6 +143,11 @@ public class Task {
         Task otherTask = (Task) other;
         return otherTask.getDescription().equals(getDescription())
                 && otherTask.getStatusIcon().equals(getStatusIcon());
+    }
+
+    public boolean haveAssignees(String assignee) {
+        return assignees.stream()
+                .anyMatch(person -> person.getName().fullName.equals(assignee));
     }
 
     @Override
