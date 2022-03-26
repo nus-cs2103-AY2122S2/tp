@@ -1,5 +1,6 @@
 package seedu.contax.ui.onboarding;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -37,16 +38,14 @@ public class Overlay extends UiPart<Region> {
      */
     public void cover(DoubleProperty boundX, DoubleProperty boundY,
                       ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width) {
-        showAll();
-        topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
-        bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
-        topOverlay.layoutXProperty().bind(boundX);
-        topOverlay.layoutYProperty().bind(boundY);
-        topOverlay.minHeightProperty().bind(height);
-        topOverlay.minWidthProperty().bind(width);
-        topOverlay.maxHeightProperty().bind(height);
-        topOverlay.maxWidthProperty().bind(width);
 
+        showOverlay(topOverlay);
+        hideOverlay(bottomOverlay);
+
+        setLayout(topOverlay, boundX, boundY);
+
+        setHeight(topOverlay, height);
+        setWidth(topOverlay, width);
     }
 
     /**
@@ -64,54 +63,110 @@ public class Overlay extends UiPart<Region> {
                          ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth,
                          ShowOverlay option) {
 
+        setLayout(topOverlay, boundX, new SimpleDoubleProperty(0));
+        setLayout(bottomOverlay, boundX, boundY.add(height));
+
+        setHeight(topOverlay, boundY);
+        setWidth(topOverlay, parentWidth);
+
+        setHeight(bottomOverlay, parentHeight.subtract(boundY.add(height)));
+        setWidth(bottomOverlay, parentWidth);
+
+        processOverlayOption(option);
+    }
+
+    /**
+     * Processes the given overlay option, which determines how the overlay will
+     * be shown
+     * @param option Overlay option
+     */
+    private void processOverlayOption(ShowOverlay option) {
         switch (option) {
         case BOTH:
-            showAll();
+            showOverlay(topOverlay);
+            showOverlay(bottomOverlay);
             break;
         case BOTTOM:
-            hideAll();
-            bottomOverlay.setVisible(true);
+            hideOverlay(topOverlay);
+            showOverlay(bottomOverlay);
             break;
         case TOP:
-            hideAll();
-            topOverlay.setVisible(true);
+            showOverlay(topOverlay);
+            hideOverlay(bottomOverlay);
             break;
         default:
             break;
         }
-
-        topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
-        bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
-        topOverlay.layoutXProperty().bind(boundX);
-        topOverlay.layoutYProperty().bind(new SimpleDoubleProperty(0));
-        topOverlay.minHeightProperty().bind(boundY);
-        topOverlay.minWidthProperty().bind(parentWidth);
-        topOverlay.maxHeightProperty().bind(boundY);
-        topOverlay.maxWidthProperty().bind(parentWidth);
-
-
-        bottomOverlay.layoutXProperty().bind(boundX);
-        bottomOverlay.layoutYProperty().bind(boundY.add(height));
-        bottomOverlay.minHeightProperty().bind(parentHeight.subtract(boundY.add(height)));
-        bottomOverlay.minWidthProperty().bind(parentWidth);
-        bottomOverlay.maxHeightProperty().bind(parentHeight.subtract(boundY.add(height)));
-        bottomOverlay.maxWidthProperty().bind(parentWidth);
     }
 
     /**
-     * Show all overlays
+     * Sets width of given overlay with the given ReadOnlyDoubleProperty.
+     * @param overlay overlay to set.
+     * @param property property to bind with.
      */
-    private void showAll() {
-        topOverlay.setVisible(true);
-        bottomOverlay.setVisible(true);
+    private void setWidth(Pane overlay, ReadOnlyDoubleProperty property) {
+        overlay.minWidthProperty().bind(property);
+        overlay.maxWidthProperty().bind(property);
     }
 
     /**
-     * Hide all overlays
+     * Sets height of given overlay with the given ReadOnlyDoubleProperty.
+     * @param overlay overlay to set.
+     * @param property property to bind with.
      */
-    private void hideAll() {
-        topOverlay.setVisible(false);
-        bottomOverlay.setVisible(false);
+    private void setHeight(Pane overlay, ReadOnlyDoubleProperty property) {
+        overlay.minHeightProperty().bind(property);
+        overlay.maxHeightProperty().bind(property);
+    }
+
+    /**
+     * Sets height of given overlay with the given DoubleBinding.
+     * @param overlay overlay to set.
+     * @param property property to bind with.
+     */
+    private void setHeight(Pane overlay, DoubleBinding property) {
+        overlay.minHeightProperty().bind(property);
+        overlay.maxHeightProperty().bind(property);
+    }
+
+    /**
+     * Sets the given overlay with the given x and y ReadOnlyDoubleProperty.
+     * @param overlay overlay to set.
+     * @param x property to bind x with
+     * @param y property to bind y with
+     */
+    private void setLayout(Pane overlay, ReadOnlyDoubleProperty x, ReadOnlyDoubleProperty y) {
+        overlay.layoutXProperty().bind(x);
+        overlay.layoutYProperty().bind(y);
+    }
+
+    /**
+     * Sets the given overlay with the given x ReadOnlyDoublePropery and y DoubleBinding.
+     * @param overlay overlay to set.
+     * @param x property to bind x with
+     * @param y property to bind y with
+     */
+    private void setLayout(Pane overlay, ReadOnlyDoubleProperty x, DoubleBinding y) {
+        overlay.layoutXProperty().bind(x);
+        overlay.layoutYProperty().bind(y);
+    }
+
+    /**
+     * Shows the given overlay
+     * @param overlay
+     */
+    private void showOverlay(Pane overlay) {
+        overlay.setVisible(true);
+        overlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
+    }
+
+    /**
+     * Hides the given overlay
+     * @param overlay
+     */
+    private void hideOverlay(Pane overlay) {
+        overlay.setVisible(false);
+        overlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
     }
 
 }
