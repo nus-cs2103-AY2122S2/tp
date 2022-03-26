@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.FlowPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-            <ImageView fx:id="displayPicture" fitWidth="200" fitHeight="200"/>
-            <Label fx:id="name" styleClass="focusStyle" text="\$phone" />
+        <VBox alignment="CENTER_LEFT" minHeight="120" GridPane.columnIndex="0">
+            <SplitPane fx:id="focusSplitPane">
+                <ImageView fx:id="displayPicture" fitWidth="100" fitHeight="120"/>
+                <VBox fx:id="keyAttributes" styleClass="keyAttributesVBox" VBox.vgrow="ALWAYS">
+                    <Label fx:id="name" styleClass="focusStyleName" text="\$phone" />
+                    <Label fx:id="id" styleClass="focusStyleName" text="\$id" />
+                    <FlowPane fx:id="statusFocusPane" prefWrapLength="200"/>
+                    <FlowPane fx:id="availableDaysFocus" prefWrapLength="200"/>
+                </VBox>
+            </SplitPane>
             <Label fx:id="phone" styleClass="focusStyle" text="\$phone" />
-            <Label fx:id="course" styleClass="focusStyle" text="\$course" />
             <Label fx:id="email" styleClass="focusStyle" text="\$email" />
+            <Label fx:id="course" styleClass="focusStyle" text="\$course" />
         </VBox>
     </GridPane>
 </HBox>

@@ -14,14 +14,16 @@ import seedu.address.model.candidate.Candidate;
 
 public class FocusCommand extends Command {
 
-    public static final String MESSAGE_FOCUS_CANDIDATE = "Details of candidate shown...";
+    public static final String MESSAGE_FOCUS_CANDIDATE = "Details of candidate shown";
     public static final String MESSAGE_USAGE = "Focus [INDEX]";
     public static final String COMMAND_WORD = "focus";
     private final Index targetIndex;
 
-
-
+    /**
+     * Constructor for creating a Focus Command.
+     */
     public FocusCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -43,8 +45,25 @@ public class FocusCommand extends Command {
         }
 
         Candidate candidateToShow = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_FOCUS_CANDIDATE + targetIndex.getZeroBased()),
-                false, false, true);
+        return new CommandResult(String.format(MESSAGE_FOCUS_CANDIDATE),
+                false, false, true, targetIndex.getZeroBased());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        } else if (((FocusCommand) other).targetIndex.equals(this.targetIndex) && other instanceof FocusCommand) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Index getTargetIndex() {
+        return targetIndex;
+    }
 }

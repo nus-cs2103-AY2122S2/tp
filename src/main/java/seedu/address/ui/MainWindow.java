@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -174,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleFocus(CommandResult commandResult) {
+    private void handleFocus(CommandResult commandResult) throws FileNotFoundException {
         if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
             focusListPanelPlaceholder.getChildren().remove(0);
         }
@@ -199,7 +200,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText)
+            throws CommandException, ParseException, FileNotFoundException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());

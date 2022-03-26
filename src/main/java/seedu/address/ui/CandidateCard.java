@@ -27,7 +27,7 @@ public class CandidateCard extends UiPart<Region> {
     private static final String AVAILABILITY_MSG = "Availability: ";
     private static final String RED = "#800000";
     private static final String GREEN = "#006100";
-    private static final String YELLOW = "#CBA92B";
+    private static final String YELLOW = "#8B8000";
     private static final String CHANGE_COLOUR = "-fx-background-color: ";
 
     /**
@@ -53,10 +53,6 @@ public class CandidateCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label applicationStatus;
-    @FXML
-    private Label interviewStatus;
-    @FXML
     private Label availability;
     @FXML
     private FlowPane tags;
@@ -75,8 +71,6 @@ public class CandidateCard extends UiPart<Region> {
         phone.setText(candidate.getPhone().value);
         course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
         email.setText(candidate.getEmail().value);
-        applicationStatus.setText(APPLICATION_STATUS_MSG + candidate.getApplicationStatus().toString());
-        interviewStatus.setText(INTERVIEW_STATUS_MSG + candidate.getInterviewStatus().toString());
         availability.setText(AVAILABILITY_MSG);
         candidate.getAvailability().getList()
                 .forEach(availability -> availableDays.getChildren().add(new Label(availability)));
