@@ -98,7 +98,7 @@ public class EditCommand extends Command {
         Index targetIndex;
         if (index == 0) {
             FilteredList<Person> tempList = new FilteredList<Person>(lastShownList);
-            String[] nameKeywords = targetNameStr.split("\\s+");
+            String[] nameKeywords = {targetNameStr};
             Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
             tempList.setPredicate(predicate);
 

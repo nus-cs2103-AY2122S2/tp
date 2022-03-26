@@ -151,14 +151,11 @@ public class ModelManager implements Model {
     @Override
     public Index getPersonListIndex(Name name) {
         Index result = Index.fromZeroBased(0);
-        String[] personName = name.fullName.split(" ");
-        personLoop:
+        String personName = name.fullName;
         for (Person i : filteredPersons) {
             String currName = i.getName().fullName;
-            for (String word : personName) {
-                if (StringUtil.containsWordIgnoreCase(currName, word)) {
-                    break personLoop;
-                }
+            if (currName.toLowerCase().contains(personName.toLowerCase())) {
+                break;
             }
             result.increment(1);
         }
