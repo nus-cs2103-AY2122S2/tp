@@ -1,4 +1,4 @@
-package seedu.ibook.ui.filters;
+package seedu.ibook.ui.control;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -7,23 +7,25 @@ import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 
-public class FilterButton extends UiComponent<HBox> {
-    private static final String FXML = "Filters/FilterButton.fxml";
+public class Filter extends UiComponent<HBox> {
+
+    private static final String FXML = "control/Filter.fxml";
 
     private final AttributeFilter filter;
 
     @FXML
     private Label type;
+
     @FXML
     private Label value;
 
     /**
-     * Initializes a {@code FilterButton}.
+     * Initializes a {@code Filter}.
      *
      * @param filter The {@code AttributeFilter}.
      * @param mainWindow The Main Window that this component resides on.
      */
-    FilterButton(AttributeFilter filter, MainWindow mainWindow) {
+    Filter(AttributeFilter filter, MainWindow mainWindow) {
         super(FXML, mainWindow);
         this.filter = filter;
         populateFields();
@@ -31,7 +33,7 @@ public class FilterButton extends UiComponent<HBox> {
 
     @FXML
     private void populateFields() {
-        type.setText(filter.getType());
+        type.setText(filter.getType().toUpperCase());
         value.setText(filter.getValue());
     }
 
