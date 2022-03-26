@@ -13,6 +13,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 public class UnassignCommand extends Command {
+
     public static final String COMMAND_WORD = "unassign";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a student from a lesson \n"
             + "Parameters: "

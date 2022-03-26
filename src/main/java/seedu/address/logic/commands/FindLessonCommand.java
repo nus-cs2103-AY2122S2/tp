@@ -12,7 +12,7 @@ import seedu.address.model.lesson.LessonNameContainsKeywordsPredicate;
  */
 public class FindLessonCommand extends Command {
 
-    public static final String COMMAND_WORD = "findlesson";
+    public static final String COMMAND_WORD = "findlessons";
     public static final String SHORTENED_COMMAND_WORD = "fl";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all lessons whose names contain any of "
@@ -33,16 +33,6 @@ public class FindLessonCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()),
                 ViewTab.LESSON);
-    }
-
-    /**
-     * Returns true if the command word entered inside the user-input matches any of the
-     * specified keywords identified with this command.
-     */
-    public boolean matchesCommandWord(String commandWord) {
-        String lowerCaseCommandWord = commandWord.toLowerCase();
-
-        return commandWord.equals(COMMAND_WORD) || commandWord.equals(SHORTENED_COMMAND_WORD);
     }
 
     @Override

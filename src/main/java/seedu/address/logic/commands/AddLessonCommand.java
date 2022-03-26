@@ -17,7 +17,9 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 
 public class AddLessonCommand extends Command {
+
     public static final String COMMAND_WORD = "addlesson";
+    public static final String SHORTENED_COMMAND_WORD = "al";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the schedule"
             + "\n"

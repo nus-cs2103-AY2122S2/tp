@@ -57,28 +57,49 @@ public class TeachWhatParser {
             return new AddStudentCommandParser().parse(arguments);
 
         case DeleteStudentCommand.COMMAND_WORD:
+            // Fallthrough
+        case DeleteStudentCommand.SHORTENED_COMMAND_WORD:
             return new DeleteStudentCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case AddLessonCommand.COMMAND_WORD:
+            // Fallthrough
+        case AddLessonCommand.SHORTENED_COMMAND_WORD:
+            return new AddLessonCommandParser().parse(arguments);
+
+        case DeleteLessonCommand.COMMAND_WORD:
+            // Fallthrough
+        case DeleteLessonCommand.SHORTENED_COMMAND_WORD:
+            return new DeleteLessonCommandParser().parse(arguments);
+
+        case EditStudentCommand.COMMAND_WORD:
+            // Fallthrough
+        case EditStudentCommand.SHORTENED_COMMAND_WORD:
+            return new EditStudentCommandParser().parse(arguments);
+
+        case EditLessonCommand.COMMAND_WORD:
+            // Fallthrough
+        case EditLessonCommand.SHORTENED_COMMAND_WORD:
+            return new EditLessonCommandParser().parse(arguments);
 
         case FindStudentCommand.COMMAND_WORD:
+            // Fallthrough
+        case FindStudentCommand.SHORTENED_COMMAND_WORD:
             return new FindStudentCommandParser().parse(arguments);
 
         case FindLessonCommand.COMMAND_WORD:
+            // Fallthrough
+        case FindLessonCommand.SHORTENED_COMMAND_WORD:
             return new FindLessonCommandParser().parse(arguments);
 
         case ListStudentsCommand.COMMAND_WORD:
+            // Fallthrough
+        case ListStudentsCommand.SHORTENED_COMMAND_WORD:
             return new ListStudentsCommand();
 
         case ListLessonsCommand.COMMAND_WORD:
+            // Fallthrough
+        case ListLessonsCommand.SHORTENED_COMMAND_WORD:
             return new ListLessonsCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
 
         case ViewStudentInfoCommand.COMMAND_WORD:
             return new ViewStudentInfoCommandParser().parse(arguments);
@@ -86,23 +107,21 @@ public class TeachWhatParser {
         case ViewLessonInfoCommand.COMMAND_WORD:
             return new ViewLessonInfoCommandParser().parse(arguments);
 
-        case AddLessonCommand.COMMAND_WORD:
-            return new AddLessonCommandParser().parse(arguments);
-
         case AssignCommand.COMMAND_WORD:
             return new AssignCommandParser().parse(arguments);
-
-        case DeleteLessonCommand.COMMAND_WORD:
-            return new DeleteLessonCommandParser().parse(arguments);
 
         case UnassignCommand.COMMAND_WORD:
             return new UnassignCommandParser().parse(arguments);
 
-        case EditStudentCommand.COMMAND_WORD:
-            return new EditStudentCommandParser().parse(arguments);
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-        case EditLessonCommand.COMMAND_WORD:
-            return new EditLessonCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

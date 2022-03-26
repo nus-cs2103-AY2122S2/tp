@@ -16,6 +16,7 @@ import seedu.address.model.student.Student;
 public class DeleteStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "rmstudent";
+    public static final String SHORTENED_COMMAND_WORD = "rms";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed student list.\n"
