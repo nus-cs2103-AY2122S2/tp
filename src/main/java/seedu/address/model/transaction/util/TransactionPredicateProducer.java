@@ -5,5 +5,5 @@ package seedu.address.model.transaction.util;
  * with the specified person identifier (email)
  */
 public interface TransactionPredicateProducer {
-    TransactionWithIdentifierPredicate createTransactionPredicate(String email);
+    TransactionWithIdentifierPredicate createTransactionPredicate(long personId);
 }

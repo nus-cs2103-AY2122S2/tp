@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
@@ -62,6 +63,13 @@ public class Person implements Serializable {
      */
     public Person(Collection<Field> fields, Collection<Tag> tags) {
         this(new Date().getTime(), fields, tags);
+
+        // Sleep for 2 microseconds to ensure that it is impossible for another Person to have the same unique ID.
+        try {
+            TimeUnit.MILLISECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public long getUniqueId() {
@@ -176,9 +184,7 @@ public class Person implements Serializable {
      */
     public Person addTags(Collection<Tag> tags) {
         HashSet<Tag> updatedTags = new HashSet<>(this.tags);
-        for (Tag t : tags) {
-            updatedTags.add(t);
-        }
+        updatedTags.addAll(tags);
         return new Person(this.uniqueId, this.fields.values(), updatedTags);
     }
 

@@ -7,7 +7,7 @@ import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_COMPLETE;
 import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_INCOMPLETE;
 import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO_COMPLETE;
 import static seedu.address.testutil.TransactionUtil.VALID_AMOUNT_ONE;
-import static seedu.address.testutil.TransactionUtil.VALID_EMAIL;
+import static seedu.address.testutil.TransactionUtil.VALID_ID;
 import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_ONE;
 
 import java.util.Collection;
@@ -19,7 +19,7 @@ public class TransactionTest {
 
     @Test
     public void constructor_null_throwsNullArgumentException() {
-        assertThrows(NullPointerException.class, () -> new Transaction((Collection<TransactionField>) null, null));
+        assertThrows(NullPointerException.class, () -> new Transaction((Collection<TransactionField>) null, VALID_ID));
     }
 
     @Test
@@ -28,13 +28,13 @@ public class TransactionTest {
         List<TransactionField> incompleteArgumentsOne = List.of(
                 new Amount(VALID_AMOUNT_ONE)
         );
-        assertThrows(IllegalArgumentException.class, () -> new Transaction(incompleteArgumentsOne, VALID_EMAIL));
+        assertThrows(IllegalArgumentException.class, () -> new Transaction(incompleteArgumentsOne, VALID_ID));
 
         // Missing Amount Field
         List<TransactionField> incompleteArgumentsTwo = List.of(
                     new TransactionDate(VALID_TRANSACTION_DATE_ONE)
         );
-        assertThrows(IllegalArgumentException.class, () -> new Transaction(incompleteArgumentsTwo, VALID_EMAIL));
+        assertThrows(IllegalArgumentException.class, () -> new Transaction(incompleteArgumentsTwo, VALID_ID));
     }
 
     @Test

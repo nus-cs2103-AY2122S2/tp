@@ -7,5 +7,5 @@ import seedu.address.model.transaction.Transaction;
  * with the specified person identifier (email)
  */
 public interface TransactionProducer {
-    Transaction createTransaction(String email);
+    Transaction createTransaction(long personId);
 }
