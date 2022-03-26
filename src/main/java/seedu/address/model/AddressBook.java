@@ -5,12 +5,14 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.lineup.UniqueLineupList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.UniqueScheduleList;
 
 /**
@@ -56,6 +58,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setLineups(List<Lineup> lineups) {
+        this.lineups.setLineups(lineups);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -63,6 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setLineups(newData.getLineupList());
     }
 
     //// person-level operations
@@ -148,6 +155,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Add a person and update the respective lineups
+     * The person must not already exist in the address book and the lineups must exist.
+     */
+    public void initalizePerson(Person p) {
+        persons.add(p);
+
+        for (LineupName lineupName : p.getLineupNames()) {
+            Lineup lineup = lineups.getLineup(lineupName);
+            lineups.putPlayerToLineup(p, lineup);
+        }
+    }
+
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -172,6 +193,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         lineups.deletePlayerFromALlLineups(key);
     }
 
+    public boolean hasSchedule(Schedule schedule) {
+        return false;
+    }
+
     /**
      * Adds a Lineup to MyGM
      *
@@ -194,6 +219,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public List<Lineup> getLineupList() {
+        return lineups.getList();
+    }
+
+    @Override
+    public ObservableList<Schedule> getScheduleList() {
+        return schedules.asUnmodifiableObservableList();
+    }
+
     public void refresh() {
         persons.refresh();
     }
@@ -209,4 +244,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }

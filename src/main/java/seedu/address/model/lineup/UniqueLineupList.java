@@ -1,12 +1,16 @@
 package seedu.address.model.lineup;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Represents a list of unique Teams
@@ -177,5 +181,14 @@ public class UniqueLineupList {
         }
     }
 
+    public List<Lineup> getList() {
+        return list;
+    }
+
+    public void setLineups(List<Lineup> lineups) {
+        for (Lineup lineup : lineups) {
+            addLineupToList(lineup);
+        }
+    }
 }
 

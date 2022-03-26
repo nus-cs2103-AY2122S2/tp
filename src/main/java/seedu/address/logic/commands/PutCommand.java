@@ -52,7 +52,6 @@ public class PutCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (!model.hasPersonName(this.playerName)) {
             throw new CommandException(MESSAGE_NO_SUCH_PERSON);
         } else if (!model.hasLineupName(this.lineupName)) {

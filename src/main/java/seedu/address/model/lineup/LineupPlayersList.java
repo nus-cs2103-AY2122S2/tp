@@ -39,6 +39,10 @@ public class LineupPlayersList {
         playersList.remove(player);
     }
 
+    public ArrayList<Person> getPlayersList() {
+        return this.playersList;
+    }
+
     /**
      * Updates the lineupName for every player in the lineup
      *
