@@ -36,7 +36,9 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(),
                 model.getInterviewSchedule(), new UserPrefs());
+
         expectedModel.deleteCandidate(candidateToDelete);
+        expectedModel.deleteInterviewForCandidate(candidateToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -59,6 +61,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS, candidateToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
+
+        expectedModel.deleteInterviewForCandidate(candidateToDelete);
         expectedModel.deleteCandidate(candidateToDelete);
         showNoCandidate(expectedModel);
 
