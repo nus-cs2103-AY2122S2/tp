@@ -3,7 +3,7 @@ package manageezpz.logic.parser;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class DeleteEmployeeCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteEmployeeCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteEmployeeCommand(INDEX_FIRST));
     }
 
     @Test

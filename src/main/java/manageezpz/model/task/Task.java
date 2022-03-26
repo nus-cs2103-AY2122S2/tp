@@ -12,13 +12,13 @@ import manageezpz.model.person.Person;
  * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
  * inputted by a user either a Todo, Deadline or Event.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected boolean isDone;
     protected String type;
     protected Priority priority;
 
     public enum Priority {
-        NONE, LOW, MEDIUM, HIGH;
+        HIGH, LOW, MEDIUM, NONE;
     }
 
     // Identity fields
@@ -97,6 +97,29 @@ public class Task {
 
     public Priority getPriority() {
         return this.priority;
+    }
+
+
+    int getAssignedValue(String s) {
+        switch (s) {
+        case "NONE":
+            return 3;
+        case "LOW":
+            return 2;
+        case "MEDIUM":
+            return 1;
+        case "HIGH":
+            return 0;
+        default:
+            return Integer.MAX_VALUE;
+        }
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        String first = this.getPriority().name();
+        String second = o.getPriority().name();
+        return Integer.compare(getAssignedValue(first), getAssignedValue(second));
     }
 
     /**
