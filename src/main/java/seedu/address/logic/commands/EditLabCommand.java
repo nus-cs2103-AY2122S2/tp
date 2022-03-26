@@ -97,7 +97,7 @@ public class EditLabCommand extends Command {
 
     /**
      * Returns true if the Lab in its current state is valid to be edited using the given edit.
-     * More relevant for SubmitLabCommand.
+     * More relevant for {@link SubmitLabCommand} and {@link GradeLabCommand}.
      */
     public boolean isLabEditableByCurrentCommand(Lab l) {
         return true;
