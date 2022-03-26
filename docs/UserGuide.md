@@ -139,7 +139,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Modules cannot be edited through the `edit` command.
+* **Modules cannot be edited** through the `edit` command.
 
 Additionally, if one were to simply use `edit`, it would open up a new window to allow users to systematically edit a chosen contact  
 ![editWindow.png](images/editWindow.png)  
@@ -174,7 +174,7 @@ Format: `deletemodule INDEX m/MODULE...`
 * Deletes modules for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The modules will be deleted only if the person has the specified modules.
+* The modules will be deleted **only if the person has the specified modules**.
 
 Examples:
 * `list` followed by `deletemodule 2 m/CS3230` deletes the module CS3230 for the 2nd person in ModuleMate Finder.
@@ -183,7 +183,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears **all entries** from the address book.
 
 Format: `clear`
 
@@ -193,7 +193,7 @@ Examples:
 
 ### Clearing all modules for a person : `clearmodules`
 
-Clears all modules based on the given index from ModuleMate Finder.
+Clears **all modules** based on the given index from ModuleMate Finder.
 
 Format: `clearmodules INDEX`
 
@@ -208,6 +208,11 @@ Format: `status INDEX s/STATUS`
 - Gives a status to the person at specified `INDEX`
 - Status can either be a `blacklist` or `favourite`, a person can have no status tagged.
 - `INDEX` must be a **positive integer** 1, 2, 3, ...
+- If used without the with an **empty status field** (i.e. `status 1 s/`), the command will be treated as a **delete
+  command** and
+  removes
+  the status of the
+  specified person.
 
 Examples:
 - `status 1 s/blacklist` tags the 1st person in ModuleMate Finder as blacklisted.
@@ -237,7 +242,7 @@ Finds a person by the given module code.
 
 Format: `filter MODULE`
 
-- Only the given flag + keyword is searched
+- Only the **given flag + keyword** is searched
 - Keyword not matching the indicator is ignored
 - Valid module code have 2-3 prefix letters followed by 4 digits and one optional letter.
 
@@ -251,9 +256,10 @@ Sort all people within address book.
 Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE]​`
 
 * Sorts list with specified field(s). For any two persons, latter fields will only be considered if preceding fields are equal.​
-* Order of fields is important and there must be at least one field.
+* Order of fields is important and there must be **at least one field**.
 * Parameters determine whether field is sorted on ascending or descending order.
-* Parameters are optional must be either "asc", "desc" or an empty string "". Empty string "" is ascending by default.
+* Parameters are optional must be either "asc", "desc" or an empty string "". Empty string "" is **ascending by 
+  default**.
 * Parameters are case-insensitive. 
 
 Examples:
@@ -308,12 +314,15 @@ Format: `comment INDEX c/COMMENT`
 * `INDEX` must be a **positive integer** 1, 2, 3, ...
 * `COMMENT` cannot be blank.
 * Any existing comments for a person will be overwritten by the new user input.
-* If used without the `c/` prefix, the command will be treated as a delete command and removes the comment of the 
+* If used without the with an **empty comment field** (i.e. `comment 1 c/`), the command will be treated as a **delete 
+  command** and 
+  removes 
+  the comment of the 
   specified person.
 
 Examples:
 * `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd person.
-* `comment 3` will delete the comment for the 3rd person.
+* `comment 3 c/` will delete the comment for the 3rd person.
 
 ### Exiting the program : `exit`
 
