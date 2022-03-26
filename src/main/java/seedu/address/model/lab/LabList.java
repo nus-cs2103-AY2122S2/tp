@@ -186,6 +186,7 @@ public class LabList implements Iterable<Lab> {
     public boolean isEmpty() {
         return internalList.isEmpty();
     }
+
     @Override
     public Iterator<Lab> iterator() {
         return internalList.iterator();

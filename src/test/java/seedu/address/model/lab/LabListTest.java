@@ -201,4 +201,15 @@ class LabListTest {
         labs2.add(new Lab("1"));
         assertFalse(labs1.equals(labs2));
     }
+
+    @Test
+    public void isEmpty_emptyList_success() {
+        assertTrue(labs.isEmpty());
+    }
+
+    @Test
+    public void isEmpty_nonEmptyList_success() {
+        labs.add(new Lab("1"));
+        assertFalse(labs.isEmpty());
+    }
 }
