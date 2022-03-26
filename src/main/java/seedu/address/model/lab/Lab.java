@@ -149,11 +149,17 @@ public class Lab {
      * Returns a new immutable {@code Lab} with the specified {@code LabMark}.
      * Mainly used in {@link SampleDataUtil} and JsonAdaptedStudent.
      */
-    public Lab of(String labStatus, String labMark) {
+    public Lab of(String labStatus, String labMark) throws InvalidLabStatusException {
         requireAllNonNull(labStatus, labMark);
+
+        if (labMark.equals(LabMark.MARKS_UNKNOWN) && LabStatus.toLabStatus(labStatus) == LabStatus.GRADED) {
+            throw new InvalidLabStatusException();
+        }
+
         if (labMark.equals(LabMark.MARKS_UNKNOWN)) {
             return (new Lab(String.valueOf(labNumber))).of(labStatus);
         }
+
         return (new Lab(String.valueOf(labNumber))).of(new LabMark(labMark));
     }
 

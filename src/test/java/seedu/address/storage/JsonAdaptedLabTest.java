@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
 
 class JsonAdaptedLabTest {
 
@@ -71,6 +72,29 @@ class JsonAdaptedLabTest {
     @Test
     public void toModelType_invalidLabStatusNoMarkAndNullMark_throwsIllegalArgumentException() {
         JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, INVALID_LABSTATUS, VALID_NO_LABMARK);
+        assertThrows(IllegalArgumentException.class, () -> js.toModelType());
+    }
+
+    @Test
+    public void toModelType_nullLabMarkStatusNotGraded_success() {
+        JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, "SUBMITTED", null);
+        Lab expectedLab = new Lab("1").of(LabStatus.SUBMITTED);
+        try {
+            assertEquals(expectedLab, js.toModelType());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void toModelType_nullLabMarkStatusGraded_throwIllegalArgumentException() {
+        JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, VALID_LABSTATUS, null);
+        assertThrows(IllegalArgumentException.class, () -> js.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidLabMark_throwIllegalArgumentException() {
+        JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, VALID_LABSTATUS, INVALID_LABMARK);
         assertThrows(IllegalArgumentException.class, () -> js.toModelType());
     }
 }
