@@ -1,4 +1,4 @@
-package seedu.trackbeau.logic.commands;
+package seedu.trackbeau.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -12,6 +12,8 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 
 import seedu.trackbeau.commons.core.Messages;
+import seedu.trackbeau.logic.commands.Command;
+import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 
@@ -19,9 +21,9 @@ import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
  * Finds and lists all customers in trackBeau whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class FindCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "findc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all customers whose details match "
             + "Parameters: "
@@ -47,7 +49,7 @@ public class FindCommand extends Command {
 
     private final SearchContainsKeywordsPredicate predicate;
 
-    public FindCommand(SearchContainsKeywordsPredicate predicate) {
+    public FindCustomerCommand(SearchContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -62,7 +64,7 @@ public class FindCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                || (other instanceof FindCustomerCommand // instanceof handles nulls
+                && predicate.equals(((FindCustomerCommand) other).predicate)); // state check
     }
 }

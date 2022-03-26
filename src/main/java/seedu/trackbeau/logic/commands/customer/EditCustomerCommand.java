@@ -1,4 +1,4 @@
-package seedu.trackbeau.logic.commands;
+package seedu.trackbeau.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -23,6 +23,8 @@ import java.util.Set;
 import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.CollectionUtil;
+import seedu.trackbeau.logic.commands.Command;
+import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Address;
@@ -39,9 +41,9 @@ import seedu.trackbeau.model.tag.Tag;
 /**
  * Edits the details of an existing customer in trackBeau.
  */
-public class EditCommand extends Command {
+public class EditCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the customer identified "
             + "by the index number used in the displayed customer list. "
@@ -73,7 +75,7 @@ public class EditCommand extends Command {
      * @param index of the customer in the filtered customer list to edit
      * @param editCustomerDescriptor details to edit the customer with
      */
-    public EditCommand(Index index, EditCustomerDescriptor editCustomerDescriptor) {
+    public EditCustomerCommand(Index index, EditCustomerDescriptor editCustomerDescriptor) {
         requireNonNull(index);
         requireNonNull(editCustomerDescriptor);
 
@@ -93,7 +95,7 @@ public class EditCommand extends Command {
         Customer customerToEdit = lastShownList.get(index.getZeroBased());
         Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
-        if (!customerToEdit.isSameCustomer(editedCustomer) && model.hasCustomer(editedCustomer)) {
+        if (!customerToEdit.isSameItem(editedCustomer) && model.hasCustomer(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
@@ -134,12 +136,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCustomerCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditCustomerCommand e = (EditCustomerCommand) other;
         return index.equals(e.index)
                 && editCustomerDescriptor.equals(e.editCustomerDescriptor);
     }

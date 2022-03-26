@@ -1,4 +1,4 @@
-package seedu.trackbeau.logic.commands;
+package seedu.trackbeau.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -13,6 +13,8 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 
+import seedu.trackbeau.logic.commands.Command;
+import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Customer;
@@ -20,9 +22,9 @@ import seedu.trackbeau.model.customer.Customer;
 /**
  * Adds a customer to trackBeau.
  */
-public class AddCommand extends Command {
+public class AddCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to TrackBeau. "
             + "Parameters: "
@@ -55,9 +57,9 @@ public class AddCommand extends Command {
     private final Customer toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Customer}
+     * Creates an AddCustomerCommand to add the specified {@code Customer}
      */
-    public AddCommand(Customer customer) {
+    public AddCustomerCommand(Customer customer) {
         requireNonNull(customer);
         toAdd = customer;
     }
@@ -77,7 +79,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddCustomerCommand // instanceof handles nulls
+                && toAdd.equals(((AddCustomerCommand) other).toAdd));
     }
 }
