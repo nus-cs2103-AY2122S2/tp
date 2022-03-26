@@ -57,6 +57,10 @@ AddCommand -> Model ++ MODEL_COLOR: hasPerson(person)
 deactivate Model
 AddCommand -> Model ++ MODEL_COLOR: addPerson(person)
 deactivate Model
+AddCommand -> Model ++ MODEL_COLOR: sortFilteredPersonList();
+deactivate Model
+AddCommand -> Model ++ MODEL_COLOR: updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+deactivate Model
 
 create CommandResult
 AddCommand -> CommandResult
