@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import manageezpz.commons.util.StringUtil;
 import manageezpz.model.person.Person;
 
 /**
@@ -168,6 +167,11 @@ public class Task implements Comparable<Task> {
                 && otherTask.getStatusIcon().equals(getStatusIcon());
     }
 
+    /**
+     * Checks whether the assignee is assigned to the task.
+     * @param assignee The assignee to be searched
+     * @return True if the assignee is assigned, false otherwise
+     */
     public boolean haveAssignees(String assignee) {
         return assignees.stream()
                 .anyMatch(person -> person.getName().fullName.equals(assignee));

@@ -21,10 +21,13 @@ import manageezpz.model.task.Date;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.TaskMultiplePredicate;
 
+/**
+ * Subclass of FindCommandParser which check if the options are valid for finding tasks.
+ */
 class FindTaskCommandParser extends FindCommandParser {
     private static final Prefix[] TASK_TYPES = {PREFIX_TASK, PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
-    private static final Prefix[] TASK_PROPERTIES
-            = {PREFIX_DATE, PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
+    private static final Prefix[] TASK_PROPERTIES = {PREFIX_DATE, PREFIX_DESCRIPTION, PREFIX_PRIORITY,
+        PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
 
     private String errorMessage = "";
     private boolean hasError = false;
@@ -60,13 +63,11 @@ class FindTaskCommandParser extends FindCommandParser {
     }
 
     private Prefix getPrefix(ArgumentMultimap argMultiMap) {
-        for (Prefix prefix : TASK_TYPES) {
-            if (argMultiMap.isPrefixExist(prefix)) {
-                return prefix;
-            }
-        }
-        assert false : "String argument must have a task type prefix";
-        return null;
+        Prefix currentPrefix = Arrays.stream(TASK_TYPES)
+                .filter(prefix -> argMultiMap.isPrefixExist(prefix))
+                .findFirst().orElseGet(null);
+        assert currentPrefix != null : "getPrefix should not return a null";
+        return currentPrefix;
     }
 
     private List<String> getDescriptions(ArgumentMultimap argMultiMap) {
@@ -119,7 +120,7 @@ class FindTaskCommandParser extends FindCommandParser {
 
     private boolean checkIfDateIsValid(String dateString) {
         if (dateString.isEmpty()) {
-            addErrorMessage(FindTaskCommand.EMPTY_DATE);
+            addErrorMessage(FindTaskCommand.INVALID_DATE);
             return false;
         }
         if (!Date.isValidDate(dateString)) {
@@ -133,14 +134,10 @@ class FindTaskCommandParser extends FindCommandParser {
         Task.Priority priority = null;
         if (argMultiMap.isPrefixExist(PREFIX_PRIORITY)) {
             String priorityString = argMultiMap.getValue(PREFIX_PRIORITY).get().trim().toUpperCase();
-            if (priorityString.isEmpty()) {
-                addErrorMessage(FindTaskCommand.EMPTY_PRIORITY);
-            } else {
-                try {
-                    priority = Task.Priority.valueOf(priorityString);
-                } catch (IllegalArgumentException e) {
-                    addErrorMessage(FindTaskCommand.INVALID_PRIORITY);
-                }
+            try {
+                priority = Task.Priority.valueOf(priorityString);
+            } catch (IllegalArgumentException e) {
+                addErrorMessage(FindTaskCommand.INVALID_PRIORITY);
             }
         }
         return priority;
@@ -155,10 +152,7 @@ class FindTaskCommandParser extends FindCommandParser {
     }
 
     private boolean checkIfEitherTrueOrFalse(String booleanString) {
-        if (booleanString.isEmpty()) {
-            addErrorMessage(FindTaskCommand.EMPTY_BOOLEAN);
-            return false;
-        } else if (booleanString.equals("true") || booleanString.equals("false")) {
+        if (booleanString.equals("true") || booleanString.equals("false")) {
             return true;
         } else if (!booleanString.equals("true") && !booleanString.equals("false")) {
             addErrorMessage(FindTaskCommand.INVALID_BOOLEAN);
@@ -168,6 +162,10 @@ class FindTaskCommandParser extends FindCommandParser {
         return false;
     }
 
+    /**
+     * Collates all the errors and shows the UI after processing all properties.
+     * @param errorMessage Error message from each checking to be added to the overall error message.
+     */
     private void addErrorMessage(String errorMessage) {
         hasError = true;
         this.errorMessage = this.errorMessage + errorMessage;

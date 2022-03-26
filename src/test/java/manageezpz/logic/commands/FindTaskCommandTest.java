@@ -1,9 +1,7 @@
 package manageezpz.logic.commands;
 
-import static manageezpz.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -50,4 +48,5 @@ class FindTaskCommandTest {
     }
 
     // TODO: finish up testing for findTaskCommandTest.java
+    
 }

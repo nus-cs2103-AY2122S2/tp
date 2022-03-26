@@ -32,18 +32,12 @@ import manageezpz.model.task.TaskMultiplePredicate;
 class FindTaskCommandParserTest {
     static final String EMPTY_DESCRIPTION_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.EMPTY_KEYWORD + FindCommand.MESSAGE_USAGE);
-    static final String EMPTY_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            FindTaskCommand.EMPTY_DATE + FindCommand.MESSAGE_USAGE);
     static final String INVALID_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_DATE + FindCommand.MESSAGE_USAGE);
-    static final String EMPTY_PRIORITY_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            FindTaskCommand.EMPTY_PRIORITY + FindCommand.MESSAGE_USAGE);
     static final String INVALID_PRIORITY_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_PRIORITY + FindCommand.MESSAGE_USAGE);
     static final String EMPTY_ASSIGNEE_COMMAND_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.EMPTY_ASSIGNEE + FindCommand.MESSAGE_USAGE);
-    static final String EMPTY_BOOLEAN_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            FindTaskCommand.EMPTY_BOOLEAN + FindCommand.MESSAGE_USAGE);
     static final String INVALID_BOOLEAN_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_BOOLEAN + FindCommand.MESSAGE_USAGE);
     static final String TODO_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
@@ -84,7 +78,7 @@ class FindTaskCommandParserTest {
         String userInput = String.join(" ", FindCommand.COMMAND_WORD, PREFIX_TASK.toString(),
                 PREFIX_DATE.toString());
 
-        assertParseFailure(parser, userInput, EMPTY_DATE_ERROR_MESSAGE);
+        assertParseFailure(parser, userInput, INVALID_DATE_ERROR_MESSAGE);
     }
 
     @Test
@@ -119,7 +113,7 @@ class FindTaskCommandParserTest {
         String userInput = String.join(" ", FindCommand.COMMAND_WORD, PREFIX_TASK.toString(),
                 PREFIX_PRIORITY.toString());
 
-        assertParseFailure(parser, userInput, EMPTY_PRIORITY_ERROR_MESSAGE);
+        assertParseFailure(parser, userInput, INVALID_PRIORITY_ERROR_MESSAGE);
     }
 
     @Test
@@ -165,7 +159,7 @@ class FindTaskCommandParserTest {
         String userInput = String.join(" ", FindCommand.COMMAND_WORD, PREFIX_TASK.toString(),
                 PREFIX_IS_MARKED.toString());
 
-        assertParseFailure(parser, userInput, EMPTY_BOOLEAN_ERROR_MESSAGE);
+        assertParseFailure(parser, userInput, INVALID_BOOLEAN_ERROR_MESSAGE);
     }
 
     @Test

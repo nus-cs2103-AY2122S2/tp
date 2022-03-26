@@ -6,6 +6,8 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
+import java.util.Arrays;
+
 import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
@@ -13,8 +15,7 @@ import manageezpz.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    private static final Prefix[] TASK_PREFIXES
-            = {PREFIX_TASK, PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
+    private static final Prefix[] TASK_PREFIXES = {PREFIX_TASK, PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -34,16 +35,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     *
-     * @param argMultiMap
-     * @return
+     * Private method to check any prefixes for task type present
+     * @param argMultiMap The mapping from the user input
+     * @return True if the user enters a task type option, false otherwise.
      */
     private boolean checkForTaskTypeOption(ArgumentMultimap argMultiMap) {
-        for (Prefix prefix : TASK_PREFIXES) {
-            if (argMultiMap.isPrefixExist(prefix)) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(TASK_PREFIXES).anyMatch(prefix -> argMultiMap.isPrefixExist(prefix));
     }
 }
