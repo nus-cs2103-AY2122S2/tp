@@ -146,7 +146,7 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandBuilder("Clear", "clear"),
                 new CommandBuilder("Comment", "comment INDEX c/COMMENT"),
                 new CommandBuilder("Delete", "delete INDEX"),
-                new CommandBuilder("Edit", "edit <INDEX> [n/NAME] [s/STATUS] [c/COMMENT]"
+                new CommandBuilder("Edit", "edit INDEX [n/NAME] [s/STATUS] [c/COMMENT]"
                         + " [t/TAG]…"),
                 new CommandBuilder("Exit", "exit"),
                 new CommandBuilder("Export", "export"),
