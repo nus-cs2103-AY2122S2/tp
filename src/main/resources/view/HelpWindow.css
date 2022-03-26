@@ -29,6 +29,12 @@
 #helpLink:visited {
     -fx-text-fill: blue;
 }
+
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+#commandView .table-column {
+  -fx-alignment: CENTER;
+  -fx-font-size: 14;
+ }
