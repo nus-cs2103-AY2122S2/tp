@@ -29,7 +29,7 @@ title: User Guide
 
 Always accessing MyAnimeList or IMDB to record down the shows you watched? Or finding it difficult to search the different websites that stored your show information? Fret not because **Trackermon** is the app just for you! But hold on, you may be wondering what is Trackermon?
 
-Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch.
+Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface ([CLI](#glossary))** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch.
 
 ---
 
@@ -96,15 +96,15 @@ For example, a command to find a show could look like this:
 
 In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
-| Component | Prefix | Description                                                                                                            |
-|-----------|--------|------------------------------------------------------------------------------------------------------------------------|
-| KEYWORD   | None   | The input after the command word                                                                                       |
-| INDEX     | None   | The index of the show as shown in the show panel list                                                                  |
-| NAME      | n/     | The name to use for a show                                                                                             |
-| STATUS    | s/     | The three statuses to label for a show<br>  <ul><li>_COMPLETED_ </li><li>_WATCHING_ </li><li>_PLAN-TO-WATCH_</li></ul> |
-| TAG       | t/     | The tag to label a show                                                                                                |
-| COMMENT   | c/     | The comment to describe a show                                                                                         |
-| RATE      | r/     | The rating to give a show                                                                                              |
+| Component | Prefix | Description                                                                            |
+|-----------|--------|----------------------------------------------------------------------------------------|
+| KEYWORD   | None   | The input after the command word                                                       |
+| INDEX     | None   | The index of the show as shown in the show panel list                                  |
+| NAME      | n/     | The name to use for a show                                                             |
+| STATUS    | s/     | The three statuses to label for a show are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
+| TAG       | t/     | The tag to label a show                                                                |
+| COMMENT   | c/     | The comment to describe a show                                                         |
+| RATE      | r/     | The rating to give a show                                                              |
 
 <div markdown="block" class="alert alert-info">
 
@@ -223,7 +223,7 @@ A show can have any number of comments or tags (including 0)
 
 <div markdown="block" class="alert alert-danger">
 
-**:information_source: Notes about edit:**<br>
+**:exclamation: Caution**<br>
 * The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
@@ -245,7 +245,7 @@ A show can have any number of comments or tags (including 0)
 
 <div markdown="block" class="alert alert-danger">
 
-**:information_source: Notes about edit:**<br>
+**:exclamation: Caution**<br>
 * **At least one field** to edit must be provided.
 * Editing to an existing name is **not allowed**.
 * The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
