@@ -107,6 +107,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setGroup(Group target, Group editedGroup) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public String viewTask(Group group) {
         throw new AssertionError("This method should not be called.");
     }
@@ -153,6 +158,11 @@ public class ModelStub implements Model {
 
     @Override
     public void deassignPerson(Person personToDeassign, Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Group getGroup(Group groupToGet) {
         throw new AssertionError("This method should not be called.");
     }
 }
