@@ -212,6 +212,14 @@ public class EditWindow extends UiPart<Stage> {
     }
 
     /**
+     * Handles the case where ENTER key is pressed on a TextField
+     */
+    @FXML
+    private void handleEnter() {
+        this.handleSubmit();
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see Logic#execute(String)
