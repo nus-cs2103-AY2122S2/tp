@@ -165,7 +165,7 @@ A show can have any number of comments or tags (including 0)
 
 ### Listing all shows: `list`
 
-**Description:** Want to view all your shows at once? Display a list of shows in Trackermon's show list!
+**Description:** Wanting to view all your shows at once? Display a list of shows in Trackermon's show list!
 
 **Format:** `list`
 
@@ -253,7 +253,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ### Deleting a show: `delete`
 
-**Description:** Want to delete an unwanted show? Delete the show at the specified index shown in Trackermon's show list!
+**Description:** Wanting to remove an unwanted show? Delete the show at the specified index shown in Trackermon's show list!
 
 **Format:** `delete INDEX`
 
@@ -266,7 +266,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 ---
 ### Editing a show: `edit`
 
-**Description:** Want to modify a show? Edit a show at the specified index shown in Trackermon's show list!
+**Description:** Wanting to modify a show? Edit a show at the specified index shown in Trackermon's show list!
 
 **Format:** `edit INDEX [n/NAME] [s/STATUS] [c/COMMENT] [t/TAG]…​`
 
