@@ -2,6 +2,7 @@ package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,7 +14,7 @@ import unibook.logic.parser.CliSyntax;
 import unibook.model.Model;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
-import unibook.model.module.ModuleName;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Student;
@@ -26,7 +27,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a student/professor/module/group to the UniBook, depending on the option specified.\n"
+        + ": Adds a student/professor/module/group/event to the UniBook, depending on the option specified.\n"
         + "Parameters: "
         + CliSyntax.PREFIX_OPTION + "OPTION "
         + CliSyntax.PREFIX_NAME + "NAME "
@@ -35,7 +36,9 @@ public class AddCommand extends Command {
         + "[" + CliSyntax.PREFIX_OFFICE + "OFFICE] "
         + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
         + "[" + CliSyntax.PREFIX_MODULE + "MODULE]... "
-        + "[" + CliSyntax.PREFIX_GROUP + "GROUP]...\n"
+        + "[" + CliSyntax.PREFIX_GROUP + "GROUP]... "
+        + "[" + CliSyntax.PREFIX_KEYEVENT + "TYPE] "
+        + "[" + CliSyntax.PREFIX_DATETIME + "DATETIME]\n"
         + "Example: " + COMMAND_WORD + " "
         + CliSyntax.PREFIX_OPTION + "student "
         + CliSyntax.PREFIX_NAME + "John Doe "
@@ -62,17 +65,26 @@ public class AddCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + CliSyntax.PREFIX_OPTION + "group "
         + CliSyntax.PREFIX_NAME + "Study Group "
-        + CliSyntax.PREFIX_MODULE + "CS2100\n";
+        + CliSyntax.PREFIX_MODULE + "CS2100\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "event "
+        + CliSyntax.PREFIX_MODULE + "CS2100 "
+        + CliSyntax.PREFIX_KEYEVENT + "1 "
+        + CliSyntax.PREFIX_DATETIME + "2022-05-04 13:00\n";
     public static final String MESSAGE_USAGE_MODULE = COMMAND_WORD
         + ": To add a module to the UniBook, use the following format.\n"
         + "Parameters: "
         + CliSyntax.PREFIX_OPTION + "module "
         + CliSyntax.PREFIX_NAME + "NAME "
-        + CliSyntax.PREFIX_MODULE + "MODULE\n"
+        + CliSyntax.PREFIX_MODULE + "MODULE "
+        + CliSyntax.PREFIX_KEYEVENT + "TYPE "
+        + CliSyntax.PREFIX_DATETIME + "DATETIME\n"
         + "Example: " + COMMAND_WORD + " "
         + CliSyntax.PREFIX_OPTION + "module "
         + CliSyntax.PREFIX_NAME + "Computer Organisation "
-        + CliSyntax.PREFIX_MODULE + "CS2100\n";
+        + CliSyntax.PREFIX_MODULE + "CS2100 "
+        + CliSyntax.PREFIX_KEYEVENT + "1 "
+        + CliSyntax.PREFIX_DATETIME + "2022-05-04 13:00\n";
     public static final String MESSAGE_USAGE_GROUP = COMMAND_WORD
         + ": To add a group to the UniBook, use the following format.\n"
         + "Parameters: "
@@ -133,6 +145,18 @@ public class AddCommand extends Command {
         + CliSyntax.PREFIX_MODULE + "CS2103 "
         + CliSyntax.PREFIX_MODULE + "CS2105 "
         + CliSyntax.PREFIX_GROUP + "CS2103 G16\n";
+    public static final String MESSAGE_USAGE_EVENT = COMMAND_WORD
+        + ": To add a key event to a module, use the following format.\n"
+        + "Parameters: "
+        + CliSyntax.PREFIX_OPTION + "event "
+        + CliSyntax.PREFIX_MODULE + "MODULE "
+        + CliSyntax.PREFIX_KEYEVENT + "TYPE "
+        + CliSyntax.PREFIX_DATETIME + "DATETIME\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_OPTION + "event "
+        + CliSyntax.PREFIX_MODULE + "CS2100 "
+        + CliSyntax.PREFIX_KEYEVENT + "1 "
+        + CliSyntax.PREFIX_DATETIME + "2022-05-04 13:00\n";
 
     public static final String MESSAGE_SUCCESS_PERSON = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook";
@@ -143,6 +167,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS_GROUP = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the specified"
         + "module in the UniBook";
+
+    public static final String MESSAGE_SUCCESS_EVENT = "New event added: %1$s";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the module specified.";
 
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "One or more of the modules entered"
         + " does not exist in the UniBook";
@@ -156,6 +183,8 @@ public class AddCommand extends Command {
     private ModuleCode moduleCode;
     private Set<ModuleCode> moduleCodeSet = new HashSet<>();
     private ArrayList<LinkedHashSet<String>> groupNamesList;
+    private ModuleKeyEvent.KeyEventType keyEvent;
+    private LocalDateTime dateTime;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -187,11 +216,19 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Module}
      */
-    public AddCommand(ModuleName moduleName, ModuleCode moduleCode) {
-        requireNonNull(moduleName);
-        requireNonNull(moduleCode);
-        Module module = new Module(moduleName, moduleCode);
+    public AddCommand(Module module) {
+        requireNonNull(module);
         moduleToAdd = module;
+    }
+
+    /**
+     * Creates an AddCommand to add the specified {@code Module}
+     */
+    public AddCommand(ModuleCode moduleCode, ModuleKeyEvent.KeyEventType keyEvent, LocalDateTime dateTime) {
+        requireNonNull(moduleCode);
+        this.moduleCode = moduleCode;
+        this.keyEvent = keyEvent;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -253,6 +290,17 @@ public class AddCommand extends Command {
             }
             model.addPerson(personToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_PERSON, personToAdd));
+        } else if (keyEvent != null) {
+            if (!model.hasModule(moduleCode)) {
+                throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
+            }
+            Module moduleToAddEventTo = model.getModuleByCode(moduleCode);
+            if (moduleToAddEventTo.hasEvent(keyEvent, dateTime)) {
+                throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+            }
+            ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEvent, dateTime, moduleToAddEventTo);
+            moduleToAddEventTo.addKeyEvent(moduleKeyEvent);
+            return new CommandResult(String.format(MESSAGE_SUCCESS_EVENT, moduleKeyEvent));
         } else {
             if (!model.hasModule(moduleCode)) {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);

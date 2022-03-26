@@ -1,5 +1,6 @@
 package unibook.logic.parser;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import unibook.logic.commands.AddCommand;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;
@@ -44,9 +46,10 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_OFFICE, CliSyntax.PREFIX_TAG, CliSyntax.PREFIX_MODULE);
+                CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_OFFICE, CliSyntax.PREFIX_TAG,
+                CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_KEYEVENT);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_NAME)
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -54,6 +57,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get().trim();
         ModuleName moduleName;
         ModuleCode moduleCode;
+        Module module;
+        ArrayList<ModuleKeyEvent> keyEventsList = new ArrayList<>();
+        ModuleKeyEvent.KeyEventType keyEvent;
+        LocalDateTime dateTime;
         Name name;
         Phone phone = new Phone();
         Email email = new Email();
@@ -68,7 +75,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         switch (option) {
         case "group":
-            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_MODULE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE_GROUP));
             }
@@ -76,17 +83,39 @@ public class AddCommandParser implements Parser<AddCommand> {
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
             return new AddCommand(groupName, moduleCode);
         case "module":
-            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_MODULE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE_MODULE));
             }
             moduleName = ParserUtil.parseModuleName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
-            return new AddCommand(moduleName, moduleCode);
-        case "student":
-            if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE)) {
+            module = new Module(moduleName, moduleCode);
+            if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYEVENT)) {
+                keyEventsList = ParserUtil.parseModuleKeyEvent(argMultimap.getAllValues(CliSyntax.PREFIX_KEYEVENT),
+                    module);
+                module.addKeyEventList(keyEventsList);
+                return new AddCommand(module);
+            } else {
+                return new AddCommand(module);
+            }
+        case "event":
+            argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_MODULE,
+                CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME);
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE,
+                CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCommand.MESSAGE_USAGE_STUDENT));
+                    AddCommand.MESSAGE_USAGE_EVENT));
+            }
+
+            moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
+            keyEvent = ParserUtil.parseKeyEventType(argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get());
+            dateTime = ParserUtil.parseDateTime(argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get());
+            return new AddCommand(moduleCode, keyEvent, dateTime);
+        case "student":
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)
+                || arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE)) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE_STUDENT));
             }
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)
                 && !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {

@@ -2,6 +2,8 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,6 +16,7 @@ import unibook.commons.util.StringUtil;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
@@ -239,5 +242,65 @@ public class ParserUtil {
             groupList.add(groupNamesSet);
         }
         return groupList;
+    }
+
+    /**
+     * Parses {@code Collection<String> keyEventAndDate} and
+     * {@code Module module}into a {@code ArrayList<ModuleKeyEvent>}.
+     */
+    public static ArrayList<ModuleKeyEvent> parseModuleKeyEvent(Collection<String> keyEventAndDate, Module module)
+            throws ParseException {
+        requireNonNull(keyEventAndDate);
+        final ArrayList<ModuleKeyEvent> moduleKeyEventList = new ArrayList<>();
+        if (keyEventAndDate.toArray().length == 0) {
+            return moduleKeyEventList;
+        }
+        for (String eventAndDate : keyEventAndDate) {
+            try {
+                String[] strArr = eventAndDate.split(" dt/");
+                LocalDateTime dateTime = parseDateTime(strArr[1]);
+                ModuleKeyEvent.KeyEventType keyEventType = parseKeyEventType(strArr[0]);
+                ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEventType, dateTime, module);
+                moduleKeyEventList.add(moduleKeyEvent);
+            } catch (Exception e) {
+                throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_MISSINGDT);
+            }
+        }
+        return moduleKeyEventList;
+    }
+
+    /**
+     * Parses {@code String dateTime} into a {@code LocalDateTime}.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            return LocalDateTime.parse(trimmedDateTime, formatter);
+        } catch (Exception e) {
+            throw new ParseException("DateTime format accepts the following:\n"
+                + "yyyy-MM-dd HH:mm");
+        }
+    }
+
+    /**
+     * Parses {@code String keyEventType} into a {@code KeyEventType}.
+     */
+    public static ModuleKeyEvent.KeyEventType parseKeyEventType(String keyEventType) throws ParseException {
+        requireNonNull(keyEventType);
+        String keyEventTypeTrimmed = keyEventType.trim();
+        switch (keyEventTypeTrimmed) {
+        case "1":
+            return ModuleKeyEvent.KeyEventType.EXAM;
+        case "2":
+            return ModuleKeyEvent.KeyEventType.QUIZ;
+        case "3":
+            return ModuleKeyEvent.KeyEventType.ASSIGNMENT_RELEASE;
+        case "4":
+            return ModuleKeyEvent.KeyEventType.ASSIGNMENT_DUE;
+        default:
+            throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_TYPE);
+        }
     }
 }
