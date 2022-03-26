@@ -19,30 +19,15 @@ import seedu.address.model.interview.Interview;
  */
 public class AddScheduleCommand extends ScheduleCommand {
 
-    public static final String COMMAND_WORD = ScheduleCommand.COMMAND_WORD + "add";
+    public static final String COMMAND_WORD = ScheduleCommand.COMMAND_WORD + " add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Schedules the candidate identified by the index number for an interview on given date and time.\n"
-            + "Date and time given must not be in the past.\n"
-            + "Parameters: candidate/CANDIDATE_INDEX (must be a positive integer) + at/DATE (in dd/mm/yyyy format)"
-            + "TIME (in hh:mm format)\n"
-            + "Example: " + COMMAND_WORD + " candidate/1 at/ 23/03/2022 13:30";
+            + "Parameters: candidate/CANDIDATE_INDEX at/DATE_TIME (in dd-MM-yyyy HH:mm format)\n"
+            + "Example: " + COMMAND_WORD + " candidate/1 at/ 23-09-2022 13:30";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
             "Successfully scheduled %1$s %2$s for interview on %3$s %4$s";
-
-    public static final String MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW =
-            "Interview for this candidate already exists!";
-
-    public static final String MESSAGE_CONFLICTING_INTERVIEW =
-            "Interview for another candidate clashes with the proposed time slot!";
-
-    public static final String MESSAGE_CANDIDATE_NOT_AVAILABLE =
-            "Candidate is not available on the proposed interview day!";
-
-    public static final String MESSAGE_NOT_OFFICE_HOUR =
-            "You are trying to schedule the interview outside of your office hours!\n"
-            + "Your office hours are Mon-Fri, 8am - 6pm.";
 
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;
