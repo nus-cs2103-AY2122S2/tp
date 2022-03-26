@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -125,4 +126,6 @@ public interface Model {
      * @throws NullPointerException if {@code sortKey} is null.
      */
     void updateSortedCandidateList(Comparator<Candidate> sortComparator);
+
+    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime);
 }

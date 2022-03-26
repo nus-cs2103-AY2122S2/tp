@@ -12,12 +12,14 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.interview.Interview;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.InterviewScheduleBuilder;
 
@@ -165,6 +167,58 @@ public class ModelManagerTest {
         modelManager = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
         modelManager.deleteInterviewForCandidate(ALICE);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
+    public void deletePastInterviews_noPastInterviews() {
+        AddressBook addressBook = new AddressBook();
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        modelManager.deletePastInterviewsForInterviewList(localDateTime);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
+    public void deletePastInterviews_hasPastInterviews() {
+        AddressBook addressBook = new AddressBook();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Interview pastInterview = new Interview(ALICE, currentDateTime);
+
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(pastInterview).build();
+        InterviewSchedule emptyInterviewSchedule = new InterviewScheduleBuilder().build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
+        modelManager.deletePastInterviewsForInterviewList(dateTimeThirtyOneMinutesIntoFuture);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
+    public void deletePastInterviews_hasBothPastAndFutureInterviews() {
+        AddressBook addressBook = new AddressBook();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Interview pastInterview = new Interview(ALICE, currentDateTime);
+
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder()
+                .withInterview(pastInterview).withInterview(INTERVIEW_BENSON).build();
+        InterviewSchedule emptyInterviewSchedule = new InterviewScheduleBuilder()
+                .withInterview(INTERVIEW_BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
+        modelManager.deletePastInterviewsForInterviewList(dateTimeThirtyOneMinutesIntoFuture);
 
         assertEquals(modelManager, modelManagerCopy);
     }
