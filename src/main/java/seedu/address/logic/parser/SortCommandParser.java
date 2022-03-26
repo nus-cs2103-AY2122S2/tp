@@ -7,7 +7,6 @@ import java.util.Comparator;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.comparators.PersonFlagComparator;
 import seedu.address.model.person.comparators.PersonNameComparator;
 import seedu.address.model.person.comparators.PersonPrevDateMetComparator;
 
