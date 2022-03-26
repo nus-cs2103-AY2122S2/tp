@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_PAST_DATETIME;
+import static seedu.address.logic.commands.schedule.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
+import static seedu.address.logic.commands.schedule.ScheduleCommand.MESSAGE_INVALID_PAST_DATETIME;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -261,7 +261,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dateTime} is in the past or has an invalid format.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime formattedDateTime;
         try {
             formattedDateTime = LocalDateTime.parse(dateTime, formatter);

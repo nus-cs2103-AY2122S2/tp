@@ -4,10 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANDIDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -25,9 +26,10 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
@@ -107,11 +109,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_schedule() throws Exception {
-        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
-                ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_CANDIDATE.getOneBased()
-                        + " /at 01/01/2023 10:00");
-        assertEquals(new ScheduleCommand(INDEX_FIRST_CANDIDATE,
-                LocalDateTime.of(2023, 01, 01, 10, 00)), command);
+        assertTrue(parser.parseCommand(AddScheduleCommand.COMMAND_WORD + " " + PREFIX_CANDIDATE
+                + INDEX_FIRST_CANDIDATE.getOneBased() + " " + PREFIX_DATETIME + "01-01-2023 10:00")
+                instanceof ScheduleCommand);
     }
 
     @Test
