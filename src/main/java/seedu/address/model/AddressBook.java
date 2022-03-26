@@ -138,6 +138,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Deletes task assigned to any {@code Person} with {@code moduleCode}.
+     *
+     * @param moduleCode the module code of the person whose task is to be deleted.
+     * @param task the task to be deleted.
+     */
+    public void deleteTaskForAllInModule(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
+        requireNonNull(task);
+
+        persons.deleteTaskForAllInModule(moduleCode, task);
+    }
+
+
+
+    /**
      * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as done.
      *
      * @param studentId the student id of the person whose task is to be marked.

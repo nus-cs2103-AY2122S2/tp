@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
 import seedu.address.commons.core.index.Index;
 
 /**
@@ -94,10 +95,19 @@ public class Person {
     /**
      * Deletes the task at {@code index} from the list of tasks.
      *
-     * @param index the index of the task to be removed.
+     * @param index the index of the task to be deleted.
      */
     public void deleteTask(Index index) {
         taskList.deleteTask(index);
+    }
+
+    /**
+     * Deletes the {@code task} from the list of tasks.
+     *
+     * @param task the task to be deleted.
+     */
+    public void deleteTask(Task task) {
+        taskList.deleteTask(task);
     }
 
     /**
