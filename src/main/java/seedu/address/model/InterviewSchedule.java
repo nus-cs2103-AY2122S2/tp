@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
+
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -33,6 +35,18 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
      */
     public void setInterviews(List<Interview> interviews) {
         this.interviews.setInterviews(interviews);
+    }
+
+    /**
+     * Reorders the contents of the interview list with the earliest upcoming
+     * interview first followed by later interviews.
+     */
+    public void sortInterviews() {
+        List<Interview> interviewsCopy = new ArrayList<Interview>(this.getInterviewList());
+        Comparator<Interview> comparatorDateTime =
+                Comparator.comparing(l -> l.getInterviewDateTime());
+        interviewsCopy.sort(comparatorDateTime);
+        this.setInterviews(interviewsCopy);
     }
 
     /**
@@ -76,7 +90,7 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }*/
 
     /**
-     * Deletes past interviews from the list if the scheduled interview time is 30 minutes ago.
+     * Deletes past interviews from the list if the scheduled interview time is 31 minutes ago.
      * @param localDateTime Current date time.
      */
     public void deletePastInterviews(LocalDateTime localDateTime) {

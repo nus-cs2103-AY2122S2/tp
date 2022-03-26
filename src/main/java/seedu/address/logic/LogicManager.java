@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
 import seedu.address.storage.Storage;
 
 /**
@@ -64,6 +65,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyInterviewSchedule getInterviewSchedule() {
         return model.getInterviewSchedule();
+    }
+
+    @Override
+    public ObservableList<Interview> getFilteredInterviewSchedule() {
+        return model.getFilteredInterviewSchedule();
     }
 
     @Override

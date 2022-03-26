@@ -19,13 +19,14 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all candidates whose description contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + " The search can be conducted only on a specific field in candidates' description by specifying the"
+            + " The search will be conducted only on a specific field in candidates' description by specifying the"
             + PREFIX_FIELD + " FIELD argument.\n"
             + "Parameters: " + PREFIX_KEYWORD + "KEYWORD [" + PREFIX_KEYWORD + "MORE_KEYWORDS]... "
             + PREFIX_FIELD + "FIELD\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_KEYWORD + "alice " + PREFIX_KEYWORD + "charlie "
             + PREFIX_FIELD + "name\n"
-            + "Allowable fields to be sorted by include course, email, phone, name, studentid.";
+            + "Allowable fields to be searched include: applicationstatus, availability, candidate, course, email, "
+            + "interviewstatus, name, phone, seniority, studentid.";
 
     private final ContainsKeywordsPredicate predicate;
 
