@@ -19,6 +19,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.InterviewStatus;
 
@@ -35,6 +36,8 @@ public class FocusCard extends UiPart<Region> {
     private static final String RED = "#800000";
     private static final String GREEN = "#006100";
     private static final String YELLOW = "#8B8000";
+    private static final String BRIGHT_GREEN = "#4BB11F";
+    private static final String GREY = "#808080";
     private static final String CHANGE_COLOUR = "-fx-background-color: ";
     private static final String BLANK_PICTURE_PATH = "docs/images/blankprofile.png";
 
@@ -92,8 +95,8 @@ public class FocusCard extends UiPart<Region> {
         displayPicture.setImage(new Image(new FileInputStream(BLANK_PICTURE_PATH)));
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
-        candidate.getAvailability().getList()
-                .forEach(availability -> availableDaysFocus.getChildren().add(new Label(availability)));
+        setAvailableDays(candidate.getAvailability());
+
     }
 
 
@@ -148,5 +151,19 @@ public class FocusCard extends UiPart<Region> {
         }
     }
 
+    public void setAvailableDays(Availability availability) {
+        String[] week = Availability.WEEK;
+        boolean[] isAvail = availability.getAvailableListAsBoolean();
+
+        for (int i = 0; i < week.length; i++) {
+            Label label = new Label(week[i]);
+            if (isAvail[i]) {
+                label.setStyle(CHANGE_COLOUR + BRIGHT_GREEN);
+            } else {
+                label.setStyle(CHANGE_COLOUR + GREY);
+            }
+            availableDaysFocus.getChildren().add(label);
+        }
+    }
 
 }
