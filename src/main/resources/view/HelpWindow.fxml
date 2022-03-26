@@ -17,7 +17,7 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-      <VBox prefHeight="520.0" prefWidth="450.0">
+      <VBox prefHeight="520.0">
           <HBox fx:id="helpMessageContainer" alignment="CENTER">
             <children>
               <Label fx:id="helpMessage" text="Label">
