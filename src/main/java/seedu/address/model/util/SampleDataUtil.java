@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javafx.util.Pair;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lab.Lab;
@@ -64,11 +63,11 @@ public class SampleDataUtil {
      * Returns a LabList containing the list of strings given.
      */
     @SafeVarargs
-    public static LabList getLabSet(Pair<String, String>... strings) {
+    public static LabList getLabSet(LabTriplet... strings) {
         LabList ll = new LabList();
 
         ll.setLabs(Arrays.stream(strings)
-                .map(x -> (new Lab(x.getKey())).of(x.getValue()))
+                .map(x -> (new Lab(x.getLabNumber()).of(x.getLabStatus(), x.getLabMark())))
                 .collect(Collectors.toList()));
         return ll;
     }

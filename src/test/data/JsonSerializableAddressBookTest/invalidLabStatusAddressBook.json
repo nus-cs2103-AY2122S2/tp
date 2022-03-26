@@ -6,7 +6,8 @@
     "github": "hansM",
     "telegram": "hans_M",
     "studentId": "A0123458C",
+    "labNumbers": [ "1" ],
     "labStatuses": [ "test" ],
-    "labNumbers": [ "1" ]
+    "labMarks": [ "Unknown" ]
   } ]
 }

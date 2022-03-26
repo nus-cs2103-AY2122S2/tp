@@ -32,11 +32,11 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         StudentHasLabPredicate firstPredicate =
-                new StudentHasLabPredicate((new Lab("1")).of(LabStatus.GRADED));
-        StudentHasLabPredicate secondPredicate =
                 new StudentHasLabPredicate((new Lab("1")).of(LabStatus.UNSUBMITTED));
+        StudentHasLabPredicate secondPredicate =
+                new StudentHasLabPredicate((new Lab("1")).of(LabStatus.SUBMITTED));
         StudentHasLabPredicate thirdPredicate =
-                new StudentHasLabPredicate((new Lab("3")).of(LabStatus.GRADED));
+                new StudentHasLabPredicate((new Lab("3")).of(LabStatus.UNSUBMITTED));
         StudentHasLabPredicate fourthPredicate =
                 new StudentHasLabPredicate((new Lab("4")).of(LabStatus.SUBMITTED));
 
