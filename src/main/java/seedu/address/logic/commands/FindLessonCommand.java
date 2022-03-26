@@ -31,7 +31,8 @@ public class FindLessonCommand extends Command {
         requireNonNull(model);
         model.updateFilteredLessonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()));
+                String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()),
+                ViewTab.LESSON);
     }
 
     /**
