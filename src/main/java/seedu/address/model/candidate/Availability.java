@@ -3,9 +3,6 @@ package seedu.address.model.candidate;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Represents a Candidate's availability.
@@ -16,10 +13,10 @@ public class Availability {
     public static final String MESSAGE_CONSTRAINTS = "Availability should consists of a list of 5 numbers, "
             + "ranging from 1 to 5, separated by commas ','\nEg. avail/1,2,3,4,5";
     public static final String VALIDATION_REGEX = "^[1-5]{1}+(?:,[1-5]{1}+)*$";
-    private static final String[] WEEK = {"Mon", "Tue", "Wed", "Thu", "Fri"};
+    public static final String[] WEEK = {"Mon", "Tue", "Wed", "Thu", "Fri"};
 
     public final String availability;
-    private List<String> availabilityList = new ArrayList<>();
+    private boolean[] availabilityList = new boolean[6];
     /**
      * Constructs a {@code Availability}.
      *
@@ -29,7 +26,7 @@ public class Availability {
         requireNonNull(availability);
         checkArgument(isValidDay(availability), MESSAGE_CONSTRAINTS);
         this.availability = availability;
-        this.availabilityList = toList(availability);
+        this.availabilityList = setAvailableList(availability);
     }
 
     /**
@@ -61,16 +58,14 @@ public class Availability {
         return availability;
     }
 
-    public List<String> getList() {
+    public boolean[] getAvailableListAsBoolean() {
         return availabilityList;
     }
 
-    private List<String> toList(String availability) {
-        HashMap<String, String> map = new HashMap<>();
+    private boolean[] setAvailableList(String availability) {
         for (String day: availability.split(",")) {
-            map.put(day, WEEK[Integer.parseInt(day) - 1]);
+            availabilityList[Integer.parseInt(day) - 1] = true;
         }
-        availabilityList.addAll(map.values());
         return availabilityList;
     }
 }

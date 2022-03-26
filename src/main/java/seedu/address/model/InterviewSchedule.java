@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -34,6 +36,18 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }
 
     /**
+     * Reorders the contents of the interview list with the earliest upcoming
+     * interview first followed by later interviews.
+     */
+    public void sortInterviews() {
+        List<Interview> interviewsCopy = new ArrayList<Interview>(this.getInterviewList());
+        Comparator<Interview> comparatorDateTime =
+                Comparator.comparing(l -> l.getInterviewDateTime());
+        interviewsCopy.sort(comparatorDateTime);
+        this.setInterviews(interviewsCopy);
+    }
+
+    /**
      * Resets the existing data of this {@code InterviewSchedule} with {@code newData}.
      */
     public void resetData(ReadOnlyInterviewSchedule newData) {
@@ -48,6 +62,7 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         requireNonNull(interview);
         return interviews.containsSameCandidate(interview);
     }
+
     /**
      * Returns true if an interview with the same date and time slot as {@code interview}
      * exists in the interview schedule.
@@ -72,10 +87,10 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         interviews.setInterview(target, editedInterview);
     }*/
 
-    // Delete function not implemented yet, code commented out to reduce test coverage.
-    /* public void removeInterview(Interview key) {
+
+    public void removeInterview(Interview key) {
         interviews.remove(key);
-    }*/
+    }
 
     @Override
     public String toString() {

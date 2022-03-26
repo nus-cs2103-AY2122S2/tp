@@ -1,23 +1,21 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.ViewCommand.MESSAGE_NO_INTERVIEWS_IN_SYSTEM;
-import static seedu.address.logic.commands.ViewCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
-import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.predicate.AllWithinTimePeriodPredicate;
 
 
 /**
@@ -27,26 +25,29 @@ public class ViewCommandTest {
 
     private Model model;
     private Model expectedModel;
+    private AllWithinTimePeriodPredicate predicate;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), getTypicalInterviewSchedule(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalInterviewSchedule(), new UserPrefs());
+        predicate = new AllWithinTimePeriodPredicate(LocalDateTime.now());
     }
 
     @Test
     public void execute_view_success() {
-        String expectedMessage = MESSAGE_SUCCESS + model.getInterviewSchedule().getInterviewList()
-                .stream().sorted(Comparator.comparing(Interview::getInterviewDateTime))
-                .map(Object::toString).collect(Collectors.joining("\n"));
-        assertCommandSuccess(new ViewCommand(), model, expectedMessage, expectedModel);
+        expectedModel.updateFilteredInterviewSchedule(predicate);
+        assertCommandSuccess(new ViewCommand(predicate), model,
+                new CommandResult(String.format(Messages.MESSAGE_INTERVIEWS_LISTED_OVERVIEW,
+                        model.getFilteredInterviewSchedule().size())), expectedModel);
     }
 
     @Test
-    public void execute_listIsEmpty_showsEmptyMessage() {
+    public void execute_listIsEmpty_showsNoInterviewsListed() {
         model = new ModelManager(new AddressBook(), new InterviewSchedule(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_NO_INTERVIEWS_IN_SYSTEM);
-        assertCommandSuccess(new ViewCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ViewCommand(predicate), model, new CommandResult(String
+                .format(Messages.MESSAGE_INTERVIEWS_LISTED_OVERVIEW, model.getFilteredInterviewSchedule().size())),
+                expectedModel);
     }
 }

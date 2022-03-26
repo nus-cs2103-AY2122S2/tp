@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,6 +7,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
@@ -16,47 +17,26 @@ import seedu.address.model.interview.Interview;
  * Schedules a candidate identified using it's displayed index from the address book for an interview
  * on a specified time slot.
  */
-public class ScheduleCommand extends Command {
+public class AddScheduleCommand extends ScheduleCommand {
 
-    public static final String COMMAND_WORD = "schedule";
+    public static final String COMMAND_WORD = ScheduleCommand.COMMAND_WORD + " add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Schedules the candidate identified by the index number for an interview on given date and time.\n"
-            + "Date and time given must not be in the past.\n"
-            + "Parameters: INDEX (must be a positive integer) + /at + DATE (in dd/mm/yyyy format)"
-            + "TIME (in hh:mm format)\n"
-            + "Example: " + COMMAND_WORD + " 1 /at 23/03/2022 13:30";
-
-    public static final String MESSAGE_INVALID_FORMAT_DATETIME =
-            "Date and/or Time is not in the following format: dd/MM/yyyy HH:mm";
-
-    public static final String MESSAGE_INVALID_PAST_DATETIME =
-            "Date and/or Time must not be in the past!";
+            + "Parameters: candidate/CANDIDATE_INDEX at/DATE_TIME (in dd-MM-yyyy HH:mm format)\n"
+            + "Example: " + COMMAND_WORD + " candidate/1 at/ 23-09-2022 13:30";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
             "Successfully scheduled %1$s %2$s for interview on %3$s %4$s";
-
-    public static final String MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW =
-            "Interview for this candidate already exists!";
-
-    public static final String MESSAGE_CONFLICTING_INTERVIEW =
-            "Interview for another candidate clashes with the proposed time slot!";
-
-    public static final String MESSAGE_CANDIDATE_NOT_AVAILABLE =
-            "Candidate is not available on the proposed interview day!";
-
-    public static final String MESSAGE_NOT_OFFICE_HOUR =
-            "You are trying to schedule the interview outside of your office hours!\n"
-            + "Your office hours are Mon-Fri, 8am - 6pm.";
 
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;
 
     /**
-     * Creates a ScheduleCommand to schedule the candidate at specified index for an
+     * Creates a AddScheduleCommand to schedule the candidate at specified index for an
      * interview on {@code LocalDateTime}
      */
-    public ScheduleCommand(Index targetIndex, LocalDateTime interviewDateTime) {
+    public AddScheduleCommand(Index targetIndex, LocalDateTime interviewDateTime) {
         this.targetIndex = targetIndex;
         this.interviewDateTime = interviewDateTime;
     }
@@ -101,8 +81,8 @@ public class ScheduleCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ScheduleCommand // instanceof handles nulls
-                && targetIndex.equals(((ScheduleCommand) other).targetIndex)
-                && interviewDateTime.equals(((ScheduleCommand) other).interviewDateTime)); // state check
+                || (other instanceof AddScheduleCommand // instanceof handles nulls
+                && targetIndex.equals(((AddScheduleCommand) other).targetIndex)
+                && interviewDateTime.equals(((AddScheduleCommand) other).interviewDateTime)); // state check
     }
 }
