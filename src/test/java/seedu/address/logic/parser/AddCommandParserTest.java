@@ -20,6 +20,7 @@ import static seedu.address.testutil.PersonUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.PersonUtil.PHONE_DESC_BOB;
 import static seedu.address.testutil.PersonUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.testutil.PersonUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.testutil.PersonUtil.REMARK_DESC_AMY;
 import static seedu.address.testutil.PersonUtil.TAG_DESC_COWORKER;
 import static seedu.address.testutil.PersonUtil.TAG_DESC_FRIEND;
 import static seedu.address.testutil.PersonUtil.VALID_ADDRESS_BOB;
@@ -81,7 +82,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = AMY.setTags();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + REMARK_DESC_AMY,
             new AddCommand(expectedPerson));
     }
 

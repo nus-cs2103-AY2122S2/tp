@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,26 +26,25 @@ import seedu.address.model.tag.Tag;
 public class Person implements Serializable {
     public static final String MAP_PREFIX = "P";
 
+    private final long uniqueId;
     private final HashMap<Prefix, Field> fields = new HashMap<>();
     private final HashSet<Tag> tags = new HashSet<>();
 
-
-    /**
-     * Person constructor
-     * @param fields A collection of all the person's attributes
-     * @param tags A collection of all the person's tags
-     */
-    public Person(Collection<Field> fields, Collection<Tag> tags) {
+    private Person(long uniqueId, Collection<Field> fields, Collection<Tag> tags) {
         requireAllNonNull(tags, fields);
+
+        // Set unique ID.
+        this.uniqueId = uniqueId;
+
         // Add tags.
         for (Tag t : tags) {
-            checkArgument(t != null, "All tags in Person constructor cannot be null.");
+            requireAllNonNull(t);
             this.tags.add(t);
         }
 
         // Add fields.
         for (Field f : fields) {
-            checkArgument(f != null, "All fields in Person constructor cannot be null.");
+            requireAllNonNull(f);
             this.fields.put(f.prefix, f);
         }
 
@@ -54,12 +54,23 @@ public class Person implements Serializable {
         }
     }
 
-    public Person(Person otherPerson) {
-        this(otherPerson.getFields(), otherPerson.getTags());
+    /**
+     * Person constructor
+     *
+     * @param fields A collection of all the person's attributes
+     * @param tags   A collection of all the person's tags
+     */
+    public Person(Collection<Field> fields, Collection<Tag> tags) {
+        this(new Date().getTime(), fields, tags);
+    }
+
+    public long getUniqueId() {
+        return uniqueId;
     }
 
     /**
      * Returns true if the person contains the specified field.
+     *
      * @param prefix the field prefix
      * @return return true if the person contains the specified field
      */
@@ -70,6 +81,7 @@ public class Person implements Serializable {
 
     /**
      * Add fields to the person. If the field already exists, it is replaced.
+     *
      * @param fields the fields to add
      * @return a person with the fields added
      */
@@ -79,6 +91,7 @@ public class Person implements Serializable {
 
     /**
      * Add fields to the person. If the field already exists, it is replaced.
+     *
      * @param fields the fields to add
      * @return a person with the fields added
      */
@@ -89,11 +102,12 @@ public class Person implements Serializable {
             requireAllNonNull(f);
             updatedFields.put(f.prefix, f);
         }
-        return new Person(updatedFields.values(), tags);
+        return new Person(this.uniqueId, updatedFields.values(), tags);
     }
 
     /**
      * Remove fields from the person. If the field does not exist, this does nothing.
+     *
      * @param prefixes the prefixes of the fields to remove
      * @return a person with the fields removed
      */
@@ -103,6 +117,7 @@ public class Person implements Serializable {
 
     /**
      * Remove fields from the person. If the field does not exist, this does nothing.
+     *
      * @param prefixes the prefixes of the fields to remove
      * @return a person with the fields removed
      */
@@ -113,8 +128,11 @@ public class Person implements Serializable {
             requireAllNonNull(p);
             updatedFields.remove(p);
         }
-        boolean noChange = updatedFields.size() == this.fields.size();
-        return noChange ? this : new Person(updatedFields.values(), tags);
+        return new Person(this.uniqueId, updatedFields.values(), tags);
+    }
+
+    public Person setFields(Collection<Field> fields) {
+        return new Person(this.uniqueId, fields, this.tags);
     }
 
     public Optional<Field> getField(Prefix prefix) {
@@ -146,38 +164,27 @@ public class Person implements Serializable {
         return (Membership) this.fields.get(Membership.PREFIX);
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    public Person setTags(Collection<Tag> tags) {
-        return new Person(this.fields.values(), tags);
-    }
-
-    public Person setTags(Tag... tags) {
-        return setTags(List.of(tags));
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
     }
 
     /**
      * Add tags to the person.
+     *
      * @param tags the tags to add
      * @return a person with the tags added
      */
     public Person addTags(Collection<Tag> tags) {
         HashSet<Tag> updatedTags = new HashSet<>(this.tags);
         for (Tag t : tags) {
-            checkArgument(t != null, "Cannot add null tags!");
             updatedTags.add(t);
         }
-        return new Person(this.fields.values(), updatedTags);
+        return new Person(this.uniqueId, this.fields.values(), updatedTags);
     }
 
     /**
      * Add tags to the person.
+     *
      * @param tags the tags to add
      * @return a person with the tags added
      */
@@ -187,24 +194,44 @@ public class Person implements Serializable {
 
     /**
      * Remove tags from the person.
+     *
      * @param tags the tags to remove
      * @return a person with the tags remove
      */
     public Person removeTags(Collection<Tag> tags) {
+        requireAllNonNull(tags);
         HashSet<Tag> updatedTags = new HashSet<>(this.tags);
         for (Tag t : tags) {
+            requireAllNonNull(t);
             updatedTags.remove(t);
         }
-        return new Person(this.fields.values(), updatedTags);
+        return new Person(this.uniqueId, this.fields.values(), updatedTags);
     }
 
     /**
      * Remove tags from the person.
+     *
      * @param tags the tags to remove
      * @return a person with the tags remove
      */
     public Person removeTags(Tag... tags) {
         return removeTags(tags);
+    }
+
+    public Person setTags(Collection<Tag> tags) {
+        return new Person(this.uniqueId, this.fields.values(), tags);
+    }
+
+    public Person setTags(Tag... tags) {
+        return setTags(List.of(tags));
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -216,7 +243,7 @@ public class Person implements Serializable {
     public Person addMembership(Membership membership) {
         HashMap<Prefix, Field> newFields = new HashMap<>(this.fields);
         newFields.put(Membership.PREFIX, membership);
-        return new Person(newFields.values(), tags);
+        return new Person(this.uniqueId, newFields.values(), tags);
     }
 
     /**
@@ -227,24 +254,27 @@ public class Person implements Serializable {
         if (otherPerson == this) {
             return true;
         }
+
         return otherPerson != null && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
+     * @param other the other Person to compare to
+     * @return true if both persons have the same identity and data fields
      */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Person)) {
             return false;
         }
 
         Person otherPerson = (Person) other;
+
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
@@ -261,14 +291,14 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
 
+        // Required Fields
+        builder.append(getName())
+                .append("; Phone: ").append(getPhone())
+                .append("; Email: ").append(getEmail())
+                .append("; Address: ").append(getAddress());
+
+        // Tags
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
