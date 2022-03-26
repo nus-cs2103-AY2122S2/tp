@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.CommandRegistry;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,6 +27,7 @@ public class CommandBox extends UiPart<Region> {
     private final ArrayList<String> historyBuffer;
     private final ArrayList<String> activeBuffer;
     private int activeBufferIndex;
+    private final Set<String> commands = CommandRegistry.PARSERS.keySet();
 
     @FXML
     private TextField commandTextField;
@@ -83,6 +86,8 @@ public class CommandBox extends UiPart<Region> {
             setPreviousCommand();
         } else if (event.getCode() == KeyCode.DOWN) {
             setNextCommand();
+        } else if (event.getCode() == KeyCode.TAB) {
+            autocomplete(commandTextField.getText());
         }
     }
 
@@ -98,6 +103,52 @@ public class CommandBox extends UiPart<Region> {
         activeBufferIndex = Math.min(activeBufferIndex + 1, activeBuffer.size() - 1);
         commandTextField.setText(activeBuffer.get(activeBufferIndex));
         commandTextField.end();
+    }
+
+    private void autocomplete(String input) {
+        String[] values = input.split("[ |]");
+        String last = values[values.length - 1];
+
+        if (!commands.contains(last)) {
+            String completed = last;
+            int min = Integer.MAX_VALUE;
+
+            for (String command : commands) {
+                int distance = editDistance(last, command);
+                if (distance < min) {
+                    completed = command;
+                    min = distance;
+                }
+            }
+
+            commandTextField.setText(input.substring(0, input.length() - last.length()) + completed);
+        }
+    }
+
+    private int editDistance(String str1, String str2) {
+        int len1 = str1.length();
+        int len2 = str2.length();
+
+        int [][]DP = new int[2][len1 + 1];
+
+        for (int i = 0; i <= len1; i++)
+            DP[0][i] = i;
+
+        for (int i = 1; i <= len2; i++) {
+            for (int j = 0; j <= len1; j++) {
+                if (j == 0) {
+                    DP[i % 2][j] = i;
+                } else if (str1.charAt(j - 1) == str2.charAt(i - 1)) {
+                    DP[i % 2][j] = DP[(i - 1) % 2][j - 1];
+                } else {
+                    DP[i % 2][j] = 1 + Math.min(DP[(i - 1) % 2][j],
+                            Math.min(DP[i % 2][j - 1],
+                                    DP[(i - 1) % 2][j - 1]));
+                }
+            }
+        }
+
+        return DP[len2 % 2][len1];
     }
 
     /**
