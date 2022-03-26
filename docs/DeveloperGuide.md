@@ -254,7 +254,7 @@ to allow for greater flexibility when filtering large contacts lists according t
 specific tags.
 
 #### Current Implementation
-The `Find`command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches 
+The `Find`command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
 
@@ -510,13 +510,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ````
 1. User requests to find any person using specific fields
 2. NUSocials shows a list of persons matching any fields
-    Use case ends. 
+    Use case ends.
 ````
 **Extensions**
 ````
 2a. The given find command is invalid.
     - 2a1. NUSocials shows an error message.
-    
+
       Use case resumes at step 1.
 ````
 ### Use case 7: Finding a person (all fields)
@@ -534,8 +534,8 @@ The user wants to find a person that has every field instead.
 2. NUSocials shows a list of all persons
 3. User requests to remove certain tags from the person
 4. NUSocials removes the specific tags
-    
-    Use case ends. 
+  
+    Use case ends.
 ````
 **Extensions**
 ````
@@ -547,15 +547,15 @@ The user wants to find a person that has every field instead.
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
-      
+
 3b. The given removetag command is invalid.
     - 3b1. NUSocials shows an error message.
 
       Use case resumes at step 2.
-      
+
 3c. The request contains non-existent tags to be removed.
     - 3c1. NUSocials shows an error message.
-    
+
       Use case resumes at step 2.
 ````
 
@@ -633,7 +633,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Subsequent launch
     1. Make some changes to the addressbook and close the application.
-       
+  
     1. Reopen the application by double-clicking the jar file<br>
         Expected: Shows the GUI and loads contacts from the addressbook. Should reflect the changes made previously.
 
@@ -655,7 +655,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting multiple persons while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-    
+
     1. Test case: `delete 1 2 3`<br>
         Expected: First, second and third contacts are deleted from the list. Details of the deleted contacts shown in the status message.
 
@@ -664,7 +664,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `delete 1 x 2 3`, `delete 1 2 3 x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-       
+
 
 ### Saving data
 

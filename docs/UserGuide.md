@@ -5,7 +5,7 @@ title: User Guide
 
 NUSocials is a **desktop app for university students to maintain a professional contact list, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -31,11 +31,11 @@ NUSocials is a **desktop app for university students to maintain a professional 
     * **`tag`** `2 edu/computer science m/CS2040S`<br>Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
 
     * **`removetag`**`2 m/cs2100 i/Shopee`<br>Removes the specified tags of the 2nd contact shown in the current list.
-    
-    * **`edit`**`2 n/Alice edu/computer engineering m/cs2100`<br>Edits the name to `Alice`, overwrites both the education and module tag to `computer engineering` and `cs2100` respectively.  
-    
+
+    * **`edit`**`2 n/Alice edu/computer engineering m/cs2100`<br>Edits the name to `Alice`, overwrites both the education and module tag to `computer engineering` and `cs2100` respectively.
+
     * **`event`** `name/Lunch appointment info/Having lunch at Hai Di Lao d/2023-11-15 t/23:19`
-      
+
     * **`cancelevent`**`1`<br>Deletes the 1st event shown in the current event list.
 
     * **`cancelevent`**`1 4`<br>Deletes the 1st and fourth event shown in the current event list.
