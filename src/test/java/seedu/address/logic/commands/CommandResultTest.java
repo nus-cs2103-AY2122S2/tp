@@ -44,7 +44,7 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, null)));
 
         // different view value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, firstViewDetails)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, null)));
 
         // different viewDetails value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback",
