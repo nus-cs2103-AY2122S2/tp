@@ -40,3 +40,6 @@ Given below are my contributions to the project.
     * Developer Guide:
       * Added user stories for the features `add`, `tag`, `event`, `cancelevent`.
       * Added use cases for the features `add`, `tag`, `event`, `cancelevent`.
+      * Modified the `ModelClassDiagram` and `StorageClassDiagram`.
+      * Added `TagSequenceDiagram`.
+      * Added the implementation design details for `tag`, `event`, `cancelevent`.
