@@ -67,7 +67,7 @@ public class AddCommand extends Command {
             + PREFIX_DESCRIPTION + "nba finals"
             + PREFIX_DATE + "01/01/2022 2000";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD +": Adds a player, lineup, schedule to MyGM\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a player, lineup, schedule to MyGM\n"
             + MESSAGE_USAGE_PLAYER + "\n"
             + MESSAGE_USAGE_LINEUP + "\n"
             + MESSAGE_USAGE_SCHEDULE;

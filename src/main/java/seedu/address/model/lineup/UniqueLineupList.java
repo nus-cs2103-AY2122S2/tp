@@ -176,5 +176,17 @@ public class UniqueLineupList {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UniqueLineupList // instanceof handles nulls
+                && list.equals(((UniqueLineupList) other).list));
+    }
+
+    @Override
+    public int hashCode() {
+        return list.hashCode();
+    }
+
 }
 
