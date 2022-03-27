@@ -1,51 +1,43 @@
-package seedu.contax.ui.appointment.factory;
+package seedu.contax.ui.appointment.cardfactory;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.ui.CardFactory;
+import seedu.contax.ui.RecyclableCard;
 
 /**
- * Creates rows for the {@code AppointmentListPanel} and transparently performs the translation from row's
+ * Creates rows for the {@code ScheduleItemListPanel} and transparently performs the translation from row's
  * ListView index to its displayed index.
  */
-public class AppointmentListRowFactory {
+public class ScheduleItemCardFactory implements CardFactory<ScheduleItem> {
 
     private final ObservableList<ScheduleItem> scheduleItemList;
     private final ArrayList<Integer> indexMap;
 
     /**
-     * Constructs an AppointmentListRowFactory.
+     * Constructs an ScheduleItemCardFactory.
      *
      * @param scheduleItemList The list of models that the factory is creating cards for.
      */
-    public AppointmentListRowFactory(ObservableList<ScheduleItem> scheduleItemList) {
+    public ScheduleItemCardFactory(ObservableList<ScheduleItem> scheduleItemList) {
         this.scheduleItemList = scheduleItemList;
         this.indexMap = new ArrayList<>(scheduleItemList.size());
         populateIndexMap();
         attachChangeListener();
     }
 
-    /**
-     * Creates a new {@code AppointmentListRow} that represents a row in {@code AppointmentListPanel}.
-     */
-    public AppointmentListRow createRow() {
-        return new AppointmentListRow();
-    }
-
-    /**
-     * Updates the supplied {@code row} with the data in the {@code ScheduleItem} model and the list index.
-     *
-     * @param row The row to update.
-     * @param scheduleItem The ScheduleItem that the supplied row should be updated to.
-     * @param index The 0-based index of this row in the ListView.
-     * @return A row that can be added as a child to {@code AppointmentListPanel}.
-     */
-    public Node updateRow(AppointmentListRow row, ScheduleItem scheduleItem, int index) {
-        return row.updateModel(scheduleItem, indexMap.get(index) + 1);
+    @Override
+    public RecyclableCard<ScheduleItem> createCard() {
+        Function<Integer, Integer> indexMappingFunction = (displayedOneBasedIndex) -> {
+            int zeroBasedIndex = displayedOneBasedIndex - 1;
+            return indexMap.get(zeroBasedIndex) + 1;
+        };
+        return new ScheduleItemCard(indexMappingFunction);
     }
 
     /**
@@ -63,7 +55,7 @@ public class AppointmentListRowFactory {
     }
 
     /**
-     * Attaches a listener to the backing ScheduleItemList to watch for changes for maintenance of the
+     * Attaches a listener to the backing ScheduleItem list to watch for changes for maintenance of the
      * indexMap.
      */
     private void attachChangeListener() {

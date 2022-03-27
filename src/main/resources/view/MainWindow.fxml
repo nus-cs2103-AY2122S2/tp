@@ -52,7 +52,7 @@
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-              <TabPane fx:id="tabbedPanelPlaceholder" stylesheets="@DarkTheme.css" tabClosingPolicy="UNAVAILABLE">
+              <TabPane fx:id="tabbedPanelPlaceholder" stylesheets="@DarkTheme.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                   <tabs>
                      <Tab fx:id="personTab" text="Person" />
                      <Tab fx:id="appointmentTab" text="Appointment" />
