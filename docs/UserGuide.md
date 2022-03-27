@@ -19,6 +19,7 @@ later.">
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
   - [Adding Medical Information: `add t/medical`](#adding-medical-information-add-tmedical)
   - [Viewing Medical Information: `view t/medical`](#viewing-medical-information-view-tmedical)
+  - [Editing Medical Information: `edit`](#editing-medical-information-edit)
   - [Adding Consultation Information: `add t/consultation`](#adding-consultation-information-add-tconsultation)
   - [Viewing Past Consultations: `view t/consultation`](#viewing-past-consultations-view-tconsultation)
   - [Adding Prescription: `add t/prescription`](#adding-prescription-add-tprescription)
@@ -81,7 +82,7 @@ Format: `help`
 
 Adds a patient to MedBook.
 
-Format" `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 Examples:
 * `add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -94,7 +95,7 @@ Format: `view`
 
 ### Deleting any Information: `delete`
 
-Deletes a specified information (contact, medical information,...) from MedBook.
+Deletes a specified information (patient, contact, medical information,...) from MedBook.
 
 Format: `delete INDEX`
 
@@ -136,16 +137,17 @@ Examples:
 
 ### Viewing Medical Information: `view t/medical`
 
-Displays medical information of a patient from MedBook.
+Displays medical information of a patient from MedBook. If no NRIC is specified, displays all medical information.
 
-Format:  `view t/medical i/NRIC`
+Format:  `view t/medical [i/NRIC]`
 
 Examples:
+* `view t/medical`
 * `view t/medical i/S1234567L`
 
-### Editing Medical Information: `edit t/medical`
+### Editing Medical Information: `edit`
 
-Edits an existing medical information in MedBook. This command can be used when a list of medical information is being displayed.
+Edits an existing medical information in MedBook when a list of medical information is being displayed.
 
 Format:  `edit INDEX [i/NRIC] [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
@@ -216,12 +218,18 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 
 | Action | Format Example |
 | :----- | :------------- |
-| Add Contact Info | `/create -t contact -i NRIC -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS` |
-| View Contact Info | `/view -t contact [-i NRIC] [-n NAME] [-p PHONE_NUMBER] [-e EMAIL]` |
-| Delete Contact Info | `/delete -t contact -i NRIC` |
-| Add Medical Info | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
-| View Medical Info | `/view -t medical [-i NRIC]` |
-| Delete Medical Info | `/delete -t medical -i NRIC` |
-| Add Consultation Info | `/create -t consultation -i S1234567P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS]` |
-| View Consultation Info | `/view -t consultation  -i S1234567P [-dt DATE][-tm TIME]` |
-| Delete Consultation Info | `/delete -t consultation -i S1234567P [-dt DATE] [-tm TIME]` |
+| View Help | `help` |
+| Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
+| List all Patients | `view` |
+| Delete any Information | `delete INDEX` |
+| Add Contact Information | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
+| View Contact Information | `view t/contact i/NRIC` |
+| Add Medical Information | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
+| View Medical Information | `view t/medical [i/NRIC]` |
+| Edit Medical Information | `edit INDEX [i/NRIC] [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
+| Add Consultation Information | `` |
+| View Past Consultations | `` |
+| Add Prescription | `` |
+| View Prescription | `` |
+| Add Test Result | `` |
+| View Test Result| `` |
