@@ -1,28 +1,28 @@
 package seedu.address.model;
 
-import seedu.address.model.person.UniquePersonList;
-
 import java.util.LinkedList;
 
-public class VersionedAddressBook extends AddressBook{
-    private LinkedList<UniquePersonList> addressBookStateList;
+import seedu.address.model.person.UniquePersonList;
+
+public class VersionedAddressBook extends AddressBook {
+    private LinkedList<UniquePersonList> addressBookStateList = new LinkedList<>();
     private int currentState = -1;
 
-    public VersionedAddressBook(){
+    public VersionedAddressBook() {
         super();
-        this.addressBookStateList = new LinkedList<>();
-        this.currentState = -1;
     }
 
-    public VersionedAddressBook(ReadOnlyAddressBook toBeCopied){
+    /** Initializes an instance of VersionedAddressBook with the given AddressBook. */
+    public VersionedAddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
         commit();
         this.currentState = 0;
     }
 
-    public void commit(){
-        while(addressBookStateList.size() > currentState + 1){
+    /** Saves the current state of the AddressBook into its history. */
+    public void commit() {
+        while (addressBookStateList.size() > currentState + 1) {
             // Clears all history in front of this commit
             addressBookStateList.removeLast();
         }
@@ -32,30 +32,48 @@ public class VersionedAddressBook extends AddressBook{
         currentState++;
     }
 
-    public void undo(){
+    /**
+     * Undoes the last command that changed the AddressBook.
+     * Does nothing if there are no commands in history to undo.
+     */
+    public void undo() {
         if (canUndo()) {
             currentState--;
-            assert (currentState >= 0  && currentState < this.addressBookStateList.size());
+            assert (currentState >= 0 && currentState < this.addressBookStateList.size());
             this.persons.setPersons(this.addressBookStateList.get(currentState));
         }
     }
 
-    public void redo(){
-        if (canRedo()){
+    /**
+     * Redo the last command that was undone.
+     * Does nothing if there are no commands in history to redo.
+     */
+    public void redo() {
+        if (canRedo()) {
             currentState++;
-            assert (currentState >= 0  && currentState < this.addressBookStateList.size());
+            assert (currentState >= 0 && currentState < this.addressBookStateList.size());
             this.persons.setPersons(this.addressBookStateList.get(currentState));
         }
     }
 
-    public boolean canUndo(){
-        if (this.addressBookStateList.size() < 1){
+    /**
+     * Returns whether there are any commands in history that can be undone.
+     *
+     * @return True if there are commands that can be undone, False otherwise.
+     */
+    public boolean canUndo() {
+        if (this.addressBookStateList.size() < 1) {
             return false;
         }
         return this.currentState != 0;
     }
 
-    public boolean canRedo(){
+    /**
+     * Returns whether there are any commands in history that can be redone.
+     *
+     * @return True if there are commands that can be redone, False otherwise.
+     */
+    public boolean canRedo() {
         return this.addressBookStateList.size() - 1 > currentState;
     }
 
@@ -63,9 +81,9 @@ public class VersionedAddressBook extends AddressBook{
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof VersionedAddressBook // instanceof handles nulls
-              //  && persons.equals(((VersionedAddressBook) other).persons)); // state check
                 && persons.equals(((VersionedAddressBook) other).persons) // state check
-                && addressBookStateList.equals(((VersionedAddressBook) other).addressBookStateList));
+                && addressBookStateList.equals(((VersionedAddressBook) other).addressBookStateList)
+                && currentState == ((VersionedAddressBook) other).currentState);
     }
 
     @Override

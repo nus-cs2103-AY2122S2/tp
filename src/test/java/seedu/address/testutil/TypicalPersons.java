@@ -104,6 +104,15 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static VersionedAddressBook getTypicalVersionedAddressBook() {
+        VersionedAddressBook versionedAddressBook = new VersionedAddressBook();
+        for (Person p : getTypicalPersons()) {
+            versionedAddressBook.addPerson(p);
+        }
+        versionedAddressBook.commit();
+        return versionedAddressBook;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }

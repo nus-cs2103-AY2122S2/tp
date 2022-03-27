@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
-
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Undo the last command entered and restores that version of AddressBook.
  */
 public class UndoCommand extends Command {
 
@@ -24,9 +24,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-
-
-        if (model.canUndoAddressBook()){
+        if (model.canUndoAddressBook()) {
             model.undoAddressBook();
             return new CommandResult(MESSAGE_UNDO_SUCCESS);
         }

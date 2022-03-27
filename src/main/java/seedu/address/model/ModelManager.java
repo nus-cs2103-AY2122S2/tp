@@ -117,6 +117,14 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    /**
+     * Returns whether the underlying {@code AddressBook} can be undone,
+     * and if there are any commands that can be undone.
+     *
+     * @return True if the {@code AddressBook} can be undone,
+     * False if the underlying AddressBook does not support undoing,
+     * or there  are no commands left to be undone.
+     */
     public boolean canUndoAddressBook() {
         if (this.addressBook instanceof VersionedAddressBook) {
             VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
@@ -126,13 +134,25 @@ public class ModelManager implements Model {
         return false;
     }
 
-    public void undoAddressBook(){
+    /**
+     * Undo the last command that edited {@code AddressBook}. If the AddressBook does not support undoing commands,
+     * or there are no commands left to undo, this method does nothing.
+     */
+    public void undoAddressBook() {
         if (this.addressBook instanceof VersionedAddressBook) {
             VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
             versionedAddressBook.undo();
         }
     }
 
+    /**
+     * Returns whether the underlying {@code AddressBook} can be redone,
+     * and if there are any commands that can be redone.
+     *
+     * @return True if the {@code AddressBook} can be redone,
+     * False if the underlying AddressBook does not support redoing,
+     * or there  are no commands left to be redone.
+     */
     public boolean canRedoAddressBook() {
         if (this.addressBook instanceof VersionedAddressBook) {
             VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
@@ -141,13 +161,21 @@ public class ModelManager implements Model {
         return false;
     }
 
-    public void redoAddressBook(){
+    /**
+     * Redo the last command that edited {@code AddressBook}. If the AddressBook does not support redoing commands,
+     * or there are no commands left to redo, this method does nothing.
+     */
+    public void redoAddressBook() {
         if (this.addressBook instanceof VersionedAddressBook) {
             VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
             versionedAddressBook.redo();
         }
     }
 
+    /**
+     * Saves the current state of the AddressBook in its history, if it supports it.
+     * If the underlying AddressBook does not support a history, this method does nothing.
+     */
     public void commitAddressBook() {
         if (this.addressBook instanceof VersionedAddressBook) {
             VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
