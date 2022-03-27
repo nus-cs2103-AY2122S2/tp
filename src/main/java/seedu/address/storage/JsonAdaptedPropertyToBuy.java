@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -13,14 +14,15 @@ import seedu.address.model.property.PropertyToBuy;
  */
 class JsonAdaptedPropertyToBuy {
 
-    private final House house;
-    private final PriceRange priceRange;
+    private final JsonAdaptedHouse house;
+    private final JsonAdaptedPriceRange priceRange;
 
     /**
-     * Constructs a {@code JsonAdaptedPropertyToBuy} with the given {@code house, @code PriceRange}.
+     * Constructs a {@code JsonAdaptedPropertyToBuy} with the given property details.
      */
     @JsonCreator
-    public JsonAdaptedPropertyToBuy(House house, PriceRange priceRange) {
+    public JsonAdaptedPropertyToBuy(@JsonProperty("house") JsonAdaptedHouse house,
+                                    @JsonProperty("pricerange") JsonAdaptedPriceRange priceRange) {
         this.house = house;
         this.priceRange = priceRange;
     }
@@ -29,32 +31,26 @@ class JsonAdaptedPropertyToBuy {
      * Converts a given {@code PropertyToBuy} into this class for Jackson use.
      */
     public JsonAdaptedPropertyToBuy(PropertyToBuy source) {
-        this.house = source.getHouse();
-        this.priceRange = source.getPriceRange();
+        this.house = new JsonAdaptedHouse(source.getHouse());
+        this.priceRange = new JsonAdaptedPriceRange(source.getPriceRange());
     }
 
     @JsonValue
-    public String getHouseTypeToString() {
-        return house.getHouseTypeToString();
+    public House getHouse() throws IllegalValueException {
+        return house.toModelType();
     }
 
-
-    public House getHouse() {
-        return house;
-    }
-
-    public PriceRange getPriceRange() {
-        return priceRange;
+    public PriceRange getPriceRange() throws IllegalValueException {
+        return priceRange.toModelType();
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code PropertyToBuy} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public PropertyToBuy toModelType() throws IllegalValueException {
-
-        return new PropertyToBuy(house, priceRange);
+        return new PropertyToBuy(house.toModelType(), priceRange.toModelType());
     }
 
 
