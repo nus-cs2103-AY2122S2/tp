@@ -10,6 +10,9 @@ public class Status extends TransactionField {
 
     private final boolean isPaid;
 
+    /**
+     * Parses and constructs a status object
+     */
     public Status(String isPaid) {
         super(PREFIX);
         this.isPaid = Boolean.parseBoolean(isPaid);
@@ -17,7 +20,7 @@ public class Status extends TransactionField {
 
     @Override
     public String getValue() {
-        return isPaid? "Paid": "Not Paid";
+        return isPaid ? "Paid" : "Not Paid";
     }
 
     public boolean isPaid() {

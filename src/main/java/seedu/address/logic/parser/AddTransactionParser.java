@@ -64,11 +64,11 @@ public class AddTransactionParser implements Parser<AddTransactionCommand> {
 
         // throwing random shits here, basically parse all the flags with FP lol
         List<TransactionField> transactionFieldsFlags =
-        Arrays.stream(TransactionFieldRegistry.FLAGS)
-                .map(x -> parseFlag(x, argMultimap))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
+            Arrays.stream(TransactionFieldRegistry.FLAGS)
+                    .map(x -> parseFlag(x, argMultimap))
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .collect(Collectors.toList());
 
         transactionFields.addAll(transactionFieldsFlags);
 
@@ -79,15 +79,15 @@ public class AddTransactionParser implements Parser<AddTransactionCommand> {
      * parse the flag to return TransactionField
      */
     private static Optional<TransactionField> parseFlag(Prefix prefix, ArgumentMultimap argumentMultimap) {
-            try {
-                return Optional.of(TransactionFieldRegistry.PARSERS.get(prefix)
-                        .parse(argumentMultimap.getValue(prefix)
-                                .map(y -> "true")
-                                .orElse("false")));
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return Optional.empty();
-            }
+        try {
+            return Optional.of(TransactionFieldRegistry.PARSERS.get(prefix)
+                    .parse(argumentMultimap.getValue(prefix)
+                            .map(y -> "true")
+                            .orElse("false")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
     /**
