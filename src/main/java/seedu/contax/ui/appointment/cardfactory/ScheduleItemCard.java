@@ -1,28 +1,34 @@
-package seedu.contax.ui.appointment.factory;
+package seedu.contax.ui.appointment.cardfactory;
+
+import java.util.function.Function;
 
 import javafx.scene.Node;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
-import seedu.contax.ui.appointment.AppointmentCard;
-import seedu.contax.ui.appointment.AppointmentSlotCard;
+import seedu.contax.ui.RecyclableCard;
 
 /**
- * Represents a row in the {@code AppointmentListPanel}, which can be either an {@code AppointmentCard}
+ * Represents a row in the {@code ScheduleItemListPanel}, which can be either an {@code AppointmentCard}
  * or {@code AppointmentSlotCard}. This is a helper UI class to support row recycling.
- * This class is package private to enforce that only {@code AppointmentListRowFactory} can create instances
+ * This class is package private to enforce that only {@code ScheduleItemCardFactory} can create instances
  * of it.
  */
-public class AppointmentListRow {
+class ScheduleItemCard implements RecyclableCard<ScheduleItem> {
     private final AppointmentCard apptCard;
     private final AppointmentSlotCard apptRowCard;
+    private final Function<Integer, Integer> displayedIndexMapper;
 
     /**
-     * Constructs a new {@code AppointmentListRow}.
+     * Constructs a new {@code ScheduleItemCard}.
+     *
+     * @param displayedIndexMapper A function to map the 1-based list index of this item to the actual index
+     *                             that should be displayed.
      */
-    AppointmentListRow() {
+    ScheduleItemCard(Function<Integer, Integer> displayedIndexMapper) {
         apptCard = new AppointmentCard();
         apptRowCard = new AppointmentSlotCard();
+        this.displayedIndexMapper = displayedIndexMapper;
     }
 
     /**
@@ -32,9 +38,9 @@ public class AppointmentListRow {
      * @param displayedIndex The new displayed index of this row.
      * @return A rendered {@code Node} object that displays the information of the supplied model.
      */
-    Node updateModel(ScheduleItem scheduleItem, int displayedIndex) {
+    public Node updateModel(ScheduleItem scheduleItem, int displayedIndex) {
         if (scheduleItem instanceof Appointment) {
-            this.apptCard.updateModel((Appointment) scheduleItem, displayedIndex);
+            this.apptCard.updateModel((Appointment) scheduleItem, displayedIndexMapper.apply(displayedIndex));
             return this.apptCard.getRoot();
         } else if (scheduleItem instanceof AppointmentSlot) {
             this.apptRowCard.updateModel((AppointmentSlot) scheduleItem);
