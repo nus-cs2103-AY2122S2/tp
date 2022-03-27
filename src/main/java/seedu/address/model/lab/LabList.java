@@ -176,7 +176,7 @@ public class LabList implements Iterable<Lab> {
 
     public List<String> getLabDetails() {
         return internalList.stream()
-                .map(Lab::getDetails)
+                .map(x -> x.getDetails() + "\n")
                 .collect(Collectors.toList());
     }
 

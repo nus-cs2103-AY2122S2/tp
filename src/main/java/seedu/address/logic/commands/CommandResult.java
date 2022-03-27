@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
+
+import seedu.address.model.student.ViewDetails;
 
 /**
  * Represents the result of a command execution.
@@ -22,12 +25,21 @@ public class CommandResult {
     private final boolean exit;
 
     /**
+     * {@code view} command is executed
+     */
+    private final boolean view;
+
+    private Optional<ViewDetails> studentDetails = Optional.empty();
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view, ViewDetails viewDetails) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.view = view;
+        this.studentDetails = Optional.ofNullable(viewDetails);
     }
 
     /**
@@ -35,15 +47,23 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, null);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
+    public ViewDetails getViewDetails() {
+        return studentDetails.orElseThrow();
+    }
+
     public boolean isShowHelp() {
         return showHelp;
+    }
+
+    public boolean isView() {
+        return view;
     }
 
     public boolean isExit() {

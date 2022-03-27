@@ -109,16 +109,8 @@ public class Student {
                 && otherStudent.getName().equals(getName());
     }
 
-    public String getDetails() {
-        List<String> labDetails = labs.getLabDetails();
-        StringBuilder sb = new StringBuilder();
-
-        for (String s : labDetails) {
-            sb.append(s);
-            sb.append("\n");
-        }
-
-        return this.name + "\n" + sb.toString();
+    public ViewDetails getViewDetails() {
+        return new ViewDetails(this);
     }
 
     /**

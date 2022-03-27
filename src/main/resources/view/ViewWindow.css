@@ -1,0 +1,18 @@
+
+#viewContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#studentName {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Segou UI Semibold";
+    -fx-text-fill: #DDDDDD;
+    -fx-font-weight: bold;
+}
+
+#labDetails {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segou UI Semibold";
+    -fx-text-fill: #DDDDDD;
+    -fx-line-spacing: 8;
+}
