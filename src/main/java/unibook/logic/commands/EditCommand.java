@@ -1,7 +1,10 @@
 package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static unibook.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static unibook.logic.parser.CliSyntax.PREFIX_GROUP;
+import static unibook.logic.parser.CliSyntax.PREFIX_KEYEVENT;
 import static unibook.logic.parser.CliSyntax.PREFIX_MEETINGTIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
 import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -9,11 +12,11 @@ import static unibook.logic.parser.CliSyntax.PREFIX_NEWMOD;
 import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
+import static unibook.logic.parser.CliSyntax.PREFIX_TYPE;
 import static unibook.model.Model.PREDICATE_SHOW_ALL_MODULES;
 import static unibook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +31,7 @@ import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.module.exceptions.ModuleNotFoundException;
 import unibook.model.module.group.Group;
@@ -38,6 +42,7 @@ import unibook.model.person.Person;
 import unibook.model.person.Phone;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
+import unibook.model.person.exceptions.DuplicatePersonException;
 import unibook.model.tag.Tag;
 
 /**
@@ -48,14 +53,18 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the module.";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
+    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edit Group success!";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_OPTION_NOT_FOUND = "O/OPTION must either be person, module or group. \n";
+    public static final String MESSAGE_OPTION_NOT_FOUND = "O/OPTION must either be person, module, group or keyevent. "
+            + "\n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
     public static final String MESSAGE_EDIT_MISSING = "Must include m/MODULECODE when editing a group";
     public static final String MESSAGE_WRONG_DATE_FORMAT = "Date time must be in YYYY-MM-DD HH:mm format";
+    public static final String MESSAGE_KEYEVENT_INDEX_MISSING = "Index of key event to be changed must be included. "
+            + "E.g. ke/1 edits the fields of 1st key event";
 
 
     public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD
@@ -91,11 +100,25 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_OPTION + "OPTION "
-            + "[" + PREFIX_NAME + "NAME] "
+            + PREFIX_MODULE + "MODULECODE "
+            + "[" + PREFIX_GROUP + "GROUPNAME] "
             + "[" + PREFIX_MEETINGTIME + "MEETINGTIME] \n "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_OPTION + "group "
             + PREFIX_NAME + "CS2103 Team1 "
+            + PREFIX_MEETINGTIME + "12-12-2022 1645";
+
+    public static final String KEYEVENT_MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the key event identified"
+            + " by the index number used in the displayed module list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (of the module must be a positive integer) "
+            + PREFIX_OPTION + "OPTION "
+            + "[" + PREFIX_KEYEVENT + "KEYEVENT] "
+            + "[" + PREFIX_DATETIME + "DATETIME] \n "
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_OPTION + "keyevent "
+            + PREFIX_KEYEVENT + "1 "
+            + PREFIX_TYPE + "exam "
             + PREFIX_MEETINGTIME + "12-12-2022 1645";
 
     private final Index index;
@@ -122,7 +145,8 @@ public class EditCommand extends Command {
      * @param editModuleDescriptor details to edit the person with
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, EditModuleDescriptor editModuleDescriptor) {
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor,
+                       EditModuleDescriptor editModuleDescriptor) {
         requireNonNull(index);
         requireNonNull(editModuleDescriptor);
         requireNonNull(editPersonDescriptor);
@@ -185,7 +209,6 @@ public class EditCommand extends Command {
             Office updatedOffice = ((Professor) personToEdit).getOffice();
             return new Professor(updatedName, updatedPhone, updatedEmail, updatedTags, updatedOffice, updatedModules);
         } else {
-        //TODO group edit function: assumes that the update filtered person function works in execute
             Set<Group> groups = ((Student) personToEdit).getGroups();
             return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, updatedModules, groups);
         }
@@ -195,7 +218,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Module} with the details of {@code moduleToEdit}
      * edited with {@code editModuleDescriptor}.
      */
-    private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
+    private static Module createEditedModule(int idx, Module moduleToEdit, EditModuleDescriptor editModuleDescriptor)
+            throws CommandException {
         assert moduleToEdit != null;
 
         ModuleName updatedModuleName = editModuleDescriptor.getModuleName().orElse(moduleToEdit.getModuleName());
@@ -206,23 +230,45 @@ public class EditCommand extends Command {
         // TODO ASSUME THAT UPDATEFILTEREDMODULELIST WORKS
         ObservableList<Group> groups = moduleToEdit.getGroups();
 
-        return new Module(updatedModuleName, updatedModuleCode, profs, students, groups);
+        // TODO changed for editing of key events
+        ObservableList<ModuleKeyEvent> keyEvents;
+        if (editModuleDescriptor.getKeyEvents().isPresent()) {
+            int i = editModuleDescriptor.getIdx();
+            if (i >= moduleToEdit.getKeyEvents().size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_KEYEVENT_DISPLAYED_INDEX);
+            }
+            ModuleKeyEvent ke = moduleToEdit.getKeyEvents().get(i);
+            if (editModuleDescriptor.getKeyEvents().get().getKeyEventTiming() == null) {
+                editModuleDescriptor.getKeyEvents().get().setDateTime(ke.getKeyEventTiming());
+            } else if (editModuleDescriptor.getKeyEvents().get().getKeyEventType() == null) {
+                editModuleDescriptor.getKeyEvents().get().setKeyDateType(ke.getKeyEventType());
+            } else { }
+            moduleToEdit.getKeyEvents().set(i, editModuleDescriptor.getKeyEvents().get());
+            keyEvents = moduleToEdit.getKeyEvents();
+        } else {
+            keyEvents = moduleToEdit.getKeyEvents();
+        }
+        return new Module(updatedModuleName, updatedModuleCode, profs, students, groups, keyEvents);
     }
 
     /**
      * Creates and returns a {@code Group} with the details of {@code groupToEdit}
      * edited with {@code editGroupDescriptor}.
      */
-    public static Group createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor) {
+    public static Group createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor)
+            throws CommandException {
         assert groupToEdit != null;
 
         // should only be able to edit group name and meeting times
         String updatedGroupName = editGroupDescriptor.getGroupName().orElse(groupToEdit.getGroupName());
 
-        // checks if there is a new meeting time and edits it at the respective index, only 1 meeting time can be edited at a time
+        // Edits it at the respective index, only 1 meeting time can be edited at a time
         ObservableList<LocalDateTime> updatedMeetingTimes;
         if (editGroupDescriptor.getMeetingTimes().isPresent()) {
             int idxOfMeetingTime = editGroupDescriptor.getIdxOfMeetingTimes().get();
+            if (idxOfMeetingTime - 1 >= groupToEdit.getMeetingTimes().size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_MEETINGTIME_DISPLAYED_INDEX);
+            }
             groupToEdit.getMeetingTimes().set(idxOfMeetingTime - 1, editGroupDescriptor.getMeetingTimes().get());
             updatedMeetingTimes = groupToEdit.getMeetingTimes();
         } else {
@@ -251,21 +297,32 @@ public class EditCommand extends Command {
         // TODO MAIN LOGIC FOR EDIT GROUP CROSS FINGER UPDATE...LIST WORKS
         if (this.editModuleDescriptor != null && this.editPersonDescriptor != null) {
             System.out.println("entered correct logic");
+            if (!isModuleListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+            }
             EditGroupDescriptor editGroupDescriptor = this.editModuleDescriptor.getGroups().get();
             editGroupDescriptor.setModel(model);
             ModuleCode modcode = editGroupDescriptor.getModuleCode();
             Module mod = model.getModuleByCode(modcode);
+
+            // Checks if module that want to add to person is valid
+            // TODO check why the exception not being printed to the console
+            if (!latestModList.contains(mod)) {
+                throw new ModuleNotFoundException(mod.toString());
+            }
+
             for (Person p : lastShownList) {
                 if (p instanceof Student) {
-                    if (((Student) p).getModules().contains(mod)) {
-                        ((Student) p).editGroupByMod(mod, editGroupDescriptor);
-                    }
+                    if (p.getModules().contains(mod)) { ((Student) p).editGroupByMod(mod, editGroupDescriptor); }
                 }
             }
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             System.out.println("updated person list");
             for (Module m : latestModList) {
                 if (m.equals(mod)) {
+                    if (this.index.getZeroBased() >= m.getGroups().size()) {
+                        throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+                    }
                     m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
                 }
             }
@@ -305,22 +362,32 @@ public class EditCommand extends Command {
 
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+            // TODO checks if person alr in module
+            if (!personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
             // When adding new module with nm/, adds prof/student to person list in each mod
             if (checkMod != null) {
                 int modIdx = latestModList.indexOf(checkMod);
                 if (editedPerson instanceof Professor) {
-                    latestModList.get(modIdx).addProfessor((Professor) editedPerson);
+                    try {
+                        latestModList.get(modIdx).addProfessor((Professor) editedPerson);
+                    } catch (DuplicatePersonException e) {
+                        throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                    }
                 } else if (editedPerson instanceof Student) {
-                    latestModList.get(modIdx).addStudent((Student) editedPerson);
+                    try {
+                        latestModList.get(modIdx).addStudent((Student) editedPerson);
+                    } catch (DuplicatePersonException e) {
+                        throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                    }
                 } else {
                     throw new CommandException(MESSAGE_PERSON_NO_SUBTYPE);
                 }
             }
 
-            /*TODO fix duplicate person checking
-            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }*/
+
 
             // Change person in every module that has this person
             for (Module mod : latestModList) {
@@ -358,7 +425,8 @@ public class EditCommand extends Command {
             }
 
             Module moduleToEdit = latestModList.get(index.getZeroBased());
-            Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
+            System.out.println(editModuleDescriptor.getIdx() + "why");
+            Module editedModule = createEditedModule(index.getZeroBased(), moduleToEdit, editModuleDescriptor);
 
             if (!moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
                 throw new CommandException(MESSAGE_DUPLICATE_MODULE);
@@ -548,6 +616,9 @@ public class EditCommand extends Command {
         private ModuleName moduleName;
         private ModuleCode moduleCode;
         private EditGroupDescriptor editGroupDescriptor;
+        private ModuleKeyEvent keyEvents;
+        private int idxOfKeyEvent = -2;
+
 
         public EditModuleDescriptor() {
         }
@@ -559,6 +630,8 @@ public class EditCommand extends Command {
             setModuleName(toCopy.moduleName);
             setModuleCode(toCopy.moduleCode);
             setGroups(toCopy.editGroupDescriptor);
+            this.keyEvents = toCopy.keyEvents;
+            this.idxOfKeyEvent = toCopy.idxOfKeyEvent;
         }
 
         /**
@@ -590,6 +663,22 @@ public class EditCommand extends Command {
 
         public void setGroups(EditGroupDescriptor groups) {
             this.editGroupDescriptor = groups;
+        }
+
+        public Optional<ModuleKeyEvent> getKeyEvents() {
+            return Optional.ofNullable(keyEvents);
+        }
+
+        public void setKeyEvents(ModuleKeyEvent e) {
+            this.keyEvents = e;
+        }
+
+        public void setIdx(int i) {
+            this.idxOfKeyEvent = i;
+        }
+
+        public int getIdx() {
+            return this.idxOfKeyEvent;
         }
 
         @Override
@@ -661,7 +750,7 @@ public class EditCommand extends Command {
         }
 
         public void setModuleCode(ModuleCode modcod) {
-            this.modcode= modcod;
+            this.modcode = modcod;
         }
 
         public ModuleCode getModuleCode() {

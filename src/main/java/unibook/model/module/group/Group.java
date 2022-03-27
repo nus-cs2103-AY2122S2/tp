@@ -3,7 +3,6 @@ package unibook.model.module.group;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,12 +16,12 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  * Represents a group of students within a module.
  */
 public class Group {
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
     private String name;
     private final Module module;
     private final ObservableList<Student> members;
     private final ObservableList<LocalDateTime> meetingTimes;
-
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
      * Instantiates a group object.

@@ -17,8 +17,8 @@ import unibook.commons.util.StringUtil;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent.KeyEventType;
 import unibook.model.module.ModuleName;
-import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Office;
@@ -31,8 +31,9 @@ import unibook.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_WRONG_MT_FORMAT = "To edit meeting times, must include index of meeting time. \n" +
-            "For example, to edit the first index of meeting times to 12th December 2022 4.45pm: mt/1 2020-12-12 16:45";
+    public static final String MESSAGE_WRONG_MT_FORMAT = "To edit meeting times, must include index of meeting time. \n"
+            + "For example, to edit the first index of meeting times to 12th December 2022 4.45pm: "
+            + "mt/1 2020-12-12 16:45";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -57,7 +58,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName) ) {
+        if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -261,7 +262,6 @@ public class ParserUtil {
     }
 
     /**
-<<<<<<< HEAD
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -281,19 +281,38 @@ public class ParserUtil {
 
         // TODO parse the index and the meeting time of the input
 
-        int idxOfMeetingTime = Integer.parseInt(meetingTime.substring(0,1));
+        int idxOfMeetingTime = Integer.parseInt(meetingTime.substring(0 , 1));
         String actualMeetingTime = meetingTime.substring(2);
-        LocalDateTime ldt =  parseDateTime(actualMeetingTime);
+        LocalDateTime ldt = parseDateTime(actualMeetingTime);
         list.add(idxOfMeetingTime);
         list.add(ldt);
         System.out.println(list);
         return list;
     }
 
+
+    /**
+     * Parses a {@code String tag} into a {@code dateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LocalDateTime} is invalid.
+     */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(trimmedDateTime, formatter);
+    }
+
+    /**
+     * Parses a {@code String } into a {@code keyeventtype}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LocalDateTime} is invalid.
+     */
+    public static KeyEventType parseKeyEventType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        return KeyEventType.valueOf(trimmedType.toUpperCase());
     }
 }

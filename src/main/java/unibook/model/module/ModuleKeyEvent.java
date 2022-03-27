@@ -22,6 +22,14 @@ public class ModuleKeyEvent {
         this.keyEventTiming = localDateTime;
         this.module = module;
     }
+    /**
+     * Constructor for a empty ModuleKeyEvent.
+     */
+    public ModuleKeyEvent() {
+        this.keyEventType = null;
+        this.keyEventTiming = null;
+        this.module = null;
+    }
 
     public void setDateTime(LocalDateTime localDateTime) {
         this.keyEventTiming = localDateTime;

@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.logic.commands.EditCommand;
 import unibook.logic.commands.EditCommand.EditGroupDescriptor;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.module.exceptions.DuplicateGroupException;
 import unibook.model.module.exceptions.DuplicateKeyEventException;
 import unibook.model.module.exceptions.GroupNotFoundException;
@@ -167,7 +168,6 @@ public class Module {
         return groups;
     }
 
-
     /**
      * Returns the group in the group list of this module that has the given unique name.
      *
@@ -187,10 +187,10 @@ public class Module {
     /**
      * Edits the information of the group in the respective index
      */
-    public void editGroupByIndex(int idx, EditGroupDescriptor editGroupDescriptor) {
-                Group group = groups.get(idx);
-                Group newGroup = EditCommand.createEditedGroup(group, editGroupDescriptor);
-                groups.set(idx, newGroup);
+    public void editGroupByIndex(int idx, EditGroupDescriptor editGroupDescriptor) throws CommandException {
+        Group group = groups.get(idx);
+        Group newGroup = EditCommand.createEditedGroup(group, editGroupDescriptor);
+        groups.set(idx, newGroup);
     }
 
     /**
@@ -218,6 +218,7 @@ public class Module {
         }
         professors.add(p);
     }
+
 
     /**
      * Adds a group {@code g} to the list of groups.

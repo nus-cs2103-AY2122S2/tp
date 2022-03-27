@@ -7,6 +7,7 @@ import java.util.Set;
 
 import unibook.logic.commands.EditCommand;
 import unibook.logic.commands.EditCommand.EditGroupDescriptor;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
@@ -74,7 +75,7 @@ public class Student extends Person {
     /**
      * Edits the information of the group in the respective module
      */
-    public void editGroupByMod(Module module, EditGroupDescriptor editGroupDescriptor) {
+    public void editGroupByMod(Module module, EditGroupDescriptor editGroupDescriptor) throws CommandException {
         for (Group g : groups) {
             if (g.getModule().equals(module)) {
                 Group group = g;

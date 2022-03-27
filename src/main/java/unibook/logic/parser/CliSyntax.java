@@ -18,4 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TYPE = new Prefix("ty/");
     public static final Prefix PREFIX_VIEW = new Prefix("v/");
     public static final Prefix PREFIX_GROUP = new Prefix("g/");
+    public static final Prefix PREFIX_DATETIME = new Prefix("dt/");
+    public static final Prefix PREFIX_KEYEVENT = new Prefix("ke/");
 }
