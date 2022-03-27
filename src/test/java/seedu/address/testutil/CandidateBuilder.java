@@ -26,7 +26,7 @@ public class CandidateBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "E0123456@u.nus.edu";
     public static final String DEFAULT_COURSE = "Computer Science";
-    public static final String DEFAULT_SENIORITY = "COM2";
+    public static final String DEFAULT_SENIORITY = "2";
     public static final String DEFAULT_APPLICATION_STATUS = "Pending";
     public static final String DEFAULT_INTERVIEW_STATUS = " Not Scheduled";
     public static final String DEFAULT_AVAILABILITY = "1,2,3,4,5";
@@ -51,7 +51,7 @@ public class CandidateBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         course = new Course(DEFAULT_COURSE);
-        seniority = new Seniority(Integer.parseInt(DEFAULT_SENIORITY.substring(DEFAULT_SENIORITY.length() - 1)));
+        seniority = new Seniority(DEFAULT_SENIORITY);
         tags = new HashSet<>();
         applicationStatus = new ApplicationStatus(DEFAULT_APPLICATION_STATUS);
         interviewStatus = new InterviewStatus(DEFAULT_INTERVIEW_STATUS);
@@ -126,7 +126,7 @@ public class CandidateBuilder {
      * Sets the {@code Seniority} of the {@code Candidate} that we are building.
      */
     public CandidateBuilder withSeniority(String seniority) {
-        this.seniority = new Seniority(Integer.parseInt(seniority.substring(seniority.length() - 1)));
+        this.seniority = new Seniority(seniority);
         return this;
     }
 

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
@@ -35,7 +34,7 @@ class JsonAdaptedCandidate {
     private final String phone;
     private final String email;
     private final String course;
-    private final int seniority;
+    private final String seniority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String applicationStatus;
     private final String interviewStatus;
@@ -57,7 +56,7 @@ class JsonAdaptedCandidate {
         this.phone = phone;
         this.email = email;
         this.course = course;
-        this.seniority = Integer.parseInt(seniority.substring(seniority.length() - 1));
+        this.seniority = seniority;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -75,10 +74,7 @@ class JsonAdaptedCandidate {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         course = source.getCourse().course;
-
-        String seniorityValue = source.getSeniority().seniority;
-        seniority = Integer.parseInt(seniorityValue.substring(seniorityValue.length() - 1));
-
+        seniority = source.getSeniority().seniority;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -135,7 +131,7 @@ class JsonAdaptedCandidate {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
         }
         if (!Course.isValidCourse(course)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
         }
         final Course modelCourse = new Course(course);
 

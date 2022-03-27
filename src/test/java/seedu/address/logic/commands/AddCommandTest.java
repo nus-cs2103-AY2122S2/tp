@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -153,6 +154,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Interview> getFilteredInterviewSchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredInterviewSchedule(Predicate<Interview> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasCandidate(Candidate candidate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -178,6 +189,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteInterviewForCandidate(Candidate target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteInterview(Interview interviewToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addInterview(Interview interview) {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,6 +215,11 @@ public class AddCommandTest {
 
         @Override
         public void updateSortedCandidateList(Comparator<Candidate> sortKey) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
             throw new AssertionError("This method should not be called.");
         }
     }

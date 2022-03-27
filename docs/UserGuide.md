@@ -29,7 +29,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
    * **`list`** : Lists all TAs.
 
-   * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science`** Adds a new TA into the system.
+   * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new TA into the system.
 
    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
@@ -52,17 +52,11 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `p/82341234 p/86785678`, only `p/86785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -79,12 +73,17 @@ Format: `help`
 
 Adds a TA into the system.
 
-Format: `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`
+Format: `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`
 
-* `STUDENT_ID` is sensitive, will be validated.
+* `STUDENTID` is sensitive and it will be validated.
+* `NAME` should only contain alphabets, `A-Z` or `a-z`.
+* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
+* `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
+* `SENIORITY` is a number range from 1 to 4.
+* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday` 
 
 Examples:
-* `add id/E0123456 n/John Doe p/87654321 c/Computer Science` adds a new TA with Student ID, E0123456, named John Doe.
+* `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new TA with Student ID, E0123456, named John Doe.
 
 ### Listing all Teaching Assistants : `list`
 
@@ -195,6 +194,17 @@ Examples:
 * `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
 for an interview on 20 September 2022, 3PM.
 
+
+### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
+
+View more details about the Candidate in the middle panel. 
+
+Format: `focus INDEX`
+
+* Additional details of the Candidate will be displayed on the center panel in the application.
+* To switch to another Candidate's information, user will just need to type the new command 
+* and the new index of the candidate. 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -213,7 +223,7 @@ TAlent Assistant™ data are saved in the hard disk automatically after any comm
 
 ### Editing the data file
 
-TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/talentassistant.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
@@ -234,14 +244,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                            |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science`            |
-| **Clear**    | `clear`                                                                                                                     |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                |
-| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                            |
-| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                 |
-| **List**     | `list`                                                                                                                      |
-| **Help**     | `help`                                                                                                                      |
+| Action       | Format, Examples                                                                                                                                                 |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
+| **Clear**    | `clear`                                                                                                                                                          |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
+| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                     |
+| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                 |
+| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                                                      |
+| **List**     | `list`                                                                                                                                                           |
+| **Help**     | `help`                                                                                                                                                           |

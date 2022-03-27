@@ -13,6 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.InterviewStatus;
 
@@ -21,13 +22,21 @@ import seedu.address.model.candidate.InterviewStatus;
  */
 public class CandidateCard extends UiPart<Region> {
 
+    // Misc
     private static final String FXML = "CandidateListCard.fxml";
+
+    // UI Text
     private static final String APPLICATION_STATUS_MSG = "Application Status : ";
     private static final String INTERVIEW_STATUS_MSG = "Interview Status : ";
     private static final String AVAILABILITY_MSG = "Availability: ";
+    private static final String SENIORITY_VALUE = "COM";
+
+    // CSS
     private static final String RED = "#800000";
     private static final String GREEN = "#006100";
     private static final String YELLOW = "#CBA92B";
+    private static final String GREY = "#808080";
+    private static final String BRIGHT_GREEN = "#4BB11F";
     private static final String CHANGE_COLOUR = "-fx-background-color: ";
 
     /**
@@ -53,10 +62,6 @@ public class CandidateCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label applicationStatus;
-    @FXML
-    private Label interviewStatus;
-    @FXML
     private Label availability;
     @FXML
     private FlowPane tags;
@@ -73,13 +78,11 @@ public class CandidateCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName + ", " + candidate.getStudentId().studentId);
         phone.setText(candidate.getPhone().value);
-        course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
+        course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
         email.setText(candidate.getEmail().value);
-        applicationStatus.setText(APPLICATION_STATUS_MSG + candidate.getApplicationStatus().toString());
-        interviewStatus.setText(INTERVIEW_STATUS_MSG + candidate.getInterviewStatus().toString());
         availability.setText(AVAILABILITY_MSG);
-        candidate.getAvailability().getList()
-                .forEach(availability -> availableDays.getChildren().add(new Label(availability)));
+
+        setAvailableDays(candidate.getAvailability());
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
     }
@@ -134,4 +137,18 @@ public class CandidateCard extends UiPart<Region> {
         }
     }
 
+    public void setAvailableDays(Availability availability) {
+        String[] week = Availability.WEEK;
+        boolean[] isAvail = availability.getAvailableListAsBoolean();
+
+        for (int i = 0; i < week.length; i++) {
+            Label label = new Label(week[i]);
+            if (isAvail[i]) {
+                label.setStyle(CHANGE_COLOUR + BRIGHT_GREEN);
+            } else {
+                label.setStyle(CHANGE_COLOUR + GREY);
+            }
+            availableDays.getChildren().add(label);
+        }
+    }
 }

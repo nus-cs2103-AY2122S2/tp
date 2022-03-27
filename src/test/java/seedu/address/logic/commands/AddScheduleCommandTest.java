@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCandidateAtIndex;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_CANDIDATE_NOT_AVAILABLE;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_NOT_OFFICE_HOUR;
+import static seedu.address.logic.commands.schedule.AddScheduleCommand.MESSAGE_CANDIDATE_NOT_AVAILABLE;
+import static seedu.address.logic.commands.schedule.AddScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW;
+import static seedu.address.logic.commands.schedule.AddScheduleCommand.MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW;
+import static seedu.address.logic.commands.schedule.AddScheduleCommand.MESSAGE_NOT_OFFICE_HOUR;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CANDIDATE;
@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,19 +37,19 @@ import seedu.address.model.interview.Interview;
 import seedu.address.testutil.InterviewBuilder;
 
 
-public class ScheduleCommandTest {
+public class AddScheduleCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new InterviewSchedule(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
         model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
         candidateToInterview = candidateToInterview.triggerInterviewStatus();
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
-        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
+        String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 toAdd.getCandidate().getName(), toAdd.getCandidate().getStudentId(),
                 toAdd.getInterviewDate(), toAdd.getInterviewStartTime());
 
@@ -57,27 +58,28 @@ public class ScheduleCommandTest {
 
         expectedModel.addInterview(toAdd);
 
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addScheduleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCandidateList().size() + 1);
-        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
 
-        assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
+        assertCommandFailure(addScheduleCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         showCandidateAtIndex(model, INDEX_FIRST_CANDIDATE);
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, TUESDAY_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand =
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TUESDAY_INTERVIEW_DATE_TIME);
 
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
         model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
 
-        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
+        String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 candidateToInterview.getName(), candidateToInterview.getStudentId(),
                 interviewDateTime.toLocalDate(), interviewDateTime.toLocalTime());
 
@@ -88,7 +90,7 @@ public class ScheduleCommandTest {
 
         showCandidateAtIndex(expectedModel, INDEX_FIRST_CANDIDATE);
         expectedModel.addInterview(toAdd);
-        assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addScheduleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -97,17 +99,18 @@ public class ScheduleCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_CANDIDATE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCandidateList().size());
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
-        assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
+        AddScheduleCommand addScheduleCommand =
+                new AddScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        assertCommandFailure(addScheduleCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_emptyList_throwsCommandException() {
         Index outOfBoundIndex = INDEX_FIRST_CANDIDATE;
         model.updateFilteredCandidateList(Model.PREDICATE_SHOW_EMPTY_LIST);
-        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
 
-        assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM);
+        assertCommandFailure(addScheduleCommand, model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM);
     }
 
     @Test
@@ -115,64 +118,66 @@ public class ScheduleCommandTest {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         model.addInterview(new InterviewBuilder().withCandidate(candidateToInterview)
                 .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build());
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand =
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
 
-        assertCommandFailure(scheduleCommand, model, MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
+        assertCommandFailure(addScheduleCommand, model, MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
     }
 
     @Test
     public void execute_hasConflictingInterview_throwsCommandException() {
         model.addInterview(INTERVIEW_AMY_TYPICAL);
         LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
 
-        assertCommandFailure(scheduleCommand, model, MESSAGE_CONFLICTING_INTERVIEW);
+        assertCommandFailure(addScheduleCommand, model, MESSAGE_CONFLICTING_INTERVIEW);
     }
 
     @Test
     public void execute_hasNoMatchingAvailability_throwsCommandException() {
         LocalDateTime interviewDateTime = THURSDAY_INTERVIEW_DATE_TIME;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
 
-        assertCommandFailure(scheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
+        assertCommandFailure(addScheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
     }
 
     @Test
     public void execute_beforeOfficeHours_throwsCommandException() {
         LocalDateTime interviewDateTime = BEFORE_OFFICE_HOURS;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
 
-        assertCommandFailure(scheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
+        assertCommandFailure(addScheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
     }
 
     @Test
     public void execute_afterOfficeHours_throwsCommandException() {
         LocalDateTime interviewDateTime = AFTER_OFFICE_HOURS;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
 
-        assertCommandFailure(scheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
+        assertCommandFailure(addScheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
     }
 
     @Test
     public void execute_interviewDuringWeekend_throwsCommandException() {
         LocalDateTime interviewDateTime = ON_WEEKEND;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FOURTH_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FOURTH_CANDIDATE, interviewDateTime);
 
-        assertCommandFailure(scheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
+        assertCommandFailure(addScheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
     }
 
     @Test
     public void equals() {
-        ScheduleCommand scheduleFirstCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
-        ScheduleCommand scheduleSecondCommand =
-                new ScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand scheduleFirstCommand =
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand scheduleSecondCommand =
+                new AddScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
 
         // same object -> returns true
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommand));
 
         // same values -> returns true
-        ScheduleCommand scheduleFirstCommandcopy =
-                new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand scheduleFirstCommandcopy =
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommandcopy));
 
         // different types -> returns false
@@ -184,18 +189,4 @@ public class ScheduleCommandTest {
         // different candidate -> returns false
         assertFalse(scheduleFirstCommand.equals(scheduleSecondCommand));
     }
-
-    /*
-    @Test
-    public void execute_interview_trigger_interviewStatus_success() {
-
-        Candidate candidateToInterview = new CandidateBuilder()
-                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
-                .build();
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
-        assertEquals(candidateToInterview.getInterviewStatus(), new InterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED));
-        scheduleCommand.triggerInterviewStatus(candidateToInterview);
-        assertEquals(scheduleCommand.triggerInterviewStatus(candidateToInterview).getInterviewStatus(),
-                new InterviewStatus(VALID_INTERVIEW_SCHEDULED));
-    }*/
 }

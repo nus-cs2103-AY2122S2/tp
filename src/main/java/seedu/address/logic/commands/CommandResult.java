@@ -17,13 +17,20 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should show focus mode. */
+    private final boolean showFocus;
+
+    /** The int index to show on the list*/
+    private final int focusIndex;
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showFocus, int focusIndex) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showFocus = showFocus;
+        this.focusIndex = focusIndex;
     }
 
     /**
@@ -31,11 +38,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, -1);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public int getIndexFocus() {
+        return focusIndex;
     }
 
     public boolean isShowHelp() {
@@ -44,6 +55,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowFocus() {
+        return showFocus;
     }
 
     @Override

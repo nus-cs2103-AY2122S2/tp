@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, -1)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +29,24 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                true, false, false, -1)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, true, false, -1)));
+
+        assertTrue((new CommandResult("feedback",
+                false, false, true, 1)).isShowFocus());
+
+        assertTrue((new CommandResult("feedback",
+                true, false, false, 1)).isShowHelp());
+
+        assertTrue((new CommandResult("feedback",
+                false, true, false, 1)).isExit());
+
+        assertEquals((new CommandResult("feedback",
+                false, true, false, 1).getIndexFocus()), 1);
     }
 
     @Test
@@ -46,9 +60,11 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                true, false, false, -1).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                false, true, false, -1).hashCode());
     }
 }

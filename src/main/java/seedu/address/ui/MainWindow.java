@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -33,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private CandidateListPanel candidateListPanel;
     private InterviewListPanel interviewListPanel;
-    private FocusListPanel focusListPanel;
+    private FocusCard focusListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -121,11 +122,8 @@ public class MainWindow extends UiPart<Stage> {
         candidateListPanel = new CandidateListPanel(logic.getFilteredCandidateList());
         candidateListPanelPlaceholder.getChildren().add(candidateListPanel.getRoot());
 
-        interviewListPanel = new InterviewListPanel(logic.getInterviewSchedule().getInterviewList());
+        interviewListPanel = new InterviewListPanel(logic.getFilteredInterviewSchedule());
         interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
-
-        focusListPanel = new FocusListPanel(logic.getFilteredCandidateList());
-        focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -177,6 +175,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleFocus(CommandResult commandResult) throws FileNotFoundException {
+        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+            focusListPanelPlaceholder.getChildren().remove(0);
+        }
+        focusListPanel = new FocusCard(logic.getFilteredCandidateList().get(commandResult.getIndexFocus()));
+        focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
+    }
+
     public CandidateListPanel getCandidateListPanel() {
         return candidateListPanel;
     }
@@ -185,7 +191,7 @@ public class MainWindow extends UiPart<Stage> {
         return interviewListPanel;
     }
 
-    public FocusListPanel getFocusListPanel() {
+    public FocusCard getFocusCard() {
         return focusListPanel;
     }
 
@@ -194,7 +200,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText)
+            throws CommandException, ParseException, FileNotFoundException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -206,6 +213,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowFocus()) {
+                handleFocus(commandResult);
             }
 
             return commandResult;

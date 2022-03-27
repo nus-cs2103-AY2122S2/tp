@@ -53,10 +53,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Reorders the contents of the candidate list by comparator on {@code sortKey}.
      * {@code candidates} must not contain duplicate candidates.
      */
-    public void sortCandidates(List<Candidate> candidates, Comparator<Candidate> sortComparator) {
-        requireNonNull(candidates);
+    public void sortCandidates(Comparator<Candidate> sortComparator) {
         requireNonNull(sortComparator);
-        List<Candidate> candidatesCopy = new ArrayList<Candidate>(candidates);
+        List<Candidate> candidatesCopy = new ArrayList<Candidate>(this.getCandidateList());
         candidatesCopy.sort(sortComparator);
         this.candidates.setCandidates(candidatesCopy);
     }

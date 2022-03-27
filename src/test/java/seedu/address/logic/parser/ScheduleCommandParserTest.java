@@ -1,44 +1,45 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.ScheduleCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
 
-
-/**
- * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the ScheduleCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the ScheduleCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
- */
 public class ScheduleCommandParserTest {
-
-    private ScheduleCommandParser parser = new ScheduleCommandParser();
-    private LocalDateTime interviewDateTime = LocalDateTime.of(2023, 03, 20, 10, 00);
+    private final ScheduleCommandParser parser = new ScheduleCommandParser();
+    private final AddScheduleCommandParser addParser = new AddScheduleCommandParser();
 
     @Test
-    public void parse_validArgs_returnsScheduleCommand() {
-        assertParseSuccess(parser, "1 /at 20/03/2023 10:00", new ScheduleCommand(INDEX_FIRST_CANDIDATE,
-                interviewDateTime));
+    public void parse_emptyArg_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> parser.parse(""));
     }
 
     @Test
-    public void parse_invalidDelimiter_throwsParseException() {
-        assertParseFailure(parser, "1 /by 20/03/2023 10:00", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ScheduleCommand.MESSAGE_USAGE));
+    public void parse_validArgs_returnsAddScheduleCommand() throws Exception {
+        AddScheduleCommand command = (AddScheduleCommand) parser.parse("add candidate/"
+                + INDEX_FIRST_CANDIDATE.getOneBased() + " at/01-01-2023 10:00");
+        assertEquals(new AddScheduleCommand(INDEX_FIRST_CANDIDATE,
+                LocalDateTime.of(2023, 01, 01, 10, 00)), command);
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ScheduleCommand.MESSAGE_USAGE));
+    public void parse_invalidArgs_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ScheduleCommand.MESSAGE_USAGE), () -> parser.parse(ScheduleCommand.COMMAND_WORD + ""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ScheduleCommand.MESSAGE_USAGE), () -> parser.parse(ScheduleCommand.COMMAND_WORD + " modify"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ScheduleCommand.MESSAGE_USAGE), () -> parser.parse(ScheduleCommand.COMMAND_WORD + " remove"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddScheduleCommand.MESSAGE_USAGE), () -> parser.parse("add 2"));
     }
 }
