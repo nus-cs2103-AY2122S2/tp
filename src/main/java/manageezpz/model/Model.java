@@ -169,9 +169,24 @@ public interface Model {
     ObservableList<Task> getFilteredTaskList();
 
     /**
-     * Returns true if a task with the same identity as {@code deadline} exists in the task list.
+     * Returns true if a task with the same identity as {@code Task} exists in the task list.
      */
     boolean hasTask(Task task);
+
+    /**
+     * Returns true if a task with the same identity as {@code todo} exists in the task list.
+     */
+    boolean hasTodo(Todo todo);
+
+    /**
+     * Returns true if a task with the same identity as {@code deadline} exists in the task list.
+     */
+    boolean hasDeadline(Deadline deadline);
+
+    /**
+     * Returns true if a task with the same identity as {@code event} exists in the task list.
+     */
+    boolean hasEvent(Event event);
 
     /**
      * Returns true if a {@code Task} is tagged.

@@ -26,7 +26,7 @@ import manageezpz.commons.core.Messages;
 import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.model.task.Date;
-import manageezpz.model.task.Task;
+import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
 
 class FindTaskCommandParserTest {
@@ -129,7 +129,7 @@ class FindTaskCommandParserTest {
         String userInput = String.join(" ", FindCommand.COMMAND_WORD, PREFIX_TASK.toString(),
                 PREFIX_PRIORITY.toString(), VALID_PRIORITY);
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(PREFIX_TASK, null,
-                null, Task.Priority.valueOf(VALID_PRIORITY), null, null);
+                null, Priority.valueOf(VALID_PRIORITY), null, null);
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -188,7 +188,7 @@ class FindTaskCommandParserTest {
                 PREFIX_PRIORITY.toString(), VALID_PRIORITY, PREFIX_ASSIGNEES.toString(), VALID_NAME_AMY,
                 PREFIX_IS_MARKED.toString(), VALID_BOOLEAN);
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(PREFIX_DEADLINE, LIST_DESCRIPTIONS,
-                new Date(VALID_DATE), Task.Priority.valueOf(VALID_PRIORITY), VALID_NAME_AMY,
+                new Date(VALID_DATE), Priority.valueOf(VALID_PRIORITY), VALID_NAME_AMY,
                 Boolean.valueOf(VALID_BOOLEAN));
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
 

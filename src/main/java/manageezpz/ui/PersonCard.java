@@ -33,6 +33,8 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label email;
+    @FXML
+    private Label numOfTasks;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.

@@ -18,7 +18,7 @@ import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.task.Date;
-import manageezpz.model.task.Task;
+import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
 
 /**
@@ -45,7 +45,7 @@ class FindTaskCommandParser extends FindCommandParser {
         Prefix taskType = getPrefix(argMultiMapTaskType);
         List<String> descriptions = getDescriptions(argMultiMapProperties);
         Date date = getTaskDate(argMultiMapProperties);
-        Task.Priority priority = getTaskPriority(argMultiMapProperties);
+        Priority priority = getTaskPriority(argMultiMapProperties);
         String assignee = getAssignee(argMultiMapProperties);
         Boolean isMarked = getIsMarked(argMultiMapProperties);
 
@@ -130,12 +130,12 @@ class FindTaskCommandParser extends FindCommandParser {
         return true;
     }
 
-    private Task.Priority getTaskPriority(ArgumentMultimap argMultiMap) {
-        Task.Priority priority = null;
+    private Priority getTaskPriority(ArgumentMultimap argMultiMap) {
+        Priority priority = null;
         if (argMultiMap.isPrefixExist(PREFIX_PRIORITY)) {
             String priorityString = argMultiMap.getValue(PREFIX_PRIORITY).get().trim().toUpperCase();
             try {
-                priority = Task.Priority.valueOf(priorityString);
+                priority = Priority.valueOf(priorityString);
             } catch (IllegalArgumentException e) {
                 addErrorMessage(FindTaskCommand.INVALID_PRIORITY);
             }

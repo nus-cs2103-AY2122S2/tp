@@ -203,27 +203,41 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a task with the same identity as {@code task} exists in the task list.
      * @param task the task to be checked.
-     * @return true if same identity otherwise false
+     * @return true if same identity otherwise false.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
     }
 
+    /**
+     * Adds a Task to the task list.
+     * The task must not already exist in the task list.
+     */
     public void addTask(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Replaces the contents of the task list with {@code task}.
+     * {@code task} must not contain duplicate tasks.
+     */
     public void setTasks(List<Task> task) {
         this.tasks.setTasks(task);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
     public void removeTask(Task key) {
         tasks.remove(key);
     }
 
     /**
-     * Returns true if a todo with the same identity as {@code todo} exists in the task list.
+     * Checks if a todo with the same identity as {@code todo} exists in the task list.
+     * @param todo a valid Todo task.
+     * @return true if a todo with the same identity as {@code todo} exists in the task list, false otherwise.
      */
     public boolean hasTodo(Todo todo) {
         requireNonNull(todo);
@@ -231,15 +245,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a todo to the task list.
-     * The todo must not already exist in the task list.
+     * Adds a Todo to the task list.
+     * @param todo a valid Todo task.
      */
     public void addTodo(Todo todo) {
         this.tasks.add(todo);
     }
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the task list.
+     * Check if an event with the same identity as {@code event} exists in the task list.
+     * @param event an event in the task list.
+     * @return true if event has same identity as {@code event} exists in the task list, false otherwise.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -247,15 +263,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds an event to the task list.
-     * The event must not already exist in the task list.
+     * Adds a Event to the task list.
+     * @param event a valid Event task.
      */
     public void addEvent(Event event) {
         this.tasks.add(event);
     }
 
     /**
-     * Returns true if a deadline with the same identity as {@code deadline} exists in the task list.
+     * Checks if a deadline with the same identity as {@code deadline} exists in the task list.
+     * @param deadline a valid deadline in the task list.
+     * @return true if deadline has same identity as {@code deadline} exists in the task list, false otherwise.
      */
     public boolean hasDeadline(Deadline deadline) {
         requireNonNull(deadline);
@@ -263,24 +281,37 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a deadline to the task list.
-     * The deadline must not already exist in the task list.
+     * Adds a Deadline to the task list.
+     * @param deadline a valid deadline task.
      */
     public void addDeadline(Deadline deadline) {
         this.tasks.add(deadline);
     }
 
+    /**
+     * Marks the task in the task list.
+     * @param task the task to be marked.
+     */
     public void markTask(Task task) {
-        tasks.markTask(task);
+        this.tasks.markTask(task);
     }
 
+    /**
+     * UnMarks the task in the task list.
+     * @param task the task to be unmarked.
+     */
     public void unmarkTask(Task task) {
-        tasks.unmarkTask(task);
+        this.tasks.unmarkTask(task);
     }
 
     public void findTask(Task task) {
     }
 
+    /**
+     * Tags the task in the task list to a person in the address book.
+     * @param task the task to be tagged.
+     * @param person the person to be tagged to the task.
+     */
     public void tagTask(Task task, Person person) {
         task.assignedTo(person);
     }

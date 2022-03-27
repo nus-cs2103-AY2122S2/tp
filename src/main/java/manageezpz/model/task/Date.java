@@ -1,9 +1,13 @@
 package manageezpz.model.task;
 
+import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.util.AppUtil.checkArgument;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 
 public class Date {
     public static final String MESSAGE_CONSTRAINTS = "Date should be in the following format : yyyy-MM-dd"
@@ -13,7 +17,13 @@ public class Date {
 
     private String date;
 
+    /**
+     * Constructs a {@code Date}.
+     * @param date A valid date.
+     */
     public Date(String date) {
+        requireNonNull(date);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         this.date = date;
     }
 
