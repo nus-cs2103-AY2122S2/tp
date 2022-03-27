@@ -335,7 +335,7 @@ Examples:
 `undo`  
 `redo`
 
- After editing a persons's name at index 3 from `George` to `Adam` and using `undo` to reverse the person's name
+ After editing a person's name at index 3 from `George` to `Adam` and using `undo` to reverse the person's name
 back to `George`, using `redo` will restore the contact's name back to `Adam`.
 ### Exiting the program : `exit`
 
