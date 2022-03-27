@@ -52,13 +52,13 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[] {
-            new Event(new Name("Interview"), new Name("SGShop"), new Date("16-9-2022"), new Time("13:30"),
+            new Event(new Name("Interview"), new Name("SGShop"), new Date("2022-09-16"), new Time("13:30"),
                     new Location("zoom"), getTagSet("technical")),
-            new Event(new Name("Interview"), new Name("DBSSS"), new Date("13-10-2022"), new Time("12:30"),
+            new Event(new Name("Interview"), new Name("DBSSS"), new Date("2022-10-13"), new Time("12:30"),
                     new Location("zoom"), getTagSet("behavioural")),
-            new Event(new Name("Online Assessment"), new Name("DBSSS"), new Date("23-04-2022"), new Time("14:30"),
+            new Event(new Name("Online Assessment"), new Name("DBSSS"), new Date("2022-04-23"), new Time("14:30"),
                     new Location("hackerrank"), getTagSet("OOP")),
-            new Event(new Name("Online Assessment"), new Name("SGShop"), new Date("16-05-2022"), new Time("15:30"),
+            new Event(new Name("Online Assessment"), new Name("SGShop"), new Date("2022-05-16"), new Time("15:30"),
                     new Location("hackereartch"), getTagSet("datastructure")),
         };
     }
