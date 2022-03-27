@@ -362,3 +362,17 @@
     -fx-background-radius: 10px;
     -fx-font-size: 11;
 }
+
+#personName {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#personName .label {
+    -fx-text-fill: white;
+    -fx-background-color: #D763FF;
+    -fx-padding: 2 4 2 4;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-size: 11;
+}
