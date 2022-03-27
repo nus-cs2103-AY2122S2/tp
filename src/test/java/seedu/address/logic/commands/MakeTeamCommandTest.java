@@ -38,6 +38,7 @@ public class MakeTeamCommandTest {
         Person expectedPerson = new PersonBuilder(expectedModel.getDisplayPersonList().get(0))
                 .isPotentialTeammate(true).build();
         expectedModel.setPerson(person, expectedPerson);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(makeTeamCommand, model, expectedMessage, expectedModel);
     }
@@ -52,6 +53,7 @@ public class MakeTeamCommandTest {
         Person expectedPerson = new PersonBuilder(expectedModel.getDisplayPersonList().get(2))
                 .isPotentialTeammate(false).build();
         expectedModel.setPerson(person, expectedPerson);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(makeTeamCommand, model, expectedMessage, expectedModel);
     }
@@ -95,6 +97,7 @@ public class MakeTeamCommandTest {
         Person expectedPerson = new PersonBuilder(expectedModel.getDisplayPersonList().get(0))
                 .isPotentialTeammate(true).build();
         expectedModel.setPerson(person, expectedPerson);
+        expectedModel.commitAddressBook();
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(makeTeamCommand, model, expectedMessage, expectedModel);

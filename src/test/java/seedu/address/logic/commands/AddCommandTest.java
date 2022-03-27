@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -224,7 +225,16 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return new VersionedAddressBook();
+        }
+
+        @Override
+        public void commitAddressBook() {
+            ReadOnlyAddressBook addressBook = this.getAddressBook();
+            if (addressBook instanceof VersionedAddressBook){
+                VersionedAddressBook versionedAddressBook = (VersionedAddressBook) addressBook;
+                versionedAddressBook.commit();
+            }
         }
     }
 
