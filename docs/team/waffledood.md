@@ -19,7 +19,7 @@ Given below are my contributions to the project.
   * What it does: Allows the client to set reminders for themselves to contact a client/clients.
   * Justification: This feature improves the product as the client will take note of which clients to follow up with, and will be constantly reminded when the app is active, or after they just launched the app.
   * Highlights: This feature involves the usage of Threads and was quite tricky to implement because improper handling or usage of Threads could result in performance issues, and the app not behaving properly (closing the app with the Thread still running did not fully close the app & forcing the app to shutdown via IntelliJ resulted in an exit code error).
-  * Credits: this feature was implemented with the help of these online resources: [Java Timer](https://www.baeldung.com/java-timer-and-timertask) 
+  * Credits: this feature was implemented with the help of these online resources: [Java Timer](https://www.baeldung.com/java-timer-and-timertask)
 
 * **Code contributed**: [RepoSense link]()
 

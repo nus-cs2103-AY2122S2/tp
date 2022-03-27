@@ -81,9 +81,9 @@ The `UserType` represents an attribute that is added to a `person` & can represe
 Unlike other attributes of a `person`, the `UserType` of a `person` cannot be edited _directly_ via the `edit` command. A `person` can be changed from a `buyer` to a `seller` & vice versa if the person's property or preference is changed. This can be done with the command: `edit INDEX pr/PROPERTY_DETAILS` or `edit INDEX pf/PREFERENCE_DETAILS`. This means editing a `person` to have a `Property` instead of a `Preference` will change them from a `buyer` (had a `Preference` initially) to a `seller` (now has a `Property`). In other cases where other attributes of a `person` are being edited, e.g. phone number, address, the `UserType` of that `person` being edited will remain the same.
 
 ## [Proposed] Remind feature
-The remind feature is implemented by storing a static list of persons the user wants to be reminded of. 
+The remind feature is implemented by storing a static list of persons the user wants to be reminded of.
 
-- `ReminderTask` -- Schedules and handles the work of activating the Reminders window. 
+- `ReminderTask` -- Schedules and handles the work of activating the Reminders window.
 - `Reminderpersons` -- Stores a `HashSet` of `person`s, because only 1 reminder can be set per person & thus only 1 occurrence of a person in this data structure is allowed.
 - `ReminderWindow` --  A Window to display all `person`s the person set reminders for.
 - Both `ReminderTask` and `ReminderWindow` classes are singletons as there can only ever be 1 occurrence of these classes.
@@ -94,7 +94,7 @@ Given below is an example usage scenarios and the behavior of the program specif
 
 Step 1: The user launches the app. Within 5 seconds, a Reminder window pops up & displays any reminders the user has actively set. As the User does not have any active reminders set, they can add a reminder.
 
-Step 2: User executes the `remind` command by typing in `remind 1`, as the user wants to set a reminder for the person with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `person` corresponding to the `Index` from `Model`. This `person` is then added to the HashSet in `Reminderpersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by MainWindow and the `ReminderWindow` is launched. 
+Step 2: User executes the `remind` command by typing in `remind 1`, as the user wants to set a reminder for the person with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `person` corresponding to the `Index` from `Model`. This `person` is then added to the HashSet in `Reminderpersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by MainWindow and the `ReminderWindow` is launched.
 
 Step 3: The User will be prompted with the Reminder window, containing the person the user just set a `Reminder` for.
 
