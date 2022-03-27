@@ -508,11 +508,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
+The archive mechanism implements the following sequence for the method call execute("archive") on a LogicManager object.
 
-_{Explain here how the data archiving feature will be implemented}_
+#### <ins>How the feature is implemented<ins/>
+The archive command will save the archived file into a subdirectory of a directory relative to the address book file path.
+`ArchiveCommand#initArchiveFilePath()` will produce the archived file path using the directory path of the address book file as the base directory.
+e.g. If the address book file is saved in `[ROOT]/data`, then a directory called `archive` will be saved in `[ROOT]/data` and the 
+subdirectories will be saved as `[ROOT/data/[LOCAL_PC_DATE]` and the archived file path is `[ROOT]/data/[LOCAL_PC_DATE]/[ARCHIVED_FILE]`.
+`FileUtil#createIfMissing()` will create a dummy file at the archive file path.
+The address book file will then be copied over to this dummy file at the archived file path using `Files#copy()`.
 
+Below are links for implementation of the classes and its methods:
+* [`FileUtil`](../src/main/java/seedu/address/commons/util/FileUtil.java)
+* [`ArchiveCommand`](../src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
+* [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
+**Sequence and Activity Diagram of Archive Feature is shown below:**
+![ArchiveCommandSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
+![ArchiveCommandActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
