@@ -169,6 +169,9 @@ public class HelpWindow extends UiPart<Stage> {
                 alert.show();
                 e.printStackTrace();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Your operating system is currently not supported!");
+            alert.show();
         }
     }
 }
