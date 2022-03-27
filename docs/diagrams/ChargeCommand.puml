@@ -1,0 +1,79 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!define LOGIC_COLOR #89CFF0
+!define LOGIC_COLOR_T2 #9DD9F3
+
+!define MODEL_COLOR #DE5D82
+!define MODEL_COLOR_T1 #EA8C8F
+
+
+box Logic LOGIC_COLOR_T2
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ChargeCommandParser" as ChargeCommandParser LOGIC_COLOR
+participant "ChargeCommand" as ChargeCommand LOGIC_COLOR
+participant "c:Charge" as c LOGIC_COLOR
+participant ":Charge" as Charge LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Pet" as Pet MODEL_COLOR
+participant ":AttendanceHashMap" as AttendanceHashMap MODEL_COLOR
+
+end box
+[-> LogicManager : execute("charge 1 /m03")]
+activate LogicManager
+
+LogicManager -> AddressBookParser: parseCommand(charge)
+activate AddressBookParser
+
+create ChargeCommandParser
+AddressBookParser -> ChargeCommandParser: Parse(arguments)
+activate ChargeCommandParser
+
+create ChargeCommand
+ChargeCommandParser -> ChargeCommand
+activate ChargeCommand
+
+'ChargeCommand -> c
+'activate c
+
+ChargeCommand -> Charge: getPerDayCharge()
+activate Charge
+
+Charge --> ChargeCommand
+deactivate Charge
+
+ChargeCommand -> Model: getFilteredPetList()
+activate Model
+Model --> ChargeCommand
+deactivate Model
+
+ChargeCommand -> Pet: getAttendance()
+activate Pet
+
+Pet -> AttendanceHashMap
+activate AttendanceHashMap
+
+Pet <-- AttendanceHashMap
+deactivate AttendanceHashMap
+
+ChargeCommand <-- Pet
+deactivate Pet
+
+'ChargeCommand <-- c
+ChargeCommandParser <-- ChargeCommand
+deactivate ChargeCommand
+
+AddressBookParser <-- ChargeCommandParser
+deactivate ChargeCommandParser
+
+LogicManager <-- AddressBookParser
+deactivate AddressBookParser
+deactivate LogicManager
+
+
+@enduml
