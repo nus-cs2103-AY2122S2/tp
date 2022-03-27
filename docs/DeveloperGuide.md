@@ -469,6 +469,95 @@ The `clear` command deletes all students currently stored in TAPA. During the ex
 8. In the `ConfirmClearCommand`, `model.setAddressBook(new AddressBook())` is invoked, resetting the current list of students stored in TAPA to an empty list.
 9. Lastly, the `ConfirmClearCommand` will create a new `CommandResult`, which will be returned to the `LogicManager`.
 
+### Archive Command
+
+#### Description
+
+The `archive` command allows users to save the current state of the data in TAPA,
+into a separate `.json` file. This newly created file can be found in the same
+folder as the original data file (in `/data`). In addition, it will have a file name
+that corresponds to the date and time (up to 6 significant figures) in which the
+command is being called. This ensures that files created will have a unique file name
+in most cases.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "archive", `ArchiveCommand()` will be called.
+4. As `ArchiveCommand` utilizes the default constructor, it simply returns a new `ArchiveCommand` object to
+   the `AddressBookParser`.
+5. This `ArchiveCommand` object will then be subsequently returned to the `LogicManager`.
+6. The `LogicManager` calls `ArchiveCommand#execute(Model model)`.
+7. In `ArchiveCommand`, the `Path` to the existing `AddressBook` is extracted, 
+   by calling `model#getAddressBookFilePath()`.
+8. Similarly, the existing `AddressBook` is also extracted, by calling `model#getAddressBook()`.
+9. With the help of the `DateTimeFormatter` and `LocalDateTime` in the Java 8 Date Time API, 
+   the file name and path of the new `.json` data file can be obtained.
+10. The new `.json` data file can now be created, using `FileUtil.createIfMissing(newPath)`.
+    A `CommandException` will be thrown if `ArchiveCommand` fails to create this file.
+11. The current copy of the `AddressBook` can be "copied" into a new `JsonSerializableAddressBook`,
+    which will be used to populate the new `.json` data file that was created 
+    (by utilizing `JsonUtil#saveJsonFile(T JsonFile, Path path)`).
+    A `CommandException` will be thrown if `ArchiveCommand` fails to populate the data file.
+12. Lastly, the `ArchiveCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
+
+![ArchiveCommandSequenceDiagram](images/ArchiveCommandSequenceDiagram.png)
+
+### Progress Command
+
+#### Description
+
+The `progress` command allows users to view the completion status of all students who are taking a particular
+module and are assigned to a particular task.
+During the execution of the `progress` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `ProgressCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "progress", 
+   `ProgressCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("progress").
+4. In the `ProgressCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+      **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+   </div>
+
+5. The `ProgressCommandParser` will pass the moduleCode input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseModuleCode(String moduleCode)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+     **Note:** A NullException will be thrown if the supplied string argument is null.
+   </div>
+
+6. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
+7. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked, which checks if the trimmed argument is
+   valid (according to the Regex supplied).
+   If the argument is valid, a new `ModuleCode` object will be created and returned to the `ProgressCommandParser`.
+   If the argument is invalid, a `ParseException` will be thrown.
+8. Steps 5 to 7 will be repeated for the "task name" field, by using its respective parse methods in `ParserUtil`.
+9. A new `ProgressCommand` will be created (using the parsed `ModuleCode` and `Task` objects) 
+   and returned to the `LogicManager`.
+10. The `LogicManager` will then call `ProgressCommand#execute(Model model)`.
+11. In the `ProgressCommand`, the `model#checkProgress(ModuleCode moduleCode, Task task)` will be invoked.
+    This method iterates through each `Person` object. If the `Person` has the same `ModuleCode` and `Task`
+    assigned to him/her, the `Person` object and the completion status 
+    (either completed/incomplete, denoted by a boolean value) will be added to a `LinkedHashMap<Person, boolean>`.
+12. If the resulting `LinkedHashMap` is null or empty, a `CommandException` will be thrown.
+13. This `LinkedHashMap` will be used to generate the output string.
+14. The output string will be used in creating a new `CommandResult` object.
+15. Lastly, the `CommandResult` object will be returned to `LogicManager`.
+
+![ProgressCommandSequenceDiagram-1](images/ProgressCommandSequenceDiagram-1.png)
+
+![ProgressCommandSequenceDiagram-2](images/ProgressCommandSequenceDiagram-2.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
