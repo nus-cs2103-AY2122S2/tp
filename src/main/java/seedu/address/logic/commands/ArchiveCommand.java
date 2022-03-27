@@ -37,7 +37,7 @@ public class ArchiveCommand extends Command {
         addressBookFilePath = model.getAddressBookFilePath();
         archiveDirectoryName = initArchiveDirectoryPathName();
         archiveFileName = initArchiveFilePathName();
-        archiveFilePath = initArchiveFilePath(archiveDirectoryName, archiveFileName);
+        archiveFilePath = initArchiveFilePath();
         archiveFile();
 
         return new CommandResult(MESSAGE_SUCCESS);
@@ -52,7 +52,7 @@ public class ArchiveCommand extends Command {
      * @param archiveFileName The name for the archived address book file
      * @return path for the archived address book file
      */
-    private Path initArchiveFilePath(String archiveDirectoryName, String archiveFileName) {
+    private Path initArchiveFilePath() {
         String splitRegex = Pattern.quote(System.getProperty("file.separator")); // "\" is the regex in this case
         StringBuilder addressBookFileDirectory = new StringBuilder();
         String[] splitAddressBookFilePath = addressBookFilePath.toString().split(splitRegex);
