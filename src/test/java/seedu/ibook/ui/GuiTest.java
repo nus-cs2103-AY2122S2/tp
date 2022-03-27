@@ -1,12 +1,16 @@
 package seedu.ibook.ui;
 
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+
+import javafx.stage.Stage;
 import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.LogicManager;
 import seedu.ibook.model.Model;
@@ -15,17 +19,13 @@ import seedu.ibook.storage.JsonIBookStorage;
 import seedu.ibook.storage.JsonUserPrefsStorage;
 import seedu.ibook.storage.StorageManager;
 
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(ApplicationExtension.class)
 public class GuiTest {
 
-    public MainWindow mainWindow;
-
     @TempDir
     public Path temporaryFolder;
+
+    private MainWindow mainWindow;
 
     @Start
     public void start(Stage stage) {
