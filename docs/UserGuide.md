@@ -16,8 +16,7 @@ title: User Guide
   * [Adding a show: `add`](#adding-a-show-add)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
   * [Editing a show: `edit`](#editing-a-show-edit)
-  * [Editing a comment: `comment`](#editing-a-comment-comment)
-  * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Commenting on a show: `comment`](#commenting-on-a-show-comment)
   * [Finding a show: `find`](#finding-a-show-find)
   * [Saving the data](#saving-the-data)
   * [Sorting the shows](#sorting-the-shows)
@@ -262,7 +261,15 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-### Editing a comment: `comment`
+### Commenting on a show: `comment`
+
+**Description:** Want to write down your comments about a show? Note it down in Trackermon!
+
+**Format:** `comment <INDEX> [c/<COMMENT>]`
+
+**Examples:** `comment 2 c/This is a good show!`
+
+---
 
 
 ### Finding a show: `find`
