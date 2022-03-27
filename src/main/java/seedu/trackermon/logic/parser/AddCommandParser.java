@@ -3,6 +3,7 @@ package seedu.trackermon.logic.parser;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -38,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get());
+        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse("0"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).orElse(""));
 

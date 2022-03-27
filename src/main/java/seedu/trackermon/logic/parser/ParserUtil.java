@@ -65,12 +65,32 @@ public class ParserUtil {
         return Status.getStatus(trimmedStatus);
     }
 
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(int rating) throws ParseException {
+        requireNonNull(rating);
+        if (!Rating.isValidScore(rating)) {
+            throw new ParseException(Rating.INVALID_RATING);
+        }
+        return new Rating(rating);
+    }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
         if (!Rating.isValidScore(rating)) {
             throw new ParseException(Rating.INVALID_RATING);
         }
-        return new Rating(Integer.parseInt(rating));
+        return new Rating(rating);
     }
 
 
