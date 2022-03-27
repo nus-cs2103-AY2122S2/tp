@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_JERSEY_NUMBER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +62,8 @@ public class AddCommandTest {
         try {
             command.execute(model);
         } catch (CommandException e) {
-            assertEquals(AddCommand.MESSAGE_DUPLICATE_JERSEY_NUMBER, e.getMessage());
+            assertEquals(String.format(MESSAGE_DUPLICATE_JERSEY_NUMBER,
+                    model.getAvailableJerseyNumber()), e.getMessage());
         }
     }
 
