@@ -23,10 +23,6 @@ import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.InterviewStatus;
 
-
-
-
-
 /**
  * An UI component that displays information of a {@code Candidate}.
  */
@@ -36,8 +32,9 @@ public class FocusCard extends UiPart<Region> {
     private static final String RED = "#800000";
     private static final String GREEN = "#006100";
     private static final String YELLOW = "#8B8000";
-    private static final String BRIGHT_GREEN = "#4BB11F";
     private static final String GREY = "#808080";
+    private static final String BRIGHT_GREEN = "#227F0F";
+    private static final String WHITE_STYLE = "-fx-text-fill: #FFFFFF;";
     private static final String CHANGE_COLOUR = "-fx-background-color: ";
     private static final String BLANK_PICTURE_PATH = "docs/images/blankprofile.png";
 
@@ -96,9 +93,7 @@ public class FocusCard extends UiPart<Region> {
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
         setAvailableDays(candidate.getAvailability());
-
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -153,16 +148,18 @@ public class FocusCard extends UiPart<Region> {
     public void setAvailableDays(Availability availability) {
         String[] week = Availability.WEEK;
         boolean[] isAvail = availability.getAvailableListAsBoolean();
+        String availStyle = CHANGE_COLOUR + BRIGHT_GREEN + ";" + WHITE_STYLE;
+        String notAvailStyle = CHANGE_COLOUR + GREY + ";" + WHITE_STYLE;
 
         for (int i = 0; i < week.length; i++) {
             Label label = new Label(week[i]);
+
             if (isAvail[i]) {
-                label.setStyle(CHANGE_COLOUR + BRIGHT_GREEN);
+                label.setStyle(availStyle);
             } else {
-                label.setStyle(CHANGE_COLOUR + GREY);
+                label.setStyle(notAvailStyle);
             }
             availableDaysFocus.getChildren().add(label);
         }
     }
-
 }

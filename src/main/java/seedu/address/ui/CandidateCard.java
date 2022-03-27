@@ -26,17 +26,16 @@ public class CandidateCard extends UiPart<Region> {
     private static final String FXML = "CandidateListCard.fxml";
 
     // UI Text
-    private static final String APPLICATION_STATUS_MSG = "Application Status : ";
-    private static final String INTERVIEW_STATUS_MSG = "Interview Status : ";
     private static final String AVAILABILITY_MSG = "Availability: ";
     private static final String SENIORITY_VALUE = "COM";
 
     // CSS
     private static final String RED = "#800000";
     private static final String GREEN = "#006100";
-    private static final String YELLOW = "#CBA92B";
+    private static final String BLUE = "#0D4BAD";
+    private static final String YELLOW = "#8B8000";
     private static final String GREY = "#808080";
-    private static final String BRIGHT_GREEN = "#4BB11F";
+    private static final String BRIGHT_GREEN = "#227F0F";
     private static final String CHANGE_COLOUR = "-fx-background-color: ";
 
     /**
@@ -132,7 +131,7 @@ public class CandidateCard extends UiPart<Region> {
             interviewLabel.setStyle(CHANGE_COLOUR + GREEN);
             statusPane.getChildren().add(interviewLabel);
         } else if (interviewString.equals(SCHEDULED)) {
-            interviewLabel.setStyle(CHANGE_COLOUR + YELLOW);
+            interviewLabel.setStyle(CHANGE_COLOUR + BLUE);
             statusPane.getChildren().add(interviewLabel);
         }
     }
