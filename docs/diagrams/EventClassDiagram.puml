@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniqueEventList
+UniqueEventList -right-> Event
+
+Event *-up-> "1" EventName
+Event *-up-> "1" Information
+Event *-up-> "1" Participants
+Event *-up-> "1" DateTime
+@enduml
