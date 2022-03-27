@@ -4,8 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Represents a Module in the TAssist.
@@ -18,15 +21,27 @@ public class TaModule implements Entity {
     private final ModuleName moduleName;
     private final ModuleCode moduleCode;
     private final AcademicYear academicYear;
+    private final UniqueStudentList uniqueStudentList;
 
     /**
      * Every field must be present and not null.
+     * Used to initialize a new module with no students.
      */
     public TaModule(ModuleName moduleName, ModuleCode moduleCode, AcademicYear academicYear) {
+        this(moduleName, moduleCode, academicYear, new UniqueStudentList());
+    }
+
+    /**
+     * Every field must be present and not null.
+     * Used to initialize a module from storage file.
+     */
+    public TaModule(ModuleName moduleName, ModuleCode moduleCode, AcademicYear academicYear,
+                    UniqueStudentList uniqueStudentList) {
         requireAllNonNull(moduleName, moduleCode);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
         this.academicYear = academicYear;
+        this.uniqueStudentList = uniqueStudentList;
     }
 
     public ModuleName getModuleName() {
@@ -39,6 +54,22 @@ public class TaModule implements Entity {
 
     public AcademicYear getAcademicYear() {
         return academicYear;
+    }
+
+    public void addStudent(Student s) {
+        uniqueStudentList.add(s);
+    }
+
+    public boolean hasStudent(Student s) {
+        return uniqueStudentList.contains(s);
+    }
+
+    public void removeStudent(Student s) {
+        uniqueStudentList.remove(s);
+    }
+
+    public ObservableList<Student> getStudents() {
+        return uniqueStudentList.asUnmodifiableObservableList();
     }
 
     /**
@@ -89,7 +120,8 @@ public class TaModule implements Entity {
         TaModule otherTaModule = (TaModule) other;
         return otherTaModule.getModuleName().equals(getModuleName())
                 && otherTaModule.getAcademicYear().equals(getAcademicYear())
-                && otherTaModule.getModuleCode().equals(getModuleCode());
+                && otherTaModule.getModuleCode().equals(getModuleCode())
+                && otherTaModule.getStudents().equals(getStudents());
     }
 
 
@@ -97,7 +129,7 @@ public class TaModule implements Entity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleName, moduleCode, academicYear);
+        return Objects.hash(moduleName, moduleCode, academicYear, uniqueStudentList);
     }
 
     @Override
