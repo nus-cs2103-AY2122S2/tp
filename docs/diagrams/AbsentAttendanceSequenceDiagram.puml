@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AbsentAttendanceCommandParser" as AbsentAttendanceCommandParser LOGIC_COLOR
+participant "a:AbsentAttendanceCommand" as AbsentAttendanceCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+
+[-> LogicManager : execute("absent 1 date/23-03-2022")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("absent 1 date/23-03-2022")
+activate AddressBookParser
+
+create AbsentAttendanceCommandParser
+AddressBookParser -> AbsentAttendanceCommandParser
+activate AbsentAttendanceCommandParser
+
+AbsentAttendanceCommandParser --> AddressBookParser
+deactivate AbsentAttendanceCommandParser
+
+AddressBookParser -> AbsentAttendanceCommandParser : parse("1 date/23-03-2022")")
+activate AbsentAttendanceCommandParser
+
+create AbsentAttendanceCommand
+AbsentAttendanceCommandParser -> AbsentAttendanceCommand
+activate AbsentAttendanceCommand
+
+AbsentAttendanceCommand --> AbsentAttendanceCommandParser : a
+deactivate AbsentAttendanceCommand
+
+AbsentAttendanceCommandParser --> AddressBookParser : a
+deactivate AbsentAttendanceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AbsentAttendanceCommandParser -[hidden]-> AddressBookParser
+destroy AbsentAttendanceCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AbsentAttendanceCommand : execute()
+activate AbsentAttendanceCommand
+
+AbsentAttendanceCommand -> Model : setPet()
+activate Model
+
+Model -> AddressBook : setPet()
+activate AddressBook
+
+AddressBook --> Model :
+deactivate AddressBook
+
+Model --> AbsentAttendanceCommand
+deactivate Model
+
+AbsentAttendanceCommand -> Model : updateFilteredPetList()
+activate Model
+
+Model --> AbsentAttendanceCommand :
+deactivate Model
+
+create CommandResult
+AbsentAttendanceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AbsentAttendanceCommand
+deactivate CommandResult
+
+AbsentAttendanceCommand --> LogicManager : result
+deactivate AbsentAttendanceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
