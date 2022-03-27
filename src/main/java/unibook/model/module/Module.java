@@ -267,6 +267,15 @@ public class Module {
     }
 
     /**
+     * Delete key event at that index
+     *
+     * @param index
+     */
+    public void deleteKeyEvent(int index) {
+        keyEvents.remove(index);
+    }
+
+    /**
      * Returns true if both modules have the same name and code.
      * This defines a weaker notion of equality between two modules.
      */

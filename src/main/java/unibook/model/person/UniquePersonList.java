@@ -182,4 +182,13 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
     }
+
+    public void removeGroupFromAllStudents(ModuleCode moduleCode) {
+        for (Person person : internalList) {
+            if (person instanceof Student) {
+                Student student = (Student)person;
+                student.removeGroup(moduleCode);
+            }
+        }
+    }
 }

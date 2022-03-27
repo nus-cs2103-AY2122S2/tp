@@ -3,6 +3,7 @@ package unibook.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -218,6 +219,11 @@ public class ModelManager implements Model {
         Module module = uniBook.getModuleByCode(moduleCode);
         uniBook.deleteGroupFromAllPersons(moduleCode, group);
         return module.removeGroupByName(group);
+    }
+
+    @Override
+    public List<Group> getShowingGroupList() {
+        return ui.getShowingGroupList();
     }
 
     //=========== Filtered Person List Accessors =============================================================

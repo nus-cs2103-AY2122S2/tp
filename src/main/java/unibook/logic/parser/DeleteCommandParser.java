@@ -1,5 +1,6 @@
 package unibook.logic.parser;
 
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -53,18 +54,20 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             boolean profIndexPresent;
             boolean stuIndexPresent;
             boolean onlyIndexPresent;
+            boolean keyEventPresent;
 
             if (Character.isDigit(args.trim().charAt(0))) {
                 indexPresent = true;
+
             }
 
             // delete m/MODULECODE case
             ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_MODULE,
-                        CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_GROUP, CliSyntax.PREFIX_OPTION,
+                        CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_GROUP,
                         CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_TAG,
                         CliSyntax.PREFIX_OFFICE, CliSyntax.PREFIX_MEETING_TIME, CliSyntax.PREFIX_PROF_INDEX,
-                        CliSyntax.PREFIX_STU_INDEX);
+                        CliSyntax.PREFIX_STU_INDEX, CliSyntax.PREFIX_KE_INDEX);
 
             moduleCodePresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE);
             optionPresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION);
@@ -76,19 +79,23 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             officePresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE);
             profIndexPresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PROF_INDEX);
             stuIndexPresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_STU_INDEX);
-            onlyIndexPresent = !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE,
-                    CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_GROUP, CliSyntax.PREFIX_OPTION,
-                    CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_TAG,
-                    CliSyntax.PREFIX_OFFICE, CliSyntax.PREFIX_MEETING_TIME, CliSyntax.PREFIX_PROF_INDEX,
-                    CliSyntax.PREFIX_STU_INDEX) && indexPresent;
+            keyEventPresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KE_INDEX);
+            onlyIndexPresent = !moduleCodePresent && !optionPresent && !groupPresent && !meetingTimePresent &&
+                    !phonePresent && !emailPresent && !tagPresent && !officePresent && !profIndexPresent
+                    && !stuIndexPresent && !keyEventPresent && indexPresent;
 
             // delete index case
             if (onlyIndexPresent) {
-                Index index = ParserUtil.parseIndex(String.valueOf(args.trim().charAt(0)));
+                Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
                 return new DeleteCommand(index);
 
             } else if (optionPresent) { // delete module code or group
                 String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get().toLowerCase();
+                System.out.println(option);
+                System.out.println(option.equals("group"));
+                System.out.println(!moduleCodePresent && !groupPresent);
+                System.out.println(!moduleCodePresent);
+                System.out.println(!groupPresent);
                 if (option.equals("module")) {
                     if (!moduleCodePresent) {
                         throw new ParseException(MODULE_MISSING);
@@ -116,16 +123,53 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
                 // delete person traits case
             } else if ((phonePresent || emailPresent || tagPresent || officePresent) && indexPresent) {
+                Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
                 String tag = tagPresent ? argMultimap.getValue(CliSyntax.PREFIX_TAG).get() : null;
-                return new DeleteCommand(phonePresent, emailPresent, tag, officePresent);
+                return new DeleteCommand(index, phonePresent, emailPresent, tag, officePresent);
+
+            } else if (indexPresent && profIndexPresent) { // delete student from module on module page
+
+                Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
+                String profIndexString = argMultimap.getValue(CliSyntax.PREFIX_PROF_INDEX).get();
+                Index profIndex = ParserUtil.parseIndex(profIndexString);
+                return new DeleteCommand(index, null, profIndex, null, null);
+
+            } else if (indexPresent && stuIndexPresent) { // delete prof from module on module page
+
+                Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
+                String stuIndexString = argMultimap.getValue(CliSyntax.PREFIX_STU_INDEX).get();
+                Index stuIndex = ParserUtil.parseIndex(stuIndexString);
+                return new DeleteCommand(index, stuIndex, null, null, null);
+
+            } else if (indexPresent && groupPresent) {
+
+                Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
+                String groupName = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get();
+                System.out.println(groupName);
+                Group group = ParserUtil.parseGroup(groupName);
+                return new DeleteCommand(index, group);
+
+            } else if (indexPresent && meetingTimePresent) {
+
+                Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
+                String meetingIndexString = argMultimap.getValue(CliSyntax.PREFIX_MEETING_TIME).get();
+                Index meetingIndex = ParserUtil.parseIndex(meetingIndexString);
+                return new DeleteCommand(index, null, null, meetingIndex, null);
+
+            } else if (indexPresent && keyEventPresent) {
+
+                Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
+                String KeyEventIndexString = argMultimap.getValue(CliSyntax.PREFIX_KE_INDEX).get();
+                Index keyEventIndex = ParserUtil.parseIndex(KeyEventIndexString);
+                return new DeleteCommand(index, null, null, null, keyEventIndex);
+
             }
 
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteCommand.MESSAGE_USAGE));
 
         } catch (ParseException pe) {
-            throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw pe;
         }
     }
 

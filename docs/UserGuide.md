@@ -186,47 +186,61 @@ Removes the specified modules, module subgroup, student or professor profile fro
 
 Format:
 
+On Person Page:
+
 `delete [INDEX]`
-* Deletes the person or module at that index
-* The GUI will display the index before the person or module
+* Deletes the person at that index
+* The GUI will display the index before the person
 
-`delete m/MODULECODE [o/OPTION]`
+`delete [INDEX] p/ e/ t/[TAG] of/`
+* p/, e/, t/[TAG], of/ can be entered in any combination, for example, to delete only phone and email, the user can put p/ and e/
+* At least 1 of the 4 tags must be entered, otherwise the command above will be executed instead
+* Only 0 or 1 of each tag must be provided
 
+On Module Page:
+
+`delete [INDEX]`
+* Deletes the module at that index
+* The GUI will display the index before the module
+
+`delete [INDEX] prof/[INDEX]`
+* Delete professor from module (The original person is not deleted, only removed from the module)
+* The first index represents the index for which module to remove a professor from
+* The second index (after prof/) represents the index for which professor to remove
+* For example, `delete 2 prof/1` would delete the professor at index 1 from the module at index 2
+
+`delete [INDEX] stu/[INDEX]`
+* Same as the above command, but index after stu/ represents the student list index to be deleted
+
+`delete [INDEX] g/[GROUPNAME]`
+* same as the above command, but group name has to be specified to delete the group with that name
+
+`delete [INDEX] ke/[INDEX]`
+* same as the above command, but index after ke/ represents the key event index to be deleted
+
+On Group page:
+
+`delete [INDEX]`
+* Deletes the group at that index
+* The GUI will display the index before the group
+
+`delete [INDEX] mt/1`
+* Delete meeting time from group
+* The first index represents the index for which group to remove the meeting time for
+* The second index (after mt/) represents the index for which meeting time to delete
+* For example, `delete 2 mt/1` would delete the meeting time at index 1 for the group at index 2
+
+On Any Page:
+
+`delete o/module m/[MODULECODE]`
 * Deletes the module with the specified `MODULECODE`.
-* Only can be used on module view
 * The module must already exist in the system.
-* Option is optional, and can take the following values: 
-  - `ALL` -> Delete module and persons if the only module that person has matches the modulecode provided.
-  - `MOD` -> Delete only the module
-* If the option field is left blank, the `MOD` setting is assumed.    
+* For example, `delete o/module m/CS2103` removes the module with module code CS2103
 
-Example:
-* `delete m/CS2107` removes the "CS2107" module only.
-
-[NOT READY] `delete m/MODULECODE g/GROUPCODE [o/OPTION]`
-* Deletes the subgroup specified by `GROUPCODE`, within the module specified by `MODULECODE`.
-* Option is optional, and can take the following values:
-    - `ALL` -> Delete everything associated with the group, including profiles.
-    - `GROUP` -> Delete only the relevant subgroup
-* If the option field is left blank, the `GROUP` setting is assumed.
+`delete o/group m/[MODULECODE] g/[GROUPNAME]`
+* Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
 * Both the module and the subgroup must already exist in the system.
-
-Example:
-* `delete m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
-
-[NOT READY] `delete n/STUDENTNAME`
-* Deletes the student profile specified by `STUDENTNAME`. If there are multiple matches,
-a prompt to specify which profile to delete will appear.
-  
-Example: `delete n/Alan Tan` will remove the profile associated with Alan Tan. If there are multiple
-profiles associated with this name, a list will appear prompting you to specify which profile to delete.
-
-[NOT READY] `delete n/PROFNAME`
-* Deletes the professor profile specified by `PROFNAME`. If there are multiple matches, a prompt
-to specify which profile to delete will appear.
-  
-Example: `delete n/Martin Henz` will remove the profile associated with Martin Henz. If there are multiple 
-profiles associated with this name, a list will appear prompting you to specify which profile to delete.
+* For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
 ### Clearing all entries : `clear`
 

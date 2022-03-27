@@ -1,6 +1,7 @@
 package unibook.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -95,6 +96,8 @@ public interface Model {
     void addGroup(Group group);
 
     Group removeGroup(ModuleCode moduleCode, Group group);
+
+    List<Group> getShowingGroupList();
 
     /**
      * Returns an unmodifiable view of the filtered person list

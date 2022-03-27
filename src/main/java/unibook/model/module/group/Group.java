@@ -120,6 +120,12 @@ public class Group {
         members.remove(student);
     }
 
+    public void removeStudentsFromThisGroup() {
+        for (Student student : members) {
+            student.removeGroup(module.getModuleCode(), this);
+        }
+    }
+
     /**
      * Add a meeting datetime to the group.
      *
@@ -145,6 +151,16 @@ public class Group {
             throw new MeetingTimeNotFoundException();
         }
         meetingTimes.remove(meetingTime);
+    }
+
+    /**
+     * Remove a meeting based on Index given
+     *
+     * @param index
+     */
+    public void removeMeetingTime(int index) {
+        requireNonNull(index);
+        meetingTimes.remove(index);
     }
 
     /**

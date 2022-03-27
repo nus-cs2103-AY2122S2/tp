@@ -234,11 +234,17 @@ public class UniBook implements ReadOnlyUniBook {
     public void removeModule(Module key) {
         modules.remove(key);
         removeModuleFromAllPersons(key.getModuleCode());
+        removeGroupFromAllStudents(key.getModuleCode());
     }
 
     public void removeByModuleCode(ModuleCode key) {
         modules.removeByModuleCode(key);
         removeModuleFromAllPersons(key);
+        removeGroupFromAllStudents(key);
+    }
+
+    public void removeGroupFromAllStudents(ModuleCode moduleCode) {
+        persons.removeGroupFromAllStudents(moduleCode);
     }
 
     /**

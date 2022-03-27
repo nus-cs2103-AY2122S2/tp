@@ -15,8 +15,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_MEETING_TIME = new Prefix("mt/");
     public static final Prefix PREFIX_PROF_INDEX = new Prefix("prof/");
     public static final Prefix PREFIX_STU_INDEX = new Prefix("stu/");
+    public static final Prefix PREFIX_KE_INDEX = new Prefix("ke/");
     public static final Prefix PREFIX_NEWMOD = new Prefix("nm/");
-    public static final Prefix PREFIX_OFFICE = new Prefix("a/");
+    public static final Prefix PREFIX_OFFICE = new Prefix("of/");
     public static final Prefix PREFIX_TYPE = new Prefix("ty/");
     public static final Prefix PREFIX_VIEW = new Prefix("v/");
     public static final Prefix PREFIX_GROUP = new Prefix("g/");

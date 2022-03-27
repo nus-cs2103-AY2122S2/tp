@@ -3,6 +3,7 @@ package unibook.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,23 +41,22 @@ public class Student extends Person {
     }
 
     public Student deletePhone() {
-        return new Student(getName(), new Phone(""), getEmail(), getTags(), getModules(), groups);
+        return new Student(getName(), new Phone(), getEmail(), getTags(), getModules(), groups);
     }
 
     public Student deleteEmail() {
-        return new Student(getName(), getPhone(), new Email(""), getTags(), getModules(), groups);
+        return new Student(getName(), getPhone(), new Email(), getTags(), getModules(), groups);
     }
 
     public Student deleteTag(String tagNameToDelete) {
         Set<Tag> tags = getTags();
-        Tag tagToDelete = null;
+        Set<Tag> newTags = new HashSet<>();
         for (Tag tag: tags) {
-            if (tag.tagName.equals(tagNameToDelete)) {
-                tagToDelete = tag;
+            if (!tag.tagName.equalsIgnoreCase(tagNameToDelete)) {
+                newTags.add(tag);
             }
         }
-        tags.remove(tagToDelete);
-        return new Student(getName(), getPhone(), getEmail(), tags, getModules(), groups);
+        return new Student(getName(), getPhone(), getEmail(), newTags, getModules(), groups);
     }
 
     public void addStudentToAllTheirGroups() {
@@ -106,6 +106,18 @@ public class Student extends Person {
         Set<Group> toBeDeleted = new HashSet<>();
         for (Group g : groups) {
             if (g.sameGroupNameAndModule(moduleCode.toString(), group.getGroupName())) {
+                toBeDeleted.add(g);
+            }
+        }
+        for (Group g : toBeDeleted) {
+            groups.remove(g);
+        }
+    }
+
+    public void removeGroup(ModuleCode moduleCode) {
+        Set<Group> toBeDeleted = new HashSet<>();
+        for (Group g : groups) {
+            if (g.getModule().getModuleCode().equals(moduleCode)) {
                 toBeDeleted.add(g);
             }
         }

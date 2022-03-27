@@ -1,5 +1,6 @@
 package unibook.model.person;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,27 +35,26 @@ public class Professor extends Person {
     }
 
     public Professor deletePhone() {
-        return new Professor(getName(), new Phone(""), getEmail(), getTags(), getOffice(), getModules());
+        return new Professor(getName(), new Phone(), getEmail(), getTags(), getOffice(), getModules());
     }
 
     public Professor deleteEmail() {
-        return new Professor(getName(), getPhone(), new Email(""), getTags(), getOffice(), getModules());
+        return new Professor(getName(), getPhone(), new Email(), getTags(), getOffice(), getModules());
     }
 
     public Professor deleteTag(String tagNameToDelete) {
         Set<Tag> tags = getTags();
-        Tag tagToDelete = null;
+        Set<Tag> newTags = new HashSet<>();
         for (Tag tag: tags) {
-            if (tag.tagName.equals(tagNameToDelete)) {
-                tagToDelete = tag;
+            if (!tag.tagName.equalsIgnoreCase(tagNameToDelete)) {
+                newTags.add(tag);
             }
         }
-        tags.remove(tagToDelete);
-        return new Professor(getName(), getPhone(), getEmail(), tags, getOffice(), getModules());
+        return new Professor(getName(), getPhone(), getEmail(), newTags, getOffice(), getModules());
     }
 
     public Professor deleteOffice() {
-        return new Professor(getName(), getPhone(), getEmail(), getTags(), new Office(""), getModules());
+        return new Professor(getName(), getPhone(), getEmail(), getTags(), new Office(), getModules());
     }
 
     public Office getOffice() {
