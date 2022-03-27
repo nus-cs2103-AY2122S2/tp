@@ -94,6 +94,77 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void undo_changesUndone_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.commitAddressBook();
+
+        modelManager.deletePerson(ALICE);
+        modelManager.commitAddressBook();
+
+        modelManager.undoAddressBook();
+        assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void undo_noChangesToUndo_doesNothing() {
+        VersionedAddressBook versionedAddressBook = new VersionedAddressBook(modelManager.getAddressBook());
+        modelManager.undoAddressBook();
+        assertEquals(versionedAddressBook, modelManager.getAddressBook());
+    }
+
+    @Test
+    public void redo_changesRedone_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.commitAddressBook();
+
+        modelManager.undoAddressBook();
+        modelManager.redoAddressBook();
+        assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void redo_noChangesToRedo_doesNothing() {
+        VersionedAddressBook versionedAddressBook = new VersionedAddressBook(modelManager.getAddressBook());
+        modelManager.redoAddressBook();
+        assertEquals(versionedAddressBook, modelManager.getAddressBook());
+    }
+
+    @Test
+    public void commitAddressBook_changesCommitted_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.commitAddressBook();
+
+        assertTrue(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void canUndo_hasCommandsToUndo_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.commitAddressBook();
+
+        assertTrue(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void canUndo_noCommandsToUndo_returnsFalse() {
+        assertFalse(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void canRedo_hasCommandsToRedo_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.commitAddressBook();
+        modelManager.undoAddressBook();
+
+        assertTrue(modelManager.canRedoAddressBook());
+    }
+
+    @Test
+    public void canRedo_noCommandsToRedo_returnsFalse() {
+        assertFalse(modelManager.canRedoAddressBook());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
