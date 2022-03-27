@@ -111,7 +111,8 @@ A client can have many fields & tags, including both optional and compulsory one
 |------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Help](#getting-help-help)                                 | `help`                                                                                                                                                                |
 | [Add](#add-client-add)                                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| [Edit](#edit-client-edit)                                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                | 
+| [Edit](#edit-client-edit)                                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                |
+| [Remark](#append-remark-to-client-remark)                  | `remark INDEX r/REMARK`<br> e.g., `remark 5 r/Needs marble flooring delivered by next Tuesday.`                                                                       |
 | [Delete](#delete-client-delete)                            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | [Clear](#delete-all-entries-clear)                         | `clear`                                                                                                                                                               |
 | [List](#list-all-clients-list)                             | `list`                                                                                                                                                                |
@@ -161,6 +162,19 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+### Append Remark to Client ('remark`)
+
+Add a remark to an existing client.
+
+Format: `remark INDEX r/REMARK`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* You can also remove a person's remarks by typing `r/` without anything else.
+
+</div>
 
 ### Delete Client (`delete`)
 
