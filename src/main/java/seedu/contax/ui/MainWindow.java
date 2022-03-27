@@ -21,7 +21,7 @@ import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.ui.appointment.AppointmentListPanel;
+import seedu.contax.ui.appointment.ScheduleItemListPanel;
 import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
@@ -39,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private ListPanel<Person> personListPanel;
-    private AppointmentListPanel appointmentListPanel;
+    private ScheduleItemListPanel scheduleItemListPanel;
     private ListPanel<Tag> tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -142,7 +142,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         personListPanel = new ListPanel<>(logic.getFilteredPersonList(), PersonCard::new);
-        appointmentListPanel = new AppointmentListPanel(logic.getScheduleItemList());
+        scheduleItemListPanel = new ScheduleItemListPanel(logic.getScheduleItemList());
         tagListPanel = new ListPanel<>(logic.getFilteredTagList(), TagCard::new);
 
         fillTabsFromPanels();
@@ -160,7 +160,7 @@ public class MainWindow extends UiPart<Stage> {
      * Creates the tabs and sets it in the Tab Pane.
      */
     private void fillTabsFromPanels() {
-        appointmentTab.setContent(appointmentListPanel.getRoot());
+        appointmentTab.setContent(scheduleItemListPanel.getRoot());
         personTab.setContent(personListPanel.getRoot());
         tagTab.setContent(tagListPanel.getRoot());
         tabbedPanelPlaceholder.getTabs().add(personTab);

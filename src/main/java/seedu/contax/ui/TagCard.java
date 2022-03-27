@@ -12,8 +12,8 @@ import seedu.contax.model.tag.Tag;
 public class TagCard extends UiPart<Region> implements RecyclableCard<Tag> {
     private static final String FXML = "TagListCard.fxml";
 
-    public int displayedIndex;
-    public Tag tagModel;
+    private int displayedIndex;
+    private Tag tagModel;
 
     @FXML
     private Label id;
@@ -57,6 +57,6 @@ public class TagCard extends UiPart<Region> implements RecyclableCard<Tag> {
             return false;
         }
 
-        return ((TagCard) o).tagModel.equals(tagModel);
+        return ((TagCard) o).tagModel.equals(tagModel) && ((TagCard) o).displayedIndex == displayedIndex;
     }
 }
