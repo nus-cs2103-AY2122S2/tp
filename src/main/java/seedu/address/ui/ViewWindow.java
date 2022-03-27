@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -66,6 +68,7 @@ public class ViewWindow extends UiPart<Stage> {
     }
 
     public void setStageTitle(String stageTitle) {
+        requireNonNull(stageTitle);
         getRoot().setTitle(stageTitle);
     }
 

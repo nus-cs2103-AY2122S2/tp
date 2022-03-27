@@ -169,4 +169,22 @@ public class LabTest {
         assertNotEquals(lab1, lab2);
     }
 
+    @Test
+    public void getDetails_gradedWithMarks() {
+        Lab lab1 = new Lab("1").of("GRADED", "12");
+        assertEquals(lab1.getDetails(), lab1.toString() + ": " + "12");
+    }
+
+    @Test
+    public void getDetails_submitted() {
+        Lab lab = new Lab("3").of("SUBMITTED");
+        assertEquals(lab.getDetails(), lab.toString() + ": " + LabStatus.describe(lab.labStatus));
+    }
+
+    @Test
+    public void getDetails_unsubmitted() {
+        Lab lab = new Lab("2").of("UNSUBMITTED");
+        assertEquals(lab.getDetails(), lab.toString() + ": " + LabStatus.describe(lab.labStatus));
+    }
+
 }

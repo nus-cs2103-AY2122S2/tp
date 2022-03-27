@@ -174,6 +174,9 @@ public class LabList implements Iterable<Lab> {
         internalList.setAll(labs);
     }
 
+    /**
+     * Returns a {@code List<String>} of the details for the {@code LabList} with line breaks
+     */
     public List<String> getLabDetails() {
         return internalList.stream()
                 .map(x -> x.getDetails() + "\n")
