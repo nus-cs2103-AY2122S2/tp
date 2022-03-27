@@ -1,8 +1,8 @@
 package seedu.address.model.lab;
 
-import seedu.address.model.student.exceptions.InvalidLabStatusException;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.model.student.exceptions.InvalidLabStatusException;
 
 /**
  * Represents the possible LabStatuses a Lab can have.
