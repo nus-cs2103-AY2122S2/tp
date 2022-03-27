@@ -62,7 +62,6 @@ public class SampleDataUtil {
     /**
      * Returns a LabList containing the list of strings given.
      */
-    @SafeVarargs
     public static LabList getLabSet(LabTriplet... strings) {
         LabList ll = new LabList();
 
