@@ -35,6 +35,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Fixed multiple checkstyle errors (Pull request [\#49](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/49))
   * Added JUnit tests for Finding persons by Class Code and its related classes (Pull request [\#75](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/75))
+  * Added JUnit tests for Finding persons by Activity and its related classes (Pull request [\#86](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/86))
   * -- (Pull requests [\#--](), [\#--]())
 
 * **Documentation**:
@@ -43,11 +44,23 @@ Given below are my contributions to the project.
     * Added quick start for user guide ([commit](https://github.com/AY2122S2-CS2103T-T12-1/tp/commit/54c68ab0ecae3cd1a5237a74df7cb7264c24b692))
     * Added documentation for the features `add` and `list` ([commit](https://github.com/AY2122S2-CS2103T-T12-1/tp/commit/54c68ab0ecae3cd1a5237a74df7cb7264c24b692))
       * Fixed formatting errors ([commit](https://github.com/AY2122S2-CS2103T-T12-1/tp/commit/9bb104d5c2c16abdd577221d100916e6f9f8edc1))
+    * Added more introduction information [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
+    * Added link to download application .jar file [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
+    * Added installation notes [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
+    * Added more information to certain commands' sections [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
+    * Added tips and warnings to multiple sections [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
+    * Added feature notes [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
+    * Added links to multiple parts of the markdown [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
   * Developer Guide:
     * Added use cases for developer guide [\#27](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/27)
-
+    * Added skeleton for DG additions [\#90](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/90)
+    * Added information for Find By Class Code, Find By Activity [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
+    * Updated design considerations for Find By Class Code, Find By Activity, and Find By Status [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
+    * Updated implementation information for Status, Class Code, Activity and Find By Status [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
+    * Added followed steps for Find By Class Code, Find By Activity, and Find By Status [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
+    
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32) [\#63](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/63)
+  * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32) [\#63](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/63) [\#105](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/105) [\#106](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/106)
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
   * Some parts of the -- feature I added was adopted by several other class mates ([1](), [2]())
@@ -55,5 +68,3 @@ Given below are my contributions to the project.
 * **Tools**:
   * -- ([\#--]())
   * --
-
-* _{you can add/remove categories in the list above}_
