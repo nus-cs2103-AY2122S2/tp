@@ -33,7 +33,9 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE_START, PREFIX_TIME_START,
                         PREFIX_DATE_END, PREFIX_TIME_END);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()
+            || (argMultimap.getValue(PREFIX_TIME_END).isPresent()
+                && argMultimap.getValue(PREFIX_DATE_END).isEmpty())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentsBetweenCommand.MESSAGE_USAGE));
         }

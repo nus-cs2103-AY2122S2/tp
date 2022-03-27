@@ -1,7 +1,6 @@
 package seedu.contax.logic.parser;
 
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_NAME_ALONE;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_TIME;
 import static seedu.contax.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -16,7 +15,9 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,66 +34,77 @@ public class AppointmentsBetweenCommandParserTest {
     private AppointmentsBetweenCommandParser parser = new AppointmentsBetweenCommandParser();
 
     @Test
-    public void parse_compulsoryFieldsPresent_success() {
-        LocalDateTime expectedStart = DateUtil.combineDateTime(
-                DateUtil.parseDate(VALID_DATE2).get(), DateUtil.parseTime(VALID_TIME2).get());
-        LocalDateTime expectedEnd = DateUtil.combineDateTime(
-                DateUtil.parseDate(VALID_DATE).get(), DateUtil.parseTime(VALID_TIME).get());
+    public void parse_defaultValuesOnly_success() {
+        LocalDateTime expectedStart = LocalDate.now().atTime(0, 0);
+        LocalDateTime expectedEnd = LocalDate.MAX.atTime(23, 59);
         AppointmentsBetweenCommand expectedCommand = new AppointmentsBetweenCommand(expectedStart, expectedEnd);
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + INPUT_START_DATE + INPUT_START_TIME
-                + INPUT_END_DATE + INPUT_END_TIME, expectedCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE, expectedCommand);
 
-        // duplicate start date
-        assertParseSuccess(parser, " " + PREFIX_DATE_START + VALID_DATE + INPUT_START_DATE
-                        + INPUT_START_TIME + INPUT_END_DATE + INPUT_END_TIME, expectedCommand);
-
-        // duplicate start time
-        assertParseSuccess(parser, INPUT_START_DATE + " " + PREFIX_TIME_START + VALID_TIME
-                        + INPUT_START_TIME + INPUT_END_DATE + INPUT_END_TIME, expectedCommand);
-
-        // duplicate end date
-        assertParseSuccess(parser, INPUT_START_DATE + INPUT_START_TIME
-                        + " " + PREFIX_DATE_END + VALID_DATE2 + INPUT_END_DATE + INPUT_END_TIME, expectedCommand);
-
-        // duplicate start time
-        assertParseSuccess(parser, INPUT_START_DATE + INPUT_START_TIME
-                        + INPUT_END_DATE + " " + PREFIX_TIME_END + VALID_TIME2 + INPUT_END_TIME, expectedCommand);
+        // No Arguments
+        assertParseSuccess(parser, "", expectedCommand);
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parse_optionalFieldsPresent_success() {
+        LocalDate defaultStartDate = LocalDate.now();
+        LocalDate defaultEndDate = LocalDate.MAX;
+        LocalTime defaultEndTime = LocalTime.of(23, 59);
+        LocalDateTime defaultEnd = DateUtil.combineDateTime(defaultEndDate, defaultEndTime);
+        LocalDate modifiedStartDate = DateUtil.parseDate(VALID_DATE2).get();
+        LocalTime modifiedStartTime = DateUtil.parseTime(VALID_TIME2).get();
+        LocalDate modifiedEndDate = DateUtil.parseDate(VALID_DATE).get();
+        LocalTime modifiedEndTime = DateUtil.parseTime(VALID_TIME).get();
+
+        // Change start. Default values for start date/time tested in compulsory field test
+        assertParseSuccess(parser, INPUT_START_DATE,
+                new AppointmentsBetweenCommand(modifiedStartDate.atStartOfDay(), defaultEnd));
+        assertParseSuccess(parser, INPUT_START_TIME,
+                new AppointmentsBetweenCommand(DateUtil.combineDateTime(defaultStartDate, modifiedStartTime),
+                        defaultEnd));
+        assertParseSuccess(parser, INPUT_START_TIME + INPUT_START_DATE,
+                new AppointmentsBetweenCommand(DateUtil.combineDateTime(modifiedStartDate, modifiedStartTime),
+                        defaultEnd));
+
+        // Change end
+        assertParseSuccess(parser, INPUT_START_DATE + INPUT_END_DATE,
+                new AppointmentsBetweenCommand(modifiedStartDate.atStartOfDay(),
+                        DateUtil.combineDateTime(modifiedEndDate, defaultEndTime)));
+        assertParseSuccess(parser, INPUT_START_DATE + INPUT_END_DATE + INPUT_END_TIME,
+                new AppointmentsBetweenCommand(modifiedStartDate.atStartOfDay(),
+                        DateUtil.combineDateTime(modifiedEndDate, modifiedEndTime)));
+
+        // All fields present
+        assertParseSuccess(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE + INPUT_END_TIME,
+                new AppointmentsBetweenCommand(DateUtil.combineDateTime(modifiedStartDate, modifiedStartTime),
+                        DateUtil.combineDateTime(modifiedEndDate, modifiedEndTime)));
+    }
+
+    @Test
+    public void parse_endTimeWithoutEndDate_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AppointmentsBetweenCommand.MESSAGE_USAGE);
-
-        // missing fields
-        assertParseFailure(parser, INPUT_START_TIME + INPUT_END_DATE + INPUT_END_TIME, expectedMessage);
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_END_DATE + INPUT_END_TIME, expectedMessage);
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_TIME, expectedMessage);
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE, expectedMessage);
-
-        // all fields missing
-        assertParseFailure(parser, APPOINTMENT_NAME_ALONE, expectedMessage);
+        assertParseFailure(parser, INPUT_END_TIME, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid start date
-        assertParseFailure(parser, " " + PREFIX_DATE_START + INVALID_DATE + INPUT_START_TIME
-                        + INPUT_END_DATE + INPUT_END_TIME, AppointmentsBetweenCommand.MESSAGE_START_DATE_INVALID);
+        assertParseFailure(parser, " " + PREFIX_DATE_START + INVALID_DATE,
+                AppointmentsBetweenCommand.MESSAGE_START_DATE_INVALID);
 
         // invalid start time
-        assertParseFailure(parser, INPUT_START_DATE + " " + PREFIX_TIME_START + INVALID_TIME
-                + INPUT_END_DATE + INPUT_END_TIME, AppointmentsBetweenCommand.MESSAGE_START_TIME_INVALID);
+        assertParseFailure(parser, " " + PREFIX_TIME_START + INVALID_TIME,
+                AppointmentsBetweenCommand.MESSAGE_START_TIME_INVALID);
 
         // invalid end date
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + " " + PREFIX_DATE_END
-                + INVALID_DATE + " " + INPUT_END_TIME, AppointmentsBetweenCommand.MESSAGE_END_DATE_INVALID);
+        assertParseFailure(parser, " " + PREFIX_DATE_END + INVALID_DATE,
+                AppointmentsBetweenCommand.MESSAGE_END_DATE_INVALID);
 
-        // invalid start time
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE
-                + " " + PREFIX_TIME_END + INVALID_TIME, AppointmentsBetweenCommand.MESSAGE_END_TIME_INVALID);
+        // invalid end time, which must be specified with some end date
+        assertParseFailure(parser, INPUT_END_DATE + " " + PREFIX_TIME_END + INVALID_TIME,
+                AppointmentsBetweenCommand.MESSAGE_END_TIME_INVALID);
     }
 
     @Test
@@ -115,20 +127,17 @@ public class AppointmentsBetweenCommandParserTest {
 
     @Test
     public void parse_duplicatedValidInvalid_failure() {
-        assertParseFailure(parser, INPUT_START_DATE + PREFIX_DATE_START + INVALID_DATE + " "
-                + INPUT_START_TIME + INPUT_END_DATE + INPUT_END_TIME,
+        assertParseFailure(parser, INPUT_START_DATE + " " + PREFIX_DATE_START + INVALID_DATE,
                 AppointmentsBetweenCommand.MESSAGE_START_DATE_INVALID);
 
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME
-                + " " + PREFIX_TIME_START + INVALID_TIME + INPUT_END_DATE + INPUT_END_TIME,
+        assertParseFailure(parser, INPUT_START_TIME + " " + PREFIX_TIME_START + INVALID_TIME,
                 AppointmentsBetweenCommand.MESSAGE_START_TIME_INVALID);
 
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE
-                + " " + PREFIX_DATE_END + INVALID_DATE + " " + INPUT_END_TIME,
+        assertParseFailure(parser, INPUT_END_DATE + " " + PREFIX_DATE_END + INVALID_DATE,
                 AppointmentsBetweenCommand.MESSAGE_END_DATE_INVALID);
 
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE
-                + INPUT_END_TIME + " " + PREFIX_TIME_END + INVALID_TIME,
+        // End time must be specified with some end date
+        assertParseFailure(parser, INPUT_END_DATE + INPUT_END_TIME + " " + PREFIX_TIME_END + INVALID_TIME,
                 AppointmentsBetweenCommand.MESSAGE_END_TIME_INVALID);
     }
 

@@ -34,7 +34,10 @@ public class FreeBetweenCommandParser implements Parser<FreeBetweenCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE_START, PREFIX_TIME_START,
                         PREFIX_DATE_END, PREFIX_TIME_END, PREFIX_DURATION);
 
-        if (argMultimap.getValue(PREFIX_DURATION).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_DURATION).isEmpty()
+                || (argMultimap.getValue(PREFIX_TIME_END).isPresent()
+                        && argMultimap.getValue(PREFIX_DATE_END).isEmpty())
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FreeBetweenCommand.MESSAGE_USAGE));
         }

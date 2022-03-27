@@ -7,6 +7,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_END;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -40,6 +41,7 @@ public class FreeBetweenCommand extends Command {
             + PREFIX_DURATION + "45`";
 
     public static final String MESSAGE_SUCCESS = "Listed all slots of at least %d minutes from %s to %s.";
+    public static final String PHRASE_NO_END_RANGE = "forever";
     public static final String MESSAGE_START_DATE_INVALID = "The start date provided is invalid!";
     public static final String MESSAGE_START_TIME_INVALID = "The start time provided is invalid!";
     public static final String MESSAGE_END_DATE_INVALID = "The end date provided is invalid!";
@@ -76,9 +78,9 @@ public class FreeBetweenCommand extends Command {
         model.setDisplayedAppointmentSlots(slotList);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, duration, rangeStart.format(formatter),
-                        rangeEnd.format(formatter)), GuiListContentType.APPOINTMENT);
+        String responseMessage = String.format(MESSAGE_SUCCESS, duration, rangeStart.format(formatter),
+                rangeEnd.toLocalDate().equals(LocalDate.MAX) ? PHRASE_NO_END_RANGE : rangeEnd.format(formatter));
+        return new CommandResult( responseMessage, GuiListContentType.APPOINTMENT);
     }
 
     @Override

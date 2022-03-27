@@ -6,6 +6,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_END;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,6 +33,7 @@ public class AppointmentsBetweenCommand extends Command {
             + PREFIX_TIME_END + "16:30`";
 
     public static final String MESSAGE_SUCCESS = "Listed appointments from %s to %s.";
+    public static final String PHRASE_NO_END_RANGE = "forever";
     public static final String MESSAGE_START_DATE_INVALID = "The start date provided is invalid!";
     public static final String MESSAGE_START_TIME_INVALID = "The start time provided is invalid!";
     public static final String MESSAGE_END_DATE_INVALID = "The end date provided is invalid!";
@@ -63,9 +65,9 @@ public class AppointmentsBetweenCommand extends Command {
         model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
         model.clearDisplayedAppointmentSlots();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, rangeStart.format(formatter), rangeEnd.format(formatter)),
-                GuiListContentType.APPOINTMENT);
+        String responseMessage = String.format(MESSAGE_SUCCESS, rangeStart.format(formatter),
+                rangeEnd.toLocalDate().equals(LocalDate.MAX) ? PHRASE_NO_END_RANGE : rangeEnd.format(formatter));
+        return new CommandResult(responseMessage, GuiListContentType.APPOINTMENT);
     }
 
     @Override
