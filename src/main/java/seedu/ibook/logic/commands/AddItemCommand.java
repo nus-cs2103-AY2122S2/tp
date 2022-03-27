@@ -19,7 +19,8 @@ public class AddItemCommand extends Command {
     public static final String COMMAND_WORD = "add-item";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to the IBook by the "
-            + "index number (a positive integer) of a product used in the displayed product list. "
+            + "index number (a positive integer at most " + Integer.MAX_VALUE + ")"
+            + " of a product used in the displayed product list. "
             + "Parameters: INDEX "
             + PREFIX_EXPIRY_DATE + "EXPIRY DATE "
             + PREFIX_QUANTITY + "QUANTITY "

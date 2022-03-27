@@ -28,6 +28,7 @@ public class CommandTestUtil {
     public static final String VALID_INDEX_A = "1";
     public static final String INVALID_INDEX_A = "0";
     public static final String INVALID_INDEX_B = "-1";
+    public static final String OVERFLOW_INDEX = "11111111111111";
 
     public static final String VALID_NAME_A = "Item A";
     public static final String VALID_NAME_B = "Item B";

@@ -21,7 +21,7 @@ public class UpdateItemCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the item identified by the index number used in the displayed list.\n"
-            + "Parameters: INDEX (must be a positive integer pair separated by '-')\n"
+            + "Parameters: INDEX (must be a positive integer pair separated by '-' at most " + Integer.MAX_VALUE + ")\n"
             + "Example: " + COMMAND_WORD + " 2-1";
 
     public static final String MESSAGE_UPDATE_ITEM_SUCCESS = "Updated Item: %1$s";

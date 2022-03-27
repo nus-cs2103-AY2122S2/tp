@@ -27,7 +27,8 @@ public class UpdateItemCommandParser implements Parser<UpdateItemCommand> {
             compoundIndex = ParserUtil.parseCompoundIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateItemCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateItemCommand.MESSAGE_USAGE),
+                    pe);
         }
 
         UpdateItemDescriptor updateItemDescriptor = new UpdateItemDescriptor();

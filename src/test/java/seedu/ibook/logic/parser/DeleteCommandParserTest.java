@@ -18,6 +18,9 @@ import seedu.ibook.logic.commands.DeleteCommand;
  */
 public class DeleteCommandParserTest {
 
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
@@ -27,6 +30,6 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", MESSAGE_INVALID_FORMAT);
     }
 }
