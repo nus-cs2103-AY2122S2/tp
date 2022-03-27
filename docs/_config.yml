@@ -8,6 +8,7 @@ header_pages:
 
 markdown: kramdown
 
+repository: "AY2122S2-CS2103T-W09-2/tp"
 github_icon: "images/github-icon.png"
 show_downloads: true
 
