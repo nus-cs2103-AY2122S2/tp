@@ -93,7 +93,7 @@ public class EditCandidateDescriptorBuilder {
      * Sets the {@code Seniority} of the {@code EditCandidateDescriptor} that we are building.
      */
     public EditCandidateDescriptorBuilder withSeniority(String seniority) {
-        descriptor.setSeniority(new Seniority(Integer.parseInt(seniority.substring(seniority.length() - 1))));
+        descriptor.setSeniority(new Seniority(seniority));
         return this;
     }
 

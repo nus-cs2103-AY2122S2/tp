@@ -174,6 +174,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteInterview(Interview interviewToDelete) {
+        interviewSchedule.removeInterview(interviewToDelete);
+    }
+
+    @Override
     public void addInterview(Interview interview) {
         interviewSchedule.addInterview(interview);
         interviewSchedule.sortInterviews();

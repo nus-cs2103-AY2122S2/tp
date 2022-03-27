@@ -26,6 +26,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.predicate.SameInterviewPredicate;
 import seedu.address.testutil.EditCandidateDescriptorBuilder;
 
 /**
@@ -87,8 +89,8 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE; // empty string not allowed for courses
-    public static final String INVALID_SENIORITY_DESC = " " + PREFIX_SENIORITY + "0"; // Must be a number 1,2,3 or 4
+    public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE; // empty string disallowed for courses
+    public static final String INVALID_SENIORITY_DESC = " " + PREFIX_SENIORITY; // empty string disallowed for seniority
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_AVAILABILITY_DESC = " "
             + PREFIX_AVAILABILITY + "1,,1"; // double commas ',' not allowed in availability
@@ -172,4 +174,16 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredCandidateList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the candidate at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showInterviewAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredInterviewSchedule().size());
+
+        Interview interview = model.getFilteredInterviewSchedule().get(targetIndex.getZeroBased());
+        model.updateFilteredInterviewSchedule(new SameInterviewPredicate(interview));;
+
+        assertEquals(1, model.getFilteredInterviewSchedule().size());
+    }
 }
