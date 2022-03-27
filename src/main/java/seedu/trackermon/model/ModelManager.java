@@ -166,7 +166,6 @@ public class ModelManager implements Model {
         requireNonNull(comparator);
         sortedShows.setComparator(comparator);
         saveSortedShowList();
-        //sortedShows.setComparator(COMPARATOR_SHOW_ALL_SHOWS);
     }
 
     @Override
