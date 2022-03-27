@@ -12,14 +12,15 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditLabStatusCommand;
+import seedu.address.logic.commands.EditLabCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GradeLabCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveLabCommand;
-import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.SubmitLabCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -79,14 +80,16 @@ public class AddressBookParser {
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
-        case EditLabStatusCommand.COMMAND_WORD:
-            return new EditLabStatusCommandParser().parse(arguments);
+        case EditLabCommand.COMMAND_WORD:
+            return new EditLabCommandParser().parse(arguments);
 
         case RemoveLabCommand.COMMAND_WORD:
             return new RemoveLabCommandParser().parse(arguments);
+        case SubmitLabCommand.COMMAND_WORD:
+            return new SubmitLabCommandParser().parse(arguments);
 
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+        case GradeLabCommand.COMMAND_WORD:
+            return new GradeLabCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

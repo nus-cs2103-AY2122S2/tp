@@ -44,6 +44,10 @@ public class JsonAdaptedStudentTest {
             .stream()
             .map(JsonAdaptedLabStatus::new)
             .collect(Collectors.toList());
+    private static final List<JsonAdaptedLabMark> VALID_LABMARKS = BENSON.getLabs().asUnmodifiableObservableList()
+            .stream()
+            .map(JsonAdaptedLabMark::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
@@ -54,7 +58,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(INVALID_NAME, VALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -62,7 +66,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(null, VALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -70,7 +74,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, INVALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -78,7 +82,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, null, VALID_TAGS, VALID_GITHUB,
-                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -88,14 +92,14 @@ public class JsonAdaptedStudentTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, invalidTags, VALID_GITHUB,
-                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         assertThrows(IllegalValueException.class, student::toModelType);
     }
 
     @Test
     public void toModelType_invalidGithub_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, VALID_TAGS, INVALID_GITHUB,
-                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = GithubUsername.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -103,7 +107,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_nullGithub_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, VALID_TAGS, null,
-                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GithubUsername.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -111,7 +115,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidTelegram_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                INVALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                INVALID_TELEGRAM, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = Telegram.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -119,7 +123,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_nullTelegram_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                null, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                null, VALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Telegram.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -127,7 +131,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidStudentId_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                VALID_TELEGRAM, INVALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, INVALID_STUDENTID, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -135,7 +139,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_nullStudentId_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                VALID_TELEGRAM, null, VALID_LABNUMBERS, VALID_LABSTATUSES);
+                VALID_TELEGRAM, null, VALID_LABNUMBERS, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -147,7 +151,7 @@ public class JsonAdaptedStudentTest {
         invalidList.add(invalid);
 
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_EMAIL, VALID_TAGS, VALID_GITHUB,
-                VALID_TELEGRAM, VALID_STUDENTID, invalidList, VALID_LABSTATUSES);
+                VALID_TELEGRAM, VALID_STUDENTID, invalidList, VALID_LABSTATUSES, VALID_LABMARKS);
         String expectedMessage = Lab.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }

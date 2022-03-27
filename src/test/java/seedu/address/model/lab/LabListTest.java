@@ -39,13 +39,12 @@ class LabListTest {
 
     @Test
     public void contains_listEmpty_failure() {
-        LabList labs = new LabList();
+        assertTrue(labs.isEmpty());
         assertFalse(labs.contains(new Lab("2")));
     }
 
     @Test
     public void getLab_labInList_success() {
-        LabList labs = new LabList();
         Lab l = new Lab("1");
         labs.add(l);
         assertEquals(l, labs.getLab(l));
@@ -61,6 +60,7 @@ class LabListTest {
 
     @Test
     public void getLab_listEmpty_throwsLabNotFoundException() {
+        assertTrue(labs.isEmpty());
         assertThrows(LabNotFoundException.class, () -> labs.getLab(new Lab("2")));
         assertThrows(LabNotFoundException.class, () -> labs.getLab(2));
     }
@@ -95,7 +95,7 @@ class LabListTest {
 
     @Test
     public void setLab_targetLabNotInList_throwsLabNotFoundException() {
-        labs.add(new Lab("1").of(LabStatus.GRADED));
+        labs.add(new Lab("1").of(LabStatus.SUBMITTED));
         assertThrows(LabNotFoundException.class, () -> labs.setLab(new Lab("1"), new Lab("2")));
     }
 
@@ -150,7 +150,7 @@ class LabListTest {
     public void setLabs_labList_replacesOwnListWithProvidedLabList() {
         labs.add(new Lab("1"));
         LabList expectedLabList = new LabList();
-        expectedLabList.add(new Lab("2").of(LabStatus.GRADED));
+        expectedLabList.add(new Lab("2").of(LabStatus.SUBMITTED));
         labs.setLabs(expectedLabList);
         assertEquals(expectedLabList, labs);
     }
@@ -200,5 +200,16 @@ class LabListTest {
         labs1.setLabs(labList);
         labs2.add(new Lab("1"));
         assertFalse(labs1.equals(labs2));
+    }
+
+    @Test
+    public void isEmpty_emptyList_success() {
+        assertTrue(labs.isEmpty());
+    }
+
+    @Test
+    public void isEmpty_nonEmptyList_success() {
+        labs.add(new Lab("1"));
+        assertFalse(labs.isEmpty());
     }
 }

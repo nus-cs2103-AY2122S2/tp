@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabMark;
 import seedu.address.model.lab.LabStatus;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
@@ -202,4 +203,20 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String labMark} into a {@code LabMark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code labMark} is invalid.
+     */
+    public static LabMark parseLabMark(String labMark) throws ParseException {
+        requireNonNull(labMark);
+        String trimmedLabMark = labMark.trim();
+
+        if (!LabMark.isValidLabMark(trimmedLabMark)) {
+            throw new ParseException(LabMark.MESSAGE_CONSTRAINTS);
+        }
+
+        return new LabMark(trimmedLabMark);
+    }
 }
