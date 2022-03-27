@@ -57,7 +57,7 @@ public class Deadline {
      *
      * @return true if is within a week from the current date.
      */
-    public boolean isOneWeekAway() {
+    public boolean isWithinReminderWindow() {
         LocalDateTime oneWeekAway = LocalDateTime.now().plusDays(reminderWindow);
         return !this.value.isBefore(LocalDateTime.now()) && oneWeekAway.isAfter(this.value);
     }

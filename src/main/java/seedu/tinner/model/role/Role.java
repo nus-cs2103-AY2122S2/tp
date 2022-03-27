@@ -73,7 +73,7 @@ public class Role {
      * Returns true if the role is within the reminder period and status is not pending, rejected or complete
      */
     public boolean needsReminding() {
-        return deadline.isOneWeekAway() && status.isActiveStatus();
+        return deadline.isWithinReminderWindow() && status.isActiveStatus();
     }
 
     /**
