@@ -58,8 +58,12 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COURSE] [m/MATRICCARD] [tele/TELEGRAM]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb:
 A person can have any number of tags (including 0)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb:
+Course, Matric Card and Telegram are optional fields!
 </div>
 
 Examples:
@@ -67,11 +71,6 @@ Examples:
 c/Computer Science m/A1231234XC tele/thisisme`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal tele/Betsycrowe`
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
 
 ### Editing a person : `edit`
 
