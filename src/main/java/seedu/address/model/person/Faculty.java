@@ -32,7 +32,6 @@ public class Faculty {
         SOPP,
         LKYSPP,
         SPH,
-        TEST,
         FOS
     }
 
