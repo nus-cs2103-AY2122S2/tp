@@ -1,5 +1,12 @@
 package seedu.contax.ui.onboarding;
 
+import static seedu.contax.model.onboarding.OnboardingStory.HighlightOption.CLEAR_ALL;
+import static seedu.contax.model.onboarding.OnboardingStory.HighlightOption.COMMAND_BOX;
+import static seedu.contax.model.onboarding.OnboardingStory.OverlayOption.ALL;
+import static seedu.contax.model.onboarding.OnboardingStory.OverlayOption.SHOW_COMMAND_BOX;
+import static seedu.contax.model.onboarding.OnboardingStory.PositionOption.CENTER;
+import static seedu.contax.model.onboarding.OnboardingStory.PositionOption.RESULT_DISPLAY_TOP;
+
 import java.util.ArrayList;
 
 import seedu.contax.logic.commands.AddPersonCommand;
@@ -10,13 +17,6 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.onboarding.OnboardingStory;
 import seedu.contax.model.person.Person;
-
-import static seedu.contax.model.onboarding.OnboardingStory.HighlightOption.CLEAR_ALL;
-import static seedu.contax.model.onboarding.OnboardingStory.HighlightOption.COMMAND_BOX;
-import static seedu.contax.model.onboarding.OnboardingStory.OverlayOption.ALL;
-import static seedu.contax.model.onboarding.OnboardingStory.OverlayOption.SHOW_COMMAND_BOX;
-import static seedu.contax.model.onboarding.OnboardingStory.PositionOption.CENTER;
-import static seedu.contax.model.onboarding.OnboardingStory.PositionOption.RESULT_DISPLAY_TOP;
 
 public class OnboardingStoryManager {
 
@@ -85,27 +85,27 @@ public class OnboardingStoryManager {
                         + "\n\nHit enter when you are done",
                 0.2, 0.5, SHOW_COMMAND_BOX, RESULT_DISPLAY_TOP, COMMAND_BOX, 1,
                 "null123null123null", ((model, commandBox) -> {
-            if (commandBox.getText().length() > 0) {
-                Command command = null;
-                try {
-                    command = parser.parseCommand(commandBox.getText());
-                } catch (ParseException e) {
-                    return INVALID_COMMAND;
-                }
+                            if (commandBox.getText().length() > 0) {
+                                Command command = null;
+                                try {
+                                    command = parser.parseCommand(commandBox.getText());
+                                } catch (ParseException e) {
+                                    return INVALID_COMMAND;
+                                }
 
-                if (!(command instanceof AddPersonCommand)) {
-                    return "Please use a add command";
-                }
+                                if (!(command instanceof AddPersonCommand)) {
+                                    return "Please use a add command";
+                                }
 
-                try {
-                    command.execute(model);
-                } catch (CommandException e) {
-                    if (e.getMessage().equals(AddPersonCommand.MESSAGE_DUPLICATE_PERSON)) {
-                        return "Person name already exists! Add someone else";
-                    }
-                }
-            }
-            return null;}), null, true));
+                                try {
+                                    command.execute(model);
+                                } catch (CommandException e) {
+                                    if (e.getMessage().equals(AddPersonCommand.MESSAGE_DUPLICATE_PERSON)) {
+                                        return "Person name already exists! Add someone else";
+                                    }
+                                }
+                            }
+                            return null; }), null, true));
         story.addStory(new OnboardingStep("Great! %s is now added into the system!" + CLICK_CONTINUE,
                 0.2, 0.5, ALL, CENTER, CLEAR_ALL,
                 0, null, null, (model) -> String.format("Great! %s is now added into the system!" + CLICK_CONTINUE,

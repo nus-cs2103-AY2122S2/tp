@@ -332,7 +332,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
 
         if (step.getCommand() != null && enforceUserInput(step, step.isCommandCustom()) == 0) {
-                return;
+            return;
         }
         storyManager.stepFront();
     }
