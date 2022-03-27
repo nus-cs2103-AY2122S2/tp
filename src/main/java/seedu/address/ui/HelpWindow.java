@@ -155,6 +155,9 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
 
+    /**
+     * Open the User Guide in the User's default browser.
+     */
     @FXML
     private void openUG() {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
