@@ -147,20 +147,22 @@ Examples:
 
 Edits an existing person in UniBook.
 
-Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
+Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME]`
 
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
 * Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list. User will not be allowed to edit if not on the correct page. 
   * `list v/modules` : To display list of modules with respective indexes
   * `list v/people` : To display list of persons with respective indexes 
-* 2 values for `OPTION`:
+* There are different compulsory fields for the 3 different values for `OPTION`:
     * `module`: Edits the module specified by compulsory field `INDEX`. Optional fields `[n/NAME] [m/MODULECODE]` to specify the new name or module code of the module.
+      * Within the `module` page, users can also choose to edit fields in `groups` specified by the compulsory field `INDEX`. For groups, there is another compulsory field for the `m/MODULECODE`, which is the `MODULECODE` of the group to be edited.
     * `person`: Edits the person at the specified by the compulsory field `INDEX`. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit 1 o/person p/91234567 e/prof@example.com nm/CS2103` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively. Adds module CS2103 to the list of modules that this person is taking. 
 *  `edit 1 o/module m/CS2103 n/Software Engineering  ` Edits the module code of the 1st module to code `CS2103` and name as `Software Engineering`. Edits the all instances of modules in each person taking the module. 
+*  `edit 1 o/group m/CS2103 g/CS2103 T2 mt/1 2022-12-12 16:45  ` Edits the group name of the 1st group to `CS2103 T2` and first index of meeting time to `12th December 2022 4.45pm`. Edits the all instances of groups in each person and module. 
 
 ### Locating persons by name: `find`
 

@@ -12,6 +12,7 @@ import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -144,8 +145,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                     editGroupDescriptor.setGroupName(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
                 }
                 if (argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()) {
-                    editGroupDescriptor.setMeetingTimes(ParserUtil.parseMeetingTime(argMultimap
-                            .getValue(PREFIX_MEETINGTIME).get()));
+                    try {
+                        editGroupDescriptor.setMeetingTimes(ParserUtil.parseMeetingTime(argMultimap
+                                .getValue(PREFIX_MEETINGTIME).get()));
+                    } catch (DateTimeParseException e) {
+                        throw new ParseException(EditCommand.MESSAGE_WRONG_DATE_FORMAT);
+                    }
                 }
 
                 if (!editGroupDescriptor.isAnyFieldEdited()) {

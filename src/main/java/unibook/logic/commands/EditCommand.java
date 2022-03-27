@@ -50,11 +50,13 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group success";
+    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_OPTION_NOT_FOUND = "O/OPTION must either be person, module or group. \n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
     public static final String MESSAGE_EDIT_MISSING = "Must include m/MODULECODE when editing a group";
+    public static final String MESSAGE_WRONG_DATE_FORMAT = "Date time must be in YYYY-MM-DD HH:mm format";
+
 
     public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the details of the person identified "
@@ -184,7 +186,6 @@ public class EditCommand extends Command {
             return new Professor(updatedName, updatedPhone, updatedEmail, updatedTags, updatedOffice, updatedModules);
         } else {
         //TODO group edit function: assumes that the update filtered person function works in execute
-//        if (personToEdit instanceof Student) {
             Set<Group> groups = ((Student) personToEdit).getGroups();
             return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, updatedModules, groups);
         }
@@ -222,7 +223,7 @@ public class EditCommand extends Command {
         ObservableList<LocalDateTime> updatedMeetingTimes;
         if (editGroupDescriptor.getMeetingTimes().isPresent()) {
             int idxOfMeetingTime = editGroupDescriptor.getIdxOfMeetingTimes().get();
-            groupToEdit.getMeetingTimes().set(idxOfMeetingTime, editGroupDescriptor.getMeetingTimes().get().get(0));
+            groupToEdit.getMeetingTimes().set(idxOfMeetingTime - 1, editGroupDescriptor.getMeetingTimes().get());
             updatedMeetingTimes = groupToEdit.getMeetingTimes();
         } else {
             updatedMeetingTimes = groupToEdit.getMeetingTimes();
@@ -265,7 +266,7 @@ public class EditCommand extends Command {
             System.out.println("updated person list");
             for (Module m : latestModList) {
                 if (m.equals(mod)) {
-                    m.editGroupByIndex(this.index.getZeroBased() - 1, editGroupDescriptor);
+                    m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
                 }
             }
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
@@ -588,7 +589,7 @@ public class EditCommand extends Command {
         }
 
         public void setGroups(EditGroupDescriptor groups) {
-            this.editGroupDescriptor = editGroupDescriptor;
+            this.editGroupDescriptor = groups;
         }
 
         @Override
@@ -621,7 +622,7 @@ public class EditCommand extends Command {
         private Module module;
         private ModuleCode modcode;
         private ObservableList<Student> members;
-        private ObservableList<LocalDateTime> meetingTimes;
+        private LocalDateTime meetingTimes;
         private Model model = null;
         private int idxOfMeetingTime = -1;
 
@@ -687,7 +688,7 @@ public class EditCommand extends Command {
             this.name = name;
         }
 
-        public Optional<ObservableList<LocalDateTime>> getMeetingTimes() {
+        public Optional<LocalDateTime> getMeetingTimes() {
             return Optional.ofNullable(meetingTimes);
         }
 
@@ -699,10 +700,12 @@ public class EditCommand extends Command {
 
         // TODO CHANGED HERE
         public void setMeetingTimes(List<Object> ls) {
+            System.out.println(ls);
             LocalDateTime meetingTime = (LocalDateTime) ls.get(1);
+            System.out.println(meetingTime.getClass().getSimpleName());
             int idxOfMeetingTime = (int) ls.get(0);
             this.idxOfMeetingTime = idxOfMeetingTime;
-            this.meetingTimes.add(meetingTime);
+            this.meetingTimes = meetingTime;
         }
 
         @Override

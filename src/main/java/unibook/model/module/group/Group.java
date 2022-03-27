@@ -3,6 +3,7 @@ package unibook.model.module.group;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -197,6 +198,13 @@ public class Group {
         builder.append(getGroupName())
             .append("; Module: ")
             .append(getModule().getModuleCode());
+
+        ObservableList<LocalDateTime> meetingTimes = getMeetingTimes();
+        if (!meetingTimes.isEmpty()) {
+            builder.append("; Meeting Times: ");
+            meetingTimes.forEach(builder::append);
+        }
+
         return builder.toString();
     }
 }
