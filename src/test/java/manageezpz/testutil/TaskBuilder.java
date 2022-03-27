@@ -26,7 +26,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Task} that we are building.
+     * Sets the {@code Description} of the {@code Task} that we are building.
      */
     public TaskBuilder withDescription(String description) {
         this.description = new Description(description);

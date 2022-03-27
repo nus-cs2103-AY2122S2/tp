@@ -17,10 +17,6 @@ public class Task implements Comparable<Task> {
     protected String type;
     protected Priority priority;
 
-    public enum Priority {
-        HIGH, LOW, MEDIUM, NONE;
-    }
-
     // Identity fields
     private final Description taskDescription;
 
@@ -43,10 +39,6 @@ public class Task implements Comparable<Task> {
         this.priority = Priority.NONE;
     }
 
-    /**
-     * Returns X if the task is done, otherwise blank.
-     * @return the string representation of the status of the task.
-     */
     public String getStatusIcon() {
         if (this.isDone()) {
             return "X";
@@ -83,6 +75,10 @@ public class Task implements Comparable<Task> {
         return this.type;
     }
 
+    /**
+     * Checks if the task is done or not.
+     * @return true if task is done, false otherwise.
+     */
     public boolean isDone() {
         return isDone;
     }
@@ -99,27 +95,9 @@ public class Task implements Comparable<Task> {
         return this.priority;
     }
 
-
-    int getAssignedValue(String s) {
-        switch (s) {
-        case "NONE":
-            return 3;
-        case "LOW":
-            return 2;
-        case "MEDIUM":
-            return 1;
-        case "HIGH":
-            return 0;
-        default:
-            return Integer.MAX_VALUE;
-        }
-    }
-
     @Override
     public int compareTo(Task o) {
-        String first = this.getPriority().name();
-        String second = o.getPriority().name();
-        return Integer.compare(getAssignedValue(first), getAssignedValue(second));
+        return Integer.compare(this.getPriority().getValue(), o.getPriority().getValue());
     }
 
     /**
@@ -132,7 +110,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Returns true if both Task have the same name.
+     * Returns true if both Task have the same Description.
      * This defines a weaker notion of equality between two Task.
      */
     public boolean isSameTask(Task otherTask) {

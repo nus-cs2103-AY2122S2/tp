@@ -61,7 +61,6 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void markTask(Task toMark) {
         requireNonNull(toMark);
-
         for (Task value : internalList) {
             if (value.equals(toMark)) {
                 value.setTaskDone();
