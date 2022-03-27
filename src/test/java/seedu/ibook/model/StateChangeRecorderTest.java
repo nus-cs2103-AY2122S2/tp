@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.testutil.Assert.assertThrows;
-import static seedu.ibook.testutil.TypicalReversibleIBookAction.REVERSIBLE_ADD_ITEM_ACTION;
-import static seedu.ibook.testutil.TypicalReversibleIBookAction.REVERSIBLE_ADD_PRODUCT_ACTION;
-import static seedu.ibook.testutil.TypicalReversibleIBookAction.REVERSIBLE_REMOVE_ITEM_ACTION;
-import static seedu.ibook.testutil.TypicalReversibleIBookAction.REVERSIBLE_SET_ITEM_ACTION;
-import static seedu.ibook.testutil.TypicalReversibleIBookAction.REVERSIBLE_SET_PRODUCT_ACTION;
+import static seedu.ibook.testutil.TypicalReversibleIBookActions.REVERSIBLE_ADD_ITEM_ACTION;
+import static seedu.ibook.testutil.TypicalReversibleIBookActions.REVERSIBLE_ADD_PRODUCT_ACTION;
+import static seedu.ibook.testutil.TypicalReversibleIBookActions.REVERSIBLE_REMOVE_ITEM_ACTION;
+import static seedu.ibook.testutil.TypicalReversibleIBookActions.REVERSIBLE_SET_ITEM_ACTION;
+import static seedu.ibook.testutil.TypicalReversibleIBookActions.REVERSIBLE_SET_PRODUCT_ACTION;
 
 import java.util.List;
 
