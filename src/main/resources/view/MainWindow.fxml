@@ -19,7 +19,6 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Cinnamon.css" />
         <URL value="@MainWindow.css" />
       </stylesheets>
       <VBox>
