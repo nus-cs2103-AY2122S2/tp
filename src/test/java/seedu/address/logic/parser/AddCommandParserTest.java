@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+/*
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -46,6 +47,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+*/
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
@@ -87,7 +89,7 @@ public class AddCommandParserTest {
                 new AddCommand(expectedPersonMultipleTags));
         */
     }
-/*
+    /*
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
@@ -166,5 +168,5 @@ public class AddCommandParserTest {
                 + INSURANCE_PACKAGE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
- */
+    */
 }

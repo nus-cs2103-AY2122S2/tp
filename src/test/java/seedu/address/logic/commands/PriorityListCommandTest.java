@@ -24,6 +24,9 @@ class PriorityListCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
+    /**
+     * Tests if the prioList command works on a regular address book.
+     */
     @Test
     public void execute_priority_list() {
         expectedModel.sortByPriority();

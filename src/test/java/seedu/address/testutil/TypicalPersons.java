@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javafx.util.Pair;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Priority;
@@ -44,7 +43,8 @@ public class TypicalPersons {
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withInsurancePackage("Basic BB")
-            .withTags(new ArrayList<Tag>(Arrays.asList(new Tag("update about new contract", Priority.PRIORITY_1)))).build();
+            .withTags(new ArrayList<Tag>(Arrays.asList(
+                        new Tag("update about new contract", Priority.PRIORITY_1)))).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withInsurancePackage("Life Premium X")

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -40,9 +39,11 @@ public class CommandTestUtil {
     public static final String VALID_INSURANCE_PACKAGE_BOB = "Silver Pro";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final ArrayList<Tag> VALID_TAG_HUSBAND = new ArrayList<Tag>(Arrays.asList(new Tag("Husband", Priority.PRIORITY_3)));
+    public static final ArrayList<Tag> VALID_TAG_HUSBAND = new ArrayList<Tag>(Arrays.asList(
+                new Tag("Husband", Priority.PRIORITY_3)));
     public static final String VALID_TAG_COMMAND_HUSBAND = "Husband :p3"; // change when needed
-    public static final ArrayList<Tag> VALID_TAG_FRIEND = new ArrayList<Tag>(Arrays.asList(new Tag("Friend", Priority.PRIORITY_4)));
+    public static final ArrayList<Tag> VALID_TAG_FRIEND = new ArrayList<Tag>(Arrays.asList(
+                new Tag("Friend", Priority.PRIORITY_4)));
     public static final String VALID_TAG_COMMAND_FRIEND = "Friend :p4";
 
     public static final String NAME_FIND_ALICE_BOB = " " + PREFIX_NAME + "Alice Bob";
