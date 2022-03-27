@@ -769,15 +769,203 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. TAssist detects an error in the entered command.
 
-    * 1a1. TAssist prompts for the correct command.
+  * 1a1. TAssist prompts for the correct command.
 
-    * 1a2. TA enters a new command.
+  * 1a2. TA enters a new command.
 
-      Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1a1-1a2 are repeated until the command entered is correct.
 
-      Use case resumes from step 2.
+    Use case resumes from step 2.
 
-**Use case 02: List modules**
+**Use case 02: Add a student**
+
+**MSS**
+
+1.  TA requests to add a new student with the specified details.
+2.  TAssist adds the new student and displays their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 03: Add a class group**
+
+**Preconditions: The module that the class group will be added to already exists.**
+
+**MSS**
+
+1. TA requests to <ins>list modules (UC10)</ins>.
+2. TA requests to add a new class group with the specified details.
+3. TAssist adds the new class group and displays its details.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. TAssist detects an error in the entered command.
+
+  * 2a1. TAssist prompts for the correct command.
+
+  * 2a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 04: Add an assessment**
+
+**Preconditions: The module that the assessment will be added to already exists.**
+
+**MSS**
+
+1. TA requests to <ins>list modules (UC10)</ins>.
+2. TA requests to add a new assessment with the specified details.
+3. TAssist adds the new assessment and displays its details.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. TAssist detects an error in the entered command.
+
+  * 2a1. TAssist prompts for the correct command.
+
+  * 2a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 05: Enrolling student(s)**
+
+**Preconditions:**
+
+1.  The student(s) to be enroled already exist.
+
+2.  The class group that the student(s) will be enroled in already exists.
+
+**MSS**
+
+1.  TA requests to enrol one/more student(s) into a particular class group.
+2.  TAssist enrols the student(s) and displays their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 06: Disenrolling student(s)**
+
+**Preconditions: The student(s) to be disenroled is already enrolled in the class group.**
+
+**MSS**
+
+1.  TA requests to disenrol one/more student(s) from a particular class group.
+2.  TAssist disenrols the student(s) and displays their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 07: Marking students' attendances**
+
+**Preconditions: The student(s) whose attendance(s) is to be marked is already enrolled in the class group.**
+
+**MSS**
+
+1.  TA requests to mark one/more student(s) attendance(s) from a particular class group.
+2.  TAssist marks the attendance(s) and displays their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 08: Unmarking students' attendances**
+
+**Preconditions: The student(s) whose attendance(s) is to be unmarked is already enrolled in the class group.**
+
+**MSS**
+
+1.  TA requests to unmark one/more student(s) attendance(s) from a particular class group.
+2.  TAssist unmarks the attendance(s) and displays their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 09: Grading assessments**
+
+**Preconditions: The student(s) are already enrolled in the module that the assesssment is associated with.**
+
+**MSS**
+
+1.  TA requests to grade one/more student(s) assessment(s) from a particular module.
+2.  TAssist grade the assessment(s) and displays their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 10: List modules**
 
 **MSS**
 
@@ -790,21 +978,159 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. TAssist detects an error in the entered command.
 
-    * 1a1. TAssist prompts for the correct command.
+  * 1a1. TAssist prompts for the correct command.
 
-    * 1a2. TA enters a new command.
+  * 1a2. TA enters a new command.
 
-      Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1a1-1a2 are repeated until the command entered is correct.
 
-      Use case resumes from step 2.
+    Use case resumes from step 2.
 
-**Use case 03: Delete a module**
+**Use case 11: List/filter students**
 
 **MSS**
 
-1. TA requests to <ins>list modules (UC02)</ins>.
+1.  TA requests to list students.
+2.  TAssist displays the details of all students.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TA requests to filter students by a specific module.
+
+  * 1a1. TAssist displays the details of students belonging to the specified module.
+
+    Use case ends.
+
+* 1a. TA requests to filter students by a specific class group.
+
+  * 1a1. TAssist displays the details of students belonging to the specified class group.
+
+    Use case ends.
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 12: List/filter class groups**
+
+**MSS**
+
+1.  TA requests to list class groups.
+2.  TAssist displays the details of all class groups.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TA requests to filter class groups by a specific module.
+
+  * 1a1. TAssist displays the details of class groups belonging to the specified module.
+
+    Use case ends.
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 13: List/filter assessments**
+
+**MSS**
+
+1.  TA requests to list assessments.
+2.  TAssist displays the details of all assessments.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TA requests to filter assessments by a specific module.
+
+  * 1a1. TAssist displays the details of assessments belonging to the specified module.
+
+    Use case ends.
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+**Use case 14: Find students by name**
+
+**MSS**
+
+1.  TA requests to find students with specific keyword(s).
+2.  TAssist displays the details of all students whose name contains one/more of the specified keyword(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+  * 1a1. TAssist prompts for the correct command.
+
+  * 1a2. TA enters a new command.
+
+    Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes from step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case 15: Delete a module**
+
+**MSS**
+
+1. TA requests to <ins>list modules (UC10)</ins>.
 2. TA requests to delete a specific module in the list.
-3. TAssist deletes the module and the class groups associated with it.
+3. TAssist deletes the module and the class groups and assessments associated with it.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. TAssist detects an error in the entered command.
+
+  * 2b1. TAssist prompts for the correct command.
+
+  * 2b2. TA enters a new command.
+
+    Steps 2b1-2b2 are repeated until the command entered is correct.
+
+    Use case resumes from step 3.
+
+**Use case 16: Delete a student**
+
+**MSS**
+
+1.  TA requests to <ins>list students (UC11)</ins>.
+2.  TA requests to delete a specific student in the list.
+3.  TAssist deletes the student and their associated assessment attempts.
 
     Use case ends.
 
@@ -816,64 +1142,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. TAssist detects an error in the entered command.
 
-    * 2b1. TAssist prompts for the correct command.
+  * 2b1. TAssist prompts for the correct command.
 
-    * 2b2. TA enters a new command.
+  * 2b2. TA enters a new command.
 
-      Steps 2b1-2b2 are repeated until the command entered is correct.
+    Steps 2b1-2b2 are repeated until the command entered is correct.
 
-      Use case resumes from step 3.
+    Use case resumes from step 3.
 
-**Use case 04: Add a class group**
-
-**Preconditions: The module that the class group will be added to already exists.**
+**Use case 17: Delete a class group**
 
 **MSS**
 
-1. TA requests to <ins>list modules (UC02)</ins>.
-2. TA requests to add a new class group with the specified details.
-3. TAssist adds the new class group and displays its details.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. TAssist detects an error in the entered command.
-
-    * 2a1. TAssist prompts for the correct command.
-
-    * 2a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-**Use case 05: List class groups**
-
-**MSS**
-
-1.  TA requests to list class groups.
-2.  TAssist displays the details of all class groups.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TAssist detects an error in the entered command.
-
-    * 1a1. TAssist prompts for the correct command.
-
-    * 1a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-**Use case 06: Delete a class group**
-
-**MSS**
-
-1.  TA requests to <ins>list class groups (UC05)</ins>.
+1.  TA requests to <ins>list class groups (UC12)</ins>.
 2.  TA requests to delete a specific class group in the list.
 3.  TAssist deletes the class group.
 
@@ -887,63 +1168,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. TAssist detects an error in the entered command.
 
-    * 2b1. TAssist prompts for the correct command.
+  * 2b1. TAssist prompts for the correct command.
 
-    * 2b2. TA enters a new command.
+  * 2b2. TA enters a new command.
 
-      Steps 2b1-2b2 are repeated until the command entered is correct.
+    Steps 2b1-2b2 are repeated until the command entered is correct.
 
-      Use case resumes from step 3.
+    Use case resumes from step 3.
 
-**Use case 07: Add a student**
-
-**MSS**
-
-1.  TA requests to add a new student with the specified details.
-2.  TAssist adds the new student and displays their details.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TAssist detects an error in the entered command.
-
-    * 1a1. TAssist prompts for the correct command.
-
-    * 1a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-**Use case 08: List students**
+**Use case 18: Delete an assessment**
 
 **MSS**
 
-1.  TA requests to list students.
-2.  TAssist displays the details of all students.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TAssist detects an error in the entered command.
-
-    * 1a1. TAssist prompts for the correct command.
-
-    * 1a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-**Use case 09: Delete a student**
-
-**MSS**
-
-1.  TA requests to <ins>list students (UC08)</ins>.
-2.  TA requests to delete a specific student in the list.
-3.  TAssist deletes the student.
+1.  TA requests to <ins>list assessments (UC13)</ins>.
+2.  TA requests to delete a specific assessment in the list.
+3.  TAssist deletes the assessment.
 
     Use case ends.
 
@@ -955,13 +1194,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. TAssist detects an error in the entered command.
 
-    * 2b1. TAssist prompts for the correct command.
+  * 2b1. TAssist prompts for the correct command.
 
-    * 2b2. TA enters a new command.
+  * 2b2. TA enters a new command.
 
-      Steps 2b1-2b2 are repeated until the command entered is correct.
+    Steps 2b1-2b2 are repeated until the command entered is correct.
 
-      Use case resumes from step 3.
+    Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
