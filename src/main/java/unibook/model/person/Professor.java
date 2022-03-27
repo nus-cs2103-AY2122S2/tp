@@ -33,6 +33,30 @@ public class Professor extends Person {
             person.getTags(), office, person.getModules());
     }
 
+    public Professor deletePhone() {
+        return new Professor(getName(), new Phone(""), getEmail(), getTags(), getOffice(), getModules());
+    }
+
+    public Professor deleteEmail() {
+        return new Professor(getName(), getPhone(), new Email(""), getTags(), getOffice(), getModules());
+    }
+
+    public Professor deleteTag(String tagNameToDelete) {
+        Set<Tag> tags = getTags();
+        Tag tagToDelete = null;
+        for (Tag tag: tags) {
+            if (tag.tagName.equals(tagNameToDelete)) {
+                tagToDelete = tag;
+            }
+        }
+        tags.remove(tagToDelete);
+        return new Professor(getName(), getPhone(), getEmail(), tags, getOffice(), getModules());
+    }
+
+    public Professor deleteOffice() {
+        return new Professor(getName(), getPhone(), getEmail(), getTags(), new Office(""), getModules());
+    }
+
     public Office getOffice() {
         return this.office;
     }

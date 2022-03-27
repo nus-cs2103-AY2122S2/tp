@@ -60,6 +60,13 @@ public abstract class Person {
         return email;
     }
 
+    abstract public Person deletePhone();
+
+    abstract public Person deleteEmail();
+
+    abstract public Person deleteTag(String tag);
+
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -133,6 +140,12 @@ public abstract class Person {
             } else {
                 throw new PersonNoSubtypeException();
             }
+        }
+    }
+
+    public void removePersonFromAllTheirModules() {
+        for (Module module : this.getModules()) {
+            module.removePerson(this);
         }
     }
 

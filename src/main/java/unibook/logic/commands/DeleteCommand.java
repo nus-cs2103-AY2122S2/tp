@@ -12,6 +12,8 @@ import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.group.Group;
 import unibook.model.person.Person;
+import unibook.model.person.Professor;
+import unibook.model.person.Student;
 
 /**
  * Deletes a person identified using it's displayed index from the unibook.
@@ -35,11 +37,22 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
     public static final String MESSAGE_INVALID_OPTION = "Invalid Option provided!\nOption should be either " +
             "o/all, o/mod or o/prof";
+    public static final String MESSAGE_DELETE_TRAITS_SUCCESS = "Successfully deleted the following traits:\n";
+    public static final String PHONE = "Phone, ";
+    public static final String EMAIL = "Email, ";
+    public static final String TAG = "Tag, ";
+    public static final String OFFICE = "Office, ";
 
     private Index targetIndex;
+    private boolean indexOnly = false;
     private ModuleCode moduleCode;
-    private String option;
     private Group group;
+    private boolean phone;
+    private boolean email;
+    private String tag;
+    private boolean office;
+    private Index profIndex;
+    private Index stuIndex;
 
     /**
      * Creates a Delete Command Object that will delete a person at targetIndex.
@@ -48,6 +61,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.indexOnly = true;
     }
 
     /**
@@ -57,17 +71,6 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(ModuleCode moduleCode) {
         this.moduleCode = moduleCode;
-    }
-
-    /**
-     * Creates a Delete Command Object that will delete a module
-     * that has moduleCode based on provided option
-     *
-     * @param moduleCode
-     */
-    public DeleteCommand(ModuleCode moduleCode, String option) {
-        this.moduleCode = moduleCode;
-        this.option = option;
     }
 
     /**
@@ -81,6 +84,13 @@ public class DeleteCommand extends Command {
         this.group = group;
     }
 
+    public DeleteCommand(boolean phone, boolean email, String tag, boolean office) {
+        this.phone = phone;
+        this.email = email;
+        this.tag = tag;
+        this.office = office;
+    }
+
     @Override
     public CommandResult execute(Model model,
                                  Boolean isPersonListShowing,
@@ -88,7 +98,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
 
         // delete person by index case
-        if (targetIndex != null) {
+        if (indexOnly) {
 
             // if not on person page, throw exception telling user to change pages
             if (isPersonListShowing) {
@@ -126,9 +136,7 @@ public class DeleteCommand extends Command {
 
 
             // delete module by code case
-        } else if ((targetIndex == null && moduleCode != null && option == null && group == null) ||
-                (targetIndex == null && moduleCode != null
-                        && option != null && option.equals("mod") && group == null)) {
+        } else if (moduleCode != null) {
 
             // if not on module page, throw exception telling users to change page
             if (!isModuleListShowing) {
@@ -145,28 +153,9 @@ public class DeleteCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleCode));
 
-            // delete with options case
-        } else if (targetIndex == null && moduleCode != null && option != null && group == null) {
-
-            // if not on module page, throw exception telling users to change page
-            if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
-            }
-
-            // check if module code is valid
-            if (!model.hasModule(moduleCode)) {
-                throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
-            }
-
-            if (option.equals("cascade")) {
-                model.deleteModuleAndPersons(moduleCode);
-                return new CommandResult(String.format(MESSAGE_DELETE_MODULE_AND_PERSON_SUCCESS, moduleCode));
-            } else {
-                throw new CommandException(MESSAGE_INVALID_OPTION);
-            }
 
             // delete group case
-        } else if (targetIndex == null && moduleCode != null && option == null && group != null) {
+        } else if (moduleCode != null && group != null) {
 
             // if not on module page, throw exception telling users to change page
             if (!isModuleListShowing) {
@@ -186,6 +175,49 @@ public class DeleteCommand extends Command {
             // module and group exists
             Group removedGroup = model.removeGroup(moduleCode, group);
             return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, removedGroup));
+
+        } else if (phone || email || tag != null || office) { // delete person attributes
+
+            if (!isPersonListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+            }
+
+            List<Person> lastShownPersonList = model.getFilteredPersonList();
+
+            if (targetIndex.getZeroBased() >= lastShownPersonList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Person personToDeleteTrait = lastShownPersonList.get(targetIndex.getZeroBased());
+            Person newPerson = null;
+
+            if (phone) {
+                newPerson = personToDeleteTrait.deletePhone();
+            }
+            if (email) {
+                newPerson = personToDeleteTrait.deleteEmail();
+            }
+            if (tag != null) {
+                newPerson = personToDeleteTrait.deleteTag(tag);
+            }
+            if (personToDeleteTrait instanceof Professor && office) {
+                newPerson = ((Professor)personToDeleteTrait).deleteOffice();
+            }
+
+            personToDeleteTrait.removePersonFromAllTheirModules();
+            newPerson.addPersonToAllTheirModules();
+            if (personToDeleteTrait instanceof Student) {
+                ((Student) personToDeleteTrait).removeStudentFromAllTheirGroups();
+                ((Student) newPerson).addStudentToAllTheirGroups();
+            }
+
+            // message can be improved if have time
+            String phoneString = phone ? PHONE : "";
+            String emailString = email ? EMAIL : "";
+            String tagString = tag != null ? TAG : "";
+            String officeString = personToDeleteTrait instanceof Professor && office ? OFFICE : "";
+            return new CommandResult(MESSAGE_DELETE_TRAITS_SUCCESS + phoneString +
+                    emailString + tagString + officeString + "from " + personToDeleteTrait.getName());
 
         }
 

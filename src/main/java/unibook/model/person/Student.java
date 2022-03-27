@@ -39,6 +39,38 @@ public class Student extends Person {
             person.getTags(), person.getModules(), groups);
     }
 
+    public Student deletePhone() {
+        return new Student(getName(), new Phone(""), getEmail(), getTags(), getModules(), groups);
+    }
+
+    public Student deleteEmail() {
+        return new Student(getName(), getPhone(), new Email(""), getTags(), getModules(), groups);
+    }
+
+    public Student deleteTag(String tagNameToDelete) {
+        Set<Tag> tags = getTags();
+        Tag tagToDelete = null;
+        for (Tag tag: tags) {
+            if (tag.tagName.equals(tagNameToDelete)) {
+                tagToDelete = tag;
+            }
+        }
+        tags.remove(tagToDelete);
+        return new Student(getName(), getPhone(), getEmail(), tags, getModules(), groups);
+    }
+
+    public void addStudentToAllTheirGroups() {
+        for (Group group: groups) {
+            group.addMember(this);
+        }
+    }
+
+    public void removeStudentFromAllTheirGroups() {
+        for (Group group: groups) {
+            group.removeMember(this);
+        }
+    }
+
 
     /**
      * Returns true only if the other student has all the same fields.
