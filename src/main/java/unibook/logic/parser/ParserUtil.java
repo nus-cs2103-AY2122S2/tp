@@ -259,6 +259,7 @@ public class ParserUtil {
     }
 
     /**
+<<<<<<< HEAD
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -287,4 +288,10 @@ public class ParserUtil {
         return list;
     }
 
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(trimmedDateTime, formatter);
+    }
 }
