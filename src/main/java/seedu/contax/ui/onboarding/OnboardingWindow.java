@@ -2,6 +2,7 @@ package seedu.contax.ui.onboarding;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -45,16 +46,19 @@ public class OnboardingWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private VBox personList;
-
-    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private StackPane labelPlaceholder;
 
     @FXML
+    private VBox contentList;
+
+    @FXML
     private MenuBar menuBar;
+
+    @FXML
+    private Tab personTab;
 
     /**
      * Creates a OnboardingWindow
@@ -123,7 +127,9 @@ public class OnboardingWindow extends UiPart<Stage> {
     private void fillInner() {
         labelPlaceholder.getChildren().add(overlay.getRoot());
         labelPlaceholder.getChildren().add(instructionLabel.getRoot());
+
         personListPanel = new PersonListPanel(model.getFilteredPersonList());
+        personTab.setContent(personListPanel.getRoot());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -190,7 +196,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         case CLEAR_ALL:
             commandBox.unhighlight();
             commandBox.clear();
-            personList.setStyle("-fx-border-width: 0px");
+            contentList.setStyle("-fx-border-width: 0px");
             break;
         case COMMAND_BOX:
             commandBox.highlight();
@@ -198,7 +204,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         case PERSON_LIST:
             commandBox.unhighlight();
             commandBox.clear();
-            personList.setStyle("-fx-border-color: yellow; -fx-border-width: 5px");
+            contentList.setStyle("-fx-border-color: yellow; -fx-border-width: 5px");
             break;
         default:
             break;
@@ -227,7 +233,7 @@ public class OnboardingWindow extends UiPart<Stage> {
             showOnly(commandBoxPlaceholder, Overlay.ShowOverlay.BOTH);
             break;
         case SHOW_PERSON_LIST:
-            showOnly(personList, Overlay.ShowOverlay.TOP);
+            showOnly(contentList, Overlay.ShowOverlay.TOP);
             break;
         default:
             break;
@@ -263,8 +269,8 @@ public class OnboardingWindow extends UiPart<Stage> {
             break;
         case PERSON_LIST_MIDDLE:
             instructionLabel.translate(
-                    personList.layoutXProperty().add(0),
-                    personList.layoutYProperty().add(
+                    contentList.layoutXProperty().add(0),
+                    contentList.layoutYProperty().add(
                             resultDisplayPlaceholder.heightProperty().multiply(1.5)
                     ));
             break;

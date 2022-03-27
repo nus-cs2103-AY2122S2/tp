@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
 <fx:root minHeight="600" minWidth="450" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
@@ -43,11 +45,17 @@
                   <Insets bottom="5" left="10" right="10" top="5" />
                 </padding>
               </StackPane>
-              <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <VBox fx:id="contentList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                <TabPane fx:id="tabbedPanelPlaceholder" tabClosingPolicy="UNAVAILABLE">
+                  <tabs>
+                    <Tab fx:id="personTab" text="Person" />
+                    <Tab fx:id="appointmentTab" text="Appointment" />
+                    <Tab fx:id="tagTab" text="Tag" />
+                  </tabs></TabPane>
+                  <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
               </VBox>
               <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
