@@ -37,7 +37,7 @@ public class ClassGroup implements Entity {
     /**
      * Constructs a {@code ClassGroup}.
      * Every field must be present and not null.
-     * Used to initialize a classgroup from storage file.
+     * Used to initialize a class group from storage file.
      *
      * @param classGroupId A valid class group ID.
      * @param classGroupType A valid class group type.
