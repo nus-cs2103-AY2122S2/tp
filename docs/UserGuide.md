@@ -58,13 +58,9 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COURSE] [m/MATRICCARD] [tele/TELEGRAM]`
 
-<div markdown="span" class="alert alert-primary">:bulb:
-A person can have any number of tags (including 0)
-</div>
+:bulb: A person can have any number of tags (including 0)
 
-<div markdown="span" class="alert alert-primary">:bulb:
-Course, Matric Card and Telegram are optional fields!
-</div>
+:bulb: Course, Matric Card and Telegram are optional fields!
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 
