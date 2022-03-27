@@ -1,5 +1,7 @@
 package seedu.ibook.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,8 @@ public class StateChangeRecorder {
      * @param action the action to be performed.
      */
     public void recordAction(ReversibleIBookAction action) {
+        requireNonNull(action);
+
         newActionList.add(action);
     }
 

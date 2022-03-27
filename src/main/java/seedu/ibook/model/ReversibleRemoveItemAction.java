@@ -1,5 +1,8 @@
 package seedu.ibook.model;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
@@ -17,17 +20,23 @@ public class ReversibleRemoveItemAction extends ReversibleIBookAction {
      * @param item the item to be deleted.
      */
     public ReversibleRemoveItemAction(Product product, Item item) {
+        requireAllNonNull(product, item);
+
         this.product = product;
         this.item = item;
     }
 
     @Override
     public void performForwardAction(IBook iBook) {
+        requireNonNull(iBook);
+
         iBook.removeItem(product, item);
     }
 
     @Override
     public void performBackwardAction(IBook iBook) {
+        requireNonNull(iBook);
+
         iBook.addItem(product, item);
     }
 

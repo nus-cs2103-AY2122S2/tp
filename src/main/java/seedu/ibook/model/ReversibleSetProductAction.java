@@ -1,5 +1,8 @@
 package seedu.ibook.model;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.ibook.model.product.Product;
 
 /**
@@ -16,17 +19,23 @@ public class ReversibleSetProductAction extends ReversibleIBookAction {
      * @param updatedProduct the product {@code productToUpdate} needs to update to.
      */
     public ReversibleSetProductAction(Product productToUpdate, Product updatedProduct) {
+        requireAllNonNull(productToUpdate, updatedProduct);
+
         this.productToUpdate = productToUpdate;
         this.updatedProduct = updatedProduct;
     }
 
     @Override
     public void performForwardAction(IBook iBook) {
+        requireNonNull(iBook);
+
         iBook.setProduct(productToUpdate, updatedProduct);
     }
 
     @Override
     public void performBackwardAction(IBook iBook) {
+        requireNonNull(iBook);
+
         iBook.setProduct(updatedProduct, productToUpdate);
     }
 
