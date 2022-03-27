@@ -366,13 +366,14 @@ _Details coming soon ..._
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME s/STATUS [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                          |
 | **Clear**  | `clear`                                                                                                                                           |
+| **Comment** | `comment <INDEX> [c/<COMMENT>]`  eg., `comment 2 c/Bad`                                                                                               |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                               |
 | **Edit**   | `edit INDEX [n/NAME] [s/STATUS] [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                               |
 | **Exit**   | `exit`                                                                                                                                            |
 | **Find**   | `find KEYWORD`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
 | **List**   | `list`                                                                                                                                            |
 | **Sort**   | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                                          |
-| **Comment** | `comment <INDEX> [c/<COMMENT>]`  eg., `comment 2 c/Bad`                                                                                               |
+|
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
