@@ -3,7 +3,6 @@ package seedu.trackermon.commons.core;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.nio.file.Path;
 
 public class JarTools {
 
