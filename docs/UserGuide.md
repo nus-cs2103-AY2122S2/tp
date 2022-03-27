@@ -314,6 +314,7 @@ Format: `exit`
 ## Special Features
 
 ### Command Chains
+
 Multiple commands can be chained by separating each command with the `|` character.
 Each command is run sequentially from first to last.
 Invalid commands and special commands `help` and `exit` will break the chain and stop further command execution.  
@@ -321,8 +322,15 @@ Invalid commands and special commands `help` and `exit` will break the chain and
 e.g `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
 
 ### Command History
+
 You can navigate through your command history by using the up and down arrow keys.
 The command history works similarly to the Linux bash terminal.
+
+### Themes
+
+You can change between the light or dark theme by click on the menu bar and selecting `Theme > Cinnamon` or `Theme > Caramel`.
+
+![](images/ChangeTheme.png)
 
 ---
 
