@@ -92,6 +92,14 @@ public class ModelManager implements Model {
         return showList;
     }
 
+    /**
+     * Returns the ShowList size
+     */
+    @Override
+    public int getShowListSize() {
+        return showList.getShows().size();
+    }
+
     @Override
     public boolean hasShow(Show show) {
         requireNonNull(show);

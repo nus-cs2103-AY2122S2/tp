@@ -214,6 +214,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.getIndexAffected() != CommandResult.DEFAULT_INDEX) {
+                showListPanel.updateSelection(commandResult.getIndexAffected());
+            }
+
             handleUpdateList();
 
             return commandResult;

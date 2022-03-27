@@ -56,6 +56,9 @@ public interface Model {
     /** Returns the ShowList */
     ReadOnlyShowList getShowList();
 
+    /** Returns the ShowList size */
+    int getShowListSize();
+
     /**
      * Returns true if a show with the same name as {@code show} exists in the show list.
      */
