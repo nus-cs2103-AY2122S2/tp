@@ -124,15 +124,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Event` objects (whihc are contained in a `UniqueEventList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The alternative (arguably, a more OOP) models are given below for `Person` and `Event` separately. The `Person` model has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
+<img src="images/TagClassDiagram.png" width="450" />
+<img src="images/EventClassDiagram.png" width="450" />
 </div>
 
 
@@ -377,26 +378,28 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                  | I want to …​                                             | So that I can…​                                                                                  |
-|----------|----------------------------------------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                                 | see usage instructions                                   | refer to instructions when I forget how to use the App                                           |
-| `* * *`  | user                                                     | view all of my contacts                                  |                                                                                                  |
+| Priority | As a …​                                                  | I want to …​                                             | So that I can…​                                                                                   |
+|----------|----------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                                 | see usage instructions                                   | refer to instructions when I forget how to use the App                                            |
+| `* * *`  | user                                                     | view all of my contacts                                  |                                                                                                   |
 | `* * *`  | user                                                     | add a new contact                                        |
-| `* * *`  | user                                                     | delete a contact                                         | remove entries that I no longer need                                                             |
-| `* * *`  | user                                                     | delete multiple contacts at once                         | delete unwanted entries faster                                                                   |
-| `* * *`  | user                                                     | edit an existing contact                                 | update the information when needed                                                               |
-| `* * *`  | user                                                     | tag additional information to an existing contact        | keep a memo of such details for future references                                                |
-| `* * `   | user                                                     | add an event and tag relevant persons in my contact list | keep a memo of such upcoming events with my contacts for future references                       |
-| `* * `   | user                                                     | find a person by name                                    | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                     | find a person by phone number                            | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                     | find a person by email address                           | locate details of persons without having to go through the entire list                           |
-| `* * `   | user                                                     | find a person by module                                  | locate details of persons with identical modules, without having to go through the entire list   |
+| `* * *`  | user                                                     | delete a contact                                         | remove entries that I no longer need                                                              |
+| `* * *`  | user                                                     | delete multiple contacts at once                         | delete unwanted entries faster                                                                    |
+| `* * *`  | user                                                     | edit an existing contact                                 | update the information when needed                                                                |
+| `* * *`  | user                                                     | tag additional information to an existing contact        | keep a memo of such details for future references                                                 |
+| `* * `   | user                                                     | add an event and tag relevant persons in my contact list | keep a memo of such upcoming events with my contacts for future references                        |
+| `* * `   | user                                                     | cancel an event                                          |                                                                                                   |
+| `* * `   | user                                                     | cancel multiple events at once                           | cancel unnecessary events faster                                                                  |
+| `* * `   | user                                                     | find a person by name                                    | locate details of persons without having to go through the entire list                            |
+| `* * `   | user                                                     | find a person by phone number                            | locate details of persons without having to go through the entire list                            |
+| `* * `   | user                                                     | find a person by email address                           | locate details of persons without having to go through the entire list                            |
+| `* * `   | user                                                     | find a person by module                                  | locate details of persons with identical modules, without having to go through the entire list    |
 | `* * `   | user                                                     | find a person by internship                              | locate details of persons with identical internship, without having to go through the entire list |
-| `* * `   | user                                                     | find a person by cca                                     | locate details of persons with identical cca, without having to go through the entire list       |
-| `* * `   | user                                                     | find a person by education                               | locate details of persons with identical education, without having to go through the entire list |
-| `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                                   | reset my contact list                                                                            |
-| `*`      | user that tagged a lot of information to the contacts    | remove a specific tag of a contact                       | avoid going through the trouble of re-tagging all the information again                          |
-| `*`      | user with many persons in the contact list               | sort persons by name in alphabetical order               | locate a person easily                                                                           |
+| `* * `   | user                                                     | find a person by cca                                     | locate details of persons with identical cca, without having to go through the entire list        |
+| `* * `   | user                                                     | find a person by education                               | locate details of persons with identical education, without having to go through the entire list  |
+| `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                                   | reset my contact list                                                                             |
+| `*`      | user that tagged a lot of information to the contacts    | remove a specific tag of a contact                       | avoid going through the trouble of re-tagging all the information again                           |
+| `*`      | user with many persons in the contact list               | sort persons by name in alphabetical order               | locate a person easily                                                                            |
 
 
 
@@ -584,15 +587,42 @@ The user wants to delete multiple persons instead.
       Use case resumes at step 2.
 ````
 
-### Use case 10: Adding events
+### Use case 10: Adding an event
 
 **MSS**
 ````
+1. User adds a new event in the given command format (see User Guide)
+2. NUSocials adds the new event to the list
 
+    Use case ends.
 ````
 **Extensions**
 ````
+2a. The given event command is invalid.
 
+    - 2a1. NUSocials shows an error message.
+
+      Use case resumes at step 1.
+````
+
+### Use case 11: Cancelling events
+
+**MSS**
+````
+Similar to Use case 9, except now:
+The user wants to delete event(s) instead.
+````
+**Extensions**
+````
+2a. The list is empty.
+
+  Use case ends.
+
+3a. One or more of given indexes are invalid.
+
+    - 3a1. NUSocials shows an error message.
+
+      Use case resumes at step 2.
 ````
 
 ### Non-Functional Requirements
