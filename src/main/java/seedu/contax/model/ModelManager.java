@@ -34,7 +34,7 @@ public class ModelManager implements Model {
     private final FilteredList<Tag> filteredTags;
 
     private final ObservableList<AppointmentSlot> displayedAppointmentSlots;
-    private final ObservableList<AppointmentSlot> unmodifiableDisplayedAppointmentSlots;
+    private final ObservableList<AppointmentSlot> readOnlyDisplayedAppointmentSlots;
     private final CompositeObservableList<ScheduleItem> scheduleItemList;
 
     /**
@@ -55,10 +55,8 @@ public class ModelManager implements Model {
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         displayedAppointmentSlots = FXCollections.observableArrayList();
-        unmodifiableDisplayedAppointmentSlots =
-                FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
-        scheduleItemList = new CompositeObservableList<>(filteredAppointments,
-                unmodifiableDisplayedAppointmentSlots);
+        readOnlyDisplayedAppointmentSlots = FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
+        scheduleItemList = new CompositeObservableList<>(filteredAppointments, readOnlyDisplayedAppointmentSlots);
     }
 
     /**
@@ -283,7 +281,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+    public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
     }
@@ -292,7 +290,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
-        return unmodifiableDisplayedAppointmentSlots;
+        return readOnlyDisplayedAppointmentSlots;
     }
 
     @Override

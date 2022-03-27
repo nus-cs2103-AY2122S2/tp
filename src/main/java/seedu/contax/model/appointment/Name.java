@@ -9,7 +9,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
  */
 public class Name {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters, spaces, the symbols .,!@#$%&*()"
+            "Names should only contain alphanumeric characters, spaces, the symbols .,!@#$%&*() "
                     + "and it should not be blank";
 
     /*

@@ -1,4 +1,4 @@
-package seedu.contax.model.appointment;
+package seedu.contax.model.chrono;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,10 +8,10 @@ import java.util.function.Predicate;
 import seedu.contax.commons.util.DateUtil;
 
 /**
- * Tests that a {@code Appointment} falls between the given date time range.
- * It returns true if the appointment being tested contains some sub-range of the predicate's date range.
+ * Tests that a {@code ScheduleItem} falls between the given date time range.
+ * It returns true if the ScheduleItem being tested contains some sub-range of the predicate's date range.
  */
-public class DateRangePredicate implements Predicate<Appointment> {
+public class DateRangePredicate implements Predicate<ScheduleItem> {
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -30,9 +30,9 @@ public class DateRangePredicate implements Predicate<Appointment> {
     }
 
     @Override
-    public boolean test(Appointment appointment) {
-        LocalDateTime appointmentStart = appointment.getStartDateTime();
-        LocalDateTime appointmentEnd = appointment.getEndDateTime();
+    public boolean test(ScheduleItem scheduleItem) {
+        LocalDateTime appointmentStart = scheduleItem.getStartDateTime();
+        LocalDateTime appointmentEnd = scheduleItem.getEndDateTime();
 
         return (DateUtil.isBeforeOrEqual(appointmentStart, start) && DateUtil.isAfterOrEqual(appointmentEnd, end))
                 || (DateUtil.isAfterOrEqual(appointmentStart, start) && DateUtil.isBeforeOrEqual(appointmentEnd, end))

@@ -9,7 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Aggregates the contents of 2 {@code ObservableLists} into a single {@code ObservableList}.
+ * Aggregates the contents of 2 sorted {@code ObservableLists} into a single sorted {@code ObservableList}.
+ * The backing lists must be sorted, or the aggregated list will not contain the correct sorting order.
  */
 public class CompositeObservableList<T extends Comparable<? super T>> {
 
@@ -61,27 +62,24 @@ public class CompositeObservableList<T extends Comparable<? super T>> {
      */
     private void refreshCombinedList() {
         // Merge sorted lists
-        int apptListIdx = 0;
-        int slotListIdx = 0;
-        ArrayList<T> mergedList =
-                new ArrayList<>(backingList1.size() + backingList2.size());
+        int list1Index = 0;
+        int list2Index = 0;
+        ArrayList<T> mergedList = new ArrayList<>(backingList1.size() + backingList2.size());
 
-        while (apptListIdx < backingList1.size() && slotListIdx < backingList2.size()) {
-            if (backingList1.get(apptListIdx).compareTo(backingList2.get(slotListIdx)) < 0) {
-                mergedList.add(backingList1.get(apptListIdx));
-                apptListIdx++;
+        while (list1Index < backingList1.size() && list2Index < backingList2.size()) {
+            if (backingList1.get(list1Index).compareTo(backingList2.get(list2Index)) < 0) {
+                mergedList.add(backingList1.get(list1Index));
+                list1Index++;
             } else {
-                mergedList.add(backingList2.get(slotListIdx));
-                slotListIdx++;
+                mergedList.add(backingList2.get(list2Index));
+                list2Index++;
             }
         }
-        while (apptListIdx < backingList1.size()) {
-            mergedList.add(backingList1.get(apptListIdx));
-            apptListIdx++;
+        for (; list1Index < backingList1.size(); list1Index++) {
+            mergedList.add(backingList1.get(list1Index));
         }
-        while (slotListIdx < backingList2.size()) {
-            mergedList.add(backingList2.get(slotListIdx));
-            slotListIdx++;
+        for (; list2Index < backingList2.size(); list2Index++) {
+            mergedList.add(backingList2.get(list2Index));
         }
 
         scheduleItemList.setAll(mergedList);

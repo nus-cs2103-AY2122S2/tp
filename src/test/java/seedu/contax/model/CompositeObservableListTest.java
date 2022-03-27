@@ -16,7 +16,7 @@ import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 
-public class CompositeScheduleItemListTest {
+public class CompositeObservableListTest {
 
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {

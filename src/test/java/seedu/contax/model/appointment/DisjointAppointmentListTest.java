@@ -119,25 +119,25 @@ public class DisjointAppointmentListTest {
     @Test
     public void setAppointment_nullTargetAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-            -> appointmentList.setAppointment(null, APPOINTMENT_ALICE));
+            -> appointmentList.set(null, APPOINTMENT_ALICE));
     }
 
     @Test
     public void setAppointment_nullEditedAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-            -> appointmentList.setAppointment(APPOINTMENT_ALICE, null));
+            -> appointmentList.set(APPOINTMENT_ALICE, null));
     }
 
     @Test
     public void setAppointment_targetAppointmentNotInList_throwsAppointmentNotFoundException() {
         assertThrows(AppointmentNotFoundException.class, ()
-            -> appointmentList.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
+            -> appointmentList.set(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
     }
 
     @Test
     public void setAppointment_editedAppointmentIsSameAppointment_success() {
         appointmentList.add(APPOINTMENT_ALICE);
-        appointmentList.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALICE);
+        appointmentList.set(APPOINTMENT_ALICE, APPOINTMENT_ALICE);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
         expectedAppointmentList.add(APPOINTMENT_ALICE);
         assertEquals(expectedAppointmentList, appointmentList);
@@ -150,7 +150,7 @@ public class DisjointAppointmentListTest {
                 .withName("Another Meeting")
                 .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1)).build();
 
-        appointmentList.setAppointment(APPOINTMENT_ALICE, editedAppointment);
+        appointmentList.set(APPOINTMENT_ALICE, editedAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
         expectedAppointmentList.add(editedAppointment);
         assertEquals(expectedAppointmentList, appointmentList);
@@ -163,7 +163,7 @@ public class DisjointAppointmentListTest {
                 .withName("Another Meeting")
                 .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusYears(1)).build();
 
-        appointmentList.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
+        appointmentList.set(APPOINTMENT_ALICE, disjointAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
         expectedAppointmentList.add(disjointAppointment);
         assertEquals(expectedAppointmentList, appointmentList);
@@ -185,21 +185,21 @@ public class DisjointAppointmentListTest {
                 .withName("Another Meeting")
                 .withStartDateTime(baseDateTime.plusDays(2)).build();
 
-        appointmentList.setAppointment(APPOINTMENT_ALONE, beforeAppointment);
+        appointmentList.set(APPOINTMENT_ALONE, beforeAppointment);
         assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
         assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(1));
 
-        appointmentList.setAppointment(beforeAppointment, afterAppointment);
+        appointmentList.set(beforeAppointment, afterAppointment);
         assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(0));
         assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(1));
 
         appointmentList.add(beforeAppointment);
-        appointmentList.setAppointment(modifiedAloneAppointment, modifiedAloneAppointment);
+        appointmentList.set(modifiedAloneAppointment, modifiedAloneAppointment);
         assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
         assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(1));
         assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(2));
 
-        appointmentList.setAppointment(afterAppointment, afterAppointment);
+        appointmentList.set(afterAppointment, afterAppointment);
         assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
         assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(1));
         assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(2));
@@ -214,7 +214,7 @@ public class DisjointAppointmentListTest {
         appointmentList.add(disjointAppointment);
 
         assertThrows(OverlappingAppointmentException.class, ()
-            -> appointmentList.setAppointment(APPOINTMENT_ALICE, disjointAppointment));
+            -> appointmentList.set(APPOINTMENT_ALICE, disjointAppointment));
     }
 
     @Test

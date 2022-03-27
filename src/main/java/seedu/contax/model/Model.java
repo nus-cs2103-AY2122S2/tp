@@ -186,7 +186,7 @@ public interface Model {
      * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+    void updateFilteredAppointmentList(Predicate<? super Appointment> predicate);
 
     /** Returns an unmodifiable view of the slots between appointments to be highlighted. */
     ObservableList<AppointmentSlot> getDisplayedAppointmentSlots();
