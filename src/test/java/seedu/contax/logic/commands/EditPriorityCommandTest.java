@@ -36,7 +36,7 @@ public class EditPriorityCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), getTypicalSchedule(),
                 new UserPrefs());
         Appointment appointment = expectedModel.getFilteredAppointmentList().get(0);
-        Appointment expectAppointment = appointment.setPriority(Priority.LOW);
+        Appointment expectAppointment = appointment.withPriority(Priority.LOW);
         expectedModel.setAppointment(appointment, expectAppointment);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -54,7 +54,7 @@ public class EditPriorityCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), getTypicalSchedule(),
                 new UserPrefs());
         Appointment appointment = expectedModel.getFilteredAppointmentList().get(0);
-        Appointment expectAppointment = appointment.setPriority(Priority.MEDIUM);
+        Appointment expectAppointment = appointment.withPriority(Priority.MEDIUM);
         expectedModel.setAppointment(appointment, expectAppointment);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -72,7 +72,7 @@ public class EditPriorityCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), getTypicalSchedule(),
                 new UserPrefs());
         Appointment appointment = expectedModel.getFilteredAppointmentList().get(0);
-        Appointment expectAppointment = appointment.setPriority(Priority.HIGH);
+        Appointment expectAppointment = appointment.withPriority(Priority.HIGH);
         expectedModel.setAppointment(appointment, expectAppointment);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

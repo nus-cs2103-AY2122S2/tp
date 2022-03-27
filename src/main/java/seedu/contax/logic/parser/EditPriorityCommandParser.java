@@ -6,8 +6,6 @@ import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_PRIORITY_LEVEL;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
-import java.util.Locale;
-
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.EditPriorityCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
@@ -34,14 +32,21 @@ public class EditPriorityCommandParser implements Parser<EditPriorityCommand> {
         }
 
         Index index;
-        Priority priority;
 
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
         }
-        switch (argumentMultimap.getValue(PREFIX_PRIORITY).get().toLowerCase(Locale.ROOT)) {
+
+        Priority priority = getPriorityFromInput(argumentMultimap.getValue(PREFIX_PRIORITY).get().toLowerCase());
+
+        return new EditPriorityCommand(index, priority);
+    }
+
+    private Priority getPriorityFromInput(String input) throws ParseException {
+        Priority priority;
+        switch (input) {
         case "high":
             priority = Priority.HIGH;
             break;
@@ -51,11 +56,13 @@ public class EditPriorityCommandParser implements Parser<EditPriorityCommand> {
         case "low":
             priority = Priority.LOW;
             break;
+        case "none":
+            priority = null;
+            break;
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_PRIORITY_LEVEL, EditPriorityCommand.MESSAGE_USAGE));
         }
-
-        return new EditPriorityCommand(index, priority);
+        return priority;
     }
 }

@@ -27,7 +27,6 @@ import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeletePersonCommand;
-import seedu.contax.logic.commands.DeletePriorityCommand;
 import seedu.contax.logic.commands.DeleteTagCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
@@ -258,12 +257,6 @@ public class AddressBookParserTest {
     public void parseCommand_editPriorityCommand() throws Exception {
         assertTrue(parser.parseCommand(EditPriorityCommand.COMMAND_WORD
                 + " 1 pri/high") instanceof EditPriorityCommand);
-    }
-
-    @Test
-    public void parseCommand_deletePriorityCommand() throws Exception {
-        assertTrue(parser.parseCommand(DeletePriorityCommand.COMMAND_WORD
-                + " 1") instanceof DeletePriorityCommand);
     }
 
     @Test

@@ -13,11 +13,10 @@ import seedu.contax.model.appointment.Priority;
 
 
 /**
- * Edits the level of an existing priority in the address book
- * Edits of priority can be set to low, medium or high
+ * Edits the level of an existing priority in the appointment list with level low, medium or high
  */
 public class EditPriorityCommand extends Command {
-    public static final String COMMAND_WORD = "editpriority";
+    public static final String COMMAND_WORD = "priority";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the level of priority.\n"
             + "Parameters: INDEX pri/PRIORITY\n"
@@ -28,12 +27,12 @@ public class EditPriorityCommand extends Command {
     private final Priority priority;
 
     /**
+     *
      * @param index The specified index to update the priority
      * @param priority Details to edit the priority with
      */
     public EditPriorityCommand(Index index, Priority priority) {
         requireNonNull(index);
-        requireNonNull(priority);
 
         this.index = index;
         this.priority = priority;
@@ -50,11 +49,17 @@ public class EditPriorityCommand extends Command {
         }
 
         Appointment appointment = appointmentList.get(index.getZeroBased());
-        Appointment editedAppointment = appointment.setPriority(priority);
+        Appointment editedAppointment = appointment.withPriority(priority);
+
+        String priorityFeedbackMessage = "None";
+
+        if (priority != null) {
+            priorityFeedbackMessage = priority.toString();
+        }
 
         model.setAppointment(appointment, editedAppointment);
         return new CommandResult(
-                String.format(MESSAGE_EDIT_PRIORITY_SUCCESS, index.getOneBased(), priority.toString()));
+                String.format(MESSAGE_EDIT_PRIORITY_SUCCESS, index.getOneBased(), priorityFeedbackMessage));
     }
 
     @Override
@@ -68,6 +73,10 @@ public class EditPriorityCommand extends Command {
         }
 
         EditPriorityCommand e = ((EditPriorityCommand) o);
-        return e.index.equals(index) && e.priority.equals(priority);
+
+        Priority thisPriority = (priority != null) ? priority : Priority.NONE;
+        Priority otherPriority = (e.priority != null) ? e.priority : Priority.NONE;
+
+        return e.index.equals(index) && thisPriority.equals(otherPriority);
     }
 }

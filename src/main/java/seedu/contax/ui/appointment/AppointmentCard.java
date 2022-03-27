@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.Priority;
 import seedu.contax.model.person.Person;
 import seedu.contax.ui.UiPart;
 
@@ -85,44 +86,33 @@ public class AppointmentCard extends UiPart<Region> {
                 personAddress.setText("");
             }
 
-            if (appointmentModel.getPriority() != null) {
-                switch (appointmentModel.getPriority()) {
-                case HIGH:
-                    priority.setText("High");
-                    priority.setStyle(
-                            "-fx-background-color: lightpink; "
-                                    + "-fx-text-fill: black;"
-                                    + "-fx-padding: 5 20;"
-                                    + "-fx-background-radius: 50"
-                    );
-                    break;
-                case MEDIUM:
-                    priority.setText("Medium");
-                    priority.setStyle(
-                            "-fx-background-color: lightyellow; "
-                                    + "-fx-text-fill: black;"
-                                    + "-fx-padding: 5 20;"
-                                    + "-fx-background-radius: 50"
-                    );
-                    break;
-                case LOW:
-                    priority.setText("Low");
-                    priority.setStyle(
-                            "-fx-background-color: lightgreen; "
-                                    + "-fx-text-fill: black;"
-                                    + "-fx-padding: 5 20;"
-                                    + "-fx-background-radius: 50"
-                    );
-                    break;
-                default:
-                    priority.setText("");
-                }
-            }
+            updatePriorityStyle(appointmentModel.getPriority());
+
         }
 
         if (displayedIndex != this.displayedIndex) {
             this.displayedIndex = displayedIndex;
             id.setText(displayedIndex + ". ");
+        }
+    }
+
+    private void updatePriorityStyle(Priority modelPriority) {
+        if (appointmentModel.getPriority() != null) {
+            priority.setText(modelPriority.toString());
+            switch (appointmentModel.getPriority()) {
+            case HIGH:
+                priority.setStyle("-fx-background-color: lightpink;");
+                break;
+            case MEDIUM:
+                priority.setStyle("-fx-background-color: lightyellow;");
+                break;
+            default:
+                priority.setStyle("-fx-background-color: lightgreen;");
+                break;
+            }
+        } else {
+            priority.setText("");
+            priority.setStyle("-fx-background-color: none;");
         }
     }
 

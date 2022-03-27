@@ -47,9 +47,9 @@ public class Appointment extends ScheduleItem {
     }
 
     /**
-     * Additional Constructs an {@code Appointment}.
-     * The fields requirements follows the previous
-     * The fields {@code priority} must be present and not null.
+     * Constructs an {@code Appointment} with additional attribute priority.
+     * The fields {@code name, startDateTime, duration} must be present and not null.
+     * The fields {@code priority} is optional and may be null.
      *
      * @param name A valid Appointment Name.
      * @param startDateTime A valid Appointment Starting DateTime.
@@ -60,6 +60,7 @@ public class Appointment extends ScheduleItem {
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
                 Appointment.getEndDateTimeOrThrow(startDateTime, duration));
+        requireNonNull(name);
 
         this.name = name;
         this.startDateTime = startDateTime;
@@ -93,7 +94,7 @@ public class Appointment extends ScheduleItem {
         return priority;
     }
 
-    public Appointment setPriority(Priority priority) {
+    public Appointment withPriority(Priority priority) {
         return new Appointment(name, startDateTime, duration, person, priority);
     }
 

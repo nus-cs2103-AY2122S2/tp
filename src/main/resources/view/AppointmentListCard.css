@@ -1,0 +1,5 @@
+#priority {
+    -fx-text-fill: black;
+    -fx-padding: 5 20;
+    -fx-background-radius: 50
+}

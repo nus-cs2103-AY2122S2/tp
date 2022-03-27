@@ -44,10 +44,10 @@ public class EditPriorityCommandParserTest {
         assertParseFailure(parser, "0 pri/high", MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
 
         // invalid arguments as preamble
-        assertParseFailure(parser, "1 some random text", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0 some random text", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 pri/null",
+        assertParseFailure(parser, "1 pri/123",
                 String.format(MESSAGE_INVALID_PRIORITY_LEVEL, EditPriorityCommand.MESSAGE_USAGE));
     }
 
@@ -56,5 +56,6 @@ public class EditPriorityCommandParserTest {
         assertParseSuccess(parser, "1 pri/high", new EditPriorityCommand(Index.fromOneBased(1), Priority.HIGH));
         assertParseSuccess(parser, "1 pri/medium", new EditPriorityCommand(Index.fromOneBased(1), Priority.MEDIUM));
         assertParseSuccess(parser, "1 pri/low", new EditPriorityCommand(Index.fromOneBased(1), Priority.LOW));
+        assertParseSuccess(parser, "1 pri/none", new EditPriorityCommand(Index.fromOneBased(1), Priority.NONE));
     }
 }
