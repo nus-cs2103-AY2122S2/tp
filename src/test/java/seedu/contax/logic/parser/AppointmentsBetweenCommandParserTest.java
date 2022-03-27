@@ -1,6 +1,5 @@
 package seedu.contax.logic.parser;
 
-import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_TIME;
 import static seedu.contax.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -83,8 +82,7 @@ public class AppointmentsBetweenCommandParserTest {
 
     @Test
     public void parse_endTimeWithoutEndDate_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AppointmentsBetweenCommand.MESSAGE_USAGE);
+        String expectedMessage = AppointmentsBetweenCommand.MESSAGE_END_TIME_WITHOUT_DATE;
         assertParseFailure(parser, INPUT_END_TIME, expectedMessage);
     }
 

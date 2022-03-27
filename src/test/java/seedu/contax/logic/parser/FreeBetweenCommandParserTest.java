@@ -91,8 +91,7 @@ public class FreeBetweenCommandParserTest {
 
     @Test
     public void parse_endTimeWithoutEndDate_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FreeBetweenCommand.MESSAGE_USAGE);
+        String expectedMessage = FreeBetweenCommand.MESSAGE_END_TIME_WITHOUT_DATE;
         assertParseFailure(parser, INPUT_END_TIME + INPUT_DURATION, expectedMessage);
     }
 

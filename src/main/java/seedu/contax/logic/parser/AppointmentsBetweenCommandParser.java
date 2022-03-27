@@ -29,15 +29,15 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
      */
     public AppointmentsBetweenCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE_START, PREFIX_TIME_START,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE_START, PREFIX_TIME_START,
                         PREFIX_DATE_END, PREFIX_TIME_END);
 
-        if (!argMultimap.getPreamble().isEmpty()
-            || (argMultimap.getValue(PREFIX_TIME_END).isPresent()
-                && argMultimap.getValue(PREFIX_DATE_END).isEmpty())) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentsBetweenCommand.MESSAGE_USAGE));
+        }
+        if (argMultimap.getValue(PREFIX_TIME_END).isPresent() && argMultimap.getValue(PREFIX_DATE_END).isEmpty()) {
+            throw new ParseException(AppointmentsBetweenCommand.MESSAGE_END_TIME_WITHOUT_DATE);
         }
 
         LocalDate startDate = getArgumentOrElse(LocalDate.now(), argMultimap.getValue(PREFIX_DATE_START),
