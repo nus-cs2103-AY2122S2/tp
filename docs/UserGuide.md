@@ -71,14 +71,14 @@ Adds a student to the tracking list
   - `STATUS` takes either of these strings `Positive`, `Negative`, `Close-Contact`
     - `STATUS` is case-sensitive and should strictly follow the strings stated above
 - Examples:
-  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 c/5A s/Negative`
-  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 p/1234567 c/2B s/Positive act/choir dance`
+  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 cc/5A s/Negative`
+  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 cc/2B s/Positive act/choir`
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
-> - Multiple activity tags can be added to a single student  
->   - Eg. `act/choir dance`  
+> - Multiple activity tags can be added to a single student by using multiple `/act` prefixes  
+>   - Eg. `act/choir act/dance`  
 > - A student can also have no activity tags  
 > - Parameters can be in any order
 
@@ -227,17 +227,17 @@ A: We are working on a feature to allow importing of **.csv** files into _**UDT*
 ----------------
 ## Command Summary
 
-| Action                                                             | Format                                                                                             | Example                                                                                                        |
-|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| [Add a student](#add-a-student-add)                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS [act/ACTIVITIES]`                    | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
-| [List all students](#list-all-students-list)                       | `list`                                                                                             | `list`                                                                                                         |
-| [Find student by name](#find-student-by-name-find)                 | `find NAME [MORE_NAME]`                                                                            | `find James Jake`                                                                                              |
-| [Find student by status](#find-student-by-status-findstatus)       | `findstatus STATUS`                                                                                | `findstatus positive`                                                                                          |
-| [Find student by class](#find-student-by-class-findclasscode)      | `findclasscode CLASS`                                                                              | `findclasscode 4A`                                                                                             |
-| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY`                                                                            | `findactivity choir`                                                                                           |
-| [Edit student details](#edit-student-details-edit)                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| [Delete a student](#delete-a-student-delete)                       | `delete INDEX`                                                                                     | `delete 3`                                                                                                     |
-| [Exit the application](#exit-the-application-exit)                 | `exit`                                                                                             | `exit`                                                                                                         |
+| Action                                                             | Format                                                                                             | Example                                                                                                         |
+|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| [Add a student](#add-a-student-add)                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cc/CLASS s/STATUS [act/ACTIVITIES]`                   | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 cc/5A s/Negative act/badminton` |
+| [List all students](#list-all-students-list)                       | `list`                                                                                             | `list`                                                                                                          |
+| [Find student by name](#find-student-by-name-find)                 | `find NAME [MORE_NAME]`                                                                            | `find James Jake`                                                                                               |
+| [Find student by status](#find-student-by-status-findstatus)       | `findstatus STATUS`                                                                                | `findstatus positive`                                                                                           |
+| [Find student by class](#find-student-by-class-findclasscode)      | `findclasscode CLASS`                                                                              | `findclasscode 4A`                                                                                              |
+| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY`                                                                            | `findactivity choir`                                                                                            |
+| [Edit student details](#edit-student-details-edit)                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                     |
+| [Delete a student](#delete-a-student-delete)                       | `delete INDEX`                                                                                     | `delete 3`                                                                                                      |
+| [Exit the application](#exit-the-application-exit)                 | `exit`                                                                                             | `exit`                                                                                                          |
 
 ----------------
 
