@@ -26,7 +26,7 @@
               <Insets right="5.0" />
             </HBox.margin>
           </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#openUG" text="Open User Guide">
+          <Button fx:id="openUserGuideButton" mnemonicParsing="false" onAction="#openUG" text="Open User Guide">
             <HBox.margin>
               <Insets left="5.0" />
             </HBox.margin>
