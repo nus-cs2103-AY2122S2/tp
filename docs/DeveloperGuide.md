@@ -520,6 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​  | I want to …​                          | So that I can…​                                                               |
 |----------|----------|---------------------------------------|-------------------------------------------------------------------------------|
 | `* * *`  | user     | add a candidate to the system         | keep track of their application details for consideration.                    |
+| `* * *`  | user     | edit a candidate in the system        | correct any wrong inputs when I added this candidate.                         |
 | `* * *`  | user     | delete a candidate from the system    | remove entries that I no longer need.                                         |
 | `* * *`  | user     | find a candidate in the system        | access details of the candidate without having to go through the entire list. |
 | `* * *`  | user     | list all candidates in the system     | monitor the application pool.                                                 |
@@ -531,9 +532,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `TAlent Assistant™ Program` and the **Actor** is the `professor`, unless specified otherwise)
+(For all use cases below, the **System** is `TAlent Assistant™` and the **Actor** is the `professor`, unless specified otherwise)
 
-> Note: TA - Teaching Assistant
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on the abbreviations:**<br>
+
+TA - Teaching Assistant
+
+</div>
 
 <br>
 
@@ -563,6 +570,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  TAlent Assistant™ requests for TA's details
 3.  User inputs details
 4.  TAlent Assistant™ adds the new TA
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given format is invalid
+    * 3a1. TAlent Assistant™ shows an error message
+
+  Use case resumes at step 2.
+
+<hr>
+
+**Use case: Edit an existing TA in the system**
+
+**MSS**
+
+1.  User requests to edit a TA
+2.  TAlent Assistant™ requests for TA's inputs
+3.  User selects candidate to edit and inputs the updated details
+4.  TAlent Assistant™ edit the specified TA
 
     Use case ends.
 
