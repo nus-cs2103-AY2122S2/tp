@@ -29,8 +29,10 @@ public class AddWindow extends UiPart<Stage> {
     public static final String PHONE_LABEL = "Number: ";
     public static final String ADDRESS_LABEL = "Address: ";
     public static final String EMAIL_LABEL = "Email: ";
+    public static final String COMMENT_LABEL = "Comment: ";
     public static final String STAT_LABEL = "Status: ";
     public static final String MODULES_LABEL = "Modules: ";
+
 
     private static final Logger logger = LogsCenter.getLogger(AddWindow.class);
     private static final String FXML = "AddWindow.fxml";
@@ -58,6 +60,9 @@ public class AddWindow extends UiPart<Stage> {
     private Label emailLabel;
 
     @FXML
+    private Label commentLabel;
+
+    @FXML
     private Label statLabel;
 
     @FXML
@@ -77,6 +82,9 @@ public class AddWindow extends UiPart<Stage> {
 
     @FXML
     private TextField emailField;
+
+    @FXML
+    private TextField commentField;
 
     @FXML
     private TextField statField;
@@ -105,6 +113,7 @@ public class AddWindow extends UiPart<Stage> {
         phoneLabel.setText(PHONE_LABEL);
         addressLabel.setText(ADDRESS_LABEL);
         emailLabel.setText(EMAIL_LABEL);
+        commentLabel.setText(COMMENT_LABEL);
         statLabel.setText(STAT_LABEL);
         modulesLabel.setText(MODULES_LABEL);
         errorLabel.setText("");
@@ -129,7 +138,7 @@ public class AddWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing add page for the application.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -142,6 +151,7 @@ public class AddWindow extends UiPart<Stage> {
         phoneField.setText("");
         addressField.setText("");
         emailField.setText("");
+        commentField.setText("");
         statField.setText("");
         modulesField.setText("");
         errorLabel.setText("");
@@ -169,12 +179,22 @@ public class AddWindow extends UiPart<Stage> {
     }
 
     /**
+     * Retrieves the last index in {@code ReadOnlyAddressBook}'s list of Person.
+     * Indexing starts from 1.
+     * @return last 1-based index
+     */
+    private int getAbLastIndex() {
+        ReadOnlyAddressBook ab = logic.getAddressBook();
+        ObservableList<Person> personList = ab.getPersonList();
+        return personList.size();
+    }
+
+    /**
      * Adds a Status for the newly created Person object.
      */
     private void addStatusForNewPerson() {
-        ReadOnlyAddressBook ab = logic.getAddressBook();
-        ObservableList<Person> personList = ab.getPersonList();
-        int lastIndex = personList.size();
+        int lastIndex = getAbLastIndex();
+        StringBuilder commandText = new StringBuilder("status ").append(lastIndex);
         String status = statField.getText();
 
         if (status.equals("")) {
@@ -183,21 +203,20 @@ public class AddWindow extends UiPart<Stage> {
 
         // Do not need to handle the fact that the given status might not be valid.
         // This is handled by executeCommand
-        String setStatusCommand = "status " + lastIndex + " s/" + status;
+        commandText.append(" s/").append(status);
         try {
-            executeCommand(setStatusCommand);
+            executeCommand(commandText.toString());
         } catch (CommandException | ParseException e) {
             return;
         }
     }
 
     /**
-     * Adds the modules for the newly created Person object.
+     * Adds the {@code module} for the newly created {@code Person} object.
      */
     private void addModulesForNewPerson() {
-        ReadOnlyAddressBook ab = logic.getAddressBook();
-        ObservableList<Person> personList = ab.getPersonList();
-        int lastIndex = personList.size();
+        int lastIndex = getAbLastIndex();
+        StringBuilder commandText = new StringBuilder("addmodule ").append(lastIndex);
         String[] modules = modulesField.getText().split(" ");
 
         if (!modules[0].equals("")) {
@@ -212,12 +231,34 @@ public class AddWindow extends UiPart<Stage> {
             }
 
             // Then, execute the addmodule command.
-            String commandText = "addmodule " + lastIndex + " " + modsToAdd;
+            commandText.append(" ").append(modsToAdd);
             try {
-                executeCommand(commandText);
+                executeCommand(commandText.toString());
             } catch (CommandException | ParseException e) {
                 return;
             }
+        }
+    }
+
+    /**
+     * Adds a {@code comment} to the {@code Person} object.
+     */
+    private void addCommentForNewPerson() {
+        int lastIndex = getAbLastIndex();
+        StringBuilder commandText = new StringBuilder("comment ").append(lastIndex);
+        String comment = commentField.getText();
+
+        // If comment is empty, simply do nothing.
+        if (comment.equals("")) {
+            return;
+        }
+
+        // Otherwise, execute the comment command.
+        commandText.append(" c/").append(comment);
+        try {
+            executeCommand(commandText.toString());
+        } catch (CommandException | ParseException e) {
+            return;
         }
     }
 
@@ -307,6 +348,7 @@ public class AddWindow extends UiPart<Stage> {
         // Since user command execution is successful, then we do the other stuff next.
         // Notice that whenever a new Person is added into AddressBook, it'll list out all Persons.
         // So we simply need to retrieve the last Person added...
+        addCommentForNewPerson();
         addStatusForNewPerson();
         addModulesForNewPerson();
 
