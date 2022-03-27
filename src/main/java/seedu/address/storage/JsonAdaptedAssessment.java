@@ -79,7 +79,7 @@ class JsonAdaptedAssessment {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
         }
-        final TaModule modelModule = module.toModelType();
+        final TaModule modelModule = module.toModelType(studentList);
         if (!taModuleList.contains(modelModule)) {
             throw new IllegalValueException(NONEXISTENT_MODULE);
         }
