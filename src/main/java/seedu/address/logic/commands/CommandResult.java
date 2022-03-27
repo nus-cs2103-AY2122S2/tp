@@ -29,7 +29,7 @@ public class CommandResult {
      */
     private final boolean view;
 
-    private Optional<ViewDetails> studentDetails = Optional.empty();
+    private final Optional<ViewDetails> viewDetails;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -39,7 +39,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.view = view;
-        this.studentDetails = Optional.ofNullable(viewDetails);
+        this.viewDetails = Optional.ofNullable(viewDetails);
     }
 
     /**
@@ -55,7 +55,7 @@ public class CommandResult {
     }
 
     public ViewDetails getViewDetails() {
-        return studentDetails.orElseThrow();
+        return viewDetails.orElseThrow();
     }
 
     public boolean isShowHelp() {
@@ -84,7 +84,9 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && view == otherCommandResult.view
+                && viewDetails.equals(otherCommandResult.viewDetails);
     }
 
     @Override
