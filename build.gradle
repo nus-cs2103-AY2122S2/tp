@@ -22,6 +22,7 @@ checkstyle {
 
 test {
     useJUnitPlatform()
+    jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : false}"
     finalizedBy jacocoTestReport
 }
 
@@ -77,27 +78,4 @@ run {
     enableAssertions = true
 }
 
-task(allTests)
-
-test {
-    systemProperty 'testfx.setup.timeout', '60000'
-}
-
-task headless {
-    doLast {
-        println 'Setting headless mode properties.'
-        test {
-            systemProperties = [
-                    'testfx.robot': 'glass',
-                    'testfx.headless': 'true',
-                    'prism.order': 'sw',
-                    'prism.text': 't2k',
-            ]
-        }
-    }
-}
-
-// Makes sure that headless properties are set before running tests
-test.mustRunAfter headless
-
-defaultTasks 'clean', 'headless', 'allTests', 'coverage'
+defaultTasks 'clean', 'test'

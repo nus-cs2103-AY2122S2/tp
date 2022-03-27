@@ -22,6 +22,15 @@ import seedu.ibook.storage.StorageManager;
 @ExtendWith(ApplicationExtension.class)
 public class GuiTest {
 
+    static {
+        if (Boolean.getBoolean("headless")) {
+            System.setProperty("testfx.robot", "glass");
+            System.setProperty("testfx.headless", "true");
+            System.setProperty("prism.order", "sw");
+            System.setProperty("prism.text", "t2k");
+        }
+    }
+
     @TempDir
     public Path temporaryFolder;
 
