@@ -1,6 +1,5 @@
 package seedu.address.model.buyer;
 
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.client.Appointment;
@@ -17,24 +16,25 @@ import seedu.address.model.tag.Tag;
 public class Buyer extends Client {
 
     // Data fields
-    private final List<PropertyToBuy> propertiesToBuy;
+    private final PropertyToBuy propertyToBuy;
 
     /**
      * Constructor of Buyer class.
      */
     public Buyer(Name name, Phone phone, Appointment appointment, Set<Tag> tags,
-                 List<PropertyToBuy> properties) {
+                 PropertyToBuy propertyToBuy) {
         super(name, phone, appointment, tags);
-        this.propertiesToBuy = properties;
+        this.propertyToBuy = propertyToBuy;
     }
 
+
     /**
-     * Returns the properties the client is willing to buy.
+     * Returns the property the client wants to buy
      *
-     * @return List of PropertyToBuy.
+     * @return PropertyToBuy.
      */
-    public List<PropertyToBuy> getPropertiesToBuy() {
-        return propertiesToBuy;
+    public PropertyToBuy getPropertyToBuy() {
+        return propertyToBuy;
     }
 
     @Override
@@ -51,18 +51,7 @@ public class Buyer extends Client {
         return otherBuyer.getName().equals(getName())
                 && otherBuyer.getPhone().equals(getPhone())
                 && otherBuyer.getTags().equals(getTags())
-                && otherBuyer.hasSameProperties(this);
+                && otherBuyer.getPropertyToBuy().equals(getPropertyToBuy());
     }
 
-    /**
-     * Checks if 2 Buyers have the matching properties.
-     *
-     * @param other The other Buyer.
-     * @return Whether their properties match.
-     */
-    public boolean hasSameProperties(Buyer other) {
-        return propertiesToBuy.containsAll(other.propertiesToBuy)
-                && other.propertiesToBuy.containsAll(propertiesToBuy);
-
-    }
 }

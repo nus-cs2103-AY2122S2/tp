@@ -1,7 +1,6 @@
 package seedu.address.model.property;
 
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -12,14 +11,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class PriceRange {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "PriceRange: lower should be lower than upper(inclusive), and all values should be non-negative";
+        "PriceRange: lower should be lower than upper(inclusive), all values should be non-negative, and please"
+                + "use numerical values";
 
     /**
      * The lower and upper bounds are inclusive, meaning the lower bound includes the lower and higher value itself,
      * respectively.
      */
-    private int lower;
-    private int upper;
+    private final int lower;
+    private final int upper;
 
     /**
      * Constructor
@@ -27,12 +27,58 @@ public class PriceRange {
      * @param upper upper bound of the PriceRange, inclusive.
      */
     public PriceRange(int lower, int upper) {
-        requireNonNull(lower);
-        requireNonNull(upper);
         checkArgument(isValidPriceRange(lower, upper), MESSAGE_CONSTRAINTS);
 
         this.lower = lower;
         this.upper = upper;
+    }
+
+    /**
+     * Constructor of the class during parsing.
+     *
+     * @param priceRange The string to be converted to int price ranges.
+     */
+    public PriceRange(String priceRange) {
+        int[] bounds = getValuesFromString(priceRange);
+        this.lower = bounds[0];
+        this.upper = bounds[1];
+    }
+
+    /**
+     * Retrieves the numerical values from the String priceRange.
+     *
+     * @param priceRange The string.
+     * @return An int[] containing lower and upper bounds.
+     */
+    private int[] getValuesFromString(String priceRange) {
+        String[] values = priceRange.split(",");
+        values[0] = values[0].trim();
+        values[1] = values[1].trim();
+        int lower = Integer.parseInt(values[0]);
+        int upper = Integer.parseInt(values[1]);
+        return new int[] {lower, upper};
+    }
+
+    /**
+     * Checks if the given string can be converted to a numerical price range.
+     *
+     * @param priceRange The string.
+     * @return True if it can be converted, False otherwise.
+     */
+    public static boolean isValidPriceRange(String priceRange) {
+        try {
+            String[] numbers = priceRange.split(",");
+            if (numbers.length != 2) {
+                return false;
+            }
+            numbers[0] = numbers[0].trim();
+            numbers[1] = numbers[1].trim();
+            int lower = Integer.parseInt(numbers[0]);
+            int upper = Integer.parseInt(numbers[1]);
+            return isValidPriceRange(lower, upper);
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
@@ -42,15 +88,24 @@ public class PriceRange {
      * @return True if PriceRange is valid, False otherwise.
      */
     public static boolean isValidPriceRange(int lower, int upper) {
-        return lower >= 0 && upper >= 0 && lower <= upper;  //valid as long as positive and lower is lower than upper
+        //valid as long as positive and lower is lower than upper
+        return lower >= 0 && upper >= 0 && lower <= upper;
     }
 
     public int getLower() {
         return this.lower;
     }
 
+    public String getLowerToString() {
+        return Integer.toString(this.lower);
+    }
+
     public int getUpper() {
         return this.upper;
+    }
+
+    public String getUpperToString() {
+        return Integer.toString(this.upper);
     }
 
     /**
@@ -69,7 +124,7 @@ public class PriceRange {
      * is within the toSell PriceRange.
      * @param buyRange the priceRange a buyer is willing to buy a Property for.
      * @param sellRange the priceRange a seller is willing to sell a Property for.
-     * @return True if the a price in the buyRange can match one in the sellRange, false otherwise.
+     * @return True if the price in the buyRange can match one in the sellRange, false otherwise.
      */
     public static boolean canMatchPrice(PriceRange buyRange, PriceRange sellRange) {
         // [50, 100] , [99, 200] should match.
