@@ -45,7 +45,7 @@ public class hasMatchWithBuyerPredicate implements Predicate<Seller> {
     }
 
     public PropertyToBuy getPropertyToBuy() {
-        return buyer.getDesiredProperty();
+        return buyer.getPropertyToBuy();
     }
 
     public PropertyToSell getPropertyToSell(Seller seller) {
