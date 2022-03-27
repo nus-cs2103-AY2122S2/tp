@@ -46,6 +46,16 @@ public class CommandBox extends UiPart<Region> {
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.UP) {
+                setPreviousCommand();
+            } else if (event.getCode() == KeyCode.DOWN) {
+                setNextCommand();
+            } else if (event.getCode() == KeyCode.TAB) {
+                event.consume();
+                autocomplete(commandTextField.getText());
+            }
+        });
     }
 
     /**
@@ -77,17 +87,6 @@ public class CommandBox extends UiPart<Region> {
             commandExecutor.execute(commandText);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
-        }
-    }
-
-    @FXML
-    private void onKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.UP) {
-            setPreviousCommand();
-        } else if (event.getCode() == KeyCode.DOWN) {
-            setNextCommand();
-        } else if (event.getCode() == KeyCode.CONTROL) {
-            autocomplete(commandTextField.getText());
         }
     }
 
