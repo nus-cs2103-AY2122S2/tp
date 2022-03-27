@@ -58,10 +58,12 @@ Tracey can get your student health status management tasks done faster than trad
 
 ## Features
 ### Finding a contact: `find`
-Find a particular contact in Tracey.
+Find a particular contact in Tracey and retrieve their specific details.
 
 Format: `find NAME`
-* Returns the student(s) with the given details: `covid-positive`, `covid-negative`, `close-contact`
+* Returns the student(s) with their student specific **details**.
+* The **details** provided are the student's `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+* A screenshot (Figure 1) is provided below to demonstrate what the find function returns to the user.
 * The search is case-insensitive. e.g `johnDoe` will match `Johndoe`
 * The search does not require full name. e.g. `jo` will match `Joe` and `John`
 
@@ -71,6 +73,11 @@ Examples of usages:
 * `find alex david` returns `Alex Yeoh` and`David Li`
 * `find J` returns `john` and`jay`
 
+Scenario:
+![find](images/FindScreenshotForUG.png) Figure 1
+
+
+As seen in the figure, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 ### Adding a contact: `add`
 Add a student with relevant details into Tracey.
 
