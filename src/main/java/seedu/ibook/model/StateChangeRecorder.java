@@ -1,9 +1,7 @@
 package seedu.ibook.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * A class that keeps records of changes to iBook.
@@ -14,17 +12,21 @@ public class StateChangeRecorder {
      * A class that represents a single state change.
      */
     private static class StateChange {
-        private final List<Consumer<IBook>> forwardActionList;
-        private final List<Consumer<IBook>> reverseActionList;
+        private final List<ReversibleIBookAction> actionList;
 
-        public StateChange(List<Consumer<IBook>> forwardActionList, List<Consumer<IBook>> reverseActionList) {
-            this.forwardActionList = forwardActionList;
-            this.reverseActionList = reverseActionList;
+        public StateChange(List<ReversibleIBookAction> actionList) {
+            this.actionList = actionList;
         }
 
         @Override
         public String toString() {
-            return String.format("A state change comprising of %d actions", forwardActionList.size());
+            return String.format("A state change comprising %d actions", actionList.size());
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this
+                    || (other instanceof StateChange && actionList.equals(((StateChange) other).actionList));
         }
     }
 
@@ -32,11 +34,12 @@ public class StateChangeRecorder {
     private static final int LIST_OFFSET = 1;
 
     private final List<StateChange> stateChanges;
-    // A variable acting as a pointer to most recent state change.
+
+    // A variable acting as a pointer to the most recent state change.
     private int curStateChange;
 
-    private List<Consumer<IBook>> nextForwardActionList;
-    private List<Consumer<IBook>> nextReverseActionList;
+    // List of new actions to be performed.
+    private List<ReversibleIBookAction> newActionList;
 
     /**
      * Class constructor.
@@ -52,32 +55,30 @@ public class StateChangeRecorder {
      * Gets a new workspace for recording next possible state change.
      */
     public void prepareNewStateChange() {
-        nextForwardActionList = new ArrayList<>();
-        nextReverseActionList = new ArrayList<>();
+        newActionList = new ArrayList<>();
     }
 
-    public void addForwardAction(Consumer<IBook> forwardAction) {
-        nextForwardActionList.add(forwardAction);
+    /**
+     * Records down the action to be performed.
+     * @param action the action to be performed.
+     */
+    public void recordAction(ReversibleIBookAction action) {
+        newActionList.add(action);
     }
 
-    public void addReverseAction(Consumer<IBook> reverseAction) {
-        nextReverseActionList.add(reverseAction);
-    }
-
-    public List<Consumer<IBook>> getCurrentForwardActionList() {
-        return stateChanges.get(curStateChange).forwardActionList;
-    }
-
-    public List<Consumer<IBook>> getCurrentReverseActionList() {
-        return stateChanges.get(curStateChange).reverseActionList;
+    /**
+     * Gets the list of actions in the {@code stateChange} indicated by {@code curStateChange}.
+     * @return a copy of action list in the {@code stateChange} indicated by {@code curStateChange}.
+     */
+    public List<ReversibleIBookAction> getCurrentActionList() {
+        return new ArrayList<>(stateChanges.get(curStateChange).actionList);
     }
 
     /**
      * Saves the changes made to iBook.
      */
     public void saveStateChange() {
-        Collections.reverse(nextReverseActionList);
-        StateChange nextStateChange = new StateChange(nextForwardActionList, nextReverseActionList);
+        StateChange nextStateChange = new StateChange(newActionList);
 
         stateChanges.subList(curStateChange + LIST_OFFSET, stateChanges.size()).clear();
         stateChanges.add(nextStateChange);
@@ -104,7 +105,7 @@ public class StateChangeRecorder {
      * Reverts most recently changes to IBook.
      */
     public void revertStateChange() {
-        curStateChange--;;
+        curStateChange--;
     }
 
     /**
@@ -116,6 +117,22 @@ public class StateChangeRecorder {
 
     @Override
     public String toString() {
-        return String.format("A state change recorder which has %d records of state change", stateChanges.size());
+        return String.format("A state change recorder having %d records of state change", stateChanges.size());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof StateChangeRecorder)) {
+            return false;
+        }
+
+        StateChangeRecorder o = (StateChangeRecorder) other;
+        return curStateChange == o.curStateChange
+                && stateChanges.equals(o.stateChanges)
+                && newActionList.equals(o.newActionList);
     }
 }

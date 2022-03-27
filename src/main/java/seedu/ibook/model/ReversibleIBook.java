@@ -1,7 +1,7 @@
 package seedu.ibook.model;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 import seedu.ibook.model.exceptions.AtLatestStateException;
 import seedu.ibook.model.exceptions.AtOldestStateException;
@@ -59,8 +59,9 @@ public class ReversibleIBook extends IBook {
             throw new AtOldestStateException();
         }
 
-        List<Consumer<IBook>> reverseActionList = stateChangeRecorder.getCurrentReverseActionList();
-        reverseActionList.forEach(action -> action.accept(this));
+        List<ReversibleIBookAction> actionList = stateChangeRecorder.getCurrentActionList();
+        Collections.reverse(actionList);
+        actionList.forEach(action -> action.performBackwardAction(this));
         stateChangeRecorder.revertStateChange();
     }
 
@@ -73,8 +74,8 @@ public class ReversibleIBook extends IBook {
         }
 
         stateChangeRecorder.restoreStateChange();
-        List<Consumer<IBook>> forwardActionList = stateChangeRecorder.getCurrentForwardActionList();
-        forwardActionList.forEach(action -> action.accept(this));
+        List<ReversibleIBookAction> actionList = stateChangeRecorder.getCurrentActionList();
+        actionList.forEach(action -> action.performForwardAction(this));
     }
 
     /// reversible versions of parent class methods
@@ -84,8 +85,7 @@ public class ReversibleIBook extends IBook {
      */
     public void reversibleAddProduct(Product product) {
         addProduct(product);
-        stateChangeRecorder.addForwardAction(iBook -> iBook.addProduct(product));
-        stateChangeRecorder.addReverseAction(iBook -> iBook.removeProduct(product));
+        stateChangeRecorder.recordAction(new ReversibleAddProductAction(product));
     }
 
     /**
@@ -93,8 +93,7 @@ public class ReversibleIBook extends IBook {
      */
     public void reversibleRemoveProduct(Product product) {
         removeProduct(product);
-        stateChangeRecorder.addForwardAction(iBook -> iBook.removeProduct(product));
-        stateChangeRecorder.addReverseAction(iBook -> iBook.addProduct(product));
+        stateChangeRecorder.recordAction(new ReversibleRemoveProductAction(product));
     }
 
     /**
@@ -102,8 +101,7 @@ public class ReversibleIBook extends IBook {
      */
     public void reversibleSetProduct(Product target, Product updatedProduct) {
         setProduct(target, updatedProduct);
-        stateChangeRecorder.addForwardAction(iBook -> iBook.setProduct(target, updatedProduct));
-        stateChangeRecorder.addReverseAction(iBook -> iBook.setProduct(updatedProduct, target));
+        stateChangeRecorder.recordAction(new ReversibleSetProductAction(target, updatedProduct));
     }
 
     @Override

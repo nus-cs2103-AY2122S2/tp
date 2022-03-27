@@ -36,7 +36,7 @@ public class IBook implements ReadOnlyIBook {
      * Replaces the contents of the product list with {@code products}.
      * {@code products} must not contain duplicate products.
      */
-    public void setProducts(List<Product> products) {
+    private void setProducts(List<Product> products) {
         this.products.setProducts(products);
     }
 
