@@ -42,9 +42,9 @@ Tracey can get your student health status management tasks done faster than trad
 
 * **`list`** : Lists all contacts.
 
-* **`summarise`** : summarise all contacts into their respective faculty and informs the reader percentage of student from that faculty is Covid positive.
+* **`summarise`** : Summarises all contacts into their respective faculty and informs the reader percentage of student from that faculty is Covid positive.
 
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* **`add`**`add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` : Adds a contact named `John Doe` to the Tracey.
 
 * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -82,15 +82,19 @@ As seen in the *figure 1*, after the user keys in `find Bernice`, the applicatio
 ### Adding a contact: `add`
 Add a student with relevant details into Tracey.
 
-Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
-* Add a student with the specific tags
+Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
+* Add a student with the specific tags, the tags are optional and you can add as many tags as you like
+  * Duplicate tags will be displayed as a single tag 
 * The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey
 * Phone Number, email and matriculation number must be **unique** to each student
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
 * Tracey will acknowledge that the student has been added
-* Tags for faculty and covid status need to be specific to the list defined below (refer to Pre-defined constants).
-* If the inputted tag is not one of those defined in the **Pre-defined constants** as described in Figure 3, there will be an error and the user will have to input the details again.
+* Faculty and covid status need to be an pre-defined constant specific to the list defined below (refer to Pre-defined constants).
+* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Figure 3, there will be an error and the user will have to input the details for the keyword again.
 
+Examples of usage:
+* `add n/Melvin f/SOC cs/ Negative`
+* `add e/student69@u.nus.edu n/ Martin`=
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
 |:--------------------:|:-----------------:|
@@ -98,12 +102,7 @@ Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 |        f/SoC         |      f/SooC       |  
 *Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3.*
 
-Examples of usage:
-* `add n/Melvin f/SOC cs/ Negative`
-* `add e/student69@u.nus.edu n/ Martin`
-
-
-| **Tag** | **Meaning** |                                                 **Pre-defined constants**                                                  |
+| **Prefix** | **Meaning** |                                                 **Pre-defined constants**                                                  |
 |:-------:|:-----------:|:--------------------------------------------------------------------------------------------------------------------------:|
 |    `n/`     |       Name        |                                                                                                                            |
 |    `p/`     |      Phone Number       |                                                                                                                            |
@@ -112,6 +111,7 @@ Examples of usage:
 |    `f/`     |      Faculty       |             `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`              |
 |    `mc/`     |      Matriculation Number       |                                                                                                                            |
 |    `cs/`     |      Covid Status       |                                               `Positive`, `Negative`, `HRN`                                                |
+|     `t/`    |      Optional tag(s)   |       No restrictions                                                                                       |
 *Figure 3: Table showing list of possible tags and the Pre-defined constants*
 
 As described in Figure 3, these are the possible tags that can be used with **Tracey**. E.g `n/`, `cs/` etc.
@@ -120,32 +120,34 @@ In addition, the list of Pre-defined constants are also provided for `Faculty` a
 ### Deleting a contact: `delete`
 Delete a contact at a specific index
 
-Format: `delete NAME`
-* Delete the student from the database
-* Deletes one student at a time
-* Can only delete at an index where a student exist
+Format: `delete INDEX`
+* Deletes the student at the specified INDEX. The index refers to the index number shown in the displayed student list.
+  The index **must be a positive integer** 1, 2, 3, …
+* Deletes one student at a time.
+* Can only delete at an index where a student exist.
 
 Examples of usage:
 * `delete 2` removes the 2nd student on the list
 * `delete 10` removes the 10th student on the list
 
 ### Editing an existing contact: `edit`
-* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list.
+* Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list.
   The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* The value to be edited must not be the same as the corresponding field value of the student.
+* When editing tags, the existing tags of the will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing t/ without specifying any tags after it.
 
 Format: `edit INDEX n/NAME ...`
 
 Examples of usage:
-* `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567`
+* `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st student to be `91234567`
   and `johndoe@example.com` respectively.
 * `edit 2 n/David Limpeh t/` edits the entry to become `David Limpeh` and clears all existing tags.
 
 ### Clearing all records: `clear`
-Clear all the data inside `Tracey`
+Clear all the data inside `Tracey`.
 
 Format:`clear`
 
@@ -185,37 +187,37 @@ This is a sample screenshot of what you can expect from the `list` command.
 Format: `help`
 
 ### Filtering contacts: `filter`
-Filter student based on health statuses and/or faculties
+Filter student based on health statuses and/or faculties.
 
 Format:`filter cs/HEALTH_STATUS f/FACULTY`
 
-* Returns a list of students with the given health status: `positive`, `negative`, `hrn`
-* The search is case-insensitive. e.g `Positive` will match `positive`
+* Returns a list of students with the given health status: `positive`, `negative`, `hrn`.
+* The search is case-insensitive. e.g `Positive` will match `positive`.
 
 Examples of usage:
-* `filter cs/positive` returns all students that are tagged as covid-positive
-* `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing)
-* `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing)
+* `filter cs/positive` returns all students that are tagged as covid-positive.
+* `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing).
+* `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing).
 
 ### Archiving address book: `archive`
-Archives the current address book file
+Archives the current address book file.
 
 Format: `archive`
 
-* The archived file will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where
-  * `[ROOT]`: Root directory of Tracey
-  * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY
-  * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss
+* The archived file will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
+  * `[ROOT]`: Root directory of Tracey.
+  * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
+  * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss.
 
 Example:
-* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33 (hh:mm:ss in 24-hour notation)
-* The archived file will be saved **in** `[ROOT]/data/archive/270322`
-* The archived file will be saved **as** `270322_152833`
-* The file path will be `[ROOT]/data/archive/270322/270322_152833`
+* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33 (hh:mm:ss in 24-hour notation).
+* The archived file will be saved **in** `[ROOT]/data/archive/270322`.
+* The archived file will be saved **as** `270322_152833`.
+* The file path will be `[ROOT]/data/archive/270322/270322_152833`.
 
 Tips:
-* You can rename the archived file in the file path manually for easier reference
-* To restore the address book to a previous version, just replace the address book file in `[ROOT]/data` with the archived file
+* You can rename the archived file in the file path manually for easier reference.
+* To restore the address book to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
@@ -235,11 +237,11 @@ The `Show Email` button opens up a separate window that consists of all the emai
 2. **Q**: What is the difference between the `list` command and `summarise` command? <br>
    **A**: The main differences of `list` and `summarise` are:
 
-        a. The `list` command will provide an unfiltered list of students `summarise` command will tabulate the studnets into pie charts according to the block they stay in and faculty they belong to. <br>
+        a. The `list` command will provide an unfiltered list of students `summarise` command will tabulate the students into pie charts according to the block they stay in and faculty they belong to.
 
-        b. `list` is helpful to get a bird eye view of the details of all the students whereas `summarise` is great to analyse how certain areas in the hall compound is doing. <br>
+        b. `list` is helpful to get a bird eye view of the details of all the students whereas `summarise` is great to analyse how certain areas in the hall compound is doing.
 
-        c. `list` is optimal to find a particular student out of everyone while `summarise` is optimal to find which block is dealing not-so-well with the covid outbreak. <br>
+        c. `list` is optimal to find a particular student out of everyone while `summarise` is optimal to find which block is dealing not-so-well with the covid outbreak.
 
 3. **Q**: Can I use filter using keywords to find certain people in the list of students? <br>
    **A**: Unfortunately `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`. Please use the `find` command instead which will allow you to search via keywords. <br>
@@ -248,16 +250,17 @@ The `Show Email` button opens up a separate window that consists of all the emai
    **A**: They can be found in the numbers located beside each individual student. <br>
    ![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
 
-5. **Q**: The `delete` feature only allow us to delete via the `INDEX` assigned to each particular person. How do I know the `INDEX` of the student i want to use `delete` on? <br>
+5. **Q**: The `delete` feature only allow us to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `delete` on? <br>
    **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `delete`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
    
-6. **Q**: The `edit` feature only allow us to edit via the `INDEX` assigned to each particular person. How do I know the `INDEX` of the student i want to use `edit` on? <br>
+6. **Q**: The `edit` feature only allow us to edit via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `edit` on? <br>
    **A**: The `INDEX` used for `edit` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `edit`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
 
 7. **Q**: Can I create new tags not mentioned by the app? <br>
-   **A**: As the vision of the app is to monitor Covid Status of students in school accomodation, we have accounted for the tags needed by Hall Admins to maximise efficiency. There are no need for more tags! <br> 
+   **A**: Yes! You are able to add optional tags with no restrictions using the `t/` prefix.
+   
 --------------------------------------------------------------------------------------------------------------------
 
 ### Command Summary
