@@ -6,7 +6,7 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
 /**
- * Lists all products in the ibook to the user.
+ * Represents a command that when executed lists all products in the iBook to user.
  */
 public class ListCommand extends Command {
 

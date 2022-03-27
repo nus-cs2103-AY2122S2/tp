@@ -8,7 +8,7 @@ import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.ExpiredFilter;
 
 /**
- * Displays all products that has expired.
+ * Represents a command that when executed displays all products that have expired.
  */
 public class ExpiredCommand extends Command {
 

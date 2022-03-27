@@ -11,7 +11,8 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.filters.AttributeFilter;
 
 /**
- * Finds and lists all products in ibook which has details matching the searching criteria.
+ * Represents a command that when executed finds and lists all products in the iBook
+ * whose details match the searching criteria.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {

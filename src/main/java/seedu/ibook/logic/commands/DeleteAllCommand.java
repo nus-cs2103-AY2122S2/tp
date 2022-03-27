@@ -10,7 +10,8 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
 /**
- * Deletes from the ibook all products shown in the displayed list.
+ * Represents a command that when executed deletes from the iBook
+ * all products shown in the displayed list.
  */
 public class DeleteAllCommand extends Command {
 

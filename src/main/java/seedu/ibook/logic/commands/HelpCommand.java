@@ -3,7 +3,7 @@ package seedu.ibook.logic.commands;
 import seedu.ibook.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Represents a command that when executed opens the help window.
  */
 public class HelpCommand extends Command {
 

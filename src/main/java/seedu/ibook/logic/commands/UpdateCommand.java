@@ -20,7 +20,8 @@ import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 
 /**
- * Updates the details of an existing product in the ibook.
+ * Represents a command that when executed updates the details of an
+ * existing product in the iBook.
  */
 public class UpdateCommand extends Command {
 

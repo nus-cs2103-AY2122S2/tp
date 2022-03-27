@@ -11,7 +11,7 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
 /**
- * Deletes a product identified using it's displayed index from the ibook.
+ * Represents a command that when executed deletes a product from the iBook.
  */
 public class DeleteCommand extends Command {
 

@@ -13,7 +13,8 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
 /**
- * Updates the details of all products shown in the displayed list.
+ * Represents a command that when executed updates the details of all products
+ * shown in the displayed list.
  */
 public class UpdateAllCommand extends Command {
 

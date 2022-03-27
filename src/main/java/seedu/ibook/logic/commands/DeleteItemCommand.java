@@ -12,7 +12,7 @@ import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
 /**
- * Deletes an item of a specified product in the ibook.
+ * Represents a command that when executed deletes an item of a specified product in the iBook.
  */
 public class DeleteItemCommand extends Command {
 
