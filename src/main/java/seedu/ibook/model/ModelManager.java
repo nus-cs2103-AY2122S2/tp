@@ -86,7 +86,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setIBook(ReadOnlyIBook iBook) {
-        this.reversibleIBook.resetData(iBook);
+        this.reversibleIBook.reversibleResetData(iBook);
     }
 
     @Override
@@ -95,6 +95,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Product =====================================================================================
+
     @Override
     public boolean hasProduct(Product product) {
         requireNonNull(product);
@@ -139,7 +140,8 @@ public class ModelManager implements Model {
         reversibleIBook.reversibleSetItem(targetProduct, targetItem, updatedItem);
     }
 
-    //=========== Changes =====================================================================================
+    //=========== Undo/Redo ===================================================================================
+
     @Override
     public void prepareIBookForChanges() {
         reversibleIBook.prepareForChanges();
