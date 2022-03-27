@@ -26,6 +26,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.predicate.SameInterviewPredicate;
 import seedu.address.testutil.EditCandidateDescriptorBuilder;
 
 /**
@@ -172,4 +174,16 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredCandidateList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the candidate at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showInterviewAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredInterviewSchedule().size());
+
+        Interview interview = model.getFilteredInterviewSchedule().get(targetIndex.getZeroBased());
+        model.updateFilteredInterviewSchedule(new SameInterviewPredicate(interview));;
+
+        assertEquals(1, model.getFilteredInterviewSchedule().size());
+    }
 }
