@@ -38,7 +38,7 @@ class JsonAdaptedPropertyToSell {
         if (!(source instanceof NullPropertyToSell)) {
             this.house = new JsonAdaptedHouse(source.getHouse());
             this.priceRange = new JsonAdaptedPriceRange(source.getPriceRange());
-            this.address = source.getAddress();
+            this.address = source.getAddress().toString();
         } else {
             //Default value of NullPropertyToSell
             System.out.println("NullPropertyToSell is translating to JSON format");

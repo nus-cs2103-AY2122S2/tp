@@ -18,7 +18,7 @@ public class PropertyToSell {
     /**
      * The exact address of this house.
      */
-    private String address;
+    private Address address;
 
     /**
      * Constructs a PropertyToSell for the seller.
@@ -26,7 +26,7 @@ public class PropertyToSell {
      * @param priceRange the PriceRange that a seller is willing to sell the property for.
      * @param address the exact address of the property the seller is selling.
      */
-    public PropertyToSell(House house, PriceRange priceRange, String address) {
+    public PropertyToSell(House house, PriceRange priceRange, Address address) {
         this.house = house;
         this.priceRange = priceRange;
         this.address = address;
@@ -40,7 +40,7 @@ public class PropertyToSell {
         return this.priceRange;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return this.address;
     }
 
