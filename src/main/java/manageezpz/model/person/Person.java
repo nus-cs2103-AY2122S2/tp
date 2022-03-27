@@ -14,7 +14,6 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private int numOfTask;
 
     /**
      * Every field must be present and not null.
@@ -24,7 +23,6 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.numOfTask = 0;
     }
 
     public Name getName() {
@@ -52,17 +50,6 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    public void increaseTaskCount() {
-        this.numOfTask = numOfTask + 1;
-    }
-
-    public void decreaseTaskCount() {
-        this.numOfTask = numOfTask - 1;
-    }
-
-    public int getNumOfTask() {
-        return numOfTask;
-    }
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

@@ -8,7 +8,6 @@ import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
-import manageezpz.model.person.Person;
 import manageezpz.model.task.Task;
 
 /**
@@ -42,9 +41,6 @@ public class DeleteTaskCommand extends Command {
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTask(taskToDelete);
-        List<Person> affectedPersonList = taskToDelete.getAssignees();
-        affectedPersonList.forEach(Person::decreaseTaskCount);
-
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
