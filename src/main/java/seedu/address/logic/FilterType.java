@@ -1,20 +1,20 @@
 package seedu.address.logic;
 
-import seedu.address.commons.core.DataType;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import seedu.address.commons.core.DataType;
 
 public class FilterType {
 
-    public static final String MESSAGE_CONSTRAINTS
-            = "Invalid filter type for the data type specified\nRefer to help for the list of filter types";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid filter type for the data type specified\n"
+            + "Refer to help for the list of filter types";
 
-    public static final Map<DataType, HashSet<String>> validFilterTypes = loadFilterTypes();
+    public static final Map<DataType, HashSet<String>> VALID_FILTER_TYPES = loadFilterTypes();
 
     public final String filterType;
 
@@ -54,7 +54,7 @@ public class FilterType {
      * Returns true if a given string is a valid filter type for the given data type.
      */
     public static boolean isValidFilterType(DataType dataType, String filterType) {
-        return validFilterTypes.get(dataType).contains(filterType);
+        return VALID_FILTER_TYPES.get(dataType).contains(filterType);
     }
 
     @Override

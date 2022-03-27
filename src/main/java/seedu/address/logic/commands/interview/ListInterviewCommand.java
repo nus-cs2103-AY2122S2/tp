@@ -5,6 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.DataType;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
@@ -15,10 +19,6 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.InterviewApplicantPredicate;
 import seedu.address.model.interview.InterviewDatePredicate;
 import seedu.address.model.interview.InterviewPositionPredicate;
-
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.function.Predicate;
 
 /**
  * Lists interviews in HireLah to the user.

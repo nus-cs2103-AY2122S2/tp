@@ -5,9 +5,6 @@ import static seedu.address.commons.core.DataTypeFlags.FLAG_INTERVIEW;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
 
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.applicant.ListApplicantCommand;
-import seedu.address.logic.commands.interview.ListInterviewCommand;
-import seedu.address.logic.commands.position.ListPositionCommand;
 import seedu.address.logic.parser.applicants.ListApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.interview.ListInterviewCommandParser;

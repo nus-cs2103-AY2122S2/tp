@@ -26,7 +26,7 @@ public class ListApplicantCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
-
+    
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListApplicantCommand(), model, ListApplicantCommand.MESSAGE_SUCCESS, expectedModel);

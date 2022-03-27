@@ -1,5 +1,8 @@
 package seedu.address.logic.parser.applicants;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
+
 import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.FilterArgument;
@@ -10,9 +13,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 
 public class ListApplicantCommandParser implements Parser<ListApplicantCommand> {
 
@@ -28,8 +28,8 @@ public class ListApplicantCommandParser implements Parser<ListApplicantCommand> 
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILTER_TYPE, PREFIX_FILTER_ARGUMENT);
 
-        if (argMultimap.getValue(PREFIX_FILTER_TYPE).isPresent() &&
-                argMultimap.getValue(PREFIX_FILTER_ARGUMENT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_FILTER_TYPE).isPresent()
+                && argMultimap.getValue(PREFIX_FILTER_ARGUMENT).isPresent()) {
 
             FilterType filterType =
                     ParserUtil.parseFilterType(DataType.APPLICANT, argMultimap.getValue(PREFIX_FILTER_TYPE).get());

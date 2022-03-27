@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.DataType;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
@@ -13,9 +16,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantNamePredicate;
-
-import java.util.Arrays;
-import java.util.function.Predicate;
 
 /**
  * Lists applicants in HireLah to the user.
