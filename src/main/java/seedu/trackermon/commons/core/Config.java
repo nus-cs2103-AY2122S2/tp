@@ -10,7 +10,8 @@ import java.util.logging.Level;
  */
 public class Config {
 
-    public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
+    public static final Path DEFAULT_CONFIG_FILE = Paths.get(
+            JarTools.getClassLocationString(Config.class), "config.json");
 
     // Config values customizable through config file
     private Level logLevel = Level.INFO;
@@ -25,7 +26,8 @@ public class Config {
     }
 
     public Path getUserPrefsFilePath() {
-        return userPrefsFilePath;
+
+        return Paths.get(JarTools.getClassLocationString(Config.class), userPrefsFilePath.toString());
     }
 
     public void setUserPrefsFilePath(Path userPrefsFilePath) {

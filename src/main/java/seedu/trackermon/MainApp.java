@@ -1,6 +1,7 @@
 package seedu.trackermon;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -66,6 +67,10 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        if (!Files.exists(storage.getShowListFilePath())) {
+            storage.saveShowList(model.getShowList());
+        }
     }
 
     /**

@@ -46,7 +46,11 @@ public class ShowCard extends UiPart<Region> {
         this.show = show;
         id.setText(displayedIndex + ". ");
         name.setText(show.getName().fullName);
-        status.setText(show.getStatus().toString());
+
+        String statusString = show.getStatus().toString();
+        String statusMessage = "[" + statusString.substring(0, 1).toUpperCase()
+                + statusString.substring(1, statusString.length()) + "]";
+        status.setText(statusMessage);
         show.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
