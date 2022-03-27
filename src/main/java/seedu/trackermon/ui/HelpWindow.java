@@ -25,6 +25,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final double TITLE_COLUMN_RATIO = 0.2;
+    private static final double COMMAND_INPUT_RATIO = 0.795;
 
     private TableView<CommandBuilder> commandSummaryTableView;
 
@@ -126,8 +128,8 @@ public class HelpWindow extends UiPart<Stage> {
 
         table.setItems(commands);
 
-        titleColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.2));
-        commandInputColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.795));
+        titleColumn.prefWidthProperty().bind(table.widthProperty().multiply(TITLE_COLUMN_RATIO));
+        commandInputColumn.prefWidthProperty().bind(table.widthProperty().multiply(COMMAND_INPUT_RATIO));
 
         table.getColumns().add(titleColumn);
         table.getColumns().add(commandInputColumn);
