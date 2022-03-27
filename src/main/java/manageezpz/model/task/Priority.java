@@ -2,7 +2,7 @@ package manageezpz.model.task;
 
 public enum Priority {
 
-    HIGH(0), LOW(1), MEDIUM(2), NONE(3);
+    HIGH(0), LOW(2), MEDIUM(1), NONE(3);
     private final int value;
 
     /**
