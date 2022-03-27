@@ -221,15 +221,34 @@ The following sequence diagram shows how the add student command works.
 ![](images/AddStudentSequenceDiagram.png)
 
 ### Add temporary/recurring lesson
-The following sequence diagram shows how the add lesson operation works:
+Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
+- the `TeachWhatParser` detects the command word `addlesson` and passes the lessons details to `AddLessonCommandParser#parse`
+- the `AddLessonCommandParser` then maps the arguments into the prefixes `name`, `subject`, `address`, `date`, `startTime` and `recurring`
+- after which it constructs a new `Lesson` and passes it to the `AddLessonComand` 
+
+The following sequence diagram shows how the add lesson operation works when a user enters the following command:
+`addlesson
+-n Sec 2 Biology Lesson
+-s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04
+-d 17-04-2022 -t 18:00 -h 1`
 
 ![Add Lesson Sequence Diagram 1](images/AddLessonSequenceDiagram_1.png)
 
-The following sequence diagram complements the above one and shows,
+The following sequence diagram shows,
 - how an `AddLessonCommand` is instantiated from the given user input
 - how a new instance of a `TemporaryLesson` or `RecurringLesson` is instantiated from the arguments given by the user
 
 ![Add Lesson Sequence Diagram 2](images/AddLessonSequenceDiagram_2.png)
+
+The following sequence diagram shows how `AddLessonCommand`
+- sets the newly added lesson as the selected lesson in the UI through `Model`
+
+![Add Lesson Sequence Diagram 3](images/AddLessonSequenceDiagram_3.png)
+
+The following sequence diagram shows how `AddLessonCommand`
+- updates the UI to show a list by updating the filtered lesson list through `Model` using an instance of `ConflictingLessonsPredicate`
+
+![Add Lesson Sequence Diagram 4](images/AddLessonSequenceDiagram_4.png)
 
 #### Determining if a lesson clashes with any existing lessons
 
@@ -241,29 +260,9 @@ A list of lessons is considered ***consistent*** when no lessons clash with each
 - no two temporary lessons should have overlapping timeslots (ie: a lesson should ***not*** start when another lesson has not ended)
 - no recurring lesson should have overlapping timeslots with any temporary lesson or recurring lesson that falls on the same weekday as it
 
-This is done with the method `ConsistentLessonList#hasConflictingLesson()`, which takes in a `Lesson` that is to be added to the list and returns true if any existing lessons clashes with it.
-
-To illustrate how it works, here's an example scenario:
-
-##### Step 1. The user requests to add a lesson that,
-- is on 20 March 2022
-- starts at 12 pm
-- lasts for 1 hour
-
-![Add Lesson Object Diagram](images/AddLessonObjectDiagram_1.png)
-
-##### Step 2. The method `ConsistentLessonList#add()` is called, with the new lesson passed in as the argument.
-The method `ConsistentLessonList#hasConflictingLesson()` is then called, which checks if the first existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
-
-![Add Lesson Object Diagram](images/AddLessonObjectDiagram_2.png)
-
-##### Step 3. The method then moves down the list and checks if the second existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
-
-![Add Lesson Object Diagram](images/AddLessonObjectDiagram_3.png)
-
-##### Step 4. Finally, only after all the existing lessons have been verified to not clash with the new lesson, it is added to the list of lessons.
-
-![Add Lesson Object Diagram](images/AddLessonObjectDiagram_4.png)
+This is done with the method `ConsistentLessonList#hasConflictingLesson()`, which takes in the `Lesson` to be added and
+- goes through the list and compares each *existing* `Lesson` with it
+- and returns true if any existing lessons clashes with it
 
 ### Assign student to lesson
 

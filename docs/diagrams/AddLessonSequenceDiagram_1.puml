@@ -15,7 +15,7 @@ participant ":Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute(**userInput**)
-note left of LogicManager
+note right of LogicManager
 **userInput = ** "addlesson
 -n Sec 2 Biology Lesson
 -s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04
@@ -23,45 +23,40 @@ note left of LogicManager
 end note
 activate LogicManager
 
+LogicManager -> TeachWhatParser : parseCommand(**userInput**)
+
 ref over TeachWhatParser, Lesson
 parse add lesson command
 end ref
 
+LogicManager <-- TeachWhatParser : addLessonCommand
+
 LogicManager -> AddLessonCommand : execute()
-activate AddLessonCommand
+
 
 AddLessonCommand -> Model : addLesson(lessonToBeAdded)
-activate Model
 
 alt does not conflict with any existing lessons
-    AddLessonCommand <-- Model
-    AddLessonCommand -> Model : setSelectedLesson(lessonToBeAdded)
-
-    create CommandResult
-    AddLessonCommand -> CommandResult
-    activate CommandResult
-    CommandResult --> AddLessonCommand : commandResultSuccess
-    deactivate CommandResult
+    ref over AddLessonCommand, Lesson, Model
+        lesson successfully added
+    end ref
 
     LogicManager <-- AddLessonCommand : commandResultSuccess
 
     [<--LogicManager : commandResultSuccess
 else else
-     AddLessonCommand <-- Model : conflictsWithLessonException
-     deactivate Model
 
-     create CommandResult
-     AddLessonCommand -> CommandResult
-     activate CommandResult
-     CommandResult --> AddLessonCommand : commandResultError
-     deactivate CommandResult
-     LogicManager <-- AddLessonCommand : commandResultError
-     deactivate AddLessonCommand
+    ref over AddLessonCommand, Lesson, Model
+        lesson conflicts with existing lesson(s)
+    end ref
 
-     [<--LogicManager : commandResultError
-     deactivate LogicManager
+    LogicManager <-- AddLessonCommand : commandResultError
+
+    [<--LogicManager : commandResultError
+
+    deactivate LogicManager
 end
-note left of LogicManager
+note right of LogicManager
         refer to the section __**Determining if a lesson clashes with any existing lessons**__
         for how //TeachWhat!// checks if the lesson to be added does not clash
         with any existing lessons
