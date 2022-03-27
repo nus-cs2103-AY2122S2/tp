@@ -47,7 +47,7 @@ School administrators _(like teachers)_ can use UDT to easily track COVID-19 cas
 
 > :information_source: **Installation notes:**  
 > - Application data will be stored in the same folder containing the application executable.  
-> - Currently only officially supported for **x64 Windows** platforms.
+> - Currently officially supported for **Windows**, **Mac** and **Linux** platforms.
 
 </div>
 
@@ -91,7 +91,7 @@ Adds a student to the tracking list
 </div>
 
 ## List all students: `list`
-Shows a list of all students in the address book.
+Shows a list of all students in the application.
 - Format: `list`
   - Any parameter after `list` is ignored
 
@@ -123,7 +123,7 @@ Find an existing student in the application by their Covid-19 Status
   - `findstatus negative` finds all students that are labelled COVID negative
 
 ## Find student by class: `findclasscode`
-Finds an existing student in the address book by their class
+Finds an existing student in the application by their class
 - Format: `findclasscode CLASS`
   - Returns a list of students with the specified `CLASS`
   - `CLASS` is case-insensitive
@@ -135,7 +135,7 @@ Finds an existing student in the address book by their class
 </div>
 
 ## Find student by activity: `findactivity`
-Finds an existing student in the address book by the activities they are participating in
+Finds an existing student in the application by the activities they are participating in
 - Format: `findactivity ACTIVITIY [MORE ACTIVITIES]`
   - Returns a list of students with the specified `ACTIVITY`
     - Matches based on students that have specified `ACTIVITY` and not just exactly those activities only
@@ -146,7 +146,7 @@ Finds an existing student in the address book by the activities they are partici
   - `findactivity badminton choir` finds all students that have the activity _"Badminton"_, _"choir"_ or **both**
 
 ## Edit student details: `edit`
-Edits an existing student's details in the address book by the Index provided and the areas that the user wants to edit
+Edits an existing student's details in the application by the Index provided and the areas that the user wants to edit
 - Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]`
   - Edits the student at the specified `INDEX`
   - `INDEX` denotes the list index of the student in the displayed list
@@ -165,7 +165,7 @@ Edits an existing student's details in the address book by the Index provided an
 </div>
 
 ## Delete a student: `delete`
-Deletes the specified person from the address book.
+Deletes the specified person from the application.
 - Format: `delete INDEX`
   - Deletes the student at the specified `INDEX`
   - `INDEX` denotes the list index of the student in the displayed list
