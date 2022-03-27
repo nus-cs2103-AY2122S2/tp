@@ -3,8 +3,6 @@ layout: page
 title: CinnamonBun Index
 ---
 
-# CinnamonBun
-
 [![Java CI](https://github.com/AY2122S2-CS2103T-W09-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-W09-2/tp/actions)
 [![Codecov](https://codecov.io/gh/AY2122S2-CS2103T-W09-2/tp/branch/master/graph/badge.svg?token=UJX2NES4W7)](https://codecov.io/gh/AY2122S2-CS2103T-W09-2/tp)
 
