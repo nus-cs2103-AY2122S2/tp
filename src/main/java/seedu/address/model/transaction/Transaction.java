@@ -111,7 +111,7 @@ public class Transaction implements Serializable {
      *
      */
     public String getPersonIdString() {
-        return String.format("Person unique id: %d", getPersonId());
+        return String.format("Person ID: %d", getPersonId());
     }
 
     /**

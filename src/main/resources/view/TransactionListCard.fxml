@@ -18,11 +18,11 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <Label fx:id="amount" styleClass="cell_small_label" text="\\$amount" />
-            <Label fx:id="transactionDate" styleClass="cell_small_label" text="\\$transactionDate" />
-            <Label fx:id="identifier" styleClass="cell_small_label" text="\\$identifier" />
-            <Label fx:id="dueDate" styleClass="cell_small_label" text="\\$dueDate" />
-         <Label fx:id="note" text="\\$note" />
+            <Label fx:id="amount" text="\\$amount" />
+            <Label fx:id="identifier" text="\\$identifier" />
+            <Label fx:id="transactionDate" text="\\$transactionDate" />
+            <Label fx:id="dueDate" text="\\$dueDate" />
+            <Label fx:id="note" text="\\$note" />
         </VBox>
       <rowConstraints>
          <RowConstraints />
