@@ -1,25 +1,24 @@
 package seedu.address.model.seller;
 
+import java.util.function.Predicate;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
-
-import java.util.function.Predicate;
+import seedu.address.model.property.PropertyToSell;
 
 /**
  * Tests that a {@code Seller}'s {@code PropertyToSell} matches the demand
  *  of a given {@code Buyer}'s {@code PropertyToBuy}.
  */
-public class hasMatchWithBuyerPredicate implements Predicate<Seller> {
+public class HasMatchWithBuyerPredicate implements Predicate<Seller> {
 
     /**
      * Index of Buyer in UniqueBuyerList to match with.
      */
     private final Buyer buyer;
 
-    public hasMatchWithBuyerPredicate(Buyer buyer) {
+    public HasMatchWithBuyerPredicate(Buyer buyer) {
         this.buyer = buyer;
     }
 
@@ -37,7 +36,7 @@ public class hasMatchWithBuyerPredicate implements Predicate<Seller> {
         PriceRange buyRange = getBuyRange(propertyToBuy);
         PriceRange sellRange = getSellRange(propertyToSell);
 
-        boolean isMatchedPrices = PriceRange.canMatchPrice(buyRange,sellRange);
+        boolean isMatchedPrices = PriceRange.canMatchPrice(buyRange, sellRange);
 
         boolean isEqualHouse = propertyToBuy.getHouse().equals(propertyToSell.getHouse());
 
@@ -63,7 +62,7 @@ public class hasMatchWithBuyerPredicate implements Predicate<Seller> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof hasMatchWithBuyerPredicate // instanceof handles nulls
-            && buyer.equals(((hasMatchWithBuyerPredicate) other).buyer)); // state check
+            || (other instanceof HasMatchWithBuyerPredicate // instanceof handles nulls
+            && buyer.equals(((HasMatchWithBuyerPredicate) other).buyer)); // state check
     }
 }

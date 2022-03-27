@@ -8,8 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.buyer.UniqueBuyerList;
-import seedu.address.model.seller.hasMatchWithBuyerPredicate;
+import seedu.address.model.seller.HasMatchWithBuyerPredicate;
 
 
 /**
@@ -36,7 +35,7 @@ public class MatchCommand extends Command {
         ObservableList<Buyer> buyerList = model.getFilteredBuyerList();
         Buyer buyer = buyerList.get(index.getZeroBased());
 
-        model.updateFilteredSellerList(new hasMatchWithBuyerPredicate(buyer));
+        model.updateFilteredSellerList(new HasMatchWithBuyerPredicate(buyer));
 
         return new CommandResult(
             String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredSellerList().size()));
