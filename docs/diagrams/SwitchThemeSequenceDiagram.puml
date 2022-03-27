@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SwitchThemeCommandParser" as SwitchThemeCommandParser LOGIC_COLOR
+participant "t:LightTheme" as LightTheme LOGIC_COLOR
+participant "s:SwitchThemeCommand" as SwitchThemeCommand LOGIC_COLOR
+participant "primaryStage: Stage" as PrimaryStage LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("theme light")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("theme light")
+activate AddressBookParser
+
+create SwitchThemeCommandParser
+AddressBookParser -> SwitchThemeCommandParser
+activate SwitchThemeCommandParser
+
+SwitchThemeCommandParser --> AddressBookParser
+deactivate SwitchThemeCommandParser
+
+AddressBookParser -> SwitchThemeCommandParser : parse("light")
+activate SwitchThemeCommandParser
+
+create LightTheme
+SwitchThemeCommandParser -> LightTheme
+activate LightTheme
+
+LightTheme --> SwitchThemeCommandParser : t
+deactivate LightTheme
+LightTheme -[hidden]-> SwitchThemeCommandParser
+destroy LightTheme
+
+create SwitchThemeCommand
+SwitchThemeCommandParser --> SwitchThemeCommand
+activate SwitchThemeCommand
+
+SwitchThemeCommand --> SwitchThemeCommandParser: s
+deactivate SwitchThemeCommand
+
+SwitchThemeCommandParser --> AddressBookParser: s
+deactivate SwitchThemeCommandParser
+SwitchThemeCommandParser -[hidden]-> AddressBookParser
+destroy SwitchThemeCommandParser
+
+LogicManager -> SwitchThemeCommand : execute()
+activate SwitchThemeCommand
+
+create PrimaryStage
+SwitchThemeCommand -> PrimaryStage : applyTheme()
+activate PrimaryStage
+
+PrimaryStage -> SwitchThemeCommand:
+deactivate PrimaryStage
+
+create CommandResult
+SwitchThemeCommand -> CommandResult
+activate CommandResult
+
+CommandResult -> SwitchThemeCommand
+deactivate CommandResult
+
+SwitchThemeCommand --> LogicManager: result
+deactivate
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml
