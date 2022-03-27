@@ -58,6 +58,10 @@ public class Time {
         return time.hashCode();
     }
 
+    /**
+     * Accesses and returns the time attribute
+     * @return the time attribute as LocalTime
+     */
     public LocalTime getPure() {
         return this.time;
     }
