@@ -428,6 +428,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 *{More to be added}*
+      
+**Use case 03: Editing position**
+
+**MSS**
+1. User requests to list positions
+2. HireLah shows a list of positions
+3. User chooses to edit a position based on the index from the visible list, and provide the fields to edit.
+4. HireLah refreshes the list of positions to display the newly edited position.
+    <br/><br/>
+    Use case ends.
+   
+**Extensions**
+
+* 3a. The given index is not a valid index in the list.
+* 3a1. HireLah informs user that the index is not valid.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3b. The new position name provided is the same as another position.
+* 3b1. HireLah informs user that the new position name is not valid.
+  <br/><br/>
+  Use case ends.
 
 ### Non-Functional Requirements
 
