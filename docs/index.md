@@ -1,6 +1,6 @@
 ---
 layout: page
-title: CinnamonBun Index
+title: CinnamonBun
 ---
 
 [![Java CI](https://github.com/AY2122S2-CS2103T-W09-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-W09-2/tp/actions)
