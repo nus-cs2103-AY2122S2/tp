@@ -21,10 +21,10 @@ deactivate Model
 create ConflictingLessonsPredicate
 AddLessonCommand -> ConflictingLessonsPredicate : ConflictingLessonsPredicate(lessonToBeAdded)
 activate ConflictingLessonsPredicate
-AddLessonCommand <-- ConflictingLessonsPredicate
+AddLessonCommand <-- ConflictingLessonsPredicate : predicate
 deactivate ConflictingLessonsPredicate
 
-AddLessonCommand -> Model : updateFilteredLessonList(conflictingLessonsPredicate)
+AddLessonCommand -> Model : updateFilteredLessonList(predicate)
 
 
 create CommandResult
