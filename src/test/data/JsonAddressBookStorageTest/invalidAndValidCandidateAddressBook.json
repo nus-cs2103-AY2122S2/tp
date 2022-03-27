@@ -5,7 +5,7 @@
     "phone": "94824240",
     "email": "E0123456@u.nus.edu",
     "course": "Computer Science",
-    "seniority": "COM2",
+    "seniority": "2",
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
     "availability": "1,2,3,4,5"
@@ -15,7 +15,7 @@
     "phone": "948asdf2424",
     "email": "E0123456@u.nus.edu",
     "course": "Computer Science",
-    "seniority": "COM2",
+    "seniority": "2",
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
     "availability": "1,2,9"

@@ -37,7 +37,7 @@ class JsonAdaptedInterview {
     private final String phone;
     private final String email;
     private final String course;
-    private final int seniority;
+    private final String seniority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String applicationStatus;
     private final String interviewStatus;
@@ -61,7 +61,7 @@ class JsonAdaptedInterview {
         this.phone = phone;
         this.email = email;
         this.course = course;
-        this.seniority = Integer.parseInt(seniority.substring(seniority.length() - 1));
+        this.seniority = seniority;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -80,10 +80,7 @@ class JsonAdaptedInterview {
         phone = source.getCandidate().getPhone().value;
         email = source.getCandidate().getEmail().value;
         course = source.getCandidate().getCourse().course;
-
-        String seniorityValue = source.getCandidate().getSeniority().seniority;
-        seniority = Integer.parseInt(seniorityValue.substring(seniorityValue.length() - 1));
-
+        seniority = source.getCandidate().getSeniority().seniority;
         tagged.addAll(source.getCandidate().getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
