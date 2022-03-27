@@ -407,7 +407,7 @@ You can change between the light or dark theme by click on the menu bar and sele
 
 ![ChangeTheme](images/ChangeTheme.png)
 
-### Command correction/completion
+### Command Correction/Completion
 
 Pressing `TAB` while typing a command will change the last typed word into the closest command.
 E.g.
