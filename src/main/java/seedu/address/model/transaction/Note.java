@@ -16,8 +16,6 @@ public class Note extends TransactionField {
 
     public static final Prefix PREFIX = new Prefix("n/", false);
 
-    public static final String EMPTY_DUE_DATE = "";
-
     private final String value;
 
     /**

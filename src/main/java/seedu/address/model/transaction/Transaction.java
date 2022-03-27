@@ -124,6 +124,22 @@ public class Transaction implements Serializable {
     }
 
     /**
+     * Gets the status of the transaction
+     *
+     * @return Status of the transaction
+     */
+    public Status getStatus() {
+        return (Status) this.fields.get(Status.PREFIX);
+    }
+
+    /**
+     * Returns whether the transaction has been paid or not
+     */
+    public boolean isPaid() {
+        return getStatus().isPaid();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
