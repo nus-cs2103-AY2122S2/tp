@@ -16,7 +16,7 @@ Are you a small business owner or freelancer? Want an easy way to store your cli
 No worries, CinnamonBun has got you covered! CinnamonBun enables you to keep track of your clients and their transaction records.
 
 As a Command-line Interface (CLI) app, you'll never have to move your hands away from the keyboard to get all your tasks done.
-If you can type fast, the CLI will allow you to execute your tasks quickly. While this may be daunting for a new user, it only takes a short time to get accustom to CinnamonBun.
+If you can type fast, the CLI will allow you to execute your tasks quickly. While this may be daunting for a new user, it only takes a short time to get accustomed to CinnamonBun.
 
 This guide aims to be the one-stop shop to get you from noob to expert in record speed.
 
@@ -72,7 +72,7 @@ Commands in CinnamonBun can be broken down into several components.
 * Commands and their arguments are case-sensitive
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command but is specified multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -190,7 +190,7 @@ Format: `append INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIR
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Fields & tags that did not previously exist in the client will be added. Fields & tags that already existed will be replaced.
+* Fields and tags that did not previously exist in the client will be added. Fields and tags that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
 
 </div>
@@ -204,7 +204,7 @@ Format: `remove INDEX [n/] [p/] [e/] [a/] [r/] [b/] [t/TAG]…​`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Fields & tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
+* Fields and tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
 * Compulsory fields cannot be removed.
 
@@ -257,7 +257,7 @@ Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [
   * Birthday `b/`
   * Remark `r/`
 * At least one of the above fields must be specified.
-* Specifying `desc` it after a field means that particular field is to be sorted in descending order. By default, they are sorted in ascending order.
+* Specifying `desc` after a field will sort it in descending order. By default, fields are sorted in ascending order.
 * The fields are to be specified in their prefix. They can be specified in any order, however, priority will be given
   based on the order specified.
 * Clients with null values in the fields to be sorted will have lesser priority. 
@@ -274,26 +274,23 @@ based on their addresses in ascending order.
 
 ### Find Client by Keyword (`find`)
 
-Finds clients whose name, phone, email, address or tags contain any of the given keywords.
+Finds clients whose attributes contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * The search is case-insensitive. e.g. `bob` will match `Bob`
-* The order of the keywords does not matter. e.g. `Hans Bob` will match `Bob Hans`
-* The name, phone, email, address and tags are searched.
-* Only full words will be matched e.g. `Bob` will not match `Bobs`
-* Clients matching at least one keyword will be returned (i.e. `OR` search).
+* The order of the keywords does not matter. e.g. `Hans Bob` will work the same as `Bob Hans`
+* Partial matches are allowed e.g. `Bob` will match `Bobs`
+* Clients with attributes matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bob` will return `Hans Zimmer`, `Bob Morrison`
 
 </div>
 
 Examples:
-* `find Bob` returns `bob` and `Bob Doe`
-* `find 65123456` returns clients with the phone number `65123456`
-* `find kent ridge` returns clients with an address containing `kent` or `ridge`
-* `find manager hr` returns clients with the `manager` or `hr` tags
+* `find Bob` returns clients with attributes containing `Bob` e.g. clients named `Sponge Bob` and `Bobs Doe`
+* `find kent ridge` returns clients with attributes containing `kent` or `ridge`. e.g. A client named `Clark Kent` and a client who lives at `123 Ridgeview Cres`.
 
 ### Delete Filtered Clients (`deleteFiltered`)
 
@@ -410,11 +407,20 @@ You can change between the light or dark theme by click on the menu bar and sele
 
 ![ChangeTheme](images/ChangeTheme.png)
 
+### Command correction/completion
+
+Pressing `TAB` while typing a command will change the last typed word into the closest command.
+E.g.
+
+`dele` -> `delete`
+
+`sddTranssaction` -> `addTransaction`
+
 ---
 
 ## Save Data
 
-CinnamonBun's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CinnamonBun's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ---
 
