@@ -68,9 +68,8 @@ public class CommandBox extends UiPart<Region> {
         switch (keyCode) {
         case ENTER:
             handleCommandEntered();
-        case UP:
-            handleNavigateHistory(keyCode);
             break;
+        case UP:
         case DOWN:
             handleNavigateHistory(keyCode);
             break;
