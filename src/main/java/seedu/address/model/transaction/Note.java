@@ -15,6 +15,7 @@ public class Note extends TransactionField {
     public static final String FIELD_NAME = "Note";
 
     public static final Prefix PREFIX = new Prefix("n/", false);
+    public static final String EMPTY_NOTE = "";
 
     private final String value;
 
