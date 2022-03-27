@@ -18,12 +18,13 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all candidates by the field specified "
-            + "and displays them as a list with index numbers.\n"
+            + "in ascending order (A-Z, 0-9) and displays them as a list with index numbers.\n"
             + " The search can be conducted only on a specific field in candidates' description by specifying the"
             + PREFIX_SORTKEY + " SORTKEY argument.\n"
             + "Parameters: " + PREFIX_SORTKEY + "SORTKEY \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SORTKEY + "name\n"
-            + "Allowable fields to be sorted by include course, email, phone, name, studentid.";
+            + "Allowable fields to be sorted by include: applicationstatus, availability, course, email, "
+            + "interviewstatus, name, phone, seniority, studentid.";
 
     private final Comparator<Candidate> sortComparator;
     private final String sortKey;

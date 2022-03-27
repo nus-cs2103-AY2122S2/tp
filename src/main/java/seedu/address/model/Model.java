@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -105,11 +106,17 @@ public interface Model {
 
     boolean hasConflictingInterview(Interview interview);
 
-    //void deleteInterview(Interview target);
+    void deleteInterviewForCandidate(Candidate target);
 
     void addInterview(Interview interview);
 
     //void setInterview(Interview target, Interview editedInterview);
+
+    //=========== Interview Schedule Accessors =============================================================
+
+    ObservableList<Interview> getFilteredInterviewSchedule();
+
+    void updateFilteredInterviewSchedule(Predicate<Interview> predicate);
 
     /** Returns an unmodifiable view of the filtered candidate list */
     ObservableList<Candidate> getFilteredCandidateList();
@@ -125,4 +132,6 @@ public interface Model {
      * @throws NullPointerException if {@code sortKey} is null.
      */
     void updateSortedCandidateList(Comparator<Candidate> sortComparator);
+
+    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime);
 }
