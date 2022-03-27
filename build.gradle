@@ -77,6 +77,12 @@ run {
     enableAssertions = true
 }
 
+task(allTests)
+
+test {
+    systemProperty 'testfx.setup.timeout', '60000'
+}
+
 task headless {
     doLast {
         println 'Setting headless mode properties.'
@@ -94,4 +100,4 @@ task headless {
 // Makes sure that headless properties are set before running tests
 test.mustRunAfter headless
 
-defaultTasks 'clean', 'test'
+defaultTasks 'clean', 'headless', 'allTests', 'coverage'
