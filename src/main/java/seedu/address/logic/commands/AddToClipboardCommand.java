@@ -8,8 +8,8 @@ import java.awt.datatransfer.StringSelection;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameExistsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NameExistsPredicate;
 
 /**
  * Copies the information of a given contact to the user's clipboard.
