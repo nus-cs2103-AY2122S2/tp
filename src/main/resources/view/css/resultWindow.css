@@ -1,4 +1,5 @@
 .result-window {
+    -fx-min-height: 100;
     -fx-pref-height: 100;
     -fx-background-color: white;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 18, 0, 0, 5);

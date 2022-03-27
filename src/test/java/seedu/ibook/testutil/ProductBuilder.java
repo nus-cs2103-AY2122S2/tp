@@ -1,8 +1,10 @@
 package seedu.ibook.testutil;
 
+import java.util.List;
+
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -14,13 +16,11 @@ public class ProductBuilder {
 
     public static final String DEFAULT_NAME = "Maggie Mee";
     public static final String DEFAULT_CATEGORY = "Noodles";
-    public static final String DEFAULT_EXPIRY_DATE = "2022-12-13";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final String DEFAULT_PRICE = "1.99";
 
     private Name name;
     private Category category;
-    private ExpiryDate expiryDate;
     private Description description;
     private Price price;
 
@@ -30,7 +30,6 @@ public class ProductBuilder {
     public ProductBuilder() {
         name = new Name(DEFAULT_NAME);
         category = new Category(DEFAULT_CATEGORY);
-        expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
         description = new Description(DEFAULT_DESCRIPTION);
         price = new Price(DEFAULT_PRICE);
     }
@@ -41,7 +40,6 @@ public class ProductBuilder {
     public ProductBuilder(Product productToCopy) {
         name = productToCopy.getName();
         category = productToCopy.getCategory();
-        expiryDate = productToCopy.getExpiryDate();
         description = productToCopy.getDescription();
         price = productToCopy.getPrice();
     }
@@ -71,14 +69,6 @@ public class ProductBuilder {
     }
 
     /**
-     * Sets the {@code ExpiryDate} of the {@code Product} that we are building.
-     */
-    public ProductBuilder withExpiryDate(String expiryDate) {
-        this.expiryDate = new ExpiryDate(expiryDate);
-        return this;
-    }
-
-    /**
      * Sets the {@code Price} of the {@code Product} that we are building.
      */
     public ProductBuilder withPrice(String price) {
@@ -87,7 +77,10 @@ public class ProductBuilder {
     }
 
     public Product build() {
-        return new Product(name, category, expiryDate, description, price);
+        return new Product(name, category, description, price);
     }
 
+    public Product buildWithItems(List<Item> items) {
+        return new Product(name, category, description, price, items);
+    }
 }

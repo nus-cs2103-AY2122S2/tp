@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+      VBox.vgrow="ALWAYS" stylesheets="@../../css/ItemTable.css" styleClass="item-table">
+    <HBox styleClass="table-header">
+        <Label styleClass="table-column-short" HBox.hgrow="ALWAYS" text="INDEX"/>
+        <Label styleClass="table-column-short" HBox.hgrow="ALWAYS" text="EXPIRY DATE"/>
+        <Label styleClass="table-column-short" HBox.hgrow="ALWAYS" text="QUANTITY"/>
+        <Label styleClass="table-column-long" HBox.hgrow="NEVER"/>
+    </HBox>
+    <VBox VBox.vgrow="ALWAYS" maxHeight="Infinity" styleClass="table-content">
+        <VBox fx:id="content" style="-fx-background-color: white;"/>
+    </VBox>
+</VBox>

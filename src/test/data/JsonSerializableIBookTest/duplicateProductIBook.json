@@ -2,13 +2,11 @@
   "products" : [ {
     "name" : "Kaya Bread",
     "category" : "Bread",
-    "expiryDate" : "2022-03-08",
     "description" : "Kaya on bread",
     "price" : "1.99"
   }, {
     "name" : "Kaya Bread",
     "category" : "Bread",
-    "expiryDate" : "2022-03-08",
     "description" : "Kaya on bread",
     "price" : "1.99"
   } ]

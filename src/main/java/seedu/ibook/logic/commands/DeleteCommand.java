@@ -40,9 +40,9 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
         }
 
-        Product personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteProduct(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, personToDelete));
+        Product productToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteProduct(productToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
     }
 
     @Override
