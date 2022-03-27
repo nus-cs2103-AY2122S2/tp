@@ -40,6 +40,23 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code string} contains the {@code substring}.
+     *   Ignores case, a full substring match is required.
+     *
+     * @param string cannot be null
+     * @param substring cannot be null, cannot be empty
+     */
+    public static boolean containsSubstringIgnoreCase(String string, String substring) {
+        requireNonNull(string);
+        requireNonNull(substring);
+
+        String preppedSubstring = substring.trim();
+        checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
+
+        return string.contains(preppedSubstring);
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {

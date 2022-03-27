@@ -98,16 +98,15 @@ public class ParserUtil {
      * Parses a  {@code List<String> } into a {@code List<Name>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if any single list item has more than one word
+     * @throws ParseException through parseName.
      */
     public static List<Name> parseNames(List<String> list) throws ParseException {
         requireNonNull(list);
         final Set<Name> set = new HashSet<>();
         for (String value : list) {
-            if (value.split(" ").length > 1) {
-                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            for (String s: value.split(" ")) {
+                set.add(parseName(s.trim()));
             }
-            set.add(parseName(value));
         }
         return new ArrayList<>(set);
     }
@@ -131,16 +130,15 @@ public class ParserUtil {
      * Parses a {@code List<String> } into a {@code List<Phone>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if any single list item has more than one word.
+     * @throws ParseException through parsePhone.
      */
     public static List<Phone> parsePhones(List<String> list) throws ParseException {
         requireNonNull(list);
         final Set<Phone> set = new HashSet<>();
         for (String value : list) {
-            if (value.split(" ").length > 1) {
-                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            for (String s: value.split(" ")) {
+                set.add(parsePhone(s.trim()));
             }
-            set.add(parsePhone(value));
         }
         return new ArrayList<>(set);
     }
@@ -164,16 +162,15 @@ public class ParserUtil {
      * Parses a {@code List<String> } into a {@code List<Address>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if any single list item has more than one word.
+     * @throws ParseException through parseAddress.
      */
     public static List<Address> parseAddresses(List<String> list) throws ParseException {
         requireNonNull(list);
         final Set<Address> set = new HashSet<>();
         for (String value : list) {
-            if (value.split(" ").length > 1) {
-                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            for (String s: value.split(" ")) {
+                set.add(parseAddress(s.trim()));
             }
-            set.add(parseAddress(value));
         }
         return new ArrayList<>(set);
     }
@@ -193,20 +190,19 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+
     /**
      * Parses a {@code List<String> } into a {@code List<Email>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if any single list item has more than one word.
      */
     public static List<Email> parseEmails(List<String> list) throws ParseException {
         requireNonNull(list);
         final Set<Email> set = new HashSet<>();
         for (String value : list) {
-            if (value.split(" ").length > 1) {
-                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            for (String s: value.split(" ")) {
+                set.add(parseEmail(s.trim()));
             }
-            set.add(parseEmail(value));
         }
         return new ArrayList<>(set);
     }

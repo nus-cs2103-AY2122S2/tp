@@ -32,11 +32,11 @@ import seedu.address.model.tag.Tag;
  */
 public class FindCommandParser implements Parser<Command> {
 
-    public static final String MULTIPLE_WORDS = "Each value must be limited to one word\n"
-            + "Eg: find n/Alex n/Ho instead of n/Alex Ho";
-
     public static final String DATE_TIME_FORMAT = "Please provide the date followed by time\n"
             + "Eg: find -e dt/2022-08-08 03:00";
+
+    public static final String EMPTY_EMAIL = "Please provide a valid string for email.";
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -71,7 +71,11 @@ public class FindCommandParser implements Parser<Command> {
                 personDescriptor.setPhones(ParserUtil.parsePhones(argMultimap.getAllValues(PREFIX_PHONE)));
             }
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-                personDescriptor.setEmails(ParserUtil.parseEmails(argMultimap.getAllValues(PREFIX_EMAIL)));
+                List<String> emails = argMultimap.getAllValues(PREFIX_EMAIL);
+                if (emails.contains("")) {
+                    throw new ParseException(EMPTY_EMAIL);
+                }
+                personDescriptor.setEmails(emails);
             }
             if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
                 personDescriptor.setAddresses(ParserUtil.parseAddresses(argMultimap.getAllValues(PREFIX_ADDRESS)));
