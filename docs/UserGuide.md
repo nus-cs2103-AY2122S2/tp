@@ -16,7 +16,7 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `HireLah.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `HireLah.jar` from [here](https://github.com/AY2122S2-CS2103-W17-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -234,7 +234,7 @@ General command to list different data type in HireLah.
 Format: `list -TYPE`
 * TYPE must take the form of `a`, `i`, `p`
 * -a will list all applicants
-* -i will list all interview for an applicant
+* -i will list all interview
 * -p will list all position
 
 ### List Applicants: `list -a`
@@ -246,7 +246,7 @@ Format: `list -a`
 
 Lists all existing interviews in HireLah. Automatically toggles view to the interview tab on the GUI.
 
-Format: `list -i CANDIDATE_INDEX`
+Format: `list -i`
 
 Examples:
 * `list -i 1`

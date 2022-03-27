@@ -147,6 +147,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.add(i);
     }
 
+    /**
+     * Replaces the given interview {@code target} with {@code editedInterview}.
+     * {@code target} must exist in HireLah.
+     * The interview identity of {@code editedInterview} must not be the same as another existing interview
+     * in HireLah.
+     */
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireNonNull(editedInterview);
+
+        interviews.setInterview(target, editedInterview);
+    }
+
     //// position-level operations
 
     /**

@@ -134,6 +134,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        addressBook.setInterview(target, editedInterview);
+    }
+
+    @Override
     public boolean hasPosition(Position position) {
         requireNonNull(position);
         return addressBook.hasPosition(position);
