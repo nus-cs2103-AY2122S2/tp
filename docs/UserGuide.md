@@ -174,7 +174,7 @@ Format: `list`
 
 This is a sample screenshot of what you can expect from the `help` command.
 
-![list](images/ListFeatureScreenShot.png) *Figure 5: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
 
 ### Viewing help: `help`
 Help users to search for all the commands that Tracey offers by opening a pop-up window.
