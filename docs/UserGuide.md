@@ -143,6 +143,16 @@ Format:  `view t/medical i/NRIC`
 Examples:
 * `view t/medical i/S1234567L`
 
+### Editing Medical Information: `edit t/medical`
+
+Edits an existing medical information in MedBook. This command can be used when a list of medical information is being displayed.
+
+Format:  `edit INDEX [i/NRIC] [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
+[il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
+
+Examples:
+* `view t/medical` followed by `edit 1 i/S1234567L bt/B` updates NRIC and blood type of first medical information displayed on the screen.
+
 ### Adding Consultation Information: `add t/consultation`
 
 Adds a consultation report of a patient to MedBook.
