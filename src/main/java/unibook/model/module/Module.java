@@ -7,6 +7,8 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unibook.logic.commands.EditCommand;
+import unibook.logic.commands.EditCommand.EditGroupDescriptor;
 import unibook.model.module.exceptions.DuplicateGroupException;
 import unibook.model.module.exceptions.DuplicateKeyEventException;
 import unibook.model.module.exceptions.GroupNotFoundException;
@@ -180,6 +182,15 @@ public class Module {
             }
         }
         throw new GroupNotFoundException();
+    }
+
+    /**
+     * Edits the information of the group in the respective index
+     */
+    public void editGroupByIndex(int idx, EditGroupDescriptor editGroupDescriptor) {
+                Group group = groups.get(idx);
+                Group newGroup = EditCommand.createEditedGroup(group, editGroupDescriptor);
+                groups.set(idx, newGroup);
     }
 
     /**

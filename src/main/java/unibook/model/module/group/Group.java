@@ -16,10 +16,12 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  * Represents a group of students within a module.
  */
 public class Group {
-    private final String name;
+    private String name;
     private final Module module;
     private final ObservableList<Student> members;
     private final ObservableList<LocalDateTime> meetingTimes;
+
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
      * Instantiates a group object.
@@ -73,9 +75,24 @@ public class Group {
         return name;
     }
 
+    /**
+     * Edit the group name of the group object.
+     */
+    public void editGroupName(String name) {
+        this.name = name;
+    }
+
     public Module getModule() {
         return module;
     }
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidName(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
 
     /**
      * Returns the member students of the group.
@@ -134,6 +151,17 @@ public class Group {
             throw new MeetingTimeNotFoundException();
         }
         meetingTimes.remove(meetingTime);
+    }
+
+    /**
+     * Edit a meeting datetime from the group.
+     *
+     * @param idx index of the meeting time to edit
+     * @param meetingTime meeting datetime to remove.
+     */
+    public void editMeetingTime(int idx, LocalDateTime meetingTime) {
+        requireNonNull(meetingTime);
+        this.meetingTimes.set(idx, meetingTime);
     }
 
     /**

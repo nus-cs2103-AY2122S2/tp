@@ -2,10 +2,13 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -15,6 +18,7 @@ import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
+import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Office;
@@ -51,10 +55,22 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!Name.isValidName(trimmedName) ) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseGroup(String name) {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        return trimmedName;
     }
 
     /**
@@ -115,6 +131,7 @@ public class ParserUtil {
     public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
         String trimmedCode = moduleCode.trim().toUpperCase(Locale.ROOT);
+        System.out.println("parseModuleCode");
         if (!ModuleCode.isValidModuleCode(trimmedCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
@@ -240,4 +257,34 @@ public class ParserUtil {
         }
         return groupList;
     }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static List<Object> parseMeetingTime(String meetingTime) throws ParseException {
+        requireNonNull(meetingTime);
+        String trimmedTag = meetingTime.trim();
+        List<Object> list = new ArrayList<>();
+
+        //TODO create the parse exception to validate meetingTime to
+//        if (!Tag.isValidTagName(trimmedTag)) {
+//            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+//        }
+
+        // TODO parse the index and the meeting time of the input
+        int idxOfMeetingTime = Integer.parseInt(meetingTime.substring(0,1));
+        String actualMeetingTime = meetingTime.substring(2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        LocalDateTime d1 = LocalDateTime.parse(actualMeetingTime, formatter);
+        DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("MMM dd YYYY HHmm");
+        String strMeetingTime =  d1.format(newFormatter);
+        LocalDateTime ldt =  LocalDateTime.parse(strMeetingTime, newFormatter);
+        list.add(idxOfMeetingTime);
+        list.add(ldt);
+        return list;
+    }
+
 }

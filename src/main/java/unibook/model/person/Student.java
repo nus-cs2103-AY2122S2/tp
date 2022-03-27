@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 import java.util.Set;
 
+import unibook.logic.commands.EditCommand;
+import unibook.logic.commands.EditCommand.EditGroupDescriptor;
 import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
@@ -66,6 +68,21 @@ public class Student extends Person {
      */
     public Set<Group> getGroups() {
         return groups;
+    }
+
+
+    /**
+     * Edits the information of the group in the respective module
+     */
+    public void editGroupByMod(Module module, EditGroupDescriptor editGroupDescriptor) {
+        for (Group g : groups) {
+            if (g.getModule().equals(module)) {
+                Group group = g;
+                groups.remove(g);
+                Group newGroup = EditCommand.createEditedGroup(g, editGroupDescriptor);
+                groups.add(newGroup);
+            }
+        }
     }
 
     @Override

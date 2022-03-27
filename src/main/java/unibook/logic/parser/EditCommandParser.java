@@ -1,8 +1,10 @@
 package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static unibook.logic.parser.CliSyntax.PREFIX_GROUP;
+import static unibook.logic.parser.CliSyntax.PREFIX_MEETINGTIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
 import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static unibook.logic.parser.CliSyntax.PREFIX_NEWMOD;
@@ -21,9 +23,12 @@ import unibook.commons.core.LogsCenter;
 import unibook.commons.core.index.Index;
 import unibook.logic.LogicManager;
 import unibook.logic.commands.EditCommand;
+import unibook.logic.commands.EditCommand.EditGroupDescriptor;
 import unibook.logic.commands.EditCommand.EditModuleDescriptor;
 import unibook.logic.commands.EditCommand.EditPersonDescriptor;
 import unibook.logic.parser.exceptions.ParseException;
+import unibook.model.Model;
+import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
@@ -42,41 +47,50 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_OPTION,
-                PREFIX_NAME,
-                PREFIX_PHONE,
-                PREFIX_EMAIL,
-                PREFIX_TAG,
-                PREFIX_MODULE,
-                PREFIX_NEWMOD);
+                ArgumentTokenizer.tokenize(args, PREFIX_OPTION,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_TAG,
+                        PREFIX_MODULE,
+                        PREFIX_NEWMOD,
+                        PREFIX_GROUP,
+                        PREFIX_MEETINGTIME);
 
         Index index;
 
+        // Checks if there is proper indexing + proper option
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             logger.info(index.toString());
         } catch (ParseException pe) {
             if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
-                throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.MESSAGE_OPTION_NOT_FOUND));
+                throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.MESSAGE_OPTION_NOT_FOUND));
             } else {
                 if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
-                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.PERSON_MESSAGE_USAGE, pe);
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.PERSON_MESSAGE_USAGE, pe);
+                } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.MODULE_MESSAGE_USAGE, pe);
                 } else {
-                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.MODULE_MESSAGE_USAGE, pe);
+
+                    // TODO CHANGED HERE
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.GROUP_MESSAGE_USAGE, pe);
                 }
             }
 
         }
 
+        // Checks if index provided <= 0
         if (index.getOneBased() <= 0) {
-            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.PERSON_MESSAGE_USAGE));
+            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.PERSON_MESSAGE_USAGE));
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
+        EditGroupDescriptor editGroupDescriptor = new EditGroupDescriptor();
 
         if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
-            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT + EditCommand.PERSON_MESSAGE_USAGE));
+            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.PERSON_MESSAGE_USAGE));
         }
 
 
@@ -94,8 +108,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
             Optional<Set<ModuleCode>> module = argMultimap.getValue(PREFIX_NEWMOD).isPresent()
-                ? parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get())
-                : Optional.empty();
+                    ? parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get())
+                    : Optional.empty();
             if (module.isEmpty() && !editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
@@ -111,13 +125,41 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
                 editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap
-                    .getValue(PREFIX_MODULE).get()));
+                        .getValue(PREFIX_MODULE).get()));
             }
 
             if (!editModuleDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
             return new EditCommand(index, editModuleDescriptor);
+        } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("group")) { // TODO CHANGED HERE
+            if (!argMultimap.getValue(PREFIX_MODULE).isPresent()) {
+                throw new ParseException(EditCommand.MESSAGE_EDIT_MISSING);
+            } else {
+                ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE).get());
+                System.out.println(modCode.toString());
+                editGroupDescriptor.setModuleCode(modCode);
+
+                if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
+                    editGroupDescriptor.setGroupName(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
+                }
+                if (argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()) {
+                    editGroupDescriptor.setMeetingTimes(ParserUtil.parseMeetingTime(argMultimap
+                            .getValue(PREFIX_MEETINGTIME).get()));
+                }
+
+                if (!editGroupDescriptor.isAnyFieldEdited()) {
+                    throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+                }
+
+                // TODO CHANGED HERE
+                editModuleDescriptor.setGroups(editGroupDescriptor);
+                editPersonDescriptor.setGroups(editGroupDescriptor);
+
+                // this index is for the index of the group within the module
+                System.out.println("created edit command");
+                return new EditCommand(index, editPersonDescriptor, editModuleDescriptor);
+            }
         } else {
             System.out.println(argMultimap.getValue(PREFIX_OPTION).get());
             throw new ParseException(EditCommand.MESSAGE_OPTION_NOT_FOUND);

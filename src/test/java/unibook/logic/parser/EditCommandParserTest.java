@@ -1,6 +1,6 @@
 package unibook.logic.parser;
 
-import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
 import static unibook.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static unibook.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static unibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -35,7 +35,7 @@ public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    private static final String MESSAGE_INVALID_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
+    private static final String MESSAGE_INVALID_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT_1
             + EditCommand.PERSON_MESSAGE_USAGE;
 
     private EditCommandParser parser = new EditCommandParser();
