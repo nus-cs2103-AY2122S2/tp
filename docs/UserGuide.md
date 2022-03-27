@@ -52,6 +52,7 @@ School administrators _(like teachers)_ can use UDT to easily track COVID-19 cas
 </div>
 
 # Features
+Below are a set of commands that can be used in the **_UDT_**. Their formats and examples are provided along with each feature.
 
 <div markdown="block" class="alert alert-info">
 
