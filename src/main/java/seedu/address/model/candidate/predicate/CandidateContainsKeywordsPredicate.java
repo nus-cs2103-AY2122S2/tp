@@ -46,8 +46,6 @@ public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicat
             sb.append(AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL[availArr[i]]).append(",");
         }
 
-        System.out.println(sb);
-
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(sb.toString(), keyword));
     }
