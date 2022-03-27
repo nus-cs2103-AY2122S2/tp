@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 
+/**
+ * Represents a command that when executed redo most recent undone changes.
+ */
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 

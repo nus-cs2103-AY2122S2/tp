@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 
+/**
+ * Represents a command that when executed undo most recent changes.
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
