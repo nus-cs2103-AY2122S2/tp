@@ -95,6 +95,10 @@ public enum HouseType {
      */
     public static boolean isValidHouseType(String house) {
         for (HouseType h : HouseType.values()) {
+            // Prevent people from adding a null house type when calling add-ptb or add-pts
+            if (h == HouseType.NULLHOUSETYPE) {
+                continue;
+            }
             HouseType houseType = h.houseMappings.get(house.toLowerCase());
             if (houseType != null) {
                 return true;

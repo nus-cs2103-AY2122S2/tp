@@ -39,7 +39,7 @@ public class AddPropertyToSellCommand extends Command {
             + PREFIX_LOCATION + "Serangoon";
 
     public static final String MESSAGE_SUCCESS = "New property added for seller: %1$s";
-    public static final String MESSAGE_DUPLICATE_PROPERTY = "The seller already has this property";
+    public static final String MESSAGE_DUPLICATE_PROPERTY = "The seller already has a property, cannot add new one";
 
     private final Index index;
     private final PropertyToSell propertyToSell;
@@ -66,7 +66,7 @@ public class AddPropertyToSellCommand extends Command {
 
         Seller sellerToUpdate = lastShownList.get(index.getZeroBased());
 
-        if (sellerToUpdate.getPropertyToSell().equals(propertyToSell)) {
+        if (!sellerToUpdate.getPropertyToSell().equals(NullPropertyToSell.getNullPropertyToSell())) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
         Seller sellerWithProperty = createPropertyForSeller(sellerToUpdate, propertyToSell);

@@ -36,7 +36,7 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_PRICE_RANGE + "400000,500000 ";
 
     public static final String MESSAGE_SUCCESS = "New property added for buyer: %1$s";
-    public static final String MESSAGE_DUPLICATE_PROPERTY = "The buyer already has this property";
+    public static final String MESSAGE_DUPLICATE_PROPERTY = "The buyer already has a property, cannot add new one";
 
     private final Index index;
     private final PropertyToBuy propertyToBuy;
@@ -63,7 +63,7 @@ public class AddPropertyToBuyCommand extends Command {
 
         Buyer buyerToUpdate = lastShownList.get(index.getZeroBased());
 
-        if (buyerToUpdate.getPropertyToBuy().equals(propertyToBuy)) {
+        if (!buyerToUpdate.getPropertyToBuy().equals(NullPropertyToBuy.getNullPropertyToBuy)) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
         Buyer buyerWithProperty = createPropertyForBuyer(buyerToUpdate, propertyToBuy);
