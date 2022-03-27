@@ -1,12 +1,18 @@
 package seedu.ibook.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ibook.commons.exceptions.IllegalValueException;
+import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.UniqueItemList;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -20,9 +26,9 @@ class JsonAdaptedProduct {
 
     private final String name;
     private final String category;
-    private final String expiryDate;
     private final String description;
     private final String price;
+    private final List<JsonAdaptedItem> items = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedProduct} with the given product details.
@@ -30,14 +36,16 @@ class JsonAdaptedProduct {
     @JsonCreator
     public JsonAdaptedProduct(@JsonProperty("name") String name,
                               @JsonProperty("category") String category,
-                              @JsonProperty("expiryDate") String expiryDate,
                               @JsonProperty("description") String description,
-                              @JsonProperty("price") String price) {
+                              @JsonProperty("price") String price,
+                              @JsonProperty("items") List<JsonAdaptedItem> items) {
         this.name = name;
         this.category = category;
-        this.expiryDate = expiryDate;
         this.description = description;
         this.price = price;
+        if (items != null) {
+            this.items.addAll(items);
+        }
     }
 
     /**
@@ -46,9 +54,11 @@ class JsonAdaptedProduct {
     public JsonAdaptedProduct(Product source) {
         name = source.getName().fullName;
         category = source.getCategory().fullCategoryName;
-        expiryDate = source.getExpiryDate().expiryDate.toString();
         description = source.getDescription().fullDescription;
         price = source.getPrice().price.toString();
+        items.addAll(StreamSupport.stream(source.getItems().spliterator(), false)
+            .map(JsonAdaptedItem::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -57,6 +67,11 @@ class JsonAdaptedProduct {
      * @throws IllegalValueException if there were any data constraints violated in the adapted product.
      */
     public Product toModelType() throws IllegalValueException {
+        final List<Item> productItems = new ArrayList<>();
+        for (JsonAdaptedItem item : items) {
+            productItems.add(item.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -73,15 +88,6 @@ class JsonAdaptedProduct {
             throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
         }
         final Category modelCategory = new Category(category);
-
-        if (expiryDate == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
-        }
-        if (!ExpiryDate.isValidExpiryDate(expiryDate)) {
-            throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
-        }
-        final ExpiryDate modelExpiryDate = new ExpiryDate(expiryDate);
 
         if (description == null) {
             throw new IllegalValueException(
@@ -100,7 +106,12 @@ class JsonAdaptedProduct {
         }
         final Price modelPrice = new Price(price);
 
-        return new Product(modelName, modelCategory, modelExpiryDate, modelDescription, modelPrice);
+        final UniqueItemList modelItems = new UniqueItemList();
+        modelItems.setItems(productItems);
+
+        List<Item> modelItemList = modelItems.asUnmodifiableObservableList();
+
+        return new Product(modelName, modelCategory, modelDescription, modelPrice, modelItemList);
     }
 
 }

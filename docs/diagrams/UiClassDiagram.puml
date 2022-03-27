@@ -4,20 +4,20 @@
 $OverrideTheme(UI_COLOR)
 
 package UI {
-   class "<<interface>>\nUi" as Ui
-   class "{abstract}\nUiPart" as UiPart
-   class "{abstract}\nUiComponent" as UiComponent
-   class UiManager
-   class MainWindow
-   class MenuToolbar
-   class CommandBox
-   class ResultWindow
+    class "<<interface>>\nUi" as Ui
+    class "{abstract}\nUiPart" as UiPart
+    class "{abstract}\nUiComponent" as UiComponent
+    class UiManager
+    class MainWindow
+    class MenuToolbar
+    class CommandBox
+    class ResultWindow
 
-   package Table <<Rectangle>> {
-   }
+    package Table <<Rectangle>> {
+    }
 
-   package Popup <<Rectangle>> {
-   }
+    package Popup <<Rectangle>> {
+    }
 }
 
 package Model <<Rectangle>> {
@@ -36,22 +36,23 @@ MainWindow *--> "1" MenuToolbar
 MainWindow *--> "1" CommandBox
 MainWindow *--> "1" ResultWindow
 MainWindow --> Table
-MainWindow --> Popup
+MainWindow -right-> Popup
 
-MenuToolbar -up-|> UiComponent
-CommandBox -up-|> UiComponent
-ResultWindow -up-|> UiComponent
+MenuToolbar --up-|> UiComponent
+CommandBox --up-|> UiComponent
+ResultWindow --up-|> UiComponent
 
 MainWindow -up-|> UiPart
 UiComponent -up-|> UiPart
 
-UiManager --> Logic
+UiManager -right-> Logic
 MainWindow --> Logic
-Popup .right.> Logic
+Popup ..> Logic
+Popup --[hidden]-> Table
 
-MainWindow .[norank].> Model
-Popup .right.> Model
-Table .down.> Model
+MainWindow ..> Model
+Popup ...> Model
+Table .right.> Model
 
 UiComponent -left-> MainWindow
 

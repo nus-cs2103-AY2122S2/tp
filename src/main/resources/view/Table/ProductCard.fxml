@@ -5,29 +5,50 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
-      styleClass="table-row">
-    <Label fx:id="indexLabel" styleClass="table-column-short"/>
-    <Label fx:id="name" styleClass="table-column-long"/>
-    <Label fx:id="category" styleClass="table-column-long"/>
-    <Label fx:id="expiryDate" styleClass="table-column-long"/>
-    <Label fx:id="price" styleClass="table-column-short"/>
-    <Label fx:id="description" styleClass="table-column-long" HBox.hgrow="ALWAYS"/>
-    <HBox fx:id="action" styleClass="table-column-long">
-        <Button alignment="CENTER" onMouseClicked="#handlePopupUpdate" mnemonicParsing="false" styleClass="edit">
-            <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../images/edit-color.png"/>
-                </ImageView>
-            </graphic>
-        </Button>
-        <Button alignment="CENTER" onMouseClicked="#handlePopupDelete" mnemonicParsing="false" styleClass="delete">
-            <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../images/trash-2-color.png"/>
-                </ImageView>
-            </graphic>
-        </Button>
+<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER_LEFT" styleClass="table-row">
+        <HBox styleClass="expand-column" alignment="CENTER">
+            <Button fx:id="expandButton" onMouseClicked="#handleExpand"
+                    alignment="CENTER" mnemonicParsing="false" styleClass="action-button">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../images/chevron-right.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+        <Label fx:id="indexLabel" styleClass="table-column-short"/>
+        <Label fx:id="name" styleClass="table-column-long"/>
+        <Label fx:id="category" styleClass="table-column-long"/>
+        <Label fx:id="price" styleClass="table-column-short"/>
+        <Label fx:id="description" styleClass="table-column-long" HBox.hgrow="ALWAYS"/>
+        <HBox styleClass="table-column-long" alignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" styleClass="action-button">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../images/file-plus.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button alignment="CENTER" onMouseClicked="#handlePopupUpdate" mnemonicParsing="false"
+                    styleClass="action-button">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../images/edit-color.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button alignment="CENTER" onMouseClicked="#handlePopupDelete" mnemonicParsing="false"
+                    styleClass="action-button">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../images/trash-2-color.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
     </HBox>
-</HBox>
+    <VBox fx:id="itemTableContainer"/>
+</VBox>

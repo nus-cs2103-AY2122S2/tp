@@ -3,7 +3,6 @@ package seedu.ibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ibook.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +12,9 @@ import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.CollectionUtil;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
+import seedu.ibook.model.item.UniqueItemList;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -67,12 +66,12 @@ public class UpdateCommand extends Command {
         Product productToUpdate = lastShownList.get(index.getZeroBased());
         Product updatedProduct = createUpdatedProduct(productToUpdate, updateProductDescriptor);
 
-        if (!productToUpdate.isSameProduct(updatedProduct) && model.hasProduct(updatedProduct)) {
+        if (!productToUpdate.isSame(updatedProduct) && model.hasProduct(updatedProduct)) {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
         model.setProduct(productToUpdate, updatedProduct);
-        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
+        model.clearProductFilters();
         return new CommandResult(String.format(MESSAGE_UPDATE_PRODUCT_SUCCESS, updatedProduct));
     }
 
@@ -86,13 +85,16 @@ public class UpdateCommand extends Command {
 
         Name updatedName = updateProductDescriptor.getName().orElse(productToUpdate.getName());
         Category updatedCategory = updateProductDescriptor.getCategory().orElse(productToUpdate.getCategory());
-        ExpiryDate updatedExpiryDate =
-                updateProductDescriptor.getExpiryDate().orElse(productToUpdate.getExpiryDate());
         Description updatedDescription =
                 updateProductDescriptor.getDescription().orElse(productToUpdate.getDescription());
         Price updatedPrice = updateProductDescriptor.getPrice().orElse(productToUpdate.getPrice());
 
-        return new Product(updatedName, updatedCategory, updatedExpiryDate, updatedDescription, updatedPrice);
+        UniqueItemList items = updateProductDescriptor.getItems().orElse(productToUpdate.getItems());
+
+        // Updates to items via this command is not available
+        assert items.equals(productToUpdate.getItems());
+
+        return new Product(updatedName, updatedCategory, updatedDescription, updatedPrice, items.asObservableList());
     }
 
     @Override
@@ -120,9 +122,9 @@ public class UpdateCommand extends Command {
     public static class UpdateProductDescriptor {
         private Name name;
         private Category category;
-        private ExpiryDate expiryDate;
         private Description description;
         private Price price;
+        private UniqueItemList items;
 
         public UpdateProductDescriptor() {}
 
@@ -132,16 +134,16 @@ public class UpdateCommand extends Command {
         public UpdateProductDescriptor(UpdateProductDescriptor toCopy) {
             setName(toCopy.name);
             setCategory(toCopy.category);
-            setExpiryDate(toCopy.expiryDate);
             setDescription(toCopy.description);
             setPrice(toCopy.price);
+            setItems(toCopy.items);
         }
 
         /**
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyNonNull(name, category, expiryDate, description, price);
+            return CollectionUtil.isAnyNonNull(name, category, description, price);
         }
 
         public void setName(Name name) {
@@ -160,14 +162,6 @@ public class UpdateCommand extends Command {
             return Optional.ofNullable(category);
         }
 
-        public void setExpiryDate(ExpiryDate expiryDate) {
-            this.expiryDate = expiryDate;
-        }
-
-        public Optional<ExpiryDate> getExpiryDate() {
-            return Optional.ofNullable(expiryDate);
-        }
-
         public void setDescription(Description description) {
             this.description = description;
         }
@@ -182,6 +176,14 @@ public class UpdateCommand extends Command {
 
         public Optional<Price> getPrice() {
             return Optional.ofNullable(price);
+        }
+
+        public void setItems(UniqueItemList items) {
+            this.items = items;
+        }
+
+        public Optional<UniqueItemList> getItems() {
+            return Optional.ofNullable(items);
         }
 
         @Override
@@ -201,9 +203,9 @@ public class UpdateCommand extends Command {
 
             return getName().equals(e.getName())
                     && getCategory().equals(e.getCategory())
-                    && getExpiryDate().equals(e.getExpiryDate())
                     && getDescription().equals(e.getDescription())
-                    && getPrice().equals(e.getPrice());
+                    && getPrice().equals(e.getPrice())
+                    && getItems().equals(e.getItems());
         }
     }
 

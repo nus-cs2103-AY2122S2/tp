@@ -3,13 +3,11 @@ package seedu.ibook.model.product;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.ibook.model.product.exceptions.DuplicateProductException;
-import seedu.ibook.model.product.exceptions.ProductNotFoundException;
+import seedu.ibook.commons.core.UniqueList;
+import seedu.ibook.commons.core.exceptions.DuplicateElementException;
+import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
 
 /**
  * A list of products that enforces uniqueness between its elements and does not allow nulls.
@@ -20,33 +18,9 @@ import seedu.ibook.model.product.exceptions.ProductNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Product#isSameProduct(Product)
+ * @see Product#isSame(Product)
  */
-public class UniqueProductList implements Iterable<Product> {
-
-    private final ObservableList<Product> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Product> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
-
-    /**
-     * Returns true if the list contains an equivalent product as the given argument.
-     */
-    public boolean contains(Product toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameProduct);
-    }
-
-    /**
-     * Adds a product to the list.
-     * The product must not already exist in the list.
-     */
-    public void add(Product toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateProductException();
-        }
-        internalList.add(toAdd);
-    }
+public class UniqueProductList extends UniqueList<Product> {
 
     /**
      * Replaces the product {@code target} in the list with {@code editedProduct}.
@@ -56,32 +30,21 @@ public class UniqueProductList implements Iterable<Product> {
     public void setProduct(Product target, Product editedProduct) {
         requireAllNonNull(target, editedProduct);
 
-        int index = internalList.indexOf(target);
+        int index = asObservableList().indexOf(target);
         if (index == -1) {
-            throw new ProductNotFoundException();
+            throw new ElementNotFoundException();
         }
 
-        if (!target.isSameProduct(editedProduct) && contains(editedProduct)) {
-            throw new DuplicateProductException();
+        if (!target.isSame(editedProduct) && contains(editedProduct)) {
+            throw new DuplicateElementException();
         }
 
-        internalList.set(index, editedProduct);
-    }
-
-    /**
-     * Removes the equivalent product from the list.
-     * The product must exist in the list.
-     */
-    public void remove(Product toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new ProductNotFoundException();
-        }
+        set(index, editedProduct);
     }
 
     public void setProducts(UniqueProductList replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        setAll(replacement.asObservableList());
     }
 
     /**
@@ -91,34 +54,10 @@ public class UniqueProductList implements Iterable<Product> {
     public void setProducts(List<Product> products) {
         requireAllNonNull(products);
         if (!productsAreUnique(products)) {
-            throw new DuplicateProductException();
+            throw new DuplicateElementException();
         }
 
-        internalList.setAll(products);
-    }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Product> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
-    }
-
-    @Override
-    public Iterator<Product> iterator() {
-        return internalList.iterator();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UniqueProductList // instanceof handles nulls
-                        && internalList.equals(((UniqueProductList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
+        setAll(products);
     }
 
     /**
@@ -127,7 +66,7 @@ public class UniqueProductList implements Iterable<Product> {
     private boolean productsAreUnique(List<Product> products) {
         for (int i = 0; i < products.size() - 1; i++) {
             for (int j = i + 1; j < products.size(); j++) {
-                if (products.get(i).isSameProduct(products.get(j))) {
+                if (products.get(i).isSame(products.get(j))) {
                     return false;
                 }
             }
