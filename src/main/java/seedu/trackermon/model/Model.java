@@ -97,5 +97,8 @@ public interface Model {
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedShowList(Comparator<Show> comparator);
-
+    /**
+     * Saves the ordering of the sorted show list.
+     */
+    void saveSortedShowList();
 }

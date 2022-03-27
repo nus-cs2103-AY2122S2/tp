@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
@@ -16,11 +17,13 @@ public class ShowBuilder {
     public static final String DEFAULT_STATUS = "completed";
     public static final String DEFAULT_TAG = "Anime";
     public static final String DEFAULT_COMMENT = "HELP";
+    public static final String DEFAULT_RATING = "1";
 
     private Name name;
     private Status status;
     private Set<Tag> tags;
     private Comment comment;
+    private Rating rating;
 
     /**
      * Creates a {@code ShowBuilder} with the default details.
@@ -30,6 +33,7 @@ public class ShowBuilder {
         status = Status.getStatus(DEFAULT_STATUS);
         tags = new HashSet<>();
         comment = new Comment(DEFAULT_COMMENT);
+        rating = new Rating(DEFAULT_RATING);
     }
 
     /**
@@ -40,6 +44,7 @@ public class ShowBuilder {
         status = showToCopy.getStatus();
         tags = new HashSet<>(showToCopy.getTags());
         comment = showToCopy.getComment();
+        rating = showToCopy.getRating();
     }
 
     /**
@@ -75,6 +80,22 @@ public class ShowBuilder {
     }
 
     /**
+     * Sets the {@code comment} of the {@code Show} that we are building.
+     */
+    public ShowBuilder withRating(String rating) {
+        this.rating = new Rating(rating);
+        return this;
+    }
+
+    /**
+     * Sets the {@code comment} of the {@code Show} that we are building to empty.
+     */
+    public ShowBuilder withRating() {
+        this.rating = new Rating("0");
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Show} that we are building.
      */
     public ShowBuilder withTags(String ... tags) {
@@ -83,6 +104,6 @@ public class ShowBuilder {
     }
 
     public Show build() {
-        return new Show(name, status, tags, comment);
+        return new Show(name, status, tags, comment, rating);
     }
 }

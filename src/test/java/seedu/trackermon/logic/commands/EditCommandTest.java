@@ -96,7 +96,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new ShowList(model.getShowList()), new UserPrefs());
         expectedModel.setShow(model.getFilteredShowList().get(0), editedShow);
-
+        model.updateFilteredShowList(Model.PREDICATE_SHOW_ALL_SHOWS);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

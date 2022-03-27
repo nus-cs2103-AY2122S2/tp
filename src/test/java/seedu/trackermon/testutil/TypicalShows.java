@@ -19,13 +19,13 @@ import seedu.trackermon.model.show.Show;
 
 public class TypicalShows {
     public static final Show ALICE_IN_WONDERLAND = new ShowBuilder().withName("Alice in WonderLand")
-            .withStatus("completed").withTags("movie").withComment("bad").build();
+            .withStatus("completed").withTags("movie").withComment("bad").withRating("5").build();
     public static final Show GONE = new ShowBuilder().withName("gone")
-            .withStatus("watching").withTags().withComment("bad").build();
+            .withStatus("watching").withTags().withComment("bad").withRating().build();
     public static final Show FRIENDS = new ShowBuilder().withName("friends")
-            .withStatus("watching").withTags("Horror", "friends").withComment("good").build();
+            .withStatus("watching").withTags("Horror", "friends").withComment("good").withRating().build();
     public static final Show HIMYM = new ShowBuilder().withName("HIMYM")
-            .withStatus("watching").withTags("Horror", "friends").withComment("good").build();
+            .withStatus("watching").withTags("Horror", "friends").withComment("good").withRating().build();
 
     // Manually added - Show's details found in {@code CommandTestUtil}
     public static final Show WEATHERING_WITH_YOU = new ShowBuilder().withName(VALID_NAME_WEATHERING_WITH_YOU)
