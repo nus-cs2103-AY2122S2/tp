@@ -37,26 +37,26 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         boolean correctDate;
         boolean correctTime;
 
-        if(nameKeywords.size() == 1 && nameKeywords.get(0) == "") {
+        if(validKeywords(nameKeywords)) {
             correctName = true;
         } else {
             correctName = nameKeywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword));
         }
-        if(companyKeywords.size() == 1 && companyKeywords.get(0) == "") {
+        if(validKeywords(companyKeywords)) {
             correctCompany = true;
         } else {
             correctCompany = companyKeywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getCompanyName().fullName, keyword));
         }
-        if(dateKeywords.size() == 1 && dateKeywords.get(0) == "") {
+        if(validKeywords(dateKeywords)) {
             correctDate = true;
         } else {
             correctDate = dateKeywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getDate().getPure().toString(),
                             keyword));
         }
-        if(timeKeywords.size() == 1 && timeKeywords.get(0) == "") {
+        if(validKeywords(timeKeywords)) {
             correctTime = true;
         } else {
             correctTime = timeKeywords.stream()
@@ -79,6 +79,10 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 && dateKeywords.equals(((EventContainsKeywordsPredicate) other).dateKeywords)
                 && timeKeywords.equals(((EventContainsKeywordsPredicate) other).timeKeywords)
                 && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)); // state check
+    }
+
+    private boolean validKeywords(List<String> keywords) {
+        return keywords.size() == 1 && keywords.get(0) == "";
     }
 
 }
