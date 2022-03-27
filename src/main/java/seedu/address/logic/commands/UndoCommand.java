@@ -29,7 +29,7 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_UNDO_SUCCESS);
         }
 
-        return new CommandResult(MESSAGE_UNDO_FAILED);
+        throw new CommandException(MESSAGE_UNDO_FAILED);
     }
 
     @Override

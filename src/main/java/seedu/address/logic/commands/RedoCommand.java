@@ -29,7 +29,7 @@ public class RedoCommand extends Command {
             return new CommandResult(MESSAGE_REDO_SUCCESS);
         }
 
-        return new CommandResult(MESSAGE_REDO_FAILED);
+        throw new CommandException(MESSAGE_REDO_FAILED);
     }
 
     @Override

@@ -106,6 +106,14 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void undo_changesNotCommitted_doesNothing() {
+        modelManager.addPerson(ALICE);
+
+        assertFalse(modelManager.canUndoAddressBook());
+        assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
     public void undo_noChangesToUndo_doesNothing() {
         VersionedAddressBook versionedAddressBook = new VersionedAddressBook(modelManager.getAddressBook());
         modelManager.undoAddressBook();
