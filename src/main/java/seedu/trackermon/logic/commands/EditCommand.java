@@ -20,6 +20,7 @@ import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
@@ -81,7 +82,6 @@ public class EditCommand extends Command {
         }
 
         model.setShow(showToEdit, editedShow);
-        model.updateFilteredShowList(Model.PREDICATE_SHOW_ALL_SHOWS);
         return new CommandResult(String.format(MESSAGE_EDIT_SHOW_SUCCESS, editedShow));
     }
 
@@ -96,8 +96,8 @@ public class EditCommand extends Command {
         Status updatedStatus = editShowDescriptor.getStatus().orElse(showToEdit.getStatus());
         Set<Tag> updatedTags = editShowDescriptor.getTags().orElse(showToEdit.getTags());
         Comment updateComment = editShowDescriptor.getComment().orElse(showToEdit.getComment());
-
-        return new Show(updatedName, updatedStatus, updatedTags, updateComment);
+        Rating updateRating = editShowDescriptor.getRating().orElse(showToEdit.getRating());
+        return new Show(updatedName, updatedStatus, updatedTags, updateComment, updateRating);
     }
 
     @Override
@@ -127,6 +127,7 @@ public class EditCommand extends Command {
         private Status status;
         private Set<Tag> tags;
         private Comment comment;
+        private Rating rating;
 
         public EditShowDescriptor() {}
 
@@ -139,13 +140,14 @@ public class EditCommand extends Command {
             setStatus(toCopy.status);
             setTags(toCopy.tags);
             setComment(toCopy.comment);
+            setRating(toCopy.rating);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, status, tags, comment);
+            return CollectionUtil.isAnyNonNull(name, status, tags, comment, rating);
         }
 
         public void setName(Name name) {
@@ -170,6 +172,14 @@ public class EditCommand extends Command {
 
         public Optional<Comment> getComment() {
             return Optional.ofNullable(comment);
+        }
+
+        public void setRating(Rating rating) {
+            this.rating = rating;
+        }
+
+        public Optional<Rating> getRating() {
+            return Optional.ofNullable(rating);
         }
 
         /**
@@ -207,7 +217,8 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getStatus().equals(e.getStatus())
                     && getTags().equals(e.getTags())
-                    && getComment().equals(e.getComment());
+                    && getComment().equals(e.getComment())
+                    && getRating().equals(e.getRating());
         }
     }
 }
