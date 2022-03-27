@@ -43,7 +43,7 @@ public class FacultyTest {
 
     @Test
     public void getFacultyEnumAsString() {
-        String listOfFaculties = "FASS BIZ SOC SCALE FOD CDE DUKE FOL YLLSOM YSTCOM SOPP LKYSPP SPH TEST FOS ";
+        String listOfFaculties = "FASS BIZ SOC SCALE FOD CDE DUKE FOL YLLSOM YSTCOM SOPP LKYSPP SPH FOS ";
         StringBuilder stringBuilder = new StringBuilder();
         Stream.of(Faculty.Nus.values()).forEach(faculty -> stringBuilder.append(faculty + " "));
         assertEquals(listOfFaculties, stringBuilder.toString());
