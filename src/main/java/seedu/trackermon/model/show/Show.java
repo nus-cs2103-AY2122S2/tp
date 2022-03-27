@@ -23,7 +23,7 @@ public class Show {
     /**
      * Every field must be present and not null.
      */
-    public Show(Name name, Status status, Set<Tag> tags, Comment comment) {
+    public Show(Name name, Status status, Set<Tag> tags, Comment comment, Rating rating) {
         requireAllNonNull(name, status, tags, comment, rating);
         this.name = name;
         this.status = status;
@@ -102,6 +102,7 @@ public class Show {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName().toString());
         builder.append(getStatus().toString());
+        builder.append(getComment().toString());
         builder.append(getRating().toString());
 
         Set<Tag> tags = getTags();
@@ -109,7 +110,6 @@ public class Show {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        builder.append(getComment().toString());
         return builder.toString();
     }
 

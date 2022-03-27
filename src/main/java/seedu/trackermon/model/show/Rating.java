@@ -6,11 +6,11 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
 public class Rating {
 
-    public static final String INVALID_RATING = "Rating should be between 0 to 10";
+    public static final String INVALID_RATING = "Rating should be between 0 to 5";
 
-    public static final Integer FULL_RATING = 10;
+    public static final Integer FULL_RATING = 5;
 
-    private final Integer rating;
+    public final Integer rating;
 
     /**
      * Constructs a {@code rating}.
@@ -24,10 +24,21 @@ public class Rating {
     }
 
     /**
+     * Constructs a {@code rating}.
+     *
+     * @param rating A valid rating.
+     */
+    public Rating(String rating) {
+        requireNonNull(rating);
+        checkArgument(isValidScore(rating), INVALID_RATING);
+        this.rating = Integer.parseInt(rating);
+    }
+
+    /**
      * Return true if a given rating is a valid rating.
      */
     public static boolean isValidScore(int rating) {
-        if (rating <= 10 && rating >= 0) {
+        if (rating <= FULL_RATING && rating >= 0) {
             return true;
         }
         return false;
@@ -55,10 +66,6 @@ public class Rating {
         return other == this //short circuit if same object
                 || (other instanceof Rating
                 && rating.equals(((Rating) other).rating));
-    }
-
-    public String stringRating() {
-        return rating.toString();
     }
 
     @Override
