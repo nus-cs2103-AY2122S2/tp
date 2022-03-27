@@ -389,7 +389,7 @@ The filter mechanism implements the following sequence for the method call execu
 
 #### What is the filter feature
 
-The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block. 
+The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block.
 
 The `filter` command is as follows:
 
@@ -397,13 +397,13 @@ The `filter` command is as follows:
 
 The user can choose whether to input filter criteria for some or all of the fields. However, at least one field must be specified. <br>
 
-The user can thus choose different combinations of filter criteria depending on the motive. For example, if a block head wants to cater to the covid-positive students in a certain block, the user can simply filter by both covid status and block to find out the details of this group of people. 
+The user can thus choose different combinations of filter criteria depending on the motive. For example, if a block head wants to cater to the covid-positive students in a certain block, the user can simply filter by both covid status and block to find out the details of this group of people.
 
 eg.
 `filter cs/positive f/soc` <br>
-This is still a valid input even though the filter criteria for block was not specified. The resultant list will contain students who are both covid-positive and from the faculty "SOC". 
+This is still a valid input even though the filter criteria for block was not specified. The resultant list will contain students who are both covid-positive and from the faculty "SOC".
 
-The activity diagram shows the possible execution paths for the `filter` command. 
+The activity diagram shows the possible execution paths for the `filter` command.
 
 **Path Execution of Filter Feature Activity Diagram is shown below:**
 ![FilterFeatureActivityDiagram](images/FilterFeatureActivityDiagram.png)
@@ -411,22 +411,22 @@ The activity diagram shows the possible execution paths for the `filter` command
 There are two possible execution paths for this command.
 
 1. User inputs the `filter` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
-2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria. 
+2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
 
 The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
 
 **Sequence Diagram of Filter Feature is shown below:**
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
-The arguments typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will then be parsed by the `parseCommmand` function in the `AddressBookParser` object. 
+The arguments typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will then be parsed by the `parseCommmand` function in the `AddressBookParser` object.
 
-A `FilterCommandParser` object will then be created to parse this input, with its `parse` function. A `FilterDescriptor` object is then created, containing the filter criteria that the user has entered. This `FilterDescriptor` object is then used to create a `FilterCommand` object. 
+A `FilterCommandParser` object will then be created to parse this input, with its `parse` function. A `FilterDescriptor` object is then created, containing the filter criteria that the user has entered. This `FilterDescriptor` object is then used to create a `FilterCommand` object.
 
-Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying a success message and a list of the filtered students. 
+Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying a success message and a list of the filtered students.
 
-The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in. 
+The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in.
 
-The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate. 
+The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -508,11 +508,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
+The archive mechanism implements the following sequence for the method call execute("archive") on a LogicManager object.
 
-_{Explain here how the data archiving feature will be implemented}_
+#### <ins>How the feature is implemented<ins/>
+The archive command will save the archived file into a subdirectory of a directory relative to the address book file path.
+`ArchiveCommand#initArchiveFilePath()` will produce the archived file path using the directory path of the address book file as the base directory.
+e.g. If the address book file is saved in `[ROOT]/data`, then a directory called `archive` will be saved in `[ROOT]/data` and the
+subdirectories will be saved as `[ROOT/data/[LOCAL_PC_DATE]` and the archived file path is `[ROOT]/data/[LOCAL_PC_DATE]/[ARCHIVED_FILE]`.
+`FileUtil#createIfMissing()` will create a dummy file at the archive file path.
+The address book file will then be copied over to this dummy file at the archived file path using `Files#copy()`.
 
+Below are links for implementation of the classes and its methods:
+* [`FileUtil`](../src/main/java/seedu/address/commons/util/FileUtil.java)
+* [`ArchiveCommand`](../src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
+* [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
+**Sequence and Activity Diagram of Archive Feature is shown below:**
+![ArchiveCommandSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
+![ArchiveCommandActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -631,7 +645,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add the student with his/her details such as year, faculty, covid status.
-2.  Tracey adds the student with all his/her details into its database. 
+2.  Tracey adds the student with all his/her details into its database.
 3.  Tracey shows the info of student with that matching name.
 
     Use case ends.
@@ -643,25 +657,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Tracey will inform user that he/she did not provide the correct information.
 
     * 1a2. User provide the correct details in the correct format.
-    
-        Use case ends. 
+
+        Use case ends.
 
 * 1b. The student to be added already exists in the list by Tracey.
 
     * 1b1. Tracey inform user that the contact exists in her database.
-      
+
         Use case ends.
 
 * 1c. User adds multiple students in one go.
 
     * 1c1. Tracey will list out a list of new students added with their info.
-      
+
         Use case ends.
 
 * 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
 
     * 1d1. Tracey will provide a list of pre-defined constants for the user.
-  
+
         Use case ends.
 
 ### Use case: UC04 - Edit information of a student
@@ -678,8 +692,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The list is empty.
-  
-    * 1a1. Tracey shows an empty list. 
+
+    * 1a1. Tracey shows an empty list.
 
         Use case ends.
 
@@ -695,9 +709,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to clear all students. 
-2.  Tracey deletes all students from its database. 
-3.  Tracey shows an empty list. 
+1.  User requests to clear all students.
+2.  Tracey deletes all students from its database.
+3.  Tracey shows an empty list.
 
     Use case ends.
 
@@ -706,8 +720,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to summarise the number of students with covid. 
-2.  Tracey shows a pie chart and statements showing the proportion of students with different covid statuses. 
+1.  User requests to summarise the number of students with covid.
+2.  Tracey shows a pie chart and statements showing the proportion of students with different covid statuses.
 
     Use case ends.
 
@@ -716,15 +730,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list all students. 
-2.  Tracey shows a list of students. 
+1.  User requests to list all students.
+2.  Tracey shows a list of students.
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
-    * 1a1. Tracey shows an empty list. 
+    * 1a1. Tracey shows an empty list.
 
   Use case ends.
 
@@ -751,18 +765,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User keys in the details of students to filter out.
 3. Tracey returns a list of students of the specified covid status, faculty and block.
 
-    Use case ends. 
+    Use case ends.
 
 **Extensions**
 
 * 2a. Tracey detects invalid or empty arguments in user input.
-    * 2a1. Tracey displays a error message and shows the correct input format. 
-    
-        Use case ends. 
-  
-* 2b. User only inputs details for one or two of the fields (covid status, faculty or block). 
+    * 2a1. Tracey displays a error message and shows the correct input format.
+
+        Use case ends.
+
+* 2b. User only inputs details for one or two of the fields (covid status, faculty or block).
     * 2b1. Tracey returns a list of students of the specified details.
-    
+
         Use case ends.
 
 ### Use case: UC10 - Summarise all students for some overview of covid situation

@@ -22,6 +22,7 @@ Tracey can get your student health status management tasks done faster than trad
     * [Listing the records](#listing-the-records-list)
     * [Viewing help](#viewing-help-help)
     * [Filtering contacts](#filtering-contacts-filter)
+    * [Archiving address book](#archiving-address-book-archive)
     * [Saving](#saving)
     * [Copying Emails](#copying-emails)
 * [FAQ](#faq)
@@ -152,7 +153,7 @@ Format: `list`
 ### Viewing help: `help`
 The `help` command opens a pop-up window that includes a summary to briefly explain all the commands that Tracey offers.
 
-The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide. 
+The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide.
 
 This is a sample screenshot of what you can expect from the `help` command.
 
@@ -173,12 +174,32 @@ Examples of usage:
 * `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing)
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing)
 
+### Archiving address book: `archive`
+Archives the current address book file
+
+Format: `archive`
+
+* The archived file will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where
+  * `[ROOT]`: Root directory of Tracey
+  * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY
+  * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss
+
+Example:
+* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33 (hh:mm:ss in 24-hour notation)
+* The archived file will be saved **in** `[ROOT]/data/archive/270322`
+* The archived file will be saved **as** `270322_152833`
+* The file path will be `[ROOT]/data/archive/270322/270322_152833`
+
+Tips:
+* You can rename the archived file in the file path manually for easier reference
+* To restore the address book to a previous version, just replace the address book file in `[ROOT]/data` with the archived file
+
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to `Tracey`.
 
 ### Copying emails
-The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals. 
+The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
 `Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
 ![Email](images/CopyEmailScreenshot.png)
 
