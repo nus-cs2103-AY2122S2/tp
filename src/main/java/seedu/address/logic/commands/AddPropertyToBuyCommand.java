@@ -16,6 +16,7 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.NullPropertyToBuy;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
@@ -63,7 +64,7 @@ public class AddPropertyToBuyCommand extends Command {
 
         Buyer buyerToUpdate = lastShownList.get(index.getZeroBased());
 
-        if (!buyerToUpdate.getPropertyToBuy().equals(NullPropertyToBuy.getNullPropertyToBuy)) {
+        if (!buyerToUpdate.getPropertyToBuy().equals(NullPropertyToBuy.getNullPropertyToBuy())) {
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
         Buyer buyerWithProperty = createPropertyForBuyer(buyerToUpdate, propertyToBuy);

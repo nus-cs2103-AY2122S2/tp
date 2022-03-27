@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
@@ -42,9 +43,9 @@ class JsonAdaptedPropertyToSell {
         } else {
             //Default value of NullPropertyToSell
             System.out.println("NullPropertyToSell is translating to JSON format");
-            this.house = new JsonAdaptedHouse(new House(HouseType.NULLHOUSETYPE, "NullLocation"));
+            this.house = new JsonAdaptedHouse(new House(HouseType.NULLHOUSETYPE, "nan"));
             this.priceRange = new JsonAdaptedPriceRange(new PriceRange(0, 0));
-            this.address = "";
+            this.address = "nan";
         }
     }
 

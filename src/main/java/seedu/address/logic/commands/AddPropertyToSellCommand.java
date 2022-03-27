@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE_RANGE;
 
 import java.util.List;
@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.property.PropertyToSell;
 import seedu.address.model.seller.Seller;
 import seedu.address.model.tag.Tag;

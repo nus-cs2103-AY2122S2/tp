@@ -17,6 +17,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.property.House;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.PriceRange;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
@@ -26,14 +30,20 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_CHAD = "Chad chadson";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_CHAD = "33333333";
+    public static final PropertyToBuy VALID_PROPERTYB_CHAD = new PropertyToBuy(new House(HouseType.HDB_FLAT, "jurong"),
+            new PriceRange(1000, 2000));
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_REMARK_AMY = "A remark";
     public static final String VALID_REMARK_BOB = "B remark";
     public static final String VALID_APPOINTMENT_AMY = "2022-09-08-12-00";
     public static final String VALID_APPOINTMENT_BOB = "2022-09-03-09-10";
+    public static final String VALID_APPOINTMENT_CHAD = "2023-09-03-09-10";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

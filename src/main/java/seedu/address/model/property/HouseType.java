@@ -39,7 +39,7 @@ public enum HouseType {
     HDB_FLAT("hdb", "hdb_flat") {
         @Override
         public String toString() {
-            return "HDB Flat";
+            return "HDB";
         }
     },
     SEMIDETACHED("semidetached", "semid", "semi-detached", "semi-d") {
@@ -57,7 +57,7 @@ public enum HouseType {
     NULLHOUSETYPE("nullhouse") {
         @Override
         public String toString() {
-            return "Nullhouse";
+            return "nullhouse";
         }
     };
 

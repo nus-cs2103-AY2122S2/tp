@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalSellers.BOB;
 import static seedu.address.testutil.TypicalSellers.YUQI;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;

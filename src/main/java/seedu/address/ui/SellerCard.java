@@ -70,7 +70,7 @@ public class SellerCard extends UiPart<Region> {
                                     + " to " + seller.getPropertyToSell().getPriceRange().getUpperToString());
             //propertyLowerPrice.setText(seller.getPropertyToSell().getPriceRange().getLowerToString());
             //propertyUpperPrice.setText(seller.getPropertyToSell().getPriceRange().getUpperToString());
-            propertyAddress.setText("Address: " + seller.getPropertyToSell().getAddress());
+            propertyAddress.setText("Address: " + seller.getPropertyToSell().getAddress().toString());
         }
     }
 
