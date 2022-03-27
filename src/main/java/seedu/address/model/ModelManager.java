@@ -127,9 +127,6 @@ public class ModelManager implements Model {
 
     //=========== LessonBook =================================================================================
 
-    // TODO: add the same functions for LessonBook
-    // TODO: also, add the abstract function declarations for these functions in the Model interface
-
     @Override
     public LessonBook getLessonBook() {
         return lessonBook;

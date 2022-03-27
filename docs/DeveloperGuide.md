@@ -264,6 +264,10 @@ This is done with the method `ConsistentLessonList#hasConflictingLesson()`, whic
 - goes through the list and compares each *existing* `Lesson` with it
 - and returns true if any existing lessons clashes with it
 
+The following sequence diagram shows how this is done:
+
+![Add Lesson Sequence Diagram 5](images/AddLessonSequenceDiagram_5.png)
+
 ### Assign student to lesson
 
 The feature assigns a `Student` to a `Lesson`. The `AssignCommand` class 

@@ -36,6 +36,10 @@ LogicManager -> AddLessonCommand : execute()
 
 AddLessonCommand -> Model : addLesson(lessonToBeAdded)
 
+ref over Model
+    check if any conflicting lessons exist
+end ref
+
 alt does not conflict with any existing lessons
     ref over AddLessonCommand, Lesson, Model
         lesson successfully added
@@ -56,9 +60,4 @@ else else
 
     deactivate LogicManager
 end
-note right of LogicManager
-        refer to the section __**Determining if a lesson clashes with any existing lessons**__
-        for how //TeachWhat!// checks if the lesson to be added does not clash
-        with any existing lessons
-        end note
 @enduml
