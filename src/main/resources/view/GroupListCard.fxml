@@ -16,7 +16,7 @@
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
-                <Insets top="5" right="5" bottom="5" left="15" />
+                <Insets top="20" right="5" bottom="5" left="15" />
             </padding>
             <HBox spacing="5" alignment="CENTER_LEFT">
                 <Label fx:id="id" styleClass="cell_big_label">
@@ -26,6 +26,18 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="groupName" text="\$first" styleClass="cell_big_label" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            </HBox>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="20" right="5" bottom="5" left="15" />
+                </padding>
+                <Label fx:id="studentContactTitle" text="\$first" styleClass="cell_big_label" style="-fx-font-size: 16px; -fx-font-weight: 900; "/>
+            </HBox>
+            <HBox>
+            <padding>
+                <Insets top="10" right="5" bottom="5" left="15" />
+            </padding>
+            <FlowPane fx:id="personName" maxHeight="200" vgap="10" style="-fx-font-size: 14px; "/>
             </HBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
                 <padding>
