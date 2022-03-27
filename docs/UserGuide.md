@@ -391,10 +391,32 @@ Examples:
 * `find Bob | addMembership 1 m/Glee Club` will add the membership to the first client that has Bob
   in its' attributes.
 
-### Undo Last Command (`undo`)
+### Undo Last Modification (`undo`)
 
-//TODO
+Undo last modification made to the clients list.
 
+Format: `undo`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Saves your latest 10 modifications to the clients or the clients list.
+* If the previous command have multiple modifications through [command chains](#Command-Chains), it is counted as one modification.
+* Calling undo will show the entire list, regardless of whether you filtered the list previously. (Filtering through the [Find command](#find-client-by-keyword-find) is not considered a modification)
+
+Types of modification that will be undone:
+* [Adding a new client](#add-client-add)
+* [Deleting a client](#delete-client-delete)
+* [Deleting filtered list](#delete-filtered-clients-deletefiltered)
+* [Sorting clients](#sort-client-list-sort)
+* [Clearing list of clients](#delete-all-entries-clear)
+* Editing client information
+  * [Adding remark](#append-remark-to-client-remark)
+  * [Appending extra information](#append-fields-to-client-append)
+  * [Adding transactions](#add-transaction-addtransaction)
+  * [Deleting transactions](#delete-transaction-deletetransaction)
+  * [Editing or removing any field value of ](#edit-client-edit)
+  * [Adding membership](#add-membership-addmembership)
+  
 ### Exit Program (`exit`)
 
 Exits the program.
