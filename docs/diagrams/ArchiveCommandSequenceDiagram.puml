@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+
+title ArchiveCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ArchiveCommand" as ArchiveCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+box "Storage" STORAGE_COLOR_T1
+participant ":JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create ArchiveCommand
+AddressBookParser -> ArchiveCommand
+activate ArchiveCommand LOGIC_COLOR
+ArchiveCommand --> AddressBookParser : ArchiveCommand
+deactivate ArchiveCommand
+
+AddressBookParser --> LogicManager --: ArchiveCommand
+LogicManager -> ArchiveCommand ++ LOGIC_COLOR: execute(model)
+
+ArchiveCommand -> Model ++ MODEL_COLOR: getAddressBookFilePath()
+Model --> ArchiveCommand -- MODEL_COLOR: currentPath
+
+ArchiveCommand -> Model ++ MODEL_COLOR: getAddressBook()
+Model --> ArchiveCommand -- MODEL_COLOR: currentAddressBook
+
+ArchiveCommand -> ArchiveCommand : Generate new path
+ArchiveCommand -> ArchiveCommand : Create new .json file
+
+create JsonSerializableAddressBook
+ArchiveCommand -> JsonSerializableAddressBook: JsonSerializableAddressBook(currentAddressBook)
+activate JsonSerializableAddressBook STORAGE_COLOR
+JsonSerializableAddressBook --> ArchiveCommand
+deactivate JsonSerializableAddressBook
+
+ArchiveCommand -> ArchiveCommand : Write to new .json file
+
+create CommandResult
+ArchiveCommand -> CommandResult
+activate CommandResult LOGIC_COLOR
+CommandResult --> ArchiveCommand : commandResult
+deactivate CommandResult
+
+ArchiveCommand --> LogicManager -- : commandResult
+[<--LogicManager --: commandResult
+deactivate LogicManager
+@enduml

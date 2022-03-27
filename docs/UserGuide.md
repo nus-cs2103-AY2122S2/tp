@@ -28,7 +28,7 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`i/A0123456Z n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu` : Adds a contact named `John` to TAPA.
+   * **`add`**`i/A0123456Z n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu` : Adds a student named `John` to TAPA.
 
    * **`delete`**`3` : Deletes the 3rd entry in TAPA.
 
@@ -85,14 +85,17 @@ Example:
 
 Deletes a student from TAPA.
 
-Format: `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID`
+Format: `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID`
 
 * The student corresponding to the index or matriculation number (specified after the `delete` command) will be removed from TAPA.
 * An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA, or there is no student with the specified matriculation number.
+* Multiple indices can be inputted in order to delete multiple students.
 
 Example:
 * `delete 10`
     * A student named John (whose list index is “10”) is deleted from TAPA.
+* `delete 10 20`
+    * The students named John and Mary (whose list indices are “10” and “20”) are deleted from TAPA.
 * `delete i/A0123456Z`
     * A student named John whose matriculation number is "A0123456Z" is deleted from TAPA.
 
@@ -119,6 +122,7 @@ Displays all the tasks that are allocated to a particular student.
 Format: `task i/STUDENT_ID`
 
 * The completed and uncompleted tasks are separated into 2 different sections.
+* An error message will be displayed to the user if there is no student with the specified matriculation number.
 
 Example:
 * `task i/AXXXXXXXR`
@@ -181,12 +185,13 @@ Example:
 
 ### Archiving details in the address book: `archive`
 
-Saves a copy of the details currently saved in the address book into a separate file.
+Saves a copy of the details currently saved in TAPA into a separate file.
 
 Format: `archive`
 
-* A copy of the details currently saved in the address book will be saved to a separate file.
+* A copy of the details currently saved in TAPA will be saved to a separate file.
 * The file name will be the date and time of the archive operation.
+* This file will be saved in the same directory as the original `.json` data file.
 
 ### Listing the student details: `list`
 
@@ -273,22 +278,21 @@ Format: `exit`
 Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
-**Delete**  | `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID` <br> e.g., `delete 10`, `delete i/AXXXXXXXR`
-**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/AXXXXXXXR`
-**Manual**  | `manual [COMMAND_NAME]` <br> e.g., `manual add`, `manual`
+**Delete**  | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> e.g., `delete 10`, `delete 10 20`, `delete i/AXXXXXXXR`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> e.g., `find n/john`, `find i/AXXXXXXXR`, `find m/CS2103T`
-**Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
-**Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task i/AXXXXXXXR`
 **Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR idx/1`
 **Unmark**  | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR idx/1`
-**list**    | `list`
-**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`, `assign m/CS2103T tn/assignment 2`
 **Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
-**Progress**| `progress m/MODULE_CODE tn/TASK_NAME` <br> e.g., `progress m/CS2103T tn/assignment 1`
 **Clear**   | `clear`
 **Archive** | `archive`
+**List**    | `list`
+**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`, `assign m/CS2103T tn/assignment 2`
+**Progress**| `progress m/MODULE_CODE tn/TASK_NAME` <br> e.g., `progress m/CS2103T tn/assignment 1`
+**Manual**  | `manual [COMMAND_NAME]` <br> e.g., `manual add`, `manual`
 **Help**    | `help`
+**Exit**    | `exit`
+
 
 
 
