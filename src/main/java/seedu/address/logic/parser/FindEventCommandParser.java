@@ -2,7 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -35,7 +40,7 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         boolean namePresent = argumentMultimap.getValue(PREFIX_NAME).isPresent();
         boolean companyNamePresent = argumentMultimap.getValue(PREFIX_COMPANY).isPresent();
         boolean datePresent = argumentMultimap.getValue(PREFIX_DATE).isPresent();
-        boolean timePresent =argumentMultimap.getValue(PREFIX_TIME).isPresent();
+        boolean timePresent = argumentMultimap.getValue(PREFIX_TIME).isPresent();
         boolean locationPresent = argumentMultimap.getValue(PREFIX_LOCATION).isPresent();
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
 
