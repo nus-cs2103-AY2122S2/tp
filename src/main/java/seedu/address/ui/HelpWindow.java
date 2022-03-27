@@ -170,7 +170,7 @@ public class HelpWindow extends UiPart<Stage> {
                 e.printStackTrace();
             }
         } else {
-            logger.info("User operating system not supported");
+            logger.warning("User operating system not supported");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Your operating system is currently not supported!");
             alert.show();
         }
