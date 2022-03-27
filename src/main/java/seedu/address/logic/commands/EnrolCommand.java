@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
@@ -10,17 +9,14 @@ import seedu.address.model.student.Student;
 public class EnrolCommand extends Command {
 
     private Index classGroupIndex;
-    private Optional<List<Student>> students;
-    private boolean isAllStudents;
+    private List<Student> students;
 
     /**
      * Creates an EnrollCommand to enroll the students into class group and module
      */
-    public EnrolCommand(Index classGroupIndex, Optional<List<Student>> students,
-                        boolean isAllStudents) {
+    public EnrolCommand(Index classGroupIndex, List<Student> students) {
         this.classGroupIndex = classGroupIndex;
         this.students = students;
-        this.isAllStudents = isAllStudents;
     }
 
     @Override
