@@ -208,11 +208,8 @@ public class ParserUtil {
      * @throws ParseException if the given {@code date} is invalid.
      */
     public static LocalDate parseFilterAppointmentDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
-            return LocalDate.parse(trimmedDate, formatter);
+            return parseFilterDate(date);
         } catch (Exception e) {
             throw new ParseException("Appointment date provided for filter should be entered in dd-MM-yyyy format!");
         }

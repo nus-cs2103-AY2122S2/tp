@@ -1,6 +1,7 @@
 package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
 
@@ -14,18 +15,18 @@ public class FilterUtil {
 
     /**
      * Returns true if the {@code petTags} contains the {@code filterWord}.
-     *   Ignores case, and a partial or full word match is required.
+     * Ignores case, and a partial or full word match is required.
      * @param petTags cannot be null
      * @param filterWord cannot be null, cannot be empty
      */
     public static boolean tagContainFilterWord(Set<Tag> petTags, String filterWord) {
-        requireNonNull(petTags);
-        requireNonNull(filterWord);
+        requireAllNonNull(petTags, filterWord);
 
         String trimFilterWord = filterWord.trim();
 
         for (Tag tag : petTags) {
-            if (StringUtil.tagContainsWordsIgnoreCase(tag.toString(), trimFilterWord)) {
+            String tagString = tag.toString();
+            if (StringUtil.tagOrNameContainsWordsIgnoreCase(tagString, trimFilterWord)) {
                 return true;
             }
         }

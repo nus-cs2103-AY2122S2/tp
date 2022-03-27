@@ -80,10 +80,6 @@ public class Appointment implements Comparable<Appointment> {
         return this.location;
     }
 
-    public LocalDate getDateOnly() {
-        return this.dateTime.toLocalDate();
-    }
-
     /**
      * Formats the LocalDateTime to String representation in format of "MMM-dd-yyyy h:mm a"
      * to be reflected in GUI and for storage.

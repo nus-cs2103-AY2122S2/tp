@@ -16,8 +16,10 @@ public class TagContainsFilterWordPredicate extends FilterByContainsFilterWordPr
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TagContainsFilterWordPredicate// instanceof handles nulls
+        if (other == this) {
+            return true;
+        }
+        return (other instanceof TagContainsFilterWordPredicate// instanceof handles nulls
                 && getFilterWord().equals(((TagContainsFilterWordPredicate) other).getFilterWord())); // state check
     }
 }

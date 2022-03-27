@@ -142,30 +142,30 @@ public class StringUtilTest {
 
     //---------------- Tests for tagContainsWordsIgnoreCase --------------------------------------
     @Test
-    public void tagContainsWordsIgnoreCase_correct_result() {
+    public void tagOrNameContainsWordsIgnoreCase_correct_result() {
         //Actual match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC", "ABC"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "ABC"));
 
         //Lower case actual match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC", "abc"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "abc"));
 
         //Partial match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC", "AB"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "AB"));
 
         //Lower case partial match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC", "ab"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "ab"));
 
         //Two words Partial Match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC DEF", "DE"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF", "DE"));
 
         //Two words one full match, one partial match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC DEF", "abc de"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF", "abc de"));
 
         //Three words, all partial match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC DEF GHI", "ab de hi"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF GHI", "ab de hi"));
 
         //Three words, two words partial match
-        assertTrue(StringUtil.tagContainsWordsIgnoreCase("ABC DEF GHI", "ab de"));
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF GHI", "ab de"));
     }
 
 }

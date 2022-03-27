@@ -11,6 +11,10 @@ public abstract class FilterByContainsFilterWordPredicate implements Predicate<P
         this.filterWord = filterWord;
     }
 
+    /**
+     * Accessor method returns a {@code String} representing the filter word.
+     * @return Filter word String.
+     */
     public String getFilterWord() {
         return this.filterWord;
     }

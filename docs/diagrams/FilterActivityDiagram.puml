@@ -1,14 +1,15 @@
 @startuml
-!pragma useVerticalIf on
 start
 :User executes filter command;
 switch ()
 case ( [field == "byTags/"] )
-    :Filter pet list by tags given as filter word;
+    :Filter pet list by tags;
 case ( [field == "byDate/"] )
-    :Filter pet list by date given as filter word;
+    :Filter pet list by date;
 case ( [keyword == "byOwner/"] )
-    :Filter pet list by owner name given as filter word;
+    :Filter pet list by owner name;
+case ( [keyword == byApp/] )
+    :Filter pet list by appointment date;
 endswitch
 
 :Return filtered list;

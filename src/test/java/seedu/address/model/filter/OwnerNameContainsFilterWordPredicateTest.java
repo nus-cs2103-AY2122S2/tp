@@ -57,8 +57,8 @@ public class OwnerNameContainsFilterWordPredicateTest {
 
         // Full match with excess filter word: Alice Tan == Alice Tan Bee Bee -> true
         OwnerNameContainsFilterWordPredicate fourthPredicate =
-                new OwnerNameContainsFilterWordPredicate(firstNameKeyword + "Bee Bee");
-        assertTrue(predicate.test(new PetBuilder().withOwnerName("Alice Tan").build()));
+                new OwnerNameContainsFilterWordPredicate(firstNameKeyword + " Tan Bee Bee");
+        assertTrue(fourthPredicate.test(new PetBuilder().withOwnerName("Alice Tan").build()));
 
         // Mixed case: Alice Tan == ALiCe -> true
         OwnerNameContainsFilterWordPredicate fifthPredicate =

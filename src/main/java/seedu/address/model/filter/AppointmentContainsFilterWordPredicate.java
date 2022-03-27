@@ -39,8 +39,11 @@ public class AppointmentContainsFilterWordPredicate extends FilterByContainsFilt
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AppointmentContainsFilterWordPredicate// instanceof handles nulls
+        if (other == this) { // short circuit if same object
+            return true;
+        }
+
+        return (other instanceof AppointmentContainsFilterWordPredicate// instanceof handles nulls
                 && appointmentDate.equals(((AppointmentContainsFilterWordPredicate) other)
                 .appointmentDate)); // state check
     }

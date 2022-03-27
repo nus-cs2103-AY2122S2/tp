@@ -195,8 +195,8 @@ Format: `filter FIELD/FilterWord`
 
 Examples:
 * `filter byDate/22-03-2022` show pets present on 22 March 2022.
-* `filter byOwner/Lily` show pets owned by any all Lily(s).
-* `filter byTags/Retriever` sho pets with `Retriever` in their tags.
+* `filter byOwner/Lily` shows pets owned by any all Lily(s).
+* `filter byTags/Retriever` shows pets with `Retriever` in their tags.
 
 ### Delete a pet: `delete`
 
@@ -242,7 +242,7 @@ Format: `help`
 | **Absent**  | `absent INDEX date/dd-MM-yyyy` <br> e.g., `absent 1 date/17-03-2022` (indicates that pet 1 was absent on 17 March 2022)                                                                                                         |
 | **App**     | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]` e.g., `app 1 date/04-03-2022 09:30 at/ NUS Vet Clinic` <br> `app INDEX clear` e.g., `app 1 clear`                                                                             |
 | **Sort**    | `sort SORT_BY` <br> e.g., `sort name`                                                                                                                                                                                           |
-| **Filter**  | `filter FIELD/FIlterWord` <br> e.g. `filter byDate/22-03-2022` (returns information of all pets present on 22 March 2022)                                                                                                       |
+| **Filter**  | `filter FIELD/FilterWord` <br> e.g. `filter byDate/22-03-2022` (returns information of all pets present on 22 March 2022)                                                                                                       |
 | **List**    | `list`                                                                                                                                                                                                                          |
 | **Clear**   | `clear`                                                                                                                                                                                                                         |
 | **Exit**    | `exit`                                                                                                                                                                                                                          |

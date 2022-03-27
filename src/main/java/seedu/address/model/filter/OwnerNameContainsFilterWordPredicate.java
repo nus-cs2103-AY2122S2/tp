@@ -11,13 +11,16 @@ public class OwnerNameContainsFilterWordPredicate extends FilterByContainsFilter
 
     @Override
     public boolean test(Pet pet) {
-        return StringUtil.nameContainsWordsIgnoreCase(pet.getOwnerName().toString(), getFilterWord());
+        return StringUtil.tagOrNameContainsWordsIgnoreCase(pet.getOwnerName().toString(), getFilterWord());
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof OwnerNameContainsFilterWordPredicate // instanceof handles nulls
+        if (other == this) {
+            return true;
+        }
+
+        return (other instanceof OwnerNameContainsFilterWordPredicate // instanceof handles nulls
                 && getFilterWord().equals(((OwnerNameContainsFilterWordPredicate) other)
                 .getFilterWord())); // state check
     }

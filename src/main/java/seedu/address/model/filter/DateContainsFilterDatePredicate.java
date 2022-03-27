@@ -10,7 +10,7 @@ import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Pet;
 
 /**
- * Tests that a {@code Pet}'s {@code attendance} matches the filter date given.
+ * Tests that a {@code Pet}'s {@code AttendanceEntry} matches the filter date given.
  */
 public class DateContainsFilterDatePredicate extends FilterByContainsFilterWordPredicate {
     private final LocalDate filterDate;
@@ -49,8 +49,11 @@ public class DateContainsFilterDatePredicate extends FilterByContainsFilterWordP
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DateContainsFilterDatePredicate// instanceof handles nulls
-                && getFilterWord().equals(((DateContainsFilterDatePredicate) other).getFilterWord())); // state check
+        if (other == this) { // short circuit if same object
+            return true;
+        }
+
+        return (other instanceof DateContainsFilterDatePredicate) // instanceof handles nulls
+                && getFilterWord().equals(((DateContainsFilterDatePredicate) other).getFilterWord()); // state check
     }
 }
