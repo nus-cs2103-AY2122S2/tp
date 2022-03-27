@@ -18,16 +18,18 @@ public class Show {
     //Data field
     private final Set<Tag> tags = new HashSet<>();
     private final Comment comment;
+    private final Rating rating;
 
     /**
      * Every field must be present and not null.
      */
-    public Show(Name name, Status status, Set<Tag> tags, Comment comment) {
-        requireAllNonNull(name, status, tags, comment);
+    public Show(Name name, Status status, Set<Tag> tags, Comment comment, Rating rating) {
+        requireAllNonNull(name, status, tags, comment, rating);
         this.name = name;
         this.status = status;
         this.tags.addAll(tags);
         this.comment = comment;
+        this.rating = rating;
     }
 
     public Name getName() {
@@ -36,6 +38,10 @@ public class Show {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Rating getRating() {
+        return rating;
     }
 
     /**
@@ -81,7 +87,8 @@ public class Show {
         return otherShow.getName().equals(getName())
                 && otherShow.getTags().equals(getTags())
                     && otherShow.getStatus().equals(getStatus())
-                        && otherShow.getComment().equals(getComment());
+                        && otherShow.getComment().equals(getComment())
+                            && otherShow.getRating().equals(getRating());
     }
 
     @Override
@@ -95,13 +102,14 @@ public class Show {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName().toString());
         builder.append(getStatus().toString());
+        builder.append(getComment().toString());
+        builder.append(getRating().toString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        builder.append(getComment().toString());
         return builder.toString();
     }
 
