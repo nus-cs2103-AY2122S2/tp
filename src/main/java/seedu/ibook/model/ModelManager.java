@@ -4,18 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.ProductFilter;
 
 /**
- * Represents the in-memory model of the ibook data.
+ * Represents the in-memory model of the iBook data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -23,7 +25,7 @@ public class ModelManager implements Model {
     private final ReversibleIBook reversibleIBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Product> filteredProducts;
-    private ProductFulfillsFiltersPredicate productFulfillsFiltersPredicate;
+    private final ProductFilter productFilter;
 
     /**
      * Initializes a ModelManager with the given iBook and userPrefs.
@@ -31,15 +33,14 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyIBook iBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(iBook, userPrefs);
 
-        logger.fine("Initializing with ibook: " + iBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with iBook: " + iBook + " and user prefs " + userPrefs);
 
         this.reversibleIBook = new ReversibleIBook(iBook);
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredProducts = new FilteredList<>(this.reversibleIBook.getProductList());
-        productFulfillsFiltersPredicate = new ProductFulfillsFiltersPredicate();
-
-        filteredProducts.setPredicate(productFulfillsFiltersPredicate);
+        productFilter = new ProductFilter();
+        filteredProducts.setPredicate(productFilter);
     }
 
     public ModelManager() {
@@ -93,6 +94,7 @@ public class ModelManager implements Model {
         return this.reversibleIBook;
     }
 
+    //=========== Product =====================================================================================
     @Override
     public boolean hasProduct(Product product) {
         requireNonNull(product);
@@ -107,7 +109,7 @@ public class ModelManager implements Model {
     @Override
     public void addProduct(Product product) {
         reversibleIBook.reversibleAddProduct(product);
-        updateProductFilters(PREDICATE_SHOW_ALL_PRODUCTS);
+        clearProductFilters();
     }
 
     @Override
@@ -147,6 +149,26 @@ public class ModelManager implements Model {
         reversibleIBook.redo();
     }
 
+    //=========== Item ========================================================================================
+
+    @Override
+    public void addItem(Product product, Item item) {
+        requireAllNonNull(product, item);
+        reversibleIBook.addItem(product, item);
+    }
+
+    @Override
+    public void deleteItem(Product targetProduct, Item target) {
+        requireAllNonNull(targetProduct, target);
+        reversibleIBook.removeItem(targetProduct, target);
+    }
+
+    @Override
+    public void updateItem(Product targetProduct, Item targetItem, Item updatedItem) {
+        requireAllNonNull(targetProduct, targetItem, updatedItem);
+        reversibleIBook.setItem(targetProduct, targetItem, updatedItem);
+    }
+
     //=========== Filtered Product List Accessors =============================================================
 
     /**
@@ -159,14 +181,20 @@ public class ModelManager implements Model {
     }
 
     /**
+     * TODO: Hack to refresh the filtered list. Feel free to improve this.
+     */
+    private void refreshFilteredProductList() {
+        filteredProducts.setPredicate(unused -> true);
+        filteredProducts.setPredicate(productFilter);
+    }
+
+    /**
      * Adds a filter to the product list.
      */
     @Override
     public void addProductFilter(AttributeFilter filter) {
-        productFulfillsFiltersPredicate.addFilter(filter);
-        // Hack to refresh the filtered list. Feel free to improve this.
-        filteredProducts.setPredicate(unused -> true);
-        filteredProducts.setPredicate(productFulfillsFiltersPredicate);
+        productFilter.addFilter(filter);
+        refreshFilteredProductList();
     }
 
     /**
@@ -174,10 +202,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void removeProductFilter(AttributeFilter filter) {
-        productFulfillsFiltersPredicate.removeFilter(filter);
-        // Hack to refresh the filtered list. Feel free to improve this.
-        filteredProducts.setPredicate(unused -> true);
-        filteredProducts.setPredicate(productFulfillsFiltersPredicate);
+        productFilter.removeFilter(filter);
+        refreshFilteredProductList();
     }
 
     /**
@@ -185,20 +211,27 @@ public class ModelManager implements Model {
      */
     @Override
     public void clearProductFilters() {
-        productFulfillsFiltersPredicate = new ProductFulfillsFiltersPredicate();
-        filteredProducts.setPredicate(productFulfillsFiltersPredicate);
+        productFilter.clearFilters();
+        refreshFilteredProductList();
     }
 
+    // TODO: remove this in the future so that product filter would not be changed
     @Override
-    public void updateProductFilters(ProductFulfillsFiltersPredicate predicate) {
+    public void updateProductFilters(Predicate<Product> predicate) {
         requireNonNull(predicate);
-        productFulfillsFiltersPredicate = predicate;
         filteredProducts.setPredicate(predicate);
     }
 
     @Override
     public ObservableList<AttributeFilter> getProductFilters() {
-        return productFulfillsFiltersPredicate.getFilters();
+        return productFilter.getFilters();
+    }
+
+    @Override
+    public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
+        for (Product p: filteredProducts) {
+            p.updateFilteredItemList(predicate);
+        }
     }
 
     @Override
@@ -219,5 +252,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredProducts.equals(other.filteredProducts);
     }
-
 }

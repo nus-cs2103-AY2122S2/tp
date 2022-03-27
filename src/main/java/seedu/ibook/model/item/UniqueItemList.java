@@ -3,13 +3,12 @@ package seedu.ibook.model.item;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.ibook.model.item.exceptions.ItemNotFoundException;
-import seedu.ibook.model.product.exceptions.ProductNotFoundException;
+import seedu.ibook.commons.core.UniqueList;
+import seedu.ibook.commons.core.exceptions.DuplicateElementException;
+import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
 
 /**
  * A list of items that enforces uniqueness between its elements and does not allow nulls.
@@ -20,28 +19,16 @@ import seedu.ibook.model.product.exceptions.ProductNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Item#isSameItem(Item)
+ * @see Item#isSame(Item)
  */
-public class UniqueItemList implements Iterable<Item> {
-
-    private final ObservableList<Item> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Item> internalUnmodifiableList =
-        FXCollections.unmodifiableObservableList(internalList);
-
-    /**
-     * Returns true if the list contains an equivalent item as the given argument.
-     */
-    public boolean contains(Item toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameItem);
-    }
+public class UniqueItemList extends UniqueList<Item> {
 
     /**
      * Gets the item in the list that is similar to the item as the given argument.
      */
     public Item getExisting(Item toAdd) {
-        for (Item item: internalList) {
-            if (toAdd.isSameItem(item)) {
+        for (Item item: internalList()) {
+            if (toAdd.isSame(item)) {
                 return item;
             }
         }
@@ -52,27 +39,36 @@ public class UniqueItemList implements Iterable<Item> {
      * Adds an item to the list.
      * If the item is already in the list, combine it with the existing one.
      */
+    @Override
     public void add(Item toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             Item existingItem = getExisting(toAdd);
-            internalList.remove(existingItem);
+            remove(existingItem);
             Item newItem = existingItem.add(toAdd);
-            internalList.add(newItem);
+            super.add(newItem);
         } else {
-            internalList.add(toAdd);
+            super.add(toAdd);
         }
-        FXCollections.sort(internalList);
+        FXCollections.sort(internalList());
     }
 
     /**
-     * Removes the equivalent item from the list.
+     * Sets the target to the updated item.
      */
-    public void remove(Item toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new ItemNotFoundException();
+    public void setItem(Item target, Item updatedItem) {
+        requireAllNonNull(target, updatedItem);
+
+        int index = asObservableList().indexOf(target);
+        if (index == -1) {
+            throw new ElementNotFoundException();
         }
+
+        if (!target.isSame(updatedItem) && contains(updatedItem)) {
+            throw new DuplicateElementException();
+        }
+
+        set(index, updatedItem);
     }
 
     /**
@@ -81,13 +77,13 @@ public class UniqueItemList implements Iterable<Item> {
     public void setItemCount(Item target, Quantity quantity) {
         requireAllNonNull(target, quantity);
 
-        int index = internalList.indexOf(target);
+        int index = internalList().indexOf(target);
         if (index == -1) {
-            throw new ProductNotFoundException();
+            throw new ElementNotFoundException();
         }
 
         Item newItem = target.setQuantity(quantity);
-        internalList.set(index, newItem);
+        internalList().set(index, newItem);
     }
 
     /**
@@ -96,13 +92,13 @@ public class UniqueItemList implements Iterable<Item> {
     public void incrementItemCount(Item target, Quantity quantity) {
         requireAllNonNull(target, quantity);
 
-        int index = internalList.indexOf(target);
+        int index = internalList().indexOf(target);
         if (index == -1) {
-            throw new ProductNotFoundException();
+            throw new ElementNotFoundException();
         }
 
         Item newItem = target.increment(quantity);
-        internalList.set(index, newItem);
+        internalList().set(index, newItem);
     }
 
     /**
@@ -118,16 +114,16 @@ public class UniqueItemList implements Iterable<Item> {
     public void decrementItemCount(Item target, Quantity quantity) {
         requireAllNonNull(target, quantity);
 
-        int index = internalList.indexOf(target);
+        int index = internalList().indexOf(target);
         if (index == -1) {
-            throw new ProductNotFoundException();
+            throw new ElementNotFoundException();
         }
 
         Item newItem = target.decrement(quantity);
         if (newItem.isEmpty()) {
-            internalList.remove(index);
+            internalList().remove(index);
         } else {
-            internalList.set(index, newItem);
+            internalList().set(index, newItem);
         }
     }
 
@@ -139,12 +135,12 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     public Integer getTotalQuantity() {
-        return internalList.stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
+        return stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
     }
 
     public void setItems(UniqueItemList replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        internalList().setAll(replacement.internalList());
     }
 
     /**
@@ -153,33 +149,9 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public void setItems(List<Item> items) {
         requireAllNonNull(items);
-        internalList.clear();
+        internalList().clear();
         for (Item item: items) {
             add(item);
         }
-    }
-
-    /**
-     * Returns the backing queue as an unmodifiable list {@code ObservableList}.
-     */
-    public ObservableList<Item> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
-    }
-
-    @Override
-    public Iterator<Item> iterator() {
-        return internalList.iterator();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-            || (other instanceof UniqueItemList // instanceof handles nulls
-            && internalList.equals(((UniqueItemList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
     }
 }

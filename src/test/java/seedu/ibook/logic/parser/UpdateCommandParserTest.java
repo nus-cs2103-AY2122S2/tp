@@ -5,10 +5,7 @@ import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.EXPIRY_DATE_FULL_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.EXPIRY_DATE_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_EXPIRY_DATE_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_PRICE_DESC;
@@ -36,7 +33,6 @@ import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Category;
-import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
@@ -81,8 +77,6 @@ public class UpdateCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
         // invalid category
         assertParseFailure(parser, "1" + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
-        // invalid description
-        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
         // invalid price
         assertParseFailure(parser, "1" + INVALID_PRICE_DESC, Price.MESSAGE_CONSTRAINTS);
 
@@ -101,7 +95,7 @@ public class UpdateCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PRODUCT;
-        String userInput = targetIndex.getOneBased() + NAME_FULL_A + CATEGORY_FULL_A + EXPIRY_DATE_FULL_A
+        String userInput = targetIndex.getOneBased() + NAME_FULL_A + CATEGORY_FULL_A
                 + DESCRIPTION_FULL_A + PRICE_FULL_A;
 
         UpdateProductDescriptor descriptor = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
@@ -155,8 +149,8 @@ public class UpdateCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PRODUCT;
-        String userInput = targetIndex.getOneBased() + NAME_FULL_A + CATEGORY_FULL_A + EXPIRY_DATE_FULL_A
-                + DESCRIPTION_FULL_A + PRICE_FULL_A + NAME_FULL_B + CATEGORY_FULL_B + EXPIRY_DATE_FULL_B
+        String userInput = targetIndex.getOneBased() + NAME_FULL_A + CATEGORY_FULL_A
+                + DESCRIPTION_FULL_A + PRICE_FULL_A + NAME_FULL_B + CATEGORY_FULL_B
                 + DESCRIPTION_FULL_B + PRICE_FULL_B;
 
         UpdateProductDescriptor descriptor = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)

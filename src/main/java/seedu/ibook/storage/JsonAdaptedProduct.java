@@ -109,7 +109,9 @@ class JsonAdaptedProduct {
         final UniqueItemList modelItems = new UniqueItemList();
         modelItems.setItems(productItems);
 
-        return new Product(modelName, modelCategory, modelDescription, modelPrice);
+        List<Item> modelItemList = modelItems.asUnmodifiableObservableList();
+
+        return new Product(modelName, modelCategory, modelDescription, modelPrice, modelItemList);
     }
 
 }

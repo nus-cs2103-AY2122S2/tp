@@ -1,10 +1,12 @@
 package seedu.ibook.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.UniqueProductList;
 
@@ -52,7 +54,7 @@ public class IBook implements ReadOnlyIBook {
     //// product-level operations
 
     /**
-     * Returns true if a product with the same identity as {@code product} exists in the ibook.
+     * Returns true if a product with the same identity as {@code product} exists in the iBook.
      */
     public boolean hasProduct(Product product) {
         requireNonNull(product);
@@ -83,6 +85,34 @@ public class IBook implements ReadOnlyIBook {
      */
     public void removeProduct(Product key) {
         products.remove(key);
+    }
+
+    //// item-level operations
+
+    /**
+     * Adds {@code item} to a {@code product} in the iBook.
+     */
+    public void addItem(Product product, Item item) {
+        requireAllNonNull(product, item);
+        product.addItem(item);
+    }
+
+    /**
+     * Removes {@code key} from {@code targetProduct}.
+     * {@code targetProduct} must exist in the iBook and {@code key} must exist in {@code targetProduct}.
+     */
+    public void removeItem(Product product, Item key) {
+        requireNonNull(key);
+        product.removeItem(key);
+    }
+
+    /**
+     * Updates {@code targetItem} in {@code targetProduct}.
+     * {@code targetProduct} must exist in the iBook and {@code targetItem} must exist in {@code targetProduct}.
+     */
+    public void setItem(Product targetProduct, Item targetItem, Item updatedItem) {
+        requireAllNonNull(targetProduct, targetItem, updatedItem);
+        targetProduct.setItem(targetItem, updatedItem);
     }
 
     //// util methods

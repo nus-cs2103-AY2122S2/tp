@@ -60,8 +60,7 @@ class JsonAdaptedItem {
         }
         final Quantity modelQuantity = new Quantity(quantity);
 
-        // TODO: setting the product field
-        return new Item(null, modelExpiryDate, modelQuantity);
+        return new Item(modelExpiryDate, modelQuantity);
     }
 
 }

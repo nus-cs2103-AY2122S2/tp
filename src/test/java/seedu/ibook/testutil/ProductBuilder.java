@@ -1,5 +1,8 @@
 package seedu.ibook.testutil;
 
+import java.util.List;
+
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
@@ -75,5 +78,9 @@ public class ProductBuilder {
 
     public Product build() {
         return new Product(name, category, description, price);
+    }
+
+    public Product buildWithItems(List<Item> items) {
+        return new Product(name, category, description, price, items);
     }
 }
