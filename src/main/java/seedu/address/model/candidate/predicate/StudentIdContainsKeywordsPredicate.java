@@ -10,7 +10,6 @@ import seedu.address.model.candidate.Candidate;
  * Tests that a {@code Candidate}'s {@code StudentId} matches any of the keywords given.
  */
 public class StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Candidate> {
-    private final List<String> keywords;
 
     /**
      * Creates a new {@link StudentIdContainsKeywordsPredicate} object with the
@@ -19,7 +18,6 @@ public class StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicat
      */
     public StudentIdContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
-        this.keywords = keywords;
     }
 
     /**

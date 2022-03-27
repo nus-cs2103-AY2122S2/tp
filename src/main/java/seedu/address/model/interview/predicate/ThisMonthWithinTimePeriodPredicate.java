@@ -9,7 +9,6 @@ import seedu.address.model.interview.Interview;
  * Tests that a {@code Interview}'s date and time is within the next month.
  */
 public class ThisMonthWithinTimePeriodPredicate extends WithinTimePeriodPredicate implements Predicate<Interview> {
-    private final LocalDateTime endDateTime;
     private final LocalDateTime currentDateTime;
 
     /**
@@ -19,7 +18,6 @@ public class ThisMonthWithinTimePeriodPredicate extends WithinTimePeriodPredicat
      */
     public ThisMonthWithinTimePeriodPredicate(LocalDateTime currentDateTime) {
         super(currentDateTime.plusMonths(1));
-        this.endDateTime = currentDateTime.plusMonths(1);
         this.currentDateTime = currentDateTime;
     }
 

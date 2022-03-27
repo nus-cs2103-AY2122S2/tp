@@ -9,7 +9,6 @@ import seedu.address.model.interview.Interview;
  * Tests that a {@code Interview}'s date and time is within the next 7 days.
  */
 public class ThisWeekWithinTimePeriodPredicate extends WithinTimePeriodPredicate implements Predicate<Interview> {
-    private final LocalDateTime endDateTime;
     private final LocalDateTime currentDateTime;
 
     /**
@@ -19,7 +18,6 @@ public class ThisWeekWithinTimePeriodPredicate extends WithinTimePeriodPredicate
      */
     public ThisWeekWithinTimePeriodPredicate(LocalDateTime currentDateTime) {
         super(currentDateTime.plusDays(7));
-        this.endDateTime = currentDateTime.plusDays(7);
         this.currentDateTime = currentDateTime;
     }
 

@@ -9,7 +9,6 @@ import seedu.address.model.interview.Interview;
  * Tests that a {@code Interview}'s date and time is within the same day.
  */
 public class TodayWithinTimePeriodPredicate extends WithinTimePeriodPredicate implements Predicate<Interview> {
-    private final LocalDateTime endDateTime;
 
     /**
      * Creates a new {@link TodayWithinTimePeriodPredicate} object with the
@@ -18,7 +17,6 @@ public class TodayWithinTimePeriodPredicate extends WithinTimePeriodPredicate im
      */
     public TodayWithinTimePeriodPredicate(LocalDateTime currentDateTime) {
         super(currentDateTime);
-        this.endDateTime = currentDateTime;
     }
 
     /**

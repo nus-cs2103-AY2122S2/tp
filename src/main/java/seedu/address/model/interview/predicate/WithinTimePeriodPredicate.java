@@ -9,7 +9,7 @@ import seedu.address.model.interview.Interview;
  * Represents a predicate of whether the (@code Interview) is within a specific time period.
  */
 public abstract class WithinTimePeriodPredicate implements Predicate<Interview> {
-    private final LocalDateTime endDateTime;
+    protected final LocalDateTime endDateTime;
 
     public WithinTimePeriodPredicate(LocalDateTime currentDateTime) {
         this.endDateTime = currentDateTime;

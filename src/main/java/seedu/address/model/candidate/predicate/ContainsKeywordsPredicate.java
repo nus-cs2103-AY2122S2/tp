@@ -11,7 +11,7 @@ import seedu.address.model.candidate.Candidate;
  * Contains hidden internal logic and the ability to be executed.
  */
 public abstract class ContainsKeywordsPredicate implements Predicate<Candidate> {
-    private final List<String> keywords;
+    protected final List<String> keywords;
 
     public ContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;

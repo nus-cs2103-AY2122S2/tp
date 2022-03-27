@@ -9,7 +9,6 @@ import seedu.address.model.interview.Interview;
  * Returns true for all interview dates and times.
  */
 public class AllWithinTimePeriodPredicate extends WithinTimePeriodPredicate implements Predicate<Interview> {
-    private final LocalDateTime endDateTime;
 
     /**
      * Creates a new {@link AllWithinTimePeriodPredicate} object with the
@@ -18,7 +17,6 @@ public class AllWithinTimePeriodPredicate extends WithinTimePeriodPredicate impl
      */
     public AllWithinTimePeriodPredicate(LocalDateTime currentDateTime) {
         super(currentDateTime);
-        this.endDateTime = currentDateTime;
     }
 
     /**

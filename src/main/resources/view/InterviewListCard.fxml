@@ -27,6 +27,9 @@
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" alignment="CENTER_LEFT" />
             </HBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="15" />
+                </padding>
                 <Label fx:id="studentId" styleClass="cell_big_label" text="\$studentId" alignment="CENTER_LEFT"/>
             </HBox>
         </VBox>
