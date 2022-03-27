@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import manageezpz.commons.core.LogsCenter;
 import manageezpz.model.person.Person;
@@ -27,6 +28,11 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+    }
+
+    @FXML
+    public void handleMouseClick(MouseEvent arg) {
+        System.out.println("clicked on " + personListView.getSelectionModel().getSelectedItem());
     }
 
     /**
