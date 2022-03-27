@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.candidate.predicate.ApplicationStatusContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.AvailabilityContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CourseContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
@@ -121,5 +122,26 @@ public class FindCommandParserTest {
 
         // no field specified
         assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  \t", expectedFindCandidateCommand);
+
+        // no field specified
+        expectedFindCandidateCommand =
+                new FindCommand(new CandidateContainsKeywordsPredicate(Arrays.asList("Mon", "Fri")));
+        assertParseSuccess(parser, "    k/Mon \t  k/Fri  \t  \t", expectedFindCandidateCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindAvailabilityCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindAvailabilityCommand =
+                new FindCommand(new AvailabilityContainsKeywordsPredicate(Arrays.asList("Mon", "Fri")));
+        assertParseSuccess(parser, " k/Mon k/Fri f/availability", expectedFindAvailabilityCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser,
+                "    k/Mon \t  k/Fri  \t  f/availability \t", expectedFindAvailabilityCommand);
+
+        // multiple whitespaces in keywords
+        assertParseSuccess(parser,
+                "    k/  Mon \t  k/     Fri  \t  f/availability \t", expectedFindAvailabilityCommand);
     }
 }

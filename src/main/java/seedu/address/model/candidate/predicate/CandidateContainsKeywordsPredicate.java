@@ -1,5 +1,6 @@
 package seedu.address.model.candidate.predicate;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -30,8 +31,23 @@ public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicat
      */
     @Override
     public boolean test(Candidate candidate) {
+        StringBuilder sb = new StringBuilder();
+        String[] separatedCandidate = candidate.toString().split("Availability: ");
+        int[] availArr = Arrays.stream(separatedCandidate[1].split(",")).mapToInt((Integer::parseInt)).toArray();
+
+        sb.append(separatedCandidate[0]).append(" Availability: ");
+
+        for (int i = 0; i < availArr.length; ++i) {
+            if (i + 1 == availArr.length) {
+                sb.append(AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL[availArr[i]]);
+                break;
+            }
+
+            sb.append(AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL[availArr[i]]).append(",");
+        }
+
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(candidate.toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(sb.toString(), keyword));
     }
 
     /**

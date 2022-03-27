@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.predicate.ApplicationStatusContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.AvailabilityContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CourseContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
@@ -54,6 +55,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         switch (fieldString) {
         case "applicationstatus":
             return new FindCommand(new ApplicationStatusContainsKeywordsPredicate(keywords));
+        case "availability":
+            return new FindCommand(new AvailabilityContainsKeywordsPredicate(keywords));
         case "candidate":
         case "":
             return new FindCommand(new CandidateContainsKeywordsPredicate(keywords));

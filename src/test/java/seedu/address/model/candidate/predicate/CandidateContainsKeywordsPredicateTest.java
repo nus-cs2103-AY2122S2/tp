@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.candidate.Candidate;
 import seedu.address.testutil.CandidateBuilder;
 
 public class CandidateContainsKeywordsPredicateTest {
@@ -43,26 +44,39 @@ public class CandidateContainsKeywordsPredicateTest {
 
     @Test
     public void test_candidateContainsKeywords_returnsTrue() {
+        Candidate candidate = new CandidateBuilder().withName("Alice").withPhone("87654321")
+                .withEmail("alice@email.com").withCourse("Business Analytics")
+                .withStudentId("E0324444").withAvailability("1,2,3").build();
+
         // One keyword
-        CandidateContainsKeywordsPredicate predicate = new CandidateContainsKeywordsPredicate(Collections.singletonList(
-                "Alice"));
-        assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+        CandidateContainsKeywordsPredicate predicate =
+                new CandidateContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        assertTrue(predicate.test(candidate));
 
         // Multiple keywords
         predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("Alice", "Business Analytics"));
-        assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+        assertTrue(predicate.test(candidate));
 
         // Only one matching keyword
         predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+        assertTrue(predicate.test(candidate));
 
         // Mixed-case keywords
         predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("aLIce", "e0324"));
-        assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+        assertTrue(predicate.test(candidate));
+
+        // Availability: One keyword
+        predicate = new CandidateContainsKeywordsPredicate(Collections.singletonList(
+                "Mon"));
+        assertTrue(predicate.test(candidate));
+
+        // Availability: Multiple keywords
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("Mon", "Tue", "Wed"));
+        assertTrue(predicate.test(candidate));
+
+        // Mixed-case keywords
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("moN", "TuE", "WED"));
+        assertTrue(predicate.test(candidate));
     }
 
     @Test
