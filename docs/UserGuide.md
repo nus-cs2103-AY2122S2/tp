@@ -8,10 +8,14 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
 * Table of Contents
   * [Quick Start](#quick-start)
   * [Features](#features)
+    * [Viewing Help: `help`](#viewing-help--help)
     * [Adding a client : `add`](#adding-a-client--add)
     * [Listing all persons : `list`](#listing-all-persons--list)
     * [Flagging a person : `flag`](#flagging-a-person--flag)
+    * [Unflagging a person : `unflag`](#unflagging-a-person--unflag)
     * [Sorting all persons : `sort`](#sorting-all-persons--sort)
+    * [Scheduling / Rescheduling a meeting: `meet`](#scheduling--rescheduling-a-meeting-meet)
+    * [Canceling a meeting: `meet`](#canceling-a-meeting-meet)
     * [Editing a person : `edit`](#editing-a-person--edit)
     * [Locating persons by name : `find`](#locating-persons-by-name--find)
     * [Deleting a person : `delete`](#deleting-a-person--delete)
@@ -91,7 +95,7 @@ Format: `help`
 
 Adds a client to the HustleBook.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [f/FLAG] [i/INFO] [d/DATE] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [i/INFO] [d/DATE] [f/FLAG] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client's data can be added in the future through edit command
@@ -102,10 +106,11 @@ A client's data can be added in the future through edit command
 * `i/INFO` will be set to `No further info` by default if not specified.
 * `t/TAG` will be empty by default if not specified.
 * `f/FLAG` will be set to `false` by default if not specified.
+* `s/SALARY` will be set to 0 by default if not specified.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 p/1234567 i/Salary of $3400 f/true`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Salary of $3400 f/true`
 
 ### Listing all persons : `list`
 
@@ -115,12 +120,25 @@ Format: `list`
 
 ### Flagging a person : `flag`
 
-Flag a person in the HustleBook to mark them as important. Can also be used to unflag the person.
+Flag a person in the HustleBook to mark them as important. 
 
-Format: `flag INDEX f/FLAG`
+Format: `flag NAME`
 
-* `FLAG` input should either be true or false.
-* `True` or `False` is not case-sensitive.
+* `NAME` input should be a name found in the HustleBook.
+* `NAME` is not case-sensitive.
+* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX` 
+of the list shown.
+
+### Unflagging a person : `unflag`
+
+Unflag a person in the HustleBook to unmark flagged clients.
+
+Format: `unflag NAME`
+
+* `NAME` input should be a name found in the HustleBook.
+* `NAME` is not case-sensitive.
+* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
+  of the list shown.
 
 ### Sorting all persons : `sort`
 
@@ -129,11 +147,34 @@ It then sorts all clients in HustleBook by date last met.
 
 Format: `sort`
 
+### Scheduling / Rescheduling a meeting: `meet`
+
+Schedules a meeting with the `NAME` given of the client with the `DATE` and `TIME` specified.
+The same command can be used to reschedule a meeting with the client.
+
+Format: `meet NAME d/DATE t/TIME`
+
+* `DATE` input must be in `YYYY-MM-DD` format
+* `TIME` input must be in 24-hr format of `HHmm`.
+* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
+    of the list shown.
+
+### Canceling a meeting: `meet`
+
+Schedules a meeting with the `NAME` given of the client with the `DATE` and `TIME` specified.
+
+Format: `meet NAME c/`
+
+* `c/` will clear the meeting with the `NAME`
+  * If `c/WORDS` is input, eg. `meet John Doe c/abcdef`,HustleBook will still clear the meeting with the given `NAME`.
+* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
+  of the list shown.
+
 ### Editing a person : `edit`
 
 Edits an existing person in the HustleBook.
 
-Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INFO] [d/DATE] [t/TAG]…​`
+Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] [d/DATE] [t/TAG]…​`
 
 * Edits the person named `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
@@ -147,7 +188,7 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INFO] [d/DATE] [t
 * You can remove the person's info by typing `i/` without specifying any info after it.
 
 Example:
-* `edit n/John Doe d/2020-12-04` Edits the meeting date of the person with the name `John Doe` to `2020-12-04` which is 4th Dec 2020.
+* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the person with the name `John Doe` to `2020-12-04` which is 4th Dec 2020.
 
 ### Locating persons by name : `find`
 
@@ -208,22 +249,20 @@ HustleBook data are saved as a JSON file `[JAR file location]/data/hustlebook.js
 If your changes to the data file makes its format invalid, HustleBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                 |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
-| **List**   | `list`            
-| **Clear**  | `clear`                                                                                                                                                                          |
-| **Sort**   | `sort`            |
-| **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                              |
-| **Flag**   | `flag INDEX f/FLAG`<br> e.g., `flag 3 f/true`                                                                                                                                    |
-| **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                    |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                       |
-| **Help**   | `help`                                                                                                                                                                           |
+| Action     | Format, Examples                                                                                                                                                                            |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
+| **List**   | `list`                                                                                                                                                                                      |
+| **Clear**  | `clear`                                                                                                                                                                                     |
+| **Sort**   | `sort`                                                                                                                                                                                      |
+| **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                                       |
+| **Flag**   | `flag NAME`<br> e.g., `flag John`                                                                                                                                                           |
+| **Unflag** | `unflag NAME` <br> e.g., `unflag John`                                                                                                                                                      |
+| **Meet**   | `meet NAME d/DATE t/TIME` <br> e.g., `meet John d/2022-05-25 t/1430`                                                                                                                        |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                             |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| **Help**   | `help`                                                                                                                                                                                      |
