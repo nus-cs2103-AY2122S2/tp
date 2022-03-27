@@ -19,7 +19,9 @@ import seedu.contax.logic.Logic;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.ui.appointment.AppointmentListPanel;
+import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
+import seedu.contax.ui.appointment.ScheduleItemListPanel;
 import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
@@ -36,9 +38,9 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private AppointmentListPanel appointmentListPanel;
-    private TagListPanel tagListPanel;
+    private ListPanel<Person> personListPanel;
+    private ScheduleItemListPanel scheduleItemListPanel;
+    private ListPanel<Tag> tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private StatusBarFooter statusBarFooter;
@@ -139,9 +141,9 @@ public class MainWindow extends UiPart<Stage> {
         statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        appointmentListPanel = new AppointmentListPanel(logic.getScheduleItemList());
-        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+        personListPanel = new ListPanel<>(logic.getFilteredPersonList(), PersonCard::new);
+        scheduleItemListPanel = new ScheduleItemListPanel(logic.getScheduleItemList());
+        tagListPanel = new ListPanel<>(logic.getFilteredTagList(), TagCard::new);
 
         fillTabsFromPanels();
 
@@ -158,7 +160,7 @@ public class MainWindow extends UiPart<Stage> {
      * Creates the tabs and sets it in the Tab Pane.
      */
     private void fillTabsFromPanels() {
-        appointmentTab.setContent(appointmentListPanel.getRoot());
+        appointmentTab.setContent(scheduleItemListPanel.getRoot());
         personTab.setContent(personListPanel.getRoot());
         tagTab.setContent(tagListPanel.getRoot());
         tabbedPanelPlaceholder.getTabs().add(personTab);

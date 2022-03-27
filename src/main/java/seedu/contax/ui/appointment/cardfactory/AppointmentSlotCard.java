@@ -1,4 +1,4 @@
-package seedu.contax.ui.appointment;
+package seedu.contax.ui.appointment.cardfactory;
 
 import static java.util.Objects.requireNonNull;
 
@@ -13,9 +13,10 @@ import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.ui.UiPart;
 
 /**
- * An UI component that displays the information in an {@code AppointmentSlot}.
+ * Displays the information in an {@code AppointmentSlot}.
+ * This class is deliberately maintained as package private to prevent unintended access.
  */
-public class AppointmentSlotCard extends UiPart<Region> {
+class AppointmentSlotCard extends UiPart<Region> {
 
     private static final String FXML = "AppointmentSlotListCard.fxml";
     private static final String DATE_FORMAT = "dd LLL yyyy";
@@ -39,7 +40,7 @@ public class AppointmentSlotCard extends UiPart<Region> {
     /**
      * Creates an empty instance of {@code AppointmentSlotCard}.
      */
-    public AppointmentSlotCard() {
+    AppointmentSlotCard() {
         super(FXML);
     }
 
@@ -48,7 +49,7 @@ public class AppointmentSlotCard extends UiPart<Region> {
      *
      * @param appointmentSlotModel The AppointmentSlot model to display in this card.
      */
-    public void updateModel(AppointmentSlot appointmentSlotModel) {
+    void updateModel(AppointmentSlot appointmentSlotModel) {
         requireNonNull(appointmentSlotModel);
         if (appointmentSlotModel.equals(this.appointmentSlotModel)) {
             return;
