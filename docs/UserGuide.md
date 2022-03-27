@@ -22,7 +22,7 @@ Tracey can get your student health status management tasks done faster than trad
     * [Listing the records](#listing-the-records-list)
     * [Viewing help](#viewing-help-help)
     * [Filtering contacts](#filtering-contacts-filter)
-    * [Archiving address book](#archiving-address-book-archive) 
+    * [Archiving address book](#archiving-address-book-archive)
     * [Saving](#saving)
     * [Copying Emails](#copying-emails)
 * [FAQ](#faq)
@@ -153,7 +153,7 @@ Format: `list`
 ### Viewing help: `help`
 The `help` command opens a pop-up window that includes a summary to briefly explain all the commands that Tracey offers.
 
-The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide. 
+The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide.
 
 This is a sample screenshot of what you can expect from the `help` command.
 
@@ -175,7 +175,7 @@ Examples of usage:
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing)
 
 ### Archiving address book: `archive`
-Archives the current address book file 
+Archives the current address book file
 
 Format: `archive`
 
@@ -199,7 +199,7 @@ Saving in the application is automatic. The data in the file will be saved accor
 there are changes to `Tracey`.
 
 ### Copying emails
-The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals. 
+The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
 `Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
 ![Email](images/CopyEmailScreenshot.png)
 
