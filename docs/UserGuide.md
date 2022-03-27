@@ -123,28 +123,48 @@ Examples:
 
 
 
-### Editing a client : `edit`
+### Editing a buyer : `editbuyer`
 
-Edits an existing client in the contact list.
+Edits an existing buyer in the contact list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editbuyer INDEX [n/NAME] [p/PHONE] [t/TAG]…​`
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* The order of the fields can be in any order
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the buyer will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+*  `editbuyer 1 n/Hong` Edits only the name of the 1st buyer to be `Chua`.
+*  `editbuyer 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
+
+### Editing a seller : `editseller`
+
+Edits an existing seller in the contact list.
+
+Format: `editseller INDEX [n/NAME] [p/PHONE] [t/TAG]…​`
+
+* Edits the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* The order of the fields can be in any order
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the seller will be removed i.e adding of tags is not cumulative.
+* You can remove all the seller’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `editseller 1 p/91234567 n/ Chua` Edits the phone number and name of the 1st seller to be `91234567` and `Chua` respectively.
+*  `editseller 2 n/Betsy Crower t/` Edits the name of the 2nd seller to be `Betsy Crower` and clears all existing tags.
 
 
 ### Locating clients by name: `find`
 
-Finds clients whose names contain any of the given keywords.
-=======
+#### Finds clients whose names contain any of the given keywords.
+
+
 ### Locating clients: `find`
 
 Finds clients whose selected field contain any of the given keywords.
@@ -229,11 +249,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**AddBuyer** | `addbuyer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**AddBuyer** | `addbuyer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addbuyer n/James Ho p/22224444`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**EditBuyer** | `editbuyer n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `edit 2 n/James Ho p/22224444 `
 **Find** | `find prefix/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
 **List** | `list`
 **Help** | `help`
