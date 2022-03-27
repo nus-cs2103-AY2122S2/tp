@@ -54,11 +54,13 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_LINEUP).isPresent()) {
             if (argMultimap.getValue(PREFIX_PLAYER).isPresent()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
 
             if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_LINEUP));
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_LINEUP));
             } else {
                 targetLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
                 LineupName editLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
@@ -72,7 +74,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 targetPlayerName = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
                 // System.out.println(targetPlayerName);
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER), pe);
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER), pe);
             }
 
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -108,7 +111,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
             }
         }
 

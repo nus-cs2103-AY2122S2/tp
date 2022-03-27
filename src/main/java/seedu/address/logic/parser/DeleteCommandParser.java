@@ -5,8 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 
-import javax.naming.PartialResultException;
-
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;

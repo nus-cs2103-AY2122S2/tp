@@ -31,7 +31,7 @@ public class ViewCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_LINEUP + "starting5"
             + " OR " + COMMAND_WORD + " " + PREFIX_LINEUP;
 
-    public static final String MESSAGE_USAGE_SCHEDULE =  COMMAND_WORD
+    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD
             + ": To view schedule\n"
             + "Parameters: " + PREFIX_SCHEDULE + "[SCHEDULE NAME]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals";
