@@ -1,11 +1,10 @@
 package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_RANGE_INDEX;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_FROM;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_TO;
 
-import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.RangeCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
@@ -31,13 +30,20 @@ public class RangeCommandParser implements Parser<RangeCommand> {
         Index toIndex;
 
         if (argMultimap.getValue(PREFIX_RANGE_FROM).isPresent() && argMultimap.getValue(PREFIX_RANGE_TO).isPresent()) {
-            fromIndex = Index.fromOneBased(Integer.parseInt(argMultimap.getValue(PREFIX_RANGE_FROM).get()));
-            toIndex = Index.fromOneBased(Integer.parseInt(argMultimap.getValue(PREFIX_RANGE_TO).get()));
+            try {
+                fromIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_RANGE_FROM).get());
+                toIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_RANGE_TO).get());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_RANGE_INDEX,
+                        RangeCommand.MESSAGE_USAGE), pe);
+            }
             if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
-                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new ParseException(String.format(MESSAGE_INVALID_RANGE_INDEX,
+                        RangeCommand.MESSAGE_USAGE));
             }
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RangeCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_RANGE_INDEX,
+                    RangeCommand.MESSAGE_USAGE));
         }
         return new RangeCommand(fromIndex, toIndex, commandInput);
     }

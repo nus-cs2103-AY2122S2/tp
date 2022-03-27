@@ -1,7 +1,6 @@
 package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_FROM;
@@ -34,7 +33,9 @@ public class RangeCommand extends Command {
             + PREFIX_RANGE_TO + "TO *\n"
             + "Example: `" + COMMAND_WORD + " edit "
             + PREFIX_PHONE + "12345678 "
-            + PREFIX_ADDRESS + "New Address `";
+            + PREFIX_ADDRESS + "New Address "
+            + PREFIX_RANGE_FROM + "1 "
+            + PREFIX_RANGE_TO + "3 `\n";
 
     private final Logger logger = LogsCenter.getLogger(RangeCommand.class);
 
@@ -57,6 +58,7 @@ public class RangeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -71,7 +73,7 @@ public class RangeCommand extends Command {
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
-                return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+                return new CommandResult(pe.getMessage());
             }
         }
         StringBuilder resultOutput = new StringBuilder();
