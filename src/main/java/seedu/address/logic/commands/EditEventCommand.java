@@ -39,7 +39,7 @@ public class EditEventCommand extends Command {
             + "[" + PREFIX_COMPANY + "COMPANY] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "TIME] "
-            + "[" + PREFIX_LOCATION + "TIME] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "2022-04-12 "

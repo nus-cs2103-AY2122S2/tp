@@ -22,13 +22,20 @@ import seedu.address.model.entry.EventContainsKeywordsPredicate;
 public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD = "finde";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose companyName contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " shopee";
-
     public static final String MESSAGE_NOT_QUERIED = "At least one field to find must be provided.";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds events with given details of the event "
+            + "by name, company, date, time, location and tag "
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_TIME + "TIME] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_COMPANY + " sgshop "
+            + PREFIX_TIME + " 13:30";
 
     private final ArgumentMultimap argumentMultimap;
 
