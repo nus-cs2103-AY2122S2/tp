@@ -1,16 +1,16 @@
 package seedu.ibook.ui;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
+import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import javafx.stage.Stage;
+import org.testfx.matcher.base.NodeMatchers;
 import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.LogicManager;
 import seedu.ibook.model.Model;
@@ -29,15 +29,6 @@ public class GuiTest {
 
     @Start
     public void start(Stage stage) {
-        init(stage);
-    }
-
-    @Test
-    public void isShowing_noExceptionThrown() {
-        assertTrue(mainWindow.getRoot().isShowing());
-    }
-
-    public void init(Stage stage) {
         JsonIBookStorage iBookStorage =
                 new JsonIBookStorage(temporaryFolder.resolve("ibook.json"));
         JsonUserPrefsStorage userPrefsStorage =
@@ -49,6 +40,11 @@ public class GuiTest {
         mainWindow = new MainWindow(stage, logic);
         mainWindow.fillInnerParts();
         mainWindow.show();
+    }
+
+    @Test
+    public void isShowing_noExceptionThrown() {
+        FxAssert.verifyThat(".main", NodeMatchers.isVisible());
     }
 
 }
