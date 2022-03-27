@@ -17,7 +17,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: #222;
+    -fx-text-fill: #333;
 }
 
 .result-display {
@@ -47,7 +47,7 @@
 }
 
 .thumb {
-    -fx-background-color: #D36F1C;
+    -fx-background-color: #E27C26;
 }
 
 #resultPane {
@@ -56,17 +56,17 @@
 
 #commandTextField {
     -fx-background-color: #FEFAF5;
-    -fx-border-color: transparent transparent #986544 transparent;
+    -fx-border-color: #986544;
     -fx-text-fill: #333;
 }
 
 #commandTextField:focused {
-    -fx-border-color: transparent transparent #D36F1C transparent;
+    -fx-border-color: #E27C26;
 }
 
 #tags .label, #memberships .label {
     -fx-text-fill: white;
-    -fx-background-color: #D36F1C;
+    -fx-background-color: #E27C26;
 }
 
 #memberships .label {
