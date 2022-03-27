@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showInterviewAtIndex;
+import static seedu.address.logic.commands.schedule.EditScheduleCommand.MESSAGE_EXPIRED_INTERVIEW;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERVIEW;
@@ -13,6 +14,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERVIEW;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.VALID_NO_CONFLICT_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +30,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.interview.Interview;
 import seedu.address.testutil.InterviewBuilder;
 import seedu.address.testutil.TypicalIndexes;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -96,6 +100,17 @@ public class EditScheduleCommandTest {
     }
 
     @Test
+    public void execute_expiredInterview_failure() {
+        Interview interviewToEdit = new InterviewBuilder().withInterviewDateTime(LocalDateTime.now()
+                .minusMinutes(1)).build();
+        model.addInterview(interviewToEdit);
+        EditScheduleCommand editScheduleCommand =
+                new EditScheduleCommand(INDEX_FIRST_INTERVIEW, TYPICAL_INTERVIEW_DATE_TIME);
+
+        assertCommandFailure(editScheduleCommand, model, MESSAGE_EXPIRED_INTERVIEW);
+    }
+
+    @Test
     public void equals() {
         EditScheduleCommand editScheduleFirstCommand =
                 new EditScheduleCommand(TypicalIndexes.INDEX_FIRST_INTERVIEW, TYPICAL_INTERVIEW_DATE_TIME);
@@ -118,14 +133,5 @@ public class EditScheduleCommandTest {
 
         // different candidate -> returns false
         assertFalse(editScheduleFirstCommand.equals(editScheduleSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered interview schedule to show no interviews.
-     */
-    private void showNoInterview(Model model) {
-        model.updateFilteredInterviewSchedule(Model.PREDICATE_SHOW_EMPTY_INTERVIEW_SCHEDULE);
-
-        assertTrue(model.getFilteredInterviewSchedule().isEmpty());
     }
 }

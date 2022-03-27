@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TI
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.schedule.EditScheduleCommand;
-import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.schedule.EditScheduleCommandParser;
 
 public class EditScheduleCommandParserTest {
@@ -61,6 +60,6 @@ public class EditScheduleCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + "20/02/2022 6:00", ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME);
+        assertParseFailure(parser, "1" + "20/02/2022 6:00", MESSAGE_INVALID_FORMAT);
     }
 }

@@ -28,6 +28,7 @@ public class EditScheduleCommand extends ScheduleCommand {
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS =
             "Successfully edited interview for %1$s";
     public static final String MESSAGE_NOT_EDITED = "Interview date and time must be provided!";
+    public static final String MESSAGE_EXPIRED_INTERVIEW = "The interview you are trying to edit has expired!!";
 
     private final Index index;
     private final LocalDateTime newDateTime;
@@ -56,11 +57,17 @@ public class EditScheduleCommand extends ScheduleCommand {
         }
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
+
+        if (interviewToEdit.isExpired()) {
+            throw new CommandException(MESSAGE_EXPIRED_INTERVIEW);
+        }
+
         Interview editedInterview = createEditedInterview(interviewToEdit, newDateTime);
 
         if (model.hasConflictingInterview(editedInterview)) {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
+
         model.setInterview(interviewToEdit, editedInterview);
         model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
         return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS,
