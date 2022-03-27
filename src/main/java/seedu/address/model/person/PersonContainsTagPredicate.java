@@ -24,7 +24,7 @@ public class PersonContainsTagPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                 || (other instanceof NameContainsKeywordsPredicate); // instanceof handles nulls
-                 // && tag.isSameTag(((NameContainsKeywordsPredicate) other).tag)); // state check
+                 || (other instanceof PersonContainsTagPredicate // instanceof handles nulls
+                 && tag.isSameTag(((PersonContainsTagPredicate) other).tag)); // state check
     }
 }
