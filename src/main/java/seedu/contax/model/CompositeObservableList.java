@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.contax.model.chrono.TemporalComparable;
 
 /**
  * Aggregates the contents of 2 {@code ObservableLists} into a single {@code ObservableList}.
  */
-public class CompositeTemporalObservableList<T extends TemporalComparable> {
+public class CompositeObservableList<T extends Comparable<? super T>> {
 
     private final ObservableList<? extends T> backingList1;
     private final ObservableList<? extends T> backingList2;
@@ -20,13 +19,13 @@ public class CompositeTemporalObservableList<T extends TemporalComparable> {
     private final ObservableList<T> unmodifiableScheduleItemList;
 
     /**
-     * Constructs a CompositeTemporalObservableList.
+     * Constructs a CompositeObservableList.
      *
      * @param backingList1 The first backing ObservableList.
      * @param backingList2 The second backing ObservableList.
      */
-    public CompositeTemporalObservableList(ObservableList<? extends T> backingList1,
-                                           ObservableList<? extends T> backingList2) {
+    public CompositeObservableList(ObservableList<? extends T> backingList1,
+                                   ObservableList<? extends T> backingList2) {
         requireNonNull(backingList1);
         requireNonNull(backingList2);
         this.backingList1 = backingList1;

@@ -35,7 +35,7 @@ public class ModelManager implements Model {
 
     private final ObservableList<AppointmentSlot> displayedAppointmentSlots;
     private final ObservableList<AppointmentSlot> unmodifiableDisplayedAppointmentSlots;
-    private final CompositeTemporalObservableList<ScheduleItem> scheduleItemList;
+    private final CompositeObservableList<ScheduleItem> scheduleItemList;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -57,7 +57,7 @@ public class ModelManager implements Model {
         displayedAppointmentSlots = FXCollections.observableArrayList();
         unmodifiableDisplayedAppointmentSlots =
                 FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
-        scheduleItemList = new CompositeTemporalObservableList<>(filteredAppointments,
+        scheduleItemList = new CompositeObservableList<>(filteredAppointments,
                 unmodifiableDisplayedAppointmentSlots);
     }
 
