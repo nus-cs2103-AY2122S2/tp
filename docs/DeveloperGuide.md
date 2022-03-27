@@ -427,6 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                     | edit an existing contact                                 | update the information when needed                                                                |
 | `* * *`  | user                                                     | tag additional information to an existing contact        | keep a memo of such details for future references                                                 |
 | `* * `   | user                                                     | add an event and tag relevant persons in my contact list | keep a memo of such upcoming events with my contacts for future references                        |
+| `* * `   | user                                                     | view all of my upcoming events                           |                                                                                                   |
 | `* * `   | user                                                     | cancel an event                                          |                                                                                                   |
 | `* * `   | user                                                     | cancel multiple events at once                           | cancel unnecessary events faster                                                                  |
 | `* * `   | user                                                     | find a person by name                                    | locate details of persons without having to go through the entire list                            |
@@ -461,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ````
 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 3a. The given index is invalid.
 
@@ -497,23 +498,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User inputs command to tag a specific person in the list
 4. NUSocials tags the person
 
-   Use case ends.
+    Use case ends.
 ````
 **Extensions**
 ````
 2a. The list is empty.
 
-  Use case ends
+    Use case ends
 
 3a. The given index is invalid.
-  - 3a1. NUSocials shows an error message.
 
-    Use case resumes at step 2.
+    - 3a1. NUSocials shows an error message.
+
+      Use case resumes at step 2.
 
 3b. The given tag command is invalid.
-  - 3b1. NUSocials shows an error message.
 
-    Use case resumes at step 2.
+    - 3b1. NUSocials shows an error message.
+
+      Use case resumes at step 2.
 ````
 ### Use case 4: Edit a person
 
@@ -521,23 +524,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ````
 1. User requests to list all persons
 2. NUSocials shows a list of all persons
-3. Users requests to overwrite certain fields and tags of the person with updated information
+3. Users requests to overwrite certain fields of the person with updated information
 4. NUSocials tags the person
 
-   Use case ends.
+    Use case ends.
 ````
 **Extensions**
 ````
 2a. The list is empty.
 
-  Use case end
+    Use case ends.
 
 3a. The given index is invalid.
+
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
 
 3b. The given edit command is invalid.
+
     - 3b1. NUSocials shows an error message.
 
       Use case resumes at step 2.
@@ -549,9 +554,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list all persons
 2. NUSocials displays all persons in a list
 
-   Use case ends.
+    Use case ends.
 ````
-### Use case 6: Finding a person (any field)
+
+### Use case 6: Viewing all upcoming events
+
+**MSS**
+````
+1. User requests to list all upcoming events
+2. NUSocials displays all upcoming events in a list
+
+    Use case ends.
+````
+
+### Use case 7: Finding a person (any field)
 
 **MSS**
 ````
@@ -562,18 +578,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 ````
 2a. The given find command is invalid.
+
     - 2a1. NUSocials shows an error message.
 
       Use case resumes at step 1.
 ````
-### Use case 7: Finding a person (all fields)
+### Use case 8: Finding a person (all fields)
 
 ````
-Similar to Use case 6, except now:
+Similar to Use case 7, except now:
 The user wants to find a person that has every field instead.
 ````
 
-### Use case 8: Removing specific tags
+### Use case 9: Removing specific tags
 
 **MSS**
 ````
@@ -591,22 +608,25 @@ The user wants to find a person that has every field instead.
   Use case end
 
 3a. The given index is invalid.
+
     - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
 
 3b. The given removetag command is invalid.
+
     - 3b1. NUSocials shows an error message.
 
       Use case resumes at step 2.
 
 3c. The request contains non-existent tags to be removed.
+
     - 3c1. NUSocials shows an error message.
 
       Use case resumes at step 2.
 ````
 
-### Use case 9: Delete multiple persons
+### Use case 10: Delete multiple persons
 
 **MSS**
 ````
@@ -617,7 +637,7 @@ The user wants to delete multiple persons instead.
 ````
 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 3a. One or more of given indexes are invalid.
 
@@ -626,7 +646,7 @@ The user wants to delete multiple persons instead.
       Use case resumes at step 2.
 ````
 
-### Use case 10: Adding an event
+### Use case 11: Adding an event
 
 **MSS**
 ````
@@ -644,11 +664,11 @@ The user wants to delete multiple persons instead.
       Use case resumes at step 1.
 ````
 
-### Use case 11: Cancelling events
+### Use case 12: Cancelling events
 
 **MSS**
 ````
-Similar to Use case 9, except now:
+Similar to Use case 10, except now:
 The user wants to delete event(s) instead.
 ````
 **Extensions**

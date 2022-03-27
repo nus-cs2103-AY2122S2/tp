@@ -9,18 +9,18 @@ NUSocials is a desktop address book application for university students who like
 
 Given below are my contributions to the project.
 
-* **New Feature**: Add the ability to tag existing contacts. (Contribution)
+* **New Feature**: Added test cases for Tag command.
   * What it does: allows the user to tag additional information to an existing contact.
   * Justification: This feature improves the product significantly because a user can tag important information to their own contacts for future references.
-  * Highlights: This enhancement affects the existing UI layout. It required an in-depth analysis of how the tagged information should be displayed alongside with their respective contacts.
 
 * **Feature Enhancement**: Added the ability to delete multiple contacts.
   * What it does: allows the user to delete multiple contacts in a single command.
   * Justification: This feature improves the product as a user can efficiently delete many contacts at once instead of inputting a delete command for each contact that he or she wants to delete.
+  * Highlights: This enhancement affects the existing UI layout. It required an in-depth analysis of how the contacts would be displayed during the deletion process.
 
 * **New Feature**: Added the ability to remove tags from existing contacts.
   * What it does: allows the user to remove tags from an existing contact.
-  * Justification: This feature improves the product significantly because a user does not have to key in every tag again with the `edit` command just to remove a few tags.
+  * Justification: This feature improves the product significantly because it allows the user to simply remove a tag, otherwise users have to recreate another contact.
 
 * Updated the UI to fit requirements for new features
   * Added a split-pane to fit 2 panels (contacts panel and events panel)
@@ -31,14 +31,12 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `add` and `tag`
-    * Added documentation for feature `delete` enhancement
-    * Added documentation for new feature `removetag`
+    * Added documentation for `removetag` and `delete` enhancement
     * Updated documentation for exact tag names for `find` and `tag`
-    * Added screenshots for `find` and `find -s` examples
+    * Added screenshots for `find`, `find -s` and NUSocials UI at initial launch
   * Developer Guide:
-    * Added user stories for `removetag` and `delete` multiple contacts
-    * Added use cases for `removetag` and `find`
+    * Added user stories for `removetag`, `delete` multiple contacts, viewing all upcoming events
+    * Added use cases for `removetag`, `find`, `delete` multiple contacts, viewing all upcoming events
     * Added implementation for delete multiple contacts and UML diagrams
 
 * **Tools**:
