@@ -173,6 +173,26 @@ Examples of usage:
 * `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing)
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing)
 
+### Archiving address book: `archive`
+Archives the current address book file 
+
+Format: `archive`
+
+* The archived file will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where
+  * `[ROOT]`: Root directory of Tracey
+  * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY
+  * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss
+
+Example:
+* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33 (hh:mm:ss in 24-hour notation)
+* The archived file will be saved **in** `[ROOT]/data/archive/270322`
+* The archived file will be saved **as** `270322_152833`
+* The file path will be `[ROOT]/data/archive/270322/270322_152833`
+
+Tips:
+* You can rename the archived file in the file path manually for easier reference
+* To restore the address book to a previous version, just replace the address book file in `[ROOT]/data` with the archived file
+
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to `Tracey`.
