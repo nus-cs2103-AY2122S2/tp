@@ -6,7 +6,7 @@ import static java.util.Objects.requireNonNull;
  * Represents a Person's remark in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Comment {
+public class Comment implements Comparable<Comment> {
 
     /*
      * The first character of the comment must not be a whitespace,
@@ -52,5 +52,10 @@ public class Comment {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Comment o) {
+        return this.value.length() - o.value.length();
     }
 }

@@ -31,9 +31,9 @@ Given below are my contributions to the project.
 
 - **New Feature**: Added GUI, `AddWindow` for adding a new Person into ModuleMateFinder. [(PR #46)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/46)
   - **What it does**: Allows users to add a new contact into ModuleMateFinder.
-  - **Justification**: This feature improves the product significantly as not all users will be familiar with CLI application, or simply do not want to memorise the commands. Having a GUI way to add contacts provides ease of use for the users.
+  - **Justification**: This feature improves the product significantly as not all users will be familiar with CLI application, or simply do not want to memorise the commands. Having a GUI way to add contacts provides ease of use for the users. Furthermore, it can execute multiple commands at once.
   - **Highlights**: This feature was challenging as it required good understanding of JavaFX, which required digging deeper into JavaFX and how it integrates with Java. Furthermore, styling is non-trivial.
-  - **Enhancements**: Extended the feature to allow for adding _optional_ fields like `Module` and `Status`[(PR #72)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72). Binded the `ENTER` key to act as a `Submit` button, when mandatory fields are added.
+  - **Enhancements**: Extended the feature to allow for adding _optional_ fields like `Module`, `Status`[(PR #72)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72) and `Comment`[(PR #88)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/88). Binded the `ENTER` key to act as a `Submit` button, when mandatory fields are added.
   - **Credits**: Some code reuse from `HelpWindow`, which served as the _baseline_ to start implementation of `AddWindow`
 
 - **New Feature**: Added GUI, `EditWindow` for editing a Person within ModuleMateFinder. [(PR #81)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/81)
@@ -58,8 +58,17 @@ Given below are my contributions to the project.
 
 **Community**
 - Reviewed all PRs done by Julio and Bryan
+  - Non-trivial PRs reviewed and commented on for Julio:
+    - [PR #62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62)
+    - [PR #90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90)
+  - Non-trivial PRs reviewed for Bryan:
+    - [PR #91](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91)
 - Reviewed some PRs by Wei Ming and Benjamin
-
+  - Non-trivial PRs reviewed and commented on for Wei Ming
+    - [PR #44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44)
+  - Non-trivial PRs reviewed and commented on for Benjamin
+    - [PR #83](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/83)
+- Verified on [forum](https://github.com/nus-cs2103-AY2122S2/forum/issues/210) regarding GUI additions
 
 **Tools**:
 - TBD
