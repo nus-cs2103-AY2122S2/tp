@@ -11,7 +11,7 @@ later.">
   - [Requirement](#requirement)
   - [Setup](#setup)
 - [Features](#features)
-  - [Viewing Help](#viewing-help)
+  - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
   - [Listing all Patients: `view`](#listing-all-patients-view)
   - [Deleting any Information: `delete`](#deleting-any-information-delete)
@@ -128,18 +128,8 @@ Examples:
 ### Adding Medical Information: `add t/medical`
 Adds a patient's medical information to MedBook.
 
-Format: `add t/medical i/NRIC
-[a/AGE]
-[bt/BLOOD_TYPE]
-[md/MEDICATION]
-[ht/HEIGHT]
-[wt/WEIGHT]
-[il/ILLNESSES]
-[su/SURGERIES]
-[fh/FAMILY_HISTORY]
-[ih/IMMUNIZATION_HISTORY]
-[gd/GENDER]
-[et/ETHNICITY]`
+Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
+  [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
 Examples:
 * `add t/medical i/S1234567L bt/O ht/185 cm`
