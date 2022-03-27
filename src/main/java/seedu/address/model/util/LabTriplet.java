@@ -48,6 +48,6 @@ public class LabTriplet {
      * Returns a new Lab with the given {@code labNumber}, {@code labStatus}, and {@code labMark}.
      */
     public Lab getLab() {
-        return new Lab(labNumber).of(labStatus, labMark);
+        return new Lab(getLabNumber()).of(getLabStatus(), getLabMark());
     }
 }
