@@ -183,7 +183,7 @@ enter the command in the command box following the instructions in the previous 
 Enables mouse interaction in mouseUX. After enabling mouse interactions, 2 new buttons ("Add" and "New tag") will
 appear on the menu bar as shown in the figure below.
 
-![enableMouseUX_menuBar](images/enableMouseUX_menuBar.png)
+<img src="images/enableMouseUX_menuBar.png" width="250"/>
 
 Format: `enable mouseUX`
 
@@ -199,20 +199,21 @@ To view a profile, click on the profile in the list to view it.
 To add a new profile, click the `Add` button on the menu bar, and select `Add profile`. An **add profile pop up
 window** will appear.
 
-![addProfile_popup](images/addProfile_popup.png)
+<img src="images/addProfile_popup.png" width="400"/>
 
 In the window, simply enter all related information into the spaces provided, and click the
 `save` button to add a new profile. Click `cancel` to stop adding and close the pop up window.
 ###Delete profile
 To delete a profile, right click on the profile and select `delete`.
 
-![deleteProfile_GUI](images/deleteProfile_GUI.png)
+<img src="images/deleteProfile_GUI.png" width="300"/>
 
 ###Adding a new tag
 To add a new tag, click the `New tag` button on the menu bar, and select `New tag`. A **new tag pop up
 window** will appear.
 
-![tag_popup](images/tag_popup.png)
+<img src="images/tag_popup.png" width="400"/>
+
 
 Enter the new tag name into the text field, and click the `Add` button to create a new tag. To cancel adding tags, click
 the `Cancel` button to close the pop up window.
@@ -223,7 +224,7 @@ selection. Select the tag(s) to delete, and click the `Delete` button to delete 
 
 Selected tags will appear in black, as shown in the figure below ("friends" and "professors" selected).
 
-![selectedTag_GUI](images/selectedTag_GUI.png)
+<img src="images/selectedTag_GUI.png" width="300"/>
 
 
 --------------------------------------------------------------------------------------------------------------------
