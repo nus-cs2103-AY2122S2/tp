@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PARAM_STUDENTS;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ALL_STUDENTS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
@@ -330,8 +330,8 @@ public class ParserUtil {
      * @throws ParseException if the student IDs or indexes are invalid.
      */
     public static ObservableList<Student> parseStudents(String s, Model model) throws ParseException {
-        if (s.equals(PARAM_STUDENTS)) {
-            return model.getFilteredStudentList();
+        if (s.equals(PARAM_ALL_STUDENTS)) {
+            return model.getUnfilteredStudentList();
         }
 
         String[] splitS = s.toUpperCase().split(",");

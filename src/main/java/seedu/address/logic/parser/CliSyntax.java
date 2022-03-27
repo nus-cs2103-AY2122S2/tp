@@ -25,5 +25,5 @@ public class CliSyntax {
     public static final String TYPE_MODULE = "module";
     public static final String TYPE_CLASS = "class";
     public static final String TYPE_ASSESSMENT = "assessment";
-    public static final String PARAM_STUDENTS = "all";
+    public static final String PARAM_ALL_STUDENTS = "all";
 }
