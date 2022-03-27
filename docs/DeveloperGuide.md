@@ -163,20 +163,20 @@ This section describes some noteworthy details on how certain features are imple
 
 ##### Implementation
 - Allergies, Staff and Services were added as tags as one customer can have multiple of these data fields
-- The rest were added as attributes 
+- The rest were added as attributes
 
 ##### Design Considerations
 
-* **Alternative 1 (current choice):** Implement only allergies,staffs and services as tags 
+* **Alternative 1 (current choice):** Implement only allergies,staffs and services as tags
   * Pros: Harder to implement
   * Cons: Less direct to access allergies, staffs and services as compared to if a list was used
 
-* **Alternative 2:** Implement all additional fields as tags 
+* **Alternative 2:** Implement all additional fields as tags
   itself.
   * Pros: Easy to implement
   * Cons: Could be harder to access the necessary data for other functions like creating summary statistics
   * Cons: Does not make sense to have multiple of certain data fields, e.g. multiple skin types, multiple birthdays
- 
+
 #### Delete multiple customers in a single command
 
 #### Overview
@@ -184,8 +184,8 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 - Current implementation allows user to enter multiple indexes seperated by comma. All the indexes will be checked if
-they are integers and is a valid index. 
-- If any indexes fail the check, the command with be aborted. Only if all indexes pass the check, then command with be 
+they are integers and is a valid index.
+- If any indexes fail the check, the command with be aborted. Only if all indexes pass the check, then command with be
 executed.
 
 ##### Design Considerations

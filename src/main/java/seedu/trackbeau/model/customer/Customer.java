@@ -8,12 +8,13 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.trackbeau.model.tag.Tag;
+import seedu.trackbeau.model.uniquelist.UniqueListItem;
 
 /**
  * Represents a Customer trackBeau.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Customer {
+public class Customer implements UniqueListItem {
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -102,13 +103,17 @@ public class Customer {
      * Returns true if both customers have the same name.
      * This defines a weaker notion of equality between two customers.
      */
-    public boolean isSameCustomer(Customer otherCustomer) {
-        if (otherCustomer == this) {
+    public boolean isSameItem(UniqueListItem other) {
+        if (other == this) {
             return true;
         }
 
-        return otherCustomer != null
-                && otherCustomer.getName().equals(getName());
+        if (!(other instanceof Customer)) {
+            return false;
+        }
+
+        Customer otherCustomer = (Customer) other;
+        return otherCustomer.getName().equals(getName());
     }
 
     /**
@@ -127,14 +132,14 @@ public class Customer {
 
         Customer otherCustomer = (Customer) other;
         return otherCustomer.getName().equals(getName())
-                && otherCustomer.getPhone().equals(getPhone())
-                && otherCustomer.getEmail().equals(getEmail())
-                && otherCustomer.getAddress().equals(getAddress())
-                && otherCustomer.getStaffs().equals(getStaffs())
-                && otherCustomer.getServices().equals(getServices())
-                && otherCustomer.getAllergies().equals(getAllergies())
-                && otherCustomer.getBirthdate().equals(getBirthdate())
-                && otherCustomer.getRegDate().equals(getRegDate());
+            && otherCustomer.getPhone().equals(getPhone())
+            && otherCustomer.getEmail().equals(getEmail())
+            && otherCustomer.getAddress().equals(getAddress())
+            && otherCustomer.getStaffs().equals(getStaffs())
+            && otherCustomer.getServices().equals(getServices())
+            && otherCustomer.getAllergies().equals(getAllergies())
+            && otherCustomer.getBirthdate().equals(getBirthdate())
+            && otherCustomer.getRegDate().equals(getRegDate());
     }
 
     @Override
@@ -147,20 +152,20 @@ public class Customer {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Skin Type: ")
-                .append(getSkinType())
-                .append("; Hair Type: ")
-                .append(getHairType())
-                .append("; Birthday: ")
-                .append(getBirthdate())
-                .append("; Registration Date: ")
-                .append(getRegDate());
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Address: ")
+            .append(getAddress())
+            .append("; Skin Type: ")
+            .append(getSkinType())
+            .append("; Hair Type: ")
+            .append(getHairType())
+            .append("; Birthday: ")
+            .append(getBirthdate())
+            .append("; Registration Date: ")
+            .append(getRegDate());
 
         Set<Tag> staffs = getStaffs();
         if (!staffs.isEmpty()) {

@@ -16,21 +16,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.trackbeau.logic.commands.FindCommand;
+import seedu.trackbeau.logic.commands.customer.FindCustomerCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCustomerCommand object
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindCommandParser implements Parser<FindCustomerCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindCustomerCommand
+     * and returns a FindCustomerCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCommand parse(String userInput) throws ParseException {
+    public FindCustomerCommand parse(String userInput) throws ParseException {
         Integer attributeCount = 9;
 
         ArgumentMultimap argMultimap =
@@ -41,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (userInput.isEmpty()) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCustomerCommand.MESSAGE_USAGE));
         }
 
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(attributeCount, null));
@@ -54,7 +54,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
 
-        return new FindCommand(new SearchContainsKeywordsPredicate(prefixArr));
+        return new FindCustomerCommand(new SearchContainsKeywordsPredicate(prefixArr));
 
     }
 }

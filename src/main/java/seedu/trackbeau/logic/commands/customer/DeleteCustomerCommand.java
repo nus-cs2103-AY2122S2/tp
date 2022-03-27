@@ -1,4 +1,4 @@
-package seedu.trackbeau.logic.commands;
+package seedu.trackbeau.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,6 +7,8 @@ import java.util.List;
 
 import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.commons.core.index.Index;
+import seedu.trackbeau.logic.commands.Command;
+import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Customer;
@@ -14,9 +16,9 @@ import seedu.trackbeau.model.customer.Customer;
 /**
  * Deletes a customer identified using it's displayed index from trackBeau.
  */
-public class DeleteCommand extends Command {
+public class DeleteCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deletec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the customer identified by the index number used in the displayed customer list.\n"
@@ -27,7 +29,7 @@ public class DeleteCommand extends Command {
 
     private final ArrayList<Index> targetIndexes;
 
-    public DeleteCommand(ArrayList<Index> targetIndexes) {
+    public DeleteCustomerCommand(ArrayList<Index> targetIndexes) {
         this.targetIndexes = targetIndexes;
     }
 
@@ -56,7 +58,7 @@ public class DeleteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndexes.containsAll(((DeleteCommand) other).targetIndexes)); // state check
+                || (other instanceof DeleteCustomerCommand // instanceof handles nulls
+                && targetIndexes.containsAll(((DeleteCustomerCommand) other).targetIndexes)); // state check
     }
 }

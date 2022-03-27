@@ -20,7 +20,7 @@ import seedu.trackbeau.model.customer.Customer;
  */
 public class AddBookingCommand extends Command {
 
-    public static final String COMMAND_WORD = "addbooking";
+    public static final String COMMAND_WORD = "addb";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Booking to TrackBeau. "
             + "Parameters: "

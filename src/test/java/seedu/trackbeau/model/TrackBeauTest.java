@@ -20,8 +20,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.exceptions.DuplicateCustomerException;
 import seedu.trackbeau.model.service.Service;
+import seedu.trackbeau.model.uniquelist.exceptions.DuplicateItemException;
 import seedu.trackbeau.testutil.CustomerBuilder;
 
 public class TrackBeauTest {
@@ -54,7 +54,7 @@ public class TrackBeauTest {
         List<Service> services = Arrays.asList();
         TrackBeauStub newData = new TrackBeauStub(newCustomers, services);
 
-        assertThrows(DuplicateCustomerException.class, () -> trackBeau.resetData(newData));
+        assertThrows(DuplicateItemException.class, () -> trackBeau.resetData(newData));
     }
 
     @Test

@@ -16,7 +16,7 @@ import seedu.trackbeau.model.service.Service;
  */
 public class AddServiceCommand extends Command {
 
-    public static final String COMMAND_WORD = "addService";
+    public static final String COMMAND_WORD = "adds";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a service to TrackBeau. "
         + "Parameters: "
