@@ -503,9 +503,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
                 <p class="c8"><span class="c0">[EPIC] Manage my students in my contacts</span></p>
                 <p class="c8 c6"><span class="c0"></span></p>
                 <ol class="c10 lst-kix_ti3wjakiwqoc-0 start" start="1">
-                    <li class="c7 li-bullet-0"><span class="c0">Add students to my contacts</span></li>
-                    <li class="c7 li-bullet-0"><span class="c0">Remove students from my contacts</span></li>
-                    <li class="c7 li-bullet-0"><span class="c0">View students</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">add students to my contacts</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove students from my contacts</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view students</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">find students by name</span></li>
                 </ol>
             </td>
             <td class="c13" colspan="1" rowspan="1">
@@ -576,6 +577,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
                 <p class="c8"><span class="c0">TA</span></p>
             </td>
             <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">[EPIC] Manage the assessments I assign</span></p>
+                <ol class="c10 lst-kix_pn5b7fzij174-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add assessments </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove assessments </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view assessments </span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">monitor the assessments I assign.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">5</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
                 <p class="c8"><span class="c0">[EPIC] Manage students in the modules I am teaching</span></p>
                 <ol class="c10 lst-kix_l5c5afd4kfve-0 start" start="1">
                     <li class="c7 li-bullet-0"><span class="c0">add students to a module</span></li>
@@ -595,16 +621,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         </tr>
         <tr class="c11">
             <td class="c16" colspan="1" rowspan="1">
-                <p class="c8"><span class="c0">5</span></p>
+                <p class="c8"><span class="c0">6</span></p>
             </td>
             <td class="c9" colspan="1" rowspan="1">
                 <p class="c8"><span class="c0">TA</span></p>
             </td>
             <td class="c3" colspan="1" rowspan="1">
-                <p class="c8"><span class="c0">Add class groups to a module</span></p>
+                <p class="c8"><span class="c0">[EPIC] Manage students in the class groups I am teaching</span></p>
+                <ol class="c10 lst-kix_l5c5afd4kfve-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add students to a class group</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove students from a class group</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view students in a class group</span></li>
+                </ol>
             </td>
             <td class="c13" colspan="1" rowspan="1">
-                <p class="c8"><span class="c0">track which module a class groups belongs to.</span></p>
+                <p class="c8"><span class="c0">easily monitor the students I am teaching in a class group.</span></p>
             </td>
             <td class="c12" colspan="1" rowspan="1">
                 <p class="c8 c6"><span class="c0"></span></p>
@@ -615,23 +646,101 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         </tr>
         <tr class="c11">
             <td class="c16" colspan="1" rowspan="1">
-                <p class="c8"><span class="c0">6</span></p>
+                <p class="c8"><span class="c0">7</span></p>
             </td>
             <td class="c9" colspan="1" rowspan="1">
                 <p class="c8"><span class="c0">TA</span></p>
             </td>
             <td class="c3" colspan="1" rowspan="1">
-                <p class="c8"><span class="c0">keep track of students’ attendance</span></p>
+                <p class="c8"><span class="c0">[EPIC] Manage class groups in the modules I am teaching</span></p>
+                <ol class="c10 lst-kix_l5c5afd4kfve-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add class groups to a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove class groups from a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view class groups in a module</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">easily monitor the class groups I am teaching in a module.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">8</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">[EPIC] Manage assessments in the modules I am teaching</span></p>
+                <ol class="c10 lst-kix_l5c5afd4kfve-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add assessments to a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove assessments from a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view assessments in a module</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">easily monitor the assessments I am assigning in a module.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">9</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">Keep track of students’ attendance</span></p>
                 <p class="c8"><span class="c0">Conditions:</span></p>
                 <ol class="c10 lst-kix_8pu3ok8lb4xj-0 start" start="1">
-                    <li class="c7 li-bullet-0"><span class="c0">add student to a lesson</span></li>
-                    <li class="c7 li-bullet-0"><span class="c0">remove student from a lesson </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">add students to a lesson</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove students from a lesson </span></li>
                     <li class="c7 li-bullet-0"><span class="c0">view students in a lesson</span></li>
-                    <li class="c7 li-bullet-0"><span class="c0">Total attendance count</span></li>
                 </ol>
             </td>
             <td class="c13" colspan="1" rowspan="1">
                 <p class="c8"><span class="c0">focus on students who have not been attending lessons.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">10</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">Keep track of students’ assessment attempts</span></p>
+                <p class="c8"><span class="c0">Conditions:</span></p>
+                <ol class="c10 lst-kix_8pu3ok8lb4xj-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add students to a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove students from a module </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view students in a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">add assessments to a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove assessments from a module </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view assessments in a module</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">grade students' assessment attempts.</span></p>
             </td>
             <td class="c12" colspan="1" rowspan="1">
                 <p class="c8 c6"><span class="c0"></span></p>
