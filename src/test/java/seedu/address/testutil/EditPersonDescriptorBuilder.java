@@ -17,7 +17,6 @@ import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
 */
 
- */
 /**
  * A utility class to help with building EditPersonDescriptor objects.
  */
