@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -16,22 +17,22 @@ import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
-    private static Person VALID_PERSON = new PersonBuilder().withName("Joel")
+    private static final Person VALID_PERSON = new PersonBuilder().withName("Joel")
             .withEmail("joel@example.com").withPhone("1267912")
             .withHeight("221").withJerseyNumber("83").withWeight("120")
             .withTags("C").build();
-    private static Person INVALID_PERSON = new PersonBuilder().withName("Alice Pauline").build();
-    private static Person INVALID_PERSON_2 = new PersonBuilder().withName("Daniel Lee").withJerseyNumber("2").build();
+    private static final Person INVALID_PERSON = new PersonBuilder().withName("Alice Pauline").build();
+    private static final Person INVALID_PERSON_2 = new PersonBuilder()
+            .withName("Daniel Lee").withJerseyNumber("2").build();
     private static final Lineup VALID_LINEUP = new Lineup(new LineupName("Dummy"));
     private static final Lineup VALID_LINEUP_2 = new LineupBuilder().build();
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());;
-    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager();
-        expectedModel = new ModelManager();
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());;
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         model.addLineup(VALID_LINEUP);
         expectedModel.addLineup(VALID_LINEUP);
     }
@@ -50,7 +51,7 @@ public class AddCommandTest {
         try {
             command.execute(model);
         } catch (CommandException e) {
-            assertEquals(AddCommand.MESSAGE_DUPLICATE_PERSON ,e.getMessage());
+            assertEquals(AddCommand.MESSAGE_DUPLICATE_PERSON, e.getMessage());
         }
     }
 
@@ -60,7 +61,7 @@ public class AddCommandTest {
         try {
             command.execute(model);
         } catch (CommandException e) {
-            assertEquals(AddCommand.MESSAGE_DUPLICATE_JERSEY_NUMBER ,e.getMessage());
+            assertEquals(AddCommand.MESSAGE_DUPLICATE_JERSEY_NUMBER, e.getMessage());
         }
     }
 
@@ -78,7 +79,7 @@ public class AddCommandTest {
         try {
             command.execute(model);
         } catch (CommandException e) {
-            assertEquals(AddCommand.MESSAGE_DUPLICATE_LINEUP_NAME ,e.getMessage());
+            assertEquals(AddCommand.MESSAGE_DUPLICATE_LINEUP_NAME, e.getMessage());
         }
     }
 }

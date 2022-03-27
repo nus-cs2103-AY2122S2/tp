@@ -134,11 +134,6 @@ public class EditCommandTest {
 */
 
 
-
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
     /*
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
