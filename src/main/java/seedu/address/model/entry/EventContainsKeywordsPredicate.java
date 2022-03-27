@@ -18,17 +18,20 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> companyKeywords;
     private final List<String> dateKeywords;
     private final List<String> timeKeywords;
+    private final List<String> locationKeywords;
     private final List<String> tagKeywords;
 
     public EventContainsKeywordsPredicate(List<String> nameKeywords,
                                           List<String> companyKeywords,
                                           List<String> dateKeywords,
                                           List<String> timeKeywords,
+                                          List<String> locationKeywords,
                                           List<String> tagKeywords) {
         this.nameKeywords = nameKeywords;
         this.companyKeywords = companyKeywords;
         this.dateKeywords = dateKeywords;
         this.timeKeywords = timeKeywords;
+        this.locationKeywords = locationKeywords;
         this.tagKeywords = tagKeywords;
     }
 
@@ -38,6 +41,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         boolean correctCompany;
         boolean correctDate;
         boolean correctTime;
+        boolean correctLocation;
         boolean correctTag;
 
         if(validKeywords(nameKeywords)) {
@@ -67,6 +71,14 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                             keyword));
         }
 
+        if(validKeywords(locationKeywords)) {
+            correctLocation = true;
+        } else {
+            correctLocation = locationKeywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getLocation().getPure(),
+                            keyword));
+        }
+
         if(validKeywords(tagKeywords)) {
             correctTag = true;
         } else {
@@ -76,7 +88,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                             .contains(keyword));
         }
 
-        return correctName && correctCompany && correctDate && correctTime && correctTag;
+        return correctName && correctCompany && correctDate && correctTime && correctLocation && correctTag;
     }
 
     @Override
@@ -87,6 +99,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 && companyKeywords.equals(((EventContainsKeywordsPredicate) other).companyKeywords)
                 && dateKeywords.equals(((EventContainsKeywordsPredicate) other).dateKeywords)
                 && timeKeywords.equals(((EventContainsKeywordsPredicate) other).timeKeywords)
+                && locationKeywords.equals(((EventContainsKeywordsPredicate) other).locationKeywords)
                 && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)); // state check
     }
 

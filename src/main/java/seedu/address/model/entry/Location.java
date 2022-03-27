@@ -1,5 +1,7 @@
 package seedu.address.model.entry;
 
+import java.time.LocalDate;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -55,5 +57,13 @@ public class Location {
     @Override
     public int hashCode() {
         return location.hashCode();
+    }
+
+    /**
+     * Accesses and returns the location attribute
+     * @return the date attribute as String
+     */
+    public String getPure() {
+        return this.location;
     }
 }

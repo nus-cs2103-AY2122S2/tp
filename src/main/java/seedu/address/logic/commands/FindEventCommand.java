@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,8 +12,7 @@ import seedu.address.model.entry.*;
 import java.util.*;
 
 /**
- * Finds and lists all events in address book whose companyName contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case insensitive
  */
 public class FindEventCommand extends Command {
 
@@ -29,9 +27,10 @@ public class FindEventCommand extends Command {
 
     private final ArgumentMultimap argumentMultimap;
 
-//    /**
-//     * @param findEventDescriptor details to find the event with
-//     */
+    /**
+     * Constructs FindEventCommand object
+     * @param argumentMultimap A hashmap containing event prefixes and its value from user input
+     */
     public FindEventCommand(ArgumentMultimap argumentMultimap) {
         requireNonNull(argumentMultimap);
         this.argumentMultimap = argumentMultimap;
@@ -44,12 +43,14 @@ public class FindEventCommand extends Command {
         String[] companyNameKeywords = argumentMultimap.getValue(PREFIX_COMPANY).orElse("").split("\\s+");
         String[] dateKeywords = argumentMultimap.getValue(PREFIX_DATE).orElse("").split("\\s+");
         String[] timeKeywords = argumentMultimap.getValue(PREFIX_TIME).orElse("").split("\\s+");
+        String[] locationKeywords = argumentMultimap.getValue(PREFIX_LOCATION).orElse("").split("\\s+");
         String[] tagKeywords = argumentMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
 
         EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Arrays.asList(nameKeywords),
                 Arrays.asList(companyNameKeywords),
                 Arrays.asList(dateKeywords),
                 Arrays.asList(timeKeywords),
+                Arrays.asList(locationKeywords),
                 Arrays.asList(tagKeywords));
 
         model.updateFilteredEventList(predicate);
