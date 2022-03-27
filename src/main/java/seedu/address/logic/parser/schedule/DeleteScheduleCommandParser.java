@@ -9,13 +9,13 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteScheduleCommand object
  */
 public class DeleteScheduleCommandParser implements Parser<DeleteScheduleCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteScheduleCommand
+     * and returns a DeleteScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteScheduleCommand parse(String args) throws ParseException {
