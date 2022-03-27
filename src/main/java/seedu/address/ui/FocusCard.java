@@ -39,6 +39,7 @@ public class FocusCard extends UiPart<Region> {
 
     private static final String FXML = "FocusListCard.fxml";
     private static final String BLANK_PICTURE_PATH = "docs/images/blankprofile.png";
+    private static final String SENIORITY_VALUE = "COM";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -90,7 +91,7 @@ public class FocusCard extends UiPart<Region> {
         name.setText(candidate.getName().fullName);
         phone.setText(candidate.getPhone().value);
         email.setText(candidate.getEmail().value);
-        course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
+        course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
         displayPicture.setImage(new Image(new FileInputStream(BLANK_PICTURE_PATH)));
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
