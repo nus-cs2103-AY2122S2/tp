@@ -48,7 +48,7 @@ This guide aims to be the one-stop shop to get you from noob to expert in record
 
 ## Graphical User Interface (GUI) Overview
 
-//TODO
+![GuiOverview](images/GuiOverview.png)
 
 ---
 
@@ -330,7 +330,7 @@ The command history works similarly to the Linux bash terminal.
 
 You can change between the light or dark theme by click on the menu bar and selecting `Theme > Cinnamon` or `Theme > Caramel`.
 
-![](images/ChangeTheme.png)
+![ChangeTheme](images/ChangeTheme.png)
 
 ---
 
