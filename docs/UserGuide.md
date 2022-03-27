@@ -33,17 +33,16 @@ This guide aims to be the one-stop shop to get you from noob to expert in record
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press `Enter` to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press `Enter` to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
+   * `list`: Lists all clients.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a client named `John Doe` to CinnamonBun.
+   * `delete 3`: Deletes the 3rd client shown in the current list.
+   * `clear`: Deletes all client records.
+   * `undo`: Undo the last executed command.
+   * `exit`: Exits the app.  
 
-   * **`list`** : Lists all clients.
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to CinnamonBun.
-   * **`delete`**`3` : Deletes the 3rd client shown in the current list.
-   * **`clear`** : Deletes all client records.
-   * **`undo`** : Undo the last executed command.
-   * **`exit`** : Exits the app.
-    
-6. Refer to the [Commands](#Commands) below for details of each command.
+7. Refer to the [Commands](#Commands) below for details of each command.
 
 ---
 
@@ -102,7 +101,7 @@ A client can have many fields & tags, including both optional and compulsory one
 | Phone    | `p/`     | Minimum 3 numeric characters.                                                                                                              | :heavy_check_mark: | `p/81312224`                              |
 | Address  | `a/`     | No constraints.                                                                                                                            | :heavy_check_mark: | `a/123 Sesame Street`                     |
 | Birthday | `b/`     | Must be in *YYYY-MM-DD* format and a valid date.                                                                                           |                    | `b/2022-03-12`                            |
-| Remark   | 'r/`     | No constraints.                                                                                                                            |                    | `r/Foreman of Project Zero Dawn.`         |       
+| Remark   | `r/`     | No constraints.                                                                                                                            |                    | `r/Foreman of Project Zero Dawn.`         |       
 | Tags     | `t/`     | Alphanumeric only.<br/><br/> No spaces allowed.<br/><br/> Multiple tags are allowed per client.                                            |                    | `t/Frequentclient t/AppointmentOverdue`   | 
 
 ### Command Summary
@@ -113,6 +112,8 @@ A client can have many fields & tags, including both optional and compulsory one
 | [Add](#add-client-add)                                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | [Edit](#edit-client-edit)                                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                |
 | [Remark](#append-remark-to-client-remark)                  | `remark INDEX r/REMARK`<br> e.g., `remark 5 r/Needs marble flooring delivered by next Tuesday.`                                                                       |
+| [Append](#append-fields-to-client-append)                  | `append INDEX r/REMARK b/BIRTHDAY e/wolololol@aoe.net t/senior`                                                                                                       |
+| [Remove](#remove-fields-from-client-remove)                | `remove INDEX r/ b/`                                                                                                                                                  |
 | [Delete](#delete-client-delete)                            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | [Clear](#delete-all-entries-clear)                         | `clear`                                                                                                                                                               |
 | [List](#list-all-clients-list)                             | `list`                                                                                                                                                                |
@@ -142,37 +143,66 @@ Examples:
 
 ### Edit Client (`edit`)
 
-Edits an existing person in CinnamonBun.
+Edits an existing client in CinnamonBun.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
     * Note: Editing email value to an existing email in the addressBook is not allowed.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
-* You can also remove a person's remarks by typing `r/` without anything else.
+* You can also remove a client's remarks by typing `r/` without anything else.
 
 </div>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
 ### Append Remark to Client ('remark`)
 
-Add a remark to an existing client.
+Appends a remark to an existing client.
 
 Format: `remark INDEX r/REMARK`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* You can also remove a person's remarks by typing `r/` without anything else.
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* You can also remove a client's remarks by typing `r/` without anything else.
+
+</div>
+
+### Append Fields to Client (`append`)
+
+Append fields to an existing client.
+
+Format: `append INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Fields & tags that did not previously exist in the client will be added. Fields & tags that already existed will be replaced.
+* Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
+
+</div>
+
+### Remove Fields from Client (`remove`)
+
+Remove fields from an existing client.
+
+Format: `remove INDEX [n/] [p/] [e/] [a/] [r/] [b/] [t/TAG]…​`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Fields & tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
+* Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
+* Compulsory fields cannot be removed.
 
 </div>
 
@@ -184,15 +214,15 @@ Format: `delete INDEX`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd client in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Delete All Entries (`clear`)
 
@@ -249,7 +279,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bob` will match `Bob Hans`
 * The name, phone, email, address and tags are searched.
 * Only full words will be matched e.g. `Bob` will not match `Bobs`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bob` will return `Hans Zimmer`, `Bob Morrison`
 
 </div>
