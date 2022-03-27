@@ -124,19 +124,23 @@ Shows all friends in Amigos. Switches GUI to the friends tab.
 
 ### Find friends : `findfriend`
 
-Find friends in Amigos whose name contain any of the given keyword(s).
+Find friends in Amigos whose name, tags or logs' title matches any of the given keyword(s).
 
 **Format**: `findfriend KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g john will match John
+* The search is case-insensitive. e.g `john` will match `John`
 * The order of the keywords does not matter. e.g Doe John will match John Doe
-* Only the name is searched.
-* Only full words will be matched e.g Joh will not match John
-* Friends matching at least one keyword will be returned. e.g John will return John Doe, John Tan
-* Either a specified`INDEX`or `NAME` of an existing friend in Amigos must be provided.
+* Name, tags, and logs' title will be searched.
+* For name and logs' title, as long as the keyword matches a substring of the name or logs' title
+  of a friend, the friend will be returned. e.g `findfriend Jim` will return `Jimmy Tan`, and friends with 
+  logs' title containing the substring `Jim` will also be returned.
+* For tags, only full words will be matched. e.g `findfriend neighbour` will return friends with the tag `Neighbour'
+  attached to them.
+* Friends matching at least one keyword will be returned. e.g `findfriend John Emily` will return `John Doe`, `John Tan`,
+  and `Emily Lim`.
 
 **Examples**:
-* `findfriend John`
+* `findfriend John neighbour`
 * `findfriend John Emily Russell`
 
 
@@ -317,7 +321,7 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 | **Delete Friend**          | `deletefriend INDEX ? n/NAME` <br> e.g., `deletefriend n/John Doe`, `deletefriend 1`                                                                                                                                                                                   |
 | **Show a specific friend** | `showfriend n/NAME`                                                                                                                                                                                                                                                    |
 | **Show all friends**       | `showfriends`                                                                                                                                                                                                                                                          |
-| **Find friends**           | `findfriend KEYWORD [KEYWORD]...`                                                                                                                                                                                                                                      |
+| **Find friends**           | `findfriend KEYWORD [KEYWORD]...`  <br> e.g, `findfriend Amy Tom`                                                                                                                                                                                                      |
 | **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                                                                                                                                                                                                                            |
 | **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`                                                                                                                                                                                                  |
 | **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                                                                                                                                                                                                                 |
