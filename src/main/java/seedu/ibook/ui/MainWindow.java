@@ -55,6 +55,9 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        // Register event handler for stage close
+        primaryStage.setOnCloseRequest(event -> handleExit());
     }
 
     /**

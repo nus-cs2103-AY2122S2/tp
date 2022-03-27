@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import seedu.ibook.commons.core.Config;
+import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
 import seedu.ibook.commons.core.Version;
 import seedu.ibook.commons.exceptions.DataConversionException;
@@ -36,7 +37,7 @@ import seedu.ibook.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(0, 1, 3, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -167,7 +168,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting iBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
