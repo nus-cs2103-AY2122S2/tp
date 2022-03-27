@@ -19,16 +19,18 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final int numOfTask;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email) {
+            @JsonProperty("email") String email, @JsonProperty("Task Amount") int numOfTask) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.numOfTask = numOfTask;
     }
 
     /**
@@ -38,6 +40,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        numOfTask = source.getNumOfTask();
     }
 
     /**
@@ -64,6 +67,9 @@ class JsonAdaptedPerson {
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (numOfTask < 0) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
