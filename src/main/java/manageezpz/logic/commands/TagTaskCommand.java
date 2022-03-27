@@ -64,6 +64,7 @@ public class TagTaskCommand extends Command {
         }
 
         model.tagTask(task, person);
+        person.increaseTaskCount();
         return new CommandResult(String.format(MESSAGE_SUCCESS, task));
     }
 

@@ -305,7 +305,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         tasks.setTask(target, editedTask);
     }
+    /**
+     * Remove the Person from the Task, also decreasing the person's task count.
+     * @param task the task affected
+     * @param person the person to be untagged from task
+     */
     public void untagTask(Task task, Person person) {
+        person.decreaseTaskCount();
         task.removeAssigned(person);
     }
 
