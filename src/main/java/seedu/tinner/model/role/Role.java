@@ -70,6 +70,13 @@ public class Role {
     }
 
     /**
+     * Returns true if the role is within the reminder period and status is not pending, rejected or complete
+     */
+    public boolean needsReminding() {
+        return deadline.isOneWeekAway() && status.isActiveStatus();
+    }
+
+    /**
      * Returns true if both roles have the same identity and data fields.
      * This defines a stronger notion of equality between two roles.
      */

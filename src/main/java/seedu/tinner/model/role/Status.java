@@ -31,9 +31,20 @@ public class Status {
 
     /**
      * Returns true if a given string is a valid status.
+     *
+     * @return true if input string is a valid status.
      */
     public static boolean isValidStatus(String test) {
         return Arrays.asList(VALIDATION_ARRAY).contains(test);
+    }
+
+    /**
+     * Returns true if the status is active, i.e. not pending, rejected or complete.
+     *
+     * @return true if status is active.
+     */
+    public boolean isActiveStatus() {
+        return !this.value.equals("pending") && !this.value.equals("rejected") && !this.value.equals("complete");
     }
 
     @Override

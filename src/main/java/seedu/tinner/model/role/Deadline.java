@@ -21,6 +21,8 @@ public class Deadline {
     public static final DateTimeFormatter STRING_REPRESENTATION_FORMATTER =
             DateTimeFormatter.ofPattern("E, MMM dd yyyy, HH:mm a");
 
+    private static int reminderWindow;
+
     public final LocalDateTime value;
 
     /**
@@ -32,6 +34,10 @@ public class Deadline {
         requireNonNull(deadline);
         checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
         value = LocalDateTime.parse(deadline, VALIDATION_FORMATTER);
+    }
+
+    public static void setReminderWindow(int newWindow) {
+        reminderWindow = newWindow;
     }
 
     /**
@@ -52,7 +58,7 @@ public class Deadline {
      * @return true if is within a week from the current date.
      */
     public boolean isOneWeekAway() {
-        LocalDateTime oneWeekAway = LocalDateTime.now().plusDays(7);
+        LocalDateTime oneWeekAway = LocalDateTime.now().plusDays(reminderWindow);
         return !this.value.isBefore(LocalDateTime.now()) && oneWeekAway.isAfter(this.value);
     }
 
