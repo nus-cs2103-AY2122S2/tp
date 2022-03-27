@@ -29,8 +29,8 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_HOUSE_TYPE + "HOUSE TYPE "
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_PRICE_RANGE + "PRICE RANGE "
-            + "Must include: index h/ l/ pr/ l\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Must include: index h/ l/ pr/ \n"
+            + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_HOUSE_TYPE + "HDB "
             + PREFIX_LOCATION + "Bishan "
             + PREFIX_PRICE_RANGE + "400000,500000 ";
