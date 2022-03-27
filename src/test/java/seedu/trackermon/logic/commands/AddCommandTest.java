@@ -124,6 +124,14 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Returns the ShowList size
+         */
+        @Override
+        public int getShowListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public boolean hasShow(Show show) {
             throw new AssertionError("This method should not be called.");
