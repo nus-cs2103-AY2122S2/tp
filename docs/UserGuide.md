@@ -100,6 +100,7 @@ Examples of usage:
 |:--------------------:|:-----------------:|
 |     cs/Negative      | cs/Close-contact  |  
 |        f/SoC         |      f/SooC       |  
+
 *Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3.*
 
 | **Prefix** | **Meaning** |                                                 **Pre-defined constants**                                                  |
@@ -112,6 +113,7 @@ Examples of usage:
 |    `mc/`     |      Matriculation Number       |                                                                                                                            |
 |    `cs/`     |      Covid Status       |                                               `Positive`, `Negative`, `HRN`                                                |
 |     `t/`    |      Optional tag(s)   |       No restrictions                                                                                       |
+
 *Figure 3: Table showing list of possible tags and the Pre-defined constants*
 
 As described in Figure 3, these are the possible tags that can be used with **Tracey**. E.g `n/`, `cs/` etc.
@@ -172,7 +174,7 @@ Format: `list`
 
 This is a sample screenshot of what you can expect from the `help` command.
 
-![list](images/ListFeatureScreenShot.png)
+![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
 
 ### Viewing help: `help`
 Help users to search for all the commands that Tracey offers by opening a pop-up window.
@@ -182,7 +184,7 @@ The pop-up window also offers a button to copy the URL of the User Guide for eas
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![help](images/HelpScreenshot.png)
+![help](images/HelpScreenshot.png) *Figure 6: Screenshot of help command.*
 
 Format: `help`
 
@@ -199,8 +201,8 @@ Examples of usage:
 * `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing).
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing).
 
-### Archiving address book: `archive`
-Archives the current address book file.
+### Archiving Tracey: `archive`
+Archives the current Tracey Database.
 
 Format: `archive`
 
@@ -217,7 +219,7 @@ Example:
 
 Tips:
 * You can rename the archived file in the file path manually for easier reference.
-* To restore the address book to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
+* To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
@@ -226,7 +228,7 @@ there are changes to `Tracey`.
 ### Copying emails
 The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
 `Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
-![Email](images/CopyEmailScreenshot.png)
+![Email](images/CopyEmailScreenshot.png) *Figure 7: Screenshot of Copy Email function.*
 
 ---------------------------------------------------------------------------------------------------------------
 
@@ -275,7 +277,10 @@ The `Show Email` button opens up a separate window that consists of all the emai
 | 6.  | `summarise`   | Summarise data into a list and pie charts for an overview | `summarise`  |
 | 7.  | `list`  |             Get a list of everyone in Tracey                                               | `list`  |
 | 8.  |  `help` |            In-app support to understand how the commands work in Tracey                                               | `help`  |
-| 9.  |  `filter` |        Retrieve list of people based on tags                                                   | `filter cs/HEALTH_STATUS f/FACULTY`  |
+| 9.  |  `filter` |        Retrieve list of people based on tags                                                   | `filter cs/HEALTH_STATUS f/FACULTY` |
+| 10. | `archive` |  Archives the Tracey Database                             |     `archive`                           |
+
+*Figure 8: Command Summary.*
 --------------------------------------------------------------------------------------------------------------------
 
 ### Glossary
