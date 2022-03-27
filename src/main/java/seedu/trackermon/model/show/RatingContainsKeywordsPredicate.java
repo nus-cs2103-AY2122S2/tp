@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.trackermon.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Show}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Show}'s {@code Rating} matches any of the keywords given.
  */
 public class RatingContainsKeywordsPredicate implements Predicate<Show> {
     private final List<String> keywords;
