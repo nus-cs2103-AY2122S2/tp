@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "d:ArchiveCommand" as ArchiveCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+participant ":FileUtil" as FileUtil #D1001C
+participant ":Files" as Files #FFA500
+
+[-> LogicManager : execute("archive")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("archive")
+activate AddressBookParser
+
+create ArchiveCommand
+AddressBookParser -> ArchiveCommand
+
+activate ArchiveCommand
+ArchiveCommand --> AddressBookParser : d
+deactivate ArchiveCommand
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> ArchiveCommand : execute()
+activate ArchiveCommand
+
+ArchiveCommand -> Model : getAddressBookFilePath()
+activate Model
+
+Model --> ArchiveCommand : addressBookFilePath
+deactivate Model
+
+ArchiveCommand -> FileUtil : createIfMissing(archiveFilePath)
+activate FileUtil
+FileUtil --> ArchiveCommand
+deactivate FileUtil
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LogicManager -[hidden]-> AddressBookParser
+destroy FileUtil
+
+ArchiveCommand -> Files : copy(addressBookFilePath, archiveFilePath)
+activate Files
+
+Files --> ArchiveCommand
+deactivate Files
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LogicManager -[hidden]-> AddressBookParser
+destroy Files
+
+create CommandResult
+ArchiveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ArchiveCommand
+deactivate CommandResult
+
+ArchiveCommand --> LogicManager : result
+deactivate ArchiveCommand
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LogicManager -[hidden]-> AddressBookParser
+destroy ArchiveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
