@@ -13,17 +13,14 @@ public class GradeCommand extends Command {
     private Assessment assessment;
     private Optional<Grade> grade;
     private Optional<List<Student>> students;
-    private boolean isAllStudents;
 
     /**
      * Creates an EnrollCommand to enroll the students into class group and module
      */
-    public GradeCommand(Assessment assessment, Optional<Grade> grade, Optional<List<Student>> students,
-                        boolean isAllStudents) {
+    public GradeCommand(Assessment assessment, Optional<Grade> grade, Optional<List<Student>> students) {
         this.assessment = assessment;
         this.grade = grade;
         this.students = students;
-        this.isAllStudents = isAllStudents;
     }
 
     @Override

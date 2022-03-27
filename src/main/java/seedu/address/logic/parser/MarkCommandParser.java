@@ -53,11 +53,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
             Index weekIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_WEEK).get());
             ObservableList<Student> students = ParserUtil.parseStudents(
                     argMultimap.getValue(PREFIX_STUDENT).get(), model);
-            boolean isAllStudents = false;
-            if (students.size() == model.getFilteredStudentList().size()) {
-                isAllStudents = true;
-            }
-            return new MarkCommand(classGroupIndex, weekIndex, Optional.of(students), isAllStudents);
+            return new MarkCommand(classGroupIndex, weekIndex, Optional.of(students));
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);

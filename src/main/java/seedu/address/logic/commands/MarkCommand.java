@@ -16,17 +16,14 @@ public class MarkCommand extends Command {
     private Index classGroupIndex;
     private Index weekIndex;
     private Optional<List<Student>> students;
-    private boolean isAllStudents;
 
     /**
      * Creates a MarkCommand to mark the attendance for the students in the specified class and week.
      */
-    public MarkCommand(Index classGroupIndex, Index weekIndex, Optional<List<Student>> students,
-                       boolean isAllStudents) {
+    public MarkCommand(Index classGroupIndex, Index weekIndex, Optional<List<Student>> students) {
         this.classGroupIndex = classGroupIndex;
         this.weekIndex = weekIndex;
         this.students = students;
-        this.isAllStudents = isAllStudents;
     }
 
     @Override

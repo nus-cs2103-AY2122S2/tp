@@ -11,16 +11,13 @@ public class EnrolCommand extends Command {
 
     private Index classGroupIndex;
     private Optional<List<Student>> students;
-    private boolean isAllStudents;
 
     /**
      * Creates an EnrollCommand to enroll the students into class group and module
      */
-    public EnrolCommand(Index classGroupIndex, Optional<List<Student>> students,
-                        boolean isAllStudents) {
+    public EnrolCommand(Index classGroupIndex, Optional<List<Student>> students) {
         this.classGroupIndex = classGroupIndex;
         this.students = students;
-        this.isAllStudents = isAllStudents;
     }
 
     @Override
