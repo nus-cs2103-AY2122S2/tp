@@ -65,16 +65,6 @@ TAssist is a **desktop app for managing students and their participation in less
 
 ### Adding entries
 
-#### Adding a student: `add student`
-
-Adds a student to TAssist.
-
-Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
-
-Examples:
-* `add student id/E0123456 n/John Doe e/johnd@example.com` creates a new student named `John Doe` with a student ID of `E0123456` and email `johnd@example.com`.
-* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
-
 #### Adding a module: `add module`
 
 Adds a module to TAssist.
@@ -97,6 +87,16 @@ Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 
 Examples:
 * `add module n/Software Engineering Project c/CS2103T a/21S1` creates a new module named `Software Engineering Project` with a module code of `CS2103T` for the academic year `21S1` (academic year 2021 Semester 1).
+
+#### Adding a student: `add student`
+
+Adds a student to TAssist.
+
+Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
+
+Examples:
+* `add student id/E0123456 n/John Doe e/johnd@example.com` creates a new student named `John Doe` with a student ID of `E0123456` and email `johnd@example.com`.
+* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
 
 #### Adding a class group: `add class`
 
@@ -208,33 +208,23 @@ Examples:
 * `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students enrolled in the module tied to the 1st assessment shown when `list assessment` is run.
 * `grade a/1 s/e0123456,e0234567 g/1` adds a grade of value `1` for the students with student IDs `E0123456` and `E0234567` to the 1st assessment shown when `list assessment` is run.
 
-### Listing entries
+### Listing/Filtering entries
 
-#### Listing all students: `list student`
+##### Listing modules: `list module`
 
-Shows a list of all students.
-
-Format: `list student`
-
-#### Listing all modules: `list module`
+##### Listing all modules
 
 Shows a list of all modules.
 
 Format: `list module`
 
-#### Listing all class groups: `list class`
+#### Listing/Filtering students: `list student`
 
-Shows a list of all class groups.
+##### Listing all students
 
-Format: `list class`
+Shows a list of all students.
 
-#### Listing all assessments: `list assessment`
-
-Shows a list of all assessments.
-
-Format: `list assessment`
-
-#### Filtering entries
+Format: `list student`
 
 ##### Filtering students
 
@@ -250,6 +240,15 @@ Examples:
 * `list student m/1` displays the students belonging to the 1st module shown when `list module` is run.
 * `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is run.
 
+#### Listing/Filtering class groups: `list class`
+
+##### Listing all class groups
+
+Shows a list of all class groups.
+
+Format: `list class`
+
+
 ##### Filtering class groups
 
 Shows a list of class groups belonging to a module.
@@ -262,6 +261,15 @@ Format: `list class m/MODULE_INDEX`
 
 Examples:
 * `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
+
+
+#### Listing/Filtering assessments: `list assessment`
+
+##### Listing all assessments
+
+Shows a list of all assessments.
+
+Format: `list assessment`
 
 ##### Filtering assessments
 
@@ -290,18 +298,9 @@ Examples:
 
 ### Deleting entries
 
-#### Deleting a student: `delete student`
-
-Deletes the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
-
-Format: `delete student INDEX`
-
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list student` followed by `delete student 2` deletes the 2nd student and their assessment(s)' attempt(s) in TAssist.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Deleting any entries will be based on the filtered list, and not the whole list. If before the `delete` command you run any `list` or `find` command, the `delete` command will delete the index that correspond with what is being displayed.
+</div>
 
 #### Deleting a module: `delete module`
 
@@ -314,7 +313,22 @@ Format: `delete module INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list module` followed by `delete module 2` deletes the 2nd module and its associated class group(s) and assessment(s) in TAssist.
+* `list module` followed by `delete module 2` deletes the 2nd module in the whole module list and its associated class group(s) and assessment(s) in TAssist.
+
+#### Deleting a student: `delete student`
+
+Deletes the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
+
+Format: `delete student INDEX`
+
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list student` followed by `delete student 2` deletes the 2nd student in the whole student list and their assessment(s)' attempt(s) in TAssist.
+* `list student c\1` followed by `delete student 2` deletes the 2nd student in the _filtered_ student list (filtered by class group index 1) and their assessment(s)' attempt(s) in TAssist.
+* `find alex` followed by `delete student 2` deletes the 2nd student in the _filtered_ student list (filtered students with the name alex) and their assessment(s)' attempt(s) in TAssist.
 
 #### Deleting a class group: `delete class`
 
@@ -327,7 +341,8 @@ Format: `delete class INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
+* `list class` followed by `delete class 2` deletes the 2nd class group in the whole class group list in TAssist.
+* `list class \m 2` followed by `delete class 2` deletes the 2nd class group in the _filtered_ class group list (filtered by module index 2).
 
 #### Deleting an assessment: `delete assessment`
 
@@ -340,7 +355,8 @@ Format: `delete assessment INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in TAssist.
+* `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in the whole assessment list in TAssist.
+* `list assessment \m 1` followed by `delete assessment 2` deletes the 2nd assessment in the _filtered_ assessment list (fitered by module index 1) in TAssist.
 
 ### Clearing all entries: `clear`
 
