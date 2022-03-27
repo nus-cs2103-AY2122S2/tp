@@ -106,22 +106,26 @@ A client can have many fields & tags, including both optional and compulsory one
 
 ### Command Summary
 
-| Action                                                     | Format, Examples                                                                                                                                                      |
-|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Help](#getting-help-help)                                 | `help`                                                                                                                                                                |
-| [Add](#add-client-add)                                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| [Edit](#edit-client-edit)                                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                |
-| [Remark](#append-remark-to-client-remark)                  | `remark INDEX r/REMARK`<br> e.g., `remark 5 r/Needs marble flooring delivered by next Tuesday.`                                                                       |
-| [Append](#append-fields-to-client-append)                  | `append INDEX r/REMARK b/BIRTHDAY e/wolololol@aoe.net t/senior`                                                                                                       |
-| [Remove](#remove-fields-from-client-remove)                | `remove INDEX r/ b/`                                                                                                                                                  |
-| [Delete](#delete-client-delete)                            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| [Clear](#delete-all-entries-clear)                         | `clear`                                                                                                                                                               |
-| [List](#list-all-clients-list)                             | `list`                                                                                                                                                                |
-| [Sort](#sort-client-list-sort)                             | `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br> e.g., `sort n/ desc p/`, `sort b/ a/`                                             |
-| [Find](#find-client-by-keyword-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            | 
-| [Delete Filtered](#delete-filtered-clients-deletefiltered) | `deleteFiltered`                                                                                                                                                      |
-| [Undo](#undo-last-command-undo)                            | `undo`                                                                                                                                                                |
- | [Exit](#exit-program-exit)                                 | `exit`                                                                                                                                                                |
+| Action                                                        | Format, Examples                                                                                                                                                      |
+|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Help](#getting-help-help)                                    | `help`                                                                                                                                                                |
+| [Add](#add-client-add)                                        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| [Edit](#edit-client-edit)                                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                |
+| [Remark](#append-remark-to-client-remark)                     | `remark INDEX r/REMARK`<br> e.g., `remark 5 r/Needs marble flooring delivered by next Tuesday.`                                                                       |
+| [Append](#append-fields-to-client-append)                     | `append INDEX r/REMARK b/BIRTHDAY e/wolololol@aoe.net t/senior`                                                                                                       |
+| [Remove](#remove-fields-from-client-remove)                   | `remove INDEX r/ b/`                                                                                                                                                  |
+| [Delete](#delete-client-delete)                               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| [Clear](#delete-all-entries-clear)                            | `clear`                                                                                                                                                               |
+| [List](#list-all-clients-list)                                | `list`                                                                                                                                                                |
+| [Sort](#sort-client-list-sort)                                | `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br> e.g., `sort n/ desc p/`, `sort b/ a/`                                             |
+| [Find](#find-client-by-keyword-find)                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            | 
+| [Delete Filtered](#delete-filtered-clients-deletefiltered)    | `deleteFiltered`                                                                                                                                                      |
+| [Undo](#undo-last-command-undo)                               | `undo`                                                                                                                                                                |
+| [Add Transaction](#add-transaction-addtransaction)            | `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE]`                                                                                            |
+| [List Transaction](#list-all-transactions-listtransaction)    | `listTransaction`                                                                                                                                                     |
+| [Find Transaction](#find-clients-transaction-findtransaction) | `findTransaction INDEX`                                                                                                                                               |
+| [Delete Transaction](#delete-transaction-deletetransaction)   | `deleteTransaction INDEX_TRANSACTION`                                                                                                                                 |
+ | [Exit](#exit-program-exit)                                    | `exit`                                                                                                                                                                |
 
 ### Getting Help (`help`)
 
@@ -164,7 +168,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Append Remark to Client ('remark`)
+### Append Remark to Client (`remark`)
 
 Appends a remark to an existing client.
 
@@ -217,6 +221,7 @@ Format: `delete INDEX`
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* When the client is deleted, all of its' transactions will also get deleted
 
 </div>
 
@@ -299,6 +304,74 @@ Format: `deleteFiltered`
 Examples:
 * `find Bob` followed by `deleteFiltered` deletes all people named Bob. Alternatively, `find Bob | deleteFiltered` does the same thing.
 
+### Add Transaction (`addTransaction`)
+
+Add a transaction associated with a client.
+
+Format: `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE]`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Add a transaction to the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The `AMOUNT` specified **must be greater** than 0.
+* The `TRANSACTION_DATE` and `DUE_DATE` specified **must be a valid date** in `YYY-MM-DD` format.
+
+</div>
+
+Examples:
+* `addTransaction 1 a/123.456 td/2020-11-11`
+* `addTransaction 1 a/123.456 td/2020-11-11 dd/2020-12-11 n/Unpaid order CONTACT ASAP`
+* `find Bob | addTransaction 1 a/123.456 td/2020-11-11` will add the transaction to the first client that has Bob 
+ in its' attributes
+
+### List All Transactions (`listTransaction`)
+
+List all the clients' Transactions.
+
+Format: `listTransaction`
+
+Examples:
+* `listTransaction`
+
+### Find Client's Transaction (`findTransaction`)
+
+List all the transactions associated with a client.
+
+Format: `findTransaction INDEX`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* List all transactions of the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
+
+Examples:
+* `find Bob | listTransaction 1` will add the transaction to the first client that has Bob
+  in its' attributes.
+
+### Delete Transaction (`deleteTransaction`)
+
+Delete a transaction.
+
+Format: `deleteTransaction INDEX_TRANSACTION`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Delete the transaction at the specified `INDEX_TRANSACTION`.
+* The index refers to the index number shown in the displayed **transaction** list **NOT** the **client** list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
+
+Examples:
+* `listTransaction 2`
+* `find Bob | listTransaction 1` will add the transaction to the first client that has Bob
+  in its' attributes.
+
 ### Undo Last Command (`undo`)
 
 //TODO
@@ -325,6 +398,11 @@ e.g `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
 
 You can navigate through your command history by using the up and down arrow keys.
 The command history works similarly to the Linux bash terminal.
+
+### Clickable Client Card
+
+You can list all transactions of a client by clicking the client's card.
+This is equivalent to typing `findTransaction INDEX` in the command box.
 
 ### Themes
 
