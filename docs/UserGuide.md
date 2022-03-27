@@ -19,9 +19,9 @@ This section lists down all the features available in MMF. You can click on any 
 - [List](#listing-all-persons--list)
 - [Add Contact](#adding-a-contact--add)
 - [Add Module to Contact](#adding-modules-to-a-contact--addmodule)
-- [Add Comment to Contact](#adding-a-comment-for-a-contact--addcomment)
-- [Add Status to a Contact](#set-a-status-for-a-person--status)
-- [Copy](#copy-command)
+- [Add Comment to Contact](#adding-a-comment-for-a-contact--comment)
+- [Add Status to a Contact](#add-a-status-for-a-person--status)
+- [Copy](#copy-contacts-in-list--copy)
 - [Clear](#clearing-all-entries--clear)
 - [Clear all Modules from Contact](#clearing-all-modules-for-a-person--clearmodules)
 - [Delete Contact](#deleting-a-person--delete)
@@ -163,20 +163,25 @@ Examples:
 - `status 2 s/favourite` tags the 2nd person in ModuleMate Finder as favourite.
 - `status 2 s/` will untag the 2nd person in ModuleMate Finder, leaving them with no `Status`
 
-### Copy contacts in list: `copy`
+### Copy contacts in list : `copy`
 
-Copy the people within address book. Attach a clipboard to the side of CLI to copy data.
+Copy the people within address book. Information is automatically copied for you once command is entered.
 
 Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [f/FORMAT]​`
 
-* Copy persons using specified field names.​
-* If no fields are specified, all fields will be copied.
 * Choose INDEX to copy a specific person.
-* If no INDEX is specified, all persons will be copied.
-* Choice of format is default, csv and json.
-* Default simply displays attribute line by line, while csv format separates attributes via a `|` delimiter.
-* JSON format is a JSON object with attribute names as keys and attribute values as values, similar to application's save file.
+* If no INDEX is specified, **all** persons will be copied.
+* Copy persons using specified field names.​
+* If no fields are specified, **all** fields will be copied.
 * Order of field names determines the order of attributes in the output.
+* Choice of format is **default**, **csv** and **json**.
+  
+| Format  | Description                                               | Example                                                                                                                   |
+|---------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| default | Displays attributes separated by a newline                | <pre>mary<br/>91282770<br/>mary@gmail.com </pre>                                                                          |
+| csv     | Displays attributes separated by a delimiter <code>&#124; | <pre>mary &#124; 91282770 &#124; mary@gmail.com </pre>                                                                    |    
+| json    | Displays information in json format                       | <pre>{<br/>  &nbsp;"name" : "mary",<br/>  &nbsp;"phone" : "91282270",<br/>  &nbsp;"email" : "mary@gmail.com"<br/>} </pre> | 
+
 
 Examples:
 * `copy 1 n/ p/ e/ f/json`  will copy name, phone and email of first person in JSON format.
@@ -197,6 +202,10 @@ Examples:
 Clears all modules based on the given index from ModuleMate Finder.
 
 Format: `clearmodules INDEX`
+
+* Deletes all modules from the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 - `clearmodules 5` wipes all modules for person in index 5.
@@ -219,12 +228,13 @@ Examples:
 
 Deletes the specified module from contact in ModuleMate Finder.
 
-Format: `deletemodule INDEX m/MODULE...`
+Format: `deletemodule INDEX m/MODULE [m/MODULE]...`
 
 * Deletes modules for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The modules will be deleted only if the person has the specified modules.
+* **One or more** modules must be specified.
 
 Examples:
 * `list` followed by `deletemodule 2 m/CS3230` deletes the module CS3230 for the 2nd person in ModuleMate Finder.
@@ -292,8 +302,21 @@ Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE]​`
 * Sorts list with specified field(s). For any two persons, latter fields will only be considered if preceding fields are equal.​
 * Order of fields is important and there must be at least one field.
 * Parameters determine whether field is sorted on ascending or descending order.
-* Parameters are optional must be either "asc", "desc" or an empty string "". Empty string "" is ascending by default.
+* Parameters are optional. If included, it must be either `asc`, `desc` or an empty string `""`. 
+* Empty string `""` is ascending by default.
 * Parameters are case-insensitive. 
+
+
+| Field   | Prefix | Specification of sort                   | Example                                                           |                                         
+|---------|--------|-----------------------------------------|-------------------------------------------------------------------|
+| Name    | `n/`   | Sorted lexicographically                | `Bob` is larger than `Alice`                                      |
+| Phone   | `p/`   | Sorted numerically                      | `9` is larger than `1`                                            |
+| Email   | `e/`   | Sorted lexicographically                | `bob@gmail.com` is larger than `alice@gmail.com`                  |
+| Address | `a/`   | Sorted lexicographically                | `banana residences` is larger than `apple residences`             |
+| Status  | `s/`   | Sorted lexicographically                | `favourite` is larger than `blacklist` which is larger than `"" ` |                
+| Module  | `m/`   | Sorted numerically by number of modules | A person with 5 modules is larger than person with 1              |
+| Comment | `c/`   | Sorted numerically by length of comment | `aaaaaaaaaaaaaaaaaaa` is larger than `a`                          |
+
 
 Examples:
 * `sort n/asc p/desc`  will sort the list by name in ascending order first. If two persons have the same name, then sort by phone number in descending order.

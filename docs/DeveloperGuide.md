@@ -192,7 +192,7 @@ This can be achieved using the `hasNewModules()` and `getNewModules()` internal 
 ### Sort feature
 #### Implementation
 
-The sort mechanism is facilitated by `PersonComparator`. It compares `Person` objects and stores internally the list of fields to be ordered on as well as the order on each field ("ascending" vs "descending"). 
+The sort mechanism is facilitated by `PersonComparator`. It compares `Person` objects and stores internally the **list of fields** to be ordered on as well as the **order** on each field ("ascending" vs "descending"). 
 `PersonComparator` then is passed to `Model`.
 
 Within Model component, 'Model' then passes it into `AddressBook`, and which is then passed into `UniquePersonList` and finally to `ObservableList`. `ObservableList` then sorts itself based on the comparator.
@@ -201,27 +201,28 @@ Below is a sequence diagram showing how sort operation works:
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
-`PersonComparator` implements the `Comparator<Person>` interface. 
-For a comparator c: 
-1. If x < y, `c.compare(x, y) < 0`
-2. If x > y, `c.compare(x, y) > 0`
-3. If x == y, `c.compare(x, y) == 0`
-
-Within the `PersonComparator`, it compares both persons based on the first field in the list of fields. If they are not equivalent, it returns an Integer depending on the comparison. 
-Else, it will check the next field. It returns a `0` when there are no fields left to compare. If `desc` was called on a field, return value will be multipled by `-1`, to invert the ordering.
+Within the `PersonComparator`, it compares both persons based on the first field in the **list of fields**. If they are not equivalent, it returns the result of the comparison taking into account the **order**. 
+Else, it will check the next field. When there are no fields remaining, it specifies that the two persons are equivalent.
 
 ### Alternatives
 #### Aspect: How to compare: `Comparator` vs `Comparable`
-####1. Alternative 1
-Create many comparators for `Person` depending on what field to compare on and how to compare that field.
-- Pros: More flexibility for ways to compare each field. E.g. can compare`Module` field based on number of modules, lexicographic ordering, etc.
-- Cons: More complexity for user syntax. Less encapsulation as `Person` has to know the details of it's fields and how it desires to sort them. 
-Has to pass all `PersonComparator` that were chosen into `Model` one after another so less efficient.
-
-####2. Alternative 2 (Current)
+####1. Alternative 1 (Current)
 Each field implements a `Comparable` interface.
-- Pros: Easier to implement.
-- Cons: Less flexible. Passes only one `PersonComparator` which stores the fields within itself. Each comparison stops once field is not equivalent, therefore is more efficient.
+- Pros:
+    - Easier to implement.
+- Cons:
+    - Less flexible.
+    - Passes only one `PersonComparator` into `Model`, which stores list of fields to be sorted on. 
+
+####2. Alternative 2
+Create a comparator for `Person` for each specific field to compare on and how to compare that field. Choose a list of comparators and sort model on them one by one.
+- Pros: 
+  - More flexibility for ways to compare each field. E.g. can compare`Module` field based on number of modules, lexicographic ordering, etc.
+- Cons: 
+  - More complexity for user syntax. 
+  - Less encapsulation as `PersonComparator` has to know the details of `Person` fields and how it desires to sort them. 
+  - Has to pass all `PersonComparator` that were chosen into `Model` one after another so less efficient.
+
 
 ### Comment feature
 #### Implementation
