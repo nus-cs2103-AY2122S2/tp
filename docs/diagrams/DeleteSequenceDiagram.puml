@@ -10,14 +10,14 @@ participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box ModelManager MODEL_COLOR_T1
+box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete student 2")
+[-> LogicManager : execute("delete class 2")
 activate LogicManager
 
-LogicManager -> TAssistParser : parseCommand("delete student 2")
+LogicManager -> TAssistParser : parseCommand("delete class 2")
 activate TAssistParser
 
 create DeleteCommandParser
@@ -27,10 +27,10 @@ activate DeleteCommandParser
 DeleteCommandParser --> TAssistParser
 deactivate DeleteCommandParser
 
-TAssistParser -> DeleteCommandParser : parse(["student", 2])
+TAssistParser -> DeleteCommandParser : parse(["class", 2])
 activate DeleteCommandParser
 
-DeleteCommandParser -> ParserUtil : parseEntity("student")
+DeleteCommandParser -> ParserUtil : parseEntity("class")
 activate ParserUtil
 
 ParserUtil --> DeleteCommandParser
@@ -55,11 +55,7 @@ deactivate TAssistParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> ModelManager : deleteEntity(STUDENT)
-activate ModelManager
-
-ModelManager --> DeleteCommand
-deactivate ModelManager
+ref over DeleteCommand, ModelManager : Delete ClassGroup
 
 create CommandResult
 DeleteCommand -> CommandResult

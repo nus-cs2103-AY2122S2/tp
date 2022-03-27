@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TAssistParser" as TAssistParser LOGIC_COLOR
+participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "mark:MarkCommand" as MarkCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mark attend c/1 w/1 s/1,2")
+activate LogicManager
+
+LogicManager -> TAssistParser : parseCommand("mark attend c/1 w/1 s/1,2")
+activate TAssistParser
+
+create MarkCommandParser
+TAssistParser -> MarkCommandParser
+activate MarkCommandParser
+
+MarkCommandParser --> TAssistParser
+deactivate MarkCommandParser
+
+TAssistParser -> MarkCommandParser : parse(["mark", "c/1", "w/1", "s/1,2"])
+activate MarkCommandParser
+
+MarkCommandParser -> ParserUtil : parseEntity("mark")
+activate ParserUtil
+
+ParserUtil --> MarkCommandParser
+deactivate ParserUtil
+
+MarkCommandParser -> ParserUtil : parseClassGroup("c/1")
+activate ParserUtil
+
+ParserUtil --> MarkCommandParser
+deactivate ParserUtil
+
+MarkCommandParser -> ParserUtil : parseWeekId("w/1")
+activate ParserUtil
+
+ParserUtil --> MarkCommandParser
+deactivate ParserUtil
+
+MarkCommandParser -> ParserUtil : parseStudentIds("s/1,2")
+activate ParserUtil
+
+ParserUtil --> MarkCommandParser
+deactivate ParserUtil
+
+create MarkCommand
+MarkCommandParser -> MarkCommand
+activate MarkCommand
+
+MarkCommand --> MarkCommandParser : mark
+deactivate MarkCommand
+
+MarkCommandParser --> TAssistParser : mark
+deactivate MarkCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkCommandParser -[hidden]-> TAssistParser
+destroy MarkCommandParser
+
+TAssistParser --> LogicManager : mark
+deactivate TAssistParser
+
+LogicManager -> MarkCommand : execute()
+activate MarkCommand
+
+ref over MarkCommand, ModelManager : Mark Attendance
+
+create CommandResult
+MarkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkCommand
+deactivate CommandResult
+
+MarkCommand --> LogicManager : result
+deactivate MarkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

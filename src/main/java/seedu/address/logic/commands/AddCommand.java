@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SIMPLE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
@@ -22,39 +24,12 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student/module/class group to TAssist\n"
-            + "1. Adds a student: "
-            + "\n\tParameters: " + TYPE_STUDENT + " "
-            + PREFIX_ID + "STUDENT_ID "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_EMAIL + "EMAIL ["
-            + PREFIX_TELEGRAM + "TELEGRAM_ID] "
-            + "\n\tExample: " + COMMAND_WORD + " "
-            + TYPE_STUDENT + " "
-            + PREFIX_ID + "E0123456 "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TELEGRAM + "john_doe\n"
-            + "2. Adds a module: "
-            + "\n\tParameters: " + TYPE_MODULE + " "
-            + PREFIX_NAME + "MODULE_NAME "
-            + PREFIX_MODULE_CODE + "MODULE_CODE "
-            + PREFIX_ACADEMIC_YEAR + "ACADEMIC_YEAR "
-            + "\n\tExample: " + COMMAND_WORD + " "
-            + TYPE_MODULE + " "
-            + PREFIX_NAME + "Software Engineering Project "
-            + PREFIX_MODULE_CODE + "CS2103T "
-            + PREFIX_ACADEMIC_YEAR + "21S1\n"
-            + "3. Adds a class group: "
-            + "\n\tParameters: " + TYPE_CLASS + " "
-            + PREFIX_ID + "CLASS_ID "
-            + PREFIX_TYPE + "CLASS_TYPE "
-            + PREFIX_MODULE_INDEX + "MODULE_INDEX "
-            + "\n\tExample: " + COMMAND_WORD + " "
-            + TYPE_CLASS + " "
-            + PREFIX_ID + "T13 "
-            + PREFIX_TYPE + "tutorial "
-            + PREFIX_MODULE_INDEX + "1 ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student/module/class group/assessment to "
+            + "TAssist.\nFor each entity, type the command to find out more about the fields required:\n"
+            + "\t1. Adds a student: add student\n"
+            + "\t2. Adds a module: add module\n"
+            + "\t3. Adds a class group: add class\n"
+            + "\t4. Adds an assessment: add assessment\n";
     public static final String MESSAGE_STUDENT_USAGE = COMMAND_WORD + ": Adds a student to TAssist\n"
             + "\tParameters: " + TYPE_STUDENT + " "
             + PREFIX_ID + "STUDENT_ID "
@@ -87,6 +62,16 @@ public class AddCommand extends Command {
             + PREFIX_ID + "T13 "
             + PREFIX_TYPE + "tutorial "
             + PREFIX_MODULE_INDEX + "1 ";
+    public static final String MESSAGE_ASSESSMENT_USAGE = COMMAND_WORD + ": Adds an assessment to TAssist\n"
+            + "\tParameters: " + TYPE_ASSESSMENT + " "
+            + PREFIX_NAME + "ASSESSMENT_NAME "
+            + PREFIX_MODULE_INDEX + "MODULE_INDEX ["
+            + PREFIX_SIMPLE_NAME + "SIMPLE_NAME] "
+            + "\n\tExample: " + COMMAND_WORD + " "
+            + TYPE_ASSESSMENT + " "
+            + PREFIX_NAME + "Participation "
+            + PREFIX_MODULE_INDEX + "1 "
+            + PREFIX_SIMPLE_NAME + "part ";
 
     public static final String MESSAGE_SUCCESS = "New entity added: %1$s";
     public static final String MESSAGE_DUPLICATE_ENTITY = "This entity already exists in TAssist";

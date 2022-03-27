@@ -4,12 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.UniqueClassGroupList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tamodule.TaModule;
 import seedu.address.model.tamodule.UniqueModuleList;
 
@@ -22,6 +29,7 @@ public class TAssist implements ReadOnlyTAssist {
     private final UniqueStudentList students;
     private final UniqueModuleList modules;
     private final UniqueClassGroupList classGroups;
+    private final UniqueAssessmentList assessments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -34,6 +42,7 @@ public class TAssist implements ReadOnlyTAssist {
         students = new UniqueStudentList();
         modules = new UniqueModuleList();
         classGroups = new UniqueClassGroupList();
+        assessments = new UniqueAssessmentList();
     }
 
     public TAssist() {
@@ -74,6 +83,14 @@ public class TAssist implements ReadOnlyTAssist {
     }
 
     /**
+     * Replaces the contents of the assessment list with {@code assessments}.
+     * {@code assessments} must not contain duplicate assessments.
+     */
+    public void setAssessments(List<Assessment> assessments) {
+        this.assessments.setAssessments(assessments);
+    }
+
+    /**
      * Resets the existing data of this {@code TAssist} with {@code newData}.
      */
     public void resetData(ReadOnlyTAssist newData) {
@@ -82,6 +99,7 @@ public class TAssist implements ReadOnlyTAssist {
         setStudents(newData.getStudentList());
         setModules(newData.getModuleList());
         setClassGroups(newData.getClassGroupList());
+        setAssessments(newData.getAssessmentList());
     }
 
     //// student-level operations
@@ -200,13 +218,53 @@ public class TAssist implements ReadOnlyTAssist {
         classGroups.remove(key);
     }
 
+
+    //// assessment-level operations
+
+    /**
+     * Returns true if an assessment with the same identity as {@code assessment} exists in the TAssist.
+     */
+    public boolean hasAssessment(Assessment assessment) {
+        requireNonNull(assessment);
+        return assessments.contains(assessment);
+    }
+
+    /**
+     * Adds an assessment to the TAssist.
+     * The assessment must not already exist in the TAssist.
+     */
+    public void addAssessment(Assessment assessment) {
+        assessments.add(assessment);
+    }
+
+    /**
+     * Replaces the given assessment {@code target} in the list with {@code editedAssessment}.
+     * {@code target} must exist in the TAssist.
+     * The assessment identity of {@code editedAssessment} must not be the same as another
+     * existing assessment in the TAssist.
+     */
+    public void setAssessment(Assessment target, Assessment editedAssessment) {
+        requireNonNull(editedAssessment);
+
+        assessments.setAssessment(target, editedAssessment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code TAssist}.
+     * {@code key} must exist in the TAssist.
+     */
+    public void removeAssessment(Assessment key) {
+        assessments.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return students.asUnmodifiableObservableList().size() + " students"
                 + modules.asUnmodifiableObservableList().size() + " modules"
-                + classGroups.asUnmodifiableObservableList().size() + " class groups";
+                + classGroups.asUnmodifiableObservableList().size() + " class groups"
+                + assessments.asUnmodifiableObservableList().size() + " assessments";
         // TODO: refine later
     }
 
@@ -215,6 +273,24 @@ public class TAssist implements ReadOnlyTAssist {
         return students.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Student> getStudentListByIndexes(List<Index> indexes) {
+        if (indexes.stream().anyMatch(x -> x.getZeroBased() >= getStudentList().size())) {
+            throw new StudentNotFoundException();
+        }
+        return FXCollections.unmodifiableObservableList(
+                FXCollections.observableArrayList(indexes.stream()
+                .map(index -> getStudentList().get(index.getZeroBased()))
+                .collect(Collectors.toList())));
+    }
+
+    public ObservableList<Student> getStudentListByStudentIds(List<StudentId> studentIds) {
+        if (studentIds.stream().anyMatch(x -> !students.contains(x))) {
+            throw new StudentNotFoundException();
+        }
+        return FXCollections.unmodifiableObservableList(
+                FXCollections.observableArrayList(getStudentList().stream()
+                .filter(student -> studentIds.contains(student.getStudentId())).collect(Collectors.toList())));
+    }
 
     @Override
     public ObservableList<TaModule> getModuleList() {
@@ -227,16 +303,22 @@ public class TAssist implements ReadOnlyTAssist {
     }
 
     @Override
+    public ObservableList<Assessment> getAssessmentList() {
+        return assessments.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TAssist // instanceof handles nulls
                 && students.equals(((TAssist) other).students)
                 && modules.equals(((TAssist) other).modules)
-                && classGroups.equals(((TAssist) other).classGroups));
+                && classGroups.equals(((TAssist) other).classGroups)
+                && assessments.equals(((TAssist) other).assessments));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(students, modules, classGroups);
+        return Objects.hash(students, modules, classGroups, assessments);
     }
 }

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 
+//@@author wxliong
 /**
  * A list of students that enforces uniqueness between its elements and does not allow nulls.
  * A student is considered unique by comparing using {@code Student#isSameStudent(Student)}.
@@ -36,6 +37,14 @@ public class UniqueStudentList implements Iterable<Student> {
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameStudent);
+    }
+
+    /**
+     * Returns true if the list contains Student with the same StudentId.
+     */
+    public boolean contains(StudentId toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(student -> student.getStudentId().equals(toCheck));
     }
 
     /**

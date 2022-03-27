@@ -1,25 +1,20 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.TAssist;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.SimpleName;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Person;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
@@ -29,50 +24,6 @@ import seedu.address.model.tamodule.TaModule;
  * Contains utility methods for populating {@code TAssist} with sample data.
  */
 public class SampleDataUtil {
-
-    /** TODO: To be removed. */
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new seedu.address.model.person.Name("Alex Yeoh"),
-                    new seedu.address.model.person.Phone("87438807"),
-                    new seedu.address.model.person.Email("alexyeoh@example.com"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"),
-                    getTagSet("friends")),
-            new Person(new seedu.address.model.person.Name("Bernice Yu"),
-                    new seedu.address.model.person.Phone("99272758"),
-                    new seedu.address.model.person.Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    getTagSet("colleagues", "friends")),
-            new Person(new seedu.address.model.person.Name("Charlotte Oliveiro"),
-                    new seedu.address.model.person.Phone("93210283"),
-                    new seedu.address.model.person.Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    getTagSet("neighbours")),
-            new Person(new seedu.address.model.person.Name("David Li"),
-                    new seedu.address.model.person.Phone("91031282"),
-                    new seedu.address.model.person.Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    getTagSet("family")),
-        };
-    }
-
-    /** TODO: To be removed. */
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
-        }
-        return sampleAb;
-    }
-
-    /**
-     * TODO: To be removed.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
-    }
 
     public static Student[] getSampleStudents() {
         return new Student[] {
@@ -116,6 +67,21 @@ public class SampleDataUtil {
         };
     }
 
+    public static Assessment[] getSampleAssessment() {
+        TaModule[] taModules = getSampleModules();
+        return new Assessment[] {
+            new Assessment(new AssessmentName("Participation"), taModules[0], Optional.of(new SimpleName("part"))),
+            new Assessment(new AssessmentName("Participation"), taModules[1], Optional.of(new SimpleName("part"))),
+            new Assessment(new AssessmentName("Lab 1"), taModules[1]),
+            new Assessment(new AssessmentName("Lab 2"), taModules[1]),
+            new Assessment(new AssessmentName("Lab 3"), taModules[1]),
+            new Assessment(new AssessmentName("Participation"), taModules[2], Optional.of(new SimpleName("part"))),
+            new Assessment(new AssessmentName("Lab 1"), taModules[2], Optional.of(new SimpleName("lab1"))),
+            new Assessment(new AssessmentName("Lab 2"), taModules[2], Optional.of(new SimpleName("lab2"))),
+            new Assessment(new AssessmentName("Lab 3"), taModules[2], Optional.of(new SimpleName("lab3")))
+        };
+    }
+
     public static ReadOnlyTAssist getSampleTAssist() {
         TAssist sampleTAssist = new TAssist();
         for (Student sampleStudent : getSampleStudents()) {
@@ -126,6 +92,9 @@ public class SampleDataUtil {
         }
         for (ClassGroup sampleClassGroup : getSampleClassGroups()) {
             sampleTAssist.addClassGroup(sampleClassGroup);
+        }
+        for (Assessment sampleAssessment : getSampleAssessment()) {
+            sampleTAssist.addAssessment(sampleAssessment);
         }
         return sampleTAssist;
     }

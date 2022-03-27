@@ -20,6 +20,9 @@ Class TaModule
 
 Class UniqueClassGroupList
 Class ClassGroup
+
+Class UniqueAssessmentList
+Class Assessment
 }
 
 Class HiddenOutside #FFFFFF
@@ -37,12 +40,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 TAssist *--> "1" UniqueStudentList
 TAssist *--> "1" UniqueModuleList
 TAssist *--> "1" UniqueClassGroupList
+TAssist *--> "1" UniqueAssessmentList
 
 UniqueStudentList --> "~* all" Student
 UniqueModuleList --> "~* all" TaModule
 UniqueClassGroupList --> "~* all" ClassGroup
+UniqueAssessmentList --> "~* all" Assessment
 
 ModelManager -->"~* filtered" Student
 ModelManager -->"~* filtered" TaModule
 ModelManager -->"~* filtered" ClassGroup
+ModelManager -->"~* filtered" Assessment
 @enduml

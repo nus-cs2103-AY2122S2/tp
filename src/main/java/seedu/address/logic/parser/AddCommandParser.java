@@ -8,8 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SIMPLE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
@@ -22,6 +24,9 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.SimpleName;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
@@ -111,6 +116,23 @@ public class AddCommandParser implements Parser<AddCommand> {
             ClassGroup classGroup = new ClassGroup(classGroupId, classGroupType, taModule);
 
             return new AddCommand(classGroup);
+
+        case TYPE_ASSESSMENT:
+            argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_MODULE_INDEX, PREFIX_SIMPLE_NAME);
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_INDEX)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_ASSESSMENT_USAGE));
+            }
+
+            AssessmentName assessmentName = ParserUtil.parseAssessmentName(argMultimap.getValue(PREFIX_NAME).get());
+            TaModule assTaModule = ParserUtil.parseTaModule(argMultimap.getValue(PREFIX_MODULE_INDEX).get(), model);
+            Optional<SimpleName> simpleName = ParserUtil.parseSimpleName(argMultimap.getValue(PREFIX_SIMPLE_NAME));
+
+            Assessment assessment = new Assessment(assessmentName, assTaModule, simpleName);
+
+            return new AddCommand(assessment);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_ENTITY);

@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TAssistParser" as TAssistParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "student:Student" as Student MODEL_COLOR
+end box
+
+[-> LogicManager : execute(ADD_STUDENT_COMMAND)
+activate LogicManager
+
+LogicManager -> TAssistParser : parseCommand(ADD_STUDENT_COMMAND)
+activate TAssistParser
+
+create AddCommandParser
+TAssistParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> TAssistParser
+deactivate AddCommandParser
+
+TAssistParser -> AddCommandParser : parse(ARGS)
+activate AddCommandParser
+
+create Student
+AddCommandParser -> Student : Student(ARGS)
+activate Student
+
+Student --> AddCommandParser
+deactivate Student
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(student)
+activate AddCommand
+
+AddCommand --> AddCommandParser
+deactivate AddCommand
+
+AddCommandParser --> TAssistParser
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> TAssistParser
+destroy AddCommandParser
+
+TAssistParser --> LogicManager
+deactivate TAssistParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+ref over AddCommand, ModelManager : Add Student
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

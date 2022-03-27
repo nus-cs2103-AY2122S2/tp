@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "mark attend c/1 w/1 s/1,2"
+
+package State {
+    class State1 as "__ta0:TAssist__"
+    class Student1 as "__s1:Student__"
+    class Student2 as "__s2:Student__"
+    class ClassGroup1 as "__c1:ClassGroup__"
+    class Lesson1 as "__l1:Lesson__"
+    class StudentAttendance1 as "__sa1:StudentAttendance__"
+    class StudentAttendance2 as "__sa2:StudentAttendance__"
+    class Attendance1 as "__a1:Attendance__"
+    class Attendance2 as "__a2:Attendance__"
+}
+
+State1 *--> ClassGroup1
+State1 *--> Student1
+State1 *--> Student2
+ClassGroup1 --> Student1
+ClassGroup1 --> Student2
+ClassGroup1 *--> Lesson1
+Lesson1 *--> StudentAttendance1
+Lesson1 *--> StudentAttendance2
+StudentAttendance1 --> Student1
+StudentAttendance2 --> Student2
+StudentAttendance1 *--> Attendance1
+StudentAttendance2 *--> Attendance2
+
+@end
