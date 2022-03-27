@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to professors for managing
-the process of hiring undergraduate/graduate Teaching Assistants (TA). They will be able to access the TAs’ application
+the process of hiring undergraduate/graduate Teaching Assistants (TA). They will be able to access the candidates’ application
 data easily and review qualifications or availability for scheduling interviews. It is **optimized for use via a
 Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
 
@@ -27,17 +27,17 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`** : Lists all TAs.
+    * **`list`** : Lists all candidates.
 
-    * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new TA into the system.
+    * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
    
-    * **`edit [INDEX] c/Computer Science yr/3 avail/1 ...`** Edits the specified TA in the system.
+    * **`edit [INDEX] c/Computer Science yr/3 avail/1 ...`** Edits the specified candidate in the system.
 
-    * **`delete [INDEX]`** : Deletes the TA with ID A0213456H from the system.
+    * **`delete [INDEX]`** : Deletes the candidate with ID A0213456H from the system.
 
-    * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
+    * **`find k/Jane f/name`** : Searches for all candidate with name containing “Jane/jane”.
 
-    * **`sort s/name`** : Sorts all TAs by name in descending alphabetical order.
+    * **`sort s/name`** : Sorts all candidate by name in descending alphabetical order.
 
     * **`help`** : List all commands in the system.
 
@@ -71,9 +71,9 @@ Lists the application commands that are available in the system.
 
 Format: `help`
 
-### Adding a Teaching Assistant: `add`
+### Adding a candidate: `add`
 
-Adds a TA into the system.
+Adds a candidate into the system.
 
 Format: `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`
 
@@ -85,11 +85,11 @@ Format: `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILIT
 * `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
 
 Examples:
-* `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new TA with Student ID, E0123456, named John Doe.
+* `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, E0123456, named John Doe.
 
-### Editing a Teaching Assistant: `edit`
+### Editing a candidate: `edit`
 
-Edits a TA in the system.
+Edits a candidate in the system.
 
 Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 
@@ -103,7 +103,7 @@ Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 
 </div>
 
-* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed TA list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -111,15 +111,15 @@ Examples:
 * `edit 1 n/Jane Doe yr/3 avail/1` Edits the name, year and availability of the 1st candidate to be Jane Doe, Year 3, Monday only respectively.
 * `edit 2 c/Business Analytics` Edits the course of the 2nd candidate to be `Business Analytics`.
 
-### Listing all Teaching Assistants : `list`
+### Listing all candidates : `list`
 
-Displays all TAs found in the system.
+Displays all candidates found in the system.
 
 Format: `list`
 
 ### Finding candidates by keyword(s) search: `find`
 
-Finds and lists TAs whose attribute field(s) contain(s) any of the given keyword(s).
+Finds and lists candidates whose attribute field(s) contain(s) any of the given keyword(s).
 
 Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 
@@ -134,21 +134,21 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 
 * The keyword search is case-insensitive. e.g `hans` will match `Hans`
 * The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
-* The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
-* For `f/candidate`, the search will find keywords across all attribute fields of the TA records.
+* The search will return a list of all candidates containing any of the specified keyword(s) in the specified attribute field.
+* For `f/candidate`, the search will find keywords across all attribute fields of the candidate records.
 * Only full keywords will be matched
-  e.g. `k/jane doe f/name` will not match TAs with name `jane koe` or just `jane`
-* TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
-  e.g. `k/Jane k/Doe f/name` will return TAs with name e.g. `Jane Koe`, `John Doe`
+  e.g. `k/jane doe f/name` will not match candidates with name `jane koe` or just `jane`
+* Candidates matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
+  e.g. `k/Jane k/Doe f/name` will return candidates with name e.g. `Jane Koe`, `John Doe`
 
 Examples:
-* `find k/Jane f/name` returns TAs with name e.g. `jane` and `jane doe`
-* `find k/Computer Science f/course` returns TAs with the course field i.e. `computer science`
-* `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
+* `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`
+* `find k/Computer Science f/course` returns candidates with the course field i.e. `computer science`
+* `find k/Jane k/Tan f/name` returns candidates with name e.g. `Jane`, `tan` and `John Tan`
 
 ### Sorting candidates by attribute field: `sort`
 
-Returns a list of TAs sorted by the specified attribute field.
+Returns a list of candidates sorted by the specified attribute field.
 
 Format: `sort s/ATTRIBUTE_FIELD`
 
@@ -162,27 +162,27 @@ Format: `sort s/ATTRIBUTE_FIELD`
 </div>
 
 * The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
-* The search will return a list of all TAs sorted in ascending order
+* The search will return a list of all candidates sorted in ascending order
   (i.e. A-Z, 0-9) with regard to the specified attribute field.
 
 Examples:
-Let's reference a default sample list of unique TA candidates with attribute fields stated as (`name`, `studentid`).
+Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `studentid`).
 1. (`Ben`, `E23456789`)
 2. (`Alice`, `E0234567`)
 3. (`Charlie`, `E0123456`)
 
-* `sort s/name` returns TAs sorted by name in the following order:
+* `sort s/name` returns candidates sorted by name in the following order:
 1. (`Alice`, `E0234567`)
 2. (`Ben`, `E23456789`)
 3. (`Charlie`, `E0123456`)
 
-* `sort s/studentid` returns TAs sorted by name in the following order:
+* `sort s/studentid` returns candidates sorted by name in the following order:
 1. (`Charlie`, `E0123456`)
 2. (`Alice`, `E0234567`)
 3. (`Ben`, `E23456789`)
 
 
-### Deleting a TA : `delete`
+### Deleting a candidate : `delete`
 
 Deletes the specified candidate from the system.
 
