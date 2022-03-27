@@ -27,6 +27,6 @@ public interface Storage extends TrackBeauStorage, UserPrefsStorage {
     Optional<ReadOnlyTrackBeau> readTrackBeau() throws DataConversionException, IOException;
 
     @Override
-    void saveTrackBeau(ReadOnlyTrackBeau addressBook) throws IOException;
+    void saveTrackBeau(ReadOnlyTrackBeau trackBeau) throws IOException;
 
 }

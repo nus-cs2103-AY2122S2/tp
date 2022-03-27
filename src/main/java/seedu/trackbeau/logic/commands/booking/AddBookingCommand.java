@@ -1,19 +1,16 @@
 package seedu.trackbeau.logic.commands.booking;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMER;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.booking.Booking;
-import seedu.trackbeau.model.customer.Customer;
 
 /**
  * Adds a booking to trackBeau.
@@ -24,41 +21,45 @@ public class AddBookingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Booking to TrackBeau. "
             + "Parameters: "
-            + PREFIX_CUSTOMER + "CUSTOMERID "
+            + PREFIX_NAME + "CUSTOMERNAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_SERVICE + "SERVICE "
             + PREFIX_STARTTIME + "APPOINTMENTTIME "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CUSTOMER + "1 "
-            + PREFIX_STARTTIME + "10-10-2022 10:30 ";
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_SERVICE + "Acne treatment "
+            + PREFIX_STARTTIME + "10-10-2022 10:30";
 
     public static final String MESSAGE_SUCCESS = "New Booking added: \n%1$s";
+    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in TrackBeau";
 
-    private final LocalDateTime startTime;
-    private final Integer customerID;
+    private final Booking toAdd;
 
     /**
      * Creates an AddBookingCommand to add the specified booking
      */
-    public AddBookingCommand(Integer customerID, LocalDateTime startTime) {
-        requireNonNull(customerID);
-        requireNonNull(startTime);
-        this.customerID = customerID;
-        this.startTime = startTime;
+    public AddBookingCommand(Booking booking) {
+        requireNonNull(booking);
+        toAdd = booking;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Customer> lastShownList = model.getFilteredCustomerList();
-        if (customerID > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        requireNonNull(model);
+
+        if (model.hasBooking(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
         }
-        Customer customer = lastShownList.get(customerID - 1);
-        Booking booking = new Booking(customer, startTime);
-        model.addBooking(booking);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
+
+        model.addBooking(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this;
+        return other == this // short circuit if same object
+                || (other instanceof AddBookingCommand // instanceof handles nulls
+                && toAdd.equals(((AddBookingCommand) other).toAdd));
     }
 }

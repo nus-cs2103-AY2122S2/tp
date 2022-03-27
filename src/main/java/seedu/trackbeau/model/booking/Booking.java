@@ -1,53 +1,88 @@
 package seedu.trackbeau.model.booking;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.customer.Name;
+import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.service.ServiceName;
 import seedu.trackbeau.model.uniquelist.UniqueListItem;
 
+/**
+ * Represents a Booking in trackBeau.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Booking implements UniqueListItem {
-    //private final Service Service;
-    private final Customer customer;
-    private final LocalDateTime startDateTime;
+    private final Name customerName;
+    private final Phone customerPhone;
+    private final ServiceName serviceName;
+    private final BookingDateTime bookingDateTime;
 
     /**
      * Every field must be present and not null.
      */
-    public Booking(Customer customer, LocalDateTime startDateTime) {
-        this.customer = customer;
-        this.startDateTime = startDateTime;
+    public Booking(Name customerName, Phone customerPhone, ServiceName serviceName, BookingDateTime bookingDateTime) {
+        requireAllNonNull(customerName, customerPhone, serviceName, bookingDateTime);
+        this.customerName = customerName;
+        this.customerPhone = customerPhone;
+        this.serviceName = serviceName;
+        this.bookingDateTime = bookingDateTime;
     }
 
-    public String getCustomerName() {
-        return customer.getName().fullName;
+    public Name getCustomerName() {
+        return customerName;
     }
 
-    public String getCustomerPhone() {
-        return customer.getPhone().value;
+    public Phone getCustomerPhone() {
+        return customerPhone;
     }
 
-    public String getDateTime() {
-        return startDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' h:mm a"));
+    public ServiceName getServiceName() {
+        return serviceName;
+    }
+
+    public BookingDateTime getBookingDateTime() {
+        return bookingDateTime;
     }
 
     /**
-     * Returns true if both bookings have the same name.
-     * This defines a weaker notion of equality between two bookings.
+     * Returns true if both bookings is the same as define by {@code equals}.
      */
     @Override
     public boolean isSameItem(UniqueListItem otherBooking) {
-        return otherBooking == this;
+        return this.equals(otherBooking);
+    }
+
+    /**
+     * Returns true if both bookings have the same fields.
+     * This defines a strong notion of equality between two bookings.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Booking)) {
+            return false;
+        }
+
+        Booking otherBooking = (Booking) other;
+        return otherBooking.getCustomerName().equals(getCustomerName())
+                && otherBooking.getCustomerPhone().equals(getCustomerPhone())
+                && otherBooking.getServiceName().equals(getServiceName())
+                && otherBooking.getBookingDateTime().equals(getBookingDateTime());
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Name: ")
-            .append(getCustomerName())
-            .append("; Appointment Time: ")
-            .append(getDateTime())
-            .append(";");
+        builder.append(getCustomerName())
+                .append("; Phone: ")
+                .append(getCustomerPhone())
+                .append("; Service: ")
+                .append(getServiceName())
+                .append("; Appointment DateTime: ")
+                .append(getBookingDateTime());
 
         return builder.toString();
     }

@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.model.booking.Booking;
+import seedu.trackbeau.model.booking.BookingDateTime;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Customer;
@@ -72,13 +74,28 @@ public class SampleDataUtil {
         };
     }
 
+    public static Booking[] getSampleBookings() {
+        return new Booking[] {
+            new Booking(new Name("Alex Yeoh"), new Phone("87438807"), new ServiceName("Organic Radiance Facial"),
+                new BookingDateTime("10-10-2022 10:30")),
+            new Booking(new Name("David Li"), new Phone("91031282"), new ServiceName("Eyebrow Shaping"),
+                new BookingDateTime("11-11-2022 11:00")),
+            new Booking(new Name("Bernice Yu"), new Phone("99272758"), new ServiceName("Anti-Aging Eye Treatment"),
+                new BookingDateTime("12-12-2022 12:30"))
+        };
+    }
+
     public static ReadOnlyTrackBeau getSampleTrackBeau() {
         TrackBeau sampleTb = new TrackBeau();
         for (Customer sampleCustomer : getSampleCustomers()) {
             sampleTb.addCustomer(sampleCustomer);
         }
+
         for (Service sampleService : getSampleServices()) {
             sampleTb.addService(sampleService);
+        }
+        for (Booking sampleBooking : getSampleBookings()) {
+            sampleTb.addBooking(sampleBooking);
         }
         return sampleTb;
     }

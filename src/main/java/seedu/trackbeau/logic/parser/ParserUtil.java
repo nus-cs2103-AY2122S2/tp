@@ -1,11 +1,7 @@
 package seedu.trackbeau.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +9,8 @@ import java.util.stream.Stream;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.StringUtil;
-import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
+import seedu.trackbeau.model.booking.BookingDateTime;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Email;
@@ -195,42 +191,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String targetIndex} into an {@code targetIndex}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code targetIndex} is invalid.
-     */
-    public static Integer parseCustomerID(String targetIndex) throws ParseException {
-        requireNonNull(targetIndex);
-        String trimmedIndex = targetIndex.trim();
-        Integer targetIndexInt;
-        try {
-            targetIndexInt = Integer.parseInt(trimmedIndex);
-        } catch (NumberFormatException e) {
-            throw e;
-        }
-        return targetIndexInt;
-    }
-
-    /**
-     * Parses a {@code String startTime} into an {@code startTime}.
+     * Parses a {@code String startTime} into an {@code BookingDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code startTime} is invalid.
      */
-    public static LocalDateTime parseStartTime(String startTime) throws ParseException {
+    public static BookingDateTime parseStartTime(String startTime) throws ParseException {
         requireNonNull(startTime);
-        String trimmedAddress = startTime.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime dateTime;
-        try {
-            dateTime = LocalDateTime.parse(trimmedAddress, formatter);
-        } catch (DateTimeException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBookingCommand.MESSAGE_USAGE));
+        String trimmedStartTime = startTime.trim();
+        if (!BookingDateTime.isValidBookingDateTime(trimmedStartTime)) {
+            throw new ParseException(BookingDateTime.MESSAGE_CONSTRAINTS);
         }
-
-        return dateTime;
+        return new BookingDateTime(trimmedStartTime);
     }
+
     /**
      * Parses a {@code String serviceName} into a {@code ServiceName}.
      * Leading and trailing whitespaces will be trimmed.

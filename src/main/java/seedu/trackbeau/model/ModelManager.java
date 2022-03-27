@@ -123,13 +123,26 @@ public class ModelManager implements Model {
     //=========== Bookings ================================================================================
 
     @Override
+    public boolean hasBooking(Booking booking) {
+        requireNonNull(booking);
+        return trackBeau.hasBooking(booking);
+    }
+
+    @Override
     public void addBooking(Booking booking) {
         trackBeau.addBooking(booking);
         updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
     }
+
     @Override
     public void deleteBooking(Booking target) {
         trackBeau.removeBooking(target);
+    }
+
+    @Override
+    public void setBooking(Booking target, Booking editedBooking) {
+        requireAllNonNull(target, editedBooking);
+        trackBeau.setBooking(target, editedBooking);
     }
     //=========== Filtered Booking List Accessors =============================================================
 
@@ -216,9 +229,10 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return trackBeau.equals(other.trackBeau)
-            && userPrefs.equals(other.userPrefs)
-            && filteredCustomers.equals(other.filteredCustomers)
-            && services.equals(other.services);
+                && userPrefs.equals(other.userPrefs)
+                && filteredCustomers.equals(other.filteredCustomers)
+                && services.equals(other.services)
+                && filteredBookings.equals(other.filteredBookings);
     }
 
 }
