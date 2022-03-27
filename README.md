@@ -5,7 +5,7 @@
 
 ### Overview
 
-MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s medical details and scheduling appointments. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' medical information, billing and appointments through a simple and easy-to-use platform.
+MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s information. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' emergency contacts, medical information and visits through a simple and easy-to-use platform.
 
 * The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
