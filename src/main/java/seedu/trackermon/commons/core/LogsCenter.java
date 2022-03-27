@@ -99,7 +99,10 @@ public class LogsCenter {
      * @throws IOException if there are problems opening the file.
      */
     private static FileHandler createFileHandler() throws IOException {
-        String logFile = Paths.get(JarTools.getClassLocationString(LogsCenter.class), LOG_FILE).toString();
+        String logFile = JarTools.runningFromJarFile()
+                ? Paths.get(JarTools.getClassLocationString(LogsCenter.class), LOG_FILE).toString()
+                : LOG_FILE;
+
         FileHandler fileHandler = new FileHandler(logFile, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
         fileHandler.setFormatter(new SimpleFormatter());
         fileHandler.setLevel(currentLogLevel);
