@@ -211,25 +211,50 @@ The `Show Email` button opens up a separate window that consists of all the emai
 ---------------------------------------------------------------------------------------------------------------
 
 ### FAQ
-**Q**: How do I----- transfer my data to another computer? <br>
-**A**: Copy the file from [ROOT]/data/tracey.txt over to your other computer. <br>
+1. **Q**: How do I transfer my data to another computer? <br>
+   **A**: Copy the file from [ROOT]/data/tracey.txt over to your other computer. <br>
 
-**Q**: What is the difference between the `list` command and `summarise` command? <br>
-**A**: The `list` command will provide an unfiltered list of addressbook whereas `summarise` command provides an overview
-of the data (Covid statuses) and give the user an easier understanding of how the faculty is dealing with the Covid outbreak. <br>
+2. **Q**: What is the difference between the `list` command and `summarise` command? <br>
+   **A**: The main differences of `list` and `summarise` are:
 
+        a. The `list` command will provide an unfiltered list of students `summarise` command will tabulate the studnets into pie charts according to the block they stay in and faculty they belong to. <br>
+
+        b. `list` is helpful to get a bird eye view of the details of all the students whereas `summarise` is great to analyse how certain areas in the hall compound is doing. <br>
+
+        c. `list` is optimal to find a particular student out of everyone while `summarise` is optimal to find which block is dealing not-so-well with the covid outbreak. <br>
+
+3. **Q**: Can I use filter using keywords to find certain people in the list of students? <br>
+   **A**: Unfortunately `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`. Please use the `find` command instead which will allow you to search via keywords. <br>
+   
+4. **Q**: Where can I find the `INDEX` of a student? <br>
+   **A**: They can be found in the numbers located beside each individual student. <br>
+   ![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
+
+5. **Q**: The `delete` feature only allow us to delete via the `INDEX` assigned to each particular person. How do I know the `INDEX` of the student i want to use `delete` on? <br>
+   **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
+   You can use `find` `STUDENT` to get his/her `INDEX` and then apply `delete`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
+   
+6. **Q**: The `edit` feature only allow us to edit via the `INDEX` assigned to each particular person. How do I know the `INDEX` of the student i want to use `edit` on? <br>
+   **A**: The `INDEX` used for `edit` is not fixed. It relies on the number in which the displayed list of students will assign.
+   You can use `find` `STUDENT` to get his/her `INDEX` and then apply `edit`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
+
+7. **Q**: Can I create new tags not mentioned by the app? <br>
+   **A**: As the vision of the app is to monitor Covid Status of students in school accomodation, we have accounted for the tags needed by Hall Admins to maximise efficiency. There are no need for more tags! <br> 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Command Summary
-| No. | Command | Description |
-| - | - | - |
-| 1. | `find` | Included in `AB3`|
-| 2. | `add` | Included in AB3 with additional attributes such as faculty, matriculation number and covid status |
-| 3. | `delete` | Included in `AB3` |
-| 4. | `edit` | Included in `AB3` |
-| 5. | `clear` | Delete everything inside `Tracey` |
-| 6. | `summarise` | Summarise data into a list for an overview |
-| 7. | `list` | Included in `AB3` |
-| 8. | `help` | Included in `AB3` |
-| 9. | `filter` | Retrieve list of people based on covid status |
-| 10. | Saving contacts into file | `Tracey` auto saves contacts into file |
+| No. | Command | Description | Example |
+| - | - | - | - |
+| 1. | `find` | Find a particular student | `find alex` \n `find j`|
+| 2. | `add` | Let Tracey keep track of this new student | `add n/Melvin f/SOC cs/ Negative b/a`|
+| 3. | `delete` | Remove a student from Tracey | `delete 2` |
+| 4. | `edit` | Change particulars of a student | `edit 1 p/91234567 e/johndoe@example.com`|
+| 5. | `clear` | Delete everything inside Tracey | `clear` |
+| 6. | `summarise` | Summarise data into a list for an overview | `summarise`|
+| 7. | `list` | Get a list of everyone in Tracey | `list` |
+| 8. | `help` | In-app support to understand how commands work in Tracey | `help` |
+| 9. | `filter` | Retrieve list of people based on tags | `filter cs/HEALTH_STATUS f/FACULTY` |
+--------------------------------------------------------------------------------------------------------------------
+
+### Glossary
+{to be added}
