@@ -22,13 +22,13 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list all/`** : Lists all Tasks.
+   * **`list`** : Lists all Tasks.
 
    * **`addEmployee`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ManageEZPZ.
 
    * **`delete`**`3` : Deletes the 3rd Task shown in the Task list.
 
-   * **`clear`** : Deletes all Tasks.
+   * **`clear`** : Deletes everything from ManageEZPZ.
    
    * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
@@ -91,20 +91,16 @@ Format:
 * `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
-For deadline and event, the DATE must be in this format: YYYY-MM-DD HHmm (in 24 hr format)
+For deadline and event, the DATE must be in this format: YYYY-MM-DD and the TIME in this format: HHmm (in 24 hr format)
 </div>
 
 ### Listing all Tasks : `list`
 
-View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for today
+View all tasks.
 
 Format:
 
 * `list`
-* `list todo/`
-* `list deadline/`
-* `list event/`
-* `list today/`
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
