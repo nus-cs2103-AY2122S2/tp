@@ -96,7 +96,7 @@ Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 |:--------------------:|:-----------------:|
 |     cs/Negative      | cs/Close-contact  |  
 |        f/SoC         |      f/SooC       |  
-*Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3*
+*Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3.*
 
 Examples of usage:
 * `add n/Melvin f/SOC cs/ Negative`
