@@ -110,7 +110,6 @@ public class StudentBuilder {
     /**
      * Parses the {@code labs} into a {@code LabList} and set it to the {@code Student} that we are building.
      */
-    @SafeVarargs
     public final StudentBuilder withLabs(LabTriplet... labs) {
         this.labs = SampleDataUtil.getLabSet(labs);
         return this;

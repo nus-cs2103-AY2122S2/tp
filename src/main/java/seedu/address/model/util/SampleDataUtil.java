@@ -1,12 +1,13 @@
 package seedu.address.model.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.LabList;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
@@ -62,11 +63,12 @@ public class SampleDataUtil {
     /**
      * Returns a LabList containing the list of strings given.
      */
-    public static LabList getLabSet(LabTriplet... strings) {
+    public static LabList getLabSet(LabTriplet... labStrings) {
+        requireNonNull(labStrings);
         LabList ll = new LabList();
 
-        ll.setLabs(Arrays.stream(strings)
-                .map(x -> (new Lab(x.getLabNumber()).of(x.getLabStatus(), x.getLabMark())))
+        ll.setLabs(Arrays.stream(labStrings)
+                .map(LabTriplet::getLab)
                 .collect(Collectors.toList()));
         return ll;
     }

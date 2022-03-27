@@ -1,5 +1,8 @@
 package seedu.address.model.util;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.LabMark;
 
 public class LabTriplet {
@@ -12,6 +15,7 @@ public class LabTriplet {
      * Creates a LabTriplet containing String representations of each Lab attribute.
      */
     public LabTriplet(String number, String status, String mark) {
+        requireAllNonNull(number, status, mark);
         labNumber = number;
         labStatus = status;
         labMark = mark;
@@ -22,6 +26,7 @@ public class LabTriplet {
      * For when no marks are initialized.
      */
     public LabTriplet(String number, String status) {
+        requireAllNonNull(number, status);
         labNumber = number;
         labStatus = status;
         labMark = LabMark.MARKS_UNKNOWN;
@@ -37,5 +42,12 @@ public class LabTriplet {
 
     public String getLabMark() {
         return labMark;
+    }
+
+    /**
+     * Returns a new Lab with the given {@code labNumber}, {@code labStatus}, and {@code labMark}.
+     */
+    public Lab getLab() {
+        return new Lab(labNumber).of(labStatus, labMark);
     }
 }
