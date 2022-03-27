@@ -183,6 +183,8 @@ Otherwise, the profile list is filtered using the predicate.
 
 The activity diagram below summarizes what happens when a filter command is executed.
 
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
 
 
 ####Design considerations 
@@ -252,7 +254,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![UndoRedoState5](images/CommitActivityDiagram.png)
 
 #### Design considerations:
 

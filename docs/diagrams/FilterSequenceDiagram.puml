@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "t:Tag" as Tag LOGIC_COLOR
+participant ":PersonContainsTagPredicate" as PersonContainsTagPredicate LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("filter family")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter family")
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser
+activate FilterCommandParser
+
+FilterCommandParser --> AddressBookParser
+deactivate FilterCommandParser
+
+AddressBookParser -> FilterCommandParser : parse("family)
+activate FilterCommandParser
+
+create Tag
+FilterCommandParser -> Tag
+activate Tag
+
+Tag --> FilterCommandParser : t
+deactivate Tag
+Tag -[hidden]-> FilterCommandParser
+destroy Tag
+
+create PersonContainsTagPredicate
+FilterCommandParser -> PersonContainsTagPredicate
+activate PersonContainsTagPredicate
+
+PersonContainsTagPredicate --> FilterCommandParser
+deactivate PersonContainsTagPredicate
+PersonContainsTagPredicate -[hidden]-> FilterCommandParser
+destroy PersonContainsTagPredicate
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser : f
+deactivate FilterCommand
+
+FilterCommandParser --> AddressBookParser: f
+deactivate FilterCommandParser
+FilterCommandParser -[hidden]-> AddressBookParser
+destroy FilterCommandParser
+
+LogicManager -> FilterCommand : execute()
+activate FilterCommand
+
+create CommandResult
+FilterCommand -> CommandResult
+activate CommandResult
+
+CommandResult -> FilterCommand
+deactivate CommandResult
+
+FilterCommand --> LogicManager: result
+deactivate FilterCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
