@@ -22,13 +22,6 @@ import seedu.ibook.storage.StorageManager;
 @ExtendWith(ApplicationExtension.class)
 public class GuiTest {
 
-    static {
-        System.setProperty("testfx.robot", "glass");
-        System.setProperty("testfx.headless", "true");
-        System.setProperty("prism.order", "sw");
-        System.setProperty("prism.text", "t2k");
-    }
-
     @TempDir
     public Path temporaryFolder;
 
@@ -51,6 +44,7 @@ public class GuiTest {
 
     @Test
     public void isShowing_noExceptionThrown() {
+        FxAssert.verifyThat(".main", NodeMatchers.isVisible());
     }
 
 }
