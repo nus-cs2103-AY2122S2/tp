@@ -64,7 +64,9 @@ public class PersonCard extends UiPart<Region> {
         cardPane.setCursor(Cursor.HAND);
         cardPane.setOnMousePressed(e -> {
             try {
-                commandExecutor.execute(commandText);
+                if (e.isPrimaryButtonDown()) { // For mouse on left click
+                    commandExecutor.execute(commandText);
+                }
             } catch (CommandException | ParseException ex) {
                 ex.printStackTrace();
             }
