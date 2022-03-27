@@ -3,22 +3,23 @@ layout: page
 title: User Guide
 ---
 
-HustleBook (HB) is a **desktop app for managing client details and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HB can get your client management meetings done faster than traditional GUI apps.
+HustleBook (HB) is a desktop app specially catered towards financial advisors for **managing client details and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, HB can get your client management meetings done faster than traditional GUI apps.
 
 * Table of Contents
   * [Quick Start](#quick-start)
   * [Features](#features)
     * [Viewing Help: `help`](#viewing-help--help)
     * [Adding a client : `add`](#adding-a-client--add)
-    * [Listing all persons : `list`](#listing-all-persons--list)
-    * [Flagging a person : `flag`](#flagging-a-person--flag)
-    * [Unflagging a person : `unflag`](#unflagging-a-person--unflag)
-    * [Sorting all persons : `sort`](#sorting-all-persons--sort)
+    * [Listing all clients : `list`](#listing-all-clients--list)
+    * [Flagging a client : `flag`](#flagging-a-client--flag)
+    * [Unflagging a client : `unflag`](#unflagging-a-client--unflag)
+    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
     * [Scheduling / Rescheduling a meeting: `meet`](#scheduling--rescheduling-a-meeting-meet)
     * [Canceling a meeting: `meet`](#canceling-a-meeting-meet)
-    * [Editing a person : `edit`](#editing-a-person--edit)
-    * [Locating persons by name : `find`](#locating-persons-by-name--find)
-    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Editing a client : `edit`](#editing-a-client--edit)
+    * [Locating clients by name : `find`](#locating-clients-by-name--find)
+    * [Deleting a client : `delete`](#deleting-a-client--delete)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
     * [Saving the data](#saving-the-data)
@@ -112,15 +113,15 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Salary of $3400 f/true`
 
-### Listing all persons : `list`
+### Listing all clients : `list`
 
 Shows a list of all clients in the HustleBook.
 
 Format: `list`
 
-### Flagging a person : `flag`
+### Flagging a client : `flag`
 
-Flag a person in the HustleBook to mark them as important. 
+Flag a client in the HustleBook to mark them as important. 
 
 Format: `flag NAME`
 
@@ -129,9 +130,9 @@ Format: `flag NAME`
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX` 
 of the list shown.
 
-### Unflagging a person : `unflag`
+### Unflagging a client : `unflag`
 
-Unflag a person in the HustleBook to unmark flagged clients.
+Unflag a client in the HustleBook to unmark flagged clients.
 
 Format: `unflag NAME`
 
@@ -140,12 +141,19 @@ Format: `unflag NAME`
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
   of the list shown.
 
-### Sorting all persons : `sort`
+### Sorting all clients : `sort`
 
 Sorts clients such that flagged clients are displayed before unflagged clients.
-It then sorts all clients in HustleBook by date last met.
+It then sorts all clients in HustleBook based on the parameter provided.
 
-Format: `sort`
+Format: `sort PARAMETER`
+
+
+* `PARAMETER` you can use are: `meeting`,`name`, `prev` and `salary`
+* `PARAMTER` is not case-sensitive. 
+
+Example:
+* `sort salary`
 
 ### Scheduling / Rescheduling a meeting: `meet`
 
@@ -170,29 +178,29 @@ Format: `meet NAME c/`
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
   of the list shown.
 
-### Editing a person : `edit`
+### Editing a client : `edit`
 
-Edits an existing person in the HustleBook.
+Edits an existing client in the HustleBook.
 
 Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] [d/DATE] [t/TAG]…​`
 
-* Edits the person named `NAME`.
+* Edits the client named `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
 * `DATE` has to be in the format **YYYY-MM-DD**.
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated with the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* You can remove the person's info by typing `i/` without specifying any info after it.
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without specifying any tags after it.
+* You can remove the client's info by typing `i/` without specifying any info after it.
 
 Example:
-* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the person with the name `John Doe` to `2020-12-04` which is 4th Dec 2020.
+* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to `2020-12-04` which is 4th Dec 2020.
 
-### Locating persons by name : `find`
+### Locating clients by name : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -200,7 +208,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -210,20 +218,20 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a client : `delete`
 
-Deletes the specified person from the HustleBook.
+Deletes the specified client from the HustleBook.
 
 Format: `delete NAME`
 
-* Deletes the person with the specified `NAME`.
+* Deletes the client with the specified `NAME`.
     * `Name` is case-insensitive. e.g. `John` will match `john`.
     * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
     * Only full words will be matched e.g. `Han` will not match `Hans`.
 * In the event of multiple clients found with the same `NAME`, the first occurrence of the client in the list will be deleted.
   
 Example: 
-* `delete John` deletes the person named `John` in the HustleBook.
+* `delete John` deletes the client named `John` in the HustleBook.
 
 ### Clearing all entries : `clear`
 
