@@ -185,14 +185,17 @@ Format: `find field/KEYWORD1 [MORE_KEYWORDS]`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 
-### Creating an appointment: `appointment`
+### Creating an appointment: `appt`
 
 Create an appointment with a certain client.
 
-Format: `appointment INDEX time/yyyy-mm-dd-hh-mm`
+Format: 
+For appointment with buyer `appt-b INDEX time/yyyy-mm-dd-hh-mm`
+For appointment with seller `appt-s INDEX time/yyyy-mm-dd-hh-mm`
 
 * Create an appointment with the client with `index` and a time of `yyyy-mm-dd-hh-mm`
 * The index must be a positive integer
+* The time entered must be a time in the future.
 
 ### Deleting a client : `delete`
 
