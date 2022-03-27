@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import seedu.trackermon.logic.commands.FindCommand;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
 import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
+import seedu.trackermon.model.show.RatingContainsKeywordsPredicate;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.ShowContainsKeywordsPredicate;
 import seedu.trackermon.model.show.StatusContainsKeywordsPredicate;
@@ -30,11 +31,13 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(
+                args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG, PREFIX_RATING);
         boolean hasPrefix = false;
         boolean hasNamePrefix = argumentMultimap.arePrefixesPresent(PREFIX_NAME);
         boolean hasStatusPrefix = argumentMultimap.arePrefixesPresent(PREFIX_STATUS);
         boolean hasTagPrefix = argumentMultimap.arePrefixesPresent(PREFIX_TAG);
+        boolean hasRatingPrefix = argumentMultimap.arePrefixesPresent(PREFIX_RATING);
         String[] keywordsArr;
 
         List<Predicate<Show>> predicateArrayList = new ArrayList<>();
@@ -67,6 +70,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }
                 predicateArrayList.add(new TagsContainsKeywordsPredicate(Arrays.asList(input.get(i))));
             }
+        }
+
+        if (hasRatingPrefix) {
+            hasPrefix = true;
+            String input = argumentMultimap.getValue(PREFIX_STATUS).get();
+            keywordsArr = getKeywords(input);
+            predicateArrayList.add(new RatingContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
         }
 
         // if no prefix, find acts as a general search based on 1 keyword,
