@@ -27,7 +27,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a player to MyGM. "
+    public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD + ": Adds a player to MyGM. "
             + "\nParameters: "
             + PREFIX_PLAYER + " "
             + PREFIX_NAME + "NAME "
@@ -66,6 +66,11 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "finals"
             + PREFIX_DESCRIPTION + "nba finals"
             + PREFIX_DATE + "01/01/2022 2000";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD +": Adds a player, lineup, schedule to MyGM\n"
+            + MESSAGE_USAGE_PLAYER + "\n"
+            + MESSAGE_USAGE_LINEUP + "\n"
+            + MESSAGE_USAGE_SCHEDULE;
 
     public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s.";
     public static final String MESSAGE_ADD_LINEUP_SUCCESS = "New lineup added: %1$s.";
