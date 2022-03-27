@@ -8,6 +8,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.applicant.ListApplicantCommand;
 import seedu.address.logic.commands.interview.ListInterviewCommand;
 import seedu.address.logic.commands.position.ListPositionCommand;
+import seedu.address.logic.parser.applicants.ListApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ListCommandParser implements Parser<ListCommand> {
@@ -20,9 +21,10 @@ public class ListCommandParser implements Parser<ListCommand> {
     @Override
     public ListCommand parse(String args) throws ParseException {
         char flag = ArgumentTokenizer.getFlag(args.trim());
+        String argsWithoutFlag = ArgumentTokenizer.removeFlag(args.trim());
 
         if (flag == FLAG_APPLICANT) {
-            return new ListApplicantCommand();
+            return new ListApplicantCommandParser().parse(argsWithoutFlag);
         } else if (flag == FLAG_INTERVIEW) {
             return new ListInterviewCommand();
         } else if (flag == FLAG_POSITION) {

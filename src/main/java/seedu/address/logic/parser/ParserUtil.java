@@ -9,8 +9,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.FilterArgument;
+import seedu.address.logic.FilterType;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Age;
@@ -253,5 +256,35 @@ public class ParserUtil {
             requirementSet.add(parseRequirement(requirement));
         }
         return requirementSet;
+    }
+
+    /**
+     * Parses a {@code String filterType} into a {@code FilterType}, along with the corresponding data type.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filterType} is invalid for the {@code dataType}.
+     */
+    public static FilterType parseFilterType(DataType dataType, String filterType) throws ParseException {
+        requireNonNull(filterType);
+        String trimmedFilterType = filterType.trim();
+        if (!FilterType.isValidFilterType(dataType, trimmedFilterType)) {
+            throw new ParseException(FilterType.MESSAGE_CONSTRAINTS);
+        }
+        return new FilterType(dataType, trimmedFilterType);
+    }
+
+    /**
+     * Parses a {@code String filterArgument} into a {@code FilterArgument}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filterArgument} is invalid.
+     */
+    public static FilterArgument parseFilterArgument(String filterArgument) throws ParseException {
+        requireNonNull(filterArgument);
+        String trimmedFilterArgument = filterArgument.trim();
+        if (!FilterArgument.isValidFilterArgument(trimmedFilterArgument)) {
+            throw new ParseException(FilterArgument.MESSAGE_CONSTRAINTS);
+        }
+        return new FilterArgument(trimmedFilterArgument);
     }
 }
