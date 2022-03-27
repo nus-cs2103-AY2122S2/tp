@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import seedu.ibook.commons.core.Config;
-import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
 import seedu.ibook.commons.core.Version;
 import seedu.ibook.commons.exceptions.DataConversionException;
