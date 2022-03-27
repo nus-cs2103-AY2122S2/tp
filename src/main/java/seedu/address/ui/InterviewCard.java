@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -29,9 +30,11 @@ public class InterviewCard extends UiPart<Region> {
     public final Interview interview;
 
     @FXML
-    private HBox cardPane;
+    private HBox interviewCard;
     @FXML
     private Label name;
+    @FXML
+    private Label studentId;
     @FXML
     private Label id;
     @FXML
@@ -47,12 +50,13 @@ public class InterviewCard extends UiPart<Region> {
     public InterviewCard(Interview interview, int displayedIndex) {
         super(FXML);
         this.interview = interview;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         id.setText(displayedIndex + ". ");
-        name.setText(interview.getCandidate().getName().toString() + " "
-                + interview.getCandidate().getStudentId().toString());
-        date.setText(interview.getInterviewDate().toString());
+        name.setText(interview.getCandidate().getName().toString());
+        studentId.setText(interview.getCandidate().getStudentId().toString());
         day.setText(DayOfWeek.of(interview.getInterviewDay()).toString());
-        time.setText("30 minutes");
+        date.setText(interview.getInterviewDate().format(formatter));
+        time.setText(interview.getInterviewStartTime().toString());
     }
 
     @Override
