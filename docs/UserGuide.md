@@ -234,9 +234,9 @@ of the data (Covid statuses) and give the user an easier understanding of how th
 --------------------------------------------------------------------------------------------------------------------
 
 ### Command Summary
-| No. | Command | Description |
-| - | - | - |
-| 1. | `find` | Included in `AB3`|
+| No. | Command | Description | Example |
+| - | - | - | - |
+| 1. | `find` | Included in `AB3`| 
 | 2. | `add` | Included in AB3 with additional attributes such as faculty, matriculation number and covid status |
 | 3. | `delete` | Included in `AB3` |
 | 4. | `edit` | Included in `AB3` |
@@ -246,3 +246,28 @@ of the data (Covid statuses) and give the user an easier understanding of how th
 | 8. | `help` | Included in `AB3` |
 | 9. | `filter` | Retrieve list of people based on covid status |
 | 10. | Saving contacts into file | `Tracey` auto saves contacts into file |
+
+| No. |  Command | Description | Example |
+|--|---|---| ---|
+|  1. | `find` | Find a particular student  | `find alex` \n `find j` |
+|   2. | `add` | Add a student to the Tracey Database  | `add n/Melvin f/SOC cs/ Negative b/a` |
+|  3. | `delete` | Remove a student from Tracey | `delete 2` |
+| 4. | `edit` | Change particulars of a student | `edit 1 p/91234567 e/johndoe@example.com`|
+| 5. | `clear` | Format the Tracey Database | `clear` |
+| 6.  |  `summarise` |  Summarise data into a list and pie chart for an overview  |`summarise` |
+| 7.  |  `list` |  Get a list of everyone in Tracey | `list` |
+|  8. | `help` | In-app support to understand how the commands work in Tracey  | `help`|
+|  9. | `filter`  |  Retrieve list of people based on tags | `filter cs/HEALTH_STATUS f/FACULTY` |
+
+
+| No.  | Command  | Description                                               | Example  |
+|---|---|-----------------------------------------------------------|---|
+| 1.  | `find`  | Find a particular student                                 | `find alex` \n `find j`  |
+| 2.  | `add`  | Add a student to the Tracey Database                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney`  |
+|  3.  | `delete`  | Remove a student from Tracey                              | `delete 2`  |
+| 4.  | `edit`  | Change particulars of a student                           | `edit 1 p/91234567 e/johndoe@example.com`  |
+| 5.  | `clear`  | Format the Tracey Database                                | `clear`  |
+| 6.  | `summarise`   | Summarise data into a list and pie charts for an overview | `summarise`  |
+| 7.  | `list`  |             Get a list of everyone in Tracey                                               | `list`  |
+| 8.  |  `help` |            In-app support to understand how the commands work in Tracey                                               | `help`  |
+| 9.  |  `filter` |        Retrieve list of people based on tags                                                   | `filter cs/HEALTH_STATUS f/FACULTY`  |
