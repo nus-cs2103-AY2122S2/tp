@@ -9,7 +9,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 /**
- * Represents a Event's Date in the address book.
+ * Represents an Event's Date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {

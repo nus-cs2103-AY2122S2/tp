@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Event's Time in the address book.
+ * Represents an Event's Time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
 public class Time {
