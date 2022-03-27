@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCandidateDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FocusCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
@@ -104,6 +105,12 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(AddScheduleCommand.COMMAND_WORD + " " + PREFIX_CANDIDATE
                 + INDEX_FIRST_CANDIDATE.getOneBased() + " " + PREFIX_DATETIME + "01-01-2023 10:00")
                 instanceof ScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_focus() throws Exception {
+        assertTrue(parser.parseCommand(FocusCommand.COMMAND_WORD + " 1")
+                instanceof FocusCommand);
     }
 
     @Test

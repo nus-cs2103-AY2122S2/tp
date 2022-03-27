@@ -194,6 +194,17 @@ Examples:
 * `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
 for an interview on 20 September 2022, 3PM.
 
+
+### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
+
+View more details about the Candidate in the middle panel. 
+
+Format: `focus INDEX`
+
+* Additional details of the Candidate will be displayed on the center panel in the application.
+* To switch to another Candidate's information, user will just need to type the new command 
+* and the new index of the candidate. 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
