@@ -176,11 +176,11 @@ Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MOD
 * Order of field names determines the order of attributes in the output.
 * Choice of format is **default**, **csv** and **json**.
   
-| Format  | Description                                               | Example                                                                                                                   |
-|---------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| default | Displays attributes separated by a newline                | <pre>mary<br/>91282770<br/>mary@gmail.com </pre>                                                                          |
-| csv     | Displays attributes separated by a delimiter <code>&#124; | <pre>mary &#124; 91282770 &#124; mary@gmail.com </pre>                                                                    |    
-| json    | Displays information in json format                       | <pre>{<br/>  &nbsp;"name" : "mary",<br/>  &nbsp;"phone" : "91282270",<br/>  &nbsp;"email" : "mary@gmail.com"<br/>} </pre> | 
+| Format  | Description                                               | Example                                                                                                           |
+|---------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| default | Displays attributes separated by a newline                | mary<br/>91282770<br/>coast residences                                                                            |
+| csv     | Displays attributes separated by a delimiter <code>&#124; | mary  &#124; 91282770 &#124; coast residences                                                                     |    
+| json    | Displays information in json format                       | {<br/>  &nbsp;"name" : "mary",<br/>  &nbsp;"phone" : "91282270",<br/>  &nbsp;"address" : "coast residences"<br/>} | 
 
 
 Examples:
