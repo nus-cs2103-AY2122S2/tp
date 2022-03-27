@@ -209,6 +209,11 @@ public class AddCommandTest {
         public ReadOnlyShowList getShowList() {
             return new ShowList();
         }
+
+        @Override
+        public int getShowListSize() {
+            return showsAdded.size();
+        }
     }
 
 }
