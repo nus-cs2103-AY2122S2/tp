@@ -8,9 +8,9 @@ public class Rating {
 
     public static final String INVALID_RATING = "Rating should be between 0 to 5";
 
-    public static final Integer FULL_RATING = 5;
+    public static final int MAX_RATING = 5;
 
-    public final Integer rating;
+    public final int rating;
 
     /**
      * Constructs a {@code rating}.
@@ -38,7 +38,7 @@ public class Rating {
      * Return true if a given rating is a valid rating.
      */
     public static boolean isValidScore(int rating) {
-        if (rating <= FULL_RATING && rating >= 0) {
+        if (rating <= MAX_RATING && rating >= 0) {
             return true;
         }
         return false;
@@ -65,11 +65,11 @@ public class Rating {
     public boolean equals(Object other) {
         return other == this //short circuit if same object
                 || (other instanceof Rating
-                && rating.equals(((Rating) other).rating));
+                && rating == ((Rating) other).rating);
     }
 
     @Override
     public int hashCode() {
-        return rating.hashCode();
+        return Integer.valueOf(rating).hashCode();
     }
 }

@@ -51,7 +51,7 @@ public class ShowUtil {
         descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.name()).append(" "));
         descriptor.getComment().ifPresent(status -> sb.append(PREFIX_COMMENT).append(status.comment).append(" "));
         descriptor.getRating().ifPresent(status -> sb.append(PREFIX_RATING)
-                .append(status.rating.toString()).append(" "));
+                .append(status.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
