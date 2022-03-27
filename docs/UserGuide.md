@@ -76,7 +76,7 @@ Add a student with relevant details into Tracey.
 
 Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 * Add a student with the specific tags
-* The student name is case sensitive e.g. `add n/johnDoe` will logged as `johnDoe` and not `JohnDoe` in Tracey
+* The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey
 * Phone Number, email and matriculation number must be **unique** to each student
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
 * Tracey will acknowledge that the student has been added
