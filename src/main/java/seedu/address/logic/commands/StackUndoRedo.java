@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import java.util.Stack;
 
 /**
- * Solution adapted from 
+ * Solution adapted from
  * https://github.com/AY1920S1-CS2103T-T09-4/main/pull/161/commits/094fbe26c9917afa2cf3e6a4e2fc5808166e4f79
  */
 
