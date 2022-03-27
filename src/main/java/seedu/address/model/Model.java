@@ -103,7 +103,7 @@ public interface Model {
 
     /**
      * Adds the given interview.
-     * {@code interview} must not already exist in the address book.
+     * {@code interview} must not already exist in HireLah.
      */
     void addInterview(Interview interview);
 
