@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
@@ -89,7 +90,7 @@ class JsonAdaptedTaModule {
         }
         final AcademicYear modelAcademicYear = new AcademicYear(academicYear);
 
-        final List<Student> modelStudents = new ArrayList<>();
+        final UniqueStudentList modelStudents = new UniqueStudentList();
         for (JsonAdaptedStudent s : students) {
             Student sObj = s.toModelType();
             if (!studentList.contains(s)) {

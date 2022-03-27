@@ -9,6 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
+import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
 //@@author jxt00
@@ -48,10 +49,11 @@ class JsonAdaptedClassGroup {
     /**
      * Converts this Jackson-friendly adapted class group object into the model's {@code ClassGroup} object.
      * Checks that the module the class group is added to already exists.
+     * Checks that the student tied to the module already exists.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted class group.
      */
-    public ClassGroup toModelType(List<TaModule> taModuleList) throws IllegalValueException {
+    public ClassGroup toModelType(List<TaModule> taModuleList, List<Student> studentList) throws IllegalValueException {
         if (classGroupId == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassGroupId.class.getSimpleName()));
@@ -87,7 +89,7 @@ class JsonAdaptedClassGroup {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
         }
-        final TaModule modelModule = module.toModelType();
+        final TaModule modelModule = module.toModelType(studentList);
         if (!taModuleList.contains(modelModule)) {
             throw new IllegalValueException(NONEXISTENT_MODULE);
         }
