@@ -85,7 +85,7 @@ public class CommandResultTest {
 
     @Test
     public void getViewDetails_failure() {
-        assertThrows(IllegalStateException.class, () -> new CommandResult("feedback", false, false, true, null));
+        assertThrows(IllegalStateException.class, () -> (new CommandResult("feedback", false, false, true, null)).getViewDetails());
     }
 
 }
