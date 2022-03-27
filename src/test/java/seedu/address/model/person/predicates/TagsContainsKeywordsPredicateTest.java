@@ -63,7 +63,6 @@ public class TagsContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withTags(new Pair<>("Friends", null),
                 new Pair<>("School", null)).build()));
     }
-    
 
     @Test
     public void test_tagsDoesNotContainKeywords_returnsFalse() {
