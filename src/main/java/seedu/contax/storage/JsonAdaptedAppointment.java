@@ -58,7 +58,7 @@ class JsonAdaptedAppointment {
         startDateTime = DATETIME_FORMATTER.format(source.getStartDateTimeObject().value);
         duration = source.getDuration().value;
         person = (source.getPerson() != null) ? source.getPerson().getName().fullName : null;
-        priority = source.getPriority().toString();
+        priority = (source.getPriority() != null) ? source.getPriority().toString() : null;
     }
 
     /**
@@ -105,7 +105,7 @@ class JsonAdaptedAppointment {
                     .findFirst().orElseThrow(() -> new IllegalValueException(INVALID_PERSON_MESSAGE));
         }
 
-        Priority modelPriority = Priority.LOW;
+        Priority modelPriority = null;
         if (priority != null) {
             switch (priority) {
             case "HIGH":
@@ -113,6 +113,9 @@ class JsonAdaptedAppointment {
                 break;
             case "MEDIUM":
                 modelPriority = Priority.MEDIUM;
+                break;
+            case "LOW":
+                modelPriority = Priority.LOW;
                 break;
             default:
                 break;

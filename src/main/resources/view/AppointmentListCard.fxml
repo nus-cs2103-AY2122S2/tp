@@ -30,7 +30,7 @@
           <Label fx:id="name" styleClass="cell_big_label" text="\$name" wrapText="true" />
         </HBox>
         <HBox style="-fx-padding: 5 10;">
-          <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" wrapText="true" />
+          <Label fx:id="priority" styleClass="cell_small_label" wrapText="true" />
         </HBox>
       </HBox>
       <HBox alignment="CENTER_LEFT">

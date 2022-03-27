@@ -1,7 +1,7 @@
 package seedu.contax.logic.parser;
 
+import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_PRIORITY_INDEX;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_PRIORITY_LEVEL;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -38,10 +38,10 @@ public class EditPriorityCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5 pri/high", MESSAGE_INVALID_PRIORITY_INDEX);
+        assertParseFailure(parser, "-5 pri/high", MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0 pri/high", MESSAGE_INVALID_PRIORITY_INDEX);
+        assertParseFailure(parser, "0 pri/high", MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
 
         // invalid arguments as preamble
         assertParseFailure(parser, "1 some random text", MESSAGE_INVALID_FORMAT);

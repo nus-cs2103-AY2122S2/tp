@@ -7,5 +7,6 @@ package seedu.contax.model.appointment;
 public enum Priority {
     LOW,
     MEDIUM,
-    HIGH
+    HIGH,
+    NONE
 }

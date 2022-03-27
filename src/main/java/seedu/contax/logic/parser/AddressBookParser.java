@@ -16,6 +16,7 @@ import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeletePersonCommand;
+import seedu.contax.logic.commands.DeletePriorityCommand;
 import seedu.contax.logic.commands.DeleteTagCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditPersonCommand;
@@ -118,6 +119,9 @@ public class AddressBookParser {
 
         case EditPriorityCommand.COMMAND_WORD:
             return new EditPriorityCommandParser().parse(arguments);
+
+        case DeletePriorityCommand.COMMAND_WORD:
+            return new DeletePriorityCommandParser().parse(arguments);
 
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:

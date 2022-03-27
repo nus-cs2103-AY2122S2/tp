@@ -43,7 +43,7 @@ public class Appointment extends ScheduleItem {
         this.startDateTime = startDateTime;
         this.duration = duration;
         this.person = person;
-        this.priority = Priority.LOW;
+        this.priority = null;
     }
 
     /**
@@ -60,7 +60,6 @@ public class Appointment extends ScheduleItem {
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
                 Appointment.getEndDateTimeOrThrow(startDateTime, duration));
-        requireAllNonNull(name, startDateTime, duration, priority);
 
         this.name = name;
         this.startDateTime = startDateTime;
@@ -133,11 +132,16 @@ public class Appointment extends ScheduleItem {
         }
 
         Appointment otherAppointment = (Appointment) other;
+
+        Priority priority = (getPriority() != null) ? getPriority() : Priority.NONE;
+        Priority otherPriority = (otherAppointment.getPriority() != null)
+                ? otherAppointment.getPriority() : Priority.NONE;
+
         return otherAppointment.getName().equals(getName())
                 && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
                 && otherAppointment.getDuration().equals(getDuration())
                 && Objects.equals(otherAppointment.getPerson(), getPerson())
-                && otherAppointment.getPriority().equals(getPriority());
+                && priority.equals(otherPriority);
     }
 
     @Override

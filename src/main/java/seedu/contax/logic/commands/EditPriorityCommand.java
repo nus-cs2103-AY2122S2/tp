@@ -13,7 +13,8 @@ import seedu.contax.model.appointment.Priority;
 
 
 /**
- * Edits the details of an existing priority in the address book.
+ * Edits the level of an existing priority in the address book
+ * Edits of priority can be set to low, medium or high
  */
 public class EditPriorityCommand extends Command {
     public static final String COMMAND_WORD = "editpriority";
@@ -22,7 +23,7 @@ public class EditPriorityCommand extends Command {
             + "Parameters: INDEX pri/PRIORITY\n"
             + "Example: " + COMMAND_WORD + " 1 " + "pri/high";
 
-    public static final String MESSAGE_EDIT_PRIORITY_SUCCESS = "Edited Priority at index %d: %s";
+    public static final String MESSAGE_EDIT_PRIORITY_SUCCESS = "Edited Priority of Appointment at index %d: %s";
     private final Index index;
     private final Priority priority;
 
@@ -45,7 +46,7 @@ public class EditPriorityCommand extends Command {
         List<Appointment> appointmentList = model.getFilteredAppointmentList();
 
         if (index.getZeroBased() >= appointmentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PRIORITY_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
         }
 
         Appointment appointment = appointmentList.get(index.getZeroBased());

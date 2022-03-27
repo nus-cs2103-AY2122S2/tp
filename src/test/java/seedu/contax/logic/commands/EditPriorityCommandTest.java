@@ -83,7 +83,7 @@ public class EditPriorityCommandTest {
         Index index = Index.fromOneBased(5);
         EditPriorityCommand command = new EditPriorityCommand(index, Priority.HIGH);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PRIORITY_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }
 
     @Test
