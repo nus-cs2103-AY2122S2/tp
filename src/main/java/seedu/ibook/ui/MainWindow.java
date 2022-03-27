@@ -199,14 +199,6 @@ public class MainWindow extends UiPart<Stage> {
         populateFilters();
     }
 
-    /**
-     * Removes all filter for the product list.
-     */
-    public void clearProductFilters() {
-        logic.clearProductFilters();
-        populateFilters();
-    }
-
     private void hidePopup() {
         popupHandler.hidePopup();
     }
