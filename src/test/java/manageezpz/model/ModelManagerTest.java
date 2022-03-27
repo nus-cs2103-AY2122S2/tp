@@ -2,10 +2,10 @@ package manageezpz.model;
 
 import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static manageezpz.testutil.Assert.assertThrows;
-import static manageezpz.testutil.TypcialTasks.READ_BOOK;
-import static manageezpz.testutil.TypcialTasks.RETURN_BOOK;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.BENSON;
+import static manageezpz.testutil.TypicalTasks.READ_BOOK;
+import static manageezpz.testutil.TypicalTasks.RETURN_BOOK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
