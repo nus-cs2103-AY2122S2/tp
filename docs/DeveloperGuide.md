@@ -159,14 +159,14 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Delete multiple persons enhancement
 
-#### Original implementation
+#### Original Implementation
 Originally, the idea was to simply call `deletePerson` on each integer, but this will not work as the indexes of each person
 in the contact list might change depending on the order of deletion. <br>
 
 **For example:** <br>
 In a list with only 3 contacts, `delete 1 2 3` will not be allowed as there is no longer an index 3 during the 3rd deletion.
 
-#### Current implementation
+#### Current Implementation
 
 The delete command now has to accept multiple indexes as a valid input. The ParserUtil class can easily facilitate this
 behaviour by extending the validity checks on the entire string of input.
@@ -191,8 +191,6 @@ Step 5. The deletion process starts sequentially. Person 3 gets deleted followed
 The Sequence Diagram below illustrates the interactions within the Logic component for the `execute("delete 1 2 3")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
-
-
 
 ### Tag feature
 
@@ -233,7 +231,7 @@ successfully.
 
 ### Edit Feature
 
-#### Original implementation
+#### Original Implementation
 The edit command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
 `EditCommandParser` parses the information input and then creates an `EditPersonDescriptor` where the unchanged fields
 are copied over from the existing person and the fields to be overwritten are changed. The Find command then takes in
@@ -245,16 +243,23 @@ The edit command has now been upgraded to support the functionality for overwrit
 
 ### Removetag feature
 
+#### Current implementation
+The `removetag` command creates and copies the target `Person` into a new `Person` object, except all tags are stored in hashsets instead. <br>
+Hashsets allow the application to perform fast searches and checks, such as checking if all provided tags are existing tags in the target `Person` and to utilize the `removeAll()` function. 
+`removetag` will not allow user to remove a non-existent tag. 
+
+![The following sequence diagram shows how the removetag operation works:](images/RemoveTagSequenceDiagram.png)
+
 ### Find/Find -s/Find -e feature
 
-#### Original implementation
-The existing Find feature in ab3 only allowed contacts to be searched for by name. We added additional functionalities
+#### Original Implementation
+The existing Find feature in AB3 only allowed contacts to be searched for by name. We added additional functionalities
 to allow for greater flexibility when filtering large contacts lists according to specific predicates. The `Find` and
 `Find -s` command now allow the user to search for specific contact details (name, phone number, email and address) or
 specific tags.
 
 #### Current Implementation
-The `Find`command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches
+The `Find` command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
 

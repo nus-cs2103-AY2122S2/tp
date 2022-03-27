@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RemoveTagCommandParser" as RemoveTagCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "t:RemoveTagCommand" as RemoveTagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p1:Person" as Person MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("removetag 2 edu/info sec \nm/cs2100 m/cs2107")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("removetag 2 edu/info sec \nm/cs2100 m/cs2107")
+activate AddressBookParser
+
+create RemoveTagCommandParser
+AddressBookParser -> RemoveTagCommandParser
+activate RemoveTagCommandParser
+
+RemoveTagCommandParser --> AddressBookParser
+deactivate RemoveTagCommandParser
+
+AddressBookParser -> RemoveTagCommandParser : parse("2")
+activate RemoveTagCommandParser
+
+RemoveTagCommandParser -> ParserUtil : parseTags("info sec")
+activate ParserUtil
+RemoveTagCommandParser -> ParserUtil : parseTags("cs2100, cs2107")
+create RemoveTagCommand
+ParserUtil -> RemoveTagCommand
+activate RemoveTagCommand
+
+RemoveTagCommand --> ParserUtil : t
+deactivate RemoveTagCommand
+ParserUtil --> RemoveTagCommandParser : t
+deactivate ParserUtil
+
+RemoveTagCommandParser --> AddressBookParser : t
+deactivate RemoveTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RemoveTagCommandParser -[hidden]-> AddressBookParser
+destroy RemoveTagCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> RemoveTagCommand : execute()
+activate RemoveTagCommand
+
+create Person
+RemoveTagCommand -> Person
+activate Person
+Person --> RemoveTagCommand : p1
+deactivate Person
+
+RemoveTagCommand -> RemoveTagCommand : remove matching tags from p1
+activate RemoveTagCommand
+RemoveTagCommand --> RemoveTagCommand : new_p1
+deactivate RemoveTagCommand
+
+RemoveTagCommand -> Model : setPerson(p1, new_p1)
+activate Model
+Model --> RemoveTagCommand
+deactivate Model
+
+create CommandResult
+RemoveTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RemoveTagCommand
+deactivate CommandResult
+
+RemoveTagCommand --> LogicManager : result
+deactivate RemoveTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

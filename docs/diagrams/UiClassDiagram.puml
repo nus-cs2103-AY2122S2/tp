@@ -59,9 +59,11 @@ UiManager -right-> Logic
 MainWindow -left-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
+EventListPanel -[hidden]left- PersonListPanel
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+EventCard -[hidden]down- PersonCard
 
 MainWindow -[hidden]-|> UiPart
 @enduml
