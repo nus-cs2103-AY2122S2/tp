@@ -11,11 +11,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.exceptions.IllegalValueException;
-import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
+import seedu.contax.model.person.Person;
 
 /**
  * An Immutable Schedule that is serializable to JSON format.
@@ -52,15 +52,15 @@ class JsonSerializableSchedule {
     /**
      * Converts this schedule into the model's {@code Schedule} object.
      *
-     * @param addressBook An up-to-date {@code AddressBook} address for looking up Persons associated with
-     *                    Appointments.
+     * @param personsList An up-to-date list of Persons from the address book for looking up Person objects
+     *                    associated with Appointments.
      * @throws IllegalValueException If there were any data constraints violated.
      */
-    public Schedule toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
+    public Schedule toModelType(List<Person> personsList) throws IllegalValueException {
         Schedule schedule = new Schedule();
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
             try {
-                Appointment appointment = jsonAdaptedAppointment.toModelType(addressBook);
+                Appointment appointment = jsonAdaptedAppointment.toModelType(personsList);
                 schedule.addAppointment(appointment);
             } catch (OverlappingAppointmentException ex) {
                 throw new IllegalValueException(MESSAGE_OVERLAPPING_APPOINTMENT);
