@@ -394,3 +394,9 @@
      -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.tag-list-heading {
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}

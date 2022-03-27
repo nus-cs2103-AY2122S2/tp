@@ -10,8 +10,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.ui.MainWindow;
-import seedu.address.ui.Profile;
 import seedu.address.ui.UiManager;
+import seedu.address.ui.general.Profile;
 
 /**
  * View the profile of a person identified using it's displayed index from the address book.
@@ -44,7 +44,9 @@ public class ProfileCommand extends Command {
         Person personToShowProfile = lastShownList.get(targetIndex.getZeroBased());
         Profile profile = new Profile(personToShowProfile);
         MainWindow mainWindow = UiManager.getMainWindow();
+        //set the general display to show the profile of the specified person
         mainWindow.getGeneralDisplay().setProfile(profile);
+        //highlight the person in person list panel
         mainWindow.getPersonListPanel().getPersonListView().getSelectionModel().select(targetIndex.getZeroBased());
 
         return new CommandResult(String.format(MESSAGE_DISPLAY_PROFILE_SUCCESS, personToShowProfile.getName()));

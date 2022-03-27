@@ -7,7 +7,9 @@ import java.util.List;
 
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
-
+import seedu.address.ui.MainWindow;
+import seedu.address.ui.UiManager;
+import seedu.address.ui.general.TagList;
 
 
 /**
@@ -31,6 +33,11 @@ public class ListTagCommand extends Command {
             result.append(" ").append(tag.getTagName());
         }
         result.append(" ]");
+
+        TagList tagList = new TagList(tags);
+        MainWindow mainWindow = UiManager.getMainWindow();
+        mainWindow.getGeneralDisplay().setTagList(tagList);
+
         return new CommandResult(result.toString());
     }
 }
