@@ -87,6 +87,8 @@ class PriceRangeTest {
         PriceRange pr2 = new PriceRange(50, 150);
         PriceRange pr3 = new PriceRange(101, 150);
         PriceRange pr4 = new PriceRange(44, 46);
+        PriceRange pr5 = new PriceRange(20, 40);
+        PriceRange pr6 = new PriceRange(10, 100);
 
         assertTrue(PriceRange.canMatchPrice(pr1, pr2)); //values from 50-100 are valid matches
         assertTrue(PriceRange.canMatchPrice(pr2, pr1)); //other way should work also
@@ -99,6 +101,9 @@ class PriceRangeTest {
 
         assertFalse(PriceRange.canMatchPrice(pr1, pr3));
         assertFalse(PriceRange.canMatchPrice(pr3, pr1));
+
+        assertTrue(PriceRange.canMatchPrice(pr5, pr6));
+        assertTrue(PriceRange.canMatchPrice(pr6, pr5));
     }
 
     @Test
