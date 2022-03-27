@@ -7,7 +7,7 @@ public class CommandBuilder {
     private SimpleStringProperty commandInput;
 
     /**
-     * Creates a {@code CommandBuilder} to display command information in {@Code Tableview}
+     * Creates a {@code CommandBuilder} to display command information in {@code Tableview}
      * @param commandTitle title of command
      * @param commandInput command to input
      */
