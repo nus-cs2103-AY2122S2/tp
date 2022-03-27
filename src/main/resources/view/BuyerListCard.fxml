@@ -40,10 +40,20 @@
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
             </children>
          </HBox>
-        <Label fx:id="propertyType" styleClass="cell_big_label"/>
-        <Label fx:id="propertyLocation" styleClass="cell_big_label"/>
-        <Label fx:id="propertyLowerPrice" styleClass="cell_big_label"/>
-        <Label fx:id="propertyUpperPrice" styleClass="cell_big_label"/>
+        <HBox>
+            <Label text="Type: "></Label>
+            <Label fx:id="propertyType" styleClass="cell_big_label"/>
+        </HBox>
+        <HBox>
+            <Label text="Location: "></Label>
+            <Label fx:id="propertyLocation" styleClass="cell_big_label"/>
+        </HBox>
+        <HBox>
+            <Label text="Price: "></Label>
+            <Label fx:id="propertyLowerPrice" styleClass="cell_big_label"/>
+            <Label text=" - "></Label>
+            <Label fx:id="propertyUpperPrice" styleClass="cell_big_label"/>
+        </HBox>
       <FlowPane fx:id="tags" />
          <HBox>
             <children>
