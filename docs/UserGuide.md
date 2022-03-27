@@ -121,8 +121,14 @@ Finds and lists TAs whose attribute field(s) contain(s) any of the given keyword
 
 Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 
-Note: `ATTRIBUTE_FIELD` can take on the following values
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the edit format:**<br>
+
+`ATTRIBUTE_FIELD` can take on the following values
 `course`, `email`, `name`, `phone`, `candidate`, `studentid`
+
+</div>
 
 * The keyword search is case-insensitive. e.g `hans` will match `Hans`
 * The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
@@ -138,15 +144,20 @@ Examples:
 * `find k/Computer Science f/course` returns TAs with the course field i.e. `computer science`
 * `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
 
-
 ### Sorting candidates by attribute field: `sort`
 
 Returns a list of TAs sorted by the specified attribute field.
 
 Format: `sort s/ATTRIBUTE_FIELD`
 
-Note: `ATTRIBUTE_FIELD` can take on the following values
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the edit format:**<br>
+
+`ATTRIBUTE_FIELD` can take on the following values
 `course`, `email`, `name`, `phone`, `candidate`, `studentid`
+
+</div>
 
 * The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
 * The search will return a list of all TAs sorted in ascending order
