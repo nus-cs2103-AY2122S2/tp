@@ -313,19 +313,11 @@ public class OnboardingWindow extends UiPart<Stage> {
             return;
         }
 
-        if (step == null) {
-            return;
-        }
-        String displayMessage = step.getDisplayMessage();
-        double messageHeight = step.getMessageHeight();
-        double messageWidth = step.getMessageWidth();
-        OnboardingStory.OverlayOption overlayOption = step.getOverlayOption();
-        OnboardingStory.HighlightOption highlightOption = step.getHighlightOption();
-
-        instructionLabel.setText(displayMessage);
-        instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
-        processOverlayOption(overlayOption);
-        processHighlightOption(highlightOption);
+        instructionLabel.setText(step.getDisplayMessage());
+        instructionLabel.setSize(step.getMessageHeight(), step.getMessageWidth(),
+                stage.heightProperty(), stage.widthProperty());
+        processOverlayOption(step.getOverlayOption());
+        processHighlightOption(step.getHighlightOption());
 
         if (step.getCommandInstruction() != null) {
             String errorMessage = step.getCommandInstruction().apply(model, commandBox);
@@ -339,12 +331,9 @@ public class OnboardingWindow extends UiPart<Stage> {
             instructionLabel.setText(step.getLabelInstruction().apply(model));
         }
 
-        if (step.getCommand() != null) {
-            if (enforceUserInput(step, step.isCommandCustom()) == 0) {
+        if (step.getCommand() != null && enforceUserInput(step, step.isCommandCustom()) == 0) {
                 return;
-            }
         }
-
         storyManager.stepFront();
     }
 }
