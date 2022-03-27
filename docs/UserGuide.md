@@ -14,7 +14,7 @@ later.">
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
   - [Listing all Patients: `view`](#listing-all-patients-view)
-  - [Deleting any Information: `delete`](#deleting-any-information-delete)
+  - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
   - [Adding Medical Information: `add t/medical`](#adding-medical-information-add-tmedical)
@@ -93,13 +93,13 @@ Shows a list of patients in MedBook.
 
 Format: `view`
 
-### Deleting any Information: `delete`
+### Deleting any Entry: `delete`
 
-Deletes a specified information (patient, contact, medical information,...) from MedBook.
+Deletes a specified entry (patient, contact, medical information,...) from MedBook.
 
 Format: `delete INDEX`
 
-* We can only delete the information only if the display panel is displaying the information.
+* We can only delete the entry only if the display panel is displaying the entry.
 * The index refers to the index number shown in the displayed list.
 * The index must be a positive integer 1, 2, 3, …​
 
@@ -137,7 +137,7 @@ Examples:
 
 ### Viewing Medical Information: `view t/medical`
 
-Displays medical information of a patient from MedBook. If no NRIC is specified, displays all medical information.
+Displays medical information of a patient from MedBook. If no NRIC is specified, displays all medical information entries.
 
 Format:  `view t/medical [i/NRIC]`
 
@@ -147,13 +147,13 @@ Examples:
 
 ### Editing Medical Information: `edit`
 
-Edits an existing medical information in MedBook when a list of medical information is being displayed.
+Edits an existing medical information entry in MedBook when a list of medical information entries is being displayed.
 
 Format:  `edit INDEX [i/NRIC] [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
 Examples:
-* `view t/medical` followed by `edit 1 i/S1234567L bt/B` updates NRIC and blood type of first medical information displayed on the screen.
+* `view t/medical` followed by `edit 1 i/S1234567L bt/B` updates NRIC and blood type of first medical information entry displayed on the screen.
 
 ### Adding Consultation Information: `add t/consultation`
 
@@ -221,15 +221,15 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | View Help | `help` |
 | Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
 | List all Patients | `view` |
-| Delete any Information | `delete INDEX` |
+| Delete any Entry | `delete INDEX` |
 | Add Contact Information | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
 | View Contact Information | `view t/contact i/NRIC` |
 | Add Medical Information | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
 | View Medical Information | `view t/medical [i/NRIC]` |
 | Edit Medical Information | `edit INDEX [i/NRIC] [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
-| Add Consultation Information | `` |
-| View Past Consultations | `` |
-| Add Prescription | `` |
-| View Prescription | `` |
-| Add Test Result | `` |
-| View Test Result| `` |
+| Add Consultation Information | `add t/consultation i/NRIC dt/DATE tm/TIME n/NOTES` |
+| View Past Consultations | `view t/consultation i/NRIC` |
+| Add Prescription | `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION` |
+| View Prescription | `view t/prescription i/NRIC` |
+| Add Test Result | `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT` |
+| View Test Result| `view t/test i/NRIC` |
