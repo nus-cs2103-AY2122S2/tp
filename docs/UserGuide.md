@@ -378,23 +378,23 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 
 ## Command summary
 
-| Action            | Format                                                                                                          | Examples                               |
-|-------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| **List**          | `list`                                                                                                          | `list`                                 |
-| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                                   | `add n/Bob p/87654321 e/bob@u.nus.edu` |
-| **Add Module**    | `addmodule INDEX m/MODULE`                                                                                      | `addmodule 4 m/CS2100`                 |
-| **Delete**        | `delete INDEX`                                                                                                  | `delete 3`                             |
-| **Delete Module** | `deletemodule INDEX m/MODULE [m/MODULE]...`                                                                     | `deletemodule 1 m/CS1231 m/CS2102`     |
-| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional              | `edit 1 n/Alice`                       |
-| **Clear**         | `clear`                                                                                                         | `clear`                                |
-| **Clear Modules** | `clearmodules INDEX`                                                                                            | `clearmodules 3`                       |
-| **Status**        | `status INDEX s/STATUS`                                                                                         | `status 2 s/favourite`                 |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                                  | `find James Jake`                      |
-| **Filter**        | `filter MODULE`                                                                                                 | `filter CS3230`                        |
-| **Sort**          | `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/status] [m/MODULE] [c/COMMENT]`  **brackets indicate optional | `sort n/asc p/ a/asc`                  |
-| **Undo**          | `undo`                                                                                                          | `undo`                                 |
-| **Redo**          | `redo`                                                                                                          | `redo`                                 |
-| **Copy**          | `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT] [f/FORMAT]`            | `copy 3 n/ e/ f/csv`                   |
-| **Add Comment**   | `comment INDEX c/COMMENT`                                                                                       | `comment 1 c/Good at math`             |
+| Action            | Format                                                                                               | Examples                               |
+|-------------------|------------------------------------------------------------------------------------------------------|----------------------------------------|
+| **List**          | `list`                                                                                               | `list`                                 |
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                        | `add n/Bob p/87654321 e/bob@u.nus.edu` |
+| **Add Module**    | `addmodule INDEX m/MODULE`                                                                           | `addmodule 4 m/CS2100`                 |
+| **Delete**        | `delete INDEX`                                                                                       | `delete 3`                             |
+| **Delete Module** | `deletemodule INDEX m/MODULE [m/MODULE]...`                                                          | `deletemodule 1 m/CS1231 m/CS2102`     |
+| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                | `edit 1 n/Alice`                       |
+| **Clear**         | `clear`                                                                                              | `clear`                                |
+| **Clear Modules** | `clearmodules INDEX`                                                                                 | `clearmodules 3`                       |
+| **Status**        | `status INDEX s/STATUS`                                                                              | `status 2 s/favourite`                 |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                       | `find James Jake`                      |
+| **Filter**        | `filter MODULE`                                                                                      | `filter CS3230`                        |
+| **Sort**          | `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/status] [m/MODULE] [c/COMMENT]`                    | `sort n/asc p/ a/asc`                  |
+| **Undo**          | `undo`                                                                                               | `undo`                                 |
+| **Redo**          | `redo`                                                                                               | `redo`                                 |
+| **Copy**          | `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT] [f/FORMAT]` | `copy 3 n/ e/ f/csv`                   |
+| **Add Comment**   | `comment INDEX c/COMMENT`                                                                            | `comment 1 c/Good at math`             |
 
 
