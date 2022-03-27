@@ -20,6 +20,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_RANGE_FROM = new Prefix("from/");
     public static final Prefix PREFIX_RANGE_TO = new Prefix("to/");
     public static final Prefix PREFIX_EQUALS = new Prefix("=/");
+    public static final Prefix PREFIX_START_WITH = new Prefix("start/");
+    public static final Prefix PREFIX_END_WITH = new Prefix("end/");
 
 
     /* Prefix definitions for Appointments */

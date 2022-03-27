@@ -1,8 +1,7 @@
 package seedu.contax.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -35,25 +34,30 @@ public class ChainCommandTest {
     @Test
     public void equals() {
         ChainCommand testChainCommand = new ChainCommand(List.of(new ListPersonCommand()));
-        ChainCommand testChainCommand2 = new ChainCommand(new ArrayList<Command>());
+        Person editedPerson = new PersonBuilder().build();
+        EditPersonCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditPersonCommand editPersonCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
+        ChainCommand testChainCommand2 = new ChainCommand(List.of(editPersonCommand));
+        ChainCommand testChainCommand3 = new ChainCommand(new ArrayList<>());
 
         // same object -> returns true
-        assertTrue(testChainCommand.equals(testChainCommand));
+        assertEquals(testChainCommand, testChainCommand);
 
         // same values -> returns true
 
         ChainCommand expectedChainCommandCopy =
                 new ChainCommand(List.of(new ListPersonCommand()));
-        assertTrue(testChainCommand.equals(expectedChainCommandCopy));
+        assertEquals(testChainCommand, expectedChainCommandCopy);
 
         // different types -> returns false
-        assertFalse(testChainCommand.equals(1));
+        assertNotEquals(testChainCommand, editedPerson);
 
         // null -> returns false
-        assertFalse(testChainCommand.equals(null));
+        assertNotEquals(null, testChainCommand);
 
         // different command -> returns false
-        assertFalse(testChainCommand.equals(testChainCommand2));
+        assertNotEquals(testChainCommand, testChainCommand2);
+        assertNotEquals(testChainCommand, testChainCommand3);
     }
 
     @Test

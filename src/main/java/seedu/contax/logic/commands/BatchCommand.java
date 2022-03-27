@@ -8,7 +8,9 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
@@ -20,11 +22,18 @@ import seedu.contax.model.util.SearchType;
 
 
 
-
 /**
- * Batch edit or delete a person identified using base on string =/ provided.
+ * Batch edits or deletes a person identified using base on string =/ provided.
  */
 public class BatchCommand extends Command {
+
+    public enum BatchType {
+        EQUALS,
+        START,
+        END,
+        UNDEFINED
+    }
+
     public static final String COMMAND_WORD = "batch";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in batch** \n"
@@ -37,33 +46,40 @@ public class BatchCommand extends Command {
             + PREFIX_SEARCH_TYPE + "phone "
             + PREFIX_EQUALS + "123 `";
 
+    private final Logger logger = LogsCenter.getLogger(BatchCommand.class);
+
     private final String commandInput;
     private final SearchType searchType;
-    private final String userInput;
+    private final String userValue;
+    private final BatchType batchType;
 
     /**
      * Creates an BatchCommand base on specified {@code commandInput} {@code searchType} and {@code userInput}.
      *
      * @param commandInput              details to word of command
      * @param searchType                search type of field apply matcher
-     * @param userInput                 regex provided by user
+     * @param userValue                 value provided by user
+     * @param batchType                 match type by user
      */
-    public BatchCommand(String commandInput, SearchType searchType, String userInput) {
+    public BatchCommand(String commandInput, SearchType searchType,
+                        String userValue, BatchType batchType) {
         requireNonNull(commandInput);
         requireNonNull(searchType);
-        requireNonNull(userInput);
+
         this.commandInput = commandInput;
         this.searchType = searchType;
-        this.userInput = userInput.trim();
+        this.userValue = userValue;
+        this.batchType = batchType;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Index> indexList = matchInputStringToIndex(model, searchType, userInput);
+
+        List<Index> indexList = matchInputStringToIndex(model, searchType, userValue, batchType);
         if (indexList.size() == 0) {
             return new CommandResult(COMMAND_WORD
-                    + ": No result matching \"" + userInput + "\"");
+                    + ": No result matching \"" + userValue + "\"");
         }
         List<CommandResult> commandResultList = new ArrayList<>();
         for (Index index: indexList) {
@@ -71,6 +87,7 @@ public class BatchCommand extends Command {
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(
                         commandInput, Integer.toString(index.getOneBased()));
+                logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
@@ -84,7 +101,17 @@ public class BatchCommand extends Command {
         return new CommandResult(resultOutput.toString());
     }
 
-    private List<Index> matchInputStringToIndex(Model model, SearchType searchType, String userInput)
+    /**
+     * Matches base on user input value and return the index list that matched the condition given.
+     *
+     * @param model         model passed from execution
+     * @param searchType    the field that user search to compare for
+     * @param userValue     user input value
+     * @param batchType     equals, start or end with
+     * @return              list of index that match given condition
+     */
+    private List<Index> matchInputStringToIndex(
+            Model model, SearchType searchType, String userValue, BatchType batchType)
             throws CommandException {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
@@ -107,10 +134,28 @@ public class BatchCommand extends Command {
                 targetField = person.getName().toString();
                 break;
             }
-            if (!targetField.isEmpty() && targetField.equals(userInput)) {
-                indexList.add(index);
+            if (!targetField.isEmpty()) {
+                switch (batchType) {
+                case EQUALS:
+                    if (targetField.equals(userValue)) {
+                        indexList.add(index);
+                    }
+                    break;
+                case START:
+                    if (targetField.startsWith(userValue)) {
+                        indexList.add(index);
+                    }
+                    break;
+                case END:
+                    if (targetField.endsWith(userValue)) {
+                        indexList.add(index);
+                    }
+                    break;
+                default:
+                    throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            BatchCommand.MESSAGE_USAGE));
+                }
             }
-
         }
         return indexList;
     }
@@ -121,6 +166,7 @@ public class BatchCommand extends Command {
                 || (other instanceof BatchCommand // instanceof handles nulls
                 && commandInput.equals(((BatchCommand) other).commandInput)
                 && searchType.equals(((BatchCommand) other).searchType)
-                && userInput.equals(((BatchCommand) other).userInput));
+                && userValue.equals(((BatchCommand) other).userValue)
+                && batchType.equals(((BatchCommand) other).batchType));
     }
 }
