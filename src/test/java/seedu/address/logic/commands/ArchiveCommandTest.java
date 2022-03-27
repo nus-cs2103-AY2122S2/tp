@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -15,22 +16,29 @@ import seedu.address.model.UserPrefs;
 
 public class ArchiveCommandTest {
     private Model model;
-    private Model expectedModel;
-    private Path testFilePath;
-    private Path testDirectoryPath;
+    private Path validTestFilePath;
+    private Path invalidTestFilePath;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        testFilePath = Paths.get("src\\test\\data\\ArchiveFilesTest\\testAddressBook.json");
-        model.setAddressBookFilePath(testFilePath);
-        expectedModel = model;
+        validTestFilePath = Paths.get("src\\test\\data\\ArchiveFilesTest\\testAddressBook.json");
+        invalidTestFilePath = Paths.get("src\\test\\data\\ArchiveFilesTest\\noSuchAddressBook.json");
+        model.setAddressBookFilePath(validTestFilePath);
     }
 
     @Test
-    public void execute_validDirectoryPath() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.setAddressBookFilePath(testFilePath);
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, model);
+    public void execute_archiveValidFile_archiveSuccessful() {
+        Model expectedModel;
+        model.setAddressBookFilePath(validTestFilePath);
+        expectedModel = model;
+        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
     }
+
+    @Test
+    public void execute_archiveInvalidFile_archiveUnsuccessful() {
+        model.setAddressBookFilePath(invalidTestFilePath);
+        assertCommandFailure(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_FAILURE);
+    }
+
 }
