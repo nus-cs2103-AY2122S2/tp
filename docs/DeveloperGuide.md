@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case 03: Editing position**
 
 **MSS**
-1. Use requests to list positions
+1. User requests to list positions
 2. HireLah shows a list of positions
 3. User chooses to edit a position based on the index from the visible list, and provide the fields to edit.
 4. HireLah refreshes the list of positions to display the newly edited position.
