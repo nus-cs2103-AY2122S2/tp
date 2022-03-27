@@ -17,6 +17,9 @@ src/main/resources/docs/
 # Test sandbox files
 src/test/data/sandbox/
 
+# Archive test files
+src/test/data/ArchiveFilesTest/archive
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/

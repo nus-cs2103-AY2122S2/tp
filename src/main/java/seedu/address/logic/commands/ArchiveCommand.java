@@ -60,6 +60,9 @@ public class ArchiveCommand extends Command {
         // to get the directory path of the address book file path
         for (int i = 0; i < splitAddressBookFilePath.length - 1; i++) {
             addressBookFileDirectory.append(splitAddressBookFilePath[i]);
+            if (i + 1 != splitAddressBookFilePath.length) {
+                addressBookFileDirectory.append("\\");
+            }
         }
 
         // path for the archived address book file
