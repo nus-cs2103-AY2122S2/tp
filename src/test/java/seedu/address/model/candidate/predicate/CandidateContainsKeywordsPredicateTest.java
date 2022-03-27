@@ -78,8 +78,24 @@ public class CandidateContainsKeywordsPredicateTest {
         predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("moN", "TuE", "WED"));
         assertTrue(predicate.test(candidate));
 
-        // Availability: Multiple keywords
+        // Seniority
         predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("com1"));
+        assertTrue(predicate.test(candidate));
+
+        // Phone
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("76543"));
+        assertTrue(predicate.test(candidate));
+
+        // Email
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("alice@email."));
+        assertTrue(predicate.test(candidate));
+
+        // Course
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("business"));
+        assertTrue(predicate.test(candidate));
+
+        // Student ID
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("444"));
         assertTrue(predicate.test(candidate));
     }
 
