@@ -57,7 +57,7 @@ public class CommentCommand extends Command {
 
         Show showToEdit = lastShownList.get(index.getZeroBased());
         Show editedShow = new Show(showToEdit.getName(), showToEdit.getStatus(),
-                showToEdit.getTags(), comment);
+                showToEdit.getTags(), showToEdit.getComment(), showToEdit.getRating());
 
         model.setShow(showToEdit, editedShow);
         model.updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
