@@ -3,6 +3,7 @@ package seedu.contax.ui.appointment;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,6 +21,7 @@ public class AppointmentSlotCard extends UiPart<Region> {
     private static final String FXML = "AppointmentSlotListCard.fxml";
     private static final String DATE_FORMAT = "dd LLL yyyy";
     private static final String TIME_FORMAT = "hh:mm a";
+    private static final String PHRASE_NO_UPPER_LIMIT = "Forever";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
@@ -60,8 +62,14 @@ public class AppointmentSlotCard extends UiPart<Region> {
         LocalDateTime endDateTime = appointmentSlotModel.getEndDateTime();
         startDate.setText(startDateTime.format(DATE_FORMATTER));
         startTime.setText(startDateTime.format(TIME_FORMATTER));
-        endDate.setText(endDateTime.format(DATE_FORMATTER));
-        endTime.setText(endDateTime.format(TIME_FORMATTER));
+        if (endDateTime.equals(LocalDate.MAX.atTime(23, 59))) {
+            endDate.setText(PHRASE_NO_UPPER_LIMIT);
+            endTime.setText("");
+        } else {
+            endDate.setText(endDateTime.format(DATE_FORMATTER));
+            endTime.setText(endDateTime.format(TIME_FORMATTER));
+        }
+
 
         long minutes = Duration.between(startDateTime, endDateTime).toMinutes();
         duration.setText(getReadableDuration(minutes));
