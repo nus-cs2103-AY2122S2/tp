@@ -125,6 +125,7 @@ A client can have many fields & tags, including both optional and compulsory one
 | [List Transaction](#list-all-transactions-listtransaction)    | `listTransaction`                                                                                                                                                     |
 | [Find Transaction](#find-clients-transaction-findtransaction) | `findTransaction INDEX`                                                                                                                                               |
 | [Delete Transaction](#delete-transaction-deletetransaction)   | `deleteTransaction INDEX_TRANSACTION`                                                                                                                                 |
+ | [Add Membership](#add-membership-addmembership)               | `addMembership INDEX m/MEMBERSHIP_NAME [d/DATE]`                                                                                                                      |
  | [Exit](#exit-program-exit)                                    | `exit`                                                                                                                                                                |
 
 ### Getting Help (`help`)
@@ -367,6 +368,27 @@ Format: `deleteTransaction INDEX_TRANSACTION`
 Examples:
 * `listTransaction 2`
 * `find Bob | listTransaction 1` will add the transaction to the first client that has Bob
+  in its' attributes.
+
+### Add Membership (`addMembership`)
+
+Adds a membership to a specified user.
+
+Format: `addMembership INDEX m/MembershipName [d/Date]`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Adds a membership to the specified `INDEX`.
+* The index refers to the user at the index number displayed.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The membership name has to be an alphanumeric string (no symbols, only number and letters).
+* The date has to be in the format 'YYYY-MM-DD'
+
+</div>
+
+Examples:
+* `addMembership 1 m/Glee Club d/2022-02-02`
+* `find Bob | addMembership 1 m/Glee Club` will add the membership to the first client that has Bob
   in its' attributes.
 
 ### Undo Last Command (`undo`)
