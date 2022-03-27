@@ -200,8 +200,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String date} and @{String time} into a {@code StartDateTime}.
-     * Parses the date according to the format dd-MM-yyyy.
-     * Parses the time according to the format HH:mm.
+     * Parses the date and time using parsers in {@code DateUtil}.
      *
      * @throws ParseException if the given {@code date} or {@code time} is invalid.
      */

@@ -18,14 +18,17 @@ public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "deleteappointment";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD
-            + "`: **Deletes the appointment identified by the index number used in the displayed appointment list.**\n"
-            + "Parameters: *INDEX (must be a positive integer)*\n"
+            + "`: **Deletes the appointment identified by the index number used in the displayed appointment list.**"
+            + "\nParameters: *INDEX (must be a positive integer)*\n"
             + "Example: `" + COMMAND_WORD + " 1`";
 
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted Appointment: %1$s";
 
     private final Index targetIndex;
 
+    /**
+     * Creates an DeleteAppointmentCommand to delete the {@code Appointment} at {@code targetIndex}.
+     */
     public DeleteAppointmentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -41,7 +44,7 @@ public class DeleteAppointmentCommand extends Command {
 
         Appointment appointmentToDelete = appointmentList.get(targetIndex.getZeroBased());
         model.deleteAppointment(appointmentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, appointmentToDelete));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToDelete));
     }
 
     @Override

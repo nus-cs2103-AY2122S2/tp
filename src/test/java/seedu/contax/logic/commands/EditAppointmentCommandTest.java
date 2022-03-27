@@ -121,7 +121,7 @@ public class EditAppointmentCommandTest {
                 .build();
         EditAppointmentCommand editCommand = new EditAppointmentCommand(Index.fromOneBased(2), descriptor);
 
-        assertCommandFailure(editCommand, model, EditAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_APPOINTMENTS_OVERLAPPING);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class EditAppointmentCommandTest {
                 .build();
         EditAppointmentCommand editCommand = new EditAppointmentCommand(Index.fromOneBased(2), descriptor);
 
-        assertCommandFailure(editCommand, model, EditAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_APPOINTMENTS_OVERLAPPING);
     }
 
     @Test

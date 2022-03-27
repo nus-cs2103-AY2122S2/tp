@@ -35,8 +35,8 @@ public class EditAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Edits the details of the appointment "
             + "identified by the index number used in the displayed appointment list. "
-            + "Existing values will be overwritten by the input values.**\n"
-            + "Parameters: *INDEX (must be a positive integer) "
+            + "Existing values will be overwritten by the input values.**"
+            + "\nParameters: *INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "TIME] "
@@ -49,8 +49,6 @@ public class EditAppointmentCommand extends Command {
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "No fields supplied, nothing was changed.";
-    public static final String MESSAGE_OVERLAPPING_APPOINTMENT = "The new appointment will overlap with"
-            + " another appointment in the schedule!";
 
     private final Index index;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
@@ -78,14 +76,13 @@ public class EditAppointmentCommand extends Command {
         if (index.getZeroBased() >= appointmentsList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
         }
-
         if (!editAppointmentDescriptor.isAnyFieldEdited()) {
             return new CommandResult(MESSAGE_NOT_EDITED);
         }
 
-        boolean isPersonIndexInvalid = editAppointmentDescriptor.getPersonIndex()
-                .map(index -> index.getZeroBased() >= personsList.size()).orElse(false);
-        if (isPersonIndexInvalid) {
+        boolean isPersonIndexValid = editAppointmentDescriptor.getPersonIndex()
+                .map(index -> index.getZeroBased() < personsList.size()).orElse(true);
+        if (!isPersonIndexValid) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -96,7 +93,7 @@ public class EditAppointmentCommand extends Command {
         try {
             model.setAppointment(appointmentToEdit, editedAppointment);
         } catch (OverlappingAppointmentException ex) {
-            throw new CommandException(MESSAGE_OVERLAPPING_APPOINTMENT);
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_OVERLAPPING);
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment));
@@ -171,7 +168,7 @@ public class EditAppointmentCommand extends Command {
         }
 
         /**
-         * Copy constructor.
+         * Creates a new instance with exactly the same attributes as {@code toCopy}.
          */
         public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
             setName(toCopy.name);

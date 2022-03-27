@@ -25,7 +25,7 @@ public class AddAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "addappointment";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Adds an appointment to the schedule.** "
-            + "Parameters: *"
+            + "\nParameters: *"
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
@@ -39,14 +39,12 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_PERSON + "1`";
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
-    public static final String MESSAGE_OVERLAPPING_APPOINTMENT = "This appointment will overlap with an"
-            + "existing appointment";
 
     private final Appointment toAdd;
     private final Index personIndex;
 
     /**
-     * Creates an AddAppointmentCommand to add the specified {@code Appointment}
+     * Creates an AddAppointmentCommand to add the specified {@code Appointment}.
      */
     public AddAppointmentCommand(Appointment appointment, Index personIndex) {
         requireNonNull(appointment);
@@ -71,7 +69,7 @@ public class AddAppointmentCommand extends Command {
         }
 
         if (model.hasOverlappingAppointment(updatedAppointment)) {
-            throw new CommandException(MESSAGE_OVERLAPPING_APPOINTMENT);
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_OVERLAPPING);
         }
 
         model.addAppointment(updatedAppointment);

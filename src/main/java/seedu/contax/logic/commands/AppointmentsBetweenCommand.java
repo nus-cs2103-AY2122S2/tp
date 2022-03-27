@@ -46,8 +46,8 @@ public class AppointmentsBetweenCommand extends Command {
     /**
      * Constructs an {@code AppointmentsBetweenCommand} object.
      *
-     * @param rangeStart
-     * @param rangeEnd
+     * @param rangeStart The start of the date-time range to search.
+     * @param rangeEnd The end of the date-time range to search.
      */
     public AppointmentsBetweenCommand(LocalDateTime rangeStart, LocalDateTime rangeEnd) {
         requireNonNull(rangeStart);

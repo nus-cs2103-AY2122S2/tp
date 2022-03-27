@@ -344,6 +344,8 @@ public class DisjointAppointmentListTest {
         refList.add(appointment2);
 
         List<TimeRange> expectedList = List.of(new TimeRange(exactRangeStart, exactRangeEnd));
+        assertEquals(expectedList, new DisjointAppointmentList()
+                .findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 1));
 
         assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 120));
         assertEquals(expectedList, refList.findAvailableSlotsInRange(exactRangeStart, exactRangeEnd, 60));
