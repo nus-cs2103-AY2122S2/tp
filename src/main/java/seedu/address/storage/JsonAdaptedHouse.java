@@ -39,6 +39,6 @@ public class JsonAdaptedHouse {
         if (houseType.equals("")) {
             return new House(HouseType.NULLHOUSETYPE, "");
         }
-        return new House(HouseType.valueOf(houseType.toUpperCase()), location);
+        return new House(HouseType.getHouseType(houseType), location);
     }
 }

@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalSellers.BOB;
 import static seedu.address.testutil.TypicalSellers.YUQI;
 
 import org.junit.jupiter.api.Test;
-
+import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.PriceRange;
@@ -101,9 +101,9 @@ public class SellerTest {
         House h2 = new House(ht2, location2);
         House h3 = new House(ht3, location3);
 
-        String a1 = "Serangoon Avenue 3 Block 201";
-        String a2 = "Rosyth Road 546208";
-        String a3 = "61 Bishan Street 21";
+        Address a1 = new Address("Serangoon Avenue 3 Block 201");
+        Address a2 = new Address("Rosyth Road 546208");
+        Address a3 = new Address("61 Bishan Street 21");
 
         pr1 = new PriceRange(100000, 200000);
         pr2 = new PriceRange(200000, 300000);
@@ -133,9 +133,9 @@ public class SellerTest {
         House h2 = new House(ht2, location2);
         House h3 = new House(ht3, location3);
 
-        String a1 = "Serangoon Avenue 3 Block 201";
-        String a2 = "Rosyth Road 546208";
-        String a3 = "61 Bishan Street 21";
+        Address a1 = new Address("Serangoon Avenue 3 Block 201");
+        Address a2 = new Address("Rosyth Road 546208");
+        Address a3 = new Address("61 Bishan Street 21");
 
         pr1 = new PriceRange(100000, 200000);
         pr2 = new PriceRange(200000, 300000);

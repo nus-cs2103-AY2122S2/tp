@@ -36,7 +36,7 @@ public enum HouseType {
             return "Colonia";
         }
     },
-    HDB_FLAT("hdb, hdb_flat") {
+    HDB_FLAT("hdb", "hdb_flat") {
         @Override
         public String toString() {
             return "HDB Flat";
@@ -54,10 +54,10 @@ public enum HouseType {
             return "Mansion";
         }
     },
-    NULLHOUSETYPE("Nullhouse") {
+    NULLHOUSETYPE("nullhouse") {
         @Override
         public String toString() {
-            return "";
+            return "Nullhouse";
         }
     };
 

@@ -136,8 +136,8 @@ public class ParserUtil {
      */
     public static HouseType parseHouseType(String houseType) throws ParseException {
         requireNonNull(houseType);
-        String trimmedAppointment = houseType.trim();
-        if (!HouseType.isValidHouseType(houseType)) {
+        String trimmedHouseType = houseType.trim();
+        if (!HouseType.isValidHouseType(trimmedHouseType)) {
             throw new ParseException(HouseType.MESSAGE_CONSTRAINTS);
         }
         return HouseType.getHouseType(houseType);

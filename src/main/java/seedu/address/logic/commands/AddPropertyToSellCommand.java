@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE_RANGE;
 
@@ -29,11 +30,13 @@ public class AddPropertyToSellCommand extends Command {
             + PREFIX_HOUSE_TYPE + "HOUSE TYPE "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_PRICE_RANGE + "PRICE RANGE "
-            + "Must include: index h/ a/ pr/ \n"
+            + PREFIX_LOCATION + "LOCATION"
+            + "Must include: index h/ a/ pr/ l/ \n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_HOUSE_TYPE + "HDB "
             + PREFIX_ADDRESS + "Blk 123, Serangoon Ave 1 #09-369 "
-            + PREFIX_PRICE_RANGE + "400000,500000 ";
+            + PREFIX_PRICE_RANGE + "400000,500000 "
+            + PREFIX_LOCATION + "Serangoon";
 
     public static final String MESSAGE_SUCCESS = "New property added for seller: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "The seller already has this property";

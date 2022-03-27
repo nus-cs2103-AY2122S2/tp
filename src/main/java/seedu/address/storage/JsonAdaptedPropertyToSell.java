@@ -57,7 +57,7 @@ class JsonAdaptedPropertyToSell {
         return priceRange.toModelType();
     }
 
-    public Address getAddress() throws IllegalValueException {
+    public Address getAddress() {
         return new Address(address);
     }
 
