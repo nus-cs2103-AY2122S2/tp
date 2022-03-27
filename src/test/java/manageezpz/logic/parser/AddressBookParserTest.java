@@ -75,10 +75,10 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
                 FindTaskCommand.COMMAND_WORD
-                        + " " + PREFIX_TASK.toString() + " " + PREFIX_DESCRIPTION
+                        + " " + PREFIX_DESCRIPTION
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindTaskCommand(
-                new TaskMultiplePredicate(PREFIX_TASK, keywords, null, null, null, null)),
+                new TaskMultiplePredicate(null, keywords, null, null, null, null)),
                 command);
     }
 

@@ -47,7 +47,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      */
     @Override
     public boolean test(Task task) {
-        boolean hasTaskType = !taskType.equals(PREFIX_TASK) ? checkIfHasSpecificTaskType(task, taskType) : true;
+        boolean hasTaskType = taskType != null ? checkIfHasSpecificTaskType(task, taskType) : true;
         boolean hasKeyword = description != null ? checkIfHasKeywords(task, description) : true;
         boolean hasDate = date != null ? checkIfHasDate(task, date) : true;
         boolean hasPriority = priority != null ? checkIfHasPriority(task, priority) : true;
@@ -109,7 +109,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
             return true;
         } else if (obj instanceof TaskMultiplePredicate) {
             TaskMultiplePredicate pre = (TaskMultiplePredicate) obj;
-            boolean isSameTaskType = pre.taskType.equals(taskType);
+            boolean isSameTaskType = isSameTaskType(pre.taskType);
             boolean isSameDescription = isSameDescription(pre.description);
             boolean isSameDate = isSameDate(pre.date);
             boolean isSamePriority = isSamePriority(pre.priority);
@@ -120,6 +120,13 @@ public class TaskMultiplePredicate implements Predicate<Task> {
                     && isSameDescription && isSameDate && isSamePriority && isSameAssignee && isSameIsMarked;
         }
         return false;
+    }
+
+    private boolean isSameTaskType(Prefix taskType) {
+        if (taskType != null) {
+            return taskType.equals(this.taskType);
+        }
+        return this.taskType == null;
     }
 
     private boolean isSameDescription(List<String> description) {

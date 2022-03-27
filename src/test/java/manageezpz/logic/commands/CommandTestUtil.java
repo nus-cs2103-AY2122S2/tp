@@ -143,7 +143,7 @@ public class CommandTestUtil {
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getDescription().toString().split("\\s+");
         TaskMultiplePredicate predicate = new TaskMultiplePredicate(
-                PREFIX_TASK,
+                null,
                 Arrays.asList(splitName[0]),
                 null,
                 null,

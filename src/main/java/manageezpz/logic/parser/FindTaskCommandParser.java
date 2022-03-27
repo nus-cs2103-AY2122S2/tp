@@ -19,12 +19,13 @@ import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
+import manageezpz.model.task.Todo;
 
 /**
  * Subclass of FindCommandParser which check if the options are valid for finding tasks.
  */
 class FindTaskCommandParser implements Parser<FindTaskCommand> {
-    private static final Prefix[] TASK_TYPES = {PREFIX_TASK, PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
+    private static final Prefix[] TASK_TYPES = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
     private static final Prefix[] TASK_PROPERTIES = {PREFIX_DATE, PREFIX_DESCRIPTION, PREFIX_PRIORITY,
         PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
 
@@ -44,9 +45,7 @@ class FindTaskCommandParser implements Parser<FindTaskCommand> {
         String assignee = getAssignee(argMultiMapProperties);
         Boolean isMarked = getIsMarked(argMultiMapProperties);
 
-        if (taskType.equals(PREFIX_TODO) && argMultiMapProperties.isPrefixExist(PREFIX_DATE)) {
-            addErrorMessage(FindTaskCommand.TODO_AND_DATE_OPTION_TOGETHER);
-        }
+        checkIfTodoAndDateTogether(argMultiMapProperties, taskType);
 
         if (hasError) {
             errorMessage = errorMessage + FindTaskCommand.MESSAGE_USAGE;
@@ -57,11 +56,16 @@ class FindTaskCommandParser implements Parser<FindTaskCommand> {
         }
     }
 
+    private void checkIfTodoAndDateTogether(ArgumentMultimap argMultiMapProperties, Prefix taskType) {
+        if (PREFIX_TODO.equals(taskType) && argMultiMapProperties.isPrefixExist(PREFIX_DATE)) {
+            addErrorMessage(FindTaskCommand.TODO_AND_DATE_OPTION_TOGETHER);
+        }
+    }
+
     private Prefix getPrefix(ArgumentMultimap argMultiMap) {
         Prefix currentPrefix = Arrays.stream(TASK_TYPES)
                 .filter(prefix -> argMultiMap.isPrefixExist(prefix))
-                .findFirst().orElseGet(null);
-        assert currentPrefix != null : "getPrefix should not return a null";
+                .findFirst().orElse(null);
         return currentPrefix;
     }
 

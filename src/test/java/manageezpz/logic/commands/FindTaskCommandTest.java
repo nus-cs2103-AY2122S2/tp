@@ -57,7 +57,7 @@ class FindTaskCommandTest {
 
     @Test
     void findAllTasks() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(PREFIX_TASK, null, null,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null, null, null,
                 null, null, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW,
@@ -70,7 +70,7 @@ class FindTaskCommandTest {
     @Test
     void findTaskWithDescription() {
         List<String> keywords = List.of("Book");
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(PREFIX_TASK, keywords, null, null,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null, keywords, null, null,
                 null, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW,
