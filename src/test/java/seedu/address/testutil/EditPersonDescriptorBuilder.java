@@ -84,13 +84,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Sets the {@code tags} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(Pair<String, Priority>... tags) {
-        ArrayList<Tag> tagSet = new ArrayList<>(Stream.of(tags).map(x -> new Tag(x.getKey(), x.getValue()))
-                .collect(Collectors.toList()));
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withTags(ArrayList<Tag> tags) {
+        descriptor.setTags(tags);
         return this;
     }
 

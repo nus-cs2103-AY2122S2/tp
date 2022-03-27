@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Priority;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -39,15 +40,10 @@ public class CommandTestUtil {
     public static final String VALID_INSURANCE_PACKAGE_BOB = "Silver Pro";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final Pair<String, Priority> VALID_TAG_HUSBAND = new Pair<>("call husband for payment",
-            Priority.PRIORITY_2);
-    public static final String VALID_TAG_NAME_HUSBAND = VALID_TAG_HUSBAND.getKey();
-    public static final Priority VALID_TAG_PRIORITY_HUSBAND = VALID_TAG_HUSBAND.getValue();
-    public static final String VALID_TAG_COMMAND_HUSBAND = VALID_TAG_NAME_HUSBAND + " :p2"; // change when needed
-    public static final Pair<String, Priority> VALID_TAG_FRIEND = new Pair<>("personal friend", null);
-    public static final String VALID_TAG_NAME_FRIEND = VALID_TAG_FRIEND.getKey();
-    public static final Priority VALID_TAG_PRIORITY_FRIEND = VALID_TAG_FRIEND.getValue();
-    public static final String VALID_TAG_COMMAND_FRIEND = VALID_TAG_NAME_FRIEND;
+    public static final ArrayList<Tag> VALID_TAG_HUSBAND = new ArrayList<Tag>(Arrays.asList(new Tag("Husband", Priority.PRIORITY_3)));
+    public static final String VALID_TAG_COMMAND_HUSBAND = "Husband :p3"; // change when needed
+    public static final ArrayList<Tag> VALID_TAG_FRIEND = new ArrayList<Tag>(Arrays.asList(new Tag("Friend", Priority.PRIORITY_4)));
+    public static final String VALID_TAG_COMMAND_FRIEND = "Friend :p4";
 
     public static final String NAME_FIND_ALICE_BOB = " " + PREFIX_NAME + "Alice Bob";
     public static final String NAME_FIND_ALICE_BOB_WHITESPACE = " " + PREFIX_NAME + "  \n Alice \n \t Bob  \t";
@@ -93,7 +89,7 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withInsurancePackage(VALID_INSURANCE_PACKAGE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
     }
 
     /**

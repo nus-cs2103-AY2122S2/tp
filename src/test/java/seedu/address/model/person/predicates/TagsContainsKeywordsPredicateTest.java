@@ -39,6 +39,7 @@ public class TagsContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
+    /*
     @Test
     public void test_tagsContainsKeywords_returnsTrue() {
         // One keyword
@@ -62,6 +63,7 @@ public class TagsContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withTags(new Pair<>("Friends", null),
                 new Pair<>("School", null)).build()));
     }
+    
 
     @Test
     public void test_tagsDoesNotContainKeywords_returnsFalse() {
@@ -80,4 +82,5 @@ public class TagsContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").withTags(new Pair<>("Church", null)).build()));
     }
+    */
 }

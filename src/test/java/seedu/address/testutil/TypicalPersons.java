@@ -21,6 +21,7 @@ import javafx.util.Pair;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Priority;
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -30,42 +31,49 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withInsurancePackage("Females-Only Golden Premium")
-            .withTags(new Pair<>("friends with Benson", null)).build();
+            .withTags(new ArrayList<Tag>(Arrays.asList(new Tag("Friends with Benson", Priority.PRIORITY_4)))).build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withInsurancePackage("Pro Silver Plus")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags(new Pair<>("owes money", Priority.PRIORITY_1), new Pair<>("friends with Alice", null)).build();
+            .withTags(new ArrayList<Tag>(Arrays.asList(new Tag("Friends with Alice", Priority.PRIORITY_4),
+                        new Tag("owes money", Priority.PRIORITY_3)))).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withInsurancePackage("Red Basic 1").build();
+            .withInsurancePackage("Red Basic 1")
+            .withTags(new ArrayList<Tag>()).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
-            .withTags(new Pair<>("update about new contract", Priority.PRIORITY_3))
-            .withInsurancePackage("Basic BB").build();
+            .withInsurancePackage("Basic BB")
+            .withTags(new ArrayList<Tag>(Arrays.asList(new Tag("update about new contract", Priority.PRIORITY_1)))).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withInsurancePackage("Life Premium X").build();
+            .withInsurancePackage("Life Premium X")
+            .withTags(new ArrayList<Tag>()).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withInsurancePackage("Lvl 5 Apple Guarantee").build();
+            .withInsurancePackage("Lvl 5 Apple Guarantee")
+            .withTags(new ArrayList<Tag>()).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
-            .withInsurancePackage("Poor Man's Fire Insurance").build();
+            .withInsurancePackage("Poor Man's Fire Insurance")
+            .withTags(new ArrayList<Tag>()).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india")
-            .withInsurancePackage("Bee Hoon Insurance").build();
+            .withInsurancePackage("Bee Hoon Insurance")
+            .withTags(new ArrayList<Tag>()).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
-            .withInsurancePackage("Rainbow").build();
+            .withInsurancePackage("Rainbow")
+            .withTags(new ArrayList<Tag>()).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
             .withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
             .withInsurancePackage(VALID_INSURANCE_PACKAGE_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
