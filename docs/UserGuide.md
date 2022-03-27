@@ -78,6 +78,7 @@ Scenario:
 
 
 As seen in the figure, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+
 ### Adding a contact: `add`
 Add a student with relevant details into Tracey.
 
@@ -87,22 +88,23 @@ Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 * Phone Number, email and matriculation number must be **unique** to each student
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
 * Tracey will acknowledge that the student has been added
-* Tags such as faculty and covid status must be a valid pre-defined constant in its respective enumeration class
+* Tags for faculty and covid status need to be specific to the list defined below (refer to Pre-defined constants).
+* If the inputted tag is not one of those defined in the **Pre-defined constants** as described in Figure 2, there will be an error and the user will have to input the details again. 
 
 Examples of usage:
 * `add n/Melvin f/SOC cs/ Negative`
 * `add e/student69@u.nus.edu n/ Martin`
 
-Possible tags:
+
 | **Tag** | **Meaning** | **Pre-defined constants** |
-| - | - | - |
-| `n/`  | Name | - |
-| `p/` | Phone Number | - |
-| `e/` | Email | - |
-| `a/` | Address | - |
-| `f/` | Faculty |  `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS` |
-| `mc/` | Matriculation Number | - |
-| `cs`/ | Covid Status | Positive, Negative, HRN |
+|---------|-------------|---------------------------|
+|    `n/`     |     Name          |                           |
+|     `p/`    |     Phone Number        |                           |
+|     `e/`    |    Email           |                           |
+|     `a/`    |     Address         |                           |
+|     `f/`    |      Faculty       |         `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS`                  |
+|     `mc/`    |     Matriculation Number        |                           |
+|     `cs/`    |    Covid Status         |        `Positive`, `Negative`, `HRN`                   |
 
 
 ### Deleting a contact: `delete`
