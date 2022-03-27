@@ -1,6 +1,7 @@
 package seedu.trackermon.commons.core;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
@@ -98,7 +99,8 @@ public class LogsCenter {
      * @throws IOException if there are problems opening the file.
      */
     private static FileHandler createFileHandler() throws IOException {
-        FileHandler fileHandler = new FileHandler(LOG_FILE, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
+        String logFile = Paths.get(JarTools.getClassLocationString(LogsCenter.class), LOG_FILE).toString();
+        FileHandler fileHandler = new FileHandler(logFile, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
         fileHandler.setFormatter(new SimpleFormatter());
         fileHandler.setLevel(currentLogLevel);
         return fileHandler;
