@@ -87,8 +87,8 @@ public class Show {
         return otherShow.getName().equals(getName())
                 && otherShow.getTags().equals(getTags())
                     && otherShow.getStatus().equals(getStatus())
-                        && otherShow.getComment().equals(getComment());
-                            && otherShow.getComment.equals(getRating());
+                        && otherShow.getComment().equals(getComment())
+                            && otherShow.getRating().equals(getRating());
     }
 
     @Override
