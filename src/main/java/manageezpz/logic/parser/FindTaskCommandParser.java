@@ -14,7 +14,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import java.util.Arrays;
 import java.util.List;
 
-import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.task.Date;
@@ -24,7 +23,7 @@ import manageezpz.model.task.TaskMultiplePredicate;
 /**
  * Subclass of FindCommandParser which check if the options are valid for finding tasks.
  */
-class FindTaskCommandParser extends FindCommandParser {
+class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private static final Prefix[] TASK_TYPES = {PREFIX_TASK, PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
     private static final Prefix[] TASK_PROPERTIES = {PREFIX_DATE, PREFIX_DESCRIPTION, PREFIX_PRIORITY,
         PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
@@ -34,11 +33,7 @@ class FindTaskCommandParser extends FindCommandParser {
 
     protected FindTaskCommandParser() {}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public FindCommand parse(String args) throws ParseException {
+    public FindTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMapTaskType = ArgumentTokenizer.tokenize(args, TASK_TYPES);
         ArgumentMultimap argMultiMapProperties = ArgumentTokenizer.tokenize(args, TASK_PROPERTIES);
 
@@ -54,7 +49,7 @@ class FindTaskCommandParser extends FindCommandParser {
         }
 
         if (hasError) {
-            errorMessage = errorMessage + FindCommand.MESSAGE_USAGE;
+            errorMessage = errorMessage + FindTaskCommand.MESSAGE_USAGE;
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
         } else {
             return new FindTaskCommand(new TaskMultiplePredicate(
