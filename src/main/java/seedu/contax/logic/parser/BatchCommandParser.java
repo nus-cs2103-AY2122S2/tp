@@ -1,7 +1,7 @@
 package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_BATCH_INPUT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_END_WITH;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
@@ -27,13 +27,15 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         String commandInput = argMultimap.getPreamble();
         String userValue = "";
         BatchType batchType = BatchType.EQUALS;
-        if (!argMultimap.arePrefixesPresent(PREFIX_SEARCH_TYPE) || argMultimap.getPreamble().isEmpty()
+        String searchType;
+        if (argMultimap.getValue(PREFIX_SEARCH_TYPE).isEmpty() || argMultimap.getPreamble().isEmpty()
             || (argMultimap.getValue(PREFIX_EQUALS).isEmpty()
                 && argMultimap.getValue(PREFIX_START_WITH).isEmpty()
                 && argMultimap.getValue(PREFIX_END_WITH).isEmpty())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_BATCH_INPUT,
                     BatchCommand.MESSAGE_USAGE));
         }
+        searchType = argMultimap.getValue(PREFIX_SEARCH_TYPE).get().toLowerCase();
         if (argMultimap.getValue(PREFIX_EQUALS).isPresent()) {
             userValue = argMultimap.getValue(PREFIX_EQUALS).get();
         } else if (argMultimap.getValue(PREFIX_START_WITH).isPresent()) {
@@ -45,7 +47,7 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         }
         return new BatchCommand(
                 commandInput.trim(),
-                new SearchType(argMultimap.getValue(PREFIX_SEARCH_TYPE).get().toLowerCase()),
+                new SearchType(searchType),
                 userValue, batchType
         );
     }

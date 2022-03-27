@@ -1,6 +1,6 @@
 package seedu.contax.logic.parser;
 
-import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_BATCH_INPUT;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -14,7 +14,7 @@ import seedu.contax.model.util.SearchType;
  * Test for parses input arguments and creates a new BatchCommand object.
  */
 public class BatchCommandParserTest {
-    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_BATCH_INPUT,
             BatchCommand.MESSAGE_USAGE);
 
     private BatchCommandParser parser = new BatchCommandParser();

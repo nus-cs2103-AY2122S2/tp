@@ -91,7 +91,7 @@ public class BatchCommand extends Command {
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
-                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchCommand.MESSAGE_USAGE));
+                throw new CommandException(pe.getMessage());
             }
         }
         StringBuilder resultOutput = new StringBuilder();
