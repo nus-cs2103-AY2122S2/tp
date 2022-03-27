@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -235,8 +235,8 @@ The `delete` feature allows the user to delete a Candidate from the system.
 This feature has been enhanced based on the initial implementation of the `delete` command in `AddressBook`.
 
 #### How is the feature implemented?
-The main logic is implemented within `DeleteCommand` (which extends from `Command`) and `DeleteCommandParser`. 
-A minor enhancement was added to `DeleteCommand` such that if the candidate list is empty, a message indicating that 
+The main logic is implemented within `DeleteCommand` (which extends from `Command`) and `DeleteCommandParser`.
+A minor enhancement was added to `DeleteCommand` such that if the candidate list is empty, a message indicating that
 there are no candidates in the system is shown to the user (instead of invalid index),
 improving the accuracy of the feedback.
 
@@ -248,7 +248,7 @@ as every candidate has their own unique `StudentId`. However, upon careful consi
 that there are two possible problems that could arise from this alternative implementation:
 1. App requirements - TAlent Assistant should be faster than GUI
 2. Performance - Each time a delete command is executed, the system will be required to iterate through the entire candidate
-list to search for the candidate with the matching `StudentId`. 
+   list to search for the candidate with the matching `StudentId`.
 
 #### UML Diagrams
 **Activity Diagram**<br>
@@ -286,7 +286,7 @@ Step 2. The user proceeds to add a candidate by running the `add` command with i
 
 #### Why is the feature implemented as such?
 
-The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input. 
+The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input.
 
 #### UML Diagrams
 **Activity Diagram**
@@ -365,13 +365,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the candidate being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the candidate being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -403,59 +403,59 @@ The following activity diagram summarizes what happens when a user executes a `l
 
 ### Edit Feature
 
-#### What is this feature about? 
+#### What is this feature about?
 The `edit` feature allows the user to change the attributes of the Candidate in the system though the CLI.
 This feature has been enhanced based on the initial implementation of the `edit` command in `AddressBook`.
 
 #### How is this feature implemented?
 
-The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrieve the attributes that can be edited. 
+The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrieve the attributes that can be edited.
 
-The user is able to edit key attributes of the Candidate, such as 
+The user is able to edit key attributes of the Candidate, such as
 * Phone Number
-* ApplicationStatus 
+* ApplicationStatus
 * InterviewStatus
 
 Based on the fields that are edited by the user, the EditCommandParser will retreive the information, and update the attributes accordingly.
 There are also some attributes that are dependent on another attribute, and we will introduce `Triggers` to update the attributes automatically.
 One of such is the `InterviewStatus`. It makes sense that if the application is accepted or rejected, it also means that the interview has been completed.
 Hence the `ApplicationStatus` will trigger `InterviewStatus` if the user is changing the `ApplicationStatus` from `Pending` to `Accepted` or `Rejected`.
-The `trigger mechanism` (WIP) is currently handled by `EditCommand#triggerInterviewStatus()`. 
+The `trigger mechanism` (WIP) is currently handled by `EditCommand#triggerInterviewStatus()`.
 
 #### Why is the feature implemented as such?
 
-**1. Triggers for `ApplicationStatus` and `InterviewStatus` <br> 
+**1. Triggers for `ApplicationStatus` and `InterviewStatus` <br>
 For the `ApplicationStatus` and `InterviewStatus`, we initially thought of allowing the user to manually update individual statuses.
 (Eg. Updating `ApplicationStatus` to `Accepted` will not trigger `InterviewStatus`).
-We initially thought that this would be a cleaner way, and to also make sure there is no wrong information in the system. 
-In the end, we went ahead with the triggers as it would make sense for the user to have all the statuses updated automatically, 
-and we just need to make more checks in our code. 
-The downside to this implementation is that the user will not be able to individually allocate the `InterviewStatus`, but we believe this 
-will not be an use case for any user. 
+We initially thought that this would be a cleaner way, and to also make sure there is no wrong information in the system.
+In the end, we went ahead with the triggers as it would make sense for the user to have all the statuses updated automatically,
+and we just need to make more checks in our code.
+The downside to this implementation is that the user will not be able to individually allocate the `InterviewStatus`, but we believe this
+will not be an use case for any user.
 
-#### UML Diagram 
+#### UML Diagram
 The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
 <img src="images/StatusActivityDiagram.png" width="250" />
 
 
-### Help Window Feature 
+### Help Window Feature
 
 #### What is this feature about?
-The `help` feature allows the user see the available commands on the system. 
+The `help` feature allows the user see the available commands on the system.
 This feature has been enhanced based on the initial implementation of the `help` command in `AddressBook3`.
 
 #### How is this feature implemented?
 
-The proposed `help` mechanism is facilitated by `HelpWindow`. It is supported by `HelpWindowUtil` where it will help the user open the User Guide on their desktop. 
-We used the existing implementation, and we modified it that the user can view the full user guide on their personal desktop with the click of a button. 
-For this feature, we used the [Desktop API](https://docs.oracle.com/javase/9/docs/api/java/awt/Desktop.html) from Java 9. 
+The proposed `help` mechanism is facilitated by `HelpWindow`. It is supported by `HelpWindowUtil` where it will help the user open the User Guide on their desktop.
+We used the existing implementation, and we modified it that the user can view the full user guide on their personal desktop with the click of a button.
+For this feature, we used the [Desktop API](https://docs.oracle.com/javase/9/docs/api/java/awt/Desktop.html) from Java 9.
 
 #### Why is the feature implemented as such?
 
 **1. Why allow user to visit full user guide? <br>
-We initially proposed to put the full list of commands and tips on the Help Window. However, we think that this does not improve user experience as 
-there will be too many commands available in the window. Hence we decided that we should streamline the important commands on the `HelpWindow`, and the 
-other information will be available on the User Guide. 
+We initially proposed to put the full list of commands and tips on the Help Window. However, we think that this does not improve user experience as
+there will be too many commands available in the window. Hence we decided that we should streamline the important commands on the `HelpWindow`, and the
+other information will be available on the User Guide.
 
 As the user will not be able to remember the link to our User Guide, we hyperlinked it using the Desktop API that was available from Java.
 
@@ -466,19 +466,19 @@ The following activity diagram summarizes what happens when a user executes a `e
 ### Focus Feature
 
 #### What is this feature about?
-The 'focus' feature utilises the different panels in our application. It will bring up the intended Candidate's information, 
-such as course, email into the middle panel for the user to see. 
+The 'focus' feature utilises the different panels in our application. It will bring up the intended Candidate's information,
+such as course, email into the middle panel for the user to see.
 
 #### How is this feature implemented?
-This feature is implemented with the similar implementation of `CandidateListCard`, as we utilise the JavaFX codes to 
+This feature is implemented with the similar implementation of `CandidateListCard`, as we utilise the JavaFX codes to
 create the `view`. We also introduced new features such as `ImageView`, where the extra information will consist of a display
-picture for the Candidate (WIP). 
+picture for the Candidate (WIP).
 
 #### Why is the feature implemented as such?
-We created a new return value in `CommandResult` to get the `Index` of the intended Candidate. We implemented it this way 
-to not alter the existing database, as the intended purpose of this feature was not to edit the candidate's information. 
-We considered creating another database for this feature, by fetching more details from the secondary database, but we considered 
-that this will be a heavy headway for our application. 
+We created a new return value in `CommandResult` to get the `Index` of the intended Candidate. We implemented it this way
+to not alter the existing database, as the intended purpose of this feature was not to edit the candidate's information.
+We considered creating another database for this feature, by fetching more details from the secondary database, but we considered
+that this will be a heavy headway for our application.
 
 #### UML Diagram
 The following activity diagram summarizes what happens when a user executes a `focus` command.<br>
@@ -552,7 +552,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
     * 2a1. TAlent Assistant™ feedbacks no TAs in system
 
-    Use case ends.
+  Use case ends.
 
 <hr>
 
@@ -572,7 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given format is invalid
     * 3a1. TAlent Assistant™ shows an error message
 
-    Use case resumes at step 2.
+  Use case resumes at step 2.
 
 <hr>
 
@@ -591,7 +591,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The list is empty
 
-    Use case ends.
+  Use case ends.
 * 3b. The given index is invalid.
 
     * 3b1. TAlent Assistant™ displays an error message
@@ -606,7 +606,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list TA candidates
 2.  TAlent Assistant™ displays the list of TA candidates
-3.  User requests to schedule a specific candidate in the list for an interview on a particular date and time 
+3.  User requests to schedule a specific candidate in the list for an interview on a particular date and time
 4.  TAlent Assistant™ schedules the interview
 
     Use case ends.
@@ -634,22 +634,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find TAs containing specific keyword(s)
-2. TAlent Assistant™ returns a list of TAs that contain one or more of the given keyword(s) 
-in the specified attribute field
+2. TAlent Assistant™ returns a list of TAs that contain one or more of the given keyword(s)
+   in the specified attribute field
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. No TA candidate entries contain the given keyword in the specified attribute field
     * 2a1. TAlent Assistant™ returns an empty list with zero search results
 
-    Use case ends.
+  Use case ends.
 
 * 2b. The specified attribute field is invalid
     * 2b1. TAlent Assistant™ returns an error message
 
-    Use case resumes at step 1.
+  Use case resumes at step 1.
 
 <hr>
 
@@ -660,7 +660,7 @@ in the specified attribute field
 1. User requests to sort TAs by a specific field
 2. TAlent Assistant™ returns a list of TAs sorted in order with regard to the specified attribute field
 
-    Use case ends.
+   Use case ends.
 
 * 2b. The specified attribute field is invalid
     * 2b1. TAlent Assistant™ returns an error message
@@ -717,15 +717,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -734,16 +734,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a candidate while all candidates are being shown
 
-   1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
+    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -751,6 +751,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
