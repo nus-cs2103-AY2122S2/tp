@@ -34,8 +34,8 @@ class JsonAdaptedShow {
      */
     @JsonCreator
     public JsonAdaptedShow(@JsonProperty("name") String name, @JsonProperty("status") String status,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("comment") String comment,
-                            @JsonProperty("rating") Rating rating) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                           @JsonProperty("comment") String comment, @JsonProperty("rating") String rating) {
         this.name = name;
         this.status = status;
         this.rating = rating;
@@ -43,7 +43,6 @@ class JsonAdaptedShow {
             this.tagged.addAll(tagged);
         }
         this.comment = comment;
-        this.rating = rating;
     }
 
     /**
@@ -52,7 +51,7 @@ class JsonAdaptedShow {
     public JsonAdaptedShow(Show source) {
         name = source.getName().fullName;
         status = source.getStatus().name();
-        rating = source.getRating().stringRating();
+        rating = source.getRating().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -92,11 +91,15 @@ class JsonAdaptedShow {
         if (rating == null) {
             throw new IllegalValueException("Rating Failed");
         }
+
         if (!Rating.isValidScore(rating)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
+
+        final Rating modelRating = new Rating(rating);
+
         final Set<Tag> modelTags = new HashSet<>(showTags);
-        return new Show(modelName, modelStatus, modelTags, modelRating);
+        return new Show(modelName, modelStatus, modelTags, modelComment, modelRating);
     }
 
 }
