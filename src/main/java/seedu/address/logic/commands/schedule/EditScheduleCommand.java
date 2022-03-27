@@ -72,7 +72,7 @@ public class EditScheduleCommand extends ScheduleCommand {
         model.setInterview(interviewToEdit, editedInterview);
         model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
         return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
-                + " to " + editedInterview.getInterviewDate() + editedInterview.getInterviewStartTime()));
+                + " to " + editedInterview.getInterviewDate() + " " + editedInterview.getInterviewStartTime()));
     }
 
     @Override

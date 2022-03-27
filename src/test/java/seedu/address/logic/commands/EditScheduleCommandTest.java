@@ -52,7 +52,7 @@ public class EditScheduleCommandTest {
                 new EditScheduleCommand(INDEX_FIRST_INTERVIEW, VALID_NO_CONFLICT_INTERVIEW_DATE_TIME);
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_INTERVIEW_SUCCESS,
-                interviewInFilteredList + " to " + editedInterview.getInterviewDate()
+                interviewInFilteredList + " to " + editedInterview.getInterviewDate() + " "
                         + editedInterview.getInterviewStartTime());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
