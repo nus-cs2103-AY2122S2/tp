@@ -18,7 +18,7 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
         FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent customer as the given argument.
+     * Returns true if the list contains an equivalent item as the given argument.
      */
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
@@ -26,8 +26,8 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
     }
 
     /**
-     * Adds a customer to the list.
-     * The customer must not already exist in the list.
+     * Adds a item to the list.
+     * The item must not already exist in the list.
      */
     public void add(T toAdd) {
         requireNonNull(toAdd);
@@ -87,7 +87,7 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
 
     /**
      * Replaces the contents of this list with {@code items}.
-     * {@code customers} must not contain duplicate items.
+     * {@code items} must not contain duplicate items.
      */
     public void setItems(List<T> items) {
         requireAllNonNull(items);
