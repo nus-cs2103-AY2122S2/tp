@@ -4,7 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Candidate's seniority in TAlent Assistant™.
- * Guarantees: immutable; is valid as declared in {@link #isValidSeniority(int)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidSeniority(String)}
  */
 public class Seniority {
     public static final String MESSAGE_CONSTRAINTS =
@@ -31,6 +31,10 @@ public class Seniority {
      */
     public static boolean isValidSeniority(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String toSearchString() {
+        return "COM" + seniority;
     }
 
     @Override

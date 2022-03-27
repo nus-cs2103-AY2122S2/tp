@@ -46,7 +46,7 @@ public class CandidateContainsKeywordsPredicateTest {
     public void test_candidateContainsKeywords_returnsTrue() {
         Candidate candidate = new CandidateBuilder().withName("Alice").withPhone("87654321")
                 .withEmail("alice@email.com").withCourse("Business Analytics")
-                .withStudentId("E0324444").withAvailability("1,2,3").build();
+                .withStudentId("E0324444").withAvailability("1,2,3").withSeniority("1").build();
 
         // One keyword
         CandidateContainsKeywordsPredicate predicate =
@@ -76,6 +76,10 @@ public class CandidateContainsKeywordsPredicateTest {
 
         // Mixed-case keywords
         predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("moN", "TuE", "WED"));
+        assertTrue(predicate.test(candidate));
+
+        // Availability: Multiple keywords
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("com1"));
         assertTrue(predicate.test(candidate));
     }
 
