@@ -103,15 +103,15 @@ Examples of usage:
 * `add e/student69@u.nus.edu n/ Martin`
 
 
-| **Tag** | **Meaning** | **Pre-defined constants** |
-|:-------:|:-----------:|:-------------------------:|
-|    `n/`     |       Name        |                           |
-|    `p/`     |      Phone Number       |                           |
-|    `e/`     |       Email        |                           |
-|    `a/`     |       Address       |                           |
-|    `f/`     |      Faculty       |             `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS`              |
-|    `mc/`     |      Matriculation Number       |                           |
-|    `cs/`     |      Covid Status       |             `Positive`, `Negative`, `HRN`              |
+| **Tag** | **Meaning** |                                                 **Pre-defined constants**                                                  |
+|:-------:|:-----------:|:--------------------------------------------------------------------------------------------------------------------------:|
+|    `n/`     |       Name        |                                                                                                                            |
+|    `p/`     |      Phone Number       |                                                                                                                            |
+|    `e/`     |       Email        |                                                                                                                            |
+|    `a/`     |       Address       |                                                                                                                            |
+|    `f/`     |      Faculty       |             `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`              |
+|    `mc/`     |      Matriculation Number       |                                                                                                                            |
+|    `cs/`     |      Covid Status       |                                               `Positive`, `Negative`, `HRN`                                                |
 *Figure 3: Table showing list of possible tags and the Pre-defined constants*
 
 As described in Figure 3, these are the possible tags that can be used with **Tracey**. E.g `n/`, `cs/` etc.
@@ -152,17 +152,16 @@ Format:`clear`
 :warning: `Save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.`
 
 ### Summarising the records: `summarise`
-Summarises the record inside `Tracey` that an overview of the data, such as number of students who are `covid-positive`. It will return an unfiltered list of the addressboook
-to show everyone in the address book while providing a valid response by the application.
+Summarises the student records inside `Tracey`, providing an overview of the data, specific to the number of students who are `covid-positive`.
 
 Format:`summarise`
 
 Example of usage:
-*  `summarise` summarises the contacts of everyone in the Tracey application such that she responses with how many Covid positive students in faculty A, how many on HRN and negative.
+* `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
-Future Enhancements:
-*  For future versions, summarise command can display a visual pie chart for different faculties to visualise the percentage of Covid positive students.
-This can aid understanding of raw data easier.
+![SummariseExample](images/SummariseExample.png) *Figure 4: Example response of Tracey in response to the `summarise` command*
+
+From Figure 4, when the user inputs the `Summarise` command, the result are multiple pie charts of the proportion of the student population categorised by `Covid Status`. These pie charts are separated into the student `Blocks` and the wider hall population.
 
 ### Listing the records: `list`
 List the full record, which displays all the student's data that are logged into Tracey.
