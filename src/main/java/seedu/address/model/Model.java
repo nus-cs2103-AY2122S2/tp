@@ -103,9 +103,17 @@ public interface Model {
 
     /**
      * Adds the given interview.
-     * {@code interview} must not already exist in the address book.
+     * {@code interview} must not already exist in HireLah.
      */
     void addInterview(Interview interview);
+
+    /**
+     * Replaces the given interview {@code target} with {@code editedInterview}.
+     * {@code target} must exist in the address book.
+     * The interview identity of {@code editedInterview} must not be the same as another existing interview
+     * in the address book.
+     */
+    void setInterview(Interview target, Interview editedInterview);
 
     /** Returns an unmodifiable view of the filtered interview list */
     ObservableList<Interview> getFilteredInterviewList();
