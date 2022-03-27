@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
-import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_PAST_DATETIME;
+import static seedu.address.logic.commands.schedule.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
+import static seedu.address.logic.commands.schedule.ScheduleCommand.MESSAGE_INVALID_PAST_DATETIME;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -165,18 +165,10 @@ public class ParserUtil {
     public static Seniority parseSeniority(String seniority) throws ParseException {
         requireNonNull(seniority);
         String trimmedSeniority = seniority.trim();
-
-        try {
-            int seniorityInt = Integer.parseInt(trimmedSeniority.substring(trimmedSeniority.length() - 1));
-
-            if (!Seniority.isValidSeniority(seniorityInt)) {
-                throw new ParseException(Seniority.MESSAGE_CONSTRAINTS);
-            }
-
-            return new Seniority(seniorityInt);
-        } catch (NumberFormatException e) {
+        if (!Seniority.isValidSeniority(trimmedSeniority)) {
             throw new ParseException(Seniority.MESSAGE_CONSTRAINTS);
         }
+        return new Seniority(trimmedSeniority);
     }
 
     /**
@@ -261,7 +253,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dateTime} is in the past or has an invalid format.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime formattedDateTime;
         try {
             formattedDateTime = LocalDateTime.parse(dateTime, formatter);

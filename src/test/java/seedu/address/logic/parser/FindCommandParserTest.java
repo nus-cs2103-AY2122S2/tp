@@ -9,11 +9,14 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.candidate.predicate.ApplicationStatusContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CourseContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.InterviewStatusContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.SeniorityContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.StudentIdContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -78,6 +81,28 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "    k/E0324 \t \t  k/149  \t  f/studentid \t", expectedFindStudentIdCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindStatusCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindInterviewStatusCommand =
+                new FindCommand(new InterviewStatusContainsKeywordsPredicate(Arrays.asList("pending", "reject")));
+        assertParseSuccess(parser, " k/pending k/reject f/interviewstatus", expectedFindInterviewStatusCommand);
+
+        // multiple whitespaces between keywords
+        FindCommand expectedFindApplicationStatusCommand =
+                new FindCommand(new ApplicationStatusContainsKeywordsPredicate(Arrays.asList("pending", "reject")));
+        assertParseSuccess(parser, " k/  pending    k/  reject   f/     applicationstatus",
+                expectedFindApplicationStatusCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindSeniorityCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindSeniorityCommand =
+                new FindCommand(new SeniorityContainsKeywordsPredicate(Arrays.asList("2", "com1")));
+        assertParseSuccess(parser, " k/2 k/com1 f/seniority", expectedFindSeniorityCommand);
     }
 
     @Test

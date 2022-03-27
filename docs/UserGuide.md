@@ -194,6 +194,17 @@ Examples:
 * `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
 for an interview on 20 September 2022, 3PM.
 
+
+### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
+
+View more details about the Candidate in the middle panel. 
+
+Format: `focus INDEX`
+
+* Additional details of the Candidate will be displayed on the center panel in the application.
+* To switch to another Candidate's information, user will just need to type the new command 
+* and the new index of the candidate. 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -212,7 +223,7 @@ TAlent Assistant™ data are saved in the hard disk automatically after any comm
 
 ### Editing the data file
 
-TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/talentassistant.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.

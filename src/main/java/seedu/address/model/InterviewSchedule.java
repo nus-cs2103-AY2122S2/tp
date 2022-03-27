@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -87,6 +88,23 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         interviews.setInterview(target, editedInterview);
     }*/
 
+    /**
+     * Deletes past interviews from the list if the scheduled interview time is 31 minutes ago.
+     * @param localDateTime Current date time.
+     */
+    public void deletePastInterviews(LocalDateTime localDateTime) {
+        localDateTime = localDateTime.minusMinutes(30).withSecond(0).withNano(0);
+
+        List<Interview> list = new ArrayList<>();
+        for (Interview i: getInterviewList()) {
+            if (i.getInterviewDateTime().isBefore(localDateTime)) {
+                list.add(i);
+            }
+        }
+        for (Interview i: list) {
+            removeInterview(i);
+        }
+    }
 
     public void removeInterview(Interview key) {
         interviews.remove(key);

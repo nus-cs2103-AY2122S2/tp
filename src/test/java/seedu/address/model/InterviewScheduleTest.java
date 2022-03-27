@@ -7,10 +7,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCandidates.BOB;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_CARL;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,6 +27,7 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.testutil.InterviewBuilder;
+import seedu.address.testutil.InterviewScheduleBuilder;
 
 public class InterviewScheduleTest {
 
@@ -134,6 +138,42 @@ public class InterviewScheduleTest {
         InterviewSchedule schedule = new InterviewSchedule();
         schedule.addInterview(interviewAlice);
         schedule.removeInterview(interviewAlice);
+
+        assertEquals(schedule, interviewSchedule);
+    }
+
+    @Test
+    public void deletePastInterviews_withPastInterviews() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Interview pastInterview = new InterviewBuilder(INTERVIEW_BENSON)
+                .withInterviewDateTime(currentDateTime).build();
+        InterviewSchedule schedule = new InterviewSchedule();
+        schedule.addInterview(pastInterview);
+        LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
+        schedule.deletePastInterviews(dateTimeThirtyOneMinutesIntoFuture);
+
+        assertEquals(schedule, interviewSchedule);
+    }
+
+    @Test
+    public void deletePastInterviews_withNoPastInterviews() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        InterviewSchedule schedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_BENSON).build();
+        interviewSchedule.addInterview(INTERVIEW_BENSON);
+        schedule.deletePastInterviews(currentDateTime);
+
+        assertEquals(schedule, interviewSchedule);
+    }
+
+    @Test
+    public void deletePastInterviews_withPastAndFutureInterviews() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Interview pastInterview = new InterviewBuilder(INTERVIEW_CARL).withInterviewDateTime(currentDateTime).build();
+        InterviewSchedule schedule = new InterviewScheduleBuilder()
+                .withInterview(INTERVIEW_BENSON).withInterview(pastInterview).build();
+        interviewSchedule.addInterview(INTERVIEW_BENSON);
+        LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
+        schedule.deletePastInterviews(dateTimeThirtyOneMinutesIntoFuture);
 
         assertEquals(schedule, interviewSchedule);
     }

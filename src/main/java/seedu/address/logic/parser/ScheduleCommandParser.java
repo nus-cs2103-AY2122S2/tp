@@ -2,50 +2,41 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.time.LocalDateTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
+import seedu.address.logic.parser.schedule.DeleteScheduleCommandParser;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
-
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ScheduleCommand parse(String args) throws ParseException {
-        String[] input;
-        Index index;
-        try {
-            input = this.parseDelimitedCommand(args);
-            index = ParserUtil.parseIndex(input[0]);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
-        final LocalDateTime interviewSlot = ParserUtil.parseDateTime(input[1]);
-        return new ScheduleCommand(index, interviewSlot);
-    }
 
-    /**
-     * Validates a 2-part command separated by a delimiter and returns the parts if command is valid.
-     *
-     * @param command The 2-part command to be validated.
-     * @return The 2 parts of the command in a String array.
-     * @throws ParseException If the command is not in a valid format.
-     */
-    private String[] parseDelimitedCommand(String command)
-            throws ParseException {
-        final String[] validDelimiter = command.split(" /at ");
-        if (validDelimiter.length < 2) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        final String scheduleCommandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+        switch (scheduleCommandWord) {
+        case "add":
+            return new AddScheduleCommandParser().parse(arguments);
+        /*case "edit":
+            return new EditScheduleCommandParser().parse(arguments);*/
+        case "delete":
+            return new DeleteScheduleCommandParser().parse(arguments);
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
-        return validDelimiter;
     }
-
 }

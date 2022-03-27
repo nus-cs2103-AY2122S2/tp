@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -19,6 +20,9 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to false */
     Predicate<Candidate> PREDICATE_SHOW_EMPTY_LIST = unused -> false;
+
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Interview> PREDICATE_SHOW_EMPTY_INTERVIEW_SCHEDULE = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -107,6 +111,8 @@ public interface Model {
 
     void deleteInterviewForCandidate(Candidate target);
 
+    void deleteInterview(Interview interviewToDelete);
+
     void addInterview(Interview interview);
 
     //void setInterview(Interview target, Interview editedInterview);
@@ -131,4 +137,6 @@ public interface Model {
      * @throws NullPointerException if {@code sortKey} is null.
      */
     void updateSortedCandidateList(Comparator<Candidate> sortComparator);
+
+    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime);
 }

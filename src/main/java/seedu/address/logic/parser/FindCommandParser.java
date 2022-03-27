@@ -11,11 +11,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.candidate.predicate.ApplicationStatusContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CandidateContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.CourseContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.InterviewStatusContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.SeniorityContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.StudentIdContainsKeywordsPredicate;
 
 /**
@@ -49,17 +52,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         switch (fieldString) {
-        case "email":
-            return new FindCommand(new EmailContainsKeywordsPredicate(keywords));
-        case "course":
-            return new FindCommand(new CourseContainsKeywordsPredicate(keywords));
-        case "name":
-            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
+        case "applicationstatus":
+            return new FindCommand(new ApplicationStatusContainsKeywordsPredicate(keywords));
         case "candidate":
         case "":
             return new FindCommand(new CandidateContainsKeywordsPredicate(keywords));
+        case "course":
+            return new FindCommand(new CourseContainsKeywordsPredicate(keywords));
+        case "email":
+            return new FindCommand(new EmailContainsKeywordsPredicate(keywords));
+        case "interviewstatus":
+            return new FindCommand(new InterviewStatusContainsKeywordsPredicate(keywords));
+        case "name":
+            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
         case "phone":
             return new FindCommand(new PhoneContainsKeywordsPredicate(keywords));
+        case "seniority":
+            return new FindCommand(new SeniorityContainsKeywordsPredicate(keywords));
         case "studentid":
             return new FindCommand(new StudentIdContainsKeywordsPredicate(keywords));
         default:

@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "talentassistant.json");
     private Path interviewListFilePath = Paths.get("data" , "interviewlist.json");
 
     /**
@@ -93,7 +93,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal AddressBook data file location : " + addressBookFilePath);
+        sb.append("\nLocal TalentAssistant data file location : " + addressBookFilePath);
         sb.append("\nLocal InterviewSchedule data file location : " + interviewListFilePath);
         return sb.toString();
     }

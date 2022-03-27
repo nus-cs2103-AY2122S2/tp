@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes focus command;
+:System parses in the focus command;
+if () then ([Valid index parsed in])
+  :System returns the Candidate at the index specified;
+else ([Invalid command format parsed in])
+  :System returns invalid command error;
+endif
+
+stop
+
+@enduml

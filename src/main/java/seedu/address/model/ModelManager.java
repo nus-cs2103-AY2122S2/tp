@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -173,10 +174,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteInterview(Interview interviewToDelete) {
+        interviewSchedule.removeInterview(interviewToDelete);
+    }
+
+    @Override
     public void addInterview(Interview interview) {
         interviewSchedule.addInterview(interview);
         interviewSchedule.sortInterviews();
         //updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+    }
+
+    /**
+     * Deletes all past interviews from the list.
+     * @param localDateTime Current date time.
+     */
+    @Override
+    public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
+        requireNonNull(localDateTime);
+        interviewSchedule.deletePastInterviews(localDateTime);
     }
 
     /*@Override
