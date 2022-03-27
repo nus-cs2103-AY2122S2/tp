@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AttendanceUtil.ATTENDANCE_DATE_GUI_FORMATTER;
 
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class AttendanceTag {
      * and a grey label if no attendance was marked on that day.
      */
     public static Label createAttendanceTag(AttendanceEntry attendanceEntry) {
+        requireNonNull(attendanceEntry);
         Optional<Boolean> isPresent = attendanceEntry.getIsPresent();
         String dateString = attendanceEntry.getAttendanceDate()
             .format(ATTENDANCE_DATE_GUI_FORMATTER);

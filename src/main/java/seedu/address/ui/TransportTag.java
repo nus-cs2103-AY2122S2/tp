@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -31,6 +34,7 @@ public class TransportTag {
      * and a grey label if no transport arrangements were made that day.
      */
     public static Label createTransportTag(AttendanceEntry attendanceEntry) {
+        requireNonNull(attendanceEntry);
         LocalDate tagDate = attendanceEntry.getAttendanceDate();
 
         if (!attendanceEntry.hasTransportArrangement()) {
@@ -48,6 +52,7 @@ public class TransportTag {
      * @return a {@code String} representing the date, relative to today.
      */
     private static String dateToDay(LocalDate date) {
+        requireNonNull(date);
         if (date.isEqual(LocalDate.now())) {
             return "Today";
         } else if (date.isEqual(LocalDate.now().plusDays(1))) {
@@ -62,6 +67,7 @@ public class TransportTag {
      * @return a tag without any transport arrangement details.
      */
     private static Label createTagWithNoArrangement(LocalDate date) {
+        requireNonNull(date);
         Label transportTag = new Label(
             String.format(TRANSPORT_TAG_NO_ARRANGEMENT, dateToDay(date))
         );
@@ -79,6 +85,7 @@ public class TransportTag {
      * @return a tag with the details of the transport arrangement.
      */
     private static Label createTagWithArrangement(LocalDate date, LocalTime pickUpTime, LocalTime dropOffTime) {
+        requireAllNonNull(date, pickUpTime, dropOffTime);
         String style = date.isEqual(LocalDate.now())
             ? TODAY_TRANSPORT_ARRANGEMENT_TAG_STYLE
             : TOMORROW_TRANSPORT_ARRANGEMENT_TAG_STYLE;

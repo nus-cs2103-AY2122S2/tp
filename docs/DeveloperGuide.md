@@ -335,16 +335,16 @@ Model component that facilitates `Attendance` functionalities.
 
 The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods 
 in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
-supported by the methods in `AttendanceTag` and `AttendanceUtil` classes.
+supported by the methods in `AttendanceTag`, `TransportTag` and `AttendanceUtil` classes.
+
+The following sequence diagram below models the interactions between the Logic as well as the Model components to
+update the backend and frontend of the application.
+
+![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
 
 The activity diagram below illustrates the workflow of attendance commands.
 
 ![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
-
-The following sequence diagram below models the interactions between the Logic as well as the Model components to 
-update the backend and frontend of the application.
-
-![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
 
 #### Design considerations:
 
