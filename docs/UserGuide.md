@@ -400,7 +400,7 @@ Format: `undo`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Saves your latest 10 modifications to the clients or the clients list.
-* If the previous command have multiple modifications through [command chains](#Command-Chains), it is counted as one modification.
+* If the previous command have multiple modifications through [command chains](#command-chains), it is counted as one modification.
 * Calling undo will show the entire list, regardless of whether you filtered the list previously. (Filtering through the [Find command](#find-client-by-keyword-find) is not considered a modification)
 
 Types of modification that will be undone:
