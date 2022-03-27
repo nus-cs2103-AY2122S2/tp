@@ -18,7 +18,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
     private final Prefix taskType;
     private final List<String> description;
     private final Date date;
-    private final Task.Priority priority;
+    private final Priority priority;
     private final String assignee;
     private final Boolean isMarked;
 
@@ -32,7 +32,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      * @param isMarked Whether the task is marked
      */
     public TaskMultiplePredicate(
-            Prefix taskType, List<String> description, Date date, Task.Priority priority, String assignee,
+            Prefix taskType, List<String> description, Date date, Priority priority, String assignee,
             Boolean isMarked) {
         this.taskType = taskType;
         this.description = description;
@@ -88,7 +88,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         }
     }
 
-    private boolean checkIfHasPriority(Task task, Task.Priority priority) {
+    private boolean checkIfHasPriority(Task task, Priority priority) {
         return task.getPriority().equals(priority);
     }
 
@@ -136,7 +136,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         return this.date == null;
     }
 
-    private boolean isSamePriority(Task.Priority priority) {
+    private boolean isSamePriority(Priority priority) {
         if (priority != null) {
             return priority.equals(this.priority);
         }
