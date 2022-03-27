@@ -8,9 +8,9 @@ import org.junit.jupiter.api.io.TempDir;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.base.NodeMatchers;
 
 import javafx.stage.Stage;
-import org.testfx.matcher.base.NodeMatchers;
 import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.LogicManager;
 import seedu.ibook.model.Model;
