@@ -165,10 +165,12 @@ public class HelpWindow extends UiPart<Stage> {
         insertRow("Edit Appointment", "editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
                 "editappointment 2 n/Call Juliet t/13:45", appointmentsPage);
         insertRow("List Appointments Within Period", "appointmentsbetween [sd/STARTDATE] [st/STARTTIME] "
-                        + "[ed/ENDDATE [et/ENDTIME]]" , "appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+                        + "[ed/ENDDATE [et/ENDTIME]]" ,
+                "appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
                 appointmentsPage);
         insertRow("List Available Slots Within Period", "freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] "
-                        + "[ed/ENDDATE [et/ENDTIME]]" , "freebetween l/20 sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+                        + "[ed/ENDDATE [et/ENDTIME]]" ,
+                "freebetween l/20 sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
                 appointmentsPage);
 
         // populate tags page
