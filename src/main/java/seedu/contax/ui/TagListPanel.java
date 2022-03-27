@@ -31,6 +31,16 @@ public class TagListPanel extends UiPart<Region> {
     }
 
     class TagListViewCell extends ListCell<Tag> {
+
+        private final TagCard card;
+
+        /**
+         * Initializes the UI elements for this cell.
+         */
+        TagListViewCell() {
+            this.card = new TagCard();
+        }
+
         @Override
         protected void updateItem(Tag tag, boolean empty) {
             super.updateItem(tag, empty);
@@ -39,7 +49,7 @@ public class TagListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TagCard(tag, getIndex() + 1).getRoot());
+                setGraphic(card.updateModel(tag, getIndex() + 1));
             }
         }
     }
