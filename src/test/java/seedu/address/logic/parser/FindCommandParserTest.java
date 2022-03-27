@@ -122,6 +122,11 @@ public class FindCommandParserTest {
 
         // no field specified
         assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  \t", expectedFindCandidateCommand);
+
+        // no field specified
+        expectedFindCandidateCommand =
+                new FindCommand(new CandidateContainsKeywordsPredicate(Arrays.asList("Mon", "Fri")));
+        assertParseSuccess(parser, "    k/Mon \t  k/Fri  \t  \t", expectedFindCandidateCommand);
     }
 
     @Test
