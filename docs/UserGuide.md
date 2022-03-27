@@ -120,7 +120,7 @@ A client can have many fields & tags, including both optional and compulsory one
 | [Sort](#sort-client-list-sort)                                | `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br> e.g., `sort n/ desc p/`, `sort b/ a/`                                             |
 | [Find](#find-client-by-keyword-find)                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            | 
 | [Delete Filtered](#delete-filtered-clients-deletefiltered)    | `deleteFiltered`                                                                                                                                                      |
-| [Undo](#undo-last-command-undo)                               | `undo`                                                                                                                                                                |
+| [Undo](#undo-last-modification-undo)                          | `undo`                                                                                                                                                                |
 | [Add Transaction](#add-transaction-addtransaction)            | `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE]`                                                                                            |
 | [List Transaction](#list-all-transactions-listtransaction)    | `listTransaction`                                                                                                                                                     |
 | [Find Transaction](#find-clients-transaction-findtransaction) | `findTransaction INDEX`                                                                                                                                               |
@@ -435,7 +435,8 @@ Multiple commands can be chained by separating each command with the `|` charact
 Each command is run sequentially from first to last.
 Invalid commands and special commands `help` and `exit` will break the chain and stop further command execution.  
 
-e.g `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
+Examples:
+* `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
 
 ### Command History
 
@@ -456,11 +457,10 @@ You can change between the light or dark theme by click on the menu bar and sele
 ### Command Correction/Completion
 
 Pressing `TAB` while typing a command will change the last typed word into the closest command.
-E.g.
 
-`dele` -> `delete`
-
-`sddTranssaction` -> `addTransaction`
+Examples:
+* `dele` -> `delete`
+* `sddTranssaction` -> `addTransaction`
 
 ---
 
