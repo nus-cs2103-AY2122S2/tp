@@ -17,10 +17,10 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
-    - `list` : Lists all contacts.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/buyer` : Adds a contact named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` and is a buyer to the RealEstatePro app.
-    - `delete 3` : Deletes the 3rd contact shown in the current list.
-    - `clear` : Deletes all contacts.
+    - `list` : Lists all client information.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/buyer` : Adds a client named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` and is a buyer in the RealEstatePro app.
+    - `delete 3` : Deletes the 3rd client shown in the current list.
+    - `clear` : Deletes all client information.
     - `exit` : Exits the app.
 6. Refer to the Features below for details of each command.
 
@@ -38,9 +38,9 @@ e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe
   e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
 
 - Inputting information after `pr/` & `t/` indicates the type of property a user is selling or buying.<br>
-e.g. `pr/PROPERTY, t/USER_TYPE` can be used as `pr/East, Block 123, 2-room, $550000, t/seller` means this person is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
+e.g. `pr/PROPERTY, t/USER_TYPE` can be used as `pr/East, Block 123, 2-room, $550000, t/seller` means this client is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
 
-- Person parameters can be in any order.<br>
+- client parameters can be in any order.<br>
 e.g. if the command specifies `n/NAME p/PHONE_NUMBER pr/PROPERTY`, `p/PHONE_NUMBER pr/PROPERTY n/NAME` is also acceptable.
 
 - If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -68,48 +68,48 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a client: `add`
 
-Adds a person to the address book.
+Adds a client to RealEstatePro.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] t/USER_TYPE`
 
-**Tip**: A person can be tagged as either a `buyer`, or `seller`.
+**Tip**: A client can be tagged as either a `buyer`, or `seller`.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000 t/buyer`
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 t/seller`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000`
 
     ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
 
-### Listing all persons : `list`
+### Listing all clients : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all clients in the address book.
 
 Format: `list`
 
-### Editing a person: `edit`
+### Editing a client: `edit`
 
-Edits an existing person in the address book.
+Edits an existing client's information in RealEstatePro.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+- Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - You may change the type of the user, from `buyer` to `seller` & vice versa
-- You can remove all the person’s properties by typing `pr/` without specifying any properties after it.
+- You can remove all the client’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/seller` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person's user type to `seller`.
-- `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
+- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+- `edit 2 n/Betsy Crower t/seller` Edits the name of the 2nd client to be `Betsy Crower` and updates the 2nd client's user type to `seller`.
+- `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing properties.
 
-### Locating persons by name: `find`
+### Locating clients by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -117,7 +117,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- clients matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
@@ -126,20 +126,20 @@ Examples:
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
-### Deleting a person: `delete`
+### Deleting a client: `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified client from the address book.
 
 Format: `delete INDEX`
 
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- Deletes the client at the specified `INDEX`.
+- The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete 2` deletes the 2nd client in the address book.
+- `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Matching properties and preferences: `match`
 
@@ -159,21 +159,21 @@ Exits the program.
 
 Format: `exit`
 
-### Favourite a person: `favourite`
+### Favourite a client: `favourite`
 
-Favourites the specified client from the application represented by a star as show below. The user (real estate agent) will be able to view the more compact list of favorited clients in a new window called the Favourites window.
+Favourites the specified client in the RealEstatePro represented by a star as show below. The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
 
 ![images/Favouritestar.png](images/Favouritestar.png)
 
 Format: `favourite INDEX`
 
-- Favourites the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- Favourites the client at the specified `INDEX`.
+- The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …
 
 ### Open Favourites window:
 
-Opens a new window that displays compacted list of clients that have been favourited.
+Opens a new window that displays the compacted list of clients that have been favourited.
 
 #### By Command: `fw`
 
@@ -181,11 +181,11 @@ Format: `fw`
 
 #### By Ui:
 
-1)  Navigate to the `File` menu and click on it.
+1) Navigate to the `File` menu and click on it.
 
 2) Under it, click on `Favourites`
 
-3) The system will pop up the Favourites window that contains a list of Persons favourited by the user.
+3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
 
 ### Open Help Window: `help`
 
@@ -218,7 +218,8 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 ### Displaying statistics `stats`
 
-Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
+Opens up a new window that displays a pie chart containing the data of the number of buyers & sellers with preference or properties respectively in a particular region namely {North, South, East, West, Central}
+
 #### By Command: `stats`
 
 # FAQ
