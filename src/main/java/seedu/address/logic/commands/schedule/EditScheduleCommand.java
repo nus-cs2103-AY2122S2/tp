@@ -22,8 +22,9 @@ public class EditScheduleCommand extends ScheduleCommand {
     public static final String COMMAND_WORD = ScheduleCommand.COMMAND_WORD + " edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the interview identified by the index number in the interview schedule.\n"
-            + "Example: " + COMMAND_WORD + " 3";
+            + ": Edits the interview identified by the index number in the interview schedule "
+            + "to the proposed date and time.\n"
+            + "Example: " + COMMAND_WORD + " 3 at/20-03-2023 10:00";
 
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS =
             "Successfully edited interview for %1$s";
@@ -70,8 +71,8 @@ public class EditScheduleCommand extends ScheduleCommand {
 
         model.setInterview(interviewToEdit, editedInterview);
         model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
-        return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS,
-                interviewToEdit + " to " + editedInterview.getInterviewDateTime()));
+        return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
+                + " to " + editedInterview.getInterviewDate() + editedInterview.getInterviewStartTime()));
     }
 
     @Override
