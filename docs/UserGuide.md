@@ -270,20 +270,20 @@ Selected tags will appear in black, as shown in the figure below ("friends" and 
 
 ## Command summary
 
-Action | Command format, Examples | Mouse Interaction
---------|------------------|--------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | (menu bar) `Add ` -> `Add Profile`
-**Add_tag**| `add_tag t/TAG_NAME` | (menu bar) `New tag` -> `New tag`; enter tag name in text field and select `Add`.
-**Attach** | `attach [t/TAGNAME] [i/PERSON_INDEX]` | -
-**Clear** | `clear` | -
-**Delete** | `delete INDEX`<br> e.g., `delete 3` | Right click on profile, select `Delete`
-**Delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3` | (menu bar) `New tag` -> `New tag`; enable `Select`, select tags and click `Delete`.
-**Detach** | `detach [t/TAGNAME] [i/PERSON_INDEX]` | -
-**Filter** | `filter [TAGMAME]` | -
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` | -
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` | -
-**List** | `list` | -
-**Help** | `help` | (menu bar) `Help` -> `Help`
-**List_tag** | `list_tag` | (menu bar) `New tag` -> `New tag`. All tags are displayed in the 'Current tags' section.
-**showTag** | `showTag INDEX` | -
+Action | Command format, Examples                                                                                                                                                                                                                          | Mouse Interaction
+--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COURSE] [m/MATRICCARD] [tele/TELEGRAM]`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/Math m/A1231234A tele/jamesho123` | (menu bar) `Add ` -> `Add Profile`
+**Add_tag**| `add_tag t/TAG_NAME`                                                                                                                                                                                                                              | (menu bar) `New tag` -> `New tag`; enter tag name in text field and select `Add`.
+**Attach** | `attach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                                                                                                             | -
+**Clear** | `clear`                                                                                                                                                                                                                                           | -
+**Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                               | Right click on profile, select `Delete`
+**Delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3`                                                                                                                                                                                                       | (menu bar) `New tag` -> `New tag`; enable `Select`, select tags and click `Delete`.
+**Detach** | `detach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                                                                                                             | -
+**Filter** | `filter [TAGMAME]`                                                                                                                                                                                                                                | -
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                       | -
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                        | -
+**List** | `list`                                                                                                                                                                                                                                            | -
+**Help** | `help`                                                                                                                                                                                                                                            | (menu bar) `Help` -> `Help`
+**List_tag** | `list_tag`                                                                                                                                                                                                                                        | (menu bar) `New tag` -> `New tag`. All tags are displayed in the 'Current tags' section.
+**showTag** | `showTag INDEX`                                                                                                                                                                                                                                   | -
 
