@@ -137,11 +137,13 @@ Find tasks based on the task description or date in the format of (DD-MM-YYYY).
 
 Format: 
 * `find task/ desc/TASK_DESCRIPTION`
-* `find date/DD-MM-YYYY`
+* `find task/ date/DD-MM-YYYY`
 
 Examples:
 * `find task/ desc/homework`
 * `find date/02-02-2022`
+
+### Locating employees by name:
 
 ### Clearing all entries : `clear`
 

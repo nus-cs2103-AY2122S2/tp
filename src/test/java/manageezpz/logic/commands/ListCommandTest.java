@@ -2,8 +2,8 @@ package manageezpz.logic.commands;
 
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showTaskAtIndex;
-import static manageezpz.testutil.TypcialTasks.getTypicalAddressBook;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
+import static manageezpz.testutil.TypicalTasks.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 
-// TODO: Create test after GUI for task settled.
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
