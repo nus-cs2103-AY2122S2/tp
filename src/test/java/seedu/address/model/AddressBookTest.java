@@ -111,6 +111,9 @@ public class AddressBookTest {
         public ObservableList<Event> getEventList() {
             return events;
         }
+
+        @Override
+        public void updateCompanyNames(String oldName, String newName) { return; }
     }
 
 }

@@ -18,7 +18,7 @@ public class Person extends Entry {
     private final Email email;
 
     // Data fields
-    private final Name companyName;
+    private Name companyName;
 
     /**
      * Every field must be present and not null.
@@ -57,6 +57,13 @@ public class Person extends Entry {
         }
 
         return otherEntry.getName().equals(getName());
+    }
+
+    @Override
+    public void updateCompanyName(String oldName, String newName) {
+        if (oldName.equals(this.companyName.toString())) {
+            this.companyName = new Name(newName);
+        }
     }
 
     /**

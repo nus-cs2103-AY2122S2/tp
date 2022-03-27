@@ -98,6 +98,14 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
     }
 
     /**
+     * Updates the companyName of entries whose companyName matches {@code oldName} to be {@code newName}.
+     * Note: This function should only be called for Person and Event lists.
+     */
+    public void updateCompanyNames(String oldName, String newName) {
+        internalList.forEach(entry -> entry.updateCompanyName(oldName, newName));
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<T> asUnmodifiableObservableList() {

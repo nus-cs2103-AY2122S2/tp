@@ -41,5 +41,10 @@ public abstract class Entry {
      */
     public abstract boolean isSameEntry(Entry otherEntry);
 
-
+    /**
+     * If the companyName of the entry matches {@code oldName}, then it is
+     * changed to {@code newName}.
+     * Note: This only applies for Person and Event. Company does not have any defined functionality for this.
+     */
+    public abstract void updateCompanyName(String oldName, String newName);
 }
