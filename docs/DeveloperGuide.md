@@ -173,7 +173,7 @@ Additionally, it implements the following operations:
 
 Below is a sequence diagram showing the overview of how add modules works:
 
-[TODD: AddModuleSequenceDiagram]
+![AddModuleSequenceDiagram](images/AddModuleSequenceDiagram.png)
 
 Each `Person` has a `Set<Module>` that represents the Collection of `Modules` associated with that `Person`.
 Hence, we utilize the behaviour of the `Set` data structure to both store and add modules to a person, automatically adding any new unique Modules while ignoring Modules that already exist, without requiring any further duplicate-checking on our part.
