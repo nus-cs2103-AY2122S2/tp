@@ -15,7 +15,7 @@ import seedu.address.model.candidate.Candidate;
 public class FocusCommand extends Command {
 
     public static final String MESSAGE_FOCUS_CANDIDATE = "Details of candidate shown";
-    public static final String MESSAGE_USAGE = "Focus [INDEX]";
+    public static final String MESSAGE_USAGE = "focus [INDEX]";
     public static final String COMMAND_WORD = "focus";
     private final Index targetIndex;
 
