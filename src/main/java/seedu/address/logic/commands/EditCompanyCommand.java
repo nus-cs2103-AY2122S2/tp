@@ -1,13 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,89 +19,86 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entry.Address;
+import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Email;
 import seedu.address.model.entry.Name;
-import seedu.address.model.entry.Person;
 import seedu.address.model.entry.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditPersonCommand extends Command {
+public class EditCompanyCommand extends Command {
 
-    public static final String COMMAND_WORD = "editp";
+    public static final String COMMAND_WORD = "editc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the command identified "
+            + "by the index number used in the displayed company list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_COMPANY + "COMPANY] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited Company: %1$s";
+    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditCompanyDescriptor editCompanyDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the person in the filtered company list to edit
+     * @param editCompanyDescriptor details to edit the person with
      */
-    public EditPersonCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCompanyCommand(Index index, EditCompanyDescriptor editCompanyDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editCompanyDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editCompanyDescriptor = new EditCompanyDescriptor(editCompanyDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ENTRY_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Company companyToEdit = lastShownList.get(index.getZeroBased());
+        Company editedCompany = createEditedCompany(companyToEdit, editCompanyDescriptor);
 
-        if (!personToEdit.isSameEntry(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!companyToEdit.isSameEntry(editedCompany) && model.hasCompany(editedCompany)) {
+            throw new CommandException(MESSAGE_DUPLICATE_COMPANY);
         }
 
-        if (!model.hasCompany(editedPerson.getCompanyName())) {
-            throw new CommandException(MESSAGE_NONEXISTENT_COMPANY);
-        }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.setCompany(companyToEdit, editedCompany);
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        return new CommandResult(String.format(MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Company createEditedCompany(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
+        assert companyToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Name updatedCompanyName = editPersonDescriptor.getCompanyName().orElse(personToEdit.getCompanyName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editCompanyDescriptor.getName().orElse(companyToEdit.getName());
+        Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
+        Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
+        Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
+        Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
 
-        return new Person(updatedName, updatedCompanyName, updatedPhone, updatedEmail, updatedTags);
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -113,46 +109,46 @@ public class EditPersonCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditPersonCommand)) {
+        if (!(other instanceof EditCompanyCommand)) {
             return false;
         }
 
         // state check
-        EditPersonCommand e = (EditPersonCommand) other;
+        EditCompanyCommand e = (EditCompanyCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editCompanyDescriptor.equals(e.editCompanyDescriptor);
     }
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditCompanyDescriptor {
         private Name name;
-        private Name companyName;
         private Phone phone;
         private Email email;
+        private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditCompanyDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditCompanyDescriptor(EditCompanyDescriptor toCopy) {
             setName(toCopy.name);
-            setCompanyName(toCopy.companyName);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setTags(toCopy.tags);
+            setAddress(toCopy.address);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, companyName, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -179,12 +175,12 @@ public class EditPersonCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setCompanyName(Name companyName) {
-            this.companyName = companyName;
+        public void setAddress(Address address) {
+            this.address = address;
         }
 
-        public Optional<Name> getCompanyName() {
-            return Optional.ofNullable(companyName);
+        public Optional<Address> getAddress() {
+            return Optional.ofNullable(address);
         }
 
         /**
@@ -212,17 +208,17 @@ public class EditPersonCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditCompanyDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditCompanyDescriptor e = (EditCompanyDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getCompanyName().equals(e.getCompanyName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
     }
