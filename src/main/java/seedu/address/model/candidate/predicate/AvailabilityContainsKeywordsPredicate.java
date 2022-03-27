@@ -11,7 +11,7 @@ import seedu.address.model.candidate.Candidate;
  * Tests that a {@code Candidate}'s {@code Availability} matches any of the keywords given.
  */
 public class AvailabilityContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Candidate> {
-    private static final String[] DAYS_IN_FULL = { "", "MON", "TUE", "WED", "THU", "FRI" };
+    public static final String[] DAYS_IN_FULL = { "", "MON", "TUE", "WED", "THU", "FRI" };
     private final List<String> keywords;
 
     /**
