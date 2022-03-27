@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.trackermon.MainApp;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 
 
@@ -25,8 +26,6 @@ public class ShowDetailsCard extends UiPart<Region> {
     private static final String ICON_STAR_FILLED = "/images/icon_star_filled_30.png";
     private static final double SPACING = 15;
     private static final double IMAGE_SIZE = 30;
-    private static final int MAX_RATING = 5; // Move this max rating to Rating class
-
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -79,6 +78,7 @@ public class ShowDetailsCard extends UiPart<Region> {
         status.setVisible(isShowExists);
         tags.setVisible(isShowExists);
         comment.setVisible(isShowExists);
+        ratings.setVisible(isShowExists);
 
         if (!isShowExists) {
             return;
@@ -98,9 +98,9 @@ public class ShowDetailsCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         ratings.getChildren().clear();
-        int curRating = (int) Math.round(Math.random() * MAX_RATING); // Remove this line when rating is done
-        for (int i = 0; i < MAX_RATING; i++) { // Change MAX_RATING to Rating.MAX_RATING
-            if (i <= curRating) { // Change curRating to show.getRating()
+
+        for (int i = 0; i < Rating.MAX_RATING; i++) {
+            if (i < show.getRating().rating) {
                 ratings.getChildren().add(getImageNode(ICON_STAR_FILLED));
             } else {
                 ratings.getChildren().add(getImageNode(ICON_STAR));
