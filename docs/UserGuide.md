@@ -33,7 +33,7 @@ a place to start or a veteran needing a quick reference, this guide is here to a
 
    * **`listc`** : Lists all companies.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the list of contact people.
+   * **`addc`**`n/DeeBee p/98765432 e/dbs@example.com a/14 Jurong Street #01-01` : Adds a company named `DeeBee` to the list of companies.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -42,6 +42,52 @@ a place to start or a veteran needing a quick reference, this guide is here to a
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+## Overview of InternBuddy
+
+InternBuddy stores 3 lists for 3 different types of entries: **Persons**, **Companies**, and **Events**. The app will only display
+one of these lists at any time, as shown in the screenshot below.
+
+[INCLUDE IMAGE HERE]
+
+Each of these 3 different types have different attributes attached to them.
+
+A Person entry has:
+* a name
+* the name of the Company the Person is associated with
+* an email address
+* a phone number
+* zero or more tags associated with them
+
+A Company entry has:
+* a name
+* an email address
+* a phone number
+* a real-life address
+* zero or more tags associated with them
+
+Finally, an Event entry has:
+* a name
+* the name of the Company the Event is associated with
+* a date
+* a time
+* a location
+* zero or more tags associated with them
+
+To interact with these lists and entries, you type commands into the command box and hit the Enter key when you are done. If the
+command is invalid for whatever reason, an error message will be shown and the command you typed will remain. 
+An example of this is shown below.
+
+![invalid commmand message](images/InvalidCommandMessageExample.png)
+
+Otherwise, if the command is valid, a success message will be shown and the command will be executed.
+The command box will also be cleared.
+
+![successful command](images/SuccessfulCommandExample.png)
+
+And that's all there is to it! You can now get started on learning all the important commands you can use to organize
+your InternBuddy lists.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -87,11 +133,11 @@ Adds a person to the list of contact people.
 Format: `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+Entries can have any number of tags (including 0)
 </div>
 
-<div markdown="span" class="alert alert-danger">:warning: **Warning:**
-`COMPANY_NAME` must match the name of an existing company in the company list.
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+`COMPANY_NAME` must match the name of an existing Company in the Company list.
 </div>
 
 Examples:
@@ -114,8 +160,13 @@ Adds an event to the list of events.
 
 Format: `adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​`
 
-* `DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM
-* `COMPANY_NAME` must match the name of an existing company in the company list.
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM
+</div>
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+`COMPANY_NAME` must match the name of an existing Company in the Company list.
+</div>
 
 Examples:
 * `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom`
@@ -141,16 +192,30 @@ Format: `liste`
 
 ### Editing a person : `editp`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the Edit Commands:**<br>
+
+* Each edit command identifies the entry to edit based on the `INDEX`.
+* The index refers to the index number shown in the appropriately displayed list. For example, for the `editp` command, the index refers to the index in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3,...
+* At least one parameter aside from `INDEX` must be provided.
+* For the parameters not included in the edit command, the values stored for those parameters will remain the same.
+* When editing tags, the existing tags of the entry will be removed i.e adding of tags is not cumulative.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove all of an entry’s tags by typing `t/` without specifying any tags after it.
+</div>
+
 Edits an existing person in the list of contact people.
 
 Format: `editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* `COMPANY_NAME` must match the name of an existing company in the company list.
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+`COMPANY_NAME` must match the name of an existing Company in the Company list.
+</div>
 
 Examples:
 *  `editp 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -162,11 +227,10 @@ Edits an existing company in the list of companies.
 
 Format: `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
-* Edits the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the company will be removed i.e adding of tags is not cumulative.
-* You can remove all the company’s tags by typing `t/` without specifying any tags after it.
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+If the name of the Company is edited, all Events and Persons referring to the Company will also
+update the company name they have stored.
+</div>
 
 Examples:
 * `editc 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
@@ -178,13 +242,13 @@ Edits an existing event in the list of events.
 
 Format: `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`
 
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
-* You can remove all the event’s tags by typing `t/` without specifying any tags after it.
-* `DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM
-* `COMPANY_NAME` must match the name of an existing company in the company list.
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM
+</div>
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+`COMPANY_NAME` must match the name of an existing Company in the Company list.
+</div>
 
 Examples:
 * `edite 1 d/2021-12-21 l/Zoom` Edits the date and location of the 1st event to be `2021-12-21` and `Zoom` respectively.
@@ -215,7 +279,7 @@ Deletes the specified entry from the currently displayed list.
 Format: `delete INDEX`
 
 * Deletes the entry at the specified `INDEX` of the currently displayed list.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the currently displayed list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -224,7 +288,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the list of contact people.
+Clears all entries from the list of people.
 
 Format: `clear`
 
