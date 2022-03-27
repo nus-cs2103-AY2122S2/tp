@@ -47,7 +47,10 @@ public class DeleteItemCommand extends Command {
 
         Item itemToDelete = targetItemList.get(targetIndex.getZeroBasedSecond());
 
+        model.prepareIBookForChanges();
         model.deleteItem(targetProduct, itemToDelete);
+        model.saveIBookChanges();
+
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, itemToDelete));
     }
 }

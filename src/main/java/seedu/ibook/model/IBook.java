@@ -15,6 +15,7 @@ import seedu.ibook.model.product.UniqueProductList;
  * Duplicates are not allowed. (by .isSameProduct comparison)
  */
 public class IBook implements ReadOnlyIBook {
+
     private final UniqueProductList products;
 
     /**
@@ -98,21 +99,21 @@ public class IBook implements ReadOnlyIBook {
     }
 
     /**
-     * Removes {@code key} from {@code targetProduct}.
-     * {@code targetProduct} must exist in the iBook and {@code key} must exist in {@code targetProduct}.
-     */
-    public void removeItem(Product product, Item key) {
-        requireNonNull(key);
-        product.removeItem(key);
-    }
-
-    /**
      * Updates {@code targetItem} in {@code targetProduct}.
      * {@code targetProduct} must exist in the iBook and {@code targetItem} must exist in {@code targetProduct}.
      */
     public void setItem(Product targetProduct, Item targetItem, Item updatedItem) {
         requireAllNonNull(targetProduct, targetItem, updatedItem);
         targetProduct.setItem(targetItem, updatedItem);
+    }
+
+    /**
+     * Removes {@code key} from {@code targetProduct}.
+     * {@code targetProduct} must exist in the iBook and {@code key} must exist in {@code targetProduct}.
+     */
+    public void removeItem(Product product, Item key) {
+        requireNonNull(key);
+        product.removeItem(key);
     }
 
     //// util methods

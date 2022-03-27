@@ -68,8 +68,11 @@ public class UpdateItemCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
+        model.prepareIBookForChanges();
         model.updateItem(targetProduct, itemToUpdate, updatedItem);
+        model.saveIBookChanges();
         model.updateFilteredItemListForProducts(PREDICATE_SHOW_ALL_ITEMS);
+
         return new CommandResult(String.format(MESSAGE_UPDATE_ITEM_SUCCESS, updatedItem));
     }
 

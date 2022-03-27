@@ -102,14 +102,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteProduct(Product target) {
-        reversibleIBook.reversibleRemoveProduct(target);
-    }
-
-    @Override
     public void addProduct(Product product) {
         reversibleIBook.reversibleAddProduct(product);
         clearProductFilters();
+    }
+
+    @Override
+    public void deleteProduct(Product target) {
+        reversibleIBook.reversibleRemoveProduct(target);
     }
 
     @Override
@@ -119,6 +119,27 @@ public class ModelManager implements Model {
         reversibleIBook.reversibleSetProduct(target, updatedProduct);
     }
 
+    //=========== Item ========================================================================================
+
+    @Override
+    public void addItem(Product product, Item item) {
+        requireAllNonNull(product, item);
+        reversibleIBook.reversibleAddItem(product, item);
+    }
+
+    @Override
+    public void deleteItem(Product targetProduct, Item target) {
+        requireAllNonNull(targetProduct, target);
+        reversibleIBook.reversibleRemoveItem(targetProduct, target);
+    }
+
+    @Override
+    public void updateItem(Product targetProduct, Item targetItem, Item updatedItem) {
+        requireAllNonNull(targetProduct, targetItem, updatedItem);
+        reversibleIBook.reversibleSetItem(targetProduct, targetItem, updatedItem);
+    }
+
+    //=========== Changes =====================================================================================
     @Override
     public void prepareIBookForChanges() {
         reversibleIBook.prepareForChanges();
@@ -147,26 +168,6 @@ public class ModelManager implements Model {
     @Override
     public void redoIBook() {
         reversibleIBook.redo();
-    }
-
-    //=========== Item ========================================================================================
-
-    @Override
-    public void addItem(Product product, Item item) {
-        requireAllNonNull(product, item);
-        reversibleIBook.addItem(product, item);
-    }
-
-    @Override
-    public void deleteItem(Product targetProduct, Item target) {
-        requireAllNonNull(targetProduct, target);
-        reversibleIBook.removeItem(targetProduct, target);
-    }
-
-    @Override
-    public void updateItem(Product targetProduct, Item targetItem, Item updatedItem) {
-        requireAllNonNull(targetProduct, targetItem, updatedItem);
-        reversibleIBook.setItem(targetProduct, targetItem, updatedItem);
     }
 
     //=========== Filtered Product List Accessors =============================================================

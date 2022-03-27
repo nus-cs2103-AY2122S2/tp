@@ -5,6 +5,7 @@ import java.util.List;
 
 import seedu.ibook.model.exceptions.AtLatestStateException;
 import seedu.ibook.model.exceptions.AtOldestStateException;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -89,6 +90,14 @@ public class ReversibleIBook extends IBook {
     }
 
     /**
+     * A reversible version of parent's {@code setProduct} method.
+     */
+    public void reversibleSetProduct(Product target, Product updatedProduct) {
+        setProduct(target, updatedProduct);
+        stateChangeRecorder.recordAction(new ReversibleSetProductAction(target, updatedProduct));
+    }
+
+    /**
      * A reversible version of parent's {@code removeProduct} method.
      */
     public void reversibleRemoveProduct(Product product) {
@@ -97,11 +106,27 @@ public class ReversibleIBook extends IBook {
     }
 
     /**
-     * A reversible version of parent's {@code setProduct} method.
+     * A reversible version of parent's {@code addItem} method.
      */
-    public void reversibleSetProduct(Product target, Product updatedProduct) {
-        setProduct(target, updatedProduct);
-        stateChangeRecorder.recordAction(new ReversibleSetProductAction(target, updatedProduct));
+    public void reversibleAddItem(Product product, Item item) {
+        addItem(product, item);
+        stateChangeRecorder.recordAction(new ReversibleAddItemAction(product, item));
+    }
+
+    /**
+     * A reversible version of parent's {@code setItem} method.
+     */
+    public void reversibleSetItem(Product targetProduct, Item targetItem, Item updatedItem) {
+        setItem(targetProduct, targetItem, updatedItem);
+        stateChangeRecorder.recordAction(new ReversibleSetItemAction(targetProduct, targetItem, updatedItem));
+    }
+
+    /**
+     * A reversible version of parent's {@code removeItem} method.
+     */
+    public void reversibleRemoveItem(Product product, Item item) {
+        removeItem(product, item);
+        stateChangeRecorder.recordAction(new ReversibleRemoveItemAction(product, item));
     }
 
     @Override
