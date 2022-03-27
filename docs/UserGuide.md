@@ -47,11 +47,12 @@ School administrators _(like teachers)_ can use UDT to easily track COVID-19 cas
 
 > :information_source: **Installation notes:**  
 > - Application data will be stored in the same folder containing the application executable.  
-> - Currently only officially supported for **x64 Windows** platforms.
+> - Currently officially supported for **Windows**, **Mac** and **Linux** platforms.
 
 </div>
 
 # Features
+Below are a set of commands that can be used in the **_UDT_**. Their formats and examples are provided along with each feature.
 
 <div markdown="block" class="alert alert-info">
 
@@ -71,14 +72,14 @@ Adds a student to the tracking list
   - `STATUS` takes either of these strings `Positive`, `Negative`, `Close-Contact`
     - `STATUS` is case-sensitive and should strictly follow the strings stated above
 - Examples:
-  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 c/5A s/Negative`
-  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 p/1234567 c/2B s/Positive act/choir dance`
+  - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 cc/5A s/Negative`
+  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 cc/2B s/Positive act/choir`
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
-> - Multiple activity tags can be added to a single student  
->   - Eg. `act/choir dance`  
+> - Multiple activity tags can be added to a single student by using multiple `/act` prefixes  
+>   - Eg. `act/choir act/dance`  
 > - A student can also have no activity tags  
 > - Parameters can be in any order
 
@@ -91,7 +92,7 @@ Adds a student to the tracking list
 </div>
 
 ## List all students: `list`
-Shows a list of all students in the address book.
+Shows a list of all students in the application.
 - Format: `list`
   - Any parameter after `list` is ignored
 
@@ -129,7 +130,7 @@ Find an existing student in the application by their Covid-19 Status
 ![find status command](images/user-guide/findstatus.png)
 
 ## Find student by class: `findclasscode`
-Finds an existing student in the address book by their class
+Finds an existing student in the application by their class
 - Format: `findclasscode CLASS`
   - Returns a list of students with the specified `CLASS`
   - `CLASS` is case-insensitive
@@ -143,7 +144,7 @@ Finds an existing student in the address book by their class
 ![find classcode command](images/user-guide/findclasscode.png)
 
 ## Find student by activity: `findactivity`
-Finds an existing student in the address book by the activities they are participating in
+Finds an existing student in the application by the activities they are participating in
 - Format: `findactivity ACTIVITIY [MORE ACTIVITIES]`
   - Returns a list of students with the specified `ACTIVITY`
     - Matches based on students that have specified `ACTIVITY` and not just exactly those activities only
@@ -156,7 +157,7 @@ Finds an existing student in the address book by the activities they are partici
 ![find activity command](images/user-guide/findactivity.png)
 
 ## Edit student details: `edit`
-Edits an existing student's details in the address book by the Index provided and the areas that the user wants to edit
+Edits an existing student's details in the application by the Index provided and the areas that the user wants to edit
 - Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]`
   - Edits the student at the specified `INDEX`
   - `INDEX` denotes the list index of the student in the displayed list
@@ -177,7 +178,7 @@ Edits an existing student's details in the address book by the Index provided an
 ![edit command](images/user-guide/edit.png)
 
 ## Delete a student: `delete`
-Deletes the specified person from the address book.
+Deletes the specified person from the application.
 - Format: `delete INDEX`
   - Deletes the student at the specified `INDEX`
   - `INDEX` denotes the list index of the student in the displayed list
@@ -244,17 +245,17 @@ A: An error message colored in red will appear stating that you have typed an un
 ----------------
 ## Command Summary
 
-| Action                                                             | Format                                                                                             | Example                                                                                                        |
-|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| [Add a student](#add-a-student-add)                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS [act/ACTIVITIES]`                    | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 c/5A s/NEGATIVE act/badminton` |
-| [List all students](#list-all-students-list)                       | `list`                                                                                             | `list`                                                                                                         |
-| [Find student by name](#find-student-by-name-find)                 | `find NAME [MORE_NAME]`                                                                            | `find James Jake`                                                                                              |
-| [Find student by status](#find-student-by-status-findstatus)       | `findstatus STATUS`                                                                                | `findstatus positive`                                                                                          |
-| [Find student by class](#find-student-by-class-findclasscode)      | `findclasscode CLASS`                                                                              | `findclasscode 4A`                                                                                             |
-| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY`                                                                            | `findactivity choir`                                                                                           |
-| [Edit student details](#edit-student-details-edit)                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| [Delete a student](#delete-a-student-delete)                       | `delete INDEX`                                                                                     | `delete 3`                                                                                                     |
-| [Exit the application](#exit-the-application-exit)                 | `exit`                                                                                             | `exit`                                                                                                         |
+| Action                                                             | Format                                                                                             | Example                                                                                                         |
+|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| [Add a student](#add-a-student-add)                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cc/CLASS s/STATUS [act/ACTIVITIES]`                   | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 cc/5A s/Negative act/badminton` |
+| [List all students](#list-all-students-list)                       | `list`                                                                                             | `list`                                                                                                          |
+| [Find student by name](#find-student-by-name-find)                 | `find NAME [MORE_NAME]`                                                                            | `find James Jake`                                                                                               |
+| [Find student by status](#find-student-by-status-findstatus)       | `findstatus STATUS`                                                                                | `findstatus positive`                                                                                           |
+| [Find student by class](#find-student-by-class-findclasscode)      | `findclasscode CLASS`                                                                              | `findclasscode 4A`                                                                                              |
+| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY`                                                                            | `findactivity choir`                                                                                            |
+| [Edit student details](#edit-student-details-edit)                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                     |
+| [Delete a student](#delete-a-student-delete)                       | `delete INDEX`                                                                                     | `delete 3`                                                                                                      |
+| [Exit the application](#exit-the-application-exit)                 | `exit`                                                                                             | `exit`                                                                                                          |
 
 ----------------
 
