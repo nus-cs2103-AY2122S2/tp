@@ -6,6 +6,10 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -192,5 +196,53 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAttendanceDate_returnsLocalDate() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate expectedLocalDate = LocalDate.parse("22-03-2022", formatter);
+        assertEquals(ParserUtil.parseAttendanceDate("22-03-2022"), expectedLocalDate);
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendanceDate("2022-03-22"));
+    }
+
+    @Test
+    public void parseAppointmentDateTime_returnsLocalDateTime() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime expectedLocalDateTime = LocalDateTime.parse("22-03-2022 09:00", formatter);
+        assertEquals(ParserUtil.parseAppointmentDateTime("22-03-2022 09:00"), expectedLocalDateTime);
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("2022-03-22 0830"));
+    }
+
+    @Test
+    public void parseFilterDate_returnsLocalDate() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate expectedLocalDate = LocalDate.parse("22-03-2022", formatter);
+        assertEquals(ParserUtil.parseFilterDate("22-03-2022"), expectedLocalDate);
+        assertThrows(ParseException.class, () -> ParserUtil.parseFilterDate("2022-03-22"));
+    }
+
+    @Test
+    public void parseFilterAppDate_returnsLocalDate() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate expectedLocalDate = LocalDate.parse("22-03-2022", formatter);
+        assertEquals(ParserUtil.parseFilterAppointmentDate("22-03-2022"), expectedLocalDate);
+        assertThrows(ParseException.class, () -> ParserUtil.parseFilterAppointmentDate("2022-03-22"));
+    }
+
+    @Test
+    public void parsePickUpTime_returnsLocalTime() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime expectedLocalTime = LocalTime.parse("09:00", formatter);
+        assertEquals(ParserUtil.parsePickUpTime("09:00"), expectedLocalTime);
+        assertThrows(ParseException.class, () -> ParserUtil.parsePickUpTime("0800"));
+    }
+
+    @Test
+    public void parseDropOffTime_returnsLocalTime() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime expectedLocalTime = LocalTime.parse("18:00", formatter);
+        assertEquals(ParserUtil.parseDropOffTime("18:00"), expectedLocalTime);
+        assertThrows(ParseException.class, () -> ParserUtil.parseDropOffTime("0800"));
     }
 }
