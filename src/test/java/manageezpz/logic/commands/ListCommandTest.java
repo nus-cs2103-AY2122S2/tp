@@ -1,8 +1,17 @@
 package manageezpz.logic.commands;
 
-import manageezpz.model.Model;
+import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static manageezpz.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
+import static manageezpz.testutil.TypicalTasks.getTypicalAddressBook;
 
-// TODO: Create test after GUI for task settled.
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import manageezpz.model.Model;
+import manageezpz.model.ModelManager;
+import manageezpz.model.UserPrefs;
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
@@ -11,7 +20,7 @@ public class ListCommandTest {
     private Model model;
     private Model expectedModel;
 
-    /*@BeforeEach
+    @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -24,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showTaskAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_ALL_SUCCESS, expectedModel);
-    }*/
+    }
 }

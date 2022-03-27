@@ -3,12 +3,14 @@ package manageezpz.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -33,13 +35,20 @@ public class DeleteEmployeeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Task> lastShownTaskList = model.getFilteredTaskList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDelete = lastShownPersonList.get(targetIndex.getZeroBased());
+        List<Task> taskList = lastShownTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToDelete)).collect(Collectors.toList());
+
+        for (int j = 0; j < taskList.size(); j++) {
+            model.untagTask(taskList.get(j), personToDelete);
+        }
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }

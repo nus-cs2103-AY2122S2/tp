@@ -4,6 +4,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,6 +20,8 @@ import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.person.NameContainsKeywordsPredicate;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.TaskMultiplePredicate;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -26,13 +29,13 @@ import manageezpz.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // All attributes pertaining to employees
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_TASK_DESCRIPTION = "get a drink";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -49,6 +52,17 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    // Attributes pertaining tasks
+    public static final String VALID_TASK_DESCRIPTION = "get a drink";
+    public static final List<String> LIST_DESCRIPTIONS = List.of(VALID_TASK_DESCRIPTION.split(" "));
+    public static final String VALID_DATE = "2022-01-01"; // Date are in YYYY-MM-DD
+    public static final String VALID_PRIORITY = "LOW"; // Valid priority are none, low, medium, high
+    public static final String INVALID_PRIORITY = "H1GH";
+    public static final String VALID_BOOLEAN = "true";
+    public static final String INVALID_BOOLEAN = "t";
+
+    public static final String INVALID_DATE = "2022 01 01";
 
     // Multiple arguments not allowed for list command
     public static final String INVALID_LIST_MULTIPLE_ARGUMENTS = " " + PREFIX_TODO + " " + PREFIX_EVENT;
@@ -104,6 +118,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -116,6 +131,28 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitName = task.getDescription().toString().split("\\s+");
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(
+                PREFIX_TASK,
+                Arrays.asList(splitName[0]),
+                null,
+                null,
+                null,
+                null
+        );
+        model.updateFilteredTaskList(predicate);
+
+        assertEquals(1, model.getFilteredTaskList().size());
     }
 
 }

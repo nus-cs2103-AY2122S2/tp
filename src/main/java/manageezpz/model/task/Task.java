@@ -145,6 +145,16 @@ public class Task implements Comparable<Task> {
                 && otherTask.getStatusIcon().equals(getStatusIcon());
     }
 
+    /**
+     * Checks whether the assignee is assigned to the task.
+     * @param assignee The assignee to be searched
+     * @return True if the assignee is assigned, false otherwise
+     */
+    public boolean haveAssignees(String assignee) {
+        return assignees.stream()
+                .anyMatch(person -> person.getName().fullName.equals(assignee));
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

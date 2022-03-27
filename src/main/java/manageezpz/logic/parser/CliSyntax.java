@@ -19,4 +19,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TASK = new Prefix("task/");
     public static final Prefix PREFIX_DATE = new Prefix("date/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("priority/");
+    public static final Prefix PREFIX_ASSIGNEES = new Prefix("assignees/");
+    public static final Prefix PREFIX_IS_MARKED = new Prefix("isMarked/");
 }

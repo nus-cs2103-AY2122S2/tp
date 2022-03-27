@@ -4,7 +4,7 @@ import manageezpz.model.task.Description;
 import manageezpz.model.task.Task;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Task objects.
  */
 public class TaskBuilder {
     public static final String TASK_DESCRIPTION = "read book";
