@@ -62,7 +62,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_JERSEY_NUMBER + "JERSEY_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PLAYER + " Jone Doe "
+            + PREFIX_PLAYER + "Jone Doe "
             + PREFIX_PHONE + "12349999 "
             + PREFIX_EMAIL + "newjohndoe@example.com";
 
@@ -72,7 +72,7 @@ public class EditCommand extends Command {
             + "Parameters: " + PREFIX_LINEUP + "LINEUP_NAME "
             + PREFIX_NAME + "LINEUP NAME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_LINEUP + " starting five "
+            + PREFIX_LINEUP + "starting five "
             + PREFIX_NAME + "substitutes";
 
     public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ": Edits the details of the schedule identified "
