@@ -7,6 +7,15 @@ import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
 import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
 import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
 import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
+import static seedu.address.ui.Styles.BLUE;
+import static seedu.address.ui.Styles.BRIGHT_GREEN;
+import static seedu.address.ui.Styles.CHANGE_COLOUR;
+import static seedu.address.ui.Styles.CLOSING_INLINE;
+import static seedu.address.ui.Styles.GREEN;
+import static seedu.address.ui.Styles.GREY;
+import static seedu.address.ui.Styles.RED;
+import static seedu.address.ui.Styles.WHITE_FONT_INLINE;
+import static seedu.address.ui.Styles.YELLOW;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,13 +38,6 @@ import seedu.address.model.candidate.InterviewStatus;
 public class FocusCard extends UiPart<Region> {
 
     private static final String FXML = "FocusListCard.fxml";
-    private static final String RED = "#800000";
-    private static final String GREEN = "#006100";
-    private static final String YELLOW = "#8B8000";
-    private static final String GREY = "#808080";
-    private static final String BRIGHT_GREEN = "#227F0F";
-    private static final String WHITE_STYLE = "-fx-text-fill: #FFFFFF;";
-    private static final String CHANGE_COLOUR = "-fx-background-color: ";
     private static final String BLANK_PICTURE_PATH = "docs/images/blankprofile.png";
 
     /**
@@ -140,7 +142,7 @@ public class FocusCard extends UiPart<Region> {
             interviewLabel.setStyle(CHANGE_COLOUR + GREEN);
             statusFocusPane.getChildren().add(interviewLabel);
         } else if (interviewString.equals(SCHEDULED)) {
-            interviewLabel.setStyle(CHANGE_COLOUR + YELLOW);
+            interviewLabel.setStyle(CHANGE_COLOUR + BLUE);
             statusFocusPane.getChildren().add(interviewLabel);
         }
     }
@@ -148,8 +150,8 @@ public class FocusCard extends UiPart<Region> {
     public void setAvailableDays(Availability availability) {
         String[] week = Availability.WEEK;
         boolean[] isAvail = availability.getAvailableListAsBoolean();
-        String availStyle = CHANGE_COLOUR + BRIGHT_GREEN + ";" + WHITE_STYLE;
-        String notAvailStyle = CHANGE_COLOUR + GREY + ";" + WHITE_STYLE;
+        String availStyle = CHANGE_COLOUR + BRIGHT_GREEN + CLOSING_INLINE + WHITE_FONT_INLINE;
+        String notAvailStyle = CHANGE_COLOUR + GREY + CLOSING_INLINE + WHITE_FONT_INLINE;
 
         for (int i = 0; i < week.length; i++) {
             Label label = new Label(week[i]);
