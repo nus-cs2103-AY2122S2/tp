@@ -189,6 +189,11 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public boolean hasConflictingInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPosition(Position target, Position editedPosition) {
             throw new AssertionError("This method should not be called.");
         }

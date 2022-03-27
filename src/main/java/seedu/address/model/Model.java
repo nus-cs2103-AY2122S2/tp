@@ -96,6 +96,11 @@ public interface Model {
     boolean hasInterview(Interview interview);
 
     /**
+     * Returns true if an applicant already has an interview for that timeslot.
+     */
+    boolean hasConflictingInterview(Interview interview);
+
+    /**
      * Deletes the given interview.
      * The interview must exist in the address book.
      */

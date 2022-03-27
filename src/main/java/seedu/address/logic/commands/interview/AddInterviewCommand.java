@@ -29,6 +29,9 @@ public class AddInterviewCommand extends AddCommand {
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in the address book";
+    public static final String MESSAGE_CONFLICTING_INTERVIEW = "This interview would cause a conflict of timings with"
+            + " a current interview in the address book. Interviews must be "
+            + "at least 1 hour apart for the same candidate.";
 
     private final Index applicantIndex;
     private final LocalDateTime date;
@@ -64,6 +67,10 @@ public class AddInterviewCommand extends AddCommand {
         Position positionInInterview = lastShownPositionList.get(positionIndex.getZeroBased());
 
         Interview interviewToAdd = new Interview(applicantInInterview, date, positionInInterview);
+
+        if (model.hasConflictingInterview(interviewToAdd)) {
+            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+        }
 
         if (model.hasInterview(interviewToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
