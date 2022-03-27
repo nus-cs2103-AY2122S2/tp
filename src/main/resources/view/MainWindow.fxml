@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="TAlent Assistant™" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -60,11 +62,19 @@
               </padding>
               <StackPane fx:id="focusListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
-            <VBox fx:id="interviewList" styleClass="pane-with-border" prefHeight="340" VBox.vgrow="ALWAYS">
+            <VBox fx:id="interviewList" styleClass="pane-with-border" prefHeight="340" VBox.vgrow="ALWAYS" >
+              <padding>
+                <Insets top="5" right="5" bottom="5" left="5" />
+              </padding>
+              <HBox styleClass="interview-panel-header" HBox.hgrow="ALWAYS" minHeight="30" prefHeight="40" alignment="CENTER">
+                <Label styleClass="interview-panel-title" alignment="CENTER" text="Scheduled Interviews" />
+              </HBox>
+              <VBox VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
               <StackPane fx:id="interviewListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
             </VBox>
           </items>
         </SplitPane>

@@ -9,7 +9,7 @@ data easily and review qualifications or availability for scheduling interviews.
 Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -27,17 +27,17 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all TAs.
+    * **`list`** : Lists all TAs.
 
-   * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new TA into the system.
+    * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new TA into the system.
 
-   * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
+    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
-   * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
+    * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
 
-   * **`sort s/name`** : Sorts all TAs by name in descending alphabetical order.
+    * **`sort s/name`** : Sorts all TAs by name in descending alphabetical order.
 
-   * **`help`** : List all commands in the system.
+    * **`help`** : List all commands in the system.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -80,7 +80,7 @@ Format: `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILIT
 * `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
 * `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
 * `SENIORITY` is a number range from 1 to 4.
-* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday` 
+* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
 
 Examples:
 * `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new TA with Student ID, E0123456, named John Doe.
@@ -138,7 +138,7 @@ Examples:
 
 ### Sorting candidates by attribute field: `sort`
 
-Returns a list of TAs sorted by the specified attribute field. 
+Returns a list of TAs sorted by the specified attribute field.
 
 Format: `sort s/ATTRIBUTE_FIELD`
 
@@ -146,8 +146,8 @@ Note: `ATTRIBUTE_FIELD` can take on the following values
 `course`, `email`, `name`, `phone`, `candidate`, `studentid`
 
 * The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
-* The search will return a list of all TAs sorted in ascending order 
-(i.e. A-Z, 0-9) with regard to the specified attribute field.
+* The search will return a list of all TAs sorted in ascending order
+  (i.e. A-Z, 0-9) with regard to the specified attribute field.
 
 Examples:
 Let's reference a default sample list of unique TA candidates with attribute fields stated as (`name`, `studentid`).
@@ -192,18 +192,18 @@ Format: `schedule INDEX /at DATE TIME`
 
 Examples:
 * `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
-for an interview on 20 September 2022, 3PM.
+  for an interview on 20 September 2022, 3PM.
 
 
 ### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
 
-View more details about the Candidate in the middle panel. 
+View more details about the Candidate in the middle panel.
 
 Format: `focus INDEX`
 
 * Additional details of the Candidate will be displayed on the center panel in the application.
-* To switch to another Candidate's information, user will just need to type the new command 
-* and the new index of the candidate. 
+* To switch to another Candidate's information, user will just need to type the new command
+* and the new index of the candidate.
 
 ### Clearing all entries : `clear`
 

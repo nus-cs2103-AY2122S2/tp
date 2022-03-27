@@ -11,7 +11,6 @@ import seedu.address.model.candidate.Candidate;
  */
 public class ApplicationStatusContainsKeywordsPredicate extends ContainsKeywordsPredicate
         implements Predicate<Candidate> {
-    private final List<String> keywords;
 
     /**
      * Creates a new {@link ApplicationStatusContainsKeywordsPredicate} object with the
@@ -20,7 +19,6 @@ public class ApplicationStatusContainsKeywordsPredicate extends ContainsKeywords
      */
     public ApplicationStatusContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
-        this.keywords = keywords;
     }
 
     /**

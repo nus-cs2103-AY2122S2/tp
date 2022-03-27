@@ -11,7 +11,6 @@ import seedu.address.model.candidate.Candidate;
  */
 public class SeniorityContainsKeywordsPredicate extends ContainsKeywordsPredicate
         implements Predicate<Candidate> {
-    private final List<String> keywords;
 
     /**
      * Creates a new {@link SeniorityContainsKeywordsPredicate} object with the
@@ -20,7 +19,6 @@ public class SeniorityContainsKeywordsPredicate extends ContainsKeywordsPredicat
      */
     public SeniorityContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
-        this.keywords = keywords;
     }
 
     /**
