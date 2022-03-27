@@ -10,6 +10,7 @@ import seedu.address.logic.commands.interview.ListInterviewCommand;
 import seedu.address.logic.commands.position.ListPositionCommand;
 import seedu.address.logic.parser.applicants.ListApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.interview.ListInterviewCommandParser;
 import seedu.address.logic.parser.position.ListPositionCommandParser;
 
 public class ListCommandParser implements Parser<ListCommand> {
@@ -27,7 +28,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (flag == FLAG_APPLICANT) {
             return new ListApplicantCommandParser().parse(argsWithoutFlag);
         } else if (flag == FLAG_INTERVIEW) {
-            return new ListInterviewCommand();
+            return new ListInterviewCommandParser().parse(argsWithoutFlag);
         } else if (flag == FLAG_POSITION) {
             return new ListPositionCommandParser().parse(argsWithoutFlag);
         }

@@ -38,7 +38,9 @@ public class FilterType {
         positionTypes.add("name");
 
         HashSet<String> interviewTypes = new HashSet<>();
-        // to add
+        interviewTypes.add("appl");
+        interviewTypes.add("pos");
+        interviewTypes.add("date");
 
         HashMap<DataType, HashSet<String>> filterTypes = new HashMap<>();
         filterTypes.put(DataType.APPLICANT, applicantTypes);

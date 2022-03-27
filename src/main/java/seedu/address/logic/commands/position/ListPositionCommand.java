@@ -33,7 +33,7 @@ public class ListPositionCommand extends ListCommand {
             + PREFIX_FILTER_TYPE + "name "
             + PREFIX_FILTER_ARGUMENT + "Software Engineer ";
 
-    public static final String MESSAGE_SUCCESS = "Listed %1$d Position(s)";
+    public static final String MESSAGE_SUCCESS = "Listed %1$d position(s)";
 
     private FilterType filterType;
     private FilterArgument filterArgument;
@@ -59,8 +59,7 @@ public class ListPositionCommand extends ListCommand {
         requireNonNull(model);
 
         if (filterType != null && filterArgument != null) {
-            switch(filterType.filterType) {
-            case "name":
+            if (filterType.filterType.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Position> predicate = new PositionNamePredicate(Arrays.asList(nameKeywords));
                 model.updateFilteredPositionList(predicate);

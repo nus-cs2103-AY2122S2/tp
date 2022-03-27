@@ -1,29 +1,32 @@
-package seedu.address.logic.parser.applicants;
+package seedu.address.logic.parser.interview;
 
 import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
-import seedu.address.logic.commands.applicant.ListApplicantCommand;
+import seedu.address.logic.commands.interview.ListInterviewCommand;
+import seedu.address.logic.commands.position.ListPositionCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 
-public class ListApplicantCommandParser implements Parser<ListApplicantCommand> {
-
+public class ListInterviewCommandParser implements Parser<ListInterviewCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the ListApplicantCommand
-     * and returns an ListApplicantCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListInterviewCommand
+     * and returns an ListInterviewCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ListApplicantCommand parse(String args) throws ParseException {
+    public ListInterviewCommand parse(String args) throws ParseException {
         if (args.equals("")) {
-            return new ListApplicantCommand();
+            return new ListInterviewCommand();
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILTER_TYPE, PREFIX_FILTER_ARGUMENT);
@@ -32,14 +35,22 @@ public class ListApplicantCommandParser implements Parser<ListApplicantCommand> 
                 argMultimap.getValue(PREFIX_FILTER_ARGUMENT).isPresent()) {
 
             FilterType filterType =
-                    ParserUtil.parseFilterType(DataType.APPLICANT, argMultimap.getValue(PREFIX_FILTER_TYPE).get());
+                    ParserUtil.parseFilterType(DataType.INTERVIEW, argMultimap.getValue(PREFIX_FILTER_TYPE).get());
             FilterArgument filterArgument =
                     ParserUtil.parseFilterArgument(argMultimap.getValue(PREFIX_FILTER_ARGUMENT).get());
 
-            return new ListApplicantCommand(filterType, filterArgument);
+            if (filterType.filterType.equals("date")) {
+                try {
+                    LocalDate.parse(filterArgument.toString());
+                } catch (DateTimeParseException e) {
+                    throw new ParseException(Messages.MESSAGE_INVALID_DATE);
+                }
+            }
+
+            return new ListInterviewCommand(filterType, filterArgument);
         } else {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListApplicantCommand.MESSAGE_USAGE));
+                    ListPositionCommand.MESSAGE_USAGE));
         }
     }
 }

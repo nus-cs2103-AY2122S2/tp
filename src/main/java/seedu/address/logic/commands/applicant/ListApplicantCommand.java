@@ -56,8 +56,7 @@ public class ListApplicantCommand extends ListCommand {
         requireNonNull(model);
 
         if (filterType != null && filterArgument != null) {
-            switch(filterType.filterType) {
-            case "name":
+            if (filterType.filterType.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
                 model.updateFilteredApplicantList(predicate);

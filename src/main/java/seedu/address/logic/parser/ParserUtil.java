@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.DataType;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.FilterArgument;
@@ -181,7 +182,7 @@ public class ParserUtil {
             LocalDateTime dateParsed = LocalDateTime.parse(date, formatter);
             return dateParsed;
         } catch (DateTimeException e) {
-            throw new ParseException("Date time format should be yyyy-MM-dd HH:mm");
+            throw new ParseException(Messages.MESSAGE_INVALID_DATETIME);
         }
 
     }
@@ -276,15 +277,9 @@ public class ParserUtil {
     /**
      * Parses a {@code String filterArgument} into a {@code FilterArgument}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code filterArgument} is invalid.
      */
-    public static FilterArgument parseFilterArgument(String filterArgument) throws ParseException {
+    public static FilterArgument parseFilterArgument(String filterArgument) {
         requireNonNull(filterArgument);
-        String trimmedFilterArgument = filterArgument.trim();
-        if (!FilterArgument.isValidFilterArgument(trimmedFilterArgument)) {
-            throw new ParseException(FilterArgument.MESSAGE_CONSTRAINTS);
-        }
-        return new FilterArgument(trimmedFilterArgument);
+        return new FilterArgument(filterArgument.trim());
     }
 }

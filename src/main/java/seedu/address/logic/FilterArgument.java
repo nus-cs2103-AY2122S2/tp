@@ -5,14 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class FilterArgument {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Filter arguments should only contain alphanumeric characters and spaces, and it should not be blank";
-
-    /*
-     * The first character of the filter argument must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MESSAGE_CONSTRAINTS = "Filter arguments should not be blank";
 
     public final String filterArgument;
 
@@ -23,17 +16,8 @@ public class FilterArgument {
      */
     public FilterArgument(String argument) {
         requireNonNull(argument);
-        checkArgument(isValidFilterArgument(argument), MESSAGE_CONSTRAINTS);
         filterArgument = argument;
     }
-
-    /**
-     * Returns true if a given string is a valid filter argument.
-     */
-    public static boolean isValidFilterArgument(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
-
 
     @Override
     public String toString() {
