@@ -12,7 +12,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class FilterType {
 
     public static final String MESSAGE_CONSTRAINTS
-            = "Invalid filter type for the data specified\nRefer to help for the list of filter types";
+            = "Invalid filter type for the data type specified\nRefer to help for the list of filter types";
 
     public static final Map<DataType, HashSet<String>> validFilterTypes = loadFilterTypes();
 

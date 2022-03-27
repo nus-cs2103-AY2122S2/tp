@@ -266,7 +266,7 @@ public class ParserUtil {
      */
     public static FilterType parseFilterType(DataType dataType, String filterType) throws ParseException {
         requireNonNull(filterType);
-        String trimmedFilterType = filterType.trim();
+        String trimmedFilterType = filterType.trim().toLowerCase();
         if (!FilterType.isValidFilterType(dataType, trimmedFilterType)) {
             throw new ParseException(FilterType.MESSAGE_CONSTRAINTS);
         }

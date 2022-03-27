@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.applicant;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.DataType;
@@ -10,7 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.NameContainsKeywordsPredicate;
+import seedu.address.model.applicant.ApplicantNamePredicate;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -19,8 +21,17 @@ import java.util.function.Predicate;
  * Lists all persons in the address book to the user.
  */
 public class ListApplicantCommand extends ListCommand {
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " -a: List applicants  with optional parameters."
+            + "\nOptional parameters: "
+            + PREFIX_FILTER_TYPE + "FILTER_TYPE "
+            + PREFIX_FILTER_ARGUMENT + "FILTER_TYPE "
+            + "\nExample: " + COMMAND_WORD + " -a "
+            + PREFIX_FILTER_TYPE + "name "
+            + PREFIX_FILTER_ARGUMENT + "John Doe ";
+
     public static final String MESSAGE_SUCCESS_ALL = "Listed all applicants";
-    public static final String MESSAGE_SUCCESS_FILTER = "Filtered applicants, %1$d applicants listed";
+    public static final String MESSAGE_SUCCESS_FILTER = "Filtered applicants, %1$d applicant(s) listed";
 
     private FilterType filterType;
     private FilterArgument filterArgument;
@@ -46,7 +57,7 @@ public class ListApplicantCommand extends ListCommand {
         requireNonNull(model);
         if (filterType != null && filterArgument != null) {
             String[] nameKeywords = filterArgument.toString().split("\\s+");
-            Predicate<Applicant> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+            Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
             model.updateFilteredApplicantList(predicate);
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_FILTER, model.getFilteredApplicantList().size()),
