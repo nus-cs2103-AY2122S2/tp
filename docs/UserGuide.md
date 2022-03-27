@@ -304,10 +304,24 @@ Examples:
 
 Undoes the most recent command. 
 
+At the moment, the command that can be undone are the following:   
+
+-  `add`
+-  `edit`
+-  `delete`
+-  `clear`
+-  `find`
+-  `filter`
+-  `comment`
+
 Format: `undo`
 
 Examples:
-- After deleting a contact at index 5, `undo` will reverse the delete command and bring the contact back at index 5.
+
+- `delete 5`  
+`undo`
+
+After deleting a person at index 5, `undo` will reverse the delete command and bring the person back at index 5.
 
 ### Redo a command : `redo`
 
@@ -316,9 +330,12 @@ Restores most recent command that was undone using `undo`.
 Format: `redo`
 
 Examples:
-- After editing a contact's name at index 3 from `George` to `Adam` and using `undo` to reverse the contact's name
-back to `George`, using `redo` will restore the contact's name back to `Adam`.
 
+- `edit 3 n/Adam`  
+`undo`  
+`redo`
+
+ After editing a person's name at index 3 from `George` to `Adam` and using `undo` to reverse the person's name back to `George`, using `redo` will restore the person's name back to `Adam`.
 ### Exiting the program : `exit`
 
 Exits the program.
