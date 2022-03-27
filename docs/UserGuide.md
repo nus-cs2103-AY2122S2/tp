@@ -96,15 +96,15 @@ For example, a command to find a show could look like this:
 
 In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
-| Component | Prefix | Description                                                                            |
-|-----------|--------|----------------------------------------------------------------------------------------|
-| KEYWORD   | None   | The input after the command word                                                       |
-| INDEX     | None   | The index of the show as shown in the show panel list                                  |
-| NAME      | n/     | The name to use for a show                                                             |
-| STATUS    | s/     | The three statuses to label for a show are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
-| TAG       | t/     | The tag to label a show                                                                |
-| COMMENT   | c/     | The comment to describe a show                                                         |
-| RATE      | r/     | The rating to give a show                                                              |
+| Parameters | Prefix | Description                                                                            |
+|------------|--------|----------------------------------------------------------------------------------------|
+| KEYWORD    | None   | The input after the command word                                                       |
+| INDEX      | None   | The index of the show as shown in the show panel list                                  |
+| NAME       | n/     | The name to use for a show                                                             |
+| STATUS     | s/     | The three statuses to label for a show are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
+| TAG        | t/     | The tag to label a show                                                                |
+| COMMENT    | c/     | The comment to describe a show                                                         |
+| RATE       | r/     | The rating to give a show                                                              |
 
 <div markdown="block" class="alert alert-info">
 
@@ -195,7 +195,7 @@ Format: `clear`
 
 ### Adding a show: `add`
 
-**Description:** Planning to watch a show and want to store its details? Add a show to Trackermon's show list!
+**Description:** Planning to watch a show and want to store its details? Add it to Trackermon's show list!
 
 **Format:** `add n/NAME s/STATUS [c/COMMENT] [t/TAG]…​`
 
@@ -233,19 +233,25 @@ The **index** parameter provided should be a [non-zero unsigned integer](https:/
 
 ### Editing a show: `edit`
 
-**Description:** Wanting to modify a show? Edit a show at the specified index shown in Trackermon's show list!
+**Description:** Wanting to modify a show? Edit it at the specified index shown in Trackermon's show list!
 
 **Format:** `edit INDEX [n/NAME] [s/STATUS] [c/COMMENT] [t/TAG]…​`
 
-**Example & Output:** `edit 2 n/Sailor Moo`
+<div markdown="span" class="alert alert-warning">:bulb: **Tip:**
+Multiple show [parameters](#command-structure) can be edited at the same time
+</div>
+
+**Example & Output:** `edit 2 n/Sailor Moo t/Horror`
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Caution:**<br>
-* **At least one field** to edit must be provided.
+* **An [index](#command-structure)** to edit must be provided.
+* **At least a [prefix](#command-structure) followed by a [parameter](#command-structure)** to edit must be provided.
 * Editing to an existing name is **not allowed**.
+* Editing a `TAG` parameter will cause all the previous tags of the show to be deleted.
 * The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
@@ -257,7 +263,7 @@ The **index** parameter provided should be a [non-zero unsigned integer](https:/
 
 ### Finding a show: `find`
 
-**Description (General Find):** Searching for a show across all parameters? Find shows containing the search words.
+**Description (General Find):** Searching for a show across all parameters? Find shows containing the search words!
 
 **Format (General Find):** `find KEYWORD`
 
@@ -276,7 +282,7 @@ The **index** parameter provided should be a [non-zero unsigned integer](https:/
 
 </div>
 
-**Description (Precise Find):** Searching for a show across specific parameters? Find shows containing the search words based on [prefix](#command-structure).
+**Description (Precise Find):** Searching for a show across specific parameters? Find shows containing the search words based on [prefix](#command-structure)!
 
 **Format (Precise Find):** `find [n/NAME] [s/STATUS] [t/TAG]…​`
 
@@ -304,7 +310,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 <div markdown="block" class="alert alert-danger">
 
 :exclamation:**Caution:**<br>
-* There must be at **least one [prefix](#command-structure) field** and it **must not be empty**.
+* There must be at **least one [prefix](#command-structure) followed by a [parameter](#command-structure)** and it **must not be empty**.
 
 :exclamation:**Multiple of the same prefixes:**<br>
 * find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
@@ -372,7 +378,7 @@ _Details coming soon ..._
 
 | Term                               | Description                                                                                                                                                                            |
 |------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AND search**                     | AND search finds all of the keywords.  For example, searching on Shutter AND Island returns only results that contain all two search terms.  It offers very limited results.           |
+| **AND search**                     | AND search finds all of the keywords.  For example, `find n/Shutter Island` returns only results that contain Shutter and Island.                                                      |
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a user to a computer program or operating system. Through the CLI, users interact with a system or application by typing in text (commands).         | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows users to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
 | **Parameter**                      | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)                                                                                          |
