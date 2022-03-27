@@ -87,6 +87,8 @@ public class StateChangeRecorder {
         stateChanges.subList(curStateChange + LIST_OFFSET, stateChanges.size()).clear();
         stateChanges.add(nextStateChange);
         curStateChange++;
+
+        prepareNewStateChange();
     }
 
     /**
@@ -109,6 +111,8 @@ public class StateChangeRecorder {
      * Reverts most recently changes to IBook.
      */
     public void revertStateChange() {
+        assert hasOlderStateChange();
+
         curStateChange--;
     }
 
@@ -116,6 +120,8 @@ public class StateChangeRecorder {
      * Restores most recently reverted changes to IBook.
      */
     public void restoreStateChange() {
+        assert hasNewerStateChange();
+
         curStateChange++;
     }
 
