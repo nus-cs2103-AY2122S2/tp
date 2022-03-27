@@ -74,10 +74,10 @@ Examples of usages:
 * `find J` returns `john` and`jay`
 
 Scenario:
-![find](images/FindScreenshotForUG.png) Figure 1
+![find](images/FindScreenshotForUG.png) *Figure 1: Screenshot of result of the find command*
 
 
-As seen in the figure, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *figure 1*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Adding a contact: `add`
 Add a student with relevant details into Tracey.
@@ -89,7 +89,14 @@ Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
 * Tracey will acknowledge that the student has been added
 * Tags for faculty and covid status need to be specific to the list defined below (refer to Pre-defined constants).
-* If the inputted tag is not one of those defined in the **Pre-defined constants** as described in Figure 2, there will be an error and the user will have to input the details again. 
+* If the inputted tag is not one of those defined in the **Pre-defined constants** as described in Figure 3, there will be an error and the user will have to input the details again.
+
+
+| Correct Usage :white_check_mark: | Incorrect Usage  :x: |
+|:--------------------:|:-----------------:|
+|     cs/Negative      | cs/Close-contact  |  
+|        f/SoC         |      f/SooC       |  
+*Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3*
 
 Examples of usage:
 * `add n/Melvin f/SOC cs/ Negative`
@@ -97,15 +104,18 @@ Examples of usage:
 
 
 | **Tag** | **Meaning** | **Pre-defined constants** |
-|---------|-------------|---------------------------|
-|    `n/`     |     Name          |                           |
-|     `p/`    |     Phone Number        |                           |
-|     `e/`    |    Email           |                           |
-|     `a/`    |     Address         |                           |
-|     `f/`    |      Faculty       |         `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS`                  |
-|     `mc/`    |     Matriculation Number        |                           |
-|     `cs/`    |    Covid Status         |        `Positive`, `Negative`, `HRN`                   |
+|:-------:|:-----------:|:-------------------------:|
+|    `n/`     |       Name        |                           |
+|    `p/`     |      Phone Number       |                           |
+|    `e/`     |       Email        |                           |
+|    `a/`     |       Address       |                           |
+|    `f/`     |      Faculty       |             `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS`              |
+|    `mc/`     |      Matriculation Number       |                           |
+|    `cs/`     |      Covid Status       |             `Positive`, `Negative`, `HRN`              |
+*Figure 3: Table showing list of possible tags and the Pre-defined constants*
 
+As described in Figure 3, these are the possible tags that can be used with **Tracey**. E.g `n/`, `cs/` etc.
+In addition, the list of Pre-defined constants are also provided for `Faculty` and `Covid Status`. 
 
 ### Deleting a contact: `delete`
 Delete a contact at a specific index
