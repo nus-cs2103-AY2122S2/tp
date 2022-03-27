@@ -91,13 +91,15 @@ Examples:
 
 Edits a TA in the system.
 
-Format: `edit INDEX c/VALUE yr/VALUE [ATTRIBUTE_FIELD/VALUE]...`
+Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the edit format:**<br>
 
 `ATTRIBUTE_FIELD` can take on the following values `id`, `name`, `phone`, `course`, `yr`, `as`, `avail`
+
+* `as` is short for `ApplicationStatus`.
 
 </div>
 
@@ -223,7 +225,7 @@ Format: `focus INDEX`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the system.
 
 Format: `clear`
 
@@ -265,7 +267,7 @@ _Details coming soon ..._
 | **Add**      | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
 | **Clear**    | `clear`                                                                                                                                                          |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                 |
 | **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                     |
 | **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                 |
 | **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                                                      |
