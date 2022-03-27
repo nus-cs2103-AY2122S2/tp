@@ -194,7 +194,6 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 ![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
 
 ### Tag feature
-
 #### Current Implementation
 The current tagging feature is originally a functionality in the `Add` command. However, it was extracted out and made
 into its own command in order to help facilitate a clearer distinction between those features. The `Tag` command would
@@ -209,7 +208,7 @@ allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of su
 
 ![Class diagram for Tag](images/TagClassDiagram.png)
 
-Given below is an example usage scenario and how the tagging mechanism behaves at each step.
+Below is an example usage scenario and how the tagging mechanism behaves at each step:
 
 Step 1. The user enters the following valid `TagCommand`: `tag 1 edu/computer science m/cs2030s m/cs2040s` and `LogicManager`
 would execute it.
@@ -229,6 +228,46 @@ and stored in the addressbook.`CommandResult` would then generate a success mess
 successfully.
 
 ![The following sequence diagram shows how the tag operation works:](images/TagSequenceDiagram.png)
+
+### Event feature
+#### Current Implementation
+The event command allows the user to create an event which will be stored in the address book. Each `Event` has the following
+fields:
+* `EventName` - the name of the event
+* `Information`- additional details about the event
+* `Participants` - the persons participating in this event
+* `DateTime` - the date and time of the event
+
+For each `Event`, the user is able to indicate which of the following persons will be tagged to the event being created. Hence,
+`Delete` and `Edit` have dependencies on `Event` where changes in the participants' names would have to be changed and reflected
+accordingly for the respective events that are affected.
+
+Below is an example usage scenario and how the tagging mechanism behaves at each step:
+
+Step 1. The user enters the valid `EventCommand` : `event 1 name/Lunch Appt info/Having lunch at Hai Di Lao d/2023-02-20 t/12:15` and
+`LogicManager` would execute it.
+
+Step 2. `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `EventCommand`.
+It will then pass the arguments to `EventCommandParser` to handle the parsing for the identified `EventCommand`.
+
+Step 3. `EventCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to tag to the event.
+Afterwards, `EventCommandParser` would parse the event arguments provided using `ParserUtil#parseEventName()` to identify the event name,
+`ParserUtil#parseInfo()` to identify the event details and `ParserUtil#parseDateTime()` to identify the event date and time.
+
+Step 4. After parsing the arguments, the control is handed over to `EventCommand` where it will return an `EventCommand` object. It
+will eventually return to `LogicManager` which will call `EventCommand#execute()` to execute the command.
+
+Step 5. Upon execution, the event will be created and added into the `AddressBook` using `Model#addEvent`. 
+`CommandResult` would then generate a success message to inform the user the event has been added successfully.
+
+![The following sequence diagram shows how the tag operation works:](images/EventSequenceDiagram.png)
+
+### Cancelevent feature
+#### Current Implementation
+The cancelevent command would allow the user to cancel and remove an event from the address book. The index specified by the user would
+lead to the deletion of the corresponding event in the event list, as long as it is a valid index. The user also has the option of specifying
+multiple indexes if multiple deletions are required.
+
 
 ### Edit Feature
 
