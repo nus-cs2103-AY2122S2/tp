@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -32,6 +33,7 @@ public class PersonBuilder {
     private JerseyNumber jerseyNumber;
     private Weight weight;
     private Set<Tag> tags;
+    private Set<LineupName> lineupNames;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +46,7 @@ public class PersonBuilder {
         jerseyNumber = new JerseyNumber(DEFAULT_JERSEY_NUMBER);
         weight = new Weight(DEFAULT_WEIGHT);
         tags = new HashSet<>();
+        lineupNames = new HashSet<>();
     }
 
     /**
@@ -57,6 +60,7 @@ public class PersonBuilder {
         jerseyNumber = personToCopy.getJerseyNumber();
         weight = personToCopy.getWeight();
         tags = new HashSet<>(personToCopy.getTags());
+        lineupNames = new HashSet<>(personToCopy.getLineupNames());
     }
 
     /**
@@ -115,8 +119,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code lineups} into a {@code Set<LineupName>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLineups(String ... lineups) {
+        this.lineupNames = SampleDataUtil.getLineupSet(lineups);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, height, jerseyNumber, tags, weight);
+        return new Person(name, phone, email, height, jerseyNumber, tags, weight, lineupNames);
     }
 
 }

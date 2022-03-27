@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Person;
 
 /**
@@ -34,7 +35,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withHeight("173").withWeight("72")
-            .withJerseyNumber("0").withTags("SF", "PF").build();
+            .withJerseyNumber("0").withTags("SF", "PF").withLineups("Starting 5").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withJerseyNumber("1").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
