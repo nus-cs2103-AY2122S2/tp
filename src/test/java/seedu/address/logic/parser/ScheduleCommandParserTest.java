@@ -12,11 +12,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
 
 public class ScheduleCommandParserTest {
     private final ScheduleCommandParser parser = new ScheduleCommandParser();
-    private final AddScheduleCommandParser addParser = new AddScheduleCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() throws ParseException {

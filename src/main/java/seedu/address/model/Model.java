@@ -21,6 +21,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to false */
     Predicate<Candidate> PREDICATE_SHOW_EMPTY_LIST = unused -> false;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Interview> PREDICATE_SHOW_ALL_INTERVIEWS = unused -> true;
+
     /** {@code Predicate} that always evaluate to false */
     Predicate<Interview> PREDICATE_SHOW_EMPTY_INTERVIEW_SCHEDULE = unused -> false;
 

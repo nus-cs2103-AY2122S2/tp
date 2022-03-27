@@ -182,7 +182,7 @@ public class ModelManager implements Model {
     public void addInterview(Interview interview) {
         interviewSchedule.addInterview(interview);
         interviewSchedule.sortInterviews();
-        //updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+        updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
     /**
