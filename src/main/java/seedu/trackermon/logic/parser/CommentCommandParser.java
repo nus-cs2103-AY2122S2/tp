@@ -18,7 +18,7 @@ public class CommentCommandParser {
     /**
      * Parse the given {@code String} of arguments in the context of the CommentCommand
      * and returns a CommentCommand object for execution.
-     * @throw ParseException if the user input does not confirm the expected format.
+     * @throws ParseException if the user input does not confirm the expected format.
      */
     public CommentCommand parse(String args) throws ParseException {
         requireNonNull(args);
