@@ -15,8 +15,9 @@ import seedu.trackermon.commons.core.JarTools;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path showListFilePath = Paths.get(
-            JarTools.getClassLocationString(UserPrefs.class) , "data" , "trackermon.json");
+    private Path showListFilePath = JarTools.runningFromJarFile()
+            ? Paths.get(JarTools.getClassLocationString(UserPrefs.class), "data" , "trackermon.json")
+            : Paths.get("data" , "trackermon.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
