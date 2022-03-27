@@ -30,8 +30,10 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
     * **`list`** : Lists all TAs.
 
     * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new TA into the system.
+   
+    * **`edit [INDEX] c/Computer Science yr/3 avail/1 ...`** Edits the specified TA in the system.
 
-    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
+    * **`delete [INDEX]`** : Deletes the TA with ID A0213456H from the system.
 
     * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
 
@@ -85,31 +87,33 @@ Format: `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILIT
 Examples:
 * `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new TA with Student ID, E0123456, named John Doe.
 
+### Editing a Teaching Assistant: `edit`
+
+Edits a TA in the system.
+
+Format: `edit INDEX c/VALUE yr/VALUE [ATTRIBUTE_FIELD/VALUE]...`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the edit format:**<br>
+
+`ATTRIBUTE_FIELD` can take on the following values `id`, `name`, `phone`, `course`, `yr`, `as`, `avail`
+
+</div>
+
+* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed TA list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+* `edit 1 n/Jane Doe yr/3 avail/1` Edits the name, year and availability of the 1st candidate to be Jane Doe, Year 3, Monday only respectively.
+* `edit 2 c/Business Analytics` Edits the course of the 2nd candidate to be `Business Analytics`.
+
 ### Listing all Teaching Assistants : `list`
 
 Displays all TAs found in the system.
 
 Format: `list`
-
-<!-- For Edit TA in the future
-### Editing a candidate : `edit`
-
-Edits an existing candidate in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the candidate will be removed i.e. adding of tags is not cumulative.
-* You can remove all the candidate’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st candidate to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd candidate to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 as/Accepted is/Interviewing` Edits the Application Status and Interview Status of the Candidate.
--->
 
 ### Finding candidates by keyword(s) search: `find`
 
@@ -119,7 +123,6 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 
 Note: `ATTRIBUTE_FIELD` can take on the following values
 `course`, `email`, `name`, `phone`, `candidate`, `studentid`
-
 
 * The keyword search is case-insensitive. e.g `hans` will match `Hans`
 * The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
@@ -154,10 +157,12 @@ Let's reference a default sample list of unique TA candidates with attribute fie
 1. (`Ben`, `E23456789`)
 2. (`Alice`, `E0234567`)
 3. (`Charlie`, `E0123456`)
+
 * `sort s/name` returns TAs sorted by name in the following order:
 1. (`Alice`, `E0234567`)
 2. (`Ben`, `E23456789`)
 3. (`Charlie`, `E0123456`)
+
 * `sort s/studentid` returns TAs sorted by name in the following order:
 1. (`Charlie`, `E0123456`)
 2. (`Alice`, `E0234567`)
