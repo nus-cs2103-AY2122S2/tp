@@ -115,7 +115,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/<NAME> s/<STATUS> [c/<COMMENT>] [t/<TAG>]` can be used as `n/ReZero s/completed c/What a Simp t/Anime` or as `n/ReZero s/completed`.
+  e.g `n/<NAME> s/<STATUS> [c/<COMMENT>] [t/TAG]…` can be used as `n/ReZero s/completed c/What a Simp t/Anime` or as `n/ReZero s/completed`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
@@ -266,8 +266,14 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 **Description:** Want to write down your comments about a show? Note it down in Trackermon!
 
 **Format:** `comment <INDEX> [c/<COMMENT>]`
+* Edit comment of the show at the specified `<INDEX>`.
+* The index refers to the index number shown in the displayed show list. (not overall)
+* The index **must be a positive integer** 1,2,3,...
+* Omitting the `[c/<COMMENT>]` would remove the comment of that specific show.
 
 **Examples:** `comment 2 c/This is a good show!`
+* `list` followed by `comment 2 c/Not bad` edits 2nd show's comment in Trackermon to "Not bad".
+* `find ghibli` followed by `comment 1` deletes the comment of the 1st show in results of `find` command.
 
 ---
 
