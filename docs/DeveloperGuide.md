@@ -184,7 +184,7 @@ This can be achieved using the `hasNewModules()` and `getNewModules()` internal 
 `getCommandResult()` of `execute()` utilizes these helper functions to create a `CommandResult` object containing varied feedback messages depending on the following possibilities:
 1. Case 1: Modules from user input contain only new modules
    * Shows new modules added
-2. Case 2: Modules from user input contain only new modules
+2. Case 2: Modules from user input contain some new modules
    * Shows new modules added, with warning that some modules already exist
 3. Case 3: Modules from user input contain no new modules
    * Shows warning that modules already exist, no new modules added, along with list of existing modules (to show the user that despite the "error", no further actions associated with typical failed commands need to be taken)
