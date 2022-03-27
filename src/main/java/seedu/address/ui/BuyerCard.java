@@ -63,11 +63,24 @@ public class BuyerCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (!(buyer.getPropertyToBuy() instanceof NullPropertyToBuy)) {
-            propertyType.setText("Type: " + buyer.getPropertyToBuy().getHouse().getHouseTypeToString());
-            propertyLocation.setText("Location: " + buyer.getPropertyToBuy().getHouse().getLocationToString());
-            propertyLowerPrice.setText("Price: " + buyer.getPropertyToBuy().getPriceRange().getLowerToString()
-                                               + " to " + buyer.getPropertyToBuy().getPriceRange().getUpperToString());
-            //propertyUpperPrice.setText(""buyer.getPropertyToBuy().getPriceRange().getUpperToString());
+            String houseType = buyer.getPropertyToBuy().getHouse().getHouseTypeToString();
+            String houseLocation = buyer.getPropertyToBuy().getHouse().getLocationToString();
+            String houseLowerPrice = buyer.getPropertyToBuy().getPriceRange().getLowerToString();
+            String houseUpperPrice = buyer.getPropertyToBuy().getPriceRange().getUpperToString();
+
+
+            if (houseType.equals("")) {
+                propertyType.setText("No Property");
+                propertyLocation.setText("No Location");
+                propertyLowerPrice.setText("NaN");
+                propertyUpperPrice.setText("NaN");
+            } else {
+                propertyType.setText(houseType);
+                propertyLocation.setText(houseLocation);
+                propertyLowerPrice.setText(houseLowerPrice);
+                propertyUpperPrice.setText(houseUpperPrice);
+            }
+
         }
     }
 

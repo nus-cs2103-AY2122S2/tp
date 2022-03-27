@@ -130,8 +130,9 @@ public class PriceRange {
         // [50, 100] , [99, 200] should match.
         // [100, 200] . [40, 99] should NOT match.
         // [50, 60], [10, 100] should match.
-        // [10, 100], [50, 60] should match.
-        return isWithinRange(buyRange.getLower(), sellRange) || isWithinRange(buyRange.getUpper(), sellRange);
+        // [10,100], [20, 40] should match, and vice versa.
+        return isWithinRange(buyRange.getLower(), sellRange) || isWithinRange(buyRange.getUpper(), sellRange)
+            || isWithinRange(sellRange.getLower(), buyRange) || isWithinRange(sellRange.getLower(), buyRange);
     }
 
     @Override
