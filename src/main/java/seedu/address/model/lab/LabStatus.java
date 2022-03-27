@@ -16,6 +16,10 @@ public enum LabStatus {
 
     public static final String VALIDATION_REGEX = "[usg]";
 
+    public static final String UNSUBMITTED_DESCRIPTION = "Not Submitted";
+    public static final String SUBMITTED_DESCRIPTION = "Submitted but yet to grade";
+    public static final String GRADED_DESCRIPTION = "Graded";
+
     /**
      * Returns true if a given string is a valid LabStatus
      */
@@ -52,11 +56,11 @@ public enum LabStatus {
 
         switch (labStatus) {
         case UNSUBMITTED:
-            return "Not Submitted";
+            return UNSUBMITTED_DESCRIPTION;
         case SUBMITTED:
-            return "Submitted but yet to grade";
+            return SUBMITTED_DESCRIPTION;
         case GRADED:
-            return "Graded";
+            return GRADED_DESCRIPTION;
         default:
             throw new InvalidLabStatusException();
         }
