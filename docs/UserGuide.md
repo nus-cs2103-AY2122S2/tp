@@ -366,8 +366,8 @@ Format: `deleteTransaction INDEX_TRANSACTION`
 </div>
 
 Examples:
-* `listTransaction 2`
-* `find Bob | listTransaction 1` will add the transaction to the first client that has Bob
+* `deleteTransaction 2`
+* `find Bob | deleteTransaction 1` will add the transaction to the first client that has Bob
   in its' attributes.
 
 ### Add Membership (`addMembership`)
