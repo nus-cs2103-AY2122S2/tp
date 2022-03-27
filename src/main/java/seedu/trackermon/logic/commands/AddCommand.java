@@ -55,7 +55,7 @@ public class AddCommand extends Command {
         }
 
         model.addShow(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), model.getShowListSize() - 1);
     }
 
     @Override

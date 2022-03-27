@@ -82,7 +82,7 @@ public class EditCommand extends Command {
         }
 
         model.setShow(showToEdit, editedShow);
-        return new CommandResult(String.format(MESSAGE_EDIT_SHOW_SUCCESS, editedShow));
+        return new CommandResult(String.format(MESSAGE_EDIT_SHOW_SUCCESS, editedShow), index.getZeroBased());
     }
 
     /**
