@@ -5,12 +5,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
- * Tests that a {@code Event}'s  {@code companyName} matches any of the keywords given.
+ * Tests that a {@code Event}'s  attributes matches any of the keywords given by user.
+ * Acts the main logic part for checking whether an Event should be displayed for finde command
  */
 public class EventContainsKeywordsPredicate implements Predicate<Event> {
 
@@ -21,6 +19,15 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> locationKeywords;
     private final List<String> tagKeywords;
 
+    /**
+     * Main Constructor for EventContainsKeywordsPredicate
+     * @param nameKeywords user input to search event name
+     * @param companyKeywords user input to search event companyName
+     * @param dateKeywords user input to search event date
+     * @param timeKeywords user input to search event time
+     * @param locationKeywords user input to search event location
+     * @param tagKeywords user input to search event tag
+     */
     public EventContainsKeywordsPredicate(List<String> nameKeywords,
                                           List<String> companyKeywords,
                                           List<String> dateKeywords,
@@ -44,26 +51,26 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         boolean correctLocation;
         boolean correctTag;
 
-        if(validKeywords(nameKeywords)) {
+        if (validKeywords(nameKeywords)) {
             correctName = true;
         } else {
             correctName = nameKeywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword));
         }
-        if(validKeywords(companyKeywords)) {
+        if (validKeywords(companyKeywords)) {
             correctCompany = true;
         } else {
             correctCompany = companyKeywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getCompanyName().fullName, keyword));
         }
-        if(validKeywords(dateKeywords)) {
+        if (validKeywords(dateKeywords)) {
             correctDate = true;
         } else {
             correctDate = dateKeywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getDate().getPure().toString(),
                             keyword));
         }
-        if(validKeywords(timeKeywords)) {
+        if (validKeywords(timeKeywords)) {
             correctTime = true;
         } else {
             correctTime = timeKeywords.stream()
@@ -71,7 +78,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                             keyword));
         }
 
-        if(validKeywords(locationKeywords)) {
+        if (validKeywords(locationKeywords)) {
             correctLocation = true;
         } else {
             correctLocation = locationKeywords.stream()
@@ -79,7 +86,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                             keyword));
         }
 
-        if(validKeywords(tagKeywords)) {
+        if (validKeywords(tagKeywords)) {
             correctTag = true;
         } else {
             correctTag = tagKeywords.stream()
