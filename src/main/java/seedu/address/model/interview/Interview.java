@@ -25,10 +25,11 @@ public class Interview {
      */
     public Interview(Candidate candidate, LocalDateTime interviewDateTime) {
         requireAllNonNull(candidate, interviewDateTime);
-        this.candidate = candidate;
         this.interviewDateTime = interviewDateTime;
         this.interviewEndDateTime = interviewDateTime.plusMinutes(INTERVIEW_DURATION_IN_MINUTES);
         this.interviewDay = interviewDateTime.getDayOfWeek().getValue();
+        Candidate candidateWithStatus = candidate.triggerInterviewStatus();
+        this.candidate = candidateWithStatus;
     }
 
     /**

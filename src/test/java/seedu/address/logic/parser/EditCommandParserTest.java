@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INTERVIEW_STATUS_PENDING;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -26,7 +25,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -130,12 +128,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_CANDIDATE;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY + APPLICATION_STATUS_PENDING
-                + INTERVIEW_STATUS_PENDING;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY + APPLICATION_STATUS_PENDING;
 
         EditCandidateDescriptor descriptor = new EditCandidateDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).withApplicationStatus(VALID_APPLICATION_PENDING)
-                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
+                .withEmail(VALID_EMAIL_AMY).withApplicationStatus(VALID_APPLICATION_PENDING).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

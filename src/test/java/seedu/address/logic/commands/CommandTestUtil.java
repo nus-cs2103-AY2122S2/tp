@@ -110,12 +110,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withCourse(VALID_COURSE_AMY)
                 .withSeniority(VALID_SENIORITY_AMY).withTags(VALID_TAG_FRIEND)
                 .withApplicationStatus(APPLICATION_STATUS_PENDING)
-                .withInterviewStatus(INTERVIEW_STATUS_PENDING).withAvailability(VALID_AVAILABILITY_AMY).build();
+                .withAvailability(VALID_AVAILABILITY_AMY).build();
         DESC_BOB = new EditCandidateDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withCourse(VALID_COURSE_BOB)
                 .withSeniority(VALID_SENIORITY_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .withApplicationStatus(APPLICATION_STATUS_PENDING)
-                .withInterviewStatus(INTERVIEW_STATUS_PENDING).withAvailability(VALID_AVAILABILITY_BOB).build();
+                .withAvailability(VALID_AVAILABILITY_BOB).build();
     }
 
     /**

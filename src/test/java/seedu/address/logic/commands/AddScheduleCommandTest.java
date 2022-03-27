@@ -45,6 +45,8 @@ public class AddScheduleCommandTest {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
         AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
+        candidateToInterview = candidateToInterview.triggerInterviewStatus();
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
         String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
@@ -75,6 +77,7 @@ public class AddScheduleCommandTest {
 
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
+        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
 
         String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 candidateToInterview.getName(), candidateToInterview.getStudentId(),

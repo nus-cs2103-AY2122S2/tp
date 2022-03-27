@@ -1,9 +1,12 @@
 package seedu.address.model.candidate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
@@ -98,4 +101,12 @@ public class CandidateTest {
         editedAlice = new CandidateBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
+
+    @Test
+    public void trigger_interviewStatus_success() {
+        Candidate candidate = new CandidateBuilder().withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
+        assertEquals(candidate.triggerInterviewStatus().getInterviewStatus(),
+                new InterviewStatus(VALID_INTERVIEW_SCHEDULED));
+    }
+
 }

@@ -1,6 +1,7 @@
 package seedu.address.model.candidate;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -165,6 +166,26 @@ public class Candidate {
                 .append("; Availability: ")
                 .append(getAvailability());
         return builder.toString();
+    }
+
+    /**
+     * Used by ScheduleCommand to return the same Candidate
+     * with `Scheduled` InterviewStatus.
+     */
+    public Candidate triggerInterviewStatus() {
+        requireAllNonNull(name, phone, email, course, seniority, tags,
+                applicationStatus, interviewStatus, availability);
+        return new Candidate(this.getStudentId(),
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCourse(),
+                this.getSeniority(),
+                this.getTags(),
+                this.getApplicationStatus(),
+                new InterviewStatus(SCHEDULED),
+                this.getAvailability()
+        );
     }
 
 }

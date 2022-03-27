@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
@@ -56,7 +55,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_SENIORITY + "SENIORITY] "
             + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION STATUS] "
-            + "[" + PREFIX_INTERVIEW_STATUS + "INTERVIEW STATUS] "
             + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -188,7 +186,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, tags,
-                    applicationStatus, interviewStatus, availability);
+                    applicationStatus, availability);
         }
 
         public void setStudentId(StudentId id) {
@@ -304,7 +302,6 @@ public class EditCommand extends Command {
                     && getSeniority().equals(e.getSeniority())
                     && getTags().equals(e.getTags())
                     && getApplicationStatus().equals(e.getApplicationStatus())
-                    && getInterviewStatus().equals(e.getInterviewStatus())
                     && getAvailability().equals(e.getAvailability());
         }
 

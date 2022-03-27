@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
@@ -39,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_COURSE, PREFIX_SENIORITY, PREFIX_TAG, PREFIX_APPLICATION_STATUS,
-                        PREFIX_INTERVIEW_STATUS, PREFIX_AVAILABILITY);
+                        PREFIX_AVAILABILITY);
 
         Index index;
 
@@ -76,11 +75,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_APPLICATION_STATUS).isPresent()) {
             editCandidateDescriptor.setApplicationStatus(
                     ParserUtil.parseApplicationStatus(argMultimap.getValue(PREFIX_APPLICATION_STATUS).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_INTERVIEW_STATUS).isPresent()) {
-            editCandidateDescriptor.setInterviewStatus(
-                    ParserUtil.parseInterviewStatus(argMultimap.getValue(PREFIX_INTERVIEW_STATUS).get()));
         }
 
         if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {

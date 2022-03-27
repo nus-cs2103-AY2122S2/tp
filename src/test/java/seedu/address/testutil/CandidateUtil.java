@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
@@ -71,8 +70,6 @@ public class CandidateUtil {
 
         descriptor.getApplicationStatus().ifPresent(applicationStatus -> sb.append(PREFIX_APPLICATION_STATUS)
                 .append(applicationStatus.toString()).append(" "));
-        descriptor.getInterviewStatus().ifPresent(interviewStatus -> sb.append(PREFIX_INTERVIEW_STATUS)
-                .append(interviewStatus.toString()).append(" "));
         descriptor.getAvailability().ifPresent(availability -> sb.append(PREFIX_AVAILABILITY)
                 .append(availability.availability).append(" "));
         return sb.toString();

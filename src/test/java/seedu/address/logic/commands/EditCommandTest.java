@@ -201,6 +201,40 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_CANDIDATE, DESC_BOB)));
+
+        EditCandidateDescriptor differentApplicationStatusPending = new EditCandidateDescriptorBuilder()
+                .withInterviewStatus(VALID_APPLICATION_PENDING)
+                .build();
+
+        EditCandidateDescriptor differentApplicationStatusAccepted = new EditCandidateDescriptorBuilder()
+                .withInterviewStatus(VALID_APPLICATION_ACCEPTED)
+                .build();
+
+        assertFalse(differentApplicationStatusPending.equals(new EditCommand(INDEX_FIRST_CANDIDATE,
+                differentApplicationStatusAccepted)));
+
+        EditCandidateDescriptor differentInterviewStatusNotScheduled = new EditCandidateDescriptorBuilder()
+                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+                .build();
+
+        EditCandidateDescriptor differentInterviewStatusCompleted = new EditCandidateDescriptorBuilder()
+                .withInterviewStatus(VALID_INTERVIEW_COMPLETED)
+                .build();
+
+        assertFalse(differentInterviewStatusNotScheduled.equals(new EditCommand(INDEX_FIRST_CANDIDATE,
+                differentInterviewStatusCompleted)));
+
+        EditCandidateDescriptor differentSenorityOne = new EditCandidateDescriptorBuilder()
+                .withSeniority("2")
+                .build();
+
+        EditCandidateDescriptor differentSeniorityTwo = new EditCandidateDescriptorBuilder()
+                .withSeniority("1")
+                .build();
+
+        assertFalse(differentSenorityOne.equals(new EditCommand(INDEX_FIRST_CANDIDATE,
+                differentSeniorityTwo)));
+
     }
 
 }
