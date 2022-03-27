@@ -195,12 +195,12 @@ public class ModelManager implements Model {
         interviewSchedule.deletePastInterviews(localDateTime);
     }
 
-    /*@Override
+    @Override
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 
         interviewSchedule.setInterview(target, editedInterview);
-    }*/
+    }
 
     //=========== Interview Schedule Accessors =============================================================
     @Override

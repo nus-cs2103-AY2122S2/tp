@@ -59,10 +59,6 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (target.isSameInterviewCandidate(editedInterview)) {
-            throw new DuplicateCandidateException();
-        }
-
         if (containsConflictingInterview(editedInterview)) {
             throw new ConflictingInterviewException();
         }

@@ -118,7 +118,7 @@ public interface Model {
 
     void addInterview(Interview interview);
 
-    //void setInterview(Interview target, Interview editedInterview);
+    void setInterview(Interview target, Interview editedInterview);
 
     //=========== Interview Schedule Accessors =============================================================
 
