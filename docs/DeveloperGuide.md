@@ -157,25 +157,25 @@ This section describes some noteworthy details on how certain features are imple
 ### Filter feature
 
 The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
-To implement the feature, the below classes are created: 
+To implement the feature, the below classes are created:
 
 * `FilterCommand` extending class `Command` is implemented to let the system understand the command
-* `FilterCommandParser`is implemented to parse the filter command entered by user. 
-* `PersonContainsTagPredicate` extends class Predicate<Person> to assist in filtering out the profiles that contains 
+* `FilterCommandParser`is implemented to parse the filter command entered by user.
+* `PersonContainsTagPredicate` extends class Predicate<Person> to assist in filtering out the profiles that contains
   the given tag
 
 The sequence diagram below illustrates how the filter command works, using `'filter family'` as the sample input.
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
-  
+
 Given below is an example usage scenario of filter command.
-  
+
 Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `filter family`.
 
 Step 2. The command is passed from `logic.LogicManager`into `logic.parser.AddressBookParser` which creates a `FilterCommandParser` object.
 
-Step 3. The `FilterCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `FilterCommand` object 
-if there is no parse exception. In the creation of a new `FilterCommand` object, the tag name is parsed out and a new 
+Step 3. The `FilterCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `FilterCommand` object
+if there is no parse exception. In the creation of a new `FilterCommand` object, the tag name is parsed out and a new
 `PersonContainsTagPredicate` object is created.
 
 Step 4. During the execution of filter command, a `CommandException` is thrown if the tag does not exist in the model.
@@ -187,7 +187,7 @@ The activity diagram below summarizes what happens when a filter command is exec
 
 
 
-####Design considerations 
+####Design considerations
 The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
 
 
@@ -277,34 +277,34 @@ limits the amount of information a user can see at one time. If simply increase 
 height of a `PersonCard`, less person will be displayed of the same window size.
 
 Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
-conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more 
+conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more
 information about a person.
 
 
-### \[Proposed\] Enhanced Add Profile Feature 
+### \[Proposed\] Enhanced Add Profile Feature
 
 In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
 
-Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and 
+Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and
 ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
 
 In the original AB3 address book, each profile is modelled by one `Person` object, which
-consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a 
-diagram of a class diagram of the profiles in the AB3 Address Book. 
+consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
+diagram of a class diagram of the profiles in the AB3 Address Book.
 
 ![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
 
 In UNite, the profiling of each `Person` object is being enhanced and modified in order to fits the needs of our target users
-(ie university professors, teaching assistants and students). More classes are added to be associated to the `Person` class, 
+(ie university professors, teaching assistants and students). More classes are added to be associated to the `Person` class,
 this includes `Major` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
 
 ![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
 
-Consider the following commands. 
+Consider the following commands.
 
 `add n/junjieteoh p/88888888 e/teohjj@comp.nus.edu.sg a/1234, Kong Ling Road t/friends m/A1234567B`
 
-This is a sample of the `Person` object diagram. 
+This is a sample of the `Person` object diagram.
 
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
 
@@ -396,10 +396,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. UNite shows an error message.
 
       Use case resumes at step 2.
-    
+
 * 5a. Tag is already attached to the profile
     * 5a1. UNite shows an error message
-  
+
       Use case resumes at step 5.
 
 * 5b. Tag does not exist
@@ -515,7 +515,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete_tag`, `delete_tag x`, (where x is larger than the list size),`delete_tag abc`, `...`, (where abc is not integer) <br>
        Expected: Similar to previous.
-        
+
 1. _{ more test cases …​ }_
 
 ### Detach a tag from a profile
