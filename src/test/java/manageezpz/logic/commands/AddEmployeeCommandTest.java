@@ -190,6 +190,21 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
+        public boolean hasTodo(Todo todo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDeadline(Deadline deadline) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean isTagged(Task task, Person p) {
             throw new AssertionError("This method should not be called.");
         }

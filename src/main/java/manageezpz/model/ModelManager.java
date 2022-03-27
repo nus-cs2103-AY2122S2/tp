@@ -169,6 +169,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasDeadline(Deadline deadline) {
+        requireNonNull(deadline);
+        return addressBook.hasDeadline(deadline);
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public boolean hasTodo(Todo todo) {
+        requireNonNull(todo);
+        return addressBook.hasTodo(todo);
+    }
+
+    @Override
     public void deleteTask(Task task) {
         addressBook.removeTask(task);
     }

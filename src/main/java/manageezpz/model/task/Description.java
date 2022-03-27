@@ -20,7 +20,8 @@ public class Description {
     }
 
     /**
-     * Returns true if a given string is a valid description.
+     * Checks if a given string is a valid description.
+     * @return true if a given string is a valid description, false otherwise
      */
     public static boolean isValidDescription(String test) {
         return !(test.trim().isEmpty());

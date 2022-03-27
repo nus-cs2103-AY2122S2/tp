@@ -1,5 +1,8 @@
 package manageezpz.model.task;
 
+import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,9 +20,15 @@ public class Time {
      * @param time A valid time.
      */
     public Time(String time) {
+        requireNonNull(time);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.time = time;
     }
 
+    /**
+     * Checks if a given string is a valid time.
+     * @return true if a given string is a valid time, false otherwise
+     */
     public static boolean isValidTime(String time) {
         return time.matches(VALIDATION_REGEX) && time.matches("([01]?[0-9]|2[0-3])[0-5][0-9]");
     }

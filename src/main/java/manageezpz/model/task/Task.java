@@ -39,10 +39,6 @@ public class Task implements Comparable<Task> {
         this.priority = Priority.NONE;
     }
 
-    /**
-     * Returns X if the task is done, otherwise blank.
-     * @return the string representation of the status of the task.
-     */
     public String getStatusIcon() {
         if (this.isDone()) {
             return "X";
@@ -79,6 +75,10 @@ public class Task implements Comparable<Task> {
         return this.type;
     }
 
+    /**
+     * Checks if the task is done or not.
+     * @return true if task is done, false otherwise.
+     */
     public boolean isDone() {
         return isDone;
     }
@@ -110,7 +110,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Returns true if both Task have the same name.
+     * Returns true if both Task have the same Description.
      * This defines a weaker notion of equality between two Task.
      */
     public boolean isSameTask(Task otherTask) {
