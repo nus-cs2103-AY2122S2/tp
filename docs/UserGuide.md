@@ -49,7 +49,7 @@ remember their owner's names, phone numbers and addresses. Not to mention, some 
 vet appointments that you have to take note off. With WoofAreYou, these things can be taken care
 of easily, and you can do exactly what you are good at: taking good care of them and ensuring their safety.
 This section will elaborate on the features WoofAreYou has and is
-categorised into **Basic Administration**, **Optional Requirements** and **Efficiency Enhancement**.  
+categorised into **Basic Administration**, **Optional Requirements** and **Efficiency Enhancement**.
 
 <div markdown="block" class="alert alert-info">
 
@@ -179,7 +179,7 @@ This subsection covers the features that you may encounter when having a pet tha
 ### Add pets' dietary requirements: `diet` ###
 
 When some pets have health issues, owners will give instructions on what their pet can or cannot eat. You will want to
-put a diet remark on the pet to take note. 
+put a diet remark on the pet to take note.
 
 Format: `diet INDEX d/REMARK`
 
@@ -244,13 +244,13 @@ Examples:
 ## _Efficiency Enhancement_
 
 You may have noticed that a handful of commands require `INDEX` and it may be very troublesome to scroll through the
-whole pet list to find that one `INDEX` if your pet list is huge. Hence, this subsection covers the features that 
+whole pet list to find that one `INDEX` if your pet list is huge. Hence, this subsection covers the features that
 will make life easier when trying to implement the features above.
 
 ### Sort pets: `sort`
 
-Firstly, you can sort the pet list by a few parameters. This command returns a sorted list of pets according to the 
-parameter chosen. You can choose to either sort alphabetically by owner name or pet name. You can also sort chronologically 
+Firstly, you can sort the pet list by a few parameters. This command returns a sorted list of pets according to the
+parameter chosen. You can choose to either sort alphabetically by owner name or pet name. You can also sort chronologically
 by appointment date.
 
 Format: `sort SORT_BY`
@@ -268,7 +268,7 @@ Examples:
 ### Find pet details: `find`
 
 If sorting alone is not enough, and you know exactly which pet you are looking for then you can use this command to find
-pets with that name. If there are multiple pets with the same name, a pet list of all such pets 
+pets with that name. If there are multiple pets with the same name, a pet list of all such pets
 will be displayed. You can also find using multiple pet names.
 
 Format: `find NAME_OF_PET [KEYWORDS]...`
@@ -295,8 +295,8 @@ Format: `filter f/KEYWORD`
 * Can only filter by date specified, owner's name and tags of pets (choose one out of three, else error will be shown)
 * Specified `f/` only consists of: `byDate/`, `byApp/`, `byTags/` and `byOwner/`.
 * `KEYWORD` if user uses `byDate/` or `byApp/` has to be in `dd-MM-yyyy` format, or `today`.
-* `KEYWORD` if user uses `byOwner/` can be any length. 
-* `KEYWORD` if user uses `byTags/` can be any length. 
+* `KEYWORD` if user uses `byOwner/` can be any length.
+* `KEYWORD` if user uses `byTags/` can be any length.
     * Can filter with a partial match in `Keyword`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`
 
 Examples:
@@ -310,17 +310,17 @@ Examples:
 
 ### List all pets : `list`
 
-After using all of those commands, you may want to retrieve the initial pet list with all the pets. This feature just 
+After using all of those commands, you may want to retrieve the initial pet list with all the pets. This feature just
 shows a list of all pets in pet list.
 
 Format:`list`
 
 ### Undo changes : `undo`
 
-Mistakes happen when dealing with CLI. Fortunately, you can undo previous commands that you have keyed in. 
+Mistakes happen when dealing with CLI. Fortunately, you can undo previous commands that you have keyed in.
 
 Format: `undo`
-* You will not be able to undo `clear`, `exit`, `find`, `help` and `list` Commands. 
+* You will not be able to undo `clear`, `exit`, `find`, `help` and `list` Commands.
 
 Examples:
 * If the user chooses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted.
