@@ -44,6 +44,8 @@ public class ScheduleCommandTest {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
+        candidateToInterview = candidateToInterview.triggerInterviewStatus();
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
@@ -73,6 +75,7 @@ public class ScheduleCommandTest {
 
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
+        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 candidateToInterview.getName(), candidateToInterview.getStudentId(),
@@ -181,4 +184,18 @@ public class ScheduleCommandTest {
         // different candidate -> returns false
         assertFalse(scheduleFirstCommand.equals(scheduleSecondCommand));
     }
+
+    /*
+    @Test
+    public void execute_interview_trigger_interviewStatus_success() {
+
+        Candidate candidateToInterview = new CandidateBuilder()
+                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+                .build();
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+        assertEquals(candidateToInterview.getInterviewStatus(), new InterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED));
+        scheduleCommand.triggerInterviewStatus(candidateToInterview);
+        assertEquals(scheduleCommand.triggerInterviewStatus(candidateToInterview).getInterviewStatus(),
+                new InterviewStatus(VALID_INTERVIEW_SCHEDULED));
+    }*/
 }

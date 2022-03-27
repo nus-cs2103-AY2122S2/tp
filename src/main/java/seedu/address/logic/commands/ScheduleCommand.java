@@ -74,8 +74,8 @@ public class ScheduleCommand extends Command {
         }
 
         Candidate candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
+        Candidate editedCandidate = candidateToInterview.triggerInterviewStatus();
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
-
 
         if (model.hasInterviewCandidate(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
@@ -93,6 +93,7 @@ public class ScheduleCommand extends Command {
             throw new CommandException(MESSAGE_NOT_OFFICE_HOUR);
         }
 
+        model.setCandidate(candidateToInterview, editedCandidate);
         model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate().getName(),
                 toAdd.getCandidate().getStudentId(), toAdd.getInterviewDate(), toAdd.getInterviewStartTime()));
