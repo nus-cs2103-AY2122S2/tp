@@ -169,6 +169,19 @@ public class Lab {
         return otherLab != null && otherLab.labNumber == this.labNumber;
     }
 
+    /**
+     * Returns the details of a Lab in {@code String} format
+     */
+    public String getDetails() {
+        String description = "";
+        if (labMark.isEmpty()) {
+            description = LabStatus.describe(labStatus);
+        } else {
+            description = labMark.toString();
+        }
+        return toString() + ": " + description;
+    }
+
     @Override
     public String toString() {
         return "Lab " + labNumber;

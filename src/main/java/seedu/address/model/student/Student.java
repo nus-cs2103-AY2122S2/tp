@@ -2,10 +2,7 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.lab.Lab;
@@ -110,6 +107,18 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getName().equals(getName());
+    }
+
+    public String getDetails() {
+        List<String> labDetails = labs.getLabDetails();
+        StringBuilder sb = new StringBuilder();
+
+        for (String s : labDetails) {
+            sb.append(s);
+            sb.append("\n");
+        }
+
+        return this.name + "\n" + sb.toString();
     }
 
     /**

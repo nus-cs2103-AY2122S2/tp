@@ -39,7 +39,9 @@ public class ViewCommand extends Command {
     }
 
     private String getStudentDetails(Student studentToView) {
-        return studentToView.toString(); // placeholder for now, waiting for lab marks to be added
+        requireNonNull(studentToView);
+
+        return studentToView.getDetails();
     }
 
 }

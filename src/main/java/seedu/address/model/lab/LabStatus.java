@@ -1,5 +1,7 @@
 package seedu.address.model.lab;
 
+import seedu.address.model.student.exceptions.InvalidLabStatusException;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -26,6 +28,7 @@ public enum LabStatus {
      */
     public static LabStatus toLabStatus(String labStatusString) {
         requireNonNull(labStatusString);
+
         switch (labStatusString) {
         case "UNSUBMITTED":
             return LabStatus.UNSUBMITTED;
@@ -35,6 +38,27 @@ public enum LabStatus {
             return LabStatus.GRADED;
         default:
             throw new IllegalArgumentException("Did not expect " + labStatusString);
+        }
+    }
+
+    /**
+     * Describes the labStatus for the user
+     *
+     * @param labStatus
+     * @return Description of the labStatus in {@code String} format
+     */
+    public static String describe(LabStatus labStatus) {
+        requireNonNull(labStatus);
+
+        switch (labStatus) {
+        case UNSUBMITTED:
+            return "Not Submitted";
+        case SUBMITTED:
+            return "Submitted but yet to grade";
+        case GRADED:
+            return "Graded";
+        default:
+            throw new InvalidLabStatusException();
         }
     }
 
