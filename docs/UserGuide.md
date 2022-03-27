@@ -210,7 +210,7 @@ Examples:
 
 ### Listing/Filtering entries
 
-##### Listing modules: `list module`
+#### Listing modules: `list module`
 
 ##### Listing all modules
 
@@ -299,7 +299,7 @@ Examples:
 ### Deleting entries
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Deleting any entries will be based on the filtered list, and not the whole list. If before the `delete` command you run any `list` or `find` command, the `delete` command will delete the index that correspond with what is being displayed.
+Deleting any entries will be based on the filtered list, and not the whole list. If you run any `list` or `find` command before the `delete` command, the `delete` command will delete the index that correspond with what is being displayed.
 </div>
 
 #### Deleting a module: `delete module`
@@ -327,8 +327,8 @@ Format: `delete student INDEX`
 
 Examples:
 * `list student` followed by `delete student 2` deletes the 2nd student in the whole student list and their assessment(s)' attempt(s) in TAssist.
-* `list student c\1` followed by `delete student 2` deletes the 2nd student in the _filtered_ student list (filtered by class group index 1) and their assessment(s)' attempt(s) in TAssist.
-* `find alex` followed by `delete student 2` deletes the 2nd student in the _filtered_ student list (filtered students with the name alex) and their assessment(s)' attempt(s) in TAssist.
+* `list student c\1` followed by `delete student 2` deletes the 2nd student in the ___filtered___ student list (filtered by class group index 1) and their assessment(s)' attempt(s) in TAssist.
+* `find alex` followed by `delete student 2` deletes the 2nd student in the ___filtered___ student list (filtered students with the name alex) and their assessment(s)' attempt(s) in TAssist.
 
 #### Deleting a class group: `delete class`
 
@@ -342,7 +342,7 @@ Format: `delete class INDEX`
 
 Examples:
 * `list class` followed by `delete class 2` deletes the 2nd class group in the whole class group list in TAssist.
-* `list class \m 2` followed by `delete class 2` deletes the 2nd class group in the _filtered_ class group list (filtered by module index 2).
+* `list class \m 2` followed by `delete class 2` deletes the 2nd class group in the ___filtered___ class group list (filtered by module index 2) in TAssist.
 
 #### Deleting an assessment: `delete assessment`
 
@@ -356,7 +356,7 @@ Format: `delete assessment INDEX`
 
 Examples:
 * `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in the whole assessment list in TAssist.
-* `list assessment \m 1` followed by `delete assessment 2` deletes the 2nd assessment in the _filtered_ assessment list (fitered by module index 1) in TAssist.
+* `list assessment \m 1` followed by `delete assessment 2` deletes the 2nd assessment in the ___filtered___ assessment list (fitered by module index 1) in TAssist.
 
 ### Clearing all entries: `clear`
 
