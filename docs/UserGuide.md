@@ -159,7 +159,7 @@ Examples:
 
 Adds a consultation report of a patient to MedBook.
 
-Format: `add t/consultation i/NRIC dt/DATE tm/TIME -n/NOTES`
+Format: `add t/consultation i/NRIC dt/DATE tm/TIME n/NOTES`
 
 Examples:
 * `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 n/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection.`
