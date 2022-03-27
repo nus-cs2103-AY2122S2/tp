@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
+import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -38,6 +40,16 @@ public class ScheduleCommandParserTest {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ScheduleCommand.MESSAGE_USAGE), () -> parser.parse(ScheduleCommand.COMMAND_WORD + " remove"));
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddScheduleCommand.MESSAGE_USAGE), () -> parser.parse("add"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddScheduleCommand.MESSAGE_USAGE), () -> parser.parse("add 2"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditScheduleCommand.MESSAGE_USAGE), () -> parser.parse("edit"));
+        assertThrows(ParseException.class, String.format(EditScheduleCommand.MESSAGE_NOT_EDITED), () ->
+                parser.parse("edit 2"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteScheduleCommand.MESSAGE_USAGE), () -> parser.parse("delete"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteScheduleCommand.MESSAGE_USAGE), () -> parser.parse("delete candidate/2"));
     }
 }

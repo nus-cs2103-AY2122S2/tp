@@ -27,6 +27,7 @@ public class EditScheduleCommand extends ScheduleCommand {
 
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS =
             "Successfully edited interview for %1$s";
+    public static final String MESSAGE_NOT_EDITED = "Interview date and time must be provided!";
 
     private final Index index;
     private final LocalDateTime newDateTime;
@@ -62,7 +63,8 @@ public class EditScheduleCommand extends ScheduleCommand {
         }
         model.setInterview(interviewToEdit, editedInterview);
         model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
-        return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS,
+                interviewToEdit + " to " + editedInterview.getInterviewDateTime()));
     }
 
     @Override
