@@ -17,10 +17,6 @@ public class Task implements Comparable<Task> {
     protected String type;
     protected Priority priority;
 
-    public enum Priority {
-        HIGH, LOW, MEDIUM, NONE;
-    }
-
     // Identity fields
     private final Description taskDescription;
 
@@ -99,27 +95,9 @@ public class Task implements Comparable<Task> {
         return this.priority;
     }
 
-
-    int getAssignedValue(String s) {
-        switch (s) {
-        case "NONE":
-            return 3;
-        case "LOW":
-            return 2;
-        case "MEDIUM":
-            return 1;
-        case "HIGH":
-            return 0;
-        default:
-            return Integer.MAX_VALUE;
-        }
-    }
-
     @Override
     public int compareTo(Task o) {
-        String first = this.getPriority().name();
-        String second = o.getPriority().name();
-        return Integer.compare(getAssignedValue(first), getAssignedValue(second));
+        return Integer.compare(this.getPriority().getValue(), o.getPriority().getValue());
     }
 
     /**
