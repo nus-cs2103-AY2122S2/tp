@@ -445,12 +445,26 @@
 
 .interview-list .list-cell:filled:odd {
     -fx-background-color: derive(#515658, 20%);
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
  }
 
 .interview-list .list-cell:filled:even {
     -fx-background-color: derive(#353C51, 20%);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+ }
+
+.list-cell:filled:selected #interviewCard {
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 1;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.list-cell:filled #interviewCard {
+    -fx-border-color: #383838;;
+    -fx-border-width: 2;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
- }
+}

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="interviewCard" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="interviewCard" fx:id="interviewCard" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="80" />
@@ -28,7 +28,7 @@
             </HBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
                 <padding>
-                    <Insets left="15" />
+                    <Insets left="20" />
                 </padding>
                 <Label fx:id="studentId" styleClass="cell_big_label" text="\$studentId" alignment="CENTER_LEFT"/>
             </HBox>
@@ -45,13 +45,13 @@
             </HBox>
             <HBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">
                 <padding>
-                    <Insets top="5" right="5" left="5" />
+                    <Insets top="2" right="5" left="5" />
                 </padding>
                 <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
             </HBox>
             <HBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">
                 <padding>
-                    <Insets top="5" right="5" bottom="5" left="5" />
+                    <Insets top="2" right="5" bottom="5" left="5" />
                 </padding>
                 <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             </HBox>

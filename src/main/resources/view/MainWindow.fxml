@@ -66,7 +66,7 @@
               <padding>
                 <Insets top="5" right="5" bottom="5" left="5" />
               </padding>
-              <HBox styleClass="interview-panel-header" HBox.hgrow="ALWAYS" prefHeight="40" alignment="CENTER">
+              <HBox styleClass="interview-panel-header" HBox.hgrow="ALWAYS" minHeight="30" prefHeight="40" alignment="CENTER">
                 <Label styleClass="interview-panel-title" alignment="CENTER" text="Scheduled Interviews" />
               </HBox>
               <VBox VBox.vgrow="ALWAYS">

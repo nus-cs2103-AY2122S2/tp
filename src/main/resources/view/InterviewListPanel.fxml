@@ -4,5 +4,5 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView styleClass="interview-list" fx:id="interviewListView" VBox.vgrow="ALWAYS" />
+    <ListView styleClass="interview-list" fx:id="interviewListView" VBox.vgrow="ALWAYS"/>
 </VBox>
