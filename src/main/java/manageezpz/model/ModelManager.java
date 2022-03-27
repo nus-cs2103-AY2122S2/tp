@@ -39,8 +39,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList().sorted());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList().sorted());
     }
 
     public ModelManager() {
@@ -135,27 +135,13 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
-    }
-
-
     //=========== ManageEZPZ ==================================================================================
+
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
 
     @Override
     public void addTask(Task task) {
@@ -167,16 +153,37 @@ public class ModelManager implements Model {
     @Override
     public void addTodo(Todo todo) {
         addressBook.addTodo(todo);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public void addDeadline(Deadline deadline) {
         addressBook.addDeadline(deadline);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public boolean hasDeadline(Deadline deadline) {
+        requireNonNull(deadline);
+        return addressBook.hasDeadline(deadline);
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public boolean hasTodo(Todo todo) {
+        requireNonNull(todo);
+        return addressBook.hasTodo(todo);
     }
 
     @Override
@@ -204,57 +211,76 @@ public class ModelManager implements Model {
         addressBook.tagTask(task, person);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void updateFilteredTaskList(Predicate<Task> predicate) {
-        requireNonNull(predicate);
-        filteredTasks.setPredicate(predicate);
+    public void untagTask(Task task, Person person) {
+        addressBook.untagTask(task, person);
     }
 
+    @Override
+    public boolean isTagged(Task task, Person person) {
+        requireNonNull(task);
+        requireNonNull(person);
+        return task.getAssignees().contains(person);
+    }
+
+    @Override
+    public String listTasks() {
+        return addressBook.listTask();
+    }
+
+    @Override
+    public String listTasks(Prefix option) {
+        return addressBook.listTask(option);
+    }
+
+    //=========== Filtered Task List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
     }
 
     @Override
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return addressBook.hasEvent(event);
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ModelManager)) {
+            return false;
+        }
+
+        // state check
+        ModelManager other = (ModelManager) obj;
+        return addressBook.equals(other.addressBook)
+                && userPrefs.equals(other.userPrefs)
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredTasks.equals(other.filteredTasks);
     }
 
     @Override
-    public boolean hasDeadline(Deadline deadline) {
-        requireNonNull(deadline);
-        return addressBook.hasDeadline(deadline);
+    public boolean hasPriority(Task task) {
+        return addressBook.hasPriority(task);
     }
 
     @Override
-    public boolean hasTodo(Todo todo) {
-        requireNonNull(todo);
-        return addressBook.hasTodo(todo);
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        addressBook.setTask(target, editedTask);
     }
 
-    @Override
-    public boolean hasTask(Task task) {
-        requireNonNull(task);
-        return addressBook.hasTask(task);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String listTasks() {
-        return addressBook.listTask();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String listTasks(Prefix option) {
-        return addressBook.listTask(option);
-    }
 }

@@ -15,12 +15,16 @@ import manageezpz.logic.commands.Command;
 import manageezpz.logic.commands.DeleteEmployeeCommand;
 import manageezpz.logic.commands.DeleteTaskCommand;
 import manageezpz.logic.commands.EditCommand;
+import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.HelpCommand;
 import manageezpz.logic.commands.ListCommand;
 import manageezpz.logic.commands.MarkTaskCommand;
+import manageezpz.logic.commands.TagTaskCommand;
+import manageezpz.logic.commands.TagTaskPriorityCommand;
 import manageezpz.logic.commands.UnmarkTaskCommand;
+import manageezpz.logic.commands.UntagTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
@@ -91,6 +95,18 @@ public class AddressBookParser {
 
         case UnmarkTaskCommand.COMMAND_WORD:
             return new UnmarkTaskCommandParser().parse(arguments);
+
+        case TagTaskCommand.COMMAND_WORD:
+            return new TagTaskCommandParser().parse(arguments);
+
+        case UntagTaskCommand.COMMAND_WORD:
+            return new UntagTaskCommandParser().parse(arguments);
+
+        case TagTaskPriorityCommand.COMMAND_WORD:
+            return new TagTaskPriorityCommandParser().parse(arguments);
+
+        case EditTaskCommand.COMMAND_WORD:
+            return new EditTaskCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

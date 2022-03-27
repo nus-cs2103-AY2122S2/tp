@@ -5,7 +5,7 @@ import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.testutil.Assert.assertThrows;
-import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,11 +22,12 @@ import manageezpz.logic.commands.EditCommand;
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
 import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindCommand;
+import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.commands.HelpCommand;
 import manageezpz.logic.commands.ListCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Person;
-import manageezpz.model.task.TaskContainsKeywordsPredicate;
+import manageezpz.model.task.TaskMultiplePredicate;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 import manageezpz.testutil.PersonBuilder;
 import manageezpz.testutil.PersonUtil;
@@ -51,8 +52,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteEmployeeCommand command = (DeleteEmployeeCommand) parser.parseCommand(
-                DeleteEmployeeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteEmployeeCommand(INDEX_FIRST_PERSON), command);
+                DeleteEmployeeCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteEmployeeCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -60,8 +61,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -77,7 +78,9 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD
                         + " " + PREFIX_TASK.toString() + " " + PREFIX_DESCRIPTION
                         + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new TaskContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindTaskCommand(
+                new TaskMultiplePredicate(PREFIX_TASK, keywords, null, null, null, null)),
+                command);
     }
 
     @Test

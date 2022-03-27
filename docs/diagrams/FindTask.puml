@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find task/ desc/ Genshin")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find task/ desc/ Genshin")
+activate AddressBookParser
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+activate FindCommandParser
+FindCommandParser --> AddressBookParser : :FindCommandParser
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse(" task/ desc/ Genshin")
+activate FindCommandParser
+FindCommandParser -> FindCommandParser : findCommandTask()
+activate FindCommandParser
+
+create FindCommand
+FindCommandParser -> FindCommand
+activate FindCommand
+FindCommand -> FindCommandParser : :FindCommand
+deactivate FindCommand
+
+FindCommandParser --> FindCommandParser : :FindCommand
+deactivate FindCommandParser
+
+FindCommandParser --> AddressBookParser : :FindCommand
+deactivate FindCommandParser
+
+AddressBookParser --> LogicManager : :FindCommand
+deactivate AddressBookParser
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> Model : updateFilteredTaskList()
+activate Model
+
+Model --> FindCommand
+deactivate Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand : :CommandResult
+deactivate CommandResult
+
+FindCommand --> LogicManager : :CommandResult
+@enduml
+

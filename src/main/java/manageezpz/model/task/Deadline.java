@@ -18,12 +18,18 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public Date getDate() {
+        return this.date;
+    }
+
     public Time getTime() {
         return this.time;
     }
 
-    public Date getDate() {
-        return this.date;
+    @Override
+    public String getDateTime() {
+        return "by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " " + time.format(DateTimeFormatter.ofPattern("h:mm a"));
     }
 
     /**

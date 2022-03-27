@@ -194,7 +194,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
         setTasks(newData.getTaskList());
     }
@@ -294,7 +293,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param task the task to be marked.
      */
     public void markTask(Task task) {
-        task.setTaskDone();
+        this.tasks.markTask(task);
     }
 
     /**
@@ -302,7 +301,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param task the task to be unmarked.
      */
     public void unmarkTask(Task task) {
-        task.setTaskNotDone();
+        this.tasks.unmarkTask(task);
     }
 
     public void findTask(Task task) {
@@ -315,6 +314,36 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void tagTask(Task task, Person person) {
         task.assignedTo(person);
+    }
+
+    /**
+     * Checks if a given task has a priority tagged to it.
+     * @param task the task to be checked.
+     * @return true if the task is tagged with a prioirity, false otherwise.
+     */
+    public boolean hasPriority(Task task) {
+        requireNonNull(task);
+        boolean returnValue;
+        if (task.getPriority() != null) {
+            returnValue = true;
+        } else {
+            returnValue = false;
+        }
+        return returnValue;
+    }
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
+    /**
+     * Remove the Person from the Task, also decreasing the person's task count.
+     * @param task the task affected
+     * @param person the person to be untagged from task
+     */
+    public void untagTask(Task task, Person person) {
+        person.decreaseTaskCount();
+        task.removeAssigned(person);
     }
 
     //// person-level operations
@@ -376,7 +405,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && tasks.equals(((AddressBook) other).tasks));
     }
 
     @Override

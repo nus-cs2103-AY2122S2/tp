@@ -2,13 +2,13 @@ package manageezpz.model;
 
 import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static manageezpz.testutil.Assert.assertThrows;
-import static manageezpz.testutil.TypcialTasks.GET_DRINK;
-import static manageezpz.testutil.TypcialTasks.HOUSE_VISTING;
-import static manageezpz.testutil.TypcialTasks.READ_BOOK;
-import static manageezpz.testutil.TypcialTasks.RETURN_BOOK;
-import static manageezpz.testutil.TypcialTasks.WEEKLY_QUIZ;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.BENSON;
+import static manageezpz.testutil.TypicalTasks.GET_DRINK;
+import static manageezpz.testutil.TypicalTasks.HOUSE_VISTING;
+import static manageezpz.testutil.TypicalTasks.READ_BOOK;
+import static manageezpz.testutil.TypicalTasks.RETURN_BOOK;
+import static manageezpz.testutil.TypicalTasks.WEEKLY_QUIZ;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -200,12 +200,14 @@ public class ModelManagerTest {
 
     @Test
     public void markTask_taskInaddressBook_returnsTrue() {
-        modelManager.markTask(READ_BOOK);
-        assertTrue(READ_BOOK.isDone());
+        modelManager.addTask(RETURN_BOOK);
+        modelManager.markTask(RETURN_BOOK);
+        assertTrue(RETURN_BOOK.isDone());
     }
 
     @Test
     public void unmarkTask_taskInaddressBook_returnsTrue() {
+        modelManager.addTask(RETURN_BOOK);
         modelManager.unmarkTask(READ_BOOK);
         assertTrue(!READ_BOOK.isDone());
     }

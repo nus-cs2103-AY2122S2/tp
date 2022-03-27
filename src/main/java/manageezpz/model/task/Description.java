@@ -4,11 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.util.AppUtil.checkArgument;
 
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Description should only contain alphanumeric characters and spaces. It should not contain any symbols"
-                    + "and it should not be blank";
-
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MESSAGE_CONSTRAINTS = "Description should not be blank";
 
     public final String description;
 
@@ -28,7 +24,7 @@ public class Description {
      * @return true if a given string is a valid description, false otherwise
      */
     public static boolean isValidDescription(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !(test.trim().isEmpty());
     }
 
     @Override

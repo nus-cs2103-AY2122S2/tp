@@ -2,6 +2,7 @@ package manageezpz.model.task;
 
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,9 +12,10 @@ import manageezpz.model.person.Person;
  * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
  * inputted by a user either a Todo, Deadline or Event.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected boolean isDone;
     protected String type;
+    protected Priority priority;
 
     // Identity fields
     private final Description taskDescription;
@@ -33,6 +35,8 @@ public class Task {
         this.taskDescription = taskDescription;
         this.isDone = false;
         this.type = "";
+        this.assignees = new ArrayList<>();
+        this.priority = Priority.NONE;
     }
 
     public String getStatusIcon() {
@@ -41,6 +45,14 @@ public class Task {
         } else {
             return " ";
         }
+    }
+
+    public List<Person> getAssignees() {
+        return this.assignees;
+    }
+
+    public void addAssignees(Person person) {
+        this.assignees.add(person);
     }
 
     public void setTaskDone() {
@@ -71,6 +83,23 @@ public class Task {
         return isDone;
     }
 
+    public String getDateTime() {
+        return "";
+    }
+
+    public void setPriority(String priority) {
+        this.priority = Priority.valueOf(priority);
+    }
+
+    public Priority getPriority() {
+        return this.priority;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        return Integer.compare(this.getPriority().getValue(), o.getPriority().getValue());
+    }
+
     /**
      * Returns the string representation of the task.
      * @return a string representation of the task, consisting of its description and whether its done or not.
@@ -97,6 +126,10 @@ public class Task {
         assignees.add(person);
     }
 
+    public void removeAssigned(Person person) {
+        assignees.remove(person);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -112,10 +145,19 @@ public class Task {
                 && otherTask.getStatusIcon().equals(getStatusIcon());
     }
 
+    /**
+     * Checks whether the assignee is assigned to the task.
+     * @param assignee The assignee to be searched
+     * @return True if the assignee is assigned, false otherwise
+     */
+    public boolean haveAssignees(String assignee) {
+        return assignees.stream()
+                .anyMatch(person -> person.getName().fullName.equals(assignee));
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(taskDescription);
     }
-
 }

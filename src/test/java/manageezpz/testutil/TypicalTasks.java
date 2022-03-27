@@ -12,7 +12,7 @@ import manageezpz.model.task.Event;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
 
-public class TypcialTasks {
+public class TypicalTasks {
 
     public static final Task READ_BOOK = new TaskBuilder().withDescription("Read Book").build();
     public static final Task RETURN_BOOK = new TaskBuilder().withDescription("Return Book").build();
@@ -28,7 +28,7 @@ public class TypcialTasks {
     public static final Task GET_A_DRINK = new TaskBuilder().withDescription(VALID_TASK_DESCRIPTION).build();
 
 
-    private TypcialTasks() {} // prevents instantiation
+    private TypicalTasks() {} // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical tasks.
