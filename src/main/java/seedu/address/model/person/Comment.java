@@ -8,7 +8,6 @@ import static java.util.Objects.requireNonNull;
  */
 public class Comment implements Comparable<Comment> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Comments should not be blank";
     /*
      * The first character of the comment must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
