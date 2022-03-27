@@ -2,8 +2,8 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.NullPropertyToSell;
@@ -57,8 +57,8 @@ class JsonAdaptedPropertyToSell {
         return priceRange.toModelType();
     }
 
-    public String getAddress() throws IllegalValueException {
-        return address;
+    public Address getAddress() throws IllegalValueException {
+        return new Address(address);
     }
 
     /**
@@ -67,6 +67,6 @@ class JsonAdaptedPropertyToSell {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public PropertyToSell toModelType() throws IllegalValueException {
-        return new PropertyToSell(house.toModelType(), priceRange.toModelType(), address);
+        return new PropertyToSell(house.toModelType(), priceRange.toModelType(), getAddress());
     }
 }

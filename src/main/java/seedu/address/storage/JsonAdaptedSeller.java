@@ -60,7 +60,7 @@ public class JsonAdaptedSeller {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Buyer} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Seller} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
@@ -95,9 +95,9 @@ public class JsonAdaptedSeller {
 
         final Set<Tag> modelTags = new HashSet<>(buyerTags);
 
-        final PropertyToSell propertyToSell = this.propertyToSell == null
+        final PropertyToSell modelPropertyToSell = this.propertyToSell == null
                 ? NullPropertyToSell.getNullPropertyToSell() : new PropertyToSell(this.propertyToSell.getHouse(),
                 this.propertyToSell.getPriceRange(), this.propertyToSell.getAddress());
-        return new Seller(modelName, modelPhone, modelAppointment, modelTags, propertyToSell);
+        return new Seller(modelName, modelPhone, modelAppointment, modelTags, modelPropertyToSell);
     }
 }
