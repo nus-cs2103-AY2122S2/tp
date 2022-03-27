@@ -18,11 +18,11 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists applicants in HireLah to the user.
  */
 public class ListApplicantCommand extends ListCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " -a: List applicants  with optional parameters."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " -a: List applicants with optional parameters."
             + "\nOptional parameters: "
             + PREFIX_FILTER_TYPE + "FILTER_TYPE "
             + PREFIX_FILTER_ARGUMENT + "FILTER_TYPE "
@@ -30,8 +30,7 @@ public class ListApplicantCommand extends ListCommand {
             + PREFIX_FILTER_TYPE + "name "
             + PREFIX_FILTER_ARGUMENT + "John Doe ";
 
-    public static final String MESSAGE_SUCCESS_ALL = "Listed all applicants";
-    public static final String MESSAGE_SUCCESS_FILTER = "Filtered applicants, %1$d applicant(s) listed";
+    public static final String MESSAGE_SUCCESS = "Listed %1$d applicants";
 
     private FilterType filterType;
     private FilterArgument filterArgument;
@@ -55,17 +54,20 @@ public class ListApplicantCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         if (filterType != null && filterArgument != null) {
-            String[] nameKeywords = filterArgument.toString().split("\\s+");
-            Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-            model.updateFilteredApplicantList(predicate);
-            return new CommandResult(
-                    String.format(MESSAGE_SUCCESS_FILTER, model.getFilteredApplicantList().size()),
-                    getCommandDataType());
+            switch(filterType.filterType) {
+            case "name":
+                String[] nameKeywords = filterArgument.toString().split("\\s+");
+                Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
+                model.updateFilteredApplicantList(predicate);
+            }
         } else {
             model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(MESSAGE_SUCCESS_ALL, getCommandDataType());
         }
+
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, model.getFilteredApplicantList().size()), getCommandDataType());
     }
 
     @Override
