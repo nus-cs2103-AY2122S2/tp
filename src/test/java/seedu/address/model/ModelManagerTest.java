@@ -191,6 +191,58 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deletePastInterviews_noPastInterviews() {
+        AddressBook addressBook = new AddressBook();
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        modelManager.deletePastInterviewsForInterviewList(localDateTime);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
+    public void deletePastInterviews_hasPastInterviews() {
+        AddressBook addressBook = new AddressBook();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Interview pastInterview = new Interview(ALICE, currentDateTime);
+
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(pastInterview).build();
+        InterviewSchedule emptyInterviewSchedule = new InterviewScheduleBuilder().build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
+        modelManager.deletePastInterviewsForInterviewList(dateTimeThirtyOneMinutesIntoFuture);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
+    public void deletePastInterviews_hasBothPastAndFutureInterviews() {
+        AddressBook addressBook = new AddressBook();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Interview pastInterview = new Interview(ALICE, currentDateTime);
+
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder()
+                .withInterview(pastInterview).withInterview(INTERVIEW_BENSON).build();
+        InterviewSchedule emptyInterviewSchedule = new InterviewScheduleBuilder()
+                .withInterview(INTERVIEW_BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
+        modelManager.deletePastInterviewsForInterviewList(dateTimeThirtyOneMinutesIntoFuture);
+
+        assertEquals(modelManager, modelManagerCopy);
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).build();
         InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE)

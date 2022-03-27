@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -209,6 +210,11 @@ public class AddCommandTest {
 
         @Override
         public void updateSortedCandidateList(Comparator<Candidate> sortKey) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
             throw new AssertionError("This method should not be called.");
         }
     }
