@@ -178,7 +178,7 @@ The following sequence diagram shows how the undo operation works:
   * Pros: Easy to implement load data.
   * Cons: Troublesome to save all data.
 
-#### 1.3 Add schedule 
+#### 1.3 Add schedule
 #### Proposed implementation
 #### Design Consideration
 
@@ -186,7 +186,7 @@ The following sequence diagram shows how the undo operation works:
 
 #### 2.1 Delete player
 #### Proposed implementation
-The proposed delete player functionality will delete an existing player from `UniquePlayerList`, 
+The proposed delete player functionality will delete an existing player from `UniquePlayerList`,
 as well as from all lineups in `UniqueLineupList` that contains the player.
 
 #### Design Consideration
@@ -234,7 +234,7 @@ After checking that both input player and lineup are valid, the lineup's name wi
 
 #### 3.2 Edit lineup
 #### Proposed implementation
-The proposed edit lineup functionality will update the name of a lineup. 
+The proposed edit lineup functionality will update the name of a lineup.
 Meanwhile, the `lineups` attribute of each person should also be updated if the person is in the lineup.
 
 #### Design Consideration
@@ -256,8 +256,8 @@ Meanwhile, the `lineups` attribute of each person should also be updated if the 
 
 #### 4.1 View player
 #### Proposed implementation
-The proposed view player functionality queries players from the existing UniquePersonList. The players returned is 
-dependent on the keywords specified in the command. The proposed view mechanism is facilitated by ModelManger which keeps 
+The proposed view player functionality queries players from the existing UniquePersonList. The players returned is
+dependent on the keywords specified in the command. The proposed view mechanism is facilitated by ModelManger which keeps
 a FilteredList of players. Note that this FilteredList of players is updated via a specified Predicate.
 Additionally, it implements the following operations:
 - `ModelManager#updateFilteredPersonList(Predicate<Person>) - Filters internal storage via a Predicate<Person> specification`
@@ -268,8 +268,8 @@ Step 1. The user launches the application.
 
 Step 2. The user wants to view player name with james in its name.
 
-Step 3. The user executes `view P/james`. The view command will check if the inputs are valid, and then parsed 
-(similar to the other CRUD commands) before using these inputs to create conditional `Predicate<>` instances (eg. NameContainsKeywordsPredicate). 
+Step 3. The user executes `view P/james`. The view command will check if the inputs are valid, and then parsed
+(similar to the other CRUD commands) before using these inputs to create conditional `Predicate<>` instances (eg. NameContainsKeywordsPredicate).
 The predicates are then combined and used to filter the `FilteredList<Person>`. The GUI will then display the player items in the filtered list.
 
 The following sequence diagram shows how the find operation works:
@@ -555,15 +555,15 @@ Use case ends.
 
 1. Find a player (UC01)
 2. User input the new details of the player.
-3. MyGM displays the success message.   
+3. MyGM displays the success message.
    Use case ends.
 
 **Extensions**
 * 1a. User entered a player that does not exist.
-    * 1a1. MyGM displays the invalid player message.   
+    * 1a1. MyGM displays the invalid player message.
       Use case ends.
 * 3a. User entered an invalid input for any of the fields.
-    * 3a1. MyGM displays the invalid input message and the appropriate command.   
+    * 3a1. MyGM displays the invalid input message and the appropriate command.
       Use case ends.
 
 *{More to be added}*
@@ -571,7 +571,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage. 
+2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should have a _friendly user interface_.
 5. The system should respond within `2` seconds.
