@@ -13,6 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_HOUSE_TYPE = new Prefix("h/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_PRICE_RANGE = new Prefix("pr/");
+    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
 
 
 }
