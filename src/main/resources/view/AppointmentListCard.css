@@ -1,5 +1,6 @@
 #priority {
     -fx-text-fill: black;
-    -fx-padding: 5 20;
-    -fx-background-radius: 50
+    -fx-padding: 2;
+    -fx-background-radius: 50;
+    -fx-font-family: "Segoe UI Semibold";
 }

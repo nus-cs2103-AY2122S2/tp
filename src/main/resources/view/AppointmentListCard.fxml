@@ -19,7 +19,6 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <HBox>
         <HBox alignment="CENTER_LEFT" spacing="5">
           <Label fx:id="id" styleClass="cell_big_label">
             <minWidth>
@@ -28,11 +27,8 @@
             </minWidth>
           </Label>
           <Label fx:id="name" styleClass="cell_big_label" text="\$name" wrapText="true" />
+          <Label fx:id="priority" alignment="CENTER" minWidth="90" styleClass="cell_small_label" wrapText="true" />
         </HBox>
-        <HBox style="-fx-padding: 5 10;">
-          <Label fx:id="priority" styleClass="cell_small_label" wrapText="true" />
-        </HBox>
-      </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
           <Insets top="6" />

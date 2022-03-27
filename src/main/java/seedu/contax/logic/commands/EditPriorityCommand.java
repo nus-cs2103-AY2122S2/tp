@@ -13,7 +13,7 @@ import seedu.contax.model.appointment.Priority;
 
 
 /**
- * Edits the level of an existing priority in the appointment list with level low, medium or high
+ * Edits the level of an existing priority in the appointment list with level low, medium or high.
  */
 public class EditPriorityCommand extends Command {
     public static final String COMMAND_WORD = "priority";
@@ -27,6 +27,7 @@ public class EditPriorityCommand extends Command {
     private final Priority priority;
 
     /**
+     * Creates an {@code EditPriorityCommand} object.
      *
      * @param index The specified index to update the priority
      * @param priority Details to edit the priority with
