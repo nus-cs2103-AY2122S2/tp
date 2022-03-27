@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -55,7 +56,7 @@ public class CommandResult {
     }
 
     public ViewDetails getViewDetails() {
-        return viewDetails.orElseThrow();
+        return viewDetails.orElseThrow(IllegalStateException::new);
     }
 
     public boolean isShowHelp() {
