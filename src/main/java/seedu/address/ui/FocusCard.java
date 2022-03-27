@@ -7,6 +7,7 @@ import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
 import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
 import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
 import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
+import static seedu.address.ui.Styles.AVAILABILITY_ID;
 import static seedu.address.ui.Styles.BLUE;
 import static seedu.address.ui.Styles.BRIGHT_GREEN;
 import static seedu.address.ui.Styles.CHANGE_COLOUR;
@@ -156,6 +157,8 @@ public class FocusCard extends UiPart<Region> {
 
         for (int i = 0; i < week.length; i++) {
             Label label = new Label(week[i]);
+            label.setId(AVAILABILITY_ID);
+            label.setMinWidth(30);
 
             if (isAvail[i]) {
                 label.setStyle(availStyle);

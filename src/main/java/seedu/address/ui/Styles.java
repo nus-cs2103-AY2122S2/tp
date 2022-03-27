@@ -18,4 +18,5 @@ public class Styles {
 
     // Misc
     public static final String CLOSING_INLINE = ";";
+    public static final String AVAILABILITY_ID = "availabilityTag";
 }

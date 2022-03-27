@@ -22,7 +22,7 @@
                     <Label fx:id="name" styleClass="focusStyleName" text="\$phone" />
                     <Label fx:id="id" styleClass="focusStyleName" text="\$id" />
                     <FlowPane fx:id="statusFocusPane" prefWrapLength="200"/>
-                    <FlowPane fx:id="availableDaysFocus" prefWrapLength="200"/>
+                    <FlowPane fx:id="availableDaysFocus" prefWrapLength="300"/>
                 </VBox>
             </SplitPane>
             <Label fx:id="phone" styleClass="focusStyle" text="\$phone" />
