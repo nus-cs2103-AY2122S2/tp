@@ -61,7 +61,12 @@ activate Person
 Person --> TagCommand : p1
 deactivate Person
 
-TagCommand -> Model : setPerson(oldp1, p1)
+TagCommand -> TagCommand : add tags to p1
+activate TagCommand
+TagCommand --> TagCommand : new_p1
+deactivate TagCommand
+
+TagCommand -> Model : setPerson(p1, new_p1)
 activate Model
 Model --> TagCommand
 deactivate Model

@@ -61,12 +61,12 @@ activate Person
 Person --> RemoveTagCommand : p1
 deactivate Person
 
-RemoveTagCommand -> RemoveTagCommand : remove matching tags
+RemoveTagCommand -> RemoveTagCommand : remove matching tags from p1
 activate RemoveTagCommand
-RemoveTagCommand --> RemoveTagCommand : updated_p1
+RemoveTagCommand --> RemoveTagCommand : new_p1
 deactivate RemoveTagCommand
 
-RemoveTagCommand -> Model : setPerson(p1, updated_p1)
+RemoveTagCommand -> Model : setPerson(p1, new_p1)
 activate Model
 Model --> RemoveTagCommand
 deactivate Model
