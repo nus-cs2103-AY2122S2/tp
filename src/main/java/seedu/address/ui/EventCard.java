@@ -52,8 +52,8 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
         company.setText(event.getCompanyName().fullName);
-        date.setText(event.getDate().date);
-        time.setText(event.getTime().time);
+        date.setText(event.getDate().toString());
+        time.setText(event.getTime().toString());
         locationName.setText(event.getLocation().location);
         event.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
