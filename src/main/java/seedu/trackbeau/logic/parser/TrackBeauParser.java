@@ -18,12 +18,14 @@ import seedu.trackbeau.logic.commands.customer.EditCustomerCommand;
 import seedu.trackbeau.logic.commands.customer.FindCustomerCommand;
 import seedu.trackbeau.logic.commands.customer.ListCustomersCommand;
 import seedu.trackbeau.logic.commands.service.AddServiceCommand;
+import seedu.trackbeau.logic.commands.service.DeleteServiceCommand;
 import seedu.trackbeau.logic.commands.service.EditServiceCommand;
 import seedu.trackbeau.logic.commands.service.ListServicesCommand;
 import seedu.trackbeau.logic.parser.booking.AddBookingCommandParser;
 import seedu.trackbeau.logic.parser.booking.DeleteBookingCommandParser;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.logic.parser.service.AddServiceCommandParser;
+import seedu.trackbeau.logic.parser.service.DeleteServiceCommandParser;
 import seedu.trackbeau.logic.parser.service.EditServiceCommandParser;
 
 /**
@@ -61,6 +63,9 @@ public class TrackBeauParser {
         case EditServiceCommand.COMMAND_WORD:
             return new EditServiceCommandParser().parse(arguments);
 
+        case DeleteServiceCommand.COMMAND_WORD:
+            return new DeleteServiceCommandParser().parse(arguments);
+
         case AddBookingCommand.COMMAND_WORD:
             return new AddBookingCommandParser().parse(arguments);
 
@@ -74,7 +79,7 @@ public class TrackBeauParser {
             return new EditCustomerCommandParser().parse(arguments);
 
         case DeleteCustomerCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCustomerCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
