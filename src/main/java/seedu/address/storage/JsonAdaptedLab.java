@@ -26,7 +26,7 @@ class JsonAdaptedLab {
      * Constructs a {@code JsonAdaptedLab} with the given {@code labNumber}.
      */
     @JsonCreator
-    public JsonAdaptedLab(@JsonProperty("number") String labNumber, @JsonProperty("status") String labStatus,
+    public JsonAdaptedLab(@JsonProperty("labNumber") String labNumber, @JsonProperty("labStatus") String labStatus,
                           @JsonProperty("labMark") String labMark) {
         this.labNumber = labNumber;
         this.labStatus = labStatus;
