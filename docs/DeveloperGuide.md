@@ -188,6 +188,7 @@ The activity diagram below summarizes what happens when a filter command is exec
 
 
 ####Design considerations
+
 The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
 
 
@@ -254,7 +255,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![UndoRedoState5](images/CommitActivityDiagram.png)
+<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
