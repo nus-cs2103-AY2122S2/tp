@@ -2,8 +2,10 @@ package seedu.address.model.entry;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 
 import static seedu.address.logic.parser.CliSyntax.*;
 
@@ -36,6 +38,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         boolean correctCompany;
         boolean correctDate;
         boolean correctTime;
+        boolean correctTag;
 
         if(validKeywords(nameKeywords)) {
             correctName = true;
@@ -64,10 +67,16 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                             keyword));
         }
 
-//        boolean correctTag = tagKeywords.stream()
-//                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getTags().toString(), keyword));
+        if(validKeywords(tagKeywords)) {
+            correctTag = true;
+        } else {
+            correctTag = tagKeywords.stream()
+                    .anyMatch(keyword -> event.getTags().stream().map(tag -> tag.getPure().toLowerCase())
+                            .collect(Collectors.toSet())
+                            .contains(keyword));
+        }
 
-        return correctName && correctCompany && correctDate && correctTime;
+        return correctName && correctCompany && correctDate && correctTime && correctTag;
     }
 
     @Override

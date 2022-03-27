@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -49,6 +51,14 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    /**
+     * Accesses and returns the tagName attribute
+     * @return the time attribute as String
+     */
+    public String getPure() {
+        return tagName;
     }
 
 }
