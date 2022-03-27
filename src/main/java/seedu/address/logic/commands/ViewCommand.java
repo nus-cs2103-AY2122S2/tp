@@ -56,4 +56,11 @@ public class ViewCommand extends Command {
         return studentToView.getViewDetails();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // shortcut circuit if same object
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
+    }
+
 }

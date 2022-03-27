@@ -28,14 +28,23 @@ public class ViewDetails {
         this(student.getName(), student.getLabs());
     }
 
+    /**
+     * @return {@code String} for the name of the student to view
+     */
     public String getName() {
         return name.fullName;
     }
 
+    /**
+     * @return {@code String} for the name and lab details of the student to view
+     */
     public String getDescription() {
         return getName() + "\n" + getLabs();
     }
 
+    /**
+     * @return {@code String} for the lab details of the student to view
+     */
     public String getLabs() {
         List<String> labDetails = labList.getLabDetails();
         StringBuilder sb = new StringBuilder();
@@ -44,6 +53,24 @@ public class ViewDetails {
 
         return sb.toString();
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (this == other) {
+            return true;
+        }
+
+        // instanceof handles unit
+        if (!(other instanceof ViewDetails)) {
+            return false;
+        }
+
+        ViewDetails otherViewDetails = (ViewDetails) other;
+
+        return name.equals(otherViewDetails.name)
+                && labList.equals(otherViewDetails.labList); // state check
     }
 
 }
