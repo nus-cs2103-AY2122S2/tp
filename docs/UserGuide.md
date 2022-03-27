@@ -444,7 +444,7 @@ The command history works similarly to the Linux bash terminal.
 
 ### Clickable Client Card
 
-You can list all transactions of a client by clicking the client's card.
+You can list all transactions of a client by left-clicking the client's card.
 This is equivalent to typing `findTransaction INDEX` in the command box.
 
 ### Themes
