@@ -26,6 +26,10 @@
     -fx-background-color: #6F686D;
 }
 
+#commentLabel {
+    -fx-background-color: #6F686D;
+}
+
 #statLabel {
     -fx-background-color: #6F686D;
 }

@@ -72,6 +72,16 @@
                            <TextField fx:id="emailField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="johndoe@example.com" />
                         </children>
                      </HBox>
+                     <HBox layoutX="10.0" layoutY="215.0">
+                        <children>
+                           <Label fx:id="commentLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="commentField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] Comment" />
+                        </children>
+                     </HBox>
                      <HBox>
                         <children>
                            <Label fx:id="statLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
