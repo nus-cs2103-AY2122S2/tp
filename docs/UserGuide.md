@@ -22,6 +22,7 @@ Tracey can get your student health status management tasks done faster than trad
     * [Listing the records](#listing-the-records-list)
     * [Viewing help](#viewing-help-help)
     * [Filtering contacts](#filtering-contacts-filter)
+    * [Archiving address book](#archiving-address-book-archive) 
     * [Saving](#saving)
     * [Copying Emails](#copying-emails)
 * [FAQ](#faq)
