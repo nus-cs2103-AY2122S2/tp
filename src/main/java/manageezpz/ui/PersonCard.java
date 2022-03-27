@@ -33,6 +33,8 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label email;
+    @FXML
+    private Label numOfTasks;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -40,10 +42,18 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+
+        /*List<Task> tasks = model.getFilteredTaskList();
+
+        List<Task> personTasks = tasks.stream()
+                .filter(task -> task.getAssignees().contains(person)).collect(Collectors.toList());
+
+        numOfTasks.setText(personTasks.size() + " Assigned Tasks");*/
     }
 
     @Override

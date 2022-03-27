@@ -1,11 +1,14 @@
 package manageezpz.ui;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -40,8 +43,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label typeLabel;
-    @FXML
     private Label type;
     @FXML
     private Label dateTimeLabel;
@@ -52,9 +53,15 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label employeesTag;
     @FXML
-    private Label statusIsDone;
+    private Label priorityTagLabel;
+    @FXML
+    private ImageView priorityTagIcon;
     @FXML
     private Label priorityTag;
+    @FXML
+    private Label statusIsDoneLabel;
+    @FXML
+    private Label statusIsDone;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -63,7 +70,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
 
-        id.setText(displayedIndex + ".");
+        id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
         type.setText(task.getType());
 
@@ -80,28 +87,55 @@ public class TaskCard extends UiPart<Region> {
             employeesTag.setText(assigneesNames);
         }
 
-        // Remove row for 'date/time' if it is a Todo task
-        if (task instanceof Todo) {
-            removeRow(detailsPane, GridPane.getRowIndex(dateTimeLabel));
-        }
+        Image priorityIcon;
 
-        // Remove row for 'assigned to' if there are no employees assigned to the task
-        if (task.getAssignees().isEmpty()) {
-            removeRow(detailsPane, GridPane.getRowIndex(employeesTagLabel));
+        switch (task.getPriority().name()) {
+        case "LOW":
+            priorityIcon = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/images/priorities_low.png")));
+            priorityTagIcon.setImage(priorityIcon);
+            priorityTag.setText(task.getPriority().name());
+            break;
+        case "MEDIUM":
+            priorityIcon = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/images/priorities_medium.png")));
+            priorityTagIcon.setImage(priorityIcon);
+            priorityTag.setText(task.getPriority().name());
+            break;
+        case "HIGH":
+            priorityIcon = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/images/priorities_high.png")));
+            priorityTagIcon.setImage(priorityIcon);
+            priorityTag.setText(task.getPriority().name());
+            break;
+        case "NONE":
+            break;
+        default:
+            throw new RuntimeException("Invalid Task Priority");
         }
 
         if (task.isDone()) {
             statusIsDone.setText("Done");
-            statusIsDone.getStyleClass().add("cell_status_done_label");
+            statusIsDone.getStyleClass().add("cell_completion_done_label");
         } else {
             statusIsDone.setText("Not Done");
-            statusIsDone.getStyleClass().add("cell_status_not_done_label");
+            statusIsDone.getStyleClass().add("cell_completion_not_done_label");
         }
 
+        // Remove date/time row if it is a Todo task
+        if (task instanceof Todo) {
+            removeRow(detailsPane, GridPane.getRowIndex(dateTimeLabel));
+        }
+
+        // Remove assignees row if there are no employees assigned to the task
+        if (task.getAssignees().isEmpty()) {
+            removeRow(detailsPane, GridPane.getRowIndex(employeesTagLabel));
+        }
+
+        // Remove priority row if there are no priority tagged to the task
         if (task.getPriority().name().equals("NONE")) {
-            priorityTag.setVisible(false);
-        } else {
-            priorityTag.setText(task.getPriority().name());
+            // Remove 'priority' row if there are no priority tagged to the task
+            removeRow(detailsPane, GridPane.getRowIndex(priorityTagLabel));
         }
     }
 
