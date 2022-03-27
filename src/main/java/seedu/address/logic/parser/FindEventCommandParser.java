@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Arrays;
+
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
