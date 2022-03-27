@@ -28,14 +28,6 @@ public class ArchiveCommandTest {
     }
 
     @Test
-    public void execute_archiveValidFile_archiveSuccessful() {
-        Model expectedModel;
-        model.setAddressBookFilePath(validTestFilePath);
-        expectedModel = model;
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
     public void execute_archiveInvalidFile_archiveUnsuccessful() {
         model.setAddressBookFilePath(invalidTestFilePath);
         assertCommandFailure(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_FAILURE);
