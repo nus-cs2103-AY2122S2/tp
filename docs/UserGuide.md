@@ -58,7 +58,7 @@ Below are the features that can be completed using command line interface (CLI).
 
 Add a new person to UNite.
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE tele/TELEGRAM m/MATRIC CARD t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE tele/TELEGRAM m/MATRICCARD t/TAG`
 
 * The order of input does not matter.
 * `n/NAME p/PHONE e/EMAIL a/ADDRESS` are the 4 required information that must be present.

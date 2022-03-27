@@ -10,18 +10,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Course {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Course should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Course should only contain alphabet characters and spaces.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Input can be blank space, if you input blank spaces,
+     * it is treated as if the course field is unfilled and blank.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
 
     public final String value;
 
     /**
-     * Constructs a {@code MatricCard}.
+     * Constructs a {@code Course}.
      *
      * @param courseName A valid courseName.
      */
