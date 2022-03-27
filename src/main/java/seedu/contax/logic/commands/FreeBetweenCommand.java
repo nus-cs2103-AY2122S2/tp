@@ -80,7 +80,7 @@ public class FreeBetweenCommand extends Command {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
         String responseMessage = String.format(MESSAGE_SUCCESS, duration, rangeStart.format(formatter),
                 rangeEnd.toLocalDate().equals(LocalDate.MAX) ? PHRASE_NO_END_RANGE : rangeEnd.format(formatter));
-        return new CommandResult( responseMessage, GuiListContentType.APPOINTMENT);
+        return new CommandResult(responseMessage, GuiListContentType.APPOINTMENT);
     }
 
     @Override
