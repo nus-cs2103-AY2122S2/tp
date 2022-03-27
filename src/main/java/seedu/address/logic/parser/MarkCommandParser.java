@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -53,7 +52,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
             Index weekIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_WEEK).get());
             ObservableList<Student> students = ParserUtil.parseStudents(
                     argMultimap.getValue(PREFIX_STUDENT).get(), model);
-            return new MarkCommand(classGroupIndex, weekIndex, Optional.of(students));
+            return new MarkCommand(classGroupIndex, weekIndex, students);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
