@@ -445,7 +445,7 @@ The user can choose when to exit the programme <br>
 The activity diagram shows the possible execution paths for the `exit` command.
 
 **Path Execution of Exit Feature Activity Diagram is shown below:**
-![ExitFeatureActivityDiagram](images/ExitFeatureActivityDiagram.png)
+![ExitFeatureActivityDiagram](images/ExitFeatureActivityDiagram.jpg)
 
 There is one possible execution path for this command.
 

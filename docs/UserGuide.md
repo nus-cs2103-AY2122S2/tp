@@ -149,12 +149,17 @@ List the full record, which displays all the student's data that are logged into
 
 Format: `list`
 
+This is a sample screenshot of what you can expect from the `help` command.
+
+![list](images/ListFeatureScreenShot.png)
+
 ### Viewing help: `help`
-The `help` command opens a pop-up window that includes a summary to briefly explain all the commands that Tracey offers.
+Help users to search for all the commands that Tracey offers by opening a pop-up window.
+It includes a summary to briefly explain all the commands.
 
 The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide. 
 
-This is a sample screenshot of what you can expect from the `help` command.
+This is a sample screenshot of what you can expect from the `list` command.
 
 ![help](images/HelpScreenshot.png)
 
