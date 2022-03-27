@@ -98,7 +98,7 @@ public interface Model {
      */
     void updateSortedShowList(Comparator<Show> comparator);
     /**
-     * Saves the sort of the sorted show list.
+     * Saves the ordering of the sorted show list.
      */
     void saveSortedShowList();
 }
