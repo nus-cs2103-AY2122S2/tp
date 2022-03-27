@@ -213,7 +213,7 @@ A show can have any number of comments or tags (including 0)
 
 ### Deleting a show: `delete`
 
-**Description:** Wanting to remove an unwanted show? Delete the show at the specified index shown in Trackermon's show list!
+**Description:** Wanting to remove an unwanted show? Delete it at the specified index shown in Trackermon's show list!
 
 **Format:** `delete INDEX`
 
@@ -251,7 +251,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 * **An [index](#command-structure)** to edit must be provided.
 * **At least a [prefix](#command-structure) followed by a [parameter](#command-structure)** to edit must be provided.
 * Editing to an existing name is **not allowed**.
-* Editing a `TAG` parameter will cause all the previous tags of the show to be deleted.
+* Editing a `TAG` parameter will cause all the **previous tags of the show to be deleted**.
 * The **index** parameter provided should be a [non-zero unsigned integer](https://en.wikipedia.org/wiki/Integer_(computer_science)) within the allowed range of Java’s [`int`](#glossary) data type. On top of that, the index should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
@@ -263,7 +263,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 ### Finding a show: `find`
 
-**Description (General Find):** Searching for a show across all parameters? Find shows containing the search words!
+**Description (General Find):** Searching for a show across all [parameters](#command-structure)? Find shows containing the search words!
 
 **Format (General Find):** `find KEYWORD`
 
@@ -282,7 +282,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 </div>
 
-**Description (Precise Find):** Searching for a show across specific parameters? Find shows containing the search words based on [prefix](#command-structure)!
+**Description (Precise Find):** Searching for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
 
 **Format (Precise Find):** `find [n/NAME] [s/STATUS] [t/TAG]…​`
 
