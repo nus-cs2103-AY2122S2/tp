@@ -52,8 +52,8 @@ public class AddLessonCommand extends Command {
             + PREFIX_DURATION_MINUTES + " 15 ";
 
     public static final String MESSAGE_SUCCESS = "New lesson added:\n%1$s";
-    public static final String MESSAGE_CONFLICTING_LESSON = "This lesson conflicts with an existing lesson "
-        + "in the schedule";
+    public static final String MESSAGE_CONFLICTING_LESSONS_TIP = "TIP: you can use \"rmlesson\" to" +
+            " remove these conflicting lessons";
 
     private final Lesson toAdd;
 
@@ -74,7 +74,8 @@ public class AddLessonCommand extends Command {
         } catch (ConflictsWithLessonsException e) {
             model.updateFilteredLessonList(new ConflictingLessonsPredicate(toAdd));
 
-            return new CommandResult(ConflictsWithLessonsException.ERROR_MESSAGE,
+            return new CommandResult(
+                    ConflictsWithLessonsException.ERROR_MESSAGE + "\n\n" + MESSAGE_CONFLICTING_LESSONS_TIP,
                     true, InfoPanelTypes.LESSON, ViewTab.LESSON);
         }
 
