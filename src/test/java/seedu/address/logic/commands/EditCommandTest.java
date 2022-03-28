@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
@@ -29,9 +28,7 @@ import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.testutil.CandidateBuilder;
 import seedu.address.testutil.EditCandidateDescriptorBuilder;
 
@@ -157,24 +154,6 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void execute_trigger_success() {
-        EditCandidateDescriptor editCandidateDescriptor = new EditCandidateDescriptorBuilder()
-                .withName(VALID_NAME_BOB)
-                .withApplicationStatus(VALID_APPLICATION_PENDING)
-                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
-                .build();
-        assertEquals(editCandidateDescriptor.getApplicationStatus().get(),
-                new ApplicationStatus(VALID_APPLICATION_PENDING));
-        assertEquals(editCandidateDescriptor.getInterviewStatus().get(),
-                new InterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED));
-
-        editCandidateDescriptor.setApplicationStatus(new ApplicationStatus(VALID_APPLICATION_ACCEPTED));
-        assertEquals(editCandidateDescriptor.getApplicationStatus().get(),
-                new ApplicationStatus(VALID_APPLICATION_ACCEPTED));
-        assertEquals(editCandidateDescriptor.getInterviewStatus().get(),
-                new InterviewStatus(VALID_INTERVIEW_COMPLETED));
-    }
 
     @Test
     public void equals() {
