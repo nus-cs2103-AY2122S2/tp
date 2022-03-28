@@ -113,6 +113,12 @@ public interface Model {
     void addInterview(Interview interview);
 
     /**
+     * Pass the given interview.
+     * {@code interview} must already exist in HireLah.
+     */
+    void passInterview(Interview interview);
+
+    /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
      * {@code target} must exist in the address book.
      * The interview identity of {@code editedInterview} must not be the same as another existing interview

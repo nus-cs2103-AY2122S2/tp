@@ -156,6 +156,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Pass an interview in the HireLah.
+     * The interview must already exist in the address book.
+     */
+    public void passInterview(Interview i) {
+        interviews.pass(i);
+    }
+
+    /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
      * {@code target} must exist in HireLah.
      * The interview identity of {@code editedInterview} must not be the same as another existing interview

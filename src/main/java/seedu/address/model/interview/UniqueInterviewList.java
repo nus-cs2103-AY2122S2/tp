@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.interview.exceptions.DuplicateInterviewException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
+import seedu.address.model.interview.exceptions.NonPassableInterviewException;
 
 public class UniqueInterviewList implements Iterable<Interview> {
     private final ObservableList<Interview> internalList = FXCollections.observableArrayList();
@@ -46,6 +47,29 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new DuplicateInterviewException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Passes an interview in the list. The interview must be passable based on the numbers of offers
+     * currently extended.
+     */
+    public void pass(Interview toPass) {
+        requireNonNull(toPass);
+        if (!toPass.isPassableInterview()) {
+            throw new NonPassableInterviewException(); //change
+        }
+
+        toPass.markAsPassed();
+        int index = internalList.indexOf(toPass);
+        if (index == -1) {
+            throw new InterviewNotFoundException();
+        }
+
+        if (!toPass.equals(toPass) && contains(toPass)) {
+            throw new DuplicateInterviewException();
+        }
+
+        internalList.set(index, toPass);
     }
 
     /**

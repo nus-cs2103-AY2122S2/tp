@@ -112,6 +112,13 @@ public class Position {
     }
 
     /**
+     * Increment position offers by one.
+     */
+    public void increasePositionOffers() {
+        this.positionOffers.increment();
+    }
+
+    /**
      * Returns true if both positions have the same identity and data fields.
      * This defines a stronger notion of equality between two positions.
      */

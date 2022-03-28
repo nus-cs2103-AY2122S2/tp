@@ -73,6 +73,21 @@ public class Interview {
     }
 
     /**
+     * Checks if the given interview can be passed based on the number of offers given for its position
+     */
+    public boolean isPassableInterview() {
+        return this.position.canExtendOffer();
+    }
+
+    /**
+     * Marks an interview as passed and increments the position offering.
+     */
+    public void markAsPassed() {
+        this.status.markAsPassed();
+        this.position.increasePositionOffers();
+    }
+
+    /**
      * Returns true if both interviews have the same data fields.
      * This defines a stronger notion of equality between two interviews.
      */
