@@ -15,10 +15,10 @@ public class Event extends Task {
      */
     public Event(Description taskDescription, Date date, Time startTime, Time endTime) {
         super(taskDescription);
-        super.setType("event");
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.type = "event";
     }
 
     public Date getDate() {
@@ -33,6 +33,11 @@ public class Event extends Task {
         return endTime;
     }
 
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
 
     @Override
     public String getDateTime() {

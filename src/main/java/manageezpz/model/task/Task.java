@@ -15,7 +15,6 @@ import manageezpz.model.person.Person;
 public abstract class Task implements Comparable<Task> {
     protected boolean isDone;
     protected Priority priority;
-    protected String type;
 
     // Identity fields
     private final Description taskDescription;
@@ -34,10 +33,11 @@ public abstract class Task implements Comparable<Task> {
         requireAllNonNull(taskDescription);
         this.taskDescription = taskDescription;
         this.isDone = false;
-        this.type ="";
         this.assignees = new ArrayList<>();
         this.priority = Priority.NONE;
     }
+
+    public abstract String getType();
 
     public String getStatusIcon() {
         if (this.isDone()) {
@@ -61,14 +61,6 @@ public abstract class Task implements Comparable<Task> {
 
     public Description getDescription() {
         return this.taskDescription;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return this.type;
     }
 
     public String getDateTime() {

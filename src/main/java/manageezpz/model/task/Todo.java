@@ -1,6 +1,8 @@
 package manageezpz.model.task;
 
 public class Todo extends Task {
+
+    protected String type;
     /**
      * Constructor for the Task class.
      *
@@ -8,7 +10,12 @@ public class Todo extends Task {
      */
     public Todo(Description taskDescription) {
         super(taskDescription);
-        super.setType("todo");
+        this.type = "todo";
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
     }
 
     /**

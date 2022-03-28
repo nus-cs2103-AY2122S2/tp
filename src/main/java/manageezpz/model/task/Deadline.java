@@ -16,8 +16,7 @@ public class Deadline extends Task {
         super(taskDescription);
         this.date = date;
         this.time = time;
-        super.setType("deadline");
-        //setType();
+        this.type = "deadline";
     }
 
     public Date getDate() {
@@ -28,6 +27,10 @@ public class Deadline extends Task {
         return this.time;
     }
 
+    @Override
+    public String getType() {
+        return this.type;
+    }
 
     @Override
     public String getDateTime() {
