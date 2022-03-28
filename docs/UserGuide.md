@@ -19,7 +19,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 * [Editing a company: `editCompany`](#c-edit-c)
 * [Editing a role: `editRole`](#c-edit-r)
 * [Finding a specific company or role: `find`](#c-find-c-r)
-* [Favouriting a specific company: `favourite`](#c-favourite-c)  
+* [Favouriting a specific company: `favourite`](#c-favourite-c)
 * [Unfavouriting a specific company: `unfavourite`](#c-unfavourite-c)
 * [Command summary](#command-summary)
 
@@ -172,7 +172,7 @@ Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/
 Examples:
 
 * `editRole 1 1 [s/offered] [$/3000]`
-  
+
 ### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
 
 Find companies or/and roles depending on the format given.
@@ -187,12 +187,12 @@ Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROL
 * Only the company name, and the role name are searched.
 * Only full words would be matched e.g. `mobile` will not match `mobiles`
 * Companies and roles matching at least one keyword will be returned e.g. `software engineer` will match `mobile engineer` and `software developer`
-* At least one role keyword or one company keyword must be provided in the user input. 
-* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered  
+* At least one role keyword or one company keyword must be provided in the user input.
+* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered
 
 Examples:
 
-* `find c/meta amazon r/engineer` 
+* `find c/meta amazon r/engineer`
 
 ### Favouriting a specific company: `favourite` <a id="c-favourite-c"></a>
 
@@ -223,7 +223,7 @@ Examples:
 
 * `list` followed by, `unfavourite 1` unfavourites the 1<sup>st</sup>
   company in Tinner.
-  
+
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
 Exits the program.
