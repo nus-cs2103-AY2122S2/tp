@@ -85,7 +85,7 @@ public class SearchContainsKeywordsPredicateTest {
         predicate = new SearchContainsKeywordsPredicate(prefixArr);
         assertFalse(predicate.test(new CustomerBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone, email and trackbeau, but does not match name
+        // Keywords match phone, email and address, but does not match name
         prefixArr.set(0, Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         predicate = new SearchContainsKeywordsPredicate(prefixArr);
         assertFalse(predicate.test(new CustomerBuilder().withName("Alice").withPhone("12345")
