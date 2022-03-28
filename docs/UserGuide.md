@@ -135,8 +135,8 @@ The table below shows a list of command parameters that will be used for custome
 |`HAIR_TYPE`|The hair type of the customer. Hair types can be any values, and it should not be blank.|
 |`SKIN_TYPE`|The skin type of the customer. Skin types can be any values, and it should not be blank.|
 |`ALLERGY`|The allergy that the customer has. Allergies can be any values, and it should not be blank.|
-|`BIRTHDATE`|The birthdate of the customer. Birthdate should follow dd-mm-yyyy and be valid date.|
-|`REGISTRATION_DATE`|The registration date of the customer. Registration date should follow dd-mm-yyyy and be valid date.|
+|`BIRTHDATE`|The birthdate of the customer. Birthdate should follow dd-MM-yyyy and be valid date.|
+|`REGISTRATION_DATE`|The registration date of the customer. Registration date should follow dd-MM-yyyy and be valid date.|
 |`INDEX`|The index of the customer in the displayed list. It must be a valid positive index.|
 
 #### 4.1.2 Adding a customer: `addc`
