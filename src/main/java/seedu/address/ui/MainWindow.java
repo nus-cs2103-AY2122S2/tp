@@ -63,7 +63,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane lessonListPanelPlaceholder;
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane studentListPanelPlaceholder;
     @FXML
     private StackPane infoPanelPlaceholder;
     @FXML
@@ -143,7 +143,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         updateAndPopulateLessonList();
-        updateAndPopulatePersonList();
+        updateAndPopulateStudentList();
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -255,7 +255,7 @@ public class MainWindow extends UiPart<Stage> {
      * Toggles to student tab.
      */
     public void toggleStudentTab() {
-        updateAndPopulatePersonList();
+        updateAndPopulateStudentList();
         listPane.getSelectionModel().select(studentTab);
     }
 
@@ -281,7 +281,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     // List Panel Methods
-    private void updateAndPopulatePersonList() {
+    private void updateAndPopulateStudentList() {
         populateListPanelWithStudents(logic.getFilteredStudentList());
     }
 
@@ -300,11 +300,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private void populateListPanelWithStudents(ObservableList<Student> list) {
         studentListPanel = new StudentListPanel(list);
-        populatePersonListPanel(studentListPanel);
+        populateStudentListPanel(studentListPanel);
     }
 
-    private void populatePersonListPanel(ListPanel newListPanel) {
-        personListPanelPlaceholder.getChildren().add(newListPanel.getRoot());
+    private void populateStudentListPanel(ListPanel newListPanel) {
+        studentListPanelPlaceholder.getChildren().add(newListPanel.getRoot());
     }
 
     // Info Panel Methods
@@ -324,10 +324,18 @@ public class MainWindow extends UiPart<Stage> {
             Lesson selectedLesson = logic.getSelectedLesson();
             populateInfoPanelWithLesson(selectedLesson);
             break;
+        case EMPTY:
+            logger.info("Clearing InfoPanel");
+            clearInfoPanel();
+            break;
         default:
             logger.severe("Something went wrong with handling the InfoPanels");
             assert false;
         }
+    }
+
+    private void clearInfoPanel() {
+        infoPanelPlaceholder.getChildren().clear();
     }
 
     private void populateInfoPanelWithStudent(Student selectedStudent) {

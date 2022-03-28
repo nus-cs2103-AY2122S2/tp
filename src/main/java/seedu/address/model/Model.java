@@ -92,6 +92,10 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     //=========== LessonBook =================================================================================
+    /**
+     * Replaces lesson book data with the data in {@code lessonBook}.
+     */
+    void setLessonBook(ReadOnlyLessonBook lessonBook);
 
     /** Returns the LessonBook */
     ReadOnlyLessonBook getLessonBook();

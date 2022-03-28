@@ -93,6 +93,7 @@ public class ModelManager implements Model {
     @Override
     public void setStudentBook(ReadOnlyStudentBook addressBook) {
         this.studentBook.resetData(addressBook);
+        filteredStudents.clear(); // This might not be necessary
     }
 
     @Override
@@ -126,6 +127,12 @@ public class ModelManager implements Model {
     }
 
     //=========== LessonBook =================================================================================
+
+    @Override
+    public void setLessonBook(ReadOnlyLessonBook lessonBook) {
+        this.lessonBook.resetData(lessonBook);
+        filteredLessons.clear(); // This might not be necessary
+    }
 
     @Override
     public LessonBook getLessonBook() {

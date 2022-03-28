@@ -21,6 +21,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AssignCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditLessonCommand;
@@ -172,6 +173,8 @@ public class HelpWindow extends UiPart<Stage> {
                         ViewStudentInfoCommand.SHORTENED_COMMAND_WORD),
                 new CommandCard(ViewLessonInfoCommand.COMMAND_DESCRIPTION, ViewLessonInfoCommand.COMMAND_WORD,
                         ViewLessonInfoCommand.SHORTENED_COMMAND_WORD),
+                new CommandCard(ClearCommand.COMMAND_DESCRIPTION, ClearCommand.COMMAND_WORD,
+                        ClearCommand.SHORTENED_COMMAND_WORD),
                 new CommandCard(HelpCommand.COMMAND_DESCRIPTION, HelpCommand.COMMAND_WORD,
                         HelpCommand.SHORTENED_COMMAND_WORD),
                 new CommandCard(ExitCommand.COMMAND_DESCRIPTION, ExitCommand.COMMAND_WORD,

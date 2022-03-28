@@ -173,6 +173,11 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public void setLessonBook(ReadOnlyLessonBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setSelectedLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
