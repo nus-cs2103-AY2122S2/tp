@@ -49,13 +49,18 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
+    public AddressBook toModelType() {
         AddressBook addressBook = new AddressBook();
 
         for (JsonAdaptedTag jsonAdaptedTag: tags) {
-            Tag tag = jsonAdaptedTag.toModelType();
-            if (addressBook.hasTag(tag)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+            Tag tag;
+            try {
+                tag = jsonAdaptedTag.toModelType();
+                if (addressBook.hasTag(tag)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+                }
+            } catch (IllegalValueException e) {
+                continue;
             }
             addressBook.addTag(tag);
         }
