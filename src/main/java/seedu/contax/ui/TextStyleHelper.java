@@ -64,18 +64,6 @@ public class TextStyleHelper {
         return resultingList;
     }
 
-    private static boolean controlCheckers(boolean bold, boolean italic, boolean boldAndItalic,
-                                           boolean isLookaheadOneStar, boolean isLookaheadTwoStar) {
-        if (italic) {
-            return false;
-        } else if (bold && isLookaheadOneStar) {
-            return false;
-        } else if (boldAndItalic && isLookaheadTwoStar) {
-            return false;
-        }
-        return true;
-    }
-
     private static int skipNumbers(boolean bold, boolean boldAndItalic, int i) {
         if (bold) {
             i += 1;
