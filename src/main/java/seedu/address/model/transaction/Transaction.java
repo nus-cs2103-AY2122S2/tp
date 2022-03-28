@@ -24,13 +24,13 @@ public class Transaction implements Serializable {
 
 
     /**
-     * Person constructor
-     * @param fields A collection of all the person's attributes
+     * Transaction constructor
+     * @param fields A collection of all the transaction's attributes
      */
-    public Transaction(Collection<TransactionField> fields, long personId) {
+    public Transaction(long transactionId, Collection<TransactionField> fields, long personId) {
         requireAllNonNull(fields, personId);
 
-        transactionId = new Date().getTime();
+        this.transactionId = transactionId;
 
         // Add fields.
         for (TransactionField f : fields) {
@@ -52,8 +52,23 @@ public class Transaction implements Serializable {
         this.personId = personId;
     }
 
+    /**
+     * Transaction constructor
+     * @param fields A collection of all the transaction's attributes
+     */
+    public Transaction(Collection<TransactionField> fields, long personId) {
+        this(new Date().getTime(), fields, personId);
+    }
+
+    /**
+     * Copy constructor
+     */
     public Transaction(Transaction otherTransaction) {
-        this(otherTransaction.getFields(), otherTransaction.getPersonId());
+        this(otherTransaction.getTransactionId(), otherTransaction.getFields(), otherTransaction.getPersonId());
+    }
+
+    private long getTransactionId() {
+        return transactionId;
     }
 
     /**
@@ -199,13 +214,16 @@ public class Transaction implements Serializable {
         return otherTr.getAmount().equals(getAmount())
                 && otherTr.getDueDate().equals(getDueDate())
                 && otherTr.getTransactionDate().equals(getTransactionDate())
-                && (otherTr.getPersonId() == getPersonId());
+                && (otherTr.getPersonId() == getPersonId())
+                && (otherTr.getTransactionId()) == getTransactionId();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getAmount(), getDueDate(), getTransactionDate(), getNote());
+        return Objects.hash(getAmount(), getDueDate(),
+                getTransactionDate(), getNote(),
+                getPersonId(), getTransactionId());
     }
 
     @Override
