@@ -31,6 +31,10 @@
                   <Font name="System Bold" size="14.0" />
                </font></Label>
         </HBox>
+        <Label fx:id="nric" styleClass="cell_big_label" text="\$nric">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font></Label>
          <Region prefHeight="200.0" prefWidth="200.0" />
       <Label text="Diagnosis">
             <font>

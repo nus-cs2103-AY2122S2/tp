@@ -6,6 +6,7 @@ import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.consultations.AddConsultationCommandParser;
 import seedu.address.logic.parser.consultations.DeleteConsultationCommandParser;
+import seedu.address.logic.parser.consultations.EditConsultationCommandParser;
 import seedu.address.logic.parser.consultations.ViewConsultationCommandParser;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.DeleteContactCommandParser;
@@ -142,7 +143,7 @@ public enum CommandType {
         case MEDICAL:
             return new EditMedicalCommandParser().parse(arguments);
         case CONSULTATION:
-            throw new ParseException("To be implemented");
+            return new EditConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             throw new ParseException("To be implemented");
         case TEST:
