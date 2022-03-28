@@ -119,6 +119,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -150,6 +155,11 @@ public class AddCommandTest {
 
         @Override
         public void undoCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoCommand() {
             throw new AssertionError("This method should not be called.");
         }
     }

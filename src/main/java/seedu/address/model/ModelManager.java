@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
+import seedu.address.storage.UndoRedoStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,14 +21,11 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private static final String UNABLE_TO_UNDO = "Command cannot be undone";
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private AddressBook backup;
-    private boolean undoable = false;
+    private UndoRedoStorage undoRedoStorage = new UndoRedoStorage();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     public ModelManager() {
@@ -85,8 +84,14 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        backup = copyAddressBook();
         this.addressBook.resetData(addressBook);
+    }
+
+    @Override
+    public void resetAddressBook() {
+        this.addressBook.resetData(new AddressBook());
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     @Override
@@ -102,36 +107,37 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        undoable = true;
-        backup = copyAddressBook();
         addressBook.removePerson(target);
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     @Override
     public void addPerson(Person person) {
-        undoable = true;
-        backup = copyAddressBook();
         addressBook.addPerson(person);
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
-        undoable = true;
-        backup = copyAddressBook();
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     @Override
     public void undoCommand() throws CommandException {
-        if (undoable) {
-            setAddressBook(backup);
-            backup = copyAddressBook();
-            undoable = false;
-        } else {
-            throw new CommandException(UNABLE_TO_UNDO);
-        }
+        AddressBook newAddressBook = undoRedoStorage.undo();
+        setAddressBook(newAddressBook);
+    }
+
+    @Override
+    public void redoCommand() throws CommandException {
+        AddressBook newAddressBook = undoRedoStorage.redo();
+        setAddressBook(newAddressBook);
     }
 
     /**

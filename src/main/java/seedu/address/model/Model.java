@@ -50,6 +50,11 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces address book data with an empty {@code addressBook}.
+     */
+    void resetAddressBook();
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
@@ -87,4 +92,6 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void undoCommand() throws CommandException;
+
+    void redoCommand() throws CommandException;
 }
