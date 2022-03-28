@@ -76,6 +76,15 @@ public class AttendanceHashMap {
     }
 
     /**
+     * Retrieves the attendance entry at the specified date.
+     * @param attendanceDate the specified date.
+     * @return an AttendanceEntry object containing the attendance corresponding entry.
+     */
+    public AttendanceEntry getAttendanceEntry(LocalDate attendanceDate) {
+        return attendanceHashMap.get(attendanceDate);
+    }
+
+    /**
      * Returns the attendance hash map in collection form.
      * @return a collection containing date-attendance pairs.
      */

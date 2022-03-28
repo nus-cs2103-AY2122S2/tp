@@ -9,9 +9,10 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Sorted all pets!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the pet list by the column specified.\n"
-            + "Columns that can be sorted: OwnerName (/o), Name (/n) \n"
-            + "Parameters: FIRST LETTER OF COLUMN NAME \n"
-            + "Example: " + COMMAND_WORD + " /o";
+            + "Columns that can be sorted by the following 5 fields:\n"
+            + "1.owner\n 2.name\n 3.app\n 4.pick up\n 5.drop off\n"
+            + "Parameters: FIELD_TO_SORT_BY \n"
+            + "Example: " + COMMAND_WORD + "owner";
 
     private final String field;
 

@@ -103,7 +103,6 @@ public class Appointment implements Comparable<Appointment> {
 
     /**
      * Compares appointment objects based on their dateTime attribute.
-     *
      * @param other appointment to be compared with.
      * @return Value signifying in the difference between the comparing attribute.
      */
