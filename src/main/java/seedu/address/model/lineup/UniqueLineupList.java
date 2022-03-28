@@ -176,5 +176,14 @@ public class UniqueLineupList {
         }
     }
 
+    public List<Lineup> getList() {
+        return list;
+    }
+
+    public void setLineups(List<Lineup> lineups) {
+        for (Lineup lineup : lineups) {
+            addLineupToList(lineup);
+        }
+    }
 }
 
