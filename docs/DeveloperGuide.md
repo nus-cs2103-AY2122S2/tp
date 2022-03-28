@@ -9,7 +9,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org/)
+* The following libraries were also used in the project.
+  * [JavaFX](https://openjfx.io/) for the Graphical User Interface (GUI)
+  * [Jackson](https://github.com/FasterXML/jackson) for JSON Parsing
+  * [JUnit5](https://github.com/junit-team/junit5) for Testing
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,9 +34,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** above provides a high-level view of the Application design and structure.
 
-Given below is a quick overview of main components and how they interact with each other.
+A quick overview of main components and how they interact with each other is provided below, while further details can be found in the subsequent sections.
 
 **Main components of the architecture**
 
@@ -51,7 +55,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteperson 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -93,13 +97,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPersonCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteperson 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteperson 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -142,8 +146,8 @@ Within the `model` package, there also exists an `IndexedCsvFile` model that hel
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, schedule data and user preference data in json format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `ScheduleStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 Within the `storage` package, there also exists a `CsvManager` class that is a helper that provides file IO related operations for working with CSV files. It is used in the Import CSV or Export CSV features. This class does not fit within the storage component diagram as it does not interact with any other classes, serving solely as a helper class.
@@ -159,12 +163,12 @@ These subsystems are namely the:
 
 * Address Book Subsystem
 * Schedule Subsystem
-* Command Parsing, Processing and Display Subsystem
+* Command Parsing, Processing and Display Subsystem (or Simply the Driver Subsystem)
 
 <img src="images/FunctionalSubsystemDiagram.png" width="600" />
 
 Functionally, the Address Book and Schedule subsystem are near identical copies of each other, with the exception being the type of data being managed and the
-logic specific to each type of data. They serve the the same purpose of storing and managing data related to Contacts and Appointments respectively, and are hence structured similarly across the 4 architectural components, with similar flows for equivalent operations (E.g. `deletePerson` and `deleteAppointment`).
+logic specific to each type of data. They serve the same purpose of storing and managing data related to Contacts and Appointments respectively, and are hence structured similarly across the 4 architectural components, with similar flows for equivalent operations (E.g. `deletePerson` and `deleteAppointment`).
 
 As such, the detailed descriptions for the Address Book subsystem above can be translated to equivalents for the Schedule subsystem.
 
