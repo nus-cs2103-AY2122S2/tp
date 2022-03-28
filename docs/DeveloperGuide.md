@@ -2,66 +2,64 @@
 layout: page
 title: Developer Guide
 ---
+* Table of Contents
+  {:toc}
 
--   Table of Contents
-    {:toc}
-
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
--   {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-
--   At app launch: Initializes the components in the correct sequence, and connects them up with each other.
--   At shut down: Shuts down the components and invokes cleanup methods where necessary.
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
--   [**`UI`**](#ui-component): The UI of the App.
--   [**`Logic`**](#logic-component): The command executor.
--   [**`Model`**](#model-component): Holds the data of the App in memory.
--   [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
--   defines its _API_ in an `interface` with the same name as the Component.
--   implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -81,10 +79,10 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 
 The `UI` component,
 
--   executes user commands using the `Logic` component.
--   listens for changes to `Model` data so that the UI can be updated with the modified data.
--   keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
--   depends on some classes in the `Model` component, as it displays `Candidate` object residing in the `Model`.
+* executes user commands using the `Logic` component.
+* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `Candidate` object residing in the `Model`.
 
 ### Logic component
 
@@ -95,7 +93,6 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a candidate).
@@ -113,28 +110,28 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-
--   When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
--   All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
+
 The `Model` component,
 
--   stores the address book data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
--   stores the currently 'selected' `Candidate` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
--   stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
--   does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores the address book data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
+* stores the currently 'selected' `Candidate` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Candidate` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Candidate` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
+
 
 ### Storage component
 
@@ -143,16 +140,15 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-
--   can save both address book data and user preference data in json format, and read them back into corresponding objects.
--   inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
--   depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
@@ -169,7 +165,6 @@ This section describes some noteworthy details on how certain features are imple
 To suit the direction of where TAlent Assistant™ is headed to, the previous `Candidate` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
 
 List of new entities:
-
 1. `StudentId`
 2. `Course`
 3. `Seniority`
@@ -182,7 +177,6 @@ List of new entities:
 ### Find feature
 
 #### What is the feature about?
-
 The `find` mechanism is facilitated by `AddressBook`. The `find` command in `TAlent Assistant™`
 has been enhanced based on the initial implementation of the `find` command in `AddressBook`.
 
@@ -191,13 +185,11 @@ user to separate multiple keywords. and `f/` which allows the user to specify wh
 `find` command should search for keywords under.
 
 #### How is the feature implemented?
-
 The main logic for `find` command is still implemented within `FindCommand` (which extends from `Command`) and
 `FindCommandParser`.
 
 The `FindCommandParser` class has been extended to include a switch-case block to validate
 which field the user is trying to search across:
-
 1. `studentId`
 2. `course`
 3. `seniority`
@@ -215,10 +207,9 @@ There is now a `ContainsKeywordsPredicate` parent abstract class extended by eac
 (e.g. `StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicate`).
 
 #### Why is the feature implemented as such?
-
 **1. Switch-case block in `FindCommandParser`** <br>
 Other alternatives considered included creating a separate class to execute the logic of checking for which field the
-user had entered and return the new `ContainsKeywordsPredicate` subclass _or_ to utilise `if`-`else` statements.
+user had entered and return the new `ContainsKeywordsPredicate` subclass *or* to utilise `if`-`else` statements.
 In the end, the implementation was done using the switch-case block within the `FindCommandParser` class, as the
 class should contain all the necessary logic to parse in the user's input. The syntax for the switch-case block was
 also more efficient than `if`-`else` statements and was more relevant for this usage.
@@ -233,7 +224,6 @@ Further, since all the child classes implement similar logic and methods, it wou
 checks for the specific related entity, and should not have any other reason to change otherwise.
 
 #### UML Diagrams
-
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens when a user executes a `find` command: <br>
 <img src="images/FindActivityDiagram.png" width="550" />
@@ -241,30 +231,26 @@ The following activity diagram summarizes what happens when a user executes a `f
 ### Delete feature
 
 #### What is the feature about?
-
 The `delete` feature allows the user to delete a Candidate from the system.
 This feature has been enhanced based on the initial implementation of the `delete` command in `AddressBook`.
 
 #### How is the feature implemented?
-
 The main logic is implemented within `DeleteCommand` (which extends from `Command`) and `DeleteCommandParser`.
 A minor enhancement was added to `DeleteCommand` such that if the candidate list is empty, a message indicating that
 there are no candidates in the system is shown to the user (instead of invalid index),
 improving the accuracy of the feedback.
 
-#### Why is the feature implemented as such?
 
+#### Why is the feature implemented as such?
 **1. Deleting a candidate by `INDEX`** <br>
 The team's original idea was to delete a candidate by its attribute `StudentId` instead of `INDEX`
 as every candidate has their own unique `StudentId`. However, upon careful consideration, we realised
 that there are two possible problems that could arise from this alternative implementation:
-
 1. App requirements - TAlent Assistant should be faster than GUI
 2. Performance - Each time a delete command is executed, the system will be required to iterate through the entire candidate
    list to search for the candidate with the matching `StudentId`.
 
 #### UML Diagrams
-
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens when a user executes a `delete` command: <br>
 <img src="images/DeleteActivityDiagram.png" width="550" />
@@ -272,10 +258,9 @@ The following activity diagram summarizes what happens when a user executes a `d
 ### Add feature
 
 #### What is the feature about?
-
 The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities (Refer to [TODO: UPDATE LINK]).
 
-The enhancement works by adding additional prefixes i.e. `id/[StudentId] `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the `ApplicationStatus`and`InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned to the entities.
+The enhancement works by adding additional prefixes i.e. `id/[StudentId] `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned to the entities.
 
 #### How is the feature implemented?
 
@@ -304,7 +289,6 @@ Step 2. The user proceeds to add a candidate by running the `add` command with i
 The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input.
 
 #### UML Diagrams
-
 **Activity Diagram**
 
 The following activity diagram summarizes what happens when a user executes an `add` command:
@@ -317,9 +301,9 @@ The following activity diagram summarizes what happens when a user executes an `
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
--   `VersionedAddressBook#commit()` — Saves the current address book state in its history.
--   `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
--   `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
@@ -380,15 +364,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
--   **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
-    -   Pros: Easy to implement.
-    -   Cons: May have performance issues in terms of memory usage.
-
--   **Alternative 2:** Individual command knows how to undo/redo by
-    itself.
-    -   Pros: Will use less memory (e.g. for `delete`, just save the candidate being deleted).
-    -   Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the candidate being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -399,33 +382,28 @@ _{Explain here how the data archiving feature will be implemented}_
 ### List Feature
 
 ### What is this feature about?
-
 The `list` feature allows the user to view all available Candidates in the system through the CLI.
 
 This feature in TAlent Assistant™ has been enhanced based on the initial implementation of the `list` command in `AddressBook`.
 
 ### How is this feature implemented?
-
 The proposed `list` feature is implemented within `ListCommand` (which extends from `Command`) in `AddressBook`.
 
 A minor enhancement was added to this `list` feature to produce another message to indicate that there are no Candidates
 in the system.
 
 ### Why is the feature implemented as such?
-
 Instead of the same message being produced in both scenarios, when there are Candidates in the system, or when there are
 no Candidates in the system, a new message would allow the user to differentiate between the two. The user would not be
 confused in possibly thinking that the TAlent Assistant™ program is unresponsive.
 
 ### UML Diagram
-
 The following activity diagram summarizes what happens when a user executes a `list` command: <br>
 <img src="images/ListActivityDiagram.png" width="250" />
 
 ### Edit Feature
 
 #### What is this feature about?
-
 The `edit` feature allows the user to change the attributes of the Candidate in the system though the CLI.
 This feature has been enhanced based on the initial implementation of the `edit` command in `AddressBook`.
 
@@ -434,10 +412,9 @@ This feature has been enhanced based on the initial implementation of the `edit`
 The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrieve the attributes that can be edited.
 
 The user is able to edit key attributes of the Candidate, such as
-
--   Phone Number
--   ApplicationStatus
--   InterviewStatus
+* Phone Number
+* ApplicationStatus
+* InterviewStatus
 
 Based on the fields that are edited by the user, the EditCommandParser will retreive the information, and update the attributes accordingly.
 There are also some attributes that are dependent on another attribute, and we will introduce `Triggers` to update the attributes automatically.
@@ -447,7 +424,7 @@ The `trigger mechanism` (WIP) is currently handled by `EditCommand#triggerInterv
 
 #### Why is the feature implemented as such?
 
-\*\*1. Triggers for `ApplicationStatus` and `InterviewStatus` <br>
+**1. Triggers for `ApplicationStatus` and `InterviewStatus` <br>
 For the `ApplicationStatus` and `InterviewStatus`, we initially thought of allowing the user to manually update individual statuses.
 (Eg. Updating `ApplicationStatus` to `Accepted` will not trigger `InterviewStatus`).
 We initially thought that this would be a cleaner way, and to also make sure there is no wrong information in the system.
@@ -457,14 +434,13 @@ The downside to this implementation is that the user will not be able to individ
 will not be an use case for any user.
 
 #### UML Diagram
-
 The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
 <img src="images/StatusActivityDiagram.png" width="250" />
+
 
 ### Help Window Feature
 
 #### What is this feature about?
-
 The `help` feature allows the user see the available commands on the system.
 This feature has been enhanced based on the initial implementation of the `help` command in `AddressBook3`.
 
@@ -476,7 +452,7 @@ For this feature, we used the [Desktop API](https://docs.oracle.com/javase/9/doc
 
 #### Why is the feature implemented as such?
 
-\*\*1. Why allow user to visit full user guide? <br>
+**1. Why allow user to visit full user guide? <br>
 We initially proposed to put the full list of commands and tips on the Help Window. However, we think that this does not improve user experience as
 there will be too many commands available in the window. Hence we decided that we should streamline the important commands on the `HelpWindow`, and the
 other information will be available on the User Guide.
@@ -484,46 +460,41 @@ other information will be available on the User Guide.
 As the user will not be able to remember the link to our User Guide, we hyperlinked it using the Desktop API that was available from Java.
 
 #### UML Diagram
-
 The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
 <img src="images/HelpWindowActivityDiagram.png" width="250" />
 
 ### Focus Feature
 
 #### What is this feature about?
-
 The 'focus' feature utilises the different panels in our application. It will bring up the intended Candidate's information,
 such as course, email into the middle panel for the user to see.
 
 #### How is this feature implemented?
-
 This feature is implemented with the similar implementation of `CandidateListCard`, as we utilise the JavaFX codes to
 create the `view`. We also introduced new features such as `ImageView`, where the extra information will consist of a display
 picture for the Candidate (WIP).
 
 #### Why is the feature implemented as such?
-
 We created a new return value in `CommandResult` to get the `Index` of the intended Candidate. We implemented it this way
 to not alter the existing database, as the intended purpose of this feature was not to edit the candidate's information.
 We considered creating another database for this feature, by fetching more details from the secondary database, but we considered
 that this will be a heavy headway for our application.
 
 #### UML Diagram
-
 The following activity diagram summarizes what happens when a user executes a `focus` command.<br>
 <img src="images/FocusCommandDiagram.png" width="250" />
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
--   [Documentation guide](Documentation.md)
--   [Testing guide](Testing.md)
--   [Logging guide](Logging.md)
--   [Configuration guide](Configuration.md)
--   [DevOps guide](DevOps.md)
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
 
@@ -531,23 +502,24 @@ The following activity diagram summarizes what happens when a user executes a `f
 
 **Target user profile**:
 
--   Professor from NUS School of Computing
--   Needs to manage a significant number of TA applications
--   Prefers desktop apps to other platform apps
--   Possesses fast typing speed
--   Prefers typing to mouse interactions
--   Reasonably comfortable using CLI apps
+* Professor from NUS School of Computing
+* Needs to manage a significant number of TA applications
+* Prefers desktop apps to other platform apps
+* Possesses fast typing speed
+* Prefers typing to mouse interactions
+* Reasonably comfortable using CLI apps
 
 **Value proposition**: TAlent Assistant™ creates a centralized management system for professors to manage TA
 applications by providing access to various application data such as qualifications, experience and
 interview availability dates.
+
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​  | I want to …​                          | So that I can…​                                                               |
-| -------- | -------- | ------------------------------------- | ----------------------------------------------------------------------------- |
+|----------|----------|---------------------------------------|-------------------------------------------------------------------------------|
 | `* * *`  | user     | add a candidate to the system         | keep track of their application details for consideration.                    |
 | `* * *`  | user     | delete a candidate from the system    | remove entries that I no longer need.                                         |
 | `* * *`  | user     | find a candidate in the system        | access details of the candidate without having to go through the entire list. |
@@ -556,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | schedule TA candidates for interviews | keep track of the interview schedule.                                         |
 | `* * *`  | new user | view all available commands           | get familiarised with the system.                                             |
 
-_{More to be added}_
+*{More to be added}*
 
 ### Use cases
 
@@ -577,11 +549,10 @@ _{More to be added}_
 
 **Extensions**
 
--   2a. The list is empty
+* 2a. The list is empty
+    * 2a1. TAlent Assistant™ feedbacks no TAs in system
 
-    -   2a1. TAlent Assistant™ feedbacks no TAs in system
-
-    Use case ends.
+  Use case ends.
 
 <hr>
 
@@ -598,11 +569,10 @@ _{More to be added}_
 
 **Extensions**
 
--   3a. The given format is invalid
+* 3a. The given format is invalid
+    * 3a1. TAlent Assistant™ shows an error message
 
-    -   3a1. TAlent Assistant™ shows an error message
-
-    Use case resumes at step 2.
+  Use case resumes at step 2.
 
 <hr>
 
@@ -619,15 +589,14 @@ _{More to be added}_
 
 **Extensions**
 
--   3a. The list is empty
+* 3a. The list is empty
 
-    Use case ends.
+  Use case ends.
+* 3b. The given index is invalid.
 
--   3b. The given index is invalid.
+    * 3b1. TAlent Assistant™ displays an error message
 
-    -   3b1. TAlent Assistant™ displays an error message
-
-    Use case resumes at step 2.
+  Use case resumes at step 2.
 
 <hr>
 
@@ -644,22 +613,21 @@ _{More to be added}_
 
 **Extensions**
 
--   2a. The list is empty
+* 2a. The list is empty
 
-    Use case ends.
+  Use case ends.
+* 3a. The given index is invalid
 
--   3a. The given index is invalid
+    * 3a1. TAlent Assistant™ displays an error message
 
-    -   3a1. TAlent Assistant™ displays an error message
+  Use case resumes at step 2.
 
-    Use case resumes at step 2.
+* 3b. The given date and/or time format is invalid
 
--   3b. The given date and/or time format is invalid
+    * 3b1. TAlent Assistant™ displays an error message
 
-        * 3b1. TAlent Assistant™ displays an error message
-
-    Use case resumes at step 2.
-    <hr>
+  Use case resumes at step 2.
+<hr>
 
 **Use case: Find TAs**
 
@@ -669,21 +637,19 @@ _{More to be added}_
 2. TAlent Assistant™ returns a list of TAs that contain one or more of the given keyword(s)
    in the specified attribute field
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
--   2a. No TA candidate entries contain the given keyword in the specified attribute field
+* 2a. No TA candidate entries contain the given keyword in the specified attribute field
+    * 2a1. TAlent Assistant™ returns an empty list with zero search results
 
-    -   2a1. TAlent Assistant™ returns an empty list with zero search results
+  Use case ends.
 
-    Use case ends.
+* 2b. The specified attribute field is invalid
+    * 2b1. TAlent Assistant™ returns an error message
 
--   2b. The specified attribute field is invalid
-
-    -   2b1. TAlent Assistant™ returns an error message
-
-    Use case resumes at step 1.
+  Use case resumes at step 1.
 
 <hr>
 
@@ -694,13 +660,12 @@ _{More to be added}_
 1. User requests to sort TAs by a specific field
 2. TAlent Assistant™ returns a list of TAs sorted in order with regard to the specified attribute field
 
-    Use case ends.
+   Use case ends.
 
--   2b. The specified attribute field is invalid
+* 2b. The specified attribute field is invalid
+    * 2b1. TAlent Assistant™ returns an error message
 
-    -   2b1. TAlent Assistant™ returns an error message
-
-    Use case resumes at step 1.
+  Use case resumes at step 1.
 
 <hr>
 
@@ -713,7 +678,8 @@ _{More to be added}_
 
     Use case ends.
 
-_{More to be added}_
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -725,18 +691,18 @@ _{More to be added}_
 6. The response to any user action should become visible within 3 seconds.
 7. Colors used for the user interface should be pleasant and not straining on the eyes.
 
-_{More to be added}_
+*{More to be added}*
 
 ### Glossary
 
--   **Mainstream OS**: Windows, Linux, Unix, macOS
--   **TA**: Teaching Assistant
--   **32/64-bit environment**: A system that uses a 32/64-bit processor
--   **System admin commands**: Commands that are used on the terminal interface
--   **CLI**: Command Line Interface
--   **GUI**: Graphical User Interface
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **TA**: Teaching Assistant
+* **32/64-bit environment**: A system that uses a 32/64-bit processor
+* **System admin commands**: Commands that are used on the terminal interface
+* **CLI**: Command Line Interface
+* **GUI**: Graphical User Interface
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
