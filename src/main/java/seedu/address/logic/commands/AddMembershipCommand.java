@@ -21,11 +21,11 @@ public class AddMembershipCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds membership to the specified person. "
             + "Parameters: "
             + "INDEX (must be a positive integer) "
-            + Membership.PREFIX + "MembershipName "
+            + Membership.PREFIX + "(bronze,silver or gold) "
             + Membership.DATE_PREFIX + "Date\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
-            + Membership.PREFIX + "Glee Club "
+            + Membership.PREFIX + "gold "
             + "(optional)" + Membership.DATE_PREFIX + "2022-02-02";
 
     public static final String MESSAGE_SUCCESS = "Membership added: %1$s";
