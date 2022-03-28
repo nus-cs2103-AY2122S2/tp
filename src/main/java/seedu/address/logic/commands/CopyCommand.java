@@ -121,7 +121,16 @@ public class CopyCommand extends Command {
 
         // state check
         CopyCommand e = (CopyCommand) other;
+
+        // check case of null in index
+        if (this.index == null) {
+            return e.index == null
+                    && prefixes.equals(e.prefixes)
+                    && formatPersonUtil.equals(e.formatPersonUtil);
+        }
+
         return index.equals(e.index)
-                && prefixes.equals(e.prefixes);
+                && prefixes.equals(e.prefixes)
+                && formatPersonUtil.equals(e.formatPersonUtil);
     }
 }

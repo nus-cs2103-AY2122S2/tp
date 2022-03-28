@@ -21,12 +21,10 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.module.Module;
 
-
-
 public class FormatPersonUtil {
-    private static final String JSON_FORMAT = "json";
-    private static final String CSV_FORMAT = "csv";
-    private static final String DEFAULT_FORMAT = "default";
+    public static final String JSON_FORMAT = "json";
+    public static final String CSV_FORMAT = "csv";
+    public static final String DEFAULT_FORMAT = "default";
 
     public static final String MESSAGE_CONSTRAINTS = "Invalid format. Valid formats are: "
             + JSON_FORMAT + ", " + CSV_FORMAT + ", " + DEFAULT_FORMAT + "\n";
@@ -87,23 +85,31 @@ public class FormatPersonUtil {
         }
     }
 
+    //=========== Default format ==================================================================================
+
     private String formatPersonDefault(Person person, List<Prefix> prefixes) {
         StringBuilder builder = new StringBuilder();
-        for (Prefix prefix : prefixes) {
-            builder.append(getPersonField(person, prefix));
-            builder.append("\n");
+        for (int i = 0; i < prefixes.size(); i++) {
+            builder.append(getPersonField(person, prefixes.get(i)));
+            if (i != prefixes.size() - 1) {
+                builder.append("\n");
+            }
         }
         return builder.toString();
     }
 
     private String formatAddressBookDefault(List<Person> persons, List<Prefix> prefixes) {
         StringBuilder builder = new StringBuilder();
-        for (Person person : persons) {
-            builder.append(formatPersonDefault(person, prefixes));
-            builder.append("\n");
+        for (int i = 0; i < persons.size(); i++) {
+            builder.append(formatPersonDefault(persons.get(i), prefixes));
+            if (i != persons.size() - 1) {
+                builder.append("\n");
+            }
         }
         return builder.toString();
     }
+
+    //=========== Csv format ==================================================================================
 
     private String formatPersonCsv(Person person, List<Prefix> prefixes) {
         StringBuilder builder = new StringBuilder();
@@ -115,7 +121,7 @@ public class FormatPersonUtil {
         return builder.toString();
     }
 
-    private String formatAddressBookCsv(List<Person> persons, List<Prefix> prefixes) {
+    private String formatHeaderCsv(List<Prefix> prefixes) {
         StringBuilder builder = new StringBuilder();
         List<String> headers = prefixes.stream()
                 .map(Prefix::getDescription)
@@ -126,22 +132,32 @@ public class FormatPersonUtil {
         }
         builder.append(headers.get(headers.size() - 1));
         builder.append("\n");
-        for (Person person : persons) {
-            builder.append(formatPersonCsv(person, prefixes));
-            builder.append("\n");
+        return builder.toString();
+    }
+
+    private String formatAddressBookCsv(List<Person> persons, List<Prefix> prefixes) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(formatHeaderCsv(prefixes));
+        for (int i = 0; i < persons.size(); i++) {
+            builder.append(formatPersonCsv(persons.get(i), prefixes));
+            if (i != persons.size() - 1) {
+                builder.append("\n");
+            }
         }
         return builder.toString();
     }
 
-    private Map<String, Object> formatPersonJson(Person person, List<Prefix> prefixes) throws JsonProcessingException {
+    //=========== Json format ==================================================================================
+
+    private Map<String, Object> formatPersonJson(Person person, List<Prefix> prefixes) {
         Map<String, Object> personMap = new LinkedHashMap<>();
         for (Prefix prefix : prefixes) {
             if (prefix.equals(PREFIX_MODULE)) {
-                List<String> modules = new ArrayList<>();
-                for (Module module : person.getModules()) {
-                    modules.add(module.getModuleName());
-                }
+                List<String> modules = person.getModules().stream()
+                                .map(Module::getModuleName)
+                                .collect(Collectors.toList());
                 personMap.put(prefix.getDescription(), modules);
+
             } else {
                 personMap.put(prefix.getDescription(), getPersonField(person, prefix));
             }
@@ -159,7 +175,7 @@ public class FormatPersonUtil {
         return JsonUtil.toJsonString(addressBookStructure);
     }
 
-    private String getPersonField(Person person, Prefix prefix) {
+    public static String getPersonField(Person person, Prefix prefix) {
         if (prefix.equals(PREFIX_NAME)) {
             return person.getName().toString();
 
@@ -185,5 +201,22 @@ public class FormatPersonUtil {
             assert false;
             return "";
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FormatPersonUtil)) {
+            return false;
+        }
+
+        // state check
+        FormatPersonUtil e = (FormatPersonUtil) other;
+        return format.equals(e.format);
     }
 }
