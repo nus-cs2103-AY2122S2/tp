@@ -189,6 +189,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public void updateCurrentlyDisplayedList(Predicate<Entry> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void showPersonList(Predicate<? super Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -235,6 +240,11 @@ public class AddPersonCommandTest {
 
         @Override
         public Entry deleteEntry(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Entry archiveEntry(int index) {
             throw new AssertionError("This method should not be called.");
         }
     }

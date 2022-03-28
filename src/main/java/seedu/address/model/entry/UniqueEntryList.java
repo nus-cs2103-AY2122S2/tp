@@ -79,6 +79,9 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
         }
     }
 
+    /**
+     * Returns the element in the list that is equal to {@code toFind}, if it exists.
+     */
     public T find(T toFind) {
         requireNonNull(toFind);
         for (int i = 0; i < internalList.size(); i++) {

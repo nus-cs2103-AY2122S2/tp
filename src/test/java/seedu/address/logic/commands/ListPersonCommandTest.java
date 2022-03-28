@@ -26,9 +26,9 @@ public class ListPersonCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        showPerson(model);
-        showPerson(expectedModel);
-        expectedCommandResult = new CommandResult(ListPersonCommand.MESSAGE_SUCCESS,
+        model.showPersonList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
+        expectedModel.showPersonList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
+        expectedCommandResult = new CommandResult(String.format(ListPersonCommand.MESSAGE_SUCCESS, " unarchived"),
                 false, false, true, false, false);
     }
 
@@ -43,11 +43,5 @@ public class ListPersonCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(
                 new ListPersonCommand(SearchType.UNARCHIVED_ONLY), model, expectedCommandResult, expectedModel);
-    }
-
-    private void showPerson(Model model) {
-        model.updateFilteredCompanyList(p -> false);
-        model.updateFilteredEventList(p -> false);
-        model.updateFilteredPersonList(p -> true);
     }
 }

@@ -18,11 +18,11 @@ public abstract class Entry {
      * @param name Name of the entry.
      * @param tags Tags associated with the entry.
      */
-    public Entry(Name name, Set<Tag> tags) {
+    public Entry(Name name, Set<Tag> tags, boolean isArchived) {
         requireAllNonNull(name, tags);
         this.name = name;
         this.tags.addAll(tags);
-        isArchived = false;
+        this.isArchived = isArchived;
     }
 
     public Name getName() {

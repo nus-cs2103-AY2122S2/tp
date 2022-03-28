@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
-import seedu.address.commons.core.EntryType;
+import seedu.address.commons.core.ListType;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
 import seedu.address.logic.commands.ListEventCommand;
@@ -12,13 +12,13 @@ import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ListCommandParser implements Parser<ListCommand> {
-    private final EntryType listType;
+    private final ListType listType;
 
     /**
      * Constructor for a ListCommandParser. Can create a new ListCommand
      * ased on the given {@code listType}.
      */
-    public ListCommandParser(EntryType listType) {
+    public ListCommandParser(ListType listType) {
         requireNonNull(listType);
         this.listType = listType;
     }

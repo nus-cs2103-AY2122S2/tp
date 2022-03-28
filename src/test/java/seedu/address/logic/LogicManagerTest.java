@@ -62,7 +62,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listPersonCommand = ListPersonCommand.COMMAND_WORD;
-        assertCommandSuccess(listPersonCommand, ListPersonCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listPersonCommand, String.format(ListPersonCommand.MESSAGE_SUCCESS, " unarchived"), model);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package seedu.address.commons.core;
 
-public enum EntryType {
+public enum ListType {
     PERSON,
     COMPANY,
     EVENT

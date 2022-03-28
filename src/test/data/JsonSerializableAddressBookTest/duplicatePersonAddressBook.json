@@ -4,12 +4,14 @@
     "companyName": "DBSSSS",
     "phone": "94351253",
     "email": "alice@example.com",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "isArchived": false
   }, {
     "name": "Alice Pauline",
     "companyName": "Janice street",
     "phone": "94351253",
-    "email": "pauline@example.com"
+    "email": "pauline@example.com",
+    "isArchived": false
   } ],
   "companies": [],
   "events": []

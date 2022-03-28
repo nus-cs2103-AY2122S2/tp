@@ -5,62 +5,72 @@
     "companyName": "DBSSS",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "isArchived": false
   }, {
     "name" : "Benson Meier",
     "companyName": "Big Bank",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "isArchived": false
   }, {
     "name" : "Carl Kurz",
     "companyName": "DBSSS",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "Daniel Meier",
     "companyName": "Janice Street",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "isArchived": false
   }, {
     "name" : "Elle Meyer",
     "companyName": "DBSSS",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "Fiona Kunz",
     "companyName": "Janice Street",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "George Best",
     "companyName": "Big Bank",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   } ],
   "companies": [ {
     "name" : "DBSSS",
     "phone" : "91123671",
     "email" : "dbsss@example.com",
     "address" : "14 Jurong Street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "Big Bank",
     "phone" : "94316789",
     "email" : "bigbank@example.com",
     "address" : "16 Race Course Road",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "Janice Street",
     "phone" : "89245223",
     "email" : "janicestreet@example.com",
     "address" : "21 Marina Bay Sands",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   } ],
   "events": []
 }
