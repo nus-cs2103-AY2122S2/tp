@@ -58,4 +58,9 @@ public class SummariseCommandTest {
         assertTrue(actual.length() > 0);
     }
 
+    @Test
+    public void test_summariseCommandWordIsCorrect() {
+        assertTrue(SummariseCommand.COMMAND_WORD.equals("summarise"));
+    }
+
 }
