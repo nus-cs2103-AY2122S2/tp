@@ -63,7 +63,6 @@ public class SellerCard extends UiPart<Region> {
         seller.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        
         String houseType = seller.getPropertyToSell().getHouse().getHouseTypeToString();
         String houseLocation = seller.getPropertyToSell().getHouse().getLocationToString();
         String houseLowerPrice = seller.getPropertyToSell().getPriceRange().getLowerToString();
