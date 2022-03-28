@@ -12,11 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.DueDate;
-import seedu.address.model.transaction.Note;
-import seedu.address.model.transaction.Transaction;
-import seedu.address.model.transaction.TransactionDate;
+import seedu.address.model.transaction.*;
 import seedu.address.model.transaction.util.TransactionProducer;
 
 
@@ -25,12 +21,13 @@ public class AddTransactionCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add a transaction to the transaction list of the "
             + "identified person by the index number used in the last person "
-            + "listing. If specified, the transaction date must be before the due date.\n"
+            + "listing. If specified, the transaction date can't be after the due date.\n"
             + "Parameters: "
             + Amount.PREFIX + "AMOUNT "
             + TransactionDate.PREFIX + "TRANSACTION DATE "
             + DueDate.PREFIX + "DUE DATE <OPTIONAL> "
-            + Note.PREFIX + "NOTE <OPTIONAL>\n"
+            + Note.PREFIX + "NOTE <OPTIONAL> "
+            + Status.PREFIX + "<OPTIONAL>\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "a/123.456 "
             + "td/2022-11-11 "
@@ -68,6 +65,10 @@ public class AddTransactionCommand extends Command {
         long personIdentifier = person.getUniqueId();
 
         Transaction transaction = transactionProducer.createTransaction(personIdentifier);
+
+        if (!transaction.isValid()) {
+            throw new CommandException(MESSAGE_USAGE);
+        }
 
         model.addTransaction(transaction);
         model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
