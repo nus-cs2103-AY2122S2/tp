@@ -34,6 +34,7 @@ import unibook.logic.commands.EditCommand.EditPersonDescriptor;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleKeyEvent;
+import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 
 /**
@@ -112,6 +113,19 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
                 editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
             }
+
+            Optional<ModuleCode> moduleCodeToAdd;
+            Optional<String> groupName;
+            if (argMultimap.getValue(PREFIX_MODULE).isPresent() && argMultimap.getValue(PREFIX_GROUP).isEmpty()
+                || argMultimap.getValue(PREFIX_GROUP).isPresent() && argMultimap.getValue(PREFIX_MODULE).isEmpty()) {
+                    // TODO add error command to show that need both module and group
+                    throw new ParseException(EditCommand.MESSAGE_ADDTOGROUP_WRONG_FORMAT);
+                } else if (argMultimap.getValue(PREFIX_MODULE).isPresent() && argMultimap.getValue(PREFIX_GROUP).isPresent()){
+                    moduleCodeToAdd = Optional.of(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE).get()));
+                    groupName = Optional.of(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
+                    editPersonDescriptor.setModCode(moduleCodeToAdd);
+                    editPersonDescriptor.setGroupName(groupName);
+                } else { }
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

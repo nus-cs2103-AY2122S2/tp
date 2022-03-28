@@ -44,6 +44,7 @@ import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.person.exceptions.DuplicatePersonException;
 import unibook.model.tag.Tag;
+import unibook.ui.cards.StudentCard;
 
 /**
  * Edits the details of an existing person in the UniBook.
@@ -62,7 +63,11 @@ public class EditCommand extends Command {
             + "\n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
     public static final String MESSAGE_EDIT_MISSING = "Must include m/MODULECODE when editing a group";
+    public static final String MESSAGE_GROUP_NOT_EXIST = "Group name %1$s does not exist!";
     public static final String MESSAGE_WRONG_DATE_FORMAT = "Date time must be in YYYY-MM-DD HH:mm format";
+    public static final String MESSAGE_ADDTOGROUP_WRONG_FORMAT = "To add a person to a group, "
+            + "must state m/MODULECODE and g/GROUPNAME "
+            + "E.g. edit 1 o/person m/cs2103 g/T2 adds the first person on the index list to group T2 of module CS2103";
     public static final String MESSAGE_KEYEVENT_INDEX_MISSING = "Index of key event to be changed must be included. "
             + "E.g. ke/1 edits the fields of 1st key event";
 
@@ -343,6 +348,7 @@ public class EditCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
+
             if (this.modCode != null) {
                 Module mod = model.getModuleByCode(modCode);
                 Set<Module> modSet = new HashSet<>();
@@ -361,6 +367,8 @@ public class EditCommand extends Command {
                 }
             }
 
+
+            ModuleCode modCode = editPersonDescriptor.getModCode().get();
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
             // TODO checks if person alr in module
@@ -406,6 +414,35 @@ public class EditCommand extends Command {
                     }
                 } else {
                     throw new CommandException(MESSAGE_PERSON_NO_SUBTYPE);
+                }
+            }
+
+
+            // TODO STILL NEED TO UPDATE THE GRPS OF OTHER STUDENTS
+            if (editPersonDescriptor.getModCode().isPresent() && editPersonDescriptor.getGroupName().isPresent()) {
+                ModuleCode moduleCode = editPersonDescriptor.getModCode().get();
+                String groupName = editPersonDescriptor.getGroupName().get();
+                Module modToEdit = model.getModuleByCode(moduleCode);
+                if (!modToEdit.hasGroupName(groupName)) {
+                    // TODO command exception that group doesnt exist
+                    throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXIST, groupName));
+                } else {
+                    // TODO CHECK HOW TO ADD THE PERSON TO THE NAME OF THE GRP
+                    if (editedPerson instanceof Professor) {
+                        // TODO ERROR TO SHOW THAT ONLY STUDENT CAN BE ADDED TO GRP
+                        throw new CommandException(MESSAGE_PERSON_NO_SUBTYPE);
+                    } else {
+                        modToEdit.addToGroupByName(groupName, (Student) editedPerson);
+                        Group group = modToEdit.getGroupByName(groupName);
+                        for (Person p : lastShownList) {
+                            if (p instanceof Student) {
+                                if (((Student) p).getGroups().contains(group)) {
+                                    Group group1 = ((Student) p).getGroupByName(group);
+                                    group1.addMember((Student) editedPerson);
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -478,6 +515,8 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Set<Module> modules;
         private EditGroupDescriptor editGroupDescriptor;
+        private Optional<String> groupName = Optional.empty();
+        private Optional<ModuleCode> modCode = Optional.empty();
 
         public EditPersonDescriptor() {
         }
@@ -517,6 +556,22 @@ public class EditCommand extends Command {
 
         public void setGroups(EditGroupDescriptor editGroupDescriptor) {
             this.editGroupDescriptor = editGroupDescriptor;
+        }
+
+        public void setGroupName(Optional<String> name) {
+            this.groupName = name;
+        }
+
+        public void setModCode(Optional<ModuleCode> name) {
+            this.modCode = name;
+        }
+
+        public Optional<String> getGroupName() {
+            return this.groupName;
+        }
+
+        public Optional<ModuleCode> getModCode() {
+            return this.modCode;
         }
 
         public Optional<Phone> getPhone() {

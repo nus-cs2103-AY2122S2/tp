@@ -164,6 +164,8 @@ public class Group {
         this.meetingTimes.set(idx, meetingTime);
     }
 
+
+
     /**
      * Returns true only if the name of the group, its meeting times, and the module code of the module it is linked to
      * are the same.
