@@ -98,9 +98,11 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_LINEUP_SUCCESS = "Edited Lineup: %1$s";
+    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited Schedule: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in MyGM.";
     public static final String MESSAGE_DUPLICATE_LINEUP = "This lineup already exists in MyGM.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in MyGM.";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule already exists in MyGM.";
 
     private enum EditCommandType {
         PLAYER, LINEUP, SCHEDULE
@@ -220,12 +222,12 @@ public class EditCommand extends Command {
 
             // ok to have same schedule name, but not ok to have the description and date to be the same
             if (model.hasSchedule(editedSchedule)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
             }
 
             model.setSchedule(scheduleToEdit, editedSchedule);
             model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ALL_SCHEDULES);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedSchedule));
+            return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule));
         }
     }
 
@@ -292,10 +294,25 @@ public class EditCommand extends Command {
         if (!(other instanceof EditCommand)) {
             return false;
         }
+        // type check
+        EditCommand e = (EditCommand) other;
+        if (this.type != e.type) {
+            return false;
+        }
 
         // state check
-        EditCommand e = (EditCommand) other;
-        return editPersonDescriptor.equals(e.editPersonDescriptor);
+
+        if (this.type == EditCommandType.PLAYER) {
+            return this.editPersonDescriptor.equals(e.editPersonDescriptor) &&
+                    this.targetPlayerName.equals(e.targetPlayerName);
+        }
+        if (this.type == EditCommandType.LINEUP) {
+            return this.editLineupName.equals(e.editLineupName) &&
+                    this.targetLineupName.equals(e.targetLineupName);
+        }
+
+        return this.editScheduleDescriptor.equals(e.editScheduleDescriptor) &&
+                this.index.equals(e.index);
     }
 
     /**

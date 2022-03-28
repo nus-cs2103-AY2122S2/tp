@@ -1,7 +1,18 @@
 package seedu.address.logic.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.EditCommand.createEditedLineup;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PF;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +23,13 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.AddressBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -21,81 +38,172 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private static final Person VALID_PERSON = new PersonBuilder().withName("Joel")
-            .withEmail("joel@example.com").withPhone("1267912")
-            .withHeight("221").withJerseyNumber("83").withWeight("120")
-            .withTags("C").build();
-    private static final Name VALID_NAME = VALID_PERSON.getName();
-    private static final Person VALID_PERSON_2 = new PersonBuilder().withName("Joelly")
-            .withEmail("joelly@example.com").withPhone("1267582")
-            .withHeight("190").build();
-    private static final Name VALID_NAME_2 = VALID_PERSON_2.getName();
-    private static final Person INVALID_PERSON = new PersonBuilder().withName("Joel").build();
-    private static final Lineup VALID_LINEUP = new LineupBuilder().withLineupName("best 5").build();
-    private static final Lineup VALID_LINEUP_2 = new LineupBuilder().withLineupName("worst 5").build();
-    private static final LineupName VALID_LINEUP_NAME = VALID_LINEUP.getLineupName();
-    private static final LineupName VALID_LINEUP_NAME_2 = VALID_LINEUP_2.getLineupName();
-    private static final LineupName INVALID_LINEUP_NAME = VALID_LINEUP.getLineupName();
-
-
     private Model model;
-    private Model expectedModel;
+    private static final LineupName EXISTING_LINEUP_NAME = new LineupBuilder().build().getLineupName();
+    private static final LineupName VALID_LINEUP_NAME = new LineupName("Lakaka");
+    private static final LineupName DUPLICATE_LINEUP_NAME = EXISTING_LINEUP_NAME;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager();
-        expectedModel = new ModelManager();
-        model.addPerson(VALID_PERSON);
-        expectedModel.addPerson(VALID_PERSON);
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addLineup(new LineupBuilder().build());
     }
 
     @Test
-    public void execute_editPerson_success() throws CommandException {
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(VALID_PERSON_2).build();
-        EditCommand editCommand = new EditCommand(VALID_NAME, descriptor);
-        CommandResult commandResult = editCommand.execute(model);
-        Person editedPerson = createEditedPerson(expectedModel.getPerson(VALID_NAME), descriptor);
-        expectedModel.setPerson(VALID_PERSON, editedPerson);
-        assertEquals(commandResult.getFeedbackToUser(),
-                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        Person editedPerson = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(BENSON.getName(), descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        String res = editCommand.execute(model).getFeedbackToUser();
+        assertEquals(res, expectedMessage);
     }
 
     @Test
-    public void execute_duplicatePerson_failure() {
-        model.addPerson(VALID_PERSON_2);
-        expectedModel.addPerson(VALID_PERSON_2);
-        EditCommand command = new EditCommand(VALID_NAME_2,
-                new EditPersonDescriptorBuilder(INVALID_PERSON).build());
+    public void execute_someFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        PersonBuilder personInList = new PersonBuilder(BENSON);
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_PF).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_PF).build();
+        EditCommand editCommand = new EditCommand(BENSON.getName(), descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        String res = editCommand.execute(model).getFeedbackToUser();
+        assertEquals(res, expectedMessage);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_success() throws CommandException {
+        EditCommand editCommand = new EditCommand(BENSON.getName(), new EditPersonDescriptor());
+        Person editedPerson = new PersonBuilder(BENSON).build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+
+        String res = editCommand.execute(model).getFeedbackToUser();
+        assertEquals(res, expectedMessage);
+    }
+
+    @Test
+    public void execute_filteredList_success() throws CommandException {
+        Person editedPerson = new PersonBuilder(BENSON).withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(BENSON.getName(),
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        String res = editCommand.execute(model).getFeedbackToUser();
+        assertEquals(res, expectedMessage);
+    }
+
+    @Test
+    public void execute_duplicatePersonFilteredList_failure() {
+        Person secondPerson = model.getFilteredPersonList().get(0); //Alice
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(secondPerson).build();
+        EditCommand editCommand = new EditCommand(BENSON.getName(), descriptor);
         try {
-            command.execute(model);
+            editCommand.execute(model);
+
         } catch (CommandException e) {
-            assertEquals(EditCommand.MESSAGE_DUPLICATE_PERSON, e.getMessage());
+            assertEquals(e.getMessage(), EditCommand.MESSAGE_DUPLICATE_PERSON);
         }
     }
 
     @Test
-    public void execute_editLineup_success() throws CommandException {
-        model.addLineup(VALID_LINEUP);
-        expectedModel.addLineup(VALID_LINEUP);
-        EditCommand editCommand = new EditCommand(VALID_LINEUP_NAME, VALID_LINEUP_NAME_2);
-        CommandResult commandResult = editCommand.execute(model);
-        Lineup editedLineup = createEditedLineup(VALID_LINEUP, VALID_LINEUP_NAME_2);
-        expectedModel.setLineup(VALID_LINEUP, editedLineup);
-        assertEquals(commandResult.getFeedbackToUser(),
-                String.format(EditCommand.MESSAGE_EDIT_LINEUP_SUCCESS, editedLineup));
-    }
-
-    @Test
-    public void execute_duplicateLineup_failure() {
-        model.addLineup(VALID_LINEUP);
-        model.addLineup(VALID_LINEUP_2);
-        EditCommand command = new EditCommand(VALID_LINEUP_NAME_2, INVALID_LINEUP_NAME);
+    public void execute_duplicatePersonUnfilteredList_failure() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(CARL).build();
+        EditCommand editCommand = new EditCommand(BENSON.getName(),
+                descriptor);
         try {
-            command.execute(model);
+            editCommand.execute(model);
         } catch (CommandException e) {
-            assertEquals(EditCommand.MESSAGE_DUPLICATE_LINEUP, e.getMessage());
+            assertEquals(e.getMessage(), EditCommand.MESSAGE_DUPLICATE_PERSON);
         }
     }
 
+    @Test
+    public void execute_editLineupName_success() throws CommandException {
+        EditCommand standardCommand = new EditCommand(EXISTING_LINEUP_NAME, VALID_LINEUP_NAME);
+        String msg = standardCommand.execute(model).getFeedbackToUser();
+        Lineup editedLineup = model.getLineup(VALID_LINEUP_NAME);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_LINEUP_SUCCESS, editedLineup);
+        assertEquals(msg, expectedMessage);
+    }
 
+    @Test
+    public void execute_duplicateLineupName_failure() {
+        model.addLineup(new Lineup(VALID_LINEUP_NAME));
+        EditCommand standardCommand = new EditCommand(EXISTING_LINEUP_NAME, VALID_LINEUP_NAME);
+        try {
+            standardCommand.execute(model);
+        } catch (CommandException e) {
+            assertEquals(e.getMessage(), EditCommand.MESSAGE_DUPLICATE_LINEUP);
+        }
+    }
+
+    @Test
+    public void execute_editSchedule_success() {
+        // EditCommand standardCommand = new EditCommand()
+        assert(true);
+    }
+
+    @Test
+    public void execute_invalidScheduleIndex_failure() {
+        assert(true);
+    }
+
+    @Test
+    public void execute_duplicateSchedule_failure() {
+        assert(true);
+    }
+
+    @Test
+    public void equalsEditPerson() {
+        final EditCommand standardCommand = new EditCommand(BENSON.getName(), DESC_AMY);
+
+        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
+        EditCommand commandWithSameValues = new EditCommand(BENSON.getName(), copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new EditCommand(BENSON.getName(), DESC_BOB)));
+    }
+
+    @Test
+    public void equalsEditLineup() {
+
+        final EditCommand editLineupCommand = new EditCommand(EXISTING_LINEUP_NAME, VALID_LINEUP_NAME);
+        final EditCommand sameEditLinupCommand = new EditCommand(EXISTING_LINEUP_NAME, VALID_LINEUP_NAME);
+
+        // same object -> returns true
+        assertTrue(editLineupCommand.equals(sameEditLinupCommand));
+
+        //null -> returns false
+        assertFalse(editLineupCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(editLineupCommand.equals(new ClearCommand()));
+
+        // different lineupName -> returns false
+        assertFalse(editLineupCommand.equals(new EditCommand(EXISTING_LINEUP_NAME, DUPLICATE_LINEUP_NAME)));
+    }
+
+    @Test
+    public void equalsEditSchedule() {
+
+    }
 }
