@@ -5,6 +5,7 @@ import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
@@ -257,6 +258,21 @@ public class UniBook implements ReadOnlyUniBook {
         return group;
     }
 
+    /**
+     *
+     */
+    public ObservableList<Group> getGroupsWithGroupName(String groupName) {
+        requireNonNull(groupName);
+        ObservableList<Group> groups = FXCollections.observableArrayList();
+        for (Module m : modules) {
+            Group g = m.getGroupByName(groupName);
+            if (g != null) {
+                groups.add(m.getGroupByName(groupName));
+            }
+        }
+
+        return groups;
+    }
 
     /**
      * Removes module from all persons that are associated with the module.
@@ -305,6 +321,8 @@ public class UniBook implements ReadOnlyUniBook {
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
+
+
 
     @Override
     public boolean equals(Object other) {

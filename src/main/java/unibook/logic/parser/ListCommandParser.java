@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import unibook.commons.core.Messages;
 import unibook.logic.commands.ListCommand;
 import unibook.logic.parser.exceptions.ParseException;
-import unibook.model.module.ModuleCode;
+
 
 /**
  * Parses input arguments and creates a new ListCommand object
@@ -26,62 +26,181 @@ public class ListCommandParser implements Parser<ListCommand> {
         try {
             ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_TYPE,
-                    CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_VIEW);
-
-            //Change View command
-            if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_VIEW)) {
-                String view = argMultimap.getValue(CliSyntax.PREFIX_VIEW).get().toLowerCase();
-                if (view.equals("modules")) {
-                    return new ListCommand(ListCommand.ListView.MODULES);
-                } else if (view.equals("people")) {
-                    return new ListCommand(ListCommand.ListView.PEOPLE);
-                } else {
-                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListCommand.MESSAGE_USAGE_VIEW));
-                }
-            }
+                    CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_VIEW, CliSyntax.PREFIX_GROUP,
+                        CliSyntax.PREFIX_MEETINGTIME, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT,
+                        CliSyntax.PREFIX_DATETIME);
 
             //List all (empty list command)
-            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION)) {
+            if (args.strip().equals("")) {
                 return new ListCommand();
             }
 
-            String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get();
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION)) {
+                //Commands that have no option field
 
-            switch (option) {
-            case "module":
-                if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
-                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListCommand.MESSAGE_MODULE_MISSING));
+                //Very specific command chain with 2-3 arguments
+
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT,
+                        CliSyntax.PREFIX_NAME)) {
+                    //On module page, checking for modules that contain a specific name with specific date, key event
+                    //e.g. list n/software dt/2022-05-04 ke/exam
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
+                    String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
+                    return new ListCommand(name, dateString, keyEvent.toUpperCase(),
+                            ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENTANDNAME);
                 }
 
-                ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get()
-                    .toUpperCase());
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT)) {
+                    //On module page, checking for modules with specific date and key event
+                    //e.g. list dt/2022-05-04 ke/exam
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
+                    return new ListCommand(dateString, keyEvent.toUpperCase(),
+                            ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENT);
+                }
+
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATETIME)) {
+                    //On module page, checking for modules with specific name match and date time
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
+                    String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
+                    return new ListCommand(dateString, name,
+                            ListCommand.ListCommandType.MODULESWITHDATEANDNAME);
+                }
+
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT)) {
+                    //On module page, checking for modules with specific name match and key event
+                    String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
+                    return new ListCommand(name, keyEvent,
+                            ListCommand.ListCommandType.MODULESWITHNAMEANDKEYEVENT);
+
+                }
+
+
 
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
+                    //Listing types of people on people page
+                    //e.g. list type/professors
+                    String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
+                    if (!(type.equals("professors") || type.equals("students"))) {
+                        //invalid type argument
+                        throw new ParseException(
+                                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_WRONG_TYPE));
+                    }
+                    return new ListCommand(type, ListCommand.ListCommandType.TYPE);
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
+                    //Group prefix present without option field (Listing groups from group page)
+                    //e.g. list g/W16-1
+                    String group = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get().toLowerCase();
+                    return new ListCommand(group, ListCommand.ListCommandType.GROUPFROMGROUPVIEW);
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MEETINGTIME)) {
+                    //Find all groups with given meeting time on group page
+                    //e.g. list mt/<YYYY-MM-DD>
+
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_MEETINGTIME).get();
+                    return new ListCommand(dateString, ListCommand.ListCommandType.GROUPWITHMEETINGDATE);
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME)) {
+                    //dt field present
+                    if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYEVENT)) {
+                        //dt + key event
+
+                    } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
+                        //dt + name
+
+                    } else {
+                        //dt only
+                        String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
+                        return new ListCommand(dateString, ListCommand.ListCommandType.MODULESWITHEVENTDATE);
+                    }
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYEVENT)) {
+                    //Listing modules that contain the given key event
+                    //e.g. list ke/exam, list ke/quiz
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
+                    return new ListCommand(keyEvent, ListCommand.ListCommandType.MODULESWITHKEYEVENT);
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
+                    //Listing modules that contain the given name on module page
+                    // e.g. list n/software, list n/operating systems
+
+                    // Name only
+                    String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
+                    return new ListCommand(name, ListCommand.ListCommandType.MODULEWITHNAMEMATCH);
+                } else {
+
+                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            ListCommand.MESSAGE_USAGE));
+                }
+
+
+            }
+            String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get();
+
+
+            switch (option) {
+            case "view":
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_VIEW)) {
+                    String view = argMultimap.getValue(CliSyntax.PREFIX_VIEW).get().toLowerCase();
+                    if (view.equals("modules")) {
+                        //Change to module view
+                        return new ListCommand(ListCommand.ListView.MODULES, ListCommand.ListCommandType.VIEW);
+                    } else if (view.equals("people")) {
+                        //Change to people view
+                        return new ListCommand(ListCommand.ListView.PEOPLE, ListCommand.ListCommandType.VIEW);
+                    } else if (view.equals("groups")) {
+                        //Change to group view
+                        return new ListCommand(ListCommand.ListView.GROUPS, ListCommand.ListCommandType.VIEW);
+                    } else {
+                        //Invalid view argument given
+                        throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                                Messages.MESSAGE_INVALID_VIEW));
+                    }
+                } else {
+                    //View type argument not present
+                    throw new ParseException(
+                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                                    Messages.MESSAGE_VIEW_FIELD_MISSING));
+                }
+            case "module":
+                if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+                    //module argument not present
+                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            Messages.MESSAGE_MODULE_FIELD_MISSING));
+                }
+                String moduleCode = argMultimap.getValue(CliSyntax.PREFIX_MODULE).get().toUpperCase();
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
+                    //list module with specific type, e.g. list o/module m/cs2103 ty/professors
                     String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
                     if (!(type.equals("professors") || type.equals("students"))) {
                         throw new ParseException(
-                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
+                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                                    Messages.MESSAGE_WRONG_TYPE));
                     }
-                    return new ListCommand(moduleCode, type);
+                    return new ListCommand(moduleCode, type, ListCommand.ListCommandType.MODULEANDTYPE);
                 } else {
-                    return new ListCommand(moduleCode);
+                    //list module only e.g. list o/module m/cs2103
+                    return new ListCommand(moduleCode, ListCommand.ListCommandType.MODULE);
                 }
-            case "type":
-                if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
-                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListCommand.MESSAGE_TYPE_MISSING));
-                }
-                String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
-                if (!(type.equals("professors") || type.equals("students"))) {
+            case "group":
+                //People page listing group in a specific module
+                //e.g. list o/group m/cs2103 g/w16-1
+                if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
                     throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
+                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                                    Messages.MESSAGE_GROUP_FIELD_MISSING));
                 }
-                return new ListCommand(type);
+                String group = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get().toLowerCase();
+
+                if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+                    //From module view.
+                    return new ListCommand(group, ListCommand.ListCommandType.GROUPFROMMODULEVIEW);
+                }
+
+                String module = argMultimap.getValue(CliSyntax.PREFIX_MODULE).get().toUpperCase();
+                return new ListCommand(group, module, ListCommand.ListCommandType.PEOPLEINGROUP);
+
             default:
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListCommand.MESSAGE_USAGE_OPTION));
+                        Messages.MESSAGE_INVALID_LIST_OPTION));
 
             }
         } catch (ParseException pe) {

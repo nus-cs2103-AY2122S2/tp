@@ -3,6 +3,7 @@ package unibook.model.module;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -194,11 +195,11 @@ public class Module {
     public Group getGroupByName(String grpName) {
         requireNonNull(grpName);
         for (Group grp : groups) {
-            if (grp.getGroupName().equals(grpName)) {
+            if ((grp.getGroupName().toLowerCase()).equals(grpName.toLowerCase())) {
                 return grp;
             }
         }
-        throw new GroupNotFoundException();
+        return null;
     }
 
     /**
@@ -352,6 +353,18 @@ public class Module {
 
     public ObservableList<ModuleKeyEvent> getKeyEvents() {
         return this.keyEvents;
+    }
+
+    public ObservableList<LocalDate> getKeyEventDates() {
+        ObservableList<LocalDate> keyEventDates = FXCollections.observableArrayList();
+        for (ModuleKeyEvent k : keyEvents) {
+            keyEventDates.add(k.getKeyEventDate());
+        }
+        return keyEventDates;
+    }
+
+    public boolean hasKeyEventDate(LocalDate date) {
+        return getKeyEventDates().contains(date);
     }
 
     /**

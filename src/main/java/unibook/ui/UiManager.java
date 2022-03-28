@@ -93,6 +93,11 @@ public class UiManager implements Ui {
     }
 
     @Override
+    public boolean isGroupListShowing() {
+        return mainWindow.isGroupListShowing();
+    }
+
+    @Override
     public void setModuleListPanel() {
         mainWindow.setModuleListPanel();
     }

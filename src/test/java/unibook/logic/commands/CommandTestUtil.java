@@ -64,6 +64,8 @@ public class CommandTestUtil {
     public static final Boolean PERSON_LIST_NOT_SHOWING = false;
     public static final Boolean MODULE_LIST_SHOWING = true;
     public static final Boolean MODULE_LIST_NOT_SHOWING = false;
+    public static final Boolean GROUP_LIST_SHOWING = true;
+    public static final Boolean GROUP_LIST_NOT_SHOWING = false;
 
 
     /**
@@ -74,7 +76,8 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
                                             Model expectedModel) {
         try {
-            CommandResult result = command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING);
+            CommandResult result = command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING,
+                    GROUP_LIST_SHOWING);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -100,9 +103,10 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccessPage(Command command, Model actualModel, CommandResult expectedCommandResult,
                                                 Model expectedModel, boolean personListShowing,
-                                                boolean moduleListShowing) {
+                                                boolean moduleListShowing, boolean groupListShowing) {
         try {
-            CommandResult result = command.execute(actualModel, personListShowing, moduleListShowing);
+            CommandResult result = command.execute(actualModel, personListShowing, moduleListShowing,
+                    groupListShowing);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -117,10 +121,10 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccessPage(Command command, Model actualModel, String expectedMessage,
                                                 Model expectedModel, boolean personListShowing,
-                                                boolean moduleListShowing) {
+                                                boolean moduleListShowing, boolean groupListShowing) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccessPage(command, actualModel, expectedCommandResult,
-            expectedModel, personListShowing, moduleListShowing);
+            expectedModel, personListShowing, moduleListShowing, groupListShowing);
     }
 
     /**
@@ -136,7 +140,8 @@ public class CommandTestUtil {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         Assert.assertThrows(CommandException.class,
-            expectedMessage, () -> command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING));
+            expectedMessage, () -> command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING,
+                        GROUP_LIST_SHOWING));
         assertEquals(expectedUniBook, actualModel.getUniBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
@@ -155,7 +160,8 @@ public class CommandTestUtil {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         Assert.assertThrows(CommandException.class,
-            expectedMessage, () -> command.execute(actualModel, personListShowing, moduleListShowing));
+            expectedMessage, () -> command.execute(actualModel, personListShowing, moduleListShowing,
+                        GROUP_LIST_SHOWING));
         assertEquals(expectedUniBook, actualModel.getUniBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
