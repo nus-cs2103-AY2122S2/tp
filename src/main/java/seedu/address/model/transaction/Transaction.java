@@ -4,15 +4,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.transaction.util.StatusFactory;
 
 /**
  * Represents a Person in the address book.
@@ -23,6 +20,7 @@ public class Transaction implements Serializable {
 
     private final HashMap<Prefix, TransactionField> fields = new HashMap<>();
     private final long personId;
+    private final long transactionId;
 
 
     /**
@@ -31,6 +29,8 @@ public class Transaction implements Serializable {
      */
     public Transaction(Collection<TransactionField> fields, long personId) {
         requireAllNonNull(fields, personId);
+
+        transactionId = new Date().getTime();
 
         // Add fields.
         for (TransactionField f : fields) {
@@ -41,6 +41,12 @@ public class Transaction implements Serializable {
         // Check for required fields.
         for (Prefix p : TransactionFieldRegistry.REQUIRED_PREFIXES) {
             checkArgument(this.fields.containsKey(p), "All required fields must be given.");
+        }
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         this.personId = personId;
@@ -76,6 +82,29 @@ public class Transaction implements Serializable {
     public Optional<TransactionField> getField(Prefix prefix) {
         requireAllNonNull(prefix);
         return Optional.ofNullable(fields.get(prefix));
+    }
+
+    public Transaction removeField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
+        fieldsCopy.remove(prefix);
+        return new Transaction(fieldsCopy.values(), getPersonId());
+    }
+
+    public Transaction addField(TransactionField field) {
+        requireAllNonNull(field);
+        HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
+        fieldsCopy.put(field.prefix, field);
+        return new Transaction(fieldsCopy.values(), getPersonId());
+    }
+
+    public Transaction setField(TransactionField field) {
+        requireAllNonNull(field);
+        return this.removeField(field.prefix).addField(field);
+    }
+
+    public Transaction setStatusTo(Class<? extends Command> command) {
+        return this.setField(StatusFactory.getStatus(command));
     }
 
     public List<TransactionField> getFields() {

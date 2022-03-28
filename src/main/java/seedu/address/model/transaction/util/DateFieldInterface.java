@@ -1,4 +1,4 @@
-package seedu.address.model.transaction;
+package seedu.address.model.transaction.util;
 
 import java.time.LocalDate;
 

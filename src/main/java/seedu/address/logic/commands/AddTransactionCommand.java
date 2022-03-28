@@ -32,7 +32,7 @@ public class AddTransactionCommand extends Command {
             + "a/123.456 "
             + "td/2022-11-11 "
             + "dd/2022-11-11 "
-            + "n/paid SGD 123.456 for haircut";
+            + "n/paid SGD 123.456 for haircut --paid";
 
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
 

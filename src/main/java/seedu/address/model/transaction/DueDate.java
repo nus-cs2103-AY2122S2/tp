@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.transaction.util.DateFieldInterface;
 
 /**
  * Represents a Due date of the transaction.
