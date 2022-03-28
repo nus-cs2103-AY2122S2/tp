@@ -2,8 +2,14 @@
 layout: page
 title: User Guide
 ---
+Tinner (Anagram of Intern) is a desktop app for managing internship applications for students, optimized for use via a Command Line Interface (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, Tinner allows you to easily sort through and retrieve relevant information faster than traditional GUI apps.
 
-Tinner (Anagram of Intern) is a desktop app for managing internship applications, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tinner allows you to easily sort through and retrieve relevant information faster than traditional GUI apps.
+Tinner aims to solve the hassle of managing internship applications though 3 aspects.
+1. **Tracks** essential information such as statuses and deadlines at a glance.
+2. **Reminds** important deadlines so that you will not miss a about your application.
+3. **Reviews** the process and take down notes so that you can ace your next application. 
 
 ## Table of Contents
 
@@ -15,7 +21,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 * [Adding a company: `addCompany`](#c-add-c)
 * [Adding a role: `addRole`](#c-add-c-r)
 * [Deleting a company: `deleteCompany`](#c-delete-c)
-* [Deleting a role: `deleteRole`](#c-delete-c-r)
+  * [Deleting a role: `deleteRole`](#c-delete-c-r)
 * [Editing a company: `editCompany`](#c-edit-c)
 * [Editing a role: `editRole`](#c-edit-r)
 * [Finding a specific company or role: `find`](#c-find-c-r)
@@ -47,7 +53,6 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features <a id="features"></a>
@@ -117,6 +122,8 @@ Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCR
 * The `DESCRIPTION` and `STIPEND` fields are optional during the initial role creation
     * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
     * The `STIPEND` must be a positive integer going up to 10 digits long.
+
+Note: Integer is a number which is not a fraction; a whole number.
 
 Examples:
 
@@ -227,6 +234,16 @@ Examples:
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
 Exits the program.
+
+### Colour code of role tags
+Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
+![img.png](images/tagcolourcode.png)
+* "applying" : white
+* "pending": orange
+* "interview and assessments": purple
+* "rejected": red
+* "offered": green
+* "complete": black
 
 Format: `exit`
 
