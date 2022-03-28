@@ -77,7 +77,7 @@ public class SummariseCommand extends Command {
     /**
      * Filter entire list by faculties to provide overview of covid situation in each faculty.
      *
-     * @param list the unfiltered entire list in the database
+     * @param list a list of all students found within the address book
      * @return The summarised overview for all students by faculties
      */
     public String filterByFaculty(List<Person> list) {
@@ -99,7 +99,7 @@ public class SummariseCommand extends Command {
     /**
      * Filter entire list by the hall block to provide overview of covid situation in each block.
      *
-     * @param list the unfiltered entire list in the database
+     * @param list a list of all students found within the address book
      * @return The summarised overview for all students by blocks
      */
     public String filterByBlock(List<Person> list) {
@@ -162,7 +162,7 @@ public class SummariseCommand extends Command {
     /**
      * Filter entire list to provide overview of covid situation in the hall.
      *
-     * @param list the unfiltered entire list in the database
+     * @param list a list of all students found within the address book
      * @return The summarised overview for all students
      */
     private String summariseAll(List<Person> list) {
