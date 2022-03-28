@@ -28,11 +28,6 @@ public class ArchiveCommandTest {
     }
 
     @Test
-    public void validTestFileExist() {
-        assertTrue(Files.exists(validTestFilePath));
-    }
-
-    @Test
     public void invalidTestFileDoesNotExist() {
         assertFalse(Files.exists(invalidTestFilePath));
     }
