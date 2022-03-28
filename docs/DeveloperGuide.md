@@ -481,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | tag my players by 'fit to play'                                                                | know which are the available healthy players for competition                                       |
 | `*`      | new user       | key in the first few letters to see what commands starting with these letters are available    | know the potential commands that starts with these letters                                         |
 | `*`      | expert user    | send mass reminders to each players one day before the training date                           | automate the sending of announcements to my players                                                |
-
+| `*`      | user           | change the theme to light mode                                                                 | read the words more clearly in various environment                                                 |
 
 *{More to be added}*
 

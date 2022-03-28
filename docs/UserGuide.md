@@ -21,6 +21,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
     * Finding a lineup or player: find
     * Putting a player to a team/ lineup: put
     * Updating a player/ team/ lineup/ schedule: update
+    * Changing the theme of the UI
     * Saving the data: save
     * Loading data from user-specified file: load
     * Clearing all data: clear
@@ -317,6 +318,12 @@ Exits the program.
 
 Format: `exit`
 
+### Changing the theme of the UI: `theme`
+
+Changes to either light mode or dark mode. MyGM is defaulted to dark mode on start up.
+
+Format: `theme T/THEME`
+
 ### Saving the data
 
 MyGM data is saved in the hard disk (in a default file) automatically after any command that changes the data. There is no need to save manually. But users can still call the save function to export the current data.
@@ -375,6 +382,7 @@ _Details coming soon ..._
 | **Filter** | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
 | **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`<br> e.g. `add S/ i/1 n/competition d/22/02/2022 0900`                                                                   |
 | **Find**   | `find P/PLAYER`<br>e.g. `find P/Wu Lala`<br>`find L/LINEUP`<br>e.g. `find L/Oo la la`                                                                                                                                                                                                                                                                                      |
+| **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                    |
 | **Save**   | `save PATH`<br> e.g.`save details/team.txt`                                                                                                                                                                                                                                                                                                                                |
 | **Load**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
 | **Clear**  | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
