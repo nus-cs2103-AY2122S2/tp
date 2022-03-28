@@ -51,7 +51,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_DURATION_HOURS + " 2 "
             + PREFIX_DURATION_MINUTES + " 15 ";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Okay, added this lesson to your schedule!";
     public static final String MESSAGE_CONFLICTING_LESSONS_TIP = "TIP: you can use \"rmlesson\" to" +
             " remove these conflicting lessons";
 
@@ -80,7 +80,7 @@ public class AddLessonCommand extends Command {
         }
 
         model.setSelectedLesson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true, InfoPanelTypes.LESSON, ViewTab.LESSON);
+        return new CommandResult(MESSAGE_SUCCESS, true, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
 
     @Override
