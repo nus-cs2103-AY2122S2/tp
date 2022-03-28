@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
@@ -23,9 +25,9 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Applicant> filteredApplicants;
-    private final FilteredList<Interview> filteredInterviews;
-    private final FilteredList<Position> filteredPositions;
+    private FilteredList<Applicant> filteredApplicants;
+    private FilteredList<Interview> filteredInterviews;
+    private FilteredList<Position> filteredPositions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -185,6 +187,14 @@ public class ModelManager implements Model {
     public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
+    }
+    // Need to test
+    @Override
+    public void updateSortApplicantList(Comparator<Applicant> comparator) {
+        requireNonNull(comparator);
+        SortedList<Applicant> sortedList = new SortedList<>(filteredApplicants);
+        sortedList.setComparator(comparator);
+        filteredApplicants = new FilteredList<>(sortedList);
     }
 
     //=========== Filtered Interview List Accessors =============================================================
