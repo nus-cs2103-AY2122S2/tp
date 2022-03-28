@@ -348,6 +348,27 @@ Throughout the onboarding guide, Overlays and Highlights are used to direct the 
 ##### The `Overlay` Class
 The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
 
+### Markdown-like Text Processing
+We built a text processor that processes common text modifications into UI elements. This is mainly used in the `ResultDisplay` field, where it shows text of a `CommandResult` each time a command is executed. In particular, it is used in the error messages, in order to present error messages better,
+
+Example of styled text:
+![StyledTextExample](images/StyledTextExample.png)
+
+It can be easily used in other components of ContaX if the need arises.
+
+It currently supports:
+- Bold
+  - Enclosing text with `*`
+- Italics
+  - Enclosing text with `**`
+- Bold and Italics
+  - Enclosing text with `***`
+- Monospaced
+  - Enclosing text with `\``
+
+This was done by changing the `ResultDisplay` to use a `TextFlow` object, and dynamically generate a List of styled `Text` objects to add to the `ResultDisplay`.
+
+
 ### Import and Export CSV Features
 
 This section describes some of the details as to how the import and export CSV features were implemented
