@@ -133,6 +133,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Returns the list of groups in mainwindow, i.e. the groups that are shown in gui.
+     */
+    public ObservableList<Group> getShowingGroups() {
+        return groupListPanel.getGroupsList();
+    }
+
+    /**
      * Replaces the child of listPanelPlaceholder with moduleListPanel.
      */
     public void setModuleListPanel() {
