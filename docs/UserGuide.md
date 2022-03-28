@@ -101,6 +101,13 @@ Finds employees that have all of the options as entered.
 * `findEmployee e/dcsdcr@nus.edu.sg`
 * `findEmployee n/Alex Yeo p/65162727 e/alexyeo@google.com`
 
+### Listing all employees : `listEmployees`
+
+Shows a list of all employees in the address book.
+
+#### Format: 
+* `listEmployees`
+
 
 ### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
