@@ -18,3 +18,10 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.priority-text {
+    -fx-font-size: 12px;
+    -fx-padding: 2;
+    -fx-background-radius: 50;
+    -fx-font-family: "Segoe UI Semibold";
+}

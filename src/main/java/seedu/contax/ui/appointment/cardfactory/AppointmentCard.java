@@ -102,13 +102,13 @@ class AppointmentCard extends UiPart<Region> {
             priority.setText(modelPriority.toString());
             switch (appointmentModel.getPriority()) {
             case HIGH:
-                priority.setStyle("-fx-background-color: lightpink;");
+                priority.setStyle("-fx-background-color: red;");
                 break;
             case MEDIUM:
-                priority.setStyle("-fx-background-color: lightyellow;");
+                priority.setStyle("-fx-background-color: orange ;");
                 break;
             default:
-                priority.setStyle("-fx-background-color: lightgreen;");
+                priority.setStyle("-fx-background-color: green;");
                 break;
             }
         } else {

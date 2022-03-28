@@ -89,6 +89,42 @@ public class EditPriorityCommandTest {
     }
 
     @Test
+    public void execute_editSamePriority_failure() {
+        EditPriorityCommand.EditPriorityDescriptor editPriorityDescriptor =
+                new EditPriorityCommand.EditPriorityDescriptor();
+        editPriorityDescriptor.setPriority(Priority.HIGH);
+        Index index = Index.fromOneBased(1);
+
+        EditPriorityCommand command = new EditPriorityCommand(index, editPriorityDescriptor);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), getTypicalSchedule(),
+                new UserPrefs());
+        Appointment appointment = expectedModel.getFilteredAppointmentList().get(0);
+        Appointment expectAppointment = appointment.withPriority(Priority.HIGH);
+        expectedModel.setAppointment(appointment, expectAppointment);
+
+        assertCommandFailure(command, expectedModel, EditPriorityCommand.MESSAGE_PRIORITY_NOT_EDITED);
+    }
+
+    @Test
+    public void execute_removeSamePriority_failure() {
+        EditPriorityCommand.EditPriorityDescriptor editPriorityDescriptor =
+                new EditPriorityCommand.EditPriorityDescriptor();
+        editPriorityDescriptor.setPriority(null);
+        Index index = Index.fromOneBased(1);
+
+        EditPriorityCommand command = new EditPriorityCommand(index, editPriorityDescriptor);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), getTypicalSchedule(),
+                new UserPrefs());
+        Appointment appointment = expectedModel.getFilteredAppointmentList().get(0);
+        Appointment expectAppointment = appointment.withPriority(null);
+        expectedModel.setAppointment(appointment, expectAppointment);
+
+        assertCommandFailure(command, expectedModel, EditPriorityCommand.MESSAGE_PRIORITY_NOT_EDITED);
+    }
+
+    @Test
     public void execute_removePriority_success() {
         EditPriorityCommand.EditPriorityDescriptor editPriorityDescriptor =
                 new EditPriorityCommand.EditPriorityDescriptor();
@@ -98,7 +134,10 @@ public class EditPriorityCommandTest {
         EditPriorityCommand command = new EditPriorityCommand(index, editPriorityDescriptor);
 
         String expectedMessage = String.format(
-                EditPriorityCommand.MESSAGE_DELETE_PRIORITY_SUCCESS, index.getOneBased(), "NONE");
+                EditPriorityCommand.MESSAGE_REMOVE_PRIORITY_SUCCESS, index.getOneBased());
+
+        model.setAppointment(model.getFilteredAppointmentList().get(0),
+                model.getFilteredAppointmentList().get(0).withPriority(Priority.HIGH));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), getTypicalSchedule(),
                 new UserPrefs());

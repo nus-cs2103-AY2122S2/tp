@@ -14,17 +14,21 @@ import seedu.contax.model.appointment.Priority;
 
 
 /**
- * Edits the level of an existing priority in the appointment list with level low, medium or high.
+ * Edits the priority level of an existing priority in the appointment list with level low, medium or high.
  */
 public class EditPriorityCommand extends Command {
     public static final String COMMAND_WORD = "priority";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the level of priority.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the level of priority of an existing appointment in the appointment list .\n"
             + "Parameters: INDEX pri/PRIORITY\n"
             + "Example: " + COMMAND_WORD + " 1 " + "pri/high";
 
     public static final String MESSAGE_EDIT_PRIORITY_SUCCESS = "Edited Priority of Appointment at index %d: %s";
-    public static final String MESSAGE_DELETE_PRIORITY_SUCCESS = "Deleted Priority of Appointment at index %d";
+    public static final String MESSAGE_REMOVE_PRIORITY_SUCCESS = "Removed Priority of Appointment at index %d";
+    public static final String MESSAGE_PRIORITY_NOT_EDITED =
+            "The priority level you provide is same as existing priority.";
+
     private final Index index;
     private final EditPriorityDescriptor editPriorityDescriptor;
 
@@ -55,17 +59,26 @@ public class EditPriorityCommand extends Command {
 
         if (editPriorityDescriptor.getPriority().isPresent()) {
             Priority priority = editPriorityDescriptor.getPriority().get();
+
+            if (priority.equals(appointment.getPriority())) {
+                throw new CommandException(MESSAGE_PRIORITY_NOT_EDITED);
+            }
+
             Appointment editedAppointment = appointment.withPriority(priority);
             model.setAppointment(appointment, editedAppointment);
 
             return new CommandResult(
                     String.format(MESSAGE_EDIT_PRIORITY_SUCCESS, index.getOneBased(), priority));
         } else {
+            if (appointment.getPriority() == null) {
+                throw new CommandException(MESSAGE_PRIORITY_NOT_EDITED);
+            }
+
             Appointment editedAppointment = appointment.withPriority(null);
             model.setAppointment(appointment, editedAppointment);
 
             return new CommandResult(
-                    String.format(MESSAGE_DELETE_PRIORITY_SUCCESS, index.getOneBased()));
+                    String.format(MESSAGE_REMOVE_PRIORITY_SUCCESS, index.getOneBased()));
         }
     }
 
