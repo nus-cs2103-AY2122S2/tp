@@ -34,7 +34,7 @@ public class Seniority {
     }
 
     public String toSearchString() {
-        return "COM" + seniority;
+        return COM_VALUE + seniority;
     }
 
     @Override
