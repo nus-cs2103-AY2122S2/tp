@@ -89,7 +89,7 @@ public class ArchiveCommand extends Command {
         Path addressBookFilePath = model.getAddressBookFilePath();
         String archiveDirectoryName = initArchiveDirectoryPathName();
         String archiveFileName = initArchiveFilePathName();
-        Path archiveFilePath = initArchiveFilePath(addressBookFilePath,archiveDirectoryName, archiveFileName);
+        Path archiveFilePath = initArchiveFilePath(addressBookFilePath, archiveDirectoryName, archiveFileName);
         try {
             FileUtil.createIfMissing(archiveFilePath);
             Files.copy(addressBookFilePath, archiveFilePath, StandardCopyOption.REPLACE_EXISTING);
