@@ -21,16 +21,4 @@ public class ListTaskCommand extends Command {
 
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof ListTaskCommand) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
