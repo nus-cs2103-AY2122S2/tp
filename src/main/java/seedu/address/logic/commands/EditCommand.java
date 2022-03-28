@@ -235,7 +235,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -255,7 +255,7 @@ public class EditCommand extends Command {
     /**
      * Creates and return a {@code Lineup} with the new Lineup name
      */
-    private static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
+    static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
         assert lineupToEdit != null;
 
         LineupName updatedName = editLineupName;
