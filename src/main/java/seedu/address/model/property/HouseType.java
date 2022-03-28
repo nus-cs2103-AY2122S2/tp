@@ -115,6 +115,10 @@ public enum HouseType {
      */
     public static HouseType getHouseType(String house) {
         for (HouseType h : HouseType.values()) {
+            // Prevent accessing NULLHOUSETYPE enum
+            if (h == HouseType.NULLHOUSETYPE) {
+                continue;
+            }
             HouseType houseType = h.houseMappings.get(house.toLowerCase());
             if (houseType != null) {
                 return houseType;

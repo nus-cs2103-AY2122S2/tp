@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
-import seedu.address.model.property.HouseType;
-import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToSell;
 
@@ -36,17 +34,9 @@ class JsonAdaptedPropertyToSell {
      * Converts a given {@code PropertyToSell} into this class for Jackson use.
      */
     public JsonAdaptedPropertyToSell(PropertyToSell source) {
-        if (!(source instanceof NullPropertyToSell)) {
-            this.house = new JsonAdaptedHouse(source.getHouse());
-            this.priceRange = new JsonAdaptedPriceRange(source.getPriceRange());
-            this.address = source.getAddress().toString();
-        } else {
-            //Default value of NullPropertyToSell
-            System.out.println("NullPropertyToSell is translating to JSON format");
-            this.house = new JsonAdaptedHouse(new House(HouseType.NULLHOUSETYPE, "nan"));
-            this.priceRange = new JsonAdaptedPriceRange(new PriceRange(0, 0));
-            this.address = "nan";
-        }
+        this.house = new JsonAdaptedHouse(source.getHouse());
+        this.priceRange = new JsonAdaptedPriceRange(source.getPriceRange());
+        this.address = source.getAddress().toString();
     }
 
 
