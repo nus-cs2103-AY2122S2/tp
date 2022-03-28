@@ -158,7 +158,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
+<br /><br />
 ### Add Modules Feature
 #### Implementation
 
@@ -173,7 +173,7 @@ Additionally, it implements the following operations:
 
 Below is a sequence diagram showing the overview of how add modules works:
 
-[TODD: AddModuleSequenceDiagram]
+[TODO: AddModuleSequenceDiagram]
 
 Each `Person` has a `Set<Module>` that represents the Collection of `Modules` associated with that `Person`.
 Hence, we utilize the behaviour of the `Set` data structure to both store and add modules to a person, automatically adding any new unique Modules while ignoring Modules that already exist, without requiring any further duplicate-checking on our part.
@@ -188,7 +188,7 @@ This can be achieved using the `hasNewModules()` and `getNewModules()` internal 
    * Shows new modules added, with warning that some modules already exist
 3. Case 3: Modules from user input contain no new modules
    * Shows warning that modules already exist, no new modules added, along with list of existing modules (to show the user that despite the "error", no further actions associated with typical failed commands need to be taken)
-   
+     <br /><br />
 ### Sort feature
 #### Implementation
 
@@ -222,7 +222,7 @@ Has to pass all `PersonComparator` that were chosen into `Model` one after anoth
 Each field implements a `Comparable` interface.
 - Pros: Easier to implement.
 - Cons: Less flexible. Passes only one `PersonComparator` which stores the fields within itself. Each comparison stops once field is not equivalent, therefore is more efficient.
-
+<br /><br />
 ### Comment feature
 #### Implementation
 
@@ -239,22 +239,29 @@ Below is a sequence diagram showing how comment operation works:
 
 ![CommentSequenceDiagram](images/CommentSequenceDiagram.png)
 
-### Design Considerations
-#### Aspect: How to remove a comment 
-####1. Alternative 1 (Current choice)
-Similar to how `Status` was implemented, upon user input of an empty comment (i.e `comment 1`), the comment of the 
-person at the particular index, in this case the first person, will be removed 
-- Pros: Can contain all logic related to adding and removing a `comment` all in the `CommentCommand` and 
-  `CommentCommandParser` classes. 
-- Cons: Not consistent with how the other fields like `Module` and `Person` are removed. These fields are removed 
-  via an additional command that specifically handles their deletion (i.e. `deletemodule` and `delete`).
-
+#### Design Considerations
+##### Aspect: How to remove a comment 
+#####1. Alternative 1 (Current choice)
+Similar to how `Status` was implemented, upon user input of an empty comment (i.e `comment 1 c/`), the comment of the 
+person at the particular index, in this case the first person, will be removed.
+- Pros: 
+  - Can contain all logic related to adding and removing a `comment` all in the `CommentCommand` and 
+    `CommentCommandParser` classes. 
+  - Does not give the users too many commands to remember.
+  - Avoid potential problems where users/reviewers expect a designated delete command for all fields, when some fields 
+    cannot be just simply deleted on its own, e.g. address, name etc.
+  
+- Cons: 
+  - Not consistent with how the other fields like `Module` and `Person` are removed. 
+  
 ####2. Alternative 2 
 Implement a separate command to handle the removal of `comment`.
-- Pros: An empty comment command (`comment 1`) will now show an error message, which is more intuitive.
-- Cons: Results in excessive code duplication, as `delete` and `deletemodule` are implemented in a very similar way 
-  to how a proposed `deletecomment` command will be implemented.
-
+- Pros: 
+  - An empty comment command (`comment 1`) will show an error message, which is more intuitive.
+- Cons: 
+  - Results in excessive code duplication, as `delete` and `deletemodule` are implemented in a very similar way 
+    to how a proposed `deletecomment` command will be implemented.
+    <br /><br />
 
 ### GUI for Adding, Editing
 
@@ -263,18 +270,23 @@ Implement a separate command to handle the removal of `comment`.
 The GUI for `AddWindow` and `EditWindow` are done using JavaFX with SceneBuilder.  
 The adding and editing mechanism is driven by the CLI commands, `add` and `edit`, and both goes through their respective `Parser`
 
-User input is retrieved from their respective `TextField`  
-User input is strung together to follow the proper `Command` format, which is then passed to `Logic` to handle the rest of the execution  
+Step 1: User input is retrieved from their respective `TextField`.  
 
-`AddWindow` allows for the execution of multiple commands within a single window.  
-Executing multiple commands (`status`, `addmodule`) is done by checking if the given inputs are valid. If they are valid, we pass the execution to `Logic` to handle the adding of a `Person`. After a `Person` is added, retrieve the last index from `PersonList`, then pass the user inputs for `status` and/or `addmodule` into `Logic` again to execute the commands
+Step 2: User input is strung together to follow the proper `Command` format, which is then passed to `Logic` to handle 
+the rest of the execution.  
+
+Step 3: `AddWindow` allows for the execution of multiple commands within a single window. Executing multiple 
+commands (`status`, `addmodule`) is done by checking if the given inputs are valid. 
+
+Step 4: If they are valid, we pass the execution to `Logic` to handle the adding of a `Person`. 
+
+Step 5: After a `Person` is added, retrieve the last index from `PersonList`, then pass the user inputs for `status` and/or `addmodule` into `Logic` again to execute the commands
 
 The following activity diagram shows how a `Person` with `Status` and `Module` is added when the given command is `add` or when the user opens `AddWindow`
 ![GuiAddActivityDiagram](images/GuiAddActivityDiagram.png)
 
 Editing through `EditWindow` is largely similar to the above.
-
-
+<br /><br />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -409,10 +421,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is `ModuleMateFinder` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: UC01 - Listing all contacts**
+#### **Use case: UC01 - Listing all contacts**
 
 **MSS**
-
 1. User requests to list out all contacts.
 2. ModuleMateFinder shows a list of all contacts.
 
@@ -422,8 +433,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The list is empty.  
   Use case ends.
+  <br/><br/>
 
-**Use case: UC02 - Adding a contact**
+#### **Use case: UC02 - Adding a contact**
 
 **MSS**
 
@@ -438,9 +450,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. The given name already exists in ModuleMateFinder.
     - 3a1. ModuleMateFinder shows an error message.  
       Use case resumes at step 2.
+      <br/><br/>
 
 
-**Use case: UC03 - Favourite a contact**
+#### **Use case: UC03 - Favourite a contact**
 
 **MSS**
 
@@ -458,9 +471,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. The given index is invalid.
     - 3a1. ModuleMateFinder shows an error message.  
       Use case resumes at step 2.
+      <br/><br/>
 
-  
-**Use case: UC04 - Blacklisting a contact**
+
+#### **Use case: UC04 - Blacklisting a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -477,9 +491,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. ModuleMateFinder shows an error message.  
       
       Use case resumes at step 2.
+      <br/><br/>
 
 
-**Use case: UC05 - Filter contacts by modules**
+#### **Use case: UC05 - Adding modules to a contact**
+
+**MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to add modules to a person.
+4. ModuleMateFinder adds the modules to the person.
+
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. The given index is invalid.
+    - 3a1. ModuleMateFinder shows an error message.
+
+      Use case resumes at step 2.
+- 3b. The module has already been added to the person.
+    - 3b1. ModuleMateFinder shows an error message.
+
+      Use case resumes at step 2.
+      <br/><br/>
+
+
+#### **Use case: UC06 - Adding a comment to a contact**
+
+**MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to leave a comment for a person in the list.
+4. ModuleMateFinder saves the comment for the person.
+
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. The given index is invalid.
+    - 3a1. ModuleMateFinder shows an error message.
+
+      Use case resumes at step 2.
+      <br/><br/>
+
+
+#### **Use case: UC07 - Filter contacts by modules**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -495,9 +554,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. No persons has a matching module.
     - 3a1. ModuleMateFinder shows an empty list.  
       Use case ends.
+      <br/><br/>
 
-
-**Use case: UC06 - Filter contacts by name**
+#### **Use case: UC08 - Filter contacts by name**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -513,9 +572,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. No persons has a matching name.
     - 3a1. ModuleMateFinder shows an empty list.  
       Use case ends.
+      <br/><br/>
 
 
-**Use case: UC07 - Editing a contact's details**
+#### **Use case: UC09 - Editing a contact's details**
 
 **MSS**
 
@@ -534,14 +594,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. ModuleMateFinder displays an error message.
       
       Use case resumes at step 2.
+      <br/><br/>
 
-**Use case: UC08 - Deleting a contact**
+#### **Use case: UC10 - Deleting a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
 2. ModuleMateFinder shows a list of persons.
 3. User requests to delete a contact at a given index.
-4. ModuleMateFinder deletes the contact at the index .
+4. ModuleMateFinder deletes the contact at the index.
    
    Use case ends.
 
@@ -552,18 +613,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. ModuleMateFinder displays an error message.
       
       Use case resumes at step 2.
-  
+      <br/><br/>
 
-**Use case: UC09 - Clearing all entries**
+
+#### **Use case: UC11 - Clearing all entries**
 
 **MSS**
 
 1. User requests to clear all entries in ModuleMateFinder.
 2. ModuleMateFinder removes all saved data and displays a success 
 message.
+   <br/><br/>
 
 
-**Use case: UC10 - Exiting the application**
+#### **Use case: UC12 - Sorting contacts**
+
+**MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to sort contacts in list.
+4. ModuleMateFinder sorts contacts according to user's requirements.
+
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. No fields are specified.
+    - 3a1. ModuleMateFinder displays an error message.
+
+      Use case resumes at step 2.
+      <br/><br/>
+
+
+#### **Use case: UC13 - Copying contacts**
+
+**MSS**
+1. User requests to copy contact's information.
+2. ModuleMateFinder copies the contacts into the user's desired format.
+
+   Use case ends.
+   <br/><br/>
+
+
+#### **Use case: UC14 - Exiting the application**
 
 **MSS**
 
@@ -571,8 +664,7 @@ message.
 2. ModuleMateFinder closes.
    
    Use case ends.
-
-*{More to be added}*
+   <br/><br/>
 
 ### Non-Functional Requirements
 
@@ -589,8 +681,6 @@ message.
 11. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-
-*{More to be added}*
 
 ### Glossary
 
