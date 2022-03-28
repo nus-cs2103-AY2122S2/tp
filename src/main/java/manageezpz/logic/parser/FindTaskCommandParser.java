@@ -8,15 +8,15 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_IS_MARKED;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
+import manageezpz.model.person.Name;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
@@ -24,50 +24,50 @@ import manageezpz.model.task.TaskMultiplePredicate;
 /**
  * Subclass of FindCommandParser which check if the options are valid for finding tasks.
  */
-class FindTaskCommandParser extends FindCommandParser {
-    private static final Prefix[] TASK_TYPES = {PREFIX_TASK, PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
-    private static final Prefix[] TASK_PROPERTIES = {PREFIX_DATE, PREFIX_DESCRIPTION, PREFIX_PRIORITY,
-        PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
+public class FindTaskCommandParser implements Parser<FindTaskCommand> {
+    private static final Prefix[] TASK_TYPES = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
+    private static final Prefix[] VALID_OPTIONS = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT, PREFIX_DATE,
+        PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
 
     private String errorMessage = "";
     private boolean hasError = false;
 
-    protected FindTaskCommandParser() {}
-
     /**
      * {@inheritDoc}
      */
-    @Override
-    public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultiMapTaskType = ArgumentTokenizer.tokenize(args, TASK_TYPES);
-        ArgumentMultimap argMultiMapProperties = ArgumentTokenizer.tokenize(args, TASK_PROPERTIES);
+    public FindTaskCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, VALID_OPTIONS);
 
-        Prefix taskType = getPrefix(argMultiMapTaskType);
-        List<String> descriptions = getDescriptions(argMultiMapProperties);
-        Date date = getTaskDate(argMultiMapProperties);
-        Priority priority = getTaskPriority(argMultiMapProperties);
-        String assignee = getAssignee(argMultiMapProperties);
-        Boolean isMarked = getIsMarked(argMultiMapProperties);
+        List<Prefix> taskTypes = getPrefix(argMultiMap);
+        List<String> descriptions = getDescriptions(argMultiMap);
+        Date date = getTaskDate(argMultiMap);
+        Priority priority = getTaskPriority(argMultiMap);
+        String assignee = getAssignee(argMultiMap);
+        Boolean isMarked = getIsMarked(argMultiMap);
 
-        if (taskType.equals(PREFIX_TODO) && argMultiMapProperties.isPrefixExist(PREFIX_DATE)) {
-            addErrorMessage(FindTaskCommand.TODO_AND_DATE_OPTION_TOGETHER);
-        }
+        checkIfTodoAndDateTogether(argMultiMap, taskTypes);
 
         if (hasError) {
-            errorMessage = errorMessage + FindCommand.MESSAGE_USAGE;
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            String finalErrorMessage = errorMessage + FindTaskCommand.MESSAGE_USAGE;
+            errorMessage = "";
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, finalErrorMessage));
         } else {
             return new FindTaskCommand(new TaskMultiplePredicate(
-                    taskType, descriptions, date, priority, assignee, isMarked));
+                    taskTypes, descriptions, date, priority, assignee, isMarked));
         }
     }
 
-    private Prefix getPrefix(ArgumentMultimap argMultiMap) {
-        Prefix currentPrefix = Arrays.stream(TASK_TYPES)
-                .filter(prefix -> argMultiMap.isPrefixExist(prefix))
-                .findFirst().orElseGet(null);
-        assert currentPrefix != null : "getPrefix should not return a null";
-        return currentPrefix;
+    private void checkIfTodoAndDateTogether(ArgumentMultimap argMultiMapProperties, List<Prefix> taskTypes) {
+        boolean isContainsTodo = taskTypes.contains(PREFIX_TODO);
+        if (isContainsTodo && argMultiMapProperties.isPrefixExist(PREFIX_DATE)) {
+            addErrorMessage(FindTaskCommand.TODO_AND_DATE_OPTION_TOGETHER);
+        }
+    }
+
+    private List<Prefix> getPrefix(ArgumentMultimap argMultiMap) {
+        List<Prefix> currentPrefixes = Arrays.stream(TASK_TYPES)
+                .filter(prefix -> argMultiMap.isPrefixExist(prefix)).collect(Collectors.toList());
+        return currentPrefixes;
     }
 
     private List<String> getDescriptions(ArgumentMultimap argMultiMap) {
@@ -89,6 +89,8 @@ class FindTaskCommandParser extends FindCommandParser {
             assignee = argMultiMap.getValue(PREFIX_ASSIGNEES).get().trim();
             if (assignee.isEmpty()) {
                 addErrorMessage(FindTaskCommand.EMPTY_ASSIGNEE);
+            } else if (!Name.isValidName(assignee)) {
+                addErrorMessage(Name.MESSAGE_CONSTRAINTS);
             }
         }
         return assignee;
@@ -119,10 +121,6 @@ class FindTaskCommandParser extends FindCommandParser {
     }
 
     private boolean checkIfDateIsValid(String dateString) {
-        if (dateString.isEmpty()) {
-            addErrorMessage(FindTaskCommand.INVALID_DATE);
-            return false;
-        }
         if (!Date.isValidDate(dateString)) {
             addErrorMessage(Date.MESSAGE_CONSTRAINTS + "\n");
             return false;

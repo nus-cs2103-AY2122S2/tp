@@ -4,7 +4,7 @@ import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.HOON;
 import static manageezpz.testutil.TypicalPersons.IDA;
-import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -63,7 +63,7 @@ public class JsonAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        AddressBook original = getTypicalAddressBook();
+        AddressBook original = getTypicalAddressBookEmployees();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back

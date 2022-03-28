@@ -79,6 +79,36 @@ Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
 * `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
 
+### Finding employees: `findEmployee`
+
+Finds employees that have all of the options as entered.
+
+#### Note:
+* Options can be stacked together in any order. 
+* No options entered will result in all employees list out like the `listEmployee` command.
+
+#### Format:
+* `findEmployee n/NAMES`
+  * Finds all employees which has their name contain any of the words in `NAMES`
+* `findEmployee p/PHONE_NUMBER`
+  * Find employees with the exact phone number
+* `findEmployee e/EMAIL`
+  * Finds employees with the exact email
+  
+#### Examples:
+* `findEmployee n/Alex Yeoh`
+* `findEmployee p/65162727`
+* `findEmployee e/dcsdcr@nus.edu.sg`
+* `findEmployee n/Alex Yeo p/65162727 e/alexyeo@google.com`
+
+### Listing all employees : `listEmployees`
+
+Shows a list of all employees in the address book.
+
+#### Format: 
+* `listEmployees`
+
+
 ### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
 Adds a Task into the Task list.
@@ -131,19 +161,51 @@ Format: `delete INDEX`
 Examples:
 * `delete 2` deletes the 2nd Task in the Task list.
 
-### Locating Task by description or Date: `find`
+### Locating Task by multiple options: `findTask`
 
-Find tasks based on the task description or date in the format of (DD-MM-YYYY).
+Finds task(s) based on multiple conditions provided.
 
-Format: 
-* `find task/ desc/TASK_DESCRIPTION`
-* `find task/ date/DD-MM-YYYY`
+#### Note:
+* Arguments can be stacked together in any order. 
+* Task Type is optional. 
+* Any other invalid options not stated below will be ignored
+* No options provided will list down all the tasks like listTask
 
-Examples:
-* `find task/ desc/homework`
-* `find date/02-02-2022`
+#### Task Type Available:
+* `todo/`: Todos
+* `deadline/`: Deadlines
+* `event/`: Events
 
-### Locating employees by name:
+#### Options :
+* `desc/`: Description of the tasks
+* `date/`: Date of the task in YYYY-MM-DD (Only for deadline and event)
+* `priority/`: Priority of task. Only HIGH, MEDIUM, LOW and NONE
+* `assignees/`: The assignees that was assigned to the task (Only one full name of assignee allowed)
+* `isMarked/`: Whether the task is marked. Only true or false.
+
+#### Format:
+* `findTask todo/`
+  * Find all todos
+* `findTask deadline/`
+  * Find all deadlines 
+* `findTask event/` 
+  * Find all events
+* `findTask desc/[TASK_DESCRIPTIONS]`
+  * Finds all tasks which contain any of the words in [TASK_DESCRIPTION].
+* `findTask date/YYYY-MM-DD`
+  * Find all deadlines and events with the date
+* `findTask priority/PRIORITY`
+  * Find all tasks with the given PRIORITY [HIGH, MEDIUM, LOW, NONE]
+* `findTask assignees/ASSIGNEE`
+  * Find all tasks assignee to ASSIGNEE
+* `findTask isMarked/BOOLEAN`
+  * Find all tasks that is already marked (true) or unmarked (false)
+  
+#### Example:
+  * `findTask desc/homework`
+  * `findTask date/2022-04-16` 
+  * `findTask desc/work priority/HIGH` 
+  * `findTask deadlines/ desc/school date/2022-04-16 priority/HIGH assignees/Alex Yeo isMarked/true`
 
 ### Clearing all entries : `clear`
 

@@ -1,6 +1,6 @@
 package manageezpz.storage;
 
-import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        AddressBook original = getTypicalAddressBookEmployees();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook(retrieved));

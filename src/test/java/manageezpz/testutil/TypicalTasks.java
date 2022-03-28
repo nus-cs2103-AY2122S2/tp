@@ -21,8 +21,16 @@ public class TypicalTasks {
     public static final Todo WEEKLY_QUIZ = new TodoBuilder().withDescription("Weekly Quiz").build();
     public static final Deadline GET_DRINK = new DeadlineBuilder().withDescription("Get Drink")
             .withDate("2022-05-13").withTime("1800").build();
+    public static final Deadline PROJECT_CAPSTONE = new DeadlineBuilder().withDescription("Project capstone")
+            .withDate("2022-04-01").withTime("2359").build();
+    public static final Deadline FYP_REPORT = new DeadlineBuilder().withDescription("FYP Report").withDate("2024-05-02")
+            .withTime("2359").build();
     public static final Event HOUSE_VISTING = new EventBuilder().withDescription("House Visiting")
             .withDate("2022-09-15").withStartTime("1800").withEndTime("2000").build();
+    public static final Event MALAYSIA_BORDERS_OPEN = new EventBuilder().withDescription("Malaysia Borders open")
+            .withDate("2022-04-01").withStartTime("0000").withEndTime("2359").build();
+    public static final Event CS2103_PRACTICAL_EXAM = new EventBuilder().withDescription("CS2103 Practical Exam")
+            .withDate("2022-04-16").withStartTime("1400").withEndTime("1600").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Todo GET_A_DRINK = new TodoBuilder().withDescription(VALID_TASK_DESCRIPTION).build();
@@ -33,7 +41,7 @@ public class TypicalTasks {
     /**
      * Returns an {@code AddressBook} with all the typical tasks.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalAddressBookTasks() {
         AddressBook ab = new AddressBook();
         for (Task task : getTypicalTask()) {
             ab.addTask(task);
@@ -42,6 +50,8 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTask() {
-        return new ArrayList<>(Arrays.asList(READ_BOOK, RETURN_BOOK, GO_FOR_RUN, GET_HAIRCUT));
+        return new ArrayList<>(Arrays.asList(WEEKLY_QUIZ, PROJECT_CAPSTONE, FYP_REPORT, READ_BOOK, RETURN_BOOK,
+                GO_FOR_RUN, GET_HAIRCUT, GET_A_DRINK, GET_DRINK, HOUSE_VISTING, MALAYSIA_BORDERS_OPEN,
+                CS2103_PRACTICAL_EXAM));
     }
 }
