@@ -110,9 +110,9 @@ public class AddressBookParserTest {
     public void parseCommand_filter() throws Exception {
         FilterCommand.FilterDescriptor filterDescriptorTest = new FilterCommand.FilterDescriptor();
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FilterCommand command2 = (FilterCommand) parser.parseCommand(
+        FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FilterCommand(filterDescriptorTest), command2);
+        assertEquals(new FilterCommand(filterDescriptorTest), command);
     }
 
     @Test
