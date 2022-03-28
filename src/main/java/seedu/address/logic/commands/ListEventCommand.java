@@ -14,7 +14,7 @@ public class ListEventCommand extends ListCommand {
 
     public static final String COMMAND_WORD = "liste";
 
-    public static final String MESSAGE_SUCCESS = "Listed all events";
+    public static final String MESSAGE_SUCCESS = "Listed events";
 
     public static final String MESSAGE_USAGE = "Lists events. The default setting is to list "
             + "only unarchived events, but you can choose to include archived ones.\n"

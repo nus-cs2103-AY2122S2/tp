@@ -14,6 +14,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class ListCommandParser implements Parser<ListCommand> {
     private final EntryType listType;
 
+    /**
+     * Constructor for a ListCommandParser. Can create a new ListCommand
+     * ased on the given {@code listType}.
+     */
     public ListCommandParser(EntryType listType) {
         requireNonNull(listType);
         this.listType = listType;
