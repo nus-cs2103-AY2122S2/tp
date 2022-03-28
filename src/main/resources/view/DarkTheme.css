@@ -44,31 +44,37 @@
 }
 
 .tab-pane .tab-header-area {
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 0 0 1px 0;
     -fx-min-height: 0;
     -fx-max-height: 0;
 }
 
 .tab-header-background {
     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: derive(#1d1d1d, 70%);
 }
 
 .tab {
     -fx-background-color: #1d1d1d;
-    -fx-background-radius: 7 7 0 0;
-    -fx-border-radius: 7 7 0 0;
-    -fx-border-color: white;
+    -fx-background-radius: 4 4 0 0;
+    -fx-border-radius: 4 4 0 0;
+    -fx-border-color: derive(#1d1d1d, 70%);
+    -fx-border-width: 2px;
     -fx-border-style: solid solid none solid;
+    -fx-padding: 4px 8px;
 }
 .tab-label {
     -fx-text-fill: white;
+    -fx-font-family: 'Segoe UI Semibold';
+    -fx-font-size: 1.2em;
 }
 .tab:selected {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-radius: 7 7 0 0;
+    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-border-radius: 4 4 0 0;
 }
 .tab:selected .focus-indicator {
-    -fx-border-radius: 6 6 0 0;
+    -fx-border-color: #00000000;
 }
 
 .table-view {

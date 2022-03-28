@@ -118,6 +118,13 @@ public class AppointmentsBetweenCommandTest {
     }
 
     @Test
+    public void execute_noUpperLimit_messageUpperLimitIsForever() {
+        assertTrue(new AppointmentsBetweenCommand(BASE_DATE_TIME, LocalDateTime.MAX)
+                .execute(new ModelManager()).getFeedbackToUser().contains("to "
+                        + AppointmentsBetweenCommand.PHRASE_NO_END_RANGE));
+    }
+
+    @Test
     public void equals() {
         LocalDateTime refDate1 = LocalDateTime.parse("2022-12-23T12:34");
         LocalDateTime refDate2 = LocalDateTime.parse("2022-12-24T12:34");

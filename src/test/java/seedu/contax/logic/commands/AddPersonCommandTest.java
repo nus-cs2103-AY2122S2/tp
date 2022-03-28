@@ -9,7 +9,6 @@ import static seedu.contax.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +24,7 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.PersonBuilder;
@@ -236,7 +236,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -246,7 +246,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
+        public void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration) {
             throw new AssertionError("This method should not be called.");
         }
 
