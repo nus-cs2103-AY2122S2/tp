@@ -1,8 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -12,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -69,9 +69,9 @@ public class ArgumentTokenizer {
             prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
         }
 
-        if((prefix.equals(PREFIX_NAME) || prefix.equals(PREFIX_ADDRESS)
-                || prefix.equals(PREFIX_EMAIL) || prefix.equals(PREFIX_PHONE)) &&
-                positions.size() > 1) {
+        if ((prefix.equals(PREFIX_NAME) || prefix.equals(PREFIX_ADDRESS)
+                || prefix.equals(PREFIX_EMAIL) || prefix.equals(PREFIX_PHONE))
+                && positions.size() > 1) {
             throw new ParseException(FindCommand.MESSAGE_TOO_MANY_PREFIXES);
         }
         return positions;

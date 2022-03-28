@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-
 public class EventFieldContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
     private final Function<Event, String> field;

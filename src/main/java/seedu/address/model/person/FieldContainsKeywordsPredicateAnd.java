@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Function;
 
-import seedu.address.commons.util.StringUtil;
-
 public abstract class FieldContainsKeywordsPredicateAnd extends ContainsKeywordsPredicate<String> {
     private final List<String> keywords;
     private final Function<Person, String> field;
@@ -17,8 +15,6 @@ public abstract class FieldContainsKeywordsPredicateAnd extends ContainsKeywords
 
     @Override
     public boolean test(Person person) {
-//        return keywords.stream()
-//                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(field.apply(person), keyword));
         return keywords.stream()
                 .allMatch(keyword -> keyword.equalsIgnoreCase(field.apply(person)));
     }
