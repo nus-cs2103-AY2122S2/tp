@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.EntryType;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.entry.Company;
@@ -28,7 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Company> filteredCompanies;
     private final FilteredList<Event> filteredEvents;
-    private ListType currentlyDisplayedListType;
+    private EntryType currentlyDisplayedListType;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,7 +45,7 @@ public class ModelManager implements Model {
         filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
 
-        currentlyDisplayedListType = ListType.PERSON;
+        currentlyDisplayedListType = EntryType.PERSON;
 
         // Don't allow deleting/finding/editing on the events or person list at the beginning
         filteredPersons.setPredicate(PREDICATE_SHOW_NO_PERSONS);
@@ -183,19 +184,19 @@ public class ModelManager implements Model {
     @Override
     public void showPersonList(Predicate<Person> predicate) {
         updateFilteredLists(predicate, PREDICATE_SHOW_NO_COMPANIES, PREDICATE_SHOW_NO_EVENTS);
-        currentlyDisplayedListType = ListType.PERSON;
+        currentlyDisplayedListType = EntryType.PERSON;
     }
 
     @Override
     public void showCompanyList(Predicate<Company> predicate) {
         updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, predicate, PREDICATE_SHOW_NO_EVENTS);
-        currentlyDisplayedListType = ListType.COMPANY;
+        currentlyDisplayedListType = EntryType.COMPANY;
     }
 
     @Override
     public void showEventList(Predicate<Event> predicate) {
         updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, PREDICATE_SHOW_NO_COMPANIES, predicate);
-        currentlyDisplayedListType = ListType.EVENT;
+        currentlyDisplayedListType = EntryType.EVENT;
     }
 
     @Override

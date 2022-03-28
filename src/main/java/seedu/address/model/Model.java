@@ -24,8 +24,6 @@ public interface Model {
     Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
     Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
 
-    static enum ListType { PERSON, COMPANY, EVENT }
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

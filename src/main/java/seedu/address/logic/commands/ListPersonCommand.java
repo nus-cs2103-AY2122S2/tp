@@ -1,19 +1,31 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListPersonCommand extends Command {
+public class ListPersonCommand extends ListCommand {
 
     public static final String COMMAND_WORD = "listp";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed persons";
 
+    public static final String MESSAGE_USAGE = "Lists persons. The default setting is to list "
+            + "only unarchived persons, but you can choose to include archived ones.\n"
+            + "Parameters: [ " + PREFIX_SEARCH_TYPE + "SEARCH_TYPE] "
+            + "(must be one of 'unarchived', 'archived', or 'all')\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_SEARCH_TYPE + "unarchived";
+
+    public ListPersonCommand(ParserUtil.SearchType searchType) {
+        super(searchType);
+    }
 
     @Override
     public CommandResult execute(Model model) {
