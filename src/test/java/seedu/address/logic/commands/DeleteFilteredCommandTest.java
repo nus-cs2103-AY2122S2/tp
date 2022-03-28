@@ -21,9 +21,9 @@ class DeleteFilteredCommandTest {
 
     @Test
     void execute_deleteUnfilteredList_success() {
-        DeleteFilteredCommand deleteCommand = new DeleteFilteredCommand();
+        ClearFilteredCommand deleteCommand = new ClearFilteredCommand();
 
-        String expectedMessage = String.format(DeleteFilteredCommand.MESSAGE_PERSONS_DELETED_OVERVIEW,
+        String expectedMessage = String.format(ClearFilteredCommand.MESSAGE_PERSONS_DELETED_OVERVIEW,
                 model.getFilteredPersonList().size());
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
@@ -33,8 +33,8 @@ class DeleteFilteredCommandTest {
 
     @Test
     void equals() {
-        DeleteFilteredCommand command = new DeleteFilteredCommand();
-        DeleteFilteredCommand otherCommand = new DeleteFilteredCommand();
+        ClearFilteredCommand command = new ClearFilteredCommand();
+        ClearFilteredCommand otherCommand = new ClearFilteredCommand();
 
         assertTrue(command.equals(command));
 
