@@ -6,6 +6,16 @@ import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
 import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
 import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
 import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
+import static seedu.address.ui.Styles.AVAILABILITY_ID;
+import static seedu.address.ui.Styles.BLUE;
+import static seedu.address.ui.Styles.BRIGHT_GREEN;
+import static seedu.address.ui.Styles.CHANGE_COLOUR;
+import static seedu.address.ui.Styles.CLOSING_INLINE;
+import static seedu.address.ui.Styles.GREEN;
+import static seedu.address.ui.Styles.GREY;
+import static seedu.address.ui.Styles.RED;
+import static seedu.address.ui.Styles.WHITE_FONT_INLINE;
+import static seedu.address.ui.Styles.YELLOW;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -26,18 +36,8 @@ public class CandidateCard extends UiPart<Region> {
     private static final String FXML = "CandidateListCard.fxml";
 
     // UI Text
-    private static final String APPLICATION_STATUS_MSG = "Application Status : ";
-    private static final String INTERVIEW_STATUS_MSG = "Interview Status : ";
     private static final String AVAILABILITY_MSG = "Availability: ";
     private static final String SENIORITY_VALUE = "COM";
-
-    // CSS
-    private static final String RED = "#800000";
-    private static final String GREEN = "#006100";
-    private static final String YELLOW = "#CBA92B";
-    private static final String GREY = "#808080";
-    private static final String BRIGHT_GREEN = "#4BB11F";
-    private static final String CHANGE_COLOUR = "-fx-background-color: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -132,7 +132,7 @@ public class CandidateCard extends UiPart<Region> {
             interviewLabel.setStyle(CHANGE_COLOUR + GREEN);
             statusPane.getChildren().add(interviewLabel);
         } else if (interviewString.equals(SCHEDULED)) {
-            interviewLabel.setStyle(CHANGE_COLOUR + YELLOW);
+            interviewLabel.setStyle(CHANGE_COLOUR + BLUE);
             statusPane.getChildren().add(interviewLabel);
         }
     }
@@ -140,13 +140,18 @@ public class CandidateCard extends UiPart<Region> {
     public void setAvailableDays(Availability availability) {
         String[] week = Availability.WEEK;
         boolean[] isAvail = availability.getAvailableListAsBoolean();
+        String availStyle = CHANGE_COLOUR + BRIGHT_GREEN + CLOSING_INLINE + WHITE_FONT_INLINE;
+        String notAvailStyle = CHANGE_COLOUR + GREY + CLOSING_INLINE + WHITE_FONT_INLINE;
 
         for (int i = 0; i < week.length; i++) {
             Label label = new Label(week[i]);
+            label.setId(AVAILABILITY_ID);
+            label.setMinWidth(30);
+
             if (isAvail[i]) {
-                label.setStyle(CHANGE_COLOUR + BRIGHT_GREEN);
+                label.setStyle(availStyle);
             } else {
-                label.setStyle(CHANGE_COLOUR + GREY);
+                label.setStyle(notAvailStyle);
             }
             availableDays.getChildren().add(label);
         }

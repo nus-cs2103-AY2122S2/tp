@@ -81,12 +81,11 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         interviews.add(interview);
     }
 
-    // Edit function not implemented yet, code commented out to reduce test coverage.
-    /* public void setInterview(Interview target, Interview editedInterview) {
+    public void setInterview(Interview target, Interview editedInterview) {
         requireNonNull(editedInterview);
 
         interviews.setInterview(target, editedInterview);
-    }*/
+    }
 
     /**
      * Deletes past interviews from the list if the scheduled interview time is 31 minutes ago.

@@ -182,7 +182,7 @@ public class ModelManager implements Model {
     public void addInterview(Interview interview) {
         interviewSchedule.addInterview(interview);
         interviewSchedule.sortInterviews();
-        //updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+        updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
     /**
@@ -195,12 +195,12 @@ public class ModelManager implements Model {
         interviewSchedule.deletePastInterviews(localDateTime);
     }
 
-    /*@Override
+    @Override
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 
         interviewSchedule.setInterview(target, editedInterview);
-    }*/
+    }
 
     //=========== Interview Schedule Accessors =============================================================
     @Override

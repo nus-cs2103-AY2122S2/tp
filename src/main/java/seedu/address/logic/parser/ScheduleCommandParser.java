@@ -9,6 +9,7 @@ import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
 import seedu.address.logic.parser.schedule.DeleteScheduleCommandParser;
+import seedu.address.logic.parser.schedule.EditScheduleCommandParser;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -31,8 +32,8 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         switch (scheduleCommandWord) {
         case "add":
             return new AddScheduleCommandParser().parse(arguments);
-        /*case "edit":
-            return new EditScheduleCommandParser().parse(arguments);*/
+        case "edit":
+            return new EditScheduleCommandParser().parse(arguments);
         case "delete":
             return new DeleteScheduleCommandParser().parse(arguments);
         default:
