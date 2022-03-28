@@ -1,6 +1,8 @@
 package seedu.tinner.ui;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,11 +43,11 @@ public class ReminderDateCard extends UiPart<Region> {
     public ReminderDateCard(LocalDate reminderDate) {
         super(FXML);
         this.reminderDate = reminderDate;
-        date.setText(reminderDate.toString());
+        date.setText(reminderDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 
         UniqueReminderList reminderList = UniqueReminderList.getInstance();
         ObservableList<Reminder> dateSpecificReminders = reminderList.getDateSpecificReminders(reminderDate);
-        reminderListPanelPlaceholder.setPrefHeight(95 * dateSpecificReminders.size());
+        reminderListPanelPlaceholder.setPrefHeight(90 * dateSpecificReminders.size());
 
         setReminderListPanelPlaceholder(dateSpecificReminders);
     }

@@ -39,8 +39,6 @@ public class ReminderCard extends UiPart<Region> {
         super(FXML);
         this.reminder = reminder;
 
-        cardPane.setMinHeight(100);
-
         String companyNameField = reminder.getCompanyName().value;
         String roleNameField = reminder.getRoleName().value;
         String deadlineField = reminder.getDeadline().toString();

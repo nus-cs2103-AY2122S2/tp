@@ -2,12 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<HBox id="companyCardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8"
+<HBox id="reminderDateCardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -15,13 +16,14 @@
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" spacing="10">
       <padding>
-        <Insets top="15" right="15" bottom="15" left="15"/>
+        <Insets right="25" bottom="25" left="25"/>
       </padding>
       <VBox spacing="4">
         <VBox>
-          <Label fx:id="date" text="\$date" styleClass="cell_big_label"/>
+          <Label fx:id="date" text="\$date" styleClass="cell_date_label"/>
         </VBox>
-        <StackPane fx:id="reminderListPanelPlaceholder" styleClass="roles_list" prefHeight="200"
+        <Separator/>
+        <StackPane fx:id="reminderListPanelPlaceholder" styleClass="roles_list"
                    VBox.vgrow="ALWAYS"/>
 
       </VBox>

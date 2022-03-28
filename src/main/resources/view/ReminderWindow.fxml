@@ -5,14 +5,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
-<fx:root resizable="true" title="Reminder" minWidth="400" minHeight="600" type="javafx.stage.Stage"
+<fx:root resizable="true" title="Reminders" minWidth="400" minHeight="600" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <scene>
     <Scene>
       <stylesheets>
         <URL value="@DarkTheme.css"/>
       </stylesheets>
-      <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+      <VBox styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
         <StackPane fx:id="reminderDateListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
       </VBox>
     </Scene>

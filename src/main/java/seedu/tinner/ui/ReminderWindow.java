@@ -87,15 +87,4 @@ public class ReminderWindow extends UiPart<Stage> {
     public void focus() {
         getRoot().requestFocus();
     }
-
-//    /**
-//     * Copies the URL to the user guide to the clipboard.
-//     */
-//    @FXML
-//    private void copyUrl() {
-//        final Clipboard clipboard = Clipboard.getSystemClipboard();
-//        final ClipboardContent url = new ClipboardContent();
-//        url.putString(USERGUIDE_URL);
-//        clipboard.setContent(url);
-//    }
 }
