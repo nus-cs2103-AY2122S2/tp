@@ -22,7 +22,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
-import seedu.address.model.lesson.*;
+import seedu.address.model.lesson.ConflictingLessonsPredicate;
+import seedu.address.model.lesson.DateTimeSlot;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonAddress;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.RecurringLesson;
+import seedu.address.model.lesson.Subject;
 
 public class EditLessonCommand extends Command {
 
