@@ -52,8 +52,8 @@ public class TaModule implements Entity {
      * @param toCopy A valid class group.
      */
     public TaModule(TaModule toCopy) {
-        this(toCopy.getModuleName(), toCopy.getModuleCode(),
-                toCopy.getAcademicYear(), toCopy.uniqueStudentList);
+        this(toCopy.getModuleName(), toCopy.getModuleCode(), toCopy.getAcademicYear(), new UniqueStudentList());
+        uniqueStudentList.setStudents(toCopy.uniqueStudentList);
     }
 
     public ModuleName getModuleName() {

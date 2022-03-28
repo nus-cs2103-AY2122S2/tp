@@ -59,8 +59,8 @@ public class ClassGroup implements Entity {
      * @param toCopy A valid class group.
      */
     public ClassGroup(ClassGroup toCopy) {
-        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(),
-                toCopy.getModule(), toCopy.uniqueStudentList);
+        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(), toCopy.getModule(), new UniqueStudentList());
+        uniqueStudentList.setStudents(toCopy.uniqueStudentList);
     }
 
     public ClassGroupId getClassGroupId() {
