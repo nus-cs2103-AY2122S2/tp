@@ -27,12 +27,15 @@ public class GrabCommand extends Command {
     public static final String ADDRESS = "a/";
     public static final String EMAIL = "e/";
     public static final String COURSE = "c/";
-    public static final String TELEGRAM  = "tele/";
+    public static final String TELEGRAM = "tele/";
     public static final String MATRICCARD = "m/";
 
     private final Prefix attribute;
     private final String index;
 
+    /**
+     * Creates an GrabCommand to grab the specified {@code Prefix} attributes
+     */
     public GrabCommand(Prefix attribute, String index) {
         this.attribute = attribute;
         this.index = index;
@@ -81,6 +84,7 @@ public class GrabCommand extends Command {
                 case TELEGRAM:
                     builder.append(p.getTelegram() + "\n");
                     break;
+                default:
                 }
             }
         } else {
@@ -108,6 +112,7 @@ public class GrabCommand extends Command {
             case TELEGRAM:
                 builder.append(personToBeGrabbed.getTelegram());
                 break;
+            default:
             }
         }
         return new CommandResult(MESSAGE_SUCCESS + '\n' + builder);
