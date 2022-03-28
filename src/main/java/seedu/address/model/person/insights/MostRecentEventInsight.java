@@ -66,6 +66,13 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
 
     @Override
     public int compareTo(MostRecentEventInsight other) {
+        if (this.dateTime == null && other.dateTime != null) {
+            return -1;
+        } else if (other.dateTime == null && this.dateTime != null) {
+            return 1;
+        } else if (other.dateTime == null && this.dateTime == null) {
+            return 0;
+        }
         return this.dateTime.compareTo(other.dateTime);
     }
 

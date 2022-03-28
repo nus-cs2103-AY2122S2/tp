@@ -178,6 +178,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<PersonInsight> getInsightsList(Model model) {
         return FXCollections.observableArrayList(this.getPersonList()
                 .stream()
+                .sorted()
                 .map(person -> new PersonInsight(person, model))
                 .collect(Collectors.toList()));
     }

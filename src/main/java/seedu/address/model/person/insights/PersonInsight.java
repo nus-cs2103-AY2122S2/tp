@@ -9,13 +9,13 @@ import seedu.address.model.person.Person;
 /**
  * This class encapsulates insights of a person.
  */
-public class PersonInsight {
+public class PersonInsight implements Comparable<PersonInsight> {
 
     // Data fields
     private final Person person;
-    private final Insight numberOfLogs;
-    private final Insight numberOfEvents;
-    private final Insight lastEvent;
+    private final NumLogsInsight numberOfLogs;
+    private final NumEventsInsight numberOfEvents;
+    private final MostRecentEventInsight lastEvent;
 
     public PersonInsight(Person person, Model model) {
         requireAllNonNull(person, model);
@@ -42,5 +42,11 @@ public class PersonInsight {
         return this.person;
     }
 
+    @Override
+    public int compareTo(PersonInsight other) {
+        return this.numberOfEvents.compareTo(other.numberOfEvents)
+                + this.numberOfLogs.compareTo(other.numberOfLogs)
+                + this.lastEvent.compareTo(other.lastEvent);
+    }
 
 }
