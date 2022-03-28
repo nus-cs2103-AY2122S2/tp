@@ -119,7 +119,7 @@ public class EditApplicantCommand extends EditCommand {
         Set<Tag> updatedTags = editApplicantDescriptor.getTags().orElse(applicantToEdit.getTags());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAge, updatedAddress,
-                updatedGender, updatedStatus,updatedTags);
+                updatedGender, updatedStatus, updatedTags);
     }
 
     @Override
