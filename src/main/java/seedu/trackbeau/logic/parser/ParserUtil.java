@@ -6,6 +6,7 @@ import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,6 +39,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -112,6 +114,7 @@ public class ParserUtil {
      * Parses a {@code String skinType } into an {@code SkinType}.
      * Leading and trailing whitespaces will be trimmed.
      * Skin type input must fit existing categories.
+     *
      * @throws ParseException if the given {@code SkinType} is invalid.
      */
     public static SkinType parseSkinType(String skinType) throws ParseException {
@@ -122,6 +125,7 @@ public class ParserUtil {
         }
         return new SkinType(trimmedSkinType);
     }
+
     /**
      * Parses a {@code String hairType} into an {@code HairType}.
      * Leading and trailing whitespaces will be trimmed.
@@ -231,6 +235,7 @@ public class ParserUtil {
 
         return dateTime;
     }
+
     /**
      * Parses a {@code String serviceName} into a {@code ServiceName}.
      * Leading and trailing whitespaces will be trimmed.
@@ -284,4 +289,17 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Splits {@code args} into a list of String where each String can be parse as an Index and returns it.
+     *
+     * @throws ParseException if parseIndex() throws a ParseException.
+     */
+    public static ArrayList<Index> parseIndexes(String args) throws ParseException {
+        String[] split = args.split(",");
+        ArrayList<Index> indexes = new ArrayList<>();
+        for (String s : split) {
+            indexes.add(parseIndex(s));
+        }
+        return indexes;
+    }
 }

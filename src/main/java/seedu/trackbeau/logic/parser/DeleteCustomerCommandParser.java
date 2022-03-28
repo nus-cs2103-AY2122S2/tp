@@ -2,17 +2,13 @@ package seedu.trackbeau.logic.parser;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.ArrayList;
-
-import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.customer.DeleteCustomerCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
-
 
 /**
  * Parses input arguments and creates a new DeleteCustomerCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteCustomerCommand> {
+public class DeleteCustomerCommandParser implements Parser<DeleteCustomerCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCustomerCommand
@@ -21,16 +17,10 @@ public class DeleteCommandParser implements Parser<DeleteCustomerCommand> {
      */
     public DeleteCustomerCommand parse(String args) throws ParseException {
         try {
-            String[] split = args.split(",");
-            ArrayList<Index> indexes = new ArrayList<>();
-            for (String s : split) {
-                indexes.add(ParserUtil.parseIndex(s));
-            }
-            return new DeleteCustomerCommand(indexes);
+            return new DeleteCustomerCommand(ParserUtil.parseIndexes(args));
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCustomerCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }
