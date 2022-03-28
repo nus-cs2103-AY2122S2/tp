@@ -51,7 +51,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_DURATION_HOURS + " 2 "
             + PREFIX_DURATION_MINUTES + " 15 ";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New lesson added:\n%1$s";
     public static final String MESSAGE_CONFLICTING_LESSON = "This lesson conflicts with an existing lesson "
         + "in the schedule";
 
