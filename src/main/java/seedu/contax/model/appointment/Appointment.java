@@ -94,13 +94,6 @@ public class Appointment extends ScheduleItem {
         return priority;
     }
 
-    public String getPriorityToString() {
-        if (priority != null) {
-            return priority.toString();
-        }
-        return "NONE";
-    }
-
     public Appointment withPriority(Priority priority) {
         return new Appointment(name, startDateTime, duration, person, priority);
     }
@@ -145,12 +138,12 @@ public class Appointment extends ScheduleItem {
                 && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
                 && otherAppointment.getDuration().equals(getDuration())
                 && Objects.equals(otherAppointment.getPerson(), getPerson())
-                && getPriorityToString().equals(otherAppointment.getPriorityToString());
+                && Objects.equals(otherAppointment.getPriority(), getPriority());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, startDateTime, duration, person);
+        return Objects.hash(name, startDateTime, duration, person, priority);
     }
 
     @Override
@@ -163,7 +156,7 @@ public class Appointment extends ScheduleItem {
                 + "; Person: "
                 + getPerson()
                 + "; Priority: "
-                + getPriorityToString();
+                + getPriority();
     }
 
     /**

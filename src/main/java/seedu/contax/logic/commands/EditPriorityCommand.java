@@ -3,6 +3,7 @@ package seedu.contax.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import seedu.contax.commons.core.Messages;
@@ -14,20 +15,20 @@ import seedu.contax.model.appointment.Priority;
 
 
 /**
- * Edits the priority level of an existing priority in the appointment list with level low, medium or high.
+ * Edits the priority level (low, medium or high) of an existing appointment in the appointment list.
  */
 public class EditPriorityCommand extends Command {
     public static final String COMMAND_WORD = "priority";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the level of priority of an existing appointment in the appointment list .\n"
-            + "Parameters: INDEX pri/PRIORITY\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "pri/high";
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD
+            + "`: **Edits the level of priority of an existing appointment in the appointment list.**\n"
+            + "Parameters: *INDEX pri/PRIORITY*\n"
+            + "Example: `" + COMMAND_WORD + " 1 " + "pri/high`";
 
     public static final String MESSAGE_EDIT_PRIORITY_SUCCESS = "Edited Priority of Appointment at index %d: %s";
     public static final String MESSAGE_REMOVE_PRIORITY_SUCCESS = "Removed Priority of Appointment at index %d";
     public static final String MESSAGE_PRIORITY_NOT_EDITED =
-            "The priority level you provide is same as existing priority.";
+            "The priority level you provided is same as existing priority.";
 
     private final Index index;
     private final EditPriorityDescriptor editPriorityDescriptor;
@@ -60,7 +61,7 @@ public class EditPriorityCommand extends Command {
         if (editPriorityDescriptor.getPriority().isPresent()) {
             Priority priority = editPriorityDescriptor.getPriority().get();
 
-            if (priority.equals(appointment.getPriority())) {
+            if (Objects.equals(appointment.getPriority(), priority)) {
                 throw new CommandException(MESSAGE_PRIORITY_NOT_EDITED);
             }
 
