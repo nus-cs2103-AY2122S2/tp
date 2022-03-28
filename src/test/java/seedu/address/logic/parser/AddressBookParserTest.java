@@ -32,6 +32,9 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
+/**
+ * Contains helper methods for testing address book parsers.
+ */
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
