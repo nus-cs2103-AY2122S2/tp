@@ -53,6 +53,11 @@ public class SampleDataUtil {
         groupList.get(0).addTask(new Task(new TaskName("Do Presentation for Open House")));
         groupList.get(1).addTask(new Task(new TaskName("Electing the new president")));
 
+        groupList.get(0).assignPerson(SampleDataUtil.getSamplePersons()[0]);
+        groupList.get(0).assignPerson(SampleDataUtil.getSamplePersons()[1]);
+        groupList.get(1).assignPerson(SampleDataUtil.getSamplePersons()[1]);
+        groupList.get(1).assignPerson(SampleDataUtil.getSamplePersons()[2]);
+
         return groupList;
     }
 

@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.testutil.GroupBuilder;
 
 /**
@@ -25,6 +26,8 @@ public class AssignCommandTest {
 
     public static final String NON_EXISTENT_GROUP_NAME = "Invalid Group Name";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    private final UniqueGroupList uniqueGroupList = new UniqueGroupList();
 
     @Test
     public void constructor_nullGroupPerson_throwsNullPointerException() {

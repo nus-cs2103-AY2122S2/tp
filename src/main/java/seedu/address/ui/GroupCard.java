@@ -25,6 +25,10 @@ public class GroupCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label studentContactTitle;
+    @FXML
+    private FlowPane personName;
+    @FXML
     private FlowPane taskName;
     @FXML
     private Label taskId;
@@ -39,8 +43,13 @@ public class GroupCard extends UiPart<Region> {
         this.group = group;
         id.setText(displayedIndex + ". ");
         groupName.setText(group.getGroupName().groupName);
-        taskTitle.setText("Task List:");
 
+        studentContactTitle.setText("Student contacts:");
+        group.getPersons().stream()
+                .sorted(Comparator.comparing(person -> person.getName().toString()))
+                .forEach(person -> personName.getChildren().add(new Label(person.getName().toString())));
+
+        taskTitle.setText("Tasks:");
         group.getTaskList().getInternalList().stream()
                 .sorted(Comparator.comparing(task -> task.taskName.taskName))
                 .forEach(task -> taskName.getChildren().add(new Label(task.taskName.taskName)));
