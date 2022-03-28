@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Remark;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/**
+ * Modifies a remark on an existing tag
+ */
 public class RemarkTagCommand extends Command {
 
     public static final String COMMAND_WORD = "remark_tag";
@@ -18,10 +21,19 @@ public class RemarkTagCommand extends Command {
             + "Parameters: TAG_NAME r/[REMARK]\n"
             + "Example: " + COMMAND_WORD + " labGroup1 r/meeting on Wed 8pm";
 
-    public static final String MESSAGE_ARGUMENTS = "tagName: %1$d, Remark: %2$s";
-
     private final Tag tag;
     private final Remark remark;
+
+    /**
+     * @param tag which it's remark to be changed
+     * @param remark of the person to be updated to
+     */
+    public RemarkTagCommand(Tag tag, Remark remark) {
+        requireAllNonNull(tag, remark);
+
+        this.tag = tag;
+        this.remark = remark;
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -40,16 +52,7 @@ public class RemarkTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tag));
     }
 
-    /**
-     * @param tag which it's remark to be changed
-     * @param remark of the person to be updated to
-     */
-    public RemarkTagCommand(Tag tag, Remark remark) {
-        requireAllNonNull(tag, remark);
 
-        this.tag = tag;
-        this.remark = remark;
-    }
 
     @Override
     public boolean equals(Object other) {
