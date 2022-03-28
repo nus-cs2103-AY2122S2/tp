@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.SortCommand.SORT_BY_ADDRESS;
 import static seedu.address.logic.commands.SortCommand.SORT_BY_EMAIL;
@@ -11,7 +12,9 @@ import static seedu.address.logic.commands.SortCommand.SORT_BY_PHONE;
 import static seedu.address.logic.commands.SortCommand.SORT_BY_USER_TYPE;
 import static seedu.address.logic.commands.SortCommand.SORT_REVERSE;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,7 +26,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns a SortCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
@@ -32,71 +35,74 @@ public class SortCommandParser implements Parser<SortCommand> {
             return new SortCommand((person1, person2) -> 0);
         }
 
-        Comparator<Person> comparator = parseComparatorArgs(trimmedArgs.split(" "));
+        Comparator<Person> comparator = parseComparators(List.of(trimmedArgs.split(" ")));
         return new SortCommand(comparator);
     }
 
     /**
-     * Parses a chain of arguments into a Comparator that compares {@code Person} objects
-     * according to the given arguments in the specified order.
+     * Parses a {@code List<String>} of keywords into a {@code Comparator<Person>} that compares {@code Person}
+     * objects according to the given keywords in the specified order.
+     *
+     * @throws ParseException if an invalid keyword is specified.
      */
-    private static Comparator<Person> parseComparatorArgs(String... args) throws ParseException {
-        Comparator<Person> chainedComparator = (person1, person2) -> 0;
+    private static Comparator<Person> parseComparators(List<String> keywords) throws ParseException {
+        requireNonNull(keywords);
 
-        for (String arg : args) {
-            arg = arg.toLowerCase();
-            boolean isReverse = false;
-
-            if (arg.startsWith(String.valueOf(SORT_REVERSE))) {
-                arg = arg.substring(1);
-                isReverse = true;
-            }
-
-            Comparator<Person> comparator = parseComparator(arg, isReverse);
-            chainedComparator = chainedComparator.thenComparing(comparator);
+        if (keywords.isEmpty()) {
+            return (person1, person2) -> 0;
         }
 
-        return chainedComparator;
+        List<Comparator<Person>> comparatorList = new ArrayList<>();
+
+        for (String keyword : keywords) {
+            comparatorList.add(parseComparator(keyword));
+        }
+
+        return comparatorList.stream().reduce(Comparator::thenComparing).get();
     }
 
     /**
-     * Parses the given argument into a Comparator.
+     * Parses the given {@code String} into a {@code Comparator<Person>}.
      *
-     * @param sortBy The field to sort by.
-     * @param isReverse Whether to sort in reverse order.
-     * @return A Comparator that compares {@code Person} objects based on the given field.
-     * @throws ParseException if the given field is invalid.
+     * @throws ParseException if the given keyword is invalid.
      */
-    private static Comparator<Person> parseComparator(String sortBy, boolean isReverse) throws ParseException {
-        Comparator<Person> comparator;
+    private static Comparator<Person> parseComparator(String keyword) throws ParseException {
+        requireNonNull(keyword);
+        Comparator<Person> parsedComparator;
+        boolean isReverse = false;
 
-        switch (sortBy) {
+        if (keyword.startsWith(String.valueOf(SORT_REVERSE))) {
+            keyword = keyword.substring(1);
+            isReverse = true;
+        }
+
+        switch (keyword.toLowerCase()) {
         case SORT_BY_NAME:
-            comparator = Comparator.comparing(person -> person.getName().fullName.toLowerCase());
+            parsedComparator = Comparator.comparing(person -> person.getName().fullName.toLowerCase());
             break;
         case SORT_BY_PHONE:
-            comparator = Comparator.comparing(person -> person.getPhone().value.toLowerCase());
+            parsedComparator = Comparator.comparing(person -> person.getPhone().value.toLowerCase());
             break;
         case SORT_BY_EMAIL:
-            comparator = Comparator.comparing(person -> person.getEmail().value.toLowerCase());
+            parsedComparator = Comparator.comparing(person -> person.getEmail().value.toLowerCase());
             break;
         case SORT_BY_ADDRESS:
-            comparator = Comparator.comparing(person -> person.getAddress().value.toLowerCase());
+            parsedComparator = Comparator.comparing(person -> person.getAddress().value.toLowerCase());
             break;
         case SORT_BY_FAVOURITE:
-            comparator = Comparator.comparing(person -> person.getFavourite().getStatus());
+            parsedComparator = Comparator.comparing(person -> person.getFavourite().getStatus());
             break;
         case SORT_BY_USER_TYPE:
-            comparator = Comparator.comparing(person -> person.getUserType().toString().toLowerCase());
+            parsedComparator = Comparator.comparing(person -> person.getUserType().toString().toLowerCase());
             break;
         case SORT_BY_NUM_PROPERTIES:
-            comparator = Comparator.comparingInt(person -> person.getProperties().size());
+            parsedComparator = Comparator.comparingInt(person -> person.getProperties().size());
             break;
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        return isReverse ? comparator.reversed() : comparator;
+        return isReverse ? parsedComparator.reversed() : parsedComparator;
     }
 
 }
