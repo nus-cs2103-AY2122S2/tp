@@ -162,11 +162,27 @@ public class Lab {
      * This defines a weaker notion of equality between two Labs.
      */
     public boolean isSameLab(Lab otherLab) {
+        requireNonNull(otherLab);
+
         if (otherLab == this) {
             return true;
         }
 
-        return otherLab != null && otherLab.labNumber == this.labNumber;
+        return otherLab.labNumber == this.labNumber;
+    }
+
+    /**
+     * Returns true if both labs have the same {@code labStatus}
+     */
+    public boolean hasSameLabStatus(Lab otherLab) {
+        requireNonNull(otherLab);
+
+        if (otherLab == this) {
+            return true;
+        }
+
+        return otherLab.labStatus.equals(this.labStatus);
+
     }
 
     @Override
