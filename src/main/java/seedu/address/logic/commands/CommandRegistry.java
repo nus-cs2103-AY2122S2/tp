@@ -16,6 +16,7 @@ import seedu.address.logic.parser.FindTransactionCommandParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.RemarkCommandParser;
 import seedu.address.logic.parser.RemoveCommandParser;
+import seedu.address.logic.parser.RemoveMembershipParser;
 import seedu.address.logic.parser.SortCommandParser;
 
 public class CommandRegistry {
@@ -34,7 +35,7 @@ public class CommandRegistry {
         parsers.put(ListCommand.COMMAND_WORD, (String args) -> new ListCommand());
         parsers.put(ExitCommand.COMMAND_WORD, (String args) -> new ExitCommand());
         parsers.put(HelpCommand.COMMAND_WORD, (String args) -> new HelpCommand());
-        parsers.put(DeleteFilteredCommand.COMMAND_WORD, (String args) -> new DeleteFilteredCommand());
+        parsers.put(ClearFilteredCommand.COMMAND_WORD, (String args) -> new ClearFilteredCommand());
         parsers.put(RemarkCommand.COMMAND_WORD, new RemarkCommandParser());
         parsers.put(AddMembershipCommand.COMMAND_WORD, new AddMembershipParser());
         parsers.put(SortCommand.COMMAND_WORD, new SortCommandParser());
@@ -43,6 +44,7 @@ public class CommandRegistry {
         parsers.put(FindTransactionCommand.COMMAND_WORD, new FindTransactionCommandParser());
         parsers.put(UndoCommand.COMMAND_WORD, (String args) -> new UndoCommand());
         parsers.put(DeleteTransactionCommand.COMMAND_WORD, new DeleteTransactionCommandParser());
+        parsers.put(RemoveMembershipCommand.COMMAND_WORD, new RemoveMembershipParser());
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
         PARSERS = Collections.unmodifiableMap(parsers);
