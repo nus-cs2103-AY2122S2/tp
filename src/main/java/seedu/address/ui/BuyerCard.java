@@ -70,13 +70,13 @@ public class BuyerCard extends UiPart<Region> {
             propertyType.setText("No Property");
             propertyLocation.setText("No Location");
             propertyLowerPrice.setText("");
-            propertyUpperPrice.setText("");
         } else {
             propertyType.setText(houseType);
             propertyLocation.setText(houseLocation);
             propertyLowerPrice.setText(houseLowerPrice);
             propertyUpperPrice.setText(houseUpperPrice);
         }
+
     }
 
     @Override

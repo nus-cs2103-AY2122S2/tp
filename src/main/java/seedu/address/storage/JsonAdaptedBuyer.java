@@ -56,7 +56,11 @@ public class JsonAdaptedBuyer {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         appointment = source.getAppointment().value;
-        propertyToBuy = new JsonAdaptedPropertyToBuy(source.getPropertyToBuy());
+        if (source.getPropertyToBuy() instanceof NullPropertyToBuy) {
+            propertyToBuy = null;
+        } else {
+            propertyToBuy = new JsonAdaptedPropertyToBuy(source.getPropertyToBuy());
+        }
     }
 
     /**
