@@ -177,6 +177,12 @@ public class ModelManager implements Model {
     }
 
     //=========== RoleManager ================================================================================
+    /**
+     * Adds the given role.
+     * @param role must not already exist in the Company.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     */
     @Override
     public void addRole (Index companyIndex, Role role) {
         assert(companyIndex.getZeroBased() < filteredCompanies.size());
@@ -187,6 +193,13 @@ public class ModelManager implements Model {
         roleManager.addRole(role);
     }
 
+    /**
+     * Checks if a role with the same identity as {@code role} exists in the role list.
+     * @param role to be checked if it exists in the Company.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     * @return true if a role with the same identity as {@code role} exists in the role list.
+     */
     @Override
     public boolean hasRole (Index companyIndex, Role role) {
         assert(companyIndex.getZeroBased() < filteredCompanies.size());
@@ -197,6 +210,12 @@ public class ModelManager implements Model {
         return roleManager.hasRole(role);
     }
 
+    /**
+     * Deletes the given role.
+     * @param roleToDelete must exists in the Company.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     */
     @Override
     public void deleteRole(Index companyIndex, Role roleToDelete) {
         assert(companyIndex.getZeroBased() < filteredCompanies.size());
@@ -207,6 +226,13 @@ public class ModelManager implements Model {
         roleManager.deleteRole(roleToDelete);
     }
 
+    /**
+     * Replaces the given role {@code target} with {@code editedRole}.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     * @param target must exists in the Company.
+     * @param editedRole must not be the same as an existing role in the role list.
+     */
     @Override
     public void setRole(Index companyIndex, Role target, Role editedRole) {
         assert(companyIndex.getZeroBased() < filteredCompanies.size());
@@ -217,6 +243,11 @@ public class ModelManager implements Model {
         roleManager.setRole(target, editedRole);
     }
 
+    /**
+     * Updates the filter of the filtered role list to filter by the given {@code predicate}.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     */
     @Override
     public void updateFilteredRoleList(Index companyIndex, Predicate<Role> predicate) {
         assert(companyIndex.getZeroBased() < filteredCompanies.size());
@@ -227,6 +258,12 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Company List Accessors =============================================================
+    /**
+     * Returns a filtered role list.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     * @return the filtered role list with a given company.
+     */
     @Override
     public ObservableList<Role> getFilteredRoleList(Index companyIndex) {
         assert(companyIndex.getZeroBased() < filteredCompanies.size());
