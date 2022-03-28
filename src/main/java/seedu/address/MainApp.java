@@ -53,7 +53,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing TalentAssistant ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -89,7 +89,7 @@ public class MainApp extends Application {
             addressBookOptional = storage.readAddressBook();
             interviewListOptional = storage.readInterviewSchedule();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample TalentAssistant");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             //Does not make sense for sample interview list. Change to empty list
@@ -98,11 +98,11 @@ public class MainApp extends Application {
             }
             initialInterviewList = interviewListOptional.orElseGet(SampleDataUtil::getEmptyInterviewList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty TalentAssistant");
             initialData = new AddressBook();
             initialInterviewList = new InterviewSchedule();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TalentAssistant");
             initialData = new AddressBook();
             initialInterviewList = new InterviewSchedule();
         }
@@ -190,7 +190,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TalentAssistant ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
