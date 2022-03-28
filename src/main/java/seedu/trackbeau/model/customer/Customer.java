@@ -37,7 +37,7 @@ public class Customer implements UniqueListItem {
                     SkinType skinType, HairType hairType,
                     Set<Tag> staffs, Set<Tag> services, Set<Tag> allergies,
                     Birthdate birthdate, RegistrationDate regDate) {
-        requireAllNonNull(name, phone, email, address);
+        requireAllNonNull(name, phone, email, address, regDate);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -113,7 +113,7 @@ public class Customer implements UniqueListItem {
         }
 
         Customer otherCustomer = (Customer) other;
-        return otherCustomer.getName().equals(getName());
+        return otherCustomer.getPhone().equals(getPhone());
     }
 
     /**
