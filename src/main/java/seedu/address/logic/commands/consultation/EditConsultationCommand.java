@@ -28,7 +28,7 @@ import seedu.address.model.consultation.Time;
 import seedu.address.model.patient.Nric;
 
 /**
- * Edits the details of an existing test result information in MedBook.
+ * Edits the details of an existing consultation in MedBook.
  */
 public class EditConsultationCommand extends Command {
 
@@ -59,8 +59,8 @@ public class EditConsultationCommand extends Command {
     private final EditConsultationDescriptor editConsultationDescriptor;
 
     /**
-     * @param targetIndex of the test result information in the filtered test result information list to edit
-     * @param editConsultationDescriptor details to edit the test result information with
+     * @param targetIndex of the consultation in the filtered consultation list to edit
+     * @param editConsultationDescriptor details to edit the consultation with
      */
     public EditConsultationCommand(Index targetIndex, EditConsultationDescriptor editConsultationDescriptor) {
         this.targetIndex = targetIndex;
@@ -114,8 +114,8 @@ public class EditConsultationCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the test result information with. Each non-empty field value will replace the
-     * corresponding field value of the test result information.
+     * Stores the details to edit the consultation with. Each non-empty field value will replace the
+     * corresponding field value of the consultation.
      */
     public static class EditConsultationDescriptor {
         private Nric nric;

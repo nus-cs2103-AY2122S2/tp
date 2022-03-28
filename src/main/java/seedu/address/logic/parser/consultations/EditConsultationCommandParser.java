@@ -17,12 +17,12 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditTestResultCommand object
+ * Parses input arguments and creates a new EditConsultationCommand object
  */
 public class EditConsultationCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the EditTestResultCommand
-     * and returns an EditTestResultCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditConsultationCommand
+     * and returns an EditConsultationCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditConsultationCommand parse(String args) throws ParseException {
