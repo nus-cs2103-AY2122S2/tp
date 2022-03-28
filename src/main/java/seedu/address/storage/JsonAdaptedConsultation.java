@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.ConsultationDiagnosis;
 import seedu.address.model.consultation.ConsultationFee;
 import seedu.address.model.consultation.ConsultationNotes;
+import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.patient.Nric;
 
@@ -92,7 +92,8 @@ class JsonAdaptedConsultation {
 
 
         if (diagnosis == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ConsultationDiagnosis.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, ConsultationDiagnosis.class.getSimpleName()));
         }
         if (!ConsultationDiagnosis.isValidDiagnosis(diagnosis)) {
             throw new IllegalValueException(ConsultationDiagnosis.MESSAGE_CONSTRAINTS);
@@ -101,7 +102,8 @@ class JsonAdaptedConsultation {
 
 
         if (fee == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ConsultationFee.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, ConsultationFee.class.getSimpleName()));
         }
         if (!ConsultationFee.isValidFee(fee)) {
             throw new IllegalValueException(ConsultationFee.MESSAGE_CONSTRAINTS);

@@ -8,8 +8,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ConsultationDiagnosis {
 
-    private String consultationDiagnosis;
-
     public static final String MESSAGE_CONSTRAINTS = "Diagnosis can take any values, and it should not be blank";
 
     /*
@@ -17,6 +15,8 @@ public class ConsultationDiagnosis {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+
+    private String consultationDiagnosis;
 
     /**
      * Constructs a {@code ConsultationDiagnosis}.
