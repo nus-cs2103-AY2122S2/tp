@@ -15,7 +15,6 @@ import seedu.address.model.UserPrefs;
 
 public class UndoCommandTest {
 
-    private static final StackUndoRedo EMPTY_STACK = new StackUndoRedo();
 
     @Test
     public void execute_undoOnEmptyStack_failed() {
@@ -32,23 +31,25 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_undoOnNonEmptyStack_failed() throws CommandException {
+    public void execute_undoOnNonEmptyStack_success() throws CommandException {
 
         //Create new model
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        UndoCommand undoCommand = new UndoCommand();
+
         StackUndoRedo undoRedoStack = new StackUndoRedo();
 
         //Expected result
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         //Execute a command
         RedoableCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         CommandResult commandResult = deleteCommand.execute(model, new CommandHistory(), undoRedoStack);
         deleteCommand.saveSuccessMessage(commandResult.getFeedbackToUser());
-        undoRedoStack.push(deleteCommand);
 
-        assertCommandSuccess(deleteCommand, model, UndoCommand.MESSAGE_USAGE_SUCCESS, expectedModel);
+        undoRedoStack.push(deleteCommand);
+        assertCommandSuccess(new UndoCommand(), model, undoRedoStack,
+                String.format(UndoCommand.MESSAGE_USAGE_SUCCESS, commandResult.getFeedbackToUser()), expectedModel);
 
     }
 }

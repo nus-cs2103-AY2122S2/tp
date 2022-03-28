@@ -17,11 +17,11 @@ public class RedoCommandTest {
 
     private static final StackUndoRedo EMPTY_STACK = new StackUndoRedo();
 
+    //Create new model
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
     public void execute_undoOnEmptyStack_failed() {
-
-        //Create new model
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         // Undo Command
         RedoCommand redoCommand = new RedoCommand();
@@ -32,14 +32,13 @@ public class RedoCommandTest {
     }
 
     @Test
-    public void execute_undoOnNonEmptyStack_failed() throws CommandException {
+    public void execute_undoOnNonEmptyStack_success() throws CommandException {
 
         //Create new model
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         StackUndoRedo undoRedoStack = new StackUndoRedo();
 
         //Expected result
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
 
         //Execute a command
@@ -49,7 +48,11 @@ public class RedoCommandTest {
         undoRedoStack.push(deleteCommand);
         undoRedoStack.popUndo();
 
-        assertCommandSuccess(deleteCommand, model, RedoCommand.MESSAGE_USAGE_SUCCESS, expectedModel);
+
+        assertCommandSuccess(new RedoCommand(), model, undoRedoStack,
+                String.format(RedoCommand.MESSAGE_USAGE_SUCCESS, commandResult.getFeedbackToUser()), expectedModel);
 
     }
+
+
 }
