@@ -75,6 +75,10 @@ public class Appointment {
         return appointmentTime;
     }
 
+    public boolean isLaterThanCurrentTime() {
+        return appointmentTime.isAfter(LocalDateTime.now());
+    }
+
     @Override
     public String toString() {
         return value;

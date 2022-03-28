@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.seller.Seller;
 
 /**
@@ -38,6 +39,16 @@ public class SellerCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label appointment;
+    @FXML
+    private Label propertyType;
+    @FXML
+    private Label propertyLocation;
+    @FXML
+    private Label propertyLowerPrice;
+    @FXML
+    private Label propertyUpperPrice;
+    @FXML
+    private Label propertyAddress;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,6 +63,25 @@ public class SellerCard extends UiPart<Region> {
         seller.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (!(seller.getPropertyToSell() instanceof NullPropertyToSell)) {
+            String houseType = seller.getPropertyToSell().getHouse().getHouseTypeToString();
+            String houseLocation = seller.getPropertyToSell().getHouse().getLocationToString();
+            String houseLowerPrice = seller.getPropertyToSell().getPriceRange().getLowerToString();
+            String houseUpperPrice = seller.getPropertyToSell().getPriceRange().getUpperToString();
+
+
+            if (houseType.equals("")) {
+                propertyType.setText("No Property");
+                propertyLocation.setText("No Location");
+                propertyLowerPrice.setText("NaN");
+                propertyUpperPrice.setText("NaN");
+            } else {
+                propertyType.setText(houseType);
+                propertyLocation.setText(houseLocation);
+                propertyLowerPrice.setText(houseLowerPrice);
+                propertyUpperPrice.setText(houseUpperPrice);
+            }
+        }
     }
 
     @Override
@@ -62,7 +92,7 @@ public class SellerCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClientCard)) {
+        if (!(other instanceof BuyerCard)) {
             return false;
         }
 

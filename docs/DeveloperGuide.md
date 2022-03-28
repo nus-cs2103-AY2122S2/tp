@@ -167,11 +167,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
 ### Match feature
 
 #### Implementation
 
-We are currently implementing to implement a Match feature. In implements the following operation:
+We are currently implementing a Match feature. In implements the following operation:
 
 * `match` —  Matches a Buyer to a List of Seller.
 
@@ -281,6 +282,7 @@ Finally, the `CommandResult`is returned to be displayed by `UI` component (Refer
 The following Sequence Diagrams summarizes the various steps involved:
 
 ![AddBuyerSequenceDiagram](images/AddBuyerSequenceDiagram.png)
+
 
 
 ### 2. `editbuyer` / `For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
