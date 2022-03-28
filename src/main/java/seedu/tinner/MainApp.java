@@ -21,7 +21,9 @@ import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.UserPrefs;
+//import seedu.tinner.model.reminder.Reminder;
 import seedu.tinner.model.reminder.UniqueReminderList;
+import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.util.SampleDataUtil;
 import seedu.tinner.storage.CompanyListStorage;
 import seedu.tinner.storage.JsonCompanyListStorage;
@@ -63,11 +65,11 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        // ui.show(model.reminderlist);
 
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+        // ui.show(model.reminderlist);
     }
 
     /**
@@ -78,9 +80,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyCompanyList> companyListOptional;
         ReadOnlyCompanyList initialData;
-        UniqueReminderList reminderList;
+        UniqueReminderList reminderList = UniqueReminderList.getReminderList();
         try {
-            reminderList = UniqueReminderList.getReminderList();
             companyListOptional = storage.readCompanyList();
             if (!companyListOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CompanyList");
@@ -88,14 +89,15 @@ public class MainApp extends Application {
             initialData = companyListOptional.orElseGet(SampleDataUtil::getSampleCompanyList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CompanyList");
-            reminderList = UniqueReminderList.getReminderList();
             initialData = new CompanyList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty CompanyList");
-            reminderList = UniqueReminderList.getReminderList();
             initialData = new CompanyList();
         }
-
+        // testing
+        // for (Reminder r : UniqueReminderList.getReminderList().internalList) {
+        //     System.out.println(r.toString());
+        // }
         return new ModelManager(initialData, userPrefs, reminderList);
     }
 
@@ -168,6 +170,8 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
+        // Set the reminder window of deadline class to what is defined in userPrefs.
+        Deadline.setReminderWindow(initializedPrefs.getReminderWindow());
         return initializedPrefs;
     }
 

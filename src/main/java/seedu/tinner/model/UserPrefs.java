@@ -13,8 +13,11 @@ import seedu.tinner.commons.core.GuiSettings;
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final int DEFAULT_REMINDER_WINDOW = 7; //days
+
     private GuiSettings guiSettings = new GuiSettings();
     private Path companyListFilePath = Paths.get("data" , "companyList.json");
+    private int reminderWindow = DEFAULT_REMINDER_WINDOW;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +39,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setCompanyListFilePath(newUserPrefs.getCompanyListFilePath());
+        setReminderWindow(newUserPrefs.getReminderWindow());
     }
 
     public GuiSettings getGuiSettings() {
@@ -54,6 +58,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setCompanyListFilePath(Path companyListFilePath) {
         requireNonNull(companyListFilePath);
         this.companyListFilePath = companyListFilePath;
+    }
+
+    public int getReminderWindow() {
+        return reminderWindow;
+    }
+
+    public void setReminderWindow(int newWindow) {
+        this.reminderWindow = newWindow;
     }
 
     @Override
