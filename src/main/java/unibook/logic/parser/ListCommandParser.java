@@ -125,8 +125,10 @@ public class ListCommandParser implements Parser<ListCommand> {
                     // Name only
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
                     return new ListCommand(name, ListCommand.ListCommandType.MODULEWITHNAMEMATCH);
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+                    String moduleCode = argMultimap.getValue(CliSyntax.PREFIX_MODULE).get().toUpperCase();
+                    return new ListCommand(moduleCode, ListCommand.ListCommandType.MODULE);
                 } else {
-
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                             ListCommand.MESSAGE_USAGE));
                 }
@@ -175,10 +177,8 @@ public class ListCommandParser implements Parser<ListCommand> {
                             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                                     Messages.MESSAGE_WRONG_TYPE));
                     }
-                    return new ListCommand(moduleCode, type, ListCommand.ListCommandType.MODULEANDTYPE);
                 } else {
                     //list module only e.g. list o/module m/cs2103
-                    return new ListCommand(moduleCode, ListCommand.ListCommandType.MODULE);
                 }
             case "group":
                 //People page listing group in a specific module
