@@ -37,9 +37,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION)) {
                 //Commands that have no option field
-
                 //Very specific command chain with 2-3 arguments
-
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT,
                         CliSyntax.PREFIX_NAME)) {
                     //On module page, checking for modules that contain a specific name with specific date, key event
@@ -50,7 +48,6 @@ public class ListCommandParser implements Parser<ListCommand> {
                     return new ListCommand(name, dateString, keyEvent.toUpperCase(),
                             ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENTANDNAME);
                 }
-
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT)) {
                     //On module page, checking for modules with specific date and key event
                     //e.g. list dt/2022-05-04 ke/exam
@@ -59,7 +56,6 @@ public class ListCommandParser implements Parser<ListCommand> {
                     return new ListCommand(dateString, keyEvent.toUpperCase(),
                             ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENT);
                 }
-
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATETIME)) {
                     //On module page, checking for modules with specific name match and date time
                     String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
@@ -67,7 +63,6 @@ public class ListCommandParser implements Parser<ListCommand> {
                     return new ListCommand(dateString, name,
                             ListCommand.ListCommandType.MODULESWITHDATEANDNAME);
                 }
-
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT)) {
                     //On module page, checking for modules with specific name match and key event
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
@@ -76,9 +71,6 @@ public class ListCommandParser implements Parser<ListCommand> {
                             ListCommand.ListCommandType.MODULESWITHNAMEANDKEYEVENT);
 
                 }
-
-
-
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
                     //Listing types of people on people page
                     //e.g. list type/professors
@@ -101,18 +93,8 @@ public class ListCommandParser implements Parser<ListCommand> {
                     String dateString = argMultimap.getValue(CliSyntax.PREFIX_MEETINGTIME).get();
                     return new ListCommand(dateString, ListCommand.ListCommandType.GROUPWITHMEETINGDATE);
                 } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME)) {
-                    //dt field present
-                    if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYEVENT)) {
-                        //dt + key event
-
-                    } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
-                        //dt + name
-
-                    } else {
-                        //dt only
-                        String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
-                        return new ListCommand(dateString, ListCommand.ListCommandType.MODULESWITHEVENTDATE);
-                    }
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
+                    return new ListCommand(dateString, ListCommand.ListCommandType.MODULESWITHEVENTDATE);
                 } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYEVENT)) {
                     //Listing modules that contain the given key event
                     //e.g. list ke/exam, list ke/quiz
@@ -121,21 +103,20 @@ public class ListCommandParser implements Parser<ListCommand> {
                 } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
                     //Listing modules that contain the given name on module page
                     // e.g. list n/software, list n/operating systems
-
                     // Name only
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
                     return new ListCommand(name, ListCommand.ListCommandType.MODULEWITHNAMEMATCH);
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+                    //listing module code in module view
+                    String moduleCode = argMultimap.getValue(CliSyntax.PREFIX_MODULE).get().toUpperCase();
+                    return new ListCommand(moduleCode, ListCommand.ListCommandType.MODULE);
                 } else {
-
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                             ListCommand.MESSAGE_USAGE));
                 }
-
-
             }
             String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get();
-
-
+            //Commands which have o/<OPTION> parameter.
             switch (option) {
             case "view":
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_VIEW)) {
@@ -177,12 +158,11 @@ public class ListCommandParser implements Parser<ListCommand> {
                     }
                     return new ListCommand(moduleCode, type, ListCommand.ListCommandType.MODULEANDTYPE);
                 } else {
-                    //list module only e.g. list o/module m/cs2103
+                    //list module with no specific type e.g. list o/module m/cs2103 (in people page)
                     return new ListCommand(moduleCode, ListCommand.ListCommandType.MODULE);
                 }
             case "group":
-                //People page listing group in a specific module
-                //e.g. list o/group m/cs2103 g/w16-1
+
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
                     throw new ParseException(
                             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
@@ -191,10 +171,11 @@ public class ListCommandParser implements Parser<ListCommand> {
                 String group = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get().toLowerCase();
 
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
-                    //From module view.
+                    //Module page listing group
                     return new ListCommand(group, ListCommand.ListCommandType.GROUPFROMMODULEVIEW);
                 }
-
+                //People page listing group in a specific module
+                //e.g. list o/group m/cs2103 g/w16-1
                 String module = argMultimap.getValue(CliSyntax.PREFIX_MODULE).get().toUpperCase();
                 return new ListCommand(group, module, ListCommand.ListCommandType.PEOPLEINGROUP);
 
