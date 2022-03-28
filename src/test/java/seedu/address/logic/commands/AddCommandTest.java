@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.function.Predicate;
 
@@ -234,6 +235,18 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            // This stub is allowed to call this method, but it does not need to do anything,
+            // since it is an ArrayList instead of an FilteredList.
+        }
+
+        @Override
+        public void sortFilteredPersonList() {
+            Comparator<Person> nameSorter = Comparator.comparing(o -> o.getName().fullName);
+            personsAdded.sort(nameSorter);
         }
     }
 
