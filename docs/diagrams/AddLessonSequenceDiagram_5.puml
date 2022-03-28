@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+mainframe **sd** check if any conflicting lessons exist
+
+box Logic LOGIC_COLOR_T1
+participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":LessonBook" as LessonBook MODEL_COLOR
+participant ":ConsistentLessonList" as ConsistentLessonList MODEL_COLOR
+participant ":ConflictsWithLessonsException" as ConflictsWithLessonsException MODEL_COLOR
+end box
+
+AddLessonCommand -> Model : addLesson(lessonToBeAdded)
+
+Model -> LessonBook : addLesson(lessonToBeAdded)
+LessonBook -> ConsistentLessonList : add(lessonToBeAdded)
+ConsistentLessonList -> ConsistentLessonList : hasConflictingLesson(lessonToBeAdded)
+
+loop until all existing lessons have been checked
+ConsistentLessonList -> ConsistentLessonList : findLessonConflictingWith(lessonToBeAdded)
+end loop
+
+opt conflicting lesson found
+    ConsistentLessonList -> ConsistentLessonList : findAllLessonsConflictingWith(lessonToBeAdded)
+
+    create ConflictsWithLessonsException
+    ConsistentLessonList ->ConflictsWithLessonsException : ConflictsWithLessonsException(lessonToBeAdded, listOfConflictingLessons)
+    activate ConflictsWithLessonsException
+    ConsistentLessonList <-- ConflictsWithLessonsException : exception
+    deactivate ConflictsWithLessonsException
+
+    LessonBook <-- ConsistentLessonList : exception
+    Model <-- LessonBook : exception
+    AddLessonCommand <-- Model : exception
+end opt
+
+@enduml

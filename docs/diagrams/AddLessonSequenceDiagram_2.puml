@@ -3,7 +3,7 @@ mainframe **sd**  parse add lesson command
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
+
 participant ":TeachWhatParser" as TeachWhatParser LOGIC_COLOR
 participant ":AddLessonCommandParser" as AddLessonCommandParser LOGIC_COLOR
 participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
@@ -11,9 +11,6 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant ":Lesson" as Lesson LOGIC_COLOR
 end box
 
-activate LogicManager
-
-LogicManager -> TeachWhatParser : parseCommand(**userInput**)
 activate TeachWhatParser
 
 create AddLessonCommandParser
@@ -33,28 +30,21 @@ activate AddLessonCommandParser
 
 alt is recurring lesson
     AddLessonCommandParser -> Lesson : makeRecurringLesson(**name**, **subject**, **address**, **dateTimeSlot)**
-
-    note right of Lesson
-    **name** = "Sec 2 Biology Lesson"
-    **subject** = "Biology"
-    **address** = "Blk 11 Ang Mo Kio Street 74, #11-04"
-    **dateTimeSlot** = "17-04-2022 18:00 1 hour 0 minutes"
-    end note
 else else
     AddLessonCommandParser -> Lesson : makeTemporaryLesson(**name**, **subject**, **address**, **dateTimeSlot**)
-
-    note right of Lesson
-    **name** = "Sec 2 Biology Lesson"
-    **subject** = "Biology"
-    **address** = "Blk 11 Ang Mo Kio Street 74, #11-04"
-    **dateTimeSlot** = "17-04-2022 18:00 1 hour 0 minutes"
-    end note
 end
+
+note left of Lesson
+**name** = "Sec 2 Biology Lesson"
+**subject** = "Biology"
+**address** = "Blk 11 Ang Mo Kio Street 74, #11-04"
+**dateTimeSlot** = "17-04-2022 18:00 1 hour 0 minutes"
+end note
 
 AddLessonCommandParser <-- Lesson : lessonToBeAdded
 
 create AddLessonCommand
-AddLessonCommandParser -> AddLessonCommand : lessonToBeAdded
+AddLessonCommandParser -> AddLessonCommand : AddLessonCommand(lessonToBeAdded)
 activate AddLessonCommand
 
 AddLessonCommand --> AddLessonCommandParser : addLessonCommand
@@ -63,7 +53,6 @@ deactivate AddLessonCommand
 AddLessonCommandParser --> TeachWhatParser : addLessonCommand
 deactivate AddLessonCommandParser
 
-TeachWhatParser --> LogicManager : addLessonCommand
 deactivate TeachWhatParser
 
 @enduml
