@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AVAILABILITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
@@ -25,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalCandidates.BOB;
@@ -118,17 +118,17 @@ public class AddCommandParserTest {
                 + COURSE_DESC_BOB + SENIORITY_DESC_BOB + AVAILABILITY_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
 
         // invalid course
-        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + INVALID_COURSE_DESC + SENIORITY_DESC_BOB
                 + AVAILABILITY_DESC_BOB, Course.MESSAGE_CONSTRAINTS);
 
         // invalid seniority
-        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + COURSE_DESC_BOB + INVALID_SENIORITY_DESC
                 + AVAILABILITY_DESC_BOB, Seniority.MESSAGE_CONSTRAINTS);
 
         // invalid availability
-        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + COURSE_DESC_BOB + SENIORITY_DESC_BOB + INVALID_AVAILABILITY_DESC,
                 Availability.MESSAGE_CONSTRAINTS);
 
