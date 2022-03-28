@@ -16,6 +16,7 @@ public class PetPickUpTimeComparator implements Comparator<Pet> {
 
     /**
      * Compares pet objects based on their pick up time attribute.
+     *
      * @param first Pet to be compared with.
      * @param second Pet to be compared with.
      * @return Value signifying in the difference between the comparing attribute.
@@ -42,6 +43,7 @@ public class PetPickUpTimeComparator implements Comparator<Pet> {
     /**
      * Compares presentAttendanceEntries of pets based on their drop off time.
      * Used in compare method.
+     *
      * @param firstPet's AttendanceEntry.
      * @param secondPet's AttendanceEntry.
      * @return Value signifying in the difference between the comparing attribute.
