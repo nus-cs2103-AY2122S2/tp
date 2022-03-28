@@ -19,9 +19,11 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -86,6 +88,21 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_summarise() throws Exception {
+        assertTrue(parser.parseCommand(SummariseCommand.COMMAND_WORD) instanceof SummariseCommand);
+        assertTrue(parser.parseCommand(SummariseCommand.COMMAND_WORD + " 3") instanceof SummariseCommand);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        FilterCommand.FilterDescriptor filterDescriptorTest = new FilterCommand.FilterDescriptor();
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FilterCommand command2 = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterCommand(filterDescriptorTest), command2);
     }
 
     @Test
