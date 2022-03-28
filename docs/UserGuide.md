@@ -60,8 +60,11 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
   * e.g. if the command specifies `-n <LESSON_NAME> -d <DATE/START_DATE> -t <START_TIME>`, <br>
   `-d <DATE / START_DATE> -t <START_TIME> -n <lesson_NAME>` is also acceptable.
 
-* **Where `<STUDENT_ID>` and `<LESSON_ID>` are mentioned, they are with referring to the index of the student 
+* **Where `<STUDENT_ID>` and `<LESSON_ID>` are mentioned, they are with referring to the index number of the student 
 or lesson in the viewable lists.**
+  * eg. If a `find` command is used, and the viewable list changes to a filtered one, `<STUDENT_ID>` and `<LESSON_ID>`
+  would refer to the index in the new viewable list.
+  
 * **Duplicate prefixes are not allowed unless explicitly stated.**
   * e.g. `assign -s 1 -l 1 -l 2` is not allowed as there are two `-l` prefixes present in the command.
 
