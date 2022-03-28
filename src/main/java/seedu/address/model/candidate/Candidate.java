@@ -233,4 +233,8 @@ public class Candidate {
         );
     }
 
+    public boolean isCompleted() {
+        return interviewStatus.equals(new InterviewStatus(COMPLETED));
+    }
+
 }
