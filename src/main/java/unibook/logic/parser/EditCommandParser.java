@@ -188,7 +188,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-                eventType = Optional.of(ParserUtil.parseKeyEventType(argMultimap.getValue(PREFIX_TYPE).get()));
+                eventType = Optional.of(ParserUtil.parseKeyEventTypeString(argMultimap.getValue(PREFIX_TYPE).get()));
             }
             if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
                 dt = Optional.of(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));

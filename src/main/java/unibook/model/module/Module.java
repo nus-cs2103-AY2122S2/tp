@@ -3,6 +3,8 @@ package unibook.model.module;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import javafx.collections.FXCollections;
@@ -68,6 +70,23 @@ public class Module {
         this.students = FXCollections.observableArrayList();
         this.professors = FXCollections.observableArrayList();
         this.keyEvents = FXCollections.observableArrayList();
+    }
+
+    /**
+     * Constructor for a Module, using a pre-existing list of key dates.
+     *
+     * @param moduleName
+     * @param moduleCode
+     * @param keyEvents
+     */
+    public Module(ObservableList<ModuleKeyEvent> keyEvents, ModuleName moduleName, ModuleCode moduleCode) {
+        requireAllNonNull(moduleName, moduleCode, keyEvents);
+        this.moduleName = moduleName;
+        this.moduleCode = moduleCode;
+        this.groups = FXCollections.observableArrayList();
+        this.students = FXCollections.observableArrayList();
+        this.professors = FXCollections.observableArrayList();
+        this.keyEvents = keyEvents;
     }
 
     /**
@@ -236,7 +255,7 @@ public class Module {
     /**
      * Adds key event to the correct module.
      *
-     * @param k
+     * @param k ModuleKeyEvent
      */
     public void addKeyEvent(ModuleKeyEvent k) {
         requireNonNull(k);
@@ -244,6 +263,21 @@ public class Module {
             throw new DuplicateKeyEventException();
         }
         keyEvents.add(k);
+    }
+
+    /**
+     * Adds a list of key events to the correct module.
+     *
+     * @param keyEventsList ArrayList of ModuleKeyEvent
+     */
+    public void addKeyEventList(ArrayList<ModuleKeyEvent> keyEventsList) {
+        requireNonNull(keyEventsList);
+        for (ModuleKeyEvent moduleKeyEvent : keyEventsList) {
+            if (keyEvents.contains(moduleKeyEvent)) {
+                throw new DuplicateKeyEventException();
+            }
+            keyEvents.add(moduleKeyEvent);
+        }
     }
 
     /**
@@ -280,6 +314,23 @@ public class Module {
     public boolean hasGroupName(String groupName) {
         for (Group group : groups) {
             if (group.getGroupName().equals(groupName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns rue if this module contains the key event with the given event name and datetime.
+     *
+     * @param keyEvent key event name to check
+     * @param dateTime datetime of key event to check
+     * @return boolean variable indicating if the key event exists in this module
+     */
+    public boolean hasEvent(ModuleKeyEvent.KeyEventType keyEvent, LocalDateTime dateTime) {
+        for (ModuleKeyEvent moduleKeyEvent : keyEvents) {
+            if (moduleKeyEvent.getKeyEventType().equals(keyEvent)
+                    && moduleKeyEvent.getKeyEventTiming().equals(dateTime)) {
                 return true;
             }
         }
@@ -361,5 +412,4 @@ public class Module {
             .append(getKeyEvents());
         return builder.toString();
     }
-
 }

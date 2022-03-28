@@ -18,6 +18,7 @@ import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleKeyEvent.KeyEventType;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
@@ -262,6 +263,7 @@ public class ParserUtil {
     }
 
     /**
+<<<<<<< HEAD
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -296,12 +298,80 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code LocalDateTime} is invalid.
+=======
+     * Parses {@code Collection<String> keyEventAndDate} and
+     * {@code Module module}into a {@code ArrayList<ModuleKeyEvent>}.
+     */
+    public static ArrayList<ModuleKeyEvent> parseModuleKeyEvent(Collection<String> keyEventAndDate, Module module)
+            throws ParseException {
+        requireNonNull(keyEventAndDate);
+        final ArrayList<ModuleKeyEvent> moduleKeyEventList = new ArrayList<>();
+        if (keyEventAndDate.toArray().length == 0) {
+            return moduleKeyEventList;
+        }
+        for (String eventAndDate : keyEventAndDate) {
+            try {
+                String[] strArr = eventAndDate.split(" dt/");
+                LocalDateTime dateTime = parseDateTime(strArr[1]);
+                ModuleKeyEvent.KeyEventType keyEventType = parseKeyEventType(strArr[0]);
+                ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEventType, dateTime, module);
+                moduleKeyEventList.add(moduleKeyEvent);
+            } catch (Exception e) {
+                throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_MISSINGDT);
+            }
+        }
+        return moduleKeyEventList;
+    }
+
+    /**
+     * Parses {@code String dateTime} into a {@code LocalDateTime}.
+>>>>>>> 3db5735417bee971d004f696f745a9fd4190e72b
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(trimmedDateTime, formatter);
+        try {
+            return LocalDateTime.parse(trimmedDateTime, formatter);
+        } catch (Exception e) {
+            throw new ParseException("DateTime format accepts the following:\n"
+                + "yyyy-MM-dd HH:mm");
+        }
+    }
+
+    /**
+     * Parses {@code String keyEventType} into a {@code KeyEventType}.
+     */
+    public static ModuleKeyEvent.KeyEventType parseKeyEventType(String keyEventType) throws ParseException {
+        requireNonNull(keyEventType);
+        String keyEventTypeTrimmed = keyEventType.trim();
+        switch (keyEventTypeTrimmed) {
+        case "1":
+            return ModuleKeyEvent.KeyEventType.EXAM;
+        case "2":
+            return ModuleKeyEvent.KeyEventType.QUIZ;
+        case "3":
+            return ModuleKeyEvent.KeyEventType.ASSIGNMENT_RELEASE;
+        case "4":
+            return ModuleKeyEvent.KeyEventType.ASSIGNMENT_DUE;
+        default:
+            throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_TYPE);
+        }
+    }
+
+    /**
+     * Parses {@code List<String> allDateTimes} into an {@code ArrayList<LocalDateTime>}.
+     */
+    public static ArrayList<LocalDateTime> parseAllDateTimes(List<String> allDateTimes) throws ParseException {
+        ArrayList<LocalDateTime> dateTimeList = new ArrayList<>();
+        for (String dateTimeStr : allDateTimes) {
+            LocalDateTime dateTime = parseDateTime(dateTimeStr);
+            if (dateTimeList.contains(dateTime)) {
+                throw new ParseException("You cannot add duplicate meeting times to the group!");
+            }
+            dateTimeList.add(dateTime);
+        }
+        return dateTimeList;
     }
 
     /**
@@ -310,7 +380,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code LocalDateTime} is invalid.
      */
-    public static KeyEventType parseKeyEventType(String type) throws ParseException {
+    public static KeyEventType parseKeyEventTypeString(String type) throws ParseException {
         requireNonNull(type);
         String trimmedType = type.trim();
         return KeyEventType.valueOf(trimmedType.toUpperCase());
