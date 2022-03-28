@@ -17,22 +17,22 @@ public class Consultation {
     // Data fields
     private Date date;
     private Time time;
-    private Notes notes;
-    private Prescription prescription;
-    private TestsTakenAndResults testsTakenAndResults;
+    private ConsultationDiagnosis diagnosis;
+    private ConsultationFee fee;
+    private ConsultationNotes notes;
 
     /**
      * Every field except notes, prescription, and testsTakenAndResults must be present and not null.
      */
-    public Consultation(Nric nric, Date date, Time time, Notes notes,
-                            Prescription prescription, TestsTakenAndResults testsTakenAndResults) {
+    public Consultation(Nric nric, Date date, Time time, ConsultationDiagnosis diagnosis,
+                        ConsultationFee fee, ConsultationNotes notes) {
         requireAllNonNull(nric, date, time);
         this.nric = nric;
         this.date = date;
         this.time = time;
+        this.diagnosis = diagnosis;
+        this.fee = fee;
         this.notes = notes;
-        this.prescription = prescription;
-        this.testsTakenAndResults = testsTakenAndResults;
     }
 
     public Nric getNric() {
@@ -47,16 +47,16 @@ public class Consultation {
         return time;
     }
 
-    public Notes getNotes() {
+    public ConsultationDiagnosis getDiagnosis() {
+        return diagnosis;
+    }
+
+    public ConsultationFee getFee() {
+        return fee;
+    }
+
+    public ConsultationNotes getNotes() {
         return notes;
-    }
-
-    public Prescription getPrescription() {
-        return prescription;
-    }
-
-    public TestsTakenAndResults getTestAndResults() {
-        return testsTakenAndResults;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Consultation {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(nric, date, time, notes, prescription, testsTakenAndResults);
+        return Objects.hash(nric, date, time, diagnosis, fee, notes);
     }
 
     @Override
@@ -92,12 +92,12 @@ public class Consultation {
                 .append(getDate())
                 .append("Time: ")
                 .append(getTime())
-                .append("Notes: ")
+                .append("Diagnosis: ")
+                .append(getDiagnosis())
+                .append("; Fee: ")
+                .append(getFee())
+                .append("; Notes: ")
                 .append(getNotes());
-        //.append("; Prescription: ")
-        //.append(getPrescription())
-        //.append("; Tests and Results: ")
-        //.append(getTestAndResults());
 
         return builder.toString();
     }

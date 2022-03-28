@@ -9,10 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.consultation.ConsultationDiagnosis;
+import seedu.address.model.consultation.ConsultationFee;
+import seedu.address.model.consultation.ConsultationNotes;
 import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Notes;
-import seedu.address.model.consultation.Prescription;
-import seedu.address.model.consultation.TestsTakenAndResults;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
@@ -372,33 +372,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String notes} into an {@code notes}.
+     * Parses a {@code String diagnosis} into an {@code consultationDiagnosis}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code notes} is invalid.
+     * @throws ParseException if the given {@code consultationDiagnosis} is invalid.
      */
-    public static Notes parseNotes(String notes) throws ParseException {
-        return new Notes(notes);
+    public static ConsultationDiagnosis parseDiagnosis(String diagnosis) throws ParseException {
+        return new ConsultationDiagnosis(diagnosis);
     }
 
     /**
-     * Parses a {@code String prescription} into an {@code prescription}.
+     * Parses a {@code String fee} into an {@code consultationFee}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code prescription} is invalid.
+     * @throws ParseException if the given {@code consultationFee} is invalid.
      */
-    public static Prescription parsePrescription(String prescription) {
-        return new Prescription(prescription);
+    public static ConsultationFee parseFee(String fee) {
+        return new ConsultationFee(fee);
     }
 
     /**
-     * Parses a {@code String testsTakenAndResults} into an {@code testsTakenAndResults}.
+     * Parses a {@code String notes} into an {@code consultationNotes}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code testsTakenAndResults} is invalid.
+     * @throws ParseException if the given {@code consultationNotes} is invalid.
      */
-    public static TestsTakenAndResults parseTestsTakenAndResults(String testsTakenAndResults) {
-        return new TestsTakenAndResults(testsTakenAndResults);
+    public static ConsultationNotes parseNotes(String notes) {
+        return new ConsultationNotes(notes);
     }
 
     /**

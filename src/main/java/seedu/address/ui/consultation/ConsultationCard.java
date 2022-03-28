@@ -28,11 +28,11 @@ public class ConsultationCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label diagnosis;
+    @FXML
+    private Label fee;
+    @FXML
     private Label notes;
-    //    @FXML
-    //    private Label prescription;
-    //    @FXML
-    //    private Label testsTakenAndResults;
 
     /**
      * Creates a {@code ConsultationCard} with the given {@code Consultation} and index to display.
@@ -42,17 +42,13 @@ public class ConsultationCard extends UiPart<Region> {
         this.consultation = consultation;
         id.setText(displayedIndex + ". ");
         date.setText(consultation.getDate().toString() + ", " + consultation.getTime().toString());
-        notes.setText(consultation.getNotes().toString());
-        //        if (consultation.getPrescription().toString().equals("")) {
-        //            prescription.setText("N/A");
-        //        } else {
-        //            prescription.setText(consultation.getPrescription().toString());
-        //        }
-        //        if (consultation.getTestAndResults().toString().equals("")) {
-        //            testsTakenAndResults.setText("N/A");
-        //        } else {
-        //            testsTakenAndResults.setText(consultation.getTestAndResults().toString());
-        //        }
+        fee.setText(consultation.getFee().toString());
+        diagnosis.setText(consultation.getDiagnosis().toString());
+        if (consultation.getNotes().toString().equals("")) {
+            notes.setText("N/A");
+        } else {
+            notes.setText(consultation.getNotes().toString());
+        }
     }
     @Override
     public boolean equals(Object other) {
