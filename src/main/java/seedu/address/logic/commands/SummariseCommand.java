@@ -165,7 +165,7 @@ public class SummariseCommand extends Command {
      * @param list the unfiltered entire list in the database
      * @return The summarised overview for all students
      */
-    public String summariseAll(List<Person> list) {
+    private String summariseAll(List<Person> list) {
         StringBuilder ans = new StringBuilder();
         int numberOfStudents = list.size();
 
