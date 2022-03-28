@@ -27,12 +27,21 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ":\n"
-        + "Possible options:\n"
-        + "delete [index] (Delete person or module at that index)"
-        + "delete m/modulecode (Delete module that matches the code)"
-        + "delete m/modulecode o/cascade (Delete module and anyone that is only associated with this module"
-        + "delete m/modulecode g/groupname (Delete the group that is associated with this module code";
+        + ":\n\n"
+        + "All Pages: \n"
+        + "delete [index] (Delete person or module or group at that index)\n"
+        + "delete o/module m/[modulecode] (Delete module that matches the code)\n"
+        + "delete o/group m/[modulecode] g/[groupname] (Delete the group that is associated with this module code)\n\n"
+        + "Person Page: \n"
+        + "delete [index] p/ e/ t/[tag] of/ (Delete attributes from person on person page only)\n\n"
+        + "Module Page: \n"
+        + "delete [index1] prof/[index2] (Delete professor at index2 from module at index1)\n"
+        + "delete [index1] stu/[index2] (Delete student at index2 from module at index1)\n"
+        + "delete [index] g/[groupname] (Delete group from module at index)\n"
+        + "delete [index1] ke/[index2] (Delete key event at index2 from module at index1)\n\n"
+        + "Group page: \n"
+        + "delete [index1] stu/[index2] (Delete student at index2 from group at index1)\n"
+        + "delete [index1] mt/[index2] (Delete meeting time at index2 from group at index1)\n";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";

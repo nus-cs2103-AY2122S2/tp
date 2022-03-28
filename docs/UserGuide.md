@@ -229,7 +229,7 @@ On Group page:
 
 For the following commands, if more than 1 of the following tags are provided, the priority will be in this order. For example, if `mt/1` and `stu/1` is both provided, `delete 1 stu/1` will be prioritised because `stu/` is higher than `mt/` on this list.
 
-* `delete [INDEX] stu/[INDEX]`
+`delete [INDEX] stu/[INDEX]`
 * Delete student from group
 * The first index represents the index for which group to remove the student from
 * The second index (after stu/) represents the index for which student to delete
