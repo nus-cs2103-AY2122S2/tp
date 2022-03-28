@@ -24,7 +24,7 @@ activate FilterCommandParser
 FilterCommandParser --> AddressBookParser
 deactivate FilterCommandParser
 
-AddressBookParser -> FilterCommandParser : parse("family)
+AddressBookParser -> FilterCommandParser : parse("family")
 activate FilterCommandParser
 
 create Tag
