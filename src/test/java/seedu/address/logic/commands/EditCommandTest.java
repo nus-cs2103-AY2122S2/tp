@@ -167,4 +167,9 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
     }
 
+    @Test
+    public void test_editCommandWordIsCorrect() {
+        assertTrue(EditCommand.COMMAND_WORD.equals("edit"));
+    }
+
 }

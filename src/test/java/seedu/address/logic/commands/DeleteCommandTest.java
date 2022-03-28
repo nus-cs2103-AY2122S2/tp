@@ -106,4 +106,9 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
+
+    @Test
+    public void test_deleteCommandWordIsCorrect() {
+        assertTrue(DeleteCommand.COMMAND_WORD.equals("delete"));
+    }
 }

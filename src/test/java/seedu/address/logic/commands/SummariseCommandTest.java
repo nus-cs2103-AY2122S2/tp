@@ -71,4 +71,9 @@ public class SummariseCommandTest {
         String actual = new SummariseCommand().filterByBlock(validList);
         assertTrue(actual.length() > 0);
     }
+
+    @Test
+    public void test_summariseCommandWordIsCorrect() {
+        assertTrue(SummariseCommand.COMMAND_WORD.equals("summarise"));
+    }
 }
