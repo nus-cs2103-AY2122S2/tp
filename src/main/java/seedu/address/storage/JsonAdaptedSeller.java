@@ -56,7 +56,7 @@ public class JsonAdaptedSeller {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         appointment = source.getAppointment().value;
-        if (source.getPropertyToSell() instanceof  NullPropertyToSell) {
+        if (source.getPropertyToSell() instanceof NullPropertyToSell) {
             propertyToSell = null;
         } else {
             propertyToSell = new JsonAdaptedPropertyToSell(source.getPropertyToSell());
