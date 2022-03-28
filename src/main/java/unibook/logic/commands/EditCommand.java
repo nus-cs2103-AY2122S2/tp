@@ -46,7 +46,6 @@ import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.person.exceptions.DuplicatePersonException;
 import unibook.model.tag.Tag;
-import unibook.ui.cards.StudentCard;
 
 /**
  * Edits the details of an existing person in the UniBook.
@@ -65,6 +64,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_OPTION_NOT_FOUND = "O/OPTION must either be person, module, group or keyevent. "
             + "\n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
+    public static final String MESSAGE_PERSON_NOT_STUDENT = "Person added to a group must only be a student";
+    public static final String MESSAGE_STUDENT_NOT_IN_MOD = "Student not in module %1$s. Add student to module first.";
     public static final String MESSAGE_EDIT_MISSING = "Must include m/MODULECODE when editing a group";
     public static final String MESSAGE_GROUP_NOT_EXIST = "Group name %1$s does not exist!";
     public static final String MESSAGE_WRONG_DATE_FORMAT = "Date time must be in YYYY-MM-DD HH:mm format";
@@ -337,7 +338,7 @@ public class EditCommand extends Command {
                 }
             }
             ModelManager mm = (ModelManager) model;
-            ((ModelManager) model).getUi().setGroupListPanel(groups);
+            mm.getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
             System.out.println("updated module list");
             // TODO make the command result for editing success more elaborate
@@ -433,28 +434,27 @@ public class EditCommand extends Command {
                 try {
                     modToEdit = model.getModuleByCode(moduleCode);
                 } catch (ModuleNotFoundException e) {
-                    throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode.toString()));
+                    throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST,
+                            moduleCode.toString()));
                 }
                 if (!modToEdit.hasGroupName(groupName)) {
                     // TODO command exception that group doesnt exist
                     throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXIST, groupName));
+                } else if (editedPerson instanceof Professor) {
+                    throw new CommandException(MESSAGE_PERSON_NOT_STUDENT);
+                } else if (!modToEdit.hasStudent((Student) editedPerson)) {
+                    throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_MOD, moduleCode));
                 } else {
-                    // TODO CHECK HOW TO ADD THE PERSON TO THE NAME OF THE GRP
-                    if (editedPerson instanceof Professor) {
-                        // TODO ERROR TO SHOW THAT ONLY STUDENT CAN BE ADDED TO GRP
-                        throw new CommandException(MESSAGE_PERSON_NO_SUBTYPE);
-                    } else {
-                        modToEdit.addToGroupByName(groupName, (Student) editedPerson);
-                        Group group = modToEdit.getGroupByName(groupName);
-                        if (group.hasMember((Student)editedPerson)) {
-                            throw new CommandException(MESSAGE_DUPLICATE_PERSON_IN_GROUP);
-                        }
-                        for (Person p : lastShownList) {
-                            if (p instanceof Student) {
-                                if (((Student) p).getGroups().contains(group)) {
-                                    Group group1 = ((Student) p).getGroupByName(group);
-                                    group1.addMember((Student) editedPerson);
-                                }
+                    modToEdit.addToGroupByName(groupName, (Student) editedPerson);
+                    Group group = modToEdit.getGroupByName(groupName);
+                    if (group.hasMember((Student) editedPerson)) {
+                        throw new CommandException(MESSAGE_DUPLICATE_PERSON_IN_GROUP);
+                    }
+                    for (Person p : lastShownList) {
+                        if (p instanceof Student) {
+                            if (((Student) p).getGroups().contains(group)) {
+                                Group group1 = ((Student) p).getGroupByName(group);
+                                group1.addMember((Student) editedPerson);
                             }
                         }
                     }

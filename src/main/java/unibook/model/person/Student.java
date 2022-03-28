@@ -60,7 +60,7 @@ public class Student extends Person {
 
         Student otherPerson = (Student) other;
 
-        return super.equals(other) && this.groups.equals(((Student) other).groups);
+        return super.equals(other);
     }
 
     /**

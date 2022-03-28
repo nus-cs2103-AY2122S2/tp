@@ -214,6 +214,15 @@ public class Module {
     }
 
     /**
+     * Returns boolean if student exists in module
+     */
+    public boolean hasStudent(Student s) {
+        return students.contains(s);
+    }
+
+
+
+    /**
      * Edits the information of the group in the respective index
      */
     public void addToGroupByName(String name, Student s) throws CommandException {

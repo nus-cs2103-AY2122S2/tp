@@ -298,10 +298,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String tag} into a {@code dateTime}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code LocalDateTime} is invalid.
-=======
-=======
      * Parses a date string with YYYY-MM-DD into LocalDate object
      * @param date
      * @return LocalDate object representing the given string.
