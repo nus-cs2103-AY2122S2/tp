@@ -16,11 +16,11 @@ public class HiredStatus {
     }
 
     public HiredStatus(String positionName) {
-        value = positionName;
+        value = "Hired as " + positionName;
     }
 
     @Override
     public String toString() {
-        return "Hired as" + value;
+        return value;
     }
 }
