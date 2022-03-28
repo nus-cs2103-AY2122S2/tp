@@ -35,7 +35,7 @@ public class RangeCommand extends Command {
             + PREFIX_PHONE + "12345678 "
             + PREFIX_ADDRESS + "New Address "
             + PREFIX_RANGE_FROM + "1 "
-            + PREFIX_RANGE_TO + "3 `\n";
+            + PREFIX_RANGE_TO + "3 `";
 
     private final Logger logger = LogsCenter.getLogger(RangeCommand.class);
 
