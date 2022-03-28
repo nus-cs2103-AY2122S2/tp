@@ -55,7 +55,7 @@ public class AddStudentCommand extends Command {
         requireNonNull(model);
 
         if (model.hasStudent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT, ViewTab.STUDENT);
         }
 
         model.addStudent(toAdd);
