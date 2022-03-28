@@ -15,7 +15,6 @@ import seedu.tinner.commons.core.LogsCenter;
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.model.company.Company;
 import seedu.tinner.model.company.RoleManager;
-import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.Role;
 
 /**
@@ -27,21 +26,7 @@ public class ModelManager implements Model {
     private final CompanyList companyList;
     private final UserPrefs userPrefs;
     private final FilteredList<Company> filteredCompanies;
-    private UniqueReminderList reminderList = null;
 
-    /**
-     * Initializes a ModelManager with the given companyList, userPrefs and reminderList.
-     */
-    public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs, UniqueReminderList reminderList) {
-        requireAllNonNull(companyList, userPrefs, reminderList);
-
-        logger.fine("Initializing with company list: " + companyList + " and user prefs " + userPrefs);
-
-        this.companyList = new CompanyList(companyList);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
-        this.reminderList = reminderList;
-    }
     /**
      * Initializes a ModelManager with the given companyList and userPrefs.
      */
@@ -52,7 +37,7 @@ public class ModelManager implements Model {
 
         this.companyList = new CompanyList(companyList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
+        this.filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
     }
 
     public ModelManager() {
@@ -145,8 +130,8 @@ public class ModelManager implements Model {
         requireAllNonNull(companyPredicate, rolePredicate);
         filteredCompanies.setPredicate(companyPredicate);
         filteredCompanies.forEach(company -> company.getRoleManager().updateFilteredRoleList(rolePredicate));
-        assert(filteredCompanies.stream().allMatch(companyPredicate));
-        assert(filteredCompanies.stream().allMatch(company -> company.getRoleManager().getFilteredRoleList()
+        assert (filteredCompanies.stream().allMatch(companyPredicate));
+        assert (filteredCompanies.stream().allMatch(company -> company.getRoleManager().getFilteredRoleList()
                 .stream().allMatch(rolePredicate)));
     }
 
@@ -171,8 +156,8 @@ public class ModelManager implements Model {
 
     //=========== RoleManager ================================================================================
     @Override
-    public void addRole (Index companyIndex, Role role) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+    public void addRole(Index companyIndex, Role role) {
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireNonNull(role);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -181,8 +166,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasRole (Index companyIndex, Role role) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+    public boolean hasRole(Index companyIndex, Role role) {
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireNonNull(role);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -192,7 +177,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteRole(Index companyIndex, Role roleToDelete) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireNonNull(roleToDelete);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -202,7 +187,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setRole(Index companyIndex, Role target, Role editedRole) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireAllNonNull(target, editedRole);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -212,7 +197,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredRoleList(Index companyIndex, Predicate<Role> predicate) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
         RoleManager roleManager = company.getRoleManager();
@@ -222,7 +207,7 @@ public class ModelManager implements Model {
     //=========== Filtered Company List Accessors =============================================================
     @Override
     public ObservableList<Role> getFilteredRoleList(Index companyIndex) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
         RoleManager roleManager = company.getRoleManager();

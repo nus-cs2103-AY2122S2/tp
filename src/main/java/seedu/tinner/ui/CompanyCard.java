@@ -60,7 +60,7 @@ public class CompanyCard extends UiPart<Region> {
         super(FXML);
         this.company = company;
         id.setText(displayedIndex + ". ");
-        name.setText(company.getName().fullName);
+        name.setText(company.getName().value);
 
         String phoneField = company.getPhone().value;
         String addressField = company.getAddress().value;
@@ -100,7 +100,7 @@ public class CompanyCard extends UiPart<Region> {
      */
     public void setRoleTags(ObservableList<Role> roleList) {
         roleTags.getChildren().clear();
-        roleList.forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
+        roleList.forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().value)));
     }
 
     /**

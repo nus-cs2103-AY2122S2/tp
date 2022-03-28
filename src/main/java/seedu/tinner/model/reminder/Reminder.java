@@ -8,7 +8,7 @@ import seedu.tinner.model.company.CompanyName;
 import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.RoleName;
 
-public class Reminder {
+public class Reminder implements Comparable<Reminder> {
 
     private final CompanyName companyName;
     private final RoleName roleName;
@@ -94,5 +94,10 @@ public class Reminder {
                 .append(getDeadline());
 
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Reminder other) {
+        return this.getDeadline().value.compareTo(other.getDeadline().value);
     }
 }

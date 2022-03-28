@@ -21,7 +21,6 @@ import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.UserPrefs;
-import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.util.SampleDataUtil;
 import seedu.tinner.storage.CompanyListStorage;
 import seedu.tinner.storage.JsonCompanyListStorage;
@@ -63,7 +62,6 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        // ui.show(model.reminderlist);
 
         logic = new LogicManager(model, storage);
 
@@ -78,9 +76,7 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyCompanyList> companyListOptional;
         ReadOnlyCompanyList initialData;
-        UniqueReminderList reminderList;
         try {
-            reminderList = UniqueReminderList.getReminderList();
             companyListOptional = storage.readCompanyList();
             if (!companyListOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CompanyList");
@@ -88,15 +84,13 @@ public class MainApp extends Application {
             initialData = companyListOptional.orElseGet(SampleDataUtil::getSampleCompanyList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CompanyList");
-            reminderList = UniqueReminderList.getReminderList();
             initialData = new CompanyList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty CompanyList");
-            reminderList = UniqueReminderList.getReminderList();
             initialData = new CompanyList();
         }
 
-        return new ModelManager(initialData, userPrefs, reminderList);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
