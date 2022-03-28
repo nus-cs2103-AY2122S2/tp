@@ -123,6 +123,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasConflictingInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.hasConflictingInterview(interview);
+    }
+
+    @Override
     public void deleteInterview(Interview target) {
         addressBook.removeInterview(target);
     }

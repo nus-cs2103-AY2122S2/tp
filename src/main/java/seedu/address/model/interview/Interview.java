@@ -62,6 +62,17 @@ public class Interview {
     }
 
     /**
+     * Checks if the given interview will conflict with the current interview.
+     */
+    public boolean isConflictingInterview(Interview i) {
+        boolean isSameApplicant = i.isInterviewForApplicant(this.applicant);
+
+        // Interview has to be at least 1 hour before or after the current interview time for it not to clash
+        return isSameApplicant && !(i.date.isBefore(this.date.minusMinutes(59))
+                        || i.date.isAfter(this.date.plusMinutes(59)));
+    }
+
+    /**
      * Returns true if both interviews have the same data fields.
      * This defines a stronger notion of equality between two interviews.
      */

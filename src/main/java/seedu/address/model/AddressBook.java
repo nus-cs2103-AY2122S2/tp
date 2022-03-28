@@ -132,6 +132,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an interview has a conflict in timing as {@code interview} exists in the address book.
+     */
+    public boolean hasConflictingInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.containsConflict(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */

@@ -24,6 +24,19 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Returns true if the list contains an interview which has a conflict in timing as the given argument.
+     */
+    public boolean containsConflict(Interview toCheck) {
+        requireNonNull(toCheck);
+        for (Interview i : internalList) {
+            if (i.isConflictingInterview(toCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds an interview to the list.
      * The interview must not already exist in the list.
      */
