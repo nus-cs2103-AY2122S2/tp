@@ -32,7 +32,7 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.applicant.Status;
+import seedu.address.model.applicant.HiredStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -115,11 +115,11 @@ public class EditApplicantCommand extends EditCommand {
         Age updatedAge = editApplicantDescriptor.getAge().orElse(applicantToEdit.getAge());
         Address updatedAddress = editApplicantDescriptor.getAddress().orElse(applicantToEdit.getAddress());
         Gender updatedGender = editApplicantDescriptor.getGender().orElse(applicantToEdit.getGender());
-        Status updatedStatus = editApplicantDescriptor.getStatus().orElse(applicantToEdit.getStatus());
+        HiredStatus updatedHiredStatus = editApplicantDescriptor.getStatus().orElse(applicantToEdit.getStatus());
         Set<Tag> updatedTags = editApplicantDescriptor.getTags().orElse(applicantToEdit.getTags());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAge, updatedAddress,
-                updatedGender, updatedStatus, updatedTags);
+                updatedGender, updatedHiredStatus, updatedTags);
     }
 
     @Override
@@ -151,7 +151,7 @@ public class EditApplicantCommand extends EditCommand {
         private Age age;
         private Address address;
         private Gender gender;
-        private Status status;
+        private HiredStatus hiredStatus;
         private Set<Tag> tags;
 
         public EditApplicantDescriptor() {}
@@ -167,7 +167,7 @@ public class EditApplicantCommand extends EditCommand {
             setAge(toCopy.age);
             setAddress(toCopy.address);
             setGender(toCopy.gender);
-            setStatus(toCopy.status);
+            setStatus(toCopy.hiredStatus);
             setTags(toCopy.tags);
         }
 
@@ -226,12 +226,12 @@ public class EditApplicantCommand extends EditCommand {
             return Optional.ofNullable(gender);
         }
 
-        public void setStatus(Status status) {
-            this.status = status;
+        public void setStatus(HiredStatus hiredStatus) {
+            this.hiredStatus = hiredStatus;
         }
 
-        public Optional<Status> getStatus() {
-            return Optional.ofNullable(status);
+        public Optional<HiredStatus> getStatus() {
+            return Optional.ofNullable(hiredStatus);
         }
 
         /**

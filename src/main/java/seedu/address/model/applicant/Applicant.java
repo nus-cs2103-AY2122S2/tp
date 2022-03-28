@@ -25,7 +25,7 @@ public class Applicant {
     private final Age age;
     private final Address address;
     private final Gender gender;
-    private final Status status;
+    private final HiredStatus hiredStatus;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -40,7 +40,7 @@ public class Applicant {
         this.age = age;
         this.address = address;
         this.gender = gender;
-        this.status = new Status();
+        this.hiredStatus = new HiredStatus();
         this.tags.addAll(tags);
     }
 
@@ -48,7 +48,7 @@ public class Applicant {
      * Overloaded constructor used to edit applicant with changed values
      */
     public Applicant(Name name, Phone phone, Email email, Age age, Address address, Gender gender,
-                     Status status, Set<Tag> tags) {
+                     HiredStatus hiredStatus, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, age, address, gender, tags);
         this.name = name;
         this.phone = phone;
@@ -56,11 +56,11 @@ public class Applicant {
         this.age = age;
         this.address = address;
         this.gender = gender;
-        this.status = status;
+        this.hiredStatus = hiredStatus;
         this.tags.addAll(tags);
     }
     /**
-     * Changes the status of an applicant to the name of the Position provided
+     * Changes the hiredStatus of an applicant to the name of the Position provided
      */
     public Applicant setStatus(Applicant applicant, Position position) {
         return new Applicant(applicant.getName(),
@@ -69,7 +69,7 @@ public class Applicant {
                 applicant.getAge(),
                 applicant.getAddress(),
                 applicant.getGender(),
-                new Status(position.getPositionName().toString()),
+                new HiredStatus(position.getPositionName().toString()),
                 applicant.getTags());
     }
 
@@ -97,8 +97,8 @@ public class Applicant {
         return gender;
     }
 
-    public Status getStatus() {
-        return status;
+    public HiredStatus getStatus() {
+        return hiredStatus;
     }
 
     /**
