@@ -37,5 +37,7 @@ public class CommandException extends Exception {
         this.viewTab = ViewTab.NONE;
     }
 
-    public ViewTab toggleTo() { return viewTab; }
+    public ViewTab toggleTo() {
+        return viewTab;
+    }
 }

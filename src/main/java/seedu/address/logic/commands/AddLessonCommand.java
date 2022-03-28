@@ -52,8 +52,8 @@ public class AddLessonCommand extends Command {
             + PREFIX_DURATION_MINUTES + " 15 ";
 
     public static final String MESSAGE_SUCCESS = "Okay, added this lesson to your schedule!";
-    public static final String MESSAGE_CONFLICTING_LESSONS_TIP = "TIP: you can use \"rmlesson\" to" +
-            " remove these conflicting lessons";
+    public static final String MESSAGE_CONFLICTING_LESSONS_TIP = "TIP: you can use \"rmlesson\" to"
+            + " remove these conflicting lessons";
 
     private final Lesson toAdd;
 
