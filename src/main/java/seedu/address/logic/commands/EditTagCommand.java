@@ -67,13 +67,13 @@ public class EditTagCommand extends Command {
 
         model.setPerson(personToEdit, tagAddedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
     }
 
     private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
-        tagList.set(tagNumber-1, tag); // add exception later
+        tagList.set(tagNumber - 1, tag); // add exception later
 
         newPerson.setTags(tagList);
         return newPerson;
@@ -87,7 +87,7 @@ public class EditTagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditTagCommand // instanceof handles nulls
-                && tagNumber  == ((EditTagCommand) other).tagNumber
+                && tagNumber == ((EditTagCommand) other).tagNumber
                 && toAdd.equals(((EditTagCommand) other).toAdd));
     }
 }
