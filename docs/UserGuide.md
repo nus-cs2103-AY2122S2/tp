@@ -51,7 +51,7 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Notes about the command format:**
+**:information_source: Notes about the command format:**
 
 * **Words in `<UPPER_CASE>` are the parameters to be supplied by the user.** <br>
   * e.g. in `addstudent -n <STUDENT_NAME>`, `<STUDENT_NAME>` is a parameter which 
@@ -152,11 +152,16 @@ Adds a recurring lesson with the following attributes:
 * on date: 27 February 2022
 * starting at: 6pm
 * duration: 1 hour and 50 minutes
+
 >**⚠️ Note:** If no type is given then the lesson is assumed to be temporary.
 
->**❗️️** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
-> 
-> 💡 If you still want to add this lesson, use `rmlesson` to remove the list of conflicting lessons shown before proceeding to add the new lesson.
+<div markdown="block" class="alert alert-info">
+
+>**❗ Conflicting Lessons:** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
+>
+> **💡 Tip:** If you still want to add this lesson, use `rmlesson` to remove the list of conflicting lessons shown before proceeding to add the new lesson.
+
+</div>
 
 ---
 
