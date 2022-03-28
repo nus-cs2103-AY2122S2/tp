@@ -16,6 +16,18 @@ public abstract class Name implements Comparable<Name> {
         this.fullName = name;
     }
 
+    /**
+     * Returns true if given {@code substring} is part of this {@code Name}.
+     * This method is case-insensitive.
+     *
+     * @param substring Substring to match this Name against.
+     * @return True if given substring is part of this Name.
+     */
+    public boolean containsIgnoreCase(String substring) {
+        requireNonNull(substring);
+        return fullName.toLowerCase().contains(substring.toLowerCase());
+    }
+
     public String toString() {
         return fullName;
     }

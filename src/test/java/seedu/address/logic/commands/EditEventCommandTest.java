@@ -36,22 +36,22 @@ public class EditEventCommandTest {
     public void execute_allFieldsSpecified_success() {
         Event editedEvent = new EventBuilder().build();
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
-        descriptor.setRemoveFriendNames(model.getEventsList().get(0).getFriendNames());
+        descriptor.setRemoveFriendNames(model.getFilteredEventList().get(0).getFriendNames());
 
         EditEventCommand editCommand = new EditEventCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setEvent(model.getEventsList().get(0), editedEvent);
+        expectedModel.setEvent(model.getFilteredEventList().get(0), editedEvent);
 
         assertEventCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecified_success() {
-        Index indexLastEvent = Index.fromOneBased(model.getEventsList().size());
-        Event lastEvent = model.getEventsList().get(indexLastEvent.getZeroBased());
+        Index indexLastEvent = Index.fromOneBased(model.getFilteredEventList().size());
+        Event lastEvent = model.getFilteredEventList().get(indexLastEvent.getZeroBased());
 
         EventBuilder eventInList = new EventBuilder(lastEvent);
         Event editedEvent = eventInList.withName(VALID_EVENT_NAME).withDateTime(VALID_EVENT_DATETIME)
@@ -74,7 +74,7 @@ public class EditEventCommandTest {
     @Test
     public void execute_noFieldSpecified_success() {
         EditEventCommand editCommand = new EditEventCommand(INDEX_FIRST_PERSON, new EditEventCommand.EditEventDescriptor());
-        Event editedEvent = model.getEventsList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Event editedEvent = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
@@ -85,7 +85,7 @@ public class EditEventCommandTest {
 
     @Test
     public void execute_duplicateEvent_failure() {
-        Event firstEvent = model.getEventsList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Event firstEvent = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(firstEvent).build();
         EditEventCommand editCommand = new EditEventCommand(INDEX_SECOND_PERSON, descriptor);
 
@@ -94,7 +94,7 @@ public class EditEventCommandTest {
 
     @Test
     public void execute_invalidEventIndex_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getEventsList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withName(VALID_EVENT_NAME).build();
         EditEventCommand editCommand = new EditEventCommand(outOfBoundIndex, descriptor);
 

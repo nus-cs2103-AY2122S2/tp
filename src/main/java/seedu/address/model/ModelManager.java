@@ -164,7 +164,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Event> getEventsList() {
+    public ObservableList<Event> getFilteredEventList() {
         return filteredEvents;
     }
 

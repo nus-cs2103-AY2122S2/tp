@@ -35,5 +35,34 @@ public class DescriptionTest {
                 + "looooooooooooooooooooooooooontg description with special characterS~~!3$54^&*((peoœø!! and"
                 + "punctuations ++2049.....!!!  !! == :>> :)")); // long address
     }
+
+    @Test
+    public void equals() {
+        Description descriptionOne = new Description("test description one");
+        Description descriptionOneCopy = new Description("test description one");
+        Description descriptionTwo = new Description("test description two");
+        Description descriptionNull = new Description(null);
+
+        //different object but same value
+        assertTrue(descriptionOneCopy.equals(descriptionOneCopy));
+
+        //different object and different value
+        assertFalse(descriptionOne.equals(descriptionTwo));
+
+        //null values
+        assertTrue(descriptionNull.equals(new Description(null)));
+
+        assertFalse(descriptionOne.equals(descriptionNull));
+
+        //different object
+        assertFalse(descriptionOne.equals(1));
+
+        assertTrue(descriptionOne.hashCode() == (descriptionOne.hashCode()));
+
+        assertTrue(descriptionOne.hashCode() == (descriptionOneCopy.hashCode()));
+
+        assertTrue(descriptionOne.hashCode() != (descriptionTwo.hashCode()));
+
+    }
 }
 

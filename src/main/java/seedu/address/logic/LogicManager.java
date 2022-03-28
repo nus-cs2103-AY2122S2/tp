@@ -71,9 +71,11 @@ public class LogicManager implements Logic {
         return model.getInsightsList();
     }
 
+
+
     @Override
-    public ObservableList<Event> getEventsList() {
-        return model.getEventsList();
+    public ObservableList<Event> getFilteredEventList() {
+        return model.getFilteredEventList();
     }
 
     @Override

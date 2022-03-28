@@ -88,7 +88,7 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Overloaded constructor for person with no email.
+     * Overloaded constructor for person with no logs.
      */
     public Person(FriendName name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
         requireAllNonNull(name, phone, address, description, tags);

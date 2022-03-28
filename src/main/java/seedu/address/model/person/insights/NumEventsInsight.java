@@ -35,7 +35,8 @@ public class NumEventsInsight extends Insight implements Comparable<NumEventsIns
     @Override
     public NumEventsInsight getInsight(Person person, Model model) {
         requireAllNonNull(person, model);
-        int numberOfEvents = (int) model.getEventsList()
+        int numberOfEvents = (int) model.getAddressBook()
+                .getEventList()
                 .stream()
                 .filter(event -> event.hasFriendWithName(person))
                 .count();

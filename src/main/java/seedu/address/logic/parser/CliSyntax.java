@@ -26,6 +26,7 @@ public class CliSyntax {
     public static final Prefix FLAG_ALL = new Prefix("-a");
 
     public static final Prefix PREFIX_DATETIME = new Prefix("dt/");
+    public static final Prefix PREFIX_DATE = new Prefix("da/");
     public static final Prefix PREFIX_FRIEND_NAME = new Prefix("f/");
     public static final Prefix PREFIX_ADD_FRIENDNAME = new Prefix("af/");
     public static final Prefix PREFIX_REMOVE_FRIENDNAME = new Prefix("rf/");

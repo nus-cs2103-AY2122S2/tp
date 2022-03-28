@@ -71,6 +71,11 @@ public class EditCommandParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        //no index and no field specified, but random inputs given
+        assertParseFailure(parser, "!", MESSAGE_INVALID_FORMAT); //punctuation
+        assertParseFailure(parser, "   ", MESSAGE_INVALID_FORMAT); //blank spaces
+        assertParseFailure(parser, "|", MESSAGE_INVALID_FORMAT); //special character
     }
 
     @Test
@@ -86,6 +91,9 @@ public class EditCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 email/abc@gmail.com", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 address/Kings' Cross", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 abc@gmail.com", MESSAGE_INVALID_FORMAT); //no prefix given
     }
 
     @Test
@@ -113,6 +121,8 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NEW_NAME_DESC + INVALID_NEW_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 FriendName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NEW_PHONE_DESC + INVALID_NEW_DESCRIPTION_DESC
+                + VALID_ADDRESS_AMY, Phone.MESSAGE_CONSTRAINTS);
     }
 
     @Test

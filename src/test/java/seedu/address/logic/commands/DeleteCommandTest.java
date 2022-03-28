@@ -9,6 +9,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -16,8 +19,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.common.Description;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,7 +35,7 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_deleteValidName_success() {
+    public void execute_deleteValidNameFilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
 
@@ -39,6 +46,53 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_deleteValidNameUnfilteredList_success() {
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        //filter the typical person list in the addressbook to only display Alice
+        model.updateFilteredPersonList(person -> person.isSamePerson(new Person(new FriendName("Alice Pauline"))));
+        expectedModel.updateFilteredPersonList(person -> person.isSamePerson(new Person(new FriendName("Alice Pauline"))));
+
+        assert(model.getFilteredPersonList().size() == 1);
+        assert(expectedModel.getFilteredPersonList().size() == 1);
+
+        Person personToDelete = model.getAddressBook().getPersonList().get(3);
+
+        //ensures that person to delete is not in the filtered person list
+        assert(!personToDelete.hasSameName(new Person(new FriendName("Alice Pauline"))));
+
+        //deletes the person that is not in the filtered person list
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteValidNameDifferentCase_success() {
+
+        Person person = new Person(new FriendName("Hilary Tan"), new Phone("97875337"),
+                new Email("ht@gmail.com"), new Address("Jurong East"), new Description("Has a cute dog!"),
+                new HashSet<>(), new ArrayList<>());
+
+        model.addPerson(person);
+
+        DeleteCommand deleteCommand = new DeleteCommand(new FriendName("HILARY TAN"));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, person);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(person);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
 
     @Test
     public void execute_deleteInvalidName_throwsCommandException() {

@@ -49,7 +49,7 @@ public class ShowEventsCommandTests {
 
         // Model has persons but no events, thus event list should be empty.
         assertFalse(noEventModel.getFilteredPersonList().isEmpty());
-        assertTrue(noEventModel.getEventsList().isEmpty());
+        assertTrue(noEventModel.getFilteredEventList().isEmpty());
     }
 
     /**
@@ -59,7 +59,7 @@ public class ShowEventsCommandTests {
     public void execute_listIsFiltered_showsOrderedList() {
         assertEventCommandSuccess(new ShowEventsCommand(), model, ShowEventsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        ObservableList<Event> checkSorted = model.getEventsList();
+        ObservableList<Event> checkSorted = model.getFilteredEventList();
 
         Event temp = checkSorted.get(0);
         for (int i = 1; i < checkSorted.size(); i++) {

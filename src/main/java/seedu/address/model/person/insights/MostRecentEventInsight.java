@@ -50,7 +50,8 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
     @Override
     public MostRecentEventInsight getInsight(Person person, Model model) {
         requireAllNonNull(person, model);
-        List<Event> eventsWithPerson = model.getEventsList()
+        List<Event> eventsWithPerson = model.getAddressBook()
+                .getEventList()
                 .stream()
                 .filter(event -> event.hasFriendWithName(person))
                 .collect(Collectors.toList());
