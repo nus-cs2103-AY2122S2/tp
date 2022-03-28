@@ -13,7 +13,7 @@ import seedu.address.logic.parser.Prefix;
  * Optional to have.
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
-public class DueDate extends TransactionField implements DateInterface {
+public class DueDate extends TransactionField implements DateFieldInterface {
 
     public static final String FIELD_NAME = "Due Date";
 

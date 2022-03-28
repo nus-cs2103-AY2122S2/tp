@@ -12,7 +12,7 @@ import seedu.address.logic.parser.Prefix;
  * Represents a Person's birthday in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
-public class TransactionDate extends TransactionField implements DateInterface {
+public class TransactionDate extends TransactionField implements DateFieldInterface {
 
     public static final String FIELD_NAME = "Transaction Date";
 
