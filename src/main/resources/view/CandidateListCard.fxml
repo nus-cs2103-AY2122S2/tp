@@ -34,7 +34,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <HBox spacing="5" alignment="CENTER_LEFT">
         <Label fx:id="availability" styleClass="cell_small_label" text="\$availability" minWidth="30"/>
-        <FlowPane fx:id="availableDays" prefWrapLength="200"/>
+        <FlowPane fx:id="availableDays" prefWrapLength="300"/>
       </HBox>
     </VBox>
   </GridPane>

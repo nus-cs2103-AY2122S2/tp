@@ -351,6 +351,14 @@
     -fx-font-size: 11;
 }
 
+#availableDays #availabilityTag {
+    -fx-alignment: center;
+}
+
+#availableDaysFocus #availabilityTag {
+    -fx-alignment: center;
+}
+
 #statusPane {
     -fx-hgap: 7;
     -fx-vgap: 10;
@@ -381,7 +389,6 @@
     -fx-hgap: 7;
     -fx-vgap: 10;
     -fx-padding: 2 3 2 3;
-
 }
 
 #statusFocusPane .label {
@@ -396,7 +403,6 @@
     -fx-hgap: 7;
     -fx-vgap: 3;
     -fx-padding: 2 3 2 3;
-
 }
 
 #availableDaysFocus .label {
@@ -410,7 +416,6 @@
 
 #focusSplitPane {
     -fx-padding: 0 0 10 0;
-
 }
 
 .focusStyle {

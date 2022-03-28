@@ -7,6 +7,16 @@ import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
 import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
 import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
 import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
+import static seedu.address.ui.Styles.AVAILABILITY_ID;
+import static seedu.address.ui.Styles.BLUE;
+import static seedu.address.ui.Styles.BRIGHT_GREEN;
+import static seedu.address.ui.Styles.CHANGE_COLOUR;
+import static seedu.address.ui.Styles.CLOSING_INLINE;
+import static seedu.address.ui.Styles.GREEN;
+import static seedu.address.ui.Styles.GREY;
+import static seedu.address.ui.Styles.RED;
+import static seedu.address.ui.Styles.WHITE_FONT_INLINE;
+import static seedu.address.ui.Styles.YELLOW;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,23 +33,14 @@ import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.InterviewStatus;
 
-
-
-
-
 /**
  * An UI component that displays information of a {@code Candidate}.
  */
 public class FocusCard extends UiPart<Region> {
 
     private static final String FXML = "FocusListCard.fxml";
-    private static final String RED = "#800000";
-    private static final String GREEN = "#006100";
-    private static final String YELLOW = "#8B8000";
-    private static final String BRIGHT_GREEN = "#4BB11F";
-    private static final String GREY = "#808080";
-    private static final String CHANGE_COLOUR = "-fx-background-color: ";
     private static final String BLANK_PICTURE_PATH = "docs/images/blankprofile.png";
+    private static final String SENIORITY_VALUE = "COM";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -91,14 +92,12 @@ public class FocusCard extends UiPart<Region> {
         name.setText(candidate.getName().fullName);
         phone.setText(candidate.getPhone().value);
         email.setText(candidate.getEmail().value);
-        course.setText(candidate.getCourse().course + ", " + candidate.getSeniority().seniority);
+        course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
         displayPicture.setImage(new Image(new FileInputStream(BLANK_PICTURE_PATH)));
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
         setAvailableDays(candidate.getAvailability());
-
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -145,7 +144,7 @@ public class FocusCard extends UiPart<Region> {
             interviewLabel.setStyle(CHANGE_COLOUR + GREEN);
             statusFocusPane.getChildren().add(interviewLabel);
         } else if (interviewString.equals(SCHEDULED)) {
-            interviewLabel.setStyle(CHANGE_COLOUR + YELLOW);
+            interviewLabel.setStyle(CHANGE_COLOUR + BLUE);
             statusFocusPane.getChildren().add(interviewLabel);
         }
     }
@@ -153,16 +152,20 @@ public class FocusCard extends UiPart<Region> {
     public void setAvailableDays(Availability availability) {
         String[] week = Availability.WEEK;
         boolean[] isAvail = availability.getAvailableListAsBoolean();
+        String availStyle = CHANGE_COLOUR + BRIGHT_GREEN + CLOSING_INLINE + WHITE_FONT_INLINE;
+        String notAvailStyle = CHANGE_COLOUR + GREY + CLOSING_INLINE + WHITE_FONT_INLINE;
 
         for (int i = 0; i < week.length; i++) {
             Label label = new Label(week[i]);
+            label.setId(AVAILABILITY_ID);
+            label.setMinWidth(30);
+
             if (isAvail[i]) {
-                label.setStyle(CHANGE_COLOUR + BRIGHT_GREEN);
+                label.setStyle(availStyle);
             } else {
-                label.setStyle(CHANGE_COLOUR + GREY);
+                label.setStyle(notAvailStyle);
             }
             availableDaysFocus.getChildren().add(label);
         }
     }
-
 }
