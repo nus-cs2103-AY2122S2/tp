@@ -67,6 +67,7 @@ dependencies {
 
 shadowJar {
     archiveName = 'manageezpz.jar'
+    archiveVersion = "v1.3"
 }
 
 run {

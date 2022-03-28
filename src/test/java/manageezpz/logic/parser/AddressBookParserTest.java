@@ -3,7 +3,6 @@ package manageezpz.logic.parser;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -71,14 +70,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findTask() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
                 FindTaskCommand.COMMAND_WORD
                         + " " + PREFIX_DESCRIPTION
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindTaskCommand(
-                new TaskMultiplePredicate(null, keywords, null, null, null, null)),
+                new TaskMultiplePredicate(List.of(), keywords, null, null, null, null)),
                 command);
     }
 
