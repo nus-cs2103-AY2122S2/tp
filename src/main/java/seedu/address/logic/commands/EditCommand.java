@@ -10,11 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -99,7 +95,8 @@ public class EditCommand extends Command {
                 && editedPerson.getStatus().toString().equals(Status.POSITIVE)) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
-                    .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                    .filter(student -> (student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                            || student.hasSameActivity(editedPerson))
                             && !student.isSamePerson(editedPerson)
                             && !student.getStatus().toString().equals(Status.POSITIVE))
                     .collect(Collectors.toList());
@@ -134,6 +131,31 @@ public class EditCommand extends Command {
                         tempDescriptor.setStatus(new Status(Status.NEGATIVE));
                         Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
                         model.setPerson(currentPerson, editedPersonStatus);
+                    }
+                }
+
+                Set<Activity> studentAcitivies = editedPerson.getActivities();
+                Iterator<Activity> iterator = studentAcitivies.iterator();
+                while (iterator.hasNext()) {
+                    Activity activity = iterator.next();
+
+                    List<Person> filteredByActivityList = studentList.stream()
+                            .filter(student -> student.hasActivity(activity)
+                                    && !student.isSamePerson(editedPerson))
+                            .collect(Collectors.toList());
+
+                    List<Person> filteredByPositiveStatusInActivity = filteredByActivityList.stream()
+                            .filter(student -> student.getStatus().toString().equals(Status.POSITIVE))
+                            .collect(Collectors.toList());
+
+                    if (filteredByPositiveStatusInActivity.size() == 0) {
+                        for (int i = 0; i < filteredByActivityList.size(); i++) {
+                            Person currentPerson = filteredByActivityList.get(i);
+                            EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
+                            tempDescriptor.setStatus(new Status(Status.NEGATIVE));
+                            Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
+                            model.setPerson(currentPerson, editedPersonStatus);
+                        }
                     }
                 }
             }
