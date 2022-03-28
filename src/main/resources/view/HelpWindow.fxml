@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/help_icon.png" />
     </icons>
@@ -66,8 +66,10 @@
                </HBox>
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="50.0" prefWidth="1000.0" style="-fx-background-color: #383838;" VBox.vgrow="NEVER">
                     <children>
-                        <Label text="For more details:" textFill="white"></Label>
-                        <TextField fx:id="userGuideLink" editable="false" prefHeight="25.0" prefWidth="337.0" style="-fx-background-color: #383838; -fx-text-fill: white;" text="https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html" onAction="#viewUserGuide" />
+                        <Label text="For more details:  " textFill="white" />
+                        <TextField fx:id="userGuideLink" editable="false" onAction="#viewUserGuide" prefHeight="25.0" prefWidth="322.0"
+                                   style="-fx-background-color: #383838; -fx-text-fill: white; -fx-padding: 0px; -fx-border-width: 0 0 1 0; -fx-border-color: white;"
+                                   text="https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html" />
                     </children>
                 </HBox>
             </children>
