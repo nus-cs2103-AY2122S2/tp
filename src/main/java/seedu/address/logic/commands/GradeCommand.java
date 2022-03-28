@@ -7,7 +7,6 @@ import seedu.address.model.Model;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.Grade;
 import seedu.address.model.student.Student;
-import seedu.address.model.tamodule.TaModule;
 
 public class GradeCommand extends Command {
 
