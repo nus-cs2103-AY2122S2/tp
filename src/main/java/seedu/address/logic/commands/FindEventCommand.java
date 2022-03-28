@@ -18,6 +18,11 @@ import seedu.address.model.entry.EventContainsKeywordsPredicate;
 
 /**
  * Keyword matching is case insensitive
+ * Find event command uses User input to specify what attributes the displayed events should have.
+ * The relationship between attributes is "AND" while the relationship between keywords of the same attribute
+ * is "OR".
+ * For example, "finde n/ interview c/ shopsg dbsss" will return any events that has "interview" as its name
+ * AND has ("shopsg" OR "dbsss") as its companyName.
  */
 public class FindEventCommand extends Command {
 
@@ -35,7 +40,7 @@ public class FindEventCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COMPANY + " sgshop "
-            + PREFIX_TIME + " 13:30";
+            + PREFIX_TIME + " zoom";
 
     private final ArgumentMultimap argumentMultimap;
 

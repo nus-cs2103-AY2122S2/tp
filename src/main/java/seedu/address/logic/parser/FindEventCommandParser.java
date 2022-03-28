@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -62,7 +63,10 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
             ParserUtil.parseLocation(argumentMultimap.getValue(PREFIX_LOCATION).get());
         }
         if (tagPresent) {
-            ParserUtil.parseTag(argumentMultimap.getValue(PREFIX_TAG).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_TAG).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
 
         return namePresent || companyNamePresent || datePresent || timePresent
