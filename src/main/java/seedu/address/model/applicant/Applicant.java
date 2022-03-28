@@ -97,7 +97,7 @@ public class Applicant {
         return gender;
     }
 
-    public Status getHiredStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -144,7 +144,7 @@ public class Applicant {
                 && otherApplicant.getAddress().equals(getAddress())
                 && otherApplicant.getGender().equals(getGender())
                 && otherApplicant.getTags().equals(getTags())
-                && otherApplicant.getHiredStatus().equals(getHiredStatus());
+                && otherApplicant.getStatus().equals(getStatus());
     }
 
     @Override
@@ -168,7 +168,7 @@ public class Applicant {
                 .append("; Gender: ")
                 .append(getGender())
                 .append("; HiredStatus: ")
-                .append(getHiredStatus());
+                .append(getStatus());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

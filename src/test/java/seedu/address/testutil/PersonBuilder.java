@@ -10,6 +10,7 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -31,6 +32,7 @@ public class PersonBuilder {
     private Age age;
     private Address address;
     private Gender gender;
+    private Status status;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +45,7 @@ public class PersonBuilder {
         age = new Age(DEFAULT_AGE);
         address = new Address(DEFAULT_ADDRESS);
         gender = new Gender(DEFAULT_GENDER);
+        status = new Status();
         tags = new HashSet<>();
     }
 
@@ -56,6 +59,7 @@ public class PersonBuilder {
         age = applicantToCopy.getAge();
         address = applicantToCopy.getAddress();
         gender = applicantToCopy.getGender();
+        status = applicantToCopy.getStatus();
         tags = new HashSet<>(applicantToCopy.getTags());
     }
 
@@ -116,7 +120,7 @@ public class PersonBuilder {
     }
 
     public Applicant build() {
-        return new Applicant(name, phone, email, age, address, gender, tags);
+        return new Applicant(name, phone, email, age, address, gender, status, tags);
     }
 
 }

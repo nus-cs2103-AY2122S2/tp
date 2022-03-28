@@ -32,6 +32,7 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -114,10 +115,11 @@ public class EditApplicantCommand extends EditCommand {
         Age updatedAge = editApplicantDescriptor.getAge().orElse(applicantToEdit.getAge());
         Address updatedAddress = editApplicantDescriptor.getAddress().orElse(applicantToEdit.getAddress());
         Gender updatedGender = editApplicantDescriptor.getGender().orElse(applicantToEdit.getGender());
+        Status updatedStatus = editApplicantDescriptor.getStatus().orElse(applicantToEdit.getStatus());
         Set<Tag> updatedTags = editApplicantDescriptor.getTags().orElse(applicantToEdit.getTags());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAge, updatedAddress,
-                updatedGender, updatedTags);
+                updatedGender, updatedStatus,updatedTags);
     }
 
     @Override
@@ -149,6 +151,7 @@ public class EditApplicantCommand extends EditCommand {
         private Age age;
         private Address address;
         private Gender gender;
+        private Status status;
         private Set<Tag> tags;
 
         public EditApplicantDescriptor() {}
@@ -164,6 +167,7 @@ public class EditApplicantCommand extends EditCommand {
             setAge(toCopy.age);
             setAddress(toCopy.address);
             setGender(toCopy.gender);
+            setStatus(toCopy.status);
             setTags(toCopy.tags);
         }
 
@@ -220,6 +224,14 @@ public class EditApplicantCommand extends EditCommand {
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
         }
 
         /**
