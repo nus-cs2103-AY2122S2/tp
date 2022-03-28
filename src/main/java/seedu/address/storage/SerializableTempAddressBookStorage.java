@@ -22,7 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
  * A class to manage temporary files of AddressBook data.
  */
 public class SerializableTempAddressBookStorage implements TempAddressBookStorage {
-    private static final int SAVE_LIMIT = 10;
+    public static final int SAVE_LIMIT = 10;
 
     private final Path fileDirectory;
     private final List<Path> tempFiles;
@@ -107,5 +107,7 @@ public class SerializableTempAddressBookStorage implements TempAddressBookStorag
         for (File file : Objects.requireNonNull(fileDirectory.toFile().listFiles())) {
             file.delete();
         }
+
+        tempFiles.clear();
     }
 }
