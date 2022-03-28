@@ -44,6 +44,18 @@ public class TaModule implements Entity {
         this.uniqueStudentList = uniqueStudentList;
     }
 
+    /**
+     * Constructs a {@code TaModule}.
+     * Every field must be present and not null.
+     * Used to initialize a module from storage file.
+     *
+     * @param toCopy A valid class group.
+     */
+    public TaModule(TaModule toCopy) {
+        this(toCopy.getModuleName(), toCopy.getModuleCode(), toCopy.getAcademicYear(), new UniqueStudentList());
+        uniqueStudentList.setStudents(toCopy.uniqueStudentList);
+    }
+
     public ModuleName getModuleName() {
         return moduleName;
     }
