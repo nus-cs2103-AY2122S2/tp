@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
@@ -91,6 +92,15 @@ public class Event implements Comparable<Event> {
     public Set<FriendName> getFriendNames() {
         return Collections.unmodifiableSet(friendNames);
     }
+
+    /**
+     * Returns true if the event has a friend with the same name as the specified person.
+     */
+    public boolean hasFriendWithName(Person person) {
+        requireNonNull(person);
+        return this.getFriendNames().stream().anyMatch(person::hasName);
+    }
+
 
     /**
      * Returns true if all friend names correspond to actual Friends in the AddressBook.
