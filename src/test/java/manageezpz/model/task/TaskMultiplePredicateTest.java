@@ -23,9 +23,8 @@ class TaskMultiplePredicateTest {
 
     @Test
     void taskMultiplePredicate_equalThisObject_true() {
-        TaskMultiplePredicate predicateWithNoOptions = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, null, null,
-                null);
+        TaskMultiplePredicate predicateWithNoOptions = new TaskMultiplePredicate(null, null,
+                null, null, null, null);
 
         // This -> true
         assertTrue(predicateWithNoOptions.equals(predicateWithNoOptions));
@@ -34,20 +33,19 @@ class TaskMultiplePredicateTest {
     @Test
     void taskMultiplePredicate_equalSomeOtherObject_false() {
         Object otherObject = new Object();
-        TaskMultiplePredicate predicateWithNoOptions = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, null, null,
-                null);
+        TaskMultiplePredicate predicateWithNoOptions = new TaskMultiplePredicate(null, null,
+                null, null, null, null);
 
         assertFalse(predicateWithNoOptions.equals(otherObject));
     }
 
     @Test
     void taskMultiplePredicate_equalTaskTypes() {
-        TaskMultiplePredicate predicateTaskType = new TaskMultiplePredicate(List.of(PREFIX_DEADLINE), null,
+        TaskMultiplePredicate predicateTaskType = new TaskMultiplePredicate(PREFIX_DEADLINE, null,
                 null, null, null, null);
-        TaskMultiplePredicate predicateTaskTypeSame = new TaskMultiplePredicate(List.of(PREFIX_DEADLINE),
+        TaskMultiplePredicate predicateTaskTypeSame = new TaskMultiplePredicate(PREFIX_DEADLINE,
                 null, null, null, null, null);
-        TaskMultiplePredicate predicateTaskTypeDifferent = new TaskMultiplePredicate(List.of(PREFIX_EVENT),
+        TaskMultiplePredicate predicateTaskTypeDifferent = new TaskMultiplePredicate(PREFIX_EVENT,
                 null, null, null, null, null);
 
         // Same TaskType -> true
@@ -60,13 +58,13 @@ class TaskMultiplePredicateTest {
     @Test
     void taskMultiplePredicate_equalDescription() {
         TaskMultiplePredicate predicateDescription = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, List.of("Word1"), null, null, null,
+                null, List.of("Word1"), null, null, null,
                 null);
         TaskMultiplePredicate predicateDescriptionSame = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, List.of("Word1"), null, null, null,
+                null, List.of("Word1"), null, null, null,
                 null);
         TaskMultiplePredicate predicateDescriptionDifferent = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, List.of("Word2"), null, null, null,
+                null, List.of("Word2"), null, null, null,
                 null);
 
         // Same Description -> true
@@ -78,12 +76,12 @@ class TaskMultiplePredicateTest {
 
     @Test
     void taskMultiplePredicate_equalDate() {
-        TaskMultiplePredicate predicateDate = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateDate = new TaskMultiplePredicate(null,
                 null, new Date("1900-01-01"), null, null, null);
-        TaskMultiplePredicate predicateDateSame = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateDateSame = new TaskMultiplePredicate(null,
                 null, new Date("1900-01-01"), null, null, null);
         TaskMultiplePredicate predicateDateDifferent = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, new Date("1900-01-02"), null,
+                null, null, new Date("1900-01-02"), null,
                 null, null);
 
         // Same date -> true
@@ -95,13 +93,13 @@ class TaskMultiplePredicateTest {
 
     @Test
     void taskMultiplePredicate_equalPriority() {
-        TaskMultiplePredicate predicatePriority = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicatePriority = new TaskMultiplePredicate(null,
                 null, null, Priority.HIGH, null, null);
         TaskMultiplePredicate predicatePrioritySame = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, Priority.HIGH, null,
+                null, null, null, Priority.HIGH, null,
                 null);
         TaskMultiplePredicate predicatePriorityDifferent = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, Priority.LOW, null,
+                null, null, null, Priority.LOW, null,
                 null);
 
         // Same priority -> true
@@ -113,13 +111,13 @@ class TaskMultiplePredicateTest {
 
     @Test
     void taskMultiplePredicate_equalAssignee() {
-        TaskMultiplePredicate predicateAssignee = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateAssignee = new TaskMultiplePredicate(null,
                 null, null, null, ALICE.getName().toString(), null);
         TaskMultiplePredicate predicateAssigneeSame = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, null,
+                null, null, null, null,
                 ALICE.getName().toString(), null);
         TaskMultiplePredicate predicateAssigneeDifferent = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, null,
+                null, null, null, null,
                 BENSON.getName().toString(), null);
 
         // Same person -> true
@@ -131,13 +129,13 @@ class TaskMultiplePredicateTest {
 
     @Test
     void taskMultiplePredicate_equalIsMarked() {
-        TaskMultiplePredicate predicateIsMarked = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateIsMarked = new TaskMultiplePredicate(null,
                 null, null, null, null, Boolean.TRUE);
         TaskMultiplePredicate predicateIsMarkedSame = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, null, null,
+                null, null, null, null, null,
                 Boolean.TRUE);
         TaskMultiplePredicate predicateIsMarkedDifferent = new TaskMultiplePredicate(
-                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, null, null,
+                null, null, null, null, null,
                 Boolean.FALSE);
 
         // Same isMarked Boolean -> true
@@ -148,50 +146,45 @@ class TaskMultiplePredicateTest {
     }
 
     @Test
-    void taskMultiplePredicate_containsTaskType_true() {
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(List.of(PREFIX_DEADLINE), null,
-                null, null, null, null);
+    void taskMultiplePredicate_containsCorrectTaskType_true() {
+        // Task type not specified
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
+                null, null, null, null, null);
         assertTrue(predicateCombo1.test(deadline));
 
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(List.of(PREFIX_TODO, PREFIX_DEADLINE),
+        // Task type same
+        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(PREFIX_DEADLINE,
                 null, null, null, null, null);
         assertTrue(predicateCombo2.test(deadline));
-
-        TaskMultiplePredicate predicateCombo3 = new TaskMultiplePredicate(List.of(PREFIX_TODO, PREFIX_DEADLINE,
-                PREFIX_EVENT), null, null, null, null, null);
-        assertTrue(predicateCombo3.test(deadline));
     }
 
     @Test
-    void taskMultiplePredicate_containsTaskType_false() {
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(List.of(PREFIX_TODO), null,
-                null, null, null, null);
-        assertFalse(predicateCombo1.test(deadline));
-
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(List.of(PREFIX_EVENT, PREFIX_TODO),
+    void taskMultiplePredicate_containsCorrectTaskType_false() {
+        // Task type different
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(PREFIX_TODO,
                 null, null, null, null, null);
-        assertFalse(predicateCombo2.test(deadline));
+        assertFalse(predicateCombo1.test(deadline));
     }
 
     @Test
     void taskMultiplePredicate_containsDescription_true() {
         // Description not specified
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, null, null, null);
         assertTrue(predicateCombo1.test(deadline));
 
         // Only 1 word
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(null,
                 List.of("Play"), null, null, null, null);
         assertTrue(predicateCombo2.test(deadline));
 
         // More than 1 word
-        TaskMultiplePredicate predicateCombo3 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo3 = new TaskMultiplePredicate(null,
                 List.of("Genshin", "Impact"), null, null, null, null);
         assertTrue(predicateCombo3.test(deadline));
 
         // Mixed cases
-        TaskMultiplePredicate predicateCombo4 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo4 = new TaskMultiplePredicate(null,
                 List.of("GeNshIn", "IMPact"), null, null, null, null);
         assertTrue(predicateCombo4.test(deadline));
     }
@@ -199,12 +192,12 @@ class TaskMultiplePredicateTest {
     @Test
     void taskMultiplePredicate_containsDescription_false() {
         // None of the words found
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 List.of("P1ay"), null, null, null, null);
         assertFalse(predicateCombo1.test(deadline));
 
         // No keywords same despite all other same
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(List.of(PREFIX_DEADLINE),
+        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(PREFIX_DEADLINE,
                 List.of("P1ay"), new Date("2022-04-01"), Priority.NONE, null, Boolean.FALSE);
         assertFalse(predicateCombo2.test(deadline));
     }
@@ -212,12 +205,12 @@ class TaskMultiplePredicateTest {
     @Test
     void taskMultiplePredicate_containsDate_true() {
         // null date
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, null, null, null);
         assertTrue(predicateCombo1.test(deadline));
 
         // Same date
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(null,
                 null, new Date("2022-04-01"), null, null, null);
         assertTrue(predicateCombo2.test(deadline));
     }
@@ -225,7 +218,7 @@ class TaskMultiplePredicateTest {
     @Test
     void taskMultiplePredicate_containsDate_false() {
         // Wrong date
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, new Date("2022-04-02"), null, null, null);
         assertFalse(predicateCombo1.test(deadline));
     }
@@ -234,12 +227,12 @@ class TaskMultiplePredicateTest {
     void taskMultiplePredicate_containsPriority_true() {
         deadline.setPriority("HIGH");
         // Priority null
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, null, null, null);
         assertTrue(predicateCombo1.test(deadline));
 
         // Same priority
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(null,
                 null, null, Priority.HIGH, null, null);
         assertTrue(predicateCombo2.test(deadline));
     }
@@ -249,7 +242,7 @@ class TaskMultiplePredicateTest {
         deadline.setPriority("HIGH");
 
         // Different priority
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, Priority.LOW, null, null);
         assertFalse(predicateCombo1.test(deadline));
     }
@@ -261,12 +254,12 @@ class TaskMultiplePredicateTest {
         deadline.addAssignees(CARL);
 
         // Assignee null
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, null, null, null);
         assertTrue(predicateCombo1.test(deadline));
 
         // Same assignee
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(null,
                 null, null, null, ALICE.getName().toString(), null);
         assertTrue(predicateCombo2.test(deadline));
     }
@@ -278,7 +271,7 @@ class TaskMultiplePredicateTest {
         deadline.addAssignees(CARL);
 
         // Different assignee
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, null, DANIEL.getName().toString(), null);
         assertFalse(predicateCombo1.test(deadline));
     }
@@ -288,12 +281,12 @@ class TaskMultiplePredicateTest {
         deadline.setTaskDone();
 
         // Is Marked is null
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, null, null, null);
         assertTrue(predicateCombo1.test(deadline));
 
         // Is Marked is the same
-        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo2 = new TaskMultiplePredicate(null,
                 null, null, null, null, Boolean.TRUE);
         assertTrue(predicateCombo2.test(deadline));
     }
@@ -303,7 +296,7 @@ class TaskMultiplePredicateTest {
         deadline.setTaskDone();
 
         // Is Marked boolean different
-        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, null, null, null, Boolean.FALSE);
         assertFalse(predicateCombo1.test(deadline));
     }

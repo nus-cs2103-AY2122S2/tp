@@ -18,6 +18,7 @@ import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Name;
 import manageezpz.model.task.Date;
+import manageezpz.model.task.Description;
 import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
 
@@ -40,48 +41,64 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     public FindTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, VALID_OPTIONS);
 
-        List<Prefix> taskTypes = getPrefix(argMultiMap);
+        Prefix taskType = getPrefix(argMultiMap);
         List<String> descriptions = getDescriptions(argMultiMap);
         Date date = getTaskDate(argMultiMap);
         Priority priority = getTaskPriority(argMultiMap);
         String assignee = getAssignee(argMultiMap);
         Boolean isMarked = getIsMarked(argMultiMap);
 
-        checkIfTodoAndDateTogether(argMultiMap, taskTypes);
+        checkIfTodoAndDateTogether(argMultiMap, taskType);
 
         if (hasError) {
             errorMessage = errorMessage + FindTaskCommand.MESSAGE_USAGE;
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
         } else {
             return new FindTaskCommand(new TaskMultiplePredicate(
-                    taskTypes, descriptions, date, priority, assignee, isMarked));
+                    taskType, descriptions, date, priority, assignee, isMarked));
         }
     }
 
-    private void checkIfTodoAndDateTogether(ArgumentMultimap argMultiMapProperties, List<Prefix> taskTypes) {
-        boolean isContainsTodo = taskTypes.contains(PREFIX_TODO);
+    private void checkIfTodoAndDateTogether(ArgumentMultimap argMultiMapProperties, Prefix taskTypes) {
+        boolean isContainsTodo = taskTypes instanceof Prefix && taskTypes.equals(PREFIX_TODO);
         if (isContainsTodo && argMultiMapProperties.isPrefixExist(PREFIX_DATE)) {
             addErrorMessage(FindTaskCommand.TODO_AND_DATE_OPTION_TOGETHER);
         }
     }
 
-    private List<Prefix> getPrefix(ArgumentMultimap argMultiMap) {
+    private Prefix getPrefix(ArgumentMultimap argMultiMap) {
         List<Prefix> currentPrefixes = Arrays.stream(TASK_TYPES)
                 .filter(prefix -> argMultiMap.isPrefixExist(prefix)).collect(Collectors.toList());
-        return currentPrefixes;
+        if (currentPrefixes.size() > 1) {
+            addErrorMessage(FindTaskCommand.MORE_THAN_ONE_TASK_TYPE);
+            return null;
+        } else if (currentPrefixes.size() < 1) {
+            return null;
+        } else {
+            return currentPrefixes.get(0);
+        }
+
     }
 
     private List<String> getDescriptions(ArgumentMultimap argMultiMap) {
         List<String> keyword = null;
         if (argMultiMap.isPrefixExist(PREFIX_DESCRIPTION)) {
-            String trimmedArgs = argMultiMap.getValue(PREFIX_DESCRIPTION).get().trim();
-            boolean isArgEmpty = checkIfArgsEmpty(trimmedArgs, FindTaskCommand.EMPTY_KEYWORD);
-            if (!isArgEmpty) {
-                String[] taskAssignees = trimmedArgs.split("\\s+");
+            String description = argMultiMap.getValue(PREFIX_DESCRIPTION).get();
+            boolean isValid = checkIfValidDescription(description);
+            if (isValid) {
+                String[] taskAssignees = description.split("\\s+");
                 keyword = Arrays.asList(taskAssignees);
             }
         }
         return keyword;
+    }
+
+    private boolean checkIfValidDescription(String description) {
+        boolean result = Description.isValidDescription(description);
+        if (!result) {
+            addErrorMessage(FindTaskCommand.Invalid_KEYWORD);
+        }
+        return result;
     }
 
     private String getAssignee(ArgumentMultimap argMultiMap) {
@@ -144,14 +161,6 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
             }
         }
         return priority;
-    }
-
-    private boolean checkIfArgsEmpty(String trimmedArgs, String emptyKeyword) {
-        if (trimmedArgs.isEmpty()) {
-            addErrorMessage(emptyKeyword);
-            return true;
-        }
-        return false;
     }
 
     private boolean checkIfEitherTrueOrFalse(String booleanString) {

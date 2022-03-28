@@ -14,9 +14,8 @@ import manageezpz.logic.parser.Prefix;
  * The predicate to search tasks based on the properties given.
  */
 public class TaskMultiplePredicate implements Predicate<Task> {
-    public static final List<Prefix> NO_SPECIFIC_TASK_TYPE = List.of();
 
-    private final List<Prefix> taskTypes;
+    private final Prefix taskType;
     private final List<String> description;
     private final Date date;
     private final Priority priority;
@@ -25,7 +24,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
 
     /**
      * The constructor for predicate.
-     * @param taskTypes All the task type to search
+     * @param taskType The task type to search
      * @param description The description to search
      * @param date The date of either the deadline or event
      * @param priority The priority of the task
@@ -33,9 +32,9 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      * @param isMarked Whether the task is marked
      */
     public TaskMultiplePredicate(
-            List<Prefix> taskTypes, List<String> description, Date date, Priority priority, String assignee,
+            Prefix taskType, List<String> description, Date date, Priority priority, String assignee,
             Boolean isMarked) {
-        this.taskTypes = taskTypes;
+        this.taskType = taskType;
         this.description = description;
         this.date = date;
         this.priority = priority;
@@ -48,7 +47,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      */
     @Override
     public boolean test(Task task) {
-        boolean hasTaskType = !taskTypes.equals(List.of()) ? checkIfHasSpecificTaskType(task) : true;
+        boolean hasTaskType = taskType != null ? checkIfHasSpecificTaskType(task) : true;
         boolean hasKeyword = description != null ? checkIfHasKeywords(task) : true;
         boolean hasDate = date != null ? checkIfHasDate(task) : true;
         boolean hasPriority = priority != null ? checkIfHasPriority(task) : true;
@@ -59,21 +58,11 @@ public class TaskMultiplePredicate implements Predicate<Task> {
     }
 
     private boolean checkIfHasSpecificTaskType(Task task) {
-        boolean isTaskTodo = false;
-        boolean isTaskDeadline = false;
-        boolean isTaskEvent = false;
+        boolean isTodo = taskType.equals(PREFIX_TODO) && task instanceof Todo;
+        boolean isDeadline = taskType.equals(PREFIX_DEADLINE) && task instanceof Deadline;
+        boolean isEvent = taskType.equals(PREFIX_EVENT) && task instanceof Event;
 
-        for (Prefix prefix : taskTypes) {
-            if (PREFIX_TODO.equals(prefix)) {
-                isTaskTodo = task instanceof Todo;
-            } else if (PREFIX_DEADLINE.equals(prefix)) {
-                isTaskDeadline = task instanceof Deadline;
-            } else if (PREFIX_EVENT.equals(prefix)) {
-                isTaskEvent = task instanceof Event;
-            }
-        }
-
-        return isTaskTodo || isTaskDeadline || isTaskEvent;
+        return isTodo || isDeadline || isEvent;
     }
 
     private boolean checkIfHasKeywords(Task task) {
@@ -122,17 +111,24 @@ public class TaskMultiplePredicate implements Predicate<Task> {
             return true;
         } else if (obj instanceof TaskMultiplePredicate) {
             TaskMultiplePredicate pre = (TaskMultiplePredicate) obj;
-            boolean isSameTaskTypes = taskTypes.equals(pre.taskTypes);
+            boolean isSameTaskType = isSameTaskType(pre.taskType);
             boolean isSameDescription = isSameDescription(pre.description);
             boolean isSameDate = isSameDate(pre.date);
             boolean isSamePriority = isSamePriority(pre.priority);
             boolean isSameAssignee = isSameAssignee(pre.assignee);
             boolean isSameIsMarked = isSameIsMarked(pre.isMarked);
 
-            return isSameTaskTypes
+            return isSameTaskType
                     && isSameDescription && isSameDate && isSamePriority && isSameAssignee && isSameIsMarked;
         }
         return false;
+    }
+
+    private boolean isSameTaskType(Prefix taskType) {
+        if (taskType != null) {
+            return taskType.equals(this.taskType);
+        }
+        return this.taskType == null;
     }
 
     private boolean isSameDescription(List<String> description) {

@@ -60,11 +60,9 @@ class FindTaskCommandTest {
     @Test
     void equals() {
         TaskMultiplePredicate firstPredicate =
-                new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
-                        Collections.singletonList("Genshin"), null, null, null, null);
+                new TaskMultiplePredicate(null, Collections.singletonList("Genshin"), null, null, null, null);
         TaskMultiplePredicate secondPredicate =
-                new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
-                        Collections.singletonList("Impact"), null, null, null, null);
+                new TaskMultiplePredicate(null, Collections.singletonList("Impact"), null, null, null, null);
 
         FindTaskCommand firstFindTaskCommand = new FindTaskCommand(firstPredicate);
         FindTaskCommand secondFindTaskCommand = new FindTaskCommand(secondPredicate);
@@ -88,8 +86,8 @@ class FindTaskCommandTest {
 
     @Test
     void findCommand_findAllTasks_showAllTasks() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
-                null, null, null, null, null);
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null, null, null,
+                null, null, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW,
                 expectedModel.getFilteredTaskList().size());
@@ -101,7 +99,7 @@ class FindTaskCommandTest {
 
     @Test
     void findCommand_findSpecificTaskType_showTaskOfSpecificType() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(List.of(PREFIX_TODO), null, null,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(PREFIX_TODO, null, null,
                 null, null, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 6);
@@ -116,7 +114,7 @@ class FindTaskCommandTest {
     void findCommand_findTaskWithDescription_showTasksWithGivenDescrription() {
         // Only 1 word
         List<String> keywords1 = List.of("Book");
-        TaskMultiplePredicate predicate1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicate1 = new TaskMultiplePredicate(null,
                 keywords1, null, null, null, null);
         expectedModel.updateFilteredTaskList(predicate1);
         String expectedMessage1 = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
@@ -128,7 +126,7 @@ class FindTaskCommandTest {
 
         // More than 1 words
         List<String> keywords2 = List.of("Book", "quiz");
-        TaskMultiplePredicate predicate2 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicate2 = new TaskMultiplePredicate(null,
                 keywords2, null, null, null, null);
         expectedModel.updateFilteredTaskList(predicate2);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
@@ -142,7 +140,7 @@ class FindTaskCommandTest {
     @Test
     void findCommand_findTaskWithDate_showTasksWithGivenDate() {
         Date date = new Date("2022-04-01");
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null,
                 null, date, null, null, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
@@ -155,7 +153,7 @@ class FindTaskCommandTest {
 
     @Test
     void findCommand_findTaskWithPriority_showTasksWithGivenPriority() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null,
                 null, null, Priority.HIGH, null, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
@@ -168,7 +166,7 @@ class FindTaskCommandTest {
 
     @Test
     void findCommand_findTaskWithAssignee_showTasksWithGivenPriority() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null,
                 null, null, null, ALICE.getName().fullName, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 4);
@@ -181,7 +179,7 @@ class FindTaskCommandTest {
 
     @Test
     void findCommand_findTaskWithIsMarked_showsTasksWithGivenIsMarked() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null,
                 null, null, null, null, Boolean.TRUE);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
@@ -196,7 +194,7 @@ class FindTaskCommandTest {
     void findCommand_findTaskWithMultipleProperties_showTasksWithGivenProperties() {
         List<String> keywords = List.of("Capstone");
         Date date = new Date("2022-04-01");
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(List.of(PREFIX_DEADLINE), keywords, date,
+        TaskMultiplePredicate predicate = new TaskMultiplePredicate(PREFIX_DEADLINE, keywords, date,
                 Priority.HIGH, ALICE.getName().toString(), Boolean.TRUE);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);

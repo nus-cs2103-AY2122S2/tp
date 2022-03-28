@@ -38,12 +38,13 @@ public class FindTaskCommand extends Command {
             + "Task properties " + TASK_PROPERTIES + "\n"
             + NOTE + "\n"
             + EXAMPLE;
-    public static final String EMPTY_KEYWORD = "Keyword is empty\n";
+    public static final String Invalid_KEYWORD = "Keyword is empty\n";
     public static final String INVALID_DATE = Date.MESSAGE_CONSTRAINTS + "\n";
     public static final String INVALID_PRIORITY = "Property should be NONE, LOW, MEDIUM, HIGH\n";
     public static final String TODO_AND_DATE_OPTION_TOGETHER = "Together and Date option are together\n";
     public static final String INVALID_BOOLEAN = "Boolean should be true or false\n";
     public static final String EMPTY_ASSIGNEE = "Assignee is empty\n";
+    public static final String MORE_THAN_ONE_TASK_TYPE = "Only one task type is allowed\n";
 
     private TaskMultiplePredicate predicate;
 

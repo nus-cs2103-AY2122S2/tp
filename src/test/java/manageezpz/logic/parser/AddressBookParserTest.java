@@ -77,7 +77,7 @@ public class AddressBookParserTest {
                         + " " + PREFIX_DESCRIPTION
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindTaskCommand(
-                new TaskMultiplePredicate(List.of(), keywords, null, null, null, null)),
+                new TaskMultiplePredicate(null, keywords, null, null, null, null)),
                 command);
     }
 

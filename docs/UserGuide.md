@@ -138,8 +138,9 @@ Finds task(s) based on multiple conditions provided.
 #### Note:
 * Arguments can be stacked together in any order. 
 * Task Type is optional. 
+* However, only one task type is allowed.
 * Any other invalid options not stated below will be ignored
-* No options provided will list down all the tasks like listTask
+* No options provided will list down all the tasks like `listTask`
 
 #### Task Type Available:
 * `todo/`: Todos
@@ -149,9 +150,9 @@ Finds task(s) based on multiple conditions provided.
 #### Options :
 * `desc/`: Description of the tasks
 * `date/`: Date of the task in YYYY-MM-DD (Only for deadline and event)
-* `priority/`: Priority of task. Only HIGH, MEDIUM, LOW and NONE
+* `priority/`: Priority of task. Only `HIGH`, `MEDIUM`, `LOW` and `NONE`
 * `assignees/`: The assignees that was assigned to the task (Only one full name of assignee allowed)
-* `isMarked/`: Whether the task is marked. Only true or false.
+* `isMarked/`: Whether the task is marked. Only `true` or `false`.
 
 #### Format:
 * `findTask todo/`
@@ -169,7 +170,14 @@ Finds task(s) based on multiple conditions provided.
 * `findTask assignees/ASSIGNEE`
   * Find all tasks assignee to ASSIGNEE
 * `findTask isMarked/BOOLEAN`
-  * Find all tasks that is already marked (true) or unmarked (false)
+  * Find all tasks that is already marked (`true`) or unmarked (`false`)
+    * Finds the task with a description that contains all of the following options:
+      * Description which contains the word “School”, 
+      * date 2022-04-16, 
+      * high priority, 
+      * assigned to Alex Yeoh 
+      * and is marked.
+
   
 #### Example:
   * `findTask desc/homework`
