@@ -66,7 +66,6 @@ class DeleteModuleCommandTest {
             String moduleName = moduleString.substring(1, moduleString.length() - 1);
             String changedFirstLetterModuleName = String.valueOf((char) (moduleName.charAt(0) + 1));
             String alteredModuleName = changedFirstLetterModuleName + moduleName.substring(1);
-            System.out.println(alteredModuleName);
             modulesPersonDoesNotHave.add(new Module(alteredModuleName));
         }
 
