@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
 
@@ -104,6 +105,11 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
             removeInterview(i);
         }
     }
+
+    public void updateInterviewCandidate(Interview target, Interview editedInterview) {
+        interviews.updateInterviewCandidate(target, editedInterview);
+    }
+
 
     public void removeInterview(Interview key) {
         interviews.remove(key);

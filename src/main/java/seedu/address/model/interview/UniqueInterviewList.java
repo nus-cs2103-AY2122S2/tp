@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
@@ -61,6 +62,17 @@ public class UniqueInterviewList implements Iterable<Interview> {
 
         if (containsConflictingInterview(editedInterview)) {
             throw new ConflictingInterviewException();
+        }
+
+        internalList.set(index, editedInterview);
+    }
+
+    public void updateInterviewCandidate (Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new InterviewNotFoundException();
         }
 
         internalList.set(index, editedInterview);
