@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Entry;
+import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
 /**

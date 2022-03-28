@@ -113,7 +113,9 @@ public class AddressBookTest {
         }
 
         @Override
-        public void updateCompanyNames(String oldName, String newName) { return; }
+        public void updateCompanyNames(String oldName, String newName) {
+            return;
+        }
     }
 
 }

@@ -48,6 +48,6 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
             }
         }
 
-        return namePresent ||  tagPresent;
+        return namePresent || tagPresent;
     }
 }

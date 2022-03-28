@@ -5,18 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 import seedu.address.model.entry.predicate.PersonContainsKeywordsPredicate;
 
-import java.util.Arrays;
-
-/**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
- */
 
 /**
  * Finds and lists all persons in address book whose name, companyName, and tags contains any of the argument keywords.
