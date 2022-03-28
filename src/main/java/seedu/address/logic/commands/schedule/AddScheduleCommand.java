@@ -54,7 +54,7 @@ public class AddScheduleCommand extends ScheduleCommand {
         }
 
         Candidate candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
-        Candidate editedCandidate = candidateToInterview.triggerInterviewStatus();
+        Candidate editedCandidate = candidateToInterview.triggerInterviewStatusScheduled();
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
         if (model.hasInterviewCandidate(toAdd)) {

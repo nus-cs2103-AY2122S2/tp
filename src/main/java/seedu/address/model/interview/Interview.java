@@ -28,7 +28,7 @@ public class Interview {
         this.interviewDateTime = interviewDateTime;
         this.interviewEndDateTime = interviewDateTime.plusMinutes(INTERVIEW_DURATION_IN_MINUTES);
         this.interviewDay = interviewDateTime.getDayOfWeek().getValue();
-        Candidate candidateWithStatus = candidate.triggerInterviewStatus();
+        Candidate candidateWithStatus = candidate.triggerInterviewStatusScheduled();
         this.candidate = candidateWithStatus;
     }
 
