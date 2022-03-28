@@ -9,6 +9,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Amount;
@@ -24,7 +25,7 @@ public class AddTransactionCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add a transaction to the transaction list of the "
             + "identified person by the index number used in the last person "
-            + "listing.\n"
+            + "listing. If specified, the transaction date must be before the due date.\n"
             + "Parameters: "
             + Amount.PREFIX + "AMOUNT "
             + TransactionDate.PREFIX + "TRANSACTION DATE "

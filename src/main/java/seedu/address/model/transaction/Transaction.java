@@ -51,6 +51,19 @@ public class Transaction implements Serializable {
     }
 
     /**
+     * Returns whether the person object is valid
+     */
+    public boolean isValid() {
+        if (!fields.containsKey(DueDate.PREFIX)) {
+            return true;
+        }
+
+        // Check whether due date >= transaction date
+        return ((TransactionDate) fields.get(TransactionDate.PREFIX))
+                .isBefore((DueDate) fields.get(DueDate.PREFIX));
+    }
+
+    /**
      * Returns true if the person contains the specified field.
      * @param prefix the field prefix
      * @return return true if the transaction contains the specified field
