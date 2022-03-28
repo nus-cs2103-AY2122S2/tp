@@ -79,6 +79,33 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
         }
     }
 
+    public T find(T toFind) {
+        requireNonNull(toFind);
+        for (int i = 0; i < internalList.size(); i++) {
+            T entry = internalList.get(i);
+            if (entry.equals(toFind)) {
+                return entry;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Archives the equivalent entry from the list.
+     * The entry must exist in the list.
+     */
+    public void archive(T toArchive) {
+        requireNonNull(toArchive);
+        T match = find(toArchive);
+
+        if (match == null) {
+            throw new EntryNotFoundException();
+        } else {
+            match.setArchived(true);
+        }
+    }
+
     public void setEntries(UniqueEntryList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

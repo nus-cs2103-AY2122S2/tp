@@ -209,6 +209,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateCurrentlyDisplayedList(Predicate<Entry> predicate) {
+        switch (currentlyDisplayedListType) {
+        case PERSON:
+            showPersonList(predicate);
+            break;
+        case COMPANY:
+            showCompanyList(predicate);
+            break;
+        case EVENT:
+            showEventList(predicate);
+            break;
+        default:
+            // Should not reach here
+        }
+    }
+
+    @Override
     public void showPersonList(Predicate<? super Person> predicate) {
         updateFilteredLists(predicate, PREDICATE_SHOW_NONE, PREDICATE_SHOW_NONE);
         currentlyDisplayedListType = EntryType.PERSON;
@@ -253,6 +270,38 @@ public class ModelManager implements Model {
             Event eventToDelete = filteredEvents.get(index);
             deleteEvent(eventToDelete);
             return eventToDelete;
+        default:
+            return null;
+        }
+    }
+
+    @Override
+    public Entry archiveEntry(int index) {
+        switch (currentlyDisplayedListType) {
+        case PERSON:
+            if (index >= filteredPersons.size()) {
+                return null;
+            }
+
+            Person personToArchive = filteredPersons.get(index);
+            addressBook.archivePerson(personToArchive);
+            return personToArchive;
+        case COMPANY:
+            if (index >= filteredCompanies.size()) {
+                return null;
+            }
+
+            Company companyToArchive = filteredCompanies.get(index);
+            addressBook.archiveCompany(companyToArchive);
+            return companyToArchive;
+        case EVENT:
+            if (index >= filteredEvents.size()) {
+                return null;
+            }
+
+            Event eventToArchive = filteredEvents.get(index);
+            addressBook.archiveEvent(eventToArchive);
+            return eventToArchive;
         default:
             return null;
         }

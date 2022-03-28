@@ -165,6 +165,11 @@ public interface Model {
     void updateFilteredEventList(Predicate<? super Event> predicate);
 
     /**
+     * Updates the filter of the currently displayed list through the {@code predicate}.
+     */
+    void updateCurrentlyDisplayedList(Predicate<Entry> predicate);
+
+    /**
      * Updates filtered lists to show only the Persons list filtered through the {@code predicate}.
      */
     void showPersonList(Predicate<? super Person> predicate);
@@ -183,4 +188,9 @@ public interface Model {
      * Deletes the entry at the index of the currently displayed list and returns it.
      */
     Entry deleteEntry(int index);
+
+    /**
+     * Archives the entry at the index of the currently displayed list and returns it.
+     */
+    Entry archiveEntry(int index);
 }

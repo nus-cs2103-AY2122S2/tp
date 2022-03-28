@@ -118,6 +118,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Archives {@code key} in the person list.
+     * {@code key} must exist in the person list.
+     */
+    public void archivePerson(Person key) {
+        persons.archive(key);
+    }
+
     //// company-level operations
 
     /**
@@ -149,11 +157,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from the company list.
+     * {@code key} must exist in the company list.
      */
     public void removeCompany(Company key) {
         companies.remove(key);
+    }
+
+    /**
+     * Archives {@code key} in the company list.
+     * {@code key} must exist in the company list.
+     */
+    public void archiveCompany(Company key) {
+        companies.archive(key);
     }
 
     //// event-level operations
@@ -185,11 +201,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from the event list.
+     * {@code key} must exist in the event list.
      */
     public void removeEvent(Event key) {
         events.remove(key);
+    }
+
+    /**
+     * Archives {@code key} in the event list.
+     * {@code key} must exist in the event list.
+     */
+    public void archiveEvent(Event key) {
+        events.archive(key);
     }
 
     @Override
