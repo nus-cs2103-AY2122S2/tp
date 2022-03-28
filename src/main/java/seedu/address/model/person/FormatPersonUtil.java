@@ -42,20 +42,17 @@ public class FormatPersonUtil {
     /**
      * Returns true if format specified is valid
      * @param format
-     * @return
+     * @return True if valid
      */
     public static boolean isValidFormat(String format) {
-        if (format.equals(JSON_FORMAT) || format.equals(CSV_FORMAT) || format.equals(DEFAULT_FORMAT)) {
-            return true;
-        }
-        return false;
+        return format.equals(JSON_FORMAT) || format.equals(CSV_FORMAT) || format.equals(DEFAULT_FORMAT);
     }
 
     /**
      * Returns a String containing formatted person
      * @param person person to be formatted
      * @param prefixes list of prefixes to be used
-     * @return
+     * @return String containing formatted person
      */
     public String formatPerson(Person person, List<Prefix> prefixes) throws JsonProcessingException {
         if (format.equals(JSON_FORMAT)) {
@@ -73,7 +70,7 @@ public class FormatPersonUtil {
      * Returns a String containing formatted addressbook
      * @param persons person to be formatted
      * @param prefixes list of prefixes to be used
-     * @return
+     * @return String containing formatted addressbook
      */
     public String formatAddressBook(List<Person> persons, List<Prefix> prefixes) throws JsonProcessingException {
         if (format.equals(JSON_FORMAT)) {
