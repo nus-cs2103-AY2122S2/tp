@@ -42,7 +42,7 @@ This guide aims to be the one-stop shop to get you from noob to expert in record
    * `undo`: Undo the last executed command.
    * `exit`: Exits the app.  
 
-7. Refer to the [Commands](#Commands) below for details of each command.
+7. Refer to the [commands](#commands) below for details of each command.
 
 ---
 
