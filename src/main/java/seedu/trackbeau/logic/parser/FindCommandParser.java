@@ -3,13 +3,16 @@ package seedu.trackbeau.logic.parser;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
+import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,26 +34,29 @@ public class FindCommandParser implements Parser<FindCustomerCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCustomerCommand parse(String userInput) throws ParseException {
-        Integer attributeCount = 9;
-
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
-        Prefix[] prefixList = {PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-            PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES};
+                PREFIX_SKINTYPE, PREFIX_HAIRTYPE,
+                    PREFIX_BIRTHDATE, PREFIX_REGDATE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
+        Prefix[] prefixList = { PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SKINTYPE,
+            PREFIX_HAIRTYPE, PREFIX_BIRTHDATE, PREFIX_REGDATE, PREFIX_STAFFS,
+            PREFIX_SERVICES, PREFIX_ALLERGIES};
 
         if (userInput.isEmpty()) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCustomerCommand.MESSAGE_USAGE));
         }
 
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(attributeCount, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
 
-        for (int i = 0; i < attributeCount; i++) {
+        for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
-                prefixArr.add(i,
+                //parseAddress is used because it allows for all formats except for empty strings
+                //using add will cause the size of the list to be wrong
+                prefixArr.set(i,
                     Arrays.asList(ParserUtil
-                        .parseName(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                        .parseAddress(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
             }
         }
 

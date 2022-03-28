@@ -3,6 +3,7 @@ package seedu.trackbeau.logic.parser;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,16 +28,17 @@ public class FindCustomerCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // Find name with no leading and trailing whitespaces
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
-        prefixArr.add(0, Arrays.asList(new String[]{"alex", "yeoh"}));
-        prefixArr.add(1, Arrays.asList(new String[]{"87438807"}));
-        prefixArr.add(2, Arrays.asList(new String[]{"alex@example.com"}));
-        prefixArr.add(3, Arrays.asList(new String[]{"geylang"}));
-        prefixArr.add(4, Arrays.asList(new String[]{"oily"}));
-        prefixArr.add(5, Arrays.asList(new String[]{"dry"}));
-        prefixArr.add(6, Arrays.asList(new String[]{"jason"}));
-        prefixArr.add(7, Arrays.asList(new String[]{"acne"}));
-        prefixArr.add(8, Arrays.asList(new String[]{"nickel"}));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
+        prefixArr.set(0, Arrays.asList(new String[]{"alex", "yeoh"}));
+        prefixArr.set(1, Arrays.asList(new String[]{"87438807"}));
+        prefixArr.set(2, Arrays.asList(new String[]{"alex@example.com"}));
+        prefixArr.set(3, Arrays.asList(new String[]{"geylang"}));
+        prefixArr.set(4, Arrays.asList(new String[]{"oily"}));
+        prefixArr.set(5, Arrays.asList(new String[]{"dry"}));
+        prefixArr.set(6, Arrays.asList(new String[]{"jason"}));
+        prefixArr.set(7, Arrays.asList(new String[]{"acne"}));
+        prefixArr.set(8, Arrays.asList(new String[]{"nickel"}));
         FindCustomerCommand expectedFindNameCommand =
                 new FindCustomerCommand(new SearchContainsKeywordsPredicate(prefixArr));
         assertParseSuccess(parser, "name n/alex yeoh p/87438807 e/alex@example.com"

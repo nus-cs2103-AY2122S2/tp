@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
 import static seedu.trackbeau.testutil.TypicalCustomers.BENSON;
@@ -121,8 +122,9 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
-        prefixArr.add(0, Arrays.asList(keywords));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
+        prefixArr.set(0, Arrays.asList(keywords));
         modelManager.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
         assertFalse(modelManager.equals(new ModelManager(trackBeau, userPrefs)));
 
