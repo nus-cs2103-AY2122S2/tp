@@ -90,7 +90,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             parsedComparator = Comparator.comparing(person -> person.getAddress().value.toLowerCase());
             break;
         case SORT_BY_FAVOURITE:
-            parsedComparator = Comparator.comparing(person -> person.getFavourite().getStatus());
+            parsedComparator = Comparator.comparing(person -> person.getFavourite().isUnfavourited());
             break;
         case SORT_BY_USER_TYPE:
             parsedComparator = Comparator.comparing(person -> person.getUserType().toString().toLowerCase());
