@@ -413,7 +413,7 @@ public class ModelManagerTest {
                 new TimeRange(
                         LocalDate.of(2022, 5, 3).atTime(10, 59),
                         LocalDate.of(2022, 5, 3).atTime(15, 0)
-                ),61);
+                ), 61);
         assertEquals(sampleSlots, modelManager.getDisplayedAppointmentSlots());
         modelManager.clearDisplayedAppointmentSlots();
         assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
