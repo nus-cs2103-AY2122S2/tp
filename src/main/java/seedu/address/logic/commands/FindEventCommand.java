@@ -14,7 +14,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
-import seedu.address.model.entry.EventContainsKeywordsPredicate;
+import seedu.address.model.entry.predicate.EventContainsKeywordsPredicate;
 
 /**
  * Keyword matching is case insensitive

@@ -1,13 +1,15 @@
-package seedu.address.model.entry;
+package seedu.address.model.entry.predicate;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.model.entry.Event;
 
 /**
- * Tests that a {@code Event}'s  attributes matches any of the keywords given by user.
+ * This class is an abstraction of combining {@code NameContainsKeywords}, {@code CompanyNameContainsKeywords},
+ * {@code DateContainsKeywords}, {@code TimeContainsKeywords}, {@code LocationContainsKeywords}
+ * , {@code TagContainsKeywords}.
+ * In particular, it tests that a {@code Event}'s  attributes matches any of the keywords given by user.
  * Acts the main logic part for checking whether an Event should be displayed for finde command
  */
 public class EventContainsKeywordsPredicate implements Predicate<Event> {
@@ -42,6 +44,11 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         this.tagKeywords = tagKeywords;
     }
 
+    /**
+     * It must be noted that the test function is implemented differently than the usual (ANY)ContainsKeywordsPredicate.
+     * In particular, it checks all keywords available. If the keyword is not available (not given by user), then
+     * it will automatically be removed from consideration when testing an event.
+     */
     @Override
     public boolean test(Event event) {
         boolean correctName;
@@ -51,49 +58,17 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         boolean correctLocation;
         boolean correctTag;
 
-        if (validKeywords(nameKeywords)) {
-            correctName = true;
-        } else {
-            correctName = nameKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword));
-        }
-        if (validKeywords(companyKeywords)) {
-            correctCompany = true;
-        } else {
-            correctCompany = companyKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getCompanyName().fullName, keyword));
-        }
-        if (validKeywords(dateKeywords)) {
-            correctDate = true;
-        } else {
-            correctDate = dateKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getDate().getPure().toString(),
-                            keyword));
-        }
-        if (validKeywords(timeKeywords)) {
-            correctTime = true;
-        } else {
-            correctTime = timeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getTime().getPure().toString(),
-                            keyword));
-        }
-
-        if (validKeywords(locationKeywords)) {
-            correctLocation = true;
-        } else {
-            correctLocation = locationKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(event.getLocation().getPure(),
-                            keyword));
-        }
-
-        if (validKeywords(tagKeywords)) {
-            correctTag = true;
-        } else {
-            correctTag = tagKeywords.stream()
-                    .anyMatch(keyword -> event.getTags().stream().map(tag -> tag.getPure().toLowerCase())
-                            .collect(Collectors.toSet())
-                            .contains(keyword));
-        }
+        correctName = invalidKeywords(nameKeywords)
+                || new NameContainsKeywordsPredicate(nameKeywords).test(event);
+        correctCompany = invalidKeywords(companyKeywords)
+                || new CompanyNameContainsKeywordsPredicate(companyKeywords).test(event);
+        correctDate = invalidKeywords(dateKeywords)
+                || new DateContainsKeywordsPredicate(dateKeywords).test(event);
+        correctTime = invalidKeywords(timeKeywords)
+                || new TimeContainsKeywordsPredicate(timeKeywords).test(event);
+        correctLocation = invalidKeywords(locationKeywords)
+                || new LocationContainsKeywordsPredicate(locationKeywords).test(event);
+        correctTag = invalidKeywords(tagKeywords) || new TagContainsKeywordsPredicate(tagKeywords).test(event);
 
         return correctName && correctCompany && correctDate && correctTime && correctLocation && correctTag;
     }
@@ -110,7 +85,11 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)); // state check
     }
 
-    private boolean validKeywords(List<String> keywords) {
+    /**
+     * Returns whether the user input inside the keywords is empty. In particular, if it consists of 1 element of
+     * empty string.
+     */
+    private boolean invalidKeywords(List<String> keywords) {
         return keywords.size() == 1 && keywords.get(0) == "";
     }
 

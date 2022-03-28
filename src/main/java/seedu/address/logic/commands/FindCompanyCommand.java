@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.entry.NameContainsKeywordsPredicate;
+import seedu.address.model.entry.predicate.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all companies in address book whose Name contains any of the argument keywords.
