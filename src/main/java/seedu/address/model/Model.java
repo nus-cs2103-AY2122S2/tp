@@ -127,6 +127,13 @@ public interface Model {
     void updateFilteredLessonList(Predicate<Lesson> predicate);
 
     /**
+     * Replaces the given lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in the lesson book.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the
+     * lesson book.
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
+    /**
      * Updates both filtered lesson and students list.
      */
     void updateAssignment(Student student, Lesson lesson);

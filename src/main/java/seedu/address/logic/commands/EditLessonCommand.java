@@ -28,6 +28,7 @@ import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 
 public class EditLessonCommand extends Command {
 
@@ -89,13 +90,11 @@ public class EditLessonCommand extends Command {
         if (lessonToEdit.equals(editedLesson)) {
             throw new CommandException(String.format(MESSAGE_DID_NOT_EDIT, lessonToEdit.getName()));
         }
-        model.deleteLesson(lessonToEdit);
-        if (model.hasConflictingLesson(editedLesson)) {
-            model.addLesson(lessonToEdit);
-            model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        try {
+            model.setLesson(lessonToEdit, editedLesson);
+        } catch (ConflictsWithLessonsException ce) {
             throw new CommandException(MESSAGE_CONFLICTING_LESSON);
         }
-        model.addLesson(editedLesson);
         model.setSelectedLesson(editedLesson);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedLesson.getName()), true,

@@ -3,6 +3,7 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -47,6 +48,24 @@ public class ConsistentLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Compares the editedLesson to find conflicting lessons in the list, excluding the lesson of the index provided.
+     * @param index of the lesson to be excluded from the comparison
+     * @param editedLesson lesson that is edited
+     * @return true if there are conflicting lessons and false otherwise
+     */
+    public boolean hasConflictingLessonExcluding(int index, Lesson editedLesson) {
+        requireAllNonNull(index, editedLesson);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (i != index) {
+                if (internalList.get(i).isConflictingWithLesson(editedLesson)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns some lesson in the list with timeslot that overlaps with the specified lesson, if exists.
      */
     public Lesson findLessonConflictingWith(Lesson toCheck) {
@@ -85,7 +104,24 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         if (hasConflictingLesson(toAdd)) {
             throw new ConflictsWithLessonsException(toAdd, findAllLessonsConflictingWith(toAdd));
         }
-        internalList.add(toAdd);
+        LocalDateTime dateTimeOfToAdd = toAdd.getDateTimeSlot().getDateOfLesson();
+        if (internalList.isEmpty()) {
+            internalList.add(toAdd);
+        } else if (dateTimeOfToAdd.isBefore(internalList.get(0).getDateTimeSlot().getDateOfLesson())) {
+            internalList.add(0, toAdd);
+        } else if (dateTimeOfToAdd.isAfter(internalList.get(internalList.size() - 1)
+                .getDateTimeSlot().getDateOfLesson())) {
+            internalList.add(toAdd);
+        } else {
+            for (int i = 1; i < internalList.size(); i++) {
+                LocalDateTime prev = internalList.get(i - 1).getDateTimeSlot().getDateOfLesson();
+                LocalDateTime curr = internalList.get(i).getDateTimeSlot().getDateOfLesson();
+                if (dateTimeOfToAdd.isAfter(prev) && dateTimeOfToAdd.isBefore(curr)) {
+                    internalList.add(i, toAdd);
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -125,7 +161,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             throw new LessonNotFoundException();
         }
 
-        if (hasConflictingLesson(editedLesson)) {
+        if (hasConflictingLessonExcluding(index, editedLesson)) {
             throw new ConflictsWithLessonsException(editedLesson, findAllLessonsConflictingWith(editedLesson));
         }
 

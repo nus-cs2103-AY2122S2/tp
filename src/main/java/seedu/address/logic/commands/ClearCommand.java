@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.LessonBook;
@@ -24,6 +25,7 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setLessonBook(new LessonBook());
         model.setStudentBook(new StudentBook());
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(MESSAGE_SUCCESS, true, InfoPanelTypes.EMPTY, ViewTab.NONE);
     }
 

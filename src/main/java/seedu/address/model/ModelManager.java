@@ -129,6 +129,12 @@ public class ModelManager implements Model {
     //=========== LessonBook =================================================================================
 
     @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+        lessonBook.setLesson(target, editedLesson);
+    }
+
+    @Override
     public void setLessonBook(ReadOnlyLessonBook lessonBook) {
         this.lessonBook.resetData(lessonBook);
         filteredLessons.clear(); // This might not be necessary
