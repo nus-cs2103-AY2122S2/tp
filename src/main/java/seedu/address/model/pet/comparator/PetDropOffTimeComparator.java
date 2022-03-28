@@ -41,8 +41,8 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
 
     /**
      * Compares presentAttendanceEntries of pets based on their drop off time. Used in compare method.
-     * @param firstPet's AttendanceEntry.
-     * @param secondPet's AttendanceEntry.
+     * @param firstPet AttendanceEntry.
+     * @param secondPet AttendanceEntry.
      * @return Value signifying in the difference between the comparing attribute.
      */
     private int comparePresentAttendanceEntries(AttendanceEntry firstPet, AttendanceEntry secondPet) {
