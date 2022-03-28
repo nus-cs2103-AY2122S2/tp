@@ -3,13 +3,10 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
@@ -20,8 +17,6 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-
-    private static final String ON_CLICK_COMMAND = "findTransaction %1$d";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -59,21 +54,8 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, PersonListPanel.CommandExecutor commandExecutor) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
-
-        String commandText = String.format(ON_CLICK_COMMAND, displayedIndex);
-        cardPane.setCursor(Cursor.HAND);
-        cardPane.setOnMousePressed(e -> {
-            try {
-                if (e.isPrimaryButtonDown()) { // For mouse on left click
-                    commandExecutor.execute(commandText);
-                }
-            } catch (CommandException | ParseException ex) {
-                ex.printStackTrace();
-            }
-        });
-
         this.person = person;
         id.setText(displayedIndex + ". ");
 
