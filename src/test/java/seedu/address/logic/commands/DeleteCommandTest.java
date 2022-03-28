@@ -1,14 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -16,9 +14,7 @@ import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
 import seedu.address.testutil.LineupBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 

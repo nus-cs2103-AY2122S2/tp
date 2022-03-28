@@ -135,7 +135,7 @@ Format: `delete L/LINEUP`
 * Delete the lineup.
 
 Example:
-* `delete L/starting five` will delete the lineup `starting five` from MyGM.
+* `delete L/Starting 5` will delete the lineup `Starting 5` from MyGM.
 
 **To delete a schedule:**
 Format: `delete T/ i/INDEX_SCHEDULE`
@@ -180,27 +180,6 @@ Format: `put P/PLAYER L/LINEUP`
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five
 
-### Mark the attendance of players: `mark`
-
-Mark the attendance of players in a team for a specific training date or competition.
-
-Format: `mark i/INDEX_SCHEDULE P/PLAYER [P/MORE_PLAYERS]`
-* Mark all players specified PLAYER_NAME as present for the event with index number INDEX_SCHEDULE on the schedule.
-* The index must be a positive integer 1, 2, 3…
-
-Example:
-* `mark i/1 P/Budaha P/john` Marks Budaha Arda and John Doe as present for the event with schedule index 1.
-
-### Mark a player as absent: `unmark`
-
-Mark the attendance of players in a team as absent for a specific training date or competition.
-
-Format: `unmark i/INDEX_SCHEDULE P/PLAYER [P/MORE_PLAYERS]​`
-* Mark all players with the specified PLAYER_NAME as absent for the event with index number INDEX_SCHEDULE on the schedule.
-* The index **must be a positive integer 1, 2, 3.**
-
-Example:
-* `unmark i/1 P/Budaha P/john` marks Budaha Arda and John Doe as absent for the event with schedule index 1.
 
 ### Viewing the summary: `view`
 
@@ -279,7 +258,7 @@ Update the details of a player, team, lineup or schedule
 
 Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [a/AGE] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`
 
-* edit the details of a player from the player list
+* Edit the details of a player from the player list
 * If any fields are specified, it will change accordingly
 * Multiple fields can be changed at once
 
@@ -290,20 +269,20 @@ Example:
 
 Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 
-* Edit the lineup name of lineup LINEUP of team _NAME to NEW_LINEUP_NAME
+* Edit the lineup name of lineup to a new lineup name
 
 Example:
-* `edit T/Lakers L/Starting5 n/Worst5` will change name of the lineup Starting5 of team Lakers to Worst5
+* `edit L/Starting5 n/Worst5` will change name of the lineup Starting5 of team Lakers to Worst5
 
 **To edit a schedule:**
 
-Format: `edit i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`
+Format: `edit i/INDEX_SCHEDULE S/ [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 
 * Edit the details of the i-th schedule of a team
 * If any fields are specified, it will be changed accordingly
 
 Example:
-* `edit S/ i/1 n/Training` will change the description of first event in the schedule for team Wizards to Training
+* `edit 1 S/ n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule
 
 ### Clearing all entries : `clear`
 
