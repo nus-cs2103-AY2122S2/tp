@@ -8,6 +8,8 @@
 
 .label {
     -fx-background-color: derive(#A3BCF9, 20%);
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI";
 }
 
 #editMessageLabel {
@@ -20,6 +22,11 @@
 
 #errorLabel {
     -fx-background-color: #7796CB;
+}
+
+.text-field {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI";
 }
 
 .button {
