@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -30,7 +31,9 @@ public class SortCommand extends RedoableCommand {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_MODULE + "MODULE] "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE + "/asc " + PREFIX_NAME + "/desc " + "\n";
+            + "[" + PREFIX_COMMENT + "COMMENT] "
+            + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE + "asc " + PREFIX_NAME + "desc " + "\n";
 
     public static final String MESSAGE_SUCCESS = "Sorted successfully: %s";
 
@@ -104,6 +107,12 @@ public class SortCommand extends RedoableCommand {
 
                 } else if (PREFIX_STATUS.equals(field)) {
                     result = o1.getStatus().compareTo(o2.getStatus());
+
+                } else if (PREFIX_COMMENT.equals(field)) {
+                    result = o1.getComment().compareTo(o2.getComment());
+
+                } else {
+                    assert false;
                 }
 
                 if (order.equals("desc")) {

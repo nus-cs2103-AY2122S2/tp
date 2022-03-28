@@ -117,7 +117,7 @@ public class EditWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing edit window of the application.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -132,6 +132,9 @@ public class EditWindow extends UiPart<Stage> {
         addressField.setText("");
         emailField.setText("");
         errorLabel.setText("");
+
+        // Set the focus on indexField so that it will be back on indexField after closing/submitting.
+        indexField.requestFocus();
     }
 
     /**
@@ -209,6 +212,14 @@ public class EditWindow extends UiPart<Stage> {
     private void handleCancel() {
         this.resetFields();
         this.hide();
+    }
+
+    /**
+     * Handles the case where ENTER key is pressed on a TextField
+     */
+    @FXML
+    private void handleEnter() {
+        this.handleSubmit();
     }
 
     /**

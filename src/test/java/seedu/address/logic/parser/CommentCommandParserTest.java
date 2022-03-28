@@ -20,9 +20,15 @@ class CommentCommandParserTest {
 
     @Test
     public void parse_invalidArgs_failure() {
-        assertParseFailure(parser, "1 c/", Comment.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, "5 Very rude", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_deleteComment_success() {
+        String userInput = "1 c/";
+        CommentCommand expectedCommand = new CommentCommand(INDEX_FIRST_PERSON, new Comment(""));
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
