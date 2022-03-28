@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.position.Position;
 
 /**
  * Represents a Applicant in the address book.
@@ -24,20 +25,52 @@ public class Applicant {
     private final Age age;
     private final Address address;
     private final Gender gender;
+    private final Status status;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
+     * For initializing an Applicant object with compulsory fields and default values
      */
     public Applicant(Name name, Phone phone, Email email, Age age, Address address, Gender gender, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, age, address, gender, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.age = age;
         this.address = address;
         this.gender = gender;
+        this.status = new Status();
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Overloaded constructor used to edit applicant with changed values
+     */
+    public Applicant(Name name, Phone phone, Email email, Age age, Address address, Gender gender,
+                     Status status, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, age, address, gender, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.age = age;
+        this.address = address;
+        this.gender = gender;
+        this.status = status;
+        this.tags.addAll(tags);
+    }
+    /**
+     * Changes the status of an applicant to the name of the Position provided
+     */
+    public Applicant setStatus(Applicant applicant, Position position) {
+        return new Applicant(applicant.getName(),
+                applicant.getPhone(),
+                applicant.getEmail(),
+                applicant.getAge(),
+                applicant.getAddress(),
+                applicant.getGender(),
+                new Status(position.getPositionName().toString()),
+                applicant.getTags());
     }
 
     public Name getName() {
@@ -62,6 +95,10 @@ public class Applicant {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public Status getHiredStatus() {
+        return status;
     }
 
     /**
@@ -106,7 +143,8 @@ public class Applicant {
                 && otherApplicant.getAge().equals(getAge())
                 && otherApplicant.getAddress().equals(getAddress())
                 && otherApplicant.getGender().equals(getGender())
-                && otherApplicant.getTags().equals(getTags());
+                && otherApplicant.getTags().equals(getTags())
+                && otherApplicant.getHiredStatus().equals(getHiredStatus());
     }
 
     @Override
@@ -128,7 +166,9 @@ public class Applicant {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Gender: ")
-                .append(getGender());
+                .append(getGender())
+                .append("; HiredStatus: ")
+                .append(getHiredStatus());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
