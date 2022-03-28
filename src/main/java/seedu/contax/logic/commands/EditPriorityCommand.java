@@ -104,10 +104,6 @@ public class EditPriorityCommand extends Command {
     public static class EditPriorityDescriptor {
         private Priority priority;
 
-        public EditPriorityDescriptor() {
-
-        }
-
         public Optional<Priority> getPriority() {
             return Optional.ofNullable(priority);
         }

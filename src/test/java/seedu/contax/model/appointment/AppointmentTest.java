@@ -140,8 +140,7 @@ public class AppointmentTest {
                         + "\n **Duration:** "
                         + appointment.getDuration()
                         + "\n **Person:** Alice Pauline"
-                        + "\n **Priority:** "
-                        + appointment.getPriority(),
+                        + "\n **Priority:** None",
                 appointment.toString());
     }
 

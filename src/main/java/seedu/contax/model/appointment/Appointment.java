@@ -157,7 +157,7 @@ public class Appointment extends ScheduleItem {
                 + "\n **Person:** "
                 + (getPerson() == null ? "None" : getPerson().getName())
                 + "\n **Priority:** "
-                + getPriority();
+                + (getPriority() == null ? "None" : getPriority());
     }
 
     /**
