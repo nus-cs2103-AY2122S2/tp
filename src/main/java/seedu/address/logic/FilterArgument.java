@@ -6,7 +6,7 @@ public class FilterArgument {
 
     public static final String MESSAGE_CONSTRAINTS = "Filter arguments should not be blank";
 
-    public final String filterArgument;
+    public final String argument;
 
     /**
      * Constructs a {@code FilterArgument}.
@@ -15,23 +15,23 @@ public class FilterArgument {
      */
     public FilterArgument(String argument) {
         requireNonNull(argument);
-        filterArgument = argument;
+        this.argument = argument;
     }
 
     @Override
     public String toString() {
-        return filterArgument;
+        return argument;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FilterArgument // instanceof handles nulls
-                && filterArgument.equals(((FilterArgument) other).filterArgument)); // state check
+                && argument.equals(((FilterArgument) other).argument)); // state check
     }
 
     @Override
     public int hashCode() {
-        return filterArgument.hashCode();
+        return argument.hashCode();
     }
 }

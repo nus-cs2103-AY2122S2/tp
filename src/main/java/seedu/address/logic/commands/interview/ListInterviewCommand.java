@@ -59,17 +59,17 @@ public class ListInterviewCommand extends ListCommand {
         requireNonNull(model);
 
         if (filterType != null && filterArgument != null) {
-            if (filterType.filterType.equals("appl")) {
+            if (filterType.type.equals("appl")) {
                 String[] applicantNameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Interview> predicateApplicantName =
                         new InterviewApplicantPredicate(Arrays.asList(applicantNameKeywords));
                 model.updateFilteredInterviewList(predicateApplicantName);
-            } else if (filterType.filterType.equals("pos")) {
+            } else if (filterType.type.equals("pos")) {
                 String[] positionNameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Interview> predicatePositionName =
                         new InterviewPositionPredicate(Arrays.asList(positionNameKeywords));
                 model.updateFilteredInterviewList(predicatePositionName);
-            } else if (filterType.filterType.equals("date")) {
+            } else if (filterType.type.equals("date")) {
                 Predicate<Interview> predicateDate =
                         new InterviewDatePredicate(LocalDate.parse(filterArgument.toString()));
                 model.updateFilteredInterviewList(predicateDate);

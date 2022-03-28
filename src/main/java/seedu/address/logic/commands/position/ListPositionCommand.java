@@ -56,7 +56,7 @@ public class ListPositionCommand extends ListCommand {
         requireNonNull(model);
 
         if (filterType != null && filterArgument != null) {
-            if (filterType.filterType.equals("name")) {
+            if (filterType.type.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Position> predicate = new PositionNamePredicate(Arrays.asList(nameKeywords));
                 model.updateFilteredPositionList(predicate);

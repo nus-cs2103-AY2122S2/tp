@@ -39,7 +39,7 @@ public class ListInterviewCommandParser implements Parser<ListInterviewCommand> 
             FilterArgument filterArgument =
                     ParserUtil.parseFilterArgument(argMultimap.getValue(PREFIX_FILTER_ARGUMENT).get());
 
-            if (filterType.filterType.equals("date")) {
+            if (filterType.type.equals("date")) {
                 try {
                     LocalDate.parse(filterArgument.toString());
                 } catch (DateTimeParseException e) {

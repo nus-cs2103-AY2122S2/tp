@@ -16,15 +16,15 @@ public class FilterType {
 
     public static final Map<DataType, HashSet<String>> VALID_FILTER_TYPES = loadFilterTypes();
 
-    public final String filterType;
+    public final String type;
 
     /**
      * Constructs a {@code FilterType}.
      */
-    public FilterType(DataType dataType, String filterType) {
-        requireNonNull(dataType, filterType);
-        checkArgument(isValidFilterType(dataType, filterType), MESSAGE_CONSTRAINTS);
-        this.filterType = filterType;
+    public FilterType(DataType dataType, String type) {
+        requireNonNull(dataType, type);
+        checkArgument(isValidFilterType(dataType, type), MESSAGE_CONSTRAINTS);
+        this.type = type;
     }
 
     /**
@@ -59,18 +59,18 @@ public class FilterType {
 
     @Override
     public String toString() {
-        return filterType;
+        return type;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FilterType // instanceof handles nulls
-                && filterType.equals(((FilterType) other).filterType)); // state check
+                && type.equals(((FilterType) other).type)); // state check
     }
 
     @Override
     public int hashCode() {
-        return filterType.hashCode();
+        return type.hashCode();
     }
 }
