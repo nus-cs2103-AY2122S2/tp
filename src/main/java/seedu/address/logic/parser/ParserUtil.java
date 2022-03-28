@@ -192,8 +192,17 @@ public class ParserUtil {
         return new Location(trimmedLocation);
     }
 
+    /**
+     * Parses a {@code String searchType} into a {@code SearchType}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code searchType} is invalid.
+     */
     public static SearchType parseSearchType(String searchType) throws ParseException {
-        switch (searchType) {
+        requireNonNull(searchType);
+        String trimmedSearchType = searchType.trim();
+
+        switch (trimmedSearchType) {
         case "unarchived":
             return SearchType.UNARCHIVED_ONLY;
         case "archived":
