@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.Location;
 import seedu.address.model.property.PriceRange;
@@ -98,6 +99,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String address} into a {@code address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static Address parseAddress(String address) throws ParseException {
+        requireNonNull(address);
+        String trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new Address(trimmedAddress);
+    }
+
+    /**
      * Parses a {@code String priceRange} into an {@code PriceRange}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,8 +136,8 @@ public class ParserUtil {
      */
     public static HouseType parseHouseType(String houseType) throws ParseException {
         requireNonNull(houseType);
-        String trimmedAppointment = houseType.trim();
-        if (!HouseType.isValidHouseType(houseType)) {
+        String trimmedHouseType = houseType.trim();
+        if (!HouseType.isValidHouseType(trimmedHouseType)) {
             throw new ParseException(HouseType.MESSAGE_CONSTRAINTS);
         }
         return HouseType.getHouseType(houseType);

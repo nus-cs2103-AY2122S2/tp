@@ -25,7 +25,7 @@ public class BuyerBuilder {
     private Phone phone;
     private Set<Tag> tags;
     private Appointment appointment;
-    private PropertyToBuy desiredProperty = NullPropertyToBuy.getNullPropertyToBuy();
+    private PropertyToBuy desiredProperty;
 
 
     /**

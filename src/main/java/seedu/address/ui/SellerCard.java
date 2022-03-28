@@ -63,24 +63,23 @@ public class SellerCard extends UiPart<Region> {
         seller.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (!(seller.getPropertyToSell() instanceof NullPropertyToSell)) {
-            String houseType = seller.getPropertyToSell().getHouse().getHouseTypeToString();
-            String houseLocation = seller.getPropertyToSell().getHouse().getLocationToString();
-            String houseLowerPrice = seller.getPropertyToSell().getPriceRange().getLowerToString();
-            String houseUpperPrice = seller.getPropertyToSell().getPriceRange().getUpperToString();
-
-
-            if (houseType.equals("")) {
-                propertyType.setText("No Property");
-                propertyLocation.setText("No Location");
-                propertyLowerPrice.setText("NaN");
-                propertyUpperPrice.setText("NaN");
-            } else {
-                propertyType.setText(houseType);
-                propertyLocation.setText(houseLocation);
-                propertyLowerPrice.setText(houseLowerPrice);
-                propertyUpperPrice.setText(houseUpperPrice);
-            }
+        String houseType = seller.getPropertyToSell().getHouse().getHouseTypeToString();
+        String houseLocation = seller.getPropertyToSell().getHouse().getLocationToString();
+        String houseLowerPrice = seller.getPropertyToSell().getPriceRange().getLowerToString();
+        String houseUpperPrice = seller.getPropertyToSell().getPriceRange().getUpperToString();
+        String houseAddress = seller.getPropertyToSell().getAddress().toString();
+        if (seller.getPropertyToSell() instanceof NullPropertyToSell) {
+            propertyType.setText("No Property added");
+            propertyLocation.setText("No Location added");
+            propertyAddress.setText("No Address added");
+            propertyLowerPrice.setText("");
+            propertyUpperPrice.setText("");
+        } else {
+            propertyType.setText(houseType);
+            propertyLocation.setText(houseLocation);
+            propertyAddress.setText(houseAddress);
+            propertyLowerPrice.setText(houseLowerPrice);
+            propertyUpperPrice.setText(houseUpperPrice);
         }
     }
 
