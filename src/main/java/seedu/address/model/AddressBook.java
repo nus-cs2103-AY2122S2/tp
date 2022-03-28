@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -178,7 +179,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<PersonInsight> getInsightsList(Model model) {
         return FXCollections.observableArrayList(this.getPersonList()
                 .stream()
-                .sorted()
+                .sorted(Comparator.reverseOrder())
                 .map(person -> new PersonInsight(person, model))
                 .collect(Collectors.toList()));
     }

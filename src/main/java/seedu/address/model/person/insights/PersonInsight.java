@@ -17,6 +17,9 @@ public class PersonInsight implements Comparable<PersonInsight> {
     private final NumEventsInsight numberOfEvents;
     private final MostRecentEventInsight lastEvent;
 
+    /**
+     * Constructs a PersonInsight object.
+     */
     public PersonInsight(Person person, Model model) {
         requireAllNonNull(person, model);
         this.person = person;

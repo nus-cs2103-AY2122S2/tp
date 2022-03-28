@@ -14,9 +14,8 @@ public class NumEventsInsight extends Insight implements Comparable<NumEventsIns
 
     private final int number;
 
-    public static NumEventsInsight of(Person person, Model model) {
-        NumEventsInsight helper = new NumEventsInsight(); // dummy todo surely there is a better way
-        return helper.getInsight(person, model);
+    private NumEventsInsight(int number) {
+        this.number = number;
     }
 
     private NumEventsInsight() {
@@ -24,8 +23,13 @@ public class NumEventsInsight extends Insight implements Comparable<NumEventsIns
         this.number = -1;
     }
 
-    private NumEventsInsight(int number) {
-        this.number = number;
+    /**
+     * Constructs a NumEventsInsight object.
+     */
+    public static NumEventsInsight of(Person person, Model model) {
+        requireAllNonNull(person, model);
+        NumEventsInsight helper = new NumEventsInsight(); // dummy todo surely there is a better way
+        return helper.getInsight(person, model);
     }
 
     @Override

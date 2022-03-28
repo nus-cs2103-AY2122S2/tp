@@ -73,6 +73,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private Tab eventsListTab;
 
+    @FXML
+    private Tab personInsightsListTab;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -134,7 +137,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         expandedPersonListPanel = new ExpandedPersonListPanel(logic.getFilteredPersonList());
-
         expandedPersonListPanelPlaceholder.getChildren();
         expandedPersonListPanelPlaceholder.getChildren().add(expandedPersonListPanel.getRoot());
 
@@ -202,7 +204,7 @@ public class MainWindow extends UiPart<Stage> {
         boolean showInsight = commandResult.isShowInsights();
         boolean isExpandedCard = commandResult.isShowFriendCommand();
         if (showInsight) {
-            tabs.getSelectionModel().select(personListTab);
+            tabs.getSelectionModel().select(personInsightsListTab);
             personInsightListPanelPlaceholder.requestFocus();
         } else if (event) {
             tabs.getSelectionModel().select(eventsListTab);

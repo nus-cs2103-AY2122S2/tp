@@ -13,17 +13,21 @@ import seedu.address.model.person.Person;
 public class NumLogsInsight extends Insight implements Comparable<NumLogsInsight> {
     private int number;
 
-    public static NumLogsInsight of(Person person, Model model) {
-        NumLogsInsight helper = new NumLogsInsight(); // dummy todo surely there is a better way
-        return helper.getInsight(person, model);
-    }
-
     private NumLogsInsight() {
         // dummy todo surely there is a better way
         this.number = -1;
     }
     private NumLogsInsight(int number) {
         this.number = number;
+    }
+
+    /**
+     * Constructs statically a NumLogsInsight object.
+     */
+    public static NumLogsInsight of(Person person, Model model) {
+        requireAllNonNull(person, model);
+        NumLogsInsight helper = new NumLogsInsight(); // dummy todo surely there is a better way
+        return helper.getInsight(person, model);
     }
 
     @Override

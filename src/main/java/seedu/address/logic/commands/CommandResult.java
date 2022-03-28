@@ -95,7 +95,9 @@ public class CommandResult {
         return showDetails;
     }
 
-    public boolean isShowInsights() { return this.showInsights; }
+    public boolean isShowInsights() {
+        return this.showInsights;
+    }
 
     @Override
     public boolean equals(Object other) {

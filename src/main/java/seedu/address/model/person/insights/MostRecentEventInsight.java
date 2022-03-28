@@ -11,16 +11,25 @@ import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
+/**
+ * This class encapsulates the insight of the most recent event.
+ */
 public class MostRecentEventInsight extends Insight implements Comparable<MostRecentEventInsight> {
 
     // data field
     private final DateTime dateTime;
     private final boolean hasAtLeastOneEvent;
 
+    private MostRecentEventInsight(boolean hasAtLeastOneEvent) {
+        assert(!hasAtLeastOneEvent);
+        this.hasAtLeastOneEvent = false;
+        this.dateTime = null;
+    }
 
-    public static MostRecentEventInsight of(Person person, Model model) {
-        MostRecentEventInsight helper = new MostRecentEventInsight(); // dummy todo surely there is a better way
-        return helper.getInsight(person, model);
+    private MostRecentEventInsight(DateTime dateTime) {
+        requireNonNull(dateTime);
+        this.dateTime = dateTime;
+        this.hasAtLeastOneEvent = true;
     }
 
     private MostRecentEventInsight() {
@@ -29,15 +38,13 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
         this.hasAtLeastOneEvent = false;
     }
 
-    private MostRecentEventInsight(boolean hasAtLeastOneEvent) {
-        assert(!hasAtLeastOneEvent);
-        this.hasAtLeastOneEvent = false;
-        this.dateTime = null;
-    }
-    private MostRecentEventInsight(DateTime dateTime) {
-        requireNonNull(dateTime);
-        this.dateTime = dateTime;
-        this.hasAtLeastOneEvent = true;
+    /**
+     * Statically constructs a MostRecentEventInsight object.
+     */
+    public static MostRecentEventInsight of(Person person, Model model) {
+        requireAllNonNull(person, model);
+        MostRecentEventInsight helper = new MostRecentEventInsight(); // dummy todo surely there is a better way
+        return helper.getInsight(person, model);
     }
 
     @Override
@@ -50,6 +57,7 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
         if (eventsWithPerson.size() > 0) {
             eventsWithPerson.sort(Event::compareTo);
             DateTime dateTime = eventsWithPerson.get(eventsWithPerson.size() - 1).getDateTime();
+            assert (dateTime != null);
             return new MostRecentEventInsight(dateTime);
         }
         return new MostRecentEventInsight(false);
@@ -61,7 +69,7 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
             return "Never had an event!";
         }
         assert (this.dateTime != null);
-        return "Most recent event: " +  this.dateTime.toString();
+        return "Most recent event: " + this.dateTime.toString();
     }
 
     @Override
