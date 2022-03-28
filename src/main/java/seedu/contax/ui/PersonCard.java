@@ -3,6 +3,7 @@ package seedu.contax.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -13,7 +14,7 @@ import seedu.contax.model.tag.Tag;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PersonCard extends UiPart<Region> implements RecyclableCard<Person> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -25,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    private Person person;
 
     @FXML
     private HBox cardPane;
@@ -43,19 +44,39 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates an empty {@code PersonCard} row, with all fields set to blank.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard() {
         super(FXML);
+
+        id.setText("");
+        name.setText("");
+        phone.setText("");
+        address.setText("");
+        email.setText("");
+        tags.getChildren().clear();
+    }
+
+    /**
+     * Updates the contents of this card with the supplied Person model and index to display.
+     *
+     * @param person The new person model to display in this card.
+     * @param displayedIndex The new index that should be displayed by this card.
+     */
+    public Node updateModel(Person person, int displayedIndex) {
         this.person = person;
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        tags.getChildren().clear();
         person.getTags().stream()
                 .sorted(Comparator.comparing(Tag::getTagNameString))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getTagNameString())));
+
+        return this.getRoot();
     }
 
     @Override

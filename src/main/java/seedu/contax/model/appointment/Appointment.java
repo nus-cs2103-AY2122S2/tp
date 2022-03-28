@@ -10,7 +10,7 @@ import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 
 /**
- * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass.
+ * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass
  * {@link ScheduleItem}.
  */
 public class Appointment extends ScheduleItem {
@@ -22,6 +22,7 @@ public class Appointment extends ScheduleItem {
     private final Name name;
     private final Duration duration;
     private final Person person;
+    private final Priority priority;
 
     /**
      * Constructs an {@code Appointment}.
@@ -35,13 +36,37 @@ public class Appointment extends ScheduleItem {
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
-                Appointment.getEndDateTimeOrThrow(startDateTime, duration));
+                Appointment.computeEndDateTime(startDateTime, duration));
         requireNonNull(name);
 
         this.name = name;
         this.startDateTime = startDateTime;
         this.duration = duration;
         this.person = person;
+        this.priority = null;
+    }
+
+    /**
+     * Constructs an {@code Appointment} with additional attribute priority.
+     * The fields {@code name, startDateTime, duration} must be present and not null.
+     * The fields {@code priority} is optional and may be null.
+     *
+     * @param name A valid Appointment Name.
+     * @param startDateTime A valid Appointment Starting DateTime.
+     * @param duration A valid Appointment Duration.
+     * @param person A valid Person or null.
+     * @param priority A valid priority level or null.
+     */
+    public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
+        super(Appointment.getStartDateTimeOrThrow(startDateTime),
+                Appointment.computeEndDateTime(startDateTime, duration));
+        requireNonNull(name);
+
+        this.name = name;
+        this.startDateTime = startDateTime;
+        this.duration = duration;
+        this.person = person;
+        this.priority = priority;
     }
 
     public Name getName() {
@@ -65,10 +90,18 @@ public class Appointment extends ScheduleItem {
         return person;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public Appointment withPriority(Priority priority) {
+        return new Appointment(name, startDateTime, duration, person, priority);
+    }
+
     /**
      * Creates a new {@code Appointment} instance with the supplied {@code Person} object.
      *
-     * @param newPerson The person object to replace the current associated person.
+     * @param newPerson The person object, or null, to replace the current associated person.
      * @return A new immutable instance of Appointment with the updated Person.
      */
     public Appointment withPerson(Person newPerson) {
@@ -82,7 +115,7 @@ public class Appointment extends ScheduleItem {
      */
     @Override
     public LocalDateTime getEndDateTime() {
-        return getStartDateTimeObject().value.plusMinutes(getDuration().value);
+        return Appointment.computeEndDateTime(startDateTime, duration);
     }
 
     /**
@@ -100,26 +133,31 @@ public class Appointment extends ScheduleItem {
         }
 
         Appointment otherAppointment = (Appointment) other;
+
         return otherAppointment.getName().equals(getName())
                 && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
                 && otherAppointment.getDuration().equals(getDuration())
-                && Objects.equals(otherAppointment.getPerson(), getPerson());
+                && Objects.equals(otherAppointment.getPerson(), getPerson())
+                && Objects.equals(otherAppointment.getPriority(), getPriority());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, startDateTime, duration, person);
+        return Objects.hash(name, startDateTime, duration, person, priority);
     }
 
     @Override
     public String toString() {
-        return getName()
-                + "; Start Date Time: "
+        return "**Name:** "
+                + getName()
+                + "\n **Start Date Time:** "
                 + getStartDateTimeObject()
-                + "; Duration: "
+                + "\n **Duration:** "
                 + getDuration()
-                + "; Person: "
-                + getPerson();
+                + "\n **Person:** "
+                + (getPerson() == null ? "None" : getPerson().getName())
+                + "\n **Priority:** "
+                + (getPriority() == null ? "None" : getPriority());
     }
 
     /**
@@ -140,7 +178,7 @@ public class Appointment extends ScheduleItem {
      * @param duration The Duration container to use.
      * @return The computed end date-time.
      */
-    private static LocalDateTime getEndDateTimeOrThrow(StartDateTime startDateTime, Duration duration) {
+    private static LocalDateTime computeEndDateTime(StartDateTime startDateTime, Duration duration) {
         requireAllNonNull(startDateTime, duration);
         return startDateTime.value.plusMinutes(duration.value);
     }

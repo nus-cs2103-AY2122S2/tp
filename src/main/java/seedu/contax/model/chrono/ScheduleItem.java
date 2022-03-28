@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Represents an entry in the Schedule. This class only implements temporal-related operations required for
- * {@code DisjointScheduleItemList} and {@code Schedule} maintenance. It does not specify any problem-domain
+ * comparing Temporal items and {@code Schedule} maintenance. It does not specify any problem-domain
  * specific logic.
  */
 public abstract class ScheduleItem implements TemporalComparable {
@@ -72,8 +72,8 @@ public abstract class ScheduleItem implements TemporalComparable {
     }
 
     /**
-     * Returns true if both ScheduleItems have the same time range.
-     * This is a stronger notion of equality, and implementing subclasses should minimally check for this
+     * Returns true if both ScheduleItems have exactly the same time range.
+     * This is a stronger notion of equality, and extending subclasses should minimally check for this
      * condition in the equals function.
      */
     @Override

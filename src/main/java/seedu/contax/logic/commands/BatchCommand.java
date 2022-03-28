@@ -36,8 +36,8 @@ public class BatchCommand extends Command {
 
     public static final String COMMAND_WORD = "batch";
 
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in batch** \n"
-            + "Parameters: *"
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in batch**"
+            + "\nParameters: *"
             + "COMMAND (must be valid command without index) "
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
             + PREFIX_EQUALS + "VALUE*\n"

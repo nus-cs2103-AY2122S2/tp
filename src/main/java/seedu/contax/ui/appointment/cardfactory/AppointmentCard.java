@@ -1,4 +1,4 @@
-package seedu.contax.ui.appointment;
+package seedu.contax.ui.appointment.cardfactory;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,13 +9,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.Priority;
 import seedu.contax.model.person.Person;
 import seedu.contax.ui.UiPart;
 
 /**
- * An UI component that displays the information in an {@code Appointment}.
+ * Displays the information in an {@code Appointment}.
+ * This class is deliberately maintained as package private to prevent unintended access.
  */
-public class AppointmentCard extends UiPart<Region> {
+class AppointmentCard extends UiPart<Region> {
 
     private static final String FXML = "AppointmentListCard.fxml";
     private static final String DATE_FORMAT = "dd LLL yyyy";
@@ -44,11 +46,13 @@ public class AppointmentCard extends UiPart<Region> {
     private Label personAddress;
     @FXML
     private Label withLabel;
+    @FXML
+    private Label priority;
 
     /**
      * Creates a new empty instance of {@code AppointmentCard}.
      */
-    public AppointmentCard() {
+    AppointmentCard() {
         super(FXML);
     }
 
@@ -59,7 +63,7 @@ public class AppointmentCard extends UiPart<Region> {
      * @param appointmentModel The Appointment to display in this card.
      * @param displayedIndex The index to display for this card.
      */
-    public void updateModel(Appointment appointmentModel, int displayedIndex) {
+    void updateModel(Appointment appointmentModel, int displayedIndex) {
         requireNonNull(appointmentModel);
         if (!appointmentModel.equals(this.appointmentModel)) {
             this.appointmentModel = appointmentModel;
@@ -82,11 +86,34 @@ public class AppointmentCard extends UiPart<Region> {
                 personName.setText("");
                 personAddress.setText("");
             }
+
+            updatePriorityStyle(appointmentModel.getPriority());
+
         }
 
         if (displayedIndex != this.displayedIndex) {
             this.displayedIndex = displayedIndex;
             id.setText(displayedIndex + ". ");
+        }
+    }
+
+    private void updatePriorityStyle(Priority modelPriority) {
+        if (appointmentModel.getPriority() != null) {
+            priority.setText(modelPriority.toString());
+            switch (appointmentModel.getPriority()) {
+            case HIGH:
+                priority.setStyle("-fx-background-color: red;");
+                break;
+            case MEDIUM:
+                priority.setStyle("-fx-background-color: orange ;");
+                break;
+            default:
+                priority.setStyle("-fx-background-color: green;");
+                break;
+            }
+        } else {
+            priority.setText("");
+            priority.setStyle("-fx-background-color: none;");
         }
     }
 

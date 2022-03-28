@@ -13,9 +13,9 @@ import seedu.contax.model.Model;
  */
 public class ChainCommand extends Command {
     public static final String COMMAND_WORD = "chain";
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Chain two commands together for execution**\n"
-            + "Parameters: *[Command] && [Command]*\n"
-            + "Example: `deleteperson 1 addperson n/Alice p/91231231 e/alice@example.com a/Address`";
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Chain two commands together for execution**"
+            + "\nParameters: *[Command] && [Command]*"
+            + "\nExample: `deleteperson 1 addperson n/Alice p/91231231 e/alice@example.com a/Address`";
 
     private final List<Command> commands;
     /**
@@ -42,16 +42,7 @@ public class ChainCommand extends Command {
     @Override
     public boolean equals(Object other) {
         if (other instanceof ChainCommand) {
-            for (int i = 0; i < commands.size(); i++) {
-                if (((ChainCommand) other).commands.size() != 0) {
-                    if (!commands.get(i).equals(((ChainCommand) other).commands.get(i))) {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-            return true;
+            return ((ChainCommand) other).commands.equals(commands);
         } else {
             return false;
         }

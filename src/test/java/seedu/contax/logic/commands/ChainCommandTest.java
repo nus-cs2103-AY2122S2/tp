@@ -84,8 +84,8 @@ public class ChainCommandTest {
 
         ChainCommand testChainCommand = new ChainCommand(commandList);
         assertEquals(testChainCommand.execute(model).getFeedbackToUser().trim(), (
-                "Edited Person: Amy Bee; Phone: 85355255; Email: amy@gmail.com; "
-                + "Address: 123, Jurong West Ave 6, #08-111\n"
+                "Edited Person: \n**Name: **Amy Bee\n**Phone: **85355255\n**Email: **amy@gmail.com\n"
+                + "**Address: **123, Jurong West Ave 6, #08-111\n"
                 + "Listed all persons"));
     }
 }
