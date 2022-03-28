@@ -130,6 +130,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         labelPlaceholder.getChildren().add(overlay.getRoot());
         labelPlaceholder.getChildren().add(instructionLabel.getRoot());
         personListPanel = new ListPanel<>(model.getFilteredPersonList(), PersonCard::new);
+        personTab.setContent(personListPanel.getRoot());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
