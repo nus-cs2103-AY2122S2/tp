@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.ParserUtil.parseSkillSetForEdit;
 
 import java.util.LinkedList;
 
@@ -27,6 +28,7 @@ public class SetSkillsCommandParser implements Parser<SetSkillsCommand> {
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         parseSkillSetForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editPersonDescriptor::setSkillSet);
 
-
+        return new SetSkillsCommand(indices, editPersonDescriptor);
     }
+
 }

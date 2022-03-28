@@ -3,8 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -39,6 +41,13 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses multiple {@code oneBasedIndex} in string format and returns a list of {@code Index}
+     * @param oneBasedIndices the string representation of indices separated with the given regex
+     * @param regex regular expression to separate the indices in String
+     * @return the list of indices
+     * @throws ParseException if one of the arguments cannot be interpreted as an {@code Index}
+     */
     public static LinkedList<Index> parseIndices(String oneBasedIndices, String regex) throws ParseException {
         String[] numbers = oneBasedIndices.split(regex);
         LinkedList<Index> indices = new LinkedList<>();
@@ -165,5 +174,35 @@ public class ParserUtil {
             skillSet.add(parseSkill(skill));
         }
         return skillSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> teams} into a {@code Set<Team>} if {@code teams} is non-empty.
+     * If {@code teams} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Team>} containing zero teams.
+     */
+    public static Optional<Set<Team>> parseTeamsForEdit(Collection<String> teams) throws ParseException {
+        assert teams != null;
+
+        if (teams.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> set = teams.size() == 1 && teams.contains("") ? Collections.emptySet() : teams;
+        return Optional.of(ParserUtil.parseTeams(set));
+    }
+
+    /**
+     * Parses {@code Collection<String> skillset} into a {@code Set<Skill>} if {@code skill} is non-empty.
+     * If {@code skill} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Skill>} containing zero tags.
+     */
+    public static Optional<SkillSet> parseSkillSetForEdit(Collection<String> skill) throws ParseException {
+        assert skill != null;
+
+        if (skill.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> skillSet = skill.size() == 1 && skill.contains("") ? Collections.emptySet() : skill;
+        return Optional.of(ParserUtil.parseSkillSet(skillSet));
     }
 }
