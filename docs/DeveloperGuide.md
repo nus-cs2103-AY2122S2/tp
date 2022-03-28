@@ -368,6 +368,9 @@ It currently supports:
 
 This was done by changing the `ResultDisplay` to use a `TextFlow` object, and dynamically generate a List of styled `Text` objects to add to the `ResultDisplay`.
 
+A partial sequence diagram showing the process of how the UI uses the text styler is as follows:
+![MarkdownTextStylerDiagram](images/MarkdownTextStylerDiagram.png)
+
 
 ### Import and Export CSV Features
 
