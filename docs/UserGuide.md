@@ -99,7 +99,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Displays a window with the commands' usage and a link to access the user guide.
 
 ![help message](images/helpMessage.png)
 
