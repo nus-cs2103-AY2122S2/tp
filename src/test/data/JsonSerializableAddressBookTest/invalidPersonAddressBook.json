@@ -3,6 +3,9 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "address": "4th street",
+    "course": "computer science",
+    "matricCard": "A1234123V",
+    "telegram" : "Alicepaupau"
   } ]
 }

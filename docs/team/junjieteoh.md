@@ -21,7 +21,7 @@ Given below are my contributions to the project.
 
 
 * **Enhancements to existing features**:
-  * New ways for user to add profiles - via a pop out window with a form-like interface 
+  * New ways for user to add profiles - via a pop out window with a form-like interface
 
 * **Documentation**:
     * User Guide:

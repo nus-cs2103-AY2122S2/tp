@@ -1,0 +1,15 @@
+@startuml
+
+start
+:User executes filter command;
+:Checks if tag exists;
+if (Tag Exists) then (true)
+  :Filter person list;
+  :Show filter success message;
+else (false)
+  :Show error message;
+endif
+
+stop
+
+@enduml

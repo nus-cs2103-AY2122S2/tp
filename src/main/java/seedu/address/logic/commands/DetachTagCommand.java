@@ -74,7 +74,9 @@ public class DetachTagCommand extends Command {
         tagCopy.removeIf(t -> t.isSameTag(toDetach));
 
         Person personAfterDetach = new Person(personToDetachTagFrom.getName(), personToDetachTagFrom.getPhone(),
-                personToDetachTagFrom.getEmail(), personToDetachTagFrom.getAddress(), tagCopy);
+                personToDetachTagFrom.getEmail(), personToDetachTagFrom.getAddress(), tagCopy,
+                personToDetachTagFrom.getCourse(), personToDetachTagFrom.getMatricCard(),
+                personToDetachTagFrom.getTelegram());
 
         model.setPerson(personToDetachTagFrom, personAfterDetach);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDetach,
