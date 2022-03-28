@@ -184,6 +184,11 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public void rejectInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setInterview(Interview target, Interview editedInterview) {
             throw new AssertionError("This method should not be called.");
         }

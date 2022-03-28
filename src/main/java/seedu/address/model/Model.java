@@ -126,9 +126,16 @@ public interface Model {
 
     /**
      * Accepts the given interview.
-     * {@code interview} must already exist in HireLah and have passed staus.
+     * {@code interview} must already exist in HireLah and have passed status.
      */
     void acceptInterview(Interview interview);
+
+    /**
+     * Rejects the given interview.
+     * {@code interview} must already exist in HireLah and have passed status.
+     */
+    void rejectInterview(Interview interview);
+
 
     /**
      * Replaces the given interview {@code target} with {@code editedInterview}.

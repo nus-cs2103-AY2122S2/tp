@@ -105,6 +105,16 @@ public class Interview {
     }
 
     /**
+     * Marks an interview as rejected.
+     * The interview must already have been passed to be rejected.
+     */
+    public void markAsRejected() {
+        this.status.markAsRejected();
+
+        // decrement position count and offering
+    }
+
+    /**
      * Returns true if both interviews have the same data fields.
      * This defines a stronger notion of equality between two interviews.
      */

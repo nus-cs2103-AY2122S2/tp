@@ -112,6 +112,26 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Rejects an interview in the list.
+     */
+    public void reject(Interview toReject) {
+        requireNonNull(toReject);
+
+        toReject.markAsRejected();
+        int index = internalList.indexOf(toReject);
+
+        if (index == -1) {
+            throw new InterviewNotFoundException();
+        }
+
+        //        if (!toFail.equals(toFail) && contains(toFail)) {
+        //            throw new DuplicateInterviewException();
+        //        }
+
+        internalList.set(index, toReject);
+    }
+
+    /**
      * Replaces the interview {@code target} in the list with {@code editedInterivew}.
      * {@code target} must exist in the list.
      * The interview {@code editedInterview} must not be the same as another existing interview in the list.
