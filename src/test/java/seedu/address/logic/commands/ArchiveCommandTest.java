@@ -46,14 +46,6 @@ public class ArchiveCommandTest {
     }
 
     @Test
-    public void execute_archiveValidFile_archiveSuccessful() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.setAddressBookFilePath(validTestFilePath);
-        Model expectedModel = model;
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
     public void directoryNameIsCorrectFormat() {
         assertTrue(ArchiveCommand.ARCHIVE_DIRECTORY_NAME_FORMAT.toPattern().matches("ddMMyy"));
     }
