@@ -54,8 +54,8 @@ public class JsonAdaptedSkill {
         if (!Skill.isValidSkillName(skillName)) {
             throw new IllegalValueException(Skill.NAME_CONSTRAINTS);
         }
-        if (!Skill.isValidSkillProficiency(skillProficiency)) {
-            throw new IllegalValueException(Skill.PROFICIENCY_CONSTRAINTS);
+        if (!Skill.isValidSkillProficiencyRange(skillProficiency)) {
+            throw new IllegalValueException(Skill.PROFICIENCY_CONSTRAINTS_RANGE);
         }
         return new Skill(skillName, skillProficiency);
     }

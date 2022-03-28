@@ -25,6 +25,7 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
       * [Show past teammates: filterteam](#filter-for-past-teammates-filterteam)
       * [Show potential teammates: show](#show-all-potential-teammates-show)
     * [Exiting HackNet](#exiting-the-program-exit)
+    * [Navigating User Input History](#navigating-user-input-history)
 * [Data](#data)
 * [Future Updates](#future-updates)
 * [FAQ](#faq)
@@ -245,7 +246,7 @@ Examples:
 
 Shows a list of past teammates in HackNet.
 
-Format: `list`
+Format: `filterteam`
 
 ### Show all potential teammates: `show`
 
@@ -258,6 +259,12 @@ Format: `show`
 Exits the program.
 
 Format: `exit`
+
+### Navigating User Input History: `↑`, `↓`
+
+Allows user to quickly retrieve their previous inputs from current session by using the up and down arrow keys.
+
+Format: `↑`, `↓`
 
 ## Data
 
@@ -309,3 +316,4 @@ Action | Format, Examples
 **Filter Past Teammates** | `filterteam` 
 **Show potential teammates** | `show`
 **Exit HackNet** | `exit`
+**Navigate User Input History** | `↑`, `↓`

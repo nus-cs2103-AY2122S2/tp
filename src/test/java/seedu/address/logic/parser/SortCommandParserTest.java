@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_SKILL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -20,6 +21,15 @@ class SortCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidSkillInput_throwsParseException() {
+        // Multiple skill name
+        assertParseFailure(parser, "C Python", String.format(MESSAGE_INVALID_SKILL, Skill.NAME_CONSTRAINTS));
+
+        // Non-alphanumeric skill name
+        assertParseFailure(parser, "C_90", String.format(MESSAGE_INVALID_SKILL, Skill.NAME_CONSTRAINTS));
     }
 
     @Test
