@@ -1,5 +1,9 @@
 package seedu.contax.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -8,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -54,6 +59,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Button tagsBtn;
+
+    @FXML
+    private TextField userGuideLink;
 
     /**
      * Creates a new HelpWindow.
@@ -127,6 +135,7 @@ public class HelpWindow extends UiPart<Stage> {
         initAppointmentsPage();
         initTagsPage();
         setGeneralPage();
+        viewUserGuide();
     }
 
     /**
@@ -287,6 +296,22 @@ public class HelpWindow extends UiPart<Stage> {
         hideAllPages();
         tagsPage.setVisible(true);
         tagsBtn.setStyle("-fx-border-color: #FFFFFF;");
+    }
+
+    /**
+     * Sets up the user guide link
+     */
+    public void viewUserGuide() {
+        userGuideLink.setOnMouseClicked((e) -> {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (URISyntaxException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        );
     }
 
     /**
