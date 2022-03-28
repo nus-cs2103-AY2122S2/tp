@@ -297,6 +297,18 @@ _Alternatively, you can press `F1` to open the pop-up._
 
 ---
 
+### Viewing previous commands
+
+View previously typed commands in the command text box.
+
+While typing in the command text box, you can use 
+- <kbd>↑</kbd> key to go back in history and
+- <kbd>↓</kbd> key to go forward in history
+
+_Newly executed commands would be added to the history as you use TeachWhat!._
+
+---
+
 ### Exit
 
 Closes TeachWhat! window.
