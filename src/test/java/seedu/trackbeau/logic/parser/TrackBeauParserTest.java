@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 
@@ -81,8 +82,8 @@ public class TrackBeauParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
-        prefixArr.add(0, keywords);
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        prefixArr.set(0, keywords);
         FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
             FindCustomerCommand.COMMAND_WORD + " /n" + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCustomerCommand(new SearchContainsKeywordsPredicate(prefixArr)), command);

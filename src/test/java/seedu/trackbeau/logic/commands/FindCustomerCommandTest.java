@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.TypicalCustomers.CARL;
 import static seedu.trackbeau.testutil.TypicalCustomers.ELLE;
 import static seedu.trackbeau.testutil.TypicalCustomers.FIONA;
@@ -32,12 +33,12 @@ public class FindCustomerCommandTest {
 
     @Test
     public void equals() {
-        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
-        ArrayList<List<String>> secondPrefixArr2 = new ArrayList<List<String>>(Collections.nCopies(9, null));
-        firstPrefixArr.add(0, Collections.singletonList("first"));
+        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> secondPrefixArr2 = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        firstPrefixArr.set(0, Collections.singletonList("first"));
         SearchContainsKeywordsPredicate firstPredicate =
                 new SearchContainsKeywordsPredicate(firstPrefixArr);
-        secondPrefixArr2.add(0, Collections.singletonList("second"));
+        secondPrefixArr2.set(0, Collections.singletonList("second"));
         SearchContainsKeywordsPredicate secondPredicate =
                 new SearchContainsKeywordsPredicate(secondPrefixArr2);
 
@@ -85,8 +86,8 @@ public class FindCustomerCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private SearchContainsKeywordsPredicate preparePredicate(String userInput) {
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
-        prefixArr.add(0, Arrays.asList(userInput.split("\\s+")));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        prefixArr.set(0, Arrays.asList(userInput.split("\\s+")));
         return new SearchContainsKeywordsPredicate(prefixArr);
     }
 }
