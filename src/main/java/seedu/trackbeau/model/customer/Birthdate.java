@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Birthdate {
-    public static final String MESSAGE_CONSTRAINTS = "Birthdate should follow dd-mm-yyyy and be valid date.";
+    public static final String MESSAGE_CONSTRAINTS = "Birthdate should follow dd-MM-yyyy and be valid date.";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final String EMPTY_DATE = "01-01-1000"; //impossible date
     public final LocalDate value;

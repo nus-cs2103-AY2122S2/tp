@@ -11,7 +11,7 @@ public class Duration {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Duration should only contain positive numbers and have a value that is greater than 0";
+        "Duration should only contain numbers and have a value that is greater than 0.";
     public static final String VALIDATION_REGEX = "^\\s*(?=.*[1-9])\\d*$";
     public final Integer value;
 
