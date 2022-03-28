@@ -9,21 +9,22 @@ UNite is a **desktop app for managing contacts specifically designed for people 
 1. [Quick Start](#quick-start)
 2. [Features (CLI)](#features-cli)
    1. [Add a new person](#add-a-new-person)
-   2. [Add a new tag](#add-a-new-tag)
-   3. [Delete a tag](#delete-a-tag)
-   4. [List all tags](#list-all-tags)
-   5. [Attach tag to a profile](#attach-tag-to-a-profile)
-   6. [Detach a tag from a profile](#detach-a-tag-from-a-profile)
-   7. [Filter list by tag](#filter-list-by-tag)
-   8. [Locate person by name](#locate-person-by-name)
-   9. [Delete a person](#delete-a-person)
-   10. [Change the theme](#change-the-theme)
-   11. [View detail profile](#view-detailed-profile-cli)
-   12. [Clear all entries](#clear-all-entries)
-   13. [Exit the program](#exit-the-program)
-   14. [Save the data](#save-the-data)
-   15. [Edit the data file](#edit-the-data-file)
-   16. [Archive data file](#archive-data-file)
+   2. [Edit a person](#edit-a-person)
+   3. [Add a new tag](#add-a-new-tag)
+   4. [Delete a tag](#delete-a-tag)
+   5. [List all tags](#list-all-tags)
+   6. [Attach tag to a profile](#attach-tag-to-a-profile)
+   7. [Detach a tag from a profile](#detach-a-tag-from-a-profile)
+   8. [Filter list by tag](#filter-list-by-tag)
+   9. [Locate person by name](#locate-person-by-name)
+   10. [Delete a person](#delete-a-person)
+   11. [Change the theme](#change-the-theme)
+   12. [View detail profile](#view-detailed-profile-cli)
+   13. [Clear all entries](#clear-all-entries)
+   14. [Exit the program](#exit-the-program)
+   15. [Save the data](#save-the-data)
+   16. [Edit the data file](#edit-the-data-file)
+   17. [Archive data file](#archive-data-file)
 3. [Features (Mouse interaction)](#features-mouse-interaction)
    1. [Enable mouse interaction](#enable-mouse-interaction)
    2. [Disable mouse interaction](#disable-mouse-interaction)
@@ -102,7 +103,7 @@ Peter with tags `classmates` and `friends`.
 This command will not get executed successfully, because of the missing required field `a/ADDRESS`.
 
 
-### Edit a person : `edit`
+### Edit a person : `edit`<a name="edit-a-person"></a>
 
 Edit a person in the address book.
 
