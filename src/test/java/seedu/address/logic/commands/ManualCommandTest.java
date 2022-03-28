@@ -104,6 +104,12 @@ public class ManualCommandTest {
     }
 
     @Test
+    public void execute_manualDeleteTask_success() {
+        CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_DELETE_TASK_COMMAND);
+        assertCommandSuccess(new ManualCommand("deleteTask"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
     public void execute_manualInvalid_success() {
         ManualCommand manualCommand = new ManualCommand(INVALID_COMMAND_NAME);
         CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_UNKNOWN_COMMANDS);
