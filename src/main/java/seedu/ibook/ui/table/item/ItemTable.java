@@ -45,8 +45,7 @@ public class ItemTable extends UiComponent<VBox> {
         if (filteredItem.isEmpty()) {
             EmptyItemTableState emptyState = new EmptyItemTableState(getMainWindow());
             content.getChildren().add(emptyState.getRoot());
-        }
-        else {
+        } else {
             for (int i = 0; i < filteredItem.size(); i++) {
                 Item item = filteredItem.get(i);
                 String index = String.format("%d-%d", productIndex, i + 1);

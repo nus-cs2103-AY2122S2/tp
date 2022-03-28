@@ -41,8 +41,7 @@ public class ProductTable extends UiComponent<VBox> {
         if (filteredIBook.isEmpty()) {
             EmptyProductTableState emptyState = new EmptyProductTableState(getMainWindow());
             content.getChildren().add(emptyState.getRoot());
-        }
-        else {
+        } else {
             for (int i = 0; i < filteredIBook.size(); i++) {
                 Product product = filteredIBook.get(i);
                 ProductCard productCard = new ProductCard(i + 1, product, getMainWindow());

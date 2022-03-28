@@ -12,11 +12,8 @@ public class EmptyProductTableState extends UiComponent<HBox> {
 
     private static final String FXML = "Table/EmptyProductTableState.fxml";
 
-    @FXML
-    private HBox content;
-
     /**
-     * Initializes a {@code ItemTable}.
+     * Initializes the empty state of {@code ProductTable}.
      *
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */

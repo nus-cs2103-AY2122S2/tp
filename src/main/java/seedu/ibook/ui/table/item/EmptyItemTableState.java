@@ -12,11 +12,8 @@ public class EmptyItemTableState extends UiComponent<HBox> {
 
     private static final String FXML = "Table/Item/EmptyItemTableState.fxml";
 
-    @FXML
-    private HBox content;
-
     /**
-     * Initializes a {@code ProductTable}.
+     * Initializes the empty state of {@code ItemTable}.
      *
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
@@ -29,6 +26,6 @@ public class EmptyItemTableState extends UiComponent<HBox> {
      */
     @FXML
     private void handleAddItemClicked() {
-        getMainWindow().showPopupAdd();
+        // TODO: Add after PR #129
     }
 }
