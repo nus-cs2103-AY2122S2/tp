@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class Prefix implements Serializable {
     private final String prefix;
     private final boolean isRequired;
+    private final boolean isFlag;
 
     /**
      * Placeholder
@@ -17,6 +18,7 @@ public class Prefix implements Serializable {
     public Prefix(String prefix) {
         this.prefix = prefix;
         this.isRequired = false;
+        this.isFlag = false;
     }
 
     /**
@@ -27,6 +29,23 @@ public class Prefix implements Serializable {
     public Prefix(String prefix, boolean isRequired) {
         this.prefix = prefix;
         this.isRequired = isRequired;
+        this.isFlag = false;
+    }
+
+    /**
+     * Placeholder
+     * @param prefix placeholder
+     * @param isRequired placeholder
+     * @param isFlag placeholder
+     */
+    public Prefix(String prefix, boolean isRequired, boolean isFlag) {
+        this.prefix = prefix;
+        this.isRequired = isRequired;
+        this.isFlag = isFlag;
+    }
+
+    public boolean isFlag() {
+        return isFlag;
     }
 
     public String getPrefix() {

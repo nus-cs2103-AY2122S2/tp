@@ -37,6 +37,8 @@ public class TransactionCard extends UiPart<Region> {
     private Label note;
     @FXML
     private Label identifier;
+    @FXML
+    private Label isPaid;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,7 +59,9 @@ public class TransactionCard extends UiPart<Region> {
 
         note.setText(transaction.getNote()
                 .map(Note::toString)
-                .orElse(Note.EMPTY_DUE_DATE));
+                .orElse(Note.EMPTY_NOTE));
+
+        isPaid.setText(String.format("Paid: %s", transaction.isPaid()));
     }
 
     @Override
