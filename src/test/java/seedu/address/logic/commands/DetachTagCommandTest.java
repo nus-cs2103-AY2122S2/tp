@@ -90,6 +90,19 @@ public class DetachTagCommandTest {
     }
 
     @Test
+    public void execute_nonExistingPersonTagUnfilteredList_failure() {
+        DetachTagCommand detachTagCommand = new DetachTagCommand(OWEMONEY, INDEX_FIRST_PERSON);
+        assertCommandFailure(detachTagCommand, model, DetachTagCommand.MESSAGE_MISSING_TAG_PERSON);
+    }
+
+    @Test
+    public void execute_nonExistingPersonTagFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        DetachTagCommand detachTagCommand = new DetachTagCommand(OWEMONEY, INDEX_FIRST_PERSON);
+        assertCommandFailure(detachTagCommand, model, DetachTagCommand.MESSAGE_MISSING_TAG_PERSON);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DetachTagCommand detachTagCommand = new DetachTagCommand(FRIEND, outOfBoundIndex);
