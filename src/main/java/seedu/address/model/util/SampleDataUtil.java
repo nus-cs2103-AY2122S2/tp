@@ -50,15 +50,39 @@ public class SampleDataUtil {
 
     public static Seller[] getSampleSellers() {
         return new Seller[] {
-            new Seller(new Name("Jacky Seller"), new Phone("2103"),
-            NO_APPOINTMENT, getTagSet("friends"), NULL_PROPERTY_TO_SELL)
+            new Seller(new Name("Chok Hoe"), new Phone("12345678"),
+            NO_APPOINTMENT, getTagSet("fav"), NULL_PROPERTY_TO_SELL),
+            new Seller(new Name("Yong Ler"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("friendly"), NULL_PROPERTY_TO_SELL),
+            new Seller(new Name("Jacky"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("funny"), NULL_PROPERTY_TO_SELL),
+            new Seller(new Name("Ian"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("talkative"), NULL_PROPERTY_TO_SELL),
+            new Seller(new Name("Joey"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("chef"), NULL_PROPERTY_TO_SELL),
+            new Seller(new Name("Justin"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("negotiator"), NULL_PROPERTY_TO_SELL),
+            new Seller(new Name("Chee Kean"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("Inquisitive"), NULL_PROPERTY_TO_SELL)
         };
     }
 
     public static Buyer[] getSampleBuyers() {
         return new Buyer[] {
-            new Buyer(new Name("Jacky Buyer"), new Phone("2103"),
-            NO_APPOINTMENT, getTagSet("friends"), NULL_PROPERTY_TO_BUY)
+            new Buyer(new Name("Shi Hong"), new Phone("12345678"),
+            NO_APPOINTMENT, getTagSet("smart"), NULL_PROPERTY_TO_BUY),
+            new Buyer(new Name("Oviya"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("kind"), NULL_PROPERTY_TO_BUY),
+            new Buyer(new Name("Zhongfu"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("cool"), NULL_PROPERTY_TO_BUY),
+            new Buyer(new Name("Janald"), new Phone("21345678"),
+                    NO_APPOINTMENT, getTagSet("cat"), NULL_PROPERTY_TO_BUY),
+            new Buyer(new Name("Jun Hong"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("rich"), NULL_PROPERTY_TO_BUY),
+            new Buyer(new Name("Jun Heng"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("big"), NULL_PROPERTY_TO_BUY),
+            new Buyer(new Name("Dara"), new Phone("12345678"),
+                    NO_APPOINTMENT, getTagSet("fav"), NULL_PROPERTY_TO_BUY)
         };
     }
 
