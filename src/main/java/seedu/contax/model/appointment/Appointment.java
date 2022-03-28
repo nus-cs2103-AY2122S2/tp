@@ -55,7 +55,7 @@ public class Appointment extends ScheduleItem {
      * @param startDateTime A valid Appointment Starting DateTime.
      * @param duration A valid Appointment Duration.
      * @param person A valid Person or null.
-     * @param priority A valid priority level.
+     * @param priority A valid priority level or null.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
