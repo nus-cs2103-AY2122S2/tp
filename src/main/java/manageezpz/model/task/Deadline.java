@@ -3,6 +3,8 @@ package manageezpz.model.task;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+    protected String type;
+    protected Description description;
     private Date date;
     private Time time;
 
@@ -12,10 +14,10 @@ public class Deadline extends Task {
      * @param taskDescription information about the task.
      */
     public Deadline(Description taskDescription, Date date, Time time) {
-        super(taskDescription);
-        super.setType("deadline");
+        this.description = taskDescription;
         this.date = date;
         this.time = time;
+        this.type = "deadline";
     }
 
     public Date getDate() {
@@ -24,6 +26,16 @@ public class Deadline extends Task {
 
     public Time getTime() {
         return this.time;
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public Description getDescription() {
+        return this.description;
     }
 
     @Override
@@ -39,7 +51,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+        return "[D]" + super.toString() + getDescription()
+                + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
 }
