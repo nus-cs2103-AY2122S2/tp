@@ -10,6 +10,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindCompanyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entry.predicate.CompanyContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCompanyPersonCommand object
@@ -31,7 +32,12 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
                     FindCompanyCommand.MESSAGE_USAGE));
         }
 
-        return new FindCompanyCommand(argMultimap);
+        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
+        String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
+
+        CompanyContainsKeywordsPredicate predicate = new CompanyContainsKeywordsPredicate(Arrays.asList(nameKeywords),
+                Arrays.asList(tagKeywords));
+        return new FindCompanyCommand(predicate);
     }
 
     private boolean isValid(ArgumentMultimap argumentMultimap) throws ParseException {
@@ -39,7 +45,10 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
 
         if (namePresent) {
-            ParserUtil.parseName(argumentMultimap.getValue(PREFIX_NAME).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_NAME).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseName(s);
+            }
         }
         if (tagPresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_TAG).get().split("\\s+"));

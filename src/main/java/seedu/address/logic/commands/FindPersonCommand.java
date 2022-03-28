@@ -5,11 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 import seedu.address.model.entry.predicate.PersonContainsKeywordsPredicate;
 
@@ -37,26 +34,20 @@ public class FindPersonCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " alice bob ";
 
-    private final ArgumentMultimap argumentMultimap;
+    private final PersonContainsKeywordsPredicate predicate;
 
     /**
      * Constructs FindPersonCommand object
-     * @param argumentMultimap A hashmap containing person prefixes and its value from user input
+     * @param predicate A predicate containing all Event's attributes queried by user
      */
-    public FindPersonCommand(ArgumentMultimap argumentMultimap) {
-        requireNonNull(argumentMultimap);
-        this.argumentMultimap = argumentMultimap;
+    public FindPersonCommand(PersonContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        String[] nameKeywords = argumentMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
-        String[] companyNameKeywords = argumentMultimap.getValue(PREFIX_COMPANY).orElse("").split("\\s+");
-        String[] tagKeywords = argumentMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
-
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Arrays.asList(nameKeywords),
-                Arrays.asList(companyNameKeywords), Arrays.asList(tagKeywords));
 
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
@@ -68,6 +59,6 @@ public class FindPersonCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindPersonCommand // instanceof handles nulls
-                && argumentMultimap.equals(((FindPersonCommand) other).argumentMultimap)); // state check
+                && predicate.equals(((FindPersonCommand) other).predicate)); // state check
     }
 }

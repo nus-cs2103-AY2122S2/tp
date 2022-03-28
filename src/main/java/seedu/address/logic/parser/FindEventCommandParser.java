@@ -14,6 +14,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entry.predicate.EventContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindEventPersonCommand object
@@ -36,7 +37,21 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
                     FindEventCommand.MESSAGE_USAGE));
         }
 
-        return new FindEventCommand(argMultimap);
+        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
+        String[] companyNameKeywords = argMultimap.getValue(PREFIX_COMPANY).orElse("").split("\\s+");
+        String[] dateKeywords = argMultimap.getValue(PREFIX_DATE).orElse("").split("\\s+");
+        String[] timeKeywords = argMultimap.getValue(PREFIX_TIME).orElse("").split("\\s+");
+        String[] locationKeywords = argMultimap.getValue(PREFIX_LOCATION).orElse("").split("\\s+");
+        String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
+
+        EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Arrays.asList(nameKeywords),
+                Arrays.asList(companyNameKeywords),
+                Arrays.asList(dateKeywords),
+                Arrays.asList(timeKeywords),
+                Arrays.asList(locationKeywords),
+                Arrays.asList(tagKeywords));
+
+        return new FindEventCommand(predicate);
     }
 
     private boolean isValid(ArgumentMultimap argumentMultimap) throws ParseException {
@@ -48,19 +63,34 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
 
         if (namePresent) {
-            ParserUtil.parseName(argumentMultimap.getValue(PREFIX_NAME).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_NAME).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
         if (companyNamePresent) {
-            ParserUtil.parseCompanyName(argumentMultimap.getValue(PREFIX_COMPANY).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_COMPANY).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
         if (datePresent) {
-            ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_DATE).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_DATE).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
         if (timePresent) {
-            ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_TIME).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_TIME).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
         if (locationPresent) {
-            ParserUtil.parseLocation(argumentMultimap.getValue(PREFIX_LOCATION).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_LOCATION).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
         if (tagPresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_TAG).get().split("\\s+"));

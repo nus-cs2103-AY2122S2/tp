@@ -11,6 +11,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entry.predicate.PersonContainsKeywordsPredicate;
 
 
 /**
@@ -32,8 +33,15 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindPersonCommand.MESSAGE_USAGE));
         }
+        String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
+        String[] companyNameKeywords = argMultimap.getValue(PREFIX_COMPANY).orElse("").split("\\s+");
+        String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
 
-        return new FindPersonCommand(argMultimap);
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Arrays.asList(nameKeywords),
+                Arrays.asList(companyNameKeywords), Arrays.asList(tagKeywords));
+
+
+        return new FindPersonCommand(predicate);
     }
 
     private boolean isValid(ArgumentMultimap argumentMultimap) throws ParseException {
@@ -42,10 +50,16 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
 
         if (namePresent) {
-            ParserUtil.parseName(argumentMultimap.getValue(PREFIX_NAME).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_NAME).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
         if (companyNamePresent) {
-            ParserUtil.parseCompanyName(argumentMultimap.getValue(PREFIX_COMPANY).get());
+            List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_COMPANY).get().split("\\s+"));
+            for (String s : dummy) {
+                ParserUtil.parseTag(s);
+            }
         }
         if (tagPresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_TAG).get().split("\\s+"));

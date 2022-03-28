@@ -8,11 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.Arrays;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 import seedu.address.model.entry.predicate.EventContainsKeywordsPredicate;
 
@@ -42,34 +39,20 @@ public class FindEventCommand extends Command {
             + PREFIX_COMPANY + " sgshop "
             + PREFIX_TIME + " zoom";
 
-    private final ArgumentMultimap argumentMultimap;
+    private final EventContainsKeywordsPredicate predicate;
 
     /**
      * Constructs FindEventCommand object
-     * @param argumentMultimap A hashmap containing event prefixes and its value from user input
+     * @param predicate A predicate containing all Event's attributes queried by user
      */
-    public FindEventCommand(ArgumentMultimap argumentMultimap) {
-        requireNonNull(argumentMultimap);
-        this.argumentMultimap = argumentMultimap;
+    public FindEventCommand(EventContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        String[] nameKeywords = argumentMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
-        String[] companyNameKeywords = argumentMultimap.getValue(PREFIX_COMPANY).orElse("").split("\\s+");
-        String[] dateKeywords = argumentMultimap.getValue(PREFIX_DATE).orElse("").split("\\s+");
-        String[] timeKeywords = argumentMultimap.getValue(PREFIX_TIME).orElse("").split("\\s+");
-        String[] locationKeywords = argumentMultimap.getValue(PREFIX_LOCATION).orElse("").split("\\s+");
-        String[] tagKeywords = argumentMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
-
-        EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Arrays.asList(nameKeywords),
-                Arrays.asList(companyNameKeywords),
-                Arrays.asList(dateKeywords),
-                Arrays.asList(timeKeywords),
-                Arrays.asList(locationKeywords),
-                Arrays.asList(tagKeywords));
-
         model.updateFilteredEventList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()),
@@ -80,6 +63,6 @@ public class FindEventCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindEventCommand // instanceof handles nulls
-                && argumentMultimap.equals(((FindEventCommand) other).argumentMultimap)); // state check
+                && predicate.equals(((FindEventCommand) other).predicate)); // state check
     }
 }
