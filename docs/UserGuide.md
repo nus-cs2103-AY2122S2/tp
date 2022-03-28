@@ -3,8 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TeachWhat! is a **desktop app for tutors to manage their schedule, students, lessons, and 
-income**, optimized for use via a Command Line Interface (CLI) while still having the 
+TeachWhat! is a **desktop app for tutors to manage their schedule, students and lessons**, optimized for use via a Command Line Interface (CLI) while still having the 
 benefits of a Graphical User Interface (GUI). 
 If you can type fast, TeachWhat! can get your tuition management tasks done faster than 
 traditional GUI apps.
@@ -63,8 +62,8 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
 * **Where `<STUDENT_ID>` and `<LESSON_ID>` are mentioned, they are with referring to the index of the student 
 or lesson in the viewable lists.**
-* **Duplicate flags are not allowed unless explicitly stated.**
-  * e.g. `assign -s 1 -l 1 -l 2` is not allowed as there are two `-l` flags present in the command.
+* **Duplicate prefixes are not allowed unless explicitly stated.**
+  * e.g. `assign -s 1 -l 1 -l 2` is not allowed as there are two `-l` prefixes present in the command.
 
 * In each Feature description, the command word section will tell you what the command words are for each command.
 You may see more than one command word for a command, the second one being the shorter command for more advanced users.
