@@ -1,18 +1,7 @@
 package seedu.address.logic.commands.medical;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ETHNICITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FAMILY_HISTORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ILLNESSES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_IMMUNIZATION_HISTORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SURGERIES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +39,7 @@ public class EditMedicalCommand extends Command {
             + ": Edits the details of the medical information identified "
             + "by the index number used in the displayed medical information list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_AGE + "AGE "
             + PREFIX_BLOODTYPE + "BLOODTYPE "

@@ -20,10 +20,12 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
 
 public class AddConsultationCommand extends Command {
-    public static final String COMMAND_WORD = "add ";
+    public static final String COMMAND_WORD = "add";
     public static final CommandType COMMAND_TYPE = CommandType.CONSULTATION;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a consultation of patient in Medbook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + PREFIX_TYPE + "consultation "
+            + ": Adds a consultation of patient in Medbook. \n"
             + "Parameters: "
             + PREFIX_TYPE + "consultation "
             + PREFIX_NRIC + "OWNER_NRIC "
@@ -41,7 +43,7 @@ public class AddConsultationCommand extends Command {
             + PREFIX_FEE + "54.00 "
             + PREFIX_NOTES + "Should get more cough drops. ";
 
-    public static final String MESSAGE_SUCCESS = "New consultation added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New consultation added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already "
                                                                 + "exists in patient consultation list";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";

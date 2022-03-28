@@ -21,14 +21,17 @@ import seedu.address.model.patient.Patient;
  * Lists all consultations in the address book to the user.
  */
 public class ViewConsultationCommand extends Command {
-    public static final String COMMAND_WORD = "view ";
+    public static final String COMMAND_WORD = "view";
     public static final CommandType COMMAND_TYPE = CommandType.CONSULTATION;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + PREFIX_TYPE + "consultation "
             + ": Shows consultations that "
             + "matches the specified owner NRIC, and displays them as a list with index numbers.\n"
-            + "Parameters: TYPE, OWNER NRIC\n"
-            + "Example: " + COMMAND_WORD
+            + "Parameters: "
+            + PREFIX_TYPE + "TYPE "
+            + PREFIX_NRIC + "NRIC \n"
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "consultation "
             + PREFIX_NRIC + "S1234567L";
 

@@ -1,12 +1,7 @@
 package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,9 +34,7 @@ public class EditConsultationCommand extends Command {
             + ": Edits the details of the consultation identified "
             + "by the index number used in the displayed consultation list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters besides index are OPTIONAL."
-            + "Parameters: "
-            + "INDEX "
+            + "Parameters: INDEX "
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
@@ -49,11 +42,11 @@ public class EditConsultationCommand extends Command {
             + PREFIX_FEE + "FEE "
             + PREFIX_NOTES + "NOTES \n"
             + "Example: " + COMMAND_WORD
-            + "1 "
+            + " 1 "
             + PREFIX_DATE + "19-09-2020 "
             + PREFIX_TIME + "19-00 ";
 
-    public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Consultation Information: %1$s";
+    public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Consultation Information: \n%1$s";
 
     private final Index targetIndex;
     private final EditConsultationDescriptor editConsultationDescriptor;

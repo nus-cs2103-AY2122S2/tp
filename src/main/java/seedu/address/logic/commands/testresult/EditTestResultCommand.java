@@ -34,7 +34,7 @@ public class EditTestResultCommand extends Command {
             + ": Edits the details of the test result identified "
             + "by the index number used in the displayed test result information list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "

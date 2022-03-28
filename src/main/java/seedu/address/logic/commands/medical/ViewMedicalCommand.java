@@ -19,11 +19,15 @@ public class ViewMedicalCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final CommandType COMMAND_TYPE = CommandType.MEDICAL;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "medical"
             + ": Lists all medical information whose owner's name contain any of "
             + "the specified owner NRIC and displays them as a list with index numbers.\n"
-            + "Parameters: OWNER NRIC\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "medical " + PREFIX_NRIC + "S1234567G";
+            + "Parameters: "
+            + PREFIX_TYPE + "medical "
+            + PREFIX_NRIC + "NRIC \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TYPE + "medical "
+            + PREFIX_NRIC + "S1234567G";
 
     private final Nric nric;
 
