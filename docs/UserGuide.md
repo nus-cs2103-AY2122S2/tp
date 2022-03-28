@@ -22,13 +22,12 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
-<div markdown="span" class="alert alert-warning">:rotating_light: **For Users on Mac OSX:**
-The security policy of OSX might prevent the creation of data files in the same folder. For users on OSX, it is recommended that you <br>
+   <div markdown="span" class="alert alert-warning">:rotating_light: **For Users on Mac OSX:**
+     The security policy of OSX might prevent the creation of data files in the same folder. For users on OSX, it is recommended that you <br>
 
-- Navigate to your _home folder_ on Terminal <br>
-- Launch the application using the command `java -jar ContaX.jar`. <br>
-
-</div>
+     - Navigate to your _home folder_ on Terminal <br>
+     - Launch the application using the command `java -jar ContaX.jar`. <br>
+   </div>
 
 5. If this is your first time running ContaX, you will be prompted to go through an [Interactive Onboarding Guide](#onboarding-guide) to learn the basics, or you can choose to explore the application by yourself.
 
