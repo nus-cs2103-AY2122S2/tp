@@ -85,6 +85,6 @@
     "services" : [],
     "allergies" : []
   } ],
-  "services": []
-
+  "services": [],
+  "bookings": []
 }

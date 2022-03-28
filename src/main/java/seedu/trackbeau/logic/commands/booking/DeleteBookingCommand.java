@@ -57,6 +57,8 @@ public class DeleteBookingCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this;
+        return other == this // short circuit if same object
+                || (other instanceof DeleteBookingCommand // instanceof handles nulls
+                && targetIndexes.containsAll(((DeleteBookingCommand) other).targetIndexes)); // state check
     }
 }
