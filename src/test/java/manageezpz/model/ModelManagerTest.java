@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.model.person.NameContainsKeywordsPredicate;
+import manageezpz.model.person.Person;
 import manageezpz.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -211,4 +212,6 @@ public class ModelManagerTest {
         modelManager.unmarkTask(READ_BOOK);
         assertTrue(!READ_BOOK.isDone());
     }
+
+
 }

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private Date date;
     private Time time;
+    protected String type;
 
     /**
      * Constructor for the Task class.
@@ -13,9 +14,10 @@ public class Deadline extends Task {
      */
     public Deadline(Description taskDescription, Date date, Time time) {
         super(taskDescription);
-        super.setType("deadline");
         this.date = date;
         this.time = time;
+        super.setType("deadline");
+        //setType();
     }
 
     public Date getDate() {
@@ -25,6 +27,7 @@ public class Deadline extends Task {
     public Time getTime() {
         return this.time;
     }
+
 
     @Override
     public String getDateTime() {

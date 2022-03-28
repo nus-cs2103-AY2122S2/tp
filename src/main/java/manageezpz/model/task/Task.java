@@ -12,10 +12,10 @@ import manageezpz.model.person.Person;
  * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
  * inputted by a user either a Todo, Deadline or Event.
  */
-public class Task implements Comparable<Task> {
+public abstract class Task implements Comparable<Task> {
     protected boolean isDone;
-    protected String type;
     protected Priority priority;
+    protected String type;
 
     // Identity fields
     private final Description taskDescription;
@@ -34,7 +34,7 @@ public class Task implements Comparable<Task> {
         requireAllNonNull(taskDescription);
         this.taskDescription = taskDescription;
         this.isDone = false;
-        this.type = "";
+        this.type ="";
         this.assignees = new ArrayList<>();
         this.priority = Priority.NONE;
     }
@@ -49,10 +49,6 @@ public class Task implements Comparable<Task> {
 
     public List<Person> getAssignees() {
         return this.assignees;
-    }
-
-    public void addAssignees(Person person) {
-        this.assignees.add(person);
     }
 
     public void setTaskDone() {
@@ -75,14 +71,6 @@ public class Task implements Comparable<Task> {
         return this.type;
     }
 
-    /**
-     * Checks if the task is done or not.
-     * @return true if task is done, false otherwise.
-     */
-    public boolean isDone() {
-        return isDone;
-    }
-
     public String getDateTime() {
         return "";
     }
@@ -93,6 +81,61 @@ public class Task implements Comparable<Task> {
 
     public Priority getPriority() {
         return this.priority;
+    }
+
+    /**
+     * Adds a Person to the Task List.
+     * @param person the person to be added.
+     */
+    public void addAssignees(Person person) {
+        this.assignees.add(person);
+    }
+
+    /**
+     * Checks if the task is done or not.
+     * @return true if task is done, false otherwise.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Returns true if both Task have the same Description.
+     * This defines a weaker notion of equality between two Task.
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getDescription().equals(getDescription());
+    }
+
+    /**
+     * Used to assign a person to this Task.
+     * @param person the person to be assigned.
+     */
+    public void assignedTo(Person person) {
+        assignees.add(person);
+    }
+
+    /**
+     * Used to deallocate a person from this Task.
+     * @param person the person to be deallocated.
+     */
+    public void removeAssigned(Person person) {
+        assignees.remove(person);
+    }
+
+    /**
+     * Checks whether the assignee is assigned to the task.
+     * @param assignee The assignee to be searched
+     * @return True if the assignee is assigned, false otherwise
+     */
+    public boolean haveAssignees(String assignee) {
+        return assignees.stream()
+                .anyMatch(person -> person.getName().fullName.equals(assignee));
     }
 
     @Override
@@ -109,27 +152,6 @@ public class Task implements Comparable<Task> {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 
-    /**
-     * Returns true if both Task have the same Description.
-     * This defines a weaker notion of equality between two Task.
-     */
-    public boolean isSameTask(Task otherTask) {
-        if (otherTask == this) {
-            return true;
-        }
-
-        return otherTask != null
-                && otherTask.getDescription().equals(getDescription());
-    }
-
-    public void assignedTo(Person person) {
-        assignees.add(person);
-    }
-
-    public void removeAssigned(Person person) {
-        assignees.remove(person);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -143,16 +165,6 @@ public class Task implements Comparable<Task> {
         Task otherTask = (Task) other;
         return otherTask.getDescription().equals(getDescription())
                 && otherTask.getStatusIcon().equals(getStatusIcon());
-    }
-
-    /**
-     * Checks whether the assignee is assigned to the task.
-     * @param assignee The assignee to be searched
-     * @return True if the assignee is assigned, false otherwise
-     */
-    public boolean haveAssignees(String assignee) {
-        return assignees.stream()
-                .anyMatch(person -> person.getName().fullName.equals(assignee));
     }
 
     @Override

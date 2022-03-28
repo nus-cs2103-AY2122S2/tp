@@ -1,6 +1,7 @@
 package manageezpz.testutil;
 
 import manageezpz.model.task.Description;
+import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
 
 public class TodoBuilder {
@@ -12,6 +13,13 @@ public class TodoBuilder {
      */
     public TodoBuilder() {
         description = new Description(TASK_DESCRIPTION);
+    }
+
+    /**
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
+     */
+    public TodoBuilder(Todo taskToCopy) {
+        description = taskToCopy.getDescription();
     }
 
     /**
