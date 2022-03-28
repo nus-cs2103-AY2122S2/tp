@@ -5,6 +5,10 @@ title: User Guide
 
 HustleBook (HB) is a **desktop app for managing client details and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HB can get your client management meetings done faster than traditional GUI apps.
 
+This guide will help provide you with all the necessary information to set up, run and use the HustleBook to manage your clients.
+
+To get started, click on any of the headers in the table of content to jump to that section to get more information.
+
 * Table of Contents
   * [Quick Start](#quick-start)
   * [Features](#features)
@@ -20,6 +24,10 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
   * [Command Summary](#command-summary)
+  
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For new users, it is highly recommended starting off from the `Quck Start` section to get HustleBook up and running.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -27,14 +35,14 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `hustlebook.jar` from [here](https://github.com/AY2122S2-CS2103T-W15-2/tp/releases/).
+2. Download the latest `hustlebook.jar` from [here](https://github.com/AY2122S2-CS2103T-W15-2/tp/releases/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your HustleBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your HustleBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
@@ -47,7 +55,9 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
+
+Now that you have set up the HustleBook, lets take a look at what Hustlebook offers to allow you to do the hustle without moving a muscle.
 
 --------------------------------------------------------------------------------------------------------------------
 
