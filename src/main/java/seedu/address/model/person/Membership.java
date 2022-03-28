@@ -80,6 +80,7 @@ public class Membership extends Field {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
+        test = test.toLowerCase();
         return test.equals("gold") || test.equals("silver") || test.equals("bronze");
     }
 
