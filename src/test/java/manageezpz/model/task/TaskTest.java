@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import manageezpz.testutil.TaskBuilder;
+import manageezpz.testutil.TodoBuilder;
 
 public class TaskTest {
 
@@ -22,19 +22,19 @@ public class TaskTest {
         assertFalse(READ_BOOK.isSameTask(null));
 
         // description differs in case -> returns false
-        Task editedTask = new TaskBuilder(RETURN_BOOK).withDescription(VALID_TASK_DESCRIPTION.toLowerCase()).build();
+        Todo editedTask = new TodoBuilder(RETURN_BOOK).withDescription(VALID_TASK_DESCRIPTION.toLowerCase()).build();
         assertFalse(RETURN_BOOK.isSameTask(editedTask));
 
         // description has trailing spaces, all other attributes same -> returns false
         String desWithTrailingSpaces = VALID_TASK_DESCRIPTION + " ";
-        editedTask = new TaskBuilder(RETURN_BOOK).withDescription(desWithTrailingSpaces).build();
+        editedTask = new TodoBuilder(RETURN_BOOK).withDescription(desWithTrailingSpaces).build();
         assertFalse(RETURN_BOOK.isSameTask(editedTask));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Task readBookCopy = new TaskBuilder(READ_BOOK).build();
+        Todo readBookCopy = new TodoBuilder(READ_BOOK).build();
         assertTrue(READ_BOOK.equals(readBookCopy));
 
         // same object -> returns true
