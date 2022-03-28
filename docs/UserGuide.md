@@ -8,10 +8,10 @@ the process of hiring undergraduate/graduate Teaching Assistants (TA). They will
 data easily and review qualifications or availability for scheduling interviews. It is **optimized for use via a
 Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
 
-* Table of Contents
-  {:toc}
+-   Table of Contents
+    {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Quick start
 
@@ -27,21 +27,21 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`** : Lists all TAs.
+    - **`list`** : Lists all TAs.
 
-    * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new TA into the system.
+    - **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new TA into the system.
 
-    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
+    - **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
-    * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
+    - **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
 
-    * **`sort s/name`** : Sorts all TAs by name in descending alphabetical order.
+    - **`sort s/name`** : Sorts all TAs by name in descending alphabetical order.
 
-    * **`help`** : List all commands in the system.
+    - **`help`** : List all commands in the system.
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -49,17 +49,17 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+-   Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+    e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+-   Parameters can be in any order.<br>
+    e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/82341234 p/86785678`, only `p/86785678` will be taken.
+-   If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+    e.g. if you specify `p/82341234 p/86785678`, only `p/86785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+-   Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+    e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
@@ -75,15 +75,16 @@ Adds a TA into the system.
 
 Format: `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`
 
-* `STUDENTID` is sensitive and it will be validated.
-* `NAME` should only contain alphabets, `A-Z` or `a-z`.
-* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
-* `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
-* `SENIORITY` is a number range from 1 to 4.
-* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
+-   `STUDENTID` is sensitive and it will be validated.
+-   `NAME` should only contain alphabets, `A-Z` or `a-z`.
+-   `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
+-   `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
+-   `SENIORITY` is a number range from 1 to 4.
+-   `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
 
 Examples:
-* `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new TA with Student ID, E0123456, named John Doe.
+
+-   `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new TA with Student ID, E0123456, named John Doe.
 
 ### Listing all Teaching Assistants : `list`
 
@@ -120,21 +121,20 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 Note: `ATTRIBUTE_FIELD` can take on the following values
 `course`, `email`, `name`, `phone`, `candidate`, `studentid`
 
-
-* The keyword search is case-insensitive. e.g `hans` will match `Hans`
-* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
-* The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
-* For `f/candidate`, the search will find keywords across all attribute fields of the TA records.
-* Only full keywords will be matched
-  e.g. `k/jane doe f/name` will not match TAs with name `jane koe` or just `jane`
-* TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
-  e.g. `k/Jane k/Doe f/name` will return TAs with name e.g. `Jane Koe`, `John Doe`
+-   The keyword search is case-insensitive. e.g `hans` will match `Hans`
+-   The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
+-   The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
+-   For `f/candidate`, the search will find keywords across all attribute fields of the TA records.
+-   Only full keywords will be matched
+    e.g. `k/jane doe f/name` will not match TAs with name `jane koe` or just `jane`
+-   TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
+    e.g. `k/Jane k/Doe f/name` will return TAs with name e.g. `Jane Koe`, `John Doe`
 
 Examples:
-* `find k/Jane f/name` returns TAs with name e.g. `jane` and `jane doe`
-* `find k/Computer Science f/course` returns TAs with the course field i.e. `computer science`
-* `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
 
+-   `find k/Jane f/name` returns TAs with name e.g. `jane` and `jane doe`
+-   `find k/Computer Science f/course` returns TAs with the course field i.e. `computer science`
+-   `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
 
 ### Sorting candidates by attribute field: `sort`
 
@@ -145,24 +145,28 @@ Format: `sort s/ATTRIBUTE_FIELD`
 Note: `ATTRIBUTE_FIELD` can take on the following values
 `course`, `email`, `name`, `phone`, `candidate`, `studentid`
 
-* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
-* The search will return a list of all TAs sorted in ascending order
-  (i.e. A-Z, 0-9) with regard to the specified attribute field.
+-   The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
+-   The search will return a list of all TAs sorted in ascending order
+    (i.e. A-Z, 0-9) with regard to the specified attribute field.
 
 Examples:
 Let's reference a default sample list of unique TA candidates with attribute fields stated as (`name`, `studentid`).
+
 1. (`Ben`, `E23456789`)
 2. (`Alice`, `E0234567`)
 3. (`Charlie`, `E0123456`)
-* `sort s/name` returns TAs sorted by name in the following order:
+
+-   `sort s/name` returns TAs sorted by name in the following order:
+
 1. (`Alice`, `E0234567`)
 2. (`Ben`, `E23456789`)
 3. (`Charlie`, `E0123456`)
-* `sort s/studentid` returns TAs sorted by name in the following order:
+
+-   `sort s/studentid` returns TAs sorted by name in the following order:
+
 1. (`Charlie`, `E0123456`)
 2. (`Alice`, `E0234567`)
 3. (`Ben`, `E23456789`)
-
 
 ### Deleting a TA : `delete`
 
@@ -170,13 +174,14 @@ Deletes the specified candidate from the system.
 
 Format: `delete INDEX`
 
-* Deletes the candidate at specified `INDEX`.
-* The index refers to the index number shown in the displayed candidate list
-* The index must be a positive integer 1, 2, 3, …​
+-   Deletes the candidate at specified `INDEX`.
+-   The index refers to the index number shown in the displayed candidate list
+-   The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
-* `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st candidate in the results of the find command.
+
+-   `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
+-   `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st candidate in the results of the find command.
 
 ### Scheduling a candidate for an interview : `schedule` [Work-In-Progress]
 
@@ -184,16 +189,16 @@ Schedules the specified candidate for an interview.
 
 Format: `schedule INDEX /at DATE TIME`
 
-* Schedules the candidate at the specified `INDEX` for an interview on given `DATE` and `TIME`.
-* The index refers to the index number shown in the displayed candidate list.
-* The index must be a positive integer 1, 2, 3, …​
-* `DATE` and `TIME` must be specified in the format `dd/MM/yyyy` and `HH:mm` respectively.
-* `DATE` and `TIME` must not be earlier than the current date and time.
+-   Schedules the candidate at the specified `INDEX` for an interview on given `DATE` and `TIME`.
+-   The index refers to the index number shown in the displayed candidate list.
+-   The index must be a positive integer 1, 2, 3, …​
+-   `DATE` and `TIME` must be specified in the format `dd/MM/yyyy` and `HH:mm` respectively.
+-   `DATE` and `TIME` must not be earlier than the current date and time.
 
 Examples:
-* `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
-  for an interview on 20 September 2022, 3PM.
 
+-   `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
+    for an interview on 20 September 2022, 3PM.
 
 ### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
 
@@ -201,9 +206,9 @@ View more details about the Candidate in the middle panel.
 
 Format: `focus INDEX`
 
-* Additional details of the Candidate will be displayed on the center panel in the application.
-* To switch to another Candidate's information, user will just need to type the new command
-* and the new index of the candidate.
+-   Additional details of the Candidate will be displayed on the center panel in the application.
+-   To switch to another Candidate's information, user will just need to type the new command
+-   and the new index of the candidate.
 
 ### Clearing all entries : `clear`
 
@@ -233,19 +238,19 @@ If your changes to the data file makes its format invalid, TAlent Assistant™ w
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAlent Assistant™ home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Command summary
 
 | Action       | Format, Examples                                                                                                                                                 |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**      | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
 | **Clear**    | `clear`                                                                                                                                                          |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
