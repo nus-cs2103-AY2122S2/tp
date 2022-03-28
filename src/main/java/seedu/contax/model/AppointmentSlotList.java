@@ -1,5 +1,6 @@
 package seedu.contax.model;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.AppUtil.checkArgument;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class AppointmentSlotList {
      * @param backingSchedule The backing Schedule that slots should be generated for.
      */
     public AppointmentSlotList(Schedule backingSchedule) {
+        requireNonNull(backingSchedule);
+
         this.backingSchedule = backingSchedule;
         this.filteredRange = null;
         this.resultList = FXCollections.observableArrayList();
@@ -83,13 +86,14 @@ public class AppointmentSlotList {
 
         // state check
         AppointmentSlotList other = (AppointmentSlotList) obj;
-        return Objects.equals(filteredRange, other.filteredRange)
+        return backingSchedule.equals(other.backingSchedule)
+                && Objects.equals(filteredRange, other.filteredRange)
                 && minimumDuration == other.minimumDuration;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(minimumDuration, filteredRange);
+        return Objects.hash(backingSchedule, minimumDuration, filteredRange);
     }
 
     /**
