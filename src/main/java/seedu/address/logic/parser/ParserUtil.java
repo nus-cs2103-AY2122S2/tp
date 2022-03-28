@@ -89,13 +89,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code appointment} is invalid.
      */
-    public static String parseLocation(String location) throws ParseException {
+    public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
         if (!Location.isValidLocation(trimmedLocation)) {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
-        return trimmedLocation;
+        return new Location(trimmedLocation);
     }
 
     /**

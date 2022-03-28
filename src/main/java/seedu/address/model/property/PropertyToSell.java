@@ -32,6 +32,16 @@ public class PropertyToSell {
         this.address = address;
     }
 
+    public PropertyToSell updatePropertyToSell(HouseType houseType, Location location, PriceRange priceRange, Address address) {
+        //Todo: need to implement updateHouseType for House class
+        //this.house.updateHouseType(houseType);
+        //this.house.updateLocation(location);
+        this.house = new House(houseType, location.toString());
+        this.priceRange = priceRange;
+        this.address = address;
+        return this;
+    }
+
     public House getHouse() {
         return this.house;
     }
