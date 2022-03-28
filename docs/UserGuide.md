@@ -18,7 +18,7 @@ No worries, CinnamonBun has got you covered! CinnamonBun enables you to keep tra
 As a Command-line Interface (CLI) app, you'll never have to move your hands away from the keyboard to get all your tasks done.
 If you can type fast, the CLI will allow you to execute your tasks quickly. While this may be daunting for a new user, it only takes a short time to get accustomed to CinnamonBun.
 
-This guide aims to be the one-stop shop to get you from noob to expert in record speed.
+This guide aims to be the one-stop shop to get you up and running.
 
 ---
 
@@ -298,6 +298,14 @@ Examples:
 Deletes the clients filtered after using the `find` function.
 
 Format: `deleteFiltered`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* `deleteFiltered` deletes all the clients shown in the filtered client list.
+* Use [`find`](#find-client-by-keyword-find) to filter the clients to delete.
+* Otherwise, if the client list is not filtered, it acts like [`clear`](#delete-all-entries-clear).
+
+</div>
 
 Examples:
 * `find Bob` followed by `deleteFiltered` deletes all people named Bob. Alternatively, `find Bob | deleteFiltered` does the same thing.
