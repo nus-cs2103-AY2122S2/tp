@@ -8,8 +8,8 @@ import seedu.address.model.lesson.Lesson;
  * Signals that the operation will result in two lessons with conflicting timeslots.
  */
 public class ConflictsWithLessonsException extends RuntimeException {
-    public static final String ERROR_MESSAGE = "Cannot add this lesson as it conflicts with these"
-            + " lessons in your schedule:";
+    public static final String ERROR_MESSAGE = "WARNING: This lesson cannot be added as it conflicts"
+            + " with these existing lessons in your schedule:";
 
     private final Lesson lessonToAdd;
     private final List<Lesson> conflictingLessons;
