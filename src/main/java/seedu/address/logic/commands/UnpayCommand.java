@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.transaction.Transaction;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class UnpayCommand extends Command {
 

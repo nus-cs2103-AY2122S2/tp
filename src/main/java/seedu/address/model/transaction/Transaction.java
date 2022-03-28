@@ -4,7 +4,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import seedu.address.logic.commands.Command;
@@ -99,6 +106,11 @@ public class Transaction implements Serializable {
         return Optional.ofNullable(fields.get(prefix));
     }
 
+    /**
+     * Removes a field from transaction fields
+     * @param prefix
+     * @return updated Transaction
+     */
     public Transaction removeField(Prefix prefix) {
         requireAllNonNull(prefix);
         HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
@@ -106,6 +118,11 @@ public class Transaction implements Serializable {
         return new Transaction(fieldsCopy.values(), getPersonId());
     }
 
+    /**
+     * Adds a field to the transaction.
+     * @param field
+     * @return updated transactions
+     */
     public Transaction addField(TransactionField field) {
         requireAllNonNull(field);
         HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
