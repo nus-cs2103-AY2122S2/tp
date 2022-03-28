@@ -11,8 +11,12 @@ public class Skill {
 
     public static final String NAME_CONSTRAINTS = "Skill names should be alphanumeric";
     public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String PROFICIENCY_CONSTRAINTS = "Skill proficiency should be within range of 1-100";
-    public static final String PROFICIENCY_VALIDATION_REGEX = "^[0-9]$|^[1-9][0-9]$|^(100)$";
+    public static final String PROFICIENCY_CONSTRAINTS_RANGE = "Skill proficiency should be within range of 1-100";
+    public static final String PROFICIENCY_CONSTRAINTS_INTEGER = "Skill proficiency must be an integer";
+    public static final String PROFICIENCY_VALIDATION_BETWEEN_0_TO_100 = "^[0-9]$|^[1-9][0-9]$|^(100)$";
+    public static final String PROFICIENCY_VALIDATION_ONLY_INTEGERS = "^[0-9]+$";
+    public static final String SKILL_INPUT_CONSTRAINTS = "Skill input should be: Skill Name_Skill proficiency. eg: "
+            + "Java_50";
 
     public final String skillName;
     public final int skillProficiency;
@@ -25,9 +29,8 @@ public class Skill {
      */
     public Skill(String skillName, int skillProficiency) {
         requireNonNull(skillName);
-        requireNonNull(skillProficiency);
         checkArgument(isValidSkillName(skillName), NAME_CONSTRAINTS);
-        checkArgument(isValidSkillProficiency(skillProficiency), PROFICIENCY_CONSTRAINTS);
+        checkArgument(isValidSkillProficiencyRange(skillProficiency), PROFICIENCY_CONSTRAINTS_RANGE);
         this.skillName = skillName;
         this.skillProficiency = skillProficiency;
     }
@@ -54,9 +57,16 @@ public class Skill {
     /**
      * Returns true if a given int is a valid skill proficiency level.
      */
-    public static boolean isValidSkillProficiency(int test) {
+    public static boolean isValidSkillProficiencyRange(int test) {
         String testInt = String.valueOf(test);
-        return testInt.matches(PROFICIENCY_VALIDATION_REGEX);
+        return testInt.matches(PROFICIENCY_VALIDATION_BETWEEN_0_TO_100);
+    }
+
+    /**
+     * Returns true if given String contains only integers
+     */
+    public static boolean isValidSkillProficiencyInteger(String test) {
+        return test.matches(PROFICIENCY_VALIDATION_ONLY_INTEGERS);
     }
 
     public boolean isSameSkill(Skill skill) {
