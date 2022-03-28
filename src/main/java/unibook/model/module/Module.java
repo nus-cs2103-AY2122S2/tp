@@ -3,6 +3,7 @@ package unibook.model.module;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javafx.collections.FXCollections;
@@ -301,6 +302,18 @@ public class Module {
 
     public ObservableList<ModuleKeyEvent> getKeyEvents() {
         return this.keyEvents;
+    }
+
+    public ObservableList<LocalDate> getKeyEventDates() {
+        ObservableList<LocalDate> keyEventDates = FXCollections.observableArrayList();
+        for (ModuleKeyEvent k : keyEvents) {
+            keyEventDates.add(k.getKeyEventDate());
+        }
+        return keyEventDates;
+    }
+
+    public boolean hasKeyEventDate(LocalDate date) {
+        return getKeyEventDates().contains(date);
     }
 
     /**

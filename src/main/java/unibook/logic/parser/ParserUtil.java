@@ -2,6 +2,8 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -240,4 +242,25 @@ public class ParserUtil {
         }
         return groupList;
     }
+
+    /**
+     * Parses a date string with YYYY-MM-DD into LocalDate object
+     * @param date
+     * @return LocalDate object representing the given string.
+     * @throws ParseException
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            return LocalDate.parse(trimmedDate, formatter);
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new ParseException("DateTime format accepts the following:\n"
+                    + "yyyy-MM-dd");
+        }
+    }
+
+
 }

@@ -2,7 +2,9 @@ package unibook.model.module.group;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -161,6 +163,15 @@ public class Group {
      */
     public ObservableList<LocalDateTime> getMeetingTimes() {
         return meetingTimes;
+    }
+
+    public ObservableList<LocalDate> getMeetingDates() {
+        return FXCollections.observableArrayList(this.meetingTimes.stream().map(mt -> {
+            int year = mt.getYear();
+            int month = mt.getMonthValue();
+            int dayOfMonth = mt.getDayOfMonth();
+            return LocalDate.of(year, month, dayOfMonth);
+        }).collect(Collectors.toList()));
     }
 
     @Override

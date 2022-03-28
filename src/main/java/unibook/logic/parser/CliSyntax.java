@@ -14,7 +14,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_MODULE = new Prefix("m/");
     public static final Prefix PREFIX_NEWMOD = new Prefix("nm/");
     public static final Prefix PREFIX_OFFICE = new Prefix("a/");
-    public static final Prefix PREFIX_TYPE = new Prefix("ty/");
+    public static final Prefix PREFIX_TYPE = new Prefix("type/");
     public static final Prefix PREFIX_VIEW = new Prefix("v/");
     public static final Prefix PREFIX_GROUP = new Prefix("g/");
+    public static final Prefix PREFIX_MEETING_TIME = new Prefix("mt/");
+    public static final Prefix PREFIX_KEY_EVENT = new Prefix("ke/");
+    public static final Prefix PREFIX_DATE_TIME = new Prefix("dt/");
 }
