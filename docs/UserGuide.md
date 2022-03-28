@@ -7,6 +7,7 @@ title: User Guide
 * [**Introduction**](#introduction)
 * [**User guide navigation**](#user-guide-navigation)
 * [**Quick start**](#quick-start)
+* [**User interface**]()
 * [**Command structure**](#command-structure)
 * [**Features**](#features)
   * [Clearing all shows](#clearing-all-shows)
@@ -16,10 +17,11 @@ title: User Guide
   * [Adding a show: `add`](#adding-a-show-add)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
   * [Editing a show: `edit`](#editing-a-show-edit)
-  * [Commenting on a show: `comment`](#commenting-on-a-show-comment)
   * [Finding a show: `find`](#finding-a-show-find)
-  * [Saving the data](#saving-the-data)
+  * [Exporting a show: `export`](#exporting-a-show-export)
+  * [Import a show: `import`](#importing-a-show-import)
   * [Sorting the shows](#sorting-the-shows)
+  * [Commenting on a show: `comment`](#commenting-on-a-show-comment)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
@@ -57,11 +59,30 @@ Before you continue reading the rest of our user guide, the table below displays
 
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
-4. Double-click the file to start the app. A [GUI](#glossary) containing the annotated 4 main components should show up as below:
+4. Double-click the file to start the app. The layout of Trackermon's [GUI](#glossary) is shown in the [section below](#user-interface).
 
-5. Start communicating with Trackermon using the command box.
+5. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
-Some example commands you can try:
+6. For details of each command, please proceed to the [command-structure](#command-structure) section.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+## User interface
+
+<img src="images/Trackermon_UI_Info.png">
+
+The table below briefly describes each of the **4 main components**.
+
+| Component      | Description                                  |
+|----------------|----------------------------------------------|
+| Show List      | A panel to display a list of saved shows     |
+| Show Details   | A panel to display a specific show's details |
+| Result Display | A panel to display command results           |
+| Command Box    | A panel to enter commands                    |
+
+You can start communicating with Trackermon using the command box. Some example commands you can try are:
 
 * **`list`** : Lists all shows.
 
@@ -70,12 +91,6 @@ Some example commands you can try:
 * **`delete`** `3` : Deletes the **3rd show** shown in the current list.
 
 * **`exit`** : Exits the app.
-
-6. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
-
-7. For details of each command, please proceed to the [Commands](#commands) section below.
-
-[INSERT IMAGE HERE]
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -97,15 +112,15 @@ For example, a command to find a show could look like this:
 
 In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
-| Parameters | Prefix | Description                                                                            |
-|------------|--------|----------------------------------------------------------------------------------------|
-| KEYWORD    | None   | The input after the command word                                                       |
-| INDEX      | None   | The index of the show as shown in the show panel list                                  |
-| NAME       | n/     | The name to use for a show                                                             |
-| STATUS     | s/     | The three statuses to label for a show are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
-| TAG        | t/     | The tag to label a show                                                                |
-| COMMENT    | c/     | The comment to describe a show                                                         |
-| RATE       | r/     | The rating to give a show                                                              |
+| Parameters | Prefix | Description                                                                      |
+|------------|--------|----------------------------------------------------------------------------------|
+| KEYWORD    | None   | The input after the command word                                                 |
+| INDEX      | None   | The index of the show as shown in the show panel list                            |
+| NAME       | n/     | The name to use for a show                                                       |
+| STATUS     | s/     | The status to label a show. They are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
+| TAG        | t/     | The tag to label a show                                                          |
+| COMMENT    | c/     | The comment to describe a show                                                   |
+| RATE       | r/     | The rating to give a show                                                        |
 
 <div markdown="block" class="alert alert-info">
 
@@ -115,7 +130,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/<NAME> s/<STATUS> [c/<COMMENT>] [t/TAG]…` can be used as `n/ReZero s/completed c/What a Simp t/Anime` or as `n/ReZero s/completed`.
+  e.g `n/NAME s/STATUS [r/RATE] [c/COMMENT] [t/TAG]…` can be used as `n/ReZero s/completed r/5 c/What a Simp t/Anime` or as `n/ReZero s/completed`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
@@ -261,22 +276,6 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-### Commenting on a show: `comment`
-
-**Description:** Want to write down your comments about a show? Note it down in Trackermon!
-
-**Format:** `comment <INDEX> [c/<COMMENT>]`
-* Edit comment of the show at the specified `<INDEX>`.
-* The index refers to the index number shown in the displayed show list. (not overall)
-* The index **must be a positive integer** 1,2,3,...
-* Omitting the `[c/<COMMENT>]` would remove the comment of that specific show.
-
-**Examples:** `comment 2 c/This is a good show!`
-* `list` followed by `comment 2 c/Not bad` edits 2nd show's comment in Trackermon to "Not bad".
-* `find ghibli` followed by `comment 1` deletes the comment of the 1st show in results of `find` command.
-
----
-
 
 ### Finding a show: `find`
 
@@ -339,13 +338,20 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ---
 
-### Saving the data 
+### Exporting a show: `export`
 
-Trackermon data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+### Importing a show: `import`
+
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
 ### Sorting the shows
 [TO CHANGE AFTER REWORK]
 
@@ -365,9 +371,31 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 ---
 
-## FAQ
+### Commenting on a show: `comment`
 
-_Details coming soon ..._
+**Description:** Want to write down your comments about a show? Note it down in Trackermon!
+
+**Format:** `comment <INDEX> [c/<COMMENT>]`
+* Edit comment of the show at the specified `<INDEX>`.
+* The index refers to the index number shown in the displayed show list. (not overall)
+* The index **must be a positive integer** 1,2,3,...
+* Omitting the `[c/<COMMENT>]` would remove the comment of that specific show.
+
+**Examples:** `comment 2 c/This is a good show!`
+* `list` followed by `comment 2 c/Not bad` edits 2nd show's comment in Trackermon to "Not bad".
+* `find ghibli` followed by `comment 1` deletes the comment of the 1st show in results of `find` command.
+
+---
+
+## FAQ
+* **Q:** Where is the data of Trackermon saved?<br>
+**A:** Trackermon data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.<br><br>
+
+* **Q:** How is my data being saved in Trackermon?<br>
+**A:** <br><br>
+
+* **Q:** How do I transfer my data to another Computer?<br>
+  **A:**  
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -375,19 +403,22 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                  |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME s/STATUS [r/RATE] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                                                          |
-| **Clear**  | `clear`                                                                                                                                           |
-| **Comment** | `comment INDEX [c/COMMENT]`  eg., `comment 2 c/Bad`                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                               |
-| **Edit**   | `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime`                                                               |
-| **Exit**   | `exit`                                                                                                                                            |
-| **Find**   | `find KEYWORD`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen` |
-| **List**   | `list`                                                                                                                                            |
-| **Sort**   | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                                          |
+| Action      | Format, Examples                                                                                                                                               |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME s/STATUS [r/RATE] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                                                          |
+| **Clear**   | `clear`                                                                                                                                                        |
+| **Comment** | `comment INDEX [c/COMMENT]`  eg., `comment 2 c/Bad`                                                                                                            |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            |
+| **Edit**    | `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime`                                       |
+| **Exit**    | `exit`                                                                                                                                                         |
+| **Export**  | `export`                                                                                                                                                       |
 |
-
+| **Import**  | `import`                                                                                                                                                       |
+|
+| **Find**    | `find KEYWORD`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen` |
+| **List**    | `list`                                                                                                                                                         |
+| **Sort**    | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                                                       |
+|
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
