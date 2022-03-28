@@ -11,6 +11,7 @@ import seedu.trackermon.commons.util.StringUtil;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
 import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
 
@@ -62,6 +63,34 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return Status.getStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(int rating) throws ParseException {
+        requireNonNull(rating);
+        if (!Rating.isValidScore(rating)) {
+            throw new ParseException(Rating.INVALID_RATING);
+        }
+        return new Rating(rating);
+    }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        requireNonNull(rating);
+        if (!Rating.isValidScore(rating)) {
+            throw new ParseException(Rating.INVALID_RATING);
+        }
+        return new Rating(rating);
     }
 
 

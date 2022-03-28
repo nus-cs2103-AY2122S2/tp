@@ -30,6 +30,7 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+         <FlowPane fx:id="ratings" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
     </VBox>
       <rowConstraints>
          <RowConstraints />
