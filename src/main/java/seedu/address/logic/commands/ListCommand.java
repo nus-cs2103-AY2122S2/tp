@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
+import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
 
 import java.util.Optional;
@@ -20,6 +24,28 @@ public class ListCommand extends Command {
     public static final String MESSAGE_MODULES = "modules";
     public static final String MESSAGE_CLASS_GROUPS = "class groups";
     public static final String MESSAGE_ASSESSMENTS = "assessments";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": list all instances of an entity, with optional filtering\n"
+            + "1. list/filter students:\n"
+            + "\tParameters: " + TYPE_STUDENT
+            + " [{m/MODULE_INDEX | c/CLASS_GROUP_INDEX}]\n"
+            + "\tExample: " + COMMAND_WORD + " "
+            + TYPE_STUDENT + " /c 1\n"
+            + "2. list modules:\n"
+            + "\tParameter: " + TYPE_MODULE + "\n"
+            + "\tExample: " + COMMAND_WORD + " "
+            + TYPE_MODULE + "\n"
+            + "3. list/filter class groups:\n"
+            + "\tParameters: " + TYPE_CLASS
+            + " [m/MODULE_INDEX]\n"
+            + "\tExample: " + COMMAND_WORD + " "
+            + TYPE_CLASS + " /m 1\n"
+            + "4. list/filter assessments:\n"
+            + "\tParameters: " + TYPE_ASSESSMENT
+            + " [m/MODULE_INDEX]\n"
+            + "\tExample: " + COMMAND_WORD + " "
+            + TYPE_ASSESSMENT + " /m 1";
 
     private EntityType entityType;
     private Optional<EntityType> filterEntityType;
