@@ -13,9 +13,9 @@ import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListTaskCommand.
  */
-public class ListCommandTest {
+public class ListTaskCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,12 +28,12 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_ALL_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListTaskCommand(), model, ListTaskCommand.MESSAGE_ALL_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showTaskAtIndex(model, INDEX_FIRST);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_ALL_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListTaskCommand(), model, ListTaskCommand.MESSAGE_ALL_SUCCESS, expectedModel);
     }
 }

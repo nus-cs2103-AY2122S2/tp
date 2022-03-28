@@ -18,7 +18,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.CommandResult;
-import manageezpz.logic.commands.ListCommand;
+import manageezpz.logic.commands.ListTaskCommand;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
@@ -63,8 +63,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_ALL_SUCCESS, model);
+        String listTaskCommand = ListTaskCommand.COMMAND_WORD;
+        assertCommandSuccess(listTaskCommand, ListTaskCommand.MESSAGE_ALL_SUCCESS, model);
     }
 
     @Test

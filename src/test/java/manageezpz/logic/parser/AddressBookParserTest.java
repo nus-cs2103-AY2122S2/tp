@@ -24,7 +24,7 @@ import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.commands.HelpCommand;
-import manageezpz.logic.commands.ListCommand;
+import manageezpz.logic.commands.ListTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.TaskMultiplePredicate;
@@ -91,7 +91,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD) instanceof ListTaskCommand);
     }
 
     @Test

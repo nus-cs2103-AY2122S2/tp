@@ -19,7 +19,7 @@ import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.HelpCommand;
-import manageezpz.logic.commands.ListCommand;
+import manageezpz.logic.commands.ListTaskCommand;
 import manageezpz.logic.commands.MarkTaskCommand;
 import manageezpz.logic.commands.TagTaskCommand;
 import manageezpz.logic.commands.TagTaskPriorityCommand;
@@ -72,8 +72,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+        case ListTaskCommand.COMMAND_WORD:
+            return new ListTaskCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
