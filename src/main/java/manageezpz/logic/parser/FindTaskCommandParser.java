@@ -24,7 +24,7 @@ import manageezpz.model.task.TaskMultiplePredicate;
 /**
  * Subclass of FindCommandParser which check if the options are valid for finding tasks.
  */
-class FindTaskCommandParser implements Parser<FindTaskCommand> {
+public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private static final Prefix[] TASK_TYPES = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
     private static final Prefix[] VALID_OPTIONS = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT, PREFIX_DATE,
             PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_ASSIGNEES, PREFIX_IS_MARKED};

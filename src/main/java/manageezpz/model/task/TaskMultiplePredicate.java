@@ -15,6 +15,8 @@ import manageezpz.logic.parser.Prefix;
  * The predicate to search tasks based on the properties given.
  */
 public class TaskMultiplePredicate implements Predicate<Task> {
+    public static final List<Prefix> NO_SPECIFIC_TASK_TYPE = List.of();
+
     private final List<Prefix> taskTypes;
     private final List<String> description;
     private final Date date;

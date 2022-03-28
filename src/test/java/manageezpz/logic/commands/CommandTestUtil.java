@@ -4,7 +4,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
