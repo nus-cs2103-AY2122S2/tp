@@ -16,34 +16,40 @@ import seedu.address.model.tag.Tag;
 /**
  * Adds a person to the address book.
  */
-public class AddTagCommand extends Command {
+public class EditTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "addTag";
+    public static final String COMMAND_WORD = "editTag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the person identified"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit a tag "
+            + "(identified by the tag's index number) "
+            + "of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Only one tag can be added at a time. "
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Only one tag can edited at a time. "
+            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + "TAG_INDEX (must be a positive integer) "
             + "TAG\n"
-            + "Example: " + COMMAND_WORD + "1 "
+            + "Example: " + COMMAND_WORD + "1 " + "2 "
             + "owesMoney :p2";
 
-    public static final String MESSAGE_SUCCESS = "Added tag to Person: %1$s";
+    public static final String MESSAGE_SUCCESS = "Edited tag in Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Index index;
+    private final int tagNumber;
     private final Tag toAdd;
 
     /**
-     * Creates an AddTagCommand to add the specified {@code Tag}
+     * Creates an EditTagCommand to replace the tag in the index with the specified {@code Tag}
      *
      * @param index of the person in the filtered person list to edit
+     * @param tagNumber of the person's tag list to edit
      * @param tag to be added to the person identified
      */
-    public AddTagCommand(Index index, Tag tag) {
+    public EditTagCommand(Index index, int tagNumber, Tag tag) {
         requireNonNull(index);
         requireNonNull(tag);
         this.index = index;
+        this.tagNumber = tagNumber;
         toAdd = tag;
     }
 
@@ -57,17 +63,17 @@ public class AddTagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person tagAddedPerson = addTagToPerson(personToEdit, toAdd);
+        Person tagAddedPerson = editTagOfPerson(personToEdit, tagNumber, toAdd);
 
         model.setPerson(personToEdit, tagAddedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
-    private Person addTagToPerson(Person personToEdit, Tag tag) {
+    private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
-        tagList.add(tag);
+        tagList.set(tagNumber-1, tag); // add exception later
 
         newPerson.setTags(tagList);
         return newPerson;
@@ -80,7 +86,8 @@ public class AddTagCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddTagCommand // instanceof handles nulls
-                && toAdd.equals(((AddTagCommand) other).toAdd));
+                || (other instanceof EditTagCommand // instanceof handles nulls
+                && tagNumber  == ((EditTagCommand) other).tagNumber
+                && toAdd.equals(((EditTagCommand) other).toAdd));
     }
 }
