@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCandidates.ALICE;
 import static seedu.address.testutil.TypicalCandidates.BOB;
@@ -42,7 +41,7 @@ public class UniqueCandidateListTest {
     @Test
     public void contains_candidateWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCandidateList.add(ALICE);
-        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB)
                 .build();
         assertTrue(uniqueCandidateList.contains(editedAlice));
     }
@@ -85,7 +84,7 @@ public class UniqueCandidateListTest {
     @Test
     public void setCandidate_editedCandidateHasSameIdentity_success() {
         uniqueCandidateList.add(ALICE);
-        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB)
                 .build();
         uniqueCandidateList.setCandidate(ALICE, editedAlice);
         UniqueCandidateList expectedUniqueCandidateList = new UniqueCandidateList();

@@ -7,9 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -24,7 +22,6 @@ import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -39,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_COURSE, PREFIX_SENIORITY, PREFIX_TAG, PREFIX_AVAILABILITY);
+                        PREFIX_COURSE, PREFIX_SENIORITY, PREFIX_AVAILABILITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_COURSE,
                 PREFIX_SENIORITY, PREFIX_AVAILABILITY)
@@ -53,12 +50,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = new Email(id.studentId);
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
         Seniority seniority = ParserUtil.parseSeniority(argMultimap.getValue(PREFIX_SENIORITY).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         ApplicationStatus applicationStatus = new ApplicationStatus(ApplicationStatus.PENDING_STATUS);
         InterviewStatus interviewStatus = new InterviewStatus(InterviewStatus.NOT_SCHEDULED);
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
 
-        Candidate candidate = new Candidate(id, name, phone, email, course, seniority, tagList,
+        Candidate candidate = new Candidate(id, name, phone, email, course, seniority,
                 applicationStatus, interviewStatus, availability);
 
         return new AddCommand(candidate);

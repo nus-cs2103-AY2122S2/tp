@@ -16,8 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SENIORITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SENIORITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +36,6 @@ public class TypicalCandidates {
             .withEmail("E0123456@u.nus.edu")
             .withCourse("Business Analytics")
             .withSeniority("2")
-            .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("1,2,3")
@@ -50,7 +47,6 @@ public class TypicalCandidates {
             .withEmail("E0234567@u.nus.edu")
             .withCourse("Computer Engineering")
             .withSeniority("2")
-            .withTags("owesMoney", "friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("2,3,4")
@@ -73,7 +69,6 @@ public class TypicalCandidates {
             .withEmail("E0456789@u.nus.edu")
             .withCourse("Information Security")
             .withSeniority("2")
-            .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("5")
@@ -144,7 +139,6 @@ public class TypicalCandidates {
             .withEmail(VALID_EMAIL_AMY)
             .withCourse(VALID_COURSE_AMY)
             .withSeniority(VALID_SENIORITY_AMY)
-            .withTags(VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability(VALID_AVAILABILITY_AMY)
@@ -156,7 +150,6 @@ public class TypicalCandidates {
             .withEmail(VALID_EMAIL_BOB)
             .withCourse(VALID_COURSE_BOB)
             .withSeniority(VALID_SENIORITY_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability(VALID_AVAILABILITY_BOB)

@@ -1,11 +1,6 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,8 +17,6 @@ import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
-import seedu.address.model.tag.Tag;
-
 
 /**
  * Jackson-friendly version of {@link Interview}.
@@ -38,7 +31,6 @@ class JsonAdaptedInterview {
     private final String email;
     private final String course;
     private final String seniority;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String applicationStatus;
     private final String interviewStatus;
     private final String availability;
@@ -51,7 +43,6 @@ class JsonAdaptedInterview {
     public JsonAdaptedInterview(@JsonProperty("studentID") String studentID, @JsonProperty("name") String name,
                                 @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                                 @JsonProperty("course") String course, @JsonProperty("seniority") String seniority,
-                                @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                                 @JsonProperty("applicationStatus") String applicationStatus,
                                 @JsonProperty("interviewStatus") String interviewStatus,
                                 @JsonProperty("availability") String availability,
@@ -62,9 +53,6 @@ class JsonAdaptedInterview {
         this.email = email;
         this.course = course;
         this.seniority = seniority;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
         this.applicationStatus = applicationStatus;
         this.interviewStatus = interviewStatus;
         this.availability = availability;
@@ -81,9 +69,6 @@ class JsonAdaptedInterview {
         email = source.getCandidate().getEmail().value;
         course = source.getCandidate().getCourse().course;
         seniority = source.getCandidate().getSeniority().seniority;
-        tagged.addAll(source.getCandidate().getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
         applicationStatus = source.getCandidate().getApplicationStatus().toString();
         interviewStatus = source.getCandidate().getInterviewStatus().toString();
         availability = source.getCandidate().getAvailability().availability;
@@ -96,11 +81,6 @@ class JsonAdaptedInterview {
      * @throws IllegalValueException if there were any data constraints violated in the adapted candidate.
      */
     public Interview toModelType() throws IllegalValueException {
-        final List<Tag> candidateTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            candidateTags.add(tag.toModelType());
-        }
-
         if (studentID == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StudentId.class.getSimpleName()));
@@ -156,12 +136,9 @@ class JsonAdaptedInterview {
         }
         final Availability modelAvailability = new Availability(availability);
 
-        final Set<Tag> modelTags = new HashSet<>(candidateTags);
-
-
         Candidate candidate = new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse,
-                modelSeniority, modelTags,
-                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus), modelAvailability);
+                modelSeniority, new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus),
+                modelAvailability);
 
         if (interviewDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "test"));
