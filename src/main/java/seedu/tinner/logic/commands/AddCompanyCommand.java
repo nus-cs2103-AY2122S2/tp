@@ -11,13 +11,13 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.company.Company;
 
 /**
- * Adds a Company to the address book.
+ * Adds a Company to the company list.
  */
 public class AddCompanyCommand extends Command {
 
     public static final String COMMAND_WORD = "addCompany";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the company list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -30,7 +30,7 @@ public class AddCompanyCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
     public static final String MESSAGE_SUCCESS = "New company added: %1$s";
-    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the company list";
 
     private final Company toAdd;
 

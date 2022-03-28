@@ -7,8 +7,19 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.tinner.model.role.exceptions.DuplicateRoleException;
+//import seedu.tinner.model.Reminder.exceptions.DuplicateReminderException;
 
+/**
+ * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
+ * A Reminder is considered unique by comparing using {@code Reminder#isSameReminder(Reminder)}. As such, adding and
+ * updating of companies uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the Reminder
+ * being added or updated is unique in terms of identity in the UniqueReminderList. However, the removal of a Reminder
+ * uses Reminder#equals(Object) so as to ensure that the Reminder with exactly the same fields will be removed.
+ * <p>
+ * Supports a minimal set of list operations.
+ *
+ * @see Reminder#isSameReminder(Reminder)
+ */
 public class UniqueReminderList implements Iterable<Reminder> {
 
     private static UniqueReminderList reminderList = null;
@@ -36,7 +47,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Returns true if the list contains an equivalent role as the given argument.
+     * Returns true if the list contains an equivalent Reminder as the given argument.
      */
     public boolean contains(Reminder toCheck) {
         requireNonNull(toCheck);
@@ -44,13 +55,13 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Adds a role to the list.
-     * The role must not already exist in the list.
+     * Adds a Reminder to the list.
+     * The Reminder must not already exist in the list.
      */
     public void add(Reminder toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateRoleException();
+            //throw new DuplicateReminderException(); //need to implement
         }
         internalList.add(toAdd);
     }
@@ -80,7 +91,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Returns true if {@code roles} contains only unique companies.
+     * Returns true if {@code Reminders} contains only unique companies.
      */
     private boolean remindersAreUnique(List<Reminder> reminders) {
         for (int i = 0; i < reminders.size() - 1; i++) {

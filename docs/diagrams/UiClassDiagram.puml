@@ -38,7 +38,7 @@ MainWindow *-down-> "1" CompanyListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-CompanyListPanel *-down-> "*" CompanyCard
+CompanyListPanel -down-> "*" CompanyCard
 
 MainWindow -left-|> UiPart
 
@@ -56,8 +56,8 @@ RoleCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-CompanyCard *-down-> "0..1" RoleListPanel
-RoleListPanel *-down-> "*" RoleCard
+CompanyCard -down-> "0..1" RoleListPanel
+RoleListPanel -down-> "*" RoleCard
 
 CompanyListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox

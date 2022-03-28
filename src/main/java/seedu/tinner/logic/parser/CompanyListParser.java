@@ -20,6 +20,7 @@ import seedu.tinner.logic.commands.FindCommand;
 import seedu.tinner.logic.commands.HelpCommand;
 import seedu.tinner.logic.commands.ListCommand;
 import seedu.tinner.logic.commands.ListFavouriteCommand;
+import seedu.tinner.logic.commands.SetReminderWindowCommand;
 import seedu.tinner.logic.commands.UnfavouriteCompanyCommand;
 import seedu.tinner.logic.parser.exceptions.ParseException;
 
@@ -91,6 +92,9 @@ public class CompanyListParser {
 
         case UnfavouriteCompanyCommand.COMMAND_WORD:
             return new UnfavouriteCompanyCommandParser().parse(arguments);
+
+        case SetReminderWindowCommand.COMMAND_WORD:
+            return new SetReminderWindowCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

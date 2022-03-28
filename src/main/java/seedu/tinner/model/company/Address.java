@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tinner.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Company's address in the address book.
+ * Represents a Company's address in the company list.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {

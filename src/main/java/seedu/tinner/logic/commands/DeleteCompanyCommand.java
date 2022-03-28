@@ -11,7 +11,7 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.company.Company;
 
 /**
- * Deletes a company identified using it's displayed index from the address book.
+ * Deletes a company identified using it's displayed index from the company list.
  */
 public class DeleteCompanyCommand extends Command {
 

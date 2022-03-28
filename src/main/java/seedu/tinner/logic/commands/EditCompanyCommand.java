@@ -25,7 +25,7 @@ import seedu.tinner.model.company.Phone;
 import seedu.tinner.model.company.ReadOnlyRoleList;
 
 /**
- * Edits the details of an existing company in the address book.
+ * Edits the details of an existing company in the company list.
  */
 public class EditCompanyCommand extends Command {
 

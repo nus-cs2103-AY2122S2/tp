@@ -24,6 +24,12 @@ public interface Model {
     Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
 
     /**
+     * Sets the reminder window in user prefs to the given input.
+     *
+     */
+    void setReminderWindow(int reminderWindow);
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);

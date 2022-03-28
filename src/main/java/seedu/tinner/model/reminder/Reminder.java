@@ -9,6 +9,10 @@ import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
 
+/**
+ * Represents a Reminder in Tinner.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Reminder {
 
     private final CompanyName companyName;
