@@ -64,15 +64,15 @@
     -fx-background-color: #FAFBFD;
 }
 
-.table-row .action-button {
+.action-button {
     -fx-background-color: transparent;
 }
 
-.table-row .action-button:hover {
+.action-button:hover {
     -fx-background-color: #F4F5F7;
 }
 
-.table-row .action-button:pressed {
+.action-button:pressed {
     -fx-background-color: #F1F2F4;
 }
 
