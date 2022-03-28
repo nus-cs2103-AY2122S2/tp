@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected String type;
+    protected Description description;
     private Date date;
     private Time time;
 
@@ -13,7 +14,7 @@ public class Deadline extends Task {
      * @param taskDescription information about the task.
      */
     public Deadline(Description taskDescription, Date date, Time time) {
-        super(taskDescription);
+        this.description = taskDescription;
         this.date = date;
         this.time = time;
         this.type = "deadline";
@@ -33,6 +34,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public Description getDescription() {
+        return this.description;
+    }
+
+    @Override
     public String getDateTime() {
         return "by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time.format(DateTimeFormatter.ofPattern("h:mm a"));
@@ -45,7 +51,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+        return "[D]" + super.toString() + getDescription()
+                + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
 }

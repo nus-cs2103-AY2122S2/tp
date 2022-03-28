@@ -1,10 +1,7 @@
 package manageezpz.model.task;
 
-import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import manageezpz.model.person.Person;
 
@@ -13,31 +10,25 @@ import manageezpz.model.person.Person;
  * inputted by a user either a Todo, Deadline or Event.
  */
 public abstract class Task implements Comparable<Task> {
-    protected boolean isDone;
-    protected Priority priority;
-
-    // Identity fields
-    private final Description taskDescription;
+    protected boolean isDone = false;
+    protected Priority priority = Priority.NONE;
 
     // Data fields
-    private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
-    //private final Set<Tag> tags = new HashSet<>();
+    private List<Person> assignees = new ArrayList<>();
 
     /**
      * Constructor for the Task class.
      * {@code Date taskDate} has a default value that will be changed if the object inheriting the Task object
      * is a Deadline or Event object. If object is a Todo object, this field will be ignored.
-     * @param taskDescription information about the task.
      */
-    public Task(Description taskDescription) {
-        requireAllNonNull(taskDescription);
-        this.taskDescription = taskDescription;
-        this.isDone = false;
-        this.assignees = new ArrayList<>();
-        this.priority = Priority.NONE;
+    public Task() {
     }
 
     public abstract String getType();
+
+    public abstract Description getDescription();
+
+    public abstract String getDateTime();
 
     public String getStatusIcon() {
         if (this.isDone()) {
@@ -57,14 +48,6 @@ public abstract class Task implements Comparable<Task> {
 
     public void setTaskNotDone() {
         this.isDone = false;
-    }
-
-    public Description getDescription() {
-        return this.taskDescription;
-    }
-
-    public String getDateTime() {
-        return "";
     }
 
     public void setPriority(String priority) {
@@ -141,7 +124,7 @@ public abstract class Task implements Comparable<Task> {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "] ";
     }
 
     @Override
@@ -159,9 +142,4 @@ public abstract class Task implements Comparable<Task> {
                 && otherTask.getStatusIcon().equals(getStatusIcon());
     }
 
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskDescription);
-    }
 }

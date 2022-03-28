@@ -3,19 +3,30 @@ package manageezpz.model.task;
 public class Todo extends Task {
 
     protected String type;
+    protected Description description;
     /**
      * Constructor for the Task class.
      *
      * @param taskDescription information about the task.
      */
     public Todo(Description taskDescription) {
-        super(taskDescription);
         this.type = "todo";
+        this.description = taskDescription;
     }
 
     @Override
     public String getType() {
         return this.type;
+    }
+
+    @Override
+    public Description getDescription() {
+        return this.description;
+    }
+
+    @Override
+    public String getDateTime() {
+        return null;
     }
 
     /**
@@ -24,6 +35,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + getDescription();
     }
 }
