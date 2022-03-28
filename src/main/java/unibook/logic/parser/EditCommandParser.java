@@ -197,8 +197,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (!argMultimap.getValue(PREFIX_KEYEVENT).isPresent()) {
                 throw new ParseException(EditCommand.MESSAGE_KEYEVENT_INDEX_MISSING);
             } else {
+                logger.info("hello");
+                logger.info(argMultimap.getValue(PREFIX_KEYEVENT).get());
                 Index i = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_KEYEVENT).get());
+                logger.info("bye");
                 int integer = i.getZeroBased();
+                System.out.println(integer);
                 editModuleDescriptor.setIdx(integer);
                 System.out.println(editModuleDescriptor.getIdx());
             }

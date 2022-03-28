@@ -231,19 +231,60 @@ Edits an existing person in UniBook.
 Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME]`
 
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
+  * Options available are person, module, keyevent or group.
+* All indexes must be positive integers.
+* Existing values will be updated to the input values.    
 * Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list. User will not be allowed to edit if not on the correct page. 
-  * `list v/modules` : To display list of modules with respective indexes
-  * `list v/people` : To display list of persons with respective indexes 
-* There are different compulsory fields for the 3 different values for `OPTION`:
-    * `module`: Edits the module specified by compulsory field `INDEX`. Optional fields `[n/NAME] [m/MODULECODE]` to specify the new name or module code of the module.
-      * Within the `module` page, users can also choose to edit fields in `groups` specified by the compulsory field `INDEX`. For groups, there is another compulsory field for the `m/MODULECODE`, which is the `MODULECODE` of the group to be edited.
-    * `person`: Edits the person at the specified by the compulsory field `INDEX`. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
-* Existing values will be updated to the input values.
+  * `list o/view v/modules` : To display list of modules with respective indexes
+  * `list o/view v/people` : To display list of persons with respective indexes 
+  * `list o/view v/groups` : To display list of groups with respective indexes 
+* Only certain options can be edited on each page, otherwise an error will be printed on the console to tell users to change to the correct page. On the
+  * `module` page: Able to edit module, keyevent or group fields
+  * `group`  page: Able to edit keyevent or group fields
+  * `person` page: Able to edit person
+    
+**Commands while on `People` view**
 
-Examples:
-*  `edit 1 o/person p/91234567 e/prof@example.com nm/CS2103` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively. Adds module CS2103 to the list of modules that this person is taking. 
-*  `edit 1 o/module m/CS2103 n/Software Engineering  ` Edits the module code of the 1st module to code `CS2103` and name as `Software Engineering`. Edits the all instances of modules in each person taking the module. 
-*  `edit 1 o/group m/CS2103 g/CS2103 T2 mt/1 2022-12-12 16:45  ` Edits the group name of the 1st group to `CS2103 T2` and first index of meeting time to `12th December 2022 4.45pm`. Edits the all instances of groups in each person and module. 
+At least one optional field must be edited in order for person to be successfully edited.
+
+Format: `edit INDEX o/person [n/NAME] [p/PHONE] [e/EMAIL]`
+* Edits the `name`, `phone` and/or `email` fields of a person at `INDEX`.
+* Example: `edit 1 o/person n/Alexa` changes the name of the first person on the list to Alexa.
+
+Format: `edit INDEX o/person [m/MODULE] [g/GROUPNAME]`
+* Adds person at `INDEX` to the group named `GROUPNAME` in the stated `MODULE`.
+* Both `[m/MODULE]` and `[g/GROUPNAME]` fields are compulsory for successful edit.
+* Example: `edit 1 o/person m/CS2103 g/T2` adds the first person to the `group` named T2 in the CS2103 `module`.
+
+Format: `edit INDEX o/person [nm/NEWMOD]`
+* Adds person at `INDEX` to the stated `MODULE`.
+* Example: `edit 1 o/person nm/CS2103` adds the first person to the CS2103 `module`.
+
+**Commands while on `Modules` view**
+
+At least one optional field must be edited in order for module to be successfully edited.
+
+Format: `edit INDEX o/module [n/NAME] [m/MODCODE]`
+* Edits the `name` and/or `modcode` fields of a module at `INDEX`.
+* Example: `edit 1 o/module n/Software Engineering m/CS2103` changes the name and module code of the first module on the list to Software Engineering and CS2103 respectively.
+
+Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
+* Edits the `groupname` and/or `meetingtimes` of the group at `INDEX` of the `module`.
+* `DATETIME` must be in `YYYY-MM-DD HH:mm` format.  
+* Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.
+
+Format: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]`
+* Edits  `type` and/or `datetime` of the keyevent at module at `INDEX`.
+* Example: `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45` adds the second key event's type and date time in the first module in the list to exam and 12th December 2022 4:45pm respectively.
+
+**Commands while on `Groups` view**
+
+At least one optional field must be edited in order for module to be successfully edited.
+
+Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
+* Edits the `groupname` and/or `meetingtimes` of the group at `INDEX` of the `module`.
+* `DATETIME` must be in `YYYY-MM-DD HH:mm` format.
+* Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.
 
 ### Locating persons by name: `find`
 
@@ -357,7 +398,7 @@ Action | Format, Examples
 **Add** | `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]… ​` <br> e.g., `add o/module n/Software Engineering m/cs2103`<br> e.g., `add o/module n/Computer Organisation m/cs2100`<br> e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd S123466 m/cs2103`<br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 m/cs2100`
 **Clear** | `clear`
 **Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
-**Edit** | `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering`
+**Edit** | `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list [o/LISTING_CRITERIA CRITERIA_INFORMATION]` <br>e.g., `list o/module CS2103`
 **Help** | `help`
