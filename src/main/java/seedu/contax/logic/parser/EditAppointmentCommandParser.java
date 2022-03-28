@@ -10,6 +10,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
@@ -36,44 +37,81 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE,
                 PREFIX_TIME, PREFIX_DURATION, PREFIX_PERSON);
 
-        Index index;
-
+        Index appointmentIndex;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            appointmentIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditAppointmentCommand.MESSAGE_USAGE), pe);
         }
 
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editAppointmentDescriptor.setName(
-                    ParserUtil.parseAppointmentName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            LocalDate dateObject = DateUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get())
-                    .orElseThrow(() -> new ParseException(Messages.MESSAGE_INVALID_DATE));
-            editAppointmentDescriptor.setStartDate(dateObject);
-        }
-        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-            LocalTime timeObject = DateUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get())
-                    .orElseThrow(() -> new ParseException(Messages.MESSAGE_INVALID_TIME));
-            editAppointmentDescriptor.setStartTime(timeObject);
-        }
-        if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
-            editAppointmentDescriptor.setDuration(
-                    ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
-            String newPersonValue = argMultimap.getValue(PREFIX_PERSON).get();
-            editAppointmentDescriptor.setPersonIndex(newPersonValue.equalsIgnoreCase(KEYWORD_REMOVE_PERSON)
-                    ? null : ParserUtil.parseIndex(newPersonValue));
-        }
+        parseName(argMultimap.getValue(PREFIX_NAME), editAppointmentDescriptor);
+        parseDate(argMultimap.getValue(PREFIX_DATE), editAppointmentDescriptor);
+        parseTime(argMultimap.getValue(PREFIX_TIME), editAppointmentDescriptor);
+        parseDuration(argMultimap.getValue(PREFIX_DURATION), editAppointmentDescriptor);
+        parsePerson(argMultimap.getValue(PREFIX_PERSON), editAppointmentDescriptor);
 
         if (!editAppointmentDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditAppointmentCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditAppointmentCommand(index, editAppointmentDescriptor);
+        return new EditAppointmentCommand(appointmentIndex, editAppointmentDescriptor);
+    }
+
+    /**
+     * Parses the input appointment name and registers the parsed object with the {@code editDescriptor}.
+     */
+    private void parseName(Optional<String> nameString, EditAppointmentDescriptor editDescriptor)
+            throws ParseException {
+        if (nameString.isPresent()) {
+            editDescriptor.setName(ParserUtil.parseAppointmentName(nameString.get()));
+        }
+    }
+
+    /**
+     * Parses the input date string and registers the parsed object with the {@code editDescriptor}.
+     */
+    private void parseDate(Optional<String> dateString, EditAppointmentDescriptor editDescriptor)
+            throws ParseException {
+        if (dateString.isPresent()) {
+            LocalDate dateObject = DateUtil.parseDate(dateString.get())
+                    .orElseThrow(() -> new ParseException(Messages.MESSAGE_INVALID_DATE));
+            editDescriptor.setStartDate(dateObject);
+        }
+    }
+
+    /**
+     * Parses the input time string and registers the parsed object with the {@code editDescriptor}.
+     */
+    private void parseTime(Optional<String> timeString, EditAppointmentDescriptor editDescriptor)
+            throws ParseException {
+        if (timeString.isPresent()) {
+            LocalTime timeObject = DateUtil.parseTime(timeString.get())
+                    .orElseThrow(() -> new ParseException(Messages.MESSAGE_INVALID_TIME));
+            editDescriptor.setStartTime(timeObject);
+        }
+    }
+
+    /**
+     * Parses the input duration string and registers the parsed object with the {@code editDescriptor}.
+     */
+    private void parseDuration(Optional<String> durationString, EditAppointmentDescriptor editDescriptor)
+            throws ParseException {
+        if (durationString.isPresent()) {
+            editDescriptor.setDuration(ParserUtil.parseDuration(durationString.get()));
+        }
+    }
+
+    /**
+     * Parses the input person index string and registers the parsed object with the {@code editDescriptor}.
+     */
+    private void parsePerson(Optional<String> personIndexString, EditAppointmentDescriptor editDescriptor)
+            throws ParseException {
+        if (personIndexString.isPresent()) {
+            String newPersonIndex = personIndexString.get();
+            editDescriptor.setPersonIndex(newPersonIndex.equalsIgnoreCase(KEYWORD_REMOVE_PERSON)
+                    ? null : ParserUtil.parseIndex(newPersonIndex));
+        }
     }
 }
