@@ -287,7 +287,8 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) throws CommandException, ModuleNotFoundException {
+                                 Boolean isModuleListShowing, Boolean isGroupListShowing)
+            throws CommandException, ModuleNotFoundException {
         requireNonNull(model);
 
         if (this.modCode != null && !model.hasModule(this.modCode)) {

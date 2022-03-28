@@ -42,14 +42,16 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText,
                                  Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) throws CommandException, ParseException {
+                                 Boolean isModuleListShowing,
+                                 Boolean isGroupListShowing) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
         Command command = uniBookParser.parseCommand(commandText);
         commandResult = command.execute(model,
             isPersonListShowing,
-            isModuleListShowing);
+            isModuleListShowing,
+                isGroupListShowing);
 
         try {
             storage.saveUniBook(model.getUniBook());

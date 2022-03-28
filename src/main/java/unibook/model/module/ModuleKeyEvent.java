@@ -2,6 +2,7 @@ package unibook.model.module;
 
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -13,6 +14,7 @@ public class ModuleKeyEvent {
             + "dt/yyyy-MM-dd HH:mm";
     private LocalDateTime keyEventTiming;
     private KeyEventType keyEventType;
+
     private Module module;
     /**
      * Constructor for a ModuleKeyEvent.
@@ -50,6 +52,13 @@ public class ModuleKeyEvent {
 
     public LocalDateTime getKeyEventTiming() {
         return this.keyEventTiming;
+    }
+
+    public LocalDate getKeyEventDate() {
+        int year = keyEventTiming.getYear();
+        int month = keyEventTiming.getMonthValue();
+        int dayOfMonth = keyEventTiming.getDayOfMonth();
+        return LocalDate.of(year, month, dayOfMonth);
     }
 
     public Module getModule() {
