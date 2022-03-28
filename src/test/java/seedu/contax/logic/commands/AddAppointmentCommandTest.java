@@ -78,7 +78,7 @@ public class AddAppointmentCommandTest {
         AddAppointmentCommand addCommand = new AddAppointmentCommand(appointmentToAdd, null);
         ModelStub modelStub = new ModelStubWithAppointment(validAppointment);
 
-        assertThrows(CommandException.class, AddAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT, ()
+        assertThrows(CommandException.class, Messages.MESSAGE_APPOINTMENTS_OVERLAPPING, ()
             -> addCommand.execute(modelStub));
     }
 
@@ -278,7 +278,7 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -1,6 +1,7 @@
 package seedu.contax.model.chrono;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.contax.commons.util.AppUtil.checkArgument;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -12,6 +13,8 @@ import java.util.Objects;
  * {@code TimeRange} objects are immutable.
  */
 public class TimeRange implements TemporalComparable {
+
+    private static final String MESSAGE_ERROR_END_BEFORE_START = "End date must be after start date";
 
     private final LocalDateTime start;
     private final LocalDateTime end;
@@ -25,9 +28,7 @@ public class TimeRange implements TemporalComparable {
     public TimeRange(LocalDateTime start, LocalDateTime end) {
         requireNonNull(start);
         requireNonNull(end);
-        if (end.isBefore(start)) {
-            throw new IllegalArgumentException("End date must be after start date");
-        }
+        checkArgument(!end.isBefore(start), MESSAGE_ERROR_END_BEFORE_START);
 
         this.start = start;
         this.end = end;
@@ -71,8 +72,7 @@ public class TimeRange implements TemporalComparable {
         }
 
         TimeRange otherRange = (TimeRange) other;
-        return otherRange.start.equals(start)
-                && otherRange.end.equals(end);
+        return otherRange.start.equals(start) && otherRange.end.equals(end);
     }
 
     @Override

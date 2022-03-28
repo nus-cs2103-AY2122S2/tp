@@ -3,12 +3,12 @@ package seedu.contax.storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.contax.commons.exceptions.IllegalValueException;
-import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.Name;
@@ -59,11 +59,24 @@ class JsonAdaptedAppointment {
     /**
      * Converts this Jackson-friendly adapted appointment object into the model's {@code Appointment} object.
      *
-     * @param addressBook The current up-to-date address book for matching the person field in appointments.
+     * @param personsList The current up-to-date persons list in the address book for matching the person
+     *                    field in appointments.
      * @throws IllegalValueException If there were any data constraints violated in the adapted appointment.
      */
-    public Appointment toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
+    public Appointment toModelType(List<Person> personsList) throws IllegalValueException {
 
+        final Name modelName = parseNameModel();
+        final StartDateTime modelStartDateTime = parseStartDateTimeModel();
+        final Duration modelDuration = parseDurationModel();
+        final Person modelPerson = parsePersonModel(personsList);
+
+        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson);
+    }
+
+    /**
+     * Performs the validation and parsing of Appointment name into a {@code Name} model.
+     */
+    private Name parseNameModel() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Name.class.getSimpleName()));
@@ -71,36 +84,47 @@ class JsonAdaptedAppointment {
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    /**
+     * Performs the validation and parsing of Appointment start date-time into a {@code StartDateTime} model.
+     */
+    private StartDateTime parseStartDateTimeModel() throws IllegalValueException {
         if (startDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StartDateTime.class.getSimpleName()));
         }
-
         LocalDateTime dateTime;
         try {
             dateTime = LocalDateTime.parse(startDateTime, DATETIME_FORMATTER);
         } catch (DateTimeParseException ex) {
             throw new IllegalValueException(INVALID_DATETIME_MESSAGE);
         }
+        return new StartDateTime(dateTime);
+    }
 
-        final StartDateTime modelStartDateTime = new StartDateTime(dateTime);
-
+    /**
+     * Performs the validation and parsing of Appointment duration into a {@code Duration} model.
+     */
+    private Duration parseDurationModel() throws IllegalValueException {
         if (duration <= 0) {
             throw new IllegalValueException(INVALID_DURATION_MESSAGE);
         }
+        return new Duration(duration);
+    }
 
-        final Duration modelDuration = new Duration(duration);
-
-        Person modelPerson = null;
+    /**
+     * Performs the validation and parsing the person name associated with the appointment into a
+     * {@code Person} model from the supplied personsList.
+     */
+    private Person parsePersonModel(List<Person> personsList) throws IllegalValueException {
         if (person != null) {
-            modelPerson = addressBook.getPersonList().stream()
+            return personsList.stream()
                     .filter(x -> x.getName().fullName.equals(person))
                     .findFirst().orElseThrow(() -> new IllegalValueException(INVALID_PERSON_MESSAGE));
         }
-
-        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson);
+        return null;
     }
 
 }

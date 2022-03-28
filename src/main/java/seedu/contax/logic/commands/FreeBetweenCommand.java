@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
-import seedu.contax.model.appointment.DateRangePredicate;
+import seedu.contax.model.chrono.DateRangePredicate;
 import seedu.contax.model.chrono.TimeRange;
 
 /**

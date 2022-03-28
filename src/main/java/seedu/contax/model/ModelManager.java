@@ -34,7 +34,7 @@ public class ModelManager implements Model {
     private final FilteredList<Tag> filteredTags;
 
     private final AppointmentSlotList displayedAppointmentSlots;
-    private final CompositeTemporalObservableList<ScheduleItem> scheduleItemList;
+    private final CompositeObservableList<ScheduleItem> scheduleItemList;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -54,7 +54,7 @@ public class ModelManager implements Model {
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         displayedAppointmentSlots = new AppointmentSlotList(this.schedule);
-        scheduleItemList = new CompositeTemporalObservableList<>(filteredAppointments,
+        scheduleItemList = new CompositeObservableList<>(filteredAppointments,
                 displayedAppointmentSlots.getSlotList());
     }
 
@@ -280,7 +280,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+    public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
     }

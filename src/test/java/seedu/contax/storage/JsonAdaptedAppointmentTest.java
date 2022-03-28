@@ -35,7 +35,7 @@ public class JsonAdaptedAppointmentTest {
     @Test
     public void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(APPOINTMENT_ALICE);
-        assertEquals(APPOINTMENT_ALICE, appointment.toModelType(addressBook));
+        assertEquals(APPOINTMENT_ALICE, appointment.toModelType(addressBook.getPersonList()));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class JsonAdaptedAppointmentTest {
                 VALID_START_DATETIME, VALID_DURATION, VALID_PERSON);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> appointment.toModelType(addressBook));
+            -> appointment.toModelType(addressBook.getPersonList()));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class JsonAdaptedAppointmentTest {
                 new JsonAdaptedAppointment(null, VALID_START_DATETIME, VALID_DURATION, VALID_PERSON);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> appointment.toModelType(addressBook));
+            -> appointment.toModelType(addressBook.getPersonList()));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class JsonAdaptedAppointmentTest {
                 new JsonAdaptedAppointment(VALID_NAME, INVALID_START_DATETIME, VALID_DURATION, VALID_PERSON);
         String expectedMessage = JsonAdaptedAppointment.INVALID_DATETIME_MESSAGE;
         assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> appointment.toModelType(addressBook));
+            -> appointment.toModelType(addressBook.getPersonList()));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class JsonAdaptedAppointmentTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 StartDateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> appointment.toModelType(addressBook));
+            -> appointment.toModelType(addressBook.getPersonList()));
     }
 
     @Test
@@ -81,11 +81,11 @@ public class JsonAdaptedAppointmentTest {
                 new JsonAdaptedAppointment(VALID_NAME, VALID_START_DATETIME, INVALID_DURATION, VALID_PERSON);
         String expectedMessage = JsonAdaptedAppointment.INVALID_DURATION_MESSAGE;
         assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> appointment.toModelType(addressBook));
+            -> appointment.toModelType(addressBook.getPersonList()));
         JsonAdaptedAppointment appointment2 =
                 new JsonAdaptedAppointment(VALID_NAME, VALID_START_DATETIME, 0, VALID_PERSON);
         assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> appointment2.toModelType(addressBook));
+            -> appointment2.toModelType(addressBook.getPersonList()));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class JsonAdaptedAppointmentTest {
                 new JsonAdaptedAppointment(VALID_NAME, VALID_START_DATETIME, VALID_DURATION, INVALID_PERSON);
         String expectedMessage = JsonAdaptedAppointment.INVALID_PERSON_MESSAGE;
         assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> appointment.toModelType(addressBook));
+            -> appointment.toModelType(addressBook.getPersonList()));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class JsonAdaptedAppointmentTest {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(VALID_NAME, VALID_START_DATETIME, VALID_DURATION, null);
         try {
-            Appointment modelAppointment = appointment.toModelType(addressBook);
+            Appointment modelAppointment = appointment.toModelType(addressBook.getPersonList());
             assertEquals(null, modelAppointment.getPerson());
         } catch (IllegalValueException ex) {
             fail();

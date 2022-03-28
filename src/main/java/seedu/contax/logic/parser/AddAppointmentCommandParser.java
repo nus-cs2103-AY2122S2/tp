@@ -46,7 +46,6 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
             personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
         }
 
-
         return new AddAppointmentCommand(new Appointment(name, startDateTime, duration, null),
                 personIndex);
     }
