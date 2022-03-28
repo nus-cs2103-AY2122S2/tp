@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * Encapsulates the set of skills that can be done by a particular {@code Person}.
+ */
 public class SkillSet {
     private Set<Skill> skillSet;
 

@@ -21,7 +21,7 @@ import seedu.address.logic.commands.MakeTeamCommand;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
+import seedu.address.logic.commands.SetSkillsCommand;
 /**
  * Parses user input.
  */
@@ -91,6 +91,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case SetSkillsCommand.COMMAND_WORD:
+            return new SetSkillsCommandParser().parse(userInput);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
