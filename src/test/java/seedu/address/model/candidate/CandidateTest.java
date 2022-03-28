@@ -105,7 +105,7 @@ public class CandidateTest {
     @Test
     public void trigger_interviewStatus_success() {
         Candidate candidate = new CandidateBuilder().withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
-        assertEquals(candidate.triggerInterviewStatus().getInterviewStatus(),
+        assertEquals(candidate.triggerInterviewStatusScheduled().getInterviewStatus(),
                 new InterviewStatus(VALID_INTERVIEW_SCHEDULED));
     }
 

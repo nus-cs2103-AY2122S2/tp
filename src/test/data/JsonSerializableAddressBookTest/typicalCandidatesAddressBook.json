@@ -1,6 +1,17 @@
 {
   "_comment": "TAlent Assistant™ save file which contains the same Candidate values as in TypicalCandidates#getTypicalAddressBook()",
   "candidates" : [ {
+      "studentId": "E0123456",
+      "name" : "Amy Bee",
+      "phone" : "91111111",
+      "email" : "E0123456@u.nus.edu",
+      "course": "Business Analytics",
+      "seniority": "2",
+      "tagged" : [ "friend" ],
+      "applicationStatus": "Pending",
+      "interviewStatus": "Scheduled",
+      "availability": "1,2,3,4,5"
+  }, {
     "studentId": "E0123450",
     "name" : "Alice Pauline",
     "phone" : "94351253",
@@ -9,7 +20,7 @@
     "seniority": "2",
     "tagged" : [ "friends" ],
     "applicationStatus": "Pending",
-    "interviewStatus": "Not Scheduled",
+    "interviewStatus": "Scheduled",
     "availability": "1,2,3"
   }, {
     "studentId": "E0234567",
@@ -20,7 +31,7 @@
     "seniority": "2",
     "tagged" : [ "owesMoney", "friends" ],
     "applicationStatus": "Pending",
-    "interviewStatus": "Not Scheduled",
+    "interviewStatus": "Scheduled",
     "availability": "2,3,4"
   }, {
     "studentId": "E0345678",
