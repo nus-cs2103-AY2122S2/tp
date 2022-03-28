@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCandidates.ALICE;
 import static seedu.address.testutil.TypicalCandidates.BENSON;
+import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 
@@ -207,7 +208,6 @@ public class ModelManagerTest {
 
     @Test
     public void deletePastInterviews_hasPastInterviews() {
-        AddressBook addressBook = new AddressBook();
         LocalDateTime currentDateTime = LocalDateTime.now();
         Interview pastInterview = new Interview(ALICE, currentDateTime);
 
@@ -215,17 +215,18 @@ public class ModelManagerTest {
         InterviewSchedule emptyInterviewSchedule = new InterviewScheduleBuilder().build();
         UserPrefs userPrefs = new UserPrefs();
 
-        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        modelManager = new ModelManager(getTypicalAddressBook(), interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(getTypicalAddressBook(), emptyInterviewSchedule, userPrefs);
         LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
         modelManager.deletePastInterviewsForInterviewList(dateTimeThirtyOneMinutesIntoFuture);
+        modelManagerCopy.setCandidate(pastInterview.getCandidate(),
+                pastInterview.getCandidate().triggerInterviewStatusCompleted());
 
         assertEquals(modelManager, modelManagerCopy);
     }
 
     @Test
     public void deletePastInterviews_hasBothPastAndFutureInterviews() {
-        AddressBook addressBook = new AddressBook();
         LocalDateTime currentDateTime = LocalDateTime.now();
         Interview pastInterview = new Interview(ALICE, currentDateTime);
 
@@ -235,10 +236,13 @@ public class ModelManagerTest {
                 .withInterview(INTERVIEW_BENSON).build();
         UserPrefs userPrefs = new UserPrefs();
 
-        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, emptyInterviewSchedule, userPrefs);
+        modelManager = new ModelManager(getTypicalAddressBook(), interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(getTypicalAddressBook(), emptyInterviewSchedule, userPrefs);
         LocalDateTime dateTimeThirtyOneMinutesIntoFuture = currentDateTime.plusMinutes(31);
+
         modelManager.deletePastInterviewsForInterviewList(dateTimeThirtyOneMinutesIntoFuture);
+        modelManagerCopy.setCandidate(pastInterview.getCandidate(),
+                pastInterview.getCandidate().triggerInterviewStatusCompleted());
 
         assertEquals(modelManager, modelManagerCopy);
     }

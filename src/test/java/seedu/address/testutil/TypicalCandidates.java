@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -37,7 +38,7 @@ public class TypicalCandidates {
             .withCourse("Business Analytics")
             .withSeniority("2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
-            .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+            .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability("1,2,3")
             .build();
     public static final Candidate BENSON = new CandidateBuilder()
@@ -48,7 +49,7 @@ public class TypicalCandidates {
             .withCourse("Computer Engineering")
             .withSeniority("2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
-            .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+            .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability("2,3,4")
             .build();
     public static final Candidate CARL = new CandidateBuilder()
@@ -119,6 +120,7 @@ public class TypicalCandidates {
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("1,4")
             .build();
+
     public static final Candidate IDA = new CandidateBuilder()
             .withStudentId("E0901234")
             .withName("Ida Mueller")
@@ -140,7 +142,7 @@ public class TypicalCandidates {
             .withCourse(VALID_COURSE_AMY)
             .withSeniority(VALID_SENIORITY_AMY)
             .withApplicationStatus(VALID_APPLICATION_PENDING)
-            .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+            .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability(VALID_AVAILABILITY_AMY)
             .build();
     public static final Candidate BOB = new CandidateBuilder()
@@ -171,6 +173,6 @@ public class TypicalCandidates {
     }
 
     public static List<Candidate> getTypicalCandidates() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(AMY, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

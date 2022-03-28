@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
 
@@ -18,7 +19,9 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         interviews = new UniqueInterviewList();
     }
 
-    public InterviewSchedule() {}
+    public InterviewSchedule() {
+
+    }
 
     /**
      * Creates an InterviewSchedule using the Interviews in the {@code toBeCopied}
@@ -91,7 +94,7 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
      * Deletes past interviews from the list if the scheduled interview time is 31 minutes ago.
      * @param localDateTime Current date time.
      */
-    public void deletePastInterviews(LocalDateTime localDateTime) {
+    public List<Interview> deletePastInterviews(LocalDateTime localDateTime) {
         localDateTime = localDateTime.minusMinutes(30).withSecond(0).withNano(0);
 
         List<Interview> list = new ArrayList<>();
@@ -103,10 +106,17 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         for (Interview i: list) {
             removeInterview(i);
         }
+
+        return list;
     }
 
-    public void removeInterview(Interview key) {
+    /**
+     * To remove the interview from the list.
+     */
+    public Candidate removeInterview(Interview key) {
+        Candidate toReturn = key.getCandidate();
         interviews.remove(key);
+        return toReturn;
     }
 
     @Override

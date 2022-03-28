@@ -1,6 +1,8 @@
 package seedu.address.model.candidate;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
+import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
 import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
 
 import java.util.Objects;
@@ -145,8 +147,9 @@ public class Candidate {
     }
 
     /**
-     * Used by ScheduleCommand to return the same Candidate
-     * with `Scheduled` InterviewStatus.
+     * Trigger the Candidate status to be a `Scheduled`.
+     *
+     * @return a New Candidate with the same attributes, but updated InterviewStatus.
      */
     public Candidate triggerInterviewStatus() {
         requireAllNonNull(name, phone, email, course, seniority,
@@ -161,6 +164,52 @@ public class Candidate {
                 new InterviewStatus(SCHEDULED),
                 this.getAvailability()
         );
+    }
+
+    /**
+     * Trigger the Candidate status to be a `Not Scheduled`.
+     *
+     * @return a New Candidate with the same attributes, but updated InterviewStatus.
+     */
+    public Candidate triggerInterviewStatusNotScheduled() {
+        requireAllNonNull(name, phone, email, course, seniority, tags,
+                applicationStatus, interviewStatus, availability);
+        return new Candidate(this.getStudentId(),
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCourse(),
+                this.getSeniority(),
+                this.getTags(),
+                this.getApplicationStatus(),
+                new InterviewStatus(NOT_SCHEDULED),
+                this.getAvailability()
+        );
+    }
+
+    /**
+     * Trigger the Candidate status to be a `Completed`.
+     *
+     * @return a New Candidate with the same attributes, but updated InterviewStatus.
+     */
+    public Candidate triggerInterviewStatusCompleted() {
+        requireAllNonNull(name, phone, email, course, seniority, tags,
+                applicationStatus, interviewStatus, availability);
+        return new Candidate(this.getStudentId(),
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCourse(),
+                this.getSeniority(),
+                this.getTags(),
+                this.getApplicationStatus(),
+                new InterviewStatus(COMPLETED),
+                this.getAvailability()
+        );
+    }
+
+    public boolean isCompleted() {
+        return interviewStatus.equals(new InterviewStatus(COMPLETED));
     }
 
 }
