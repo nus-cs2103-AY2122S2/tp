@@ -12,7 +12,7 @@ import seedu.contax.model.appointment.ContainsKeywordsPredicate;
  * Keyword matching is case-insensitive.
  */
 public class FindAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "findappointment";
+    public static final String COMMAND_WORD = "findappt";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: Finds all appointments with"
             + "names or person names that "

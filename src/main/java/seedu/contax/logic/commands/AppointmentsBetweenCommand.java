@@ -19,7 +19,7 @@ import seedu.contax.model.chrono.DateRangePredicate;
  */
 public class AppointmentsBetweenCommand extends Command {
 
-    public static final String COMMAND_WORD = "appointmentsbetween";
+    public static final String COMMAND_WORD = "apptbetween";
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Lists appointments within a period.** "
             + "\nParameters: *"
             + "[" + PREFIX_DATE_START + "STARTDATE] "
