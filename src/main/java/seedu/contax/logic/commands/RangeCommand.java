@@ -27,12 +27,12 @@ public class RangeCommand extends Command {
     public static final String COMMAND_WORD = "range";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in range"
-            + "by the index number used in the displayed person list.**\n"
-            + "Parameters: *"
+            + "by the index number used in the displayed person list.**"
+            + "\nParameters: *"
             + "COMMAND (must be valid command without index) "
             + PREFIX_RANGE_FROM + "FROM "
             + PREFIX_RANGE_TO + "TO *\n"
-            + "Example: `" + COMMAND_WORD + " edit "
+            + "Example: `" + COMMAND_WORD + " editperson "
             + PREFIX_PHONE + "12345678 "
             + PREFIX_ADDRESS + "New Address `";
 
