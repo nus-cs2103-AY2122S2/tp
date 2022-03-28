@@ -20,19 +20,20 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 3. Copy the file to the folder you want to use as the _home folder_ for ContaX.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-   <br>
+4. Double-click the file to start the app.<br>
    <div markdown="span" class="alert alert-warning">:rotating_light: **For Users on Mac OSX:**
      The security policy of OSX might prevent the creation of data files in the same folder. For users on OSX, it is recommended that you <br>
 
-     - Navigate to your _home folder_ on Terminal <br>
-     - Launch the application using the command `java -jar ContaX.jar`. <br>
+  - Navigate to your _home folder_ on Terminal <br>
+  - Launch the application using the command `java -jar ContaX.jar`. <br>
    </div>
+  
+5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
-5. If this is your first time running ContaX, you will be prompted to go through an [Interactive Onboarding Guide](#onboarding-guide) to learn the basics, or you can choose to explore the application by yourself.
+6. If this is your first time running ContaX, you will be prompted to go through an [Interactive Onboarding Guide](#onboarding-guide) to learn the basics, or you can choose to explore the application by yourself.
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`listpersons`** : Lists all contacts.
@@ -45,7 +46,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
    * **`exit`** : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
