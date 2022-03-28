@@ -34,8 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CHAD = "33333333";
-    public static final PropertyToBuy VALID_PROPERTYB_CHAD = new PropertyToBuy(new House(HouseType.HDB_FLAT, "jurong"),
-            new PriceRange(1000, 2000));
+    public static final PropertyToBuy VALID_PROPERTY_BUY_CHAD = new PropertyToBuy(new House(HouseType.HDB_FLAT,
+            "jurong"), new PriceRange(1000, 2000));
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_REMARK_AMY = "A remark";

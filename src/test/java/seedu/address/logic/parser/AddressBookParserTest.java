@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTYB_CHAD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_BUY_CHAD;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBuyers.CHAD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
@@ -110,7 +110,7 @@ public class AddressBookParserTest {
                 parser.parseCommand(AddPropertyToBuyCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getPropertyToBuyCommand(buyer));
         AddPropertyToBuyCommand c = new AddPropertyToBuyCommand(INDEX_FIRST_CLIENT,
-                VALID_PROPERTYB_CHAD);
+                VALID_PROPERTY_BUY_CHAD);
         boolean a = c.equals(command);
         assertTrue(a);
     }

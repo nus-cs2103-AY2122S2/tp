@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHAD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHAD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTYB_CHAD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_BUY_CHAD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -59,7 +59,7 @@ public class TypicalBuyers {
     public static final Buyer CHAD = new BuyerBuilder()
             .withName(VALID_NAME_CHAD).withPhone(VALID_PHONE_CHAD)
             .withAppointment(VALID_APPOINTMENT_CHAD).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withProperty(VALID_PROPERTYB_CHAD).build();
+            .withProperty(VALID_PROPERTY_BUY_CHAD).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
