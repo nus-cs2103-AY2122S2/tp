@@ -96,6 +96,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         } else if (task instanceof Event) {
             return ((Event) task).getDate();
         } else {
+            assert false : "checkIfHasDate did not filter out the todo";
             return null;
         }
     }
@@ -121,7 +122,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
             return true;
         } else if (obj instanceof TaskMultiplePredicate) {
             TaskMultiplePredicate pre = (TaskMultiplePredicate) obj;
-            boolean isSameTaskTypes = isSameTaskTypes(pre.taskTypes);
+            boolean isSameTaskTypes = taskTypes.equals(pre.taskTypes);
             boolean isSameDescription = isSameDescription(pre.description);
             boolean isSameDate = isSameDate(pre.date);
             boolean isSamePriority = isSamePriority(pre.priority);
@@ -132,13 +133,6 @@ public class TaskMultiplePredicate implements Predicate<Task> {
                     && isSameDescription && isSameDate && isSamePriority && isSameAssignee && isSameIsMarked;
         }
         return false;
-    }
-
-    private boolean isSameTaskTypes(List<Prefix> taskTypes) {
-        if (taskTypes != null) {
-            return taskTypes.equals(this.taskTypes);
-        }
-        return this.taskTypes == null;
     }
 
     private boolean isSameDescription(List<String> description) {

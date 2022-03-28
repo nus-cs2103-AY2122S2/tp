@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.Messages;
 import manageezpz.logic.commands.FindTaskCommand;
+import manageezpz.model.person.Name;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
@@ -38,6 +39,8 @@ class FindTaskCommandParserTest {
             FindTaskCommand.INVALID_PRIORITY + FindTaskCommand.MESSAGE_USAGE);
     static final String EMPTY_ASSIGNEE_COMMAND_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.EMPTY_ASSIGNEE + FindTaskCommand.MESSAGE_USAGE);
+    static final String INVALID_ASSIGNEE_COMMAND_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            Name.MESSAGE_CONSTRAINTS + FindTaskCommand.MESSAGE_USAGE);
     static final String INVALID_BOOLEAN_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_BOOLEAN + FindTaskCommand.MESSAGE_USAGE);
     static final String TODO_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
@@ -147,6 +150,14 @@ class FindTaskCommandParserTest {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_ASSIGNEES.toString());
 
         assertParseFailure(parser, userInput, EMPTY_ASSIGNEE_COMMAND_MESSAGE);
+    }
+
+    @Test
+    void findTaskCommandParser_invalidAssignee_findTaskCommand() {
+        String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD,
+                PREFIX_ASSIGNEES.toString(), "James&");
+
+        assertParseFailure(parser, userInput, INVALID_ASSIGNEE_COMMAND_MESSAGE);
     }
 
     @Test

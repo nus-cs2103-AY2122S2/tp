@@ -32,6 +32,16 @@ class TaskMultiplePredicateTest {
     }
 
     @Test
+    void taskMultiplePredicate_equalSomeOtherObject_false() {
+        Object otherObject = new Object();
+        TaskMultiplePredicate predicateWithNoOptions = new TaskMultiplePredicate(
+                TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, null, null, null, null,
+                null);
+
+        assertFalse(predicateWithNoOptions.equals(otherObject));
+    }
+
+    @Test
     void taskMultiplePredicate_equalTaskTypes() {
         TaskMultiplePredicate predicateTaskType = new TaskMultiplePredicate(List.of(PREFIX_DEADLINE), null,
                 null, null, null, null);
