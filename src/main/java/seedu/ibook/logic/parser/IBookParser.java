@@ -16,6 +16,7 @@ import seedu.ibook.logic.commands.ExpiredCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.HelpCommand;
 import seedu.ibook.logic.commands.ListCommand;
+import seedu.ibook.logic.commands.ReminderCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateItemCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -80,6 +81,9 @@ public class IBookParser {
 
         case ExpiredCommand.COMMAND_WORD:
             return new ExpiredCommand();
+
+        case ReminderCommand.COMMAND_WORD:
+            return new ReminderCommandParser().parse(arguments);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

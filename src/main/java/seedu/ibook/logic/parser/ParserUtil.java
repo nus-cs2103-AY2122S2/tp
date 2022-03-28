@@ -143,4 +143,20 @@ public class ParserUtil {
         }
         return new Price(trimmedPrice);
     }
+
+    /**
+     * Parses a string of one integer and returns an expiry date that is integer days after the current date
+     * @param numberOfDays the number in string form to add to the current date
+     *
+     * @throws ParseException
+     */
+    public static ExpiryDate parseNumberIntoDate(String numberOfDays) throws ParseException {
+        requireNonNull(numberOfDays);
+        String trimmedDays = numberOfDays.trim();
+        int days = Integer.parseInt(trimmedDays);
+        if (days < 0) {
+            throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
+        }
+        return ExpiryDate.getDateFromNow(days);
+    }
 }
