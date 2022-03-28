@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public class BookingDateTime {
     public static final String MESSAGE_CONSTRAINTS =
-            "BookingDateTime should follow dd-mm-yyyy hh:mm, and it should not be blank";
+            "BookingDateTime should follow dd-MM-yyyy HH:mm, and it should not be blank";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     public final LocalDateTime value;
 
