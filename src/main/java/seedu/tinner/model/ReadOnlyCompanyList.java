@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.tinner.model.company.Company;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an company list
  */
 public interface ReadOnlyCompanyList {
 

@@ -15,10 +15,11 @@ import seedu.tinner.commons.core.LogsCenter;
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.model.company.Company;
 import seedu.tinner.model.company.RoleManager;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.Role;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the company list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -26,14 +27,28 @@ public class ModelManager implements Model {
     private final CompanyList companyList;
     private final UserPrefs userPrefs;
     private final FilteredList<Company> filteredCompanies;
+    private UniqueReminderList reminderList = null;
 
+    /**
+     * Initializes a ModelManager with the given companyList, userPrefs and reminderList.
+     */
+    public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs, UniqueReminderList reminderList) {
+        requireAllNonNull(companyList, userPrefs, reminderList);
+
+        logger.fine("Initializing with company list: " + companyList + " and user prefs " + userPrefs);
+
+        this.companyList = new CompanyList(companyList);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
+        this.reminderList = reminderList;
+    }
     /**
      * Initializes a ModelManager with the given companyList and userPrefs.
      */
     public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(companyList, userPrefs);
 
-        logger.fine("Initializing with address book: " + companyList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with company list: " + companyList + " and user prefs " + userPrefs);
 
         this.companyList = new CompanyList(companyList);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -74,9 +89,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setCompanyListFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setCompanyListFilePath(addressBookFilePath);
+    public void setCompanyListFilePath(Path companyListFilePath) {
+        requireNonNull(companyListFilePath);
+        userPrefs.setCompanyListFilePath(companyListFilePath);
     }
 
     //=========== CompanyList ================================================================================
@@ -118,7 +133,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedCompanyList}
      */
     @Override
     public ObservableList<Company> getFilteredCompanyList() {
@@ -213,15 +228,4 @@ public class ModelManager implements Model {
         RoleManager roleManager = company.getRoleManager();
         return roleManager.getFilteredRoleList();
     }
-
-
-
-
-
-
-
-
-
-
-
 }

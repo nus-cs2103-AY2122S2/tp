@@ -71,11 +71,34 @@ The `UI` component,
 
 ### Logic Component
 
-![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
 [`Logic.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/logic/Logic.java)
 
+![Structure of the Logic Component](images/LogicClassDiagram.png)
+
+How the `Logic` component works:
+
+* When `Logic` is called upon to execute a command, it uses the `CompanyListParser` class to parse the user command.
+* This results in a `Command` object (or more precisely, an object of one of its subclasses e.g., `AddCompanyCommand`) which is executed by the `LogicManager`.
+* The command can communicate with the `Model` when it is executed (e.g. to add a company).
+* The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteCompany 1")` API call.
+
+![Interactions Inside the Logic Component for the `deleteCompany 1` Command](images/DeleteCompanySequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCompanyCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command can be represented as follows:
+
+<img src="images/ParserClasses.png" width="600"/>
+
+How the parsing works:
+
+* When called upon to parse a user command, the `CompanyListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCompanyCommandParser`) which uses the other classes shown above (e.g. `ArgumentMultimap`, `ParserUtil`, etc.) to parse the user command and create a `XYZCommand` object (e.g., `AddCompanyCommand`) which the `CompanyListParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCompanyCommandParser`, `DeleteCompanyCommandParser`, …) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model Component
 
@@ -173,6 +196,30 @@ The following sequence diagram shows how the `editRole` command operation works 
 4. The `EditRoleCommand` object will be returned to the `LogicManager` and will then invoke the `EditRoleCommand#execute()` method to implement the changes.
 5. The  `EditRoleCommand#execute()` will check the validity of both the indexes, and invoke the `Model#setRole()` method.
 6. The  `Model#setRole()` with the company index will set the role to be edited with a new role containing the changes. Then the `Model#updateFilteredRoleList()` filters the list of roles such that the application only displays the edited `Role` to the User.
+7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
+
+### Delete role feature
+The `deleteRole` command for the `Role` item allows the user to delete any role under a `Company` item by specifying the company index and role index that which are associated with the `Role` item to be deleted.
+
+#### Implementation
+The `deleteRole` command relies on the `DeleteRoleCommandParser`, a class that extends `Parser`, as well as `DeleteRoleCommand`, which is a class that extends `Command`. The `DeleteRoleCommand`, upon execution, dynamically updates the displayed list of roles accordingly.
+
+* Upon a valid user's input using the `deleteRole` command, the `DeleteRoleCommandParser#parse()` retrieves the indices of the role to be deleted from the parsed user input.
+* The `DeleteRoleCommandParser#parse()` then instantiates a `DeleteRoleCommand` that possesses the aforementioned indices.
+* Then invoking the `DeleteRoleCommand#execute()` method will update the internal `CompanyList` and `FilteredList<Company>` of the `ModelManager` to reflect the role deletion.
+
+
+![UML diagram of the DeleteRole feature](images/DeleteRoleDiagram.png)
+
+The following sequence diagram shows how the `deleteRole` command operation works with the user input `deleteRole 1 1`:
+
+![Sequence diagram of the DeleteRole feature](images/DeleteRoleSequenceDiagram.png)
+
+1. The user first enters the input `deleteRole 1 1`, the `CompayListParser#parseCommand()` method parses the information `1 1` to `DeleteRoleCommandParser` using the method `parse()` based on the keyword `deleteRole`.
+2. The `DeleteRoleCommandParser#parse()` method creates an instance of `DeleteCommand` by passing the company index and role index of the role that is to be deleted.
+4. The `DeleteRoleCommand` object is returned to the `LogicManager` and invokes the `DeleteRoleCommand#execute()` method to implement the deletion.
+5. The  `DeleteRoleCommand#execute()` checks the validity of both the indexes, and invokes the `Model#deleteRole()` method using the stored company index and role index.
+6. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
 7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
 

@@ -21,6 +21,7 @@ import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.UserPrefs;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.util.SampleDataUtil;
 import seedu.tinner.storage.CompanyListStorage;
 import seedu.tinner.storage.JsonCompanyListStorage;
@@ -62,6 +63,7 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
+        // ui.show(model.reminderlist);
 
         logic = new LogicManager(model, storage);
 
@@ -69,28 +71,32 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s company list and {@code userPrefs}. <br>
+     * The data from the sample company list will be used instead if {@code storage}'s company list is not found,
+     * or an empty company list will be used instead if errors occur when reading {@code storage}'s company list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyCompanyList> addressBookOptional;
+        Optional<ReadOnlyCompanyList> companyListOptional;
         ReadOnlyCompanyList initialData;
+        UniqueReminderList reminderList;
         try {
-            addressBookOptional = storage.readCompanyList();
-            if (!addressBookOptional.isPresent()) {
+            reminderList = UniqueReminderList.getReminderList();
+            companyListOptional = storage.readCompanyList();
+            if (!companyListOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CompanyList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleCompanyList);
+            initialData = companyListOptional.orElseGet(SampleDataUtil::getSampleCompanyList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CompanyList");
+            reminderList = UniqueReminderList.getReminderList();
             initialData = new CompanyList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty CompanyList");
+            reminderList = UniqueReminderList.getReminderList();
             initialData = new CompanyList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, reminderList);
     }
 
     private void initLogging(Config config) {
@@ -173,7 +179,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Company List ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
