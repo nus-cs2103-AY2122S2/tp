@@ -31,7 +31,7 @@ CompanyListParser -> AddRoleCommandParser : parse("1 n/Data Analyst s/applying b
 activate AddRoleCommandParser
 
 create Role
-AddRoleCommandParser -> Role : Role(name, status, deadline)
+AddRoleCommandParser -> Role : Role(name, status, reminderDate)
 activate Role
 
 Role --> AddRoleCommandParser : role

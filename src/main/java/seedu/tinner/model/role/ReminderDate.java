@@ -8,13 +8,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Role's deadline in the role list.
- * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
+ * Represents a Role's reminder date in the role list.
+ * Guarantees: immutable; is valid as declared in {@link #isValidReminderDate(String)}
  */
-public class Deadline {
+public class ReminderDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadlines should not have passed and must be in the following format: dd-MM-yyyy HH:mm";
+            "Reminder dates should not have passed and must be in the following format: dd-MM-yyyy HH:mm";
 
     public static final DateTimeFormatter VALIDATION_FORMATTER =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -26,14 +26,18 @@ public class Deadline {
     public final LocalDateTime value;
 
     /**
-     * Constructs a {@code Deadline}.
+     * Constructs a {@code Reminder date}.
      *
-     * @param deadline A valid deadline.
+     * @param reminderDate A valid reminder date.
      */
-    public Deadline(String deadline) {
-        requireNonNull(deadline);
-        checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
-        value = LocalDateTime.parse(deadline, VALIDATION_FORMATTER);
+    public ReminderDate(String reminderDate) {
+        requireNonNull(reminderDate);
+        checkArgument(isValidReminderDate(reminderDate), MESSAGE_CONSTRAINTS);
+        if (reminderDate.isEmpty()) {
+            value = null;
+        } else {
+            value = LocalDateTime.parse(reminderDate, VALIDATION_FORMATTER);
+        }
     }
 
     public static void setReminderWindow(int newWindow) {
@@ -41,9 +45,12 @@ public class Deadline {
     }
 
     /**
-     * Returns true if a given string is a valid deadline.
+     * Returns true if a given string is a valid reminder date.
      */
-    public static boolean isValidDeadline(String test) {
+    public static boolean isValidReminderDate(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         try {
             VALIDATION_FORMATTER.parse(test);
         } catch (DateTimeParseException e) {
@@ -53,35 +60,46 @@ public class Deadline {
     }
 
     /**
-     * Returns true if the deadline is within a week from the current {@code LocalDateTime}.
+     * Returns true if the reminder date is within a week from the current {@code LocalDateTime}
+     * or if the date is null.
      *
      * @return true if is within a week from the current date.
      */
     public boolean isWithinReminderWindow() {
+        if (this.value == null) {
+            return false;
+        }
         LocalDateTime oneWeekAway = LocalDateTime.now().plusDays(reminderWindow);
         return !this.value.isBefore(LocalDateTime.now()) && oneWeekAway.isAfter(this.value);
     }
 
     /**
-     * Returns true if a given string, when parsed into {@code LocalDateTime} is after the current time.
+     * Returns true if a given string, when parsed into {@code LocalDateTime} is after the current time or if the
+     * string is empty.
      *
      * @param test User input to be tested.
      * @return true if user input is after current time.
      */
-    public static boolean isDeadlineAfter(String test) {
+    public static boolean isReminderDateAfter(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return LocalDateTime.parse(test, VALIDATION_FORMATTER).isAfter(LocalDateTime.now());
     }
 
     @Override
     public String toString() {
+        if (value == null) {
+            return "";
+        }
         return value.format(STRING_REPRESENTATION_FORMATTER);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                && value.equals(((Deadline) other).value)); // state check
+                || (other instanceof ReminderDate // instanceof handles nulls
+                && value.equals(((ReminderDate) other).value)); // state check
     }
 
     @Override
