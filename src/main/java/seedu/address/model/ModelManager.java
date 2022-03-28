@@ -131,6 +131,11 @@ public class ModelManager implements Model {
     // TODO: also, add the abstract function declarations for these functions in the Model interface
 
     @Override
+    public void setLessonBook(ReadOnlyLessonBook lessonBook) {
+        this.lessonBook.resetData(lessonBook);
+    }
+
+    @Override
     public LessonBook getLessonBook() {
         return lessonBook;
     }
