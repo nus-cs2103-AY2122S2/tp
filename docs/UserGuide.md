@@ -198,7 +198,7 @@ Format: `clear`
 
 **Description:** Planning to watch a show and want to store its details? Add it to Trackermon's show list!
 
-**Format:** `add n/NAME s/STATUS [c/COMMENT] [t/TAG]…​`
+**Format:** `add n/NAME s/STATUS [r/RATE] [c/COMMENT] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 A show can have any number of comments or tags (including 0)
@@ -236,7 +236,7 @@ The **index** parameter provided should be a [non-zero unsigned integer](https:/
 
 **Description:** Wanting to modify a show? Edit it at the specified index shown in Trackermon's show list!
 
-**Format:** `edit INDEX [n/NAME] [s/STATUS] [c/COMMENT] [t/TAG]…​`
+**Format:** `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Multiple show [parameters](#command-structure) can be edited at the same time
@@ -301,13 +301,13 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 **Description (Precise Find):** Searching for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
 
-**Format (Precise Find):** `find [n/NAME] [s/STATUS] [t/TAG]…​`
+**Format (Precise Find):** `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`
 
 **Example & Output:** `find n/Shutter Island`
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
-**Example & Output:** `find n/Django s/completed t/Action`
+**Example & Output:** `find n/Django s/completed r/3 t/Action`
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
@@ -316,7 +316,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 **:information_source: Notes about Precise Find:**<br>
 * **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an [**AND search**](#glossary) is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
 * `find n/Shutter Island` displays all the shows in the Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
-* `find n/Django s/completed t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, and **Action** in the `TAG` parameter.
+* `find n/Django s/completed r/3 t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, **3** in the `RATE` parameter and **Action** in the `TAG` parameter.
 
 </div>
 
@@ -377,13 +377,13 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                  |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME s/STATUS [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                                          |
+| **Add**    | `add n/NAME s/STATUS [r/RATE] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                                                          |
 | **Clear**  | `clear`                                                                                                                                           |
-| **Comment** | `comment <INDEX> [c/<COMMENT>]`  eg., `comment 2 c/Bad`                                                                                               |
+| **Comment** | `comment INDEX [c/COMMENT]`  eg., `comment 2 c/Bad`                                                                                               |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                               |
-| **Edit**   | `edit INDEX [n/NAME] [s/STATUS] [t/TAG]…​` <br> e.g., `n/ReZero s/watching t/Anime`                                                               |
+| **Edit**   | `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime`                                                               |
 | **Exit**   | `exit`                                                                                                                                            |
-| **Find**   | `find KEYWORD`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching t/Anime t/Seinen` |
+| **Find**   | `find KEYWORD`<br> e.g., `find hero`<br><br>`find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen` |
 | **List**   | `list`                                                                                                                                            |
 | **Sort**   | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                                          |
 |
