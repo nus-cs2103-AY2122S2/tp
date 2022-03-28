@@ -191,11 +191,11 @@ public class HelpWindow extends UiPart<Stage> {
         insertRow("Delete Appointment", "deleteappt INDEX", "deleteappt 2", appointmentsPage);
         insertRow("Edit Appointment", "editappt INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
                 "editappt 2 n/Call Juliet t/13:45", appointmentsPage);
-        insertRow("List Appointments Within Period", "apptbetween [sd/STARTDATE] [st/STARTTIME]" +
-                        "[ed/ENDDATE [et/ENDTIME]]" , "apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+        insertRow("List Appointments Within Period", "apptbetween [sd/STARTDATE] [st/STARTTIME]"
+                        + "[ed/ENDDATE [et/ENDTIME]]" , "apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
                 appointmentsPage);
-        insertRow("List Available Slots Within Period", "freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME]" +
-                        "[ed/ENDDATE [et/ENDTIME]]", "freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60",
+        insertRow("List Available Slots Within Period", "freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME]"
+                        + "[ed/ENDDATE [et/ENDTIME]]", "freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60",
                 appointmentsPage);
         insertRow("Prioritize Appointment", "prioritizeappt INDEX pri/PRIORITY",
                 "prioritizeappt 2 pri/low", appointmentsPage);
