@@ -31,33 +31,14 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
         if (!argMultimap.arePrefixesPresent(PREFIX_FILE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCsvCommand.MESSAGE_USAGE));
         }
-
         File file = ParserUtil.parseCsvFilePath(argMultimap.getValue(PREFIX_FILE).get());
 
-        //check if file exists, else throw exception
+        int namePosition = prefixChecker(1, PREFIX_NAME, argMultimap);
+        int phonePosition = prefixChecker(2, PREFIX_PHONE, argMultimap);
+        int emailPosition = prefixChecker(3, PREFIX_EMAIL, argMultimap);
+        int addressPosition = prefixChecker(4, PREFIX_ADDRESS, argMultimap);
+        int tagPosition = prefixChecker(5, PREFIX_TAG, argMultimap);
 
-        int namePosition = 1;
-        int phonePosition = 2;
-        int emailPosition = 3;
-        int addressPosition = 4;
-        int tagPosition = 5;
-        if (argMultimap.arePrefixesPresent(PREFIX_NAME)) {
-            namePosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_NAME).get());
-        }
-        if (argMultimap.arePrefixesPresent(PREFIX_PHONE)) {
-            phonePosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_PHONE).get());
-        }
-        if (argMultimap.arePrefixesPresent(PREFIX_EMAIL)) {
-            emailPosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_EMAIL).get());
-        }
-        if (argMultimap.arePrefixesPresent(PREFIX_ADDRESS)) {
-            addressPosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_ADDRESS).get());
-        }
-        if (argMultimap.arePrefixesPresent(PREFIX_TAG)) {
-            tagPosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_TAG).get());
-        }
-
-        //Check if all the positions are distinct
         HashSet<Integer> positionHashSet = new HashSet<>();
         positionHashSet.add(namePosition);
         checkDuplicateAndAdd(positionHashSet, phonePosition);
@@ -69,7 +50,6 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
                 emailPosition, addressPosition, tagPosition);
 
         return new ImportCsvCommand(indexedCsvFileObject);
-
     }
 
     /**
@@ -84,4 +64,14 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
         }
     }
 
+    /**
+     * Checks if the prefix exists in the command and provides the index, otherwise uses the default index.
+     */
+    private int prefixChecker(int defaultValue, Prefix prefix, ArgumentMultimap argsMultimap) throws ParseException {
+        if (argsMultimap.arePrefixesPresent(prefix)) {
+            return ParserUtil.parseCsvPositions(argsMultimap.getValue(prefix).get());
+        } else {
+            return defaultValue;
+        }
+    }
 }

@@ -59,8 +59,9 @@ public class BatchCommandTest {
                         new SearchType(SearchType.TYPE_PHONE), "94351253", BatchType.EQUALS);
         CommandResult commandResult = expectedBatchCommand.execute(model);
         assertTrue(commandResult.getFeedbackToUser().equals(
-                "Edited Person: Alice Pauline; Phone: 12345678; "
-                        + "Email: alice@example.com; Address: 123, Jurong West Ave 6, #08-111; Tags: [friends]\n"));
+                "Edited Person: \n**Name: **Alice Pauline\n**Phone: **12345678\n"
+                        + "**Email: **alice@example.com\n**Address: **123, Jurong West Ave 6, #08-111"
+                        + "\n**Tags: **[friends]\n"));
         expectedBatchCommand =
                 new BatchCommand("editperson p/12345678",
                         new SearchType(SearchType.TYPE_ADDRESS), "1234567890", BatchType.EQUALS);
@@ -87,8 +88,9 @@ public class BatchCommandTest {
                         new SearchType(SearchType.TYPE_PHONE), "94351253", BatchType.START);
         CommandResult commandResult = expectedBatchCommand.execute(model);
         assertTrue(commandResult.getFeedbackToUser().equals(
-                "Edited Person: Alice Pauline; Phone: 12345678; "
-                        + "Email: alice@example.com; Address: 123, Jurong West Ave 6, #08-111; Tags: [friends]\n"));
+                "Edited Person: \n**Name: **Alice Pauline\n**Phone: **12345678\n"
+                        + "**Email: **alice@example.com\n**Address: **123, Jurong West Ave 6, #08-111"
+                        + "\n**Tags: **[friends]\n"));
         expectedBatchCommand =
                 new BatchCommand("editperson p/12345678",
                         new SearchType(SearchType.TYPE_ADDRESS), "1234567890", BatchType.START);
@@ -115,8 +117,9 @@ public class BatchCommandTest {
                         new SearchType(SearchType.TYPE_PHONE), "94351253", BatchType.END);
         CommandResult commandResult = expectedBatchCommand.execute(model);
         assertTrue(commandResult.getFeedbackToUser().equals(
-                "Edited Person: Alice Pauline; Phone: 12345678; "
-                        + "Email: alice@example.com; Address: 123, Jurong West Ave 6, #08-111; Tags: [friends]\n"));
+                "Edited Person: \n**Name: **Alice Pauline\n**Phone: **12345678\n"
+                        + "**Email: **alice@example.com\n**Address: **123, Jurong West Ave 6, #08-111"
+                        + "\n**Tags: **[friends]\n"));
         expectedBatchCommand =
                 new BatchCommand("editperson p/12345678",
                         new SearchType(SearchType.TYPE_ADDRESS), "1234567890", BatchType.END);
