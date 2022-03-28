@@ -36,14 +36,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists entries based on specified conditions. \n"
-            + "Format examples: \n"
-            + "list (displays all entries)\n"
-            + "list o/type ty/<TYPE> (displays all people with the specified type (students/professors))\n"
-            + "list o/module m/<MODULENAME> (displays all entries associated with the given module)\n"
-            + "list o/module m/<MODULENAME> ty/<TYPE> "
-            + "(displays all entries of a specific type associated with the module)\n"
-            + "list o/view v/<VIEWTYPE> (Switches the UniBook to the specified view (people/modules))"
-            + "list o/group g/<GROUPNAME> (Dsiplays groups with the given groupname)";
+            + "Please refer to user guide in docs folder for command syntax.";
 
 
     private ModuleCode moduleCode;
