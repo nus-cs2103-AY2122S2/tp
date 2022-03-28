@@ -27,7 +27,7 @@ import seedu.address.model.entry.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing company in the address book.
  */
 public class EditCompanyCommand extends Command {
 
@@ -53,8 +53,8 @@ public class EditCompanyCommand extends Command {
     private final EditCompanyDescriptor editCompanyDescriptor;
 
     /**
-     * @param index of the person in the filtered company list to edit
-     * @param editCompanyDescriptor details to edit the person with
+     * @param index of the company in the filtered company list to edit
+     * @param editCompanyDescriptor details to edit the company with
      */
     public EditCompanyCommand(Index index, EditCompanyDescriptor editCompanyDescriptor) {
         requireNonNull(index);
@@ -92,8 +92,8 @@ public class EditCompanyCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Company} with the details of {@code companyToEdit}
+     * edited with {@code editCompanyDescriptor}.
      */
     private static Company createEditedCompany(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
         assert companyToEdit != null;
@@ -126,8 +126,8 @@ public class EditCompanyCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the company with. Each non-empty field value will replace the
+     * corresponding field value of the company.
      */
     public static class EditCompanyDescriptor {
         private Name name;

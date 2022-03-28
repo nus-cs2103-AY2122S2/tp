@@ -15,13 +15,13 @@ import seedu.address.logic.commands.EditCompanyCommand.EditCompanyDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditEventCommand object
+ * Parses input arguments and creates a new EditCompanyCommand object
  */
 public class EditCompanyCommandParser implements Parser<EditCompanyCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditEventCommand
-     * and returns an EditEventCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditCompanyCommand
+     * and returns an EditCompanyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCompanyCommand parse(String args) throws ParseException {

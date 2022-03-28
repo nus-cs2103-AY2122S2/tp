@@ -28,6 +28,9 @@ import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Time;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Edits the details of an existing event in the address book.
+ */
 public class EditEventCommand extends Command {
     public static final String COMMAND_WORD = "edite";
 
@@ -39,7 +42,7 @@ public class EditEventCommand extends Command {
             + "[" + PREFIX_COMPANY + "COMPANY] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "TIME] "
-            + "[" + PREFIX_LOCATION + "TIME] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "2022-04-12 "
