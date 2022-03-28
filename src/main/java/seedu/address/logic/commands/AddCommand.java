@@ -58,6 +58,8 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.addInsurancePackage(toAdd.getInsurancePackage());
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

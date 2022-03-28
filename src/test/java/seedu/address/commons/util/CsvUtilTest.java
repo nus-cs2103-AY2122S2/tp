@@ -21,7 +21,7 @@ public class CsvUtilTest {
     public void writeAndReadCsvFileWithoutHeader_exceptionThrown() {
         Assertions.assertThrows(DataConversionException.class, () -> {
             CsvUtil.writePeople(new ArrayList<>(), TEST_FILE);
-            CsvUtil.loadCsvFile(TEST_FILE);
+            CsvUtil.loadAbCsvFile(TEST_FILE);
         });
     }
 }

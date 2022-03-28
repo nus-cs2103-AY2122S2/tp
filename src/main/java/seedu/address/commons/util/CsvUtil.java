@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.person.InsurancePackage;
+import seedu.address.storage.CsvAdaptedInsurancePackage;
 import seedu.address.storage.CsvAdaptedPerson;
 
 /**
@@ -23,9 +25,14 @@ public class CsvUtil {
     private static Scanner s;
 
     /**
-     * The headers to be used for the CSV file.
+     * The headers to be used for the CSV file for AddressBook.
      */
-    private static String headers = "Name,Phone Number,Email,Insurance Package,Address,Tags";
+    private static String abHeaders = "Name,Phone Number,Email,Insurance Package,Address,Tags";
+
+    /**
+     * The headers to be used for the CSV file for InsurancePackagesSet.
+     */
+    private static String ipHeaders = "Package Name,Package Details";
 
     /**
      * Takes in a List of CsvAdaptedPerson, and the Path of the CSV file to be saved to,
@@ -35,20 +42,20 @@ public class CsvUtil {
      * @param filePath the given Path to the CSV file.
      * @throws IOException if there are errors with file handling.
      */
-    public static void saveCsvFile(List<CsvAdaptedPerson> persons, Path filePath) throws IOException {
-        writeHeaders(filePath);
+    public static void saveAbCsvFile(List<CsvAdaptedPerson> persons, Path filePath) throws IOException {
+        writeAbHeaders(filePath);
         writePeople(persons, filePath);
     }
 
     /**
-     * Method that handles the writing of headers of the CSV file.
+     * Method that handles the writing of headers of the CSV file for AddressBook.
      *
      * @param filePath the given Path to the CSV file.
      * @throws IOException if there are errors with file handling.
      */
-    public static void writeHeaders(Path filePath) throws IOException {
+    public static void writeAbHeaders(Path filePath) throws IOException {
         fw = new FileWriter(filePath.toString());
-        fw.write(headers + "\n");
+        fw.write(abHeaders + "\n");
         fw.close();
     }
 
@@ -73,7 +80,7 @@ public class CsvUtil {
      * @return a List of CsvAdaptedPerson.
      * @throws IOException if there are errors with file handling.
      */
-    public static List<CsvAdaptedPerson> loadCsvFile(Path filePath) throws DataConversionException {
+    public static List<CsvAdaptedPerson> loadAbCsvFile(Path filePath) throws DataConversionException {
 
         ArrayList<CsvAdaptedPerson> persons = new ArrayList<>();
         String personString;
@@ -97,7 +104,78 @@ public class CsvUtil {
             logger.warning("Error reading from CSV file " + filePath + ": " + e);
             throw new DataConversionException(e);
         }
-
-
     }
+
+    /**
+     * Takes in a List of InsurancePackage, and the Path of the CSV file to be saved to,
+     * and saves this list to a CSV file.
+     *
+     * @param packages a list of InsurancePackage to save to CSV to.
+     * @param filePath the given Path to the CSV file.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static void saveIpCsvFile(List<CsvAdaptedInsurancePackage> packages, Path filePath) throws IOException {
+        writeIpCsvHeaders(filePath);
+        writePackages(packages, filePath);
+    }
+
+    /**
+     * Method that handles the writing of headers of the CSV file for the insurance packages.
+     *
+     * @param filePath the given Path to the CSV file.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static void writeIpCsvHeaders(Path filePath) throws IOException {
+        fw = new FileWriter(filePath.toString());
+        fw.write(ipHeaders + "\n");
+        fw.close();
+    }
+
+    /**
+     * Method that handles the writing of the List of InsurancePackage to CSV.
+     *
+     * @param packages a list of InsurancePackage to save to CSV to.
+     * @param filePath the given Path to the CSV file.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static void writePackages(List<CsvAdaptedInsurancePackage> packages, Path filePath) throws IOException {
+        fw = new FileWriter(filePath.toString(), true);
+        for (CsvAdaptedInsurancePackage p : packages) {
+            fw.write(p.toCsvString() + "\n");
+        }
+        fw.close();
+    }
+
+    /**
+     * Takes in the Path of an existing CSV file, and reads the CSV file to produce a List of InsurancePackage.
+     * @param filePath the Path to the existing CSV file.
+     * @return a List of InsurancePackage.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static List<CsvAdaptedInsurancePackage> loadIpCsvFile(Path filePath) throws DataConversionException {
+
+        ArrayList<CsvAdaptedInsurancePackage> packages = new ArrayList<>();
+        String packageString;
+        CsvAdaptedInsurancePackage p;
+
+        try {
+            s = new Scanner(new File(filePath.toString())); // create a Scanner using the File as the source
+            if (!s.hasNext()) {
+                logger.warning("Empty CSV File");
+                throw new IOException("Empty CSV file");
+            }
+            s.nextLine(); // headers
+            while (s.hasNext()) {
+                packageString = s.nextLine();
+                p = new CsvAdaptedInsurancePackage(packageString);
+                packages.add(p);
+            }
+            s.close();
+            return packages;
+        } catch (IOException e) {
+            logger.warning("Error reading from CSV file " + filePath + ": " + e);
+            throw new DataConversionException(e);
+        }
+    }
+
 }

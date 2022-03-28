@@ -99,6 +99,30 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String insurance package name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static String parseInsurancePackageName(String insurancePackage) throws ParseException {
+        requireNonNull(insurancePackage);
+        String trimmedInsurancePackage = insurancePackage.trim();
+        if (!InsurancePackage.isValidInsurancePackage(trimmedInsurancePackage)) {
+            throw new ParseException(InsurancePackage.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedInsurancePackage;
+    }
+
+    /**
+     * Parses a {@code String insurance package description}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseInsurancePackageDesc(String insurancePackageDesc) {
+        requireNonNull(insurancePackageDesc);
+        return insurancePackageDesc.trim();
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
