@@ -26,7 +26,7 @@ public class ProfessorCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on UniBook level 4</a>
      */
 
-    public final Professor professor;
+    private final Professor professor;
     private final Logger logger = LogsCenter.getLogger(ProfessorCard.class);
     @FXML
     private HBox cardPane;
@@ -82,6 +82,17 @@ public class ProfessorCard extends UiPart<Region> {
         professor.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        setUpStyling();
+    }
+
+    /**
+     * Set up the styling of the professor card pane.
+     */
+    private void setUpStyling() {
+        cardPane.setStyle("-fx-background-color: #BCC2C2; " +
+            "-fx-border-radius: 10; " +
+            "-fx-background-radius: 10;");
     }
 
     @Override

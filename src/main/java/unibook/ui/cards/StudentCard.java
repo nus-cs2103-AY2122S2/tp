@@ -5,9 +5,12 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Paint;
 import unibook.commons.core.LogsCenter;
 import unibook.model.person.Student;
 import unibook.ui.UiPart;
@@ -71,6 +74,16 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        setUpStyling();
+    }
+
+    /**
+     * Set up the styling of the student card pane.
+     */
+    private void setUpStyling() {
+        cardPane.setStyle("-fx-background-color: #D1D0CE; -fx-border-radius: 10; " +
+            "-fx-background-radius: 10;");
     }
 
     @Override

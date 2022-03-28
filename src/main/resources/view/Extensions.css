@@ -19,6 +19,30 @@
     -fx-text-fill: white;
 }
 
+/* Person related styling */
+.person-list-pane {
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+}
+
+.scroll-pane {
+    -fx-background: #F5F5F5;
+    -fx-padding: 8;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.student-card-pane {
+   -fx-background-color: #D1D0CE;
+   -fx-border-radius: 10;
+   -fx-background-radius: 10;
+}
+
+/* Module related styling*/
+
 .module-code {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 32px;
@@ -126,4 +150,30 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 28px;
     -fx-text-fill: #010504;
+}
+
+/* person list page classes */
+
+.person-list-header {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 32px;
+    -fx-text-fill: white;
+}
+
+.module-group-mini-cards {
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.mini-pane-module-code {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 28px;
+    -fx-text-fill: #010504;
+}
+
+.module-group-list-scroll-pane {
+    -fx-background: transparent;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }

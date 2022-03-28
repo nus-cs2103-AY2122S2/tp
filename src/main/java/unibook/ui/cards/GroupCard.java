@@ -1,18 +1,14 @@
 package unibook.ui.cards;
 
-import static unibook.ui.util.CustomVBoxListFiller.fillVBoxFromList;
+import static unibook.ui.util.CustomVBoxListFiller.fillPaneFromList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -21,9 +17,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.group.Group;
-import unibook.model.person.Student;
 import unibook.ui.UiPart;
 import unibook.ui.util.CustomListChangeListeners;
+import unibook.ui.util.CustomVBoxListFiller;
 
 /**
  * A class that displays the information of a {@code Group}.
@@ -118,9 +114,9 @@ public class GroupCard extends UiPart<Region> {
      * Sets up all the vbox lists which display lists of fields of a group to user.
      */
     private void setUpVBoxLists() {
-        fillVBoxFromList(membersList, group.getMembers(), (member, i) ->
+        CustomVBoxListFiller.fillPaneFromList(membersList, group.getMembers(), (member, i) ->
             new StudentCard(member, i + 1).getRoot());
-        fillVBoxFromList(meetingTimesList, group.getMeetingTimes(), (meetingTime, i) ->
+        CustomVBoxListFiller.fillPaneFromList(meetingTimesList, group.getMeetingTimes(), (meetingTime, i) ->
             createLabelFromMeetingTime(meetingTime, i + 1));
     }
 

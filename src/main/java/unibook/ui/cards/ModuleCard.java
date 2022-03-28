@@ -1,30 +1,25 @@
 package unibook.ui.cards;
 
-import static unibook.ui.util.CustomVBoxListFiller.fillVBoxFromList;
+import static unibook.ui.util.CustomListChangeListeners.addIndexedAndFlagListChangeListener;
+import static unibook.ui.util.CustomListChangeListeners.addIndexedListChangeListener;
+import static unibook.ui.util.CustomVBoxListFiller.fillPaneFromList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.Module;
-import unibook.model.module.ModuleKeyEvent;
-import unibook.model.module.group.Group;
-import unibook.model.person.Professor;
-import unibook.model.person.Student;
 import unibook.ui.UiPart;
-import unibook.ui.util.CustomListChangeListeners;
+import unibook.ui.util.CustomVBoxListFiller;
 
 /**
  * A UI component that displays information of {@code Module}.
@@ -41,7 +36,7 @@ public class ModuleCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on UniBook level 4</a>
      */
 
-    public final Module module;
+    private final Module module;
     private final List<Node> allTabContents;
     private final Logger logger = LogsCenter.getLogger(ModuleCard.class);
     @FXML
@@ -105,13 +100,13 @@ public class ModuleCard extends UiPart<Region> {
      * Initially all Vboxes are not visible, until one tab is clicked by user.
      */
     private void setUpVBoxLists() {
-        fillVBoxFromList(professors, module.getProfessors(), (professor, i) ->
+        CustomVBoxListFiller.fillPaneFromList(professors, module.getProfessors(), (professor, i) ->
             new ProfessorCard(professor, i + 1).getRoot());
-        fillVBoxFromList(students, module.getStudents(), (student, i) ->
+        CustomVBoxListFiller.fillPaneFromList(students, module.getStudents(), (student, i) ->
             new StudentCard(student, i + 1).getRoot());
-        fillVBoxFromList(groups, module.getGroups(), (group, i, flag) ->
+        fillPaneFromList(groups, module.getGroups(), (group, i, flag) ->
             new GroupCard(group, i + 1, flag).getRoot());
-        fillVBoxFromList(keyEvents, module.getKeyEvents(), (keyEvent, i) ->
+        CustomVBoxListFiller.fillPaneFromList(keyEvents, module.getKeyEvents(), (keyEvent, i) ->
             new ModuleKeyEventCard(keyEvent, i + 1).getRoot());
 
         students.setManaged(false);
@@ -239,13 +234,13 @@ public class ModuleCard extends UiPart<Region> {
      * can change accordingly.
      */
     private void setUpListChangeListeners() {
-        CustomListChangeListeners.addIndexedListChangeListener(professors, module.getProfessors(),
+        addIndexedListChangeListener(professors, module.getProfessors(),
                     (professor, index) -> new ProfessorCard(professor, index + 1).getRoot());
-        CustomListChangeListeners.addIndexedListChangeListener(students, module.getStudents(),
+        addIndexedListChangeListener(students, module.getStudents(),
                     (student, index) -> new StudentCard(student, index + 1).getRoot());
-        CustomListChangeListeners.addIndexedAndFlagListChangeListener(groups, module.getGroups(),
+        addIndexedAndFlagListChangeListener(groups, module.getGroups(),
                     (group, index, flag) -> new GroupCard(group, index + 1, flag).getRoot());
-        CustomListChangeListeners.addIndexedListChangeListener(keyEvents, module.getKeyEvents(),
+        addIndexedListChangeListener(keyEvents, module.getKeyEvents(),
             (keyEvent, index) -> new ModuleKeyEventCard(keyEvent, index + 1).getRoot());
     }
 
