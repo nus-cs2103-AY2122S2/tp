@@ -14,7 +14,7 @@ import seedu.contax.model.chrono.TemporalComparable;
 public class StartDateTime implements TemporalComparable {
     public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
-    public static final String MESSAGE_CONSTRAINTS = "DateTime has to be valid";
+    public static final String MESSAGE_CONSTRAINTS = "Date and Time have to be valid";
 
     public final LocalDateTime value;
 

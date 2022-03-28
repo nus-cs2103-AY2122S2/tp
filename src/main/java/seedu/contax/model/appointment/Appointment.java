@@ -113,13 +113,14 @@ public class Appointment extends ScheduleItem {
 
     @Override
     public String toString() {
-        return getName()
-                + "; Start Date Time: "
+        return "**Name:** "
+                + getName()
+                + "\n **Start Date Time:** "
                 + getStartDateTimeObject()
-                + "; Duration: "
+                + "\n **Duration:** "
                 + getDuration()
-                + "; Person: "
-                + getPerson();
+                + "\n **Person:** "
+                + (getPerson() == null ? "None" : getPerson());
     }
 
     /**
