@@ -25,16 +25,26 @@ public class MembershipTest {
 
     @Test
     public void getValue() {
-        Membership member = new Membership("Test");
+        Membership member = new Membership("bronze");
 
-        assertEquals("Test", member.getValue());
+        assertEquals("BRONZE", member.getValue());
+        assertNotEquals("Fake", member.getValue());
+
+        member = new Membership("silver");
+
+        assertEquals("SILVER", member.getValue());
+        assertNotEquals("Fake", member.getValue());
+
+        member = new Membership("gold");
+
+        assertEquals("GOLD", member.getValue());
         assertNotEquals("Fake", member.getValue());
     }
 
     @Test
     public void getDate() {
         LocalDate date = LocalDate.parse("1920-02-02");
-        Membership member = new Membership("Test", date);
+        Membership member = new Membership("gold", date);
 
         assertEquals(date, member.getDate());
     }
@@ -50,8 +60,9 @@ public class MembershipTest {
         assertFalse(Membership.isValidName("-")); // non-alphanumeric
 
         // valid addresses
-        assertTrue(Membership.isValidName("Glee Club"));
-        assertTrue(Membership.isValidName("I am the leader of all humans and you should bow before"));
+        assertTrue(Membership.isValidName("gOlD"));
+        assertTrue(Membership.isValidName("bRoNZE"));
+        assertTrue(Membership.isValidName("silver"));
     }
 
     @Test
@@ -67,8 +78,8 @@ public class MembershipTest {
     @Test
     public void toString_test() {
         LocalDate date = LocalDate.parse("1920-02-02");
-        Membership member = new Membership("Test", date);
-        String expectedResult = "Test since " + date.toString();
+        Membership member = new Membership("BRONZE", date);
+        String expectedResult = "BRONZE MEMBER since " + date.toString();
 
         assertEquals(expectedResult, member.toString());
     }
@@ -76,9 +87,9 @@ public class MembershipTest {
     @Test
     public void equals() {
         // null address
-        Membership member1 = new Membership("Test", LocalDate.parse("1920-02-02"));
-        Membership member2 = new Membership("Test", LocalDate.parse("1920-02-02"));
-        Membership member3 = new Membership("Different");
+        Membership member1 = new Membership("GOLD", LocalDate.parse("1920-02-02"));
+        Membership member2 = new Membership("GOLD", LocalDate.parse("1920-02-02"));
+        Membership member3 = new Membership("SILVER");
 
         assertTrue(member1.equals(member1));
         assertTrue(member1.equals(member2));
@@ -88,20 +99,20 @@ public class MembershipTest {
 
     @Test
     public void hashCode_test() {
-        Membership member = new Membership("Test");
+        Membership member = new Membership("Gold");
 
-        int expected = "Test".hashCode();
+        int expected = Membership.Tier.GOLD.hashCode();
 
         assertEquals(expected, member.hashCode());
     }
 
     @Test
     public void compareTo() {
-        Membership member1 = new Membership("Alpha");
-        Membership member2 = new Membership("Beta");
+        Membership member1 = new Membership("gold");
+        Membership member2 = new Membership("silver");
 
         assertEquals(-1, member1.compareTo(null));
-        assertEquals(-1, member1.compareTo(member2));
-        assertEquals(1, member2.compareTo(member1));
+        assertEquals(-12, member1.compareTo(member2));
+        assertEquals(12, member2.compareTo(member1));
     }
 }

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a membership to a person in the address book.
  */
 public class AddMembershipCommand extends Command {
 
@@ -57,7 +56,6 @@ public class AddMembershipCommand extends Command {
         Person editedPerson = personToEdit.addMembership(membership);
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, membership.toString()));
     }

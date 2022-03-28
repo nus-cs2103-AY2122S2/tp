@@ -6,7 +6,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
-import java.util.Locale;
 
 import seedu.address.logic.parser.Prefix;
 
@@ -80,6 +79,7 @@ public class Membership extends Field {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
+        test = test.toLowerCase();
         return test.equals("gold") || test.equals("silver") || test.equals("bronze");
     }
 
