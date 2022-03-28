@@ -32,24 +32,24 @@
                </font></Label>
         </HBox>
          <Region prefHeight="200.0" prefWidth="200.0" />
+      <Label text="Diagnosis">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
+      <Label fx:id="diagnosis" styleClass="cell_small_label" text="\$diagnosis" />
+         <Region prefHeight="200.0" prefWidth="200.0" />
+      <Label text="Fee">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
+      <Label fx:id="fee" styleClass="cell_small_label" text="\$fee" />
+         <Region prefHeight="200.0" prefWidth="200.0" />
       <Label text="Notes">
             <font>
                <Font size="14.0" />
             </font></Label>
       <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" />
          <Region prefHeight="200.0" prefWidth="200.0" />
-<!--      <Label text="Prescription">-->
-<!--            <font>-->
-<!--               <Font size="14.0" />-->
-<!--            </font></Label>-->
-<!--      <Label fx:id="prescription" styleClass="cell_small_label" text="\$prescription" />-->
-<!--         <Region prefHeight="200.0" prefWidth="200.0" />-->
-<!--      <Label text="Tests Taken And Results">-->
-<!--            <font>-->
-<!--               <Font size="14.0" />-->
-<!--            </font></Label>-->
-<!--      <Label fx:id="testsTakenAndResults" styleClass="cell_small_label" text="\$testsTakenAndResults" />-->
-<!--         <Region prefHeight="200.0" prefWidth="200.0" />-->
     </VBox>
       <rowConstraints>
          <RowConstraints />
