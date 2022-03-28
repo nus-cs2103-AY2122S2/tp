@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -85,7 +87,7 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     @FXML
-    private Button copyButton;
+    private Button openUserGuideButton;
 
     @FXML
     private Label helpMessage;
@@ -152,14 +154,25 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Open the User Guide in the User's default browser.
      */
     @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    private void openUG() {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.browse(URI.create(USERGUIDE_URL));
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "The URL is currently down/being changed!");
+                alert.show();
+                e.printStackTrace();
+            }
+        } else {
+            logger.warning("User operating system not supported");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Your operating system is currently not supported!");
+            alert.show();
+        }
     }
 }
