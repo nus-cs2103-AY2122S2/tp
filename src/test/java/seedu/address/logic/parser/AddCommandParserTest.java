@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AVAILABILITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
@@ -12,15 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SENIORITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.SENIORITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SENIORITY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -33,7 +28,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalCandidates.AMY;
 import static seedu.address.testutil.TypicalCandidates.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -80,14 +74,6 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
                 + COURSE_DESC_BOB + SENIORITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB,
                 new AddCommand(expectedCandidateMultipleTags));
-    }
-
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Candidate expectedCandidate = new CandidateBuilder(AMY).build();
-        assertParseSuccess(parser, STUDENT_ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
-                + COURSE_DESC_AMY + SENIORITY_DESC_AMY + AVAILABILITY_DESC_AMY, new AddCommand(expectedCandidate));
     }
 
     @Test
