@@ -59,7 +59,7 @@ public class Appointment extends ScheduleItem {
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
-                Appointment.getEndDateTimeOrThrow(startDateTime, duration));
+                Appointment.computeEndDateTime(startDateTime, duration));
         requireNonNull(name);
 
         this.name = name;
@@ -155,7 +155,7 @@ public class Appointment extends ScheduleItem {
                 + "\n **Duration:** "
                 + getDuration()
                 + "\n **Person:** "
-                + (getPerson() == null ? "None" : getPerson().getName());
+                + (getPerson() == null ? "None" : getPerson().getName())
                 + "\n **Priority:** "
                 + getPriority();
     }

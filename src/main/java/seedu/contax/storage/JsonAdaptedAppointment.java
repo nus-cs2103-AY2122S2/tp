@@ -25,6 +25,7 @@ class JsonAdaptedAppointment {
     public static final String INVALID_DATETIME_MESSAGE = "Appointment's StartDateTime is invalid!";
     public static final String INVALID_DURATION_MESSAGE = "Appointment's Duration is not a positive integer!";
     public static final String INVALID_PERSON_MESSAGE = "Appointment's person cannot be found!";
+    public static final String INVALID_PRIORITY_MESSAGE = "Appointment's priority is invalid!";
     public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"; // ISO-8601 Specification
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
@@ -76,7 +77,7 @@ class JsonAdaptedAppointment {
         final Person modelPerson = parsePersonModel(personsList);
         final Priority modelPriority = parsePriorityModel();
 
-        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson);
+        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson, modelPriority);
     }
 
     /**
@@ -132,8 +133,8 @@ class JsonAdaptedAppointment {
         }
         return null;
     }
-   /**
-     * Performs the validation and parsing of Appointment priority into a {@code Duration} model.
+    /**
+     * Performs the validation and parsing of Appointment priority into a {@code Priority} model.
      */
     private Priority parsePriorityModel() throws IllegalValueException {
         Priority modelPriority = null;
@@ -149,9 +150,10 @@ class JsonAdaptedAppointment {
                 modelPriority = Priority.LOW;
                 break;
             default:
-                break;
+                throw new IllegalValueException(INVALID_PRIORITY_MESSAGE);
             }
             return modelPriority;
-      }
-      return null;
+        }
+        return null;
+    }
 }
