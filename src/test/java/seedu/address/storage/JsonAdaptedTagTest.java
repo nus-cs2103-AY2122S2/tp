@@ -20,7 +20,7 @@ public class JsonAdaptedTagTest {
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
-        JsonAdaptedTag tag = new JsonAdaptedTag(INVALID_TAG);
+        JsonAdaptedTag tag = new JsonAdaptedTag(INVALID_TAG, null);
         assertThrows(IllegalValueException.class, tag::toModelType);
     }
 

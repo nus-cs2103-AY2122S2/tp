@@ -203,10 +203,12 @@ window** will appear.
 
 In the window, simply enter all related information into the spaces provided, and click the
 `save` button to add a new profile. Click `cancel` to stop adding and close the pop up window.
+
 ###Delete profile
 To delete a profile, right click on the profile and select `delete`.
 
 <img src="images/deleteProfile_GUI.png" width="300"/>
+
 
 ###Adding a new tag
 To add a new tag, click the `New tag` button on the menu bar, and select `New tag`. A **new tag pop up
