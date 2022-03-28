@@ -16,8 +16,10 @@ import seedu.address.model.entry.Person;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Entry> PREDICATE_SHOW_ALL_ENTRIES = unused -> true;
-    Predicate<Entry> PREDICATE_SHOW_NO_ENTRIES = unused -> false;
+    Predicate<Entry> PREDICATE_SHOW_ALL = unused -> true;
+    Predicate<Entry> PREDICATE_SHOW_NONE = unused -> false;
+    Predicate<Entry> PREDICATE_SHOW_UNARCHIVED_ONLY = entry -> !entry.isArchived();
+    Predicate<Entry> PREDICATE_SHOW_ARCHIVED_ONLY = Entry::isArchived;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

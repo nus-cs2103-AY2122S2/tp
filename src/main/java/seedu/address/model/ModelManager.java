@@ -48,8 +48,8 @@ public class ModelManager implements Model {
         currentlyDisplayedListType = EntryType.PERSON;
 
         // Don't allow deleting/finding/editing on the events or person list at the beginning
-        filteredPersons.setPredicate(PREDICATE_SHOW_NO_ENTRIES);
-        filteredEvents.setPredicate(PREDICATE_SHOW_NO_ENTRIES);
+        filteredPersons.setPredicate(PREDICATE_SHOW_NONE);
+        filteredEvents.setPredicate(PREDICATE_SHOW_NONE);
     }
 
     public ModelManager() {
@@ -119,7 +119,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_ENTRIES);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class ModelManager implements Model {
     @Override
     public void addCompany(Company company) {
         addressBook.addCompany(company);
-        updateFilteredCompanyList(PREDICATE_SHOW_ALL_ENTRIES);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL);
     }
 
     /**
@@ -182,7 +182,7 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
-        updateFilteredEventList(PREDICATE_SHOW_ALL_ENTRIES);
+        updateFilteredEventList(PREDICATE_SHOW_ALL);
     }
 
     @Override
@@ -210,19 +210,19 @@ public class ModelManager implements Model {
 
     @Override
     public void showPersonList(Predicate<? super Person> predicate) {
-        updateFilteredLists(predicate, PREDICATE_SHOW_NO_ENTRIES, PREDICATE_SHOW_NO_ENTRIES);
+        updateFilteredLists(predicate, PREDICATE_SHOW_NONE, PREDICATE_SHOW_NONE);
         currentlyDisplayedListType = EntryType.PERSON;
     }
 
     @Override
     public void showCompanyList(Predicate<? super Company> predicate) {
-        updateFilteredLists(PREDICATE_SHOW_NO_ENTRIES, predicate, PREDICATE_SHOW_NO_ENTRIES);
+        updateFilteredLists(PREDICATE_SHOW_NONE, predicate, PREDICATE_SHOW_NONE);
         currentlyDisplayedListType = EntryType.COMPANY;
     }
 
     @Override
     public void showEventList(Predicate<? super Event> predicate) {
-        updateFilteredLists(PREDICATE_SHOW_NO_ENTRIES, PREDICATE_SHOW_NO_ENTRIES, predicate);
+        updateFilteredLists(PREDICATE_SHOW_NONE, PREDICATE_SHOW_NONE, predicate);
         currentlyDisplayedListType = EntryType.EVENT;
     }
 
