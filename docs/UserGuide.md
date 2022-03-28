@@ -93,13 +93,13 @@ Format:
 For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
 </div>
 
-### Listing all Tasks : `list`
+### Listing all Tasks : `listTask`
 
-View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for today
+Shows a list of all tasks in ManageEZPZ.
 
 Format:
 
-* `list`
+* `listTask`
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
