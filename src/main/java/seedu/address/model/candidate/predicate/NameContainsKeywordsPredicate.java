@@ -29,7 +29,7 @@ public class NameContainsKeywordsPredicate extends ContainsKeywordsPredicate imp
     @Override
     public boolean test(Candidate candidate) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(candidate.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(candidate.getName().toString(), keyword));
     }
 
     /**

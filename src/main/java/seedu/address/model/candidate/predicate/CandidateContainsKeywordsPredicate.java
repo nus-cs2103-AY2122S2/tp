@@ -40,12 +40,19 @@ public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicat
                 sb.append(AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL[availArr[i]]);
                 break;
             }
-
             sb.append(AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL[availArr[i]]).append(",");
         }
 
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(sb.toString(), keyword));
+        return keywords.stream().anyMatch(keyword ->
+                StringUtil.containsStringIgnoreCase(candidate.getApplicationStatus().toString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(candidate.getCourse().toString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(candidate.getEmail().toString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(candidate.getInterviewStatus().toString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(candidate.getName().toString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(candidate.getPhone().toString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(candidate.getSeniority().toSearchString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(candidate.getStudentId().toString(), keyword)
+                        || StringUtil.containsStringIgnoreCase(sb.toString(), keyword));
     }
 
     /**

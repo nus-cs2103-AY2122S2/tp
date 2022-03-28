@@ -30,7 +30,7 @@ public class SeniorityContainsKeywordsPredicate extends ContainsKeywordsPredicat
     @Override
     public boolean test(Candidate candidate) {
         return keywords.stream().anyMatch(keyword -> StringUtil
-                .containsStringIgnoreCase(candidate.getSeniority().toString(), keyword));
+                .containsStringIgnoreCase(candidate.getSeniority().toSearchString(), keyword));
     }
 
     /**
