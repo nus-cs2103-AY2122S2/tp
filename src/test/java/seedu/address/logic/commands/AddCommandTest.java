@@ -59,8 +59,8 @@ public class AddCommandTest {
     @Test
     public void equals() {
         Candidate[] candidates = new SampleDataUtil().getSampleCandidates();
-        Candidate alice = new CandidateBuilder().withName("Alice").build();
-        Candidate bob = new CandidateBuilder().withName("Bob").build();
+        Candidate alice = new CandidateBuilder().withName("Alice").withStudentId("E1234567").build();
+        Candidate bob = new CandidateBuilder().withName("Bob").withStudentId("E9876543").build();
         Candidate charlotte = new CandidateBuilder().withName("Charlotte Oliveiro").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
