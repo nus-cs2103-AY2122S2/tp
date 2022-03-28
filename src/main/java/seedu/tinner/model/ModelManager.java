@@ -27,7 +27,7 @@ public class ModelManager implements Model {
     private final CompanyList companyList;
     private final UserPrefs userPrefs;
     private final FilteredList<Company> filteredCompanies;
-    private UniqueReminderList reminderList = null;
+    private UniqueReminderList reminderList;
 
     /**
      * Initializes a ModelManager with the given companyList, userPrefs and reminderList.
@@ -42,21 +42,9 @@ public class ModelManager implements Model {
         filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
         this.reminderList = reminderList;
     }
-    /**
-     * Initializes a ModelManager with the given companyList and userPrefs.
-     */
-    public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(companyList, userPrefs);
-
-        logger.fine("Initializing with company list: " + companyList + " and user prefs " + userPrefs);
-
-        this.companyList = new CompanyList(companyList);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
-    }
 
     public ModelManager() {
-        this(new CompanyList(), new UserPrefs());
+        this(new CompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -227,5 +215,10 @@ public class ModelManager implements Model {
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
         RoleManager roleManager = company.getRoleManager();
         return roleManager.getFilteredRoleList();
+    }
+
+    //=================== Reminder List Accessors =============================================================
+    public UniqueReminderList getReminderList() {
+        return reminderList;
     }
 }
