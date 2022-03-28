@@ -95,6 +95,14 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     /**
+     * Updates the filter of the filtered student list to filter by the given {@code predicate} and
+     * the previous {@code predicate}
+     *
+     * @param predicate The new predicate to add on to the current predicate
+     */
+    void addOnFilteredStudentList(Predicate<Student> predicate);
+
+    /**
      * Returns true if a lab with the same identity as {@code lab} exists in the TAddressBook.
      */
     boolean hasLab(Lab lab);
