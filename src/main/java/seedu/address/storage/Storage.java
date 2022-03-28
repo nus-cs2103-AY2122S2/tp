@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerAddressBook;
 import seedu.address.model.ReadOnlySellerAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -13,7 +14,8 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, SellerAddressBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, SellerAddressBookStorage,
+        BuyerAddressBookStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -38,4 +40,13 @@ public interface Storage extends AddressBookStorage, SellerAddressBookStorage, U
 
     @Override
     void saveSellerAddressBook(ReadOnlySellerAddressBook addressBook) throws IOException;
+
+    @Override
+    Path getBuyerAddressBookFilePath();
+
+    @Override
+    Optional<ReadOnlyBuyerAddressBook> readBuyerAddressBook() throws DataConversionException, IOException;
+
+    @Override
+    void saveBuyerAddressBook(ReadOnlyBuyerAddressBook addressBook) throws IOException;
 }

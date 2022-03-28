@@ -23,8 +23,16 @@ public class House {
         return houseType;
     }
 
+    public String getHouseTypeToString() {
+        return houseType.toString();
+    }
+
     public Location getLocation() {
         return location;
+    }
+
+    public String getLocationToString() {
+        return location.toString();
     }
 
     /**

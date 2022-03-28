@@ -1,7 +1,10 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -30,6 +33,18 @@ public class ClientUtil {
      */
     public static String getAddBuyerCommand(Buyer buyer) {
         return AddBuyerCommand.COMMAND_WORD + " " + getclientDetails(buyer);
+    }
+
+    /**
+     * Returns the part of the command string for the given {@code buyer}'s PropertyToBuy details.
+     */
+    public static String getPropertyToBuyCommand(Buyer buyer) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_LOCATION + buyer.getPropertyToBuy().getHouse().getLocation().toString() + " ");
+        sb.append(PREFIX_HOUSE_TYPE + buyer.getPropertyToBuy().getHouse().getHouseTypeToString() + " ");
+        sb.append(PREFIX_PRICE_RANGE
+                + buyer.getPropertyToBuy().getPriceRange().toString().split("]")[0].substring(1) + " ");
+        return sb.toString();
     }
 
     /**

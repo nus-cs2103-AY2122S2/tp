@@ -23,15 +23,18 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final SellerAddressBook sellerAddressBook;
+    private final BuyerAddressBook buyerAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Seller> filteredSellers;
+    private final FilteredList<Buyer> filteredBuyers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook,
-                        ReadOnlyUserPrefs userPrefs, ReadOnlySellerAddressBook sellerAddressBook) {
+                        ReadOnlyUserPrefs userPrefs, ReadOnlySellerAddressBook sellerAddressBook,
+                        ReadOnlyBuyerAddressBook buyerAddressBook) {
         requireAllNonNull(addressBook, userPrefs, sellerAddressBook);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
@@ -40,12 +43,14 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.sellerAddressBook = new SellerAddressBook(sellerAddressBook);
+        this.buyerAddressBook = new BuyerAddressBook(buyerAddressBook);
         filteredClients = new FilteredList<>(this.addressBook.getclientList());
         filteredSellers = new FilteredList<>(this.sellerAddressBook.getSellerList());
+        filteredBuyers = new FilteredList<>(this.buyerAddressBook.getBuyerList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new SellerAddressBook());
+        this(new AddressBook(), new UserPrefs(), new SellerAddressBook(), new BuyerAddressBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -94,6 +99,17 @@ public class ModelManager implements Model {
         userPrefs.setSellerAddressBookFilePath(sellerAddressBookFilePath);
     }
 
+    @Override
+    public Path getBuyerAddressBookFilePath() {
+        return userPrefs.getBuyerAddressBookFilePath();
+    }
+
+    @Override
+    public void setBuyerAddressBookFilePath(Path buyerAddressBookFilePath) {
+        requireNonNull(buyerAddressBookFilePath);
+        userPrefs.setBuyerAddressBookFilePath(buyerAddressBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -133,16 +149,47 @@ public class ModelManager implements Model {
     //========== For addbuyer============//
     @Override
     public void addBuyer(Buyer buyer) {
-        addressBook.addBuyer(buyer);
-        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        buyerAddressBook.addBuyer(buyer);
+        updateFilteredBuyerList(PREDICATE_SHOW_ALL_BUYERS);
     }
 
     @Override
     public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.hasBuyer(buyer);
+        return buyerAddressBook.hasBuyer(buyer);
     }
 
+    @Override
+    public void deleteBuyer(Buyer target) {
+        buyerAddressBook.removeBuyer(target);
+    }
+
+    @Override
+    public void setBuyer(Buyer target, Buyer editedBuyer) {
+        requireAllNonNull(target, editedBuyer);
+        buyerAddressBook.setBuyer(target, editedBuyer);
+    }
+
+    @Override
+    public ObservableList<Buyer> getFilteredBuyerList() {
+        return filteredBuyers;
+    }
+
+    @Override
+    public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
+        requireNonNull(predicate);
+        filteredBuyers.setPredicate(predicate);
+    }
+
+    @Override
+    public void setBuyerAddressBook(ReadOnlyBuyerAddressBook buyerAddressBook) {
+        this.buyerAddressBook.resetData(buyerAddressBook);
+    }
+
+    @Override
+    public ReadOnlyBuyerAddressBook getBuyerAddressBook() {
+        return buyerAddressBook;
+    }
     //========== For addseller============//
     @Override
     public void addSeller(Seller seller) {

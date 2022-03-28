@@ -5,21 +5,21 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AppointmentCommand;
+import seedu.address.logic.commands.AddPropertyToBuyCommand;
 
-public class AppointmentCommandParserTest {
+public class AddPtbCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPropertyToBuyCommand.MESSAGE_USAGE);
 
 
-    private AppointmentCommandParser parser = new AppointmentCommandParser();
+    private AddPropertyToBuyCommandParser parser = new AddPropertyToBuyCommandParser();
 
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPropertyToBuyCommand.MESSAGE_USAGE));
     }
 
     @Test

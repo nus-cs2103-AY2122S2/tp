@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 class HouseTest {
 
-    private House h1 = new House(HouseType.BUNGALOW, "Serangoon");
+    private House h1 = new House(HouseType.BUNGALOW, "Bishan");
     private House h2 = new House(HouseType.BUNGALOW, "Kovan");
     private House h3 = new House(HouseType.APARTMENT, "Serangoon");
-    private House h4 = new House(HouseType.BUNGALOW, "Serangoon");
+    private House h4 = new House(HouseType.BUNGALOW, "Bishan");
 
     @Test
     public void testHouseEquals() {

@@ -29,7 +29,10 @@ public class StorageManagerTest {
         JsonSellerAddressBookStorage sellerAddressBookStorage = new JsonSellerAddressBookStorage(
                 getTempFilePath("sab")
         );
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, sellerAddressBookStorage);
+        JsonBuyerAddressBookStorage buyerAddressBookStorage = new JsonBuyerAddressBookStorage(
+                getTempFilePath("bab"));
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, sellerAddressBookStorage,
+                buyerAddressBookStorage);
     }
 
     private Path getTempFilePath(String fileName) {

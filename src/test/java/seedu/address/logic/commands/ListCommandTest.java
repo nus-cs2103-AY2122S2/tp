@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.SellerAddressBook;
@@ -23,8 +24,10 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+                new BuyerAddressBook());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
+                new BuyerAddressBook());
     }
 
     @Test

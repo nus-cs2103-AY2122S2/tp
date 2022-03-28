@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -15,6 +14,8 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.NullPropertyToBuy;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
 
@@ -38,8 +39,9 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Appointment appointment = new Appointment("");
+        PropertyToBuy desiredProperty = NullPropertyToBuy.getNullPropertyToBuy();
 
-        Buyer buyer = new Buyer(name, phone, appointment, tagList, new ArrayList<>());
+        Buyer buyer = new Buyer(name, phone, appointment, tagList, desiredProperty);
         return new AddBuyerCommand(buyer);
     }
 

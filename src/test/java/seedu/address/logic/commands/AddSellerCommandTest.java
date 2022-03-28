@@ -18,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerAddressBook;
 import seedu.address.model.ReadOnlySellerAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.buyer.Buyer;
@@ -213,6 +214,48 @@ public class AddSellerCommandTest {
 
         @Override
         public void updateFilteredSellerList(Predicate<Seller> predicate) {
+
+        }
+
+        // buyer
+
+        @Override
+        public Path getBuyerAddressBookFilePath() {
+            return null;
+        }
+
+        @Override
+        public void setBuyerAddressBookFilePath(Path buyerAddressBookFilePath) {
+
+        }
+
+        @Override
+        public void setBuyerAddressBook(ReadOnlyBuyerAddressBook buyerAddressBook) {
+
+        }
+
+        @Override
+        public ReadOnlyBuyerAddressBook getBuyerAddressBook() {
+            return null;
+        }
+
+        @Override
+        public void deleteBuyer(Buyer target) {
+
+        }
+
+        @Override
+        public void setBuyer(Buyer target, Buyer editedBuyer) {
+
+        }
+
+        @Override
+        public ObservableList<Buyer> getFilteredBuyerList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
 
         }
     }

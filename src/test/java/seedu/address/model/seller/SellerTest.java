@@ -14,7 +14,7 @@ import static seedu.address.testutil.TypicalSellers.YUQI;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.PriceRange;
@@ -102,23 +102,17 @@ public class SellerTest {
         House h2 = new House(ht2, location2);
         House h3 = new House(ht3, location3);
 
-        String a1 = "Serangoon Avenue 3 Block 201";
-        String a2 = "Rosyth Road 546208";
-        String a3 = "61 Bishan Street 21";
+        Address a1 = new Address("Serangoon Avenue 3 Block 201");
+        Address a2 = new Address("Rosyth Road 546208");
+        Address a3 = new Address("61 Bishan Street 21");
 
-        try {
-            pr1 = new PriceRange(100000, 200000);
-            pr2 = new PriceRange(200000, 300000);
-            pr3 = new PriceRange(300000, 400000);
+        pr1 = new PriceRange(100000, 200000);
+        pr2 = new PriceRange(200000, 300000);
+        pr3 = new PriceRange(300000, 400000);
 
-
-            PropertyToSell ptb1 = new PropertyToSell(h1, pr1, a1);
-            PropertyToSell ptb2 = new PropertyToSell(h2, pr2, a2);
-            PropertyToSell ptb3 = new PropertyToSell(h3, pr3, a3);
-
-        } catch (IllegalValueException e) {
-            System.out.println(e.getMessage());
-        }
+        PropertyToSell ptb1 = new PropertyToSell(h1, pr1, a1);
+        PropertyToSell ptb2 = new PropertyToSell(h2, pr2, a2);
+        PropertyToSell ptb3 = new PropertyToSell(h3, pr3, a3);
 
     }
 
@@ -140,22 +134,17 @@ public class SellerTest {
         House h2 = new House(ht2, location2);
         House h3 = new House(ht3, location3);
 
-        String a1 = "Serangoon Avenue 3 Block 201";
-        String a2 = "Rosyth Road 546208";
-        String a3 = "61 Bishan Street 21";
+        Address a1 = new Address("Serangoon Avenue 3 Block 201");
+        Address a2 = new Address("Rosyth Road 546208");
+        Address a3 = new Address("61 Bishan Street 21");
 
-        try {
-            pr1 = new PriceRange(100000, 200000);
-            pr2 = new PriceRange(200000, 300000);
-            pr3 = new PriceRange(300000, 400000);
+        pr1 = new PriceRange(100000, 200000);
+        pr2 = new PriceRange(200000, 300000);
+        pr3 = new PriceRange(300000, 400000);
 
+        PropertyToSell pts1 = new PropertyToSell(h1, pr1, a1);
+        PropertyToSell pts2 = new PropertyToSell(h2, pr2, a2);
+        PropertyToSell pts3 = new PropertyToSell(h3, pr3, a3);
 
-            PropertyToSell pts1 = new PropertyToSell(h1, pr1, a1);
-            PropertyToSell pts2 = new PropertyToSell(h2, pr2, a2);
-            PropertyToSell pts3 = new PropertyToSell(h3, pr3, a3);
-
-        } catch (IllegalValueException e) {
-            System.out.println(e.getMessage());
-        }
     }
 }

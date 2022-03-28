@@ -16,24 +16,24 @@ public class PropertyToBuy {
     /**
      * The PriceRange a buyer is willing to pay to buy the House.
      */
-    private PriceRange buyRange;
+    private PriceRange priceRange;
 
     /**
      * Constructs a PropertyToBuy of the buyer.
      * @param house the house that a buyer wants to buy.
-     * @param buyRange the PriceRange that a buyer is willing to pay.
+     * @param priceRange the PriceRange that a buyer is willing to pay.
      */
-    public PropertyToBuy(House house, PriceRange buyRange) {
+    public PropertyToBuy(House house, PriceRange priceRange) {
         this.house = house;
-        this.buyRange = buyRange;
+        this.priceRange = priceRange;
     }
 
     public House getHouse() {
         return this.house;
     }
 
-    public PriceRange getBuyRange() {
-        return this.buyRange;
+    public PriceRange getPriceRange() {
+        return this.priceRange;
     }
 
     @Override
@@ -41,6 +41,6 @@ public class PropertyToBuy {
         return other == this // short circuit if same object
             || (other instanceof PropertyToBuy // instanceof handles nulls
             && house.equals(((PropertyToBuy) other).house)
-            && buyRange.equals(((PropertyToBuy) other).buyRange)); // state check
+            && priceRange.equals(((PropertyToBuy) other).priceRange)); // state check
     }
 }
