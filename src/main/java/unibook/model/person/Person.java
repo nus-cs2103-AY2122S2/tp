@@ -75,6 +75,15 @@ public abstract class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Tag getTag(String tagName) {
+        for (Tag tag : tags) {
+            if (tag.tagName.equals(tagName)) {
+                return tag;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Returns a modifiable module set.

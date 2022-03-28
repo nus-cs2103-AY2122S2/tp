@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
@@ -37,23 +38,21 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_MODULE_AND_PERSON_SUCCESS = "Deleted Module: %1$s, and all Persons";
     public static final String MESSAGE_DELETE_UNSUCCESSFUL = "Delete Unsuccessful";
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
-    public static final String MESSAGE_INVALID_OPTION = "Invalid Option provided!\nOption should be either " +
-            "o/all, o/mod or o/prof";
     public static final String MESSAGE_DELETE_TRAITS_SUCCESS = "Successfully deleted the following traits:\n";
-    public static final String PHONE = "Phone, ";
-    public static final String EMAIL = "Email, ";
-    public static final String TAG = "Tag, ";
-    public static final String OFFICE = "Office, ";
+    public static final String PHONE = "Phone: ";
+    public static final String EMAIL = "Email: ";
+    public static final String TAG = "Tag: ";
+    public static final String OFFICE = "Office: ";
     public static final String MESSAGE_DELETE_PROF_FROM_MODULE_SUCCESS = "Successfully deleted Prof: %1$s " +
-            "from Module: %1$s";
+            "from Module: %2$s";
     public static final String MESSAGE_DELETE_STUDENT_FROM_MODULE_SUCCESS = "Successfully deleted Student: %1$s " +
-            "from Module: %1$s";
+            "from Module: %2$s";
     public static final String MESSAGE_DELETE_GROUP_FROM_MODULE_SUCCESS = "Successfully deleted Group: %1$s " +
-            "from Module: %1$s";
-    public static final String MESSAGE_DELETE_MEETING_FROM_GROUP_SUCCESS = "Successfully deleted meeting " +
-            "from Group: %1$s";
-    public static final String MESSAGE_DELETE_KEY_EVENT_FROM_MODULE_SUCCESS = "Successfully deleted key event " +
-            "from Module: %1$s";
+            "from Module: %2$s";
+    public static final String MESSAGE_DELETE_MEETING_FROM_GROUP_SUCCESS = "Successfully deleted Meeting: %1$s " +
+            "from Group: %2$s";
+    public static final String MESSAGE_DELETE_KEY_EVENT_FROM_MODULE_SUCCESS = "Successfully deleted Key Event: %1$s " +
+            "from Module: %2$s";
 
     private Index targetIndex;
     private boolean indexOnly = false;
@@ -140,7 +139,17 @@ public class DeleteCommand extends Command {
                 Person personToDelete = lastShownPersonList.get(targetIndex.getZeroBased());
 
                 // Bi-directionality
-                model.deletePerson(personToDelete); // delete person from UniquePersonList
+                model.deletePerson(personToDelete);
+                // delete person from UniquePersonList
+                // delete person from each module in module list if exists
+
+                // delete person from each group they are in
+                if (personToDelete instanceof Student) {
+                    Set<Group> groupToLeave = ((Student) personToDelete).getGroups();
+                    for (Group g : groupToLeave) {
+                        g.removeMember((Student) personToDelete);
+                    }
+                }
 
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
 
@@ -223,17 +232,25 @@ public class DeleteCommand extends Command {
 
             Person personToDeleteTrait = lastShownPersonList.get(targetIndex.getZeroBased());
             Person newPerson = personToDeleteTrait;
+            String phoneDeleted = null;
+            String emailDeleted = null;
+            String tagDeleted = null;
+            String officeDeleted = null;
 
             if (phone) {
+                phoneDeleted = newPerson.getPhone().toString();
                 newPerson = newPerson.deletePhone();
             }
             if (email) {
+                emailDeleted = newPerson.getEmail().toString();
                 newPerson = newPerson.deleteEmail();
             }
             if (tag != null) {
+                tagDeleted = newPerson.getTag(tag).tagName;
                 newPerson = newPerson.deleteTag(tag);
             }
             if (personToDeleteTrait instanceof Professor && office) {
+                officeDeleted = ((Professor)newPerson).getOffice().toString();
                 newPerson = ((Professor)newPerson).deleteOffice();
             }
 
@@ -247,10 +264,10 @@ public class DeleteCommand extends Command {
             model.addPerson(newPerson);
 
             // message can be improved if have time
-            String phoneString = phone ? PHONE : "";
-            String emailString = email ? EMAIL : "";
-            String tagString = tag != null ? TAG : "";
-            String officeString = personToDeleteTrait instanceof Professor && office ? OFFICE : "";
+            String phoneString = phoneDeleted != null ? PHONE + phoneDeleted + "\n" : "";
+            String emailString = emailDeleted != null ? EMAIL + emailDeleted + "\n": "";
+            String tagString = tagDeleted != null ? TAG + tagDeleted + "\n": "";
+            String officeString = officeDeleted != null ? OFFICE + officeDeleted + "\n": "";
             return new CommandResult(MESSAGE_DELETE_TRAITS_SUCCESS + phoneString +
                     emailString + tagString + officeString + "from " + personToDeleteTrait.getName());
 
@@ -376,9 +393,11 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_KEY_EVENT_DISPLAYED_INDEX);
             }
 
+            ModuleKeyEvent keyToBeDeleted = lastShownKeyEventList.get(keyEventIndex.getZeroBased());
             lastShownKeyEventList.remove(keyEventIndex.getZeroBased());
 
             return new CommandResult(String.format(MESSAGE_DELETE_KEY_EVENT_FROM_MODULE_SUCCESS,
+                    keyToBeDeleted,
                     moduleToDeleteKeyEvent.getModuleCode()));
 
         }
