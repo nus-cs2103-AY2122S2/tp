@@ -88,6 +88,13 @@ public class Interview {
     }
 
     /**
+     * Marks an interview as failed.
+     */
+    public void markAsFailed() {
+        this.status.markAsFailed();
+    }
+
+    /**
      * Returns true if both interviews have the same data fields.
      * This defines a stronger notion of equality between two interviews.
      */

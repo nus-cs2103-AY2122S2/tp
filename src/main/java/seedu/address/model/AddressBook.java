@@ -164,6 +164,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Fails an interview in the HireLah.
+     * The interview must already exist in the address book.
+     */
+    public void failInterview(Interview i) {
+        interviews.fail(i);
+    }
+
+    /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
      * {@code target} must exist in HireLah.
      * The interview identity of {@code editedInterview} must not be the same as another existing interview
@@ -171,7 +179,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setInterview(Interview target, Interview editedInterview) {
         requireNonNull(editedInterview);
-
         interviews.setInterview(target, editedInterview);
     }
 

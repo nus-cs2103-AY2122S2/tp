@@ -56,7 +56,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     public void pass(Interview toPass) {
         requireNonNull(toPass);
         if (!toPass.isPassableInterview()) {
-            throw new NonPassableInterviewException(); //change
+            throw new NonPassableInterviewException();
         }
 
         toPass.markAsPassed();
@@ -65,11 +65,30 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (!toPass.equals(toPass) && contains(toPass)) {
-            throw new DuplicateInterviewException();
-        }
+        //        if (!toPass.equals(toPass) && contains(toPass)) {
+        //            throw new DuplicateInterviewException();
+        //        }
 
         internalList.set(index, toPass);
+    }
+
+    /**
+     * Fails an interview in the list.
+     */
+    public void fail(Interview toFail) {
+        requireNonNull(toFail);
+
+        toFail.markAsFailed();
+        int index = internalList.indexOf(toFail);
+
+        if (index == -1) {
+            throw new InterviewNotFoundException();
+        }
+        //        if (!toFail.equals(toFail) && contains(toFail)) {
+        //            throw new DuplicateInterviewException();
+        //        }
+
+        internalList.set(index, toFail);
     }
 
     /**
