@@ -23,6 +23,7 @@ public class CommentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a comment to the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing comments will be overwritten by the input.\n"
+            + "Use an empty value after c/ to delete the comment.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_COMMENT + "COMMENT\n"
             + "Example: " + COMMAND_WORD + " 1 "

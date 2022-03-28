@@ -165,7 +165,7 @@ public class ParserUtil {
         requireNonNull(comment);
         String trimmedComment = comment.trim();
         if (!Comment.isValidComment(trimmedComment)) {
-            throw new ParseException(Comment.MESSAGE_CONSTRAINTS);
+            return new Comment("");
         }
         return new Comment(trimmedComment);
     }
