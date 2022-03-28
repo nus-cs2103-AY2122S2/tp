@@ -182,15 +182,20 @@ public class HelpWindow extends UiPart<Stage> {
         rowCounter = 1;
         insertHeaderRow("Action", "Format", "Example", tagsPage);
         insertHeaderRow("Action", "Format", "Example", appointmentsPage);
-        insertRow("Add Appointment", "addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON      ",
-                "addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60", appointmentsPage);
-        insertRow("List Appointments", "listappointments", "-", appointmentsPage);
-        insertRow("Delete Appointment", "deleteappointment INDEX", "deleteappointment 2", appointmentsPage);
-        insertRow("Edit Appointment", "editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
-                "editappointment 2 n/Call Juliet t/13:45", appointmentsPage);
-        insertRow("List Appointments Within Period", "appointmentsbetween sd/STARTDATE st/STARTTIME "
-                        + "ed/ENDDATE et/ENDTIME" , "appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+        insertRow("Add Appointment", "addappt n/NAME d/DATE t/TIME l/DURATION p/PERSON      ",
+                "addappt n/Call Bob d/14-02-2022 t/11:00 p/2 l/60", appointmentsPage);
+        insertRow("List Appointments", "listappt", "-", appointmentsPage);
+        insertRow("Delete Appointment", "deleteappt INDEX", "deleteappt 2", appointmentsPage);
+        insertRow("Edit Appointment", "editappt INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
+                "editappt 2 n/Call Juliet t/13:45", appointmentsPage);
+        insertRow("List Appointments Within Period", "apptbetween [sd/STARTDATE] [st/STARTTIME]" +
+                        "[ed/ENDDATE [et/ENDTIME]]" , "apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
                 appointmentsPage);
+        insertRow("List Available Slots Within Period", "freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME]" +
+                        "[ed/ENDDATE [et/ENDTIME]]", "freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60",
+                appointmentsPage);
+        insertRow("Prioritize Appointment", "prioritizeappt INDEX pri/PRIORITY",
+                "prioritizeappt 2 pri/low", appointmentsPage);
     }
 
     /**
