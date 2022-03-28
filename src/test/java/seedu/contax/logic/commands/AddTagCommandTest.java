@@ -11,7 +11,6 @@ import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +25,7 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.TagBuilder;
@@ -199,7 +199,7 @@ class AddTagCommandTest {
         }
 
         @Override
-        public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
+        public void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration) {
             throw new AssertionError("This method should not be called.");
         }
 

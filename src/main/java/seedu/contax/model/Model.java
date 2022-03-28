@@ -1,7 +1,6 @@
 package seedu.contax.model;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,6 +8,7 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -194,9 +194,10 @@ public interface Model {
     /**
      * Sets the list of slots between appointments to highlight.
      *
-     * @param items A list containing the ranges between appointments to highlight.
+     * @param range The time range between which slots in the schedule should be displayed.
+     * @param minimumDuration The minimum duration of a slot for it to be displayed.
      */
-    void setDisplayedAppointmentSlots(List<AppointmentSlot> items);
+    void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration);
 
     /**
      * Clears all the highlighted empty slots in the Schedule.
