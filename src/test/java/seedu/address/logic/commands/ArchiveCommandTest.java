@@ -1,8 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,22 +18,54 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ArchiveCommandTest {
-    private Model model;
+
     private Path validTestFilePath;
     private Path invalidTestFilePath;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         validTestFilePath = Paths.get("src\\test\\data\\ArchiveFilesTest\\testAddressBook.json");
         invalidTestFilePath = Paths.get("src\\test\\data\\ArchiveFilesTest\\noSuchAddressBook.json");
-        model.setAddressBookFilePath(validTestFilePath);
+    }
+
+    @Test
+    public void validTestFileExist() {
+        assertTrue(Files.exists(validTestFilePath));
+    }
+
+    @Test
+    public void invalidTestFileDoesNotExist() {
+        assertFalse(Files.exists(invalidTestFilePath));
     }
 
     @Test
     public void execute_archiveInvalidFile_archiveUnsuccessful() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.setAddressBookFilePath(invalidTestFilePath);
         assertCommandFailure(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_FAILURE);
+    }
+
+    @Test
+    public void execute_archiveValidFile_archiveSuccessful() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.setAddressBookFilePath(validTestFilePath);
+        Model expectedModel = model;
+        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void directoryNameIsCorrectFormat() {
+        assertTrue(ArchiveCommand.ARCHIVE_DIRECTORY_NAME_FORMAT.toPattern().matches("ddMMyy"));
+    }
+
+    @Test
+    public void archivedFileNameIsCorrectFormat() {
+        assertTrue(ArchiveCommand.ARCHIVE_FILE_NAME_FORMAT.toPattern().matches("ddMMyy_HHmmssSSS"));
+    }
+
+    @Test
+    public void test_archiveCommandWordIsCorrect() {
+        assertTrue(ArchiveCommand.COMMAND_WORD.equals("archive"));
     }
 
 }

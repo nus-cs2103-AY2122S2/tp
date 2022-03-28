@@ -26,6 +26,11 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandTest {
 
     @Test
+    public void test_addCommandWordIsCorrect() {
+        assertTrue(AddCommand.COMMAND_WORD.equals("add"));
+    }
+
+    @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
