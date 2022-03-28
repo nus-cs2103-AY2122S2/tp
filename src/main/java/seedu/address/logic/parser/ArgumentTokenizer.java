@@ -1,5 +1,13 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,14 +45,21 @@ public class ArgumentTokenizer {
      */
     private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
         return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
+                .flatMap(prefix -> {
+                    try {
+                        return findPrefixPositions(argsString, prefix).stream();
+                    } catch (ParseException e) {
+                        e.initCause(new ParseException(FindCommand.MESSAGE_TOO_MANY_PREFIXES));
+                    }
+                    return null;
+                })
                 .collect(Collectors.toList());
     }
 
     /**
      * {@see findAllPrefixPositions}
      */
-    private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
+    private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) throws ParseException {
         List<PrefixPosition> positions = new ArrayList<>();
 
         int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
@@ -54,6 +69,11 @@ public class ArgumentTokenizer {
             prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
         }
 
+        if((prefix.equals(PREFIX_NAME) || prefix.equals(PREFIX_ADDRESS)
+                || prefix.equals(PREFIX_EMAIL) || prefix.equals(PREFIX_PHONE)) &&
+                positions.size() > 1) {
+            throw new ParseException(FindCommand.MESSAGE_TOO_MANY_PREFIXES);
+        }
         return positions;
     }
 

@@ -23,7 +23,7 @@ public class EventParticipantsContainsKeywordsPredicate implements Predicate<Eve
     public boolean test(Event event) {
         return keywords.stream()
                 .anyMatch(keyword -> field.apply(event).stream()
-                        .anyMatch(detail -> StringUtil.containsWordIgnoreCase(detail, keyword)));
+                        .anyMatch(detail -> detail.equalsIgnoreCase(keyword)));
     }
 
     @Override

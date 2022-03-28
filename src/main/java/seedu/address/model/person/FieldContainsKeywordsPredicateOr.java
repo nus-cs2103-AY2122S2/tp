@@ -18,7 +18,7 @@ public abstract class FieldContainsKeywordsPredicateOr extends ContainsKeywordsP
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(field.apply(person), keyword));
+                .anyMatch(keyword -> field.apply(person).equalsIgnoreCase(keyword));
     }
 
     @Override

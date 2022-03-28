@@ -45,6 +45,7 @@ public class FindCommand extends Command {
             + COMMAND_WORD + " n/Alex Yeoh";
 
     public static final String MESSAGE_NO_PARAMETERS = "At least one field must be provided.";
+    public static final String MESSAGE_TOO_MANY_PREFIXES = "At most one prefix for basic particulars can be provided";
 
     private final Predicate<Person> predicate;
 
