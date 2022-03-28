@@ -164,8 +164,8 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         if (hasConflictingLessonExcluding(index, editedLesson)) {
             throw new ConflictsWithLessonsException(editedLesson, findAllLessonsConflictingWith(editedLesson));
         }
-
-        internalList.set(index, editedLesson);
+        internalList.remove(target);
+        this.add(editedLesson);
     }
 
     /**
