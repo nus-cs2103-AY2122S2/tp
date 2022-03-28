@@ -15,6 +15,13 @@ public class TodoBuilder {
     }
 
     /**
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
+     */
+    public TodoBuilder(Todo taskToCopy) {
+        description = taskToCopy.getDescription();
+    }
+
+    /**
      * Sets the {@code Description} of the {@code Task} that we are building.
      */
     public TodoBuilder withDescription(String description) {
