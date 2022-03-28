@@ -101,19 +101,19 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
   - [`addp`](#adding-a-person-addp): Adds a person to the list of persons.
   - [`adde`](#adding-an-event-adde): Adds an event to the list of events.
 - **Listing/Viewing entries**
-  - [`listc`](#listing-companies-listc): Lists all companies.
-  - [`listp`](#listing-persons-listp): Lists all persons.
-  - [`liste`](#listing-events-liste): Lists all events.
+  - [`listc`](#listing-all-companies--listc): Lists all companies.
+  - [`listp`](#listing-all-persons--listp): Lists all persons.
+  - [`liste`](#listing-all-events--liste): Lists all events.
 - **Editing entries**
-  - [`editc`](#editing-a-company-editc): Edits a company.
-  - [`editp`](#editing-a-person-editp): Edits a person.
-  - [`edite`](#editing-an-event-edite): Edits an event.
+  - [`editc`](#editing-a-company--editc): Edits a company.
+  - [`editp`](#editing-a-person--editp): Edits a person.
+  - [`edite`](#editing-an-event--edite): Edits an event.
 - **Deleting entries**
-  - [`delete`](#deleting-an-entry-delete): Deletes an entry. 
+  - [`delete`](#deleting-an-entry--delete): Deletes an entry. 
 - **Finding/Locating entries**
-  - [`findc`](#finding-a-company-findc): Finds a company.
-  - [`findp`](#finding-a-person-findp): Finds a person.
-  - [`finde`](#finding-an-event-finde): Finds an event. 
+  - [`findc`](#locating-companies-findc): Finds a company.
+  - [`findp`](#locating-people-by-name-findp): Finds a person.
+  - [`finde`](#locating-events-finde): Finds an event. 
 
 There are other commands such as [`help`](#viewing-help--help), [`clear`](#clearing-all-entries--clear), and [`exit`](#exiting-the-program--exit). You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to read the [User Guide Icons](#user-guide-icons) and [Command Formats](#command-formats) section first to have a smoother experience reading our [Features](#features) section :smile:.
 
