@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,6 +25,7 @@ public class AddCommand extends Command {
             + PREFIX_ID + "ID "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
             + PREFIX_COURSE + "COURSE "
             + PREFIX_SENIORITY + "SENIORITY "
             + PREFIX_AVAILABILITY + "AVAILABILITY \n"
@@ -31,9 +33,10 @@ public class AddCommand extends Command {
             + PREFIX_ID + "E0123456 "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "E0123456@u.nus.edu "
             + PREFIX_COURSE + "Computer Science "
             + PREFIX_SENIORITY + "2 "
-            + PREFIX_AVAILABILITY + "1,2,3,4,5,6,7";
+            + PREFIX_AVAILABILITY + "1,2,3,4,5";
 
     public static final String MESSAGE_SUCCESS = "New candidate added: %1$s";
     public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the system";
