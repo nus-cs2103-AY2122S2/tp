@@ -46,8 +46,8 @@ public class ModelManager implements Model {
 
         currentlyDisplayedListType = ListType.PERSON;
 
-        // Don't allow deleting/finding/editing on the companies or events list at the beginning
-        filteredCompanies.setPredicate(PREDICATE_SHOW_NO_COMPANIES);
+        // Don't allow deleting/finding/editing on the events or person list at the beginning
+        filteredPersons.setPredicate(PREDICATE_SHOW_NO_PERSONS);
         filteredEvents.setPredicate(PREDICATE_SHOW_NO_EVENTS);
     }
 
@@ -242,7 +242,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<? super Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
@@ -261,7 +261,7 @@ public class ModelManager implements Model {
      * Updates the filter of the filtered company list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    public void updateFilteredCompanyList(Predicate<Company> predicate) {
+    public void updateFilteredCompanyList(Predicate<? super Company> predicate) {
         requireNonNull(predicate);
         filteredCompanies.setPredicate(predicate);
     }

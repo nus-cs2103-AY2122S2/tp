@@ -3,21 +3,18 @@ package seedu.address.model.entry;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 /**
- * Represents a Event's Time in the address book.
+ * Represents an Event's Time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "TODO CONSTRAINTS";
+    public static final String MESSAGE_CONSTRAINTS = "Time should follow the 24-hour format HH:MM and be a valid time.";
 
-    /*
-     * TODO VALIDATION REGEX
-     */
-    //public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    public final String time;
+    public final LocalTime time;
 
     /**
      * Constructs a {@code Time}.
@@ -27,22 +24,25 @@ public class Time {
     public Time(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = time;
+        this.time = LocalTime.parse(time);;
     }
 
     /**
      * Returns true if a given string is a valid time.
-     * TODO
      */
     public static boolean isValidTime(String test) {
-        //return test.matches(VALIDATION_REGEX);
+        try {
+            LocalTime.parse(test);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
         return true;
     }
 
 
     @Override
     public String toString() {
-        return time;
+        return time.toString();
     }
 
     @Override
