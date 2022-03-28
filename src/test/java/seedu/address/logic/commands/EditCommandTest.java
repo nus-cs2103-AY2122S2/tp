@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_COMPL
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCandidateAtIndex;
@@ -64,11 +63,10 @@ public class EditCommandTest {
         Candidate lastCandidate = model.getFilteredCandidateList().get(indexLastCandidate.getZeroBased());
 
         CandidateBuilder candidateInList = new CandidateBuilder(lastCandidate);
-        Candidate editedCandidate = candidateInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Candidate editedCandidate = candidateInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditCandidateDescriptor descriptor = new EditCandidateDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastCandidate, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate);

@@ -114,7 +114,6 @@ public class EditCommand extends Command {
         Email updatedEmail = editCandidateDescriptor.getEmail().orElse(candidateToEdit.getEmail());
         Course updatedCourse = editCandidateDescriptor.getCourse().orElse(candidateToEdit.getCourse());
         Seniority updatedSeniority = editCandidateDescriptor.getSeniority().orElse(candidateToEdit.getSeniority());
-        Set<Tag> updatedTags = editCandidateDescriptor.getTags().orElse(candidateToEdit.getTags());
         ApplicationStatus applicationStatus = editCandidateDescriptor.getApplicationStatus()
                 .orElse(candidateToEdit.getApplicationStatus());
         InterviewStatus interviewStatus = editCandidateDescriptor.getInterviewStatus()
@@ -123,7 +122,7 @@ public class EditCommand extends Command {
                 .orElse(candidateToEdit.getAvailability());
 
         return new Candidate(updatedID, updatedName, updatedPhone, updatedEmail,
-                updatedCourse, updatedSeniority, updatedTags,
+                updatedCourse, updatedSeniority,
                 applicationStatus, interviewStatus, updatedAvailability);
     }
 

@@ -12,7 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_COURSE = new Prefix("c/");
     public static final Prefix PREFIX_SENIORITY = new Prefix("yr/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_KEYWORD = new Prefix("k/");
     public static final Prefix PREFIX_FIELD = new Prefix("f/");
     public static final Prefix PREFIX_SORTKEY = new Prefix("s/");
