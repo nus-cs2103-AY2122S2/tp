@@ -9,11 +9,14 @@ participant "a:AddModuleCommand" as AddModuleCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
 
-[-> LogicManager : execute("AddModule 1 m/CS2103T")
+[-> LogicManager : execute("addmodule 1 m/CS2103T")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("AddModule 1 m/CS2103T")
+LogicManager -> AddressBookParser : parseCommand("addmodule 1 m/CS2103T")
 activate AddressBookParser
 
 create AddModuleCommandParser
@@ -27,23 +30,29 @@ AddressBookParser -> AddModuleCommandParser : parse("1 m/CS2103T")
 activate AddModuleCommandParser
 
 create AddModuleCommand
-AddModuleCommandParser -> AddModuleCommand : AddModuleCommand(1, List<Module>(CS2103T))
+AddModuleCommandParser -> AddModuleCommand
 activate AddModuleCommand
 
-AddModuleCommand -> AddModuleCommand : createEditedPerson(personToEdit, modulesToAdd)
+AddModuleCommand --> AddModuleCommandParser : a
+deactivate AddModuleCommand
+
+AddModuleCommandParser --> AddressBookParser : a
+deactivate AddModuleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddModuleCommandParser -[hidden]-> AddressBookParser
+destroy AddModuleCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddModuleCommand : execute()
 activate AddModuleCommand
 
-AddModuleCommand -> AddModuleCommand : getCommandResult(personToEdit, editedPerson, modulesToAddActual)
-activate AddModuleCommand
+AddModuleCommand -> Model : setPerson()
+activate Model
 
-AddModuleCommand -> AddModuleCommand : hasModulesInCommon(Person personToEdit, List<Module> proposedModules)
-activate AddModuleCommand
-
-alt has modules in common
-    AddModuleCommand -> AddModuleCommand : getNewModules(Person personToEdit, List<Module> proposedModules)
-    activate AddModuleCommand
-    deactivate AddModuleCommand
-end
+Model --> AddModuleCommand
+deactivate Model
 
 create CommandResult
 AddModuleCommand -> CommandResult
@@ -52,16 +61,8 @@ activate CommandResult
 CommandResult --> AddModuleCommand
 deactivate CommandResult
 
-AddModuleCommand --> AddModuleCommandParser:
+AddModuleCommand --> LogicManager : result
 deactivate AddModuleCommand
-
-AddModuleCommandParser --> AddressBookParser:
-deactivate AddModuleCommandParser
-
-AddressBookParser --> LogicManager
-deactivate AddressBookParser
-
-destroy AddModuleCommand
 
 [<--LogicManager
 deactivate LogicManager
