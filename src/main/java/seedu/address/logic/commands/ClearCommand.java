@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
-import seedu.address.model.StudentBook;
 
 /**
  * Clears the student book.
@@ -11,15 +10,17 @@ import seedu.address.model.StudentBook;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String COMMAND_DESCRIPTION = "Assign a student to a lesson";
-    public static final String SHORTENED_COMMAND_WORD = "";
+    public static final String COMMAND_DESCRIPTION = "Clears the entire lesson book and student book.";
+    public static final String MESSAGE_USAGE = "To confirm clearing, please enter \"clear -f\" in the command box.";
     public static final String MESSAGE_SUCCESS = "TeachWhat! has been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setStudentBook(new StudentBook());
+//        model.
+//        model.setStudentBook(new StudentBook());
+        System.out.println("Clear command executed!");
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

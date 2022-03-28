@@ -23,4 +23,6 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_STUDENT = new Prefix("-s", "studentID");
     public static final Prefix PREFIX_LESSON = new Prefix("-l", "lessonID");
+
+    public static final Prefix PREFIX_CLEAR = new Prefix("-f", "clearConfirmation");
 }
