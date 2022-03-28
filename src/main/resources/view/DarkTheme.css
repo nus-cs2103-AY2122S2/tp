@@ -431,6 +431,40 @@
     -fx-padding: 10 10 10 0;
 }
 
+// ************* candidate panel header css *************
+.candidate-panel-header {
+    -fx-background-color: #3c3e3f;
+}
+
+.candidate-panel-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
+
+// ************* focus panel header css *************
+.focus-panel-header {
+    -fx-background-color: #3c3e3f;
+}
+
+.focus-panel-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
+
+#focus-card-label {
+    -fx-padding: 0 0 0 15;
+}
+
+#focus-card-scroll-pane {
+    -fx-background-color: #3c3e3f;
+    -fx-border-width: 0;
+}
+
+#focus-card-scroll-pane > .viewport {
+    -fx-background-color: #3c3e3f;
+}
 
 // ************* interview panel css *************
 .interview-panel-header {
