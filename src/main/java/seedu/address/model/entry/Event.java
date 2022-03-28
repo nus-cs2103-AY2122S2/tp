@@ -15,7 +15,7 @@ public class Event extends Entry {
 
 
     // Data fields
-    private final Name companyName;
+    private Name companyName;
     private final Date date;
     private final Time time;
     private final Location location;
