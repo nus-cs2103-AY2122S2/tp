@@ -69,7 +69,7 @@ class JsonSerializableTAssist {
         }
 
         for (JsonAdaptedTaModule jsonAdaptedTaModule : modules) {
-            TaModule module = jsonAdaptedTaModule.toModelType();
+            TaModule module = jsonAdaptedTaModule.toModelType(tAssist.getStudentList());
             if (tAssist.hasModule(module)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE);
             }
@@ -77,7 +77,8 @@ class JsonSerializableTAssist {
         }
 
         for (JsonAdaptedClassGroup jsonAdaptedClassGroup : classGroups) {
-            ClassGroup classGroup = jsonAdaptedClassGroup.toModelType(tAssist.getModuleList());
+            ClassGroup classGroup = jsonAdaptedClassGroup.toModelType(
+                    tAssist.getModuleList(), tAssist.getStudentList());
             if (tAssist.hasClassGroup(classGroup)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLASS_GROUP);
             }
