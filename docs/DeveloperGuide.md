@@ -268,6 +268,24 @@ The cancelevent command would allow the user to cancel and remove an event from 
 lead to the deletion of the corresponding event in the event list, as long as it is a valid index. The user also has the option of specifying
 multiple indexes if multiple deletions are required.
 
+Below is an example usage scenario and how the tagging mechanism behaves at each step:
+
+Step 1. The user enters the valid `CancelEventCommand` : `cancelevent 1 2` and `LogicManager` would execute it.
+
+Step 2. `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `CancelEventCommand`.
+It will then pass the arguments to `CancelEventCommandParser` to handle the parsing for the identified `CancelEventCommand`.
+
+Step 3. `CancelEventCommandParser` would first parse the string of indexes using `ParserUtil#parseIndexes()` to identify the events
+and ensure the indexes are unique and positive integers.
+
+Step 4. After parsing the arguments, the control is handed over to `CancelEventCommand` where it will return a `CancelEventCommand` object. It
+will eventually return to `LogicManager` which will call `CancelEventCommand#execute()` to execute the command.
+
+Step 5. Upon execution, the information of the events will be extracted using `CancelEventCommand#extractDeletedInfo()` that will be use as output for the
+notifying the user later. Afterwards, the events will be deleted from the `AddressBook` using `Model#deleteEvent` within `CancelEventCommand#deleteFromList`.
+Finally, `CommandResult` would then generate a success message to inform the user the event has been added successfully.
+
+![The following sequence diagram shows how the tag operation works:](images/CancelEventSequenceDiagram.png)
 
 ### Edit Feature
 
