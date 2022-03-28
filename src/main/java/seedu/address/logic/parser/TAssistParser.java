@@ -74,7 +74,7 @@ public class TAssistParser {
             return new DisenrolCommandParser().parse(arguments, model);
 
         case GradeCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments, model);
+            return new GradeCommandParser().parse(arguments, model);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
