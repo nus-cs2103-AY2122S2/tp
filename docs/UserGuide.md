@@ -379,7 +379,7 @@ _Details coming soon ..._
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME s/STATUS [r/RATE] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                                                          |
 | **Clear**  | `clear`                                                                                                                                           |
-| **Comment** | `comment <INDEX> [c/<COMMENT>]`  eg., `comment 2 c/Bad`                                                                                               |
+| **Comment** | `comment INDEX [c/COMMENT]`  eg., `comment 2 c/Bad`                                                                                               |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                               |
 | **Edit**   | `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime`                                                               |
 | **Exit**   | `exit`                                                                                                                                            |
