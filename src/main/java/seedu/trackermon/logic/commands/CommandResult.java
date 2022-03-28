@@ -9,6 +9,8 @@ import java.util.Objects;
  */
 public class CommandResult {
 
+    public static final int DEFAULT_INDEX = -1;
+
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -20,21 +22,43 @@ public class CommandResult {
     /** The application is importing a file. */
     private final boolean isImport;
 
+    /** The index information of commands */
+    private final int indexAffected;
+
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with all specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport) {
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport,
+                         int indexAffected) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowHelp = isShowHelp;
         this.isExit = isExit;
         this.isImport = isImport;
+        this.indexAffected = indexAffected;
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code isShowHelp},
+     * {@code isExit}, {@code isImport}, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport) {
+        this(feedbackToUser, isShowHelp, isExit, isImport, DEFAULT_INDEX);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code isShowHelp},
+     * {@code isExit}, and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit) {
         this(feedbackToUser, isShowHelp, isExit, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code indexAffected},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, int indexAffected) {
+        this(feedbackToUser, false, false, false, indexAffected);
     }
 
     /**
@@ -59,6 +83,10 @@ public class CommandResult {
 
     public boolean isImport() {
         return isImport;
+    }
+
+    public int getIndexAffected() {
+        return indexAffected;
     }
 
     @Override

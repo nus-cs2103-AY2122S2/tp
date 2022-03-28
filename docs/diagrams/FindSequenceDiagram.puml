@@ -5,8 +5,6 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TrackermonParser" as TrackermonParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
-participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
-participant ":TagsContainsKeywordsPredicate" as TagsContainsKeywordsPredicate LOGIC_COLOR
 participant "fc:FindCommand" as FindCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -15,41 +13,23 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find t/Anime t/Action")
+[-> LogicManager : execute("find t/Anime")
 activate LogicManager
 
-LogicManager -> TrackermonParser : parseCommand("find t/Anime t/Action")
+LogicManager -> TrackermonParser : parseCommand("find t/Anime")
 activate TrackermonParser
 
 create FindCommandParser
-TrackermonParser -> FindCommandParser :FindCommandParser("find t/Anime t/Action")
+TrackermonParser -> FindCommandParser
 activate FindCommandParser
 
 FindCommandParser --> TrackermonParser
 deactivate FindCommandParser
 
-TrackermonParser -> FindCommandParser :parse("t/Anime t/Action")
+TrackermonParser -> FindCommandParser :parse("t/Anime")
 activate FindCommandParser
 
-FindCommandParser -> ArgumentTokenizer : tokenize(args, PREFIX_TAG)
-activate ArgumentTokenizer
-
-ArgumentTokenizer --> FindCommandParser : argumentMultimap
-deactivate ArgumentTokenizer
-
-create TagsContainsKeywordsPredicate
-FindCommandParser -> TagsContainsKeywordsPredicate : TagsContainsKeywordsPredicate(predicates)
-activate TagsContainsKeywordsPredicate
-
-TagsContainsKeywordsPredicate --> FindCommandParser : predicates
-deactivate TagsContainsKeywordsPredicate
-
-create FindCommand
-FindCommandParser -> FindCommand : FindCommand(predicates)
-activate FindCommand
-
-FindCommand --> FindCommandParser : fc
-deactivate FindCommand
+ref over FindCommandParser, FindCommand : Parsing implementation
 
 FindCommandParser --> TrackermonParser : fc
 deactivate FindCommandParser

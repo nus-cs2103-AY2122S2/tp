@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SORT_NAME_DES = new Prefix("snd/");
     public static final Prefix PREFIX_SORT_STATUS_DES = new Prefix("ssd/");
     public static final Prefix PREFIX_SORT_STATUS_ORD = new Prefix("so/");
+    public static final Prefix PREFIX_RATING = new Prefix("r/");
 
 }

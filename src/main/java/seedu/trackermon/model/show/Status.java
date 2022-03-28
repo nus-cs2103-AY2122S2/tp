@@ -4,7 +4,7 @@ public enum Status {
 
     COMPLETED("completed"),
     WATCHING("watching"),
-    PLANTOWATCH("plan-to-watch");
+    PLAN_TO_WATCH("plan-to-watch");
 
     public static final String MESSAGE_CONSTRAINTS =
             "Status should only be completed or watching or plan to watch!";
@@ -17,18 +17,19 @@ public enum Status {
     Status(String status) {
         this.status = status;
     }
+
     public static Status getStatus(String status) {
         status = status.trim().toUpperCase();
         //find match pattern similar to "plan-to-watch" for example, user key in "plan to watch"
         if (status.matches(PATTERN)) {
-            status = PLANTOWATCH.name();
+            status = PLAN_TO_WATCH.name();
         }
         return Status.valueOf(status);
     }
 
     @Override
     public String toString() {
-        return "[" + status + "]";
+        return status;
     }
 
     /**
@@ -50,7 +51,7 @@ public enum Status {
             return true;
         }
         return status.equals(COMPLETED.name()) || status.equals(WATCHING.name())
-            || status.equals(PLANTOWATCH.name());
+            || status.equals(PLAN_TO_WATCH.name());
     }
 
     /**
