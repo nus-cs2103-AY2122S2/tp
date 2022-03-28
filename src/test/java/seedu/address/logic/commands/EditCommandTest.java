@@ -159,24 +159,6 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void execute_trigger_success() {
-        EditCandidateDescriptor editCandidateDescriptor = new EditCandidateDescriptorBuilder()
-                .withName(VALID_NAME_BOB)
-                .withApplicationStatus(VALID_APPLICATION_PENDING)
-                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
-                .build();
-        assertEquals(editCandidateDescriptor.getApplicationStatus().get(),
-                new ApplicationStatus(VALID_APPLICATION_PENDING));
-        assertEquals(editCandidateDescriptor.getInterviewStatus().get(),
-                new InterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED));
-
-        editCandidateDescriptor.setApplicationStatus(new ApplicationStatus(VALID_APPLICATION_ACCEPTED));
-        assertEquals(editCandidateDescriptor.getApplicationStatus().get(),
-                new ApplicationStatus(VALID_APPLICATION_ACCEPTED));
-        assertEquals(editCandidateDescriptor.getInterviewStatus().get(),
-                new InterviewStatus(VALID_INTERVIEW_COMPLETED));
-    }
 
     @Test
     public void equals() {
