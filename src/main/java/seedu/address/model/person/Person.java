@@ -2,7 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.activity.Activity;
 
@@ -86,8 +90,8 @@ public class Person {
     }
 
     /**
-     *
-     *
+     * Returns true if a person is in the same
+     * activity as the other.
      */
     public boolean hasSameActivity(Person otherStudent) {
         Set<Activity> otherStudentActivities = otherStudent.getActivities();
@@ -100,6 +104,9 @@ public class Person {
         return false;
     }
 
+    /**
+     * Returns true if a person has a specified activity.
+     */
     public boolean hasActivity(Activity activity) {
         return activities.contains(activity);
     }
