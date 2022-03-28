@@ -133,17 +133,18 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
+        builder.append("**Name: **")
+                .append(getName())
+                .append("\n**Phone: **")
                 .append(getPhone())
-                .append("; Email: ")
+                .append("\n**Email: **")
                 .append(getEmail())
-                .append("; Address: ")
+                .append("\n**Address: **")
                 .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("\n**Tags: **");
             tags.forEach(builder::append);
         }
         return builder.toString();
