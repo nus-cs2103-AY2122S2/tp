@@ -18,7 +18,7 @@ import seedu.contax.model.appointment.Priority;
  * Edits the priority level (low, medium or high) of an existing appointment in the appointment list.
  */
 public class EditPriorityCommand extends Command {
-    public static final String COMMAND_WORD = "priority";
+    public static final String COMMAND_WORD = "prioritizeappt";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD
             + "`: **Edits the level of priority of an existing appointment in the appointment list.**\n"
