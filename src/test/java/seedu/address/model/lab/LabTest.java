@@ -170,6 +170,13 @@ public class LabTest {
     }
 
     @Test
+    public void hasSameLabStatus_differentLabNumberBothGradedWithDifferentLabMark_success() {
+        Lab stub1 = new Lab("1").of(new LabMark("20"));
+        Lab stub2 = new Lab("2").of(new LabMark("30"));
+        assertTrue(stub1.hasSameLabStatus(stub2));
+    }
+
+    @Test
     public void hasSameLabStatus_nullInput_throwsNullPointerException() {
         Lab stub = new Lab("1").of(LabStatus.UNSUBMITTED);
         assertThrows(NullPointerException.class, () -> stub.hasSameLabStatus(null));
