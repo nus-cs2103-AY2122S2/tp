@@ -430,20 +430,22 @@ In order to import data from external sources into ContaX, there are the followi
 
 ### Importing CSV Files: `importcsv`
 
-Format: `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]`
+Format: `importcsv f/FILEPATH [n/COLUMN_NAME] [p/COLUMN_PHONE] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]`
 
 * Imported contacts will be appended to the current address book.
 * Each argument represents the corresponding attribute for a person.
-  * n = Name
-  * p = Phone
-  * e = Email
-  * a = Address
-  * t = Tagged
+  * COLUMN_NAME - specifies column number for Name
+  * COLUMN_PHONE - specifies column number for Phone
+  * COLUMN_EMAIL - specifies column number for Email
+  * COLUMN_ADDRESS - specifies column number for Address
+  * COLUMN_TAGS - specifies column number for Tags
 * If any argument is omitted, it will follow the next available column based on the default sequence of
-  Name - Phone - Email - Address - Tagged
-* If the specified rows clash, the command will fail
+  Name - Phone - Email - Address - Tags
+* Fields should comply with existing field restrictions, e.g. no alphabets in Phone.
+* Tags should be in the delimited by `;` e.g. `tag1;tag2;tag3;`, in the imported CSV file.
+* If the specified rows clash, the command will fail.
 * If there are lines with illegal characters or invalid formatting, ContaX will skip importing the affected line
-* This is designed with flexibility in mind, such that users will be able to export CSV files from any other format and do minimal data orgnaisation before importing into ContaX
+* This is designed with flexibility in mind, such that users will be able to export CSV files from any other format and do minimal data organisation before importing into ContaX
 
 Examples:
 * `importcsv f/file.csv n/2 p/3 e/5 a/6 t/4`
