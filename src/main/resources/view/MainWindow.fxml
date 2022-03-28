@@ -69,7 +69,7 @@
                 <Insets top="5" right="5" bottom="5" left="5" />
               </padding>
               <HBox styleClass="focus-panel-header" HBox.hgrow="ALWAYS" minHeight="40" prefHeight="40" alignment="CENTER">
-                <Label styleClass="focus-panel-title" alignment="CENTER" text="Focused Display" />
+                <Label styleClass="focus-panel-title" alignment="CENTER" text="Candidate Profile" />
               </HBox>
               <VBox VBox.vgrow="ALWAYS">
                 <padding>
