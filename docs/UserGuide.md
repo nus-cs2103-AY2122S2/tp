@@ -154,6 +154,10 @@ Adds a recurring lesson with the following attributes:
 * duration: 1 hour and 50 minutes
 >**Note:** If no type is given then the lesson is assumed to be temporary.
 
+>**⚠️** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.\
+> 
+> 💡 If you still want to add this lesson, use `rmlesson` to remove the list of conflicting lessons shown before proceeding to add the new lesson.
+
 ---
 
 ### Editing a Lesson
