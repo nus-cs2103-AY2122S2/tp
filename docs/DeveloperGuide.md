@@ -391,13 +391,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* students who are looking for group mates
+* students who want to keep track of the modules their friends are taking or have taken
 * has a need to manage a significant number of contacts within their educational organisation
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: ModuleMateFinder provides a platform that allows students to manage their contacts and find 
+group mates easier by consolidating important information such as modules taken. 
 
 
 ### User stories
@@ -418,10 +421,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+ModuleMateFinder provides the necessary features that support the management of contact information such as adding,
+deleting, listing, sorting, finding and editing. Moreover, there are module related features that are more specific
+to the context of ModuleMateFinder. The Use Cases listed below demonstrates their usages.
+
 (For all use cases below, the **System** is `ModuleMateFinder` and the **Actor** is the `user`, unless specified otherwise)
+<br/><br/>
 
-
-#### **Use case: UC01 - Listing all contacts**
+**Use case: UC01 - Listing all contacts**
 
 **MSS**
 1. User requests to list out all contacts.
@@ -435,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
   <br/><br/>
 
-#### **Use case: UC02 - Adding a contact**
+**Use case: UC02 - Adding a contact**
 
 **MSS**
 
@@ -453,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br/><br/>
 
 
-#### **Use case: UC03 - Favourite a contact**
+**Use case: UC03 - Favourite a contact**
 
 **MSS**
 
@@ -474,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br/><br/>
 
 
-#### **Use case: UC04 - Blacklisting a contact**
+**Use case: UC04 - Blacklisting a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -494,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br/><br/>
 
 
-#### **Use case: UC05 - Adding modules to a contact**
+**Use case: UC05 - Adding modules to a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -518,7 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br/><br/>
 
 
-#### **Use case: UC06 - Adding a comment to a contact**
+**Use case: UC06 - Adding a comment to a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -538,7 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br/><br/>
 
 
-#### **Use case: UC07 - Filter contacts by modules**
+**Use case: UC07 - Filter contacts by modules**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -556,7 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
       <br/><br/>
 
-#### **Use case: UC08 - Filter contacts by name**
+**Use case: UC08 - Filter contacts by name**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -575,7 +582,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br/><br/>
 
 
-#### **Use case: UC09 - Editing a contact's details**
+**Use case: UC09 - Editing a contact's details**
 
 **MSS**
 
@@ -596,7 +603,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
       <br/><br/>
 
-#### **Use case: UC10 - Deleting a contact**
+**Use case: UC10 - Deleting a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -616,7 +623,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br/><br/>
 
 
-#### **Use case: UC11 - Clearing all entries**
+**Use case: UC11 - Clearing all entries**
 
 **MSS**
 
@@ -626,7 +633,7 @@ message.
    <br/><br/>
 
 
-#### **Use case: UC12 - Sorting contacts**
+**Use case: UC12 - Sorting contacts**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -646,7 +653,7 @@ message.
       <br/><br/>
 
 
-#### **Use case: UC13 - Copying contacts**
+**Use case: UC13 - Copying contacts**
 
 **MSS**
 1. User requests to copy contact's information.
@@ -656,7 +663,7 @@ message.
    <br/><br/>
 
 
-#### **Use case: UC14 - Exiting the application**
+**Use case: UC14 - Exiting the application**
 
 **MSS**
 
