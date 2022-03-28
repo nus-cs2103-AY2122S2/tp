@@ -24,6 +24,9 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     public static final String MESSAGE_CONSTRAINTS =
             "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
 
+    public static final String DAYS_CONSTRAINTS =
+            "Number of days should be non-negative.";
+
     private static final DateStringManager[] ACCEPTED_FORMATS = {
         new DateStringManager("d MMM yyyy"),
         new DateStringManager("dd MMM yyyy"),
@@ -51,6 +54,18 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
 
         dateStringManager = findDateStringManager(date);
         expiryDate = dateStringManager.parse(date);
+    }
+
+    /**
+     * Factory method to create an expiryDate {@code days} days from the current day
+     * @param days
+     * @return
+     */
+    public static ExpiryDate getDateFromNow(int days) {
+        requireNonNull(days);
+        checkArgument(days > 0, DAYS_CONSTRAINTS);
+        LocalDate dateNow = LocalDate.now();
+        return new ExpiryDate(dateNow.plusDays(days).toString());
     }
 
     /**
@@ -100,6 +115,15 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     @Override
     public int compareTo(ExpiryDate o) {
         return expiryDate.compareTo(o.expiryDate);
+    }
+
+    /**
+     * Checks if the current expiryDate is within the currentDate and {@code toCheck} including those two dates
+     * @param toCheck
+     * @return
+     */
+    public boolean within(ExpiryDate toCheck) {
+        return !LocalDate.now().isAfter(this.expiryDate) && !toCheck.expiryDate.isBefore(this.expiryDate);
     }
 
     /**
