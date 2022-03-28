@@ -2,12 +2,13 @@ package unibook.model.module.group;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
-import unibook.model.module.ModuleCode;
 import unibook.model.module.exceptions.DuplicateMeetingTimeException;
 import unibook.model.module.exceptions.MeetingTimeNotFoundException;
 import unibook.model.person.Student;
@@ -120,6 +121,10 @@ public class Group {
         members.remove(student);
     }
 
+    /**
+     * Removes the groups in the group list of each student that has this group
+     *
+     */
     public void removeStudentsFromThisGroup() {
         for (Student student : members) {
             student.removeGroup(module.getModuleCode(), this);
@@ -171,6 +176,13 @@ public class Group {
         return this.name.equals(group.getGroupName());
     }
 
+    /**
+     * Returns True if group name and module code are the same else False
+     *
+     * @param moduleCode
+     * @param groupName
+     * @return
+     */
     public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
         if (moduleCode.equals(this.module.getModuleCode().toString()) && groupName.equals(this.getGroupName())) {
             return true;
@@ -203,6 +215,15 @@ public class Group {
      */
     public ObservableList<LocalDateTime> getMeetingTimes() {
         return meetingTimes;
+    }
+
+    public ObservableList<LocalDate> getMeetingDates() {
+        return FXCollections.observableArrayList(this.meetingTimes.stream().map(mt -> {
+            int year = mt.getYear();
+            int month = mt.getMonthValue();
+            int dayOfMonth = mt.getDayOfMonth();
+            return LocalDate.of(year, month, dayOfMonth);
+        }).collect(Collectors.toList()));
     }
 
     @Override

@@ -2,12 +2,14 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import unibook.commons.util.StringUtil;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;
@@ -39,7 +42,6 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        System.out.println(!StringUtil.isNonZeroUnsignedInteger(trimmedIndex));
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -246,7 +248,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String groupName} into a {@code Group}.
+     * * Parses {@code String groupName} into a {@code Group}.
      */
     public static Group parseGroup(String groupName)
             throws ParseException {
@@ -254,13 +256,100 @@ public class ParserUtil {
         return new Group(groupName);
     }
 
-     /**
+    /**
+     * Parses a date string with YYYY-MM-DD into LocalDate object
+     *
+     * @param date
+     * @return LocalDate object representing the given string.
+     * @throws ParseException
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            return LocalDate.parse(trimmedDate, formatter);
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new ParseException("DateTime format accepts the following:\n"
+                    + "yyyy-MM-dd");
+        }
+    }
+
+    /**
+     * Parses {@code Collection<String> keyEventAndDate} and
+     * {@code Module module}into a {@code ArrayList<ModuleKeyEvent>}.
+     */
+    public static ArrayList<ModuleKeyEvent> parseModuleKeyEvent(Collection<String> keyEventAndDate, Module module)
+            throws ParseException {
+        requireNonNull(keyEventAndDate);
+        final ArrayList<ModuleKeyEvent> moduleKeyEventList = new ArrayList<>();
+        if (keyEventAndDate.toArray().length == 0) {
+            return moduleKeyEventList;
+        }
+        for (String eventAndDate : keyEventAndDate) {
+            try {
+                String[] strArr = eventAndDate.split(" dt/");
+                LocalDateTime dateTime = parseDateTime(strArr[1]);
+                ModuleKeyEvent.KeyEventType keyEventType = parseKeyEventType(strArr[0]);
+                ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEventType, dateTime, module);
+                moduleKeyEventList.add(moduleKeyEvent);
+            } catch (Exception e) {
+                throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_MISSINGDT);
+            }
+        }
+        return moduleKeyEventList;
+    }
+
+    /**
+>>>>>>> 69f9bda5ca8dfb47b3a4168a9dba4176c85f29f7
      * Parses {@code String dateTime} into a {@code LocalDateTime}.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(trimmedDateTime, formatter);
+        try {
+            return LocalDateTime.parse(trimmedDateTime, formatter);
+        } catch (Exception e) {
+            throw new ParseException("DateTime format accepts the following:\n"
+                + "yyyy-MM-dd HH:mm");
+        }
     }
+
+    /**
+     * Parses {@code String keyEventType} into a {@code KeyEventType}.
+     */
+    public static ModuleKeyEvent.KeyEventType parseKeyEventType(String keyEventType) throws ParseException {
+        requireNonNull(keyEventType);
+        String keyEventTypeTrimmed = keyEventType.trim();
+        switch (keyEventTypeTrimmed) {
+        case "1":
+            return ModuleKeyEvent.KeyEventType.EXAM;
+        case "2":
+            return ModuleKeyEvent.KeyEventType.QUIZ;
+        case "3":
+            return ModuleKeyEvent.KeyEventType.ASSIGNMENT_RELEASE;
+        case "4":
+            return ModuleKeyEvent.KeyEventType.ASSIGNMENT_DUE;
+        default:
+            throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_TYPE);
+        }
+    }
+
+    /**
+     * Parses {@code List<String> allDateTimes} into an {@code ArrayList<LocalDateTime>}.
+     */
+    public static ArrayList<LocalDateTime> parseAllDateTimes(List<String> allDateTimes) throws ParseException {
+        ArrayList<LocalDateTime> dateTimeList = new ArrayList<>();
+        for (String dateTimeStr : allDateTimes) {
+            LocalDateTime dateTime = parseDateTime(dateTimeStr);
+            if (dateTimeList.contains(dateTime)) {
+                throw new ParseException("You cannot add duplicate meeting times to the group!");
+            }
+            dateTimeList.add(dateTime);
+        }
+        return dateTimeList;
+    }
+
 }

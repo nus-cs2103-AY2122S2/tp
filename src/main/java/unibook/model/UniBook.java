@@ -6,6 +6,7 @@ import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
@@ -237,6 +238,12 @@ public class UniBook implements ReadOnlyUniBook {
         removeGroupFromAllStudents(key.getModuleCode());
     }
 
+    /**
+     * Remove module by matching the module code, also removes modules from all students and all groups from students
+     * relating to that module
+     *
+     * @param key
+     */
     public void removeByModuleCode(ModuleCode key) {
         modules.removeByModuleCode(key);
         removeModuleFromAllPersons(key);
@@ -314,13 +321,26 @@ public class UniBook implements ReadOnlyUniBook {
         persons.deleteProfs(profsToBeDeleted);
     }
 
+    public void deleteGroupFromAllPersons(ModuleCode moduleCode, Group group) {
+        persons.deleteGroupFromAllPersons(moduleCode, group);
+    }
+
     /**
      * Delete all groups that match the group name provided from all persons
      *
-     * @param group
+     * @param groupName
      */
-    public void deleteGroupFromAllPersons(ModuleCode moduleCode, Group group) {
-        persons.deleteGroupFromAllPersons(moduleCode, group);
+    public ObservableList<Group> getGroupsWithGroupName(String groupName) {
+        requireNonNull(groupName);
+        ObservableList<Group> groups = FXCollections.observableArrayList();
+        for (Module m : modules) {
+            Group g = m.getGroupByName(groupName);
+            if (g != null) {
+                groups.add(m.getGroupByName(groupName));
+            }
+        }
+
+        return groups;
     }
 
     /**
@@ -370,6 +390,8 @@ public class UniBook implements ReadOnlyUniBook {
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
+
+
 
     @Override
     public boolean equals(Object other) {

@@ -1,7 +1,5 @@
 package unibook.logic.parser;
 
-import java.util.Arrays;
-import java.util.Locale;
 import java.util.stream.Stream;
 
 import unibook.commons.core.Messages;
@@ -16,15 +14,15 @@ import unibook.model.module.group.Group;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
+    private static final String MODULE_MISSING = "Module code is missing! Example: m/modulecode";
+    private static final String MODULE_AND_GROUP_MISSING = "Group name and Module code is missing! "
+            + "Example: m/modulecode g/groupname";
+    private static final String WRONG_OPTION = "Only o/module or o/group is allowed";
+    private static final String GROUP_MISSING = "Group name is missing! Example: g/groupname";
+
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
-    private static final String WRONG_OPTION = "Only o/module or o/group is allowed";
-    private static final String MODULE_MISSING = "Module code is missing! Example: m/modulecode";
-    private static final String GROUP_MISSING = "Group name is missing! Example: g/groupname";
-    private static final String MODULE_AND_GROUP_MISSING = "Group name and Module code is missing! " +
-            "Example: m/modulecode g/groupname";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -80,8 +78,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             profIndexPresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PROF_INDEX);
             stuIndexPresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_STU_INDEX);
             keyEventPresent = arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KE_INDEX);
-            onlyIndexPresent = !moduleCodePresent && !optionPresent && !groupPresent && !meetingTimePresent &&
-                    !phonePresent && !emailPresent && !tagPresent && !officePresent && !profIndexPresent
+            onlyIndexPresent = !moduleCodePresent && !optionPresent && !groupPresent && !meetingTimePresent
+                    && !phonePresent && !emailPresent && !tagPresent && !officePresent && !profIndexPresent
                     && !stuIndexPresent && !keyEventPresent && indexPresent;
 
             // delete index case
@@ -91,11 +89,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             } else if (optionPresent) { // delete module code or group
                 String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get().toLowerCase();
-                System.out.println(option);
-                System.out.println(option.equals("group"));
-                System.out.println(!moduleCodePresent && !groupPresent);
-                System.out.println(!moduleCodePresent);
-                System.out.println(!groupPresent);
                 if (option.equals("module")) {
                     if (!moduleCodePresent) {
                         throw new ParseException(MODULE_MISSING);
@@ -159,8 +152,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             } else if (indexPresent && keyEventPresent) {
 
                 Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
-                String KeyEventIndexString = argMultimap.getValue(CliSyntax.PREFIX_KE_INDEX).get();
-                Index keyEventIndex = ParserUtil.parseIndex(KeyEventIndexString);
+                String keyEventIndexString = argMultimap.getValue(CliSyntax.PREFIX_KE_INDEX).get();
+                Index keyEventIndex = ParserUtil.parseIndex(keyEventIndexString);
                 return new DeleteCommand(index, null, null, null, keyEventIndex);
 
             }

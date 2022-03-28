@@ -60,11 +60,11 @@ public abstract class Person {
         return email;
     }
 
-    abstract public Person deletePhone();
+    public abstract Person deletePhone();
 
-    abstract public Person deleteEmail();
+    public abstract Person deleteEmail();
 
-    abstract public Person deleteTag(String tag);
+    public abstract Person deleteTag(String tag);
 
 
     /**
@@ -152,6 +152,9 @@ public abstract class Person {
         }
     }
 
+    /**
+     * Remove this person from Person List in all modules that this person is involved in
+     */
     public void removePersonFromAllTheirModules() {
         for (Module module : this.getModules()) {
             module.removePerson(this);

@@ -174,6 +174,12 @@ public class UniquePersonList implements Iterable<Person> {
         return true;
     }
 
+    /**
+     * Delete the specified Group from all persons in person list
+     *
+     * @param moduleCode
+     * @param group
+     */
     public void deleteGroupFromAllPersons(ModuleCode moduleCode, Group group) {
         for (Person person : internalList) {
             if (person instanceof Student && person.hasModule(moduleCode)) {
@@ -183,10 +189,15 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Remove all groups from all students that are associated with this module code
+     *
+     * @param moduleCode
+     */
     public void removeGroupFromAllStudents(ModuleCode moduleCode) {
         for (Person person : internalList) {
             if (person instanceof Student) {
-                Student student = (Student)person;
+                Student student = (Student) person;
                 student.removeGroup(moduleCode);
             }
         }

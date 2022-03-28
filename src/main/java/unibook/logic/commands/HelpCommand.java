@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) {
+                                 Boolean isModuleListShowing, Boolean isGroupListShowing) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }

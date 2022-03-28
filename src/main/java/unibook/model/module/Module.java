@@ -3,6 +3,9 @@ package unibook.model.module;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import javafx.collections.FXCollections;
@@ -65,6 +68,23 @@ public class Module {
         this.students = FXCollections.observableArrayList();
         this.professors = FXCollections.observableArrayList();
         this.keyEvents = FXCollections.observableArrayList();
+    }
+
+    /**
+     * Constructor for a Module, using a pre-existing list of key dates.
+     *
+     * @param moduleName
+     * @param moduleCode
+     * @param keyEvents
+     */
+    public Module(ObservableList<ModuleKeyEvent> keyEvents, ModuleName moduleName, ModuleCode moduleCode) {
+        requireAllNonNull(moduleName, moduleCode, keyEvents);
+        this.moduleName = moduleName;
+        this.moduleCode = moduleCode;
+        this.groups = FXCollections.observableArrayList();
+        this.students = FXCollections.observableArrayList();
+        this.professors = FXCollections.observableArrayList();
+        this.keyEvents = keyEvents;
     }
 
     /**
@@ -207,11 +227,11 @@ public class Module {
     public Group getGroupByName(String grpName) {
         requireNonNull(grpName);
         for (Group grp : groups) {
-            if (grp.getGroupName().equals(grpName)) {
+            if ((grp.getGroupName().toLowerCase()).equals(grpName.toLowerCase())) {
                 return grp;
             }
         }
-        throw new GroupNotFoundException();
+        return null;
     }
 
     /**
@@ -256,7 +276,7 @@ public class Module {
     /**
      * Adds key event to the correct module.
      *
-     * @param k
+     * @param k ModuleKeyEvent
      */
     public void addKeyEvent(ModuleKeyEvent k) {
         requireNonNull(k);
@@ -273,6 +293,21 @@ public class Module {
      */
     public void deleteKeyEvent(int index) {
         keyEvents.remove(index);
+    }
+
+    /**
+     * Adds a list of key events to the correct module.
+     *
+     * @param keyEventsList ArrayList of ModuleKeyEvent
+     */
+    public void addKeyEventList(ArrayList<ModuleKeyEvent> keyEventsList) {
+        requireNonNull(keyEventsList);
+        for (ModuleKeyEvent moduleKeyEvent : keyEventsList) {
+            if (keyEvents.contains(moduleKeyEvent)) {
+                throw new DuplicateKeyEventException();
+            }
+            keyEvents.add(moduleKeyEvent);
+        }
     }
 
     /**
@@ -316,6 +351,23 @@ public class Module {
     }
 
     /**
+     * Returns rue if this module contains the key event with the given event name and datetime.
+     *
+     * @param keyEvent key event name to check
+     * @param dateTime datetime of key event to check
+     * @return boolean variable indicating if the key event exists in this module
+     */
+    public boolean hasEvent(ModuleKeyEvent.KeyEventType keyEvent, LocalDateTime dateTime) {
+        for (ModuleKeyEvent moduleKeyEvent : keyEvents) {
+            if (moduleKeyEvent.getKeyEventType().equals(keyEvent)
+                    && moduleKeyEvent.getKeyEventTiming().equals(dateTime)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Remove a person from students or professors list depending on whether person is a student or professor
      * and if present
      *
@@ -342,6 +394,18 @@ public class Module {
 
     public ObservableList<ModuleKeyEvent> getKeyEvents() {
         return this.keyEvents;
+    }
+
+    public ObservableList<LocalDate> getKeyEventDates() {
+        ObservableList<LocalDate> keyEventDates = FXCollections.observableArrayList();
+        for (ModuleKeyEvent k : keyEvents) {
+            keyEventDates.add(k.getKeyEventDate());
+        }
+        return keyEventDates;
+    }
+
+    public boolean hasKeyEventDate(LocalDate date) {
+        return getKeyEventDates().contains(date);
     }
 
     /**
@@ -390,5 +454,4 @@ public class Module {
             .append(getKeyEvents());
         return builder.toString();
     }
-
 }

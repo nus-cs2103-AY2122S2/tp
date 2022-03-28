@@ -3,7 +3,6 @@ package unibook.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,14 +39,29 @@ public class Student extends Person {
             person.getTags(), person.getModules(), groups);
     }
 
+    /**
+     * Returns a new Student Object with phone removed
+     *
+     * @return Student with phone deleted
+     */
     public Student deletePhone() {
         return new Student(getName(), new Phone(), getEmail(), getTags(), getModules(), groups);
     }
 
+    /**
+     * Returns a new Student Object with email removed
+     *
+     * @return Student with email deleted
+     */
     public Student deleteEmail() {
         return new Student(getName(), getPhone(), new Email(), getTags(), getModules(), groups);
     }
 
+    /**
+     * Returns a new Student Object with specific tag removed
+     *
+     * @return Student with specific tag deleted
+     */
     public Student deleteTag(String tagNameToDelete) {
         Set<Tag> tags = getTags();
         Set<Tag> newTags = new HashSet<>();
@@ -59,12 +73,18 @@ public class Student extends Person {
         return new Student(getName(), getPhone(), getEmail(), newTags, getModules(), groups);
     }
 
+    /**
+     * Add Student to all their groups.
+     */
     public void addStudentToAllTheirGroups() {
         for (Group group: groups) {
             group.addMember(this);
         }
     }
 
+    /**
+     * Remove this student from all their groups.
+     */
     public void removeStudentFromAllTheirGroups() {
         for (Group group: groups) {
             group.removeMember(this);
@@ -102,6 +122,12 @@ public class Student extends Person {
         return groups;
     }
 
+    /**
+     * Remove Group from this student
+     *
+     * @param moduleCode
+     * @param group
+     */
     public void removeGroup(ModuleCode moduleCode, Group group) {
         Set<Group> toBeDeleted = new HashSet<>();
         for (Group g : groups) {
@@ -114,6 +140,11 @@ public class Student extends Person {
         }
     }
 
+    /**
+     * Remove all groups that is part of the module from this student
+     *
+     * @param moduleCode
+     */
     public void removeGroup(ModuleCode moduleCode) {
         Set<Group> toBeDeleted = new HashSet<>();
         for (Group g : groups) {

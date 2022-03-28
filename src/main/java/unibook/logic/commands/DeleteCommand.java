@@ -43,16 +43,18 @@ public class DeleteCommand extends Command {
     public static final String EMAIL = "Email: ";
     public static final String TAG = "Tag: ";
     public static final String OFFICE = "Office: ";
-    public static final String MESSAGE_DELETE_PROF_FROM_MODULE_SUCCESS = "Successfully deleted Prof: %1$s " +
-            "from Module: %2$s";
-    public static final String MESSAGE_DELETE_STUDENT_FROM_MODULE_SUCCESS = "Successfully deleted Student: %1$s " +
-            "from Module: %2$s";
-    public static final String MESSAGE_DELETE_GROUP_FROM_MODULE_SUCCESS = "Successfully deleted Group: %1$s " +
-            "from Module: %2$s";
-    public static final String MESSAGE_DELETE_MEETING_FROM_GROUP_SUCCESS = "Successfully deleted Meeting: %1$s " +
-            "from Group: %2$s";
-    public static final String MESSAGE_DELETE_KEY_EVENT_FROM_MODULE_SUCCESS = "Successfully deleted Key Event: %1$s " +
-            "from Module: %2$s";
+    public static final String MESSAGE_DELETE_PROF_FROM_MODULE_SUCCESS = "Successfully deleted Prof: %1$s "
+            + "from Module: %2$s";
+    public static final String MESSAGE_DELETE_STUDENT_FROM_MODULE_SUCCESS = "Successfully deleted Student: %1$s "
+            + "from Module: %2$s";
+    public static final String MESSAGE_DELETE_STUDENT_FROM_GROUP_SUCCESS = "Successfully deleted Student: %1$s "
+            + "from Group: %2$s";
+    public static final String MESSAGE_DELETE_GROUP_FROM_MODULE_SUCCESS = "Successfully deleted Group: %1$s "
+            + "from Module: %2$s";
+    public static final String MESSAGE_DELETE_MEETING_FROM_GROUP_SUCCESS = "Successfully deleted Meeting: %1$s "
+            + "from Group: %2$s";
+    public static final String MESSAGE_DELETE_KEY_EVENT_FROM_MODULE_SUCCESS = "Successfully deleted Key Event: %1$s "
+            + "from Module: %2$s";
 
     private Index targetIndex;
     private boolean indexOnly = false;
@@ -97,6 +99,15 @@ public class DeleteCommand extends Command {
         this.group = group;
     }
 
+    /**
+     * Creates a Delete Command Object that will delete person attributes such as phone, email, tag, office
+     *
+     * @param targetIndex
+     * @param phone
+     * @param email
+     * @param tag
+     * @param office
+     */
     public DeleteCommand(Index targetIndex, boolean phone, boolean email, String tag, boolean office) {
         this.targetIndex = targetIndex;
         this.phone = phone;
@@ -105,6 +116,15 @@ public class DeleteCommand extends Command {
         this.office = office;
     }
 
+    /**
+     * Creates a Delete Command that involves 2 Index
+     *
+     * @param index
+     * @param stuIndex
+     * @param profIndex
+     * @param meetingTimeIndex
+     * @param keyEventIndex
+     */
     public DeleteCommand(Index index, Index stuIndex, Index profIndex, Index meetingTimeIndex, Index keyEventIndex) {
         this.targetIndex = index;
         this.stuIndex = stuIndex;
@@ -113,6 +133,12 @@ public class DeleteCommand extends Command {
         this.keyEventIndex = keyEventIndex;
     }
 
+    /**
+     * Creates a Delete Command that deletes a group
+     *
+     * @param index
+     * @param group
+     */
     public DeleteCommand(Index index, Group group) {
         this.targetIndex = index;
         this.group = group;
@@ -121,10 +147,11 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model,
                                  Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) throws CommandException {
+                                 Boolean isModuleListShowing, Boolean isGroupListShowing) throws CommandException {
         requireNonNull(model);
 
         // delete person by index case
+
         if (indexOnly) {
 
             // if not on person page, throw exception telling user to change pages
@@ -167,23 +194,28 @@ public class DeleteCommand extends Command {
                 model.deleteModule(moduleToDelete); // delete person from UniquePersonList
 
                 return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete.getModuleCode()));
+
+            } else if (isGroupListShowing) {
+
+                System.out.println(isGroupListShowing);
+
+                List<Group> lastShownGroupList = model.getShowingGroupList();
+
+                // list o/view v/groups
+
+                if (targetIndex.getZeroBased() >= lastShownGroupList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+                }
+
+                Group groupToDelete = lastShownGroupList.get(targetIndex.getZeroBased());
+                Module moduleThatHasThisGroup = groupToDelete.getModule();
+                model.removeGroup(moduleThatHasThisGroup.getModuleCode(), groupToDelete);
+                lastShownGroupList.remove(targetIndex.getZeroBased());
+
+
+                return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete.getGroupName()));
+
             }
-//            } else if (isGroupListShowing) {
-//
-//                List<Group> lastShownGroupList = model.getShowingGroupList();
-//
-//                if (targetIndex.getZeroBased() >= lastShownGroupList.size()) {
-//                    throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-//                }
-//
-//                Group groupToDelete = lastShownGroupList.get(targetIndex.getZeroBased());
-//                groupToDelete.removeStudentsFromThisGroup();
-//                Module moduleThatHasThisGroup = groupToDelete.getModule();
-//                moduleThatHasThisGroup.removeGroupByName(groupToDelete);
-//
-//                return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete.getGroupName()));
-//
-//            }
 
 
 
@@ -216,6 +248,8 @@ public class DeleteCommand extends Command {
 
             // module and group exists
             Group removedGroup = model.removeGroup(moduleCode, group);
+            List<Group> lastShownGroupList = model.getShowingGroupList();
+            lastShownGroupList.remove(removedGroup);
             return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, removedGroup));
 
         } else if (phone || email || tag != null || office) { // delete person attributes
@@ -250,26 +284,28 @@ public class DeleteCommand extends Command {
                 newPerson = newPerson.deleteTag(tag);
             }
             if (personToDeleteTrait instanceof Professor && office) {
-                officeDeleted = ((Professor)newPerson).getOffice().toString();
-                newPerson = ((Professor)newPerson).deleteOffice();
+                officeDeleted = ((Professor) newPerson).getOffice().toString();
+                newPerson = ((Professor) newPerson).deleteOffice();
             }
 
             personToDeleteTrait.removePersonFromAllTheirModules();
             model.deletePerson(personToDeleteTrait);
             newPerson.addPersonToAllTheirModules();
             if (personToDeleteTrait instanceof Student) {
-                ((Student) personToDeleteTrait).removeStudentFromAllTheirGroups();
-                ((Student) newPerson).addStudentToAllTheirGroups();
+                Student studentToDeleteTrait = (Student) personToDeleteTrait;
+                studentToDeleteTrait.removeStudentFromAllTheirGroups();
+                Student newStudent = (Student) newPerson;
+                newStudent.addStudentToAllTheirGroups();
             }
             model.addPerson(newPerson);
 
             // message can be improved if have time
             String phoneString = phoneDeleted != null ? PHONE + phoneDeleted + "\n" : "";
-            String emailString = emailDeleted != null ? EMAIL + emailDeleted + "\n": "";
-            String tagString = tagDeleted != null ? TAG + tagDeleted + "\n": "";
-            String officeString = officeDeleted != null ? OFFICE + officeDeleted + "\n": "";
-            return new CommandResult(MESSAGE_DELETE_TRAITS_SUCCESS + phoneString +
-                    emailString + tagString + officeString + "from " + personToDeleteTrait.getName());
+            String emailString = emailDeleted != null ? EMAIL + emailDeleted + "\n" : "";
+            String tagString = tagDeleted != null ? TAG + tagDeleted + "\n" : "";
+            String officeString = officeDeleted != null ? OFFICE + officeDeleted + "\n" : "";
+            return new CommandResult(MESSAGE_DELETE_TRAITS_SUCCESS + phoneString
+                    + emailString + tagString + officeString + "from " + personToDeleteTrait.getName());
 
         } else if (targetIndex != null && profIndex != null) { // delete prof from module
 
@@ -300,30 +336,54 @@ public class DeleteCommand extends Command {
 
         } else if (targetIndex != null && stuIndex != null) { // delete student from module
 
-            if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+            if (isModuleListShowing) {
+
+                List<Module> lastShownModuleList = model.getFilteredModuleList();
+
+                if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+                }
+
+                Module moduleToDeleteStudent = lastShownModuleList.get(targetIndex.getZeroBased());
+                List<Student> lastShownStuList = moduleToDeleteStudent.getStudents();
+
+                if (stuIndex.getZeroBased() >= lastShownStuList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_STU_DISPLAYED_INDEX);
+                }
+
+                Student studentToDelete = lastShownStuList.get(targetIndex.getZeroBased());
+
+                studentToDelete.removeModule(moduleToDeleteStudent.getModuleCode()); // remove module from student
+                moduleToDeleteStudent.removePerson(studentToDelete);
+
+                return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_FROM_MODULE_SUCCESS,
+                        studentToDelete.getName(), moduleToDeleteStudent.getModuleCode()));
+
+            } else if (isGroupListShowing) {
+
+                List<Group> lastShownGroupList = model.getShowingGroupList();
+
+                if (targetIndex.getZeroBased() >= lastShownGroupList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+                }
+
+                Group groupToDeleteStudent = lastShownGroupList.get(targetIndex.getZeroBased());
+                List<Student> listOfStudentsInGroup = groupToDeleteStudent.getMembers();
+
+                if (stuIndex.getZeroBased() >= listOfStudentsInGroup.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_STU_DISPLAYED_INDEX);
+                }
+
+                Student studentToDelete = listOfStudentsInGroup.get(stuIndex.getZeroBased());
+                groupToDeleteStudent.removeMember(studentToDelete);
+                studentToDelete.removeGroup(groupToDeleteStudent.getModule().getModuleCode(), groupToDeleteStudent);
+
+                return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_FROM_GROUP_SUCCESS,
+                        studentToDelete.getName(), groupToDeleteStudent.getGroupName()));
+
             }
 
-            List<Module> lastShownModuleList = model.getFilteredModuleList();
-
-            if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
-            }
-
-            Module moduleToDeleteStudent = lastShownModuleList.get(targetIndex.getZeroBased());
-            List<Student> lastShownStuList = moduleToDeleteStudent.getStudents();
-
-            if (stuIndex.getZeroBased() >= lastShownStuList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_STU_DISPLAYED_INDEX);
-            }
-
-            Student studentToDelete = lastShownStuList.get(targetIndex.getZeroBased());
-
-            studentToDelete.removeModule(moduleToDeleteStudent.getModuleCode()); // remove module from student
-            moduleToDeleteStudent.removePerson(studentToDelete);
-
-            return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_FROM_MODULE_SUCCESS,
-                    studentToDelete.getName(), moduleToDeleteStudent.getModuleCode()));
+            throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE);
 
         } else if (targetIndex != null && group != null) { // delete group from module
 
@@ -350,29 +410,31 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_GROUP_FROM_MODULE_SUCCESS,
                     groupToDelete.getGroupName(), moduleToDeleteGroup.getModuleCode()));
 
-//        } else if (targetIndex != null && meetingTimeIndex != null) { // delete meeting time from group page
-//
-//            if (!isGroupListShowing) {
-//                throw new CommandException(Messages.MESSAGE_CHANGE_TO_GROUP_PAGE);
-//            }
-//
-//            List<Group> lastShownGroupList = model.getShowingGroupList();
-//
-//            if (targetIndex.getZeroBased() >= lastShownGroupList.size()) {
-//                throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-//            }
-//
-//            Group groupToDeleteMeetingTime = lastShownGroupList.get(targetIndex.getZeroBased());
-//            List<LocalDateTime> meetingTimes = groupToDeleteMeetingTime.getMeetingTimes();
-//
-//            if (meetingTimeIndex.getZeroBased() >= meetingTimes.size()) {
-//                throw new CommandException(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
-//            }
-//
-//            groupToDeleteMeetingTime.removeMeetingTime(meetingTimeIndex.getZeroBased());
-//
-//            return new CommandResult(String.format(MESSAGE_DELETE_MEETING_FROM_GROUP_SUCCESS,
-//                    groupToDeleteMeetingTime.getGroupName()));
+        } else if (targetIndex != null && meetingTimeIndex != null) { // delete meeting time from group page
+
+            if (!isGroupListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_GROUP_PAGE);
+            }
+
+            List<Group> lastShownGroupList = model.getShowingGroupList();
+
+            if (targetIndex.getZeroBased() >= lastShownGroupList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+            }
+
+            Group groupToDeleteMeetingTime = lastShownGroupList.get(targetIndex.getZeroBased());
+            List<LocalDateTime> meetingTimes = groupToDeleteMeetingTime.getMeetingTimes();
+
+            if (meetingTimeIndex.getZeroBased() >= meetingTimes.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
+            }
+
+            LocalDateTime meetingToDelete = meetingTimes.get(meetingTimeIndex.getZeroBased());
+            groupToDeleteMeetingTime.removeMeetingTime(meetingTimeIndex.getZeroBased());
+
+            return new CommandResult(String.format(MESSAGE_DELETE_MEETING_FROM_GROUP_SUCCESS,
+                    meetingToDelete,
+                    groupToDeleteMeetingTime.getGroupName()));
 
         } else if (targetIndex != null && keyEventIndex != null) {
 
