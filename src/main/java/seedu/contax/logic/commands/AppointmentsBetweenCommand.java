@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
-import seedu.contax.model.appointment.DateRangePredicate;
+import seedu.contax.model.chrono.DateRangePredicate;
 
 /**
  * Lists all Appointments within a period.
@@ -49,8 +49,8 @@ public class AppointmentsBetweenCommand extends Command {
     /**
      * Constructs an {@code AppointmentsBetweenCommand} object.
      *
-     * @param rangeStart
-     * @param rangeEnd
+     * @param rangeStart The start of the date-time range to search.
+     * @param rangeEnd The end of the date-time range to search.
      */
     public AppointmentsBetweenCommand(LocalDateTime rangeStart, LocalDateTime rangeEnd) {
         requireNonNull(rangeStart);
