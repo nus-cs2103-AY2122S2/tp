@@ -10,12 +10,9 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
-import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.appointment.DateRangePredicate;
 import seedu.contax.model.chrono.TimeRange;
 
@@ -71,12 +68,7 @@ public class FreeBetweenCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
-        List<TimeRange> slotsFound = model.getSchedule()
-                .findSlotsBetweenAppointments(rangeStart, rangeEnd, duration);
-        List<AppointmentSlot> slotList = slotsFound.stream()
-                .map(AppointmentSlot::new)
-                .collect(Collectors.toList());
-        model.setDisplayedAppointmentSlots(slotList);
+        model.setDisplayedAppointmentSlotRange(new TimeRange(rangeStart, rangeEnd), duration);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
         String responseMessage = String.format(MESSAGE_SUCCESS, duration, rangeStart.format(formatter),

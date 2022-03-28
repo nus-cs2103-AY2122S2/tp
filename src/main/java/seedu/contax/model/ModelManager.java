@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
@@ -17,6 +16,7 @@ import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -33,8 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Appointment> filteredAppointments;
     private final FilteredList<Tag> filteredTags;
 
-    private final ObservableList<AppointmentSlot> displayedAppointmentSlots;
-    private final ObservableList<AppointmentSlot> unmodifiableDisplayedAppointmentSlots;
+    private final AppointmentSlotList displayedAppointmentSlots;
     private final CompositeTemporalObservableList<ScheduleItem> scheduleItemList;
 
     /**
@@ -54,11 +53,9 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
-        displayedAppointmentSlots = FXCollections.observableArrayList();
-        unmodifiableDisplayedAppointmentSlots =
-                FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
+        displayedAppointmentSlots = new AppointmentSlotList(this.schedule);
         scheduleItemList = new CompositeTemporalObservableList<>(filteredAppointments,
-                unmodifiableDisplayedAppointmentSlots);
+                displayedAppointmentSlots.getSlotList());
     }
 
     /**
@@ -292,18 +289,18 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
-        return unmodifiableDisplayedAppointmentSlots;
+        return displayedAppointmentSlots.getSlotList();
     }
 
     @Override
-    public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
-        requireNonNull(items);
-        displayedAppointmentSlots.setAll(items);
+    public void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration) {
+        requireNonNull(range);
+        displayedAppointmentSlots.updateFilteredRange(range, minimumDuration);
     }
 
     @Override
     public void clearDisplayedAppointmentSlots() {
-        displayedAppointmentSlots.clear();
+        displayedAppointmentSlots.updateFilteredRange(null, 0);
     }
 
     @Override

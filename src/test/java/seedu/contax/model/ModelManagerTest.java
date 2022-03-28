@@ -384,21 +384,36 @@ public class ModelManagerTest {
 
     @Test
     public void setDisplayedAppointmentSlots_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setDisplayedAppointmentSlots(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setDisplayedAppointmentSlotRange(null, 1));
     }
 
     @Test
-    public void setDisplayedAppointmentSlots_validList_success() {
+    public void setDisplayedAppointmentSlots_validTimeRange_success() {
         List<AppointmentSlot> sampleSlots = List.of(
-                new AppointmentSlot(new TimeRange(LocalDate.of(2022, 1, 1).atStartOfDay(),
-                        LocalDate.of(2022, 1, 1).atTime(23, 59))),
-                new AppointmentSlot(new TimeRange(LocalDate.of(2022, 1, 2).atStartOfDay(),
-                        LocalDate.of(2022, 1, 2).atTime(23, 59))),
-                new AppointmentSlot(new TimeRange(LocalDate.of(2022, 2, 3).atStartOfDay(),
-                        LocalDate.of(2022, 2, 3).atTime(23, 59)))
+                new AppointmentSlot(new TimeRange(
+                        LocalDate.of(2022, 5, 3).atTime(10, 59),
+                        LocalDate.of(2022, 5, 3).atTime(12, 0))
+                ),
+                new AppointmentSlot(new TimeRange(
+                        LocalDate.of(2022, 5, 3).atTime(12, 30),
+                        LocalDate.of(2022, 5, 3).atTime(14, 0))
+                )
         );
+        modelManager.addAppointment(new AppointmentBuilder().withName("Test 1")
+                .withStartDateTime(LocalDateTime.of(2022, 5, 3, 12, 0))
+                .withDuration(30).build()
+        );
+        modelManager.addAppointment(new AppointmentBuilder().withName("Test 2")
+                .withStartDateTime(LocalDateTime.of(2022, 5, 3, 14, 0))
+                .withDuration(60).build()
+        );
+
         assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
-        modelManager.setDisplayedAppointmentSlots(sampleSlots);
+        modelManager.setDisplayedAppointmentSlotRange(
+                new TimeRange(
+                        LocalDate.of(2022, 5, 3).atTime(10, 59),
+                        LocalDate.of(2022, 5, 3).atTime(15, 0)
+                ),61);
         assertEquals(sampleSlots, modelManager.getDisplayedAppointmentSlots());
         modelManager.clearDisplayedAppointmentSlots();
         assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
@@ -455,7 +470,8 @@ public class ModelManagerTest {
                 new AppointmentSlot(new TimeRange(LocalDateTime.MIN, LocalDateTime.MAX))
         );
         ModelManager differentModelManager = new ModelManager();
-        differentModelManager.setDisplayedAppointmentSlots(differentAppointmentSlots);
+        differentModelManager.setDisplayedAppointmentSlotRange(new TimeRange(LocalDateTime.MIN,
+                LocalDateTime.MAX), 1);
         assertFalse(modelManager.equals(differentModelManager));
     }
 }

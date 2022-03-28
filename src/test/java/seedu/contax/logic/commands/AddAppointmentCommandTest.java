@@ -31,6 +31,7 @@ import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
@@ -287,7 +288,7 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public void setDisplayedAppointmentSlots(List<AppointmentSlot> items) {
+        public void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration) {
             throw new AssertionError("This method should not be called.");
         }
 
