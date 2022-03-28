@@ -23,12 +23,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.commons.util.CollectionUtil;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
+import unibook.model.ModelManager;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleKeyEvent;
@@ -55,6 +57,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the module.";
+    public static final String MESSAGE_DUPLICATE_PERSON_IN_GROUP = "This person already exists in the group.";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edit Group success!";
@@ -298,13 +301,11 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Module> latestModList = model.getFilteredModuleList();
 
-        System.out.println(this.editModuleDescriptor == null);
-        System.out.println(this.editPersonDescriptor == null);
         // TODO MAIN LOGIC FOR EDIT GROUP CROSS FINGER UPDATE...LIST WORKS
         if (this.editModuleDescriptor != null && this.editPersonDescriptor != null) {
             System.out.println("entered correct logic");
-            if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+            if (!isGroupListShowing && !isModuleListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE);
             }
             EditGroupDescriptor editGroupDescriptor = this.editModuleDescriptor.getGroups().get();
             editGroupDescriptor.setModel(model);
@@ -317,6 +318,7 @@ public class EditCommand extends Command {
                 throw new ModuleNotFoundException(mod.toString());
             }
 
+            ObservableList<Group> groups = FXCollections.observableArrayList();;
             // Update groups in person and modules
             for (Person p : lastShownList) {
                 if (p instanceof Student) {
@@ -331,8 +333,11 @@ public class EditCommand extends Command {
                         throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                     }
                     m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
+                    groups = m.getGroups();
                 }
             }
+            ModelManager mm = (ModelManager) model;
+            ((ModelManager) model).getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
             System.out.println("updated module list");
             // TODO make the command result for editing success more elaborate
@@ -369,7 +374,6 @@ public class EditCommand extends Command {
             }
 
 
-            ModuleCode modCode = editPersonDescriptor.getModCode().get();
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
             // TODO checks if person alr in module
@@ -418,12 +422,19 @@ public class EditCommand extends Command {
                 }
             }
 
-
+            System.out.println(editPersonDescriptor.getModCode().isPresent() + "there");
+            System.out.println(editPersonDescriptor.getGroupName().isPresent() + "there");
             // TODO STILL NEED TO UPDATE THE GRPS OF OTHER STUDENTS
             if (editPersonDescriptor.getModCode().isPresent() && editPersonDescriptor.getGroupName().isPresent()) {
                 ModuleCode moduleCode = editPersonDescriptor.getModCode().get();
                 String groupName = editPersonDescriptor.getGroupName().get();
-                Module modToEdit = model.getModuleByCode(moduleCode);
+                System.out.println("entered");
+                Module modToEdit;
+                try {
+                    modToEdit = model.getModuleByCode(moduleCode);
+                } catch (ModuleNotFoundException e) {
+                    throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode.toString()));
+                }
                 if (!modToEdit.hasGroupName(groupName)) {
                     // TODO command exception that group doesnt exist
                     throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXIST, groupName));
@@ -435,6 +446,9 @@ public class EditCommand extends Command {
                     } else {
                         modToEdit.addToGroupByName(groupName, (Student) editedPerson);
                         Group group = modToEdit.getGroupByName(groupName);
+                        if (group.hasMember((Student)editedPerson)) {
+                            throw new CommandException(MESSAGE_DUPLICATE_PERSON_IN_GROUP);
+                        }
                         for (Person p : lastShownList) {
                             if (p instanceof Student) {
                                 if (((Student) p).getGroups().contains(group)) {
@@ -533,6 +547,8 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setModules(toCopy.modules);
             setGroups(toCopy.editGroupDescriptor);
+            setModCode(toCopy.getModCode());
+            setGroupName(toCopy.getGroupName());
 
         }
 
@@ -540,7 +556,10 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules);
+            System.out.println(groupName.isPresent());
+            System.out.println(modCode.isPresent());
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules)
+                    || (groupName.isPresent() && modCode.isPresent());
         }
 
         public Optional<Name> getName() {

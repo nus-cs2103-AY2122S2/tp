@@ -78,6 +78,20 @@ public class Group {
     }
 
     /**
+     * Returns of whether student in group
+     *
+     * @return boolean of whether student exists.
+     */
+    public boolean hasMember(Student s) {
+        for (Student student : members) {
+            if (student.equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Edit the group name of the group object.
      */
     public void editGroupName(String name) {

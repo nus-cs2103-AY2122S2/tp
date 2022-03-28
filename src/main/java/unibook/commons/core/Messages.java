@@ -16,6 +16,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Changed page to Module Page!";
+    public static final String MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE = "Changed page to Module or Group Page!";
     public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Changed page to Person Page!";
     public static final String MESSAGE_CHANGE_TO_GROUP_PAGE = "Changed page to Group Page!";
     public static final String MESSAGE_MODULE_CODE_NOT_EXIST = "Module Code does not exist: %1$s";
