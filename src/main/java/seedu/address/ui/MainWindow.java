@@ -32,8 +32,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ScheduleListPanel scheduleListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private boolean isDarkMode;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane scheduleListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -62,6 +68,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        this.isDarkMode = true;
 
         setAccelerators();
 
@@ -113,6 +121,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
+        scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -163,6 +174,22 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Changes to dark mode.
+     */
+    @FXML
+    private void handleToDark() {
+        loadFxmlFile(getFxmlFileUrl("MainWindow.fxml"), primaryStage);
+        this.isDarkMode = true;
+        fillInnerParts();
+    }
+
+    private void handleToLight() {
+        loadFxmlFile(getFxmlFileUrl("MainWindowLightMode.fxml"), primaryStage);
+        this.isDarkMode = false;
+        fillInnerParts();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +211,22 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isToDark()) {
+                if (isDarkMode) {
+                    resultDisplay.setFeedbackToUser("MyGM is already in dark mode.");
+                } else {
+                    handleToDark();
+                }
+            }
+
+            if (commandResult.isToLight()) {
+                if (!isDarkMode) {
+                    resultDisplay.setFeedbackToUser("MyGM is already in light mode.");
+                } else {
+                    handleToLight();
+                }
             }
 
             return commandResult;

@@ -24,10 +24,41 @@ import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.ScheduleBuilder;
 
 public class AddCommandTest {
+    private static final Person VALID_PERSON = new PersonBuilder().withName("Joel")
+            .withEmail("joel@example.com").withPhone("1267912")
+            .withHeight("221").withJerseyNumber("83").withWeight("120")
+            .withTags("C").build();
+    private static final Person INVALID_PERSON = new PersonBuilder().withName("Alice Pauline").build();
+    private static final Person INVALID_PERSON_2 = new PersonBuilder()
+            .withName("Daniel Lee").withJerseyNumber("2").build();
+    private static final Lineup VALID_LINEUP = new Lineup(new LineupName("Dummy"));
+    private static final Lineup VALID_LINEUP_2 = new LineupBuilder().build();
+    private Model model;
+    private Model expectedModel;
+
+    @Test
+    public void execute_addLineup_success() throws CommandException {
+        expectedModel.addLineup(VALID_LINEUP_2);
+        CommandResult commandResult = new AddCommand(VALID_LINEUP_2).execute(model);
+        assertEquals(commandResult.getFeedbackToUser(),
+                String.format(AddCommand.MESSAGE_ADD_LINEUP_SUCCESS, VALID_LINEUP_2));
+    }
+
+    @Test
+    public void getExecute_invalidAddLineup_duplicateLineup() {
+        Command command = new AddCommand(VALID_LINEUP);
+        try {
+            command.execute(model);
+        } catch (CommandException e) {
+            assertEquals(AddCommand.MESSAGE_DUPLICATE_LINEUP_NAME, e.getMessage());
+        }
+    }
+
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand((Person) null));
