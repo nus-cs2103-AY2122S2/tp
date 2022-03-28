@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Objects;
 import javax.imageio.ImageIO;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Creates a UserImage object that contains an image file with description
  */
@@ -22,6 +24,7 @@ public class UserImage {
      * @param description description to be attached to image
      */
     public UserImage(FilePath filePath, String description) {
+        requireAllNonNull(filePath, description);
         this.filePath = filePath;
         this.description = description;
         this.image = new File(filePath.value);

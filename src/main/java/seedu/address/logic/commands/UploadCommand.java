@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -32,16 +33,16 @@ public class UploadCommand extends Command {
     public static final String MESSAGE_FILE_NOT_IMAGE = "File provided is not a image file";
 
     private final Index targetIndex;
-    private final UserImage userImage;
+    private final Set<UserImage> userImages;
 
     /**
      * @param targetIndex index of person to upload to
-     * @param userImage Image to be associated to person
+     * @param userImages Images to be associated to person
      */
-    public UploadCommand(Index targetIndex, UserImage userImage) {
-        requireAllNonNull(targetIndex, userImage);
+    public UploadCommand(Index targetIndex, Set<UserImage> userImages) {
+        requireAllNonNull(targetIndex, userImages);
         this.targetIndex = targetIndex;
-        this.userImage = userImage;
+        this.userImages = userImages;
     }
 
     @Override
@@ -51,12 +52,14 @@ public class UploadCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (!userImage.isImage()) {
-            throw new CommandException(MESSAGE_FILE_NOT_IMAGE);
+        for (UserImage userImage : userImages) {
+            if (!userImage.isImage()) {
+                throw new CommandException(MESSAGE_FILE_NOT_IMAGE);
+            }
         }
 
         Person personToUpload = lastShownList.get(targetIndex.getZeroBased());
-        personToUpload.getUserImages().add(userImage);
+        personToUpload.getUserImages().addAll(userImages);
         return new CommandResult(MESSAGE_UPLOAD_SUCCESS);
     }
 
@@ -65,6 +68,6 @@ public class UploadCommand extends Command {
         return other == this // short circuit if same object
             || (other instanceof UploadCommand // instanceof handles nulls
             && targetIndex.equals(((UploadCommand) other).targetIndex))
-            && userImage.equals((((UploadCommand) other).userImage));
+            && userImages.equals((((UploadCommand) other).userImages));
     }
 }

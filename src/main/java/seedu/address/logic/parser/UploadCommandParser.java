@@ -9,6 +9,8 @@ import seedu.address.logic.commands.UploadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.userimage.UserImage;
 
+import java.util.Set;
+
 /**
  * Parses input arguments and creates a new UploadCommand object
  */
@@ -25,7 +27,7 @@ public class UploadCommandParser implements Parser<UploadCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UploadCommand.MESSAGE_USAGE), pe);
         }
-        UserImage userImage = ParserUtil.parseUserImage(argMultimap.getValue(PREFIX_USERIMAGE).get());
-        return new UploadCommand(index, userImage);
+        Set<UserImage> userImages = ParserUtil.parseUserImages(argMultimap.getAllValues(PREFIX_USERIMAGE));
+        return new UploadCommand(index, userImages);
     }
 }

@@ -242,7 +242,7 @@ public class ParserUtil {
         String[] splitUserImage = trimmedUserImage.split(":");
 
         FilePath filePath = parseFilePath(splitUserImage[0]);
-        String description = null;
+        String description = "";
         if (splitUserImage.length == 2) {
             description = parseDescription(splitUserImage[1]);
         }
