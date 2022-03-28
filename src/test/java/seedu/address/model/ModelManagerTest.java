@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
+import seedu.address.model.lab.StudentHasLabPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.LabNotFoundException;
@@ -176,5 +178,32 @@ public class ModelManagerTest {
     public void addLab_duplicateLab_throwsDuplicateLabException() {
         modelManager.addLab(new Lab("1"));
         assertThrows(DuplicateLabException.class, () -> modelManager.addLab(new Lab("1")));
+    }
+
+    @Test
+    public void addOnFilteredStudentList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addOnFilteredStudentList(null));
+    }
+
+    @Test
+    public void addOnFilteredStudentList_validPredicate_success() {
+        AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        // current predicate on filtered student list == null
+        assertDoesNotThrow(() ->
+                modelManager.addOnFilteredStudentList(
+                        new StudentHasLabPredicate((new Lab("1")).of(LabStatus.UNSUBMITTED))
+                )
+        );
+
+        // add on to the current predicate
+        assertDoesNotThrow(() ->
+                modelManager.addOnFilteredStudentList(
+                        new StudentHasLabPredicate((new Lab("2")).of(LabStatus.UNSUBMITTED))
+                )
+        );
     }
 }
