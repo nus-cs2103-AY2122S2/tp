@@ -1,12 +1,12 @@
 package seedu.address.model.pet.comparator;
 
-import seedu.address.model.attendance.AttendanceEntry;
-import seedu.address.model.attendance.PresentAttendanceEntry;
-import seedu.address.model.pet.Pet;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Comparator;
+
+import seedu.address.model.attendance.AttendanceEntry;
+import seedu.address.model.attendance.PresentAttendanceEntry;
+import seedu.address.model.pet.Pet;
 
 /**
  * Comparator class to compare pets based on pet's Drop Off Time.
