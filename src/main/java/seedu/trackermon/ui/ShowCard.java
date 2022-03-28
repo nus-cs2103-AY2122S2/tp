@@ -10,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.trackermon.MainApp;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 
 /**
@@ -20,7 +21,6 @@ public class ShowCard extends UiPart<Region> {
     private static final String FXML = "ShowListCard.fxml";
     private static final String ICON_STAR = "/images/icon_star_30.png";
     private static final String ICON_STAR_FILLED = "/images/icon_star_filled_30.png";
-    private static final int MAX_RATING = 5; // Move this max rating to Rating class
     private static final double IMAGE_SIZE = 20;
 
     /**
@@ -58,14 +58,14 @@ public class ShowCard extends UiPart<Region> {
 
         String statusString = show.getStatus().toString();
         String statusMessage = "[" + statusString.substring(0, 1).toUpperCase()
-                + statusString.substring(1, statusString.length()) + "]";
+                + statusString.substring(1) + "]";
         status.setText(statusMessage);
         show.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        int curRating = (int) Math.round(Math.random() * MAX_RATING); // Remove this line when rating is done
-        for (int i = 0; i < MAX_RATING; i++) { // Change MAX_RATING to Rating.MAX_RATING
-            if (i <= curRating) { // Change curRating to show.getRating()
+
+        for (int i = 0; i < Rating.MAX_RATING; i++) {
+            if (i < show.getRating().rating) {
                 ratings.getChildren().add(getImageNode(ICON_STAR_FILLED));
             } else {
                 ratings.getChildren().add(getImageNode(ICON_STAR));
