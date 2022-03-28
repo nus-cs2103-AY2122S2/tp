@@ -39,6 +39,8 @@ import seedu.address.model.medical.Weight;
 import seedu.address.model.patient.Nric;
 
 public class AddMedicalCommandParser implements Parser<AddMedicalCommand> {
+    public static final String EMPTY_PLACEHOLDER = "nil";
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -55,65 +57,40 @@ public class AddMedicalCommandParser implements Parser<AddMedicalCommand> {
      */
     public AddMedicalCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap;
-        argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_TYPE,
-                PREFIX_NRIC,
-                PREFIX_AGE,
-                PREFIX_BLOODTYPE,
-                PREFIX_MEDICATION,
-                PREFIX_HEIGHT,
-                PREFIX_WEIGHT,
-                PREFIX_ILLNESSES,
-                PREFIX_SURGERIES,
-                PREFIX_FAMILY_HISTORY,
-                PREFIX_IMMUNIZATION_HISTORY,
-                PREFIX_GENDER,
-                PREFIX_ETHNICITY);
+        argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_AGE, PREFIX_BLOODTYPE,
+                PREFIX_MEDICATION, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_ILLNESSES, PREFIX_SURGERIES,
+                PREFIX_FAMILY_HISTORY, PREFIX_IMMUNIZATION_HISTORY, PREFIX_GENDER, PREFIX_ETHNICITY);
 
-        if (!arePrefixesPresent(argMultimap,
-                PREFIX_TYPE,
-                PREFIX_NRIC,
-                PREFIX_AGE,
-                PREFIX_BLOODTYPE,
-                PREFIX_MEDICATION,
-                PREFIX_HEIGHT,
-                PREFIX_WEIGHT,
-                PREFIX_ILLNESSES,
-                PREFIX_SURGERIES,
-                PREFIX_FAMILY_HISTORY,
-                PREFIX_IMMUNIZATION_HISTORY,
-                PREFIX_GENDER,
-                PREFIX_ETHNICITY)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMedicalCommand.MESSAGE_USAGE));
         }
 
         Nric patientNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-        Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
-        BloodType bloodtype = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).get());
-        Medication medication = ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get());
-        Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());
-        Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get());
-        Illnesses illnesses = ParserUtil.parseIllnesses(argMultimap.getValue(PREFIX_ILLNESSES).get());
-        Surgeries surgeries = ParserUtil.parseSurgeries(argMultimap.getValue(PREFIX_SURGERIES).get());
-        FamilyHistory familyHistory = ParserUtil.parseFamilyHistory(argMultimap.getValue(PREFIX_FAMILY_HISTORY).get());
-        ImmunizationHistory immunizationHistory =
-                ParserUtil.parseImmunizationHistory(argMultimap.getValue(PREFIX_IMMUNIZATION_HISTORY).get());
-        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        Ethnicity ethnicity = ParserUtil.parseEthnicity(argMultimap.getValue(PREFIX_ETHNICITY).get());
+        Age age = ParserUtil.parseAge(
+                argMultimap.getValue(PREFIX_AGE).orElse(EMPTY_PLACEHOLDER));
+        BloodType bloodtype = ParserUtil.parseBloodType(
+                argMultimap.getValue(PREFIX_BLOODTYPE).orElse(EMPTY_PLACEHOLDER));
+        Medication medication = ParserUtil.parseMedication(
+                argMultimap.getValue(PREFIX_MEDICATION).orElse(EMPTY_PLACEHOLDER));
+        Height height = ParserUtil.parseHeight(
+                argMultimap.getValue(PREFIX_HEIGHT).orElse(EMPTY_PLACEHOLDER));
+        Weight weight = ParserUtil.parseWeight(
+                argMultimap.getValue(PREFIX_WEIGHT).orElse(EMPTY_PLACEHOLDER));
+        Illnesses illnesses = ParserUtil.parseIllnesses(
+                argMultimap.getValue(PREFIX_ILLNESSES).orElse(EMPTY_PLACEHOLDER));
+        Surgeries surgeries = ParserUtil.parseSurgeries(
+                argMultimap.getValue(PREFIX_SURGERIES).orElse(EMPTY_PLACEHOLDER));
+        FamilyHistory familyHistory = ParserUtil.parseFamilyHistory(
+                argMultimap.getValue(PREFIX_FAMILY_HISTORY).orElse(EMPTY_PLACEHOLDER));
+        ImmunizationHistory immunizationHistory = ParserUtil.parseImmunizationHistory(
+                argMultimap.getValue(PREFIX_IMMUNIZATION_HISTORY).orElse(EMPTY_PLACEHOLDER));
+        Gender gender = ParserUtil.parseGender(
+                argMultimap.getValue(PREFIX_GENDER).orElse(EMPTY_PLACEHOLDER));
+        Ethnicity ethnicity = ParserUtil.parseEthnicity(
+                argMultimap.getValue(PREFIX_ETHNICITY).orElse(EMPTY_PLACEHOLDER));
 
-        Medical medical = new Medical(patientNric,
-                age,
-                bloodtype,
-                medication,
-                height,
-                weight,
-                illnesses,
-                surgeries,
-                familyHistory,
-                immunizationHistory,
-                gender,
-                ethnicity);
+        Medical medical = new Medical(patientNric, age, bloodtype, medication, height, weight, illnesses, surgeries,
+                familyHistory, immunizationHistory, gender, ethnicity);
 
         return new AddMedicalCommand(patientNric, medical);
     }

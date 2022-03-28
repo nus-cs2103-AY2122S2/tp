@@ -3,6 +3,9 @@ package seedu.address.model.medical;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Represents a Person's blood type in MedBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidBloodType(String)}
@@ -12,10 +15,9 @@ public class BloodType {
     public static final String MESSAGE_CONSTRAINTS = "Blood type must be either A, B, AB or O.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Blood type must be either A, B, AB, O, or nil (in case user did not specify it).
      */
-    public static final String VALIDATION_REGEX = "[A|B|AB|O]";
+    public static final String VALIDATION_REGEX = "[A|B|O|AB|nil]";
 
     public final String value;
 
@@ -34,7 +36,9 @@ public class BloodType {
      * Returns true if given string is valid.
      */
     public static boolean isValidBloodType(String test) {
-        return test.matches(VALIDATION_REGEX);
+        Pattern p = Pattern.compile(VALIDATION_REGEX);
+        Matcher m = p.matcher(test);
+        return m.lookingAt();
     }
 
     @Override
