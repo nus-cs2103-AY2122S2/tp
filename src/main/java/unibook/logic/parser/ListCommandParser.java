@@ -27,8 +27,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_TYPE,
                     CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_VIEW, CliSyntax.PREFIX_GROUP,
-                        CliSyntax.PREFIX_MEETING_TIME, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEY_EVENT,
-                        CliSyntax.PREFIX_DATE_TIME);
+                        CliSyntax.PREFIX_MEETINGTIME, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT,
+                        CliSyntax.PREFIX_DATETIME);
 
             //List all (empty list command)
             if (args.strip().equals("")) {
@@ -40,38 +40,38 @@ public class ListCommandParser implements Parser<ListCommand> {
 
                 //Very specific command chain with 2-3 arguments
 
-                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATE_TIME, CliSyntax.PREFIX_KEY_EVENT,
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT,
                         CliSyntax.PREFIX_NAME)) {
                     //On module page, checking for modules that contain a specific name with specific date, key event
                     //e.g. list n/software dt/2022-05-04 ke/exam
-                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATE_TIME).get();
-                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEY_EVENT).get();
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
                     return new ListCommand(name, dateString, keyEvent.toUpperCase(),
                             ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENTANDNAME);
                 }
 
-                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATE_TIME, CliSyntax.PREFIX_KEY_EVENT)) {
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT)) {
                     //On module page, checking for modules with specific date and key event
                     //e.g. list dt/2022-05-04 ke/exam
-                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATE_TIME).get();
-                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEY_EVENT).get();
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
                     return new ListCommand(dateString, keyEvent.toUpperCase(),
                             ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENT);
                 }
 
-                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATE_TIME)) {
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATETIME)) {
                     //On module page, checking for modules with specific name match and date time
-                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATE_TIME).get();
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
                     return new ListCommand(dateString, name,
                             ListCommand.ListCommandType.MODULESWITHDATEANDNAME);
                 }
 
-                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEY_EVENT)) {
+                if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT)) {
                     //On module page, checking for modules with specific name match and key event
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
-                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEY_EVENT).get();
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
                     return new ListCommand(name, keyEvent,
                             ListCommand.ListCommandType.MODULESWITHNAMEANDKEYEVENT);
 
@@ -94,15 +94,15 @@ public class ListCommandParser implements Parser<ListCommand> {
                     //e.g. list g/W16-1
                     String group = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get().toLowerCase();
                     return new ListCommand(group, ListCommand.ListCommandType.GROUPFROMGROUPVIEW);
-                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MEETING_TIME)) {
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MEETINGTIME)) {
                     //Find all groups with given meeting time on group page
                     //e.g. list mt/<YYYY-MM-DD>
 
-                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_MEETING_TIME).get();
+                    String dateString = argMultimap.getValue(CliSyntax.PREFIX_MEETINGTIME).get();
                     return new ListCommand(dateString, ListCommand.ListCommandType.GROUPWITHMEETINGDATE);
-                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATE_TIME)) {
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME)) {
                     //dt field present
-                    if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEY_EVENT)) {
+                    if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYEVENT)) {
                         //dt + key event
 
                     } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
@@ -110,13 +110,13 @@ public class ListCommandParser implements Parser<ListCommand> {
 
                     } else {
                         //dt only
-                        String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATE_TIME).get();
+                        String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
                         return new ListCommand(dateString, ListCommand.ListCommandType.MODULESWITHEVENTDATE);
                     }
-                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEY_EVENT)) {
+                } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYEVENT)) {
                     //Listing modules that contain the given key event
                     //e.g. list ke/exam, list ke/quiz
-                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEY_EVENT).get();
+                    String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
                     return new ListCommand(keyEvent, ListCommand.ListCommandType.MODULESWITHKEYEVENT);
                 } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
                     //Listing modules that contain the given name on module page
