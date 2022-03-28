@@ -68,7 +68,6 @@ public class SellerCard extends UiPart<Region> {
         String houseLowerPrice = seller.getPropertyToSell().getPriceRange().getLowerToString();
         String houseUpperPrice = seller.getPropertyToSell().getPriceRange().getUpperToString();
         String houseAddress = seller.getPropertyToSell().getAddress().toString();
-      
         if (seller.getPropertyToSell() instanceof NullPropertyToSell) {
               propertyType.setText("No Property added");
               propertyLocation.setText("No Location added");
