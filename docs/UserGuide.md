@@ -377,7 +377,7 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                  |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME s/STATUS [r/RATE][t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                                                          |
+| **Add**    | `add n/NAME s/STATUS [r/RATE] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                                                          |
 | **Clear**  | `clear`                                                                                                                                           |
 | **Comment** | `comment <INDEX> [c/<COMMENT>]`  eg., `comment 2 c/Bad`                                                                                               |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                               |
