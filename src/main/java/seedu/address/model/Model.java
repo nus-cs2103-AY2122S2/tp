@@ -125,6 +125,12 @@ public interface Model {
     void failInterview(Interview interview);
 
     /**
+     * Accepts the given interview.
+     * {@code interview} must already exist in HireLah and have passed staus.
+     */
+    void acceptInterview(Interview interview);
+
+    /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
      * {@code target} must exist in the address book.
      * The interview identity of {@code editedInterview} must not be the same as another existing interview

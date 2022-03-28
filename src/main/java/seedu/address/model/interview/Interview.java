@@ -95,6 +95,16 @@ public class Interview {
     }
 
     /**
+     * Marks an interview as accepted.
+     * The interview must already have been passed to be accepted.
+     */
+    public void markAsAccepted() {
+        this.status.markAsAccepted();
+
+        // decrement position count and offering
+    }
+
+    /**
      * Returns true if both interviews have the same data fields.
      * This defines a stronger notion of equality between two interviews.
      */

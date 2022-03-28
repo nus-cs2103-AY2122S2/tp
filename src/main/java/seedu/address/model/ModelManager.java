@@ -152,6 +152,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void acceptInterview(Interview interview) {
+        addressBook.acceptInterview(interview);
+        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
+    }
+
+    @Override
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 
