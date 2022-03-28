@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALICE_INTERVIEW_DATE_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BENSON_INTERVIEW_DATE_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CARL_INTERVIEW_DATE_TIME;
-
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -24,6 +20,15 @@ public class TypicalInterviews {
     public static final LocalDateTime AFTER_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23, 17, 31);
     public static final LocalDateTime BEFORE_OFFICE_HOURS = LocalDateTime.of(2080, Month.APRIL, 23, 7, 59);
     public static final LocalDateTime ON_WEEKEND = LocalDateTime.of(2080, Month.APRIL, 20, 8, 30);
+
+    public static final LocalDateTime VALID_ALICE_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.FEBRUARY, 23, 15, 00);
+    public static final LocalDateTime VALID_BENSON_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.DECEMBER, 01, 15, 00);
+    public static final LocalDateTime VALID_CARL_INTERVIEW_DATE_TIME =
+            VALID_ALICE_INTERVIEW_DATE_TIME.plusMinutes(15);
+    public static final LocalDateTime VALID_NO_CONFLICT_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2030, Month.FEBRUARY, 23, 15, 00);
 
     public static final Interview INTERVIEW_ALICE = new InterviewBuilder().withCandidate(TypicalCandidates.ALICE)
             .withInterviewDateTime(VALID_ALICE_INTERVIEW_DATE_TIME).build();

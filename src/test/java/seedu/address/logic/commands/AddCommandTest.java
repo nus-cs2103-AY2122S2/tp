@@ -204,6 +204,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setInterview(Interview target, Interview editedInterview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Candidate> getFilteredCandidateList() {
             throw new AssertionError("This method should not be called.");
         }
