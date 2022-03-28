@@ -51,7 +51,7 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Notes about the command format:**
+**:information_source: Notes about the command format:**
 
 * **Words in `<UPPER_CASE>` are the parameters to be supplied by the user.** <br>
   * e.g. in `addstudent -n <STUDENT_NAME>`, `<STUDENT_NAME>` is a parameter which 
