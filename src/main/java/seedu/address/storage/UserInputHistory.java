@@ -3,7 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFieldStorage {
+public class UserInputHistory {
 
     private final List<String> list;
     private int index;
@@ -11,7 +11,7 @@ public class TextFieldStorage {
     /**
      * Creates a new TextFieldStorage.
      */
-    public TextFieldStorage() {
+    public UserInputHistory() {
         this.list = new ArrayList<>();
         this.list.add("");
         this.index = 0;
@@ -23,6 +23,7 @@ public class TextFieldStorage {
      * @param userInput String input from the user.
      */
     public void add(String userInput) {
+        this.index = this.list.size() - 1;
         this.list.add(this.index, userInput);
         this.index++;
     }
@@ -38,7 +39,7 @@ public class TextFieldStorage {
      * Decrements current index. Does nothing if index is at 0.
      */
     public void up() {
-        if (this.index - 1 > -1) {
+        if (this.index > 0) {
             this.index--;
         }
     }
@@ -47,7 +48,7 @@ public class TextFieldStorage {
      * Increments current index. Does nothing if index is at max list size - 1.
      */
     public void down() {
-        if (this.index + 1 < this.list.size()) {
+        if (this.index < this.list.size() - 1) {
             this.index++;
         }
     }
