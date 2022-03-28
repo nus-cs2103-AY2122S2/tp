@@ -48,8 +48,8 @@ public class ModelManager implements Model {
         currentlyDisplayedListType = EntryType.PERSON;
 
         // Don't allow deleting/finding/editing on the events or person list at the beginning
-        filteredPersons.setPredicate(PREDICATE_SHOW_NO_PERSONS);
-        filteredEvents.setPredicate(PREDICATE_SHOW_NO_EVENTS);
+        filteredPersons.setPredicate(PREDICATE_SHOW_NO_ENTRIES);
+        filteredEvents.setPredicate(PREDICATE_SHOW_NO_ENTRIES);
     }
 
     public ModelManager() {
@@ -119,7 +119,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_ENTRIES);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class ModelManager implements Model {
     @Override
     public void addCompany(Company company) {
         addressBook.addCompany(company);
-        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_ENTRIES);
     }
 
     /**
@@ -166,6 +166,32 @@ public class ModelManager implements Model {
         addressBook.setCompany(target, editedCompany);
     }
 
+    //=========== For Events =================================================================================
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_ENTRIES);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
+    }
+
     //=========== General Filtered List Modifiers ============================================================
 
     /**
@@ -174,28 +200,29 @@ public class ModelManager implements Model {
      * @param companyPredicate The predicate to apply to the Company list.
      * @param eventPredicate The predicate to apply to the Event list.
      */
-    private void updateFilteredLists(Predicate<Person> personPredicate, Predicate<Company> companyPredicate,
-                                    Predicate<Event> eventPredicate) {
+    private void updateFilteredLists(Predicate<? super Person> personPredicate,
+                                     Predicate<? super Company> companyPredicate,
+                                     Predicate<? super Event> eventPredicate) {
         updateFilteredPersonList(personPredicate);
         updateFilteredCompanyList(companyPredicate);
         updateFilteredEventList(eventPredicate);
     }
 
     @Override
-    public void showPersonList(Predicate<Person> predicate) {
-        updateFilteredLists(predicate, PREDICATE_SHOW_NO_COMPANIES, PREDICATE_SHOW_NO_EVENTS);
+    public void showPersonList(Predicate<? super Person> predicate) {
+        updateFilteredLists(predicate, PREDICATE_SHOW_NO_ENTRIES, PREDICATE_SHOW_NO_ENTRIES);
         currentlyDisplayedListType = EntryType.PERSON;
     }
 
     @Override
-    public void showCompanyList(Predicate<Company> predicate) {
-        updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, predicate, PREDICATE_SHOW_NO_EVENTS);
+    public void showCompanyList(Predicate<? super Company> predicate) {
+        updateFilteredLists(PREDICATE_SHOW_NO_ENTRIES, predicate, PREDICATE_SHOW_NO_ENTRIES);
         currentlyDisplayedListType = EntryType.COMPANY;
     }
 
     @Override
-    public void showEventList(Predicate<Event> predicate) {
-        updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, PREDICATE_SHOW_NO_COMPANIES, predicate);
+    public void showEventList(Predicate<? super Event> predicate) {
+        updateFilteredLists(PREDICATE_SHOW_NO_ENTRIES, PREDICATE_SHOW_NO_ENTRIES, predicate);
         currentlyDisplayedListType = EntryType.EVENT;
     }
 
@@ -267,6 +294,19 @@ public class ModelManager implements Model {
         filteredCompanies.setPredicate(predicate);
     }
 
+    //=========== Filtered Event List Accessors =============================================================
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<? super Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -286,44 +326,6 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredCompanies.equals(other.filteredCompanies)
                 && filteredEvents.equals(other.filteredEvents);
-    }
-
-    //=========== For Events =================================================================================
-
-    @Override
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return addressBook.hasEvent(event);
-    }
-
-    @Override
-    public void deleteEvent(Event target) {
-        addressBook.removeEvent(target);
-    }
-
-    @Override
-    public void addEvent(Event event) {
-        addressBook.addEvent(event);
-        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-    }
-
-    @Override
-    public void setEvent(Event target, Event editedEvent) {
-        requireAllNonNull(target, editedEvent);
-
-        addressBook.setEvent(target, editedEvent);
-    }
-
-
-    @Override
-    public ObservableList<Event> getFilteredEventList() {
-        return filteredEvents;
-    }
-
-    @Override
-    public void updateFilteredEventList(Predicate<Event> predicate) {
-        requireNonNull(predicate);
-        filteredEvents.setPredicate(predicate);
     }
 
 }

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ENTRIES;
 
 import seedu.address.logic.parser.ParserUtil.SearchType;
 import seedu.address.model.Model;
@@ -29,7 +29,7 @@ public class ListCompanyCommand extends ListCommand {
         requireNonNull(model);
 
         //Show all the events and empty out all the temporary list for events and companies
-        model.showCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        model.showCompanyList(PREDICATE_SHOW_ALL_ENTRIES);
         return new CommandResult(MESSAGE_SUCCESS, false, false, false, true, false);
     }
 }

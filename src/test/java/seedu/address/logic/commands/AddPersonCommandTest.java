@@ -189,17 +189,17 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void showPersonList(Predicate<Person> predicate) {
+        public void showPersonList(Predicate<? super Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void showCompanyList(Predicate<Company> predicate) {
+        public void showCompanyList(Predicate<? super Company> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void showEventList(Predicate<Event> predicate) {
+        public void showEventList(Predicate<? super Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -229,7 +229,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void updateFilteredEventList(Predicate<Event> predicate) {
+        public void updateFilteredEventList(Predicate<? super Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

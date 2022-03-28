@@ -16,13 +16,8 @@ import seedu.address.model.entry.Person;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
-    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
-
-    Predicate<Person> PREDICATE_SHOW_NO_PERSONS = unused -> false;
-    Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
-    Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
+    Predicate<Entry> PREDICATE_SHOW_ALL_ENTRIES = unused -> true;
+    Predicate<Entry> PREDICATE_SHOW_NO_ENTRIES = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -165,22 +160,22 @@ public interface Model {
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredEventList(Predicate<Event> predicate);
+    void updateFilteredEventList(Predicate<? super Event> predicate);
 
     /**
      * Updates filtered lists to show only the Persons list filtered through the {@code predicate}.
      */
-    void showPersonList(Predicate<Person> predicate);
+    void showPersonList(Predicate<? super Person> predicate);
 
     /**
      * Updates filtered lists to show only the Company list filtered through the {@code predicate}.
      */
-    void showCompanyList(Predicate<Company> predicate);
+    void showCompanyList(Predicate<? super Company> predicate);
 
     /**
      * Updates filtered lists to show only the Events list filtered through the {@code predicate}.
      */
-    void showEventList(Predicate<Event> predicate);
+    void showEventList(Predicate<? super Event> predicate);
 
     /**
      * Deletes the entry at the index of the currently displayed list and returns it.
