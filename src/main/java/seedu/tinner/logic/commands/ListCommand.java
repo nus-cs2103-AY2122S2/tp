@@ -7,7 +7,7 @@ import static seedu.tinner.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 import seedu.tinner.model.Model;
 
 /**
- * Lists all companies in the address book to the user.
+ * Lists all companies in the company list to the user.
  */
 public class ListCommand extends Command {
 

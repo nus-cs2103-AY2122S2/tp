@@ -20,7 +20,7 @@ import seedu.tinner.model.company.ReadOnlyRoleList;
 
 
 /**
- * Unfavourites a company identified using it's displayed index from the address book.
+ * Unfavourites a company identified using it's displayed index from the company list.
  */
 public class UnfavouriteCompanyCommand extends Command {
 

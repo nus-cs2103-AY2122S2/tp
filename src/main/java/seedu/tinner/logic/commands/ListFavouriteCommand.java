@@ -7,7 +7,7 @@ import seedu.tinner.model.Model;
 import seedu.tinner.model.company.CompanyHasBeenFavouritedPredicate;
 
 /**
- * Lists all favourited companies in the address book to the user.
+ * Lists all favourited companies in the company list to the user.
  */
 public class ListFavouriteCommand extends Command {
 

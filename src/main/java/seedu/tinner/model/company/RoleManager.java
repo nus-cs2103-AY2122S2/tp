@@ -10,7 +10,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.tinner.model.role.Role;
 
 /**
- * Represents the list of all roles tagged to a Company found in the address book.
+ * Represents the list of all roles tagged to a Company found in the company list.
  */
 public class RoleManager {
 
@@ -61,7 +61,7 @@ public class RoleManager {
 
     /**
      * Deletes the given role.
-     * The role must exist in the address book.
+     * The role must exist in the company list.
      */
     public void deleteRole(Role target) {
         roleList.removeRole(target);
@@ -69,7 +69,7 @@ public class RoleManager {
 
     /**
      * Adds the given role.
-     * {@code role} must not already exist in the address book.
+     * {@code role} must not already exist in the company list.
      */
     public void addRole(Role role) {
         roleList.addRole(role);

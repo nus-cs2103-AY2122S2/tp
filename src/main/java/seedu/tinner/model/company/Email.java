@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tinner.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Company's email in the address book.
+ * Represents a Company's email in the company list.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {

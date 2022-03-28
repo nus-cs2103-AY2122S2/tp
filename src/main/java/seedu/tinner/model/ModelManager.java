@@ -59,6 +59,13 @@ public class ModelManager implements Model {
         this(new CompanyList(), new UserPrefs());
     }
 
+    //=========== ReminderWindow ==================================================================================
+    @Override
+    public void setReminderWindow(int reminderWindow) {
+        this.userPrefs.setReminderWindow(reminderWindow);
+
+    }
+
     //=========== UserPrefs ==================================================================================
 
     @Override

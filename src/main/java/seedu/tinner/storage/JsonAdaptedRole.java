@@ -13,6 +13,9 @@ import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
 import seedu.tinner.model.role.Stipend;
 
+/**
+ * Jackson-friendly version of {@link Role}.
+ */
 public class JsonAdaptedRole {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Role's %s field is missing!";
