@@ -265,7 +265,7 @@ public class ParserUtil {
         }
     }
 
-
+    /**
      * Parses {@code Collection<String> keyEventAndDate} and
      * {@code Module module}into a {@code ArrayList<ModuleKeyEvent>}.
      */
