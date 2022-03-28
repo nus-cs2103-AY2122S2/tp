@@ -188,7 +188,7 @@ Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROL
 * Only full words would be matched e.g. `mobile` will not match `mobiles`
 * Companies and roles matching at least one keyword will be returned e.g. `software engineer` will match `mobile engineer` and `software developer`
 * At least one role keyword or one company keyword must be provided in the user input. 
-* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered  
+* The prefixes `c/` and `r/` must be omitted if no corresponding keywords are meant to be entered.
 
 Examples:
 
