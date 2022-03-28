@@ -29,24 +29,22 @@ public class RangeCommandParser implements Parser<RangeCommand> {
 
         String commandInput = argMultimap.getPreamble();
 
-        Index fromIndex = Index.fromZeroBased(0);
-        Index toIndex = Index.fromZeroBased(0);
-
         if (argMultimap.getValue(PREFIX_RANGE_FROM).isEmpty() || argMultimap.getValue(PREFIX_RANGE_TO).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RangeCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_RANGE_FROM).isPresent() && argMultimap.getValue(PREFIX_RANGE_TO).isPresent()) {
-            try {
-                fromIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_RANGE_FROM).get());
-                toIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_RANGE_TO).get());
-            } catch (ParseException pe) {
-                throw new ParseException(MESSAGE_INVALID_RANGE_INDEX, pe);
-            }
-            if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
-                throw new ParseException(INDEX_FROM_LARGER_THAN_TO);
-            }
+        Index fromIndex;
+        Index toIndex;
+
+        try {
+            fromIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_RANGE_FROM).get());
+            toIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_RANGE_TO).get());
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_RANGE_INDEX, pe);
+        }
+        if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
+            throw new ParseException(INDEX_FROM_LARGER_THAN_TO);
         }
 
         return new RangeCommand(fromIndex, toIndex, commandInput);
