@@ -74,7 +74,7 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 Adds a student to TAPA.
 
-**Format**: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
+**Format**: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
 * The student’s matriculation number, name as well as module code are compulsory fields.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
@@ -174,7 +174,7 @@ Marks a specific done task as undone for a particular student.
 
 Edits a student's information in TAPA.
 
-**Format**: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
+**Format**: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
 * The index of the student to be edited is a compulsory field.
 * The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded.
@@ -308,7 +308,7 @@ Exits the program.
 
 Action      | Command Format with Examples
 ------------|------------------
-**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
+**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
 **Delete**  | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> Example: `delete 10` (or) `delete 10 20` (or) `delete i/AXXXXXXXR`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> Example: `find n/john` (or) `find i/AXXXXXXXR` (or) `find m/CS2103T`
 **Task**    | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`
