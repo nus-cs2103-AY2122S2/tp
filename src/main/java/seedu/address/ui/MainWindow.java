@@ -226,9 +226,19 @@ public class MainWindow extends UiPart<Stage> {
             addNewUserInputToHistory(commandText);
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException commandException) {
+            logger.info("Invalid command: " + commandText);
+            resultDisplay.setFeedbackToUser(commandException.getMessage());
+
+            if (!commandException.toggleTo().equals(ViewTab.NONE)) {
+                toggleTab(commandException.toggleTo());
+            }
+
+            throw commandException;
+        } catch (ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+
             throw e;
         }
     }

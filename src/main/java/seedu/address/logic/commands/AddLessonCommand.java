@@ -74,9 +74,10 @@ public class AddLessonCommand extends Command {
         } catch (ConflictsWithLessonsException e) {
             model.updateFilteredLessonList(new ConflictingLessonsPredicate(toAdd));
 
-            return new CommandResult(
-                    ConflictsWithLessonsException.ERROR_MESSAGE + "\n\n" + MESSAGE_CONFLICTING_LESSONS_TIP,
-                    true, InfoPanelTypes.LESSON, ViewTab.LESSON);
+            throw new CommandException(
+                    ConflictsWithLessonsException.ERROR_MESSAGE + "\n\n"
+                            + MESSAGE_CONFLICTING_LESSONS_TIP, ViewTab.LESSON
+            );
         }
 
         model.setSelectedLesson(toAdd);
