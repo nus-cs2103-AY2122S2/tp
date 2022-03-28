@@ -7,6 +7,7 @@ participant ":TeachWhatParser" as TeachWhatParser LOGIC_COLOR
 participant ":AddLessonCommandParser" as AddLessonCommandParser LOGIC_COLOR
 participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":CommandException" as CommandException LOGIC_COLOR
 participant ":Lesson" as Lesson LOGIC_COLOR
 end box
 
@@ -54,9 +55,15 @@ else else
         lesson conflicts with existing lesson(s)
     end ref
 
-    LogicManager <-- AddLessonCommand : commandResultError
+    create CommandException
+    AddLessonCommand -> CommandException
+    activate CommandException
+    AddLessonCommand <-- CommandException : exception
+    deactivate CommandException
 
-    [<--LogicManager : commandResultError
+    LogicManager <-- AddLessonCommand : exception
+
+    [<--LogicManager : exception
 
     deactivate LogicManager
 end
