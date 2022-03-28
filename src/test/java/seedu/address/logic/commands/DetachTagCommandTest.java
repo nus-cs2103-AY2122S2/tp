@@ -43,8 +43,8 @@ public class DetachTagCommandTest {
         Set<Tag> tagCopy = new HashSet<>(tempTags);
         tagCopy.removeIf(t -> t.isSameTag(FRIEND));
         Person newPerson = new Person(editedPerson.getName(), editedPerson.getPhone(),
-                editedPerson.getEmail(), editedPerson.getAddress(),
-                tagCopy);
+                editedPerson.getEmail(), editedPerson.getAddress(), tagCopy, editedPerson.getCourse(),
+                editedPerson.getMatricCard(), editedPerson.getTelegram());
 
         String expectedMessage = String.format(DetachTagCommand.MESSAGE_SUCCESS,
                 FRIEND, editedPerson.getName());
@@ -63,8 +63,8 @@ public class DetachTagCommandTest {
         Set<Tag> tagCopy = new HashSet<>(tempTags);
         tagCopy.removeIf(t -> t.isSameTag(FRIEND));
         Person newPerson = new Person(editedPerson.getName(), editedPerson.getPhone(),
-                editedPerson.getEmail(), editedPerson.getAddress(),
-                tagCopy);
+                editedPerson.getEmail(), editedPerson.getAddress(), tagCopy, editedPerson.getCourse(),
+                editedPerson.getMatricCard(), editedPerson.getTelegram());
 
         String expectedMessage = String.format(DetachTagCommand.MESSAGE_SUCCESS,
                 FRIEND, editedPerson.getName());

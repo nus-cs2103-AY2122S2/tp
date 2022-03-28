@@ -43,8 +43,8 @@ public class AttachTagCommandTest {
         Set<Tag> tagCopy = new HashSet<>(tempTags);
         tagCopy.add(OWEMONEY);
         Person newPerson = new Person(editedPerson.getName(), editedPerson.getPhone(),
-                editedPerson.getEmail(), editedPerson.getAddress(),
-                tagCopy);
+                editedPerson.getEmail(), editedPerson.getAddress(), tagCopy, editedPerson.getCourse(),
+                editedPerson.getMatricCard(), editedPerson.getTelegram());
 
         String expectedMessage = String.format(AttachTagCommand.MESSAGE_SUCCESS,
                 OWEMONEY, editedPerson.getName());
@@ -63,7 +63,8 @@ public class AttachTagCommandTest {
         tagCopy.add(OWEMONEY);
         Person newPerson = new Person(personInFilteredList.getName(), personInFilteredList.getPhone(),
                 personInFilteredList.getEmail(), personInFilteredList.getAddress(),
-                tagCopy);
+                tagCopy, personInFilteredList.getCourse(), personInFilteredList.getMatricCard(),
+                personInFilteredList.getTelegram());
         AttachTagCommand attachTagCommand = new AttachTagCommand(OWEMONEY, INDEX_FIRST_PERSON);
         String expectedMessage = String.format(AttachTagCommand.MESSAGE_SUCCESS,
                 OWEMONEY, personInFilteredList.getName());
