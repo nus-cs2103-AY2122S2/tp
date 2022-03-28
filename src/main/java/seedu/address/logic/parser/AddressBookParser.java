@@ -67,7 +67,7 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-        
+
         case DeleteBuyerCommand.COMMAND_WORD:
             return new DeleteBuyerCommandParser().parse(arguments);
 
