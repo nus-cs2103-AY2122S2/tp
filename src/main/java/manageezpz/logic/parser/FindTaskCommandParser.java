@@ -27,13 +27,16 @@ import manageezpz.model.task.TaskMultiplePredicate;
 public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private static final Prefix[] TASK_TYPES = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
     private static final Prefix[] VALID_OPTIONS = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT, PREFIX_DATE,
-            PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
+        PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
 
     private String errorMessage = "";
     private boolean hasError = false;
 
     protected FindTaskCommandParser() {}
 
+    /**
+     * {@inheritDoc}
+     */
     public FindTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, VALID_OPTIONS);
 

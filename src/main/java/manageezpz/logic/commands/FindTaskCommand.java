@@ -24,14 +24,13 @@ import manageezpz.model.task.TaskMultiplePredicate;
  */
 public class FindTaskCommand extends Command {
     public static final String COMMAND_WORD = "findTask";
-
-    private static final String TASK_OPTIONS = String.join(", ", PREFIX_TODO.toString(),
+    public static final String TASK_OPTIONS = String.join(", ", PREFIX_TODO.toString(),
             PREFIX_DEADLINE.toString(), PREFIX_EVENT.toString());
-    private static final String TASK_PROPERTIES = String.join(", ", PREFIX_DESCRIPTION.toString(),
+    public static final String TASK_PROPERTIES = String.join(", ", PREFIX_DESCRIPTION.toString(),
             PREFIX_DATE.toString(), PREFIX_PRIORITY.toString(), PREFIX_ASSIGNEES.toString(),
             PREFIX_IS_MARKED.toString());
-    private static final String NOTE = "NOTE: All task properties option must be filled";
-    private static final String EXAMPLE = String.join(" ", COMMAND_WORD,
+    public static final String NOTE = "NOTE: All task properties option must be filled";
+    public static final String EXAMPLE = String.join(" ", COMMAND_WORD,
             PREFIX_DEADLINE.toString(), "Finish TP", PREFIX_DATE.toString(), "2022-01-01");
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all tasks that contains the properties specified.\n"
@@ -39,7 +38,6 @@ public class FindTaskCommand extends Command {
             + "Task properties " + TASK_PROPERTIES + "\n"
             + NOTE + "\n"
             + EXAMPLE;
-
     public static final String EMPTY_KEYWORD = "Keyword is empty\n";
     public static final String INVALID_DATE = Date.MESSAGE_CONSTRAINTS + "\n";
     public static final String INVALID_PRIORITY = "Property should be NONE, LOW, MEDIUM, HIGH\n";

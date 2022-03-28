@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import manageezpz.model.Model;
@@ -38,14 +39,32 @@ class FindTaskCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    @BeforeEach
+    void setMoreProperties() {
+        // Set Priority
+        WEEKLY_QUIZ.setPriority("HIGH");
+        PROJECT_CAPSTONE.setPriority("HIGH");
+        FYP_REPORT.setPriority("HIGH");
+
+        // Set Assignee
+        RETURN_BOOK.addAssignees(ALICE);
+        PROJECT_CAPSTONE.addAssignees(ALICE);
+        FYP_REPORT.addAssignees(ALICE);
+        HOUSE_VISTING.addAssignees(ALICE);
+
+        // Set marked
+        RETURN_BOOK.setTaskDone();
+        PROJECT_CAPSTONE.setTaskDone();
+    }
+
     @Test
     void equals() {
         TaskMultiplePredicate firstPredicate =
-                new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, Collections.singletonList("Genshin"),
-                        null, null, null, null);
+                new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+                        Collections.singletonList("Genshin"), null, null, null, null);
         TaskMultiplePredicate secondPredicate =
-                new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE, Collections.singletonList("Impact"),
-                        null, null, null, null);
+                new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+                        Collections.singletonList("Impact"), null, null, null, null);
 
         FindTaskCommand firstFindTaskCommand = new FindTaskCommand(firstPredicate);
         FindTaskCommand secondFindTaskCommand = new FindTaskCommand(secondPredicate);
@@ -95,16 +114,29 @@ class FindTaskCommandTest {
 
     @Test
     void findCommand_findTaskWithDescription_showTasksWithGivenDescrription() {
-        List<String> keywords = List.of("Book");
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
-                keywords, null, null, null, null);
-        expectedModel.updateFilteredTaskList(predicate);
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
-        List<Task> expectedTasks = List.of(READ_BOOK, RETURN_BOOK);
-        FindTaskCommand command = new FindTaskCommand(predicate);
+        // Only 1 word
+        List<String> keywords1 = List.of("Book");
+        TaskMultiplePredicate predicate1 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+                keywords1, null, null, null, null);
+        expectedModel.updateFilteredTaskList(predicate1);
+        String expectedMessage1 = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+        List<Task> expectedTasks1 = List.of(READ_BOOK, RETURN_BOOK);
+        FindTaskCommand command = new FindTaskCommand(predicate1);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(expectedTasks, model.getFilteredTaskList());
+        assertCommandSuccess(command, model, expectedMessage1, expectedModel);
+        assertEquals(expectedTasks1, model.getFilteredTaskList());
+
+        // More than 1 words
+        List<String> keywords2 = List.of("Book", "quiz");
+        TaskMultiplePredicate predicate2 = new TaskMultiplePredicate(TaskMultiplePredicate.NO_SPECIFIC_TASK_TYPE,
+                keywords2, null, null, null, null);
+        expectedModel.updateFilteredTaskList(predicate2);
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
+        List<Task> expectedTasks2 = List.of(WEEKLY_QUIZ, READ_BOOK, RETURN_BOOK);
+        FindTaskCommand command2 = new FindTaskCommand(predicate2);
+
+        assertCommandSuccess(command2, model, expectedMessage, expectedModel);
+        assertEquals(expectedTasks2, model.getFilteredTaskList());
     }
 
     @Test
