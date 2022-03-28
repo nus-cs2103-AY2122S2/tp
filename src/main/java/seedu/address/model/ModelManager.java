@@ -177,7 +177,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteInterview(Interview interviewToDelete) {
-        Candidate candidate = interviewSchedule.removeInterview(interviewToDelete);
+        interviewSchedule.removeInterview(interviewToDelete);
     }
 
     @Override
