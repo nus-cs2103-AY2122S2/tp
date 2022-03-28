@@ -151,7 +151,7 @@ public class Candidate {
      *
      * @return a New Candidate with the same attributes, but updated InterviewStatus.
      */
-    public Candidate triggerInterviewStatus() {
+    public Candidate triggerInterviewStatusScheduled() {
         requireAllNonNull(name, phone, email, course, seniority,
                 applicationStatus, interviewStatus, availability);
         return new Candidate(this.getStudentId(),
@@ -172,7 +172,7 @@ public class Candidate {
      * @return a New Candidate with the same attributes, but updated InterviewStatus.
      */
     public Candidate triggerInterviewStatusNotScheduled() {
-        requireAllNonNull(name, phone, email, course, seniority, tags,
+        requireAllNonNull(name, phone, email, course, seniority,
                 applicationStatus, interviewStatus, availability);
         return new Candidate(this.getStudentId(),
                 this.getName(),
@@ -180,7 +180,6 @@ public class Candidate {
                 this.getEmail(),
                 this.getCourse(),
                 this.getSeniority(),
-                this.getTags(),
                 this.getApplicationStatus(),
                 new InterviewStatus(NOT_SCHEDULED),
                 this.getAvailability()
@@ -193,7 +192,7 @@ public class Candidate {
      * @return a New Candidate with the same attributes, but updated InterviewStatus.
      */
     public Candidate triggerInterviewStatusCompleted() {
-        requireAllNonNull(name, phone, email, course, seniority, tags,
+        requireAllNonNull(name, phone, email, course, seniority,
                 applicationStatus, interviewStatus, availability);
         return new Candidate(this.getStudentId(),
                 this.getName(),
@@ -201,7 +200,6 @@ public class Candidate {
                 this.getEmail(),
                 this.getCourse(),
                 this.getSeniority(),
-                this.getTags(),
                 this.getApplicationStatus(),
                 new InterviewStatus(COMPLETED),
                 this.getAvailability()
