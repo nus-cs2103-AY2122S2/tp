@@ -28,7 +28,7 @@ import seedu.tinner.model.role.Role;
  */
 public class DeleteRoleCommandTest {
     private Model model =
-            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
 
     @Test
     public void execute_validIndexList_success() {
@@ -38,7 +38,7 @@ public class DeleteRoleCommandTest {
 
         String expectedMessage = String.format(DeleteRoleCommand.MESSAGE_DELETE_ROLE_SUCCESS, roleToDelete);
         ModelManager expectedModel =
-                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
         assertCommandSuccess(deleteRoleCommand, model, expectedMessage, expectedModel);
     }
 

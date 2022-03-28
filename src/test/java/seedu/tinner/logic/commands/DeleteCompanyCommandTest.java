@@ -25,7 +25,7 @@ import seedu.tinner.model.reminder.UniqueReminderList;
  */
 public class DeleteCompanyCommandTest {
 
-    private UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
     private Model model = new ModelManager(getTypicalCompanyList(),
             new UserPrefs(), reminderList);
 

@@ -34,7 +34,6 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs, UniqueReminderList reminderList) {
         requireAllNonNull(companyList, userPrefs, reminderList);
-
         logger.fine("Initializing with company list: " + companyList + " and user prefs " + userPrefs);
 
         this.companyList = new CompanyList(companyList);
@@ -44,7 +43,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new CompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+        this(new CompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
     }
 
     //=========== ReminderWindow ==================================================================================
@@ -140,8 +139,8 @@ public class ModelManager implements Model {
         requireAllNonNull(companyPredicate, rolePredicate);
         filteredCompanies.setPredicate(companyPredicate);
         filteredCompanies.forEach(company -> company.getRoleManager().updateFilteredRoleList(rolePredicate));
-        assert(filteredCompanies.stream().allMatch(companyPredicate));
-        assert(filteredCompanies.stream().allMatch(company -> company.getRoleManager().getFilteredRoleList()
+        assert (filteredCompanies.stream().allMatch(companyPredicate));
+        assert (filteredCompanies.stream().allMatch(company -> company.getRoleManager().getFilteredRoleList()
                 .stream().allMatch(rolePredicate)));
     }
 
@@ -172,8 +171,8 @@ public class ModelManager implements Model {
      *                     the size of a filtered company list.
      */
     @Override
-    public void addRole (Index companyIndex, Role role) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+    public void addRole(Index companyIndex, Role role) {
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireNonNull(role);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -189,8 +188,8 @@ public class ModelManager implements Model {
      * @return true if a role with the same identity as {@code role} exists in the role list.
      */
     @Override
-    public boolean hasRole (Index companyIndex, Role role) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+    public boolean hasRole(Index companyIndex, Role role) {
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireNonNull(role);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -206,7 +205,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void deleteRole(Index companyIndex, Role roleToDelete) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireNonNull(roleToDelete);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -223,7 +222,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void setRole(Index companyIndex, Role target, Role editedRole) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
         requireAllNonNull(target, editedRole);
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
@@ -238,7 +237,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void updateFilteredRoleList(Index companyIndex, Predicate<Role> predicate) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
         RoleManager roleManager = company.getRoleManager();
@@ -254,7 +253,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Role> getFilteredRoleList(Index companyIndex) {
-        assert(companyIndex.getZeroBased() < filteredCompanies.size());
+        assert (companyIndex.getZeroBased() < filteredCompanies.size());
 
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
         RoleManager roleManager = company.getRoleManager();

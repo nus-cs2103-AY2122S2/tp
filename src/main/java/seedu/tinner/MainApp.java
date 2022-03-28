@@ -80,7 +80,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyCompanyList> companyListOptional;
         ReadOnlyCompanyList initialData;
-        UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+        UniqueReminderList reminderList = UniqueReminderList.getInstance();
+
         try {
             companyListOptional = storage.readCompanyList();
             if (!companyListOptional.isPresent()) {

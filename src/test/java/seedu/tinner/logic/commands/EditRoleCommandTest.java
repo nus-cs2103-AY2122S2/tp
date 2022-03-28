@@ -29,7 +29,7 @@ import seedu.tinner.testutil.EditRoleDescriptorBuilder;
 import seedu.tinner.testutil.RoleBuilder;
 
 public class EditRoleCommandTest {
-    private UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
     private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
 
     @Test

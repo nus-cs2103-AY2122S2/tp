@@ -23,7 +23,7 @@ public class AddCompanyCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+        model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class AddCompanyCommandIntegrationTest {
         Company validCompany = new CompanyBuilder().build();
 
         Model expectedModel =
-                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
         expectedModel.addCompany(validCompany);
 
         assertCommandSuccess(new AddCompanyCommand(validCompany), model,

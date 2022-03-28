@@ -21,7 +21,7 @@ import seedu.tinner.model.reminder.UniqueReminderList;
 public class SetReminderWindowCommandTest {
 
     private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(),
-            UniqueReminderList.getReminderList());
+            UniqueReminderList.getInstance());
 
     @Test
     public void execute_invalidReminderWindowHigh_throwsCommandException() {

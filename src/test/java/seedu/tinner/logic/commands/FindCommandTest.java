@@ -27,9 +27,9 @@ import seedu.tinner.model.role.RoleNameContainsKeywordsPredicate;
  */
 public class FindCommandTest {
     private Model model =
-            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
     private Model expectedModel =
-            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
 
     @Test
     public void equals() {

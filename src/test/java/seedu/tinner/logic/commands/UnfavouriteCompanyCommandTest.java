@@ -28,7 +28,7 @@ import seedu.tinner.testutil.CompanyBuilder;
 public class UnfavouriteCompanyCommandTest {
 
     private Model model =
-            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+            new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -42,7 +42,7 @@ public class UnfavouriteCompanyCommandTest {
                 unfavouritedCompany);
 
         Model expectedModel =
-                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
         expectedModel.setCompany(companyToUnfavourite, unfavouritedCompany);
 
         assertCommandSuccess(unfavouriteCompanyCommand, model, expectedMessage, expectedModel);
@@ -70,7 +70,7 @@ public class UnfavouriteCompanyCommandTest {
                 unfavouritedCompany);
 
         Model expectedModel =
-                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+                new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
         expectedModel.setCompany(companyToUnfavourite, unfavouritedCompany);
 
         assertCommandSuccess(unfavouriteCompanyCommand, model, expectedMessage, expectedModel);

@@ -23,8 +23,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
-        expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getReminderList());
+        model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
+        expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
     }
 
     @Test

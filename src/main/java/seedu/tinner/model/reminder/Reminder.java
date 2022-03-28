@@ -9,11 +9,12 @@ import seedu.tinner.model.role.Deadline;
 import seedu.tinner.model.role.RoleName;
 import seedu.tinner.model.role.Status;
 
+
 /**
  * Represents a Reminder in Tinner.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Reminder {
+public class Reminder implements Comparable<Reminder> {
 
     private final CompanyName companyName;
     private final Deadline deadline;
@@ -102,5 +103,10 @@ public class Reminder {
                 .append(getDeadline());
 
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Reminder other) {
+        return this.getDeadline().value.compareTo(other.getDeadline().value);
     }
 }

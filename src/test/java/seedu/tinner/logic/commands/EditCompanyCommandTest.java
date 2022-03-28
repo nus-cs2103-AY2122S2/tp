@@ -31,7 +31,7 @@ import seedu.tinner.testutil.EditCompanyDescriptorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCompanyCommandTest {
-    private UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
     private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
 
     @Test

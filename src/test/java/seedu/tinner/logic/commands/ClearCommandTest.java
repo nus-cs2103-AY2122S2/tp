@@ -23,7 +23,7 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyCompanyList_success() {
-        UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+        UniqueReminderList reminderList = UniqueReminderList.getInstance();
         Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
         Model expectedModel = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
         expectedModel.setCompanyList(new CompanyList());

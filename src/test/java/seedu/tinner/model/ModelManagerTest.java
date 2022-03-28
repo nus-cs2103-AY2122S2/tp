@@ -30,7 +30,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new CompanyList(), new CompanyList(modelManager.getCompanyList()));
-        assertEquals(UniqueReminderList.getReminderList(), modelManager.getReminderList());
+        assertEquals(UniqueReminderList.getInstance(), modelManager.getReminderList());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class ModelManagerTest {
                 new CompanyListBuilder().withCompany(META).withCompany(AMAZON).build();
         CompanyList differentCompanyList = new CompanyList();
         UserPrefs userPrefs = new UserPrefs();
-        UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+        UniqueReminderList reminderList = UniqueReminderList.getInstance();
 
         // same values -> returns true
         modelManager = new ModelManager(companyList, userPrefs, reminderList);
@@ -124,7 +124,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentCompanyList, userPrefs, reminderList)));
 
         // different filteredList -> returns false
-        String[] keywords = META.getName().fullName.split("\\s+");
+        String[] keywords = META.getName().value.split("\\s+");
         modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords),
                         Arrays.asList(keywords)), new RoleNameContainsKeywordsPredicate(Arrays.asList(" ")));
         assertFalse(modelManager.equals(new ModelManager(companyList, userPrefs, reminderList)));

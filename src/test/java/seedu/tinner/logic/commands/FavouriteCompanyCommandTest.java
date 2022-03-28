@@ -27,7 +27,7 @@ import seedu.tinner.testutil.CompanyBuilder;
  */
 public class FavouriteCompanyCommandTest {
 
-    private UniqueReminderList reminderList = UniqueReminderList.getReminderList();
+    private UniqueReminderList reminderList = UniqueReminderList.getInstance();
     private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(), reminderList);
 
     @Test
