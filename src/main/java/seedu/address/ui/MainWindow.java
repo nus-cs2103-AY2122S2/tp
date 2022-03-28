@@ -165,13 +165,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleResize() {
         double height = resultDisplayPlaceholder.getHeight();
-            if (height == resultDisplaySizeOne) {
-                resultDisplayPlaceholder.setMinHeight(resultDisplaySizeTwo );
-            } else if (height == resultDisplaySizeTwo) {
-                resultDisplayPlaceholder.setMinHeight(resultDisplaySizeThree );
-            } else {
-                resultDisplayPlaceholder.setMinHeight(resultDisplaySizeOne);
-            }
+        if (height == resultDisplaySizeOne) {
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeTwo);
+        } else if (height == resultDisplaySizeTwo) {
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeThree);
+        } else {
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeOne);
+        }
     }
 
     /**
@@ -216,6 +216,7 @@ public class MainWindow extends UiPart<Stage> {
      * Creates and open a pie chart window if it is not yet created or not showing. Or else it will close, create and
      * open a new pie chart window. Focus of window is not used because user might edit the contact in Tracey and
      * use the {@code SummariseCommand} again, so an updated window is needed to be shown.
+     *
      * @param message Feedback message from {@code SummariseCommand} to user
      */
     @FXML
