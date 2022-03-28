@@ -51,7 +51,17 @@ public class ClassGroup implements Entity {
         this.uniqueStudentList = uniqueStudentList;
     }
 
-
+    /**
+     * Constructs a {@code ClassGroup}.
+     * Every field must be present and not null.
+     * Used to initialize a class group from storage file.
+     *
+     * @param toCopy A valid class group.
+     */
+    public ClassGroup(ClassGroup toCopy) {
+        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(),
+                toCopy.getModule(), toCopy.uniqueStudentList);
+    }
 
     public ClassGroupId getClassGroupId() {
         return classGroupId;
