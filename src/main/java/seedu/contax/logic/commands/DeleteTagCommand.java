@@ -21,7 +21,7 @@ public class DeleteTagCommand extends Command {
             + "\nParameters: *INDEX (must be a positive integer)*\n"
             + "Example: `" + COMMAND_WORD + " 1`";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: \n%s";
 
     private final Index targetIndex;
 

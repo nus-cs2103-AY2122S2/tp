@@ -22,7 +22,7 @@ public class EditTagCommand extends Command {
             + "\nParameters: *INDEX t/NEW_TAGNAME*\n"
             + "Example: `" + COMMAND_WORD + " 1 " + "t/Prospective Clients`";
 
-    public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited Tag: %s";
+    public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited Tag: \n%s";
     public static final String MESSAGE_TAG_EXISTS = "Specified tag name already exists in the address book.";
     private final Index index;
     private final EditTagDescriptor editTagDescriptor;

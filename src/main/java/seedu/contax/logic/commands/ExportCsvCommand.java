@@ -34,7 +34,7 @@ public class ExportCsvCommand extends Command {
         CsvManager csvManager = new CsvManager(model, (csvData) -> {
             List<Person> listOfPersons = model.getAddressBook().getPersonList();
             for (Person person : listOfPersons) {
-                String[] lineDat = lineProcessor(person);
+                String[] lineDat = processLine(person);
                 csvData.add(lineDat);
             }
             return csvData;
@@ -52,7 +52,7 @@ public class ExportCsvCommand extends Command {
      * @param person Person to process
      * @return String array with person information
      */
-    private String[] lineProcessor(Person person) {
+    private String[] processLine(Person person) {
         String[] lineDat = new String[5];
         lineDat[0] = person.getName().toString();
         lineDat[1] = person.getPhone().toString();
