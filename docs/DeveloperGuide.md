@@ -173,7 +173,7 @@ Additionally, it implements the following operations:
 
 Below is a sequence diagram showing the overview of how add modules works:
 
-[TODD: AddModuleSequenceDiagram]
+![AddModuleSequenceDiagram](images/AddModuleSequenceDiagram.png)
 
 Each `Person` has a `Set<Module>` that represents the Collection of `Modules` associated with that `Person`.
 Hence, we utilize the behaviour of the `Set` data structure to both store and add modules to a person, automatically adding any new unique Modules while ignoring Modules that already exist, without requiring any further duplicate-checking on our part.
@@ -184,7 +184,7 @@ This can be achieved using the `hasNewModules()` and `getNewModules()` internal 
 `getCommandResult()` of `execute()` utilizes these helper functions to create a `CommandResult` object containing varied feedback messages depending on the following possibilities:
 1. Case 1: Modules from user input contain only new modules
    * Shows new modules added
-2. Case 2: Modules from user input contain only new modules
+2. Case 2: Modules from user input contain some new modules
    * Shows new modules added, with warning that some modules already exist
 3. Case 3: Modules from user input contain no new modules
    * Shows warning that modules already exist, no new modules added, along with list of existing modules (to show the user that despite the "error", no further actions associated with typical failed commands need to be taken)
