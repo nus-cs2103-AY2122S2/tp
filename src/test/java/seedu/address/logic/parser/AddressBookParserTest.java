@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_BUY_CHAD;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBuyers.CHAD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 //import java.util.Arrays;
@@ -14,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddCommand;
-//import seedu.address.logic.commands.AddPropertyToBuyCommand;
+import seedu.address.logic.commands.AddPropertyToBuyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -28,10 +30,12 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 //import seedu.address.model.client.NameContainsKeywordsPredicate;
 //import seedu.address.model.property.NullPropertyToBuy;
+import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
+
 
 public class AddressBookParserTest {
 
@@ -102,15 +106,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPropertyToBuy() throws Exception {
-        //Todo : fix the houseType parse fail case
-        //Buyer buyer = new BuyerBuilder().build();
-        //AddPropertyToBuyCommand command = (AddPropertyToBuyCommand)
-        //        parser.parseCommand(AddPropertyToBuyCommand.COMMAND_WORD + " "
-        //        + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getPropertyToBuyCommand(buyer));
-        //AddPropertyToBuyCommand c = new AddPropertyToBuyCommand(INDEX_FIRST_CLIENT,
-        //        NullPropertyToBuy.getNullPropertyToBuy());
-        //boolean a = c.equals(command);
-        //assertTrue(a);
+        Buyer buyer = new BuyerBuilder(CHAD).build();
+        AddPropertyToBuyCommand command = (AddPropertyToBuyCommand)
+                parser.parseCommand(AddPropertyToBuyCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getPropertyToBuyCommand(buyer));
+        AddPropertyToBuyCommand c = new AddPropertyToBuyCommand(INDEX_FIRST_CLIENT,
+                VALID_PROPERTY_BUY_CHAD);
+        boolean a = c.equals(command);
+        assertTrue(a);
     }
 
     @Test
