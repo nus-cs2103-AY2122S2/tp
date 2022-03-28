@@ -17,9 +17,9 @@ public class GradeCommand extends Command {
             + "\tParameters: {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX}"
             + " s/all|STUDENT_INDEXES|STUDENT_IDS [g/GRADE]\n"
             + "\tExamples: \n"
-            + "\t\t" + COMMAND_WORD + "sn/lab1 m/1 s/all g/1\n"
-            + "\t\t" + COMMAND_WORD + "a/1 s/1,2,3,4,5,6\n"
-            + "\t\t" + COMMAND_WORD + "a/1 s/e0123456,e0234567 g/1\n";
+            + "\t\t1. " + COMMAND_WORD + " sn/lab1 m/1 s/all g/1\n"
+            + "\t\t2. " + COMMAND_WORD + " a/1 s/1,2,3,4,5,6\n"
+            + "\t\t3. " + COMMAND_WORD + " a/1 s/e0123456,e0234567 g/1\n";
 
     private Assessment assessment;
     private Optional<Grade> grade;
