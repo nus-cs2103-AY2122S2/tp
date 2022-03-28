@@ -22,6 +22,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+   <br>
    <div markdown="span" class="alert alert-warning">:rotating_light: **For Users on Mac OSX:**
      The security policy of OSX might prevent the creation of data files in the same folder. For users on OSX, it is recommended that you <br>
 
