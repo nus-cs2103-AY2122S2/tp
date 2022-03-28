@@ -29,11 +29,20 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <FlowPane fx:id="tags" />
+         <FlowPane fx:id="parentFlowPane">
+            <children>
+            <Pane fx:id="salary">
+                  <FlowPane.margin>
+                     <Insets right="7" />
+                  </FlowPane.margin></Pane>
+            <FlowPane fx:id="tags" />
+            </children>
+         </FlowPane>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
+      <Label fx:id="prevDateMet" styleClass="cell_small_label" text="\$prevDateMet" />
       <Label fx:id="info" styleClass="cell_small_label" text="\$info" />
       <Label fx:id="flag" styleClass="cell_small_label" text="\$flag" />
     </VBox>

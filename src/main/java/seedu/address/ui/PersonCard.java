@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
@@ -45,7 +46,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label prevDateMet;
     @FXML
-    private Label salary;
+    private Pane salary;
     @FXML
     private Label info;
     @FXML
@@ -76,6 +77,8 @@ public class PersonCard extends UiPart<Region> {
             String meetingTime = meetingSplit[1];
             scheduledMeeting.setText("Upcoming meeting:\n" + meetingDate + " at " + meetingTime);
         }
+
+        salary.getChildren().add(new Label("Salary: $" + person.getSalary().value));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
