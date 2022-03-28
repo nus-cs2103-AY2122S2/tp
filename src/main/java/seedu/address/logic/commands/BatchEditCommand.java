@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -13,13 +14,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-public class SetSkillsCommand extends Command {
-    public static final String COMMAND_WORD = "setskills";
+public class BatchEditCommand extends Command {
+    public static final String COMMAND_WORD = "batchedit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the persons identified "
         + "by the index number used in the displayed person list. "
-        + "Existing skillsets will be overwritten by the input values.\n"
+        + "Existing skillsets and teams will be overwritten by the input values.\n"
+        + "At least one argument for skillsets or teams of the persons have to be present\n"
         + "Parameters: INDEX... (must be a positive integer) "
-        + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY...\n"
+        + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY...]\n"
+        + "[" + PREFIX_TEAM + "TEAM...]\n"
         + "Example: " + COMMAND_WORD + " 1 2 3 "
         + PREFIX_SKILL + "s/java_100 s/c_30";
 
@@ -30,10 +33,10 @@ public class SetSkillsCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param indices of the persons to edit in the addressbook
+     * @param indices              of the persons to edit in the addressbook
      * @param editPersonDescriptor describing how the persons' skillset will change
      */
-    public SetSkillsCommand(List<Index> indices, EditPersonDescriptor editPersonDescriptor) {
+    public BatchEditCommand(List<Index> indices, EditPersonDescriptor editPersonDescriptor) {
         this.indices = indices;
         this.editPersonDescriptor = editPersonDescriptor;
     }
@@ -54,6 +57,8 @@ public class SetSkillsCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
         }
         model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // Throwing error after editing for valid indices allows the successful edit for least the valid indices.
         if (!isAllIndicesValid) {
             throw new CommandException(Messages.MESSAGE_INVALID_SOME_PERSON_DISPLAYED_INDEX);
         }
