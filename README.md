@@ -8,15 +8,17 @@
 * This application is aimed at professionals with many clients to help them to organise contacts, appointments and resources
 
 * Usages:
+  * Management of tags 
   * Management of contacts
   * Management of schedules
 
 * Features:
   * Detailed onboarding
   * Add/Delete/Edit Contacts
+  * Add/Delete/Edit Appointments
+  * Add/Delete/Edit Tags
   * Contact Tagging and Filtering
   * Advanced command chaining/mass operations
-  * Add/Delete/Edit Appointments
 * For the detailed documentation of this project, see the **[ContaX Product Website](https://ay2122s2-cs2103-w17-1.github.io/tp/)**.
 
 
