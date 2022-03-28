@@ -1,5 +1,7 @@
 package unibook.ui.cards;
 
+import static unibook.ui.util.CustomVBoxListFiller.fillVBoxFromList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -21,6 +24,7 @@ import unibook.model.module.group.Group;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.ui.UiPart;
+import unibook.ui.util.CustomListChangeListeners;
 
 /**
  * A UI component that displays information of {@code Module}.
@@ -86,11 +90,37 @@ public class ModuleCard extends UiPart<Region> {
         allTabContents.add(groups);
         allTabContents.add(keyEvents);
 
+        //set up all the vbox lists, make them all invisible in the ui at the start
+        setUpVBoxLists();
+
         //Set up all the listeners to the underlying lists of module
         setUpListChangeListeners();
 
         //set up mouse click handlers for each tab
         setUpTabMouseClickHandlers();
+    }
+
+    /**
+     * Sets up all the vbox lists which display lists of fields of a module to user.
+     */
+    private void setUpVBoxLists() {
+        fillVBoxFromList(professors, module.getProfessors(), (professor, i) ->
+            new ProfessorCard(professor, i + 1).getRoot());
+        fillVBoxFromList(students, module.getStudents(), (student, i) ->
+            new StudentCard(student, i + 1).getRoot());
+        fillVBoxFromList(groups, module.getGroups(), (group, i, flag) ->
+            new GroupCard(group, i + 1, flag).getRoot());
+        fillVBoxFromList(keyEvents, module.getKeyEvents(), (keyEvent, i) ->
+            new ModuleKeyEventCard(keyEvent, i + 1).getRoot());
+
+        students.setManaged(false);
+        students.setVisible(false);
+        professors.setManaged(false);
+        professors.setVisible(false);
+        groups.setManaged(false);
+        groups.setVisible(false);
+        keyEvents.setManaged(false);
+        keyEvents.setVisible(false);
     }
 
     /**
@@ -183,19 +213,15 @@ public class ModuleCard extends UiPart<Region> {
         }
 
         if (tab == ModuleCardTab.STUDENTS) {
-            fillStudentList();
             students.setManaged(true);
             students.setVisible(true);
         } else if (tab == ModuleCardTab.PROFESSORS) {
-            fillProfessorList();
             professors.setManaged(true);
             professors.setVisible(true);
         } else if (tab == ModuleCardTab.GROUPS) {
-            fillGroupList();
             groups.setManaged(true);
             groups.setVisible(true);
         } else if (tab == ModuleCardTab.KEY_EVENTS) {
-            fillKeyEventList();
             keyEvents.setManaged(true);
             keyEvents.setVisible(true);
         } else {
@@ -212,100 +238,16 @@ public class ModuleCard extends UiPart<Region> {
      * can change accordingly.
      */
     private void setUpListChangeListeners() {
-        ObservableList<Professor> modelProfessorList = module.getProfessors();
-        ObservableList<Student> modelStudentList = module.getStudents();
-        ObservableList<Group> modelGroupList = module.getGroups();
-        ObservableList<ModuleKeyEvent> modelKeyEventsList = module.getKeyEvents();
-
-        //add listeners to the underlying lists of module objects
-        //so that the list shown in this card will change on update
-        modelProfessorList.addListener(new ListChangeListener<Professor>() {
-            /**
-             * Rebuild the list of profs shown to viewer on any kind of change
-             */
-            @Override
-            public void onChanged(Change<? extends Professor> c) {
-                fillProfessorList();
-            }
-        });
-
-        modelStudentList.addListener(new ListChangeListener<Student>() {
-            @Override
-            public void onChanged(Change<? extends Student> c) {
-                fillStudentList();
-            }
-        });
-
-        modelGroupList.addListener(new ListChangeListener<Group>() {
-            @Override
-            public void onChanged(Change<? extends Group> c) {
-                fillGroupList();
-            }
-        });
-
-        modelKeyEventsList.addListener(new ListChangeListener<ModuleKeyEvent>() {
-            @Override
-            public void onChanged(Change<? extends ModuleKeyEvent> c) {
-                fillKeyEventList();
-            }
-        });
+        CustomListChangeListeners.addIndexedListChangeListener(professors, module.getProfessors(),
+                    (professor, index) -> new ProfessorCard(professor, index + 1).getRoot());
+        CustomListChangeListeners.addIndexedListChangeListener(students, module.getStudents(),
+                    (student, index) -> new StudentCard(student, index + 1).getRoot());
+        CustomListChangeListeners.addIndexedAndFlagListChangeListener(groups, module.getGroups(),
+                    (group, index, flag) -> new GroupCard(group, index + 1, flag).getRoot());
+        CustomListChangeListeners.addIndexedListChangeListener(keyEvents, module.getKeyEvents(),
+            (keyEvent, index) -> new ModuleKeyEventCard(keyEvent, index + 1).getRoot());
     }
 
-    /**
-     * Fills the professor card list of this module card.
-     */
-    private void fillProfessorList() {
-        ObservableList<Professor> modelProfessorList = module.getProfessors();
-        int index = 0;
-        ArrayList<Node> professorCards = new ArrayList<>();
-        for (Professor prof : modelProfessorList) {
-            index++;
-            professorCards.add(new ProfessorCard(prof, index).getRoot());
-        }
-        professors.getChildren().setAll(professorCards);
-    }
-
-    /**
-     * Fills the student card list of this module card.
-     */
-    private void fillStudentList() {
-        ObservableList<Student> modelStudentList = module.getStudents();
-        int index = 0;
-        ArrayList<Node> studentCards = new ArrayList<>();
-        for (Student student : modelStudentList) {
-            index++;
-            studentCards.add(new StudentCard(student, index).getRoot());
-        }
-        students.getChildren().setAll(studentCards);
-    }
-
-    /**
-     * Fills the group card list of this module card.
-     */
-    private void fillGroupList() {
-        ObservableList<Group> modelGroupList = module.getGroups();
-        int index = 0;
-        ArrayList<Node> groupCards = new ArrayList<>();
-        for (Group group : modelGroupList) {
-            index++;
-            groupCards.add(new GroupCard(group, index, modelGroupList.size() == 1).getRoot());
-        }
-        groups.getChildren().setAll(groupCards);
-    }
-
-    /**
-     * Fills the key event list of this module card.
-     */
-    private void fillKeyEventList() {
-        ObservableList<ModuleKeyEvent> modelModuleKeyEventList = module.getKeyEvents();
-        int index = 0;
-        ArrayList<Node> moduleKeyEventCards = new ArrayList<>();
-        for (ModuleKeyEvent keyEvent : modelModuleKeyEventList) {
-            index++;
-            moduleKeyEventCards.add(new ModuleKeyEventCard(keyEvent, index).getRoot());
-        }
-        keyEvents.getChildren().setAll(moduleKeyEventCards);
-    }
 
     @Override
     public boolean equals(Object other) {
