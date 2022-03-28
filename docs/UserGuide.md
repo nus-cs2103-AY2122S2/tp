@@ -60,8 +60,11 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
   * e.g. if the command specifies `-n <LESSON_NAME> -d <DATE/START_DATE> -t <START_TIME>`, <br>
   `-d <DATE / START_DATE> -t <START_TIME> -n <lesson_NAME>` is also acceptable.
 
-* **Where `<STUDENT_ID>` and `<LESSON_ID>` are mentioned, they are with referring to the index of the student 
+* **Where `<STUDENT_ID>` and `<LESSON_ID>` are mentioned, they are with referring to the index number of the student 
 or lesson in the viewable lists.**
+  * eg. If a `find` command is used, and the viewable list changes to a filtered one, `<STUDENT_ID>` and `<LESSON_ID>`
+  would refer to the index in the new viewable list.
+  
 * **Duplicate prefixes are not allowed unless explicitly stated.**
   * e.g. `assign -s 1 -l 1 -l 2` is not allowed as there are two `-l` prefixes present in the command.
 
@@ -156,9 +159,9 @@ Adds a recurring lesson with the following attributes:
 
 <div markdown="block" class="alert alert-info">
 
->**❗ Conflicting Lessons:** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
->
-> **💡 Tip:** If you still want to add this lesson, use `rmlesson` to remove the list of conflicting lessons shown before proceeding to add the new lesson.
+* **❗ Conflicting Lessons:** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
+
+* **💡 Tip:** If you still want to add this lesson, use [`rmlesson`](#deleting a-lesson) to remove the list of conflicting lessons shown before proceeding to add the new lesson.
 
 </div>
 
