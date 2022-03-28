@@ -21,12 +21,12 @@ public class AppointmentsBetweenCommand extends Command {
 
     public static final String COMMAND_WORD = "appointmentsbetween";
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Lists appointments within a period.** "
-            + "Parameters: *"
+            + "\nParameters: *"
             + "[" + PREFIX_DATE_START + "STARTDATE] "
             + "[" + PREFIX_TIME_START + "STARTTIME] "
             + "[" + PREFIX_DATE_END + "ENDDATE "
-            + "[" + PREFIX_TIME_END + "ENDTIME]]*\n"
-            + "Example: `" + COMMAND_WORD + " "
+            + "[" + PREFIX_TIME_END + "ENDTIME]]*"
+            + "\nExample: `" + COMMAND_WORD + " "
             + PREFIX_DATE_START + "22-10-2022 "
             + PREFIX_TIME_START + "12:30 "
             + PREFIX_DATE_END + "22-10-2022 "

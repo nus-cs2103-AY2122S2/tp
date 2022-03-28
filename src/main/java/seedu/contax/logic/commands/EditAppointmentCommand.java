@@ -47,7 +47,7 @@ public class EditAppointmentCommand extends Command {
             + PREFIX_DURATION + "60 "
             + PREFIX_PERSON + "2`";
 
-    public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
+    public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment:\n %1$s";
     public static final String MESSAGE_NOT_EDITED = "No fields supplied, nothing was changed.";
 
     private final Index index;
