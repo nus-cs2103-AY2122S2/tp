@@ -3,10 +3,10 @@ package manageezpz.model.task;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    protected String type;
     private Date date;
     private Time startTime;
     private Time endTime;
-    protected String type;
 
     /**
      * Constructor for the Task class.

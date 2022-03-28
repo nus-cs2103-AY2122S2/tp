@@ -3,9 +3,9 @@ package manageezpz.model.task;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+    protected String type;
     private Date date;
     private Time time;
-    protected String type;
 
     /**
      * Constructor for the Task class.

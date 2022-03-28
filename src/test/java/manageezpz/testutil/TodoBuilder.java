@@ -1,7 +1,6 @@
 package manageezpz.testutil;
 
 import manageezpz.model.task.Description;
-import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
 
 public class TodoBuilder {
