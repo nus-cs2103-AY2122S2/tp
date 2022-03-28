@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTS_TAKEN_AND_RESULTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
@@ -29,17 +29,17 @@ public class AddConsultationCommand extends Command {
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
-            + PREFIX_NOTES + "NOTES "
-            + PREFIX_PRESCRIPTION + " "
-            + PREFIX_TESTS_TAKEN_AND_RESULTS + " \n"
+            + PREFIX_DIAGNOSIS + "DIAGNOSIS "
+            + PREFIX_FEE + "FEE "
+            + PREFIX_NOTES + "NOTES \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "consultation "
             + PREFIX_NRIC + "S1234567L "
             + PREFIX_DATE + "19-09-2020 "
             + PREFIX_TIME + "19-00 "
-            + PREFIX_NOTES + "Patient was having cough, sneezing fits. "
-            + PREFIX_PRESCRIPTION + " "
-            + PREFIX_TESTS_TAKEN_AND_RESULTS + " ";
+            + PREFIX_DIAGNOSIS + "Upper respiratory infection. Patient was having cough, sneezing fits. "
+            + PREFIX_FEE + "54.00 "
+            + PREFIX_NOTES + "Should get more cough drops. ";
 
     public static final String MESSAGE_SUCCESS = "New consultation added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already "

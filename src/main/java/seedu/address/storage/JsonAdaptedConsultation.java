@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Notes;
-import seedu.address.model.consultation.Prescription;
-import seedu.address.model.consultation.TestsTakenAndResults;
+import seedu.address.model.consultation.ConsultationDiagnosis;
+import seedu.address.model.consultation.ConsultationFee;
+import seedu.address.model.consultation.ConsultationNotes;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.patient.Nric;
 
@@ -24,25 +24,25 @@ class JsonAdaptedConsultation {
     private final String ownerNric;
     private final String date;
     private final String time;
+    private final String diagnosis;
+    private final String fee;
     private final String notes;
-    private final String prescription;
-    private final String testsTakenAndResults;
 
     /**
      * Constructs a {@code JsonAdaptedConsultation} with the given consultation details.
      */
     @JsonCreator
     public JsonAdaptedConsultation(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("date") String date,
-                              @JsonProperty("time") String time, @JsonProperty("notes") String notes,
-                              @JsonProperty("prescription") String prescription, @JsonProperty("testsTakenAndResults")
-                                               String testsTakenAndResults) {
+                              @JsonProperty("time") String time, @JsonProperty("diagnosis") String diagnosis,
+                              @JsonProperty("fee") String fee, @JsonProperty("notes")
+                                               String notes) {
 
         this.ownerNric = ownerNric;
         this.date = date;
         this.time = time;
+        this.diagnosis = diagnosis;
+        this.fee = fee;
         this.notes = notes;
-        this.prescription = prescription;
-        this.testsTakenAndResults = testsTakenAndResults;
     }
 
     /**
@@ -52,9 +52,9 @@ class JsonAdaptedConsultation {
         ownerNric = source.getNric().value;
         date = source.getDate().value().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         time = source.getTime().value().format(DateTimeFormatter.ofPattern("HH-mm"));
+        diagnosis = source.getDiagnosis().value();
+        fee = source.getFee().value();
         notes = source.getNotes().value();
-        prescription = source.getPrescription().value();
-        testsTakenAndResults = source.getTestAndResults().value();
     }
 
     /**
@@ -72,6 +72,7 @@ class JsonAdaptedConsultation {
         }
         final String modelOwnerNric = ownerNric;
 
+
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
@@ -79,6 +80,7 @@ class JsonAdaptedConsultation {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final String modelDate = date;
+
 
         if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
@@ -88,15 +90,30 @@ class JsonAdaptedConsultation {
         }
         final String modelTime = time;
 
+
+        if (diagnosis == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ConsultationDiagnosis.class.getSimpleName()));
+        }
+        if (!ConsultationDiagnosis.isValidDiagnosis(diagnosis)) {
+            throw new IllegalValueException(ConsultationDiagnosis.MESSAGE_CONSTRAINTS);
+        }
+        final String modelDiagnosis = diagnosis;
+
+
+        if (fee == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ConsultationFee.class.getSimpleName()));
+        }
+        if (!ConsultationFee.isValidFee(fee)) {
+            throw new IllegalValueException(ConsultationFee.MESSAGE_CONSTRAINTS);
+        }
+        final String modelFee = fee;
+
+
         final String modelNotes = notes;
-
-        final String modelPrescription = prescription;
-
-        final String modelTestsTakenAndResults = testsTakenAndResults;
 
 
         return new Consultation(new Nric(modelOwnerNric), new Date(modelDate), new Time(modelTime),
-                new Notes(modelNotes), new Prescription(modelPrescription),
-                new TestsTakenAndResults(modelTestsTakenAndResults));
+                new ConsultationDiagnosis(modelDiagnosis), new ConsultationFee(modelFee),
+                new ConsultationNotes(modelNotes));
     }
 }
