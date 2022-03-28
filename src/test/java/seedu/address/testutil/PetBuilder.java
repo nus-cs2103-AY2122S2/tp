@@ -135,7 +135,8 @@ public class PetBuilder {
     }
 
     /**
-     * Sets the {@code PresentAttendanceEntry} of the {@code Pet} that we are building.
+     * Sets the {@code PresentAttendanceEntry} of the {@code Pet} that we are building,
+     * including transport arrangements.
      */
     public PetBuilder withPresentAttendanceEntry(String attendanceDate, String pickUpTime, String dropOffTime) {
         attendanceHashMap.addAttendance(
@@ -143,6 +144,21 @@ public class PetBuilder {
                 LocalDate.parse(attendanceDate),
                 LocalTime.parse(pickUpTime),
                 LocalTime.parse(dropOffTime)));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PresentAttendanceEntry} of the {@code Pet} that we are building,
+     * excluding transport arrangements.
+     */
+    public PetBuilder withPresentAttendanceEntry(String attendanceDate) {
+        attendanceHashMap.addAttendance(
+            new PresentAttendanceEntry(
+                LocalDate.parse(attendanceDate),
+                null,
+                null
+            )
+        );
         return this;
     }
 

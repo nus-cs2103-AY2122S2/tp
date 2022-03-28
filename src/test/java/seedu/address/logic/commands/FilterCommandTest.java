@@ -192,6 +192,9 @@ public class FilterCommandTest {
 
     @Test
     public void execute_attendanceDateMatch_multiplePetsFound() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         try {
             DateContainsFilterDatePredicate predicate =
                     new DateContainsFilterDatePredicate("today");
