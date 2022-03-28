@@ -274,12 +274,12 @@ public class DeleteCommand extends Command {
 
             if (phone) {
                 String oldPhone = newPerson.getPhone().toString();
-                phoneDeleted = oldPhone.equals("") ? "None": oldPhone;
+                phoneDeleted = oldPhone.equals("") ? "None" : oldPhone;
                 newPerson = newPerson.deletePhone();
             }
             if (email) {
                 String oldEmail = newPerson.getEmail().toString();
-                emailDeleted = oldEmail.equals("") ? "None": oldEmail;
+                emailDeleted = oldEmail.equals("") ? "None" : oldEmail;
                 newPerson = newPerson.deleteEmail();
             }
             if (tag != null) {
