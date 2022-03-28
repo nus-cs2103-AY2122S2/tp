@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.LessonBook;
 import seedu.address.model.Model;
 import seedu.address.model.StudentBook;
@@ -23,7 +24,7 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setLessonBook(new LessonBook());
         model.setStudentBook(new StudentBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true, InfoPanelTypes.EMPTY, ViewTab.NONE);
     }
 
 }

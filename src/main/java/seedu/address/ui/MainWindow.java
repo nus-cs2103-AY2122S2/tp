@@ -324,10 +324,18 @@ public class MainWindow extends UiPart<Stage> {
             Lesson selectedLesson = logic.getSelectedLesson();
             populateInfoPanelWithLesson(selectedLesson);
             break;
+        case EMPTY:
+            logger.info("Clearing InfoPanel");
+            clearInfoPanel();
+            break;
         default:
             logger.severe("Something went wrong with handling the InfoPanels");
             assert false;
         }
+    }
+
+    private void clearInfoPanel() {
+        infoPanelPlaceholder.getChildren().clear();
     }
 
     private void populateInfoPanelWithStudent(Student selectedStudent) {
