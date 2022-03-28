@@ -8,7 +8,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_IS_MARKED;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import java.util.function.Predicate;

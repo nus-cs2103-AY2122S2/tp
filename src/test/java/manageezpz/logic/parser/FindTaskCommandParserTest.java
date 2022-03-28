@@ -15,7 +15,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_IS_MARKED;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
