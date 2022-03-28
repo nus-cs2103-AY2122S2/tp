@@ -132,7 +132,6 @@ public class EditAppointmentCommand extends Command {
         }
 
         Priority originalPriority = appointmentToEdit.getPriority();
-
         return new Appointment(updatedName, updatedStartDateTime, updatedDuration, updatedPerson, originalPriority);
     }
 
