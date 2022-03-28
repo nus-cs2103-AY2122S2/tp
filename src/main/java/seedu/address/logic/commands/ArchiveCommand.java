@@ -23,36 +23,26 @@ public class ArchiveCommand extends Command {
     public static final String COMMAND_WORD = "archive";
     public static final String MESSAGE_SUCCESS = "Tracey has been archived!";
     public static final String MESSAGE_FAILURE = "Unable to archive the address book";
-    private static final SimpleDateFormat ARCHIVE_DIRECTORY_NAME = new SimpleDateFormat("ddMMyy");
-    private static final SimpleDateFormat ARCHIVE_FILE_NAME = new SimpleDateFormat("ddMMyy_HHmmss");
-    private Date date = new Date();
-    private Path archiveFilePath; // path for the archived address book file
-    private Path addressBookFilePath; // path for the address book file
-    private String archiveDirectoryName; // name for the directory for the archived address book file
-    private String archiveFileName; // name for the archived address book file
+    public static final SimpleDateFormat ARCHIVE_DIRECTORY_NAME_FORMAT = new SimpleDateFormat("ddMMyy");
+    public static final SimpleDateFormat ARCHIVE_FILE_NAME_FORMAT = new SimpleDateFormat("ddMMyy_HHmmssSSS");
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        addressBookFilePath = model.getAddressBookFilePath();
-        archiveDirectoryName = initArchiveDirectoryPathName();
-        archiveFileName = initArchiveFilePathName();
-        archiveFilePath = initArchiveFilePath();
-        archiveFile();
-
+        archiveFile(model);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
     /**
      * Initialises the path for the archived address book file. This method will first get the directory path of the
      * address book file path e.g. "[ROOT]/data" if the address book file path is "[ROOT]/data/addressbook.json".
-     * A path to the archived address book file is then returned using this directory path as the reference path
-     * eg. "[ROOT]/data/[ARCHIVED_FILE_PATH]".
-     * @param archiveDirectoryName The directory name for the archived address book file
-     * @param archiveFileName The name for the archived address book file
+     *  A path to the archived address book file is then returned using this directory path as the reference path.
+     * @param addressBookFilePath path for address book file
+     * @param archiveDirectoryName name for the archive directory
+     * @param archiveFileName name for the archived file
      * @return path for the archived address book file
      */
-    private Path initArchiveFilePath() {
+    private Path initArchiveFilePath(Path addressBookFilePath, String archiveDirectoryName, String archiveFileName) {
         String splitRegex = Pattern.quote(System.getProperty("file.separator")); // "\" is the regex in this case
         StringBuilder addressBookFileDirectory = new StringBuilder();
         String[] splitAddressBookFilePath = addressBookFilePath.toString().split(splitRegex);
@@ -76,7 +66,8 @@ public class ArchiveCommand extends Command {
      * @return Name for the directory for the archived file
      */
     private String initArchiveDirectoryPathName() {
-        return ARCHIVE_DIRECTORY_NAME.format(date);
+        Date date = new Date();
+        return ARCHIVE_DIRECTORY_NAME_FORMAT.format(date);
     }
 
     /**
@@ -84,21 +75,26 @@ public class ArchiveCommand extends Command {
      * @return Name for the archived file
      */
     private String initArchiveFilePathName() {
-        return ARCHIVE_FILE_NAME.format(date) + ".json";
+        Date date = new Date();
+        return ARCHIVE_FILE_NAME_FORMAT.format(date) + ".json";
     }
 
     /**
      * Creates the archived address book file in the specified path and copies the information in the address book
      * to the archived address book.
+     * @param model Address book model.
      * @throws CommandException if the file or directory cannot be created, or if the file cannot be copied.
      */
-    private void archiveFile() throws CommandException {
+    private void archiveFile(Model model) throws CommandException {
+        Path addressBookFilePath = model.getAddressBookFilePath();
+        String archiveDirectoryName = initArchiveDirectoryPathName();
+        String archiveFileName = initArchiveFilePathName();
+        Path archiveFilePath = initArchiveFilePath(addressBookFilePath,archiveDirectoryName, archiveFileName);
         try {
             FileUtil.createIfMissing(archiveFilePath);
             Files.copy(addressBookFilePath, archiveFilePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException error) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-
     }
 }
