@@ -124,49 +124,70 @@ It is split into the following subsections:
 #### 4.1.1 Customer management command parameters
 The table below shows a list of command parameters that will be used for customer management.
 
-
-#### 4.1.2 Adding a customer: `add`
+|Parameter|Description|
+|---------|-----------|
+|`NAME`|Name of the customer. Names should only contain alphanumeric characters and spaces, and it should not be blank.|
+|`PHONE_NUMBER`|Phone number of the customer. Phone numbers should only contain numbers, and it should be at least 3 digits long.|
+|`ADDRESS`|Address of the customer. Addresses can take any values, and it should not be blank.|
+|`EMAIL`|Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <br> <ol><li> The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li> <li> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li> <li>have each domain label start and end with alphanumeric characters</li> <li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>|
+|`STAFF_PREFERENCE`|The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank.|
+|`SERVICE_PREFERENCE`|The name of the services that the customer prefers. Services' name can be any values, and it should not be blank.|
+|`HAIR_TYPE`|The hair type of the customer. Hair types can be any values, and it should not be blank.|
+|`SKIN_TYPE`|The skin type of the customer. Skin types can be any values, and it should not be blank.|
+|`ALLERGY`|The allergy that the customer has. Allergies can be any values, and it should not be blank.|
+|`BIRTHDATE`|The birthdate of the customer. Birthdate should follow dd-mm-yyyy and be valid date.|
+|`REGISTRATION_DATE`|The registration date of the customer. Registration date should follow dd-mm-yyyy and be valid date.|
+|`INDEX`|The index of the customer in the displayed list. It must be a valid positive index.|
+#### 4.1.2 Adding a customer: `addc`
 
 Adds a customer to the application.
 
-Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​`
+Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A customer can have any number of preferred staffs, preferred services and allergies (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 al/Aloe Vera sep/facial sep/massage`
+* `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com`
+* `addc n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 al/Aloe Vera sep/facial sep/massage`
 
-#### 4.1.3 Listing all customers : `list`
+#### 4.1.3 Listing all customers : `listc`
 
 Shows a list of all customers in the application.
 
-Format: `list`
+Format: `listc`
 
-#### 4.1.4 Editing a customer : `edit`
+#### 4.1.4 Editing a customer : `editc`
 
 Edits an existing customer in the application.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​`
+Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
-* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing staff preferences, service preferences or allergies, the existing staff preferences, service preferences or allergies of the customer will be removed i.e adding of staff preferences, service preferences or allergies is not cumulative.
-* You can remove all the customer’s staff preferences, service preferences or allergies by typing `stp/`, `sep/` or `al/` without
-  specifying any staff preferences, service preferences or allergies after it.
+<div markdown="block" class="alert alert-info">
+Information: 
+<ul>
+    <li>At least one of the optional fields must be provided.</li>
+    <li>Existing values will be updated to the input values.</li>
+</ul>
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<ul>
+    <li>When editing staff/service preferences or allergies, the existing staff/service preferences or allergies will be removed i.e., adding of staff/service preferences or allergies is not cumulative.</li>
+    <li>By leaving the staff/service preferences or allergies parameter empty, i.e, `stp/` or `sep/` or `al/` it will remove all the staff/service preferences or allergies currently associated with the customer.</li>
+</ul>
+</div>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower al/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing allergies.
+*  `editc 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
+*  `editc 2 n/Betsy Crower al/` Edits the name of the 2nd customer to be `Betsy Crower` and removes all existing allergies.
 
-#### 4.1.5 Listing customers' profile by name: `find`
+#### 4.1.5 Finding customers' profile by name: `findc`
 
 Finds customers whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
 * Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies
 * The search is case-insensitive. e.g `john` will match `john`
@@ -178,18 +199,18 @@ Examples:
 * `find allergies nickle` returns customer profiles with nickle allergies
 * `find hairtype oily dry` returns customer profiles that has the hair type of oily or dry
 
-#### 4.1.6 Deleting customer(s) : `delete`
+#### 4.1.6 Deleting customer(s) : `deletec`
 
 Deletes the specified customer(s) from the application.
 
-Format: delete INDEX,[MORE INDEXES]
+Format: deletec INDEX,[MORE INDEXES]
 * Deletes the customer profile at the specified INDEXES.
 * The index refers to the index number shown in the displayed customer list.
 * The index must be a positive integer 1, 2, 3, …
 * All indexes must be valid else the operation will not execute.
 
 Examples:
-* `delete 1,2` : Removes the 1st and 2nd customer from the application.
+* `deletec 1,2` : Removes the 1st and 2nd customer from the application.
 
 ### 4.2 Service management
 
