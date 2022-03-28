@@ -3,7 +3,7 @@ package manageezpz.logic.commands;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
-import static manageezpz.testutil.TypicalTasks.getTypicalAddressBook;
+import static manageezpz.testutil.TypicalTasks.getTypicalAddressBookTasks;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 

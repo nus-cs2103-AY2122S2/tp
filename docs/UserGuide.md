@@ -79,6 +79,29 @@ Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
 * `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
 
+### Finding employees: `findEmployee`
+
+Finds employees that have all of the options as entered.
+
+#### Note:
+* Options can be stacked together in any order. 
+* No options entered will result in all employees list out like the `listEmployee` command.
+
+#### Format:
+* `findEmployee n/NAMES`
+  * Finds all employees which has their name contain any of the words in `NAMES`
+* `findEmployee p/PHONE_NUMBER`
+  * Find employees with the exact phone number
+* `findEmployee e/EMAIL`
+  * Finds employees with the exact email
+  
+#### Examples:
+* `findEmployee n/Alex Yeoh`
+* `findEmployee p/65162727`
+* `findEmployee e/dcsdcr@nus.edu.sg`
+* `findEmployee n/Alex Yeo p/65162727 e/alexyeo@google.com`
+
+
 ### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
 Adds a Task into the Task list.

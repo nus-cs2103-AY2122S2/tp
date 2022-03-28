@@ -36,7 +36,8 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
         String email = getPersonEmail(argMultimap);
 
         if (hasError) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    errorMessage + FindEmployeeCommand.MESSAGE_USAGE));
         } else {
             return new FindEmployeeCommand(new PersonMultiplePredicate(names, phone, email));
         }
@@ -49,7 +50,7 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
             String[] nameArguments = nameArgumentString.split("\\s+");
             boolean isValid = Arrays.stream(nameArguments).allMatch(name -> Name.isValidName(name));
             if (!isValid) {
-                addErrorMessage(Name.MESSAGE_CONSTRAINTS);
+                addErrorMessage(FindEmployeeCommand.INVALID_NAME);
             } else {
                 names = Arrays.asList(nameArguments);
             }
@@ -63,7 +64,7 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
             phone = argMultimap.getValue(PREFIX_PHONE).get();
             boolean isValidPhone = Phone.isValidPhone(phone);
             if (!isValidPhone) {
-                addErrorMessage(Phone.MESSAGE_CONSTRAINTS);
+                addErrorMessage(FindEmployeeCommand.INVALD_PHONE);
                 phone = null;
             }
         }
@@ -76,7 +77,7 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
             email = argMultimap.getValue(PREFIX_EMAIL).get();
             boolean isEmailValid = Email.isValidEmail(email);
             if (!isEmailValid) {
-                addErrorMessage(Email.MESSAGE_CONSTRAINTS);
+                addErrorMessage(FindEmployeeCommand.INVALID_EMAIL);
                 email = null;
             }
         }

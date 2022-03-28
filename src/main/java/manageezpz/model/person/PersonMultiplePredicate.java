@@ -34,7 +34,7 @@ public class PersonMultiplePredicate implements Predicate<Person> {
         boolean hasPhone = phone != null ? checkIfPhoneExists(person) : true;
         boolean hasEmail = email != null ? checkIfEmailExists(person) : true;
 
-        return  hasName && hasPhone && hasEmail;
+        return hasName && hasPhone && hasEmail;
     }
 
     private boolean checkIfNameExists(Person person) {
@@ -47,6 +47,47 @@ public class PersonMultiplePredicate implements Predicate<Person> {
     }
 
     private boolean checkIfEmailExists(Person person) {
+        Email email = new Email(this.email);
         return person.getEmail().equals(email);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (other instanceof PersonMultiplePredicate) {
+            PersonMultiplePredicate otherPredicate = (PersonMultiplePredicate) other;
+            boolean isNameEquals = checkIfNameEquals(otherPredicate.name);
+            boolean isPhoneEquals = checIfPhoneEquals(otherPredicate.phone);
+            boolean isEmailEquals = checkIfEmailEquals(otherPredicate.email);
+
+            return isNameEquals && isPhoneEquals && isEmailEquals;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkIfNameEquals(List<String> name) {
+        if (name != null) {
+            return name.equals(this.name);
+        } else {
+            return this.name == null;
+        }
+    }
+
+    private boolean checIfPhoneEquals(String phone) {
+        if (phone != null) {
+            return phone.equals(this.phone);
+        } else {
+            return this.phone == null;
+        }
+    }
+
+    private boolean checkIfEmailEquals(String email) {
+        if (email != null) {
+            return email.equals(this.email);
+        } else {
+            return this.email == null;
+        }
     }
 }

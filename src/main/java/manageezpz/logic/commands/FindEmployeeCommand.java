@@ -10,7 +10,10 @@ import java.util.function.Predicate;
 import manageezpz.commons.core.Messages;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
+import manageezpz.model.person.Email;
+import manageezpz.model.person.Name;
 import manageezpz.model.person.PersonMultiplePredicate;
+import manageezpz.model.person.Phone;
 
 /**
  * The command to find employees based on the multiple properties given.
@@ -21,11 +24,14 @@ public class FindEmployeeCommand extends Command {
             PREFIX_EMAIL.getPrefix(), PREFIX_PHONE.getPrefix());
     public static final String NOTE = "";
     public static final String EXAMPLE = "";
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            ": Finds all employees that contains the properties specified.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all employees that contains the properties specified.\n"
             + "Employee's properties " + PERSON_PROPERTIES + "\n"
             + NOTE + "\n"
             + EXAMPLE;
+    public static final String INVALID_NAME = Name.MESSAGE_CONSTRAINTS + "\n";
+    public static final String INVALD_PHONE = Phone.MESSAGE_CONSTRAINTS + "\n";
+    public static final String INVALID_EMAIL = Email.MESSAGE_CONSTRAINTS + "\n";
 
     private PersonMultiplePredicate predicate;
 

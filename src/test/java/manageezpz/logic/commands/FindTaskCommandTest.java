@@ -15,7 +15,7 @@ import static manageezpz.testutil.TypicalTasks.PROJECT_CAPSTONE;
 import static manageezpz.testutil.TypicalTasks.READ_BOOK;
 import static manageezpz.testutil.TypicalTasks.RETURN_BOOK;
 import static manageezpz.testutil.TypicalTasks.WEEKLY_QUIZ;
-import static manageezpz.testutil.TypicalTasks.getTypicalAddressBook;
+import static manageezpz.testutil.TypicalTasks.getTypicalAddressBookTasks;
 import static manageezpz.testutil.TypicalTasks.getTypicalTask;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -36,8 +36,8 @@ import manageezpz.model.task.Task;
 import manageezpz.model.task.TaskMultiplePredicate;
 
 class FindTaskCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
 
     @BeforeEach
     void setMoreProperties() {
