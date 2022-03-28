@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
+    private PersonInsightListPanel personInsightListPanel;
     private ExpandedPersonListPanel expandedPersonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -50,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane eventListPanelPlaceholder;
+
+    @FXML
+    private StackPane personInsightListPanelPlaceholder;
 
     @FXML
     private StackPane expandedPersonListPanelPlaceholder;
@@ -140,6 +144,9 @@ public class MainWindow extends UiPart<Stage> {
         eventListPanel = new EventListPanel(logic.getEventsList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
+        personInsightListPanel = new PersonInsightListPanel(logic.getInsightsList());
+        personInsightListPanelPlaceholder.getChildren().add(personInsightListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -192,8 +199,12 @@ public class MainWindow extends UiPart<Stage> {
 
     private void changeInterface(CommandResult commandResult) {
         boolean event = commandResult.isEvent();
+        boolean showInsight = commandResult.isShowInsights();
         boolean isExpandedCard = commandResult.isShowFriendCommand();
-        if (event) {
+        if (showInsight) {
+            tabs.getSelectionModel().select(personListTab);
+            personInsightListPanelPlaceholder.requestFocus();
+        } else if (event) {
             tabs.getSelectionModel().select(eventsListTab);
             eventListPanelPlaceholder.requestFocus();
         } else {

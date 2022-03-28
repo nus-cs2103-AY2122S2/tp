@@ -46,7 +46,7 @@ public class ShowFriendCommand extends Command {
         model.updateFilteredPersonList(x -> x.isSamePerson(toShow));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toShow.getName()), false,
-                false, false, true);
+                false, false, true, false);
     }
 
     @Override

@@ -4,12 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.insights.PersonInsight;
 
 /**
  * Wraps all data at the address-book level
@@ -168,6 +171,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
+    }
+
+
+    @Override
+    public ObservableList<PersonInsight> getInsightsList(Model model) {
+        return FXCollections.observableArrayList(this.getPersonList()
+                .stream()
+                .map(person -> new PersonInsight(person, model))
+                .collect(Collectors.toList()));
     }
 
     @Override

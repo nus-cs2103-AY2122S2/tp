@@ -12,12 +12,14 @@ import seedu.address.model.person.Person;
 public class PersonInsight {
 
     // Data fields
+    private final Person person;
     private final Insight numberOfLogs;
     private final Insight numberOfEvents;
     private final Insight lastEvent;
 
     public PersonInsight(Person person, Model model) {
         requireAllNonNull(person, model);
+        this.person = person;
         this.numberOfEvents = NumEventsInsight.of(person, model);
         this.numberOfLogs = NumLogsInsight.of(person, model);
         this.lastEvent = MostRecentEventInsight.of(person, model);
@@ -34,6 +36,10 @@ public class PersonInsight {
 
     public String getLastEventInsightAsString() {
         return this.lastEvent.getAsString();
+    }
+
+    public Person getPerson() {
+        return this.person;
     }
 
 

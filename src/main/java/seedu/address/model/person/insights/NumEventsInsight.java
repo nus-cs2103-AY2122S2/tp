@@ -11,6 +11,7 @@ import seedu.address.model.person.Person;
  */
 public class NumEventsInsight extends Insight implements Comparable<NumEventsInsight> {
 
+
     private final int number;
 
     public static NumEventsInsight of(Person person, Model model) {
