@@ -413,6 +413,7 @@
     -fx-padding: 1 10 1 10;
     -fx-background-radius: 20;
     -fx-font-size: 10;
+    -fx-font-weight: bold;
 }
 
 .roles_list .list-view {

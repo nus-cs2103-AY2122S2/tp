@@ -11,7 +11,7 @@ import seedu.tinner.commons.core.LogsCenter;
 import seedu.tinner.model.reminder.UniqueReminderList;
 
 /**
- * Controller for a help page
+ * Controller for a reminder page
  */
 public class ReminderWindow extends UiPart<Stage> {
 
@@ -21,6 +21,10 @@ public class ReminderWindow extends UiPart<Stage> {
     @FXML
     private StackPane reminderDateListPanelPlaceholder;
 
+    /**
+     * Creates a new ReminderWindow
+     * @param root
+     */
     public ReminderWindow(Stage root) {
         super(FXML, root);
         UniqueReminderList reminderList = UniqueReminderList.getInstance();
@@ -28,14 +32,15 @@ public class ReminderWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new ReminderWindow.
      */
     public ReminderWindow() {
         this(new Stage());
     }
 
     /**
-     * Updates <code>roleListPanelPlaceholder</code> to reflect the contents of the current <code>roleList</code>
+     * Updates <code>reminderListPanelPlaceholder</code> to reflect the contents of the current
+     * <code>reminderList</code>
      */
     public void setReminderListPanelListViewPlaceholder(ObservableList<LocalDate> roleList) {
         ReminderDateListPanel reminderDateListPanel = new ReminderDateListPanel(roleList);
@@ -68,21 +73,21 @@ public class ReminderWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the reminder window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the reminder window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the reminder window.
      */
     public void focus() {
         getRoot().requestFocus();

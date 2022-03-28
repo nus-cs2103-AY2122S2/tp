@@ -15,6 +15,7 @@ import seedu.tinner.commons.core.LogsCenter;
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.model.company.Company;
 import seedu.tinner.model.company.RoleManager;
+import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.Role;
 
 /**
@@ -26,22 +27,30 @@ public class ModelManager implements Model {
     private final CompanyList companyList;
     private final UserPrefs userPrefs;
     private final FilteredList<Company> filteredCompanies;
+    private UniqueReminderList reminderList;
 
     /**
-     * Initializes a ModelManager with the given companyList and userPrefs.
+     * Initializes a ModelManager with the given companyList, userPrefs and reminderList.
      */
-    public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(companyList, userPrefs);
-
+    public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs, UniqueReminderList reminderList) {
+        requireAllNonNull(companyList, userPrefs, reminderList);
         logger.fine("Initializing with company list: " + companyList + " and user prefs " + userPrefs);
 
         this.companyList = new CompanyList(companyList);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
+        filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
+        this.reminderList = reminderList;
     }
 
     public ModelManager() {
-        this(new CompanyList(), new UserPrefs());
+        this(new CompanyList(), new UserPrefs(), UniqueReminderList.getInstance());
+    }
+
+    //=========== ReminderWindow ==================================================================================
+    @Override
+    public void setReminderWindow(int reminderWindow) {
+        this.userPrefs.setReminderWindow(reminderWindow);
+
     }
 
     //=========== UserPrefs ==================================================================================
@@ -155,6 +164,12 @@ public class ModelManager implements Model {
     }
 
     //=========== RoleManager ================================================================================
+    /**
+     * Adds the given role.
+     * @param role must not already exist in the Company.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     */
     @Override
     public void addRole(Index companyIndex, Role role) {
         assert (companyIndex.getZeroBased() < filteredCompanies.size());
@@ -165,6 +180,13 @@ public class ModelManager implements Model {
         roleManager.addRole(role);
     }
 
+    /**
+     * Checks if a role with the same identity as {@code role} exists in the role list.
+     * @param role to be checked if it exists in the Company.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     * @return true if a role with the same identity as {@code role} exists in the role list.
+     */
     @Override
     public boolean hasRole(Index companyIndex, Role role) {
         assert (companyIndex.getZeroBased() < filteredCompanies.size());
@@ -175,6 +197,12 @@ public class ModelManager implements Model {
         return roleManager.hasRole(role);
     }
 
+    /**
+     * Deletes the given role.
+     * @param roleToDelete must exists in the Company.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     */
     @Override
     public void deleteRole(Index companyIndex, Role roleToDelete) {
         assert (companyIndex.getZeroBased() < filteredCompanies.size());
@@ -185,6 +213,13 @@ public class ModelManager implements Model {
         roleManager.deleteRole(roleToDelete);
     }
 
+    /**
+     * Replaces the given role {@code target} with {@code editedRole}.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     * @param target must exists in the Company.
+     * @param editedRole must not be the same as an existing role in the role list.
+     */
     @Override
     public void setRole(Index companyIndex, Role target, Role editedRole) {
         assert (companyIndex.getZeroBased() < filteredCompanies.size());
@@ -195,6 +230,11 @@ public class ModelManager implements Model {
         roleManager.setRole(target, editedRole);
     }
 
+    /**
+     * Updates the filter of the filtered role list to filter by the given {@code predicate}.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     */
     @Override
     public void updateFilteredRoleList(Index companyIndex, Predicate<Role> predicate) {
         assert (companyIndex.getZeroBased() < filteredCompanies.size());
@@ -205,6 +245,12 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Company List Accessors =============================================================
+    /**
+     * Returns a filtered role list.
+     * @param companyIndex must be a non-negative index that is smaller than
+     *                     the size of a filtered company list.
+     * @return the filtered role list with a given company.
+     */
     @Override
     public ObservableList<Role> getFilteredRoleList(Index companyIndex) {
         assert (companyIndex.getZeroBased() < filteredCompanies.size());
@@ -212,5 +258,10 @@ public class ModelManager implements Model {
         Company company = this.filteredCompanies.get(companyIndex.getZeroBased());
         RoleManager roleManager = company.getRoleManager();
         return roleManager.getFilteredRoleList();
+    }
+
+    //=================== Reminder List Accessors =============================================================
+    public UniqueReminderList getReminderList() {
+        return reminderList;
     }
 }

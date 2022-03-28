@@ -11,6 +11,17 @@ import javafx.collections.ObservableList;
 import seedu.tinner.model.role.exceptions.DuplicateRoleException;
 import seedu.tinner.model.role.exceptions.RoleNotFoundException;
 
+/**
+ * A list of roles that enforces uniqueness between its elements and does not allow nulls.
+ * A role is considered unique by comparing using {@code Role#isSameRole(Role)}. As such, adding and
+ * updating of companies uses Role#isSameRole(Role) for equality so as to ensure that the Role being added
+ * or updated is unique in terms of identity in the UniqueRoleList. However, the removal of a Role uses
+ * Role#equals(Object) so as to ensure that the Role with exactly the same fields will be removed.
+ * <p>
+ * Supports a minimal set of list operations.
+ *
+ * @see Role#isSameRole(Role)
+ */
 public class UniqueRoleList implements Iterable<Role> {
 
     private final ObservableList<Role> internalList = FXCollections.observableArrayList();

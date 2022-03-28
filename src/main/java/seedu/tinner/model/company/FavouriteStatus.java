@@ -3,7 +3,7 @@ package seedu.tinner.model.company;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Company's favourite status in the address book.
+ * Represents a Company's favourite status in the company list.
  * Guarantees: immutable
  */
 public class FavouriteStatus {
