@@ -120,7 +120,7 @@ public class Appointment extends ScheduleItem {
                 + "\n **Duration:** "
                 + getDuration()
                 + "\n **Person:** "
-                + (getPerson() == null ? "None" : getPerson());
+                + (getPerson() == null ? "None" : getPerson().getName());
     }
 
     /**
