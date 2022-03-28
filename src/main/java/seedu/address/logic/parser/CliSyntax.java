@@ -19,5 +19,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("r/");
     public static final Prefix PREFIX_SCHEDULE = new Prefix("S/");
     public static final Prefix PREFIX_LINEUP = new Prefix("L/");
+    public static final Prefix PREFIX_THEME = new Prefix("T/");
 
 }

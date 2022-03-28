@@ -36,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private boolean isDarkMode;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -66,6 +68,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        this.isDarkMode = true;
 
         setAccelerators();
 
@@ -170,6 +174,22 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Changes to dark mode.
+     */
+    @FXML
+    private void handleToDark() {
+        loadFxmlFile(getFxmlFileUrl("MainWindow.fxml"), primaryStage);
+        this.isDarkMode = true;
+        fillInnerParts();
+    }
+
+    private void handleToLight() {
+        loadFxmlFile(getFxmlFileUrl("MainWindowLightMode.fxml"), primaryStage);
+        this.isDarkMode = false;
+        fillInnerParts();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -191,6 +211,22 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isToDark()) {
+                if (isDarkMode) {
+                    resultDisplay.setFeedbackToUser("MyGM is already in dark mode.");
+                } else {
+                    handleToDark();
+                }
+            }
+
+            if (commandResult.isToLight()) {
+                if (!isDarkMode) {
+                    resultDisplay.setFeedbackToUser("MyGM is already in light mode.");
+                } else {
+                    handleToLight();
+                }
             }
 
             return commandResult;

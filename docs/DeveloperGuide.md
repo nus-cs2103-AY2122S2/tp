@@ -259,6 +259,7 @@ Meanwhile, the `lineups` attribute of each person should also be updated if the 
 The proposed view player functionality queries players from the existing UniquePersonList. The players returned is
 dependent on the keywords specified in the command. The proposed view mechanism is facilitated by ModelManger which
 keeps a FilteredList of players. Note that this FilteredList of players is updated via a specified Predicate.
+
 Additionally, it implements the following operations:
 - `ModelManager#updateFilteredPersonList(Predicate<Person>) - Filters internal storage via a Predicate<Person> specification`
 
@@ -294,6 +295,9 @@ Puts a `Person` into a `Lineup`
 Stores the `LineupName` in `Person`
 
 Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
+
+![put](images/Put.png)
+
 #### Design Consideration
 **Aspect: How to navigate from player to lineup:**
 
@@ -481,7 +485,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | tag my players by 'fit to play'                                                                | know which are the available healthy players for competition                                       |
 | `*`      | new user       | key in the first few letters to see what commands starting with these letters are available    | know the potential commands that starts with these letters                                         |
 | `*`      | expert user    | send mass reminders to each players one day before the training date                           | automate the sending of announcements to my players                                                |
-
+| `*`      | user           | change the theme to light mode                                                                 | read the words more clearly in various environment                                                 |
 
 *{More to be added}*
 

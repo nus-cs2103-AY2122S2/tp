@@ -2,10 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
-import seedu.address.model.lineup.LineupPlayersList;
-import seedu.address.model.person.Person;
-
-import static seedu.address.testutil.TypicalPersons.BENSON;
 
 /**
  * A utility class to help with building Lineup objects.
