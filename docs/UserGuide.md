@@ -138,11 +138,12 @@ The table below shows a list of command parameters that will be used for custome
 |`BIRTHDATE`|The birthdate of the customer. Birthdate should follow dd-mm-yyyy and be valid date.|
 |`REGISTRATION_DATE`|The registration date of the customer. Registration date should follow dd-mm-yyyy and be valid date.|
 |`INDEX`|The index of the customer in the displayed list. It must be a valid positive index.|
+
 #### 4.1.2 Adding a customer: `addc`
 
 Adds a customer to the application.
 
-Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​`
+Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A customer can have any number of preferred staffs, preferred services and allergies (including 0)
@@ -183,6 +184,11 @@ Examples:
 *  `editc 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
 *  `editc 2 n/Betsy Crower al/` Edits the name of the 2nd customer to be `Betsy Crower` and removes all existing allergies.
 
+Example Usage: `editc 2 n/Betsy Crower al/`
+
+![Editing a customer example](images/user-guide/edit-customer.png)
+
+
 #### 4.1.5 Finding customers' profile by name: `findc`
 
 Finds customers whose names contain any of the given keywords.
@@ -203,29 +209,93 @@ Examples:
 
 Deletes the specified customer(s) from the application.
 
-Format: deletec INDEX,[MORE INDEXES]
+Format: `deletec INDEX,[MORE INDEXES]`
 * Deletes the customer profile at the specified INDEXES.
 * The index refers to the index number shown in the displayed customer list.
 * The index must be a positive integer 1, 2, 3, …
 * All indexes must be valid else the operation will not execute.
 
 Examples:
-* `deletec 1,2` : Removes the 1st and 2nd customer from the application.
+* `deletec 1,2` Removes the 1st and 2nd customer from the application.
 
 ### 4.2 Service management
 
 #### 4.2.1 Service management command parameters
 The table below shows a list of command parameters that will be used for service management.
 
+|Parameter|Description|
+|---------|-----------|
+|`SERVICE_NAME`|Name of the service. Service name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. It should also be unique such that no two services have the same name.|
+|`PRICE`|Price of the service. Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.|
+|`DURATION`|Duration of the service in minutes. Duration should only contain numbers and have a value that is greater than 0.|
+|`INDEX`|The index of the service in the displayed list. It must be a valid positive index.|
+
+#### 4.2.2 Adding a service: `adds`
+Adds a service to the application.
+
+Format: `adds n/SERVICE_NAME pr/PRICE d/DURATION`
+
+Examples:
+* `adds n/Acne Facial Treatment pr/138 d/120`
+* `adds n/Hydrating Facial pr/108 d/60`
+
+Example Usage: `adds n/Acne Facial Treatment pr/138 d/120`
+
+![Adding a service example](images/user-guide/add-service.png)
+
+
+#### 4.2.3 Listing all services : `lists`
+
+Shows a list of all services in the application.
+
+Format: `lists`
+
+#### 4.2.4 Editing a service: `edits`
+Edits an existing service in the application.
+
+Format: `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
+
+Examples:
+* `edits 1 pr/200` Edits the price of the 1st service to be `200`.
+* `edits 2 n/Dark Eye Circle Treatment d/30` Edits the name and duration of the 2nd service to be `Dark Eye Circle Treatment` and `60` respectively.
+
+Example Usage: `edits 1 pr/200`
+
+![Editing a service example](images/user-guide/edit-service.png)
+
+
+#### 4.2.5 Deleting service(s) : `deletes`
+
+Deletes the specified service(s) from the application.
+
+Format: `deletes INDEX,[MORE INDEXES]`
+
+<div markdown="block" class="alert alert-info">
+Information: All the input indexes must be valid else the command will not be executed.
+</div>
+
+Examples:
+* `deletes 3` Removes the 3rd service from the application.
+* `deletes 1,2,3` Removes the 1st, 2nd and 3rd service from the application.
+
 ### 4.3 Booking management
 
 #### 4.3.1 Booking management command parameters
 The table below shows a list of command parameters that will be used for booking management.
 
+|Parameter|Description|
+|---------|-----------|
+|||
+|`INDEX`|The index of the booking in the displayed list. It must be a valid positive index.|
+
 ### 4.4 Statistics
 
 #### 4.4.1 Statistics command parameters
 The table below shows a list of command parameters that will be used for statistics.
+
+|Parameter|Description|
+|---------|-----------|
+|||
 
 ### 4.5 Miscellaneous
 
@@ -249,11 +319,11 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+#### 4.5.4 Saving the data
 
 TrackBeau data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### 4.5.5 Editing the data file
 
 TrackBeau data are saved as a JSON file `[JAR file location]/data/trackbeau.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -261,29 +331,64 @@ TrackBeau data are saved as a JSON file `[JAR file location]/data/trackbeau.json
 If your changes to the data file makes its format invalid, TrackBeau will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 5. Command summary
+
+### 5.1 Customer
+
+|Action|Format|Examples|
+|------|------|--------|
+|Add a customer|`addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`||
+|List all customers|`listc`||
+|Edit a customer|`editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`|`editc 2 n/Betsy Crower al/`|
+|Find customer profiles|`findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`||
+|Delete customer(s)|`deletec INDEX,[MORE INDEXES]`||
+
+### 5.2 Service
+
+|Action|Format|Examples|
+|------|------|--------|
+|Add a service|`adds n/SERVICE_NAME pr/PRICE d/DURATION`|`adds n/Acne Facial Treatment pr/138 d/120`|
+|List all services|`lists`||
+|Edit a service|`edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`|`edits 2 n/Dark Eye Circle Treatment d/30`|
+|Delete service(s)|`deletes INDEX,[MORE INDEXES]`|`deletes 1,2,3`|
+
+### 5.3 Booking
+
+|Action|Format|Examples|
+|------|------|--------|
+|||
+
+### 5.4 Statistics
+
+|Action|Format|Examples|
+|------|------|--------|
+|||
+
+### 5.5 Miscellaneous
+
+|Action|Format|
+|------|------|
+|Help|`help`|
+|Clear|`clear`|
+|Exit|`exit`|
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 6. Glossary
+|Term|Definition|
+|----|----------|
+|Command Line Interface (CLI)|A command line interface connects a user to the computer program by allowing the users to interact with the application by typing in text (commands).|
+|Graphical User Interface (GUI)|A graphical user interface is a type of user interface through which users interact with the application via visual indicator representations.|
+|Java ARchive (JAR)|A JAR is a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file distribution.|
+|Java 11|Java 11 is an open-source reference implementation of Java SE platform version 11.|
+|Javascript Object Notation (JSON)|JSON is a text format for storing and transporting data.|
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackBeau home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-| Action     | Format, Examples                                                                                                                                                                                                                                                    |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​`<br>e.g., `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 al/Aloe Vera sep/facial sep/massage` |
-| **Clear**  | `clear`                                                                                                                                                                                                                                                             |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                 |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​`<br>e.g.,`edit 1 p/91234567 e/johndoe@example.com`                                                       |
-| **Exit**   | `exit`                                                                                                                                                                                                                                                              |
-| **Find**   | `find KEYWORDTYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find hairtype oily dry`                                                                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                                                                                                              |
-| **List**   | `list`                                                                                                                                                                                                                                                              |
-| **Show**   | `show INDEX`<br> e.g., `show 3`                                                                                                                                                                                                                                     |
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackBeau home folder.                                                                                                                                                                                                                                   |
