@@ -6,6 +6,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_END;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,10 +22,10 @@ public class AppointmentsBetweenCommand extends Command {
     public static final String COMMAND_WORD = "appointmentsbetween";
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Lists appointments within a period.** "
             + "Parameters: *"
-            + PREFIX_DATE_START + "STARTDATE "
-            + PREFIX_TIME_START + "STARTTIME "
-            + PREFIX_DATE_END + "ENDDATE "
-            + PREFIX_TIME_END + "ENDTIME*\n"
+            + "[" + PREFIX_DATE_START + "STARTDATE] "
+            + "[" + PREFIX_TIME_START + "STARTTIME] "
+            + "[" + PREFIX_DATE_END + "ENDDATE "
+            + "[" + PREFIX_TIME_END + "ENDTIME]]*\n"
             + "Example: `" + COMMAND_WORD + " "
             + PREFIX_DATE_START + "22-10-2022 "
             + PREFIX_TIME_START + "12:30 "
@@ -32,12 +33,14 @@ public class AppointmentsBetweenCommand extends Command {
             + PREFIX_TIME_END + "16:30`";
 
     public static final String MESSAGE_SUCCESS = "Listed appointments from %s to %s.";
+    public static final String PHRASE_NO_END_RANGE = "forever";
     public static final String MESSAGE_START_DATE_INVALID = "The start date provided is invalid!";
     public static final String MESSAGE_START_TIME_INVALID = "The start time provided is invalid!";
     public static final String MESSAGE_END_DATE_INVALID = "The end date provided is invalid!";
     public static final String MESSAGE_END_TIME_INVALID = "The end time provided is invalid!";
     public static final String MESSAGE_END_BEFORE_START = "The end date time provided is before the"
             + " start date time!";
+    public static final String MESSAGE_END_TIME_WITHOUT_DATE = "An end date should be provided with the end time!";
     private static final String DATETIME_DISPLAY_FORMAT = "dd LLL yyyy hh:mm a";
 
     private final LocalDateTime rangeStart;
@@ -63,9 +66,9 @@ public class AppointmentsBetweenCommand extends Command {
         model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
         model.clearDisplayedAppointmentSlots();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, rangeStart.format(formatter), rangeEnd.format(formatter)),
-                GuiListContentType.APPOINTMENT);
+        String responseMessage = String.format(MESSAGE_SUCCESS, rangeStart.format(formatter),
+                rangeEnd.toLocalDate().equals(LocalDate.MAX) ? PHRASE_NO_END_RANGE : rangeEnd.format(formatter));
+        return new CommandResult(responseMessage, GuiListContentType.APPOINTMENT);
     }
 
     @Override

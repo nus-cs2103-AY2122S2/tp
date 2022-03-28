@@ -115,6 +115,13 @@ public class FreeBetweenCommandTest {
     }
 
     @Test
+    public void execute_noUpperLimit_messageUpperLimitIsForever() {
+        assertTrue(new FreeBetweenCommand(BASE_DATE_TIME, LocalDateTime.MAX, 60)
+                .execute(new ModelManager()).getFeedbackToUser().contains("to "
+                        + FreeBetweenCommand.PHRASE_NO_END_RANGE));
+    }
+
+    @Test
     public void equals() {
         LocalDateTime refDate1 = LocalDateTime.parse("2022-12-23T12:34");
         LocalDateTime refDate2 = LocalDateTime.parse("2022-12-24T12:34");
