@@ -29,14 +29,16 @@ public class PetPickUpTimeComparator implements Comparator<Pet> {
         boolean isSecondPresent = secondAttendanceEntry instanceof PresentAttendanceEntry;
 
         if (isFirstPresent && isSecondPresent) {
-            LocalTime firstPickUpTime = firstAttendanceEntry.getPickUpTime().get();
-            LocalTime secondPickUpTime = secondAttendanceEntry.getPickUpTime().get();
+            boolean isFirstPickUpTimePresent = firstAttendanceEntry.getPickUpTime().isPresent();
+            boolean isSecondPickUpTimePresent = secondAttendanceEntry.getPickUpTime().isPresent();
 
-            if (firstPickUpTime != null && secondPickUpTime != null) {
+            if (isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
+                LocalTime firstPickUpTime = firstAttendanceEntry.getPickUpTime().get();
+                LocalTime secondPickUpTime = secondAttendanceEntry.getPickUpTime().get();
                 return firstPickUpTime.compareTo(secondPickUpTime);
-            } else if (firstPickUpTime != null && secondPickUpTime == null) {
+            } else if (isFirstPickUpTimePresent && !isSecondPickUpTimePresent) {
                 return 1;
-            } else if (firstPickUpTime == null && secondPickUpTime != null) {
+            } else if (!isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
                 return -1;
             } else {
                 return 0;

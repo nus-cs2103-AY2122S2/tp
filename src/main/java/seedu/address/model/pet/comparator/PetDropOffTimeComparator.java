@@ -29,14 +29,16 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
         boolean isSecondPresent = secondAttendanceEntry instanceof PresentAttendanceEntry;
 
         if (isFirstPresent && isSecondPresent) {
-            LocalTime firstDropOffTime = firstAttendanceEntry.getDropOffTime().get();
-            LocalTime secondDropOffTime = secondAttendanceEntry.getDropOffTime().get();
+            boolean isFirstDropOffTimePresent = firstAttendanceEntry.getDropOffTime().isPresent();
+            boolean isSecondDropOffTimePresent = secondAttendanceEntry.getDropOffTime().isPresent();
 
-            if (firstDropOffTime != null && secondDropOffTime != null) {
+            if (isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
+                LocalTime firstDropOffTime = firstAttendanceEntry.getDropOffTime().get();
+                LocalTime secondDropOffTime = secondAttendanceEntry.getDropOffTime().get();
                 return firstDropOffTime.compareTo(secondDropOffTime);
-            } else if (firstDropOffTime != null && secondDropOffTime == null) {
+            } else if (isFirstDropOffTimePresent && !isSecondDropOffTimePresent) {
                 return 1;
-            } else if (firstDropOffTime == null && secondDropOffTime != null) {
+            } else if (!isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
                 return -1;
             } else {
                 return 0;
