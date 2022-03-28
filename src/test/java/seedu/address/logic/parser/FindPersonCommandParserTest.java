@@ -8,6 +8,10 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindPersonCommand;
+import seedu.address.model.entry.predicate.PersonContainsKeywordsPredicate;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class FindPersonCommandParserTest {
 
@@ -22,16 +26,15 @@ public class FindPersonCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        ArgumentMultimap dummy = new ArgumentMultimap();
-        dummy.put(PREFIX_NAME, "Alice Bob");
-        dummy.put(new Prefix(""), "");
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(
+                List.<String>of("Alice", "Bob"), List.<String>of(""),
+                List.<String>of(""));
         FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(dummy);
+                new FindPersonCommand(predicate);
         assertParseSuccess(parser, " n/ Alice Bob", expectedFindPersonCommand);
 
-        // multiple whitespaces between keywords
-        // multiple whitespaces between keywords cannot be tested properly
-        //assertParseSuccess(parser, " \n n/  Alice \n \t Bob  \t", expectedFindPersonCommand);
+        //multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n n/  Alice \n \t Bob  \t", expectedFindPersonCommand);
     }
 
 }

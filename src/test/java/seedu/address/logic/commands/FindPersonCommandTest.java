@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -32,20 +31,20 @@ public class FindPersonCommandTest {
     @Test
     public void equals() {
 
-        ArgumentMultimap argMultimapFirst = new ArgumentMultimap();
-        argMultimapFirst.put(PREFIX_NAME, "first");
-        ArgumentMultimap argMultimapSecond = new ArgumentMultimap();
-        argMultimapFirst.put(PREFIX_NAME, "second");
+        PersonContainsKeywordsPredicate firstPredicate = new PersonContainsKeywordsPredicate(
+                List.<String>of("first"), List.<String>of(""), List.<String>of(""));
+        PersonContainsKeywordsPredicate secondPredicate = new PersonContainsKeywordsPredicate(
+                List.<String>of("second"), List.<String>of(""), List.<String>of(""));
 
 
-        FindPersonCommand findFirstCommand = new FindPersonCommand(argMultimapFirst);
-        FindPersonCommand findSecondCommand = new FindPersonCommand(argMultimapSecond);
+        FindPersonCommand findFirstCommand = new FindPersonCommand(firstPredicate);
+        FindPersonCommand findSecondCommand = new FindPersonCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindPersonCommand findFirstCommandCopy = new FindPersonCommand(argMultimapFirst);
+        FindPersonCommand findFirstCommandCopy = new FindPersonCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -76,11 +75,9 @@ public class FindPersonCommandTest {
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(List.<String>of("Kurz", "Elle", "Kunz"),
                         List.<String>of(""), List.<String>of(""));
-        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
-        argumentMultimap.put(PREFIX_NAME, "Kurz Elle Kunz");
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false, false);
-        FindPersonCommand command = new FindPersonCommand(argumentMultimap);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
