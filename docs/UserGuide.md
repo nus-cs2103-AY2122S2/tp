@@ -215,9 +215,9 @@ Example:
 
 ### Deleting previously assigned task: `deleteTask`
 
-Deletes a task from the students list of tasks.
+Deletes a task from a particular student's list of tasks.
 
-Format: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/cs2030 tn/Assignment 1`
+Format: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
 
 * An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
 * An error message will be displayed if the student with the given student ID does not exist.
@@ -226,7 +226,7 @@ Format: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/cs2030 tn/Assignm
 
 Example:
 * `deleteTask i/AXXXXXXXR idx/3`
-    * Deletes task at index 3 from the students list of assigned task, provided that a task exists at that index.
+    * Deletes task at index 3 from the student's list of assigned task, provided that a task exists at that index.
 * `deleteTask m/cs2030 tn/Assignment 1`
     * Deletes Assignment 1 that was previously assigned to any of the students taking CS2030 module.
 
@@ -301,7 +301,7 @@ Action      | Format, Examples
 **Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR idx/1`
 **Unmark**  | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR idx/1`
 **list**    | `list`
-**deleteTask**| `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/cs2030 tn/Assignment 1` <br> e.g., `deleteTask i/AXXXXXXXR idx/3`,`deleteTask m/cs2030 tn/Assignment 1`  
+**deleteTask**| `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> e.g., `deleteTask i/AXXXXXXXR idx/3`,`deleteTask m/cs2030 tn/Assignment 1`  
 **Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`, `assign m/CS2103T tn/assignment 2`
 **Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Progress**| `progress m/MODULE_CODE tn/TASK_NAME` <br> e.g., `progress m/CS2103T tn/assignment 1`

@@ -28,10 +28,12 @@ public class DeleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "deleteTask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Delete a specific task for a particular student. "
-            + "Parameters: STUDENT_ID and INDEX  (or) MODULE_CODE and TASK_NAME\n"
-            + "Example: \n" + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z " + PREFIX_INDEX + "1\n (or) \n"
-            + "Example: \n" + COMMAND_WORD + " " + PREFIX_MODULE_CODE + "CS2030 " + PREFIX_TASK_NAME + "Assignment 1";
+            + ": Deletes a specific task for a particular student. "
+            + "Parameters: " + PREFIX_ID + "STUDENT_ID " + PREFIX_INDEX + "INDEX\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z " + PREFIX_INDEX + "1\n"
+            + "or\n"
+            + "Parameters: " + PREFIX_MODULE_CODE + "MODULE_CODE " + PREFIX_TASK_NAME + "TASK_NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE_CODE + "CS2030 " + PREFIX_TASK_NAME + "Assignment 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task for %1$s deleted.";
     public static final String MESSAGE_MODULE_CODE_NOT_FOUND = "There is no person taking the given module.";

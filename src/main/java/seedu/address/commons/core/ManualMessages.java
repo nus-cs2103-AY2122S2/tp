@@ -95,10 +95,11 @@ public class ManualMessages {
             + "9. archive \n"
             + "10. list \n"
             + "11. assign \n"
-            + "12. progress \n"
-            + "13. manual \n"
-            + "14. help \n"
-            + "15. exit \n"
+            + "12. deleteTask \n"
+            + "13. progress \n"
+            + "14. manual \n"
+            + "15. help \n"
+            + "16. exit \n"
             + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";
