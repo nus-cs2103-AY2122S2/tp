@@ -3,7 +3,6 @@ package seedu.address.model.interview;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.position.Position;
@@ -66,8 +65,10 @@ public class Interview {
      * Checks if the given interview will conflict with the current interview.
      */
     public boolean isConflictingInterview(Interview i) {
-        return i.isInterviewForApplicant(this.applicant)
-                && !(i.date.isBefore(this.date.minus(59, ChronoUnit.MINUTES))
+        boolean isSameApplicant = i.isInterviewForApplicant(this.applicant);
+
+        // Interview has to be at least 1 hour before or after the current interview time for it not to clash
+        return isSameApplicant && !(i.date.isBefore(this.date.minusMinutes(59))
                         || i.date.isAfter(this.date.plusMinutes(59)));
     }
 
