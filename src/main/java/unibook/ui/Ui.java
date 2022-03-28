@@ -57,6 +57,11 @@ public interface Ui {
     void setPersonListPanel();
 
     /**
+     * Gets the list of groups shown in the ui.
+     */
+    ObservableList<Group> getShowingGroupList();
+
+    /**
      * Set the view to show given list of groups.
      *
      * @param group list of groups to show.
