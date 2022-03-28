@@ -92,7 +92,7 @@ Format: `help`
 Adds a player/ lineup/ schedule to MyGM.
 
 **To add a player:**
-Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`
+Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
 
@@ -101,7 +101,7 @@ Examples:
 and email of johnd@example.com to the player list.`
 
 **To add a lineup:**
-Format: `add L/ n/LINEUP_NAME [P/PLAYER]…​`
+Format: `add L/ n/LINEUP_NAME`
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
 * If `n/LINEUP_NAME` and `P/PLAYER` are specified, a lineup with the specified `LINEUP_NAME` with the specified `PLAYER` added to this lineup.
 * Multiple `PLAYER` can be specified but it will be **capped at 5**.
@@ -117,7 +117,7 @@ Format: `add S/ r/DESCRIPTION d/DATETIME`
 * `DATETIME` must be in a date time format.
 
 Examples:
-* `add S/ d/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900`.
+* `add S/ r/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900`.
 
 ### deleting a player/ lineup/ schedule :  `delete`
 deletes a player/ lineup/ schedule from MyGM
@@ -143,35 +143,10 @@ Format: `delete T/ i/INDEX_SCHEDULE`
   Example:
   *`delete i/1` will delete schedule `1` from MyGM.
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Putting a player to a lineup: `put`
 
 Puts a player to a specific team or to a specific lineup.
 
-**To put a player to a lineup:** <br>
 Format: `put P/PLAYER L/LINEUP`
 * Adds a player to a specific lineup.
 * Displays error if either the specified PLAYER or LINEUP does not exist.
@@ -220,24 +195,6 @@ Format: `view i/[INDEX]`
 Examples:
 * `view i/1` Displays the information on `Lakaka`'s 1st schedule.
 
-### Finding a lineup or player: `find`
-
-Finds the specified lineup or player.
-
-####To find a lineup:
-Format: `find L/LINEUP`
-* Finds the specified `LINEUP` and displays its information.
-
-Examples:
-* `find L/STARTING FIVE` If the user forgets which team `STARTING FIVE` belongs to, they can use this command to find it.
-
-####To find a player:
-Format: `find P/PLAYER`
-* Finds the specified `PLAYER` and displays his/her information.
-
-Examples:
-* `find P/Brown James` If the user forgets which team and lineup `Brown James` belongs to, they can use this command to find him.
-
 ### Filtering players by position: `filter`
 
 Filter all players with the specified tag(s).
@@ -276,13 +233,13 @@ Example:
 
 **To edit a schedule:**
 
-Format: `edit i/INDEX_SCHEDULE S/ [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
+Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 
 * Edit the details of the i-th schedule of a team
 * If any fields are specified, it will be changed accordingly
 
 Example:
-* `edit 1 S/ n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule
+* `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule
 
 ### Clearing all entries : `clear`
 
@@ -323,7 +280,7 @@ Example:
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MyGM data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
