@@ -25,7 +25,6 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setLessonBook(new LessonBook());
         model.setStudentBook(new StudentBook());
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(MESSAGE_SUCCESS, true, InfoPanelTypes.EMPTY, ViewTab.NONE);
     }
 
