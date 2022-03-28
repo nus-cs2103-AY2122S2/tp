@@ -1,6 +1,7 @@
 package seedu.contax.model.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.contax.commons.util.AppUtil.checkArgument;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.Duration;
@@ -23,8 +24,8 @@ import seedu.contax.model.chrono.TimeRange;
  * upon any modification to the list. It also enforces a chronological ordering of the appointments in the
  * list, done by sorting {@link Appointment#getStartDateTime()} since appointments are disjoint.
  *
- * Note that {@link #remove(Appointment)} uses Appointment#equals(Object) to find the target appointment to
- * remove.
+ * Note that {@link #remove(Appointment)} uses {@link Appointment#equals(Object)} to find the target
+ * appointment to remove.
  *
  * Supports a minimal set of list operations.
  */
@@ -89,8 +90,9 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
      */
     public boolean containsOverlapping(Appointment target) {
         requireNonNull(target);
-        long overlappingAppointmentCount = appointments.stream().filter((appointment) -> (
-                appointment.isOverlapping(target))).count();
+        long overlappingAppointmentCount = appointments.stream()
+                .filter((appointment) -> (appointment.isOverlapping(target)))
+                .count();
 
         return overlappingAppointmentCount > 0;
     }
@@ -107,8 +109,9 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         }
 
         // Check for overlapping appointments
-        long overlappingAppointmentCount = appointments.stream().filter((appointment) -> (
-                appointment.isOverlapping(target))).count();
+        long overlappingAppointmentCount = appointments.stream()
+                .filter((appointment) -> (appointment.isOverlapping(target)))
+                .count();
 
         if (overlappingAppointmentCount > 0) {
             throw new OverlappingAppointmentException();
@@ -127,7 +130,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
      * @param newAppointment The {@code Appointment} to replace {@code target} with.
      * @throws AppointmentNotFoundException If {@code target} cannot be found in the list.
      */
-    public void setAppointment(Appointment target, Appointment newAppointment) {
+    public void set(Appointment target, Appointment newAppointment) {
         requireAllNonNull(target, newAppointment);
 
         int indexOfTarget = appointments.indexOf(target);
@@ -193,9 +196,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     public List<TimeRange> findAvailableSlotsInRange(LocalDateTime start, LocalDateTime end,
                                                      int minimumDuration) {
         requireAllNonNull(start, end, minimumDuration);
-        if (minimumDuration <= 0) {
-            throw new IllegalArgumentException("Duration has to be a positive integer");
-        }
+        checkArgument(minimumDuration > 0, "Duration has to be a positive integer");
 
         ArrayList<TimeRange> slotsFound = new ArrayList<>();
         if (!(start.isBefore(end))) {
@@ -209,6 +210,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
 
         Appointment firstAppointment = appointments.get(0);
         Appointment lastAppointment = appointments.get(size() - 1);
+
         if (Duration.between(start, firstAppointment.getStartDateTime()).toMinutes() >= minimumDuration) {
             slotsFound.add(new TimeRange(start, getEarlier(firstAppointment.getStartDateTime(), end)));
         }
@@ -256,36 +258,56 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
 
     /**
      * Performs the shifting operation in insertion sort, omitting the insert into list component of
-     * insertion sort, and shifts the appointment at the given {@code index} into its sorted position.
-     * Note that this function may only be called if only the given appointment at {@code index} is out
-     * of position.
+     * insertion sort. It shifts the appointment at the given {@code index} into its sorted position in the list.
+     * Note that this function will only guarantee a sorted list after its completion if the given appointment
+     * at {@code index} is the only element out of position.
      *
-     * @param index The appointment to shift into place. This must be a valid index in the appointments list.
+     * @param index The index of the appointment to shift into place. This must be a valid index in the
+     *              appointments list.
      */
     private void shiftAppointmentToPosition(int index) {
         assert (index >= 0 && index < appointments.size());
 
         Appointment target = appointments.get(index);
-        int otherIndex = index;
 
         // Determine direction
         if (index - 1 >= 0 && target.compareTo(appointments.get(index - 1)) < 0) {
             // target < index - 1, shift left
-            otherIndex = index - 1;
-            while (otherIndex >= 0 && target.compareTo(appointments.get(otherIndex)) < 0) {
-                appointments.set(otherIndex + 1, appointments.get(otherIndex)); // Right Shift
-                otherIndex--;
-            }
-            appointments.set(otherIndex + 1, target);
+            shiftAppointmentLeft(index);
         } else if (index + 1 < appointments.size() && target.compareTo(appointments.get(index + 1)) > 0) {
-            // target > index + 1
-            otherIndex = index + 1;
-            while (otherIndex < appointments.size() && target.compareTo(appointments.get(otherIndex)) > 0) {
-                appointments.set(otherIndex - 1, appointments.get(otherIndex)); // Left Shift
-                otherIndex++;
-            }
-            appointments.set(otherIndex - 1, target);
+            // target > index + 1, shift right
+            shiftAppointmentRight(index);
         }
+    }
+
+    /**
+     * Shifts the appointment at {@code index} left into its sorted position.
+     */
+    private void shiftAppointmentLeft(int index) {
+        assert (index >= 0 && index < appointments.size());
+
+        Appointment target = appointments.get(index);
+        int otherIndex = index - 1;
+        while (otherIndex >= 0 && target.compareTo(appointments.get(otherIndex)) < 0) {
+            appointments.set(otherIndex + 1, appointments.get(otherIndex)); // Right shift other appointment
+            otherIndex--;
+        }
+        appointments.set(otherIndex + 1, target);
+    }
+
+    /**
+     * Shifts the appointment at {@code index} right into its sorted position.
+     */
+    private void shiftAppointmentRight(int index) {
+        assert (index >= 0 && index < appointments.size());
+
+        Appointment target = appointments.get(index);
+        int otherIndex = index + 1;
+        while (otherIndex < appointments.size() && target.compareTo(appointments.get(otherIndex)) > 0) {
+            appointments.set(otherIndex - 1, appointments.get(otherIndex)); // Left Shift
+            otherIndex++;
+        }
+        appointments.set(otherIndex - 1, target);
     }
 
     /**
@@ -299,6 +321,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
      */
     private void findAvailableSlotsBetweenAppointments(ArrayList<TimeRange> resultList, LocalDateTime start,
                                            LocalDateTime end, long minimumDuration) {
+        assert (resultList != null) && (start != null) && (end != null);
+
         for (int i = 0; i < size() - 1; i++) {
             LocalDateTime gapStart = getLater(appointments.get(i).getEndDateTime(), start);
             LocalDateTime gapEnd = getEarlier(appointments.get(i + 1).getStartDateTime(), end);

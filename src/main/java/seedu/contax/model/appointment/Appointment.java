@@ -10,7 +10,7 @@ import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 
 /**
- * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass.
+ * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass
  * {@link ScheduleItem}.
  */
 public class Appointment extends ScheduleItem {
@@ -36,7 +36,7 @@ public class Appointment extends ScheduleItem {
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
-                Appointment.getEndDateTimeOrThrow(startDateTime, duration));
+                Appointment.computeEndDateTime(startDateTime, duration));
         requireNonNull(name);
 
         this.name = name;
@@ -101,7 +101,7 @@ public class Appointment extends ScheduleItem {
     /**
      * Creates a new {@code Appointment} instance with the supplied {@code Person} object.
      *
-     * @param newPerson The person object to replace the current associated person.
+     * @param newPerson The person object, or null, to replace the current associated person.
      * @return A new immutable instance of Appointment with the updated Person.
      */
     public Appointment withPerson(Person newPerson) {
@@ -115,7 +115,7 @@ public class Appointment extends ScheduleItem {
      */
     @Override
     public LocalDateTime getEndDateTime() {
-        return getStartDateTimeObject().value.plusMinutes(getDuration().value);
+        return Appointment.computeEndDateTime(startDateTime, duration);
     }
 
     /**
@@ -148,14 +148,15 @@ public class Appointment extends ScheduleItem {
 
     @Override
     public String toString() {
-        return getName()
-                + "; Start Date Time: "
+        return "**Name:** "
+                + getName()
+                + "\n **Start Date Time:** "
                 + getStartDateTimeObject()
-                + "; Duration: "
+                + "\n **Duration:** "
                 + getDuration()
-                + "; Person: "
-                + getPerson()
-                + "; Priority: "
+                + "\n **Person:** "
+                + (getPerson() == null ? "None" : getPerson().getName());
+                + "\n **Priority:** "
                 + getPriority();
     }
 
@@ -177,7 +178,7 @@ public class Appointment extends ScheduleItem {
      * @param duration The Duration container to use.
      * @return The computed end date-time.
      */
-    private static LocalDateTime getEndDateTimeOrThrow(StartDateTime startDateTime, Duration duration) {
+    private static LocalDateTime computeEndDateTime(StartDateTime startDateTime, Duration duration) {
         requireAllNonNull(startDateTime, duration);
         return startDateTime.value.plusMinutes(duration.value);
     }

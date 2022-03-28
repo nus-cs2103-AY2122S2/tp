@@ -132,15 +132,16 @@ public class AppointmentTest {
         LocalDateTime startDate = LocalDateTime.parse("2022-02-11T12:30:00");
         Appointment appointment = new AppointmentBuilder().withName("Test Meeting")
                 .withStartDateTime(startDate).withDuration(20).withPerson(ALICE).build();
-        assertEquals(appointment.getName()
-                + "; Start Date Time: "
-                + appointment.getStartDateTimeObject()
-                + "; Duration: "
-                + appointment.getDuration()
-                + "; Person: "
-                + appointment.getPerson()
-                + "; Priority: "
-                + appointment.getPriority(),
+
+        assertEquals("**Name:** "
+                        + appointment.getName()
+                        + "\n **Start Date Time:** "
+                        + appointment.getStartDateTimeObject()
+                        + "\n **Duration:** "
+                        + appointment.getDuration()
+                        + "\n **Person:** Alice Pauline"
+                        + "\n **Priority:** "
+                        + appointment.getPriority(),
                 appointment.toString());
     }
 
