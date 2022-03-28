@@ -104,7 +104,12 @@ class JsonAdaptedPerson {
                 preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
 
         final Set<UserImage> modelUserImages = new LinkedHashSet<>();
+        UserImage newImage;
         for (JsonAdaptedUserImage userImage : userImages) {
+            newImage = userImage.toModelType();
+            if (newImage == null) {
+                continue;
+            }
             modelUserImages.add(userImage.toModelType());
         }
 
