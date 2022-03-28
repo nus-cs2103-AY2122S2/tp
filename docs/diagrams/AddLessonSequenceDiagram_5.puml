@@ -3,10 +3,6 @@
 
 mainframe **sd** check if any conflicting lessons exist
 
-box Logic LOGIC_COLOR_T1
-participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
-end box
-
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":LessonBook" as LessonBook MODEL_COLOR
@@ -14,7 +10,7 @@ participant ":ConsistentLessonList" as ConsistentLessonList MODEL_COLOR
 participant ":ConflictsWithLessonsException" as ConflictsWithLessonsException MODEL_COLOR
 end box
 
-AddLessonCommand -> Model : addLesson(lessonToBeAdded)
+[-> Model : addLesson(lessonToBeAdded)
 
 Model -> LessonBook : addLesson(lessonToBeAdded)
 LessonBook -> ConsistentLessonList : add(lessonToBeAdded)
@@ -35,7 +31,7 @@ opt conflicting lesson found
 
     LessonBook <-- ConsistentLessonList : exception
     Model <-- LessonBook : exception
-    AddLessonCommand <-- Model : exception
+    [<-- Model : exception
 end opt
 
 @enduml
