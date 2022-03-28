@@ -26,7 +26,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
    * **`addEmployee`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ManageEZPZ.
 
-   * **`delete`**`3` : Deletes the 3rd Task shown in the Task list.
+   * **`deleteTask`**`3` : Deletes the 3rd Task shown in the Task list.
 
    * **`clear`** : Deletes everything from ManageEZPZ.
    
@@ -70,7 +70,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `addEmployee`
+### Adding an employee: `addEmployee`
 
 Adds an employee to ManageEZPZ.
 
@@ -80,18 +80,40 @@ Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
 * `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
 
+### Deleting an employee: `deleteEmployee`
+
+Deletes the specified employee from the address book.
+
+Format: `deleteEmployee INDEX`
+
+* Deletes the employee at the specified INDEX.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `list` followed by `deleteEmployee 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by delete 1 deletes the 1st person in the results of the find command.
+
+
 ### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
 Adds a Task into the Task list.
 
 Format:
-
 * `addTodo desc/TASK_DESCRIPTION`
 * `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
 * `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
+Examples:
+* `addTodo desc/read book`
+* `addDeadline desc/return book by/16-02-2022 1800`
+* `addEvent desc/project meeting at/17-02-2022 1900 2000`
+
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 For deadline and event, the DATE must be in this format: YYYY-MM-DD and the TIME in this format: HHmm (in 24 hr format)
+
+Furthermore, parsing of task is done using the keywords such as "desc/", "by/" & "at/" as such, 
+the parsing mechanism would take everything inserted after the keywords.
 </div>
 
 ### Listing all Tasks : `list`
