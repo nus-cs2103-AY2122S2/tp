@@ -27,6 +27,9 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final Double resultDisplaySizeOne = 100.0;
+    private final Double resultDisplaySizeTwo = 200.0;
+    private final Double resultDisplaySizeThree = 300.0;
 
     private Stage primaryStage;
     private Logic logic;
@@ -154,6 +157,21 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Toggles display text place holder height to grow and shrink.
+     */
+    @FXML
+    public void handleResize() {
+        double height = resultDisplayPlaceholder.getHeight();
+            if (height == resultDisplaySizeOne) {
+                resultDisplayPlaceholder.setMinHeight(resultDisplaySizeTwo );
+            } else if (height == resultDisplaySizeTwo) {
+                resultDisplayPlaceholder.setMinHeight(resultDisplaySizeThree );
+            } else {
+                resultDisplayPlaceholder.setMinHeight(resultDisplaySizeOne);
+            }
     }
 
     /**
