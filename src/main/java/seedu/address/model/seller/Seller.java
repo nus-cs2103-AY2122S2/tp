@@ -6,7 +6,6 @@ import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.property.Address;
 import seedu.address.model.property.PropertyToSell;
 import seedu.address.model.tag.Tag;
 

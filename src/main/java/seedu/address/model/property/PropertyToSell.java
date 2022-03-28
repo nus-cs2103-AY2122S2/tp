@@ -32,7 +32,17 @@ public class PropertyToSell {
         this.address = address;
     }
 
-    public PropertyToSell updatePropertyToSell(HouseType houseType, Location location, PriceRange priceRange, Address address) {
+    /**
+     * Update the PropertyToSell information by calling this method, this method will be used
+     * in {@code EditSellerCommand} class.
+     * @param houseType
+     * @param location
+     * @param priceRange
+     * @param address
+     * @return a new updated PropertyToSell
+     */
+    public PropertyToSell updatePropertyToSell(HouseType houseType, Location location,
+                                               PriceRange priceRange, Address address) {
         //Todo: need to implement updateHouseType for House class
         //this.house.updateHouseType(houseType);
         //this.house.updateLocation(location);

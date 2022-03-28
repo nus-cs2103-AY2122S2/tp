@@ -100,7 +100,7 @@ public class EditSellerCommand extends Command {
         //Todo: add property
         //PropertyToSell updatedPropertyToSell = editSellerDescriptor.getPropertyToSell()
         //        .orElse(NullPropertyToSell.getNullPropertyToSell());
-        if (sellerToEdit.getPropertyToSell() instanceof  NullPropertyToSell) {
+        if (sellerToEdit.getPropertyToSell() instanceof NullPropertyToSell) {
             //The seller do not have property yet,
             /*
             Todo:

@@ -67,7 +67,8 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
             editSellerDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE_RANGE).isPresent()) {
-            editSellerDescriptor.setPriceRange(ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_PRICE_RANGE).get()));
+            editSellerDescriptor.setPriceRange(ParserUtil.parsePriceRange(
+                    argMultimap.getValue(PREFIX_PRICE_RANGE).get()));
         }
 
         if (!editSellerDescriptor.isAnyFieldEdited()) {
