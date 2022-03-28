@@ -12,7 +12,7 @@ import java.util.Comparator;
  * Comparator class to compare pets based on pet's Pick Up Time.
  */
 public class PetPickUpTimeComparator implements Comparator<Pet> {
-    LocalDate today = LocalDate.now();
+    private LocalDate today = LocalDate.now();
 
     /**
      * Compares pet objects based on their pick up time attribute.
@@ -29,24 +29,35 @@ public class PetPickUpTimeComparator implements Comparator<Pet> {
         boolean isSecondPresent = secondAttendanceEntry instanceof PresentAttendanceEntry;
 
         if (isFirstPresent && isSecondPresent) {
-            boolean isFirstPickUpTimePresent = firstAttendanceEntry.getPickUpTime().isPresent();
-            boolean isSecondPickUpTimePresent = secondAttendanceEntry.getPickUpTime().isPresent();
-
-            if (isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
-                LocalTime firstPickUpTime = firstAttendanceEntry.getPickUpTime().get();
-                LocalTime secondPickUpTime = secondAttendanceEntry.getPickUpTime().get();
-                return firstPickUpTime.compareTo(secondPickUpTime);
-            } else if (isFirstPickUpTimePresent && !isSecondPickUpTimePresent) {
-                return 1;
-            } else if (!isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return comparePresentAttendanceEntries(firstAttendanceEntry, secondAttendanceEntry);
         } else if (isFirstPresent && !isSecondPresent) {
             return -1;
         } else if (!isFirstPresent && isSecondPresent) {
             return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Compares presentAttendanceEntries of pets based on their drop off time.
+     * Used in compare method.
+     * @param firstPet's AttendanceEntry.
+     * @param secondPet's AttendanceEntry.
+     * @return Value signifying in the difference between the comparing attribute.
+     */
+    private int comparePresentAttendanceEntries(AttendanceEntry firstPet, AttendanceEntry secondPet) {
+        boolean isFirstPickUpTimePresent = firstPet.getPickUpTime().isPresent();
+        boolean isSecondPickUpTimePresent = secondPet.getPickUpTime().isPresent();
+
+        if (isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
+            LocalTime firstPickUpTime = firstPet.getPickUpTime().get();
+            LocalTime secondPickUpTime = secondPet.getPickUpTime().get();
+            return firstPickUpTime.compareTo(secondPickUpTime);
+        } else if (isFirstPickUpTimePresent && !isSecondPickUpTimePresent) {
+            return 1;
+        } else if (!isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
+            return -1;
         } else {
             return 0;
         }

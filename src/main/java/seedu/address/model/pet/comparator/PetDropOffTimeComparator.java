@@ -12,7 +12,7 @@ import java.util.Comparator;
  * Comparator class to compare pets based on pet's Drop Off Time.
  */
 public class PetDropOffTimeComparator implements Comparator<Pet> {
-    LocalDate today = LocalDate.now();
+    private LocalDate today = LocalDate.now();
 
     /**
      * Compares pet objects based on their drop off time attribute.
@@ -29,20 +29,7 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
         boolean isSecondPresent = secondAttendanceEntry instanceof PresentAttendanceEntry;
 
         if (isFirstPresent && isSecondPresent) {
-            boolean isFirstDropOffTimePresent = firstAttendanceEntry.getDropOffTime().isPresent();
-            boolean isSecondDropOffTimePresent = secondAttendanceEntry.getDropOffTime().isPresent();
-
-            if (isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
-                LocalTime firstDropOffTime = firstAttendanceEntry.getDropOffTime().get();
-                LocalTime secondDropOffTime = secondAttendanceEntry.getDropOffTime().get();
-                return firstDropOffTime.compareTo(secondDropOffTime);
-            } else if (isFirstDropOffTimePresent && !isSecondDropOffTimePresent) {
-                return 1;
-            } else if (!isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return comparePresentAttendanceEntries(firstAttendanceEntry, secondAttendanceEntry);
         } else if (isFirstPresent && !isSecondPresent) {
             return -1;
         } else if (!isFirstPresent && isSecondPresent) {
@@ -51,4 +38,29 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
             return 0;
         }
     }
+
+    /**
+     * Compares presentAttendanceEntries of pets based on their drop off time.
+     * Used in compare method.
+     * @param firstPet's AttendanceEntry.
+     * @param secondPet's AttendanceEntry.
+     * @return Value signifying in the difference between the comparing attribute.
+     */
+    private int comparePresentAttendanceEntries(AttendanceEntry firstPet, AttendanceEntry secondPet) {
+        boolean isFirstDropOffTimePresent = firstPet.getDropOffTime().isPresent();
+        boolean isSecondDropOffTimePresent = secondPet.getDropOffTime().isPresent();
+
+        if (isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
+            LocalTime firstDropOffTime = firstPet.getDropOffTime().get();
+            LocalTime secondDropOffTime = secondPet.getDropOffTime().get();
+            return firstDropOffTime.compareTo(secondDropOffTime);
+        } else if (isFirstDropOffTimePresent && !isSecondDropOffTimePresent) {
+            return 1;
+        } else if (!isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
 }
