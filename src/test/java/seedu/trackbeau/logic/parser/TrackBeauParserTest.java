@@ -82,7 +82,8 @@ public class TrackBeauParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, keywords);
         FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
             FindCustomerCommand.COMMAND_WORD + " /n" + keywords.stream().collect(Collectors.joining(" ")));

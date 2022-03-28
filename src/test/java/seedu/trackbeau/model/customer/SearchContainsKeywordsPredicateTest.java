@@ -20,8 +20,10 @@ public class SearchContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
-        ArrayList<List<String>> secondPrefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> secondPrefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
         firstPrefixArr.set(0, firstPredicateKeywordList);
         SearchContainsKeywordsPredicate firstPredicate = new SearchContainsKeywordsPredicate(firstPrefixArr);
         secondPrefixArr.set(0, secondPredicateKeywordList);
@@ -47,7 +49,8 @@ public class SearchContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Collections.singletonList("Alice"));
         SearchContainsKeywordsPredicate predicate = new SearchContainsKeywordsPredicate(prefixArr);
         assertTrue(predicate.test(new CustomerBuilder().withName("Alice Bob").build()));
@@ -70,7 +73,8 @@ public class SearchContainsKeywordsPredicateTest {
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
 
         // Zero keywords
         SearchContainsKeywordsPredicate predicate = new SearchContainsKeywordsPredicate(prefixArr);

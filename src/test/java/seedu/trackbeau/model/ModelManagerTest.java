@@ -122,7 +122,8 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Arrays.asList(keywords));
         modelManager.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
         assertFalse(modelManager.equals(new ModelManager(trackBeau, userPrefs)));

@@ -28,7 +28,8 @@ public class FindCustomerCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // Find name with no leading and trailing whitespaces
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Arrays.asList(new String[]{"alex", "yeoh"}));
         prefixArr.set(1, Arrays.asList(new String[]{"87438807"}));
         prefixArr.set(2, Arrays.asList(new String[]{"alex@example.com"}));

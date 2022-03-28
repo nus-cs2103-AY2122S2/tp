@@ -39,8 +39,8 @@ public class FindCommandParser implements Parser<FindCustomerCommand> {
                 PREFIX_SKINTYPE, PREFIX_HAIRTYPE,
                     PREFIX_BIRTHDATE, PREFIX_REGDATE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
         Prefix[] prefixList = { PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SKINTYPE,
-                PREFIX_HAIRTYPE, PREFIX_BIRTHDATE, PREFIX_REGDATE, PREFIX_STAFFS,
-                PREFIX_SERVICES, PREFIX_ALLERGIES};
+            PREFIX_HAIRTYPE, PREFIX_BIRTHDATE, PREFIX_REGDATE, PREFIX_STAFFS,
+            PREFIX_SERVICES, PREFIX_ALLERGIES};
 
         if (userInput.isEmpty()) {
             throw new ParseException(

@@ -189,7 +189,8 @@ public class CommandTestUtil {
 
         Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(FIND_ATTRIBUTE_COUNT, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Arrays.asList(splitName[0]));
         model.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
 
