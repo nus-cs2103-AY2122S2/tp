@@ -122,10 +122,6 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     }
 
     private boolean checkIfDateIsValid(String dateString) {
-        if (dateString.isEmpty()) {
-            addErrorMessage(FindTaskCommand.INVALID_DATE);
-            return false;
-        }
         if (!Date.isValidDate(dateString)) {
             addErrorMessage(Date.MESSAGE_CONSTRAINTS + "\n");
             return false;
