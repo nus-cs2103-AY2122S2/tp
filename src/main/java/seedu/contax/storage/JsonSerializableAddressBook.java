@@ -61,9 +61,15 @@ class JsonSerializableAddressBook {
         }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            Person person;
+            try {
+                person = jsonAdaptedPerson.toModelType();
+                if (addressBook.hasPerson(person)) {
+                    //skip instead of throwing exception
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                }
+            } catch (IllegalValueException e) {
+                continue;
             }
 
             // Load tags that were not added from tag list
