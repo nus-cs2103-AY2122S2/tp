@@ -36,10 +36,10 @@ public enum HouseType {
             return "Colonia";
         }
     },
-    HDB_FLAT("hdb, hdb_flat") {
+    HDB_FLAT("hdb", "hdb_flat") {
         @Override
         public String toString() {
-            return "HDB Flat";
+            return "HDB";
         }
     },
     SEMIDETACHED("semidetached", "semid", "semi-detached", "semi-d") {
@@ -54,10 +54,10 @@ public enum HouseType {
             return "Mansion";
         }
     },
-    NULLHOUSETYPE("Nullhouse") {
+    NULLHOUSETYPE("nullhouse") {
         @Override
         public String toString() {
-            return "";
+            return "nullhouse";
         }
     };
 
@@ -95,6 +95,10 @@ public enum HouseType {
      */
     public static boolean isValidHouseType(String house) {
         for (HouseType h : HouseType.values()) {
+            // Prevent people from adding a null house type when calling add-ptb or add-pts
+            if (h == HouseType.NULLHOUSETYPE) {
+                continue;
+            }
             HouseType houseType = h.houseMappings.get(house.toLowerCase());
             if (houseType != null) {
                 return true;

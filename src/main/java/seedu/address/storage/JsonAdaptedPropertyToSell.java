@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.NullPropertyToSell;
@@ -38,13 +39,13 @@ class JsonAdaptedPropertyToSell {
         if (!(source instanceof NullPropertyToSell)) {
             this.house = new JsonAdaptedHouse(source.getHouse());
             this.priceRange = new JsonAdaptedPriceRange(source.getPriceRange());
-            this.address = source.getAddress();
+            this.address = source.getAddress().toString();
         } else {
             //Default value of NullPropertyToSell
             System.out.println("NullPropertyToSell is translating to JSON format");
-            this.house = new JsonAdaptedHouse(new House(HouseType.NULLHOUSETYPE, "NullLocation"));
+            this.house = new JsonAdaptedHouse(new House(HouseType.NULLHOUSETYPE, "nan"));
             this.priceRange = new JsonAdaptedPriceRange(new PriceRange(0, 0));
-            this.address = "";
+            this.address = "nan";
         }
     }
 
@@ -57,8 +58,8 @@ class JsonAdaptedPropertyToSell {
         return priceRange.toModelType();
     }
 
-    public String getAddress() throws IllegalValueException {
-        return address;
+    public Address getAddress() {
+        return new Address(address);
     }
 
     /**
@@ -67,6 +68,6 @@ class JsonAdaptedPropertyToSell {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public PropertyToSell toModelType() throws IllegalValueException {
-        return new PropertyToSell(house.toModelType(), priceRange.toModelType(), address);
+        return new PropertyToSell(house.toModelType(), priceRange.toModelType(), getAddress());
     }
 }
