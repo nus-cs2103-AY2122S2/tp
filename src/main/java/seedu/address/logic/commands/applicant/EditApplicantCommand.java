@@ -30,9 +30,9 @@ import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
+import seedu.address.model.applicant.HiredStatus;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.applicant.HiredStatus;
 import seedu.address.model.tag.Tag;
 
 /**
