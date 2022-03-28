@@ -15,6 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_AGE = new Prefix("ag/");
     public static final Prefix PREFIX_GENDER = new Prefix("g/");
     // Interview parser
+    public static final Prefix PREFIX_APPLICANT = new Prefix("a/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_POSITION = new Prefix("p/");
     // Position parser
