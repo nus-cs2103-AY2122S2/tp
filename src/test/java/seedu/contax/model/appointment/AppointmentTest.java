@@ -67,6 +67,13 @@ public class AppointmentTest {
         // different person -> returns false
         editedAliceAppt = new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(BOB).build();
         assertFalse(APPOINTMENT_ALICE.equals(editedAliceAppt));
+
+        // different priority -> returns false
+        Appointment aliceApptHigh = new AppointmentBuilder(APPOINTMENT_ALICE.withPriority(Priority.HIGH))
+                .buildWithPriority();
+        Appointment aliceApptLow = new AppointmentBuilder(APPOINTMENT_ALICE.withPriority(Priority.LOW))
+                .buildWithPriority();
+        assertFalse(aliceApptHigh.equals(aliceApptLow));
     }
 
     @Test
@@ -130,7 +137,9 @@ public class AppointmentTest {
                 + "; Duration: "
                 + appointment.getDuration()
                 + "; Person: "
-                + appointment.getPerson(),
+                + appointment.getPerson()
+                + "; Priority: "
+                + appointment.getPriorityToString(),
                 appointment.toString());
     }
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.EditPriorityCommand;
+import seedu.contax.logic.commands.EditPriorityCommand.EditPriorityDescriptor;
 import seedu.contax.model.appointment.Priority;
 
 
@@ -53,9 +54,18 @@ public class EditPriorityCommandParserTest {
 
     @Test
     public void parser_validInput_success() {
-        assertParseSuccess(parser, "1 pri/high", new EditPriorityCommand(Index.fromOneBased(1), Priority.HIGH));
-        assertParseSuccess(parser, "1 pri/medium", new EditPriorityCommand(Index.fromOneBased(1), Priority.MEDIUM));
-        assertParseSuccess(parser, "1 pri/low", new EditPriorityCommand(Index.fromOneBased(1), Priority.LOW));
-        assertParseSuccess(parser, "1 pri/none", new EditPriorityCommand(Index.fromOneBased(1), Priority.NONE));
+        EditPriorityDescriptor editPriorityDescriptor = new EditPriorityDescriptor();
+        editPriorityDescriptor.setPriority(Priority.HIGH);
+        assertParseSuccess(parser, "1 pri/high",
+                new EditPriorityCommand(Index.fromOneBased(1), editPriorityDescriptor));
+        editPriorityDescriptor.setPriority(Priority.MEDIUM);
+        assertParseSuccess(parser, "1 pri/medium",
+                new EditPriorityCommand(Index.fromOneBased(1), editPriorityDescriptor));
+        editPriorityDescriptor.setPriority(Priority.LOW);
+        assertParseSuccess(parser, "1 pri/low",
+                new EditPriorityCommand(Index.fromOneBased(1), editPriorityDescriptor));
+        editPriorityDescriptor.setPriority(null);
+        assertParseSuccess(parser, "1 pri/none",
+                new EditPriorityCommand(Index.fromOneBased(1), editPriorityDescriptor));
     }
 }

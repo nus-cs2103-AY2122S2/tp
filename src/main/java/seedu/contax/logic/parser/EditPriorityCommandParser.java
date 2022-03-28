@@ -8,6 +8,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.EditPriorityCommand;
+import seedu.contax.logic.commands.EditPriorityCommand.EditPriorityDescriptor;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.appointment.Priority;
 
@@ -41,7 +42,10 @@ public class EditPriorityCommandParser implements Parser<EditPriorityCommand> {
 
         Priority priority = getPriorityFromInput(argumentMultimap.getValue(PREFIX_PRIORITY).get().toLowerCase());
 
-        return new EditPriorityCommand(index, priority);
+        EditPriorityDescriptor editPriorityDescriptor = new EditPriorityDescriptor();
+        editPriorityDescriptor.setPriority(priority);
+
+        return new EditPriorityCommand(index, editPriorityDescriptor);
     }
 
     private Priority getPriorityFromInput(String input) throws ParseException {

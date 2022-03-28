@@ -94,6 +94,13 @@ public class Appointment extends ScheduleItem {
         return priority;
     }
 
+    public String getPriorityToString() {
+        if (priority != null) {
+            return priority.toString();
+        }
+        return "NONE";
+    }
+
     public Appointment withPriority(Priority priority) {
         return new Appointment(name, startDateTime, duration, person, priority);
     }
@@ -134,15 +141,11 @@ public class Appointment extends ScheduleItem {
 
         Appointment otherAppointment = (Appointment) other;
 
-        Priority priority = (getPriority() != null) ? getPriority() : Priority.NONE;
-        Priority otherPriority = (otherAppointment.getPriority() != null)
-                ? otherAppointment.getPriority() : Priority.NONE;
-
         return otherAppointment.getName().equals(getName())
                 && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
                 && otherAppointment.getDuration().equals(getDuration())
                 && Objects.equals(otherAppointment.getPerson(), getPerson())
-                && priority.equals(otherPriority);
+                && getPriorityToString().equals(otherAppointment.getPriorityToString());
     }
 
     @Override
@@ -158,7 +161,9 @@ public class Appointment extends ScheduleItem {
                 + "; Duration: "
                 + getDuration()
                 + "; Person: "
-                + getPerson();
+                + getPerson()
+                + "; Priority: "
+                + getPriorityToString();
     }
 
     /**
