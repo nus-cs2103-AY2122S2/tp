@@ -4,8 +4,11 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
@@ -20,30 +23,48 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
+    private static final String LIST_COMMAND = "listTransaction";
+    private static final String FIND_COMMAND = "findTransaction %1$d";
+
     @FXML
     private ListView<Person> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList} and
-     * comand executor
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList} and command executor
      */
     public PersonListPanel(ObservableList<Person> personList, CommandExecutor commandExecutor) {
         super(FXML);
+        MultipleSelectionModel<Person> selectionModel = personListView.getSelectionModel();
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell(commandExecutor));
+        personListView.setCellFactory(listView -> {
+            PersonListViewCell cell = new PersonListViewCell();
+            cell.setCursor(Cursor.HAND);
+            cell.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+                personListView.requestFocus();
+                if (event.isPrimaryButtonDown() && !cell.isEmpty()) {
+                    int index = cell.getIndex();
+                    try {
+                        if (selectionModel.getSelectedIndex() == index) {
+                            selectionModel.clearSelection();
+                            commandExecutor.execute(LIST_COMMAND);
+                        } else {
+                            selectionModel.select(index);
+                            commandExecutor.execute(String.format(FIND_COMMAND, index + 1));
+                        }
+                    } catch (CommandException | ParseException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                event.consume();
+            });
+            return cell;
+        });
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     static class PersonListViewCell extends ListCell<Person> {
-        private final CommandExecutor commandExecutor;
-
-        PersonListViewCell(CommandExecutor commandExecutor) {
-            super();
-            this.commandExecutor = commandExecutor;
-        }
-
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -52,7 +73,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1, commandExecutor).getRoot());
+                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
     }

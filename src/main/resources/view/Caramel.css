@@ -10,10 +10,16 @@
 
 .list-cell:filled {
     -fx-background-color: #333;
+    -fx-border-color: #333;
 }
 
 .list-cell:filled:odd {
     -fx-background-color: #474747;
+    -fx-border-color: #474747;
+}
+
+#personListView .list-cell:filled:selected {
+    -fx-border-color: #BA6C41;
 }
 
 .list-cell .label {

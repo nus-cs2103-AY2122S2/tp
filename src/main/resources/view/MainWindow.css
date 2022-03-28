@@ -13,8 +13,9 @@
 
 .list-cell:filled {
     -fx-background-radius: 14px;
+    -fx-border-width: 2px;
     -fx-border-radius: 10px;
-    -fx-padding: 14px 16px;
+    -fx-padding: 8px;
     -fx-border-insets: 5px 9px;
     -fx-background-insets: 5px 9px;
 }
