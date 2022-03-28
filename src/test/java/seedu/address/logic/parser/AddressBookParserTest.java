@@ -26,7 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-//import seedu.address.model.buyer.Buyer;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 //import seedu.address.model.client.NameContainsKeywordsPredicate;
 //import seedu.address.model.property.NullPropertyToBuy;
