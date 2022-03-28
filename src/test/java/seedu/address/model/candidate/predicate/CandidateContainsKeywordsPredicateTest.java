@@ -45,7 +45,7 @@ public class CandidateContainsKeywordsPredicateTest {
     @Test
     public void test_candidateContainsKeywords_returnsTrue() {
         Candidate candidate = new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics")
+                .withEmail("E0123456@u.nus.edu").withCourse("Business Analytics")
                 .withStudentId("E0324444").withAvailability("1,2,3").withSeniority("1").build();
 
         // One keyword
@@ -87,7 +87,7 @@ public class CandidateContainsKeywordsPredicateTest {
         assertTrue(predicate.test(candidate));
 
         // Email
-        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("alice@email."));
+        predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("E0123456@u."));
         assertTrue(predicate.test(candidate));
 
         // Course
@@ -104,11 +104,11 @@ public class CandidateContainsKeywordsPredicateTest {
         // Zero keywords
         CandidateContainsKeywordsPredicate predicate = new CandidateContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+                .withEmail("E0123456@u.nus.edu").withCourse("Business Analytics").withStudentId("E0324444").build()));
 
         // Non-matching keyword
         predicate = new CandidateContainsKeywordsPredicate(Arrays.asList("Carol Alice"));
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+                .withEmail("E0123456@u.nus.edu").withCourse("Business Analytics").withStudentId("E0324444").build()));
     }
 }
