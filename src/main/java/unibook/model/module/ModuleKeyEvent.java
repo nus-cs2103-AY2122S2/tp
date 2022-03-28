@@ -6,6 +6,11 @@ import java.time.LocalDateTime;
 
 
 public class ModuleKeyEvent {
+    public static final String MESSAGE_CONSTRAINTS_TYPE = "Key Event type can only take in values from 1 to 4.\n"
+            + "1 = EXAM\n2 = QUIZ\n3 = ASSIGNMENT_RELEASE\n4 = ASSIGNMENT_DUE";
+    public static final String MESSAGE_CONSTRAINTS_MISSINGDT = "Missing datetime field in your input."
+            + "Please specify the date and time of the key event in the following format!\n"
+            + "dt/yyyy-MM-dd HH:mm";
     private LocalDateTime keyEventTiming;
     private KeyEventType keyEventType;
     private Module module;
