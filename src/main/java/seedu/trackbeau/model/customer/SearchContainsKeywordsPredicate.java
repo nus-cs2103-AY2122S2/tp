@@ -13,8 +13,9 @@ import seedu.trackbeau.model.tag.Tag;
  * Tests that a {@code Customer's}'s {@code Data} matches any of the keywords given.
  */
 public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
+    public static final int FIND_ATTRIBUTE_COUNT = 11;
+    private static final int NON_TAG_ATTRIBUTE_COUNT = 8;
     private final ArrayList<List<String>> keywordsList;
-
     /**
      * Constructs a {@code Predicate}.
      *
@@ -22,19 +23,21 @@ public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
      */
     public SearchContainsKeywordsPredicate(ArrayList<List<String>> keywordsList) {
         this.keywordsList = keywordsList;
+        assert keywordsList.size() == FIND_ATTRIBUTE_COUNT
+                : String.format("Keyword list is wrong size: %s", keywordsList.toString());
     }
 
     @Override
     public boolean test(Customer customer) {
         String[] find = {"getName", "getPhone", "getEmail", "getAddress", "getSkinType",
-            "getHairType", "getStaffs", "getServices", "getAllergies"};
+            "getHairType", "getBirthdate", "getRegDate", "getStaffs", "getServices", "getAllergies"};
         String searchString = "";
         Boolean anyMatch = false;
 
         try {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
                 List<String> keywords = keywordsList.get(i);
-                if (i < 6) {
+                if (i < NON_TAG_ATTRIBUTE_COUNT) {
                     searchString = customer.getClass().getDeclaredMethod(find[i]).invoke(customer).toString();
                 } else {
                     // Will always return type Set<Tag> from the 3 possible methods in the Customer class.
@@ -70,7 +73,7 @@ public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
             return false;
         }
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
             List<String> thisKeywords = this.keywordsList.get(i);
             List<String> otherKeywords = ((SearchContainsKeywordsPredicate) other).keywordsList.get(i);
             if ((thisKeywords != null) && (otherKeywords != null)) {
