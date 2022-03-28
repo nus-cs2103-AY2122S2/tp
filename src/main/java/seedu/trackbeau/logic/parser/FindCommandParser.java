@@ -3,10 +3,12 @@ package seedu.trackbeau.logic.parser;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
@@ -31,13 +33,15 @@ public class FindCommandParser implements Parser<FindCustomerCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCustomerCommand parse(String userInput) throws ParseException {
-        Integer attributeCount = 9;
+        Integer attributeCount = 11;
 
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
+                PREFIX_SKINTYPE, PREFIX_HAIRTYPE,
+                    PREFIX_BIRTHDATE, PREFIX_REGDATE,PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
         Prefix[] prefixList = {PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-            PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES};
+            PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_BIRTHDATE, PREFIX_REGDATE,
+                PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES};
 
         if (userInput.isEmpty()) {
             throw new ParseException(
@@ -48,6 +52,7 @@ public class FindCommandParser implements Parser<FindCustomerCommand> {
 
         for (int i = 0; i < attributeCount; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
+                //parseAddress is used because it allows for all formats except for empty strings
                 prefixArr.add(i,
                     Arrays.asList(ParserUtil
                         .parseName(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
