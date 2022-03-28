@@ -15,7 +15,9 @@ import java.util.Optional;
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
@@ -37,6 +39,19 @@ public class ArgumentMultimap {
     public Optional<String> getValue(Prefix prefix) {
         List<String> values = getAllValues(prefix);
         return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
+    }
+
+    /**
+     * Returns the values, when multiple arguments are passed in within one prefix.
+     *
+     * @param prefix of the value to obtain values of
+     * @param regex  that separates the values within the prefix
+     * @return the array of values
+     */
+    public String[] getValuesWithRegex(Prefix prefix, String regex) {
+        String unseparatedArgs = getValue(prefix).get();
+        String[] separatedArgs = unseparatedArgs.split(" ", 0);
+        return separatedArgs;
     }
 
     /**

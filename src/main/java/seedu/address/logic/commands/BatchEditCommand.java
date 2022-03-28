@@ -19,12 +19,14 @@ public class BatchEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the persons identified "
         + "by the index number used in the displayed person list. "
         + "Existing skillsets and teams will be overwritten by the input values.\n"
-        + "At least one argument for skillsets or teams of the persons have to be present\n"
+        + "Either the prefix for skillset or teams have to be present\n"
+        + "values after prefixes are separated by spaces"
+        + "if skillset or team prefix appear multiple times only the values that appear after last prefix take effect"
         + "Parameters: INDEX... (must be a positive integer) "
         + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY...]\n"
         + "[" + PREFIX_TEAM + "TEAM...]\n"
         + "Example: " + COMMAND_WORD + " 1 2 3 "
-        + PREFIX_SKILL + "s/java_100 s/c_30";
+        + PREFIX_SKILL + "s/java_100 c_30";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

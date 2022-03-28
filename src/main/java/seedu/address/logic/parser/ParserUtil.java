@@ -43,8 +43,9 @@ public class ParserUtil {
 
     /**
      * Parses multiple {@code oneBasedIndex} in string format and returns a list of {@code Index}
+     *
      * @param oneBasedIndices the string representation of indices separated with the given regex
-     * @param regex regular expression to separate the indices in String
+     * @param regex           regular expression to separate the indices in String
      * @return the list of indices
      * @throws ParseException if one of the arguments cannot be interpreted as an {@code Index}
      */
@@ -205,4 +206,5 @@ public class ParserUtil {
         Collection<String> skillSet = skill.size() == 1 && skill.contains("") ? Collections.emptySet() : skill;
         return Optional.of(ParserUtil.parseSkillSet(skillSet));
     }
+
 }
