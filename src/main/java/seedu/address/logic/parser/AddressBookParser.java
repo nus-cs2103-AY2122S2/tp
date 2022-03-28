@@ -23,6 +23,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowEventsCommand;
 import seedu.address.logic.commands.ShowFriendCommand;
+import seedu.address.logic.commands.ShowInsightsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -99,6 +100,9 @@ public class AddressBookParser {
 
         case ShowEventsCommand.COMMAND_WORD:
             return new ShowEventsCommand();
+
+        case ShowInsightsCommand.COMMAND_WORD:
+            return new ShowInsightsCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
