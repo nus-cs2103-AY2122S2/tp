@@ -58,7 +58,6 @@
                 <Label text=" - "></Label>
                 <Label fx:id="propertyUpperPrice" styleClass="cell_big_label"/>
             </HBox>
-            <Label></Label>
             <FlowPane fx:id="tags" />
             <HBox>
                 <children>

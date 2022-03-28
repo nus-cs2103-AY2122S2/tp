@@ -62,25 +62,20 @@ public class BuyerCard extends UiPart<Region> {
         buyer.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (!(buyer.getPropertyToBuy() instanceof NullPropertyToBuy)) {
-            String houseType = buyer.getPropertyToBuy().getHouse().getHouseTypeToString();
-            String houseLocation = buyer.getPropertyToBuy().getHouse().getLocationToString();
-            String houseLowerPrice = buyer.getPropertyToBuy().getPriceRange().getLowerToString();
-            String houseUpperPrice = buyer.getPropertyToBuy().getPriceRange().getUpperToString();
-
-
-            if (houseType.equals("")) {
-                propertyType.setText("No Property");
-                propertyLocation.setText("No Location");
-                propertyLowerPrice.setText("NaN");
-                propertyUpperPrice.setText("NaN");
-            } else {
-                propertyType.setText(houseType);
-                propertyLocation.setText(houseLocation);
-                propertyLowerPrice.setText(houseLowerPrice);
-                propertyUpperPrice.setText(houseUpperPrice);
-            }
-
+        String houseType = buyer.getPropertyToBuy().getHouse().getHouseTypeToString();
+        String houseLocation = buyer.getPropertyToBuy().getHouse().getLocationToString();
+        String houseLowerPrice = buyer.getPropertyToBuy().getPriceRange().getLowerToString();
+        String houseUpperPrice = buyer.getPropertyToBuy().getPriceRange().getUpperToString();
+        if (buyer.getPropertyToBuy() instanceof NullPropertyToBuy) {
+            propertyType.setText("No Property");
+            propertyLocation.setText("No Location");
+            propertyLowerPrice.setText("");
+            propertyUpperPrice.setText("");
+        } else {
+            propertyType.setText(houseType);
+            propertyLocation.setText(houseLocation);
+            propertyLowerPrice.setText(houseLowerPrice);
+            propertyUpperPrice.setText(houseUpperPrice);
         }
     }
 
