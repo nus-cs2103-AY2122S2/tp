@@ -418,7 +418,11 @@ Examples:
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ContaX wil try to read valid lines and import, and may skip problematic lines. Refer to the [FAQ](#faq) for more details
+If your changes to the data file makes the format invalid, ContaX wil try to read valid objects and import, and will skip objects with attributes that have invalid formats (e.g. having alphabets in a Phone number). 
+
+However, if the JSON formatting is broken, a blank AddressBook/Schedule will be loaded instead.
+
+Refer to the [FAQ](#faq) for more details
 </div>
 
 ### Importing data
