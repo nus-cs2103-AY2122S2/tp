@@ -24,7 +24,7 @@ class SortCommandParserTest {
     }
 
     @Test
-    public void parse_invalidSkillName_throwsParseException() {
+    public void parse_invalidSkillInput_throwsParseException() {
         // Multiple skill name
         assertParseFailure(parser, "C Python", String.format(MESSAGE_INVALID_SKILL, Skill.NAME_CONSTRAINTS));
 
