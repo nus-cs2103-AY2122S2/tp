@@ -364,7 +364,7 @@ It currently supports:
 - Bold and Italics
   - Enclosing text with `***`
 - Monospaced
-  - Enclosing text with `\``
+  - Enclosing text with `` ` ``
 
 This was done by changing the `ResultDisplay` to use a `TextFlow` object, and dynamically generate a List of styled `Text` objects to add to the `ResultDisplay`.
 
