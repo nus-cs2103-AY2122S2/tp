@@ -137,7 +137,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseInsurancePackage_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePackage(INVALID_ADDRESS));
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePackage(INVALID_INSURANCE_PACKAGE));
     }
 
     @Test
@@ -151,6 +151,16 @@ public class ParserUtilTest {
         String insurancePackageWithWhitespace = WHITESPACE + VALID_INSURANCE_PACKAGE + WHITESPACE;
         InsurancePackage expectedInsurancePackage = new InsurancePackage(VALID_INSURANCE_PACKAGE);
         assertEquals(expectedInsurancePackage, ParserUtil.parseInsurancePackage(insurancePackageWithWhitespace));
+    }
+
+    @Test
+    public void parseInsurancePackageName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInsurancePackageName((String) null));
+    }
+
+    @Test
+    public void parseInsurancePackageName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePackageName(INVALID_INSURANCE_PACKAGE));
     }
 
     @Test

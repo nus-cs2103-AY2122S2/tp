@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.person.InsurancePackage;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.storage.CsvAdaptedInsurancePackage;
 import seedu.address.storage.CsvAdaptedPerson;
 
@@ -167,8 +167,12 @@ public class CsvUtil {
             s.nextLine(); // headers
             while (s.hasNext()) {
                 packageString = s.nextLine();
-                p = new CsvAdaptedInsurancePackage(packageString);
-                packages.add(p);
+                try {
+                    p = new CsvAdaptedInsurancePackage(packageString);
+                    packages.add(p);
+                } catch (IllegalValueException ive) { // row does not have 2 values
+                    continue; // choose to ignore
+                }
             }
             s.close();
             return packages;

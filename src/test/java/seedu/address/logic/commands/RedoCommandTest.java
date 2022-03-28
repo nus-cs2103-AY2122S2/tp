@@ -18,15 +18,15 @@ import seedu.address.model.person.Person;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code UndoCommand}.
  */
-public class UndoCommandTest {
+public class RedoCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new InsurancePackagesSet());
 
     @Test
     public void execute_undoCommand_throwsCommandException() {
-        UndoCommand undoCommand = new UndoCommand();
+        RedoCommand redoCommand = new RedoCommand();
 
-        assertCommandFailure(undoCommand, model, "No previous command to undo");
+        assertCommandFailure(redoCommand, model, "No previous command to redo");
     }
 
     @Test
@@ -35,16 +35,19 @@ public class UndoCommandTest {
             Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
             DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
             UndoCommand undoCommand = new UndoCommand();
+            RedoCommand redoCommand = new RedoCommand();
 
-            String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS);
+            String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS);
             CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
             Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new InsurancePackagesSet());
             expectedModel.deletePerson(personToDelete);
             expectedModel.undoCommand();
+            expectedModel.redoCommand();
 
             deleteCommand.execute(model);
-            CommandResult result = undoCommand.execute(model);
+            undoCommand.execute(model);
+            CommandResult result = redoCommand.execute(model);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, model);
         } catch (CommandException ce) {
@@ -52,3 +55,4 @@ public class UndoCommandTest {
         }
     }
 }
+

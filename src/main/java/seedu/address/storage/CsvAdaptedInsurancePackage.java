@@ -11,6 +11,7 @@ import seedu.address.model.person.InsurancePackage;
  */
 public class CsvAdaptedInsurancePackage {
 
+    public static final String INVALID_CSV_FORMAT_ERROR = "Invalid insurance package in CSV file!";
     public static final String MISSING_NAME_MESSAGE_FORMAT = "Insurance package name is missing!";
 
     private final String insurancePackageName;
@@ -37,10 +38,13 @@ public class CsvAdaptedInsurancePackage {
      * A constructor that takes in a comma-separated string to a CsvAdaptedInsurancePackage.
      * @param s The String representation of this package.
      */
-    public CsvAdaptedInsurancePackage(String s) {
+    public CsvAdaptedInsurancePackage(String s) throws IllegalValueException {
 
         String[] packageDetails = s.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
+        if (packageDetails.length != 2) {
+            throw new IllegalValueException(INVALID_CSV_FORMAT_ERROR);
+        }
         insurancePackageName = cleanup(packageDetails[0]);
         insurancePackageDetails = cleanup(packageDetails[1]);
     }
@@ -52,7 +56,7 @@ public class CsvAdaptedInsurancePackage {
      */
     public InsurancePackage toModelType() throws IllegalValueException {
 
-        if (insurancePackageName == null) {
+        if (insurancePackageName == null || insurancePackageName.equals("")) {
             throw new IllegalValueException(String.format(MISSING_NAME_MESSAGE_FORMAT,
                     InsurancePackage.class.getSimpleName()));
         }

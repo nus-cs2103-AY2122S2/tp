@@ -22,7 +22,7 @@ public class InsurancePackageContainsKeywordsPredicate extends FieldContainsKeyw
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getInsurancePackage().packageName,
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getInsurancePackage().getPackageName(),
                         keyword));
     }
 

@@ -4,13 +4,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_PACKAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PACKAGE_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPackageCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -27,6 +30,20 @@ public class PersonUtil {
     }
 
     /**
+     * Returns an add insurance package command string for adding the {@code insurancePackage}.
+     */
+    public static String getAddPackageCommand(InsurancePackage insurancePackage) {
+        return AddPackageCommand.COMMAND_WORD + " " + getPackageDetails(insurancePackage);
+    }
+
+    public static String getPackageDetails(InsurancePackage p) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_INSURANCE_PACKAGE + p.getPackageName() + " ");
+        sb.append(PREFIX_PACKAGE_DESC + p.getPackageDescription() + " ");
+        return sb.toString();
+    }
+
+    /**
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getPersonDetails(Person person) {
@@ -34,7 +51,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_INSURANCE_PACKAGE + person.getInsurancePackage().packageName + " ");
+        sb.append(PREFIX_INSURANCE_PACKAGE + person.getInsurancePackage().getPackageName() + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -51,7 +68,7 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getInsurancePackage().ifPresent(insurancePackage ->
-                sb.append(PREFIX_INSURANCE_PACKAGE).append(insurancePackage.packageName).append(" "));
+                sb.append(PREFIX_INSURANCE_PACKAGE).append(insurancePackage.getPackageName()).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             ArrayList<Tag> tags = descriptor.getTags().get();

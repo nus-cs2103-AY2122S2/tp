@@ -92,7 +92,7 @@ public class SampleDataUtil {
     public static InsurancePackagesSet getSampleInsurancePackages() {
         InsurancePackagesSet sampleIp = new InsurancePackagesSet();
         for (InsurancePackage samplePackage : samplePackages) {
-            sampleIp.addInsurancePackage(samplePackage);
+            sampleIp.addPackage(samplePackage);
         }
         return sampleIp;
     }

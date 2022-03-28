@@ -3,9 +3,11 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.person.InsurancePackage;
+import seedu.address.storage.CsvAdaptedInsurancePackage;
 
 public class InsurancePackagesSet {
 
@@ -17,10 +19,6 @@ public class InsurancePackagesSet {
 
     public InsurancePackagesSet(InsurancePackagesSet s) {
         allPackages = s.allPackages;
-    }
-
-    public void addInsurancePackage(InsurancePackage p) {
-        allPackages.add(p);
     }
 
     /**
@@ -58,7 +56,7 @@ public class InsurancePackagesSet {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setInsurancePackage(InsurancePackage target, InsurancePackage editedPackage) {
+    public void setPackage(InsurancePackage target, InsurancePackage editedPackage) {
         requireNonNull(editedPackage);
         for (InsurancePackage p: allPackages) {
             if (p.equals(target)) {
@@ -72,11 +70,25 @@ public class InsurancePackagesSet {
      * Removes {@code key} from this {@code InsurancePackagesSet}.
      * {@code key} must exist in the set.
      */
-    public void removeInsurancePackage(InsurancePackage key) {
+    public void removePackage(InsurancePackage key) {
         allPackages.remove(key);
     }
 
     public int numPackages() {
         return allPackages.size();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof InsurancePackagesSet)) {
+            return false;
+        }
+
+        InsurancePackagesSet otherPackage = (InsurancePackagesSet) other;
+        return new HashSet<>(otherPackage.getPackagesList()).equals(new HashSet<>(allPackages));
     }
 }

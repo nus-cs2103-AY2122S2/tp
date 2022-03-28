@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInsurancePackages.GOLD;
+import static seedu.address.testutil.TypicalInsurancePackages.SILVER;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -86,6 +88,23 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasInsurancePackage_nullPackage_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasInsurancePackage(null));
+    }
+
+    @Test
+    public void hasInsurancePackage_packageNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasInsurancePackage(GOLD));
+    }
+
+    @Test
+    public void hasInsurancePackage_personInAddressBook_returnsTrue() {
+        modelManager.addInsurancePackage(GOLD);
+        assertTrue(modelManager.hasInsurancePackage(GOLD));
+        assertFalse(modelManager.hasInsurancePackage(SILVER));
     }
 
     @Test

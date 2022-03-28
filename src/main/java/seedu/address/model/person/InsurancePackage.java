@@ -17,8 +17,8 @@ public class InsurancePackage {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String packageName;
-    public String packageDescription;
+    private final String packageName;
+    private String packageDescription;
 
     /**
      * Constructs an {@code InsurancePackage}.

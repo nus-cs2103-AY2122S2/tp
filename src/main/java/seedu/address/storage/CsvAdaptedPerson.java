@@ -56,7 +56,7 @@ public class CsvAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        insurancePackage = source.getInsurancePackage().packageName;
+        insurancePackage = source.getInsurancePackage().getPackageName();
         address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(CsvAdaptedTag::new)

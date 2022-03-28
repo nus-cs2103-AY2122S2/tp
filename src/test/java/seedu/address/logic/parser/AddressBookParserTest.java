@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPackageCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.CombineContainsKeywordsPredicate;
@@ -51,6 +53,13 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addPackage() throws Exception {
+        InsurancePackage p = new InsurancePackage("Test", "Test Desc");
+        AddPackageCommand command = (AddPackageCommand) parser.parseCommand(PersonUtil.getAddPackageCommand(p));
+        assertEquals(new AddPackageCommand(p), command);
     }
 
     @Test

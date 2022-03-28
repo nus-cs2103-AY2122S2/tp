@@ -53,6 +53,16 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicatePackage_throwsCommandException() {
+        InsurancePackage validPackage = new InsurancePackage("Test");
+        AddPackageCommand addPackageCommand = new AddPackageCommand(validPackage);
+        ModelStub modelStub = new ModelStubWithPackage(validPackage);
+
+        assertThrows(CommandException.class,
+                AddPackageCommand.MESSAGE_DUPLICATE_PACKAGE, () -> addPackageCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -151,6 +161,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -184,6 +199,11 @@ public class AddCommandTest {
         public void undoCommand() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void redoCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -201,6 +221,24 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+    }
+
+    /**
+     * A Model stub that contains a single insurance package.
+     */
+    private class ModelStubWithPackage extends ModelStub {
+        private final InsurancePackage p;
+
+        ModelStubWithPackage(InsurancePackage p) {
+            requireNonNull(p);
+            this.p = p;
+        }
+
+        @Override
+        public boolean hasInsurancePackage(InsurancePackage p) {
+            requireNonNull(p);
+            return this.p.equals(p);
         }
     }
 
