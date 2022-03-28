@@ -102,6 +102,7 @@ public class ModuleCard extends UiPart<Region> {
 
     /**
      * Sets up all the vbox lists which display lists of fields of a module to user.
+     * Initially all Vboxes are not visible, until one tab is clicked by user.
      */
     private void setUpVBoxLists() {
         fillVBoxFromList(professors, module.getProfessors(), (professor, i) ->
