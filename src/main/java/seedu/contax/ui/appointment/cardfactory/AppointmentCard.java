@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.Priority;
 import seedu.contax.model.person.Person;
 import seedu.contax.ui.UiPart;
 
@@ -45,6 +46,8 @@ class AppointmentCard extends UiPart<Region> {
     private Label personAddress;
     @FXML
     private Label withLabel;
+    @FXML
+    private Label priority;
 
     /**
      * Creates a new empty instance of {@code AppointmentCard}.
@@ -83,11 +86,34 @@ class AppointmentCard extends UiPart<Region> {
                 personName.setText("");
                 personAddress.setText("");
             }
+
+            updatePriorityStyle(appointmentModel.getPriority());
+
         }
 
         if (displayedIndex != this.displayedIndex) {
             this.displayedIndex = displayedIndex;
             id.setText(displayedIndex + ". ");
+        }
+    }
+
+    private void updatePriorityStyle(Priority modelPriority) {
+        if (appointmentModel.getPriority() != null) {
+            priority.setText(modelPriority.toString());
+            switch (appointmentModel.getPriority()) {
+            case HIGH:
+                priority.setStyle("-fx-background-color: red;");
+                break;
+            case MEDIUM:
+                priority.setStyle("-fx-background-color: orange ;");
+                break;
+            default:
+                priority.setStyle("-fx-background-color: green;");
+                break;
+            }
+        } else {
+            priority.setText("");
+            priority.setStyle("-fx-background-color: none;");
         }
     }
 

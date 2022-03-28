@@ -32,6 +32,7 @@ import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.contax.logic.commands.EditPersonCommand;
 import seedu.contax.logic.commands.EditPersonCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditPriorityCommand;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
@@ -250,6 +251,12 @@ public class AddressBookParserTest {
     public void parseCommand_batchCommand() throws Exception {
         assertTrue(parser.parseCommand(BatchCommand.COMMAND_WORD + " " + DeletePersonCommand.COMMAND_WORD
                 + " by/phone =/123") instanceof BatchCommand);
+    }
+
+    @Test
+    public void parseCommand_editPriorityCommand() throws Exception {
+        assertTrue(parser.parseCommand(EditPriorityCommand.COMMAND_WORD
+                + " 1 pri/high") instanceof EditPriorityCommand);
     }
 
     @Test
