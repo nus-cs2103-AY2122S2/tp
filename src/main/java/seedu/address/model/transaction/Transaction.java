@@ -7,12 +7,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.transaction.util.StatusFactory;
 
 /**
  * Represents a Person in the address book.
@@ -23,14 +27,17 @@ public class Transaction implements Serializable {
 
     private final HashMap<Prefix, TransactionField> fields = new HashMap<>();
     private final long personId;
+    private final long transactionId;
 
 
     /**
-     * Person constructor
-     * @param fields A collection of all the person's attributes
+     * Transaction constructor
+     * @param fields A collection of all the transaction's attributes
      */
-    public Transaction(Collection<TransactionField> fields, long personId) {
+    public Transaction(long transactionId, Collection<TransactionField> fields, long personId) {
         requireAllNonNull(fields, personId);
+
+        this.transactionId = transactionId;
 
         // Add fields.
         for (TransactionField f : fields) {
@@ -43,11 +50,45 @@ public class Transaction implements Serializable {
             checkArgument(this.fields.containsKey(p), "All required fields must be given.");
         }
 
+        try {
+            TimeUnit.MILLISECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         this.personId = personId;
     }
 
+    /**
+     * Transaction constructor
+     * @param fields A collection of all the transaction's attributes
+     */
+    public Transaction(Collection<TransactionField> fields, long personId) {
+        this(new Date().getTime(), fields, personId);
+    }
+
+    /**
+     * Copy constructor
+     */
     public Transaction(Transaction otherTransaction) {
-        this(otherTransaction.getFields(), otherTransaction.getPersonId());
+        this(otherTransaction.getTransactionId(), otherTransaction.getFields(), otherTransaction.getPersonId());
+    }
+
+    private long getTransactionId() {
+        return transactionId;
+    }
+
+    /**
+     * Returns whether the person object is valid
+     */
+    public boolean isValid() {
+        if (!fields.containsKey(DueDate.PREFIX)) {
+            return true;
+        }
+
+        // Check whether due date >= transaction date
+        return ((TransactionDate) fields.get(TransactionDate.PREFIX))
+                .isBefore((DueDate) fields.get(DueDate.PREFIX));
     }
 
     /**
@@ -63,6 +104,39 @@ public class Transaction implements Serializable {
     public Optional<TransactionField> getField(Prefix prefix) {
         requireAllNonNull(prefix);
         return Optional.ofNullable(fields.get(prefix));
+    }
+
+    /**
+     * Removes a field from transaction fields
+     * @param prefix
+     * @return updated Transaction
+     */
+    public Transaction removeField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
+        fieldsCopy.remove(prefix);
+        return new Transaction(fieldsCopy.values(), getPersonId());
+    }
+
+    /**
+     * Adds a field to the transaction.
+     * @param field
+     * @return updated transactions
+     */
+    public Transaction addField(TransactionField field) {
+        requireAllNonNull(field);
+        HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
+        fieldsCopy.put(field.prefix, field);
+        return new Transaction(fieldsCopy.values(), getPersonId());
+    }
+
+    public Transaction setField(TransactionField field) {
+        requireAllNonNull(field);
+        return this.removeField(field.prefix).addField(field);
+    }
+
+    public Transaction setStatusTo(Class<? extends Command> command) {
+        return this.setField(StatusFactory.getStatus(command));
     }
 
     public List<TransactionField> getFields() {
@@ -157,13 +231,16 @@ public class Transaction implements Serializable {
         return otherTr.getAmount().equals(getAmount())
                 && otherTr.getDueDate().equals(getDueDate())
                 && otherTr.getTransactionDate().equals(getTransactionDate())
-                && (otherTr.getPersonId() == getPersonId());
+                && (otherTr.getPersonId() == getPersonId())
+                && (otherTr.getTransactionId()) == getTransactionId();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getAmount(), getDueDate(), getTransactionDate(), getNote());
+        return Objects.hash(getAmount(), getDueDate(),
+                getTransactionDate(), getNote(),
+                getPersonId(), getTransactionId());
     }
 
     @Override
