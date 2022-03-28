@@ -17,6 +17,7 @@ import unibook.model.module.group.Group;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
+import unibook.model.tag.Tag;
 
 /**
  * Deletes a person identified using it's displayed index from the unibook.
@@ -272,19 +273,23 @@ public class DeleteCommand extends Command {
             String officeDeleted = null;
 
             if (phone) {
-                phoneDeleted = newPerson.getPhone().toString();
+                String oldPhone = newPerson.getPhone().toString();
+                phoneDeleted = oldPhone.equals("") ? "None": oldPhone;
                 newPerson = newPerson.deletePhone();
             }
             if (email) {
-                emailDeleted = newPerson.getEmail().toString();
+                String oldEmail = newPerson.getEmail().toString();
+                emailDeleted = oldEmail.equals("") ? "None": oldEmail;
                 newPerson = newPerson.deleteEmail();
             }
             if (tag != null) {
-                tagDeleted = newPerson.getTag(tag).tagName;
+                Tag oldTag = newPerson.getTag(tag);
+                tagDeleted = oldTag == null ? "Tag not found" : newPerson.getTag(tag).tagName;
                 newPerson = newPerson.deleteTag(tag);
             }
             if (personToDeleteTrait instanceof Professor && office) {
-                officeDeleted = ((Professor) newPerson).getOffice().toString();
+                String oldOffice = ((Professor) newPerson).getOffice().toString();
+                officeDeleted = oldOffice.equals("") ? "None" : oldOffice;
                 newPerson = ((Professor) newPerson).deleteOffice();
             }
 
