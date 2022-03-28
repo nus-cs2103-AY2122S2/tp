@@ -1,39 +1,28 @@
 #addContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #7796CB;
 }
 
 #editContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #7796CB;
 }
 
-#indexLabel {
-    -fx-background-color: #6F686D;
+.label {
+    -fx-background-color: derive(#A3BCF9, 20%);
 }
 
-#nameLabel {
-    -fx-background-color: #6F686D;
+#editMessageLabel {
+    -fx-background-color: #7796CB;
 }
 
-#phoneLabel {
-    -fx-background-color: #6F686D;
+#addMessageLabel {
+    -fx-background-color: #7796CB;
 }
 
-#addressLabel {
-    -fx-background-color: #6F686D;
+#errorLabel {
+    -fx-background-color: #7796CB;
 }
 
-#emailLabel {
-    -fx-background-color: #6F686D;
-}
-
-#commentLabel {
-    -fx-background-color: #6F686D;
-}
-
-#statLabel {
-    -fx-background-color: #6F686D;
-}
-
-#modulesLabel {
-    -fx-background-color: #6F686D;
+.button {
+    -fx-font-size: 14;
+    -fx-background-color: derive(#A3BCF9, 20%);
 }
