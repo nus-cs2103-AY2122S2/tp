@@ -147,13 +147,78 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `manageezpz.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### **Task Components**
+- Added Classes into the model Component to encapsulate a Task.
+
+#### **Implementation**
+<img src="images/ModelTaskClassDiagram.png" width="450" />
+
+A `Task`,
+- is stored in `uniqueTaskList` of the Model
+- can be represented by a `Todo`, `Event`, or `Deadline`
+
+A `Task` contains the following attributes,
+1. a `Description`, which represent the details of the Task to be stored in the `uniqueTaskList`
+2. a `Date`, which represent the day, month and year as specified by a number of the Task
+3. a `Time`, which represent the period during the Task exists or happens
+4. can be assigned/Tagged to multiple different `Person`
+5. a type, to differentiate between the different types of task
+6. can be marked/unmarked based on whether the task is done or not.
+7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
+
+#### Design considerations:
+
+#### Aspect: How the components within Task are added or changed
+- **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
+    * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
+    * Cons: Less flexible, more steps needed in editing Task objects
+- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
+    * Pros: Less overhead as fewer objects are created
+    * Cons: Prone to error as a Component might not be correctly changed
+
+### Task Adding feature
+
+#### What is Task Adding feature about?
+
+The Add Task mechanism is facilitated by `AddressBook`. This feature enhances `AddressBook` by allowing to store not only `Person`, but also `Task`. This is stored internally as a `UniquePersonList` and `UniqueTaskList`. Additionally, the feature implements the following operations:
+
+* `AddressBook#addTodo(Todo)` —  Adds the `Todo` Task to `UniqueTaskList`
+* `AddressBook#addDeadline(Deadline)` — Adds the `Deadline` Task to `UniqueTaskList`
+* `AddressBook#addEvent(Event)` — Adds the `Event` Task to `UniqueTaskList`
+
+For the command, the feature extends `command`, and is implemented as such:
+* `addTodo desc/TASK_DESCRIPTION`
+* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
+
+#### Implementation Flow of Task Adding feature
+
+Given below is an example usage scenario and how the Task Adding mechanism behaves at each step.
+
+Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
+
+Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
+
+Step 2. The user executes `addTodo desc/Watch Netflix with Mum` command to create a new `Todo` Task.
+![AddTodo1](images/AddTodo.png)
+
+#### Design considerations:
+- The Task adding commands are straight-to-the-point and efficient for users to add Tasks to ManageEZPZ.
+- The prefixes allow users to understand what the different types of Task need in order to be created.
+
+#### UML Diagram for Adding Todo Task
+
+The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
+
+<img src="images/AddTaskActivityDiagram.png" width="250" />
 
 ### Task Marking feature
 
@@ -235,73 +300,6 @@ Step 2. The user executes `delete 4` command to delete the task `Watch Netflix w
 #### UML Diagram for Task Deleting
 
 ![](images/DeleteClassDiagram.png)
-
-
-### **Task Components**
-- Added Classes into the model Component to encapsulate a Task.
-
-#### **Implementation**
-<img src="images/ModelTaskClassDiagram.png" width="450" />
-
-A `Task`,
-- is stored in `uniqueTaskList` of the Model
-- can be represented by a `Todo`, `Event`, or `Deadline`
-
-A `Task` contains the following attributes,
-1. a `Description`, which represent the details of the Task to be stored in the `uniqueTaskList`
-2. a `Date`, which represent the day, month and year as specified by a number of the Task
-3. a `Time`, which represent the period during the Task exists or happens
-4. can be assigned/Tagged to multiple different `Person`
-5. a type, to differentiate between the different types of task
-6. can be marked/unmarked based on whether the task is done or not.
-7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
-
-#### Design considerations:
-
-#### Aspect: How the components within Task are added or changed
-- **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
-  * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
-  * Cons: Less flexible, more steps needed in editing Task objects
-- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
-  * Pros: Less overhead as fewer objects are created
-  * Cons: Prone to error as a Component might not be correctly changed
-
-### Task Adding feature
-
-#### What is Task Adding feature about?
-
-The Add Task mechanism is facilitated by `AddressBook`. This feature enhances `AddressBook` by allowing to store not only `Person`, but also `Task`. This is stored internally as a `UniquePersonList` and `UniqueTaskList`. Additionally, the feature implements the following operations:
-
-* `AddressBook#addTodo(Todo)` —  Adds the `Todo` Task to `UniqueTaskList`
-* `AddressBook#addDeadline(Deadline)` — Adds the `Deadline` Task to `UniqueTaskList`
-* `AddressBook#addEvent(Event)` — Adds the `Event` Task to `UniqueTaskList`
-
-For the command, the feature extends `command`, and is implemented as such:
-* `addTodo desc/TASK_DESCRIPTION` 
-* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
-* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
-
-#### Implementation Flow of Task Adding feature
-
-Given below is an example usage scenario and how the Task Adding mechanism behaves at each step.
-
-Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
-
-Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
-
-Step 2. The user executes `addTodo desc/Watch Netflix with Mum` command to create a new `Todo` Task.
-![AddTodo1](images/AddTodo.png)
-
-#### Design considerations:
-- The Task adding commands are straight-to-the-point and efficient for users to add Tasks to ManageEZPZ.
-- The prefixes allow users to understand what the different types of Task need in order to be created.
-
-#### UML Diagram for Adding Todo Task
-
-The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
-
-<img src="images/AddTaskActivityDiagram.png" width="250" />
-
 
 ### Editing details of a task
 
@@ -810,19 +808,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an employee
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `deleteEmployee 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `deleteEmployee 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deleteEmployee`, `deleteEmployee x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
