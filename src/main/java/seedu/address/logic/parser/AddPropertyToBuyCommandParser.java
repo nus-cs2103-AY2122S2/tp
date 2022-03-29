@@ -14,6 +14,7 @@ import seedu.address.logic.commands.AddPropertyToBuyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
 
@@ -40,9 +41,9 @@ public class AddPropertyToBuyCommandParser implements Parser<AddPropertyToBuyCom
             throw new ParseException(AddPropertyToBuyCommand.MESSAGE_USAGE);
         }
         HouseType houseType = ParserUtil.parseHouseType(argMultimap.getValue(PREFIX_HOUSE_TYPE).get());
-        String location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
+        Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         PriceRange priceRange = ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_PRICE_RANGE).get());
-        PropertyToBuy propertyToBuy = new PropertyToBuy(new House(houseType, location), priceRange);
+        PropertyToBuy propertyToBuy = new PropertyToBuy(new House(houseType, location.toString()), priceRange);
 
         return new AddPropertyToBuyCommand(index, propertyToBuy);
     }
