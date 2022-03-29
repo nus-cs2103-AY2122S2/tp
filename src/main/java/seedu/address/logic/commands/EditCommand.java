@@ -199,6 +199,10 @@ public class EditCommand extends Command {
             this.name = name;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Name.
+         * Returns {@code Optional#empty()} if {@code Name} is null.
+         */
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
@@ -210,6 +214,10 @@ public class EditCommand extends Command {
             this.block = block;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Block.
+         * Returns {@code Optional#empty()} if {@code Block} is null.
+         */
         public Optional<Block> getBlock() {
             return Optional.ofNullable(block);
         }
@@ -221,6 +229,10 @@ public class EditCommand extends Command {
             this.faculty = faculty;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Faculty.
+         * Returns {@code Optional#empty()} if {@code Faculty} is null.
+         */
         public Optional<Faculty> getFaculty() {
             return Optional.ofNullable(faculty);
         }
@@ -232,6 +244,10 @@ public class EditCommand extends Command {
             this.phone = phone;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Phone.
+         * Returns {@code Optional#empty()} if {@code Phone} is null.
+         */
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
@@ -243,6 +259,10 @@ public class EditCommand extends Command {
             this.email = email;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain an Email.
+         * Returns {@code Optional#empty()} if {@code Email} is null.
+         */
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
@@ -254,6 +274,10 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain an Address.
+         * Returns {@code Optional#empty()} if {@code Address} is null.
+         */
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
@@ -265,6 +289,10 @@ public class EditCommand extends Command {
             this.matriculationNumber = matriculationNumber;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a MatriculationNumber.
+         * Returns {@code Optional#empty()} if {@code MatriculationNumber} is null.
+         */
         public Optional<MatriculationNumber> getMatriculationNumber() {
             return Optional.ofNullable(matriculationNumber);
         }
@@ -276,6 +304,10 @@ public class EditCommand extends Command {
             this.covidStatus = covidStatus;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a CovidStatus
+         * Returns {@code Optional#empty()} if {@code CovidStatus} is null.
+         */
         public Optional<CovidStatus> getCovidStatus() {
             return Optional.ofNullable(covidStatus);
         }
