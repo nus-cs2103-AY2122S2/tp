@@ -9,7 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.transaction.util.TransactionPredicateProducer;
+import seedu.address.model.transaction.util.TransactionPredicateBuilder;
 import seedu.address.model.transaction.util.TransactionWithIdentifierPredicate;
 
 
@@ -23,13 +23,13 @@ public class FindTransactionCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     private final Index index;
-    private final TransactionPredicateProducer predicateProducer;
+    private final TransactionPredicateBuilder predicateProducer;
 
     /**
      * Creates a FindTransactionCommand with the specified index
      * and predicateProducer that returns a TransactionPredicate.
      */
-    public FindTransactionCommand(Index index, TransactionPredicateProducer predicateProducer) {
+    public FindTransactionCommand(Index index, TransactionPredicateBuilder predicateProducer) {
         this.index = index;
         this.predicateProducer = predicateProducer;
     }
