@@ -101,6 +101,17 @@ public class HustleBook implements ReadOnlyHustleBook {
     }
 
     /**
+     * Returns true if any person with the same scheduled meeting
+     * as {@code scheduledMeeting} exists in the hustle book.
+     * @param scheduledMeeting The meeting to be scheduled.
+     * @return true if meeting clashes.
+     */
+    public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
+        requireNonNull(scheduledMeeting);
+        return persons.anyMeetingClash(scheduledMeeting);
+    }
+
+    /**
      * Schedules a meeting date and time with the targetted person.
      * @param target The person to be scheduled a meeting with.
      * @param scheduledMeeting The meeting details.

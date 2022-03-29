@@ -153,6 +153,20 @@ public class Person {
     }
 
     /**
+     * Returns true if current person has the same scheduled meeting.
+     * @param scheduledMeeting The meeting to be compared with.
+     * @return true if meeting clash.
+     */
+    public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
+        if (scheduledMeeting == getScheduledMeeting()) {
+            return true;
+        }
+
+        return scheduledMeeting != null
+                && scheduledMeeting.hasSameMeeting(getScheduledMeeting());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

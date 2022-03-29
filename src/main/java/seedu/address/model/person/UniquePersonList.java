@@ -39,6 +39,18 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if any person with the same scheduled meeting
+     * as {@code scheduledMeeting} exists in the hustle book.
+     * @param scheduledMeeting The meeting to be scheduled.
+     * @return true if meeting clashes.
+     */
+    public boolean anyMeetingClash(ScheduledMeeting scheduledMeeting) {
+        requireNonNull(scheduledMeeting);
+        return internalList.stream()
+                .anyMatch(person -> person.hasSameMeeting(scheduledMeeting));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

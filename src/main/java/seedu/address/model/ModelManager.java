@@ -112,6 +112,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
+        requireNonNull(scheduledMeeting);
+        return hustleBook.hasSameMeeting(scheduledMeeting);
+    }
+
+    @Override
     public void addPerson(Person person) {
         hustleBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

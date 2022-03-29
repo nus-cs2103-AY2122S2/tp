@@ -61,6 +61,13 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a meeting clashes with existing ones in the hustle book.
+     * @param scheduledMeeting Meeting to be scheduled.
+     * @return true if meeting clashes.
+     */
+    boolean hasSameMeeting(ScheduledMeeting scheduledMeeting);
+
+    /**
      * Deletes the given person.
      * The person must exist in the hustle book.
      */
