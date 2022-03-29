@@ -2,6 +2,7 @@ package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.commons.core.Messages.MESSAGE_PREFIX_NOT_EQUALS_ONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_END_WITH;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
@@ -14,9 +15,6 @@ import seedu.contax.model.util.SearchType;
 
 
 public class BatchCommandParser implements Parser<BatchCommand> {
-
-    public static String MESSAGE_PREFIX_NOT_EQUALS_ONE = "Only one value of param (=, start or end) can be provided.";
-
     /**
      * Parses the given {@code String} of arguments in the context of the BatchCommandParser
      * and returns an BatchCommand object for execution.
