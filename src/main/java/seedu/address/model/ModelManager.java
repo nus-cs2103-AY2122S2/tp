@@ -197,6 +197,11 @@ public class ModelManager implements Model {
         return addressBook.getApplicantsInterviews(applicant);
     }
 
+    @Override
+    public ArrayList<Interview> getPositionsInterviews(Position position) {
+        return addressBook.getPositionsInterview(position);
+    }
+
     //=========== Filtered Position List Accessors =============================================================
     @Override
     public ObservableList<Position> getFilteredPositionList() {

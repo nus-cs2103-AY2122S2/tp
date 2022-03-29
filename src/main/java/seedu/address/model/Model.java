@@ -123,6 +123,11 @@ public interface Model {
     ArrayList<Interview> getApplicantsInterviews(Applicant applicant);
 
     /**
+     * Returns interview(s) which are for the specified position.
+     */
+    ArrayList<Interview> getPositionsInterviews(Position position);
+
+    /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.

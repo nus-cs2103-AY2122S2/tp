@@ -155,6 +155,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return interviews.getApplicantsInterviews(applicant);
     }
 
+    /**
+     * Returns interview(s) which are for the specified position.
+     */
+    public ArrayList<Interview> getPositionsInterview(Position position) {
+        return interviews.getPositionsInterview(position);
+    }
+
     //// position-level operations
 
     /**
