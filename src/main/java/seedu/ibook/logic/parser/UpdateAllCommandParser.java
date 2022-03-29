@@ -1,10 +1,7 @@
 package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.ibook.logic.parser.CliSyntax.*;
 
 import seedu.ibook.logic.commands.UpdateAllCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
@@ -22,8 +19,8 @@ public class UpdateAllCommandParser implements Parser<UpdateAllCommand> {
     @Override
     public UpdateAllCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NAME, PREFIX_CATEGORY, PREFIX_PRICE, PREFIX_DESCRIPTION);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY,
+                PREFIX_PRICE, PREFIX_DESCRIPTION, PREFIX_DISCOUNTRATE, PREFIX_DISCOUNTSTART);
 
         UpdateProductDescriptor updateProductDescriptor = new UpdateProductDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -38,6 +35,14 @@ public class UpdateAllCommandParser implements Parser<UpdateAllCommand> {
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             updateProductDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DISCOUNTRATE).isPresent()) {
+            updateProductDescriptor.setDiscountRate(
+                    ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DISCOUNTSTART).isPresent()) {
+            updateProductDescriptor.setDiscountStart(
+                    ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART).get()));
         }
 
         if (!updateProductDescriptor.isAnyFieldUpdated()) {
