@@ -93,18 +93,18 @@
                                 </rowConstraints>
                                 <children>
 
-                                    <VBox fx:id="personList" styleClass="pane-with-border" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
-                                        <padding>
-                                            <Insets bottom="10" left="10" right="10" top="10" />
-                                        </padding>
-                                        
-                                    </VBox>
-
-                                    <VBox fx:id="scheduleList" alignment="TOP_RIGHT" styleClass="pane-with-border" GridPane.columnIndex="1">
+                                    <VBox fx:id="scheduleList" alignment="TOP_RIGHT" styleClass="pane-with-border" GridPane.columnIndex="0">
                                         <padding>
                                             <Insets bottom="10" left="10" right="10" top="10" />
                                         </padding>
                                         <StackPane fx:id="scheduleListPanelPlaceholder" prefWidth="235.0" VBox.vgrow="ALWAYS" />
+                                    </VBox>
+
+                                    <VBox fx:id="scheduleCalendarPanel" alignment="TOP_RIGHT" styleClass="pane-with-border" GridPane.columnIndex="1">
+                                        <padding>
+                                            <Insets bottom="10" left="10" right="10" top="10" />
+                                        </padding>
+                                        <StackPane fx:id="scheduleCalendarPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                     </VBox>
 
                                 </children>

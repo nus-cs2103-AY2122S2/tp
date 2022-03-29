@@ -34,7 +34,6 @@ public class PlayerStatisticsPanel extends UiPart<Region> {
     }
 
     public void update(ObservableList<Person> persons) {
-        System.out.println("update pie chart");
         this.persons = persons;
         populatePieChart();
 

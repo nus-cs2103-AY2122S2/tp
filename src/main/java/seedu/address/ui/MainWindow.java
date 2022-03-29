@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private PlayerStatisticsPanel playerStatisticsPanel;
     private ScheduleListPanel scheduleListPanel;
+    private ScheduleCalendarPanel scheduleCalendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -51,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane scheduleListPanelPlaceholder;
+
+    @FXML
+    private StackPane scheduleCalendarPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -126,6 +131,9 @@ public class MainWindow extends UiPart<Stage> {
 
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
         scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+
+        scheduleCalendarPanel = new ScheduleCalendarPanel(logic.getFilteredScheduleList());
+        scheduleCalendarPanelPlaceholder.getChildren().add(scheduleCalendarPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
