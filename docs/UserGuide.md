@@ -113,6 +113,11 @@ LAB_STATUS:
 
 Format: `filter l/LAB_NUMBER s/LAB_STATUS`
 
+#### View student details : `view`
+View a student's details from the TAddressBook. INDEX must be a positive integer 1, 2, 3...
+
+Format: `view INDEX`
+
 ### Lab-related features
 
 #### Adding a Lab : `labadd`
