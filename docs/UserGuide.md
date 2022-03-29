@@ -216,7 +216,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
-**Edit Employee** | `editEmployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Edit Employee** | `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **Delete Employee** | `deleteEmployee INDEX` <br> e.g., `deleteEmployee 3`
 **Find Employee** | `findEmployee OPTIONS` <br> `findEmployee n/Alex Yeoh`
 **listEmployee** | `listEmployee`
