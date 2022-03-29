@@ -52,5 +52,5 @@ public class TransactionUtil {
             VALID_ID
     );
 
-    public static final Index VALID_INDEX =Index.fromZeroBased(1);
+    public static final Index VALID_INDEX =Index.fromZeroBased(0);
 }

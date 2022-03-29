@@ -10,8 +10,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Filter;
 
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -40,11 +44,12 @@ public class AddTransactionCommandTest {
         ModelStubAcceptingTransactionAdded modelStub = new ModelStubAcceptingTransactionAdded();
         Transaction validTransaction = TransactionUtil.TRANSACTION_ONE_COMPLETE;
         Index validIndex = TransactionUtil.VALID_INDEX;
+        Person validPerson = PersonUtil.AMY;
 
         CommandResult commandResult = new AddTransactionCommand(validIndex, x -> validTransaction).execute(modelStub);
 
         assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, validTransaction), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validTransaction), modelStub.transactionAdded);
     }
 
     @Test
@@ -215,6 +220,12 @@ public class AddTransactionCommandTest {
         public void addTransaction(Transaction transaction) {
             requireNonNull(transaction);
             transactionAdded.add(transaction);
+        }
+
+        @Override
+        public FilteredList<Person> getFilteredPersonList() {
+            ObservableList<Person> obs = FXCollections.observableArrayList(PersonUtil.AMY);
+            return new FilteredList<Person>(obs);
         }
 
         @Override

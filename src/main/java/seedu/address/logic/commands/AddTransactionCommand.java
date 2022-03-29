@@ -75,7 +75,6 @@ public class AddTransactionCommand extends Command {
         }
 
         model.addTransaction(transaction);
-        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.toString()));
     }
