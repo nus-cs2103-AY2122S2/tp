@@ -22,18 +22,19 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list all/`** : Lists all Tasks.
+   * **`listTask`** : Lists all Tasks.
 
    * **`addEmployee`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ManageEZPZ.
 
-   * **`delete`**`3` : Deletes the 3rd Task shown in the Task list.
+   * **`deleteTask`**`3` : Deletes the 3rd Task shown in the Task list.
 
-   * **`clear`** : Deletes all Tasks.
+   * **`clear`** : Deletes everything from ManageEZPZ.
    
    * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
+   * **`tagTask 1 n/John Doe`** : Assigns the first task on the task list to an employee named John Doe. 
+
    * **`exit`** : Exits the app.
-   
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -58,6 +59,8 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
 * Task related parameters must be in sequence as shown in the instruction.
 
+* All indexes are int based, as such the maximum value is 2147483647. (2<sup>32</sup>)
+
 </div>
 
 ### Viewing help : `help`
@@ -69,7 +72,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `addEmployee`
+### Adding an employee: `addEmployee`
 
 Adds an employee to ManageEZPZ.
 
@@ -78,6 +81,14 @@ Format: `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL`
 Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
 * `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
+
+### Listing all employees : `listEmployee`
+
+Shows a list of all employees in the address book.
+
+#### Format: 
+* `listEmployee`
+
 
 ### Finding employees: `findEmployee`
 
@@ -101,26 +112,42 @@ Finds employees that have all of the options as entered.
 * `findEmployee e/dcsdcr@nus.edu.sg`
 * `findEmployee n/Alex Yeo p/65162727 e/alexyeo@google.com`
 
-### Listing all employees : `listEmployee`
+### Deleting an employee: `deleteEmployee`
 
-Shows a list of all employees in the address book.
+Deletes the specified employee from the address book.
 
-#### Format: 
-* `listEmployee`
+Format: `deleteEmployee INDEX`
+
+* Deletes the employee at the specified INDEX.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `list` followed by `deleteEmployee 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by delete 1 deletes the 1st person in the results of the find command.
+
 
 ### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
 Adds a Task into the Task list.
 
 Format:
-
 * `addTodo desc/TASK_DESCRIPTION`
-* `addTDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
 * `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
+Examples:
+* `addTodo desc/Powerpoint slides for company XYZ`
+* `addDeadline desc/Client Proposal Slides by/2022-03-20 1800`
+* `addEvent desc/Business meeting at/2022-02-18 1900 2000`
+
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
-For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
+For deadline and event, the DATE must be in this format: YYYY-MM-DD and the TIME in this format: HHmm (in 24 hr format)
+
+Furthermore, parsing of task is done using the keywords such as "desc/", "by/" & "at/" as such, 
+the parsing mechanism would take everything inserted after the keywords.
 </div>
+
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
@@ -215,6 +242,44 @@ Format:
 
 * `listTask`
 
+### Tagging Tasks to Employees: `tagTask`
+
+Assigns a Task to the Employee
+
+Note:
+* For `tagTask`, the INDEX must be a positive integer 1,2,3...
+* For `tagTask`, the NAME must be a valid Employee Name from ManageEZPZ.
+
+Format: `tagTask INDEX n/NAME`
+
+Example: `tagTask 1 n/Alex Yeoh`
+
+### Untag Tasks from Employees: `untagTask`
+
+Deallocate the Task from Employee.
+
+Note:
+* For `untagTask`, the INDEX must be a positive integer 1,2,3...
+* For `untagTask`, the NAME must be a valid Employee Name from ManageEZPZ.
+
+Format: `untagTask INDEX n/NAME`
+
+Example: `untagTask 1 n/Alex Yeoh`
+
+### Tag Priority to a Task: `tagPriority`
+
+Assign a Task to a Priority which is enum of “HIGH / MEDIUM / LOW / NONE”
+
+Note:
+* For `tagPriority`, the INDEX must be a positive integer 1,2,3...
+* For `tagPriority`, the ENUM must be HIGH, MEDIUM, LOW, or NONE.
+
+Format: `tagPriority INDEX priority/ENUM`
+
+Example: 
+* `tagPriority 1 priority/HIGH`
+* `tagPriority 1 priority/NONE`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the Task list.
@@ -239,8 +304,6 @@ ManageEZPZ data are saved as a JSON file `[JAR file location]/data/ManageEZPZ.js
 If your changes to the data file makes its format invalid, ManageEZPZ will discard all data and start with an empty data file at the next run.
 </div>
 
-### Tagging Tasks to Employees `[coming in v1.3]`
-
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
@@ -254,12 +317,34 @@ _Details coming soon ..._
 
 ## Command summary
 
+###Employee Related Commands
 Action | Format, Examples
 --------|------------------
 **Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
-**Add Task** | `TASK_TYPE desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book` <br>`addDeadline desc/Use up resin /by 2022-15-03 0400` 
+**Edit Employee** | `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Delete Employee** | `deleteEmployee INDEX` <br> e.g., `deleteEmployee 3`
+**Find Employee** | `findEmployee OPTIONS` <br> `findEmployee n/Alex Yeoh`
+**listEmployee** | `listEmployee`
+
+###Task Related Commands
+Action | Format, Examples
+------------|--------------
+**Add Todo Task** | `addTodo desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book`
+**Add Deadline Task** | `addDeadline desc/TASK_DESCRIPTION by/DATETIME` <br> e.g., `addDeadline desc/return book by/16-02-2022 1800`
+**Add Event Task** | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., `addEvent desc/project meeting at/17-02-2022 1900 2000`
+**mark Task** | `markTask INDEX` <br> e.g., `markTask 2`
+**unmark Task** | `unmarkTask INDEX` <br> e.g., `unmarkTask 2`
+**delete Task** | `deleteTask INDEX` <br> e.g., `deleteTask 2`
+**find Task** | `findTask OPTIONS` <br> e.g.,`findTask todo/`
+**list Task** | `listTasks`
+**tag Task** | `tagTask INDEX n/NAME` <br> e.g.,`tagTask 1 n/Alex Yeoh`
+**untag Task** |`untagTask INDEX n/NAME` <br> e.g.,`untagTask 1 n/Alex Yeoh`
+**tag Priority** | `tagPriority INDEX priority/ENUM` <br> e.g.,`tagPriority 1 priority/HIGH`
+
+###Others
+Action | Format
+------------|-------------
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find task/TASK_DESCRIPTION` <br> e.g., `find task/homework`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
