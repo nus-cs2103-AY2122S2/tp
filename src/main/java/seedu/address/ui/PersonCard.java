@@ -75,17 +75,17 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream().sorted(Comparator.comparing(tag -> tag.value))
             .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
 
-        /*
-        // Memberships.
-        person.getMemberships().getList().stream()
-                .sorted(Comparator.comparing(membership -> membership.toString()))
-                .forEach(membership -> memberships.getChildren().add(new Label(membership.toString())));
-
-         */
-
         Membership membership = person.getMembership();
         if (membership != null) {
-            memberships.getChildren().add(new Label(membership.toString()));
+            Label newLabel = new Label(membership.toString());
+            if (membership.getValue().equals("GOLD")) {
+                newLabel.setId("gold");
+            } else if (membership.getValue().equals("SILVER")) {
+                newLabel.setId("silver");
+            } else {
+                newLabel.setId("bronze");
+            }
+            memberships.getChildren().add(newLabel);
         }
 
     }

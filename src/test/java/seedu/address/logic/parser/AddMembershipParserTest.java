@@ -16,15 +16,15 @@ public class AddMembershipParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Membership expectedMember = new Membership("Test");
-        Membership expectedMemberWithDate = new Membership("Test", LocalDate.parse("1920-02-02"));
+        Membership expectedMember = new Membership("GOLD");
+        Membership expectedMemberWithDate = new Membership("GOLD", LocalDate.parse("1920-02-02"));
 
         // valid name
-        assertParseSuccess(parser, "1 m/Test",
+        assertParseSuccess(parser, "1 m/GOLD",
                 new AddMembershipCommand(Index.fromOneBased(1), expectedMember));
 
         // valid name and date
-        assertParseSuccess(parser, "1 m/Test d/1920-02-02",
+        assertParseSuccess(parser, "1 m/GOLD d/1920-02-02",
                 new AddMembershipCommand(Index.fromOneBased(1), expectedMemberWithDate));
     }
 
@@ -34,6 +34,6 @@ public class AddMembershipParserTest {
         assertParseFailure(parser, "1 m/-", Membership.MESSAGE_CONSTRAINTS);
 
         // invalid date
-        assertParseFailure(parser, "1 m/Test d/Fail", Membership.MESSAGE_DATE_CONSTRAINTS);
+        assertParseFailure(parser, "1 m/Gold d/Fail", Membership.MESSAGE_DATE_CONSTRAINTS);
     }
 }

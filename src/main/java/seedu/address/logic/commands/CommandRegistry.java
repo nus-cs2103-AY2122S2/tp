@@ -13,6 +13,7 @@ import seedu.address.logic.parser.DeleteTransactionCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.FindTransactionCommandParser;
+import seedu.address.logic.parser.ListMembersCommandParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.PayCommandParser;
 import seedu.address.logic.parser.RemarkCommandParser;
@@ -51,6 +52,7 @@ public class CommandRegistry {
         parsers.put(PayCommand.COMMAND_WORD, new PayCommandParser());
         parsers.put(UnpayCommand.COMMAND_WORD, new UnpayCommandParser());
         parsers.put(RemoveMembershipCommand.COMMAND_WORD, new RemoveMembershipParser());
+        parsers.put(ListMembersCommand.COMMAND_WORD, new ListMembersCommandParser());
 
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---

@@ -14,20 +14,21 @@ import seedu.address.logic.parser.Prefix;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Membership extends Field {
+
+    enum Tier {
+        GOLD,
+        SILVER,
+        BRONZE
+    }
+
     public static final Prefix PREFIX = new Prefix("m/", true);
     public static final Prefix DATE_PREFIX = new Prefix("d/", false);
     public static final String MESSAGE_CONSTRAINTS =
-            "Membership names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Membership tier should be either 'gold','silver','bronze'";
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date is in an invalid format";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    private final String value;
+    private final Tier tier;
     private final LocalDate date;
 
     /**
@@ -39,8 +40,9 @@ public class Membership extends Field {
         super(PREFIX);
         requireNonNull(name);
         name = name.trim();
+        name = name.toLowerCase();
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        value = name;
+        tier = getTierFromString(name);
         date = null;
     }
 
@@ -54,16 +56,38 @@ public class Membership extends Field {
         super(PREFIX);
         requireNonNull(name);
         name = name.trim();
+        name = name.toLowerCase();
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        value = name;
+        tier = getTierFromString(name);
         this.date = date;
+    }
+
+    /**
+     * Returns a tier based on the given string.
+     */
+    public static Tier getTierFromString(String name) {
+        if (name.equals("gold")) {
+            return Tier.GOLD;
+        } else if (name.equals("silver")) {
+            return Tier.SILVER;
+        } else {
+            return Tier.BRONZE;
+        }
+    }
+
+    /**
+     * Returns a tier based on the given string.
+     */
+    public Tier getTier() {
+        return tier;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        test = test.toLowerCase();
+        return test.equals("gold") || test.equals("silver") || test.equals("bronze");
     }
 
     /**
@@ -79,6 +103,14 @@ public class Membership extends Field {
     }
 
     public String getValue() {
+        String value = "";
+        if (tier == Tier.GOLD) {
+            value = "GOLD";
+        } else if (tier == Tier.SILVER) {
+            value = "SILVER";
+        } else if (tier == Tier.BRONZE) {
+            value = "BRONZE";
+        }
         return value;
     }
 
@@ -92,7 +124,9 @@ public class Membership extends Field {
         if (date != null) {
             datePostFix = " since " + date.toString();
         }
-        return value + datePostFix;
+        String value = "";
+
+        return getValue() + " MEMBER" + datePostFix;
     }
 
     @Override
@@ -100,16 +134,16 @@ public class Membership extends Field {
         if (date != null) {
             return other == this // short circuit if same object
                     || (other instanceof Membership // instanceof handles nulls
-                    && value.equals(((Membership) other).value) && date.equals(((Membership) other).date));
+                    && tier.equals(((Membership) other).tier) && date.equals(((Membership) other).date));
         }
         return other == this // short circuit if same object
                 || (other instanceof Membership // instanceof handles nulls
-                && value.equals(((Membership) other).value));
+                && tier.equals(((Membership) other).tier));
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return tier.hashCode();
     }
 
     @Override
@@ -120,7 +154,7 @@ public class Membership extends Field {
 
         //compare by name of membership first followed by date
         Membership otherMembership = (Membership) other;
-        return Comparator.comparing(Membership::getValue)
+        return Comparator.comparing(Membership::getTier)
                 .thenComparing(Membership::getDate)
                 .compare(this, otherMembership);
     }
