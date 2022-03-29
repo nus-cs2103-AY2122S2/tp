@@ -359,9 +359,7 @@ However, this implementation comes with the increased risk of desynchronization 
 ### Edit Appointment Priority Feature - `prioritizeappt`
 
 The priority feature is similar to the edit for `Appointment` but specifically changes the appointment's priority to one of the `Priority` values.
-The `Priority` enums handles convert enum to reader friendly feedback of priority level, and static `Priority#getFromDisplayName()` method to handle case-insensitive string to enum conversion.
-The original `Appointment` also extended with additional constructor with attribute priority, and set `Priority` is done by creating new appointment by method `Appointment#withPriority()` which keep its immutability.
-
+The `Priority` enum values provide the display name of the enum denoting priority level, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
 ### Date Time Input Parsing
 
 The app accepts multiple date and time formats to make it easier for users to input. This functionality is implemented by the `DateUtil` class, supported by the `commons.util.datetimeparser` package.
@@ -518,6 +516,7 @@ This extension allows the user to perform range of commands based on `index`. Du
 #### Batch Command
 
 This extension allows the editing of `Person` objects that have attributes matching a specific value. Since this matching requires the objects to already exist, only edit and delete operations can be performed. The command translates the `Person` objects matching the condition into a series of indexes and executes the specified command on them sequentially.
+The field of Batch Command parameters are checked in a defensive way that only one equal, start or end can be accepted.
 
 The sequence diagram is as follows:
 ![Input to Index](images/BatchCommandInputToIndexSequenceDiagram.png)

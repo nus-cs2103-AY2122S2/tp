@@ -25,6 +25,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_PRIORITY_LEVEL = "Invalid priority level for editpriority \n%1$s";
 
     // ====== Bulk Operation Related Messages =======
-    public static final String MESSAGE_PREFIX_NOT_EQUALS_ONE = "Only one parameter (=, start or end) can be provided.";
     public static final String MESSAGE_INVALID_RANGE_INDEX = "The range index is invalid!";
 }

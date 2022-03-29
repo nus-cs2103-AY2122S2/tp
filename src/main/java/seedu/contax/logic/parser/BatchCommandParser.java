@@ -2,7 +2,7 @@ package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.commons.core.Messages.MESSAGE_PREFIX_NOT_EQUALS_ONE;
+import static seedu.contax.logic.commands.BatchCommand.MESSAGE_PREFIX_NOT_EQUALS_ONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_END_WITH;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;

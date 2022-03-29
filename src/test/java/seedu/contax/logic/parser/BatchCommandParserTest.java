@@ -6,7 +6,6 @@ import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.commons.core.Messages;
 import seedu.contax.logic.commands.BatchCommand;
 import seedu.contax.logic.commands.BatchCommand.BatchType;
 import seedu.contax.model.util.SearchType;
@@ -37,7 +36,7 @@ public class BatchCommandParserTest {
 
         // more than one param
         assertParseFailure(parser, "batch editperson by/phone =/1 start/1",
-                Messages.MESSAGE_PREFIX_NOT_EQUALS_ONE);
+                BatchCommand.MESSAGE_PREFIX_NOT_EQUALS_ONE);
 
     }
 
