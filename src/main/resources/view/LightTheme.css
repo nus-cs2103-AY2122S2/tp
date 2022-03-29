@@ -381,3 +381,16 @@
     -fx-text-fill: #17083E;
     -fx-padding: 4 20 4 20;
 }
+
+.list-cell:filled:selected #taskContainer {
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 0;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}
