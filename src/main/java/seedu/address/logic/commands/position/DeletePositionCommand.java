@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
@@ -52,35 +51,18 @@ public class DeletePositionCommand extends DeleteCommand {
         }
 
         Position positionToDelete = lastShownList.get(targetIndex.getZeroBased());
-        int deleteInterviewCount = deletePositionsInterview(model, positionToDelete);
 
-        model.deletePosition(positionToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_POSITION_SUCCESS, positionToDelete) + "\n"
-                    + String.format(MESSAGE_DELETE_INTERVIEWS, deleteInterviewCount),
-                getCommandDataType());
-    }
-
-    /**
-     * Deletes interviews which are for the position to delete.
-     *
-     * @return Number of interviews deleted.
-     */
-    private int deletePositionsInterview(Model model, Position positionToDelete) {
-        ObservableList<Interview> interviewList = model.getAddressBook().getInterviewList();
-        ArrayList<Interview> interviewsToDelete = new ArrayList<>();
-
-        for (Interview i : interviewList) {
-            if (i.isInterviewForPosition(positionToDelete)) {
-                interviewsToDelete.add(i);
-            }
-        }
-
+        ArrayList<Interview> interviewsToDelete = model.getPositionsInterviews(positionToDelete);
         for (Interview i : interviewsToDelete) {
             model.deleteInterview(i);
             logger.log(Level.INFO, String.format("Deleted interview: %1$s", i));
         }
 
-        return interviewsToDelete.size();
+
+        model.deletePosition(positionToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_POSITION_SUCCESS, positionToDelete) + "\n"
+                    + String.format(MESSAGE_DELETE_INTERVIEWS, interviewsToDelete.size()),
+                getCommandDataType());
     }
 
     @Override
