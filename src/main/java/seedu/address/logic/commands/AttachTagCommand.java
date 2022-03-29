@@ -84,8 +84,19 @@ public class AttachTagCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AttachTagCommand // instanceof handles nulls
-                && toAttach.equals(((AttachTagCommand) other).toAttach));
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AttachTagCommand)) {
+            return false;
+        }
+
+        // state check
+        AttachTagCommand e = (AttachTagCommand) other;
+        return toAttach.equals(e.toAttach)
+                && targetIndex.equals(e.targetIndex);
     }
 }
