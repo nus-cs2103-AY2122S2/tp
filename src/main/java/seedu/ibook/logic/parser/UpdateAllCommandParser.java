@@ -1,7 +1,12 @@
 package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ibook.logic.parser.CliSyntax.*;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import seedu.ibook.logic.commands.UpdateAllCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
