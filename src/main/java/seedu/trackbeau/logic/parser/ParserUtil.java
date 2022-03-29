@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.StringUtil;
+import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
@@ -197,7 +198,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code targetIndex} is invalid.
      */
-    public static Integer parseCustomerID(String targetIndex) throws ParseException {
+    public static Integer parseCustomerID(String targetIndex) {
         requireNonNull(targetIndex);
         String trimmedIndex = targetIndex.trim();
         Integer targetIndexInt;
@@ -215,7 +216,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code startTime} is invalid.
      */
-    public static LocalDateTime parseStartTime(String startTime) throws DateTimeException {
+    public static LocalDateTime parseStartTime(String startTime) throws ParseException {
         requireNonNull(startTime);
         String trimmedAddress = startTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -223,7 +224,7 @@ public class ParserUtil {
         try {
             dateTime = LocalDateTime.parse(trimmedAddress, formatter);
         } catch (DateTimeException e) {
-            throw e;
+            throw new ParseException("Please enter valid appointment time in: dd-MM-yyyy HH:mm");
         }
 
         return dateTime;
