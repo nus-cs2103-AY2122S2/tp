@@ -127,14 +127,15 @@ public class LogicManager implements Logic {
     }
 
     /**
-     *  Saves address book data before the data modification made into a temporary file.
+     * Saves address book data before the data modification made into a temporary file.
      *
      * @param addressBookBeforeCommand Data of the address book before modification.
+     * @return Whether a temporary file is created. If no modifications were made, no temporary file will be created.
      * @throws CommandException If there are issues saving the data into the temporary file.
      */
-    public void savePrevAddressBookDataInTemp(ReadOnlyAddressBook addressBookBeforeCommand) throws CommandException {
+    public boolean savePrevAddressBookDataInTemp(ReadOnlyAddressBook addressBookBeforeCommand) throws CommandException {
         if (addressBookBeforeCommand.equals(model.getAddressBook())) {
-            return;
+            return false;
         }
 
         //address book data before command saved to temp file
@@ -143,6 +144,8 @@ public class LogicManager implements Logic {
         } catch (Exception exception) {
             throw new CommandException(TEMP_FILE_OPS_ERROR_MESSAGE + exception, exception);
         }
+
+        return true;
     }
 
     @Override
