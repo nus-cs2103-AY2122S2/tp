@@ -1115,7 +1115,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 ![Import/Export CSV Use Cases](images/UseCaseDiagramImportExportCsv.png)
 
-**UC19: Export CSV File**
+**UC18: Export CSV File**
 
 **MSS**
 
@@ -1123,7 +1123,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. ContaX saves a CSV file to the disk<br><br>
    Use case ends.
 
-**UC20: Import CSV file**
+**UC19: Import CSV file**
 
 **MSS**
 
