@@ -307,7 +307,7 @@ public class ListCommand extends Command {
                     return new CommandResult(Messages.MESSAGE_ALREADY_ON_MODULE_PAGE);
                 } else {
                     modelManager.getUi().setModuleListPanel();
-                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                    return new CommandResult(Messages.MESSAGE_CHANGED_TO_MODULE_PAGE);
                 }
             } else if (this.viewType == ListView.PEOPLE) {
                 //Switch view to people
@@ -315,7 +315,7 @@ public class ListCommand extends Command {
                     return new CommandResult(Messages.MESSAGE_ALREADY_ON_PEOPLE_PAGE);
                 } else {
                     modelManager.getUi().setPersonListPanel();
-                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+                    return new CommandResult(Messages.MESSAGE_CHANGED_TO_PERSON_PAGE);
                 }
             } else {
                 //Switch view to groups
@@ -333,7 +333,7 @@ public class ListCommand extends Command {
                         }
                     }
                     modelManager.getUi().setGroupListPanel(groups);
-                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_GROUP_PAGE);
+                    return new CommandResult(Messages.MESSAGE_CHANGED_TO_GROUP_PAGE);
                 }
             }
         case PEOPLEINGROUP:
