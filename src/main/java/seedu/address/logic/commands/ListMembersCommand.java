@@ -13,7 +13,7 @@ public class ListMembersCommand extends Command {
 
     public static final String COMMAND_WORD = "listMembers";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons whose "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all clients whose "
             + "tier matches the provided string. It displays all members if no tier is provided\n"
             + "Parameters: (OPTIONAL)<TIER (GOLD,BRONZE,SILVER)>\n"
             + "Example: " + COMMAND_WORD + " GOLD";

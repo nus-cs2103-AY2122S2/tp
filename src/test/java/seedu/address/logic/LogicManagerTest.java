@@ -75,7 +75,7 @@ class LogicManagerTest {
         try {
             logicManager.execute(PersonUtil.getAddCommand(validPerson1) + " | "
                     + PersonUtil.getAddCommand(validPerson2));
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException e) {
             e.getStackTrace();
         }
 
@@ -91,11 +91,11 @@ class LogicManagerTest {
         try {
             logicManager.execute(PersonUtil.getAddCommand(validPerson1) + " | invalidCommand | "
                     + PersonUtil.getAddCommand(validPerson2));
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException e) {
             e.getStackTrace();
         }
 
-        assertTrue(model.hasPerson(validPerson1));
+        assertFalse(model.hasPerson(validPerson1));
         assertFalse(model.hasPerson(validPerson2));
     }
 
@@ -105,11 +105,11 @@ class LogicManagerTest {
 
         try {
             logicManager.execute(PersonUtil.getAddCommand(validPerson1) + " | ");
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException e) {
             e.getStackTrace();
         }
 
-        assertTrue(model.hasPerson(validPerson1));
+        assertFalse(model.hasPerson(validPerson1));
     }
 
     //@@author

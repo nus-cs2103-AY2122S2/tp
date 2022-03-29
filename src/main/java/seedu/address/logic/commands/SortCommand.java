@@ -25,11 +25,12 @@ import seedu.address.model.person.Remark;
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_SUCCESS = "List is sorted accordingly!";
-    public static final String MESSAGE_EMPTY_ERROR = "Fields to be sorted or not specified, list remains unchanged!";
+    public static final String MESSAGE_SUCCESS = "Client list is sorted accordingly!";
+    public static final String MESSAGE_EMPTY_ERROR = "Fields to be sorted or not specified,"
+        + " client list remains unchanged!";
     public static final String DESCENDING_KEYWORD = "desc";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": sorts the person list in the field order specified.\n"
+            + ": sorts the client list in the field order specified.\n"
             + "Parameters: Any field prefix "
             + "[" + Name.PREFIX + "] "
             + "[" + Phone.PREFIX + "] "
@@ -43,7 +44,7 @@ public class SortCommand extends Command {
     private final List<FieldSortOrder> fieldSortOrderList;
 
     /**
-     *  Creates a SortCommand to sort the person list in address book based on fields given.
+     * Creates a SortCommand to sort the person list in address book based on fields given.
      * @param fieldSortOrderList a list of information about the fields to be sorted in the order of the list.
      */
     public SortCommand(List<FieldSortOrder> fieldSortOrderList) {
@@ -194,4 +195,3 @@ public class SortCommand extends Command {
         return fieldSortOrderList.equals(s.fieldSortOrderList);
     }
 }
-

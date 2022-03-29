@@ -16,12 +16,11 @@ public class ClearFilteredCommand extends Command {
     public static final String COMMAND_WORD = "clearFiltered";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes all filtered people.\n"
+            + ": Deletes all filtered clients.\n"
             + "Parameters: none\n"
             + "Example: " + COMMAND_WORD + "";
 
-    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d people deleted!";
-
+    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d client(s) deleted!";
 
     public ClearFilteredCommand() {
     }
