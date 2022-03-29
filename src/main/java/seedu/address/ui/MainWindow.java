@@ -14,6 +14,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.FocusCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Candidate;
@@ -192,6 +194,22 @@ public class MainWindow extends UiPart<Stage> {
         focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
     }
 
+    private void handleDelete(String commandResult) throws CommandException {
+        int index;
+        try {
+            index = Integer.parseInt(commandResult.substring(7));
+            if (focusListPanel.getCandidate().equals(logic.getFilteredCandidateList().get(index - 1))) {
+                if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+                    focusListPanelPlaceholder.getChildren().remove(0);
+                }
+                FocusCard focusCard = new FocusCard(null, null);
+                focusListPanelPlaceholder.getChildren().add(focusCard.getRoot());
+            }
+        } catch (Exception e) {
+            throw new CommandException(DeleteCommand.MESSAGE_USAGE);
+        }
+    }
+
     public CandidateListPanel getCandidateListPanel() {
         return candidateListPanel;
     }
@@ -209,9 +227,13 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText)
-            throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+
+            if (commandText.contains(DeleteCommand.COMMAND_WORD)) {
+                handleDelete(commandText);
+            }
+
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -224,8 +246,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowFocus()) {
+            if (commandResult.isShowFocus() && !commandResult.isEdit()) {
                 handleFocus(commandResult);
+            }
+
+            if (commandResult.isEdit() && !commandResult.isShowFocus()) {
+                executeCommand(FocusCommand.COMMAND_WORD + " " + commandResult.getEditIndex());
             }
 
             return commandResult;

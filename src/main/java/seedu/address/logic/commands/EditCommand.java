@@ -60,6 +60,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_CANDIDATE_SUCCESS = "Edited Candidate: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the system";
+    public static final String MESSAGE_FOCUS_FAIL = "Cannot refresh Candidate Details";
 
     private final Index index;
     private final EditCandidateDescriptor editCandidateDescriptor;
@@ -94,7 +95,9 @@ public class EditCommand extends Command {
 
         model.setCandidate(candidateToEdit, editedCandidate);
         model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
-        return new CommandResult(String.format(MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate),
+                true, index.getOneBased());
     }
 
     /**
