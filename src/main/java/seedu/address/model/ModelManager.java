@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -24,9 +25,9 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private FilteredList<Applicant> filteredApplicants;
-    private FilteredList<Interview> filteredInterviews;
-    private FilteredList<Position> filteredPositions;
+    private final FilteredList<Applicant> filteredApplicants;
+    private final FilteredList<Interview> filteredInterviews;
+    private final FilteredList<Position> filteredPositions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -231,6 +232,16 @@ public class ModelManager implements Model {
         requireAllNonNull(predicate, comparator);
         addressBook.sortInterview(comparator);
         filteredInterviews.setPredicate(predicate);
+    }
+
+    @Override
+    public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+        return addressBook.getApplicantsInterviews(applicant);
+    }
+
+    @Override
+    public ArrayList<Interview> getPositionsInterviews(Position position) {
+        return addressBook.getPositionsInterview(position);
     }
 
     //=========== Filtered Position List Accessors =============================================================
