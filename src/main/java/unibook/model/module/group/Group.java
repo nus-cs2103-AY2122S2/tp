@@ -184,7 +184,8 @@ public class Group {
      * @return
      */
     public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
-        if (moduleCode.equals(this.module.getModuleCode().toString()) && groupName.equals(this.getGroupName())) {
+        if (moduleCode.equals(this.module.getModuleCode().toString())
+                && groupName.equals(this.getGroupName())) {
             return true;
         }
         return false;

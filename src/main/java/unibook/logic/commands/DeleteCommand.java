@@ -9,6 +9,7 @@ import java.util.Set;
 import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.logic.commands.exceptions.CommandException;
+import unibook.logic.parser.CliSyntax;
 import unibook.model.Model;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
@@ -29,25 +30,36 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ":\n\n"
         + "All Pages: \n"
-        + "delete [index] (Delete person or module or group at that index)\n"
-        + "delete o/module m/[modulecode] (Delete module that matches the code)\n"
-        + "delete o/group m/[modulecode] g/[groupname] (Delete the group that is associated with this module code)\n\n"
+        + COMMAND_WORD + String.format(" [index] (Delete person or module or group at that index)\n")
+        + COMMAND_WORD + String.format(" %smodule %s[modulecode] (Delete module that matches the code)\n",
+            CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_MODULE)
+        + COMMAND_WORD + String.format(" %sgroup %s[modulecode] %s[groupname] "
+        + "(Delete the group that is associated with this module code)\n\n",
+            CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_GROUP)
         + "Person Page: \n"
-        + "delete [index] p/ e/ t/[tag] of/ (Delete attributes from person on person page only)\n\n"
+        + COMMAND_WORD + String.format(" [index] %s %s %s[tag] %s "
+        + "(Delete attributes from person on person page only)\n\n",
+            CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_TAG, CliSyntax.PREFIX_OFFICE)
         + "Module Page: \n"
-        + "delete [index1] prof/[index2] (Delete professor at index2 from module at index1)\n"
-        + "delete [index1] stu/[index2] (Delete student at index2 from module at index1)\n"
-        + "delete [index] g/[groupname] (Delete group from module at index)\n"
-        + "delete [index1] ke/[index2] (Delete key event at index2 from module at index1)\n\n"
+        + COMMAND_WORD + String.format(" [index1] %s[index2] (Delete professor at index2 from module at index1)\n",
+            CliSyntax.PREFIX_PROF_INDEX)
+        + COMMAND_WORD + String.format(" [index1] %s[index2] (Delete student at index2 from module at index1)\n",
+            CliSyntax.PREFIX_STU_INDEX)
+        + COMMAND_WORD + String.format(" [index] %s[groupname] (Delete group from module at index)\n",
+            CliSyntax.PREFIX_GROUP)
+        + COMMAND_WORD + String.format(" [index1] %s[index2] (Delete key event at index2 from module at index1)\n\n",
+            CliSyntax.PREFIX_KEYEVENT)
         + "Group page: \n"
-        + "delete [index1] stu/[index2] (Delete student at index2 from group at index1)\n"
-        + "delete [index1] mt/[index2] (Delete meeting time at index2 from group at index1)\n";
+        + COMMAND_WORD + String.format(" [index1] %s[index2] (Delete student at index2 from group at index1)\n",
+            CliSyntax.PREFIX_STU_INDEX)
+        + COMMAND_WORD + String.format(" [index1] %s[index2] (Delete meeting time at index2 from group at index1)\n",
+            CliSyntax.PREFIX_MEETING_TIME);
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Successfully deleted Module: %1$s";
     public static final String MESSAGE_DELETE_MODULE_AND_PERSON_SUCCESS = "Deleted Module: %1$s, and all Persons";
     public static final String MESSAGE_DELETE_UNSUCCESSFUL = "Delete Unsuccessful";
-    public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
+    public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Successfully deleted Group: %1$s from Module: %2$s";
     public static final String MESSAGE_DELETE_TRAITS_SUCCESS = "Successfully deleted the following traits:\n";
     public static final String PHONE = "Phone: ";
     public static final String EMAIL = "Email: ";
@@ -223,7 +235,8 @@ public class DeleteCommand extends Command {
                 lastShownGroupList.remove(targetIndex.getZeroBased());
 
 
-                return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete.getGroupName()));
+                return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS,
+                        groupToDelete.getGroupName(), groupToDelete.getModule().getModuleCode()));
 
             }
 
@@ -262,7 +275,8 @@ public class DeleteCommand extends Command {
                 List<Group> lastShownGroupList = model.getShowingGroupList();
                 lastShownGroupList.remove(removedGroup);
             }
-            return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, removedGroup));
+            return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS,
+                    removedGroup, removedGroup.getModule().getModuleCode()));
 
         } else if (phone || email || tag != null || office) { // delete person attributes
 
