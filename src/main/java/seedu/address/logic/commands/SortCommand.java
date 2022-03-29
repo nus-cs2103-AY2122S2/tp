@@ -21,10 +21,10 @@ public class SortCommand extends Command {
     public static final char SORT_REVERSE = '!';
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the list of persons by the specified fields (case-insensitive) in the order specified."
-            + "Prefix the field with " + SORT_REVERSE + " to sort in reverse order.\n"
-            + "Parameters: [FIELD]...\n"
-            + "Allowed values for FIELD: " + SORT_BY_NAME + ", " + SORT_BY_PHONE + ", " + SORT_BY_EMAIL + ", "
+            + ": Sorts the list of persons by the specified keywords (case-insensitive) in the order specified.\n"
+            + "Parameters: [" + SORT_REVERSE + "]KEYWORD [[" + SORT_REVERSE + "]MORE_KEYWORDS]...\n"
+            + "Prefixing a keyword with " + SORT_REVERSE + " will reverse the sorting order for that keyword.\n"
+            + "List of supported keywords: " + SORT_BY_NAME + ", " + SORT_BY_PHONE + ", " + SORT_BY_EMAIL + ", "
             + SORT_BY_FAVOURITE + ", " + SORT_BY_ADDRESS + ", " + SORT_BY_USER_TYPE + ", " + SORT_BY_NUM_PROPERTIES
             + "\n"
             + "Example: " + COMMAND_WORD + " " + SORT_BY_NAME + " " + SORT_BY_PHONE + " " + SORT_REVERSE
