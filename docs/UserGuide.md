@@ -4,9 +4,13 @@ title: User Guide
 ---
 
 TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to professors for managing
-the process of hiring undergraduate/graduate Teaching Assistants (TA). They will be able to access the candidates’ application
-data easily and review qualifications or availability for scheduling interviews. It is **optimized for use via a
-Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
+the interview scheduling process of candidates applying to be undergraduate/graduate Teaching Assistants (TA). 
+Professors will be able to access the candidates’ application data easily and review their general availability for 
+scheduling interviews during office hours.
+TAlent Assistant™ is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a 
+Graphical User Interface (GUI). 
+If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative 
+faster than traditional GUI applications.
 
 * Table of Contents
 {:toc}
@@ -24,7 +28,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
     * **`list`** : Lists all candidates.
@@ -35,15 +39,33 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
     * **`delete [INDEX]`** : Deletes the candidate with ID A0213456H from the system.
 
-    * **`find k/Jane f/name`** : Searches for all candidate with name containing “Jane/jane”.
+    * **`find k/Jane f/name`** : Searches for all candidates with name containing “Jane” (case-insensitive).
 
-    * **`sort s/name`** : Sorts all candidate by name in descending alphabetical order.
-
+    * **`sort s/name`** : Sorts all candidates by name in ascending alphabetical order (i.e. A-Z).
+    
+    * **`view today`** : Filters all interviews to display only interviews scheduled today (if any).
+    
     * **`help`** : List all commands in the system.
+   
+    * **`exit`** : Closes and exits the system.
 
-1. Refer to the [Features](#features) below for details of each command.
+
+1. Refer to the [Features](#features) below for details of all commands.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Navigating the Display
+
+**:information_source: Notes about GUI display layout:**<br>
+
+* **Candidates List** : Bottom leftmost panel displays the list of candidates in the system, alongside some key information.
+
+* **Candidate Profile** : Bottom middle panel brings up a focused view of the candidate's profile when the related command is entered.
+
+* **Scheduled Interviews** : Bottom rightmost panel displays the list of scheduled interviews.
+
+Commands that affect the display of information within each of these panels is described below.
+
 
 ## Features
 
@@ -181,6 +203,8 @@ Let's reference a default sample list of unique candidates with attribute fields
 2. (`Alice`, `E0234567`)
 3. (`Ben`, `E23456789`)
 
+### Viewing scheduled interviews `sort`
+
 
 ### Deleting a candidate : `delete`
 
@@ -247,9 +271,6 @@ TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/tale
 If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,14 +283,33 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                 |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
-| **Clear**    | `clear`                                                                                                                                                          |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                 |
-| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                     |
-| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                 |
-| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                                                      |
-| **List**     | `list`                                                                                                                                                           |
-| **Help**     | `help`                                                                                                                                                           |
+Commands in this section have been organised based on the targeted expected behaviour.
+
+### Candidates List
+| Action     | Format, Examples                                                                                                                                                 |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                 |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                     |
+| **Sort**   | [[PLACEHOLDER]]                                                                                                                                                  |
+
+### Candidate Profile
+| Action    | Format, Examples |
+|-----------|------------------|
+| **Focus** | [[PLACEHOLDER]]  |
+
+### Scheduled Interviews
+| Action              | Format, Examples                                                                |
+|---------------------|---------------------------------------------------------------------------------|
+| **Schedule Add**    | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`     |
+| **Schedule Delete** | [[PLACEHOLDER]]                                                                 |
+| **Schedule Edit**   | [[PLACEHOLDER]]                                                                 |
+| **View**            | `view [TIME PERIOD]` <br> e.g., `view`, `view today`, `view week`, `view month` |
+
+### Other Commands
+| Action    | Format, Examples |
+|-----------|------------------|
+| **Clear** | `clear`          |
+| **Exit**  | `exit`           |
+| **Help**  | `help`           |
