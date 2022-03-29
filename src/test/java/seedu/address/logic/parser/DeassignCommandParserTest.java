@@ -13,12 +13,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AssignCommand;
+import seedu.address.logic.commands.DeassignCommand;
 import seedu.address.model.group.Group;
 import seedu.address.testutil.GroupBuilder;
 
-public class AssignCommandParserTest {
-    private AssignCommandParser parser = new AssignCommandParser();
+public class DeassignCommandParserTest {
+    private DeassignCommandParser parser = new DeassignCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -27,13 +27,13 @@ public class AssignCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + 1
-                + GROUP_DESC_NUS_FINTECH_SOCIETY, new AssignCommand(INDEX_FIRST_PERSON, expectedGroup));
+                + GROUP_DESC_NUS_FINTECH_SOCIETY, new DeassignCommand(INDEX_FIRST_PERSON, expectedGroup));
 
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeassignCommand.MESSAGE_USAGE);
 
         // missing group name prefix
         assertParseFailure(parser, 1 + VALID_GROUP_NAME_NUS_FINTECH_SOCIETY,

@@ -51,7 +51,10 @@ public class SampleDataUtil {
         groupList.add(new Group(new GroupName("NUS Data Science Society")));
 
         groupList.get(0).addTask(new Task(new TaskName("Do Presentation for Open House")));
+        groupList.get(0).addTask(new Task(new TaskName("Website design review")));
+        groupList.get(0).addTask(new Task(new TaskName("Meeting with external partners")));
         groupList.get(1).addTask(new Task(new TaskName("Electing the new president")));
+        groupList.get(1).addTask(new Task(new TaskName("Launch post on Medium")));
 
         groupList.get(0).assignPerson(SampleDataUtil.getSamplePersons()[0]);
         groupList.get(0).assignPerson(SampleDataUtil.getSamplePersons()[1]);
