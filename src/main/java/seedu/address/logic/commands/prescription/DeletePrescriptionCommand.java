@@ -45,6 +45,7 @@ public class DeletePrescriptionCommand extends Command {
         Prescription prescriptionToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePrescription(prescriptionToDelete);
         if (lastShownList.isEmpty()) {
+            CommandType.setViewCommandType(CommandType.DEFAULT);
             return new CommandResult(String.format(MESSAGE_DELETE_PRESCRIPTION_SUCCESS, prescriptionToDelete),
                     CommandType.DEFAULT);
         }

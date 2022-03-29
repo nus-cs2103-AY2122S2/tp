@@ -119,7 +119,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Patient patient) {
+        public void addPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -154,12 +154,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patient patient) {
+        public boolean hasPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Predicate<Patient> predicate) {
+        public boolean hasPatient(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -181,7 +181,7 @@ public class AddCommandTest {
 
 
         @Override
-        public void deletePerson(Patient target) {
+        public void deletePatient(Patient target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Patient> getFilteredPersonList() {
+        public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -216,7 +216,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Patient> predicate) {
+        public void updateFilteredPatientList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -330,9 +330,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patient patient) {
+        public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return this.patient.isSamePerson(patient);
+            return this.patient.isSamePatient(patient);
         }
     }
 
@@ -344,13 +344,13 @@ public class AddCommandTest {
         final ArrayList<Medical> medicalsAdded = new ArrayList<Medical>();
 
         @Override
-        public boolean hasPerson(Patient patient) {
+        public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return personsAdded.stream().anyMatch(patient::isSamePerson);
+            return personsAdded.stream().anyMatch(patient::isSamePatient);
         }
 
         @Override
-        public void addPerson(Patient patient) {
+        public void addPatient(Patient patient) {
             requireNonNull(patient);
             personsAdded.add(patient);
         }

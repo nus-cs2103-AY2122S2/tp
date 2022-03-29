@@ -48,7 +48,7 @@ public class ViewMedicalCommand extends Command {
                     COMMAND_TYPE);
         } else { // Nric specified, find and display medical details for patient with specifed nric
             model.updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
-            if (!model.hasPerson(new NricPredicate(nric))) {
+            if (!model.hasPatient(new NricPredicate(nric))) {
                 throw new CommandException(MESSAGE_MISSING_PATIENT);
             }
             return new CommandResult(

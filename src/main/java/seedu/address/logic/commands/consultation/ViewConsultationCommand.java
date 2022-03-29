@@ -48,7 +48,7 @@ public class ViewConsultationCommand extends Command {
         requireNonNull(model);
         model.updateFilteredConsultationList(new ConsultationWithPredicates(ownerNric));
 
-        if (!model.hasPerson(new NricPredicate(ownerNric))) {
+        if (!model.hasPatient(new NricPredicate(ownerNric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

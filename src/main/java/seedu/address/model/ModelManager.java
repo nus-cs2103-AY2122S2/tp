@@ -46,7 +46,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
-        filteredPatients = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
         filteredPrescription = new FilteredList<>(this.addressBook.getPrescriptionList());
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
         filteredTestResults = new FilteredList<>(this.addressBook.getTestResultList());
@@ -108,26 +108,26 @@ public class ModelManager implements Model {
     //=========== Person ================================================================================
 
     @Override
-    public boolean hasPerson(Patient patient) {
+    public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
         return addressBook.hasPerson(patient);
     }
 
     @Override
-    public boolean hasPerson(Predicate<Patient> predicate) {
+    public boolean hasPatient(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         return !filteredPatients.filtered(predicate).isEmpty();
     }
 
     @Override
-    public void deletePerson(Patient target) {
-        addressBook.removePerson(target);
+    public void deletePatient(Patient target) {
+        addressBook.removePatient(target);
     }
 
     @Override
-    public void addPerson(Patient patient) {
-        addressBook.addPerson(patient);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addPatient(Patient patient) {
+        addressBook.addPatient(patient);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -190,7 +190,7 @@ public class ModelManager implements Model {
     public void setPerson(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
-        addressBook.setPerson(target, editedPatient);
+        addressBook.setPatient(target, editedPatient);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -200,17 +200,17 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Patient> getFilteredPersonList() {
+    public ObservableList<Patient> getFilteredPatientList() {
         return filteredPatients;
     }
 
     @Override
     public ObservableList<Patient> getPersonList() {
-        return addressBook.getPersonList();
+        return addressBook.getPatientList();
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Patient> predicate) {
+    public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
     }

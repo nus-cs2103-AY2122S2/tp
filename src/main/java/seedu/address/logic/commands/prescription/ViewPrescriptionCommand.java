@@ -38,7 +38,7 @@ public class ViewPrescriptionCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
 
-        if (!model.hasPerson(new NricPredicate(nric))) {
+        if (!model.hasPatient(new NricPredicate(nric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

@@ -44,7 +44,7 @@ public class ViewContactCommand extends Command {
         requireNonNull(model);
         model.updateFilteredContactList(new ContactWithNricPredicate(ownerNric));
 
-        if (!model.hasPerson(new NricPredicate(ownerNric))) {
+        if (!model.hasPatient(new NricPredicate(ownerNric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

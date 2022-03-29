@@ -12,7 +12,7 @@ import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.medical.UniqueMedicalList;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.UniquePersonList;
+import seedu.address.model.patient.UniquePatientList;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.UniquePrescriptionList;
 import seedu.address.model.testresult.TestResult;
@@ -25,7 +25,7 @@ import seedu.address.model.testresult.UniqueTestResultList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePatientList persons;
     private final UniqueContactList contacts;
     private final UniqueConsultationList consultations;
     private final UniquePrescriptionList prescriptions;
@@ -40,7 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniquePatientList();
         contacts = new UniqueContactList();
         consultations = new UniqueConsultationList();
         prescriptions = new UniquePrescriptionList();
@@ -66,7 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Patient> patients) {
-        this.persons.setPersons(patients);
+        this.persons.setPatients(patients);
     }
 
     /**
@@ -74,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
+        setPersons(newData.getPatientList());
         setContacts(newData.getContactList());
         setMedicals(newData.getMedicalList());
         setConsultations(newData.getConsultationList());
@@ -96,7 +96,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Patient p) {
+    public void addPatient(Patient p) {
         persons.add(p);
     }
 
@@ -127,17 +127,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
 
-        persons.setPerson(target, editedPatient);
+        persons.setPatient(target, editedPatient);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Patient key) {
+    public void removePatient(Patient key) {
         persons.remove(key);
     }
 
@@ -290,7 +290,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Patient> getPersonList() {
+    public ObservableList<Patient> getPatientList() {
         return persons.asUnmodifiableObservableList();
     }
 
