@@ -2,8 +2,21 @@
 
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 
-<StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8"
-    xmlns:fx="http://javafx.com/fxml/1">
-  <TextArea fx:id="summaryDisplay" editable="false" styleClass="summary-display"/>
-</StackPane>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <HBox spacing="5" alignment="CENTER_LEFT">
+    <Label fx:id="screenTitle" text="\$screenTitle" styleClass="screen-header"/>
+    <padding>
+      <Insets top="10" bottom="10" />
+    </padding>
+  </HBox>
+  <StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8"
+             xmlns:fx="http://javafx.com/fxml/1">
+    <TextArea fx:id="summaryDisplay" editable="false" styleClass="summary-display" wrapText="true"/>
+  </StackPane>
+</VBox>
+
