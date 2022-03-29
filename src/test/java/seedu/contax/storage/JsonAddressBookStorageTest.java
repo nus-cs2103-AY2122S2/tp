@@ -18,6 +18,9 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.contax.commons.exceptions.DataConversionException;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.ReadOnlyAddressBook;
+import seedu.contax.model.person.Person;
+import seedu.contax.testutil.AddressBookBuilder;
+import seedu.contax.testutil.PersonBuilder;
 
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
@@ -51,13 +54,23 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readAddressBook_invalidPersonAddressBook_personSkipped() throws Exception {
+        ReadOnlyAddressBook addressBook = readAddressBook("invalidPersonAddressBook.json").get();
+
+        assertEquals(0, addressBook.getPersonList().size());
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readAddressBook_invalidAndValidPersonAddressBook_personSkipped() throws Exception {
+        ReadOnlyAddressBook addressBook = readAddressBook("invalidAndValidPersonAddressBook.json").get();
+        Person exepctedPerson = new PersonBuilder()
+                .withName("Valid Person")
+                .withPhone("9482424")
+                .withEmail("hans@example.com")
+                .withAddress("4th street")
+                .build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(exepctedPerson).build();
+        assertEquals(addressBook, expectedAddressBook);
     }
 
     @Test
