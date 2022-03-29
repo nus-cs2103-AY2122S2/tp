@@ -146,8 +146,17 @@ public class Person {
      * @return a copy of the person object.
      */
     public Person getCopy() {
+        TaskList copyOfTaskList = new TaskList();
+        for (Task task : getTaskList().getTaskList()) {
+            Task copyOfTask = new Task(task.getTaskName());
+            if (task.isTaskComplete()) {
+                copyOfTask.markComplete();
+            }
+            copyOfTaskList.addTask(copyOfTask);
+        }
+
         return new Person(getStudentId(), getName(), getModuleCode(), getPhone(),
-                getTelegramHandle(), getEmail(), getTaskList());
+                getTelegramHandle(), getEmail(), copyOfTaskList);
     }
 
     /**
@@ -202,13 +211,23 @@ public class Person {
             isEmailEqual = otherPerson.getEmail().equals(getEmail());
         }
 
+        boolean isTaskListEqual;
+
+        if (otherPerson.getTaskList() == null && getTaskList() == null) {
+            isTaskListEqual = true;
+        } else if (getTaskList() == null || otherPerson.getTaskList() == null) {
+            isTaskListEqual = false;
+        } else {
+            isTaskListEqual = otherPerson.getTaskList().equals(getTaskList());
+        }
+
         return otherPerson.getStudentId().equals(getStudentId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getModuleCode().equals(getModuleCode())
                 && isPhoneEqual
                 && isTelegramHandleEqual
                 && isEmailEqual
-                && otherPerson.getTaskList().equals(getTaskList());
+                && isTaskListEqual;
     }
 
     @Override
