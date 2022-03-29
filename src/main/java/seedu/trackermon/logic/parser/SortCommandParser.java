@@ -1,10 +1,10 @@
 package seedu.trackermon.logic.parser;
 
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_RATING;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_STATUS;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_TAGS;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -53,8 +53,8 @@ public class SortCommandParser implements Parser<SortCommand> {
         Comparator<Show> tagComparator = new TagComparator();
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SORT_NAME,
-                        PREFIX_SORT_STATUS, PREFIX_SORT_RATING, PREFIX_SORT_TAGS, PREFIX_SORT_ORDER);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                        PREFIX_STATUS, PREFIX_RATING, PREFIX_TAG, PREFIX_SORT_ORDER);
 
         order = new HashMap<>();
         //Initialise order map
@@ -63,10 +63,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         order.put(ratingComparator, NO_VALUE);
         order.put(tagComparator, NO_VALUE);
 
-        nameComparator = putIntoMap(nameComparator, PREFIX_SORT_NAME, argMultimap);
-        statusComparator = putIntoMap(statusComparator, PREFIX_SORT_STATUS, argMultimap);
-        ratingComparator = putIntoMap(ratingComparator, PREFIX_SORT_RATING, argMultimap);
-        tagComparator = putIntoMap(tagComparator, PREFIX_SORT_TAGS, argMultimap);
+        nameComparator = putIntoMap(nameComparator, PREFIX_NAME, argMultimap);
+        statusComparator = putIntoMap(statusComparator, PREFIX_STATUS, argMultimap);
+        ratingComparator = putIntoMap(ratingComparator, PREFIX_RATING, argMultimap);
+        tagComparator = putIntoMap(tagComparator, PREFIX_TAG, argMultimap);
 
         HashMap<Comparator<Show>, String> comparatorString = new HashMap<>();
         comparatorString.put(nameComparator, VALUE_ORDER_NAME);
