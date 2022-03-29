@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.logic.commands.medical.ViewMedicalCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -37,6 +38,7 @@ public class ViewMedicalCommandParser {
         if (arePrefixesPresent(argMultimap, PREFIX_NRIC)) {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         }
+        ViewedNric.setViewedNric(nric);
 
         return new ViewMedicalCommand(nric);
     }

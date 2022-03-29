@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,6 +22,7 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.storage.Storage;
+
 
 /**
  * The main LogicManager of the app.
@@ -93,6 +95,22 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<TestResult> getFilteredTestResultList() {
         return model.getFilteredTestResultList();
+    }
+
+    @Override
+    public String getSummary() {
+        return "======[ PATIENT'S DETAILS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredPersonList()) + "\n"
+                + "======[ EMERGENCY CONTACTS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredContactList()) + "\n"
+                + "======[ MEDICAL DETAILS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredMedicalList()) + "\n"
+                + "======[ CONSULTATIONS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredConsultationList()) + "\n"
+                + "======[ PRESCRIPTIONS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredPrescriptionList()) + "\n"
+                + "======[ TEST RESULTS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredTestResultList());
     }
 
     @Override

@@ -57,6 +57,7 @@ public class AddCommand extends Command {
         }
         model.addPerson(toAdd);
         CommandType.setViewCommandType(CommandType.DEFAULT);
+        ViewedNric.setViewedNric(null);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
