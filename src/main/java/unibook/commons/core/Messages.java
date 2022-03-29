@@ -28,6 +28,9 @@ public class Messages {
     public static final String MESSAGE_GROUP_NOT_EXIST = "Group does not exist: %1$s";
 
     //ListCommand
+    public static final String MESSAGE_CHANGED_TO_MODULE_PAGE = "Changed page to Module Page!";
+    public static final String MESSAGE_CHANGED_TO_PERSON_PAGE = "Changed page to Person Page!";
+    public static final String MESSAGE_CHANGED_TO_GROUP_PAGE = "Changed page to Group Page!";
     public static final String MESSAGE_ALREADY_ON_PEOPLE_PAGE = "You are already on the People view!";
     public static final String MESSAGE_ALREADY_ON_MODULE_PAGE = "You are already on the Modules view!";
     public static final String MESSAGE_ALREADY_ON_GROUP_PAGE = "You are already on the Groups view!";
