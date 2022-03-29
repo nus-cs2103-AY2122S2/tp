@@ -10,7 +10,7 @@ title: User Guide
 * [**User interface**]()
 * [**Command structure**](#command-structure)
 * [**Features**](#features)
-  * [Clearing all shows](#clearing-all-shows)
+  * [Clearing all shows](#clearing-all-shows-clear)
   * [Listing all shows: `list`](#listing-all-shows-list)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Viewing help: `help`](#viewing-help-help)
@@ -161,7 +161,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 ## Features
 
-### Clearing all shows
+### Clearing all shows: `clear`
 
 **Description:** Wanting to reset your current show list? Clear all shows in Trackermon's show list!
 
