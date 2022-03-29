@@ -1,21 +1,12 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ViewCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.medical.ViewMedicalCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Nric;
-
 
 
 public class ViewCommandParser {

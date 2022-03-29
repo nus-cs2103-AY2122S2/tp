@@ -1,16 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import seedu.address.commons.core.Messages;
-import static seedu.address.commons.core.Messages.MESSAGE_SUMMARY_SHOWN;
-import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
-import seedu.address.logic.commands.exceptions.CommandException;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.consultation.ConsultationWithPredicates;
-import seedu.address.model.contact.ContactWithNricPredicate;
-import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
 
 /**

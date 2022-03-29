@@ -2,8 +2,6 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -20,11 +18,11 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
-import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.storage.Storage;
+
 
 /**
  * The main LogicManager of the app.
@@ -101,18 +99,18 @@ public class LogicManager implements Logic {
 
     @Override
     public String getSummary() {
-        return "[ PATIENT'S DETAILS ]\n" +
-                CollectionUtil.observableListToIndexedList(getFilteredPersonList()) + "\n" +
-                "[ EMERGENCY CONTACTS]\n" +
-                CollectionUtil.observableListToIndexedList(getFilteredContactList()) + "\n" +
-                "[ MEDICAL DETAILS ]\n" +
-                CollectionUtil.observableListToIndexedList(getFilteredMedicalList()) + "\n" +
-                "[ CONSULTATIONS ]\n" +
-                CollectionUtil.observableListToIndexedList(getFilteredConsultationList()) + "\n" +
-                "[ PRESCRIPTIONS ]\n" +
-                CollectionUtil.observableListToIndexedList(getFilteredPrescriptionList()) + "\n" +
-                "[ TEST RESULTS ]\n" +
-                CollectionUtil.observableListToIndexedList(getFilteredTestResultList());
+        return "======[ PATIENT'S DETAILS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredPersonList()) + "\n"
+                + "======[ EMERGENCY CONTACTS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredContactList()) + "\n"
+                + "======[ MEDICAL DETAILS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredMedicalList()) + "\n"
+                + "======[ CONSULTATIONS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredConsultationList()) + "\n"
+                + "======[ PRESCRIPTIONS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredPrescriptionList()) + "\n"
+                + "======[ TEST RESULTS ]======\n"
+                + CollectionUtil.observableListToIndexedList(getFilteredTestResultList());
     }
 
     @Override
