@@ -8,6 +8,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -25,6 +28,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final Paint HEADER_COLOR = Paint.valueOf("#383838");
     private static final Paint CELL_COLOR = Paint.valueOf("#555555");
+    private static final String USERGUIDE_URL = "https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html";
 
     private int rowCounter = 1;
 
@@ -54,6 +58,12 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Button tagsBtn;
+
+    @FXML
+    private TextField userGuideLink;
+
+    @FXML
+    private Label linkCopiedLabel;
 
     /**
      * Creates a new HelpWindow.
@@ -122,15 +132,21 @@ public class HelpWindow extends UiPart<Stage> {
      * Initializes the HelpWindow by populating it with data.
      */
     private void init() {
+        initGeneralPage();
+        initPersonsPage();
+        initAppointmentsPage();
+        initTagsPage();
+        initUserGuideLink();
+        setGeneralPage();
 
-        // set up table headers
-        insertHeaderRow("Action", "Format", "Example", generalPage);
-        insertHeaderRow("Action", "Format", "Example", personsPage);
-        insertHeaderRow("Action", "Format", "Example", appointmentsPage);
-        insertHeaderRow("Action", "Format", "Example", tagsPage);
+    }
 
-        // populate general page
+    /**
+     * Populates the general page
+     */
+    private void initGeneralPage() {
         rowCounter = 1;
+        insertHeaderRow("Action", "Format", "Example", generalPage);
         insertRow("Clear", "clear", "-", generalPage);
         insertRow("Help", "help", "-", generalPage);
         insertRow("Export CSV", "exportcsv", "-", generalPage);
@@ -139,9 +155,14 @@ public class HelpWindow extends UiPart<Stage> {
                 "importCSV n/2 p/3 e/5 a/6 t/4", generalPage);
         insertRow("Chaining Commands", "chain COMMAND_A && COMMAND_B",
                 "chain editappointment 6 l/360 && listappointments", generalPage);
+    }
 
-        // populate persons page
+    /**
+     * Populates the persons page
+     */
+    private void initPersonsPage() {
         rowCounter = 1;
+        insertHeaderRow("Action", "Format", "Example", personsPage);
         insertRow("Add Person", "addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…   ",
                 "addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd t/friend t/colleague",
                 personsPage);
@@ -155,32 +176,41 @@ public class HelpWindow extends UiPart<Stage> {
                 "batch Edit p/87438806 where/ p/Phone = 87438807", personsPage);
         insertRow("Operate on Contacts within Range", "range COMMAND from/INDEX to/INDEX",
                 "range editperson e/johndoe@example.com from/6 to/10", personsPage);
+    }
 
-        // populate appointments page
+    /**
+     * Populates the appointments page
+     */
+    private void initAppointmentsPage() {
         rowCounter = 1;
-        insertRow("Add Appointment", "addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON      ",
-                "addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60", appointmentsPage);
-        insertRow("List Appointments", "listappointments", "-", appointmentsPage);
-        insertRow("Delete Appointment", "deleteappointment INDEX", "deleteappointment 2", appointmentsPage);
-        insertRow("Edit Appointment", "editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
-                "editappointment 2 n/Call Juliet t/13:45", appointmentsPage);
-        insertRow("List Appointments Within Period", "appointmentsbetween [sd/STARTDATE] [st/STARTTIME] "
-                        + "[ed/ENDDATE [et/ENDTIME]]" ,
-                "appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+        insertHeaderRow("Action", "Format", "Example", tagsPage);
+        insertHeaderRow("Action", "Format", "Example", appointmentsPage);
+        insertRow("Add Appointment", "addappt n/NAME d/DATE t/TIME l/DURATION p/PERSON      ",
+                "addappt n/Call Bob d/14-02-2022 t/11:00 p/2 l/60", appointmentsPage);
+        insertRow("List Appointments", "listappt", "-", appointmentsPage);
+        insertRow("Delete Appointment", "deleteappt INDEX", "deleteappt 2", appointmentsPage);
+        insertRow("Edit Appointment", "editappt INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
+                "editappt 2 n/Call Juliet t/13:45", appointmentsPage);
+        insertRow("List Appointments Within Period", "apptbetween [sd/STARTDATE] [st/STARTTIME]"
+                        + "[ed/ENDDATE [et/ENDTIME]]" , "apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
                 appointmentsPage);
-        insertRow("List Available Slots Within Period", "freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] "
-                        + "[ed/ENDDATE [et/ENDTIME]]" ,
-                "freebetween l/20 sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00",
+        insertRow("List Available Slots Within Period", "freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME]"
+                        + "[ed/ENDDATE [et/ENDTIME]]", "freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60",
                 appointmentsPage);
+        insertRow("Prioritize Appointment", "prioritizeappt INDEX pri/PRIORITY",
+                "prioritizeappt 2 pri/low", appointmentsPage);
+    }
 
-        // populate tags page
+    /**
+     * populates the tags page
+     */
+    private void initTagsPage() {
+        rowCounter = 1;
         insertRow("Add Tag", "addtag n/TAGNAME", "addtag n/Potential Clients", tagsPage);
         insertRow("Edit Tag", "edittag INDEX t/NEW_TAGNAME", "edittag 1 t/Prospective Clients", tagsPage);
         insertRow("Delete Tag", "deletetag INDEX", "deletetag 1", tagsPage);
         insertRow("List Tags", "listtags", "-", tagsPage);
         insertRow("Find Contacts By Tag", "findbytag t/TAGNAME", "findbytag t/friends", tagsPage);
-
-        setGeneralPage();
     }
 
     /**
@@ -232,7 +262,6 @@ public class HelpWindow extends UiPart<Stage> {
         label.setText(text);
         label.setTextFill(Paint.valueOf("#FFFFFF"));
 
-
         hbox.getChildren().add(label);
         hbox.setBackground(new Background(new BackgroundFill(paint, new CornerRadii(0), Insets.EMPTY)));
         return hbox;
@@ -275,6 +304,25 @@ public class HelpWindow extends UiPart<Stage> {
         hideAllPages();
         tagsPage.setVisible(true);
         tagsBtn.setStyle("-fx-border-color: #FFFFFF;");
+    }
+
+    /**
+     * Sets up the user guide link
+     */
+    public void initUserGuideLink() {
+        linkCopiedLabel.setVisible(false);
+
+        userGuideLink.setOnMouseClicked((e) -> {
+            linkCopiedLabel.setVisible(true);
+            final Clipboard clipboard = Clipboard.getSystemClipboard();
+            final ClipboardContent url = new ClipboardContent();
+            url.putString(USERGUIDE_URL);
+            clipboard.setContent(url);
+        });
+
+        userGuideLink.setOnMouseExited((e) -> {
+            linkCopiedLabel.setVisible(false);
+        });
     }
 
     /**
