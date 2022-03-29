@@ -28,7 +28,7 @@ public class UploadCommandTest {
         UserImage testImage = new UserImage(filePath, "test");
         Set<UserImage> testImages = new LinkedHashSet<>(Arrays.asList(testImage));
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_UPLOAD_SUCCESS,
-          false, false, false, false, false);
+          false, false, false, false, false, false);
         assertCommandSuccess(new UploadCommand(INDEX_FIRST_PERSON, testImages), model, expectedCommandResult, expectedModel);
     }
 }
