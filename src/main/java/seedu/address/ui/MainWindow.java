@@ -44,6 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private PrescriptionListPanel prescriptionListPanel;
     private TestResultListPanel testResultListPanel;
     private ResultDisplay resultDisplay;
+    private SummaryDisplay summaryDisplay;
     private final HelpWindow helpWindow;
 
     @FXML
@@ -129,6 +130,8 @@ public class MainWindow extends UiPart<Stage> {
         testResultListPanel = new TestResultListPanel(logic.getFilteredTestResultList());
 
         personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
+        summaryDisplay = new SummaryDisplay();
+        summaryDisplay.setSummary(logic.getSummary());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -177,6 +180,11 @@ public class MainWindow extends UiPart<Stage> {
         case TEST:
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(testResultListPanel.getRoot());
+            return;
+        case SUMMARY:
+            summaryDisplay.setSummary(logic.getSummary());
+            personListPanelPlaceholder.getChildren().remove(0);
+            personListPanelPlaceholder.getChildren().add(summaryDisplay.getRoot());
             return;
         default:
             personListPanelPlaceholder.getChildren().remove(0);

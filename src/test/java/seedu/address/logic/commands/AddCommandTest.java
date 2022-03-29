@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
@@ -316,6 +317,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateSummary(Nric nric) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

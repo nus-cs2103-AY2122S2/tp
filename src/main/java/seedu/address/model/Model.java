@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
@@ -83,6 +84,8 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPatient(Patient patient);
+
+    void updateSummary(Nric nric);
 
     void addPrescription(Prescription prescription);
 

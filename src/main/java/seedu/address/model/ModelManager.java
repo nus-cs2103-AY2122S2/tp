@@ -12,11 +12,18 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.ConsultationWithPredicates;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.medical.Medical;
+import seedu.address.model.medical.MedicalWithNricPredicate;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.prescription.PrescriptionWithNricPredicate;
 import seedu.address.model.testresult.TestResult;
+import seedu.address.model.testresult.TestResultWithNricPredicate;
 
 
 /**
@@ -213,6 +220,22 @@ public class ModelManager implements Model {
     public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
+    }
+
+    /**
+     * Updates summary with given nric.
+     *
+     * @param nric
+     */
+    @Override
+    public void updateSummary(Nric nric) {
+        // Update all internal lists with Nric predicates
+        updateFilteredContactList(new ContactWithNricPredicate(nric));
+        updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
+        updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
+        updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
+        updateFilteredConsultationList(new ConsultationWithPredicates(nric));
+        updateFilteredPersonList(new NricPredicate(nric));
     }
 
     //=========== Contact ================================================================================

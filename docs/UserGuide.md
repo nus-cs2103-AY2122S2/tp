@@ -14,6 +14,7 @@ later.">
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
   - [Listing all Patients: `view`](#listing-all-patients-view)
+  - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
@@ -93,15 +94,25 @@ Shows a list of patients in MedBook.
 
 Format: `view`
 
+### View Summary of a Patient: `view i/NRIC`
+
+Shows a summary of a patient's information in MedBook, including personal details, contact, medical information,...
+
+Format: `view i/NRIC`
+
+Examples:
+* `view i/S1234567L`
+
 ### Deleting any Entry: `delete`
 
-Deletes a specified entry (patient, contact, medical information,...) from MedBook.
+Deletes a specified entry (patient, contact, medical information,...) on current screen from MedBook.
 
 Format: `delete INDEX`
 
-* We can only delete the entry only if the display panel is displaying the entry.
-* The index refers to the index number shown in the displayed list.
+* We can delete the entry only if the entry is being shown on the display panel.
+* For all screens apart from Summary, the index refers to the index number shown in the displayed list.
 * The index must be a positive integer 1, 2, 3, …​
+* For Summary screen, `delete 1` deletes the patient being viewed; other indices are invalid.
 
 Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
@@ -175,7 +186,7 @@ Examples:
 
 ### Adding Prescription: `add t/prescription`
 
-Adds a medical prescription of a patient in MedBook.
+Adds a medical prescription of a patient to MedBook.
 
 Format: `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`
 
@@ -221,6 +232,7 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | View Help | `help` |
 | Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
 | List all Patients | `view` |
+| View Summary of a Patient | `view i/NRIC` |
 | Delete any Entry | `delete INDEX` |
 | Add Contact Information | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
 | View Contact Information | `view t/contact i/NRIC` |

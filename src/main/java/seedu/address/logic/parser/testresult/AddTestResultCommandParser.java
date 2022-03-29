@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.logic.commands.testresult.AddTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -39,14 +40,15 @@ public class AddTestResultCommandParser implements Parser<AddTestResultCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestResultCommand.MESSAGE_USAGE));
         }
 
-        Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        Nric patientNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         TestDate testDate = ParserUtil.parseTestDate(argMultimap.getValue(PREFIX_TESTDATE).get());
         MedicalTest medicalTest = ParserUtil.parseMedicalTest(argMultimap.getValue(PREFIX_MEDICALTEST).get());
         Result result = ParserUtil.parseResult(argMultimap.getValue(PREFIX_RESULT).get());
 
-        TestResult testResult = new TestResult(ownerNric, testDate, medicalTest, result);
+        TestResult testResult = new TestResult(patientNric, testDate, medicalTest, result);
+        ViewedNric.setViewedNric(patientNric);
 
-        return new AddTestResultCommand(ownerNric, testResult);
+        return new AddTestResultCommand(patientNric, testResult);
     }
 
     /**
