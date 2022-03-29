@@ -1,6 +1,7 @@
 package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,5 +32,18 @@ public class CollectionUtil {
      */
     public static boolean isAnyNonNull(Object... items) {
         return items != null && Arrays.stream(items).anyMatch(Objects::nonNull);
+    }
+
+    /**
+     * Builds a string representation of an ObservableList.
+     */
+    public static <T> String observableListToIndexedList(ObservableList<T> items) {
+        String EMPTY_LIST_MESSAGE = "No record found, please add some!\n";
+        if (items.size() == 0) return EMPTY_LIST_MESSAGE;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < items.size(); i++) {
+            result.append(String.format("%d. %s\n", i + 1, items.get(i)));
+        }
+        return result.toString();
     }
 }

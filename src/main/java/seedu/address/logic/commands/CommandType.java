@@ -25,7 +25,7 @@ import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 
 public enum CommandType {
-    DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST;
+    DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST, SUMMARY;
 
     public static final String MESSAGE_CONSTRAINTS = "Command type should be either contact, medical, "
             + "consultation, prescription or test";

@@ -24,5 +24,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_MEDICAL_INFORMATION_INDEX =
             "The medical information index provided is invalid";
 
-
+    public static final String MESSAGE_SUMMARY_SHOWN = "Shown summary for patient %1$s!";
 }
