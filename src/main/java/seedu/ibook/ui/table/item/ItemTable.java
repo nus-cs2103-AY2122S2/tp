@@ -45,11 +45,16 @@ public class ItemTable extends UiComponent<VBox> {
         ObservableList<Item> filteredItem = product.getFilteredItems();
         filteredItem.addListener(listener);
         content.getChildren().clear();
-        for (int i = 0; i < filteredItem.size(); i++) {
-            Item item = filteredItem.get(i);
-            String index = String.format("%d-%d", productIndex, i + 1);
-            ItemCard itemCard = new ItemCard(index, item, getMainWindow());
-            content.getChildren().add(itemCard.getRoot());
+        if (filteredItem.isEmpty()) {
+            EmptyItemTableState emptyState = new EmptyItemTableState(getMainWindow());
+            content.getChildren().add(emptyState.getRoot());
+        } else {
+            for (int i = 0; i < filteredItem.size(); i++) {
+                Item item = filteredItem.get(i);
+                String index = String.format("%d-%d", productIndex, i + 1);
+                ItemCard itemCard = new ItemCard(index, item, getMainWindow());
+                content.getChildren().add(itemCard.getRoot());
+            }
         }
     }
 
