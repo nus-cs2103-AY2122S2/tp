@@ -74,10 +74,12 @@ public class PersonTest {
         assertTrue(BOB.isSamePerson(editedBob));
 
         // matriculation number differs in case, all other attributes same -> returns true
-        editedBob = new PersonBuilder(BOB).withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB.toUpperCase()).build();
+        editedBob = new PersonBuilder(BOB)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB.toUpperCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        editedBob = new PersonBuilder(BOB).withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB.toLowerCase()).build();
+        editedBob = new PersonBuilder(BOB)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
         // First character is upper case last character is lower case eg. A0253625m --> returns true
