@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.tinner.commons.core.LogsCenter;
 
 /**
@@ -17,12 +18,17 @@ import seedu.tinner.commons.core.LogsCenter;
 public class ReminderDateListPanel extends UiPart<Region> {
 
     private static final String HEADER_TEXT = "Reminders";
+    private static final String NO_REMINDERS_TEXT = "You have no upcoming reminders!";
 
     private static final String FXML = "ReminderDateListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ReminderDateListPanel.class);
 
     @FXML
     private Label header;
+    @FXML
+    private Label noReminders;
+    @FXML
+    private VBox noRemindersBox;
     @FXML
     private ListView<LocalDate> reminderDateListView;
 
@@ -34,8 +40,29 @@ public class ReminderDateListPanel extends UiPart<Region> {
 
         header.setText(HEADER_TEXT);
 
+        if (dateList.isEmpty()) {
+            initialiseNoRemindersLabel();
+        } else {
+            initialiseReminderDateListView(dateList);
+        }
+    }
+
+    /**
+     * Initialises the {@code noReminders} label and disables the {@code reminderDateListView}.
+     */
+    private void initialiseNoRemindersLabel() {
+        noReminders.setText(NO_REMINDERS_TEXT);
+        reminderDateListView.setManaged(false);
+    }
+
+    /**
+     * Initialises the {@code reminderDateListView} and disables the {@code noReminders} label.
+     */
+    private void initialiseReminderDateListView(ObservableList<LocalDate> dateList) {
         reminderDateListView.setItems(dateList);
         reminderDateListView.setCellFactory(listView -> new ReminderListViewCell());
+        noRemindersBox.setManaged(false);
+        noReminders.setManaged(false);
     }
 
     /**

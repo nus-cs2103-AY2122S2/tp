@@ -30,6 +30,8 @@ public class ReminderCard extends UiPart<Region> {
     @FXML
     private Label roleName;
     @FXML
+    private Label status;
+    @FXML
     private Label reminderDate;
 
     /**
@@ -41,14 +43,17 @@ public class ReminderCard extends UiPart<Region> {
 
         String companyNameField = reminder.getCompanyName().value;
         String roleNameField = reminder.getRoleName().value;
+        String statusField = reminder.getStatus().value;
         String reminderDateField = reminder.getReminderDate().toString();
 
         companyName.setText(companyNameField);
         roleName.setText(roleNameField);
+        status.setText(statusField);
         reminderDate.setText(reminderDateField);
 
         companyName.setManaged(!companyNameField.isEmpty());
         roleName.setManaged(!roleNameField.isEmpty());
+        status.setManaged(!statusField.isEmpty());
         reminderDate.setManaged(!reminderDateField.isEmpty());
     }
 
