@@ -260,7 +260,7 @@ public class ParserUtil {
             return LocalDate.parse(trimmedDate, formatter);
         } catch (Exception e) {
             System.out.println(e);
-            throw new ParseException("DateTime format accepts the following:\n"
+            throw new ParseException("Date format accepts the following:\n"
                     + "yyyy-MM-dd");
         }
     }

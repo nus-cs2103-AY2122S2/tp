@@ -35,6 +35,7 @@ public class Messages {
     public static final String MESSAGE_GROUP_FIELD_MISSING = "The g/<GROUPNAME> field is missing!";
     public static final String MESSAGE_VIEW_FIELD_MISSING = "The v/<VIEW> field is missing!";
     public static final String MESSAGE_GROUP_NOT_IN_MODULE = "The group %s does not exist in the module!";
+
     public static final String MESSAGE_GROUP_NOT_IN_UNIBOOK = "The group %s does not exist in Unibook!";
     public static final String MESSAGE_DISPLAYED_GROUPS_WITH_NAME = "Displayed group(s) with name %s!";
     public static final String MESSAGE_DISPLAYED_PEOPLE_IN_GROUP = "Displayed people in %s %s!";
@@ -44,12 +45,26 @@ public class Messages {
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_KEY_EVENT = "Displayed modules with key event(s) %s!";
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_DATE = "Displayed modules with key event(s) on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_DATE = "No modules have key events on %s!";
+    public static final String MESSAGE_NO_MODULES_WITH_NAME = "No modules have names containing %s!";
+    public static final String MESSAGE_INVALID_KEY_EVENT = "Invalid Key Event: %s. Acceptable arguments are "
+            + "EXAM, ASSIGNMENT_DUE, ASSIGNMENT_RELEASE or QUIZ.";
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_EVENT_AND_DATE =
             "Displayed modules with key event %s on %s!";
+    public static final String MESSAGE_NO_MODULE_WITH_EVENT_AND_DATE =
+            "No modules have key event(s) %s on %s!";
+    public static final String MESSAGE_NO_MODULE_WITH_NAME_AND_DATE =
+            "No modules have module names containing %s with key event(s) on %s!";
+    public static final String MESSAGE_NO_MODULE_WITH_EVENT_AND_NAME =
+            "No modules have key event(s) %s and contain %s in their module name!";
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_NAME_AND_DATE =
-            "Displayed modules with name %s and key event(s) on %s!";
+            "Displayed modules with module name containing %s and key event(s) on %s!";
     public static final String MESSAGES_DISPLAYED_MODULES_WITH_EVENT_AND_NAME =
-            "Displayed modules with key event(s) %s containing %s in the module name!";
+            "Displayed modules with key event(s) %s that contain %s in the module name!";
+    public static final String MESSAGES_DISPLAYED_MODULES_WITH_EVENT_AND_NAME_AND_DATE =
+            "Displayed modules with module names containing %s and with key event(s) of type %s "
+                    + "falling on %s!";
+    public static final String MESSAGE_NO_MODULES_WITH_EVENT_AND_NAME_AND_DATE =
+            "No modules have module names containing %s, with key event(s) of type %s falling on %s!";
 
 
 }
