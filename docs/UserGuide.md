@@ -2,15 +2,21 @@
 layout: page title: User Guide
 ---
 
-**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via interacting with the application through easy-to-use commands through a user-friendly interface. Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps if you can type fast. Even if you can't, this user guide will guide you through how to use UDT effectively and efficiently.
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
+Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps. 
 
-School administrators _(like teachers)_ in charge of managing COVID can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
+School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
+
+Through this user guide, you will learn how to use UDT effectively and efficiently, to manage COVID-19 cases in your schools.
+Features below are accompanied by instructions, figures and examples to help you understand how to use them.
+A glossary is included at the end to clarify any technical or vague terms used.
 
 # Content Page
 
 <div markdown="block" class="alert alert-info">
 
 - [Quick start](#quick-start)
+- [About UDT](#about-udt)
 - [Features](#features)
   - [Add a student](#add-a-student-add): `add`
   - [List all students](#list-all-students-list): `list`
@@ -25,12 +31,16 @@ School administrators _(like teachers)_ in charge of managing COVID can use UDT 
 - [Editing the data file](#editing-the-data-file)
 - [Frequently Asked Questions](#faq)
 - [Command Summary](#command-summary)
+- [Glossary](#glossary)
 
 </div>
 
 # Quick start
 1. Ensure you have **Java 11** or above installed in your Computer.
    - You can download **Java 11** from [this link](https://www.oracle.com/java/technologies/downloads/#java11).
+   - To check which version of Java you have installed:
+     1. Type "Command Prompt" into the search bar next to your Start menu, and click on it when it appears in the search results.
+     2. Type "java -version" into the Command Prompt, then press Enter on your keyboard.
 2. Download the latest **ultimatedivoctracker.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
@@ -43,6 +53,31 @@ School administrators _(like teachers)_ in charge of managing COVID can use UDT 
 > - Currently officially supported for **Windows**, **Mac** and **Linux** platforms.
 
 </div>
+
+## About UDT
+Before we get into the details of what UDT can do, let's first bring you through what the application will look like.
+
+|![UDTGUI](images/UdtGuiWithLabels.png)|
+|:--:|
+|*Figure 1 - GUI*|
+
+As seen in Figure 1 above, the application contains 3 main segments.
+
+Firstly, the Command Line (area to input commands) is at the top of the application and can be easily seen by the blinking cursor/insertion point.
+
+Secondly, the box beneath the Command Line is where the application will produce any text outputs or errors if the command provided requires so.
+
+Lastly, each information card contains the following details of the student and are presented in order:
+1. Name
+2. Activity/Activities
+3. Phone Number
+4. Address
+5. Email Address
+6. Class
+7. COVID-19 Status
+
+With UDT, you can update and track COVID-19 Cases in your school, keep track of Close-Contacts, to perform timely updates to parents and Next-of-Kin.
+Filter through the endless list of students with a simple command to extract details on the cases by class, or by activities (CCAs etc.).
 
 # Features
 Below are a set of commands that can be used in the **_UDT_**. Their formats and examples are provided along with each feature.
@@ -62,8 +97,8 @@ Adds a student to the tracking list
   - `EMAIL` follows the standard email formatting 
     - eg. `johntan@example.com`
   - `PHONE_NUMBER` takes a sequence of numbers
-  - `STATUS` takes either of these strings `Positive`, `Negative`, `Close-Contact`
-    - `STATUS` is case-sensitive and should strictly follow the strings stated above
+  - `STATUS` takes either of these texts `Positive`, `Negative`, `Close-Contact`
+    - `STATUS` is case-sensitive and should strictly follow the texts stated above
 - Examples:
   - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 cc/5A s/Negative`
   - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 cc/2B s/Positive act/choir`
@@ -96,7 +131,9 @@ Shows a list of all students in the application.
 
 </div>
 
-![list command](images/user-guide/list.png)
+|![list command](images/user-guide/list.png)|
+|:--:|
+|*Figure 2 - `list` Command*|
 
 ## Find student by name: `find`
 Find an existing student in the application by their name
@@ -109,8 +146,10 @@ Find an existing student in the application by their name
     - `find john` can find students _"John Tan"_ and _"John Lee"_
 - Example:
   - `find bernice` will find student _"Bernice Yu"_
-
-![find command](images/user-guide/find.png)
+  
+|![find command](images/user-guide/find.png)|
+|:--:|
+|*Figure 3 - `find` Command*|
 
 ## Find student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
@@ -121,8 +160,10 @@ Find an existing student in the application by their Covid-19 Status
 - Examples:
   - `findstatus positive` finds all students that are labelled COVID positive
   - `findstatus negative` finds all students that are labelled COVID negative
-
-![find status command](images/user-guide/findstatus.png)
+  
+|![find status command](images/user-guide/findstatus.png)|
+|:--:|
+|*Figure 4 - `findstatus` Command*|
 
 ## Find student by class: `findclasscode`
 Finds an existing student in the application by their class
@@ -136,24 +177,28 @@ Finds an existing student in the application by their class
 
 </div>
 
-![find classcode command](images/user-guide/findclasscode.png)
+|![find classcode command](images/user-guide/findclasscode.png)|
+|:--:|
+|*Figure 5 - `findclasscode` Command*|
 
 ## Find student by activity: `findactivity`
 Finds an existing student in the application by the activities they are participating in
 - Format: `findactivity ACTIVITIY [MORE ACTIVITIES]`
   - Returns a list of students with the specified `ACTIVITY`
-    - Matches based on students that have specified `ACTIVITY` and not just exactly those activities only
+    - Matches based on students that have specified `ACTIVITY` in their list of `ACTIVITIES`
   - If more than 1 activity is specified, command returns a list of student that participated in **ANY** of the activities specified
   - `ACTIVITY` is case-insensitive
 - Example:
   - `findactivity badminton` finds all students that have the activity _"Badminton"_
   - `findactivity badminton choir` finds all students that have the activity _"Badminton"_, _"choir"_ or **both**
 
-![find activity command](images/user-guide/findactivity.png)
+|![find activity command](images/user-guide/findactivity.png)|
+|:--:|
+|*Figure 6 - `findactivity` Command*|
 
 ## Edit student details: `edit`
 Edits an existing student's details in the list Index provided and the parts that you want to edit
-- Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cc/CLASS] [s/STATUS] [act/ACTIVITIES]`
+- Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cc/CLASS] [s/STATUS] [act/ACTIVITY] [act/MORE ACTIVITIES]`
   - Edits the student at the specified `INDEX`
   - `INDEX` denotes the list index of the student in the displayed list
   - `INDEX` must be a _positive integer (1, 2, 3...)_
@@ -170,7 +215,9 @@ Edits an existing student's details in the list Index provided and the parts tha
 
 </div>
 
-![edit command](images/user-guide/edit.png)
+|![edit command](images/user-guide/edit.png)|
+|:--:|
+|*Figure 7 - `edit` Command*|
 
 ## Delete a student: `delete`
 Deletes the specified person from the application.
@@ -188,7 +235,9 @@ Deletes the specified person from the application.
 
 </div>
 
-![delete command](images/user-guide/delete.png)
+|![delete command](images/user-guide/delete.png)|
+|:--:|
+|*Figure 8 - `delete` Command*|
 
 ## Exit the application: `exit`
 Exits the program.
@@ -240,17 +289,22 @@ A: An error message colored in red will appear stating that you have typed an un
 ----------------
 ## Command Summary
 
-| Action                                                             | Format                                                                                              | Example                                                                                                         |
-|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| [Add a student](#add-a-student-add)                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cc/CLASS s/STATUS [act/ACTIVITIES]`                    | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 cc/5A s/Negative act/badminton` |
-| [List all students](#list-all-students-list)                       | `list`                                                                                              | `list`                                                                                                          |
-| [Find student by name](#find-student-by-name-find)                 | `find NAME [MORE_NAME]`                                                                             | `find James Jake`                                                                                               |
-| [Find student by status](#find-student-by-status-findstatus)       | `findstatus STATUS`                                                                                 | `findstatus positive`                                                                                           |
-| [Find student by class](#find-student-by-class-findclasscode)      | `findclasscode CLASS`                                                                               | `findclasscode 4A`                                                                                              |
-| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY`                                                                             | `findactivity choir`                                                                                            |
-| [Edit student details](#edit-student-details-edit)                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cc/CLASS] [s/STATUS] [act/ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                     |
-| [Delete a student](#delete-a-student-delete)                       | `delete INDEX`                                                                                      | `delete 3`                                                                                                      |
-| [Exit the application](#exit-the-application-exit)                 | `exit`                                                                                              | `exit`                                                                                                          |
+| Action                                                             | Format                                                                                                                    | Example                                                                                                         |
+|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| [Add a student](#add-a-student-add)                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cc/CLASS s/STATUS [act/ACTIVITIES] [act/MORE ACTIVITIES]`                    | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 cc/5A s/Negative act/badminton` |
+| [List all students](#list-all-students-list)                       | `list`                                                                                                                    | `list`                                                                                                          |
+| [Find student by name](#find-student-by-name-find)                 | `find NAME [MORE_NAME]`                                                                                                   | `find James Jake`                                                                                               |
+| [Find student by status](#find-student-by-status-findstatus)       | `findstatus STATUS`                                                                                                       | `findstatus positive`                                                                                           |
+| [Find student by class](#find-student-by-class-findclasscode)      | `findclasscode CLASS`                                                                                                     | `findclasscode 4A`                                                                                              |
+| [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY`                                                                                                   | `findactivity choir`                                                                                            |
+| [Edit student details](#edit-student-details-edit)                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cc/CLASS] [s/STATUS] [act/ACTIVITIES] [act/MORE ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                     |
+| [Delete a student](#delete-a-student-delete)                       | `delete INDEX`                                                                                                            | `delete 3`                                                                                                      |
+| [Exit the application](#exit-the-application-exit)                 | `exit`                                                                                                                    | `exit`                                                                                                          |
 
 ----------------
 
+## Glossary
+| Term      | Meaning                                 |
+|-----------|-----------------------------------------|
+| Parameter | Input supplied after the command        |
+| JSON      | A file type that UDT uses to store data |
