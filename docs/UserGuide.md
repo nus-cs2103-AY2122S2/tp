@@ -219,7 +219,7 @@ Alternate Format: `delete INDEX…​`
 Examples:
 * `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the currently shown list.
 
-### Locating persons: `find`
+### Finding persons: `find`
 
 Finds persons that match any of the given fields and tags.
 
@@ -237,7 +237,7 @@ Examples:
 * `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find i/Shopee m/cs2040s cs2030s'](images/findShopeeCS2040sCS2030sResult.png)
 
-### Locating specific persons: `find -s`
+### Finding specific persons: `find -s`
 
 Finds persons that match all given fields and tags.
 
@@ -254,7 +254,7 @@ Examples:
 * `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with cs2040s, cs2030s and Shopee)<br>
   ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
 
-### Locating an event: `find -e`
+### Finding an event: `find -e`
 
 Finds an event that matches any of the given details
 
@@ -315,7 +315,7 @@ Action | Format, Examples
 **Event** | `event INDEX…​ name/EVENT NAME info/INFORMATION d/DATE t/TIME` <br> e.g., `event 1 name/Dinner Date info/Having Dinner at Bread Street Kitchen by Gordon Ramsay d/2022-12-20 t/20:15`
 **Cancelevent** | `cancelevent INDEX…​` <br> e.g.,`cancelevent 1 2 3`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​INDEX` <br> e.g. `delete 1 3 5`
+**Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​` <br> e.g. `delete 1 3 5`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`
 **Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`
 **Find -s** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`

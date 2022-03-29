@@ -97,7 +97,7 @@ public class EventCommand extends Command {
         }
 
         model.addEvent(currEvent);
-        model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        model.updateFilteredEventList(Model.PREDICATE_SHOW_UPCOMING_EVENTS);
         return new CommandResult(String.format(MESSAGE_ARGUMENTS, names, currEvent));
     }
 

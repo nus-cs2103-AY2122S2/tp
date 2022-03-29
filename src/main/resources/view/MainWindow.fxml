@@ -55,7 +55,6 @@
                 <AnchorPane focusTraversable="true" minWidth="420.0">
                      <children>
                         <StackPane fx:id="eventListPanelPlaceholder" focusTraversable="true" layoutX="11.0" layoutY="11.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <StackPane fx:id="singlePersonPanelPlaceholder" focusTraversable="true" layoutX="21.0" layoutY="21.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
               </items>
