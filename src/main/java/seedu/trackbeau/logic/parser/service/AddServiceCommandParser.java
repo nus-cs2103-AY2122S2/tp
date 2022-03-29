@@ -5,14 +5,11 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PRICE;
 
-import java.util.stream.Stream;
-
 import seedu.trackbeau.logic.commands.service.AddServiceCommand;
 import seedu.trackbeau.logic.parser.ArgumentMultimap;
 import seedu.trackbeau.logic.parser.ArgumentTokenizer;
 import seedu.trackbeau.logic.parser.Parser;
 import seedu.trackbeau.logic.parser.ParserUtil;
-import seedu.trackbeau.logic.parser.Prefix;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.service.Duration;
 import seedu.trackbeau.model.service.Price;
@@ -34,7 +31,7 @@ public class AddServiceCommandParser implements Parser<AddServiceCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_DURATION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE, PREFIX_DURATION)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE, PREFIX_DURATION)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddServiceCommand.MESSAGE_USAGE));
         }
@@ -46,14 +43,6 @@ public class AddServiceCommandParser implements Parser<AddServiceCommand> {
         Service service = new Service(name, price, duration);
 
         return new AddServiceCommand(service);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

@@ -2,17 +2,16 @@ package seedu.trackbeau.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.commons.util.StringUtil;
-import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
+import seedu.trackbeau.model.booking.BookingDateTime;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Email;
@@ -36,6 +35,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -110,6 +110,7 @@ public class ParserUtil {
      * Parses a {@code String skinType } into an {@code SkinType}.
      * Leading and trailing whitespaces will be trimmed.
      * Skin type input must fit existing categories.
+     *
      * @throws ParseException if the given {@code SkinType} is invalid.
      */
     public static SkinType parseSkinType(String skinType) throws ParseException {
@@ -193,39 +194,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String targetIndex} into an {@code targetIndex}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code targetIndex} is invalid.
-     */
-    public static Integer parseCustomerID(String targetIndex) {
-        requireNonNull(targetIndex);
-        String trimmedIndex = targetIndex.trim();
-        Integer targetIndexInt;
-        try {
-            targetIndexInt = Integer.parseInt(trimmedIndex);
-        } catch (NumberFormatException e) {
-            throw e;
-        }
-        return targetIndexInt;
-    }
-
-    /**
-     * Parses a {@code String startTime} into an {@code startTime}.
+     * Parses a {@code String startTime} into an {@code BookingDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code startTime} is invalid.
      */
-    public static LocalDateTime parseStartTime(String startTime) throws ParseException {
+    public static BookingDateTime parseStartTime(String startTime) throws ParseException {
         requireNonNull(startTime);
-        String trimmedAddress = startTime.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime dateTime;
-        try {
-            dateTime = LocalDateTime.parse(trimmedAddress, formatter);
-        } catch (DateTimeException e) {
-            throw new ParseException("Please enter valid appointment time in: dd-MM-yyyy HH:mm");
+        String trimmedStartTime = startTime.trim();
+        if (!BookingDateTime.isValidBookingDateTime(trimmedStartTime)) {
+            throw new ParseException(BookingDateTime.MESSAGE_CONSTRAINTS);
         }
+        return new BookingDateTime(trimmedStartTime);
+    }
 
         return dateTime;
     }
@@ -274,4 +255,25 @@ public class ParserUtil {
         return new Duration(trimmedDuration);
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Splits {@code args} into a list of String where each String can be parse as an Index and returns it.
+     *
+     * @throws ParseException if parseIndex() throws a ParseException.
+     */
+    public static ArrayList<Index> parseIndexes(String args) throws ParseException {
+        String[] split = args.split(",");
+        ArrayList<Index> indexes = new ArrayList<>();
+        for (String s : split) {
+            indexes.add(parseIndex(s));
+        }
+        return indexes;
+    }
 }

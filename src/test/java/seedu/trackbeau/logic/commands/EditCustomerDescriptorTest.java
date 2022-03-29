@@ -14,7 +14,7 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
+import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
 
 public class EditCustomerDescriptorTest {

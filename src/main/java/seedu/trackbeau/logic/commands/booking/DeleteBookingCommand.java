@@ -18,7 +18,7 @@ import seedu.trackbeau.model.booking.Booking;
  */
 public class DeleteBookingCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletebooking";
+    public static final String COMMAND_WORD = "deleteb";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the Booking identified by the index number used in the displayed Booking list.\n"
@@ -57,6 +57,8 @@ public class DeleteBookingCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this;
+        return other == this // short circuit if same object
+                || (other instanceof DeleteBookingCommand // instanceof handles nulls
+                && targetIndexes.containsAll(((DeleteBookingCommand) other).targetIndexes)); // state check
     }
 }

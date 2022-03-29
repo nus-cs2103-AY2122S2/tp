@@ -13,6 +13,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
+import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import seedu.trackbeau.commons.core.index.Index;
+import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.TrackBeau;
@@ -112,8 +114,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditCustomerDescriptor DESC_AMY;
-    public static final EditCommand.EditCustomerDescriptor DESC_BOB;
+    public static final EditCustomerDescriptor DESC_AMY;
+    public static final EditCustomerDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -187,8 +189,9 @@ public class CommandTestUtil {
 
         Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
-        prefixArr.add(0, Arrays.asList(splitName[0]));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
+                .nCopies(FIND_ATTRIBUTE_COUNT, null));
+        prefixArr.set(0, Arrays.asList(splitName[0]));
         model.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
 
         assertEquals(1, model.getFilteredCustomerList().size());

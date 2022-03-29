@@ -13,7 +13,7 @@ import seedu.trackbeau.model.Model;
  */
 public class ListServicesCommand extends Command {
 
-    public static final String COMMAND_WORD = "listServices";
+    public static final String COMMAND_WORD = "lists";
 
     public static final String MESSAGE_SUCCESS = "Listed all services";
 

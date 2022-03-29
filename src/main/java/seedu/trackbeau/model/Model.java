@@ -94,6 +94,13 @@ public interface Model {
      */
     void setCustomer(Customer target, Customer editedCustomer);
 
+    /**
+     * Replaces the given booking {@code target} with {@code editedBooking}.
+     * {@code target} must exist in trackBeau.
+     * The booking identity of {@code editedBooking} must not be the same as another existing booking in trackBeau.
+     */
+    void setBooking(Booking target, Booking editedBooking);
+
     /** Returns an unmodifiable view of the filtered booking list */
     ObservableList<Booking> getFilteredBookingList();
 
@@ -144,4 +151,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateServiceList(Predicate<Service> predicate);
+
+    /**
+     * Returns true if a booking with the same identity as {@code booking} exists in trackBeau.
+     */
+    boolean hasBooking(Booking booking);
 }

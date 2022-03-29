@@ -64,10 +64,22 @@ public class CustomerCard extends UiPart<Region> {
         phone.setText(customer.getPhone().value);
         address.setText(customer.getAddress().value);
         email.setText(customer.getEmail().value);
-        skinType.setText("Skin Type: " + customer.getSkinType().value);
-        hairType.setText("Hair Type: " + customer.getHairType().value);
-        birthDate.setText("Birthday: " + customer.getBirthdate().toString());
         regDate.setText("Registration Date: " + customer.getRegDate().toString());
+        if (customer.getSkinType().value != "Skin type data not available") {
+            skinType.setText("Skin Type: " + customer.getSkinType().value);
+        } else {
+            skinType.setManaged(false);
+        }
+        if (customer.getHairType().value != "Hair type data not available") {
+            hairType.setText("Hair Type: " + customer.getHairType().value);
+        } else {
+            hairType.setManaged(false);
+        }
+        if (customer.getBirthdate().toString() != "Birthday data not available.") {
+            birthDate.setText("Birthday: " + customer.getBirthdate().toString());
+        } else {
+            birthDate.setManaged(false);
+        }
         customer.getServices().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> services.getChildren().add(new Label(tag.tagName)));

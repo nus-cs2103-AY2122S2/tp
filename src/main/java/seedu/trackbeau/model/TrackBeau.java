@@ -6,11 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.trackbeau.model.booking.Booking;
-import seedu.trackbeau.model.booking.UniqueBookingList;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.UniqueCustomerList;
 import seedu.trackbeau.model.service.Service;
-import seedu.trackbeau.model.service.UniqueServiceList;
+import seedu.trackbeau.model.uniquelist.UniqueList;
 
 /**
  * Wraps all data at the trackBeau level
@@ -18,9 +16,9 @@ import seedu.trackbeau.model.service.UniqueServiceList;
  */
 public class TrackBeau implements ReadOnlyTrackBeau {
 
-    private final UniqueCustomerList customers;
-    private final UniqueServiceList services;
-    private final UniqueBookingList bookings;
+    private final UniqueList<Customer> customers;
+    private final UniqueList<Service> services;
+    private final UniqueList<Booking> bookings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,9 +28,9 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      *   among constructors.
      */
     {
-        customers = new UniqueCustomerList();
-        services = new UniqueServiceList();
-        bookings = new UniqueBookingList();
+        customers = new UniqueList<>();
+        services = new UniqueList<>();
+        bookings = new UniqueList<>();
     }
 
     public TrackBeau() {}
@@ -52,7 +50,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * {@code customers} must not contain duplicate customers.
      */
     public void setCustomers(List<Customer> customers) {
-        this.customers.setCustomers(customers);
+        this.customers.setItems(customers);
     }
 
     /**
@@ -60,7 +58,15 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * {@code services} must not contain duplicate services.
      */
     public void setServices(List<Service> services) {
-        this.services.setServices(services);
+        this.services.setItems(services);
+    }
+
+    /**
+     * Replaces the contents of the booking list with {@code bookings}.
+     * {@code bookings} must not contain duplicate bookings.
+     */
+    public void setBookings(List<Booking> bookings) {
+        this.bookings.setItems(bookings);
     }
 
     /**
@@ -71,6 +77,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
 
         setCustomers(newData.getCustomerList());
         setServices(newData.getServiceList());
+        setBookings(newData.getBookingList());
     }
 
     //// customer-level operations
@@ -99,7 +106,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);
 
-        customers.setCustomer(target, editedCustomer);
+        customers.setItem(target, editedCustomer);
     }
 
     /**
@@ -129,6 +136,14 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     }
 
     /**
+     * Removes {@code key} from this {@code TrackBeau}.
+     * {@code key} must exist in trackBeau.
+     */
+    public void removeService(Service key) {
+        services.remove(key);
+    }
+
+    /**
      * Replaces the given service {@code target} in the list with {@code editedService}.
      * {@code target} must exist in trackBeau.
      * The service identity of {@code editedService} must not be the same as another existing service in trackBeau.
@@ -136,8 +151,17 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public void setService(Service target, Service editedService) {
         requireNonNull(editedService);
 
-        services.setService(target, editedService);
+        services.setItem(target, editedService);
     }
+
+    /**
+     * Returns true if a booking with the same identity as {@code booking} exists in trackBeau.
+     */
+    public boolean hasBooking(Booking booking) {
+        requireNonNull(booking);
+        return bookings.contains(booking);
+    }
+
     /**
      * Adds a booking to trackBeau.
      * The customer must not already exist in trackBeau.
@@ -145,6 +169,18 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public void addBooking(Booking b) {
         bookings.add(b);
     }
+
+    /**
+     * Replaces the given booking {@code target} in the list with {@code editedBooking}.
+     * {@code target} must exist in trackBeau.
+     * The booking identity of {@code editedBooking} must not be the same as another existing booking in trackBeau.
+     */
+    public void setBooking(Booking target, Booking editedBooking) {
+        requireNonNull(editedBooking);
+
+        bookings.setItem(target, editedBooking);
+    }
+
     /**
      * Removes {@code key} from this {@code TrackBeau}.
      * {@code key} must exist in trackBeau.
@@ -153,15 +189,6 @@ public class TrackBeau implements ReadOnlyTrackBeau {
         bookings.remove(key);
     }
 
-    /**
-     * Removes {@code key} from this {@code TrackBeau}.
-     * {@code key} must exist in trackBeau.
-     */
-    public void removeService(Service key) {
-        services.remove(key);
-    }
-
-
     //// util methods
 
     @Override
@@ -169,7 +196,8 @@ public class TrackBeau implements ReadOnlyTrackBeau {
         // return customers.asUnmodifiableObservableList().size() + " customers";
         // TODO: refine later
         return customers.asUnmodifiableObservableList().size() + " customers"
-                + ", " + services.asUnmodifiableObservableList().size() + " services";
+                + ", " + services.asUnmodifiableObservableList().size() + " services"
+                + ", " + bookings.asUnmodifiableObservableList().size() + " bookings";
     }
 
     @Override

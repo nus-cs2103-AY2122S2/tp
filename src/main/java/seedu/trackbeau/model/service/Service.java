@@ -6,11 +6,13 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Objects;
 
+import seedu.trackbeau.model.uniquelist.UniqueListItem;
+
 /**
  * Represents a Service for the beauty salon in trackbeau.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Service {
+public class Service implements UniqueListItem {
     // Identity fields
     private final ServiceName name;
 
@@ -46,13 +48,17 @@ public class Service {
      * Returns true if both services have the same name.
      * This defines a weaker notion of equality between two services.
      */
-    public boolean isSameService(Service otherService) {
-        if (otherService == this) {
+    public boolean isSameItem(UniqueListItem other) {
+        if (other == this) {
             return true;
         }
 
-        return otherService != null
-                && otherService.getName().equals(getName());
+        if (!(other instanceof Service)) {
+            return false;
+        }
+
+        Service otherService = (Service) other;
+        return otherService.getName().equals(getName());
     }
 
     /**
@@ -71,8 +77,8 @@ public class Service {
 
         Service otherService = (Service) other;
         return otherService.getName().equals(getName())
-                && otherService.getPrice().equals(getPrice())
-                && otherService.getDuration().equals(getDuration());
+            && otherService.getPrice().equals(getPrice())
+            && otherService.getDuration().equals(getDuration());
     }
 
     @Override
@@ -88,10 +94,10 @@ public class Service {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
         String priceString = formatter.format(getPrice().value);
         builder.append(getName())
-                .append("; Price: ")
-                .append(priceString)
-                .append("; Duration (in minutes): ")
-                .append(getDuration());
+            .append("; Price: ")
+            .append(priceString)
+            .append("; Duration (in minutes): ")
+            .append(getDuration());
 
         return builder.toString();
     }

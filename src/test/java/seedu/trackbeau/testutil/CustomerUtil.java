@@ -14,8 +14,8 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 
 import java.util.Set;
 
-import seedu.trackbeau.logic.commands.AddCommand;
-import seedu.trackbeau.logic.commands.EditCommand;
+import seedu.trackbeau.logic.commands.customer.AddCustomerCommand;
+import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.tag.Tag;
 
@@ -28,7 +28,7 @@ public class CustomerUtil {
      * Returns an add command string for adding the {@code customer}.
      */
     public static String getAddCommand(Customer customer) {
-        return AddCommand.COMMAND_WORD + " " + getCustomerDetails(customer);
+        return AddCustomerCommand.COMMAND_WORD + " " + getCustomerDetails(customer);
     }
 
     /**
@@ -57,7 +57,7 @@ public class CustomerUtil {
     /**
      * Returns the part of command string for the given {@code EditCustomerDescriptor}'s details.
      */
-    public static String getEditCustomerDescriptorDetails(EditCommand.EditCustomerDescriptor descriptor) {
+    public static String getEditCustomerDescriptorDetails(EditCustomerDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
@@ -72,7 +72,7 @@ public class CustomerUtil {
         if (descriptor.getStaffs().isPresent()) {
             Set<Tag> tags = descriptor.getStaffs().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_STAFFS);
+                sb.append(PREFIX_STAFFS + " ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_STAFFS).append(s.tagName).append(" "));
             }
@@ -80,7 +80,7 @@ public class CustomerUtil {
         if (descriptor.getServices().isPresent()) {
             Set<Tag> tags = descriptor.getServices().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_SERVICES);
+                sb.append(PREFIX_SERVICES + " ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_SERVICES).append(s.tagName).append(" "));
             }
@@ -88,7 +88,7 @@ public class CustomerUtil {
         if (descriptor.getAllergies().isPresent()) {
             Set<Tag> tags = descriptor.getAllergies().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_ALLERGIES);
+                sb.append(PREFIX_ALLERGIES + " ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_ALLERGIES).append(s.tagName).append(" "));
             }
