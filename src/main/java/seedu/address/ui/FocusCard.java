@@ -75,8 +75,6 @@ public class FocusCard extends UiPart<Region> {
     @FXML
     private Label availability;
     @FXML
-    private Label remark;
-    @FXML
     private FlowPane statusFocusPane;
     @FXML
     private FlowPane availableDaysFocus;
@@ -96,7 +94,6 @@ public class FocusCard extends UiPart<Region> {
         email.setText(candidate.getEmail().value);
         course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
         displayPicture.setImage(new Image(new FileInputStream(BLANK_PICTURE_PATH)));
-        remark.setText(candidate.getRemark().value);
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
         setAvailableDays(candidate.getAvailability());
