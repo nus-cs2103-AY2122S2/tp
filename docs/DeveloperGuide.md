@@ -416,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to **list persons (UC1)**.
 2. ContaX displays a list of persons.
 3. User requests to delete a person.
-4. User enters details to delete person.
+4. User selects the person to delete.
 5. ContaX deletes the person.
 6. ContaX displays a message indicating that the person was successfully deleted.
     Use case ends.
@@ -433,10 +433,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. ContaX has no persons to list.
   * Use case ends.<br>&nbsp;
-
-* 4a. ContaX detects that a required person attribute was not supplied.
-    * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
-    * Use case ends.<br>&nbsp;
 
 * 5a. ContaX cannot find the requested person to delete.
   * 5a1. ContaX shows an error message indicating that no such person exists.
@@ -476,11 +472,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4b2. ContaX shows the expected allowed values.
     * Use case ends.<br>&nbsp;
 
-* 5a. ContaX cannot find the requested person to delete.
+* 5a. ContaX cannot find the requested person to edit.
     * 5a1. ContaX shows an error message indicating that no such person exists.
     * Use case ends.<br>&nbsp;
 
-* 5b. The person already exists.
+* 5b. ContaX detects that a person with the same name already exists.
     * 5b1. ContaX shows an error message indicating that the person already exists.
     * Use case ends.<br>&nbsp;
 
@@ -590,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
     * Use case ends.<br>&nbsp;
 
-* 4a. ContaX cannot find the requested tag to edit.
+* 4a. ContaX cannot find the requested tag to delete.
     * 4a1. ContaX shows an error message indicating that no such tag exists.
     * Use case ends.<br>&nbsp;
 
