@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
 
 
@@ -19,6 +20,9 @@ import unibook.model.module.ModuleName;
 public class JsonAdaptedModule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Modules's %s field is missing!";
+    public static final String GROUP_ALREADY_IN_MODULE_MESSAGE_FORMAT = "Group with name %s already in module %s";
+    public static final String KEY_EVENT_ALREADY_IN_MODULE_MESSAGE_FORMAT =
+            "Key event with name %s and date %s already in module %s";
 
     private final String moduleName;
     private final String moduleCode;
@@ -87,11 +91,20 @@ public class JsonAdaptedModule {
 
         Module module = new Module(new ModuleName(moduleName), new ModuleCode(moduleCode));
         for (JsonAdaptedGroup jsonGroup : groups) {
+            if (module.hasGroupName(jsonGroup.getGroupName())) {
+                throw new IllegalValueException(String.format(GROUP_ALREADY_IN_MODULE_MESSAGE_FORMAT,
+                        jsonGroup.getGroupName(), module.getModuleCode()));
+            }
             module.getGroups().add(jsonGroup.toModelType(module));
         }
 
         for (JsonAdaptedModuleKeyEvent jsonKeyEvent : keyEvents) {
-            module.getKeyEvents().add(jsonKeyEvent.toModelType(module));
+            ModuleKeyEvent moduleKeyEvent = jsonKeyEvent.toModelType(module);
+            if (module.hasEvent(moduleKeyEvent.getKeyEventType(), moduleKeyEvent.getKeyEventTiming())) {
+                throw new IllegalValueException(String.format(KEY_EVENT_ALREADY_IN_MODULE_MESSAGE_FORMAT,
+                        moduleKeyEvent.getKeyEventType(), moduleKeyEvent.getKeyEventDate(), module.getModuleCode()));
+            }
+            module.addKeyEvent(moduleKeyEvent);
         }
 
         return module;
