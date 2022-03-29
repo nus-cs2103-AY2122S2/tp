@@ -314,12 +314,11 @@ public class EditCommand extends Command {
             EditGroupDescriptor editGroupDescriptor = this.editModuleDescriptor.getGroups().get();
             editGroupDescriptor.setModel(model);
             ModuleCode modcode = editGroupDescriptor.getModuleCode();
-            Module mod = model.getModuleByCode(modcode);
-
-            // Checks if module that want to add to person is valid
-            // TODO check why the exception not being printed to the console
-            if (!latestModList.contains(mod)) {
-                throw new CommandException("Module: " + mod.toString() + " not found!");
+            Module mod;
+            try {
+                mod = model.getModuleByCode(modcode);
+            } catch (ModuleNotFoundException e) {
+                throw new CommandException("Module: " + modcode.toString() + " not found!");
             }
 
             ObservableList<Group> groups = FXCollections.observableArrayList();;
