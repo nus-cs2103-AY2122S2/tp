@@ -156,7 +156,7 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     /**
-     * Open the User Guide in the User's default browser.
+     * Open the User Guide in the user's default browser.
      */
     @FXML
     private void openUG() {
@@ -165,6 +165,7 @@ public class HelpWindow extends UiPart<Stage> {
                 Desktop desktop = Desktop.getDesktop();
                 desktop.browse(URI.create(USERGUIDE_URL));
             } catch (IOException e) {
+                logger.warning("User Guide page is currently down");
                 Alert alert = new Alert(Alert.AlertType.ERROR, "The URL is currently down/being changed!");
                 alert.show();
                 e.printStackTrace();

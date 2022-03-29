@@ -192,6 +192,9 @@ public class EditCommand extends Command {
                     matriculationNumber, covidStatus, tags);
         }
 
+        /**
+         * Sets {@code Name} to this object's {@code Name}.
+         */
         public void setName(Name name) {
             this.name = name;
         }
@@ -200,6 +203,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
+        /**
+         * Sets {@code Block} to this object's {@code Block}.
+         */
         public void setBlock(Block block) {
             this.block = block;
         }
@@ -208,6 +214,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(block);
         }
 
+        /**
+         * Sets {@code Faculty} to this object's {@code Faculty}.
+         */
         public void setFaculty(Faculty faculty) {
             this.faculty = faculty;
         }
@@ -216,6 +225,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(faculty);
         }
 
+        /**
+         * Sets {@code Phone} to this object's {@code Phone}.
+         */
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
@@ -224,6 +236,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
+        /**
+         * Sets {@code Email} to this object's {@code Email}.
+         */
         public void setEmail(Email email) {
             this.email = email;
         }
@@ -232,6 +247,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        /**
+         * Sets {@code Address} to this object's {@code Address}.
+         */
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -240,6 +258,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        /**
+         * Sets {@code MatriculationNumber} to this object's {@code MatriculationNumber}.
+         */
         public void setMatriculationNumber(MatriculationNumber matriculationNumber) {
             this.matriculationNumber = matriculationNumber;
         }
@@ -249,8 +270,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Set the covid status of a student
-         * @param covidStatus is the covid status of a student in POSITIVE, NEGATIVE, HRN
+         * Sets {@code CovidStatus} to this object's {@code CovidStatus}.
          */
         public void setCovidStatus(CovidStatus covidStatus) {
             this.covidStatus = covidStatus;
