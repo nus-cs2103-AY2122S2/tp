@@ -28,6 +28,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.util.TransactionBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TransactionUtil;
 
@@ -53,23 +54,16 @@ public class AddTransactionCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = PersonUtil.AMY;
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
     public void equals() {
-        AddCommand command = new AddCommand(PersonUtil.AMY);
+        TransactionBuilder tb = x -> TransactionUtil.TRANSACTION_ONE_COMPLETE;
+
+        AddTransactionCommand command = new AddTransactionCommand(TransactionUtil.VALID_INDEX, tb);
 
         // same object -> returns true
         assertTrue(command.equals(command));
 
         // same values -> returns true
-        assertTrue(command.equals(new AddCommand(PersonUtil.AMY)));
+        assertTrue(command.equals(new AddTransactionCommand(TransactionUtil.VALID_INDEX, tb)));
 
         // different types -> returns false
         assertFalse(command.equals(1));
@@ -78,7 +72,8 @@ public class AddTransactionCommandTest {
         assertFalse(command.equals(null));
 
         // different person -> returns false
-        assertFalse(command.equals(new AddCommand(PersonUtil.BOB)));
+        assertFalse(command.equals(new AddTransactionCommand(Index.fromZeroBased(2),
+                x -> TransactionUtil.TRANSACTION_TWO_COMPLETE)));
     }
 
     /**
@@ -189,24 +184,6 @@ public class AddTransactionCommandTest {
         @Override
         public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
             throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
         }
     }
 
