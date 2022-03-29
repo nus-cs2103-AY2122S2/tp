@@ -32,7 +32,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            return new SortCommand((person1, person2) -> 0);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         Comparator<Person> comparator = parseComparators(List.of(trimmedArgs.split(" ")));
@@ -47,10 +47,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     private static Comparator<Person> parseComparators(List<String> keywords) throws ParseException {
         requireNonNull(keywords);
-
-        if (keywords.isEmpty()) {
-            return (person1, person2) -> 0;
-        }
+        assert(!keywords.isEmpty());
 
         List<Comparator<Person>> comparatorList = new ArrayList<>();
 

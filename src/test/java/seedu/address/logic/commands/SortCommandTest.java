@@ -13,10 +13,8 @@ import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +27,7 @@ import seedu.address.model.person.Person;
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
 public class SortCommandTest {
-    public static final Comparator<Person> DEFAULT_COMPARATOR = (p1, p2) -> 0;
+
     public static final Comparator<Person> NAME_COMPARATOR =
             Comparator.comparing(person -> person.getName().fullName.toLowerCase());
     public static final Comparator<Person> ADDRESS_COMPARATOR =
@@ -47,17 +45,6 @@ public class SortCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_default_noChange() {
-        List<Person> originalList = new ArrayList<>(model.getFilteredAndSortedPersonList());
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = DEFAULT_COMPARATOR;
-        SortCommand command = new SortCommand(comparator);
-        expectedModel.updateSortedPersonList(comparator);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(originalList, model.getFilteredAndSortedPersonList());
-    }
 
     @Test
     public void execute_byName_alphabeticalOrder() {
