@@ -10,7 +10,7 @@
 * Usages:
   * Management of tags 
   * Management of contacts
-  * Management of schedules
+  * Management of appointments
 
 * Features:
   * Detailed onboarding
