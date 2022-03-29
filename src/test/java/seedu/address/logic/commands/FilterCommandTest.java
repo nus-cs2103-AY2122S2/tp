@@ -146,4 +146,9 @@ public class FilterCommandTest {
         // different person -> returns false
         assertFalse(firstFilterCommand.equals(secondFilterCommand));
     }
+
+    @Test
+    public void test_filterCommandWordIsCorrect() {
+        assertTrue(FilterCommand.COMMAND_WORD.equals("filter"));
+    }
 }

@@ -14,14 +14,17 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -29,6 +32,9 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
+/**
+ * Contains helper methods for testing address book parsers.
+ */
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
@@ -86,6 +92,27 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_summarise() throws Exception {
+        assertTrue(parser.parseCommand(SummariseCommand.COMMAND_WORD) instanceof SummariseCommand);
+        assertTrue(parser.parseCommand(SummariseCommand.COMMAND_WORD + " 3") instanceof SummariseCommand);
+    }
+
+    @Test
+    public void parseCommand_archive() throws Exception {
+        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
+        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD + " 3") instanceof ArchiveCommand);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        FilterCommand.FilterDescriptor filterDescriptorTest = new FilterCommand.FilterDescriptor();
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterCommand(filterDescriptorTest), command);
     }
 
     @Test
