@@ -51,7 +51,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model,
             isPersonListShowing,
             isModuleListShowing,
-                isGroupListShowing);
+            isGroupListShowing);
 
         try {
             storage.saveUniBook(model.getUniBook());

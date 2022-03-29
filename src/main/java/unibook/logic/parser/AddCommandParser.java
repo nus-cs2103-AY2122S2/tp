@@ -77,7 +77,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         switch (option) {
         case "group":
             argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_NAME,
-                    CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_DATETIME);
+                CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_DATETIME);
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_MODULE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE_GROUP));
@@ -119,11 +119,11 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(moduleCode, groupName, dateTimeList);
         case "event":
             argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_MODULE,
-                    CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME);
+                CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME);
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE,
-                    CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME)) {
+                CliSyntax.PREFIX_KEYEVENT, CliSyntax.PREFIX_DATETIME)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE_EVENT));
+                    AddCommand.MESSAGE_USAGE_EVENT));
             }
 
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
@@ -134,7 +134,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)
                 || arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_USAGE_STUDENT));
+                    AddCommand.MESSAGE_USAGE_STUDENT));
             }
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)
                 && !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {

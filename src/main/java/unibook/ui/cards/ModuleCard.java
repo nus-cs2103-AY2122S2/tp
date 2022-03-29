@@ -1,11 +1,13 @@
 package unibook.ui.cards;
 
+import static unibook.ui.util.CustomListChangeListeners.addIndexedAndFlagListChangeListener;
+import static unibook.ui.util.CustomListChangeListeners.addIndexedListChangeListener;
+import static unibook.ui.util.CustomPaneListFiller.fillPaneFromList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -16,10 +18,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.Module;
-import unibook.model.module.ModuleKeyEvent;
-import unibook.model.module.group.Group;
-import unibook.model.person.Professor;
-import unibook.model.person.Student;
 import unibook.ui.UiPart;
 
 /**
@@ -37,7 +35,7 @@ public class ModuleCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on UniBook level 4</a>
      */
 
-    public final Module module;
+    private final Module module;
     private final List<Node> allTabContents;
     private final Logger logger = LogsCenter.getLogger(ModuleCard.class);
     @FXML
@@ -86,11 +84,38 @@ public class ModuleCard extends UiPart<Region> {
         allTabContents.add(groups);
         allTabContents.add(keyEvents);
 
+        //set up all the vbox lists, make them all invisible in the ui at the start
+        setUpVBoxLists();
+
         //Set up all the listeners to the underlying lists of module
         setUpListChangeListeners();
 
         //set up mouse click handlers for each tab
         setUpTabMouseClickHandlers();
+    }
+
+    /**
+     * Sets up all the vbox lists which display lists of fields of a module to user.
+     * Initially all Vboxes are not visible, until one tab is clicked by user.
+     */
+    private void setUpVBoxLists() {
+        fillPaneFromList(professors, module.getProfessors(), (professor, i) ->
+            new ProfessorCard(professor, i + 1).getRoot());
+        fillPaneFromList(students, module.getStudents(), (student, i) ->
+            new StudentCard(student, i + 1).getRoot());
+        fillPaneFromList(groups, module.getGroups(), (group, i, flag) ->
+            new GroupCard(group, i + 1, flag).getRoot());
+        fillPaneFromList(keyEvents, module.getKeyEvents(), (keyEvent, i) ->
+            new ModuleKeyEventCard(keyEvent, i + 1).getRoot());
+
+        students.setManaged(false);
+        students.setVisible(false);
+        professors.setManaged(false);
+        professors.setVisible(false);
+        groups.setManaged(false);
+        groups.setVisible(false);
+        keyEvents.setManaged(false);
+        keyEvents.setVisible(false);
     }
 
     /**
@@ -178,24 +203,24 @@ public class ModuleCard extends UiPart<Region> {
         //same tab was clicked twice, just close the tab
         if (tab == currentTab) {
             logger.info(String.format("Changed to no tab being shown for module %s", module.getModuleCode()));
+            lightenTab(tab);
             currentTab = ModuleCardTab.NONE;
             return;
         }
 
+        lightenAllTabs();
+        darkenTab(tab);
+
         if (tab == ModuleCardTab.STUDENTS) {
-            fillStudentList();
             students.setManaged(true);
             students.setVisible(true);
         } else if (tab == ModuleCardTab.PROFESSORS) {
-            fillProfessorList();
             professors.setManaged(true);
             professors.setVisible(true);
         } else if (tab == ModuleCardTab.GROUPS) {
-            fillGroupList();
             groups.setManaged(true);
             groups.setVisible(true);
         } else if (tab == ModuleCardTab.KEY_EVENTS) {
-            fillKeyEventList();
             keyEvents.setManaged(true);
             keyEvents.setVisible(true);
         } else {
@@ -207,105 +232,65 @@ public class ModuleCard extends UiPart<Region> {
     }
 
     /**
+     * Darkens the button of specified tab.
+     */
+    private void darkenTab(ModuleCardTab tab) {
+        if (tab == ModuleCardTab.STUDENTS) {
+            studentsTab.getStyleClass().add("module-student-list-heading-pressed");
+        } else if (tab == ModuleCardTab.PROFESSORS) {
+            professorsTab.getStyleClass().add("module-professor-list-heading-pressed");
+        } else if (tab == ModuleCardTab.GROUPS) {
+            groupsTab.getStyleClass().add("module-groups-list-heading-pressed");
+        } else if (tab == ModuleCardTab.KEY_EVENTS) {
+            keyEventsTab.getStyleClass().add("module-key-events-list-heading-pressed");
+        } else {
+            throw new RuntimeException("This pathway should not happen");
+        }
+    }
+
+    /**
+     * Lightens the button of specified tab when unpressed.
+     */
+    private void lightenTab(ModuleCardTab tab) {
+        if (tab == ModuleCardTab.STUDENTS) {
+            studentsTab.getStyleClass().removeIf(style -> style.equals("module-student-list-heading-pressed"));
+        } else if (tab == ModuleCardTab.PROFESSORS) {
+            professorsTab.getStyleClass().removeIf(style -> style.equals("module-professor-list-heading-pressed"));
+        } else if (tab == ModuleCardTab.GROUPS) {
+            groupsTab.getStyleClass().removeIf(style -> style.equals("module-groups-list-heading-pressed"));
+        } else if (tab == ModuleCardTab.KEY_EVENTS) {
+            keyEventsTab.getStyleClass().removeIf(style -> style.equals("module-key-events-list-heading-pressed"));
+        } else {
+            throw new RuntimeException("This pathway should not happen");
+        }
+    }
+
+    /**
+     * Lightens all tabs.
+     */
+    private void lightenAllTabs() {
+        lightenTab(ModuleCardTab.STUDENTS);
+        lightenTab(ModuleCardTab.PROFESSORS);
+        lightenTab(ModuleCardTab.GROUPS);
+        lightenTab(ModuleCardTab.KEY_EVENTS);
+    }
+
+    /**
      * Set up listeners for changes in all the tab content lists, so that
      * when a change in one of them is detected, the list shown in ui
      * can change accordingly.
      */
     private void setUpListChangeListeners() {
-        ObservableList<Professor> modelProfessorList = module.getProfessors();
-        ObservableList<Student> modelStudentList = module.getStudents();
-        ObservableList<Group> modelGroupList = module.getGroups();
-        ObservableList<ModuleKeyEvent> modelKeyEventsList = module.getKeyEvents();
-
-        //add listeners to the underlying lists of module objects
-        //so that the list shown in this card will change on update
-        modelProfessorList.addListener(new ListChangeListener<Professor>() {
-            /**
-             * Rebuild the list of profs shown to viewer on any kind of change
-             */
-            @Override
-            public void onChanged(Change<? extends Professor> c) {
-                fillProfessorList();
-            }
-        });
-
-        modelStudentList.addListener(new ListChangeListener<Student>() {
-            @Override
-            public void onChanged(Change<? extends Student> c) {
-                fillStudentList();
-            }
-        });
-
-        modelGroupList.addListener(new ListChangeListener<Group>() {
-            @Override
-            public void onChanged(Change<? extends Group> c) {
-                fillGroupList();
-            }
-        });
-
-        modelKeyEventsList.addListener(new ListChangeListener<ModuleKeyEvent>() {
-            @Override
-            public void onChanged(Change<? extends ModuleKeyEvent> c) {
-                fillKeyEventList();
-            }
-        });
+        addIndexedListChangeListener(professors, module.getProfessors(), (professor, index) ->
+                new ProfessorCard(professor, index + 1).getRoot());
+        addIndexedListChangeListener(students, module.getStudents(), (student, index) ->
+                new StudentCard(student, index + 1).getRoot());
+        addIndexedAndFlagListChangeListener(groups, module.getGroups(), (group, index, flag) ->
+                new GroupCard(group, index + 1, flag).getRoot());
+        addIndexedListChangeListener(keyEvents, module.getKeyEvents(), (keyEvent, index) ->
+                new ModuleKeyEventCard(keyEvent, index + 1).getRoot());
     }
 
-    /**
-     * Fills the professor card list of this module card.
-     */
-    private void fillProfessorList() {
-        ObservableList<Professor> modelProfessorList = module.getProfessors();
-        int index = 0;
-        ArrayList<Node> professorCards = new ArrayList<>();
-        for (Professor prof : modelProfessorList) {
-            index++;
-            professorCards.add(new ProfessorCard(prof, index).getRoot());
-        }
-        professors.getChildren().setAll(professorCards);
-    }
-
-    /**
-     * Fills the student card list of this module card.
-     */
-    private void fillStudentList() {
-        ObservableList<Student> modelStudentList = module.getStudents();
-        int index = 0;
-        ArrayList<Node> studentCards = new ArrayList<>();
-        for (Student student : modelStudentList) {
-            index++;
-            studentCards.add(new StudentCard(student, index).getRoot());
-        }
-        students.getChildren().setAll(studentCards);
-    }
-
-    /**
-     * Fills the group card list of this module card.
-     */
-    private void fillGroupList() {
-        ObservableList<Group> modelGroupList = module.getGroups();
-        int index = 0;
-        ArrayList<Node> groupCards = new ArrayList<>();
-        for (Group group : modelGroupList) {
-            index++;
-            groupCards.add(new GroupCard(group, index, modelGroupList.size() == 1).getRoot());
-        }
-        groups.getChildren().setAll(groupCards);
-    }
-
-    /**
-     * Fills the key event list of this module card.
-     */
-    private void fillKeyEventList() {
-        ObservableList<ModuleKeyEvent> modelModuleKeyEventList = module.getKeyEvents();
-        int index = 0;
-        ArrayList<Node> moduleKeyEventCards = new ArrayList<>();
-        for (ModuleKeyEvent keyEvent : modelModuleKeyEventList) {
-            index++;
-            moduleKeyEventCards.add(new ModuleKeyEventCard(keyEvent, index).getRoot());
-        }
-        keyEvents.getChildren().setAll(moduleKeyEventCards);
-    }
 
     @Override
     public boolean equals(Object other) {

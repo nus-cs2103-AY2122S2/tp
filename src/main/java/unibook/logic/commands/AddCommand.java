@@ -188,7 +188,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_MEETING = "New meeting time added.";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting time already exists in the specified "
-            + "group in the UniBook";
+        + "group in the UniBook";
 
     public static final String MESSAGE_SUCCESS_EVENT = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the module specified.";
