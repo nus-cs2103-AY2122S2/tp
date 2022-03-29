@@ -58,9 +58,9 @@ The table below explains the symbols and syntax used throughout the user guide.
 
 | Symbol/Syntax    | Meaning                                                                                        |
 |----------------- |------------------------------------------------------------------------------------------------|
-|<div class="alert alert-info"> :information_source: **Information:** Example information</div>| Text that appears in the information box indicates additional information that may be useful to know.|
-|<div class="alert alert-primary">:bulb: **Tip:** Example tip</div>| Text that appears in the tip box are useful for enhancing your experience with using TrackBeau.|                                               
-|<div class="alert alert-warning">:exclamation: **Caution:** Example warning</div>| Text that appears in the caution box is important as unwanted consequences might arise if not followed.|
+|<div markdown="span" class="alert alert-info"> :information_source: **Information:** Example information</div>| Text that appears in the information box indicates additional information that may be useful to know.|
+|<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Example tip</div>| Text that appears in the tip box are useful for enhancing your experience with using TrackBeau.|                                               
+|<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** Example warning</div>| Text that appears in the caution box is important as unwanted consequences might arise if not followed.|
 
 #### 3.2.2 Sections of TrackBeau's GUI
 The image below shows the annotated GUI components of TrackBeau.
@@ -149,8 +149,11 @@ Adds a customer to the application.
 
 Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
-<div class="alert alert-primary">:bulb: **Tip:**
+<div class="alert alert-primary">
+
+:bulb: **Tip:**
 A customer can have any number of preferred staffs, preferred services and allergies (including 0)
+
 </div>
 
 Examples:
@@ -170,17 +173,21 @@ Edits an existing customer in the application.
 Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
 <div class="alert alert-info">
-:information_source: **Information:** 
+
+**:information_source: Information:**
 <ul>
     <li>At least one of the optional fields must be provided.</li>
     <li>Existing values will be updated to the input values.</li>
 </ul>
+
 </div>
 
-<div class="alert alert-warning">
-:exclamation: **Caution:**<br>
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
 * When editing staff/service preferences or allergies, the existing staff/service preferences or allergies will be removed i.e., adding of staff/service preferences or allergies is not cumulative.<br>
 * By leaving the staff/service preferences or allergies parameter empty, i.e, `stp/` or `sep/` or `al/` it will remove all the staff/service preferences or allergies currently associated with the customer.
+
 </div>
 
 Examples:
@@ -330,8 +337,11 @@ TrackBeau data are saved in the hard disk automatically after any command that c
 
 TrackBeau data are saved as a JSON file `[JAR file location]/data/trackbeau.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div class="alert alert-warning">:exclamation: **Caution:**
+<div class="alert alert-warning">
+
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TrackBeau will discard all data and start with an empty data file at the next run.
+
 </div>
 
 
