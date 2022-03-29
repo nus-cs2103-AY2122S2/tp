@@ -20,10 +20,10 @@ public class SortCommand extends Command {
             + "no prefix, it will sort by name in ascending order.\n"
             + "if the value for ascending and descending is incorrect, \n"
             + "it will only sort by ascending.\n"
-            + "By default it sort by name then status,\n"
-            + "use so/ to sort by status then name.\n"
-            + "Parameters: [sn/] [ss/] [so/]...\n"
-            + "Example: " + COMMAND_WORD;
+            + "if all prefix are shown, by default it sort by name then status then rating then tags,\n"
+            + "use so/ to sort in different priority by stating the name of your priority in order.\n"
+            + "Parameters: [sn/] [ss/] [sr] [st] [so/]...\n"
+            + "Example: " + COMMAND_WORD + " sn/ ss/dsc";
 
     private final Comparator<Show> comparator;
 

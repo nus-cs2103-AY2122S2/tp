@@ -12,6 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_COMMENT = new Prefix("c/");
     public static final Prefix PREFIX_SORT_NAME = new Prefix("sn/");
     public static final Prefix PREFIX_SORT_STATUS = new Prefix("ss/");
+    public static final Prefix PREFIX_SORT_RATING = new Prefix("sr/");
+    public static final Prefix PREFIX_SORT_TAGS = new Prefix("st/");
     public static final Prefix PREFIX_SORT_ORDER = new Prefix("so/");
     public static final Prefix PREFIX_RATING = new Prefix("r/");
 
