@@ -1,5 +1,6 @@
 package unibook.model.person;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -33,6 +34,55 @@ public class Professor extends Person {
             person.getTags(), office, person.getModules());
     }
 
+    /**
+     * Returns a new Professor Object with phone removed
+     *
+     * @return Professor with phone deleted
+     */
+    public Professor deletePhone() {
+        return new Professor(getName(), new Phone(), getEmail(), getTags(), getOffice(), getModules());
+    }
+
+    /**
+     * Returns a new Professor Object with email removed
+     *
+     * @return Professor with email deleted
+     */
+    public Professor deleteEmail() {
+        return new Professor(getName(), getPhone(), new Email(), getTags(), getOffice(), getModules());
+    }
+
+    /**
+     * Returns a new Professor Object with tag removed
+     *
+     * @param tagNameToDelete A String of the tag name
+     * @return Professor with that specific tag deleted
+     */
+    public Professor deleteTag(String tagNameToDelete) {
+        Set<Tag> tags = getTags();
+        Set<Tag> newTags = new HashSet<>();
+        for (Tag tag: tags) {
+            if (!tag.tagName.equalsIgnoreCase(tagNameToDelete)) {
+                newTags.add(tag);
+            }
+        }
+        return new Professor(getName(), getPhone(), getEmail(), newTags, getOffice(), getModules());
+    }
+
+    /**
+     * Returns a new Professor Object with office removed
+     *
+     * @return Professor with that specific office deleted
+     */
+    public Professor deleteOffice() {
+        return new Professor(getName(), getPhone(), getEmail(), getTags(), new Office(), getModules());
+    }
+
+    /**
+     * Returns the Office object that this professor has
+     *
+     * @return Office
+     */
     public Office getOffice() {
         return this.office;
     }

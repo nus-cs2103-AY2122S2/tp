@@ -1,6 +1,7 @@
 package unibook.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -94,6 +95,10 @@ public interface Model {
     //=========== Groups =====================================================================================
     void addGroup(Group group);
 
+    Group removeGroup(ModuleCode moduleCode, Group group);
+
+    List<Group> getShowingGroupList();
+
     /**
      * Returns an unmodifiable view of the filtered person list
      */
@@ -112,15 +117,13 @@ public interface Model {
 
     boolean hasModule(ModuleCode moduleCode);
 
+    boolean hasModuleAndGroup(ModuleCode moduleCode, Group group);
+
     void deleteByModuleCode(ModuleCode moduleCode);
 
     void deleteModule(Module module);
 
     void addPersonToTheirModules(Person person);
-
-    void removeModuleFromAllPersons(ModuleCode moduleCode);
-
-    void removePersonFromAllModules(Person person);
 
     /**
      * Adds the given module.
@@ -131,6 +134,10 @@ public interface Model {
     void setModule(Module target, Module editedModule);
 
     boolean isModuleExist(Set<ModuleCode> moduleCodeSet);
+
+    void deleteModuleAndPersons(ModuleCode moduleCode);
+
+    void deleteProfModule(ModuleCode moduleCode);
 
     /**
      * Finds the corresponding module to the module code.

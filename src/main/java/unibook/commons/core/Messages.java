@@ -9,11 +9,23 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_MODULE_DISPLAYED_INDEX = "The module index provided is invalid";
+    public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
+    public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "The meeting time index provided is invalid";
+    public static final String MESSAGE_INVALID_PROF_DISPLAYED_INDEX = "The professor index provided is invalid";
+    public static final String MESSAGE_INVALID_STU_DISPLAYED_INDEX = "The student index provided is invalid";
+    public static final String MESSAGE_INVALID_KEY_EVENT_DISPLAYED_INDEX = "The key event index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Changed page to Module Page!";
-    public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Changed page to Person Page!";
-    public static final String MESSAGE_CHANGE_TO_GROUP_PAGE = "Changed page to Group Page!";
+    public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Change page to Module Page!\n"
+            + "Command to change to module page: list o/view v/modules";
+    public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Change page to Person Page!\n"
+            + "Command to change to person page: list o/view v/people";
+    public static final String MESSAGE_CHANGE_TO_GROUP_PAGE = "Change page to Group Page!\n"
+            + "Command to change to group page: list o/view v/groups";
+    public static final String MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE = "Change page to Module Page or Group Page!\n"
+            + "Command to change to module page: list o/view v/modules\n"
+            + "Command to change to group page: list o/view v/groups";
     public static final String MESSAGE_MODULE_CODE_NOT_EXIST = "Module Code does not exist: %1$s";
+    public static final String MESSAGE_GROUP_NOT_EXIST = "Group does not exist: %1$s";
 
     //ListCommand
     public static final String MESSAGE_CHANGED_TO_MODULE_PAGE = "Changed page to Module Page!";
@@ -68,6 +80,7 @@ public class Messages {
             + "falling on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_EVENT_AND_NAME_AND_DATE =
         "No modules have module names containing %s, with key event(s) of type %s falling on %s!";
+
 
 
 }
