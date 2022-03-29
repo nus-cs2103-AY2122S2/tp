@@ -39,7 +39,7 @@ Click any of the subsections above to navigate there now.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are inputs to be supplied by the user.<br>
-  e.g. In `addbuyer n/NAME`, `NAME` is an input such as `add n/Chok Hoe`.
+  e.g. In `addbuyer n/NAME`, `NAME` is an input such as `addbuyer n/Chok Hoe`.
 
 * Items in square brackets are optional inputs.<br>
   e.g In `n/NAME [t/TAG]`, the user can input `n/Chok Hoe t/funny` or simply `n/Chok Hoe`.
