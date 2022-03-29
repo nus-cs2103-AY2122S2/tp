@@ -67,11 +67,8 @@
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="50.0" prefWidth="1000.0" style="-fx-background-color: #383838;" VBox.vgrow="NEVER">
                     <children>
                         <Label text="For more details:  " textFill="white" />
-                        <TextField fx:id="userGuideLink" editable="false" prefHeight="25.0" prefWidth="322.0"
-                                   style="-fx-background-color: #383838; -fx-text-fill: white; -fx-padding: 0px; -fx-border-width: 0 0 1 0; -fx-border-color: white;"
-                                   text="https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html" />
-                        <Label fx:id="linkCopiedLabel" text="Link copied!" textFill="white"
-                               style="-fx-background-color: #585858; -fx-padding: 10px; -fx-border-insets: 5px; -fx-background-insets: 5px;"/>
+                        <TextField fx:id="userGuideLink" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="340.0" style="-fx-background-color: #383838; -fx-text-fill: white; -fx-padding: 0px; -fx-border-width: 0 0 1 0; -fx-border-color: white;" text="https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html" />
+                        <Label fx:id="linkCopiedLabel" style="-fx-background-color: #585858; -fx-padding: 10px; -fx-border-insets: 5px; -fx-background-insets: 5px;" text="Link copied!" textFill="white" />
                     </children>
                 </HBox>
             </children>
