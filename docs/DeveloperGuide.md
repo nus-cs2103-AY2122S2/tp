@@ -870,6 +870,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
 * **Schedule**: The part of ContaX that keeps track of Appointments
+* **Onboarding Guide**: The quick start guide to ContaX
 
 --------------------------------------------------------------------------------------------------------------------
 
