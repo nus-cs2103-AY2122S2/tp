@@ -41,7 +41,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
    
     * **`schedule add candidate/1 at/05-05-2022 10:00`** : Schedules the first candidate for an interview at 5 May 2022 10AM.
    
-    * **`schedule edit 1 at/06-06-2022 15:00`** : Reschedules the first interview in the interview schedule to be at 6 June 2022 3PM. Note that the index in the interview schedule is different from the candidate list.
+    * **`schedule edit 1 at/06-06-2022 15:00`** : Reschedules the first interview in the interview schedule to 6 June 2022 3PM. Note that the index in the interview schedule is different from the candidate list.
 
     * **`schedule delete 1`** : Deletes the first interview in the interview schedule. Note that the index in the interview schedule is different from the candidate list.
    
@@ -267,7 +267,7 @@ Format: `schedule delete SCHEDULE_INDEX`
 * Deletes the interview at the specified `SCHEDULE_INDEX`.
 * The schedule index refers to the index number shown in the displayed interview schedule.
 * The schedule index must be a positive integer 1, 2, 3, …​
-* 
+
 Examples:
 * `view` followed by `schedule delete 2` deletes the second interview in the interview schedule.
 
