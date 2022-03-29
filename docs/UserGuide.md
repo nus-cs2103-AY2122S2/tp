@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-NUSocials is a **desktop app for university students to maintain a professional contact list, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
+NUSocials is a **desktop app for university students to maintain a professional contact list, where users can keep track information about friends/acquaintances easily in one single platform.
+It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
 {:toc}
@@ -105,15 +106,17 @@ Tags additional information to an existing contact.
 
 Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
-* Tags the person at the specified `INDEX`.
+* Tags the relevant information to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list. 
 * At least one of the prefixes must be provided.
 * If a prefix is used, the input after must not be blank.
-* Input tag values will be accumulated to the existing tags.
+* Input tag values will be added to the existing tags in their respective fields.
 
-Example:
+Examples:
 * `tag 1 i/abc-company m/CS2100 m/CS2030S`<br>
 Tags the internship company and 2 modules to the 1st person in the currently shown contact list.
+* `tag 1 i/ m/`<br>
+This is an invalid command because there is no input given after a prefix is used.
 
 ### Removing specific tags from person: `removetag`
 Removes the specific tags of an existing contact.
@@ -124,11 +127,18 @@ Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [e
 * The index refers to the index number shown in the displayed person list. 
 * At least one of the prefixes must be provided.
 * If a prefix is used, the input after must not be blank.
-* All arguments for tags provided must be an exact match to existing tags.
+* All inputs for tags provided must be an exact match to existing tags.
 
-Example:
+Examples:
 * `removetag 1 i/abc-company m/CS2100 m/CS2030S`<br>
 Removes the internship company and 2 modules tags from the 1st person in the currently shown contact list.
+* `removetag 1 i/ m/`<br>
+This is an invalid command because there is no input given after a prefix is used.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If the existing education tags for person 1 contains "computer science", `removetag 1 edu/computer` would not lead to the
+removal of `computer science` from person 1 because it's not an exact match.
+</div>
 
 ### Editing a person : `edit`
 
@@ -139,10 +149,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 * Edits the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
 
 Example:
-* `edit 1 p/91234567 e/KL123@example.com`<br>Edits the phone number and email address of the 1st person to `91234567` and `KL123@example.com` respectively.
+* `edit 1 p/91234567 e/KL123@example.com`<br>
+Edits the phone number and email address of the 1st person to `91234567` and `KL123@example.com` respectively.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Existing values will be overwritten and updated to the new input values!
+</div>
 
 ### Adding an event: `event`
 Adds an event into NUSocials.
@@ -152,9 +166,9 @@ Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
 * Tags the participating persons to the events based on the specified `INDEX…​`. 
 * The index refers to the index number shown in the displayed person list.
 * All fields must be provided.
-* Argument provided for `DATE` has to be in the format of `yyyy-MM-dd`.
-* Argument provided for `TIME` has to be in the format of `HH:mm`.
-* Arguments for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
+* Input provided for `DATE` has to be in the format of `yyyy-MM-dd`.
+* Input provided for `TIME` has to be in the format of `HH:mm`.
+* Inputs for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
 * `EVENT NAME` has a limit of 100 characters.
 * `EVENT DETAILS` has a limit of 300 characters.
 
@@ -176,7 +190,7 @@ Examples:
 
 Alternate Format: `cancelevent INDEX…​`
 
-* Deletes multiple events at the specified `INDEX`'s.
+* Deletes multiple events at the specified `INDEX` numbers.
 * The index refers to the index number shown in the displayed event list.
 * Each index **must be separated by a whitespace**
 
@@ -198,7 +212,7 @@ Examples:
 
 Alternate Format: `delete INDEX…​`
 
-* Deletes multiple persons at the specified `INDEX`'s.
+* Deletes multiple persons at the specified `INDEX` numbers.
 * The index refers to the index number shown in the displayed person list.
 * Each index **must be separated by a whitespace**
 
