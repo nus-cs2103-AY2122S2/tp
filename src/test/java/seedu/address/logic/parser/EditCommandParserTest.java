@@ -50,6 +50,35 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
+    //@Test
+    //public void parse_oneFieldSpecified_success() {
+    // name
+    //Index targetIndex = INDEX_THIRD_PERSON;
+    //String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
+    //EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+    //EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+    //assertParseSuccess(parser, userInput, expectedCommand);
+
+    // phone
+    //userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
+    //descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+    //expectedCommand = new EditCommand(targetIndex, descriptor);
+    //assertParseSuccess(parser, userInput, expectedCommand);
+
+    // email
+    //userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+    //descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+    //expectedCommand = new EditCommand(targetIndex, descriptor);
+    //assertParseSuccess(parser, userInput, expectedCommand);
+
+    // address
+    //userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
+    //descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+    //expectedCommand = new EditCommand(targetIndex, descriptor);
+    //assertParseSuccess(parser, userInput, expectedCommand);
+    //}
+
+
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
