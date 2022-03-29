@@ -382,8 +382,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list products ([UC1](#uc1-listing-products))
-2. User requests to update a product in the list specified by the index 
+1. User requests to list products ([UC1](#uc1-listing-products)).
+2. User requests to update a product in the list specified by the index.
 3. IBook updates the product
     Use case ends.
 
@@ -399,10 +399,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find products 
+1. User requests to find products.
 2. IBook updates the list to show the requested products
 Use case ends.
-   
+
 **Extensions**
 
 * 2a. Requested fields are invalid.

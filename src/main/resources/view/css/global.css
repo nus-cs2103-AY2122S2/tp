@@ -10,6 +10,10 @@
     src: url('../font/NotoSans-SemiBold.ttf');
 }
 
+@font-face {
+    src: url('../font/MonoLisa-Regular.otf');
+}
+
 .root {
     -fx-font-family: 'Noto Sans';
 }

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
 import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.commands.CommandResult;
@@ -55,6 +56,24 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        // Configure the UI
+        setWindowDefaultSize(logic.getGuiSettings());
+
+        // Register event handler for stage close
+        primaryStage.setOnCloseRequest(event -> handleExit());
+    }
+
+    /**
+     * Sets the default size based on {@code guiSettings}.
+     */
+    private void setWindowDefaultSize(GuiSettings guiSettings) {
+        primaryStage.setHeight(guiSettings.getWindowHeight());
+        primaryStage.setWidth(guiSettings.getWindowWidth());
+        if (guiSettings.getWindowCoordinates() != null) {
+            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
     }
 
     /**
@@ -68,7 +87,10 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    public void handleExit() {
+    void handleExit() {
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setGuiSettings(guiSettings);
         primaryStage.hide();
     }
 

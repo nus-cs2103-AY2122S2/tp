@@ -37,10 +37,16 @@ public class ProductTable extends UiComponent<VBox> {
     private void populateField() {
         getMainWindow().populateFilters();
         content.getChildren().clear();
-        for (int i = 0; i < filteredIBook.size(); i++) {
-            Product product = filteredIBook.get(i);
-            ProductCard productCard = new ProductCard(i + 1, product, getMainWindow());
-            content.getChildren().add(productCard.getRoot());
+
+        if (filteredIBook.isEmpty()) {
+            EmptyProductTableState emptyState = new EmptyProductTableState(getMainWindow());
+            content.getChildren().add(emptyState.getRoot());
+        } else {
+            for (int i = 0; i < filteredIBook.size(); i++) {
+                Product product = filteredIBook.get(i);
+                ProductCard productCard = new ProductCard(i + 1, product, getMainWindow());
+                content.getChildren().add(productCard.getRoot());
+            }
         }
     }
 
