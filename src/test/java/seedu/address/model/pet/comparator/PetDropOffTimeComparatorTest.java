@@ -2,15 +2,15 @@ package seedu.address.model.pet.comparator;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.ComparatorUtil.PET_WITH_ABSENT_ATTENDANCE_ENTRY;
+import static seedu.address.testutil.ComparatorUtil.PET_WITH_MISSING_ATTENDANCE_ENTRY;
 import static seedu.address.testutil.ComparatorUtil.PET_WITH_PRESENT_ATTENDANCE_ENTRY;
 import static seedu.address.testutil.ComparatorUtil.PET_WITH_PRESENT_ATTENDANCE_ENTRY_AND_TRANSPORT_TIMING_1;
 import static seedu.address.testutil.ComparatorUtil.PET_WITH_PRESENT_ATTENDANCE_ENTRY_AND_TRANSPORT_TIMING_2;
-import static seedu.address.testutil.ComparatorUtil.PET_WITH_MISSING_ATTENDANCE_ENTRY;
 
 import org.junit.jupiter.api.Test;
 
 public class PetDropOffTimeComparatorTest {
-    PetDropOffTimeComparator comparator = new PetDropOffTimeComparator();
+    private PetDropOffTimeComparator comparator = new PetDropOffTimeComparator();
 
     @Test
     public void compare() {
