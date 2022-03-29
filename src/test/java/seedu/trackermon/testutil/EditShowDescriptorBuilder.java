@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.trackermon.logic.commands.EditCommand.EditShowDescriptor;
 import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
@@ -36,6 +37,7 @@ public class EditShowDescriptorBuilder {
         descriptor.setStatus(show.getStatus());
         descriptor.setTags(show.getTags());
         descriptor.setComment(show.getComment());
+        descriptor.setRating(show.getRating());
     }
 
     /**
@@ -71,6 +73,15 @@ public class EditShowDescriptorBuilder {
      */
     public EditShowDescriptorBuilder withComment(String comment) {
         descriptor.setComment(new Comment(comment));
+        return this;
+    }
+
+    /**
+     * Parses the {@code rating} into a {@code Rating} and set it to the {@code EditShowDescriptor}
+     * that we are building.
+     */
+    public EditShowDescriptorBuilder withRating(String rating) {
+        descriptor.setRating(new Rating(rating));
         return this;
     }
 
