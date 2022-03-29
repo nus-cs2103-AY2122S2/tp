@@ -191,9 +191,6 @@ ManageEZPZ data are saved as a JSON file `[JAR file location]/data/ManageEZPZ.js
 If your changes to the data file makes its format invalid, ManageEZPZ will discard all data and start with an empty data file at the next run.
 </div>
 
-
-
-
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
