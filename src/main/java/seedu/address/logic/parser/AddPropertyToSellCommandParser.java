@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToSell;
 
@@ -43,10 +44,11 @@ public class AddPropertyToSellCommandParser implements Parser<AddPropertyToSellC
             throw new ParseException(AddPropertyToSellCommand.MESSAGE_USAGE);
         }
         HouseType houseType = ParserUtil.parseHouseType(argMultimap.getValue(PREFIX_HOUSE_TYPE).get());
-        String location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
+        Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         PriceRange priceRange = ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_PRICE_RANGE).get());
-        PropertyToSell propertyToSell = new PropertyToSell(new House(houseType, location), priceRange, address);
+        PropertyToSell propertyToSell = new PropertyToSell(new House(houseType, location.toString()),
+                priceRange, address);
 
         return new AddPropertyToSellCommand(index, propertyToSell);
     }
