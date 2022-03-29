@@ -30,7 +30,7 @@ public class Flag {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid flag.
      */
     public static boolean isValidFlag(String test) {
         return test.toLowerCase().matches(VALIDATION_REGEX);
