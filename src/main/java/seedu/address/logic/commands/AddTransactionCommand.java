@@ -37,7 +37,8 @@ public class AddTransactionCommand extends Command {
             + "dd/2022-11-11 "
             + "n/paid SGD 123.456 for haircut --paid";
 
-    public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s;\n"
+            + "With a Transaction: %2$s";
 
     private final Index index;
     private final TransactionBuilder transactionBuilder;
@@ -75,7 +76,7 @@ public class AddTransactionCommand extends Command {
 
         model.addTransaction(transaction);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, person, transaction));
     }
 
     @Override
