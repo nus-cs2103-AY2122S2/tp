@@ -28,6 +28,9 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -262,7 +265,27 @@ public class RangeCommandTest {
         }
 
         @Override
-        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ScheduleItem> getScheduleItemList() {
             throw new AssertionError("This method should not be called.");
         }
 

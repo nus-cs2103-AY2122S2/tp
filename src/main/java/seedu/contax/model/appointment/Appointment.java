@@ -6,12 +6,14 @@ import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 
 /**
- * Represents an appointment in the schedule.
+ * Represents an appointment in the Schedule. Time related functionality is implemented in the superclass
+ * {@link ScheduleItem}.
  */
-public class Appointment implements Comparable<Appointment> {
+public class Appointment extends ScheduleItem {
 
     // Appointment identification fields
     private final StartDateTime startDateTime;
@@ -20,9 +22,10 @@ public class Appointment implements Comparable<Appointment> {
     private final Name name;
     private final Duration duration;
     private final Person person;
+    private final Priority priority;
 
     /**
-     * Constructs an {@code Appointment}.
+     * Constructs an {@code Appointment} without a priority level.
      * The fields {@code name, startDateTime, duration} must be present and not null.
      * The {@code person} argument is optional, and may be null.
      *
@@ -32,19 +35,43 @@ public class Appointment implements Comparable<Appointment> {
      * @param person A valid Person or null.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
-        requireAllNonNull(name, startDateTime, duration);
+        this(name, startDateTime, duration, person, null);
+    }
+
+    /**
+     * Constructs an {@code Appointment} with a priority level.
+     * The fields {@code name, startDateTime, duration} must be present and not null.
+     * The fields {@code person, priority} are optional and may be null.
+     *
+     * @param name A valid Appointment Name.
+     * @param startDateTime A valid Appointment Starting DateTime.
+     * @param duration A valid Appointment Duration.
+     * @param person A valid Person or null.
+     * @param priority A valid Priority level or null.
+     */
+    public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person,
+                       Priority priority) {
+        super(Appointment.getStartDateTimeOrThrow(startDateTime),
+                Appointment.computeEndDateTime(startDateTime, duration));
+        requireNonNull(name);
 
         this.name = name;
         this.startDateTime = startDateTime;
         this.duration = duration;
         this.person = person;
+        this.priority = priority;
     }
 
     public Name getName() {
         return this.name;
     }
 
-    public StartDateTime getStartDateTime() {
+    @Override
+    public LocalDateTime getStartDateTime() {
+        return this.startDateTime.value;
+    }
+
+    public StartDateTime getStartDateTimeObject() {
         return this.startDateTime;
     }
 
@@ -56,10 +83,24 @@ public class Appointment implements Comparable<Appointment> {
         return person;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
+    /**
+     * Creates a new {@code Appointment} instance with the supplied {@code Priority} level.
+     *
+     * @param priority The new priority level to assign to this Appointment.
+     * @return A new immutable instance of Appointment with the updated Priority.
+     */
+    public Appointment withPriority(Priority priority) {
+        return new Appointment(name, startDateTime, duration, person, priority);
+    }
+
     /**
      * Creates a new {@code Appointment} instance with the supplied {@code Person} object.
      *
-     * @param newPerson The person object to replace the current associated person.
+     * @param newPerson The person object, or null, to replace the current associated person.
      * @return A new immutable instance of Appointment with the updated Person.
      */
     public Appointment withPerson(Person newPerson) {
@@ -71,35 +112,9 @@ public class Appointment implements Comparable<Appointment> {
      *
      * @return The end DateTime of this appointment.
      */
+    @Override
     public LocalDateTime getEndDateTime() {
-        return getStartDateTime().value.plusMinutes(getDuration().value);
-    }
-
-    /**
-     * Returns true if both appointments overlap, that is, the start time of an appointment is strictly before
-     * the (start time + duration) of the other appointment. Note that false will be returned if the start
-     * time of the other appointment is exactly the end time of this appointment.
-     *
-     * @param other The other {@code Appointment} to compare against.
-     * @return True if both appointments overlap, otherwise false.
-     */
-    public boolean isOverlapping(Appointment other) {
-        requireNonNull(other);
-        if (this.equals(other)) {
-            return true;
-        }
-
-        final LocalDateTime otherStartDateTime = other.getStartDateTime().value;
-        final LocalDateTime selfStartDateTime = getStartDateTime().value;
-
-        if (otherStartDateTime.isAfter(selfStartDateTime.minusSeconds(1))) {
-            // In this case, other.startDateTime is after this.startDateTime.
-            return otherStartDateTime.isBefore(getEndDateTime());
-        }
-
-        // other.startDateTime is strictly before this.startDateTime, need to check if other.endDateTime
-        // overflows into this.startDateTime
-        return (other.getEndDateTime().isAfter(selfStartDateTime));
+        return Appointment.computeEndDateTime(startDateTime, duration);
     }
 
     /**
@@ -116,31 +131,54 @@ public class Appointment implements Comparable<Appointment> {
             return false;
         }
 
-        Appointment otherPerson = (Appointment) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getStartDateTime().equals(getStartDateTime())
-                && otherPerson.getDuration().equals(getDuration())
-                && Objects.equals(otherPerson.getPerson(), getPerson());
+        Appointment otherAppointment = (Appointment) other;
+
+        return otherAppointment.getName().equals(getName())
+                && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
+                && otherAppointment.getDuration().equals(getDuration())
+                && Objects.equals(otherAppointment.getPerson(), getPerson())
+                && Objects.equals(otherAppointment.getPriority(), getPriority());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, startDateTime, duration, person);
+        return Objects.hash(name, startDateTime, duration, person, priority);
     }
 
     @Override
     public String toString() {
-        return getName()
-                + "; Start Date Time: "
-                + getStartDateTime()
-                + "; Duration: "
+        return "**Name:** "
+                + getName()
+                + "\n **Start Date Time:** "
+                + getStartDateTimeObject()
+                + "\n **Duration:** "
                 + getDuration()
-                + "; Person: "
-                + getPerson();
+                + "\n **Person:** "
+                + (getPerson() == null ? "None" : getPerson().getName())
+                + "\n **Priority:** "
+                + (getPriority() == null ? "None" : getPriority());
     }
 
-    @Override
-    public int compareTo(Appointment o) {
-        return this.getStartDateTime().compareTo(o.getStartDateTime());
+    /**
+     * Extracts the LocalDateTime object from the supplied StartDateTime object.
+     *
+     * @param startDateTimeObject The StartDateTime container to extract from.
+     * @return The extracted LocalDateTime object.
+     */
+    private static LocalDateTime getStartDateTimeOrThrow(StartDateTime startDateTimeObject) {
+        requireNonNull(startDateTimeObject);
+        return startDateTimeObject.value;
+    }
+
+    /**
+     * Computes the ending time from the {@code StartDateTime} and {@code Duration}.
+     *
+     * @param startDateTime The StartDateTime container use.
+     * @param duration The Duration container to use.
+     * @return The computed end date-time.
+     */
+    private static LocalDateTime computeEndDateTime(StartDateTime startDateTime, Duration duration) {
+        requireAllNonNull(startDateTime, duration);
+        return startDateTime.value.plusMinutes(duration.value);
     }
 }

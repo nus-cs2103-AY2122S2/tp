@@ -11,6 +11,7 @@ import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,11 +26,11 @@ public class AppointmentTest {
         assertThrows(NullPointerException.class, () ->
                 new Appointment(null, null, null, null));
         assertThrows(NullPointerException.class, () ->
-                new Appointment(reference.getName(), reference.getStartDateTime(), null, null));
+                new Appointment(reference.getName(), reference.getStartDateTimeObject(), null, null));
         assertThrows(NullPointerException.class, () ->
                 new Appointment(reference.getName(), null, reference.getDuration(), null));
         assertThrows(NullPointerException.class, () ->
-                new Appointment(null, reference.getStartDateTime(), reference.getDuration(), null));
+                new Appointment(null, reference.getStartDateTimeObject(), reference.getDuration(), null));
     }
 
     @Test
@@ -67,6 +68,13 @@ public class AppointmentTest {
         // different person -> returns false
         editedAliceAppt = new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(BOB).build();
         assertFalse(APPOINTMENT_ALICE.equals(editedAliceAppt));
+
+        // different priority -> returns false
+        Appointment aliceApptHigh = new AppointmentBuilder(APPOINTMENT_ALICE.withPriority(Priority.HIGH))
+                .buildWithPriority();
+        Appointment aliceApptLow = new AppointmentBuilder(APPOINTMENT_ALICE.withPriority(Priority.LOW))
+                .buildWithPriority();
+        assertFalse(aliceApptHigh.equals(aliceApptLow));
     }
 
     @Test
@@ -84,6 +92,7 @@ public class AppointmentTest {
 
     @Test
     public void isOverlapping() {
+        // This is an integration test, more detailed tests are done in ScheduleItemTest
         Appointment appointment1 = new AppointmentBuilder()
                 .withDuration(30)
                 .withStartDateTime(LocalDateTime.parse("2020-04-23T12:34:00")).build();
@@ -100,56 +109,12 @@ public class AppointmentTest {
                 .withDuration(60)
                 .withStartDateTime(LocalDateTime.parse("2020-04-23T12:10:00")).build();
 
-        // Bounds Testing
-        Appointment appointment7 = new AppointmentBuilder(appointment1).withDuration(60).build();
-        Appointment appointment8 = new AppointmentBuilder(appointment1).withDuration(15).build();
-
-        Appointment appointment9 = new AppointmentBuilder(appointment1)
-                .withDuration(20)
-                .withStartDateTime(LocalDateTime.parse("2020-04-23T12:44:00")).build();
-        Appointment appointment10 = new AppointmentBuilder(appointment1)
-                .withDuration(40)
-                .withStartDateTime(LocalDateTime.parse("2020-04-23T12:24:00")).build();
-
-        Appointment appointment11 = new AppointmentBuilder(appointment1)
-                .withStartDateTime(LocalDateTime.parse("2020-04-23T13:04:00")).build();
-        Appointment appointment12 = new AppointmentBuilder(appointment1)
-                .withDuration(1)
-                .withStartDateTime(LocalDateTime.parse("2020-04-23T12:33:00")).build();
-
         assertTrue(appointment1.isOverlapping(appointment1)); // Will overlap with itself
         assertTrue(appointment1.isOverlapping(appointment2)); // Will overlap since seconds are zeroed
-        assertTrue(appointment2.isOverlapping(appointment1)); // Symmetric test
         assertTrue(appointment1.isOverlapping(appointment3)); // 3 starts before 1 ends
-        assertTrue(appointment3.isOverlapping(appointment1)); // Symmetric test
         assertTrue(appointment1.isOverlapping(appointment4)); // 1 starts before 4 ends
-        assertTrue(appointment4.isOverlapping(appointment1)); // Symmetric test
         assertTrue(appointment1.isOverlapping(appointment5)); // 5 is contained in 1
-        assertTrue(appointment5.isOverlapping(appointment1)); // Symmetric test
         assertTrue(appointment1.isOverlapping(appointment6)); // 1 is contained in 6
-        assertTrue(appointment6.isOverlapping(appointment1)); // Symmetric test
-
-        /* Testing Overlapping Bounds */
-        // 1 and 7 start at the same time, 1 is contained in 7
-        assertTrue(appointment1.isOverlapping(appointment7));
-        assertTrue(appointment7.isOverlapping(appointment1)); // Symmetric test
-
-        // 1 and 8 start at the same time, 8 is contained in 1
-        assertTrue(appointment1.isOverlapping(appointment8));
-        assertTrue(appointment8.isOverlapping(appointment1)); // Symmetric test
-
-        // 1 and 9 end at the same time, 9 is contained in 1
-        assertTrue(appointment1.isOverlapping(appointment9));
-        assertTrue(appointment9.isOverlapping(appointment1)); // Symmetric test
-
-        // 1 and 10 end at the same time, 1 is contained in 10
-        assertTrue(appointment1.isOverlapping(appointment10));
-        assertTrue(appointment10.isOverlapping(appointment1)); // Symmetric test
-
-        assertFalse(appointment1.isOverlapping(appointment11));
-        assertFalse(appointment11.isOverlapping(appointment1));
-        assertFalse(appointment1.isOverlapping(appointment12));
-        assertFalse(appointment12.isOverlapping(appointment1));
     }
 
     @Test
@@ -167,13 +132,15 @@ public class AppointmentTest {
         LocalDateTime startDate = LocalDateTime.parse("2022-02-11T12:30:00");
         Appointment appointment = new AppointmentBuilder().withName("Test Meeting")
                 .withStartDateTime(startDate).withDuration(20).withPerson(ALICE).build();
-        assertEquals(appointment.getName()
-                + "; Start Date Time: "
-                + appointment.getStartDateTime()
-                + "; Duration: "
-                + appointment.getDuration()
-                + "; Person: "
-                + appointment.getPerson(),
+
+        assertEquals("**Name:** "
+                        + appointment.getName()
+                        + "\n **Start Date Time:** "
+                        + appointment.getStartDateTimeObject()
+                        + "\n **Duration:** "
+                        + appointment.getDuration()
+                        + "\n **Person:** Alice Pauline"
+                        + "\n **Priority:** None",
                 appointment.toString());
     }
 
@@ -192,5 +159,15 @@ public class AppointmentTest {
         assertEquals(0, refAppointment.compareTo(appointmentDifferentSeconds));
         assertEquals(1, refAppointment.compareTo(appointmentBefore));
         assertEquals(-1, refAppointment.compareTo(appointmentAfter));
+    }
+
+    @Test
+    public void hasCodeTest() {
+        LocalDateTime startDate = LocalDateTime.parse("2022-02-11T12:30:00");
+        Appointment appointment = new AppointmentBuilder().withName("Test Meeting")
+                .withStartDateTime(startDate).withDuration(20).withPerson(ALICE).withPriority(Priority.HIGH).build();
+        assertEquals(appointment.hashCode(),
+                Objects.hash(appointment.getName(), appointment.getStartDateTime(),
+                        appointment.getDuration(), appointment.getPerson(), appointment.getPriority()));
     }
 }

@@ -129,8 +129,8 @@ public class CommandTestUtil {
     public static final String COMMAND_CSV_NEGATIVE_ADDRESSPOSITION = " " + PREFIX_ADDRESS + "-1";
     public static final String COMMAND_CSV_NEGATIVE_TAGPOSITION = " " + PREFIX_TAG + "-1";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

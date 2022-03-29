@@ -12,6 +12,7 @@ import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.testutil.AppointmentBuilder;
+import seedu.contax.testutil.ScheduleBuilder;
 
 public class JsonScheduleStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test",
@@ -66,15 +68,30 @@ public class JsonScheduleStorageTest {
     }
 
     @Test
-    public void readSchedule_invalidAppointment_throwDataConversionException() {
-        assertThrows(DataConversionException.class, ()
-            -> readSchedule("invalidAppointmentSchedule.json", GLOBAL_ADDRESSBOOK));
+    public void readSchedule_invalidAppointment_recordSkipped() throws Exception {
+        ReadOnlySchedule schedule =
+                readSchedule("invalidAppointmentSchedule.json", GLOBAL_ADDRESSBOOK).get();
+        assertEquals(0, schedule.getAppointmentList().size());
     }
 
     @Test
-    public void readAddressBook_invalidAndValidAppointment_throwDataConversionException() {
+    public void readAddressBook_invalidAndValidAppointment_recordSkipped() throws Exception {
+        ReadOnlySchedule schedule =
+                readSchedule("invalidAndValidAppointmentSchedule.json", GLOBAL_ADDRESSBOOK).get();
+        Appointment expectedAppointment = new AppointmentBuilder()
+                .withName("Valid appointment")
+                .withStartDateTime(LocalDateTime.parse("2022-11-11T12:34"))
+                .withDuration(10)
+                .build();
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(expectedAppointment).build();
+
+        assertEquals(schedule, expectedSchedule);
+    }
+
+    @Test
+    public void readSchedule_overlappingAppointment_throwsDataConversionException() {
         assertThrows(DataConversionException.class, ()
-            -> readSchedule("invalidAndValidAppointmentSchedule.json", GLOBAL_ADDRESSBOOK));
+            -> readSchedule("overlappingAppointmentSchedule.json", GLOBAL_ADDRESSBOOK));
     }
 
     @Test
@@ -100,7 +117,7 @@ public class JsonScheduleStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         Appointment edittedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.minusDays(1))
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().minusDays(1))
                 .withName("Different Meeting").build();
         original.addAppointment(edittedAppointment);
         jsonScheduleStorage.saveSchedule(original, filePath);

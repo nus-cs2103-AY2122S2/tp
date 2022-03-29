@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.contax.model.person.Address;
 import seedu.contax.model.person.Email;
 import seedu.contax.model.person.Name;

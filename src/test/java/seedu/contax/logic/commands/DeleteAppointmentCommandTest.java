@@ -33,7 +33,7 @@ public class DeleteAppointmentCommandTest {
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(0);
         DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(Index.fromZeroBased(0));
 
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_SUCCESS,
                 appointmentToDelete);
 
         ModelManager expectedModel = new ModelManager(new AddressBook(), model.getSchedule(), new UserPrefs());
@@ -49,7 +49,7 @@ public class DeleteAppointmentCommandTest {
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(0);
         DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(Index.fromZeroBased(0));
 
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_SUCCESS,
                 appointmentToDelete);
 
         ModelManager expectedModel = new ModelManager(new AddressBook(), model.getSchedule(), new UserPrefs());

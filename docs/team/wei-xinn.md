@@ -11,13 +11,12 @@ ContacX will allow for efficient management of a large list of contacts, allowin
 
 Given below are my contributions to the project.
 
-* **New Feature**: Onboarding guide for new users
-  * What it does: `To be added soon`
-  * Justification: `To be added soon`
-  * Highlights: `To be added soon`
-  * Credits: `To be added soon`
+* **New Feature**: Onboarding Guide for new users
+  * What it does: Provides a step-by-step guide for new users to learn the basic functions of ContaX
+  * Justification: ContaX's extensive feature set may set a learning curve for new users. The Onboarding guide serves as starting point for new users by introducing the basic functions in a manner that is simple to understand.
 
-* **Code contributed**: `to be added soon`
+* **Code contributed**:
+  * Functionality, documentation and tests for Onboarding Guide
 
 * **Project management**:
   * `to be added soon`
@@ -27,9 +26,9 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * `to be added soon`
+    * Added documentation for onboarding guide
   * Developer Guide:
-    * `to be added soon`
+    * Added documentation on the implementation of onboarding guide
 
 * **Community**:
   * `to be added soon`

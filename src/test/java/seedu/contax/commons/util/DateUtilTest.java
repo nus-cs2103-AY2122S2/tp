@@ -16,18 +16,20 @@ import org.junit.jupiter.api.Test;
 public class DateUtilTest {
     @Test
     public void parseDateTest() {
+        // Rigorous testing is done in DateParserTest.
         assertThrows(NullPointerException.class, () -> DateUtil.parseDate(null));
         assertEquals(Optional.empty(), DateUtil.parseDate("32-10-2022")); // Invalid Day
-        assertEquals(Optional.empty(), DateUtil.parseDate("0-10-2022")); // Invalid Day
-        assertEquals(Optional.empty(), DateUtil.parseDate("ab-10-2022")); // Invalid Day
         assertEquals(Optional.empty(), DateUtil.parseDate("20-13-2022")); // Invalid Month
         assertEquals(Optional.empty(), DateUtil.parseDate("20-0-2022")); // Invalid Month
-        assertEquals(Optional.empty(), DateUtil.parseDate("20-ab-2022")); // Invalid Month
-        assertEquals(Optional.empty(), DateUtil.parseDate("20-10-abcd")); // Invalid Year
-        assertEquals(Optional.empty(), DateUtil.parseDate("20-10-212")); // Invalid Year
+        assertEquals(Optional.empty(), DateUtil.parseDate("20-10-abc")); // Invalid Year
 
+        // Successful parsing
         assertEquals(LocalDate.parse("2022-10-20"), DateUtil.parseDate("20-10-2022").get());
-        assertEquals(LocalDate.parse("1971-03-30"), DateUtil.parseDate("30-03-1971").get());
+
+        // Different delimiters
+        assertEquals(LocalDate.parse("1971-03-30"), DateUtil.parseDate("30/03/1971").get());
+        assertEquals(LocalDate.parse("1971-03-30"), DateUtil.parseDate("30/03-1971").get());
+        assertEquals(LocalDate.parse("1971-03-30"), DateUtil.parseDate("30-03/1971").get());
     }
 
     @Test

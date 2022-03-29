@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.contax.logic.commands.AddAppointmentCommand;
-import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.AddPersonCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
 import seedu.contax.logic.commands.BatchCommand;
@@ -15,19 +15,22 @@ import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
-import seedu.contax.logic.commands.DeleteCommand;
+import seedu.contax.logic.commands.DeletePersonCommand;
 import seedu.contax.logic.commands.DeleteTagCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand;
-import seedu.contax.logic.commands.EditCommand;
+import seedu.contax.logic.commands.EditPersonCommand;
+import seedu.contax.logic.commands.EditPriorityCommand;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
+import seedu.contax.logic.commands.FindAppointmentCommand;
 import seedu.contax.logic.commands.FindByTagCommand;
-import seedu.contax.logic.commands.FindCommand;
+import seedu.contax.logic.commands.FindPersonCommand;
+import seedu.contax.logic.commands.FreeBetweenCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
-import seedu.contax.logic.commands.ListCommand;
+import seedu.contax.logic.commands.ListPersonCommand;
 import seedu.contax.logic.commands.ListTagCommand;
 import seedu.contax.logic.commands.RangeCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
@@ -59,26 +62,26 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddPersonCommand.COMMAND_WORD:
+            return new AddPersonCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditPersonCommand.COMMAND_WORD:
+            return new EditPersonCommandParser().parse(arguments);
 
         case RangeCommand.COMMAND_WORD:
             return new RangeCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeletePersonCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPersonCommand.COMMAND_WORD:
+            return new FindPersonCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListPersonCommand.COMMAND_WORD:
+            return new ListPersonCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -110,6 +113,12 @@ public class AddressBookParser {
         case AppointmentsBetweenCommand.COMMAND_WORD:
             return new AppointmentsBetweenCommandParser().parse(arguments);
 
+        case FreeBetweenCommand.COMMAND_WORD:
+            return new FreeBetweenCommandParser().parse(arguments);
+
+        case EditPriorityCommand.COMMAND_WORD:
+            return new EditPriorityCommandParser().parse(arguments);
+
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
@@ -126,6 +135,9 @@ public class AddressBookParser {
         case FindByTagCommand.COMMAND_WORD:
             return new FindByTagCommandParser().parse(arguments);
 
+        case FindAppointmentCommand.COMMAND_WORD:
+            return new FindAppointmentCommandParser().parse(arguments);
+
         // Command chaining
         case ChainCommand.COMMAND_WORD:
             return new ChainCommandParser().parse(arguments);
@@ -133,7 +145,6 @@ public class AddressBookParser {
         // Batch Command
         case BatchCommand.COMMAND_WORD:
             return new BatchCommandParser().parse(arguments);
-
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

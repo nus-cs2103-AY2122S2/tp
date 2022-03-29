@@ -34,8 +34,8 @@ public class AppointmentUtil {
         StringBuilder sb = new StringBuilder();
 
         sb.append(PREFIX_NAME + appointment.getName().name + " ");
-        sb.append(PREFIX_DATE + appointment.getStartDateTime().value.format(dateFormatter) + " ");
-        sb.append(PREFIX_TIME + appointment.getStartDateTime().value.format(timeFormatter) + " ");
+        sb.append(PREFIX_DATE + appointment.getStartDateTime().format(dateFormatter) + " ");
+        sb.append(PREFIX_TIME + appointment.getStartDateTime().format(timeFormatter) + " ");
         sb.append(PREFIX_DURATION + String.valueOf(appointment.getDuration().value) + " ");
         if (appointment.getPerson() != null) {
             sb.append(PREFIX_PERSON

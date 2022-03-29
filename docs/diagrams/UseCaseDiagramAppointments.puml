@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+!include style.puml
+
+:User: as User USER_COLOR
+package ContaX {
+package {
+    (List all Appointments) as (UC11)
+    (Find Appointments) as (UC15)
+    (Find Schedule Slots) as (UC16)
+}
+
+package {
+    (Delete Appointment) as (UC13)
+    (Edit Appointment) as (UC14)
+    (Edit Appointment Priority) as (UC17)
+}
+(Add Appointment) as (UC12)
+
+}
+
+UC13 ---[hidden]right- UC11
+UC14 ---[hidden]right- UC15
+UC16 ---[hidden]right- UC17
+
+UC13 -[hidden]down- UC14
+UC14 -[hidden]down- UC17
+
+UC11 -[hidden]down- UC15
+UC15 -[hidden]down- UC16
+
+UC13 ..left.> UC11 : <<include>>
+UC13 ..left.> UC15 : <<include>>
+UC13 ..left.> UC16 : <<include>>
+UC14 ..left.> UC11 : <<include>>
+UC14 ..left.> UC15 : <<include>>
+UC14 ..left.> UC16 : <<include>>
+UC17 ..left.> UC11 : <<include>>
+UC17 ..left.> UC15 : <<include>>
+UC17 ..left.> UC16 : <<include>>
+
+User ---> UC11
+User --> UC12
+User --> UC13
+User ---> UC14
+User ---> UC15
+User ---> UC16
+User ---> UC17
+
+
+UC14 -[hidden]down- UC15
+
+@enduml

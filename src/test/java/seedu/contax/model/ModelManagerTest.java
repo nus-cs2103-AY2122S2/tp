@@ -21,13 +21,20 @@ import static seedu.contax.testutil.TypicalTags.FAMILY;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.model.tag.exceptions.TagNotFoundException;
@@ -155,7 +162,8 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
         modelManager.addPerson(BOB);
         modelManager.addAppointment(APPOINTMENT_ALICE);
-        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        modelManager.addAppointment(APPOINTMENT_ALONE);
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_EXTRA).withPerson(BOB).build();
         modelManager.addAppointment(appointment2);
 
         modelManager.deletePerson(ALICE);
@@ -163,6 +171,7 @@ public class ModelManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(APPOINTMENT_ALONE);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(null).build());
         expectedModel.addAppointment(appointment2);
         assertEquals(expectedModel, modelManager);
@@ -198,8 +207,9 @@ public class ModelManagerTest {
     public void setPerson_personInAddressBookHasAppointments_success() {
         modelManager.addPerson(ALICE);
         modelManager.addPerson(BOB);
+        modelManager.addAppointment(APPOINTMENT_ALONE);
         modelManager.addAppointment(APPOINTMENT_ALICE);
-        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_EXTRA).withPerson(BOB).build();
         modelManager.addAppointment(appointment2);
 
         modelManager.setPerson(ALICE, CARL);
@@ -208,6 +218,7 @@ public class ModelManagerTest {
         expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(CARL);
         expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(APPOINTMENT_ALONE);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(CARL).build());
         expectedModel.addAppointment(appointment2);
         assertEquals(expectedModel, modelManager);
@@ -355,6 +366,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getScheduleItemList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, ()
+            -> modelManager.getScheduleItemList().remove(0));
+    }
+
+    @Test
     public void updateFilteredAppointmentList_predicateChange_throwsUnsupportedOperationException() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
         modelManager.addAppointment(APPOINTMENT_ALONE);
@@ -363,6 +380,43 @@ public class ModelManagerTest {
         modelManager.updateFilteredAppointmentList(appointment -> !appointment.equals(APPOINTMENT_ALONE));
         assertEquals(APPOINTMENT_EXTRA, modelManager.getFilteredAppointmentList().get(0));
         assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(1));
+    }
+
+    @Test
+    public void setDisplayedAppointmentSlots_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setDisplayedAppointmentSlotRange(null, 1));
+    }
+
+    @Test
+    public void setDisplayedAppointmentSlots_validTimeRange_success() {
+        List<AppointmentSlot> sampleSlots = List.of(
+                new AppointmentSlot(new TimeRange(
+                        LocalDate.of(2022, 5, 3).atTime(10, 59),
+                        LocalDate.of(2022, 5, 3).atTime(12, 0))
+                ),
+                new AppointmentSlot(new TimeRange(
+                        LocalDate.of(2022, 5, 3).atTime(12, 30),
+                        LocalDate.of(2022, 5, 3).atTime(14, 0))
+                )
+        );
+        modelManager.addAppointment(new AppointmentBuilder().withName("Test 1")
+                .withStartDateTime(LocalDateTime.of(2022, 5, 3, 12, 0))
+                .withDuration(30).build()
+        );
+        modelManager.addAppointment(new AppointmentBuilder().withName("Test 2")
+                .withStartDateTime(LocalDateTime.of(2022, 5, 3, 14, 0))
+                .withDuration(60).build()
+        );
+
+        assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
+        modelManager.setDisplayedAppointmentSlotRange(
+                new TimeRange(
+                        LocalDate.of(2022, 5, 3).atTime(10, 59),
+                        LocalDate.of(2022, 5, 3).atTime(15, 0)
+                ), 61);
+        assertEquals(sampleSlots, modelManager.getDisplayedAppointmentSlots());
+        modelManager.clearDisplayedAppointmentSlots();
+        assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
     }
 
     @Test
@@ -410,5 +464,14 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, schedule, differentUserPrefs)));
+
+        // different displayedAppointmentSlots -> returns false
+        ObservableList<AppointmentSlot> differentAppointmentSlots = FXCollections.observableArrayList(
+                new AppointmentSlot(new TimeRange(LocalDateTime.MIN, LocalDateTime.MAX))
+        );
+        ModelManager differentModelManager = new ModelManager();
+        differentModelManager.setDisplayedAppointmentSlotRange(new TimeRange(LocalDateTime.MIN,
+                LocalDateTime.MAX), 1);
+        assertFalse(modelManager.equals(differentModelManager));
     }
 }

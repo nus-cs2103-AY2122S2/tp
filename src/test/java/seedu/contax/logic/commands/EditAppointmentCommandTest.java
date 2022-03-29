@@ -114,14 +114,14 @@ public class EditAppointmentCommandTest {
     public void execute_overlappingAppointment_failure() {
         Index targetIndex = Index.fromOneBased(1);
         Appointment firstAppointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
-        LocalTime modifiedOverlappingTime = firstAppointment.getStartDateTime().value.toLocalTime()
+        LocalTime modifiedOverlappingTime = firstAppointment.getStartDateTime().toLocalTime()
                 .minusMinutes(1);
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(firstAppointment)
                 .withStartTime(DateInputUtil.formatTimeToInputString(modifiedOverlappingTime))
                 .build();
         EditAppointmentCommand editCommand = new EditAppointmentCommand(Index.fromOneBased(2), descriptor);
 
-        assertCommandFailure(editCommand, model, EditAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_APPOINTMENTS_OVERLAPPING);
     }
 
     @Test
@@ -132,14 +132,14 @@ public class EditAppointmentCommandTest {
 
         Index targetIndex = Index.fromOneBased(1);
         Appointment firstAppointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
-        LocalTime modifiedOverlappingTime = firstAppointment.getStartDateTime().value.toLocalTime()
+        LocalTime modifiedOverlappingTime = firstAppointment.getStartDateTime().toLocalTime()
                 .minusMinutes(1);
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(firstAppointment)
                 .withStartTime(DateInputUtil.formatTimeToInputString(modifiedOverlappingTime))
                 .build();
         EditAppointmentCommand editCommand = new EditAppointmentCommand(Index.fromOneBased(2), descriptor);
 
-        assertCommandFailure(editCommand, model, EditAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_APPOINTMENTS_OVERLAPPING);
     }
 
     @Test

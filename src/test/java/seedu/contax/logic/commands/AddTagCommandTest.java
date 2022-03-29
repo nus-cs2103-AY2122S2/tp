@@ -23,6 +23,9 @@ import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.TagBuilder;
@@ -186,7 +189,27 @@ class AddTagCommandTest {
         }
 
         @Override
-        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ScheduleItem> getScheduleItemList() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -152,7 +155,7 @@ public interface Model {
 
     /**
      * Returns true if an overlapping {@code appointment} exists in the schedule.
-     * See {@link Appointment#isOverlapping(Appointment)} for the overlap checking logic.
+     * See {@link Appointment#isOverlapping(ScheduleItem)} for the overlap checking logic.
      */
     boolean hasOverlappingAppointment(Appointment appointment);
 
@@ -176,13 +179,34 @@ public interface Model {
      */
     void setAppointment(Appointment target, Appointment editedAppointment);
 
-    /** Returns an unmodifiable view of the filtered appointment list */
+    /** Returns an unmodifiable view of the filtered appointment list. */
     ObservableList<Appointment> getFilteredAppointmentList();
 
     /**
      * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+    void updateFilteredAppointmentList(Predicate<? super Appointment> predicate);
+
+    /** Returns an unmodifiable view of the slots between appointments to be highlighted. */
+    ObservableList<AppointmentSlot> getDisplayedAppointmentSlots();
+
+    /**
+     * Sets the list of slots between appointments to highlight.
+     *
+     * @param range The time range between which slots in the schedule should be displayed.
+     * @param minimumDuration The minimum duration of a slot for it to be displayed.
+     */
+    void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration);
+
+    /**
+     * Clears all the highlighted empty slots in the Schedule.
+     */
+    void clearDisplayedAppointmentSlots();
+
+    /**
+     * Returns a list of {@code ScheduleItems} currently in the Schedule.
+     */
+    ObservableList<ScheduleItem> getScheduleItemList();
 
 }

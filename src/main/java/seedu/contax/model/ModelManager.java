@@ -14,6 +14,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -29,6 +32,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Appointment> filteredAppointments;
     private final FilteredList<Tag> filteredTags;
+
+    private final AppointmentSlotList displayedAppointmentSlots;
+    private final CompositeObservableList<ScheduleItem> scheduleItemList;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -47,6 +53,9 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+        displayedAppointmentSlots = new AppointmentSlotList(this.schedule);
+        scheduleItemList = new CompositeObservableList<>(filteredAppointments,
+                displayedAppointmentSlots.getSlotList());
     }
 
     /**
@@ -129,7 +138,7 @@ public class ModelManager implements Model {
         // any modification to the list.
         List<Appointment> oldAppointments = new ArrayList<>(
                 schedule.getAppointmentList()
-                        .filtered(appointment -> appointment.getPerson().equals(target)));
+                        .filtered(appointment -> target.equals(appointment.getPerson())));
         oldAppointments.forEach(appointment -> {
             setAppointment(appointment, appointment.withPerson(null));
         });
@@ -152,7 +161,7 @@ public class ModelManager implements Model {
         // any modification to the list.
         List<Appointment> oldAppointments = new ArrayList<>(
                 schedule.getAppointmentList()
-                        .filtered(appointment -> appointment.getPerson().equals(target)));
+                        .filtered(appointment -> target.equals(appointment.getPerson())));
 
         oldAppointments.forEach(appointment -> {
             setAppointment(appointment, appointment.withPerson(editedPerson));
@@ -271,9 +280,32 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+    public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
+    }
+
+    //=========== Appointment Slot List Operations ===========================================================
+
+    @Override
+    public ObservableList<AppointmentSlot> getDisplayedAppointmentSlots() {
+        return displayedAppointmentSlots.getSlotList();
+    }
+
+    @Override
+    public void setDisplayedAppointmentSlotRange(TimeRange range, int minimumDuration) {
+        requireNonNull(range);
+        displayedAppointmentSlots.updateFilteredRange(range, minimumDuration);
+    }
+
+    @Override
+    public void clearDisplayedAppointmentSlots() {
+        displayedAppointmentSlots.updateFilteredRange(null, 0);
+    }
+
+    @Override
+    public ObservableList<ScheduleItem> getScheduleItemList() {
+        return this.scheduleItemList.getUnmodifiableList();
     }
 
     @Override
@@ -295,7 +327,8 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredAppointments.equals(other.filteredAppointments)
-                && filteredTags.equals(other.filteredTags);
+                && filteredTags.equals(other.filteredTags)
+                && displayedAppointmentSlots.equals(other.displayedAppointmentSlots);
     }
 
 }

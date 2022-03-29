@@ -8,8 +8,8 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.contax.logic.commands.AddCommand;
-import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.AddPersonCommand;
+import seedu.contax.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
@@ -22,7 +22,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddPersonCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

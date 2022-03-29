@@ -21,7 +21,7 @@ import seedu.contax.testutil.AppointmentBuilder;
 
 public class AppointmentsBetweenCommandTest {
 
-    private static final LocalDateTime BASE_DATE_TIME = APPOINTMENT_ALONE.getStartDateTime().value;
+    private static final LocalDateTime BASE_DATE_TIME = APPOINTMENT_ALONE.getStartDateTime();
     private static final Appointment APPOINTMENT1 = new AppointmentBuilder(APPOINTMENT_ALONE)
             .withStartDateTime(BASE_DATE_TIME).withDuration(30).build();
     private static final Appointment APPOINTMENT2 = new AppointmentBuilder(APPOINTMENT_ALONE)
@@ -115,6 +115,13 @@ public class AppointmentsBetweenCommandTest {
         assertEquals(List.of(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3, APPOINTMENT4),
                 copyModel.getFilteredAppointmentList());
 
+    }
+
+    @Test
+    public void execute_noUpperLimit_messageUpperLimitIsForever() {
+        assertTrue(new AppointmentsBetweenCommand(BASE_DATE_TIME, LocalDateTime.MAX)
+                .execute(new ModelManager()).getFeedbackToUser().contains("to "
+                        + AppointmentsBetweenCommand.PHRASE_NO_END_RANGE));
     }
 
     @Test

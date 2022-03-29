@@ -15,13 +15,13 @@ import seedu.contax.model.tag.Tag;
  */
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : Deletes the tag identified by tag name (case-insensitive).\n"
-            + "Deleting this tag will also remove contacts who have this tag.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD
+            + "` : **Deletes the tag identified by tag name (case-insensitive). "
+            + "Deleting this tag will also remove contacts who have this tag.**"
+            + "\nParameters: *INDEX (must be a positive integer)*\n"
+            + "Example: `" + COMMAND_WORD + " 1`";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: \n%s";
 
     private final Index targetIndex;
 

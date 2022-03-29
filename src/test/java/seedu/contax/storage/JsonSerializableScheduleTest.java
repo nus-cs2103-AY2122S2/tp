@@ -31,16 +31,17 @@ public class JsonSerializableScheduleTest {
     public void toModelType_typicalAppointmentsFile_success() throws Exception {
         JsonSerializableSchedule dataFromFile = JsonUtil.readJsonFile(TYPICAL_APPOINTMENTS_FILE,
                 JsonSerializableSchedule.class).get();
-        Schedule addressBookFromFile = dataFromFile.toModelType(GLOBAL_ADDRESSBOOK);
+        Schedule addressBookFromFile = dataFromFile.toModelType(GLOBAL_ADDRESSBOOK.getPersonList());
         Schedule typicalPersonsAddressBook = TypicalAppointments.getTypicalSchedule();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
     @Test
-    public void toModelType_invalidAppointmentFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidAppointmentFile_recordSkipped() throws Exception {
         JsonSerializableSchedule dataFromFile = JsonUtil.readJsonFile(INVALID_APPOINTMENT_FILE,
                 JsonSerializableSchedule.class).get();
-        assertThrows(IllegalValueException.class, () -> dataFromFile.toModelType(GLOBAL_ADDRESSBOOK));
+        Schedule schedule = dataFromFile.toModelType(GLOBAL_ADDRESSBOOK.getPersonList());
+        assertEquals(TypicalAppointments.getTypicalSchedule(), schedule);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class JsonSerializableScheduleTest {
         JsonSerializableSchedule dataFromFile = JsonUtil.readJsonFile(OVERLAPPING_APPOINTMENTS_FILE,
                 JsonSerializableSchedule.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableSchedule.MESSAGE_OVERLAPPING_APPOINTMENT, ()
-            -> dataFromFile.toModelType(GLOBAL_ADDRESSBOOK));
+            -> dataFromFile.toModelType(GLOBAL_ADDRESSBOOK.getPersonList()));
     }
 
 }

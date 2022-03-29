@@ -356,7 +356,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAndCreateNewCommand_returnsCommand() throws ParseException {
-        assertEquals("test 1  command",
+        assertEquals("test 1 command",
                 ParserUtil.parseAndCreateNewCommand("test command", "1"));
     }
     @Test

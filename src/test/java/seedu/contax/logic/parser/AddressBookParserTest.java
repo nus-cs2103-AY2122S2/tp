@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.AddAppointmentCommand;
-import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.AddPersonCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
 import seedu.contax.logic.commands.BatchCommand;
@@ -25,22 +26,25 @@ import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
-import seedu.contax.logic.commands.DeleteCommand;
+import seedu.contax.logic.commands.DeletePersonCommand;
 import seedu.contax.logic.commands.DeleteTagCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
-import seedu.contax.logic.commands.EditCommand;
-import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditPersonCommand;
+import seedu.contax.logic.commands.EditPersonCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditPriorityCommand;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
+import seedu.contax.logic.commands.FindAppointmentCommand;
 import seedu.contax.logic.commands.FindByTagCommand;
-import seedu.contax.logic.commands.FindCommand;
+import seedu.contax.logic.commands.FindPersonCommand;
+import seedu.contax.logic.commands.FreeBetweenCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
-import seedu.contax.logic.commands.ListCommand;
+import seedu.contax.logic.commands.ListPersonCommand;
 import seedu.contax.logic.commands.ListTagCommand;
 import seedu.contax.logic.commands.RangeCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
@@ -69,8 +73,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new AddPersonCommand(person), command);
     }
 
     @Test
@@ -81,18 +85,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
+                DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -104,9 +108,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findAppointment() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindAppointmentCommand command = (FindAppointmentCommand) parser.parseCommand(
+                FindAppointmentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindAppointmentCommand(new
+                seedu.contax.model.appointment.NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -117,8 +130,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD) instanceof ListPersonCommand);
+        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD + " 3") instanceof ListPersonCommand);
     }
 
     // Tag management commands
@@ -193,10 +206,19 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_appointmentsBetween() throws Exception {
-        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime();
         assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
                 + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
                 instanceof AppointmentsBetweenCommand);
+    }
+
+    @Test
+    public void parseCommand_freeBetween() throws Exception {
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime();
+        assertTrue(parser.parseCommand(FreeBetweenCommand.COMMAND_WORD
+                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50))
+                + " " + PREFIX_DURATION + "1")
+                instanceof FreeBetweenCommand);
     }
 
     //Import/Export csv tests
@@ -215,20 +237,26 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_chainCommand() throws Exception {
-        assertTrue(parser.parseCommand(ChainCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD
-                + " && " + ListCommand.COMMAND_WORD) instanceof ChainCommand);
+        assertTrue(parser.parseCommand(ChainCommand.COMMAND_WORD + " " + ListPersonCommand.COMMAND_WORD
+                + " && " + ListPersonCommand.COMMAND_WORD) instanceof ChainCommand);
     }
 
     @Test
     public void parseCommand_rangeCommand() throws Exception {
-        assertTrue(parser.parseCommand(RangeCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD
+        assertTrue(parser.parseCommand(RangeCommand.COMMAND_WORD + " " + DeletePersonCommand.COMMAND_WORD
                 + " from/1 to/2") instanceof RangeCommand);
     }
 
     @Test
     public void parseCommand_batchCommand() throws Exception {
-        assertTrue(parser.parseCommand(BatchCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD
+        assertTrue(parser.parseCommand(BatchCommand.COMMAND_WORD + " " + DeletePersonCommand.COMMAND_WORD
                 + " by/phone =/123") instanceof BatchCommand);
+    }
+
+    @Test
+    public void parseCommand_editPriorityCommand() throws Exception {
+        assertTrue(parser.parseCommand(EditPriorityCommand.COMMAND_WORD
+                + " 1 pri/high") instanceof EditPriorityCommand);
     }
 
     @Test

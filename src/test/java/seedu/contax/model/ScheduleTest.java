@@ -9,6 +9,7 @@ import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
+import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
@@ -85,7 +87,7 @@ public class ScheduleTest {
     public void resetData_withOverlappingAppointments_throwsOverlappingAppointmentException() {
         // Construct two appointments that have overlapping periods
         Appointment overlappingAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1))
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusMinutes(1))
                 .build();
         List<Appointment> newAppointments = Arrays.asList(APPOINTMENT_ALICE, overlappingAppointment);
         ScheduleStub newData = new ScheduleStub(newAppointments);
@@ -165,7 +167,7 @@ public class ScheduleTest {
         schedule.addAppointment(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusMinutes(1)).build();
 
         schedule.setAppointment(APPOINTMENT_ALICE, editedAppointment);
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(editedAppointment).build();
@@ -177,7 +179,7 @@ public class ScheduleTest {
         schedule.addAppointment(APPOINTMENT_ALICE);
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusYears(1)).build();
 
         schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(disjointAppointment).build();
@@ -188,7 +190,7 @@ public class ScheduleTest {
     public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusYears(1)).build();
         schedule.addAppointment(APPOINTMENT_ALICE);
         schedule.addAppointment(disjointAppointment);
 
@@ -212,6 +214,39 @@ public class ScheduleTest {
         schedule.addAppointment(APPOINTMENT_ALONE);
         schedule.removeAppointment(APPOINTMENT_ALONE);
         assertEquals(new Schedule(), schedule);
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_nullInputs_throwsNullPointerException() {
+        LocalDateTime dummyTime = LocalDateTime.parse("2022-12-12T12:30");
+        assertThrows(NullPointerException.class, ()
+            -> schedule.findSlotsBetweenAppointments(null, dummyTime, 1));
+        assertThrows(NullPointerException.class, ()
+            -> schedule.findSlotsBetweenAppointments(dummyTime, null, 1));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_validInputs_success() {
+        // This is an integration test, more thorough tests are performed in DisjointAppointmentListTest
+        LocalDateTime rangeStart = LocalDateTime.parse("2022-12-12T12:30");
+        LocalDateTime rangeEnd = LocalDateTime.parse("2022-12-12T14:30");
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        schedule.addAppointment(appointment1);
+        schedule.addAppointment(appointment2);
+
+        List<TimeRange> expectedList = List.of(new TimeRange(rangeStart, rangeEnd));
+
+        assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 120));
+        assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 60));
+        assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 1));
+        assertEquals(List.of(), schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 121));
     }
 
     @Test
@@ -253,6 +288,22 @@ public class ScheduleTest {
         @Override
         public ObservableList<Appointment> getAppointmentList() {
             return appointments;
+        }
+
+        @Override
+        public boolean hasOverlappingAppointment(Appointment target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAppointment(Appointment target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                            int minimumDuration) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

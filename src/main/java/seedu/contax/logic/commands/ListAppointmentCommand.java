@@ -11,7 +11,7 @@ import seedu.contax.model.Model;
  */
 public class ListAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "listappointments";
+    public static final String COMMAND_WORD = "listappt";
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";
 
@@ -20,6 +20,7 @@ public class ListAppointmentCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        model.clearDisplayedAppointmentSlots();
         return new CommandResult(MESSAGE_SUCCESS, GuiListContentType.APPOINTMENT);
     }
 }

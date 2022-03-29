@@ -1,19 +1,9 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
-}
-
-#copyButton {
-    -fx-background-color: dimgray;
-}
-
-#copyButton:hover {
-    -fx-background-color: gray;
-}
-
-#copyButton:armed {
-    -fx-background-color: darkgray;
-}
-
-#helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+.button {
+    -fx-background-color: #555555;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-border-color: #555555;
+    -fx-border-radius: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }

@@ -1,0 +1,23 @@
+@startuml
+!include ../style.puml
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Schedule" as Schedule MODEL_COLOR
+participant ":DisjointAppointmentList" as DisjointAppointmentList MODEL_COLOR
+end box
+
+[-> Model : addAppointment(appointment)
+activate Model
+Model -> Schedule : addAppointment(appointment)
+activate Schedule
+Schedule -> DisjointAppointmentList : add(appointment)
+activate DisjointAppointmentList
+deactivate DisjointAppointmentList
+Schedule <-- DisjointAppointmentList
+Model <-- Schedule
+deactivate Schedule
+[<-- Model
+deactivate Model
+
+@enduml
