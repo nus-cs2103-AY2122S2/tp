@@ -34,7 +34,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         Comparator<Candidate> sortComparator;
 
         switch (sortKey) {
-        case "applicationstatus":
+        case "as":
             sortComparator = Comparator.comparing(l -> l.getApplicationStatus().toString().toLowerCase());
             break;
         case "course":
@@ -43,7 +43,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         case "email":
             sortComparator = Comparator.comparing(l -> l.getEmail().toString().toLowerCase());
             break;
-        case "interviewstatus":
+        case "is":
             sortComparator = Comparator.comparing(l -> l.getInterviewStatus().toString().toLowerCase());
             break;
         case "phone":
@@ -52,10 +52,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         case "name":
             sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
             break;
-        case "seniority":
+        case "yr":
             sortComparator = Comparator.comparing(l -> l.getSeniority().toString().toLowerCase());
             break;
-        case "studentid":
+        case "id":
             sortComparator = Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
             break;
         default:

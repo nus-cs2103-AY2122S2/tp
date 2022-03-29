@@ -39,7 +39,7 @@ faster than traditional GUI applications.
 
     * **`delete 1`** : Deletes the first candidate in the system.
 
-    * **`find k/Jane f/name`** : Searches for all candidate with name containing “Jane/jane”.
+    * **`find k/Alex f/name`** : Searches for all candidate with name containing “jane" (case-insensitive).
 
     * **`sort s/name`** : Sorts all candidates by name in ascending alphabetical order (i.e. A-Z).
     
@@ -96,6 +96,16 @@ Commands that affect the display of information within each of these panels is d
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* The following table lists some common abbreviations used in `ATTRIBUTE_FIELD`s.
+
+| `ATTRIBUTE_FIELD` | Refers to           |
+|-------------------|---------------------|
+| `is`              | interview status    |
+| `as`              | application status  |
+| `yr`              | seniority           |
+| `avail`           | availability        |
+
 
 </div>
 
@@ -164,21 +174,26 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit format:**<br>
+**:information_source: Notes about the find format:**<br>
 
-`ATTRIBUTE_FIELD` can take on the following values
-`course`, `email`, `name`, `phone`, `candidate`, `studentid`
+`ATTRIBUTE_FIELD` can take on the following values 
+`as`, `course`, `email`, `is`, `name`, `phone`, `yr`, `id`, `all`, `avail`
+
+Note: 
+`yr` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
+`avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THUR` or `FRI`
 
 </div>
 
 * The keyword search is case-insensitive. e.g `hans` will match `Hans`
 * The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
 * The search will return a list of all candidates containing any of the specified keyword(s) in the specified attribute field.
-* For `f/candidate`, the search will find keywords across all attribute fields of the candidate records.
+* For `f/all`, the search will find keywords across all attribute fields of the candidate records.
 * Only full keywords will be matched
   e.g. `k/jane doe f/name` will not match candidates with name `jane koe` or just `jane`
 * Candidates matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
   e.g. `k/Jane k/Doe f/name` will return candidates with name e.g. `Jane Koe`, `John Doe`
+* If multiple `ATTRIBUTE_FIELD`s are provided, only the last field will be used.
 
 Examples:
 * `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`
@@ -187,7 +202,7 @@ Examples:
 
 ### Sorting candidates by attribute field: `sort`
 
-Returns a list of candidates sorted by the specified attribute field.
+Returns a list of candidates sorted by the specified attribute field in ascending order (A-Z, 0-9).
 
 Format: `sort s/ATTRIBUTE_FIELD`
 
@@ -196,7 +211,7 @@ Format: `sort s/ATTRIBUTE_FIELD`
 **:information_source: Notes about the edit format:**<br>
 
 `ATTRIBUTE_FIELD` can take on the following values
-`course`, `email`, `name`, `phone`, `candidate`, `studentid`
+`as`, `course`, `email`, `is`, `name`, `phone`, `yr`, `id`
 
 </div>
 
@@ -205,23 +220,46 @@ Format: `sort s/ATTRIBUTE_FIELD`
   (i.e. A-Z, 0-9) with regard to the specified attribute field.
 
 Examples:
-Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `studentid`).
-1. (`Ben`, `E23456789`)
-2. (`Alice`, `E0234567`)
-3. (`Charlie`, `E0123456`)
+Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `id`).
+1. (`Ben`, `A5588565L`)
+2. (`Alice`, `A2344567B`)
+3. (`Charlie`, `A0188565L`)
 
-* `sort s/name` returns candidates sorted by name in the following order:
-1. (`Alice`, `E0234567`)
-2. (`Ben`, `E23456789`)
-3. (`Charlie`, `E0123456`)
+`sort s/name` returns candidates sorted by name in the following order:
+1. (`Alice`, `A2344567B`)
+2. (`Ben`, `A5588565L`)
+3. (`Charlie`, `A0188565L`)
 
-* `sort s/studentid` returns candidates sorted by name in the following order:
-1. (`Charlie`, `E0123456`)
-2. (`Alice`, `E0234567`)
-3. (`Ben`, `E23456789`)
+`sort s/id` returns candidates sorted by name in the following order:
+1. (`Charlie`, `A0188565L`)
+2. (`Alice`, `A2344567B`)
+3. (`Ben`, `A5588565L`)
 
-### Viewing scheduled interviews `sort`
+### Viewing scheduled interviews `view`
 
+Returns the list of scheduled interviews within the specified time period.
+
+Format: `view TIME_PERIOD`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the edit format:**<br>
+
+`TIME_PERIOD` can take on the following values `all`, `today`, `week`, `month`
+
+</div>
+
+* The attribute field is case-insensitive. e.g. `ALL` is equivalent to `all`
+* Scheduled interviews are automatically sorted from earliest to latest
+
+Examples:
+
+| Example command | Expected Behaviour                                                               |
+|-----------------|----------------------------------------------------------------------------------|
+| `view all`      | returns all scheduled interviews still in system whether in the past or upcoming |
+| `view today`    | returns all scheduled interviews on the same date as the current time            |
+| `view week`     | returns all upcoming scheduled interviews within the next 7 days                 |
+| `view month`    | returns all upcoming scheduled interviews within the next month                  |
 
 ### Deleting a candidate : `delete`
 
@@ -334,8 +372,7 @@ If your changes to the data file makes its format invalid, TAlent Assistant™ w
 
 ## Command summary
 
-<<<<<<< HEAD
-Commands in this section have been organised based on the targeted expected behaviour.
+Commands in this section have been organised based on the expected scope of behaviour.
 
 ### Candidates List
 | Action     | Format, Examples                                                                                                                                                 |
@@ -352,14 +389,14 @@ Commands in this section have been organised based on the targeted expected beha
 | **Focus** | [[PLACEHOLDER]]  |
 
 ### Scheduled Interviews
-| Action                   | Format, Examples                                                                                          |
-|--------------------------|-----------------------------------------------------------------------------------------------------------|
-| **Schedule interview**   | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00`    |
-| **Reschedule interview** | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`              |
-| **Delete interview**     | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                           |
-| **View**                 | `view [TIME PERIOD]` <br> e.g., `view`, `view today`, `view week`, `view month`                           |
+| Action                        | Format, Examples                                                                                       |
+|-------------------------------|--------------------------------------------------------------------------------------------------------|
+| **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
+| **Reschedule interview**      | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`           |
+| **Delete interview**          | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                        |
+| **View scheduled interviews** | `view TIME PERIOD` <br> e.g., `view all`, `view today`                                                 |
 
-### Other Commands
+### Miscellaneous commands / Help
 | Action    | Format, Examples |
 |-----------|------------------|
 | **Clear** | `clear`          |

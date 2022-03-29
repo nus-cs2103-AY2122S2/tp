@@ -12,15 +12,8 @@ public class ViewCommandParserTest {
     private ViewCommandParser parser = new ViewCommandParser();
 
     @Test
-    public void parse_emptyArg_returnsViewCommand() throws ParseException {
-        assert (new ViewCommandParser().parse("     ")) != null;
-    }
-
-    @Test
     public void parse_validArgs_returnsViewCommand() throws ParseException {
-        assert (new ViewCommandParser().parse("   \t  ")) != null;
         assert (new ViewCommandParser().parse("   all  ")) != null;
-        assert(new ViewCommandParser().parse("")) != null;
         assert(new ViewCommandParser().parse("   today   ") != null);
     }
 
