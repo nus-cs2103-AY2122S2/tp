@@ -101,6 +101,20 @@ After adding:
 Notes:
 * Any tags are optional.
 
+### Adding a tag to a person: `addTag`
+
+Adds a tag to the specified person in ClientConnect.
+
+Format: `addTag INDEX TAG …​`
+
+Examples:
+* `addTag 3 friend of the family`
+* `addTag 2 owes money :p2`
+
+Notes:
+* Adds tag to the person at the specified `INDEX`.
+* Only one tag can be added at a time
+
 ### Listing all persons : `list`
 
 Displays all your clients in ClientConnect.
@@ -132,6 +146,22 @@ Notes:
 * You can look for a client’s index by using the `list` command.
 * At least one of the fields must be provided.
 * Existing values will be updated to the input values.
+
+
+### Editing a tag of a person: `editTag`
+
+Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect.
+
+Format: `editTag INDEX TAG_NUMBER TAG …​`
+
+Examples:
+* `editTag 3 1 friend of the family`
+* `editTag 2 3 owes money :p2`
+
+Notes:
+* Edits person at the specified `INDEX`.
+* Edits person's tag at the specified `TAG_NUMBER`.
+* Only one tag can be edited at a time.
 
 ### Locating persons by field: `find`
 
@@ -190,6 +220,21 @@ After `delete 2`:
 
 ![result after 'delete 2'](images/afterDeleteUG.png)
 
+### Deleting a tag of a person: `deleteTag`
+
+Deletes the specified tag of the specified person in ClientConnect.
+
+Format: `deleteTag INDEX TAG_NUMBER …​`
+
+Examples:
+* `deleteTag 3 1`
+* `deleteTag 2 3`
+
+Notes:
+* Deletes person at the specified `INDEX`.
+* Deletes person's tag at the specified `TAG_NUMBER`.
+* Only one tag can be deleted at a time.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -222,16 +267,19 @@ Format: `exit`
 
 ## Command summary
 
-| Action     | Format, Examples|
-|------------|------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 i/package1 t/friend t/colleague`|
- | **Delete** | `delete INDEX`<br> e.g., `delete 3`|
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
- | **Find**   | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`|
- | **Clip**    | `clip n/NAME`<br> e.g., `find n/John Doe`|
-| **List**   | `list`|
- | **Help**   | `help`|
- | **Exit**   | `exit`|
+| Action         | Format, Examples                                                                                                                                                                                    |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 i/package1 t/friend t/colleague` |
+| **Add Tag**    | `addTag INDEX TAG`<br> e.g., `addTag 3 owes money :p2`                                                                                                                                              |
+ | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
+| **Delete Tag** | `deleteTag INDEX TAG_NUMBER` <br> e.g.,`deleteTag 3 2`                                                                                                         |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                   |
+| **Edit Tag**   | `editTag INDEX TAG_NUMBER TAG`<br> e.g.,`edit 2 3 friend of family`                                                                                                                                 |
+| **Find**       | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                                                  |
+ | **Clip**       | `clip n/NAME`<br> e.g., `find n/John Doe`                                                                                                                                                           |
+| **List**       | `list`                                                                                                                                                                                              |
+ | **Help**       | `help`                                                                                                                                                                                              |
+ | **Exit**       | `exit`                                                                                                                                                                                              |
 
 Fields:
 * `n/`: name
