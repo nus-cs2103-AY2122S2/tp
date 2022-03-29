@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
+import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.consultations.AddConsultationCommandParser;
 import seedu.address.logic.parser.consultations.DeleteConsultationCommandParser;
 import seedu.address.logic.parser.consultations.EditConsultationCommandParser;
@@ -18,19 +19,21 @@ import seedu.address.logic.parser.medical.EditMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
+import seedu.address.logic.parser.prescription.EditPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
 import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
 import seedu.address.logic.parser.testresult.EditTestResultCommandParser;
+import seedu.address.logic.parser.testresult.FindTestResultCommandParser;
 import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
-
 public enum CommandType {
-    DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST;
+    DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST, SUMMARY;
 
     public static final String MESSAGE_CONSTRAINTS = "Command type should be either contact, medical, "
             + "consultation, prescription or test";
     private static CommandType viewCommandType = DEFAULT;
+
     private static String getFirstPrefixType(String text) {
         int index = text.indexOf(' ');
         if (index > -1) { // Check if there is more than one word.
@@ -145,7 +148,7 @@ public enum CommandType {
         case CONSULTATION:
             return new EditConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
-            throw new ParseException("To be implemented");
+            return new EditPrescriptionCommandParser().parse(arguments);
         case TEST:
             return new EditTestResultCommandParser().parse(arguments);
         default:
@@ -174,6 +177,30 @@ public enum CommandType {
             return new DeleteTestResultCommandParser().parse(arguments);
         default:
             return new DeleteCommandParser().parse(arguments);
+        }
+    }
+
+    /**
+     * Returns command related to finding information of patients in MedBook.
+     *
+     * @param arguments user input arguments
+     * @return the command based on the user input
+     */
+    public static Command parseFindCommandType(String arguments) throws ParseException {
+        requireNonNull(arguments);
+        switch (viewCommandType) {
+        case CONTACT:
+            throw new ParseException("To be implemented");
+        case MEDICAL:
+            throw new ParseException("To be implemented");
+        case CONSULTATION:
+            throw new ParseException("To be implemented");
+        case PRESCRIPTION:
+            throw new ParseException("To be implemented");
+        case TEST:
+            return new FindTestResultCommandParser().parse(arguments);
+        default:
+            return new FindCommandParser().parse(arguments);
         }
     }
 }

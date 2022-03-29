@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -51,6 +52,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        ViewedNric.setViewedNric(ownerNric);
         Contact contact = new Contact(ownerNric, name, phone, email, address, tagList);
 
         return new AddContactCommand(ownerNric, contact);
@@ -60,7 +62,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 

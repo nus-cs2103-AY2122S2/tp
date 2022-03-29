@@ -17,6 +17,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.logic.commands.medical.AddMedicalCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -88,9 +89,9 @@ public class AddMedicalCommandParser implements Parser<AddMedicalCommand> {
                 argMultimap.getValue(PREFIX_GENDER).orElse(EMPTY_PLACEHOLDER));
         Ethnicity ethnicity = ParserUtil.parseEthnicity(
                 argMultimap.getValue(PREFIX_ETHNICITY).orElse(EMPTY_PLACEHOLDER));
-
         Medical medical = new Medical(patientNric, age, bloodtype, medication, height, weight, illnesses, surgeries,
                 familyHistory, immunizationHistory, gender, ethnicity);
+        ViewedNric.setViewedNric(patientNric);
 
         return new AddMedicalCommand(patientNric, medical);
     }

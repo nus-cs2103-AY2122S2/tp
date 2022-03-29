@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.logic.commands.testresult.ViewTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -31,9 +32,10 @@ public class ViewTestResultCommandParser {
                     ViewTestResultCommand.MESSAGE_USAGE));
         }
 
-        Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        Nric patientNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        ViewedNric.setViewedNric(patientNric);
 
-        return new ViewTestResultCommand(ownerNric);
+        return new ViewTestResultCommand(patientNric);
     }
 
     /**
