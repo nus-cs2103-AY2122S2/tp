@@ -29,10 +29,19 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         BatchType batchType = BatchType.EQUALS;
         String searchType;
 
+        int emptyCounter = 0;
+        if (argMultimap.getValue(PREFIX_EQUALS).isEmpty()) {
+            emptyCounter ++;
+        }
+        if (argMultimap.getValue(PREFIX_START_WITH).isEmpty()) {
+            emptyCounter ++;
+        }
+        if (argMultimap.getValue(PREFIX_END_WITH).isEmpty()) {
+            emptyCounter ++;
+        }
+
         if (argMultimap.getValue(PREFIX_SEARCH_TYPE).isEmpty() || argMultimap.getPreamble().isEmpty()
-            || (argMultimap.getValue(PREFIX_EQUALS).isEmpty()
-                && argMultimap.getValue(PREFIX_START_WITH).isEmpty()
-                && argMultimap.getValue(PREFIX_END_WITH).isEmpty())) {
+            || (emptyCounter != 2)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchCommand.MESSAGE_USAGE));
         }

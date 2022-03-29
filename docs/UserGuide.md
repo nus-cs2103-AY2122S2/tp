@@ -431,7 +431,6 @@ Examples:
 * `prioritizeappt 6 pri/high` Edits the *6th* appointment priority level in the list of appointments to have a status of *high*.
 * `prioritizeappt 2 pri/none` Removes the *second* appointment priority and set status to *none*.
 
-
 **Example Output:**
 
 ![Prioritize Appointments](images/Prioritizeappt.png)
@@ -530,16 +529,16 @@ Format: `batch COMMAND by/FIELD [=/EQUALS_VALUE] [start/START_WITH] [end/END_WIT
   * `Address`
   * `Phone`
   * `Email`
+* Exactly one parameter of `EQUALS_VALUE` `START_WITH` or `END_WITH` must be provided.
 * A `EQUALS_VALUE` is value matching the exact value in the target field.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * If this value is provided, `START_WITH` and `END_WITH` will be ignored.
 * A `START_WITH` is value matching the value in the target field with specific starting value.
 * A `END_WITH` is value matching the value in the target field with specific ending value.
 
 Examples:
-* `batch delete by/name start/A`
+* `batch deleteperson by/name start/A`
   * Deletes all persons whose name start with A (case-sensitive)
-* `batch edit p/87438806 by/phone =/87438807 `
+* `batch editpersonp/87438806 by/phone =/87438807 `
   * Edit contact with phone matches keyword 87438807 change to 87438806
 
 ### Operate on Contacts within Range : `range`
@@ -552,14 +551,14 @@ Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 * `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
   * edit
   * delete
-* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the index number shown in the **displayed contact list**.
-* `INDEX_FROM` must be less than `INDEX_TO` must be supplied, otherwise the command will perform no operation.
+* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the index number shown in the **displayed person list**.
+* `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will throw error.
 * The resultant effect of the command is dependent on the performed action.
 
 Examples:
-* `range edit e/johndoe@example.com from/6 to/10`
+* `range editpersone/johndoe@example.com from/6 to/10`
   * Sets the email address of the 6th to 10th contacts in the address book to `johndoe@example.com`.
-* `range delete from/2 to/3`
+* `range deleteperson from/2 to/3`
   * Deletes the 2nd and 3rd contacts in the address book.
 
 ### Chaining Commands: `chain`
@@ -618,7 +617,7 @@ Action | Format, Examples
 --------|------------------
 **Add Person** | `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Person** | `deleteperson INDEX`<br> e.g., `delete 3`
+**Delete Person** | `deleteperson INDEX`<br> e.g., `deleteperson 3`
 **Edit Person** | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editperson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `findperson James Jake by/name`
 **List Persons** | `listpersons`
@@ -637,6 +636,6 @@ Action | Format, Examples
 **Help** | `help`
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
-**Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
+**Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch editperson p/87438806 by/phone =/87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range editperson e/johndoe@example.com from/6 to/10`
 **Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappt 6 l/360 && listappt`

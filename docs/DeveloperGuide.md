@@ -359,12 +359,8 @@ However, this implementation comes with the increased risk of desynchronization 
 ### Edit Appointment Priority Feature - `prioritizeappt`
 
 The priority feature is similar to the edit for `Appointment` but specifically changes to the `Priority` enums.
-The `Priority` enums override the `Priority#toString()` method to convert enum to reader friendly values and have static `Priority#getFromDisplayName()` to convert case-insensitive `String` to `Priority` enums.
-The original `Appointment` also extended with additional attribute constructor priority, and set `Priority` by immutable `Appointment#withPriority()`.
-
-The calls of static method are received by Appointment and creation of new Appointment with `Priority` show as partial diagram below:
-
-![Priority Diagram](images/PrioritizeApptSequenceDiagram.png)
+The `Priority` enums handles convert enum to reader friendly feedback of priority level, and static `Priority#getFromDisplayName()` method to handle case-insensitive string to enum conversion.
+The original `Appointment` also extended with additional constructor with attribute priority, and set `Priority` is done by creating new appointment by method `Appointment#withPriority()` which keep its immutability.
 
 ### Date Time Input Parsing
 
