@@ -48,7 +48,7 @@ public class EditRoleCommand extends Command {
             + PREFIX_STATUS + "PENDING "
             + PREFIX_STIPEND + "3000";
 
-    public static final String MESSAGE_EDIT_ROLE_SUCCESS = "Edited Role: %1$s %1$s";
+    public static final String MESSAGE_EDIT_ROLE_SUCCESS = "Edited Role: %1$s";
     public static final String MESSAGE_DUPLICATE_ROLE = "This role already exists in the "
             + "company.";
 

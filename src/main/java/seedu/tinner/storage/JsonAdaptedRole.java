@@ -93,11 +93,19 @@ public class JsonAdaptedRole {
         }
         final ReminderDate roleReminderDate = new ReminderDate(reminderDate);
 
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
+        }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description roleDescription = new Description(description);
 
+        if (stipend == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Stipend.class.getSimpleName()));
+        }
         if (!Stipend.isValidStipend(stipend)) {
             throw new IllegalValueException(Stipend.MESSAGE_CONSTRAINTS);
         }

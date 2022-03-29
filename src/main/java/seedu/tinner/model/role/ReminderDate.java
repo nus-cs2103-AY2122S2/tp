@@ -69,8 +69,8 @@ public class ReminderDate {
         if (this.value == null) {
             return false;
         }
-        LocalDateTime oneWeekAway = LocalDateTime.now().plusDays(reminderWindow);
-        return !this.value.isBefore(LocalDateTime.now()) && oneWeekAway.isAfter(this.value);
+        LocalDateTime oneReminderWindowAway = LocalDateTime.now().plusDays(reminderWindow);
+        return !this.value.isBefore(LocalDateTime.now()) && oneReminderWindowAway.isAfter(this.value);
     }
 
     /**
