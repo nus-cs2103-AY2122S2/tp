@@ -28,6 +28,9 @@ public abstract class Command {
             this.messageUsage = messageUsage;
         }
 
+        /**
+         * Returns true if a given string is a valid command.
+         */
         public static boolean isValidCommand(String command) {
             for (CommandEnum commands : CommandEnum.values()) {
                 if (command.equals(commands.name())) {
