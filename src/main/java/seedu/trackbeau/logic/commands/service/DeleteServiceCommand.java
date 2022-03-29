@@ -37,6 +37,9 @@ public class DeleteServiceCommand extends Command {
         this.targetIndexes = targetIndexes;
     }
 
+    /**
+     * Returns a list of bookings affected by the deletion of Services.
+     */
     public ArrayList<Booking> bookingsToDelete(List<Service> lastShownServicesList,
                                                List<Booking> lastShownBookingsList) {
         ArrayList<Booking> bookingsToDelete = new ArrayList<>();
