@@ -73,8 +73,7 @@ public class ListPositionCommand extends ListCommand {
         } else if (sortArgument != null) {
             Comparator<Position> comparator = new PositionNameComparator(sortArgument.toString());
             model.updateSortPositionList(comparator);
-        }
-        else {
+        } else {
             model.updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
         }
 
