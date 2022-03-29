@@ -176,7 +176,7 @@ public class AddApplicantCommandTest {
 
         @Override
         public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
-            
+
         }
 
         @Override
