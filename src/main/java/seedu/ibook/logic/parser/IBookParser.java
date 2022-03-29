@@ -9,6 +9,7 @@ import seedu.ibook.logic.commands.AddCommand;
 import seedu.ibook.logic.commands.AddItemCommand;
 import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.Command;
+import seedu.ibook.logic.commands.DeleteAllCommand;
 import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.logic.commands.DeleteItemCommand;
 import seedu.ibook.logic.commands.ExitCommand;
@@ -16,8 +17,10 @@ import seedu.ibook.logic.commands.ExpiredCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.HelpCommand;
 import seedu.ibook.logic.commands.ListCommand;
+import seedu.ibook.logic.commands.OutOfStockCommand;
 import seedu.ibook.logic.commands.RedoCommand;
 import seedu.ibook.logic.commands.UndoCommand;
+import seedu.ibook.logic.commands.UpdateAllCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateItemCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -56,8 +59,14 @@ public class IBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteAllCommand.COMMAND_WORD:
+            return new DeleteAllCommand();
+
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommandParser().parse(arguments);
+
+        case UpdateAllCommand.COMMAND_WORD:
+            return new UpdateAllCommandParser().parse(arguments);
 
         case AddItemCommand.COMMAND_WORD:
             return new AddItemCommandParser().parse(arguments);
@@ -91,6 +100,9 @@ public class IBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case OutOfStockCommand.COMMAND_WORD:
+            return new OutOfStockCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

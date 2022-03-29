@@ -15,8 +15,7 @@ public class CommandBox extends UiComponent<HBox> {
     private TextField commandTextField;
 
     /**
-     * Creates a {@code CommandBox} with a {@code CommandExecutor}
-     * and a {@code popupAdd}.
+     * Creates a {@code CommandBox}.
      *
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
@@ -36,14 +35,6 @@ public class CommandBox extends UiComponent<HBox> {
 
         getMainWindow().executeCommand(commandText);
         commandTextField.setText("");
-    }
-
-    /**
-     * Handles the add product button clicked event.
-     */
-    @FXML
-    private void handleAddProductClicked() {
-        getMainWindow().showPopupAdd();
     }
 
 }

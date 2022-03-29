@@ -11,14 +11,19 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Represents a command that when executed deletes an item of a specified product in the iBook.
+ */
 public class DeleteItemCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-item";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the item identified by the index number used in the displayed list.\n"
-            + "Parameters: INDEX (must be a positive integer pair separated by '-')\n"
-            + "Example: " + COMMAND_WORD + " 1-1";
+            + "Parameters: INDEX (must be a positive integer pair separated by '"
+            + CompoundIndex.SEPARATOR
+            + "')\n"
+            + "Example: " + COMMAND_WORD + " 1" + CompoundIndex.SEPARATOR + "1";
 
     public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Item: %1$s";
 
