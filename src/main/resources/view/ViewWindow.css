@@ -3,16 +3,45 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-#studentName {
-    -fx-font-size: 16pt;
+#name {
+    -fx-font-size: 20px;
     -fx-font-family: "Segou UI Semibold";
     -fx-text-fill: #DDDDDD;
     -fx-font-weight: bold;
 }
 
-#labDetails {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segou UI Semibold";
+#email {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
     -fx-text-fill: #DDDDDD;
-    -fx-line-spacing: 8;
+}
+
+#github {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #DDDDDD;
+}
+
+#telegram {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #DDDDDD;
+}
+
+#studentId {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #DDDDDD;
+}
+
+#labs .label {
+    -fx-text-fill: white;
+    -fx-padding: 2 5 2 5;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-font-size: 12;
+}
+
+#labs .list-cell {
+    -fx-cell-size: 25;
 }

@@ -173,13 +173,11 @@ public class Lab {
      * Returns the details of a Lab in {@code String} format
      */
     public String getDetails() {
-        String description = "";
         if (labMark.isEmpty()) {
-            description = LabStatus.describe(labStatus);
+            return LabStatus.describe(labStatus);
         } else {
-            description = labMark.toString();
+            return "Marks: " + labMark.toString();
         }
-        return toString() + ": " + description;
     }
 
     @Override

@@ -60,7 +60,7 @@ public class StudentCard extends UiPart<Region> {
         email.setText("email: " + student.getEmail().value);
         github.setText("github: " + student.getGithubUsername().username);
         telegram.setText("telegram: " + student.getTelegram().handle);
-        studentId.setText("studentid: " + student.getStudentId().id);
+        studentId.setText("studentID: " + student.getStudentId().id);
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -16,7 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.ViewDetails;
+import seedu.address.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -149,8 +149,8 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    @FXML void handleView(ViewDetails viewDetails) {
-        ViewWindow viewWindow = new ViewWindow(viewDetails);
+    @FXML void handleView(Student student) {
+        ViewWindow viewWindow = new ViewWindow(student);
         viewWindow.show();
     }
 
@@ -190,7 +190,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isView()) {
-                handleView(commandResult.getViewDetails());
+                handleView(commandResult.getStudent());
             }
 
             if (commandResult.isExit()) {

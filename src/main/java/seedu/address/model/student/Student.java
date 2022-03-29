@@ -112,10 +112,6 @@ public class Student {
                 && otherStudent.getName().equals(getName());
     }
 
-    public ViewDetails getViewDetails() {
-        return new ViewDetails(this);
-    }
-
     /**
      * Returns true if both Students have the same identity and data fields.
      * This defines a stronger notion of equality between two Students.

@@ -7,7 +7,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -172,15 +171,6 @@ public class LabList implements Iterable<Lab> {
         }
 
         internalList.setAll(labs);
-    }
-
-    /**
-     * Returns a {@code List<String>} of the details for the {@code LabList} with line breaks
-     */
-    public List<String> getLabDetails() {
-        return internalList.stream()
-                .map(x -> x.getDetails() + "\n")
-                .collect(Collectors.toList());
     }
 
     /**

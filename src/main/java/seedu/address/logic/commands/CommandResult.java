@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 import java.util.Optional;
 
-import seedu.address.model.student.ViewDetails;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the result of a command execution.
@@ -29,17 +29,17 @@ public class CommandResult {
      */
     private final boolean view;
 
-    private final Optional<ViewDetails> viewDetails;
+    private final Optional<Student> student;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view, ViewDetails viewDetails) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view, Student student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.view = view;
-        this.viewDetails = Optional.ofNullable(viewDetails);
+        this.student = Optional.ofNullable(student);
     }
 
     /**
@@ -54,8 +54,8 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public ViewDetails getViewDetails() {
-        return viewDetails.orElseThrow(IllegalStateException::new);
+    public Student getStudent() {
+        return student.orElseThrow(IllegalStateException::new);
     }
 
     public boolean isShowHelp() {
@@ -86,12 +86,12 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && view == otherCommandResult.view
-                && viewDetails.equals(otherCommandResult.viewDetails);
+                && student.equals(otherCommandResult.student);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, view, viewDetails);
+        return Objects.hash(feedbackToUser, showHelp, exit, view, student);
     }
 
 }
