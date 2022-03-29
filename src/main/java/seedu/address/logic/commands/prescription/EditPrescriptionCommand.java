@@ -47,7 +47,7 @@ public class EditPrescriptionCommand extends Command {
     private final EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor;
 
     /**
-     * @param targetIndex of the test result information in the filtered test result information list to edit
+     * @param targetIndex of the prescription information in the filtered test result information list to edit
      * @param editPrescriptionDescriptor details to edit the test result information with
      */
     public EditPrescriptionCommand(Index targetIndex,
