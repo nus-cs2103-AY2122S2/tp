@@ -24,7 +24,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -99,7 +98,7 @@ public class EditCommand extends Command {
         Index targetIndex;
         if (index == 0) {
             FilteredList<Person> tempList = new FilteredList<Person>(lastShownList);
-            String[] nameKeywords = targetNameStr.split("\\s+");
+            String[] nameKeywords = {targetNameStr};
             Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
             tempList.setPredicate(predicate);
 
@@ -108,8 +107,7 @@ public class EditCommand extends Command {
                 return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
 
-            HustleBook tempHustleBook = new HustleBook();
-            targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
+            targetIndex = model.getPersonListIndex(targetName);
         } else {
             targetIndex = Index.fromOneBased(index);
         }
