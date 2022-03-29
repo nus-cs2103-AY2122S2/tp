@@ -214,6 +214,14 @@ public class ModelManager implements Model {
         filteredInterviews.setPredicate(predicate);
     }
 
+    @Override
+    public void updateSortInterviewList(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        SortedList<Interview> sortedList = new SortedList<>(filteredInterviews);
+        sortedList.setComparator(comparator);
+        filteredInterviews = new FilteredList<>(sortedList);
+    }
+
     //=========== Filtered Position List Accessors =============================================================
     @Override
     public ObservableList<Position> getFilteredPositionList() {
@@ -224,6 +232,14 @@ public class ModelManager implements Model {
     public void updateFilteredPositionList(Predicate<Position> predicate) {
         requireNonNull(predicate);
         filteredPositions.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortPositionList(Comparator<Position> comparator) {
+        requireNonNull(comparator);
+        SortedList<Position> sortedList = new SortedList<>(filteredPositions);
+        sortedList.setComparator(comparator);
+        filteredPositions = new FilteredList<>(sortedList);
     }
 
     //=========== Utility methods =============================================================

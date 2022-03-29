@@ -6,15 +6,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POSITIONS;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.DataType;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
+import seedu.address.logic.SortArgument;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.PositionNameComparator;
 import seedu.address.model.position.PositionNamePredicate;
 
 /**
@@ -34,6 +37,7 @@ public class ListPositionCommand extends ListCommand {
 
     private FilterType filterType;
     private FilterArgument filterArgument;
+    private SortArgument sortArgument;
 
     /**
      * Creates an ListPositionCommand to display all {@code Position}
@@ -41,6 +45,7 @@ public class ListPositionCommand extends ListCommand {
     public ListPositionCommand() {
         filterType = null;
         filterArgument = null;
+        sortArgument = null;
     }
 
     /**
@@ -49,6 +54,10 @@ public class ListPositionCommand extends ListCommand {
     public ListPositionCommand(FilterType filterType, FilterArgument filterArgument) {
         this.filterType = filterType;
         this.filterArgument = filterArgument;
+    }
+
+    public ListPositionCommand(SortArgument sortArgument) {
+        this.sortArgument = sortArgument;
     }
 
     @Override
@@ -61,7 +70,11 @@ public class ListPositionCommand extends ListCommand {
                 Predicate<Position> predicate = new PositionNamePredicate(Arrays.asList(nameKeywords));
                 model.updateFilteredPositionList(predicate);
             }
-        } else {
+        } else if (sortArgument != null) {
+            Comparator<Position> comparator = new PositionNameComparator(sortArgument.toString());
+            model.updateSortPositionList(comparator);
+        }
+        else {
             model.updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
         }
 

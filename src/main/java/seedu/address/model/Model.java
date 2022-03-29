@@ -166,4 +166,8 @@ public interface Model {
     ObservableList<Position> getFilteredPositionList();
 
     void updateSortApplicantList(Comparator<Applicant> comparator);
+
+    void updateSortInterviewList(Comparator<Interview> comparator);
+
+    void updateSortPositionList(Comparator<Position> comparator);
 }
