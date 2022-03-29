@@ -73,21 +73,21 @@ public class SampleDataUtil {
 
     public static Schedule[] getSampleSchedules() {
         return new Schedule[] {
-            new Schedule(new ScheduleName("Championship Match"),
-                new ScheduleDescription("Against Clippers LeGM needs to stop passing"),
-                new ScheduleDateTime("06/01/2022 1200")),
-            new Schedule(new ScheduleName("All star game"),
-                new ScheduleDescription("LBJ and KD participating"),
-                new ScheduleDateTime("02/01/2020 1200")),
-            new Schedule(new ScheduleName("Skills challenge"),
-                new ScheduleDescription("Practice for this"),
-                new ScheduleDateTime("18/01/2021 1200")),
-            new Schedule(new ScheduleName("Three point shoot out"),
-                new ScheduleDescription("Steph practice 3 pointer"),
-                new ScheduleDateTime("19/02/2020 1200")),
-            new Schedule(new ScheduleName("Free throw practice"),
-                new ScheduleDescription("Dwight needs to improve free throws"),
-                new ScheduleDateTime("19/06/2021 1200"))
+                new Schedule(new ScheduleName("Championship Match"),
+                        new ScheduleDescription("Against Clippers LeGM needs to stop passing"),
+                        new ScheduleDateTime("01/06/2020 1200")),
+                new Schedule(new ScheduleName("All star game"),
+                        new ScheduleDescription("LBJ and KD participating"),
+                        new ScheduleDateTime("01/02/2020 1200")),
+                new Schedule(new ScheduleName("Skills challenge"),
+                        new ScheduleDescription("Practice for this"),
+                        new ScheduleDateTime("18/01/2020 1200")),
+                new Schedule(new ScheduleName("Three point shoot out"),
+                        new ScheduleDescription("Steph practice 3 pointer"),
+                        new ScheduleDateTime("19/02/2020 1200")),
+                new Schedule(new ScheduleName("Free throw practice"),
+                        new ScheduleDescription("Dwight needs to improve free throws"),
+                        new ScheduleDateTime("19/06/2020 1200"))
         };
     }
 
