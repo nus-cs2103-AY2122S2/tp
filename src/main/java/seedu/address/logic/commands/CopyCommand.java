@@ -51,8 +51,9 @@ public class CopyCommand extends Command {
 
     /**
      * Constructor for copy command.
-     * @param index of the person in the filtered person list to edit
-     * @param prefixes details to copy the person with
+     *
+     * @param index            of the person in the filtered person list to edit
+     * @param prefixes         details to copy the person with
      * @param formatPersonUtil to format the person
      */
     public CopyCommand(Index index, List<Prefix> prefixes, FormatPersonUtil formatPersonUtil) {
@@ -67,7 +68,8 @@ public class CopyCommand extends Command {
 
     /**
      * Constructor for copy command
-     * @param prefixes details to copy the person with
+     *
+     * @param prefixes         details to copy the person with
      * @param formatPersonUtil to format the person
      */
     public CopyCommand(List<Prefix> prefixes, FormatPersonUtil formatPersonUtil) {
@@ -77,25 +79,6 @@ public class CopyCommand extends Command {
         this.index = null;
         this.prefixes = prefixes;
         this.formatPersonUtil = formatPersonUtil;
-    }
-
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof CopyCommand)) {
-            return false;
-        }
-
-        // state check
-        CopyCommand e = (CopyCommand) other;
-        return index.equals(e.index)
-                && prefixes.equals(e.prefixes);
     }
 
     @Override
@@ -128,4 +111,30 @@ public class CopyCommand extends Command {
         return new CommandResult(copiedFields, false, false, false, false, true);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CopyCommand)) {
+            return false;
+        }
+
+        // state check
+        CopyCommand e = (CopyCommand) other;
+
+        // check case of null in index
+        if (this.index == null) {
+            return e.index == null
+                    && prefixes.equals(e.prefixes)
+                    && formatPersonUtil.equals(e.formatPersonUtil);
+        }
+
+        return index.equals(e.index)
+                && prefixes.equals(e.prefixes)
+                && formatPersonUtil.equals(e.formatPersonUtil);
+    }
 }

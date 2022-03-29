@@ -25,10 +25,10 @@ class CopyCommandParserTest {
     private CopyCommandParser parser = new CopyCommandParser();
     private FormatPersonUtil fpCsv = new FormatPersonUtil(FormatPersonUtil.CSV_FORMAT);
     private List<Prefix> partialPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_PHONE,
-        PREFIX_EMAIL, PREFIX_ADDRESS);
+            PREFIX_EMAIL, PREFIX_ADDRESS);
 
     private List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_PHONE,
-        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE, PREFIX_COMMENT);
+            PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE, PREFIX_COMMENT);
 
     @Test
     public void parse_validArgs_person() {
@@ -44,8 +44,8 @@ class CopyCommandParserTest {
 
     @Test
     public void parse_validArgs_noPrefixes() {
-        CopyCommand correctCommand = new CopyCommand(INDEX_FIRST_PERSON, allPrefixes, fpCsv);
-        assertParseSuccess(parser, " 1 f/csv", correctCommand);
+        CopyCommand correctCommand = new CopyCommand(partialPrefixes, fpCsv);
+        assertParseSuccess(parser, " n/ p/ e/ a/ f/csv", correctCommand);
     }
 
     @Test
