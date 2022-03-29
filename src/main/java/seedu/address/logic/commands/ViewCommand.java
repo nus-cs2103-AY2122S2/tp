@@ -33,11 +33,6 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        CommandType.setViewCommandType(CommandType.DEFAULT);
-        ViewedNric.setViewedNric(null);
-        return new CommandResult(MESSAGE_SUCCESS);
-
 
         if (nric != null && !model.hasPerson(new NricPredicate(nric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
@@ -46,6 +41,7 @@ public class ViewCommand extends Command {
         if (nric == null) { // No nric specified, display all patients
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             CommandType.setViewCommandType(CommandType.DEFAULT);
+            ViewedNric.setViewedNric(null);
             return new CommandResult(MESSAGE_SUCCESS);
         } else { // Nric specified, display summary of patient with given NRIC
 
