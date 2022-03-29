@@ -6,7 +6,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -197,7 +199,15 @@ public class ModelManager implements Model {
     @Override
     public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
         requireNonNull(localDateTime);
-        interviewSchedule.deletePastInterviews(localDateTime);
+        List<Interview> list = interviewSchedule.deletePastInterviews(localDateTime);
+        int i = 0;
+        while (!list.isEmpty()) {
+            Candidate candidate = list.get(i).getCandidate();
+            logger.log(Level.INFO, candidate.toString());
+            setCandidate(candidate, candidate.triggerInterviewStatusCompleted());
+            list.remove(i);
+            i++;
+        }
     }
 
     @Override

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
@@ -67,6 +66,11 @@ public class UniqueInterviewList implements Iterable<Interview> {
         internalList.set(index, editedInterview);
     }
 
+    /**
+     * Replaces the interview {@code target} in the list with {@code editedInterview}, without checking for
+     * any conflicting interview as only the candidate field in the {@code editedInterview} is modified.
+     * {@code target} must exist in the schedule.
+     */
     public void updateInterviewCandidate (Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 

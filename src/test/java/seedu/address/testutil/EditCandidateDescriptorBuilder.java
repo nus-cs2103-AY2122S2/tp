@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand.EditCandidateDescriptor;
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Availability;
@@ -15,7 +11,6 @@ import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditCandidateDescriptor objects.
@@ -43,7 +38,6 @@ public class EditCandidateDescriptorBuilder {
         descriptor.setEmail(candidate.getEmail());
         descriptor.setCourse(candidate.getCourse());
         descriptor.setSeniority(candidate.getSeniority());
-        descriptor.setTags(candidate.getTags());
         descriptor.setApplicationStatus(candidate.getApplicationStatus());
         descriptor.setInterviewStatus(candidate.getInterviewStatus());
         descriptor.setAvailability(candidate.getAvailability());
@@ -94,16 +88,6 @@ public class EditCandidateDescriptorBuilder {
      */
     public EditCandidateDescriptorBuilder withSeniority(String seniority) {
         descriptor.setSeniority(new Seniority(seniority));
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditCandidateDescriptor}
-     * that we are building.
-     */
-    public EditCandidateDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
         return this;
     }
 

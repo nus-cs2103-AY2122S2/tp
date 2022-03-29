@@ -6,26 +6,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <ScrollPane id="focus-card-scroll-pane" VBox.vgrow="ALWAYS" minHeight="200" HBox.hgrow="ALWAYS" hbarPolicy="AS_NEEDED">
             <VBox HBox.hgrow="ALWAYS">
                 <GridPane HBox.hgrow="ALWAYS" minWidth="300">
-                    <padding>
-                        <Insets bottom="15" />
-                    </padding>
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="120" prefWidth="150" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="150" prefWidth="150" />
                     </columnConstraints>
-                    <VBox alignment="CENTER" minHeight="150" minWidth="120" GridPane.columnIndex="0">
-                        <ImageView fx:id="displayPicture" fitWidth="120" fitHeight="120"/>
+                    <VBox alignment="CENTER" GridPane.columnIndex="0">
+                        <StackPane fx:id="stackPane" minHeight="150" minWidth="150" >
+                            <Text fx:id="profileName" styleClass="profileTextStyle" />
+                        </StackPane>
                     </VBox>
-                    <padding>
-                        <Insets bottom="15" />
-                    </padding>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="200" maxWidth="250"/>
                     </columnConstraints>
@@ -39,6 +35,12 @@
                 <Label id="focus-card-label" fx:id="phone" styleClass="focusStyle" text="\$phone" />
                 <Label id="focus-card-label" fx:id="email" styleClass="focusStyle" text="\$email" />
                 <Label id="focus-card-label" fx:id="course" styleClass="focusStyle" text="\$course" />
+                <Label id="focus-card-schedule-label" fx:id="scheduleMessage" styleClass="focusStyle" />
+                <HBox>
+                    <Label id="focus-card-label" fx:id="day" styleClass="focusStyle" />
+                    <Label fx:id="date" styleClass="focusStyle" />
+                    <Label fx:id="time" styleClass="focusStyle" />
+                </HBox>
             </VBox>
         </ScrollPane>
 </HBox>

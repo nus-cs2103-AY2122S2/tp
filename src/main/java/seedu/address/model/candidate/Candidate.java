@@ -1,14 +1,11 @@
 package seedu.address.model.candidate;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
+import static seedu.address.model.candidate.InterviewStatus.NOT_SCHEDULED;
 import static seedu.address.model.candidate.InterviewStatus.SCHEDULED;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Candidate in TAlent Assistant™.
@@ -27,23 +24,19 @@ public class Candidate {
     private final InterviewStatus interviewStatus;
     private final Availability availability;
 
-    // Data fields
-    private final Set<Tag> tags = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
     public Candidate(StudentId studentId, Name name, Phone phone, Email email, Course course, Seniority seniority,
-            Set<Tag> tags, ApplicationStatus applicationStatus, InterviewStatus interviewStatus,
+            ApplicationStatus applicationStatus, InterviewStatus interviewStatus,
             Availability availability) {
-        requireAllNonNull(studentId, name, phone, email, course, seniority, tags, availability);
+        requireAllNonNull(studentId, name, phone, email, course, seniority, availability);
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.course = course;
         this.seniority = seniority;
-        this.tags.addAll(tags);
         this.applicationStatus = applicationStatus;
         this.interviewStatus = interviewStatus;
         this.availability = availability;
@@ -86,14 +79,6 @@ public class Candidate {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
      * Returns true if both candidates have the same name.
      * This defines a weaker notion of equality between two candidates.
      */
@@ -103,7 +88,8 @@ public class Candidate {
         }
 
         return otherCandidate != null
-                && otherCandidate.getStudentId().equals(getStudentId());
+                && (otherCandidate.getStudentId().equals(getStudentId())
+                || otherCandidate.getEmail().equals(getEmail()));
     }
 
     /**
@@ -127,7 +113,6 @@ public class Candidate {
                 && otherCandidate.getEmail().equals(getEmail())
                 && otherCandidate.getCourse().equals(getCourse())
                 && otherCandidate.getSeniority().equals(getSeniority())
-                && otherCandidate.getTags().equals(getTags())
                 && otherCandidate.getApplicationStatus().equals(getApplicationStatus())
                 && otherCandidate.getInterviewStatus().equals(getInterviewStatus())
                 && otherCandidate.getAvailability().equals(getAvailability());
@@ -135,7 +120,7 @@ public class Candidate {
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, name, phone, email, course, seniority, tags,
+        return Objects.hash(studentId, name, phone, email, course, seniority,
                 applicationStatus, interviewStatus, availability);
     }
 
@@ -152,14 +137,8 @@ public class Candidate {
                 .append("; Course: ")
                 .append(getCourse())
                 .append("; Seniority: ")
-                .append(getSeniority());
-
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
-        builder.append("; Application Status: ")
+                .append(getSeniority())
+                .append("; Application Status: ")
                 .append(getApplicationStatus())
                 .append("; Interview Status: ")
                 .append(getInterviewStatus())
@@ -169,11 +148,12 @@ public class Candidate {
     }
 
     /**
-     * Used by ScheduleCommand to return the same Candidate
-     * with `Scheduled` InterviewStatus.
+     * Trigger the Candidate status to be a `Scheduled`.
+     *
+     * @return a New Candidate with the same attributes, but updated InterviewStatus.
      */
-    public Candidate triggerInterviewStatus() {
-        requireAllNonNull(name, phone, email, course, seniority, tags,
+    public Candidate triggerInterviewStatusScheduled() {
+        requireAllNonNull(name, phone, email, course, seniority,
                 applicationStatus, interviewStatus, availability);
         return new Candidate(this.getStudentId(),
                 this.getName(),
@@ -181,11 +161,54 @@ public class Candidate {
                 this.getEmail(),
                 this.getCourse(),
                 this.getSeniority(),
-                this.getTags(),
                 this.getApplicationStatus(),
                 new InterviewStatus(SCHEDULED),
                 this.getAvailability()
         );
+    }
+
+    /**
+     * Trigger the Candidate status to be a `Not Scheduled`.
+     *
+     * @return a New Candidate with the same attributes, but updated InterviewStatus.
+     */
+    public Candidate triggerInterviewStatusNotScheduled() {
+        requireAllNonNull(name, phone, email, course, seniority,
+                applicationStatus, interviewStatus, availability);
+        return new Candidate(this.getStudentId(),
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCourse(),
+                this.getSeniority(),
+                this.getApplicationStatus(),
+                new InterviewStatus(NOT_SCHEDULED),
+                this.getAvailability()
+        );
+    }
+
+    /**
+     * Trigger the Candidate status to be a `Completed`.
+     *
+     * @return a New Candidate with the same attributes, but updated InterviewStatus.
+     */
+    public Candidate triggerInterviewStatusCompleted() {
+        requireAllNonNull(name, phone, email, course, seniority,
+                applicationStatus, interviewStatus, availability);
+        return new Candidate(this.getStudentId(),
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCourse(),
+                this.getSeniority(),
+                this.getApplicationStatus(),
+                new InterviewStatus(COMPLETED),
+                this.getAvailability()
+        );
+    }
+
+    public boolean isCompleted() {
+        return interviewStatus.equals(new InterviewStatus(COMPLETED));
     }
 
 }

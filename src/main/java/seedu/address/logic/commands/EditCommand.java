@@ -11,9 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
-import static seedu.address.model.candidate.ApplicationStatus.ACCEPTED_STATUS;
-import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
-import static seedu.address.model.candidate.InterviewStatus.COMPLETED;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -128,7 +125,6 @@ public class EditCommand extends Command {
         Email updatedEmail = editCandidateDescriptor.getEmail().orElse(candidateToEdit.getEmail());
         Course updatedCourse = editCandidateDescriptor.getCourse().orElse(candidateToEdit.getCourse());
         Seniority updatedSeniority = editCandidateDescriptor.getSeniority().orElse(candidateToEdit.getSeniority());
-        Set<Tag> updatedTags = editCandidateDescriptor.getTags().orElse(candidateToEdit.getTags());
         ApplicationStatus applicationStatus = editCandidateDescriptor.getApplicationStatus()
                 .orElse(candidateToEdit.getApplicationStatus());
         InterviewStatus interviewStatus = editCandidateDescriptor.getInterviewStatus()
@@ -137,7 +133,7 @@ public class EditCommand extends Command {
                 .orElse(candidateToEdit.getAvailability());
 
         return new Candidate(updatedID, updatedName, updatedPhone, updatedEmail,
-                updatedCourse, updatedSeniority, updatedTags,
+                updatedCourse, updatedSeniority,
                 applicationStatus, interviewStatus, updatedAvailability);
     }
 
@@ -253,7 +249,6 @@ public class EditCommand extends Command {
 
         public void setApplicationStatus(ApplicationStatus applicationStatus) {
             this.applicationStatus = applicationStatus;
-            triggerInterviewStatus(applicationStatus);
         }
 
         public Optional<ApplicationStatus> getApplicationStatus() {
@@ -319,17 +314,5 @@ public class EditCommand extends Command {
                     && getAvailability().equals(e.getAvailability());
         }
 
-
-        /**
-         * Allows the {@code InterviewStatus} to be triggered by ApplicationStatus.
-         */
-        public void triggerInterviewStatus(ApplicationStatus applicationStatus) {
-            if (getApplicationStatus().isPresent()) {
-                if (applicationStatus.toString().equals(ACCEPTED_STATUS)
-                        || applicationStatus.toString().equals(REJECTED_STATUS)) {
-                    setInterviewStatus(new InterviewStatus(COMPLETED));
-                }
-            }
-        }
     }
 }

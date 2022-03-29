@@ -13,6 +13,8 @@ import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedu
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
@@ -71,7 +73,11 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_CANDIDATES_LISTED_OVERVIEW, 3);
         CandidateContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
+        Logger logger = Logger.getLogger(FocusCommandTest.class.getName());
         expectedModel.updateFilteredCandidateList(predicate);
+
+        logger.log(Level.INFO, command.execute(model).getFeedbackToUser());
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCandidateList());
     }

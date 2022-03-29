@@ -13,10 +13,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 import seedu.address.testutil.TypicalIndexes;
 
@@ -28,10 +30,12 @@ public class DeleteScheduleCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalInterviewSchedule(), new UserPrefs());
 
+
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredList_success() throws CommandException {
         Interview interviewToDelete = model.getFilteredInterviewSchedule()
                 .get(TypicalIndexes.INDEX_FIRST_INTERVIEW.getZeroBased());
+        Candidate changedCandidate = interviewToDelete.getCandidate();
         DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(TypicalIndexes.INDEX_FIRST_CANDIDATE);
 
         String expectedMessage =
@@ -39,8 +43,8 @@ public class DeleteScheduleCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(),
                 model.getInterviewSchedule(), new UserPrefs());
-
         expectedModel.deleteInterview(interviewToDelete);
+        expectedModel.setCandidate(changedCandidate, changedCandidate.triggerInterviewStatusNotScheduled());
         assertCommandSuccess(deleteScheduleCommand, model, expectedMessage, expectedModel);
     }
 
@@ -56,6 +60,7 @@ public class DeleteScheduleCommandTest {
     public void execute_validIndexFilteredList_success() {
         showInterviewAtIndex(model, TypicalIndexes.INDEX_FIRST_INTERVIEW);
         Interview interviewToDelete = model.getFilteredInterviewSchedule().get(INDEX_FIRST_INTERVIEW.getZeroBased());
+        Candidate candidateToDelete = interviewToDelete.getCandidate();
         DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_INTERVIEW);
 
         String expectedMessage =
@@ -64,6 +69,8 @@ public class DeleteScheduleCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
 
         expectedModel.deleteInterview(interviewToDelete);
+        expectedModel.setCandidate(candidateToDelete, candidateToDelete.triggerInterviewStatusNotScheduled());
+
         showNoInterview(expectedModel);
         assertCommandSuccess(deleteScheduleCommand, model, expectedMessage, expectedModel);
     }

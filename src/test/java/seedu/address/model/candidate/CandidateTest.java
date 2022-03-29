@@ -11,8 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCandidates.ALICE;
 import static seedu.address.testutil.TypicalCandidates.BOB;
 
@@ -21,12 +19,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.CandidateBuilder;
 
 public class CandidateTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Candidate candidate = new CandidateBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> candidate.getTags().remove(0));
-    }
 
     @Test
     public void isSameCandidate() {
@@ -38,12 +30,12 @@ public class CandidateTest {
 
         // same name, all other attributes different -> returns true
         Candidate editedAlice = new CandidateBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withCourse(VALID_COURSE_BOB).build();
         assertTrue(ALICE.isSameCandidate(editedAlice));
 
-        // different studentId, all other attributes same -> returns false
+        // different studentId, all other attributes same, incl. email -> returns true
         editedAlice = new CandidateBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB).build();
-        assertFalse(ALICE.isSameCandidate(editedAlice));
+        assertTrue(ALICE.isSameCandidate(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Candidate editedBob = new CandidateBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
@@ -54,9 +46,9 @@ public class CandidateTest {
         editedBob = new CandidateBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSameCandidate(editedBob));
 
-        // different studentId, all other attributes same -> returns false
+        // different studentId, all other attributes same, incl. email -> returns true
         editedBob = new CandidateBuilder(BOB).withStudentId(VALID_STUDENT_ID_AMY).build();
-        assertFalse(BOB.isSameCandidate(editedBob));
+        assertTrue(BOB.isSameCandidate(editedBob));
 
         // totally different candidates
         assertFalse(ALICE.isSameCandidate(BOB));
@@ -96,16 +88,12 @@ public class CandidateTest {
         // different address -> returns false
         editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new CandidateBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void trigger_interviewStatus_success() {
         Candidate candidate = new CandidateBuilder().withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
-        assertEquals(candidate.triggerInterviewStatus().getInterviewStatus(),
+        assertEquals(candidate.triggerInterviewStatusScheduled().getInterviewStatus(),
                 new InterviewStatus(VALID_INTERVIEW_SCHEDULED));
     }
 

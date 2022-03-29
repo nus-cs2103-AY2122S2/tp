@@ -8,14 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditCandidateDescriptor;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Candidate.
@@ -37,12 +33,10 @@ public class CandidateUtil {
         sb.append(PREFIX_ID + candidate.getStudentId().studentId + " ");
         sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
         sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + candidate.getEmail().value + " ");
         sb.append(PREFIX_COURSE + candidate.getCourse().course + " ");
         sb.append(PREFIX_SENIORITY + candidate.getSeniority().seniority + " ");
         sb.append(PREFIX_AVAILABILITY + candidate.getAvailability().availability + " ");
-        candidate.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
         return sb.toString();
     }
 
@@ -58,16 +52,6 @@ public class CandidateUtil {
         descriptor.getCourse().ifPresent(course -> sb.append(PREFIX_COURSE).append(course.course).append(" "));
         descriptor.getSeniority().ifPresent(seniority ->
                 sb.append(PREFIX_SENIORITY).append(seniority.seniority).append(" "));
-
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG).append(" ");
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
-
         descriptor.getApplicationStatus().ifPresent(applicationStatus -> sb.append(PREFIX_APPLICATION_STATUS)
                 .append(applicationStatus.toString()).append(" "));
         descriptor.getAvailability().ifPresent(availability -> sb.append(PREFIX_AVAILABILITY)

@@ -45,8 +45,8 @@ public class AddScheduleCommandTest {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
         AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
-        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
-        candidateToInterview = candidateToInterview.triggerInterviewStatus();
+        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatusScheduled());
+        candidateToInterview = candidateToInterview.triggerInterviewStatusScheduled();
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
         String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
@@ -77,7 +77,7 @@ public class AddScheduleCommandTest {
 
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
-        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatus());
+        model.setCandidate(candidateToInterview, candidateToInterview.triggerInterviewStatusScheduled());
 
         String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 candidateToInterview.getName(), candidateToInterview.getStudentId(),
@@ -128,7 +128,7 @@ public class AddScheduleCommandTest {
     public void execute_hasConflictingInterview_throwsCommandException() {
         model.addInterview(INTERVIEW_AMY_TYPICAL);
         LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
-        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_SECOND_CANDIDATE, interviewDateTime);
 
         assertCommandFailure(addScheduleCommand, model, MESSAGE_CONFLICTING_INTERVIEW);
     }
@@ -136,7 +136,7 @@ public class AddScheduleCommandTest {
     @Test
     public void execute_hasNoMatchingAvailability_throwsCommandException() {
         LocalDateTime interviewDateTime = THURSDAY_INTERVIEW_DATE_TIME;
-        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_SECOND_CANDIDATE, interviewDateTime);
 
         assertCommandFailure(addScheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
     }

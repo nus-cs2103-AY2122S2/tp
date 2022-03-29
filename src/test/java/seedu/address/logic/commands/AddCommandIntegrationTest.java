@@ -28,7 +28,9 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newCandidate_success() {
-        Candidate validCandidate = new CandidateBuilder().build();
+        Candidate validCandidate = new CandidateBuilder()
+                .withName("Valid Candidate")
+                .withStudentId("A0563827B").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
         expectedModel.addCandidate(validCandidate);

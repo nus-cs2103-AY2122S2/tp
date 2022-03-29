@@ -34,11 +34,11 @@ public class ParserUtilTest {
     private static final String INVALID_FORMAT_DATE_TIME = "2025/03/01 10PM";
     private static final String INVALID_TIME_PERIOD = "A0123456";
 
-    private static final String VALID_STUDENT_ID = "E0123456";
+    private static final String VALID_STUDENT_ID = "A0123456B";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "98765432";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_EMAIL = "E0123456@u.nus.edu";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_DATE_TIME = "20-03-2025 10:00";

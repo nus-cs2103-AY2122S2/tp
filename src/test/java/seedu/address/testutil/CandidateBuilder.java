@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
@@ -13,22 +10,20 @@ import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Candidate objects.
  */
 public class CandidateBuilder {
 
-    public static final String DEFAULT_STUDENT_ID = "E0123456";
+    public static final String DEFAULT_STUDENT_ID = "A0123456B";
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "E0123456@u.nus.edu";
+    public static final String DEFAULT_EMAIL = "E0223456@u.nus.edu";
     public static final String DEFAULT_COURSE = "Computer Science";
     public static final String DEFAULT_SENIORITY = "2";
     public static final String DEFAULT_APPLICATION_STATUS = "Pending";
-    public static final String DEFAULT_INTERVIEW_STATUS = " Not Scheduled";
+    public static final String DEFAULT_INTERVIEW_STATUS = "Not Scheduled";
     public static final String DEFAULT_AVAILABILITY = "1,2,3,4,5";
 
     private StudentId studentId;
@@ -37,7 +32,6 @@ public class CandidateBuilder {
     private Email email;
     private Course course;
     private Seniority seniority;
-    private Set<Tag> tags;
     private ApplicationStatus applicationStatus;
     private InterviewStatus interviewStatus;
     private Availability availability;
@@ -52,7 +46,6 @@ public class CandidateBuilder {
         email = new Email(DEFAULT_EMAIL);
         course = new Course(DEFAULT_COURSE);
         seniority = new Seniority(DEFAULT_SENIORITY);
-        tags = new HashSet<>();
         applicationStatus = new ApplicationStatus(DEFAULT_APPLICATION_STATUS);
         interviewStatus = new InterviewStatus(DEFAULT_INTERVIEW_STATUS);
         availability = new Availability(DEFAULT_AVAILABILITY);
@@ -68,7 +61,6 @@ public class CandidateBuilder {
         email = candidateToCopy.getEmail();
         course = candidateToCopy.getCourse();
         seniority = candidateToCopy.getSeniority();
-        tags = new HashSet<>(candidateToCopy.getTags());
         applicationStatus = candidateToCopy.getApplicationStatus();
         interviewStatus = candidateToCopy.getInterviewStatus();
         availability = candidateToCopy.getAvailability();
@@ -87,14 +79,6 @@ public class CandidateBuilder {
      */
     public CandidateBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Candidate} that we are building.
-     */
-    public CandidateBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -159,7 +143,7 @@ public class CandidateBuilder {
      * @return a new Candidate.
      */
     public Candidate build() {
-        return new Candidate(studentId, name, phone, email, course, seniority, tags,
+        return new Candidate(studentId, name, phone, email, course, seniority,
                 applicationStatus, interviewStatus, availability);
     }
 

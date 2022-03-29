@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -16,8 +17,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SENIORITY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SENIORITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,31 +31,29 @@ import seedu.address.model.candidate.Candidate;
 public class TypicalCandidates {
 
     public static final Candidate ALICE = new CandidateBuilder()
-            .withStudentId("E0123450")
+            .withStudentId("A0123451B")
             .withName("Alice Pauline")
             .withPhone("94351253")
-            .withEmail("E0123456@u.nus.edu")
+            .withEmail("E0123450@u.nus.edu")
             .withCourse("Business Analytics")
             .withSeniority("2")
-            .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
-            .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+            .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability("1,2,3")
             .build();
     public static final Candidate BENSON = new CandidateBuilder()
-            .withStudentId("E0234567")
+            .withStudentId("A0234567B")
             .withName("Benson Meier")
             .withPhone("98765432")
-            .withEmail("E0234567@u.nus.edu")
+            .withEmail("E0234560@u.nus.edu")
             .withCourse("Computer Engineering")
             .withSeniority("2")
-            .withTags("owesMoney", "friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
-            .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+            .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability("2,3,4")
             .build();
     public static final Candidate CARL = new CandidateBuilder()
-            .withStudentId("E0345678")
+            .withStudentId("A0345678B")
             .withName("Carl Kurz")
             .withPhone("95352563")
             .withEmail("E0345678@u.nus.edu")
@@ -67,19 +64,18 @@ public class TypicalCandidates {
             .withAvailability("3,4,5")
             .build();
     public static final Candidate DANIEL = new CandidateBuilder()
-            .withStudentId("E0456789")
+            .withStudentId("A0456789B")
             .withName("Daniel Meier")
             .withPhone("87652533")
             .withEmail("E0456789@u.nus.edu")
             .withCourse("Information Security")
             .withSeniority("2")
-            .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("5")
             .build();
     public static final Candidate ELLE = new CandidateBuilder()
-            .withStudentId("E0567890")
+            .withStudentId("A0567890B")
             .withName("Elle Meyer")
             .withPhone("94822240")
             .withEmail("E0567890@u.nus.edu")
@@ -90,7 +86,7 @@ public class TypicalCandidates {
             .withAvailability("1,3,5")
             .build();
     public static final Candidate FIONA = new CandidateBuilder()
-            .withStudentId("E0678901")
+            .withStudentId("A0678901B")
             .withName("Fiona Kunz")
             .withPhone("94824270")
             .withEmail("E0678901@u.nus.edu")
@@ -101,7 +97,7 @@ public class TypicalCandidates {
             .withAvailability("2,4")
             .build();
     public static final Candidate GEORGE = new CandidateBuilder()
-            .withStudentId("E0789012")
+            .withStudentId("A0789012B")
             .withName("George Best")
             .withPhone("94824420")
             .withEmail("E0789012@u.nus.edu")
@@ -114,7 +110,7 @@ public class TypicalCandidates {
 
     // Manually added
     public static final Candidate HOON = new CandidateBuilder()
-            .withStudentId("E0890123")
+            .withStudentId("A0890123B")
             .withName("Hoon Meier")
             .withPhone("84824240")
             .withEmail("E0890123@u.nus.edu")
@@ -124,8 +120,9 @@ public class TypicalCandidates {
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("1,4")
             .build();
+
     public static final Candidate IDA = new CandidateBuilder()
-            .withStudentId("E0901234")
+            .withStudentId("A0901234B")
             .withName("Ida Mueller")
             .withPhone("84821310")
             .withEmail("E0901234@u.nus.edu")
@@ -144,9 +141,8 @@ public class TypicalCandidates {
             .withEmail(VALID_EMAIL_AMY)
             .withCourse(VALID_COURSE_AMY)
             .withSeniority(VALID_SENIORITY_AMY)
-            .withTags(VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_PENDING)
-            .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+            .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability(VALID_AVAILABILITY_AMY)
             .build();
     public static final Candidate BOB = new CandidateBuilder()
@@ -156,7 +152,6 @@ public class TypicalCandidates {
             .withEmail(VALID_EMAIL_BOB)
             .withCourse(VALID_COURSE_BOB)
             .withSeniority(VALID_SENIORITY_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability(VALID_AVAILABILITY_BOB)
@@ -178,6 +173,6 @@ public class TypicalCandidates {
     }
 
     public static List<Candidate> getTypicalCandidates() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(AMY, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

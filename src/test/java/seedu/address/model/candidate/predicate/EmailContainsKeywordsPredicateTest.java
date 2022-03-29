@@ -43,36 +43,36 @@ public class EmailContainsKeywordsPredicateTest {
     public void test_emailContainsKeywords_returnsTrue() {
         // One keyword
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(Collections.singletonList(
-                "alice@email.com"));
-        assertTrue(predicate.test(new CandidateBuilder().withEmail("alice@email.com").build()));
+                "E0123456@u.nus.edu"));
+        assertTrue(predicate.test(new CandidateBuilder().withEmail("E0123456@u.nus.edu").build()));
 
         // Multiple keywords
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("Alice", "@gmail"));
-        assertTrue(predicate.test(new CandidateBuilder().withEmail("Alice@gmail.com.sg").build()));
+        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("E0123456", "@u.nus.edu"));
+        assertTrue(predicate.test(new CandidateBuilder().withEmail("E0123456@u.nus.edu").build()));
 
         // Only one matching keyword
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("Alice", "email.com"));
-        assertTrue(predicate.test(new CandidateBuilder().withEmail("Alice@gmail.com").build()));
+        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("E0123456", "@gmail.com"));
+        assertTrue(predicate.test(new CandidateBuilder().withEmail("E0123456@u.nus.edu").build()));
 
         // Mixed-case keywords
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("aLIce", "@GMAIL.com"));
-        assertTrue(predicate.test(new CandidateBuilder().withEmail("Alice@gmail.com").build()));
+        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("e0123456", "@u.NUS.Edu"));
+        assertTrue(predicate.test(new CandidateBuilder().withEmail("E0123456@u.nus.edu").build()));
     }
 
     @Test
     public void test_emailDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new CandidateBuilder().withEmail("Alice@gmail.com").build()));
+        assertFalse(predicate.test(new CandidateBuilder().withEmail("E0123456@u.nus.edu").build()));
 
         // Non-matching keyword
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("gmail.com"));
-        assertFalse(predicate.test(new CandidateBuilder().withEmail("alice@email.com").build()));
+        assertFalse(predicate.test(new CandidateBuilder().withEmail("E0123456@u.nus.edu").build()));
 
         // Keywords match other fields, but does/do not match email
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("87654321", "E0324444", "Main",
+        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("87654321", "A0324444B", "Main",
                 "Street"));
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+                .withEmail("E0123456@u.nus.edu").withCourse("Business Analytics").withStudentId("A0324444B").build()));
     }
 }

@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_PEN
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCandidates.ALICE;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
@@ -51,7 +50,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateCandidates_throwsDuplicateCandidateException() {
         // Two candidates with the same identity fields
-        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB)
                 .withApplicationStatus(VALID_APPLICATION_PENDING)
                 .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
                 .withAvailability(VALID_AVAILABILITY_BOB)
@@ -94,7 +93,7 @@ public class AddressBookTest {
     @Test
     public void hasCandidate_candidateWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addCandidate(ALICE);
-        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB)
                 .withAvailability(VALID_AVAILABILITY_BOB).build();
         assertTrue(addressBook.hasCandidate(editedAlice));
     }

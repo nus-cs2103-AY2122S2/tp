@@ -18,20 +18,27 @@ import static seedu.address.ui.Styles.RED;
 import static seedu.address.ui.Styles.WHITE_FONT_INLINE;
 import static seedu.address.ui.Styles.YELLOW;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.InterviewStatus;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.interview.Interview;
 
 /**
  * An UI component that displays information of a {@code Candidate}.
@@ -39,8 +46,9 @@ import seedu.address.model.candidate.InterviewStatus;
 public class FocusCard extends UiPart<Region> {
 
     private static final String FXML = "FocusListCard.fxml";
-    private static final String BLANK_PICTURE_PATH = "docs/images/blankprofile.png";
     private static final String SENIORITY_VALUE = "COM";
+    private static final String SCHEDULE_MESSAGE = "Scheduled interview on:";
+    private static final String NO_SCHEDULE_MESSAGE = "No interview scheduled!";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -51,6 +59,7 @@ public class FocusCard extends UiPart<Region> {
      */
 
     public final Candidate candidate;
+    private Interview interview;
 
     @FXML
     private HBox cardPane;
@@ -75,28 +84,41 @@ public class FocusCard extends UiPart<Region> {
     @FXML
     private Label availability;
     @FXML
+    private Label date;
+    @FXML
+    private Label day;
+    @FXML
+    private Label time;
+    @FXML
+    private Label scheduleMessage;
+    @FXML
     private FlowPane statusFocusPane;
     @FXML
     private FlowPane availableDaysFocus;
     @FXML
-    private ImageView displayPicture;
+    private StackPane stackPane;
+    @FXML
+    private Text profileName;
+
     /**
      * Creates a {@code CandidateCode} with the given {@code Candidate} and index to display.
      */
 
-    public FocusCard(Candidate candidate) throws FileNotFoundException {
+    public FocusCard(Candidate candidate, Interview interview) {
         super(FXML);
         requireNonNull(candidate);
         this.candidate = candidate;
+        this.interview = interview;
         id.setText(candidate.getStudentId().toString());
         name.setText(candidate.getName().fullName);
         phone.setText(candidate.getPhone().value);
         email.setText(candidate.getEmail().value);
         course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
-        displayPicture.setImage(new Image(new FileInputStream(BLANK_PICTURE_PATH)));
+        setProfilePicture(candidate.getName());
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
         setAvailableDays(candidate.getAvailability());
+        setSchedule();
     }
 
     @Override
@@ -166,6 +188,49 @@ public class FocusCard extends UiPart<Region> {
                 label.setStyle(notAvailStyle);
             }
             availableDaysFocus.getChildren().add(label);
+        }
+    }
+
+    private void setProfilePicture(Name candidateName) {
+        String[] temp = candidateName.fullName.split(" ");
+        StringBuilder initials = new StringBuilder();
+        if (temp.length > 1) {
+            initials.append(temp[0].charAt(0)).append(temp[1].charAt(0));
+        } else {
+            initials.append(temp[0].charAt(0));
+        }
+
+        Random random = new Random();
+        double red = (random.nextInt(106) + 150) / 255.0;
+        double blue = (random.nextInt(106) + 150) / 255.0;
+        double green = (random.nextInt(106) + 150) / 255.0;
+
+        stackPane.setBackground(new Background(new BackgroundFill(
+                Color.color(red, blue, green),
+                null,
+                null
+        )));
+
+        Circle circle = new Circle();
+        circle.setRadius(60);
+        circle.setCenterX(75);
+        circle.setCenterY(75);
+        profileName.setText(initials.toString());
+        stackPane.setClip(circle);
+        stackPane.setAlignment(Pos.CENTER);
+    }
+
+    private void setSchedule() {
+        if (interview != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+            String temp = interview.getInterviewDate().getDayOfWeek().toString();
+            String d = temp.charAt(0) + temp.substring(1).toLowerCase() + ",";
+            day.setText(d);
+            date.setText(interview.getInterviewDate().format(formatter));
+            time.setText("@ " + interview.getInterviewStartTime().toString());
+            scheduleMessage.setText(SCHEDULE_MESSAGE);
+        } else {
+            scheduleMessage.setText(NO_SCHEDULE_MESSAGE);
         }
     }
 }
