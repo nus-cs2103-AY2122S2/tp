@@ -258,8 +258,10 @@ public class DeleteCommand extends Command {
 
             // module and group exists
             Group removedGroup = model.removeGroup(moduleCode, group);
-            List<Group> lastShownGroupList = model.getShowingGroupList();
-            lastShownGroupList.remove(removedGroup);
+            if (isGroupListShowing) {
+                List<Group> lastShownGroupList = model.getShowingGroupList();
+                lastShownGroupList.remove(removedGroup);
+            }
             return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, removedGroup));
 
         } else if (phone || email || tag != null || office) { // delete person attributes
