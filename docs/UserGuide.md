@@ -242,6 +242,25 @@ Assigns a task to a particular student.
 
 <br>
 
+### Deleting previously assigned task: `deleteTask`
+
+Deletes a task from a particular student's list of tasks.
+
+Format: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
+
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
+* An error message will be displayed if the student with the given student ID does not exist.
+* An error message will be displayed if none of the students taking the module had previously been assigned the task with the given task name.
+* An error message will be displayed if none of the students are taking a module with the given module code.
+
+Example:
+* `deleteTask i/AXXXXXXXR idx/3`
+    * Deletes task at index 3 from the student's list of assigned task, provided that a task exists at that index.
+* `deleteTask m/cs2030 tn/Assignment 1`
+    * Deletes Assignment 1 that was previously assigned to any of the students taking CS2030 module.
+
+<br>
+
 ### Viewing the completion status of a particular task: `progress`
 
 Displays a list of students who are taking the specified module, and have been assigned with a particular task.
@@ -314,6 +333,7 @@ Action      | Command Format with Examples
 **Task**    | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`
 **Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`
 **Unmark**  | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> Example: `unmark i/AXXXXXXXR idx/1`
+**Delete Task**| `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`  
 **Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Clear**   | `clear`
 **Archive** | `archive`
