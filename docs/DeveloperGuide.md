@@ -787,8 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to export address book as file for ContaX
-2. ContaX saves a CSV file to the disk at `data/addressbook.csv`
-
+2. ContaX saves a CSV file to the disk at `data/addressbook.csv`<br><br>
    Use case ends.
 
 **UC20: Import CSV file**
@@ -796,13 +795,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to import a CSV file from a specified file path
-2. ContactX imports the contacts from given CSV file
-
+2. ContactX imports the contacts from given CSV file<br><br>
     Use case ends.
 
 **Extensions**
 
-* 1a. User enters custom column definitions
+* 1a. User enters custom column definitions<br>&nbsp;
     * Use case resumes at step 2<br>&nbsp;
 
 * 2a. Invalid CSV file selected
