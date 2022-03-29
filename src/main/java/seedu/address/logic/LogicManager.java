@@ -45,28 +45,41 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String userInput)
-            throws CommandException, ParseException, IllegalArgumentException {
+    public CommandResult execute(String userInput) throws CommandException {
         logger.info("----------------[USER INPUT][" + userInput + "]");
 
         CommandResult commandResult = null;
         String[] commands = userInput.split("\\|");
         ReadOnlyAddressBook addressBookBeforeCommand = new AddressBook(model.getAddressBook());
+        boolean revert = false;
+        String errMsg = "";
 
-        for (String commandText : commands) {
+        for (int i = 0; i < commands.length; i++) {
+            String commandText = commands[i];
             logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-            Command command = addressBookParser.parseCommand(commandText);
-            commandResult = command.execute(model);
-
             try {
-                storage.saveAddressBook(model.getAddressBook());
-            } catch (IOException ioe) {
-                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+                Command command = addressBookParser.parseCommand(commandText);
+                commandResult = command.execute(model);
+
+                if (i > 0 && (commandResult.isExit() || commandResult.isShowHelp()
+                        || commandResult.isUndoPrevCommand())) {
+                    throw new CommandException("Special command should not be in command chain");
+                }
+            } catch (CommandException | ParseException | IllegalArgumentException e) {
+                revert = true;
+                errMsg = e.getMessage();
             }
 
-            if (commandResult.isExit() || commandResult.isShowHelp() || commandResult.isUndoPrevCommand()) {
-                break;
+            try {
+                if (!revert) {
+                    storage.saveAddressBook(model.getAddressBook());
+                } else {
+                    model.setAddressBook(addressBookBeforeCommand);
+                    throw new CommandException("\"" + commandText + "\" - " + errMsg);
+                }
+            } catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
         }
 
