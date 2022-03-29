@@ -16,6 +16,9 @@ import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Represents a command that when executed updates an item of a specified product in the iBook.
+ */
 public class UpdateItemCommand extends Command {
     public static final String COMMAND_WORD = "update-item";
 

@@ -3,7 +3,7 @@ package seedu.ibook.logic.commands;
 import seedu.ibook.model.Model;
 
 /**
- * Terminates the program.
+ * Represents a command that when executed terminates the program.
  */
 public class ExitCommand extends Command {
 

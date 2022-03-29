@@ -13,7 +13,7 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 
 /**
- * Adds a product to the Ibook.
+ * Represents a command that when executed adds a product to the iBook.
  */
 public class AddCommand extends Command {
 
