@@ -1,12 +1,16 @@
 package unibook.ui.listpanels;
 
+import static unibook.ui.util.CustomListChangeListeners.addIndexedListChangeListener;
+import static unibook.ui.util.CustomPaneListFiller.fillPaneFromList;
+
+import java.util.function.BiFunction;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.Node;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.Module;
 import unibook.ui.UiPart;
@@ -19,33 +23,28 @@ public class ModuleListPanel extends UiPart<Region> {
     private static final String FXML = "listpanels/ModuleListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ModuleListPanel.class);
 
+    private ObservableList<Module> moduleList;
+
     @FXML
-    private ListView<Module> moduleListView;
+    private VBox moduleListView;
 
     /**
      * Creates a {@code ModuleListPanel} with the given {@code ObservableList}.
      */
     public ModuleListPanel(ObservableList<Module> moduleList) {
         super(FXML);
-        moduleListView.setItems(moduleList);
-        moduleListView.setCellFactory(listView -> new ModuleListViewCell());
-    }
+        this.moduleList = moduleList;
 
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleCard}.
-     */
-    class ModuleListViewCell extends ListCell<Module> {
-        @Override
-        protected void updateItem(Module module, boolean empty) {
-            super.updateItem(module, empty);
-
-            if (empty || module == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new ModuleCard(module, getIndex() + 1).getRoot());
+        BiFunction<Module, Integer, Node> cardCreator = new BiFunction<Module, Integer, Node>() {
+            @Override
+            public Node apply(Module module, Integer index) {
+                return new ModuleCard(module, index + 1).getRoot();
             }
-        }
-    }
+        };
 
+        fillPaneFromList(moduleListView, this.moduleList, cardCreator);
+
+        addIndexedListChangeListener(moduleListView, this.moduleList, cardCreator);
+
+    }
 }

@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import unibook.commons.core.LogsCenter;
@@ -28,6 +29,8 @@ public class ModuleKeyEventCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private GridPane gridPane;
+    @FXML
     private Label id;
     @FXML
     private Label moduleKeyEventType;
@@ -45,6 +48,17 @@ public class ModuleKeyEventCard extends UiPart<Region> {
         moduleKeyEventType.setText(this.moduleKeyEvent.getKeyEventType().toString());
         moduleKeyEventTime.setText(this.moduleKeyEvent.getKeyEventTiming().format(
             DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+        setStyle();
+    }
+
+    /**
+     * Set styling for important module events.
+     */
+    private void setStyle() {
+        if (moduleKeyEvent.getKeyEventType() == ModuleKeyEvent.KeyEventType.EXAM
+            || moduleKeyEvent.getKeyEventType() == ModuleKeyEvent.KeyEventType.ASSIGNMENT_DUE) {
+            gridPane.getStyleClass().add("module-key-event-card-important");
+        }
     }
 
     @Override

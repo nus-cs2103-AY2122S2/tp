@@ -123,20 +123,20 @@
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
 }
 
 .cell_medium_label {
     -fx-font-family: "Segoe UI Italic";
-    -fx-font-size: 14px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
 }
 
 .stack-pane {
@@ -149,6 +149,12 @@
      -fx-border-top-width: 1px;
 }
 
+.result-pane {
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
@@ -157,7 +163,7 @@
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .result-display .label {
@@ -200,7 +206,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #333333;
 }
 
 .menu-bar .label {
@@ -278,7 +284,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#A5A5A8, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -289,7 +295,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#787276, 20%);
 }
 
 .scroll-bar .thumb {
@@ -340,8 +346,10 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
+    -fx-background-color: #D1D0CE;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-text-fill: black;
 }
 
 #tags {
@@ -352,8 +360,8 @@
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
+    -fx-padding: 2 4 2 4;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 16;
 }
