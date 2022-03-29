@@ -95,6 +95,30 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
 
+        try {
+            batchUpdateNegativeToPositive(personToEdit, editedPerson, studentList, model);
+        } catch (Exception ex) {
+            logger.severe("Batch update failed: " + StringUtil.getDetails(ex));
+        }
+
+        try {
+
+            batchUpdatePositiveToNegative(personToEdit, editedPerson, studentList, model);
+        } catch (Exception ex) {
+            logger.severe("Batch update failed: " + StringUtil.getDetails(ex));
+        }
+
+
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    /**
+     * Batch updates the list when a person's status changes
+     * from negative to positive.
+     */
+    private static void batchUpdateNegativeToPositive(Person personToEdit, Person editedPerson,
+                                                      ObservableList<Person> studentList, Model model) {
         if (personToEdit.getStatus().toString().equals(Status.NEGATIVE)
                 && editedPerson.getStatus().toString().equals(Status.POSITIVE)) {
 
@@ -113,44 +137,43 @@ public class EditCommand extends Command {
                 model.setPerson(currentPerson, editedPersonStatus);
             }
         }
+    }
 
-        try {
-            if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
-                    && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
+    /**
+     * Batch updates the list when a person's status changes
+     * from positive to negative.
+     */
+    private static void batchUpdatePositiveToNegative(Person personToEdit, Person editedPerson,
+                                                      ObservableList<Person> studentList, Model model) {
+        if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
+                && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
 
-                List<Person> filteredByClassCodeAndActivityList = studentList.stream()
+            List<Person> filteredByClassCodeAndActivityList = studentList.stream()
+                    .filter(student -> (student.getClassCode().toString()
+                            .equals(editedPerson.getClassCode().toString())
+                            || student.hasSameActivity(editedPerson))
+                            && !student.isSamePerson(editedPerson))
+                    .collect(Collectors.toList());
+
+            for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
+                Person currentPerson = filteredByClassCodeAndActivityList.get(i);
+
+                List<Person> positiveRelatedToPerson = studentList.stream()
                         .filter(student -> (student.getClassCode().toString()
-                                .equals(editedPerson.getClassCode().toString())
-                                || student.hasSameActivity(editedPerson))
-                                && !student.isSamePerson(editedPerson))
+                                .equals(currentPerson.getClassCode().toString())
+                                || student.hasSameActivity(currentPerson))
+                                && !student.isSamePerson(editedPerson)
+                                && student.getStatus().toString().equals(Status.POSITIVE))
                         .collect(Collectors.toList());
 
-                for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
-                    Person currentPerson = filteredByClassCodeAndActivityList.get(i);
-
-                    List<Person> positiveRelatedToPerson = studentList.stream()
-                            .filter(student -> (student.getClassCode().toString()
-                                    .equals(currentPerson.getClassCode().toString())
-                                    || student.hasSameActivity(currentPerson))
-                                    && !student.isSamePerson(editedPerson)
-                                    && student.getStatus().toString().equals(Status.POSITIVE))
-                            .collect(Collectors.toList());
-
-                    if (positiveRelatedToPerson.size() == 0) {
-                        EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                        tempDescriptor.setStatus(new Status(Status.NEGATIVE));
-                        Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                        model.setPerson(currentPerson, editedPersonStatus);
-                    }
+                if (positiveRelatedToPerson.size() == 0) {
+                    EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
+                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
+                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
+                    model.setPerson(currentPerson, editedPersonStatus);
                 }
             }
-        } catch (Exception ex) {
-            logger.severe("Batch update failed: " + StringUtil.getDetails(ex));
         }
-
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     /**
