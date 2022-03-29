@@ -127,6 +127,33 @@ Examples:
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
+## Sorting persons
+
+Sorts the list of persons displayed according to one or more keywords.
+
+Format: `sort [!]KEYWORD [[!]MORE_KEYWORDS]…`
+
+- `KEYWORD` can be one of `name` `phone` `email` `address` `favourite` `usertype` `num_property` (case-insensitive)
+- Prefixing a keyword with `!` will reverse the sorting order for that keyword
+- If multiple keywords are specified, the list is sorted according to the order in which the keywords are specified, i.e., subsequent keywords are used to break ties after sorting by the previous keyword.
+
+The following table shows the keywords and the default sorting behaviours:
+
+| Keyword        | Default Behaviour                   |
+|----------------|-------------------------------------|
+| `name`         | Sort by `Name` alphabetically       |
+| `phone`        | Sort by `Phone` numerically         |
+| `email`        | Sort by `Email` lexicographically   |
+| `address`      | Sort by `Address` lexicographically |
+| `favourite`    | Show favourites first               |
+| `usertype`     | Show buyers first                   |
+| `num_property` | Sort by number of `Property`        |
+
+Examples:
+- `sort address name phone` will sort the list by `Address` first. If there are entries with equal `Address`, the entries will be sorted by `Name`. If there are entries with equal `Address` and `Name`, they will be sorted by `Phone`
+- `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`
+- `sort favourite !name` will sort the list according to `Favourite`, with favourites being listed first, followed by non-favourites. Within each group, entries are sorted according to `Name` in reverse alphabetical order.
+
 ### Deleting a person: `delete`
 
 Deletes the specified person from the address book.
