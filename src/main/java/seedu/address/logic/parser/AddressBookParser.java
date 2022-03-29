@@ -74,7 +74,7 @@ public class AddressBookParser {
             if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
                 return parseViewCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
             }
-            return new ViewCommand();
+            return new ViewCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

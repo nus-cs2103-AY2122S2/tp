@@ -25,4 +25,6 @@ public class Messages {
             "The medical information index provided is invalid";
     public static final String MESSAGE_INVALID_CONSULTATION_INDEX =
             "The consultation index provided is invalid";
+
+    public static final String MESSAGE_SUMMARY_SHOWN = "Summary for patient with NRIC %1$s shown!";
 }
