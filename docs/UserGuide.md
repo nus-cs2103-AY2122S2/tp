@@ -22,7 +22,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all Tasks.
+   * **`listTask`** : Lists all Tasks.
 
    * **`addEmployee`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ManageEZPZ.
 
@@ -31,6 +31,8 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
    * **`clear`** : Deletes everything from ManageEZPZ.
    
    * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
+
+   * **`tagTask 1 n/John Doe`** : Assigns the first task on the task list to an employee named John Doe. 
 
    * **`exit`** : Exits the app.
 --------------------------------------------------------------------------------------------------------------------
@@ -105,9 +107,9 @@ Format:
 * `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 Examples:
-* `addTodo desc/read book`
-* `addDeadline desc/return book by/16-02-2022 1800`
-* `addEvent desc/project meeting at/17-02-2022 1900 2000`
+* `addTodo desc/Powerpoint slides for company XYZ`
+* `addDeadline desc/Client Proposal Slides by/2022-03-20 1800`
+* `addEvent desc/Business meeting at/2022-02-18 1900 2000`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 For deadline and event, the DATE must be in this format: YYYY-MM-DD and the TIME in this format: HHmm (in 24 hr format)
@@ -210,12 +212,33 @@ _Details coming soon ..._
 
 ## Command summary
 
+###Employee Related Commands
 Action | Format, Examples
 --------|------------------
 **Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
-**Add Task** | `TASK_TYPE desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book` <br>`addDeadline desc/Use up resin /by 2022-15-03 0400` 
+**Edit Employee** | `editEmployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Delete Employee** | `deleteEmployee INDEX` <br> e.g., `deleteEmployee 3`
+**Find Employee** | `findEmployee OPTIONS` <br> `findEmployee n/Alex Yeoh`
+**listEmployee** | `listEmployee`
+
+###Task Related Commands
+Action | Format, Examples
+------------|--------------
+**Add Todo Task** | `addTodo desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book`
+**Add Deadline Task** | `addDeadline desc/TASK_DESCRIPTION by/DATETIME` <br> e.g., `addDeadline desc/return book by/16-02-2022 1800`
+**Add Event Task** | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., ` addEvent desc/project meeting at/17-02-2022 1900 2000
+**mark Task** | `markTask INDEX` <br> e.g., `markTask 2`
+**unmark Task** | `unmarkTask INDEX` <br> e.g., `unmarkTask 2`
+**delete Task** | `deleteTask INDEX` <br> e.g., `deleteTask 2`
+**find Task** | `findTask OPTIONS` <br> e.g.,`findTask todo/`
+**list Task** | `listTasks`
+**tag Task** | `tagTask INDEX n/NAME` <br> e.g.,`tagTask 1 n/Alex Yeoh`
+**untag Task** |`untagTask INDEX n/NAME` <br> e.g.,`untagTask 1 n/Alex Yeoh`
+**tag Priority** | `tagPriority INDEX priority/ENUM` <br> e.g.,`tagPriority 1 priority/HIGH`
+
+###Others
+Action | Format
+------------|-------------
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find task/ desc/TASK_DESCRIPTION` <br> e.g., `find task/ desc/homework`
-**List** | `list` <br> e.g. `list all/` or `list event/` or `list deadline/`
 **Help** | `help`
+**Exit** | `exit`
