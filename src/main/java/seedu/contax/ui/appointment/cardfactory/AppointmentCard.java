@@ -98,22 +98,25 @@ class AppointmentCard extends UiPart<Region> {
     }
 
     private void updatePriorityStyle(Priority modelPriority) {
+        priority.getStyleClass().remove("high");
+        priority.getStyleClass().remove("medium");
+        priority.getStyleClass().remove("low");
+
         if (appointmentModel.getPriority() != null) {
             priority.setText(modelPriority.toString());
             switch (appointmentModel.getPriority()) {
             case HIGH:
-                priority.setStyle("-fx-background-color: red;");
+                priority.getStyleClass().add("high");
                 break;
             case MEDIUM:
-                priority.setStyle("-fx-background-color: orange ;");
+                priority.getStyleClass().add("medium");
                 break;
             default:
-                priority.setStyle("-fx-background-color: green;");
+                priority.getStyleClass().add("low");
                 break;
             }
         } else {
             priority.setText("");
-            priority.setStyle("-fx-background-color: none;");
         }
     }
 

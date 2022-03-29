@@ -137,23 +137,14 @@ class JsonAdaptedAppointment {
      * Performs the validation and parsing of Appointment priority into a {@code Priority} model.
      */
     private Priority parsePriorityModel() throws IllegalValueException {
-        Priority modelPriority = null;
-        if (priority != null) {
-            switch (priority) {
-            case "High":
-                modelPriority = Priority.HIGH;
-                break;
-            case "Medium":
-                modelPriority = Priority.MEDIUM;
-                break;
-            case "Low":
-                modelPriority = Priority.LOW;
-                break;
-            default:
-                throw new IllegalValueException(INVALID_PRIORITY_MESSAGE);
-            }
-            return modelPriority;
+        if (priority == null) {
+            return null;
         }
-        return null;
+
+        Priority modelPriority = Priority.getFromDisplayName(priority);
+        if (modelPriority == null) {
+            throw new IllegalValueException(INVALID_PRIORITY_MESSAGE);
+        }
+        return modelPriority;
     }
 }

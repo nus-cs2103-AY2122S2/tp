@@ -25,7 +25,7 @@ public class Appointment extends ScheduleItem {
     private final Priority priority;
 
     /**
-     * Constructs an {@code Appointment}.
+     * Constructs an {@code Appointment} without a priority level.
      * The fields {@code name, startDateTime, duration} must be present and not null.
      * The {@code person} argument is optional, and may be null.
      *
@@ -35,29 +35,22 @@ public class Appointment extends ScheduleItem {
      * @param person A valid Person or null.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
-        super(Appointment.getStartDateTimeOrThrow(startDateTime),
-                Appointment.computeEndDateTime(startDateTime, duration));
-        requireNonNull(name);
-
-        this.name = name;
-        this.startDateTime = startDateTime;
-        this.duration = duration;
-        this.person = person;
-        this.priority = null;
+        this(name, startDateTime, duration, person, null);
     }
 
     /**
-     * Constructs an {@code Appointment} with additional attribute priority.
+     * Constructs an {@code Appointment} with a priority level.
      * The fields {@code name, startDateTime, duration} must be present and not null.
-     * The fields {@code priority} is optional and may be null.
+     * The fields {@code person, priority} are optional and may be null.
      *
      * @param name A valid Appointment Name.
      * @param startDateTime A valid Appointment Starting DateTime.
      * @param duration A valid Appointment Duration.
      * @param person A valid Person or null.
-     * @param priority A valid priority level or null.
+     * @param priority A valid Priority level or null.
      */
-    public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person, Priority priority) {
+    public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person,
+                       Priority priority) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
                 Appointment.computeEndDateTime(startDateTime, duration));
         requireNonNull(name);
@@ -94,6 +87,12 @@ public class Appointment extends ScheduleItem {
         return priority;
     }
 
+    /**
+     * Creates a new {@code Appointment} instance with the supplied {@code Priority} level.
+     *
+     * @param priority The new priority level to assign to this Appointment.
+     * @return A new immutable instance of Appointment with the updated Priority.
+     */
     public Appointment withPriority(Priority priority) {
         return new Appointment(name, startDateTime, duration, person, priority);
     }
