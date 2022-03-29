@@ -204,10 +204,10 @@ Format: `remove INDEX [r/] [b/] [t/TAG]…​`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
+* **Compulsory fields cannot be removed.**
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Fields and tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
-* **Compulsory fields cannot be removed.**
 
 </div>
 
