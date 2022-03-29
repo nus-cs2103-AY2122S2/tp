@@ -54,6 +54,7 @@ public class TeachWhatParser {
         switch (commandWord) {
 
         case AddStudentCommand.COMMAND_WORD:
+        case AddStudentCommand.SHORTENED_COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
         case DeleteStudentCommand.COMMAND_WORD:
@@ -117,7 +118,7 @@ public class TeachWhatParser {
             return new HelpCommand();
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

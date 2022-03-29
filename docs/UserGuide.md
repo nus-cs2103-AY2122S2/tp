@@ -159,9 +159,9 @@ Adds a recurring lesson with the following attributes:
 
 <div markdown="block" class="alert alert-info">
 
->**❗ Conflicting Lessons:** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
->
-> **💡 Tip:** If you still want to add this lesson, use `rmlesson` to remove the list of conflicting lessons shown before proceeding to add the new lesson.
+* **❗ Conflicting Lessons:** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
+
+* **💡 Tip:** If you still want to add this lesson, use [`rmlesson`](#deleting a-lesson) to remove the list of conflicting lessons shown before proceeding to add the new lesson.
 
 </div>
 
