@@ -77,7 +77,10 @@ public class PackageWindow extends UiPart<Stage> {
         ObservableList<InsurancePackage> internalList =
                 FXCollections.observableArrayList(new InsurancePackage("Premium"),
                         new InsurancePackage("Ups Special"),
-                        new InsurancePackage("Golden Dragon"));
+                        new InsurancePackage("Golden Dragon"),
+                        new InsurancePackage("Life Protection"),
+                        new InsurancePackage("Children Protection"),
+                        new InsurancePackage("Car Protection"));
         ObservableList<InsurancePackage> internalUnmodifiableList =
                 FXCollections.unmodifiableObservableList(internalList);
         ObservableList<InsurancePackage> packageList = new FilteredList<>(internalUnmodifiableList);

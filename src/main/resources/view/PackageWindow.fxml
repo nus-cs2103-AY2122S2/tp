@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.Scene?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
@@ -14,16 +15,16 @@
     </icons>
    <scene>
       <Scene>
-          <AnchorPane prefHeight="200" prefWidth="200">
-            <children>
-                <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets top="10" right="10" bottom="10" left="10" />
-                    </padding>
-                    <StackPane fx:id="packageListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-                </VBox>
-            </children>
-         </AnchorPane>
+          <stylesheets>
+              <URL value="@LightTheme.css" />
+              <URL value="@LightExtensions.css" />
+          </stylesheets>
+            <VBox fx:id="personList" styleClass="pane-with-border" minHeight="600" minWidth="450" prefWidth="340" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                <StackPane fx:id="packageListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
       </Scene>
    </scene>
 </fx:root>
