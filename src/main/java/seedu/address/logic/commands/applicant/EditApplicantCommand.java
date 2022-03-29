@@ -43,7 +43,7 @@ public class EditApplicantCommand extends EditCommand {
             + ": Edits the details of the applicant " + "identified "
             + "by the index number used in the displayed applicant list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INTERVIEW_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -91,7 +91,7 @@ public class EditApplicantCommand extends EditCommand {
         }
 
         model.setPerson(applicantToEdit, editedApplicant);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant), getCommandDataType());
     }
 

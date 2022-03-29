@@ -133,6 +133,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an interview has a conflict in timing as {@code interview} exists in the address book.
+     */
+    public boolean hasConflictingInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.containsConflict(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -149,6 +157,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+<<<<<<< HEAD
      * Returns interview(s) which are for the specified applicant.
      */
     public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
@@ -160,6 +169,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public ArrayList<Interview> getPositionsInterview(Position position) {
         return interviews.getPositionsInterview(position);
+=======
+     * Replaces the given interview {@code target} with {@code editedInterview}.
+     * {@code target} must exist in HireLah.
+     * The interview identity of {@code editedInterview} must not be the same as another existing interview
+     * in HireLah.
+     */
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireNonNull(editedInterview);
+
+        interviews.setInterview(target, editedInterview);
+>>>>>>> master
     }
 
     //// position-level operations

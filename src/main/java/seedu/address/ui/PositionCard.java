@@ -37,6 +37,8 @@ public class PositionCard extends UiPart<Region> {
     @FXML
     private Label openings;
     @FXML
+    private Label offered;
+    @FXML
     private FlowPane requirements;
 
     /**
@@ -55,6 +57,8 @@ public class PositionCard extends UiPart<Region> {
         if (numofOpenings == 0) {
             openings.setStyle("-fx-text-fill: #ffa4a4");
         }
+
+        offered.setText(position.getPositionOffers().getCount() + " offered");
 
         position.getRequirements().stream()
                 .sorted(Comparator.comparing(req -> req.requirementText))

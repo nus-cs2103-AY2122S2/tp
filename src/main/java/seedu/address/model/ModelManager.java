@@ -107,7 +107,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Applicant applicant) {
         addressBook.addApplicant(applicant);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -124,6 +124,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasConflictingInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.hasConflictingInterview(interview);
+    }
+
+    @Override
     public void deleteInterview(Interview target) {
         addressBook.removeInterview(target);
     }
@@ -132,6 +138,13 @@ public class ModelManager implements Model {
     public void addInterview(Interview interview) {
         addressBook.addInterview(interview);
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
+    }
+
+    @Override
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        addressBook.setInterview(target, editedInterview);
     }
 
     @Override
@@ -170,7 +183,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Applicant> predicate) {
+    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
     }

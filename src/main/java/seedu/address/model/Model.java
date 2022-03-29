@@ -89,12 +89,17 @@ public interface Model {
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Applicant> predicate);
+    void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
     /**
      * Returns true if an interview already exists in the address book.
      */
     boolean hasInterview(Interview interview);
+
+    /**
+     * Returns true if an applicant already has an interview for that timeslot.
+     */
+    boolean hasConflictingInterview(Interview interview);
 
     /**
      * Deletes the given interview.
@@ -104,9 +109,17 @@ public interface Model {
 
     /**
      * Adds the given interview.
-     * {@code interview} must not already exist in the address book.
+     * {@code interview} must not already exist in HireLah.
      */
     void addInterview(Interview interview);
+
+    /**
+     * Replaces the given interview {@code target} with {@code editedInterview}.
+     * {@code target} must exist in the address book.
+     * The interview identity of {@code editedInterview} must not be the same as another existing interview
+     * in the address book.
+     */
+    void setInterview(Interview target, Interview editedInterview);
 
     /** Returns an unmodifiable view of the filtered interview list */
     ObservableList<Interview> getFilteredInterviewList();

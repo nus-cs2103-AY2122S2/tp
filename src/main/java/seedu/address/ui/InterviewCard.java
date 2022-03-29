@@ -42,7 +42,7 @@ public class InterviewCard extends UiPart<Region> {
     @FXML
     private Label interviewemail;
     @FXML
-    private Label status;
+    private Label interviewstatus;
 
     /**
      * Creates a {@code InterviewCard} with the given {@code Interview} and index to display.
@@ -59,7 +59,16 @@ public class InterviewCard extends UiPart<Region> {
         name.setText(applicant.getName().fullName);
         interviewphone.setText(applicant.getPhone().value);
         interviewemail.setText(applicant.getEmail().value);
-        status.setText(interview.getStatus().toString());
+
+        String status = interview.getStatus().toString();
+        interviewstatus.setText(status);
+        if (status.equals("Pending") || status.equals("Passed - Waiting for Applicant")) {
+            interviewstatus.setStyle("-fx-background-color: #9f8331;");
+        } else if (status.equals("Failed")) {
+            interviewstatus.setStyle("-fx-background-color: #b92c2c;");
+        } else if (status.equals("Accepted")) {
+            interviewstatus.setStyle("-fx-background-color: #319f43;");
+        }
     }
 
     @Override

@@ -159,12 +159,17 @@ public class AddApplicantCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Applicant> predicate) {
+        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setInterview(Interview target, Interview editedInterview) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -195,6 +200,11 @@ public class AddApplicantCommandTest {
 
         @Override
         public boolean hasPosition(Position position) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasConflictingInterview(Interview interview) {
             throw new AssertionError("This method should not be called.");
         }
 

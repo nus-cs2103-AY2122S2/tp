@@ -1,6 +1,5 @@
 package seedu.address.model.position;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -52,7 +51,6 @@ public class Position {
         this.positionOpenings = positionOpenings;
         this.requirements.addAll(requirements);
         this.positionOffers = positionOffers;
-        checkArgument(isValidOpeningsToOffers(), MESSAGE_CONSTRAINTS);
     }
 
     public PositionName getPositionName() {
