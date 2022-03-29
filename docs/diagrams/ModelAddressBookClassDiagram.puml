@@ -36,10 +36,14 @@ Person *--> Address
 Person *--> "*" Tag
 Tag *--> "1" "  Name  "
 
+Appointment -down-> Person
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+AddressBook -[hidden]down- ModelManager
 
-ModelManager -->"~* filtered" Person
-Appointment -> Person
+ModelManager --up->"~* filtered" Tag
+ModelManager -up-->"~* filtered" Person
+
+
 @enduml
