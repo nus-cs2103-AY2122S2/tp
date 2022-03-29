@@ -18,6 +18,8 @@ import manageezpz.logic.commands.FindEmployeeCommand;
 import manageezpz.model.person.PersonMultiplePredicate;
 
 class FindEmployeeCommandParserTest {
+    private static final String NO_OPTION_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            FindEmployeeCommand.NO_OPTIONS + FindEmployeeCommand.MESSAGE_USAGE);
     private static final String INVALID_NAME_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindEmployeeCommand.INVALID_NAME + FindEmployeeCommand.MESSAGE_USAGE);
     private static final String INVALID_PHONE_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
@@ -28,12 +30,9 @@ class FindEmployeeCommandParserTest {
     private FindEmployeeCommandParser parser = new FindEmployeeCommandParser();
 
     @Test
-    void findEmployeeCommandParser_noOptions_findCommand() {
+    void findEmployeeCommandParser_noOptions_throwParseException() {
         String userInput = String.join(" ", FindEmployeeCommand.COMMAND_WORD);
-        PersonMultiplePredicate predicate = new PersonMultiplePredicate(null, null, null);
-        FindEmployeeCommand command = new FindEmployeeCommand(predicate);
-
-        assertParseSuccess(parser, userInput, command);
+        assertParseFailure(parser, userInput, NO_OPTION_MESSAGE);
     }
 
     @Test

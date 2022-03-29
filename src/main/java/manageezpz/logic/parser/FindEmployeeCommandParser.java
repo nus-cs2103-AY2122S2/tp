@@ -6,6 +6,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import manageezpz.commons.core.Messages;
 import manageezpz.logic.commands.FindEmployeeCommand;
@@ -31,6 +32,7 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
     public FindEmployeeCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PERSON_PROPERTIES);
 
+        checkIfHaveAtLeastOneOption(argMultimap);
         List<String> names = getPersonName(argMultimap);
         String phone = getPersonPhone(argMultimap);
         String email = getPersonEmail(argMultimap);
@@ -42,6 +44,13 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
         } else {
             PersonMultiplePredicate predicate = new PersonMultiplePredicate(names, phone, email);
             return new FindEmployeeCommand(predicate);
+        }
+    }
+
+    private void checkIfHaveAtLeastOneOption(ArgumentMultimap argMultiMap) {
+        if (!arePrefixesPresent(argMultiMap, PERSON_PROPERTIES)
+                || !argMultiMap.getPreamble().isEmpty()) {
+            addErrorMessage(FindEmployeeCommand.NO_OPTIONS);
         }
     }
 
@@ -105,5 +114,13 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
     private void addErrorMessage(String errorMessage) {
         hasError = true;
         this.errorMessage = this.errorMessage + errorMessage;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

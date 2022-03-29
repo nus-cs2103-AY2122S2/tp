@@ -13,6 +13,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
@@ -39,6 +40,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     public FindTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, VALID_OPTIONS);
 
+        checkIfHaveAtLeastOneOption(argMultiMap);
         Prefix taskType = getPrefix(argMultiMap);
         List<String> descriptions = getDescriptions(argMultiMap);
         Date date = getTaskDate(argMultiMap);
@@ -55,6 +57,13 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         } else {
             return new FindTaskCommand(new TaskMultiplePredicate(
                     taskType, descriptions, date, priority, assignee, isMarked));
+        }
+    }
+
+    private void checkIfHaveAtLeastOneOption(ArgumentMultimap argMultiMap) {
+        if (!arePrefixesPresent(argMultiMap, VALID_OPTIONS)
+                || !argMultiMap.getPreamble().isEmpty()) {
+            addErrorMessage(FindTaskCommand.NO_OPTIONS);
         }
     }
 
@@ -190,5 +199,13 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private void addErrorMessage(String errorMessage) {
         hasError = true;
         this.errorMessage = this.errorMessage + errorMessage;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

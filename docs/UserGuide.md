@@ -96,7 +96,7 @@ Finds employees that have all of the options as entered.
 
 #### Note:
 * Options can be stacked together in any order. 
-* No options entered will result in all employees list out like the `listEmployee` command.
+* At least one option is needed.
 
 #### Format:
 * `findEmployee n/NAMES`
@@ -185,10 +185,9 @@ Finds task(s) based on multiple conditions provided.
 
 #### Note:
 * Arguments can be stacked together in any order. 
-* Task Type is optional. 
+* There must be at least one task type or options shown below. 
 * However, only one task type is allowed.
 * Any other invalid options not stated below will be ignored
-* No options provided will list down all the tasks like `listTask`
 
 #### Task Type Available:
 * `todo/`: Todos

@@ -28,19 +28,21 @@ import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
 
 class FindTaskCommandParserTest {
-    static final String INVALID_DESCRIPTION_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String NO_OPTIONS_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            FindTaskCommand.NO_OPTIONS + FindTaskCommand.MESSAGE_USAGE);
+    private static final String INVALID_DESCRIPTION_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_DESCRIPTION + FindTaskCommand.MESSAGE_USAGE);
-    static final String INVALID_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String INVALID_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_DATE + FindTaskCommand.MESSAGE_USAGE);
-    static final String INVALID_PRIORITY_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String INVALID_PRIORITY_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_PRIORITY + FindTaskCommand.MESSAGE_USAGE);
-    static final String INVALID_ASSIGNEE_COMMAND_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String INVALID_ASSIGNEE_COMMAND_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_ASSIGNEE + FindTaskCommand.MESSAGE_USAGE);
-    static final String INVALID_BOOLEAN_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String INVALID_BOOLEAN_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_BOOLEAN + FindTaskCommand.MESSAGE_USAGE);
-    static final String TODO_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String TODO_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.TODO_AND_DATE_OPTION_TOGETHER + FindTaskCommand.MESSAGE_USAGE);
-    static final String MORE_THAN_ONE_TASK_TYPE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+    private static final String MORE_THAN_ONE_TASK_TYPE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.MORE_THAN_ONE_TASK_TYPE + FindTaskCommand.MESSAGE_USAGE);
 
     private FindTaskCommandParser parser = new FindTaskCommandParser();
@@ -48,14 +50,11 @@ class FindTaskCommandParserTest {
     @Test
     void findTaskCommandParser_noArguments_findTaskCommand() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD);
-        TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(null, null, null,
-                null, null, null);
-        FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, NO_OPTIONS_MESSAGE);
     }
 
     @Test
-    void findTaskCommandParser_specificTaskType_findCommand() {
+    void findTaskCommandParser_specificTaskType_findTaskCommand() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_TODO.toString());
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(PREFIX_TODO, null, null,
                 null, null, null);
