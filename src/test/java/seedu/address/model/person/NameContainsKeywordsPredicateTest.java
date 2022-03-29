@@ -46,7 +46,7 @@ public class NameContainsKeywordsPredicateTest {
         // One keyword
         NameContainsKeywordsPredicateOr predicate =
                 new NameContainsKeywordsPredicateOr(Collections.singletonList("Alice"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicateOr(Arrays.asList("Alice", "Bob"));
@@ -57,8 +57,8 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicateOr(Arrays.asList("aLIce", "bOB"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicateOr(Arrays.asList("aLIce"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").build()));
     }
 
     @Test
