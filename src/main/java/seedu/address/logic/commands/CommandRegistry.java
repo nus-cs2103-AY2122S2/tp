@@ -15,10 +15,14 @@ import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.FindTransactionCommandParser;
 import seedu.address.logic.parser.ListMembersCommandParser;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.PayCommandParser;
 import seedu.address.logic.parser.RemarkCommandParser;
 import seedu.address.logic.parser.RemoveCommandParser;
 import seedu.address.logic.parser.RemoveMembershipParser;
 import seedu.address.logic.parser.SortCommandParser;
+import seedu.address.logic.parser.UnpayCommandParser;
+
+
 
 public class CommandRegistry {
     public static final Map<String, Parser<? extends Command>> PARSERS;
@@ -45,8 +49,11 @@ public class CommandRegistry {
         parsers.put(FindTransactionCommand.COMMAND_WORD, new FindTransactionCommandParser());
         parsers.put(UndoCommand.COMMAND_WORD, (String args) -> new UndoCommand());
         parsers.put(DeleteTransactionCommand.COMMAND_WORD, new DeleteTransactionCommandParser());
+        parsers.put(PayCommand.COMMAND_WORD, new PayCommandParser());
+        parsers.put(UnpayCommand.COMMAND_WORD, new UnpayCommandParser());
         parsers.put(RemoveMembershipCommand.COMMAND_WORD, new RemoveMembershipParser());
         parsers.put(ListMembersCommand.COMMAND_WORD, new ListMembersCommandParser());
+
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
         PARSERS = Collections.unmodifiableMap(parsers);

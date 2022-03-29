@@ -6,6 +6,10 @@ public class Status extends TransactionField {
 
     public static final String FIELD_NAME = "Status";
 
+    public static final String STATUS_PAID = "true";
+
+    public static final String STATUS_NOTPAID = "false";
+
     public static final Prefix PREFIX = new Prefix("--paid", false, true);
 
     private final boolean isPaid;

@@ -7,13 +7,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.transaction.util.DateFieldInterface;
 
 /**
  * Represents a Due date of the transaction.
  * Optional to have.
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
-public class DueDate extends TransactionField {
+public class DueDate extends TransactionField implements DateFieldInterface {
 
     public static final String FIELD_NAME = "Due Date";
 
@@ -53,6 +54,11 @@ public class DueDate extends TransactionField {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return value;
     }
 
     @Override

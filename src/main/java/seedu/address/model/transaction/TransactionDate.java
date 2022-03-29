@@ -7,12 +7,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.transaction.util.DateFieldInterface;
 
 /**
  * Represents a Person's birthday in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
-public class TransactionDate extends TransactionField {
+public class TransactionDate extends TransactionField implements DateFieldInterface {
 
     public static final String FIELD_NAME = "Transaction Date";
 
@@ -34,6 +35,11 @@ public class TransactionDate extends TransactionField {
         transactionDate = transactionDate.trim();
         checkArgument(DueDate.isValid(transactionDate), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(transactionDate);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return value;
     }
 
     /**

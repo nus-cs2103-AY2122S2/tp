@@ -28,7 +28,9 @@
         <!-- Name -->
         <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
       </HBox>
-      <Label id="pid" fx:id="personId" text="\$phone" />
+      <Label id="pid" fx:id="personId" text="\$personId" />
+      <!-- Memebership -->
+      <FlowPane fx:id="memberships" />
       <!-- Tags -->
       <FlowPane fx:id="tags" />
       <!-- Required Fields (Need to add individually.) -->
@@ -37,8 +39,6 @@
       <Label fx:id="email" text="\$email" />
       <!-- Optional Fields -->
       <FlowPane fx:id="optionalFields" />
-      <!-- Memebership -->
-      <FlowPane fx:id="memberships" />
     </VBox>
   </GridPane>
 </HBox>
