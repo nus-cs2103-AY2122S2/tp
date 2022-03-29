@@ -53,6 +53,7 @@ public class ParserUtil {
         String[] numbers = oneBasedIndices.split(regex);
         LinkedList<Index> indices = new LinkedList<>();
         for (String number : numbers) {
+            number = number.trim();
             indices.add(parseIndex(number));
         }
         return indices;
@@ -134,7 +135,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String skill} into a {@code skill}.
+     * Parses a {@code String skill} into a {@code skill}.'
+     *
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code skill} is invalid.

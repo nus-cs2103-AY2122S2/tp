@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Team {
 
     public static final String MESSAGE_CONSTRAINTS = "teams names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "^[\\w|\\d]+[\\w|\\d|\\s]+[\\w|\\d]+$";
 
     public final String teamName;
 

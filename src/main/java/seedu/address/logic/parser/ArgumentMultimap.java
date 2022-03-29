@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -48,10 +49,15 @@ public class ArgumentMultimap {
      * @param regex  that separates the values within the prefix
      * @return the array of values
      */
-    public String[] getValuesWithRegex(Prefix prefix, String regex) {
+    public List<String> getValuesWithRegex(Prefix prefix, String regex) {
         String unseparatedArgs = getValue(prefix).get();
-        String[] separatedArgs = unseparatedArgs.split(" ", 0);
-        return separatedArgs;
+        String[] separatedArgs = unseparatedArgs.split(regex, 0);
+        List<String> trimmedArgs = new LinkedList<>();
+        for (String arg : separatedArgs) {
+            String trimmedArg = arg.trim();
+            trimmedArgs.add(trimmedArg);
+        }
+        return trimmedArgs;
     }
 
     /**

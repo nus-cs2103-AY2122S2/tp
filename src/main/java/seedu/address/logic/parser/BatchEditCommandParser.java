@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -33,9 +34,9 @@ public class BatchEditCommandParser implements Parser<BatchEditCommand> {
 
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_SKILL).isPresent()) {
-            String[] separatedArgs = argMultimap.getValuesWithRegex(PREFIX_SKILL, " ");
+            List<String> separatedArgs = argMultimap.getValuesWithRegex(PREFIX_SKILL, "\\s?,\\s?");
             Set<Skill> skillSet = new HashSet<>();
-            if (!(separatedArgs.length == 1 && separatedArgs[0].equals(""))) {
+            if (!(separatedArgs.size() == 1 && separatedArgs.get(0).equals(""))) {
                 for (String arg : separatedArgs) {
                     Skill skill = ParserUtil.parseSkill(arg);
                     skillSet.add(skill);
@@ -46,9 +47,9 @@ public class BatchEditCommandParser implements Parser<BatchEditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_TEAM).isPresent()) {
-            String[] separatedArgs = argMultimap.getValuesWithRegex(PREFIX_TEAM, " ");
+            List<String> separatedArgs = argMultimap.getValuesWithRegex(PREFIX_TEAM, "\\s?,\\s?");
             Set<Team> teams = new HashSet<>();
-            if (!(separatedArgs.length == 1 && separatedArgs[0].equals(""))) {
+            if (!(separatedArgs.size() == 1 && separatedArgs.get(0).equals(""))) {
                 for (String arg : separatedArgs) {
                     Team team = ParserUtil.parseTeam(arg);
                     teams.add(team);
