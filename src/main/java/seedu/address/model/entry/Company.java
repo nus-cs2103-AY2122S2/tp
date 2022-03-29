@@ -76,6 +76,11 @@ public class Company extends Entry {
         return otherEntry.getName().equals(getName());
     }
 
+    @Override
+    public void updateCompanyName(String oldName, String newName) {
+        return;
+    }
+
     /**
      * Returns true if both companies have the same identity and data fields.
      * This defines a stronger notion of equality between two companies.
@@ -122,5 +127,4 @@ public class Company extends Entry {
         }
         return builder.toString();
     }
-
 }

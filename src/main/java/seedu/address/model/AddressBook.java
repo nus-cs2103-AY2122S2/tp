@@ -217,18 +217,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Event> getEventList() {
-        return events.asUnmodifiableObservableList();
+    public void updateCompanyNames(String oldName, String newName) {
+        persons.updateCompanyNames(oldName, newName);
+        events.updateCompanyNames(oldName, newName);
     }
 
-    //// util methods
-
     @Override
-    public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons,"
-                + companies.asUnmodifiableObservableList().size() + " companies, "
-                + events.asUnmodifiableObservableList().size() + " events";
-        // TODO: refine later
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
     }
 
     @Override
@@ -239,6 +235,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Company> getCompanyList() {
         return companies.asUnmodifiableObservableList();
+    }
+
+    //// util methods
+
+    @Override
+    public String toString() {
+        return persons.asUnmodifiableObservableList().size() + " persons,"
+                + companies.asUnmodifiableObservableList().size() + " companies, "
+                + events.asUnmodifiableObservableList().size() + " events";
+        // TODO: refine later
     }
 
     @Override

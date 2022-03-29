@@ -20,13 +20,16 @@ a place to start or a veteran needing a quick reference, this guide is here to a
 1. Ensure you have Java `11` or above installed in your Computer.
    * If you don't have it installed, you can follow [Orcale's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
    for your operating system.
+   * Please make sure that you select Java `11` as your default Java version.
+   * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
+   to check.
 
 2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/tag/v1.2.0).
 
 3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
 4. Double-click the file to start the app. A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   (UI Image to be added)
+   ![Opening UI](images/UserGuide/Ui-1.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -43,37 +46,57 @@ a place to start or a veteran needing a quick reference, this guide is here to a
 
 6. Refer to the [Features](#features) below for details of each command.
 
+## User Guide Icons
+
+| Icon               | Meaning                                                       |
+|--------------------|---------------------------------------------------------------|
+|:information_source:| This icon indicates important information to be taken note of |
+|:bulb:               | This icon indicates useful tips for the users                |
+
 --------------------------------------------------------------------------------------------------------------------
 ## Overview of InternBuddy
 
-InternBuddy stores 3 lists for 3 different types of entries: **Persons**, **Companies**, and **Events**. The app will only display
-one of these lists at any time, as shown in the screenshot below.
+InternBuddy is designed specifically for students who are searching for internships. With InternBuddy, there is no need 
+for you to juggle between multiple apps just to manage your multiple internship applications. With efficiency as 
+its focus, InternBuddy values your **Time** and **Experience**. Let InterBuddy help you to manage your application details
+so you can focus acing your assessments and interviews!
 
-[INCLUDE IMAGE HERE]
+InternBuddy stores 3 lists for 3 different types of entries: **Companies**, **Persons**, and **Events**. 
+The app will only display one of these lists at any time, as shown in the screenshot below.
 
-Each of these 3 different types have different attributes attached to them.
+### Company List
+![Company List](images/UserGuide/Ui-2.png)
 
-A Person entry has:
-* a name
-* the name of the Company the Person is associated with
-* an email address
-* a phone number
-* zero or more tags associated with them
+### Person List
+![Person List](images/UserGuide/Ui-3.png)
+
+### Event List
+![Event List](images/UserGuide/Ui-4.png)
+
+Each of these 3 different types have different attributes attached to them. Let's dive in to understand what each type
+can store.
 
 A Company entry has:
-* a name
-* an email address
-* a phone number
-* a real-life address
-* zero or more tags associated with them
+* A name
+* An email address
+* A phone number
+* A real-life address
+* Zero or more tags associated with them
+
+A Person entry has:
+* A name
+* The name of the Company the Person is associated with
+* An email address
+* A phone number
+* Zero or more tags associated with them
 
 Finally, an Event entry has:
-* a name
-* the name of the Company the Event is associated with
-* a date
-* a time
-* a location
-* zero or more tags associated with them
+* A name
+* The name of the Company the Event is associated with
+* A date
+* A time
+* A location
+* Zero or more tags associated with them
 
 To interact with these lists and entries, you type commands into the command box and hit the Enter key when you are done. If the
 command is invalid for whatever reason, an error message will be shown and the command you typed will remain. 
@@ -125,16 +148,25 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding a company: `addc`
+
+Adds a company to the list of companies.
+
+Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Entries can have any number of tags (including 0)
+</div>
+
+Examples:
+* `addc n/Shopee p/96113432 e/shopee@gmail.com a/14 Jurong Street #01-01`
+* `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card Road #02-03 t/financial`
 
 ### Adding a person: `addp`
 
 Adds a person to the list of contact people.
 
 Format: `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Entries can have any number of tags (including 0)
-</div>
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
 `COMPANY_NAME` must match the name of an existing Company in the Company list.
@@ -144,16 +176,6 @@ Examples:
 * `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com`
 * `addp n/Betsy Crowe c/DBS t/friend e/betsycrowe@example.com p/1234567 t/criminal`
 
-### Adding a company: `addc`
-
-Adds a company to the list of companies.
-
-Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-Examples:
-* `addc n/Shopee p/96113432 e/shopee@gmail.com a/14 Jurong Street #01-01`
-* `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card Road #02-03 t/financial`
-
 ### Adding an event: `adde`
 
 Adds an event to the list of events.
@@ -161,7 +183,8 @@ Adds an event to the list of events.
 Format: `adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
-`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM
+`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM.
+E.g. 2022-10-20 and 13:30.
 </div>
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
@@ -172,17 +195,17 @@ Examples:
 * `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom`
 * `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
 
-### Listing all persons : `listp`
-
-Shows a list of all people in the list of contact people.
-
-Format: `listp`
-
 ### Listing all companies : `listc`
 
 Shows a list of all companies in the list of companies.
 
 Format: `listc`
+
+### Listing all persons : `listp`
+
+Shows a list of all people in the list of contact people.
+
+Format: `listp`
 
 ### Listing all events : `liste`
 
@@ -190,7 +213,7 @@ Shows a list of all events in the list of events.
 
 Format: `liste`
 
-### Editing a person : `editp`
+### Editing a company : `editc`
 
 <div markdown="block" class="alert alert-info">
 
@@ -204,6 +227,21 @@ Format: `liste`
 * When editing tags, the existing tags of the entry will be removed i.e adding of tags is not cumulative.
 
 </div>
+
+Edits an existing company in the list of companies.
+
+Format: `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+If the name of the Company is edited, all Events and Persons referring to the Company will also
+update the company name they have stored.
+</div>
+
+Examples:
+* `editc 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
+* `editc 2 n/Shoppee t/` Edits the name of the 2nd company to be `Shoppee` and clears all existing tags.
+
+### Editing a person : `editp`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can remove all of an entry’s tags by typing `t/` without specifying any tags after it.
@@ -221,21 +259,6 @@ Examples:
 *  `editp 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `editp 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Editing a company : `editc`
-
-Edits an existing company in the list of companies.
-
-Format: `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
-If the name of the Company is edited, all Events and Persons referring to the Company will also
-update the company name they have stored.
-</div>
-
-Examples:
-* `editc 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
-* `editc 2 n/Shoppee t/` Edits the name of the 2nd company to be `Shoppee` and clears all existing tags.
-
 ### Editing an event : `edite`
 
 Edits an existing event in the list of events.
@@ -243,7 +266,8 @@ Edits an existing event in the list of events.
 Format: `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
-`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM
+`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM.
+E.g. 2022-10-20 and 13:30.
 </div>
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
@@ -254,11 +278,15 @@ Examples:
 * `edite 1 d/2021-12-21 l/Zoom` Edits the date and location of the 1st event to be `2021-12-21` and `Zoom` respectively.
 * `edite 2 n/Resume Screening t/` Edits the name of the 2nd event to be `Resume Screening` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating companies: `findc`
 
-Finds persons whose names contain any of the given keywords.
+**TODO**
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+### Locating people by name: `findp`
+
+Finds people whose names contain any of the given keywords.
+
+Format: `findp KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -271,6 +299,10 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating events: `findp`
+
+**TODO**
 
 ### Deleting an entry : `delete`
 
@@ -288,7 +320,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the list of people.
+Clears all entries from all lists.
 
 Format: `clear`
 
@@ -312,10 +344,23 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Common Workflow
+
+**TODO**
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternBuddy home folder.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## GLOSSARY
+
+**TODO**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -331,7 +376,7 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 | **Edit Person**    | `editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`             | `editp 1 p/91234567 e/johndoe@example.com`                                           |
 | **Edit Company**   | `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                  | `editc 2 n/Shoppee t/`                                                               |
 | **Edit Event**     | `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…` | `edite 2 n/Resume Screening d/2022-12-11`                                              |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`                                                   | `find James Jake`                                                                                     |
+| **Find Person**    | `findp KEYWORD [MORE_KEYWORDS]`                                                  | `find James Jake`                                                                                     |
 | **List Persons**   | `listp`                                                                          |                                                                                      |
 | **List Companies** | `listc`                                                                          |                                                                                      |
 | **List Events**    | `liste`                                                                          |                                                                                      |
