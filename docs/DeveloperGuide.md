@@ -674,7 +674,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 ![Appointment Use Case](images/UseCaseDiagramAppointments.png)
 
-**UC10: List all appointments**
+**UC11: List All Appointments**
 
 **MSS**
 
@@ -682,7 +682,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. ContaX shows a list of all appointments.<br><br>
    Use case ends.
 
-**UC11: Add appointment**
+**UC12: Add Appointment**
 
 **MSS**
 
@@ -707,11 +707,11 @@ Note that since underline is not allowed in markdown, included use cases are **b
   * 2c1. ContaX shows an error message indicating that the appointment cannot be created due to overlapping appointments.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
-**UC12: Delete appointment**
+**UC13: Delete Appointment**
 
 **MSS**
 
-1. User **lists all appointments (UC10)**.
+1. User **lists all appointments (UC11)**.
 2. ContaX displays a list of appointments.
 3. User requests to delete a specific appointments in the list.
 4. ContaX deletes the appointment.
@@ -721,11 +721,11 @@ Note that since underline is not allowed in markdown, included use cases are **b
 **Extensions**
 
 * 1a. User filters appointments by condition.
-  * 1a1. User **finds appointments (UC13)**<br>&nbsp;
+  * 1a1. User **finds appointments (UC15)**<br>&nbsp;
   * Use Case resumes from step 2.<br>&nbsp;
 
 * 1b. User lists appointments with available slots in the schedule.
-  * 1b1. User **finds schedule slots (UC14)**<br>&nbsp;
+  * 1b1. User **finds schedule slots (UC16)**<br>&nbsp;
   * 1b2. Use Case resumes from step 2.<br>&nbsp;
 
 * 2a. ContaX has no appointments to list.<br>&nbsp;
@@ -735,11 +735,11 @@ Note that since underline is not allowed in markdown, included use cases are **b
     * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
     * Use case resumes at step 2.<br>&nbsp;
 
-**UC13: Edit an appointment**
+**UC14: Edit Appointment**
 
 **MSS**
 
-1. User **lists all appointments (UC10)**.
+1. User **lists all appointments (UC11)**.
 2. ContaX displays a list of appointments.
 3. User requests to modify a specific appointment.
 4. User enters the new attributes for the appointment.
@@ -750,11 +750,11 @@ Note that since underline is not allowed in markdown, included use cases are **b
 **Extensions**
 
 * 1a. User filters appointments by condition.
-    * 1a1. User **finds appointments (UC13)**<br>&nbsp;
+    * 1a1. User **finds appointments (UC15)**<br>&nbsp;
     * Use Case resumes from step 2.<br>&nbsp;
 
 * 1b. User lists appointments with available slots in the schedule.
-    * 1b1. User **finds schedule slots (UC14)**<br>&nbsp;
+    * 1b1. User **finds schedule slots (UC16)**<br>&nbsp;
     * 1b2. Use Case resumes from step 2.<br>&nbsp;
 
 * 2a. ContaX has no appointments to list.<br>&nbsp;
@@ -773,7 +773,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
     * 4b1. ContaX shows an error message indicating that the appointment cannot be edited due to overlapping appointments.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
-**UC15: Find appointments**
+**UC15: Find Appointments**
 
 **MSS**
 
@@ -813,7 +813,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 **MSS**
 
-1. User **lists all appointments (UC10)**.
+1. User **lists all appointments (UC11)**.
 2. ContaX displays a list of appointments.
 3. User requests to modify the priority level of a specific appointment.
 4. User enters the new priority for the appointment.
@@ -824,11 +824,11 @@ Note that since underline is not allowed in markdown, included use cases are **b
 **Extensions**
 
 * 1a. User filters appointments by condition.
-    * 1a1. User **finds appointments (UC13)**<br>&nbsp;
+    * 1a1. User **finds appointments (UC15)**<br>&nbsp;
     * Use Case resumes from step 2.<br>&nbsp;
 
 * 1b. User lists appointments with available slots in the schedule.
-    * 1b1. User **finds schedule slots (UC14)**<br>&nbsp;
+    * 1b1. User **finds schedule slots (UC16)**<br>&nbsp;
     * 1b2. Use Case resumes from step 2.<br>&nbsp;
 
 * 2a. ContaX has no appointments to list.<br>&nbsp;
