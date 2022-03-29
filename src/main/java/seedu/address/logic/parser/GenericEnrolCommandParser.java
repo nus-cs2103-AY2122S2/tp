@@ -5,9 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -25,7 +22,6 @@ import seedu.address.model.student.Student;
  */
 public class GenericEnrolCommandParser {
 
-    private static final Pattern GENERIC_ENROL_COMMAND_FORMAT = Pattern.compile("(?<entityType>\\S+)(?<arguments>.*)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the EnrolCommand or DisenrolCommand
@@ -33,13 +29,7 @@ public class GenericEnrolCommandParser {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public static Command parse(String command, String args, Model model, String usage) throws ParseException {
-        final Matcher matcher = GENERIC_ENROL_COMMAND_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage));
-        }
-
-        final String arguments = matcher.group("arguments");
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_CLASS_INDEX, PREFIX_STUDENT);
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_STUDENT)

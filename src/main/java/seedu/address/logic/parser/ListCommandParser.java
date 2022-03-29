@@ -59,6 +59,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                     }
                 } else {
                     filteredEntity = argMultimap.getValue(PREFIX_CLASS_INDEX).map(x -> EntityType.CLASS_GROUP);
+                    optionalIndex = ParserUtil.parseOptionalIndex(argMultimap.getValue(PREFIX_CLASS_INDEX));
                     if (filteredEntity.isPresent()) {
                         if (!ParserUtil.checkValidIndex(optionalIndex.get(),
                                 model.getUnfilteredClassGroupList().size())) {

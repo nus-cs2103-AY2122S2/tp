@@ -10,12 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SIMPLE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -31,7 +28,6 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class GradeCommandParser implements Parser<GradeCommand> {
 
-    private static final Pattern GRADE_COMMAND_FORMAT = Pattern.compile("(?<entityType>\\S+)(?<arguments>.*)");
     private static final String MESSAGE_ASSESSMENT_NOT_FOUND =
                 "Unable to find assessment using the given the module index and simple name!";
 
@@ -42,17 +38,12 @@ public class GradeCommandParser implements Parser<GradeCommand> {
      */
     @Override
     public GradeCommand parse(String args, Model model) throws ParseException {
-        final Matcher matcher = GRADE_COMMAND_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
-        }
 
-        final String arguments = matcher.group("arguments");
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments,
-                PREFIX_GRADE, PREFIX_MODULE_INDEX, PREFIX_ASSESSMENT_INDEX, PREFIX_STUDENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_GRADE, PREFIX_MODULE_INDEX, PREFIX_ASSESSMENT_INDEX, PREFIX_SIMPLE_NAME, PREFIX_STUDENT);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_INDEX, PREFIX_MODULE_INDEX,
-                PREFIX_SIMPLE_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        if ((!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_INDEX, PREFIX_MODULE_INDEX,
+                PREFIX_SIMPLE_NAME, PREFIX_STUDENT)) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GradeCommand.MESSAGE_USAGE));
         }
@@ -68,11 +59,12 @@ public class GradeCommandParser implements Parser<GradeCommand> {
             } else {
                 Index moduleIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MODULE_INDEX).get());
                 SimpleName simpleName = ParserUtil.parseSimpleName(argMultimap.getValue(PREFIX_SIMPLE_NAME)).get();
-                if (!ParserUtil.checkValidIndex(moduleIndex, model.getUnfilteredAssessmentList().size())) {
+                if (!ParserUtil.checkValidIndex(moduleIndex, model.getUnfilteredModuleList().size())) {
                     throw new ParseException(MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX);
                 }
                 TaModule module = model.getUnfilteredModuleList().get(moduleIndex.getZeroBased());
-                assessment = model.getFilteredAssessmentList().stream().filter(a -> a.getTaModule().equals(module)
+                assessment = model.getUnfilteredAssessmentList().stream()
+                        .filter(a -> a.getTaModule().equals(module)
                         && a.getSimpleName().equals(simpleName)).findFirst().orElseThrow(() ->
                 new ParseException(MESSAGE_ASSESSMENT_NOT_FOUND));
             }
@@ -83,16 +75,17 @@ public class GradeCommandParser implements Parser<GradeCommand> {
             return new GradeCommand(assessment, grade, students);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format("%s\n%s", pe.getMessage(), GradeCommand.MESSAGE_USAGE), pe);
         }
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix assessmentIndex,
-                                              Prefix moduleIndex, Prefix simpleName) {
-        if (argumentMultimap.getValue(assessmentIndex).isPresent()) {
+                                              Prefix moduleIndex, Prefix simpleName, Prefix student) {
+        if (argumentMultimap.getValue(assessmentIndex).isPresent() && argumentMultimap.getValue(student).isPresent()) {
             return true;
         } else if (argumentMultimap.getValue(moduleIndex).isPresent()
-                && argumentMultimap.getValue(simpleName).isPresent()) {
+                && argumentMultimap.getValue(simpleName).isPresent()
+                && argumentMultimap.getValue(student).isPresent()) {
             return true;
         }
         return false;
