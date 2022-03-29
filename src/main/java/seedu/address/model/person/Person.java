@@ -168,6 +168,17 @@ public class Person {
         return Objects.hash(name, phone, email, favourite, address, properties, preference, userType);
     }
 
+    /**
+     * Returns a plain string representation of {@code preference}.
+     */
+    public String preferenceToPlainString() {
+        if (preference.isEmpty()) {
+            return "";
+        } else {
+            return preference.get().toPlainString();
+        }
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
