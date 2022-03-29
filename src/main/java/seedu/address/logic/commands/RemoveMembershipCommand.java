@@ -18,14 +18,14 @@ public class RemoveMembershipCommand extends Command {
 
     public static final String COMMAND_WORD = "removeMembership";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes membership from the specified person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes membership from the specified client. "
             + "Parameters: "
             + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 ";
 
     public static final String MESSAGE_SUCCESS = "Membership removed";
-    public static final String MESSAGE_NO_MEMBERSHIP = "This person does not have a membership";
+    public static final String MESSAGE_NO_MEMBERSHIP = "This client does not have a membership";
 
     private final Index index;
 

@@ -5,10 +5,12 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,23 +20,26 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book.\n"
+            + "Required Parameters: "
             + Name.PREFIX + "NAME "
             + Phone.PREFIX + "PHONE "
             + Email.PREFIX + "EMAIL "
-            + Address.PREFIX + "ADDRESS "
+            + Address.PREFIX + "ADDRESS \n"
+            + "Optional Parameters: "
+            + Birthday.PREFIX + "BIRTHDAY "
+            + Remark.PREFIX + "REMARK "
             + "[" + Tag.PREFIX + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + Name.PREFIX + "John Doe "
             + Phone.PREFIX + "98765432 "
             + Email.PREFIX + "johnd@example.com "
             + Address.PREFIX + "311, Clementi Ave 2, #02-25 "
-            + Tag.PREFIX + "friends "
+            + Tag.PREFIX + "vendor "
             + Tag.PREFIX + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New client added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 
     private final Person toAdd;
 

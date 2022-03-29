@@ -51,7 +51,7 @@ public class Person implements Serializable {
 
         // Check for required fields.
         for (Prefix p : FieldRegistry.REQUIRED_PREFIXES) {
-            checkArgument(this.fields.containsKey(p), "All required fields must be given.");
+            checkArgument(this.fields.containsKey(p), "Client must have all required fields.");
         }
     }
 
@@ -296,21 +296,6 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-
-        // Required Fields
-        builder.append(getName())
-                .append("; Phone: ").append(getPhone())
-                .append("; Email: ").append(getEmail())
-                .append("; Address: ").append(getAddress());
-
-        // Tags
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
-
-        return builder.toString();
+        return getName().getValue();
     }
 }
