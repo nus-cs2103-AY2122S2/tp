@@ -357,7 +357,7 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 * Use `t/` if you want to sort by tag
 * Use `r/` if you want to sort by rating
 * For the above prefixes, you have to specify the `ORDER` right after the prefix.
-* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or  Type `dsc` to sort by descending! 
+* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending! 
 * If two or more of the above prefixes are being used, sort will prioritise sorting by name then status then rating then tag.   
 * Use `so/` if you want to reorder the priority and state the `SEQUENCE`
 * List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
