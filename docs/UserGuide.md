@@ -197,8 +197,8 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] 
 * Edits the client named `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * Spaces in `NAME` will be counted as separate names, unless `NAME` fully matches client's name
-    * Example: `edit John Doe p\88888888` will find clients with names containing `John` and `Doe`,
+  * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
+    * Example: `edit John Doe p/88888888` will find clients with names containing `John` and `Doe`, unless
                 there exists a client with the name `John Doe`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names
@@ -262,15 +262,20 @@ Format: `delete NAME`
 * Deletes the client with the specified `NAME`.
   * `Name` is case-insensitive. e.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * Spaces in `NAME` will be counted as separate names, unless `NAME` fully matches client's name
-    * Example: `edit John Doe p\88888888` will find clients with names containing `John` and `Doe`,
+  * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
+    * Example: `delete John Doe ` will find clients with names containing `John` and `Doe`, unless
                 there exists a client with the name `John Doe`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names
   * Input the position on the list of the client you wish to edit.
   
 Example:
-Scenario: You have clients named `John Doe` `John Smith` and `John Willams`
+
+**Scenario 1**: You have a client named `John Doe`
+
+`delete John Doe` removes client `John Doe` from HustleBook
+
+**Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
 * Running the command `delete n/John` will show a list of clients with names containing "John"
 * If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
 
