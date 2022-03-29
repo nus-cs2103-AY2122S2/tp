@@ -33,6 +33,7 @@ public class CandidateUtil {
         sb.append(PREFIX_ID + candidate.getStudentId().studentId + " ");
         sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
         sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + candidate.getEmail().value + " ");
         sb.append(PREFIX_COURSE + candidate.getCourse().course + " ");
         sb.append(PREFIX_SENIORITY + candidate.getSeniority().seniority + " ");
         sb.append(PREFIX_AVAILABILITY + candidate.getAvailability().availability + " ");

@@ -56,14 +56,6 @@ public class CandidateCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label course;
-    @FXML
-    private Label email;
-    @FXML
-    private Label availability;
-    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane statusPane;
@@ -77,10 +69,6 @@ public class CandidateCard extends UiPart<Region> {
         this.candidate = candidate;
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName + ", " + candidate.getStudentId().studentId);
-        phone.setText(candidate.getPhone().value);
-        course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
-        email.setText(candidate.getEmail().value);
-        availability.setText(AVAILABILITY_MSG);
 
         setAvailableDays(candidate.getAvailability());
         setApplicationStatus(candidate.getApplicationStatus());

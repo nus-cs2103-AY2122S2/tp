@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -17,6 +16,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -175,11 +176,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleFocus(CommandResult commandResult) throws FileNotFoundException {
+    private void handleFocus(CommandResult commandResult) {
         if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
             focusListPanelPlaceholder.getChildren().remove(0);
         }
-        focusListPanel = new FocusCard(logic.getFilteredCandidateList().get(commandResult.getIndexFocus()));
+        Candidate candidate = logic.getFilteredCandidateList().get(commandResult.getIndexFocus());
+        Interview interview = null;
+        for (Interview i: logic.getFilteredInterviewSchedule()) {
+            if (i.getCandidate().isSameCandidate(candidate)) {
+                interview = i;
+                break;
+            }
+        }
+        focusListPanel = new FocusCard(candidate, interview);
         focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
     }
 
@@ -201,7 +210,7 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText)
-            throws CommandException, ParseException, FileNotFoundException {
+            throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());

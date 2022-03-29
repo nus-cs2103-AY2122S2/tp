@@ -16,14 +16,14 @@ import seedu.address.model.candidate.StudentId;
  */
 public class CandidateBuilder {
 
-    public static final String DEFAULT_STUDENT_ID = "E0123456";
+    public static final String DEFAULT_STUDENT_ID = "A0123456B";
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "E0123456@u.nus.edu";
+    public static final String DEFAULT_EMAIL = "E0223456@u.nus.edu";
     public static final String DEFAULT_COURSE = "Computer Science";
     public static final String DEFAULT_SENIORITY = "2";
     public static final String DEFAULT_APPLICATION_STATUS = "Pending";
-    public static final String DEFAULT_INTERVIEW_STATUS = " Not Scheduled";
+    public static final String DEFAULT_INTERVIEW_STATUS = "Not Scheduled";
     public static final String DEFAULT_AVAILABILITY = "1,2,3,4,5";
 
     private StudentId studentId;
