@@ -91,8 +91,15 @@ public class ListCommandParser implements Parser<ListCommand> {
                     return new ListCommand(type, ListCommand.ListCommandType.TYPE);
                 } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
                     //Group prefix present without option field (Listing groups from group page)
-                    //e.g. list g/W16-1
                     String group = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get().toLowerCase();
+
+                    if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+                        //list g/W16-1 m/module
+                        String module = argMultimap.getValue(CliSyntax.PREFIX_MODULE).get().toLowerCase();
+                        return new ListCommand(group, module, ListCommand.ListCommandType.SPECIFICGROUPFROMGROUPVIEW);
+                    }
+
+                    //e.g. list g/W16-1
                     return new ListCommand(group, ListCommand.ListCommandType.GROUPFROMGROUPVIEW);
                 } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MEETINGTIME)) {
                     //Find all groups with given meeting time on group page

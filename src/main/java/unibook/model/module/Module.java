@@ -302,7 +302,7 @@ public class Module {
      */
     public boolean hasGroupName(String groupName) {
         for (Group group : groups) {
-            if (group.getGroupName().equals(groupName)) {
+            if (group.getGroupName().equalsIgnoreCase(groupName)) {
                 return true;
             }
         }
