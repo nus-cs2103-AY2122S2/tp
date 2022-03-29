@@ -62,11 +62,11 @@ class JsonSerializableAddressBook {
                 if (addressBook.hasTag(tag)) {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
                 }
+                addressBook.addTag(tag);
             } catch (IllegalValueException e) {
                 logger.fine("Skipped Tag: " + jsonAdaptedTag.getTagNameString());
                 continue;
             }
-            addressBook.addTag(tag);
         }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
@@ -77,14 +77,13 @@ class JsonSerializableAddressBook {
                     //skip instead of throwing exception
                     throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
                 }
+                // Load tags that were not added from tag list
+                addMissingTags(person, addressBook);
+                addressBook.addPerson(person);
             } catch (IllegalValueException e) {
                 logger.fine("Skipped Person: " + jsonAdaptedPerson.getPersonNameString());
                 continue;
             }
-
-            // Load tags that were not added from tag list
-            addMissingTags(person, addressBook);
-            addressBook.addPerson(person);
         }
         return addressBook;
     }
