@@ -48,7 +48,7 @@ Step 3. User can access the Favourites window by navigating to the menu item as 
 The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
 The left column shows the sellers, while the right column shows the buyers.
 
-Two `Person` make a match if one has at least one `property` that matches the other's `preference`.
+Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
 
 ## Help Feature and Window
 The `help` command and selecting help from the dropdown opens the `helpwindow`.
@@ -160,6 +160,10 @@ If multiple attributes are specified, the first attribute is given the highest p
 The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`.
 
 Whenever the underlying application data is modified, the `FilteredList<Person>` is notified first and will filter the data. If there is any change in the `FilteredList<Person>`, the `SortedList<Person>` is notified and will sort the filtered data.
+
+## Feature `find` enhanced
+In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
+They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute. 
 
 # Documentation, logging, testing, configuration, dev-ops
 

@@ -142,7 +142,7 @@ public class PersonBuilder {
      * Does not set the {@code Preference} of the {@code Person} that we are building & return the current Person.
      */
     public PersonBuilder withPreference() {
-        this.preference = null;
+        this.preference = Optional.empty();
         return this;
     }
 
