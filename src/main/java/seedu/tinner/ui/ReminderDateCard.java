@@ -47,7 +47,7 @@ public class ReminderDateCard extends UiPart<Region> {
 
         UniqueReminderList reminderList = UniqueReminderList.getInstance();
         ObservableList<Reminder> dateSpecificReminders = reminderList.getDateSpecificReminders(reminderDate);
-        reminderListPanelPlaceholder.setPrefHeight(90 * dateSpecificReminders.size());
+        reminderListPanelPlaceholder.setPrefHeight(100 * dateSpecificReminders.size());
 
         setReminderListPanelPlaceholder(dateSpecificReminders);
     }

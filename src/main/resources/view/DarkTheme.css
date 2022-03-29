@@ -168,40 +168,43 @@
     -fx-text-fill: white;
 }
 
+#noRemindersBox .label {
+    -fx-text-fill: grey;
+}
+
 .cell_giant_label {
     -fx-font-family: "Rubik Bold";
     -fx-font-size: 28px;
-    -fx-text-fill: #010504;
 }
 
 .cell_big_label {
     -fx-font-family: "Rubik Bold";
     -fx-font-size: 18px;
-    -fx-text-fill: #010504;
 }
 
 .cell_date_label {
     -fx-font-family: "Rubik";
     -fx-font-size: 18px;
-    -fx-text-fill: #010504;
+}
+
+.cell_no_reminders_label {
+    -fx-font-family: "Rubik";
+    -fx-font-size: 18px;
 }
 
 .cell_medium_label {
     -fx-font-family: "Rubik Bold";
     -fx-font-size: 14px;
-    -fx-text-fill: #010504;
 }
 
 .cell_small_label {
     -fx-font-family: "Rubik Regular";
     -fx-font-size: 12px;
-    -fx-text-fill: #010504;
 }
 
 .cell_tiny_label {
     -fx-font-family: "Rubik Regular";
     -fx-font-size: 11px;
-    -fx-text-fill: #010504;
 }
 
 .stack-pane {
