@@ -39,21 +39,25 @@ public class DeleteModuleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert this.modCodePredicate != null;
         int deletedCount = 0;
+
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        assert this.modCodePredicate != null;
+
         model.updateFilteredPersonList(this.modCodePredicate);
         if (model.getFilteredPersonList().size() == 0) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(MESSAGE_NONEXISTENT_MODULE_CODE);
         }
-        while (model.getFilteredPersonList().size() > 0) { // person with specified id exists
+
+        while (model.getFilteredPersonList().size() > 0) { // students with specified module code exist
             Person personToDelete = lastShownList.get(Index.fromZeroBased(0).getZeroBased());
             model.deletePerson(personToDelete);
             deletedCount++;
             model.updateFilteredPersonList(this.modCodePredicate);
         }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_MULTIPLE_PERSONS_SUCCESS, deletedCount));
     }
