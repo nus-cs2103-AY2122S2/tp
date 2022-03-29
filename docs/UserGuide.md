@@ -417,7 +417,7 @@ Example:
 
 Finds appointments with name or Person name that contains the given keyword.
 
-Format: `findappt KEYWORD [MORE_KEYWORDS] [by/person]`
+Format: `findappt KEYWORD [MORE_KEYWORDS] [by/(person OR name)]`
 
 * The search is case-insensitive. e.g `Meeting` will match `meeting`
 * The order of the keywords does not matter. e.g. `Meeting Here` will match `Here Meeting`
@@ -425,6 +425,8 @@ Format: `findappt KEYWORD [MORE_KEYWORDS] [by/person]`
 * Appointments matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Meeting Here` will return `Meeting There`, `Meeting Now`
 * If `by/person` is included, the appointments will be matched based on the person name.
+* If `by/name` is included, the appointments will be matched based on the appointment name.
+* If neither `by/name` nor `by/person` are specified, the appointments will to default to match based on the appointment name.
 
 Example:
 * `findappt Meeting` Lists all appointments with name that contains `Meeting`.
