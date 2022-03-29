@@ -278,7 +278,7 @@ The no-overlap constraint is enforced at such a low level as a defensive measure
 While chronological ordering can arguably be enforced in `ModelManager` or even the `UI` component, the decision to implement it at such a low level is due to the fact that `DisjointAppointmentList` is the only class that has direct access to the underlying list of appointments.
 Although manipulation using the public methods can be done, they do not provide index-level manipulation, and are hence less efficient due to the extra `List#indexOf` operation required. The solution of implementing additional index-based operations exists, but would result in highly specialized methods that are only used by the sorting function, unnecessarily complicating the class.
 
-In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance. 
+In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance.
 
 |<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
 | - |
@@ -332,7 +332,7 @@ The sequence diagram below illustrates an example of both `Parser` and `UI` acce
 
 ### Schedule Serialization and Inflation
 
-`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated. 
+`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
 
 The inflation process is also designed to be forgiving, and will skip corrupted records instead of invalidating the entire data file.
 
@@ -793,7 +793,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 4a. ContaX detects that a required person attribute was not supplied.
     * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
     * Use case ends.<br>&nbsp;
-     
+
 * 4b. ContaX detects that a supplied attribute has an invalid value
     * 4b1. ContaX shows an error message indicating that the supplied parameter is invalid.
     * 4b2. ContaX shows the expected allowed values.
@@ -856,7 +856,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 2a. ContaX detects that the required tag attributed was not supplied.
   * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
   * Use case ends.<br>&nbsp;
-  
+
 * 2b. ContaX detects that invalid characters were supplied.
   * 2b1. ContaX shows an error message indicating that an invalid character was found.
   * 2b2. ContaX shows the expected allowed values.
