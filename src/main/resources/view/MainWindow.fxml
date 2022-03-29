@@ -36,6 +36,7 @@
                         <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                     </Menu>
                     <Menu mnemonicParsing="false" text="Charts">
+                        <MenuItem fx:id="monthlyCustomerChart" mnemonicParsing="false" onAction="#plotMonthlyCustomerChart" text="Customers per Month Chart" />
                         <MenuItem fx:id="staffChart" mnemonicParsing="false" onAction="#plotStaffChart" text="Staff Chart" />
                         <MenuItem fx:id="serviceChart" mnemonicParsing="false" onAction="#plotServiceChart" text="Service Chart" />
                         <MenuItem fx:id="allergyChart" mnemonicParsing="false" onAction="#plotAllergyChart" text="Allergy Chart" />

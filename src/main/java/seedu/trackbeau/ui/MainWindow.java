@@ -3,6 +3,7 @@ package seedu.trackbeau.ui;
 import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
 import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,7 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -36,6 +39,7 @@ import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.ui.charts.AllergyChartWindow;
 import seedu.trackbeau.ui.charts.HairChartWindow;
+import seedu.trackbeau.ui.charts.MonthlyCustomerChartWindow;
 import seedu.trackbeau.ui.charts.ServiceChartWindow;
 import seedu.trackbeau.ui.charts.SkinChartWindow;
 import seedu.trackbeau.ui.charts.StaffChartWindow;
@@ -61,6 +65,7 @@ public class MainWindow extends UiPart<Stage> {
     private AllergyChartWindow allergyChartWindow;
     private SkinChartWindow skinChartWindow;
     private HairChartWindow hairChartWindow;
+    private MonthlyCustomerChartWindow monthlyCustomerChartWindow;
     private ServiceListPanel serviceListPanel;
     private BookingListPanel bookingListPanel;
     private StatisticsPanel statisticsPanel;
@@ -115,6 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         allergyChartWindow = new AllergyChartWindow();
         skinChartWindow = new SkinChartWindow();
         hairChartWindow = new HairChartWindow();
+        monthlyCustomerChartWindow = new MonthlyCustomerChartWindow();
 
         this.labels = new ArrayList<>();
         this.labels.add(customersLabel);
@@ -252,7 +258,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void plotStaffChart() {
         HashMap<String, Integer> staffMap = this.getStaffMap();
-        addData(staffMap, staffChartWindow.getPieChart());
+        addPieChartData(staffMap, staffChartWindow.getPieChart());
         if (!staffChartWindow.isShowing()) {
             staffChartWindow.show();
         } else {
@@ -266,7 +272,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void plotServiceChart() {
         HashMap<String, Integer> serviceMap = this.getServiceMap();
-        addData(serviceMap, serviceChartWindow.getPieChart());
+        addPieChartData(serviceMap, serviceChartWindow.getPieChart());
         if (!serviceChartWindow.isShowing()) {
             serviceChartWindow.show();
         } else {
@@ -280,7 +286,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void plotAllergyChart() {
         HashMap<String, Integer> allergyMap = this.getAllergyMap();
-        addData(allergyMap, allergyChartWindow.getPieChart());
+        addPieChartData(allergyMap, allergyChartWindow.getPieChart());
         if (!allergyChartWindow.isShowing()) {
             allergyChartWindow.show();
         } else {
@@ -294,7 +300,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void plotSkinChart() {
         HashMap<String, Integer> skinTypeMap = this.getSkinTypeMap();
-        addData(skinTypeMap, skinChartWindow.getPieChart());
+        addPieChartData(skinTypeMap, skinChartWindow.getPieChart());
         if (!skinChartWindow.isShowing()) {
             skinChartWindow.show();
         } else {
@@ -308,7 +314,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void plotHairChart() {
         HashMap<String, Integer> hairTypeMap = this.getHairTypeMap();
-        addData(hairTypeMap, hairChartWindow.getPieChart());
+        addPieChartData(hairTypeMap, hairChartWindow.getPieChart());
         if (!hairChartWindow.isShowing()) {
             hairChartWindow.show();
         } else {
@@ -317,9 +323,24 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the monthly customer chart window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void plotMonthlyCustomerChart() {
+        HashMap<Integer, Integer> monthlyCustomerMap = this.getMonthlyCustomerMap();
+        addLineChartData(monthlyCustomerMap,
+                monthlyCustomerChartWindow.getLineChart(), "Customers Gained This Year");
+        if (!monthlyCustomerChartWindow.isShowing()) {
+            monthlyCustomerChartWindow.show();
+        } else {
+            monthlyCustomerChartWindow.focus();
+        }
+    }
+
+    /**
      * Adds data to the pie charts in a specific window.
      */
-    void addData(HashMap<String, Integer> hm, PieChart pieChart) {
+    void addPieChartData(HashMap<String, Integer> hm, PieChart pieChart) {
         pieChart.getData().clear();
         int dataCount = 0; //add only top 10 most count to prevent cluttering
         Map<String, Integer> map = sortByValue(hm);
@@ -336,6 +357,25 @@ public class MainWindow extends UiPart<Stage> {
         //.layout() prevents labels from moving to top left after opening chart a few times
         pieChart.layout();
     }
+
+    /**
+     * Adds data to a line chart in a specific window.
+     */
+    void addLineChartData(HashMap<Integer, Integer> hm, LineChart lineChart, String chartName) {
+        lineChart.getData().clear();
+        XYChart.Series series = new XYChart.Series();
+        for (int key : hm.keySet()) {
+            int month = key;
+            int count = hm.get(key);
+            series.getData().add(new XYChart.Data(month, count));
+        }
+        series.setName(chartName);
+        lineChart.getData().add(series);
+        //.layout() prevents labels from moving to top left after opening chart a few times
+        lineChart.layout();
+    }
+
+
 
     /**
      * Returns a hashmap with the staff name as the key and count as the value.
@@ -368,7 +408,7 @@ public class MainWindow extends UiPart<Stage> {
         ObservableList<Customer> customerList = logic.getFilteredCustomerList();
         for (Customer customer : customerList) {
             for (Tag tag : customer.getServices()) {
-                String key = tag.tagName.toUpperCase(); //key is the staff name
+                String key = tag.tagName.toUpperCase(); //key is the service name
                 if (serviceMap.containsKey(key)) {
                     serviceMap.put(key, serviceMap.get(key) + 1);
                 } else {
@@ -389,7 +429,7 @@ public class MainWindow extends UiPart<Stage> {
         ObservableList<Customer> customerList = logic.getFilteredCustomerList();
         for (Customer customer : customerList) {
             for (Tag tag : customer.getAllergies()) {
-                String key = tag.tagName.toUpperCase(); //key is the staff name
+                String key = tag.tagName.toUpperCase(); //key is the allergy name
                 if (allergyMap.containsKey(key)) {
                     allergyMap.put(key, allergyMap.get(key) + 1);
                 } else {
@@ -430,7 +470,7 @@ public class MainWindow extends UiPart<Stage> {
         HashMap<String, Integer> hairTypeMap = new HashMap<String, Integer>();
         ObservableList<Customer> customerList = logic.getFilteredCustomerList();
         for (Customer customer : customerList) {
-            String key = customer.getHairType().toString().toUpperCase(); //key is the staff name
+            String key = customer.getHairType().toString().toUpperCase(); //key is the hair type name
             if (!key.equals(EMPTY_HAIR_TYPE.toUpperCase())) {
                 if (hairTypeMap.containsKey(key)) {
                     hairTypeMap.put(key, hairTypeMap.get(key) + 1);
@@ -441,6 +481,30 @@ public class MainWindow extends UiPart<Stage> {
         }
         return hairTypeMap;
     }
+
+    /**
+     * Returns a hashmap with the month as the key and count as the value.
+     * Count refers to the number of customers who have registered on that month this year.
+     * @return HashMap
+     */
+    HashMap<Integer, Integer> getMonthlyCustomerMap() {
+        HashMap<Integer, Integer> monthlyCustomerMap = new HashMap<Integer, Integer>();
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        LocalDate currentDate = LocalDate.now();
+        int currentYear = currentDate.getYear();
+        for (Customer customer : customerList) {
+            Integer key = customer.getRegDate().value.getMonthValue();
+            if (customer.getRegDate().value.getYear() == currentYear) {
+                if (monthlyCustomerMap.containsKey(key)) {
+                    monthlyCustomerMap.put(key, monthlyCustomerMap.get(key) + 1);
+                } else {
+                    monthlyCustomerMap.put(key, 1);
+                }
+            }
+        }
+        return monthlyCustomerMap;
+    }
+
 
     /**
      * Returns a sorted HashMap by value.
@@ -482,6 +546,9 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         staffChartWindow.hide();
         serviceChartWindow.hide();
+        allergyChartWindow.hide();
+        skinChartWindow.hide();
+        hairChartWindow.hide();
         primaryStage.hide();
     }
 
@@ -522,6 +589,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isPlotSkinChart()) {
                 plotSkinChart();
+            }
+
+            if (commandResult.isPlotMonthlyCustomerChart()) {
+                plotMonthlyCustomerChart();
             }
 
             if (commandResult.isPlotHairChart()) {

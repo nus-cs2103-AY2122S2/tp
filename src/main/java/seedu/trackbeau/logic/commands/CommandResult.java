@@ -32,13 +32,17 @@ public class CommandResult {
     /** plot hair chart */
     private final boolean plotHairChart;
 
+    /** plot monthly customer chart */
+    private final boolean plotMonthlyCustomerChart;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp,
                          boolean exit, boolean plotStaffChart,
                          boolean plotServiceChart, boolean plotAllergyChart,
-                         boolean plotSkinChart, boolean plotHairChart) {
+                         boolean plotSkinChart, boolean plotHairChart,
+                         boolean plotMonthlyCustomerChart) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -47,6 +51,7 @@ public class CommandResult {
         this.plotAllergyChart = plotAllergyChart;
         this.plotSkinChart = plotSkinChart;
         this.plotHairChart = plotHairChart;
+        this.plotMonthlyCustomerChart = plotMonthlyCustomerChart;
     }
 
     /**
@@ -56,7 +61,7 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false,
                 false, false, false, false,
-                false, false);
+                false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -91,6 +96,10 @@ public class CommandResult {
         return plotHairChart;
     }
 
+    public boolean isPlotMonthlyCustomerChart() {
+        return plotMonthlyCustomerChart;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -110,14 +119,15 @@ public class CommandResult {
                 && plotServiceChart == otherCommandResult.plotServiceChart
                 && plotAllergyChart == otherCommandResult.plotAllergyChart
                 && plotSkinChart == otherCommandResult.plotSkinChart
-                && plotHairChart == otherCommandResult.plotHairChart;
+                && plotHairChart == otherCommandResult.plotHairChart
+                && plotMonthlyCustomerChart == otherCommandResult.plotMonthlyCustomerChart;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(feedbackToUser, showHelp, exit,
                 plotStaffChart, plotServiceChart, plotAllergyChart,
-                plotSkinChart, plotHairChart);
+                plotSkinChart, plotHairChart, plotMonthlyCustomerChart);
     }
 
 }

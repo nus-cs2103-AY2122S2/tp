@@ -18,6 +18,6 @@ public class PlotAllergyChartCommand extends Command {
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_CHART_MESSAGE, false,
                 false, true,
-                false, true, false, false);
+                false, true, false, false, false);
     }
 }
