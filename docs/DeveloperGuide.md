@@ -246,7 +246,7 @@ The following sequence diagram shows how `AddLessonCommand`
 ![Add Lesson Sequence Diagram 3](images/AddLessonSequenceDiagram_3.png)
 
 The following sequence diagram shows how `AddLessonCommand`
-- updates the UI to show a list by updating the filtered lesson list through `Model` using an instance of `ConflictingLessonsPredicate`
+- updates the UI to show a list of conflicting lessons by updating the filtered lesson list through `Model` using an instance of `ConflictingLessonsPredicate`
 
 ![Add Lesson Sequence Diagram 4](images/AddLessonSequenceDiagram_4.png)
 
