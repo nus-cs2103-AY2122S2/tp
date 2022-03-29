@@ -110,8 +110,9 @@ Deletes a specified entry (patient, contact, medical information,...) on current
 Format: `delete INDEX`
 
 * We can delete the entry only if the entry is being shown on the display panel.
-* The index refers to the index number shown in the displayed list.
+* For all screens apart from Summary, the index refers to the index number shown in the displayed list.
 * The index must be a positive integer 1, 2, 3, …​
+* For Summary screen, `delete 1` deletes the patient being viewed; other indices are invalid.
 
 Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
