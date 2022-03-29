@@ -521,19 +521,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User uses one of the three `addTask` commands:
-    * 3a1. User uses `addTask /todo` command
+* 3a. User uses one of the three `add` commands: 
+    * 3a1. User uses `addTodo` command 
 
-      Use case resumes from step 4.
+      Use case resumes from step 4. 
 
-    * 3a2. User uses `addTask /event` command
+    * 3a2. User uses `addDeadline` command 
 
-      Use case resumes from step 4.
+      Use case resumes from step 4. 
 
-    * 3a3. User uses `addTask /deadline` command
+    * 3a3. User uses `addEvent` command 
 
-      Use case resumes from step 4.
-
+      Use case resumes from step 4. 
+    
 * 3b. User uses Add Task Commands with the wrong syntax
 
     * 3b1. ManageEZPZ sends an error message to User, indicating the
@@ -544,6 +544,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ****
 
 **Use Case 2 - Delete Task**
+
+Guarantees: Deletion of any Task will also result in the removal
+            of any Employee association that the Task has.
 
 **MSS**
 
@@ -571,36 +574,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User enters the command to list Tasks.
-4. ManageEZPZ displays the Tasks according.
+4. ManageEZPZ displays the all Tasks.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the five `list` Task commands:
-    * 3a1. User uses `list /all` command
-
-      Use case resumes from step 4.
-
-    * 3a2. User uses `list /todo` command
-
-      Use case resumes from step 4.
-
-    * 3a3. User uses `list /deadline` command
-
-      Use case resumes from step 4.
-
-    * 3a2. User uses `list /event` command
-
-      Use case resumes from step 4.
-
-    * 3a3. User uses `list /today` command
-
-      Use case resumes from step 4.
-
-* 3b. User uses list Task commands with the wrong syntax.
-    * 3b1. ManageEZPZ sends an error message to User, that the list
-      command is incorrect, attached with the correct syntax format.
+* 3a. User uses list Task commands with the wrong syntax. 
+    * 3a1. ManageEZPZ sends an error message to User, that the list
+      command is incorrect, attached with the correct syntax format. 
 
       Use case ends.
 
@@ -640,7 +622,8 @@ Preconditions: User is currently using ManageEZPZ.
 2. ManageEZPZ displays the Tasks.
 3. User realises that Task is marked as done, but is actually not done.
 4. User enters command to unmark Task for the specific Task Number.
-5. ManageEZPZ unmarks the Task & confirms with a successful message that the task is unmarked.
+5. ManageEZPZ unmarks the Task & confirms with a successful message 
+   that the task is unmarked. 
 
    Use case ends.
 
@@ -668,15 +651,22 @@ Preconditions: User is currently using ManageEZPZ.
 
 **Extensions**
 
-* 3a. User uses one of the two Find Task commands:
+* 3a. User uses one of the three Find Task commands: 
 
-    * 3a1. User uses `find /task TASK_DESCRIPTION` command
+    * 3a1. User uses any of the `findTask` command:
+        * `findTask todo/`
+        * `findTask deadline/`
+        * `findTask event/`
+        * With or without the Task type above, the User wants to also get a more 
+          filtered search result, User then adds these prefixes as additional
+          search terms:
+          * `desc/` for Description search.
+          * `date/` for Date search.
+          * `priority/` for Priority search.
+          * `assignees/` for Assignees search.
+          * `isMarked/` for finished Tasks Search.
 
-      Use case resumes from step 4.
-
-    * 3a2. User uses `find /date DD-MM-YYYY` command
-
-      Use case resumes from step 4.
+      Use case resumes from step 4. 
 
 * 3b. User uses find Task commands with the wrong syntax
 
@@ -687,21 +677,53 @@ Preconditions: User is currently using ManageEZPZ.
 
 ****
 
-**Use Case 7 - Add Employee**
+**Use Case 7 - Edit Tasks**
 
 **MSS**
-1. User starts up ManageEZPZ.
+
+1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User wants to add a new Employee, enters command to add Employee.
-4. ManageEZPZ adds the Employee & confirms with a successful message that the task is marked
+3. User enters the command to list Tasks.
+4. User realizes that some Tasks have the wrong information.
+5. User enters the command to edit the Task(s).
+6. ManageEZPZ sends a message to the User indicating that the edit has been successful.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data.
+* 5a. User selects a combination of information to edit:
+  * `desc/` to edit the Description.
+  * `at/` to edit the Time.
+  * `date/` to edit the Date.
 
-    * 3a1. ManageEZPZ sends an error message to User, indicating the
+  Use case resumes from step 6.
+
+* 5b. User uses edit Task commands with the wrong syntax
+
+    * 5b1. ManageEZPZ sends an error message to User, indicating syntax used for
+      the edit Task command is incorrect, attached with the correct syntax format.
+
+      Use Case ends.
+
+****
+
+**Use Case 8 - Add Employee**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+1. User wants to add a new Employee, enters command to add Employee.
+2. ManageEZPZ adds the Employee & confirms with a successful message that the
+   Employee is added to ManageEZPZ.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data. 
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
       format for the add Employee command is incorrect, attached with the
       correct syntax format.
 
@@ -709,19 +731,107 @@ Preconditions: User is currently using ManageEZPZ.
 
 ****
 
-**Use Case 8 - Clear all Tasks**
+**Use Case 9 - Deleting Employee**
+
+Preconditions: User is currently using ManageEZPZ.
+
+Guarantees: Deletion of any Employee will also result in the removal 
+            of the Employee from the Task(s) that the Employee has been
+            assigned to.
+
+**MSS**
+1. User wants to delete an existing Employee, enters command to delete Employee.
+2. ManageEZPZ deletes the Employee and sends a confirmation message that the
+   deletion has been successful.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data.
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
+      format for delete Employee command is incorrect, attached with the
+      correct syntax format.
+      
+  Use Case ends.
+
+****
+
+**Use Case 10 - Tagging Employee to Task**
+
+Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
-1. User enters the command to clear all Tasks
-2. ManageEZPZ clears all Tasks & confirms with a successful
-   message that all Task are cleared.
+1. User enters the command to tag an Employee to a Task.
+2. ManageEZPZ assigns the Employee to the Task, and sends a confirmation message 
+   to the User that the Employee has been assigned.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data.
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
+      format for the tag Employee to Task command is incorrect, attached with the
+      correct syntax format.
+    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List, 
+      indicating to the User to enter a valid Task number.
+    * 1a3. ManageEZPZ detects that Name of Employee is not in the database, 
+      indicating to the User to enter a valid Employee Name.
+
+      Use Case ends.
+
+****
+
+**Use Case 11 - Tagging Priority to Tasks**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters the command to Tag a Priority to a Task.
+2. ManageEZPZ tags the appropriate Priority to the Task, and sends a 
+   confirmation message to the Priority has been assigned to the Task.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data.
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
+      format for the add Employee command is incorrect, attached with the
+      correct syntax format.
+    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List, 
+      indicating to the User to enter a valid Task number.
+    * 1a3. ManageEZPZ detects that an invalid Priority that is not one of the four: 
+           None, Low, Medium, High. ManageEZPZ reminds the User to use a valid 
+           Priority.
+  
+      Use Case ends.
+
+****
+
+**Use Case 12 - Deleting all Entries in ManageEZPZ**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters the command to clear ManageEZPZ.
+2. ManageEZPZ clears all Employee and Task data, sending a confirmation
+   message that ManageEZPZ entries are cleared.
 
    Use case ends.
 
 ****
 
-**Use Case 9 - Exit ManageEZPZ**
+**Use Case 13 - Exit ManageEZPZ**
+
+Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
@@ -732,8 +842,7 @@ Preconditions: User is currently using ManageEZPZ.
    Use case ends.
 
 ****
-*{More to be added}*
-****
+
 ### Non-Functional Requirements
 
 #### Technical Requirements
