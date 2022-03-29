@@ -365,7 +365,7 @@ public class DeleteCommand extends Command {
                     throw new CommandException(Messages.MESSAGE_INVALID_STU_DISPLAYED_INDEX);
                 }
 
-                Student studentToDelete = lastShownStuList.get(targetIndex.getZeroBased());
+                Student studentToDelete = lastShownStuList.get(stuIndex.getZeroBased());
 
                 studentToDelete.removeModule(moduleToDeleteStudent.getModuleCode()); // remove module from student
                 moduleToDeleteStudent.removePerson(studentToDelete);
