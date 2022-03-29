@@ -6,7 +6,11 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -423,7 +427,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseUserImage_validValueWithWhitespace_returnsTrimmedUserImage() throws Exception {
-        String userImageWithWhitespace = WHITESPACE + VALID_USERIMAGE_1+ WHITESPACE;
+        String userImageWithWhitespace = WHITESPACE + VALID_USERIMAGE_1 + WHITESPACE;
         FilePath expectedFilePath = new FilePath(VALID_FILEPATH_1);
         UserImage expectedUserImage = new UserImage(expectedFilePath, VALID_DESCRIPTION);
         assertEquals(expectedUserImage, ParserUtil.parseUserImage(userImageWithWhitespace));
@@ -437,7 +441,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseUserImage_collectionWithValidUserImage_returnsUserImageSet() throws Exception {
-        Set<UserImage> actualUserImageSet = ParserUtil.parseUserImages(Arrays.asList(VALID_USERIMAGE_1, VALID_USERIMAGE_2));
+        Set<UserImage> actualUserImageSet = ParserUtil.parseUserImages(
+                    Arrays.asList(VALID_USERIMAGE_1, VALID_USERIMAGE_2));
 
         FilePath expectedFilePath1 = new FilePath(VALID_FILEPATH_1);
         UserImage expectedUserImage1 = new UserImage(expectedFilePath1, VALID_DESCRIPTION);
@@ -445,7 +450,8 @@ public class ParserUtilTest {
         FilePath expectedFilePath2 = new FilePath(VALID_FILEPATH_2);
         UserImage expectedUserImage2 = new UserImage(expectedFilePath2, "");
 
-        Set<UserImage> expectedUserImageSet= new LinkedHashSet<>(Arrays.asList(expectedUserImage1, expectedUserImage2));
+        Set<UserImage> expectedUserImageSet = new LinkedHashSet<>(
+                Arrays.asList(expectedUserImage1, expectedUserImage2));
 
         assertEquals(expectedUserImageSet, actualUserImageSet);
     }

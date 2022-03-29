@@ -1,16 +1,15 @@
 package seedu.address.storage;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.property.Region;
 import seedu.address.model.userimage.FilePath;
 import seedu.address.model.userimage.UserImage;
-
-import java.util.logging.Logger;
 
 
 /**
@@ -18,9 +17,9 @@ import java.util.logging.Logger;
  */
 public class JsonAdaptedUserImage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedUserImage.class);
-
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "UserImage's %s field is missing!";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedUserImage.class);
 
     private final String filePath;
     private final String description;

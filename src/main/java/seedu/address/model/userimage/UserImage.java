@@ -1,11 +1,11 @@
 package seedu.address.model.userimage;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import javax.imageio.ImageIO;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Creates a UserImage object that contains an image file with description
