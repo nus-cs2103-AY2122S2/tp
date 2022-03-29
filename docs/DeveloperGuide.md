@@ -78,7 +78,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
+
+There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `Appointment` and `Tag`. One of the `ListPanel<T>` is a subclass `ScheduleItemListPanel`, which handles the display logic specific to `Appointment` models. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
 
 The `UI` component,
 
@@ -86,6 +88,14 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+The `Card` component of the `UI` class diagram has been omitted from the overall view for brevity. The detailed view of the component is as follows.
+
+![Structure of the UI Component](images/UiCardClassDiagram.png)
+
+The structure roughly follows the factory design pattern, with modifications in `ScheduleItemCardFactory` to handle the logic specific to the composition hidden by `ScheduleItemCard`. The factories for `TagCard` and `PersonCard` are implemented as anonymous lambda functions, so they are omitted from the class diagram.
+
+Each `{model}Card` depends on the corresponding `{model}` in the Model component for populating data onto the UI.
 
 ### Logic component
 
@@ -119,23 +129,32 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelOverviewClassDiagram.png" width="600" />
 
+The high-level partial class diagram above shows how the model component is structured, without showing the details of the inner-workings of the `AddressBook` and `Schedule` models. Separate detailed diagrams for each of the `AddressBook` and `Schedule` subcomponents are shown further below.
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the schedule data i.e., all `Appointment` objects (which are contained in a `DisjointAppointmentList` object).
 * store the tag data i.e., all `Tag` objects (which are contained in a `UniqueTagList` object).
+* stores the schedule data i.e., all `Appointment` objects (which are contained in a `DisjointAppointmentList` object).
+* stores the currently 'selected' objects for each of the above types (e.g., results of a search query) as separate _filtered_ lists which is exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<ScheduleItem>` and `ObservableList<Tag>` which can be 'observed'. For example, the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<img src="images/ModelAddressBookClassDiagram.png" width="600" />
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+The class diagram above illustrates how the `AddressBook` subcomponent is structured, including how `Tag` and `Person` are stored internally.
 
-</div>
+<img src="images/ModelScheduleClassDiagram.png" width="600" />
+
+The class diagram above illustrates how the `Schedule` subcomponent is structured. The Schedule subcomponent is structured such that:
+
+* The bulk of the time-related functionality is centralized to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
+* `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
+* The `DisjointAppointmentList` only stores `Appointment` and not `AppointmentSlot` objects.
+
+For further details of how the `Schedule` subcomponent works together to expose a unified `ObservableList<ScheduleItem>` list, see the [implementation](#implementation) section.
 
 Within the `model` package, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, the class does not maintain any persistent instances, and does not fit within the model component diagram, serving solely as a helper model.
 
@@ -532,16 +551,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: Allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for tracking work-related information.
 
-
 ### User stories
+
+This section lists the user stories that were both implemented in the system and considered but dropped in favour of other user stories.
+
+#### Implemented User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                     | I want to …​                                                                         | So that I can…​                                                     |
-| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | beginner user                              | see usage instructions and tutorials                                                | remember how to perform certain tasks                                  |
+|----------| ------------------------------------------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user on my first run of the App        | see examples and onboarding guides                                                  | quickly learn how to use the application                               |
-| `*    `  | beginner user                              | see examples for all commands that can be used                                      | learn from them and modify them for my needs                           |
+| `* * *`  | beginner user                              | see examples for all commands that can be used                                      | learn from them and modify them for my needs                           |
 | `* * *`  | user                                       | add a new person to my address book                                                 | record their information                                               |
 | `* * *`  | user                                       | list all the people in my address book                                              | see everyone in my address book                                        |
 | `* * *`  | user                                       | find a person by name                                                               | locate details of persons without having to go through the entire list |
@@ -552,30 +573,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *  `  | power user                                 | find a person by tags                                                               | easily find subgroups of persons within my address book                |
 | `* * *`  | new user                                   | import data from an Excel compatible format                                         | transfer my current list of persons from an Excel document             |
 | `* *  `  | seasoned user                              | export my address book to an Excel compatible format                                | share my address book in a widely known document format                |
-| `*    `  | power user                                 | link documents to a person                                                          | easily locate related documents for a person                           |
-| `*    `  | power user                                 | unlink documents from a person                                                      | remove documents no longer required for a person                       |
 | `* * *`  | user                                       | create a new appointment in my schedule                                             | keep track of things that I need to do at different times              |
 | `* * *`  | user                                       | list all appointments in my schedule                                                | have an overview of all scheduled events                               |
 | `* *  `  | user                                       | edit the details of an appointment                                                  | respond to any changes in my schedule                                  |
 | `* * *`  | user                                       | delete an appointment                                                               | free up my schedule if events are cancelled                            |
 | `* * *`  | user                                       | find appointments within a range of dates                                           | plan my day(s) ahead of time                                           |
-| `*    `  | user                                       | view all appointments on a calendar interface                                       | get an overview of all my appointments in the month                    |
 | `* *  `  | user                                       | search for appointments by a person's name                                          | find all appointments related to a particular person                   |
-| `* *  `  | user                                       | be reminded of things that are happening on a particular day                        | remember to attend them                                                |
-| `* *  `  | power user                                 | add a to-do list to an appointment                                                  | be reminded to make preparations for that appointment                  |
-| `* *  `  | power user                                 | view the to-do list of an appointment                                               | ensure that I am fully prepared for the appointment                    |
-| `* *  `  | power user                                 | indicate if a task in the to-do list of an appointment is done                      | keep track of the things that are already done                         |
-| `* *  `  | power user                                 | search for appointments by tags and other filters                                   | easily find appointments amongst my large address book                 |
-| `* *  `  | power user                                 | link documents to an appointment                                                    | easily find them to prepare for my appointment                         |
-| `*    `  | seasoned user                              | export contact information to PDF                                                   | easily print mailing labels for contacts                               |
 | `* * *`  | seasoned user                              | directly edit the .json data file to add/edit persons                               | manage the address book faster                                         |
 | `* * *`  | seasoned user                              | export and import the .json file                                                    | easily transfer the data in ContaX across multiple users or devices    |
-| `*    `  | seasoned user                              | export all my data files as backup                                                  | have a copy of the contact list and import it in case of data loss     |
 | `* * *`  | seasoned user                              | enter commands that perform an action on multiple contacts in a single step         | efficiently manage my address book                                     |
 | `* *  `  | seasoned user                              | enter commands that perform an action on multiple appointments in a single step     | efficiently manage my schedule                                         |
-| `*    `  | seasoned user                              | customise the names and format of text-based commands                               | easily remember and use commands I need                                |
 | `* * *`  | seasoned user                              | batch multiple commands together                                                    | perform complex tasks in a single action                               |
-| `*    `  | seasoned user                              | add macros to chain multiple actions together as custom command                     | perform complex actions that I need in 1 command                       |
+
+
+#### User Stories Not Implemented
+
+The following user stories were considered but ultimately not implemented. Some reasons for not implementing are listed below.
+
+* The UI was made intuitive with only 1 text field for input so that there is no ambiguity for the user
+* Document linking and handling is infeasible due the requirement of either an external file system or a large internal data folder for maintaining the fiels
+* A To-Do list does not add value to the problem that is being tackled
+* Custom commands add significant complexity without much value. It was decided that keeping the commands simple and short would eliminate the need for this entirely.
+
+| Priority | As a …​     | I want to …​                                                     | So that I can…​                                                     |
+|----------|----------------|------------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `*    `  | beginner user  | see usage instructions and tutorials                             | remember how to perform certain tasks                                  |
+| `*    `  | power user     | link documents to a person                                       | easily locate related documents for a person                           |
+| `*    `  | power user     | unlink documents from a person                                   | remove documents no longer required for a person                       |
+| `*    `  | user           | view all appointments on a calendar interface                    | get an overview of all my appointments in the month                    |
+| `* *  `  | user           | be reminded of things that are happening on a particular day     | remember to attend them                                                |
+| `* *  `  | power user     | add a to-do list to an appointment                               | be reminded to make preparations for that appointment                  |
+| `* *  `  | power user     | view the to-do list of an appointment                            | ensure that I am fully prepared for the appointment                    |
+| `* *  `  | power user     | indicate if a task in the to-do list of an appointment is done   | keep track of the things that are already done                         |
+| `* *  `  | power user     | search for appointments by tags and other filters                | easily find appointments amongst my large address book                 |
+| `* *  `  | power user     | link documents to an appointment                                 | easily find them to prepare for my appointment                         |
+| `*    `  | seasoned user  | export contact information to PDF                                | easily print mailing labels for contacts                               |
+| `*    `  | seasoned user  | export all my data files as backup                               | have a copy of the contact list and import it in case of data loss     |
+| `*    `  | seasoned user  | customise the names and format of text-based commands            | easily remember and use commands I need                                |
+| `*    `  | seasoned user  | add macros to chain multiple actions together as custom command  | perform complex actions that I need in 1 command                       |
 
 
 ### Use cases
