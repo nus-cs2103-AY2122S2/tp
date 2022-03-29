@@ -2,7 +2,7 @@ package unibook.ui.cards;
 
 import static unibook.ui.util.CustomListChangeListeners.addIndexedAndFlagListChangeListener;
 import static unibook.ui.util.CustomListChangeListeners.addIndexedListChangeListener;
-import static unibook.ui.util.CustomVBoxListFiller.fillPaneFromList;
+import static unibook.ui.util.CustomPaneListFiller.fillPaneFromList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.Module;
 import unibook.ui.UiPart;
-import unibook.ui.util.CustomVBoxListFiller;
+import unibook.ui.util.CustomPaneListFiller;
 
 /**
  * A UI component that displays information of {@code Module}.
@@ -100,13 +100,13 @@ public class ModuleCard extends UiPart<Region> {
      * Initially all Vboxes are not visible, until one tab is clicked by user.
      */
     private void setUpVBoxLists() {
-        CustomVBoxListFiller.fillPaneFromList(professors, module.getProfessors(), (professor, i) ->
+        fillPaneFromList(professors, module.getProfessors(), (professor, i) ->
             new ProfessorCard(professor, i + 1).getRoot());
-        CustomVBoxListFiller.fillPaneFromList(students, module.getStudents(), (student, i) ->
+        fillPaneFromList(students, module.getStudents(), (student, i) ->
             new StudentCard(student, i + 1).getRoot());
         fillPaneFromList(groups, module.getGroups(), (group, i, flag) ->
             new GroupCard(group, i + 1, flag).getRoot());
-        CustomVBoxListFiller.fillPaneFromList(keyEvents, module.getKeyEvents(), (keyEvent, i) ->
+        fillPaneFromList(keyEvents, module.getKeyEvents(), (keyEvent, i) ->
             new ModuleKeyEventCard(keyEvent, i + 1).getRoot());
 
         students.setManaged(false);
@@ -204,9 +204,13 @@ public class ModuleCard extends UiPart<Region> {
         //same tab was clicked twice, just close the tab
         if (tab == currentTab) {
             logger.info(String.format("Changed to no tab being shown for module %s", module.getModuleCode()));
+            lightenTab(tab);
             currentTab = ModuleCardTab.NONE;
             return;
         }
+
+        lightenAllTabs();
+        darkenTab(tab);
 
         if (tab == ModuleCardTab.STUDENTS) {
             students.setManaged(true);
@@ -226,6 +230,50 @@ public class ModuleCard extends UiPart<Region> {
 
         logger.info(String.format("Changed to %s tab being shown for module %s", tab, module.getModuleCode()));
         currentTab = tab;
+    }
+
+    /**
+     * Darkens the button of specified tab.
+     */
+    private void darkenTab(ModuleCardTab tab) {
+        if (tab == ModuleCardTab.STUDENTS) {
+            studentsTab.getStyleClass().add("module-student-list-heading-pressed");
+        } else if (tab == ModuleCardTab.PROFESSORS) {
+            professorsTab.getStyleClass().add("module-professor-list-heading-pressed");
+        } else if (tab == ModuleCardTab.GROUPS) {
+            groupsTab.getStyleClass().add("module-groups-list-heading-pressed");
+        } else if (tab == ModuleCardTab.KEY_EVENTS) {
+            keyEventsTab.getStyleClass().add("module-key-events-list-heading-pressed");
+        } else {
+            throw new RuntimeException("This pathway should not happen");
+        }
+    }
+
+    /**
+     * Lightens the button of specified tab when unpressed.
+     */
+    private void lightenTab(ModuleCardTab tab) {
+        if (tab == ModuleCardTab.STUDENTS) {
+            studentsTab.getStyleClass().removeIf(style -> style.equals("module-student-list-heading-pressed"));
+        } else if (tab == ModuleCardTab.PROFESSORS) {
+            professorsTab.getStyleClass().removeIf(style -> style.equals("module-professor-list-heading-pressed"));
+        } else if (tab == ModuleCardTab.GROUPS) {
+            groupsTab.getStyleClass().removeIf(style -> style.equals("module-groups-list-heading-pressed"));
+        } else if (tab == ModuleCardTab.KEY_EVENTS) {
+            keyEventsTab.getStyleClass().removeIf(style -> style.equals("module-key-events-list-heading-pressed"));
+        } else {
+            throw new RuntimeException("This pathway should not happen");
+        }
+    }
+
+    /**
+     * Lightens all tabs.
+     */
+    private void lightenAllTabs() {
+        lightenTab(ModuleCardTab.STUDENTS);
+        lightenTab(ModuleCardTab.PROFESSORS);
+        lightenTab(ModuleCardTab.GROUPS);
+        lightenTab(ModuleCardTab.KEY_EVENTS);
     }
 
     /**

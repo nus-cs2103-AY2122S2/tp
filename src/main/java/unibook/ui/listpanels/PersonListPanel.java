@@ -1,8 +1,7 @@
 package unibook.ui.listpanels;
 
-import static unibook.ui.util.CustomListChangeListeners.addBasicListChangeListener;
 import static unibook.ui.util.CustomListChangeListeners.addIndexedListChangeListener;
-import static unibook.ui.util.CustomVBoxListFiller.fillPaneFromList;
+import static unibook.ui.util.CustomPaneListFiller.fillPaneFromList;
 
 import java.util.function.BiFunction;
 import java.util.logging.Logger;
@@ -45,8 +44,9 @@ public class PersonListPanel extends UiPart<Region> {
         logger.info("Instantiating person list");
         this.personList = personList;
         this.moduleList = moduleList;
-        //set up the basic vbox list
-        fillPaneFromList(personListView, personList, new BiFunction<Person, Integer, Node>() {
+
+        //functon for creating a person card
+        BiFunction<Person, Integer, Node> cardCreator = new BiFunction<Person, Integer, Node>() {
             @Override
             public Node apply(Person person, Integer index) {
                 if (person instanceof Student) {
@@ -59,29 +59,21 @@ public class PersonListPanel extends UiPart<Region> {
                     throw new PersonNoSubtypeException();
                 }
             }
-        });
+        };
+
+
+        //set up the basic vbox list
+        fillPaneFromList(personListView, this.personList, cardCreator);
 
         //set up listener for changes to underlying personlist
-        addIndexedListChangeListener(personListView, personList, new BiFunction<Person, Integer, Node>() {
-            @Override
-            public Node apply(Person person, Integer index) {
-                if (person instanceof Student) {
-                    return new StudentCard((Student) person, index + 1).getRoot();
-                } else if (person instanceof Professor) {
-                    return new ProfessorCard((Professor) person, index + 1).getRoot();
-                } else {
-                    //Since a person must always be a Student or Professor, this
-                    //should never run
-                    throw new PersonNoSubtypeException();
-                }
-            }
-        });
+        addIndexedListChangeListener(personListView, this.personList, cardCreator);
 
         //fill in the moduleandgroup pane
-        fillPaneFromList(moduleAndGroupListView, moduleList, module -> new ModuleAndGroupMiniCard(module).getRoot());
+        fillPaneFromList(moduleAndGroupListView, this.moduleList,
+                (module, index) -> new ModuleAndGroupMiniCard(module, index).getRoot());
 
         //set up list event listener pane
-        addBasicListChangeListener(moduleAndGroupListView, moduleList,
-                module -> new ModuleAndGroupMiniCard(module).getRoot());
+        addIndexedListChangeListener(moduleAndGroupListView, this.moduleList,
+            (module, index) -> new ModuleAndGroupMiniCard(module, index).getRoot());
     }
 }

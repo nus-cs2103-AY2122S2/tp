@@ -1,16 +1,23 @@
 package unibook.ui.listpanels;
 
+import static unibook.ui.util.CustomListChangeListeners.addIndexedAndFlagListChangeListener;
+import static unibook.ui.util.CustomPaneListFiller.fillPaneFromList;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
+import unibook.commons.util.TriFunction;
 import unibook.model.module.group.Group;
 import unibook.ui.UiPart;
 import unibook.ui.cards.GroupCard;
+import unibook.ui.util.CustomPaneListFiller;
 
 public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "listpanels/GroupListPanel.fxml";
@@ -18,7 +25,7 @@ public class GroupListPanel extends UiPart<Region> {
     //Flag that indicates if only a single group is being shown
     private boolean singleGroupFlag = false;
     @FXML
-    private ListView<Group> groupListView;
+    private VBox groupListView;
     private ObservableList<Group> groupList;
 
     /**
@@ -28,11 +35,20 @@ public class GroupListPanel extends UiPart<Region> {
         super(FXML);
         logger.info("Instantiating a new group list panel");
         this.groupList = groupList;
-        groupListView.setItems(groupList);
-        groupListView.setCellFactory(listView -> new GroupListPanel.GroupListViewCell());
         if (groupList.size() == 1) {
             singleGroupFlag = true;
         }
+
+        TriFunction<Group, Integer, Boolean, Node> cardConverter = new TriFunction<>() {
+            @Override
+            public Node apply(Group group, Integer index, Boolean singleFlag) {
+                return new GroupCard(group, index + 1, singleFlag).getRoot();
+            }
+        };
+
+        fillPaneFromList(groupListView, this.groupList, cardConverter);
+
+        addIndexedAndFlagListChangeListener(groupListView, this.groupList, cardConverter);
     }
 
     /**
@@ -40,22 +56,5 @@ public class GroupListPanel extends UiPart<Region> {
      */
     public ObservableList<Group> getGroupsList() {
         return groupList;
-    }
-
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Group} using a {@code GroupCard}.
-     */
-    class GroupListViewCell extends ListCell<Group> {
-        @Override
-        protected void updateItem(Group group, boolean empty) {
-            super.updateItem(group, empty);
-
-            if (empty || group == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new GroupCard(group, getIndex() + 1, singleGroupFlag).getRoot());
-            }
-        }
     }
 }

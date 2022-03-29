@@ -36,9 +36,17 @@
 }
 
 .student-card-pane {
+   -fx-background-color: #BCC2C2;
+   -fx-border-radius: 10;
+   -fx-background-radius: 10;
+   -fx-padding: 5;
+}
+
+.professor-card-pane {
    -fx-background-color: #D1D0CE;
    -fx-border-radius: 10;
    -fx-background-radius: 10;
+   -fx-padding: 5;
 }
 
 /* Module related styling*/
@@ -62,10 +70,19 @@
     -fx-text-fill: #010504;
     -fx-padding: 0 5 0 5;
     -fx-background-color: #5B4B49;
+    -fx-border-radius: 5 0 0 0;
+    -fx-background-radius: 5 0 0 0;
 }
 
-.module-professor-list-heading:hover {
+.module-professor-list-heading:hover, .module-professor-list-heading-pressed {
     -fx-background-color: #493c3a;
+}
+
+.module-professor-list-pane {
+    -fx-padding: 8;
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 0 10 10 10;
+    -fx-background-radius: 0 10 10 10;
 }
 
 .module-student-list-heading {
@@ -76,8 +93,15 @@
     -fx-background-color: #8DA7BE;
 }
 
-.module-student-list-heading:hover {
+.module-student-list-heading:hover, .module-student-list-heading-pressed  {
     -fx-background-color: #718698;
+}
+
+.module-student-list-pane {
+    -fx-padding: 8;
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 0 10 10 10;
+    -fx-background-radius: 0 10 10 10;
 }
 
 .module-groups-list-heading {
@@ -88,8 +112,15 @@
     -fx-background-color: #5E8C61;
 }
 
-.module-groups-list-heading:hover {
+.module-groups-list-heading:hover, .module-groups-list-heading-pressed {
     -fx-background-color: #4b704e;
+}
+
+.module-groups-list-pane {
+    -fx-padding: 8;
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 0 10 10 10;
+    -fx-background-radius: 0 10 10 10;
 }
 
 .module-key-events-list-heading {
@@ -98,10 +129,19 @@
     -fx-text-fill: #010504;
     -fx-background-color: #CA895F;
     -fx-padding: 0 5 0 5;
+    -fx-border-radius: 0 5 0 0;
+    -fx-background-radius: 0 5 0 0;
 }
 
-.module-key-events-list-heading:hover {
+.module-key-events-list-heading:hover, .module-key-events-list-heading-pressed {
     -fx-background-color: #a26e4c;
+}
+
+.module-key-events-list-pane {
+    -fx-padding: 8;
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 0 10 10 10;
+    -fx-background-radius: 0 10 10 10;
 }
 
 /* GroupCard related classes */
@@ -111,19 +151,20 @@
     -fx-text-fill: #010504;
 }
 
-.group-module-code.label {
+.group-module-code {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 32px;
     -fx-text-fill: black;
     -fx-background-color: #C1CAD6;
     -fx-background-radius: 2;
-    -fx-padding: 2 2 2 2
+    -fx-padding: 4;
 }
 
 .group-name {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 32px;
-    -fx-padding: 0 0 0 5;
+    -fx-padding: 4;
+    -fx-text-fill: #333333
 }
 
 .group-subheadings {
@@ -157,7 +198,23 @@
 .person-list-header {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 32px;
+    -fx-text-fill: #F5F5F5;
+}
+
+.person-list-groups-header-pane {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 32px;
     -fx-text-fill: #333333;
+    -fx-border-style: hidden hidden hidden solid;
+    -fx-border-width: 2;
+    -fx-border-color: #333333
+
+}
+
+.module-group-mini-cards-header-pane {
+    -fx-background-color: #989898;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
 }
 
 .module-group-mini-cards {
@@ -165,6 +222,7 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }
+
 
 .mini-pane-module-code {
     -fx-font-family: "Segoe UI";
@@ -174,8 +232,81 @@
 
 .module-group-list-scroll-pane {
     -fx-background: #F5F5F5;
+    -fx-border-width: 0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 0;
+}
+
+.module-list-pane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
-    -fx-border-radius: 0 0 10 10;
-    -fx-background-radius: 0 0 10 10;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+
+.mini-pane-group-code-list {
+    -fx-border-style: hidden hidden hidden solid;
+    -fx-border-width: 2;
+    -fx-border-color: #333333;
+}
+
+.odd-mini-pane {
+    -fx-background-color: #b2beb5;
+}
+
+.even-mini-pane {
+    -fx-background-color: #c4c3d0;
+}
+
+.mini-pane-group-name-label {
+    -fx-background-color: #cfcfc4;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 2;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 16;
+}
+
+.module-group-card {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+/* modules pane */
+.modules-scroll-pane {
+    -fx-background: #D1D0CE;
+}
+
+.module-key-event-card {
+    -fx-background-color: #ead0bf;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.group-card-pane {
+    -fx-background-color: #cfddd0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.group-card-pane:hover {
+    -fx-background-color: #bac7bb;
+}
+
+.module-key-event-card-important {
+    -fx-background-color: #e38381;
+}
+
+.group-meeting-time-label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 24;
+    -fx-padding: 5;
+}
+
+.group-meeting-time-label-today {
+    -fx-background-color: #e38381;
 }

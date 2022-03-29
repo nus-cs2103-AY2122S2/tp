@@ -1,5 +1,6 @@
 package unibook.ui.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -11,7 +12,7 @@ import unibook.commons.util.TriFunction;
 /**
  * Util class for {@code Pane} filler functions.
  */
-public class CustomVBoxListFiller {
+public class CustomPaneListFiller {
 
     /**
      * Fills a {@code Pane} from given list with {@code Node} objects genreated using {@code converter}.
@@ -21,6 +22,7 @@ public class CustomVBoxListFiller {
      * @param <T>
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, Function<T, ? extends Node> converter) {
+        pane.getChildren().clear();
         for (T item : underlyingList) {
            pane.getChildren().add(converter.apply(item));
         }
@@ -35,6 +37,7 @@ public class CustomVBoxListFiller {
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, BiFunction<T, Integer,
                                                                                     ? extends Node> converter) {
+        pane.getChildren().clear();
         for (int i = 0; i < underlyingList.size(); i++) {
             pane.getChildren().add(converter.apply(underlyingList.get(i), i));
         }
@@ -50,6 +53,7 @@ public class CustomVBoxListFiller {
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, TriFunction<T, Integer, Boolean,
                                                                                         ? extends Node> converter) {
+        pane.getChildren().clear();
         for (int i = 0; i < underlyingList.size(); i++) {
             pane.getChildren().add(converter.apply(underlyingList.get(i), i, underlyingList.size() == 1));
         }

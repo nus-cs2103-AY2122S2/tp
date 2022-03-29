@@ -74,16 +74,6 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-        setUpStyling();
-    }
-
-    /**
-     * Set up the styling of the student card pane.
-     */
-    private void setUpStyling() {
-        cardPane.setStyle("-fx-background-color: #D1D0CE; -fx-border-radius: 10; " +
-            "-fx-background-radius: 10;");
     }
 
     @Override

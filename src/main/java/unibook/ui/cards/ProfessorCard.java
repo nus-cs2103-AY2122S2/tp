@@ -82,17 +82,6 @@ public class ProfessorCard extends UiPart<Region> {
         professor.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-        setUpStyling();
-    }
-
-    /**
-     * Set up the styling of the professor card pane.
-     */
-    private void setUpStyling() {
-        cardPane.setStyle("-fx-background-color: #BCC2C2; " +
-            "-fx-border-radius: 10; " +
-            "-fx-background-radius: 10;");
     }
 
     @Override

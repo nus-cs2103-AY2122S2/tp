@@ -1,7 +1,8 @@
 package unibook.ui.cards;
 
-import static unibook.ui.util.CustomVBoxListFiller.fillPaneFromList;
+import static unibook.ui.util.CustomPaneListFiller.fillPaneFromList;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -19,7 +20,7 @@ import unibook.commons.core.LogsCenter;
 import unibook.model.module.group.Group;
 import unibook.ui.UiPart;
 import unibook.ui.util.CustomListChangeListeners;
-import unibook.ui.util.CustomVBoxListFiller;
+import unibook.ui.util.CustomPaneListFiller;
 
 /**
  * A class that displays the information of a {@code Group}.
@@ -106,17 +107,23 @@ public class GroupCard extends UiPart<Region> {
      * Converts a given {@code MeetingTime} to a {@code Label} for display in GUI.
      */
     private Label createLabelFromMeetingTime(LocalDateTime meetingTime, int index) {
-        return new Label(index + ".    "
+        Label label = new Label(index + ".    "
             + meetingTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+        label.getStyleClass().add("group-meeting-time-label");
+        //meeting time is on the current day, highlight it
+        if (meetingTime.toLocalDate().equals(LocalDate.now())) {
+            label.getStyleClass().add("group-meeting-time-label-today");
+        }
+        return label;
     }
 
     /**
      * Sets up all the vbox lists which display lists of fields of a group to user.
      */
     private void setUpVBoxLists() {
-        CustomVBoxListFiller.fillPaneFromList(membersList, group.getMembers(), (member, i) ->
+        CustomPaneListFiller.fillPaneFromList(membersList, group.getMembers(), (member, i) ->
             new StudentCard(member, i + 1).getRoot());
-        CustomVBoxListFiller.fillPaneFromList(meetingTimesList, group.getMeetingTimes(), (meetingTime, i) ->
+        CustomPaneListFiller.fillPaneFromList(meetingTimesList, group.getMeetingTimes(), (meetingTime, i) ->
             createLabelFromMeetingTime(meetingTime, i + 1));
     }
 

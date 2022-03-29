@@ -52,11 +52,10 @@ public class CustomListChangeListeners {
                                 .set(i, toChildNode.apply(underlyingList.get(i)));
                         }
                     } else {
-                        for (U obj : c.getRemoved()) {
-                            pane.getChildren().remove(obj);
-                        }
-                        for (U obj : c.getAddedSubList()) {
-                            pane.getChildren().add(toChildNode.apply(obj));
+                        //just refresh whole pane on add or remove
+                        pane.getChildren().clear();
+                        for (int i = 0; i < underlyingList.size(); i++) {
+                            pane.getChildren().add(i, toChildNode.apply(underlyingList.get(i)));
                         }
                     }
                 }
@@ -100,13 +99,10 @@ public class CustomListChangeListeners {
                                 .set(i, toChildNode.apply(underlyingList.get(i), i));
                         }
                     } else {
-                        for (U obj : c.getRemoved()) {
-                            pane.getChildren().remove(obj);
-                        }
-                        int i = pane.getChildren().size() + 1;
-                        for (U obj : c.getAddedSubList()) {
-                            pane.getChildren().add(toChildNode.apply(obj, i));
-                            i++;
+                        //just refresh whole pane on add or remove
+                        pane.getChildren().clear();
+                        for (int i = 0; i < underlyingList.size(); i++) {
+                            pane.getChildren().add(i, toChildNode.apply(underlyingList.get(i), i));
                         }
                     }
                 }
@@ -153,13 +149,11 @@ public class CustomListChangeListeners {
                                 .set(i, toChildNode.apply(underlyingList.get(i), i, underlyingList.size() == 1));
                         }
                     } else {
-                        for (U obj : c.getRemoved()) {
-                            pane.getChildren().remove(obj);
-                        }
-                        int i = pane.getChildren().size() + 1;
-                        for (U obj : c.getAddedSubList()) {
-                            pane.getChildren().add(toChildNode.apply(obj, i, underlyingList.size() == 1));
-                            i++;
+                        //just refresh whole pane on add or remove
+                        pane.getChildren().clear();
+                        for (int i = 0; i < underlyingList.size(); i++) {
+                            pane.getChildren().add(i, toChildNode.apply(underlyingList.get(i),
+                                    i, underlyingList.size() == 1));
                         }
                     }
                 }

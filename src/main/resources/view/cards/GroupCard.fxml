@@ -7,8 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" id="groupPane" fx:id="groupPane" xmlns="http://javafx.com/javafx/8">
-    <GridPane HBox.hgrow="ALWAYS">
+    <GridPane styleClass="group-card-pane" HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
         </columnConstraints>
@@ -21,22 +22,24 @@
                 <Label fx:id="moduleCode" styleClass="group-module-code" text="\$moduleCode"/>
                 <Label fx:id="groupName" styleClass="group-name" text="\$groupName"/>
             </HBox>
-            <GridPane fx:id="moreGroupDetails" prefHeight="0.0" prefWidth="131.0">
+            <GridPane fx:id="moreGroupDetails">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="0" percentWidth="50.0"/>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="0" percentWidth="50.0"/>
                 </columnConstraints>
-                <children>
-                    <VBox fx:id="members" GridPane.columnIndex="0">
-                        <Label fx:id="membersHeading" style="-fx-padding: 0 0 0 15" styleClass="group-subheadings"
-                               text="Members"/>
-                        <VBox fx:id="membersList" VBox.vgrow="ALWAYS"/>
-                    </VBox>
-                    <VBox fx:id="meetingTimes" GridPane.columnIndex="1">
-                        <Label fx:id="meetingTimesHeading" styleClass="group-subheadings" text="Meetings"/>
-                        <VBox fx:id="meetingTimesList" VBox.vgrow="ALWAYS"/>
-                    </VBox>
-                </children>
+                    <ScrollPane fitToWidth="true" prefViewportHeight="200" GridPane.columnIndex="0">
+                        <VBox fx:id="members">
+                            <Label fx:id="membersHeading" style="-fx-padding: 0 0 0 15" styleClass="group-subheadings"
+                                   text="Members"/>
+                            <VBox fx:id="membersList" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+                    </ScrollPane>
+                    <ScrollPane fitToWidth="true" prefHeight="200" GridPane.columnIndex="1">
+                        <VBox fx:id="meetingTimes" >
+                            <Label fx:id="meetingTimesHeading" styleClass="group-subheadings" text="Meetings"/>
+                            <VBox fx:id="meetingTimesList" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+                    </ScrollPane>
             </GridPane>
         </VBox>
         <rowConstraints>

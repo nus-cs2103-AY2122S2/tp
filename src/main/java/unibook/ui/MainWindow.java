@@ -121,6 +121,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
         //by default the listPanel holds person list on startup
         listPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
+        setModuleListPanel();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
