@@ -185,6 +185,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sortList();
     }
 
+    public void sortPersonListByTaskDone() {
+        persons.sortListByTaskDone();
+    }
+
     /**
      * Returns a key-value pair between each {@code person} and the completion status of a task,
      * if the person is taking the specified module and is being assigned with the specified task.

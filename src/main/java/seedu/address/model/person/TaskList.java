@@ -12,12 +12,14 @@ import seedu.address.model.person.exceptions.TaskNotFoundException;
 public class TaskList {
 
     private final ArrayList<Task> taskList;
+    private int numOfCompletedTasks;
 
     /**
      * Constructs a {@code TaskList}.
      */
     public TaskList() {
         taskList = new ArrayList<>();
+        this.numOfCompletedTasks = 0;
     }
 
     /**
@@ -91,6 +93,7 @@ public class TaskList {
      */
     public void markTaskAsComplete(int index) {
         taskList.get(index).markComplete();
+        numOfCompletedTasks++;
     }
 
     /**
@@ -100,6 +103,11 @@ public class TaskList {
      */
     public void markTaskAsNotComplete(int index) {
         taskList.get(index).markNotComplete();
+        numOfCompletedTasks--;
+    }
+
+    public int getNumOfCompletedTasks() {
+        return numOfCompletedTasks;
     }
 
     /**

@@ -141,4 +141,6 @@ public interface Model {
 
     /** Sorts the list of persons in alphabetical order by their names */
     void sortFilteredPersonList();
+
+    void sortFilteredPersonListByTaskDone();
 }

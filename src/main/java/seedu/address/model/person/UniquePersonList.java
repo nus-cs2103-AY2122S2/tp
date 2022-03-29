@@ -371,6 +371,10 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.sort(new SortAlphabetically());
     }
 
+    public void sortListByTaskDone() {
+        internalList.sort(new SortByTaskDone());
+    }
+
     /**
      * SortAlphabetically implements a comparator class, to sort the list of persons in alphabetical order.
      */
@@ -388,6 +392,16 @@ public class UniquePersonList implements Iterable<Person> {
             String personAFullName = a.getName().fullName;
             String personBFullName = b.getName().fullName;
             return personAFullName.compareTo(personBFullName);
+        }
+    }
+
+    class SortByTaskDone implements Comparator<Person> {
+
+        @Override
+        public int compare(Person a, Person b) {
+            Integer personANumOfTaskDone = a.getTaskList().getNumOfCompletedTasks();
+            Integer personBNumOfTaskDone = b.getTaskList().getNumOfCompletedTasks();
+            return personANumOfTaskDone.compareTo(personBNumOfTaskDone);
         }
     }
 }

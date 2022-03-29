@@ -194,6 +194,11 @@ public class AddCommandTest {
         public void sortFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortFilteredPersonListByTaskDone() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
