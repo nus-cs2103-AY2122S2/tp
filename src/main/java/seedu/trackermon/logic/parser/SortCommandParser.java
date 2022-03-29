@@ -166,7 +166,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     /**
-     * Add value to value + ADD_VALUE
+     * Add ADD_VALUE to value.
      * @param value integer to change.
      * @return the new value.
      */
