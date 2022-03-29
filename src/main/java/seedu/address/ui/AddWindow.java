@@ -161,7 +161,7 @@ public class AddWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the add window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();

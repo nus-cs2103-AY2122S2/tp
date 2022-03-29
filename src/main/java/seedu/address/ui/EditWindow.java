@@ -138,7 +138,7 @@ public class EditWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the edit window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
