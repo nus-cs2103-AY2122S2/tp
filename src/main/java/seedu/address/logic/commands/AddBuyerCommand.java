@@ -11,7 +11,7 @@ import seedu.address.model.buyer.Buyer;
 
 public class AddBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "addbuyer";
+    public static final String COMMAND_WORD = "add-b";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a new buyer. "
             + "Parameters: "
