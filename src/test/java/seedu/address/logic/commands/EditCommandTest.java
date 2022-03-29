@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.EditCommand.createEditedLineup;
-import static seedu.address.logic.commands.EditCommand.createEditedPerson;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -17,19 +15,14 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.AddressBook;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -38,10 +31,11 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private Model model;
     private static final LineupName EXISTING_LINEUP_NAME = new LineupBuilder().build().getLineupName();
     private static final LineupName VALID_LINEUP_NAME = new LineupName("Lakaka");
     private static final LineupName DUPLICATE_LINEUP_NAME = EXISTING_LINEUP_NAME;
+
+    private Model model;
 
     @BeforeEach
     public void setUp() {
