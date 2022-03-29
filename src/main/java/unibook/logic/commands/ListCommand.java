@@ -686,7 +686,7 @@ public class ListCommand extends Command {
                 Module module = model.getModuleByCode(this.moduleCode);
 
                 if (!module.hasGroupName(this.group)) {
-                    throw new CommandException(String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, moduleCode));
+                    throw new CommandException(String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group));
                 }
 
                 groups.add(module.getGroupByName(this.group));
