@@ -39,68 +39,6 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if some lesson in the list conflicts with the specified lesson
-     */
-    public boolean hasConflictingLesson(Lesson toCheck) {
-        requireNonNull(toCheck);
-
-        return findLessonConflictingWith(toCheck) != null;
-    }
-
-    /**
-     * Compares the editedLesson to find conflicting lessons in the list, excluding the lesson of the index provided.
-     * @param index of the lesson to be excluded from the comparison
-     * @param editedLesson lesson that is edited
-     * @return true if there are conflicting lessons and false otherwise
-     */
-    public boolean hasConflictingLessonExcluding(int index, Lesson editedLesson) {
-        requireAllNonNull(index, editedLesson);
-        for (int i = 0; i < internalList.size(); i++) {
-            if (i != index) {
-                if (internalList.get(i).isConflictingWithLesson(editedLesson)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns some lesson in the list with timeslot that overlaps with the specified lesson, if exists.
-     */
-    public Lesson findLessonConflictingWith(Lesson toCheck) {
-        requireNonNull(toCheck);
-
-        for (Lesson existingLesson : internalList) {
-            if (existingLesson.isConflictingWithLesson(toCheck)) {
-                return existingLesson;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns a list of lessons in the list with timeslot that overlaps with the specified lesson, if exists.
-     */
-    public List<Lesson> findAllLessonsConflictingWith(Lesson toCheck) {
-        requireNonNull(toCheck);
-
-        List<Lesson> conflictingLessons = new ArrayList<>();
-        for (Lesson existingLesson : internalList) {
-            if (existingLesson.isConflictingWithLesson(toCheck)) {
-                conflictingLessons.add(existingLesson);
-            }
-        }
-        return conflictingLessons;
-    }
-
-    private void sortList() {
-        FXCollections.sort(internalList, Comparator.comparing(lesson ->
-                lesson.getDateTimeSlot().getDateOfLesson()));
-    }
-
-    /**
      * Adds a lesson to the list.
      * The time slot of the lesson must not conflict with any of the existing lessons in the list.
      */
@@ -184,27 +122,67 @@ public class ConsistentLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Returns true if some lesson in the list conflicts with the specified lesson
+     */
+    public boolean hasConflictingLesson(Lesson toCheck) {
+        requireNonNull(toCheck);
+
+        return findLessonConflictingWith(toCheck) != null;
+    }
+
+    /**
+     * Compares the editedLesson to find conflicting lessons in the list, excluding the lesson of the index provided.
+     * @param index of the lesson to be excluded from the comparison
+     * @param editedLesson lesson that is edited
+     * @return true if there are conflicting lessons and false otherwise
+     */
+    public boolean hasConflictingLessonExcluding(int index, Lesson editedLesson) {
+        requireAllNonNull(index, editedLesson);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (i != index) {
+                if (internalList.get(i).isConflictingWithLesson(editedLesson)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns some lesson in the list with timeslot that overlaps with the specified lesson, if exists.
+     */
+    public Lesson findLessonConflictingWith(Lesson toCheck) {
+        requireNonNull(toCheck);
+
+        for (Lesson existingLesson : internalList) {
+            if (existingLesson.isConflictingWithLesson(toCheck)) {
+                return existingLesson;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Lesson> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
-    @Override
-    public Iterator<Lesson> iterator() {
-        return internalList.iterator();
-    }
+    /**
+     * Returns a list of lessons in the list with timeslot that overlaps with the specified lesson, if exists.
+     */
+    public List<Lesson> findAllLessonsConflictingWith(Lesson toCheck) {
+        requireNonNull(toCheck);
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ConsistentLessonList // instanceof handles nulls
-                        && internalList.equals(((ConsistentLessonList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
+        List<Lesson> conflictingLessons = new ArrayList<>();
+        for (Lesson existingLesson : internalList) {
+            if (existingLesson.isConflictingWithLesson(toCheck)) {
+                conflictingLessons.add(existingLesson);
+            }
+        }
+        return conflictingLessons;
     }
 
     /**
@@ -233,5 +211,27 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             }
         }
         return null;
+    }
+
+    private void sortList() {
+        FXCollections.sort(internalList, Comparator.comparing(lesson ->
+                lesson.getDateTimeSlot().getDateOfLesson()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ConsistentLessonList // instanceof handles nulls
+                        && internalList.equals(((ConsistentLessonList) other).internalList));
+    }
+
+    @Override
+    public Iterator<Lesson> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
     }
 }
