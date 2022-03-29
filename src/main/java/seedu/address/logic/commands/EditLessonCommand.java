@@ -29,7 +29,6 @@ import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 
 public class EditLessonCommand extends Command {
 
@@ -96,6 +95,7 @@ public class EditLessonCommand extends Command {
             model.updateFilteredLessonList(new ConflictingLessonsPredicate(editedLesson));
             throw new CommandException(MESSAGE_CONFLICTING_LESSON, ViewTab.LESSON);
         }
+        model.addLesson(editedLesson);
         model.setSelectedLesson(editedLesson);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedLesson.getName()), true,
