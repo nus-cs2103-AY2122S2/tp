@@ -91,7 +91,7 @@ public class ManualMessages {
             + "9. archive \n"
             + "10. list \n"
             + "11. assign \n"
-            + "12. progress \n"      
+            + "12. progress \n"
             + "13. deleteTask \n"
             + "14. history \n"
             + "15. undo \n"
