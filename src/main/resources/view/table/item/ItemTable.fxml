@@ -10,6 +10,7 @@
         <Label styleClass="table-column-short" HBox.hgrow="ALWAYS" text="ITEM INDEX"/>
         <Label styleClass="table-column-short" HBox.hgrow="ALWAYS" text="EXPIRY DATE"/>
         <Label styleClass="table-column-short" HBox.hgrow="ALWAYS" text="QUANTITY"/>
+        <Label styleClass="table-column-long" HBox.hgrow="ALWAYS" text="UNIT PRICE (DISCOUNTED)"/>
         <Label styleClass="table-column-long" HBox.hgrow="NEVER"/>
     </HBox>
     <VBox VBox.vgrow="ALWAYS" maxHeight="Infinity" styleClass="table-content">

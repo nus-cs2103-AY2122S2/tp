@@ -28,6 +28,8 @@ public class ItemCard extends UiComponent<HBox> {
     private Label expiryDate;
     @FXML
     private Label quantity;
+    @FXML
+    private Label price;
 
     /**
      * Initializes a {@code ProductCard}.
@@ -52,6 +54,7 @@ public class ItemCard extends UiComponent<HBox> {
         indexLabel.setText(productIndex + "-" + itemIndex);
         expiryDate.setText(item.getExpiryDate().toString());
         quantity.setText(item.getQuantity().toString());
+        price.setText(item.getDiscountedPrice().toString());
     }
 
     @FXML
