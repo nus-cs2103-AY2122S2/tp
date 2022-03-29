@@ -63,7 +63,6 @@ public class LabList implements Iterable<Lab> {
      * @return A copy of the Lab with the given lab number from the internalList.
      */
     public Lab getLab(int labNumberToGet) throws LabNotFoundException {
-        requireNonNull(labNumberToGet);
 
         for (Lab l : internalList) {
             if (l.labNumber == labNumberToGet) {
@@ -185,6 +184,49 @@ public class LabList implements Iterable<Lab> {
      */
     public boolean isEmpty() {
         return internalList.isEmpty();
+    }
+
+    /**
+     * Aligns the current LabList to the given {@code toAlignWith}.
+     * Aligning LabList means that the current LabList has to have all the Labs that the {@code toAlignWith} has,
+     * and no additional Labs that the {@code toAlignWith} doesn't have.
+     * The end result is that both LabList will have the same list of Labs with potentially different status and marks.
+     * Most relevant for deserialization of labs in {@code JsonSerializableAddressBook}.
+     *
+     * @param toAlignWith The LabList that you want to align to.
+     * @throws DuplicateLabException if one of the LabList contains duplicate labs. (should not be the case)
+     */
+    public void alignLabs(LabList toAlignWith) throws DuplicateLabException {
+        requireNonNull(toAlignWith);
+        // Using LabList instead of List<Labs> for O(n) setLabs instead of O(n^2) setLabs
+        LabList replacementList = new LabList();
+
+        // Iterator variable for toAlignWith
+        int i = 0;
+        //Iterator variable for this
+        int j = 0;
+
+        ObservableList<Lab> toAlignWithList = toAlignWith.internalList;
+
+        while (i < toAlignWithList.size() && j < internalList.size()) {
+            if (toAlignWithList.get(i).isSameLab(internalList.get(j))) {
+                replacementList.add(internalList.get(j));
+                i++;
+                j++;
+            } else if (sortByLabNumber.compare(toAlignWithList.get(i), internalList.get(j)) < 0) {
+                replacementList.add(toAlignWithList.get(i));
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        while (i < toAlignWithList.size()) {
+            replacementList.add(toAlignWithList.get(i));
+            i++;
+        }
+
+        this.setLabs(replacementList);
     }
 
     @Override

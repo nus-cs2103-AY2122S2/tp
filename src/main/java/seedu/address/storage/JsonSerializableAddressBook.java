@@ -21,7 +21,7 @@ import seedu.address.model.student.Student;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-    public static final String MESSAGE_DUPLICATE_LAB = "Students list contains duplicate lab(s).";
+    public static final String MESSAGE_DUPLICATE_LAB = "Master list contains duplicate lab(s).";
 
     private final List<JsonAdaptedLab> masterList = new ArrayList<>();
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
@@ -54,13 +54,6 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            Student student = jsonAdaptedStudent.toModelType();
-            if (addressBook.hasStudent(student)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
-            }
-            addressBook.addStudent(student);
-        }
 
         for (JsonAdaptedLab jsonAdaptedLab : masterList) {
             Lab lab = jsonAdaptedLab.toModelType();
@@ -69,6 +62,16 @@ class JsonSerializableAddressBook {
             }
             addressBook.getMasterLabList().add(lab.of("UNSUBMITTED"));
         }
+
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
+            if (addressBook.hasStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
+            }
+            student.getLabs().alignLabs(addressBook.getMasterLabList());
+            addressBook.addStudent(student);
+        }
+
         return addressBook;
     }
 

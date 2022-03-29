@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
+import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +26,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedStudent.class);
+    public static final String MESSAGE_DUPLICATE_LABS = "Student list contains duplicate Labs.";
 
     private final String name;
     private final String email;
@@ -85,7 +84,7 @@ class JsonAdaptedStudent {
     public Student toModelType() throws IllegalValueException {
         final List<Tag> personTags = deserializeTags();
 
-        final List<Lab> personLabs = deserializeLabs();
+        final LabList personLabs = deserializeLabs();
 
         final Name modelName = deserializeName();
 
@@ -105,11 +104,17 @@ class JsonAdaptedStudent {
         return s;
     }
 
-    private List<Lab> deserializeLabs() throws IllegalValueException {
-        List<Lab> personLabs = new ArrayList<>();
-        for (JsonAdaptedLab lab : labs) {
-            personLabs.add(lab.toModelType());
+    private LabList deserializeLabs() throws IllegalValueException {
+        LabList personLabs = new LabList();
+
+        try {
+            for (JsonAdaptedLab lab : labs) {
+                personLabs.add(lab.toModelType());
+            }
+        } catch (DuplicateLabException e) {
+            throw new IllegalValueException(MESSAGE_DUPLICATE_LABS);
         }
+
         return personLabs;
     }
 
