@@ -17,8 +17,8 @@ public class FindTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "findTransaction";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Transactions of person "
-            + "by using the index of the displayed list of persons. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Transactions of client "
+            + "by using the index of the displayed list of client. "
             + "Index must be greater than 0.\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -50,9 +50,11 @@ public class FindTransactionCommand extends Command {
         TransactionWithIdentifierPredicate predicate = predicateProducer.createTransactionPredicate(personIdentifier);
         model.updateFilteredTransactionList(predicate);
 
-        return new CommandResult(
-                String.format(Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW,
-                        model.getFilteredTransactionList().size()));
+        if (model.getFilteredTransactionList().size() == 0) {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_NO_TRANSACTIONS_LISTED_OVERVIEW, person.toString()));
+        }
+        return new CommandResult(String.format(Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, person.toString()));
     }
 
     @Override
