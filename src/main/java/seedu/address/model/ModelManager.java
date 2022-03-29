@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
@@ -192,9 +191,8 @@ public class ModelManager implements Model {
     @Override
     public void updateSortApplicantList(Comparator<Applicant> comparator) {
         requireNonNull(comparator);
-        SortedList<Applicant> sortedList = new SortedList<>(filteredApplicants);
-        sortedList.setComparator(comparator);
-        filteredApplicants = new FilteredList<>(sortedList);
+        addressBook.sortApplicant(comparator);
+        filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Interview List Accessors =============================================================
@@ -217,9 +215,8 @@ public class ModelManager implements Model {
     @Override
     public void updateSortInterviewList(Comparator<Interview> comparator) {
         requireNonNull(comparator);
-        SortedList<Interview> sortedList = new SortedList<>(filteredInterviews);
-        sortedList.setComparator(comparator);
-        filteredInterviews = new FilteredList<>(sortedList);
+        addressBook.sortInterview(comparator);
+        filteredInterviews.setPredicate(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
     //=========== Filtered Position List Accessors =============================================================
@@ -237,9 +234,8 @@ public class ModelManager implements Model {
     @Override
     public void updateSortPositionList(Comparator<Position> comparator) {
         requireNonNull(comparator);
-        SortedList<Position> sortedList = new SortedList<>(filteredPositions);
-        sortedList.setComparator(comparator);
-        filteredPositions = new FilteredList<>(sortedList);
+        addressBook.sortPosition(comparator);
+        filteredPositions.setPredicate(PREDICATE_SHOW_ALL_POSITIONS);
     }
 
     //=========== Utility methods =============================================================

@@ -60,11 +60,28 @@ public class ListApplicantCommand extends ListCommand {
         this.sortArgument = sortArgument;
     }
 
+    /**
+     *
+     */
+    public ListApplicantCommand(FilterType filterType, FilterArgument filterArgument, SortArgument sortArgument) {
+        this.filterArgument = filterArgument;
+        this.filterType = filterType;
+        this.sortArgument = sortArgument;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (filterType != null && filterArgument != null && sortArgument != null) {
+            if (filterType.type.equals("name")) {
+                String[] nameKeywords = filterArgument.toString().split("\\s+");
+                Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
+                model.updateFilteredApplicantList(predicate);
 
-        if (filterType != null && filterArgument != null) {
+                Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
+                model.updateSortApplicantList(comparator);
+            }
+        } else if (filterType != null && filterArgument != null) {
             if (filterType.type.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));

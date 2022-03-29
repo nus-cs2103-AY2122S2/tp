@@ -3,6 +3,7 @@ package seedu.address.model.applicant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +47,14 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Sorts a list of applicant
+     */
+    public void sort(Comparator<Applicant> comparator) {
+        requireNonNull(comparator);
+        internalList.sort(comparator);
     }
 
     /**

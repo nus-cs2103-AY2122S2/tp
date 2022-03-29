@@ -14,12 +14,16 @@ import seedu.address.logic.FilterType;
 import seedu.address.logic.SortArgument;
 import seedu.address.logic.commands.interview.ListInterviewCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.GenericListParser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ListInterviewCommandParser extends GenericListParser<ListInterviewCommand> {
+
+    @Override
+    public ListInterviewCommand parseFilterAndSort(ArgumentMultimap argMultimap) {
+        return null;
+    }
 
     @Override
     public ListInterviewCommand returnFullList() {
@@ -34,18 +38,11 @@ public class ListInterviewCommandParser extends GenericListParser<ListInterviewC
      * @throws ParseException if the user input does not conform the expected sort format
      */
     @Override
-    public ListInterviewCommand parseSort(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT_ARGUMENT);
+    public ListInterviewCommand parseSort(ArgumentMultimap args) throws ParseException {
+        SortArgument sortArgument =
+                ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
 
-        if (argMultimap.getValue(PREFIX_SORT_ARGUMENT).isPresent()) {
-            SortArgument sortArgument =
-                    ParserUtil.parseSortArgument(argMultimap.getValue(PREFIX_SORT_ARGUMENT).get());
-
-            return new ListInterviewCommand(sortArgument);
-        } else {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListInterviewCommand.MESSAGE_USAGE));
-        }
+        return new ListInterviewCommand(sortArgument);
     }
 
     /**
@@ -56,29 +53,20 @@ public class ListInterviewCommandParser extends GenericListParser<ListInterviewC
      * @throws ParseException if the user input does not conform the expected filter format
      */
     @Override
-    public ListInterviewCommand parseFilter(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILTER_TYPE, PREFIX_FILTER_ARGUMENT);
+    public ListInterviewCommand parseFilter(ArgumentMultimap args) throws ParseException {
+        FilterType filterType =
+                ParserUtil.parseFilterType(DataType.INTERVIEW, args.getValue(PREFIX_FILTER_TYPE).get());
+        FilterArgument filterArgument =
+                ParserUtil.parseFilterArgument(args.getValue(PREFIX_FILTER_ARGUMENT).get());
 
-        if (argMultimap.getValue(PREFIX_FILTER_TYPE).isPresent()
-                && argMultimap.getValue(PREFIX_FILTER_ARGUMENT).isPresent()) {
-
-            FilterType filterType =
-                    ParserUtil.parseFilterType(DataType.INTERVIEW, argMultimap.getValue(PREFIX_FILTER_TYPE).get());
-            FilterArgument filterArgument =
-                    ParserUtil.parseFilterArgument(argMultimap.getValue(PREFIX_FILTER_ARGUMENT).get());
-
-            if (filterType.type.equals("date")) {
-                try {
-                    LocalDate.parse(filterArgument.toString());
-                } catch (DateTimeParseException e) {
-                    throw new ParseException(Messages.MESSAGE_INVALID_DATE);
-                }
+        if (filterType.type.equals("date")) {
+            try {
+                LocalDate.parse(filterArgument.toString());
+            } catch (DateTimeParseException e) {
+                throw new ParseException(Messages.MESSAGE_INVALID_DATE);
             }
-
-            return new ListInterviewCommand(filterType, filterArgument);
-        } else {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListInterviewCommand.MESSAGE_USAGE));
         }
+
+        return new ListInterviewCommand(filterType, filterArgument);
     }
 }

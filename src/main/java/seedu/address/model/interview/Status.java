@@ -12,7 +12,11 @@ public class Status {
      * Constructs a Status with default value of "Pending".
      */
     public Status() {
-        value = "Pending";
+        this("Pending");
+    }
+
+    public Status(String value) {
+        this.value = value;
     }
 
     public void markAsPassed() {

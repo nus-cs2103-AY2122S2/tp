@@ -31,6 +31,17 @@ public class Interview {
         this.status = new Status();
     }
 
+    /**
+     * Create Interview object when loading from database
+     */
+    public Interview(Applicant applicant, LocalDateTime date, Position position, Status status) {
+        requireAllNonNull(applicant, date, status);
+        this.applicant = applicant;
+        this.date = date;
+        this.position = position;
+        this.status = status;
+    }
+
     public Applicant getApplicant() {
         return applicant;
     }
