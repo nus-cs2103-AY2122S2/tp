@@ -31,14 +31,20 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
     * **`add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
    
-    * **`edit [INDEX] c/Computer Science yr/3 avail/1 ...`** Edits the specified candidate in the system.
+    * **`edit 1 c/Computer Science yr/3 avail/1 ...`** Edits the first candidate in the system.
 
-    * **`delete [INDEX]`** : Deletes the candidate with ID A0213456H from the system.
+    * **`delete 1`** : Deletes the first candidate in the system.
 
     * **`find k/Jane f/name`** : Searches for all candidate with name containing “Jane/jane”.
 
     * **`sort s/name`** : Sorts all candidate by name in descending alphabetical order.
+   
+    * **`schedule add candidate/1 at/05-05-2022 10:00`** : Schedules the first candidate for an interview at 5 May 2022 10AM.
+   
+    * **`schedule edit 1 at/06-06-2022 15:00`** : Reschedules the first interview in the interview schedule to 6 June 2022 3PM. Note that the index in the interview schedule is different from the candidate list.
 
+    * **`schedule delete 1`** : Deletes the first interview in the interview schedule. Note that the index in the interview schedule is different from the candidate list.
+   
     * **`help`** : List all commands in the system.
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -48,6 +54,12 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 ## Features
 
 <div markdown="block" class="alert alert-info">
+
+* [Viewing Help](#viewing-help)
+* [Managing candidates](#managing-candidates)
+* [Scheduling Interviews](#scheduling-interviews)
+* [Miscellaneous commands](#miscellaneous-commands)
+* [Processing data](#processing-data)
 
 **:information_source: Notes about the command format:**<br>
 
@@ -65,11 +77,15 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
 </div>
 
-### Viewing help : `help`
+## Viewing help
+
+### Viewing help window: `help`
 
 Lists the application commands that are available in the system.
 
 Format: `help`
+
+## Managing Candidates
 
 ### Adding a candidate: `add`
 
@@ -197,22 +213,6 @@ Examples:
 * `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
 * `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st candidate in the results of the find command.
 
-### Scheduling a candidate for an interview : `schedule` [Work-In-Progress]
-
-Schedules the specified candidate for an interview.
-
-Format: `schedule INDEX /at DATE TIME`
-
-* Schedules the candidate at the specified `INDEX` for an interview on given `DATE` and `TIME`.
-* The index refers to the index number shown in the displayed candidate list.
-* The index must be a positive integer 1, 2, 3, …​
-* `DATE` and `TIME` must be specified in the format `dd/MM/yyyy` and `HH:mm` respectively.
-* `DATE` and `TIME` must not be earlier than the current date and time.
-
-Examples:
-* `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
-  for an interview on 20 September 2022, 3PM.
-
 
 ### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
 
@@ -224,9 +224,58 @@ Format: `focus INDEX`
 * To switch to another Candidate's information, user will just need to type the new command
 * and the new index of the candidate.
 
+## Scheduling interviews
+
+### Scheduling a candidate for interview: `schedule add`
+
+Schedules the specified candidate for an interview.
+
+Format: `schedule add candidate/INDEX at/DATE_TIME`
+
+* Schedules the candidate at the specified `INDEX` for an interview on given `DATE_TIME`.
+* The candidate index refers to the index number shown in the displayed candidate list.
+* The candidate index must be a positive integer 1, 2, 3, …​
+* `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
+* `DATE_TIME` must not be earlier than the present date and time.
+
+Examples:
+* `list` followed by `schedule add candidate/2 at/05-05-2022 10:00` schedules the second candidate in the candidate list
+  for an interview on 5 May 2022 10AM.
+
+### Rescheduling an interview: `schedule edit`
+
+Reschedules the specified interview to a new date and time.
+
+Format: `schedule edit SCHEDULE_INDEX at/DATE_TIME`
+
+* Reschedules the interview at the specified `SCHEDULE_INDEX` to the given new `DATE_TIME`.
+* The schedule index refers to the index number shown in the displayed interview schedule.
+* The schedule index must be a positive integer 1, 2, 3, …​
+* `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
+* `DATE_TIME` must not be earlier than the present date and time.
+
+Examples:
+* `view` followed by `schedule edit 2 at/06-06-2022 15:00` reschedules the second interview in the interview schedule
+  to 6 June 2022 3PM.
+
+### Deleting an interview: `schedule delete`
+
+Deletes the specified interview.
+
+Format: `schedule delete SCHEDULE_INDEX`
+
+* Deletes the interview at the specified `SCHEDULE_INDEX`.
+* The schedule index refers to the index number shown in the displayed interview schedule.
+* The schedule index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `view` followed by `schedule delete 2` deletes the second interview in the interview schedule.
+
+## Miscellaneous commands
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the system.
+Clears all entries (candidates and interviews) from the system.
 
 Format: `clear`
 
@@ -236,6 +285,7 @@ Exits the program.
 
 Format: `exit`
 
+## Processing data
 ### Saving the data
 
 TAlent Assistant™ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -248,10 +298,6 @@ TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/tale
 If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -263,14 +309,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                                              |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add id/STUDENTID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
-| **Clear**    | `clear`                                                                                                                                                                                       |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                           |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                                              |
-| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                  |
-| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                              |
-| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                                                                                   |
-| **List**     | `list`                                                                                                                                                                                        |
-| **Help**     | `help`                                                                                                                                                                                        |
+| Action                   | Format, Examples                                                                                                                                                                              |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                  | `add id/STUDENTID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
+| **Clear**                | `clear`                                                                                                                                                                                       |
+| **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                           |
+| **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                                              |
+| **Find**                 | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                  |
+| **Sort**                 | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                              |
+| **Schedule interview**   | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00`                                                                                        |
+| **Reschedule interview** | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`                                                                                                  |
+| **Delete interview**     | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                                                                                                               |
+| **List**                 | `list`                                                                                                                                                                                        |
+| **Help**                 | `help`                                                                                                                                                                                        |
