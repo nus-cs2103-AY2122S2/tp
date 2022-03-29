@@ -38,6 +38,10 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         this.priority = priority;
         this.assignee = assignee;
         this.isMarked = isMarked;
+
+        boolean isAtLeastOneNotNull = (this.taskType != null) || (this.description != null) || (this.date != null)
+                || (this.priority != null) || (this.assignee != null) || (this.isMarked != null);
+        assert isAtLeastOneNotNull : "At least one search option should be specified";
     }
 
     /**

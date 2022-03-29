@@ -48,8 +48,7 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
     }
 
     private void checkIfHaveAtLeastOneOption(ArgumentMultimap argMultiMap) {
-        if (!arePrefixesPresent(argMultiMap, PERSON_PROPERTIES)
-                || !argMultiMap.getPreamble().isEmpty()) {
+        if (!isAtLeastOnePrefixPresent(argMultiMap, PERSON_PROPERTIES) || !argMultiMap.getPreamble().isEmpty()) {
             addErrorMessage(FindEmployeeCommand.NO_OPTIONS);
         }
     }
@@ -120,7 +119,7 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean isAtLeastOnePrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

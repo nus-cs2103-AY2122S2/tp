@@ -16,7 +16,6 @@ import static manageezpz.testutil.TypicalTasks.READ_BOOK;
 import static manageezpz.testutil.TypicalTasks.RETURN_BOOK;
 import static manageezpz.testutil.TypicalTasks.WEEKLY_QUIZ;
 import static manageezpz.testutil.TypicalTasks.getTypicalAddressBookTasks;
-import static manageezpz.testutil.TypicalTasks.getTypicalTask;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -84,19 +83,6 @@ class FindTaskCommandTest {
 
         // Different description -> return false
         assertFalse(firstFindTaskCommand.equals(secondFindTaskCommand));
-    }
-
-    @Test
-    void findCommand_findAllTasks_showAllTasks() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null, null, null,
-                null, null, null);
-        expectedModel.updateFilteredTaskList(predicate);
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW,
-                expectedModel.getFilteredTaskList().size());
-        FindTaskCommand command = new FindTaskCommand(predicate);
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalTask(), model.getFilteredTaskList());
     }
 
     @Test

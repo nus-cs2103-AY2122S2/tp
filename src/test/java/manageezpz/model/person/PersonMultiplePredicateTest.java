@@ -10,30 +10,24 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class PersonMultiplePredicateTest {
+    // Equals method
     @Test
     void personMultiplePredicate_equalsOwnObject_true() {
-        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
+        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Alice"), null, null);
         assertTrue(predicate1.equals(predicate1));
     }
 
     @Test
     void personalMultiplePredicate_equalsOtherObject_false() {
         Object object = new Object();
-        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
+        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Alice"), null, null);
         assertFalse(predicate1.equals(object));
     }
 
     @Test
     void personalMultiplePredicate_equalsNull_false() {
-        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
+        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Alice"), null, null);
         assertFalse(predicate1.equals(null));
-    }
-
-    @Test
-    void personalMultiplePredicate_equalsWithAllNullValue_true() {
-        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
-        PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(null, null, null);
-        assertTrue(predicate1.equals(predicate2));
     }
 
     @Test
@@ -86,12 +80,8 @@ class PersonMultiplePredicateTest {
         assertFalse(predicate1.equals(predicate2));
     }
 
-    @Test
-    void personalMultiplePredicate_noOptionsSpecified_true() {
-        PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
-        assertTrue(predicate1.test(ALICE));
-    }
 
+    // Test with person class
     @Test
     void personalMultiplePredicate_sameName_true() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Alice"), null, null);

@@ -23,6 +23,9 @@ public class PersonMultiplePredicate implements Predicate<Person> {
         this.name = name;
         this.phone = phone;
         this.email = email;
+
+        boolean isAtLeastOneNotNull = (this.name != null) || (this.phone != null) || (this.email != null);
+        assert isAtLeastOneNotNull : "At least one search option should be specified";
     }
 
     /**
