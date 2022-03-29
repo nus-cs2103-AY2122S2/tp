@@ -157,7 +157,7 @@ public class Overlay extends UiPart<Region> {
      */
     private void showOverlay(Pane overlay) {
         overlay.setVisible(true);
-        overlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
+        overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5)");
     }
 
     /**
@@ -166,7 +166,7 @@ public class Overlay extends UiPart<Region> {
      */
     private void hideOverlay(Pane overlay) {
         overlay.setVisible(false);
-        overlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
+        overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
     }
 
 }
