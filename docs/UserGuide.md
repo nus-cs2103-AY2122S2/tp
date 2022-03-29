@@ -13,20 +13,20 @@ Tracey can get your student health status management tasks done faster than trad
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * [Finding a contact](#finding-a-contact-find)
-    * [Adding a contact](#adding-a-contact-add)
-    * [Deleting a contact](#deleting-a-contact-delete)
-    * [Editing an exisiting contact](#editing-an-existing-contact-edit)
-    * [Clearing all records](#clearing-all-records-clear)
-    * [Summarising the records](#summarising-the-records-summarise)
-    * [Listing the records](#listing-the-records-list)
-    * [Viewing help](#viewing-help-help)
-    * [Filtering contacts](#filtering-contacts-filter)
-    * [Archiving address book](#archiving-address-book-archive)
-    * [Saving](#saving)
-    * [Copying Emails](#copying-emails)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
+    * <a href='#finding-a-contact-find'>Finding a contact</a>
+    * <a href='#adding-a-contact-add'>Adding a contact</a>
+    * <a href='#deleting-a-contact-delete'>Deleting a contact</a>
+    * <a href='#editing-an-existing-contact-edit'>Editing an exisiting contact</a>
+    * <a href='#clearing-all-records-clear'>Clearing all records</a>
+    * <a href='#summarising-the-records-summarise'>Summarising the records</a>
+    * <a href='#listing-the-records-list'>Listing the records</a>
+    * <a href='#viewing-help-help'>Viewing help</a>
+    * <a href='#filtering-contacts-filter'>Filtering contacts</a>
+    * <a href='#archiving-tracey-archive'>Archiving address book</a>
+    * <a href='#saving'>Saving</a>
+    * <a href='#copying-emails'>Copying Emails</a>
+* <a href='#faq'>FAQ</a>
+* <a href='#command-summary'>Command Summary</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
