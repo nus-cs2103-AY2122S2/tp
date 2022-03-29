@@ -303,16 +303,16 @@ public class EditCommand extends Command {
         // state check
 
         if (this.type == EditCommandType.PLAYER) {
-            return this.editPersonDescriptor.equals(e.editPersonDescriptor) &&
-                    this.targetPlayerName.equals(e.targetPlayerName);
+            return this.editPersonDescriptor.equals(e.editPersonDescriptor)
+                    && this.targetPlayerName.equals(e.targetPlayerName);
         }
         if (this.type == EditCommandType.LINEUP) {
-            return this.editLineupName.equals(e.editLineupName) &&
-                    this.targetLineupName.equals(e.targetLineupName);
+            return this.editLineupName.equals(e.editLineupName)
+                    && this.targetLineupName.equals(e.targetLineupName);
         }
 
-        return this.editScheduleDescriptor.equals(e.editScheduleDescriptor) &&
-                this.index.equals(e.index);
+        return this.editScheduleDescriptor.equals(e.editScheduleDescriptor)
+                && this.index.equals(e.index);
     }
 
     /**

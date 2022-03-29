@@ -1,13 +1,12 @@
 package seedu.address.logic.parser;
-
-import seedu.address.logic.commands.ThemeCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
+
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.ThemeCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ThemeCommandParser implements Parser<ThemeCommand> {
     @Override
@@ -23,15 +22,13 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
         String theme = argMultimap.getValue(PREFIX_THEME).get();
 
         switch (theme.toLowerCase()) {
-            case "dark":
-                return new ThemeCommand(true, false);
-
-            case "light":
-                return new ThemeCommand(false, true);
-
-            default:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ThemeCommand.MESSAGE_EDIT_THEME_INVALID));
+        case "dark":
+            return new ThemeCommand(true, false);
+        case "light":
+            return new ThemeCommand(false, true);
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ThemeCommand.MESSAGE_EDIT_THEME_INVALID));
         }
     }
 
