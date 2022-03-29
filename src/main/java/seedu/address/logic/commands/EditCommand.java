@@ -154,8 +154,7 @@ public class EditCommand extends Command {
 
     /**
      * Constructs an EditCommand for Person
-     *
-     * @param index     of the schedule in the filtered schedule list to edit
+     *  @param index     of the schedule in the filtered schedule list to edit
      * @param editScheduleDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditScheduleDescriptor editScheduleDescriptor) {
@@ -269,7 +268,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Schedule} with the details of {@code scheduleToEdit}
      * edited with {@code editScheduleDescriptor}.
      */
-    private static Schedule createEditedSchedule(Schedule scheduleToEdit,
+    public static Schedule createEditedSchedule(Schedule scheduleToEdit,
                                                  EditScheduleDescriptor editScheduleDescriptor) {
         assert scheduleToEdit != null;
 
