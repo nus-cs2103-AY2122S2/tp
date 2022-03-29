@@ -38,7 +38,7 @@ public class AddCustomerCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicateCustomer_throwsCommanldException() {
+    public void execute_duplicateCustomer_throwsCommandException() {
         Customer customerInList = model.getTrackBeau().getCustomerList().get(0);
         assertCommandFailure(new AddCustomerCommand(customerInList), model,
             AddCustomerCommand.MESSAGE_DUPLICATE_CUSTOMER);

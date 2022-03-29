@@ -208,8 +208,6 @@ public class ParserUtil {
         return new BookingDateTime(trimmedStartTime);
     }
 
-        return dateTime;
-    }
     /**
      * Parses a {@code String serviceName} into a {@code ServiceName}.
      * Leading and trailing whitespaces will be trimmed.
