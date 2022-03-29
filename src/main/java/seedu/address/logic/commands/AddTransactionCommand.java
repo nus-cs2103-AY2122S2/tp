@@ -17,7 +17,7 @@ import seedu.address.model.transaction.Note;
 import seedu.address.model.transaction.Status;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
-import seedu.address.model.transaction.util.TransactionProducer;
+import seedu.address.model.transaction.util.TransactionBuilder;
 
 
 public class AddTransactionCommand extends Command {
@@ -41,19 +41,19 @@ public class AddTransactionCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
 
     private final Index index;
-    private final TransactionProducer transactionProducer;
+    private final TransactionBuilder transactionBuilder;
 
     /**
      * Constructs AddTransaction command with the specified index
      * of the person and the transaction.
      *
      * @param index
-     * @param transactionProducer
+     * @param transactionBuilder
      */
-    public AddTransactionCommand(Index index, TransactionProducer transactionProducer) {
-        requireAllNonNull(index, transactionProducer);
+    public AddTransactionCommand(Index index, TransactionBuilder transactionBuilder) {
+        requireAllNonNull(index, transactionBuilder);
         this.index = index;
-        this.transactionProducer = transactionProducer;
+        this.transactionBuilder = transactionBuilder;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class AddTransactionCommand extends Command {
         Person person = lastShownList.get(index.getZeroBased());
         long personIdentifier = person.getUniqueId();
 
-        Transaction transaction = transactionProducer.createTransaction(personIdentifier);
+        Transaction transaction = transactionBuilder.createTransaction(personIdentifier);
 
         if (!transaction.isValid()) {
             throw new CommandException(MESSAGE_USAGE);
@@ -85,6 +85,6 @@ public class AddTransactionCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddTransactionCommand // instanceof handles nulls
                 && index.equals(((AddTransactionCommand) other).index))
-                && transactionProducer.equals(((AddTransactionCommand) other).transactionProducer);
+                && transactionBuilder.equals(((AddTransactionCommand) other).transactionBuilder);
     }
 }

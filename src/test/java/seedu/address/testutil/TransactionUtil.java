@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.DueDate;
 import seedu.address.model.transaction.Note;
@@ -50,4 +51,6 @@ public class TransactionUtil {
             ),
             VALID_ID
     );
+
+    public static final Index VALID_INDEX =Index.fromZeroBased(1);
 }
