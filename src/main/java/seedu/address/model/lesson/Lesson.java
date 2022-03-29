@@ -48,7 +48,7 @@ public class Lesson {
         this.studentAttendanceList = new ArrayList<>();
         // init all students enrolled in the class as not attending any lessons
         for (Student s : students) {
-            studentAttendanceList.add(new StudentAttendance(s, new Attendance("0")));
+            studentAttendanceList.add(new StudentAttendance(s, new Attendance(false)));
         }
     }
 
