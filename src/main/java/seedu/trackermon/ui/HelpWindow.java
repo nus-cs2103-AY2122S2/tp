@@ -152,12 +152,12 @@ public class HelpWindow extends UiPart<Stage> {
                         + "[c/COMMENT] [t/TAG]…"),
                 new CommandBuilder("Exit", "exit"),
                 new CommandBuilder("Export", "export"),
-                new CommandBuilder("Find", "find KEYWORD OR\nfind [n/NAME] [s/STATUS]"
+                new CommandBuilder("Find", "find KEYWORD\nfind [n/NAME] [s/STATUS]"
                         + " [r/RATING] [t/TAG]"),
                 new CommandBuilder("Help", "help"),
                 new CommandBuilder("Import", "import"),
                 new CommandBuilder("List", "list"),
-                new CommandBuilder("Sort", "sort [sna/] [snd/] [ssa/] [ssd/] [so/]…")
+                new CommandBuilder("Sort", "sort [n/] [s/] [r/] [t/] [so/]…")
         );
     }
 
