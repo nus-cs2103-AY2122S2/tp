@@ -5,20 +5,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TransactionUtil.INVALID_TRANSACTION;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_COMPLETE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO_COMPLETE;
+import static seedu.address.testutil.TransactionUtil.VALID_INDEX;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Filter;
 
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,40 +32,50 @@ import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.util.TransactionBuilder;
 import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.TransactionUtil;
 
 public class AddTransactionCommandTest {
 
     @Test
     public void constructor_nullTransaction_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddTransactionCommand(null, x -> null));
-        assertThrows(NullPointerException.class, () -> new AddTransactionCommand(Index.fromZeroBased(0), null));
+        assertThrows(NullPointerException.class, () -> new AddTransactionCommand(Index.fromZeroBased(0),
+                null));
     }
 
     @Test
     public void execute_transactionAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTransactionAdded modelStub = new ModelStubAcceptingTransactionAdded();
-        Transaction validTransaction = TransactionUtil.TRANSACTION_ONE_COMPLETE;
-        Index validIndex = TransactionUtil.VALID_INDEX;
-        Person validPerson = PersonUtil.AMY;
+        Transaction validTransaction = TRANSACTION_ONE_COMPLETE;
+        Index validIndex = VALID_INDEX;
 
         CommandResult commandResult = new AddTransactionCommand(validIndex, x -> validTransaction).execute(modelStub);
 
-        assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, validTransaction), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, validTransaction),
+                commandResult.getFeedbackToUser());
         assertEquals(List.of(validTransaction), modelStub.transactionAdded);
     }
 
     @Test
-    public void equals() {
-        TransactionBuilder tb = x -> TransactionUtil.TRANSACTION_ONE_COMPLETE;
+    public void execute_transactionInvalid_throwsCommandException() {
+        ModelStubAcceptingTransactionAdded modelStub = new ModelStubAcceptingTransactionAdded();
+        Transaction invalidTransaction = INVALID_TRANSACTION;
+        Index validIndex = VALID_INDEX;
 
-        AddTransactionCommand command = new AddTransactionCommand(TransactionUtil.VALID_INDEX, tb);
+        assertThrows(CommandException.class, () -> new AddTransactionCommand(validIndex, x -> invalidTransaction)
+                .execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        TransactionBuilder tb = x -> TRANSACTION_ONE_COMPLETE;
+
+        AddTransactionCommand command = new AddTransactionCommand(VALID_INDEX, tb);
 
         // same object -> returns true
         assertTrue(command.equals(command));
 
         // same values -> returns true
-        assertTrue(command.equals(new AddTransactionCommand(TransactionUtil.VALID_INDEX, tb)));
+        assertTrue(command.equals(new AddTransactionCommand(VALID_INDEX, tb)));
 
         // different types -> returns false
         assertFalse(command.equals(1));
@@ -72,8 +84,7 @@ public class AddTransactionCommandTest {
         assertFalse(command.equals(null));
 
         // different person -> returns false
-        assertFalse(command.equals(new AddTransactionCommand(Index.fromZeroBased(2),
-                x -> TransactionUtil.TRANSACTION_TWO_COMPLETE)));
+        assertFalse(command.equals(new AddTransactionCommand(Index.fromZeroBased(2), x -> TRANSACTION_TWO_COMPLETE)));
     }
 
     /**

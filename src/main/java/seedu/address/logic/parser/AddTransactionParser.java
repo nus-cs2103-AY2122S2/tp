@@ -29,11 +29,13 @@ public class AddTransactionParser implements Parser<AddTransactionCommand> {
     public AddTransactionCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
+
         List<Prefix> prefixList = new ArrayList<>(List.of(TransactionFieldRegistry.PREFIXES));
         prefixList.addAll(List.of(TransactionFieldRegistry.FLAGS));
         Prefix[] allPrefixes = prefixList.toArray(new Prefix[0]);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, allPrefixes);
+        String preamble = argMultimap.getPreamble();
 
         // Ensure that all required fields are present.
         if (!arePrefixesPresent(argMultimap, TransactionFieldRegistry.REQUIRED_PREFIXES)) {
@@ -62,7 +64,7 @@ public class AddTransactionParser implements Parser<AddTransactionCommand> {
             transactionFields.add(field);
         }
 
-        // throwing random shits here, basically parse all the flags with FP lol
+        // throwing random shits here, basically parse all the flags using FP lol
         List<TransactionField> transactionFieldsFlags =
             Arrays.stream(TransactionFieldRegistry.FLAGS)
                     .map(x -> parseFlag(x, argMultimap))
