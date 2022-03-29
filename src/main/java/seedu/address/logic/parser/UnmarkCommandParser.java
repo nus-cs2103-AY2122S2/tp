@@ -5,9 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -22,8 +19,6 @@ import seedu.address.model.student.Student;
  */
 public class UnmarkCommandParser implements Parser<UnmarkCommand> {
 
-    private static final Pattern UNMARK_COMMAND_FORMAT = Pattern.compile("(?<entityType>\\S+)(?<arguments>.*)");
-
     /**
      * Parses the given {@code String} of arguments in the context of the UnmarkCommand
      * and returns a UnmarkCommand object for execution.
@@ -31,13 +26,8 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
      */
     @Override
     public UnmarkCommand parse(String args, Model model) throws ParseException {
-        final Matcher matcher = UNMARK_COMMAND_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
-        }
 
-        final String arguments = matcher.group("arguments");
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_CLASS_INDEX, PREFIX_WEEK, PREFIX_STUDENT);
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_WEEK, PREFIX_STUDENT)
