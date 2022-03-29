@@ -10,7 +10,7 @@ import manageezpz.model.person.Person;
  * inputted by a user either a Todo, Deadline or Event.
  */
 
-public abstract class Task implements {
+public abstract class Task {
     protected boolean isDone = false;
     protected Priority priority = Priority.NONE;
 
