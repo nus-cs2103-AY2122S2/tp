@@ -87,7 +87,7 @@ public class TrackermonParser {
             return new ClearCommand();
 
         case SuggestCommand.COMMAND_WORD:
-            return new SuggestCommandParser().parse(arguments);
+            return new SuggestCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
