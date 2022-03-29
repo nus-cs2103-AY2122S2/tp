@@ -2,8 +2,15 @@ package seedu.ibook.testutil;
 
 import static seedu.ibook.testutil.TypicalItems.ITEM_A;
 import static seedu.ibook.testutil.TypicalItems.ITEM_B;
+import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01;
+import static seedu.ibook.testutil.TypicalItems.Q5_2200_01_01;
+import static seedu.ibook.testutil.TypicalProducts.CHOCOLATE_BREAD;
+import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
+import static seedu.ibook.testutil.TypicalProducts.PEANUT_BUTTER_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_B;
+import static seedu.ibook.testutil.TypicalProducts.VANILLA_CAKE;
+import static seedu.ibook.testutil.TypicalProducts.WAFFLES;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,15 +28,15 @@ public class TypicalReversibleIBookActions {
     public static final ReversibleAddProductAction REVERSIBLE_ADD_PRODUCT_ACTION =
             new ReversibleAddProductAction(PRODUCT_A);
     public static final ReversibleSetProductAction REVERSIBLE_SET_PRODUCT_ACTION =
-            new ReversibleSetProductAction(PRODUCT_A, PRODUCT_B);
+            new ReversibleSetProductAction(KAYA_BREAD, PRODUCT_B);
     public static final ReversibleRemoveProductAction REVERSIBLE_REMOVE_PRODUCT_ACTION =
-            new ReversibleRemoveProductAction(PRODUCT_B);
+            new ReversibleRemoveProductAction(VANILLA_CAKE);
     public static final ReversibleAddItemAction REVERSIBLE_ADD_ITEM_ACTION =
-            new ReversibleAddItemAction(PRODUCT_A, ITEM_A);
+            new ReversibleAddItemAction(WAFFLES, ITEM_A);
     public static final ReversibleSetItemAction REVERSIBLE_SET_ITEM_ACTION =
-            new ReversibleSetItemAction(PRODUCT_A, ITEM_A, ITEM_B);
+            new ReversibleSetItemAction(CHOCOLATE_BREAD, Q5_2200_01_01, ITEM_B);
     public static final ReversibleRemoveItemAction REVERSIBLE_REMOVE_ITEM_ACTION =
-            new ReversibleRemoveItemAction(PRODUCT_A, ITEM_B);
+            new ReversibleRemoveItemAction(PEANUT_BUTTER_BREAD, Q5_2022_03_01);
 
     private TypicalReversibleIBookActions() {} // prevent instantiation
 
