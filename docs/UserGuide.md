@@ -50,6 +50,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                 |
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                 |
 | [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional |
+| \<Instructions for parameters\>                                                     | Represents certain requirements you will need to follow |
 
 ---
 
@@ -235,7 +236,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the Rating and Comment feature.** 
+**:information_source: Notes about the Rating and Comment feature:** <br>
 * Reset the rating of a show: `edit INDEX r/0`
 * Removing a comment: `edit INDEX c/`
 
