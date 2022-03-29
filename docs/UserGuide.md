@@ -228,7 +228,7 @@ Format: `list mt/<YYYY-MM-DD>`
 
 Edits an existing person in UniBook.
 
-Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME]`
+Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [a/OFFICE] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME]`
 
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
   * Options available are person, module, keyevent or group.
@@ -247,8 +247,9 @@ Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODU
 
 At least one optional field must be edited in order for person to be successfully edited.
 
-Format: `edit INDEX o/person [n/NAME] [p/PHONE] [e/EMAIL]`
+Format: `edit INDEX o/person [n/NAME] [p/PHONE] [e/EMAIL] [a/OFFICE]`
 * Edits the `name`, `phone` and/or `email` fields of a person at `INDEX`.
+* The `office` field can only be edited if the person is a professor.  
 * Example: `edit 1 o/person n/Alexa` changes the name of the first person on the list to Alexa.
 
 Format: `edit INDEX o/person [m/MODULE] [g/GROUPNAME]`
