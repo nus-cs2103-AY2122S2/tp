@@ -58,8 +58,14 @@ class FindTaskCommandParserTest {
     }
 
     @Test
-    void findTaskCommandParser_noArguments_findTaskCommand() {
+    void findTaskCommandParser_noArguments_throwParseException() {
         String userInput = " ";
+        assertParseFailure(parser, userInput, NO_OPTIONS_MESSAGE);
+    }
+
+    @Test
+    void findTaskCommandParser_invalidArguments_throwParseException() {
+        String userInput = String.join(" ", EMPTY_STRING, "someNonExistentCommand/");
         assertParseFailure(parser, userInput, NO_OPTIONS_MESSAGE);
     }
 
@@ -149,7 +155,7 @@ class FindTaskCommandParserTest {
     }
 
     @Test
-    void findTaskCommandParser_invalidAssignee_findTaskCommand() {
+    void findTaskCommandParser_invalidAssignee_throwParseException() {
         String userInput = String.join(" ", EMPTY_STRING, PREFIX_ASSIGNEES.toString(), "James&");
         assertParseFailure(parser, userInput, INVALID_ASSIGNEE_COMMAND_MESSAGE);
     }

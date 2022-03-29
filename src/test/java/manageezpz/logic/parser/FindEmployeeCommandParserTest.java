@@ -43,6 +43,12 @@ class FindEmployeeCommandParserTest {
     }
 
     @Test
+    void findEmployeeCommandParser_invalidOption_throwParseException() {
+        String userInput = String.join(" ", EMPTY_STRING, "nonExistentCommand/");
+        assertParseFailure(parser, userInput, NO_OPTION_MESSAGE);
+    }
+
+    @Test
     void findEmployeeCommandParser_noName_throwsParseException() {
         String userInput = String.join(" ", EMPTY_STRING, PREFIX_NAME.getPrefix());
         assertParseFailure(parser, userInput, INVALID_NAME_MESSAGE);

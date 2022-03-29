@@ -99,7 +99,7 @@ class FindTaskCommandTest {
     }
 
     @Test
-    void findCommand_findTaskWithDescription_showTasksWithGivenDescrription() {
+    void findCommand_findTaskWithDescription_showTasksWithGivenDescription() {
         // Only 1 word
         List<String> keywords1 = List.of("Book");
         TaskMultiplePredicate predicate1 = new TaskMultiplePredicate(null,
@@ -153,7 +153,7 @@ class FindTaskCommandTest {
     }
 
     @Test
-    void findCommand_findTaskWithAssignee_showTasksWithGivenPriority() {
+    void findCommand_findTaskWithAssignee_showTasksWithGivenAssignee() {
         TaskMultiplePredicate predicate = new TaskMultiplePredicate(null,
                 null, null, null, ALICE.getName().fullName, null);
         expectedModel.updateFilteredTaskList(predicate);

@@ -63,7 +63,7 @@ class PersonMultiplePredicateTest {
     }
 
     @Test
-    void personalMultiplePredicate_equalsWithSameEmail_false() {
+    void personalMultiplePredicate_equalsWithSameEmail_true() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null,
                 ALICE.getEmail().toString());
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(null, null,
@@ -83,7 +83,7 @@ class PersonMultiplePredicateTest {
 
     // Test with person class
     @Test
-    void personalMultiplePredicate_sameName_true() {
+    void personalMultiplePredicate_containsName_true() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Alice"), null, null);
         assertTrue(predicate1.test(ALICE));
 
@@ -98,7 +98,7 @@ class PersonMultiplePredicateTest {
     }
 
     @Test
-    void personalMultiplePredicate_differentName_false() {
+    void personalMultiplePredicate_doesNotContainName_false() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Al1ce"), null, null);
         assertFalse(predicate1.test(ALICE));
     }
