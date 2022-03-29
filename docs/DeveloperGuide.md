@@ -388,7 +388,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a person
+1. User requests to add a person.
 2. User enters details of the new person.
 3. ContaX adds the new person.
 4. ContaX shows that the person has been added successfully.
@@ -400,12 +400,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
     * Use case ends.
 
-* 2b. ContaX detects that a supplied attribute has an invalid value
+* 2b. ContaX detects that a supplied attribute has an invalid value.
     * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
     * 2b2. ContaX shows the expected allowed values.
     * Use case ends.
 
-* 2c. The person already exists
+* 2c. ContaX detects that the person already exists.
     * 2c1. ContaX shows an error message indicating that the person already exists.
     * Use case ends.
 
@@ -430,6 +430,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. User filters persons by tag keyword.
   * 1b1. User **finds person by tag (UC10)**.
   * Use case resumes from step 2.
+
+* 2a. ContaX has no persons to list.
+  * Use case ends.
 
 * 4a. ContaX detects that a required person attribute was not supplied.
     * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
@@ -460,6 +463,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. User **finds person by tag (UC10)**.
     * Use case resumes from step 2.
 
+* 2a. ContaX has no persons to list.
+  * Use case ends.
+
 * 4a. ContaX detects that a required person attribute was not supplied.
     * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
     * Use case ends.
@@ -472,10 +478,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 5a. ContaX cannot find the requested person to delete.
     * 5a1. ContaX shows an error message indicating that no such person exists.
 
-* 5b. The person already exists
+* 5b. The person already exists.
     * 5b1. ContaX shows an error message indicating that the person already exists.
     * Use case ends.
 
+**UC5: Find Persons**
+
+**MSS**
+
+1. User requests to find persons.
+2. User enters details to find person by.
+3. ContaX shows a list of persons that matches the specified details.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that a required person attribute was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * Use case ends.
+
+* 2b. ContaX detects that a supplied attribute has an invalid value
+  * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+  * 2b2. ContaX shows the expected allowed values.
+  * Use case ends.
+
+* 3a. ContaX has no persons to list.
+  * 3a1. Use case ends.
 
 #### Tag-Related Use Cases
 ![Tag Use Case](images/UseCaseDiagramTags.png)
@@ -583,6 +611,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. ContaX shows an error message indicating that an invalid character was found.
     * 2b2. ContaX shows the expected allowed values.
     * Use case ends.
+
+* 3a. ContaX has no persons to list.
+  * Use case ends.
 
 **Use case: List appointments**
 
