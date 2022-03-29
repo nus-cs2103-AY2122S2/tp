@@ -25,6 +25,11 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because it allows the user to view the list of clients that the user thinks are potentially always going to be contacted, thus being favourited by him/her.
   * Highlights: This enhancement does not affect existing commands but the existing GUI and user experience.
 
+* **New Feature**: Added a Statistics command/window.
+  * What it does: Allows the user open up a new window that displays the visualization of the data of sellers' properties & buyers' preference based on their region.
+  * Justification: This feature improves the product significantly because it allows the user to visualize data of his/her client and thus allow him/her to make better business decisions (exp. Find more clients in popular regions).
+  * Highlights: This enhancement does not affect existing commands but the existing GUI and user experience.
+
 * **Project management**:
   * Acted as repository master for the first iteration
     * Merged PRs into respective branches after reviewing changes
@@ -36,7 +41,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete`, `find`, `favourite`, `Favourites window`[\#72]()
+    * Added documentation for the features `delete`, `find`, `favourite`, `Favourites window`[\#72](), `Statistics command/window` [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94)
     * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
   * Developer Guide:
     * Added user stories for RealEstatePro
