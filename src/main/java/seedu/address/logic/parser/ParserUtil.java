@@ -148,17 +148,18 @@ public class ParserUtil {
             throw new ParseException(Skill.SKILL_INPUT_CONSTRAINTS);
         }
         String skillName = trimmedSkill[0];
+        String trimmedSkillName = skillName.trim();
         if (!Skill.isValidSkillProficiencyInteger(trimmedSkill[1])) {
             throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_INTEGER);
         }
         int skillProficiency = Integer.parseInt(trimmedSkill[1]);
-        if (!Skill.isValidSkillName(skillName)) {
+        if (!Skill.isValidSkillName(trimmedSkillName)) {
             throw new ParseException(Skill.NAME_CONSTRAINTS);
         }
         if (!Skill.isValidSkillProficiencyRange(skillProficiency)) {
             throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_RANGE);
         }
-        return new Skill(skillName, skillProficiency);
+        return new Skill(trimmedSkillName, skillProficiency);
     }
 
     /**
