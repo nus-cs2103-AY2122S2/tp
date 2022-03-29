@@ -1,10 +1,10 @@
 package seedu.address.model.pet;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class AppointmentTest {
     public static final String RETRIEVED_APPOINTMENT_VALUE = "Mar-04-2022 09:30 AM at NUS VET";
