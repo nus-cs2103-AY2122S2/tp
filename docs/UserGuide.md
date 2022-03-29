@@ -196,14 +196,16 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] 
 
 * Edits the client named `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
+  * Spaces in `NAME` will be counted as separate names, unless `NAME` fully matches client's name
+    * Example: `edit John Doe p\88888888` will find clients with names containing `John` and `Doe`,
+                there exists a client with the name `John Doe`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-  * Only full words will be matched e.g. `Han` will not match `Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names
   * Input the position on the list of the client you wish to edit.
 
 Example:
 Scenario: You have clients named `John Doe` `John Smith` and `John Willams`
-* Running the command `edit n/John d/2020-12-04`: will show a list of clients with names containing "John"
+* Running the command `edit n/John d/2020-12-04` will show a list of clients with names containing "John"
 
 ![edit_multiple_clients](images/editMultipleClients.png)
 * Typing `1` will edit "John Doe", typing `2` will edit "John Smith" and typing `3` will edit "John Williams"
@@ -212,6 +214,8 @@ Scenario: You have clients named `John Doe` `John Smith` and `John Willams`
 ![edit_client_result](images/editClientResult.png)
 
 <div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `edit`:**<br>
 
 * `DATE` has to be in the format **YYYY-MM-DD**.
 * **At least one** of the optional fields must be provided.
@@ -249,13 +253,18 @@ Deletes the specified client from the HustleBook.
 Format: `delete NAME`
 
 * Deletes the client with the specified `NAME`.
-    * `Name` is case-insensitive. e.g. `John` will match `john`.
-    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-    * Only full words will be matched e.g. `Han` will not match `Hans`.
-* In the event of multiple clients found with the same `NAME`, the first occurrence of the client in the list will be deleted.
+  * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * Spaces in `NAME` will be counted as separate names, unless `NAME` fully matches client's name
+    * Example: `edit John Doe p\88888888` will find clients with names containing `John` and `Doe`,
+                there exists a client with the name `John Doe`
+  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* If `NAME` matches multiple clients, you will see a list of clients with matching names
+  * Input the position on the list of the client you wish to edit.
   
-Example: 
-* `delete John` deletes the client named `John` in the HustleBook.
+Example:
+Scenario: You have clients named `John Doe` `John Smith` and `John Willams`
+* Running the command `delete n/John` will show a list of clients with names containing "John"
+* If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
 
 ### Clearing all entries : `clear`
 
