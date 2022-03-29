@@ -14,7 +14,7 @@ public class DiscountRate {
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Rate should only be a positive double, and at most 100";
 
-    public static final String VALIDATION_REGEX = "|(\\d+(?:.\\d{1,2})?)%?";
+    public static final String VALIDATION_REGEX = "|\\d+(?:\\.\\d{1,2})?%?";
 
     public final Double discountRate;
 
