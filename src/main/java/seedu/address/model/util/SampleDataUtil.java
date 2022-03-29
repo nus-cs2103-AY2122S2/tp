@@ -65,20 +65,20 @@ public class SampleDataUtil {
     public static Schedule[] getSampleSchedules() {
         return new Schedule[] {
             new Schedule(new ScheduleName("Championship Match"),
-                new ScheduleDescription("Against Clippers\n LeGM needs to stop passing"),
-                new ScheduleDateTime("2020-06-01 1200")),
+                new ScheduleDescription("Against Clippers LeGM needs to stop passing"),
+                new ScheduleDateTime("01/06/2020 1200")),
             new Schedule(new ScheduleName("All star game"),
                 new ScheduleDescription("LBJ and KD participating"),
-                new ScheduleDateTime("2020-02-01 1200")),
+                new ScheduleDateTime("01/02/2020 1200")),
             new Schedule(new ScheduleName("Skills challenge"),
                 new ScheduleDescription("Practice for this"),
-                new ScheduleDateTime("2020-01-18 1200")),
+                new ScheduleDateTime("18/01/2020 1200")),
             new Schedule(new ScheduleName("Three point shoot out"),
                 new ScheduleDescription("Steph practice 3 pointer"),
-                new ScheduleDateTime("2020-02-19 1200")),
+                new ScheduleDateTime("19/02/2020 1200")),
             new Schedule(new ScheduleName("Free throw practice"),
                 new ScheduleDescription("Dwight needs to improve free throws"),
-                new ScheduleDateTime("2020-06-19 1200"))
+                new ScheduleDateTime("19/06/2020 1200"))
         };
     }
 
