@@ -17,13 +17,22 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** plot staff chart */
+    private final boolean plotStaffChart;
+
+    /** plot service chart */
+    private final boolean plotServiceChart;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp,
+                         boolean exit, boolean plotStaffChart, boolean plotServiceChart) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.plotStaffChart = plotStaffChart;
+        this.plotServiceChart = plotServiceChart;
     }
 
     /**
@@ -31,7 +40,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false,
+                false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +54,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isPlotStaffChart() {
+        return plotStaffChart;
+    }
+
+    public boolean isPlotServiceChart() {
+        return plotServiceChart;
     }
 
     @Override
@@ -60,12 +78,15 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && plotStaffChart == otherCommandResult.plotStaffChart
+                && plotServiceChart == otherCommandResult.plotServiceChart;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit,
+                plotStaffChart, plotServiceChart);
     }
 
 }

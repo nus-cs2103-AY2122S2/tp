@@ -28,7 +28,6 @@ import seedu.trackbeau.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -38,6 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     private CustomerListPanel customerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StaffChartWindow staffChartWindow;
+    private ServiceChartWindow serviceChartWindow;
     private ServiceListPanel serviceListPanel;
     private BookingListPanel bookingListPanel;
     private StatisticsPanel statisticsPanel;
@@ -87,6 +88,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        staffChartWindow = new StaffChartWindow();
+        serviceChartWindow = new ServiceChartWindow();
 
         this.labels = new ArrayList<>();
         this.labels.add(customersLabel);
@@ -218,6 +221,30 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the staff chart window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void plotStaffChart() {
+        if (!staffChartWindow.isShowing()) {
+            staffChartWindow.show();
+        } else {
+            staffChartWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the service chart window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void plotServiceChart() {
+        if (!serviceChartWindow.isShowing()) {
+            serviceChartWindow.show();
+        } else {
+            serviceChartWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -231,6 +258,8 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        staffChartWindow.hide();
+        serviceChartWindow.hide();
         primaryStage.hide();
     }
 
@@ -255,6 +284,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isPlotStaffChart()) {
+                plotStaffChart();
+            }
+
+            if (commandResult.isPlotServiceChart()) {
+                plotServiceChart();
             }
 
             return commandResult;

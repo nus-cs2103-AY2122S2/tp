@@ -35,6 +35,10 @@
                     <Menu mnemonicParsing="false" text="Help">
                         <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                     </Menu>
+                    <Menu mnemonicParsing="false" text="Charts">
+                        <MenuItem fx:id="staffChart" mnemonicParsing="false" onAction="#plotStaffChart" text="Staff Chart" />
+                        <MenuItem fx:id="serviceChart" mnemonicParsing="false" onAction="#plotServiceChart" text="Service Chart" />
+                    </Menu>
                 </MenuBar>
                 <HBox VBox.vgrow="ALWAYS">
                     <children>
