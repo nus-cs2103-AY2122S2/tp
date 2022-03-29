@@ -14,7 +14,7 @@ public class Attendance {
 
     public static final String VALIDATION_REGEX = "^[01]{1}$";
 
-    public final String value;
+    private static Boolean value;
 
     /**
      * Constructs a {@code Attendance}.
@@ -24,7 +24,7 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
-        this.value = attendance;
+        this.value = attendance.trim() == "1";
     }
 
     /**
@@ -36,7 +36,7 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return value;
+        return String.valueOf(value);
     }
 
     @Override

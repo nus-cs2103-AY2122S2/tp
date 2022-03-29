@@ -37,6 +37,28 @@ public class StudentAttendance {
     }
 
     /**
+     * Marks the attendance of the given student if the student match the
+     * student identity in this {@code StudentAttendance}.
+     */
+    public StudentAttendance markAttendance(Student s) {
+        if (this.student.isSameStudent(s)) {
+            return new StudentAttendance(student, new Attendance("1"));
+        }
+        return this;
+    }
+
+    /**
+     * Unmarks the attendance of the given student if the student match the
+     * student identity in this {@code StudentAttendance}.
+     */
+    public StudentAttendance unmarkAttendance(Student s) {
+        if (this.student.isSameStudent(s)) {
+            return new StudentAttendance(student, new Attendance("0"));
+        }
+        return this;
+    }
+
+    /**
      * Returns true if both student attendances have the same student.
      * This defines a weaker notion of equality between two student attendances.
      */

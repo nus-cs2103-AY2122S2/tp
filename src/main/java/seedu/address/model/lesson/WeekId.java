@@ -12,7 +12,7 @@ public class WeekId {
     public static final String MESSAGE_CONSTRAINTS =
             "Week IDs should only contain numbers between 1 and 13 inclusive, and it should not be blank";
 
-    public static final String VALIDATION_REGEX = "^(0?[1-9]|1[012])$";
+    public static final String VALIDATION_REGEX = "^(0?[1-9]|1[0123])$";
 
     public final String value;
 
