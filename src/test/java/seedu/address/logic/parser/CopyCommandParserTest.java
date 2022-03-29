@@ -44,14 +44,14 @@ class CopyCommandParserTest {
 
     @Test
     public void parse_validArgs_noPrefixes() {
-        CopyCommand correctCommand = new CopyCommand(partialPrefixes, fpCsv);
-        assertParseSuccess(parser, " n/ p/ e/ a/ f/csv", correctCommand);
+        CopyCommand correctCommand = new CopyCommand(INDEX_FIRST_PERSON, allPrefixes, fpCsv);
+        assertParseSuccess(parser, " 1 f/csv", correctCommand);
     }
 
     @Test
     public void parse_validArgs_noArgs() {
         CopyCommand correctCommand = new CopyCommand(allPrefixes, fpCsv);
-        assertParseSuccess(parser, " n/ p/ e/ a/ f/csv", correctCommand);
+        assertParseSuccess(parser, " f/csv", correctCommand);
     }
 
     @Test
