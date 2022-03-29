@@ -1,42 +1,31 @@
 package seedu.address.model.studentattendance;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author jxt00
 /**
  * Represents a student's attendance for lessons in the TAssist.
- * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
+ * Guarantees: immutable;
  */
 public class Attendance {
     public static final String MESSAGE_CONSTRAINTS =
-            "Attendance should only be 0 or 1";
+            "Attendance should only be false or true";
 
-    public static final String VALIDATION_REGEX = "^[01]{1}$";
-
-    public final String value;
+    private static Boolean value;
 
     /**
      * Constructs a {@code Attendance}.
      *
      * @param attendance A valid attendance value.
      */
-    public Attendance(String attendance) {
+    public Attendance(Boolean attendance) {
         requireNonNull(attendance);
-        checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
         this.value = attendance;
-    }
-
-    /**
-     * Returns true if a given string is a valid attendance value.
-     */
-    public static boolean isValidAttendance(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value;
+        return String.valueOf(value);
     }
 
     @Override
