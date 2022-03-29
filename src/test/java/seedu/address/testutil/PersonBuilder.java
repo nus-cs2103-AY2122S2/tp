@@ -111,7 +111,6 @@ public class PersonBuilder {
 
     /**
      * Sets the {@Code Faculty} of the {@Code Person} that we are building
-     * This method is to be used in future tests
      */
     public PersonBuilder withFaculty(String faculty) {
         this.faculty = new Faculty(faculty);
@@ -120,9 +119,8 @@ public class PersonBuilder {
 
     /**
      * Sets the {@Code MatriculationNumber} of the {@Code Person} that we are building
-     * This method is to be used in future tests
      */
-    public PersonBuilder withMatricNumber(String matriculationNumber) {
+    public PersonBuilder withMatriculationNumber(String matriculationNumber) {
         this.matriculationNumber = new MatriculationNumber(matriculationNumber.trim());
         return this;
     }
