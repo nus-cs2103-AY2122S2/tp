@@ -1,8 +1,8 @@
 package seedu.trackermon.logic.parser;
 
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
