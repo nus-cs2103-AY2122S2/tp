@@ -10,7 +10,7 @@ title: User Guide
 * [**User interface**]()
 * [**Command structure**](#command-structure)
 * [**Features**](#features)
-  * [Clearing all shows](#clearing-all-shows-clear)
+  * [Clearing all shows: `clear`](#clearing-all-shows-clear)
   * [Listing all shows: `list`](#listing-all-shows-list)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Viewing help: `help`](#viewing-help-help)
