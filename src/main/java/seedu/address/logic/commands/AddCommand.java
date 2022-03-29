@@ -166,7 +166,7 @@ public class AddCommand extends Command {
             }
 
             if (model.hasSchedule(toAddSchedule)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
             }
 
             model.addSchedule(toAddSchedule);
