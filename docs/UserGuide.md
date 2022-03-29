@@ -235,7 +235,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Provided below are information to take note regarding the Rating and Comment feature. 
+**:information_source: Notes about the Rating and Comment feature.** 
 * Reset the rating of a show: `edit INDEX r/0`
 * Removing a comment: `edit INDEX c/`
 
@@ -252,7 +252,8 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 * The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
-:exclamation:**Adding, Editing and Deleting a Tag:** Doing any of these can result in your tags being deleted if you do not specify existing tags you want to keep. <br>
+:exclamation:**Adding, Editing and Deleting a Tag:** <br>
+* Doing any of these can result in your tags being deleted if you do not specify existing tags you want to keep. <br>
 * Adding a Tag:
   * `edit INDEX <Specify all tags in show> t/NEW_TAG`
 * Deleting a Tag:
