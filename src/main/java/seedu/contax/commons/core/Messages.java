@@ -18,7 +18,7 @@ public class Messages {
             + " another appointment in the schedule!";
     public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX =
             "The appointment index provided is invalid";
- 
+
     public static final String MESSAGE_INVALID_DATE = "The date provided is invalid!";
     public static final String MESSAGE_INVALID_TIME = "The time provided is invalid!";
     public static final String MESSAGE_INVALID_RANGE_INDEX = "The range index is invalid!";
