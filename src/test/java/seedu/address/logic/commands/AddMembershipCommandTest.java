@@ -23,11 +23,11 @@ class AddMembershipCommandTest {
 
     @Test
     void execute_addMembership_success() {
-        Membership member = new Membership("Test");
+        Membership member = new Membership("Gold");
         AddMembershipCommand command = new AddMembershipCommand(Index.fromZeroBased(0), member);
 
         String expectedMessage = String.format(AddMembershipCommand.MESSAGE_SUCCESS,
-                "Test");
+                "GOLD MEMBER");
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person person = expectedModel.getFilteredPersonList().get(0);
@@ -39,11 +39,11 @@ class AddMembershipCommandTest {
 
     @Test
     void equals() {
-        AddMembershipCommand command = new AddMembershipCommand(Index.fromZeroBased(0), new Membership("Test"));
+        AddMembershipCommand command = new AddMembershipCommand(Index.fromZeroBased(0), new Membership("Gold"));
         AddMembershipCommand otherCommand = new AddMembershipCommand(Index.fromZeroBased(0),
-                new Membership("Test"));
+                new Membership("Gold"));
         AddMembershipCommand otherCommand2 = new AddMembershipCommand(Index.fromZeroBased(1),
-                new Membership("Different"));
+                new Membership("Silver"));
 
         assertTrue(command.equals(command));
 

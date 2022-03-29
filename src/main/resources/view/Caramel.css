@@ -74,12 +74,23 @@
 }
 
 #tags .label, #memberships .label {
-    -fx-text-fill: #EAEAEA;
+    -fx-text-fill: white;
+}
+
+#tags .label {
     -fx-background-color: #BA6C41;
 }
 
-#memberships .label {
-    -fx-background-color: #862E1A;
+#gold {
+    -fx-background-color: #CEAA54;
+}
+
+#silver {
+    -fx-background-color: #AAA9AD;
+}
+
+#bronze {
+    -fx-background-color: #A97142;
 }
 
 #optionalFields .label {

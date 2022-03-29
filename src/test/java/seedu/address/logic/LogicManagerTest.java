@@ -13,6 +13,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -22,7 +28,6 @@ import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonUtil;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,12 +35,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.PersonUtil.*;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
 
-    private Model model = new ModelManager();
+    private Model model;
+    private StorageManager storageManager;
     private LogicManager logicManager;
 
     @TempDir
@@ -48,14 +53,62 @@ class LogicManagerTest {
         SerializableTempAddressBookStorage addressBookTempStorage = new SerializableTempAddressBookStorage(
                 getTempFilePath("temp ab"));
 
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
-        logicManager = new LogicManager(model, storage);
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        logicManager = new LogicManager(model, storageManager);
     }
 
     private Path getTempFilePath(String fileName) {
         return testFolder.resolve(fileName);
     }
 
+    //@@author DaneMarc
+    @Test
+    public void execute_commandChainingTest_valid() {
+        Person validPerson1 = PersonUtil.AMY;
+        Person validPerson2 = PersonUtil.BOB;
+
+        try {
+            logicManager.execute(PersonUtil.getAddCommand(validPerson1) + " | "
+                    + PersonUtil.getAddCommand(validPerson2));
+        } catch (CommandException | ParseException e) {
+            e.getStackTrace();
+        }
+
+        assertTrue(model.hasPerson(validPerson1));
+        assertTrue(model.hasPerson(validPerson2));
+    }
+
+    @Test
+    public void execute_commandChainingTest_breakChain() {
+        Person validPerson1 = PersonUtil.AMY;
+        Person validPerson2 = PersonUtil.BOB;
+
+        try {
+            logicManager.execute(PersonUtil.getAddCommand(validPerson1) + " | invalidCommand | "
+                    + PersonUtil.getAddCommand(validPerson2));
+        } catch (CommandException | ParseException e) {
+            e.getStackTrace();
+        }
+
+        assertTrue(model.hasPerson(validPerson1));
+        assertFalse(model.hasPerson(validPerson2));
+    }
+
+    @Test
+    public void execute_commandChainingTest_noChainCommand() {
+        Person validPerson1 = PersonUtil.AMY;
+
+        try {
+            logicManager.execute(PersonUtil.getAddCommand(validPerson1) + " | ");
+        } catch (CommandException | ParseException e) {
+            e.getStackTrace();
+        }
+
+        assertTrue(model.hasPerson(validPerson1));
+    }
+
+    //@@author
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
@@ -64,7 +117,7 @@ class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete 20";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -79,6 +132,7 @@ class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logicManager.getFilteredPersonList().remove(0));
     }
 
+    //@@author LapisRaider
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
@@ -95,8 +149,9 @@ class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_FRIEND;
         Person expectedPerson = PersonUtil.AMY;
-        ModelManager expectedModel = new ModelManager();
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
         expectedModel.addPerson(expectedPerson);
+
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
@@ -111,7 +166,7 @@ class LogicManagerTest {
         SerializableTempAddressBookStorage addressBookTempStorage =
                 new SerializableTempAddressBookIoExceptionThrowingStub(getTempFilePath("temp ab"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
-        logicManager = new LogicManager(model, storage);
+        logicManager = new LogicManager(new ModelManager(), storage);
 
         AddressBook originalAddressBook = getTypicalAddressBook();
         String expectedMessage = LogicManager.TEMP_FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -154,6 +209,7 @@ class LogicManagerTest {
                 () -> logicManager.undoPrevModification());
     }
 
+    //@@author
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -221,6 +277,7 @@ class LogicManagerTest {
         }
     }
 
+    //@@author LapisRaider
     /**
      * A stub class to throw an {@code IOException} when the save and read temporary file method is called.
      */

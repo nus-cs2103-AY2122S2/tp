@@ -8,7 +8,7 @@
       "y" : 100,
       "z" : 99
     },
-    "stylesheet" : ""
+    "stylesheet" : "test"
   },
   "addressBookFilePath" : "addressbook.json"
 }

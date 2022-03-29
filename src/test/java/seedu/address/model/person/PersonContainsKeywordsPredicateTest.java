@@ -65,6 +65,14 @@ public class PersonContainsKeywordsPredicateTest {
         predicate = new PersonContainsKeywordsPredicate(
             Arrays.asList(PersonUtil.VALID_PHONE_AMY, PersonUtil.VALID_EMAIL_AMY, PersonUtil.VALID_ADDRESS_AMY));
         assertTrue(predicate.test(PersonUtil.AMY));
+
+        // Person fields partial match
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Am"));
+        assertTrue(predicate.test(PersonUtil.AMY));
+
+        // Person tags partial match
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("frie"));
+        assertTrue(predicate.test(PersonUtil.AMY));
     }
 
     @Test

@@ -6,7 +6,7 @@
       "x" : 300,
       "y" : 100
     },
-    "stylesheet" : ""
+    "stylesheet" : "test"
   },
   "addressBookFilePath" : "addressbook.json"
 }
