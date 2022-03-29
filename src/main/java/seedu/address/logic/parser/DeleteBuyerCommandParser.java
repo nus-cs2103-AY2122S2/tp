@@ -6,7 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class DeleteBuyerCommandParser {
+public class DeleteBuyerCommandParser implements Parser<DeleteBuyerCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteBuyerCommand

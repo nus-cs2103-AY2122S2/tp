@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.property.House;
@@ -113,6 +114,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -125,6 +127,20 @@ public class CommandTestUtil {
         model.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredClientList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showBuyerAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredBuyerList().size());
+
+        Buyer buyer = model.getFilteredBuyerList().get(targetIndex.getZeroBased());
+        final String[] splitName = buyer.getName().fullName.split("\\s+");
+        model.updateFilteredBuyerList(new BuyerNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredBuyerList().size());
     }
 
 }

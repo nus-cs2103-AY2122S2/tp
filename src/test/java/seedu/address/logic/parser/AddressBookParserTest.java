@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditclientDescriptor;
@@ -58,6 +58,13 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_CLIENT), command);
+    }
+
+    @Test
+    public void parseCommand_deletebuyer() throws Exception {
+        DeleteBuyerCommand command = (DeleteBuyerCommand) parser.parseCommand(
+                DeleteBuyerCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
+        assertEquals(new DeleteBuyerCommand(INDEX_FIRST_CLIENT), command);
     }
 
     @Test

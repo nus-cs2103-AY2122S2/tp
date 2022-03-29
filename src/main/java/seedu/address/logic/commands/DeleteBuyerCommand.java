@@ -12,7 +12,7 @@ import seedu.address.model.buyer.Buyer;
 
 public class DeleteBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "del-b";
+    public static final String COMMAND_WORD = "delete-b";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the buyer identified by the index number used in the displayed buyer list.\n"
