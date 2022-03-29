@@ -51,7 +51,7 @@ class CopyCommandParserTest {
     @Test
     public void parse_validArgs_noArgs() {
         CopyCommand correctCommand = new CopyCommand(allPrefixes, fpCsv);
-        assertParseSuccess(parser, " f/csv", correctCommand);
+        assertParseSuccess(parser, " n/ p/ e/ a/ f/csv", correctCommand);
     }
 
     @Test
