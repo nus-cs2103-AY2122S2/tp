@@ -58,8 +58,8 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULES]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12345678 p/87654321`, only `p/87654321` will be taken.
+* If a parameter is expected only once in the command but you specified it multiple times, they will all be rejected.<br>
+  e.g. if you specify `p/12345678 p/87654321`, both will be rejected.
   
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -236,11 +236,11 @@ Example:
 
 Finds persons that match any of the given fields and tags.
 
-Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only exact matches for fields will be allowed e.g. `Han` will not match `Hans`
 * Persons matching at least one of the fields or tags will be returned (i.e. `OR` search).
 * All arguments for tags provided must be an exact match to existing tags.
 
@@ -254,11 +254,11 @@ Examples:
 
 Finds persons that match all given fields and tags.
 
-Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `find -s [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only exact matches for fields will be allowed e.g. `Han` will not match `Hans`
 * Only persons matching all fields and tags will be returned (i.e. `AND` search).
 * All arguments for tags provided must be an exact match to existing tags.
 
@@ -275,11 +275,11 @@ Format: `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICPA
 
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `lunch` will match `Lunch`
-* Only full words will be matched e.g. `lun` will not match `lunch`
-* Events matching at least one of the field will be returned (i.e. `OR` search).
+* Only exact matches will be allowed e.g. `lun` will not match `lunch`
+* Events matching at least one of the fields will be returned (i.e. `OR` search).
 
 Example:
-* `find -e name/lunch part/alex` returns all events with `lunch` in its name and all events involving Alex<br>
+* `find -e name/lunch part/Alex Yeoh` returns all events named `lunch` and all events involving Alex Yeoh<br>
 
 ### Clearing all entries : `clear`
 

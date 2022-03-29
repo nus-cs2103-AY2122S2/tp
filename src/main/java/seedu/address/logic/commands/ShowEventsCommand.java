@@ -14,9 +14,9 @@ public class ShowEventsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Filters the events list to show either upcoming, past or all events. \n"
-            + "By defualt shows all events, unless one of the flags is specified. \n"
+            + "By defualt shows all events, unless one of the flags is specified.\n"
             + "Parameters: "
-            + "[-upcoming] [-past]"
+            + "[-upcoming] [-past]\n"
             + "Example: " + COMMAND_WORD + "-upcoming";
 
     private final Predicate<Event> predicate;
