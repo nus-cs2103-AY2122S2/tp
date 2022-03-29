@@ -373,95 +373,108 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ContaX` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: List persons**
+#### Person-Related Use Cases
+![Person Use Case](images/UseCaseDiagramPersons.png)
+
+**UC1: List Persons**
 
 **MSS**
 
-1. User requests to list persons
-2. ContaX shows a list of persons
-
+1. User requests to list persons.
+2. ContaX shows a list of persons.
     Use case ends.
 
-**Use case: Add a person**
+**UC2: Add Person**
 
 **MSS**
 
 1. User requests to add a person
-2. ContaX adds the person
-
+2. User enters details of the new person.
+3. ContaX adds the new person.
+4. ContaX shows that the person has been added successfully.
     Use case ends.
 
 **Extensions**
 
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
+* 2a. ContaX detects that a required person attribute was not supplied.
+    * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
     * Use case ends.
 
-* 1b. A parameter given is in an invalid format
-
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
-
+* 2b. ContaX detects that a supplied attribute has an invalid value
+    * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 2b2. ContaX shows the expected allowed values.
     * Use case ends.
 
-* 1c. The person already exists
-
-    * 1c1. ContaX shows an error message indicating that the person already exists.
-
+* 2c. The person already exists
+    * 2c1. ContaX shows an error message indicating that the person already exists.
     * Use case ends.
 
-**Use case: Delete a person**
+**UC3: Delete Person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  ContaX shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  ContaX deletes the person
-
+1. User requests to **list persons (UC1)**.
+2. ContaX displays a list of persons.
+3. User requests to delete a person.
+4. User enters details to delete person.
+5. ContaX deletes the person.
+6. ContaX displays a message indicating that the person was successfully deleted.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 1a. User filters person by attribute.
+  * 1a1. User **finds person (UC5)**.
+  * Use case resumes from step 2.
 
-  Use case ends.
+* 1b. User filters persons by tag keyword.
+  * 1b1. User **finds person by tag (UC10)**.
+  * Use case resumes from step 2.
 
-* 3a. The command given is in an invalid format
+* 4a. ContaX detects that a required person attribute was not supplied.
+    * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
+* 5a. ContaX cannot find the requested person to delete.
+  * 5a1. ContaX shows an error message indicating that no such person exists.
 
-    * Use case resumes at step 2.
-
-**Use case: Edit a person**
+**UC4: Edit Person**
 
 **MSS**
 
-1. User requests to list persons
-2. ContaX shows a list of persons
-3. User requests to modify a specific person and enters new values
-4. ContaX edits the person accordingly
-
+1. User requests to **list persons (UC1)**.
+2. ContaX shows a list of persons.
+3. User requests to edit person.
+4. User enters details to modify a specific person.
+5. ContaX updates the specified person.
+6. ContaX displays a message indicating that the person was successfully edited.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User filters person by attribute.
+    * 1a1. User **finds person (UC5)**.
+    * Use case resumes from step 2.
 
-  Use case ends.
+* 1b. User filters persons by tag keyword.
+    * 1b1. User **finds person by tag (UC10)**.
+    * Use case resumes from step 2.
 
-* 3a. The command given is in an invalid format
+* 4a. ContaX detects that a required person attribute was not supplied.
+    * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.
+    * 
+* 4b. ContaX detects that a supplied attribute has an invalid value
+    * 4b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 4b2. ContaX shows the expected allowed values.
+    * Use case ends.
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
+* 5a. ContaX cannot find the requested person to delete.
+    * 5a1. ContaX shows an error message indicating that no such person exists.
 
-    * Use case resumes at step 2.
-
-* 3b. A parameter given is in an invalid format
-
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
-
-    * Use case resumes at step 2.
+* 5b. The person already exists
+    * 5b1. ContaX shows an error message indicating that the person already exists.
+    * Use case ends.
 
 
 #### Tag-Related Use Cases
