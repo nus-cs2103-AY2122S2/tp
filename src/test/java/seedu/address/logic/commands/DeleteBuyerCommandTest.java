@@ -4,24 +4,26 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showBuyerAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.SellerAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.testutil.TypicalBuyers;
+import seedu.address.testutil.TypicalClients;
 
 public class DeleteBuyerCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
-            new BuyerAddressBook());
+    private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
+            new SellerAddressBook(), TypicalBuyers.getTypicalAddressBook());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -31,7 +33,7 @@ public class DeleteBuyerCommandTest {
         String expectedMessage = String.format(DeleteBuyerCommand.MESSAGE_DELETE_CLIENT_SUCCESS, buyerToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
-                new BuyerAddressBook());
+                TypicalBuyers.getTypicalAddressBook());
         expectedModel.deleteBuyer(buyerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -52,10 +54,10 @@ public class DeleteBuyerCommandTest {
         Buyer buyerToDelete = model.getFilteredBuyerList().get(INDEX_FIRST_CLIENT.getZeroBased());
         DeleteBuyerCommand deleteCommand = new DeleteBuyerCommand(INDEX_FIRST_CLIENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CLIENT_SUCCESS, buyerToDelete);
+        String expectedMessage = String.format(DeleteBuyerCommand.MESSAGE_DELETE_CLIENT_SUCCESS, buyerToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
-                new BuyerAddressBook());
+                TypicalBuyers.getTypicalAddressBook());
         expectedModel.deleteBuyer(buyerToDelete);
         showNobuyer(expectedModel);
 

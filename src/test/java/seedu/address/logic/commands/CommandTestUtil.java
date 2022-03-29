@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.model.buyer.BuyerNameContainsKeywordsPredicate;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.property.House;
