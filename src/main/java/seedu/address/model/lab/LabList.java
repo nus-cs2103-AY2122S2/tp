@@ -170,6 +170,7 @@ public class LabList implements Iterable<Lab> {
         }
 
         internalList.setAll(labs);
+        internalList.sort(sortByLabNumber);
     }
 
     /**
@@ -198,7 +199,7 @@ public class LabList implements Iterable<Lab> {
      */
     public void alignLabs(LabList toAlignWith) throws DuplicateLabException {
         requireNonNull(toAlignWith);
-        // Using LabList instead of List<Labs> for O(n) setLabs instead of O(n^2) setLabs
+        // Using LabList instead of List<Lab> for O(n) setLabs instead of O(n^2) setLabs
         LabList replacementList = new LabList();
 
         // Iterator variable for toAlignWith
