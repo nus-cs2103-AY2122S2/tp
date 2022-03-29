@@ -130,10 +130,8 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
 
         switch (commandWord) {
-
         case ConfirmClearCommand.COMMAND_WORD:
             return new ConfirmClearCommand();
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
