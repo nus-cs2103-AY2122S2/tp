@@ -42,7 +42,7 @@ public class Membership extends Field {
         name = name.trim();
         name = name.toLowerCase();
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        tier = getTier(name);
+        tier = getTierFromString(name);
         date = null;
     }
 
@@ -58,14 +58,14 @@ public class Membership extends Field {
         name = name.trim();
         name = name.toLowerCase();
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        tier = getTier(name);
+        tier = getTierFromString(name);
         this.date = date;
     }
 
     /**
      * Returns a tier based on the given string.
      */
-    public static Tier getTier(String name) {
+    public static Tier getTierFromString(String name) {
         if (name.equals("gold")) {
             return Tier.GOLD;
         } else if (name.equals("silver")) {
@@ -73,6 +73,13 @@ public class Membership extends Field {
         } else {
             return Tier.BRONZE;
         }
+    }
+
+    /**
+     * Returns a tier based on the given string.
+     */
+    public Tier getTier() {
+        return tier;
     }
 
     /**
@@ -147,7 +154,7 @@ public class Membership extends Field {
 
         //compare by name of membership first followed by date
         Membership otherMembership = (Membership) other;
-        return Comparator.comparing(Membership::getValue)
+        return Comparator.comparing(Membership::getTier)
                 .thenComparing(Membership::getDate)
                 .compare(this, otherMembership);
     }
