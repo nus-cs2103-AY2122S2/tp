@@ -8,8 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import seedu.address.model.person.Person;
 
 /**
@@ -66,7 +64,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
         if (person.getFlag().isFlagged) {
-//            flag.setFill(Color.rgb(201, 72, 72));
             flag.setStyle("-fx-background-color: #c94848");
         }
         prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
