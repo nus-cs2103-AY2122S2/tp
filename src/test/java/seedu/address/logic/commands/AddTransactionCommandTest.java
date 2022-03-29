@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PersonUtil.AMY;
 import static seedu.address.testutil.TransactionUtil.INVALID_TRANSACTION;
 import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_COMPLETE;
 import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO_COMPLETE;
@@ -50,7 +51,7 @@ public class AddTransactionCommandTest {
 
         CommandResult commandResult = new AddTransactionCommand(validIndex, x -> validTransaction).execute(modelStub);
 
-        assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, validTransaction),
+        assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, AMY, validTransaction),
                 commandResult.getFeedbackToUser());
         assertEquals(List.of(validTransaction), modelStub.transactionAdded);
     }
@@ -212,7 +213,7 @@ public class AddTransactionCommandTest {
 
         @Override
         public FilteredList<Person> getFilteredPersonList() {
-            ObservableList<Person> obs = FXCollections.observableArrayList(PersonUtil.AMY);
+            ObservableList<Person> obs = FXCollections.observableArrayList(AMY);
             return new FilteredList<Person>(obs);
         }
 
