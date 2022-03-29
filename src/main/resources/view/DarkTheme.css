@@ -124,6 +124,15 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-padding: 2 0 2 0;
+}
+
+.status_pane_style {
+    -fx-padding: 2 0 2 0;
+}
+
+.availability_pane_style {
+    -fx-padding: 5 0 0 0;
 }
 
 .cell_small_label {
