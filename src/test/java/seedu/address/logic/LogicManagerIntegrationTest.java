@@ -1,8 +1,22 @@
 package seedu.address.logic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.PersonUtil.ADDRESS_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.EMAIL_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.NAME_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.PHONE_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.REMARK_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.TAG_DESC_FRIEND;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -16,20 +30,13 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonUtil;
 
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.PersonUtil.*;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 class LogicManagerIntegrationTest {
+    @TempDir
+    public Path testFolder;
 
     private Model model;
     private Storage storage;
     private LogicManager logicManager;
-
-    @TempDir
-    public Path testFolder;
 
     @BeforeEach
     public void setUp() {

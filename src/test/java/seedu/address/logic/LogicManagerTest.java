@@ -1,8 +1,27 @@
 package seedu.address.logic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PersonUtil.ADDRESS_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.EMAIL_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.NAME_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.PHONE_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.REMARK_DESC_AMY;
+import static seedu.address.testutil.PersonUtil.TAG_DESC_FRIEND;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -13,12 +32,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.nio.file.Path;
-
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -27,24 +40,15 @@ import seedu.address.storage.SerializableTempAddressBookStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonUtil;
 
-import java.io.IOException;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.PersonUtil.*;
-
 class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
+
+    @TempDir
+    public Path testFolder;
 
     private Model model;
     private StorageManager storageManager;
     private LogicManager logicManager;
-
-    @TempDir
-    public Path testFolder;
 
     @BeforeEach
     public void setUp() {
@@ -155,7 +159,7 @@ class LogicManagerTest {
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
-    
+
     @Test
     public void tempStorageSaveThrowsIoException_throwsCommandException() {
         // Setup LogicManager with SerializableTempAddressBookStorage
@@ -170,8 +174,8 @@ class LogicManagerTest {
 
         AddressBook originalAddressBook = getTypicalAddressBook();
         String expectedMessage = LogicManager.TEMP_FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertThrows(CommandException.class, expectedMessage,
-                () -> logicManager.savePrevAddressBookDataInTemp(originalAddressBook));
+        assertThrows(CommandException.class,
+                expectedMessage, () -> logicManager.savePrevAddressBookDataInTemp(originalAddressBook));
     }
 
     @Test
@@ -186,10 +190,9 @@ class LogicManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
         logicManager = new LogicManager(model, storage);
 
-        AddressBook originalAddressBook = getTypicalAddressBook();
         String expectedMessage = LogicManager.TEMP_FILE_READ_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertThrows(CommandException.class, expectedMessage,
-                () -> logicManager.undoPrevModification());
+        assertThrows(CommandException.class,
+                expectedMessage, () -> logicManager.undoPrevModification());
     }
 
     @Test
@@ -205,8 +208,7 @@ class LogicManagerTest {
         logicManager = new LogicManager(model, storage);
 
         String expectedMessage = UndoCommand.REACHED_UNDO_LIMIT;
-        assertThrows(CommandException.class, expectedMessage,
-                () -> logicManager.undoPrevModification());
+        assertThrows(CommandException.class, expectedMessage, () -> logicManager.undoPrevModification());
     }
 
     //@@author
