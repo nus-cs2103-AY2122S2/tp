@@ -7,7 +7,7 @@ package seedu.address.commons.core;
 public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_ADD_COMMAND = "Adds a student to TAPA. \n"
-            + "Format: add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] "
+            + "Format: add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] "
             + "[e/EMAIL_ADDRESS] \n"
             + "Example: add i/A6942069R n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu";
 
@@ -22,7 +22,7 @@ public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_EDIT_COMMAND = "Edits a student's information in TAPA. \n"
             + "Format : edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] "
-            + "[h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] \n"
+            + "[t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] \n"
             + "Example: edit 1 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu";
 
     public static final String MANUAL_MESSAGE_CLEAR_COMMAND = "Clears all students from TAPA. "
