@@ -167,6 +167,21 @@ Format: `untagTask INDEX n/NAME`
 
 Example: `untagTask 1 n/Alex Yeoh`
 
+### Tag Priority to a Task: `tagPriority`
+
+Assign a Task to a Priority which is enum of “HIGH / MEDIUM / LOW / NONE”
+
+Note:
+* For `tagPriority`, the INDEX must be a positive integer 1,2,3...
+* For `tagPriority`, the ENUM must be HIGH, MEDIUM, LOW, or NONE.
+
+Format: `tagPriority INDEX priority/ENUM`
+
+Example: 
+* `tagPriority 1 priority/HIGH`
+* `tagPriority 1 priority/NONE`
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the Task list.
