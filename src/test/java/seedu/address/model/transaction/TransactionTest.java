@@ -3,9 +3,9 @@ package seedu.address.model.transaction;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_COMPLETE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE;
 import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_INCOMPLETE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO_COMPLETE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO;
 import static seedu.address.testutil.TransactionUtil.VALID_AMOUNT_ONE;
 import static seedu.address.testutil.TransactionUtil.VALID_ID;
 import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_ONE;
@@ -40,22 +40,22 @@ public class TransactionTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Transaction transactionCopy = new Transaction(TRANSACTION_ONE_COMPLETE);
-        assertEquals(TRANSACTION_ONE_COMPLETE, transactionCopy);
+        Transaction transactionCopy = new Transaction(TRANSACTION_ONE);
+        assertEquals(TRANSACTION_ONE, transactionCopy);
 
         // same object -> returns true
-        assertEquals(TRANSACTION_ONE_COMPLETE, TRANSACTION_ONE_COMPLETE);
+        assertEquals(TRANSACTION_ONE, TRANSACTION_ONE);
 
         // null -> returns false
-        assertNotEquals(null, TRANSACTION_ONE_COMPLETE);
+        assertNotEquals(null, TRANSACTION_ONE);
 
         // different type -> returns false
-        assertNotEquals("TRANSACTION_ONE_COMPLETE", TRANSACTION_ONE_COMPLETE);
+        assertNotEquals("TRANSACTION_ONE", TRANSACTION_ONE);
 
         // different Transaction -> returns false
-        assertNotEquals(TRANSACTION_ONE_COMPLETE, TRANSACTION_TWO_COMPLETE);
+        assertNotEquals(TRANSACTION_ONE, TRANSACTION_TWO);
 
         // some fields are missing -> return false
-        assertNotEquals(TRANSACTION_ONE_COMPLETE, TRANSACTION_ONE_INCOMPLETE);
+        assertNotEquals(TRANSACTION_ONE, TRANSACTION_ONE_INCOMPLETE);
     }
 }

@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PersonUtil.AMY;
-import static seedu.address.testutil.TransactionUtil.INVALID_TRANSACTION;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_COMPLETE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO_COMPLETE;
-import static seedu.address.testutil.TransactionUtil.VALID_INDEX;
+import static seedu.address.testutil.TransactionUtil.*;
+//import static seedu.address.testutil.TransactionUtil.INVALID_TRANSACTION;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class AddTransactionCommandTest {
     @Test
     public void execute_transactionAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTransactionAdded modelStub = new ModelStubAcceptingTransactionAdded();
-        Transaction validTransaction = TRANSACTION_ONE_COMPLETE;
+        Transaction validTransaction = TRANSACTION_ONE;
         Index validIndex = VALID_INDEX;
 
         CommandResult commandResult = new AddTransactionCommand(validIndex, x -> validTransaction).execute(modelStub);
@@ -67,7 +65,7 @@ public class AddTransactionCommandTest {
 
     @Test
     public void equals() {
-        TransactionBuilder tb = x -> TRANSACTION_ONE_COMPLETE;
+        TransactionBuilder tb = x -> TRANSACTION_ONE;
 
         AddTransactionCommand command = new AddTransactionCommand(VALID_INDEX, tb);
 
@@ -84,7 +82,7 @@ public class AddTransactionCommandTest {
         assertFalse(command.equals(null));
 
         // different person -> returns false
-        assertFalse(command.equals(new AddTransactionCommand(Index.fromZeroBased(2), x -> TRANSACTION_TWO_COMPLETE)));
+        assertFalse(command.equals(new AddTransactionCommand(Index.fromZeroBased(2), x -> TRANSACTION_TWO)));
     }
 
     /**
@@ -221,5 +219,4 @@ public class AddTransactionCommandTest {
             return new AddressBook();
         }
     }
-
 }

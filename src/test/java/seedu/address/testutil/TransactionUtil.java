@@ -34,14 +34,26 @@ public class TransactionUtil {
     public static final String DUE_DATE_TWO = " " + DueDate.PREFIX + VALID_DUE_DATE_TWO;
     public static final String NOTE_TWO = " " + Note.PREFIX + VALID_NOTE_TWO;
 
+    public static final String VALID_AMOUNT_THREE = "100";
+    public static final String VALID_TRANSACTION_DATE_THREE = "2020-12-11";
+    public static final String VALID_DUE_DATE_THREE = "2022-11-11";
+    public static final String VALID_NOTE_THREE = "This is a note";
+
     public static final String INVALID_TRANSACTION_DATE = " " + TransactionDate.PREFIX + "2020-20-20";
     public static final String INVALID_DUE_DATE = " " + DueDate.PREFIX + "2002-20-20";
     public static final String INVALID_AMOUNT = " " + Amount.PREFIX + "-1";
     public static final String INVALID_INDEX_STRING = "Not an index";
 
     public static final String DUE_DATE_EARLY = "2001-11-11";
+    public static final String VALID_INDEX_STRING = " 1";
 
-    public static final Transaction TRANSACTION_ONE_COMPLETE = new Transaction(
+    public static final Index VALID_INDEX = Index.fromZeroBased(0);
+    public static final Index INDEX_FIRST_PERSON = Index.fromOneBased(1);
+    public static final Index INDEX_FIRST_TRANSACTION = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_TRANSACTION = Index.fromOneBased(2);
+    public static final Index INDEX_THRID_TRANSACTION = Index.fromOneBased(3);
+
+    public static final Transaction TRANSACTION_ONE = new Transaction(
             List.of(
                     new Amount(VALID_AMOUNT_ONE),
                     new TransactionDate(VALID_TRANSACTION_DATE_ONE),
@@ -60,12 +72,22 @@ public class TransactionUtil {
             VALID_ID
     );
 
-    public static final Transaction TRANSACTION_TWO_COMPLETE = new Transaction(
+    public static final Transaction TRANSACTION_TWO = new Transaction(
             List.of(
                     new Amount(VALID_AMOUNT_TWO),
                     new TransactionDate(VALID_TRANSACTION_DATE_TWO),
                     new DueDate(VALID_DUE_DATE_TWO),
                     new Note(VALID_NOTE_TWO)
+            ),
+            VALID_ID
+    );
+
+    public static final Transaction TRANSACTION_THREE = new Transaction(
+            List.of(
+                    new Amount(VALID_AMOUNT_THREE),
+                    new TransactionDate(VALID_TRANSACTION_DATE_THREE),
+                    new DueDate(VALID_DUE_DATE_THREE),
+                    new Note(VALID_NOTE_THREE)
             ),
             VALID_ID
     );
@@ -79,7 +101,4 @@ public class TransactionUtil {
             ),
             VALID_ID
     );
-
-    public static final Index VALID_INDEX = Index.fromZeroBased(0);
-    public static final String VALID_INDEX_STRING = " 1";
 }
