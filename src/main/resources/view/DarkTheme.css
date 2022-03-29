@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#00539CFF, 30%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #5B84B1FF; /* Used in the default.html file */
 }
 
 .label {
@@ -90,13 +90,13 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#00539CFF, 30%);
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: derive(#5B84B1FF, 20%);
 }
 
 .list-cell:filled:even {
@@ -204,7 +204,7 @@
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: derive(#00539CFF, 30%);
 }
 
 /*
@@ -350,3 +350,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
