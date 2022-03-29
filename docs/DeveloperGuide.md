@@ -578,6 +578,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ContaX` and the **Actor** is the `user`, unless specified otherwise)
 
+Note that since underline is not allowed in markdown, included use cases are **bolded** instead.
+
 **Use case: List persons**
 
 **MSS**
@@ -668,93 +670,177 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 2.
 
+#### Appointment-Related Use Cases
 
-**Use case: List appointments**
+![Appointment Use Case](images/UseCaseDiagramAppointments.png)
 
-**MSS**
-
-1. User requests to list appointments
-2. ContaX shows a list of appointments
-
-    Use case ends.
-
-**Use case: Add an appointment**
+**UC10: List all appointments**
 
 **MSS**
 
-1. User requests to add an appointment
-2. ContaX adds the appointment
+1. User requests to list appointments.
+2. ContaX shows a list of all appointments.<br><br>
+   Use case ends.
 
+**UC11: Add appointment**
+
+**MSS**
+
+1. User requests to add an appointment.
+2. User enters details of the new appointment.
+3. ContaX saves the new appointment.
+4. ContaX shows that the appointment has been added successfully.<br><br>
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that a required appointment attribute was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
+  * Use case ends.<br>&nbsp;
+
+* 2b. ContaX detects that a supplied attribute has an invalid value.
+  * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+  * 2b2. ContaX shows the expected allowed values.<br>&nbsp;
+  *  Use case ends.<br>&nbsp;
+
+* 2c. ContaX detects that the appointment details supplied overlaps with another appointment already in ContaX.
+  * 2c1. ContaX shows an error message indicating that the appointment cannot be created due to overlapping appointments.<br>&nbsp;
+  * Use case ends.<br>&nbsp;
+
+**UC12: Delete appointment**
+
+**MSS**
+
+1. User **lists all appointments (UC10)**.
+2. ContaX displays a list of appointments.
+3. User requests to delete a specific appointments in the list.
+4. ContaX deletes the appointment.
+5. ContaX displays a message indicating that the appointment was deleted.<br><br>
     Use case ends.
 
 **Extensions**
 
-* 1a. The command given is in an invalid format
+* 1a. User filters appointments by condition.
+  * 1a1. User **finds appointments (UC13)**<br>&nbsp;
+  * Use Case resumes from step 2.<br>&nbsp;
 
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
+* 1b. User lists appointments with available slots in the schedule.
+  * 1b1. User **finds schedule slots (UC14)**<br>&nbsp;
+  * 1b2. Use Case resumes from step 2.<br>&nbsp;
 
-    * Use case ends.
-* 1b. A parameter given is in an invalid format
+* 2a. ContaX has no appointments to list.<br>&nbsp;
+  * Use case ends.<br>&nbsp;
 
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
+* 3a. ContaX cannot find the requested appointment to delete.
+    * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
 
-    * Use case ends.
-
-* 1c. The appointment timing overlaps with another appointment
-
-    * 1c1. ContaX shows an error message indicating that the appointment cannot be created due to overlaps.
-
-    * Use case ends.
-
-**Use case: Delete an appointment**
+**UC13: Edit an appointment**
 
 **MSS**
 
-1.  User requests to list appointments
-2.  ContaX shows a list of appointments
-3.  User requests to delete a specific appointments in the list
-4.  ContaX deletes the appointment
-
-    Use case ends.
+1. User **lists all appointments (UC10)**.
+2. ContaX displays a list of appointments.
+3. User requests to modify a specific appointment.
+4. User enters the new attributes for the appointment.
+5. ContaX saves the modified appointment.
+6. ContaX displays a message indicating that the appointment was successfully edited.<br><br>
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User filters appointments by condition.
+    * 1a1. User **finds appointments (UC13)**<br>&nbsp;
+    * Use Case resumes from step 2.<br>&nbsp;
 
-  Use case ends.
+* 1b. User lists appointments with available slots in the schedule.
+    * 1b1. User **finds schedule slots (UC14)**<br>&nbsp;
+    * 1b2. Use Case resumes from step 2.<br>&nbsp;
 
-* 3a. The command given is in an invalid format
+* 2a. ContaX has no appointments to list.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
+* 3a. ContaX cannot find the requested appointment to edit.
+    * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
 
-    * Use case resumes at step 2.
+* 4a. ContaX detects that a supplied attribute has an invalid value.
+    * 4a1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 4a2. ContaX shows the expected allowed values.<br>&nbsp;
+    *  Use case resumes at step 2.<br>&nbsp;
 
-**Use case: Edit an appointment**
+* 4b. ContaX detects that the appointment details supplied overlaps with another appointment already in ContaX.
+    * 4b1. ContaX shows an error message indicating that the appointment cannot be edited due to overlapping appointments.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
+
+**UC15: Find appointments**
 
 **MSS**
 
-1. User requests to list appointments
-2. ContaX shows a list of appointments
-3. User requests to modify a specific appointment and enters new values
-4. ContaX edits the appointment.
+1. User decides to search by keyword.
+2. User enters a keyword to search by.
+3. ContaX shows a list of all appointments with names containing the keyword.<br><br>
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User decides to search for appointments by date range.
+    * 1a1. User enters the start and end date to search between.
+    * 1a2. ContaX shows a list of all appointments between the specified start and end date.<br>&nbsp;
+    * Use Case ends.<br>&nbsp;
 
-  Use case ends.
+* 2a. User searches by a specific appointment attribute.
+    * 2a1. User enters the attribute to search by.
+    * 2a2. ContaX shows a list of all appointments with keyword contained in the specified attribute.<br>&nbsp;
+    * Use Case ends.<br>&nbsp;
 
-* 3a. The command given is in an invalid format
+**UC16: Find Schedule Slots**
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
+**MSS**
 
-    * Use case resumes at step 2.
+1. User enters the properties of the slots to search for and a time period to search between.
+2. ContaX shows a list of appointments within the time period.
+3. ContaX shows a list of all slots in the schedule within the time period.<br><br>
+   Use case ends.
 
-* 3b. A parameter given is in an invalid format
+**Extensions**
 
-    * 3b1. ContaX shows an error message indicating that the given parameter is of invalid format.
+* 1a. User enters invalid slot properties.
+    * 1a1. ContaX shows an error message that the properties entered are invalid.<br>&nbsp;
+    * Use Case ends.<br>&nbsp;
 
-    * Use case resumes at step 2.
+**UC17: Edit Appointment Priority**
+
+**MSS**
+
+1. User **lists all appointments (UC10)**.
+2. ContaX displays a list of appointments.
+3. User requests to modify the priority level of a specific appointment.
+4. User enters the new priority for the appointment.
+5. ContaX saves the modified appointment.
+6. ContaX displays a message indicating that the appointment was successfully edited.<br><br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. User filters appointments by condition.
+    * 1a1. User **finds appointments (UC13)**<br>&nbsp;
+    * Use Case resumes from step 2.<br>&nbsp;
+
+* 1b. User lists appointments with available slots in the schedule.
+    * 1b1. User **finds schedule slots (UC14)**<br>&nbsp;
+    * 1b2. Use Case resumes from step 2.<br>&nbsp;
+
+* 2a. ContaX has no appointments to list.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
+
+* 3a. ContaX cannot find the requested appointment to edit.
+    * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
+
+* 4a. User enters invalid priority.
+    * 4a1. ContaX shows an error message indicating that the supplied priority is invalid<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
 
 **Use case: Export address book**
 
