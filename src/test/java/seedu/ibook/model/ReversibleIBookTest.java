@@ -64,6 +64,7 @@ public class ReversibleIBookTest {
 
         reversibleIBook.reversibleAddProduct(PRODUCT_A);
         reversibleIBook.saveChanges();
+        reversibleIBookCopy.prepareForChanges();
         reversibleIBookCopy.reversibleAddProduct(PRODUCT_A);
         reversibleIBookCopy.saveChanges();
 
@@ -78,6 +79,7 @@ public class ReversibleIBookTest {
         reversibleIBook.redo();
         assertEquals(reversibleIBook, reversibleIBookCopy);
 
+        reversibleIBook.prepareForChanges();
         reversibleIBook.reversibleAddProduct(PRODUCT_B);
         reversibleIBook.saveChanges();
         assertNotEquals(reversibleIBook, reversibleIBookCopy);

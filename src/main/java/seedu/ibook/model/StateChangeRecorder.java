@@ -41,6 +41,7 @@ public class StateChangeRecorder {
 
     // A variable acting as a pointer to the most recent state change.
     private int curStateChange;
+    private boolean hasAnyChanges;
 
     // List of new actions to be performed.
     private List<ReversibleIBookAction> newActionList;
@@ -51,6 +52,7 @@ public class StateChangeRecorder {
     public StateChangeRecorder() {
         stateChanges = new ArrayList<>();
         curStateChange = INVALID_STATE_CHANGE;
+        hasAnyChanges = false;
 
         prepareNewStateChange();
     }
@@ -59,6 +61,8 @@ public class StateChangeRecorder {
      * Gets a new workspace for recording next possible state change.
      */
     public void prepareNewStateChange() {
+        assert stateChanges.size() == 0 || hasAnyChanges == false;
+
         newActionList = new ArrayList<>();
     }
 
@@ -70,6 +74,7 @@ public class StateChangeRecorder {
         requireNonNull(action);
 
         newActionList.add(action);
+        hasAnyChanges = true;
     }
 
     /**
@@ -90,7 +95,7 @@ public class StateChangeRecorder {
         stateChanges.add(nextStateChange);
         curStateChange++;
 
-        prepareNewStateChange();
+        hasAnyChanges = false;
     }
 
     /**
