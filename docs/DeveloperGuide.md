@@ -782,12 +782,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Import/Export CSV UseCases
 
+![Import/Export CSV Use Cases](images/UseCaseDiagramImportExportCsv.png)
+
 **UC19: Export CSV File**
 
 **MSS**
 
 1. User requests to export address book as file for ContaX
-2. ContaX saves a CSV file to the disk at `data/addressbook.csv`<br><br>
+2. ContaX saves a CSV file to the disk<br><br>
    Use case ends.
 
 **UC20: Import CSV file**

@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+!include style.puml
+
+:User: as User USER_COLOR
+package ContaX {
+
+(ExportCsv) as (UC19)
+(ImportCsv) as (UC20)
+}
+
+
+User ---> UC19
+User ---> UC20
+
+@enduml
