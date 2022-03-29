@@ -20,6 +20,7 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         CommandType.setViewCommandType(CommandType.DEFAULT);
+        ViewedNric.setViewedNric(null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

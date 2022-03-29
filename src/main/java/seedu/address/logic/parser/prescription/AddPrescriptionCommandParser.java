@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.logic.commands.prescription.AddPrescriptionCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -47,6 +48,8 @@ public class AddPrescriptionCommandParser implements Parser<AddPrescriptionComma
         Instruction instruction = ParserUtil.parseInstruction(argMultimap.getValue(PREFIX_INSTRUCTION).get());
 
         Prescription prescription = new Prescription(nric, drugName, date, instruction);
+
+        ViewedNric.setViewedNric(nric);
 
         return new AddPrescriptionCommand(nric, prescription);
     }

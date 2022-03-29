@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.logic.commands.consultation.AddConsultationCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -50,7 +51,7 @@ public class AddConsultationCommandParser implements Parser<AddConsultationComma
         ConsultationDiagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
         ConsultationFee fee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_FEE).get());
         ConsultationNotes notes = ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).get());
-
+        ViewedNric.setViewedNric(ownerNric);
         Consultation consultation = new Consultation(ownerNric, date, time, diagnosis, fee, notes);
 
         return new AddConsultationCommand(ownerNric, consultation);
