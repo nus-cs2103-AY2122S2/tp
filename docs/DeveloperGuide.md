@@ -271,27 +271,25 @@ This feature has been enhanced based on the initial implementation of the `edit`
 
 #### How is this feature implemented?
 
-The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` and `EditPersonDescriptor` 
-where it will retrieve the attributes that can be edited.
+The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` and `EditCandidateDescriptor` where it will retrieve the attributes that can be edited.
 
 The user is able to edit key attributes of the Candidate, such as
 * Phone Number
 * ApplicationStatus
 
 Based on the fields that are edited by the user, the EditCommandParser will retreive the information, and update the attributes accordingly.
-This `EditPersonDescriptor` class will take in the current attributes of the Candidate, and update the fields accordingly by the
-`EditCommandParser`. 
+This `EditCandidateDescriptor` class will take in the current attributes of the Candidate, and update the fields accordingly by the `EditCommandParser`. 
 
 #### Why is the feature implemented as such?
 
 **1. We have implemented the `EditCommand` in this manner because it will help enhance the user experience. 
 One alternative method we had was to allow the user to update the candidate by retyping all the fields of the Candidate. 
-However, this proved to be not efficient, and hence we implemented it this way. With `EditCommandParser` and `EditPersonDescriptor`, 
+However, this proved to be not efficient, and hence we implemented it this way. With `EditCommandParser` and `EditCandidateDescriptor`, 
 the user can edit one attribute of the candidate without typing every attribute of the Candidate.  
 
 #### UML Diagram
 The following activity diagram summarizes what happens when a user executes a `edit` command. <br>
-<img src="images/EditCommandDiagram.png" width="250" />
+<img src="images/EditCommandDiagram.png" width="550" />
 
 
 ### ApplicationStatus Feature
