@@ -2,12 +2,14 @@ package seedu.contax.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.ReadOnlyAddressBook;
@@ -22,6 +24,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TAG = "Tag list contains duplicate tag(s).";
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -60,6 +63,7 @@ class JsonSerializableAddressBook {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
                 }
             } catch (IllegalValueException e) {
+                logger.fine("Skipped Tag: " + jsonAdaptedTag.getTagNameString());
                 continue;
             }
             addressBook.addTag(tag);
@@ -74,6 +78,7 @@ class JsonSerializableAddressBook {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
                 }
             } catch (IllegalValueException e) {
+                logger.fine("Skipped Person: " + jsonAdaptedPerson.getPersonNameString());
                 continue;
             }
 
