@@ -26,7 +26,8 @@ public class AddressBookHistory {
     }
 
     /**
-     * Returns AddressBook before execution of previous command.
+     * Returns the AddressBook that was saved in AddressBookHistory
+     * before the execution of previous command.
      */
     public AddressBook getPreviousAddressBook() {
         if (addressBooks.size() == 1) {
