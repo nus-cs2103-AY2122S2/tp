@@ -116,13 +116,23 @@ public class CommandBox extends UiPart<Region> {
 
             if (!commands.contains(last)) {
                 String completed = last;
-                int min = Integer.MAX_VALUE;
 
                 for (String command : commands) {
-                    int distance = editDistance(last, command);
-                    if (distance < min) {
+                    if (command.contains(last)) {
                         completed = command;
-                        min = distance;
+                        break;
+                    }
+                }
+
+                if (completed.equals(last)) {
+                    int min = Integer.MAX_VALUE;
+
+                    for (String command : commands) {
+                        int distance = editDistance(last, command);
+                        if (distance < min) {
+                            completed = command;
+                            min = distance;
+                        }
                     }
                 }
 
