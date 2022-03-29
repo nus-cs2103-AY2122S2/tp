@@ -32,7 +32,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.util.TransactionBuilder;
-import seedu.address.testutil.PersonUtil;
 
 public class AddTransactionCommandTest {
 
