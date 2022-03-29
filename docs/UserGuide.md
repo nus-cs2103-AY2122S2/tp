@@ -259,9 +259,7 @@ Example:
 * `deleteTask m/cs2030 tn/Assignment 1`
     * Deletes Assignment 1 that was previously assigned to any of the students taking CS2030 module.
 
-
 <br>
-
 
 ### Viewing the completion status of a particular task: `progress`
 
