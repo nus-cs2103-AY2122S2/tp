@@ -277,7 +277,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Entry archiveEntry(int index) {
+    public Entry archiveEntry(int index, boolean isArchived) {
         switch (currentlyDisplayedListType) {
         case PERSON:
             if (index >= filteredPersons.size()) {
@@ -285,7 +285,7 @@ public class ModelManager implements Model {
             }
 
             Person personToArchive = filteredPersons.get(index);
-            addressBook.archivePerson(personToArchive);
+            addressBook.setArchivePerson(personToArchive, isArchived);
             return personToArchive;
         case COMPANY:
             if (index >= filteredCompanies.size()) {
@@ -293,7 +293,7 @@ public class ModelManager implements Model {
             }
 
             Company companyToArchive = filteredCompanies.get(index);
-            addressBook.archiveCompany(companyToArchive);
+            addressBook.setArchiveCompany(companyToArchive, isArchived);
             return companyToArchive;
         case EVENT:
             if (index >= filteredEvents.size()) {
@@ -301,7 +301,7 @@ public class ModelManager implements Model {
             }
 
             Event eventToArchive = filteredEvents.get(index);
-            addressBook.archiveEvent(eventToArchive);
+            addressBook.setArchiveEvent(eventToArchive, isArchived);
             return eventToArchive;
         default:
             return null;

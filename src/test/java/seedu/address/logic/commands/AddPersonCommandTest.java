@@ -244,7 +244,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Entry archiveEntry(int index) {
+        public Entry archiveEntry(int index, boolean isArchived) {
             throw new AssertionError("This method should not be called.");
         }
     }

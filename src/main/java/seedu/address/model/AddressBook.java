@@ -119,11 +119,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Archives {@code key} in the person list.
+     * Sets archived state of {@code key} in the person list.
      * {@code key} must exist in the person list.
      */
-    public void archivePerson(Person key) {
-        persons.archive(key);
+    public void setArchivePerson(Person key, boolean isArchived) {
+        persons.setArchived(key, isArchived);
     }
 
     //// company-level operations
@@ -165,11 +165,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Archives {@code key} in the company list.
+     * Sets archived state of {@code key} in the company list.
      * {@code key} must exist in the company list.
      */
-    public void archiveCompany(Company key) {
-        companies.archive(key);
+    public void setArchiveCompany(Company key, boolean isArchived) {
+        companies.setArchived(key, isArchived);
     }
 
     //// event-level operations
@@ -209,11 +209,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Archives {@code key} in the event list.
+     * Sets archived state of {@code key} in the event list.
      * {@code key} must exist in the event list.
      */
-    public void archiveEvent(Event key) {
-        events.archive(key);
+    public void setArchiveEvent(Event key, boolean isArchived) {
+        events.setArchived(key, isArchived);
     }
 
     @Override

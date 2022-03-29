@@ -192,5 +192,5 @@ public interface Model {
     /**
      * Archives the entry at the index of the currently displayed list and returns it.
      */
-    Entry archiveEntry(int index);
+    Entry archiveEntry(int index, boolean isArchived);
 }
