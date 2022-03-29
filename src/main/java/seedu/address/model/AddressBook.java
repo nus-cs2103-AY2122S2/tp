@@ -270,6 +270,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void refresh() {
         persons.refresh();
+        schedules.refresh();
     }
 
     @Override
