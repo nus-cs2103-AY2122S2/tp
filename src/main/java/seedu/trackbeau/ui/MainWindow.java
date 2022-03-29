@@ -1,11 +1,23 @@
 package seedu.trackbeau.ui;
 
+import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
+import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -20,6 +32,13 @@ import seedu.trackbeau.logic.Logic;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
+import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.tag.Tag;
+import seedu.trackbeau.ui.charts.AllergyChartWindow;
+import seedu.trackbeau.ui.charts.HairChartWindow;
+import seedu.trackbeau.ui.charts.ServiceChartWindow;
+import seedu.trackbeau.ui.charts.SkinChartWindow;
+import seedu.trackbeau.ui.charts.StaffChartWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -39,6 +58,9 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private StaffChartWindow staffChartWindow;
     private ServiceChartWindow serviceChartWindow;
+    private AllergyChartWindow allergyChartWindow;
+    private SkinChartWindow skinChartWindow;
+    private HairChartWindow hairChartWindow;
     private ServiceListPanel serviceListPanel;
     private BookingListPanel bookingListPanel;
     private StatisticsPanel statisticsPanel;
@@ -90,6 +112,9 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
         staffChartWindow = new StaffChartWindow();
         serviceChartWindow = new ServiceChartWindow();
+        allergyChartWindow = new AllergyChartWindow();
+        skinChartWindow = new SkinChartWindow();
+        hairChartWindow = new HairChartWindow();
 
         this.labels = new ArrayList<>();
         this.labels.add(customersLabel);
@@ -226,6 +251,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void plotStaffChart() {
+        HashMap<String, Integer> staffMap = this.getStaffMap();
+        addData(staffMap, staffChartWindow.getPieChart());
         if (!staffChartWindow.isShowing()) {
             staffChartWindow.show();
         } else {
@@ -238,11 +265,206 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void plotServiceChart() {
+        HashMap<String, Integer> serviceMap = this.getServiceMap();
+        addData(serviceMap, serviceChartWindow.getPieChart());
         if (!serviceChartWindow.isShowing()) {
             serviceChartWindow.show();
         } else {
             serviceChartWindow.focus();
         }
+    }
+
+    /**
+     * Opens the allergy chart window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void plotAllergyChart() {
+        HashMap<String, Integer> allergyMap = this.getAllergyMap();
+        addData(allergyMap, allergyChartWindow.getPieChart());
+        if (!allergyChartWindow.isShowing()) {
+            allergyChartWindow.show();
+        } else {
+            allergyChartWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the skin type chart window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void plotSkinChart() {
+        HashMap<String, Integer> skinTypeMap = this.getSkinTypeMap();
+        addData(skinTypeMap, skinChartWindow.getPieChart());
+        if (!skinChartWindow.isShowing()) {
+            skinChartWindow.show();
+        } else {
+            skinChartWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the hair type chart window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void plotHairChart() {
+        HashMap<String, Integer> hairTypeMap = this.getHairTypeMap();
+        addData(hairTypeMap, hairChartWindow.getPieChart());
+        if (!hairChartWindow.isShowing()) {
+            hairChartWindow.show();
+        } else {
+            hairChartWindow.focus();
+        }
+    }
+
+    /**
+     * Adds data to the pie charts in a specific window.
+     */
+    void addData(HashMap<String, Integer> hm, PieChart pieChart) {
+        pieChart.getData().clear();
+        int dataCount = 0; //add only top 10 most count to prevent cluttering
+        Map<String, Integer> map = sortByValue(hm);
+        for (String key : map.keySet()) {
+            if (dataCount == 10) {
+                break;
+            }
+            String detail = key;
+            Integer count = map.get(key);
+            pieChart.getData()
+                    .add(new PieChart.Data(detail, count));
+            dataCount++;
+        }
+        //.layout() prevents labels from moving to top left after opening chart a few times
+        pieChart.layout();
+    }
+
+    /**
+     * Returns a hashmap with the staff name as the key and count as the value.
+     * Count refers to the number of customers who chose the staff as their favorite.
+     * @return HashMap
+     */
+    HashMap<String, Integer> getStaffMap() {
+        HashMap<String, Integer> staffMap = new HashMap<String, Integer>();
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        for (Customer customer : customerList) {
+            for (Tag tag : customer.getStaffs()) {
+                String key = tag.tagName.toUpperCase(); //key is the staff name
+                if (staffMap.containsKey(key)) {
+                    staffMap.put(key, staffMap.get(key) + 1);
+                } else {
+                    staffMap.put(key, 1);
+                }
+            };
+        }
+        return staffMap;
+    }
+
+    /**
+     * Returns a hashmap with the service name as the key and count as the value.
+     * Count refers to the number of customers who chose the service as their favorite.
+     * @return HashMap
+     */
+    HashMap<String, Integer> getServiceMap() {
+        HashMap<String, Integer> serviceMap = new HashMap<String, Integer>();
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        for (Customer customer : customerList) {
+            for (Tag tag : customer.getServices()) {
+                String key = tag.tagName.toUpperCase(); //key is the staff name
+                if (serviceMap.containsKey(key)) {
+                    serviceMap.put(key, serviceMap.get(key) + 1);
+                } else {
+                    serviceMap.put(key, 1);
+                }
+            };
+        }
+        return serviceMap;
+    }
+
+    /**
+     * Returns a hashmap with the allergy name as the key and count as the value.
+     * Count refers to the number of customers who have the allergy.
+     * @return HashMap
+     */
+    HashMap<String, Integer> getAllergyMap() {
+        HashMap<String, Integer> allergyMap = new HashMap<String, Integer>();
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        for (Customer customer : customerList) {
+            for (Tag tag : customer.getAllergies()) {
+                String key = tag.tagName.toUpperCase(); //key is the staff name
+                if (allergyMap.containsKey(key)) {
+                    allergyMap.put(key, allergyMap.get(key) + 1);
+                } else {
+                    allergyMap.put(key, 1);
+                }
+            };
+        }
+        return allergyMap;
+    }
+
+    /**
+     * Returns a hashmap with the skin type name as the key and count as the value.
+     * Count refers to the number of customers who have the skin type.
+     * @return HashMap
+     */
+    HashMap<String, Integer> getSkinTypeMap() {
+        HashMap<String, Integer> skinTypeMap = new HashMap<String, Integer>();
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        for (Customer customer : customerList) {
+            String key = customer.getSkinType().toString().toUpperCase();
+            if (!key.equals(EMPTY_SKIN_TYPE.toUpperCase())) {
+                if (skinTypeMap.containsKey(key)) {
+                    skinTypeMap.put(key, skinTypeMap.get(key) + 1);
+                } else {
+                    skinTypeMap.put(key, 1);
+                }
+            }
+        }
+        return skinTypeMap;
+    }
+
+    /**
+     * Returns a hashmap with the hair type name as the key and count as the value.
+     * Count refers to the number of customers who have the hair type.
+     * @return HashMap
+     */
+    HashMap<String, Integer> getHairTypeMap() {
+        HashMap<String, Integer> hairTypeMap = new HashMap<String, Integer>();
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        for (Customer customer : customerList) {
+            String key = customer.getHairType().toString().toUpperCase(); //key is the staff name
+            if (!key.equals(EMPTY_HAIR_TYPE.toUpperCase())) {
+                if (hairTypeMap.containsKey(key)) {
+                    hairTypeMap.put(key, hairTypeMap.get(key) + 1);
+                } else {
+                    hairTypeMap.put(key, 1);
+                }
+            }
+        }
+        return hairTypeMap;
+    }
+
+    /**
+     * Returns a sorted HashMap by value.
+     */
+    //function is taken from https://www.geeksforgeeks.org/sorting-a-hashmap-according-to-values/
+    private HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Integer> > list =
+                new LinkedList<Map.Entry<String, Integer> >(hm.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
     }
 
     void show() {
@@ -292,6 +514,18 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isPlotServiceChart()) {
                 plotServiceChart();
+            }
+
+            if (commandResult.isPlotAllergyChart()) {
+                plotAllergyChart();
+            }
+
+            if (commandResult.isPlotSkinChart()) {
+                plotSkinChart();
+            }
+
+            if (commandResult.isPlotHairChart()) {
+                plotHairChart();
             }
 
             return commandResult;

@@ -2,6 +2,9 @@ package seedu.trackbeau.logic.commands;
 
 import seedu.trackbeau.model.Model;
 
+/**
+ * Plots a Service Chart that shows the favourite services amongst customers.
+ */
 public class PlotServiceChartCommand extends Command {
     public static final String COMMAND_WORD = "plotService";
 
@@ -14,6 +17,7 @@ public class PlotServiceChartCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_CHART_MESSAGE, false,
-                false, false, true);
+                false, false, true,
+                false, false, false);
     }
 }

@@ -2,6 +2,9 @@ package seedu.trackbeau.logic.commands;
 
 import seedu.trackbeau.model.Model;
 
+/**
+ * Plots a Staff Chart that shows the favourite staffs amongst customers.
+ */
 public class PlotStaffChartCommand extends Command {
     public static final String COMMAND_WORD = "plotStaff";
 
@@ -14,6 +17,7 @@ public class PlotStaffChartCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_CHART_MESSAGE, false,
-                false, true, false);
+                false, true, false,
+                false, false, false);
     }
 }

@@ -1,56 +1,47 @@
-package seedu.trackbeau.ui;
+package seedu.trackbeau.ui.charts;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 import seedu.trackbeau.commons.core.LogsCenter;
+import seedu.trackbeau.ui.UiPart;
 
-public class StaffChartWindow extends UiPart<Stage> {
-    //referenced from https://docs.oracle.com/javafx/2/charts/pie-chart.htm
-    private static final Logger logger = LogsCenter.getLogger(StaffChartWindow.class);
+public class AllergyChartWindow extends UiPart<Stage> {
+    private static final Logger logger = LogsCenter.getLogger(SkinChartWindow.class);
     private static final String FXML = "PieChartWindow.fxml";
 
-    @FXML
+    @javafx.fxml.FXML
     private PieChart pieChart;
     /**
-     * Creates a new HelpWindow.
+     * Creates a new Allergy Chart Window.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the AllergyChartWindow.
      */
-    public StaffChartWindow(Stage root) {
+    public AllergyChartWindow(Stage root) {
         super(FXML, root);
+        //referenced from https://docs.oracle.com/javafx/2/charts/pie-chart.htm
         Scene scene = new Scene(new Group());
-        root.setTitle("Staff Preference Chart");
+        root.setTitle("Allergy Preference Chart");
         root.setWidth(500);
         root.setHeight(500);
-
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(new PieChart.Data("Jane", 13),
-                        new PieChart.Data("John", 25),
-                        new PieChart.Data("Jason", 10),
-                        new PieChart.Data("Alice", 22),
-                        new PieChart.Data("Jay", 30));
-        final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Favorite Staffs Amongst Customers"); (
-                (Group) scene.getRoot()).getChildren().add(chart);
+        pieChart.setLabelLineLength(10);
+        pieChart.setTitle("Common Allergies Amongst Customers"); (
+                (Group) scene.getRoot()).getChildren().add(pieChart);
         root.setScene(scene);
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new AllergyChartWindow.
      */
-    public StaffChartWindow() {
+    public AllergyChartWindow() {
         this(new Stage());
     }
 
     /**
-     * Shows the help window.
+     * Shows the AllergyChart window.
      * @throws IllegalStateException
      * <ul>
      *     <li>
@@ -68,30 +59,34 @@ public class StaffChartWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing staff chart.");
+        logger.fine("Showing allergy chart.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
+    public PieChart getPieChart() {
+        return this.pieChart;
+    }
+
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the AllergyChart window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the AllergyChart window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the AllergyChart window.
      */
     public void focus() {
         getRoot().requestFocus();
     }
-
 }
+
