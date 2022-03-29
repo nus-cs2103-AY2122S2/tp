@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -54,6 +55,20 @@ public class ConsistentLessonListTest {
         for (Lesson lesson : listWithNonConflictingLessons) {
             assertTrue(conflictingLessons.contains(lesson));
         }
+    }
+
+    @Test
+    public void findLessonConflictingWith_nonConflictingLesson_returnsNull() {
+        ConsistentLessonList l = new ConsistentLessonList();
+        l.setLessons(listWithNonConflictingLessons);
+
+        LocalDateTime differentLessonDateTime = LocalDateTime.of(
+                2022, 1, 26, 19, 0, 0);
+        Lesson nonConflictingLesson = new TemporaryLessonBuilder()
+                .withDateTimeSlot(differentLessonDateTime, 0, 50)
+                .build();
+
+        assertNull(l.findLessonConflictingWith(nonConflictingLesson));
     }
 
     @Test

@@ -44,9 +44,11 @@ public class ConsistentLessonList implements Iterable<Lesson> {
      */
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
+
         if (hasConflictingLesson(toAdd)) {
             throw new ConflictsWithLessonsException(toAdd, findAllLessonsConflictingWith(toAdd));
         }
+
         internalList.add(toAdd);
         sortList();
     }
@@ -59,6 +61,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
     public void assignStudent(Student student, Lesson lesson) {
         requireAllNonNull(student, lesson);
         assert internalList.contains(lesson) : "Cannot find lesson object in internal list.";
+
         internalList.get(internalList.indexOf(lesson)).assignStudent(student);
     }
 
@@ -68,6 +71,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
      */
     public void unassignStudent(Student student) {
         requireNonNull(student);
+
         for (Lesson lesson: internalList) {
             if (lesson.hasAlreadyAssigned(student)) {
                 lesson.unassignStudent(student);
@@ -91,6 +95,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         if (hasConflictingLessonExcluding(index, editedLesson)) {
             throw new ConflictsWithLessonsException(editedLesson, findAllLessonsConflictingWith(editedLesson));
         }
+
         internalList.set(index, editedLesson);
         sortList();
     }
@@ -101,6 +106,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
      */
     public void remove(Lesson toRemove) {
         requireNonNull(toRemove);
+
         if (!internalList.remove(toRemove)) {
             throw new LessonNotFoundException();
         }
@@ -112,6 +118,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
      */
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
+
         if (lessonsDoConflict(lessons)) {
             List<Lesson> conflictingLessons = findConflictingLessons(lessons);
             throw new ContainsConflictingLessonsException(conflictingLessons);
@@ -200,7 +207,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Returns a list containing two instances of conflicting lessons in {@code lessons}, if any.
+     * Returns a list containing instances of conflicting lessons in a list of {@code lessons}, if any.
      */
     private List<Lesson> findConflictingLessons(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
