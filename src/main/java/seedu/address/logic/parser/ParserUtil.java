@@ -104,9 +104,7 @@ public class ParserUtil {
         requireNonNull(list);
         final Set<Name> set = new HashSet<>();
         for (String value : list) {
-            for (String s: value.split(" ")) {
-                set.add(parseName(s.trim()));
-            }
+            set.add(parseName(value.trim()));
         }
         return new ArrayList<>(set);
     }
@@ -136,9 +134,7 @@ public class ParserUtil {
         requireNonNull(list);
         final Set<Phone> set = new HashSet<>();
         for (String value : list) {
-            for (String s: value.split(" ")) {
-                set.add(parsePhone(s.trim()));
-            }
+            set.add(parsePhone(value.trim()));
         }
         return new ArrayList<>(set);
     }
@@ -168,9 +164,7 @@ public class ParserUtil {
         requireNonNull(list);
         final Set<Address> set = new HashSet<>();
         for (String value : list) {
-            for (String s: value.split(" ")) {
-                set.add(parseAddress(s.trim()));
-            }
+            set.add(parseAddress(value.trim()));
         }
         return new ArrayList<>(set);
     }
@@ -311,9 +305,7 @@ public class ParserUtil {
         requireNonNull(list);
         final Set<EventName> set = new HashSet<>();
         for (String value : list) {
-            for (String s : value.split(" ")) {
-                set.add(parseEventName(s.trim()));
-            }
+            set.add(parseEventName(value.trim()));
         }
         return new ArrayList<>(set);
     }
@@ -341,9 +333,7 @@ public class ParserUtil {
         requireNonNull(list);
         final Set<Information> set = new HashSet<>();
         for (String value : list) {
-            for (String s : value.split(" ")) {
-                set.add(parseInfo(s.trim()));
-            }
+            set.add(parseInfo(value.trim()));
         }
         return new ArrayList<>(set);
     }

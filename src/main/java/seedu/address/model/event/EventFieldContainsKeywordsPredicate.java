@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-
 public class EventFieldContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
     private final Function<Event, String> field;
@@ -18,7 +16,7 @@ public class EventFieldContainsKeywordsPredicate implements Predicate<Event> {
     @Override
     public boolean test(Event event) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(field.apply(event), keyword));
+                .anyMatch(keyword -> keyword.equalsIgnoreCase(field.apply(event)));
     }
 
     @Override
