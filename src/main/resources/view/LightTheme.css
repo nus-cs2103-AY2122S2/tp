@@ -392,12 +392,11 @@
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: derive(#7e7a7a,0%);
+    -fx-background-color: derive(#c1c1c1,0%);
     -fx-border-color: transparent;
         -fx-background-insets: 2 2 2 1;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-
 }
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
