@@ -102,7 +102,10 @@ public class ClassGroup implements Entity {
         return taModule;
     }
 
-
+    /**
+     * Adds a student to the {@code uniqueStudentList} and initialize his/her
+     * attendance for all lessons.
+     */
     public void addStudent(Student s) {
         uniqueStudentList.add(s);
         for (Lesson lesson : lessons) {
@@ -114,6 +117,10 @@ public class ClassGroup implements Entity {
         return uniqueStudentList.contains(s);
     }
 
+    /**
+     * Removes a student from the {@code uniqueStudentList} as well as
+     * all the lessons under the current class group.
+     */
     public void removeStudent(Student s) {
         uniqueStudentList.remove(s);
         for (Lesson lesson : lessons) {

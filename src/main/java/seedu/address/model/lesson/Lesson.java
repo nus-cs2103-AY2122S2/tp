@@ -45,6 +45,9 @@ public class Lesson {
         studentAttendanceList.add(new StudentAttendance(student, new Attendance(false)));
     }
 
+    /**
+     * Removes a student from the lesson as well as all the related attendance information.
+     */
     public void removeStudent(Student student) {
         for (StudentAttendance sa : studentAttendanceList) {
             if (sa.getStudent().equals(student)) {
