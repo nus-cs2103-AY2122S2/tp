@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
+
 
 import java.util.List;
 import java.util.function.Predicate;
