@@ -9,27 +9,28 @@ If you can type fast, Tinner allows you to easily sort through and retrieve rele
 Tinner aims to solve the hassle of managing internship applications though 3 aspects.
 1. **Tracks** essential information such as statuses and deadlines at a glance.
 2. **Reminds** important deadlines so that you will not miss a about your application.
-3. **Reviews** the process and take down notes so that you can ace your next application. 
+3. **Reviews** the process and take down notes so that you can ace your next application.
 
 ## Table of Contents
 
-* [Quick start](#quick-start)
-* [Features](#features)
+  * [Quick start](#quick-start)
+  * [Features](#features)
   * [Viewing all companies and roles: `list`](#c-list)
   * [Viewing all favourited companies: `listFavourite`](#c-listfavourite)
   * [Adding a company: `addCompany`](#c-add-c)
   * [Adding a role: `addRole`](#c-add-c-r)
   * [Deleting a company: `deleteCompany`](#c-delete-c)
-    * [Deleting a role: `deleteRole`](#c-delete-c-r)
+  * [Deleting a role: `deleteRole`](#c-delete-c-r)
   * [Editing a company: `editCompany`](#c-edit-c)
-    * [Editing a role: `editRole`](#c-edit-r)
+  * [Editing a role: `editRole`](#c-edit-r)
   * [Finding a specific company or role: `find`](#c-find-c-r)
   * [Favouriting a specific company: `favourite`](#c-favourite-c)
   * [Unfavouriting a specific company: `unfavourite`](#c-unfavourite-c)
+  * [Changing the reminder window: `setWindow`](#c-setWindow-c)
   * [Clearing the company list: `clear`](#c-clear)
   * [Viewing help: `help`](#c-help)
   * [Exiting Tinner: `exit`](#c-exit) 
-* [Command summary](#command-summary)
+  * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +65,7 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/COMPANY`, `COMPANY` is a parameter which can be used as `add n/Google`.
+  e.g. in `add n/COMPANY`, `COMPANY` is a parameter* which can be used as `add n/Google`.
 
 * Items in square brackets are optional.<br>
   e.g `n/COMPANY [p/PHONE_NUMBER]` can be used as `n/Google P/65427981` or as `n/Google`.
@@ -78,6 +79,7 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+*Note: a parameter is the user input that is given to a command.
 </div>
 
 ### Listing all companies : `list` <a id="c-list"></a>
@@ -152,7 +154,8 @@ Examples:
 * `list` followed by, `deleteRole 1 1` deletes the 1<sup>st</sup> role from the 1<sup>st</sup>
   company in the displayed company list.
 
-### Edits an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
+
+### Editing an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
 
 Edits the specified company within the displayed company list.
 
@@ -166,7 +169,7 @@ Examples:
 
 * `list` followed by `editCompany 1 p/91234567 e/johndoe@example.com`edits the 1<sup>st</sup> company in the displayed company list.
 
-### Edits an existing role from company : `editRole` <a id="c-edit-r"></a>
+### Editing an existing role from company : `editRole` <a id="c-edit-r"></a>
 
 Edits the specified role in the specified company within the displayed company list.
 
@@ -182,10 +185,10 @@ Examples:
 
 ### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
 
-Find companies or/and roles depending on the format given.
-If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
-If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be displayed.
-If both keywords are entered, only companies with names that match any of the company keywords while containing one or more roles whose names match any of the role keywords are displayed (with only the selected roles which matched the role keywords).
+* Find companies or/and roles depending on the format given.
+* If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
+* If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be displayed.
+* If both keywords are entered, only companies with names that match any of the company keywords while containing roles whose names match any of the role keywords are displayed.
 
 Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
 
@@ -203,7 +206,7 @@ Examples:
 
 ### Favouriting a specific company: `favourite` <a id="c-favourite-c"></a>
 
-Favourite a specific company from the list of companies
+Favourite a specific company from the list of companies.
 
 Format: `favourite COMPANY_INDEX`
 
@@ -218,7 +221,7 @@ Examples:
 
 ### Unfavouriting a specific company: `unfavourite` <a id="c-unfavourite-c"></a>
 
-Unfavourite a specific company from the list of companies
+Unfavourite a specific company from the list of companies.
 
 Format: `unfavourite COMPANY_INDEX`
 
@@ -244,6 +247,18 @@ Shows a message explaining how to access the User Guide.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Changing the reminder window: `setWindow` <a id="c-setWindow-c"></a>
+
+* The parameter `REMINDER_WINDOW` specifies the period (in days) in which you will receive reminders before a role's reminder date.
+* Sets the reminder window to the specified `REMINDER_WINDOW`.
+* All roles with reminder dates that are within the specified `REMINDER_WINDOW` days away from today will show up in the reminders window.
+
+Format: `setWindow REMINDER_WINDOW`
+
+Examples:
+
+* `setWindow 14` would make Tinner remind you of all upcoming reminders from up to two weeks prior to the associated role's reminder date.
 
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
@@ -273,19 +288,21 @@ _Details coming soon ..._
 
 ## Command summary <a id="command-summary"></a>
 
-Action | Format, Examples
---------|------------------
-**List companies** | `list`
-**List favourited companies** | `listFavourite`
-**Add company** | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371`
-**Add role** | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS r/REMINDER_DATE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse marketing data $/5000`
-**Delete company** | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `
-**Delete role** | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `
-**Edit company** | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`
-**Edit role** | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending r/31-03-2022 23:59 $/5000`
-**Find company or role** | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`
-**Favourite company** | `favourite COMPANY_INDEX`
-**Unfavourite company** | `unfavourite COMPANY_INDEX`
-**Clear company list** | `clear`
-**Help** | `help`
-**Exit Tinner** | `exit`
+| Action                        | Format, Examples                                                                                                                                                                                                   |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **List companies**            | `list`                                                                                                                                                                                                             |
+| **List favourited companies** | `listFavourite`                                                                                                                                                                                                    |
+| **Add company**               | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` |
+| **Add role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`               |
+| **Delete company**            | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `                                                                                                                                                     |
+| **Delete role**               | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `                                                                                                                                              |
+| **Edit company**              | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`                                                                         |
+| **Edit role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`                                   |
+| **Find company or role**      | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`                                                                              |
+| **Favourite company**         | `favourite COMPANY_INDEX` <br><br> e.g., `favourite 1`                                                                                                                                                             |
+| **Unfavourite company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
+| **Set reminder window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
+| **Help**                      | `help`                                                                                                                                                                                                             |
+| **Clear**                     | `clear`                                                                                                                                                                                                             |
+| **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
+
