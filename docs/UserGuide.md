@@ -55,7 +55,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
 <div markdown="block" class="alert alert-info">
 
-* [Viewing Help](#viewing-help-window-help)
+* [Viewing Help](#viewing-help)
 * [Managing candidates](#managing-candidates)
 * [Scheduling Interviews](#scheduling-interviews)
 * [Miscellaneous commands](#miscellaneous-commands)
