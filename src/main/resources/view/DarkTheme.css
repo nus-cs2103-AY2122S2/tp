@@ -441,3 +441,11 @@
 #mainDisplay {
     -fx-background-color: #dac5d6;
 }
+
+.weekdayLabel {
+    -fx-text-fill: black;
+}
+
+.weekendLabel {
+    -fx-text-fill: red;
+}

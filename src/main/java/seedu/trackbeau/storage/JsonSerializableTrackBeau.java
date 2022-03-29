@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.trackbeau.commons.exceptions.IllegalValueException;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
 
@@ -22,18 +23,22 @@ class JsonSerializableTrackBeau {
 
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
     public static final String MESSAGE_DUPLICATE_SERVICE = "Services list contains duplicate service(s).";
+    public static final String MESSAGE_DUPLICATE_BOOKING = "Bookings list contains duplicate booking(s).";
 
     private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
     private final List<JsonAdaptedService> services = new ArrayList<>();
+    private final List<JsonAdaptedBooking> bookings = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTrackBeau} with the given customers and services.
+     * Constructs a {@code JsonSerializableTrackBeau} with the given customers, services and bookings.
      */
     @JsonCreator
     public JsonSerializableTrackBeau(@JsonProperty("customers") List<JsonAdaptedCustomer> customers,
-                                     @JsonProperty("services") List<JsonAdaptedService> services) {
+                                     @JsonProperty("services") List<JsonAdaptedService> services,
+                                     @JsonProperty("bookings") List<JsonAdaptedBooking> bookings) {
         this.customers.addAll(customers);
         this.services.addAll(services);
+        this.bookings.addAll(bookings);
     }
 
     /**
@@ -44,6 +49,7 @@ class JsonSerializableTrackBeau {
     public JsonSerializableTrackBeau(ReadOnlyTrackBeau source) {
         customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
         services.addAll(source.getServiceList().stream().map(JsonAdaptedService::new).collect(Collectors.toList()));
+        bookings.addAll(source.getBookingList().stream().map(JsonAdaptedBooking::new).collect(Collectors.toList()));
     }
 
     /**
@@ -68,7 +74,14 @@ class JsonSerializableTrackBeau {
             }
             trackBeau.addService(service);
         }
+
+        for (JsonAdaptedBooking jsonAdaptedBooking : bookings) {
+            Booking booking = jsonAdaptedBooking.toModelType();
+            if (trackBeau.hasBooking(booking)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_BOOKING);
+            }
+            trackBeau.addBooking(booking);
+        }
         return trackBeau;
     }
-
 }

@@ -28,6 +28,7 @@
                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
             </HBox>
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+            <Label fx:id="service" styleClass="cell_small_label" text="\$service" />
             <Label fx:id="startTime" styleClass="cell_small_label" text="\$startTime" />
         </VBox>
         <rowConstraints>

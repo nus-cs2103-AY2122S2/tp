@@ -1,10 +1,14 @@
 package seedu.trackbeau.ui;
 
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.trackbeau.model.booking.Booking;
+
+
 
 /**
  * An UI component that displays information of a {@code Booking}.
@@ -22,6 +26,7 @@ public class BookingCard extends UiPart<Region> {
      */
 
     public final Booking booking;
+    public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' HH:mm a");
 
     @FXML
     private HBox cardPane;
@@ -32,6 +37,8 @@ public class BookingCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
+    private Label service;
+    @FXML
     private Label startTime;
 
     /**
@@ -41,9 +48,10 @@ public class BookingCard extends UiPart<Region> {
         super(FXML);
         this.booking = booking;
         id.setText(displayedIndex + ". ");
-        name.setText(booking.getCustomerName());
-        phone.setText("Phone Number: " + booking.getCustomerPhone());
-        startTime.setText("Start Time: " + booking.getDateTime());
+        name.setText(booking.getCustomerName().fullName);
+        phone.setText("Phone Number: " + booking.getCustomerPhone().value);
+        service.setText("Service: " + booking.getServiceName().fullName);
+        startTime.setText("Time: " + booking.getBookingDateTime().value.format(formatter));
     }
 
     @Override
