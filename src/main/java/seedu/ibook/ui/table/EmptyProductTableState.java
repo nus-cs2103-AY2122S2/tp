@@ -10,7 +10,7 @@ import seedu.ibook.ui.UiComponent;
  */
 public class EmptyProductTableState extends UiComponent<HBox> {
 
-    private static final String FXML = "Table/EmptyProductTableState.fxml";
+    private static final String FXML = "table/EmptyProductTableState.fxml";
 
     /**
      * Initializes the empty state of {@code ProductTable}.
@@ -26,6 +26,6 @@ public class EmptyProductTableState extends UiComponent<HBox> {
      */
     @FXML
     private void handleAddProductClicked() {
-        getMainWindow().showPopupAdd();
+        getMainWindow().showPopupAddProduct();
     }
 }

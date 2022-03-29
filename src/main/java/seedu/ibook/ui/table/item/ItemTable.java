@@ -15,7 +15,7 @@ import seedu.ibook.ui.table.ProductCard;
  */
 public class ItemTable extends UiComponent<VBox> {
 
-    private static final String FXML = "Table/Item/ItemTable.fxml";
+    private static final String FXML = "table/item/ItemTable.fxml";
 
     private final ProductCard productCard;
     private final Product product;
@@ -46,13 +46,12 @@ public class ItemTable extends UiComponent<VBox> {
         filteredItem.addListener(listener);
         content.getChildren().clear();
         if (filteredItem.isEmpty()) {
-            EmptyItemTableState emptyState = new EmptyItemTableState(getMainWindow());
+            EmptyItemTableState emptyState = new EmptyItemTableState(productIndex, product, getMainWindow());
             content.getChildren().add(emptyState.getRoot());
         } else {
             for (int i = 0; i < filteredItem.size(); i++) {
                 Item item = filteredItem.get(i);
-                String index = String.format("%d-%d", productIndex, i + 1);
-                ItemCard itemCard = new ItemCard(index, item, getMainWindow());
+                ItemCard itemCard = new ItemCard(productIndex, i + 1, product, item, getMainWindow());
                 content.getChildren().add(itemCard.getRoot());
             }
         }
