@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Skill {
 
     public static final String NAME_CONSTRAINTS = "Skill names should be alphanumeric";
-    public static final String NAME_VALIDATION_REGEX = "^[\\w|\\d]+[\\w|\\d|\\s]+[\\w|\\d]+$";
+    public static final String NAME_VALIDATION_REGEX = "[\\w|\\d|\\s]+";
     public static final String PROFICIENCY_CONSTRAINTS_RANGE = "Skill proficiency should be within range of 1-100";
     public static final String PROFICIENCY_CONSTRAINTS_INTEGER = "Skill proficiency must be an integer";
     public static final String PROFICIENCY_VALIDATION_BETWEEN_0_TO_100 = "^[0-9]$|^[1-9][0-9]$|^(100)$";
