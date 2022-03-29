@@ -17,24 +17,41 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL =
             "https://ay2122s2-cs2103-f11-2.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Available functions on this version: \n\n"
-            + "- add n/NAME id/STUDENT_ID c/COURSE \n-delete STUDENT_ID\n"
-            + "- find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD\n"
-            + "- delete [INDEX]\n"
-            + "- sort s/[attribute] \n"
-            + "- edit [INDEX] [PREFIX]/[NEW VALUE]\n"
-            + "- exit\n\n"
-            + "The full guide is available on our User Guide";
-
+    private static final String HELP_MESSAGE = "Available functions on this version: \n\n";
+    private static final String ADD_FIELD = "n/NAME id/STUDENT_ID c/COURSE avail/AVAILABILITY";
+    private static final String FIELD_IS_INDEX = "INDEX";
+    private static final String EDIT_FIELD = FIELD_IS_INDEX + " [PREFIX]/[NEW VALUE]";
+    private static final String FIND_FIELD = "k/KEYWORD k/[MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]";
+    private static final String SCHEDULE_FIELD = "add candidate/" + FIELD_IS_INDEX + " at/dd-MM-yyyy HH:mm";
+    private static final String SORT_FIELD = "s/ATTRIBUTE";
+    private static final String VIEW_FIELD = "[today] [week] [month]";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
     private Button copyButton;
-
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private Label addField;
+    @FXML
+    private Label deleteField;
+    @FXML
+    private Label editField;
+    @FXML
+    private Label exit;
+    @FXML
+    private Label findField;
+    @FXML
+    private Label focusField;
+    @FXML
+    private Label scheduleField;
+    @FXML
+    private Label sortField;
+    @FXML
+    private Label viewField;
 
     /**
      * Creates a new HelpWindow.
@@ -44,6 +61,14 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        addField.setText(ADD_FIELD);
+        deleteField.setText(FIELD_IS_INDEX);
+        editField.setText(EDIT_FIELD);
+        findField.setText(FIND_FIELD);
+        scheduleField.setText(SCHEDULE_FIELD);
+        sortField.setText(SORT_FIELD);
+        focusField.setText(FIELD_IS_INDEX);
+        viewField.setText(VIEW_FIELD);
     }
 
     /**
@@ -100,7 +125,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Copies the URL to the user guide to the clipboard.
-     * @return
      */
     @FXML
     public void goToUrl() throws IOException {

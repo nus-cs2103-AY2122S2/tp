@@ -8,24 +8,17 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <ScrollPane id="focus-card-scroll-pane" VBox.vgrow="ALWAYS" minHeight="200" HBox.hgrow="ALWAYS" hbarPolicy="AS_NEEDED">
             <VBox HBox.hgrow="ALWAYS">
                 <GridPane HBox.hgrow="ALWAYS" minWidth="300">
-                    <padding>
-                        <Insets bottom="15" />
-                    </padding>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="120" prefWidth="150" />
                     </columnConstraints>
                     <VBox alignment="CENTER" minHeight="150" minWidth="120" GridPane.columnIndex="0">
                         <ImageView fx:id="displayPicture" fitWidth="120" fitHeight="120"/>
                     </VBox>
-                    <padding>
-                        <Insets bottom="15" />
-                    </padding>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="200" maxWidth="250"/>
                     </columnConstraints>
