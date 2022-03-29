@@ -228,6 +228,13 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 28px;
     -fx-text-fill: #333333;
+    -fx-padding: 3 24 3 24;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.mini-pane-module-code:hover {
+    -fx-background-color: #bcbbb9;
 }
 
 .module-group-list-scroll-pane {
@@ -252,6 +259,10 @@
     -fx-border-color: #333333;
 }
 
+.mini-pane {
+    -fx-padding: 3;
+}
+
 .odd-mini-pane {
     -fx-background-color: #b2beb5;
 }
@@ -264,10 +275,14 @@
     -fx-background-color: #cfcfc4;
     -fx-background-radius: 5;
     -fx-border-radius: 5;
-    -fx-padding: 2;
+    -fx-padding: 2 3 2 3;
     -fx-text-fill: #333333;
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 16;
+}
+
+.mini-pane-group-name-label:hover {
+    -fx-background-color: #babab0;
 }
 
 .module-group-card {

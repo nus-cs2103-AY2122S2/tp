@@ -117,11 +117,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFilteredModuleList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFilteredModuleList(), this);
         moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
         //by default the listPanel holds person list on startup
         listPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
-        setModuleListPanel();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -251,7 +250,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    public CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText,
                 this.isPersonListShowing(),

@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import unibook.commons.util.TriFunction;
 import unibook.model.person.Professor;
+import unibook.ui.Ui;
 import unibook.ui.cards.ProfessorCard;
 
 /**

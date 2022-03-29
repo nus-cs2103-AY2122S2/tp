@@ -27,7 +27,7 @@
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="0" percentWidth="50.0"/>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="0" percentWidth="50.0"/>
                 </columnConstraints>
-                    <ScrollPane fitToWidth="true" prefViewportHeight="200" GridPane.columnIndex="0">
+                    <ScrollPane fitToWidth="true" prefViewportHeight="350" GridPane.columnIndex="0">
                         <VBox fx:id="members">
                             <Label fx:id="membersHeading" style="-fx-padding: 0 0 0 15" styleClass="group-subheadings"
                                    text="Members"/>
