@@ -24,6 +24,7 @@
         <Label fx:id="category" styleClass="table-column-long"/>
         <Label fx:id="price" styleClass="table-column-short"/>
         <Label fx:id="description" styleClass="table-column-long" HBox.hgrow="ALWAYS"/>
+        <Label fx:id="quantity" styleClass="table-column-short" HBox.hgrow="ALWAYS"/>
         <HBox styleClass="table-column-long" alignment="CENTER">
             <Button alignment="CENTER" mnemonicParsing="false" styleClass="action-button">
                 <graphic>

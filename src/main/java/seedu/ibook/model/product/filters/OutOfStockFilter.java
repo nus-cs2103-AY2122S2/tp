@@ -2,15 +2,15 @@ package seedu.ibook.model.product.filters;
 
 import seedu.ibook.model.product.Product;
 
-public class ExpiredFilter extends AttributeFilter {
-    private static final String TYPE = "expired";
+public class OutOfStockFilter extends AttributeFilter {
+    private static final String TYPE = "out-of-stock";
 
     private final String value = "";
 
     /**
-     * Creates a predicate that checks if the product has expired.
+     * Creates a predicate that checks if the product has quantity of zero in all its items.
      */
-    public ExpiredFilter() {
+    public OutOfStockFilter() {
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ExpiredFilter extends AttributeFilter {
 
     @Override
     public boolean test(Product otherProduct) {
-        return otherProduct.hasExpiredItems();
+        return otherProduct.getTotalQuantity().quantity == 0;
     }
 
     @Override
@@ -34,6 +34,6 @@ public class ExpiredFilter extends AttributeFilter {
             return true;
         }
 
-        return other instanceof ExpiredFilter;
+        return other instanceof OutOfStockFilter;
     }
 }

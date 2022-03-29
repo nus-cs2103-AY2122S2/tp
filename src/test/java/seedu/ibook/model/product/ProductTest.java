@@ -10,6 +10,7 @@ import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
+import seedu.ibook.model.item.Quantity;
 import seedu.ibook.testutil.ProductBuilder;
 
 class ProductTest {
@@ -18,16 +19,16 @@ class ProductTest {
 
     @Test
     void getTotalQuantity_noItems_returnZero() {
-        assertEquals(0, testProduct.getTotalQuantity());
+        assertEquals(new Quantity(0), testProduct.getTotalQuantity());
     }
 
     @Test
     void getTotalQuantity_multipleQuantities_getSum() {
         testProduct.addItem(Q5_2022_03_01);
-        assertEquals(5, testProduct.getTotalQuantity());
+        assertEquals(new Quantity(5), testProduct.getTotalQuantity());
 
         testProduct.addItem(Q10_2022_03_01);
-        assertEquals(15, testProduct.getTotalQuantity());
+        assertEquals(new Quantity(15), testProduct.getTotalQuantity());
     }
 
     @Test

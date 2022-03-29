@@ -43,6 +43,8 @@ public class ProductCard extends UiComponent<HBox> {
     private Label price;
     @FXML
     private Label description;
+    @FXML
+    private Label quantity;
 
     @FXML
     private VBox itemTableContainer;
@@ -77,12 +79,20 @@ public class ProductCard extends UiComponent<HBox> {
         rotateClose.setOnFinished(eventExpand);
     }
 
-    private void populateField() {
+    /**
+     * Updates the product card.
+     */
+    public void populateField() {
         indexLabel.setText(String.valueOf(index));
         name.setText(product.getName().toString());
         category.setText(product.getCategory().toString());
         price.setText(product.getPrice().toString());
         description.setText(product.getDescription().toString());
+        quantity.setText(product.getTotalQuantity().toString());
+    }
+
+    private ProductCard getProductCard() {
+        return this;
     }
 
     @FXML
@@ -109,7 +119,7 @@ public class ProductCard extends UiComponent<HBox> {
     private class EventExpand implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             if (isShowingItems) {
-                ItemTable itemTable = new ItemTable(getMainWindow(), product, index);
+                ItemTable itemTable = new ItemTable(getMainWindow(), getProductCard(), product, index);
                 itemTableContainer.getChildren().add(itemTable.getRoot());
             } else {
                 itemTableContainer.getChildren().clear();
