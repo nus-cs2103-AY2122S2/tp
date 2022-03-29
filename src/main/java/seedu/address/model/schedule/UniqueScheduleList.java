@@ -3,11 +3,13 @@ package seedu.address.model.schedule;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
 import seedu.address.model.schedule.exceptions.DuplicateScheduleException;
 import seedu.address.model.schedule.exceptions.ScheduleNotFoundException;
 
@@ -18,6 +20,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     private final ObservableList<Schedule> internalList = FXCollections.observableArrayList();
     private final ObservableList<Schedule> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private final ScheduleComparator comparator = new ScheduleComparator();
 
     /**
      * Returns true if the list contains an equivalent schedule as the given argument.
@@ -25,6 +28,23 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public boolean contains(Schedule toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
+     * Sort the internal list for display.
+     * Called when there is a change in {@code Schedule} inside the list except for deleting.
+     */
+    private void sort() {
+        this.internalList.sort(comparator);
+    }
+
+    /**
+     * Refreshes the observable list so that update can be reflected in GUI.
+     */
+    public void refresh() {
+        List<Schedule> schedulesCopy = new ArrayList<>(internalList);
+        internalList.setAll(schedulesCopy);
+        sort();
     }
 
     /**
