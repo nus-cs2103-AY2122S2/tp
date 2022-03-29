@@ -7,7 +7,7 @@ title: User Guide
 * [**Introduction**](#introduction)
 * [**User guide navigation**](#user-guide-navigation)
 * [**Quick start**](#quick-start)
-* [**User interface**]()
+* [**User interface**](#user-interface)
 * [**Command structure**](#command-structure)
 * [**Features**](#features)
   * [Viewing help: `help`](#viewing-help-help)
