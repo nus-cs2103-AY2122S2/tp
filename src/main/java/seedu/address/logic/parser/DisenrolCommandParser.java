@@ -6,13 +6,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
- * Parses input arguments and creates a new EnrolCommand object
+ * Parses input arguments and creates a new DisenrolCommand object
  */
 public class DisenrolCommandParser implements Parser<Command> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EnrolCommand
-     * and returns a EnrolCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DisenrolCommand
+     * and returns a DisenrolCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
     @Override

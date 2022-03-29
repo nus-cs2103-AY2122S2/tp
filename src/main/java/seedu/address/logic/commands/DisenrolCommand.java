@@ -26,14 +26,14 @@ public class DisenrolCommand extends Command {
             + "the given class group.\n"
             + "\tParameters: " + PREFIX_CLASS_INDEX + "CLASS_GROUP_INDEX "
             + PREFIX_STUDENT + "all|STUDENT_INDEXES|STUDENT_IDS "
-            + "\n\tExample: "
+            + "\n\tExamples: "
             + "\n\t\t1. " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
             + PREFIX_STUDENT + "all "
             + "\n\t\t2. " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
             + PREFIX_STUDENT + "1,2,3 "
-            + "\n\t3. " + COMMAND_WORD + " "
+            + "\n\t\t3. " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
             + PREFIX_STUDENT + "e0123456,e0234567 \n";
     private Index classGroupIndex;
