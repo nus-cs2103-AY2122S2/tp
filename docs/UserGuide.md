@@ -165,7 +165,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Description:** Wanting to reset your current show list? Clear all shows in Trackermon's show list!
 
-Format: `clear`
+**Format:** `clear`
 
 **Example:** `clear`
 
