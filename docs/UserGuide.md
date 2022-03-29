@@ -65,7 +65,7 @@ The app will only display one of these lists at any time, as shown in the screen
 #### Company List
 ![Company List](images/UserGuide/Ui-2.png)
 
-A Company entry has:
+A **Company** entry has:
 * A *name*
 * An *email address*
 * A *phone number*
@@ -75,7 +75,7 @@ A Company entry has:
 #### Person List
 ![Person List](images/UserGuide/Ui-3.png)
 
-A Person entry has:
+A **Person** entry has:
 * A *name*
 * The *name* of the Company the Person is associated with
 * An *email address*
@@ -85,7 +85,7 @@ A Person entry has:
 #### Event List
 ![Event List](images/UserGuide/Ui-4.png)
 
-Finally, an Event entry has:
+Finally, an **Event** entry has:
 * A *name*
 * The *name* of the Company the Event is associated with
 * A *date*
@@ -343,6 +343,7 @@ E.g. 2022-10-20 and 13:30.
 Examples:
 * `edite 1 d/2021-12-21 l/Zoom` Edits the date and location of the 1st event to be `2021-12-21` and `Zoom` respectively.
 * `edite 2 n/Resume Screening t/` Edits the name of the 2nd event to be `Resume Screening` and clears all existing tags.
+
 ### Locating entries
 #### Locating companies: `findc`
 
@@ -433,7 +434,12 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 ## Glossary
 
-**TODO**
+- ### CLI
+  CLI stands for Command Line Interface. It is a special type of terminal where you can type commands into it and the command will be executed.
+- ### GUI
+  GUI stands for Graphical User Interface. Contrary to CLI, GUI is an interface that you can interact with, mainly through clicking interface (i.e. clicking buttons).
+- ### Entry
+  An entry is a single entry in a list. In InternBuddy, an entry can be a company, a person, or an event. Entry is a generic term that can be used to refer to any of the three types of entries.
 
 --------------------------------------------------------------------------------------------------------------------
 
