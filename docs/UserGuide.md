@@ -50,7 +50,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                 |
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                 |
 | [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional |
-| \<Instructions for parameters\>                                                     | Represents certain requirements you will need to follow |
+| \<Instructions for Parameters\>                                                     | Represents certain requirements you will need to follow |
 
 ---
 
