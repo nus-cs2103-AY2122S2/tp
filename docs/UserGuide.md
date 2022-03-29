@@ -2,17 +2,9 @@
 layout: page title: User Guide
 ---
 
-| Quick Links                         |
-|-------------------------------------|
-| [Content Page](#Content-Page)       |
-| [Quick start](#Quick-start)         |
-| [Features](#Features)               |
-| [Command Summary](#Command-Summary) |
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via interacting with the application through easy-to-use commands through a user-friendly interface. Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps if you can type fast. Even if you can't, this user guide will guide you through how to use UDT effectively and efficiently.
 
-
-**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via a Command Line Interface _(CLI)_ while still having the benefits of a Graphical User Interface _(GUI)_. If you can type fast, Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps.
-
-School administrators _(like teachers)_ can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
+School administrators _(like teachers)_ in charge of managing COVID can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
 
 # Content Page
 
@@ -37,16 +29,17 @@ School administrators _(like teachers)_ can use UDT to easily track COVID-19 cas
 </div>
 
 # Quick start
-- Ensure you have **Java 11** or above installed in your Computer.
-- Download the latest **ultimatedivoctracker.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
-- Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
-- Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-- Refer to the Features below for details of each command.
+1. Ensure you have **Java 11** or above installed in your Computer.
+   - You can download **Java 11** from [this link](https://www.oracle.com/java/technologies/downloads/#java11).
+2. Download the latest **ultimatedivoctracker.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
+3. Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
+4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
+5. Refer to the Features below for details of each command.
 
 <div markdown="block" class="alert alert-info">
 
 > :information_source: **Installation notes:**  
-> - Application data will be stored in the same folder containing the application executable.  
+> - Application save data will be stored in the same folder containing the **ultimatedivoctracker.jar** application.  
 > - Currently officially supported for **Windows**, **Mac** and **Linux** platforms.
 
 </div>
@@ -57,15 +50,15 @@ Below are a set of commands that can be used in the **_UDT_**. Their formats and
 <div markdown="block" class="alert alert-info">
 
 > :information_source: **Formatting notes:**  
-> - Words in `UPPER_CASE` are the parameters to be supplied.  
+> - Words in `UPPER_CASE` are the user inputs to be supplied.  
 > - Items in square brackets `[]` are optional.
 
 </div>
 
 ## Add a student: `add`
 Adds a student to the tracking list
-- Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ cc/CLASS s/STATUS [act/ACTIVITY] [MORE ACTIVITIES]`
-  - `NAME`, `ADDRESS`, `CLASS`, `ACTIVITY` takes a string of characters
+- Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ cc/CLASS s/STATUS [act/ACTIVITY] [act/MORE ACTIVITIES]`
+  - `NAME`, `ADDRESS`, `CLASS`, `ACTIVITY` takes in text
   - `EMAIL` follows the standard email formatting 
     - eg. `johntan@example.com`
   - `PHONE_NUMBER` takes a sequence of numbers
@@ -81,20 +74,21 @@ Adds a student to the tracking list
 > - Multiple activity tags can be added to a single student by using multiple `/act` prefixes  
 >   - Eg. `act/choir act/dance`  
 > - A student can also have no activity tags  
-> - Parameters can be in any order
+> - User inputs can be in any order
 
 </div>
 
-<div markdown="span" class="alert alert-warning" role="alert">
+<div markdown="span" class="alert alert-info" role="alert">
 
-> :warning: **Warning:** Capitalization of text will be reflected in the User Interface
+> :information_source: **Note:** Capitalization of text will be reflected in the User Interface
 
 </div>
 
 ## List all students: `list`
 Shows a list of all students in the application.
 - Format: `list`
-  - Any parameter after `list` is ignored
+  - Any user input after `list` is ignored
+    - `list 12345 john` is the same as `list`
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
@@ -114,7 +108,7 @@ Find an existing student in the application by their name
   - Searching for name returns a list of names contains the provided name
     - `find john` can find students _"John Tan"_ and _"John Lee"_
 - Example:
-  - `find john tan zi wei` will find student _"John Tan Zi Wei"_
+  - `find bernice` will find student _"Bernice Yu"_
 
 ![find command](images/user-guide/find.png)
 
@@ -122,6 +116,7 @@ Find an existing student in the application by their name
 Find an existing student in the application by their Covid-19 Status
 - Format: `findstatus STATUS`
   - Returns a list of students with the specified `STATUS`
+  - `STATUS` is either `positive`, `negative` or `close contact`
   - `STATUS` is case-insensitive
 - Examples:
   - `findstatus positive` finds all students that are labelled COVID positive
@@ -157,7 +152,7 @@ Finds an existing student in the application by the activities they are particip
 ![find activity command](images/user-guide/findactivity.png)
 
 ## Edit student details: `edit`
-Edits an existing student's details in the application by the Index provided and the areas that the user wants to edit
+Edits an existing student's details in the list Index provided and the parts that you want to edit
 - Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cc/CLASS] [s/STATUS] [act/ACTIVITIES]`
   - Edits the student at the specified `INDEX`
   - `INDEX` denotes the list index of the student in the displayed list
@@ -171,7 +166,7 @@ Edits an existing student's details in the application by the Index provided and
 
 > :bulb: **Tips:**  
 > - Filter the student list via __*find*__ commands to make finding the index easier  
-> - Leave other attributes of the student as is by omitting parameters from the command
+> - Omitting parts of the student details from the command will leave them unedited
 
 </div>
 
@@ -201,7 +196,7 @@ Format: `exit`
 
 <div markdown="span" class="alert alert-primary" role="alert">
 
-> :bulb: **Tip:** You can also close the application directly as it is functionally identical
+> :bulb: **Tip:** You can also close the application directly
 
 </div>
 
