@@ -7,9 +7,9 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.collections.FXCollections;
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.module.Module;
+import unibook.model.module.exceptions.DuplicateMeetingTimeException;
 import unibook.model.module.group.Group;
 import unibook.model.person.Name;
 import unibook.model.person.Phone;
@@ -20,6 +20,7 @@ import unibook.model.person.Phone;
 public class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
+    public static final String DUPLICATE_KEY_EVENT_MESSAGE_FORMAT = "Duplicate key event on %s found in group %s";
 
     private final String groupName;
     private final Set<LocalDateTime> meetingTimes;
@@ -47,10 +48,16 @@ public class JsonAdaptedGroup {
         this.meetingTimes = new HashSet<>(source.getMeetingTimes());
     }
 
+    /**
+     *  Returns group name.
+     */
+    public String getGroupName() {
+        return this.groupName;
+    }
+
 
     /**
      * Converts this Jackson-friendly adapted group object into the model's {@code Group} object.
-     *
      * @param module that this group is inside.
      * @throws IllegalValueException if there were any data constraints violated in the adapted Group.
      */
@@ -63,7 +70,18 @@ public class JsonAdaptedGroup {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
 
-        return new Group(groupName, module, FXCollections.observableArrayList(meetingTimes));
+        Group group = new Group(groupName, module);
+
+        for (LocalDateTime meetingTime : meetingTimes) {
+            try {
+                group.addMeetingTime(meetingTime);
+            } catch (DuplicateMeetingTimeException e) {
+                throw new IllegalValueException(String.format(DUPLICATE_KEY_EVENT_MESSAGE_FORMAT,
+                        meetingTime.toString(), group.getGroupName()));
+            }
+        }
+
+        return group;
     }
 
 }

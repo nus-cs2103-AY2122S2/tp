@@ -34,7 +34,8 @@ public class Messages {
     public static final String MESSAGE_TYPE_FIELD_MISSING = "The ty/<TYPE> field is missing!";
     public static final String MESSAGE_GROUP_FIELD_MISSING = "The g/<GROUPNAME> field is missing!";
     public static final String MESSAGE_VIEW_FIELD_MISSING = "The v/<VIEW> field is missing!";
-    public static final String MESSAGE_GROUP_NOT_IN_MODULE = "The group %s does not exist!";
+    public static final String MESSAGE_GROUP_NOT_IN_MODULE = "The group %s does not exist in the module!";
+
     public static final String MESSAGE_GROUP_NOT_IN_UNIBOOK = "The group %s does not exist in Unibook!";
     public static final String MESSAGE_DISPLAYED_GROUPS_WITH_NAME = "Displayed group(s) with name %s!";
     public static final String MESSAGE_DISPLAYED_PEOPLE_IN_GROUP = "Displayed people in %s %s!";
