@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.prescription.FindPrescriptionCommand;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
@@ -17,10 +18,7 @@ import seedu.address.logic.parser.medical.AddMedicalCommandParser;
 import seedu.address.logic.parser.medical.DeleteMedicalCommandParser;
 import seedu.address.logic.parser.medical.EditMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
-import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
-import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
-import seedu.address.logic.parser.prescription.EditPrescriptionCommandParser;
-import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
+import seedu.address.logic.parser.prescription.*;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
 import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
 import seedu.address.logic.parser.testresult.EditTestResultCommandParser;
@@ -190,13 +188,13 @@ public enum CommandType {
         requireNonNull(arguments);
         switch (viewCommandType) {
         case CONTACT:
-            throw new ParseException("To be implemented");
+            return new FindPrescriptionCommandParser().parse(arguments);
         case MEDICAL:
-            throw new ParseException("To be implemented");
+            return new FindPrescriptionCommandParser().parse(arguments);
         case CONSULTATION:
-            throw new ParseException("To be implemented");
+            return new FindPrescriptionCommandParser().parse(arguments);
         case PRESCRIPTION:
-            throw new ParseException("To be implemented");
+            return new FindPrescriptionCommandParser().parse(arguments);
         case TEST:
             return new FindTestResultCommandParser().parse(arguments);
         default:
