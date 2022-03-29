@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -86,6 +87,28 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if a person is in the same
+     * activity as the other.
+     */
+    public boolean hasSameActivity(Person otherStudent) {
+        Set<Activity> otherStudentActivities = otherStudent.getActivities();
+        Iterator<Activity> iterator = otherStudentActivities.iterator();
+        while (iterator.hasNext()) {
+            if (activities.contains(iterator.next())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a person has a specified activity.
+     */
+    public boolean hasActivity(Activity activity) {
+        return activities.contains(activity);
     }
 
     /**
