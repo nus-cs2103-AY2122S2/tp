@@ -780,42 +780,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 2.
 
-**Use case: Export address book**
+#### Import/Export CSV UseCases
+
+**UC19: Export CSV File**
 
 **MSS**
 
 1. User requests to export address book as file for ContaX
-2. ContaX saves a CSV file to the disk according to the format requested by the user
+2. ContaX saves a CSV file to the disk at `data/addressbook.csv`
 
    Use case ends.
 
-**Extensions**
-
-* 1a. User requests to export address book as file for Google Contacts
-
-  Use case resumes at step 2.
-
-* 1b. User requests to export address book as file for Microsoft Outlook
-
-  Use case resumes at step 2.
-
-**Use Case: Import CSV file**
+**UC20: Import CSV file**
 
 **MSS**
 
-1. User requests to import a CSV file
-2. User selects the CSV file to import
-3. ContactX imports the given CSV file
+1. User requests to import a CSV file from a specified file path
+2. ContactX imports the contacts from given CSV file
 
     Use case ends.
 
 **Extensions**
 
+* 1a. User enters custom column definitions
+    * Use case resumes at step 2<br>&nbsp;
+
 * 2a. Invalid CSV file selected
+    * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
 
-    * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.
-
-    * Use case ends.
 
 **Use case: User requests to perform a batch command**
 
