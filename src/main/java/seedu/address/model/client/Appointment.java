@@ -28,7 +28,7 @@ public class Appointment {
     public Appointment(String time) {
         requireNonNull(time);
         checkArgument(isValidAppointment(time), MESSAGE_CONSTRAINTS);
-        if (time == "") {
+        if (time.equals("")) {
             appointmentTime = null;
         } else {
             appointmentTime = LocalDateTime.parse(time, FORMATTER);
@@ -40,7 +40,7 @@ public class Appointment {
      * Checks whether the input String is of the correct format.
      */
     public static boolean isValidAppointment(String time) {
-        if (time == EMPTY_APPOINTMENT) {
+        if (time.equals(EMPTY_APPOINTMENT)) {
             return true;
         }
         try {
