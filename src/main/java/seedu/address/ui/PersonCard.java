@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
         flag.setText("Flag: " + person.getFlag().toString());
-        prevDateMet.setText("Last met: " + person.getPrevDateMet().value.toString());
+        prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
         info.setText("Info: " + person.getInfo().value);
 
         String meetingDetails = person.getScheduledMeeting().toString();
@@ -74,7 +74,7 @@ public class PersonCard extends UiPart<Region> {
             String[] meetingSplit = person.getScheduledMeeting().toString().split(" ");
             String meetingDate = meetingSplit[0];
             String meetingTime = meetingSplit[1];
-            scheduledMeeting.setText("Scheduled meeting: " + meetingDate + " at " + meetingTime);
+            scheduledMeeting.setText("Upcoming meeting:\n" + meetingDate + " at " + meetingTime);
         }
 
         salary.getChildren().add(new Label("Salary: $" + person.getSalary().value));

@@ -35,19 +35,37 @@
                   <FlowPane.margin>
                      <Insets right="7" />
                   </FlowPane.margin></Pane>
-            <FlowPane fx:id="tags" />
+            <FlowPane fx:id="tags" prefWrapLength="200" />
             </children>
          </FlowPane>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="prevDateMet" styleClass="cell_small_label" text="\$prevDateMet" />
       <Label fx:id="info" styleClass="cell_small_label" text="\$info" />
       <Label fx:id="flag" styleClass="cell_small_label" text="\$flag" />
-      <Label fx:id="scheduledMeeting" styleClass="cell_small_label" text="\$scheduledMeeting" />
     </VBox>
       <rowConstraints>
          <RowConstraints />
       </rowConstraints>
   </GridPane>
+   <FlowPane fx:id="meetingBox" alignment="CENTER">
+      <children>
+         <Pane fx:id="prevDateBox">
+            <children>
+            <Label fx:id="prevDateMet" styleClass="cell-date-label" text="\$prevDateMet" />
+            </children>
+            <FlowPane.margin>
+               <Insets right="20.0" />
+            </FlowPane.margin>
+         </Pane>
+         <Pane fx:id="nextMeetingBox">
+            <children>
+            <Label fx:id="scheduledMeeting" styleClass="cell-date-label" text="\$scheduledMeeting" />
+            </children>
+            <FlowPane.margin>
+               <Insets left="20.0" />
+            </FlowPane.margin>
+         </Pane>
+      </children>
+   </FlowPane>
 </HBox>
