@@ -196,6 +196,7 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] 
 
 * Edits the client named `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
   * Spaces in `NAME` will be counted as separate names, unless `NAME` fully matches client's name
     * Example: `edit John Doe p\88888888` will find clients with names containing `John` and `Doe`,
                 there exists a client with the name `John Doe`
@@ -204,7 +205,12 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] 
   * Input the position on the list of the client you wish to edit.
 
 Example:
-Scenario: You have clients named `John Doe` `John Smith` and `John Willams`
+
+**Scenario 1**: You have a client named `John Doe`
+* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to
+  `2020-12-04` which is 4th Dec 2020.
+  
+**Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
 * Running the command `edit n/John d/2020-12-04` will show a list of clients with names containing "John"
 
 ![edit_multiple_clients](images/editMultipleClients.png)
@@ -212,6 +218,7 @@ Scenario: You have clients named `John Doe` `John Smith` and `John Willams`
 * After typing `1`, the previous meeting date of the client with the name `John Doe` to `2020-12-04`
 
 ![edit_client_result](images/editClientResult.png)
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -254,6 +261,7 @@ Format: `delete NAME`
 
 * Deletes the client with the specified `NAME`.
   * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
   * Spaces in `NAME` will be counted as separate names, unless `NAME` fully matches client's name
     * Example: `edit John Doe p\88888888` will find clients with names containing `John` and `Doe`,
                 there exists a client with the name `John Doe`
