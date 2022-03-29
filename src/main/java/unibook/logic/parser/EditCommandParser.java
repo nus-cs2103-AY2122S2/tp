@@ -10,6 +10,7 @@ import static unibook.logic.parser.CliSyntax.PREFIX_MEETINGTIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
 import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static unibook.logic.parser.CliSyntax.PREFIX_NEWMOD;
+import static unibook.logic.parser.CliSyntax.PREFIX_OFFICE;
 import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
@@ -62,19 +63,9 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_MEETINGTIME,
                         PREFIX_TYPE,
                         PREFIX_DATETIME,
-                        PREFIX_KEYEVENT);
+                        PREFIX_KEYEVENT,
+                        PREFIX_OFFICE);
 
-        boolean isNamePresent = argMultimap.getValue(PREFIX_NAME).isPresent();
-        boolean isPhonePresent = argMultimap.getValue(PREFIX_PHONE).isPresent();
-        boolean isEmailPresent = argMultimap.getValue(PREFIX_EMAIL).isPresent();
-        boolean isTagPresent = argMultimap.getValue(PREFIX_TAG).isPresent();
-        boolean isModulePresent = argMultimap.getValue(PREFIX_MODULE).isPresent();
-        boolean isNewModPresent = argMultimap.getValue(PREFIX_NEWMOD).isPresent();
-        boolean isGroupPresent = argMultimap.getValue(PREFIX_GROUP).isPresent();
-        boolean isMeetingTimePresent = argMultimap.getValue(PREFIX_MEETINGTIME).isPresent();
-        boolean isTypePresent = argMultimap.getValue(PREFIX_TYPE).isPresent();
-        boolean isDateTimePresent = argMultimap.getValue(PREFIX_DATETIME).isPresent();
-        boolean isKeyEventPresent = argMultimap.getValue(PREFIX_KEYEVENT).isPresent();
         Index index;
 
         // Checks if there is proper indexing + proper option
@@ -123,6 +114,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
                 editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
             }
+
+            if (argMultimap.getValue(PREFIX_OFFICE).isPresent()) {
+                editPersonDescriptor.setOffice(ParserUtil.parseOffice(argMultimap.getValue(PREFIX_OFFICE).get()));
+            }
+
 
             Optional<ModuleCode> moduleCodeToAdd;
             Optional<String> groupName;

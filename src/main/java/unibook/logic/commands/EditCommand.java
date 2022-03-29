@@ -65,8 +65,10 @@ public class EditCommand extends Command {
             + "\n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
     public static final String MESSAGE_PERSON_NOT_STUDENT = "Person added to a group must only be a student";
+    public static final String MESSAGE_NOT_PROFESSOR = "Only can edit office field of professor";
     public static final String MESSAGE_STUDENT_NOT_IN_MOD = "Student not in module %1$s. Add student to "
             + "module first (e.g. edit 1 nm/NEW_MOD_TO_ADD).";
+    public static final String MESSAGE_EDIT_PERSON_GROUP_SUCCESS = "Student %1$s added to group %2$s.";
     public static final String MESSAGE_EDIT_MISSING = "Must include m/MODULECODE when editing a group";
     public static final String MESSAGE_GROUP_NOT_EXIST = "Group name %1$s does not exist!";
     public static final String MESSAGE_WRONG_DATE_FORMAT = "Date time must be in YYYY-MM-DD HH:mm format";
@@ -216,7 +218,7 @@ public class EditCommand extends Command {
         }
 
         if (personToEdit instanceof Professor) {
-            Office updatedOffice = ((Professor) personToEdit).getOffice();
+            Office updatedOffice = editPersonDescriptor.getOffice().orElse(((Professor) personToEdit).getOffice());
             return new Professor(updatedName, updatedPhone, updatedEmail, updatedTags, updatedOffice, updatedModules);
         } else {
             Set<Group> groups = ((Student) personToEdit).getGroups();
@@ -366,6 +368,10 @@ public class EditCommand extends Command {
 
             Person personToEdit = lastShownList.get(index.getZeroBased());
             Module checkMod = null;
+            if (this.editPersonDescriptor.getOffice().isPresent() && personToEdit instanceof Student) {
+                throw new CommandException(MESSAGE_NOT_PROFESSOR);
+            }
+
 
             // Checks if module that want to add to person is valid
             if (!editPersonDescriptor.getModules().equals(Optional.empty()) && latestModList.size() != 0) {
@@ -439,18 +445,18 @@ public class EditCommand extends Command {
                             moduleCode.toString()));
                 }
                 if (!modToEdit.hasGroupName(groupName)) {
-                    // TODO command exception that group doesnt exist
                     throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXIST, groupName));
                 } else if (editedPerson instanceof Professor) {
                     throw new CommandException(MESSAGE_PERSON_NOT_STUDENT);
                 } else if (!modToEdit.hasStudent((Student) editedPerson)) {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_MOD, moduleCode));
                 } else {
-                    modToEdit.addToGroupByName(groupName, (Student) editedPerson);
+
                     Group group = modToEdit.getGroupByName(groupName);
                     if (group.hasMember((Student) editedPerson)) {
                         throw new CommandException(MESSAGE_DUPLICATE_PERSON_IN_GROUP);
                     }
+                    modToEdit.addToGroupByName(groupName, (Student) editedPerson);
                     for (Person p : lastShownList) {
                         if (p instanceof Student) {
                             if (((Student) p).getGroups().contains(group)) {
@@ -460,6 +466,20 @@ public class EditCommand extends Command {
                         }
                     }
                 }
+
+                // Updates all the groups is in
+                if (personToEdit instanceof Student && editedPerson instanceof Student) {
+                    for (Group g : ((Student) personToEdit).getGroups()) {
+                        Student s = (Student) personToEdit;
+                        int i = g.getMembers().indexOf(s);
+                        g.getMembers().set(i, (Student) editedPerson);
+                    }
+                } else { }
+
+                model.setPerson(personToEdit, editedPerson);
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                return new CommandResult(String.format(MESSAGE_EDIT_PERSON_GROUP_SUCCESS, editedPerson, groupName));
+
             }
 
             // Updates all the groups is in
@@ -471,7 +491,6 @@ public class EditCommand extends Command {
                 }
             } else { }
 
-            // TODO find a way to edit all the
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
@@ -538,6 +557,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Office office;
         private Set<Tag> tags;
         private Set<Module> modules;
         private EditGroupDescriptor editGroupDescriptor;
@@ -557,6 +577,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setModules(toCopy.modules);
+            setOffice(toCopy.office);
             setGroups(toCopy.editGroupDescriptor);
             setModCode(toCopy.getModCode());
             setGroupName(toCopy.getGroupName());
@@ -569,7 +590,7 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             System.out.println(groupName.isPresent());
             System.out.println(modCode.isPresent());
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules)
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules, office)
                     || (groupName.isPresent() && modCode.isPresent());
         }
 
@@ -619,6 +640,14 @@ public class EditCommand extends Command {
 
         public void setEmail(Email email) {
             this.email = email;
+        }
+
+        public Optional<Office> getOffice() {
+            return Optional.ofNullable(office);
+        }
+
+        public void setOffice(Office office) {
+            this.office = office;
         }
 
         /**
