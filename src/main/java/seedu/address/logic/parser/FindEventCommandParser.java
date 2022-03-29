@@ -65,31 +65,31 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         if (namePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_NAME).get().split("\\s+"));
             for (String s : dummy) {
-                ParserUtil.parseTag(s);
+                ParserUtil.parseName(s);
             }
         }
         if (companyNamePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_COMPANY).get().split("\\s+"));
             for (String s : dummy) {
-                ParserUtil.parseTag(s);
+                ParserUtil.parseCompanyName(s);
             }
         }
         if (datePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_DATE).get().split("\\s+"));
             for (String s : dummy) {
-                ParserUtil.parseTag(s);
+                ParserUtil.parseDate(s);
             }
         }
         if (timePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_TIME).get().split("\\s+"));
             for (String s : dummy) {
-                ParserUtil.parseTag(s);
+                ParserUtil.parseTime(s);
             }
         }
         if (locationPresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_LOCATION).get().split("\\s+"));
             for (String s : dummy) {
-                ParserUtil.parseTag(s);
+                ParserUtil.parseLocation(s);
             }
         }
         if (tagPresent) {
