@@ -302,7 +302,7 @@ A call of `Model#addAppointment()` is shown below to illustrate how a call is pr
 
 #### Appointment Slot List
 
-The `freebetween` feature requires the display the available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
+The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
 
 Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically, abstracting the underlying dependency to external classes.
 
@@ -364,7 +364,7 @@ A high-level overview of the organization of the package is shown below.
 
 ![DateUtil Architecture](images/DateTimeUtilArchitecture.png)
 
-The organization of the time parser mirrors the date parsers, and their purposes are as follows:
+The organization of the time parser mirrors the date parser, and their purposes are as follows:
 
 * `TimeParser` / `DateParser`: Contains the actual parsing logic for determining the input format and the parsing logic to use
 * `TimeParserPatternProvider` / `DateParserPatternProvider`: Contains the Regex patterns required for parsing
