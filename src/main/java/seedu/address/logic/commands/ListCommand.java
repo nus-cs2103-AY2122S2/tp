@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.EntityType;
 import seedu.address.model.entity.exceptions.UnknownEntityException;
@@ -45,19 +46,19 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        String result = "";
+        String result;
         switch(entityType) {
         case STUDENT:
-            updateStudentList(model, result);
+            result = updateStudentList(model);
             break;
         case TA_MODULE:
-            updateModuleList(model, result);
+            result = updateModuleList(model);
             break;
         case CLASS_GROUP:
-            updateClassGroupList(model, result);
+            result = updateClassGroupList(model);
             break;
         case ASSESSMENT:
-            updateAssessmentList(model, result);
+            result = updateAssessmentList(model);
             break;
         default:
             throw new UnknownEntityException();
@@ -69,9 +70,10 @@ public class ListCommand extends Command {
      * Updates filtered student list in ModelManager.
      *
      * @param model ModelManager.
-     * @param result Result string to update.
+     * @return Result string.
      */
-    private void updateStudentList(Model model, String result) {
+    private String updateStudentList(Model model) {
+        String result;
         try {
             if (filterEntityType.isEmpty()) {
                 model.updateFilteredStudentList(PREDICATE_SHOW_ALL);
@@ -90,15 +92,17 @@ public class ListCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             result = MESSAGE_INVALID_INDEX;
         }
+        return result;
     }
 
     /**
-     * Updates filtered student list in ModelManager.
+     * Updates filtered class group list in ModelManager.
      *
      * @param model ModelManager.
-     * @param result Result string to update.
+     * @return Result string.
      */
-    private void updateClassGroupList(Model model, String result) {
+    private String updateClassGroupList(Model model) {
+        String result;
         try {
             if (filterEntityType.isEmpty()) {
                 model.updateFilteredClassGroupList(PREDICATE_SHOW_ALL);
@@ -113,28 +117,44 @@ public class ListCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             result = MESSAGE_INVALID_INDEX;
         }
+        return result;
     }
 
     /**
      * Updates filtered module list in ModelManager.
      *
      * @param model ModelManager.
-     * @param result Result string to update.
+     * @return Result string.
      */
-    private void updateModuleList(Model model, String result) {
+    private String updateModuleList(Model model) {
+        String result = String.format(MESSAGE_SUCCESS, MESSAGE_MODULES);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL);
-        result = String.format(MESSAGE_SUCCESS, MESSAGE_MODULES);
+        return result;
     }
 
     /**
      * Updates filtered assessment list in ModelManager.
      *
      * @param model ModelManager.
-     * @param result Result string to update.
+     * @return Result string.
      */
-    private void updateAssessmentList(Model model, String result) {
-        model.updateFilteredAssessmentList(PREDICATE_SHOW_ALL);
-        result = String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
+    private String updateAssessmentList(Model model) {
+        String result;
+        try {
+            if (filterEntityType.isEmpty()) {
+                model.updateFilteredAssessmentList(PREDICATE_SHOW_ALL);
+                String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
+            } else if (filterEntityType.get().equals(EntityType.TA_MODULE)) {
+                Predicate<Assessment> filter = filterAssessmentsByModule(model);
+                model.updateFilteredAssessmentList(filter);
+                String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
+            } else {
+                result = MESSAGE_INVALID_FILTER;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            result = MESSAGE_INVALID_INDEX;
+        }
+        return result;
     }
 
     /**
@@ -182,6 +202,23 @@ public class ListCommand extends Command {
         TaModule module = modules.get(filterEntityIndex.get().getZeroBased());
         return (ClassGroup classGroup) -> {
             if (module.equals(classGroup.getModule())) {
+                return true;
+            }
+            return false;
+        };
+    }
+
+    /**
+     * Filters all assessments that belong to the TaModule specified by filterEntityIndex.
+     *
+     * @param model ModelManager.
+     * @return Predicate that filters assessments.
+     */
+    private Predicate<Assessment> filterAssessmentsByModule(Model model) {
+        ObservableList<TaModule> modules = model.getUnfilteredModuleList();
+        TaModule module = modules.get(filterEntityIndex.get().getZeroBased());
+        return (Assessment assessment) -> {
+            if (module.equals(assessment.getTaModule())) {
                 return true;
             }
             return false;
