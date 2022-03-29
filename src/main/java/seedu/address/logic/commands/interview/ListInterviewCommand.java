@@ -63,11 +63,37 @@ public class ListInterviewCommand extends ListCommand {
         this.sortArgument = sortArgument;
     }
 
+    /**
+     * Creates an ListApplicantCommand to filter and sort then display {@code Interview}
+     */
+    public ListInterviewCommand(FilterType filterType, FilterArgument filterArgument, SortArgument sortArgument) {
+        this.filterType = filterType;
+        this.filterArgument = filterArgument;
+        this.sortArgument = sortArgument;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (filterType != null && filterArgument != null && sortArgument != null) {
+            Comparator<Interview> comparator = new InterviewDateComparator(sortArgument.toString());
 
-        if (filterType != null && filterArgument != null) {
+            if (filterType.type.equals("appl")) {
+                String[] applicantNameKeywords = filterArgument.toString().split("\\s+");
+                Predicate<Interview> predicateApplicantName =
+                        new InterviewApplicantPredicate(Arrays.asList(applicantNameKeywords));
+                model.updateFilterAndSortInterviewList(predicateApplicantName, comparator);
+            } else if (filterType.type.equals("pos")) {
+                String[] positionNameKeywords = filterArgument.toString().split("\\s+");
+                Predicate<Interview> predicatePositionName =
+                        new InterviewPositionPredicate(Arrays.asList(positionNameKeywords));
+                model.updateFilterAndSortInterviewList(predicatePositionName, comparator);
+            } else if (filterType.type.equals("date")) {
+                Predicate<Interview> predicateDate =
+                        new InterviewDatePredicate(LocalDate.parse(filterArgument.toString()));
+                model.updateFilterAndSortInterviewList(predicateDate, comparator);
+            }
+        } else if (filterType != null && filterArgument != null) {
             if (filterType.type.equals("appl")) {
                 String[] applicantNameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Interview> predicateApplicantName =

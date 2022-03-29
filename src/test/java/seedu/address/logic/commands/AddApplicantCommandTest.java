@@ -175,6 +175,21 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
+            
+        }
+
+        @Override
+        public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
+
+        }
+
+        @Override
+        public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
+
+        }
+
+        @Override
         public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }

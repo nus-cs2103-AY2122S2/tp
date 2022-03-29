@@ -60,11 +60,27 @@ public class ListPositionCommand extends ListCommand {
         this.sortArgument = sortArgument;
     }
 
+    /**
+     * Creates an ListApplicantCommand to filter and sort then display {@code Position}
+     */
+    public ListPositionCommand(FilterType filterType, FilterArgument filterArgument, SortArgument sortArgument) {
+        this.filterType = filterType;
+        this.filterArgument = filterArgument;
+        this.sortArgument = sortArgument;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        if (filterType != null && filterArgument != null) {
+        if (filterType != null && filterArgument != null && sortArgument != null) {
+            Comparator<Position> comparator = new PositionNameComparator(sortArgument.toString());
+            if (filterType.type.equals("name")) {
+                String[] nameKeywords = filterArgument.toString().split("\\s+");
+                Predicate<Position> predicate = new PositionNamePredicate(Arrays.asList(nameKeywords));
+                model.updateFilterAndSortPositionList(predicate, comparator);
+            }
+        } else if (filterType != null && filterArgument != null) {
             if (filterType.type.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Position> predicate = new PositionNamePredicate(Arrays.asList(nameKeywords));

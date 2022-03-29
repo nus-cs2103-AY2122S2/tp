@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.applicant.ListApplicantCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
 
 public abstract class GenericListParser<T extends Command> implements Parser<T> {
 

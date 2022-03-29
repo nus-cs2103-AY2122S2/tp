@@ -170,4 +170,10 @@ public interface Model {
     void updateSortInterviewList(Comparator<Interview> comparator);
 
     void updateSortPositionList(Comparator<Position> comparator);
+
+    void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator);
+
+    void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator);
+
+    void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator);
 }

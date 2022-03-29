@@ -195,6 +195,13 @@ public class ModelManager implements Model {
         filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
+        requireAllNonNull(predicate, comparator);
+        addressBook.sortApplicant(comparator);
+        filteredApplicants.setPredicate(predicate);
+    }
+
     //=========== Filtered Interview List Accessors =============================================================
 
     /**
@@ -219,6 +226,13 @@ public class ModelManager implements Model {
         filteredInterviews.setPredicate(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
+    @Override
+    public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
+        requireAllNonNull(predicate, comparator);
+        addressBook.sortInterview(comparator);
+        filteredInterviews.setPredicate(predicate);
+    }
+
     //=========== Filtered Position List Accessors =============================================================
     @Override
     public ObservableList<Position> getFilteredPositionList() {
@@ -236,6 +250,13 @@ public class ModelManager implements Model {
         requireNonNull(comparator);
         addressBook.sortPosition(comparator);
         filteredPositions.setPredicate(PREDICATE_SHOW_ALL_POSITIONS);
+    }
+
+    @Override
+    public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
+        requireAllNonNull(predicate, comparator);
+        addressBook.sortPosition(comparator);
+        filteredPositions.setPredicate(predicate);
     }
 
     //=========== Utility methods =============================================================

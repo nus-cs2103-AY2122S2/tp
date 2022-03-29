@@ -19,15 +19,28 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ListInterviewCommandParser extends GenericListParser<ListInterviewCommand> {
-
-    @Override
-    public ListInterviewCommand parseFilterAndSort(ArgumentMultimap argMultimap) {
-        return null;
-    }
-
     @Override
     public ListInterviewCommand returnFullList() {
         return new ListInterviewCommand();
+    }
+
+    @Override
+    public ListInterviewCommand parseFilterAndSort(ArgumentMultimap args) throws ParseException {
+        FilterType filterType =
+                ParserUtil.parseFilterType(DataType.INTERVIEW, args.getValue(PREFIX_FILTER_TYPE).get());
+        FilterArgument filterArgument =
+                ParserUtil.parseFilterArgument(args.getValue(PREFIX_FILTER_ARGUMENT).get());
+        SortArgument sortArgument =
+                ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
+
+        if (filterType.type.equals("date")) {
+            try {
+                LocalDate.parse(filterArgument.toString());
+            } catch (DateTimeParseException e) {
+                throw new ParseException(Messages.MESSAGE_INVALID_DATE);
+            }
+        }
+        return new ListInterviewCommand(filterType, filterArgument, sortArgument);
     }
 
     /**

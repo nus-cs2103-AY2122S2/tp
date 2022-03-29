@@ -17,13 +17,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class ListPositionCommandParser extends GenericListParser<ListPositionCommand> {
 
     @Override
-    public ListPositionCommand parseFilterAndSort(ArgumentMultimap argMultimap) {
-        return null;
+    public ListPositionCommand returnFullList() {
+        return new ListPositionCommand();
     }
 
     @Override
-    public ListPositionCommand returnFullList() {
-        return new ListPositionCommand();
+    public ListPositionCommand parseFilterAndSort(ArgumentMultimap args) throws ParseException {
+        FilterType filterType =
+                ParserUtil.parseFilterType(DataType.POSITION, args.getValue(PREFIX_FILTER_TYPE).get());
+        FilterArgument filterArgument =
+                ParserUtil.parseFilterArgument(args.getValue(PREFIX_FILTER_ARGUMENT).get());
+        SortArgument sortArgument =
+                ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
+        return new ListPositionCommand(filterType, filterArgument, sortArgument);
     }
 
     /**
@@ -37,7 +43,7 @@ public class ListPositionCommandParser extends GenericListParser<ListPositionCom
         SortArgument sortArgument =
                 ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
 
-            return new ListPositionCommand(sortArgument);
+        return new ListPositionCommand(sortArgument);
     }
 
     /**

@@ -61,7 +61,7 @@ public class ListApplicantCommand extends ListCommand {
     }
 
     /**
-     *
+     * Creates an ListApplicantCommand to filter and sort then display {@code Applicant}
      */
     public ListApplicantCommand(FilterType filterType, FilterArgument filterArgument, SortArgument sortArgument) {
         this.filterArgument = filterArgument;
@@ -76,10 +76,8 @@ public class ListApplicantCommand extends ListCommand {
             if (filterType.type.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-                model.updateFilteredApplicantList(predicate);
-
                 Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
-                model.updateSortApplicantList(comparator);
+                model.updateFilterAndSortApplicantList(predicate, comparator);
             }
         } else if (filterType != null && filterArgument != null) {
             if (filterType.type.equals("name")) {
