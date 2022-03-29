@@ -187,11 +187,19 @@ Examples:
 * `view P/Kelvin Darent` Displays the information of `Kelvin Darent`.
 * `view P/` Displays all players in the system.
 
-**To view a schedule:**<br>
+**To view schedules:**<br>
 
-Format: `view i/[INDEX]`
-* Displays the schedule of the specified `` numbered with the specified `INDEX`.
-* If no `INDEX` is provided, the list of all schedules of the `` will be displayed.
+Format: `view S/[KEYWORDS]`
+* Displays the schedule containing `KEYWORDS`, cases ignored.
+* If no `KEYWORDS` is provided, the list of all active schedules which happen at future dates will be displayed.
+
+Format: `view S/ a/all`
+* Displays all schedules added.
+* If no `all` is provided, error message will be displayed.
+
+Format: `view S/ a/archive`
+* Displays archived schedules only.
+* If no `archive` is provided, error message will be displayed.
 
 Examples:
 * `view i/1` Displays the information on `Lakaka`'s 1st schedule.

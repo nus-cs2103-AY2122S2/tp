@@ -64,7 +64,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_IN_LINEUP = "Player is not inside the lineup";
     public static final String MESSAGE_DELETE_PERSON_FROM_LINEUP_SUCCESS = "Person deleted from lineup %s: %s";
     public static final String MESSAGE_DELETE_LINEUP_SUCCESS = "Deleted Lineup: %s";
-    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Schedule: %1%s";
+    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Schedule: %s";
     public static final String MESSAGE_DELETE_FAILURE = "Delete cannot be executed.";
 
     private enum DeleteCommandType {
