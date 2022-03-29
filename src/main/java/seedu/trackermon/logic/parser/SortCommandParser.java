@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -63,16 +64,19 @@ public class SortCommandParser implements Parser<SortCommand> {
         order.put(ratingComparator, NO_VALUE);
         order.put(tagComparator, NO_VALUE);
 
-        nameComparator = putIntoMap(nameComparator, PREFIX_NAME, argMultimap);
-        statusComparator = putIntoMap(statusComparator, PREFIX_STATUS, argMultimap);
-        ratingComparator = putIntoMap(ratingComparator, PREFIX_RATING, argMultimap);
-        tagComparator = putIntoMap(tagComparator, PREFIX_TAG, argMultimap);
+        //put into Order map for every prefix used
+        Comparator<Show> finalNameComparator = putIntoMap(nameComparator, PREFIX_NAME, argMultimap);
+        Comparator<Show> finalStatusComparator = putIntoMap(statusComparator, PREFIX_STATUS, argMultimap);
+        Comparator<Show> finalRatingComparator = putIntoMap(ratingComparator, PREFIX_RATING, argMultimap);
+        Comparator<Show> finalTagComparator = putIntoMap(tagComparator, PREFIX_TAG, argMultimap);
 
+        //a new Map for knowing what word to search for in so/
         HashMap<Comparator<Show>, String> comparatorString = new HashMap<>();
-        comparatorString.put(nameComparator, VALUE_ORDER_NAME);
-        comparatorString.put(statusComparator, VALUE_ORDER_STATUS);
-        comparatorString.put(ratingComparator, VALUE_ORDER_RATING);
-        comparatorString.put(tagComparator, VALUE_ORDER_TAG);
+        comparatorString.put(finalNameComparator, VALUE_ORDER_NAME);
+        comparatorString.put(finalStatusComparator, VALUE_ORDER_STATUS);
+        comparatorString.put(finalRatingComparator, VALUE_ORDER_RATING);
+        comparatorString.put(finalTagComparator, VALUE_ORDER_TAG);
+        //reorder the Order map according to the input value in so/
         reorderMap(argMultimap, comparatorString);
 
         //sort the hashmap
@@ -81,14 +85,12 @@ public class SortCommandParser implements Parser<SortCommand> {
                 .collect(Collectors.toMap(Map.Entry::getKey,
                         Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
+        //the final comparator built according the Order Map
         Comparator<Show> comparator = buildComparator(sortedOrder);
 
-        //no prefixes are present, sort by name ascending
-        if (comparator == null) {
-            return new SortCommand(nameComparator);
-        }
+        //if no prefixes are present, sort by name ascending
+        return new SortCommand(Objects.requireNonNullElse(comparator, nameComparator));
 
-        return new SortCommand(comparator);
     }
 
     /**
@@ -132,17 +134,18 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     private static Comparator<Show> putIntoMap(Comparator<Show> comparator,
                                                Prefix prefix, ArgumentMultimap argMultimap) {
+        Comparator<Show> newComparator = comparator;
         if (arePrefixesPresent(argMultimap, prefix)) {
             String valueName = argMultimap.getValue(prefix).orElse(VALUE_ASC);
             valueName = valueName.toUpperCase().trim();
             if (valueName.equals(VALUE_DSC)) {
-                comparator = comparator.reversed();
+                newComparator = comparator.reversed();
             }
-            order.put(comparator, startingValue);
+            order.put(newComparator, startingValue);
             startingValue++;
         }
 
-        return comparator;
+        return newComparator;
     }
 
     /**
