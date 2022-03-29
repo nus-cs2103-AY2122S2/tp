@@ -23,6 +23,7 @@ public class MeetCommand extends Command {
             + "Parameters: NAME (must be found in HustleBook), DATE (YYYY-MM-DD format), TIME (24HR Format)\n"
             + "Example: " + COMMAND_WORD + " NAME" + " m/2022-02-23" + " t/1530";
 
+    public static final String MESSAGE_MEETING_CLASH = "A meeting clash is detected!";
     public static final String MESSAGE_SCHEDULE_MEETING_PERSON_SUCCESS = "Updated a meeting with %1$s";
 
     private final Name targetName;
@@ -40,6 +41,11 @@ public class MeetCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasSameMeeting(scheduledMeeting)) {
+            throw new CommandException(MeetCommand.MESSAGE_MEETING_CLASH);
+        }
+
         List<Person> lastShownList = model.getFilteredPersonList();
         HustleBook tempHustleBook = new HustleBook();
         Index targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);

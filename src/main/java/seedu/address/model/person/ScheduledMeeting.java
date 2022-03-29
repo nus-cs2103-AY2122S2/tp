@@ -53,13 +53,19 @@ public class ScheduledMeeting {
      * @param otherMeeting The other meeting to check against.
      * @return true if this meeting has the same date and time as the other meeting.
      */
-    public boolean isSameMeeting(ScheduledMeeting otherMeeting) {
+    public boolean hasSameMeeting(ScheduledMeeting otherMeeting) {
         if (otherMeeting == this) {
             return true;
         }
 
-        return otherMeeting != null
-                && otherMeeting.equals(this);
+        if (otherMeeting != null
+                && otherMeeting.hasMeetingScheduled()
+                && this.hasMeetingScheduled()) {
+            return otherMeeting.getDate().equals(getDate())
+                    && otherMeeting.getTime().equals(getTime());
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -73,13 +79,15 @@ public class ScheduledMeeting {
         }
 
         ScheduledMeeting otherMeeting = (ScheduledMeeting) other;
-        // Check if both does not have any scheduled meetings
-        if (!otherMeeting.hasMeetingScheduled() && !this.hasMeetingScheduled()) {
-            return true;
+        // Compare both date and time only if both has scheduled meetings
+        if (otherMeeting.hasMeetingScheduled() && this.hasMeetingScheduled()) {
+            return otherMeeting.getDate().equals(getDate())
+                    && otherMeeting.getTime().equals(getTime());
+        } else if (!otherMeeting.hasMeetingScheduled() && !this.hasMeetingScheduled()) {
+            return true; // Return true if both have no meeting scheduled
+        } else {
+            return false;
         }
-
-        return otherMeeting.getDate().equals(getDate())
-                && otherMeeting.getTime().equals(getTime());
     }
 
     @Override
