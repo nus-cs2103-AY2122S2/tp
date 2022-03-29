@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="518.0" spacing="5.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="518.0" spacing="5.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <Label fx:id="name" style="-fx-text-fill: WHITE;" styleClass="cell_title_label" text="\$name" />
    <Label fx:id="subject" style="-fx-text-fill: WHITE;" styleClass="cell_small_label" text="\$subject" />
    <Label fx:id="date" style="-fx-text-fill: WHITE;" styleClass="cell_small_label" text="\$date" />
