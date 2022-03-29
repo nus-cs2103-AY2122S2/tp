@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AttendanceUtil.ATTENDANCE_DATE_GUI_FORMATTER;
 
 import java.util.Optional;
@@ -12,8 +13,8 @@ import seedu.address.model.attendance.AttendanceEntry;
  */
 public class AttendanceTag {
     private static final String MISSING_ATTENDANCE_TAG_STYLE = "-fx-background-color: #c4c4c4";
-    private static final String PRESENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #95ff7a";
-    private static final String ABSENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #ff7e7e";
+    private static final String PRESENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #90be6d";
+    private static final String ABSENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #ff595e";
 
     /**
      * Private constructor to prevent creation.
@@ -30,6 +31,7 @@ public class AttendanceTag {
      * and a grey label if no attendance was marked on that day.
      */
     public static Label createAttendanceTag(AttendanceEntry attendanceEntry) {
+        requireNonNull(attendanceEntry);
         Optional<Boolean> isPresent = attendanceEntry.getIsPresent();
         String dateString = attendanceEntry.getAttendanceDate()
             .format(ATTENDANCE_DATE_GUI_FORMATTER);

@@ -90,4 +90,19 @@ public class AttendanceUtil {
 
         return weeklyAttendanceList;
     }
+
+    public static List<AttendanceEntry> getNextTwoDaysTransport(AttendanceHashMap attendanceHashMap) {
+        requireNonNull(attendanceHashMap);
+        ArrayList<AttendanceEntry> nextTwoDaysTransportList = new ArrayList<>();
+
+        LocalDate currentDate = LocalDate.now(); // the current date
+        LocalDate endDate = currentDate.plusDays(2);
+
+        for (LocalDate d = currentDate; d.isBefore(endDate); d = d.plusDays(1)) {
+            AttendanceEntry entry = attendanceHashMap.getAttendance(d).orElse(new MissingAttendanceEntry(d));
+            nextTwoDaysTransportList.add(entry);
+        }
+
+        return nextTwoDaysTransportList;
+    }
 }

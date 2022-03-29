@@ -14,12 +14,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.EditPetDescriptorBuilder;
+import seedu.address.testutil.PresentAttendanceDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -65,13 +67,22 @@ public class CommandTestUtil {
     public static final EditCommand.EditPetDescriptor DESC_AMY;
     public static final EditCommand.EditPetDescriptor DESC_BOB;
 
+    public static final PresentAttendanceDescriptor DESC_WITH_TRANSPORT_ARRANGEMENT;
+    public static final PresentAttendanceDescriptor DESC_WITHOUT_TRANSPORT_ARRANGEMENT;
+
     static {
         DESC_AMY = new EditPetDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withOwnerName(VALID_OWNER_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_AMY).withOwnerName(VALID_OWNER_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPetDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_WITH_TRANSPORT_ARRANGEMENT = new PresentAttendanceDescriptorBuilder()
+            .withDate("2022-03-27").withPickUpTime("09:00").withDropOffTime("17:30")
+            .build();
+        DESC_WITHOUT_TRANSPORT_ARRANGEMENT = new PresentAttendanceDescriptorBuilder()
+            .withDate("2022-03-27")
+            .build();
     }
 
     /**
@@ -80,7 +91,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -95,7 +106,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -116,6 +127,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPetList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the pet at the given {@code targetIndex} in the
      * {@code model}'s address book.

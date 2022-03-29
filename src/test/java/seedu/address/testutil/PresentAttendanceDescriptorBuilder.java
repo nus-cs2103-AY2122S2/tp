@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import seedu.address.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 
 /**
- * A utility class to help with building PresentAttendanceEntry objects.
+ * A utility class to help with building PresentAttendanceDescriptor objects.
  */
 public class PresentAttendanceDescriptorBuilder {
 
