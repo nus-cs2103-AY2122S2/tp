@@ -116,13 +116,13 @@ class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertCommandException(invalidCommand, "\"" + "uicfhmowqewca" + "\" - " + MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 20";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, "\"" + "delete 20" + "\" - " + MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
