@@ -17,6 +17,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
+    private int numOfTask;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -25,6 +26,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        numOfTask = 0;
     }
 
     /**
@@ -61,6 +63,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email);
+        return new Person(name, phone, email, numOfTask);
     }
 }
