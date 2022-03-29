@@ -1,5 +1,6 @@
 package seedu.ibook.model.product.filters;
 
+import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.product.Product;
 
 public class OutOfStockFilter extends AttributeFilter {
@@ -25,7 +26,7 @@ public class OutOfStockFilter extends AttributeFilter {
 
     @Override
     public boolean test(Product otherProduct) {
-        return otherProduct.getTotalQuantity() == 0;
+        return otherProduct.getTotalQuantity().equals(new Quantity(0));
     }
 
     @Override
