@@ -58,7 +58,6 @@ public class BuyerBuilder {
         return this;
     }
 
-
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code client} that we are building.
      */
