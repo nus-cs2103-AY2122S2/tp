@@ -3,9 +3,9 @@ package seedu.address.model.pet.comparator;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Comparator;
+import java.util.Optional;
 
 import seedu.address.model.attendance.AttendanceEntry;
-import seedu.address.model.attendance.PresentAttendanceEntry;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -22,17 +22,14 @@ public class PetPickUpTimeComparator implements Comparator<Pet> {
      */
     @Override
     public int compare(Pet first, Pet second) {
-        AttendanceEntry firstAttendanceEntry = first.getAttendanceHashMap().getAttendanceEntry(today);
-        AttendanceEntry secondAttendanceEntry = second.getAttendanceHashMap().getAttendanceEntry(today);
+        Optional<AttendanceEntry> firstAttendanceEntry = first.getAttendanceHashMap().getAttendance(today);
+        Optional<AttendanceEntry> secondAttendanceEntry = second.getAttendanceHashMap().getAttendance(today);
 
-        boolean isFirstPresent = firstAttendanceEntry instanceof PresentAttendanceEntry;
-        boolean isSecondPresent = secondAttendanceEntry instanceof PresentAttendanceEntry;
-
-        if (isFirstPresent && isSecondPresent) {
-            return comparePresentAttendanceEntries(firstAttendanceEntry, secondAttendanceEntry);
-        } else if (isFirstPresent && !isSecondPresent) {
+        if (firstAttendanceEntry.isPresent() && secondAttendanceEntry.isPresent()) {
+            return compareAttendanceEntries(firstAttendanceEntry, secondAttendanceEntry);
+        } else if (firstAttendanceEntry.isPresent() && !secondAttendanceEntry.isPresent()) {
             return -1;
-        } else if (!isFirstPresent && isSecondPresent) {
+        } else if (!firstAttendanceEntry.isPresent() && secondAttendanceEntry.isPresent()) {
             return 1;
         } else {
             return 0;
@@ -40,23 +37,26 @@ public class PetPickUpTimeComparator implements Comparator<Pet> {
     }
 
     /**
-     * Compares presentAttendanceEntries of pets based on their drop off time.Used in compare method.
-     * @param firstPet AttendanceEntry.
-     * @param secondPet AttendanceEntry.
+     * Compares compareAttendanceEntries of pets based on their pick up time. Used in compare method.
+     * @param firstPet Optional<AttendanceEntry>.
+     * @param secondPet Optional<AttendanceEntry>.
      * @return Value signifying in the difference between the comparing attribute.
      */
-    private int comparePresentAttendanceEntries(AttendanceEntry firstPet, AttendanceEntry secondPet) {
-        boolean isFirstPickUpTimePresent = firstPet.getPickUpTime().isPresent();
-        boolean isSecondPickUpTimePresent = secondPet.getPickUpTime().isPresent();
+    private int compareAttendanceEntries(Optional<AttendanceEntry> firstPet, Optional<AttendanceEntry> secondPet) {
+        AttendanceEntry firstPetAttendanceEntry = firstPet.get();
+        AttendanceEntry secondPetAttendanceEntry = secondPet.get();
 
-        if (isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
-            LocalTime firstPickUpTime = firstPet.getPickUpTime().get();
-            LocalTime secondPickUpTime = secondPet.getPickUpTime().get();
-            return firstPickUpTime.compareTo(secondPickUpTime);
-        } else if (isFirstPickUpTimePresent && !isSecondPickUpTimePresent) {
-            return 1;
-        } else if (!isFirstPickUpTimePresent && isSecondPickUpTimePresent) {
+        boolean isFirstPetPickUpPresent = firstPetAttendanceEntry.hasTransportArrangement();
+        boolean isSecondPetPickUpTimePresent = secondPetAttendanceEntry.hasTransportArrangement();
+
+        if (isFirstPetPickUpPresent && isSecondPetPickUpTimePresent) {
+            LocalTime firstDropOffTime = firstPetAttendanceEntry.getPickUpTime().get();
+            LocalTime secondDropOffTime = secondPetAttendanceEntry.getPickUpTime().get();
+            return firstDropOffTime.compareTo(secondDropOffTime);
+        } else if (isFirstPetPickUpPresent && !isSecondPetPickUpTimePresent) {
             return -1;
+        } else if (!isFirstPetPickUpPresent && isSecondPetPickUpTimePresent) {
+            return 1;
         } else {
             return 0;
         }

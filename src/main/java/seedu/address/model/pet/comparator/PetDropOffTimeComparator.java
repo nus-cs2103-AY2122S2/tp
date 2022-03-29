@@ -3,9 +3,9 @@ package seedu.address.model.pet.comparator;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Comparator;
+import java.util.Optional;
 
 import seedu.address.model.attendance.AttendanceEntry;
-import seedu.address.model.attendance.PresentAttendanceEntry;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -22,17 +22,14 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
      */
     @Override
     public int compare(Pet first, Pet second) {
-        AttendanceEntry firstAttendanceEntry = first.getAttendanceHashMap().getAttendanceEntry(today);
-        AttendanceEntry secondAttendanceEntry = second.getAttendanceHashMap().getAttendanceEntry(today);
+        Optional<AttendanceEntry> firstAttendanceEntry = first.getAttendanceHashMap().getAttendance(today);
+        Optional<AttendanceEntry> secondAttendanceEntry = second.getAttendanceHashMap().getAttendance(today);
 
-        boolean isFirstPresent = firstAttendanceEntry instanceof PresentAttendanceEntry;
-        boolean isSecondPresent = secondAttendanceEntry instanceof PresentAttendanceEntry;
-
-        if (isFirstPresent && isSecondPresent) {
-            return comparePresentAttendanceEntries(firstAttendanceEntry, secondAttendanceEntry);
-        } else if (isFirstPresent && !isSecondPresent) {
+        if (firstAttendanceEntry.isPresent() && secondAttendanceEntry.isPresent()) {
+            return compareAttendanceEntries(firstAttendanceEntry, secondAttendanceEntry);
+        } else if (firstAttendanceEntry.isPresent() && !secondAttendanceEntry.isPresent()) {
             return -1;
-        } else if (!isFirstPresent && isSecondPresent) {
+        } else if (!firstAttendanceEntry.isPresent() && secondAttendanceEntry.isPresent()) {
             return 1;
         } else {
             return 0;
@@ -40,23 +37,26 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
     }
 
     /**
-     * Compares presentAttendanceEntries of pets based on their drop off time. Used in compare method.
-     * @param firstPet AttendanceEntry.
-     * @param secondPet AttendanceEntry.
+     * Compares compareAttendanceEntries of pets based on their drop off time. Used in compare method.
+     * @param firstPet Optional<AttendanceEntry>.
+     * @param secondPet Optional<AttendanceEntry>.
      * @return Value signifying in the difference between the comparing attribute.
      */
-    private int comparePresentAttendanceEntries(AttendanceEntry firstPet, AttendanceEntry secondPet) {
-        boolean isFirstDropOffTimePresent = firstPet.getDropOffTime().isPresent();
-        boolean isSecondDropOffTimePresent = secondPet.getDropOffTime().isPresent();
+    private int compareAttendanceEntries(Optional<AttendanceEntry> firstPet, Optional<AttendanceEntry> secondPet) {
+        AttendanceEntry firstPetAttendanceEntry = firstPet.get();
+        AttendanceEntry secondPetAttendanceEntry = secondPet.get();
 
-        if (isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
-            LocalTime firstDropOffTime = firstPet.getDropOffTime().get();
-            LocalTime secondDropOffTime = secondPet.getDropOffTime().get();
+        boolean isFirstPetDropOffTimePresent = firstPetAttendanceEntry.hasTransportArrangement();
+        boolean isSecondPetDropOffTimePresent = secondPetAttendanceEntry.hasTransportArrangement();
+
+        if (isFirstPetDropOffTimePresent && isSecondPetDropOffTimePresent) {
+            LocalTime firstDropOffTime = firstPetAttendanceEntry.getDropOffTime().get();
+            LocalTime secondDropOffTime = secondPetAttendanceEntry.getDropOffTime().get();
             return firstDropOffTime.compareTo(secondDropOffTime);
-        } else if (isFirstDropOffTimePresent && !isSecondDropOffTimePresent) {
-            return 1;
-        } else if (!isFirstDropOffTimePresent && isSecondDropOffTimePresent) {
+        } else if (isFirstPetDropOffTimePresent && !isSecondPetDropOffTimePresent) {
             return -1;
+        } else if (!isFirstPetDropOffTimePresent && isSecondPetDropOffTimePresent) {
+            return 1;
         } else {
             return 0;
         }
