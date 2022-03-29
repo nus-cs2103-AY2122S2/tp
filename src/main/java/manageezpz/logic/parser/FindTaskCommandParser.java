@@ -85,15 +85,13 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         } else {
             return currentPrefixes.get(0);
         }
-
     }
 
     private List<String> getDescriptions(ArgumentMultimap argMultiMap) {
         List<String> descriptions = null;
         if (argMultiMap.isPrefixExist(PREFIX_DESCRIPTION)) {
-            String description = argMultiMap.getValue(PREFIX_DESCRIPTION).get();
-            String[] descriptionArray = description.split("\\s+");
-            descriptions = List.of(descriptionArray);
+            String descriptionString = argMultiMap.getValue(PREFIX_DESCRIPTION).get();
+            descriptions = List.of(descriptionString.split("\\s+"));
             checkIfValidDescription(descriptions);
         }
         return descriptions;

@@ -15,7 +15,7 @@ import manageezpz.logic.parser.Prefix;
  */
 public class TaskMultiplePredicate implements Predicate<Task> {
     private final Prefix taskType;
-    private final List<String> description;
+    private final List<String> descriptions;
     private final Date date;
     private final Priority priority;
     private final String assignee;
@@ -24,22 +24,22 @@ public class TaskMultiplePredicate implements Predicate<Task> {
     /**
      * The constructor for predicate.
      * @param taskType The task type to search
-     * @param description The description to search
+     * @param descriptions The description to search
      * @param date The date of either the deadline or event
      * @param priority The priority of the task
      * @param assignee The employees assigned to the tasks
      * @param isMarked Whether the task is marked
      */
-    public TaskMultiplePredicate(Prefix taskType, List<String> description, Date date, Priority priority,
+    public TaskMultiplePredicate(Prefix taskType, List<String> descriptions, Date date, Priority priority,
                                  String assignee, Boolean isMarked) {
         this.taskType = taskType;
-        this.description = description;
+        this.descriptions = descriptions;
         this.date = date;
         this.priority = priority;
         this.assignee = assignee;
         this.isMarked = isMarked;
 
-        boolean isAtLeastOneNotNull = (this.taskType != null) || (this.description != null) || (this.date != null)
+        boolean isAtLeastOneNotNull = (this.taskType != null) || (this.descriptions != null) || (this.date != null)
                 || (this.priority != null) || (this.assignee != null) || (this.isMarked != null);
         assert isAtLeastOneNotNull : "At least one search option should be specified";
     }
@@ -52,7 +52,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         // Checks if the specific search term is specified in the parameter, then check on the task provided.
         // Defaults to true if not specified.
         boolean hasTaskType = taskType != null ? checkIfHasSpecificTaskType(task) : true;
-        boolean hasKeyword = description != null ? checkIfHasKeywords(task) : true;
+        boolean hasKeyword = descriptions != null ? checkIfHasKeywords(task) : true;
         boolean hasDate = date != null ? checkIfHasDate(task) : true;
         boolean hasPriority = priority != null ? checkIfHasPriority(task) : true;
         boolean hasAssignee = assignee != null ? checkIfHasAssignee(task) : true;
@@ -71,7 +71,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
 
     private boolean checkIfHasKeywords(Task task) {
         String otherTaskDescription = task.getDescription().toString();
-        return description.stream()
+        return descriptions.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(otherTaskDescription, keyword));
     }
 
@@ -116,12 +116,12 @@ public class TaskMultiplePredicate implements Predicate<Task> {
             return true;
         } else if (obj instanceof TaskMultiplePredicate) {
             TaskMultiplePredicate pre = (TaskMultiplePredicate) obj;
-            boolean isSameTaskType = isSameTaskType(pre.taskType);
-            boolean isSameDescription = isSameDescription(pre.description);
-            boolean isSameDate = isSameDate(pre.date);
-            boolean isSamePriority = isSamePriority(pre.priority);
-            boolean isSameAssignee = isSameAssignee(pre.assignee);
-            boolean isSameIsMarked = isSameIsMarked(pre.isMarked);
+            boolean isSameTaskType = isSameOption(taskType, pre.taskType);
+            boolean isSameDescription = isSameOption(descriptions, pre.descriptions);
+            boolean isSameDate = isSameOption(date, pre.date);
+            boolean isSamePriority = isSameOption(priority, pre.priority);
+            boolean isSameAssignee = isSameOption(assignee, pre.assignee);
+            boolean isSameIsMarked = isSameOption(isMarked, pre.isMarked);
 
             return isSameTaskType
                     && isSameDescription && isSameDate && isSamePriority && isSameAssignee && isSameIsMarked;
@@ -129,45 +129,10 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         return false;
     }
 
-    private boolean isSameTaskType(Prefix taskType) {
-        if (taskType != null) {
-            return taskType.equals(this.taskType);
+    private boolean isSameOption(Object currentObj, Object otherObj) {
+        if (otherObj != null) {
+            return otherObj.equals(currentObj);
         }
-        return this.taskType == null;
-    }
-
-    private boolean isSameDescription(List<String> description) {
-        if (description != null) {
-            return description.equals(this.description);
-        }
-        return this.description == null;
-    }
-
-    private boolean isSameDate(Date date) {
-        if (date != null) {
-            return date.equals(this.date);
-        }
-        return this.date == null;
-    }
-
-    private boolean isSamePriority(Priority priority) {
-        if (priority != null) {
-            return priority.equals(this.priority);
-        }
-        return this.priority == null;
-    }
-
-    private boolean isSameAssignee(String assignee) {
-        if (assignee != null) {
-            return assignee.equals(this.assignee);
-        }
-        return this.assignee == null;
-    }
-
-    private boolean isSameIsMarked(Boolean isMarked) {
-        if (isMarked != null) {
-            return isMarked.equals(this.isMarked);
-        }
-        return this.isMarked == null;
+        return currentObj == null;
     }
 }
