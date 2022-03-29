@@ -246,21 +246,20 @@ public class Transaction implements Serializable {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Amount: ")
-                .append(getAmount())
-                .append("; Transaction date: ")
+        builder.append(getAmount())
+                .append("; ")
                 .append(getTransactionDate())
-                .append("; Person email: ")
-                .append(getPersonId());
+                .append("; ")
+                .append(getPersonId())
+                .append("; ");
 
         if (getDueDate().isPresent()) {
-            builder.append("; Due date: ")
-                    .append(getDueDate().get());
+            builder.append(getDueDate().get())
+                    .append("; ");
         }
 
         if (getNote().isPresent()) {
-            builder.append("; Note: ")
-                    .append(getNote().get());
+            builder.append(getNote().get());
         }
 
         return builder.toString();
