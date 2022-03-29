@@ -105,43 +105,129 @@ Examples:
 
 ### Listing entries: `list`
 
-Lists entries in UniBook according to a specified listing criteria.
+Lists entries in UniBook according to a specified listing criteria. Behaves differently depending
+on currently active view.
 
-Format: `list o/OPTION [m/MODULE] [ty/TYPE]`, `list v/VIEW`
+**Changing UniBook views**
 
-* Lists all entries in the UniBook based on the user specified option and criteria.
-* If no argument is provided, UniBook simply lists every entry depending on the currently active view.
+This command applies for all `views`.
 
-OPTION values:
+Format: `list o/view v/<VIEWTYPE>`
 
-* `module` -  lists all contacts that are participants of a module which is specified by entering 
-`/m <MODULECODE>`.
+* Changes the view of the `UniBook` to the specified view type. Available arguments for 
+`VIEWTYPE` are `people`/`groups`/`modules`.
+* Example: `list o/view v/modules` switches the `UniBook` to the `modules` view.  
 
-* `type` - lists all contacts by their contact type, specified by entering `ty/<TYPE>` where
-`<TYPE>` is either `professors` or `students`.
+**Commands while in the `People` view**
 
-* [NOT READY] `group` - lists all contacts that are participants of that group
+These commands apply while in the `People` view.
 
-VIEW values:
-* `people` - switches to people view, automatically lists all persons
-* `modules` - switches to modules view, automatically list all modules
+Format: `list`
 
-Examples:
+* Lists all people in the UniBook.
 
-* `list` displays every entry depending on currently active view.
+Format: `list type/<PERSONTYPE>`
 
-* `list o/module m/CS2103` lists all contacts related to the module CS2103
+* Lists all people of a specific type. Available arguments for `PERSONTYPE` are `students`/`professors`.
+* Example: `list type/professors` lists every `Professor` in the `UniBook`.
 
-* `list o/type ty/professors` lists all professors
+Format: `list o/module m/<MODULECODE>`
 
-* `list o/module m/CS2103 ty/professors` lists all professors of the module CS2103
+* Lists all people in a given `Module`.
+* Example: `list o/module m/CS2103` displays all people who are in the module `CS2103`.
 
-* `list o/module m/CS2103 ty/students` lists all students of the module CS2103
+Format: `list o/module m/<MODULECODE> type/<PERSONTYPE>`
 
-* `list v/modules` switches the UniBook to `modules` view.
+* Lists all people in a given `Module` who are of a specific type.
+* Example: `list o/module m/cs2103 type/students` lists all `students` who are in the module `CS2103`.
 
+Format: `list o/group m/<MODULECODE> g/<GROUPNAME>`
+
+* Lists all students who are in a given `Group` of a given `Module`.
+* Example: `list o/group m/CS2103 g/W16-1` lists all students in group `W16-1` of module `CS2103`.
+
+**Commands while in the `Modules` view**
+
+These commands apply while in the `Modules` view.
+
+Format: `list`
+
+- Lists all modules.
+
+Format: `list m/<MODULECODE>`
+
+- Lists a module with a given module code.
+- Example: `list m/CS2103` lists the module `CS2103`.
+
+Format: `list n/<KEYWORD>`
+
+- Lists modules which have module names containing the given keyword.
+- Example: `list n/Software` will display all modules that contain `Software` in their module name.
+
+Format: `list ke/<KEYEVENT>`
+
+- Lists modules which has a specific type of key event. Acceptable arguments for `KEYEVENT` are 
+  `EXAM/QUIZ/ASSIGNMENT_DUE/ASSIGNMENT_RELEASE`.
+- Example: `list ke/EXAM` will display all modules that have key event(s) of type `EXAM`.
+
+Format: `list dt/<YYYY-MM-DD>`
+
+- Lists modules which has any type of key event(s) falling on a given date.
+- Example: `list dt/2022-05-04` displays all modules with any key event(s) falling on `May 4th 2022`.
+
+Format: `list dt/<YYYY-MM-DD> ke/<KEYEVENT>`
+
+- Lists all modules which has a specific type of key event falling on a given date. Acceptable arguments for `KEYEVENT` are
+  `EXAM/QUIZ/ASSIGNMENT_DUE/ASSIGNMENT_RELEASE`.
+- Example: `list dt/2022-05-04 ke/QUIZ` displays all modules with key event(s) `Quiz` falling on `May 4th 2022`.
+
+Format: `list dt/<YYYY-MM-DD> n/<KEYWORD>`
+
+- Lists all modules which have a module name containing a given name and any type of key event(s) 
+  falling on a given date.
+- Example: `list dt/2022-05-04 n/Network` displays all modules that have `Network` in their module name and
+have key events falling on `May 4th 2022`.
   
-* [NOT READY] `list o/group W16-T1` lists all contacts that are related to the group W16-T1
+Format: `list n/<KEYWORD> ke/<KEYEVENT>`
+- Lists all modules which has a module containing a given name and a specific type of key event.
+  Acceptable arguments for `KEYEVENT` are
+  `EXAM/QUIZ/ASSIGNMENT_DUE/ASSIGNMENT_RELEASE`.
+- Example: `list n/Software ke/ASSIGNMENT_DUE` displays all modules that have `Software` in their module name and
+have key event(s) of type `ASSIGNMENT_DUE`.
+  
+Format: `list n/<KEYWORD> ke/<KEYEVENT> dt/<YYYY-MM-DD>`
+- Lists all modules which has a module containing a given name and a specific type of key event falling
+on a given date. Acceptable arguments for `KEYEVENT` are `EXAM/QUIZ/ASSIGNMENT_DUE/ASSIGNMENT_RELEASE`.
+- Example: `list n/Software ke/ASSIGNMENT_DUE dt/2022-05-04` displays all modules that have `Software` 
+  in their module name and have key event(s) of type `ASSIGNMENT_DUE` which fall on `May 4th 2022`.
+  
+Format: `list o/group g<GROUPNAME>`
+- If the module list currently has `1` module showing, UniBook switches to `Groups` view automatically and displays
+the specific group with the given group name, from the given module.
+- Otherwise, UniBook switches to `Groups` view automatically and displays all groups with the given name.
+- Example: Assume module `CS2103` along with multiple other modules have a group with group name `W16-1`. 
+  When the command `list o/group g/W16-1` is run, if only `CS2103` was visible then the specific `W16-1` in `CS2103` 
+  is displayed in the group view. Otherwise all groups with name `W16-1` from all modules are displayed.
+  
+**Commands while in the `Groups` view**
+
+These commands apply while in the `Groups` view.
+
+Format: `list`
+- Lists all groups.
+
+Format: `list g/<GROUPNAME>`
+- Lists all groups with a given group name.
+- Example: `list g/W16-1` lists all groups with the name `W16-1`.
+
+Format: `list g/<GROUPNAME> m/<MODULECODE>`
+- Lists all groups with a given group name in a specific module.
+- Example: `list g/W16-1 m/CS2103` lists group `W16-1` of `CS2103`.
+
+Format: `list mt/<YYYY-MM-DD>`
+- Lists all groups with a meeting times falling on a given date.
+- Example: `list mt/2022-05-04` lists all groups that have meetings on `May 4th 2022`.
+
 
 ### Editing a person : `edit`
 
