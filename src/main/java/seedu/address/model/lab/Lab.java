@@ -146,11 +146,27 @@ public class Lab {
     }
 
     /**
+     * Returns a new immutable {@code Lab} with the specified {@code LabStatus} and {@code LabMark}
+     * {@code LabMark.MARKS_UNKNOWN} is assigned to labs with {@code LabStatus == UNSUBMITTED / SUBMITTED}
+     */
+    public Lab of(LabStatus labStatus, LabMark labMark) {
+        requireAllNonNull(labStatus, labMark);
+
+        if (labStatus == LabStatus.GRADED) {
+            return of(labMark);
+        } else {
+            return of(labStatus);
+        }
+
+    }
+
+    /**
      * Returns a new immutable {@code Lab} with the specified {@code LabMark}.
      * Mainly used in {@link SampleDataUtil} and JsonAdaptedStudent.
      */
     public Lab of(String labStatus, String labMark) {
         requireAllNonNull(labStatus, labMark);
+
         if (labMark.equals(LabMark.MARKS_UNKNOWN)) {
             return (new Lab(String.valueOf(labNumber))).of(labStatus);
         }

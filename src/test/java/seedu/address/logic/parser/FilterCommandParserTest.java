@@ -24,7 +24,7 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFilterCommand() {
         Lab expectedLab1 = (new Lab("1")).of("SUBMITTED");
         Lab expectedLab2 = (new Lab("2")).of("UNSUBMITTED");
-        Lab expectedLab3 = (new Lab("3")).of(new LabMark("0"));
+        Lab expectedLab3 = (new Lab("3")).of(new LabMark());
         FilterCommand expectedFilterCommand1 =
                 new FilterCommand(new StudentHasLabPredicate(expectedLab1));
         FilterCommand expectedFilterCommand2 =

@@ -34,13 +34,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Lab lab = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
         LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
 
-        if (labStatus == LabStatus.GRADED) {
-            lab = lab.of(new LabMark("0"));
-        } else {
-            lab = lab.of(labStatus);
-        }
+        Lab labToFilter = lab.of(labStatus, new LabMark());
 
-        return new FilterCommand(new StudentHasLabPredicate(lab));
+        return new FilterCommand(new StudentHasLabPredicate(labToFilter));
 
     }
 
