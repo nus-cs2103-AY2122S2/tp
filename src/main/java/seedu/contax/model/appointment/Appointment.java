@@ -22,9 +22,10 @@ public class Appointment extends ScheduleItem {
     private final Name name;
     private final Duration duration;
     private final Person person;
+    private final Priority priority;
 
     /**
-     * Constructs an {@code Appointment}.
+     * Constructs an {@code Appointment} without a priority level.
      * The fields {@code name, startDateTime, duration} must be present and not null.
      * The {@code person} argument is optional, and may be null.
      *
@@ -34,6 +35,22 @@ public class Appointment extends ScheduleItem {
      * @param person A valid Person or null.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
+        this(name, startDateTime, duration, person, null);
+    }
+
+    /**
+     * Constructs an {@code Appointment} with a priority level.
+     * The fields {@code name, startDateTime, duration} must be present and not null.
+     * The fields {@code person, priority} are optional and may be null.
+     *
+     * @param name A valid Appointment Name.
+     * @param startDateTime A valid Appointment Starting DateTime.
+     * @param duration A valid Appointment Duration.
+     * @param person A valid Person or null.
+     * @param priority A valid Priority level or null.
+     */
+    public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person,
+                       Priority priority) {
         super(Appointment.getStartDateTimeOrThrow(startDateTime),
                 Appointment.computeEndDateTime(startDateTime, duration));
         requireNonNull(name);
@@ -42,6 +59,7 @@ public class Appointment extends ScheduleItem {
         this.startDateTime = startDateTime;
         this.duration = duration;
         this.person = person;
+        this.priority = priority;
     }
 
     public Name getName() {
@@ -63,6 +81,20 @@ public class Appointment extends ScheduleItem {
 
     public Person getPerson() {
         return person;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    /**
+     * Creates a new {@code Appointment} instance with the supplied {@code Priority} level.
+     *
+     * @param priority The new priority level to assign to this Appointment.
+     * @return A new immutable instance of Appointment with the updated Priority.
+     */
+    public Appointment withPriority(Priority priority) {
+        return new Appointment(name, startDateTime, duration, person, priority);
     }
 
     /**
@@ -100,15 +132,17 @@ public class Appointment extends ScheduleItem {
         }
 
         Appointment otherAppointment = (Appointment) other;
+
         return otherAppointment.getName().equals(getName())
                 && otherAppointment.getStartDateTimeObject().equals(getStartDateTimeObject())
                 && otherAppointment.getDuration().equals(getDuration())
-                && Objects.equals(otherAppointment.getPerson(), getPerson());
+                && Objects.equals(otherAppointment.getPerson(), getPerson())
+                && Objects.equals(otherAppointment.getPriority(), getPriority());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, startDateTime, duration, person);
+        return Objects.hash(name, startDateTime, duration, person, priority);
     }
 
     @Override
@@ -120,7 +154,9 @@ public class Appointment extends ScheduleItem {
                 + "\n **Duration:** "
                 + getDuration()
                 + "\n **Person:** "
-                + (getPerson() == null ? "None" : getPerson().getName());
+                + (getPerson() == null ? "None" : getPerson().getName())
+                + "\n **Priority:** "
+                + (getPriority() == null ? "None" : getPriority());
     }
 
     /**

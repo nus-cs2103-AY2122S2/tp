@@ -12,7 +12,6 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_TAGS_LISTED_OVERVIEW = "%d tags listed!";
 
-
     // ====== Appointments Related Messages =======
     public static final String MESSAGE_APPOINTMENTS_LISTED_OVERVIEW = "%1$d appointments listed!";
     public static final String MESSAGE_APPOINTMENTS_OVERLAPPING = "The new appointment will **overlap** with"
@@ -22,6 +21,6 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_DATE = "The date provided is invalid!";
     public static final String MESSAGE_INVALID_TIME = "The time provided is invalid!";
-
-    public static final String MESSAGE_INVALID_INPUT = "=/ provided is invalid";
+    public static final String MESSAGE_INVALID_RANGE_INDEX = "The range index is invalid!";
+    public static final String MESSAGE_INVALID_PRIORITY_LEVEL = "Invalid priority level for editpriority \n%1$s";
 }

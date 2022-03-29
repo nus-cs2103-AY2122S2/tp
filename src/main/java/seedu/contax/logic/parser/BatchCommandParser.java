@@ -27,13 +27,17 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         String commandInput = argMultimap.getPreamble();
         String userValue = "";
         BatchType batchType = BatchType.EQUALS;
-        if (!argMultimap.arePrefixesPresent(PREFIX_SEARCH_TYPE) || argMultimap.getPreamble().isEmpty()
+        String searchType;
+
+        if (argMultimap.getValue(PREFIX_SEARCH_TYPE).isEmpty() || argMultimap.getPreamble().isEmpty()
             || (argMultimap.getValue(PREFIX_EQUALS).isEmpty()
                 && argMultimap.getValue(PREFIX_START_WITH).isEmpty()
                 && argMultimap.getValue(PREFIX_END_WITH).isEmpty())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchCommand.MESSAGE_USAGE));
         }
+
+        searchType = argMultimap.getValue(PREFIX_SEARCH_TYPE).get().toLowerCase();
         if (argMultimap.getValue(PREFIX_EQUALS).isPresent()) {
             userValue = argMultimap.getValue(PREFIX_EQUALS).get();
         } else if (argMultimap.getValue(PREFIX_START_WITH).isPresent()) {
@@ -45,7 +49,7 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         }
         return new BatchCommand(
                 commandInput.trim(),
-                new SearchType(argMultimap.getValue(PREFIX_SEARCH_TYPE).get().toLowerCase()),
+                new SearchType(searchType),
                 userValue, batchType
         );
     }

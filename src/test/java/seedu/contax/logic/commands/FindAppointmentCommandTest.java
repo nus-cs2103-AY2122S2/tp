@@ -127,7 +127,6 @@ public class FindAppointmentCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
         Appointment a1 = new AppointmentBuilder(APPOINTMENT_ALICE).build();
         model.addAppointment(a1);
-        System.out.println(a1.getName());
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("first", "meeting"));;
         model.updateFilteredAppointmentList(predicate);
         assertEquals(Arrays.asList(a1), model.getFilteredAppointmentList());

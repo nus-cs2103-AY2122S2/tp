@@ -27,6 +27,12 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$name" wrapText="true" />
+        <Label fx:id="priority" text="\$priority" styleClass="priority_label">
+          <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>

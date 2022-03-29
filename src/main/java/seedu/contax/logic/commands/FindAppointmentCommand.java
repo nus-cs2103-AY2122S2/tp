@@ -12,13 +12,13 @@ import seedu.contax.model.appointment.ContainsKeywordsPredicate;
  * Keyword matching is case-insensitive.
  */
 public class FindAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "findappointment";
+    public static final String COMMAND_WORD = "findappt";
 
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: Finds all appointments with"
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Finds all appointments with"
             + "names or person names that "
             + "contain any of the specified keywords (case-insensitive) "
-            + "and displays them as a list with index numbers.\n"
-            + "Parameters: *KEYWORDS [MORE_KEYWORDS]... [by/person OR by/name]*\n"
+            + "and displays them as a list with index numbers.**"
+            + "\nParameters: *KEYWORDS [MORE_KEYWORDS]... [by/person OR by/name]*\n"
             + "Example: `" + COMMAND_WORD + " Contract Alice Meeting`";
 
     private final ContainsKeywordsPredicate predicate;

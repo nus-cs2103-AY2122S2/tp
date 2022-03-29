@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, allowing you to shift your focus to other things.
+ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, allowing you to shift your focus to other more important things.
 
 Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, and a *Schedule* for managing Appointments.
 
@@ -16,27 +16,37 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ContaX.jar` from [here](https://github.com/AY2122S2-CS2103-W17-1/tp/releases).
+2. Download the latest `ContaX.jar` from [here](https://github.com/AY2122S2-CS2103-W17-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for ContaX.
+3. Copy the file to the folder you want to use as the _home folder_ for ContaX.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app.<br>
+   <div markdown="span" class="alert alert-warning">:rotating_light: **For Users on Mac OSX:**
+     The security policy of OSX might prevent the creation of data files in the same folder. For users on OSX, it is recommended that you <br>
+
+     - Navigate to your _home folder_ on Terminal <br>
+     - Launch the application using the command `java -jar ContaX.jar`. <br>
+   </div>
+  
+5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. If this is your first time running ContaX, you will be prompted to go through an [Interactive Onboarding Guide](#onboarding-guide) to learn the basics, or you can choose to explore the application by yourself.
+
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`listpersons`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`addperson`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`deleteperson`**`3` : Deletes the 3rd contact shown in the current list.
 
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -99,7 +109,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Displays a window with the commands' usage and a link to access the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -107,7 +117,7 @@ Format: `help`
 
 ### Onboarding guide
 
-#### Prompt on first run
+**Prompt on first run**
 
 When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions. You will be taken to the onboarding guide window if you select yes. If you choose no, the prompt will just close.
 
@@ -118,10 +128,20 @@ When going through the onboarding guide, instructions such as the one shown belo
 
 ![](images/OnboardingInstruction.jpg)
 
-#### Basic features covered
+**Basic features covered**
 The onboarding guide will cover the following:
 - Add person
-- List person
+- Find person
+- Delete person
+- List persons
+
+### Viewing help : `help`
+
+Shows the commands available and the syntax for all of them. It also includes a link to this user guide for further reading.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
 
 ### Adding a person: `addperson`
 
@@ -168,15 +188,14 @@ Format: `findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* `SEARCH_TYPE` must match one of the following:
-  * Name
-  * Address
-  * Phone
-  * Email
+* The `SEARCH_TYPE` determines the attribute being searched, and must match one of the following:
+  * `Name`
+  * `Address`
+  * `Phone`
+  * `Email`
 * If `SEARCH_TYPE` is not specified, default search type is by `Name`.
 
 Examples:
@@ -202,7 +221,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all contacts and tags from the address book and all appointments from the schedule.
 
 Format: `clear`
 
@@ -271,94 +290,95 @@ Examples:
 
 ![Find Tags](images/FindTag.png)
 
-### Creating an Appointment : `addappointment`
+### Creating an Appointment : `addappt`
 
-Creates an appointment in the schedule.
+Creates an Appointment in the Schedule.
 
-Format: `addappointment n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
+Format: `addappt n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
 * Creates a new appointment with the specified parameters.
 * All parameters except `PERSON` **must** be specified.
 * The `NAME` parameter must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
 * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
+* The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive integer**.
 * The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the index number shown in the displayed person list.
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the appointment **overlaps** with another appointment.
 </div>
 
 Examples:
-* `addappointment n/Bi-Weekly Meeting d/14-02-2022 t/11:00 l/60` Creates a *one-hour* appointment named *"Bi-Weekly Meeting"* on *14th Feb 2022* at *11:00 AM*, associated with nobody in the contact list.
-* `addappointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
+* `addappt n/Bi-Weekly Meeting d/14-02-2022 t/11:00 l/60` Creates a *one-hour* appointment named *"Bi-Weekly Meeting"* on *14th Feb 2022* at *11:00 AM*, associated with nobody in the contact list.
+* `addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
 
-### Listing All Appointments : `listappointments`
+### Listing All Appointments : `listappt`
 
-Shows a list of all appointments in the schedule.
+Shows a list of all Appointments in the Schedule.
 
-Format: `listappointments`
+Format: `listappt`
 
 **Example output**
 
 ![List Appointments Result](images/ListAppointments.png)
 
-### Deleting an Appointment : `deleteappointment`
+### Deleting an Appointment : `deleteappt`
 
-Deletes an appointment previously created in the schedule.
+Deletes an Appointment previously created in the Schedule.
 
-Format: `deleteappointment INDEX`
+Format: `deleteappt INDEX`
 
-* Deletes the appointment that is at `INDEX` in the appointment list.
+* Deletes the appointment that is at `INDEX` in the displayed appointment list.
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
 
 Examples:
-* `deleteappointment 2` Deletes the *second* appointment in the list of appointments.
+* `deleteappt 2` Deletes the *second* appointment in the list of appointments.
 
-### Editing an Appointment : `editappointment`
+### Editing an Appointment : `editappt`
 
-Edits an appointment previously created in the schedule.
+Edits an Appointment previously created in the Schedule.
 
-Format: `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`
+Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 
-* Edits the appointment that is at `INDEX` in the appointment list, setting the supplied parameter(s) to the supplied value(s).
+* Edits the appointment that is at `INDEX` in the displayed appointment list, setting the supplied parameter(s) to the supplied value(s).
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
     * The `NAME` parameter must be non-empty, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`..
     * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
     * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-    * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the index number shown in the displayed person list. The string `none` is used to dissociate the person associated to the appointment.
+    * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the index number shown in the displayed person list. The String `none` is used to dissociate the person associated to the appointment.
     * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the modified appointment **overlaps** with another appointment.
 </div>
 
 Examples:
-* `editappointment 6 l/300 p/none` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*, and removes the person associated with the appointment. No other properties are changed.
-* `editappointment 2 n/Call Juliet t/13:45 p/1` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"*, changes the time to *1:45 PM* and associates the appointment to the first person in the displayed persons list. No other properties are changed.
+* `editappt 6 l/300 p/none` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*, and removes the person associated with the appointment. No other properties are changed.
+* `editappt 2 n/Call Juliet t/13:45 p/1` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"*, changes the time to *1:45 PM* and associates the appointment to the first person in the displayed persons list. No other properties are changed.
 
-### Listing Appointments Within A Period : `appointmentsbetween`
+### Listing Appointments Within A Period : `apptbetween`
 
 Lists all appointments from a starting time to an ending time inclusive of both ends of the range.
 It will list all appointments that contain any sub-range of the provided period.
 
-Format: `appointmentsbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
+Format: `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
 * The starting time **must be before** the ending time.
 * The `STARTDATE` parameter denotes the *starting date* of the period.
+  * `STARTDATE` defaults to **Today** if unspecified.
 * The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
+  * `STARTTIME` defaults to `00:00` if unspecified.
 * The `ENDDATE` parameter denotes the *ending date* of the period.
+  * No upper limit will be enforced if `ENDDATE` is unspecified
 * The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
+  * `ENDTIME` defaults to `23:59` if unspecified.
 * Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `STARTTIME` is unspecified, it defaults to `00:00`.
-* If `STARTDATE` is unspecified, it defaults to today.
-* If `ENDDATE` is unspecified, there will be no upper limit to the appointments listed.
-* If `ENDTIME` is unspecified, it defaults to `23:59`.
 * If `ENDTIME` is specified, then `ENDDATE` must be specified.
 
 Example:
-* `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
+* `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
+* `apptbetween st/08:00` Lists all appointments from *8AM Today*.
 
 **Example Output:**
 
@@ -373,30 +393,25 @@ Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/EN
 
 * The starting time **must be before** the ending time.
 * The `STARTDATE` parameter denotes the *starting date* of the period.
+  * `STARTDATE` defaults to **Today** if unspecified.
 * The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
+  * `STARTTIME` defaults to `00:00` if unspecified.
 * The `ENDDATE` parameter denotes the *ending date* of the period.
+  * No upper limit will be enforced if `ENDDATE` is unspecified
 * The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
+  * `ENDTIME` defaults to `23:59` if unspecified.
 * Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `STARTTIME` is unspecified, it defaults to `00:00`.
-* If `STARTDATE` is unspecified, it defaults to today.
-* If `ENDDATE` is unspecified, there will be no upper limit to the appointments listed.
-* If `ENDTIME` is unspecified, it defaults to `23:59`.
 * If `ENDTIME` is specified, then `ENDDATE` must be specified.
 * The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
 
 Example:
 * `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60` Lists all empty slots in the schedule that are at least *60 minutes (1 hour)* long between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
+* `freebetween st/09:30 l/20` Lists all empty slots in the schedule that are at least *20 minutes* long from *9:30AM* today.
 
 **Example Output:**
 
 ![Appointments Between Wireframe](images/FreeBetween.png)
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Saving the data
 
@@ -459,10 +474,6 @@ Examples:
 * `importcsv f/file.csv`
   * Reads from CSV with default ContaX format positions
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ### Operate on Contacts by Conditional Clause : `batch`
 
 Performs operations on contacts in the address book that match the given condition.
@@ -515,12 +526,17 @@ Format: `COMMAND_A && COMMAND_B`
 * A valid command must be supplied before and after the `&&` operator, otherwise the command will fail
 
 Examples:
-* `editappointment 6 l/360 && listappointments`
+* `editappt 6 l/360 && listappt`
     * Edits the 6th appointment in the list of appointments to have a duration of 6 hours. Then list all appointments in the Schedule
-* `deleteappointment 2 && addappointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
+* `deleteappt 2 && addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
     * Deletes the 2nd appointment in the list of appointments.
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -528,6 +544,25 @@ Examples:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+<div markdown="span" class="alert alert-info">
+:information_source: **Note the Data Files to be Copied:**
+
+There are 2 data files in the data folder, `addressbook.json` and `schedule.json`, both of which need to be copied for a complete transfer of all saved data.
+</div>
+
+**Q**: Can I edit the data manually? <br>
+**A**: Yes, simply open `addressbook.json` to edit Contacts and `schedule.json` to edit Appointments. Note that if you change a Contact's name in `addressbook.json`, you will also need to change it in `schedule.json`.
+<div markdown="span" class="alert alert-warning">
+:rotating_light: **Recommended Practice:**
+
+It is recommended that you create a backup of the entire data folder before you perform any manual edits, as you risk losing information if your edits are incorrect.
+</div>
+
+**Q**: Why is **ALL** my data missing?<br>
+**A**: Your data file is probably corrupted (likely in the JSON structure). Do not enter any command, close the application, and fix your data file!
+
+**Q**: Why is **some** of my data missing?<br>
+**A**: There is probably some invalid information in your data file. Invalid records are discarded during loading, and those records you do not see might be invalid. Do not enter any command, close the application, and fix your data file!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -546,15 +581,15 @@ Action | Format, Examples
 **List Tags** | `listtags`
 **Delete Tag** | `deletetag INDEX` <br> e.g., `deletetag 1`
 **Find Contacts By Tag** | `findbytag t/TAGNAME` <br> e.g., `findbytag t/friends`
-**Add Appointment** | `addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
-**List Appointments** | `listappointments`
-**Delete Appointment** | `deleteappointment INDEX`<br> e.g., `deleteappointment 2`
-**Edit Appointment** | `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappointment 2 n/Call Juliet t/13:45`
-**List Appointments Within Period** | `appointmentsbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
+**Add Appointment** | `addappt n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addappt n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
+**List Appointments** | `listappt`
+**Delete Appointment** | `deleteappt INDEX`<br> e.g., `deleteappt 2`
+**Edit Appointment** | `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappt 2 n/Call Juliet t/13:45`
+**List Appointments Within Period** | `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **List Available Slots Within Period** | `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60`
 **Help** | `help`
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
 **Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range editperson e/johndoe@example.com from/6 to/10`
-**Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappointment 6 l/360 && listappointments`
+**Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappt 6 l/360 && listappt`

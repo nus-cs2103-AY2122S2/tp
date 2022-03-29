@@ -12,6 +12,7 @@ import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.Name;
+import seedu.contax.model.appointment.Priority;
 import seedu.contax.model.appointment.StartDateTime;
 import seedu.contax.model.person.Person;
 
@@ -24,6 +25,7 @@ class JsonAdaptedAppointment {
     public static final String INVALID_DATETIME_MESSAGE = "Appointment's StartDateTime is invalid!";
     public static final String INVALID_DURATION_MESSAGE = "Appointment's Duration is not a positive integer!";
     public static final String INVALID_PERSON_MESSAGE = "Appointment's person cannot be found!";
+    public static final String INVALID_PRIORITY_MESSAGE = "Appointment's priority is invalid!";
     public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"; // ISO-8601 Specification
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
@@ -31,6 +33,7 @@ class JsonAdaptedAppointment {
     private final String startDateTime;
     private final int duration;
     private final String person;
+    private final String priority;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,11 +42,13 @@ class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(@JsonProperty("name") String name,
                                   @JsonProperty("startDateTime") String startDateTime,
                                   @JsonProperty("duration") int duration,
-                                  @JsonProperty("person") String person) {
+                                  @JsonProperty("person") String person,
+                                  @JsonProperty("priority") String priority) {
         this.name = name;
         this.startDateTime = startDateTime;
         this.duration = duration;
         this.person = person;
+        this.priority = priority;
     }
 
     /**
@@ -54,6 +59,7 @@ class JsonAdaptedAppointment {
         startDateTime = DATETIME_FORMATTER.format(source.getStartDateTimeObject().value);
         duration = source.getDuration().value;
         person = (source.getPerson() != null) ? source.getPerson().getName().fullName : null;
+        priority = (source.getPriority() != null) ? source.getPriority().toString() : null;
     }
 
     /**
@@ -69,8 +75,9 @@ class JsonAdaptedAppointment {
         final StartDateTime modelStartDateTime = parseStartDateTimeModel();
         final Duration modelDuration = parseDurationModel();
         final Person modelPerson = parsePersonModel(personsList);
+        final Priority modelPriority = parsePriorityModel();
 
-        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson);
+        return new Appointment(modelName, modelStartDateTime, modelDuration, modelPerson, modelPriority);
     }
 
     /**
@@ -126,5 +133,18 @@ class JsonAdaptedAppointment {
         }
         return null;
     }
+    /**
+     * Performs the validation and parsing of Appointment priority into a {@code Priority} model.
+     */
+    private Priority parsePriorityModel() throws IllegalValueException {
+        if (priority == null) {
+            return null;
+        }
 
+        Priority modelPriority = Priority.getFromDisplayName(priority);
+        if (modelPriority == null) {
+            throw new IllegalValueException(INVALID_PRIORITY_MESSAGE);
+        }
+        return modelPriority;
+    }
 }

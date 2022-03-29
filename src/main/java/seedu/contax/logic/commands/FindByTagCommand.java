@@ -15,8 +15,8 @@ public class FindByTagCommand extends Command {
     public static final String COMMAND_WORD = "findbytag";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "` : **Finds all persons who "
-            + "contains the specified tag.**\n"
-            + "Parameters: *t/TAGNAME*\n"
+            + "contains the specified tag.**"
+            + "\nParameters: *t/TAGNAME*\n"
             + "Example: `" + COMMAND_WORD + " t/friends`";
 
     private final TagNameContainsKeywordsPredicate predicate;

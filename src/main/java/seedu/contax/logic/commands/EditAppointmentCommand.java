@@ -22,6 +22,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.Name;
+import seedu.contax.model.appointment.Priority;
 import seedu.contax.model.appointment.StartDateTime;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
 import seedu.contax.model.person.Person;
@@ -31,7 +32,7 @@ import seedu.contax.model.person.Person;
  */
 public class EditAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "editappointment";
+    public static final String COMMAND_WORD = "editappt";
 
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Edits the details of the appointment "
             + "identified by the index number used in the displayed appointment list. "
@@ -130,7 +131,8 @@ public class EditAppointmentCommand extends Command {
                     .map(index -> personList.get(index.getZeroBased())).orElse(null);
         }
 
-        return new Appointment(updatedName, updatedStartDateTime, updatedDuration, updatedPerson);
+        Priority originalPriority = appointmentToEdit.getPriority();
+        return new Appointment(updatedName, updatedStartDateTime, updatedDuration, updatedPerson, originalPriority);
     }
 
     @Override
