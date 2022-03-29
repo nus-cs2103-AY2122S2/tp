@@ -13,10 +13,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Event extends Entry {
 
-    //Identity fields
-    private Name companyName;
 
     // Data fields
+    private Name companyName;
     private final Date date;
     private final Time time;
     private final Location location;

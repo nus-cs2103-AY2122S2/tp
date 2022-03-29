@@ -51,4 +51,12 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Accesses and returns the tagName attribute
+     * @return the time attribute as String
+     */
+    public String getPure() {
+        return tagName;
+    }
+
 }
