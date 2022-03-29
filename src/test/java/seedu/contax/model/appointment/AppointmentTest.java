@@ -11,6 +11,7 @@ import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +68,13 @@ public class AppointmentTest {
         // different person -> returns false
         editedAliceAppt = new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(BOB).build();
         assertFalse(APPOINTMENT_ALICE.equals(editedAliceAppt));
+
+        // different priority -> returns false
+        Appointment aliceApptHigh = new AppointmentBuilder(APPOINTMENT_ALICE.withPriority(Priority.HIGH))
+                .buildWithPriority();
+        Appointment aliceApptLow = new AppointmentBuilder(APPOINTMENT_ALICE.withPriority(Priority.LOW))
+                .buildWithPriority();
+        assertFalse(aliceApptHigh.equals(aliceApptLow));
     }
 
     @Test
@@ -124,13 +132,15 @@ public class AppointmentTest {
         LocalDateTime startDate = LocalDateTime.parse("2022-02-11T12:30:00");
         Appointment appointment = new AppointmentBuilder().withName("Test Meeting")
                 .withStartDateTime(startDate).withDuration(20).withPerson(ALICE).build();
-        assertEquals(appointment.getName()
-                + "; Start Date Time: "
-                + appointment.getStartDateTimeObject()
-                + "; Duration: "
-                + appointment.getDuration()
-                + "; Person: "
-                + appointment.getPerson(),
+
+        assertEquals("**Name:** "
+                        + appointment.getName()
+                        + "\n **Start Date Time:** "
+                        + appointment.getStartDateTimeObject()
+                        + "\n **Duration:** "
+                        + appointment.getDuration()
+                        + "\n **Person:** Alice Pauline"
+                        + "\n **Priority:** None",
                 appointment.toString());
     }
 
@@ -149,5 +159,15 @@ public class AppointmentTest {
         assertEquals(0, refAppointment.compareTo(appointmentDifferentSeconds));
         assertEquals(1, refAppointment.compareTo(appointmentBefore));
         assertEquals(-1, refAppointment.compareTo(appointmentAfter));
+    }
+
+    @Test
+    public void hasCodeTest() {
+        LocalDateTime startDate = LocalDateTime.parse("2022-02-11T12:30:00");
+        Appointment appointment = new AppointmentBuilder().withName("Test Meeting")
+                .withStartDateTime(startDate).withDuration(20).withPerson(ALICE).withPriority(Priority.HIGH).build();
+        assertEquals(appointment.hashCode(),
+                Objects.hash(appointment.getName(), appointment.getStartDateTime(),
+                        appointment.getDuration(), appointment.getPerson(), appointment.getPriority()));
     }
 }

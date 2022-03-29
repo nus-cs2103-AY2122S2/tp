@@ -1,8 +1,9 @@
-package seedu.contax.ui.appointment;
+package seedu.contax.ui.appointment.cardfactory;
 
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,13 +14,15 @@ import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.ui.UiPart;
 
 /**
- * An UI component that displays the information in an {@code AppointmentSlot}.
+ * Displays the information in an {@code AppointmentSlot}.
+ * This class is deliberately maintained as package private to prevent unintended access.
  */
-public class AppointmentSlotCard extends UiPart<Region> {
+class AppointmentSlotCard extends UiPart<Region> {
 
     private static final String FXML = "AppointmentSlotListCard.fxml";
     private static final String DATE_FORMAT = "dd LLL yyyy";
     private static final String TIME_FORMAT = "hh:mm a";
+    private static final String PHRASE_NO_UPPER_LIMIT = "Forever";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
@@ -39,7 +42,7 @@ public class AppointmentSlotCard extends UiPart<Region> {
     /**
      * Creates an empty instance of {@code AppointmentSlotCard}.
      */
-    public AppointmentSlotCard() {
+    AppointmentSlotCard() {
         super(FXML);
     }
 
@@ -48,7 +51,7 @@ public class AppointmentSlotCard extends UiPart<Region> {
      *
      * @param appointmentSlotModel The AppointmentSlot model to display in this card.
      */
-    public void updateModel(AppointmentSlot appointmentSlotModel) {
+    void updateModel(AppointmentSlot appointmentSlotModel) {
         requireNonNull(appointmentSlotModel);
         if (appointmentSlotModel.equals(this.appointmentSlotModel)) {
             return;
@@ -60,8 +63,14 @@ public class AppointmentSlotCard extends UiPart<Region> {
         LocalDateTime endDateTime = appointmentSlotModel.getEndDateTime();
         startDate.setText(startDateTime.format(DATE_FORMATTER));
         startTime.setText(startDateTime.format(TIME_FORMATTER));
-        endDate.setText(endDateTime.format(DATE_FORMATTER));
-        endTime.setText(endDateTime.format(TIME_FORMATTER));
+        if (endDateTime.equals(LocalDate.MAX.atTime(23, 59))) {
+            endDate.setText(PHRASE_NO_UPPER_LIMIT);
+            endTime.setText("");
+        } else {
+            endDate.setText(endDateTime.format(DATE_FORMATTER));
+            endTime.setText(endDateTime.format(TIME_FORMATTER));
+        }
+
 
         long minutes = Duration.between(startDateTime, endDateTime).toMinutes();
         duration.setText(getReadableDuration(minutes));

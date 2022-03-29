@@ -47,7 +47,6 @@ public class Schedule implements ReadOnlySchedule {
      */
     public void resetData(ReadOnlySchedule newData) {
         requireNonNull(newData);
-
         setAppointments(newData.getAppointmentList());
     }
 
@@ -69,7 +68,7 @@ public class Schedule implements ReadOnlySchedule {
         requireNonNull(target);
         requireNonNull(editedAppointment);
 
-        appointments.setAppointment(target, editedAppointment);
+        appointments.set(target, editedAppointment);
     }
 
     /**

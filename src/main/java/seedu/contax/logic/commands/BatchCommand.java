@@ -36,8 +36,8 @@ public class BatchCommand extends Command {
 
     public static final String COMMAND_WORD = "batch";
 
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in batch** \n"
-            + "Parameters: *"
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in batch**"
+            + "\nParameters: *"
             + "COMMAND (must be valid command without index) "
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
             + PREFIX_EQUALS + "VALUE*\n"
@@ -91,7 +91,7 @@ public class BatchCommand extends Command {
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
-                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchCommand.MESSAGE_USAGE));
+                throw new CommandException(pe.getMessage());
             }
         }
         StringBuilder resultOutput = new StringBuilder();

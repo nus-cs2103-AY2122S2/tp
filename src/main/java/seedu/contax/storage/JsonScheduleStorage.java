@@ -59,7 +59,7 @@ public class JsonScheduleStorage implements ScheduleStorage {
         }
 
         try {
-            return Optional.of(jsonSchedule.get().toModelType(addressBook));
+            return Optional.of(jsonSchedule.get().toModelType(addressBook.getPersonList()));
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

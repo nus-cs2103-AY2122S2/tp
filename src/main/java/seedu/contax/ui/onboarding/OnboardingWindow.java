@@ -11,7 +11,9 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.onboarding.OnboardingStory;
-import seedu.contax.ui.PersonListPanel;
+import seedu.contax.model.person.Person;
+import seedu.contax.ui.ListPanel;
+import seedu.contax.ui.PersonCard;
 import seedu.contax.ui.UiPart;
 
 /**
@@ -23,7 +25,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     private static final String FXML = "onboarding/OnboardingWindow.fxml";
     private Stage stage;
     private Stage mainWindow;
-    private PersonListPanel personListPanel;
+    private ListPanel<Person> personListPanel;
     private OnboardingStoryManager storyManager;
     private Overlay overlay;
     private OnboardingCommandBox commandBox;
@@ -123,7 +125,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     private void fillInner() {
         labelPlaceholder.getChildren().add(overlay.getRoot());
         labelPlaceholder.getChildren().add(instructionLabel.getRoot());
-        personListPanel = new PersonListPanel(model.getFilteredPersonList());
+        personListPanel = new ListPanel<>(model.getFilteredPersonList(), PersonCard::new);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
