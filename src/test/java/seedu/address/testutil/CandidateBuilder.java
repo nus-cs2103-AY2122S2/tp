@@ -8,6 +8,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Remark;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 
@@ -25,6 +26,7 @@ public class CandidateBuilder {
     public static final String DEFAULT_APPLICATION_STATUS = "Pending";
     public static final String DEFAULT_INTERVIEW_STATUS = " Not Scheduled";
     public static final String DEFAULT_AVAILABILITY = "1,2,3,4,5";
+    public static final String DEFAULT_REMARK = "";
 
     private StudentId studentId;
     private Name name;
@@ -35,6 +37,7 @@ public class CandidateBuilder {
     private ApplicationStatus applicationStatus;
     private InterviewStatus interviewStatus;
     private Availability availability;
+    private Remark remark;
 
     /**
      * Creates a {@code CandidateBuilder} with the default details.
@@ -49,6 +52,7 @@ public class CandidateBuilder {
         applicationStatus = new ApplicationStatus(DEFAULT_APPLICATION_STATUS);
         interviewStatus = new InterviewStatus(DEFAULT_INTERVIEW_STATUS);
         availability = new Availability(DEFAULT_AVAILABILITY);
+        remark = new Remark(DEFAULT_REMARK);
     }
 
     /**
@@ -64,6 +68,7 @@ public class CandidateBuilder {
         applicationStatus = candidateToCopy.getApplicationStatus();
         interviewStatus = candidateToCopy.getInterviewStatus();
         availability = candidateToCopy.getAvailability();
+        remark = candidateToCopy.getRemark();
     }
 
     /**
@@ -139,12 +144,20 @@ public class CandidateBuilder {
     }
 
     /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public CandidateBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
      * Returns a new Candidate with specific fields.
      * @return a new Candidate.
      */
     public Candidate build() {
         return new Candidate(studentId, name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
+                applicationStatus, interviewStatus, availability, remark);
     }
 
 }

@@ -39,6 +39,7 @@
                 <Label id="focus-card-label" fx:id="phone" styleClass="focusStyle" text="\$phone" />
                 <Label id="focus-card-label" fx:id="email" styleClass="focusStyle" text="\$email" />
                 <Label id="focus-card-label" fx:id="course" styleClass="focusStyle" text="\$course" />
+                <Label id="focus-card-label" fx:id="remark" styleClass="focusStyle" text="\$remark" />
             </VBox>
         </ScrollPane>
 </HBox>

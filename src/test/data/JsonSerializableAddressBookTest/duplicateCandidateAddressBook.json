@@ -9,7 +9,8 @@
     "tagged": [ "friends" ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "1,2,3,4,5"
+    "availability": "1,2,3,4,5",
+    "remark" : ""
   }, {
     "studentId": "E0123456",
     "name": "Alice Pauline",
@@ -19,6 +20,7 @@
     "seniority": "2",
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "1,2,3,4,5"
+    "availability": "1,2,3,4,5",
+    "remark" : ""
   } ]
 }

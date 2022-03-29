@@ -21,6 +21,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalCandidates.BOB;
@@ -33,18 +34,22 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Remark;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.testutil.CandidateBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+    private String EMPTY_STRING = "";
+
 
     @Test
     public void parse_allFieldsPresent_success() {
         Candidate expectedCandidate = new CandidateBuilder(BOB)
                 .withApplicationStatus(VALID_APPLICATION_PENDING)
-                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
+                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+                .withRemark(EMPTY_STRING).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB

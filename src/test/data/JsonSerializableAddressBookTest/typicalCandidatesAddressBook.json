@@ -1,16 +1,17 @@
 {
   "_comment": "TAlent Assistant™ save file which contains the same Candidate values as in TypicalCandidates#getTypicalAddressBook()",
   "candidates" : [ {
-      "studentId": "E0123456",
-      "name" : "Amy Bee",
-      "phone" : "91111111",
-      "email" : "E0123456@u.nus.edu",
-      "course": "Business Analytics",
-      "seniority": "2",
-      "tagged" : [ "friend" ],
-      "applicationStatus": "Pending",
-      "interviewStatus": "Scheduled",
-      "availability": "1,2,3,4,5"
+    "studentId": "E0123456",
+    "name" : "Amy Bee",
+    "phone" : "91111111",
+    "email" : "E0123456@u.nus.edu",
+    "course": "Business Analytics",
+    "seniority": "2",
+    "tagged" : [ "friend" ],
+    "applicationStatus": "Pending",
+    "interviewStatus": "Scheduled",
+    "availability": "1,2,3,4,5",
+    "remark" : ""
   }, {
     "studentId": "E0123450",
     "name" : "Alice Pauline",
@@ -21,7 +22,8 @@
     "tagged" : [ "friends" ],
     "applicationStatus": "Pending",
     "interviewStatus": "Scheduled",
-    "availability": "1,2,3"
+    "availability": "1,2,3",
+    "remark" : ""
   }, {
     "studentId": "E0234567",
     "name" : "Benson Meier",
@@ -32,7 +34,8 @@
     "tagged" : [ "owesMoney", "friends" ],
     "applicationStatus": "Pending",
     "interviewStatus": "Scheduled",
-    "availability": "2,3,4"
+    "availability": "2,3,4",
+    "remark" : ""
   }, {
     "studentId": "E0345678",
     "name" : "Carl Kurz",
@@ -43,7 +46,8 @@
     "tagged" : [ ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "3,4,5"
+    "availability": "3,4,5",
+    "remark" : ""
   }, {
     "studentId": "E0456789",
     "name" : "Daniel Meier",
@@ -54,7 +58,8 @@
     "tagged" : [ "friends" ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "5"
+    "availability": "5",
+    "remark" : ""
   }, {
     "studentId": "E0567890",
     "name" : "Elle Meyer",
@@ -65,7 +70,8 @@
     "tagged" : [ ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "1,3,5"
+    "availability": "1,3,5",
+    "remark" : ""
   }, {
     "studentId": "E0678901",
     "name" : "Fiona Kunz",
@@ -76,7 +82,8 @@
     "tagged" : [ ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "2,4"
+    "availability": "2,4",
+    "remark" : ""
   }, {
     "studentId": "E0789012",
     "name" : "George Best",
@@ -87,6 +94,7 @@
     "tagged" : [ ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
-    "availability": "2,3,4,5"
+    "availability": "2,3,4,5",
+    "remark" : ""
   } ]
 }

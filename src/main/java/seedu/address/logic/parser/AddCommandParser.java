@@ -20,6 +20,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Remark;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 
@@ -53,9 +54,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         ApplicationStatus applicationStatus = new ApplicationStatus(ApplicationStatus.PENDING_STATUS);
         InterviewStatus interviewStatus = new InterviewStatus(InterviewStatus.NOT_SCHEDULED);
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
+        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
+
 
         Candidate candidate = new Candidate(id, name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
+                applicationStatus, interviewStatus, availability, remark);
 
         return new AddCommand(candidate);
     }

@@ -1,6 +1,7 @@
 package seedu.address.model.candidate.predicate;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -11,6 +12,7 @@ import seedu.address.model.candidate.Candidate;
  * Tests that a {@code Candidate} matches any of the keywords given.
  */
 public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Candidate> {
+    public static final String[] DAYS_IN_FULL = { "", "MON", "TUE", "WED", "THU", "FRI" };
 
     /**
      * Creates a new {@link CandidateContainsKeywordsPredicate} object with the
@@ -29,18 +31,12 @@ public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicat
      */
     @Override
     public boolean test(Candidate candidate) {
-        StringBuilder sb = new StringBuilder();
-        String[] separatedCandidate = candidate.toString().split("Availability: ");
-        int[] availArr = Arrays.stream(separatedCandidate[1].split(",")).mapToInt((Integer::parseInt)).toArray();
+        String availability = candidate.getAvailability().toString();
+        int[] availArr = Arrays.stream(availability.split(",")).mapToInt((Integer::parseInt)).toArray();
+        HashMap<String, Integer> availMap = new HashMap<>();
 
-        sb.append(separatedCandidate[0]).append(" Availability: ");
-
-        for (int i = 0; i < availArr.length; ++i) {
-            if (i + 1 == availArr.length) {
-                sb.append(AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL[availArr[i]]);
-                break;
-            }
-            sb.append(AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL[availArr[i]]).append(",");
+        for (Integer i: availArr) {
+            availMap.put(DAYS_IN_FULL[i], i);
         }
 
         return keywords.stream().anyMatch(keyword ->
@@ -52,7 +48,7 @@ public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicat
                         || StringUtil.containsStringIgnoreCase(candidate.getPhone().toString(), keyword)
                         || StringUtil.containsStringIgnoreCase(candidate.getSeniority().toSearchString(), keyword)
                         || StringUtil.containsStringIgnoreCase(candidate.getStudentId().toString(), keyword)
-                        || StringUtil.containsStringIgnoreCase(sb.toString(), keyword));
+                        || availMap.containsKey(keyword.toUpperCase()));
     }
 
     /**

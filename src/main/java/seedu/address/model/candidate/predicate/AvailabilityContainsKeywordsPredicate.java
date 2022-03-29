@@ -12,7 +12,6 @@ import seedu.address.model.candidate.Candidate;
  */
 public class AvailabilityContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Candidate> {
     public static final String[] DAYS_IN_FULL = { "", "MON", "TUE", "WED", "THU", "FRI" };
-    private final List<String> keywords;
 
     /**
      * Creates a new {@link AvailabilityContainsKeywordsPredicate} object with the
@@ -21,7 +20,6 @@ public class AvailabilityContainsKeywordsPredicate extends ContainsKeywordsPredi
      */
     public AvailabilityContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
-        this.keywords = keywords;
     }
 
     /**
