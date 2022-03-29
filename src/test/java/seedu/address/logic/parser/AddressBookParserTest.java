@@ -83,7 +83,7 @@ public class AddressBookParserTest {
     public void parseCommandByIndex_deletefriend() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
             + INDEX_FIRST_PERSON.getOneBased());
-        DeleteCommand commandByAlias = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_ALIAS+ " "
+        DeleteCommand commandByAlias = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_ALIAS + " "
                 + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
 
