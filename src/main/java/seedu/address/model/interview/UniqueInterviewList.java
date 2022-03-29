@@ -3,11 +3,18 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.applicant.DeleteApplicantCommand;
+import seedu.address.model.Model;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.exceptions.DuplicateInterviewException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 
@@ -15,6 +22,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
     private final ObservableList<Interview> internalList = FXCollections.observableArrayList();
     private final ObservableList<Interview> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    private final Logger logger = LogsCenter.getLogger(UniqueInterviewList.class);
+
     /**
      * Returns true if the list contains an equivalent interview as the given argument.
      */
@@ -64,6 +74,21 @@ public class UniqueInterviewList implements Iterable<Interview> {
         if (!internalList.remove(toRemove)) {
             throw new InterviewNotFoundException();
         }
+    }
+
+    /**
+     * Returns interview(s) which are for the specified applicant.
+     */
+    public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+        ArrayList<Interview> interviews = new ArrayList<>();
+
+        for (Interview i : internalList) {
+            if (i.isInterviewForApplicant(applicant)) {
+                interviews.add(i);
+            }
+        }
+
+        return interviews;
     }
 
     public void setInterviews(UniqueInterviewList replacement) {

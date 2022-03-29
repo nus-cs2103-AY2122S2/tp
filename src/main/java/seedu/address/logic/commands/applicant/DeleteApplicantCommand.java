@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.position.DeletePositionCommand;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
@@ -52,12 +53,17 @@ public class DeleteApplicantCommand extends DeleteCommand {
         }
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
-        int deleteInterviewCount = deleteApplicantsInterview(model, applicantToDelete);
+
+        ArrayList<Interview> interviewsToDelete = model.getApplicantsInterviews(applicantToDelete);
+        for (Interview i : interviewsToDelete) {
+            model.deleteInterview(i);
+            logger.log(Level.INFO, String.format("Deleted interview: %1$s", i));
+        }
 
         model.deletePerson(applicantToDelete);
         return new CommandResult(
                 String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
-                        + String.format(MESSAGE_DELETE_INTERVIEWS, deleteInterviewCount),
+                        + String.format(MESSAGE_DELETE_INTERVIEWS, interviewsToDelete.size()),
                 getCommandDataType());
     }
 

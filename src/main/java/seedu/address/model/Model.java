@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -115,6 +116,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredInterviewList(Predicate<Interview> predicate);
+
+    /**
+     * Returns interview(s) which are for the specified applicant.
+     */
+    ArrayList<Interview> getApplicantsInterviews(Applicant applicant);
 
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.

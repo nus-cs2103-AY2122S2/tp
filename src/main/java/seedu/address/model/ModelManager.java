@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -189,6 +190,11 @@ public class ModelManager implements Model {
     public void updateFilteredInterviewList(Predicate<Interview> predicate) {
         requireNonNull(predicate);
         filteredInterviews.setPredicate(predicate);
+    }
+
+    @Override
+    public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+        return addressBook.getApplicantsInterviews(applicant);
     }
 
     //=========== Filtered Position List Accessors =============================================================
