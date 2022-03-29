@@ -68,6 +68,9 @@ public class ManualCommand extends Command {
         case AssignCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_ASSIGN_COMMAND);
 
+        case DeleteTaskCommand.COMMAND_WORD:
+            return new CommandResult(ManualMessages.MANUAL_MESSAGE_DELETE_TASK_COMMAND);
+
         case ProgressCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_PROGRESS_COMMAND);
 

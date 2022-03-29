@@ -19,6 +19,7 @@ import seedu.address.model.person.exceptions.PartialDuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.exceptions.TaskAlreadyCompleteException;
 import seedu.address.model.person.exceptions.TaskAlreadyNotCompleteException;
+import seedu.address.model.person.exceptions.TaskNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -140,7 +141,6 @@ public class UniquePersonList implements Iterable<Person> {
      * @param moduleCode the module code of the module of which all students are to be assigned a task.
      * @param task the task to be assigned.
      */
-
     public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
         requireAllNonNull(moduleCode, task);
         boolean anyPersonFound = false;
@@ -172,12 +172,73 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Deletes task with {@code index} belonging to {@code Person} with {@code studentId}.
+     *
+     * @param studentId the student id of the person whose task is to be deleted.
+     * @param index the index of the task to be deleted.
+     */
+    public void deleteTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+
+                Person updatedPerson = currPerson.getCopy();
+                updatedPerson.deleteTask(index);
+                setPerson(currPerson, updatedPerson);
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+
+    }
+
+    /**
+     * Deletes task assigned to {@code Person} with {@code moduleCode}.
+     *
+     * @param moduleCode the module code of the person whose task is to be deleted.
+     * @param task the task with the exact task name to be deleted.
+     */
+    public void deleteTaskForAllInModule(ModuleCode moduleCode, Task task) {
+        requireAllNonNull(moduleCode, task);
+        boolean isAnyPersonFound = false;
+        int personsAssignedToTask = 0;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getModuleCode().equals(moduleCode)) {
+                isAnyPersonFound = true;
+
+                try {
+                    Person updatedPerson = currPerson.getCopy();
+                    updatedPerson.deleteTask(task);
+                    setPerson(currPerson, updatedPerson);
+                    personsAssignedToTask++;
+                } catch (TaskNotFoundException taskNotFoundException) {
+                    // do not do anything yet.
+                }
+            }
+        }
+
+        if (!isAnyPersonFound) {
+            throw new ModuleCodeNotFoundException();
+        }
+
+        if (personsAssignedToTask == 0) { // raise error if no student in the module was assigned to this task.
+            throw new TaskNotFoundException();
+        }
+
+    }
+
+    /**
      * Mark {@code task} task belonging to a person {@code studentId} as done.
      *
      * @param studentId the student id of the person's whose task is to be marked as done.
      * @param index the index of he task to be marked as complete.
      */
-
     public void markTaskOfPerson(StudentId studentId, Index index) {
         requireAllNonNull(studentId, index);
         boolean isPersonFound = false;
@@ -207,7 +268,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Mark {@code task} task belonging to a person {@code studentId} as undone.
+     * Unmark {@code task} task belonging to a person {@code studentId} as undone.
      *
      * @param studentId the student id of the person's whose task is to be marked as undone.
      * @param index the index of he task to be marked as incomplete.
@@ -242,9 +303,8 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Iterates through each {@code Person}, and checks if the {@code Person} who is taking {@code ModuleCode}
-     * has the specified {@code Task} in his/her {@code TaskList}. If the specified {@Code Task} is present,
+     * has the specified {@code Task} in his/her {@code TaskList}. If the specified task is present,
      * the completion status will be extracted out into a resulting HashMap.
-     *
      *
      * @param moduleCode target moduleCode to be compared with.
      * @param task target task to be compared with.
