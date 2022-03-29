@@ -2,8 +2,16 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
