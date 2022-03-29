@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.util.Pair;
@@ -24,23 +24,23 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new InsurancePackage("Golden Package"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet(new Pair<>("introduce to friends", null))),
+                getTagList(new Pair<>("introduce to friends", null))),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new InsurancePackage("Silver Package"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet(new Pair<>("update insurance package", Priority.PRIORITY_1),
+                getTagList(new Pair<>("update insurance package", Priority.PRIORITY_1),
                         new Pair<>("going to move abroad soon", null))),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new InsurancePackage("Undecided"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet(new Pair<>("tell about Car insurance updates", Priority.PRIORITY_3))),
+                getTagList(new Pair<>("tell about Car insurance updates", Priority.PRIORITY_3))),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new InsurancePackage("Undecided"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet(new Pair<>("contact wife if not available", null))),
+                getTagList(new Pair<>("contact wife if not available", null))),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new InsurancePackage("Basic Family Package"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet()),
+                getTagList()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new InsurancePackage("Car Theft Insurance"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet(new Pair<>("update insurance package", Priority.PRIORITY_1)))
+                getTagList(new Pair<>("update insurance package", Priority.PRIORITY_1)))
         };
     }
 
@@ -55,10 +55,10 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(Pair<String, Priority>... tagPairs) {
-        return Arrays.stream(tagPairs)
+    public static ArrayList<Tag> getTagList(Pair<String, Priority>... tagPairs) {
+        return new ArrayList<>(Arrays.stream(tagPairs)
                 .map(x -> new Tag(x.getKey(), x.getValue()))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList()));
     }
 
 }

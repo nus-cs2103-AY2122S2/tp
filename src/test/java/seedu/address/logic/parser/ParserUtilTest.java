@@ -7,11 +7,10 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -224,8 +223,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_NAME_1, VALID_TAG_NAME_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_NAME_1, null),
+        ArrayList<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_NAME_1, VALID_TAG_NAME_2));
+        ArrayList<Tag> expectedTagSet = new ArrayList<>(Arrays.asList(new Tag(VALID_TAG_NAME_1, null),
                 new Tag(VALID_TAG_NAME_2, null)));
         for (Iterator<Tag> it = actualTagSet.iterator(); it.hasNext(); ) {
             Tag t = it.next();

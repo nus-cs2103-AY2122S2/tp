@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 import javafx.util.Pair;
 import seedu.address.model.person.Address;
@@ -30,7 +29,7 @@ public class PersonBuilder {
     private Email email;
     private InsurancePackage insurancePackage;
     private Address address;
-    private Set<Tag> tags;
+    private ArrayList<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,7 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         insurancePackage = new InsurancePackage(DEFAULT_INSURANCE_PACKAGE);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        tags = new ArrayList<>();
     }
 
     /**
@@ -53,7 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         insurancePackage = personToCopy.getInsurancePackage();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        tags = new ArrayList<>(personToCopy.getTags());
     }
 
     /**
@@ -68,7 +67,7 @@ public class PersonBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(Pair<String, Priority>... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.tags = SampleDataUtil.getTagList(tags);
         return this;
     }
 

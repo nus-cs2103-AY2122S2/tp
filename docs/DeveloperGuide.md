@@ -243,6 +243,78 @@ The predicate is implemented in this way since updating the filteredPersonList i
 
 _{more aspects and alternatives to be added}_
 
+### Adding the ability to export AddressBook to CSV and back
+
+The ability to convert a collection of Persons to a CSV file is facilitated by `CsvUtil` and `CsvAdaptedPerson`.
+
+`CsvAdaptedPerson` is a CSV-friendly version of `Person`, with a method that allows it to be converted to a CSV-friendly string, while `CsvUtil` allows for the writing of a `CsvAdaptedPerson` object to a CSV file.
+
+The implementation of writing the AddressBook to CSV is as follows:
+
+When the user wishes to save the current state of the AddressBook to CSV, either through the `export` command or by clicking on the button in the dropdown, the following events occur:
+
+Step 1: `MainWindow#handleSaveToCsv` is called, which:
+- calls `MainWindow#handleSaveFile` to obtain a destination file location from the user to save to.
+- then calls `LogicManager#saveAddressBookToCsv`
+
+Step 2: `LogicManager#saveAddressBookToCsv`is called, which calls `StorageManager#saveAddressBookToCsv`
+
+Step 3: `StorageManager#saveAddressBookToCsv` is called, which calls `CsvAddressBookStorage#saveAddressBook`
+
+Step 4: `CsvAddressBookStorage#saveAddressBook` is called, which
+- creates a file at the given location, if it does not exist yet
+- generates a `List` of `CsvAdaptedPerson` from the AddressBook
+- calls `CsvUtil#saveCsvFile`
+
+Step 5: `CsvUtil#saveCsvFile` is called, which writes the contents of the AddressBook to the CSV file.
+
+![Save AddressBook to CSV](images/SaveAddressBookToCsv.png)
+
+A similar flow of events occur for the loading of a CSV file to the AddressBook.
+
+#### Design considerations:
+
+The functionality was implemented this way to stick to the existing codebase as much as possible.
+
+There is existing functionality to export the AddressBook to JSON, hence the classes involved with CSV files are organised and structured in a similar way.
+
+### Adding the ability to Undo Add/Delete/Edit command
+
+The ability to undo an Add/Delete Edit command is facilitated by `ModelManager`. It stores a copy of the current address book as an `AddressBook`. 
+Additionally, it implements the following operations:
+
+- AddressBook#copy() - Makes a copy of the current address book.
+- Command#undo() - Reverts the address book to a copy before the last command.
+
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state.
+
+![UndoRedoState0](images/UndoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `ModelManager#copyAddressBook()`, making a copy of the address book and pointing `backup` to it before the `delete 5` command executes, and the `AddressBook` is updated without the deleted person.
+
+![UndoRedoState1](images/UndoState1.png)
+
+Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCommand()`, which will revert the `AddressBook`, by pointing it to the `backup`, and restores the address book to that state.
+
+![UndoRedoState3](images/UndoState2.png)
+
+#### Design considerations:
+
+**Aspect: How undo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
