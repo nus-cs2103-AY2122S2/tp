@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
@@ -9,6 +9,8 @@ import java.util.List;
 
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
+import seedu.ibook.logic.commands.Command;
+import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.item.Item;
@@ -64,7 +66,7 @@ public class AddItemCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.ibook.logic.commands.AddItemCommand // instanceof handles nulls
-                && toAdd.equals(((seedu.ibook.logic.commands.AddItemCommand) other).toAdd));
+                || (other instanceof AddItemCommand // instanceof handles nulls
+                && toAdd.equals(((AddItemCommand) other).toAdd));
     }
 }

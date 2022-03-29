@@ -2,7 +2,7 @@ package seedu.ibook.ui.popup;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import seedu.ibook.logic.commands.DeleteCommand;
+import seedu.ibook.logic.commands.product.DeleteCommand;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 

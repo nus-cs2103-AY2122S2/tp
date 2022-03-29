@@ -7,7 +7,7 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import java.util.stream.Stream;
 
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.AddItemCommand;
+import seedu.ibook.logic.commands.item.AddItemCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Item;

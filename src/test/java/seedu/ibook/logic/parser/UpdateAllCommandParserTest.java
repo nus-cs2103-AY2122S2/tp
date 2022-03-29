@@ -28,8 +28,8 @@ import static seedu.ibook.testutil.TypicalIndexes.INDEX_THIRD_PRODUCT;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.UpdateAllCommand;
-import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
+import seedu.ibook.logic.commands.product.UpdateAllCommand;
+import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;

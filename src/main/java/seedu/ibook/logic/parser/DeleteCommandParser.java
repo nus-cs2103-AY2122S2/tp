@@ -3,7 +3,7 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.DeleteCommand;
+import seedu.ibook.logic.commands.product.DeleteCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 
 /**

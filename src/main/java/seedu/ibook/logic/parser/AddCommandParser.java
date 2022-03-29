@@ -8,7 +8,7 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import java.util.stream.Stream;
 
-import seedu.ibook.logic.commands.AddCommand;
+import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;

@@ -23,7 +23,7 @@ import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ibook.logic.commands.AddCommand;
+import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;

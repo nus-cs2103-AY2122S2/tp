@@ -18,7 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
+import seedu.ibook.logic.commands.product.UpdateCommand;
+import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;

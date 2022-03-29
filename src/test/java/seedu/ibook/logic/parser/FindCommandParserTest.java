@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ibook.logic.commands.FindCommand;
+import seedu.ibook.logic.commands.product.FindCommand;
 import seedu.ibook.model.product.filters.AttributeFilter;
 
 public class FindCommandParserTest {

@@ -7,7 +7,7 @@ import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ibook.logic.commands.DeleteCommand;
+import seedu.ibook.logic.commands.product.DeleteCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

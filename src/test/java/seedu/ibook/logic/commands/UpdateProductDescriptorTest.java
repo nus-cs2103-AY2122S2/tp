@@ -11,7 +11,7 @@ import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_B;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
+import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
 public class UpdateProductDescriptorTest {

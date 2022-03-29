@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -7,6 +7,8 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import java.util.List;
 
 import seedu.ibook.commons.core.Messages;
+import seedu.ibook.logic.commands.Command;
+import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.filters.AttributeFilter;
 

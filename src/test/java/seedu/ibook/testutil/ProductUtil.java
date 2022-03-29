@@ -5,8 +5,8 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
-import seedu.ibook.logic.commands.AddCommand;
-import seedu.ibook.logic.commands.UpdateCommand;
+import seedu.ibook.logic.commands.product.AddCommand;
+import seedu.ibook.logic.commands.product.UpdateCommand;
 import seedu.ibook.model.product.Product;
 
 /**
