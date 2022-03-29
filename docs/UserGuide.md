@@ -27,7 +27,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
      - Navigate to your _home folder_ on Terminal <br>
      - Launch the application using the command `java -jar ContaX.jar`. <br>
    </div>
- 
+
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
