@@ -116,7 +116,6 @@ public class CommandBox extends UiPart<Region> {
 
             if (!commands.contains(last)) {
                 String completed = last;
-
                 for (String command : commands) {
                     if (command.contains(last)) {
                         completed = command;
@@ -126,7 +125,6 @@ public class CommandBox extends UiPart<Region> {
 
                 if (completed.equals(last)) {
                     int min = Integer.MAX_VALUE;
-
                     for (String command : commands) {
                         int distance = editDistance(last, command);
                         if (distance < min) {
