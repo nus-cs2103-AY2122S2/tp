@@ -10,6 +10,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.AttendanceUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.AbsentAttendanceEntry;
@@ -102,6 +103,29 @@ public class AbsentAttendanceCommand extends Command {
             return attendanceDate;
         }
 
+        @Override
+        public String toString() {
+            String date = getAttendanceDate().format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
+            return "Absent | " + date;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof AbsentAttendanceDescriptor)) {
+                return false;
+            }
+
+            // state check
+            AbsentAttendanceDescriptor otherDescriptor = (AbsentAttendanceDescriptor) other;
+
+            return attendanceDate.equals(otherDescriptor.attendanceDate);
+        }
     }
 
     /**
@@ -139,6 +163,4 @@ public class AbsentAttendanceCommand extends Command {
         return index.equals(e.index)
                 && absentAttendanceDescriptor.equals(e.absentAttendanceDescriptor);
     }
-
-
 }

@@ -31,9 +31,9 @@ public class PresentAttendanceCommand extends Command {
             + "by the index number used in the displayed pet list. \n"
             + "Includes the date, pick up time and drop off time (if any). \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_DATE + "DATE OF ATTENDANCE IN DD/MM/YYYY] "
-            + "[" + PREFIX_PICKUP + "PICK UP TIME IN HH:MM] "
-            + "[" + PREFIX_DROPOFF + "DROP OFF TIME IN HH:MM] \n"
+            + "[" + PREFIX_DATE + "DATE OF ATTENDANCE IN dd-MM-yyyy] "
+            + "[" + PREFIX_PICKUP + "PICK UP TIME IN HH:mm] "
+            + "[" + PREFIX_DROPOFF + "DROP OFF TIME IN HH:mm] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "15-03-2022 "
             + PREFIX_PICKUP + "09:15 "
@@ -136,6 +136,15 @@ public class PresentAttendanceCommand extends Command {
         public PresentAttendanceDescriptor() {
         }
 
+        /**
+         * Copy constructor.
+         */
+        public PresentAttendanceDescriptor(PresentAttendanceDescriptor toCopy) {
+            setAttendanceDate(toCopy.attendanceDate);
+            setPickUpTime(toCopy.pickUpTime);
+            setDropOffTime(toCopy.dropOffTime);
+        }
+
         public void setAttendanceDate(LocalDate attendanceDate) {
             this.attendanceDate = attendanceDate;
         }
@@ -175,6 +184,26 @@ public class PresentAttendanceCommand extends Command {
             }
 
             return "Present | " + date + " | " + NO_PICKUP_DROPOFF_STRING;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof PresentAttendanceDescriptor)) {
+                return false;
+            }
+
+            // state check
+            PresentAttendanceDescriptor otherDescriptor = (PresentAttendanceDescriptor) other;
+
+            return attendanceDate.equals(otherDescriptor.attendanceDate)
+                && getPickUpTime().equals(otherDescriptor.getPickUpTime())
+                && getDropOffTime().equals(otherDescriptor.getDropOffTime());
         }
     }
 

@@ -140,4 +140,32 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for tagContainsWordsIgnoreCase --------------------------------------
+    @Test
+    public void tagOrNameContainsWordsIgnoreCase_correct_result() {
+        //Actual match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "ABC"));
+
+        //Lower case actual match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "abc"));
+
+        //Partial match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "AB"));
+
+        //Lower case partial match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC", "ab"));
+
+        //Two words Partial Match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF", "DE"));
+
+        //Two words one full match, one partial match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF", "abc de"));
+
+        //Three words, all partial match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF GHI", "ab de hi"));
+
+        //Three words, two words partial match
+        assertTrue(StringUtil.tagOrNameContainsWordsIgnoreCase("ABC DEF GHI", "ab de"));
+    }
+
 }

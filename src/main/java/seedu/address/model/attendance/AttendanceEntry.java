@@ -51,6 +51,8 @@ public abstract class AttendanceEntry {
      */
     public abstract Optional<LocalTime> getDropOffTime();
 
+    public abstract boolean hasTransportArrangement();
+
     @Override
     public abstract boolean equals(Object other);
 

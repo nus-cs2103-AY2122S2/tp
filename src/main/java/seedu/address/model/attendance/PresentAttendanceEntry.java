@@ -55,7 +55,8 @@ public class PresentAttendanceEntry extends AttendanceEntry {
      *
      * @return true if both specified, false otherwise.
      */
-    private boolean hasPickUpDropOff() {
+    @Override
+    public boolean hasTransportArrangement() {
         return getPickUpTime().isPresent() && getDropOffTime().isPresent();
     }
 
@@ -102,7 +103,7 @@ public class PresentAttendanceEntry extends AttendanceEntry {
     public String toString() {
         String date = getAttendanceDate().format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
 
-        if (hasPickUpDropOff()) {
+        if (hasTransportArrangement()) {
             String pickUp = String.format(PICKUP_STRING, pickUpTime.toString());
             String dropOff = String.format(DROPOFF_STRING, dropOffTime.toString());
             return "Present | " + date + " | " + pickUp + " | " + dropOff;

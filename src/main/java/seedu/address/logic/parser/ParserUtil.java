@@ -167,6 +167,55 @@ public class ParserUtil {
     }
 
     /**
+     * Checks if a keyword follows after the filter field. Returns keyword as String.
+     * @param trimmedArgs Arguments to be parsed.
+     * @return keyword as String.
+     * @throws ParseException Throws exception if keyword is absent.
+     */
+    public static String parseFilterArgs(String trimmedArgs) throws ParseException {
+        String[] argSplitter = trimmedArgs.split("/");
+        if (argSplitter.length != 2) {
+            throw new ParseException("You did not provide a keyword!");
+        }
+        return argSplitter[1];
+    }
+
+    /**
+     * Parses a {@code String filterDate} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return Parsed local date.
+     * @throws ParseException if the given filter date is invalid.
+
+     */
+    public static LocalDate parseFilterDate(String filterDate) throws ParseException {
+        requireNonNull(filterDate);
+        String trimmedAttendanceDate = filterDate.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            return LocalDate.parse(trimmedAttendanceDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Filter date provided should be in dd-MM-yyyy format!");
+        }
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param date Date in String format of dd-MM-yyyy HH:mm.
+     * @return Parsed LocalDateTime representation of input.
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseFilterAppointmentDate(String date) throws ParseException {
+        try {
+            return parseFilterDate(date);
+        } catch (Exception e) {
+            throw new ParseException("Appointment date provided for filter should be entered in dd-MM-yyyy format!");
+        }
+    }
+
+    /**
      * Parses a {@code String pickUpTime} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
