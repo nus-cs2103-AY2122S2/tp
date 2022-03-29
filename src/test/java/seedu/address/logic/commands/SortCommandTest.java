@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -198,5 +199,30 @@ public class SortCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(FIONA, ELLE, BENSON, GEORGE, DANIEL, CARL, ALICE),
                 model.getFilteredAndSortedPersonList());
+    }
+
+    @Test
+    public void equals() {
+        PersonComparator nameComparator = new PersonComparator(List.of(NAME_COMPARATOR));
+        PersonComparator addressComparator = new PersonComparator(List.of(ADDRESS_COMPARATOR));
+
+        SortCommand sortNameCommand = new SortCommand(nameComparator);
+        SortCommand sortAddressCommand = new SortCommand(addressComparator);
+
+        // same object -> returns true
+        assertTrue(sortNameCommand.equals(sortNameCommand));
+
+        // same values -> returns true
+        SortCommand sortNameCommandCopy = new SortCommand(nameComparator);
+        assertTrue(sortNameCommand.equals(sortNameCommandCopy));
+
+        // different types -> returns false
+        assertFalse(sortNameCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(sortNameCommand.equals(null));
+
+        // different comparator -> returns false
+        assertFalse(sortNameCommand.equals(sortAddressCommand));
     }
 }
