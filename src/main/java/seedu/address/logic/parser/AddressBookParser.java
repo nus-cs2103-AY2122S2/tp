@@ -17,8 +17,11 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindBuyerCommand;
+//import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindSellerCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchCommand;
@@ -61,8 +64,8 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        //case EditSellerCommand.COMMAND_WORD:
-        //    return new EditSellerCommandParser().parse(arguments);
+        case EditSellerCommand.COMMAND_WORD:
+            return new EditSellerCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
@@ -70,8 +73,14 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        //case FindCommand.COMMAND_WORD:
+        //    return new FindCommandParser().parse(arguments);
+
+        case FindSellerCommand.COMMAND_WORD:
+            return new FindSellerCommandParser().parse(arguments);
+
+        case FindBuyerCommand.COMMAND_WORD:
+            return new FindBuyerCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

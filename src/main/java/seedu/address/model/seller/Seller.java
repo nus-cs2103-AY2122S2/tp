@@ -52,4 +52,5 @@ public class Seller extends Client {
                 && otherSeller.getPhone().equals(getPhone())
                 && otherSeller.getTags().equals(getTags());
     }
+
 }
