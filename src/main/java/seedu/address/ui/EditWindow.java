@@ -152,7 +152,7 @@ public class EditWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the edit window.
      */
     public void focus() {
         getRoot().requestFocus();

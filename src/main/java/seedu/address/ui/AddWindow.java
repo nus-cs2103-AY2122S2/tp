@@ -175,7 +175,7 @@ public class AddWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the add window.
      */
     public void focus() {
         getRoot().requestFocus();
