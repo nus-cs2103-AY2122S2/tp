@@ -65,7 +65,6 @@ public class PersonCard extends UiPart<Region> {
         email.setText("Email: " + person.getEmail().value);
         flag.setText("Flag: " + person.getFlag().toString());
         prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
-        salary.setText("Salary: $" + person.getSalary().value);
         info.setText("Info: " + person.getInfo().value);
 
         String meetingDetails = person.getScheduledMeeting().toString();
