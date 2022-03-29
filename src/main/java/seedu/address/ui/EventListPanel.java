@@ -14,19 +14,19 @@ import seedu.address.model.entry.Event;
  * Panel containing the list of events.
  */
 public class EventListPanel extends UiPart<Region> {
-    private static final String FXML = "EventListPanel.fxml";
+    private static final String FXML = "EntryListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     @FXML
-    private ListView<Event> eventListView;
+    private ListView<Event> entryListView;
 
     /**
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
     public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
-        eventListView.setItems(eventList);
-        eventListView.setCellFactory(listView -> new EventListViewCell());
+        entryListView.setItems(eventList);
+        entryListView.setCellFactory(listView -> new EventListViewCell());
     }
 
     /**
