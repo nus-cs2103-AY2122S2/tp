@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FocusCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -210,6 +211,34 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * This method will be used when a user tries to key in an Edit Command. It will check if the index
+     * being edited corresponds to the Candidate being shown.
+     *
+     * @return if the Candidate being edited is the one on Focus Panel, return the index of the Candidate. Else
+     * it will return the value of -1.
+     */
+    public int handleEdit(String commandText) throws CommandException, ParseException {
+        int displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
+        String string = commandText.substring(5);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (Character.isDigit(c)) {
+                builder.append(c);
+            } else {
+                break;
+            }
+        }
+
+        int editIndex = Integer.parseInt(builder.toString());
+        if (editIndex - 1 == displayedIndex) {
+            return editIndex;
+        } else {
+            return -1;
+        }
+    }
+
     public CandidateListPanel getCandidateListPanel() {
         return candidateListPanel;
     }
@@ -229,9 +258,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            int editFlag = -1;
 
             if (commandText.contains(DeleteCommand.COMMAND_WORD)) {
                 handleDelete(commandText);
+            }
+
+            if (commandText.contains(EditCommand.COMMAND_WORD)) {
+                editFlag = handleEdit(commandText);
             }
 
             CommandResult commandResult = logic.execute(commandText);
@@ -250,8 +284,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleFocus(commandResult);
             }
 
-            if (commandResult.isEdit() && !commandResult.isShowFocus()) {
-                executeCommand(FocusCommand.COMMAND_WORD + " " + commandResult.getEditIndex());
+            if (editFlag != -1) {
+                executeCommand(FocusCommand.COMMAND_WORD + " " + editFlag);
             }
 
             return commandResult;
