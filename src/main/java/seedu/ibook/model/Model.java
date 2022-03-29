@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
 
@@ -80,7 +81,7 @@ public interface Model {
      * Adds the given item to {@code product}.
      * {@code item} must not already exist in the IBook.
      */
-    void addItem(Product product, Item item);
+    void addItem(Product product, ItemDescriptor item);
 
     /**
      * Deletes the given item from the product.

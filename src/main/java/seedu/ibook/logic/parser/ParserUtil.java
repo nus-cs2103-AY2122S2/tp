@@ -10,6 +10,8 @@ import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.DiscountRate;
+import seedu.ibook.model.product.DiscountStart;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 
@@ -144,5 +146,35 @@ public class ParserUtil {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String discountRate} into a {@code DiscountRate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code discountRate} is invalid.
+     */
+    public static DiscountRate parseDiscountRate(String discountRate) throws ParseException {
+        requireNonNull(discountRate);
+        String trimmedDiscountRate = discountRate.trim();
+        if (!DiscountRate.isValidDiscountRate(trimmedDiscountRate)) {
+            throw new ParseException(DiscountRate.MESSAGE_CONSTRAINTS);
+        }
+        return new DiscountRate(trimmedDiscountRate);
+    }
+
+    /**
+     * Parses a {@code String discountStart} into a {@code DiscountStart}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code discountStart} is invalid.
+     */
+    public static DiscountStart parseDiscountStart(String discountStart) throws ParseException {
+        requireNonNull(discountStart);
+        String trimmedDiscountStart = discountStart.trim();
+        if (!DiscountStart.isValidDiscountStart(trimmedDiscountStart)) {
+            throw new ParseException(DiscountStart.MESSAGE_CONSTRAINTS);
+        }
+        return new DiscountStart(trimmedDiscountStart);
     }
 }

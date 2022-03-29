@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.ProductFilter;
@@ -121,7 +122,7 @@ public class ModelManager implements Model {
     //=========== Item ========================================================================================
 
     @Override
-    public void addItem(Product product, Item item) {
+    public void addItem(Product product, ItemDescriptor item) {
         requireAllNonNull(product, item);
         iBook.addItem(product, item);
     }
