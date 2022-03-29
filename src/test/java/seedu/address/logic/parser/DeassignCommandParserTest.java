@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.commands.DeassignCommand;
 import seedu.address.model.group.Group;
 import seedu.address.testutil.GroupBuilder;
