@@ -26,6 +26,8 @@ public class ConsultationCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label nric;
+    @FXML
     private Label date;
     @FXML
     private Label diagnosis;
@@ -41,6 +43,7 @@ public class ConsultationCard extends UiPart<Region> {
         super(FXML);
         this.consultation = consultation;
         id.setText(displayedIndex + ". ");
+        nric.setText(consultation.getNric().toString());
         date.setText(consultation.getDate().toString() + ", " + consultation.getTime().toString());
         fee.setText(consultation.getFee().toString());
         diagnosis.setText(consultation.getDiagnosis().toString());

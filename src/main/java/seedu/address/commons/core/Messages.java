@@ -23,6 +23,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_TEST_RESULT_INDEX = "The test result index provided is invalid";
     public static final String MESSAGE_INVALID_MEDICAL_INFORMATION_INDEX =
             "The medical information index provided is invalid";
+    public static final String MESSAGE_INVALID_CONSULTATION_INDEX =
+            "The consultation index provided is invalid";
 
-    public static final String MESSAGE_SUMMARY_SHOWN = "Shown summary for patient %1$s!";
+    public static final String MESSAGE_SUMMARY_SHOWN = "Showed summary for patient with NRIC %1$s!";
 }
