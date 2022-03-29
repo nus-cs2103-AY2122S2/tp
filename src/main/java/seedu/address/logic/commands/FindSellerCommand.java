@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.seller.Seller;
 import seedu.address.model.seller.SellerHouseTypeContainsKeywordsPredicate;
+import seedu.address.model.seller.SellerLocationContainsKeywordsPredicate;
 import seedu.address.model.seller.SellerNameContainsKeywordsPredicate;
 import seedu.address.model.seller.SellerPhoneContainsKeywordsPredicate;
 import seedu.address.model.seller.SellerTagsContainsKeywordsPredicate;
@@ -18,7 +19,7 @@ import seedu.address.model.seller.SellerTagsContainsKeywordsPredicate;
  */
 public class FindSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "findseller";
+    public static final String COMMAND_WORD = "find-s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all sellers whose specified field matches "
             + "the given keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -40,6 +41,10 @@ public class FindSellerCommand extends Command {
     }
 
     public FindSellerCommand(SellerHouseTypeContainsKeywordsPredicate predicate) {
+        this.predicateSeller = predicate;
+    }
+
+    public FindSellerCommand(SellerLocationContainsKeywordsPredicate predicate) {
         this.predicateSeller = predicate;
     }
 
