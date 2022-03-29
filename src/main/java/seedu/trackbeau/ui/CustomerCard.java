@@ -1,5 +1,9 @@
 package seedu.trackbeau.ui;
 
+import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_DATE;
+import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
+import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -65,21 +69,25 @@ public class CustomerCard extends UiPart<Region> {
         address.setText(customer.getAddress().value);
         email.setText(customer.getEmail().value);
         regDate.setText("Registration Date: " + customer.getRegDate().toString());
-        if (customer.getSkinType().value != "Skin type data not available") {
+
+        if (!customer.getSkinType().value.equals(EMPTY_SKIN_TYPE)) {
             skinType.setText("Skin Type: " + customer.getSkinType().value);
         } else {
             skinType.setManaged(false);
         }
-        if (customer.getHairType().value != "Hair type data not available") {
+
+        if (!customer.getHairType().value.equals(EMPTY_HAIR_TYPE)) {
             hairType.setText("Hair Type: " + customer.getHairType().value);
         } else {
             hairType.setManaged(false);
         }
-        if (customer.getBirthdate().toString() != "Birthday data not available.") {
+
+        if (!customer.getBirthdate().toString().equals(EMPTY_DATE)) {
             birthDate.setText("Birthday: " + customer.getBirthdate().toString());
         } else {
             birthDate.setManaged(false);
         }
+
         customer.getServices().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> services.getChildren().add(new Label(tag.tagName)));
