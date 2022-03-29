@@ -1,0 +1,20 @@
+@startuml
+ 'https://plantuml.com/activity-diagram-beta
+
+ start
+ :User keys in the edit command;
+ if () then ([Valid command to change ApplicationStatus])
+    switch ( )
+    case ([User change status to "Pending"])
+    :update candidate ApplicationStatus to Pending;
+    case ([User change status to "Accepted"])
+    :update candidate ApplicationStatus to Accepted;
+    case ([User change status to "Rejected"])
+    :update candidate ApplicationStatus to Rejected;
+    endswitch
+ else ([Invalid prefix or status entered])
+   :System returns invalid command error;
+ endif
+ stop
+
+ @enduml
