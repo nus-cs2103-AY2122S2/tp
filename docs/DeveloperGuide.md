@@ -348,6 +348,30 @@ Throughout the onboarding guide, Overlays and Highlights are used to direct the 
 ##### The `Overlay` Class
 The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
 
+### Markdown-like Text Processing
+The `TextStyleHelper` class contains a text processor that processes common text modifications into UI elements. This is mainly used in the `ResultDisplay` UI component, where it shows text output each time a command is executed. In particular, it is used in the error messages, in order to present error messages better.
+
+Example of styled text:
+![StyledTextExample](images/StyledTextExample.png)
+
+It can be easily used in other components of ContaX if the need arises.
+
+It currently supports:
+- Italics
+  - Enclosing text with `*`
+- Bold
+  - Enclosing text with `**`
+- Bold and Italics
+  - Enclosing text with `***`
+- Monospaced
+  - Enclosing text with `` ` ``
+
+This was done by changing the `ResultDisplay` to use a `TextFlow` object, and dynamically generating a List of styled `Text` objects to add to the `ResultDisplay`.
+
+A partial sequence diagram showing the process of how the UI uses the text styler is as follows:
+![MarkdownTextStylerDiagram](images/MarkdownTextStylerDiagram.png)
+
+
 ### Import and Export CSV Features
 
 This section describes some of the details as to how the import and export CSV features were implemented
@@ -756,42 +780,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 2.
 
-**Use case: Export address book**
+#### Import/Export CSV UseCases
+
+![Import/Export CSV Use Cases](images/UseCaseDiagramImportExportCsv.png)
+
+**UC19: Export CSV File**
 
 **MSS**
 
 1. User requests to export address book as file for ContaX
-2. ContaX saves a CSV file to the disk according to the format requested by the user
-
+2. ContaX saves a CSV file to the disk<br><br>
    Use case ends.
 
-**Extensions**
-
-* 1a. User requests to export address book as file for Google Contacts
-
-  Use case resumes at step 2.
-
-* 1b. User requests to export address book as file for Microsoft Outlook
-
-  Use case resumes at step 2.
-
-**Use Case: Import CSV file**
+**UC20: Import CSV file**
 
 **MSS**
 
-1. User requests to import a CSV file
-2. User selects the CSV file to import
-3. ContactX imports the given CSV file
-
+1. User requests to import a CSV file from a specified file path
+2. ContactX imports the contacts from given CSV file<br><br>
     Use case ends.
 
 **Extensions**
 
+* 1a. User enters custom column definitions<br>&nbsp;
+    * Use case resumes at step 2<br>&nbsp;
+
 * 2a. Invalid CSV file selected
+    * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
 
-    * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.
-
-    * Use case ends.
 
 **Use case: User requests to perform a batch command**
 
@@ -870,6 +887,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
 * **Schedule**: The part of ContaX that keeps track of Appointments
+* **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications.
 * **Onboarding Guide**: The quick start guide to ContaX
 
 --------------------------------------------------------------------------------------------------------------------
