@@ -16,6 +16,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Constructor for ResultDisplay
+     */
     public ResultDisplay() {
         super(FXML);
         resultDisplay.setWrapText(true);

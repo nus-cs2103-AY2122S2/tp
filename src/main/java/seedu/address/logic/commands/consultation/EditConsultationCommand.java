@@ -1,7 +1,12 @@
 package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.List;
 import java.util.Optional;
