@@ -36,11 +36,15 @@ public class DeleteAllCommand extends Command {
             throw new CommandException(MESSAGE_NO_PRODUCT_TO_DELETE);
         }
 
+        model.prepareIBookForChanges();
+
         StringBuilder deletedProductDescription = new StringBuilder();
         for (Product target : productsToDelete) {
             model.deleteProduct(target);
             deletedProductDescription.append(String.format(MESSAGE_DELETED_PRODUCT, target));
         }
+
+        model.saveIBookChanges();
 
         return new CommandResult(MESSAGE_DELETE_ALL_PRODUCT_SUCCESS + deletedProductDescription);
     }
