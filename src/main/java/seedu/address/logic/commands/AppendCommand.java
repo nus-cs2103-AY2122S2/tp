@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 public class AppendCommand extends Command {
     public static final String COMMAND_WORD = "append";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Appends fields to a client.";
-    public static final String MESSAGE_SUCCESS = "Appended fields to client: %1$s";
+    public static final String MESSAGE_SUCCESS = "Appended fields to %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 
     private final Index index;

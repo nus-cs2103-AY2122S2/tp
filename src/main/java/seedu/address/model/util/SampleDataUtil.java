@@ -5,6 +5,7 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -25,7 +26,7 @@ public class SampleDataUtil {
                     new Address("Blk 30 Geylang Street 29, #06-40")
                 ),
                 List.of(
-                    new Tag("friends")
+                    new Tag("distributor")
                 )),
             new Person(
                 List.of(
@@ -35,18 +36,19 @@ public class SampleDataUtil {
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")
                 ),
                 List.of(
-                    new Tag("friends"),
-                    new Tag("colleagues")
+                    new Tag("vendor"),
+                    new Tag("furniture")
                 )),
             new Person(
                 List.of(
                     new Name("Charlotte Oliveiro"),
                     new Phone("93210283"),
                     new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04")
+                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    new Birthday("2000-09-01")
                 ),
                 List.of(
-                    new Tag("neighbours")
+                    new Tag("supplier")
                 )),
             new Person(
                 List.of(
@@ -56,7 +58,7 @@ public class SampleDataUtil {
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43")
                 ),
                 List.of(
-                    new Tag("family")
+                    new Tag("supplier")
                 )),
             new Person(
                 List.of(
@@ -66,7 +68,7 @@ public class SampleDataUtil {
                     new Address("Blk 47 Tampines Street 20, #17-35")
                 ),
                 List.of(
-                    new Tag("classmates")
+                    new Tag("supplier")
                 )),
             new Person(
                 List.of(
@@ -76,7 +78,7 @@ public class SampleDataUtil {
                     new Address("Blk 45 Aljunied Street 85, #11-31")
                 ),
                 List.of(
-                    new Tag("colleagues")
+                    new Tag("plumber")
                 ))
         };
     }
