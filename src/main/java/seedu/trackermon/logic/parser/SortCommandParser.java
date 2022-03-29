@@ -142,7 +142,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                                                Prefix prefix, ArgumentMultimap argMultimap) throws ParseException {
         Comparator<Show> newComparator = comparator;
         if (arePrefixesPresent(argMultimap, prefix)) {
-            String value = argMultimap.getValue(prefix).orElse(VALUE_ASC).toUpperCase().trim();
+            String value = argMultimap.getValue(prefix).orElse(VALUE_ASC);
             value = ParserUtil.checkOrder(value.toUpperCase().trim());
             if (value.equals(VALUE_DSC)) {
                 newComparator = comparator.reversed();
