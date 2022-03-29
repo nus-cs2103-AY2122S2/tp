@@ -201,6 +201,98 @@ The following activity diagram summarizes the different possible paths when addi
 * **Alternative 2:** Use null values are default values.
     * Pros: Easier and faster to implement.
     * Cons: Code wise is more prone to errors and more defensive approach have to be used when handling the new attributes.
+    
+### Adding optional additional attribute, Salary
+
+#### Implementation
+
+Clients handled by financial advisors are usually working adults, earning salary and are capable of paying for the services provided by the financial advisors. Moreover, using the client's salary information, financial advisors can better advise them on the plans and/or services to get. Therefore, it is very beneficial to track clients' salaries. 
+
+To cater for this new information to be stored, a new optional attribute, `Salary` has been implemented. A `Salary` exists for each client to store their salary amount.
+
+This attribute can be added to through the use of the `s/` prefix. The `Salary` attribute can be added to a client through the `add` command as well as modified through the `edit` command.
+* Since this is an optional attribute, the prefix can be omitted when using `add` or `edit` command. Clients added without this prefix will be assigned a `Salary` with a predefined value. This predefined value can be modified using the `edit` command.
+
+***Diagrams to be added later***
+
+#### Design Consideration
+**Aspect: How to handle contacts with no salary aspect:**
+* **Alternative 1 (Current choice):** Use a new constructor with no parameters, taking predefined value as salary.
+    * Pros: Future changes to the predefined value will only need simple and small changes in the constructor.
+    * Cons: Now the object has an additional constructor method that needs to be kept track of and updated by the developer if any changes are required.
+
+* **Alternative 2:** Use the existing constructor with String as a parameter, passing in a predefined value as salary.
+    * Pros: Through the use of an existing method, a developer needs to keep track of and update only one constructor for that object if any change is required.
+    * Cons: If any change is required for the predefined value, a developer needs to search all usages of this method and update those using the predefined value to a new value. This can be time-consuming.
+
+### Edit Command, Using name
+**To be added**
+
+### Delete Command, Using name
+**To be added**
+
+### Flagging important clients
+
+The feature is implemented to provide functionality and visual representation of important clients. 
+Feature is needed for several user stories involving important clients. A new attribute is thus added to the current 
+Person class. Flag command is created to shorten the process of flagging a client, instead of needing to use the edit 
+command. 
+
+Additionally, a new prefix, `f/`, can be used in the add and edit command to specify the flag status directly. 
+This prefix is optional and can be left out during the creation of a new client contact. 
+
+All new clients will adopt a default `unflagged` state when the flag status is not specified. 
+
+The following sequence diagram shows how the `flag`/`unflag` command works:
+
+**[COMING SOON]**
+
+The following activity diagram summarizes how to flag a client.
+
+**[COMING SOON]**
+
+#### Design considerations:
+
+**Aspect: Ease of use of flag commands:**
+
+* **Alternative 1 (current choice):** `flag` and `unflag` split into separate commands. 
+    * Pros: More intuitive to use as compared to alternative 2 for any user.
+    * Cons: More commands to test and maintain.
+
+* **Alternative 2:** Single `flag` command and use an `f/` prefix to set new flag.
+    * Pros: Only one command for both scenarios and fewer tests needed.
+    * Cons: Usage is not very intuitive to a user.
+
+### Sort Command
+
+The `sort` command sorts clients based on the parameter provided by the user input.
+
+The `sort` mechanism is facilitated by `HustleBook`. It is implemented by `SortCommand` that extends `Command` and parsed
+by `SortCommandParser`. SortCommand accepts a Comparator<Person> and uses FXCollections.sort to sort
+`UniquePersonsList`. The parameters `SortCommand` currently accepts are `name`, `prev`, `salary` and `meeting`.
+
+Given below is an example usage scenario and how the `sort` mechanism behaves at each step.
+
+Step 1. The user inputs `sort name`. `LogicManager#excute` calls `HustleBookParser#parseCommand`.
+
+Step 2. `HustleBookParser#parseCommand` then passes the user input and calls `SortComandParser#parse`.
+
+Step 3. `SortComandParser#parse` calls `SortCommandParser#parseComparatorForSort` to determine the Comparator
+required and returns a `PersonNameComparator` object to `SortComandParser#parse`.
+
+Step 4. `SortComandParser#parse` then returns a `SortCommand` containing `PersonNameComparator` to `LogicManager`.
+
+Step 5.  `LogicManager#execute` executes the `SortCommand` which calls `model#sortPersonListBy` and sorts the
+`UniquePersonList` using FXCollections.sort and `PersonNameComparator`.
+
+
+The following sequence diagram shows how the `sort` command works:
+
+**[COMING SOON]**
+
+The following activity diagram summarizes how to sort all clients.
+
+**[COMING SOON]**
 
 ### \[Proposed\] Undo/redo feature
 
@@ -285,6 +377,22 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### Edit/Delete Feature
+
+#### Implementation
+Initially, the edit and delete features of AddressBook only worked on one person in the list - the first one.
+We wanted to add a feature that allowed our users to specify the client they wished to perfom an action on, in the case
+of multiple clients with similar names.
+
+Firstly, we added a `lastCommand` variable to store the last command that the user requested. This will be useful to us
+when we are asking the user to perform an action with multiple inputs.
+
+When `edit` is first called, the `EditCommand` first makes a copy of the `FilteredPersonList`. Then a `Predicate` is
+set to filter the list of clients with matching names as the search term given. If that is the case, we will then show 
+the list of clients with similar names, and ask the user to input the index of the client they wish to edit. With that
+additional input, we can specify which client the user wants to edit based on the index given.
+
 
 
 --------------------------------------------------------------------------------------------------------------------

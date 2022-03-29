@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,8 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Flag;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 
 /**
  * Represents the in-memory model of the hustle book data.
@@ -105,6 +109,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void scheduleMeetingPerson(Person target, ScheduledMeeting scheduledMeeting) {
+        hustleBook.scheduleMeeting(target, scheduledMeeting);
+    }
+
+    @Override
+    public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
+        requireNonNull(scheduledMeeting);
+        return hustleBook.hasSameMeeting(scheduledMeeting);
+    }
+
+    @Override
     public void addPerson(Person person) {
         hustleBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -118,8 +133,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortPersonListByDate() {
-        hustleBook.sortPersonByDate();
+    public void sortPersonListBy(Comparator<Person> sortComparator) {
+        hustleBook.sortPersonBy(sortComparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -137,6 +152,20 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Index getPersonListIndex(Name name) {
+        Index result = Index.fromZeroBased(0);
+        String personName = name.fullName;
+        for (Person i : filteredPersons) {
+            String currName = i.getName().fullName;
+            if (currName.toLowerCase().contains(personName.toLowerCase())) {
+                break;
+            }
+            result.increment(1);
+        }
+        return result;
     }
 
     @Override

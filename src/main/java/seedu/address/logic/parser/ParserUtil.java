@@ -14,9 +14,12 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
+import seedu.address.model.person.MeetingDate;
+import seedu.address.model.person.MeetingTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,6 +56,7 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -110,6 +114,32 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into an {@code MeetingDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static MeetingDate parseMeetingDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!MeetingDate.isValidDate(trimmedDate)) {
+            throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS);
+        }
+        return new MeetingDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String time} into an {@code MeetingTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static MeetingTime parseMeetingTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!MeetingTime.isValidTime(trimmedTime)) {
+            throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
+        }
+        return new MeetingTime(trimmedTime);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -151,6 +181,23 @@ public class ParserUtil {
             throw new ParseException(PrevDateMet.MESSAGE_CONSTRAINTS);
         }
         return new PrevDateMet(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String salary} into a {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param salary A string representing the salary value.
+     * @return A salary object with the salary value.
+     * @throws ParseException is thrown if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
     }
 
     /**

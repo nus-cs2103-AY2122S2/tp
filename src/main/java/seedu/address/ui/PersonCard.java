@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
@@ -45,7 +46,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label prevDateMet;
     @FXML
+    private Pane salary;
+    @FXML
     private Label info;
+    @FXML
+    private Label scheduledMeeting;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -59,8 +64,21 @@ public class PersonCard extends UiPart<Region> {
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
         flag.setText("Flag: " + person.getFlag().toString());
-        prevDateMet.setText("Last met: " + person.getPrevDateMet().value.toString());
+        prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
         info.setText("Info: " + person.getInfo().value);
+
+        String meetingDetails = person.getScheduledMeeting().toString();
+        if (meetingDetails.equals("No meeting scheduled")) {
+            scheduledMeeting.setText(meetingDetails);
+        } else {
+            String[] meetingSplit = person.getScheduledMeeting().toString().split(" ");
+            String meetingDate = meetingSplit[0];
+            String meetingTime = meetingSplit[1];
+            scheduledMeeting.setText("Upcoming meeting:\n" + meetingDate + " at " + meetingTime);
+        }
+
+        salary.getChildren().add(new Label("Salary: $" + person.getSalary().value));
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

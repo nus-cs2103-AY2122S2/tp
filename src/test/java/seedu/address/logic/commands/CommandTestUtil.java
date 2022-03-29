@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREV_DATE_MET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -39,6 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_PREV_DATE_MET = "2022-02-12";
+    public static final String VALID_SALARY_AMY = "4300";
+    public static final String VALID_SALARY_BOB = "3000";
     public static final String VALID_INFO_AMY = "Salary - $4300 and interested in investing";
     public static final String VALID_INFO_BOB = "Salary - $3000 and low risk tolerance";
 
@@ -53,6 +56,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PREV_DATE_MET_DESC = " " + PREFIX_PREV_DATE_MET + VALID_PREV_DATE_MET;
+    public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
+    public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
     public static final String INFO_DESC_AMY = " " + PREFIX_INFO + VALID_INFO_AMY;
     public static final String INFO_DESC_BOB = " " + PREFIX_INFO + VALID_INFO_BOB;
 
@@ -62,6 +67,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_PREV_DATE_MET = " " + PREFIX_PREV_DATE_MET + "12/12/2022"; //wrong date format
+    public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "sixty thousand"; // Alphabets not allowed
     public static final String INVALID_INFO = " " + PREFIX_INFO + "High risk \\n tolerance"; // '\n' not allowed in info
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -73,10 +79,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withSalary(VALID_SALARY_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSalary(VALID_SALARY_BOB).build();
     }
 
     /**

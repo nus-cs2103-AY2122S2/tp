@@ -14,10 +14,14 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
+import seedu.address.model.person.MeetingDate;
+import seedu.address.model.person.MeetingTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,8 +36,10 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String flag;
-    private String prevDateMet;
-    private String info;
+    private final String prevDateMet;
+    private final String salary;
+    private final String info;
+    private final String scheduledMeeting;
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -44,7 +50,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("flag") String flag, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("info") String info) {
+            @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("salary") String salary,
+            @JsonProperty("info") String info, @JsonProperty("scheduledMeeting") String scheduledMeeting) {
 
         this.name = name;
         this.phone = phone;
@@ -52,7 +59,9 @@ class JsonAdaptedPerson {
         this.address = address;
         this.flag = flag;
         this.prevDateMet = prevDateMet;
+        this.salary = salary;
         this.info = info;
+        this.scheduledMeeting = scheduledMeeting;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -68,7 +77,9 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         flag = source.getFlag().toString();
         prevDateMet = source.getPrevDateMet().toString();
+        salary = source.getSalary().value;
         info = source.getInfo().value;
+        scheduledMeeting = source.getScheduledMeeting().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -135,6 +146,14 @@ class JsonAdaptedPerson {
         }
         final PrevDateMet modelPrevDateMet = new PrevDateMet(prevDateMet);
 
+        if (salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
+        }
+        if (!Salary.isValidSalary(salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        final Salary modelSalary = new Salary(salary);
+
         if (info == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
@@ -143,8 +162,33 @@ class JsonAdaptedPerson {
         }
         final Info modelInfo = new Info(info);
 
+        if (scheduledMeeting == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        ScheduledMeeting meeting;
+        if (scheduledMeeting.equals("No meeting scheduled")) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
+                    modelTags, modelPrevDateMet, modelSalary, modelInfo);
+        } else {
+            meeting = parseScheduledMeeting();
+        }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
-                modelTags, modelPrevDateMet, modelInfo);
+                modelTags, modelPrevDateMet, modelSalary, modelInfo, meeting);
+    }
+
+    private ScheduledMeeting parseScheduledMeeting() throws IllegalValueException {
+        ScheduledMeeting meeting;
+        String[] meetingSplit = scheduledMeeting.split(" ");
+        String meetingDate = meetingSplit[0];
+        String meetingTime = meetingSplit[1];
+        if (!MeetingDate.isValidDate(meetingDate)) {
+            throw new IllegalValueException(MeetingDate.MESSAGE_CONSTRAINTS);
+        }
+        if (!MeetingTime.isValidTime(meetingTime)) {
+            throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);
+        }
+        meeting = new ScheduledMeeting(new MeetingDate(meetingDate), new MeetingTime(meetingTime));
+        return meeting;
     }
 
 }

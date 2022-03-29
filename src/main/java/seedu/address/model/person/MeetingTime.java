@@ -4,16 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Person's upcoming meeting time.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
 public class MeetingTime {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting should only contain numbers and hyphens, in the format of YYYY-MM-DD";
-    //public static final String VALIDATION_REGEX = "^([0-9]{4})(-)(0[1-9]|1[0-2])(-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$";
+            "Meeting time should only contain numbers, in the 24hr format of HHmm";
+    public static final String VALIDATION_REGEX = "^(0[0-9]|1[0-9]|2[0-3])([0-5][0-9])$";
     public final LocalTime value;
 
     /**
@@ -24,20 +26,19 @@ public class MeetingTime {
     public MeetingTime(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        value = LocalTime.parse(time);
+        value = LocalTime.parse(time, FORMATTER);
     }
 
     /**
      * Returns true if a given string is a valid time.
      */
     public static boolean isValidTime(String test) {
-        return true;
-        // return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return value.format(FORMATTER);
     }
 
     @Override

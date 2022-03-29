@@ -8,29 +8,34 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREV_DATE_MET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,6 +54,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_FLAG + "FLAG] "
+            + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_PREV_DATE_MET + "DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -58,10 +64,16 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
+            + "list below and enter the index of the client you wish to edit \n"
+            + "Example: 1, 2, 3 ...";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book.";
+    public static final String MESSAGE_INVALID_INDEX = "This index does not exist!";
 
     private final Name targetName;
+    private final String targetNameStr;
     private final EditPersonDescriptor editPersonDescriptor;
+    private int index = 0;
 
     /**
      * @param name name of the person in the filtered person list to edit
@@ -71,16 +83,34 @@ public class EditCommand extends Command {
         requireNonNull(name);
         requireNonNull(editPersonDescriptor);
 
+
         this.targetName = name;
+        this.targetNameStr = name.fullName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
+
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        HustleBook tempHustleBook = new HustleBook();
-        Index targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
+        FilteredList<Person> lastShownList = (FilteredList<Person>) model.getFilteredPersonList();
+        Index targetIndex;
+        if (index == 0) {
+            FilteredList<Person> tempList = new FilteredList<Person>(lastShownList);
+            String[] nameKeywords = {targetNameStr};
+            Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+            tempList.setPredicate(predicate);
+
+            if (tempList.size() > 1) {
+                lastShownList.setPredicate(predicate);
+                return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+            }
+
+            targetIndex = model.getPersonListIndex(targetName);
+        } else {
+            targetIndex = Index.fromOneBased(index);
+        }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
@@ -98,6 +128,10 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
@@ -111,11 +145,15 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Flag updatedFlag = editPersonDescriptor.getFlag().orElse(personToEdit.getFlag());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
         PrevDateMet updatedPrevDateMet = editPersonDescriptor.getPrevDateMet().orElse(personToEdit.getPrevDateMet());
 
+        // Schedule meeting remains unchanged through edit commands. MeetCommand handles CRUD for meetings.
+        ScheduledMeeting scheduledMeeting = personToEdit.getScheduledMeeting();
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFlag,
-                updatedTags, updatedPrevDateMet, updatedInfo);
+                updatedTags, updatedPrevDateMet, updatedSalary, updatedInfo, scheduledMeeting);
     }
 
     @Override
@@ -147,6 +185,7 @@ public class EditCommand extends Command {
         private Address address;
         private Flag flag;
         private Set<Tag> tags;
+        private Salary salary;
         private Info info;
         private PrevDateMet prevDateMet;
 
@@ -165,6 +204,7 @@ public class EditCommand extends Command {
             setInfo(toCopy.info);
             setPrevDateMet(toCopy.prevDateMet);
             setTags(toCopy.tags);
+            setSalary(toCopy.salary);
             setInfo(toCopy.info);
             setPrevDateMet(toCopy.prevDateMet);
         }
@@ -174,7 +214,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, email, address, tags, info, prevDateMet);
+                    name, phone, email, address, tags, salary, info, prevDateMet);
         }
 
         public void setName(Name name) {
@@ -215,6 +255,14 @@ public class EditCommand extends Command {
 
         public Optional<Flag> getFlag() {
             return Optional.ofNullable(flag);
+        }
+
+        public void setSalary(Salary salary) {
+            this.salary = salary;
+        }
+
+        public Optional<Salary> getSalary() {
+            return Optional.ofNullable(salary);
         }
 
         public void setInfo(Info info) {

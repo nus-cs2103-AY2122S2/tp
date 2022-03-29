@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.util.PersonPrevDateMetComparator;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -36,6 +36,18 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if any person with the same scheduled meeting
+     * as {@code scheduledMeeting} exists in the hustle book.
+     * @param scheduledMeeting The meeting to be scheduled.
+     * @return true if meeting clashes.
+     */
+    public boolean anyMeetingClash(ScheduledMeeting scheduledMeeting) {
+        requireNonNull(scheduledMeeting);
+        return internalList.stream()
+                .anyMatch(person -> person.hasSameMeeting(scheduledMeeting));
     }
 
     /**
@@ -79,6 +91,16 @@ public class UniquePersonList implements Iterable<Person> {
         target.setFlag(flag);
     }
 
+    /**
+     * Schedules a meeting with the targeted person.
+     * @param target The person to be scheduled a meeting with.
+     * @param scheduledMeeting The meeting details.
+     */
+    public void scheduleMeeting(Person target, ScheduledMeeting scheduledMeeting) {
+        requireAllNonNull(target, scheduledMeeting);
+        target.setScheduledMeeting(scheduledMeeting);
+    }
+
 
     /**
      * Removes the equivalent person from the list.
@@ -117,8 +139,8 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
 
-    public void sortByDate() {
-        FXCollections.sort(internalList, new PersonPrevDateMetComparator());
+    public void sortBy(Comparator<Person> sortComparator) {
+        FXCollections.sort(internalList, sortComparator);
     }
 
     @Override

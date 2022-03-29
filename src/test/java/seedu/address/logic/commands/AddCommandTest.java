@@ -9,19 +9,23 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyHustleBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Flag;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -140,6 +144,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void scheduleMeetingPerson(Person target, ScheduledMeeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,9 +169,15 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortPersonListByDate() {
+        public void sortPersonListBy(Comparator<Person> sortComparator) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Index getPersonListIndex(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

@@ -1,12 +1,16 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Flag;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 
 /**
  * The API of the Model component.
@@ -59,6 +63,13 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a meeting clashes with existing ones in the hustle book.
+     * @param scheduledMeeting Meeting to be scheduled.
+     * @return true if meeting clashes.
+     */
+    boolean hasSameMeeting(ScheduledMeeting scheduledMeeting);
+
+    /**
      * Deletes the given person.
      * The person must exist in the hustle book.
      */
@@ -69,6 +80,13 @@ public interface Model {
      * The person must exist in the hustle book.
      */
     void flagPerson(Person target, Flag flag);
+
+    /**
+     * Schedule a meeting with the given person.
+     * @param target Person to be scheduled meeting with.
+     * @param scheduledMeeting The meeting scheduled details.
+     */
+    void scheduleMeetingPerson(Person target, ScheduledMeeting scheduledMeeting);
 
     /**
      * Adds the given person.
@@ -86,9 +104,9 @@ public interface Model {
     /**
      * Sorts the person list.
      */
-    void sortPersonListByDate();
+    void sortPersonListBy(Comparator<Person> sortComparator);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered person list. */
     ObservableList<Person> getFilteredPersonList();
 
     /**
@@ -96,4 +114,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the index of a specified person in the filtered person list.
+     */
+    Index getPersonListIndex(Name name);
 }
