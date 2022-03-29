@@ -35,6 +35,12 @@
                 <Label id="focus-card-label" fx:id="phone" styleClass="focusStyle" text="\$phone" />
                 <Label id="focus-card-label" fx:id="email" styleClass="focusStyle" text="\$email" />
                 <Label id="focus-card-label" fx:id="course" styleClass="focusStyle" text="\$course" />
+                <Label id="focus-card-schedule-label" fx:id="scheduleMessage" styleClass="focusStyle" />
+                <HBox>
+                    <Label id="focus-card-label" fx:id="day" styleClass="focusStyle" />
+                    <Label fx:id="date" styleClass="focusStyle" />
+                    <Label fx:id="time" styleClass="focusStyle" />
+                </HBox>
             </VBox>
         </ScrollPane>
 </HBox>

@@ -469,6 +469,10 @@
     -fx-padding: 0 0 0 15;
 }
 
+#focus-card-schedule-label {
+    -fx-padding: 25 0 0 15;
+}
+
 #focus-card-scroll-pane {
     -fx-background-color: #3c3e3f;
     -fx-border-width: 0;

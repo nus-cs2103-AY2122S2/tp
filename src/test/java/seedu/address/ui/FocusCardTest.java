@@ -8,6 +8,6 @@ public class FocusCardTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(ExceptionInInitializerError.class, () -> new FocusCard(null));
+        assertThrows(ExceptionInInitializerError.class, () -> new FocusCard(null, null));
     }
 }
