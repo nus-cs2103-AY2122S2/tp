@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.comparators.TagPriorityComparator;
 import seedu.address.storage.UndoRedoStorage;
 
 /**
@@ -201,10 +202,21 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Filters and updates {@code filteredPersons} by {@code predicate}.
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Sorts the list of {@code Person} in {@code addressBook} by the priority level of their tags.
+     */
+    @Override
+    public void sortByPriority() {
+        addressBook.sort(new TagPriorityComparator());
     }
 
     @Override

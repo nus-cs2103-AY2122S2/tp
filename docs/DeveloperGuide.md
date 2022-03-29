@@ -212,6 +212,12 @@ Currently, there are 4 priority levels that a tag can have, as provided by the `
   * Cons: We cannot give so much nuance- if someone has some issues that are urgent, and others that aren't, this cannot be captured.
 
 _{more aspects and alternatives to be added}_
+#### Listing by priority
+The PriorityList() command. facilitated by `PriorityListCommand` and `TagPriorityComparator`, allows users to sort and display their contact list by the priority level of their contact's tags. 
+The priority level of a person with multiple tags will be treated as the highest priority out of all his/her tags.
+
+**Aspect: How prioList executes:**
+![PrioListSeq](images/PrioListCommandSeq.PNG)
 
 ### Adding more fields for Find
 Having multiple fields for the `FindCommand` is facilitated by the improvement of the `FindCommandParser` and the creation of different types of `Predicate`. The `CombineContainsKeywordsPredicate` is used in order to combine the various `Predicate` for multiple fields searching. It is the main driver for `FindCommand#execute(model)` in updating the filteredPersonsList.

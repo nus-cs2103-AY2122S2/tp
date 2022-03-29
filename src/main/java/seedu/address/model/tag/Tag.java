@@ -34,6 +34,13 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the priority of the tag.
+     */
+    public Priority getPriority() {
+        return tagPriority;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
