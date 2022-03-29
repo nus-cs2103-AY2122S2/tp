@@ -379,7 +379,6 @@ A flow of a client class using the parsing services provided by `DateUtil` for a
 
 ![Parser Flow](images/DateTimeParsingSequenceDiagram.png)
 
-
 ### Result List Model Type Switching Feature
 
 Due to the fact that the application handles multiple model types, including `Person`, `Appointment` and `Tag`, there is a need for the UI to handle the display of different models and their associated data.

@@ -14,6 +14,9 @@ import seedu.contax.model.util.SearchType;
 
 
 public class BatchCommandParser implements Parser<BatchCommand> {
+
+    public static String MESSAGE_PREFIX_NOT_EQUALS_ONE = "Only one value of param (=, start or end) can be provided.";
+
     /**
      * Parses the given {@code String} of arguments in the context of the BatchCommandParser
      * and returns an BatchCommand object for execution.
@@ -31,19 +34,22 @@ public class BatchCommandParser implements Parser<BatchCommand> {
 
         int emptyCounter = 0;
         if (argMultimap.getValue(PREFIX_EQUALS).isEmpty()) {
-            emptyCounter ++;
+            emptyCounter++;
         }
         if (argMultimap.getValue(PREFIX_START_WITH).isEmpty()) {
-            emptyCounter ++;
+            emptyCounter++;
         }
         if (argMultimap.getValue(PREFIX_END_WITH).isEmpty()) {
-            emptyCounter ++;
+            emptyCounter++;
         }
 
         if (argMultimap.getValue(PREFIX_SEARCH_TYPE).isEmpty() || argMultimap.getPreamble().isEmpty()
-            || (emptyCounter != 2)) {
+            || (emptyCounter == 3)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchCommand.MESSAGE_USAGE));
+        }
+        if (emptyCounter != 2) {
+            throw new ParseException(MESSAGE_PREFIX_NOT_EQUALS_ONE);
         }
 
         searchType = argMultimap.getValue(PREFIX_SEARCH_TYPE).get().toLowerCase();
