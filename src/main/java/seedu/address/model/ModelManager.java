@@ -235,7 +235,7 @@ public class ModelManager implements Model {
         updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
         updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
         updateFilteredConsultationList(new ConsultationWithPredicates(nric));
-        updateFilteredPersonList(new NricPredicate(nric));
+        updateFilteredPatientList(new NricPredicate(nric));
     }
 
     //=========== Contact ================================================================================
