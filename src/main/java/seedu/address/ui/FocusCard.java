@@ -90,6 +90,8 @@ public class FocusCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private Label remark;
+    @FXML
     private Label scheduleMessage;
     @FXML
     private FlowPane statusFocusPane;
@@ -114,6 +116,7 @@ public class FocusCard extends UiPart<Region> {
         phone.setText(candidate.getPhone().value);
         email.setText(candidate.getEmail().value);
         course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
+        remark.setText("Remarks: " + candidate.getRemark().value);
         setProfilePicture(candidate.getName());
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());

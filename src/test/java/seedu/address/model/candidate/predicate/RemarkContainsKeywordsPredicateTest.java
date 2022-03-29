@@ -74,6 +74,6 @@ public class RemarkContainsKeywordsPredicateTest {
         predicate = new RemarkContainsKeywordsPredicate(Arrays.asList("Business Analytics", "alice@email.com", "Main",
                 "Street"));
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withRemark("Quite a good candidate")
-                .withEmail("E0123456@u.nus.edu").withCourse("Business Analytics").withStudentId("E0324444").build()));
+                .withEmail("E0123456@u.nus.edu").withCourse("Business Analytics").withStudentId("A0188565L").build()));
     }
 }
