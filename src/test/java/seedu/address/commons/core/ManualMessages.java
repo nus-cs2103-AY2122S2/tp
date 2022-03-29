@@ -7,7 +7,7 @@ package seedu.address.commons.core;
 public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_ADD_COMMAND = "Adds a student to TAPA. \n"
-            + "Format: add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] "
+            + "Format: add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] "
             + "[e/EMAIL_ADDRESS] \n"
             + "Example: add i/A6942069R n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu";
 
@@ -22,7 +22,7 @@ public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_EDIT_COMMAND = "Edits a student's information in TAPA. \n"
             + "Format : edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] "
-            + "[h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] \n"
+            + "[t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] \n"
             + "Example: edit 1 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu";
 
     public static final String MANUAL_MESSAGE_CLEAR_COMMAND = "Clears all students from TAPA. "
@@ -75,6 +75,10 @@ public class ManualMessages {
             + "Format : assign i/STUDENT_ID tn/TASK_NAME \n"
             + "Example: assign i/A6942069R tn/Watch Lecture";
 
+    public static final String MANUAL_MESSAGE_DELETE_TASK_COMMAND = "Deletes a task that was previously assigned. \n"
+            + "Format: deleteTask i/STUDENT_ID idx/INDEX (or) deleteTask m/MODULE_CODE tn/TASK_NAME \n"
+            + "Example: deleteTask i/A0123456Z idx/4 (or) deleteTask m/CS2030 tn/Assignment 1";
+
     public static final String MANUAL_MESSAGE_ALL_COMMANDS = "Here are all the commands: \n"
             + "1. add \n"
             + "2. delete \n"
@@ -88,11 +92,12 @@ public class ManualMessages {
             + "10. list \n"
             + "11. assign \n"
             + "12. progress \n"
-            + "13. history \n"
-            + "14. undo \n"
-            + "15. manual \n"
-            + "16. help \n"
-            + "17. exit \n"
+            + "13. deleteTask \n"
+            + "14. history \n"
+            + "15. undo \n"
+            + "16. manual \n"
+            + "17. help \n"
+            + "18. exit \n"
             + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";

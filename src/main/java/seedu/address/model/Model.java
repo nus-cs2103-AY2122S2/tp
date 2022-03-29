@@ -119,6 +119,20 @@ public interface Model {
     void assignTaskToPerson(StudentId studentId, Task task);
 
     /**
+     * Deletes {@code Task} assigned to {@code person} with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * A {@code task} at {@code Index} should exist.
+     */
+    void deleteTaskOfPerson(StudentId studentId, Index index);
+
+    /**
+     * Deletes {@code Task} assigned to {@code person} with {@code moduleCode}.
+     * A person with {@code moduleCode} must exist in the address book.
+     * A {@code task} with the exact task name as given by the user should exist.
+     */
+    void deleteTaskForAllInModule(ModuleCode moduleCode, Task task);
+
+    /**
      * Assigns {@code Task} to 1 or more {@code person} with taking the module with the {@code moduleCode}.
      * 1 or more persons with {@code moduleCode} must exist in the address book.
      * The {@code task} should be unique and not a duplicate of already assigned task.
