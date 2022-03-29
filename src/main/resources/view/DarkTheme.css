@@ -128,8 +128,30 @@
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
     -fx-text-fill: #010504;
+}
+
+.cell_completion_done_label {
+    -fx-background-color: #34a853;
+    -fx-background-radius: 5;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-text-fill: #eaeaea;
+}
+
+.cell_completion_not_done_label {
+    -fx-background-color: #ea4335;
+    -fx-background-radius: 5;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-text-fill: #eaeaea;
+}
+
+.cell_priority_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-text-fill: #eaeaea;
 }
 
 .stack-pane {

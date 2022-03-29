@@ -9,51 +9,57 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Loke Jin Xue Aaron
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aaron-ljx.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/aaron-ljx)]
+[[portfolio](team/aaronljx.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Deliverables and Deadlines
+* In Charge of Component Logic
 
-### Jean Doe
+### Alfred Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alfredkohhh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/alfredkohhh)]
+[[portfolio](team/alfredkohhh.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Integration, Documentation, Deliverables and Deadlines
+* In Charge of: Storage
+
+### Tay Jun Yang
+
+<img src="images/dannytayjy.png" width="200px">
+
+[[github](http://github.com/dannytayjy)]
+[[portfolio](team/dannytayjy.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and Deadlines, Code Quality
+* In Charge of Component UI
+
+### Ng Wen Hao Dennis
+
+<img src="images/denniszedead.png" width="200px">
+
+[[github](http://github.com/denniszedead)]
+[[portfolio](team/denniszedead.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and Deadlines, Quality Assurance
+* In Charge of Component Logic
+
+### Chan Wei Jie
+
+<img src="images/chanweijie.png" width="200px">
+
+[[github](http://github.com/chanweijie)]
+[[portfolio](team/chanweijie.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Documentation, Deliverables and Deadlines  
+* In Charge of Component Model

@@ -162,7 +162,7 @@ Find tasks based on the task description or date in the format of (YYYY-MM-DD).
 
 Format: 
 * `find task/ desc/TASK_DESCRIPTION`
-* `find date/YYYY-MM-DD`
+* `find task/ date/YYYY-MM-DD`
 
 Examples:
 * `find task/ desc/homework`
@@ -172,6 +172,8 @@ Examples:
 Find works based on keywords, as such find would return all matches of the words found in description. 
 And the DATE must be in this format: YYYY-MM-DD (24 hr format)
 </div>
+
+### Locating employees by name:
 
 ### Clearing all entries : `clear`
 
@@ -240,5 +242,6 @@ Action | Format, Examples
 Action | Format
 ------------|-------------
 **Clear** | `clear`
+**List** | `list`
 **Help** | `help`
 **Exit** | `exit`
