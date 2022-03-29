@@ -39,9 +39,8 @@ public class CommandBox extends UiPart<Region> {
                 if (ke.getCode().equals(KeyCode.ENTER) && !ke.isShiftDown()) {
                     handleCommandEntered();
                     ke.consume();
-                }
-                else if (ke.getCode().equals(KeyCode.ENTER)) {
-                    commandTextArea.insertText(commandTextArea.getCaretPosition(),"\n");
+                } else if (ke.getCode().equals(KeyCode.ENTER)) {
+                    commandTextArea.insertText(commandTextArea.getCaretPosition(), "\n");
                 }
             }
         });
