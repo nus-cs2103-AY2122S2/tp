@@ -24,7 +24,7 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
-        this.value = attendance.trim() == "1";
+        this.value = attendance.trim().equals("1");
     }
 
     /**

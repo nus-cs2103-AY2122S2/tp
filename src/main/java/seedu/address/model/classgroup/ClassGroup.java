@@ -107,6 +107,7 @@ public class ClassGroup implements Entity {
         return uniqueStudentList.asUnmodifiableObservableList();
     }
 
+    //@@author EvaderFati
     /**
      * Finds the lesson according to the specified weekIndex and marks attendance
      * for all students in the given student list.
@@ -116,6 +117,7 @@ public class ClassGroup implements Entity {
         toMark.markAttendance(students);
     }
 
+    //@@author EvaderFati
     /**
      * Finds the lesson according to the specified weekIndex and unmarks attendance
      * for all students in the given student list.
