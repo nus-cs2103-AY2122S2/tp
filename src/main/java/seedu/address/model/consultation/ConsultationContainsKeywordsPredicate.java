@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ViewedNric;
-import seedu.address.model.prescription.Prescription;
 
 /**
  * Tests that a {@code Person}'s {@code Consultation} matches any of the keywords given.

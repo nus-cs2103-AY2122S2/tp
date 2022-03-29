@@ -37,7 +37,7 @@ public class FindConsultationCommand extends Command {
         requireNonNull(model);
         model.updateFilteredConsultationList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_CONSULTATION_LISTED_OVERVIEW,
-                        model.getFilteredConsultationList().size(), ViewedNric.getViewedNric().toString()), COMMAND_TYPE);
+                model.getFilteredConsultationList().size(), ViewedNric.getViewedNric().toString()), COMMAND_TYPE);
     }
 
     @Override

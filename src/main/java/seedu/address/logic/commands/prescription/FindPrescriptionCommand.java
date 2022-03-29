@@ -37,7 +37,7 @@ public class FindPrescriptionCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPrescriptionList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_PRESCRIPTIONS_LISTED_OVERVIEW,
-                        model.getFilteredPrescriptionList().size(), ViewedNric.getViewedNric().toString()), COMMAND_TYPE);
+                model.getFilteredPrescriptionList().size(), ViewedNric.getViewedNric().toString()), COMMAND_TYPE);
     }
 
     @Override

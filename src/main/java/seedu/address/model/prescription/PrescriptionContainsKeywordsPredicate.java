@@ -21,11 +21,14 @@ public class PrescriptionContainsKeywordsPredicate implements Predicate<Prescrip
         return StringUtil.containsWordIgnoreCase(prescription.getPrescriptionTarget().toString(),
                     ViewedNric.getViewedNric().toString())
                 && (keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(prescription.getPrescriptionDate().toString(), keyword))
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(prescription.getPrescriptionDate().toString(),
+                        keyword))
                 || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(prescription.getInstruction().toString(), keyword))
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(prescription.getInstruction().toString(),
+                        keyword))
                 || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(prescription.getDrugName().toString(), keyword)));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(prescription.getDrugName().toString(),
+                        keyword)));
     }
 
     @Override
