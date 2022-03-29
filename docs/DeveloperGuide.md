@@ -464,6 +464,113 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 2.
 
 
+#### Tag-Related Use Cases
+![Tag Use Case](images/UseCaseDiagramTags.png)
+
+**UC6: List All Tags**
+
+**MSS**
+
+1. User requests to list tags.
+2. ContaX shows a list of tags
+    Use case ends.
+
+**UC7: Add Person Tag**
+
+**MSS**
+
+1. User requests to add tag.
+2. User enters details to add tag.
+3. ContaX adds new tag.
+4. ContaX shows that the appointment has been added successfully.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that the required tag attributed was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * Use case ends.
+  
+* 2b. ContaX detects that invalid characters were supplied.
+  * 2b1. ContaX shows an error message indicating that an invalid character was found.
+  * 2b2. ContaX shows the expected allowed values.
+  * Use case ends.
+
+* 3a. ContaX detects that the tag already exists.
+  * 3a1. ContaX shows an error message indicating that the tag already exists in the system.
+  * Use case ends.
+
+**UC8: Edit Person Tag**
+
+**MSS**
+
+1. User **lists all tags (UC6)**.
+2. User requests to edit tag.
+3. User enters details to edit tag.
+4. ContaX updates the specified tag.
+5. ContaX shows that the tag has been edited successfully.
+   Use case ends.
+
+**Extensions**
+
+* 3a. ContaX detects that the required tag attributed was not supplied.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.
+
+* 3b. ContaX detects that invalid characters were supplied.
+    * 3b1. ContaX shows an error message indicating that an invalid character was found.
+    * 3b2. ContaX shows the expected allowed values.
+    * Use case ends.
+
+* 4a. ContaX cannot find the requested tag to edit.
+  * 4a1. ContaX shows an error message indicating that no such tag exists.
+  * Use case ends.
+
+* 4b. ContaX detects that the updated tag already exists.
+  * 4b1. Contax shows an error message indicating that the tag already exists in the system.
+  * Use case ends.
+
+**UC9: Delete Person Tag**
+
+**MSS**
+
+1. User **list All Tags (UC6)**.
+2. User requests to delete tag.
+3. User enters details to delete tag.
+4. ContaX deletes the specified tag.
+5. ContaX shows that the tag has been deleted successfully.
+   Use case ends.
+
+**Extensions**
+
+* 3a. ContaX detects that the required tag attributed was not supplied.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.
+
+* 4a. ContaX cannot find the requested tag to edit.
+    * 4a1. ContaX shows an error message indicating that no such tag exists.
+    * Use case ends.
+
+**UC10: Find Persons By Tag**
+
+*MSS**
+
+1. User requests to find persons by tag.
+2. User enters keyword to search by.
+3. ContaX shows a list of persons whose tags contain the specified keyword.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that the keyword was not supplied.
+  * 2a1. ContaX shows an error message prompting for the keyword.
+  * Use case ends.
+
+* 2b. ContaX detects that invalid characters were supplied.
+    * 2b1. ContaX shows an error message indicating that an invalid character was found.
+    * 2b2. ContaX shows the expected allowed values.
+    * Use case ends.
+
 **Use case: List appointments**
 
 **MSS**
