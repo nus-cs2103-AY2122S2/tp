@@ -185,6 +185,7 @@ public class MainWindow extends UiPart<Stage> {
         for (Interview i: logic.getFilteredInterviewSchedule()) {
             if (i.getCandidate().isSameCandidate(candidate)) {
                 interview = i;
+                break;
             }
         }
         focusListPanel = new FocusCard(candidate, interview);

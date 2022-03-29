@@ -222,13 +222,13 @@ public class FocusCard extends UiPart<Region> {
 
     private void setSchedule() {
         if (interview != null) {
-            scheduleMessage.setText(SCHEDULE_MESSAGE);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
             String temp = interview.getInterviewDate().getDayOfWeek().toString();
             String d = temp.charAt(0) + temp.substring(1).toLowerCase() + ",";
             day.setText(d);
             date.setText(interview.getInterviewDate().format(formatter));
             time.setText("@ " + interview.getInterviewStartTime().toString());
+            scheduleMessage.setText(SCHEDULE_MESSAGE);
         } else {
             scheduleMessage.setText(NO_SCHEDULE_MESSAGE);
         }
