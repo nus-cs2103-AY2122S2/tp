@@ -19,7 +19,7 @@ title: User Guide
   * [Finding a show: `find`](#finding-a-show-find)
     * [General find](#general-find)
     * [Precise find](#precise-find)
-  * [Sorting the shows](#sorting-the-shows)
+  * [Sorting the shows: `sort`](#sorting-the-shows)
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
@@ -341,20 +341,51 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ---
 
-### Sorting the shows
-[TO CHANGE AFTER REWORK]
+### Sorting the shows `sort`
 
-Sort shows based on the input prefix.
+Your show list is in mess! Do you need a way to organise the list?
+Sort can help reorder the list!!
 
-Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
-* Use sna/ to sort name in ascending order.
-* Use snd/ to sort name in descending order.
-* Use ssa/ to sort status in ascending order.
-* Use ssd/ to sort status in descending order.
-* If there are no prefix, it will sort by name in ascending order.
-* If both prefixes for ascending and descending are used for the same attribute, it will only sort by ascending.
-* If both prefixes for name and status are used, by default, it will sort by name then status.
-* Use so/ to sort by status then name.
+:exclamation:**Caution:**<br>
+*You cannot undo the sort once you applied it!
+
+Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
+
+`Sort` will sort according to the [prefixes](#command-structure)**
+* Use `n/` if you want to sort by name 
+* Use `s/` if you want to sort by status
+* Use `t/` if you want to sort by tag
+* Use `r/` if you want to sort by rating
+* For the above prefixes, you have to specify the `ORDER` right after the prefix.
+* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or  Type `dsc` to sort by descending! 
+* If two or more of the above prefixes are being used, sort will prioritise sorting by name then status then rating then tag.   
+* Use `so/` if you want to reorder the priority and state the `SEQUENCE`
+* List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
+* For example: you want to sort by rating then tag then status then name, `SEQUENCE` will be "RatingTagStatusName"
+* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!  
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Sort:**<br>
+* By not entering any prefixes, it will sort by name in ascending order.
+* Enter the right amount prefixes! If you only sort by name, use only `n/`. 
+* The `ORDER` must be asc or dsc!
+* The `SEQUENCE` must contain the full name of the prefix used!
+* For `SEQUENCE`, if more than one of the same full name is being used, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag. 
+* If multiple same prefixes are being used, only the last prefix will be considered by the program!
+</div>
+
+**Example & Output:** `sort`
+
+<img src="images/Sort_UI.png">
+
+**Example & Output:** `sort t/dsc r/asc`
+
+<img src="images/Sort_UI2.png">
+
+**Example & Output:** `sort t/dsc r/asc so/tagrating`
+
+<img src="images/Sort_UI3.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -428,7 +459,7 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 | **Clear**        | `clear`                                                                                                                  |
 | **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                 |
 | **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-| **Sort**         | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                 |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                             |
 | **Import**       | `import`                                                                                                                 |
 | **Export**       | `export`                                                                                                                 |
 | **Exit**         | `exit`                                                                                                                   |
