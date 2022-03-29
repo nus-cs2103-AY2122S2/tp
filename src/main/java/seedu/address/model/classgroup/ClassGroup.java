@@ -60,10 +60,21 @@ public class ClassGroup implements Entity {
         // initialize the 13 lessons
         Lesson[] arr = new Lesson[NUM_OF_WEEKS];
         for (int i = 0; i < NUM_OF_WEEKS; i++) {
-            arr[i] = new Lesson(new WeekId(Integer.toString(i + 1)),
-                    uniqueStudentList.asUnmodifiableObservableList());
+            arr[i] = new Lesson(new WeekId(Integer.toString(i + 1)));
         }
         this.lessons = Arrays.asList(arr);
+    }
+
+    /**
+     * Construct a {@code ClassGroup} by copying all the provided fields.
+     */
+    private ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule,
+                       UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
+        this.classGroupId = classGroupId;
+        this.classGroupType = classGroupType;
+        this.taModule = taModule;
+        this.uniqueStudentList = uniqueStudentList;
+        this.lessons = lessons;
     }
 
     /**
@@ -74,7 +85,8 @@ public class ClassGroup implements Entity {
      * @param toCopy A valid class group.
      */
     public ClassGroup(ClassGroup toCopy) {
-        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(), toCopy.getModule(), new UniqueStudentList());
+        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(), toCopy.getModule(), new UniqueStudentList(),
+                toCopy.lessons);
         uniqueStudentList.setStudents(toCopy.uniqueStudentList);
     }
 
@@ -93,6 +105,9 @@ public class ClassGroup implements Entity {
 
     public void addStudent(Student s) {
         uniqueStudentList.add(s);
+        for (Lesson lesson : lessons) {
+            lesson.addStudent(s);
+        }
     }
 
     public boolean hasStudent(Student s) {
@@ -101,6 +116,9 @@ public class ClassGroup implements Entity {
 
     public void removeStudent(Student s) {
         uniqueStudentList.remove(s);
+        for (Lesson lesson : lessons) {
+            lesson.removeStudent(s);
+        }
     }
 
     public ObservableList<Student> getStudents() {

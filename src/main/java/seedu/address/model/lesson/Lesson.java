@@ -33,31 +33,24 @@ public class Lesson {
         this.studentAttendanceList = new ArrayList<StudentAttendance>();
     }
 
-    //@@author EvaderFati
-    /**
-     * Constructs a {@code Lesson} and initialize unmark all students enrolled
-     * in the lesson.
-     * {@code weekId} and {@code students} must be present and not null.
-     *
-     * @param weekId A valid week ID.
-     * @param students A valid student attendance list.
-     */
-    public Lesson(WeekId weekId, List<Student> students) {
-        requireAllNonNull(weekId, students);
-        this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<>();
-        // init all students enrolled in the class as not attending any lessons
-        for (Student s : students) {
-            studentAttendanceList.add(new StudentAttendance(s, new Attendance(false)));
-        }
-    }
-
     public WeekId getWeekId() {
         return weekId;
     }
 
     public List<StudentAttendance> getStudentAttendanceList() {
         return studentAttendanceList;
+    }
+
+    public void addStudent(Student student) {
+        studentAttendanceList.add(new StudentAttendance(student, new Attendance(false)));
+    }
+
+    public void removeStudent(Student student) {
+        for (StudentAttendance sa : studentAttendanceList) {
+            if (sa.getStudent().equals(student)) {
+                studentAttendanceList.remove(sa);
+            }
+        }
     }
 
     //@@author EvaderFati
