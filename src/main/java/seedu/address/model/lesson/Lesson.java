@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.student.Student;
+import seedu.address.model.studentattendance.Attendance;
 import seedu.address.model.studentattendance.StudentAttendance;
 
 //@@author jxt00
@@ -31,25 +33,61 @@ public class Lesson {
         this.studentAttendanceList = new ArrayList<StudentAttendance>();
     }
 
-    /**
-     * Constructs a {@code Lesson}.
-     * {@code weekId} and {@code studentAttendanceList} must be present and not null.
-     *
-     * @param weekId A valid week ID.
-     * @param studentAttendanceList A valid student attendance list.
-     */
-    public Lesson(WeekId weekId, List<StudentAttendance> studentAttendanceList) {
-        requireAllNonNull(weekId, studentAttendanceList);
-        this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<StudentAttendance>(studentAttendanceList);
-    }
-
     public WeekId getWeekId() {
         return weekId;
     }
 
     public List<StudentAttendance> getStudentAttendanceList() {
         return studentAttendanceList;
+    }
+
+    public void addStudent(Student student) {
+        studentAttendanceList.add(new StudentAttendance(student, new Attendance(false)));
+    }
+
+    /**
+     * Removes a student from the lesson as well as all the related attendance information.
+     */
+    public void removeStudent(Student student) {
+        for (StudentAttendance sa : studentAttendanceList) {
+            if (sa.getStudent().equals(student)) {
+                studentAttendanceList.remove(sa);
+            }
+        }
+    }
+
+    //@@author EvaderFati
+    /**
+     * Iterate through all the student in the specified student list and update the studentAttendanceList
+     * if there is a {@code StudentAttendance} representing the attendance for the specified student.
+     *
+     * @param students A list of students to mark attendance
+     */
+    public void markAttendance(List<Student> students) {
+        for (Student s : students) {
+            for (StudentAttendance sa : studentAttendanceList) {
+                if (sa.getStudent().equals(students)) {
+                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.markAttendance(s));
+                }
+            }
+        }
+    }
+
+    //@@author EvaderFati
+    /**
+     * Iterate through all the student in the specified student list and update the studentAttendanceList
+     * if there is a {@code StudentAttendance} representing the attendance for the specified student.
+     *
+     * @param students A list of students to unmark attendance
+     */
+    public void unmarkAttendance(List<Student> students) {
+        for (Student s : students) {
+            for (StudentAttendance sa : studentAttendanceList) {
+                if (sa.getStudent().equals(students)) {
+                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.unmarkAttendance(s));
+                }
+            }
+        }
     }
 
     /**
