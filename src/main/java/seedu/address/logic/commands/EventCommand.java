@@ -31,6 +31,7 @@ public class EventCommand extends Command {
             + "\nParameters: INDEX (must be a positive integer) " + PREFIX_EVENT_NAME + "EVENT NAME " + PREFIX_INFO
             + "EVENT DETAILS " + PREFIX_DATE + "yyyy-MM-dd " + PREFIX_TIME + "HH:mm";
     public static final String MESSAGE_ARGUMENTS = "Tagged following event to %1$s:" + "\n%2$s";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
 
     private final Index[] indexes;
     private final EventName name;
@@ -95,9 +96,11 @@ public class EventCommand extends Command {
             Person currPerson = lastShownList.get(currIndex.getZeroBased());
             names.add(currPerson.getName().toString());
         }
+        if (model.hasEvent(currEvent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
 
         model.addEvent(currEvent);
-        model.updateFilteredEventList(Model.PREDICATE_SHOW_UPCOMING_EVENTS);
         return new CommandResult(String.format(MESSAGE_ARGUMENTS, names, currEvent));
     }
 

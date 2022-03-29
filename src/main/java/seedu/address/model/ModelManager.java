@@ -166,7 +166,6 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
-        updateFilteredEventList(PREDICATE_SHOW_UPCOMING_EVENTS);
     }
 
     @Override
