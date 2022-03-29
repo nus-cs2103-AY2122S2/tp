@@ -35,7 +35,7 @@ public class ViewCommand extends Command {
         requireNonNull(model);
 
 
-        if (!model.hasPerson(new NricPredicate(nric))) {
+        if (nric != null && !model.hasPerson(new NricPredicate(nric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
