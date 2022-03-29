@@ -13,7 +13,7 @@
       <Insets top="10" bottom="10" />
     </padding>
   </HBox>
-  <TextArea fx:id="summaryDisplay" editable="false" styleClass="summary-display" wrapText="true"/>
+  <TextArea fx:id="summaryDisplay" editable="false" styleClass="summary-display" minHeight="280" wrapText="true"/>
 </VBox>
 
 
