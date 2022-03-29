@@ -60,9 +60,11 @@ class FindTaskCommandTest {
     @Test
     void equals() {
         TaskMultiplePredicate firstPredicate =
-                new TaskMultiplePredicate(null, Collections.singletonList("Genshin"), null, null, null, null);
+                new TaskMultiplePredicate(null, Collections.singletonList("Genshin"), null, null,
+                        null, null);
         TaskMultiplePredicate secondPredicate =
-                new TaskMultiplePredicate(null, Collections.singletonList("Impact"), null, null, null, null);
+                new TaskMultiplePredicate(null, Collections.singletonList("Impact"), null, null,
+                        null, null);
 
         FindTaskCommand firstFindTaskCommand = new FindTaskCommand(firstPredicate);
         FindTaskCommand secondFindTaskCommand = new FindTaskCommand(secondPredicate);

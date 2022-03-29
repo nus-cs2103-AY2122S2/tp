@@ -14,7 +14,7 @@ public class PersonMultiplePredicate implements Predicate<Person> {
     private final String email;
 
     /**
-     * The constructor for the multipredicate to search for employees with the states options.
+     * The constructor for the multipredicate to search for employees with the stated options.
      * @param name Name of the employee
      * @param phone Phone number of the employee
      * @param email Email of the employee.
@@ -30,6 +30,8 @@ public class PersonMultiplePredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
+        // Checks if the specific search term is specified in the parameter, then check on the person provided.
+        // Defaults to true if not specified.
         boolean hasName = name != null ? checkIfNameExists(person) : true;
         boolean hasPhone = phone != null ? checkIfPhoneExists(person) : true;
         boolean hasEmail = email != null ? checkIfEmailExists(person) : true;
@@ -51,6 +53,9 @@ public class PersonMultiplePredicate implements Predicate<Person> {
         return person.getEmail().equals(email);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -58,7 +63,7 @@ public class PersonMultiplePredicate implements Predicate<Person> {
         } else if (other instanceof PersonMultiplePredicate) {
             PersonMultiplePredicate otherPredicate = (PersonMultiplePredicate) other;
             boolean isNameEquals = checkIfNameEquals(otherPredicate.name);
-            boolean isPhoneEquals = checIfPhoneEquals(otherPredicate.phone);
+            boolean isPhoneEquals = checkIfPhoneEquals(otherPredicate.phone);
             boolean isEmailEquals = checkIfEmailEquals(otherPredicate.email);
 
             return isNameEquals && isPhoneEquals && isEmailEquals;
@@ -75,7 +80,7 @@ public class PersonMultiplePredicate implements Predicate<Person> {
         }
     }
 
-    private boolean checIfPhoneEquals(String phone) {
+    private boolean checkIfPhoneEquals(String phone) {
         if (phone != null) {
             return phone.equals(this.phone);
         } else {

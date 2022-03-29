@@ -23,22 +23,19 @@ import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.Messages;
 import manageezpz.logic.commands.FindTaskCommand;
-import manageezpz.model.person.Name;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Priority;
 import manageezpz.model.task.TaskMultiplePredicate;
 
 class FindTaskCommandParserTest {
-    static final String EMPTY_DESCRIPTION_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            FindTaskCommand.Invalid_KEYWORD + FindTaskCommand.MESSAGE_USAGE);
+    static final String INVALID_DESCRIPTION_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            FindTaskCommand.INVALID_DESCRIPTION + FindTaskCommand.MESSAGE_USAGE);
     static final String INVALID_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_DATE + FindTaskCommand.MESSAGE_USAGE);
     static final String INVALID_PRIORITY_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_PRIORITY + FindTaskCommand.MESSAGE_USAGE);
-    static final String EMPTY_ASSIGNEE_COMMAND_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            FindTaskCommand.EMPTY_ASSIGNEE + FindTaskCommand.MESSAGE_USAGE);
     static final String INVALID_ASSIGNEE_COMMAND_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            Name.MESSAGE_CONSTRAINTS + FindTaskCommand.MESSAGE_USAGE);
+            FindTaskCommand.INVALID_ASSIGNEE + FindTaskCommand.MESSAGE_USAGE);
     static final String INVALID_BOOLEAN_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindTaskCommand.INVALID_BOOLEAN + FindTaskCommand.MESSAGE_USAGE);
     static final String TODO_DATE_ERROR_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
@@ -54,7 +51,6 @@ class FindTaskCommandParserTest {
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(null, null, null,
                 null, null, null);
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -64,7 +60,6 @@ class FindTaskCommandParserTest {
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(PREFIX_TODO, null, null,
                 null, null, null);
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -72,15 +67,13 @@ class FindTaskCommandParserTest {
     void findTaskCommandParser_multipleTaskType_throwsParseError() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_TODO.toString(),
                 PREFIX_DEADLINE.toString());
-
         assertParseFailure(parser, userInput, MORE_THAN_ONE_TASK_TYPE_ERROR_MESSAGE);
     }
 
     @Test
     void findTaskCommandParser_emptyDescription_throwsParseError() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_DESCRIPTION.toString());
-
-        assertParseFailure(parser, userInput, EMPTY_DESCRIPTION_ERROR_MESSAGE);
+        assertParseFailure(parser, userInput, INVALID_DESCRIPTION_ERROR_MESSAGE);
     }
 
     @Test
@@ -90,14 +83,12 @@ class FindTaskCommandParserTest {
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(null, LIST_DESCRIPTIONS, null,
                 null, null, null);
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     void findTaskCommandParser_noDate_throwsParseException() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_DATE.toString());
-
         assertParseFailure(parser, userInput, INVALID_DATE_ERROR_MESSAGE);
     }
 
@@ -105,7 +96,6 @@ class FindTaskCommandParserTest {
     void findTaskCommandParser_invalidDate_throwsParseException() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_DATE.toString(),
                 INVALID_DATE);
-
         assertParseFailure(parser, userInput, INVALID_DATE_ERROR_MESSAGE);
     }
 
@@ -113,7 +103,6 @@ class FindTaskCommandParserTest {
     void findTaskCommandParser_todoWithDateOption_throwParseError() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_TODO.toString(),
                 PREFIX_DATE.toString(), VALID_DATE);
-
         assertParseFailure(parser, userInput, TODO_DATE_ERROR_MESSAGE);
     }
 
@@ -123,14 +112,12 @@ class FindTaskCommandParserTest {
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(null, null,
                 new Date(VALID_DATE), null, null, null);
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     void findTaskCommandPaeser_emptyPriority_throwParseException() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_PRIORITY.toString());
-
         assertParseFailure(parser, userInput, INVALID_PRIORITY_ERROR_MESSAGE);
     }
 
@@ -138,7 +125,6 @@ class FindTaskCommandParserTest {
     void findTaskCommandParser_invalidPriority_throwParseException() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_PRIORITY.toString(),
                 INVALID_PRIORITY);
-
         assertParseFailure(parser, userInput, INVALID_PRIORITY_ERROR_MESSAGE);
     }
 
@@ -149,22 +135,19 @@ class FindTaskCommandParserTest {
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(null, null,
                 null, Priority.valueOf(VALID_PRIORITY), null, null);
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     void findTaskCommandParser_emptyAssignee_throwParseException() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_ASSIGNEES.toString());
-
-        assertParseFailure(parser, userInput, EMPTY_ASSIGNEE_COMMAND_MESSAGE);
+        assertParseFailure(parser, userInput, INVALID_ASSIGNEE_COMMAND_MESSAGE);
     }
 
     @Test
     void findTaskCommandParser_invalidAssignee_findTaskCommand() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD,
                 PREFIX_ASSIGNEES.toString(), "James&");
-
         assertParseFailure(parser, userInput, INVALID_ASSIGNEE_COMMAND_MESSAGE);
     }
 
@@ -175,14 +158,12 @@ class FindTaskCommandParserTest {
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(null, null, null,
                 null, VALID_NAME_AMY, null);
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     void findTaskCommandParser_emptyBoolean_throwParseError() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_IS_MARKED.toString());
-
         assertParseFailure(parser, userInput, INVALID_BOOLEAN_ERROR_MESSAGE);
     }
 
@@ -190,17 +171,16 @@ class FindTaskCommandParserTest {
     void findTaskCommandParser_invalidBoolean_throwParseException() {
         String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_IS_MARKED.toString(),
                 INVALID_BOOLEAN);
-
         assertParseFailure(parser, userInput, INVALID_BOOLEAN_ERROR_MESSAGE);
     }
 
     @Test
     void findTaskCommandParser_validBoolean_findTaskCommand() {
-        String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_IS_MARKED.toString(), VALID_BOOLEAN);
+        String userInput = String.join(" ", FindTaskCommand.COMMAND_WORD, PREFIX_IS_MARKED.toString(),
+                VALID_BOOLEAN);
         TaskMultiplePredicate expectedPredicate = new TaskMultiplePredicate(null, null,
                 null, null, null, Boolean.valueOf(VALID_BOOLEAN));
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -214,7 +194,6 @@ class FindTaskCommandParserTest {
                 new Date(VALID_DATE), Priority.valueOf(VALID_PRIORITY), VALID_NAME_AMY,
                 Boolean.valueOf(VALID_BOOLEAN));
         FindTaskCommand expectedCommand = new FindTaskCommand(expectedPredicate);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

@@ -25,8 +25,6 @@ class TaskMultiplePredicateTest {
     void taskMultiplePredicate_equalThisObject_true() {
         TaskMultiplePredicate predicateWithNoOptions = new TaskMultiplePredicate(null, null,
                 null, null, null, null);
-
-        // This -> true
         assertTrue(predicateWithNoOptions.equals(predicateWithNoOptions));
     }
 
@@ -35,7 +33,6 @@ class TaskMultiplePredicateTest {
         Object otherObject = new Object();
         TaskMultiplePredicate predicateWithNoOptions = new TaskMultiplePredicate(null, null,
                 null, null, null, null);
-
         assertFalse(predicateWithNoOptions.equals(otherObject));
     }
 
@@ -160,7 +157,6 @@ class TaskMultiplePredicateTest {
 
     @Test
     void taskMultiplePredicate_containsCorrectTaskType_false() {
-        // Task type different
         TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(PREFIX_TODO,
                 null, null, null, null, null);
         assertFalse(predicateCombo1.test(deadline));
@@ -217,7 +213,6 @@ class TaskMultiplePredicateTest {
 
     @Test
     void taskMultiplePredicate_containsDate_false() {
-        // Wrong date
         TaskMultiplePredicate predicateCombo1 = new TaskMultiplePredicate(null,
                 null, new Date("2022-04-02"), null, null, null);
         assertFalse(predicateCombo1.test(deadline));

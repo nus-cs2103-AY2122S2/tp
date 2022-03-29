@@ -14,7 +14,6 @@ import manageezpz.logic.parser.Prefix;
  * The predicate to search tasks based on the properties given.
  */
 public class TaskMultiplePredicate implements Predicate<Task> {
-
     private final Prefix taskType;
     private final List<String> description;
     private final Date date;
@@ -31,9 +30,8 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      * @param assignee The employees assigned to the tasks
      * @param isMarked Whether the task is marked
      */
-    public TaskMultiplePredicate(
-            Prefix taskType, List<String> description, Date date, Priority priority, String assignee,
-            Boolean isMarked) {
+    public TaskMultiplePredicate(Prefix taskType, List<String> description, Date date, Priority priority,
+                                 String assignee, Boolean isMarked) {
         this.taskType = taskType;
         this.description = description;
         this.date = date;
@@ -47,6 +45,8 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      */
     @Override
     public boolean test(Task task) {
+        // Checks if the specific search term is specified in the parameter, then check on the task provided.
+        // Defaults to true if not specified.
         boolean hasTaskType = taskType != null ? checkIfHasSpecificTaskType(task) : true;
         boolean hasKeyword = description != null ? checkIfHasKeywords(task) : true;
         boolean hasDate = date != null ? checkIfHasDate(task) : true;
@@ -66,8 +66,9 @@ public class TaskMultiplePredicate implements Predicate<Task> {
     }
 
     private boolean checkIfHasKeywords(Task task) {
+        String otherTaskDescription = task.getDescription().toString();
         return description.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(otherTaskDescription, keyword));
     }
 
     private boolean checkIfHasDate(Task task) {
@@ -85,7 +86,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         } else if (task instanceof Event) {
             return ((Event) task).getDate();
         } else {
-            assert false : "checkIfHasDate did not filter out the todo";
+            assert false : "checkIfHasDate() did not filter out the todo";
             return null;
         }
     }

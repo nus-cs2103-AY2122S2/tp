@@ -182,14 +182,14 @@ Finds task(s) based on multiple conditions provided.
   * Find all deadlines 
 * `findTask event/` 
   * Find all events
-* `findTask desc/[TASK_DESCRIPTIONS]`
-  * Finds all tasks which contain any of the words in [TASK_DESCRIPTION].
+* `findTask desc/[LIST OF WORDS]`
+  * Finds all tasks which contain any of the words in [LIST OF WORDS].
 * `findTask date/YYYY-MM-DD`
   * Find all deadlines and events with the date
 * `findTask priority/PRIORITY`
   * Find all tasks with the given PRIORITY [HIGH, MEDIUM, LOW, NONE]
-* `findTask assignees/ASSIGNEE`
-  * Find all tasks assignee to ASSIGNEE
+* `findTask assignees/Assignee full name`
+  * Find all tasks assignee to the stated assignee (in full name)
 * `findTask isMarked/BOOLEAN`
   * Find all tasks that is already marked (`true`) or unmarked (`false`)
     * Finds the task with a description that contains all of the following options:

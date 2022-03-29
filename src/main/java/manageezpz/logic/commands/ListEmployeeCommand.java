@@ -18,7 +18,6 @@ public class ListEmployeeCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(model.PREDICATE_SHOW_ALL_PERSONS);
-
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
 }

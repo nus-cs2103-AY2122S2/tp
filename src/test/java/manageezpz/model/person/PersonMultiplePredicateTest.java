@@ -12,10 +12,7 @@ import org.junit.jupiter.api.Test;
 class PersonMultiplePredicateTest {
     @Test
     void personMultiplePredicate_equalsOwnObject_true() {
-        Object object = new Object();
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
-
-        // Equals own object -> true
         assertTrue(predicate1.equals(predicate1));
     }
 
@@ -23,16 +20,12 @@ class PersonMultiplePredicateTest {
     void personalMultiplePredicate_equalsOtherObject_false() {
         Object object = new Object();
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
-
-        // Some other object -> false
         assertFalse(predicate1.equals(object));
     }
 
     @Test
     void personalMultiplePredicate_equalsNull_false() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
-
-        // null -> false
         assertFalse(predicate1.equals(null));
     }
 
@@ -40,8 +33,6 @@ class PersonMultiplePredicateTest {
     void personalMultiplePredicate_equalsWithAllNullValue_true() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(null, null, null);
-
-        // Same values -> true
         assertTrue(predicate1.equals(predicate2));
     }
 
@@ -49,8 +40,6 @@ class PersonMultiplePredicateTest {
     void personalMultiplePredicate_equalsWithSameNames_true() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Alice"), null, null);
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(List.of("Alice"), null, null);
-
-        // Same values -> true
         assertTrue(predicate1.equals(predicate2));
     }
 
@@ -58,8 +47,6 @@ class PersonMultiplePredicateTest {
     void personalMultiplePredicate_equalsWithDifferentNames_false() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(List.of("Alice"), null, null);
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(List.of("Benson"), null, null);
-
-        // Same values -> true
         assertFalse(predicate1.equals(predicate2));
     }
 
@@ -69,8 +56,6 @@ class PersonMultiplePredicateTest {
                 null);
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(null, ALICE.getPhone().toString(),
                 null);
-
-        // Same values -> true
         assertTrue(predicate1.equals(predicate2));
     }
 
@@ -80,8 +65,6 @@ class PersonMultiplePredicateTest {
                 null);
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(null, BENSON.getPhone().toString(),
                 null);
-
-        // Same values -> true
         assertFalse(predicate1.equals(predicate2));
     }
 
@@ -91,8 +74,6 @@ class PersonMultiplePredicateTest {
                 ALICE.getEmail().toString());
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(null, null,
                 ALICE.getEmail().toString());
-
-        // Same values -> true
         assertTrue(predicate1.equals(predicate2));
     }
 
@@ -102,15 +83,12 @@ class PersonMultiplePredicateTest {
                 ALICE.getEmail().toString());
         PersonMultiplePredicate predicate2 = new PersonMultiplePredicate(null, null,
                 BENSON.getEmail().toString());
-
-        // Same values -> true
         assertFalse(predicate1.equals(predicate2));
     }
 
     @Test
     void personalMultiplePredicate_noOptionsSpecified_true() {
         PersonMultiplePredicate predicate1 = new PersonMultiplePredicate(null, null, null);
-
         assertTrue(predicate1.test(ALICE));
     }
 

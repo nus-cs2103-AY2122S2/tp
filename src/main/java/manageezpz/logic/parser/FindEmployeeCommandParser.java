@@ -36,10 +36,12 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
         String email = getPersonEmail(argMultimap);
 
         if (hasError) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    errorMessage + FindEmployeeCommand.MESSAGE_USAGE));
+            String finalMessage = errorMessage + FindEmployeeCommand.MESSAGE_USAGE;
+            String displayedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, finalMessage);
+            throw new ParseException(displayedMessage);
         } else {
-            return new FindEmployeeCommand(new PersonMultiplePredicate(names, phone, email));
+            PersonMultiplePredicate predicate = new PersonMultiplePredicate(names, phone, email);
+            return new FindEmployeeCommand(predicate);
         }
     }
 
@@ -48,12 +50,18 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
         if (argMultimap.isPrefixExist(PREFIX_NAME)) {
             String nameArgumentString = argMultimap.getValue(PREFIX_NAME).get().trim();
             String[] nameArguments = nameArgumentString.split("\\s+");
-            boolean isValid = Arrays.stream(nameArguments).allMatch(name -> Name.isValidName(name));
-            if (!isValid) {
-                addErrorMessage(FindEmployeeCommand.INVALID_NAME);
-            } else {
-                names = Arrays.asList(nameArguments);
-            }
+            names = checkIfAllNamesValid(nameArguments);
+        }
+        return names;
+    }
+
+    private List<String> checkIfAllNamesValid(String[] nameArguments) {
+        List<String> names = null;
+        boolean isValid = Arrays.stream(nameArguments).allMatch(name -> Name.isValidName(name));
+        if (!isValid) {
+            addErrorMessage(FindEmployeeCommand.INVALID_NAME);
+        } else {
+            names = Arrays.asList(nameArguments);
         }
         return names;
     }
@@ -62,26 +70,32 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
         String phone = null;
         if (argMultimap.isPrefixExist(PREFIX_PHONE)) {
             phone = argMultimap.getValue(PREFIX_PHONE).get();
-            boolean isValidPhone = Phone.isValidPhone(phone);
-            if (!isValidPhone) {
-                addErrorMessage(FindEmployeeCommand.INVALD_PHONE);
-                phone = null;
-            }
+            checkIfPhoneValid(phone);
         }
         return phone;
+    }
+
+    private void checkIfPhoneValid(String phone) {
+        boolean isValidPhone = Phone.isValidPhone(phone);
+        if (!isValidPhone) {
+            addErrorMessage(FindEmployeeCommand.INVALD_PHONE);
+        }
     }
 
     private String getPersonEmail(ArgumentMultimap argMultimap) {
         String email = null;
         if (argMultimap.isPrefixExist(PREFIX_EMAIL)) {
             email = argMultimap.getValue(PREFIX_EMAIL).get();
-            boolean isEmailValid = Email.isValidEmail(email);
-            if (!isEmailValid) {
-                addErrorMessage(FindEmployeeCommand.INVALID_EMAIL);
-                email = null;
-            }
+            checkIfEmailIsValid(email);
         }
         return email;
+    }
+
+    private void checkIfEmailIsValid(String email) {
+        boolean isValidEmail = Email.isValidEmail(email);
+        if (!isValidEmail) {
+            addErrorMessage(FindEmployeeCommand.INVALID_EMAIL);
+        }
     }
 
     /**

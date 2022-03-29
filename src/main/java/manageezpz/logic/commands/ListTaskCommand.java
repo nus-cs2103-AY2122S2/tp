@@ -18,7 +18,6 @@ public class ListTaskCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTaskList(model.PREDICATE_SHOW_ALL_TASKS);
-
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
 }
