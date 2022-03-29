@@ -8,6 +8,7 @@ import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_B;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.ibook.model.product.Name;
 
 class NameFilterTest {
