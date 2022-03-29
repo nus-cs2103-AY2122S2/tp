@@ -220,9 +220,14 @@ Format: `list g/<GROUPNAME>`
 - Lists all groups with a given group name.
 - Example: `list g/W16-1` lists all groups with the name `W16-1`.
 
+Format: `list g/<GROUPNAME> m/<MODULECODE>`
+- Lists all groups with a given group name in a specific module.
+- Example: `list g/W16-1 m/CS2103` lists group `W16-1` of `CS2103`.
+
 Format: `list mt/<YYYY-MM-DD>`
 - Lists all groups with a meeting times falling on a given date.
 - Example: `list mt/2022-05-04` lists all groups that have meetings on `May 4th 2022`.
+
 
 ### Editing a person : `edit`
 

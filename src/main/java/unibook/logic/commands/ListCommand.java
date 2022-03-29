@@ -146,6 +146,11 @@ public class ListCommand extends Command {
             this.moduleNameFragment = field1;
             this.keyEvent = field2;
             break;
+        case SPECIFICGROUPFROMGROUPVIEW:
+            this.commandType = ListCommandType.SPECIFICGROUPFROMGROUPVIEW;
+            this.group = field1;
+            this.moduleCode = new ModuleCode(field2);
+            break;
         default:
             break;
         }
@@ -672,6 +677,26 @@ public class ListCommand extends Command {
             } else {
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "Modules"));
             }
+        case SPECIFICGROUPFROMGROUPVIEW:
+            if (modelManager.getUi().isGroupListShowing()) {
+                ObservableList<Group> groups = FXCollections.observableArrayList();
+                if (!model.hasModule(moduleCode)) {
+                    throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
+                }
+                Module module = model.getModuleByCode(this.moduleCode);
+
+                if (!module.hasGroupName(this.group)) {
+                    throw new CommandException(String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group));
+                }
+
+                groups.add(module.getGroupByName(this.group));
+                ModelManager mm = (ModelManager) model;
+                mm.getUi().setGroupListPanel(groups);
+                return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_GROUPS_WITH_NAME,
+                        this.group.toUpperCase()));
+            } else {
+                throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "Groups"));
+            }
         default:
             return new CommandResult("");
         }
@@ -697,7 +722,7 @@ public class ListCommand extends Command {
         ALL, MODULE, TYPE, MODULEANDTYPE, VIEW, GROUPFROMMODULEVIEW, PEOPLEINGROUP, GROUPFROMGROUPVIEW,
         GROUPWITHMEETINGDATE, MODULEWITHNAMEMATCH, MODULESWITHKEYEVENT, MODULESWITHEVENTDATE,
         MODULESWITHDATEANDKEYEVENT, MODULESWITHDATEANDNAME, MODULESWITHNAMEANDKEYEVENT,
-        MODULESWITHDATEANDKEYEVENTANDNAME
+        MODULESWITHDATEANDKEYEVENTANDNAME, SPECIFICGROUPFROMGROUPVIEW
     }
 
     public enum ListView {
