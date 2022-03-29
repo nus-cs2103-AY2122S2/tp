@@ -1,6 +1,5 @@
 package unibook.ui.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -16,27 +15,29 @@ public class CustomPaneListFiller {
 
     /**
      * Fills a {@code Pane} from given list with {@code Node} objects genreated using {@code converter}.
-     * @param pane to fill.
+     *
+     * @param pane           to fill.
      * @param underlyingList to fill from.
-     * @param converter to use to convert a list item to node.
+     * @param converter      to use to convert a list item to node.
      * @param <T>
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, Function<T, ? extends Node> converter) {
         pane.getChildren().clear();
         for (T item : underlyingList) {
-           pane.getChildren().add(converter.apply(item));
+            pane.getChildren().add(converter.apply(item));
         }
     }
 
     /**
      * Fills a {@code Pane} from given list with {@code Node} objects genreated using {@code converter}, with indexes.
-     * @param pane to fill.
+     *
+     * @param pane           to fill.
      * @param underlyingList to fill from.
-     * @param converter to use to convert a list item to node.
+     * @param converter      to use to convert a list item to node.
      * @param <T>
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, BiFunction<T, Integer,
-                                                                                    ? extends Node> converter) {
+        ? extends Node> converter) {
         pane.getChildren().clear();
         for (int i = 0; i < underlyingList.size(); i++) {
             pane.getChildren().add(converter.apply(underlyingList.get(i), i));
@@ -44,15 +45,16 @@ public class CustomPaneListFiller {
     }
 
     /**
-     * Fills a {@code Pane} from given list with {@code Node} objects genreated using {@code converter}, with indexes, and flag
-     * to represent if only one item in the list of children in pane.
-     * @param pane to fill.
+     * Fills a {@code Pane} from given list with {@code Node} objects genreated using {@code converter},
+     * with indexes, and flag to represent if only one item in the list of children in pane.
+     *
+     * @param pane           to fill.
      * @param underlyingList to fill from.
-     * @param converter to use to convert a list item to node.
+     * @param converter      to use to convert a list item to node.
      * @param <T>
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, TriFunction<T, Integer, Boolean,
-                                                                                        ? extends Node> converter) {
+        ? extends Node> converter) {
         pane.getChildren().clear();
         for (int i = 0; i < underlyingList.size(); i++) {
             pane.getChildren().add(converter.apply(underlyingList.get(i), i, underlyingList.size() == 1));

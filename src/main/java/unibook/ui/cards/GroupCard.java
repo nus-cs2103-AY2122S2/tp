@@ -1,7 +1,5 @@
 package unibook.ui.cards;
 
-import static unibook.ui.util.CustomPaneListFiller.fillPaneFromList;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -97,10 +95,10 @@ public class GroupCard extends UiPart<Region> {
      * can change accordingly.
      */
     private void setUpListChangeListeners() {
-        CustomListChangeListeners.addIndexedListChangeListener(membersList, group.getMembers(),
-            (member, index) -> new StudentCard(member, index + 1).getRoot());
-        CustomListChangeListeners.addIndexedListChangeListener(meetingTimesList, group.getMeetingTimes(),
-            (meetingTime, index) -> createLabelFromMeetingTime(meetingTime, index + 1));
+        CustomListChangeListeners.addIndexedListChangeListener(membersList, group.getMembers(), (member, index) ->
+            new StudentCard(member, index + 1).getRoot());
+        CustomListChangeListeners.addIndexedListChangeListener(meetingTimesList,
+            group.getMeetingTimes(), (meetingTime, index) -> createLabelFromMeetingTime(meetingTime, index + 1));
     }
 
     /**

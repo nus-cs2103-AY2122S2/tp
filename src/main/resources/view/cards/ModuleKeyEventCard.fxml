@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane"  xmlns="http://javafx.com/javafx/8">
+<HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8">
     <GridPane styleClass="module-key-event-card-normal" fx:id="gridPane" HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>

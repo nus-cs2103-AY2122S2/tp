@@ -8,8 +8,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
@@ -17,7 +15,6 @@ import unibook.commons.util.TriFunction;
 import unibook.model.module.group.Group;
 import unibook.ui.UiPart;
 import unibook.ui.cards.GroupCard;
-import unibook.ui.util.CustomPaneListFiller;
 
 public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "listpanels/GroupListPanel.fxml";

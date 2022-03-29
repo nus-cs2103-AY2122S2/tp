@@ -12,17 +12,16 @@ import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
+import unibook.model.module.Module;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.ui.MainWindow;
-import unibook.ui.Ui;
 import unibook.ui.UiPart;
 import unibook.ui.cards.ModuleAndGroupMiniCard;
 import unibook.ui.cards.ProfessorCard;
 import unibook.ui.cards.StudentCard;
-import unibook.model.module.Module;
 
 /**
  * Panel containing the list of persons.
@@ -42,7 +41,8 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, ObservableList<Module> moduleList, MainWindow mainWindow) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableList<Module> moduleList,
+                           MainWindow mainWindow) {
         super(FXML);
         logger.info("Instantiating person list");
         this.mainWindow = mainWindow;
@@ -73,11 +73,11 @@ public class PersonListPanel extends UiPart<Region> {
         addIndexedListChangeListener(personListView, this.personList, cardCreator);
 
         //fill in the moduleandgroup pane
-        fillPaneFromList(moduleAndGroupListView, this.moduleList,
-                (module, index) -> new ModuleAndGroupMiniCard(module, index, mainWindow).getRoot());
+        fillPaneFromList(moduleAndGroupListView, this.moduleList, (module, index) ->
+                new ModuleAndGroupMiniCard(module, index, mainWindow).getRoot());
 
         //set up list event listener pane
-        addIndexedListChangeListener(moduleAndGroupListView, this.moduleList,
-            (module, index) -> new ModuleAndGroupMiniCard(module, index, mainWindow).getRoot());
+        addIndexedListChangeListener(moduleAndGroupListView, this.moduleList, (module, index) ->
+                new ModuleAndGroupMiniCard(module, index, mainWindow).getRoot());
     }
 }

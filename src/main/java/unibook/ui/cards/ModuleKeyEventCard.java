@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.ModuleKeyEvent;
 import unibook.ui.UiPart;
+
 public class ModuleKeyEventCard extends UiPart<Region> {
     private static final String FXML = "cards/ModuleKeyEventCard.fxml";
 
@@ -54,8 +55,8 @@ public class ModuleKeyEventCard extends UiPart<Region> {
      * Set styling for important module events.
      */
     private void setStyle() {
-        if (moduleKeyEvent.getKeyEventType() == ModuleKeyEvent.KeyEventType.EXAM ||
-                moduleKeyEvent.getKeyEventType() == ModuleKeyEvent.KeyEventType.ASSIGNMENT_DUE) {
+        if (moduleKeyEvent.getKeyEventType() == ModuleKeyEvent.KeyEventType.EXAM
+            || moduleKeyEvent.getKeyEventType() == ModuleKeyEvent.KeyEventType.ASSIGNMENT_DUE) {
             gridPane.getStyleClass().add("module-key-event-card-important");
         }
     }

@@ -27,8 +27,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_TYPE,
                     CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_VIEW, CliSyntax.PREFIX_GROUP,
-                        CliSyntax.PREFIX_MEETINGTIME, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT,
-                        CliSyntax.PREFIX_DATETIME);
+                    CliSyntax.PREFIX_MEETINGTIME, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT,
+                    CliSyntax.PREFIX_DATETIME);
 
             //List all (empty list command)
             if (args.strip().equals("")) {
@@ -39,14 +39,14 @@ public class ListCommandParser implements Parser<ListCommand> {
                 //Commands that have no option field
                 //Very specific command chain with 2-3 arguments
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT,
-                        CliSyntax.PREFIX_NAME)) {
+                    CliSyntax.PREFIX_NAME)) {
                     //On module page, checking for modules that contain a specific name with specific date, key event
                     //e.g. list n/software dt/2022-05-04 ke/exam
                     String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
                     String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
                     return new ListCommand(name, dateString, keyEvent.toUpperCase(),
-                            ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENTANDNAME);
+                        ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENTANDNAME);
                 }
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_KEYEVENT)) {
                     //On module page, checking for modules with specific date and key event
@@ -54,21 +54,21 @@ public class ListCommandParser implements Parser<ListCommand> {
                     String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
                     String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
                     return new ListCommand(dateString, keyEvent.toUpperCase(),
-                            ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENT);
+                        ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENT);
                 }
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATETIME)) {
                     //On module page, checking for modules with specific name match and date time
                     String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get();
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
                     return new ListCommand(dateString, name,
-                            ListCommand.ListCommandType.MODULESWITHDATEANDNAME);
+                        ListCommand.ListCommandType.MODULESWITHDATEANDNAME);
                 }
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_KEYEVENT)) {
                     //On module page, checking for modules with specific name match and key event
                     String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
                     String keyEvent = argMultimap.getValue(CliSyntax.PREFIX_KEYEVENT).get();
                     return new ListCommand(name, keyEvent,
-                            ListCommand.ListCommandType.MODULESWITHNAMEANDKEYEVENT);
+                        ListCommand.ListCommandType.MODULESWITHNAMEANDKEYEVENT);
 
                 }
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
@@ -78,7 +78,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                     if (!(type.equals("professors") || type.equals("students"))) {
                         //invalid type argument
                         throw new ParseException(
-                                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_WRONG_TYPE));
+                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_WRONG_TYPE));
                     }
                     return new ListCommand(type, ListCommand.ListCommandType.TYPE);
                 } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
@@ -112,7 +112,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                     return new ListCommand(moduleCode, ListCommand.ListCommandType.MODULE);
                 } else {
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_USAGE));
+                        ListCommand.MESSAGE_USAGE));
                 }
             }
             String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get();
@@ -133,19 +133,19 @@ public class ListCommandParser implements Parser<ListCommand> {
                     } else {
                         //Invalid view argument given
                         throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                Messages.MESSAGE_INVALID_VIEW));
+                            Messages.MESSAGE_INVALID_VIEW));
                     }
                 } else {
                     //View type argument not present
                     throw new ParseException(
-                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                    Messages.MESSAGE_VIEW_FIELD_MISSING));
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            Messages.MESSAGE_VIEW_FIELD_MISSING));
                 }
             case "module":
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
                     //module argument not present
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            Messages.MESSAGE_MODULE_FIELD_MISSING));
+                        Messages.MESSAGE_MODULE_FIELD_MISSING));
                 }
                 String moduleCode = argMultimap.getValue(CliSyntax.PREFIX_MODULE).get().toUpperCase();
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
@@ -154,7 +154,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                     if (!(type.equals("professors") || type.equals("students"))) {
                         throw new ParseException(
                             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                    Messages.MESSAGE_WRONG_TYPE));
+                                Messages.MESSAGE_WRONG_TYPE));
                     }
                     return new ListCommand(moduleCode, type, ListCommand.ListCommandType.MODULEANDTYPE);
                 } else {
@@ -165,8 +165,8 @@ public class ListCommandParser implements Parser<ListCommand> {
 
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
                     throw new ParseException(
-                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                    Messages.MESSAGE_GROUP_FIELD_MISSING));
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            Messages.MESSAGE_GROUP_FIELD_MISSING));
                 }
                 String group = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get().toLowerCase();
 
@@ -181,7 +181,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
             default:
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        Messages.MESSAGE_INVALID_LIST_OPTION));
+                    Messages.MESSAGE_INVALID_LIST_OPTION));
 
             }
         } catch (ParseException pe) {

@@ -37,11 +37,16 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
     @FXML
     private FlowPane groupNameList;
 
-
+    /**
+     * A Card displaying module code and the group names of groups of that module.
+     * @param module to display.
+     * @param index index of this mini card.
+     * @param mainWindow of the UI.
+     */
     public ModuleAndGroupMiniCard(Module module, Integer index, MainWindow mainWindow) {
         super(FXML);
         logger.info(String.format("Instantiating a moduleAndGroupMiniCard with module code %s",
-                module.getModuleCode()));
+            module.getModuleCode()));
         this.mainWindow = mainWindow;
         this.module = module;
         moduleCode.setText(module.getModuleCode().toString());
@@ -59,7 +64,7 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
                         try {
                             switchToModulePage();
                             mainWindow.executeCommand("list o/group g/" + group.getGroupName());
-                        } catch (CommandException | ParseException e){
+                        } catch (CommandException | ParseException e) {
                             throw new ButtonActionException();
                         }
                     }
@@ -90,7 +95,7 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
                 public void handle(MouseEvent event) {
                     try {
                         switchToModulePage();
-                    } catch (CommandException | ParseException e){
+                    } catch (CommandException | ParseException e) {
                         throw new ButtonActionException();
                     }
                 }

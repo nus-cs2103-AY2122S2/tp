@@ -19,7 +19,6 @@ import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.Module;
 import unibook.ui.UiPart;
-import unibook.ui.util.CustomPaneListFiller;
 
 /**
  * A UI component that displays information of {@code Module}.
@@ -282,14 +281,14 @@ public class ModuleCard extends UiPart<Region> {
      * can change accordingly.
      */
     private void setUpListChangeListeners() {
-        addIndexedListChangeListener(professors, module.getProfessors(),
-                    (professor, index) -> new ProfessorCard(professor, index + 1).getRoot());
-        addIndexedListChangeListener(students, module.getStudents(),
-                    (student, index) -> new StudentCard(student, index + 1).getRoot());
-        addIndexedAndFlagListChangeListener(groups, module.getGroups(),
-                    (group, index, flag) -> new GroupCard(group, index + 1, flag).getRoot());
-        addIndexedListChangeListener(keyEvents, module.getKeyEvents(),
-            (keyEvent, index) -> new ModuleKeyEventCard(keyEvent, index + 1).getRoot());
+        addIndexedListChangeListener(professors, module.getProfessors(), (professor, index) ->
+                new ProfessorCard(professor, index + 1).getRoot());
+        addIndexedListChangeListener(students, module.getStudents(), (student, index) ->
+                new StudentCard(student, index + 1).getRoot());
+        addIndexedAndFlagListChangeListener(groups, module.getGroups(), (group, index, flag) ->
+                new GroupCard(group, index + 1, flag).getRoot());
+        addIndexedListChangeListener(keyEvents, module.getKeyEvents(), (keyEvent, index) ->
+                new ModuleKeyEventCard(keyEvent, index + 1).getRoot());
     }
 
 
