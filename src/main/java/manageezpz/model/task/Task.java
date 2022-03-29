@@ -12,7 +12,7 @@ import manageezpz.model.person.Person;
  * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
  * inputted by a user either a Todo, Deadline or Event.
  */
-public class Task implements Comparable<Task> {
+public class Task {
     protected boolean isDone;
     protected String type;
     protected Priority priority;
@@ -93,11 +93,6 @@ public class Task implements Comparable<Task> {
 
     public Priority getPriority() {
         return this.priority;
-    }
-
-    @Override
-    public int compareTo(Task o) {
-        return Integer.compare(this.getPriority().getValue(), o.getPriority().getValue());
     }
 
     /**
