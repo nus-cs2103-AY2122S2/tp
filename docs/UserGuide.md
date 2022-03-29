@@ -262,7 +262,7 @@ Examples:
 
 Deletes the specified interview.
 
-Format: `schedule edit SCHEDULE_INDEX at/DATE_TIME`
+Format: `schedule delete SCHEDULE_INDEX`
 
 * Deletes the interview at the specified `SCHEDULE_INDEX`.
 * The schedule index refers to the index number shown in the displayed interview schedule.
