@@ -196,7 +196,11 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             throw new ContainsConflictingLessonsException(conflictingLessons);
         }
 
-        internalList.setAll(lessons);
+        for (Lesson l : lessons) {
+            add(l);
+        }
+
+        // internalList.setAll(lessons);
     }
 
     /**
