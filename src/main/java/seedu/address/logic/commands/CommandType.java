@@ -22,8 +22,8 @@ import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
 import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
-import seedu.address.logic.parser.testresult.FindTestResultCommandParser;
 import seedu.address.logic.parser.testresult.EditTestResultCommandParser;
+import seedu.address.logic.parser.testresult.FindTestResultCommandParser;
 import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 public enum CommandType {
