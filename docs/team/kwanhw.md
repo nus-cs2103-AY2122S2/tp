@@ -18,17 +18,18 @@ Given below are my contributions to the project.
 * **New Feature**: Added ability to find persons who contain a specified tag
   * What it does: Allows the user to manage tags in the address book.
   * Justification: This improves the usability of the application, as it provides more options for the user to search for contacts.
-   
+
 * **Code contributed**:
   * 2000+ LoC contributed to the project
   * Test cases for the tags subsystem
 
 * **Project management**:
-    * `to be added soon`
+    * Review pull requests submitted by the team
 
 * **Enhancements to existing features**:
     * Extraction of Tags into its own list for management
     * Abstraction of `Tag` by moving the name attribute as its own class
+    * Implemented tabbed user interface
 
 * **Documentation**:
     * User Guide:
@@ -42,6 +43,8 @@ Given below are my contributions to the project.
         * Added section for tag management
         * Added section for tag editing
         * Added section for tag inflation and serialisation
+        * Added use cases for persons
+        * Added use cases for tags
 
 * **Community**:
     * `to be added soon`
