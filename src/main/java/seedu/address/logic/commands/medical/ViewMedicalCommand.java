@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MIS
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -14,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
+import seedu.address.model.patient.Patient;
 
 public class ViewMedicalCommand extends Command {
     public static final String COMMAND_WORD = "view";
@@ -55,9 +57,19 @@ public class ViewMedicalCommand extends Command {
             if (!model.hasPerson(new NricPredicate(nric))) {
                 throw new CommandException(MESSAGE_MISSING_PATIENT);
             }
+
+            ObservableList<Patient> personList = model.getPersonList();
+            String nameAndNric = "";
+
+            for (Patient patient : personList) {
+                if (patient.getNric().equals(nric)) {
+                    nameAndNric = patient.getName().toString() + " / " + nric;
+                }
+            }
+
             return new CommandResult(
                     String.format(Messages.MESSAGE_MEDICALS_LISTED_OVERVIEW,
-                            model.getFilteredMedicalList().size(), nric),
+                            model.getFilteredMedicalList().size(), nameAndNric),
                     COMMAND_TYPE);
         }
     }

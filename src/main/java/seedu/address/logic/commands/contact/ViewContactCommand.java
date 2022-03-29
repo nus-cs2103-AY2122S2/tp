@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MIS
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -14,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
+import seedu.address.model.patient.Patient;
 
 /**
  * Lists all persons in the address book to the user.
@@ -52,9 +54,18 @@ public class ViewContactCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
+        ObservableList<Patient> personList = model.getPersonList();
+        String nameAndNric = "";
+
+        for (Patient patient : personList) {
+            if (patient.getNric().equals(ownerNric)) {
+                nameAndNric = patient.getName().toString() + " / " + ownerNric;
+            }
+        }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW,
-                        model.getFilteredContactList().size(), ownerNric),
+                        model.getFilteredContactList().size(), nameAndNric),
                 COMMAND_TYPE);
     }
 }
