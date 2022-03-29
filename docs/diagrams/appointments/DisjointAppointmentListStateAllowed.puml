@@ -1,20 +1,20 @@
 @startuml
-!include style.puml
+!include ../style.puml
 show fields
 hide empty fields
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title Disallowed State
+title Allowed State
 
 class "  __:DisjointAppointmentList__  " as DisjointAppointmentList
 
 package "" {
-    class Appointment0 as "  __appt0:Appointment__  " #FFCCCC {
+    class Appointment0 as "  __appt0:Appointment__  " {
         StartDateTime = "12-12-2022 13:00"
-        Duration = 60
+        Duration = 30
     }
-    class Appointment1 as "  __appt1:Appointment__  " #FFCCCC {
+    class Appointment1 as "  __appt1:Appointment__  " {
         StartDateTime = "12-12-2022 13:30"
         Duration = 60
     }

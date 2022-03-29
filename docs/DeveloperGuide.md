@@ -214,16 +214,35 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 
 ![AddMissingTags](images/AddMissingTagsSequenceDiagram.png)
 
-### The Appointments Model
+### The Schedule and Appointment Models
 
-This section will describe the implementation of the models used by the appointments subsystem. An overview is shown in the partial class diagram below.
+This section will describe the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects. The overall *design goal* of the Schedule subsystem is to expose a **single** `ObservableList<ScheduleItem>` through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display. This list includes both `Appointment` and `AppointmentSlot` objects sorted in chronological order so that it can be directly displayed in-order by the UI, unifying the ordering maintenance to the Model component.
+
+An overview is shown in the partial class diagram below.
 
 ![Appointment Models](images/AppointmentModelClassDiagram.png)
+
+#### The `ScheduleItem` Class
+
+The data models `Appointment` and `AppointmentSlot` models inherit from the `ScheduleItem` class. The classes are structured such that common logic related to time are mostly handled in the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
+
+![Appointment Models](images/ScheduleItemClassDiagram.png)
+
+In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a unified natural ordering used by both `CompositeObservableList` and `DisjointAppointmentList`.
+
+The time-related methods of note implemented by `ScheduleItem` are:
+
+* Getters `getStartDateTime()` and `getEndDateTime()`
+* Comparator helper method `getComparableDateTime()`
+* Comparable method `compareTo(ScheduleItem)`
+* Helper method `isOverlapping(ScheduleItem)` for checking if the `ScheduleItem` overlaps with another `ScheduleItem`
+  * Two `ScheduleItem` objects are said to be overlapping if `S1.getStartDateTime() < S2.getEndDateTime()` or `A2.getStartDateTime() < A1.getEndDateTime()`
 
 #### The `DisjointAppointmentList` Class
 
 All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` object at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
-* All `Appointment` objects in the list must not have overlapping periods, that is, for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.startDateTime >= A2.endDateTime` or `A2.startStartTime >= A1.endDateTime`.
+* All `Appointment` objects in the list *must not* have overlapping periods, enforced through the `ScheduleItem#isOverlapping(ScheduleItem)` method.
+  * This means that for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.getStartDateTime() >= A2.getEndDateTime()` or `A2.getStartDateTime() >= A1.getEndDateTime()`.
 * All `Appointment` objects are chronologically sorted by `startDateTime` within the list.
 
 |<img src="images/DisjointAppointmentListStateAllowed.png" width="550" />|
@@ -242,7 +261,7 @@ In order to efficiently maintain chronological ordering upon list modification, 
 | - |
 |<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
 
-*Merge Sort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
+The built-in Java *QuickSort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
 
 #### The `Schedule` Wrapper Class
 
@@ -257,6 +276,22 @@ A call of `Model#addAppointment()` is shown below to illustrate how a call is pr
 #### Defensive `Schedule`
 
 `Schedule` implements the `ReadOnlySchedule` interface, which exposes only the getter method `Schedule#getAppointmentList()` for the underlying `DisjointAppointmentList`. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule` to prevent unintended modifications to the list of `Appointment` objects.
+
+#### Appointment Slot List
+
+The `freebetween` feature requires the display the available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
+
+Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically, abstracting the underlying dependency to external classes.
+
+#### Appointment and AppointmentSlot List Composition
+
+Since there are 2 separately maintained `ScheduleItem` lists, namely a filtered `DisjointAppointmentList` and `AppointmentSlotList`, there is a need to aggregate them into a single unified list for classes external to the Model component to use. The list must:
+
+* contain all elements from both lists
+* be chronologically sorted
+* be chronologically disjoint
+
+This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` also watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list to guarantee the 3 constraints listed above.
 
 ### Appointments Filtering Feature - `appointmentsbetween`
 
@@ -274,7 +309,10 @@ The sequence diagram below illustrates an example of both `Parser` and `UI` acce
 
 ### Schedule Serialization and Inflation
 
-`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
+`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated. 
+
+The inflation process is also designed to be forgiving, and will skip corrupted records instead of invalidating the entire data file.
+
 Subsequent sections will describe how the dependence on `AddressBook` is handled during the process of serializing and inflating `Schedule`.
 
 #### Serialization of Schedule
@@ -286,6 +324,8 @@ Because each schedule stores a reference to a `Person`, serialization does not r
 This operation is particularly tricky as the dependency requires the data in `AddressBook` to be inflated correctly before `Schedule` can be inflated. This is handled in the `MainApp#initModelManager()` method, in which the implementation guarantees that `AddressBook` must be inflated first. The sequence diagram below shows this process and how `AddressBook` is propagated inwards.
 
 ![Appointment Filter](images/ScheduleInflationSequenceDiagram.png)
+
+It is important to note the design consideration that the coupling of `AddressBook` to the inflation methods stops at the `JsonScheduleStorage` component, as deeper levels work with the type `List<Person>` instead.
 
 #### Schedule Data as a Separate JSON File
 
