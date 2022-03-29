@@ -8,7 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
-public class ShowEventsCommand extends Command{
+public class ShowEventsCommand extends Command {
 
     public static final String COMMAND_WORD = "showevents";
 
@@ -22,9 +22,10 @@ public class ShowEventsCommand extends Command{
     private final Predicate<Event> predicate;
 
     public ShowEventsCommand(Predicate<Event> predicate) {
-        this.predicate =  predicate;
+        this.predicate = predicate;
     }
 
+    @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
