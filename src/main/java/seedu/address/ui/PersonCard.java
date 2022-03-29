@@ -40,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label flag;
+    private Pane flag;
     @FXML
     private FlowPane tags;
     @FXML
@@ -63,7 +63,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText("Phone Number: " + person.getPhone().value);
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
-        flag.setText("Flag: " + person.getFlag().toString());
+        if (person.getFlag().isFlagged) {
+            flag.setStyle("-fx-background-color: #c94848");
+        }
         prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
         info.setText("Info: " + person.getInfo().value);
 
