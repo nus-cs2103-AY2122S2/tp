@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.layout.VBox?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -18,27 +19,48 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
+        <VBox alignment="CENTER_LEFT" fx:id="helpMessageContainer" minHeight="300" minWidth="375">
         <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#goToUrl" text="Open User Guide">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
+            <Label fx:id="helpMessage" styleClass="styleFieldMessage" />
+            <HBox styleClass="styleHBox">
+                <Label fx:id="addCommand" styleClass="styleCommand" text="add" prefWidth="55" alignment="CENTER"/>
+                <Label fx:id="addField" styleClass="styleField"/>
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="deleteCommand" styleClass="styleCommand" text="delete" prefWidth="55" alignment="CENTER"/>
+                <Label fx:id="deleteField" styleClass="styleField"/>
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="editCommand" styleClass="styleCommand" text="edit" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="editField" styleClass="styleField" />
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="findCommand" styleClass="styleCommand" text="find" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="findField" styleClass="styleField"/>
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="focusCommand" styleClass="styleCommand" text="focus" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="focusField" styleClass="styleField"/>
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="sortCommand" styleClass="styleCommand" text="sort" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="sortField" styleClass="styleField" />
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="exit" styleClass="styleCommand" text="exit" prefWidth="55" alignment="CENTER" />
+            </HBox>
         </children>
+        <HBox styleClass="styleHBox" alignment="BOTTOM_LEFT">
+            <Button fx:id="copyButton" mnemonicParsing="false" onAction="#goToUrl"
+                    text="Open User Guide in Browser" />
+        </HBox>
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </opaqueInsets>
         <padding>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
-      </HBox>
+      </VBox>
     </Scene>
   </scene>
 </fx:root>
