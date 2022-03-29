@@ -175,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the email window or opens an updated window it if it's already opened.
+     * Opens the email window or opens an updated window if it's already opened.
      */
     @FXML
     public void handleEmailWindow() {
