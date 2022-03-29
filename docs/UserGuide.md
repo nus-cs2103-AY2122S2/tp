@@ -82,6 +82,36 @@ Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
 * `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
 
+### Listing all employees : `listEmployee`
+
+Shows a list of all employees in the address book.
+
+#### Format: 
+* `listEmployee`
+
+
+### Finding employees: `findEmployee`
+
+Finds employees that have all of the options as entered.
+
+#### Note:
+* Options can be stacked together in any order. 
+* No options entered will result in all employees list out like the `listEmployee` command.
+
+#### Format:
+* `findEmployee n/NAMES`
+  * Finds all employees which has their name contain any of the words in `NAMES`
+* `findEmployee p/PHONE_NUMBER`
+  * Find employees with the exact phone number
+* `findEmployee e/EMAIL`
+  * Finds employees with the exact email
+  
+#### Examples:
+* `findEmployee n/Alex Yeoh`
+* `findEmployee p/65162727`
+* `findEmployee e/dcsdcr@nus.edu.sg`
+* `findEmployee n/Alex Yeo p/65162727 e/alexyeo@google.com`
+
 ### Deleting an employee: `deleteEmployee`
 
 Deletes the specified employee from the address book.
@@ -118,13 +148,6 @@ Furthermore, parsing of task is done using the keywords such as "desc/", "by/" &
 the parsing mechanism would take everything inserted after the keywords.
 </div>
 
-### Listing all Tasks : `list`
-
-View all tasks.
-
-Format:
-
-* `list`
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
@@ -156,22 +179,68 @@ Format: `delete INDEX`
 Examples:
 * `delete 2` deletes the 2nd Task in the Task list.
 
-### Locating Task by description or Date: `find`
+### Locating Task by multiple options: `findTask`
 
-Find tasks based on the task description or date in the format of (YYYY-MM-DD).
+Finds task(s) based on multiple conditions provided.
 
-Format: 
-* `find task/ desc/TASK_DESCRIPTION`
-* `find task/ date/YYYY-MM-DD`
+#### Note:
+* Arguments can be stacked together in any order. 
+* Task Type is optional. 
+* However, only one task type is allowed.
+* Any other invalid options not stated below will be ignored
+* No options provided will list down all the tasks like `listTask`
 
-Examples:
-* `find task/ desc/homework`
-* `find date/2022-02-02`
+#### Task Type Available:
+* `todo/`: Todos
+* `deadline/`: Deadlines
+* `event/`: Events
 
-<div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
-Find works based on keywords, as such find would return all matches of the words found in description. 
-And the DATE must be in this format: YYYY-MM-DD (24 hr format)
-</div>
+#### Options :
+* `desc/`: Description of the tasks
+* `date/`: Date of the task in YYYY-MM-DD (Only for deadline and event)
+* `priority/`: Priority of task. Only `HIGH`, `MEDIUM`, `LOW` and `NONE`
+* `assignees/`: The assignees that was assigned to the task (Only one full name of assignee allowed)
+* `isMarked/`: Whether the task is marked. Only `true` or `false`.
+
+#### Format:
+* `findTask todo/`
+  * Find all todos
+* `findTask deadline/`
+  * Find all deadlines 
+* `findTask event/` 
+  * Find all events
+* `findTask desc/[LIST OF WORDS]`
+  * Finds all tasks which contain any of the words in [LIST OF WORDS].
+* `findTask date/YYYY-MM-DD`
+  * Find all deadlines and events with the date
+* `findTask priority/PRIORITY`
+  * Find all tasks with the given PRIORITY [HIGH, MEDIUM, LOW, NONE]
+* `findTask assignees/Assignee full name`
+  * Find all tasks assignee to the stated assignee (in full name)
+* `findTask isMarked/BOOLEAN`
+  * Find all tasks that is already marked (`true`) or unmarked (`false`)
+    * Finds the task with a description that contains all of the following options:
+      * Description which contains the word “School”, 
+      * date 2022-04-16, 
+      * high priority, 
+      * assigned to Alex Yeoh 
+      * and is marked.
+
+  
+#### Example:
+  * `findTask desc/homework`
+  * `findTask date/2022-04-16` 
+  * `findTask desc/work priority/HIGH` 
+  * `findTask deadlines/ desc/school date/2022-04-16 priority/HIGH assignees/Alex Yeo isMarked/true`
+
+
+### Listing all Tasks : `listTask`
+
+Shows a list of all tasks in ManageEZPZ.
+
+Format:
+
+* `listTask`
 
 ### Tagging Tasks to Employees: `tagTask`
 
@@ -210,7 +279,6 @@ Format: `tagPriority INDEX priority/ENUM`
 Example: 
 * `tagPriority 1 priority/HIGH`
 * `tagPriority 1 priority/NONE`
-
 
 ### Clearing all entries : `clear`
 
@@ -263,7 +331,7 @@ Action | Format, Examples
 ------------|--------------
 **Add Todo Task** | `addTodo desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book`
 **Add Deadline Task** | `addDeadline desc/TASK_DESCRIPTION by/DATETIME` <br> e.g., `addDeadline desc/return book by/16-02-2022 1800`
-**Add Event Task** | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., ` addEvent desc/project meeting at/17-02-2022 1900 2000
+**Add Event Task** | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., `addEvent desc/project meeting at/17-02-2022 1900 2000`
 **mark Task** | `markTask INDEX` <br> e.g., `markTask 2`
 **unmark Task** | `unmarkTask INDEX` <br> e.g., `unmarkTask 2`
 **delete Task** | `deleteTask INDEX` <br> e.g., `deleteTask 2`

@@ -2,7 +2,7 @@ package manageezpz.model;
 
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalPersons.ALICE;
-import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
 import static manageezpz.testutil.TypicalTasks.READ_BOOK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -39,7 +39,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        AddressBook newData = getTypicalAddressBookEmployees();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }

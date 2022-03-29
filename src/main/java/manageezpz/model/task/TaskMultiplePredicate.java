@@ -2,7 +2,6 @@ package manageezpz.model.task;
 
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import java.util.List;
@@ -31,9 +30,8 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      * @param assignee The employees assigned to the tasks
      * @param isMarked Whether the task is marked
      */
-    public TaskMultiplePredicate(
-            Prefix taskType, List<String> description, Date date, Priority priority, String assignee,
-            Boolean isMarked) {
+    public TaskMultiplePredicate(Prefix taskType, List<String> description, Date date, Priority priority,
+                                 String assignee, Boolean isMarked) {
         this.taskType = taskType;
         this.description = description;
         this.date = date;
@@ -47,29 +45,33 @@ public class TaskMultiplePredicate implements Predicate<Task> {
      */
     @Override
     public boolean test(Task task) {
-        boolean hasTaskType = !taskType.equals(PREFIX_TASK) ? checkIfHasSpecificTaskType(task, taskType) : true;
-        boolean hasKeyword = description != null ? checkIfHasKeywords(task, description) : true;
-        boolean hasDate = date != null ? checkIfHasDate(task, date) : true;
-        boolean hasPriority = priority != null ? checkIfHasPriority(task, priority) : true;
-        boolean hasAssignee = assignee != null ? checkIfHasAssignee(task, assignee) : true;
-        boolean hasIsMarked = isMarked != null ? checkedIfIsMarked(task, isMarked.booleanValue()) : true;
+        // Checks if the specific search term is specified in the parameter, then check on the task provided.
+        // Defaults to true if not specified.
+        boolean hasTaskType = taskType != null ? checkIfHasSpecificTaskType(task) : true;
+        boolean hasKeyword = description != null ? checkIfHasKeywords(task) : true;
+        boolean hasDate = date != null ? checkIfHasDate(task) : true;
+        boolean hasPriority = priority != null ? checkIfHasPriority(task) : true;
+        boolean hasAssignee = assignee != null ? checkIfHasAssignee(task) : true;
+        boolean hasIsMarked = isMarked != null ? checkedIfIsMarked(task) : true;
 
         return hasTaskType && hasKeyword && hasDate && hasPriority && hasAssignee && hasIsMarked;
     }
 
-    private boolean checkIfHasSpecificTaskType(Task task, Prefix taskType) {
-        boolean isTaskTodo = taskType.equals(PREFIX_TODO) && (task instanceof Todo);
-        boolean isTaskDeadline = taskType.equals(PREFIX_DEADLINE) && (task instanceof Deadline);
-        boolean isTaskEvent = taskType.equals(PREFIX_EVENT) && (task instanceof Event);
-        return isTaskTodo || isTaskDeadline || isTaskEvent;
+    private boolean checkIfHasSpecificTaskType(Task task) {
+        boolean isTodo = taskType.equals(PREFIX_TODO) && task instanceof Todo;
+        boolean isDeadline = taskType.equals(PREFIX_DEADLINE) && task instanceof Deadline;
+        boolean isEvent = taskType.equals(PREFIX_EVENT) && task instanceof Event;
+
+        return isTodo || isDeadline || isEvent;
     }
 
-    private boolean checkIfHasKeywords(Task task, List<String> description) {
+    private boolean checkIfHasKeywords(Task task) {
+        String otherTaskDescription = task.getDescription().toString();
         return description.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(otherTaskDescription, keyword));
     }
 
-    private boolean checkIfHasDate(Task task, Date date) {
+    private boolean checkIfHasDate(Task task) {
         if (task instanceof Todo) {
             return false;
         } else {
@@ -84,20 +86,21 @@ public class TaskMultiplePredicate implements Predicate<Task> {
         } else if (task instanceof Event) {
             return ((Event) task).getDate();
         } else {
+            assert false : "checkIfHasDate() did not filter out the todo";
             return null;
         }
     }
 
-    private boolean checkIfHasPriority(Task task, Priority priority) {
+    private boolean checkIfHasPriority(Task task) {
         return task.getPriority().equals(priority);
     }
 
-    private boolean checkIfHasAssignee(Task task, String assignees) {
+    private boolean checkIfHasAssignee(Task task) {
         return task.haveAssignees(assignee);
     }
 
-    private boolean checkedIfIsMarked(Task task, boolean booleanValue) {
-        return task.isDone == booleanValue;
+    private boolean checkedIfIsMarked(Task task) {
+        return task.isDone == isMarked.booleanValue();
     }
 
     /**
@@ -109,7 +112,7 @@ public class TaskMultiplePredicate implements Predicate<Task> {
             return true;
         } else if (obj instanceof TaskMultiplePredicate) {
             TaskMultiplePredicate pre = (TaskMultiplePredicate) obj;
-            boolean isSameTaskType = pre.taskType.equals(taskType);
+            boolean isSameTaskType = isSameTaskType(pre.taskType);
             boolean isSameDescription = isSameDescription(pre.description);
             boolean isSameDate = isSameDate(pre.date);
             boolean isSamePriority = isSamePriority(pre.priority);
@@ -120,6 +123,13 @@ public class TaskMultiplePredicate implements Predicate<Task> {
                     && isSameDescription && isSameDate && isSamePriority && isSameAssignee && isSameIsMarked;
         }
         return false;
+    }
+
+    private boolean isSameTaskType(Prefix taskType) {
+        if (taskType != null) {
+            return taskType.equals(this.taskType);
+        }
+        return this.taskType == null;
     }
 
     private boolean isSameDescription(List<String> description) {

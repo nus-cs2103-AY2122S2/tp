@@ -3,7 +3,6 @@ package manageezpz.logic.parser;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,10 +20,9 @@ import manageezpz.logic.commands.DeleteEmployeeCommand;
 import manageezpz.logic.commands.EditCommand;
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
 import manageezpz.logic.commands.ExitCommand;
-import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.commands.HelpCommand;
-import manageezpz.logic.commands.ListCommand;
+import manageezpz.logic.commands.ListTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.TaskMultiplePredicate;
@@ -72,14 +70,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findTask() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD
-                        + " " + PREFIX_TASK.toString() + " " + PREFIX_DESCRIPTION
+        FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
+                FindTaskCommand.COMMAND_WORD
+                        + " " + PREFIX_DESCRIPTION
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindTaskCommand(
-                new TaskMultiplePredicate(PREFIX_TASK, keywords, null, null, null, null)),
+                new TaskMultiplePredicate(null, keywords, null, null, null, null)),
                 command);
     }
 
@@ -91,7 +89,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD) instanceof ListTaskCommand);
     }
 
     @Test
