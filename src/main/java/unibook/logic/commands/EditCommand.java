@@ -319,7 +319,7 @@ public class EditCommand extends Command {
             // Checks if module that want to add to person is valid
             // TODO check why the exception not being printed to the console
             if (!latestModList.contains(mod)) {
-                throw new ModuleNotFoundException(mod.toString());
+                throw new CommandException("Module: " + mod.toString() + " not found!");
             }
 
             ObservableList<Group> groups = FXCollections.observableArrayList();;
@@ -333,10 +333,12 @@ public class EditCommand extends Command {
             System.out.println("updated person list");
             for (Module m : latestModList) {
                 if (m.equals(mod)) {
+                    System.out.println("true");
                     if (this.index.getZeroBased() >= m.getGroups().size()) {
                         throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                     }
                     m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
+                    System.out.println(m.getModuleName().toString());
                     groups = m.getGroups();
                 }
             }
@@ -508,7 +510,6 @@ public class EditCommand extends Command {
             }
 
             Module moduleToEdit = latestModList.get(index.getZeroBased());
-            System.out.println(editModuleDescriptor.getIdx() + "why");
             Module editedModule = createEditedModule(index.getZeroBased(), moduleToEdit, editModuleDescriptor);
 
             if (!moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
@@ -523,6 +524,11 @@ public class EditCommand extends Command {
                     moduleSet.add(editedModule);
                 }
             }
+
+            for (Group g : editedModule.getGroups()) {
+                g.editModule(editedModule);
+            }
+
 
             model.setModule(moduleToEdit, editedModule);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);

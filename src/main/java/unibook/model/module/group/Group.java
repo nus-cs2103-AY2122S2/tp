@@ -21,7 +21,7 @@ public class Group {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private String name;
-    private final Module module;
+    private Module module;
     private final ObservableList<Student> members;
     private final ObservableList<LocalDateTime> meetingTimes;
 
@@ -96,6 +96,13 @@ public class Group {
      */
     public void editGroupName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Edit the module of the group object.
+     */
+    public void editModule(Module module) {
+        this.module = module;
     }
 
     public Module getModule() {
