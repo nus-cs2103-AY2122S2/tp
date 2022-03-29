@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 # WoofAreYou
@@ -14,6 +14,10 @@ type fast and understand the basics of CLI (Command Line Interface), WoofAreYou 
   <img src="images/forUserGuide/addCommand.png" alt="WoofForYou sample screenshot"/>
 </p>
 
+* Table of Contents
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
