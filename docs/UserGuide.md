@@ -9,7 +9,7 @@ data easily and review qualifications or availability for scheduling interviews.
 Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
     * **`list`** : Lists all candidates.
 
     * **`add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
-   
+
     * **`edit 1 c/Computer Science yr/3 avail/1 ...`** Edits the first candidate in the system.
 
     * **`delete 1`** : Deletes the first candidate in the system.
@@ -38,13 +38,13 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
     * **`find k/Jane f/name`** : Searches for all candidate with name containing “Jane/jane”.
 
     * **`sort s/name`** : Sorts all candidate by name in descending alphabetical order.
-   
+
     * **`schedule add candidate/1 at/05-05-2022 10:00`** : Schedules the first candidate for an interview at 5 May 2022 10AM.
-   
+
     * **`schedule edit 1 at/06-06-2022 15:00`** : Reschedules the first interview in the interview schedule to 6 June 2022 3PM. Note that the index in the interview schedule is different from the candidate list.
 
     * **`schedule delete 1`** : Deletes the first interview in the interview schedule. Note that the index in the interview schedule is different from the candidate list.
-   
+
     * **`help`** : List all commands in the system.
 
 1. Refer to the [Features](#features) below for details of each command.
