@@ -19,7 +19,6 @@ src/test/data/sandbox/
 
 # Archive files and test files
 data/archive
-src/test/data/ArchiveFilesTest/archive
 
 # MacOS custom attributes files created by Finder
 .DS_Store
