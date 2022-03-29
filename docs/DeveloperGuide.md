@@ -271,33 +271,93 @@ This feature has been enhanced based on the initial implementation of the `edit`
 
 #### How is this feature implemented?
 
-The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` where it will retrieve the attributes that can be edited.
+The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` and `EditCandidateDescriptor` where it will retrieve the attributes that can be edited.
 
 The user is able to edit key attributes of the Candidate, such as
 * Phone Number
 * ApplicationStatus
-* InterviewStatus
 
 Based on the fields that are edited by the user, the EditCommandParser will retreive the information, and update the attributes accordingly.
-There are also some attributes that are dependent on another attribute, and we will introduce `Triggers` to update the attributes automatically.
-One of such is the `InterviewStatus`. It makes sense that if the application is accepted or rejected, it also means that the interview has been completed.
-Hence the `ApplicationStatus` will trigger `InterviewStatus` if the user is changing the `ApplicationStatus` from `Pending` to `Accepted` or `Rejected`.
-The `trigger mechanism` (WIP) is currently handled by `EditCommand#triggerInterviewStatus()`.
+This `EditCandidateDescriptor` class will take in the current attributes of the Candidate, and update the fields accordingly by the `EditCommandParser`. 
 
 #### Why is the feature implemented as such?
 
-**1. Triggers for `ApplicationStatus` and `InterviewStatus` <br>
-For the `ApplicationStatus` and `InterviewStatus`, we initially thought of allowing the user to manually update individual statuses.
-(Eg. Updating `ApplicationStatus` to `Accepted` will not trigger `InterviewStatus`).
-We initially thought that this would be a cleaner way, and to also make sure there is no wrong information in the system.
-In the end, we went ahead with the triggers as it would make sense for the user to have all the statuses updated automatically,
-and we just need to make more checks in our code.
-The downside to this implementation is that the user will not be able to individually allocate the `InterviewStatus`, but we believe this
-will not be an use case for any user.
+**1. We have implemented the `EditCommand` in this manner because it will help enhance the user experience. 
+One alternative method we had was to allow the user to update the candidate by retyping all the fields of the Candidate. 
+However, this proved to be not efficient, and hence we implemented it this way. With `EditCommandParser` and `EditCandidateDescriptor`, 
+the user can edit one attribute of the candidate without typing every attribute of the Candidate.  
 
 #### UML Diagram
-The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
-<img src="images/StatusActivityDiagram.png" width="250" />
+The following activity diagram summarizes what happens when a user executes a `edit` command. <br>
+<img src="images/EditCommandDiagram.png" width="550" />
+
+
+### ApplicationStatus Feature
+
+#### What is the feature about?
+
+This feature implements a tagging system attached to the Candidate's profile in our Application. This way, our user can 
+easily see which candidates are `accepted`, `rejected`, or `pending`. This will help enhance user experience when using our application.  
+
+#### How is the feature implemented?
+
+This feature is currently embedded into the `EditCommand` feature. Currently, a user could edit the `ApplicationStatus` by using the 
+using the `Edit` command. 
+
+#### Why is the feature implemented as such?
+We designed this tagging system is such a way that when a user is first added into the system, the user's `ApplicationStatus` 
+will be set to default of `pending`. This will help the user to minimise the amount of commands to type when adding in a Candidate. 
+
+The `ApplicationStatus` is currently implemented as a class by itself, and each `Candidate` has an `ApplicationStatus` embedded into their profile. 
+To change their status, the `EditCommandParser` will look out for the prefix to change the status, and will change their status accordingly.
+
+In the initial phase of the project, we wanted the ApplicationStatus to be a `String` inside the `Candidate`. However after much consideration, 
+we have decided to make it a class of its own. This way, we can defensively design and code the `ApplicationStatus` and prevent any rouge data 
+from being entered. 
+
+#### UML Diagrams
+**Activity Diagram**<br>
+The following activity diagram summarizes what happens when a user executes a `Edit ApplicationStatus` command: <br>
+<img src="images/ApplicationStatusCommandDiagram.png" width="550" />
+
+
+### InterviewStatus Feature
+
+#### What is the feature about?
+
+This feature implements a tagging system attached to the Candidate's profile in our Application. This way, our user can
+easily see which candidates are `scheuled`, `not scheduled`, or `completed`. This will help enhance user experience when using our application.
+
+#### How is the feature implemented?
+
+This feature currently uses our `trigger` inside the Candidate class, namely `Candidate#triggerInterviewStatusNotScheduled()`,
+`Candidate#triggerInterviewStatusScheduled()` and `Candidate#triggerInterviewStatusCompleted()`. 
+
+When a `Candidate` is scheduled for an interview, it will `trigger` the `InterviewStatus` of the Candidate to be `scheduled`.
+When a `Candidate`'s interview is over, the trigger will automatically mark the `Candidate`'s `InterviewStatus` as `completed`. 
+If an interview date is deleted prematurely, the `InterviewStatus` of the `Candidate` will be reverted back to `Not Scheduled`. 
+
+#### Why is the feature implemented as such?
+We designed this tagging system is such a way that when a user is first added into the system, the user's `ApplicationStatus`
+will be set to default of `not scheduled`. This will help the user to minimise the amount of commands to type when adding in a Candidate.
+
+In the initial planning phase of the project, we intended for the `InterviewStatus` to be `triggered` by many factors, such as `ApplicationStatus`, 
+the current date and time, etc.
+However by coupling these two statuses together, the user will have lesser flexibility to change either `ApplicationStatus` or `InterviewStatus. 
+Hence we decided to keep them independent. 
+
+We also decided that when an interview is deleted prematurely, that the `InterviewStatus` will revert back to `not scheduled`, as it will help to differentiate
+which `Candidate` has yet to be scheduled. 
+
+We also implemented a blocking system, such that if a `Candidate` has completed their interview, the system will not be able to schedule them for
+another interview (by checking their `InterviewStatus`)
+
+#### UML Diagrams
+**Activity Diagram**<br>
+The following activity diagram summarizes what happens for the `InterviewStatus` <br>
+<img src="images/InterviewStatusDiagram.png" width="550" />
+
+
 
 ### Find feature
 
@@ -387,7 +447,7 @@ such as course, email into the middle panel for the user to see.
 #### How is this feature implemented?
 This feature is implemented with the similar implementation of `CandidateListCard`, as we utilise the JavaFX codes to
 create the `view`. We also introduced new features such as `ImageView`, where the extra information will consist of a display
-picture for the Candidate (WIP).
+picture for the Candidate.
 
 #### Why is the feature implemented as such?
 We created a new return value in `CommandResult` to get the `Index` of the intended Candidate. We implemented it this way
@@ -633,7 +693,7 @@ TA - Teaching Assistant
 1.  User requests to list TA candidates
 2.  TAlent Assistant™ displays the list of TA candidates
 3.  User requests to schedule a specific candidate in the list for an interview on a particular date and time
-4.  TAlent Assistant™ schedules the interview
+4.  TAlent Assistant™ schedules the interview and marks the Interview Status of the candidate as Scheduled. 
 
     Use case ends.
 
@@ -704,6 +764,59 @@ TA - Teaching Assistant
 
     Use case ends.
 
+<hr>
+
+**Use case: Marks candidate's application status**
+
+**MSS**
+
+1. User wants to edit a candidate's application status
+2. TAlent Assistant™ will update the status of the candidate, and display it on the UI.
+
+   Use case ends.
+
+* 2a. The status entered by the user is invalid
+    * 2a1. TAlent Assistant™ returns an error message
+      Use case ends.
+
+* 2b. The Candidate does not exist
+    * 2b1. TAlent Assistant™ returns an error message
+      Use case ends.
+
+<hr> 
+
+**Use case: Change the Interview Status of the Candidate**
+
+Preconditions: Candidate has an interview scheduled.
+
+**MSS**
+
+1. User wants to change the Interview Status of the Candidate to Completed.
+2. TAlent Assistant™ will update the Interview Status of the candidate once the interview slot is over.
+
+   Use case ends.
+
+* 2a. User deletes the interview slot before the interview starts
+    * 2a1. TAlent Assistant™ will change the Interview Status of the Candidate to Not Scheduled.
+  
+      Use case ends.
+
+<hr>
+
+**Use case: User wants to see more details of the Candidate**
+
+**MSS**
+
+1. User requests to see more information about the Candidate. 
+2. TAlent Assistant™ will return all the information available for the Candidate selected. 
+
+   Use case ends.
+
+* 2a. Candidate does not exist in the system. 
+    * 2a1. TAlent Assistant™ returns an error message
+
+      Use case ends.
+<hr>
 
 *{More to be added}*
 
