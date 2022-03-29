@@ -119,7 +119,7 @@ public class CommandBox extends UiPart<Region> {
                 int min = Integer.MAX_VALUE;
 
                 for (String command : commands) {
-                    if (command.toLowerCase().contains(last.toLowerCase()) && command.length() < min) {
+                    if (command.length() < min && command.toLowerCase().contains(last.toLowerCase())) {
                         completed = command;
                         min = command.length();
                     }
