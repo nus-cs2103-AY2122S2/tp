@@ -133,7 +133,7 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
 
-### Batch editing multiple persons: 'batchedit'
+### Batch editing multiple persons: `batchedit`
 
 Edits multiple persons in HackNet.
 
@@ -141,14 +141,15 @@ Format: `batchedit INDEX... [s/SKILLNAME_SKILLPROFICENCY...] [t/TEAM...]`
 
 * Edits multiple persons in the specified 'INDEX...'. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
-* At least one of the fields must be provided.
-* The values after `t/` and `s/` is divided by spaces.
+* If some of the indices are invalid, HackNet will try its best to edit at least for the valid indices.
+* At least one field to edit must be provided.
+* The values after `t/` and `s/` is divided by commas.
 * You can remove all the person’s teams by typing `t/` without
   specifying any teams after it. Same concept applies with the skill field with prefix `s/`
 
 Examples:
-* `batchedit 1 2 3 s/Java_100 Python_80` Edits the skill set of the 1st, 2nd and 3rd person to be `java` and `python` with proficiency of 100 and 80.
-* `batchedit 2 3 s/ t/GoogleProject` Clears the skill set of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject`.
+* `batchedit 1 2 3 s/Java_100, Python_80` Edits the skill set of the 1st, 2nd and 3rd person to be `java` and `python` with proficiency of 100 and 80.
+* `batchedit 2 3 s/ t/GoogleProject, Hackathon 2022` Clears the skill set of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
 
 
 ### Add/remove potential teammates: `team/unteam`
