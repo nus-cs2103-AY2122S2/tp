@@ -174,7 +174,7 @@ public class EditWindow extends UiPart<Stage> {
         // First 2 are empty because they are for
         // 0: command word
         // 1: index, which has no prefix.
-        String[] prefixes = {"", "", "n/", "p/", "a/", "e"};
+        String[] prefixes = {"", "", "n/", "p/", "a/", "e/"};
         String[] personFields = {"edit", index, name, phone, address, email};
 
         if (index.equals("")) {
