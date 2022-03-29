@@ -107,7 +107,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<InsurancePackagesSet> readInsurancePackages(Path filePath) throws DataConversionException, IOException {
+    public Optional<InsurancePackagesSet> readInsurancePackages(Path filePath)
+            throws DataConversionException, IOException {
         logger.fine("Attempting to read insurance packages from file: " + filePath);
         return insurancePackagesStorage.readInsurancePackages(filePath);
     }

@@ -1,7 +1,7 @@
 package seedu.address.commons.util;
 
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -17,17 +17,17 @@ import seedu.address.testutil.TestUtil;
  */
 public class CsvUtilTest {
 
-    private static CsvAdaptedPerson DUMMY_PERSON =
+    private static final CsvAdaptedPerson DUMMY_PERSON =
             new CsvAdaptedPerson(null, null, null, null, null, null);
 
     // fake list with only 1 person
-    private static List<CsvAdaptedPerson> DUMMY_PERSON_LIST = Arrays.asList(new CsvAdaptedPerson[]{DUMMY_PERSON});
+    private static final List<CsvAdaptedPerson> DUMMY_PERSON_LIST = Collections.singletonList(DUMMY_PERSON);
 
-    private static CsvAdaptedInsurancePackage DUMMY_PACKAGE = new CsvAdaptedInsurancePackage("Test", "Test");
+    private static final CsvAdaptedInsurancePackage DUMMY_PACKAGE = new CsvAdaptedInsurancePackage("Test", "Test");
 
     // fake list with only 1 package
-    private static List<CsvAdaptedInsurancePackage> DUMMY_PACKAGE_LIST =
-            Arrays.asList(new CsvAdaptedInsurancePackage[]{DUMMY_PACKAGE});
+    private static final List<CsvAdaptedInsurancePackage> DUMMY_PACKAGE_LIST =
+            Collections.singletonList(DUMMY_PACKAGE);
 
     private static final Path TEST_FILE = TestUtil.getFilePathInSandboxFolder("test.csv");
 

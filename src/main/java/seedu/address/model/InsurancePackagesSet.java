@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.person.InsurancePackage;
-import seedu.address.storage.CsvAdaptedInsurancePackage;
 
 public class InsurancePackagesSet {
 

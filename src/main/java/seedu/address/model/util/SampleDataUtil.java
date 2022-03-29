@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    private static int numSamples = 6;
+    private static int NUM_SAMPLES = 6;
 
     private static final List<Name> sampleNames = List.of(
             new Name("Alex Yeoh"), new Name("Bernice Yu"), new Name("Charlotte Oliveiro"),
@@ -66,8 +66,8 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         if (samplePersons == null) {
-            samplePersons = new Person[numSamples];
-            for (int i = 0; i < numSamples; i++) {
+            samplePersons = new Person[NUM_SAMPLES];
+            for (int i = 0; i < NUM_SAMPLES; i++) {
                 samplePersons[i] = new Person(
                     sampleNames.get(i),
                     samplePhones.get(i),

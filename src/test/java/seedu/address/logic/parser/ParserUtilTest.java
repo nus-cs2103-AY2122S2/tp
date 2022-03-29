@@ -238,11 +238,9 @@ public class ParserUtilTest {
                 new Tag(VALID_TAG_NAME_2, null)));
         for (Iterator<Tag> it = actualTagSet.iterator(); it.hasNext(); ) {
             Tag t = it.next();
-            System.out.println(t.tagName + t.tagPriority); //has priority
         }
         for (Iterator<Tag> it = expectedTagSet.iterator(); it.hasNext(); ) {
             Tag t = it.next();
-            System.out.println(t.tagName + t.tagPriority); //doesn't have priority
         }
 
         assertEquals(expectedTagSet, actualTagSet);
