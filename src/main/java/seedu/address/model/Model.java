@@ -172,6 +172,22 @@ public interface Model {
      */
     void setPosition(Position target, Position editedPosition);
 
+    /**
+     * Replaces all instances of {@code positionToBeUpdated} with {@code newPosition}.
+     * {@code positionToBeUpdated} must exist in the address book.
+     * The position identity of {@code newPosition} must not be the same as another existing position
+     * in the address book.
+     */
+    void updatePosition(Position positionToBeUpdated, Position newPosition);
+
+    /**
+     * Replaces all instances of {@code applicantToBeUpdated} with {@code newApplicant}.
+     * {@code applicantToBeUpdated} must exist in the address book.
+     * The applicant identity of {@code newApplicant} must not be the same as another existing applicant
+     * in the address book.
+     */
+    void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant);
+
     /** Returns an unmodifiable view of the filtered position list */
     ObservableList<Position> getFilteredPositionList();
 }
