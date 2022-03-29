@@ -14,6 +14,7 @@ later.">
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
   - [Listing all Patients: `view`](#listing-all-patients-view)
+  - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
@@ -93,7 +94,7 @@ Shows a list of patients in MedBook.
 
 Format: `view`
 
-### View Summary of a Patient's Information: `view i/NRIC`
+### View Summary of a Patient: `view i/NRIC`
 
 Shows a summary of a patient's information in MedBook, including personal details, contact, medical information,...
 
@@ -230,7 +231,7 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | View Help | `help` |
 | Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
 | List all Patients | `view` |
-| View Summary of a Patient's Details | `view i/NRIC` |
+| View Summary of a Patient | `view i/NRIC` |
 | Delete any Entry | `delete INDEX` |
 | Add Contact Information | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
 | View Contact Information | `view t/contact i/NRIC` |
