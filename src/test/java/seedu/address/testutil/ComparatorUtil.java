@@ -14,8 +14,6 @@ public class ComparatorUtil {
     private static final String TEST_PICK_UP_2 = "10:30";
     private static final String TEST_DROP_OFF_2 = "20:30";
 
-    public static final Pet PET_WITH_MISSING_ATTENDANCE_ENTRY =
-            new PetBuilder().build();
     public static final Pet PET_WITH_ABSENT_ATTENDANCE_ENTRY =
             new PetBuilder().withAbsentAttendanceEntry(TEST_DATE).build();
     public static final Pet PET_WITH_PRESENT_ATTENDANCE_ENTRY =
@@ -24,4 +22,6 @@ public class ComparatorUtil {
             new PetBuilder().withPresentAttendanceEntry(TEST_DATE, TEST_PICK_UP_1, TEST_DROP_OFF_1).build();
     public static final Pet PET_WITH_PRESENT_ATTENDANCE_ENTRY_AND_TRANSPORT_TIMING_2 =
             new PetBuilder().withPresentAttendanceEntry(TEST_DATE, TEST_PICK_UP_2, TEST_DROP_OFF_2).build();
+    public static final Pet PET_WITH_MISSING_ATTENDANCE_ENTRY =
+            new PetBuilder().build();
 }
