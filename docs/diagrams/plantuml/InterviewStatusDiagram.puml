@@ -1,0 +1,20 @@
+@startuml
+ 'https://plantuml.com/activity-diagram-beta
+
+ start
+ :User schedules an interview;
+ if () then ([Valid command])
+    : Candidate's InterviewStatus will change to Scheduled;
+ else ([Invalid prefix or status entered])
+   :System returns invalid command error;
+ endif
+ if () then ([User deletes interview prematurely])
+    : Candidate's InterviewStatus will change to Not Scheduled;
+ endif;
+ if () then ([InterviewDate is over])
+    : Candidate's InterviewStatus will change to Completed;
+ endif;
+ stop;
+
+
+ @enduml

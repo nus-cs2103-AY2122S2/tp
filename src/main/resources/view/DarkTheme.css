@@ -124,6 +124,15 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-padding: 2 0 2 0;
+}
+
+.status_pane_style {
+    -fx-padding: 2 0 2 0;
+}
+
+.availability_pane_style {
+    -fx-padding: 5 0 0 0;
 }
 
 .cell_small_label {
@@ -460,6 +469,12 @@
     -fx-font-family: "Segoe UI Light";
 }
 
+.profileTextStyle {
+    -fx-font-size: 35px;
+    -fx-stroke: black;
+    -fx-font-family: "Segoe UI";
+}
+
 // ************* focus panel header css *************
 .focus-panel-header {
     -fx-background-color: #3c3e3f;
@@ -473,6 +488,10 @@
 
 #focus-card-label {
     -fx-padding: 0 0 0 15;
+}
+
+#focus-card-schedule-label {
+    -fx-padding: 25 0 0 15;
 }
 
 #focus-card-scroll-pane {

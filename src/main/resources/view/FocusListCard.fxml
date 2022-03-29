@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.geometry.Insets?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
@@ -29,18 +29,15 @@
                 <FlowPane fx:id="statusFocusPane" prefWrapLength="200"/>
                 <FlowPane fx:id="availableDaysFocus" prefWrapLength="200"/>
             </VBox>
-            <VBox styleClass="keyAttributesVBox" alignment="CENTER_LEFT" minWidth="100" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
-                <Label id="focus-card-label" fx:id="phone" styleClass="focusStyle" text="\$phone" />
-                <Label id="focus-card-label" fx:id="email" styleClass="focusStyle" text="\$email" />
-                <Label id="focus-card-label" fx:id="course" styleClass="focusStyle" text="\$course" />
-                <HBox >
-                    <padding>
-                        <Insets top="10" />
-                    </padding>
-                    <Label id="focus-card-label" styleClass="focusStyleRemark" text="Remarks added:" />
-                </HBox>
-                <Label id="focus-card-label" fx:id="remark" styleClass="focusStyleRemarkText" text="\$remark" wrapText="true"/>
-            </VBox>
+        <Label id="focus-card-label" fx:id="phone" styleClass="focusStyle" text="\$phone" />
+        <Label id="focus-card-label" fx:id="email" styleClass="focusStyle" text="\$email" />
+        <Label id="focus-card-label" fx:id="course" styleClass="focusStyle" text="\$course" />
+        <Label id="focus-card-schedule-label" fx:id="scheduleMessage" styleClass="focusStyle" />
+        <HBox>
+            <Label id="focus-card-label" fx:id="day" styleClass="focusStyle" />
+            <Label fx:id="date" styleClass="focusStyle" />
+            <Label fx:id="time" styleClass="focusStyle" />
+        </HBox>
         </GridPane>
     </ScrollPane>
 </HBox>

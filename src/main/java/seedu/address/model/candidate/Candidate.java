@@ -94,7 +94,8 @@ public class Candidate {
         }
 
         return otherCandidate != null
-                && otherCandidate.getStudentId().equals(getStudentId());
+                && (otherCandidate.getStudentId().equals(getStudentId())
+                || otherCandidate.getEmail().equals(getEmail()));
     }
 
     /**
