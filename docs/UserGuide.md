@@ -258,7 +258,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 * Adding a Tag:
   * `edit INDEX <Specify all tags in show> t/NEW_TAG`
 * Deleting a Tag:
-  * `edit INDEX <Specify all tags in show except the show you want to delete>`
+  * `edit INDEX <Specify all tags in show except the tag you want to delete>`
 * Editing a Tag:
   * `edit INDEX <Specify all other tags in show> t/EDITED_TAG`
 
