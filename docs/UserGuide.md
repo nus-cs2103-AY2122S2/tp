@@ -44,14 +44,10 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Add, edit, delete students](#adding-a-student--add)
     - [List students](#listing-all-students--list)
     - [Find students](#locating-students-by-name--find)
-<<<<<<< HEAD
-    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-coming-soon)
-=======
-    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status)
->>>>>>> 02c3157a84d97d11ff14df5bfb6b9ad49a614977
+    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter)
 - [Manage labs](#lab-related-features)
     - [Add labs](#adding-a-lab--labadd)
-    - [Change status of labs](#setting-the-status-of-individual-labs--labstat-coming-soon)
+    - [Change status of labs](#setting-the-status-of-individual-labs--labstat)
 
 ### System-related features
 
@@ -105,8 +101,10 @@ Format: `clear`
 
 #### Filter (by status of individual labs) : `filter`
 Filters students based on the status of their lab tags. LAB_NUMBER must be a positive integer.
-Multiple filters can be applied by executing the filter command repeatedly. 
-Using the `list` command clears all applied 
+
+Multiple filters can be applied in a conjunctional manner by executing the filter command multiple times
+
+Using the `list` command clears all filters that are currently applied
 
 LAB_STATUS:
 * Unsubmitted = u
@@ -144,16 +142,16 @@ Format: `labrm l/LAB_NUMBER`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME e/EMAIL g/GITHUB t/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`
-**Filter** | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add lab** | `labadd l/LAB_NUMBER`
-**Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`
-**List** | `list`
-**Help** | `help`
-**Exit** | `exit`
+| Action              | Format, Examples                                                                                                                                       |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME e/EMAIL g/GITHUB t/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` |
+| **Clear**           | `clear`                                                                                                                                                |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                    |
+| **Edit**            | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`                       |
+| **Filter**          | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`                                                                                          |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                             |
+| **Add lab**         | `labadd l/LAB_NUMBER`                                                                                                                                  |
+| **Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`                                                                                                              |
+| **List**            | `list`                                                                                                                                                 |
+| **Help**            | `help`                                                                                                                                                 |
+| **Exit**            | `exit`                                                                                                                                                 |
