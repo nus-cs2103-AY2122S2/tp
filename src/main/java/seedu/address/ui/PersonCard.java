@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
         if (person.getFlag().isFlagged) {
-            flag.setStyle("-fx-background-color: #c9484i8");
+            flag.setStyle("-fx-background-color: #c94848");
         }
         prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
         info.setText("Info: " + person.getInfo().value);
