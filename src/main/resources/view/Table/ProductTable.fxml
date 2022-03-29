@@ -18,6 +18,7 @@
         <Label styleClass="table-column-long" text="CATEGORY"/>
         <Label styleClass="table-column-short" text="PRICE"/>
         <Label styleClass="table-column-long" text="DESCRIPTION" HBox.hgrow="ALWAYS"/>
+        <Label styleClass="table-column-short" text="QUANTITY" HBox.hgrow="ALWAYS"/>
         <Label styleClass="table-column-long" HBox.hgrow="NEVER"/>
     </HBox>
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="table-content">
