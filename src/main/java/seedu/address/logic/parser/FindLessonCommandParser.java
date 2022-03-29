@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.LessonNameContainsKeywordsPredicate;
+import seedu.address.model.lesson.LessonNameOrSubjectContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindLessonCommand object
@@ -27,7 +27,7 @@ public class FindLessonCommandParser implements Parser<FindLessonCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindLessonCommand(new LessonNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindLessonCommand(new LessonNameOrSubjectContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }

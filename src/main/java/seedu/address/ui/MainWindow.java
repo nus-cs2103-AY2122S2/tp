@@ -205,7 +205,8 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
+            updateAndPopulateLessonList();
+            updateAndPopulateStudentList();
             if (!commandResult.toggleTo().equals(ViewTab.NONE)) {
                 toggleTab(commandResult.toggleTo());
             }
@@ -265,7 +266,7 @@ public class MainWindow extends UiPart<Stage> {
      * Toggles to student tab.
      */
     public void toggleStudentTab() {
-        updateAndPopulateStudentList();
+        // updateAndPopulateStudentList();
         listPane.getSelectionModel().select(studentTab);
     }
 
@@ -273,7 +274,7 @@ public class MainWindow extends UiPart<Stage> {
      * Toggles to student tab.
      */
     public void toggleLessonTab() {
-        updateAndPopulateLessonList();
+        // updateAndPopulateLessonList();
         listPane.getSelectionModel().select(lessonTab);
     }
 

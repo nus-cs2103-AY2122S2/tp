@@ -22,6 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.ConflictingLessonsPredicate;
 import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAddress;
@@ -34,7 +35,6 @@ public class EditLessonCommand extends Command {
     public static final String COMMAND_WORD = "editlesson";
     public static final String SHORTENED_COMMAND_WORD = "el";
     public static final String COMMAND_DESCRIPTION = "Edit a lesson";
-
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lesson from the list of lessons "
             + "\n"
@@ -60,8 +60,8 @@ public class EditLessonCommand extends Command {
             + "\nNote: You cannot change recurring lessons to be temporary and vice-versa.";
 
     public static final String MESSAGE_SUCCESS = "%1$s successfully edited!";
-    public static final String MESSAGE_CONFLICTING_LESSON = "Editing the time/date of this lesson conflicts "
-            + "with an existing lesson in the schedule";
+    public static final String MESSAGE_CONFLICTING_LESSON = "WARNING: Cannot edit lesson as new date and time"
+            + " conflicts with these existing lessons in your schedule:";
     public static final String MESSAGE_DID_NOT_EDIT = "No details were provided to edit %1$s!";
 
     private final Index lessonId;
@@ -92,8 +92,8 @@ public class EditLessonCommand extends Command {
         model.deleteLesson(lessonToEdit);
         if (model.hasConflictingLesson(editedLesson)) {
             model.addLesson(lessonToEdit);
-            model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-            throw new CommandException(MESSAGE_CONFLICTING_LESSON);
+            model.updateFilteredLessonList(new ConflictingLessonsPredicate(editedLesson));
+            throw new CommandException(MESSAGE_CONFLICTING_LESSON, ViewTab.LESSON);
         }
         model.addLesson(editedLesson);
         model.setSelectedLesson(editedLesson);
