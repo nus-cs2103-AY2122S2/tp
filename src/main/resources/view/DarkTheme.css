@@ -413,3 +413,46 @@
     -fx-background-radius: 2;
     -fx-font-size: 14;
 }
+
+/* Adapted from https://community.oracle.com/tech/developers/discussion/3538389/styling-tabpane-css */
+.tab-pane {
+  -fx-tab-min-width:120px;
+  -fx-tab-max-width:120px;
+  -fx-tab-min-height:50px;
+  -fx-tab-max-height:50px;
+  -fx-background-color: #383838;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:top {
+    -fx-border-radius: 5 5 0 0;
+    -fx-background-color: #383838;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected:top {
+    -fx-border-width: 5 1 1 1;
+    -fx-border-radius: 5 5 0 0;
+    -fx-background-color: #383838;
+    -fx-background-insets: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #707070;
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+    -fx-pref-width: 450;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color:#383838;
+    -fx-border-color: #383838;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-insets: 0;
+}

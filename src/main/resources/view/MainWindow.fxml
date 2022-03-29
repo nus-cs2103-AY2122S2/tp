@@ -50,7 +50,7 @@
                     </padding>
                 </StackPane>
 
-                <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS">
+                <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab text="Players">
 
