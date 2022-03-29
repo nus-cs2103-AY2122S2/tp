@@ -24,7 +24,7 @@
                 <Label GridPane.halignment="CENTER" text="Modules" styleClass="person-list-header" GridPane.columnIndex="0"/>
                 <Label GridPane.halignment="CENTER" text="Groups" styleClass="person-list-header" GridPane.columnIndex="1" />
             </GridPane>
-            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="module-group-list-scroll-pane" />
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="module-group-list-scroll-pane" >
                 <VBox fx:id="moduleAndGroupListView" VBox.vgrow="ALWAYS" spacing="5" styleClass="module-list-pane" />
             </ScrollPane>
         </VBox>
