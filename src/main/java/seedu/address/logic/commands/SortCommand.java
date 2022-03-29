@@ -2,11 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.PersonComparator;
 
 public class SortCommand extends Command {
 
@@ -30,9 +28,9 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + SORT_BY_NAME + " " + SORT_BY_PHONE + " " + SORT_REVERSE
             + SORT_BY_EMAIL;
 
-    private final Comparator<Person> comparator;
+    private final PersonComparator comparator;
 
-    public SortCommand(Comparator<Person> comparator) {
+    public SortCommand(PersonComparator comparator) {
         this.comparator = comparator;
     }
 

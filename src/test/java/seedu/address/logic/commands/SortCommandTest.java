@@ -4,6 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.SortCommandParser.ADDRESS_COMPARATOR;
+import static seedu.address.logic.parser.SortCommandParser.ADDRESS_COMPARATOR_REVERSE;
+import static seedu.address.logic.parser.SortCommandParser.EMAIL_COMPARATOR;
+import static seedu.address.logic.parser.SortCommandParser.EMAIL_COMPARATOR_REVERSE;
+import static seedu.address.logic.parser.SortCommandParser.FAVOURITE_COMPARATOR;
+import static seedu.address.logic.parser.SortCommandParser.FAVOURITE_COMPARATOR_REVERSE;
+import static seedu.address.logic.parser.SortCommandParser.NAME_COMPARATOR;
+import static seedu.address.logic.parser.SortCommandParser.NAME_COMPARATOR_REVERSE;
+import static seedu.address.logic.parser.SortCommandParser.PHONE_COMPARATOR;
+import static seedu.address.logic.parser.SortCommandParser.PHONE_COMPARATOR_REVERSE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -14,34 +24,19 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.PersonComparator;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
 public class SortCommandTest {
-
-    public static final Comparator<Person> NAME_COMPARATOR =
-            Comparator.comparing(person -> person.getName().fullName.toLowerCase());
-    public static final Comparator<Person> ADDRESS_COMPARATOR =
-            Comparator.comparing(person -> person.getAddress().value.toLowerCase());
-    public static final Comparator<Person> EMAIL_COMPARATOR =
-            Comparator.comparing(person -> person.getEmail().value.toLowerCase());
-    public static final Comparator<Person> PHONE_COMPARATOR =
-            Comparator.comparing(person -> person.getPhone().value.toLowerCase());
-    public static final Comparator<Person> FAVOURITE_COMPARATOR =
-            Comparator.comparing(person -> person.getFavourite().isUnfavourited());
-    public static final Comparator<Person> USER_TYPE_COMPARATOR =
-            Comparator.comparing(person -> person.getUserType().value.toLowerCase());
-    public static final Comparator<Person> NUM_PROPERTIES_COMPARATOR =
-            Comparator.comparingInt(person -> person.getProperties().size());
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -49,7 +44,7 @@ public class SortCommandTest {
     @Test
     public void execute_byName_alphabeticalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = NAME_COMPARATOR;
+        PersonComparator comparator = new PersonComparator(List.of(NAME_COMPARATOR));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -60,7 +55,7 @@ public class SortCommandTest {
     @Test
     public void execute_byNameReversed_reverseAlphabeticalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = NAME_COMPARATOR.reversed();
+        PersonComparator comparator = new PersonComparator(List.of(NAME_COMPARATOR_REVERSE));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -71,7 +66,7 @@ public class SortCommandTest {
     @Test
     public void execute_byAddress_lexicographicalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = ADDRESS_COMPARATOR;
+        PersonComparator comparator = new PersonComparator(List.of(ADDRESS_COMPARATOR));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -82,7 +77,7 @@ public class SortCommandTest {
     @Test
     public void execute_byAddressReversed_reverseLexicographicalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = ADDRESS_COMPARATOR.reversed();
+        PersonComparator comparator = new PersonComparator(List.of(ADDRESS_COMPARATOR_REVERSE));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -93,7 +88,7 @@ public class SortCommandTest {
     @Test
     public void execute_byEmail_lexicographicalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = EMAIL_COMPARATOR;
+        PersonComparator comparator = new PersonComparator(List.of(EMAIL_COMPARATOR));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -104,7 +99,7 @@ public class SortCommandTest {
     @Test
     public void execute_byEmailReversed_reverseLexicographicalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = EMAIL_COMPARATOR.reversed();
+        PersonComparator comparator = new PersonComparator(List.of(EMAIL_COMPARATOR_REVERSE));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -115,7 +110,7 @@ public class SortCommandTest {
     @Test
     public void execute_byPhone_numericalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = PHONE_COMPARATOR;
+        PersonComparator comparator = new PersonComparator(List.of(PHONE_COMPARATOR));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -126,7 +121,7 @@ public class SortCommandTest {
     @Test
     public void execute_byPhoneReversed_reverseNumericalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = PHONE_COMPARATOR.reversed();
+        PersonComparator comparator = new PersonComparator(List.of(PHONE_COMPARATOR_REVERSE));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -137,7 +132,7 @@ public class SortCommandTest {
     @Test
     public void execute_byFavourite_favouritesFirst() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = FAVOURITE_COMPARATOR;
+        PersonComparator comparator = new PersonComparator(List.of(FAVOURITE_COMPARATOR));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -150,7 +145,7 @@ public class SortCommandTest {
     @Test
     public void execute_byFavouriteReversed_favouritesLast() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = FAVOURITE_COMPARATOR.reversed();
+        PersonComparator comparator = new PersonComparator(List.of(FAVOURITE_COMPARATOR_REVERSE));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -163,7 +158,7 @@ public class SortCommandTest {
     @Test
     public void execute_byFavouriteThenName_favouritesFirstAndAlphabeticalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = FAVOURITE_COMPARATOR.thenComparing(NAME_COMPARATOR);
+        PersonComparator comparator = new PersonComparator(List.of(FAVOURITE_COMPARATOR, NAME_COMPARATOR));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -174,7 +169,7 @@ public class SortCommandTest {
     @Test
     public void execute_byFavouriteThenNameReversed_favouritesFirstAndReverseAlphabeticalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = FAVOURITE_COMPARATOR.thenComparing(NAME_COMPARATOR.reversed());
+        PersonComparator comparator = new PersonComparator(List.of(FAVOURITE_COMPARATOR, NAME_COMPARATOR_REVERSE));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -185,7 +180,7 @@ public class SortCommandTest {
     @Test
     public void execute_byFavouriteReversedThenName_favouritesLastAndAlphabeticalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = FAVOURITE_COMPARATOR.reversed().thenComparing(NAME_COMPARATOR);
+        PersonComparator comparator = new PersonComparator(List.of(FAVOURITE_COMPARATOR_REVERSE, NAME_COMPARATOR));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -196,7 +191,8 @@ public class SortCommandTest {
     @Test
     public void execute_byFavouriteReversedThenNameReversed_favouritesLastAndReverseAlphabeticalOrder() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        Comparator<Person> comparator = FAVOURITE_COMPARATOR.reversed().thenComparing(NAME_COMPARATOR.reversed());
+        PersonComparator comparator =
+                new PersonComparator(List.of(FAVOURITE_COMPARATOR_REVERSE, NAME_COMPARATOR_REVERSE));
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
