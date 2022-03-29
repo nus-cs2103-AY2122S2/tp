@@ -1144,64 +1144,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 2a. Invalid CSV file selected
     * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.<br>&nbsp;
     * Use case ends.<br>&nbsp;
-
-
-**Use case: User requests to perform a batch command**
-
-**MSS**
-
-1. User requests to perform a batch command which includes a condition
-2. ContaX executes the command based on the given condition
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-* 1b. There are no entries that matches the given condition
-
-    * Use case ends.
-
-**Use case: User requests to perform a command on a specified range**
-
-**MSS**
-
-1. User requests to perform a command to a specified range
-2. ContaX executes the command based on the given range
-
-    Use case ends.
-
-**Extensions**
-
-* * 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-**Use case: User requests to chain multiple commands**
-
-**MSS**
-
-1. User requests to perform multiple commands by chaining them
-2. ContaX starts from the first command
-3. ContaX executes the command
-4. If there is a subsequent chained command, ContaX repeats from step 3 on the next command
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
+    
 
 ### Non-Functional Requirements
 
