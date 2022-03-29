@@ -28,7 +28,7 @@ public class SampleDataUtil {
 
     private static final ApplicationStatus PENDING = new ApplicationStatus("pending");
     private static final InterviewStatus INTERVIEW_NOT_SCHEDULED = new InterviewStatus("Not Scheduled");
-    public static final Remark EMPTY_REMARK = new Remark("");
+    private static final Remark EMPTY_REMARK = new Remark("");
 
     public static Candidate[] getSampleCandidates() {
         return new Candidate[] {
