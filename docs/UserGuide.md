@@ -272,6 +272,22 @@ Format: `list assessment m/MODULE_INDEX`
 Examples:
 * `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
 
+### Finding students: `find`
+
+Finds students whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+
+Examples:
+* `find John` returns `john` and `John Doe`.
+* `find alex david` returns `Alex Yeoh`, `David Li`.
+
 ### Deleting entries
 
 #### Deleting a student: `delete student`
@@ -520,6 +536,16 @@ _Details coming soon ..._
             <ul>
                 <li>syntax: <code>list assessment m/MODULE_INDEX</code></li>
                 <li>e.g., <code>list assessment m/1</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1">Find</td>
+        <td>student</td>
+        <td>
+            <ul>
+                <li>syntax: <code>find KEYWORD [MORE_KEYWORDS]</code></li>
+                <li>e.g., <code>find John</code></li>
             </ul>
         </td>
     </tr>

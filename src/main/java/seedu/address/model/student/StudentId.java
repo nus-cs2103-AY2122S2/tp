@@ -17,7 +17,7 @@ public class StudentId {
      * The first character of the student ID must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[Ee][0-9]{0,7}$";
+    public static final String VALIDATION_REGEX = "^[Ee][0-9]{7}$";
 
     public final String value;
 

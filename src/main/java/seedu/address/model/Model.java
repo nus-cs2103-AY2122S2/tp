@@ -95,6 +95,19 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered assessment list. */
     ObservableList<Assessment> getFilteredAssessmentList();
 
+    /** Returns an unmodifiable view of the unfiltered student list. */
+    ObservableList<Student> getUnfilteredStudentList();
+
+    /** Returns an unmodifiable view of the unfiltered module list. */
+    ObservableList<TaModule> getUnfilteredModuleList();
+
+    /** Returns an unmodifiable view of the unfiltered class group list. */
+    ObservableList<ClassGroup> getUnfilteredClassGroupList();
+
+    /** Returns an unmodifiable view of the unfiltered assessment list. */
+    ObservableList<Assessment> getUnfilteredAssessmentList();
+
+
     /** Returns an unmodifiable view of the student list given by the list of indexes. */
     ObservableList<Student> getStudentListByIndexes(List<Index> indexes);
 

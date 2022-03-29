@@ -225,6 +225,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Student> getUnfilteredStudentList() {
+        return tAssist.getStudentList();
+    }
+
+    @Override
+    public ObservableList<TaModule> getUnfilteredModuleList() {
+        return tAssist.getModuleList();
+    }
+
+    @Override
+    public ObservableList<ClassGroup> getUnfilteredClassGroupList() {
+        return tAssist.getClassGroupList();
+    }
+
+    @Override
+    public ObservableList<Assessment> getUnfilteredAssessmentList() {
+        return tAssist.getAssessmentList();
+    }
+
+    @Override
     public ObservableList<Student> getStudentListByIndexes(List<Index> indexes) {
         return tAssist.getStudentListByIndexes(indexes);
     }
