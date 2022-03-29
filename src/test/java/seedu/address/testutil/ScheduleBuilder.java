@@ -51,7 +51,7 @@ public class ScheduleBuilder {
     /**
      * Sets the {@code ScheduleDateTime} of the {@code Schedule} that we are building.
      */
-    public ScheduleBuilder withPhone(String dateTime) {
+    public ScheduleBuilder withDateTime(String dateTime) {
         this.dateTime = new ScheduleDateTime(dateTime);
         return this;
     }

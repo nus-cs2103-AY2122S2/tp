@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lineup.Lineup;
@@ -38,8 +39,8 @@ public class AddCommandTest {
             .withName("Daniel Lee").withJerseyNumber("2").build();
     private static final Lineup VALID_LINEUP = new Lineup(new LineupName("Dummy"));
     private static final Lineup VALID_LINEUP_2 = new LineupBuilder().build();
-    private Model model;
-    private Model expectedModel;
+    private Model model = new ModelManager();
+    private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_addLineup_success() throws CommandException {
@@ -103,7 +104,7 @@ public class AddCommandTest {
     @Test
     public void execute_scheduleAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingScheduleAdded modelStub = new ModelStubAcceptingScheduleAdded();
-        Schedule validSchedule = new ScheduleBuilder().build();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
 
         CommandResult commandResult = new AddCommand(validSchedule).execute(modelStub);
 
@@ -158,7 +159,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateSchedule_throwsCommandException() {
-        Schedule validSchedule = new ScheduleBuilder().build();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
         AddCommand addCommand = new AddCommand(validSchedule);
         ModelStub modelStub = new ModelStubWithSchedule(validSchedule);
 
@@ -169,8 +170,8 @@ public class AddCommandTest {
     @Test
     public void execute_notDuplicateSchedule_Success() throws Exception {
         ModelStubAcceptingScheduleAdded modelStub = new ModelStubAcceptingScheduleAdded();
-        Schedule validSchedule = new ScheduleBuilder().build();
-        Schedule anotherSchedule = new ScheduleBuilder(validSchedule).withScheduleDescription("Serious").build();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
+        Schedule anotherSchedule = new ScheduleBuilder(validSchedule).withDateTime("01/10/2030 2020").withScheduleDescription("Serious").build();
         new AddCommand(validSchedule).execute(modelStub);
         CommandResult commandResult = new AddCommand(anotherSchedule).execute(modelStub);
 
