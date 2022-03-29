@@ -35,7 +35,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        Comparator<Person> comparator = parseComparators(List.of(trimmedArgs.split(" ")));
+        Comparator<Person> comparator = parseComparators(List.of(trimmedArgs.split("\\s+")));
         return new SortCommand(comparator);
     }
 
