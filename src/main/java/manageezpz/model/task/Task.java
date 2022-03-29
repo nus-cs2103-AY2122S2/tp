@@ -96,6 +96,10 @@ public abstract class Task {
         assignees.add(person);
     }
 
+    public void assignedTo(int index, Person newPerson) {
+        assignees.set(index, newPerson);
+    }
+
     /**
      * Used to deallocate a person from this Task.
      * @param person the person to be deallocated.

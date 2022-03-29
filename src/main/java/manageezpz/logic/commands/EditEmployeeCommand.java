@@ -8,6 +8,7 @@ import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
@@ -18,16 +19,17 @@ import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
+import manageezpz.model.task.Task;
 
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditEmployeeCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editEmployee";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the employee identified "
+            + "by the index number used in the displayed employee list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -37,7 +39,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -48,7 +50,7 @@ public class EditCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditEmployeeCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -59,13 +61,14 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Task> lastShownTaskList = model.getFilteredTaskList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownPersonList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -74,6 +77,15 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        List<Task> taskList = lastShownTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToEdit)).collect(Collectors.toList());
+
+
+        for (int j = 0; j < taskList.size(); j++) {
+            taskList.get(j).assignedTo(index.getZeroBased(), editedPerson);
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -99,12 +111,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditEmployeeCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditEmployeeCommand e = (EditEmployeeCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }

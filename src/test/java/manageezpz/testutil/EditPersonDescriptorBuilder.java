@@ -1,6 +1,6 @@
 package manageezpz.testutil;
 
-import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
+import manageezpz.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
