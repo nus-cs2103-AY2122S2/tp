@@ -15,7 +15,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_STU_DISPLAYED_INDEX = "The student index provided is invalid";
     public static final String MESSAGE_INVALID_KEY_EVENT_DISPLAYED_INDEX = "The key event index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Change page to Module Page!\n "
+    public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Change page to Module Page!\n"
             + "Command to change to module page: list o/view v/modules";
     public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Change page to Person Page!\n"
             + "Command to change to person page: list o/view v/people";

@@ -173,7 +173,7 @@ public class Group {
      * are the same.
      */
     public boolean sameGroupName(Group group) {
-        return this.name.equals(group.getGroupName());
+        return this.name.equalsIgnoreCase(group.getGroupName());
     }
 
     /**
@@ -185,7 +185,7 @@ public class Group {
      */
     public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
         if (moduleCode.equals(this.module.getModuleCode().toString())
-                && groupName.equals(this.getGroupName())) {
+                && groupName.equalsIgnoreCase(this.getGroupName())) {
             return true;
         }
         return false;
