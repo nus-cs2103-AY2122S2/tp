@@ -122,6 +122,13 @@ public class ConsistentLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Lesson> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    /**
      * Returns true if some lesson in the list conflicts with the specified lesson
      */
     public boolean hasConflictingLesson(Lesson toCheck) {
@@ -161,13 +168,6 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         }
 
         return null;
-    }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Lesson> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
     }
 
     /**
