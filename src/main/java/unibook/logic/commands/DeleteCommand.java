@@ -340,7 +340,7 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PROF_DISPLAYED_INDEX);
             }
 
-            Professor professorToDelete = lastShownProfList.get(targetIndex.getZeroBased());
+            Professor professorToDelete = lastShownProfList.get(profIndex.getZeroBased());
 
             professorToDelete.removeModule(moduleToDeleteProf.getModuleCode()); // remove module from prof
             moduleToDeleteProf.removePerson(professorToDelete);
