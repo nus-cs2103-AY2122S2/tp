@@ -34,6 +34,10 @@ public class BatchCommandParserTest {
         // =/ is not specified
         assertParseFailure(parser, "batch editperson by/phone", MESSAGE_INVALID_FORMAT);
 
+        // more than one param
+        assertParseFailure(parser, "batch editperson by/phone =/1 start/1",
+                BatchCommand.MESSAGE_PREFIX_NOT_EQUALS_ONE);
+
     }
 
     @Test

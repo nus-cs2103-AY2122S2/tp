@@ -46,6 +46,8 @@ public class BatchCommand extends Command {
             + PREFIX_SEARCH_TYPE + "phone "
             + PREFIX_EQUALS + "123 `";
 
+    public static final String MESSAGE_PREFIX_NOT_EQUALS_ONE = "Only one parameter (=, start or end) can be provided.";
+
     private final Logger logger = LogsCenter.getLogger(BatchCommand.class);
 
     private final String commandInput;
