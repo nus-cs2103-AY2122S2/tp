@@ -12,7 +12,7 @@ public class Price {
     public static final String MESSAGE_CONSTRAINTS =
             "Prices should only be of type double, and should not be negative";
 
-    public static final String VALIDATION_REGEX = "\\$?(\\d+(?:\\.\\d{1,2})?)";
+    public static final String VALIDATION_REGEX = "\\$?\\d+(?:\\.\\d{1,2})?";
 
     public final Double price;
 
