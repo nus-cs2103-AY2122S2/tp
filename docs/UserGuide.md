@@ -27,7 +27,6 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
     * [Exiting HackNet](#exiting-the-program-exit)
     * [Navigating User Input History](#navigating-user-input-history)
 * [Data](#data)
-* [Future Updates](#future-updates)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -71,10 +70,10 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
     * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-    * e.g `n/NAME [t/Team]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+    * e.g `n/NAME [t/TEAM]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-    * e.g. `[t/Team]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+    * e.g. `[t/TEAM]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
     * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -106,7 +105,7 @@ This section contains commands that can help you manage the details of your cont
 
 Adds a person to HackNet.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of teams (including 0)
@@ -120,7 +119,7 @@ Examples:
 
 Edits an existing person in HackNet.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -150,22 +149,6 @@ Format: `batchedit INDEX... [s/SKILLNAME_SKILLPROFICENCY...] [t/TEAM...]`
 Examples:
 * `batchedit 1 2 3 s/Java_100, Python_80` Edits the skill set of the 1st, 2nd and 3rd person to be `java` and `python` with proficiency of 100 and 80.
 * `batchedit 2 3 s/ t/GoogleProject, Hackathon 2022` Clears the skill set of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
-
-
-### Add/remove potential teammates: `team/unteam`
-
-Format:
-* `team INDEX`
-* `unteam INDEX`
-    * Adds/removes the person at `INDEX`as potential teammate
-    * The index refers to the index number shown in the displayed person list
-    * The index **must be a positive integer** 1, 2, 3, …​
-    * Redundant adding/removal (e.g. adding someone who is already a potential teammate) is not allowed
-
-Examples:
-* `team 1` adds the first person as a potential teammate
-
-![result for 'team 1'](images/teamCommandResult.png)
 
 ### Deleting a person: `delete`
 
@@ -243,6 +226,22 @@ Format: `sort SKILL`
 Examples:
 * `sort Python` shows persons with `Python` as a skill in descending order of proficiency
 
+### Mark/unmark contact as potential teammates: `team/unteam`
+
+Format:
+* `team INDEX`
+* `unteam INDEX`
+    * Marks/unmarks the person at `INDEX`as potential teammate
+    * The index refers to the index number shown in the displayed person list
+    * The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `team 1` marks the first person as a potential teammate
+
+![result for 'team 1'](images/teamCommandResultBefore.png)
+
+![result for 'team 1'](images/teamCommandResultAfter.png)
+
 ### Filter for past teammates: `filterteam`
 
 Shows a list of past teammates in HackNet.
@@ -269,9 +268,11 @@ Format: `↑`, `↓`
 
 ## Data
 
+This section contains information about how we save your data across sessions.
+
 ### Saving the data
 
-Hacknet data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HackNet data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -284,12 +285,6 @@ If your changes to the data file makes its format invalid, HackNet will discard 
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
-
-## Future updates
-
-Input validation for skills<br>
-update skills<br>
-filter by multiple skills<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
