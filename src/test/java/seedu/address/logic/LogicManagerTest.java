@@ -3,28 +3,40 @@ package seedu.address.logic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.SerializableAddressBookStorage;
 import seedu.address.storage.SerializableTempAddressBookStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.PersonUtil;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.PersonUtil.*;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 class LogicManagerTest {
+    private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
+
     private Model model = new ModelManager();
-    private Logic logicManager;
+    private LogicManager logicManager;
 
     @TempDir
     public Path testFolder;
@@ -60,6 +72,86 @@ class LogicManagerTest {
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logicManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void execute_storageThrowsIoException_throwsCommandException() {
+        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        SerializableAddressBookStorage addressBookStorage =
+                new SerializableAddressBookIoExceptionThrowingStub(testFolder.resolve("ioExceptionAddressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(testFolder.resolve("ioExceptionUserPrefs.json"));
+        SerializableTempAddressBookStorage addressBookTempStorage = new SerializableTempAddressBookStorage(
+                getTempFilePath("temp ab"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
+        logicManager = new LogicManager(model, storage);
+
+        // Execute add command
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_FRIEND;
+        Person expectedPerson = PersonUtil.AMY;
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(expectedPerson);
+        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+    
+    @Test
+    public void tempStorageSaveThrowsIoException_throwsCommandException() {
+        // Setup LogicManager with SerializableTempAddressBookStorage
+        SerializableAddressBookStorage addressBookStorage =
+                new SerializableAddressBookStorage(testFolder.resolve("ioExceptionAddressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(testFolder.resolve("ioExceptionUserPrefs.json"));
+        SerializableTempAddressBookStorage addressBookTempStorage =
+                new SerializableTempAddressBookIoExceptionThrowingStub(getTempFilePath("temp ab"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
+        logicManager = new LogicManager(model, storage);
+
+        AddressBook originalAddressBook = getTypicalAddressBook();
+        String expectedMessage = LogicManager.TEMP_FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        assertThrows(CommandException.class, expectedMessage,
+                () -> logicManager.savePrevAddressBookDataInTemp(originalAddressBook));
+    }
+
+    @Test
+    public void tempStorageReadThrowsIoException_throwsCommandException() {
+        // Setup LogicManager with SerializableTempAddressBookStorage
+        SerializableAddressBookStorage addressBookStorage =
+                new SerializableAddressBookStorage(testFolder.resolve("ioExceptionAddressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(testFolder.resolve("ioExceptionUserPrefs.json"));
+        SerializableTempAddressBookStorage addressBookTempStorage =
+                new SerializableTempAddressBookIoExceptionThrowingStub(getTempFilePath("temp ab"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
+        logicManager = new LogicManager(model, storage);
+
+        AddressBook originalAddressBook = getTypicalAddressBook();
+        String expectedMessage = LogicManager.TEMP_FILE_READ_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        assertThrows(CommandException.class, expectedMessage,
+                () -> logicManager.undoPrevModification());
+    }
+
+    @Test
+    public void tempStorageEmpty_throwsCommandException() {
+        // Setup LogicManager with SerializableTempAddressBookReturnEmptyStub
+        SerializableAddressBookStorage addressBookStorage =
+                new SerializableAddressBookStorage(testFolder.resolve("ioExceptionAddressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(testFolder.resolve("ioExceptionUserPrefs.json"));
+        SerializableTempAddressBookStorage addressBookTempStorage =
+                new SerializableTempAddressBookReturnEmptyStub(getTempFilePath("temp ab"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, addressBookTempStorage);
+        logicManager = new LogicManager(model, storage);
+
+        String expectedMessage = UndoCommand.REACHED_UNDO_LIMIT;
+        assertThrows(CommandException.class, expectedMessage,
+                () -> logicManager.undoPrevModification());
     }
 
     /**
@@ -113,5 +205,52 @@ class LogicManagerTest {
                                       String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logicManager.execute(inputCommand));
         assertEquals(expectedModel, model);
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save method is called.
+     */
+    private static class SerializableAddressBookIoExceptionThrowingStub extends SerializableAddressBookStorage {
+        private SerializableAddressBookIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save and read temporary file method is called.
+     */
+    private static class SerializableTempAddressBookIoExceptionThrowingStub extends SerializableTempAddressBookStorage {
+        private SerializableTempAddressBookIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void addNewTempAddressBookFile(ReadOnlyAddressBook addressBook) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+
+        @Override
+        public Optional<ReadOnlyAddressBook> popTempAddressFileData() throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class to return an Optional empty when trying to get the temporary address file data.
+     */
+    private static class SerializableTempAddressBookReturnEmptyStub extends SerializableTempAddressBookStorage {
+        private SerializableTempAddressBookReturnEmptyStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public Optional<ReadOnlyAddressBook> popTempAddressFileData() {
+            return Optional.empty();
+        }
     }
 }
