@@ -371,6 +371,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.sort(new SortAlphabetically());
     }
 
+    /**
+     * Sorts the list of persons in ascending order of the number of tasks completed.
+     */
     public void sortListByTaskDone() {
         internalList.sort(new SortByTaskDone());
     }
@@ -395,6 +398,9 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * SortByTaskDone implements a comparator class, to sort the list of persons by the number of tasks completed.
+     */
     class SortByTaskDone implements Comparator<Person> {
 
         @Override

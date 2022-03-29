@@ -88,6 +88,7 @@ public class TaskList {
 
     /**
      * Marks the task at {@code index} from the list of tasks as complete.
+     * Increment the number of tasks completed.
      *
      * @param index the index of the task to be marked complete.
      */
@@ -98,6 +99,7 @@ public class TaskList {
 
     /**
      * Marks the task at {@code index} from the list of tasks as not complete.
+     * Decrement the number of tasks completed.
      *
      * @param index the index of the task to be marked not complete.
      */
@@ -106,6 +108,11 @@ public class TaskList {
         numOfCompletedTasks--;
     }
 
+    /**
+     * Retrieves the number of completed tasks.
+     *
+     * @return the number of tasks that were completed.
+     */
     public int getNumOfCompletedTasks() {
         return numOfCompletedTasks;
     }
