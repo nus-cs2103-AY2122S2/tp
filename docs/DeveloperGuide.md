@@ -434,8 +434,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. ContaX has no persons to list.
   * Use case ends.<br>&nbsp;
 
-* 5a. ContaX cannot find the requested person to delete.
-  * 5a1. ContaX shows an error message indicating that no such person exists.
+* 3a. ContaX cannot find the requested person to delete.
+  * 3a1. ContaX shows an error message indicating that no such person exists.
   * Use case ends.<br>&nbsp;
 
 **UC4: Edit Person**
