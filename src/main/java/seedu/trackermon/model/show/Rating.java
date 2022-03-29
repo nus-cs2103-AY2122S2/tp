@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
 
-public class Rating {
+public class Rating implements Comparable<Rating> {
 
     public static final String INVALID_RATING = "Rating should be between 0 to 5";
 
@@ -71,5 +71,10 @@ public class Rating {
     @Override
     public int hashCode() {
         return Integer.valueOf(rating).hashCode();
+    }
+
+    @Override
+    public int compareTo(Rating other) {
+        return Integer.compare(this.rating, other.rating);
     }
 }

@@ -127,6 +127,20 @@ public class Show {
         return this.status.compareTo(other.status);
     }
 
+    /**
+     * Compare this rating with other by rating integer value
+     */
+    public int compareRating(Show other) {
+        return this.rating.compareTo(other.rating);
+    }
+
+    /**
+     * Compare this tag with other by number of tags
+     */
+    public int compareTags(Show other) {
+        return Integer.compare(this.tags.size(), other.tags.size());
+    }
+
 
 
 }
