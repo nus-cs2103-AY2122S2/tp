@@ -42,6 +42,25 @@ public class MembershipTest {
     }
 
     @Test
+    public void getTierFromString() {
+        assertEquals(Membership.Tier.GOLD, Membership.getTierFromString("gold"));
+        assertEquals(Membership.Tier.SILVER, Membership.getTierFromString("silver"));
+        assertEquals(Membership.Tier.BRONZE, Membership.getTierFromString("bronze"));
+    }
+
+    @Test
+    public void getTier() {
+        Membership member = new Membership("gold");
+        assertEquals(Membership.Tier.GOLD, member.getTier());
+
+        member = new Membership("silver");
+        assertEquals(Membership.Tier.SILVER, member.getTier());
+
+        member = new Membership("bronze");
+        assertEquals(Membership.Tier.BRONZE, member.getTier());
+    }
+
+    @Test
     public void getDate() {
         LocalDate date = LocalDate.parse("1920-02-02");
         Membership member = new Membership("gold", date);
@@ -112,7 +131,7 @@ public class MembershipTest {
         Membership member2 = new Membership("silver");
 
         assertEquals(-1, member1.compareTo(null));
-        assertEquals(-12, member1.compareTo(member2));
-        assertEquals(12, member2.compareTo(member1));
+        assertEquals(-1, member1.compareTo(member2));
+        assertEquals(1, member2.compareTo(member1));
     }
 }
