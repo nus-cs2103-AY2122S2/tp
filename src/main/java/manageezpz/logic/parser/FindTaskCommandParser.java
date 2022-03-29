@@ -33,8 +33,6 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private String errorMessage = "";
     private boolean hasError = false;
 
-    protected FindTaskCommandParser() {}
-
     /**
      * {@inheritDoc}
      */
@@ -51,8 +49,9 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         checkIfTodoAndDateTogether(argMultiMap, taskType);
 
         if (hasError) {
-            errorMessage = errorMessage + FindTaskCommand.MESSAGE_USAGE;
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            String finalErrorMessage = errorMessage + FindTaskCommand.MESSAGE_USAGE;
+            errorMessage = "";
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, finalErrorMessage));
         } else {
             return new FindTaskCommand(new TaskMultiplePredicate(
                     taskType, descriptions, date, priority, assignee, isMarked));
@@ -139,10 +138,6 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     }
 
     private boolean checkIfDateIsValid(String dateString) {
-        if (dateString.isEmpty()) {
-            addErrorMessage(FindTaskCommand.INVALID_DATE);
-            return false;
-        }
         if (!Date.isValidDate(dateString)) {
             addErrorMessage(Date.MESSAGE_CONSTRAINTS + "\n");
             return false;

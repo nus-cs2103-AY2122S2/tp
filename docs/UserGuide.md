@@ -79,6 +79,36 @@ Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
 * `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
 
+### Finding employees: `findEmployee`
+
+Finds employees that have all of the options as entered.
+
+#### Note:
+* Options can be stacked together in any order. 
+* No options entered will result in all employees list out like the `listEmployee` command.
+
+#### Format:
+* `findEmployee n/NAMES`
+  * Finds all employees which has their name contain any of the words in `NAMES`
+* `findEmployee p/PHONE_NUMBER`
+  * Find employees with the exact phone number
+* `findEmployee e/EMAIL`
+  * Finds employees with the exact email
+  
+#### Examples:
+* `findEmployee n/Alex Yeoh`
+* `findEmployee p/65162727`
+* `findEmployee e/dcsdcr@nus.edu.sg`
+* `findEmployee n/Alex Yeo p/65162727 e/alexyeo@google.com`
+
+### Listing all employees : `listEmployees`
+
+Shows a list of all employees in the address book.
+
+#### Format: 
+* `listEmployees`
+
+
 ### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
 Adds a Task into the Task list.
@@ -93,13 +123,13 @@ Format:
 For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
 </div>
 
-### Listing all Tasks : `list`
+### Listing all Tasks : `listTask`
 
-View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for today
+Shows a list of all tasks in ManageEZPZ.
 
 Format:
 
-* `list`
+* `listTask`
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
