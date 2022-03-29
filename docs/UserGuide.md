@@ -2,18 +2,19 @@
 layout: page
 title: User Guide
 ---
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## 1. Introduction
 
 IBook is an inventory recording system for storekeepers to manage incoming and outgoing products in a store.
+It is designed for fast use through **command line interface**(CLI), complemented by a **graphical user interface**(GUI)
+for convenience use.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 2. Quick start
+* Table of Contents
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 1. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -31,7 +32,7 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
    * **`add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`** : Adds a product named `Maggie` to iBook.
 
-   * **`delete`** `3` : Deletes the 3rd product shown in the current list.
+   * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
 
    * **`exit`** : Exits the app.
 
@@ -39,17 +40,17 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. About
-### 3.1 Structure of the document
+## 2. About
+### 2.1 Structure of the document
 
 This document is structured in a chronological manner so that you would be able to follow through this guide while using the product. If you feel lost at any point in time, you can always refer to the Table of Contents.
 
-### 3.2 Reading the document
+### 2.2 Reading the document
 
 This subsection would introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
 It is important to read this section before proceeding further to avoid getting confused!
 
-#### 3.2.1 Special symbols
+#### 2.2.1 Special symbols
 
 **Additional Information**
 
@@ -86,18 +87,18 @@ Example tip.
 
 </div>
 
-#### 3.2.2 Sections of the Application Window
+#### 2.2.2 Sections of the Application Window
 
 The application window is divided into a command box, results window as well as a table that includes all the products.
 ![Ui](images/Ui.png)
 
-#### 3.2.3 Navigating around
+#### 2.2.3 Navigating around
 
 The main mode of navigation in iBook is through the Command Line Interface (CLI). You can enter commands into the command box and press `Enter` to execute them. The results window would then display the results from executing the command. The table would also update accordingly based on the command ran.
 
 Alternatively, you can also interact with the application through buttons, such as the `Add Product` button, where a popup would be displayed for you to enter the different fields once it is clicked.
 
-#### 3.2.4 Command Format
+#### 2.2.4 Command Format
 
 <div markdown="block" class="alert alert-info">
 
@@ -117,7 +118,7 @@ Alternatively, you can also interact with the application through buttons, such 
 
 </div>
 
-#### 3.2.5 Command Parameters
+#### 2.2.5 Command Parameters
 
 | Parameter      | Description                                               |
 |:---------------|:----------------------------------------------------------|
@@ -129,17 +130,17 @@ Alternatively, you can also interact with the application through buttons, such 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. Features
+## 3. Features
 
-### 4.1 Product Commands
+### 3.1 Product Commands
 
-#### 4.1.1 Listing all products : `list`
+#### 3.1.1 Listing all products : `list`
 
 Shows a list of all products in the application.
 
 Format: `list`
 
-#### 4.1.2 Adding a product : `add`
+#### 3.1.2 Adding a product : `add`
 
 Adds a new product to the application.
 
@@ -156,7 +157,7 @@ Only a single product would be added at a time
 Examples:
 * `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`
 
-#### 4.1.3 Updating products : `update`
+#### 3.1.3 Updating products : `update`
 
 Updates the product at the specified INDEX.
 
@@ -174,7 +175,7 @@ Examples:
 * `update 2 p:14.99` Updates the price of the 2nd product to be `14.99`.
 * `update 3 c:bread d:ABC brand` Updates the category of the 3rd product to `bread` and its description to `ABC brand`.
 
-#### 4.1.4 Deleting products : `delete`
+#### 3.1.4 Deleting products : `delete`
 
 Deletes the product at a specified INDEX.
 
@@ -200,7 +201,7 @@ Format: `delete [TAG:VALUE ...]`
 
 Example: `delete n:Bread`
 
-#### 4.1.5 Finding certain products : `find`
+#### 3.1.5 Finding certain products : `find`
 
 Finds products that fit a certain filter in the application.
 
@@ -216,35 +217,35 @@ Examples:
 
 `find c:Food` lists all products that has category as Food.
 
-#### 4.1.6 Looking for expired certain products : `expired`
+#### 3.1.6 Looking for expired certain products : `expired`
 
 Finds products that contain expired items.
 
 Format: `expired`
 
-#### 4.1.7 Looking for products that are out of stock : `out-of-stock`
+#### 3.1.7 Looking for products that are out of stock : `out-of-stock`
 
 Lists products that are out of stock.
 
 Format: `out-of-stock`
 
-### 4.2 Item Commands *[coming soon]*
+### 3.2 Item Commands *[coming soon]*
 
-### 4.3 Miscellaneous Commands
+### 3.3 Miscellaneous Commands
 
-#### 4.3.2 Exiting the program : `exit`
+#### 3.3.2 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-## 5. Storage
+## 4. Storage
 
-### 5.1 Saving the data
+### 4.1 Saving the data
 
 iBook's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 5.2 Editing the data file
+### 4.2 Editing the data file
 
 iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -252,16 +253,20 @@ iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Adv
 If your changes to the data file makes its format invalid, iBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### 5.3 Archiving data files `[coming in v2.0]`
+### 4.3 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous iBook home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 6. Glossary
 
 --------------------------------------------------------------------------------------------------------------------
 
