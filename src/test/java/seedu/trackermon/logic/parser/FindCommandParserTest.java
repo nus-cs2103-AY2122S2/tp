@@ -1,6 +1,5 @@
 package seedu.trackermon.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackermon.logic.parser.CommandParserTestUtil.assertParseSuccess;
