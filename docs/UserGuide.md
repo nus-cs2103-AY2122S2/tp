@@ -7,6 +7,7 @@ title: User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## 1. Introduction
 
 TrackBeau is a **desktop app made for beauty salons to aid them in managing customers' profile, bookings and services.
@@ -27,23 +28,25 @@ traditional GUI apps.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`listc`** and pressing Enter will show you profiles of all customers.<br>
+5. Type the command in the command box and press Enter to execute it. E.g., typing **`listc`** and pressing Enter will show you profiles of all customers.<br>
    Some example commands you can try:
 
    * **`lists`** : Shows a list of all services in the application.
    * **`help`** : Opens the help window.
    * **`exit`** : Exits the app.
 
-6. Refer to the [4. Features](#4.-Features) below for details of each command.
+6. Refer to the [4. Features](#4.-features) below for details of each command.
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## 3. About
 
 ### 3.1 Structure of this document
 
 This User Guide is structured in a way that lets you find what you need quickly and easily.
 You can jump to the different sections easily by referring to the Table of Contents.
-In the following subsection, [3.2 Reading this document](#), you can find several tips on how to read this guide.
-The next section, [4. Features](#4.-Features) documents the main features in TrackBeau and provides you with 
+In the following subsection, [3.2 Reading this document](#32-reading-this-document), you can find several tips on how to read this guide.
+The next section, [4. Features](#4-features) documents the main features in TrackBeau and provides you with 
 instructions on how to use them.
 
 ### 3.2 Reading this document
@@ -55,9 +58,9 @@ The table below explains the symbols and syntax used throughout the user guide.
 
 | Symbol/Syntax    | Meaning                                                                                        |
 |----------------- |------------------------------------------------------------------------------------------------|
-|<div markdown="block" class="alert alert-info">Information: Example information</div>| Text that appears in the information box indicates additional information that may be useful to know.|
-|<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Example tip</div>| Text that appears in the tip box are useful for enhancing your experience with using TrackBeau.|                                               
-|<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** Example warning</div>| Text that appears in the caution box is important as unwanted consequences might arise if not followed.|
+|<div class="alert alert-info">Information: Example information</div>| Text that appears in the information box indicates additional information that may be useful to know.|
+|<div class="alert alert-primary">:bulb: **Tip:** Example tip</div>| Text that appears in the tip box are useful for enhancing your experience with using TrackBeau.|                                               
+|<div class="alert alert-warning">:exclamation: **Caution:** Example warning</div>| Text that appears in the caution box is important as unwanted consequences might arise if not followed.|
 
 #### 3.2.2 Sections of TrackBeau's GUI
 The image below shows the annotated GUI components of TrackBeau.
@@ -69,7 +72,7 @@ By selecting a tab, it toggles the display panel to showcase the contents relate
 Services, it will display a list of services available. By default, the Customers tab is selected.
 
 There is also a menu bar at the top of the GUI that consists of 2 menu item, File and Help. By clicking on File,
-you will be able to access Exit to exit the app. By clicking on Help, you will be able access Help F1 to open the help window.
+you will be able to access Exit to exit the app. By clicking on Help, you will be able to access Help F1 to open the help window.
 
 You can enter the commands via the command box and pressing Enter to execute them.
 The results panel will then display a response on whether the command was successfully executed.
@@ -92,32 +95,33 @@ The table below explains the important technical terms to help you understand ho
 
 The commands in TrackBeau follows these rules:
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnd@example.com` or as `n/John Doe`.
+  e.g., `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnd@example.com` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[sep/SERVICE_PREFERENCE]…​` can be used as ` ` (i.e. 0 times), `sep/massage`, `sep/facial sep/massage` etc.
+  e.g., `[sep/SERVICE_PREFERENCE]…​` can be used as ` ` (i.e., 0 times), `sep/massage`, `sep/facial sep/massage` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g., if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `listc`, `exit`) will be ignored.<br>
-  e.g. if the command specifies `listc 123`, it will be interpreted as `listc`.
+  e.g., if the command specifies `listc 123`, it will be interpreted as `listc`.
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Features
 This section contains the information about the features and commands of TrackBeau. 
 It is split into the following subsections:
-1. [Customer management ](#4.1-Customer management)
-2. [Service management ](#4.2-Service management)
-3. [Booking management ](#4.3-Booking management)
-4. [Statistics ](#4.4-Statistics)
-5. [Miscellaneous ](#4.5-Miscellaneous)
+1. [Customer management ](#41-customer-management)
+2. [Service management ](#42-service-management)
+3. [Booking management ](#43-booking-management)
+4. [Statistics ](#44-statistics)
+5. [Miscellaneous ](#45-miscellaneous)
 
 ### 4.1 Customer management
 
@@ -145,7 +149,7 @@ Adds a customer to the application.
 
 Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div class="alert alert-primary">:bulb: **Tip:**
 A customer can have any number of preferred staffs, preferred services and allergies (including 0)
 </div>
 
@@ -165,7 +169,7 @@ Edits an existing customer in the application.
 
 Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
-<div markdown="block" class="alert alert-info">
+<div class="alert alert-info">
 Information: 
 <ul>
     <li>At least one of the optional fields must be provided.</li>
@@ -173,7 +177,7 @@ Information:
 </ul>
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div class="alert alert-warning">:exclamation: **Caution:**
 <ul>
     <li>When editing staff/service preferences or allergies, the existing staff/service preferences or allergies will be removed i.e., adding of staff/service preferences or allergies is not cumulative.</li>
     <li>By leaving the staff/service preferences or allergies parameter empty, i.e, `stp/` or `sep/` or `al/` it will remove all the staff/service preferences or allergies currently associated with the customer.</li>
@@ -196,7 +200,7 @@ Finds customers whose names contain any of the given keywords.
 Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
 * Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies
-* The search is case-insensitive. e.g `john` will match `john`
+* The search is case-insensitive. e.g, `john` will match `john`
 * Only the name is searched.
 * Only full words will be matched e.g. `john` will not match `joh`
 
@@ -270,7 +274,7 @@ Deletes the specified service(s) from the application.
 
 Format: `deletes INDEX,[MORE INDEXES]`
 
-<div markdown="block" class="alert alert-info">
+<div class="alert alert-info">
 Information: All the input indexes must be valid else the command will not be executed.
 </div>
 
@@ -327,7 +331,7 @@ TrackBeau data are saved in the hard disk automatically after any command that c
 
 TrackBeau data are saved as a JSON file `[JAR file location]/data/trackbeau.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TrackBeau will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -378,6 +382,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6. Glossary
+
 |Term|Definition|
 |----|----------|
 |Command Line Interface (CLI)|A command line interface connects a user to the computer program by allowing the users to interact with the application by typing in text (commands).|
@@ -391,4 +396,5 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 ## 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackBeau home folder.                                                                                                                                                                                                                                   |
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackBeau home folder.       
+
