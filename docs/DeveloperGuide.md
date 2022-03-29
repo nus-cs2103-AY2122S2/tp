@@ -293,6 +293,16 @@ The data for `Schedule`, containing multiple `Appointment` objects is stored in 
 
 However, this implementation comes with the increased risk of desynchronization between the AddressBook and Schedule data files. This is deemed an acceptable risk, but is also mitigated by validation checks during the inflation process to discard invalid appointment data, ensuring that the application only works with valid appointments.
 
+### Edit Appointment Priority Feature - `prioritizeappt`
+
+The priority feature is similar to the edit for `Appointment` but specifically changes to the `Priority` enums.
+The `Priority` enums override the `Priority#toString()` method to convert enum to reader friendly values and have static `Priority#getFromDisplayName()` to convert case-insensitive `String` to `Priority` enums.
+The original `Appointment` also extended with additional attribute constructor priority, and set `Priority` by immutable `Appointment#withPriority()`.
+
+The calls of static method are received by Appointment and creation of new Appointment with `Priority` show as partial diagram below:
+
+![Priority Diagram](images/PrioritizeApptSequenceDiagram.png)
+
 ### Result List Model Type Switching Feature
 
 Due to the fact that the application handles multiple model types, including `Person`, `Appointment` and `Tag`, there is a need for the UI to handle the display of different models and their associated data.
