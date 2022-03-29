@@ -601,7 +601,7 @@ Action | Format, Examples
 **Edit Appointment** | `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappt 2 n/Call Juliet t/13:45`
 **List Appointments Within Period** | `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **List Available Slots Within Period** | `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60`
-**Find Appointment** | `findappt KEYWORD [MORE_KEYWORDS] [by/person]` <br> e.g `findappt Meeting`
+**Find Appointment** | `findappt KEYWORD [MORE_KEYWORDS] [by/(person OR name)]` <br> e.g `findappt Meeting`
 **Help** | `help`
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
