@@ -157,7 +157,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-<<<<<<< HEAD
      * Returns interview(s) which are for the specified applicant.
      */
     public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
@@ -169,7 +168,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public ArrayList<Interview> getPositionsInterview(Position position) {
         return interviews.getPositionsInterview(position);
-=======
+    }
+
+    /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
      * {@code target} must exist in HireLah.
      * The interview identity of {@code editedInterview} must not be the same as another existing interview
@@ -179,7 +180,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedInterview);
 
         interviews.setInterview(target, editedInterview);
->>>>>>> master
     }
 
     //// position-level operations
