@@ -3,11 +3,7 @@ package seedu.address.logic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -20,12 +16,10 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonUtil;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.PersonUtil.*;
-import static seedu.address.testutil.TypicalPersons.getEmptyTransactions;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 class LogicManagerIntegrationTest {
@@ -103,18 +97,5 @@ class LogicManagerIntegrationTest {
         logicManager.execute(addCommand);
         assertTrue(storage.readAddressBook().isPresent());
         assertEquals(newAddressBook, storage.readAddressBook().get());
-    }
-
-    /**
-     * Executes the command and confirms that
-     * - no exceptions are thrown <br>
-     * - the feedback message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     */
-    private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      Model expectedModel) throws CommandException, ParseException {
-        CommandResult result = logicManager.execute(inputCommand);
-        assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedModel, model);
     }
 }

@@ -9,14 +9,22 @@ import seedu.address.model.ReadOnlyAddressBook;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class SerializableTempAddressBookStorageTest {
     private SerializableTempAddressBookStorage tempAddressBookStorage;
+
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "TempAddressBookStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -103,5 +111,28 @@ class SerializableTempAddressBookStorageTest {
         Optional<ReadOnlyAddressBook> retrieved = tempAddressBookStorage.popTempAddressFileData();
 
         assertTrue(retrieved.isEmpty());
+    }
+
+    @Test
+    public void readTemporaryFile_success() throws Exception {
+        Path path = addToTestDataPathIfNotNull("validTempAddressbookTest.json");
+        Optional<ReadOnlyAddressBook> retrieved = tempAddressBookStorage.getTempAddressBookFileData(path);
+
+        assertTrue(retrieved.isPresent());
+        assertEquals(retrieved.get(), getTypicalAddressBook());
+    }
+
+    @Test
+    public void readTemporaryFile_fail_throwException() {
+        //try to read a corrupted file
+        Path path = addToTestDataPathIfNotNull("invalidTempAddressbookTest.json");
+
+        assertThrows(IOException.class, () -> tempAddressBookStorage.getTempAddressBookFileData(path));
+    }
+
+    private Path addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
+        return userPrefsFileInTestDataFolder != null
+                ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder)
+                : null;
     }
 }
