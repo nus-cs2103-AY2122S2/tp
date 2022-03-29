@@ -26,7 +26,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_KEYWORD + "alice " + PREFIX_KEYWORD + "charlie "
             + PREFIX_FIELD + "name\n"
             + "Allowable fields to be searched include: applicationstatus, availability, candidate, course, email, "
-            + "interviewstatus, name, phone, seniority, studentid.";
+            + "interviewstatus, name, phone, remark, seniority, studentid.";
 
     private final ContainsKeywordsPredicate predicate;
 
