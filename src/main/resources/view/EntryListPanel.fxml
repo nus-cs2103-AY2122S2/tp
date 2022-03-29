@@ -4,7 +4,16 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Label?>
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <Label fx:id="listTitle" />
-  <ListView fx:id="entryListView" VBox.vgrow="ALWAYS" />
+<?import javafx.geometry.Insets?>
+
+<VBox styleClass="rounded-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox styleClass="rounded-header">
+        <padding>
+            <Insets bottom="5" left="5" right="5" top="5"/>
+        </padding>
+        <Label styleClass="title" fx:id="listTitle"/>
+    </VBox>
+    <VBox VBox.vgrow="ALWAYS">
+        <ListView fx:id="entryListView" VBox.vgrow="ALWAYS"/>
+    </VBox>
 </VBox>
