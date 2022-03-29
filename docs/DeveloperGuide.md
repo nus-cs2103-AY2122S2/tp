@@ -818,9 +818,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 2a2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 2a1-2a2 are repeated until the command entered is correct.
 
-    Use case resumes from step 2.
+    Use case resumes from step 3.
 
 **Use case 04: Add an assessment**
 
@@ -842,17 +842,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 2a2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 2a1-2a2 are repeated until the command entered is correct.
 
-    Use case resumes from step 2.
+    Use case resumes from step 3.
 
 **Use case 05: Enrolling student(s)**
 
 **Preconditions:**
 
-1.  The student(s) to be enroled already exist.
-
-2.  The class group that the student(s) will be enroled in already exists.
+1.  The student(s) to be enrolled already exist.
+2.  The class group that the student(s) will be enrolled in already exists.
 
 **MSS**
 
@@ -875,7 +874,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case 06: Disenrolling student(s)**
 
-**Preconditions: The student(s) to be disenroled is already enrolled in the class group.**
+**Preconditions: The student(s) to be disenrolled is already enrolled in the class group.**
 
 **MSS**
 
