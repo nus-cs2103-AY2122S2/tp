@@ -1,12 +1,14 @@
 package seedu.trackermon.logic.parser;
 
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_NAME_ACS;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_NAME_DES;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_STATUS_ACS;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_STATUS_DES;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_STATUS_ORD;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_SORT_STATUS;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.trackermon.logic.commands.SortCommand;
@@ -20,6 +22,12 @@ import seedu.trackermon.model.show.StatusComparator;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+    private static final String VALUE_ORDER_NAME = "NAME";
+    private static final String VALUE_ORDER_STATUS = "STATUS";
+    private static final String VALUE_ASC = "ASC";
+    private static final String VALUE_DSC = "DSC";
+    private static final int NO_VALUE = -1;
+    private static int startingValue = 0;
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns a SortCommand object for execution.
@@ -31,48 +39,96 @@ public class SortCommandParser implements Parser<SortCommand> {
             return new SortCommand(new NameComparator());
         }
 
-        boolean isNamePresent = false;
-        boolean isStatusPresent = false;
         Comparator<Show> nameComparator = new NameComparator();
         Comparator<Show> statusComparator = new StatusComparator();
+        HashMap<Comparator<Show>, Integer> order = new HashMap<>();
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SORT_NAME_ACS,
-                        PREFIX_SORT_STATUS_ACS, PREFIX_SORT_NAME_DES,
-                        PREFIX_SORT_STATUS_DES, PREFIX_SORT_STATUS_ORD);
+                ArgumentTokenizer.tokenize(args, PREFIX_SORT_NAME,
+                        PREFIX_SORT_STATUS, PREFIX_SORT_ORDER);
 
-        if (arePrefixesPresent(argMultimap, PREFIX_SORT_NAME_ACS)) {
-            isNamePresent = true;
-        } else if (arePrefixesPresent(argMultimap, PREFIX_SORT_NAME_DES)) {
-            isNamePresent = true;
-            nameComparator = nameComparator.reversed();
-        }
+        //Initialise order map
+        order.put(nameComparator, NO_VALUE);
+        order.put(statusComparator, NO_VALUE);
 
-        if (arePrefixesPresent(argMultimap, PREFIX_SORT_STATUS_ACS)) {
-            isStatusPresent = true;
-        } else if (arePrefixesPresent(argMultimap, PREFIX_SORT_STATUS_DES)) {
-            isStatusPresent = true;
-            statusComparator = statusComparator.reversed();
-        }
+        nameComparator = putIntoMap(order, nameComparator, PREFIX_SORT_NAME, argMultimap);
+        statusComparator = putIntoMap(order, statusComparator, PREFIX_SORT_STATUS, argMultimap);
 
-        //only name present
-        if (isNamePresent && !isStatusPresent) {
+        reorderMap(order, argMultimap, nameComparator, statusComparator);
+
+        //sort the hashmap
+        Map<Comparator<Show>, Integer> sortedOrder = order.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        Comparator<Show> comparator = buildComparator(sortedOrder);
+
+        //nothing is present, sort by name ascending
+        if (comparator == null) {
             return new SortCommand(nameComparator);
         }
 
-        //only status present
-        if (isStatusPresent && !isNamePresent) {
-            return new SortCommand(statusComparator);
+        return new SortCommand(comparator);
+    }
+
+    private static Comparator<Show> chainComparator(Comparator<Show> comparator,
+                                                    Map.Entry<Comparator<Show>, Integer> entry) {
+        if (comparator == null) {
+            return entry.getKey();
+        } else {
+            return comparator.thenComparing(entry.getKey());
+        }
+    }
+
+    private static Comparator<Show> buildComparator(Map<Comparator<Show>, Integer> sortedOrder) {
+        Comparator<Show> overallComparator = null;
+        for (Map.Entry<Comparator<Show>, Integer> entry: sortedOrder.entrySet()) {
+            if (entry.getValue() != NO_VALUE) {
+                overallComparator = chainComparator(overallComparator, entry);
+            }
+        }
+        return overallComparator;
+    }
+
+
+    private static Comparator<Show> putIntoMap(HashMap<Comparator<Show>, Integer> order,
+                                  Comparator<Show> comparator, Prefix prefix, ArgumentMultimap argMultimap) {
+        if (arePrefixesPresent(argMultimap, prefix)) {
+            String valueName = argMultimap.getValue(prefix).orElse(VALUE_ASC);
+            valueName = valueName.toUpperCase().trim();
+            if (valueName.equals(VALUE_DSC)) {
+                comparator = comparator.reversed();
+            }
+            order.put(comparator, startingValue);
+            startingValue++;
         }
 
-        //both name and status present - status first then name
-        if (arePrefixesPresent(argMultimap, PREFIX_SORT_STATUS_ORD)) {
-            return new SortCommand(statusComparator.thenComparing(nameComparator));
+        return comparator;
+    }
+
+    private static void reorderMap(HashMap<Comparator<Show>, Integer> order, ArgumentMultimap argMultimap,
+                                   Comparator<Show> nameComparator, Comparator<Show> statusComparator) {
+        if (arePrefixesPresent(argMultimap, PREFIX_SORT_ORDER)) {
+            String valueOrder = argMultimap.getValue(PREFIX_SORT_ORDER).get();
+            valueOrder = valueOrder.toUpperCase().trim();
+            int nameIndex = valueOrder.indexOf(VALUE_ORDER_NAME);
+            int statusIndex = valueOrder.indexOf(VALUE_ORDER_STATUS);
+            if (nameIndex == NO_VALUE) {
+                nameIndex = Integer.MAX_VALUE;
+            }
+            if (statusIndex == NO_VALUE) {
+                statusIndex = Integer.MAX_VALUE;
+            }
+
+            if (order.get(nameComparator) != NO_VALUE) {
+                order.replace(nameComparator, nameIndex);
+            }
+
+            if (order.get(statusComparator) != NO_VALUE) {
+                order.replace(statusComparator, statusIndex);
+            }
         }
-
-        //both name and status present - name first then status
-        return new SortCommand(nameComparator.thenComparing(statusComparator));
-
     }
 
     /**
