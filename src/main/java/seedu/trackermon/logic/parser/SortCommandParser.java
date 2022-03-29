@@ -92,9 +92,9 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     /**
-     * Returns a comparator then chain the previous comparator to a new one if the previous is not null.
-     * @param comparator previous comparator to build upon.
-     * @param entry contain the new comparator.
+     * Returns a comparator then chains the previous comparator to a new one if the previous is not null.
+     * @param comparator previous comparator to built upon.
+     * @param entry is the new comparator to chain.
      * @return a comparator build upon the previous comparator.
      */
     private static Comparator<Show> chainComparator(Comparator<Show> comparator,
@@ -146,7 +146,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     /**
-     * Updates value of Order Map, if the value is not -1.
+     * Updates value of Order Map if the value is not -1.
      * @param comparator key of the Order Map.
      * @param index new index to update.
      */
