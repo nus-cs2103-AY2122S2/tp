@@ -30,6 +30,7 @@ import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 import seedu.address.model.util.UserTypeUtil;
+import seedu.address.storage.ReminderPersons;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -86,6 +87,11 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
+        // remove reminder for previous instance of Person
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        reminderPersons.remove(personToEdit);
+        reminderPersons.add(editedPerson);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
