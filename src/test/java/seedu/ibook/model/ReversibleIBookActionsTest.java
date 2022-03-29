@@ -10,6 +10,11 @@ import static seedu.ibook.testutil.TypicalReversibleIBookActions.REVERSIBLE_SET_
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.model.actions.ReversibleAddProductAction;
+import seedu.ibook.model.actions.ReversibleRemoveProductAction;
+import seedu.ibook.model.actions.ReversibleResetDataAction;
+import seedu.ibook.model.actions.ReversibleSetProductAction;
+
 public class ReversibleIBookActionsTest {
     private final IBook emptyIBook = new IBook();
     private final IBook typicalIBook = getTypicalIBook();

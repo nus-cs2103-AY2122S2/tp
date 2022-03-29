@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.ibook.model.actions.ReversibleIBookAction;
+
 /**
  * A class that keeps records of changes to iBook.
  */

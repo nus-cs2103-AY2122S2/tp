@@ -3,6 +3,14 @@ package seedu.ibook.model;
 import java.util.Collections;
 import java.util.List;
 
+import seedu.ibook.model.actions.ReversibleAddItemAction;
+import seedu.ibook.model.actions.ReversibleAddProductAction;
+import seedu.ibook.model.actions.ReversibleIBookAction;
+import seedu.ibook.model.actions.ReversibleRemoveItemAction;
+import seedu.ibook.model.actions.ReversibleRemoveProductAction;
+import seedu.ibook.model.actions.ReversibleResetDataAction;
+import seedu.ibook.model.actions.ReversibleSetItemAction;
+import seedu.ibook.model.actions.ReversibleSetProductAction;
 import seedu.ibook.model.exceptions.AtLatestStateException;
 import seedu.ibook.model.exceptions.AtOldestStateException;
 import seedu.ibook.model.item.Item;

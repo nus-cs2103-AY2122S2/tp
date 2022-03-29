@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.ibook.model.ReversibleAddItemAction;
-import seedu.ibook.model.ReversibleAddProductAction;
-import seedu.ibook.model.ReversibleIBookAction;
-import seedu.ibook.model.ReversibleRemoveItemAction;
-import seedu.ibook.model.ReversibleRemoveProductAction;
-import seedu.ibook.model.ReversibleSetItemAction;
-import seedu.ibook.model.ReversibleSetProductAction;
+import seedu.ibook.model.actions.ReversibleAddItemAction;
+import seedu.ibook.model.actions.ReversibleAddProductAction;
+import seedu.ibook.model.actions.ReversibleIBookAction;
+import seedu.ibook.model.actions.ReversibleRemoveItemAction;
+import seedu.ibook.model.actions.ReversibleRemoveProductAction;
+import seedu.ibook.model.actions.ReversibleSetItemAction;
+import seedu.ibook.model.actions.ReversibleSetProductAction;
 
 public class TypicalReversibleIBookActions {
     public static final ReversibleAddProductAction REVERSIBLE_ADD_PRODUCT_ACTION =

@@ -15,6 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.model.actions.ReversibleIBookAction;
+
 public class StateChangeRecorderTest {
     private StateChangeRecorder recorderWithNoRecord = getStateChangeRecorderWithNoRecord();
     private StateChangeRecorder recorderWithOneRecord = getStateChangeRecorderWithOneRecord();
