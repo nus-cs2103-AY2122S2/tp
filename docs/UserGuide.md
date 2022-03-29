@@ -29,7 +29,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
     * **`list`** : Lists all candidates.
 
-    * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
+    * **`add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
    
     * **`edit [INDEX] c/Computer Science yr/3 avail/1 ...`** Edits the specified candidate in the system.
 
@@ -75,17 +75,18 @@ Format: `help`
 
 Adds a candidate into the system.
 
-Format: `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`
+Format: `add id/STUDENTID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`
 
 * `STUDENTID` is sensitive and it will be validated.
 * `NAME` should only contain alphabets, `A-Z` or `a-z`.
 * `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
+* `EMAIL` should only be in this format. i.e. `EXXXXXXX@u.nus.edu`
 * `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
 * `SENIORITY` is a number range from 1 to 4.
 * `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
 
 Examples:
-* `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, E0123456, named John Doe.
+* `add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, E0123456, named John Doe.
 
 ### Editing a candidate: `edit`
 
@@ -262,14 +263,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                 |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
-| **Clear**    | `clear`                                                                                                                                                          |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                 |
-| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                     |
-| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                 |
-| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                                                      |
-| **List**     | `list`                                                                                                                                                           |
-| **Help**     | `help`                                                                                                                                                           |
+| Action       | Format, Examples                                                                                                                                                                              |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add id/STUDENTID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
+| **Clear**    | `clear`                                                                                                                                                                                       |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                           |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                                              |
+| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                  |
+| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                              |
+| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                                                                                   |
+| **List**     | `list`                                                                                                                                                                                        |
+| **Help**     | `help`                                                                                                                                                                                        |

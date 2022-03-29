@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_NO_CANDIDATES_IN_SYSTE
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SENIORITY_DESC_AMY;
@@ -91,7 +92,8 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + STUDENT_ID_DESC_AMY + NAME_DESC_AMY
-                + PHONE_DESC_AMY + COURSE_DESC_AMY + SENIORITY_DESC_AMY + AVAILABILITY_DESC_AMY;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + COURSE_DESC_AMY + SENIORITY_DESC_AMY
+                + AVAILABILITY_DESC_AMY;
         Candidate expectedCandidate = new CandidateBuilder(AMY)
                 .withApplicationStatus(VALID_APPLICATION_PENDING)
                 .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();

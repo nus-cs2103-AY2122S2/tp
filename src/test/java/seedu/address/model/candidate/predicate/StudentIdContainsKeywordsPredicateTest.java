@@ -75,6 +75,6 @@ public class StudentIdContainsKeywordsPredicateTest {
         predicate = new StudentIdContainsKeywordsPredicate(Arrays.asList("87654321", "alice@email.com", "Main",
                 "Street"));
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
+                .withEmail("E0123456@u.nus.edu").withCourse("Business Analytics").withStudentId("E0324444").build()));
     }
 }
