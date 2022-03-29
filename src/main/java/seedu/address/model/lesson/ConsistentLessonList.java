@@ -168,11 +168,6 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         }
     }
 
-    public void setLessons(ConsistentLessonList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Replaces the contents of this list with {@code lessons}.
      * {@code lessons} must not contain lessons with overlapping timeslots.
