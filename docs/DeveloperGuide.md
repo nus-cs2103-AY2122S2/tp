@@ -783,7 +783,7 @@ TA - Teaching Assistant
     * 2b1. TAlent Assistant™ returns an error message
       Use case ends.
 
-<hr> 
+<hr>
 
 **Use case: Change the Interview Status of the Candidate**
 
