@@ -173,7 +173,44 @@ Find works based on keywords, as such find would return all matches of the words
 And the DATE must be in this format: YYYY-MM-DD (24 hr format)
 </div>
 
-### Locating employees by name:
+### Tagging Tasks to Employees: `tagTask`
+
+Assigns a Task to the Employee
+
+Note:
+* For `tagTask`, the INDEX must be a positive integer 1,2,3...
+* For `tagTask`, the NAME must be a valid Employee Name from ManageEZPZ.
+
+Format: `tagTask INDEX n/NAME`
+
+Example: `tagTask 1 n/Alex Yeoh`
+
+### Untag Tasks from Employees: `untagTask`
+
+Deallocate the Task from Employee.
+
+Note:
+* For `untagTask`, the INDEX must be a positive integer 1,2,3...
+* For `untagTask`, the NAME must be a valid Employee Name from ManageEZPZ.
+
+Format: `untagTask INDEX n/NAME`
+
+Example: `untagTask 1 n/Alex Yeoh`
+
+### Tag Priority to a Task: `tagPriority`
+
+Assign a Task to a Priority which is enum of “HIGH / MEDIUM / LOW / NONE”
+
+Note:
+* For `tagPriority`, the INDEX must be a positive integer 1,2,3...
+* For `tagPriority`, the ENUM must be HIGH, MEDIUM, LOW, or NONE.
+
+Format: `tagPriority INDEX priority/ENUM`
+
+Example: 
+* `tagPriority 1 priority/HIGH`
+* `tagPriority 1 priority/NONE`
+
 
 ### Clearing all entries : `clear`
 
@@ -198,8 +235,6 @@ ManageEZPZ data are saved as a JSON file `[JAR file location]/data/ManageEZPZ.js
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ManageEZPZ will discard all data and start with an empty data file at the next run.
 </div>
-
-### Tagging Tasks to Employees `[coming in v1.3]`
 
 _Details coming soon ..._
 
