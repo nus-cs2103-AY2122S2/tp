@@ -419,6 +419,15 @@
     -fx-background-radius: 5;
 }
 
+.scroll-bar .increment-button:hover, .scroll-bar .decrement-button:hover {
+    -fx-background-color: #d2d2d2;
+}
+
+.scroll-bar .increment-button:pressed, .scroll-bar .increment-button:hover:pressed,
+.scroll-bar .decrement-button:pressed, .scroll-bar .decrement-button:hover:pressed{
+    -fx-background-color: #7e7a7a;
+}
+
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
 }
 
