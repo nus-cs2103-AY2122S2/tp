@@ -659,7 +659,7 @@ Preconditions: User is currently using ManageEZPZ.
         * `findTask todo/`
         * `findTask deadline/`
         * `findTask event/`
-        * Based on the Task type above, the User wants to also get a more 
+        * With or without the Task type above, the User wants to also get a more 
           filtered search result, User then adds these prefixes as additional
           search terms:
           * `desc/` for Description search.
