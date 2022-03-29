@@ -93,13 +93,22 @@ Shows a list of patients in MedBook.
 
 Format: `view`
 
+### View Summary of a Patient's Information: `view i/NRIC`
+
+Shows a summary of a patient's information in MedBook, including personal details, contact, medical information,...
+
+Format: `view i/NRIC`
+
+Examples:
+* `view i/S1234567L`
+
 ### Deleting any Entry: `delete`
 
-Deletes a specified entry (patient, contact, medical information,...) from MedBook.
+Deletes a specified entry (patient, contact, medical information,...) on current screen from MedBook.
 
 Format: `delete INDEX`
 
-* We can only delete the entry only if the display panel is displaying the entry.
+* We can delete the entry only if the entry is being shown on the display panel.
 * The index refers to the index number shown in the displayed list.
 * The index must be a positive integer 1, 2, 3, …​
 
@@ -175,7 +184,7 @@ Examples:
 
 ### Adding Prescription: `add t/prescription`
 
-Adds a medical prescription of a patient in MedBook.
+Adds a medical prescription of a patient to MedBook.
 
 Format: `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`
 
@@ -221,6 +230,7 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | View Help | `help` |
 | Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
 | List all Patients | `view` |
+| View Summary of a Patient's Details | `view i/NRIC` |
 | Delete any Entry | `delete INDEX` |
 | Add Contact Information | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
 | View Contact Information | `view t/contact i/NRIC` |
