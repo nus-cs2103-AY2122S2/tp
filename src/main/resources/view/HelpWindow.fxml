@@ -23,31 +23,39 @@
         <children>
             <Label fx:id="helpMessage" styleClass="styleFieldMessage" />
             <HBox styleClass="styleHBox">
-                <Label fx:id="addCommand" styleClass="styleCommand" text="add" prefWidth="55" alignment="CENTER"/>
+                <Label fx:id="addCommand" styleClass="styleCommand" text="add" prefWidth="70" alignment="CENTER"/>
                 <Label fx:id="addField" styleClass="styleField"/>
             </HBox>
             <HBox styleClass="styleHBox">
-                <Label fx:id="deleteCommand" styleClass="styleCommand" text="delete" prefWidth="55" alignment="CENTER"/>
+                <Label fx:id="deleteCommand" styleClass="styleCommand" text="delete" prefWidth="70" alignment="CENTER"/>
                 <Label fx:id="deleteField" styleClass="styleField"/>
             </HBox>
             <HBox styleClass="styleHBox">
-                <Label fx:id="editCommand" styleClass="styleCommand" text="edit" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="editCommand" styleClass="styleCommand" text="edit" prefWidth="70" alignment="CENTER" />
                 <Label fx:id="editField" styleClass="styleField" />
             </HBox>
             <HBox styleClass="styleHBox">
-                <Label fx:id="findCommand" styleClass="styleCommand" text="find" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="findCommand" styleClass="styleCommand" text="find" prefWidth="70" alignment="CENTER" />
                 <Label fx:id="findField" styleClass="styleField"/>
             </HBox>
             <HBox styleClass="styleHBox">
-                <Label fx:id="focusCommand" styleClass="styleCommand" text="focus" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="focusCommand" styleClass="styleCommand" text="focus" prefWidth="70" alignment="CENTER" />
                 <Label fx:id="focusField" styleClass="styleField"/>
             </HBox>
             <HBox styleClass="styleHBox">
-                <Label fx:id="sortCommand" styleClass="styleCommand" text="sort" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="scheduleCommand" styleClass="styleCommand" text="schedule" prefWidth="70" alignment="CENTER"/>
+                <Label fx:id="scheduleField" styleClass="styleField"/>
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="sortCommand" styleClass="styleCommand" text="sort" prefWidth="70" alignment="CENTER" />
                 <Label fx:id="sortField" styleClass="styleField" />
             </HBox>
             <HBox styleClass="styleHBox">
-                <Label fx:id="exit" styleClass="styleCommand" text="exit" prefWidth="55" alignment="CENTER" />
+                <Label fx:id="viewCommand" styleClass="styleCommand" text="view" prefWidth="70" alignment="CENTER"/>
+                <Label fx:id="viewField" styleClass="styleField"/>
+            </HBox>
+            <HBox styleClass="styleHBox">
+                <Label fx:id="exit" styleClass="styleCommand" text="exit" prefWidth="70" alignment="CENTER" />
             </HBox>
         </children>
         <HBox styleClass="styleHBox" alignment="BOTTOM_LEFT">

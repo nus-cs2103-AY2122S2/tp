@@ -19,11 +19,12 @@ public class HelpWindow extends UiPart<Stage> {
             "https://ay2122s2-cs2103-f11-2.github.io/tp/UserGuide.html";
     private static final String HELP_MESSAGE = "Available functions on this version: \n\n";
     private static final String ADD_FIELD = "n/NAME id/STUDENT_ID c/COURSE avail/AVAILABILITY";
-    private static final String DELETE_FIELD = "INDEX";
-    private static final String EDIT_FIELD = "INDEX [PREFIX]/[NEW VALUE]";
+    private static final String FIELD_IS_INDEX = "INDEX";
+    private static final String EDIT_FIELD = FIELD_IS_INDEX + " [PREFIX]/[NEW VALUE]";
     private static final String FIND_FIELD = "k/KEYWORD k/[MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]";
-    private static final String FOCUS_FIELD = "INDEX";
+    private static final String SCHEDULE_FIELD = "add candidate/" + FIELD_IS_INDEX + " at/dd-MM-yyyy HH:mm";
     private static final String SORT_FIELD = "s/ATTRIBUTE";
+    private static final String VIEW_FIELD = "[today] [week] [month]";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -46,7 +47,11 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label focusField;
     @FXML
+    private Label scheduleField;
+    @FXML
     private Label sortField;
+    @FXML
+    private Label viewField;
 
     /**
      * Creates a new HelpWindow.
@@ -57,11 +62,13 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         addField.setText(ADD_FIELD);
-        deleteField.setText(DELETE_FIELD);
+        deleteField.setText(FIELD_IS_INDEX);
         editField.setText(EDIT_FIELD);
         findField.setText(FIND_FIELD);
+        scheduleField.setText(SCHEDULE_FIELD);
         sortField.setText(SORT_FIELD);
-        focusField.setText(FOCUS_FIELD);
+        focusField.setText(FIELD_IS_INDEX);
+        viewField.setText(VIEW_FIELD);
     }
 
     /**
