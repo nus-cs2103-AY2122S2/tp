@@ -16,12 +16,14 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyHustleBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Flag;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.testutil.PersonBuilder;
@@ -170,6 +172,12 @@ public class AddCommandTest {
         public void sortPersonListBy(Comparator<Person> sortComparator) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Index getPersonListIndex(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

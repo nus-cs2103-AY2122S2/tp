@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -35,6 +36,10 @@ public class NumberParser {
     public Command parse() throws ParseException {
         if (lastCommand instanceof EditCommand) {
             EditCommand newCommand = (EditCommand) lastCommand;
+            newCommand.setIndex(index);
+            return newCommand;
+        } else if (lastCommand instanceof DeleteCommand) {
+            DeleteCommand newCommand = (DeleteCommand) lastCommand;
             newCommand.setIndex(index);
             return newCommand;
         } else {

@@ -12,7 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Flag;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduledMeeting;
 
@@ -150,6 +152,20 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Index getPersonListIndex(Name name) {
+        Index result = Index.fromZeroBased(0);
+        String personName = name.fullName;
+        for (Person i : filteredPersons) {
+            String currName = i.getName().fullName;
+            if (currName.toLowerCase().contains(personName.toLowerCase())) {
+                break;
+            }
+            result.increment(1);
+        }
+        return result;
     }
 
     @Override
