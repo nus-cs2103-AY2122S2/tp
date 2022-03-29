@@ -12,5 +12,6 @@ public class Messages {
     public static final String MESSAGE_PETS_FOUND = "Found %1$d pet(s) similar to keyword(s)!";
     public static final String MESSAGE_MISSING_PICKUP_TIME = "You forgot to include the pick-up time!";
     public static final String MESSAGE_MISSING_DROPOFF_TIME = "You forgot to include the drop-off time!";
-
+    public static final String MESSAGE_NO_CHARGE_SET = "You forgot to include the daily charge!";
+    public static final String MESSAGE_NO_CHARGE_MONTH_SET = "You forgot to include the month to charge the pet by!";
 }

@@ -2,13 +2,16 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.AttendanceEntry;
 import seedu.address.model.charge.Charge;
+import seedu.address.model.charge.ChargeDate;
 import seedu.address.model.pet.Pet;
 
 
@@ -22,25 +25,25 @@ public class ChargeCommand extends Command {
             + ": Computes a month's charge of the pet identified "
             + "by the index number used in the last pet listing.\n"
             + "Parameters: INDEX (must be a positive integer)"
-            + "m/ [MM]\n"
+            + "m/[MM-yyyy] c/[cost]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "m/03";
+            + "m/03-2022 c/200";
 
-    public static final String MESSAGE_COMPUTE_CHARGE_SUCCESS = "Computed charge of Pet: %1$s";
+    public static final String MESSAGE_COMPUTE_CHARGE_SUCCESS = "Computed charge of Pet: $%.2f";
     private final Index index;
-    private final Charge dailyCharge;
-    private final Integer month;
+    private final ChargeDate chargeDate;
+    private final Charge charge;
 
     /**
      * @param index of the pet in the filtered pets list to compute the charges of.
-     * @param dailyCharge of pet stay.
+     * @param chargeDate the month in the specified year to calculate amount chargeable.
      */
-    public ChargeCommand(Index index, Charge dailyCharge, Integer month) {
-        requireAllNonNull(index, dailyCharge, month);
+    public ChargeCommand(Index index, ChargeDate chargeDate, Charge charge) {
+        requireAllNonNull(index, chargeDate);
 
         this.index = index;
-        this.dailyCharge = dailyCharge;
-        this.month = month;
+        this.chargeDate = chargeDate;
+        this.charge = charge;
     }
 
     @Override
@@ -52,9 +55,21 @@ public class ChargeCommand extends Command {
         }
 
         Pet petToCharge = lastShownList.get(index.getZeroBased());
-        Integer amountChargeable = 0;
+        double amountChargeable = 0.0 ;
+        // check current charge
+        if (this.charge.getCharge() == null) {
+            throw new CommandException(String.format(Messages.MESSAGE_NO_CHARGE_SET, ChargeCommand.MESSAGE_USAGE));
+        }
         // get attendance
-        // calculate number of days in month
+        Collection<AttendanceEntry> entries = petToCharge.getAttendanceHashMap().toCollection();
+        // calculate charge based on number of days in month
+        for (AttendanceEntry entry : entries) {
+            if (entry.getAttendanceDate().getMonthValue() == chargeDate.getMonth()
+                && entry.getAttendanceDate().getYear() == chargeDate.getYear()
+                && entry.getIsPresent().get() == true) {
+                amountChargeable += this.charge.getCharge();
+            }
+        }
 
         return new CommandResult(generateSuccessMessage(amountChargeable));
     }
@@ -63,7 +78,7 @@ public class ChargeCommand extends Command {
      * Generates a command execution success message
      * {@code petToEdit}.
      */
-    private String generateSuccessMessage(Integer amountChargeable) {
+    private String generateSuccessMessage(double amountChargeable) {
         return String.format(MESSAGE_COMPUTE_CHARGE_SUCCESS, amountChargeable);
     }
 
@@ -82,7 +97,8 @@ public class ChargeCommand extends Command {
         // state check
         ChargeCommand e = (ChargeCommand) other;
         return index.equals(e.index)
-                && dailyCharge.equals(e.dailyCharge);
+                && chargeDate.equals(e.chargeDate)
+                && charge.equals(e.charge);
     }
 
 }
