@@ -888,6 +888,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
 * **Schedule**: The part of ContaX that keeps track of Appointments
 * **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications.
+* **Onboarding Guide**: The quick start guide to ContaX
 
 --------------------------------------------------------------------------------------------------------------------
 
