@@ -104,24 +104,25 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         if (hasConflictingLesson(toAdd)) {
             throw new ConflictsWithLessonsException(toAdd, findAllLessonsConflictingWith(toAdd));
         }
-        LocalDateTime dateTimeOfToAdd = toAdd.getDateTimeSlot().getDateOfLesson();
-        if (internalList.isEmpty()) {
-            internalList.add(toAdd);
-        } else if (dateTimeOfToAdd.isBefore(internalList.get(0).getDateTimeSlot().getDateOfLesson())) {
-            internalList.add(0, toAdd);
-        } else if (dateTimeOfToAdd.isAfter(internalList.get(internalList.size() - 1)
-                .getDateTimeSlot().getDateOfLesson())) {
-            internalList.add(toAdd);
-        } else {
-            for (int i = 1; i < internalList.size(); i++) {
-                LocalDateTime prev = internalList.get(i - 1).getDateTimeSlot().getDateOfLesson();
-                LocalDateTime curr = internalList.get(i).getDateTimeSlot().getDateOfLesson();
-                if (dateTimeOfToAdd.isAfter(prev) && dateTimeOfToAdd.isBefore(curr)) {
-                    internalList.add(i, toAdd);
-                    break;
-                }
-            }
-        }
+        internalList.add(toAdd);
+//        LocalDateTime dateTimeOfToAdd = toAdd.getDateTimeSlot().getDateOfLesson();
+//        if (internalList.isEmpty()) {
+//            internalList.add(toAdd);
+//        } else if (dateTimeOfToAdd.isBefore(internalList.get(0).getDateTimeSlot().getDateOfLesson())) {
+//            internalList.add(0, toAdd);
+//        } else if (dateTimeOfToAdd.isAfter(internalList.get(internalList.size() - 1)
+//                .getDateTimeSlot().getDateOfLesson())) {
+//            internalList.add(toAdd);
+//        } else {
+//            for (int i = 1; i < internalList.size(); i++) {
+//                LocalDateTime prev = internalList.get(i - 1).getDateTimeSlot().getDateOfLesson();
+//                LocalDateTime curr = internalList.get(i).getDateTimeSlot().getDateOfLesson();
+//                if (dateTimeOfToAdd.isAfter(prev) && dateTimeOfToAdd.isBefore(curr)) {
+//                    internalList.add(i, toAdd);
+//                    break;
+//                }
+//            }
+//        }
     }
 
     /**
