@@ -179,8 +179,12 @@
 .summary-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 10pt;
+    -fx-font-size: 13pt;
     -fx-text-fill: #004aad;
+}
+
+.summary-display .label {
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {

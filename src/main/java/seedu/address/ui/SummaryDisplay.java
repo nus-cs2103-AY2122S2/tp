@@ -20,6 +20,9 @@ public class SummaryDisplay extends UiPart<Region> {
     @FXML
     private TextArea summaryDisplay;
 
+    /**
+     * UI for summary
+     */
     public SummaryDisplay() {
         super(FXML);
         screenTitle.setText(SCREEN_TITLE);
