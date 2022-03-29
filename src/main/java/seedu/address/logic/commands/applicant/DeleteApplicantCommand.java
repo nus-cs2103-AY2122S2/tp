@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
@@ -52,36 +51,18 @@ public class DeleteApplicantCommand extends DeleteCommand {
         }
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
-        int deleteInterviewCount = deleteApplicantsInterview(model, applicantToDelete);
 
-        model.deletePerson(applicantToDelete);
-        return new CommandResult(
-                String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
-                        + String.format(MESSAGE_DELETE_INTERVIEWS, deleteInterviewCount),
-                getCommandDataType());
-    }
-
-    /**
-     * Deletes interviews which are for the applicant to delete.
-     *
-     * @return Number of interviews deleted.
-     */
-    private int deleteApplicantsInterview(Model model, Applicant applicantToDelete) {
-        ObservableList<Interview> interviewList = model.getAddressBook().getInterviewList();
-        ArrayList<Interview> interviewsToDelete = new ArrayList<>();
-
-        for (Interview i : interviewList) {
-            if (i.isInterviewForApplicant(applicantToDelete)) {
-                interviewsToDelete.add(i);
-            }
-        }
-
+        ArrayList<Interview> interviewsToDelete = model.getApplicantsInterviews(applicantToDelete);
         for (Interview i : interviewsToDelete) {
             model.deleteInterview(i);
             logger.log(Level.INFO, String.format("Deleted interview: %1$s", i));
         }
 
-        return interviewsToDelete.size();
+        model.deletePerson(applicantToDelete);
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
+                        + String.format(MESSAGE_DELETE_INTERVIEWS, interviewsToDelete.size()),
+                getCommandDataType());
     }
 
     @Override

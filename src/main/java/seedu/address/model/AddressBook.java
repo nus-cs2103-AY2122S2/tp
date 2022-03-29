@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -153,6 +154,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addInterview(Interview i) {
         interviews.add(i);
+    }
+
+    /**
+     * Returns interview(s) which are for the specified applicant.
+     */
+    public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+        return interviews.getApplicantsInterviews(applicant);
+    }
+
+    /**
+     * Returns interview(s) which are for the specified position.
+     */
+    public ArrayList<Interview> getPositionsInterview(Position position) {
+        return interviews.getPositionsInterview(position);
     }
 
     /**
