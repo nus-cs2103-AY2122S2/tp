@@ -270,7 +270,7 @@ Implement a separate command to handle the removal of `comment`.
 The GUI for `AddWindow` and `EditWindow` are done using JavaFX with SceneBuilder.  
 The adding and editing mechanism is driven by the CLI commands, `add` and `edit`, and both goes through their respective `Parser`
 
-Step 1: User input is retrieved from their respective `TextField`.  
+Step 1: User input is retrieved from its respective `TextField`.  
 
 Step 2: User input is strung together to follow the proper `Command` format, which is then passed to `Logic` to handle 
 the rest of the execution.  
@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ModuleMateFinder provides the necessary features that support the management of contact information such as adding,
 deleting, listing, sorting, finding and editing. Moreover, there are module related features that are more specific
-to the context of ModuleMateFinder. The Use Cases listed below demonstrates their usages.
+to the context of ModuleMateFinder. The Use Cases listed below demonstrate their usages.
 
 (For all use cases below, the **System** is `ModuleMateFinder` and the **Actor** is the `user`, unless specified otherwise)
 <br/><br/>
