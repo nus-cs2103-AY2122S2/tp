@@ -4,7 +4,9 @@ import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
 import static manageezpz.commons.core.Messages.MESSAGE_TASK_UPDATE_SUCCESS;
 import static manageezpz.commons.core.Messages.MESSAGE_UNEXPECTED_ERROR;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.ArrayList;
 
@@ -27,13 +29,16 @@ import manageezpz.model.task.Todo;
 
 public class EditTaskCommand extends Command {
     public static final String COMMAND_WORD = "editTask";
-
+    public static final String MORE_EXAMPLES = COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION + "Eat Apple "
+            + PREFIX_DATE + "2022-09-05 " + PREFIX_TIME + "1800";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed task list.\n"
             + "Parameters: INDEX (must exist in the Address Book) "
             + "[" + PREFIX_DESCRIPTION + " NAME] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DESCRIPTION + " Eat bananas ";
+            + PREFIX_DESCRIPTION + " Eat bananas "
+            + "\n"
+            + MORE_EXAMPLES;
 
     private final Index index;
     private final String desc;
