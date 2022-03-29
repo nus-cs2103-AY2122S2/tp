@@ -13,18 +13,18 @@ Tracey can get your student health status management tasks done faster than trad
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * <a href='#finding-a-contact-find'>Finding a contact</a>
+    * <a href='#viewing-help-help'>Help</a> 
     * <a href='#adding-a-contact-add'>Adding a contact</a>
-    * <a href='#deleting-a-contact-delete'>Deleting a contact</a>
     * <a href='#editing-an-existing-contact-edit'>Editing an exisiting contact</a>
-    * <a href='#clearing-all-records-clear'>Clearing all records</a>
-    * <a href='#summarising-the-records-summarise'>Summarising the records</a>
-    * <a href='#listing-the-records-list'>Listing the records</a>
-    * <a href='#viewing-help-help'>Viewing help</a>
+    * <a href='#deleting-a-contact-delete'>Deleting a contact</a>
+    * <a href='#finding-a-contact-find'>Finding a contact</a>
     * <a href='#filtering-contacts-filter'>Filtering contacts</a>
-    * <a href='#archiving-tracey-archive'>Archiving address book</a>
-    * <a href='#saving'>Saving</a>
+    * <a href='#listing-the-records-list'>Listing the records</a>
     * <a href='#copying-emails'>Copying Emails</a>
+    * <a href='#summarising-the-records-summarise'>Summarising the records</a>
+    * <a href='#archiving-tracey-archive'>Archiving Tracey</a>
+    * <a href='#clearing-all-records-clear'>Clearing all records</a>
+    * <a href='#saving'>Saving</a>
 * <a href='#faq'>FAQ</a>
 * <a href='#command-summary'>Command Summary</a>
 
@@ -116,8 +116,11 @@ Examples of usage:
 
 *Figure 3: Table showing list of possible tags and the Pre-defined constants*
 
-As described in Figure 3, these are the possible tags that can be used with **Tracey**. E.g `n/`, `cs/` etc.
+As described in Figure 3, these are the possible tags that can be used with Tracey. E.g `n/`, `cs/` etc.
 In addition, the list of Pre-defined constants are also provided for `Faculty` and `Covid Status`. 
+
+💡`Tips`:
+* You are able to add optional tags with no restrictions using the `t/` prefix.
 
 ### Deleting a contact: `delete`
 Delete a contact at a specific index
@@ -131,6 +134,14 @@ Format: `delete INDEX`
 Examples of usage:
 * `delete 2` removes the 2nd student on the list
 * `delete 10` removes the 10th student on the list
+
+⚠️`Warning:`
+* The deleted student cannot be recovered. 
+
+💡`Tips:`
+* The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
+* You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
+* This can save you time scrolling down an entire list to get his/her `INDEX`!
 
 ### Editing an existing contact: `edit`
 * Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list.
@@ -148,15 +159,19 @@ Examples of usage:
   and `johndoe@example.com` respectively.
 * `edit 2 n/David Limpeh t/` edits the entry to become `David Limpeh` and clears all existing tags.
 
+⚠️`Warning:`
+* Once the tags of the student has been edited, the old tags cannot be recovered.
+
 ### Clearing all records: `clear`
-Clear all the data inside `Tracey`.
+Clear all the data inside Tracey.
 
 Format:`clear`
 
-:warning: `Save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.`
+⚠️`Warning:` 
+* Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
 
 ### Summarising the records: `summarise`
-Summarises the student records inside `Tracey`, providing an overview of the data, specific to the number of students who are `covid-positive`.
+Summarises the student records inside Tracey, providing an overview of the data, specific to the number of students who are `covid-positive`.
 
 Format:`summarise`
 
@@ -200,16 +215,18 @@ Examples of usage:
 * `filter cs/positive` returns all students that are tagged as covid-positive.
 * `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing).
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing).
+                 
+📓`Note:`
+* `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`. 
+* Please use the `find` command instead which will allow you to search via keywords.
 
 ### Archiving Tracey: `archive`
-Archives the current Tracey Database.
-
-Format: `archive`
-
-* The archived file will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
+Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
   * `[ROOT]`: Root directory of Tracey.
   * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
   * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss.
+
+Format: `archive`
 
 Example:
 * Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33 (hh:mm:ss in 24-hour notation).
@@ -217,13 +234,13 @@ Example:
 * The archived file will be saved **as** `270322_152833`.
 * The file path will be `[ROOT]/data/archive/270322/270322_152833`.
 
-Tips:
+💡`Tips:`
 * You can rename the archived file in the file path manually for easier reference.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
-there are changes to `Tracey`.
+there are changes to Tracey.
 
 ### Copying emails
 The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
@@ -234,7 +251,7 @@ The `Show Email` button opens up a separate window that consists of all the emai
 
 ### FAQ
 1. **Q**: How do I transfer my data to another computer? <br>
-   **A**: Copy the file from [ROOT]/data/tracey.txt over to your other computer. <br>
+   **A**: Copy the file from [ROOT]/data/addressbook.json over to your other computer. <br>
 
 2. **Q**: What is the difference between the `list` command and `summarise` command? <br>
    **A**: The main differences of `list` and `summarise` are:
