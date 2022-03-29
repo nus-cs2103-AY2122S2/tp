@@ -53,6 +53,7 @@ class ProductTest {
 
     @Test
     void removeItem_itemDoesNotExist_throwElementNotFoundException() {
-        assertThrows(ElementNotFoundException.class, () -> testProduct.removeItem(Q5_2020_01_01));
+        assertThrows(ElementNotFoundException.class, () ->
+                testProduct.removeItem(Q5_2020_01_01.toItem(testProduct)));
     }
 }

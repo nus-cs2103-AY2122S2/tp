@@ -4,6 +4,7 @@ import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_QUANTITY_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_QUANTITY_B;
+import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,25 +18,25 @@ public class TypicalItems {
     public static final String QUANTITY_10 = "10";
 
     public static final Item Q5_2022_03_01 =
-        new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_5).build();
+        new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q10_2022_03_01 =
-        new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_10).build();
+        new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_10).build(KAYA_BREAD);
     public static final Item Q5_2020_01_01 =
-        new ItemBuilder().withExpiryDate("2020-01-01").withQuantity(QUANTITY_5).build();
+        new ItemBuilder().withExpiryDate("2020-01-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q5_2200_01_01 =
-            new ItemBuilder().withExpiryDate("2200-01-01").withQuantity(QUANTITY_5).build();
+            new ItemBuilder().withExpiryDate("2200-01-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q5_2022_03_02 =
-            new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_5).build();
+            new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q0_2022_03_01 =
-            new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_0).build();
+            new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_0).build(KAYA_BREAD);
     public static final Item Q0_2022_03_02 =
-            new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_0).build();
+            new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_0).build(KAYA_BREAD);
 
     public static final Item ITEM_A =
-        new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).withQuantity(VALID_QUANTITY_A).build();
+        new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).withQuantity(VALID_QUANTITY_A).build(KAYA_BREAD);
 
     public static final Item ITEM_B =
-        new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_B).withQuantity(VALID_QUANTITY_B).build();
+        new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_B).withQuantity(VALID_QUANTITY_B).build(KAYA_BREAD);
 
     private TypicalItems() {} // prevents instantiation
 

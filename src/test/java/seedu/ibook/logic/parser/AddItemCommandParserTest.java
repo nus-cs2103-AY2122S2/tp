@@ -17,18 +17,18 @@ import org.junit.jupiter.api.Test;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.AddItemCommand;
 import seedu.ibook.model.item.ExpiryDate;
-import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.testutil.ItemBuilder;
 
 public class AddItemCommandParserTest {
-    private AddItemCommandParser parser = new AddItemCommandParser();
+    private final AddItemCommandParser parser = new AddItemCommandParser();
 
     private final Index index = Index.fromOneBased(1);
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Item expectedItem = new ItemBuilder(ITEM_A).build();
+        ItemDescriptor expectedItem = new ItemBuilder(ITEM_A).buildItemDescriptor();
         AddItemCommand expectedCommand = new AddItemCommand(index, expectedItem);
 
         assertParseSuccess(parser, VALID_INDEX_A + EXPIRY_DATE_FULL_A + QUANTITY_FULL_A, expectedCommand);
