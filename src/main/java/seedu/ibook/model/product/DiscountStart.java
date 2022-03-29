@@ -18,10 +18,6 @@ public class DiscountStart {
 
     public final Integer discountStart;
 
-    private DiscountStart() {
-        discountStart = Integer.parseInt(DEFAULT_DISCOUNTSTART);
-    }
-
     /**
      * Constructs a {@code DiscountStart}.
      *

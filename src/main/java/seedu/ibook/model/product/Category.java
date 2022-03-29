@@ -23,13 +23,6 @@ public class Category {
     public final String fullCategoryName;
 
     /**
-     * Constructs a {@code Category} representing no categorization.
-     */
-    private Category() {
-        fullCategoryName = DEFAULT_CATEGORY;
-    }
-
-    /**
      * Constructs a {@code Category}.
      *
      * @param categoryName A valid category name.

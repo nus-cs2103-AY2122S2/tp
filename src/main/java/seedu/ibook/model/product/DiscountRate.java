@@ -18,10 +18,6 @@ public class DiscountRate {
 
     public final Double discountRate;
 
-    private DiscountRate() {
-        discountRate = Double.parseDouble(DEFAULT_DISCOUNTRATE);
-    }
-
     /**
      * Constructs a {@code DiscountRate}.
      *

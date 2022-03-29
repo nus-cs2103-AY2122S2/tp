@@ -16,10 +16,6 @@ public class Price {
 
     public final Double price;
 
-    private Price() {
-        price = 0.00;
-    }
-
     /**
      * Constructs a {@code Price} from string.
      *
