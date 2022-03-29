@@ -65,7 +65,8 @@ public class EditCommand extends Command {
             + "\n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
     public static final String MESSAGE_PERSON_NOT_STUDENT = "Person added to a group must only be a student";
-    public static final String MESSAGE_STUDENT_NOT_IN_MOD = "Student not in module %1$s. Add student to module first.";
+    public static final String MESSAGE_STUDENT_NOT_IN_MOD = "Student not in module %1$s. Add student to "
+            + "module first (e.g. edit 1 nm/NEW_MOD_TO_ADD).";
     public static final String MESSAGE_EDIT_MISSING = "Must include m/MODULECODE when editing a group";
     public static final String MESSAGE_GROUP_NOT_EXIST = "Group name %1$s does not exist!";
     public static final String MESSAGE_WRONG_DATE_FORMAT = "Date time must be in YYYY-MM-DD HH:mm format";
@@ -402,10 +403,9 @@ public class EditCommand extends Command {
                 }
             }
 
-
-
             // Change person in every module that has this person
             for (Module mod : latestModList) {
+
                 if (editedPerson instanceof Professor) {
                     ObservableList<Professor> profList = mod.getProfessors();
                     if (profList.contains(personToEdit)) {
@@ -425,7 +425,8 @@ public class EditCommand extends Command {
 
             System.out.println(editPersonDescriptor.getModCode().isPresent() + "there");
             System.out.println(editPersonDescriptor.getGroupName().isPresent() + "there");
-            // TODO STILL NEED TO UPDATE THE GRPS OF OTHER STUDENTS
+
+            // If adding existing person to an existing group
             if (editPersonDescriptor.getModCode().isPresent() && editPersonDescriptor.getGroupName().isPresent()) {
                 ModuleCode moduleCode = editPersonDescriptor.getModCode().get();
                 String groupName = editPersonDescriptor.getGroupName().get();
@@ -461,6 +462,16 @@ public class EditCommand extends Command {
                 }
             }
 
+            // Updates all the groups is in
+            if (personToEdit instanceof Student && editedPerson instanceof Student) {
+                for (Group g : ((Student) personToEdit).getGroups()) {
+                    Student s = (Student) personToEdit;
+                    int i = g.getMembers().indexOf(s);
+                    g.getMembers().set(i, (Student) editedPerson);
+                }
+            } else { }
+
+            // TODO find a way to edit all the
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));

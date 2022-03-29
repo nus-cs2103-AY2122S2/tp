@@ -64,6 +64,17 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_DATETIME,
                         PREFIX_KEYEVENT);
 
+        boolean isNamePresent = argMultimap.getValue(PREFIX_NAME).isPresent();
+        boolean isPhonePresent = argMultimap.getValue(PREFIX_PHONE).isPresent();
+        boolean isEmailPresent = argMultimap.getValue(PREFIX_EMAIL).isPresent();
+        boolean isTagPresent = argMultimap.getValue(PREFIX_TAG).isPresent();
+        boolean isModulePresent = argMultimap.getValue(PREFIX_MODULE).isPresent();
+        boolean isNewModPresent = argMultimap.getValue(PREFIX_NEWMOD).isPresent();
+        boolean isGroupPresent = argMultimap.getValue(PREFIX_GROUP).isPresent();
+        boolean isMeetingTimePresent = argMultimap.getValue(PREFIX_MEETINGTIME).isPresent();
+        boolean isTypePresent = argMultimap.getValue(PREFIX_TYPE).isPresent();
+        boolean isDateTimePresent = argMultimap.getValue(PREFIX_DATETIME).isPresent();
+        boolean isKeyEventPresent = argMultimap.getValue(PREFIX_KEYEVENT).isPresent();
         Index index;
 
         // Checks if there is proper indexing + proper option
