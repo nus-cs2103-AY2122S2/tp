@@ -91,6 +91,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Sorts the person list by the priority of their tags.
+     */
+    void sortByPriority();
+
     void undoCommand() throws CommandException;
 
     void redoCommand() throws CommandException;
