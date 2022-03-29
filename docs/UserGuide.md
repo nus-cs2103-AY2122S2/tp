@@ -101,13 +101,12 @@ Finds employees that have all of the options as entered.
 * `findEmployee e/dcsdcr@nus.edu.sg`
 * `findEmployee n/Alex Yeo p/65162727 e/alexyeo@google.com`
 
-### Listing all employees : `listEmployees`
+### Listing all employees : `listEmployee`
 
 Shows a list of all employees in the address book.
 
 #### Format: 
-* `listEmployees`
-
+* `listEmployee`
 
 ### Adding a Task: `addTodo`, `addEvent`, `addDeadline`
 
@@ -122,14 +121,6 @@ Format:
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
 </div>
-
-### Listing all Tasks : `listTask`
-
-Shows a list of all tasks in ManageEZPZ.
-
-Format:
-
-* `listTask`
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
@@ -214,6 +205,15 @@ Finds task(s) based on multiple conditions provided.
   * `findTask date/2022-04-16` 
   * `findTask desc/work priority/HIGH` 
   * `findTask deadlines/ desc/school date/2022-04-16 priority/HIGH assignees/Alex Yeo isMarked/true`
+
+
+### Listing all Tasks : `listTask`
+
+Shows a list of all tasks in ManageEZPZ.
+
+Format:
+
+* `listTask`
 
 ### Clearing all entries : `clear`
 

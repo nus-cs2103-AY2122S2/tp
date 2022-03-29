@@ -20,7 +20,7 @@ import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindEmployeeCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.commands.HelpCommand;
-import manageezpz.logic.commands.ListEmployeesCommand;
+import manageezpz.logic.commands.ListEmployeeCommand;
 import manageezpz.logic.commands.ListTaskCommand;
 import manageezpz.logic.commands.MarkTaskCommand;
 import manageezpz.logic.commands.TagTaskCommand;
@@ -80,8 +80,8 @@ public class AddressBookParser {
         case ListTaskCommand.COMMAND_WORD:
             return new ListTaskCommand();
 
-        case ListEmployeesCommand.COMMAND_WORD:
-            return new ListEmployeesCommand();
+        case ListEmployeeCommand.COMMAND_WORD:
+            return new ListEmployeeCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

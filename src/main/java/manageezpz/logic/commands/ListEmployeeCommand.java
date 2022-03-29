@@ -7,8 +7,8 @@ import manageezpz.model.Model;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListEmployeesCommand extends Command {
-    public static final String COMMAND_WORD = "listEmployees";
+public class ListEmployeeCommand extends Command {
+    public static final String COMMAND_WORD = "listEmployee";
     public static final String MESSAGE_ALL_SUCCESS = "Listed all Employees";
 
     /**

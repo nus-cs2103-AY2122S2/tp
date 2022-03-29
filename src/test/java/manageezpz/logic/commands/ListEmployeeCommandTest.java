@@ -11,20 +11,20 @@ import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 
-class ListEmployeesCommandTest {
+class ListEmployeeCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
 
     @Test
     void listEmployeesCommand_notFilteredList_showSameList() {
-        assertCommandSuccess(new ListEmployeesCommand(), model, ListEmployeesCommand.MESSAGE_ALL_SUCCESS,
+        assertCommandSuccess(new ListEmployeeCommand(), model, ListEmployeeCommand.MESSAGE_ALL_SUCCESS,
                 expectedModel);
     }
 
     @Test
     void listEmployeesCommand_listIsFiltered_showEverything() {
         showPersonAtIndex(model, INDEX_FIRST);
-        assertCommandSuccess(new ListEmployeesCommand(), model, ListEmployeesCommand.MESSAGE_ALL_SUCCESS,
+        assertCommandSuccess(new ListEmployeeCommand(), model, ListEmployeeCommand.MESSAGE_ALL_SUCCESS,
                 expectedModel);
     }
 }
