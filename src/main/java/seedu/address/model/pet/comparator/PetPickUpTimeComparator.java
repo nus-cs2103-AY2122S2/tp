@@ -37,9 +37,9 @@ public class PetPickUpTimeComparator implements Comparator<Pet> {
     }
 
     /**
-     * Compares compareAttendanceEntries of pets based on their pick up time. Used in compare method.
-     * @param firstPet Optional<AttendanceEntry>.
-     * @param secondPet Optional<AttendanceEntry>.
+     * Compares AttendanceEntries of pets based on their pick up time. Used in compare method.
+     * @param firstPet AttendanceEntry.
+     * @param secondPet AttendanceEntry.
      * @return Value signifying in the difference between the comparing attribute.
      */
     private int compareAttendanceEntries(Optional<AttendanceEntry> firstPet, Optional<AttendanceEntry> secondPet) {
