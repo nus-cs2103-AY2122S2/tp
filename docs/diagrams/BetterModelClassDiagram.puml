@@ -16,4 +16,5 @@ Show -up-> "*" Tag
 
 Show *--> Name
 Show *--> Status
+Show *--> Comment
 @enduml

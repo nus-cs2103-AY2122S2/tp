@@ -37,8 +37,8 @@ public class ModelManager implements Model {
 
         this.showList = new ShowList(showList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredShows = new FilteredList<>(this.showList.getShows());
-        sortedShows = new SortedList<>(filteredShows);
+        sortedShows = new SortedList<>(this.showList.getShows());
+        filteredShows = new FilteredList<>(sortedShows);
     }
 
     public ModelManager() {
@@ -90,6 +90,14 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyShowList getShowList() {
         return showList;
+    }
+
+    /**
+     * Returns the ShowList size
+     */
+    @Override
+    public int getShowListSize() {
+        return showList.getShows().size();
     }
 
     @Override
@@ -165,7 +173,16 @@ public class ModelManager implements Model {
     public void updateSortedShowList(Comparator<Show> comparator) {
         requireNonNull(comparator);
         sortedShows.setComparator(comparator);
-        sortedShows.setComparator(COMPARATOR_SHOW_ALL_SHOWS);
+        saveSortedShowList();
+    }
+
+    @Override
+    public void saveSortedShowList() {
+        ShowList newShowList = new ShowList();
+        for (int i = 0; i < sortedShows.size(); i++) {
+            newShowList.addShow(sortedShows.get(i));
+        }
+        showList.resetData(newShowList);
     }
 
 }

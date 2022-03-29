@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -31,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG, PREFIX_COMMENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG, PREFIX_COMMENT, PREFIX_RATING);
 
         Index index;
 
@@ -53,6 +54,10 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_COMMENT).isPresent()) {
             editShowDescriptor.setComment(ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
+            editShowDescriptor.setRating(ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get()));
         }
 
         if (!editShowDescriptor.isAnyFieldEdited()) {
