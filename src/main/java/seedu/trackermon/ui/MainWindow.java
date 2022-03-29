@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         showDetailsCard.getRoot().prefWidthProperty().bind(showDetailsPlaceholder
                 .widthProperty().subtract(PADDING));
 
-        showListPanel = new ShowListPanel(logic.getSortedShowList(), showDetailsCard);
+        showListPanel = new ShowListPanel(logic.getFilteredShowList(), showDetailsCard);
         showListPanelPlaceholder.getChildren().add(showListPanel.getRoot());
 
         showDetailsPlaceholder.focusTraversableProperty().setValue(false);
@@ -212,6 +212,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.getIndexAffected() != CommandResult.DEFAULT_INDEX) {
+                showListPanel.updateSelection(commandResult.getIndexAffected());
             }
 
             handleUpdateList();

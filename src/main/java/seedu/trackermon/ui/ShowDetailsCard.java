@@ -5,10 +5,14 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
+import seedu.trackermon.MainApp;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 
 
@@ -18,7 +22,10 @@ import seedu.trackermon.model.show.Show;
 public class ShowDetailsCard extends UiPart<Region> {
 
     private static final String FXML = "ShowDetailsCard.fxml";
+    private static final String ICON_STAR = "/images/icon_star_30.png";
+    private static final String ICON_STAR_FILLED = "/images/icon_star_filled_30.png";
     private static final double SPACING = 15;
+    private static final double IMAGE_SIZE = 30;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,7 +47,10 @@ public class ShowDetailsCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private FlowPane ratings;
+    @FXML
     private TextArea comment;
+
 
     /**
      * Creates a {@code ShowCard} with the given {@code Show} and index to display.
@@ -68,6 +78,7 @@ public class ShowDetailsCard extends UiPart<Region> {
         status.setVisible(isShowExists);
         tags.setVisible(isShowExists);
         comment.setVisible(isShowExists);
+        ratings.setVisible(isShowExists);
 
         if (!isShowExists) {
             return;
@@ -86,15 +97,32 @@ public class ShowDetailsCard extends UiPart<Region> {
         show.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        ratings.getChildren().clear();
+
+        for (int i = 0; i < Rating.MAX_RATING; i++) {
+            if (i < show.getRating().rating) {
+                ratings.getChildren().add(getImageNode(ICON_STAR_FILLED));
+            } else {
+                ratings.getChildren().add(getImageNode(ICON_STAR));
+            }
+        }
+
         comment.setText(show.getComment().comment);
         updateTextArea(name);
+    }
+
+    private ImageView getImageNode(String imagePath) {
+        ImageView imageNode = new ImageView(new Image(MainApp.class.getResourceAsStream(imagePath)));
+        imageNode.setFitHeight(IMAGE_SIZE);
+        imageNode.setFitWidth(IMAGE_SIZE);
+        return imageNode;
     }
 
     /**
      * Updates TextArea to resize with text height length.
      * @param textArea the text area to be resized.
      */
-    public void updateTextArea(TextArea textArea) {
+    private void updateTextArea(TextArea textArea) {
 
         Text helper = new Text(textArea.getText());
 

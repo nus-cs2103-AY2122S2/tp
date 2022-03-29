@@ -17,6 +17,7 @@
       <VBox.margin>
          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
       </VBox.margin></Label>
+   <FlowPane fx:id="ratings" maxHeight="40.0" minWidth="40.0" prefHeight="40.0" />
    <TextArea fx:id="comment" editable="false" focusTraversable="false" minHeight="-Infinity" prefHeight="200.0" prefRowCount="1" styleClass="cell_small_textfield" text="\\\comment" wrapText="true">
       <VBox.margin>
          <Insets left="5.0" right="5.0" />

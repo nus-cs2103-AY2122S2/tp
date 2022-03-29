@@ -62,4 +62,12 @@ public class JarTools {
         return getClassLocation(cls, true).toPath().toString();
     }
 
+    /**
+     * Check if application is running from IntelliJ
+     * @return whether application is running from IntelliJ
+     */
+    public static boolean runningFromJarFile() {
+        String resourcePath = JarTools.class.getResource("JarTools.class").toString();
+        return resourcePath.startsWith("jar:") || resourcePath.startsWith("rsrc:");
+    }
 }
