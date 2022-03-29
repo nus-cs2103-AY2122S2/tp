@@ -20,8 +20,7 @@ public class ClearFilteredCommand extends Command {
             + "Parameters: none\n"
             + "Example: " + COMMAND_WORD + "";
 
-    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d people deleted!";
-
+    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d client(s) deleted!";
 
     public ClearFilteredCommand() {
     }

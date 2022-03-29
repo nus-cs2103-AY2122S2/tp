@@ -198,16 +198,16 @@ Format: `append INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIR
 
 ### Remove Fields from Client (`remove`)
 
-Remove fields from an existing client.
+Remove optional fields from an existing client.
 
-Format: `remove INDEX [n/] [p/] [e/] [a/] [r/] [b/] [t/TAG]…​`
+Format: `remove INDEX [r/] [b/] [t/TAG]…​`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Fields and tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
-* Compulsory fields cannot be removed.
+* **Compulsory fields cannot be removed.**
 
 </div>
 

@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 public class RemoveCommand extends Command {
     public static final String COMMAND_WORD = "remove";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes fields from a client.";
-    public static final String MESSAGE_SUCCESS = "Removed fields from client.";
+    public static final String MESSAGE_SUCCESS = "Removed fields from %s.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 
     private final Index index;

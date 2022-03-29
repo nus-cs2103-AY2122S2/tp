@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) for {@code DeleteFilteredCommandTest}.
  */
-class DeleteFilteredCommandTest {
+class ClearFilteredCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
