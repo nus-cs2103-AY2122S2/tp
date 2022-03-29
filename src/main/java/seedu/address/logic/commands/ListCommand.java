@@ -143,11 +143,11 @@ public class ListCommand extends Command {
         try {
             if (filterEntityType.isEmpty()) {
                 model.updateFilteredAssessmentList(PREDICATE_SHOW_ALL);
-                String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
+                result = String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
             } else if (filterEntityType.get().equals(EntityType.TA_MODULE)) {
                 Predicate<Assessment> filter = filterAssessmentsByModule(model);
                 model.updateFilteredAssessmentList(filter);
-                String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
+                result = String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
             } else {
                 result = MESSAGE_INVALID_FILTER;
             }
