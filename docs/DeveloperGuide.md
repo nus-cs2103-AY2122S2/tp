@@ -333,6 +333,23 @@ The data for `Schedule`, containing multiple `Appointment` objects is stored in 
 
 However, this implementation comes with the increased risk of desynchronization between the AddressBook and Schedule data files. This is deemed an acceptable risk, but is also mitigated by validation checks during the inflation process to discard invalid appointment data, ensuring that the application only works with valid appointments.
 
+### Date Time Input Parsing
+
+The app accepts multiple date and time formats to make it easier for users to input. This functionality is implemented by the `DateUtil` class, supported by the `commons.util.datetimeparser` package.
+
+A high-level overview of the organization of the package is shown below.
+
+![DateUtil Architecture](images/DateTimeUtilArchitecture.png)
+
+The organization of the time parser mirrors the date parsers, and their purposes are as follows:
+
+* `TimeParser` / `DateParser`: Contains the actual parsing logic for determining the input format and the parsing logic to use
+* `TimeParserPatternProvider` / `DateParserPatternProvider`: Contains the Regex patterns required for parsing
+
+A flow of a client class using the parsing services provided by `DateUtil` for a dateTime input is as follows (Note that all classes and methods are static):
+
+![Parser Flow](images/DateTimeParsingSequenceDiagram.png)
+
 ### Result List Model Type Switching Feature
 
 Due to the fact that the application handles multiple model types, including `Person`, `Appointment` and `Tag`, there is a need for the UI to handle the display of different models and their associated data.
