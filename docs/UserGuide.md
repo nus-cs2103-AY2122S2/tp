@@ -32,8 +32,6 @@ The Features section will be split into 3 subsections for:
 2. Buyer-specific commands
 3. Seller-specific commands
 
-Click any of the subsections above to navigate there now.
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
