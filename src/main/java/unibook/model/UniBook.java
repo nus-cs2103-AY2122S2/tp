@@ -392,7 +392,6 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
 
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -1,16 +1,13 @@
 package unibook.ui.cards;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -19,8 +16,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.model.module.group.Group;
-import unibook.model.person.Student;
 import unibook.ui.UiPart;
+import unibook.ui.util.CustomListChangeListeners;
+import unibook.ui.util.CustomPaneListFiller;
 
 /**
  * A class that displays the information of a {@code Group}.
@@ -69,11 +67,9 @@ public class GroupCard extends UiPart<Region> {
         moduleCode.setText(group.getModule().getModuleCode().toString());
         groupName.setText(group.getGroupName());
 
-        fillMemberList();
-        fillMeetingTimesList();
+        setUpVBoxLists();
 
-        ObservableList<Student> modelMemberList = group.getMembers();
-        ObservableList<LocalDateTime> modelMeetingTimesList = group.getMeetingTimes();
+        setUpListChangeListeners();
 
         if (!singleGroupFlag) {
             groupPane.addEventHandler(MouseEvent.MOUSE_CLICKED,
@@ -91,55 +87,42 @@ public class GroupCard extends UiPart<Region> {
 
         moreGroupDetails.setVisible(additionalDetailsVisible);
         moreGroupDetails.setManaged(additionalDetailsVisible);
-
-        //add listeners to the underlying lists of members and meetingTimes of student
-        //so that the list shown in this card will change on update
-        modelMemberList.addListener(new ListChangeListener<>() {
-            /**
-             * Rebuild the list of members shown to viewer on any kind of change
-             * @param c
-             */
-            @Override
-            public void onChanged(Change<? extends Student> c) {
-                fillMemberList();
-            }
-        });
-
-        modelMeetingTimesList.addListener(new ListChangeListener<>() {
-            @Override
-            public void onChanged(Change<? extends LocalDateTime> c) {
-                fillMeetingTimesList();
-            }
-        });
     }
 
     /**
-     * Fills the member studentcard list of this module card.
+     * Set up listeners for changes in all the tab content lists, so that
+     * when a change in one of them is detected, the list shown in ui
+     * can change accordingly.
      */
-    private void fillMemberList() {
-        ObservableList<Student> modelMemberList = group.getMembers();
-        int index = 0;
-        ArrayList<Node> memberCards = new ArrayList<>();
-        for (Student student : modelMemberList) {
-            index++;
-            memberCards.add(new StudentCard(student, index).getRoot());
-        }
-        membersList.getChildren().setAll(memberCards);
+    private void setUpListChangeListeners() {
+        CustomListChangeListeners.addIndexedListChangeListener(membersList, group.getMembers(), (member, index) ->
+            new StudentCard(member, index + 1).getRoot());
+        CustomListChangeListeners.addIndexedListChangeListener(meetingTimesList,
+            group.getMeetingTimes(), (meetingTime, index) -> createLabelFromMeetingTime(meetingTime, index + 1));
     }
 
     /**
-     * Fills the meeting times list of this module card.
+     * Converts a given {@code MeetingTime} to a {@code Label} for display in GUI.
      */
-    private void fillMeetingTimesList() {
-        ObservableList<LocalDateTime> modelMeetingTimeList = group.getMeetingTimes();
-        int index = 0;
-        ArrayList<Node> meetingTimeLabels = new ArrayList<>();
-        for (LocalDateTime dateTime : modelMeetingTimeList) {
-            index++;
-            meetingTimeLabels.add(new Label(index + ".    "
-                + dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))));
+    private Label createLabelFromMeetingTime(LocalDateTime meetingTime, int index) {
+        Label label = new Label(index + ".    "
+            + meetingTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+        label.getStyleClass().add("group-meeting-time-label");
+        //meeting time is on the current day, highlight it
+        if (meetingTime.toLocalDate().equals(LocalDate.now())) {
+            label.getStyleClass().add("group-meeting-time-label-today");
         }
-        meetingTimesList.getChildren().setAll(meetingTimeLabels);
+        return label;
+    }
+
+    /**
+     * Sets up all the vbox lists which display lists of fields of a group to user.
+     */
+    private void setUpVBoxLists() {
+        CustomPaneListFiller.fillPaneFromList(membersList, group.getMembers(), (member, i) ->
+            new StudentCard(member, i + 1).getRoot());
+        CustomPaneListFiller.fillPaneFromList(meetingTimesList, group.getMeetingTimes(), (meetingTime, i) ->
+            createLabelFromMeetingTime(meetingTime, i + 1));
     }
 
 

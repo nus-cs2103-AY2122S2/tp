@@ -272,7 +272,7 @@ public class ParserUtil {
         } catch (Exception e) {
             System.out.println(e);
             throw new ParseException("Date format accepts the following:\n"
-                    + "yyyy-MM-dd");
+                + "yyyy-MM-dd");
         }
     }
 
@@ -281,7 +281,7 @@ public class ParserUtil {
      * {@code Module module}into a {@code ArrayList<ModuleKeyEvent>}.
      */
     public static ArrayList<ModuleKeyEvent> parseModuleKeyEvent(Collection<String> keyEventAndDate, Module module)
-            throws ParseException {
+        throws ParseException {
         requireNonNull(keyEventAndDate);
         final ArrayList<ModuleKeyEvent> moduleKeyEventList = new ArrayList<>();
         if (keyEventAndDate.toArray().length == 0) {
