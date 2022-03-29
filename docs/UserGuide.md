@@ -30,7 +30,7 @@ for convenience use.
 
    * **`list`** : Lists all products.
 
-   * **`add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`** : Adds a product named `Maggie` to iBook.
+   * **`add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
    * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
 
@@ -74,8 +74,6 @@ Example warnings.
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 **Tip**
 
 Text that appear in a tip box are useful for improving your experience with iBook.
@@ -86,6 +84,8 @@ Text that appear in a tip box are useful for improving your experience with iBoo
 Example tip.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### 2.2.2 Sections of the Application Window
 
@@ -104,29 +104,30 @@ Alternatively, you can also interact with the application through buttons, such 
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n:NAME`, `NAME` is a parameter which can be used as `add n:Maggie`.
+* Words in `UPPER_CASE` are additional user inputs supplied to a command.<br>
+  e.g. in `add n:NAME`, `NAME` is an input which can be supplied as `add n:Maggie Mee`.
 
-* Items in square brackets are optional.<br>
-  e.g `n:NAME [t:TAG]` can be used as `n:Maggie c:noodle` or as `n:Maggie`.
+* Inputs in square brackets are optional.<br>
+  e.g. if the command specifies `n:NAME [t:TAG]`, both `n:Maggie Mee c:noodle` and `n:Maggie Mee` are acceptable.
 
-* Parameters can be in any order.<br>
+* Inputs of a command can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
-  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
+* Extra inputs for commands that do not take in any (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
+  e.g. the command `exit 123` will be interpreted as `exit`.
 
 </div>
 
-#### 2.2.5 Command Parameters
+#### 2.2.5 Command inputs
 
-| Parameter      | Description                                               |
+| Input          | Description                                               |
 |:---------------|:----------------------------------------------------------|
-| `NAME`         | Name of the product/item.                                 |
+| `NAME`         | Name of the product.                                      |
 | `CATEGORY`     | Category of the product.                                  |
-| `EXPRIRY_DATE` | Expiry date of the item.                                  |
 | `PRICE`        | Price of the product. A valid price is a positive number. |
 | `DESCRIPTION`  | Description of the product.                               |
+| `EXPRIRY_DATE` | Expiry date of the item.                                  |
+| `QUANTITY`     | Quantity of the item.                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,7 +156,7 @@ Only a single product would be added at a time
 </div>
 
 Examples:
-* `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`
+* `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour`
 
 #### 3.1.3 Updating products : `update`
 
@@ -217,7 +218,7 @@ Examples:
 
 `find c:Food` lists all products that has category as Food.
 
-#### 3.1.6 Looking for expired certain products : `expired`
+#### 3.1.6 Looking for products having expired items : `expired`
 
 Finds products that contain expired items.
 
@@ -229,9 +230,25 @@ Lists products that are out of stock.
 
 Format: `out-of-stock`
 
-### 3.2 Item Commands *[coming soon]*
+#### 3.1.8 Updating all products : `update-all`
+
+#### 3.1.9 Deleting all products : `delete-all`
+
+### 3.2 Item Commands
+
+#### 3.2.1 Adding an item to a product : `add-item`
+
+#### 3.2.2 Updating an item of a product : `update-item`
+
+#### 3.2.3 Deleting an item from a product : `delete-item`
 
 ### 3.3 Miscellaneous Commands
+
+#### 3.3.1 Clearing all data : `clear`
+
+#### 3.3.2 Undo most recent changes : `undo`
+
+#### 3.3.3 Redo most recent undone changes : `redo`
 
 #### 3.3.2 Exiting the program : `exit`
 
@@ -268,25 +285,32 @@ _Details coming soon ..._
 
 ## 6. Glossary
 
+| Term               | Meanings                                                                                     |
+|------------------  |----------------------------------------------------------------------------------------------|
+| **Main stream OS** | `to-be-added`                                                                                |
+| **To be added**    | `to-be-added`                                                                                |
+| **To be added**    | `to-be-added`                                                                                |
+| **To be added**    | `to-be-added`                                                                                |
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Command summary
 
-### 7.1 Product
+### 7.1 Product Commands
 
-| Action           | Format, Examples                                                                                                                      |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles` |
-| **List**         | `list`                                                                                                                                |
-| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                       |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                   |
-| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                    |
-| **Expired**      | `expired`                                                                                                                             |
-| **Out of Stock** | `out-of-stock`                                                                                                                        |
+| Action           | Format, Examples                                                                                                                         |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------   |
+| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour` |
+| **List**         | `list`                                                                                                                                   |
+| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                          |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                      |
+| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                       |
+| **Expired**      | `expired`                                                                                                                                |
+| **Out of Stock** | `out-of-stock`                                                                                                                           |
 
-### 7.2 Item *[Coming soon]*
+### 7.2 Item Commands
 
-### 7.3 Miscellaneous
+### 7.3 Miscellaneous Commands
 
 | Action   | Format, Examples |
 |:---------|:-----------------|
