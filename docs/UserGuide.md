@@ -15,18 +15,20 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 
 * [Quick start](#quick-start)
 * [Features](#features)
-* [Viewing help: `help`](#c-help)
-* [Viewing all companies and roles: `list`](#c-list)
-* [Viewing all favourited companies: `listFavourite`](#c-listfavourite)
-* [Adding a company: `addCompany`](#c-add-c)
-* [Adding a role: `addRole`](#c-add-c-r)
-* [Deleting a company: `deleteCompany`](#c-delete-c)
-  * [Deleting a role: `deleteRole`](#c-delete-c-r)
-* [Editing a company: `editCompany`](#c-edit-c)
-* [Editing a role: `editRole`](#c-edit-r)
-* [Finding a specific company or role: `find`](#c-find-c-r)
-* [Favouriting a specific company: `favourite`](#c-favourite-c)
-* [Unfavouriting a specific company: `unfavourite`](#c-unfavourite-c)
+  * [Viewing all companies and roles: `list`](#c-list)
+  * [Viewing all favourited companies: `listFavourite`](#c-listfavourite)
+  * [Adding a company: `addCompany`](#c-add-c)
+  * [Adding a role: `addRole`](#c-add-c-r)
+  * [Deleting a company: `deleteCompany`](#c-delete-c)
+    * [Deleting a role: `deleteRole`](#c-delete-c-r)
+  * [Editing a company: `editCompany`](#c-edit-c)
+    * [Editing a role: `editRole`](#c-edit-r)
+  * [Finding a specific company or role: `find`](#c-find-c-r)
+  * [Favouriting a specific company: `favourite`](#c-favourite-c)
+  * [Unfavouriting a specific company: `unfavourite`](#c-unfavourite-c)
+  * [Clearing the company list: `clear`](#c-clear)
+  * [Viewing help: `help`](#c-help)
+  * [Exiting Tinner: `exit`](#c-exit) 
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -46,7 +48,7 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
    * **`list`** : Lists all companies and internship roles.
    * **`addCompany`**`n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` :
     Adds a company named `Google` to Tinner.
-   * **`addRole`**`1 n/Software Engineering Intern s/applying b/31-03-2022 23:59 d/Write mobile applications $/5000` :
+   * **`addRole`**`1 n/Software Engineering Intern s/applying r/31-03-2022 23:59 d/Write mobile applications $/5000` :
     Adds a software engineering intern role to the company at index 1.
    * **`deleteCompany`**`1` : Deletes the 1st company shown in the current list.
    * **`deleteRole`**`1 1` : Deletes the 1st role of the 1st company shown in the current list.
@@ -78,14 +80,6 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the User Guide.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
 ### Listing all companies : `list` <a id="c-list"></a>
 
 Shows a list of all companies and internship roles in Tinner.
@@ -113,13 +107,13 @@ Examples:
 
 Adds an internship role to a company that already exists in the list.
 
-Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]`
+Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS r/REMINDER_DATE [d/DESCRIPTION] [$/STIPEND]`
 * Add internship role at the specified `COMPANY_INDEX`.
 * The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, ...
 * The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
 * The `STATUS` accepted are as follows: applying, pending, interview and assessments, offered, rejected, complete.
-* The `DEADLINE` should be in format dd-MM-yyyy HH:mm
-* The `DESCRIPTION` and `STIPEND` fields are optional during the initial role creation
+* The `REMINDER_DATE` should be in format dd-MM-yyyy HH:mm.
+* The `DESCRIPTION` and `STIPEND` fields are optional during the initial role creation.
     * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
     * The `STIPEND` must be a positive integer going up to 10 digits long.
 
@@ -127,12 +121,12 @@ Note: Integer is a number which is not a fraction; a whole number.
 
 Examples:
 
-* `addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse data $/4800 `
-* `addRole 3 n/Software Engineer (Front end) s/applying b/30-04-2022 01:20 d/web deveploment with react js $/2400 `
+* `addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse data $/4800 `
+* `addRole 3 n/Software Engineer (Front end) s/applying r/30-04-2022 01:20 d/web deveploment with react js $/2400 `
 
 ### Deleting a Company : `deleteCompany` <a id="c-delete-c"></a>
 
-Deletes the specified company from the list.
+Deletes the specified company within the displayed company list.
 
 Format: `deleteCompany COMPANY_INDEX`
 
@@ -146,7 +140,7 @@ Examples:
 
 ### Deleting an internship role from company : `deleteRole` <a id="c-delete-c-r"></a>
 
-Deletes the specified role in the specified company.
+Deletes the specified role in the specified company within the displayed company list.
 
 Format: `deleteRole COMPANY_INDEX ROLE_INDEX`
 
@@ -156,9 +150,12 @@ Format: `deleteRole COMPANY_INDEX ROLE_INDEX`
 Examples:
 
 * `list` followed by, `deleteRole 1 1` deletes the 1<sup>st</sup> role from the 1<sup>st</sup>
-  company in Tinner.
+  company in the displayed company list.
 
 ### Edits an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
+
+Edits the specified company within the displayed company list.
+
 Format: `editCompany COMPANY_INDEX [n/COMPANY_NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the company at the specified INDEX. The index refers to the index number shown in the displayed company list. The index must be a positive integer 1, 2, 3, …​
@@ -167,10 +164,13 @@ Format: `editCompany COMPANY_INDEX [n/COMPANY_NAME] [p/PHONE_NUMBER] [e/EMAIL] [
 
 Examples:
 
-* editCompany 1 p/91234567 e/johndoe@example.com
+* `list` followed by `editCompany 1 p/91234567 e/johndoe@example.com`edits the 1<sup>st</sup> company in the displayed company list.
 
 ### Edits an existing role from company : `editRole` <a id="c-edit-r"></a>
-Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]`
+
+Edits the specified role in the specified company within the displayed company list.
+
+Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]`
 
 * Edits the role at the specified `ROLE_INDEX` of the company at the specified `COMPANY_INDEX`. The indexes refers to the index number shown in the displayed company list. The indexes must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -178,14 +178,14 @@ Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/
 
 Examples:
 
-* `editRole 1 1 [s/offered] [$/3000]`
+* `list` followed by `editRole 1 1 [s/offered] [$/3000]` edits the 1<sup>st</sup> role from the 1<sup>st</sup> company in the displayed company list.
 
 ### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
 
 Find companies or/and roles depending on the format given.
 If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
 If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be displayed.
-If both keywords are entered, only companies with names that match any of the company keywords while containing roles whose names match any of the role keywords are displayed.
+If both keywords are entered, only companies with names that match any of the company keywords while containing one or more roles whose names match any of the role keywords are displayed (with only the selected roles which matched the role keywords).
 
 Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
 
@@ -208,7 +208,7 @@ Favourite a specific company from the list of companies
 Format: `favourite COMPANY_INDEX`
 
 * Favourites the company at the specified `COMPANY_INDEX`.
-* The index refer to the index number shown in the displayed company list.
+* The index refers to the index number shown in the displayed company list.
 * The indexes must be a positive integer like 1, 2, 3, …
 
 Examples:
@@ -230,10 +230,26 @@ Examples:
 
 * `list` followed by, `unfavourite 1` unfavourites the 1<sup>st</sup>
   company in Tinner.
+  
+### Clearing the company list: `clear` <a id="c-clear"></a>
+
+Clears the entire company list, including roles within each company.
+
+Format: `clear`
+
+### Viewing help : `help` <a id="c-help"></a>
+
+Shows a message explaining how to access the User Guide.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
 
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
-Exits the program.
+Exits the Tinner application.
+
+Format: `exit`
 
 ### Colour code of role tags
 Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
@@ -244,8 +260,6 @@ Colour coding of roles allows users to quickly obtain information about their ap
 * "rejected": red
 * "offered": green
 * "complete": black
-
-Format: `exit`
 
 ### Saving the data
 
@@ -264,13 +278,14 @@ Action | Format, Examples
 **List companies** | `list`
 **List favourited companies** | `listFavourite`
 **Add company** | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371`
-**Add role** | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`
+**Add role** | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS r/REMINDER_DATE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse marketing data $/5000`
 **Delete company** | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `
 **Delete role** | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `
 **Edit company** | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`
-**Edit role** | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`
+**Edit role** | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending r/31-03-2022 23:59 $/5000`
 **Find company or role** | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`
 **Favourite company** | `favourite COMPANY_INDEX`
 **Unfavourite company** | `unfavourite COMPANY_INDEX`
+**Clear company list** | `clear`
 **Help** | `help`
 **Exit Tinner** | `exit`
