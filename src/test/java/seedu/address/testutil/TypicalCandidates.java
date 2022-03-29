@@ -31,10 +31,10 @@ import seedu.address.model.candidate.Candidate;
 public class TypicalCandidates {
 
     public static final Candidate ALICE = new CandidateBuilder()
-            .withStudentId("A0123450B")
+            .withStudentId("A0123451B")
             .withName("Alice Pauline")
             .withPhone("94351253")
-            .withEmail("E0123456@u.nus.edu")
+            .withEmail("E0123450@u.nus.edu")
             .withCourse("Business Analytics")
             .withSeniority("2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
@@ -45,7 +45,7 @@ public class TypicalCandidates {
             .withStudentId("A0234567B")
             .withName("Benson Meier")
             .withPhone("98765432")
-            .withEmail("E0234567@u.nus.edu")
+            .withEmail("E0234560@u.nus.edu")
             .withCourse("Computer Engineering")
             .withSeniority("2")
             .withApplicationStatus(VALID_APPLICATION_PENDING)
