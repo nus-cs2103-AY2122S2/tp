@@ -381,10 +381,10 @@ Using the FileChooser library, it manages to create a File Explorer GUI similar 
 #### Design considerations:
 
 - **Alternative 1 (current choice):** 
-  `Status` is treated as a `enum` class. Enumerations offer compile time type safety, reducing the risk of runtime errors. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would reference the same `enum` static class. However, for the class implementation, a new `Status` instance is  instantiated each time a `Show` object is created.
+  `Status` is implemented as a `enum` class. Enumerations offer compile time type safety, reducing the risk of runtime errors. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would reference the same `enum` static class. However, for the class implementation, a new `Status` instance is  instantiated each time a `Show` object is created.
   - Pros: Offers compile time type safety.
   - Cons: -
-- **Alternative 2 :** `Status` is treated as a regular class that encapsulates a String or Integer which would represent the status of the show (`watching`, `completed` and `plan-to-watch`). 
+- **Alternative 2 :** `Status` is implemented as a regular class that encapsulates a String or Integer which would represent the status of the show (`watching`, `completed` and `plan-to-watch`). 
   - Pros: Easier to implement as it is what most people are more familiar with.
   - Cons: Lack of compile time safety.
 
