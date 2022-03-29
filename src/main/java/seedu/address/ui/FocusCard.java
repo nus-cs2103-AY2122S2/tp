@@ -18,20 +18,25 @@ import static seedu.address.ui.Styles.RED;
 import static seedu.address.ui.Styles.WHITE_FONT_INLINE;
 import static seedu.address.ui.Styles.YELLOW;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.util.Random;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.InterviewStatus;
+import seedu.address.model.candidate.Name;
 
 /**
  * An UI component that displays information of a {@code Candidate}.
@@ -79,12 +84,15 @@ public class FocusCard extends UiPart<Region> {
     @FXML
     private FlowPane availableDaysFocus;
     @FXML
-    private ImageView displayPicture;
+    private StackPane stackPane;
+    @FXML
+    private Text profileName;
+
     /**
      * Creates a {@code CandidateCode} with the given {@code Candidate} and index to display.
      */
 
-    public FocusCard(Candidate candidate) throws FileNotFoundException {
+    public FocusCard(Candidate candidate) {
         super(FXML);
         requireNonNull(candidate);
         this.candidate = candidate;
@@ -93,7 +101,7 @@ public class FocusCard extends UiPart<Region> {
         phone.setText(candidate.getPhone().value);
         email.setText(candidate.getEmail().value);
         course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
-        displayPicture.setImage(new Image(new FileInputStream(BLANK_PICTURE_PATH)));
+        setProfilePicture(candidate.getName());
         setApplicationStatus(candidate.getApplicationStatus());
         setInterviewStatus(candidate.getInterviewStatus());
         setAvailableDays(candidate.getAvailability());
@@ -167,5 +175,34 @@ public class FocusCard extends UiPart<Region> {
             }
             availableDaysFocus.getChildren().add(label);
         }
+    }
+
+    private void setProfilePicture(Name candidateName) {
+        String[] temp = candidateName.fullName.split(" ");
+        StringBuilder initials = new StringBuilder();
+        if (temp.length > 1) {
+            initials.append(temp[0].charAt(0)).append(temp[1].charAt(0));
+        } else {
+            initials.append(temp[0].charAt(0));
+        }
+
+        Random random = new Random();
+        double red = (random.nextInt(106) + 150) / 255.0;
+        double blue = (random.nextInt(106) + 150) / 255.0;
+        double green = (random.nextInt(106) + 150) / 255.0;
+
+        stackPane.setBackground(new Background(new BackgroundFill(
+                Color.color(red, blue, green),
+                null,
+                null
+        )));
+
+        Circle circle = new Circle();
+        circle.setRadius(60);
+        circle.setCenterX(75);
+        circle.setCenterY(75);
+        profileName.setText(initials.toString());
+        stackPane.setClip(circle);
+        stackPane.setAlignment(Pos.CENTER);
     }
 }

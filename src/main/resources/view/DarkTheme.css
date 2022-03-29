@@ -448,6 +448,12 @@
     -fx-font-family: "Segoe UI Light";
 }
 
+.profileTextStyle {
+    -fx-font-size: 35px;
+    -fx-stroke: black;
+    -fx-font-family: "Segoe UI";
+}
+
 // ************* focus panel header css *************
 .focus-panel-header {
     -fx-background-color: #3c3e3f;
