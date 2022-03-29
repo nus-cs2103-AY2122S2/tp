@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.ClearCommand;
 import manageezpz.logic.commands.DeleteEmployeeCommand;
-import manageezpz.logic.commands.EditCommand;
-import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
+import manageezpz.logic.commands.EditEmployeeCommand;
+import manageezpz.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
 import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.commands.HelpCommand;
@@ -58,9 +58,9 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditEmployeeCommand command = (EditEmployeeCommand) parser.parseCommand(EditEmployeeCommand.COMMAND_WORD + " "
                 + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
+        assertEquals(new EditEmployeeCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test

@@ -5,7 +5,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import manageezpz.logic.commands.AddEmployeeCommand;
-import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
+import manageezpz.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
 import manageezpz.model.person.Person;
 
 /**
