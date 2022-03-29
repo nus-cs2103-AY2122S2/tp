@@ -16,6 +16,7 @@ import seedu.ibook.logic.commands.ExpiredCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.HelpCommand;
 import seedu.ibook.logic.commands.ListCommand;
+import seedu.ibook.logic.commands.OutOfStockCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateItemCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -83,6 +84,9 @@ public class IBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case OutOfStockCommand.COMMAND_WORD:
+            return new OutOfStockCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
