@@ -529,7 +529,7 @@ Format: `batch COMMAND by/FIELD [=/EQUALS_VALUE] [start/START_WITH] [end/END_WIT
   * `Address`
   * `Phone`
   * `Email`
-* Exactly one parameter of `EQUALS_VALUE` `START_WITH` or `END_WITH` must be provided.
+* Exactly one parameter of `EQUALS_VALUE`, `START_WITH`, or `END_WITH` must be provided.
 * A `EQUALS_VALUE` is value matching the exact value in the target field.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
 * A `START_WITH` is value matching the value in the target field with specific starting value.
@@ -538,7 +538,7 @@ Format: `batch COMMAND by/FIELD [=/EQUALS_VALUE] [start/START_WITH] [end/END_WIT
 Examples:
 * `batch deleteperson by/name start/A`
   * Deletes all persons whose name start with A (case-sensitive)
-* `batch editpersonp/87438806 by/phone =/87438807 `
+* `batch editperson p/87438806 by/phone =/87438807 `
   * Edit contact with phone matches keyword 87438807 change to 87438806
 
 ### Operate on Contacts within Range : `range`
@@ -552,11 +552,11 @@ Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
   * edit
   * delete
 * The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the index number shown in the **displayed person list**.
-* `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will throw error.
+* `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will fail.
 * The resultant effect of the command is dependent on the performed action.
 
 Examples:
-* `range editpersone/johndoe@example.com from/6 to/10`
+* `range editperson e/johndoe@example.com from/6 to/10`
   * Sets the email address of the 6th to 10th contacts in the address book to `johndoe@example.com`.
 * `range deleteperson from/2 to/3`
   * Deletes the 2nd and 3rd contacts in the address book.

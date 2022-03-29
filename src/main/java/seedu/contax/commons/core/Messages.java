@@ -23,7 +23,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_TIME = "The time provided is invalid!";
 
 
-    public static final String MESSAGE_PREFIX_NOT_EQUALS_ONE = "Only one param (=, start or end) can be provided.";
+    public static final String MESSAGE_PREFIX_NOT_EQUALS_ONE = "Only one parameter (=, start or end) can be provided.";
     public static final String MESSAGE_INVALID_RANGE_INDEX = "The range index is invalid!";
     public static final String MESSAGE_INVALID_PRIORITY_LEVEL = "Invalid priority level for editpriority \n%1$s";
 }
