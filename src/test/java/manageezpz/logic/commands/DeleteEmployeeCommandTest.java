@@ -5,7 +5,7 @@ import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
-import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,7 +24,7 @@ import manageezpz.model.person.Person;
  */
 public class DeleteEmployeeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

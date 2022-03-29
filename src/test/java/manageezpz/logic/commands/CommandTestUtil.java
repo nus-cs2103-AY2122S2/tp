@@ -4,7 +4,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,8 +17,8 @@ import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
-import manageezpz.model.person.NameContainsKeywordsPredicate;
 import manageezpz.model.person.Person;
+import manageezpz.model.person.PersonMultiplePredicate;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.TaskMultiplePredicate;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
@@ -128,7 +127,8 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new PersonMultiplePredicate(Arrays.asList(splitName[0]), null,
+                null));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -143,7 +143,7 @@ public class CommandTestUtil {
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getDescription().toString().split("\\s+");
         TaskMultiplePredicate predicate = new TaskMultiplePredicate(
-                PREFIX_TASK,
+                null,
                 Arrays.asList(splitName[0]),
                 null,
                 null,

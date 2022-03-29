@@ -19,12 +19,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email) {
+    public Person(Name name, Phone phone, Email email, int numOfTask) {
         requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.numOfTask = 0;
+        this.numOfTask = numOfTask;
     }
 
     public Name getName() {
@@ -63,6 +63,7 @@ public class Person {
     public int getNumOfTask() {
         return numOfTask;
     }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

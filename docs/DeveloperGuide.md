@@ -147,13 +147,78 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `manageezpz.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### **Task Components**
+- Added Classes into the model Component to encapsulate a Task.
+
+#### **Implementation**
+<img src="images/ModelTaskClassDiagram.png" width="450" />
+
+A `Task`,
+- is stored in `uniqueTaskList` of the Model
+- can be represented by a `Todo`, `Event`, or `Deadline`
+
+A `Task` contains the following attributes,
+1. a `Description`, which represent the details of the Task to be stored in the `uniqueTaskList`
+2. a `Date`, which represent the day, month and year as specified by a number of the Task
+3. a `Time`, which represent the period during the Task exists or happens
+4. can be assigned/Tagged to multiple different `Person`
+5. a type, to differentiate between the different types of task
+6. can be marked/unmarked based on whether the task is done or not.
+7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
+
+#### Design considerations:
+
+#### Aspect: How the components within Task are added or changed
+- **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
+    * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
+    * Cons: Less flexible, more steps needed in editing Task objects
+- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
+    * Pros: Less overhead as fewer objects are created
+    * Cons: Prone to error as a Component might not be correctly changed
+
+### Task Adding feature
+
+#### What is Task Adding feature about?
+
+The Add Task mechanism is facilitated by `AddressBook`. This feature enhances `AddressBook` by allowing to store not only `Person`, but also `Task`. This is stored internally as a `UniquePersonList` and `UniqueTaskList`. Additionally, the feature implements the following operations:
+
+* `AddressBook#addTodo(Todo)` —  Adds the `Todo` Task to `UniqueTaskList`
+* `AddressBook#addDeadline(Deadline)` — Adds the `Deadline` Task to `UniqueTaskList`
+* `AddressBook#addEvent(Event)` — Adds the `Event` Task to `UniqueTaskList`
+
+For the command, the feature extends `command`, and is implemented as such:
+* `addTodo desc/TASK_DESCRIPTION`
+* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
+
+#### Implementation Flow of Task Adding feature
+
+Given below is an example usage scenario and how the Task Adding mechanism behaves at each step.
+
+Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
+
+Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
+
+Step 2. The user executes `addTodo desc/Watch Netflix with Mum` command to create a new `Todo` Task.
+![AddTodo1](images/AddTodo.png)
+
+#### Design considerations:
+- The Task adding commands are straight-to-the-point and efficient for users to add Tasks to ManageEZPZ.
+- The prefixes allow users to understand what the different types of Task need in order to be created.
+
+#### UML Diagram for Adding Todo Task
+
+The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
+
+<img src="images/AddTaskActivityDiagram.png" width="250" />
 
 ### Task Marking feature
 
@@ -235,73 +300,6 @@ Step 2. The user executes `delete 4` command to delete the task `Watch Netflix w
 #### UML Diagram for Task Deleting
 
 ![](images/DeleteClassDiagram.png)
-
-
-### **Task Components**
-- Added Classes into the model Component to encapsulate a Task.
-
-#### **Implementation**
-<img src="images/ModelTaskClassDiagram.png" width="450" />
-
-A `Task`,
-- is stored in `uniqueTaskList` of the Model
-- can be represented by a `Todo`, `Event`, or `Deadline`
-
-A `Task` contains the following attributes,
-1. a `Description`, which represent the details of the Task to be stored in the `uniqueTaskList`
-2. a `Date`, which represent the day, month and year as specified by a number of the Task
-3. a `Time`, which represent the period during the Task exists or happens
-4. can be assigned/Tagged to multiple different `Person`
-5. a type, to differentiate between the different types of task
-6. can be marked/unmarked based on whether the task is done or not.
-7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
-
-#### Design considerations:
-
-#### Aspect: How the components within Task are added or changed
-- **Current Choice**: Attributes within `Task` are immutable, meaning that if there is an attribute that has to be edited, a new Task object has to be created.
-  * Pros: Concept of Immutability is met, making the code less prone to bugs as all components of an Task object are fixed
-  * Cons: Less flexible, more steps needed in editing Task objects
-- Alternative 1: Allow certain components within Task, like Time and Date to be mutable
-  * Pros: Less overhead as fewer objects are created
-  * Cons: Prone to error as a Component might not be correctly changed
-
-### Task Adding feature
-
-#### What is Task Adding feature about?
-
-The Add Task mechanism is facilitated by `AddressBook`. This feature enhances `AddressBook` by allowing to store not only `Person`, but also `Task`. This is stored internally as a `UniquePersonList` and `UniqueTaskList`. Additionally, the feature implements the following operations:
-
-* `AddressBook#addTodo(Todo)` —  Adds the `Todo` Task to `UniqueTaskList`
-* `AddressBook#addDeadline(Deadline)` — Adds the `Deadline` Task to `UniqueTaskList`
-* `AddressBook#addEvent(Event)` — Adds the `Event` Task to `UniqueTaskList`
-
-For the command, the feature extends `command`, and is implemented as such:
-* `addTodo desc/TASK_DESCRIPTION` 
-* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
-* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
-
-#### Implementation Flow of Task Adding feature
-
-Given below is an example usage scenario and how the Task Adding mechanism behaves at each step.
-
-Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state with the `clear` command.
-
-Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
-
-Step 2. The user executes `addTodo desc/Watch Netflix with Mum` command to create a new `Todo` Task.
-![AddTodo1](images/AddTodo.png)
-
-#### Design considerations:
-- The Task adding commands are straight-to-the-point and efficient for users to add Tasks to ManageEZPZ.
-- The prefixes allow users to understand what the different types of Task need in order to be created.
-
-#### UML Diagram for Adding Todo Task
-
-The following activity diagram summarizes what happens when a user executes a new `addTodo` command:
-
-<img src="images/AddTaskActivityDiagram.png" width="250" />
-
 
 ### Editing details of a task
 
@@ -523,19 +521,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User uses one of the three `addTask` commands:
-    * 3a1. User uses `addTask /todo` command
+* 3a. User uses one of the three `add` commands: 
+    * 3a1. User uses `addTodo` command 
 
-      Use case resumes from step 4.
+      Use case resumes from step 4. 
 
-    * 3a2. User uses `addTask /event` command
+    * 3a2. User uses `addDeadline` command 
 
-      Use case resumes from step 4.
+      Use case resumes from step 4. 
 
-    * 3a3. User uses `addTask /deadline` command
+    * 3a3. User uses `addEvent` command 
 
-      Use case resumes from step 4.
-
+      Use case resumes from step 4. 
+    
 * 3b. User uses Add Task Commands with the wrong syntax
 
     * 3b1. ManageEZPZ sends an error message to User, indicating the
@@ -546,6 +544,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ****
 
 **Use Case 2 - Delete Task**
+
+Guarantees: Deletion of any Task will also result in the removal
+            of any Employee association that the Task has.
 
 **MSS**
 
@@ -573,36 +574,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User enters the command to list Tasks.
-4. ManageEZPZ displays the Tasks according.
+4. ManageEZPZ displays the all Tasks.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the five `list` Task commands:
-    * 3a1. User uses `list /all` command
-
-      Use case resumes from step 4.
-
-    * 3a2. User uses `list /todo` command
-
-      Use case resumes from step 4.
-
-    * 3a3. User uses `list /deadline` command
-
-      Use case resumes from step 4.
-
-    * 3a2. User uses `list /event` command
-
-      Use case resumes from step 4.
-
-    * 3a3. User uses `list /today` command
-
-      Use case resumes from step 4.
-
-* 3b. User uses list Task commands with the wrong syntax.
-    * 3b1. ManageEZPZ sends an error message to User, that the list
-      command is incorrect, attached with the correct syntax format.
+* 3a. User uses list Task commands with the wrong syntax. 
+    * 3a1. ManageEZPZ sends an error message to User, that the list
+      command is incorrect, attached with the correct syntax format. 
 
       Use case ends.
 
@@ -642,7 +622,8 @@ Preconditions: User is currently using ManageEZPZ.
 2. ManageEZPZ displays the Tasks.
 3. User realises that Task is marked as done, but is actually not done.
 4. User enters command to unmark Task for the specific Task Number.
-5. ManageEZPZ unmarks the Task & confirms with a successful message that the task is unmarked.
+5. ManageEZPZ unmarks the Task & confirms with a successful message 
+   that the task is unmarked. 
 
    Use case ends.
 
@@ -670,15 +651,22 @@ Preconditions: User is currently using ManageEZPZ.
 
 **Extensions**
 
-* 3a. User uses one of the two Find Task commands:
+* 3a. User uses one of the three Find Task commands: 
 
-    * 3a1. User uses `find /task TASK_DESCRIPTION` command
+    * 3a1. User uses any of the `findTask` command:
+        * `findTask todo/`
+        * `findTask deadline/`
+        * `findTask event/`
+        * With or without the Task type above, the User wants to also get a more 
+          filtered search result, User then adds these prefixes as additional
+          search terms:
+          * `desc/` for Description search.
+          * `date/` for Date search.
+          * `priority/` for Priority search.
+          * `assignees/` for Assignees search.
+          * `isMarked/` for finished Tasks Search.
 
-      Use case resumes from step 4.
-
-    * 3a2. User uses `find /date DD-MM-YYYY` command
-
-      Use case resumes from step 4.
+      Use case resumes from step 4. 
 
 * 3b. User uses find Task commands with the wrong syntax
 
@@ -689,21 +677,53 @@ Preconditions: User is currently using ManageEZPZ.
 
 ****
 
-**Use Case 7 - Add Employee**
+**Use Case 7 - Edit Tasks**
 
 **MSS**
-1. User starts up ManageEZPZ.
+
+1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User wants to add a new Employee, enters command to add Employee.
-4. ManageEZPZ adds the Employee & confirms with a successful message that the task is marked
+3. User enters the command to list Tasks.
+4. User realizes that some Tasks have the wrong information.
+5. User enters the command to edit the Task(s).
+6. ManageEZPZ sends a message to the User indicating that the edit has been successful.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data.
+* 5a. User selects a combination of information to edit:
+  * `desc/` to edit the Description.
+  * `at/` to edit the Time.
+  * `date/` to edit the Date.
 
-    * 3a1. ManageEZPZ sends an error message to User, indicating the
+  Use case resumes from step 6.
+
+* 5b. User uses edit Task commands with the wrong syntax
+
+    * 5b1. ManageEZPZ sends an error message to User, indicating syntax used for
+      the edit Task command is incorrect, attached with the correct syntax format.
+
+      Use Case ends.
+
+****
+
+**Use Case 8 - Add Employee**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+1. User wants to add a new Employee, enters command to add Employee.
+2. ManageEZPZ adds the Employee & confirms with a successful message that the
+   Employee is added to ManageEZPZ.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data. 
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
       format for the add Employee command is incorrect, attached with the
       correct syntax format.
 
@@ -711,19 +731,107 @@ Preconditions: User is currently using ManageEZPZ.
 
 ****
 
-**Use Case 8 - Clear all Tasks**
+**Use Case 9 - Deleting Employee**
+
+Preconditions: User is currently using ManageEZPZ.
+
+Guarantees: Deletion of any Employee will also result in the removal 
+            of the Employee from the Task(s) that the Employee has been
+            assigned to.
+
+**MSS**
+1. User wants to delete an existing Employee, enters command to delete Employee.
+2. ManageEZPZ deletes the Employee and sends a confirmation message that the
+   deletion has been successful.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data.
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
+      format for delete Employee command is incorrect, attached with the
+      correct syntax format.
+      
+  Use Case ends.
+
+****
+
+**Use Case 10 - Tagging Employee to Task**
+
+Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
-1. User enters the command to clear all Tasks
-2. ManageEZPZ clears all Tasks & confirms with a successful
-   message that all Task are cleared.
+1. User enters the command to tag an Employee to a Task.
+2. ManageEZPZ assigns the Employee to the Task, and sends a confirmation message 
+   to the User that the Employee has been assigned.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data.
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
+      format for the tag Employee to Task command is incorrect, attached with the
+      correct syntax format.
+    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List, 
+      indicating to the User to enter a valid Task number.
+    * 1a3. ManageEZPZ detects that Name of Employee is not in the database, 
+      indicating to the User to enter a valid Employee Name.
+
+      Use Case ends.
+
+****
+
+**Use Case 11 - Tagging Priority to Tasks**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters the command to Tag a Priority to a Task.
+2. ManageEZPZ tags the appropriate Priority to the Task, and sends a 
+   confirmation message to the Priority has been assigned to the Task.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data.
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
+      format for the add Employee command is incorrect, attached with the
+      correct syntax format.
+    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List, 
+      indicating to the User to enter a valid Task number.
+    * 1a3. ManageEZPZ detects that an invalid Priority that is not one of the four: 
+           None, Low, Medium, High. ManageEZPZ reminds the User to use a valid 
+           Priority.
+  
+      Use Case ends.
+
+****
+
+**Use Case 12 - Deleting all Entries in ManageEZPZ**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters the command to clear ManageEZPZ.
+2. ManageEZPZ clears all Employee and Task data, sending a confirmation
+   message that ManageEZPZ entries are cleared.
 
    Use case ends.
 
 ****
 
-**Use Case 9 - Exit ManageEZPZ**
+**Use Case 13 - Exit ManageEZPZ**
+
+Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
@@ -734,8 +842,7 @@ Preconditions: User is currently using ManageEZPZ.
    Use case ends.
 
 ****
-*{More to be added}*
-****
+
 ### Non-Functional Requirements
 
 #### Technical Requirements
@@ -810,19 +917,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an employee
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `deleteEmployee 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `deleteEmployee 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deleteEmployee`, `deleteEmployee x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
