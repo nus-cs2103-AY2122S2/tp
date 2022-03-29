@@ -26,7 +26,7 @@ public class ProfessorCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on UniBook level 4</a>
      */
 
-    public final Professor professor;
+    private final Professor professor;
     private final Logger logger = LogsCenter.getLogger(ProfessorCard.class);
     @FXML
     private HBox cardPane;

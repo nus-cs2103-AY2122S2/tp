@@ -360,7 +360,7 @@ public class Module {
     public boolean hasEvent(ModuleKeyEvent.KeyEventType keyEvent, LocalDateTime dateTime) {
         for (ModuleKeyEvent moduleKeyEvent : keyEvents) {
             if (moduleKeyEvent.getKeyEventType().equals(keyEvent)
-                    && moduleKeyEvent.getKeyEventTiming().equals(dateTime)) {
+                && moduleKeyEvent.getKeyEventTiming().equals(dateTime)) {
                 return true;
             }
         }
