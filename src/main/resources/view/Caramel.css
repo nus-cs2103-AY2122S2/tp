@@ -73,20 +73,16 @@
     -fx-border-color: transparent transparent #BA6C41 transparent;
 }
 
+#tags .label, #memberships .label {
+    -fx-text-fill: white;
+}
+
 #tags .label {
-    -fx-text-fill: #EAEAEA;
     -fx-background-color: #BA6C41;
 }
 
-/*
-#memberships .label {
-    -fx-background-color: #862E1A;
-}
-*/
-
 #gold {
-    -fx-text-fill: black;
-    -fx-background-color: #FFD700;
+    -fx-background-color: #CEAA54;
 }
 
 #silver {
@@ -94,7 +90,7 @@
 }
 
 #bronze {
-    -fx-background-color: #CD7F32;
+    -fx-background-color: #A97142;
 }
 
 #optionalFields .label {
