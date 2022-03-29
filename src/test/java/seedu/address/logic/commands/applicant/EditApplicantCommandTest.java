@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.applicant.EditApplicantCommand;
 import seedu.address.logic.commands.applicant.EditApplicantCommand.EditApplicantDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
