@@ -1,10 +1,15 @@
 package seedu.address.model.classgroup;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.WeekId;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tamodule.TaModule;
@@ -16,10 +21,12 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class ClassGroup implements Entity {
     // Identity fields
+    private static final int NUM_OF_WEEKS = 13;
     private final ClassGroupId classGroupId;
     private final ClassGroupType classGroupType;
     private final TaModule taModule;
     private final UniqueStudentList uniqueStudentList;
+    private final List<Lesson> lessons;
 
     /**
      * Constructs a {@code ClassGroup}.
@@ -49,6 +56,14 @@ public class ClassGroup implements Entity {
         this.classGroupType = classGroupType;
         this.taModule = taModule;
         this.uniqueStudentList = uniqueStudentList;
+
+        // initialize the 13 lessons
+        Lesson[] arr = new Lesson[NUM_OF_WEEKS];
+        for (int i = 0; i < NUM_OF_WEEKS; i++) {
+            arr[i] = new Lesson(new WeekId(Integer.toString(i + 1)),
+                    uniqueStudentList.asUnmodifiableObservableList());
+        }
+        this.lessons = Arrays.asList(arr);
     }
 
 
@@ -80,6 +95,35 @@ public class ClassGroup implements Entity {
 
     public ObservableList<Student> getStudents() {
         return uniqueStudentList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Finds the lesson according to the specified weekIndex and marks attendance
+     * for all students in the given student list.
+     */
+    public void markAttendance(Index weekIndex, List<Student> students) {
+        Lesson toMark = findLessonByIndex(weekIndex);
+        toMark.markAttendance(students);
+    }
+
+    /**
+     * Finds the lesson according to the specified weekIndex and unmarks attendance
+     * for all students in the given student list.
+     */
+    public void unmarkAttendance(Index weekIndex, List<Student> students) {
+        Lesson toUnmark = findLessonByIndex(weekIndex);
+        toUnmark.unmarkAttendance(students);
+    }
+
+    /**
+     * Finds the lesson in the lesson list by the provided weekIndex.
+     */
+    private Lesson findLessonByIndex(Index weekIndex) {
+        return lessons.get(weekIndex.getZeroBased());
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
     @Override

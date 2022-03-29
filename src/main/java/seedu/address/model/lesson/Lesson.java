@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.student.Student;
+import seedu.address.model.studentattendance.Attendance;
 import seedu.address.model.studentattendance.StudentAttendance;
 
 //@@author jxt00
@@ -31,17 +33,23 @@ public class Lesson {
         this.studentAttendanceList = new ArrayList<StudentAttendance>();
     }
 
+    //@@author EvaderFati
     /**
-     * Constructs a {@code Lesson}.
-     * {@code weekId} and {@code studentAttendanceList} must be present and not null.
+     * Constructs a {@code Lesson} and initialize unmark all students enrolled
+     * in the lesson.
+     * {@code weekId} and {@code students} must be present and not null.
      *
      * @param weekId A valid week ID.
-     * @param studentAttendanceList A valid student attendance list.
+     * @param students A valid student attendance list.
      */
-    public Lesson(WeekId weekId, List<StudentAttendance> studentAttendanceList) {
-        requireAllNonNull(weekId, studentAttendanceList);
+    public Lesson(WeekId weekId, List<Student> students) {
+        requireAllNonNull(weekId, students);
         this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<StudentAttendance>(studentAttendanceList);
+        this.studentAttendanceList = new ArrayList<>();
+        // init all students enrolled in the class as not attending any lessons
+        for (Student s : students) {
+            studentAttendanceList.add(new StudentAttendance(s, new Attendance("0")));
+        }
     }
 
     public WeekId getWeekId() {
@@ -50,6 +58,40 @@ public class Lesson {
 
     public List<StudentAttendance> getStudentAttendanceList() {
         return studentAttendanceList;
+    }
+
+    //@@author EvaderFati
+    /**
+     * Iterate through all the student in the specified student list and update the studentAttendanceList
+     * if there is a {@code StudentAttendance} representing the attendance for the specified student.
+     *
+     * @param students A list of students to mark attendance
+     */
+    public void markAttendance(List<Student> students) {
+        for (Student s : students) {
+            for (StudentAttendance sa : studentAttendanceList) {
+                if (sa.getStudent().equals(students)) {
+                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.markAttendance(s));
+                }
+            }
+        }
+    }
+
+    //@@author EvaderFati
+    /**
+     * Iterate through all the student in the specified student list and update the studentAttendanceList
+     * if there is a {@code StudentAttendance} representing the attendance for the specified student.
+     *
+     * @param students A list of students to unmark attendance
+     */
+    public void unmarkAttendance(List<Student> students) {
+        for (Student s : students) {
+            for (StudentAttendance sa : studentAttendanceList) {
+                if (sa.getStudent().equals(students)) {
+                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.unmarkAttendance(s));
+                }
+            }
+        }
     }
 
     /**
