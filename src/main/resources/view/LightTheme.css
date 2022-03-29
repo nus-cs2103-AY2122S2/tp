@@ -349,7 +349,7 @@
     -fx-text-fill: #F70D1A;
 }
 
-#commandTextField {
+#commandTextField, #userPassword, #userRepeatPassword {
     -fx-background-color: transparent #ffffff transparent #ffffff;
     -fx-background-insets: 0;
     -fx-border-color: #7e7a7a #7e7a7a #004aad #7e7a7a;
@@ -360,6 +360,7 @@
     -fx-font-size: 13pt;
     -fx-text-fill: #004aad;
 }
+
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);

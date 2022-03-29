@@ -33,6 +33,10 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        CommandType.setViewCommandType(CommandType.DEFAULT);
+        ViewedNric.setViewedNric(null);
+        return new CommandResult(MESSAGE_SUCCESS);
 
 
         if (nric != null && !model.hasPerson(new NricPredicate(nric))) {
