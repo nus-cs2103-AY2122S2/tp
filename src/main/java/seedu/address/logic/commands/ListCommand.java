@@ -57,7 +57,7 @@ public class ListCommand extends Command {
             updateClassGroupList(model, result);
             break;
         case ASSESSMENT:
-            updateFilteredAssessmentList(model, result);
+            updateAssessmentList(model, result);
             break;
         default:
             throw new UnknownEntityException();
@@ -67,6 +67,7 @@ public class ListCommand extends Command {
 
     /**
      * Updates filtered student list in ModelManager.
+     * 
      * @param model ModelManager.
      * @param result Result string to update.
      */
@@ -93,6 +94,7 @@ public class ListCommand extends Command {
 
     /**
      * Updates filtered student list in ModelManager.
+     * 
      * @param model ModelManager.
      * @param result Result string to update.
      */
@@ -115,6 +117,7 @@ public class ListCommand extends Command {
 
     /**
      * Updates filtered module list in ModelManager.
+     * 
      * @param model ModelManager.
      * @param result Result string to update.
      */
@@ -125,16 +128,18 @@ public class ListCommand extends Command {
 
     /**
      * Updates filtered assessment list in ModelManager.
+     * 
      * @param model ModelManager.
      * @param result Result string to update.
      */
-    private void updateFilteredAssessmentList(Model model, String result) {
+    private void updateAssessmentList(Model model, String result) {
         model.updateFilteredAssessmentList(PREDICATE_SHOW_ALL);
         result = String.format(MESSAGE_SUCCESS, MESSAGE_ASSESSMENTS);
     }
 
     /**
      * Filters all students enroled in the ClassGroup specified by filterEntityIndex.
+     * 
      * @param model ModelManager.
      * @return Predicate that filters students.
      */
@@ -151,6 +156,7 @@ public class ListCommand extends Command {
 
     /**
      * Filters all students enroled in the TaModule specified by filterEntityIndex.
+     * 
      * @param model ModelManager.
      * @return Predicate that filters students.
      */
@@ -167,6 +173,7 @@ public class ListCommand extends Command {
 
     /**
      * Filters all class groups that belong to the TaModule specified by filterEntityIndex.
+     * 
      * @param model ModelManager.
      * @return Predicate that filters class groups.
      */
