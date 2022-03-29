@@ -27,7 +27,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
      - Navigate to your _home folder_ on Terminal <br>
      - Launch the application using the command `java -jar ContaX.jar`. <br>
    </div>
-  
+
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -452,7 +452,7 @@ Examples:
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes the format invalid, ContaX wil try to read valid objects and import, and will skip objects with attributes that have invalid formats (e.g. having alphabets in a Phone number), and any duplicate Persons. 
+If your changes to the data file makes the format invalid, ContaX wil try to read valid objects and import, and will skip objects with attributes that have invalid formats (e.g. having alphabets in a Phone number), and any duplicate Persons.
 
 However, if the JSON formatting is broken, a blank AddressBook/Schedule will be loaded instead.
 

@@ -8,7 +8,7 @@
 * This application is aimed at professionals with many clients to help them to organise contacts, appointments and resources
 
 * Usages:
-  * Management of tags 
+  * Management of tags
   * Management of contacts
   * Management of appointments
 

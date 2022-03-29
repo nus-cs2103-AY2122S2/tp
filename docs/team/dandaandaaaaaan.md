@@ -14,9 +14,7 @@ Given below are my contributions to the project.
     * What it does: Allows the user to import contacts from a Microsoft Excel compatible format, as well as export it back into the same format. Import CSV allows for customising of column numbers for each field.
     * Justification: As our target audience is professionals, it is very common that they will have contacts in Excel in some form. By designing an Import CSV command with flexibility of column numbers, professionals can easily migrate their existing contacts with minimal modifications.
 
-
-
-* **Code contributed**: 
+* **Code contributed**:
     * Functionality, documentation and tests for both `Import CSV` and `Export CSV` functions
       * Includes components in `Storage`, `Logic`, `Model` etc.
 
