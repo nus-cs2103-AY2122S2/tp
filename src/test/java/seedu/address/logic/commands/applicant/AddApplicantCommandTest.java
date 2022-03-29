@@ -204,6 +204,16 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public void updatePosition(Position positionToBeUpdated, Position newPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPosition(Position position) {
             throw new AssertionError("This method should not be called.");
         }

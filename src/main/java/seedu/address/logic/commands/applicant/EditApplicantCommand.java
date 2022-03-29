@@ -91,7 +91,7 @@ public class EditApplicantCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(applicantToEdit, editedApplicant);
+        model.updateApplicant(applicantToEdit, editedApplicant);
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant), getCommandDataType());
     }
