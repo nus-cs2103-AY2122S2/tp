@@ -210,7 +210,7 @@ Clears all students from TAPA.
 * All students and their corresponding details will be removed from TAPA.
 * A message will be displayed if TAPA is already empty and there are no students to be removed.
 
-Example:
+**Example**:
 * `clear`
     * All students cleared from TAPA.
 
@@ -261,14 +261,14 @@ Assigns a task to a particular student.
 
 Deletes a task from a particular student's list of tasks.
 
-Format: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
+**Format**: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
 
 * An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
 * An error message will be displayed if the student with the given student ID does not exist.
 * An error message will be displayed if none of the students taking the module had previously been assigned the task with the given task name.
 * An error message will be displayed if none of the students are taking a module with the given module code.
 
-Example:
+**Example**:
 * `deleteTask i/AXXXXXXXR idx/3`
     * Deletes task at index 3 from the student's list of assigned task, provided that a task exists at that index.
 * `deleteTask m/cs2030 tn/Assignment 1`
@@ -291,6 +291,21 @@ The completion status of each student in the list will be displayed as well.
     * For each student in the output list, a "tick" symbol signifies that he/she has already
       completed the assigned task.
     * On the other hand, a "cross" symbol signifies that the student has not complete the assigned task.
+
+<br>
+
+### View the list of students by the number of undone tasks in descending order: `sort`
+
+Sorts and displays the students in TAPA by the number of undone tasks in descending order.
+
+**Format**: `sort`
+
+* Displays the students from the list of students by the number of undone tasks in descending order
+* The students are indexed as 1, 2, 3, ......
+
+**Example**:
+* `sort`
+    * Displays all the enrolled students by the number of undone tasks in descending order
 
 <br>
 
@@ -356,6 +371,7 @@ Action      | Command Format with Examples
 **List**    | `list`
 **Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> Example: `task i/AXXXXXXXR tn/assignment 1` (or) `assign m/CS2103T tn/assignment 2`
 **Progress**| `progress m/MODULE_CODE tn/TASK_NAME` <br> Example: `progress m/CS2103T tn/assignment 1`
+**Sort**    | `sort`
 **Manual**  | `manual [COMMAND_NAME]` <br> Example: `manual` (or) `manual add`
 **Help**    | `help`
 **Exit**    | `exit`
