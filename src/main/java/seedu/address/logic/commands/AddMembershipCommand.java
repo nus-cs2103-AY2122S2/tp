@@ -28,7 +28,7 @@ public class AddMembershipCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + Membership.PREFIX + "gold "
-            + "[" + Membership.DATE_PREFIX + "2022-02-03]";
+            + Membership.DATE_PREFIX + "2022-02-03";
 
     public static final String MESSAGE_SUCCESS = "Added membership to %s (%s).";
 
