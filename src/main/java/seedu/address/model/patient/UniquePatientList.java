@@ -20,9 +20,9 @@ import seedu.address.model.patient.exceptions.PersonNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Patient#isSamePerson(Patient)
+ * @see Patient#isSamePatient(Patient)
  */
-public class UniquePersonList implements Iterable<Patient> {
+public class UniquePatientList implements Iterable<Patient> {
 
     private final ObservableList<Patient> internalList = FXCollections.observableArrayList();
     private final ObservableList<Patient> internalUnmodifiableList =
@@ -33,7 +33,7 @@ public class UniquePersonList implements Iterable<Patient> {
      */
     public boolean contains(Patient toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSamePatient);
     }
 
     /**
@@ -53,7 +53,7 @@ public class UniquePersonList implements Iterable<Patient> {
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
         int index = internalList.indexOf(target);
@@ -61,7 +61,7 @@ public class UniquePersonList implements Iterable<Patient> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPatient) && contains(editedPatient)) {
+        if (!target.isSamePatient(editedPatient) && contains(editedPatient)) {
             throw new DuplicatePersonException();
         }
 
@@ -79,7 +79,7 @@ public class UniquePersonList implements Iterable<Patient> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPatients(UniquePatientList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -88,9 +88,9 @@ public class UniquePersonList implements Iterable<Patient> {
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Patient> patients) {
+    public void setPatients(List<Patient> patients) {
         requireAllNonNull(patients);
-        if (!personsAreUnique(patients)) {
+        if (!patientsAreUnique(patients)) {
             throw new DuplicatePersonException();
         }
 
@@ -112,8 +112,8 @@ public class UniquePersonList implements Iterable<Patient> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniquePatientList // instanceof handles nulls
+                && internalList.equals(((UniquePatientList) other).internalList));
     }
 
     @Override
@@ -124,10 +124,10 @@ public class UniquePersonList implements Iterable<Patient> {
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean personsAreUnique(List<Patient> patients) {
+    private boolean patientsAreUnique(List<Patient> patients) {
         for (int i = 0; i < patients.size() - 1; i++) {
             for (int j = i + 1; j < patients.size(); j++) {
-                if (patients.get(i).isSamePerson(patients.get(j))) {
+                if (patients.get(i).isSamePatient(patients.get(j))) {
                     return false;
                 }
             }

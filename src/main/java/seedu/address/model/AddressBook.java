@@ -12,7 +12,7 @@ import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.medical.UniqueMedicalList;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.UniquePersonList;
+import seedu.address.model.patient.UniquePatientList;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.UniquePrescriptionList;
 import seedu.address.model.testresult.TestResult;
@@ -25,7 +25,7 @@ import seedu.address.model.testresult.UniqueTestResultList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePatientList patients;
     private final UniqueContactList contacts;
     private final UniqueConsultationList consultations;
     private final UniquePrescriptionList prescriptions;
@@ -40,7 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        patients = new UniquePatientList();
         contacts = new UniqueContactList();
         consultations = new UniqueConsultationList();
         prescriptions = new UniquePrescriptionList();
@@ -65,8 +65,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Patient> patients) {
-        this.persons.setPersons(patients);
+    public void setPatients(List<Patient> patients) {
+        this.patients.setPatients(patients);
     }
 
     /**
@@ -74,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
+        setPatients(newData.getPatientList());
         setContacts(newData.getContactList());
         setMedicals(newData.getMedicalList());
         setConsultations(newData.getConsultationList());
@@ -89,15 +89,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Patient patient) {
         requireNonNull(patient);
-        return persons.contains(patient);
+        return patients.contains(patient);
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Patient p) {
-        persons.add(p);
+    public void addPatient(Patient p) {
+        patients.add(p);
     }
 
     public void addPrescription(Prescription p) {
@@ -127,18 +127,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
 
-        persons.setPerson(target, editedPatient);
+        patients.setPatient(target, editedPatient);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Patient key) {
-        persons.remove(key);
+    public void removePatient(Patient key) {
+        patients.remove(key);
     }
 
     /**
@@ -282,7 +282,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons"
+        return patients.asUnmodifiableObservableList().size() + " persons"
                 + contacts.asUnmodifiableObservableList().size() + " contacts"
                 + consultations.asUnmodifiableObservableList().size() + " consultations"
                 + testResults.asUnmodifiableObservableList().size() + " test results";
@@ -290,8 +290,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Patient> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Patient> getPatientList() {
+        return patients.asUnmodifiableObservableList();
     }
 
     @Override
@@ -322,7 +322,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons))
+                && patients.equals(((AddressBook) other).patients))
                 && contacts.equals(((AddressBook) other).contacts)
                 && consultations.equals(((AddressBook) other).consultations)
                 && testResults.equals(((AddressBook) other).testResults);
@@ -330,7 +330,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return patients.hashCode();
     }
 
 

@@ -44,6 +44,7 @@ public class DeleteContactCommand extends Command {
 
         // Display patient screen when current view list is empty
         if (lastShownList.isEmpty()) {
+            CommandType.setViewCommandType(CommandType.DEFAULT);
             return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, contactToDelete),
                     CommandType.DEFAULT);
         }
