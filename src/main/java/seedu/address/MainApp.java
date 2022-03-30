@@ -84,7 +84,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         Optional<ReadOnlyInterviewSchedule> interviewListOptional;
-        ReadOnlyInterviewSchedule initialInterviewList;
+        ReadOnlyInterviewSchedule initialInterviewSchedule;
         try {
             addressBookOptional = storage.readAddressBook();
             interviewListOptional = storage.readInterviewSchedule();
@@ -96,17 +96,17 @@ public class MainApp extends Application {
             if (!interviewListOptional.isPresent()) {
                 logger.info("Data file for interviews not found. Will be starting with a sample InterviewSchedule");
             }
-            initialInterviewList = interviewListOptional.orElseGet(SampleDataUtil::getEmptyInterviewList);
+            initialInterviewSchedule = interviewListOptional.orElseGet(SampleDataUtil::getEmptyInterviewList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TalentAssistant");
             initialData = new AddressBook();
-            initialInterviewList = new InterviewSchedule();
+            initialInterviewSchedule = new InterviewSchedule();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TalentAssistant");
             initialData = new AddressBook();
-            initialInterviewList = new InterviewSchedule();
+            initialInterviewSchedule = new InterviewSchedule();
         }
-        return new ModelManager(initialData, initialInterviewList, userPrefs);
+        return new ModelManager(initialData, initialInterviewSchedule, userPrefs);
     }
 
     private void initLogging(Config config) {
