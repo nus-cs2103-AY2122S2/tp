@@ -16,7 +16,7 @@ public class EventFieldContainsKeywordsPredicate implements Predicate<Event> {
     @Override
     public boolean test(Event event) {
         return keywords.stream()
-                .anyMatch(keyword -> keyword.equalsIgnoreCase(field.apply(event)));
+                .anyMatch(keyword -> field.apply(event).toLowerCase().contains(keyword.toLowerCase()));
     }
 
     @Override

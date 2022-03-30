@@ -78,7 +78,8 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all persons: `list`
+### Person Commands:
+#### Listing all persons: `list`
 Shows a list of all persons in NUSocials.
 
 Format: `list`
@@ -87,130 +88,20 @@ Format: `list`
 * The different tags are listed as follows: yellow for education, blue for modules, orange for CCAs and red for internships.
 * Personal details are listed in the following order: Phone number, Address, Email.
 
-### Showing events: `showevents`
-Shows a list of all events in NUSocials.
-
-Format: `showevents`
-
-* Events shown are automatically sorted in chronological order.
-
-Alternate formats:
-1. `showevents -upcoming`<br>
-    * Shows a list of all upcoming events instead
-    <br><br>
-2. `showevents -past`<br>
-    * Shows a list of all past events instead
-
-### Adding a person: `add`
-Adds a person to NUSocials. 
+#### Adding a person: `add`
+Adds a person to NUSocials.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 Example:
 * `add n/Kim Lai p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
-Adds a person with the following fields:
-  - Name: Kim Lai
-  - Phone Number: 12345678
-  - Email: kimlai222@example.com
-  - Address: KL street, block 123, #01-01
+  Adds a person with the following fields:
+    - Name: Kim Lai
+    - Phone Number: 12345678
+    - Email: kimlai222@example.com
+    - Address: KL street, block 123, #01-01
 
-### Tagging a person: `tag`
-Tags additional information to an existing contact.
-
-Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
-
-* Tags the relevant information to the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list. 
-* At least one of the prefixes must be provided.
-* If a prefix is used, the input after must not be blank.
-* Input tag values will be added to the existing tags in their respective fields.
-
-Examples:
-* `tag 1 i/abc-company m/CS2100 m/CS2030S`<br>
-Tags the internship company and 2 modules to the 1st person in the currently shown contact list.
-* `tag 1 i/ m/`<br>
-This is an invalid command because there is no input given after a prefix is used.
-
-### Removing specific tags from person: `removetag`
-Removes the specific tags of an existing contact.
-
-Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
-
-* Removes the tags from the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list. 
-* At least one of the prefixes must be provided.
-* If a prefix is used, the input after must not be blank.
-* All inputs for tags provided must be an exact match to existing tags.
-
-Examples:
-* `removetag 1 i/abc-company m/CS2100 m/CS2030S`<br>
-Removes the internship company and 2 modules tags from the 1st person in the currently shown contact list.
-* `removetag 1 i/ m/`<br>
-This is an invalid command because there is no input given after a prefix is used.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If the existing education tags for person 1 contains "computer science", `removetag 1 edu/computer` would not lead to the
-removal of `computer science` from person 1 because it's not an exact match.
-</div>
-
-### Editing a person : `edit`
-
-Edits an existing person's details in NUSocials.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
-
-* Edits the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* At least one of the optional fields must be provided.
-
-Example:
-* `edit 1 p/91234567 e/KL123@example.com`<br>
-Edits the phone number and email address of the 1st person to `91234567` and `KL123@example.com` respectively.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Existing values will be overwritten and updated to the new input values!
-</div>
-
-### Adding an event: `event`
-Adds an event into NUSocials.
-
-Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
-
-* Tags the participating persons to the events based on the specified `INDEX…​`. 
-* The index refers to the index number shown in the displayed person list.
-* All fields must be provided.
-* Input provided for `DATE` has to be in the format of `yyyy-MM-dd`.
-* Input provided for `TIME` has to be in the format of `HH:mm`.
-* Inputs for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
-* `EVENT NAME` has a limit of 100 characters.
-* `EVENT DETAILS` has a limit of 300 characters.
-
-Example:
-* `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15`<br>
-Creates the Event and adds into NUSocials.
-
-### Cancelling an event : `cancelevent`
-
-Deletes the specified event from NUSocials.
-
-Format: `cancelevent INDEX`
-
-* Deletes the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed event list.
-
-Examples:
-* `list` followed by `cancelevent 2` deletes the 2nd event in the currently shown event list.
-
-Alternate Format: `cancelevent INDEX…​`
-
-* Deletes multiple events at the specified `INDEX` numbers.
-* The index refers to the index number shown in the displayed event list.
-* Each index **must be separated by a whitespace**
-
-Examples:
-* `list` followed by `cancelevent 2 5 7` deletes the 2nd, 5th and 7th events in the currently shown event list.
-
-### Deleting a person : `delete`
+#### Deleting a person : `delete`
 
 Deletes the specified person from NUSocials.
 
@@ -232,7 +123,64 @@ Alternate Format: `delete INDEX…​`
 Example:
 * `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the currently shown list.
 
-### Finding persons: `find`
+#### Editing a person : `edit`
+
+Edits an existing person's details in NUSocials.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+
+* Edits the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* At least one of the optional fields must be provided.
+
+Example:
+* `edit 1 p/91234567 e/KL123@example.com`<br>
+  Edits the phone number and email address of the 1st person to `91234567` and `KL123@example.com` respectively.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Existing values will be overwritten and updated to the new input values!
+</div>
+
+#### Tagging a person: `tag`
+Tags additional information to an existing contact.
+
+Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+
+* Tags the relevant information to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* At least one of the prefixes must be provided.
+* If a prefix is used, the input after must not be blank.
+* Input tag values will be added to the existing tags in their respective fields.
+
+Examples:
+* `tag 1 i/abc-company m/CS2100 m/CS2030S`<br>
+  Tags the internship company and 2 modules to the 1st person in the currently shown contact list.
+* `tag 1 i/ m/`<br>
+  This is an invalid command because there is no input given after a prefix is used.
+
+#### Removing specific tags from person: `removetag`
+Removes the specific tags of an existing contact.
+
+Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+
+* Removes the tags from the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* At least one of the prefixes must be provided.
+* If a prefix is used, the input after must not be blank.
+* All inputs for tags provided must be an exact match to existing tags.
+
+Examples:
+* `removetag 1 i/abc-company m/CS2100 m/CS2030S`<br>
+  Removes the internship company and 2 modules tags from the 1st person in the currently shown contact list.
+* `removetag 1 i/ m/`<br>
+  This is an invalid command because there is no input given after a prefix is used.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If the existing education tags for person 1 contains "computer science", `removetag 1 edu/computer` would not lead to the
+removal of `computer science` from person 1 because it's not an exact match.
+</div>
+
+#### Finding persons: `find`
 
 Finds persons that match any of the given fields and tags.
 
@@ -250,7 +198,7 @@ Examples:
 * `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find i/Shopee m/cs2040s cs2030s'](images/findShopeeCS2040sCS2030sResult.png)
 
-### Finding specific persons: `find -s`
+#### Finding specific persons: `find -s`
 
 Finds persons that match all given fields and tags.
 
@@ -267,7 +215,61 @@ Examples:
 * `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with cs2040s, cs2030s and Shopee)<br>
   ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
 
-### Finding an event: `find -e`
+### Event Commands:
+#### Showing events: `showevents`
+Shows a list of all events in NUSocials.
+
+Format: `showevents`
+
+* Events shown are automatically sorted in chronological order.
+
+Alternate formats:
+1. `showevents -upcoming`<br>
+    * Shows a list of all upcoming events instead
+    <br><br>
+2. `showevents -past`<br>
+    * Shows a list of all past events instead
+
+#### Adding an event: `event`
+Adds an event into NUSocials.
+
+Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
+
+* Tags the participating persons to the events based on the specified `INDEX…​`.
+* The index refers to the index number shown in the displayed person list.
+* All fields must be provided.
+* Input provided for `DATE` has to be in the format of `yyyy-MM-dd`.
+* Input provided for `TIME` has to be in the format of `HH:mm`.
+* Inputs for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
+* `EVENT NAME` has a limit of 100 characters.
+* `EVENT DETAILS` has a limit of 300 characters.
+
+Example:
+* `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15`<br>
+  Creates the Event and adds into NUSocials.
+
+#### Cancelling an event : `cancelevent`
+
+Deletes the specified event from NUSocials.
+
+Format: `cancelevent INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+
+Examples:
+* `cancelevent 2` deletes the 2nd event in the currently shown event list.
+
+Alternate Format: `cancelevent INDEX…​`
+
+* Deletes multiple events at the specified `INDEX` numbers.
+* The index refers to the index number shown in the displayed event list.
+* Each index **must be separated by a whitespace**
+
+Examples:
+* `cancelevent 2 5 7` deletes the 2nd, 5th and 7th events in the currently shown event list.
+
+#### Finding an event: `find -e`
 
 Finds an event that matches any of the given details
 

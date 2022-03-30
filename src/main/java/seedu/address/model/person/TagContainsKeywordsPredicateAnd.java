@@ -17,7 +17,7 @@ public abstract class TagContainsKeywordsPredicateAnd extends ContainsKeywordsPr
     public boolean test(Person person) {
         return keywords.stream()
                 .allMatch(keyword -> field.apply(person).stream()
-                        .anyMatch(tag -> tag.equalsIgnoreCase(keyword)));
+                        .anyMatch(tag -> tag.contains(keyword.toLowerCase())));
     }
 
     @Override

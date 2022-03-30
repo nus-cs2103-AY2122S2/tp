@@ -45,7 +45,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.displayPersonForDelete());
+                personToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -69,7 +69,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.displayPersonForDelete());
+                personToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -97,9 +97,9 @@ public class DeleteCommandTest {
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person personToDelete3 = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         StringBuilder personsToDelete = new StringBuilder();
-        personsToDelete.append(personToDelete3.displayPersonForDelete())
-                .append(System.lineSeparator()).append(personToDelete1.displayPersonForDelete())
-                .append(System.lineSeparator()).append(personToDelete2.displayPersonForDelete());
+        personsToDelete.append(personToDelete3)
+                .append(System.lineSeparator()).append(personToDelete1)
+                .append(System.lineSeparator()).append(personToDelete2);
 
         DeleteCommand deleteCommand = new DeleteCommand(
                 new Index[]{INDEX_THIRD_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON});
@@ -122,9 +122,9 @@ public class DeleteCommandTest {
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person personToDelete3 = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         StringBuilder personsToDelete = new StringBuilder();
-        personsToDelete.append(personToDelete1.displayPersonForDelete())
-                    .append(System.lineSeparator()).append(personToDelete2.displayPersonForDelete())
-                    .append(System.lineSeparator()).append(personToDelete3.displayPersonForDelete());
+        personsToDelete.append(personToDelete1)
+                    .append(System.lineSeparator()).append(personToDelete2)
+                    .append(System.lineSeparator()).append(personToDelete3);
 
         DeleteCommand deleteCommand = new DeleteCommand(
                 new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON});
@@ -147,9 +147,9 @@ public class DeleteCommandTest {
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person personToDelete3 = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         StringBuilder personsToDelete = new StringBuilder();
-        personsToDelete.append(personToDelete3.displayPersonForDelete())
-                .append(System.lineSeparator()).append(personToDelete2.displayPersonForDelete())
-                .append(System.lineSeparator()).append(personToDelete1.displayPersonForDelete());
+        personsToDelete.append(personToDelete3)
+                .append(System.lineSeparator()).append(personToDelete2)
+                .append(System.lineSeparator()).append(personToDelete1);
 
         DeleteCommand deleteCommand = new DeleteCommand(
                 new Index[]{INDEX_THIRD_PERSON, INDEX_SECOND_PERSON, INDEX_FIRST_PERSON});
