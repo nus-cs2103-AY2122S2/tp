@@ -249,7 +249,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < internalList.size(); i++) {
             Interview curr = internalList.get(i);
             if (curr.getPosition().equals(positionToBeUpdated)) {
-                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition));
+                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition, curr.getStatus()));
             }
         }
     }
@@ -263,7 +263,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < internalList.size(); i++) {
             Interview curr = internalList.get(i);
             if (curr.getApplicant().equals(applicantToBeUpdated)) {
-                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition()));
+                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition(), curr.getStatus()));
             }
         }
     }

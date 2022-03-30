@@ -31,6 +31,17 @@ public class Interview {
         this.status = new Status();
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Interview(Applicant applicant, LocalDateTime date, Position position, Status status) {
+        requireAllNonNull(applicant, date);
+        this.applicant = applicant;
+        this.date = date;
+        this.position = position;
+        this.status = status;
+    }
+
     public Applicant getApplicant() {
         return applicant;
     }
@@ -144,6 +155,7 @@ public class Interview {
         Interview otherInterview = (Interview) other;
         return otherInterview.getApplicant().equals(getApplicant())
                 && otherInterview.getDate().equals(getDate())
+                && otherInterview.getStatus().equals(getStatus())
                 && otherInterview.getPosition().equals(getPosition());
     }
 

@@ -59,8 +59,8 @@ public class AcceptInterviewCommand extends Command {
         acceptedInterview.markAsPassed();
         acceptedInterview.markAsAccepted();
         model.setInterview(interviewToAccept, acceptedInterview);
-        model.updatePosition(oldPosition, newPosition);
         model.updateApplicant(oldApplicant, newApplicant);
+        model.updatePosition(oldPosition, newPosition);
 
         return new CommandResult(String.format(MESSAGE_ACCEPT_INTERVIEW_SUCCESS, acceptedInterview),
                 getCommandDataType());
