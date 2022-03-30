@@ -34,12 +34,10 @@ public class EditPrescriptionCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW PRESCRIPTION INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_NAME + "DRUG_NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_INSTRUCTION + "INSTRUCTION \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NRIC + "S1234567L "
             + PREFIX_INSTRUCTION + "1 tablet per day";
 
     public static final String MESSAGE_EDIT_PRESCRIPTION_SUCCESS = "Edited Prescription Information: %1$s";
@@ -63,7 +61,7 @@ public class EditPrescriptionCommand extends Command {
         List<Prescription> lastShownList = model.getFilteredPrescriptionList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TEST_RESULT_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PRESCRIPTION_DISPLAYED_INDEX);
         }
 
         Prescription prescription = lastShownList.get(targetIndex.getZeroBased());

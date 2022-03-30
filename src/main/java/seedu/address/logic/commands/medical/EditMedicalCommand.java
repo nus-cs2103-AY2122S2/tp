@@ -290,7 +290,7 @@ public class EditMedicalCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
+            if (!(other instanceof EditCommand.EditPatientDescriptor)) {
                 return false;
             }
 
