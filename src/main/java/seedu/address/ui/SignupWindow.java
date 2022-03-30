@@ -23,8 +23,8 @@ import seedu.address.commons.core.LogsCenter;
 public class SignupWindow extends UiPart<Stage> {
     private static final String FXML = "SignupWindow.fxml";
     private static final String SCREEN_TITLE = "Welcome to MedBook\nPlease type in a new password to get started";
-    private static final String PASSWORD_DOES_NOT_MATCH_MESSAGE = "Oops. Your password the format\n"
-            + "Please double check again";
+    private static final String PASSWORD_DOES_NOT_MEET_REQUIREMENTS_MESSAGE = "Oops. Your password format does not meet"
+            + "the following requirements\nPlease double check again";
     private static final String PASSWORD_EMPTY_MESSAGE = "Oops. Your password is empty";
 
     private static final Image APPROVE_IMAGE = new Image("/images/approve.png");
@@ -138,7 +138,7 @@ public class SignupWindow extends UiPart<Stage> {
         if (isValidPassword(userPassword.getText(), userRepeatPassword.getText())) {
             handleNewPassword();
         } else {
-            responseDisplay.setText(PASSWORD_DOES_NOT_MATCH_MESSAGE);
+            responseDisplay.setText(PASSWORD_DOES_NOT_MEET_REQUIREMENTS_MESSAGE);
             responseDisplay.setTextFill(Color.web("#D06651"));
         }
     }
@@ -163,11 +163,11 @@ public class SignupWindow extends UiPart<Stage> {
 
     private boolean isValidPassword(String password, String repeatPassword) {
         if (password.equals(repeatPassword) && !repeatPassword.isEmpty()) {
-            conditionText1.setText("Password match");
+            conditionText1.setText("Passwords match");
             conditionImage1.setImage(APPROVE_IMAGE);
         } else {
             conditionImage1.setImage(REJECT_IMAGE);
-            conditionText1.setText("Password mismatch");
+            conditionText1.setText("Passwords do not match");
         }
 
         if (password.length() >= 8) {

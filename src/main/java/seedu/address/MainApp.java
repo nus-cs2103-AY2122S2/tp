@@ -205,6 +205,7 @@ public class MainApp extends Application {
             if (!authentication.isLoggedIn()) {
                 return;
             }
+            storage.saveAddressBook(model.getAddressBook());
             storage.saveUserPrefs(model.getUserPrefs());
             authentication.createEncryptedFile(storage.getAddressBookFilePath());
             FileUtil.deleteFile(storage.getAddressBookFilePath());
