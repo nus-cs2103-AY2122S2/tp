@@ -11,7 +11,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all tags in the address book to the user.
  */
 public class ListTagCommand extends Command {
 

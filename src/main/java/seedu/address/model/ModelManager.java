@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ObservableList<Tag> tags;
+    private boolean isMouseUxEnabled;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         tags = this.addressBook.getTagList();
+        isMouseUxEnabled = false;
     }
 
     public ModelManager() {
@@ -140,6 +142,21 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags;
+    }
+
+    @Override
+    public void enableMouseUX() {
+        isMouseUxEnabled = true;
+    }
+
+    @Override
+    public void disableMouseUX() {
+        isMouseUxEnabled = false;
+    }
+
+    @Override
+    public boolean isMouseUxEnabled() {
+        return isMouseUxEnabled;
     }
 
     //=========== Filtered Person List Accessors =============================================================

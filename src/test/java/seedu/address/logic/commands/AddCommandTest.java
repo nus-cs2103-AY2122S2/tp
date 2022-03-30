@@ -173,6 +173,21 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void disableMouseUX() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void enableMouseUX() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isMouseUxEnabled() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
