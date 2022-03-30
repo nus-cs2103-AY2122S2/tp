@@ -13,7 +13,7 @@ import seedu.address.model.property.Property;
 import seedu.address.storage.ReminderPersons;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Person} with the corresponding {@code Reminder}.
  */
 public class ReminderPersonCard extends UiPart<Region> {
 

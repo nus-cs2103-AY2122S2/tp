@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of persons with Reminders.
  */
 public class ReminderPersonListPanel extends UiPart<Region> {
     private static final String FXML = "ReminderPersonListPanel.fxml";

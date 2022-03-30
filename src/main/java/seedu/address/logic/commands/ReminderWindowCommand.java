@@ -1,10 +1,11 @@
-package seedu.address.logic;
+package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * A Window containing the list of Persons & their corresponding Reminders.
+ */
 public class ReminderWindowCommand extends Command {
     public static final String COMMAND_WORD = "rm";
     public static final String MESSAGE_REMINDERS_WINDOW_SUCCESS =
