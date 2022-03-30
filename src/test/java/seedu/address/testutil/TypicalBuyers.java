@@ -29,7 +29,7 @@ public class TypicalBuyers {
     public static final Buyer YUQI = new BuyerBuilder().withName("Alice Pauline")
             .withPhone("94351253").withAppointment("2022-05-01-12-00")
             .withTags("friends").build();
-    public static final Buyer SHIHONG = new BuyerBuilder().withName("Benson Meier")
+    public static final Buyer BENSON = new BuyerBuilder().withName("Benson Meier")
             .withPhone("98765432").withAppointment("2022-05-04-09-00")
             .withTags("owesMoney", "friends").build();
     public static final Buyer JUNHENG = new BuyerBuilder().withName("Carl Kurz")
@@ -66,9 +66,9 @@ public class TypicalBuyers {
     private TypicalBuyers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical clients.
+     * Returns an {@code BuyerAddressBook} with all the typical buyers.
      */
-    public static BuyerAddressBook getTypicalAddressBook() {
+    public static BuyerAddressBook getTypicalBuyerAddressBook() {
         BuyerAddressBook ab = new BuyerAddressBook();
         for (Buyer buyer : getTypicalBuyers()) {
             ab.addBuyer(buyer);
@@ -77,6 +77,6 @@ public class TypicalBuyers {
     }
 
     public static List<Buyer> getTypicalBuyers() {
-        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, SHIHONG, JANALD, DARA, RICHARD, YUQI));
+        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, BENSON, JANALD, DARA, RICHARD, YUQI));
     }
 }
