@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showTransactionAtIndex;
 import static seedu.address.testutil.TransactionUtil.INDEX_FIRST_TRANSACTION;
 import static seedu.address.testutil.TypicalTransactions.getTypicalAddressBook;
 

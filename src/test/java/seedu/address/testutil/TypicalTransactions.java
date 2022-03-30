@@ -2,8 +2,9 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.PersonUtil.AMY;
 import static seedu.address.testutil.PersonUtil.BOB;
-import static seedu.address.testutil.TransactionUtil.*;
-//import static seedu.address.testutil.TransactionUtil.TRANSACTION_THREE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_THREE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO;
 
 import java.util.ArrayList;
 import java.util.Arrays;

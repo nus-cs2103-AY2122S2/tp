@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PersonUtil.AMY;
-import static seedu.address.testutil.TransactionUtil.*;
-//import static seedu.address.testutil.TransactionUtil.INVALID_TRANSACTION;
+import static seedu.address.testutil.TransactionUtil.INVALID_TRANSACTION;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO;
+import static seedu.address.testutil.TransactionUtil.VALID_INDEX;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

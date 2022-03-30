@@ -115,7 +115,7 @@ public class Transaction implements Serializable {
         requireAllNonNull(prefix);
         HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
         fieldsCopy.remove(prefix);
-        return new Transaction(getTransactionId(),fieldsCopy.values(), getPersonId());
+        return new Transaction(getTransactionId(), fieldsCopy.values(), getPersonId());
     }
 
     /**
@@ -127,7 +127,7 @@ public class Transaction implements Serializable {
         requireAllNonNull(field);
         HashMap<Prefix, TransactionField> fieldsCopy = new HashMap<>(fields);
         fieldsCopy.put(field.prefix, field);
-        return new Transaction(getTransactionId(),fieldsCopy.values(), getPersonId());
+        return new Transaction(getTransactionId(), fieldsCopy.values(), getPersonId());
     }
 
     public Transaction setField(TransactionField field) {
