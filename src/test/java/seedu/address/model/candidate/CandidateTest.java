@@ -97,4 +97,34 @@ public class CandidateTest {
                 new InterviewStatus(VALID_INTERVIEW_SCHEDULED));
     }
 
+    @Test
+    public void looseEquals() {
+        Candidate aliceCopy = new CandidateBuilder(ALICE).build();
+        assertTrue(ALICE.looseEqual(aliceCopy));
+
+        // same object -> returns true
+        assertTrue(ALICE.looseEqual(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.looseEqual(null));
+
+        // different candidate -> returns false
+        assertFalse(ALICE.looseEqual(BOB));
+
+        // different name -> returns false
+        Candidate editedAlice = new CandidateBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.looseEqual(editedAlice));
+
+        // different phone -> returns false
+        editedAlice = new CandidateBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.looseEqual(editedAlice));
+
+        // different email -> returns false
+        editedAlice = new CandidateBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.looseEqual(editedAlice));
+
+        // different address -> returns false
+        editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).build();
+        assertFalse(ALICE.looseEqual(editedAlice));
+    }
 }

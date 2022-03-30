@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.model.candidate.ApplicationStatus.ACCEPTED_STATUS;
 import static seedu.address.model.candidate.ApplicationStatus.PENDING_STATUS;
 import static seedu.address.model.candidate.ApplicationStatus.REJECTED_STATUS;
@@ -49,6 +48,8 @@ public class FocusCard extends UiPart<Region> {
     private static final String SENIORITY_VALUE = "COM";
     private static final String SCHEDULE_MESSAGE = "Scheduled interview on:";
     private static final String NO_SCHEDULE_MESSAGE = "No interview scheduled!";
+    private static final String EMPTY_MESSAGE = " ";
+
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -58,7 +59,7 @@ public class FocusCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Candidate candidate;
+    private Candidate candidate;
     private Interview interview;
 
     @FXML
@@ -106,19 +107,26 @@ public class FocusCard extends UiPart<Region> {
 
     public FocusCard(Candidate candidate, Interview interview) {
         super(FXML);
-        requireNonNull(candidate);
-        this.candidate = candidate;
-        this.interview = interview;
-        id.setText(candidate.getStudentId().toString());
-        name.setText(candidate.getName().fullName);
-        phone.setText(candidate.getPhone().value);
-        email.setText(candidate.getEmail().value);
-        course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
-        setProfilePicture(candidate.getName());
-        setApplicationStatus(candidate.getApplicationStatus());
-        setInterviewStatus(candidate.getInterviewStatus());
-        setAvailableDays(candidate.getAvailability());
-        setSchedule();
+        if (candidate == null) {
+            id.setText(EMPTY_MESSAGE);
+            name.setText(EMPTY_MESSAGE);
+            phone.setText(EMPTY_MESSAGE);
+            email.setText(EMPTY_MESSAGE);
+            course.setText(EMPTY_MESSAGE);
+        } else {
+            this.candidate = candidate;
+            this.interview = interview;
+            id.setText(candidate.getStudentId().toString());
+            name.setText(candidate.getName().fullName);
+            phone.setText(candidate.getPhone().value);
+            email.setText(candidate.getEmail().value);
+            course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
+            setProfilePicture(candidate.getName());
+            setApplicationStatus(candidate.getApplicationStatus());
+            setInterviewStatus(candidate.getInterviewStatus());
+            setAvailableDays(candidate.getAvailability());
+            setSchedule();
+        }
     }
 
     @Override
@@ -232,5 +240,9 @@ public class FocusCard extends UiPart<Region> {
         } else {
             scheduleMessage.setText(NO_SCHEDULE_MESSAGE);
         }
+    }
+
+    public Candidate getCandidate() {
+        return candidate;
     }
 }
