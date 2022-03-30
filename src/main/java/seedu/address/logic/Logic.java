@@ -54,4 +54,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     void switchAddressBook() throws CommandException;
+
+    void archivePersonByIndex(String oneBasedString) throws CommandException;
 }

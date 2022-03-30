@@ -231,8 +231,9 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Function to archive the selected person's information
      */
-    private void handleArchive(CommandResult result) {
-        System.out.println("INDEX TO ARCHIVE" + result.getFeedbackToUser());
+    private void handleArchive(CommandResult result) throws CommandException {
+        String oneBasedTarget = result.getFeedbackToUser();
+        logic.archivePersonByIndex(oneBasedTarget);
     }
 
     /**

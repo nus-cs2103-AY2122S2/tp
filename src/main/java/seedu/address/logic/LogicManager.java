@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -116,5 +117,16 @@ public class LogicManager implements Logic {
 
         model.setAddressBook(new AddressBook(initialData));
         System.out.println(getArchivedAddressBookFilePath().toString());
+    }
+
+    @Override
+    public void archivePersonByIndex(String oneBasedString) throws CommandException {
+        Index oneBased = Index.fromOneBased(Integer.parseInt(oneBasedString));
+
+        Person target = model.getFilteredPersonList().get(oneBased.getZeroBased());
+        model.deletePerson(target);
+        switchAddressBook();
+        model.addPerson(target);
+        switchAddressBook();
     }
 }
