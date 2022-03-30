@@ -3,6 +3,7 @@ package seedu.address.model.theme;
 import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
 
 /**
  * Represents a Light Theme.
@@ -10,6 +11,8 @@ import javafx.fxml.FXML;
 public class LightTheme extends Theme {
     private final String lightThemeResource = requireNonNull(getClass().getResource("/view/LightTheme.css"))
             .toExternalForm();
+    private final String lightExtensionsResource = requireNonNull(getClass()
+            .getResource("/view/ExtensionsLight.css")).toExternalForm();
 
     public LightTheme() {}
 
@@ -18,10 +21,10 @@ public class LightTheme extends Theme {
      */
     @Override
     @FXML
-    public void applyTheme() {
-        this.stage.getScene().getStylesheets().clear();
-        this.stage.getScene().getStylesheets().add(this.lightThemeResource);
-        this.stage.getScene().getStylesheets().add(this.extensionsResource);
+    public void applyTheme(Stage stage) {
+        stage.getScene().getStylesheets().clear();
+        stage.getScene().getStylesheets().add(this.lightThemeResource);
+        stage.getScene().getStylesheets().add(this.lightExtensionsResource);
     }
 
     @Override
@@ -30,7 +33,10 @@ public class LightTheme extends Theme {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof LightTheme;
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof LightTheme
+                && lightThemeResource.equals(((LightTheme) other).lightExtensionsResource)
+                && lightExtensionsResource.equals(((LightTheme) other).lightExtensionsResource));
     }
 }
