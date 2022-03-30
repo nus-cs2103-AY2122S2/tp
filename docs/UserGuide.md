@@ -63,6 +63,30 @@ TAssist is a **desktop app for managing students and their participation in less
 
 </div>
 
+### Command Parameters
+
+<table>
+<tbody>
+    <tr>
+        <th>Parameter</th>
+        <th>Prefix</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>ACADEMIC_YEAR</code></td>
+        <td>a/</td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td><code>ASSESSMENT_INDEX</code></td>
+<td>a/</td>
+        <td>
+        </td>
+    </tr>
+</tbody>
+</table>
+
 ### Adding entries
 
 #### Adding a module: `add module`
