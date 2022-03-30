@@ -41,9 +41,9 @@ public class EditTaskCommand extends Command {
             + "[" + PREFIX_TIME + " TIME] \n"
             + "At least one of " + PREFIX_DESCRIPTION + " "
             + PREFIX_DATE + " " + PREFIX_TIME + " must have a value. \n"
-            + "For an event task, a start time and an end time" +
-            " separated with an empty space" + "\n must be provided" +
-            " instead of a single time value. \n"
+            + "For an event task, a start time and an end time"
+            + " separated with an empty space" + "\n must be provided"
+            + " instead of a single time value. \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + " Eat bananas "
             + "\n"
