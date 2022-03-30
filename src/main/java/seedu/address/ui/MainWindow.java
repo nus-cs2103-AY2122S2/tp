@@ -205,12 +205,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * GUI alternative to activate a SwitchCommand.
+     * TODO: Bind F10 to this function
+     */
     @FXML
     private void handleSwitchMenu() throws CommandException, ParseException {
         logger.info("Switch Menu Item fired!!!");
         executeCommand("switch");
     }
 
+    /**
+     * Function to perform operations involving logic object
+     */
     private void handleSwitch() {
         logger.info("Handle Switch fired!");
         logic = logic.switchAddressBook();
