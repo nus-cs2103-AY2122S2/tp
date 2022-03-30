@@ -204,6 +204,30 @@ Exits the program.
 
 Format: `exit`
 
+### Setting a Reminder for a person: `remind`
+
+Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the Reminder window.
+
+Format: `remind INDEX r/ReminderDetails`
+- Sets a Reminder for the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a postive integer** 1, 2, 3, ...
+- The `ReminderDetails` must be a non-empty String, e.g. `arrange home viewing`.
+
+### Open Reminder window:
+
+Opens a new window that displays compacted list of clients that have Reminders set.
+
+#### By Command: `rm`
+
+Format: `rm`
+
+#### By Ui:
+
+1) Navigate to the `File` menu and click on it.
+2) Under it, click on `Reminders`.
+3) The system will launc the `Reminder` window that contains a list of Persons the user has set Reminders for.
+
 ### Favourite a person: `favourite`
 
 Favourites the specified client from the application represented by a star as show below. The user (real estate agent) will be able to view the more compact list of favorited clients in a new window called the Favourites window.
