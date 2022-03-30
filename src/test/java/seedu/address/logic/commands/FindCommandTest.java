@@ -67,7 +67,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneKeyword_onePersonFound() {
-        // One name inputtedand only one person has this name -> one person shown
+        // One name inputted and only one person has this name -> one person shown
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("Elle");
         FindCommand command = new FindCommand(predicate);
