@@ -40,16 +40,15 @@ public class AddressBookParser {
 
     /**
      * Checks whether command that does not require any parameters such as {@Code ListCommand} are input by the user.
-     * @param userInput full user input string
+     * @param arguments any arguments that user may have added
      * @param commandWord the type of command inputted
      * @throws ParseException if the user input additional parameters
      */
-    private void checkForSingleCommandWord(String userInput, String commandWord) throws ParseException {
-        for (int i = 0; i < singleCommandList.length; i++) {
-            if (singleCommandList[i].equals(commandWord)) {
-                if (userInput.split(" ").length != 1) {
-                    throw new ParseException(MESSAGE_IRRELEVANT_PARAMETERS);
-                }
+    private void checkForSingleCommandWord(String arguments, String commandWord) throws ParseException {
+        String trimmedArgs = arguments.trim();
+        for (String command : singleCommandList) {
+            if (command.equals(commandWord) && !trimmedArgs.isEmpty()) {
+                throw new ParseException(MESSAGE_IRRELEVANT_PARAMETERS);
             }
         }
     }
@@ -70,7 +69,7 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        checkForSingleCommandWord(userInput, commandWord);
+        checkForSingleCommandWord(arguments, commandWord);
 
         switch (commandWord) {
 
