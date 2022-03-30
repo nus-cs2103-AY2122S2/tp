@@ -102,7 +102,7 @@ The role tags are colour coded in order to make use of the GUI to better inform 
 
 ### Reminder Window
 
-![Reminder Window](images/HomeScreen.png)
+![Reminder Window](images/ReminderWindow.png)
 
 |   Component   | Function                                                                                                             |
 |:-------------:|----------------------------------------------------------------------------------------------------------------------|
