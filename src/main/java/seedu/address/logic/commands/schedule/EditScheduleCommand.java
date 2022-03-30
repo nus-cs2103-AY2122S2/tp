@@ -5,10 +5,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
@@ -81,7 +84,7 @@ public class EditScheduleCommand extends ScheduleCommand {
         model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
         int indexCandidate = model.getFilteredCandidateList().indexOf(editedInterview.getCandidate());
-
+        Logger.getLogger(EditScheduleCommand.class.getName()).log(Level.INFO, String.valueOf(indexCandidate));
         return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
                 + " to " + editedInterview.getInterviewDate() + " " + editedInterview.getInterviewStartTime()),
                 false, false, false, -1, true, indexCandidate);
