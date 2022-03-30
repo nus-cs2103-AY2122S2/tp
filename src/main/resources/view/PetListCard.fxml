@@ -14,39 +14,76 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" prefWidth="300.0" />
-         <ColumnConstraints />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="447.0" minWidth="304.0" prefWidth="407.0" />
+         <ColumnConstraints maxWidth="474.0" minWidth="331.0" prefWidth="371.0" />
         </columnConstraints>
         <VBox alignment="CENTER" minHeight="105" GridPane.columnIndex="0">
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <Label fx:id="id" styleClass="cell_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="name" styleClass="cell_big_label" text="\$first">
-               <font>
-                  <Font name="Montserrat Bold" size="13.0" />
-               </font></Label>
-            </HBox>
-            <VBox alignment="CENTER_LEFT">
-                <FlowPane fx:id="tags" styleClass="cell_small_label" />
+            <VBox alignment="CENTER_LEFT" prefHeight="109.0" prefWidth="308.0">
+               <HBox alignment="CENTER_LEFT" spacing="5">
+                   <Label fx:id="id" styleClass="cell_big_label">
+                       <minWidth>
+                           <!-- Ensures that the label text is never truncated -->
+                           <Region fx:constant="USE_PREF_SIZE" />
+                       </minWidth>
+                   </Label>
+                   <Label fx:id="name" styleClass="cell_big_label" text="\$first">
+                  <font>
+                     <Font name="Montserrat Bold" size="13.0" />
+                  </font>
+               </Label>
+               </HBox>
+                <FlowPane fx:id="tags" />
                 <Label fx:id="ownerName" styleClass="cell_small_label" text="\$ownerName" />
                 <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
                 <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-                <Label fx:id="diet" styleClass="cell_small_label" text="\$diet" />
-                <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" />
+            <HBox prefHeight="24.0" prefWidth="280.0">
+               <children>
+                  <VBox prefHeight="24.0" prefWidth="30.0">
+                     <children>
+                        <FlowPane fx:id="dietLabel" prefHeight="17.0" prefWidth="25.0" stylesheets="@DarkTheme.css">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding></FlowPane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="24.0" prefWidth="342.0">
+                     <children>
+                            <Label fx:id="diet" prefHeight="17.0" prefWidth="355.0" styleClass="cell_small_label" text="\$diet" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="1.5" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="14.0" prefWidth="280.0">
+               <children>
+                  <VBox prefHeight="17.0" prefWidth="76.0">
+                     <children>
+                        <FlowPane fx:id="appLabel" prefHeight="13.0" prefWidth="91.0">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="17.0" prefWidth="312.0">
+                     <children>
+                            <Label fx:id="appointment" prefHeight="17.0" prefWidth="247.0" styleClass="cell_small_label" text="\$appointment" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             </VBox>
         </VBox>
-        <VBox id="attendancePane" alignment="CENTER" minHeight="105" GridPane.columnIndex="1">
+        <VBox id="attendancePane" alignment="CENTER" minHeight="105" prefWidth="478.0" GridPane.columnIndex="1">
             <padding>
                 <Insets bottom="5" left="5" right="5" top="5" />
             </padding>
-            <VBox alignment="CENTER_LEFT">
+            <VBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="140.0">
                 <padding>
                     <Insets bottom="5" top="5" />
                 </padding>
@@ -59,10 +96,10 @@
                </padding></Label>
                 <FlowPane fx:id="attendanceTags" alignment="CENTER_LEFT">
                <padding>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="5.0" />
                </padding></FlowPane>
             </VBox>
-            <VBox alignment="CENTER_LEFT">
+            <VBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="381.0">
                 <padding>
                     <Insets bottom="5" top="5" />
                 </padding>
