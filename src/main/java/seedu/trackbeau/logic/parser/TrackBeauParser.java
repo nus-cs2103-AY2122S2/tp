@@ -10,6 +10,13 @@ import seedu.trackbeau.logic.commands.ClearCommand;
 import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.ExitCommand;
 import seedu.trackbeau.logic.commands.HelpCommand;
+import seedu.trackbeau.logic.commands.PlotAllergyChartCommand;
+import seedu.trackbeau.logic.commands.PlotCommand;
+import seedu.trackbeau.logic.commands.PlotHairChartCommand;
+import seedu.trackbeau.logic.commands.PlotMonthlyCustomerChartCommand;
+import seedu.trackbeau.logic.commands.PlotServiceChartCommand;
+import seedu.trackbeau.logic.commands.PlotSkinChartCommand;
+import seedu.trackbeau.logic.commands.PlotStaffChartCommand;
 import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.commands.booking.DeleteBookingCommand;
 import seedu.trackbeau.logic.commands.customer.AddCustomerCommand;
@@ -95,6 +102,29 @@ public class TrackBeauParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        // chart commands
+
+        case PlotAllergyChartCommand.COMMAND_WORD:
+            return new PlotAllergyChartCommand();
+
+        case PlotServiceChartCommand.COMMAND_WORD:
+            return new PlotServiceChartCommand();
+
+        case PlotStaffChartCommand.COMMAND_WORD:
+            return new PlotStaffChartCommand();
+
+        case PlotHairChartCommand.COMMAND_WORD:
+            return new PlotHairChartCommand();
+
+        case PlotSkinChartCommand.COMMAND_WORD:
+            return new PlotSkinChartCommand();
+
+        case PlotMonthlyCustomerChartCommand.COMMAND_WORD:
+            return new PlotMonthlyCustomerChartCommand();
+
+        case PlotCommand.COMMAND_WORD:
+            return new PlotCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
