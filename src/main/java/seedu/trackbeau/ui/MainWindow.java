@@ -1,5 +1,6 @@
 package seedu.trackbeau.ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -41,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private ServiceListPanel serviceListPanel;
     private BookingListPanel bookingListPanel;
     private StatisticsPanel statisticsPanel;
+    private SchedulePanel schedulePanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,6 +67,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Label bookingsLabel;
+
+    @FXML
+    private Label scheduleLabel;
 
     @FXML
     private Label statisticsLabel;
@@ -93,6 +98,7 @@ public class MainWindow extends UiPart<Stage> {
         this.labels.add(servicesLabel);
         this.labels.add(bookingsLabel);
         this.labels.add(statisticsLabel);
+        this.labels.add(scheduleLabel);
 
         customersLabel.getStyleClass().add("selected");
         for (Label l : this.labels) {
@@ -128,6 +134,10 @@ public class MainWindow extends UiPart<Stage> {
         case "bookingsLabel":
             bookingListPanel = new BookingListPanel(logic.getFilteredBookingList());
             detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
+            break;
+        case "scheduleLabel":
+            schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), LocalDate.now());
+            detailsPanelPlaceholder.getChildren().add(schedulePanel.getRoot());
             break;
         case "statisticsLabel":
             statisticsPanel = new StatisticsPanel();

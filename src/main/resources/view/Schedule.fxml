@@ -16,7 +16,12 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <Label styleClass="weekdayLabel" text="Mon" />
+                  <HBox>
+                     <children>
+                              <Label styleClass="weekdayLabel" text="Mon, " />
+                        <Label fx:id="monDate" styleClass="weekdayLabel" text="\$Date" />
+                     </children>
+                  </HBox>
                   <ListView fx:id="monListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
@@ -25,7 +30,12 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <Label styleClass="weekdayLabel" text="Tue" />
+                  <HBox>
+                     <children>
+                              <Label styleClass="weekdayLabel" text="Tue, " />
+                        <Label fx:id="tueDate" styleClass="weekdayLabel" text="\$Date" />
+                     </children>
+                  </HBox>
                   <ListView fx:id="tueListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
@@ -34,7 +44,12 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <Label styleClass="weekdayLabel" text="Wed" />
+                  <HBox>
+                     <children>
+                              <Label styleClass="weekdayLabel" text="Wed, " />
+                        <Label fx:id="wedDate" styleClass="weekdayLabel" text="\$Date" />
+                     </children>
+                  </HBox>
                   <ListView fx:id="wedListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
@@ -43,7 +58,12 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <Label styleClass="weekdayLabel" text="Thu" />
+                  <HBox>
+                     <children>
+                              <Label styleClass="weekdayLabel" text="Thu, " />
+                        <Label fx:id="thuDate" styleClass="weekdayLabel" text="\$Date" />
+                     </children>
+                  </HBox>
                   <ListView fx:id="thuListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
@@ -52,7 +72,12 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <Label styleClass="weekdayLabel" text="Fri" />
+                  <HBox>
+                     <children>
+                              <Label styleClass="weekdayLabel" text="Fri, " />
+                        <Label fx:id="friDate" styleClass="weekdayLabel" text="\$Date" />
+                     </children>
+                  </HBox>
                   <ListView fx:id="friListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
@@ -61,7 +86,12 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <Label styleClass="weekendLabel" text="Sat" />
+                  <HBox>
+                     <children>
+                              <Label styleClass="weekendLabel" text="Sat, " />
+                        <Label fx:id="satDate" styleClass="weekendLabel" text="\$Date" />
+                     </children>
+                  </HBox>
                   <ListView fx:id="satListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
@@ -70,7 +100,12 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <Label styleClass="weekendLabel" text="Sun" />
+                  <HBox>
+                     <children>
+                              <Label styleClass="weekendLabel" text="Sun, " />
+                        <Label fx:id="sunDate" styleClass="weekendLabel" text="\$Date" />
+                     </children>
+                  </HBox>
                   <ListView fx:id="sunListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
