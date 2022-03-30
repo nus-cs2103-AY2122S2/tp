@@ -89,6 +89,25 @@ Shows a list of all employees in ManageEZPZ.
 
 Format: `listEmployee`
 
+### Finding Employees by multiple options : `findEmployee`
+
+Finds employee(s) based on multiple conditions provided.
+
+Note:
+* Parameters for finding employees can be entered together in any order.
+* You must enter at least one parameter.
+
+Format: `findEmployee [n/NAMES] [p/PHONE_NUMBER] [e/EMAIL]`
+* `findEmployee n/[LIST OF NAMES]` finds employees whose names contain any of the words in [LIST OF NAMES].
+* `findEmployee p/PHONE_NUMBER` finds employees with the exact phone number.
+* `findEmployee e/EMAIL` finds employees with the exact email.
+
+Examples:
+* `findEmployee n/Alex`
+* `findEmployee p/87438807`
+* `findEmployee e/alexyeoh@example.com`
+* `findEmployee n/Bernice Yu p/99272758 e/berniceyu@example.com`
+
 ### Editing an Employee : `editEmployee`
 
 Edits an existing employee in ManageEZPZ.
@@ -118,25 +137,6 @@ Examples:
 * `deleteEmployee 2` deletes the 2nd employee in the displayed employee list.
 * `listEmployee` followed by `deleteEmployee 2` sets the displayed employee list to show all employees in ManageEZPZ and deletes the 2nd employee in ManageEZPZ.
 * `findEmployee n/Betsy` followed by `deleteEmployee 1` sets the displayed employee list with the results from the findEmployee command and deletes the 1st employee in the displayed employee list.
-
-### Finding Employees by multiple options : `findEmployee`
-
-Finds employee(s) based on multiple conditions provided.
-
-Note:
-* Parameters for finding employees can be entered together in any order.
-* You must enter at least one parameter.
-
-Format: `findEmployee [n/NAMES] [p/PHONE_NUMBER] [e/EMAIL]`
-* `findEmployee n/NAMES` finds employees whose names contain any of the words in [LIST OF NAMES].
-* `findEmployee p/PHONE_NUMBER` finds employees with the exact phone number.
-* `findEmployee e/EMAIL` finds employees with the exact email.
-
-Examples:
-* `findEmployee n/Alex`
-* `findEmployee p/87438807`
-* `findEmployee e/alexyeoh@example.com`
-* `findEmployee n/Bernice Yu p/99272758 e/berniceyu@example.com`
 
 ### Adding a Task : `addTodo`, `addEvent`, `addDeadline`
 
