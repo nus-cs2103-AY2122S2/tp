@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,28 +15,37 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Represents the control of player aggregated data.
  */
 public class PlayerStatisticsPanel extends UiPart<Region> {
     private static final String FXML = "PlayerStatisticsPanel.fxml";
-    private static final List<Tag> positionTags = List.of(new Tag("PG"), new Tag("SG"), new Tag("SF"), new Tag("PF"), new Tag("C"));
+    private static final List<Tag> positionTags =
+            List.of(new Tag("PG"), new Tag("SG"), new Tag("SF"),
+                    new Tag("PF"), new Tag("C"));
 
     @FXML
     private PieChart playerStatisticsPieChart;
 
     private ObservableList<Person> persons;
 
+    /**
+     * Creates a new panel.
+     *
+     * @param persons
+     */
     public PlayerStatisticsPanel(ObservableList<Person> persons) {
         super(FXML);
         this.persons = persons;
         populatePieChart();
     }
 
+    /**
+     * Updates the pie chart.
+     *
+     * @param persons
+     */
     public void update(ObservableList<Person> persons) {
         this.persons = persons;
         populatePieChart();
@@ -47,7 +60,8 @@ public class PlayerStatisticsPanel extends UiPart<Region> {
         }
     }
 
-    // Reused from https://github.com/AY1920S2-CS2103T-W12-3/main/blob/master/src/main/java/seedu/address/ui/WalletStatisticsPanel.java with modifications.
+    // Reused from https://github.com/AY1920S2-CS2103T-W12-3/
+    // main/blob/master/src/main/java/seedu/address/ui/WalletStatisticsPanel.java with modifications.
     private void populatePieChart() {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         Map<Tag, Integer> positions = new HashMap<>();
@@ -81,7 +95,8 @@ public class PlayerStatisticsPanel extends UiPart<Region> {
         playerStatisticsPieChart.layout();
         pieChartData.add(tempData);
 
-        pieChartData.forEach(data -> {System.out.println(data);});
+        pieChartData.forEach(data -> {
+            System.out.println(data); });
 
         pieChartData.forEach(data -> data.nameProperty().bind(Bindings.concat(data.getName(),
                 String.format(" - %d", (int) data.getPieValue()))));

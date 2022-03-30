@@ -1,36 +1,32 @@
 package seedu.address.ui;
 
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import seedu.address.model.person.Person;
-import seedu.address.model.schedule.Schedule;
-import seedu.address.model.tag.Tag;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import seedu.address.model.schedule.Schedule;
+
 
 /**
  * Represents the control of schedule calendar.
  */
 public class ScheduleCalendarPanel extends UiPart<Region> {
     private static final String FXML = "ScheduleCalendarPanel.fxml";
-    private static final List<String> DAYS = List.of("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+    private static final List<String> DAYS =
+            List.of("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
 
     @FXML
     private GridPane calendar;
@@ -43,6 +39,11 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
 
     private ObservableList<Schedule> schedules;
 
+    /**
+     * Creates a new calendar panel.
+     *
+     * @param schedules List o schedules.
+     */
     public ScheduleCalendarPanel(ObservableList<Schedule> schedules) {
         super(FXML);
         this.schedules = schedules;
@@ -52,6 +53,11 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
         setDates();
     }
 
+    /**
+     * Updates the content of schedule calendar.
+     *
+     * @param schedules List of schedules.
+     */
     public void update(ObservableList<Schedule> schedules) {
         this.schedules = schedules;
 
@@ -60,6 +66,9 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
         setDates();
     }
 
+    /**
+     * Sets the day today on GUI.
+     */
     public void setTodayDay() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE");
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -67,6 +76,9 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
         todayDay.setFont(new Font(45));
     }
 
+    /**
+     * Sets the date today on GUI.
+     */
     public void setTodayDate() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -74,6 +86,9 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
         todayDate.setFont(new Font(25));
     }
 
+    /**
+     * Sets the dates in the calendar.
+     */
     public void setDates() {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yyyy");

@@ -1,20 +1,27 @@
 package seedu.address.logic;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Represents a class that provide insights based on data.
+ */
 public class DataAnalyzer {
     private static final List<Tag> POSITION_TAGS = List.of(new Tag("PG"), new Tag("SG"),
             new Tag("SF"), new Tag("PF"), new Tag("C"));
-    private static final String MESSAGE_BALANCED_TEAM = "Well done! Seems like the number of players\nin each position are balanced!";
-    private static final String MESSAGE_UNBALANCED_TEAM = "It seems like your club is short of %s players.\nConsider recruiting more of them.";
-    private static final String MESSAGE_UNCLASSIFIED_PLAYERS = "\nMeanwhile, you still have %d unclassified players.\nPlease tag them by their position so that MyGM can have a better\nunderstanding of your club.";
+    private static final String MESSAGE_BALANCED_TEAM =
+            "Well done! Seems like the number of players\nin each position are balanced!";
+    private static final String MESSAGE_UNBALANCED_TEAM =
+            "It seems like your club is short of %s players.\nConsider recruiting more of them.";
+    private static final String MESSAGE_UNCLASSIFIED_PLAYERS =
+            "\nMeanwhile, you still have %d unclassified players.\n"
+            + "Please tag them by their position so that MyGM can have a better\nunderstanding of your club.";
 
     /**
      * Analyzes the number of players by position.
@@ -22,7 +29,7 @@ public class DataAnalyzer {
      * @param persons List of players.
      * @return String message indicating the suggestion given by MyGM.
      */
-    public static String AnalyzePlayerPosition(ObservableList<Person> persons) {
+    public static String analyzePlayerPosition(ObservableList<Person> persons) {
         Map<Tag, Integer> positions = new HashMap<>();
         for (Tag tag : POSITION_TAGS) {
             positions.put(tag, 0);
