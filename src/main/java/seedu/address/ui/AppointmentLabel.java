@@ -9,7 +9,8 @@ import javafx.scene.control.Label;
 import seedu.address.model.pet.Appointment;
 
 public class AppointmentLabel {
-    private static final String APPOINTMENT_NOT_TODAY_STYLE = "-fx-background-color: #c4c4c4";
+    private static final String APPOINTMENT_AFTER_TODAY_STYLE = "-fx-background-color: #c4c4c4";
+    private static final String APPOINTMENT_BEFORE_TODAY_STYLE = "-fx-background-color: #ff595e";
     private static final String APPOINTMENT_TODAY_STYLE = "-fx-background-color: #90be6d";
     private static final String LABEL = "Appointment:";
     private static final LocalDate NOW = LocalDate.now();
@@ -37,8 +38,10 @@ public class AppointmentLabel {
 
             if (appDate.equals(NOW)) {
                 appLabel.setStyle(APPOINTMENT_TODAY_STYLE);
+            } else if (appDate.isBefore(NOW)) {
+                appLabel.setStyle(APPOINTMENT_BEFORE_TODAY_STYLE);
             } else {
-                appLabel.setStyle(APPOINTMENT_NOT_TODAY_STYLE);
+                appLabel.setStyle(APPOINTMENT_AFTER_TODAY_STYLE);
             }
         }
         return appLabel;

@@ -72,7 +72,7 @@
                   </VBox>
                   <VBox prefHeight="17.0" prefWidth="312.0">
                      <children>
-                            <Label fx:id="appointment" prefHeight="17.0" prefWidth="247.0" styleClass="cell_small_label" text="\$appointment" />
+                            <Label fx:id="appointment" prefHeight="17.0" prefWidth="322.0" styleClass="cell_small_label" text="\$appointment" />
                      </children>
                   </VBox>
                </children>
