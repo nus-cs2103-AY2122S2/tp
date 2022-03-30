@@ -17,13 +17,13 @@ public class PersonContainsMembershipPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person member) {
+        if (!member.hasField(Membership.PREFIX)) {
+            return false;
+        }
         if (tier == "ALL") {
             return member.hasField(Membership.PREFIX);
         } else {
-            if (!member.hasField(Membership.PREFIX)) {
-                return false;
-            }
-            return member.getMembership().getValue().equals(tier);
+            return member.getMembership().getValue().toUpperCase().equals(tier);
         }
     }
 

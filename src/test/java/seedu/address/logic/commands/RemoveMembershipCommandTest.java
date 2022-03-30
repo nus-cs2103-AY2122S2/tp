@@ -27,17 +27,19 @@ class RemoveMembershipCommandTest {
     void execute_removeMembership_success() {
         RemoveMembershipCommand command = new RemoveMembershipCommand(Index.fromZeroBased(0));
 
-        // Succesful remove command
-        String expectedMessage = String.format(RemoveMembershipCommand.MESSAGE_SUCCESS);
+        // Successful remove command
+
         Model editModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person person = editModel.getFilteredPersonList().get(0);
         Membership member = new Membership("Gold");
         Person personEdited = person.addMembership(member);
         editModel.setPerson(person, personEdited);
+        String expectedMessage = String.format(RemoveMembershipCommand.MESSAGE_SUCCESS, person);
         assertCommandSuccess(command, editModel, expectedMessage, model);
 
         // No membership
-        expectedMessage = RemoveMembershipCommand.MESSAGE_NO_MEMBERSHIP;
+        person = model.getFilteredPersonList().get(0);
+        expectedMessage = String.format(RemoveMembershipCommand.MESSAGE_NO_MEMBERSHIP, person);
         assertCommandSuccess(command, model, expectedMessage, model);
     }
 

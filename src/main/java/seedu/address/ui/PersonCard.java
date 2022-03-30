@@ -78,9 +78,9 @@ public class PersonCard extends UiPart<Region> {
         Membership membership = person.getMembership();
         if (membership != null) {
             Label newLabel = new Label(membership.toString());
-            if (membership.getValue().equals("GOLD")) {
+            if (membership.getValue().toUpperCase().equals("GOLD")) {
                 newLabel.setId("gold");
-            } else if (membership.getValue().equals("SILVER")) {
+            } else if (membership.getValue().toUpperCase().equals("SILVER")) {
                 newLabel.setId("silver");
             } else {
                 newLabel.setId("bronze");

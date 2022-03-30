@@ -35,7 +35,7 @@ public class ListMembersCommandTest {
 
     @Test
     public void execute_noMembers_showsEmptyList() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
+        String expectedMessage = Messages.MESSAGE_NO_PERSONS_FOUND_OVERVIEW;
         PersonContainsMembershipPredicate predicate = new PersonContainsMembershipPredicate("ALL");
 
         expectedModel.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList("NONESTUFF")));
@@ -46,7 +46,7 @@ public class ListMembersCommandTest {
     @Test
     public void execute_listIsFiltered_showsEverything() {
         // Gold test
-        Membership member = new Membership("Gold");
+        Membership member = new Membership("GOLD");
         Person person = model.getFilteredPersonList().get(0);
         Person personEdited = person.addMembership(member);
         model.setPerson(person, personEdited);
