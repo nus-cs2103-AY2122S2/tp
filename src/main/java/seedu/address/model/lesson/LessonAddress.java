@@ -16,6 +16,8 @@ public class LessonAddress {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
+    public static final LessonAddress EMPTY_ADDRESS = new LessonAddress();
+
     public final String value;
 
     /**
@@ -27,6 +29,13 @@ public class LessonAddress {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
+    }
+
+    /**
+     * Constructs an empty {@code Address}.
+     */
+    public LessonAddress() {
+        value = "NO ADDRESS ASSIGNED";
     }
 
     /**
