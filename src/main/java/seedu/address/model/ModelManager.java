@@ -44,8 +44,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-
         this.interviewSchedule = new InterviewSchedule(interviewList);
+        //interviewSchedule.checkInvalidValues();
         filteredCandidates = new FilteredList<>(this.addressBook.getCandidateList());
         filteredInterviewSchedule = new FilteredList<>(this.interviewSchedule.getInterviewList());
     }
