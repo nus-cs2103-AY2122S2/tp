@@ -26,6 +26,7 @@ public class ScheduleCommand extends Command {
     private final LocalDate selectedDate;
 
     public ScheduleCommand(LocalDate selectedDate) {
+        requireNonNull(selectedDate);
         this.selectedDate = selectedDate;
     }
 
@@ -36,5 +37,12 @@ public class ScheduleCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, selectedDate.format(formatter)),
             false, false, false, false, false,
             false, false, false, true);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof ScheduleCommand // instanceof handles nulls
+            && selectedDate.equals(((ScheduleCommand) other).selectedDate));
     }
 }
