@@ -4,16 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_NUS_DATA_SCIENCE_SOCIETY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_NUS_FINTECH_SOCIETY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.TypicalGroups.NUS_DATA_SCIENCE_SOCIETY;
 import static seedu.address.testutil.TypicalGroups.NUS_FINTECH_SOCIETY;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class GroupTest {
     @Test
