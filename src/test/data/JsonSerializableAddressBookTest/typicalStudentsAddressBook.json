@@ -1,5 +1,11 @@
 {
-  "masterList": [ "1" ],
+  "masterList": [
+    {
+      "labMark": "Unknown",
+      "labNumber": "1",
+      "labStatus": "UNSUBMITTED"
+    }
+  ],
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "students": [ {
       "name": "Alice Pauline",
@@ -8,9 +14,12 @@
       "telegram": "alice_P",
       "studentId": "A0123456B",
       "tagged": [ "friends" ],
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
   }, {
       "name": "Benson Meier",
       "email": "johnd@example.com",
@@ -18,9 +27,12 @@
       "telegram": "benson_M",
       "studentId": "A0123457C",
       "tagged": [ "owesMoney", "friends" ],
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
     }, {
       "name": "Carl Kurz",
       "email": "heinz@example.com",
@@ -28,9 +40,12 @@
       "telegram": "carl_K",
       "studentId": "A0123458D",
       "tagged": [],
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
     }, {
       "name": "Daniel Meier",
       "email": "cornelia@example.com",
@@ -38,9 +53,12 @@
       "telegram": "daniel_M",
       "studentId": "A0123459E",
       "tagged": [ "friends" ],
-      "labNumbers": [ "1" ],
-     "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
     }, {
       "name": "Elle Meyer",
       "email": "werner@example.com",
@@ -48,9 +66,12 @@
       "telegram": "elle_M",
       "studentId": "A0123411A",
       "tagged": [],
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
     }, {
       "name": "Fiona Kunz",
       "email": "lydia@example.com",
@@ -58,9 +79,12 @@
       "telegram": "fiona_K",
       "studentId": "A0123412B",
       "tagged": [],
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
     }, {
       "name": "George Best",
       "email": "anna@example.com",
@@ -68,8 +92,11 @@
       "telegram": "george_B",
       "studentId": "A0123413C",
       "tagged": [],
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
     } ]
 }

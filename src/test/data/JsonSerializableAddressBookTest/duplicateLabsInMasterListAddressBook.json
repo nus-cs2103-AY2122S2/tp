@@ -1,9 +1,13 @@
 {
   "masterList": [
     {
-      "labMark": "Unknown",
       "labNumber": "1",
-      "labStatus": "UNSUBMITTED"
+      "labStatus": "UNSUBMITTED",
+      "labMark": "Unknown"
+    }, {
+      "labNumber": "1",
+      "labStatus": "UNSUBMITTED",
+      "labMark": "Unknown"
     }
   ],
   "students": [ {
@@ -14,9 +18,9 @@
     "studentId": "A0123458C",
     "labs" : [
       {
-        "labMark": "Unknown",
         "labNumber": "1",
-        "labStatus": "test"
+        "labStatus": "UNSUBMITTED",
+        "labMark": "Unknown"
       } ]
   } ]
 }

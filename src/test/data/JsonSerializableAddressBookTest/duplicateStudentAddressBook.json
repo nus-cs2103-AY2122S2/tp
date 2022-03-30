@@ -1,5 +1,11 @@
 {
-  "masterList": [ "1" ],
+  "masterList": [
+      {
+          "labMark": "Unknown",
+          "labNumber": "1",
+          "labStatus": "UNSUBMITTED"
+      }
+  ],
   "students": [ {
       "name": "Alice Pauline",
       "email": "alice@example.com",
@@ -7,17 +13,23 @@
       "telegram": "alice_P",
       "studentId": "A0123457C",
       "tagged": [ "friends" ],
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+          {
+              "labMark": "Unknown",
+              "labNumber": "1",
+              "labStatus": "UNSUBMITTED"
+          } ]
   }, {
       "name": "Alice Pauline",
       "email": "pauline@example.com",
       "github": "aliceP",
       "telegram": "alice_P",
       "studentId": "A0123457C",
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+          "labMark": "Unknown",
+          "labNumber": "1",
+          "labStatus": "UNSUBMITTED"
+      } ]
     } ]
 }
