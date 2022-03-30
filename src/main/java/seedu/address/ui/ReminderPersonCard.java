@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.StringJoiner;
 
 import javafx.fxml.FXML;

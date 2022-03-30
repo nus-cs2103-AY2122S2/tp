@@ -22,13 +22,13 @@ public class RemindCommand extends Command {
 
     public static final String COMMAND_WORD = "remind";
     public static final String MESSAGE_REMIND_PERSON_WARNING = "";
-    public static final String MESSAGE_UNREMIND_PERSON_WARNING = "If you're trying to remove a reminder for a Person, "
+    public static final String MESSAGE_UNREMIND_PERSON_WARNING = "If you're trying to remove a Reminder for a Person, "
             + "type \"remind INDEX\"";
-    private static final String MESSAGE_REMIND_PERSON_SUCCESS = "Reminder for Person: %1$s";
-    private static final String MESSAGE_UNREMIND_PERSON_SUCCESS = "Removed reminder for Person: %1$s";
-    private static final String MESSAGE_EDIT_REMIND_PERSON_SUCCESS = "Edited reminder for Person: %1$s";
+    public static final String MESSAGE_REMIND_PERSON_SUCCESS = "Created Reminder for Person: %1$s";
+    public static final String MESSAGE_UNREMIND_PERSON_SUCCESS = "Removed Reminder for Person: %1$s";
+    public static final String MESSAGE_EDIT_REMIND_PERSON_SUCCESS = "Edited Reminder for Person: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets a reminder for the client "
+            + ": Sets a Reminder for the client "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_REMINDER + "REMINDER\n"
@@ -43,7 +43,7 @@ public class RemindCommand extends Command {
      * @param reminder
      */
     public RemindCommand(Index index, Optional<Reminder> reminder) {
-        requireAllNonNull(index);
+        requireAllNonNull(index, reminder);
         reminderPersons = ReminderPersons.getInstance();
         this.index = index;
         this.reminder = reminder;
@@ -62,11 +62,13 @@ public class RemindCommand extends Command {
 
         // if the person already has a reminder
         if (reminderPersons.containsKey(personToRemind)) {
+            // the RemindCommand does not have a Reminder, remove the Reminder for this current person
             if (reminder.isEmpty()) {
                 reminderPersons.remove(personToRemind);
                 return new CommandResult(String.format(MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind), false,
                         false, false, true, false);
             }
+            // the RemindCommand contains a Reminder, edit the current Reminder to be this new one
             reminderPersons.add(personToRemind, reminder.get());
             return new CommandResult(String.format(MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind), false,
                     false, false, true, false);

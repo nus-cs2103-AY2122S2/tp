@@ -1,8 +1,6 @@
 package seedu.address.storage;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.Reminder;
@@ -36,7 +34,6 @@ public class ReminderPersons {
      */
     public Reminder add(Person person, Reminder reminder) {
         return reminders.put(person, reminder);
-//        return reminderPersons.reminders.put(person, reminder);
     }
 
     /**
