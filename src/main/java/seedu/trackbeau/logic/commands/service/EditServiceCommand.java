@@ -82,7 +82,7 @@ public class EditServiceCommand extends Command {
             Booking booking = lastShownBookingsList.get(i);
             if (booking.getService().equals(serviceToEdit)) {
                 model.setBooking(booking, new Booking(booking.getCustomer(), editedService,
-                    booking.getBookingDateTime()));
+                    booking.getBookingDateTime(), booking.getFeedback()));
             }
         }
 
