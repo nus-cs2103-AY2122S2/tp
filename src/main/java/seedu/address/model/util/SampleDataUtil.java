@@ -39,11 +39,11 @@ public class SampleDataUtil {
             new Email("irfan@example.com"), new Email("royb@example.com"));
 
     private static final List<InsurancePackage> samplePackages = List.of(
-            new InsurancePackage("Golden Package", "Best package!"),
-            new InsurancePackage("Silver Package", "Second best!"),
-            new InsurancePackage("Bronze Package", "Average package!"),
-            new InsurancePackage("Golden Plus Package", "For VIP only!"),
-            new InsurancePackage("Basic Package", "Basic insurance package"),
+            new InsurancePackage("Golden Package", "Luxurious coverage for many aspects"),
+            new InsurancePackage("Silver Package", "Plenty coverage for most aspects"),
+            new InsurancePackage("Bronze Package", "An affordable package to cover essential aspects"),
+            new InsurancePackage("Golden Plus Package", "A VIP Special for those already under the Golden Package"),
+            new InsurancePackage("Basic Package", "Basic insurance package to cover basic needs"),
             new InsurancePackage("Theft Insurance Package", "For theft protection"));
 
     private static final List<Address> sampleAddresses = List.of(
