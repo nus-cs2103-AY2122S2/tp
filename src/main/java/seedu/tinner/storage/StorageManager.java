@@ -10,6 +10,7 @@ import seedu.tinner.commons.exceptions.DataConversionException;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.UserPrefs;
+import seedu.tinner.model.reminder.UniqueReminderList;
 
 /**
  * Manages storage of CompanyList data in local storage.
@@ -73,6 +74,9 @@ public class StorageManager implements Storage {
     public void saveCompanyList(ReadOnlyCompanyList companyList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         companyListStorage.saveCompanyList(companyList, filePath);
+
+        UniqueReminderList reminderList = UniqueReminderList.getInstance();
+        reminderList.setReminders(companyList.getCompanyList());
     }
 
 }

@@ -13,6 +13,8 @@ import java.util.TreeSet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.tinner.model.company.Company;
+import seedu.tinner.model.role.Role;
 
 /**
  * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -132,5 +134,18 @@ public class UniqueReminderList implements Iterable<Reminder> {
             }
         }
         return true;
+    }
+
+    public void setReminders(ObservableList<Company> companyList) {
+        for (Company company : companyList) {
+            ObservableList<Role> roleList = company.getRoleManager().getRoleList().getRoles();
+            for (Role role : roleList) {
+                if (role.getReminderDate().isWithinReminderWindow()) {
+                    Reminder reminder =
+                            new Reminder(company.getName(), role.getName(), role.getStatus(), role.getReminderDate());
+                    add(reminder);
+                }
+            }
+        }
     }
 }
