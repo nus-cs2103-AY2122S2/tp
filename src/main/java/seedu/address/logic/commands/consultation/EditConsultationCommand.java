@@ -52,7 +52,7 @@ public class EditConsultationCommand extends Command {
 
     public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Consultation Information: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in MedBook.";
+    public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already exists in MedBook.";
 
     private final Index targetIndex;
     private final EditConsultationDescriptor editConsultationDescriptor;
@@ -77,6 +77,11 @@ public class EditConsultationCommand extends Command {
 
         Consultation consultation = lastShownList.get(targetIndex.getZeroBased());
         Consultation editedConsultation = createEditedConsultation(consultation, editConsultationDescriptor);
+
+        if (consultation.equals(editedConsultation) && model.hasConsultation(editedConsultation)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONSULTATION);
+        }
+
         model.setConsultation(consultation, editedConsultation);
 
         return new CommandResult(String.format(MESSAGE_EDIT_TEST_RESULT_SUCCESS, editedConsultation), COMMAND_TYPE);
