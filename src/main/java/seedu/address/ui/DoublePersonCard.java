@@ -70,10 +70,10 @@ public class DoublePersonCard extends UiPart<Region> {
 
     private void setPersonToCard(Person person, Label name, Label phone, Label address, Label email,
                                  Label property, Label preference, Label favourite, Label tagBuyer, Label tagSeller) {
+
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
-
         email.setText(person.getEmail().value);
 
         if (person.getUserType().isBuyer()) {
