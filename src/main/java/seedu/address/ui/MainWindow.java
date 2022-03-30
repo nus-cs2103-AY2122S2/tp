@@ -205,6 +205,11 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleSwitch() {
+        logger.info("Switch AddressBook!");
+    }
+
     /**
      * Copy to the clipboard the selected person's information.
      */
