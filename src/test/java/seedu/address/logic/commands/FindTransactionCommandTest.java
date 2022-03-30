@@ -41,15 +41,14 @@ public class FindTransactionCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        TransactionWithIdentifierPredicate predicate =
-                new TransactionWithIdentifierPredicate(selectedPerson.getUniqueId());
+        TransactionPredicateBuilder b = TransactionWithIdentifierPredicate::new;
         String expectedMessage = String.format(Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW,
                 model.getFilteredTransactionList().size());
 
-        FindTransactionCommand findCommand = new FindTransactionCommand(INDEX_FIRST_PERSON, x -> predicate);
+        FindTransactionCommand findCommand = new FindTransactionCommand(INDEX_FIRST_PERSON, b);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredTransactionList(predicate);
+        expectedModel.updateFilteredTransactionList(b.createTransactionPredicate(selectedPerson.getUniqueId()));
 
         assertCommandSuccess(findCommand, model, expectedMessage, expectedModel);
     }
