@@ -34,7 +34,11 @@ The Features section will be split into 3 subsections for:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the command format and terminology:**<br>
+
+* Buyer: Someone who is seeking to purchase property.
+
+* Seller: Seomeone who is seeking to sell their property.
 
 * Words in `UPPER_CASE` are inputs to be supplied by the user.<br>
   e.g. In `addbuyer n/NAME`, `NAME` is an input such as `addbuyer n/Chok Hoe`.
@@ -152,8 +156,8 @@ Format: `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOU
 * The house-related inputs (`pr/`, `l/`, `h/`) cannot be edited until a Property is added (See how to add one here).
 
 Examples:
-* `edit-b 1 n/Chua` Edits only the name of the 1st buyer to be `Chua`.
-* `edit-b 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
+* `edit-b 1 n/Chua` Edits only the name of the 1st buyer in displayed buyer list to be `Chua`.
+* `edit-b 2 n/Betsy Crower t/` Edits the name of the 2nd buyer in displayed buyer list to be `Betsy Crower` and clears all existing tags.
 
 ### `find-b`
 
@@ -185,12 +189,12 @@ Format: `delete-b INDEX`
 * The displayed list refers to the buyer list shown after a `list-b`, `sort-b` or `find-b` was previously executed.
 
 Examples:
-* `list-b` followed by `delete-b 2` deletes the 2nd buyer in the entire buyer list.
+* `list-b` followed by `delete-b 2` deletes the 2nd buyer in the buyer list.
 * `find-b Betsy` followed by `delete-b 1` deletes the 1st buyer in the result of the `find-b` command.
 
 ### `clear-b`
 
-Clear all buyers from the saved buyer list.
+Clear all buyers from the buyer list.
 
 Format: `clear-b`
 
@@ -288,8 +292,8 @@ Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOU
 * The house-related inputs (`pr/`, `l/`, `h/`, `a/`) cannot be edited until a Property is added (See how to add one here).
 
 Examples:
-* `edit-s 1 n/Chua` Edits only the name of the 1st seller to be `Chua`.
-* `edit-s 2 n/Betsy Crower t/` Edits the name of the 2nd seller to be `Betsy Crower` and clears all existing tags.
+* `edit-s 1 n/Chua` Edits only the name of the 1st seller on displayed seller list to be `Chua`.
+* `edit-s 2 n/Betsy Crower t/` Edits the name of the 2nd seller on displayed seller list to be `Betsy Crower` and clears all existing tags.
 
 
 ### `find-s`
@@ -306,11 +310,11 @@ Format: `find-s field/KEYWORD1 [MORE_KEYWORDS]`
 * The **order** of the keywords does not matter. e.g. `find-bs n/Hans Bo` is equivalent to `find-s n/Bo Hans`.
 * All partial words will be matched e.g. `Han` keyword will match `Hans` and `Han`.
 * However, if the keyword is larger than the item itself, it will not match e.g. `Hans` keyword will not match `Han` in name
-* Buyers matching at least one keyword will be returned (i.e. `OR` search).
+* Sellers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find-s n/John` displays buyers whose names are `john` and `John Doe`.
+* `find-s n/John` displays seller whose names are `john` and `John Doe`.
 
 ### `delete-s`
 
@@ -322,8 +326,8 @@ Format: `delete-s INDEX`
 * The displayed list refers to the seller list shown after a `list-b`, `sort-b` or `find-b` was previously executed.
 
 Examples:
-* `list-s` followed by `delete-s 2` deletes the 2nd buyer in the entire seller list.
-* `find-s Betsy` followed by `delete-s 1` deletes the 1st buyer in the result of the `find-s` command.
+* `list-s` followed by `delete-s 2` deletes the 2nd seller in the seller list.
+* `find-s Betsy` followed by `delete-s 1` deletes the 1st seller in the result of the `find-s` command.
 
 ### `clear-s`
 
