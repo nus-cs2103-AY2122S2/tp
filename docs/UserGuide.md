@@ -117,7 +117,30 @@ The following points explain the format of a command.
   e.g. if there exists a company named `meta`, adding another company with the name `meta` is not allowed. 
   
 --------------------------------------------------------------------------------------------------------------------
+# Demo Use Cases <a id="demos"></a>
 
+## Use Case #1: Applying to a role in a company
+
+Say you found a company with an opening that you are interested in. You did your research and found relevant information pertaining to the company and the role. Here's how you can input this data in the application:
+
+1. [Add the company](#c-add-c) to the company list.
+![AddCompanyDemo](images/AddCompanyDemo.png)
+
+
+2. [Add the role](#c-add-c-r) under the added company.
+![AddRoleDemo](images/AddRoleDemo.png)
+
+## Use Case #2: Deleting a company or a role
+
+Perhaps for some reason, you decide not to go through with an application. Maybe you realised the company's mission and vision were  not in line with your values or maybe you realised the role isn't for you. Here's how you can delete these entries from the application:
+
+1. [Delete the role](#c-delete-c-r) from a given company.
+![DeleteRoleDemo](images/DeleteRoleDemo.png)
+
+2. [Delete the company](#c-delete-c) from the company list.
+![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
+
+--------------------------------------------------------------------------------------------------------------------
 # Features <a id="features"></a>
 
 ## Modifying Companies <a id="c-modifying-companies"></a>
