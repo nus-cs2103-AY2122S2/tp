@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the daily amount chargeable of a Pet in the address book.
- * Guarantees: immutable; is always valid.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Charge {
     public static final String MESSAGE_INVALID_CHARGE_FORMAT = "Charge should be formatted as [number] or "
@@ -17,7 +17,7 @@ public class Charge {
     public static final String VALIDATION_REGEX =
             "\\d+[.]?\\d{0,2}";
 
-    private Double perDayCharge;
+    private final Double perDayCharge;
 
     /**
      * Constructs an {@code Charge}.

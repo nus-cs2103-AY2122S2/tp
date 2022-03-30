@@ -55,7 +55,7 @@ public class ChargeCommand extends Command {
         }
 
         Pet petToCharge = lastShownList.get(index.getZeroBased());
-        double amountChargeable = 0.0 ;
+        double amountChargeable = 0.0;
         // check current charge
         if (this.charge.getCharge() == null) {
             throw new CommandException(String.format(Messages.MESSAGE_NO_CHARGE_SET, ChargeCommand.MESSAGE_USAGE));

@@ -1,27 +1,19 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AbsentAttendanceCommand;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ChargeCommand;
-import seedu.address.logic.commands.DietCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.charge.Charge;
-import seedu.address.model.charge.ChargeDate;
-import seedu.address.model.pet.*;
-import seedu.address.model.tag.Tag;
-
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.Set;
-import java.util.stream.Stream;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_NO_CHARGE_SET;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE_MONTH_YEAR;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.ChargeCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.charge.Charge;
+import seedu.address.model.charge.ChargeDate;
+
 
 public class ChargeCommandParser implements Parser<ChargeCommand> {
     /**
