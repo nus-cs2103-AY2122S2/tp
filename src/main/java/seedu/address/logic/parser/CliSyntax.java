@@ -23,9 +23,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_FILTER_BY_OWNER_NAME = new Prefix("byOwner/");
     public static final Prefix PREFIX_FILTER_BY_APPOINTMENT = new Prefix("byApp/");
 
-    /* Valid parameters for sort command */
-    public static final String SORT_BY_NAME = "name";
-    public static final String SORT_BY_OWNER = "owner";
-    public static final String SORT_BY_APPOINTMENT = "app";
-
 }

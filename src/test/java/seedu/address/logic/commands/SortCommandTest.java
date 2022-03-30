@@ -50,4 +50,23 @@ public class SortCommandTest {
         expectedModel.sortPetList("app");
         assertCommandSuccess(new SortCommand("app"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
+
+    /**
+     * Test method that checks if the pet list gets sorted by pet name after calling the sort command.
+     */
+    @Test
+    public void execute_listIsNotFiltered_showsSortedListByPetDropOffTime() {
+        expectedModel.sortPetList("drop off");
+        assertCommandSuccess(new SortCommand("drop off"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    /**
+     * Test method that checks if the pet list gets sorted by pet appointment after calling the sort command.
+     */
+    @Test
+    public void execute_listIsNotFiltered_showsSortedListByPetPickUpTime() {
+        expectedModel.sortPetList("pick up");
+        assertCommandSuccess(new SortCommand("pick up"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
 }
