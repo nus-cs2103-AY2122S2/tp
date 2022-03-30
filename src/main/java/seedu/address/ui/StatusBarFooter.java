@@ -25,21 +25,29 @@ public class StatusBarFooter extends UiPart<Region> {
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
+    public String getSaveLocationStatusText() {
+        return saveLocationStatus.getText();
+    }
+
     /**
      * Changes the text for {@code StatusBarFooter} with to the correct {@code Path}.
      * @param archivePath the path from which our archived data is at
      * @param defaultPath the default path of our data
      */
-    public void swapPaths(Path archivePath, Path defaultPath) {
+    public String swapPaths(Path archivePath, Path defaultPath) {
         String currentPathString = saveLocationStatus.getText();
         String archivePathString = Paths.get(".").resolve(archivePath).toString();
         String defaultPathString = Paths.get(".").resolve(defaultPath).toString();
 
         if (currentPathString.equals(archivePathString)) {
             saveLocationStatus.setText(defaultPathString);
+            return defaultPathString;
         } else if (currentPathString.equals(defaultPathString)) {
             saveLocationStatus.setText(archivePathString);
+            return archivePathString;
         }
+
+        return "";
     }
 
 }

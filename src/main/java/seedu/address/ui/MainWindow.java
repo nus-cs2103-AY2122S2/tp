@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -229,7 +230,17 @@ public class MainWindow extends UiPart<Stage> {
 
         Path defaultPath = logic.getAddressBookFilePath();
         Path archivePath = logic.getArchivedAddressBookFilePath();
-        statusBarFooter.swapPaths(defaultPath, archivePath);
+        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.swapPaths(defaultPath, archivePath));
+
+        boolean isArchivedNext = statusBarFooter.getSaveLocationStatusText().equals(Paths.get(".")
+                .resolve(defaultPath).toString());
+        boolean isDefaultNext = statusBarFooter.getSaveLocationStatusText().equals(Paths.get(".")
+                .resolve(archivePath).toString());
+        if (isArchivedNext) {
+            switchMenuItem.setText("Switch to Archived");
+        } else if (isDefaultNext) {
+            switchMenuItem.setText("Switch to Default");
+        }
     }
 
     /**
