@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
     public static final Set<String> AVAILABLE_HELP_TOPICS = Set.of("add", "delete", "find", "filter", "list", "skill",
-            "team", "unteam", "sort", "");
+            "team", "unteam", "sort", "", "batchedit", "clear", "exit");
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions. Usage: <Help> "
             + "to get link to user guide or <Help> <Topic> to get help for particular topic \n"
             + "Example: " + COMMAND_WORD + "\nExample: " + COMMAND_WORD + " list\n";
@@ -26,6 +26,9 @@ public class HelpCommand extends Command {
     public static final String HELP_MESSAGE_SORT = SortCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_TEAM = MakeTeamCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_UNTEAM = MakeTeamCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_BATCHEDIT = BatchEditCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_CLEAR = ClearCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_EXIT = ExitCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_SKILL = "Skill stores a Skill Name and Skill proficiency. Usage: "
             + "<Command> s/<Skill Name>_<Skill Proficiency> \nExample: edit 1 s/Java_50\n ";
 
@@ -55,6 +58,12 @@ public class HelpCommand extends Command {
             return new CommandResult(HELP_MESSAGE_UNTEAM, false, false);
         case "sort":
             return new CommandResult(HELP_MESSAGE_SORT, false, false);
+        case "batchedit":
+            return new CommandResult(HELP_MESSAGE_BATCHEDIT, false, false);
+        case "clear":
+            return new CommandResult(HELP_MESSAGE_CLEAR, false, false);
+        case "exit":
+            return new CommandResult(HELP_MESSAGE_EXIT, false, false);
         default:
             return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         }
