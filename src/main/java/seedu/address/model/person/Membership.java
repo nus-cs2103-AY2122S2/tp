@@ -15,10 +15,11 @@ import seedu.address.logic.parser.Prefix;
  */
 public class Membership extends Field {
 
-    enum Tier {
+    public enum Tier {
         GOLD,
         SILVER,
-        BRONZE
+        BRONZE,
+        ALL
     }
 
     public static final Prefix PREFIX = new Prefix("m/", true);
@@ -70,8 +71,10 @@ public class Membership extends Field {
             return Tier.GOLD;
         } else if (name.equals("silver")) {
             return Tier.SILVER;
-        } else {
+        } else if (name.equals("bronze")){
             return Tier.BRONZE;
+        } else {
+            return Tier.ALL;
         }
     }
 
