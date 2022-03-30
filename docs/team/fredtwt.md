@@ -30,6 +30,7 @@ Given below are my contributions to the project.
   * Removed the tag functionality from add command
   * Created a tag command that can tag specific fields to existing contact entries
   * Enhanced the cancelevent command to handle multiple cancellations at once
+  * Contributed to the logic for `find` command
 
 * **Documentation**:
     * User Guide:
