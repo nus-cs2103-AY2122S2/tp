@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
- * Clears the address book.
+ * Adds a tag into UNite
  */
 public class AddTagCommand extends Command {
 

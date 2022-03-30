@@ -13,6 +13,7 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    private Remark remark;
 
     /**
      * Constructs a {@code Tag}.
@@ -23,6 +24,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        remark = new Remark("");
     }
 
     /**
@@ -35,6 +37,7 @@ public class Tag {
     public String getTagName() {
         return tagName;
     }
+
     /**
      * Returns true if both tags have the same description.
      * This defines a weaker notion of equality between two persons.
@@ -46,6 +49,14 @@ public class Tag {
 
         return otherTag != null
                 && otherTag.getTagName().equals(getTagName());
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    public void changeRemark(Remark remark) {
+        this.remark = remark;
     }
 
     @Override

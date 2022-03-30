@@ -15,4 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_TELEGRAM = new Prefix("tele/");
     public static final Prefix PREFIX_COURSE = new Prefix("c/");
     public static final Prefix PREFIX_MATRICCARD = new Prefix("m/");
+    public static final Prefix PREFIX_REMARK = new Prefix("r/");
 }

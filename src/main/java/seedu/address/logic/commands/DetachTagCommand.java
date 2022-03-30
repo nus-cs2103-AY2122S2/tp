@@ -88,8 +88,19 @@ public class DetachTagCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DetachTagCommand // instanceof handles nulls
-                && toDetach.equals(((DetachTagCommand) other).toDetach));
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DetachTagCommand)) {
+            return false;
+        }
+
+        // state check
+        DetachTagCommand e = (DetachTagCommand) other;
+        return toDetach.equals(e.toDetach)
+                && targetIndex.equals(e.targetIndex);
     }
 }

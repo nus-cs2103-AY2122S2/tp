@@ -18,10 +18,12 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GrabCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTagCommand;
 import seedu.address.logic.commands.ProfileCommand;
+import seedu.address.logic.commands.RemarkTagCommand;
 import seedu.address.logic.commands.SwitchThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -100,9 +102,14 @@ public class AddressBookParser {
         case ProfileCommand.COMMAND_WORD:
             return new ProfileCommandParser().parse(arguments);
 
+        case RemarkTagCommand.COMMAND_WORD:
+            return new RemarkTagCommandParser().parse(arguments);
+
+        case GrabCommand.COMMAND_WORD:
+            return new GrabCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
