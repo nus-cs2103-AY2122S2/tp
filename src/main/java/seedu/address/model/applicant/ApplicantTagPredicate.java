@@ -1,10 +1,10 @@
 package seedu.address.model.applicant;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 
 /**
  * Tests that an {@code Applicant} has a {@code Tag} that matches any of the keywords given.

@@ -16,11 +16,6 @@ import seedu.address.logic.SortArgument;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
-import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.ApplicantGenderPredicate;
-import seedu.address.model.applicant.ApplicantNamePredicate;
-import seedu.address.model.applicant.ApplicantStatusPredicate;
-import seedu.address.model.applicant.ApplicantTagPredicate;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.PositionNameComparator;
 import seedu.address.model.position.PositionNamePredicate;
@@ -102,6 +97,9 @@ public class ListPositionCommand extends ListCommand {
         return DataType.POSITION;
     }
 
+    /**
+     * Returns the suitable {@code Predicate} based on the given {@code filterType} and {@code filterArgument}
+     */
     public Predicate<Position> getFilterPredicate(FilterType filterType, FilterArgument filterArgument) {
         if (filterType.type.equals("name")) {
             String[] nameKeywords = filterArgument.toString().split("\\s+");

@@ -2,6 +2,8 @@ package seedu.address.model.applicant;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Tests that an {@code Applicant}'s {@code HiredStatus} matches the status given.
  */
@@ -15,8 +17,7 @@ public class ApplicantStatusPredicate implements Predicate<Applicant> {
     @Override
     public boolean test(Applicant applicant) {
         assert status.equals("available") || status.equals("hired");
-        return (status.equals("available") && applicant.getStatus().toString().equals("Available"))
-                || (status.equals("hired") && applicant.getStatus().toString().toLowerCase().contains("hired"));
+        return StringUtil.containsWordIgnoreCase(applicant.getStatus().toString(), status);
     }
 
     @Override
