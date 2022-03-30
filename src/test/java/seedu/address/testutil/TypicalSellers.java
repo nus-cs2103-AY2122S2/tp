@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.SellerAddressBook;
 import seedu.address.model.seller.Seller;
 
 /**
@@ -25,7 +25,7 @@ public class TypicalSellers {
     public static final Seller YUQI = new SellerBuilder().withName("Alice Pauline")
             .withPhone("94351253").withAppointment("2022-05-01-12-00")
             .withTags("friends").build();
-    public static final Seller SHIHONG = new SellerBuilder().withName("Benson Meier")
+    public static final Seller BENSON = new SellerBuilder().withName("Benson Meier")
             .withPhone("98765432").withAppointment("2022-05-04-09-00")
             .withTags("owesMoney", "friends").build();
     public static final Seller JUNHENG = new SellerBuilder().withName("Carl Kurz")
@@ -58,17 +58,18 @@ public class TypicalSellers {
     private TypicalSellers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical clients.
+     * Returns an {@code SellerAddressBook} with all the typical sellers.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static SellerAddressBook getTypicalSellerAddressBook() {
+        SellerAddressBook ab = new SellerAddressBook();
         for (Seller seller : getTypicalSellers()) {
-            ab.addclient(seller);
+            ab.addSeller(seller);
         }
         return ab;
     }
 
+
     public static List<Seller> getTypicalSellers() {
-        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, SHIHONG, JANALD, DARA, RICHARD, YUQI));
+        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, BENSON, JANALD, DARA, RICHARD, YUQI));
     }
 }
