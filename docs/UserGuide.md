@@ -63,7 +63,7 @@ Before you continue reading the rest of our user guide, the table below displays
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
 4. Double-click the file to start the app. The layout of Trackermon's [GUI](#glossary) is shown in the [section below](#user-interface).
-   * Do note that for Linux OS, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! <br>\
+   * Do note that for Linux OS, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! <br><br>
    
 5. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
