@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.schedule.Schedule;
 
@@ -41,6 +43,9 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     private boolean isDarkMode;
+
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -226,6 +231,15 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandText.contains(CliSyntax.PREFIX_SCHEDULE.toString())) {
+                this.tabPane.getSelectionModel().select(this.tabPane.getTabs().get(1));
+                System.out.println("swtich to schdeul");
+            } else {
+                this.tabPane.getSelectionModel().select(this.tabPane.getTabs().get(0));
+                System.out.println("switch to player");
+            }
+
             playerStatisticsPanel.update(logic.getPersonList());
             playerSuggestion.update(logic.getPersonList());
             scheduleCalendarPanel.update(logic.getScheduleList());
