@@ -18,7 +18,7 @@ Get started now by following a step-by-step tutorial in under 10 minutes.
 1. HustleBook requires `Java 11` or above installed in your Computer. [What's this?](https://www.oracle.com/java/)
 
 2. Download the latest `HustleBook` [here](https://github.com/AY2122S2-CS2103T-W15-2/tp/releases/).
-
+   ![Where to click](images/downloadHustleBookHere.png)
 3. Place the file into a folder where you would like to keep it. We recommend keeping it in your `Desktop` for easier access.
 
 4. Double-click the file to start the app. The app should look identical as shown below.<br>
