@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Tracey User Guide
+title: User Guide
 ---
 
 # Tracey
@@ -76,7 +76,7 @@ Additional formatting guidelines:
 1. Ensure you have Java 11 or above installed in your Computer. <br>
  📓`Note:`
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
-   2. To check your java version: 
+   2. To check your java version:
       1. For Mac users, open up Terminal and type in `java --version`.
       2. For Windows users, open up Command Prompt and type in `java --version`.
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
