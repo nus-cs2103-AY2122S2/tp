@@ -18,8 +18,10 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  * Represents a group of students within a module.
  */
 public class Group {
-    private final String name;
-    private final Module module;
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
+    private String name;
+    private Module module;
     private final ObservableList<Student> members;
     private final ObservableList<LocalDateTime> meetingTimes;
 
@@ -85,9 +87,45 @@ public class Group {
         return name;
     }
 
+    /**
+     * Returns of whether student in group
+     *
+     * @return boolean of whether student exists.
+     */
+    public boolean hasMember(Student s) {
+        for (Student student : members) {
+            if (student.equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Edit the group name of the group object.
+     */
+    public void editGroupName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Edit the module of the group object.
+     */
+    public void editModule(Module module) {
+        this.module = module;
+    }
+
     public Module getModule() {
         return module;
     }
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidName(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
 
     /**
      * Returns the member students of the group.
@@ -169,6 +207,17 @@ public class Group {
     }
 
     /**
+     * Edit a meeting datetime from the group.
+     *
+     * @param idx index of the meeting time to edit
+     * @param meetingTime meeting datetime to remove.
+     */
+    public void editMeetingTime(int idx, LocalDateTime meetingTime) {
+        requireNonNull(meetingTime);
+        this.meetingTimes.set(idx, meetingTime);
+    }
+
+    /**
      * Returns true only if the name of the group provided and this group name
      * are the same.
      */
@@ -233,6 +282,13 @@ public class Group {
         builder.append(getGroupName())
             .append("; Module: ")
             .append(getModule().getModuleCode());
+
+        ObservableList<LocalDateTime> meetingTimes = getMeetingTimes();
+        if (!meetingTimes.isEmpty()) {
+            builder.append("; Meeting Times: ");
+            meetingTimes.forEach(builder::append);
+        }
+
         return builder.toString();
     }
 }

@@ -17,11 +17,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_STU_INDEX = new Prefix("stu/");
     public static final Prefix PREFIX_KE_INDEX = new Prefix("ke/");
     public static final Prefix PREFIX_NEWMOD = new Prefix("nm/");
+    public static final Prefix PREFIX_MEETINGTIME = new Prefix("mt/");
     public static final Prefix PREFIX_OFFICE = new Prefix("of/");
     public static final Prefix PREFIX_TYPE = new Prefix("type/");
     public static final Prefix PREFIX_VIEW = new Prefix("v/");
     public static final Prefix PREFIX_GROUP = new Prefix("g/");
     public static final Prefix PREFIX_KEYEVENT = new Prefix("ke/");
-    public static final Prefix PREFIX_MEETINGTIME = new Prefix("mt/");
     public static final Prefix PREFIX_DATETIME = new Prefix("dt/");
 }
