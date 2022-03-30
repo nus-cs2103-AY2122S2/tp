@@ -115,14 +115,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void saveHistory() {
-        addressBook.saveHistory();
-    }
-
-    @Override
     public void restoreHistory() {
         addressBook.restoreHistory();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public boolean checkHistory() {
+        return addressBook.getHistory() != null;
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -77,14 +77,14 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Saves the current state of the address book.
-     */
-    void saveHistory();
-
-    /**
      * Restores the previous state of the address book.
      */
     void restoreHistory();
+
+    /**
+     * Checks the presence of a previous state of the address book.
+     */
+    boolean checkHistory();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

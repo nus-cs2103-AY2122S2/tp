@@ -154,10 +154,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void saveHistory() {}
+        public void restoreHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void restoreHistory() {
+        public boolean checkHistory() {
             throw new AssertionError("This method should not be called.");
         }
     }

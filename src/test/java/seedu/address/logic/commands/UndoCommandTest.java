@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_FAILURE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -21,6 +23,13 @@ import seedu.address.testutil.TypicalPersons;
  * Contains integration tests (interaction with the Model) for {@code UndoCommand}.
  */
 public class UndoCommandTest {
+
+    @Test
+    public void execute_undoAsFirstFunction_failure() {
+        Model model = new ModelManager();
+
+        assertCommandFailure(new UndoCommand(), model, MESSAGE_UNDO_FAILURE);
+    }
 
     @Test
     public void execute_undoForAddFunction_success() {

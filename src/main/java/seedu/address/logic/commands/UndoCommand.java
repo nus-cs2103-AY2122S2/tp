@@ -17,10 +17,16 @@ public class UndoCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_UNDO_SUCCESS = "Undid last change.";
+    public static final String MESSAGE_UNDO_FAILURE = "No previous changes.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.checkHistory() == false) {
+            throw new CommandException(MESSAGE_UNDO_FAILURE);
+        }
+
         model.restoreHistory();
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }

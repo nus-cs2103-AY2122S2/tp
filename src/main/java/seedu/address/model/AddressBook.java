@@ -15,7 +15,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniquePersonList personsHistory;
+
+    private UniquePersonList personsHistory;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,7 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        personsHistory = new UniquePersonList();
+        personsHistory = null;
     }
 
     public AddressBook() {}
@@ -99,6 +100,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Saves the current list of persons in the address book.
      */
     public void saveHistory() {
+        if (this.personsHistory == null) {
+            this.personsHistory = new UniquePersonList();
+        }
         this.personsHistory.setPersons(this.persons);
     }
 
@@ -107,6 +111,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void restoreHistory() {
         this.persons.setPersons(this.personsHistory);
+    }
+
+    /**
+     * Retrieves the previous list of persons in the address book.
+     */
+    public UniquePersonList getHistory() {
+        return this.personsHistory;
     }
 
     //// util methods
