@@ -90,25 +90,25 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlySellerAddressBook> sellerAddressBookOptional;
         Optional<ReadOnlyBuyerAddressBook> buyerAddressBookOptional;
-
+        // Create dummy value for initialData
         ReadOnlyAddressBook initialData;
         ReadOnlySellerAddressBook initialSellerData;
         ReadOnlyBuyerAddressBook initialBuyerData;
 
         try {
-            addressBookOptional = storage.readAddressBook();
+            //addressBookOptional = storage.readAddressBook();
             sellerAddressBookOptional = storage.readSellerAddressBook();
             buyerAddressBookOptional = storage.readBuyerAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
+            //if (!addressBookOptional.isPresent()) {
+            //    logger.info("Data file not found. Will be starting with a sample AddressBook");
+            //}
             if (!sellerAddressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample SellerAddressBook");
             }
             if (!buyerAddressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample BuyerAddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = new AddressBook();
             initialSellerData = sellerAddressBookOptional.orElseGet(SampleDataUtil::getSampleSellerAddressBook);
             initialBuyerData = buyerAddressBookOptional.orElseGet(SampleDataUtil::getSampleBuyerAddressBook);
         } catch (DataConversionException e) {

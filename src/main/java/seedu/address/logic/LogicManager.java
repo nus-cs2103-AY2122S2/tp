@@ -50,7 +50,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            //storage.saveAddressBook(model.getAddressBook());
             storage.saveSellerAddressBook(model.getSellerAddressBook());
             storage.saveBuyerAddressBook(model.getBuyerAddressBook());
         } catch (IOException ioe) {
