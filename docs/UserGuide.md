@@ -34,7 +34,7 @@ Tracey can get your student health status management tasks done faster than trad
 --------------------------------------------------------------------------------------------------------------------
 ## How to navigate the User Guide
 
-There are a few symbols to take note of in our User Guide. These symbols are serve different purposes as stated below:
+There are a few symbols to take note of in our User Guide. These symbols serve different purposes as stated below:
 
 | Symbol  |                                                Purpose                                                |
 |:-------:|:-----------------------------------------------------------------------------------------------------:|
@@ -42,6 +42,14 @@ There are a few symbols to take note of in our User Guide. These symbols are ser
 |   ⚠️    |          Warnings are parked here. These are information that you **NEED** to take note of.           |
 |   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey |
 *Figure 1: Symbols and their purposes*
+
+Additional formatting guidelines:
+
+**Bold**: Bolded words indicate important keywords.
+
+`Command`: Words/phrases that are presented like this highlight specific keywords that you can use to interact with your computer or Tracey.
+
+[Links](): Words/phrases that are presented like this highlight clickable links to different parts of the User Guide or to external web pages for additional information. 
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
@@ -53,15 +61,15 @@ There are a few symbols to take note of in our User Guide. These symbols are ser
       2. For Windows users, open up Command Prompt and type in `java --version`.
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
-2. Download the latest `Tracey.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest **Tracey.jar** from [here](https://github.com/se-edu/addressbook-level3/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data. <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data* <br>
    📓`Note:`
-   1. If you are a Mac user and are unable to open the jar file after double-clicking, please open Terminal and change directory to where `Tracey.jar` is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-   2. If you are a Windows user and are unable to open the jar file after double-clicking, please open Command Prompt and change directory to where `Tracey.jar` is locaated. Then, type the following command to open the application: `java -jar Tracey.jar`.
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   1. If you are a Mac user and are unable to open the jar file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   2. If you are a Windows user and are unable to open the jar file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is locaated. Then, type the following command to open the application: `java -jar Tracey.jar`.
+6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * **`list`** : Lists all contacts.
