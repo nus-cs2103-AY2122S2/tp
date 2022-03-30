@@ -105,7 +105,7 @@ Deletes a student from TAPA.
 
 <br>
 
-### Deleting all students taking a particular module: `deletemodule`
+### Deleting all students taking a particular module: `deleteModule`
 
 Deletes all students taking a particular module from TAPA.
 
