@@ -376,6 +376,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            return null;
+        }
+
+        @Override
+        public ObservableList<Schedule> getScheduleList() {
+            return null;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }

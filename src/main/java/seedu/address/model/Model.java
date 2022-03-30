@@ -202,12 +202,16 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    ObservableList<Person> getPersonList();
+
     //=========== MyGM PlayerList (End) ======================================================================
 
     //=========== MyGM ScheduleList (Start) ==================================================================
 
     /** Returns an unmodifiable view of the filtered schedule list */
     ObservableList<Schedule> getFilteredScheduleList();
+
+    ObservableList<Schedule> getScheduleList();
 
     /**
      * Updates the filter of the filtered schedule list to filter by the given {@code predicate}.

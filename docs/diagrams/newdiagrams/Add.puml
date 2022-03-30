@@ -1,0 +1,47 @@
+@startuml
+!include Style.puml
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+end box
+
+box Model
+participant ":Model" as Model LOGIC_COLOR_T4
+participant ":AddressBook" as AddressBook LOGIC_COLOR_T4
+end box
+
+[-> LogicManager : execute(add)
+activate LogicManager
+
+LogicManager -> AddCommandParser : parseCommand(add)
+activate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand
+
+AddCommand --> AddCommandParser
+deactivate AddCommand
+
+AddCommandParser --> LogicManager : a
+deactivate AddCommandParser
+
+LogicManager -> AddCommand : execute(model)
+activate AddCommand
+
+AddCommand -> Model : addLineup()
+activate Model
+
+Model -> AddressBook : addLineup()
+activate AddressBook
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> AddCommand
+deactivate Model
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+@enduml

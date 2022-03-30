@@ -1,4 +1,5 @@
 package seedu.address.logic.parser;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
@@ -26,6 +27,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
             return new ThemeCommand(true, false);
         case "light":
             return new ThemeCommand(false, true);
+
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ThemeCommand.MESSAGE_EDIT_THEME_INVALID));

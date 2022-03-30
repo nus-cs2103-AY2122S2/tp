@@ -259,6 +259,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    public ObservableList<Person> getPersonList() {
+        return this.addressBook.getPersonList();
+    }
+
     //=========== Filtered Person List Accessors (End) ====================================================
 
     //=========== Filtered Schedule List Accessors (Start) ====================================================
@@ -276,6 +280,10 @@ public class ModelManager implements Model {
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);
+    }
+
+    public ObservableList<Schedule> getScheduleList() {
+        return this.addressBook.getScheduleList();
     }
 
     //=========== Filtered Schedule List Accessors (End) ====================================================

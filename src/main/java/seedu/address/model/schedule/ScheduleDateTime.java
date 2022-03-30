@@ -32,7 +32,7 @@ public class ScheduleDateTime {
     }
 
     /**
-     * Checks the schedule date time is valid
+     * Checks if a string is valid date time.
      */
     public static boolean isValidScheduleDateTime(String test) {
         try {

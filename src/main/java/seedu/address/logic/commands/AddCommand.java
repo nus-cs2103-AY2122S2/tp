@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
+
 /**
  * Adds a person to the address book.
  */
