@@ -1,14 +1,13 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.CommandType;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Nric;
-
 
 public class ViewCommandParser {
     /**
