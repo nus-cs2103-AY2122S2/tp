@@ -43,9 +43,9 @@ public class RemarkTagCommand extends Command {
         }
 
         ObservableList<Tag> allTags = model.getTagList();
-        for (int i = 0; i < allTags.size(); i++) {
-            if (allTags.get(i).equals(tag)) {
-                allTags.get(i).changeRemark(remark);
+        for (Tag allTag : allTags) {
+            if (allTag.equals(tag)) {
+                allTag.changeRemark(remark);
             }
         }
 
