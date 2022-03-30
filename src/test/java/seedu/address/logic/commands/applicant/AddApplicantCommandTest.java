@@ -22,6 +22,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 import seedu.address.testutil.PersonBuilder;
@@ -131,6 +133,16 @@ public class AddApplicantCommandTest {
         @Override
         public boolean hasPerson(Applicant applicant) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Applicant getApplicantWithEmail(Email email) {
+            return null;
+        }
+
+        @Override
+        public Applicant getApplicantWithPhone(Phone phone) {
+            return null;
         }
 
         @Override

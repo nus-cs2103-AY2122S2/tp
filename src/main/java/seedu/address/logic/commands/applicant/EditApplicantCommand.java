@@ -93,14 +93,22 @@ public class EditApplicantCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Applicant applicantWithEmail = model.getApplicantWithEmail(editedApplicant.getEmail());
-        if (applicantWithEmail != null) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, applicantWithEmail.getName().fullName));
+        boolean emailNotEdited = applicantToEdit.getEmail().equals(editedApplicant.getEmail());
+        if (!emailNotEdited) {
+            Applicant applicantWithEmail = model.getApplicantWithEmail(editedApplicant.getEmail());
+            if (applicantWithEmail != null) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL,
+                        applicantWithEmail.getName().fullName));
+            }
         }
 
-        Applicant applicantWithPhone = model.getApplicantWithPhone(editedApplicant.getPhone());
-        if (applicantWithPhone != null) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_PHONE, applicantWithPhone.getName().fullName));
+        boolean phoneNotEdited = applicantToEdit.getPhone().equals(editedApplicant.getPhone());
+        if (!phoneNotEdited) {
+            Applicant applicantWithPhone = model.getApplicantWithPhone(editedApplicant.getPhone());
+            if (applicantWithPhone != null) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_PHONE,
+                        applicantWithPhone.getName().fullName));
+            }
         }
 
         model.updateApplicant(applicantToEdit, editedApplicant);
