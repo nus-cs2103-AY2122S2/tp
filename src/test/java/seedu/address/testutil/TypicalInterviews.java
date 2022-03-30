@@ -28,7 +28,7 @@ public class TypicalInterviews {
     public static final LocalDateTime VALID_CARL_INTERVIEW_DATE_TIME =
             VALID_ALICE_INTERVIEW_DATE_TIME.plusMinutes(15);
     public static final LocalDateTime VALID_NO_CONFLICT_INTERVIEW_DATE_TIME =
-            LocalDateTime.of(2030, Month.FEBRUARY, 23, 15, 00);
+            LocalDateTime.of(2023, Month.FEBRUARY, 23, 16, 00);
 
     public static final Interview INTERVIEW_ALICE = new InterviewBuilder().withCandidate(TypicalCandidates.ALICE)
             .withInterviewDateTime(VALID_ALICE_INTERVIEW_DATE_TIME).build();
