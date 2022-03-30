@@ -72,16 +72,16 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 --------------------------------------------------------------------------------------------------------------------
 # About <a id="about"></a>
 
+The User Guide's primary goal is to assist the user in learning how to use the application Tinner.
+This guide covers everything from what the user sees, how Tinner can help the user, and even its limitations.
 ## Outline of this Guide <a id="outline"></a>
-The User Guide's primary goal is to assist the user in learning how to use the application Tinner
 
 This subsection helps you to understand the [Graphical User Interface (GUI)](#navigation), commonly used [technical terminologies](#technical-terminologies) and [general symbols](#general-symbols) to help you better understand the User Guide.
 
 Following this would be the [Features](#features), detailing the capabilities of Tinner and how to use them. This section can be either read from the start to bottom or by nicely divided segments of Tinner's repertoire in the [Table of Contents](#toc) and learn everything you can do with that specific area.
 
 ## Navigating within Tinner <a id="navigation"></a>
-The GUI of Tinner can be broken down into different segments with different purposes, this section would like to help users who are confused by the GUI get a better understanding of their uses and get more comfortable using the application.
-
+The GUI of Tinner can be broken down into different segments with different purposes. This section aims to help users who are confused by the GUI get a better understanding of its use and get more comfortable using the application.
 ### Main Window
 ![Main Window](images/MainWindow.png)
 
@@ -91,11 +91,11 @@ The GUI of Tinner can be broken down into different segments with different purp
 |     Command Box     | Text field for users to key in their commands                                                                                                                             |
 |    Response Box     | Tinner's response to user's commands. <br/>If the command was successful, Tinner would respond with what it did. Else it tells you what went wrong and any tips to fix it |
 | Company Result List | List out all the companies tracked by Tinner, or those that you specifically want to find                                                                                 |
-|  Role Result List   | List out all the roles in this company tracked by Tinner, or those tha you specifically want to find                                                                      |
-|      Role Tags      | A quick and easy visual aid to check an application's progress, more on this below                                                                                        |
+|  Role Result List   | List out all the roles in this company tracked by Tinner, or those that you specifically want to find                                                                     |
+|      Role Tags      | A quick and easy visual aid to check an application's progress, more on this [below](#tags)                                                                               |
 |     Status Bar      | Shows the file path to which your data is being saved at                                                                                                                  |
 
-### Role Tags
+### Role Tags <a id="tags"></a>
 The role tags are colour coded in order to make use of the GUI to better inform you how far along the internship application process for each role is at a glance.
 
 ![Role Tags](images/RoleTags.png)
