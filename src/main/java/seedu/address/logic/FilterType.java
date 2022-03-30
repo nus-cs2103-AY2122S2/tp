@@ -39,6 +39,7 @@ public class FilterType {
 
         HashSet<String> positionTypes = new HashSet<>();
         positionTypes.add("name");
+        positionTypes.add("req");
 
         HashSet<String> interviewTypes = new HashSet<>();
         interviewTypes.add("appl");

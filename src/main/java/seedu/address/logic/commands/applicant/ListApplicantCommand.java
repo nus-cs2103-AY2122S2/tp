@@ -98,6 +98,9 @@ public class ListApplicantCommand extends ListCommand {
         return DataType.APPLICANT;
     }
 
+    /**
+     * Returns the suitable {@code Predicate} based on the given {@code filterType} and {@code filterArgument}
+     */
     public Predicate<Applicant> getFilterPredicate(FilterType filterType, FilterArgument filterArgument) {
         if (filterType.type.equals("name")) {
             String[] nameKeywords = filterArgument.toString().split("\\s+");
