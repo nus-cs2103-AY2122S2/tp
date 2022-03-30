@@ -190,7 +190,7 @@ public class EditConsultationCommand extends Command {
             // state check
             EditConsultationDescriptor e = (EditConsultationDescriptor) other;
 
-            return  getDate().equals(e.getDate())
+            return getDate().equals(e.getDate())
                     && getTime().equals(e.getTime())
                     && getDiagnosis().equals(e.getDiagnosis())
                     && getFee().equals(e.getFee())
