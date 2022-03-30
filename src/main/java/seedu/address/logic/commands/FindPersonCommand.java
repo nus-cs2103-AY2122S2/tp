@@ -25,14 +25,14 @@ public class FindPersonCommand extends Command {
     public static final String COMMAND_WORD = "findp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose name, companyName, and tags"
-            + " contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + " contain any of the specified keywords (case-insensitive)"
+            + " and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_COMPANY + "COMPANY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " alice bob ";
+            + PREFIX_NAME + "alice bob ";
 
     private final PersonContainsKeywordsPredicate predicate;
 

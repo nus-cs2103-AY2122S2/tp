@@ -28,18 +28,18 @@ public class FindEventCommand extends Command {
     public static final String MESSAGE_NOT_QUERIED = "At least one field to find must be provided.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds events with given details of the event "
-            + "by name, company, date, time, location and tag "
+            + "by name, company, start date, end date, time, location and tag\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_COMPANY + "COMPANY] "
-            + "[" + PREFIX_START_DATE + " START DATE] "
-            + "[" + PREFIX_END_DATE + " START DATE] "
+            + "[" + PREFIX_START_DATE + "START DATE] "
+            + "[" + PREFIX_END_DATE + "START DATE] "
             + "[" + PREFIX_TIME + "TIME] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_COMPANY + " sgshop "
-            + PREFIX_TIME + " zoom";
+            + PREFIX_COMPANY + "sgshop "
+            + PREFIX_TIME + "zoom";
 
     private final EventContainsKeywordsPredicate predicate;
 
