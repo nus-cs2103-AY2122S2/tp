@@ -74,7 +74,8 @@ Format: `help`
 
 ### Listing all persons : `list`
 
-Shows a list of all student contacts in ArchDuke.
+Shows a list of all student contacts in ArchDuke. This command is often used to return back 
+to the student contact list.
 
 Format: `list`
 
@@ -102,9 +103,15 @@ There is no need to save manually.
 Adds a student contact information to ArchDuke. `add` must be followed by the student’s `NAME`, 
 `PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional. 
 
-Note: A student contact can only be added if it **has yet to exist** in ArchDuke. The student contact 
-is uniquely identified by his `NAME` with no regards to case sensitivity. E.g. `John Doe` would be the 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+A student contact can only be added if it **has yet to exist** in ArchDuke. The student contact 
+is uniquely identified by his `NAME` with **no regards to case sensitivity**. E.g. `John Doe` would be the 
 same person as `john doe`
+
+</div>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]`
 
@@ -118,11 +125,12 @@ A student contact can have any number of tags (including 0)
 
 Example: 
 
-* `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
+* `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science t/friends`
+* `add n/Joel Lee p/87654321 e/joellee@u.nus.edu a/Information Systems`
 
 Expected outcome:
 
-* Student’s contact information is visible in ArchDuke.
+* Student’s contact information is visible in ArchDuke and added to student contact list.
 
 ### Delete student contact information: `delete`
 
@@ -137,7 +145,7 @@ Example:
 
 * `delete 1`
 * `list` followed by `delete 2` deletes the second person in the current list from ArchDuke.
-* `find Alex` followed by `delete 1` deletes the first person in the current resulting list of the `find` command.
+* `find n/Bernice` followed by `delete 1` deletes the first person in the current resulting list of the `find` command.
 
 Expected outcome:
 
@@ -155,7 +163,7 @@ After delete:
 
 Locates all student contact in ArchDuke based on attributes that matches the given keywords. 
 * The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
-* The specified keywords are case-insensitive. 
+* The specified keywords are **case-insensitive**. 
 * The attributes could be accessed by adding prefixes before the keywords.
 * The result must match the exact wording, partial words will not match (e.g. `n/Dav` will not match the student contact
 `David` or `David Li`).
@@ -163,12 +171,12 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
   * `find n/Alex` would match with `Alex Yeoh` and `Alex Yu`
   * `find n/Alex Yeoh` would match with `Alex Yeoh` and `Alex Yu`
   * `find n/Alex Yu` would match with `Alex Yeoh`, `Alex Yu`, and `Bernice Yu`
-* The attributes supported multiple findings at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`
+* The attributes supported **multiple findings** at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`
   * `find n/Alex David` is possible and would show two results as `Alex Yeoh` and `David Li`, assuming that these are the only matching contacts.
   * `find a/Computer Science Business` is possible and would show contacts that has the following major: `Computer Science`, `Business`, `Business Analytics`
   , assuming that these majors are the exhaustive majors in the student contacts.
   * `find t/friends colleagues` is possible and would show contacts that has the at least one of the 2 tags: `friends` and `colleagues`
-* The attributes not supported multiple findings at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
+* The attributes **not supported multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
   * `find e/example@u.nus.edu student@u.nus.edu` is not possible as `find` command only supports finding one `EMAIL` at a time (e.g. `find e/example@u.nus.edu` or `find e/student@u.nus.edu`)
   * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`)
 
@@ -195,9 +203,15 @@ match those keywords.
 
 Creates a group in ArchDuke.
 
-Note: A group can only be added if it **has yet to exist** in ArchDuke. The group
-is uniquely identified by a `GROUP_NAME` with no regards to case sensitivity. E.g. `NUS` would be the
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+A group can only be added if it **has yet to exist** in ArchDuke. The group
+is uniquely identified by a `GROUP_NAME` with **no regards to case sensitivity**. E.g. `NUS` would be the
 same group as `Nus` and `nus`
+
+</div>
 
 Format: `addgroup g/GROUP_NAME`
 
@@ -236,7 +250,7 @@ Format: `assign INDEX g/GROUP_NAME`
 
 Example:
 
-* `assign 1 g/CS2103-W16-3`
+* `assign 3 g/NUS Fintech Society`
 
 Expected outcome:
 
@@ -263,7 +277,7 @@ Format: `deassign INDEX g/GROUP_NAME`
 
 Example:
 
-* `deassign 1 g/CS2103-W16-3`
+* `deassign 1 g/NUS Fintech Society`
 
 Expected outcome:
 
@@ -280,7 +294,7 @@ Format: `viewcontact g/GROUP_NAME`
 
 Example:
 
-* `viewcontact g/CS2103-W16-3`
+* `viewcontact g/NUS Fintech Society`
 
 Expected outcome:
 
@@ -293,9 +307,15 @@ Expected outcome:
 Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
 The group must **already exist** in ArchDuke. The task **must not already exist** in ArchDuke.
 
-Note: A task can only be added if it **has yet to exist** in the particular. The task
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+A task can only be added if it **has yet to exist** in the particular. The task
 is uniquely identified by a `TASK_NAME` with no regards to case sensitivity. E.g. `MEETING` would be the
 same task as `Meeting` and `meeting`
+
+</div>
 
 Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
@@ -303,11 +323,11 @@ Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
 Example:
 
-* `addtask task/v1.2 user guide g/CS2103-W16-3`
+* `addtask task/v1.2 user guide g/NUS Fintech Society`
 
 Expected outcome:
 
-* Adds the task to the specified group in ArchDuke. The task appears inside the group.
+* Adds the specified task to the specified group. The task appears inside the group.
 
 Before add task:
 
@@ -328,7 +348,7 @@ Format: `deltask task/TASK_NAME g/GROUP_NAME`
 
 Example: 
 
-* `deltask task/v1.2 user guide g/CS2103-W16-3`
+* `deltask task/v1.2 user guide g/NUS Fintech Society`
 
 Expected outcome:
 
@@ -345,7 +365,7 @@ Format: `viewtask g/GROUP_NAME`
 
 Example:
 
-* `viewtask g/CS2103-W16-3`
+* `viewtask g/NUS Fintech Society`
 
 Expected outcome:
 
@@ -389,7 +409,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
+**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science t/friends`
 **Delete student contact information** | `delete INDEX` <br> e.g., `delete 1`
 **Display the student contacts in a group** | `viewcontact g/GROUP_NAME` <br> e.g., `viewcontact g/CS2103-W16-3`
 
