@@ -33,7 +33,7 @@ faster than traditional GUI applications.
 
     * **`list`** : Lists all candidates.
 
-    * **`add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
+    * **`add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
    
     * **`edit 1 c/Computer Science yr/3 avail/1 ...`** Edits the first candidate in the system.
 
@@ -62,6 +62,8 @@ faster than traditional GUI applications.
 
 ## Navigating the Display
 
+<div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about GUI display layout:**<br>
 
 * **Candidates List** : Bottom leftmost panel displays the list of candidates in the system, alongside some key information.
@@ -72,16 +74,16 @@ faster than traditional GUI applications.
 
 Commands that affect the display of information within each of these panels is described below.
 
+</div>
+
+// TODO: Add illustrated (with shapes and text) of GUI
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
+{:toc}
 
 <div markdown="block" class="alert alert-info">
-
-* [Viewing Help](#viewing-help)
-* [Managing candidates](#managing-candidates)
-* [Scheduling Interviews](#scheduling-interviews)
-* [Miscellaneous commands](#miscellaneous-commands)
-* [Processing data](#processing-data)
 
 **:information_source: Notes about the command format:**<br>
 
@@ -106,7 +108,6 @@ Commands that affect the display of information within each of these panels is d
 | `yr`              | seniority           |
 | `avail`           | availability        |
 
-
 </div>
 
 ## Viewing help
@@ -127,14 +128,14 @@ Format: `add id/STUDENTID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVA
 
 * `STUDENTID` is sensitive and it will be validated.
 * `NAME` should only contain alphabets, `A-Z` or `a-z`.
-* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
 * `EMAIL` should only be in this format. i.e. `EXXXXXXX@u.nus.edu`
+* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
 * `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
 * `SENIORITY` is a number range from 1 to 4.
 * `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
 
 Examples:
-* `add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, E0123456, named John Doe.
+* `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, **A0123456B**, named John Doe.
 
 ### Editing a candidate: `edit`
 
@@ -146,7 +147,7 @@ Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 
 **:information_source: Notes about the edit format:**<br>
 
-`ATTRIBUTE_FIELD` can take on the following values `id`, `name`, `phone`, `course`, `yr`, `as`, `avail`
+`ATTRIBUTE_FIELD` can take on the following values `id`, `name`, `email`, `phone`, `course`, `yr`, `as`, `avail`
 
 * `as` is short for `ApplicationStatus`.
 
@@ -159,6 +160,7 @@ Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 Examples:
 * `edit 1 n/Jane Doe yr/3 avail/1` Edits the name, year and availability of the 1st candidate to be Jane Doe, Year 3, Monday only respectively.
 * `edit 2 c/Business Analytics` Edits the course of the 2nd candidate to be `Business Analytics`.
+* `edit 3 as/Accepted` Edits the application status of the 3rd candidate to `Accepted`.
 
 ### Listing all candidates : `list`
 
@@ -275,7 +277,6 @@ Examples:
 * `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
 * `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st candidate in the results of the find command.
 
-
 ### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
 
 View more details about the Candidate in the middle panel.
@@ -348,6 +349,7 @@ Exits the program.
 Format: `exit`
 
 ## Processing data
+
 ### Saving the data
 
 TAlent Assistant™ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -356,10 +358,13 @@ TAlent Assistant™ data are saved in the hard disk automatically after any comm
 
 TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/talentassistant.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
-</div>
+<div markdown="span" class="alert alert-warning">
 
+:exclamation: **Caution:**
+
+If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -375,20 +380,20 @@ If your changes to the data file makes its format invalid, TAlent Assistant™ w
 Commands in this section have been organised based on the expected scope of behaviour.
 
 ### Candidates List
-| Action     | Format, Examples                                                                                                                                                 |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                 |
-| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                     |
-| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                 |
+| Action     | Format, Examples                                                                                                                                                                               |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add id/STUDENTID n/NAME e/EMAIL p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
+| **Edit**   | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE_NUMBER] [c/COURSE] [yr/YEAR] [avail/AVAILABILITY] [as/APPLICATION_STATUS]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                             |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                   |
+| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                               |
 
 ### Candidate Profile
 | Action    | Format, Examples |
 |-----------|------------------|
 | **Focus** | [[PLACEHOLDER]]  |
 
-### Scheduled Interviews
+### Scheduling Interviews
 | Action                        | Format, Examples                                                                                       |
 |-------------------------------|--------------------------------------------------------------------------------------------------------|
 | **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
