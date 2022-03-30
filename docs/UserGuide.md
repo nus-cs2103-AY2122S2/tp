@@ -20,6 +20,7 @@ title: User Guide
     * [General find](#general-find)
     * [Precise find](#precise-find)
   * [Sorting the shows](#sorting-the-shows)
+  * [Suggesting a show](#suggest-a-show-suggest)
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
@@ -375,7 +376,17 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 * Use so/ to sort by status then name.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+---
 
+### Suggest a Show: `suggest`
+
+**Description:** Want a random show? This suggests a random show from the displayed list!
+
+**Format:** `suggest`
+
+**Example:** `suggest`
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 ---
 
 ### Importing a show: `import`
@@ -447,6 +458,7 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 | **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                 |
 | **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
 | **Sort**         | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                 |
+| **Suggest**      | `suggest`                                                                                                                |
 | **Import**       | `import`                                                                                                                 |
 | **Export**       | `export`                                                                                                                 |
 | **Exit**         | `exit`                                                                                                                   |

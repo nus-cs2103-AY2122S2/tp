@@ -430,21 +430,23 @@ Using the FileChooser library, it manages to create a File Explorer GUI similar 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a…​                       | I want to…​                                           | So that I can…​                                                |
-|----------|------------------------------|-------------------------------------------------------|----------------------------------------------------------------|
-| `* * *`  | user                         | add shows                                             | add new shows into the list                                    |
-| `* * *`  | user                         | delete shows  		                                      | remove wrong entries in the list                               |
-| `* * *`  | user                         | find a show                                           | search whether a specific show is in the list                  |
-| `* * *`  | user                         | list out all of my shows                              | see the details of all my shows in the list                    |
-| `* * *`  | user                         | edit a show from the list                             | change the name or status or tag of my show in the list        |
-| `* *`    | new user                     | see usage instructions                                | refer to instructions when I forget how to use the application |
-| `* * `   | long time user               | find shows of specific genres                         | recommend those shows to my friends                            |
-| `* * `   | long time user               | find a show I may or may not have watched             | decide whether to watch that show or not                       |
-| `* * `   | long time user               | find whether a show I am watching is completed or not | continue watching if it is not completed                       |
-| `* * `   | long time user               | sort the list of shows                                | view the list in an organised manner                           |
-| `* * `   | user with multiple computers | import or export the show data easily                 | keep updated copies of the show data                           |
-
-
+| Priority | As a…​                       | I want to…​                                            | So that I can…​                                                |
+|----------|------------------------------|--------------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | user                         | add shows                                              | add new shows into the list                                    |
+| `* * *`  | user                         | delete shows  		                                       | remove wrong entries in the list                               |
+| `* * *`  | user                         | find a show                                            | search whether a specific show is in the list                  |
+| `* * *`  | user                         | list out all of my shows                               | see the details of all my shows in the list                    |
+| `* * *`  | user                         | edit a show from the list                              | change the name or status or tag of my show in the list        |
+| `* *`    | new user                     | see usage instructions                                 | refer to instructions when I forget how to use the application |
+| `* * `   | long time user               | find shows of specific genres                          | recommend those shows to my friends                            |
+| `* * `   | long time user               | find a show I may or may not have watched              | decide whether to watch that show or not                       |
+| `* * `   | long time user               | find whether a show I am watching is completed or not  | continue watching if it is not completed                       |
+| `* * `   | long time user               | sort the list of shows                                 | view the list in an organised manner                           |
+| `* * `   | user with multiple computers | import or export the show data easily                  | keep updated copies of the show data                           |
+| `* * `   | indecisive user              | get a suggestion                                       | easily decide on what show to watch                            |
+| `* * `   | user                         | comment on shows                                       | record down my opinions about a show                           |
+| `* * `   | user                         | rate shows                                             | keep track on whether a show is good or bad                    |
+| `* * `   | user                         | tag shows                                              | keep track on what genre the show belongs to                   |
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
