@@ -15,6 +15,7 @@ public class Profile extends UiPart<Region> {
 
     private static final String FXML = "Profile.fxml";
     private Index index;
+    private Person person;
 
     @FXML
     private Label name;
@@ -38,11 +39,14 @@ public class Profile extends UiPart<Region> {
     /**
      * Creates a {@code Profile}.
      */
-    public Profile(Person person) {
+    public Profile() {
         super(FXML);
+    }
+
+    public void setPerson(Person person) {
         this.index = Index.fromZeroBased(UiManager.getMainWindow().getPersonListPanel()
                 .getPersonListView().getItems().indexOf(person));
-
+        this.person = person;
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
@@ -50,9 +54,14 @@ public class Profile extends UiPart<Region> {
         matriculation.setText(person.getMatricCard().value);
         course.setText(person.getCourse().value);
         address.setText(person.getAddress().value);
+        tags.getChildren().clear();
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    public Person getPerson() {
+        return this.person;
     }
 
     public Index getIndex() {

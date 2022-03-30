@@ -11,24 +11,26 @@ import seedu.address.ui.UiPart;
 
 public class TagList extends UiPart<Region> {
     private static final String FXML = "TagList.fxml";
-    private final List<Tag> tagList;
 
     @FXML
     private Label heading;
     @FXML
-    private FlowPane tags;
+    private FlowPane tagsInPane;
 
     /**
      * Creates a {@code TagList}.
      */
-    public TagList(List<Tag> tagList) {
+    public TagList() {
         super(FXML);
-        this.tagList = tagList;
-        heading.setText("Current tags: ");
-        tagList.forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    public List<Tag> getTagList() {
-        return this.tagList;
+    public void setTagList(List<Tag> tagList) {
+        heading.setText("Current tags: ");
+        tagsInPane.getChildren().clear();
+        int i = 1;
+        for (Tag tag : tagList) {
+            tagsInPane.getChildren().add(new Label(i + ". " + tag.tagName));
+            i++;
+        }
     }
 }

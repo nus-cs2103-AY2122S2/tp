@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -28,7 +27,6 @@ public class ListTagCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
-    @Disabled
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         // get success message in String

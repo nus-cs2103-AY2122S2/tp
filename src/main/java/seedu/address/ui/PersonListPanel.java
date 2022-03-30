@@ -10,10 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ProfileCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -25,7 +22,6 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
     private Logic logic;
-    private ResultDisplay resultDisplay;
 
     @FXML
     private ListView<Person> personListView;
@@ -38,7 +34,6 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         this.logic = logic;
-        resultDisplay = new ResultDisplay();
     }
 
     /**
@@ -66,10 +61,7 @@ public class PersonListPanel extends UiPart<Region> {
      * Handles the event whenever the selected person card changes.
      */
     public void handleSelect() throws CommandException {
-        int personSelected = personListView.getSelectionModel().getSelectedIndex();
-        ProfileCommand profileCommand = new ProfileCommand(Index.fromZeroBased(personSelected));
-        CommandResult commandResult = profileCommand.execute(logic.getModel());
-        UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        UiManager.getMainWindow().getGeneralDisplay().setProfile(personListView.getSelectionModel().getSelectedItem());
     }
 
     /**

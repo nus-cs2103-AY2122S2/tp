@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -26,14 +25,12 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TagBuilder;
 
 
-
 public class AddTagCommandTest {
     @Test
     public void constructor_nullTag_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddTagCommand(null));
     }
 
-    @Disabled
     @Test
     public void execute_tagAcceptedByModel_addSuccessful() throws Exception {
         AddTagCommandTest.ModelStubAcceptingTagAdded modelStub = new AddTagCommandTest.ModelStubAcceptingTagAdded();

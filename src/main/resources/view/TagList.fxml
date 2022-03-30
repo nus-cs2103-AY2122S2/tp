@@ -7,7 +7,7 @@
     <VBox spacing="10">
         <Label fx:id="heading" styleClass="tag-list-heading">
         </Label>
-        <FlowPane fx:id="tags">
+        <FlowPane fx:id="tagsInPane">
         </FlowPane>
     </VBox>
 </StackPane>

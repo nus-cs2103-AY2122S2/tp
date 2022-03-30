@@ -16,8 +16,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.UiManager;
-import seedu.address.ui.general.Profile;
 
 /**
  * Clears the address book.
@@ -81,11 +79,8 @@ public class AttachTagCommand extends Command {
         }
         model.setPerson(personToAttachNewTag, personWithNewTag);
 
-        //refresh the profile after attaching the tag.
-        Profile profile = new Profile(personWithNewTag);
-        UiManager.getMainWindow().getGeneralDisplay().refreshProfile(profile);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAttach, personToAttachNewTag.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAttach, personToAttachNewTag.getName()),
+                true, false, false, personWithNewTag);
     }
 
 

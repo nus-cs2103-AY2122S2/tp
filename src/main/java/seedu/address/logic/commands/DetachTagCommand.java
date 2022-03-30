@@ -16,8 +16,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.UiManager;
-import seedu.address.ui.general.Profile;
 
 /**
  * Clears the address book.
@@ -82,12 +80,9 @@ public class DetachTagCommand extends Command {
 
         model.setPerson(personToDetachTagFrom, personAfterDetach);
 
-        //refresh the profile after detaching the tag.
-        Profile profile = new Profile(personAfterDetach);
-        UiManager.getMainWindow().getGeneralDisplay().refreshProfile(profile);
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDetach,
-                personToDetachTagFrom.getName()));
+                personToDetachTagFrom.getName()),
+                true, false, false, personAfterDetach);
     }
 
 

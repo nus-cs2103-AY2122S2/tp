@@ -1,8 +1,12 @@
 package seedu.address.ui.general;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.ui.UiPart;
 
 /**
@@ -12,6 +16,7 @@ import seedu.address.ui.UiPart;
 public class GeneralDisplay extends UiPart<Region> {
     private static final String FXML = "GeneralDisplay.fxml";
     private Profile profile;
+    private TagList tagList;
 
     @FXML
     private StackPane profileDisplayPlaceholder;
@@ -23,39 +28,44 @@ public class GeneralDisplay extends UiPart<Region> {
      */
     public GeneralDisplay() {
         super(FXML);
+        profile = new Profile();
+        tagList = new TagList();
         tagListPlaceholder.setVisible(false);
         profileDisplayPlaceholder.setVisible(false);
     }
 
     /**
-     * Set the general display to show profile.
+     * Set the general display to show profile of specified person if person is not null.
+     * If person is null, it means the DeleteCommand was invoked on the currently shown person.
      */
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setProfile(Person person) {
+        this.profile.setPerson(person);
         tagListPlaceholder.setVisible(false);
         profileDisplayPlaceholder.setVisible(true);
-        profileDisplayPlaceholder.getChildren().clear();
+        resetProfile();
         profileDisplayPlaceholder.getChildren().add(profile.getRoot());
-    }
-
-    /**
-     * Refresh the profile if the person being currently displayed, and certain operation has being
-     * operated on that person.
-     */
-    public void refreshProfile(Profile profile) {
-        if (this.profile != null && this.profile.getIndex().equals(profile.getIndex())) {
-            this.setProfile(profile);
-        }
     }
 
     /**
      * Set the general display to show all tags.
      */
-    public void setTagList(TagList tagList) {
-        this.profile = null;
-        tagListPlaceholder.getChildren().clear();
+    public void setTagList(List<Tag> tags) {
+        this.tagList.setTagList(tags);
         tagListPlaceholder.setVisible(true);
         profileDisplayPlaceholder.setVisible(false);
+        resetTagList();
         tagListPlaceholder.getChildren().add(tagList.getRoot());
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void resetProfile() {
+        profileDisplayPlaceholder.getChildren().clear();
+    }
+
+    public void resetTagList() {
+        tagListPlaceholder.getChildren().clear();
     }
 }

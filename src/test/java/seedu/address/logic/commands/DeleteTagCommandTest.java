@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -31,7 +30,6 @@ public class DeleteTagCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    @Disabled
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Tag tagToDelete = model.getTagList().get(INDEX_FIRST_TAG.getZeroBased());

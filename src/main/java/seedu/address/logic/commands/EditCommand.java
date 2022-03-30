@@ -31,8 +31,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.UiManager;
-import seedu.address.ui.general.Profile;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -95,11 +93,8 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        //refresh the profile after attaching the tag.
-        Profile profile = new Profile(editedPerson);
-        UiManager.getMainWindow().getGeneralDisplay().refreshProfile(profile);
-
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson),
+                true, false, false, editedPerson);
     }
 
     /**

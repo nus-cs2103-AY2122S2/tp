@@ -222,6 +222,27 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isRemoveProfile() && this.generalDisplay.getProfile().getPerson() != null
+                    && this.generalDisplay.getProfile().getPerson().isSamePerson(commandResult.getPerson())) {
+                this.generalDisplay.resetProfile();
+            }
+
+            if (commandResult.isShowProfile()) {
+                this.generalDisplay.setProfile(commandResult.getPerson());
+                this.personListPanel.getPersonListView().scrollTo(this.generalDisplay
+                        .getProfile().getIndex().getZeroBased());
+                this.personListPanel.getPersonListView().getSelectionModel().select(this.generalDisplay
+                        .getProfile().getIndex().getZeroBased());
+            }
+
+            if (commandResult.isShowTagList()) {
+                this.generalDisplay.setTagList(logic.getModel().getTagList());
+            }
+
+            if (commandResult.isSwitchTheme()) {
+                commandResult.getTheme().applyTheme(primaryStage);
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

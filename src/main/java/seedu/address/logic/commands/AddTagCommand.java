@@ -9,8 +9,6 @@ import java.util.logging.Logger;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.UiManager;
-import seedu.address.ui.general.TagList;
 
 /**
  * Clears the address book.
@@ -51,10 +49,8 @@ public class AddTagCommand extends Command {
 
         model.addTag(toAdd);
 
-        TagList tagList = new TagList(model.getTagList());
-        UiManager.getMainWindow().getGeneralDisplay().setTagList(tagList);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
+                false, true, false, null);
     }
 
     @Override

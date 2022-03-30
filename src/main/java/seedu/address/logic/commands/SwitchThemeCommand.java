@@ -7,8 +7,6 @@ import java.util.logging.Logger;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.theme.DarkTheme;
-import seedu.address.model.theme.LightTheme;
 import seedu.address.model.theme.Theme;
 
 /**
@@ -38,16 +36,8 @@ public class SwitchThemeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         logger.log(Level.INFO, this.theme.toString());
-        if (theme.currentTheme().equals(theme)) {
-            throw new CommandException(String.format(MESSAGE_THEME_ALREADY_IN_USE, theme));
-        }
-        if (theme instanceof DarkTheme) {
-            new DarkTheme().applyTheme();
-        }
-        if (theme instanceof LightTheme) {
-            new LightTheme().applyTheme();
-        }
-        return new CommandResult(String.format(MESSAGE_SWITCH_THEME_SUCCESS, theme));
+
+        return new CommandResult(String.format(MESSAGE_SWITCH_THEME_SUCCESS, theme), true, theme);
     }
 
     @Override

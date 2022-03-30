@@ -12,8 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.UiManager;
-import seedu.address.ui.general.TagList;
 
 /**
  * Deletes a tag identified using it's displayed index from the address book.
@@ -58,10 +56,8 @@ public class DeleteTagCommand extends Command {
             model.setPerson(currPerson, newPerson);
         }
 
-        TagList tagList = new TagList(model.getTagList());
-        UiManager.getMainWindow().getGeneralDisplay().setTagList(tagList);
-
-        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete),
+                false, true, false, null);
     }
 
     @Override
