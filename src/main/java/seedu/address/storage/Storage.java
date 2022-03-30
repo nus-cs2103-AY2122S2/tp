@@ -35,4 +35,6 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Path getArchivedAddressBookFilePath();
 
     Optional<ReadOnlyAddressBook> readArchivedAddressBook() throws DataConversionException, IOException;
+
+    void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws DataConversionException, IOException;
 }

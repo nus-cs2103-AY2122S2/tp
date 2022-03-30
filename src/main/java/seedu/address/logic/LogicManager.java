@@ -85,7 +85,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Logic switchAddressBook() {
+    public void switchAddressBook() throws CommandException {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
@@ -102,9 +102,14 @@ public class LogicManager implements Logic {
             logger.warning("Problem while reading from the file. Will be starting with an empty Archived AddressBook");
             initialData = new AddressBook();
         }
-        Model model2 = new ModelManager(initialData, model.getUserPrefs());
-        model2.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new LogicManager(model2, storage);
+        try {
+            storage.saveArchivedAddressBook(model.getAddressBook());
+            storage.saveAddressBook(new AddressBook(initialData));
+        } catch (IOException | DataConversionException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+
+        model.setAddressBook(new AddressBook(initialData));
     }
 }

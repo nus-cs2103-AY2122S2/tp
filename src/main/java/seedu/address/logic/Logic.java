@@ -48,5 +48,5 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    Logic switchAddressBook();
+    void switchAddressBook() throws CommandException;
 }

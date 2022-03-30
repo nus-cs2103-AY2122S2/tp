@@ -211,9 +211,9 @@ public class MainWindow extends UiPart<Stage> {
         executeCommand("switch");
     }
 
-    private void handleSwitch() {
+    private void handleSwitch() throws CommandException, ParseException {
         logger.info("Handle Switch fired!");
-        logic = logic.switchAddressBook();
+        logic.switchAddressBook();
     }
 
     /**

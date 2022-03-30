@@ -72,6 +72,7 @@ public class StorageManager implements Storage {
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
+        System.out.println("Attempting to read data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -98,6 +99,11 @@ public class StorageManager implements Storage {
     public Optional<ReadOnlyAddressBook> readArchivedAddressBook() throws DataConversionException, IOException {
         System.out.println("Archived AddressBook path==>" + archivedAddressBookStorage.getAddressBookFilePath());
         return readAddressBook(archivedAddressBookStorage.getAddressBookFilePath());
+    }
+
+    @Override
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, archivedAddressBookStorage.getAddressBookFilePath());
     }
 
 }
