@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -20,7 +20,8 @@ public interface Model {
 
     /** {@code Predicate} that evaluates to true when a person has lineup name*/
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP = person -> !person.getLineupNames().isEmpty();
-
+    Predicate<Schedule> PREDICATE_SHOW_ACTIVE_SCHEDULES = schedule -> schedule.isActive();
+    Predicate<Schedule> PREDICATE_SHOW_ARCHIVED_SCHEDULES = schedule -> !schedule.isActive();
     //=========== MyGM (Start) =====================================================================
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,7 +93,7 @@ public interface Model {
     /**
      * Returns true if the name is taken by some player.
      */
-    boolean hasPersonName(LineupName targetName);
+    boolean hasPersonName(Name targetName);
 
     /**
      * Returns true if the lineup name is taken by some lineup.
@@ -147,7 +148,7 @@ public interface Model {
     /**
      * Returns the person with the given name.
      */
-    Person getPerson(LineupName targetName);
+    Person getPerson(Name targetName);
 
     /**
      * TO BE FILLED

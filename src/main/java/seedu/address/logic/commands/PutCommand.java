@@ -7,8 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Name;
 
 /**
  * Represents a put command which puts a player into a lineup.
@@ -30,15 +31,23 @@ public class PutCommand extends Command {
     public static final String MESSAGE_LINEUP_FULL = "Lineup is already full (max 5).";
     public static final String MESSAGE_PUT_PERSON_SUCCESS = "Successfully put %s into %s";
 
-    private final LineupName playerName;
+    private final Name playerName;
     private final seedu.address.model.lineup.LineupName lineupName;
 
     /**
      * Constructs a new put command.
      */
-    public PutCommand(LineupName playerName, seedu.address.model.lineup.LineupName lineupName) {
+    public PutCommand(Name playerName, seedu.address.model.lineup.LineupName lineupName) {
         this.playerName = playerName;
         this.lineupName = lineupName;
+    }
+
+    public Name getPlayerName() {
+        return this.playerName;
+    }
+
+    public LineupName getLineupName() {
+        return this.lineupName;
     }
 
     /**
@@ -63,5 +72,23 @@ public class PutCommand extends Command {
             model.putPersonIntoLineup(player, lineup);
             return new CommandResult(String.format(MESSAGE_PUT_PERSON_SUCCESS, this.playerName, this.lineupName));
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PutCommand)) {
+            return false;
+        }
+
+        PutCommand p = (PutCommand) other;
+
+        return getPlayerName().equals(p.getPlayerName())
+                && getLineupName().equals(p.getLineupName());
     }
 }

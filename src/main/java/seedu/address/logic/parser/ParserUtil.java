@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
 import seedu.address.model.schedule.ScheduleDateTime;
@@ -31,10 +31,10 @@ public class ParserUtil {
     /**
      * Parses a player.
      */
-    public static LineupName parsePlayer(String targetPlayerName) throws ParseException {
+    public static Name parsePlayer(String targetPlayerName) throws ParseException {
         requireNonNull(targetPlayerName);
         String trimmedName = targetPlayerName.trim();
-        return new LineupName(trimmedName);
+        return new Name(trimmedName);
     }
 
     /**
@@ -56,13 +56,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static LineupName parseName(String name) throws ParseException {
+    public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!LineupName.isValidLineupName(trimmedName)) {
-            throw new ParseException(LineupName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidLineupName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new LineupName(trimmedName);
+        return new Name(trimmedName);
     }
 
     /**

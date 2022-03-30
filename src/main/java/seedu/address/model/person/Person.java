@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final LineupName name;
+    private final Name name;
     private final Phone phone;
     private final Email email;
 
@@ -33,7 +33,7 @@ public class Person {
      * Every field must be present and not null.
      * Constructor to create a new player without lineups.
      */
-    public Person(LineupName name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
+    public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
                   Set<Tag> tags, Weight weight) {
         requireAllNonNull(name, phone, email, height, jerseyNumber, tags, weight);
         this.name = name;
@@ -48,7 +48,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(LineupName name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
+    public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
                   Set<Tag> tags, Weight weight, Set<seedu.address.model.lineup.LineupName> lineups) {
         requireAllNonNull(name, phone, email, height, jerseyNumber, tags, weight, lineups);
         this.name = name;
@@ -62,7 +62,7 @@ public class Person {
     }
 
 
-    public LineupName getName() {
+    public Name getName() {
         return name;
     }
 
@@ -136,7 +136,7 @@ public class Person {
     /**
      * Returns true if some person's name is {@code targetName}.
      */
-    public boolean isMatchName(LineupName targetName) {
+    public boolean isMatchName(Name targetName) {
         requireNonNull(targetName);
         return getName().equals(targetName);
     }

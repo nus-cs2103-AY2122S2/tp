@@ -32,7 +32,7 @@ import seedu.address.model.lineup.LineupPlayersList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
@@ -108,7 +108,7 @@ public class EditCommand extends Command {
     }
 
     private final EditCommandType type;
-    private final LineupName targetPlayerName;
+    private final Name targetPlayerName;
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
     private final EditScheduleDescriptor editScheduleDescriptor;
@@ -120,7 +120,7 @@ public class EditCommand extends Command {
      * @param targetPlayerName     of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(LineupName targetPlayerName, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Name targetPlayerName, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(targetPlayerName);
         requireNonNull(editPersonDescriptor);
 
@@ -233,10 +233,10 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        LineupName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
@@ -254,6 +254,8 @@ public class EditCommand extends Command {
      * Creates and return a {@code Lineup} with the new Lineup name
      */
     static Lineup createEditedLineup(Lineup lineupToEdit, seedu.address.model.lineup.LineupName editLineupName) {
+
+    //public static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
         assert lineupToEdit != null;
 
         seedu.address.model.lineup.LineupName updatedName = editLineupName;
@@ -318,7 +320,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private LineupName name;
+        private Name name;
         private Phone phone;
         private Email email;
         private Height height;
@@ -350,11 +352,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, height, jerseyNumber, tags, weight);
         }
 
-        public void setName(LineupName name) {
+        public void setName(Name name) {
             this.name = name;
         }
 
-        public Optional<LineupName> getName() {
+        public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -412,7 +414,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null && tags.size() != 0) ?
+                    Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override

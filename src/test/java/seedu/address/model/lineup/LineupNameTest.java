@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 
 public class LineupNameTest {
     @Test
@@ -14,16 +14,16 @@ public class LineupNameTest {
         assertThrows(NullPointerException.class, () -> seedu.address.model.lineup.LineupName.isValidLineupName(null));
 
         // invalid name
-        assertFalse(LineupName.isValidLineupName("")); // empty string
-        assertFalse(LineupName.isValidLineupName(" ")); // spaces only
-        assertFalse(LineupName.isValidLineupName("^")); // only non-alphanumeric characters
-        assertFalse(LineupName.isValidLineupName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidLineupName("")); // empty string
+        assertFalse(Name.isValidLineupName(" ")); // spaces only
+        assertFalse(Name.isValidLineupName("^")); // only non-alphanumeric characters
+        assertFalse(Name.isValidLineupName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(LineupName.isValidLineupName("start")); // alphabets only
-        assertTrue(LineupName.isValidLineupName("12345")); // numbers only
-        assertTrue(LineupName.isValidLineupName("the 5")); // alphanumeric characters
-        assertTrue(LineupName.isValidLineupName("GG")); // with capital letters
-        assertTrue(LineupName.isValidLineupName("the greatest lineup ever in history")); // long names
+        assertTrue(Name.isValidLineupName("start")); // alphabets only
+        assertTrue(Name.isValidLineupName("12345")); // numbers only
+        assertTrue(Name.isValidLineupName("the 5")); // alphanumeric characters
+        assertTrue(Name.isValidLineupName("GG")); // with capital letters
+        assertTrue(Name.isValidLineupName("the greatest lineup ever in history")); // long names
     }
 }

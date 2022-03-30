@@ -6,7 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_JERSEY_NUMBER = "91";
     public static final String DEFAULT_WEIGHT = "80";
 
-    private LineupName name;
+    private Name name;
     private Phone phone;
     private Email email;
     private Height height;
@@ -38,7 +38,7 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-        name = new LineupName(DEFAULT_NAME);
+        name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         height = new Height(DEFAULT_HEIGHT);
@@ -66,7 +66,7 @@ public class PersonBuilder {
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
-        this.name = new LineupName(name);
+        this.name = new Name(name);
         return this;
     }
 

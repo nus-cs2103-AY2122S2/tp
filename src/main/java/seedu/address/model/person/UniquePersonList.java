@@ -56,7 +56,7 @@ public class UniquePersonList implements Iterable<Person> {
      * @param targetName to check existence.
      * @return true if the name exists.
      */
-    public boolean containsName(LineupName targetName) {
+    public boolean containsName(Name targetName) {
         requireNonNull(targetName);
         return internalList.stream().anyMatch(person -> person.isMatchName(targetName));
     }
@@ -105,7 +105,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns the person with {@code targetName};
      */
-    public Person getPerson(LineupName targetName) {
+    public Person getPerson(Name targetName) {
         requireNonNull(targetName);
         return internalList.stream()
                 .filter(person -> person.isMatchName(targetName))

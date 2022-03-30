@@ -10,31 +10,31 @@ public class NameTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LineupName(null));
+        assertThrows(NullPointerException.class, () -> new Name(null));
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new LineupName(invalidName));
+        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
     }
 
     @Test
     public void isValidName() {
         // null name
-        assertThrows(NullPointerException.class, () -> LineupName.isValidLineupName(null));
+        assertThrows(NullPointerException.class, () -> Name.isValidLineupName(null));
 
         // invalid name
-        assertFalse(LineupName.isValidLineupName("")); // empty string
-        assertFalse(LineupName.isValidLineupName(" ")); // spaces only
-        assertFalse(LineupName.isValidLineupName("^")); // only non-alphanumeric characters
-        assertFalse(LineupName.isValidLineupName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidLineupName("")); // empty string
+        assertFalse(Name.isValidLineupName(" ")); // spaces only
+        assertFalse(Name.isValidLineupName("^")); // only non-alphanumeric characters
+        assertFalse(Name.isValidLineupName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(LineupName.isValidLineupName("peter jack")); // alphabets only
-        assertTrue(LineupName.isValidLineupName("12345")); // numbers only
-        assertTrue(LineupName.isValidLineupName("peter the 2nd")); // alphanumeric characters
-        assertTrue(LineupName.isValidLineupName("Capital Tan")); // with capital letters
-        assertTrue(LineupName.isValidLineupName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidLineupName("peter jack")); // alphabets only
+        assertTrue(Name.isValidLineupName("12345")); // numbers only
+        assertTrue(Name.isValidLineupName("peter the 2nd")); // alphanumeric characters
+        assertTrue(Name.isValidLineupName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidLineupName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }
