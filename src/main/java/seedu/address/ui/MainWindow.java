@@ -82,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
         favouriteWindow = new FavouriteWindow(logic);
         statisticsWindow = new StatisticsWindow(logic);
         reminderWindow = ReminderWindow.getInstance(logic);
+        timer = new Timer();
     }
 
     public Stage getPrimaryStage() {
@@ -257,6 +258,9 @@ public class MainWindow extends UiPart<Stage> {
         // launch the Reminder window only when there are active reminders
         if (!ReminderPersons.getInstance().isEmpty()) {
             newTimer.scheduleAtFixedRate(tasks, 60_000, 60_000);
+            // cancel any previous instances of Timer
+            timer.cancel();
+            // set the newly created Timer
             timer = newTimer;
         // else cancel the recurring Reminder window
         } else {

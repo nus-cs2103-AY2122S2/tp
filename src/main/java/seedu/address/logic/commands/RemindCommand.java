@@ -65,13 +65,11 @@ public class RemindCommand extends Command {
             // the RemindCommand does not have a Reminder, remove the Reminder for this current person
             if (reminder.isEmpty()) {
                 reminderPersons.remove(personToRemind);
-                return new CommandResult(String.format(MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind), false,
-                        false, false, false, false, true, false);
+                return new CommandResult(String.format(MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind));
             }
             // the RemindCommand contains a Reminder, edit the current Reminder to be this new one
             reminderPersons.add(personToRemind, reminder.get());
-            return new CommandResult(String.format(MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind), false,
-                    false, false, false, false, true, false);
+            return new CommandResult(String.format(MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind));
         }
 
         // a reminder is being added to this person for the first time
@@ -81,8 +79,7 @@ public class RemindCommand extends Command {
             reminderPersons.add(personToRemind, reminder.get());
         }
 
-        return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind), false,
-                false, false, false, false, true, false);
+        return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind));
     }
 
     public Index getIndex() {
