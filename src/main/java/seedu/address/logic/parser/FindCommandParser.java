@@ -73,7 +73,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new PhoneContainsKeywordsPredicate(keywords));
         case "remark":
             return new FindCommand(new RemarkContainsKeywordsPredicate(keywords));
-        case "yr':
+        case "yr":
             return new FindCommand(new SeniorityContainsKeywordsPredicate(keywords));
         case "id":
             return new FindCommand(new StudentIdContainsKeywordsPredicate(keywords));
