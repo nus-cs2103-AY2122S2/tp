@@ -1,7 +1,9 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -86,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// applicant-level operations
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
      */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
@@ -94,7 +96,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a applicant to the address book.
+     * Adds an applicant to the address book.
      * The applicant must not already exist in the address book.
      */
     public void addApplicant(Applicant p) {
@@ -156,6 +158,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+<<<<<<< HEAD
      * Pass an interview in HireLah.
      * The interview must already exist in HireLah.
      */
@@ -187,6 +190,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.reject(i);
     }
 
+
+    /**
+     * Returns interview(s) which are for the specified applicant.
+     */
+    public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+        return interviews.getApplicantsInterviews(applicant);
+    }
+
+    /**
+     * Returns interview(s) which are for the specified position.
+     */
+    public ArrayList<Interview> getPositionsInterview(Position position) {
+        return interviews.getPositionsInterview(position);
+    }
 
     /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
@@ -223,6 +240,28 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePosition(Position key) {
         positions.remove(key);
+    }
+
+    /**
+     * Updates all old instances of {@code positionToBeUpdated} with {@code newPosition}.
+     * Existence of {@code positionToBeUpdated} and uniqueness of {@code newPosition} will be checked at
+     * {@link #setPosition(Position, Position)}.
+     */
+    public void updatePosition(Position positionToBeUpdated, Position newPosition) {
+        requireAllNonNull(positionToBeUpdated, newPosition);
+        setPosition(positionToBeUpdated, newPosition);
+        interviews.updatePositions(positionToBeUpdated, newPosition);
+    }
+
+    /**
+     * Updates all old instances of {@code applicantToBeUpdated} with {@code newApplicant}.
+     * Existence of {@code applicantToBeUpdated} and uniqueness of {@code newApplicant} will be checked at
+     * {@link #setApplicant(Applicant, Applicant)}.
+     */
+    public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
+        requireAllNonNull(applicantToBeUpdated, newApplicant);
+        setApplicant(applicantToBeUpdated, newApplicant);
+        interviews.updateApplicants(applicantToBeUpdated, newApplicant);
     }
 
     /**

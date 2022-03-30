@@ -204,6 +204,16 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Interview> getPositionsInterviews(Position position) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePosition(Position target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -220,6 +230,16 @@ public class AddApplicantCommandTest {
 
         @Override
         public void setPosition(Position target, Position editedPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePosition(Position positionToBeUpdated, Position newPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
             throw new AssertionError("This method should not be called.");
         }
 

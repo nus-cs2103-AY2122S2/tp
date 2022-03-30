@@ -3,19 +3,23 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.exceptions.DuplicateInterviewException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 import seedu.address.model.interview.exceptions.NonPassableInterviewException;
+import seedu.address.model.position.Position;
 
 public class UniqueInterviewList implements Iterable<Interview> {
     private final ObservableList<Interview> internalList = FXCollections.observableArrayList();
     private final ObservableList<Interview> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
     /**
      * Returns true if the list contains an equivalent interview as the given argument.
      */
@@ -162,6 +166,36 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
     }
 
+    /**
+     * Returns interview(s) which are for the specified applicant.
+     */
+    public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+        ArrayList<Interview> interviews = new ArrayList<>();
+
+        for (Interview i : internalList) {
+            if (i.isInterviewForApplicant(applicant)) {
+                interviews.add(i);
+            }
+        }
+
+        return interviews;
+    }
+
+    /**
+     * Returns interview(s) which are for the specified position.
+     */
+    public ArrayList<Interview> getPositionsInterview(Position position) {
+        ArrayList<Interview> interviews = new ArrayList<>();
+
+        for (Interview i : internalList) {
+            if (i.isInterviewForPosition(position)) {
+                interviews.add(i);
+            }
+        }
+
+        return interviews;
+    }
+
     public void setInterviews(UniqueInterviewList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -178,6 +212,34 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
 
         internalList.setAll(interview);
+    }
+
+    /**
+     * Updates all interview containing instance of {@code positionToBeUpdated} to {@code newPosition}.
+     * Effects of editing a Position cascades to update all instances of the old position to the edited position.
+     */
+    public void updatePositions(Position positionToBeUpdated, Position newPosition) {
+        requireAllNonNull(positionToBeUpdated, newPosition);
+        for (int i = 0; i < internalList.size(); i++) {
+            Interview curr = internalList.get(i);
+            if (curr.getPosition().equals(positionToBeUpdated)) {
+                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition));
+            }
+        }
+    }
+
+    /**
+     * Updates all interview containing instance of {@code applicantToBeUpdated} to {@code newApplicant}.
+     * Effects of editing an Applicant cascades to update all instances of the old applicant to the edited applicant.
+     */
+    public void updateApplicants(Applicant applicantToBeUpdated, Applicant newApplicant) {
+        requireAllNonNull(applicantToBeUpdated, newApplicant);
+        for (int i = 0; i < internalList.size(); i++) {
+            Interview curr = internalList.get(i);
+            if (curr.getApplicant().equals(applicantToBeUpdated)) {
+                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition()));
+            }
+        }
     }
 
     /**

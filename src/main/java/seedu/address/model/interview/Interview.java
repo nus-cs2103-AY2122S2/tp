@@ -84,7 +84,6 @@ public class Interview {
      */
     public void markAsPassed() {
         this.status.markAsPassed();
-        this.position.increasePositionOffers();
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -155,6 +156,16 @@ public interface Model {
     void updateFilteredInterviewList(Predicate<Interview> predicate);
 
     /**
+     * Returns interview(s) which are for the specified applicant.
+     */
+    ArrayList<Interview> getApplicantsInterviews(Applicant applicant);
+
+    /**
+     * Returns interview(s) which are for the specified position.
+     */
+    ArrayList<Interview> getPositionsInterviews(Position position);
+
+    /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
@@ -185,6 +196,22 @@ public interface Model {
      * in the address book.
      */
     void setPosition(Position target, Position editedPosition);
+
+    /**
+     * Replaces all instances of {@code positionToBeUpdated} with {@code newPosition}.
+     * {@code positionToBeUpdated} must exist in the address book.
+     * The position identity of {@code newPosition} must not be the same as another existing position
+     * in the address book.
+     */
+    void updatePosition(Position positionToBeUpdated, Position newPosition);
+
+    /**
+     * Replaces all instances of {@code applicantToBeUpdated} with {@code newApplicant}.
+     * {@code applicantToBeUpdated} must exist in the address book.
+     * The applicant identity of {@code newApplicant} must not be the same as another existing applicant
+     * in the address book.
+     */
+    void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant);
 
     /** Returns an unmodifiable view of the filtered position list */
     ObservableList<Position> getFilteredPositionList();
