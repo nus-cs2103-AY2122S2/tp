@@ -3,6 +3,7 @@ package seedu.address.model.interview;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.position.Position;
@@ -173,7 +174,7 @@ public class Interview {
         final StringBuilder builder = new StringBuilder();
         builder.append(applicant.getName())
                 .append("; Date: ")
-                .append(getDate())
+                .append(getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                 .append("; Position: ")
                 .append(position.getPositionName())
                 .append("; Status: ")
