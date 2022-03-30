@@ -77,11 +77,6 @@
                                         <Region fx:constant="USE_PREF_SIZE" />
                                     </minWidth>
                                 </Label>
-                                <Label styleClass="sideBarToggleLabel" fx:id="statisticsLabel" text="Statistics">
-                                    <minWidth>
-                                        <Region fx:constant="USE_PREF_SIZE" />
-                                    </minWidth>
-                                </Label>
                             </children>
                         </VBox>
                         <VBox id="mainDisplay" HBox.hgrow="ALWAYS">
