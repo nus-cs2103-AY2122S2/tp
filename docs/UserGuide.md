@@ -124,7 +124,8 @@ Expected outcome:
 
 Deletes a student contact information at the specified index from ArchDuke.
 The index refers to the index number shown in the displayed student contact list. 
-The index must be a positive integer.
+The index must be a positive integer. The student deleted student contact would also be 
+deleted from all his previously assigned groups.
 
 Format: `delete INDEX`
 
@@ -136,7 +137,7 @@ Example:
 
 Expected outcome:
 
-* The student contact is removed from ArchDuke.
+* The student contact is removed from ArchDuke. The student contact is also removed from all previously assigned groups.
 
 ### Locating student contacts by attributes: `find`
 
@@ -150,16 +151,25 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
   * `find n/Alex` would match with `Alex Yeoh` and `Alex Yu`
   * `find n/Alex Yeoh` would match with `Alex Yeoh` and `Alex Yu`
   * `find n/Alex Yu` would match with `Alex Yeoh`, `Alex Yu`, and `Bernice Yu`
+* The attributes supported multiple findings at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`
+  * `find n/Alex David` is possible and would show two results as `Alex Yeoh` and `David Li`, assuming that these are the only matching contacts.
+  * `find a/Computer Science Business` is possible and would show contacts that has the following major: `Computer Science`, `Business`, `Business Analytics`
+  , assuming that these majors are the exhaustive majors in the student contacts.
+  * `find t/friends colleagues` is possible and would show contacts that has the at least one of the 2 tags: `friends` and `colleagues`
+* The attributes not supported multiple findings at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
+  * `find e/example@u.nus.edu student@u.nus.edu` is not possible as `find` command only supports finding one `EMAIL` at a time (e.g. `find e/example@u.nus.edu` or `find e/student@u.nus.edu`)
+  * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`)
 
-Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]`
+Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]` for these `PREFIX`: `n/`, `a/`, `t/`
+Format: `find PREFIX/KEYWORD` for these `PREFIX`: `e/`, `p/`
 
 Example:
 
-* `find n/Alex`
+* `find n/Alex David`
 * `find p/98765432`
 * `find e/example@u.nus.edu`
 * `find a/Computer Science`
-* `find t/friends`
+* `find t/friends colleagues`
 
 Expected outcome:
 
@@ -328,8 +338,9 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
+**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
 **Delete student contact information** | `delete INDEX` <br> e.g., `delete 1`
+**Display the student contacts in a group** | `viewcontact g/GROUP_NAME` <br> e.g., `viewcontact g/CS2103-W16-3`
 
 ### Student group management
 
@@ -345,6 +356,6 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add a task in a group** | `addtask t/TASK_NAME g/GROUP_NAME`<br> e.g., `addtask t/v1.2 user guide g/CS2103-W16-3`
-**Delete a task in a group** | `deltask t/TASK_NAME g/GROUP_NAME`<br> e.g.,`deltask t/v1.2 user guide g/CS2103-W16-3`
+**Add a task in a group** | `addtask task/TASK_NAME g/GROUP_NAME`<br> e.g., `addtask task/v1.2 user guide g/CS2103-W16-3`
+**Delete a task in a group** | `deltask task/TASK_NAME g/GROUP_NAME`<br> e.g.,`deltask task/v1.2 user guide g/CS2103-W16-3`
 **Display the tasks in a group** | `viewtask g/GROUP_NAME`<br> e.g.,`viewtask g/CS2103-W16-3`
