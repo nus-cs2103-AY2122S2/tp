@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
-
-public class ThemeCommand extends Command{
+public class ThemeCommand extends Command {
 
     public static final String COMMAND_WORD = "theme";
 
@@ -24,11 +24,24 @@ public class ThemeCommand extends Command{
 
     private final boolean toLight;
 
+    /**
+     * Creates a new ThemeCommand.
+     *
+     * @param toDark Whether the theme is to become dark.
+     * @param toLight Whether the theme is to become light.
+     */
     public ThemeCommand(boolean toDark, boolean toLight) {
         this.toDark = toDark;
         this.toLight = toLight;
     }
 
+    /**
+     * Executes the command and returns the feedback.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult
+     * @throws CommandException
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (toDark) {

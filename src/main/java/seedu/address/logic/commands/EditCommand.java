@@ -303,16 +303,16 @@ public class EditCommand extends Command {
         // state check
 
         if (this.type == EditCommandType.PLAYER) {
-            return this.editPersonDescriptor.equals(e.editPersonDescriptor) &&
-                    this.targetPlayerName.equals(e.targetPlayerName);
+            return this.editPersonDescriptor.equals(e.editPersonDescriptor)
+                    && this.targetPlayerName.equals(e.targetPlayerName);
         }
         if (this.type == EditCommandType.LINEUP) {
-            return this.editLineupName.equals(e.editLineupName) &&
-                    this.targetLineupName.equals(e.targetLineupName);
+            return this.editLineupName.equals(e.editLineupName)
+                    && this.targetLineupName.equals(e.targetLineupName);
         }
 
-        return this.editScheduleDescriptor.equals(e.editScheduleDescriptor) &&
-                this.index.equals(e.index);
+        return this.editScheduleDescriptor.equals(e.editScheduleDescriptor)
+                && this.index.equals(e.index);
     }
 
     /**
@@ -414,8 +414,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null && tags.size() != 0) ?
-                    Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null && tags.size() != 0)
+                    ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override

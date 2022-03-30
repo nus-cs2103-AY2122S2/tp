@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -32,11 +34,17 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PlayerStatisticsPanel playerStatisticsPanel;
     private ScheduleListPanel scheduleListPanel;
+    private ScheduleCalendarPanel scheduleCalendarPanel;
     private ResultDisplay resultDisplay;
+    private PlayerSuggestion playerSuggestion;
     private HelpWindow helpWindow;
 
     private boolean isDarkMode;
+
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -48,10 +56,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane playerStatisticsPanelPlaceholder;
+
+    @FXML
     private StackPane scheduleListPanelPlaceholder;
 
     @FXML
+    private StackPane scheduleCalendarPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane playerSuggestionPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -121,11 +138,20 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        playerStatisticsPanel = new PlayerStatisticsPanel(logic.getPersonList());
+        playerStatisticsPanelPlaceholder.getChildren().add(playerStatisticsPanel.getRoot());
+
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
         scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
 
+        scheduleCalendarPanel = new ScheduleCalendarPanel(logic.getScheduleList());
+        scheduleCalendarPanelPlaceholder.getChildren().add(scheduleCalendarPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        playerSuggestion = new PlayerSuggestion(logic.getPersonList());
+        playerSuggestionPlaceholder.getChildren().add(playerSuggestion.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -204,6 +230,18 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandText.contains(CliSyntax.PREFIX_SCHEDULE.toString())) {
+                this.tabPane.getSelectionModel().select(this.tabPane.getTabs().get(1));
+                System.out.println("swtich to schdeul");
+            } else {
+                this.tabPane.getSelectionModel().select(this.tabPane.getTabs().get(0));
+                System.out.println("switch to player");
+            }
+
+            playerStatisticsPanel.update(logic.getPersonList());
+            playerSuggestion.update(logic.getPersonList());
+            scheduleCalendarPanel.update(logic.getScheduleList());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

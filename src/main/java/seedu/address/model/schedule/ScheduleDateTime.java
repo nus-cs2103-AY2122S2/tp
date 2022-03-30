@@ -31,7 +31,9 @@ public class ScheduleDateTime {
         return scheduleDateTime;
     }
 
-
+    /**
+     * Checks if a string is valid date time.
+     */
     public static boolean isValidScheduleDateTime(String test) {
         try {
             LocalDateTime.parse(test, FORMATTER);

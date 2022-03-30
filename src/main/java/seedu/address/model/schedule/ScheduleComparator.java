@@ -1,7 +1,7 @@
 package seedu.address.model.schedule;
 
-import java.util.Comparator;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 /**
  * A comparator to compare between objects of {@code Person}.

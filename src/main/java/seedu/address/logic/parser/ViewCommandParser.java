@@ -2,16 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
-import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,8 +22,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.LineupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleNameContainsKeywordsPredicate;
-
-import javax.swing.text.View;
 
 /**
  * Parses input arguments and creates a new ViewCommand object
@@ -41,8 +38,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      */
     @Override
     public ViewCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP, PREFIX_SCHEDULE
-                , PREFIX_ALL_SCHEDULE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP, PREFIX_SCHEDULE,
+                PREFIX_ALL_SCHEDULE);
 
         boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
         boolean hasLSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP); // L/

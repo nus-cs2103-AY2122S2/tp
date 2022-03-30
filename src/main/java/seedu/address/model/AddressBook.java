@@ -268,6 +268,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return schedules.asUnmodifiableObservableList();
     }
 
+    /**
+     * Refreshes the addressbook.
+     */
     public void refresh() {
         persons.refresh();
         schedules.refresh();
