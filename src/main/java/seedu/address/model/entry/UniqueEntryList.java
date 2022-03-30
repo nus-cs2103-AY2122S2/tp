@@ -3,6 +3,7 @@ package seedu.address.model.entry;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -110,6 +111,14 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
      */
     public ObservableList<T> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public ObservableList<T> asSortedList(Comparator<T> comparator) {
+        return FXCollections.observableArrayList(internalList.sorted(comparator));
+    }
+
+    public ObservableList<T> asReversedSortedList(Comparator<T> comparator) {
+        return FXCollections.observableArrayList(internalList.sorted(comparator.reversed()));
     }
 
     @Override
