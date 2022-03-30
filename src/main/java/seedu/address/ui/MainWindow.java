@@ -265,8 +265,8 @@ public class MainWindow extends UiPart<Stage> {
                 resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
                 handleCopy(commandResult);
             } else if (commandResult.isArchiveCommand()) {
-                // TODO: Provide contact index
-                resultDisplay.setFeedbackToUser("Archived a Contact!");
+                resultDisplay.setFeedbackToUser(String.format("Archived Contact #%s!",
+                                                commandResult.getFeedbackToUser()));
                 handleArchive(commandResult);
             } else {
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
