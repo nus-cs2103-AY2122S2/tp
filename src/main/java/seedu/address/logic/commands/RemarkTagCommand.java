@@ -49,7 +49,8 @@ public class RemarkTagCommand extends Command {
             }
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tag));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tag),
+                false, true, false, null);
     }
 
 

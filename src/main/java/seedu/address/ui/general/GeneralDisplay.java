@@ -2,9 +2,13 @@ package seedu.address.ui.general;
 
 import java.util.List;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.logic.Logic;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.UiPart;
@@ -26,10 +30,10 @@ public class GeneralDisplay extends UiPart<Region> {
     /**
      * Creates a {@code GeneralDisplay}.
      */
-    public GeneralDisplay() {
+    public GeneralDisplay(Logic logic) {
         super(FXML);
         profile = new Profile();
-        tagList = new TagList();
+        tagList = new TagList(logic);
         tagListPlaceholder.setVisible(false);
         profileDisplayPlaceholder.setVisible(false);
     }
@@ -53,8 +57,7 @@ public class GeneralDisplay extends UiPart<Region> {
         this.tagList.setTagList(tags);
         tagListPlaceholder.setVisible(true);
         profileDisplayPlaceholder.setVisible(false);
-        resetTagList();
-        tagListPlaceholder.getChildren().add(tagList.getRoot());
+        tagListPlaceholder.getChildren().add(tagList.getTagListView());
     }
 
     public Profile getProfile() {
@@ -63,9 +66,5 @@ public class GeneralDisplay extends UiPart<Region> {
 
     public void resetProfile() {
         profileDisplayPlaceholder.getChildren().clear();
-    }
-
-    public void resetTagList() {
-        tagListPlaceholder.getChildren().clear();
     }
 }

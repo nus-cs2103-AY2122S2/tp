@@ -143,7 +143,7 @@ public class MainWindow extends UiPart<Stage> {
         SearchBar searchBar = new SearchBar();
         searchBarPlaceholder.getChildren().add(searchBar.getRoot());
 
-        generalDisplay = new GeneralDisplay();
+        generalDisplay = new GeneralDisplay(logic);
         generalDisplayPlaceholder.getChildren().add(generalDisplay.getRoot());
     }
 
