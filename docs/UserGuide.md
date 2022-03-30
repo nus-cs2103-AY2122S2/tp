@@ -90,6 +90,25 @@ Function: Exit the program. Don't worry, we will save your data!
 
 Format: `exit`
 
+<<<<<<< HEAD
+=======
+### `match`
+
+Function: Match the specified buyer's property to any sellers' property.
+
+Format: `match INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers who have properties that are matching the buyer's property requirements will be displayed.
+* A seller will match to the buyer if:
+  * They have the same location & house type.
+  * If a price within the buyer's price range is within the seller's price range.
+* E.g. If a buyer has house type `HDB`, location `Bishan` and price range `400000,500000`, a seller with house type `HDB`, location `Bishan` and price range `490000,600000` will match as the buyer's price range has an **overlap** with the seller's.
+
+Examples:
+
+* `match 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+>>>>>>> 0ee3b7e2bc0fd40c651738f80d213c9e1a150a41
 
 [back to start of section](#features)
 

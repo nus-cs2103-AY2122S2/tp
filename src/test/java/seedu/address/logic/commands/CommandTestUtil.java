@@ -24,6 +24,8 @@ import seedu.address.model.property.HouseType;
 import seedu.address.model.property.Location;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
+import seedu.address.model.seller.Seller;
+import seedu.address.model.seller.SellerNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
@@ -118,6 +120,23 @@ public class CommandTestUtil {
     }
 
     /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the address book, filtered seller list and selected seller in {@code actualModel} remain unchanged
+     */
+    public static void assertSellerCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        List<Seller> expectedFilteredSellerList = new ArrayList<>(actualModel.getFilteredSellerList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedFilteredSellerList, actualModel.getFilteredSellerList());
+    }
+
+    /**
      * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
@@ -132,7 +151,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the buyer at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showBuyerAtIndex(Model model, Index targetIndex) {
@@ -143,6 +162,20 @@ public class CommandTestUtil {
         model.updateFilteredBuyerList(new BuyerNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredBuyerList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the seller at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showSellerAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredSellerList().size());
+
+        Seller seller = model.getFilteredSellerList().get(targetIndex.getZeroBased());
+        final String[] splitName = seller.getName().fullName.split("\\s+");
+        model.updateFilteredSellerList(new SellerNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredSellerList().size());
     }
 
 }
