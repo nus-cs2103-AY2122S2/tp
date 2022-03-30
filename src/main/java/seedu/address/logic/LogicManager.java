@@ -74,6 +74,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Path getArchivedAddressBookFilePath() {
+        return model.getArchivedAddressBookFilePath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
@@ -110,5 +115,6 @@ public class LogicManager implements Logic {
         }
 
         model.setAddressBook(new AddressBook(initialData));
+        System.out.println(getArchivedAddressBookFilePath().toString());
     }
 }

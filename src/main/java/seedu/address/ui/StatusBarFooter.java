@@ -25,4 +25,16 @@ public class StatusBarFooter extends UiPart<Region> {
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
+    public void swapPaths(Path archivePath, Path defaultPath) {
+        String currentPathString = saveLocationStatus.getText();
+        String archivePathString = Paths.get(".").resolve(archivePath).toString();
+        String defaultPathString = Paths.get(".").resolve(defaultPath).toString();
+
+        if (currentPathString.equals(archivePathString)) {
+            saveLocationStatus.setText(defaultPathString);
+        } else if (currentPathString.equals(defaultPathString)) {
+            saveLocationStatus.setText(archivePathString);
+        }
+    }
+
 }
