@@ -58,7 +58,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear_withExtraArgs_failure() {
+    public void parseCommand_clear_withExtraArgs() {
         String userInput = ClearCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
@@ -85,7 +85,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_exit_withExtraArgs_failure() {
+    public void parseCommand_exit_withExtraArgs() {
         String userInput = ExitCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
@@ -104,7 +104,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_help_withExtraArgs_failure() {
+    public void parseCommand_help_withExtraArgs() {
         String userInput = HelpCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
@@ -115,7 +115,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list_withExtraArgs_failure() {
+    public void parseCommand_list_withExtraArgs() {
         String userInput = ListCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
@@ -126,7 +126,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_summarise_withExtraArgs_failure() {
+    public void parseCommand_summarise_withExtraArgs() {
         String userInput = SummariseCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
@@ -137,7 +137,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_archive_withExtraArgs_failure() {
+    public void parseCommand_archive_withExtraArgs() {
         String userInput = ArchiveCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
@@ -158,7 +158,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_undo_withExtraArgs_failure() {
+    public void parseCommand_undo_withExtraArgs() {
         String userInput = UndoCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
@@ -169,7 +169,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_redo_withExtraArgs_failure() {
+    public void parseCommand_redo_withExtraArgs() {
         String userInput = RedoCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
         assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
