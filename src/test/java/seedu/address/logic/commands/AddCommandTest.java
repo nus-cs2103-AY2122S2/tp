@@ -232,6 +232,11 @@ public class AddCommandTest {
         public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void resetAllScheduledStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -1,14 +1,13 @@
 package seedu.address.logic.commands.schedule;
 
-import seedu.address.logic.commands.Command;
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
-
 /**
- * Clears the address book.
+ * Clears the interview schedule.
  */
 public class ClearScheduleCommand extends ScheduleCommand {
 
