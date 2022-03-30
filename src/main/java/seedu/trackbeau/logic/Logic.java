@@ -39,7 +39,7 @@ public interface Logic {
     ObservableList<Booking> getFilteredBookingList();
 
     /** Returns an unmodifiable view of the list of services */
-    ObservableList<Service> getFilteredServicesList();
+    ObservableList<Service> getFilteredServiceList();
 
     /**
      * Returns the user prefs' trackBeau file path.

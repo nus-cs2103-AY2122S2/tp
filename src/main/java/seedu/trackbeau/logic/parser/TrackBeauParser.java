@@ -12,6 +12,9 @@ import seedu.trackbeau.logic.commands.ExitCommand;
 import seedu.trackbeau.logic.commands.HelpCommand;
 import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.commands.booking.DeleteBookingCommand;
+import seedu.trackbeau.logic.commands.booking.EditBookingCommand;
+import seedu.trackbeau.logic.commands.booking.FindBookingCommand;
+import seedu.trackbeau.logic.commands.booking.ListBookingsCommand;
 import seedu.trackbeau.logic.commands.customer.AddCustomerCommand;
 import seedu.trackbeau.logic.commands.customer.DeleteCustomerCommand;
 import seedu.trackbeau.logic.commands.customer.EditCustomerCommand;
@@ -20,13 +23,21 @@ import seedu.trackbeau.logic.commands.customer.ListCustomersCommand;
 import seedu.trackbeau.logic.commands.service.AddServiceCommand;
 import seedu.trackbeau.logic.commands.service.DeleteServiceCommand;
 import seedu.trackbeau.logic.commands.service.EditServiceCommand;
+import seedu.trackbeau.logic.commands.service.FindServiceCommand;
 import seedu.trackbeau.logic.commands.service.ListServicesCommand;
 import seedu.trackbeau.logic.parser.booking.AddBookingCommandParser;
 import seedu.trackbeau.logic.parser.booking.DeleteBookingCommandParser;
+import seedu.trackbeau.logic.parser.booking.EditBookingCommandParser;
+import seedu.trackbeau.logic.parser.booking.FindBookingCommandParser;
+import seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser;
+import seedu.trackbeau.logic.parser.customer.DeleteCustomerCommandParser;
+import seedu.trackbeau.logic.parser.customer.EditCustomerCommandParser;
+import seedu.trackbeau.logic.parser.customer.FindCustomerCommandParser;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.logic.parser.service.AddServiceCommandParser;
 import seedu.trackbeau.logic.parser.service.DeleteServiceCommandParser;
 import seedu.trackbeau.logic.parser.service.EditServiceCommandParser;
+import seedu.trackbeau.logic.parser.service.FindServiceCommandParser;
 
 /**
  * Parses user input.
@@ -54,6 +65,21 @@ public class TrackBeauParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+        case ListCustomersCommand.COMMAND_WORD:
+            return new ListCustomersCommand();
+
+        case AddCustomerCommand.COMMAND_WORD:
+            return new AddCustomerCommandParser().parse(arguments);
+
+        case EditCustomerCommand.COMMAND_WORD:
+            return new EditCustomerCommandParser().parse(arguments);
+
+        case DeleteCustomerCommand.COMMAND_WORD:
+            return new DeleteCustomerCommandParser().parse(arguments);
+
+        case FindCustomerCommand.COMMAND_WORD:
+            return new FindCustomerCommandParser().parse(arguments);
+
         case ListServicesCommand.COMMAND_WORD:
             return new ListServicesCommand();
 
@@ -66,29 +92,26 @@ public class TrackBeauParser {
         case DeleteServiceCommand.COMMAND_WORD:
             return new DeleteServiceCommandParser().parse(arguments);
 
+        case FindServiceCommand.COMMAND_WORD:
+            return new FindServiceCommandParser().parse(arguments);
+
+        case ListBookingsCommand.COMMAND_WORD:
+            return new ListBookingsCommand();
+
         case AddBookingCommand.COMMAND_WORD:
             return new AddBookingCommandParser().parse(arguments);
+
+        case EditBookingCommand.COMMAND_WORD:
+            return new EditBookingCommandParser().parse(arguments);
 
         case DeleteBookingCommand.COMMAND_WORD:
             return new DeleteBookingCommandParser().parse(arguments);
 
-        case AddCustomerCommand.COMMAND_WORD:
-            return new AddCustomerCommandParser().parse(arguments);
-
-        case EditCustomerCommand.COMMAND_WORD:
-            return new EditCustomerCommandParser().parse(arguments);
-
-        case DeleteCustomerCommand.COMMAND_WORD:
-            return new DeleteCustomerCommandParser().parse(arguments);
+        case FindBookingCommand.COMMAND_WORD:
+            return new FindBookingCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case FindCustomerCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCustomersCommand.COMMAND_WORD:
-            return new ListCustomersCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

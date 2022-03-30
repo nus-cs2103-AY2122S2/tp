@@ -61,7 +61,7 @@ public class EditServiceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Service> lastShownServiceList = model.getFilteredServicesList();
+        List<Service> lastShownServiceList = model.getFilteredServiceList();
 
         if (index.getZeroBased() >= lastShownServiceList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);

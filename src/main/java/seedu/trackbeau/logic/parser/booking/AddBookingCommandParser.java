@@ -17,6 +17,7 @@ import seedu.trackbeau.model.booking.BookingDateTime;
  * Parses input arguments and creates a new AddBookingCommand object
  */
 public class AddBookingCommandParser implements Parser<AddBookingCommand> {
+    public static final String EMPTY_FEEDBACK_TYPE = "No data";
     /**
      * Parses the given {@code String} of arguments in the context of the AddBookingCommand
      * and returns an AddCustomerCommand object for execution.

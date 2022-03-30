@@ -55,6 +55,7 @@ import org.junit.jupiter.api.Test;
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.customer.EditCustomerCommand;
 import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
+import seedu.trackbeau.logic.parser.customer.EditCustomerCommandParser;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;

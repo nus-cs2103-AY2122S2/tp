@@ -102,27 +102,45 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteCustomer(Customer target) {
-        trackBeau.removeCustomer(target);
-    }
-
-    @Override
     public void addCustomer(Customer customer) {
         trackBeau.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     @Override
-    public Integer getCustomerIndex(Customer customer) {
-        return trackBeau.getCustomerIndex(customer);
+    public void deleteCustomer(Customer target) {
+        trackBeau.removeCustomer(target);
     }
 
     @Override
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
-
         trackBeau.setCustomer(target, editedCustomer);
+    }
 
+    //=========== Services =============================================================
+
+    @Override
+    public boolean hasService(Service service) {
+        requireNonNull(service);
+        return trackBeau.hasService(service);
+    }
+
+    @Override
+    public void addService(Service service) {
+        trackBeau.addService(service);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+    }
+
+    @Override
+    public void deleteService(Service target) {
+        trackBeau.removeService(target);
+    }
+
+    @Override
+    public void setService(Service target, Service editedService) {
+        requireAllNonNull(target, editedService);
+        trackBeau.setService(target, editedService);
     }
 
     //=========== Bookings ================================================================================
@@ -149,63 +167,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedBooking);
         trackBeau.setBooking(target, editedBooking);
     }
-    //=========== Filtered Booking List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Booking} backed by the internal list of
-     * {@code versionedTrackBeau}
-     */
-    @Override
-    public ObservableList<Booking> getFilteredBookingList() {
-        return filteredBookings;
-    }
-
-    @Override
-    public void updateFilteredBookingList(Predicate<Booking> predicate) {
-        requireNonNull(predicate);
-        filteredBookings.setPredicate(predicate);
-    }
-
-    //=========== Services =============================================================
-
-    @Override
-    public boolean hasService(Service service) {
-        requireNonNull(service);
-        return trackBeau.hasService(service);
-    }
-
-    @Override
-    public void deleteService(Service target) {
-        trackBeau.removeService(target);
-    }
-
-    @Override
-    public void addService(Service service) {
-        trackBeau.addService(service);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-    }
-
-    @Override
-    public Integer getServiceIndex(Service service) {
-        return trackBeau.getServiceIndex(service);
-    }
-
-    @Override
-    public void setService(Service target, Service editedService) {
-        requireAllNonNull(target, editedService);
-        trackBeau.setService(target, editedService);
-    }
-
-    @Override
-    public ObservableList<Service> getFilteredServicesList() {
-        return filteredServices;
-    }
-
-    @Override
-    public void updateServiceList(Predicate<Service> predicate) {
-        requireNonNull(predicate);
-        filteredServices.setPredicate(predicate);
-    }
 
     //=========== Filtered Customer List Accessors =============================================================
 
@@ -222,6 +184,46 @@ public class ModelManager implements Model {
     public void updateFilteredCustomerList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
         filteredCustomers.setPredicate(predicate);
+    }
+
+    //=========== Filtered Service List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Service} backed by the internal list of
+     * {@code versionedTrackBeau}
+     */
+    @Override
+    public ObservableList<Service> getFilteredServiceList() {
+        return filteredServices;
+    }
+
+    @Override
+    public void updateFilteredServiceList(Predicate<Service> predicate) {
+        requireNonNull(predicate);
+        filteredServices.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateServiceList(Predicate<Service> predicate) {
+        requireNonNull(predicate);
+        filteredServices.setPredicate(predicate);
+    }
+
+    //=========== Filtered Booking List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Booking} backed by the internal list of
+     * {@code versionedTrackBeau}
+     */
+    @Override
+    public ObservableList<Booking> getFilteredBookingList() {
+        return filteredBookings;
+    }
+
+    @Override
+    public void updateFilteredBookingList(Predicate<Booking> predicate) {
+        requireNonNull(predicate);
+        filteredBookings.setPredicate(predicate);
     }
 
     @Override

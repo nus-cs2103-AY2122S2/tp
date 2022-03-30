@@ -1,8 +1,8 @@
 package seedu.trackbeau.ui;
 
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_DATE;
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_DATE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 
 import java.util.Comparator;
 

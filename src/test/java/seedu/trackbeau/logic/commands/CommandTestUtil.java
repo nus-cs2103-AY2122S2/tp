@@ -13,7 +13,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
-import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
 
 /**
@@ -192,7 +192,7 @@ public class CommandTestUtil {
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
                 .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Arrays.asList(splitName[0]));
-        model.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
+        model.updateFilteredCustomerList(new CustomerSearchContainsKeywordsPredicate(prefixArr));
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }

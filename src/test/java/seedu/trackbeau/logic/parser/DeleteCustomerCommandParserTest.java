@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.customer.DeleteCustomerCommand;
+import seedu.trackbeau.logic.parser.customer.DeleteCustomerCommandParser;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

@@ -15,7 +15,7 @@ import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.model.Model;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 
 /**
  * Finds and lists all customers in trackBeau whose name contains any of the argument keywords.
@@ -47,9 +47,9 @@ public class FindCustomerCommand extends Command {
             + PREFIX_SERVICES + "Acne treatment "
             + PREFIX_ALLERGIES + "Nickel";
 
-    private final SearchContainsKeywordsPredicate predicate;
+    private final CustomerSearchContainsKeywordsPredicate predicate;
 
-    public FindCustomerCommand(SearchContainsKeywordsPredicate predicate) {
+    public FindCustomerCommand(CustomerSearchContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
