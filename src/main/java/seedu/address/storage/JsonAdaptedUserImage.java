@@ -11,10 +11,6 @@ import seedu.address.model.property.Region;
 import seedu.address.model.userimage.FilePath;
 import seedu.address.model.userimage.UserImage;
 
-
-/**
- * Constructs a {@code JsonAdapterUserImage} with the given UserImage details.
- */
 public class JsonAdaptedUserImage {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "UserImage's %s field is missing!";
