@@ -72,9 +72,11 @@ class JsonAdaptedLabTest {
     @Test
     public void toModelType_invalidLabStatusNoMarkAndNullMark_throwsIllegalArgumentException() {
         JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, INVALID_LABSTATUS, VALID_NO_LABMARK);
+        JsonAdaptedLab js2 = new JsonAdaptedLab(VALID_LABNUMBER, INVALID_LABSTATUS, null);
         Lab expectedLab = new Lab("1");
         try {
             assertEquals(expectedLab, js.toModelType());
+            assertEquals(expectedLab, js2.toModelType());
         } catch (Exception e) {
             fail();
         }

@@ -14,6 +14,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.LabNotFoundException;
 
+/**
+ * A list of Labs that enforces uniqueness between its elements and does not allow nulls.
+ * A Lab is considered unique by comparing using {@code Lab#isSameStudent(Lab)}.
+ * Maintains sorted invariance (sorted by increase labNumber) after every {@code LabList#add(Lab)},
+ * {@code LabList#setAll(LabList)}, and {@code LabList#setAll(List<Lab>)}.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Lab#isSameLab(Lab)
+ */
 public class LabList implements Iterable<Lab> {
 
     private final ObservableList<Lab> internalList = FXCollections.observableArrayList();
@@ -157,6 +167,9 @@ public class LabList implements Iterable<Lab> {
     public void setLabs(LabList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+
+        // Incase ObservableList.setall() does not maintain order as it is not stated in the java docs that it does.
+        internalList.sort(sortByLabNumber);
     }
 
     /**
@@ -199,32 +212,35 @@ public class LabList implements Iterable<Lab> {
      */
     public void alignLabs(LabList toAlignWith) throws DuplicateLabException {
         requireNonNull(toAlignWith);
-        // Using LabList instead of List<Lab> for O(n) setLabs instead of O(n^2) setLabs
+        // Using LabList instead of List<Lab> for O(nlogn) setLabs instead of O(n^2) setLabs
         LabList replacementList = new LabList();
 
         // Iterator variable for toAlignWith
-        int i = 0;
+        int toAlignIter = 0;
         //Iterator variable for this
-        int j = 0;
+        int thisIter = 0;
 
         ObservableList<Lab> toAlignWithList = toAlignWith.internalList;
 
-        while (i < toAlignWithList.size() && j < internalList.size()) {
-            if (toAlignWithList.get(i).isSameLab(internalList.get(j))) {
-                replacementList.add(internalList.get(j));
-                i++;
-                j++;
-            } else if (sortByLabNumber.compare(toAlignWithList.get(i), internalList.get(j)) < 0) {
-                replacementList.add(toAlignWithList.get(i));
-                i++;
+        // This while loop takes advantage of the LabList's sorted invariant.
+        while (toAlignIter < toAlignWithList.size() && thisIter < internalList.size()) {
+
+            if (toAlignWithList.get(toAlignIter).isSameLab(internalList.get(thisIter))) {
+                replacementList.add(internalList.get(thisIter));
+                toAlignIter++;
+                thisIter++;
+            } else if (sortByLabNumber.compare(toAlignWithList.get(toAlignIter), internalList.get(thisIter)) < 0) {
+                replacementList.add(toAlignWithList.get(toAlignIter));
+                toAlignIter++;
             } else {
-                j++;
+                thisIter++;
             }
         }
 
-        while (i < toAlignWithList.size()) {
-            replacementList.add(toAlignWithList.get(i));
-            i++;
+        // Add any remaining Labs in toAlignWithList.
+        while (toAlignIter < toAlignWithList.size()) {
+            replacementList.add(toAlignWithList.get(toAlignIter));
+            toAlignIter++;
         }
 
         this.setLabs(replacementList);
