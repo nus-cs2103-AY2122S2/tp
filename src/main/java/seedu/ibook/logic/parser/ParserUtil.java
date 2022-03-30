@@ -180,8 +180,9 @@ public class ParserUtil {
             throw new ParseException(DiscountStart.MESSAGE_CONSTRAINTS);
         }
         return new DiscountStart(trimmedDiscountStart);
+    }
 
-    /*
+    /**
      * Parses a string of one integer and returns an expiry date that is integer days after the current date
      * @param numberOfDays the number in string form to add to the current date
      *

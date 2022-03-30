@@ -58,7 +58,7 @@ public class AddItemCommand extends Command {
         Product product = lastShownList.get(productIndex.getZeroBased());
 
         model.prepareIBookForChanges();
-        model.addItem(product, toAdd);
+        model.addItem(product, toAdd.toItem(product));
         model.saveIBookChanges();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, product.getName(), toAdd));

@@ -67,7 +67,7 @@ public class Price {
     public Price getDiscountedPrice(DiscountRate rate) {
         return new Price(price * (100 - rate.discountRate) / 100.0);
     }
-    
+
     /**
      * Checks that the price is within a specified range.
      */

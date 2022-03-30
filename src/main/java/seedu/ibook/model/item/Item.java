@@ -75,7 +75,7 @@ public class Item extends ItemDescriptor implements Comparable<Item>, Distinguis
     }
 
     public boolean expiresBefore(ExpiryDate toCheck) {
-        return expiryDate.within(toCheck);
+        return getExpiryDate().within(toCheck);
     }
 
     /**
