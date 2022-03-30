@@ -228,7 +228,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortFilteredPersonListByTaskDone() {
+        public void sortFilteredPersonListByTaskLeft() {
             throw new AssertionError("This method should not be called.");
         }
 
