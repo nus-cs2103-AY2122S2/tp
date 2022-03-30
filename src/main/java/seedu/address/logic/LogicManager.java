@@ -51,7 +51,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult = null;
         String[] commands = userInput.split("\\|", -1); // -1 to stop split from ignoring trailing whitespace
         ReadOnlyAddressBook addressBookBeforeCommand = new AddressBook(model.getAddressBook());
-        boolean valid = true;
+        boolean isValid = true;
         String errMsg = "";
 
         for (int i = 0; i < commands.length; i++) {
@@ -68,7 +68,7 @@ public class LogicManager implements Logic {
                     throw new CommandException("Special command should not be in a command chain");
                 }
             } catch (CommandException | ParseException | IllegalArgumentException e) {
-                valid = false;
+                isValid = false;
                 errMsg = "\"" + commandText.trim() + "\" - " + e.getMessage();
                 break;
             }
@@ -76,7 +76,7 @@ public class LogicManager implements Logic {
 
         // Saves the updated addressbook if commands are valid; resets the model if otherwise
         try {
-            if (valid) {
+            if (isValid) {
                 storage.saveAddressBook(model.getAddressBook());
             } else {
                 model.setAddressBook(addressBookBeforeCommand);
