@@ -14,14 +14,27 @@ public class Messages {
     public static final String MESSAGE_INVALID_MEETINGTIME_DISPLAYED_INDEX =
             "The meeting time index provided is invalid";
     public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
+    public static final String MESSAGE_INVALID_MEETING_DISPLAYED_INDEX = "The meeting time index provided is invalid";
+    public static final String MESSAGE_INVALID_PROF_DISPLAYED_INDEX = "The professor index provided is invalid";
+    public static final String MESSAGE_INVALID_STU_DISPLAYED_INDEX = "The student index provided is invalid";
+    public static final String MESSAGE_INVALID_KEY_EVENT_DISPLAYED_INDEX = "The key event index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Changed page to Module Page!";
-    public static final String MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE = "Changed page to Module or Group Page!";
-    public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Changed page to Person Page!";
-    public static final String MESSAGE_CHANGE_TO_GROUP_PAGE = "Changed page to Group Page!";
+    public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Change page to Module Page!\n"
+            + "Command to change to module page: list o/view v/modules";
+    public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Change page to Person Page!\n"
+            + "Command to change to person page: list o/view v/people";
+    public static final String MESSAGE_CHANGE_TO_GROUP_PAGE = "Change page to Group Page!\n"
+            + "Command to change to group page: list o/view v/groups";
+    public static final String MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE = "Change page to Module Page or Group Page!\n"
+            + "Command to change to module page: list o/view v/modules\n"
+            + "Command to change to group page: list o/view v/groups";
     public static final String MESSAGE_MODULE_CODE_NOT_EXIST = "Module Code does not exist: %1$s";
+    public static final String MESSAGE_GROUP_NOT_EXIST = "Group does not exist: %1$s";
 
     //ListCommand
+    public static final String MESSAGE_CHANGED_TO_MODULE_PAGE = "Changed page to Module Page!";
+    public static final String MESSAGE_CHANGED_TO_PERSON_PAGE = "Changed page to Person Page!";
+    public static final String MESSAGE_CHANGED_TO_GROUP_PAGE = "Changed page to Group Page!";
     public static final String MESSAGE_ALREADY_ON_PEOPLE_PAGE = "You are already on the People view!";
     public static final String MESSAGE_ALREADY_ON_MODULE_PAGE = "You are already on the Modules view!";
     public static final String MESSAGE_ALREADY_ON_GROUP_PAGE = "You are already on the Groups view!";
@@ -53,24 +66,25 @@ public class Messages {
     public static final String MESSAGE_NO_MODULES_WITH_DATE = "No modules have key events on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_NAME = "No modules have names containing %s!";
     public static final String MESSAGE_INVALID_KEY_EVENT = "Invalid Key Event: %s. Acceptable arguments are "
-            + "EXAM, ASSIGNMENT_DUE, ASSIGNMENT_RELEASE or QUIZ.";
+        + "EXAM, ASSIGNMENT_DUE, ASSIGNMENT_RELEASE or QUIZ.";
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_EVENT_AND_DATE =
-            "Displayed modules with key event %s on %s!";
+        "Displayed modules with key event %s on %s!";
     public static final String MESSAGE_NO_MODULE_WITH_EVENT_AND_DATE =
-            "No modules have key event(s) %s on %s!";
+        "No modules have key event(s) %s on %s!";
     public static final String MESSAGE_NO_MODULE_WITH_NAME_AND_DATE =
-            "No modules have module names containing %s with key event(s) on %s!";
+        "No modules have module names containing %s with key event(s) on %s!";
     public static final String MESSAGE_NO_MODULE_WITH_EVENT_AND_NAME =
-            "No modules have key event(s) %s and contain %s in their module name!";
+        "No modules have key event(s) %s and contain %s in their module name!";
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_NAME_AND_DATE =
-            "Displayed modules with module name containing %s and key event(s) on %s!";
+        "Displayed modules with module name containing %s and key event(s) on %s!";
     public static final String MESSAGES_DISPLAYED_MODULES_WITH_EVENT_AND_NAME =
-            "Displayed modules with key event(s) %s that contain %s in the module name!";
+        "Displayed modules with key event(s) %s that contain %s in the module name!";
     public static final String MESSAGES_DISPLAYED_MODULES_WITH_EVENT_AND_NAME_AND_DATE =
-            "Displayed modules with module names containing %s and with key event(s) of type %s "
-                    + "falling on %s!";
+        "Displayed modules with module names containing %s and with key event(s) of type %s "
+            + "falling on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_EVENT_AND_NAME_AND_DATE =
-            "No modules have module names containing %s, with key event(s) of type %s falling on %s!";
+        "No modules have module names containing %s, with key event(s) of type %s falling on %s!";
+
 
 
 }

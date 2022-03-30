@@ -35,8 +35,8 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed everything.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists entries based on specified conditions. \n"
-            + "Please refer to user guide in docs folder for command syntax.";
+        + ": Lists entries based on specified conditions. \n"
+        + "Please refer to user guide in docs folder for command syntax.";
 
 
     private ModuleCode moduleCode;
@@ -240,7 +240,7 @@ public class ListCommand extends Command {
                 Predicate<Person> showSpecificPeoplePredicate = p -> p.hasModule(this.moduleCode);
                 model.updateFilteredPersonList(showSpecificPeoplePredicate);
                 return new
-                        CommandResult(String.format(Messages.MESSAGE_LISTED_PEOPLE_WITH_MODULE, moduleCode.toString()));
+                    CommandResult(String.format(Messages.MESSAGE_LISTED_PEOPLE_WITH_MODULE, moduleCode.toString()));
 
             } else if (modelManager.getUi().isModuleListShowing()) {
                 //Module command given in modules page. Displays specified module.
@@ -278,19 +278,19 @@ public class ListCommand extends Command {
                 if (type.equals("professors")) {
                     //Displays all professors in the given module.
                     Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)
-                            && (p instanceof Professor);
+                        && (p instanceof Professor);
                     model.updateFilteredPersonList(showSpecificProfessorPredicate);
                     return new CommandResult(
-                            String.format(Messages.MESSAGE_LISTED_ALL_TYPE_IN_MODULE,
-                                    "professors", moduleCode.toString()));
+                        String.format(Messages.MESSAGE_LISTED_ALL_TYPE_IN_MODULE,
+                            "professors", moduleCode.toString()));
                 } else if (type.equals("students")) {
                     //Displays all students in the given module.
                     Predicate<Person> showSpecificStudentPredicate = p -> p.hasModule(this.moduleCode)
-                            && (p instanceof Student);
+                        && (p instanceof Student);
                     model.updateFilteredPersonList(showSpecificStudentPredicate);
                     return new CommandResult(
-                            String.format(Messages.MESSAGE_LISTED_ALL_TYPE_IN_MODULE,
-                                    "students", moduleCode.toString()));
+                        String.format(Messages.MESSAGE_LISTED_ALL_TYPE_IN_MODULE,
+                            "students", moduleCode.toString()));
                 } else {
                     //Invalid type argument.
                     throw new CommandException(Messages.MESSAGE_WRONG_TYPE);
@@ -307,7 +307,7 @@ public class ListCommand extends Command {
                     return new CommandResult(Messages.MESSAGE_ALREADY_ON_MODULE_PAGE);
                 } else {
                     modelManager.getUi().setModuleListPanel();
-                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                    return new CommandResult(Messages.MESSAGE_CHANGED_TO_MODULE_PAGE);
                 }
             } else if (this.viewType == ListView.PEOPLE) {
                 //Switch view to people
@@ -315,7 +315,7 @@ public class ListCommand extends Command {
                     return new CommandResult(Messages.MESSAGE_ALREADY_ON_PEOPLE_PAGE);
                 } else {
                     modelManager.getUi().setPersonListPanel();
-                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+                    return new CommandResult(Messages.MESSAGE_CHANGED_TO_PERSON_PAGE);
                 }
             } else {
                 //Switch view to groups
@@ -324,7 +324,7 @@ public class ListCommand extends Command {
                     return new CommandResult(Messages.MESSAGE_ALREADY_ON_GROUP_PAGE);
                 } else {
                     ObservableList<Module> modules = ((UniBook) modelManager.getUniBook())
-                            .getModuleList();
+                        .getModuleList();
                     ObservableList<Group> groups = FXCollections.observableArrayList();
                     for (Module m : modules) {
                         ObservableList<Group> moduleGroups = m.getGroups();
@@ -333,7 +333,7 @@ public class ListCommand extends Command {
                         }
                     }
                     modelManager.getUi().setGroupListPanel(groups);
-                    return new CommandResult(Messages.MESSAGE_CHANGE_TO_GROUP_PAGE);
+                    return new CommandResult(Messages.MESSAGE_CHANGED_TO_GROUP_PAGE);
                 }
             }
         case PEOPLEINGROUP:
@@ -347,7 +347,7 @@ public class ListCommand extends Command {
 
                 if (!m.hasGroupName(this.group)) {
                     throw new CommandException(String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE,
-                            this.group, this.moduleCode));
+                        this.group, this.moduleCode));
                 }
 
                 Group g = m.getGroupByName(this.group);
@@ -357,7 +357,7 @@ public class ListCommand extends Command {
                 Predicate<Person> pred = p -> peopleInGroup.contains(p);
                 model.updateFilteredPersonList(pred);
                 return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_PEOPLE_IN_GROUP,
-                        this.moduleCode.toString(), g.getGroupName()));
+                    this.moduleCode.toString(), g.getGroupName()));
             } else {
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "People"));
             }
@@ -371,28 +371,28 @@ public class ListCommand extends Command {
                     if (g.getGroupName().toLowerCase().equals(this.group)) {
                         if (groups.size() == 0) {
                             throw new CommandException(
-                                    String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group.toUpperCase()));
+                                String.format(Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group.toUpperCase()));
                         }
                         modelManager.getUi().setGroupListPanel(FXCollections.observableArrayList(g));
                         return new CommandResult(String.format(Messages.MESSAGE_LISTED_MODULE_GROUP,
-                                g.getGroupName(), g.getModule().getModuleCode().toString()));
+                            g.getGroupName(), g.getModule().getModuleCode().toString()));
                     }
                 }
                 throw new CommandException(String.format(
-                        Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group));
+                    Messages.MESSAGE_GROUP_NOT_IN_MODULE, this.group));
             } else if (modelManager.getUi().isModuleListShowing()) {
                 try {
                     //The case where the user is in modules list with >1 module showing
                     //Shows all groups that match given name.
                     ObservableList<Group> groups = ((UniBook) modelManager.getUniBook())
-                            .getGroupsWithGroupName(this.group);
+                        .getGroupsWithGroupName(this.group);
                     if (groups.size() == 0) {
                         throw new CommandException(
-                                String.format(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK, this.group.toUpperCase()));
+                            String.format(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK, this.group.toUpperCase()));
                     }
                     modelManager.getUi().setGroupListPanel(groups);
                     return new CommandResult(String.format(Messages.MESSAGE_LISTED_GROUP_WITH_NAME,
-                            groups.get(0).getGroupName()));
+                        groups.get(0).getGroupName()));
                 } catch (GroupNotFoundException g) {
                     throw new CommandException(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK);
                 }
@@ -416,12 +416,12 @@ public class ListCommand extends Command {
                 }
                 if (groups.size() == 0) {
                     throw new CommandException(
-                            String.format(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK, this.group.toUpperCase()));
+                        String.format(Messages.MESSAGE_GROUP_NOT_IN_UNIBOOK, this.group.toUpperCase()));
                 }
                 ModelManager mm = (ModelManager) model;
                 mm.getUi().setGroupListPanel(groups);
                 return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_GROUPS_WITH_NAME,
-                        this.group.toUpperCase()));
+                    this.group.toUpperCase()));
             } else {
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "Groups"));
             }
@@ -443,12 +443,12 @@ public class ListCommand extends Command {
 
                     if (groups.size() == 0) {
                         throw new CommandException(
-                                String.format(Messages.MESSAGE_NO_GROUP_WITH_MEETING_DATE, this.date.toString()));
+                            String.format(Messages.MESSAGE_NO_GROUP_WITH_MEETING_DATE, this.date.toString()));
                     }
                     ModelManager mm = (ModelManager) model;
                     mm.getUi().setGroupListPanel(groups);
                     return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_GROUPS_WITH_MEETING_DATE,
-                            this.date.toString()));
+                        this.date.toString()));
 
                 } else {
                     throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "Groups"));
@@ -462,10 +462,10 @@ public class ListCommand extends Command {
                 checkIfKeywordExists(modelManager);
 
                 Predicate<Module> showSpecificModulePredicate = m ->
-                        m.getModuleName().toString().toLowerCase().contains(this.moduleNameFragment.toLowerCase());
+                    m.getModuleName().toString().toLowerCase().contains(this.moduleNameFragment.toLowerCase());
                 model.updateFilteredModuleList(showSpecificModulePredicate);
                 return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_MODULES_WITH_NAME,
-                        this.moduleNameFragment));
+                    this.moduleNameFragment));
             } else {
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "Modules"));
             }
@@ -484,7 +484,7 @@ public class ListCommand extends Command {
                     };
                     model.updateFilteredModuleList(showSpecificModulePredicate);
                     return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_MODULES_WITH_KEY_EVENT,
-                            this.keyEvent));
+                        this.keyEvent));
                 } catch (IllegalArgumentException e) {
                     throw new CommandException(String.format(Messages.MESSAGE_INVALID_KEY_EVENT, this.keyEvent));
                 }
@@ -504,7 +504,7 @@ public class ListCommand extends Command {
                     Predicate<Module> showSpecificModulePredicate = m -> m.getKeyEventDates().contains(localDate);
                     model.updateFilteredModuleList(showSpecificModulePredicate);
                     return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_MODULES_WITH_DATE,
-                            localDate.toString()));
+                        localDate.toString()));
 
                 } catch (ParseException e) {
                     throw new CommandException(e.getMessage());
@@ -523,7 +523,7 @@ public class ListCommand extends Command {
 
                     try {
                         ModuleKeyEvent.KeyEventType ke =
-                                ModuleKeyEvent.KeyEventType.valueOf(this.keyEvent.toUpperCase());
+                            ModuleKeyEvent.KeyEventType.valueOf(this.keyEvent.toUpperCase());
                     } catch (IllegalArgumentException e) {
                         throw new CommandException(String.format(Messages.MESSAGE_INVALID_KEY_EVENT, this.keyEvent));
                     }
@@ -533,7 +533,7 @@ public class ListCommand extends Command {
                         ObservableList<ModuleKeyEvent> keyEvents = m.getKeyEvents();
                         for (ModuleKeyEvent k : keyEvents) {
                             if (k.getKeyEventType().toString().equals(this.keyEvent.toUpperCase())
-                                    && k.getKeyEventDate().equals(localDate)) {
+                                && k.getKeyEventDate().equals(localDate)) {
                                 return true;
                             }
                         }
@@ -544,11 +544,11 @@ public class ListCommand extends Command {
                     if (model.getFilteredModuleList().isEmpty()) {
                         model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
                         throw new CommandException(String.format(Messages.MESSAGE_NO_MODULE_WITH_EVENT_AND_DATE,
-                                this.keyEvent, localDate));
+                            this.keyEvent, localDate));
                     }
 
                     return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_MODULES_WITH_EVENT_AND_DATE,
-                            this.keyEvent, localDate.toString()));
+                        this.keyEvent, localDate.toString()));
 
                 } catch (ParseException e) {
                     throw new CommandException(e.getMessage());
@@ -569,20 +569,20 @@ public class ListCommand extends Command {
 
                     Predicate<Module> showSpecificModulePredicate = m -> {
                         return m.getModuleName().toString().toLowerCase().contains(this.moduleNameFragment
-                                .toLowerCase())
-                                && m.getKeyEvents().stream().map(ke -> ke.getKeyEventDate().equals(localDate))
-                                        .collect(Collectors.toList()).contains(true);
+                            .toLowerCase())
+                            && m.getKeyEvents().stream().map(ke -> ke.getKeyEventDate().equals(localDate))
+                            .collect(Collectors.toList()).contains(true);
                     };
                     model.updateFilteredModuleList(showSpecificModulePredicate);
 
                     if (model.getFilteredModuleList().isEmpty()) {
                         model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
                         throw new CommandException(String.format(Messages.MESSAGE_NO_MODULE_WITH_NAME_AND_DATE,
-                                this.moduleNameFragment, localDate));
+                            this.moduleNameFragment, localDate));
                     }
 
                     return new CommandResult(String.format(Messages.MESSAGE_DISPLAYED_MODULES_WITH_NAME_AND_DATE,
-                            this.moduleNameFragment, localDate.toString()));
+                        this.moduleNameFragment, localDate.toString()));
 
                 } catch (ParseException e) {
                     throw new CommandException(e.getMessage());
@@ -603,7 +603,7 @@ public class ListCommand extends Command {
 
                 Predicate<Module> showSpecificModulePredicate = m -> {
                     if (!m.getModuleName().toString().toLowerCase()
-                            .contains(this.moduleNameFragment.toLowerCase())) {
+                        .contains(this.moduleNameFragment.toLowerCase())) {
                         return false;
                     }
                     ObservableList<ModuleKeyEvent> keyEvents = m.getKeyEvents();
@@ -620,11 +620,11 @@ public class ListCommand extends Command {
                 if (model.getFilteredModuleList().isEmpty()) {
                     model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
                     throw new CommandException(String.format(Messages.MESSAGE_NO_MODULE_WITH_EVENT_AND_NAME,
-                            this.keyEvent, this.moduleNameFragment));
+                        this.keyEvent, this.moduleNameFragment));
                 }
 
                 return new CommandResult(String.format(Messages.MESSAGES_DISPLAYED_MODULES_WITH_EVENT_AND_NAME,
-                        this.keyEvent, this.moduleNameFragment));
+                    this.keyEvent, this.moduleNameFragment));
 
             } else {
                 throw new CommandException(String.format(Messages.MESSAGE_WRONG_VIEW, "Modules"));
@@ -642,7 +642,7 @@ public class ListCommand extends Command {
 
                     try {
                         ModuleKeyEvent.KeyEventType ke = ModuleKeyEvent.KeyEventType
-                                .valueOf(this.keyEvent.toUpperCase());
+                            .valueOf(this.keyEvent.toUpperCase());
                     } catch (IllegalArgumentException e) {
                         throw new CommandException(String.format(Messages.MESSAGE_INVALID_KEY_EVENT, this.keyEvent));
                     }
@@ -654,7 +654,7 @@ public class ListCommand extends Command {
                         ObservableList<ModuleKeyEvent> keyEvents = m.getKeyEvents();
                         for (ModuleKeyEvent k : keyEvents) {
                             if (k.getKeyEventType().toString().equals(this.keyEvent.toUpperCase())
-                                    && k.getKeyEventDate().equals(localDate)) {
+                                && k.getKeyEventDate().equals(localDate)) {
                                 return true;
                             }
                         }
@@ -664,12 +664,12 @@ public class ListCommand extends Command {
                     if (model.getFilteredModuleList().isEmpty()) {
                         model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
                         throw new CommandException(String.format(
-                                Messages.MESSAGE_NO_MODULES_WITH_EVENT_AND_NAME_AND_DATE,
-                                moduleNameFragment, this.keyEvent, localDate));
+                            Messages.MESSAGE_NO_MODULES_WITH_EVENT_AND_NAME_AND_DATE,
+                            moduleNameFragment, this.keyEvent, localDate));
                     }
                     return new CommandResult(String.format(
-                            Messages.MESSAGES_DISPLAYED_MODULES_WITH_EVENT_AND_NAME_AND_DATE,
-                            this.moduleNameFragment, this.keyEvent, localDate.toString()));
+                        Messages.MESSAGES_DISPLAYED_MODULES_WITH_EVENT_AND_NAME_AND_DATE,
+                        this.moduleNameFragment, this.keyEvent, localDate.toString()));
 
                 } catch (ParseException e) {
                     throw new CommandException(e.getMessage());
@@ -714,7 +714,7 @@ public class ListCommand extends Command {
 
         if (!found) {
             throw new CommandException(String.format(Messages.MESSAGE_NO_MODULES_WITH_NAME,
-                    moduleNameFragment));
+                moduleNameFragment));
         }
     }
 

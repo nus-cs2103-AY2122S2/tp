@@ -131,7 +131,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 moduleCodeToAdd = Optional.of(ParserUtil.parseModuleCode(argMultimap
                         .getValue(PREFIX_MODULE)
                         .get()));
-                groupName = Optional.of(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
+                groupName = Optional.of(ParserUtil.parseGroupString(argMultimap.getValue(PREFIX_GROUP).get()));
                 editPersonDescriptor.setModCode(moduleCodeToAdd);
                 editPersonDescriptor.setGroupName(groupName);
             } else { }
@@ -172,7 +172,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editGroupDescriptor.setModuleCode(modCode);
 
                 if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
-                    editGroupDescriptor.setGroupName(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
+                    editGroupDescriptor.setGroupName(ParserUtil.parseGroupString(argMultimap.getValue(PREFIX_GROUP).get()));
                 }
                 if (argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()) {
                     try {

@@ -3,6 +3,7 @@ package unibook.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -154,6 +155,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasModuleAndGroup(ModuleCode moduleCode, Group group) {
+        return uniBook.hasModuleAndGroup(moduleCode, group);
+    }
+
+    @Override
     public void deleteByModuleCode(ModuleCode moduleCode) {
         uniBook.removeByModuleCode(moduleCode);
     }
@@ -161,16 +167,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteModule(Module module) {
         uniBook.removeModule(module);
-    }
-
-    @Override
-    public void removeModuleFromAllPersons(ModuleCode moduleCode) {
-        uniBook.removeModuleFromAllPersons(moduleCode);
-    }
-
-    @Override
-    public void removePersonFromAllModules(Person person) {
-        uniBook.removePersonFromModules(person);
     }
 
 
@@ -198,6 +194,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteModuleAndPersons(ModuleCode moduleCode) {
+        uniBook.deleteModuleAndPersons(moduleCode);
+    }
+
+    @Override
+    public void deleteProfModule(ModuleCode moduleCode) {
+        uniBook.deleteProfModule(moduleCode);
+    }
+
+    @Override
     public Module getModuleByCode(ModuleCode moduleCode) {
         return uniBook.getModuleByCode(moduleCode);
     }
@@ -208,6 +214,18 @@ public class ModelManager implements Model {
         uniBook.addGroupToModule(group);
     }
 
+    @Override
+    public Group removeGroup(ModuleCode moduleCode, Group group) {
+        Module module = uniBook.getModuleByCode(moduleCode);
+        uniBook.deleteGroupFromAllPersons(moduleCode, group);
+        return module.removeGroupByName(group);
+    }
+
+    @Override
+    public List<Group> getShowingGroupList() {
+        return ui.getShowingGroupList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -216,6 +234,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        logger.info("Retrieving filtered person list...");
         return filteredPersons;
     }
 

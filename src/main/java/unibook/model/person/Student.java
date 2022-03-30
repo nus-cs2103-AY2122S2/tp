@@ -2,6 +2,7 @@ package unibook.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import unibook.logic.commands.EditCommand.EditGroupDescriptor;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.module.Module;
 import unibook.model.module.exceptions.GroupNotFoundException;
+import unibook.model.module.ModuleCode;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 
@@ -39,6 +41,58 @@ public class Student extends Person {
     public Student(Person person, Set<Group> groups) {
         this(person.getName(), person.getPhone(), person.getEmail(),
             person.getTags(), person.getModules(), groups);
+    }
+
+    /**
+     * Returns a new Student Object with phone removed
+     *
+     * @return Student with phone deleted
+     */
+    public Student deletePhone() {
+        return new Student(getName(), new Phone(), getEmail(), getTags(), getModules(), groups);
+    }
+
+    /**
+     * Returns a new Student Object with email removed
+     *
+     * @return Student with email deleted
+     */
+    public Student deleteEmail() {
+        return new Student(getName(), getPhone(), new Email(), getTags(), getModules(), groups);
+    }
+
+    /**
+     * Returns a new Student Object with specific tag removed
+     *
+     * @return Student with specific tag deleted
+     */
+    public Student deleteTag(String tagNameToDelete) {
+        Set<Tag> tags = getTags();
+        Set<Tag> newTags = new HashSet<>();
+        for (Tag tag: tags) {
+            if (!tag.tagName.equalsIgnoreCase(tagNameToDelete)) {
+                newTags.add(tag);
+            }
+        }
+        return new Student(getName(), getPhone(), getEmail(), newTags, getModules(), groups);
+    }
+
+    /**
+     * Add Student to all their groups.
+     */
+    public void addStudentToAllTheirGroups() {
+        for (Group group: groups) {
+            group.addMember(this);
+        }
+    }
+
+    /**
+     * Remove this student from all their groups.
+     */
+    public void removeStudentFromAllTheirGroups() {
+        for (Group group: groups) {
+            group.removeMember(this);
+        }
     }
 
 
@@ -72,7 +126,6 @@ public class Student extends Person {
         return groups;
     }
 
-
     /**
      * Edits the information of the group in the respective module
      */
@@ -98,6 +151,41 @@ public class Student extends Person {
         }
         // TODO EDIT GROUP NOT FOUND EXCEPTION MSG
         throw new GroupNotFoundException();
+    }
+
+    /**
+     * Remove Group from this student
+     *
+     * @param moduleCode
+     * @param group
+     */
+    public void removeGroup(ModuleCode moduleCode, Group group) {
+        Set<Group> toBeDeleted = new HashSet<>();
+        for (Group g : groups) {
+            if (g.sameGroupNameAndModule(moduleCode.toString(), group.getGroupName())) {
+                toBeDeleted.add(g);
+            }
+        }
+        for (Group g : toBeDeleted) {
+            groups.remove(g);
+        }
+    }
+
+    /**
+     * Remove all groups that is part of the module from this student
+     *
+     * @param moduleCode
+     */
+    public void removeGroup(ModuleCode moduleCode) {
+        Set<Group> toBeDeleted = new HashSet<>();
+        for (Group g : groups) {
+            if (g.getModule().getModuleCode().equals(moduleCode)) {
+                toBeDeleted.add(g);
+            }
+        }
+        for (Group g : toBeDeleted) {
+            groups.remove(g);
+        }
     }
 
     @Override

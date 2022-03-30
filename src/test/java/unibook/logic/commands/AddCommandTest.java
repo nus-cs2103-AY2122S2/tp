@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -152,6 +153,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Group removeGroup(ModuleCode moduleCode, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Group> getShowingGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -177,22 +188,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasModuleAndGroup(ModuleCode moduleCode, Group group) {
+            return false;
+        }
+
+        @Override
         public void deleteModule(Module target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addPersonToTheirModules(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void removeModuleFromAllPersons(ModuleCode moduleCode) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void removePersonFromAllModules(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -209,6 +215,16 @@ public class AddCommandTest {
         @Override
         public boolean isModuleExist(Set<ModuleCode> moduleCodeSet) {
             return false;
+        }
+
+        @Override
+        public void deleteModuleAndPersons(ModuleCode moduleCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteProfModule(ModuleCode moduleCode) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

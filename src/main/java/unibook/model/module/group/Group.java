@@ -69,6 +69,16 @@ public class Group {
     }
 
     /**
+     * Instantiates a group object with only the name, to be used to match groups to delete
+     */
+    public Group(String name) {
+        this.name = name;
+        this.module = null;
+        this.meetingTimes = FXCollections.observableArrayList();
+        this.members = FXCollections.observableArrayList();
+    }
+
+    /**
      * Returns the group name of the group object.
      *
      * @return group name of the group object.
@@ -150,6 +160,16 @@ public class Group {
     }
 
     /**
+     * Removes the groups in the group list of each student that has this group
+     *
+     */
+    public void removeStudentsFromThisGroup() {
+        for (Student student : members) {
+            student.removeGroup(module.getModuleCode(), this);
+        }
+    }
+
+    /**
      * Add a meeting datetime to the group.
      *
      * @param meetingTime meeting datetime to add.
@@ -177,6 +197,7 @@ public class Group {
     }
 
     /**
+<<<<<<< HEAD
      * Edit a meeting datetime from the group.
      *
      * @param idx index of the meeting time to edit
@@ -188,6 +209,38 @@ public class Group {
     }
 
 
+    /*
+     * Remove a meeting based on Index given
+     *
+     * @param index
+     */
+    public void removeMeetingTime(int index) {
+        requireNonNull(index);
+        meetingTimes.remove(index);
+    }
+
+    /**
+     * Returns true only if the name of the group provided and this group name
+     * are the same.
+     */
+    public boolean sameGroupName(Group group) {
+        return this.name.equalsIgnoreCase(group.getGroupName());
+    }
+
+    /**
+     * Returns True if group name and module code are the same else False
+     *
+     * @param moduleCode
+     * @param groupName
+     * @return
+     */
+    public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
+        if (moduleCode.equals(this.module.getModuleCode().toString())
+                && groupName.equalsIgnoreCase(this.getGroupName())) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Returns true only if the name of the group, its meeting times, and the module code of the module it is linked to
