@@ -8,6 +8,8 @@ import seedu.address.model.lineup.LineupName;
  */
 public class LineupBuilder {
     public static final String DEFAULT_LINEUP_NAME = "I AM A LINEUP";
+    public static final String NEW_LINEUP_NAME = "I AM A NEW LINEUP";
+    public static final String INVALID_LINEUP_NAME = "%%LINEUP*";
 
     private LineupName lineupName;
 
