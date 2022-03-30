@@ -20,7 +20,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditBuyerCommand;
 import seedu.address.logic.commands.EditSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
