@@ -51,6 +51,11 @@ public abstract class AttendanceEntry {
      */
     public abstract Optional<LocalTime> getDropOffTime();
 
+    /**
+     * Checks if the attendance entry contains a transport arrangement.
+     * @return true if the attendance entry contains a transport arrangement with pick-up and
+     * drop-off times, false otherwise.
+     */
     public abstract boolean hasTransportArrangement();
 
     @Override

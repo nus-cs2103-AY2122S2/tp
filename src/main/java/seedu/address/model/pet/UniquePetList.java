@@ -2,9 +2,11 @@ package seedu.address.model.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.SORT_BY_APPOINTMENT;
-import static seedu.address.logic.parser.CliSyntax.SORT_BY_NAME;
-import static seedu.address.logic.parser.CliSyntax.SORT_BY_OWNER;
+import static seedu.address.logic.parser.SortUtil.SORT_BY_APPOINTMENT;
+import static seedu.address.logic.parser.SortUtil.SORT_BY_DROP_OFF_TIME;
+import static seedu.address.logic.parser.SortUtil.SORT_BY_NAME;
+import static seedu.address.logic.parser.SortUtil.SORT_BY_OWNER;
+import static seedu.address.logic.parser.SortUtil.SORT_BY_PICK_UP_TIME;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -12,6 +14,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.pet.comparator.PetDropOffTimeComparator;
+import seedu.address.model.pet.comparator.PetPickUpTimeComparator;
 import seedu.address.model.pet.exceptions.DuplicatePetException;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
 
@@ -48,16 +52,22 @@ public class UniquePetList implements Iterable<Pet> {
     public void sortPetList(String field) {
         switch (field) {
         case SORT_BY_NAME:
-            Comparator<Pet> petOwnerNameComparator = Comparator.comparing(Pet::getOwnerName);
-            FXCollections.sort(internalList, petOwnerNameComparator);
-            break;
-        case SORT_BY_OWNER:
             Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);
             FXCollections.sort(internalList, petNameComparator);
+            break;
+        case SORT_BY_OWNER:
+            Comparator<Pet> petOwnerNameComparator = Comparator.comparing(Pet::getOwnerName);
+            FXCollections.sort(internalList, petOwnerNameComparator);
             break;
         case SORT_BY_APPOINTMENT:
             Comparator<Pet> petAppointmentComparator = Comparator.comparing(Pet::getAppointment);
             FXCollections.sort(internalList, petAppointmentComparator);
+            break;
+        case SORT_BY_DROP_OFF_TIME:
+            FXCollections.sort(internalList, new PetDropOffTimeComparator());
+            break;
+        case SORT_BY_PICK_UP_TIME:
+            FXCollections.sort(internalList, new PetPickUpTimeComparator());
             break;
         default:
             assert false;
