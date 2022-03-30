@@ -5,6 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents the date and time of a schedule
@@ -12,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 public class ScheduleDateTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Please check the format of schedule date and time, and it should not be blank";
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     // solution below adapted from
     // https://stackoverflow.com/questions/
@@ -23,6 +25,7 @@ public class ScheduleDateTime {
             + "(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/)(?:(?:0?[1-9])"
             + "|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2}) ([01]?[0-9]|2[0-3])[0-5][0-9]$";
     private static final String DATE_TIME_FORMATTER = "[dd/MM/yyyy HHmm]";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER);
     private final LocalDateTime scheduleDateTime;
 
     /**
@@ -31,8 +34,7 @@ public class ScheduleDateTime {
     public ScheduleDateTime(String scheduleDateTime) {
         requireNonNull(scheduleDateTime);
         checkArgument(isValidScheduleDateTime(scheduleDateTime), MESSAGE_CONSTRAINTS);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER);
-        this.scheduleDateTime = LocalDateTime.parse(scheduleDateTime, formatter);
+        this.scheduleDateTime = LocalDateTime.parse(scheduleDateTime, FORMATTER);
     }
 
     public LocalDateTime getScheduleDateTime() {
@@ -41,7 +43,13 @@ public class ScheduleDateTime {
 
 
     public static boolean isValidScheduleDateTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDateTime.parse(test, FORMATTER);
+            return true;
+        } catch (DateTimeParseException pe) {
+            return false;
+        }
+        //return test.matches(VALIDATION_REGEX);
     }
 
 
