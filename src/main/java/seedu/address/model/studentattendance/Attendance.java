@@ -23,6 +23,10 @@ public class Attendance {
         this.value = attendance;
     }
 
+    public Boolean getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(value);
@@ -38,5 +42,9 @@ public class Attendance {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public static boolean isValidAttendance(String attendance) {
+        return false;
     }
 }
