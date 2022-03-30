@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +39,33 @@ public class UniqueInterviewList implements Iterable<Interview> {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if the interview is passable based off the number of currently
+     * extended offers and position openings.
+     */
+    public boolean isPassableInterview(Interview toPass) {
+        requireNonNull(toPass);
+        return toPass.isPassableInterview();
+    }
+
+    /**
+     * Returns true if the interview is passable based off the current status of
+     * the interview.
+     */
+    public boolean isAcceptableInterview(Interview toAccept) {
+        requireNonNull(toAccept);
+        return toAccept.isAcceptableInterview();
+    }
+
+    /**
+     * Returns true if the interview can be rejected based off the current status of
+     * the interview.
+     */
+    public boolean isRejectableInterview(Interview toReject) {
+        requireNonNull(toReject);
+        return toReject.isRejectableInterview();
     }
 
     /**
@@ -132,6 +160,14 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Sorts a list of interviews
+     */
+    public void sort(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        internalList.sort(comparator);
+    }
+
+    /**
      * Updates all interview containing instance of {@code positionToBeUpdated} to {@code newPosition}.
      * Effects of editing a Position cascades to update all instances of the old position to the edited position.
      */
@@ -140,7 +176,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < internalList.size(); i++) {
             Interview curr = internalList.get(i);
             if (curr.getPosition().equals(positionToBeUpdated)) {
-                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition));
+                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition, curr.getStatus()));
             }
         }
     }
@@ -154,7 +190,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < internalList.size(); i++) {
             Interview curr = internalList.get(i);
             if (curr.getApplicant().equals(applicantToBeUpdated)) {
-                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition()));
+                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition(), curr.getStatus()));
             }
         }
     }

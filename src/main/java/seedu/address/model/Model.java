@@ -2,11 +2,14 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
@@ -63,6 +66,16 @@ public interface Model {
     boolean hasPerson(Applicant applicant);
 
     /**
+     * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
+     */
+    Applicant getApplicantWithEmail(Email email);
+
+    /**
+     * Returns the {@code Applicant} with the {@code phone} provided if exists; or null if no such applicant.
+     */
+    Applicant getApplicantWithPhone(Phone phone);
+
+    /**
      * Deletes the given applicant.
      * The applicant must exist in the address book.
      */
@@ -102,6 +115,21 @@ public interface Model {
     boolean hasConflictingInterview(Interview interview);
 
     /**
+     * Returns true if an interview can be passed.
+     */
+    boolean isPassableInterview(Interview interview);
+
+    /**
+     * Returns true if an interview can be rejected.
+     */
+    boolean isRejectableInterview(Interview interview);
+
+    /**
+     * Returns true if an interview can be accepted.
+     */
+    boolean isAcceptableInterview(Interview interview);
+
+    /**
      * Deletes the given interview.
      * The interview must exist in the address book.
      */
@@ -112,6 +140,7 @@ public interface Model {
      * {@code interview} must not already exist in HireLah.
      */
     void addInterview(Interview interview);
+
 
     /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
@@ -190,4 +219,16 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered position list */
     ObservableList<Position> getFilteredPositionList();
+
+    void updateSortApplicantList(Comparator<Applicant> comparator);
+
+    void updateSortInterviewList(Comparator<Interview> comparator);
+
+    void updateSortPositionList(Comparator<Position> comparator);
+
+    void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator);
+
+    void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator);
+
+    void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator);
 }

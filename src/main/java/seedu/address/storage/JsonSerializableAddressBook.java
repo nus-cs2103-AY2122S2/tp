@@ -69,14 +69,6 @@ class JsonSerializableAddressBook {
             addressBook.addApplicant(applicant);
         }
 
-        for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
-            Interview interview = jsonAdaptedInterview.toModelType();
-            if (addressBook.hasInterview(interview)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
-            }
-            addressBook.addInterview(interview);
-        }
-
         for (JsonAdaptedPosition jsonAdaptedPosition : positions) {
             Position position = jsonAdaptedPosition.toModelType();
             if (addressBook.hasPosition(position)) {
@@ -84,6 +76,26 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPosition(position);
         }
+
+        for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
+            Interview interview = jsonAdaptedInterview.toModelType();
+            Applicant interviewApplicant = interview.getApplicant();
+            Position interviewPosition = interview.getPosition();
+
+            if (addressBook.hasApplicant(interviewApplicant)) {
+                interview.setApplicant(addressBook.getApplicantUsingStorage(interviewApplicant));
+            }
+
+            if (addressBook.hasPosition(interviewPosition)) {
+                interview.setPosition(addressBook.getPositionUsingStorage(interviewPosition));
+            }
+
+            if (addressBook.hasInterview(interview)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
+            }
+            addressBook.addInterview(interview);
+        }
+
         return addressBook;
     }
 

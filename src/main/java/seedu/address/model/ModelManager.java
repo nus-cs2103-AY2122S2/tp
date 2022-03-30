@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
@@ -100,6 +103,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Applicant getApplicantWithEmail(Email email) {
+        requireNonNull(email);
+        return addressBook.getApplicantWithEmail(email);
+    }
+
+    @Override
+    public Applicant getApplicantWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return addressBook.getApplicantWithPhone(phone);
+    }
+
+    @Override
     public void deletePerson(Applicant target) {
         addressBook.removeApplicant(target);
     }
@@ -130,6 +145,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isPassableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isPassableInterview(interview);
+    }
+
+    @Override
+    public boolean isAcceptableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isAcceptableInterview(interview);
+    }
+
+    @Override
+    public boolean isRejectableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isRejectableInterview(interview);
+    }
+
+    @Override
     public void deleteInterview(Interview target) {
         addressBook.removeInterview(target);
     }
@@ -139,6 +172,7 @@ public class ModelManager implements Model {
         addressBook.addInterview(interview);
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
+
 
     @Override
     public void setInterview(Interview target, Interview editedInterview) {
@@ -200,6 +234,20 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
     }
+    // Need to test
+    @Override
+    public void updateSortApplicantList(Comparator<Applicant> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortApplicant(comparator);
+        filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
+        requireAllNonNull(predicate, comparator);
+        addressBook.sortApplicant(comparator);
+        filteredApplicants.setPredicate(predicate);
+    }
 
     //=========== Filtered Interview List Accessors =============================================================
 
@@ -215,6 +263,20 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredInterviewList(Predicate<Interview> predicate) {
         requireNonNull(predicate);
+        filteredInterviews.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortInterviewList(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortInterview(comparator);
+        filteredInterviews.setPredicate(PREDICATE_SHOW_ALL_INTERVIEWS);
+    }
+
+    @Override
+    public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
+        requireAllNonNull(predicate, comparator);
+        addressBook.sortInterview(comparator);
         filteredInterviews.setPredicate(predicate);
     }
 
@@ -237,6 +299,20 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPositionList(Predicate<Position> predicate) {
         requireNonNull(predicate);
+        filteredPositions.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortPositionList(Comparator<Position> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortPosition(comparator);
+        filteredPositions.setPredicate(PREDICATE_SHOW_ALL_POSITIONS);
+    }
+
+    @Override
+    public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
+        requireAllNonNull(predicate, comparator);
+        addressBook.sortPosition(comparator);
         filteredPositions.setPredicate(predicate);
     }
 
