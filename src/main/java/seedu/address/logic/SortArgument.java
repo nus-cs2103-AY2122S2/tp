@@ -7,7 +7,7 @@ public class SortArgument {
     public final String argument;
 
     /**
-     * Constructs a {@code FilterArgument}.
+     * Constructs a {@code SortArgument}.
      *
      * @param argument A valid argument.
      */
@@ -24,8 +24,8 @@ public class SortArgument {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FilterArgument // instanceof handles nulls
-                && argument.equals(((FilterArgument) other).argument)); // state check
+                || (other instanceof SortArgument // instanceof handles nulls
+                && argument.equals(((SortArgument) other).argument)); // state check
     }
 
     @Override

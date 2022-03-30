@@ -24,7 +24,7 @@ public class Interview {
      * Every field must be present and not null.
      */
     public Interview(Applicant applicant, LocalDateTime date, Position position) {
-        requireAllNonNull(applicant, date);
+        requireAllNonNull(applicant, date, position);
         this.applicant = applicant;
         this.date = date;
         this.position = position;
@@ -36,7 +36,7 @@ public class Interview {
      * Every field must be present and not null.
      */
     public Interview(Applicant applicant, LocalDateTime date, Position position, Status status) {
-        requireAllNonNull(applicant, date, status);
+        requireAllNonNull(applicant, date, status, position);
         this.applicant = applicant;
         this.date = date;
         this.position = position;
