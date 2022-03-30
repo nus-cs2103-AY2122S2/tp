@@ -15,7 +15,7 @@ The purpose of this User Guide is to assist you in learning and using InternBudd
 ## Quick start
 If you feel InternBuddy is the solution to your problem and you're interested in using it, try it out now! If this is your first time using InternBuddy, you can get started right away by following the steps below.
 1. Ensure you have Java `11` or above installed in your Computer.
-   * If you don't have it installed, you can follow [Orcale's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
+   * If you don't have it installed, you can follow [Oracle's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
    for your operating system.
    * Please make sure that you select Java `11` as your default Java version.
    * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
@@ -94,7 +94,7 @@ Finally, an **Event** entry has:
 * Zero or more *tags* associated with them
 
 ### Interacting with the app
-Since **InternBuddy** is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through typing the commands. To interact with these app, you **type commands into the command box** and **hit the Enter key** when you are done.<br/>
+Since **InternBuddy** is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through typing the commands. To interact with this app, you **type commands into the command box** and **hit the Enter key** when you are done.<br/>
 **InternBuddy**'s commands follows a simple classification system for all 3 lists. There are 5 types of commands:
 - **Adding entries**
   - [`addc`](#adding-a-company-addc): Adds a company to the list of companies.
