@@ -28,12 +28,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.lineup.LineupPlayersList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
@@ -109,19 +108,19 @@ public class EditCommand extends Command {
     }
 
     private final EditCommandType type;
-    private final Name targetPlayerName;
+    private final LineupName targetPlayerName;
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
     private final EditScheduleDescriptor editScheduleDescriptor;
-    private final LineupName targetLineupName;
-    private final LineupName editLineupName;
+    private final seedu.address.model.lineup.LineupName targetLineupName;
+    private final seedu.address.model.lineup.LineupName editLineupName;
 
     /**
      * Constructs an EditCommand for Person
      * @param targetPlayerName     of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Name targetPlayerName, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(LineupName targetPlayerName, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(targetPlayerName);
         requireNonNull(editPersonDescriptor);
 
@@ -139,7 +138,7 @@ public class EditCommand extends Command {
      * @param targetLineupName The target LineupName to edit
      * @param editLineupName The new LineupName
      */
-    public EditCommand(LineupName targetLineupName, LineupName editLineupName) {
+    public EditCommand(seedu.address.model.lineup.LineupName targetLineupName, seedu.address.model.lineup.LineupName editLineupName) {
         requireNonNull(targetLineupName);
         requireNonNull(editLineupName);
 
@@ -237,7 +236,7 @@ public class EditCommand extends Command {
     static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        LineupName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
@@ -245,7 +244,7 @@ public class EditCommand extends Command {
         JerseyNumber updatedJerseyNumber = editPersonDescriptor.getJerseyNumber()
                 .orElse(personToEdit.getJerseyNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<LineupName> lineupNames = personToEdit.getModifiableLineupNames();
+        Set<seedu.address.model.lineup.LineupName> lineupNames = personToEdit.getModifiableLineupNames();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight, lineupNames);
@@ -254,10 +253,10 @@ public class EditCommand extends Command {
     /**
      * Creates and return a {@code Lineup} with the new Lineup name
      */
-    static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
+    static Lineup createEditedLineup(Lineup lineupToEdit, seedu.address.model.lineup.LineupName editLineupName) {
         assert lineupToEdit != null;
 
-        LineupName updatedName = editLineupName;
+        seedu.address.model.lineup.LineupName updatedName = editLineupName;
         LineupPlayersList playersList = lineupToEdit.getPlayers();
         playersList.replaceLineup(lineupToEdit.getLineupName(), updatedName);
 
@@ -319,7 +318,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Name name;
+        private LineupName name;
         private Phone phone;
         private Email email;
         private Height height;
@@ -351,11 +350,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, height, jerseyNumber, tags, weight);
         }
 
-        public void setName(Name name) {
+        public void setName(LineupName name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<LineupName> getName() {
             return Optional.ofNullable(name);
         }
 

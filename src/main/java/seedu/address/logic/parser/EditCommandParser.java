@@ -27,8 +27,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditScheduleDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -48,8 +47,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_EMAIL, PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP,
                         PREFIX_SCHEDULE, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_INDEX);
 
-        Name targetPlayerName;
-        LineupName targetLineupName;
+        LineupName targetPlayerName;
+        seedu.address.model.lineup.LineupName targetLineupName;
         Index index;
 
         if (argMultimap.getValue(PREFIX_LINEUP).isPresent()) {
@@ -63,7 +62,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_LINEUP));
             } else {
                 targetLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
-                LineupName editLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+                seedu.address.model.lineup.LineupName editLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
                 return new EditCommand(targetLineupName, editLineupName);
             }
         }

@@ -21,8 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.LineupBuilder;
@@ -37,7 +36,7 @@ public class AddCommandTest {
     private static final Person INVALID_PERSON = new PersonBuilder().withName("Alice Pauline").build();
     private static final Person INVALID_PERSON_2 = new PersonBuilder()
             .withName("Daniel Lee").withJerseyNumber("2").build();
-    private static final Lineup VALID_LINEUP = new Lineup(new LineupName("Dummy"));
+    private static final Lineup VALID_LINEUP = new Lineup(new seedu.address.model.lineup.LineupName("Dummy"));
     private static final Lineup VALID_LINEUP_2 = new LineupBuilder().build();
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
@@ -282,12 +281,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPersonName(Name targetName) {
+        public boolean hasPersonName(LineupName targetName) {
             throw new AssertionError("hasPersonName should not be called.");
         }
 
         @Override
-        public boolean hasLineupName(LineupName targetName) {
+        public boolean hasLineupName(seedu.address.model.lineup.LineupName targetName) {
             throw new AssertionError("hasLineupName should not be called.");
         }
 
@@ -337,12 +336,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person getPerson(Name targetName) {
+        public Person getPerson(LineupName targetName) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Lineup getLineup(LineupName targetName) {
+        public Lineup getLineup(seedu.address.model.lineup.LineupName targetName) {
             throw new AssertionError("This method should not be called.");
         }
 

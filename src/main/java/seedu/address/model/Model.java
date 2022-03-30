@@ -6,8 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -93,12 +92,12 @@ public interface Model {
     /**
      * Returns true if the name is taken by some player.
      */
-    boolean hasPersonName(Name targetName);
+    boolean hasPersonName(LineupName targetName);
 
     /**
      * Returns true if the lineup name is taken by some lineup.
      */
-    boolean hasLineupName(LineupName targetName);
+    boolean hasLineupName(seedu.address.model.lineup.LineupName targetName);
 
     /**
      * Add a lineup to MyGM.
@@ -148,12 +147,12 @@ public interface Model {
     /**
      * Returns the person with the given name.
      */
-    Person getPerson(Name targetName);
+    Person getPerson(LineupName targetName);
 
     /**
      * TO BE FILLED
      */
-    Lineup getLineup(LineupName targetName);
+    Lineup getLineup(seedu.address.model.lineup.LineupName targetName);
 
     /**
      * Refreshes the model.

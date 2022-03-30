@@ -20,11 +20,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
@@ -58,7 +57,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_LINEUP));
             } else {
-                LineupName name = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+                seedu.address.model.lineup.LineupName name = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
                 Lineup lineup = new Lineup(name);
                 if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
                     // to be added later
@@ -90,7 +89,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE_PLAYER));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        LineupName name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         JerseyNumber jerseyNumber = ParserUtil.parseJerseyNumber(argMultimap.getValue(PREFIX_JERSEY_NUMBER).get());
         Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get());
         Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());

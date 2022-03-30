@@ -7,8 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,13 +30,13 @@ public class PutCommand extends Command {
     public static final String MESSAGE_LINEUP_FULL = "Lineup is already full (max 5).";
     public static final String MESSAGE_PUT_PERSON_SUCCESS = "Successfully put %s into %s";
 
-    private final Name playerName;
-    private final LineupName lineupName;
+    private final LineupName playerName;
+    private final seedu.address.model.lineup.LineupName lineupName;
 
     /**
      * Constructs a new put command.
      */
-    public PutCommand(Name playerName, LineupName lineupName) {
+    public PutCommand(LineupName playerName, seedu.address.model.lineup.LineupName lineupName) {
         this.playerName = playerName;
         this.lineupName = lineupName;
     }

@@ -6,9 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.lineup.UniqueLineupList;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Schedule;
@@ -113,7 +112,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if {@code targetName} is taken by some player.
      */
-    public boolean hasPersonName(Name targetName) {
+    public boolean hasPersonName(LineupName targetName) {
         requireNonNull(targetName);
         return this.persons.containsName(targetName);
     }
@@ -121,7 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns the person with {@code targetName};
      */
-    public Person getPerson(Name targetName) {
+    public Person getPerson(LineupName targetName) {
         return persons.getPerson(targetName);
     }
 
@@ -145,7 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param targetName The lineup name to check
      * @return Boolean represents the existecne of the lineup name
      */
-    public boolean hasLineupName(LineupName targetName) {
+    public boolean hasLineupName(seedu.address.model.lineup.LineupName targetName) {
         requireNonNull(targetName);
         return this.lineups.containsLineupName(targetName);
     }
@@ -163,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         lineups.replaceLineup(target, editedLineup);
     }
 
-    public Lineup getLineup(LineupName targetName) {
+    public Lineup getLineup(seedu.address.model.lineup.LineupName targetName) {
         return lineups.getLineup(targetName);
     }
 
@@ -212,7 +211,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void initalizePerson(Person p) {
         persons.add(p);
 
-        for (LineupName lineupName : p.getLineupNames()) {
+        for (seedu.address.model.lineup.LineupName lineupName : p.getLineupNames()) {
             Lineup lineup = lineups.getLineup(lineupName);
             lineups.putPlayerToLineup(p, lineup);
         }

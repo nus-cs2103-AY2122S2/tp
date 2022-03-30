@@ -12,8 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -72,14 +71,14 @@ public class DeleteCommand extends Command {
     }
 
     private final DeleteCommandType type;
-    private final Name player;
-    private final LineupName lineup;
+    private final LineupName player;
+    private final seedu.address.model.lineup.LineupName lineup;
     private final Index targetIndex;
 
     /**
      * Constructs a new delete command.
      */
-    public DeleteCommand(Name player) {
+    public DeleteCommand(LineupName player) {
         this.type = DeleteCommandType.PLAYER;
         this.player = player;
         this.lineup = null;
@@ -89,7 +88,7 @@ public class DeleteCommand extends Command {
     /**
      * Overloaded constructor for delete command.
      */
-    public DeleteCommand(Name player, LineupName lineup) {
+    public DeleteCommand(LineupName player, seedu.address.model.lineup.LineupName lineup) {
         this.type = DeleteCommandType.PLAYER_LINEUP;
         this.player = player;
         this.lineup = lineup;
@@ -99,7 +98,7 @@ public class DeleteCommand extends Command {
     /**
      * Overloaded constructor for delete command.
      */
-    public DeleteCommand(LineupName lineup) {
+    public DeleteCommand(seedu.address.model.lineup.LineupName lineup) {
         this.type = DeleteCommandType.LINEUP;
         this.player = null;
         this.lineup = lineup;

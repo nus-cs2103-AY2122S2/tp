@@ -10,11 +10,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
@@ -88,7 +87,7 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        final List<LineupName> personLineups = new ArrayList<>();
+        final List<seedu.address.model.lineup.LineupName> personLineups = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
@@ -97,12 +96,12 @@ class JsonAdaptedPerson {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LineupName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!LineupName.isValidLineupName(name)) {
+            throw new IllegalValueException(LineupName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final LineupName modelName = new LineupName(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -149,7 +148,7 @@ class JsonAdaptedPerson {
         final Weight modelWeight = new Weight(weight);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<LineupName> modelLineups = new HashSet<>(personLineups);
+        final Set<seedu.address.model.lineup.LineupName> modelLineups = new HashSet<>(personLineups);
 
         return new Person(modelName, modelPhone, modelEmail,
                 modelHeight, modelJerseyNumber, modelTags, modelWeight, modelLineups);
