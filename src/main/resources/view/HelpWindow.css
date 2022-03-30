@@ -41,7 +41,7 @@
     -fx-font-size: 14;
 }
 
-#delTaskCommand.label, #viewTaskCommand.label, #viewContactCommand.label {
+#delTaskCommand.label, #viewTaskCommand.label, #viewContactCommand.label, #findCommand.label {
     -fx-text-fill: white;
     -fx-background-color: #8A88FF;
     -fx-padding: 2 10 2 10;
