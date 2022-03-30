@@ -7,6 +7,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class NameTest {
+    public static final String PET_NAME_1 = "MOJO";
+    public static final String PET_NAME_2 = "PIKA";
+    public static final String PET_NAME_3 = "APPLE";
+    public static final String PET_NAME_4 = "APPO";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -36,5 +40,25 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+    }
+
+    @Test
+    public void compareTo() {
+
+        assertTrue(PET_NAME_1.compareTo(PET_NAME_1) == 0);
+        assertTrue(PET_NAME_2.compareTo(PET_NAME_2) == 0);
+        assertTrue(PET_NAME_3.compareTo(PET_NAME_3) == 0);
+
+        assertTrue(PET_NAME_1.compareTo(PET_NAME_2) < 0);
+        assertTrue(PET_NAME_2.compareTo(PET_NAME_3) > 0);
+        assertTrue(PET_NAME_3.compareTo(PET_NAME_1) < 0);
+
+        assertFalse(PET_NAME_1.compareTo(PET_NAME_2) > 0);
+        assertFalse(PET_NAME_2.compareTo(PET_NAME_3) < 0);
+        assertFalse(PET_NAME_3.compareTo(PET_NAME_1) > 0);
+
+        assertFalse(PET_NAME_4.compareTo(PET_NAME_3) == 0);
+        assertTrue(PET_NAME_4.compareTo(PET_NAME_3) > 0);
+        assertTrue(PET_NAME_3.compareTo(PET_NAME_4) < 0);
     }
 }

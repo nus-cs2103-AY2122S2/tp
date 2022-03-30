@@ -10,17 +10,22 @@ WoofAreYou is a desktop app for pet daycare owners to handle the administrative 
 Given below are my contributions to the project.
 ***
 
-* **New Feature**: *to be added soon*
-
+* **New Feature**: 
+1. AppointmentCommand
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=dineshraj555&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**: *to be added soon*
 
-* **Enhancements to existing features**: *to be added soon*
+* **Enhancements to existing features**:
+1. Update AddCommand -> Worked on second level refactoring to convert project from address book to pet book.
+2. Update SortCommand -> Implemented additional 3 sort fields : appointment, pickup time and drop off time.
 
 * **Documentation**:
-  * User Guide: *to be added soon*
-  * Developer Guide: *to be added soon*
+  * User Guide: 
+  1. Added Appointment Command, Add Command, Clear Command, Edit Command.
+  2. Updated SortCommand 
+  * Developer Guide: 
+  1. Appointment Command feature design implementation.
 
 * **Community**: *to be added soon*
 
