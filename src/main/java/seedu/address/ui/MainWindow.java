@@ -29,6 +29,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.ui.infopanel.InfoPanel;
 import seedu.address.ui.infopanel.LessonInfoPanel;
+import seedu.address.ui.infopanel.RecurringLessonInfoPanel;
 import seedu.address.ui.infopanel.StudentInfoPanel;
 import seedu.address.ui.listpanel.LessonListPanel;
 import seedu.address.ui.listpanel.ListPanel;
@@ -358,9 +359,18 @@ public class MainWindow extends UiPart<Stage> {
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
         requireNonNull(selectedLesson);
-        infoPanel = new LessonInfoPanel(selectedLesson);
-        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
-        populateInfoPanel(lessonInfoPanel);
+        if (selectedLesson.isRecurring()) {
+            infoPanel = new RecurringLessonInfoPanel(selectedLesson);
+            RecurringLessonInfoPanel lessonInfoPanel = (RecurringLessonInfoPanel) this.infoPanel;
+            populateInfoPanel(lessonInfoPanel);
+            return;
+        } else if (!selectedLesson.isRecurring()) {
+            infoPanel = new LessonInfoPanel(selectedLesson);
+            LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
+            populateInfoPanel(lessonInfoPanel);
+            return;
+        }
+        assert false;
     }
 
     private void populateInfoPanel(InfoPanel newInfoPanel) {
