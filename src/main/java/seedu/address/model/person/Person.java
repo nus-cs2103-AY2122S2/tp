@@ -81,11 +81,11 @@ public class Person {
     }
 
     /**
-     * Toggles the favourite status of Person
+     * Returns a copy of the Person with the favourite status toggled.
      */
-    public void toggleFavourite() {
+    public Person toggleFavourite() {
         boolean toggledStatus = !favourite.getStatus();
-        favourite.setStatus(toggledStatus);
+        return new Person(name, phone, email, new Favourite(toggledStatus), address, properties, preference, userType);
     }
 
     public Address getAddress() {
@@ -175,6 +175,17 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, favourite, address, properties, preference, userType, userImages);
+    }
+
+    /**
+     * Returns a plain string representation of {@code preference}.
+     */
+    public String preferenceToPlainString() {
+        if (preference.isEmpty()) {
+            return "";
+        } else {
+            return preference.get().toPlainString();
+        }
     }
 
     @Override
