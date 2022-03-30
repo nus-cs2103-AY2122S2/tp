@@ -176,7 +176,7 @@ If incorrect format of `deleteevent` command is entered, the appropriate delete 
 
 #### Show all events
 
-Upon successful execution of `showfriends` command the following must occur
+Upon successful execution of `showevents` command the following must occur
 
 1. Events tab is selected and displayed
 2. All the Events in Amigos are displayed
@@ -217,9 +217,9 @@ Upon successful adding of a log
 |:------------------------------------------------------:|:----------------------------------------------------:|
 | ![BeforeAddLog](images/GUITestImages/BeforeAddLog.png) | ![AfterAddLog](images/GUITestImages/AfterAddLog.png) |
 
-As you can see in the above images `WL's Bday` was inserted in the correct order with the appropriate command result message displayed in the CommandResult box.
+As you can see in the above images `First Log!` was inserted in the correct order with the appropriate command result message displayed in the CommandResult box.
 
-If incorrect format of `addevent` command is entered, the appropriate error message should be displayed in the CommandResult box. Shown below is the error message in the CommandResultBox.
+If incorrect format of `addlog` command is entered, the appropriate error message should be displayed in the CommandResult box. Shown below is the error message in the CommandResultBox.
 
 ![AddLogError](images/GUITestImages/AddLogError.png)
 
