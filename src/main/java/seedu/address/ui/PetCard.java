@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
 import seedu.address.commons.util.AttendanceUtil;
 import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Pet;
