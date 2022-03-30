@@ -1,8 +1,8 @@
 package seedu.address.ui.general;
 
-import javafx.scene.layout.Region;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Region;
 import seedu.address.ui.UiPart;
 
 public class GrabResult extends UiPart<Region> {
