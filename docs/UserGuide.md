@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: Tracey User Guide
 ---
 
 # Tracey
@@ -11,6 +11,7 @@ Tracey can get your student health status management tasks done faster than trad
 
 --------------------------------------------------------------------------------------------------------------------
 
+* [Navigating the User Guide](#how-to-navigate-the-user-guide)
 * [Quick Start](#quick-start)
 * [Features](#features)
     * <a href='#viewing-help'>Help</a>
@@ -31,7 +32,18 @@ Tracey can get your student health status management tasks done faster than trad
 * <a href='#command-summary'>Command Summary</a>
 
 --------------------------------------------------------------------------------------------------------------------
+## How to navigate the User Guide
 
+There are a few symbols to take note of in our User Guide. These symbols are serve different purposes as stated below:
+
+| Symbol  |                                                Purpose                                                |
+|:-------:|:-----------------------------------------------------------------------------------------------------:|
+|   📓    |    Additional notes are parked here. They contain beneficial information in case you are confused.    |
+|   ⚠️    |          Warnings are parked here. These are information that you **NEED** to take note of.           |
+|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey |
+*Figure 1: Symbols and their purposes*
+
+--------------------------------------------------------------------------------------------------------------------
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
  📓`Note:`
