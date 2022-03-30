@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.Command;
@@ -31,14 +32,17 @@ public class AddContactCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS \n"
+            + PREFIX_ADDRESS + "ADDRESS"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "S1234567L "
             + PREFIX_NAME + "John Smith "
             + PREFIX_PHONE + "88888888 "
             + PREFIX_EMAIL + "johns@example.com "
-            + PREFIX_ADDRESS + "21 Lower Kent Ridge Road, Singapore 119077 ";
+            + PREFIX_ADDRESS + "21 Lower Kent Ridge Road, Singapore 119077 "
+            + PREFIX_TAG + "primary "
+            + PREFIX_TAG + "father";
 
     public static final String MESSAGE_SUCCESS = "New contact added: \n%1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in patient contact list";
