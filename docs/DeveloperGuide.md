@@ -36,6 +36,10 @@ title: Developer Guide
       * [What it does](#what-it-does-3)
       * [Implementation](#implementation-4)
       * [Design considerations](#design-considerations-3)
+    * [Suggest show](#suggest-show)
+        * [What it does](#what-it-does-4)
+        * [Implementation](#implementation-5)
+        * [Design considerations](#design-considerations-4)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix A: Requirements**](#appendix-a-requirements)
   * [Product scope](#product-scope)
@@ -387,6 +391,40 @@ Using the FileChooser library, it manages to create a File Explorer GUI similar 
 - **Alternative 2 :** `Status` is implemented as a regular class that encapsulates a String or Integer which would represent the status of the show (`watching`, `completed` and `plan-to-watch`). 
   - Pros: Easier to implement as it is what most people are more familiar with.
   - Cons: Lack of compile time safety.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+### Suggest Show
+
+#### What it does
+`suggest` returns a random `Show` from the displayed ShowList.
+
+#### Implementation
+
+After executing the `suggest` command, it would create a `SuggestCommand` object.
+Upon execution of the `SuggestCommand`'s execute method, it will obtain the `filteredShowList`
+from the `model` object. After obtaining the list of `Show` object from the model via
+ the `models`'s getFilteredShowList method. 
+
+In the event that the list is empty, this would cause an error message
+informing users that there no shows in the list. Similarly, if there is only 1 `Show` object
+present in the list, it would inform the user that there is only 1 show in the current list.
+
+After which a random integer would be generated based on the size of 
+the said list. A random `Show` object will then be selected by calling the `List`'s get method. After 
+which the `Show` object returned would then be used to create an instance of `SuggestPredicate` which would be
+inputted into the `updateFilteredShowList()` method of the `model` instance to display said random
+Show.
+
+#### Design considerations:
+
+- **Alternative 1 (current choice):**
+    - Pros: Offers compile time type safety.
+    - Cons: Harder to implement for people who are not familiar with `enum` class.
+- **Alternative 2 :** `Status` is implemented as a regular class that encapsulates a String or Integer which would represent the status of the show (`watching`, `completed` and `plan-to-watch`).
+    - Pros: Easier to implement as it is what most people are more familiar with.
+    - Cons: Lack of compile time safety.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
