@@ -3,6 +3,7 @@ package seedu.address.model.person.insights;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.insights.Insights.Insight;
 import seedu.address.model.person.Person;
 
 
@@ -11,26 +12,20 @@ import seedu.address.model.person.Person;
  */
 public class NumEventsInsight extends Insight implements Comparable<NumEventsInsight> {
 
-
     private final int number;
 
     private NumEventsInsight(int number) {
         this.number = number;
+        super.markInitialized();
     }
 
-    private NumEventsInsight() {
-        // dummy todo surely there is a better way
+    protected NumEventsInsight() {
         this.number = -1;
     }
 
     /**
      * Constructs a NumEventsInsight object.
      */
-    public static NumEventsInsight of(Person person, Model model) {
-        requireAllNonNull(person, model);
-        NumEventsInsight helper = new NumEventsInsight(); // dummy todo surely there is a better way
-        return helper.getInsight(person, model);
-    }
 
     @Override
     public NumEventsInsight getInsight(Person person, Model model) {
@@ -45,6 +40,7 @@ public class NumEventsInsight extends Insight implements Comparable<NumEventsIns
 
     @Override
     public String getAsString() {
+        assert(super.isInitialized());
         return "Number of events: " + this.number;
     }
 

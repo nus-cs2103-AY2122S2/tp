@@ -3,6 +3,7 @@ package seedu.address.model.person.insights;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.insights.Insights.Insight;
 import seedu.address.model.person.Person;
 
 
@@ -11,24 +12,19 @@ import seedu.address.model.person.Person;
  * a person has.
  */
 public class NumLogsInsight extends Insight implements Comparable<NumLogsInsight> {
+
     private int number;
 
-    private NumLogsInsight() {
-        // dummy todo surely there is a better way
+    protected NumLogsInsight() {
+        // dummy
         this.number = -1;
     }
+
     private NumLogsInsight(int number) {
         this.number = number;
+        super.markInitialized();
     }
 
-    /**
-     * Constructs statically a NumLogsInsight object.
-     */
-    public static NumLogsInsight of(Person person, Model model) {
-        requireAllNonNull(person, model);
-        NumLogsInsight helper = new NumLogsInsight(); // dummy todo surely there is a better way
-        return helper.getInsight(person, model);
-    }
 
     @Override
     public NumLogsInsight getInsight(Person person, Model model) {
@@ -38,6 +34,7 @@ public class NumLogsInsight extends Insight implements Comparable<NumLogsInsight
 
     @Override
     public String getAsString() {
+        assert(super.isInitialized());
         return "Number of logs: " + this.number;
     }
 

@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 import seedu.address.model.Model;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.insights.Insights.Insight;
 import seedu.address.model.person.Person;
+
 
 /**
  * This class encapsulates the insight of the most recent event.
@@ -24,37 +26,37 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
         assert(!hasAtLeastOneEvent);
         this.hasAtLeastOneEvent = false;
         this.dateTime = null;
+        super.markInitialized();
     }
 
     private MostRecentEventInsight(DateTime dateTime) {
         requireNonNull(dateTime);
         this.dateTime = dateTime;
         this.hasAtLeastOneEvent = true;
+        super.markInitialized();
     }
 
-    private MostRecentEventInsight() {
-        // dummy todo surely there is a better way
+    protected MostRecentEventInsight() {
         this.dateTime = null;
         this.hasAtLeastOneEvent = false;
-    }
+    };
 
-    /**
-     * Statically constructs a MostRecentEventInsight object.
-     */
-    public static MostRecentEventInsight of(Person person, Model model) {
-        requireAllNonNull(person, model);
-        MostRecentEventInsight helper = new MostRecentEventInsight(); // dummy todo surely there is a better way
-        return helper.getInsight(person, model);
-    }
 
     @Override
     public MostRecentEventInsight getInsight(Person person, Model model) {
+
+        // sanity check
         requireAllNonNull(person, model);
+
+        // get event
         List<Event> eventsWithPerson = model.getAddressBook()
                 .getEventList()
                 .stream()
                 .filter(event -> event.hasFriendWithName(person))
+                .filter(event -> event.getDateTime().isBeforeNow()) // only past events
                 .collect(Collectors.toList());
+
+        // if have past event, update that
         if (eventsWithPerson.size() > 0) {
             eventsWithPerson.sort(Event::compareTo);
             DateTime dateTime = eventsWithPerson.get(eventsWithPerson.size() - 1).getDateTime();
@@ -66,6 +68,7 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
 
     @Override
     public String getAsString() {
+        assert(super.isInitialized());
         if (!this.hasAtLeastOneEvent) {
             return "Never had an event!";
         }
@@ -91,7 +94,9 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
             return true;
         } else if (other instanceof MostRecentEventInsight) {
             MostRecentEventInsight otherInsight = (MostRecentEventInsight) other;
-            if ((otherInsight.dateTime == null) ^ (this.dateTime == null)) {
+            if ((otherInsight.dateTime == null) && (this.dateTime == null)){
+                return true;
+            } else if ((otherInsight.dateTime == null) ^ (this.dateTime == null)) {
                 return false;
             }
             return this.dateTime.equals(((MostRecentEventInsight) other).dateTime);
