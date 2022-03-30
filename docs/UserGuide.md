@@ -33,7 +33,7 @@ faster than traditional GUI applications.
 
     * **`list`** : Lists all candidates.
 
-    * **`add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
+    * **`add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
    
     * **`edit 1 c/Computer Science yr/3 avail/1 ...`** Edits the first candidate in the system.
 
@@ -134,7 +134,7 @@ Format: `add id/STUDENTID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVA
 * `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
 
 Examples:
-* `add id/E0123456 n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, E0123456, named John Doe.
+* `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, **A0123456B**, named John Doe.
 
 ### Editing a candidate: `edit`
 
@@ -375,20 +375,20 @@ If your changes to the data file makes its format invalid, TAlent Assistant™ w
 Commands in this section have been organised based on the expected scope of behaviour.
 
 ### Candidates List
-| Action     | Format, Examples                                                                                                                                                 |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science yr/2 avail/1,2,3` |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                              |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                 |
-| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                     |
-| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                 |
+| Action     | Format, Examples                                                                                                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                    |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                                       |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                           |
+| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                       |
 
 ### Candidate Profile
 | Action    | Format, Examples |
 |-----------|------------------|
 | **Focus** | [[PLACEHOLDER]]  |
 
-### Scheduled Interviews
+### Scheduling Interviews
 | Action                        | Format, Examples                                                                                       |
 |-------------------------------|--------------------------------------------------------------------------------------------------------|
 | **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
