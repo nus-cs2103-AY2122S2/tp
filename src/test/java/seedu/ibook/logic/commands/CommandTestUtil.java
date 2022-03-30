@@ -28,15 +28,16 @@ public class CommandTestUtil {
     public static final String VALID_INDEX_A = "1";
     public static final String INVALID_INDEX_A = "0";
     public static final String INVALID_INDEX_B = "-1";
+    public static final String OVERFLOW_INDEX = "11111111111111";
 
     public static final String VALID_NAME_A = "Item A";
     public static final String VALID_NAME_B = "Item B";
     public static final String VALID_CATEGORY_A = "Category A";
     public static final String VALID_CATEGORY_B = "Category B";
-    public static final String VALID_DESCRIPTION_A = "A";
-    public static final String VALID_DESCRIPTION_B = "B";
-    public static final String VALID_PRICE_A = "1.99";
-    public static final String VALID_PRICE_B = "2.99";
+    public static final String VALID_DESCRIPTION_A = "Description A";
+    public static final String VALID_DESCRIPTION_B = "Description B";
+    public static final String VALID_PRICE_A = "$1.99";
+    public static final String VALID_PRICE_B = "$2.99";
     public static final String VALID_EXPIRY_DATE_A = "2022-03-08";
     public static final String VALID_EXPIRY_DATE_B = "2022-03-18";
     public static final String VALID_QUANTITY_A = "10";

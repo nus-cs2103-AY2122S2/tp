@@ -20,8 +20,8 @@ public class Price {
 
     public final Double price;
 
-    private Price() {
-        price = 0.00;
+    public Price(Double price) {
+        this.price = price;
     }
 
     /**
@@ -60,6 +60,13 @@ public class Price {
         }
 
         return price;
+    }
+
+    /**
+     * Checks that the price is within a specified range.
+     */
+    public boolean isWithin(Price startPrice, Price endPrice) {
+        return price >= startPrice.price && price <= endPrice.price;
     }
 
     @Override

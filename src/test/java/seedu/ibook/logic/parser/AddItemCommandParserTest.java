@@ -22,6 +22,9 @@ import seedu.ibook.model.item.Quantity;
 import seedu.ibook.testutil.ItemBuilder;
 
 public class AddItemCommandParserTest {
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE);
+
     private AddItemCommandParser parser = new AddItemCommandParser();
 
     private final Index index = Index.fromOneBased(1);
@@ -35,20 +38,16 @@ public class AddItemCommandParserTest {
     }
 
     @Test
-    public void parse_anyFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE);
+    public void parse_anyFieldMissing_parseException() {
+        assertParseFailure(parser, VALID_INDEX_A + EXPIRY_DATE_FULL_A, MESSAGE_INVALID_FORMAT);
 
-        assertParseFailure(parser, VALID_INDEX_A + EXPIRY_DATE_FULL_A, expectedMessage);
+        assertParseFailure(parser, QUANTITY_FULL_A + EXPIRY_DATE_FULL_A, MESSAGE_INVALID_FORMAT);
 
-        assertParseFailure(parser, QUANTITY_FULL_A + EXPIRY_DATE_FULL_A, expectedMessage);
-
-        assertParseFailure(parser, EXPIRY_DATE_FULL_A, expectedMessage);
+        assertParseFailure(parser, EXPIRY_DATE_FULL_A, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
-    public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE);
-
+    public void parse_invalidValue_parseException() {
         assertParseFailure(parser,
                 VALID_INDEX_A + INVALID_EXPIRY_DATE_DESC + QUANTITY_FULL_A,
                 ExpiryDate.MESSAGE_CONSTRAINTS);
