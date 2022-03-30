@@ -23,6 +23,8 @@ public class ClassGroupCard extends UiPart<Region> {
 
     public final ClassGroup classGroup;
 
+    private AttendanceWindow attendanceWindow;
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -47,6 +49,20 @@ public class ClassGroupCard extends UiPart<Region> {
         classType.setText(classGroup.getClassGroupType().toString());
         moduleCode.setText(classGroup.getModule().getModuleCode().value);
         moduleName.setText(classGroup.getModule().getModuleName().value);
+
+        attendanceWindow = new AttendanceWindow(classGroup.getLessons());
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleAttendance() {
+        if (!attendanceWindow.isShowing()) {
+            attendanceWindow.show();
+        } else {
+            attendanceWindow.focus();
+        }
     }
 
     @Override
