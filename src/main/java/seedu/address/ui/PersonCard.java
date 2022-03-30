@@ -61,14 +61,18 @@ public class PersonCard extends UiPart<Region> {
 
         // Required fields.
         name.setText(person.getName().getValue());
-        personId.setText("#" + person.getUniqueId());
+        personId.setText("Client ID #" + person.getUniqueId());
         phone.setText(person.getPhone().getValue());
         address.setText(person.getAddress().getValue());
         email.setText(person.getEmail().getValue());
 
         // Optional fields.
         person.getFields().stream().filter((Field f) -> !f.prefix.isRequired()).forEach((Field f) -> {
-            optionalFields.getChildren().add(new Label(f.getValue()));
+            String value = f.getValue();
+            // Do not display blank fields. (e.g. blank remarks)
+            if (!value.isBlank()) {
+                optionalFields.getChildren().add(new Label(value));
+            }
         });
 
         // Tags.
@@ -78,9 +82,9 @@ public class PersonCard extends UiPart<Region> {
         Membership membership = person.getMembership();
         if (membership != null) {
             Label newLabel = new Label(membership.toString());
-            if (membership.getValue().equals("GOLD")) {
+            if (membership.getValue().toUpperCase().equals("GOLD")) {
                 newLabel.setId("gold");
-            } else if (membership.getValue().equals("SILVER")) {
+            } else if (membership.getValue().toUpperCase().equals("SILVER")) {
                 newLabel.setId("silver");
             } else {
                 newLabel.setId("bronze");

@@ -17,7 +17,7 @@ import seedu.address.logic.parser.Prefix;
  */
 public class Tag implements Serializable {
     public static final Prefix PREFIX = new Prefix("t/", false);
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names must be alphanumeric without spaces.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String value;

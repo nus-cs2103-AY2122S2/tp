@@ -12,7 +12,7 @@ import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Removes a membership from a person in the address book.
  */
 public class RemoveMembershipCommand extends Command {
 
@@ -24,7 +24,7 @@ public class RemoveMembershipCommand extends Command {
             + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + "1";
 
-    public static final String MESSAGE_SUCCESS = "Removed membership from %1$s.";
+    public static final String MESSAGE_SUCCESS = "Removed membership from %s.";
     public static final String MESSAGE_NO_MEMBERSHIP = "%1$s does not have a membership";
 
     private final Index index;
