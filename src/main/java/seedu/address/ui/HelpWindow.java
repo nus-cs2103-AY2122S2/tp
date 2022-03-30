@@ -37,9 +37,9 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: add n/NAME p/PHONENUMBER e/EMAIL ..."
             + NEWLINE_AND_INDENTATION
-            + "Example 1: add n/Melvin f/SOC cs/ Negative"
+            + "Example 1: add n/Melvin b/e f/SOC p/99999999 a/12 Kent Ridge Drive e/melvin@bing.com mc/a0216456n cs/negative"
             + NEWLINE_AND_INDENTATION
-            + "Example 2: add e/student69@u.nus.edu n/ Martin\n"
+            + "Example 2: add f/FOL p/84848002 a/13 Kent Ridge Drive e/danny@yahoo.com mc/a0024345h n/Danny cs/positive b/c\n"
 
             + "\n3.DELETE a contact at a specific INDEX. The index refers to the index number shown in the "
             + "displayed person list."
