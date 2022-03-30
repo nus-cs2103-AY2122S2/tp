@@ -181,39 +181,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.add(i);
     }
 
-    //    /**
-    //     * Pass an interview in HireLah.
-    //     * The interview must already exist in HireLah.
-    //     */
-    //    public void passInterview(Interview i) {
-    //        interviews.pass(i);
-    //    }
-    //
-    //    /**
-    //     * Fails an interview in HireLah.
-    //     * The interview must already exist in HireLah.
-    //     */
-    //    public void failInterview(Interview i) {
-    //        interviews.fail(i);
-    //    }
-    //
-    //    /**
-    //     * Accepts an interview in HireLah.
-    //     * The interview must already exist in HireLah.
-    //     */
-    //    public void acceptInterview(Interview i) {
-    //        interviews.accept(i);
-    //    }
-    //
-    //    /**
-    //     * Rejects an interview in HireLah.
-    //     * The interview must already exist in HireLah.
-    //     */
-    //    public void rejectInterview(Interview i) {
-    //        interviews.reject(i);
-    //    }
-
-
     /**
      * Returns interview(s) which are for the specified applicant.
      */

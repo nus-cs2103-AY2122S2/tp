@@ -158,29 +158,6 @@ public class ModelManager implements Model {
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
-    //    @Override
-    //    public void passInterview(Interview target, Interview editedInterview) {
-    //        //addressBook.passInterview(interview);
-    //        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
-    //    }
-    //
-    //    @Override
-    //    public void failInterview(Interview interview) {
-    //        addressBook.failInterview(interview);
-    //        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
-    //    }
-    //
-    //    @Override
-    //    public void acceptInterview(Interview interview) {
-    //        addressBook.acceptInterview(interview);
-    //        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
-    //    }
-    //
-    //    @Override
-    //    public void rejectInterview(Interview interview) {
-    //        addressBook.rejectInterview(interview);
-    //        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
-    //    }
 
     @Override
     public void setInterview(Interview target, Interview editedInterview) {
