@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteModuleCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletemodule";
+    public static final String COMMAND_WORD = "deleteModule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all students identified by the module code inputted.\n"
