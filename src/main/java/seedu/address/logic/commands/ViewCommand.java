@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -36,12 +37,17 @@ public class ViewCommand extends Command {
             + "Parameters: " + PREFIX_SCHEDULE + "[SCHEDULE NAME]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals";
 
+    public static final String MESSAGE_ACTIVE_SCHEDULE_USAGE = COMMAND_WORD
+            + ": To view all schedules\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "all\n"
+            + "To view archived schedules\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "archive\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information of players, lineups and schedules.\n"
             + MESSAGE_USAGE_PLAYER + "\n"
             + MESSAGE_USAGE_LINEUP + "\n"
             + MESSAGE_USAGE_SCHEDULE;
 
-    private static String successMessage = "Listed all information!";
+    private static String MESSAGE_VIEW_SUCCESS = "Listed all information!";
 
     private final Predicate<Person> predicate;
     private final Predicate<Schedule> predicateSchedule;
@@ -76,18 +82,18 @@ public class ViewCommand extends Command {
             model.updateFilteredScheduleList(predicateSchedule);
         }
         changeSuccessMessage(model);
-        return new CommandResult(successMessage);
+        return new CommandResult(MESSAGE_VIEW_SUCCESS);
     }
 
     private void changeSuccessMessage(Model model) {
         if (keywords.size() > 1 && (keywords.contains("L/") || keywords.contains("P/"))) {
-            successMessage = String.format(
+            MESSAGE_VIEW_SUCCESS = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
         } else if (keywords.contains("S/")) {
-            successMessage = String.format(
+            MESSAGE_VIEW_SUCCESS = String.format(
                     Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
         } else {
-            successMessage = "Listed all persons!";
+            MESSAGE_VIEW_SUCCESS = "Listed all persons!";
         }
     }
 

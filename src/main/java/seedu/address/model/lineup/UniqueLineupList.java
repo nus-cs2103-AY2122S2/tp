@@ -193,6 +193,7 @@ public class UniqueLineupList {
     }
 
     public void setLineups(List<Lineup> lineups) {
+        list.clear();
         for (Lineup lineup : lineups) {
             addLineupToList(lineup);
         }

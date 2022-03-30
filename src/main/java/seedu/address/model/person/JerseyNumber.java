@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's jersey number in MyGM.
  */
-public class JerseyNumber {
+public class JerseyNumber implements Comparable<JerseyNumber> {
 
     public static final String MESSAGE_CONSTRAINTS = "Jersey numbers should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -46,5 +46,10 @@ public class JerseyNumber {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(JerseyNumber jn) {
+        return Integer.parseInt(value) - Integer.parseInt(jn.value);
     }
 }

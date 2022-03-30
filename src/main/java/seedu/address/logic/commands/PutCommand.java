@@ -41,6 +41,14 @@ public class PutCommand extends Command {
         this.lineupName = lineupName;
     }
 
+    public Name getPlayerName() {
+        return this.playerName;
+    }
+
+    public LineupName getLineupName() {
+        return this.lineupName;
+    }
+
     /**
      * Executes the PutCommand and returns the result message.
      *
@@ -63,5 +71,23 @@ public class PutCommand extends Command {
             model.putPersonIntoLineup(player, lineup);
             return new CommandResult(String.format(MESSAGE_PUT_PERSON_SUCCESS, this.playerName, this.lineupName));
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PutCommand)) {
+            return false;
+        }
+
+        PutCommand p = (PutCommand) other;
+
+        return getPlayerName().equals(p.getPlayerName())
+                && getLineupName().equals(p.getLineupName());
     }
 }

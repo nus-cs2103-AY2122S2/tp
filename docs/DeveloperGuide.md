@@ -276,6 +276,7 @@ The predicates are then combined and used to filter the `FilteredList<Person>`. 
 The following sequence diagram shows how the find operation works:
 Sequence Diagram:
 __TO BE ADDED__
+
 #### Design Consideration
 For future development (v1.3b), may consider to enter more flags so that user can perform more specific view task.
 
@@ -285,7 +286,36 @@ For future development (v1.3b), may consider to enter more flags so that user ca
 
 #### 4.3 View schedule
 #### Proposed implementation
+The proposed implementation of view schedule has three variants, which differ in Step 2 and 3 of user scenarios.
+
+Step 1. The user launches the application.
+
+Step 2a. The user wants to view active schedules happening at future dates.
+
+Step 3a. The user executes `view S/`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ACTIVE_SCHEDULES`.
+
+Step 2b. The user wants to view all schedules added.
+
+Step 3b. The user executes `view S/ a/all`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ALL_SCHEDULES`.
+
+Step 2b. The user wants to view archived schedules only.
+
+Step 3b. The user executes `view S/ a/archive`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ARCHIVED_SCHEDULES`.
+
+The following sequence diagram shows how the find operation works:
+Sequence Diagram:
+__TO BE ADDED__
+
 #### Design Consideration
+**Aspect: How to set the default display of schedule to active schedules only:**
+
+* **Alternative 1 (current choice):** Set the predicate at initialization of `AddressBook`.
+    * Pros: Easy to implement.
+    * Cons: Risk breaking abstraction principle because `LogicManager` is implementing for `ModelManager`.
+
+* **Alternative 2:** Set the predicate inside `ModelManager`.
+  * Pros: `LogicManager` will not call functions other than `get...()` of `ModelManager`.
+  * Cons: Difficult to implement.
 
 ### 5. Put feature
 Puts a `Person` into a `Lineup`

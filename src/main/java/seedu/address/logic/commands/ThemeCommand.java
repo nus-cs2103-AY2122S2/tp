@@ -39,4 +39,19 @@ public class ThemeCommand extends Command {
             return new CommandResult(MESSAGE_EDIT_THEME_LIGHT, false, false, false, true);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ThemeCommand)) {
+            return false;
+        }
+
+        ThemeCommand t = (ThemeCommand) other;
+
+        return this.toDark == t.toDark && this.toLight == t.toLight;
+    }
 }
