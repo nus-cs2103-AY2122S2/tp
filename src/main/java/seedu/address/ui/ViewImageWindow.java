@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -110,8 +112,12 @@ public class ViewImageWindow extends UiPart<Stage> {
      */
     public void refresh(UserImage userImage) {
         UserImage newImage = userImage;
-        Image displayImage = new Image(
-                this.getClass().getResourceAsStream("/" + newImage.getFilePath().get()));
+        Image displayImage;
+        try {
+            displayImage = new Image(new FileInputStream(newImage.getFilePath().get()));
+        } catch (FileNotFoundException e) {
+            displayImage = new Image(this.getClass().getResourceAsStream("/images/Missing.png"));
+        }
         displayArea.setImage(displayImage);
         description.setText(newImage.getDescription());
     }

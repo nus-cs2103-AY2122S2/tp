@@ -155,11 +155,20 @@ Format: `clear`
 
 ### Upload an Image : `upload`
 
-Uploads an image and description to be associated with a person.
+Uploads an image and description to be associated with a client.
+
+Format `upload INDEX [f/FilePath:description]`
+- Adds an image to the person at the specified `INDEX`
+- The index refers to the index number shown in the displayed person list.
+- File path is from the directory the JAR file is ran from. e.g. `upload 1 f/example.png:living room`
+  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
+- Description is optional and can be left blank e.g. `upload 1 f/example.png`
 
 ### View image of person: `viewimage`
 
 View images that are associated with a person in another window.
+
+Format `viewimage INDEX`
 
 ### Exiting the program : `exit`
 
@@ -231,23 +240,27 @@ Opens up a new window that shows a pie chart of the number of buyers & sellers w
 
 # Command Summary
                                                                                                   |
-| Action                                                                                                      | Format, Examples  |
-|-------------------------------------------------------------------------------------------------------------| --- |
-| Add                                                                                                         | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE
+| Action                                                                                                                | Format, Examples  |
+|-----------------------------------------------------------------------------------------------------------------------| --- |
+| Add                                                                                                                   | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE
  e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
-| Clear                                                                                                       | clear  |
-| Delete                                                                                                      | delete INDEX
- e.g., delete 3                                                                                              |
-| Edit                                                                                                        | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
- e.g., edit 2 n/James Lee e/jameslee@example.com                                                             |
-| Find                                                                                                        | find KEYWORD [MORE_KEYWORDS]
- e.g., find James Jake                                                                                       |
-| List                                                                                                        | list  |
-| Help                                                                                                        | help  |
-| Match                                                                                                       | match |
-| Favourite                                                                                                   | favourite INDEX
- e.g., favourite 3                                                                                           |
-| Favourites window                                                                                           | fw
-| Statistics window                                                                                           | stats
+| Clear                                                                                                                 | clear  |
+| Delete                                                                                                                | delete INDEX
+ e.g., delete 3                                                                                                        |
+| Edit                                                                                                                  | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
+ e.g., edit 2 n/James Lee e/jameslee@example.com                                                                       |
+| Find                                                                                                                  | find KEYWORD [MORE_KEYWORDS]
+ e.g., find James Jake                                                                                                 |
+| Upload                                                                                                                | upload INDEX [f/FilePath:Description]
+| e.g. Upload 1 f/livingroom.png:Living room of 4-room flat                                                             |
+| viewimage                                                                                                             | viewimage INDEX
+| e.g. viewimage 1                                                                                                      | 
+| List                                                                                                                  | list  |
+| Help                                                                                                                  | help  |
+| Match                                                                                                                 | match |
+| Favourite                                                                                                             | favourite INDEX
+ e.g., favourite 3                                                                                                     |
+| Favourites window                                                                                                     | fw
+| Statistics window                                                                                                     | stats
 
 
