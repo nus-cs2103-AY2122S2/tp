@@ -54,8 +54,7 @@ public class LogicManager implements Logic {
         boolean isValid = true;
         String errMsg = "";
 
-        for (int i = 0; i < commands.length; i++) {
-            String commandText = commands[i];
+        for (String commandText : commands) {
             logger.info("----------------[USER COMMAND][" + commandText + "]");
 
             try {
@@ -63,7 +62,7 @@ public class LogicManager implements Logic {
                 commandResult = command.execute(model);
 
                 // Checks if any of the special commands are in a command chain; throws exception if found
-                if (i > 0 && (commandResult.isExit() || commandResult.isShowHelp()
+                if (commands.length > 1 && (commandResult.isExit() || commandResult.isShowHelp()
                         || commandResult.isUndoPrevCommand())) {
                     throw new CommandException("Special command should not be in a command chain");
                 }
