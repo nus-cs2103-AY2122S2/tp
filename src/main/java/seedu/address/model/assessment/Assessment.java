@@ -63,9 +63,9 @@ public class Assessment implements Entity {
     }
 
     /**
-     * Returns a new copy of the assessment with a updated module.
-     *      * Every field must be present and not null.
-     *      * Used to initialize a class group for enrollment.
+     * Returns a new copy of the assessment with an updated module.
+     * Every field must be present and not null.
+     * Used to initialize an assessment for grading.
      */
     public Assessment(Assessment toCopy, TaModule module) {
         this(toCopy.getAssessmentName(), module, Optional.of(toCopy.getSimpleName()),
