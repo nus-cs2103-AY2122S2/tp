@@ -47,7 +47,6 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             logger.info("Time period parsed - month");
             return new ViewCommand(new ThisMonthWithinTimePeriodPredicate(now));
         case "all":
-        case "":
         default:
             logger.info("Time period parsed - all time");
             return new ViewCommand(new AllWithinTimePeriodPredicate(now));

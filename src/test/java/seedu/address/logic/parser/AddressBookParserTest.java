@@ -115,11 +115,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_view() throws Exception {
-        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD) instanceof ViewCommand);
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " today  ") instanceof ViewCommand);
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " WEEK  ") instanceof ViewCommand);
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " month  ") instanceof ViewCommand);
-        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + "       \t ") instanceof ViewCommand);
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " all  ") instanceof ViewCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), (
                         ) -> parser.parseCommand(ViewCommand.COMMAND_WORD + " month today  "));

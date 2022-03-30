@@ -59,8 +59,7 @@ public class ParserUtil {
         if (!trimmedTimePeriod.equalsIgnoreCase("today")
                 && !trimmedTimePeriod.equalsIgnoreCase("week")
                 && !trimmedTimePeriod.equalsIgnoreCase("month")
-                && !trimmedTimePeriod.equalsIgnoreCase("all")
-                && !trimmedTimePeriod.equalsIgnoreCase("")) {
+                && !trimmedTimePeriod.equalsIgnoreCase("all")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
         return trimmedTimePeriod;
