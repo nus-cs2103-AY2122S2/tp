@@ -2,12 +2,16 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Pair;
@@ -18,6 +22,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Person;
 import seedu.address.storage.ReminderPersons;
 import seedu.address.storage.Storage;
@@ -92,10 +97,11 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Person> getReminderPersonList() {
+        // get HashSet of HashMap's keys
         ObservableList<Person> reminderList = FXCollections.observableArrayList();
         ReminderPersons reminderPersons = ReminderPersons.getInstance();
-        HashSet<Person> reminderPersonsList = reminderPersons.clone();
-        reminderList.addAll(reminderPersonsList);
+        Set<Person> keySetOfReminderPerson = reminderPersons.getKeySet();
+        reminderList.addAll(keySetOfReminderPerson);
         return reminderList;
     }
 

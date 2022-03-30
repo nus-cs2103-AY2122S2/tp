@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
@@ -90,8 +91,8 @@ public class EditCommand extends Command {
 
         // remove reminder for previous instance of Person
         ReminderPersons reminderPersons = ReminderPersons.getInstance();
-        reminderPersons.remove(personToEdit);
-        reminderPersons.add(editedPerson);
+        Reminder previousReminder = reminderPersons.remove(personToEdit);
+        reminderPersons.add(editedPerson, previousReminder);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -2,13 +2,16 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Person;
 import seedu.address.storage.ReminderPersons;
 
@@ -18,24 +21,32 @@ import seedu.address.storage.ReminderPersons;
 public class RemindCommand extends Command {
 
     public static final String COMMAND_WORD = "remind";
+    public static final String MESSAGE_REMIND_PERSON_WARNING = "";
+    public static final String MESSAGE_UNREMIND_PERSON_WARNING = "If you're trying to remove a reminder for a Person, "
+            + "type \"remind INDEX\"";
     private static final String MESSAGE_REMIND_PERSON_SUCCESS = "Reminder for Person: %1$s";
-    private static final String MESSAGE_PERSON_ALREADY_REMINDED =
-            "This person has already been added to your reminders list!";
+    private static final String MESSAGE_UNREMIND_PERSON_SUCCESS = "Removed reminder for Person: %1$s";
+    private static final String MESSAGE_EDIT_REMIND_PERSON_SUCCESS = "Edited reminder for Person: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a reminder for the client "
             + "by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_REMINDER + "REMINDER\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_REMINDER + "meet client for home viewing.";
     private static ReminderPersons reminderPersons;
     private final Index index;
+    private final Optional<Reminder> reminder;
 
     /**
      * @param index of the person in the filtered person list to remind of.
+     * @param reminder
      */
-    public RemindCommand(Index index) {
+    public RemindCommand(Index index, Optional<Reminder> reminder) {
         requireAllNonNull(index);
         reminderPersons = ReminderPersons.getInstance();
         this.index = index;
+        this.reminder = reminder;
     }
 
     @Override
@@ -48,10 +59,24 @@ public class RemindCommand extends Command {
         }
 
         Person personToRemind = lastShownList.get(index.getZeroBased());
-        boolean isPersonNotReminded = reminderPersons.add(personToRemind);
 
-        if (!isPersonNotReminded) {
-            throw new CommandException(MESSAGE_PERSON_ALREADY_REMINDED);
+        // if the person already has a reminder
+        if (reminderPersons.containsKey(personToRemind)) {
+            if (reminder.isEmpty()) {
+                reminderPersons.remove(personToRemind);
+                return new CommandResult(String.format(MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind), false,
+                        false, false, true, false);
+            }
+            reminderPersons.add(personToRemind, reminder.get());
+            return new CommandResult(String.format(MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind), false,
+                    false, false, true, false);
+        }
+
+        // a reminder is being added to this person for the first time
+        if (reminder.isEmpty()) {
+            throw new CommandException(MESSAGE_USAGE);
+        } else {
+            reminderPersons.add(personToRemind, reminder.get());
         }
 
         return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind), false,

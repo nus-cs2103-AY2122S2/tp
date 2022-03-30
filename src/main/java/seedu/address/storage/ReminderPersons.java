@@ -1,7 +1,11 @@
 package seedu.address.storage;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Person;
 
 /**
@@ -11,10 +15,10 @@ import seedu.address.model.person.Person;
 public class ReminderPersons {
 
     private static ReminderPersons reminderPersons;
-    private static HashSet<Person> reminders;
+    private static HashMap<Person, Reminder> reminders;
 
     private ReminderPersons() {
-        reminders = new HashSet<>();
+        reminders = new HashMap<>();
     }
 
     public static ReminderPersons getInstance() {
@@ -30,22 +34,31 @@ public class ReminderPersons {
      * returns a boolean indicating if this person is in this list or not.
      * @param person The person to be reminded of.
      */
-    public boolean add(Person person) {
-        return reminders.add(person);
+    public Reminder add(Person person, Reminder reminder) {
+        return reminders.put(person, reminder);
+//        return reminderPersons.reminders.put(person, reminder);
     }
 
     /**
      * Removes a person from the list of persons to be reminded of
      * @param person The person to remove from reminders.
      */
-    public boolean remove(Person person) {
+    public Reminder remove(Person person) {
         return reminders.remove(person);
     }
 
     /**
-     * Returns a shallow copy of the HashSet.
+     * Returns a shallow copy of the HashMap.
      */
-    public HashSet<Person> clone() {
-        return new HashSet<>(reminders);
+    public HashMap<Person, Reminder> clone() {
+        return new HashMap<>(reminders);
+    }
+
+    public Set<Person> getKeySet() {
+        return reminders.keySet();
+    }
+
+    public boolean containsKey(Person person) {
+        return reminders.containsKey(person);
     }
 }

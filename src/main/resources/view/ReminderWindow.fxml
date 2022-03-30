@@ -25,7 +25,7 @@
                             <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
                         <children>
-                            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                            <StackPane fx:id="reminderPersonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </children>
                     </VBox>
                 </children>

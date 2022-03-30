@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -214,6 +216,21 @@ public class ParserUtil {
             throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
         }
         return new UserType(trimmedUserType);
+    }
+
+    /**
+     * Parses a {@code String reminder} into a {@code Reminder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reminder} is invalid.
+     */
+    public static Reminder parseReminder(String reminder) throws ParseException {
+        requireNonNull(reminder);
+        String trimmedReminder = reminder.trim();
+        if (!Reminder.isValidReminder(trimmedReminder)) {
+            throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
+        }
+        return new Reminder(trimmedReminder);
     }
 
 }

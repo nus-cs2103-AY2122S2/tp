@@ -19,10 +19,10 @@ public class ReminderWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ReminderPersonListPanel reminderPersonListPanel;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane reminderPersonListPanelPlaceholder;
 
     /**
      * Sets up Logic instance in ReminderWindow
@@ -74,15 +74,15 @@ public class ReminderWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ReminderPersonListPanel getPersonListPanel() {
+        return reminderPersonListPanel;
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getReminderPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        reminderPersonListPanel = new ReminderPersonListPanel(logic.getReminderPersonList());
+        reminderPersonListPanelPlaceholder.getChildren().add(reminderPersonListPanel.getRoot());
     }
 }
