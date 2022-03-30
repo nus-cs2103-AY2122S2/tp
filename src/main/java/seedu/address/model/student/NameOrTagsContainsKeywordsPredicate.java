@@ -27,7 +27,7 @@ public class NameOrTagsContainsKeywordsPredicate implements Predicate<Student> {
 
     private boolean nameContainsKeyword(Student student) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().fullName, keyword));
+                .anyMatch(keyword -> student.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     private boolean tagsContainKeyword(Student student) {
