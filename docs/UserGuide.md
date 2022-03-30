@@ -127,8 +127,8 @@ Format: `add id/STUDENTID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVA
 
 * `STUDENTID` is sensitive and it will be validated.
 * `NAME` should only contain alphabets, `A-Z` or `a-z`.
-* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
 * `EMAIL` should only be in this format. i.e. `EXXXXXXX@u.nus.edu`
+* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
 * `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
 * `SENIORITY` is a number range from 1 to 4.
 * `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
@@ -146,7 +146,7 @@ Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 
 **:information_source: Notes about the edit format:**<br>
 
-`ATTRIBUTE_FIELD` can take on the following values `id`, `name`, `phone`, `course`, `yr`, `as`, `avail`
+`ATTRIBUTE_FIELD` can take on the following values `id`, `name`, `email`, `phone`, `course`, `yr`, `as`, `avail`
 
 * `as` is short for `ApplicationStatus`.
 
@@ -159,6 +159,7 @@ Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 Examples:
 * `edit 1 n/Jane Doe yr/3 avail/1` Edits the name, year and availability of the 1st candidate to be Jane Doe, Year 3, Monday only respectively.
 * `edit 2 c/Business Analytics` Edits the course of the 2nd candidate to be `Business Analytics`.
+* `edit 3 as/Accepted` Edits the application status of the 3rd candidate to `Accepted`.
 
 ### Listing all candidates : `list`
 
@@ -375,13 +376,13 @@ If your changes to the data file makes its format invalid, TAlent Assistant™ w
 Commands in this section have been organised based on the expected scope of behaviour.
 
 ### Candidates List
-| Action     | Format, Examples                                                                                                                                                                       |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add id/STUDENTID n/NAME p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                    |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [yr/YEAR]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                                       |
-| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                           |
-| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                       |
+| Action     | Format, Examples                                                                                                                                                                               |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add id/STUDENTID n/NAME e/EMAIL p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
+| **Edit**   | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE_NUMBER] [c/COURSE] [yr/YEAR] [avail/AVAILABILITY] [as/APPLICATION_STATUS]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                             |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                   |
+| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                               |
 
 ### Candidate Profile
 | Action    | Format, Examples |
