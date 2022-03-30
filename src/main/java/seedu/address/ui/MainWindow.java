@@ -206,8 +206,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleSwitch() {
+    private void handleSwitch() throws CommandException, ParseException {
         logger.info("Switch AddressBook!");
+        executeCommand("switch");
     }
 
     /**
