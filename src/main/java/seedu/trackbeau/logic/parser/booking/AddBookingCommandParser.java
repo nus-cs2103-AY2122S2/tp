@@ -1,9 +1,8 @@
 package seedu.trackbeau.logic.parser.booking;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMERINDEX;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICEINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
 
 import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
@@ -12,11 +11,7 @@ import seedu.trackbeau.logic.parser.ArgumentTokenizer;
 import seedu.trackbeau.logic.parser.Parser;
 import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
-import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.booking.BookingDateTime;
-import seedu.trackbeau.model.customer.Name;
-import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.service.ServiceName;
 
 /**
  * Parses input arguments and creates a new AddBookingCommand object
@@ -28,21 +23,26 @@ public class AddBookingCommandParser implements Parser<AddBookingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddBookingCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_SERVICE, PREFIX_STARTTIME);
+        try {
+            ArgumentMultimap argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMERINDEX, PREFIX_SERVICEINDEX, PREFIX_STARTTIME);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_SERVICE, PREFIX_STARTTIME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBookingCommand.MESSAGE_USAGE));
+            if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CUSTOMERINDEX, PREFIX_SERVICEINDEX, PREFIX_STARTTIME)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddBookingCommand.MESSAGE_USAGE));
+            }
+
+            Integer customerIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CUSTOMERINDEX)
+                    .get()).getZeroBased();
+            Integer serviceIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SERVICEINDEX)
+                    .get()).getZeroBased();
+            BookingDateTime bookingDateTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_STARTTIME).get());
+
+            return new AddBookingCommand(customerIndex, serviceIndex, bookingDateTime);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBookingCommand.MESSAGE_USAGE), pe);
         }
-
-        Name customerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone customerPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        ServiceName serviceName = ParserUtil.parseServiceName(argMultimap.getValue(PREFIX_SERVICE).get());
-        BookingDateTime bookingDateTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_STARTTIME).get());
-
-        Booking booking = new Booking(customerName, customerPhone, serviceName, bookingDateTime);
-
-        return new AddBookingCommand(booking);
     }
 }

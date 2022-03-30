@@ -99,6 +99,14 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     }
 
     /**
+     * Return the index of the customer in the customer list.
+     * The customer must already exist in trackBeau.
+     */
+    public Integer getCustomerIndex(Customer c) {
+        return customers.indexOf(c);
+    }
+
+    /**
      * Replaces the given customer {@code target} in the list with {@code editedCustomer}.
      * {@code target} must exist in trackBeau.
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackBeau.
@@ -136,6 +144,13 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     }
 
     /**
+     * Return the index of the service in the service list.
+     * The service must already exist in trackBeau.
+     */
+    public Integer getServiceIndex(Service s) {
+        return services.indexOf(s);
+    }
+    /**
      * Removes {@code key} from this {@code TrackBeau}.
      * {@code key} must exist in trackBeau.
      */
@@ -167,6 +182,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * The customer must not already exist in trackBeau.
      */
     public void addBooking(Booking b) {
+        requireNonNull(b);
         bookings.add(b);
     }
 
@@ -204,6 +220,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public ObservableList<Customer> getCustomerList() {
         return customers.asUnmodifiableObservableList();
     }
+
     @Override
     public ObservableList<Service> getServiceList() {
         return services.asUnmodifiableObservableList();

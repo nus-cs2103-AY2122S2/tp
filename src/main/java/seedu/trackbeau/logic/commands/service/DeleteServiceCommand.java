@@ -1,7 +1,10 @@
 package seedu.trackbeau.logic.commands.service;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackbeau.logic.commands.booking.DeleteBookingCommand.MESSAGE_DELETE_BOOKING_SUCCESS;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,8 @@ import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.service.Service;
-
 
 /**
  * Deletes service(s) identified using it's displayed index from trackBeau.
@@ -34,28 +37,67 @@ public class DeleteServiceCommand extends Command {
         this.targetIndexes = targetIndexes;
     }
 
+    /**
+     * Returns a list of bookings affected by the deletion of Services.
+     */
+    public ArrayList<Booking> bookingsToDelete(List<Service> lastShownServicesList,
+                                               List<Booking> lastShownBookingsList) {
+        ArrayList<Booking> bookingsToDelete = new ArrayList<>();
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String currentTimeStr = localDateTime.format(formatter);
+        LocalDateTime currentTime = LocalDateTime.parse(currentTimeStr, formatter);
+
+        for (Booking booking : lastShownBookingsList) {
+            for (Index targetIndex : targetIndexes) {
+                if (booking.getService().equals(lastShownServicesList.get(targetIndex.getZeroBased()))
+                        && booking.getBookingDateTime().value.isAfter(currentTime)) {
+                    bookingsToDelete.add(booking);
+                    break;
+                }
+            }
+        }
+
+        return bookingsToDelete;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Service> lastShownList = model.getServiceList();
+        List<Service> lastShownServicesList = model.getFilteredServicesList();
+        List<Booking> lastShownBookingsList = model.getFilteredBookingList();
 
         ArrayList<Service> servicesToDelete = new ArrayList<>();
+        ArrayList<Booking> bookingsToDelete = bookingsToDelete(lastShownServicesList, lastShownBookingsList);
+
         for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            if (targetIndex.getZeroBased() >= lastShownServicesList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
             }
-            servicesToDelete.add(lastShownList.get(targetIndex.getZeroBased()));
+            servicesToDelete.add(lastShownServicesList.get(targetIndex.getZeroBased()));
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sbServices = new StringBuilder();
+        StringBuilder sbBookings = new StringBuilder();
+
         for (Service serviceToDelete : servicesToDelete) {
-            // TODO: Delete future bookings related to these services
-
             model.deleteService(serviceToDelete);
-            sb.append(serviceToDelete).append("\n");
+            sbServices.append(serviceToDelete).append("\n");
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_SERVICE_SUCCESS, sb));
+        for (Booking bookingToDelete : bookingsToDelete) {
+            model.deleteBooking(bookingToDelete);
+            sbBookings.append(bookingToDelete).append("\n");
+        }
+
+        String successMessage = String.format(MESSAGE_DELETE_SERVICE_SUCCESS, sbServices);
+
+        if (sbBookings.length() > 0) {
+            successMessage += String.format(MESSAGE_DELETE_BOOKING_SUCCESS, sbBookings);
+        }
+
+        return new CommandResult(successMessage);
     }
 
     @Override

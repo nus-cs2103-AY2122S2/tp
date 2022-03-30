@@ -17,13 +17,41 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** plot staff chart */
+    private final boolean plotStaffChart;
+
+    /** plot service chart */
+    private final boolean plotServiceChart;
+
+    /** plot allergy chart */
+    private final boolean plotAllergyChart;
+
+    /** plot skin chart */
+    private final boolean plotSkinChart;
+
+    /** plot hair chart */
+    private final boolean plotHairChart;
+
+    /** plot monthly customer chart */
+    private final boolean plotMonthlyCustomerChart;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp,
+                         boolean exit, boolean plotStaffChart,
+                         boolean plotServiceChart, boolean plotAllergyChart,
+                         boolean plotSkinChart, boolean plotHairChart,
+                         boolean plotMonthlyCustomerChart) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.plotStaffChart = plotStaffChart;
+        this.plotServiceChart = plotServiceChart;
+        this.plotAllergyChart = plotAllergyChart;
+        this.plotSkinChart = plotSkinChart;
+        this.plotHairChart = plotHairChart;
+        this.plotMonthlyCustomerChart = plotMonthlyCustomerChart;
     }
 
     /**
@@ -31,7 +59,9 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false,
+                false, false, false, false,
+                false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +74,30 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isPlotStaffChart() {
+        return plotStaffChart;
+    }
+
+    public boolean isPlotServiceChart() {
+        return plotServiceChart;
+    }
+
+    public boolean isPlotAllergyChart() {
+        return plotAllergyChart;
+    }
+
+    public boolean isPlotSkinChart() {
+        return plotSkinChart;
+    }
+
+    public boolean isPlotHairChart() {
+        return plotHairChart;
+    }
+
+    public boolean isPlotMonthlyCustomerChart() {
+        return plotMonthlyCustomerChart;
     }
 
     @Override
@@ -60,12 +114,20 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && plotStaffChart == otherCommandResult.plotStaffChart
+                && plotServiceChart == otherCommandResult.plotServiceChart
+                && plotAllergyChart == otherCommandResult.plotAllergyChart
+                && plotSkinChart == otherCommandResult.plotSkinChart
+                && plotHairChart == otherCommandResult.plotHairChart
+                && plotMonthlyCustomerChart == otherCommandResult.plotMonthlyCustomerChart;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit,
+                plotStaffChart, plotServiceChart, plotAllergyChart,
+                plotSkinChart, plotHairChart, plotMonthlyCustomerChart);
     }
 
 }

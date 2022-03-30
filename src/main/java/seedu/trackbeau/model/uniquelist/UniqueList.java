@@ -69,6 +69,15 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
     }
 
     /**
+     * Returns the index of the first occurrence of the specified element in the UniqueList,
+     * or -1 if this UniqueList does not contain the element.
+     */
+    public Integer indexOf(T item) {
+        requireNonNull(item);
+        return internalList.indexOf(item);
+    }
+
+    /**
      * Removes the items that satisfy the {@code condition}.
      *
      */
