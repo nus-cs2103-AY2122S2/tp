@@ -138,12 +138,11 @@ public class EditCommandTest {
                 .collect(Collectors.toList());
 
         for (Person classmate : filteredByClassCodeAndActivityList) {
-             List<Person> positiveRelatedToPerson = studentList.stream()
+            List<Person> positiveRelatedToPerson = studentList.stream()
                     .filter(student -> (student.getClassCode().toString()
-                            .equals(classmate.getClassCode().toString())
-                            || student.hasSameActivity(classmate))
-                            && !student.isSamePerson(editedPerson)
-                            && student.getStatus().toString().equals(Status.POSITIVE))
+                        .equals(classmate.getClassCode().toString()) || student.hasSameActivity(classmate))
+                        && !student.isSamePerson(editedPerson)
+                        && student.getStatus().toString().equals(Status.POSITIVE))
                     .collect(Collectors.toList());
 
             if (positiveRelatedToPerson.size() == 0) {
