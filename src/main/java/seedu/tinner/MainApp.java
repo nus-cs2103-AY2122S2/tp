@@ -69,7 +69,6 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
-        // ui.show(model.reminderlist);
     }
 
     /**
@@ -95,10 +94,6 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty CompanyList");
             initialData = new CompanyList();
         }
-        // testing
-        // for (Reminder r : UniqueReminderList.getReminderList().internalList) {
-        //     System.out.println(r.toString());
-        // }
         return new ModelManager(initialData, userPrefs, reminderList);
     }
 

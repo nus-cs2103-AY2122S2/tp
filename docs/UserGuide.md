@@ -109,7 +109,7 @@ Examples:
 
 Adds an internship role to a company that already exists in the list.
 
-Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS r/REMINDER_DATE [d/DESCRIPTION] [$/STIPEND]`
+Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]`
 * Add internship role at the specified `COMPANY_INDEX`.
 * The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, ...
 * The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
