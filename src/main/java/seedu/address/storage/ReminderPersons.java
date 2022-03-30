@@ -33,7 +33,7 @@ public class ReminderPersons {
      * @param person The person to be reminded of.
      */
     public Reminder add(Person person, Reminder reminder) {
-        return reminders.put(person, reminder);
+        return reminderPersons.reminders.put(person, reminder);
     }
 
     /**
@@ -41,21 +41,21 @@ public class ReminderPersons {
      * @param person The person to remove from reminders.
      */
     public Reminder remove(Person person) {
-        return reminders.remove(person);
+        return reminderPersons.reminders.remove(person);
     }
 
     /**
      * Returns a shallow copy of the HashMap.
      */
     public HashMap<Person, Reminder> clone() {
-        return new HashMap<>(reminders);
+        return new HashMap<>(reminderPersons.reminders);
     }
 
     public Set<Person> getKeySet() {
-        return reminders.keySet();
+        return reminderPersons.reminders.keySet();
     }
 
     public boolean containsKey(Person person) {
-        return reminders.containsKey(person);
+        return reminderPersons.reminders.containsKey(person);
     }
 }

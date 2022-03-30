@@ -32,7 +32,11 @@ class RemindCommandTest {
     }
 
     @Test
-    public void execute_newReminder_addSuccessful() throws Exception {
+    public void execute_createEditAndRemoveReminder_addEditRemoveSuccessful() throws Exception {
+        /* because of the singleton nature of ReminderPersons,
+        the addition, edit and removal of a Reminder are localized */
+
+        // adding a new Reminder
         Person personToRemind = model.getFilteredPersonList().get(0);
 
         CommandResult commandResult = new RemindCommand(Index.fromZeroBased(0),
@@ -40,18 +44,26 @@ class RemindCommandTest {
 
         assertEquals(String.format(RemindCommand.MESSAGE_REMIND_PERSON_SUCCESS, personToRemind),
                 commandResult.getFeedbackToUser());
-    }
 
-    @Test
-    public void execute_editReminder_editSuccesful() throws Exception {
-        Person personToRemind = model.getFilteredPersonList().get(0);
+        // editing an existing Reminder
+        personToRemind = model.getFilteredPersonList().get(0);
 
-        CommandResult commandResult = new RemindCommand(Index.fromZeroBased(0),
+        commandResult = new RemindCommand(Index.fromZeroBased(0),
                 Optional.of(new Reminder("finalizing leasing options"))).execute(model);
 
         assertEquals(String.format(RemindCommand.MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind),
                 commandResult.getFeedbackToUser());
+
+        // removing an existing Reminder
+        personToRemind = model.getFilteredPersonList().get(0);
+
+        commandResult = new RemindCommand(Index.fromZeroBased(0),
+                Optional.empty()).execute(model);
+
+        assertEquals(String.format(RemindCommand.MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind),
+                commandResult.getFeedbackToUser());
     }
+
 
     @Test
     public void execute_wrongIndex_throwsCommandException() throws Exception {
