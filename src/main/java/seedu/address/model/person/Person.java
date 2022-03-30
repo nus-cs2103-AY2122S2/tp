@@ -70,7 +70,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().toString().equalsIgnoreCase(getName().toString());
     }
 
     /**
@@ -88,7 +88,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return otherPerson.getName().toString().equalsIgnoreCase(getName().toString())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAcademicMajor().equals(getAcademicMajor())
