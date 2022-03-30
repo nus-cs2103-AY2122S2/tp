@@ -61,7 +61,7 @@ public class MakeTeamCommand extends Command {
         List<Person> lastShownList = model.getDisplayPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_FOR_PERSON);
         }
 
         Person personToUpdate = lastShownList.get(targetIndex.getZeroBased());

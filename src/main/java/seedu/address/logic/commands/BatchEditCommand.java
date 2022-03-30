@@ -62,7 +62,7 @@ public class BatchEditCommand extends Command {
 
         // Throwing error after editing for valid indices allows the successful edit for least the valid indices.
         if (!isAllIndicesValid) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SOME_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_FOR_SOME_PERSON);
         }
         return null;
     }
