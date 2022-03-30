@@ -53,11 +53,11 @@
                 </StackPane>
             <VBox prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #383838;" VBox.vgrow="ALWAYS">
                <children>
-      
+
                       <TabPane fx:id="tabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                           <tabs>
                               <Tab text="        ☺︎ Player">
-      
+
                                   <GridPane fx:id="gridPane" minWidth="340.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
                                       <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="170.0" />
@@ -67,14 +67,14 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                       <children>
-      
+
                                           <VBox fx:id="personList" styleClass="pane-without-border" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                               <padding>
                                                   <Insets bottom="10" left="10" right="10" top="10" />
                                               </padding>
                                               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                           </VBox>
-      
+
                                           <VBox fx:id="scheduleList" alignment="TOP_RIGHT" styleClass="dark-pane-without-border" GridPane.columnIndex="1">
                                               <padding>
                                                   <Insets bottom="10" left="10" right="10" top="10" />
@@ -113,7 +113,7 @@
                                       </children>
                                   </GridPane>
                               </Tab>
-      
+
                               <Tab text="  ✍︎ Schedule">
       
                                   <GridPane fx:id="gridPane" minWidth="340.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
@@ -125,24 +125,24 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                       <children>
-      
+
                                           <VBox fx:id="scheduleList" alignment="TOP_RIGHT" styleClass="pane-without-border" GridPane.columnIndex="0">
                                               <padding>
                                                   <Insets bottom="10" left="10" right="10" top="10" />
                                               </padding>
                                               <StackPane fx:id="scheduleListPanelPlaceholder" prefWidth="235.0" VBox.vgrow="ALWAYS" />
                                           </VBox>
-      
+
                                           <VBox fx:id="scheduleCalendarPanel" alignment="TOP_RIGHT" styleClass="dark-pane-without-border" GridPane.columnIndex="1">
                                               <padding>
                                                   <Insets bottom="10" left="10" right="10" top="10" />
                                               </padding>
                                               <StackPane fx:id="scheduleCalendarPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                           </VBox>
-      
+
                                       </children>
                                   </GridPane>
-      
+                                  
                               </Tab>
                           </tabs>
                       </TabPane>
