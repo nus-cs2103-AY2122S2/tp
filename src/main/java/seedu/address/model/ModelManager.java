@@ -137,6 +137,18 @@ public class ModelManager implements Model {
         addressBook.setCandidate(target, editedCandidate);
     }
 
+    @Override
+    public boolean hasInterview(Candidate editedCandidate) {
+        String availability = editedCandidate.getAvailability().toString();
+        Interview interview = getInterview(editedCandidate);
+
+        if (interview == null) {
+            return false;
+        }
+
+        return !availability.contains(String.valueOf(interview.getInterviewDay()));
+    }
+
     //=========== InterviewSchedule ================================================================================
 
     @Override
@@ -218,7 +230,19 @@ public class ModelManager implements Model {
         interviewSchedule.setInterview(target, editedInterview);
     }
 
+    @Override
+    public Interview getInterview(Candidate target) {
+        for (Interview i: interviewSchedule.getInterviewList()) {
+            if (i.getCandidate().getStudentId().toString().equals(target.getStudentId().toString())) {
+                return i;
+            }
+        }
+
+        return null;
+    }
+
     //=========== Interview Schedule Accessors =============================================================
+
     @Override
     public ObservableList<Interview> getFilteredInterviewSchedule() {
         interviewSchedule.sortInterviews();
@@ -231,7 +255,6 @@ public class ModelManager implements Model {
         interviewSchedule.sortInterviews();
         filteredInterviewSchedule.setPredicate(predicate);
     }
-
 
     //=========== Filtered/Sort Candidate List Accessors =============================================================
     /**
@@ -274,5 +297,4 @@ public class ModelManager implements Model {
                 && filteredCandidates.equals(other.filteredCandidates)
                 && interviewSchedule.equals(other.interviewSchedule);
     }
-
 }

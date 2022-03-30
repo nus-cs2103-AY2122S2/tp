@@ -57,9 +57,11 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "E0123456@u.nus.edu";
 
     public static final String MESSAGE_EDIT_CANDIDATE_SUCCESS = "Edited Candidate: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
     public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the system";
-    public static final String MESSAGE_FOCUS_FAIL = "Cannot refresh Candidate Details";
+    public static final String MESSAGE_CONFLICTED_AVAILABILITY =
+            "This candidate already has an interview scheduled on his/her available day that was previously added"
+            + "\nPlease consider re-scheduling the interview before making this change";
 
     private final Index index;
     private final EditCandidateDescriptor editCandidateDescriptor;
@@ -91,6 +93,10 @@ public class EditCommand extends Command {
 
         if (!candidateToEdit.isSameCandidate(editedCandidate) && model.hasCandidate(editedCandidate)) {
             throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE);
+        }
+
+        if (model.hasInterview(editedCandidate)) {
+            throw new CommandException(MESSAGE_CONFLICTED_AVAILABILITY);
         }
 
         model.setCandidate(candidateToEdit, editedCandidate);

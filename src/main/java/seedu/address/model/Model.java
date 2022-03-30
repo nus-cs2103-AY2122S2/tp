@@ -109,6 +109,11 @@ public interface Model {
      */
     void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException;
 
+    /**
+     * Checks if {@code editedCandidate} already has an interview when editing {@code availability}
+     */
+    boolean hasInterview(Candidate editedCandidate);
+
     boolean hasInterviewCandidate(Interview interview);
 
     boolean hasConflictingInterview(Interview interview);
@@ -120,6 +125,11 @@ public interface Model {
     void addInterview(Interview interview);
 
     void setInterview(Interview target, Interview editedInterview);
+
+    /**
+     * Gets candidate's scheduled interview if present
+     */
+    Interview getInterview(Candidate target);
 
     //=========== Interview Schedule Accessors =============================================================
 
