@@ -71,6 +71,6 @@ public class TaskName {
 
         // state check
         TaskName e = (TaskName) other;
-        return taskName.equals(e.taskName);
+        return taskName.equalsIgnoreCase(e.taskName);
     }
 }
