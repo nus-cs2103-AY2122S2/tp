@@ -24,7 +24,7 @@ public class Membership extends Field {
     public static final Prefix PREFIX = new Prefix("m/", true);
     public static final Prefix DATE_PREFIX = new Prefix("d/", false);
     public static final String MESSAGE_CONSTRAINTS =
-            "Membership tier should be either 'gold','silver','bronze'";
+            "Membership tier should be either 'bronze', 'silver' or 'gold'";
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date is in an invalid format";
 

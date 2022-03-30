@@ -14,6 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.Name;
@@ -29,8 +30,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the fields of the specified client "
+            + "by the index number used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + Name.PREFIX + "NAME] "
@@ -38,15 +39,16 @@ public class EditCommand extends Command {
             + "[" + Email.PREFIX + "EMAIL] "
             + "[" + Address.PREFIX + "ADDRESS] "
             + "[" + Remark.PREFIX + "REMARK] "
+            + "[" + Birthday.PREFIX + "BIRTHDAY] "
             + "[" + Tag.PREFIX + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + Phone.PREFIX + "91234567 "
             + Email.PREFIX + "johndoe@example.com "
-            + Remark.PREFIX + "Likes to adventure.";
+            + Remark.PREFIX + "Filing for bankruptcy.";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Client edited: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "Another person is already using this email.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 
     private final Index index;
     private final List<Field> fields;

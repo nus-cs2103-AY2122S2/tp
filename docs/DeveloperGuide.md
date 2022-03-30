@@ -159,81 +159,75 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Undo
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo mechanism is facilitated by `SerializableTempAddressBookStorage`. It extends `TempAddressBookStorage` 
+an interface and is stored and managed at `StorageManager` as `tempAddressBookStorage`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+This mechanism will store previous states of CinnamonBun when a modification or change is made to the data in temporary files.
+When users type the `undo` command, the latest state stored will be restored.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Additionally, it implements the follow operations which are exposed in the `Storage` interface:
+- `SerializableTempAddressBookStorage#getTempAddressBookFilepath()` --- Gets the file path of where the temporary files are stored.
+- `SerializableTempAddressBookStorage#addNewTempAddressBookFile()` --- Saves the state of CinnamonBun and keep track of the version.
+- `SerializableTempAddressBookStorage#popTempAddressFileData()` --- Gets the latest state of CinnamonBun stored in `SerializableTempAddressBookStorage`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `SerializableTempAddressBookStorage` will be initialized
+with the file path of where the temporary files will be saved, and an empty `arraylist` named `tempFiles` is created to store the file paths of the
+temporary files that will be created.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th person in the address book.
+In `LogicManager`, before executing the command, it will locally store the current clients' list state.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+After executing the command, it will compare the previous state with the current state of the clients' list. If it senses they are different, such as in this
+case since user has deleted the 5th client, it will call `LogicManager#savePrevAddressBookDataInTemp()`. 
 
-![UndoRedoState1](images/UndoRedoState1.png)
+From there, it will call `Storage#addNewTempAddressBookFile()` where the previous state of the clients' list, before the `delete 5` was executed, will be saved as a temporary file.
+The new temporary file will then be added into `tempFiles` list in `SerializableTempAddressBookStorage`.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+<div markdown="1" class="alert alert-info">:information_source: **Note:**
+Only modifications made to the clients' list will be saved. See the user guide for more info.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+`SerializableTempAddressBookStorage` also will only store the 10 latest modifications. When the 11th modification is made, it will removed
+the earliest modification saved and delete the temporary file for it.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
+If there are any issues with creating the temporary file and saving the data, an exception will be thrown and the modification will not be saved in
+a temporary file, thus, the modification cannot be undone.
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 3. The user executed `add n/David...` to add a new person. The steps mentioned in step 2 would be repeated. Thus, `tempFiles` will now store
+2 file paths to the 2 temporary files created.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+Step 4. The user now decides that adding the person was a mistake and decides to undo that action by executing the `undo` command.
+The `undo` command will call `LogicManager#undoPrevModification()`, which calls `Storage#popTempAddressFileData()`. This will obtain
+the latest temporary file added and restore the clients' list to the state saved in the temporary file (the state of the clients' list before add the new person, so before step 3).
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="1" class="alert alert-info">:information_source: **Note:**
+If there are no previous modifications to be restored (no modifications in the first place, or the user has undone the last 10 modifications and reached
+the limit) an error message will be shown.
 
+If the temporary file for the modification user is trying to undo is corrupted or deleted, then for that particular modification it can no longer
+be undone and an error message will be shown there was issue reading the file.
 </div>
 
-The following sequence diagram shows how the undo operation works:
+Step 5. The user executed the command `filter Daniel` to find all Daniels. This command do not modify the clients' list.
+Hence, `Storage#addNewTempAddressBookFile()` will not be called and no new temporary files will be added.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
+Step 6. The user closes the CinnamonBun application. All temporary files created will be deleted.
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire address book in temporary files.
   * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * Cons: May have performance issues in terms of storage and memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** Individual command knows how to undo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
@@ -384,16 +378,16 @@ To facilitate multiple commands, the program will split the given user input by 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                               | So that I can…​                                                       |
-| ------- |--------------------------------------------|--------------------------------------------| --------------------------------------------------------------------- |
-| `* * *` | business owner                                   | list all my clients information            | see my clients information.                 |
-| `* * *` | business owner                                       | add a new client to CinnamonBun            |                                                                       |
-| `* * *` | business owner                                       | edit a client’s information                | keep my client’s information updated.                                  |
-| `* * *` | business owner                                       | delete a client information                | remove those who are no longer customers. |
-| `* *`   | business owner                                       | find a client based on keywords            | easily find a specific client or group of clients.               |
- | `* * *` | business owner                                 | store a transaction of a particular client | easily keep track of unpaid transactions |
+| Priority | As a …​                                    | I want to …​                               | So that I can…​                                             |
+| ------- |--------------------------------------------|--------------------------------------------|-------------------------------------------------------------|
+| `* * *` | business owner                                   | list all my clients information            | see my clients information.                                 |
+| `* * *` | business owner                                       | add a new client to CinnamonBun            |                                                             |
+| `* * *` | business owner                                       | edit a client’s information                | keep my client’s information updated.                       |
+| `* * *` | business owner                                       | delete a client information                | remove those who are no longer customers.                   |
+| `* *`   | business owner                                       | find a client based on keywords            | easily find a specific client or group of clients.          |
+ | `* * *` | business owner                                 | store a transaction of a particular client | easily keep track of unpaid transactions                    |
 | `* * ` | business owner                                 | sort my clients based on certain field                        | easily sort and see the customers based on the field I want |
-
+| `* * ` | business owner                                 | undo previous modifications made to the address book                        | prevent mistakes made to the clients' list data             |
 
 *{More to be added}*
 
@@ -487,10 +481,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 1.
 * 1b. User inputs non-existent/not supported fields
   * 1b1. An error message is shown
-  
+
      Use case resumes at step 1
 
+**Use case: Undo modifications**
 
+**MSS**
+1. User undos the latest modification made to the Clients' list in the AddressBook.
+2. The modifications have been undone.
+3. The AddressBook shows the earlier clients' list without the modifications.
+
+**Extensions**
+* 1a. There have been no modification made prior to calling undo.
+  * 1a1. CinnamonBun shows an error message. <br>
+  Use case ends.
+  
+* 1b. The previous data cannot be read due to file reading issues/corruption
+  * 1b1. CinnamonBun shows an error message. <br>
+  Use case ends.
+
+    
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -561,6 +571,33 @@ testers are expected to do more *exploratory* testing.
         displayed based on their phone number in descending order.
    4. Test case: `sort l:)/ djewijw p/`<br>
       Expected: An error would be thrown as the fields specified do not exist.
+
+### Undo data modifications
+1. Undo a modification that was previously made
+   1. Prerequisites: There needs to be modifications made to the clients' list.
+   2. Test case: `undo` <br>
+      Expected: The previous modification done will be reverted and the application will display the previous version
+   of the clients' list.
+2. Undo a modification when there are none
+   1. Prerequisites: No modifications were made since the start of the application or all modifications have been reverted.
+   2. Test case: `undo` <br>
+      Expected: An error message will be shown stating that there is nothing to undo since there are no modifications.
+3. Only able to undo the 10 latest modifications.
+   1. Prerequisites: More than 10 modifications were made without reverting any of them.
+   2. Test case: `undo` 11 times <br>
+      Expected: Notice that it can only revert the clients' list by the latest 10 modifications made and not the modifications before those.
+      At the 11th `undo`, will show an error message stating that there is nothing to undo since there are no modifications.
+4. Handling temporary file corruption.
+   1. Prerequisites: Some modifications were made, but the latest temporary files in the `data\.tempdata` are either corrupted or deleted
+   by the user and not the application.
+   2. Test case: `undo` <br>
+      Expected: An error message would be shown stating it cannot read the temporary file. The temporary file if it's not
+   already deleted by the user, will then be deleted by the application. The clients' list will not be able to revert to before the modification stored 
+   in the corrupted temporary file. 
+   
+      However, if the user were to call `undo` again, and if the second latest temporary file data
+   is not corrupted or deleted by user, the application will be able to revert the clients' list to the state stored in the temporary file. Thus,
+   effectively undoing the latest 2 modifications.
 
 ### Saving data
 

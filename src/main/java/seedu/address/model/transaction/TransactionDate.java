@@ -19,8 +19,8 @@ public class TransactionDate extends TransactionField implements DateFieldInterf
 
     public static final Prefix PREFIX = new Prefix("td/", true);
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Due date should be in YYYY-MM-DD format and must exist";
+    public static final String MESSAGE_CONSTRAINT =
+            "Transaction date should be in YYYY-MM-DD format and must exist";
 
     private final LocalDate value;
 
@@ -33,7 +33,7 @@ public class TransactionDate extends TransactionField implements DateFieldInterf
         super(PREFIX);
         requireNonNull(transactionDate);
         transactionDate = transactionDate.trim();
-        checkArgument(DueDate.isValid(transactionDate), MESSAGE_CONSTRAINTS);
+        checkArgument(DueDate.isValid(transactionDate), MESSAGE_CONSTRAINT);
         value = LocalDate.parse(transactionDate);
     }
 

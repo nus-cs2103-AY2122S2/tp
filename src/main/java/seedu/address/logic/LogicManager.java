@@ -45,28 +45,41 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String userInput)
-            throws CommandException, ParseException, IllegalArgumentException {
+    public CommandResult execute(String userInput) throws CommandException {
         logger.info("----------------[USER INPUT][" + userInput + "]");
 
         CommandResult commandResult = null;
         String[] commands = userInput.split("\\|");
         ReadOnlyAddressBook addressBookBeforeCommand = new AddressBook(model.getAddressBook());
+        boolean revert = false;
+        String errMsg = "";
 
-        for (String commandText : commands) {
+        for (int i = 0; i < commands.length; i++) {
+            String commandText = commands[i];
             logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-            Command command = addressBookParser.parseCommand(commandText);
-            commandResult = command.execute(model);
-
             try {
-                storage.saveAddressBook(model.getAddressBook());
-            } catch (IOException ioe) {
-                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+                Command command = addressBookParser.parseCommand(commandText);
+                commandResult = command.execute(model);
+
+                if (i > 0 && (commandResult.isExit() || commandResult.isShowHelp()
+                        || commandResult.isUndoPrevCommand())) {
+                    throw new CommandException("Special command should not be in command chain");
+                }
+            } catch (CommandException | ParseException | IllegalArgumentException e) {
+                revert = true;
+                errMsg = e.getMessage();
             }
 
-            if (commandResult.isExit() || commandResult.isShowHelp() || commandResult.isUndoPrevCommand()) {
-                break;
+            try {
+                if (!revert) {
+                    storage.saveAddressBook(model.getAddressBook());
+                } else {
+                    model.setAddressBook(addressBookBeforeCommand);
+                    throw new CommandException("\"" + commandText + "\" - " + errMsg);
+                }
+            } catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
         }
 
@@ -114,14 +127,15 @@ public class LogicManager implements Logic {
     }
 
     /**
-     *  Saves address book data before the data modification made into a temporary file.
+     * Saves address book data before the data modification made into a temporary file.
      *
      * @param addressBookBeforeCommand Data of the address book before modification.
+     * @return Whether a temporary file is created. If no modifications were made, no temporary file will be created.
      * @throws CommandException If there are issues saving the data into the temporary file.
      */
-    public void savePrevAddressBookDataInTemp(ReadOnlyAddressBook addressBookBeforeCommand) throws CommandException {
+    public boolean savePrevAddressBookDataInTemp(ReadOnlyAddressBook addressBookBeforeCommand) throws CommandException {
         if (addressBookBeforeCommand.equals(model.getAddressBook())) {
-            return;
+            return false;
         }
 
         //address book data before command saved to temp file
@@ -130,6 +144,8 @@ public class LogicManager implements Logic {
         } catch (Exception exception) {
             throw new CommandException(TEMP_FILE_OPS_ERROR_MESSAGE + exception, exception);
         }
+
+        return true;
     }
 
     @Override

@@ -35,4 +35,16 @@ public class CommandParserTestUtil {
             assertEquals(expectedMessage, e.getMessage());
         }
     }
+
+    /**
+     * Asserts that parsing of {@code userinput} by {@code parser} is successful without
+     * checking the commandResult.
+     */
+    public static void assertParseNoFailure(Parser parser, String userInput) {
+        try {
+            Command command = parser.parse(userInput);
+        } catch (IllegalArgumentException | ParseException e) {
+            throw new IllegalArgumentException("Invalid userInput.", e);
+        }
+    }
 }
