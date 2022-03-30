@@ -36,16 +36,17 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            throw new ParseException(EditCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
-        }
-
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+
+
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            throw new ParseException(EditCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
         }
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();

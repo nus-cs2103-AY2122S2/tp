@@ -9,7 +9,6 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.patient.Name;
-import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 
@@ -39,14 +38,6 @@ public class EditPatientDescriptorBuilder {
         descriptor.setEmail(patient.getEmail());
         descriptor.setAddress(patient.getAddress());
         descriptor.setTags(patient.getTags());
-    }
-
-    /**
-     * Sets the {@code Nric} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPatientDescriptorBuilder withNric(String nric) {
-        descriptor.setNric(new Nric(nric));
-        return this;
     }
 
     /**
