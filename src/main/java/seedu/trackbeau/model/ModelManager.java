@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final TrackBeau trackBeau;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
-    private final FilteredList<Service> services;
+    private final FilteredList<Service> filteredServices;
     private final FilteredList<Booking> filteredBookings;
 
     /**
@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.trackBeau = new TrackBeau(trackBeau);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
-        services = new FilteredList<>(this.trackBeau.getServiceList());
+        filteredServices = new FilteredList<>(this.trackBeau.getServiceList());
         filteredBookings = new FilteredList<>(this.trackBeau.getBookingList());
     }
 
@@ -113,6 +113,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Integer getCustomerIndex(Customer customer) {
+        return trackBeau.getCustomerIndex(customer);
+    }
+
+    @Override
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
@@ -181,20 +186,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Integer getServiceIndex(Service service) {
+        return trackBeau.getServiceIndex(service);
+    }
+
+    @Override
     public void setService(Service target, Service editedService) {
         requireAllNonNull(target, editedService);
         trackBeau.setService(target, editedService);
     }
 
     @Override
-    public ObservableList<Service> getServiceList() {
-        return services;
+    public ObservableList<Service> getFilteredServicesList() {
+        return filteredServices;
     }
 
     @Override
     public void updateServiceList(Predicate<Service> predicate) {
         requireNonNull(predicate);
-        services.setPredicate(predicate);
+        filteredServices.setPredicate(predicate);
     }
 
     //=========== Filtered Customer List Accessors =============================================================
@@ -231,7 +241,7 @@ public class ModelManager implements Model {
         return trackBeau.equals(other.trackBeau)
                 && userPrefs.equals(other.userPrefs)
                 && filteredCustomers.equals(other.filteredCustomers)
-                && services.equals(other.services)
+                && filteredServices.equals(other.filteredServices)
                 && filteredBookings.equals(other.filteredBookings);
     }
 

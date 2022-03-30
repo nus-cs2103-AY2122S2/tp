@@ -47,9 +47,19 @@ class JsonSerializableTrackBeau {
      * @param source future changes to this will not affect the created {@code JsonSerializableTrackBeau}.
      */
     public JsonSerializableTrackBeau(ReadOnlyTrackBeau source) {
-        customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
-        services.addAll(source.getServiceList().stream().map(JsonAdaptedService::new).collect(Collectors.toList()));
-        bookings.addAll(source.getBookingList().stream().map(JsonAdaptedBooking::new).collect(Collectors.toList()));
+        List<Customer> customerList = source.getCustomerList();
+        List<Service> serviceList = source.getServiceList();
+        List<Booking> bookingList = source.getBookingList();
+
+        customers.addAll(customerList.stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
+        services.addAll(serviceList.stream().map(JsonAdaptedService::new).collect(Collectors.toList()));
+        for (Booking booking : bookingList) {
+            Integer customerIndex = source.getCustomerIndex(booking.getCustomer());
+            Integer serviceIndex = source.getServiceIndex(booking.getService());
+            if (customerIndex >= 0 || serviceIndex >= 0) {
+                bookings.add(new JsonAdaptedBooking(booking, customerIndex, serviceIndex));
+            }
+        }
     }
 
     /**
@@ -76,7 +86,7 @@ class JsonSerializableTrackBeau {
         }
 
         for (JsonAdaptedBooking jsonAdaptedBooking : bookings) {
-            Booking booking = jsonAdaptedBooking.toModelType();
+            Booking booking = jsonAdaptedBooking.toModelType(trackBeau);
             if (trackBeau.hasBooking(booking)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_BOOKING);
             }

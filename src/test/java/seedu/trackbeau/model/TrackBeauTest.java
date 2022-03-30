@@ -108,6 +108,17 @@ public class TrackBeauTest {
         public ObservableList<Service> getServiceList() {
             return services;
         }
+
+        @Override
+        public Integer getCustomerIndex(Customer customer) {
+            return customers.indexOf(customer);
+        }
+
+        @Override
+        public Integer getServiceIndex(Service service) {
+            return services.indexOf(service);
+        }
+
         @Override
         public ObservableList<Booking> getBookingList() {
             return bookings;

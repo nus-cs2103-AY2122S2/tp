@@ -2,8 +2,10 @@ package seedu.trackbeau.model.booking;
 
 import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.service.Service;
 import seedu.trackbeau.model.service.ServiceName;
 import seedu.trackbeau.model.uniquelist.UniqueListItem;
 
@@ -12,32 +14,39 @@ import seedu.trackbeau.model.uniquelist.UniqueListItem;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Booking implements UniqueListItem {
-    private final Name customerName;
-    private final Phone customerPhone;
-    private final ServiceName serviceName;
+
+    private final Customer customer;
+    private final Service service;
     private final BookingDateTime bookingDateTime;
 
     /**
      * Every field must be present and not null.
      */
-    public Booking(Name customerName, Phone customerPhone, ServiceName serviceName, BookingDateTime bookingDateTime) {
-        requireAllNonNull(customerName, customerPhone, serviceName, bookingDateTime);
-        this.customerName = customerName;
-        this.customerPhone = customerPhone;
-        this.serviceName = serviceName;
+    public Booking(Customer customer, Service service, BookingDateTime bookingDateTime) {
+        requireAllNonNull(bookingDateTime);
+        this.customer = customer;
+        this.service = service;
         this.bookingDateTime = bookingDateTime;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
     public Name getCustomerName() {
-        return customerName;
+        return customer.getName();
     }
 
     public Phone getCustomerPhone() {
-        return customerPhone;
+        return customer.getPhone();
     }
 
     public ServiceName getServiceName() {
-        return serviceName;
+        return service.getName();
     }
 
     public BookingDateTime getBookingDateTime() {
@@ -67,9 +76,8 @@ public class Booking implements UniqueListItem {
         }
 
         Booking otherBooking = (Booking) other;
-        return otherBooking.getCustomerName().equals(getCustomerName())
-                && otherBooking.getCustomerPhone().equals(getCustomerPhone())
-                && otherBooking.getServiceName().equals(getServiceName())
+        return otherBooking.getCustomer().equals(getCustomer())
+                && otherBooking.getService().equals(getService())
                 && otherBooking.getBookingDateTime().equals(getBookingDateTime());
     }
 

@@ -1,14 +1,17 @@
 package seedu.trackbeau.storage;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.commons.exceptions.IllegalValueException;
+import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.booking.BookingDateTime;
-import seedu.trackbeau.model.customer.Name;
-import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.service.ServiceName;
+import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.service.Service;
 
 /**
  * Jackson-friendly version of {@link Booking}.
@@ -17,65 +20,49 @@ class JsonAdaptedBooking {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Booking's %s field is missing!";
 
-    private final String name;
-    private final String phone;
-    private final String service;
+    private final Integer customerIndex;
+    private final Integer serviceIndex;
     private final String bookingDateTime;
 
     /**
      * Constructs a {@code JsonAdaptedBooking} with the given Booking details.
      */
     @JsonCreator
-    public JsonAdaptedBooking(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("service") String service,
+    public JsonAdaptedBooking(@JsonProperty("nameIndex") Integer customerIndex,
+                              @JsonProperty("serviceIndex") Integer serviceIndex,
                               @JsonProperty("bookingDateTime") String bookingDateTime) {
-        this.name = name;
-        this.phone = phone;
-        this.service = service;
+        this.customerIndex = customerIndex;
+        this.serviceIndex = serviceIndex;
         this.bookingDateTime = bookingDateTime;
     }
 
     /**
      * Converts a given {@code Booking} into this class for Jackson use.
      */
-    public JsonAdaptedBooking(Booking source) {
-        name = source.getCustomerName().fullName;
-        phone = source.getCustomerPhone().value;
-        service = source.getServiceName().fullName;
-        bookingDateTime = source.getBookingDateTime().toString();
+    public JsonAdaptedBooking(Booking source, Integer customerIndex, Integer serviceIndex) {
+        this.customerIndex = customerIndex;
+        this.serviceIndex = serviceIndex;
+        this.bookingDateTime = source.getBookingDateTime().toString();
     }
 
-    Name getModelName() throws IllegalValueException {
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Name.class.getSimpleName()));
+    Integer getModelCustomerID() throws IllegalValueException {
+        if (customerIndex == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Integer.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (customerIndex < 0) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
-        return new Name(name);
+        return customerIndex;
     }
 
-    Phone getModelPhone() throws IllegalValueException {
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+    Integer getModelServiceID() throws IllegalValueException {
+        if (serviceIndex == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Integer.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (serviceIndex < 0) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
         }
-        return new Phone(phone);
-    }
-
-    ServiceName getModelServiceName() throws IllegalValueException {
-        if (service == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ServiceName.class.getSimpleName()));
-        }
-
-        if (!ServiceName.isValidName(service)) {
-            throw new IllegalValueException(ServiceName.MESSAGE_CONSTRAINTS);
-        }
-        return new ServiceName(service);
+        return serviceIndex;
     }
 
     BookingDateTime getModelBookingDateTime() throws IllegalValueException {
@@ -83,7 +70,6 @@ class JsonAdaptedBooking {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     BookingDateTime.class.getSimpleName()));
         }
-
         if (!BookingDateTime.isValidBookingDateTime(bookingDateTime)) {
             throw new IllegalValueException(BookingDateTime.MESSAGE_CONSTRAINTS);
         }
@@ -95,12 +81,12 @@ class JsonAdaptedBooking {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted Booking.
      */
-    public Booking toModelType() throws IllegalValueException {
-        final Name modelName = this.getModelName();
-        final Phone modelPhone = this.getModelPhone();
-        final ServiceName modelServiceName = this.getModelServiceName();
-        final BookingDateTime modelBookingDateTime = this.getModelBookingDateTime();
+    public Booking toModelType(TrackBeau trackBeau) throws IllegalValueException {
+        List<Customer> customerList = trackBeau.getCustomerList();
+        List<Service> serviceList = trackBeau.getServiceList();
+        Customer customer = customerList.get(getModelCustomerID());
+        Service service = serviceList.get(getModelServiceID());
 
-        return new Booking(modelName, modelPhone, modelServiceName, modelBookingDateTime);
+        return new Booking(customer, service, getModelBookingDateTime());
     }
 }
