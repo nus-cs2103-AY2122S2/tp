@@ -89,7 +89,7 @@ public class Interview {
      * Returns true if this interview's date and time has expired.
      */
     public boolean isExpired() {
-        return this.interviewDateTime.isBefore(LocalDateTime.now());
+        return this.interviewEndDateTime.isBefore(LocalDateTime.now());
     }
 
     /**
