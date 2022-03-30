@@ -13,3 +13,19 @@
 #emailButton:hover {
     -fx-background-color: gray;
 }
+
+#importButton {
+    -fx-text-fill: white;
+}
+
+#importButton {
+    -fx-background-color: dimgray;
+}
+
+#importButton {
+    -fx-border-radius: 5px;
+}
+
+#importButton:hover {
+    -fx-background-color: gray;
+}

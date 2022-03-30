@@ -52,6 +52,8 @@
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
+          <Button fx:id="importButton" onAction="#handleImport" text="Import" translateX="300">
+          </Button>
           <Button fx:id="emailButton" onAction="#handleEmailWindow" text="Show Email" StackPane.alignment="CENTER_RIGHT" >
           </Button>
 

@@ -1,7 +1,13 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -10,13 +16,20 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.excel.ExcelToJSONConverter;
+import seedu.address.model.excel.ImportFileParser;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,7 +48,9 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private EmailWindow emailWindow;
-    private HelpWindow helpWindow;
+    private static HelpWindow helpWindow;
+
+    public static File excelFile;
 
     @FXML
     private PieChartWindow pieChartWindow;
@@ -153,6 +168,28 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens file manager for import
+     */
+    @FXML
+    public void handleImport() throws ParseException, CommandException, InterruptedException {
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            assert (selectedFile != null);
+            ImportFileParser converter = new ImportFileParser();
+            List<String> res = converter.JsonToPerson(selectedFile);
+            System.out.println(res);
+
+            for(int i = 0; i < res.size(); i++) {
+                executeCommand(res.get(i));
+                //TimeUnit.SECONDS.sleep(1);
+            }
+
         }
     }
 
