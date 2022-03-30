@@ -287,7 +287,7 @@ tags or name contains with "alex" **or** friends.
 
 ### Finding a Lesson
 
-Displays the lessons whose name contain the input provided.
+Displays the lessons whose name or subject contains the input provided.
 
 Command word: `findlesson` / `fl`
 
@@ -333,6 +333,11 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous TeachWhat! folder.
+
+**Q**: Why are both student and lesson lists empty? <br>
+**A**: This is most probably due to data in the respective files that holds the data for students and lessons. To guard
+against the possibility of you being misled by corrupted data, TeachWhat! will wipe all data and start from scratch if any
+irregularity is found in the data files for students *or* lessons.
 
 --------------------------------------------------------------------------------------------------------------------
 
