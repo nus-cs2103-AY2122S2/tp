@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.PutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 
 /**
@@ -28,7 +27,8 @@ public class PutCommandParser implements Parser<PutCommand> {
             // delete player from lineup
             // for now, we assume that there is only one team
             Name person = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
-            LineupName lineup = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
+            seedu.address.model.lineup.LineupName lineup = ParserUtil
+                    .parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
             return new PutCommand(person, lineup);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PutCommand.MESSAGE_USAGE));

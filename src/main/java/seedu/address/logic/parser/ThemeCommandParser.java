@@ -25,7 +25,6 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
         switch (theme.toLowerCase()) {
         case "dark":
             return new ThemeCommand(true, false);
-
         case "light":
             return new ThemeCommand(false, true);
 

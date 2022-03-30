@@ -38,8 +38,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      */
     @Override
     public ViewCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP, PREFIX_SCHEDULE,
-                PREFIX_ALL_SCHEDULE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP,
+                PREFIX_SCHEDULE, PREFIX_ALL_SCHEDULE);
 
         boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
         boolean hasLSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP); // L/

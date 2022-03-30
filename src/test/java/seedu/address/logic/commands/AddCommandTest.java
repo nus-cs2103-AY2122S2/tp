@@ -17,10 +17,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
@@ -36,10 +36,10 @@ public class AddCommandTest {
     private static final Person INVALID_PERSON = new PersonBuilder().withName("Alice Pauline").build();
     private static final Person INVALID_PERSON_2 = new PersonBuilder()
             .withName("Daniel Lee").withJerseyNumber("2").build();
-    private static final Lineup VALID_LINEUP = new Lineup(new LineupName("Dummy"));
+    private static final Lineup VALID_LINEUP = new Lineup(new seedu.address.model.lineup.LineupName("Dummy"));
     private static final Lineup VALID_LINEUP_2 = new LineupBuilder().build();
-    private Model model;
-    private Model expectedModel;
+    private Model model = new ModelManager();
+    private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_addLineup_success() throws CommandException {
@@ -103,7 +103,7 @@ public class AddCommandTest {
     @Test
     public void execute_scheduleAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingScheduleAdded modelStub = new ModelStubAcceptingScheduleAdded();
-        Schedule validSchedule = new ScheduleBuilder().build();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
 
         CommandResult commandResult = new AddCommand(validSchedule).execute(modelStub);
 
@@ -128,21 +128,21 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
         AddCommand addCommand = new AddCommand(duplicateJerseyNumberPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_JERSEY_NUMBER,
-                () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_JERSEY_NUMBER, () -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_PersonCapacityFull_throwsCommandException() {
+    public void execute_personCapacityFull_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         Person extraPerson1 = new PersonBuilder(validPerson).withName("Extraaa1").build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
-        ModelStubWithPerson stub =  (ModelStubWithPerson) modelStub;
+        ModelStubWithPerson stub = (ModelStubWithPerson) modelStub;
         stub.cheatIncrement();
         AddCommand addCommand = new AddCommand(extraPerson1);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_FULL_CAPACITY_REACHED,
-                () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_FULL_CAPACITY_REACHED, () -> addCommand.execute(modelStub));
     }
 
     /*
@@ -158,19 +158,20 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateSchedule_throwsCommandException() {
-        Schedule validSchedule = new ScheduleBuilder().build();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
         AddCommand addCommand = new AddCommand(validSchedule);
         ModelStub modelStub = new ModelStubWithSchedule(validSchedule);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_SCHEDULE,
-                () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_SCHEDULE, () -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_notDuplicateSchedule_Success() throws Exception {
+    public void execute_notDuplicateSchedule_success() throws Exception {
         ModelStubAcceptingScheduleAdded modelStub = new ModelStubAcceptingScheduleAdded();
-        Schedule validSchedule = new ScheduleBuilder().build();
-        Schedule anotherSchedule = new ScheduleBuilder(validSchedule).withScheduleDescription("Serious").build();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
+        Schedule anotherSchedule = new ScheduleBuilder(validSchedule)
+                .withDateTime("01/10/2030 2020").withScheduleDescription("Serious").build();
         new AddCommand(validSchedule).execute(modelStub);
         CommandResult commandResult = new AddCommand(anotherSchedule).execute(modelStub);
 
@@ -285,7 +286,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasLineupName(LineupName targetName) {
+        public boolean hasLineupName(seedu.address.model.lineup.LineupName targetName) {
             throw new AssertionError("hasLineupName should not be called.");
         }
 
@@ -340,7 +341,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Lineup getLineup(LineupName targetName) {
+        public Lineup getLineup(seedu.address.model.lineup.LineupName targetName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -404,8 +405,8 @@ public class AddCommandTest {
      * A Model stub that contains person.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
         private static final int CAPACITY = 2;
+        private final Person person;
         private int size = 0;
 
         ModelStubWithPerson(Person person) {

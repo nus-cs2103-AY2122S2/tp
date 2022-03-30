@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -65,9 +64,9 @@ public class SampleDataUtil {
 
     public static Lineup[] getSampleLineups() {
         return new Lineup[] {
-            new Lineup(new LineupName("snake")),
-            new Lineup(new LineupName("all star")),
-            new Lineup(new LineupName("freak"))
+            new Lineup(new seedu.address.model.lineup.LineupName("snake")),
+            new Lineup(new seedu.address.model.lineup.LineupName("all star")),
+            new Lineup(new seedu.address.model.lineup.LineupName("freak"))
         };
     }
 
@@ -121,9 +120,9 @@ public class SampleDataUtil {
     /**
      * Returns a lineup set containing the list of strings given.
      */
-    public static Set<LineupName> getLineupSet(String... strings) {
+    public static Set<seedu.address.model.lineup.LineupName> getLineupSet(String... strings) {
         return Arrays.stream(strings)
-                .map(LineupName::new)
+                .map(seedu.address.model.lineup.LineupName::new)
                 .collect(Collectors.toSet());
     }
 

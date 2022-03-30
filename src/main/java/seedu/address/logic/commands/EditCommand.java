@@ -28,7 +28,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.lineup.LineupPlayersList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -113,8 +112,8 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
     private final EditScheduleDescriptor editScheduleDescriptor;
-    private final LineupName targetLineupName;
-    private final LineupName editLineupName;
+    private final seedu.address.model.lineup.LineupName targetLineupName;
+    private final seedu.address.model.lineup.LineupName editLineupName;
 
     /**
      * Constructs an EditCommand for Person
@@ -139,7 +138,8 @@ public class EditCommand extends Command {
      * @param targetLineupName The target LineupName to edit
      * @param editLineupName The new LineupName
      */
-    public EditCommand(LineupName targetLineupName, LineupName editLineupName) {
+    public EditCommand(seedu.address.model.lineup.LineupName targetLineupName,
+                       seedu.address.model.lineup.LineupName editLineupName) {
         requireNonNull(targetLineupName);
         requireNonNull(editLineupName);
 
@@ -154,8 +154,7 @@ public class EditCommand extends Command {
 
     /**
      * Constructs an EditCommand for Person
-     *
-     * @param index     of the schedule in the filtered schedule list to edit
+     *  @param index     of the schedule in the filtered schedule list to edit
      * @param editScheduleDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditScheduleDescriptor editScheduleDescriptor) {
@@ -246,7 +245,7 @@ public class EditCommand extends Command {
         JerseyNumber updatedJerseyNumber = editPersonDescriptor.getJerseyNumber()
                 .orElse(personToEdit.getJerseyNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<LineupName> lineupNames = personToEdit.getModifiableLineupNames();
+        Set<seedu.address.model.lineup.LineupName> lineupNames = personToEdit.getModifiableLineupNames();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight, lineupNames);
@@ -255,10 +254,10 @@ public class EditCommand extends Command {
     /**
      * Creates and return a {@code Lineup} with the new Lineup name
      */
-    public static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
+    public static Lineup createEditedLineup(Lineup lineupToEdit, seedu.address.model.lineup.LineupName editLineupName) {
         assert lineupToEdit != null;
 
-        LineupName updatedName = editLineupName;
+        seedu.address.model.lineup.LineupName updatedName = editLineupName;
         LineupPlayersList playersList = lineupToEdit.getPlayers();
         playersList.replaceLineup(lineupToEdit.getLineupName(), updatedName);
 

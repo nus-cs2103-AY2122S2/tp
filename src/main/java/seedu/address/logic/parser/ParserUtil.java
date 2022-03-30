@@ -11,7 +11,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -149,13 +148,13 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static LineupName parseLineupName(String lineupName) throws ParseException {
+    public static seedu.address.model.lineup.LineupName parseLineupName(String lineupName) throws ParseException {
         requireNonNull(lineupName);
         String trimmedLineupName = lineupName.trim();
-        if (!LineupName.isValidLineupName(trimmedLineupName)) {
-            throw new ParseException(LineupName.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.lineup.LineupName.isValidLineupName(trimmedLineupName)) {
+            throw new ParseException(seedu.address.model.lineup.LineupName.MESSAGE_CONSTRAINTS);
         }
-        return new LineupName(trimmedLineupName);
+        return new seedu.address.model.lineup.LineupName(trimmedLineupName);
     }
 
     /**

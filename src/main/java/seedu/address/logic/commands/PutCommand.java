@@ -32,12 +32,12 @@ public class PutCommand extends Command {
     public static final String MESSAGE_PUT_PERSON_SUCCESS = "Successfully put %s into %s";
 
     private final Name playerName;
-    private final LineupName lineupName;
+    private final seedu.address.model.lineup.LineupName lineupName;
 
     /**
      * Constructs a new put command.
      */
-    public PutCommand(Name playerName, LineupName lineupName) {
+    public PutCommand(Name playerName, seedu.address.model.lineup.LineupName lineupName) {
         this.playerName = playerName;
         this.lineupName = lineupName;
     }
