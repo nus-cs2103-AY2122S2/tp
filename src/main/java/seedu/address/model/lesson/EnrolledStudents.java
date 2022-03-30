@@ -26,6 +26,19 @@ public class EnrolledStudents {
         return this.enrolledStudents.add(student);
     }
 
+    /**
+     * Replaces the student to be edited to the edited student
+     * @param target the student to be edited
+     * @param editedStudent the student after the edit
+     */
+    public void replaceEditedStudent(Student target, Student editedStudent) {
+        for (int i = 0; i < enrolledStudents.size(); i++) {
+            if (enrolledStudents.get(i).equals(target)) {
+                enrolledStudents.set(i, editedStudent);
+            }
+        }
+    }
+
     public boolean hasEnrolled(Student student) {
         return enrolledStudents.contains(student);
     }

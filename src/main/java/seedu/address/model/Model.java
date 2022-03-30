@@ -133,6 +133,8 @@ public interface Model {
      * lesson book.
      */
     void setLesson(Lesson target, Lesson editedLesson);
+
+
     /**
      * Updates both filtered lesson and students list.
      */
