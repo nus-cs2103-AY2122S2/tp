@@ -33,13 +33,23 @@ Tracey can get your student health status management tasks done faster than trad
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
-1. Ensure you have Java 11 or above installed in your Computer.
+1. Ensure you have Java 11 or above installed in your Computer. <br>
+ 📓`Note:`
+   1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
+   2. To check your java version: 
+      1. For Mac users, open up Terminal and type in `java --version`.
+      2. For Windows users, open up Command Prompt and type in `java --version`.
+   3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
+   4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
 2. Download the latest `Tracey.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data. <br>
-   ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data* <br>
+   📓`Note:`
+   1. If you are a Mac user and are unable to open the jar file after double-clicking, please open Terminal and change directory to where `Tracey.jar` is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   2. If you are a Windows user and are unable to open the jar file after double-clicking, please open Command Prompt and change directory to where `Tracey.jar` is locaated. Then, type the following command to open the application: `java -jar Tracey.jar`.
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * **`list`** : Lists all contacts.
@@ -307,6 +317,8 @@ there are changes to Tracey.
 
 ### Command Summary
 
+Figure 8: Command Summary.
+
 | No.  | Command  | Description                                               | Example  |
 |---|---|-----------------------------------------------------------|---|
 | 1.  | `find`  | Find a particular student                                 | `find alex` \n `find j`  |
@@ -320,8 +332,8 @@ there are changes to Tracey.
 | 9.  |  `filter` |        Retrieve list of people based on tags                                                   | `filter cs/HEALTH_STATUS f/FACULTY` |
 | 10. | `archive` |  Archives the Tracey Database                             |     `archive`                           |
 
-*Figure 8: Command Summary.*
 --------------------------------------------------------------------------------------------------------------------
+
 
 ### Glossary
 {to be added}
