@@ -10,15 +10,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.consultation.EditConsultationCommand;
+import seedu.address.logic.commands.consultation.EditConsultationCommand.EditConsultationDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditConsultationCommand object
  */
-public class EditConsultationCommandParser {
+public class EditConsultationCommandParser implements Parser<EditConsultationCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditConsultationCommand
      * and returns an EditConsultationCommand object for execution.
@@ -26,40 +28,46 @@ public class EditConsultationCommandParser {
      */
     public EditConsultationCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE,
+                PREFIX_TIME, PREFIX_DIAGNOSIS, PREFIX_FEE, PREFIX_NOTES);
+
+        Index index;
+
         try {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE,
-                    PREFIX_TIME, PREFIX_DIAGNOSIS, PREFIX_FEE, PREFIX_NOTES);
-
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-
-            EditConsultationCommand.EditConsultationDescriptor editConsultationDescriptor =
-                    new EditConsultationCommand.EditConsultationDescriptor();
-
-            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-                editConsultationDescriptor.setDate(ParserUtil.parseDate(
-                        argMultimap.getValue(PREFIX_DATE).get()));
-            }
-            if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-                editConsultationDescriptor.setTime(ParserUtil.parseTime(
-                        argMultimap.getValue(PREFIX_TIME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_DIAGNOSIS).isPresent()) {
-                editConsultationDescriptor.setDiagnosis(ParserUtil.parseDiagnosis(
-                        argMultimap.getValue(PREFIX_DIAGNOSIS).get()));
-            }
-            if (argMultimap.getValue(PREFIX_FEE).isPresent()) {
-                editConsultationDescriptor.setFee(ParserUtil.parseFee(
-                        argMultimap.getValue(PREFIX_FEE).get()));
-            }
-            if (argMultimap.getValue(PREFIX_NOTES).isPresent()) {
-                editConsultationDescriptor.setNotes(ParserUtil.parseNotes(
-                        argMultimap.getValue(PREFIX_NOTES).get()));
-            }
-
-            return new EditConsultationCommand(index, editConsultationDescriptor);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditConsultationCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditConsultationCommand.MESSAGE_USAGE), pe);
         }
+
+        EditConsultationDescriptor editConsultationDescriptor =
+                new EditConsultationDescriptor();
+
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            editConsultationDescriptor.setDate(ParserUtil.parseDate(
+                    argMultimap.getValue(PREFIX_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+            editConsultationDescriptor.setTime(ParserUtil.parseTime(
+                    argMultimap.getValue(PREFIX_TIME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DIAGNOSIS).isPresent()) {
+            editConsultationDescriptor.setDiagnosis(ParserUtil.parseDiagnosis(
+                    argMultimap.getValue(PREFIX_DIAGNOSIS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_FEE).isPresent()) {
+            editConsultationDescriptor.setFee(ParserUtil.parseFee(
+                    argMultimap.getValue(PREFIX_FEE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NOTES).isPresent()) {
+            editConsultationDescriptor.setNotes(ParserUtil.parseNotes(
+                    argMultimap.getValue(PREFIX_NOTES).get()));
+        }
+
+        if (!editConsultationDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditConsultationCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditConsultationCommand(index, editConsultationDescriptor);
     }
 }
