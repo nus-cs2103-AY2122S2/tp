@@ -3,7 +3,10 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import jdk.jfr.Event;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,6 +20,8 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+
+    private String lastCommandStr;
 
     @FXML
     private TextField commandTextField;
@@ -42,11 +47,22 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
+            this.lastCommandStr = commandText;
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    @FXML
+    private void handleKeyPressed(KeyEvent event) {
+        KeyCode keyCode = event.getCode();
+        if (keyCode == KeyCode.UP) {
+            commandTextField.setText(lastCommandStr);
+            commandTextField.positionCaret(lastCommandStr.length());
+        }
+
     }
 
     /**
