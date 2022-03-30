@@ -15,9 +15,9 @@ import seedu.address.model.position.Position;
 public class Interview {
 
     //Data fields
-    private final Applicant applicant;
+    private Applicant applicant;
     private final LocalDateTime date;
-    private final Position position;
+    private Position position;
     private final Status status;
 
     /**
@@ -56,6 +56,14 @@ public class Interview {
 
     public Status getStatus() {
         return status;
+    }
+
+    public void setApplicant(Applicant applicant) {
+        this.applicant = applicant;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     /**
