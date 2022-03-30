@@ -10,7 +10,7 @@ title: User Guide
 As a pet daycare owner, it takes a lot of effort to match pets to their names,
 as well as remember their owner's names, phone numbers and addresses. In addition, some pets may have special dietary requirements and
 vet appointments that you have to take note off. With WoofAreYou, these things can be taken care
-of easily, so that you may focus on the things that **truly** matter: taking good care of them and ensuring their safety.
+of easily, so that you may focus on the things that **truly** matter: taking good care of your pets and ensuring their safety.
 --------------------------------------------------------------------------------------------------------------------
 # WoofAreYou
 
@@ -20,7 +20,7 @@ all your clients' information. You can perform a variety of tasks by typing in a
 Interface) syntax. Just tell WoofAreYou what you want to do, and it will get it done quickly and efficiently.
 
 Even if you are unfamiliar with CLI, fret not, for this user guide is written specifically to guide you through the
-process of using WoofAreYou step by step. By the end of this user guide, it is our hope that you will be able to harness the power of WoofAreYou to bring your pet daycare establishment to greater heights.
+process of using WoofAreYou step-by-step. By the end of this user guide, it is our hope that you will be able to harness the power of WoofAreYou to bring your pet daycare establishment to greater heights.
 
 Let's get started!
 
@@ -311,14 +311,19 @@ You may also find sorting pets in WoofAreYou useful during your daily administra
 
 The command returns a sorted list of pets according to the parameter chosen. 
 
-You can choose to either sort pets alphabetically, by their names or their owner's names.
+You can choose to either sort pets alphabetically, 
+* By the pets' names
+* By the owners' names
 
-You can also sort pets chronologically, by their appointment dates, transport pick-up times as well as drop-off times.
+You can also sort pets chronologically, 
+* By their appointment dates
+* By their transport pick-up times
+* By their transport drop-off times
 
 Format: `sort SORT_BY`
+* **One and only one** `SORT_BY` parameter is to be used with this command.
 * The valid `SORT_BY` parameters are `name` , `owner`, `app`, `pick up` and `drop off`.
 * The parameters are case-sensitive.
-* **One and only one** `SORT_BY` parameter is to be used with this command.
 
 Examples:
 * `sort name` will sort the pets alphabetically as shown below.
@@ -328,22 +333,23 @@ Examples:
 </p>
 
 * `sort app` will sort the pets by their appointment dates and times, listing the pets starting from the pet with the earliest appointment to the latest appointment.
-* `sort pick up` and `sort drop off` will sort the pets by their pick up and drop off times respectively, listing the pets starting from the pet with the earliest time to the latest time.
+* `sort pick up` and `sort drop off` will sort the pets by their pick-up and drop-off times for transport arrangements **for today only**, listing the pets starting from the pet with the earliest time to the latest time.
 
 ### Filter pet list: `filter`
 
-If you just want to know  common information about some pets, you can filter the pet list by a specified field.
-You can filter by date, to find out which pets are present on a given date. You can filter by appointment to check which
-pets have appointment on a given date. You can filter by owner's name to find all pets with the same owner. You can also
-filter by tags to find all pets of with a common tag.
+If you just want to know common information about some pets, you can filter the pet list by a specified field.
+* You can filter by date, to find out which pets are present on a given date. 
+* You can filter by appointment, to check which pets have appointments on a given date. 
+* You can filter by owner's name, to find all pets with the same owner. 
+* You can also filter by tags, to find all pets of a common breed.
 
 Format: `filter f/KEYWORD`
 
-* Can only filter by date specified, owner's name and tags of pets (choose one out of three, else error will be shown)
+* **One and only one** filter parameter is to be used with this command.
 * Specified `f/` only consists of: `byDate/`, `byApp/`, `byTags/` and `byOwner/`.
-* `KEYWORD` if you use `byDate/` or `byApp/` has to be in `dd-MM-yyyy` format, or `today`.
-* `KEYWORD` if you use `byOwner/` can be any length.
-* `KEYWORD` if you use `byTags/` can be any length.
+* If you use `byDate/` or `byApp/`, `KEYWORD` has to be in `dd-MM-yyyy` format, or `today`.
+* If you use `byOwner/`, `KEYWORD` can be any length.
+* If you use `byTags/`, `KEYWORD` can be any length.
     * Can filter with a partial match in `Keyword`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`
 
 Examples:
@@ -366,14 +372,14 @@ Format:`list`
 Mistakes happen when dealing with CLI. Fortunately, you can undo previous commands that you have keyed in.
 
 Format: `undo`
-* You will not be able to undo `clear`, `exit`, `find`, `help` and `list` Commands.
+* You will not be able to undo `clear`, `exit`, `find`, `help` and `list` commands.
 
 Examples:
 * If the user chooses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted.
 
 ### View help : `help`
 
-If you need additional help when using WoofAreYou, you can use the help command. It shows a message explaining how to access the help page.
+If you need additional help when using WoofAreYou, feel free to use the help command. It shows a message explaining how to access the help page.
 
 Format: `help`
 
