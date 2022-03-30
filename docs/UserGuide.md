@@ -248,6 +248,8 @@ The `Show Email` button opens up a separate window that consists of all the emai
 `Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
 ![Email](images/CopyEmailScreenshot.png) *Figure 7: Screenshot of Copy Email function.*
 
+From Figure 7, this function is beneficial for administators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+
 ### Summarising the records
 Summarises the student records inside Tracey.
 
