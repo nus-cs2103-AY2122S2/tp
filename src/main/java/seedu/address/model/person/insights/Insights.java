@@ -1,16 +1,17 @@
 package seedu.address.model.person.insights;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Encapsulates an insight.
  */
 public class Insights {
 
-    public static abstract class Insight {
+    public abstract static class Insight {
 
         // instantiate flag
         private boolean initialized = false;

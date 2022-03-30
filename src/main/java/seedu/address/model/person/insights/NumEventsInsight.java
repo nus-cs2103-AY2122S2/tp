@@ -3,8 +3,8 @@ package seedu.address.model.person.insights;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.insights.Insights.Insight;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insights.Insights.Insight;
 
 
 /**

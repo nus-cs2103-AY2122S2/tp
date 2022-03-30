@@ -9,14 +9,18 @@ import java.util.stream.Collectors;
 import seedu.address.model.Model;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.insights.Insights.Insight;
 import seedu.address.model.person.Person;
-
+import seedu.address.model.person.insights.Insights.Insight;
 
 /**
  * This class encapsulates the insight of the most recent event.
  */
 public class MostRecentEventInsight extends Insight implements Comparable<MostRecentEventInsight> {
+
+
+    // constants
+    public static final String DEFAULT_NO_EVENT_MESSAGE = "Never had an event!";
+    public static final String DEFAULT_HAS_EVENT_PREFIX = "Most recent event: ";
 
     // data field
     private final DateTime dateTime;
@@ -70,7 +74,7 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
     public String getAsString() {
         assert(super.isInitialized());
         if (!this.hasAtLeastOneEvent) {
-            return "Never had an event!";
+            return DEFAULT_NO_EVENT_MESSAGE;
         }
         assert (this.dateTime != null);
         return "Most recent event: " + this.dateTime.toString();
@@ -94,7 +98,7 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
             return true;
         } else if (other instanceof MostRecentEventInsight) {
             MostRecentEventInsight otherInsight = (MostRecentEventInsight) other;
-            if ((otherInsight.dateTime == null) && (this.dateTime == null)){
+            if ((otherInsight.dateTime == null) && (this.dateTime == null)) {
                 return true;
             } else if ((otherInsight.dateTime == null) ^ (this.dateTime == null)) {
                 return false;
