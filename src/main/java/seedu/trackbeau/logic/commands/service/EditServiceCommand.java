@@ -61,13 +61,13 @@ public class EditServiceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Service> lastShownList = model.getServiceList();
+        List<Service> lastShownServiceList = model.getFilteredServicesList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownServiceList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
         }
 
-        Service serviceToEdit = lastShownList.get(index.getZeroBased());
+        Service serviceToEdit = lastShownServiceList.get(index.getZeroBased());
         Service editedService = createEditedService(serviceToEdit, editServiceDescriptor);
 
         if (!serviceToEdit.isSameItem(editedService) && model.hasService(editedService)) {

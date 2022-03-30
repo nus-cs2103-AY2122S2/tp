@@ -44,7 +44,6 @@ public class DeleteCustomerCommandTest {
         StringBuilder sb = new StringBuilder();
         sb.append(customerToDelete).append("\n");
         String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
-
         ModelManager expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
 
@@ -81,7 +80,6 @@ public class DeleteCustomerCommandTest {
         sb.append(customerToDelete1).append("\n");
         sb.append(customerToDelete2).append("\n");
         String expectedMessage = String.format(DeleteCustomerCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
-
         ModelManager expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete1);
         expectedModel.deleteCustomer(customerToDelete2);

@@ -76,12 +76,9 @@ public class SampleDataUtil {
 
     public static Booking[] getSampleBookings() {
         return new Booking[] {
-            new Booking(new Name("Alex Yeoh"), new Phone("87438807"), new ServiceName("Organic Radiance Facial"),
-                new BookingDateTime("10-10-2022 10:30")),
-            new Booking(new Name("David Li"), new Phone("91031282"), new ServiceName("Eyebrow Shaping"),
-                new BookingDateTime("11-11-2022 11:00")),
-            new Booking(new Name("Bernice Yu"), new Phone("99272758"), new ServiceName("Anti-Aging Eye Treatment"),
-                new BookingDateTime("12-12-2022 12:30"))
+            new Booking(getSampleCustomers()[0], getSampleServices()[0], new BookingDateTime("10-10-2022 10:30")),
+            new Booking(getSampleCustomers()[1], getSampleServices()[1], new BookingDateTime("11-11-2022 11:30")),
+            new Booking(getSampleCustomers()[2], getSampleServices()[2], new BookingDateTime("12-12-2022 12:30"))
         };
     }
 

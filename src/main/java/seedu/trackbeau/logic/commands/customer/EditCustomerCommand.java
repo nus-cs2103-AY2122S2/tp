@@ -86,13 +86,13 @@ public class EditCustomerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Customer> lastShownList = model.getFilteredCustomerList();
+        List<Customer> lastShownCustomerList = model.getFilteredCustomerList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownCustomerList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
 
-        Customer customerToEdit = lastShownList.get(index.getZeroBased());
+        Customer customerToEdit = lastShownCustomerList.get(index.getZeroBased());
         Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
         if (!customerToEdit.isSameItem(editedCustomer) && model.hasCustomer(editedCustomer)) {

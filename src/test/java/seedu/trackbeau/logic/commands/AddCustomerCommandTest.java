@@ -134,6 +134,11 @@ public class AddCustomerCommandTest {
         }
 
         @Override
+        public Integer getCustomerIndex(Customer customer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setTrackBeau(ReadOnlyTrackBeau newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -199,12 +204,17 @@ public class AddCustomerCommandTest {
         }
 
         @Override
+        public Integer getServiceIndex(Service service) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setService(Service target, Service editedService) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Service> getServiceList() {
+        public ObservableList<Service> getFilteredServicesList() {
             throw new AssertionError("This method should not be called.");
         }
 
