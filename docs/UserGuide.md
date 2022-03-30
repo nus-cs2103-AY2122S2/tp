@@ -229,55 +229,62 @@ Examples:
 * `delete -p Senior Frontend Software Engineer`
 
 ## List
-General command to list different data type in HireLah.
+General command to list different data type in HireLah. User can provide optional parameters to filter the data to display.
+If there are no parameters provided, HireLah will display all data of that type by default.
 
-Format: `list -TYPE`
-* TYPE must take the form of `a`, `i`, `p`
-* -a will list all applicants
-* -i will list all interview
-* -p will list all position
+Note: This command may change the index of the displayed items, and all other commands that accepts an index will follow the latest index shown in HireLah.
 
-### List Applicants: `list -a`
-Lists all existing applicants. Automatically toggles view to the applicant tab on the GUI.
+Format: `list -TYPE [f/FILTER_TYPE a/FILTER_ARGUMENT]`
+* `TYPE` must take the form of `a`, `i`, `p`
+  * `-a` will list all applicants
+  * `-i` will list all interview
+  * `-p` will list all position
+* `FILTER_TYPE` and `FILTER_ARGUMENT` are optional paramters to filter the data listed
+  * Note that **both** `FILTER_TYPE` and `FILTER_ARGUMENT` need to be provided to filter data
+  * Different data types will accept different `FILTER_TYPE` and `FILTER_ARGUMENT`, as elaborated below
+  * `FILTER_TYPE` has to be exactly the same as listed below (not caps-sensitive)
+  
 
-Format: `list -a`
+### List Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT]`
+Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI. 
 
-### Listing interviews: `list -i`
+The applicants displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-Lists all existing interviews in HireLah. Automatically toggles view to the interview tab on the GUI.
+| FILTER_TYPE | FILTER_ARGUMENT                    | Description                                        |
+|-------------|------------------------------------|----------------------------------------------------|
+| `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s) |
 
-Format: `list -i`
+Example: `list -a f/name a/John Doe`
 
-Examples:
-* `list -i 1`
-### List Positions : `list -p`
+### List Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT]`
 
-Lists all existing positions in HireLah. Automatically toggles view to the position tab on the GUI.
+Lists all existing positions by default. Automatically toggles view to the position tab on the GUI.
 
-Format: `list -p`
+The positions displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
+
+| FILTER_TYPE | FILTER_ARGUMENT                 | Description                                            |
+|-------------|---------------------------------|--------------------------------------------------------|
+| `name`      | Keyword(s) in the position name | View positions with names that contains the keyword(s) |
+
+Example: `list -p f/name a/Software Engineer`
 
 
-### Filter data: `filter`
-View different applicants, interviews and positions in HireLah through various filters. It alters the current display of HireLah and changes the index of the relevant data.
+### Listing interviews: `list -i [f/FILTER_TYPE a/FILTER_ARGUMENT]`
 
-Format: `filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]`
+Lists all existing interviews by default. Automatically toggles view to the interview tab on the GUI.
 
-* Different data has different filters available, thus requiring different arguments, as listed:
+The interviews displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-| DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description                                                                                  |
-|-----------|-------------|-----------------------|----------------------------------------------------------------------------------------------|
-| `appl`    | `name`      | `n/KEYWORD`           | View applicants whose name contains the keyword                                              |
-| `appl`    | `tag`       | `t/TAG1, [t/TAG2, …]` | View applicants who have all the tags specified                                              |
-| `intvw`   | `appl`      | `n/NAME`              | View interviews for applicants whose name is specified                                       |
-| `intvw`   | `date`      | `d/DATE`              | View interviews happening on the specified date (Date provided must be in format YYYY-MM-DD) |
-| `pos`     | `name`      | `n/KEYWORD`           | View positions which has the specified keyword in the position name                          |
+| FILTER_TYPE | FILTER_ARGUMENT                                           | Description                                                          |
+|-------------|-----------------------------------------------------------|----------------------------------------------------------------------|
+| `appl`      | Keyword(s) in the applicant's name                        | View interviews for applicants whose name contains the keyword(s)    |
+| `pos`       | Keyword(s) in the position's name                         | View interviews for position with names that contains the keyword(s) |
+| `date`      | Date the interview is happening<br/>Format: `yyyy-mm-dd`  | View interviews which happens on the date provided                   |
 
-Examples:
-* `filter appl name n/john`
-* `filter appl tag t/school t/friend`
-* `filter intvw date d/2022-03-20`
 
-### Sort data: `sort`
+Example: `list -i f/date a/2022-05-04`
+
+## Sort data: `sort`
 
 Arranges applicants, interview and positions in HireLah according to their properties. 
 It alters the current display of HireLah and changes the index of the relevant data.
@@ -297,7 +304,7 @@ Examples:
 * `sort APPL ASC`
 * `sort POS DSC`
 
-### Viewing help: `help`
+## Viewing help: `help`
 
 Lists all the command keywords with their general descriptions
 

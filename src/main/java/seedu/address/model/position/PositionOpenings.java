@@ -3,13 +3,13 @@ package seedu.address.model.position;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.Counter;
+import seedu.address.model.ImmutableCounter;
 
 /**
  * Represents the number of openings in a Position in HireLah.
  * Guarantees: is non-negative
  */
-public class PositionOpenings implements Counter {
+public class PositionOpenings implements ImmutableCounter {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Number of openings should be a valid non-negative integer.";
@@ -33,6 +33,15 @@ public class PositionOpenings implements Counter {
     }
 
     /**
+     * Constructs a {@code PositionOpenings}
+     * Constructor is used internally to increment or decrement the counter
+     */
+    private PositionOpenings(Integer openings) {
+        requireNonNull(openings);
+        numOfOpenings = openings;
+    }
+
+    /**
      * Returns true if a given string is a valid number for openings.
      */
     public static boolean isValidNumber(String test) {
@@ -40,14 +49,14 @@ public class PositionOpenings implements Counter {
     }
 
     @Override
-    public void increment() {
-        numOfOpenings++;
+    public PositionOpenings increment() {
+        return new PositionOpenings(numOfOpenings + 1);
     }
 
     @Override
-    public void decrement() {
+    public PositionOpenings decrement() {
         assert numOfOpenings > 0;
-        numOfOpenings--;
+        return new PositionOpenings(numOfOpenings - 1);
     }
 
     @Override

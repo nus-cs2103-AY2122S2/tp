@@ -172,6 +172,19 @@ public class ModelManager implements Model {
         addressBook.setPosition(target, editedPosition);
     }
 
+    @Override
+    public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
+        requireAllNonNull(applicantToBeUpdated, newApplicant);
+
+        addressBook.updateApplicant(applicantToBeUpdated, newApplicant);
+    }
+
+    @Override
+    public void updatePosition(Position positionToBeUpdated, Position newPosition) {
+        requireAllNonNull(positionToBeUpdated, newPosition);
+        addressBook.updatePosition(positionToBeUpdated, newPosition);
+    }
+
     //=========== Filtered Applicant List Accessors =============================================================
 
     /**

@@ -141,6 +141,34 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Updates all interview containing instance of {@code positionToBeUpdated} to {@code newPosition}.
+     * Effects of editing a Position cascades to update all instances of the old position to the edited position.
+     */
+    public void updatePositions(Position positionToBeUpdated, Position newPosition) {
+        requireAllNonNull(positionToBeUpdated, newPosition);
+        for (int i = 0; i < internalList.size(); i++) {
+            Interview curr = internalList.get(i);
+            if (curr.getPosition().equals(positionToBeUpdated)) {
+                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition));
+            }
+        }
+    }
+
+    /**
+     * Updates all interview containing instance of {@code applicantToBeUpdated} to {@code newApplicant}.
+     * Effects of editing an Applicant cascades to update all instances of the old applicant to the edited applicant.
+     */
+    public void updateApplicants(Applicant applicantToBeUpdated, Applicant newApplicant) {
+        requireAllNonNull(applicantToBeUpdated, newApplicant);
+        for (int i = 0; i < internalList.size(); i++) {
+            Interview curr = internalList.get(i);
+            if (curr.getApplicant().equals(applicantToBeUpdated)) {
+                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition()));
+            }
+        }
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Interview> asUnmodifiableObservableList() {

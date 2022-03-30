@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -222,6 +223,28 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePosition(Position key) {
         positions.remove(key);
+    }
+
+    /**
+     * Updates all old instances of {@code positionToBeUpdated} with {@code newPosition}.
+     * Existence of {@code positionToBeUpdated} and uniqueness of {@code newPosition} will be checked at
+     * {@link #setPosition(Position, Position)}.
+     */
+    public void updatePosition(Position positionToBeUpdated, Position newPosition) {
+        requireAllNonNull(positionToBeUpdated, newPosition);
+        setPosition(positionToBeUpdated, newPosition);
+        interviews.updatePositions(positionToBeUpdated, newPosition);
+    }
+
+    /**
+     * Updates all old instances of {@code applicantToBeUpdated} with {@code newApplicant}.
+     * Existence of {@code applicantToBeUpdated} and uniqueness of {@code newApplicant} will be checked at
+     * {@link #setApplicant(Applicant, Applicant)}.
+     */
+    public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
+        requireAllNonNull(applicantToBeUpdated, newApplicant);
+        setApplicant(applicantToBeUpdated, newApplicant);
+        interviews.updateApplicants(applicantToBeUpdated, newApplicant);
     }
 
     /**
