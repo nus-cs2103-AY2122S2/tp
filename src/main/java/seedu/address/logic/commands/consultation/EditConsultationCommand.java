@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.List;
@@ -39,8 +38,8 @@ public class EditConsultationCommand extends Command {
             + ": Edits the details of the consultation identified "
             + "by the index number used in the displayed consultation list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX "
-            + PREFIX_NRIC + "OWNER_NRIC "
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONSULTATION INSTEAD.\n"
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
             + PREFIX_DIAGNOSIS + "DIAGNOSIS "
@@ -85,7 +84,7 @@ public class EditConsultationCommand extends Command {
                                                      EditConsultationDescriptor editConsultationDescriptor) {
         assert consultation != null;
 
-        Nric updatedNric = editConsultationDescriptor.getNric().orElse(consultation.getNric());
+        Nric nric = consultation.getNric();
         Date updatedDate = editConsultationDescriptor.getDate().orElse(consultation.getDate());
         Time updatedTime = editConsultationDescriptor.getTime().orElse(consultation.getTime());
         ConsultationDiagnosis updatedDiagnosis =
@@ -95,7 +94,7 @@ public class EditConsultationCommand extends Command {
         ConsultationNotes updatedNotes =
                 editConsultationDescriptor.getNotes().orElse(consultation.getNotes());
 
-        return new Consultation(updatedNric,
+        return new Consultation(nric,
                 updatedDate,
                 updatedTime,
                 updatedDiagnosis,
@@ -116,7 +115,6 @@ public class EditConsultationCommand extends Command {
      * corresponding field value of the consultation.
      */
     public static class EditConsultationDescriptor {
-        private Nric nric;
         private Date date;
         private Time time;
         private ConsultationDiagnosis diagnosis;
@@ -130,20 +128,11 @@ public class EditConsultationCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditConsultationDescriptor(EditConsultationDescriptor toCopy) {
-            setNric(toCopy.nric);
             setDate(toCopy.date);
             setTime(toCopy.time);
             setDiagnosis(toCopy.diagnosis);
             setFee(toCopy.fee);
             setNotes(toCopy.notes);
-        }
-
-        public Optional<Nric> getNric() {
-            return Optional.ofNullable(nric);
-        }
-
-        public void setNric(Nric nric) {
-            this.nric = nric;
         }
 
         public Optional<Date> getDate() {
@@ -201,8 +190,7 @@ public class EditConsultationCommand extends Command {
             // state check
             EditConsultationDescriptor e = (EditConsultationDescriptor) other;
 
-            return getNric().equals(e.getNric())
-                    && getDate().equals(e.getDate())
+            return getDate().equals(e.getDate())
                     && getTime().equals(e.getTime())
                     && getDiagnosis().equals(e.getDiagnosis())
                     && getFee().equals(e.getFee())

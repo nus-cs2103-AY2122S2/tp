@@ -32,6 +32,7 @@ public class EditPrescriptionCommand extends Command {
             + ": Edits the details of the prescription identified "
             + "by the index number used in the displayed prescription information list. "
             + "Existing values will be overwritten by the input values.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW PRESCRIPTION INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_NAME + "DRUG_NAME "

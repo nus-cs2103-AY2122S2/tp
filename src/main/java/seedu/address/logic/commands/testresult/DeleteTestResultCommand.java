@@ -23,7 +23,7 @@ public class DeleteTestResultCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX"
             + ": Deletes the test result identified by the index number used in the displayed test result list.\n"
-            + "Parameters: INDEX \n"
+            + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TEST_RESULT_SUCCESS = "Deleted Test Result: %1$s";
