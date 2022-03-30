@@ -14,10 +14,11 @@ public class FindClassCodeCommand extends Command {
 
     public static final String COMMAND_WORD = "findclasscode";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose class code contains any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " 3B";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " Command: Finds all persons whose class code contains "
+            + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
+            + "Example: " + COMMAND_WORD + " 3B\n"
+            + "Example: " + COMMAND_WORD + " 3B 4A 1F";
 
     private final ClassCodeContainsKeywordsPredicate predicate;
 

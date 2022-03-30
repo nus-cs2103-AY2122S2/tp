@@ -27,6 +27,9 @@
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
+               <font>
+                  <Font name="Helvetica" size="13.0" />
+               </font>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>

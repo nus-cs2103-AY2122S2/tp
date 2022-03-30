@@ -41,23 +41,23 @@ import seedu.address.model.person.Status;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Successfully edited %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " Command: Edits details of person by index used "
+            + "in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_CLASSCODE + "CLASSCODE] "
-            + "[" + PREFIX_ACTIVITY + "ACTIVITY]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_STATUS + "STATUS "
+            + PREFIX_CLASSCODE + "CLASSCODE "
+            + "[" + PREFIX_ACTIVITY + "ACTIVITIES]..."
+            + "\n\nExample: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
