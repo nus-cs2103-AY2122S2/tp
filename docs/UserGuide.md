@@ -111,11 +111,11 @@ Deletes all students taking a particular module from TAPA.
 
 **Format**: `deleteModule m/MODULE_CODE`
 
-* All students who are taking the module with the module code specified after the `deletemodule` command will be removed from TAPA.
+* All students who are taking the module with the module code specified after the `deleteModule` command will be removed from TAPA.
 * An error message will be displayed to the user if there are no students taking the specified module.
 
 **Example**:
-* `deletemodule m/CS2100`
+* `deleteModule m/CS2100`
     * All students who are specified as taking CS2100 are deleted from TAPA.
 
 <br>
