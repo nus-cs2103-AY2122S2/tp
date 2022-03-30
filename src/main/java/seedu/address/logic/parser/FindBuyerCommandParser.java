@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindBuyerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.buyer.BuyerHouseTypeContainsKeywordsPredicate;
+import seedu.address.model.buyer.BuyerLocationContainsKeywordsPredicate;
 import seedu.address.model.buyer.BuyerNameContainsKeywordsPredicate;
 import seedu.address.model.buyer.BuyerPhoneContainsKeywordsPredicate;
 import seedu.address.model.buyer.BuyerTagsContainsKeywordsPredicate;
@@ -44,7 +46,7 @@ public class FindBuyerCommandParser implements Parser<FindBuyerCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBuyerCommand.MESSAGE_USAGE));
         }
         String prefix = firstArg.substring(0, 2);
-        if (checkPrefix(prefix, PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG, PREFIX_HOUSE_TYPE)) {
+        if (checkPrefix(prefix, PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG, PREFIX_HOUSE_TYPE, PREFIX_LOCATION)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindBuyerCommand.MESSAGE_USAGE));
         }
@@ -78,6 +80,9 @@ public class FindBuyerCommandParser implements Parser<FindBuyerCommand> {
             // Fallthrough
         case "h/":
             return new FindBuyerCommand(new BuyerHouseTypeContainsKeywordsPredicate(Arrays.asList(keywords)));
+            // Fallthrough
+        case "l/":
+            return new FindBuyerCommand(new BuyerLocationContainsKeywordsPredicate(Arrays.asList(keywords)));
             // Fallthrough
         default:
             throw new ParseException(

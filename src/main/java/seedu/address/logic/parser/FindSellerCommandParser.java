@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.seller.SellerHouseTypeContainsKeywordsPredicate;
+import seedu.address.model.seller.SellerLocationContainsKeywordsPredicate;
 import seedu.address.model.seller.SellerNameContainsKeywordsPredicate;
 import seedu.address.model.seller.SellerPhoneContainsKeywordsPredicate;
 import seedu.address.model.seller.SellerTagsContainsKeywordsPredicate;
@@ -47,7 +49,7 @@ public class FindSellerCommandParser implements Parser<FindSellerCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSellerCommand.MESSAGE_USAGE));
         }
         String prefix = firstArg.substring(0, 2);
-        if (checkPrefix(prefix, PREFIX_NAME, PREFIX_PHONE, PREFIX_HOUSE_TYPE, PREFIX_TAG)) {
+        if (checkPrefix(prefix, PREFIX_NAME, PREFIX_PHONE, PREFIX_HOUSE_TYPE, PREFIX_TAG, PREFIX_LOCATION)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSellerCommand.MESSAGE_USAGE));
         }
@@ -71,16 +73,19 @@ public class FindSellerCommandParser implements Parser<FindSellerCommand> {
         switch(prefix) {
         case "n/":
             return new FindSellerCommand(new SellerNameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        // Fallthrough
+            // Fallthrough
         case "p/":
             return new FindSellerCommand(new SellerPhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
-        // Fallthrough
+            // Fallthrough
         case "t/":
             return new FindSellerCommand(new SellerTagsContainsKeywordsPredicate(Arrays.asList(keywords)));
-        // Fallthrough
+            // Fallthrough
         case "h/":
             return new FindSellerCommand(new SellerHouseTypeContainsKeywordsPredicate(Arrays.asList(keywords)));
-        // Fallthrough
+            // Fallthrough
+        case "l/":
+            return new FindSellerCommand(new SellerLocationContainsKeywordsPredicate(Arrays.asList(keywords)));
+            // Fallthrough
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSellerCommand.MESSAGE_USAGE));

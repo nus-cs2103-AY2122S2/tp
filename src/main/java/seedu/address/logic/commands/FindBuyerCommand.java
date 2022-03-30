@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.BuyerHouseTypeContainsKeywordsPredicate;
+import seedu.address.model.buyer.BuyerLocationContainsKeywordsPredicate;
 import seedu.address.model.buyer.BuyerNameContainsKeywordsPredicate;
 import seedu.address.model.buyer.BuyerPhoneContainsKeywordsPredicate;
 import seedu.address.model.buyer.BuyerTagsContainsKeywordsPredicate;
@@ -18,7 +19,7 @@ import seedu.address.model.buyer.BuyerTagsContainsKeywordsPredicate;
  */
 public class FindBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "findbuyer";
+    public static final String COMMAND_WORD = "find-b";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all buyers whose specified field matches "
             + "the given keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -40,6 +41,10 @@ public class FindBuyerCommand extends Command {
     }
 
     public FindBuyerCommand(BuyerHouseTypeContainsKeywordsPredicate predicate) {
+        this.predicateBuyer = predicate;
+    }
+
+    public FindBuyerCommand(BuyerLocationContainsKeywordsPredicate predicate) {
         this.predicateBuyer = predicate;
     }
 
