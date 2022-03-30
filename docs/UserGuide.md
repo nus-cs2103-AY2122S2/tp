@@ -118,9 +118,11 @@ Example:
 **:x: Invalid Examples:**<br>
 
 * `add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 190, #01-23`
+
 Not allowed as `n/` prefix is used more than once.
   
 * `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 190, #01-23`
+
 Not allowed as `PHONE_NUMBER` is blank. 
 </div>
 
@@ -181,7 +183,7 @@ Example:
 
 <div markdown="span" class="alert alert-warning">
 
-**:exclamation: Caution:**<br>
+**:exclamation: Caution:**
 Existing values will be overwritten and updated to the new input values!
 </div>
 
@@ -212,12 +214,15 @@ Example:
 **:x: Invalid Examples:**<br>
 
 * `tag 1`
+
 Not allowed as no prefix provided.
   
 * `tag 1 i/ m/`
+
 Not allowed as there is no input given after a prefix is used.
   
 * `tag 0 i/xyz company m/CS2103T`
+
 Not allowed as there `INDEX` 0 does not exist in the contact list.
 </div>
 
@@ -236,7 +241,7 @@ Constraints:
 * `INDEX` provided has to be on the currently shown contact list.
 
 Example:
-* `removetag 1 i/abc-company m/CS2100 m/CS2030S`<br>
+* `removetag 1 i/abc company m/CS2100 m/CS2030S`<br>
 Removes the internship company tag and the 2 modules tags from the 1st person in the currently shown contact list.
 
 <div markdown="span" class="alert alert-warning">
@@ -244,9 +249,11 @@ Removes the internship company tag and the 2 modules tags from the 1st person in
 **:x: Invalid Examples:**<br>
 
 * `removetag 1 i/ m/`
+
 Not allowed as there is no input given after a prefix is used.
 
 * `removetag 1 edu/computer` while person 1 has an education tag with `computer science`
+
 Not allowed as it is not an exact match.
 </div>
 
@@ -281,9 +288,11 @@ Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
 **:x: Invalid Examples:**<br>
 
 * `find n/ m/`
+
 Not allowed as there is no input given after a prefix is used.
   
 * `find n/Hans n/Chewbacca`
+
 Not allowed as the `n/` prefix is used more than once.
 </div>
 
@@ -317,9 +326,11 @@ Examples:
 **:x: Invalid Examples:**<br>
 
 * `find -s n/ m/`
+
 Not allowed as there is no input given after a prefix is used.
 
 * `find -s n/Hans n/Solo`
+
 Not allowed as the `n/` prefix is used more than once.
 </div>
 
@@ -374,9 +385,11 @@ Creates the Event and adds into NUSocials. (as shown below)
 **:x: Invalid Examples:**<br>
 
 * `event 1 2 name/ info/At Michael's d/2022-08-22 t/19:00`
+
 Not allowed as there is no input after a prefix is used.
   
 * `event 1 2 name/Dinner appointment name/Game night info/At Michael's d/2022-08-22 t/19:00`
+
 Not allowed as the `name/` prefix is more than once.
 </div>
 
@@ -433,12 +446,14 @@ Example:
 
 <div markdown="span" class="alert alert-warning">
 
-**:x: Invalid Examples: **<br>
+**:x: Invalid Examples:**<br>
 
 * `find -e name/ info/`
+
 Not allowed as there is no input given after a prefix is used.
 
 * `find -e name/Dinner name/Lunch`
+
 Not allowed as the `name/` prefix is used more than once.
 </div>
 
