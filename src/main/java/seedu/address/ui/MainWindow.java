@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -41,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private AddWindow addWindow;
     private EditWindow editWindow;
 
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -133,7 +135,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -220,6 +222,10 @@ public class MainWindow extends UiPart<Stage> {
     private void handleSwitch() throws CommandException, ParseException {
         logger.info("Handle Switch fired!");
         logic.switchAddressBook();
+
+        Path defaultPath = logic.getAddressBookFilePath();
+        Path archivePath = logic.getArchivedAddressBookFilePath();
+        statusBarFooter.swapPaths(defaultPath, archivePath);
     }
 
     /**
