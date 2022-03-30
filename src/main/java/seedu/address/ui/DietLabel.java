@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.util.Objects;
 
 import javafx.scene.control.Label;
-
 import seedu.address.model.pet.Diet;
 
 public class DietLabel {
