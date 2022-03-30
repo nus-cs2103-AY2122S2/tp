@@ -21,7 +21,7 @@ import seedu.address.model.applicant.ApplicantGenderPredicate;
 import seedu.address.model.applicant.ApplicantNameComparator;
 import seedu.address.model.applicant.ApplicantNamePredicate;
 import seedu.address.model.applicant.ApplicantStatusPredicate;
-import seedu.address.model.applicant.Gender;
+import seedu.address.model.applicant.ApplicantTagPredicate;
 
 /**
  * Lists applicants in HireLah to the user.
@@ -106,6 +106,9 @@ public class ListApplicantCommand extends ListCommand {
             return new ApplicantGenderPredicate(filterArgument.toString());
         } else if (filterType.type.equals("status")) {
             return new ApplicantStatusPredicate(filterArgument.toString());
+        } else if (filterType.type.equals("tag")) {
+            String[] tagKeywords = filterArgument.toString().split("\\s+");
+            return new ApplicantTagPredicate(Arrays.asList(tagKeywords));
         }
 
         assert true : "Filter type should be valid";

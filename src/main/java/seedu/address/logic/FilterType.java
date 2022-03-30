@@ -35,6 +35,7 @@ public class FilterType {
         applicantTypes.add("name");
         applicantTypes.add("gender");
         applicantTypes.add("status");
+        applicantTypes.add("tag");
 
         HashSet<String> positionTypes = new HashSet<>();
         positionTypes.add("name");

@@ -3,7 +3,7 @@ package seedu.address.model.applicant;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Applicant}'s {@code Gender} matches the gender given.
+ * Tests that an {@code Applicant}'s {@code Gender} matches the gender given.
  */
 public class ApplicantGenderPredicate implements Predicate<Applicant> {
     private final String gender;
