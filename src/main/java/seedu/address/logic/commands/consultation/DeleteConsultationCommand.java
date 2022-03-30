@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
 import java.util.List;
 
@@ -17,18 +16,15 @@ import seedu.address.model.consultation.Consultation;
  * Lists all consultation in the address book to the user.
  */
 public class DeleteConsultationCommand extends Command {
-    public static final String COMMAND_WORD = "delete ";
+    public static final String COMMAND_WORD = "delete";
     public static final CommandType COMMAND_TYPE = CommandType.CONSULTATION;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the consultation on the filtered consultation list that "
             + "matches the filtered list index.\n"
             + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_INDEX + "1 ";
-    public static final String MESSAGE_CONSULTATION_DELETE_OVERVIEW =
-            "Delete consultation successful: index %1$s \n"
-            + "Remaining consultations in filtered list shown below.";
+            + "Example: " + COMMAND_WORD + " 1 ";
+    public static final String MESSAGE_CONSULTATION_DELETE_OVERVIEW = "Deleted consultation: %1$s";
     public static final String MESSAGE_INVALID_CONSULTATION_INDEX =
             "The consultation index provided is invalid";
 
@@ -52,18 +48,21 @@ public class DeleteConsultationCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             return new CommandResult(
                     String.format(
-                            MESSAGE_CONSULTATION_DELETE_OVERVIEW, targetIndex),
+                            MESSAGE_INVALID_CONSULTATION_INDEX, targetIndex),
                     COMMAND_TYPE);
         }
 
         Consultation consultationToDelete = lastShownList.get(targetIndex.getZeroBased());
+      
         model.deleteConsultation(consultationToDelete);
         if (lastShownList.isEmpty()) {
             CommandType.setViewCommandType(CommandType.DEFAULT);
             return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_OVERVIEW, targetIndex.getOneBased()),
                     CommandType.DEFAULT);
         }
-        return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_OVERVIEW, targetIndex.getOneBased()),
+        
+
+        return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_OVERVIEW, consultationToDelete.toString()),
                 COMMAND_TYPE);
     }
 

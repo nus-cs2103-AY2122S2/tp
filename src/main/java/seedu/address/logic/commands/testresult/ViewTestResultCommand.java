@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MIS
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -13,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.testresult.TestResultWithNricPredicate;
 
 /**
@@ -22,11 +24,15 @@ public class ViewTestResultCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final CommandType COMMAND_TYPE = CommandType.TEST;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "test " + PREFIX_NRIC + "PATIENT_NRIC"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "test "
             + ": Lists all test results whose tests contain any of "
             + "the specified patient NRIC and displays them as a list with index numbers.\n"
-            + "Parameters: PATIENT NRIC\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "test " + PREFIX_NRIC + "S1234567L";
+            + "Parameters: "
+            + PREFIX_TYPE + "test "
+            + PREFIX_NRIC + "PATIENT_NRIC\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TYPE + "test "
+            + PREFIX_NRIC + "S1234567L";
 
     private final Nric patientNric;
 
@@ -48,9 +54,18 @@ public class ViewTestResultCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
+        ObservableList<Patient> personList = model.getPersonList();
+        String nameAndNric = "";
+
+        for (Patient patient : personList) {
+            if (patient.getNric().equals(patientNric)) {
+                nameAndNric = patient.getName().toString() + " / " + patientNric;
+            }
+        }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_TEST_RESULTS_LISTED_OVERVIEW,
-                        model.getFilteredTestResultList().size(), patientNric),
+                        model.getFilteredTestResultList().size(), nameAndNric),
                 COMMAND_TYPE);
     }
 }

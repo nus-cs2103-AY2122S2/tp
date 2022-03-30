@@ -50,7 +50,7 @@ public class EditMedicalCommand extends Command {
             + ": Edits the details of the medical information identified "
             + "by the index number used in the displayed medical information list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_AGE + "AGE "
             + PREFIX_BLOODTYPE + "BLOODTYPE "

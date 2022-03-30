@@ -395,3 +395,46 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(#004aad, 0%);
+    -fx-background-insets: 1 2 1 1;
+    -fx-background-radius: 5;
+
+}
+
+.scroll-bar {
+    -fx-background-color: derive(#ffffff, 0%);
+    -fx-border-color: #7e7a7a;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: derive(#c1c1c1,0%);
+    -fx-border-color: transparent;
+        -fx-background-insets: 2 2 2 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .increment-button:hover, .scroll-bar .decrement-button:hover {
+    -fx-background-color: #d2d2d2;
+}
+
+.scroll-bar .increment-button:pressed, .scroll-bar .increment-button:hover:pressed,
+.scroll-bar .decrement-button:pressed, .scroll-bar .decrement-button:hover:pressed{
+    -fx-background-color: #7e7a7a;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 8 8 8 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 8 8 8;
+}

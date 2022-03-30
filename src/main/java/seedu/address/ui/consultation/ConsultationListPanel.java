@@ -17,7 +17,7 @@ import seedu.address.ui.UiPart;
  * Panel containing the list of consultations.
  */
 public class ConsultationListPanel extends UiPart<Region> {
-    private static final String SCREEN_TITLE = "Contacts";
+    private static final String SCREEN_TITLE = "Consultation";
     private static final String FXML = "consultation/ConsultationListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ConsultationListPanel.class);
 
