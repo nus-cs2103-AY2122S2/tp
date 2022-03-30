@@ -281,16 +281,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* The search is case-insensitive. e.g. `bob` will match `Bob`
-* The order of the keywords does not matter. e.g. `Hans Bob` will work the same as `Bob Hans`
-* Partial matches are allowed e.g. `Bob` will match `Bobs`
-* Clients with attributes matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bob` will return `Hans Zimmer`, `Bob Morrison`
+* The search is case-insensitive.
+* The order of the keywords does not matter. e.g. `find Hans Bob` will work the same as `find Bob Hans`.
+* Partial matches are allowed e.g. `find Bob` will match a client named `Bobs`.
+* Clients with attributes or tags matching at least one keyword will be returned (i.e. `OR` search).
 
 </div>
 
 Examples:
-* `find Bob` returns clients with attributes containing `Bob` e.g. clients named `Sponge Bob` and `Bobs Doe`
+* `find bob` returns clients with attributes containing `bob` e.g. clients named `Sponge Bob` and `Bobs Doe`
 * `find kent ridge` returns clients with attributes containing `kent` or `ridge`. e.g. A client named `Clark Kent` and a client who lives at `123 Ridgeview Cres`.
 
 ### Delete Filtered Clients (`deleteFiltered`)
@@ -440,11 +439,31 @@ Format: `exit`
 ### Command Chains
 
 Multiple commands can be chained by separating each command with the `|` character.
-Each command is run sequentially from first to last.
-Invalid commands and special commands `help` and `exit` will break the chain and stop further command execution.  
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Each command is run sequentially from first to last.
+* Take note of indexes. E.g. `delete 7 | delete 8` may not work as expected as deleting item 7 will in turn cause item 8 to become item 7 which may result in unintended consequences. Instead, run `delete 7 | delete 7` which is what you would do anyway if you wanted to achieve the same effect by running each command individually. This is intended behaviour.
+* If invalid commands and the special commands `help`, `exit` and `undo` are found anywhere in the command chain, the whole chain will be invalidated causing none of the commands in the chain - even valid commands - to execute.
+* Anything bounded by the start of the command, the end of command and the '|' separators will be considered a command. E.g. `find alex | clearFiltered | ` will be considered three commands, namely "find alex", "clearFiltered" and " ". Since the third command, " ", is invalid, the first two will not execute.
+* The user will only receive the command feedback of the last command
+
+</div>
+
 
 Examples:
-* `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
+
+* Valid command chain:
+
+`add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
+
+* Invalid command chains:
+
+`add n/John Doe e/johndoe@email.com | invalidCommand | delete 2` (add and delete commands will not execute as an invalid command was found)
+
+`add n/John Doe e/johndoe@email.com | delete 2 | undo` (add and delete commands will not execute as a special command, in this case `undo`, was found)
+
+`add n/John Doe e/johndoe@email.com | ` (add command will not execute as the second command is empty and is thus invalid)
 
 ### Command History
 
@@ -454,7 +473,7 @@ The command history works similarly to the Linux bash terminal.
 ### Clickable Client Card
 
 You can list all transactions of a client by left-clicking the client's card.
-This is equivalent to typing `findTransaction INDEX` in the command box.
+This is equivalent to typing `findTransaction INDEX` in the command box. Left-clicking a selected client card will deselect that card and list all transactions. Up to one client card can be selected at anytime.
 
 ### Themes
 
@@ -464,11 +483,12 @@ You can change between the light or dark theme by click on the menu bar and sele
 
 ### Command Correction/Completion
 
-Pressing `TAB` while typing a command will change the last typed word into the closest command.
+Pressing `TAB` while typing a command will change the last word of the command into the closest command word.
 
 Examples:
 * `dele` -> `delete`
 * `sddTranssaction` -> `addTransaction`
+* `delete 7 | ed` -> `delete 7 | edit`
 
 ---
 
