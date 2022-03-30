@@ -62,12 +62,14 @@ public class UnmarkCommand extends Command {
             throw new CommandException(String.format(NONEXISTENT_CG, classGroupIndex));
         }
 
-        ClassGroup classGroup = cgList.get(classGroupIndex.getZeroBased());
+        ClassGroup classGroupToEdit = cgList.get(classGroupIndex.getZeroBased());
+        ClassGroup classGroup = new ClassGroup(classGroupToEdit);
         if (weekIndex.getZeroBased() >= classGroup.getLessons().size()) {
             throw new CommandException(String.format(NONEXISTENT_WEEK, weekIndex));
         }
 
         classGroup.unmarkAttendance(weekIndex, students);
+        model.setEntity(classGroupToEdit, classGroup);
         return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS,
                 classGroup.getClassGroupId(), classGroup.getClassGroupType()));
     }
