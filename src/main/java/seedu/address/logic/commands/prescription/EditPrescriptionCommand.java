@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTRUCTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -41,6 +41,10 @@ public class EditPrescriptionCommand extends Command {
             + PREFIX_INSTRUCTION + "1 tablet per day";
 
     public static final String MESSAGE_EDIT_PRESCRIPTION_SUCCESS = "Edited Prescription Information: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "This prescription already exists in MedBook.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
+            + "Create a new prescription instead.";
 
     private final Index targetIndex;
     private final EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor;
@@ -50,9 +54,9 @@ public class EditPrescriptionCommand extends Command {
      * @param editPrescriptionDescriptor details to edit the test result information with
      */
     public EditPrescriptionCommand(Index targetIndex,
-                                   EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor) {
+                                   EditPrescriptionDescriptor editPrescriptionDescriptor) {
         this.targetIndex = targetIndex;
-        this.editPrescriptionDescriptor = editPrescriptionDescriptor;
+        this.editPrescriptionDescriptor = new EditPrescriptionDescriptor(editPrescriptionDescriptor);
     }
 
     @Override
@@ -64,9 +68,14 @@ public class EditPrescriptionCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PRESCRIPTION_DISPLAYED_INDEX);
         }
 
-        Prescription prescription = lastShownList.get(targetIndex.getZeroBased());
-        Prescription editedPrescription = createEditedPrescription(prescription, editPrescriptionDescriptor);
-        model.setPrescription(prescription, editedPrescription);
+        Prescription prescriptionToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Prescription editedPrescription = createEditedPrescription(prescriptionToEdit, editPrescriptionDescriptor);
+
+        if (!prescriptionToEdit.equals(editedPrescription) && model.hasPrescription(editedPrescription)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PRESCRIPTION);
+        }
+
+        model.setPrescription(prescriptionToEdit, editedPrescription);
 
         return new CommandResult(String.format(MESSAGE_EDIT_PRESCRIPTION_SUCCESS, editedPrescription), COMMAND_TYPE);
     }
@@ -76,7 +85,7 @@ public class EditPrescriptionCommand extends Command {
                                                              editPrescriptionDescriptor) {
         assert prescription != null;
 
-        Nric updatedNric = editPrescriptionDescriptor.getNric().orElse(prescription.getPrescriptionTarget());
+        Nric updatedNric = prescription.getPrescriptionTarget();
         DrugName updatedDrugName = editPrescriptionDescriptor.getDrugName().orElse(prescription.getDrugName());
         PrescriptionDate updatedPrescriptionDate =
                 editPrescriptionDescriptor.getPrescriptionDate().orElse(prescription.getPrescriptionDate());
@@ -102,7 +111,6 @@ public class EditPrescriptionCommand extends Command {
      * corresponding field value of the test result information.
      */
     public static class EditPrescriptionDescriptor {
-        private Nric nric;
         private DrugName drugName;
         private PrescriptionDate date;
         private Instruction instruction;
@@ -114,18 +122,13 @@ public class EditPrescriptionCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPrescriptionDescriptor(EditPrescriptionCommand.EditPrescriptionDescriptor toCopy) {
-            setNric(toCopy.nric);
             setDrugName(toCopy.drugName);
             setPrescriptionDate(toCopy.date);
             setResult(toCopy.instruction);
         }
 
-        public Optional<Nric> getNric() {
-            return Optional.ofNullable(nric);
-        }
-
-        public void setNric(Nric nric) {
-            this.nric = nric;
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(drugName, date, instruction);
         }
 
         public Optional<DrugName> getDrugName() {
@@ -168,8 +171,7 @@ public class EditPrescriptionCommand extends Command {
             EditPrescriptionCommand.EditPrescriptionDescriptor e =
                     (EditPrescriptionCommand.EditPrescriptionDescriptor) other;
 
-            return getNric().equals(e.getNric())
-                    && getDrugName().equals(e.getDrugName())
+            return getDrugName().equals(e.getDrugName())
                     && getPrescriptionDate().equals(e.getPrescriptionDate())
                     && getInstruction().equals(e.getInstruction());
         }
