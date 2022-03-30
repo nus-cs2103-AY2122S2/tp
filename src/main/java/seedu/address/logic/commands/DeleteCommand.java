@@ -175,7 +175,25 @@ public class DeleteCommand extends Command {
         default:
             throw new CommandException(MESSAGE_DELETE_FAILURE);
         }
+    }
 
-        //return null; // temporarily
+    @Override
+    public boolean equals(Object other) {
+        if (player != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof DeleteCommand // instanceof handles nulls
+                    && player.equals(((DeleteCommand) other).player));
+        }
+        if (lineup != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof DeleteCommand // instanceof handles nulls
+                    && lineup.equals(((DeleteCommand) other).lineup));
+        }
+        if (targetIndex != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof DeleteCommand // instanceof handles nulls
+                    && targetIndex.equals(((DeleteCommand) other).targetIndex));
+        }
+        return false;
     }
 }

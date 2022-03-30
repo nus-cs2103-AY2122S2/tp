@@ -104,7 +104,6 @@ public class SampleDataUtil {
             sampleAb.initalizePerson(samplePerson);
         }
         for (Schedule sampleSchedule : getSampleSchedules()) {
-            System.out.println(sampleSchedule);
             sampleAb.addSchedule(sampleSchedule);
         }
         return sampleAb;
