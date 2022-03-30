@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -71,6 +72,11 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_PROPERTY_DESC =
             " " + PREFIX_PROPERTY + "North Block 123 1-room $300000"; // missing comma between fields
+
+    public static final String INVALID_REMINDER = "";
+    public static final String INVALID_REMINDER_DESC = PREFIX_REMINDER + INVALID_REMINDER;
+    public static final String VALID_REMINDER = "meet client for home viewing";
+    public static final String VALID_REMINDER_DESC = " " + PREFIX_REMINDER + VALID_REMINDER;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

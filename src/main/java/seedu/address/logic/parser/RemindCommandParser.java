@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Reminder;
@@ -24,8 +26,12 @@ public class RemindCommandParser implements Parser<RemindCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_REMINDER);
-
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE), pe);
+        }
         Optional<Reminder> reminder;
         if (!argMultimap.getValue(PREFIX_REMINDER).isPresent()) {
             reminder = Optional.empty();

@@ -227,7 +227,7 @@ public class ParserUtil {
         requireNonNull(reminder);
         String trimmedReminder = reminder.trim();
         if (!Reminder.isValidReminder(trimmedReminder)) {
-            throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Reminder.MESSAGE_CONSTRAINTS);
         }
         return new Reminder(trimmedReminder);
     }
