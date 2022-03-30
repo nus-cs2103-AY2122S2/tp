@@ -10,8 +10,8 @@ import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.ExpiringFilter;
 
-public class ReminderCommand extends Command {
-    public static final String COMMAND_WORD = "reminder";
+public class RemindCommand extends Command {
+    public static final String COMMAND_WORD = "remind";
 
     public static final String MESSAGE_SUCCESS = "Listed expiring products";
 
@@ -35,7 +35,7 @@ public class ReminderCommand extends Command {
      * Creates a reminder command with {@code expiryDate}.
      * @param expiryDate
      */
-    public ReminderCommand(ExpiryDate expiryDate) {
+    public RemindCommand(ExpiryDate expiryDate) {
         this.expiryDate = expiryDate;
         expiringFilter = new ExpiringFilter(expiryDate);
     }
