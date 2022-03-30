@@ -83,7 +83,7 @@ Adds a client as a Buyer to the contact list.
 Format: `addbuyer n/NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]...
 
 Examples:
-* `addbuyer n/Yu Qi p/98765432
+* `addbuyer n/Yu Qi p/98765432`
 * `addbuyer n/Janald t/friend t/criminal`
 
 ### Adding a seller: `addseller`
@@ -93,7 +93,7 @@ Adds a client as a Seller to the contact list.
 Format: `addseller n/NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]...
 
 Examples:
-* `addseller n/Yu Qi p/98765432
+* `addseller n/Yu Qi p/98765432`
 * `addseller n/Janald t/friend t/criminal`
 
 ### Listing all clients : `list`

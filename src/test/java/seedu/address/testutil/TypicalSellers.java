@@ -25,7 +25,7 @@ public class TypicalSellers {
     public static final Seller YUQI = new SellerBuilder().withName("Alice Pauline")
             .withPhone("94351253").withAppointment("2022-05-01-12-00")
             .withTags("friends").build();
-    public static final Seller SHIHONG = new SellerBuilder().withName("Benson Meier")
+    public static final Seller BENSON = new SellerBuilder().withName("Benson Meier")
             .withPhone("98765432").withAppointment("2022-05-04-09-00")
             .withTags("owesMoney", "friends").build();
     public static final Seller JUNHENG = new SellerBuilder().withName("Carl Kurz")
@@ -70,6 +70,6 @@ public class TypicalSellers {
 
 
     public static List<Seller> getTypicalSellers() {
-        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, SHIHONG, JANALD, DARA, RICHARD, YUQI));
+        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, BENSON, JANALD, DARA, RICHARD, YUQI));
     }
 }
