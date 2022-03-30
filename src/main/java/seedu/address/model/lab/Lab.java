@@ -142,12 +142,15 @@ public class Lab {
      */
     public Lab of(LabMark labMark) {
         requireNonNull(labMark);
+        if (labMark.isEmpty()) {
+            throw new InvalidLabStatusException();
+        }
         return new Lab(String.valueOf(labNumber), labMark);
     }
 
     /**
-     * Returns a new immutable {@code Lab} with the specified {@code LabStatus} and {@code LabMark}
-     * {@code LabMark.MARKS_UNKNOWN} is assigned to labs with {@code LabStatus == UNSUBMITTED / SUBMITTED}
+     * Returns a new immutable {@code Lab} with the specified {@code LabStatus} and {@code LabMark}.
+     * {@code LabMark.MARKS_UNKNOWN} is assigned to labs with {@code LabStatus == UNSUBMITTED / SUBMITTED}.
      */
     public Lab of(LabStatus labStatus, LabMark labMark) {
         requireAllNonNull(labStatus, labMark);

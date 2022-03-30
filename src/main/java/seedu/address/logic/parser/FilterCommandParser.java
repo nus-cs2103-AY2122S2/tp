@@ -31,10 +31,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        Lab lab = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
+        Lab labToFilter = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
         LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
 
-        Lab labToFilter = lab.of(labStatus, new LabMark("0"));
+        labToFilter = labToFilter.of(labStatus, new LabMark("0"));
 
         return new FilterCommand(new StudentHasLabPredicate(labToFilter));
 
