@@ -25,8 +25,6 @@ public class FindStudentCommandParser implements Parser<FindStudentCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
         }
 
-         String[] nameKeywords = trimmedArgs.split("\\s+");
-
         return new FindStudentCommand(new NameOrTagsContainsKeywordsPredicate(Arrays.asList(trimmedArgs)));
     }
 

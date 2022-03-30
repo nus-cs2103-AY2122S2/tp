@@ -1,10 +1,7 @@
 package seedu.address.model.lesson;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Predicate;
-
-import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Lesson}'s {@code LessonName} or {@code Subject} matches any of the keywords given.
