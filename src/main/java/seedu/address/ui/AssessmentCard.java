@@ -41,7 +41,7 @@ public class AssessmentCard extends UiPart<Region> {
         super(FXML);
         this.assessment = assessment;
 
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         name.setText(assessment.getAssessmentName().value);
         module.setText(assessment.getTaModule().getModuleCode().value);
 

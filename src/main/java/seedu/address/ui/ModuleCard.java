@@ -38,7 +38,7 @@ public class ModuleCard extends UiPart<Region> {
     public ModuleCard(TaModule module, int displayedIndex) {
         super(FXML);
         this.module = module;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         code.setText(module.getModuleCode().value);
         name.setText(module.getModuleName().value);
     }

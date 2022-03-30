@@ -19,18 +19,20 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
+      <HBox spacing="5" alignment="TOP_LEFT">
+        <Label fx:id="id" styleClass="cell-big-num">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
         <Label fx:id="id" text="\$first" styleClass="cell_big_label" />
+        <VBox>
+            <Label fx:id="name" styleClass="cell_small_label" text="\$name" />
+            <Label fx:id="module" styleClass="cell_small_label" text="\$module" />
+            <Button fx:id="attemptsButton" text="See Attempts" onAction="#handleAttempts"/>
+        </VBox>
       </HBox>
-      <Label fx:id="name" styleClass="cell_small_label" text="\$name" />
-      <Label fx:id="module" styleClass="cell_small_label" text="\$module" />
-      <Button fx:id="attemptsButton" text="See Attempts" onAction="#handleAttempts"/>
     </VBox>
   </GridPane>
 </HBox>

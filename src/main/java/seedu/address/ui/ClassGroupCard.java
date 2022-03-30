@@ -47,7 +47,7 @@ public class ClassGroupCard extends UiPart<Region> {
     public ClassGroupCard(ClassGroup classGroup, int displayedIndex) {
         super(FXML);
         this.classGroup = classGroup;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         classId.setText(classGroup.getClassGroupId().value);
         classType.setText(classGroup.getClassGroupType().toString());
         moduleCode.setText(classGroup.getModule().getModuleCode().value);
