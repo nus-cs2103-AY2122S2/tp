@@ -88,9 +88,9 @@ UniBook is a **desktop app for students to manage their university contacts rela
   * The _people page_ displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names. (ref: `add` command)
   ![Ui](images/Ui.png) 
   * The _module page_ displays all modules stored in UniBook, and all their individual details.
-  ![ModulesPage](images/ModulesPage.png)
+  ![ModulesPage](images/modulesPage.png)
   * The _groups page_ displays all the groups stored in UniBook, and all their individual details.
-  ![GroupsPage](images/GroupsPage.png)
+  ![GroupsPage](images/groupsPage.png)
   
 * A User can navigate between pages with the `list` command.
 
@@ -379,6 +379,8 @@ Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
 
 ### Locating persons by name: `find`
 
+**Only meant to be used on the person page**
+
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -392,8 +394,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex` returns `Alex Yeoh`, `Alex Teo`<br>
+  ![result for 'find alex david'](images/findCommandResult.png)
 
 ### Deleting specific entries : `delete`
 
