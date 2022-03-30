@@ -83,9 +83,10 @@ public class Person {
     /**
      * Toggles the favourite status of Person
      */
-    public void toggleFavourite() {
+    public Person toggleFavourite() {
         boolean toggledStatus = !favourite.getStatus();
-        favourite.setStatus(toggledStatus);
+        return new Person(name, phone, email, new Favourite(toggledStatus), address,
+            properties, preference, userType, userImages);
     }
 
     public Address getAddress() {
