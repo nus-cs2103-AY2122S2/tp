@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.ReminderWindowCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -81,6 +82,9 @@ public class AddressBookParser {
 
         case StatisticsWindowCommand.COMMAND_WORD:
             return new StatisticsWindowCommand();
+
+        case ReminderWindowCommand.COMMAND_WORD:
+            return new ReminderWindowCommand();
 
         case RemindCommand.COMMAND_WORD:
             return new RemindCommandParser().parse(arguments);
