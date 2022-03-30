@@ -40,7 +40,7 @@ public class AddressBookParser {
 
     /**
      * Checks whether command that does not require any parameters such as {@Code ListCommand} are input by the user.
-     * @param userInput full user input string
+     * @param arguments any arguments that user may have added
      * @param commandWord the type of command inputted
      * @throws ParseException if the user input additional parameters
      */
