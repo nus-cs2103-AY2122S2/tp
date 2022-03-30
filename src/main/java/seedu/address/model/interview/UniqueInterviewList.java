@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -156,6 +157,14 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
 
         internalList.setAll(interview);
+    }
+
+    /**
+     * Sorts a list of interviews
+     */
+    public void sort(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        internalList.sort(comparator);
     }
 
     /**

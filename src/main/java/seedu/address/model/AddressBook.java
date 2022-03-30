@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -141,6 +142,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         applicants.remove(key);
     }
 
+    /**
+     * Sorts list of applicant using comparator
+     */
+    public void sortApplicant(Comparator<Applicant> comparator) {
+        applicants.sort(comparator);
+    }
+
     //// interview-level operations
 
     /**
@@ -224,6 +232,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.setInterview(target, editedInterview);
     }
 
+    /**
+     * Sorts list of interview using comparator
+     */
+    public void sortInterview(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        interviews.sort(comparator);
+    }
+
     //// position-level operations
 
     /**
@@ -284,6 +300,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         positions.setPosition(target, editedPosition);
     }
 
+    /**
+     * Sorts list of interview using comparator
+     */
+    public void sortPosition(Comparator<Position> comparator) {
+        requireNonNull(comparator);
+        positions.sort(comparator);
+    }
     //// util methods
 
     @Override

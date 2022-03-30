@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -168,6 +169,36 @@ public class AddApplicantCommandTest {
         @Override
         public ObservableList<Position> getFilteredPositionList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortApplicantList(Comparator<Applicant> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortInterviewList(Comparator<Interview> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortPositionList(Comparator<Position> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
+
+        }
+
+        @Override
+        public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
+
+        }
+
+        @Override
+        public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
+
         }
 
         @Override
