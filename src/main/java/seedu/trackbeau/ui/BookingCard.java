@@ -26,7 +26,7 @@ public class BookingCard extends UiPart<Region> {
      */
 
     public final Booking booking;
-    public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' HH:mm a");
+    public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' hh:mm a");
 
     @FXML
     private HBox cardPane;
@@ -49,9 +49,10 @@ public class BookingCard extends UiPart<Region> {
         this.booking = booking;
         id.setText(displayedIndex + ". ");
         name.setText(booking.getCustomerName().fullName);
-        phone.setText("Phone Number: " + booking.getCustomerPhone().value);
-        service.setText("Service: " + booking.getServiceName().fullName);
-        startTime.setText("Time: " + booking.getBookingDateTime().value.format(formatter));
+        phone.setText("P: " + booking.getCustomerPhone().value);
+        service.setText("Sev: " + booking.getServiceName().fullName);
+        startTime.setText(booking.getBookingDateTime().value.format(formatter));
+        startTime.setWrapText(true);
     }
 
     @Override
