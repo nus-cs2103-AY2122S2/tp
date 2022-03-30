@@ -6,21 +6,24 @@ import java.util.List;
 import manageezpz.model.person.Person;
 
 /**
- * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
- * inputted by a user either a Todo, Deadline or Event.
+ * An abstract class that represents the tasks a user could create.
+ * A <code> Task </code> object would correspond to a task inputted
+ * by a user, either a Todo, Deadline or Event.
  */
-
 public abstract class Task {
     protected boolean isDone = false;
     protected Priority priority = Priority.NONE;
 
     // Data fields
-    private List<Person> assignees = new ArrayList<>();
+    protected List<Person> assignees = new ArrayList<>();
 
     /**
-     * Constructor for the Task class.
-     * {@code Date taskDate} has a default value that will be changed if the object inheriting the Task object
-     * is a Deadline or Event object. If object is a Todo object, this field will be ignored.
+     * Constructor to initialize an instance of Task class.
+     *
+     * {@code Date taskDate} has a default value that will be changed if the
+     * object inheriting the Task object is a Deadline or Event object.
+     *
+     * If object is a Todo object, this field will be ignored.
      */
     public Task() {
     }
@@ -32,11 +35,19 @@ public abstract class Task {
     public abstract String getDateTime();
 
     public String getStatusIcon() {
-        if (this.isDone()) {
-            return "X";
-        } else {
-            return " ";
-        }
+        return this.isDone() ? "X" : " ";
+    }
+
+    /**
+     * Checks if the task is done or not.
+     * @return true if task is done, false otherwise.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public Priority getPriority() {
+        return this.priority;
     }
 
     public List<Person> getAssignees() {
@@ -55,8 +66,8 @@ public abstract class Task {
         this.priority = Priority.valueOf(priority);
     }
 
-    public Priority getPriority() {
-        return this.priority;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     /**
@@ -65,14 +76,6 @@ public abstract class Task {
      */
     public void addAssignees(Person person) {
         this.assignees.add(person);
-    }
-
-    /**
-     * Checks if the task is done or not.
-     * @return true if task is done, false otherwise.
-     */
-    public boolean isDone() {
-        return isDone;
     }
 
     /**
@@ -102,7 +105,7 @@ public abstract class Task {
 
     /**
      * Used to deallocate a person from this Task.
-     * @param person the person to be deallocated.
+     * @param person The person to be deallocated.
      */
     public void removeAssigned(Person person) {
         assignees.remove(person);
@@ -120,7 +123,9 @@ public abstract class Task {
 
     /**
      * Returns the string representation of the task.
-     * @return a string representation of the task, consisting of its description and whether its done or not.
+     *
+     * @return The string representation of the task, consisting of whether
+     * it is done or not
      */
     @Override
     public String toString() {

@@ -15,7 +15,7 @@ import manageezpz.model.task.Task;
  */
 public class MarkTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "markTask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task identified by the index number used in the displayed task list as done.\n"
@@ -26,6 +26,12 @@ public class MarkTaskCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor to initialize an instance of MarkTaskCommand class
+     * with the given targetIndex.
+     *
+     * @param targetIndex Index of the Task to be marked as done
+     */
     public MarkTaskCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -33,16 +39,17 @@ public class MarkTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
-        model.markTask(taskToMark);
+        Task markedTask = model.markTask(taskToMark);
 
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, markedTask));
     }
 
     @Override

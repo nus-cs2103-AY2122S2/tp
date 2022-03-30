@@ -1,6 +1,7 @@
 package manageezpz.model;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODAY;
@@ -16,6 +17,7 @@ import manageezpz.model.person.UniquePersonList;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
+import manageezpz.model.task.Priority;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
 import manageezpz.model.task.UniqueTaskList;
@@ -292,16 +294,26 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Marks the task in the task list.
      * @param task the task to be marked.
      */
-    public void markTask(Task task) {
-        this.tasks.markTask(task);
+    public Task markTask(Task task) {
+        requireNonNull(task);
+        return this.tasks.markTask(task);
     }
 
     /**
-     * UnMarks the task in the task list.
+     * Unmarks the task in the task list.
      * @param task the task to be unmarked.
      */
-    public void unmarkTask(Task task) {
-        this.tasks.unmarkTask(task);
+    public Task unmarkTask(Task task) {
+        requireNonNull(task);
+        return this.tasks.unmarkTask(task);
+    }
+
+    /**
+     * Tags a priority to the task.
+     */
+    public Task tagPriorityToTask(Task task, Priority priority) {
+        requireAllNonNull(task, priority);
+        return this.tasks.tagPriorityToTask(task, priority);
     }
 
     public void findTask(Task task) {
@@ -312,8 +324,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param task the task to be tagged.
      * @param person the person to be tagged to the task.
      */
-    public void tagTask(Task task, Person person) {
-        task.assignedTo(person);
+    public Task tagEmployeeToTask(Task task, Person person) {
+        requireAllNonNull(task, person);
+        return this.tasks.tagEmployeeToTask(task, person);
+    }
+
+    /**
+     * Remove the Person from the Task, also decreasing the person's task count.
+     * @param task the task affected
+     * @param person the person to be untagged from task
+     */
+    public Task untagEmployeeFromTask(Task task, Person person) {
+        requireAllNonNull(task, person);
+        return this.tasks.untagEmployeeFromTask(task, person);
     }
 
     /**
@@ -331,19 +354,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         return returnValue;
     }
+
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
-
         tasks.setTask(target, editedTask);
-    }
-    /**
-     * Remove the Person from the Task, also decreasing the person's task count.
-     * @param task the task affected
-     * @param person the person to be untagged from task
-     */
-    public void untagTask(Task task, Person person) {
-        person.decreaseTaskCount();
-        task.removeAssigned(person);
     }
 
     //// person-level operations
@@ -371,8 +385,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Increases the number of tasks by one.
+     */
+    public void increaseNumOfTasks(Person person) {
+        requireNonNull(person);
+        this.persons.increaseNumOfTasks(person);
+    }
+
+    /**
+     * Decreases the number of tasks by one.
+     */
+    public void decreaseNumOfTasks(Person person) {
+        requireNonNull(person);
+        this.persons.decreaseNumOfTasks(person);
     }
 
     /**

@@ -31,11 +31,16 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Todo(new Description("Read Book")),
-            new Deadline(new Description("Finish 160 Resins in Genshin"),
+            new Todo(new Description("Review Monthly Finance KPI")),
+            new Deadline(new Description("Finish Client Proposal"),
                     new Date("2022-03-15"), new Time("1800")),
-            new Event(new Description("Watch Netflix"), new Date("2022-03-15"),
-                    new Time("1200"), new Time("2359"))
+            new Event(new Description("Meeting with Client"), new Date("2022-03-15"),
+                    new Time("1300"), new Time("1400")),
+            new Todo(new Description("Call Representative of Company XYZ")),
+            new Deadline(new Description("Submit Proposal"),
+                    new Date("2022-04-08"), new Time("1800")),
+            new Event(new Description("Meeting with HR"), new Date("2022-03-16"),
+                    new Time("1400"), new Time("1500"))
         };
     }
     public static ReadOnlyAddressBook getSampleAddressBook() {

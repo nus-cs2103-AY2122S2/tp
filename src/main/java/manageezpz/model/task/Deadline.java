@@ -2,6 +2,9 @@ package manageezpz.model.task;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class that represents a Deadline task.
+ */
 public class Deadline extends Task {
     protected String type;
     protected Description description;
@@ -9,15 +12,34 @@ public class Deadline extends Task {
     private Time time;
 
     /**
-     * Constructor for the Task class.
+     * Constructor to initialize an instance of Deadline class with task
+     * description, date and time.
      *
-     * @param taskDescription information about the task.
+     * @param taskDescription Description of the task
+     * @param date Date by which the Deadline task needs to be completed
+     * @param time Time by which the Deadline task needs to be completed
      */
     public Deadline(Description taskDescription, Date date, Time time) {
+        this.type = "deadline";
         this.description = taskDescription;
         this.date = date;
         this.time = time;
-        this.type = "deadline";
+    }
+
+    /**
+     * Constructor to initialize an instance of Deadline class with an existing
+     * Deadline object.
+     *
+     * @param deadline Deadline task
+     */
+    public Deadline(Deadline deadline) {
+        this.type = deadline.getType();
+        this.description = deadline.getDescription();
+        this.date = deadline.getDate();
+        this.time = deadline.getTime();
+        this.isDone = deadline.isDone();
+        this.priority = deadline.getPriority();
+        this.assignees = deadline.getAssignees();
     }
 
     public Date getDate() {
@@ -45,9 +67,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of a deadline.
-     * @return a string representation of the deadline, consisting of its description
-     * and formatted date and time.
+     * Returns the string representation of a Deadline task.
+     *
+     * @return The string representation of the Deadline task, consisting of its
+     * description and formatted date and time
      */
     @Override
     public String toString() {

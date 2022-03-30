@@ -9,6 +9,7 @@ import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
+import manageezpz.model.task.Priority;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
 
@@ -83,6 +84,10 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    void increaseNumOfTasks(Person person);
+
+    void decreaseNumOfTasks(Person person);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -105,13 +110,15 @@ public interface Model {
      * Marks the given task.
      * The task must exist in the task list.
      */
-    void markTask(Task task);
+    Task markTask(Task task);
 
     /**
      * unMarks the given task.
      * The task must exist in the task list.
      */
-    void unmarkTask(Task task);
+    Task unmarkTask(Task task);
+
+    Task tagPriorityToTask(Task task, Priority priority);
 
     /**
      * Finds the given task.
@@ -125,7 +132,7 @@ public interface Model {
      * @param task
      * @param person
      */
-    void tagTask(Task task, Person person);
+    Task tagEmployeeToTask(Task task, Person person);
 
     /**
      * Untags the given task.
@@ -133,7 +140,7 @@ public interface Model {
      * @param task
      * @param person
      */
-    void untagTask(Task task, Person person);
+    Task untagEmployeeFromTask(Task task, Person person);
 
     /**
      * Adds the given task.
