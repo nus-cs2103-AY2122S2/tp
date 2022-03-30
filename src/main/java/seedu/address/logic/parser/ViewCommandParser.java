@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.commands.CommandType;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.stream.Stream;
@@ -23,6 +24,7 @@ public class ViewCommandParser {
 
         if (arePrefixesPresent(argMultimap, PREFIX_NRIC)) {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            CommandType.setViewCommandType(CommandType.SUMMARY);
         }
 
         return new ViewCommand(nric);
