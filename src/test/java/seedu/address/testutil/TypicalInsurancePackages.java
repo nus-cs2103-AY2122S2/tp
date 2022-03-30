@@ -4,7 +4,7 @@ package seedu.address.testutil;
 import seedu.address.model.person.InsurancePackage;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of objects to be used in tests.
  */
 public class TypicalInsurancePackages {
 
