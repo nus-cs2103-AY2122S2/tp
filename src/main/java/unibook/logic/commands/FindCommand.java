@@ -1,8 +1,10 @@
 package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static unibook.commons.core.Messages.MESSAGE_CHANGE_TO_PERSON_PAGE;
 
 import unibook.commons.core.Messages;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
 import unibook.model.person.NameContainsKeywordsPredicate;
 
@@ -27,8 +29,12 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing, Boolean isGroupListShowing) {
+                                 Boolean isModuleListShowing, Boolean isGroupListShowing) throws CommandException {
         requireNonNull(model);
+        //disallow use of this commmand on any other page other than person page
+        if (!isPersonListShowing) {
+            throw new CommandException(MESSAGE_CHANGE_TO_PERSON_PAGE);
+        }
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
             String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
