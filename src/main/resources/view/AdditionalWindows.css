@@ -1,39 +1,42 @@
 #addContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #7796CB;
 }
 
 #editContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #7796CB;
 }
 
-#indexLabel {
-    -fx-background-color: #6F686D;
+.label {
+    -fx-background-color: derive(#A3BCF9, 20%);
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI";
 }
 
-#nameLabel {
-    -fx-background-color: #6F686D;
+#editMessageLabel {
+    -fx-background-color: #7796CB;
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
 }
 
-#phoneLabel {
-    -fx-background-color: #6F686D;
+#addMessageLabel {
+    -fx-background-color: #7796CB;
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
 }
 
-#addressLabel {
-    -fx-background-color: #6F686D;
+#errorLabel {
+    -fx-background-color: #7796CB;
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
 }
 
-#emailLabel {
-    -fx-background-color: #6F686D;
+.text-field {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI";
 }
 
-#commentLabel {
-    -fx-background-color: #6F686D;
-}
-
-#statLabel {
-    -fx-background-color: #6F686D;
-}
-
-#modulesLabel {
-    -fx-background-color: #6F686D;
+.button {
+    -fx-font-size: 14;
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: derive(#A3BCF9, 20%);
 }
