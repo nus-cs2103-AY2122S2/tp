@@ -22,30 +22,28 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
+        // Tests valid input number 1
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // Tests invalid input alphabet
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_numberZero_throwsParseException() {
+        // Tests invalid input number 0
         assertParseFailure(parser, "0",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_numberNegative_throwsParseException() {
+        // Tests invalid negative number
         assertParseFailure(parser, "-1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidArgs_numberAndLetter_throwsParseException() {
-        assertParseFailure(parser, "1a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
