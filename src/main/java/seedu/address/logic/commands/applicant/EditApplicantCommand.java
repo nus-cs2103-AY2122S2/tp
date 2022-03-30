@@ -59,6 +59,7 @@ public class EditApplicantCommand extends EditCommand {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the address book.";
+    private static final String MESSAGE_DUPLICATE_EMAIL = "The email is already used by %1$s";
 
     private final Index index;
     private final EditApplicantDescriptor editApplicantDescriptor;
@@ -89,6 +90,11 @@ public class EditApplicantCommand extends EditCommand {
 
         if (!applicantToEdit.isSamePerson(editedApplicant) && model.hasPerson(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        Applicant applicantWithEmail = model.getApplicantWithEmail(editedApplicant.getEmail());
+        if (applicantWithEmail != null) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, applicantWithEmail.getName().fullName));
         }
 
         model.updateApplicant(applicantToEdit, editedApplicant);

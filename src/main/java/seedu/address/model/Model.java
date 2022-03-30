@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
@@ -61,6 +62,11 @@ public interface Model {
      * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
      */
     boolean hasPerson(Applicant applicant);
+
+    /**
+     * Returns the {@code Applicant} (if exists) with the {@code email} provided, null if no such applicant.
+     */
+    Applicant getApplicantWithEmail(Email email);
 
     /**
      * Deletes the given applicant.

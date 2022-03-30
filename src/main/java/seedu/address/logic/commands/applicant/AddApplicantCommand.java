@@ -42,6 +42,7 @@ public class AddApplicantCommand extends AddCommand {
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the address book";
+    private static final String MESSAGE_DUPLICATE_EMAIL = "The email is already used by %1$s";
 
     private final Applicant toAdd;
 
@@ -59,6 +60,11 @@ public class AddApplicantCommand extends AddCommand {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        Applicant applicantWithEmail = model.getApplicantWithEmail(toAdd.getEmail());
+        if (applicantWithEmail != null) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, applicantWithEmail.getName().fullName));
         }
 
         model.addPerson(toAdd);
