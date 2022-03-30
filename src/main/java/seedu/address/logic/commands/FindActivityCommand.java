@@ -14,19 +14,17 @@ public class FindActivityCommand extends Command {
 
     public static final String COMMAND_WORD = "findactivity";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose activities contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [ACTIVITY]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " Command: Finds all persons whose activities contain "
+            + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [ACTIVITY]...\n\n"
             + "Example: " + COMMAND_WORD + " badminton\n"
-            + "Example: " + COMMAND_WORD + " basketball\n"
-            + "Example: " + COMMAND_WORD + " choir\n";
+            + "Example: " + COMMAND_WORD + " basketball soccer golf\n";
 
-    public static final String ERRMSG_STATUS = "Parameters: KEYWORD [ACTIVITY]...\n"
-            + "the specified keywords (case-insensitive) should only contain alphabets\n"
-            + "Parameters: KEYWORD [ACTIVITY]...\n"
+    public static final String ERRMSG_STATUS = "Parameters: KEYWORD [ACTIVITY]\n"
+            + "The specified keywords (case-insensitive) should only contain alphabets\n"
+            + "Parameters: KEYWORD [ACTIVITY]...\n\n"
             + "Example: " + COMMAND_WORD + " badminton\n"
-            + "Example: " + COMMAND_WORD + " basketball\n"
-            + "Example: " + COMMAND_WORD + " choir\n";
+            + "Example: " + COMMAND_WORD + " basketball soccer golf\n";
 
     private final ActivityContainsKeywordsPredicate predicate;
 

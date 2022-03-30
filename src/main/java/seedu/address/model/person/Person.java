@@ -144,21 +144,27 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
+        builder.append(getName()).append("!")
+                .append(System.getProperty("line.separator"))
+                .append("Phone: ")
                 .append(getPhone())
-                .append("; Email: ")
+                .append(System.getProperty("line.separator"))
+                .append("Email: ")
                 .append(getEmail())
-                .append("; Address: ")
+                .append(System.getProperty("line.separator"))
+                .append("Address: ")
                 .append(getAddress())
-                .append("; Status: ")
+                .append(System.getProperty("line.separator"))
+                .append("Status: ")
                 .append(getStatus())
-                .append("; Class Code: ")
+                .append(System.getProperty("line.separator"))
+                .append("Class Code: ")
                 .append(getClassCode());
 
         Set<Activity> activities = getActivities();
         if (!activities.isEmpty()) {
-            builder.append("; Activities: ");
+            builder.append(System.getProperty("line.separator"))
+                    .append("Activities: ");
             activities.forEach(builder::append);
         }
         return builder.toString();
