@@ -64,7 +64,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "Unsure"; // 'Unsure' not recognize
-    public static final String INVALID_CLASSCODE_DESC = " " + PREFIX_NAME + "b!0"; // '!' not allowed in classcode
+    public static final String INVALID_CLASSCODE_DESC = " " + PREFIX_CLASSCODE + "b!0"; // '!' not allowed in classcode
     public static final String INVALID_ACTIVITY_DESC = " " + PREFIX_ACTIVITY + "badminton*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
