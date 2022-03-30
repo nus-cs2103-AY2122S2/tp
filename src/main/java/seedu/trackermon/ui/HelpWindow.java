@@ -157,7 +157,7 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandBuilder("Help", "help"),
                 new CommandBuilder("Import", "import"),
                 new CommandBuilder("List", "list"),
-                new CommandBuilder("Sort", "sort [n/] [s/] [r/] [t/] [so/]…")
+                new CommandBuilder("Sort", "sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]")
         );
     }
 
