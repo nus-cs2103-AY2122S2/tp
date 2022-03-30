@@ -49,9 +49,9 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER INPUT][" + userInput + "]");
 
         CommandResult commandResult = null;
-        String[] commands = userInput.split("\\|");
+        String[] commands = userInput.split("\\|", -1); // -1 to stop split from ignoring trailing whitespace
         ReadOnlyAddressBook addressBookBeforeCommand = new AddressBook(model.getAddressBook());
-        boolean revert = false;
+        boolean valid = true;
         String errMsg = "";
 
         for (int i = 0; i < commands.length; i++) {
@@ -62,25 +62,28 @@ public class LogicManager implements Logic {
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResult = command.execute(model);
 
+                // Checks if any of the special commands are in a command chain; throws exception if found
                 if (i > 0 && (commandResult.isExit() || commandResult.isShowHelp()
                         || commandResult.isUndoPrevCommand())) {
-                    throw new CommandException("Special command should not be in command chain");
+                    throw new CommandException("Special command should not be in a command chain");
                 }
             } catch (CommandException | ParseException | IllegalArgumentException e) {
-                revert = true;
-                errMsg = e.getMessage();
+                valid = false;
+                errMsg = "\"" + commandText.trim() + "\" - " + e.getMessage();
+                break;
             }
+        }
 
-            try {
-                if (!revert) {
-                    storage.saveAddressBook(model.getAddressBook());
-                } else {
-                    model.setAddressBook(addressBookBeforeCommand);
-                    throw new CommandException("\"" + commandText + "\" - " + errMsg);
-                }
-            } catch (IOException ioe) {
-                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        // Saves the updated addressbook if commands are valid; resets the model if otherwise
+        try {
+            if (valid) {
+                storage.saveAddressBook(model.getAddressBook());
+            } else {
+                model.setAddressBook(addressBookBeforeCommand);
+                throw new CommandException(errMsg);
             }
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 
         assert commandResult != null : "CommandResult is null, should not happen";
