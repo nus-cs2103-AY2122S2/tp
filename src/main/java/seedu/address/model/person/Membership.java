@@ -26,7 +26,7 @@ public class Membership extends Field {
     public static final String MESSAGE_CONSTRAINTS =
             "Membership tier must be either 'bronze', 'silver' or 'gold'.";
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Birthday must be in YYYY-MM-DD format, must exist, and cannot be in the future.";
+            "Date must be in YYYY-MM-DD format, must exist, and cannot be in the future.";
 
     private final Tier tier;
     private final LocalDate date;
