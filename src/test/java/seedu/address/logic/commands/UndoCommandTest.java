@@ -17,7 +17,9 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
-
+/**
+ * Contains integration tests (interaction with the Model) for {@code UndoCommand}.
+ */
 public class UndoCommandTest {
 
     @Test
