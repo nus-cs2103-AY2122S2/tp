@@ -1,6 +1,8 @@
 package seedu.trackermon.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackermon.logic.parser.SortCommandParser.VALUE_ASC;
+import static seedu.trackermon.logic.parser.SortCommandParser.VALUE_DSC;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,6 +23,7 @@ import seedu.trackermon.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ORDER = "Invalid value!! Need to asc or dsc. For example: n/asc";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -128,5 +131,19 @@ public class ParserUtil {
         requireNonNull(comment);
         Comment validComment = new Comment(comment);
         return validComment;
+    }
+
+    /**
+     * Checks input string is valid.
+     * @param order input string.
+     * @return input string.
+     * @throws ParseException if the input is not valid.
+     */
+    public static String checkOrder(String order) throws ParseException {
+        requireNonNull(order);
+        if (!order.equals(VALUE_ASC) && !order.equals(VALUE_DSC)) {
+            throw new ParseException(MESSAGE_INVALID_ORDER);
+        }
+        return order;
     }
 }
