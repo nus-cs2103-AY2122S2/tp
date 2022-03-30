@@ -16,22 +16,22 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditSellerCommand;
-import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
+import seedu.address.logic.commands.EditBuyerCommand;
+import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditSellerCommandParser implements Parser<EditSellerCommand> {
+public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditSellerCommand parse(String args) throws ParseException {
+    public EditBuyerCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG,
@@ -43,35 +43,35 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditSellerCommand.MESSAGE_USAGE), pe);
+                    EditBuyerCommand.MESSAGE_USAGE), pe);
         }
 
-        EditSellerDescriptor editSellerDescriptor = new EditSellerDescriptor();
+        EditBuyerDescriptor editBuyerDescriptor = new EditBuyerDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editSellerDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editBuyerDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editSellerDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editBuyerDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         //for tags
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSellerDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBuyerDescriptor::setTags);
         //for Property
         if (argMultimap.getValue(PREFIX_HOUSE_TYPE).isPresent()) {
-            editSellerDescriptor.setHouseType(ParserUtil.parseHouseType(argMultimap.getValue(PREFIX_HOUSE_TYPE).get()));
+            editBuyerDescriptor.setHouseType(ParserUtil.parseHouseType(argMultimap.getValue(PREFIX_HOUSE_TYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            editSellerDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+            editBuyerDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE_RANGE).isPresent()) {
-            editSellerDescriptor.setPriceRange(ParserUtil.parsePriceRange(
+            editBuyerDescriptor.setPriceRange(ParserUtil.parsePriceRange(
                     argMultimap.getValue(PREFIX_PRICE_RANGE).get()));
         }
 
-        if (!editSellerDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditSellerCommand.MESSAGE_NOT_EDITED);
+        if (!editBuyerDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditBuyerCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditSellerCommand(index, editSellerDescriptor);
+        return new EditBuyerCommand(index, editBuyerDescriptor);
     }
 
     /**
