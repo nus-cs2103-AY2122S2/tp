@@ -17,27 +17,26 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.property.Address;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.Location;
-import seedu.address.model.property.NullPropertyToSell;
+import seedu.address.model.property.NullPropertyToBuy;
 import seedu.address.model.property.PriceRange;
-import seedu.address.model.property.PropertyToSell;
-import seedu.address.model.seller.Seller;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing client in the address book.
  */
-public class EditSellerCommand extends Command {
+public class EditBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-s";
+    public static final String COMMAND_WORD = "edit-b";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the seller identified "
-            + "by the index number used in the displayed seller list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the buyer identified "
+            + "by the index number used in the displayed buyer list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -46,87 +45,84 @@ public class EditSellerCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_SELLER_SUCCESS = "Edited seller: %1$s";
+    public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited buyer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book.";
 
     private final Index index;
-    private final EditSellerDescriptor editSellerDescriptor;
+    private final EditBuyerDescriptor editBuyerDescriptor;
 
     /**
      * @param index of the client in the filtered client list to edit
-     * @param editSellerDescriptor details to edit the client with
+     * @param editBuyerDescriptor details to edit the client with
      */
-    public EditSellerCommand(Index index, EditSellerDescriptor editSellerDescriptor) {
+    public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
         requireNonNull(index);
-        requireNonNull(editSellerDescriptor);
+        requireNonNull(editBuyerDescriptor);
 
         this.index = index;
-        this.editSellerDescriptor = new EditSellerDescriptor(editSellerDescriptor);
+        this.editBuyerDescriptor = new EditBuyerDescriptor(editBuyerDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Seller> lastShownList = model.getFilteredSellerList();
+        List<Buyer> lastShownList = model.getFilteredBuyerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Seller sellerToEdit = lastShownList.get(index.getZeroBased());
-        Seller editedSeller = createEditedSeller(sellerToEdit, editSellerDescriptor);
+        Buyer buyerToEdit = lastShownList.get(index.getZeroBased());
+        Buyer editedBuyer = createEditedBuyer(buyerToEdit, editBuyerDescriptor);
 
-        if (!sellerToEdit.isSameclient(editedSeller) && model.hasClient(editedSeller)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SELLER);
+        if (!buyerToEdit.isSameclient(editedBuyer) && model.hasClient(editedBuyer)) {
+            throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
 
-        model.setSeller(sellerToEdit, editedSeller);
+        model.setBuyer(buyerToEdit, editedBuyer);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, editedSeller));
+        return new CommandResult(String.format(MESSAGE_EDIT_BUYER_SUCCESS, editedBuyer));
     }
 
     /**
-     * Creates and returns a {@code client} with the details of {@code sellerToEdit}
-     * edited with {@code editSellerDescriptor}.
+     * Creates and returns a {@code client} with the details of {@code buyerToEdit}
+     * edited with {@code editBuyerDescriptor}.
      */
-    private static Seller createEditedSeller(Seller sellerToEdit, EditSellerDescriptor editSellerDescriptor) {
-        assert sellerToEdit != null;
+    private static Buyer createEditedBuyer(Buyer buyerToEdit, EditBuyerDescriptor editBuyerDescriptor) {
+        assert buyerToEdit != null;
 
-        Name updatedName = editSellerDescriptor.getName().orElse(sellerToEdit.getName());
-        Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
-        Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
-        Appointment updatedAppointment = editSellerDescriptor.getAppointment().orElse(sellerToEdit.getAppointment());
+        Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
+        Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
+        Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
+        Appointment updatedAppointment = editBuyerDescriptor.getAppointment().orElse(buyerToEdit.getAppointment());
         //Todo: add property
-        //PropertyToSell updatedPropertyToSell = editSellerDescriptor.getPropertyToSell()
-        //        .orElse(NullPropertyToSell.getNullPropertyToSell());
-        if (sellerToEdit.getPropertyToSell() instanceof NullPropertyToSell) {
-            //The seller do not have property yet,
+        //PropertyToBuy updatedPropertyToBuy = editBuyerDescriptor.getPropertyToBuy()
+        //        .orElse(NullPropertyToBuy.getNullPropertyToBuy());
+        if (buyerToEdit.getPropertyToBuy() instanceof NullPropertyToBuy) {
+            //The buyer do not have property yet,
             /*
             Todo:
              Option 1: throw error to user ;
              Option 2: addProperty for user(more dangerous and harder: what if user miss out some fields?
              */
             //Current way: dont do update to property first
-            return new Seller(updatedName, updatedPhone, updatedAppointment, updatedTags,
-                    NullPropertyToSell.getNullPropertyToSell());
+            return new Buyer(updatedName, updatedPhone, updatedAppointment, updatedTags,
+                    NullPropertyToBuy.getNullPropertyToBuy());
         } else {
-            //The seller already has a property just update it with new values
-            Address updatedAddress = editSellerDescriptor.getAddress().orElse(
-                    sellerToEdit.getPropertyToSell().getAddress());
-            HouseType updatedHouseType = editSellerDescriptor.getHouseType().orElse(
-                    sellerToEdit.getPropertyToSell().getHouse().getHouseType());
-            Location updatedLocation = editSellerDescriptor.getLocation().orElse(
-                    sellerToEdit.getPropertyToSell().getHouse().getLocation());
-            PriceRange updatedPriceRange = editSellerDescriptor.getPriceRange().orElse(
-                    sellerToEdit.getPropertyToSell().getPriceRange());
-            PropertyToSell updatedPropertyToSell = sellerToEdit.getPropertyToSell().updatePropertyToSell(
+            //The Buyer already has a property just update it with new values
+            HouseType updatedHouseType = editBuyerDescriptor.getHouseType().orElse(
+                    buyerToEdit.getPropertyToBuy().getHouse().getHouseType());
+            Location updatedLocation = editBuyerDescriptor.getLocation().orElse(
+                    buyerToEdit.getPropertyToBuy().getHouse().getLocation());
+            PriceRange updatedPriceRange = editBuyerDescriptor.getPriceRange().orElse(
+                    buyerToEdit.getPropertyToBuy().getPriceRange());
+            PropertyToBuy updatedPropertyToBuy = buyerToEdit.getPropertyToBuy().updatePropertyToBuy(
                     updatedHouseType,
                     updatedLocation,
-                    updatedPriceRange,
-                    updatedAddress
+                    updatedPriceRange
             );
-            return new Seller(updatedName, updatedPhone, updatedAppointment, updatedTags, updatedPropertyToSell);
+            return new Buyer(updatedName, updatedPhone, updatedAppointment, updatedTags, updatedPropertyToBuy);
         }
 
 
@@ -140,42 +136,40 @@ public class EditSellerCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditSellerCommand)) {
+        if (!(other instanceof EditBuyerCommand)) {
             return false;
         }
 
         // state check
-        EditSellerCommand e = (EditSellerCommand) other;
+        EditBuyerCommand e = (EditBuyerCommand) other;
         return index.equals(e.index)
-                && editSellerDescriptor.equals(e.editSellerDescriptor);
+                && editBuyerDescriptor.equals(e.editBuyerDescriptor);
     }
 
     /**
      * Stores the details to edit the client with. Each non-empty field value will replace the
      * corresponding field value of the client.
      */
-    public static class EditSellerDescriptor {
+    public static class EditBuyerDescriptor {
         private Name name;
         private Phone phone;
         private Set<Tag> tags;
         private Appointment appointment;
-        //private PropertyToSell propertyToSell;
-        private Address address;
+        //private PropertyToBuy propertyToBuy;
         private HouseType houseType;
         private Location location;
         private PriceRange priceRange;
 
-        public EditSellerDescriptor() {}
+        public EditBuyerDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditSellerDescriptor(EditSellerDescriptor toCopy) {
+        public EditBuyerDescriptor(EditBuyerDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setTags(toCopy.tags);
-            setAddress(toCopy.address);
             setHouseType(toCopy.houseType);
             setLocation(toCopy.location);
             setPriceRange(toCopy.priceRange);
@@ -186,7 +180,7 @@ public class EditSellerCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, tags, address, houseType, location, priceRange);
+            return CollectionUtil.isAnyNonNull(name, phone, tags, houseType, location, priceRange);
         }
 
         public void setName(Name name) {
@@ -211,14 +205,6 @@ public class EditSellerCommand extends Command {
 
         public Optional<Appointment> getAppointment() {
             return Optional.ofNullable(appointment);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setHouseType(HouseType houseType) {
@@ -271,17 +257,16 @@ public class EditSellerCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditSellerDescriptor)) {
+            if (!(other instanceof EditBuyerDescriptor)) {
                 return false;
             }
 
             // state check
-            EditSellerDescriptor e = (EditSellerDescriptor) other;
+            EditBuyerDescriptor e = (EditBuyerDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getTags().equals(e.getTags())
-                    && getAddress().equals(e.getAddress())
                     && getHouseType().equals(e.getHouseType())
                     && getLocation().equals(e.getLocation())
                     && getPriceRange().equals(e.getPriceRange());
