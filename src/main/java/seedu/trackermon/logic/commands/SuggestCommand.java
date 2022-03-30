@@ -10,6 +10,9 @@ import seedu.trackermon.model.Model;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.SuggestPredicate;
 
+/**
+ * Returns a random Show from the displayed list.
+ */
 public class SuggestCommand extends Command {
 
     public static final String COMMAND_WORD = "suggest";
@@ -20,9 +23,6 @@ public class SuggestCommand extends Command {
 
     public static final String TAG_ERROR = "Tag parameter must only be a single word.\n"
             + "Example: " + COMMAND_WORD + " t/Action";
-
-    public SuggestCommand() {
-    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
