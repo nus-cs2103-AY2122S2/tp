@@ -163,7 +163,7 @@ Whenever the underlying application data is modified, the `FilteredList<Person>`
 
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
-They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute. 
+They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
 
 # Documentation, logging, testing, configuration, dev-ops
 
