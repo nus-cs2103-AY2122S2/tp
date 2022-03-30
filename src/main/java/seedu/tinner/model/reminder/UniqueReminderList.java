@@ -20,7 +20,7 @@ import seedu.tinner.model.role.Role;
 /**
  * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
  * A Reminder is considered unique by comparing using {@code Reminder#isSameReminder(Reminder)}. As such, adding and
- * updating of companies uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the Reminder
+ * updating of reminders uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the Reminder
  * being added or updated is unique in terms of identity in the UniqueReminderList. However, the removal of a Reminder
  * uses Reminder#equals(Object) so as to ensure that the Reminder with exactly the same fields will be removed.
  * <p>
