@@ -19,11 +19,11 @@ Note that the main difference between GUI and CLI is the method of interaction.
 As Tracey is a Command Line Interface, these are the aspects that highlight the power of Tracey and why it was developed using a CLI:
 
 1. **Speed** <br>
-Tracey offers immense speed. GUIs require additional resources to render graphical components and thus is slower than CLIs
+Tracey offers immense response speed. GUIs require additional resources to render graphical components, making them slower than CLIs.
 2. **Functionality** <br>
-Tracey offers flexibility in terms of its use. A GUI does not have the same level of functionality and granular control as a CLI. This is portrayed in the various forms of features that Tracey offers that you can expand on later in this User Guide.
+Tracey offers flexibility in its use. A typical GUI does not have the same level of functionality and granular control as a typical CLI. This is portrayed in the variety of features that Tracey offers, which you can learn about more in this User Guide.
 3. **Scalability** <br>
-Simple command functions in Tracey allow you to handle various complex features. Additionally, if newer features were to be added in future iterations, CLIs allow for easier integration as GUIs require rendering and creation of graphical components.
+Simple command functions in Tracey allows it to handle various complex features. Additionally, the CLI of Tracey allows easier integration of newer features that may be added in future iterations, compared to GUIs which require rendering and creation of graphical components.
 
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
 
@@ -39,6 +39,8 @@ We hope you enjoy Tracey as much as we did developing it!
     * <a href='#adding-a-contact'>Adding a contact</a>
     * <a href='#editing-an-existing-contact'>Editing an existing contact</a>
     * <a href='#deleting-a-contact'>Deleting a contact</a>
+    * <a href='#undoing-an-action'>Undoing an action</a>
+    * <a href='#redoing-an-action'>Redoing an action</a>
     * <a href='#finding-a-contact'>Finding a contact</a>
     * <a href='#filtering-contacts'>Filtering contacts</a>
     * <a href='#listing-the-records'>Listing the records</a>
@@ -50,17 +52,18 @@ We hope you enjoy Tracey as much as we did developing it!
     * <a href='#saving'>Saving</a>
 * <a href='#faq'>FAQ</a>
 * <a href='#command-summary'>Command Summary</a>
+* <a href='#glossary'>Glossary</a>
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to navigate the User Guide
 
-There are a few symbols to take note of in our User Guide. These symbols serve different purposes as stated below:
+There are a few symbols to take note of in our User Guide. Their purposes are stated below:
 
 | Symbol  |                                                Purpose                                                |
 |:-------:|:-----------------------------------------------------------------------------------------------------:|
 |   📓    |    Additional notes are parked here. They contain beneficial information in case you are confused.    |
-|   ⚠️    |          Warnings are parked here. These are information that you **NEED** to take note of.           |
-|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey |
+|   ⚠️    |          Warnings are parked here. They contain information that you **NEED** to take note of.           |
+|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey. |
 *Figure 1: Symbols and their purposes*
 
 Additional formatting guidelines:
@@ -69,7 +72,7 @@ Additional formatting guidelines:
 
 `Command`: Words/phrases that are presented like this highlight specific keywords that you can use to interact with your computer or Tracey.
 
-[Links](): Words/phrases that are presented like this highlight clickable links to different parts of the User Guide or to external web pages for additional information. 
+[Links](): Words/phrases that are presented like this are clickable links to different parts of the User Guide or to external web pages for additional information. 
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
@@ -128,14 +131,14 @@ Format: `help`
 Add a student with relevant details into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
-* Add a student with the specific tags, the tags are optional and you can add as many tags as you like
-    * Duplicate tags will be displayed as a single tag
-* The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey
-* Phone Number, email and matriculation number must be **unique** to each student
-* Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
-* Tracey will acknowledge that the student has been added
+* Adds a student with the specific tags, the tags are optional and you can add as many tags as you like.
+    * Duplicate tags will be displayed as a single tag.
+* The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey.
+* Phone Number, email and matriculation number must be **unique** to each student.
+* Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`.
+* Tracey will acknowledge that the student has been added.
 * Faculty and covid status need to be an pre-defined constant specific to the list defined below (refer to Pre-defined constants).
-* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Figure 3, there will be an error and the user will have to input the details for the keyword again.
+* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Figure 3, there will be an error and you will have to input the details for the keyword again.
 
 Examples of usage:
 * `add n/Melvin f/SOC cs/ Negative`
@@ -171,13 +174,13 @@ In addition, the list of Pre-defined constants are also provided for `Faculty` a
 Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
-* Edits an existing student's information found in Tracey. The student is referred by an index, displayed alongside him in the student list.
-* To edit a student's predefined constant, you can use the command `edit` on the student's `INDEX` with the pre-defined constant's prefix (mentioned in Figure 3 above).
+* Edits an existing student's information found in Tracey. The student is referred to by an index, displayed beside his/her name in the student list.
+* To edit a student's pre-defined constant, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
   The index **must be a positive integer** 1, 2, 3, …
-* Prefix must be used in order for Tracey to know what you intend to edit.
-* Existing information of the student will be updated with the newly inputted values.
+* The correct prefixes must be used in order for Tracey to know what you intend to edit.
+* Existing information of the student will be replaced with the newly inputted values.
 * When editing predefined constants that are tags, all existing tags will be replaced with the newly inputted tag(s). <br>
-  i.e. Adding tags is not cumulative. New tags replace old tags
+  i.e. Adding tags is not cumulative. All new tags will replace all old tags.
 * You can remove all tags of the student by typing `t/` without specifying any details after it.
 
 How to identify `INDEX`:
@@ -195,42 +198,55 @@ Examples of usage:
 Delete a contact at a specific index.
 
 Format: `delete INDEX`
-* Deletes an existing student in Tracey. The student is referred by an index, displayed alongside him in the student list.
+* Deletes an existing student in Tracey. The student is referred to by an index, displayed beside his/her name in the student list.
 * To delete a student, you can use the command `delete` on the student's `INDEX`.
   The index **must be a positive integer** 1, 2, 3, …
 * Deletes one student at a time.
-* You can only delete at an index where a student is assigned to it.
+* You can only delete the contact information at an index where there is a student assigned to it.
 
 How to identify `INDEX`:
 ![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
 
 Examples of usage:
-* `delete 2` removes the 2nd student on the list
-* `delete 10` removes the 10th student on the list
-
-⚠️`Warning:`
-* The deleted student cannot be recovered.
+* `delete 2` removes the 2nd student on the list.
+* `delete 10` removes the 10th student on the list.
 
 💡`Tips:`
-* The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
+* The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
 * You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
+
+### Undoing an action
+Undo an executed `add`, `edit` or `delete` command.
+
+Format: `undo`
+* Undoes only the last executed add, edit or delete command.
+* You can only use the undo command after executing an add, edit, or delete command.
+* Cannot be used in succession to undo previously executed commands besides the last executed one.
+
+### Redoing an action
+Reverses an executed undo command.
+
+Format: `redo`
+* Reverses only the last executed `undo` command.
+* You can only use the `redo` command after executing an `undo` command.
+* Cannot be used in succession to reverse previously executed `undo` commands besides the last executed one.
 
 ### Finding a contact
 Find a particular contact in Tracey and retrieve their specific details.
 
 Format: `find NAME`
-* Returns the student(s) with their student specific **details**.
+* Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
 * The **details** provided are the student's `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
-* A screenshot (Figure 1) is provided below to demonstrate what the find function returns to the user.
-* The search is case-insensitive. e.g `johnDoe` will match `Johndoe`
-* The search does not require full name. e.g. `jo` will match `Joe` and `John`
+* A screenshot (Figure 1) is provided below to demonstrate what the find function returns.
+* The search is case-insensitive. e.g `johnDoe` will match `Johndoe`.
+* The search does not require full name. e.g. `jo` will match `Joe` and `John`.
 
 Examples of usages:
 
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh` and`David Li`
-* `find J` returns `john` and`jay`
+* `find John` returns `john` and `John Doe`.
+* `find alex david` returns `Alex Yeoh` and`David Li`.
+* `find J` returns `john` and`jay`.
 
 Scenario:
 ![find](images/FindScreenshotForUG.png) *Figure 1: Screenshot of result of the find command*
@@ -238,28 +254,36 @@ Scenario:
 As seen in the *figure 1*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Filtering contacts
-Filter student based on health statuses and/or faculties.
+Filter students based on faculties, health statuses and/or blocks.
 
-Format:`filter cs/HEALTH_STATUS f/FACULTY`
+Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
-* Returns a list of students with the given health status: `positive`, `negative`, `hrn`.
+* Returns a list of students with the given values in the respective specified fields.
 * The search is case-insensitive. e.g `Positive` will match `positive`.
+* The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result. 
+* At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid. 
 
 Examples of usage:
 * `filter cs/positive` returns all students that are tagged as covid-positive.
 * `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing).
+* `filter b/e` returns all students who live in block E of the hall. 
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing).
+* `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall. 
+
+An example is shown below:
+![find](images/FilterScreenshotForUG.png) *Figure 1: Example result of `filter` command*
+
+As seen in *figure 1*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria. 
 
 📓`Note:`
-* `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`.
-* Please use the `find` command instead which will allow you to search via keywords.
+* `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
 
 ### Listing the records
-List the full record, which displays all the student's data that are logged into Tracey.
+List all students, displaying all their data stored in Tracey.
 
 Format: `list`
 
-This is a sample screenshot of what you can expect from the `help` command.
+This is a sample screenshot of what you can expect from the `list` command.
 
 ![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
 
@@ -271,7 +295,7 @@ The `Show Email` button opens up a separate window that consists of all the emai
 From Figure 7, this function is beneficial for administators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
-Summarises the student records inside Tracey.
+Summarises the statistics of the student records inside Tracey.
 
 Format:`summarise`
 * You can get an overview of the students in Tracey if you want to get an idea of the location where covid is more prevalent.
@@ -308,15 +332,13 @@ Format:`clear`
 
 ⚠️`Warning:` 
 * Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+* This feature cannot be reversed using `undo`. 
 
 ### Exiting Tracey
 Close the application.
 
 Format: `exit`
-* The application can shut down when you are done using it.
-
-Example of usage:
-* `exit` stops Tracey from running.
+* Closes the application.
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
@@ -378,4 +400,6 @@ Figure 8: Command Summary.
 
 
 ### Glossary
-{to be added}
+| Term  | Meaning  |
+|---|---|
+| Pre-defined constant | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. | 
