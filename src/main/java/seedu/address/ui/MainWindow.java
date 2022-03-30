@@ -212,6 +212,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleSwitch() {
+        logger.info("Handle Switch fired!");
         logic = logic.switchAddressBook();
     }
 

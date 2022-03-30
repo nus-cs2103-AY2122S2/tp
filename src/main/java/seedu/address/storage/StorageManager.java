@@ -96,6 +96,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readArchivedAddressBook() throws DataConversionException, IOException {
+        System.out.println("Archived AddressBook path==>" + archivedAddressBookStorage.getAddressBookFilePath());
         return readAddressBook(archivedAddressBookStorage.getAddressBookFilePath());
     }
 
