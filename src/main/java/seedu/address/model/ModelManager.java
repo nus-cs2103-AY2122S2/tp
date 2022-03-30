@@ -95,11 +95,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        addressBook.saveHistory();
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
+        addressBook.saveHistory();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -108,6 +110,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
+        addressBook.saveHistory();
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -119,6 +122,7 @@ public class ModelManager implements Model {
     @Override
     public void restoreHistory() {
         addressBook.restoreHistory();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================

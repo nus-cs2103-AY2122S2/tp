@@ -15,7 +15,6 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
     private final UniquePersonList personsHistory;
 
     /*
