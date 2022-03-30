@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.Distinguishable;
+import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.item.UniqueItemList;
@@ -189,7 +190,7 @@ public class Product implements Distinguishable<Product> {
     }
 
     /**
-     * Checks if the Product has items that are expired
+     * Checks if the Product has items that are expired.
      *
      * @return true if the product contains items that are expired.
      */
@@ -201,6 +202,20 @@ public class Product implements Distinguishable<Product> {
             }
         }
 
+        return false;
+    }
+
+    /**
+     * Checks if the Product has items that are expiring before but including the {@code expiryDateToCheck}
+     * @param expiryDateToCheck
+     * @return true if the product has items that are expiring before but including that date.
+     */
+    public boolean hasExpiringItems(ExpiryDate expiryDateToCheck) {
+        for (Item i : items) {
+            if (i.getExpiryDate().within(expiryDateToCheck)) {
+                return true;
+            }
+        }
         return false;
     }
 

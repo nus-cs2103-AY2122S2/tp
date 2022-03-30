@@ -84,8 +84,16 @@ public class Item implements Comparable<Item>, Distinguishable<Item> {
         return quantity.isEmpty();
     }
 
+    /**
+     * Checks if the item has expired.
+     * @return true if the item has expired
+     */
     public boolean isExpired() {
         return expiryDate.isPast();
+    }
+
+    public boolean expiresBefore(ExpiryDate toCheck) {
+        return expiryDate.within(toCheck);
     }
 
     /**
