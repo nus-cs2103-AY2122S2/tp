@@ -8,18 +8,22 @@ import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.consultations.AddConsultationCommandParser;
 import seedu.address.logic.parser.consultations.DeleteConsultationCommandParser;
 import seedu.address.logic.parser.consultations.EditConsultationCommandParser;
+import seedu.address.logic.parser.consultations.FindConsultationCommandParser;
 import seedu.address.logic.parser.consultations.ViewConsultationCommandParser;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.DeleteContactCommandParser;
+import seedu.address.logic.parser.contact.FindContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.medical.AddMedicalCommandParser;
 import seedu.address.logic.parser.medical.DeleteMedicalCommandParser;
 import seedu.address.logic.parser.medical.EditMedicalCommandParser;
+import seedu.address.logic.parser.medical.FindMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.EditPrescriptionCommandParser;
+import seedu.address.logic.parser.prescription.FindPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
 import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
@@ -190,13 +194,13 @@ public enum CommandType {
         requireNonNull(arguments);
         switch (viewCommandType) {
         case CONTACT:
-            throw new ParseException("To be implemented");
+            return new FindContactCommandParser().parse(arguments);
         case MEDICAL:
-            throw new ParseException("To be implemented");
+            return new FindMedicalCommandParser().parse(arguments);
         case CONSULTATION:
-            throw new ParseException("To be implemented");
+            return new FindConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
-            throw new ParseException("To be implemented");
+            return new FindPrescriptionCommandParser().parse(arguments);
         case TEST:
             return new FindTestResultCommandParser().parse(arguments);
         default:
