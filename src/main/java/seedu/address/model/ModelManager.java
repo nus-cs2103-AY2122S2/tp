@@ -111,6 +111,16 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void saveHistory() {
+        addressBook.saveHistory();
+    }
+
+    @Override
+    public void restoreHistory() {
+        addressBook.restoreHistory();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
