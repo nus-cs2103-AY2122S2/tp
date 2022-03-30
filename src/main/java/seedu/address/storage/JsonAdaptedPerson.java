@@ -155,4 +155,9 @@ class JsonAdaptedPerson {
                 modelHeight, modelJerseyNumber, modelTags, modelWeight, modelLineups);
     }
 
+    @Override
+    public String toString() {
+        return name + " " + email + " " + height + " " + weight +" " + jerseyNumber + " " + phone + " " + tagged
+                + " " + lineups;
+    }
 }

@@ -235,7 +235,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -255,7 +255,7 @@ public class EditCommand extends Command {
     /**
      * Creates and return a {@code Lineup} with the new Lineup name
      */
-    static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
+    public static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
         assert lineupToEdit != null;
 
         LineupName updatedName = editLineupName;
@@ -269,7 +269,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Schedule} with the details of {@code scheduleToEdit}
      * edited with {@code editScheduleDescriptor}.
      */
-    private static Schedule createEditedSchedule(Schedule scheduleToEdit,
+    public static Schedule createEditedSchedule(Schedule scheduleToEdit,
                                                  EditScheduleDescriptor editScheduleDescriptor) {
         assert scheduleToEdit != null;
 
@@ -414,7 +414,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null && tags.size() != 0) ?
+                    Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override
