@@ -38,7 +38,7 @@ public class AcceptInterviewCommand extends Command {
         }
 
         Interview interviewToAccept = lastShownList.get(targetIndex.getZeroBased());
-        model.acceptInterview(interviewToAccept);
+        //model.acceptInterview(interviewToAccept);
         return new CommandResult(String.format(MESSAGE_ACCEPT_INTERVIEW_SUCCESS, interviewToAccept),
                 getCommandDataType());
     }

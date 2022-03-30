@@ -142,6 +142,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an interview is passable based on the number of extended offers and openings.
+     */
+    public boolean isPassableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isPassableInterview(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -157,38 +165,37 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.add(i);
     }
 
-    /**
-<<<<<<< HEAD
-     * Pass an interview in HireLah.
-     * The interview must already exist in HireLah.
-     */
-    public void passInterview(Interview i) {
-        interviews.pass(i);
-    }
-
-    /**
-     * Fails an interview in HireLah.
-     * The interview must already exist in HireLah.
-     */
-    public void failInterview(Interview i) {
-        interviews.fail(i);
-    }
-
-    /**
-     * Accepts an interview in HireLah.
-     * The interview must already exist in HireLah.
-     */
-    public void acceptInterview(Interview i) {
-        interviews.accept(i);
-    }
-
-    /**
-     * Rejects an interview in HireLah.
-     * The interview must already exist in HireLah.
-     */
-    public void rejectInterview(Interview i) {
-        interviews.reject(i);
-    }
+    //    /**
+    //     * Pass an interview in HireLah.
+    //     * The interview must already exist in HireLah.
+    //     */
+    //    public void passInterview(Interview i) {
+    //        interviews.pass(i);
+    //    }
+    //
+    //    /**
+    //     * Fails an interview in HireLah.
+    //     * The interview must already exist in HireLah.
+    //     */
+    //    public void failInterview(Interview i) {
+    //        interviews.fail(i);
+    //    }
+    //
+    //    /**
+    //     * Accepts an interview in HireLah.
+    //     * The interview must already exist in HireLah.
+    //     */
+    //    public void acceptInterview(Interview i) {
+    //        interviews.accept(i);
+    //    }
+    //
+    //    /**
+    //     * Rejects an interview in HireLah.
+    //     * The interview must already exist in HireLah.
+    //     */
+    //    public void rejectInterview(Interview i) {
+    //        interviews.reject(i);
+    //    }
 
 
     /**

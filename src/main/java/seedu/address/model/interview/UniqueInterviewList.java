@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.exceptions.DuplicateInterviewException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
-import seedu.address.model.interview.exceptions.NonPassableInterviewException;
 import seedu.address.model.position.Position;
 
 public class UniqueInterviewList implements Iterable<Interview> {
@@ -42,6 +41,15 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Returns true if the interview is passable based off the number of currently
+     * extended offers and position openings.
+     */
+    public boolean isPassableInterview(Interview toPass) {
+        requireNonNull(toPass);
+        return toPass.isPassableInterview();
+    }
+
+    /**
      * Adds an interview to the list.
      * The interview must not already exist in the list.
      */
@@ -53,87 +61,87 @@ public class UniqueInterviewList implements Iterable<Interview> {
         internalList.add(toAdd);
     }
 
-    /**
-     * Passes an interview in the list. The interview must be passable based on the numbers of offers
-     * currently extended.
-     */
-    public void pass(Interview toPass) {
-        requireNonNull(toPass);
-        if (!toPass.isPassableInterview()) {
-            throw new NonPassableInterviewException();
-        }
-
-        toPass.markAsPassed();
-        int index = internalList.indexOf(toPass);
-        if (index == -1) {
-            throw new InterviewNotFoundException();
-        }
-
-        //        if (!toPass.equals(toPass) && contains(toPass)) {
-        //            throw new DuplicateInterviewException();
-        //        }
-
-        internalList.set(index, toPass);
-    }
-
-    /**
-     * Fails an interview in the list.
-     */
-    public void fail(Interview toFail) {
-        requireNonNull(toFail);
-
-        toFail.markAsFailed();
-        int index = internalList.indexOf(toFail);
-
-        if (index == -1) {
-            throw new InterviewNotFoundException();
-        }
-        //        if (!toFail.equals(toFail) && contains(toFail)) {
-        //            throw new DuplicateInterviewException();
-        //        }
-
-        internalList.set(index, toFail);
-    }
-
-    /**
-     * Accepts an interview in the list.
-     */
-    public void accept(Interview toAccept) {
-        requireNonNull(toAccept);
-
-        toAccept.markAsAccepted();
-        int index = internalList.indexOf(toAccept);
-
-        if (index == -1) {
-            throw new InterviewNotFoundException();
-        }
-
-        //        if (!toFail.equals(toFail) && contains(toFail)) {
-        //            throw new DuplicateInterviewException();
-        //        }
-
-        internalList.set(index, toAccept);
-    }
-
-    /**
-     * Rejects an interview in the list.
-     */
-    public void reject(Interview toReject) {
-        requireNonNull(toReject);
-
-        toReject.markAsRejected();
-        int index = internalList.indexOf(toReject);
-
-        if (index == -1) {
-            throw new InterviewNotFoundException();
-        }
-
-        //        if (!toFail.equals(toFail) && contains(toFail)) {
-        //            throw new DuplicateInterviewException();
-        //        }
-
-        internalList.set(index, toReject);
-    }
+    //    /**
+    //     * Passes an interview in the list. The interview must be passable based on the numbers of offers
+    //     * currently extended.
+    //     */
+    //    public void pass(Interview toPass) {
+    //        requireNonNull(toPass);
+    //        if (!toPass.isPassableInterview()) {
+    //            throw new NonPassableInterviewException();
+    //        }
+    //
+    //        toPass.markAsPassed();
+    //        int index = internalList.indexOf(toPass);
+    //        if (index == -1) {
+    //            throw new InterviewNotFoundException();
+    //        }
+    //
+    //        //        if (!toPass.equals(toPass) && contains(toPass)) {
+    //        //            throw new DuplicateInterviewException();
+    //        //        }
+    //
+    //        internalList.set(index, toPass);
+    //    }
+    //
+    //    /**
+    //     * Fails an interview in the list.
+    //     */
+    //    public void fail(Interview toFail) {
+    //        requireNonNull(toFail);
+    //
+    //        toFail.markAsFailed();
+    //        int index = internalList.indexOf(toFail);
+    //
+    //        if (index == -1) {
+    //            throw new InterviewNotFoundException();
+    //        }
+    //        //        if (!toFail.equals(toFail) && contains(toFail)) {
+    //        //            throw new DuplicateInterviewException();
+    //        //        }
+    //
+    //        internalList.set(index, toFail);
+    //    }
+    //
+    //    /**
+    //     * Accepts an interview in the list.
+    //     */
+    //    public void accept(Interview toAccept) {
+    //        requireNonNull(toAccept);
+    //
+    //        toAccept.markAsAccepted();
+    //        int index = internalList.indexOf(toAccept);
+    //
+    //        if (index == -1) {
+    //            throw new InterviewNotFoundException();
+    //        }
+    //
+    //        //        if (!toFail.equals(toFail) && contains(toFail)) {
+    //        //            throw new DuplicateInterviewException();
+    //        //        }
+    //
+    //        internalList.set(index, toAccept);
+    //    }
+    //
+    //    /**
+    //     * Rejects an interview in the list.
+    //     */
+    //    public void reject(Interview toReject) {
+    //        requireNonNull(toReject);
+    //
+    //        toReject.markAsRejected();
+    //        int index = internalList.indexOf(toReject);
+    //
+    //        if (index == -1) {
+    //            throw new InterviewNotFoundException();
+    //        }
+    //
+    //        //        if (!toFail.equals(toFail) && contains(toFail)) {
+    //        //            throw new DuplicateInterviewException();
+    //        //        }
+    //
+    //        internalList.set(index, toReject);
+    //    }
 
     /**
      * Replaces the interview {@code target} in the list with {@code editedInterivew}.

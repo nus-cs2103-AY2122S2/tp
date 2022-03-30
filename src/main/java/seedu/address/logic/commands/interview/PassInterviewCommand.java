@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 public class PassInterviewCommand extends Command {
     public static final String COMMAND_WORD = "pass";
@@ -38,8 +39,23 @@ public class PassInterviewCommand extends Command {
         }
 
         Interview interviewToPass = lastShownList.get(targetIndex.getZeroBased());
-        model.passInterview(interviewToPass);
-        return new CommandResult(String.format(MESSAGE_PASS_INTERVIEW_SUCCESS, interviewToPass),
+
+        if (!model.isPassableInterview(interviewToPass)) {
+            throw new CommandException(Messages.MESSAGE_INTERIVEW_CANNOT_BE_PASSED);
+        }
+
+        // Should this be extracted out to a method
+        Position oldPosition = interviewToPass.getPosition();
+        Position newPosition = interviewToPass.getPosition().extendOffer();
+        Interview passedInterview = new Interview(interviewToPass.getApplicant(), interviewToPass.getDate(),
+                newPosition);
+
+        // Should I change the constructor (of interview) or leave as a method instead
+        passedInterview.markAsPassed();
+        model.setInterview(interviewToPass, passedInterview);
+        model.updatePosition(oldPosition, newPosition);
+
+        return new CommandResult(String.format(MESSAGE_PASS_INTERVIEW_SUCCESS, passedInterview),
                 getCommandDataType());
     }
 

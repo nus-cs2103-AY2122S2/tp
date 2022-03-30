@@ -102,6 +102,11 @@ public interface Model {
     boolean hasConflictingInterview(Interview interview);
 
     /**
+     * Returns true if an interview can be passed.
+     */
+    boolean isPassableInterview(Interview interview);
+
+    /**
      * Deletes the given interview.
      * The interview must exist in the address book.
      */
@@ -113,29 +118,29 @@ public interface Model {
      */
     void addInterview(Interview interview);
 
-    /**
-     * Pass the given interview.
-     * {@code interview} must already exist in HireLah.
-     */
-    void passInterview(Interview interview);
-
-    /**
-     * Fails the given interview.
-     * {@code interview} must already exist in HireLah.
-     */
-    void failInterview(Interview interview);
-
-    /**
-     * Accepts the given interview.
-     * {@code interview} must already exist in HireLah and have passed status.
-     */
-    void acceptInterview(Interview interview);
-
-    /**
-     * Rejects the given interview.
-     * {@code interview} must already exist in HireLah and have passed status.
-     */
-    void rejectInterview(Interview interview);
+    //    /**
+    //     * Pass the given interview.
+    //     * {@code interview} must already exist in HireLah.
+    //     */
+    //    void passInterview(Interview target, Interview passedInterview);
+    //
+    //    /**
+    //     * Fails the given interview.
+    //     * {@code interview} must already exist in HireLah.
+    //     */
+    //    void failInterview(Interview interview);
+    //
+    //    /**
+    //     * Accepts the given interview.
+    //     * {@code interview} must already exist in HireLah and have passed status.
+    //     */
+    //    void acceptInterview(Interview interview);
+    //
+    //    /**
+    //     * Rejects the given interview.
+    //     * {@code interview} must already exist in HireLah and have passed status.
+    //     */
+    //    void rejectInterview(Interview interview);
 
 
     /**

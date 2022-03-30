@@ -38,7 +38,7 @@ public class RejectInterviewCommand extends Command {
         }
 
         Interview interviewToReject = lastShownList.get(targetIndex.getZeroBased());
-        model.rejectInterview(interviewToReject);
+        //model.rejectInterview(interviewToReject);
         return new CommandResult(String.format(MESSAGE_REJECT_INTERVIEW_SUCCESS, interviewToReject),
                 getCommandDataType());
     }
