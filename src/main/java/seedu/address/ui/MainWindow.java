@@ -18,6 +18,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReminderTask;
+import seedu.address.storage.ReminderPersons;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -81,9 +82,6 @@ public class MainWindow extends UiPart<Stage> {
         favouriteWindow = new FavouriteWindow(logic);
         statisticsWindow = new StatisticsWindow(logic);
         reminderWindow = ReminderWindow.getInstance(logic);
-
-        // start the reminders
-        launchReminders();
     }
 
     public Stage getPrimaryStage() {
@@ -254,9 +252,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void launchReminders() {
-        timer = new Timer();
+        Timer newTimer = new Timer();
         ReminderTask tasks = new ReminderTask();
-        timer.scheduleAtFixedRate(tasks, 5_000, 60_000);
+        // launch the Reminder window only when there are active reminders
+        if (!ReminderPersons.getInstance().isEmpty()) {
+            newTimer.scheduleAtFixedRate(tasks, 60_000, 60_000);
+            timer = newTimer;
+        // else cancel the recurring Reminder window
+        } else {
+            timer.cancel();
+            newTimer.cancel();
+        }
     }
 
     private void closeReminders() {
@@ -300,6 +306,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowReminders()) {
+                launchReminders();
                 handleReminders();
             }
 

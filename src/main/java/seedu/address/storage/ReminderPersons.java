@@ -58,4 +58,8 @@ public class ReminderPersons {
     public boolean containsKey(Person person) {
         return reminderPersons.reminders.containsKey(person);
     }
+
+    public boolean isEmpty() {
+        return reminderPersons.reminders.isEmpty();
+    }
 }
