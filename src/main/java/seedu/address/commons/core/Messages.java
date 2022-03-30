@@ -15,4 +15,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_FLAG = "Flag is invalid!";
     public static final String MESSAGE_NO_FLAG = "No flag is found!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INTERIVEW_CANNOT_BE_PASSED = "The interview cannot be passed, "
+            + "as the number of current offers will exceed the number of available positions!";
+    public static final String MESSAGE_INTERIVEW_CANNOT_BE_ACCEPTED = "The interview cannot be accepted, "
+            + "as it has not been passed yet!";
+    public static final String MESSAGE_INTERIVEW_CANNOT_BE_REJECTED = "The interview cannot be rejected, "
+            + "as it has not been passed yet!";
 }

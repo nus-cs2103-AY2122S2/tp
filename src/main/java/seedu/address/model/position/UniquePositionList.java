@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -144,5 +145,10 @@ public class UniquePositionList implements Iterable<Position> {
             }
         }
         return true;
+    }
+    // May change isSamePosition to equals if required
+    public Position getPosition(Position interviewPosition) {
+        return internalList.stream().filter(a -> a.isSamePosition(interviewPosition))
+                .collect(Collectors.toList()).get(0);
     }
 }

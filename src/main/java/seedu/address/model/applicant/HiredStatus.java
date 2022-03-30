@@ -23,4 +23,21 @@ public class HiredStatus {
     public String toString() {
         return value;
     }
+
+    /**
+     * Returns true if both Hired Status have the same value.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof HiredStatus)) {
+            return false;
+        }
+
+        HiredStatus otherStatus = (HiredStatus) other;
+        return otherStatus.value.equals(this.value);
+    }
 }
