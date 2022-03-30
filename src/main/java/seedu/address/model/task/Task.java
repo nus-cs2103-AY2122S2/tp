@@ -34,7 +34,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getTaskName().equals(getTaskName());
+                && otherTask.getTaskName().toString().equalsIgnoreCase(getTaskName().toString());
     }
 
 
@@ -58,7 +58,7 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
-        return otherTask.getTaskName().equals(getTaskName());
+        return otherTask.getTaskName().toString().equalsIgnoreCase(getTaskName().toString());
     }
 
     @Override
