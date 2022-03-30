@@ -22,11 +22,18 @@ public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityComma
      * @throws ParseException if the user input does not conform the expected format
      */
     public TagTaskPriorityCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimapPriority =
+                ArgumentTokenizer.tokenize(args, PREFIX_PRIORITY);
+
         Index index;
         Priority priority;
 
-        ArgumentMultimap argMultimapPriority =
-                ArgumentTokenizer.tokenize(args, PREFIX_PRIORITY);
+        try {
+            index = ParserUtil.parseIndex(argMultimapPriority.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TagTaskPriorityCommand.MESSAGE_USAGE), pe);
+        }
 
         if (!arePrefixesPresent(argMultimapPriority, PREFIX_PRIORITY)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -36,14 +43,6 @@ public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityComma
         if (argMultimapPriority.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_TASK_NUMBER,
                     TagTaskPriorityCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            String[] argsArr = args.trim().split(" ");
-            index = ParserUtil.parseIndex(argsArr[0]);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagTaskPriorityCommand.MESSAGE_USAGE), pe);
         }
 
         String priorityString = argMultimapPriority.getValue(PREFIX_PRIORITY).get();

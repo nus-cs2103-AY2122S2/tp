@@ -20,10 +20,17 @@ public class UntagTaskCommandParser implements Parser<UntagTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public UntagTaskCommand parse(String args) throws ParseException {
-        Index index;
-
         ArgumentMultimap argMultimapTag =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimapTag.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    UntagTaskCommand.MESSAGE_USAGE), pe);
+        }
 
         if (!arePrefixesPresent(argMultimapTag, PREFIX_NAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -33,14 +40,6 @@ public class UntagTaskCommandParser implements Parser<UntagTaskCommand> {
         if (argMultimapTag.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_TASK_NUMBER,
                     UntagTaskCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            String[] argsArr = args.trim().split(" ");
-            index = ParserUtil.parseIndex(argsArr[0]);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UntagTaskCommand.MESSAGE_USAGE), pe);
         }
 
         String name = argMultimapTag.getValue(PREFIX_NAME).get();
