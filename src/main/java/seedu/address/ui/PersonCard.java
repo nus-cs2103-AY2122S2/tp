@@ -59,11 +59,14 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         status.setText(person.getStatus().value);
         if (person.getStatus().value.equals(Status.POSITIVE)) {
-            status.setStyle("-fx-text-fill: red !important;");
+            status.setStyle("-fx-text-fill: #FF0000 !important; -fx-label-padding: 20; "
+                    + "-fx-border-color: #FF0000 !important; -fx-border-width: 4; -fx-border-radius: 7");
         } else if (person.getStatus().value.equals(Status.NEGATIVE)) {
-            status.setStyle("-fx-text-fill: green !important;");
+            status.setStyle("-fx-text-fill: #00FF00 !important; -fx-label-padding: 20; "
+                    + "-fx-border-color: #00FF00 !important; -fx-border-width: 4; -fx-border-radius: 7");
         } else if (person.getStatus().value.equals(Status.CLOSE_CONTACT)) {
-            status.setStyle("-fx-text-fill: blue !important;");
+            status.setStyle("-fx-text-fill: orange !important; -fx-label-padding: 20; "
+                    + "-fx-border-color: orange !important; -fx-border-width: 4; -fx-border-radius: 7");
         }
         classCode.setText(person.getClassCode().value);
         person.getActivities().stream()

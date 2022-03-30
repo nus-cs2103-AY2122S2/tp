@@ -14,15 +14,15 @@ public class FindStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "findstatus";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose status contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " Command: Finds all persons whose status contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [STATUS]...\n"
+            + "Parameters: KEYWORD [STATUS]...\n\n"
             + "Example: " + COMMAND_WORD + " positive\n"
             + "Example: " + COMMAND_WORD + " negative\n"
             + "Example: " + COMMAND_WORD + " close-contact\n";
 
     public static final String ERRMSG_STATUS = "Parameters: KEYWORD [STATUS]...\n"
-            + "[STATUS] Should only be positive, negative or close-contact\n"
+            + "[STATUS] Should only be positive, negative or close-contact\n\n"
             + "Example: " + COMMAND_WORD + " positive\n"
             + "Example: " + COMMAND_WORD + " negative\n"
             + "Example: " + COMMAND_WORD + " close-contact";
