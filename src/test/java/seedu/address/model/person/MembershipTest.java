@@ -27,17 +27,17 @@ public class MembershipTest {
     public void getValue() {
         Membership member = new Membership("bronze");
 
-        assertEquals("Bronze", member.getValue());
+        assertEquals("Bronze member", member.getValue());
         assertNotEquals("Fake", member.getValue());
 
         member = new Membership("silver");
 
-        assertEquals("Silver", member.getValue());
+        assertEquals("Silver member", member.getValue());
         assertNotEquals("Fake", member.getValue());
 
         member = new Membership("gold");
 
-        assertEquals("Gold", member.getValue());
+        assertEquals("Gold member", member.getValue());
         assertNotEquals("Fake", member.getValue());
     }
 

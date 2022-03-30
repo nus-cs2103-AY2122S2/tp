@@ -115,7 +115,12 @@ public class Membership extends Field {
         } else if (tier == Tier.BRONZE) {
             value = "Bronze";
         }
-        return value;
+        String datePostFix = "";
+        if (date != null) {
+            datePostFix = " since " + date.toString();
+        }
+
+        return value + " member" + datePostFix;
     }
 
     public LocalDate getDate() {
@@ -124,12 +129,7 @@ public class Membership extends Field {
 
     @Override
     public String toString() {
-        String datePostFix = "";
-        if (date != null) {
-            datePostFix = " since " + date.toString();
-        }
-
-        return getValue() + " member" + datePostFix;
+        return getValue();
     }
 
     @Override

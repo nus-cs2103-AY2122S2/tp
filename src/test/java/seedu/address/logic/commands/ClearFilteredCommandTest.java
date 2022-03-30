@@ -14,13 +14,13 @@ import seedu.address.model.UserPrefs;
 
 
 /**
- * Contains integration tests (interaction with the Model) for {@code DeleteFilteredCommandTest}.
+ * Contains integration tests (interaction with the Model) for {@code ClearFilteredCommandTest}.
  */
 class ClearFilteredCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    void execute_deleteUnfilteredList_success() {
+    void execute_clearUnfilteredList_success() {
         ClearFilteredCommand deleteCommand = new ClearFilteredCommand();
 
         String expectedMessage = String.format(ClearFilteredCommand.MESSAGE_PERSONS_DELETED_OVERVIEW,
