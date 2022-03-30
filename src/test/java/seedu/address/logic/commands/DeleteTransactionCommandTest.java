@@ -29,7 +29,7 @@ public class DeleteTransactionCommandTest {
     private Model model;
 
     @BeforeEach
-    public void init() {
+    public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
