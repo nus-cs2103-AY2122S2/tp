@@ -64,6 +64,7 @@ Before you continue reading the rest of our user guide, the table below displays
 
 4. Double-click the file to start the app. The layout of Trackermon's [GUI](#glossary) is shown in the [section below](#user-interface).
    * Do note that for Linux OS, you may have to [enable double clicking to run JAR files](https://askubuntu.com/a/270175) first!
+   
 
 5. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
@@ -407,8 +408,8 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 **Example & Output:** `export`
 - Step 1. Navigate to the location you wish to export Trackermon data to using your OS' native GUI!
-- Step 2. Select the file and click "Save"
-- Step 3. Trackermon will export the selected file. It's that easy!
+- Step 2. Click "Save"
+- Step 3. Trackermon will export the selected file to your selected location. It's that easy!
   - If there was an error exporting the file, Trackermon will display an error message!
 
 <img src="images/Export.png">
