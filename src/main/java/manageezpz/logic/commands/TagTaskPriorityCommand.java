@@ -52,7 +52,7 @@ public class TagTaskPriorityCommand extends Command {
         Task taskToTagPriority = lastShownList.get(targetIndex.getZeroBased());
         Task taggedPriorityTask = model.tagPriorityToTask(taskToTagPriority, priority);
 
-        return new CommandResult(String.format(MESSAGE_TAG_PRIORITY_SUCCESS, priority.name()) +
-                taggedPriorityTask);
+        return new CommandResult(String.format(MESSAGE_TAG_PRIORITY_SUCCESS, priority.name())
+                + taggedPriorityTask);
     }
 }

@@ -41,19 +41,21 @@ public class DeleteTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Task> lastShownTaskList = model.getFilteredTaskList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
-        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Task taskToDelete = lastShownTaskList.get(targetIndex.getZeroBased());
         model.deleteTask(taskToDelete);
 
         List<Person> affectedPersonList = taskToDelete.getAssignees();
 
         for (Person person : affectedPersonList) {
-            model.decreaseNumOfTasks(person);
+            Person personToUpdate = lastShownPersonList.get(lastShownPersonList.indexOf(person));
+            model.decreaseNumOfTasks(personToUpdate);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));

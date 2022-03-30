@@ -5,6 +5,7 @@ import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static manageezpz.logic.commands.DeleteEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalPersons.AMY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,7 +59,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deleteEmployee 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
     }
 
     @Test

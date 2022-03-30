@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import manageezpz.model.person.exceptions.DuplicatePersonException;
 import manageezpz.model.person.exceptions.PersonNotFoundException;
-import manageezpz.model.task.Task;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -69,7 +68,10 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.set(index, editedPerson);
     }
 
-    public Person increaseNumOfTasks(Person person) {
+    /**
+     * Increases the number of tasks by one.
+     */
+    public void increaseNumOfTasks(Person person) {
         requireNonNull(person);
 
         Person updatedPerson = new Person(person.getName(), person.getPhone(),
@@ -77,24 +79,19 @@ public class UniquePersonList implements Iterable<Person> {
         updatedPerson.increaseTaskCount();
 
         setPerson(person, updatedPerson);
-
-        return updatedPerson;
     }
 
-    public Person decreaseNumOfTasks(Person person) {
+    /**
+     * Decreases the number of tasks by one.
+     */
+    public void decreaseNumOfTasks(Person person) {
         requireNonNull(person);
-
-        System.out.println("Before: " + person + String.valueOf(person.getNumOfTasks()));
 
         Person updatedPerson = new Person(person.getName(), person.getPhone(),
                 person.getEmail(), person.getNumOfTasks());
         updatedPerson.decreaseTaskCount();
 
-        System.out.println("After: " + updatedPerson + String.valueOf(person.getNumOfTasks()));
-
         setPerson(person, updatedPerson);
-
-        return updatedPerson;
     }
 
     /**

@@ -87,6 +87,9 @@ public class UniqueTaskList implements Iterable<Task> {
         return unmarkedTask;
     }
 
+    /**
+     * Tags a priority to the task.
+     */
     public Task tagPriorityToTask(Task toTagPriority, Priority priority) {
         requireNonNull(toTagPriority);
         requireNonNull(priority);
@@ -99,6 +102,9 @@ public class UniqueTaskList implements Iterable<Task> {
         return taggedPriorityTask;
     }
 
+    /**
+     * Tags an employee to the task.
+     */
     public Task tagEmployeeToTask(Task toTagEmployee, Person person) {
         requireNonNull(toTagEmployee);
         requireNonNull(person);
@@ -111,6 +117,9 @@ public class UniqueTaskList implements Iterable<Task> {
         return taggedEmployeeTask;
     }
 
+    /**
+     * Untags an employee to the task.
+     */
     public Task untagEmployeeFromTask(Task toUntagEmployee, Person person) {
         requireNonNull(toUntagEmployee);
         requireNonNull(person);

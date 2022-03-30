@@ -8,7 +8,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.stream.Stream;
 
 import manageezpz.commons.core.index.Index;
-import manageezpz.logic.commands.TagTaskCommand;
 import manageezpz.logic.commands.UntagTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 

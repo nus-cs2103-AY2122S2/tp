@@ -13,7 +13,11 @@ import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.core.LogsCenter;
 import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
-import manageezpz.model.task.*;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Priority;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -116,15 +120,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person increaseNumOfTasks(Person person) {
+    public void increaseNumOfTasks(Person person) {
         requireNonNull(person);
-        return addressBook.increaseNumOfTasks(person);
+        addressBook.increaseNumOfTasks(person);
     }
 
     @Override
-    public Person decreaseNumOfTasks(Person person) {
+    public void decreaseNumOfTasks(Person person) {
         requireNonNull(person);
-        return addressBook.decreaseNumOfTasks(person);
+        addressBook.decreaseNumOfTasks(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================

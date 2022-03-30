@@ -52,11 +52,19 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * Increases the number of tasks by one.
+     */
     public void increaseTaskCount() {
         this.numOfTasks = numOfTasks + 1;
     }
 
+    /**
+     * Decreases the number of tasks by one.
+     * At any time, the number of tasks should not be lesser than zero.
+     */
     public void decreaseTaskCount() {
+        assert numOfTasks >= 0 : "numOfTasks should not be lesser than 0";
         this.numOfTasks = numOfTasks - 1;
     }
 

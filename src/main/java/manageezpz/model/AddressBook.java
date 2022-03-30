@@ -14,7 +14,13 @@ import javafx.collections.ObservableList;
 import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.UniquePersonList;
-import manageezpz.model.task.*;
+import manageezpz.model.task.Date;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Priority;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
+import manageezpz.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -294,7 +300,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * UnMarks the task in the task list.
+     * Unmarks the task in the task list.
      * @param task the task to be unmarked.
      */
     public Task unmarkTask(Task task) {
@@ -302,6 +308,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.tasks.unmarkTask(task);
     }
 
+    /**
+     * Tags a priority to the task.
+     */
     public Task tagPriorityToTask(Task task, Priority priority) {
         requireAllNonNull(task, priority);
         return this.tasks.tagPriorityToTask(task, priority);
@@ -379,14 +388,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
-    public Person increaseNumOfTasks(Person person) {
+    /**
+     * Increases the number of tasks by one.
+     */
+    public void increaseNumOfTasks(Person person) {
         requireNonNull(person);
-        return this.persons.increaseNumOfTasks(person);
+        this.persons.increaseNumOfTasks(person);
     }
 
-    public Person decreaseNumOfTasks(Person person) {
+    /**
+     * Decreases the number of tasks by one.
+     */
+    public void decreaseNumOfTasks(Person person) {
         requireNonNull(person);
-        return this.persons.decreaseNumOfTasks(person);
+        this.persons.decreaseNumOfTasks(person);
     }
 
     /**

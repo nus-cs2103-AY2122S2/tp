@@ -3,6 +3,7 @@ package manageezpz.logic.commands;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandFailure;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static manageezpz.logic.commands.DeleteEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
@@ -44,7 +45,8 @@ public class DeleteEmployeeCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteEmployeeCommand deleteEmployeeCommand = new DeleteEmployeeCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteEmployeeCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteEmployeeCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
     }
 
     @Test
@@ -73,7 +75,8 @@ public class DeleteEmployeeCommandTest {
 
         DeleteEmployeeCommand deleteEmployeeCommand = new DeleteEmployeeCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteEmployeeCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteEmployeeCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
     }
 
     @Test

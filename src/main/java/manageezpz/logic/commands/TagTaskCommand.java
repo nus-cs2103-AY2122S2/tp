@@ -75,10 +75,10 @@ public class TagTaskCommand extends Command {
         }
 
         Task taggedEmployeeTask = model.tagEmployeeToTask(taskToTagEmployee, person);
-        Person updatedPerson = model.increaseNumOfTasks(person);
+        model.increaseNumOfTasks(person);
 
         return new CommandResult(String.format(MESSAGE_TAG_TASK_SUCCESS,
-                updatedPerson.getName().toString()) + taggedEmployeeTask);
+                person.getName().toString()) + taggedEmployeeTask);
     }
 
 }

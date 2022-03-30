@@ -24,6 +24,7 @@ import manageezpz.model.ReadOnlyUserPrefs;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
+import manageezpz.model.task.Priority;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
 import manageezpz.testutil.PersonBuilder;
@@ -145,6 +146,16 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
+        public void increaseNumOfTasks(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void decreaseNumOfTasks(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -245,6 +256,11 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
+        public Task tagPriorityToTask(Task task, Priority priority) {
+            return null;
+        }
+
+        @Override
         public void findTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -255,7 +271,7 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public void untagTask(Task task, Person person) {
+        public Task untagEmployeeFromTask(Task task, Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

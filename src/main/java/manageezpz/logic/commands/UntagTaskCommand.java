@@ -75,10 +75,10 @@ public class UntagTaskCommand extends Command {
         }
 
         Task untaggedEmployeeTask = model.untagEmployeeFromTask(taskToUntagEmployee, person);
-        Person updatedPerson = model.decreaseNumOfTasks(person);
+        model.decreaseNumOfTasks(person);
 
         return new CommandResult(String.format(MESSAGE_UNTAG_TASK_SUCCESS,
-                updatedPerson.getName().toString()) + untaggedEmployeeTask);
+                person.getName().toString()) + untaggedEmployeeTask);
     }
 
 }

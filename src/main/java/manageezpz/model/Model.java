@@ -7,7 +7,11 @@ import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
-import manageezpz.model.task.*;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Priority;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
 
 /**
  * The API of the Model component.
@@ -80,9 +84,9 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    Person increaseNumOfTasks(Person person);
+    void increaseNumOfTasks(Person person);
 
-    Person decreaseNumOfTasks(Person person);
+    void decreaseNumOfTasks(Person person);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

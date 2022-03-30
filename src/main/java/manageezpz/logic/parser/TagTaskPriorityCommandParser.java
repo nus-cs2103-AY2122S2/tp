@@ -1,6 +1,9 @@
 package manageezpz.logic.parser;
 
-import static manageezpz.commons.core.Messages.*;
+import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_PRIORITY;
+import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_TASK_NUMBER;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PRIORITY;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.stream.Stream;
