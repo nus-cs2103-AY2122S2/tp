@@ -44,10 +44,10 @@ class JsonAdaptedClassGroup {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
         this.module = module;
-        if (classGroupStudents != null) {
+        if (!classGroupStudents.isEmpty()) {
             this.classGroupStudents.addAll(classGroupStudents);
         }
-        if (lessons != null) {
+        if (!lessons.isEmpty()) {
             this.lessons.addAll(lessons);
         }
     }

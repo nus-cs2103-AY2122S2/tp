@@ -25,7 +25,7 @@ class JsonAdaptedStudentAttendance {
      */
     @JsonCreator
     public JsonAdaptedStudentAttendance(@JsonProperty("student") JsonAdaptedStudent student,
-                                        @JsonProperty("attendance") Boolean isPresent) {
+                                        @JsonProperty("isPresent") Boolean isPresent) {
         this.student = student;
         this.isPresent = isPresent;
     }
