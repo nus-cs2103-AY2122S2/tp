@@ -35,8 +35,8 @@ public class AddTransactionCommand extends Command {
             + "dd/2022-11-11 "
             + "n/Paid $12.50 for haircut.";
 
-    public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s;\n"
-            + "With a Transaction: %2$s";
+    public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %s;\n"
+            + "With a Transaction: %s";
 
     private final Index index;
     private final TransactionBuilder transactionBuilder;

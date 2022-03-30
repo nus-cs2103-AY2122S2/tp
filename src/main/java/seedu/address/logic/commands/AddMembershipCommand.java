@@ -30,7 +30,7 @@ public class AddMembershipCommand extends Command {
             + Membership.PREFIX + "gold "
             + "[" + Membership.DATE_PREFIX + "2022-02-03]";
 
-    public static final String MESSAGE_SUCCESS = "Added membership to %1$s (%1$s).";
+    public static final String MESSAGE_SUCCESS = "Added membership to %s (%s).";
 
     private final Index index;
     private final Membership membership;

@@ -26,8 +26,8 @@ import seedu.address.model.person.Remark;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "Client list sorted accordingly.";
-    public static final String MESSAGE_EMPTY_ERROR = "No fields specified. "
-        + " Client list remains unchanged.";
+    public static final String MESSAGE_EMPTY_ERROR =
+        "No fields specified. Client list remains unchanged.";
     public static final String DESCENDING_KEYWORD = "desc";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sort the client list according to the order of the fields specified.\n"

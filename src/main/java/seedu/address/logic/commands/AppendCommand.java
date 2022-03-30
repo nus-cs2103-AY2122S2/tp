@@ -18,7 +18,7 @@ public class AppendCommand extends Command {
     public static final String COMMAND_WORD = "append";
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Append fields from the client in the list as specified by the index.";
-    public static final String MESSAGE_SUCCESS = "Appended fields to %1$s.";
+    public static final String MESSAGE_SUCCESS = "Appended fields to %s.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 
     private final Index index;

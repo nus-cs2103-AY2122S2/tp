@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + Tag.PREFIX + "vendor "
             + Tag.PREFIX + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "Added %1$s.";
+    public static final String MESSAGE_SUCCESS = "Added %s.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 
     private final Person toAdd;
