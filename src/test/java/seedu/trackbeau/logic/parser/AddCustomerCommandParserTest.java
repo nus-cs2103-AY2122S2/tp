@@ -44,10 +44,10 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
-import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
-import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 import static seedu.trackbeau.testutil.TypicalCustomers.AMY;
 import static seedu.trackbeau.testutil.TypicalCustomers.BOB;
 

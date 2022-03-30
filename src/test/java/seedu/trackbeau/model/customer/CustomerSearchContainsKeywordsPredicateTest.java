@@ -25,15 +25,18 @@ public class CustomerSearchContainsKeywordsPredicateTest {
         ArrayList<List<String>> secondPrefixArr = new ArrayList<List<String>>(Collections
                 .nCopies(FIND_ATTRIBUTE_COUNT, null));
         firstPrefixArr.set(0, firstPredicateKeywordList);
-        CustomerSearchContainsKeywordsPredicate firstPredicate = new CustomerSearchContainsKeywordsPredicate(firstPrefixArr);
+        CustomerSearchContainsKeywordsPredicate firstPredicate =
+                new CustomerSearchContainsKeywordsPredicate(firstPrefixArr);
         secondPrefixArr.set(0, secondPredicateKeywordList);
-        CustomerSearchContainsKeywordsPredicate secondPredicate = new CustomerSearchContainsKeywordsPredicate(secondPrefixArr);
+        CustomerSearchContainsKeywordsPredicate secondPredicate =
+                new CustomerSearchContainsKeywordsPredicate(secondPrefixArr);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        CustomerSearchContainsKeywordsPredicate firstPredicateCopy = new CustomerSearchContainsKeywordsPredicate(firstPrefixArr);
+        CustomerSearchContainsKeywordsPredicate firstPredicateCopy =
+                new CustomerSearchContainsKeywordsPredicate(firstPrefixArr);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
