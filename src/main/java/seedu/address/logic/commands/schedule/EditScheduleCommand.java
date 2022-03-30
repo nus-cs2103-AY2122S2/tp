@@ -69,6 +69,14 @@ public class EditScheduleCommand extends ScheduleCommand {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
 
+        if (!editedInterview.hasMatchingAvailability()) {
+            throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
+        }
+
+        if (!editedInterview.isDuringOfficeHour()) {
+            throw new CommandException(MESSAGE_NOT_OFFICE_HOUR);
+        }
+
         model.setInterview(interviewToEdit, editedInterview);
         model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
