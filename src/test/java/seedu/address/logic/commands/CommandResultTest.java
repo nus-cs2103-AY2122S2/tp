@@ -36,6 +36,29 @@ public class CommandResultTest {
     }
 
     @Test
+    public void constructor_helpCommandResultAssignment_success() {
+        CommandResult helpCommand =
+                new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE, true, false, false);
+        assertTrue(helpCommand.isShowHelp());
+    }
+
+    @Test
+    public void constructor_summariseCommandResultAssignment_success() {
+        CommandResult summariseCommand =
+                new CommandResult(SummariseCommand.MESSAGE_SUMMARISE_PERSON_SUCCESS, false,
+                        false, true);
+        assertTrue(summariseCommand.isSummarise());
+    }
+
+    @Test
+    public void constructor_exitCommandResultAssignment_success() {
+        CommandResult exitCommand =
+                new CommandResult(SummariseCommand.MESSAGE_SUMMARISE_PERSON_SUCCESS, false,
+                        true, false);
+        assertTrue(exitCommand.isExit());
+    }
+
+    @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
 
