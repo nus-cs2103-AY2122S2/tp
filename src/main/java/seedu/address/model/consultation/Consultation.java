@@ -87,16 +87,17 @@ public class Consultation {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getNric())
-                .append("Date: ")
+        builder.append("Nric: ")
+                .append(getNric())
+                .append(" Date: ")
                 .append(getDate())
-                .append("Time: ")
+                .append(" Time: ")
                 .append(getTime())
-                .append("Diagnosis: ")
+                .append(" Diagnosis: ")
                 .append(getDiagnosis())
-                .append("; Fee: ")
+                .append(" Fee: ")
                 .append(getFee())
-                .append("; Notes: ")
+                .append(" Notes: ")
                 .append(getNotes());
 
         return builder.toString();

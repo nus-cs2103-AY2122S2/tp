@@ -23,8 +23,9 @@ public class AddTestResultCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + PREFIX_TYPE + "test"
-            + ": Adds the results of a test taken for a patient in the MedBook. "
+            + ": Adds the results of a test taken for a patient in the MedBook. \n"
             + "Parameters: "
+            + PREFIX_TYPE + "test"
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "

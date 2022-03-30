@@ -29,8 +29,10 @@ public class AddMedicalCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final CommandType COMMAND_TYPE = CommandType.MEDICAL;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds medical information of a patient to MedBook. "
-            + "\nParameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + PREFIX_TYPE + "medical "
+            + ": Adds medical information of a patient to MedBook. \n"
+            + "Parameters: "
             + PREFIX_TYPE + "medical "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_AGE + "AGE "
@@ -43,8 +45,8 @@ public class AddMedicalCommand extends Command {
             + PREFIX_FAMILY_HISTORY + "FAMILY_HISTORY "
             + PREFIX_IMMUNIZATION_HISTORY + "IMMUNIZATION_HISTORY "
             + PREFIX_GENDER + "GENDER "
-            + PREFIX_ETHNICITY + "ETHNICITY "
-            + "\nExample: " + COMMAND_WORD + " "
+            + PREFIX_ETHNICITY + "ETHNICITY \n"
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "medical "
             + PREFIX_NRIC + "S1234567L "
             + PREFIX_AGE + "22 "
