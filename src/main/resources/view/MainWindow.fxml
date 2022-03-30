@@ -137,11 +137,6 @@
                                               <padding>
                                                   <Insets bottom="10" left="10" right="10" top="10" />
                                               </padding>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Insights">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
                                               <StackPane fx:id="scheduleCalendarPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                           </VBox>
       

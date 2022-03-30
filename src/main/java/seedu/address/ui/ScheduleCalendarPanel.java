@@ -36,7 +36,10 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
     private GridPane calendar;
 
     @FXML
-    private Text month;
+    private Text todayDay;
+
+    @FXML
+    private Text todayDate;
 
     private ObservableList<Schedule> schedules;
 
@@ -44,22 +47,31 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
         super(FXML);
         this.schedules = schedules;
 
-        setMonth();
+        setTodayDay();
+        setTodayDate();
         setDates();
     }
 
     public void update(ObservableList<Schedule> schedules) {
         this.schedules = schedules;
 
-        setMonth();
+        setTodayDay();
+        setTodayDate();
         setDates();
-
     }
 
-    public void setMonth() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+    public void setTodayDay() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE");
         LocalDateTime localDateTime = LocalDateTime.now();
-        month.setText(dateTimeFormatter.format(localDateTime));
+        todayDay.setText(dateTimeFormatter.format(localDateTime));
+        todayDay.setFont(new Font(45));
+    }
+
+    public void setTodayDate() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        todayDate.setText(dateTimeFormatter.format(localDateTime));
+        todayDate.setFont(new Font(25));
     }
 
     public void setDates() {

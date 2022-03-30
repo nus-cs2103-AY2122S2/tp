@@ -548,3 +548,13 @@
 .player-suggestion .label {
     -fx-text-fill: black !important;
 }
+
+.day-box {
+    -fx-padding: 0 27 20 0;
+}
+
+.date-box {
+    -fx-padding: 0 27 20 0;
+    -fx-border-width: 0 0 5 0;
+    -fx-border-color: #383838;
+}
