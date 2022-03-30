@@ -196,11 +196,11 @@ Examples:
 
 Grabs person's (single or multiple) attribute.
 
-Format: `grab ATTRIBUTE_PREFIX/[INDEX]` 
+Format: `grab ATTRIBUTE_PREFIX/[INDEX]`
 
-* `INDEX` is optional. If an index is provided, it will grab the attribute of the person with this `INDEX`. If it 
+* `INDEX` is optional. If an index is provided, it will grab the attribute of the person with this `INDEX`. If it
 is left blank, it will grab this attribute of all the persons in UNite.
-* The available `ATTRIBUTE_PREFIX` that you can grab are `n/` for name, `p/` for phone number, `e/` for email, 
+* The available `ATTRIBUTE_PREFIX` that you can grab are `n/` for name, `p/` for phone number, `e/` for email,
 `a/` for address, `c/` for course, `m/` for matric card, `tele/` for telegram.
 
 Examples:

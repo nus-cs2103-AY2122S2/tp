@@ -100,7 +100,7 @@ public class AddressBookParser {
 
         case RemarkTagCommand.COMMAND_WORD:
             return new RemarkTagCommandParser().parse(arguments);
-            
+
         case GrabCommand.COMMAND_WORD:
             return new GrabCommandParser().parse(arguments);
 
