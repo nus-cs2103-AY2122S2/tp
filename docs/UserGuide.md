@@ -31,7 +31,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 
     * **`list`**<br>Lists all contacts and upcoming events.
 
-    * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01`<br>Adds a contact named `fred` to the Address Book.
+    * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01`<br>Adds a contact named `fred` to NUSocials.
 
     * **`tag`** `2 edu/computer science m/CS2040S`<br>Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
 
@@ -58,8 +58,8 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULES]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12345678 p/87654321`, only `p/87654321` will be taken.
+* If a parameter is expected only once in the command but you specified it multiple times, they will all be rejected.<br>
+  e.g. if you specify `p/12345678 p/87654321`, both will be rejected.
   
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -78,15 +78,28 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all persons and upcoming events: `list`
-Shows a list of all persons and upcoming events in the address book.
+### Listing all persons: `list`
+Shows a list of all persons in NUSocials.
 
 Format: `list`
 
 * All existing persons and upcoming events are automatically rendered when the application is launched.
 * The different tags are listed as follows: yellow for education, blue for modules, orange for CCAs and red for internships.
 * Personal details are listed in the following order: Phone number, Address, Email.
-* Upcoming events are automatically sorted in chronological order.
+
+### Showing events: `showevents`
+Shows a list of all events in NUSocials.
+
+Format: `showevents`
+
+* Events shown are automatically sorted in chronological order.
+
+Alternate formats:
+1. `showevents -upcoming`<br>
+    * Shows a list of all upcoming events instead
+    <br><br>
+2. `showevents -past`<br>
+    * Shows a list of all past events instead
 
 ### Adding a person: `add`
 Adds a person to NUSocials. 
@@ -178,7 +191,7 @@ Creates the Event and adds into NUSocials.
 
 ### Cancelling an event : `cancelevent`
 
-Deletes the specified event from the address book.
+Deletes the specified event from NUSocials.
 
 Format: `cancelevent INDEX`
 
@@ -199,7 +212,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from NUSocials.
 
 Format: `delete INDEX`
 
@@ -216,18 +229,18 @@ Alternate Format: `delete INDEX…​`
 * The index refers to the index number shown in the displayed person list.
 * Each index **must be separated by a whitespace**
 
-Examples:
+Example:
 * `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the currently shown list.
 
-### Locating persons: `find`
+### Finding persons: `find`
 
 Finds persons that match any of the given fields and tags.
 
-Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only exact matches for fields will be allowed e.g. `Han` will not match `Hans`
 * Persons matching at least one of the fields or tags will be returned (i.e. `OR` search).
 * All arguments for tags provided must be an exact match to existing tags.
 
@@ -237,15 +250,15 @@ Examples:
 * `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find i/Shopee m/cs2040s cs2030s'](images/findShopeeCS2040sCS2030sResult.png)
 
-### Locating specific persons: `find -s`
+### Finding specific persons: `find -s`
 
 Finds persons that match all given fields and tags.
 
-Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `find -s [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only exact matches for fields will be allowed e.g. `Han` will not match `Hans`
 * Only persons matching all fields and tags will be returned (i.e. `AND` search).
 * All arguments for tags provided must be an exact match to existing tags.
 
@@ -254,7 +267,7 @@ Examples:
 * `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with cs2040s, cs2030s and Shopee)<br>
   ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
 
-### Locating an event: `find -e`
+### Finding an event: `find -e`
 
 Finds an event that matches any of the given details
 
@@ -262,11 +275,11 @@ Format: `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICPA
 
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `lunch` will match `Lunch`
-* Only full words will be matched e.g. `lun` will not match `lunch`
-* Events matching at least one of the field will be returned (i.e. `OR` search).
+* Only exact matches will be allowed e.g. `lun` will not match `lunch`
+* Events matching at least one of the fields will be returned (i.e. `OR` search).
 
-Examples:
-* `find -e name/lunch part/alex` returns all events with `lunch` in its name and all events involving Alex<br>
+Example:
+* `find -e name/lunch part/Alex Yeoh` returns all events named `lunch` and all events involving Alex Yeoh<br>
 
 ### Clearing all entries : `clear`
 
@@ -315,10 +328,11 @@ Action | Format, Examples
 **Event** | `event INDEX…​ name/EVENT NAME info/INFORMATION d/DATE t/TIME` <br> e.g., `event 1 name/Dinner Date info/Having Dinner at Bread Street Kitchen by Gordon Ramsay d/2022-12-20 t/20:15`
 **Cancelevent** | `cancelevent INDEX…​` <br> e.g.,`cancelevent 1 2 3`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​INDEX` <br> e.g. `delete 1 3 5`
+**Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​` <br> e.g. `delete 1 3 5`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`
 **Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`
 **Find -s** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
 **Find -e** | `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICIPANT]…​ [dt/DATE AND TIME]…​`<br> e.g., `find -e name/Dinner info/Candice's birthday dt/2022-05-12 19:30`
 **List** | `list`
+**Showevents** | `showevents` `showevents -upcoming` `showevents -past`
 **Help** | `help`

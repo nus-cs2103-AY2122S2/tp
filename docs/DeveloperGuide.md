@@ -446,6 +446,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                     | tag additional information to an existing contact        | keep a memo of such details for future references                                                 |
 | `* * `   | user                                                     | add an event and tag relevant persons in my contact list | keep a memo of such upcoming events with my contacts for future references                        |
 | `* * `   | user                                                     | view all of my upcoming events                           |                                                                                                   |
+| `* * `   | user                                                     | view all of my past events                               |                                                                                                   |
+| `* * `   | user                                                     | view all of my past and upcoming events                  |                                                                                                   |
 | `* * `   | user                                                     | cancel an event                                          |                                                                                                   |
 | `* * `   | user                                                     | cancel multiple events at once                           | cancel unnecessary events faster                                                                  |
 | `* * `   | user                                                     | find a person by name                                    | locate details of persons without having to go through the entire list                            |
@@ -575,14 +577,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 ````
 
-### Use case 6: Viewing all upcoming events
+### Use case 6: Viewing events
 
 **MSS**
 ````
-1. User requests to list all upcoming events
-2. NUSocials displays all upcoming events in a list
+1. User requests to list all events
+2. NUSocials displays all events in a list
 
     Use case ends.
+````
+**Extensions**
+````
+1a. User specifies past or upcoming events.
+
+    Use case resumes at step 2.
+    
+2a. NUSocials displays past or upcoming events instead.
+
+    Use case ends.
+    
+2b. The given find command is invalid.
+
+    - 2b1. NUSocials shows an error message.
+
+      Use case resumes at step 1.
 ````
 
 ### Use case 7: Finding a person (any field)
@@ -591,6 +609,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ````
 1. User requests to find any person using specific fields
 2. NUSocials shows a list of persons matching any fields
+
     Use case ends.
 ````
 **Extensions**
@@ -623,7 +642,7 @@ The user wants to find a person that has every field instead.
 ````
 2a. The list is empty.
 
-  Use case end
+  Use case ends.
 
 3a. The given index is invalid.
 
