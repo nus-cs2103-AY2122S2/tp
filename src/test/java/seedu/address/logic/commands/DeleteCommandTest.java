@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.TypicalPersons;
@@ -22,7 +22,7 @@ import seedu.address.testutil.TypicalPersons;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-    private static final Name INVALID_NAME = new Name("RAcHel");
+    private static final LineupName INVALID_NAME = new LineupName("RAcHel");
     private static final seedu.address.model.lineup.LineupName INVALID_LINEUP_NAME = new seedu.address.model.lineup.LineupName("Not a lineup");
 
     private static final Person VALID_PERSON = TypicalPersons.BENSON;

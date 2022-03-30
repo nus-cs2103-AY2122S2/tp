@@ -7,7 +7,6 @@ import seedu.address.model.schedule.ScheduleName;
 
 public class ScheduleBuilder {
     public static final String DEFAULT_SCHEDULE_NAME = "NBA FINALS";
-    public static final String NEW_SCHEDULE_NAME = "NBA SEMIFINALS";
     public static final String DEFAULT_DESCRIPTION = "Game1 Lakers vs Bucks";
     public static final String DEFAULT_DATETIME = "22/02/2022 1222";
 

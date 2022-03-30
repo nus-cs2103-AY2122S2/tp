@@ -13,7 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -125,7 +125,7 @@ public class ModelManager implements Model {
 
     // Added to fit MyGM needs.
     @Override
-    public boolean hasPersonName(Name targetName) {
+    public boolean hasPersonName(LineupName targetName) {
         requireNonNull(targetName);
         return addressBook.hasPersonName(targetName);
     }
@@ -137,7 +137,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person getPerson(Name targetName) {
+    public Person getPerson(LineupName targetName) {
         requireNonNull(targetName);
         return addressBook.getPerson(targetName);
     }

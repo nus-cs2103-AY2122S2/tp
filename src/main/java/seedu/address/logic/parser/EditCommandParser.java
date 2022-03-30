@@ -27,7 +27,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditScheduleDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_EMAIL, PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP,
                         PREFIX_SCHEDULE, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_INDEX);
 
-        Name targetPlayerName;
+        LineupName targetPlayerName;
         seedu.address.model.lineup.LineupName targetLineupName;
         Index index;
 
@@ -69,12 +69,9 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Player level
         if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
-            if (args.equals(" P/")) {
-                throw new ParseException(String.format(
-                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER));
-            }
             try {
                 targetPlayerName = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
+                // System.out.println(targetPlayerName);
             } catch (ParseException pe) {
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER), pe);
@@ -109,12 +106,20 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditCommand(targetPlayerName, editPersonDescriptor);
         }
 
+        if (arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
+            }
+        }
+
         //Schedule level
         try {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SCHEDULE).get());
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
@@ -135,7 +140,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
+
         return new EditCommand(index, editScheduleDescriptor);
+
+
     }
 
     /**

@@ -1,17 +1,12 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
-import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
-import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,15 +19,10 @@ import seedu.address.model.person.LineupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleNameContainsKeywordsPredicate;
 
-import javax.swing.text.View;
-
 /**
  * Parses input arguments and creates a new ViewCommand object
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
-
-    private static final String ALL_SCHEDULES = "all";
-    private static final String ARCHIVED_SCHEDULES = "archive";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
@@ -41,8 +31,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      */
     @Override
     public ViewCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP, PREFIX_SCHEDULE
-                , PREFIX_ALL_SCHEDULE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP, PREFIX_SCHEDULE);
 
         boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
         boolean hasLSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP); // L/
@@ -119,26 +108,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             List<String> prefixAndArgument = new ArrayList<>();
             prefixAndArgument.add(PREFIX_SCHEDULE.toString());
 
-            // view S/ -> view all active schedules by default
+            // view P/ --> view all player
             if (args.equals(" S/")) {
-                return new ViewCommand(null, PREDICATE_SHOW_ACTIVE_SCHEDULES, prefixAndArgument);
-            }
-
-            System.out.println(arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE));
-            // view all schedules
-            if (arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE)) {
-                System.out.println(argMultimap.getValue(PREFIX_ALL_SCHEDULE));
-                if (argMultimap.getValue(PREFIX_ALL_SCHEDULE).get().equals(ARCHIVED_SCHEDULES)) {
-                    System.out.println("archived");
-                    return new ViewCommand(null, PREDICATE_SHOW_ARCHIVED_SCHEDULES, prefixAndArgument);
-                }
-                if (argMultimap.getValue(PREFIX_ALL_SCHEDULE).get().equals(ALL_SCHEDULES)) {
-                    System.out.println("all");
-                    return new ViewCommand(null, PREDICATE_SHOW_ALL_SCHEDULES, prefixAndArgument);
-                } else {
-                    throw new ParseException(String.format(MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT,
-                            ViewCommand.MESSAGE_ACTIVE_SCHEDULE_USAGE));
-                }
+                return new ViewCommand(null, PREDICATE_SHOW_ALL_SCHEDULES, prefixAndArgument);
             }
 
             // check has preamble. check here because if arg = "S/", preamble = "S/" as well

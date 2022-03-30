@@ -8,7 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -19,7 +19,7 @@ public class PutCommandTest {
             .withTags("C").build();
     private static final Lineup VALID_LINEUP = new Lineup(new seedu.address.model.lineup.LineupName("Dummy"));
     private static final Lineup VALID_LINEUP_2 = new Lineup(new seedu.address.model.lineup.LineupName("Dummy2"));
-    private static final Name VALID_NAME = VALID_PERSON.getName();
+    private static final LineupName VALID_NAME = VALID_PERSON.getName();
     private static final seedu.address.model.lineup.LineupName VALID_LINEUP_NAME = VALID_LINEUP.getLineupName();
     private static final seedu.address.model.lineup.LineupName VALID_LINEUP_NAME_2 = VALID_LINEUP_2.getLineupName();
 

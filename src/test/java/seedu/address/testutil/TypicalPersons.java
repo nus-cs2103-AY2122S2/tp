@@ -34,24 +34,23 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withHeight("173").withWeight("72")
-            .withJerseyNumber("0").withTags("SF", "PF").build();
+            .withJerseyNumber("0").withTags("SF", "PF").withLineups("Starting 5").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withJerseyNumber("1").withHeight("161").withWeight("50").build();
+            .withEmail("heinz@example.com").withJerseyNumber("1").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withJerseyNumber("3").withHeight("191")
-            .withWeight("80").withTags("C").build();
+            .withEmail("cornelia@example.com").withJerseyNumber("3").withTags("C").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withJerseyNumber("13").withHeight("161").withWeight("50").build();
+            .withEmail("werner@example.com").withJerseyNumber("13").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withJerseyNumber("18").withHeight("161").withWeight("50").build();
+            .withEmail("lydia@example.com").withJerseyNumber("18").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withJerseyNumber("19").withHeight("161").withWeight("50").build();
+            .withEmail("anna@example.com").withJerseyNumber("19").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withHeight("161").withJerseyNumber("81").withWeight("50").build();
+            .withEmail("stefan@example.com").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withHeight("161").withJerseyNumber("80").withWeight("50").build();
+            .withEmail("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

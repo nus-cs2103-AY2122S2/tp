@@ -10,7 +10,7 @@ import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
@@ -26,37 +26,37 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Person(new LineupName("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Height("172"), new JerseyNumber("23"),
                 getTagSet("PG", "SG"), new Weight("60")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Person(new LineupName("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Height("181"), new JerseyNumber("11"),
                 getTagSet("SG"), new Weight("85")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+            new Person(new LineupName("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Height("175"), new JerseyNumber("0"),
                 getTagSet("PG", "SG"), new Weight("60")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+            new Person(new LineupName("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Height("190"), new JerseyNumber("15"),
                 getTagSet("PF", "C"), new Weight("90")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+            new Person(new LineupName("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Height("213"), new JerseyNumber("1"),
                 getTagSet("C"), new Weight("110")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+            new Person(new LineupName("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Height("188"), new JerseyNumber("3"),
                 getTagSet("SF", "PF"), new Weight("90")),
-            new Person(new Name("Kevin Durantula"), new Phone("95326789"), new Email("durantula@example.com"),
+            new Person(new LineupName("Kevin Durantula"), new Phone("95326789"), new Email("durantula@example.com"),
                     new Height("211"), new JerseyNumber("7"),
                     getTagSet("SG", "SF", "PF"), new Weight("105"), getLineupSet("snake", "all star")),
-            new Person(new Name("Lebron LeGM"), new Phone("92623662"), new Email("legm@example.com"),
+            new Person(new LineupName("Lebron LeGM"), new Phone("92623662"), new Email("legm@example.com"),
                     new Height("206"), new JerseyNumber("6"),
                     getTagSet("SF", "PF", "C"), new Weight("120"), getLineupSet("all star")),
-            new Person(new Name("Stephen Spice"), new Phone("96564417"), new Email("steph@example.com"),
+            new Person(new LineupName("Stephen Spice"), new Phone("96564417"), new Email("steph@example.com"),
                     new Height("188"), new JerseyNumber("30"),
                     getTagSet("PG", "SG"), new Weight("90"), getLineupSet("all star")),
-            new Person(new Name("Joel EnBig"), new Phone("92683747"), new Email("enbigb@example.com"),
+            new Person(new LineupName("Joel EnBig"), new Phone("92683747"), new Email("enbigb@example.com"),
                     new Height("213"), new JerseyNumber("21"),
                     getTagSet("C"), new Weight("90"), getLineupSet("all star")),
-            new Person(new Name("Greek Koumpo"), new Phone("85624417"), new Email("greek@example.com"),
+            new Person(new LineupName("Greek Koumpo"), new Phone("85624417"), new Email("greek@example.com"),
                     new Height("208"), new JerseyNumber("34"),
                     getTagSet("SF", "PF"), new Weight("110"), getLineupSet("all star", "freak"))
         };
@@ -86,10 +86,7 @@ public class SampleDataUtil {
                 new ScheduleDateTime("19/02/2020 1200")),
             new Schedule(new ScheduleName("Free throw practice"),
                 new ScheduleDescription("Dwight needs to improve free throws"),
-                new ScheduleDateTime("19/06/2021 1200")),
-            new Schedule(new ScheduleName("An active schedule"),
-                    new ScheduleDescription("Dwight needs to improve free throws"),
-                    new ScheduleDateTime("19/06/2023 1200"))
+                new ScheduleDateTime("19/06/2021 1200"))
         };
     }
 
@@ -102,6 +99,7 @@ public class SampleDataUtil {
             sampleAb.initalizePerson(samplePerson);
         }
         for (Schedule sampleSchedule : getSampleSchedules()) {
+            System.out.println(sampleSchedule);
             sampleAb.addSchedule(sampleSchedule);
         }
         return sampleAb;

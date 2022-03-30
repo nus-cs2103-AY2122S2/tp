@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's weight in the MyGM.
  */
-public class Weight implements Comparable<Weight> {
+public class Weight {
 
     public static final String MESSAGE_CONSTRAINTS = "Weights should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -47,10 +47,5 @@ public class Weight implements Comparable<Weight> {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    @Override
-    public int compareTo(Weight w) {
-        return Integer.parseInt(value) - Integer.parseInt(w.value);
     }
 }

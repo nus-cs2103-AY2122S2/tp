@@ -3,7 +3,6 @@ package seedu.address.model.schedule;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -43,14 +42,6 @@ public class Schedule {
     public boolean isMatchName(ScheduleName targetName) {
         requireNonNull(targetName);
         return getScheduleName().equals(targetName);
-    }
-
-    /**
-     * Returns true if the event is still active, i.e. on a future date.
-     */
-    public boolean isActive() {
-        LocalDateTime now = LocalDateTime.now();
-        return scheduleDateTime.getScheduleDateTime().isAfter(now);
     }
 
     /**

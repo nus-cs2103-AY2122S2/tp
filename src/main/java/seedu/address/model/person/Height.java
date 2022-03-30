@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's height in the MyGM.
  */
-public class Height implements Comparable<Height> {
+public class Height {
 
     public static final String MESSAGE_CONSTRAINTS = "Heights should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -50,10 +50,5 @@ public class Height implements Comparable<Height> {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    @Override
-    public int compareTo(Height h) {
-        return Integer.parseInt(value) - Integer.parseInt(h.value);
     }
 }

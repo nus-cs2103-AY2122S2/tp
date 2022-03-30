@@ -75,7 +75,6 @@ class JsonSerializableAddressBook {
             addressBook.initalizePerson(person);
         }
 
-
         for (JsonAdaptedSchedule jsonAdaptedSchedule : schedules) {
             Schedule schedule = jsonAdaptedSchedule.toModelType();
             if (addressBook.hasSchedule(schedule)) {

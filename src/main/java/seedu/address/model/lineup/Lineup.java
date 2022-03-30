@@ -100,18 +100,4 @@ public class Lineup {
 
         return builder.toString();
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Lineup)) {
-            return false;
-        }
-
-        Lineup otherLineup = (Lineup) other;
-        return sameLineupName(otherLineup.getLineupName());
-    }
 }
