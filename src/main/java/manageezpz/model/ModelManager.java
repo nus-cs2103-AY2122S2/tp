@@ -13,10 +13,7 @@ import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.core.LogsCenter;
 import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
-import manageezpz.model.task.Deadline;
-import manageezpz.model.task.Event;
-import manageezpz.model.task.Task;
-import manageezpz.model.task.Todo;
+import manageezpz.model.task.*;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -118,6 +115,18 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Person increaseNumOfTasks(Person person) {
+        requireNonNull(person);
+        return addressBook.increaseNumOfTasks(person);
+    }
+
+    @Override
+    public Person decreaseNumOfTasks(Person person) {
+        requireNonNull(person);
+        return addressBook.decreaseNumOfTasks(person);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -192,13 +201,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markTask(Task task) {
-        addressBook.markTask(task);
+    public Task markTask(Task task) {
+        return addressBook.markTask(task);
     }
 
     @Override
-    public void unmarkTask(Task task) {
-        addressBook.unmarkTask(task);
+    public Task unmarkTask(Task task) {
+        return addressBook.unmarkTask(task);
+    }
+
+    @Override
+    public Task tagPriorityToTask(Task task, Priority priority) {
+        return addressBook.tagPriorityToTask(task, priority);
     }
 
     @Override
@@ -207,13 +221,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void tagTask(Task task, Person person) {
-        addressBook.tagTask(task, person);
+    public Task tagEmployeeToTask(Task task, Person person) {
+        return addressBook.tagEmployeeToTask(task, person);
     }
 
     @Override
-    public void untagTask(Task task, Person person) {
-        addressBook.untagTask(task, person);
+    public Task untagEmployeeFromTask(Task task, Person person) {
+        return addressBook.untagEmployeeFromTask(task, person);
     }
 
     @Override

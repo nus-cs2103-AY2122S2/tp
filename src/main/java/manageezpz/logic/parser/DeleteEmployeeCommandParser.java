@@ -7,7 +7,7 @@ import manageezpz.logic.commands.DeleteEmployeeCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteEmployeeCommand object
  */
 public class DeleteEmployeeCommandParser implements Parser<DeleteEmployeeCommand> {
 

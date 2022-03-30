@@ -235,12 +235,12 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public void markTask(Task task) {
+        public Task markTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void unmarkTask(Task task) {
+        public Task unmarkTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -250,7 +250,7 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public void tagTask(Task task, Person person) {
+        public Task tagEmployeeToTask(Task task, Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

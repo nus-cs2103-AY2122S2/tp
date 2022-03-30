@@ -14,17 +14,17 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private int numOfTask;
+    private int numOfTasks;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, int numOfTask) {
+    public Person(Name name, Phone phone, Email email, int numOfTasks) {
         requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.numOfTask = numOfTask;
+        this.numOfTasks = numOfTasks;
     }
 
     public Name getName() {
@@ -53,15 +53,15 @@ public class Person {
     }
 
     public void increaseTaskCount() {
-        this.numOfTask = numOfTask + 1;
+        this.numOfTasks = numOfTasks + 1;
     }
 
     public void decreaseTaskCount() {
-        this.numOfTask = numOfTask - 1;
+        this.numOfTasks = numOfTasks - 1;
     }
 
-    public int getNumOfTask() {
-        return numOfTask;
+    public int getNumOfTasks() {
+        return numOfTasks;
     }
 
     /**
