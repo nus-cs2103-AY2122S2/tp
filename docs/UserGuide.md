@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: Tracey User Guide
 ---
 
 # Tracey
@@ -9,8 +9,29 @@ Tracey is a **desktop app for managing health statuses of NUS Hall Residents, op
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
+What are CLIs? What are GUIs? 
+
+1) CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
+2) GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
+
+Note that the main difference between GUI and CLI is the method of interaction.
+
+As Tracey is a Command Line Interface, these are the aspects that highlight the power of Tracey and why it was developed using a CLI:
+
+1. **Speed** <br>
+Tracey offers immense speed. GUIs require additional resources to render graphical components and thus is slower than CLIs
+2. **Functionality** <br>
+Tracey offers flexibility in terms of its use. A GUI does not have the same level of functionality and granular control as a CLI. This is portrayed in the various forms of features that Tracey offers that you can expand on later in this User Guide.
+3. **Scalability** <br>
+Simple command functions in Tracey allow you to handle various complex features. Additionally, if newer features were to be added in future iterations, CLIs allow for easier integration as GUIs require rendering and creation of graphical components.
+
+Sounds exciting? Proceed on to the next section to learn more about Tracey!
+
+We hope you enjoy Tracey as much as we did developing it!
+
 --------------------------------------------------------------------------------------------------------------------
 
+* [Navigating the User Guide](#how-to-navigate-the-user-guide)
 * [Quick Start](#quick-start)
 * [Features](#features)
     * <a href='#viewing-help'>Help</a>
@@ -31,15 +52,44 @@ Tracey can get your student health status management tasks done faster than trad
 * <a href='#command-summary'>Command Summary</a>
 
 --------------------------------------------------------------------------------------------------------------------
+## How to navigate the User Guide
 
+There are a few symbols to take note of in our User Guide. These symbols serve different purposes as stated below:
+
+| Symbol  |                                                Purpose                                                |
+|:-------:|:-----------------------------------------------------------------------------------------------------:|
+|   📓    |    Additional notes are parked here. They contain beneficial information in case you are confused.    |
+|   ⚠️    |          Warnings are parked here. These are information that you **NEED** to take note of.           |
+|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey |
+*Figure 1: Symbols and their purposes*
+
+Additional formatting guidelines:
+
+**Bold**: Bolded words indicate important keywords.
+
+`Command`: Words/phrases that are presented like this highlight specific keywords that you can use to interact with your computer or Tracey.
+
+[Links](): Words/phrases that are presented like this highlight clickable links to different parts of the User Guide or to external web pages for additional information. 
+
+--------------------------------------------------------------------------------------------------------------------
 ## Quick Start
-1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest `Tracey.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Ensure you have Java 11 or above installed in your Computer. <br>
+ 📓`Note:`
+   1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
+   2. To check your java version: 
+      1. For Mac users, open up Terminal and type in `java --version`.
+      2. For Windows users, open up Command Prompt and type in `java --version`.
+   3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
+   4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+2. Download the latest **Tracey.jar** from [here](https://github.com/se-edu/addressbook-level3/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data. <br>
-   ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data* <br>
+   📓`Note:`
+   1. If you are a Mac user and are unable to open the jar file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   2. If you are a Windows user and are unable to open the jar file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is locaated. Then, type the following command to open the application: `java -jar Tracey.jar`.
+6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * **`list`** : Lists all contacts.
@@ -218,6 +268,8 @@ The `Show Email` button opens up a separate window that consists of all the emai
 `Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
 ![Email](images/CopyEmailScreenshot.png) *Figure 7: Screenshot of Copy Email function.*
 
+From Figure 7, this function is beneficial for administators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+
 ### Summarising the records
 Summarises the student records inside Tracey.
 
@@ -307,6 +359,8 @@ there are changes to Tracey.
 
 ### Command Summary
 
+Figure 8: Command Summary.
+
 | No.  | Command  | Description                                               | Example  |
 |---|---|-----------------------------------------------------------|---|
 | 1.  | `find`  | Find a particular student                                 | `find alex` \n `find j`  |
@@ -320,8 +374,8 @@ there are changes to Tracey.
 | 9.  |  `filter` |        Retrieve list of people based on tags                                                   | `filter cs/HEALTH_STATUS f/FACULTY` |
 | 10. | `archive` |  Archives the Tracey Database                             |     `archive`                           |
 
-*Figure 8: Command Summary.*
 --------------------------------------------------------------------------------------------------------------------
+
 
 ### Glossary
 {to be added}
