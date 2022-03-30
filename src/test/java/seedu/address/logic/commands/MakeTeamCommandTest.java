@@ -79,7 +79,7 @@ public class MakeTeamCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getDisplayPersonList().size() + 1);
         MakeTeamCommand makeTeamCommand = new MakeTeamCommand(outOfBoundIndex, MakeTeamCommand.TeamAction.ADD);
 
-        assertCommandFailure(makeTeamCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(makeTeamCommand, model, Messages.MESSAGE_INVALID_INDEX_FOR_PERSON);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class MakeTeamCommandTest {
 
         MakeTeamCommand makeTeamCommand = new MakeTeamCommand(outOfBoundIndex, MakeTeamCommand.TeamAction.ADD);
 
-        assertCommandFailure(makeTeamCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(makeTeamCommand, model, Messages.MESSAGE_INVALID_INDEX_FOR_PERSON);
     }
 
     @Test
