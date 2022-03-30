@@ -504,9 +504,9 @@
 }
 
 // ************* interview panel css *************
-   .interview-panel-header {
-       -fx-background-color: #3c3e3f;
-   }
+.interview-panel-header {
+    -fx-background-color: #3c3e3f;
+}
 
 .interview-panel-title {
     -fx-font-size: 16px;
@@ -515,7 +515,7 @@
 }
 
 .interview-list .list-cell:filled:odd {
-    -fx-background-color:  #515658;
+    -fx-background-color: #515658;
 }
 
 .interview-list .list-cell:filled:even {

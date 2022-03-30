@@ -60,31 +60,31 @@ public class SortCommandParserTest {
 
         SortCommand expectedCommandName = new SortCommand(sortComparatorName, "name");
         SortCommand expectedCommandCourse = new SortCommand(sortComparatorCourse, "course");
-        SortCommand expectedCommandStudentId = new SortCommand(sortComparatorStudentId, "studentid");
+        SortCommand expectedCommandStudentId = new SortCommand(sortComparatorStudentId, "id");
         SortCommand expectedCommandPhone = new SortCommand(sortComparatorPhone, "phone");
         SortCommand expectedCommandEmail = new SortCommand(sortComparatorEmail, "email");
         SortCommand expectedCommandApplicationStatus = new SortCommand(sortComparatorApplicationStatus,
-                "applicationstatus");
-        SortCommand expectedCommandInterviewStatus = new SortCommand(sortComparatorInterviewStatus, "interviewstatus");
-        SortCommand expectedCommandSeniority = new SortCommand(sortComparatorSeniority, "seniority");
+                "as");
+        SortCommand expectedCommandInterviewStatus = new SortCommand(sortComparatorInterviewStatus, "is");
+        SortCommand expectedCommandSeniority = new SortCommand(sortComparatorSeniority, "yr");
 
         assertParseSuccess(parser, SORT_EMPTY + "name", expectedCommandName);
         assertParseSuccess(parser, " " + PREFIX_SORTKEY + "name", expectedCommandName);
         assertParseSuccess(parser, SORT_EMPTY + "course", expectedCommandCourse);
-        assertParseSuccess(parser, SORT_EMPTY + "studentid", expectedCommandStudentId);
+        assertParseSuccess(parser, SORT_EMPTY + "id", expectedCommandStudentId);
         assertParseSuccess(parser, SORT_EMPTY + "phone", expectedCommandPhone);
         assertParseSuccess(parser, SORT_EMPTY + "email", expectedCommandEmail);
-        assertParseSuccess(parser, SORT_EMPTY + "applicationstatus", expectedCommandApplicationStatus);
-        assertParseSuccess(parser, SORT_EMPTY + "interviewstatus", expectedCommandInterviewStatus);
-        assertParseSuccess(parser, SORT_EMPTY + "seniority", expectedCommandSeniority);
+        assertParseSuccess(parser, SORT_EMPTY + "as", expectedCommandApplicationStatus);
+        assertParseSuccess(parser, SORT_EMPTY + "is", expectedCommandInterviewStatus);
+        assertParseSuccess(parser, SORT_EMPTY + "yr", expectedCommandSeniority);
     }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        String userInput = SORT_EMPTY + "name" + SORT_EMPTY + "course" + SORT_EMPTY + "studentid";
+        String userInput = SORT_EMPTY + "name" + SORT_EMPTY + "course" + SORT_EMPTY + "id";
 
         Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
-        SortCommand expectedCommand = new SortCommand(sortComparator, "studentid");
+        SortCommand expectedCommand = new SortCommand(sortComparator, "id");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

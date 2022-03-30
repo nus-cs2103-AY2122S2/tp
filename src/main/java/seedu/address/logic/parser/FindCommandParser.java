@@ -54,18 +54,18 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         switch (fieldString) {
-        case "applicationstatus":
+        case "as":
             return new FindCommand(new ApplicationStatusContainsKeywordsPredicate(keywords));
-        case "availability":
+        case "avail":
             return new FindCommand(new AvailabilityContainsKeywordsPredicate(keywords));
-        case "candidate":
+        case "all":
         case "":
             return new FindCommand(new CandidateContainsKeywordsPredicate(keywords));
         case "course":
             return new FindCommand(new CourseContainsKeywordsPredicate(keywords));
         case "email":
             return new FindCommand(new EmailContainsKeywordsPredicate(keywords));
-        case "interviewstatus":
+        case "is":
             return new FindCommand(new InterviewStatusContainsKeywordsPredicate(keywords));
         case "name":
             return new FindCommand(new NameContainsKeywordsPredicate(keywords));
@@ -73,9 +73,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new PhoneContainsKeywordsPredicate(keywords));
         case "remark":
             return new FindCommand(new RemarkContainsKeywordsPredicate(keywords));
-        case "seniority":
+        case "yr':
             return new FindCommand(new SeniorityContainsKeywordsPredicate(keywords));
-        case "studentid":
+        case "id":
             return new FindCommand(new StudentIdContainsKeywordsPredicate(keywords));
         default:
             return new FindCommand(new CandidateContainsKeywordsPredicate(Collections.<String>emptyList()));

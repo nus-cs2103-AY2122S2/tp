@@ -78,10 +78,10 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindStudentIdCommand =
                 new FindCommand(new StudentIdContainsKeywordsPredicate(Arrays.asList("E0324", "149")));
-        assertParseSuccess(parser, " k/E0324 k/149 f/studentid", expectedFindStudentIdCommand);
+        assertParseSuccess(parser, " k/E0324 k/149 f/id", expectedFindStudentIdCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    k/E0324 \t \t  k/149  \t  f/studentid \t", expectedFindStudentIdCommand);
+        assertParseSuccess(parser, "    k/E0324 \t \t  k/149  \t  f/id \t", expectedFindStudentIdCommand);
     }
 
     @Test
@@ -89,12 +89,12 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindInterviewStatusCommand =
                 new FindCommand(new InterviewStatusContainsKeywordsPredicate(Arrays.asList("pending", "reject")));
-        assertParseSuccess(parser, " k/pending k/reject f/interviewstatus", expectedFindInterviewStatusCommand);
+        assertParseSuccess(parser, " k/pending k/reject f/is", expectedFindInterviewStatusCommand);
 
         // multiple whitespaces between keywords
         FindCommand expectedFindApplicationStatusCommand =
                 new FindCommand(new ApplicationStatusContainsKeywordsPredicate(Arrays.asList("pending", "reject")));
-        assertParseSuccess(parser, " k/  pending    k/  reject   f/     applicationstatus",
+        assertParseSuccess(parser, " k/  pending    k/  reject   f/     as",
                 expectedFindApplicationStatusCommand);
     }
 
@@ -103,7 +103,7 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindSeniorityCommand =
                 new FindCommand(new SeniorityContainsKeywordsPredicate(Arrays.asList("2", "com1")));
-        assertParseSuccess(parser, " k/2 k/com1 f/seniority", expectedFindSeniorityCommand);
+        assertParseSuccess(parser, " k/2 k/com1 f/yr", expectedFindSeniorityCommand);
     }
 
     @Test
@@ -111,11 +111,11 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCandidateCommand =
                 new FindCommand(new CandidateContainsKeywordsPredicate(Arrays.asList("Amy", "computer science")));
-        assertParseSuccess(parser, " k/Amy k/computer science f/candidate", expectedFindCandidateCommand);
+        assertParseSuccess(parser, " k/Amy k/computer science f/all", expectedFindCandidateCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser,
-                "    k/Amy \t  k/computer science  \t  f/candidate \t", expectedFindCandidateCommand);
+                "    k/Amy \t  k/computer science  \t  f/all \t", expectedFindCandidateCommand);
 
         // no field specified
         assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  f/ \t", expectedFindCandidateCommand);
@@ -134,14 +134,14 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindAvailabilityCommand =
                 new FindCommand(new AvailabilityContainsKeywordsPredicate(Arrays.asList("Mon", "Fri")));
-        assertParseSuccess(parser, " k/Mon k/Fri f/availability", expectedFindAvailabilityCommand);
+        assertParseSuccess(parser, " k/Mon k/Fri f/avail", expectedFindAvailabilityCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser,
-                "    k/Mon \t  k/Fri  \t  f/availability \t", expectedFindAvailabilityCommand);
+                "    k/Mon \t  k/Fri  \t  f/avail \t", expectedFindAvailabilityCommand);
 
         // multiple whitespaces in keywords
         assertParseSuccess(parser,
-                "    k/  Mon \t  k/     Fri  \t  f/availability \t", expectedFindAvailabilityCommand);
+                "    k/  Mon \t  k/     Fri  \t  f/avail \t", expectedFindAvailabilityCommand);
     }
 }

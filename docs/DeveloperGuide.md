@@ -243,23 +243,23 @@ The following activity diagram summarizes what happens when a user executes a `d
 
 ### List Feature
 
-### What is this feature about?
+#### What is this feature about?
 The `list` feature allows the user to view all available Candidates in the system through the CLI.
 
 This feature in TAlent Assistant™ has been enhanced based on the initial implementation of the `list` command in `AddressBook`.
 
-### How is this feature implemented?
+#### How is this feature implemented?
 The proposed `list` feature is implemented within `ListCommand` (which extends from `Command`) in `AddressBook`.
 
 A minor enhancement was added to this `list` feature to produce another message to indicate that there are no Candidates
 in the system.
 
-### Why is the feature implemented as such?
+#### Why is the feature implemented as such?
 Instead of the same message being produced in both scenarios, when there are Candidates in the system, or when there are
 no Candidates in the system, a new message would allow the user to differentiate between the two. The user would not be
 confused in possibly thinking that the TAlent Assistant™ program is unresponsive.
 
-### UML Diagram
+#### UML Diagram
 The following activity diagram summarizes what happens when a user executes a `list` command: <br>
 <img src="images/ListActivityDiagram.png" width="250" />
 
@@ -375,16 +375,16 @@ The main logic for `find` command is still implemented within `FindCommand` (whi
 
 The `FindCommandParser` class has been extended to include a switch-case block to validate
 which field the user is trying to search across:
-1. `studentId`
+1. `studentId` (accepted user input abbreviated as `id`)
 2. `course`
-3. `seniority`
+3. `seniority` (accepted user input abbreviated as `yr`)
 4. `name`
 5. `email`
 6. `phone`
-7. `applicationStatus` (WIP)
-8. `interviewStatus` (WIP)
-9. `availability` (WIP)
-10. `candidate` (i.e. search across all fields)
+7. `applicationStatus` (accepted user input abbreviated as `as`)
+8. `interviewStatus` (accepted user input abbreviated as `is`)
+9. `availability` (accepted user input abbreviated as `avail`)
+10. `all` (i.e. search across all fields of the candidate)
 
 Based on the field validated by the switch-case block, a `new findCommand(new ContainsKeywordsPredicate(keywords))`
 will be created. The implementation of the original `NameContainsKeywordsPredicate` has been enhanced here.
@@ -408,10 +408,67 @@ Further, since all the child classes implement similar logic and methods, it wou
 (abstract) parent class. This establishes the SRP principle, such that each subclass is only responsible for
 checks for the specific related entity, and should not have any other reason to change otherwise.
 
+**3. Allowing searches across multiple fields**
+Currently the `find` command is implemented such that the parser will only validate the last `ATTRIBUTE_FIELD` parsed in
+by the user, and execute the `ContainsKeywordsPredicate` test against it. An alternative was to allow searches across multiple
+`ATTRIBUTE_FIELDS`. Though this is easily implementable by checking the validity of each of the `ATTRIBUTE_FIELD` parsed in,
+it is not very relevant for the nature of the application's use. Given as all the fields hold extremely different values,
+the user is unlikely to be searching for the same set of keywords across multiple fields. Instead, following the behaviour
+of other commands, the `FindCommandParser` will take in the last `/f` prefix.
+
 #### UML Diagrams
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens when a user executes a `find` command: <br>
 <img src="images/FindActivityDiagram.png" width="550" />
+
+
+### Sort feature
+
+#### What is the feature about?
+The `sort` mechanism utilises the existing class model from `AddressBook`. It introduces new methods and modifies current
+implementation of existing methods in order to allow the user sort the last viewed candidates list by a specific
+field.
+
+A new `s/` prefix is added in the `CliSyntax`, which is used to accurately parse in the `ATTRIBUTE_FIELD` that the user
+would like to sort the existing candidate list by. The implementation works by calling `model.updateSortedCandidateList(sortComparator)`,
+which updates the sorted order of the existing `CandidateList` in the system.
+
+
+#### How is the feature implemented?
+The parser for the `sort` command works similarly to all other commands implemented. In this case, as the user
+may potentially key in multiple valid `s/` prefix fields, we utilise the `ArgumentTokenizer` in order to parse
+in all the input, and only utilise the last `s/` prefix field.
+
+The main logic for executing the `sort` command works within the `ModelManager` and `AddressBook` classes. When the
+sort command is executed, a valid Comparator is passed as an argument into the `updateSortedCandidateList()` method, which
+is called from the `ModelManager` class. Here, the `ModelManager` class acts as an intermediate layer
+which then calls the `sortCandidates()` method in the `AddressBook` class.
+
+The `sortCandidates()` method creates an exact copy of the exact `CandidateList` currently
+in the system, before sorting it by the `Comparator` passed as its argument and setting
+the new `CandidateList` in the system to be that of the sorted copy.
+
+#### Why is the feature implemented as such? (WIP)
+**1. Layers of abstraction in method calls** <br>
+
+**2. Modification of ObservableList<Candidate>**
+
+#### UML Diagrams (WIP)
+
+
+### View feature
+
+#### What is the feature about?
+This feature allows the user to view interviews scheduled within 3 time periods: `today`, this `week` and this `month`.
+
+#### How is the feature implemented? (WIP)
+The view feature implements a similar logic to the `find` command, whereby we make use of predicate classes in order to
+check if we should display a particular interview.
+
+#### Why is the feature implemented as such? (WIP)
+**1. Utilising multiple predicate classes** <br>
+
+#### UML Diagrams (WIP)
 
 ### Help Window Feature
 
@@ -577,16 +634,17 @@ interview availability dates.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                          | So that I can…​                                                               |
-|----------|----------|---------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user     | add a candidate to the system         | keep track of their application details for consideration.                    |
-| `* * *`  | user     | edit a candidate in the system        | correct any wrong inputs when I added this candidate.                         |
-| `* * *`  | user     | delete a candidate from the system    | remove entries that I no longer need.                                         |
-| `* * *`  | user     | find a candidate in the system        | access details of the candidate without having to go through the entire list. |
-| `* * *`  | user     | list all candidates in the system     | monitor the application pool.                                                 |
-| `*`      | user     | sort candidates                       | reorder candidates based on a specific attribute field.                       |
-| `* * *`  | user     | schedule TA candidates for interviews | keep track of the interview schedule.                                         |
-| `* * *`  | new user | view all available commands           | get familiarised with the system.                                             |
+| Priority | As a …​  | I want to …​                                            | So that I can…​                                                               |
+|----------|----------|---------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user     | add a candidate to the system                           | keep track of their application details for consideration.                    |
+| `* * *`  | user     | edit a candidate in the system                          | correct any wrong inputs when I added this candidate.                         |
+| `* * *`  | user     | delete a candidate from the system                      | remove entries that I no longer need.                                         |
+| `* * *`  | user     | find a candidate in the system                          | access details of the candidate without having to go through the entire list. |
+| `* * *`  | user     | list all candidates in the system                       | monitor the application pool.                                                 |
+| `* *`    | user     | sort candidates                                         | reorder candidates based on a specific attribute field for easier viewing.    |
+| `* * *`  | user     | view scheduled interviews within a specific time period | keep track of the upcoming interview schedule.                                |
+| `* * *`  | user     | schedule TA candidates for interviews                   | keep track of the interview schedule.                                         |
+| `* * *`  | new user | view all available commands                             | get familiarised with the system.                                             |
 
 *{More to be added}*
 
@@ -604,32 +662,32 @@ TA - Teaching Assistant
 
 <br>
 
-**Use case: List all TA candidates in the system**
+**Use case: List all candidates in the system**
 
 **MSS**
 
-1.  User requests to list TAs
-2.  TAlent Assistant™ shows all TAs
+1.  User requests to list candidates
+2.  TAlent Assistant™ shows all candidates
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty
-    * 2a1. TAlent Assistant™ feedbacks no TAs in system
+    * 2a1. TAlent Assistant™ feedbacks no candidates in system
 
   Use case ends.
 
 <hr>
 
-**Use case: Add a TA into the system**
+**Use case: Add a candidate into the system**
 
 **MSS**
 
-1.  User requests to add a TA
-2.  TAlent Assistant™ requests for TA's details
+1.  User requests to add a candidate
+2.  TAlent Assistant™ requests for candidate's details
 3.  User inputs details
-4.  TAlent Assistant™ adds the new TA
+4.  TAlent Assistant™ adds the new candidate
 
     Use case ends.
 
@@ -642,14 +700,14 @@ TA - Teaching Assistant
 
 <hr>
 
-**Use case: Edit an existing TA in the system**
+**Use case: Edit an existing candidate in the system**
 
 **MSS**
 
-1.  User requests to edit a TA
-2.  TAlent Assistant™ requests for TA's inputs
+1.  User requests to edit a candidate
+2.  TAlent Assistant™ requests for candidate's inputs
 3.  User selects candidate to edit and inputs the updated details
-4.  TAlent Assistant™ edit the specified TA
+4.  TAlent Assistant™ edit the specified candidate
 
     Use case ends.
 
@@ -662,14 +720,14 @@ TA - Teaching Assistant
 
 <hr>
 
-**Use case: Delete a TA from the system**
+**Use case: Delete a candidate from the system**
 
 **MSS**
 
 1.  User requests to list TA candidates
 2.  TAlent Assistant™ displays the list of TA candidates
-3.  User requests to delete a specific TA in the list
-4.  TAlent Assistant™ deletes the TA from the list and displays the deleted entry
+3.  User requests to delete a specific candidate in the list
+4.  TAlent Assistant™ deletes the candidate from the list and displays the deleted entry
 
     Use case ends.
 
@@ -715,12 +773,12 @@ TA - Teaching Assistant
   Use case resumes at step 2.
 <hr>
 
-**Use case: Find TAs**
+**Use case: Find candidates in the system**
 
 **MSS**
 
-1. User requests to find TAs containing specific keyword(s)
-2. TAlent Assistant™ returns a list of TAs that contain one or more of the given keyword(s)
+1. User requests to find candidates containing specific keyword(s)
+2. TAlent Assistant™ returns a list of candidates that contain one or more of the given keyword(s)
    in the specified attribute field
 
    Use case ends.
@@ -739,12 +797,12 @@ TA - Teaching Assistant
 
 <hr>
 
-**Sort TAs**
+**Sort candidates**
 
 **MSS**
 
-1. User requests to sort TAs by a specific field
-2. TAlent Assistant™ returns a list of TAs sorted in order with regard to the specified attribute field
+1. User requests to sort candidates by a specific field
+2. TAlent Assistant™ returns a list of candidates sorted in ascending order with regard to the specified attribute field
 
    Use case ends.
 

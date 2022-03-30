@@ -1,5 +1,7 @@
 package seedu.address.model.candidate.predicate;
 
+import static seedu.address.model.candidate.predicate.AvailabilityContainsKeywordsPredicate.DAYS_IN_FULL;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

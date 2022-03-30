@@ -46,7 +46,7 @@ public class FocusCommand extends Command {
 
         Candidate candidateToShow = lastShownList.get(targetIndex.getZeroBased());
         return new CommandResult(String.format(MESSAGE_FOCUS_CANDIDATE),
-                false, false, true, targetIndex.getZeroBased());
+                false, false, true, targetIndex.getZeroBased(), false, -1);
     }
 
     @Override

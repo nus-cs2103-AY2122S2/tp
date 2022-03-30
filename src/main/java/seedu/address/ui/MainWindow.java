@@ -14,7 +14,13 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.FocusCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
+import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
@@ -26,8 +32,12 @@ import seedu.address.model.interview.Interview;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final int EDIT_COMMAND_INDEX = 5;
+    private static final int DELETE_COMMAND_INDEX = 7;
+    private static final int ADD_SCHEDULE_COMMAND_INDEX = 23;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
 
     private Stage primaryStage;
     private Logic logic;
@@ -192,6 +202,56 @@ public class MainWindow extends UiPart<Stage> {
         focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
     }
 
+    private void handleDelete(String commandResult) throws CommandException {
+        int index;
+        try {
+            index = Integer.parseInt(commandResult.substring(DELETE_COMMAND_INDEX));
+            if (focusListPanel.getCandidate().equals(logic.getFilteredCandidateList().get(index - 1))) {
+                if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+                    focusListPanelPlaceholder.getChildren().remove(0);
+                }
+                FocusCard focusCard = new FocusCard(null, null);
+                focusListPanelPlaceholder.getChildren().add(focusCard.getRoot());
+            }
+        } catch (Exception e) {
+            throw new CommandException(DeleteCommand.MESSAGE_USAGE);
+        }
+    }
+
+    /**
+     * This method will be used when a user tries to key in an Edit Command. It will check if the index
+     * being edited corresponds to the Candidate being shown.
+     *
+     * @return if the Candidate being edited is the one on Focus Panel, return the index of the Candidate. Else
+     * it will return the value of -1.
+     */
+    public int handleEdit(String commandText, int commandIndex) throws CommandException, ParseException {
+        logger.info(commandText);
+
+        try {
+            int displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
+            String string = commandText.substring(commandIndex);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < string.length(); i++) {
+                char c = string.charAt(i);
+                if (Character.isDigit(c)) {
+                    builder.append(c);
+                } else {
+                    break;
+                }
+            }
+
+            int editIndex = Integer.parseInt(builder.toString());
+            if (editIndex - 1 == displayedIndex) {
+                return editIndex;
+            } else {
+                return -1;
+            }
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
     public CandidateListPanel getCandidateListPanel() {
         return candidateListPanel;
     }
@@ -209,9 +269,39 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText)
-            throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            int editFlag = -1;
+
+            if (commandText.contains(DeleteScheduleCommand.COMMAND_WORD)) {
+                CommandResult commandResult = logic.execute(commandText);
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                if (focusListPanel.getCandidate().looseEqual(logic
+                        .getFilteredCandidateList()
+                        .get(commandResult.getEditIndex()))) {
+                    executeCommand(FocusCommand.COMMAND_WORD + " "
+                            + String.valueOf(commandResult.getEditIndex() + 1));
+                }
+                return commandResult;
+            } else if (commandText.contains(EditScheduleCommand.COMMAND_WORD)) {
+                CommandResult commandResult = logic.execute(commandText);
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                if (focusListPanel.getCandidate().equals(logic
+                        .getFilteredCandidateList()
+                        .get(commandResult.getEditIndex()))) {
+                    executeCommand(FocusCommand.COMMAND_WORD + " "
+                            + String.valueOf(commandResult.getEditIndex() + 1));
+                }
+                return commandResult;
+            } else if (commandText.contains(DeleteCommand.COMMAND_WORD)) {
+                handleDelete(commandText);
+            } else if (commandText.contains(EditCommand.COMMAND_WORD)) {
+                editFlag = handleEdit(commandText, EDIT_COMMAND_INDEX);
+            } else if (commandText.contains(AddScheduleCommand.COMMAND_WORD)) {
+                logger.info(commandText);
+                editFlag = handleEdit(commandText, ADD_SCHEDULE_COMMAND_INDEX);
+            }
+
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -226,6 +316,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowFocus()) {
                 handleFocus(commandResult);
+            }
+
+            if (editFlag != -1) {
+                executeCommand(FocusCommand.COMMAND_WORD + " " + editFlag);
             }
 
             return commandResult;

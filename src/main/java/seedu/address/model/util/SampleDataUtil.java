@@ -62,8 +62,8 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyInterviewSchedule getEmptyInterviewList() {
-        InterviewSchedule emptyList = new InterviewSchedule();
-        return emptyList;
+        InterviewSchedule interviewSchedule = new InterviewSchedule();
+        return interviewSchedule;
     }
 
     /**
