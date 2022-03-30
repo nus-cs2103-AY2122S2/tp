@@ -51,7 +51,7 @@ public class ManualCommand extends Command {
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_HELP_COMMAND);
 
         case ExitCommand.COMMAND_WORD:
-        return new CommandResult(ManualMessages.MANUAL_MESSAGE_EXIT_COMMAND);
+            return new CommandResult(ManualMessages.MANUAL_MESSAGE_EXIT_COMMAND);
 
         case TaskCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_TASK_COMMAND);
