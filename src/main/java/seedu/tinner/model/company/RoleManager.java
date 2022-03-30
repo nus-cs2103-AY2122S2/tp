@@ -47,6 +47,9 @@ public class RoleManager {
         this.roleList.resetData(roleList);
     }
 
+    /**
+     * Returns the internal list of roles.
+     */
     public ReadOnlyRoleList getRoleList() {
         return roleList;
     }
