@@ -3,7 +3,9 @@ package seedu.trackermon.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
 import static seedu.trackermon.logic.commands.CommandTestUtil.NAME_DESC_ALICE_IN_WONDERLAND;
+import static seedu.trackermon.logic.commands.CommandTestUtil.RATING_DESC_HIGH;
 import static seedu.trackermon.logic.commands.CommandTestUtil.STATUS_DESC_COMPLETED;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalShows.ALICE_IN_WONDERLAND;
@@ -78,11 +80,12 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED;
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED
+                + COMMENT_DESC_BAD + RATING_DESC_HIGH;
         Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addShow(expectedShow);
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        String expectedMessage = LogicManager.FILE_OPS_SAVE_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 

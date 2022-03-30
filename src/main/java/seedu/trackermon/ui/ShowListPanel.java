@@ -47,17 +47,22 @@ public class ShowListPanel extends UiPart<Region> {
     }
 
     /**
+     *
+     * @param index
+     */
+    public void updateSelection(int index) {
+        showListView.getSelectionModel().select(index);
+        showListView.scrollTo(index);
+    }
+
+    /**
      * Updates the GUI of the list to select the first item.
      */
     public void handleUpdatedList() {
-        if (!showListView.getItems().isEmpty()) {
-
-            if (showListView.getSelectionModel().getSelectedItem() == null) {
-                showListView.getSelectionModel().selectFirst();
-            }
-
-            showDetailsCard.updateShowDetails(showListView.getSelectionModel().getSelectedItem());
+        if (showListView.getSelectionModel().getSelectedItem() == null) {
+            showListView.getSelectionModel().selectFirst();
         }
+        showDetailsCard.updateShowDetails(showListView.getSelectionModel().getSelectedItem());
     }
 
     /**

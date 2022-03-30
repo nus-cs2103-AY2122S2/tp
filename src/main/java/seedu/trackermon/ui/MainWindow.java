@@ -27,6 +27,7 @@ import seedu.trackermon.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final double PADDING = 5;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -117,12 +118,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showDetailsCard = new ShowDetailsCard(null);
+        showDetailsCard = new ShowDetailsCard();
 
         showDetailsPlaceholder.setContent(showDetailsCard.getRoot());
-        showDetailsCard.getRoot().prefWidthProperty().bind(showDetailsPlaceholder.widthProperty());
+        showDetailsCard.getRoot().prefWidthProperty().bind(showDetailsPlaceholder
+                .widthProperty().subtract(PADDING));
 
-        showListPanel = new ShowListPanel(logic.getSortedShowList(), showDetailsCard);
+        showListPanel = new ShowListPanel(logic.getFilteredShowList(), showDetailsCard);
         showListPanelPlaceholder.getChildren().add(showListPanel.getRoot());
 
         showDetailsPlaceholder.focusTraversableProperty().setValue(false);
@@ -141,6 +143,8 @@ public class MainWindow extends UiPart<Stage> {
 
         primaryStage.widthProperty().addListener(stageSizeListener);
         primaryStage.heightProperty().addListener(stageSizeListener);
+
+        handleUpdateList();
     }
 
     /**
@@ -183,7 +187,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleModifyList() {
+    private void handleUpdateList() {
         showListPanel.handleUpdatedList();
     }
 
@@ -210,9 +214,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isModifyList()) {
-                handleModifyList();
+            if (commandResult.getIndexAffected() != CommandResult.DEFAULT_INDEX) {
+                showListPanel.updateSelection(commandResult.getIndexAffected());
             }
+
+            handleUpdateList();
 
             return commandResult;
         } catch (CommandException | ParseException e) {
