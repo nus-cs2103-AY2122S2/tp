@@ -275,9 +275,10 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && interviewSchedule.equals(other.interviewSchedule)
                 && userPrefs.equals(other.userPrefs)
                 && filteredCandidates.equals(other.filteredCandidates)
-                && interviewSchedule.equals(other.interviewSchedule);
+                && filteredInterviewSchedule.equals(other.filteredInterviewSchedule);
     }
 
 }
