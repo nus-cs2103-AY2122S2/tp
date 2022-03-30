@@ -339,6 +339,8 @@ the data of your previous TeachWhat! folder.
 against the possibility of you being misled by corrupted data, TeachWhat! will wipe all data and start from scratch if any
 irregularity is found in the data files for students *or* lessons.
 
+An example of such irregularities would be conflicting lessons being found in the data file that holds lessons.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
