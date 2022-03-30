@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FALSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -18,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameExistsPredicate;
 
 /**
@@ -79,7 +82,7 @@ class AddToClipboardCommandTest {
     }
 
     /**
-     * Test for when a person is found matching the given keyword.
+     * Test for when a person is found matching the given name keyword.
      * Should return the success message from AddToClipboardCommand.java class.
      */
     @Test
@@ -99,7 +102,7 @@ class AddToClipboardCommandTest {
     }
 
     /**
-     * Test for when no person is found matching the given keyword.
+     * Test for when no person is found matching the given name keyword.
      * Should return the failure message from AddToClipboardCommand.java class.
      */
     @Test
@@ -113,6 +116,43 @@ class AddToClipboardCommandTest {
             expectedModel.updateFilteredPersonList(predicate);
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
             assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        } catch (HeadlessException e) {
+            return;
+        }
+    }
+
+    /**
+     * Test for when a person is found at the given index.
+     * Should return the success message from AddToClipboardCommand.java class.
+     */
+    @Test
+    void execute_indexFound() throws HeadlessException {
+        String expectedMessage = AddToClipboardCommand.MESSAGE_SUCCESS;
+        Person personToClip = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        AddToClipboardCommand command = new AddToClipboardCommand(INDEX_FIRST_PERSON);
+        try {
+            //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
+            //so this test will be skipped.
+            expectedModel.updateFilteredPersonList(new NameExistsPredicate(personToClip.getName()));
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            assertEquals(Arrays.asList(personToClip), model.getFilteredPersonList());
+        } catch (HeadlessException e) {
+            return;
+        }
+    }
+
+    /**
+     * Test for when a person is not found at the given index.
+     * Should return the failure message from AddToClipboardCommand.java class.
+     */
+    @Test
+    void execute_indexNotFound() throws HeadlessException {
+        String expectedMessage = AddToClipboardCommand.MESSAGE_FAILURE;
+        AddToClipboardCommand command = new AddToClipboardCommand(INDEX_FALSE);
+        try {
+            //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
+            //so this test will be skipped.
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
         } catch (HeadlessException e) {
             return;
         }

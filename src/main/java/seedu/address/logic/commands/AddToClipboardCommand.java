@@ -7,6 +7,9 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameExistsPredicate;
@@ -27,6 +30,7 @@ public class AddToClipboardCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/ John Doe ";
 
     private final NameExistsPredicate predicate;
+    private final Index targetIndex;
 
     /**
      * Creates an AddToClipboardCommand to copy information of the person specified in {@code NameExistsPredicate}
@@ -34,13 +38,44 @@ public class AddToClipboardCommand extends Command {
     public AddToClipboardCommand(NameExistsPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
+        this.targetIndex = null;
+    }
+
+    /**
+     * Creates an AddToClipboardCommand to copy information of the person at the specified {@code targetIndex}.
+     */
+    public AddToClipboardCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+        this.predicate = null;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        ObservableList<Person> filterResult = model.getFilteredPersonList();
+        ObservableList<Person> filterResult;
+
+        if (this.targetIndex == null) {
+            //This instance of AddToClipboardCommand was created with a name keyword
+            model.updateFilteredPersonList(predicate);
+            filterResult = model.getFilteredPersonList();
+        } else if (this.predicate == null) {
+            //This instance of AddToClipboardCommand was created with a target index
+            ObservableList<Person> personList = model.getFilteredPersonList();
+            if (targetIndex.getZeroBased() >= personList.size()) {
+                //No such contact at that index exists
+                return new CommandResult(MESSAGE_FAILURE);
+            }
+
+            Person personToClip = personList.get(targetIndex.getZeroBased());
+            model.updateFilteredPersonList(new NameExistsPredicate(personToClip.getName()));
+            filterResult = model.getFilteredPersonList();
+        } else {
+            //Every instance of AddToClipboardCommand should have either a name or index key
+            System.out.println("Execution should not reach here. "
+                    + "An AddToClipboardCommand should not have both a targetIndex and a NameExistsPredicate. "
+                    + "Please contact a developer to fix this problem.");
+            throw new CommandException(Messages.MESSAGE_SERIOUS_ERROR);
+        }
 
         if (filterResult.toString().equals("[]")) {
             //Filter returns nothing, no such contact with the given name exists

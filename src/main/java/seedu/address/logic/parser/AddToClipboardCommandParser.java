@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddToClipboardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -22,15 +23,21 @@ public class AddToClipboardCommandParser implements Parser<AddToClipboardCommand
     public AddToClipboardCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        String preamble = argMultimap.getPreamble();
 
-        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+        if (!preamble.equals("")) {
+            //An index was specified
+            Index index = ParserUtil.parseIndex(preamble);
+            return new AddToClipboardCommand(index);
+        } else if (!argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            //A name was specified
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            return new AddToClipboardCommand(new NameExistsPredicate(name));
+        } else {
+            //Neither an index nor name was specified
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, AddToClipboardCommand.MESSAGE_USAGE));
         }
-
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-
-        return new AddToClipboardCommand(new NameExistsPredicate(name));
     }
 
 }
