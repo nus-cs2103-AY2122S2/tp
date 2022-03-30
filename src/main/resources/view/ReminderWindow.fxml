@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.control.Label?>
 <Stage minHeight="600" minWidth="450" title="Reminders" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/exclamation_icon.png" />
@@ -25,6 +26,7 @@
                             <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
                         <children>
+                            <Label fx:id="reminderStatus" styleClass="reminder-status"/>
                             <StackPane fx:id="reminderPersonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </children>
                     </VBox>

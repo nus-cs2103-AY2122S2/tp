@@ -226,7 +226,7 @@ Format: `rm`
 
 1) Navigate to the `File` menu and click on it.
 2) Under it, click on `Reminders`.
-3) The system will launc the `Reminder` window that contains a list of Persons the user has set Reminders for.
+3) The system will launc the `Reminders` window that contains a list of Persons the user has set Reminders for.
 
 ### Favourite a person: `favourite`
 
