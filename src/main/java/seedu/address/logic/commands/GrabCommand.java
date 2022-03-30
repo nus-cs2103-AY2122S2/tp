@@ -100,32 +100,32 @@ public class GrabCommand extends Command {
 
     /**
      * Helper function to grab the person
-     * @param personGetGrabbed the person that get grabbed
+     * @param personGrabbed the person that get grabbed
      * @return the grabbed result
      */
-    public String grabOnePerson(Person personGetGrabbed) {
+    public String grabOnePerson(Person personGrabbed) {
         final StringBuilder builder = new StringBuilder();
         switch (attribute.toString()) {
         case NAME:
-            builder.append(personGetGrabbed.getName());
+            builder.append(personGrabbed.getName());
             break;
         case PHONE:
-            builder.append(personGetGrabbed.getPhone());
+            builder.append(personGrabbed.getPhone());
             break;
         case EMAIL:
-            builder.append(personGetGrabbed.getEmail());
+            builder.append(personGrabbed.getEmail());
             break;
         case ADDRESS:
-            builder.append(personGetGrabbed.getAddress());
+            builder.append(personGrabbed.getAddress());
             break;
         case COURSE:
-            builder.append(personGetGrabbed.getCourse());
+            builder.append(personGrabbed.getCourse());
             break;
         case MATRICCARD:
-            builder.append(personGetGrabbed.getMatricCard());
+            builder.append(personGrabbed.getMatricCard());
             break;
         case TELEGRAM:
-            builder.append(personGetGrabbed.getTelegram());
+            builder.append(personGrabbed.getTelegram());
             break;
         default:
             return "";
