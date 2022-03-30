@@ -25,20 +25,20 @@ import seedu.address.model.person.Remark;
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_SUCCESS = "Client list is sorted accordingly!";
-    public static final String MESSAGE_EMPTY_ERROR = "Fields to be sorted or not specified,"
-        + " client list remains unchanged!";
+    public static final String MESSAGE_SUCCESS = "Client list sorted accordingly.";
+    public static final String MESSAGE_EMPTY_ERROR = "No fields specified. "
+        + " Client list remains unchanged.";
     public static final String DESCENDING_KEYWORD = "desc";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": sorts the client list in the field order specified.\n"
-            + "Parameters: Any field prefix "
+            + ": Sort the client list according to the order of the fields specified.\n"
+            + "Parameters: "
             + "[" + Name.PREFIX + "] "
             + "[" + Phone.PREFIX + "] "
             + "[" + Email.PREFIX + "] "
             + "[" + Address.PREFIX + "] "
             + "[" + Remark.PREFIX + "] "
-            + "[" + Birthday.PREFIX + "] "
-            + "Add keyword" + DESCENDING_KEYWORD + " after a field if it's to be sorted in descending order.\n"
+            + "[" + Birthday.PREFIX + "]\n"
+            + "Add keyword" + DESCENDING_KEYWORD + " after a prefix to sort in descending order.\n"
             + "Example: " + COMMAND_WORD + " n/ e/ desc a/ n/";
 
     private final List<FieldSortOrder> fieldSortOrderList;

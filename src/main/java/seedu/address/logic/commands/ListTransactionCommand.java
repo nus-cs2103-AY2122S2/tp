@@ -13,7 +13,7 @@ public class ListTransactionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Listed all transactions ";
+    public static final String MESSAGE_SUCCESS = "All transactions listed.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

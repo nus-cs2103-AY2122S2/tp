@@ -27,17 +27,17 @@ public class MembershipTest {
     public void getValue() {
         Membership member = new Membership("bronze");
 
-        assertEquals("BRONZE", member.getValue());
+        assertEquals("Bronze", member.getValue());
         assertNotEquals("Fake", member.getValue());
 
         member = new Membership("silver");
 
-        assertEquals("SILVER", member.getValue());
+        assertEquals("Silver", member.getValue());
         assertNotEquals("Fake", member.getValue());
 
         member = new Membership("gold");
 
-        assertEquals("GOLD", member.getValue());
+        assertEquals("Gold", member.getValue());
         assertNotEquals("Fake", member.getValue());
     }
 
@@ -98,7 +98,7 @@ public class MembershipTest {
     public void toString_test() {
         LocalDate date = LocalDate.parse("1920-02-02");
         Membership member = new Membership("BRONZE", date);
-        String expectedResult = "BRONZE MEMBER since " + date.toString();
+        String expectedResult = "Bronze member since " + date.toString();
 
         assertEquals(expectedResult, member.toString());
     }

@@ -18,11 +18,10 @@ class RemarkCommandTest {
 
     @Test
     void execute_addRemarkUnfilteredList_success() {
+        Remark remark = new Remark("Test Remark");
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = firstPerson.addFields(new Remark("Some remark."));
-
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON,
-                new Remark(editedPerson.getField(Remark.PREFIX).orElse(Remark.EMPTY_REMARK).getValue()));
+        Person editedPerson = firstPerson.addFields(remark);
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, remark);
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 

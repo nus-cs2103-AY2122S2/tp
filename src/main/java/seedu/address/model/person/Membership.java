@@ -24,9 +24,9 @@ public class Membership extends Field {
     public static final Prefix PREFIX = new Prefix("m/", true);
     public static final Prefix DATE_PREFIX = new Prefix("d/", false);
     public static final String MESSAGE_CONSTRAINTS =
-            "Membership tier should be either 'bronze', 'silver' or 'gold'";
+            "Membership tier must be either 'bronze', 'silver' or 'gold'.";
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Date is in an invalid format";
+            "Birthday must be in YYYY-MM-DD format, must exist, and cannot be in the future.";
 
     private final Tier tier;
     private final LocalDate date;
@@ -94,22 +94,23 @@ public class Membership extends Field {
      * Returns true if a given date is a valid date.
      */
     public static boolean isValidDate(String test) {
+        LocalDate date;
         try {
-            LocalDate.parse(test);
+            date = LocalDate.parse(test);
         } catch (DateTimeParseException e) {
             return false;
         }
-        return true;
+        return date.isBefore(LocalDate.now());
     }
 
     public String getValue() {
         String value = "";
         if (tier == Tier.GOLD) {
-            value = "GOLD";
+            value = "Gold";
         } else if (tier == Tier.SILVER) {
-            value = "SILVER";
+            value = "Silver";
         } else if (tier == Tier.BRONZE) {
-            value = "BRONZE";
+            value = "Bronze";
         }
         return value;
     }
@@ -124,9 +125,8 @@ public class Membership extends Field {
         if (date != null) {
             datePostFix = " since " + date.toString();
         }
-        String value = "";
 
-        return getValue() + " MEMBER" + datePostFix;
+        return getValue() + " member" + datePostFix;
     }
 
     @Override

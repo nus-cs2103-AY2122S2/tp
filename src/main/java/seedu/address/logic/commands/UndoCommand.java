@@ -10,8 +10,8 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_UNDO_ACKNOWLEDGEMENT = "Successfully undo previous modification made";
-    public static final String REACHED_UNDO_LIMIT = "You have reached the undo limit. Cannot undo.";
+    public static final String MESSAGE_UNDO_ACKNOWLEDGEMENT = "Undid previous modification.";
+    public static final String REACHED_UNDO_LIMIT = "Cannot undo. Undo limit reached.";
 
     @Override
     public CommandResult execute(Model model) {

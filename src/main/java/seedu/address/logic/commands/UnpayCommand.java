@@ -13,14 +13,12 @@ public class UnpayCommand extends Command {
 
     public static final String COMMAND_WORD = "unpay";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": set the status of "
-            + "the transaction at specified index to unpaid (false). "
-            + "Index must be greater than 0.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Set the status of the transaction at specified index to 'Unpaid'.\n"
+            + "Parameters: INDEX (must be a positive integer) \n"
             + "Format: " + COMMAND_WORD + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
-
-    public static final String MESSAGE_SUCCESS = "Transaction status has "
-            + "been changed!";
+    public static final String MESSAGE_SUCCESS = "Transaction status updated.";
 
     private final Index index;
 
