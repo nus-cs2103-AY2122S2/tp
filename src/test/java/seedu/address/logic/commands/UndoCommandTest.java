@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -44,7 +43,7 @@ public class UndoCommandTest {
 
         //Execute a command
         RedoableCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        CommandResult commandResult = deleteCommand.execute(model, new CommandHistory(), undoRedoStack);
+        CommandResult commandResult = deleteCommand.execute(model, undoRedoStack);
         deleteCommand.saveSuccessMessage(commandResult.getFeedbackToUser());
 
         undoRedoStack.push(deleteCommand);

@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -15,7 +14,7 @@ public class ExitCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory,
+    public CommandResult execute(Model model,
                                  StackUndoRedo undoRedoStack) throws CommandException {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, false, false, true, false);
     }

@@ -11,7 +11,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -80,9 +79,8 @@ public class DeleteModuleCommand extends RedoableCommand {
     }
 
     @Override
-    protected CommandResult executeUndoableCommand(Model model,
-                                                   CommandHistory commandHistory,
-                                                   StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model,
+                                                StackUndoRedo undoRedoStack) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 

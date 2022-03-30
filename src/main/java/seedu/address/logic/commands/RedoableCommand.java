@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -17,7 +16,7 @@ public abstract class RedoableCommand extends Command {
 
     private String message = "";
 
-    protected abstract CommandResult executeUndoableCommand(Model model, CommandHistory commandHistory,
+    protected abstract CommandResult executeUndoableCommand(Model model,
                                                             StackUndoRedo undoRedoStack) throws CommandException;
 
     /**
@@ -77,12 +76,12 @@ public abstract class RedoableCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory,
+    public CommandResult execute(Model model,
                                  StackUndoRedo undoRedoStack) throws CommandException {
 
         saveAddressBookSnapshot(model);
 
-        return executeUndoableCommand(model, commandHistory, undoRedoStack);
+        return executeUndoableCommand(model, undoRedoStack);
     }
 
 }

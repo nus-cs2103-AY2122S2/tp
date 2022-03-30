@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -85,7 +84,7 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
                                             Model expectedModel) {
         try {
-            CommandResult result = command.execute(actualModel, new CommandHistory(), new StackUndoRedo());
+            CommandResult result = command.execute(actualModel, new StackUndoRedo());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -102,7 +101,7 @@ public class CommandTestUtil {
                                             CommandResult expectedCommandResult, Model expectedModel) {
         StackUndoRedo expectedUndoRedoStack = new StackUndoRedo(actualUndoRedoStack);
         try {
-            CommandResult result = command.execute(actualModel, new CommandHistory(), actualUndoRedoStack);
+            CommandResult result = command.execute(actualModel, actualUndoRedoStack);
 
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
@@ -144,7 +143,6 @@ public class CommandTestUtil {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel,
-                new CommandHistory(),
                 new StackUndoRedo()));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());

@@ -8,7 +8,6 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Comment;
@@ -78,8 +77,8 @@ public class CommentCommand extends RedoableCommand {
     }
 
     @Override
-    protected CommandResult executeUndoableCommand(Model model, CommandHistory commandHistory,
-                                                   StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model,
+                                                StackUndoRedo undoRedoStack) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

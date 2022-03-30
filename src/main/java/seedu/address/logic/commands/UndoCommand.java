@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -22,7 +21,7 @@ public class UndoCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory,
+    public CommandResult execute(Model model ,
                                  StackUndoRedo undoRedoStack) throws CommandException {
         requireAllNonNull(model, undoRedoStack);
 

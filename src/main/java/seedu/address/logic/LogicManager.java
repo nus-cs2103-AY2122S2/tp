@@ -29,7 +29,6 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final CommandHistory commandHistory;
     private final StackUndoRedo undoRedoStack;
 
     /**
@@ -38,7 +37,6 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        this.commandHistory = new CommandHistory();
         this.undoRedoStack = new StackUndoRedo();
 
         addressBookParser = new AddressBookParser();
@@ -50,12 +48,11 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model, commandHistory, undoRedoStack);
+        commandResult = command.execute(model, undoRedoStack);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
 
-            commandHistory.add(commandText);
             undoRedoStack.push(command);
 
             if (command instanceof RedoableCommand) {
