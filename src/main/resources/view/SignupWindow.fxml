@@ -62,7 +62,7 @@
                         <ImageView fx:id="conditionImage1" fitHeight="16" fitWidth="16">
                             <Image url="@/images/reject.png"/>
                         </ImageView>
-                        <Label fx:id="conditionText1" text="Password mismatch" wrapText="true"/>
+                        <Label fx:id="conditionText1" text="Passwords do not match" wrapText="true"/>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" >
                         <ImageView fx:id="conditionImage2" fitHeight="16" fitWidth="16">
