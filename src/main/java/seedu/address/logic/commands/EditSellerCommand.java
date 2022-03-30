@@ -71,7 +71,7 @@ public class EditSellerCommand extends Command {
         List<Seller> lastShownList = model.getFilteredSellerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
         }
 
         Seller sellerToEdit = lastShownList.get(index.getZeroBased());

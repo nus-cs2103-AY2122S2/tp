@@ -96,6 +96,7 @@ Format: `match INDEX`
 * E.g. If a buyer has house type `HDB`, location `Bishan` and price range `400000,500000`, a seller with house type `HDB`, location `Bishan` and price range `490000,600000` will match as the buyer's price range has an **overlap** with the seller's.
 
 Examples:
+
 * `match 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
 
 [back to start of section](#features)

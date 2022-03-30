@@ -36,6 +36,7 @@ public class SellerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
+        desiredProperty = DEFAULT_PROPERTY;
     }
 
     /**
@@ -46,6 +47,7 @@ public class SellerBuilder {
         phone = sellerToCopy.getPhone();
         appointment = sellerToCopy.getAppointment();
         tags = new HashSet<>(sellerToCopy.getTags());
+        desiredProperty = sellerToCopy.getPropertyToSell();
     }
 
     /**
