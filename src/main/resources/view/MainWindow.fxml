@@ -115,7 +115,7 @@
                               </Tab>
 
                               <Tab text="  ✍︎ Schedule">
-      
+
                                   <GridPane fx:id="gridPane" minWidth="340.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
                                       <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="170.0" />
@@ -125,7 +125,6 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                       <children>
-
                                           <VBox fx:id="scheduleList" alignment="TOP_RIGHT" styleClass="pane-without-border" GridPane.columnIndex="0">
                                               <padding>
                                                   <Insets bottom="10" left="10" right="10" top="10" />
@@ -139,10 +138,8 @@
                                               </padding>
                                               <StackPane fx:id="scheduleCalendarPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                           </VBox>
-
                                       </children>
                                   </GridPane>
-                                  
                               </Tab>
                           </tabs>
                       </TabPane>
