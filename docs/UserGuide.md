@@ -9,6 +9,26 @@ Tracey is a **desktop app for managing health statuses of NUS Hall Residents, op
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
+What are CLIs? What are GUIs? 
+
+1) CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
+2) GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
+
+Note that the main difference between GUI and CLI is the method of interaction.
+
+As Tracey is a Command Line Interface, these are the aspects that highlight the power of Tracey and why it was developed using a CLI:
+
+1. **Speed** <br>
+Tracey offers immense speed. GUIs require additional resources to render graphical components and thus is slower than CLIs
+2. **Functionality** <br>
+Tracey offers flexibility in terms of its use. A GUI does not have the same level of functionality and granular control as a CLI. This is portrayed in the various forms of features that Tracey offers that you can expand on later in this User Guide.
+3. **Scalability** <br>
+Simple command functions in Tracey allow you to handle various complex features. Additionally, if newer features were to be added in future iterations, CLIs allow for easier integration as GUIs require rendering and creation of graphical components.
+
+Sounds exciting? Proceed on to the next section to learn more about Tracey!
+
+We hope you enjoy Tracey as much as we did developing it!
+
 --------------------------------------------------------------------------------------------------------------------
 
 * [Navigating the User Guide](#how-to-navigate-the-user-guide)
