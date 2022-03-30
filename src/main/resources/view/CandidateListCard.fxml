@@ -27,8 +27,8 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+      <Label fx:id="course" styleClass="cell_small_label" text="\$course" />
       <FlowPane fx:id="statusPane" prefWrapLength="200" styleClass="status_pane_style"/>
-      <FlowPane fx:id="tags"/>
       <FlowPane fx:id="availableDays" prefWrapLength="300" styleClass="availability_pane_style" />
     </VBox>
   </GridPane>

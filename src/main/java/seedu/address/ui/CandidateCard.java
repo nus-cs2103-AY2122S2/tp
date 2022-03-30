@@ -52,6 +52,8 @@ public class CandidateCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label course;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -69,6 +71,7 @@ public class CandidateCard extends UiPart<Region> {
         this.candidate = candidate;
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName + ", " + candidate.getStudentId().studentId);
+        course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
 
         setAvailableDays(candidate.getAvailability());
         setApplicationStatus(candidate.getApplicationStatus());
