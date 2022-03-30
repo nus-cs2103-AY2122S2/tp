@@ -144,6 +144,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isPassableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isPassableInterview(interview);
+    }
+
+    @Override
+    public boolean isAcceptableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isAcceptableInterview(interview);
+    }
+
+    @Override
+    public boolean isRejectableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isRejectableInterview(interview);
+    }
+
+    @Override
     public void deleteInterview(Interview target) {
         addressBook.removeInterview(target);
     }
@@ -153,6 +171,7 @@ public class ModelManager implements Model {
         addressBook.addInterview(interview);
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
+
 
     @Override
     public void setInterview(Interview target, Interview editedInterview) {

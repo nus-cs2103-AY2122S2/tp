@@ -422,7 +422,7 @@
     -fx-text-fill: #d0d0d0;
 }
 
-#interviewstatus {
+#interviewstatus, #applicantstatus {
     -fx-text-fill: white;
     -fx-background-color: #9f8331;
     -fx-padding: 3 3 3 3;

@@ -94,7 +94,7 @@ public class PositionTest {
 
         // different offers count -> returns false
         Position editedJrSw4 = new PositionBuilder(JR_SOFTWARE_ENGINEER).build();
-        editedJrSw4.getPositionOffers().increment();
+        editedJrSw4 = editedJrSw4.extendOffer();
         assertFalse(JR_SOFTWARE_ENGINEER.equals(editedJrSw4));
     }
 
@@ -106,22 +106,24 @@ public class PositionTest {
         assertTrue(jrSweCopy.isValidOpeningsToOffers());
 
         // extend first offer - 1 offer to 2 openings - valid
-        jrSweCopy.getPositionOffers().increment();
-        assertTrue(jrSweCopy.isValidOpeningsToOffers());
+        Position jrSweWithOffer = jrSweCopy.extendOffer();
+        assertTrue(jrSweWithOffer.isValidOpeningsToOffers());
 
         // should have 1 offer
-        assertTrue(jrSweCopy.getPositionOffers().getCount().equals(1));
+        assertTrue(jrSweWithOffer.getPositionOffers().getCount().equals(1));
 
         // extend second offer - 2 offers to 2 openings - valid
-        jrSweCopy.getPositionOffers().increment();
-        assertTrue(jrSweCopy.isValidOpeningsToOffers());
+        Position jrSweWithTwoOffers = jrSweWithOffer.extendOffer();
+        assertTrue(jrSweWithTwoOffers.isValidOpeningsToOffers());
 
         // should have 2 offers
-        assertTrue(jrSweCopy.getPositionOffers().getCount().equals(2));
+        assertTrue(jrSweWithTwoOffers.getPositionOffers().getCount().equals(2));
 
         // extend third offer - invalid
-        jrSweCopy.getPositionOffers().increment();
-        assertFalse(jrSweCopy.isValidOpeningsToOffers());
+        Position invalidSwe = new Position(jrSweWithTwoOffers.getPositionName(), jrSweWithTwoOffers.getDescription(),
+                jrSweWithTwoOffers.getPositionOpenings(), jrSweWithTwoOffers.getPositionOffers().increment(),
+                jrSweWithTwoOffers.getRequirements());
+        assertFalse(invalidSwe.isValidOpeningsToOffers());
     }
 
     @Test
@@ -132,12 +134,12 @@ public class PositionTest {
         assertTrue(jrSweCopy.canExtendOffer());
 
         // after offering 1, still can extend offer
-        jrSweCopy.getPositionOffers().increment();
-        assertTrue(jrSweCopy.canExtendOffer());
+        Position jrSweWithOffer = jrSweCopy.extendOffer();
+        assertTrue(jrSweWithOffer.canExtendOffer());
 
         // after offering 2nd, cannot extend offer anymore
-        jrSweCopy.getPositionOffers().increment();
-        assertFalse(jrSweCopy.canExtendOffer());
+        Position jrSweWithTwoOffers = jrSweWithOffer.extendOffer();
+        assertFalse(jrSweWithTwoOffers.canExtendOffer());
     }
 
     @Test
@@ -148,12 +150,11 @@ public class PositionTest {
         assertFalse(jrSweCopy.canAcceptOffer());
 
         // after 1 offer, can accept
-        jrSweCopy.getPositionOffers().increment();
-        assertTrue(jrSweCopy.canAcceptOffer());
+        Position jrSweWithOffer = jrSweCopy.extendOffer();
+        assertTrue(jrSweWithOffer.canAcceptOffer());
 
         // after accepting 1st offer, cannot accept
-        jrSweCopy.getPositionOffers().decrement();
-        jrSweCopy.getPositionOpenings().decrement();
+        jrSweCopy = jrSweWithOffer.acceptOffer();
         assertFalse(jrSweCopy.canAcceptOffer());
     }
 }

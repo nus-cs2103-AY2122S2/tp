@@ -90,7 +90,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// applicant-level operations
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
      */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
@@ -114,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a applicant to the address book.
+     * Adds an applicant to the address book.
      * The applicant must not already exist in the address book.
      */
     public void addApplicant(Applicant p) {
@@ -160,6 +160,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an interview is passable based on the number of extended offers and openings.
+     */
+    public boolean isPassableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isPassableInterview(i);
+    }
+
+    /**
+     * Returns true if an interview is acceptable based on the status of the interview.
+     */
+    public boolean isAcceptableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isAcceptableInterview(i);
+    }
+
+    /**
+     * Returns true if an interview is rejectable based on the status of the interview.
+     */
+    public boolean isRejectableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isRejectableInterview(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -197,7 +221,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setInterview(Interview target, Interview editedInterview) {
         requireNonNull(editedInterview);
-
         interviews.setInterview(target, editedInterview);
     }
 
@@ -294,5 +317,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return applicants.hashCode();
+    }
+
+    public Applicant getApplicantUsingStorage(Applicant interviewApplicant) {
+        return applicants.getApplicant(interviewApplicant);
+    }
+
+    public Position getPositionUsingStorage(Position interviewPosition) {
+        return positions.getPosition(interviewPosition);
     }
 }

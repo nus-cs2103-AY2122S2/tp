@@ -41,6 +41,33 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Returns true if the interview is passable based off the number of currently
+     * extended offers and position openings.
+     */
+    public boolean isPassableInterview(Interview toPass) {
+        requireNonNull(toPass);
+        return toPass.isPassableInterview();
+    }
+
+    /**
+     * Returns true if the interview is passable based off the current status of
+     * the interview.
+     */
+    public boolean isAcceptableInterview(Interview toAccept) {
+        requireNonNull(toAccept);
+        return toAccept.isAcceptableInterview();
+    }
+
+    /**
+     * Returns true if the interview can be rejected based off the current status of
+     * the interview.
+     */
+    public boolean isRejectableInterview(Interview toReject) {
+        requireNonNull(toReject);
+        return toReject.isRejectableInterview();
+    }
+
+    /**
      * Adds an interview to the list.
      * The interview must not already exist in the list.
      */
@@ -140,7 +167,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < internalList.size(); i++) {
             Interview curr = internalList.get(i);
             if (curr.getPosition().equals(positionToBeUpdated)) {
-                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition));
+                internalList.set(i, new Interview(curr.getApplicant(), curr.getDate(), newPosition, curr.getStatus()));
             }
         }
     }
@@ -154,7 +181,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         for (int i = 0; i < internalList.size(); i++) {
             Interview curr = internalList.get(i);
             if (curr.getApplicant().equals(applicantToBeUpdated)) {
-                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition()));
+                internalList.set(i, new Interview(newApplicant, curr.getDate(), curr.getPosition(), curr.getStatus()));
             }
         }
     }

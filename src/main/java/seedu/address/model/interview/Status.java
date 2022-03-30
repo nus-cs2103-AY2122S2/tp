@@ -34,6 +34,17 @@ public class Status {
         value = "Accepted";
     }
 
+    /**
+     * Marks an interview as rejected only if status is passed.
+     */
+    public void markAsRejected() {
+        // Defensive programming to prevent acceptance before passing interview
+        if (value != "Passed - Waiting for Applicant") {
+            throw new RuntimeException("The Interview should be passed before its can be accepted by candidate");
+        }
+        value = "Rejected";
+    }
+
     @Override
     public String toString() {
         return value;
