@@ -161,10 +161,11 @@ Format: `put P/PLAYER L/LINEUP`
 
 Views the summarised information of lineup/ player/ schedule.
 
-**To view a lineup:**<br>
+**To view lineup:**<br>
 
-Format: `view L/[LINEUP]`
+Format: `view L/[LINEUP] [N/]`
 * The summarised information of a lineup only include the name, the position of the player and the number of slots (out of 5) filled.
+* The optional N/ flag is used to specify players without a lineup. When this flag is used, LINEUP must be empty.
 * Displays the summarised information of the specified `LINEUP` in the specified ``.
   - All the players in the specified `LINEUP` will be displayed.
 * If no `LINEUP` is provided, the summarised information of all lineups in the specified `` will be displayed.
@@ -174,11 +175,14 @@ Format: `view L/[LINEUP]`
 Examples:
 * `view L/Starting Five` Displays the summarised information of lineup `Start Five`
 * `view L/` Displays the summarised information of all lineups
+*  `view L/ N/` Displays all the players without a lineup.
 
-**To view a player:**<br>
+**To view player:**<br>
 
-Format: `view P/[PLAYER]`
+Format: `view P/[PLAYER…​] w/[OP_WEIGHT] h/[OP_HEIGHT] t/[POSITION…​]`
 * The summarised information of a player includes all its attributes.
+* Parameter OP can be gte (greater than or equal to), lte (lesser than or equal to),
+gt (greater than), lt (lesser than), eq (equal to).
 * Displays the summarised information of the specified `PLAYER`.
   - Only the specified player will be displayed.
 * If no `PLAYER` is provided, the summarised information of all existing players in the system will be displayed.
@@ -186,6 +190,8 @@ Format: `view P/[PLAYER]`
 Examples:
 * `view P/Kelvin Darent` Displays the information of `Kelvin Darent`.
 * `view P/` Displays all players in the system.
+* `view P/ h/gt180 w/gte90 t/PF SF` Displays the information of all the players with weight greater than
+or equal to 90kg, height greater than 180cm and plays the PF or SF position.
 
 **To view schedules:**<br>
 
