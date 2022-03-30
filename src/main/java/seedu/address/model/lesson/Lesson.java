@@ -61,11 +61,9 @@ public class Lesson {
      * Removes a student from the lesson as well as all the related attendance information.
      */
     public void removeStudent(Student student) {
-        for (StudentAttendance sa : studentAttendanceList) {
-            if (sa.getStudent().equals(student)) {
-                studentAttendanceList.remove(sa);
-            }
-        }
+        StudentAttendance objToDelete = studentAttendanceList.stream().filter(sa -> sa.getStudent().equals(student))
+                .findFirst().get();
+        studentAttendanceList.remove(objToDelete);
     }
 
     //@@author EvaderFati

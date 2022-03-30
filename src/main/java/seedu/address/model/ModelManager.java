@@ -252,6 +252,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeStudentFromAssessments(Student student) {
+        tAssist.removeStudentFromAssessments(student);
+    }
+
+    @Override
     public ObservableList<Student> getStudentListByIndexes(List<Index> indexes) {
         return tAssist.getStudentListByIndexes(indexes);
     }
