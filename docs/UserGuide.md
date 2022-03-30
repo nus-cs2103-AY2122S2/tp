@@ -216,12 +216,12 @@ Format: `exit`
 
 ## _Optional Requirements_
 
-This subsection covers the features that you may encounter when having a pet that requires more attention.
+This subsection covers the features that you may encounter when taking care of a pet that requires more attention.
 
 ### Add pets' dietary requirements: `diet` ###
 
-When some pets have health issues, owners will give instructions on what their pet can or cannot eat. You will want to
-put a diet remark on the pet to take note.
+Your clients may provide you with instructions on what their pets can or cannot consume, in the event that their pets suffer 
+from health issues. You may wish to include a diet remark along with such pets in WoofAreYou to take note.
 
 Format: `diet INDEX d/REMARK`
 
@@ -239,16 +239,15 @@ Examples:
 
 ### Add / Clear pets' appointment details: `app` ###
 
-Sometimes, you will need to bring the pet out for its vet or grooming appointments. You will want to put a reminder on
-the pet to take note as well. With this feature you can **_Add Appointment_** and **_Clear Appointment_** when appropriate.
+In the event that your client tasks you with bringing their pets out for their vet or grooming appointments, you may wish 
+to note down the relevant details of such appointments, such as the date, time and location.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about this feature:**<br>
 
-* You can only store one appointment to a pet at any point of time.
-  * This is because pets often have varying appointment dates, and it is unlikely to know when the next appointment will be.
-* Once the appointment is over, you have to clear it if you want to put new appointments in the future.
+* You can only note down one appointment per pet at any point in time.
+* Once the appointment is over, you will have to clear it manually if you wish to note down a new appointments.
 
 </div>
 
@@ -256,18 +255,17 @@ the pet to take note as well. With this feature you can **_Add Appointment_** an
 
 Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 
-* Adds appointment for pet at `INDEX` on `dt/[dd-MM-yyyy HH:mm]` `at/[location]` .
+* Adds appointment for pet at `INDEX` on a specific date at a specific location.
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Date and time of appointment should be entered together with `dt/` prefix.
+* Date and time of the appointment should be entered together with `dt/` prefix.
 * Date and time should strictly follow `dd-MM-yyyy HH:mm` format.
 * Location of appointment should be entered with `at/` prefix.
 * Whitespaces, special characters and alphanumeric characters are allowed for location.
-* If both `date/` and `at/` are not present, `app` will be deemed invalid.
+* Both `date/` and `at/` are **mandatory** fields.
 
 Examples:
-* `app 1 dt/27-03-2022 09:30 at/ NUS Vet Clinic` will store the appointment details for Woofie as
-`Mar-27-2022 9:30 AM at NUS Vet Clinic`.
+* `app 1 dt/27-03-2022 09:30 at/ NUS Vet Clinic` will note down that Woofie has an appointment on 27 March 2022, 9:30 am at the NUS Vet Clinic.
 
 **Clear Appointment**
 
@@ -277,28 +275,50 @@ Format: `app INDEX clear`
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `clear` is case-sensitive.
-* Whitespaces, special characters and alphanumeric characters are allowed for location.
-* If `clear` is not present, `app` will be deemed invalid.
 
 Examples:
-`app 1 clear` will clear the appointment details for Woofie and set it to be an empty field.
+* `app 1 clear` will clear the appointment details for Woofie.
 
 ## _Efficiency Enhancement_
 
-You may have noticed that a handful of commands require `INDEX` and it may be very troublesome to scroll through the
-whole pet list to find that one `INDEX` if your pet list is huge. Hence, this subsection covers the features that
-will make life easier when trying to implement the features above.
+You may have noticed that a handful of commands require `INDEX`, and it may be troublesome to scroll through WoofAreYou 
+to find that one pet's `INDEX` if you have many clients. Hence, this subsection covers the features that will make your
+life easier when trying to use the features previously introduced.
+
+### Find pet details: `find`
+
+In the event that you wish to search for particular pets in WoofAreYou to check up on details, and know their names, you can use this function to find pets with a particular name. 
+
+If there are multiple pets with the same name, all such pets will be displayed. 
+
+You can also find multiple pets by providing multiple pet names as keywords.
+
+Format: `find NAME_OF_PET...`
+* The name of the pet is case-insensitive e.g: `find woofie` will return Woofie as a match.
+* Only the names of pets are searched.
+* Search returns partial name matches e.g.: `find woo` will return Woofie as a match.
+
+Examples:
+* `find poofie woofie` will return a list of pets containing all pets named Poofie and Woofie.
+
+<p align="center">
+  <img src="images/forUserGuide/UpdatedFind.png" alt="After finding sample screenshot"/>
+</p>
 
 ### Sort pets: `sort`
 
-Firstly, you can sort the pet list by a few parameters. This command returns a sorted list of pets according to the
-parameter chosen. You can choose to either sort alphabetically by owner name or pet name. You can also sort chronologically
-by appointment date.
+You may also find sorting pets in WoofAreYou useful during your daily administration. 
+
+The command returns a sorted list of pets according to the parameter chosen. 
+
+You can choose to either sort pets alphabetically, by their names or their owner's names.
+
+You can also sort pets chronologically, by their appointment dates, transport pick-up times as well as drop-off times.
 
 Format: `sort SORT_BY`
-* The valid `SORT_BY` parameters are `name` , `owner` and `app`.
+* The valid `SORT_BY` parameters are `name` , `owner`, `app`, `pick up` and `drop off`.
 * The parameters are case-sensitive.
-* Only one `SORT_BY` parameter is to be used with this command. If none or more than one parameter is used, command will throw an error.
+* **One and only one** `SORT_BY` parameter is to be used with this command.
 
 Examples:
 * `sort name` will sort the pets alphabetically as shown below.
@@ -307,23 +327,8 @@ Examples:
   <img src="images/forUserGuide/UpdatedSort.png" alt="After sorting sample screenshot"/>
 </p>
 
-### Find pet details: `find`
-
-If sorting alone is not enough, and you know exactly which pet you are looking for then you can use this command to find
-pets with that name. If there are multiple pets with the same name, a pet list of all such pets
-will be displayed. You can also find using multiple pet names.
-
-Format: `find NAME_OF_PET [KEYWORDS]...`
-* The name of pet is case-insensitive e.g: `find Woofie` will match `find woofie`.
-* Only the name is searched.
-* Search returns partial name matches e.g.: `find woo` will return Woofie as a result.
-
-Examples:
-* `find poofie woofie` will return a pet list with these two pets in the list.
-
-<p align="center">
-  <img src="images/forUserGuide/UpdatedFind.png" alt="After finding sample screenshot"/>
-</p>
+* `sort app` will sort the pets by their appointment dates and times, listing the pets starting from the pet with the earliest appointment to the latest appointment.
+* `sort pick up` and `sort drop off` will sort the pets by their pick up and drop off times respectively, listing the pets starting from the pet with the earliest time to the latest time.
 
 ### Filter pet list: `filter`
 
@@ -352,8 +357,7 @@ Examples:
 
 ### List all pets : `list`
 
-After using all of those commands, you may want to retrieve the initial pet list with all the pets. This feature just
-shows a list of all pets in pet list.
+This feature lists out all pets, helpful for when you wish to look through all pets in WoofAreYou.
 
 Format:`list`
 
@@ -375,8 +379,8 @@ Format: `help`
 
 ## Command Summary
 
-The table below summarises all the commands and features discussed above. You can refer to this if you do not want to
-deal with the nitty-gritty details of each feature.
+The table below summarises all the commands and features discussed above. You can refer to this nifty table if you do not 
+wish to deal with the nitty-gritty details of each feature.
 
 | Action        | Format                                                                              | Example                                                                       | Function                                                                                                              |
 |---------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
