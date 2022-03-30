@@ -8,7 +8,7 @@
 //
 //public class HouseBuilder {
 //
-//    public static final HouseType DEFAULT_HOUSE_TYPE= HouseType.ANY;
+//    public static final HouseType DEFAULT_HOUSE_TYPE= HouseType.UNSPECIFIED;
 //    public static final String DEFAULT_LOCATION = "Clementi";
 //
 //    private HouseType houseType;
