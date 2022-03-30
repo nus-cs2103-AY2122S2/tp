@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,16 +51,16 @@ public class InsurancePackagesSet {
         return allPackages;
     }
 
+
     /**
-     * Replaces the given package {@code target} in the list with {@code editedPackage}.
+     * Replaces the given package in the list, given the package name, with the given package description.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPackage(InsurancePackage target, InsurancePackage editedPackage) {
-        requireNonNull(editedPackage);
+    public void setPackage(String targetPackageName, String newPackageDesc) {
+        requireAllNonNull(targetPackageName, newPackageDesc);
         for (InsurancePackage p: allPackages) {
-            if (p.equals(target)) {
-                p.setPackageDescription(editedPackage.getPackageDescription());
+            if (p.getPackageName().equals(targetPackageName)) {
+                p.setPackageDescription(newPackageDesc);
                 break;
             }
         }

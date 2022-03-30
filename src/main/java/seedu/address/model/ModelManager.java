@@ -113,9 +113,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteInsurancePackage(InsurancePackage p) {
+        this.insurancePackagesSet.removePackage(p);
+    }
+
+    @Override
     public boolean hasInsurancePackage(InsurancePackage p) {
         requireNonNull(p);
         return insurancePackagesSet.hasPackage(p);
+    }
+
+    @Override
+    public void setInsurancePackage(String targetPackageName, String newPackageDesc) {
+        insurancePackagesSet.setPackage(targetPackageName, newPackageDesc);
     }
 
     //=========== AddressBook ================================================================================

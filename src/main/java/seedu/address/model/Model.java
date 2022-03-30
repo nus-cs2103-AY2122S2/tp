@@ -83,9 +83,19 @@ public interface Model {
     void addInsurancePackage(InsurancePackage p);
 
     /**
+     * Deletes the given Insurance Package.
+     */
+    void deleteInsurancePackage(InsurancePackage p);
+
+    /**
      * Returns true if an insurance package with the same identity as {@code p} exists in the set of packages.
      */
     boolean hasInsurancePackage(InsurancePackage p);
+
+    /**
+     * Sets the description of an insurance package with the given description.
+     */
+    void setInsurancePackage(String targetPackageName, String newPackageDesc);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

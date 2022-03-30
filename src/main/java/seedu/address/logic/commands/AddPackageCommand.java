@@ -26,11 +26,10 @@ public class AddPackageCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New package added: %1$s";
     public static final String MESSAGE_DUPLICATE_PACKAGE = "This package already exists in the address book";
 
-
     private final InsurancePackage toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPackageCommand to add the specified insurance package.
      */
     public AddPackageCommand(InsurancePackage p) {
         requireNonNull(p);
