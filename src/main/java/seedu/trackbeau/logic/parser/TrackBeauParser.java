@@ -10,6 +10,7 @@ import seedu.trackbeau.logic.commands.ClearCommand;
 import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.ExitCommand;
 import seedu.trackbeau.logic.commands.HelpCommand;
+import seedu.trackbeau.logic.commands.ScheduleCommand;
 import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.commands.booking.DeleteBookingCommand;
 import seedu.trackbeau.logic.commands.customer.AddCustomerCommand;
@@ -89,6 +90,9 @@ public class TrackBeauParser {
 
         case ListCustomersCommand.COMMAND_WORD:
             return new ListCustomersCommand();
+
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
