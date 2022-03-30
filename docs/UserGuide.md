@@ -148,12 +148,10 @@ Amigos provides functionality to manage logs, which are essentially detailed not
 Adds a log to an existing friend at the specified `INDEX` in Amigos.
 The `INDEX` refers to the index number shown in the displayed person's list.
 
-**Format**: `addlog INDEX ? n/NAME ttl/[TITLE] d/[DESCRIPTION]`
+**Format**: `addlog INDEX ? n/NAME ttl/TITLE [d/DESCRIPTION]`
 
 * Exactly one of `INDEX` or the `NAME` fields is compulsory.
 * If the `TITLE` argument is provided, then the `DESCRIPTON` argument is optional.
-* If neither `TITLE` nor `DESCRIPTION` arguments are provided, then a GUI
-  pop up will prompt the user to key in the title and longer-form text as the description.
 
 **Examples**:
 * `addlog 1 ttl/has a pet named poki`
@@ -163,33 +161,27 @@ The `INDEX` refers to the index number shown in the displayed person's list.
 
 Edits an existing log of an existing friend in Amigos.
 
-**Format**: `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
+**Format**: `editlog INDEX ? n/NAME id/LOG_INDEX [ttl/NEW_TITLE] [d/NEW_DESCRIPTION]`
 
 * The `NAME` field is compulsory.
-* If `LOG_INDEX` is not provided, then all logs, each with an accompanying index, will allow a user to
-  choose which log to apply the changes to.
 * At least one of the `NEW_TITLE` or `NEW_DESCRIPTION` arguments must be provided.
   Both will directly overwrite the current values.
-* If neither `NEW_TITLE` nor `NEW_DESCRIPTION` arguments are provided, then a GUI
-  pop up will prompt the user to key in the title and longer-form text as the description.
 
 **Examples:**
-* `editlog n/John Doe id/1 nt/has a pet named Poki`
-* `editlog n/Andrew Tan id/1 nt/recommended movies and shows nd/the martian, interstellar, three idiots, peaky blinders`
+* `editlog n/John Doe id/1 ttl/has a pet named Poki`
+* `editlog n/Andrew Tan id/1 ttl/recommended movies and shows d/the martian, interstellar, three idiots, peaky blinders`
 
 ### Deleting a log: `deletelog`
 
-Deletes an existing log of an existing friend in Amigos.
+Deletes an existing log or logs of an existing friend in Amigos.
 
-**Format**: `deletelog INDEX id/LOG_INDEX -a`
+**Format**: `deletelog [INDEX ? n/NAME] [id/LOG_INDEX] [-a]`
 
-* The `INDEX` field is compulsory.
-* If `INDEX` is provided as well as a `-a` flag, then all logs of tht person will
+There are three cases of usage: 
+* If `INDEX` or `NAME` is provided as well as `LOG_INDEX`, then that specific log will be deleted.
+* If `INDEX` or `NAME` is provided as well as a `-a` flag, then all logs of that person will
   be deleted.
-* If `LOG_INDEX` is not provided and there is no `-a` flat, then all logs, each with an
-  accompanying index, will allow a user to choose one log to delete.
-* If no `INDEX` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
-  of all friends will be deleted.
+* If only `-a` is provided, then all possible logs of all friends will be deleted.
 
 **Examples:**
 * `deletelog n/John Doe id/1`
@@ -266,6 +258,14 @@ Find events in Amigos whose properties match the given search criteria.
 * `findevent n/dinner da/20-03-2022` returns events on 20 Mar 2022 with an event name containing 'dinner' 
 * `findevent f/Joe f/John` will return events with a friends list containing both 'joe' and 'john'
 
+## Insights
+
+Amigos aims to help you improve your relationships by providing the tools to reflect on your relationships.
+
+### Review insights of your friends: `showinsights`
+
+Shows insights about friends in Amigos. Switches GUI to the Insights tab.
+
 
 ## Miscellaneous
 ### Viewing help : `help`
@@ -318,14 +318,15 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 | **Show a specific friend** | `showfriend n/NAME`                                                                                                                                                                                                                                                    |
 | **Show all friends**       | `showfriends`                                                                                                                                                                                                                                                          |
 | **Find friends**           | `findfriend KEYWORD [KEYWORD]...`                                                                                                                                                                                                                                      |
-| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                                                                                                                                                                                                                            |
-| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`                                                                                                                                                                                                  |
-| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                                                                                                                                                                                                                 |
+| **Add log**                | `addlog INDEX ? n/NAME t/TITLE [d/DESCRIPTION]`                                                                                                                                                                                                                        |
+| **Edit log**               | `editlog INDEX ? n/NAME id/LOG_INDEX [ttl/NEW_TITLE] [d/NEW_DESCRIPTION]`                                                                                                                                                                                              |
+| **Delete log**             | `deletelog [INDEX ? n/NAME] [id/LOG_INDEX] [-a]`                                                                                                                                                                                                                       |
 | **Add Event**              | `addevent n/EVENT_NAME dt/DATE_TIME [d/DESCRIPTION] [f/FRIEND_NAME]...` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`                                                                                   |
 | **Edit Event**             | `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...` <br> e.g., `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo`                                                                 |
 | **Delete Event**           | `deleteevent INDEX` <br> e.g., `deleteevent 2`                                                                                                                                                                                                                         |
 | **Show all events**        | `showevents`                                                                                                                                                                                                                                                           |
 | **Find events**            | `findevent [n/EVENT_NAME_SUBSTRING] [da/DATE] [f/FRIEND_NAME_SUBSTRING]...` <br> e.g.,`findevent n/dinner da/20-03-2022 f/Maggie`                                                                                                                                      |
+| **Show insights**          | `showinsights`                                                                                                                                                                                                                                                         |
 | **Help**                   | `help`                                                                                                                                                                                                                                                                 |
 | **Clear**                  | `clear`                                                                                                                                                                                                                                                                |
 | **Exit**                   | `exit`                                                                                                                                                                                                                                                                 |
