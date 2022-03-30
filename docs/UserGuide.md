@@ -250,9 +250,12 @@ Lists all applicants by default. Automatically toggles view to the applicant tab
 
 The applicants displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-| FILTER_TYPE | FILTER_ARGUMENT                    | Description                                        |
-|-------------|------------------------------------|----------------------------------------------------|
-| `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s) |
+| FILTER_TYPE | FILTER_ARGUMENT                    | Description                                              |
+|-------------|------------------------------------|----------------------------------------------------------|
+| `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s)       |
+| `gender`    | M/F                                | View applicants of the given gender                      |
+| `status`    | available/hired                    | View applicants with the status given.                   |
+| `tag`       | Keyword in the applicant's tag     | View applicants with a tag that matches the keywords(S)  |
 
 Example: `list -a f/name a/John Doe`
 
@@ -262,9 +265,10 @@ Lists all existing positions by default. Automatically toggles view to the posit
 
 The positions displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-| FILTER_TYPE | FILTER_ARGUMENT                 | Description                                            |
-|-------------|---------------------------------|--------------------------------------------------------|
-| `name`      | Keyword(s) in the position name | View positions with names that contains the keyword(s) |
+| FILTER_TYPE | FILTER_ARGUMENT                 | Description                                                     |
+|------------|---------------------------------|-----------------------------------------------------------------|
+| `name`     | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
+| `req`       | Keyword(s) in the requirement   | View positions with a requirement that contains the keywords(s) |
 
 Example: `list -p f/name a/Software Engineer`
 
@@ -275,11 +279,12 @@ Lists all existing interviews by default. Automatically toggles view to the inte
 
 The interviews displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-| FILTER_TYPE | FILTER_ARGUMENT                                           | Description                                                          |
-|-------------|-----------------------------------------------------------|----------------------------------------------------------------------|
-| `appl`      | Keyword(s) in the applicant's name                        | View interviews for applicants whose name contains the keyword(s)    |
-| `pos`       | Keyword(s) in the position's name                         | View interviews for position with names that contains the keyword(s) |
-| `date`      | Date the interview is happening<br/>Format: `yyyy-mm-dd`  | View interviews which happens on the date provided                   |
+| FILTER_TYPE | FILTER_ARGUMENT                                          | Description                                                          |
+|-------------|----------------------------------------------------------|----------------------------------------------------------------------|
+| `appl`      | Keyword(s) in the applicant's name                       | View interviews for applicants whose name contains the keyword(s)    |
+| `pos`       | Keyword(s) in the position's name                        | View interviews for position with names that contains the keyword(s) |
+| `date`      | Date the interview is happening<br/>Format: `yyyy-mm-dd` | View interviews which happens on the date provided                   |
+| `status`    | pending / passed / failed / accepted / rejected          | View interviews with the status given.                               |
 
 
 Example: `list -i f/date a/2022-05-04`
