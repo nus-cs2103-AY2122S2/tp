@@ -21,8 +21,8 @@ public class RemarkCommand extends Command {
         + "r/[REMARK]\n"
         + "Example: " + COMMAND_WORD + " 2 "
         + "r/Goods to be delivered by next Thursday.";
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to %1$s.";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from %1$s.";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to %s.";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from %s.";
 
     private final Index index;
     private final Remark remark;
