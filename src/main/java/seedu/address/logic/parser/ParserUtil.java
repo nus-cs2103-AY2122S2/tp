@@ -275,9 +275,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            for (String s : tagName.split(" ")) {
-                tagSet.add(parseTag(s.trim(), type));
-            }
+            tagSet.add(parseTag(tagName.trim(), type));
         }
         return new ArrayList<>(tagSet);
     }
