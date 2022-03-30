@@ -52,6 +52,6 @@ public class TypicalShows {
      */
     public static List<Show> getTypicalShows() {
         return new ArrayList<>(Arrays.asList(ALICE_IN_WONDERLAND, GONE,
-                FRIENDS, HIMYM));
+                FRIENDS, HIMYM, HANCOCK));
     }
 }

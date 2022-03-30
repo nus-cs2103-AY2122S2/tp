@@ -101,9 +101,9 @@ public class Show {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName().toString());
-        builder.append(getStatus().toString());
-        builder.append(getComment().toString());
-        builder.append(getRating().toString());
+        builder.append("; Status: " + getStatus().toString());
+        builder.append("; Rating: " + getRating().toString());
+        builder.append("; Comment: " + getComment().toString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -125,6 +125,20 @@ public class Show {
      */
     public int compareStatus(Show other) {
         return this.status.compareTo(other.status);
+    }
+
+    /**
+     * Compare this rating with other by rating integer value
+     */
+    public int compareRating(Show other) {
+        return this.rating.compareTo(other.rating);
+    }
+
+    /**
+     * Compare this tag with other by number of tags
+     */
+    public int compareTags(Show other) {
+        return Integer.compare(this.tags.size(), other.tags.size());
     }
 
 
