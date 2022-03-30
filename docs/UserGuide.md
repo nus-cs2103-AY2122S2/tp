@@ -305,7 +305,7 @@ Expected outcome:
 ### Add a task in a group: `addtask`
 
 Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
-The group must **already exist** in ArchDuke. The task **must not already exist** in ArchDuke.
+The group must **already exist** in ArchDuke. The task **must not already exist** in the specified group ArchDuke.
 
 <div markdown="block" class="alert alert-info">
 
@@ -373,7 +373,7 @@ Expected outcome:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ (Coming soon...)
+## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file 
@@ -386,6 +386,10 @@ fresh from the start, you could use the `clear` command to clear all the sample 
 
 **Q**: What is an academic major?<br>
 **A**: An academic major is simply the major that the student is studying in university.
+
+**Q**: What does an index refer to?<br>
+**A**: An index is simply the number in front of the student contact's name or the group's name. It specifies the order 
+in which the student contact or the group appears in the list.
 
 --------------------------------------------------------------------------------------------------------------------
 
