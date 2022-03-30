@@ -2,12 +2,14 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Pair;
 import seedu.address.model.person.Person;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * The API of the Model component.
@@ -81,8 +83,14 @@ public interface Model {
     /** Returns list of matching properties and preferences. */
     List<Pair<Person>> getMatchList();
 
+    /** Returns set of images associated with person */
+    Set<UserImage> getViewImageSet();
+
     /** Updates the match list. */
     void updateMatchList();
+
+    /** Updates the person to view associated images */
+    void updateViewPerson(Set<UserImage> userImages);
 
     /**
      * Toggles the Favourite status of the given person {@code personToFavourite}.

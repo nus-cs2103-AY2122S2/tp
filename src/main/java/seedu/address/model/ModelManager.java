@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Pair;
 import seedu.address.model.person.Person;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private List<Pair<Person>> matchList;
+    private Set<UserImage> viewImageSet;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -127,8 +130,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Set<UserImage> getViewImageSet() {
+        return viewImageSet;
+    }
+
+    @Override
     public void updateMatchList() {
         matchList = addressBook.match();
+    }
+
+    @Override
+    public void updateViewPerson(Set<UserImage> userImages) {
+        viewImageSet = userImages;
     }
 
     //=========== Filtered Person List Accessors =============================================================

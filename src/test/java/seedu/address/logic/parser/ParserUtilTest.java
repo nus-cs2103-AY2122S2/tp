@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,8 @@ import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
+import seedu.address.model.userimage.FilePath;
+import seedu.address.model.userimage.UserImage;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -39,6 +42,10 @@ public class ParserUtilTest {
             INVALID_REGION + "," + INVALID_ADDRESS + "," + INVALID_SIZE + "," + INVALID_PRICE;
     private static final String INVALID_PREFERENCE =
             INVALID_REGION + "," + INVALID_SIZE + "," + INVALID_PRICE + "," + INVALID_PRICE_2;
+    private static final String INVALID_FILEPATH = " ";
+    private static final String INVALID_USERIMAGE_1 = " ";
+    private static final String INVALID_USERIMAGE_2 =
+            "./src/test/resources/images/text.txt:fail";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -59,6 +66,11 @@ public class ParserUtilTest {
             VALID_REGION_2 + "," + VALID_ADDRESS_2 + "," + VALID_SIZE_2 + "," + VALID_PRICE_2;
     private static final String VALID_PREFERENCE =
             VALID_REGION_1 + "," + VALID_SIZE_1 + "," + VALID_PRICE_1 + "," + VALID_PRICE_2;
+    private static final String VALID_DESCRIPTION = "Living room";
+    private static final String VALID_FILEPATH_1 = "./src/test/resources/images/success.png";
+    private static final String VALID_FILEPATH_2 = "./src/test/resources/images/fail.png";
+    private static final String VALID_USERIMAGE_1 = VALID_FILEPATH_1 + ":" + VALID_DESCRIPTION;
+    private static final String VALID_USERIMAGE_2 = VALID_FILEPATH_2;
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -364,4 +376,84 @@ public class ParserUtilTest {
         Preference expectedPreference = new Preference(region, size, lowPrice, highPrice);
         assertEquals(expectedPreference, ParserUtil.parsePreference(preferenceWithWhitespace));
     }
+
+    @Test
+    public void parseFilePath_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFilePath(null));
+    }
+
+    @Test
+    public void parseFilePath_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFilePath(INVALID_FILEPATH));
+    }
+
+    @Test
+    public void parseFilePath_validValueWithoutWhitespace_returnsTrimmedFilePath() throws Exception {
+        String filePathWithWhitespace = VALID_FILEPATH_1;
+        FilePath expectedFilePath = new FilePath(VALID_FILEPATH_1);
+        assertEquals(expectedFilePath, ParserUtil.parseFilePath(filePathWithWhitespace));
+    }
+
+    @Test
+    public void parseFilePath_validValueWithWhitespace_returnsTrimmedFilePath() throws Exception {
+        String filePathWithWhitespace = WHITESPACE + VALID_FILEPATH_1 + WHITESPACE;
+        FilePath expectedFilePath = new FilePath(VALID_FILEPATH_1);
+        assertEquals(expectedFilePath, ParserUtil.parseFilePath(filePathWithWhitespace));
+    }
+
+    @Test
+    public void parseDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
+    }
+
+    @Test
+    public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+        String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(descriptionWithWhitespace));
+    }
+
+    @Test
+    public void parseUserImage_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUserImage(null));
+    }
+
+    @Test
+    public void parseUserImage_validValueWithoutWhitespace_returnsUserImage() throws Exception {
+        String userImageWithWhitespace = VALID_USERIMAGE_1;
+        FilePath expectedFilePath = new FilePath(VALID_FILEPATH_1);
+        UserImage expectedUserImage = new UserImage(expectedFilePath, VALID_DESCRIPTION);
+        assertEquals(expectedUserImage, ParserUtil.parseUserImage(userImageWithWhitespace));
+    }
+
+    @Test
+    public void parseUserImage_validValueWithWhitespace_returnsTrimmedUserImage() throws Exception {
+        String userImageWithWhitespace = WHITESPACE + VALID_USERIMAGE_1 + WHITESPACE;
+        FilePath expectedFilePath = new FilePath(VALID_FILEPATH_1);
+        UserImage expectedUserImage = new UserImage(expectedFilePath, VALID_DESCRIPTION);
+        assertEquals(expectedUserImage, ParserUtil.parseUserImage(userImageWithWhitespace));
+    }
+
+    @Test
+    public void parseUserImage_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFilePath(INVALID_USERIMAGE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseFilePath(INVALID_USERIMAGE_2));
+    }
+
+    @Test
+    public void parseUserImage_collectionWithValidUserImage_returnsUserImageSet() throws Exception {
+        Set<UserImage> actualUserImageSet = ParserUtil.parseUserImages(
+                    Arrays.asList(VALID_USERIMAGE_1, VALID_USERIMAGE_2));
+
+        FilePath expectedFilePath1 = new FilePath(VALID_FILEPATH_1);
+        UserImage expectedUserImage1 = new UserImage(expectedFilePath1, VALID_DESCRIPTION);
+
+        FilePath expectedFilePath2 = new FilePath(VALID_FILEPATH_2);
+        UserImage expectedUserImage2 = new UserImage(expectedFilePath2, "");
+
+        Set<UserImage> expectedUserImageSet = new LinkedHashSet<>(
+                Arrays.asList(expectedUserImage1, expectedUserImage2));
+
+        assertEquals(expectedUserImageSet, actualUserImageSet);
+    }
+
 }
