@@ -21,7 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.LineupBuilder;
@@ -281,7 +281,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPersonName(LineupName targetName) {
+        public boolean hasPersonName(Name targetName) {
             throw new AssertionError("hasPersonName should not be called.");
         }
 
@@ -336,7 +336,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person getPerson(LineupName targetName) {
+        public Person getPerson(Name targetName) {
             throw new AssertionError("This method should not be called.");
         }
 

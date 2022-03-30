@@ -27,7 +27,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditScheduleDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_EMAIL, PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP,
                         PREFIX_SCHEDULE, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_INDEX);
 
-        LineupName targetPlayerName;
+        Name targetPlayerName;
         seedu.address.model.lineup.LineupName targetLineupName;
         Index index;
 

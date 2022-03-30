@@ -7,7 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.UniqueLineupList;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Schedule;
@@ -112,7 +112,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if {@code targetName} is taken by some player.
      */
-    public boolean hasPersonName(LineupName targetName) {
+    public boolean hasPersonName(Name targetName) {
         requireNonNull(targetName);
         return this.persons.containsName(targetName);
     }
@@ -120,7 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns the person with {@code targetName};
      */
-    public Person getPerson(LineupName targetName) {
+    public Person getPerson(Name targetName) {
         return persons.getPerson(targetName);
     }
 

@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PF;
+import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 import static seedu.address.logic.commands.EditCommand.createEditedSchedule;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -48,7 +49,6 @@ public class EditCommandTest {
     private static final ScheduleName VALID_SCHEDULE_NAME = VALID_SCHEDULE_2.getScheduleName();
     private static final ScheduleDescription VALID_SCHEDULE_DESCRIPTION = VALID_SCHEDULE_2.getScheduleDescription();
 
-
     private Model model;
 
     @BeforeEach
@@ -62,6 +62,7 @@ public class EditCommandTest {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(BENSON.getName(), descriptor);
+        editedPerson = createEditedPerson(BENSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 

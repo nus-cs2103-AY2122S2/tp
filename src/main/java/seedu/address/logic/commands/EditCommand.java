@@ -32,7 +32,7 @@ import seedu.address.model.lineup.LineupPlayersList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
-import seedu.address.model.person.LineupName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
@@ -108,7 +108,7 @@ public class EditCommand extends Command {
     }
 
     private final EditCommandType type;
-    private final LineupName targetPlayerName;
+    private final Name targetPlayerName;
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
     private final EditScheduleDescriptor editScheduleDescriptor;
@@ -120,7 +120,7 @@ public class EditCommand extends Command {
      * @param targetPlayerName     of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(LineupName targetPlayerName, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Name targetPlayerName, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(targetPlayerName);
         requireNonNull(editPersonDescriptor);
 
@@ -236,7 +236,7 @@ public class EditCommand extends Command {
     public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        LineupName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
@@ -319,7 +319,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private LineupName name;
+        private Name name;
         private Phone phone;
         private Email email;
         private Height height;
@@ -351,11 +351,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, height, jerseyNumber, tags, weight);
         }
 
-        public void setName(LineupName name) {
+        public void setName(Name name) {
             this.name = name;
         }
 
-        public Optional<LineupName> getName() {
+        public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
