@@ -1,13 +1,11 @@
 package seedu.address.model.applicant;
 
-import seedu.address.logic.parser.ParserUtil;
-
 import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Applicant}'s {@code Gender} matches the gender given.
  */
-public class ApplicantGenderPredicate implements Predicate<Applicant>  {
+public class ApplicantGenderPredicate implements Predicate<Applicant> {
     private final String gender;
 
     public ApplicantGenderPredicate(String gender) {
@@ -26,5 +24,4 @@ public class ApplicantGenderPredicate implements Predicate<Applicant>  {
                 || (other instanceof ApplicantGenderPredicate // instanceof handles nulls
                 && gender.equals(((ApplicantGenderPredicate) other).gender)); // state check
     }
-
 }

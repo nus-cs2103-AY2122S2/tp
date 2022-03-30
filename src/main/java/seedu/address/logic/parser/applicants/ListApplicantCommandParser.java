@@ -17,6 +17,11 @@ import seedu.address.model.applicant.Gender;
 
 public class ListApplicantCommandParser extends GenericListParser<ListApplicantCommand> {
 
+    public static final String STATUS_REGEX = "available|hired";
+
+    public static final String MESSAGE_INVALID_STATUS =
+            "Applicant's status should only be available/hired (case-sensitive)";
+
     @Override
     public ListApplicantCommand returnFullList() {
         return new ListApplicantCommand();
@@ -74,6 +79,8 @@ public class ListApplicantCommandParser extends GenericListParser<ListApplicantC
     public void checkFilterTypeArgument(FilterType filterType, FilterArgument filterArgument) throws ParseException {
         if (filterType.type.equals("gender") && !Gender.isValidGender(filterArgument.toString())) {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        } else if (filterType.type.equals("status") && !filterArgument.toString().matches(STATUS_REGEX)) {
+            throw new ParseException(MESSAGE_INVALID_STATUS);
         }
     }
 }

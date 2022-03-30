@@ -20,6 +20,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantGenderPredicate;
 import seedu.address.model.applicant.ApplicantNameComparator;
 import seedu.address.model.applicant.ApplicantNamePredicate;
+import seedu.address.model.applicant.ApplicantStatusPredicate;
 import seedu.address.model.applicant.Gender;
 
 /**
@@ -75,29 +76,11 @@ public class ListApplicantCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (filterType != null && filterArgument != null && sortArgument != null) {
-            Predicate<Applicant> predicate = null;
-
-            if (filterType.type.equals("name")) {
-                String[] nameKeywords = filterArgument.toString().split("\\s+");
-                predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-            } else if (filterType.type.equals("gender")) {
-                predicate = new ApplicantGenderPredicate(filterArgument.toString());
-            }
-
-            assert predicate != null : "Filter type should be valid";
+            Predicate<Applicant> predicate = getFilterPredicate(filterType, filterArgument);
             Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
             model.updateFilterAndSortApplicantList(predicate, comparator);
         } else if (filterType != null && filterArgument != null) {
-            Predicate<Applicant> predicate = null;
-
-            if (filterType.type.equals("name")) {
-                String[] nameKeywords = filterArgument.toString().split("\\s+");
-                predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-            } else if (filterType.type.equals("gender")) {
-                predicate = new ApplicantGenderPredicate(filterArgument.toString());
-            }
-
-            assert predicate != null : "Filter type should be valid";
+            Predicate<Applicant> predicate = getFilterPredicate(filterType, filterArgument);
             model.updateFilteredApplicantList(predicate);
         } else if (sortArgument != null) {
             Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
@@ -113,5 +96,19 @@ public class ListApplicantCommand extends ListCommand {
     @Override
     public DataType getCommandDataType() {
         return DataType.APPLICANT;
+    }
+
+    public Predicate<Applicant> getFilterPredicate(FilterType filterType, FilterArgument filterArgument) {
+        if (filterType.type.equals("name")) {
+            String[] nameKeywords = filterArgument.toString().split("\\s+");
+            return new ApplicantNamePredicate(Arrays.asList(nameKeywords));
+        } else if (filterType.type.equals("gender")) {
+            return new ApplicantGenderPredicate(filterArgument.toString());
+        } else if (filterType.type.equals("status")) {
+            return new ApplicantStatusPredicate(filterArgument.toString());
+        }
+
+        assert true : "Filter type should be valid";
+        return null;
     }
 }
