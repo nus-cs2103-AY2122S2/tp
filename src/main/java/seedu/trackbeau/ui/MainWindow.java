@@ -118,7 +118,10 @@ public class MainWindow extends UiPart<Stage> {
         allergyChartWindow = new AllergyChartWindow();
         skinChartWindow = new SkinChartWindow();
         hairChartWindow = new HairChartWindow();
-        monthlyCustomerChartWindow = new MonthlyCustomerChartWindow();
+        int maxMonthlyCustomerCount = this
+                .getMonthlyCustomerMaxCount(this.getMonthlyCustomerMap());
+        int totalCustomerCount = this.getCustomerCount();
+        monthlyCustomerChartWindow = new MonthlyCustomerChartWindow(maxMonthlyCustomerCount, totalCustomerCount);
 
         this.labels = new ArrayList<>();
         this.labels.add(customersLabel);
@@ -321,7 +324,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void plotMonthlyCustomerChart() {
         HashMap<Integer, Integer> monthlyCustomerMap = this.getMonthlyCustomerMap();
-        addLineChartData(monthlyCustomerMap,
+        int totalCustomerCount = this.getCustomerCount();
+        int maxMonthlyCustomerCount = this
+                .getMonthlyCustomerMaxCount(monthlyCustomerMap);
+        //update the axis limits manually
+        monthlyCustomerChartWindow = new MonthlyCustomerChartWindow(maxMonthlyCustomerCount,
+                totalCustomerCount);
+        addMonthlyCustomerChartData(monthlyCustomerMap,
                 monthlyCustomerChartWindow.getLineChart(), "Customers Gained This Year");
         if (!monthlyCustomerChartWindow.isShowing()) {
             monthlyCustomerChartWindow.show();
@@ -343,8 +352,9 @@ public class MainWindow extends UiPart<Stage> {
             }
             String detail = key;
             Integer count = map.get(key);
+            String dataLabel = String.format("%s: %d", detail, count);
             pieChart.getData()
-                    .add(new PieChart.Data(detail, count));
+                    .add(new PieChart.Data(dataLabel, count));
             dataCount++;
         }
         //.layout() prevents labels from moving to top left after opening chart a few times
@@ -354,7 +364,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Adds data to a line chart in a specific window.
      */
-    void addLineChartData(HashMap<Integer, Integer> hm, LineChart lineChart, String chartName) {
+    void addMonthlyCustomerChartData(HashMap<Integer, Integer> hm, LineChart lineChart, String chartName) {
         lineChart.getData().clear();
         XYChart.Series series = new XYChart.Series();
         for (int key : hm.keySet()) {
@@ -368,7 +378,31 @@ public class MainWindow extends UiPart<Stage> {
         lineChart.layout();
     }
 
+    /**
+     * Get maximum customer count gained a month in the current year to bound y-axis of chart.
+     */
+    int getMonthlyCustomerMaxCount(HashMap<Integer, Integer> hm) {
+        int maxCount = 0;
+        for (int key : hm.keySet()) {
+            int count = hm.get(key);
+            if (count > maxCount) {
+                maxCount = count;
+            }
+        }
+        return maxCount;
+    }
 
+    /**
+     * Get total customer count in TrackBeau.
+     */
+    int getCustomerCount() {
+        int count = 0;
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        for (Customer customer : customerList) {
+            count++;
+        }
+        return count;
+    }
 
     /**
      * Returns a hashmap with the staff name as the key and count as the value.
