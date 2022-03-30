@@ -8,14 +8,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Button?>
 
 <StackPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <HBox alignment="TOP_CENTER" fx:id="hBox">
       <padding>
-         <Insets top="20"/>
+         <Insets top="20" left="-10"/>
       </padding>
-      <ImageView>
+      <ImageView fitWidth="100" fitHeight="100">
          <Image url="/images/profile_icon.png"/>
       </ImageView>
    </HBox>
@@ -32,16 +31,31 @@
          <Label fx:id="phone" styleClass="profile_small_label" text="\$phone" wrapText="true"/>
       </VBox>
       <VBox>
-         <Label styleClass="profile_information_label" text="Address"/>
-         <Label fx:id="address" styleClass="profile_small_label" text="\$address" wrapText="true"/>
+         <Label styleClass="profile_information_label" text="Email"/>
+         <Label fx:id="email" styleClass="profile_small_label" text="\$email" wrapText="true"/>
+      </VBox>
+      <VBox>
+         <Label styleClass="profile_information_label" text="Matriculation ID"/>
+         <Label fx:id="matriculation" styleClass="profile_small_label" text="\$matriculation" wrapText="true"/>
+      </VBox>
+      <VBox>
+         <Label styleClass="profile_information_label" text="Telegram"/>
+         <Label fx:id="telegram" styleClass="profile_small_label" text="\$telegram" wrapText="true"/>
+      </VBox>
+      <VBox>
+         <Label styleClass="profile_information_label" text="Course"/>
+         <Label fx:id="course" styleClass="profile_small_label" text="\$course" wrapText="true"/>
       </VBox>
       <VBox>
          <Label styleClass="profile_information_label" text="Address"/>
-         <Label fx:id="email" styleClass="profile_small_label" text="\$email" wrapText="true"/>
+         <Label fx:id="address" styleClass="profile_small_label" text="\$address" wrapText="true"/>
       </VBox>
       <VBox spacing="5">
          <Label styleClass="profile_information_label" text="Tags"/>
          <FlowPane fx:id="tags"/>
       </VBox>
    </VBox>
+   <padding>
+      <Insets bottom="20" left="20" />
+   </padding>
 </StackPane>

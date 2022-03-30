@@ -188,6 +188,11 @@ public class AddCommandTest {
         public boolean isMouseUxEnabled() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int countPersonsInTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -11,7 +11,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -23,7 +22,6 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
     private Logic logic;
-    private ResultDisplay resultDisplay;
 
     @FXML
     private ListView<Person> personListView;
@@ -36,7 +34,6 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         this.logic = logic;
-        resultDisplay = new ResultDisplay();
     }
 
     /**
@@ -63,8 +60,8 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Handles the event whenever the selected person card changes.
      */
-    public void handleSelect() {
-        MainWindow.setSelectedProfile(getPersonListView());
+    public void handleSelect() throws CommandException {
+        UiManager.getMainWindow().getGeneralDisplay().setProfile(personListView.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -77,9 +74,9 @@ public class PersonListPanel extends UiPart<Region> {
             try {
                 int personToDeleteIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
                 String deleteCommand = "delete " + personToDeleteIndex;
-                CommandResult result = logic.execute(deleteCommand);
+                logic.execute(deleteCommand);
             } catch (ParseException | CommandException e) {
-                resultDisplay.setFeedbackToUser(e.getMessage());
+                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
             }
         });
         contextMenu.getItems().addAll(delete);

@@ -121,4 +121,8 @@ public interface Model {
 
     /** Returns true is mouseUX is enabled */
     boolean isMouseUxEnabled();
+
+    /** Counts the number of persons attached to the given tag */
+    int countPersonsInTag(Tag tag);
+
 }

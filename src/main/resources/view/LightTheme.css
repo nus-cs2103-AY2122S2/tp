@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#9bb4bd, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #9bb4bd; /* Used in the default.html file */
 }
 
 .label {
@@ -382,4 +382,17 @@
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-text-fill: black;
+}
+
+
+.scroll-pane-general {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane-general .viewport {
+    -fx-background-color: derive(#9bb4bd, 20%);
+}
+
+.general-display-content {
+     -fx-background-color: derive(#9bb4bd, 20%);
 }

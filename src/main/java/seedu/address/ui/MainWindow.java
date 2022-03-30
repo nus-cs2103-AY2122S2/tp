@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -20,7 +21,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.ui.general.GeneralDisplay;
+import seedu.address.ui.general.Profile;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -42,6 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private AddTagWindow addTagWindow;
     private AddProfileWindow addProfileWindow;
+    private GeneralDisplay generalDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,7 +65,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane searchBarPlaceholder;
 
     @FXML
-    private StackPane profileDisplayPlaceholder;
+    private StackPane generalDisplayPlaceholder;
 
     @FXML
     private Menu addMenu;
@@ -151,9 +154,8 @@ public class MainWindow extends UiPart<Stage> {
         SearchBar searchBar = new SearchBar();
         searchBarPlaceholder.getChildren().add(searchBar.getRoot());
 
-        profile = new Profile();
-        profile.setProfile(personListPanel.getPersonListView().getItems().get(0));
-        profileDisplayPlaceholder.getChildren().add(profile.getRoot());
+        generalDisplay = new GeneralDisplay();
+        generalDisplayPlaceholder.getChildren().add(generalDisplay.getRoot());
     }
 
     /**
@@ -219,10 +221,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -242,6 +240,27 @@ public class MainWindow extends UiPart<Stage> {
                 newTagMenu.setVisible(false);
             }
 
+            if (commandResult.isRemoveProfile() && this.generalDisplay.getProfile().getPerson() != null
+                    && this.generalDisplay.getProfile().getPerson().isSamePerson(commandResult.getPerson())) {
+                this.generalDisplay.resetProfile();
+            }
+
+            if (commandResult.isShowProfile()) {
+                this.generalDisplay.setProfile(commandResult.getPerson());
+                this.personListPanel.getPersonListView().scrollTo(this.generalDisplay
+                        .getProfile().getIndex().getZeroBased());
+                this.personListPanel.getPersonListView().getSelectionModel().select(this.generalDisplay
+                        .getProfile().getIndex().getZeroBased());
+            }
+
+            if (commandResult.isShowTagList()) {
+                this.generalDisplay.setTagList(logic.getModel().getTagList());
+            }
+
+            if (commandResult.isSwitchTheme()) {
+                commandResult.getTheme().applyTheme(primaryStage);
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -258,12 +277,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Whenever the selected person card changes, set the profile with the selected person.
-     */
-    public static void setSelectedProfile(ListView<Person> listView) {
-        Person person = listView.getSelectionModel().getSelectedItem();
-        profile.clearPreviousTags();
-        profile.setProfile(person);
+    public GeneralDisplay getGeneralDisplay() {
+        return this.generalDisplay;
+    }
+
+    public PersonListPanel getPersonListPanel() {
+        return this.personListPanel;
+    }
+
+    public ResultDisplay getResultDisplay() {
+        return this.resultDisplay;
+    }
+
+    public Logic getLogic() {
+        return this.logic;
     }
 }

@@ -8,8 +8,6 @@ import java.util.List;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
-
-
 /**
  * Lists all tags in the address book to the user.
  */
@@ -31,6 +29,8 @@ public class ListTagCommand extends Command {
             result.append(" ").append(tag.getTagName());
         }
         result.append(" ]");
-        return new CommandResult(result.toString());
+
+        return new CommandResult(result.toString(),
+                false, true, false, null);
     }
 }
