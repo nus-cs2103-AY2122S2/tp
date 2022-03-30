@@ -73,15 +73,128 @@ TAssist is a **desktop app for managing students and their participation in less
         <th>Description</th>
     </tr>
     <tr>
-        <td><code>ACADEMIC_YEAR</code></td>
-        <td>a/</td>
-        <td>
+        <td>ACADEMIC_YEAR</td>
+        <td><code>a/</code></td>
+        <td>It is represented by the year (last 2 digits) and a semester. Semester value ranges from <code>S1</code> to <code>S8</code>. The table under the <code>Add a module</code> feature shows the representation of each value.
         </td>
     </tr>
     <tr>
-        <td><code>ASSESSMENT_INDEX</code></td>
-<td>a/</td>
+        <td>ASSESSMENT_INDEX</td>
+        <td><code>a/</code></td>
+        <td>It represents the index of the assessments shown when <code>list assessment</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>ASSESSMENT_NAME</td>
+        <td><code>n/</code></td>
+        <td>It represents the name of the assessments e.g. <code>Lab 1</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>CLASS_GROUP_ID</td>
+        <td><code>id/</code></td>
+        <td>It represents the ID of the class group, similar to those used by NUSMods, e.g. <code>T13</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>CLASS_GROUP_INDEX</td>
+        <td><code>c/</code></td>
+        <td>It represents the index of the class groups shown when <code>list class</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>CLASS_GROUP_TYPE</td>
+        <td><code>t/</code></td>
+        <td>It represents the type of the class groups e.g. <code>Tutorial</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>EMAIL</td>
+        <td><code>e/</code></td>
+        <td>It represents the email of the students.
+        </td>
+    </tr>
+    <tr>
+        <td>GRADE</td>
+        <td><code>g/</code></td>
+        <td>It represents the numerical grade given to a student's assignment attempt.
+        </td>
+    </tr>
+    <tr>
+        <td>INDEX</td>
+        <td>No prefix</td>
+        <td>It represents the index of the students/modules/class groups/assessments shown when <code>list student</code>/<code>list module</code>/<code>list class</code>/<code>list assessment</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>KEYWORD</td>
+        <td>No prefix</td>
+        <td>It represents the numerical grade given to a student's assignment attempt.
+        </td>
+    </tr>
+    <tr>
+        <td>GRADE</td>
+        <td><code>g/</code></td>
+        <td>It represents the numerical grade given to a student's assignment attempt.
+        </td>
+    </tr>
+    <tr>
+        <td>MODULE_CODE</td>
+        <td><code>c/</code></td>
+        <td>It represents the code of the module, similar to those used by NUSMods, e.g. <code>CS2103T</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>MODULE_INDEX</td>
+        <td><code>m/</code></td>
+        <td>It represents the index of the modules shown when <code>list module</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>MODULE_NAME</td>
+        <td><code>n/</code></td>
+        <td>It represents the name of the module, , similar to those used by NUSMods, e.g. <code>Software Engineering Project</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>NAME</td>
+        <td><code>n/</code></td>
+        <td>It represents the name of the student.
+        </td>
+    </tr>
+    <tr>
+        <td>SIMPLE_NAME</td>
+        <td><code>sn/</code></td>
+        <td>It represents the simple name of the assessment.
+        </td>
+    </tr>
+    <tr>
+        <td>STUDENT_ID</td>
+        <td><code>id/</code></td>
+        <td>It represents the ID of the student, e.g. <code>E012345</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>TELEGRAM_ID</td>
+        <td><code>t/</code></td>
+        <td>It represents the Telegram handle of the student.
+        </td>
+    </tr>
+    <tr>
+        <td>w/WEEK_INDEX</td>
+        <td><code>w/</code></td>
+        <td>It represents the week index of the lesson, similar to the ones used by NUS Academic Calendar, e.g. <code>1</code> to <code>13</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>all|STUDENT_INDEXES|STUDENT_IDS</td>
+        <td><code>s/</code></td>
         <td>
+            <ul>
+                <li><code>all</code> refers to all students.</li>
+                <li><code>STUDENT_INDEXES</code> represents the index of the students shown when <code>list student</code> is run.</li>
+                <li><code>STUDENT_IDS</code> represents the student ID of the student, e.g. <code>E012345</code>.</li>
+            </ul>
         </td>
     </tr>
 </tbody>
@@ -286,7 +399,6 @@ Format: `list class m/MODULE_INDEX`
 Examples:
 * `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
 
-
 #### Listing/Filtering assessments: `list assessment`
 
 ##### Listing all assessments
@@ -383,6 +495,10 @@ Examples:
 * `list assessment \m 1` followed by `delete assessment 2` deletes the 2nd assessment in the ___filtered___ assessment list (fitered by module index 1) in TAssist.
 
 ### Clearing all entries: `clear`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All data will be cleared from TAssist. This action is irreversible.
+</div>
 
 Clears all entries from TAssist.
 
