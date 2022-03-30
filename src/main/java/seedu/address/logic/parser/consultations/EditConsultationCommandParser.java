@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.commons.core.index.Index;
@@ -28,7 +29,7 @@ public class EditConsultationCommandParser implements Parser<EditConsultationCom
      */
     public EditConsultationCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_DATE,
                 PREFIX_TIME, PREFIX_DIAGNOSIS, PREFIX_FEE, PREFIX_NOTES);
 
         Index index;
@@ -38,6 +39,10 @@ public class EditConsultationCommandParser implements Parser<EditConsultationCom
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditConsultationCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            throw new ParseException(EditConsultationCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
         }
 
         EditConsultationDescriptor editConsultationDescriptor =
