@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
+import manageezpz.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

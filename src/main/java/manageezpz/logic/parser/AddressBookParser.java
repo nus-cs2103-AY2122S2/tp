@@ -14,7 +14,7 @@ import manageezpz.logic.commands.ClearCommand;
 import manageezpz.logic.commands.Command;
 import manageezpz.logic.commands.DeleteEmployeeCommand;
 import manageezpz.logic.commands.DeleteTaskCommand;
-import manageezpz.logic.commands.EditCommand;
+import manageezpz.logic.commands.EditEmployeeCommand;
 import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindEmployeeCommand;
@@ -59,7 +59,7 @@ public class AddressBookParser {
         case AddEmployeeCommand.COMMAND_WORD:
             return new AddEmployeeCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditEmployeeCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteEmployeeCommand.COMMAND_WORD:
