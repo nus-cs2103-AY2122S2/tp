@@ -223,6 +223,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Function to archive the selected person's information
+     */
+    private void handleArchive(CommandResult result) {
+        System.out.println("INDEX TO ARCHIVE" + result.getFeedbackToUser());
+    }
+
+    /**
      * Copy to the clipboard the selected person's information.
      */
     private void handleCopy(CommandResult result) {
@@ -250,10 +257,13 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isCopyCommand()) {
                 resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
                 handleCopy(commandResult);
+            } else if (commandResult.isArchiveCommand()) {
+                // TODO: Provide contact index
+                resultDisplay.setFeedbackToUser("Archived a Contact!");
+                handleArchive(commandResult);
             } else {
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             }
-
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
