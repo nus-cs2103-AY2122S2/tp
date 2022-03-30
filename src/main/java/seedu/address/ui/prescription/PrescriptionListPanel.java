@@ -37,7 +37,6 @@ public class PrescriptionListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Prescription prescription, boolean empty) {
             super.updateItem(prescription, empty);
-
             if (empty || prescription == null) {
                 setGraphic(null);
                 setText(null);

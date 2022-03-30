@@ -104,6 +104,7 @@ public class SignupWindow extends UiPart<Stage> {
     public SignupWindow(Authentication auth, Stage primaryStage) {
         super(FXML, primaryStage);
         requireNonNull(auth);
+        primaryStage.setResizable(true);
         screenTitle.setText(SCREEN_TITLE);
         this.auth = auth;
     }
