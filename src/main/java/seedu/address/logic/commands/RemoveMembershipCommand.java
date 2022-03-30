@@ -18,14 +18,14 @@ public class RemoveMembershipCommand extends Command {
 
     public static final String COMMAND_WORD = "removeMembership";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes membership from the specified client. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Remove membership from the client in the list as specified by the index.\n"
             + "Parameters: "
             + "INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "1 ";
+            + "Example: " + COMMAND_WORD + "1";
 
-    public static final String MESSAGE_SUCCESS = "Membership removed";
-    public static final String MESSAGE_NO_MEMBERSHIP = "This client does not have a membership";
+    public static final String MESSAGE_SUCCESS = "Removed membership from %1$s.";
+    public static final String MESSAGE_NO_MEMBERSHIP = "%1$s does not have a membership";
 
     private final Index index;
 
@@ -48,14 +48,14 @@ public class RemoveMembershipCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         if (!personToEdit.hasField(Membership.PREFIX)) {
-            return new CommandResult(MESSAGE_NO_MEMBERSHIP);
+            return new CommandResult(String.format(MESSAGE_NO_MEMBERSHIP, personToEdit));
         }
 
         Person editedPerson = personToEdit.removeFields(Membership.PREFIX);
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit));
     }
 
     @Override

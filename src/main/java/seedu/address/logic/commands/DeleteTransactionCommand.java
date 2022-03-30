@@ -18,12 +18,11 @@ public class DeleteTransactionCommand extends Command {
     public static final String COMMAND_WORD = "deleteTransaction";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the transaction identified by the index number used in the "
-            + "displayed transaction list.\n"
+            + ": Delete the transaction in the list as specified by the index.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Transaction: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted %1$s.";
 
     private final Index targetIndex;
 

@@ -18,24 +18,22 @@ import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
 import seedu.address.model.transaction.util.TransactionBuilder;
 
-
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "addTransaction";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add a transaction to the transaction list of the "
-            + "identified person by the index number used in the last person "
-            + "listing. If specified, the transaction date can't be after the due date.\n"
+            + ": Add a transaction to the client in the list as specified by the index."
+            + "If specified, the transaction date can't be after the due date.\n"
             + "Parameters: "
             + Amount.PREFIX + "AMOUNT "
             + TransactionDate.PREFIX + "TRANSACTION DATE "
-            + DueDate.PREFIX + "DUE DATE <OPTIONAL> "
-            + Note.PREFIX + "NOTE <OPTIONAL> "
-            + Status.PREFIX + "<OPTIONAL>\n"
+            + "[" + DueDate.PREFIX + "DUE DATE] "
+            + "[" + Note.PREFIX + "NOTE] "
+            + "[" + Status.PREFIX + "STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "a/123.456 "
+            + "a/12.50 "
             + "td/2022-11-11 "
             + "dd/2022-11-11 "
-            + "n/paid SGD 123.456 for haircut --paid";
+            + "n/Paid $12.50 for haircut.";
 
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s;\n"
             + "With a Transaction: %2$s";

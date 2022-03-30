@@ -30,9 +30,9 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the fields of the specified client "
-            + "by the index number used in the displayed client list. "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edit the fields of the client in the list as specified by the index. "
+            + "Existing values will be overwritten.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + Name.PREFIX + "NAME] "
             + "[" + Phone.PREFIX + "PHONE] "
@@ -46,7 +46,7 @@ public class EditCommand extends Command {
             + Email.PREFIX + "johndoe@example.com "
             + Remark.PREFIX + "Filing for bankruptcy.";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Client edited: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited %1$s.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 

@@ -16,7 +16,7 @@ import seedu.address.logic.parser.Prefix;
 public class Birthday extends Field {
     public static final Prefix PREFIX = new Prefix("b/", false);
     public static final String MESSAGE_CONSTRAINTS =
-        "Birthday should be in YYYY-MM-DD format, must exist, and cannot be in the future.";
+        "Birthday must be in YYYY-MM-DD format, must exist, and cannot be in the future.";
 
     private final LocalDate value;
 

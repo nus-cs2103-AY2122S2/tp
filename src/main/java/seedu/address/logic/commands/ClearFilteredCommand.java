@@ -20,7 +20,8 @@ public class ClearFilteredCommand extends Command {
             + "Parameters: none\n"
             + "Example: " + COMMAND_WORD + "";
 
-    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d client(s) deleted!";
+    public static final String MESSAGE_NO_PERSONS_DELETED_OVERVIEW = "No clients to delete.";
+    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d clients deleted.";
 
     public ClearFilteredCommand() {
     }
@@ -31,6 +32,11 @@ public class ClearFilteredCommand extends Command {
         List<Person> lastShownList = List.copyOf(model.getFilteredPersonList());
         for (Person person : lastShownList) {
             model.deletePerson(person);
+        }
+
+        int numPerson = lastShownList.size();
+        if (numPerson == 0) {
+            return new CommandResult(MESSAGE_NO_PERSONS_DELETED_OVERVIEW);
         }
         return new CommandResult(String.format(MESSAGE_PERSONS_DELETED_OVERVIEW, lastShownList.size()));
     }

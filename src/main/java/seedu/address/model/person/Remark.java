@@ -10,7 +10,6 @@ import seedu.address.logic.parser.Prefix;
  */
 public class Remark extends Field {
     public static final Prefix PREFIX = new Prefix("r/", false);
-    public static final Remark EMPTY_REMARK = new Remark("");
     public final String value;
 
     /**

@@ -13,14 +13,12 @@ public class PayCommand extends Command {
 
     public static final String COMMAND_WORD = "pay";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": set the status of "
-            + "the transaction at specified index to paid (true). "
-            + "Index must be greater than 0.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Set the status of the transaction at specified index to 'Paid'.\n"
+            + "Parameters: INDEX (must be a positive integer) \n"
             + "Format: " + COMMAND_WORD + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
-
-    public static final String MESSAGE_SUCCESS = "Transaction status has "
-            + "been changed!";
+    public static final String MESSAGE_SUCCESS = "Transaction status updated.";
 
     private final Index index;
     public PayCommand(Index index) {
