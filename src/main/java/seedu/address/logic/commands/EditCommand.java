@@ -34,20 +34,21 @@ import seedu.address.model.team.Team;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String RESET_ARG = "r";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME] "
-            + "[" + PREFIX_TEAM + "TEAM]"
-            + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+        + "by the index number used in the displayed person list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_PHONE + "PHONE] "
+        + "[" + PREFIX_EMAIL + "EMAIL] "
+        + "[" + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME] "
+        + "[" + PREFIX_TEAM + "TEAM]"
+        + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY]...\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_PHONE + "91234567 "
+        + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -55,17 +56,62 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final boolean isResetMode;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, boolean isResetMode) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
+        requireNonNull(isResetMode);
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.isResetMode = isResetMode;
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor,
+                                             boolean isResetMode) {
+        assert personToEdit != null;
+
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        GithubUsername updatedUsername = editPersonDescriptor.getGithubUsername()
+            .orElse(personToEdit.getGithubUsername());
+        Set<Team> updatedTeams;
+        SkillSet updatedSkillSet;
+        if (isResetMode) {
+            updatedTeams = editPersonDescriptor.getTeams().orElse(personToEdit.getTeams());
+            updatedSkillSet = editPersonDescriptor.getSkillSet().orElse(personToEdit.getSkillSet());
+        } else {
+            Set<Team> previousTeams = personToEdit.getTeams();
+            Optional<Set<Team>> teamsToAdd = editPersonDescriptor.getTeams();
+            updatedTeams = new HashSet<>();
+            updatedTeams.addAll(previousTeams);
+            if (teamsToAdd.isPresent()) {
+                updatedTeams.addAll(teamsToAdd.get());
+            }
+
+            SkillSet previousSkillSet = personToEdit.getSkillSet();
+            updatedSkillSet = new SkillSet();
+            updatedSkillSet.addAll(previousSkillSet);
+            Optional<SkillSet> skillSetToAdd = editPersonDescriptor.getSkillSet();
+            if (skillSetToAdd.isPresent()) {
+                updatedSkillSet.addAll(skillSetToAdd.get());
+            }
+        }
+        // Potential teammate field to be unchanged on edit command
+        boolean isPotentialTeammate = personToEdit.isPotentialTeammate();
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedUsername,
+            updatedTeams, updatedSkillSet, isPotentialTeammate);
     }
 
     @Override
@@ -78,7 +124,7 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -87,27 +133,6 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        GithubUsername updatedUsername = editPersonDescriptor.getGithubUsername()
-                        .orElse(personToEdit.getGithubUsername());
-        Set<Team> updatedTeams = editPersonDescriptor.getTeams().orElse(personToEdit.getTeams());
-        SkillSet updatedSkills = editPersonDescriptor.getSkillSet().orElse(personToEdit.getSkillSet());
-        // Potential teammate field to be unchanged on edit command
-        boolean isPotentialTeammate = personToEdit.isPotentialTeammate();
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedUsername,
-                updatedTeams, updatedSkills, isPotentialTeammate);
     }
 
     @Override
@@ -125,7 +150,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+            && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
     /**
@@ -140,7 +165,8 @@ public class EditCommand extends Command {
         private Set<Team> teams;
         private SkillSet skillSet;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -162,48 +188,36 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, username, teams, skillSet);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setName(Name name) {
+            this.name = name;
         }
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setPhone(Phone phone) {
+            this.phone = phone;
         }
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setGithubUsername(GithubUsername username) {
-            this.username = username;
+        public void setEmail(Email email) {
+            this.email = email;
         }
 
         public Optional<GithubUsername> getGithubUsername() {
             return Optional.ofNullable(username);
         }
 
-        /**
-         * Sets {@code teams} to this object's {@code teams}.
-         * A defensive copy of {@code teams} is used internally.
-         */
-        public void setTeams(Set<Team> teams) {
-            this.teams = (teams != null) ? new HashSet<>(teams) : null;
-        }
-
-        public void setSkillSet(SkillSet skillSet) {
-            this.skillSet = (skillSet != null) ? new SkillSet(new HashSet<>(skillSet.getSkillSet())) : null;
+        public void setGithubUsername(GithubUsername username) {
+            this.username = username;
         }
 
         /**
@@ -215,9 +229,21 @@ public class EditCommand extends Command {
             return (teams != null) ? Optional.of(Collections.unmodifiableSet(teams)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code teams} to this object's {@code teams}.
+         * A defensive copy of {@code teams} is used internally.
+         */
+        public void setTeams(Set<Team> teams) {
+            this.teams = (teams != null) ? new HashSet<>(teams) : null;
+        }
+
         public Optional<SkillSet> getSkillSet() {
             return (this.skillSet != null && skillSet.getSkillSet() != null)
-                    ? Optional.of(new SkillSet(Collections.unmodifiableSet(skillSet.getSkillSet()))) : Optional.empty();
+                ? Optional.of(new SkillSet(Collections.unmodifiableSet(skillSet.getSkillSet()))) : Optional.empty();
+        }
+
+        public void setSkillSet(SkillSet skillSet) {
+            this.skillSet = (skillSet != null) ? new SkillSet(new HashSet<>(skillSet.getSkillSet())) : null;
         }
 
         @Override
@@ -236,11 +262,11 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getGithubUsername().equals(e.getGithubUsername())
-                    && getTeams().equals(e.getTeams())
-                    && getSkillSet().equals(e.getSkillSet());
+                && getPhone().equals(e.getPhone())
+                && getEmail().equals(e.getEmail())
+                && getGithubUsername().equals(e.getGithubUsername())
+                && getTeams().equals(e.getTeams())
+                && getSkillSet().equals(e.getSkillSet());
         }
 
     }
