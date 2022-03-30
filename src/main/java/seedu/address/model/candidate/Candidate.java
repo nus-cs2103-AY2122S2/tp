@@ -122,6 +122,11 @@ public class Candidate {
      * For a looser bound for equal method, for refreshing Focus Panel when the Interview is being deleted.
      */
     public boolean looseEqual(Candidate candidate) {
+
+        if (candidate == null) {
+            return false;
+        }
+
         return candidate.getStudentId().equals(getStudentId())
                 && candidate.getName().equals(getName())
                 && candidate.getPhone().equals(getPhone())

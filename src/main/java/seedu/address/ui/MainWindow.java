@@ -286,7 +286,7 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandText.contains(EditScheduleCommand.COMMAND_WORD)) {
                 CommandResult commandResult = logic.execute(commandText);
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-                if (focusListPanel.getCandidate().looseEqual(logic
+                if (focusListPanel.getCandidate().equals(logic
                         .getFilteredCandidateList()
                         .get(commandResult.getEditIndex()))) {
                     executeCommand(FocusCommand.COMMAND_WORD + " "
