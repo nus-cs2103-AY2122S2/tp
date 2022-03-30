@@ -25,7 +25,7 @@ import seedu.address.model.testresult.UniqueTestResultList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePatientList persons;
+    private final UniquePatientList patients;
     private final UniqueContactList contacts;
     private final UniqueConsultationList consultations;
     private final UniquePrescriptionList prescriptions;
@@ -40,7 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePatientList();
+        patients = new UniquePatientList();
         contacts = new UniqueContactList();
         consultations = new UniqueConsultationList();
         prescriptions = new UniquePrescriptionList();
@@ -65,8 +65,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Patient> patients) {
-        this.persons.setPatients(patients);
+    public void setPatients(List<Patient> patients) {
+        this.patients.setPatients(patients);
     }
 
     /**
@@ -74,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setPersons(newData.getPatientList());
+        setPatients(newData.getPatientList());
         setContacts(newData.getContactList());
         setMedicals(newData.getMedicalList());
         setConsultations(newData.getConsultationList());
@@ -89,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Patient patient) {
         requireNonNull(patient);
-        return persons.contains(patient);
+        return patients.contains(patient);
     }
 
     /**
@@ -97,7 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPatient(Patient p) {
-        persons.add(p);
+        patients.add(p);
     }
 
     public void addPrescription(Prescription p) {
@@ -130,7 +130,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
 
-        persons.setPatient(target, editedPatient);
+        patients.setPatient(target, editedPatient);
     }
 
     /**
@@ -138,7 +138,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePatient(Patient key) {
-        persons.remove(key);
+        patients.remove(key);
     }
 
     /**
@@ -282,7 +282,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons"
+        return patients.asUnmodifiableObservableList().size() + " persons"
                 + contacts.asUnmodifiableObservableList().size() + " contacts"
                 + consultations.asUnmodifiableObservableList().size() + " consultations"
                 + testResults.asUnmodifiableObservableList().size() + " test results";
@@ -291,7 +291,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Patient> getPatientList() {
-        return persons.asUnmodifiableObservableList();
+        return patients.asUnmodifiableObservableList();
     }
 
     @Override
@@ -322,7 +322,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons))
+                && patients.equals(((AddressBook) other).patients))
                 && contacts.equals(((AddressBook) other).contacts)
                 && consultations.equals(((AddressBook) other).consultations)
                 && testResults.equals(((AddressBook) other).testResults);
@@ -330,7 +330,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return patients.hashCode();
     }
 
 
