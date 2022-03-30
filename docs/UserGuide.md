@@ -127,10 +127,10 @@ Delete a contact at a specific index.
 
 Format: `delete INDEX`
 * Deletes an existing student in Tracey. The student is referred by an index, displayed alongside him in the student list.
-* To delete a student, use the command `delete` on the student's `INDEX`.
+* To delete a student, you can use the command `delete` on the student's `INDEX`.
   The index **must be a positive integer** 1, 2, 3, …
 * Deletes one student at a time.
-* Can only delete at an index where a student is assigned to it.
+* You can only delete at an index where a student is assigned to it.
 
 How to identify `INDEX`:
 ![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
@@ -152,9 +152,9 @@ Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
 * Edits an existing student's information found in Tracey. The student is referred by an index, displayed alongside him in the student list.
-* To edit a student, use the command `edit` on the student's `INDEX` with the optional fields of information to be changed.
+* To edit a student, you can use the command `edit` on the student's `INDEX` with the optional fields of information to be changed.
   The index **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields of information must be provided.
+* You have to provide at least one of the optional fields of information.
 * Existing information of the student will be updated with the newly inputted values.
 * The original value to be edited must not be the same as the corresponding field value of the student.
 * When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
