@@ -15,7 +15,7 @@ public class Appointment implements Comparable<Appointment> {
 
     /** Regex to match value attribute. eg: "Mar-04-2022 09:30 AM at NUS VET".*/
     public static final String VALIDATION_REGEX =
-            "\\w{3}-\\d{2}-\\d{4} \\d{1}:\\d{2} \\w{2} \\w+(\\s\\w+){1,}";
+            "\\w{3}-\\d{2}-\\d{4} \\d{2}:\\d{2} \\w{2} \\w+(\\s\\w+){1,}";
 
     /** Date and time of appointment in "dd-MM-yyyy HH:mm" format.*/
     public final LocalDateTime dateTime;
@@ -103,7 +103,6 @@ public class Appointment implements Comparable<Appointment> {
 
     /**
      * Compares appointment objects based on their dateTime attribute.
-     *
      * @param other appointment to be compared with.
      * @return Value signifying in the difference between the comparing attribute.
      */
