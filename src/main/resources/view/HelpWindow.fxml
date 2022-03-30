@@ -58,16 +58,6 @@
             </Label>
           </children>
         </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="listCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
-        </HBox>
         <HBox fx:id="exitCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -84,16 +74,6 @@
               </HBox.margin>
             </Label>
           </children>
-        </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="exitCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
         </HBox>
         <HBox fx:id="clearCommandContainer">
           <padding>
@@ -112,16 +92,6 @@
             </Label>
           </children>
         </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="clearCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
-        </HBox>
         <HBox fx:id="addCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -138,16 +108,6 @@
               </HBox.margin>
             </Label>
           </children>
-        </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="addCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
         </HBox>
         <HBox fx:id="deleteCommandContainer">
           <padding>
@@ -166,16 +126,6 @@
             </Label>
           </children>
         </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="deleteCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
-        </HBox>
         <HBox fx:id="addGroupCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -192,16 +142,6 @@
               </HBox.margin>
             </Label>
           </children>
-        </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="addGroupCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
         </HBox>
         <HBox fx:id="delGroupCommandContainer">
           <padding>
@@ -220,16 +160,6 @@
             </Label>
           </children>
         </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="delGroupCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
-        </HBox>
         <HBox fx:id="assignCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -246,16 +176,6 @@
               </HBox.margin>
             </Label>
           </children>
-        </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="assignCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
         </HBox>
         <HBox fx:id="deassignCommandContainer">
           <padding>
@@ -274,16 +194,6 @@
             </Label>
           </children>
         </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="deassignCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
-        </HBox>
         <HBox fx:id="addTaskCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -300,16 +210,6 @@
               </HBox.margin>
             </Label>
           </children>
-        </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="addTaskCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
         </HBox>
         <HBox fx:id="delTaskCommandContainer">
           <padding>
@@ -328,16 +228,6 @@
             </Label>
           </children>
         </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="delTaskCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
-        </HBox>
         <HBox fx:id="viewTaskCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -354,16 +244,6 @@
               </HBox.margin>
             </Label>
           </children>
-        </HBox>
-        <HBox>
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <Label fx:id="viewTaskCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
         </HBox>
         <HBox fx:id="viewContactCommandContainer">
           <padding>
@@ -382,15 +262,22 @@
             </Label>
           </children>
         </HBox>
-        <HBox>
+        <HBox fx:id="findCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
           </padding>
-          <Label fx:id="viewContactCommandExample" text="Label" style="-fx-font-weight: bold">
-            <HBox.margin>
-              <Insets right="10.0" />
-            </HBox.margin>
-          </Label>
+          <children>
+            <Label fx:id="findCommandDesc" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+            <Label fx:id="findCommand" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+          </children>
         </HBox>
       </VBox>
     </Scene>
