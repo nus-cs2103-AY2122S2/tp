@@ -27,7 +27,7 @@ import seedu.address.model.person.Person;
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags an event to the person identified by the index "
-            + "number. \nEach prefix should only be used once!"
+            + "number. \nAll prefix must be used and each prefix must be used only once!"
             + "\nParameters: INDEX (must be a positive integer) " + PREFIX_EVENT_NAME + "EVENT NAME " + PREFIX_INFO
             + "EVENT DETAILS " + PREFIX_DATE + "yyyy-MM-dd " + PREFIX_TIME + "HH:mm";
     public static final String MESSAGE_ARGUMENTS = "Tagged following event to %1$s:" + "\n%2$s";
