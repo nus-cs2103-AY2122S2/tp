@@ -30,16 +30,16 @@ public class UserImageTest {
     @Test
     public void isValidImage() {
         //tests valid image
-        UserImage success = new UserImage(new FilePath("./src/test/resources/images/success.png"), "success");
-        assertTrue(success.isImage());
+        FilePath success = new FilePath("./src/test/resources/images/success.png");
+        assertTrue(UserImage.isImage(success));
 
         //tests file that is image extension but not image
-        UserImage notImage = new UserImage(new FilePath("./src/test/resources/images/notAImage.png"), "");
-        assertFalse(notImage.isImage());
+        FilePath notImage = new FilePath("./src/test/resources/images/notAImage.png");
+        assertFalse(UserImage.isImage(notImage));
 
         //tests file that is not an image
-        UserImage text = new UserImage(new FilePath("./src/test/resources/images/text.txt"), "");
-        assertFalse(text.isImage());
+        FilePath text = new FilePath("./src/test/resources/images/text.txt");
+        assertFalse(UserImage.isImage(text));
     }
 }
 

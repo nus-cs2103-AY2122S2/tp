@@ -1,5 +1,6 @@
 package seedu.address.model.userimage;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.File;
@@ -8,12 +9,13 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 
 /**
- * Creates a UserImage object that contains an image file with description
+ * Represents a Person's associated image in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isImage(FilePath)}
  */
 public class UserImage {
 
     public static final String MESSAGE_CONSTRAINTS =
-                "Image must be of the format: [File Path:Description(optional)]";
+                "File must be an image file";
 
     private final String description;
     private final FilePath filePath;
@@ -26,6 +28,7 @@ public class UserImage {
     public UserImage(FilePath filePath, String description) {
         requireAllNonNull(filePath, description);
         this.filePath = filePath;
+        checkArgument(isImage(filePath), MESSAGE_CONSTRAINTS);
         this.description = description;
         this.image = new File(filePath.value);
     }
@@ -46,9 +49,10 @@ public class UserImage {
     /**
      * Checks to ensure that file in filepath is an image file
      */
-    public boolean isImage() {
+    public static boolean isImage(FilePath file) {
+        File testFile = new File(file.value);
         try {
-            return ImageIO.read(image) != null;
+            return ImageIO.read(testFile) != null;
         } catch (IOException E) {
             return false;
         }

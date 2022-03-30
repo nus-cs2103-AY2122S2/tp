@@ -52,11 +52,6 @@ public class UploadCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        for (UserImage userImage : userImages) {
-            if (!userImage.isImage()) {
-                throw new CommandException(MESSAGE_FILE_NOT_IMAGE);
-            }
-        }
 
         Person personToUpload = lastShownList.get(targetIndex.getZeroBased());
         personToUpload.getUserImages().addAll(userImages);

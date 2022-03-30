@@ -31,7 +31,7 @@ public class UploadCommandParserTest {
         Set<UserImage> userImages = new LinkedHashSet<>(Arrays.asList(testImage1, testImage2));
         UploadCommand expectedUploadCommand =
               new UploadCommand(INDEX_FIRST_PERSON, userImages);
-        assertParseSuccess(parser, "1 f/./src/test/resources/images/success.png"
-                            + " f/./src/test/resources/images/fail.png:fail", expectedUploadCommand);
+        assertParseSuccess(parser, "1 i/./src/test/resources/images/success.png"
+                            + " i/./src/test/resources/images/fail.png:fail", expectedUploadCommand);
     }
 }

@@ -6,7 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.File;
 
 /**
- * Creates a new FilePath object from a valid filePath
+ * Represents a file path to a file in the user's file system.
+ * Guarantees: immutable; is valid as declared in {@link #isValidFilePath(String filepath)}
  */
 public class FilePath {
 

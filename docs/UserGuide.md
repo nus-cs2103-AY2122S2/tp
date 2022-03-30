@@ -157,12 +157,12 @@ Format: `clear`
 
 Uploads an image and description to be associated with a client.
 
-Format `upload INDEX [f/FilePath:description]`
+Format `upload INDEX [i/FilePath:description]`
 - Adds an image to the person at the specified `INDEX`
 - The index refers to the index number shown in the displayed person list.
-- File path is from the directory the JAR file is ran from. e.g. `upload 1 f/example.png:living room`
+- File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
   ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
-- Description is optional and can be left blank e.g. `upload 1 f/example.png`
+- Description is optional and can be left blank e.g. `upload 1 i/example.png`
 
 ### View image of person: `viewimage`
 
@@ -251,10 +251,10 @@ Opens up a new window that shows a pie chart of the number of buyers & sellers w
  e.g., edit 2 n/James Lee e/jameslee@example.com                                                                       |
 | Find                                                                                                                  | find KEYWORD [MORE_KEYWORDS]
  e.g., find James Jake                                                                                                 |
-| Upload                                                                                                                | upload INDEX [f/FilePath:Description]
-| e.g. Upload 1 f/livingroom.png:Living room of 4-room flat                                                             |
+| Upload                                                                                                                | upload INDEX [i/FilePath:Description]
+| e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                             |
 | viewimage                                                                                                             | viewimage INDEX
-| e.g. viewimage 1                                                                                                      | 
+| e.g. viewimage 1                                                                                                      |
 | List                                                                                                                  | list  |
 | Help                                                                                                                  | help  |
 | Match                                                                                                                 | match |

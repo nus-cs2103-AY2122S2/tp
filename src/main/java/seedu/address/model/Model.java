@@ -89,7 +89,7 @@ public interface Model {
     /** Updates the match list. */
     void updateMatchList();
 
-    /** Update the person to view associated images */
+    /** Updates the person to view associated images */
     void updateViewPerson(Set<UserImage> userImages);
 
     /**

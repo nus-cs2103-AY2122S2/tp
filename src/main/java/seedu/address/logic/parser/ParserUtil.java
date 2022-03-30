@@ -242,6 +242,9 @@ public class ParserUtil {
         String[] splitUserImage = trimmedUserImage.split(":");
 
         FilePath filePath = parseFilePath(splitUserImage[0]);
+        if (!UserImage.isImage(filePath)) {
+            throw new ParseException(UserImage.MESSAGE_CONSTRAINTS);
+        }
         String description = "";
         if (splitUserImage.length == 2) {
             description = parseDescription(splitUserImage[1]);
@@ -265,6 +268,7 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String Description} into a {@code description}.
      * Leading and trailing whitespaces will be trimmed.
      */
     public static String parseDescription(String description) {

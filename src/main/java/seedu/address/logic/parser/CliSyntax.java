@@ -12,5 +12,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_PROPERTY = new Prefix("pr/");
     public static final Prefix PREFIX_PREFERENCE = new Prefix("pf/");
-    public static final Prefix PREFIX_USERIMAGE = new Prefix("f/");
+    public static final Prefix PREFIX_USERIMAGE = new Prefix("i/");
 }
