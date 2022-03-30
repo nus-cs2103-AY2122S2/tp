@@ -34,7 +34,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Lab lab = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
         LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
 
-        Lab labToFilter = lab.of(labStatus, new LabMark());
+        Lab labToFilter = lab.of(labStatus, new LabMark("0"));
 
         return new FilterCommand(new StudentHasLabPredicate(labToFilter));
 
