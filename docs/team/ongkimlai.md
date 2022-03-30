@@ -32,7 +32,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for `removetag` and `delete` enhancement
     * Updated documentation for exact tag names for `find` and `tag`
-    * Added screenshots for `find`, `find -s` and NUSocials UI at initial launch
+    * Added all the screenshots in User Guide
     * Added constraints for features
   * Developer Guide:
     * Added user stories for `removetag`, `delete` multiple contacts, viewing all upcoming events

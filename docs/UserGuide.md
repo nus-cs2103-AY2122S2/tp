@@ -56,7 +56,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
   e.g `n/NAME [edu/EDUCATION]` can be used as `n/Kim Lai edu/computer science` or as `n/Kim Lai`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[m/MODULES]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
+  e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
 * If a parameter is expected only once in the command but you specified it multiple times, they will all be rejected.<br>
   e.g. if you specify `p/12345678 p/87654321`, both will be rejected.
@@ -102,19 +102,28 @@ Constraints:
 * All fields must be used.
 
 Example:
-* `add n/Kim Lai p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
+* `add n/Alisson Becker p/12345678 e/alisson111@example.com a/VVD street, block 123, #01-01`
   Adds a person with the following fields:
-    - Name: Kim Lai
+    - Name: Alisson Becker 
     - Phone Number: 12345678
-    - Email: kimlai222@example.com
-    - Address: KL street, block 123, #01-01
-    
-<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
-`add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
+    - Email: alisson111@example.com
+    - Address: VVD street, block 123, #01-01
+
+| Before | After |
+  :---:|:---:
+| ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'add n/Alisson Becker p/12345678 e/alisson111@example.com a/VVD street, block 123, #01-01'](images/screenshots/addAlissonBecker.png) |
+
+<div markdown="span" class="alert alert-warning">
+
+**:x: Invalid Examples:**<br>
+
+* `add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 190, #01-23`
 Not allowed as `n/` prefix is used more than once.
-* `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 123, #01-01`
+  
+* `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 190, #01-23`
 Not allowed as `PHONE_NUMBER` is blank. 
 </div>
+
 
 #### Deleting a person : `delete`
 
@@ -170,14 +179,16 @@ Example:
 * `edit 1 p/91234567 e/KL123@example.com`<br>
   Edits the phone number and email address of the 1st person to `91234567` and `KL123@example.com` respectively.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
 Existing values will be overwritten and updated to the new input values!
 </div>
 
 #### Tagging a person: `tag`
 Tags additional information to an existing contact.
 
-Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * Tags the relevant information to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -185,26 +196,35 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 
 Constraints:
 * At least one of the prefixes must be provided.
-* If a prefix is used, the input after must not be blank.
+* If a prefix is used, the input after must not be blank and must be alphanumeric.
 * `INDEX` provided has to be on the currently shown contact list.
 
 Example:
-* `tag 1 i/abc-company m/CS2100 m/CS2030S`<br>
+* `tag 1 i/abc company m/CS2100 m/CS2105`(as shown below)<br>
   Tags the internship company and 2 modules to the 1st person in the currently shown contact list.
 
-<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+| Before | After |
+  :---:|:---:
+| ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'tag 1 i/abc company m/CS2100 m/CS2105'](images/screenshots/tagInternshipModuleModule.png) |
+
+<div markdown="span" class="alert alert-warning">
+
+**:x: Invalid Examples:**<br>
+
 * `tag 1`
 Not allowed as no prefix provided.
+  
 * `tag 1 i/ m/`
 Not allowed as there is no input given after a prefix is used.
-* `tag 0 i/xyz-company m/CS2103T`
+  
+* `tag 0 i/xyz company m/CS2103T`
 Not allowed as there `INDEX` 0 does not exist in the contact list.
 </div>
 
 #### Removing specific tags from person: `removetag`
 Removes the specific tags of an existing contact.
 
-Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * Removes the tags from the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -219,9 +239,13 @@ Example:
 * `removetag 1 i/abc-company m/CS2100 m/CS2030S`<br>
 Removes the internship company tag and the 2 modules tags from the 1st person in the currently shown contact list.
 
-<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+<div markdown="span" class="alert alert-warning">
+
+**:x: Invalid Examples:**<br>
+
 * `removetag 1 i/ m/`
 Not allowed as there is no input given after a prefix is used.
+
 * `removetag 1 edu/computer` while person 1 has an education tag with `computer science`
 Not allowed as it is not an exact match.
 </div>
@@ -230,7 +254,7 @@ Not allowed as it is not an exact match.
 
 Finds persons that match any of the given fields and tags.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
@@ -241,14 +265,24 @@ Constraints:
 * Only 1 prefix for each basic particulars field is allowed.
 
 Examples:
-* `find m/cs2030s m/cs2040s` returns anyone tagged with either `cs2030s` or `cs2040s` or both
-* `find n/Hans m/cs2100` will return `Hans` and `Bo Yang` (i.e. Bo Yang is tagged with cs2100)
-* `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
-  ![result for 'find i/Shopee m/cs2040s cs2030s'](images/findShopeeCS2040sCS2030sResult.png)
+* `find m/cs2030s m/cs2040s`<br>
+Returns anyone tagged with either `cs2030s` or `cs2040s` or both
+* `find n/Hans m/cs2100`<br>
+Returns `Hans` and `Bo Yang` (i.e. Bo Yang is tagged with cs2100)
+* `find i/Shopee m/cs2040s m/cs2030s`<br>
+Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
+  
+| Before | After |
+:---:|:---:
+| ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find i/Shopee m/cs2040s cs2030s'](images/screenshots/findShopeeCS2040sCS2030sResult.png) |
 
-<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+<div markdown="span" class="alert alert-warning">
+
+**:x: Invalid Examples:**<br>
+
 * `find n/ m/`
 Not allowed as there is no input given after a prefix is used.
+  
 * `find n/Hans n/Chewbacca`
 Not allowed as the `n/` prefix is used more than once.
 </div>
@@ -257,7 +291,7 @@ Not allowed as the `n/` prefix is used more than once.
 
 Finds persons that match all given fields and tags.
 
-Format: `find -s [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+Format: `find -s [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
@@ -268,13 +302,23 @@ Constraints:
 * Only 1 prefix for each basic particulars field is allowed.
 
 Examples:
-* `find -s n/Bo Yang m/cs2040s` will return `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
-* `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with cs2040s, cs2030s and Shopee)<br>
-  ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
+* `find -s n/Bo Yang m/cs2040s`<br>
+  Returns `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
+  
+* `find -s i/Shopee m/cs2040s m/cs2030s`<br>
+  Returns `Alex Yeoh` (as shown below)
+  
+| Before | After |
+:---:|:---:
+| ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/screenshots/find-sShopeeCS2040sCS2030s.png) |
 
-<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+<div markdown="span" class="alert alert-warning">
+
+**:x: Invalid Examples:**<br>
+
 * `find -s n/ m/`
 Not allowed as there is no input given after a prefix is used.
+
 * `find -s n/Hans n/Solo`
 Not allowed as the `n/` prefix is used more than once.
 </div>
@@ -288,12 +332,14 @@ Format: `showevents`
 * Events shown are automatically sorted in chronological order.
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Tip :**<br>
 Use the `-upcoming` or `-past` flags to filter the event list.
 
 Alternate formats:
 1. `showevents -upcoming`
 * Shows a list of all upcoming events instead
+
 2. `showevents -past`
 * Shows a list of all past events instead
 </div>
@@ -316,12 +362,20 @@ Constraints:
 * `EVENT DETAILS` has a limit of 300 characters.
 
 Example:
-* `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15`<br>
-Creates the Event and adds into NUSocials.
-  
-<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+* `event 2 3 name/Movie marathon info/Harry Potter movies d/2022-08-15 t/14:00`<br>
+Creates the Event and adds into NUSocials. (as shown below)
+
+| Before | After |
+:---:|:---:
+| ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'event 2 3 name/Movie marathon info/Harry Potter movies d/2022-08-15 t/14:00'](images/screenshots/eventMovieMarathon.png) |
+
+<div markdown="span" class="alert alert-warning">
+
+**:x: Invalid Examples:**<br>
+
 * `event 1 2 name/ info/At Michael's d/2022-08-22 t/19:00`
 Not allowed as there is no input after a prefix is used.
+  
 * `event 1 2 name/Dinner appointment name/Game night info/At Michael's d/2022-08-22 t/19:00`
 Not allowed as the `name/` prefix is more than once.
 </div>
@@ -377,9 +431,13 @@ Constraints:
 Example:
 * `find -e name/lunch part/Alex Yeoh` returns all events containing `lunch` in its name and all events involving Alex Yeoh<br>
 
-<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+<div markdown="span" class="alert alert-warning">
+
+**:x: Invalid Examples: **<br>
+
 * `find -e name/ info/`
 Not allowed as there is no input given after a prefix is used.
+
 * `find -e name/Dinner name/Lunch`
 Not allowed as the `name/` prefix is used more than once.
 </div>
@@ -404,7 +462,9 @@ NUSocials data are saved in the hard disk automatically after any command that c
 
 NUSocials data are saved as a JSON file `[JAR file location]/data/nusocials.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+**:exclamation: Caution:**
 If your changes to the data file makes its format invalid, NUSocials will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -426,15 +486,15 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
-**Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105 m/CS2106`
-**Removetag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
+**Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105 m/CS2106`
+**Removetag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
 **Event** | `event INDEX…​ name/EVENT NAME info/INFORMATION d/DATE t/TIME` <br> e.g., `event 1 name/Dinner Date info/Having Dinner at Bread Street Kitchen by Gordon Ramsay d/2022-12-20 t/20:15`
 **Cancelevent** | `cancelevent INDEX…​` <br> e.g.,`cancelevent 1 2 3`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​` <br> e.g. `delete 1 3 5`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`
-**Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`
-**Find -s** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
+**Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`
+**Find -s** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
 **Find -e** | `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICIPANT]…​ [dt/DATE AND TIME]…​`<br> e.g., `find -e name/Dinner info/Candice's birthday dt/2022-05-12 19:30`
 **List** | `list`
 **Showevents** | `showevents` `showevents -upcoming` `showevents -past`
