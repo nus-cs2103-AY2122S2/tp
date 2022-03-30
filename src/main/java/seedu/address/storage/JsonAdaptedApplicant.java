@@ -139,7 +139,7 @@ class JsonAdaptedApplicant {
         final HiredStatus modelHireStatus = new HiredStatus(hiredStatus);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        
+
         return new Applicant(modelName, modelPhone, modelEmail, modelAge, modelAddress, modelGender, modelHireStatus,
                 modelTags);
     }
