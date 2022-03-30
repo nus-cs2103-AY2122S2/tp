@@ -17,14 +17,15 @@ UNite is a **desktop app for managing contacts specifically designed for people 
    7. [Detach a tag from a profile](#detach-a-tag-from-a-profile)
    8. [Filter list by tag](#filter-list-by-tag)
    9. [Locate person by name](#locate-person-by-name)
-   10. [Delete a person](#delete-a-person)
-   11. [Change the theme](#change-the-theme)
-   12. [View detail profile](#view-detailed-profile-cli)
-   13. [Clear all entries](#clear-all-entries)
-   14. [Exit the program](#exit-the-program)
-   15. [Save the data](#save-the-data)
-   16. [Edit the data file](#edit-the-data-file)
-   17. [Archive data file](#archive-data-file)
+   10. [Grab person's attribute](#grab-person-attribute)
+   11. [Delete a person](#delete-a-person)
+   12. [Change the theme](#change-the-theme)
+   13. [View detail profile](#view-detailed-profile-cli)
+   14. [Clear all entries](#clear-all-entries)
+   15. [Exit the program](#exit-the-program)
+   16. [Save the data](#save-the-data)
+   17. [Edit the data file](#edit-the-data-file)
+   18. [Archive data file](#archive-data-file)
 3. [Features (Mouse interaction)](#features-mouse-interaction)
    1. [Enable mouse interaction](#enable-mouse-interaction)
    2. [Disable mouse interaction](#disable-mouse-interaction)
@@ -190,6 +191,21 @@ Examples:
 
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Grab person's attribute : `grab`<a name="grab-person-attribute"></a>
+
+Grabs person's (single or multiple) attribute.
+
+Format: `grab ATTRIBUTE_PREFIX/[INDEX]` 
+
+* `INDEX` is optional. If an index is provided, it will grab the attribute of the person with this `INDEX`. If it 
+is left blank, it will grab this attribute of all the persons in UNite.
+* The available `ATTRIBUTE_PREFIX` that you can grab are `n/` for name, `p/` for phone number, `e/` for email, 
+`a/` for address, `c/` for course, `m/` for matric card, `tele/` for telegram.
+
+Examples:
+* `grab e/1` grabs the email address of person with index 1.
+* `grab tele/` grabs the telegram id of everyone inside UNite
 
 ### Delete a person : `delete`<a name="delete-a-person"></a>
 
