@@ -86,6 +86,17 @@ public interface Model {
      */
     boolean checkHistory();
 
+    /**
+     * Restores the original state of the address book.
+     */
+    void restoreOriginal();
+
+    /**
+     * Checks the presence of an original state of the address book.
+     * @return
+     */
+    boolean checkOriginal();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

@@ -162,6 +162,16 @@ public class AddCommandTest {
         public boolean checkHistory() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void restoreOriginal() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkOriginal() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
