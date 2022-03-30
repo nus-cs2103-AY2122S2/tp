@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -28,7 +29,7 @@
         <Label fx:id="id" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <Label fx:id="name" styleClass="cell_small_label" text="\$name" />
-      <Label fx:id="grade" styleClass="cell_small_label" text="\$module" />
+      <Label fx:id="module" styleClass="cell_small_label" text="\$module" />
       <Button fx:id="attemptsButton" text="See Attempts" onAction="#handleAttempts"/>
     </VBox>
   </GridPane>

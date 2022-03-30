@@ -30,7 +30,7 @@ public class AttendanceWindow extends UiPart<Stage> {
      * @param root Stage to use as the root of the HelpWindow.
      */
     public AttendanceWindow(ObservableList<Lesson> lessonList) {
-        super(FXML);
+        super(FXML, new Stage());
         lessonListView.setItems(lessonList);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }

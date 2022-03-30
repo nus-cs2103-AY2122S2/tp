@@ -190,7 +190,7 @@ public class MainWindow extends UiPart<Stage> {
         studentListButton.getStyleClass().remove("active");
         assessmentListButton.getStyleClass().remove("active");
         assessmentListButton.getStyleClass().add("active");
-        showModuleList();
+        showAssessmentList();
     }
 
     @FXML

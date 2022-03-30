@@ -36,7 +36,7 @@ public class AssessmentAttemptsWindow extends UiPart<Stage> {
      * @param root Stage to use as the root of the HelpWindow.
      */
     public AssessmentAttemptsWindow(Map<Student, Grade> attempts) {
-        super(FXML);
+        super(FXML, new Stage());
         ObservableList<AssessmentAttempt> attemptList = FXCollections.observableArrayList();
         attempts.forEach((student, grade) -> {
             attemptList.add(new AssessmentAttempt(student, grade));

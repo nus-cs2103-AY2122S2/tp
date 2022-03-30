@@ -56,6 +56,15 @@ public class AssessmentCard extends UiPart<Region> {
         attemptsWindow = new AssessmentAttemptsWindow(assessment.getAttempts());
     }
 
+    @FXML
+    private void handleAttempts() {
+        if (!attemptsWindow.isShowing()) {
+            attemptsWindow.show();
+        } else {
+            attemptsWindow.focus();
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
