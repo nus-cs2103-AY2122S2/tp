@@ -43,6 +43,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     argMultimap.getValue(PREFIX_BLOCK).get()));
         }
 
+        if (filterDescriptor.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
         return new FilterCommand(filterDescriptor);
     }
 

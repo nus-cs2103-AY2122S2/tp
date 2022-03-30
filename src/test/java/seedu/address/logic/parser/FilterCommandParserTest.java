@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_FACULTY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOCK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COVID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FACULTY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
@@ -33,6 +34,14 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // values without prefixes
+        assertParseFailure(parser, VALID_BLOCK_BOB, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+
+        // wrong types of values
+        assertParseFailure(parser, VALID_NAME_BOB, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+
         // invalid faculty
         assertParseFailure(parser, INVALID_FACULTY_DESC, Faculty.MESSAGE_CONSTRAINTS);
 
