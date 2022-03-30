@@ -12,7 +12,7 @@ import seedu.address.model.transaction.TransactionDate;
 
 
 public class TransactionUtil {
-    public static final long VALID_ID = PersonUtil.AMY.getUniqueId();
+    public static final long VALID_ID = PersonUtil.AMY.getUniqueId(); // set all transactions to be amy's
 
     public static final String VALID_AMOUNT_ONE = "123.45";
     public static final String VALID_TRANSACTION_DATE_ONE = "2020-11-11";

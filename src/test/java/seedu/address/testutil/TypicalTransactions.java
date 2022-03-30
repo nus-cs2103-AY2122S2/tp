@@ -1,8 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE;
+import static seedu.address.testutil.PersonUtil.AMY;
+import static seedu.address.testutil.PersonUtil.BOB;
+import static seedu.address.testutil.TransactionUtil.*;
 //import static seedu.address.testutil.TransactionUtil.TRANSACTION_THREE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,14 +25,14 @@ public class TypicalTransactions {
      * Returns an {@code AddressBook} with all the typical persons.
      */
     public static AddressBook getTypicalAddressBook() {
-        return new AddressBook(getEmptyPerson(), getTypicalTransactions());
+        return new AddressBook(getTypicalPersons(), getTypicalTransactions());
     }
 
-    public static List<Person> getEmptyPerson() {
-        return new ArrayList<>();
+    public static List<Person> getTypicalPersons() {
+        return new ArrayList<>(Arrays.asList(AMY, BOB));
     }
 
     public static List<Transaction> getTypicalTransactions() {
-        return new ArrayList<>(Arrays.asList(TRANSACTION_ONE, TRANSACTION_TWO));
+        return new ArrayList<>(Arrays.asList(TRANSACTION_ONE, TRANSACTION_TWO, TRANSACTION_THREE));
     }
 }
