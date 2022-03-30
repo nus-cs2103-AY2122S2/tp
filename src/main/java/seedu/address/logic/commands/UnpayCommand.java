@@ -20,7 +20,7 @@ public class UnpayCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) \n"
             + "Format: " + COMMAND_WORD + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Transaction status updated.";
+    public static final String MESSAGE_SUCCESS = "Transaction set to unpaid.";
 
     private final Index index;
 

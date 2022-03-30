@@ -21,7 +21,7 @@ public class ClearFilteredCommand extends Command {
             + "Example: " + COMMAND_WORD + "";
 
     public static final String MESSAGE_NO_PERSONS_DELETED_OVERVIEW = "No clients to delete.";
-    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d clients deleted.";
+    public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%d clients deleted.";
 
     public ClearFilteredCommand() {
     }

@@ -46,7 +46,7 @@ public class EditCommand extends Command {
             + Email.PREFIX + "johndoe@example.com "
             + Remark.PREFIX + "Filing for bankruptcy.";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited %1$s.";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited %s.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 

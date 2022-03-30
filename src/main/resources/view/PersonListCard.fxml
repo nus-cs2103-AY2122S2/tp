@@ -28,6 +28,7 @@
         <!-- Name -->
         <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
       </HBox>
+      <!-- ID -->
       <Label id="pid" fx:id="personId" text="\$personId" />
       <!-- Memebership -->
       <FlowPane fx:id="memberships" />

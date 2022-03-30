@@ -54,8 +54,7 @@ public class LogicManager implements Logic {
         boolean isValid = true;
         String errMsg = "";
 
-        for (int i = 0; i < commands.length; i++) {
-            String commandText = commands[i];
+        for (String commandText : commands) {
             logger.info("----------------[USER COMMAND][" + commandText + "]");
 
             try {
@@ -63,7 +62,7 @@ public class LogicManager implements Logic {
                 commandResult = command.execute(model);
 
                 // Checks if any of the special commands are in a command chain; throws exception if found
-                if (i > 0 && (commandResult.isExit() || commandResult.isShowHelp()
+                if (commands.length > 1 && (commandResult.isExit() || commandResult.isShowHelp()
                         || commandResult.isUndoPrevCommand())) {
                     throw new CommandException("Special command should not be in a command chain");
                 }
@@ -75,15 +74,15 @@ public class LogicManager implements Logic {
         }
 
         // Saves the updated addressbook if commands are valid; resets the model if otherwise
-        try {
-            if (isValid) {
+        if (isValid) {
+            try {
                 storage.saveAddressBook(model.getAddressBook());
-            } else {
-                model.setAddressBook(addressBookBeforeCommand);
-                throw new CommandException(errMsg);
+            } catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        } else {
+            model.setAddressBook(addressBookBeforeCommand);
+            throw new CommandException(errMsg);
         }
 
         assert commandResult != null : "CommandResult is null, should not happen";
