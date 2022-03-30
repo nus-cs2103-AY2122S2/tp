@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ListMembersCommand;
+import seedu.address.model.person.Membership;
 import seedu.address.model.person.util.PersonContainsMembershipPredicate;
 
 public class ListMembersCommandParserTest {
@@ -16,19 +17,19 @@ public class ListMembersCommandParserTest {
     public void parse_allFieldsPresent_success() {
         // valid input
         assertParseSuccess(parser, "GOLD",
-                new ListMembersCommand(new PersonContainsMembershipPredicate("GOLD")));
+                new ListMembersCommand(new PersonContainsMembershipPredicate(Membership.Tier.GOLD)));
 
         // valid input
         assertParseSuccess(parser, "BRONZE",
-                new ListMembersCommand(new PersonContainsMembershipPredicate("BRONZE")));
+                new ListMembersCommand(new PersonContainsMembershipPredicate(Membership.Tier.BRONZE)));
 
         // valid input
         assertParseSuccess(parser, "SILVER",
-                new ListMembersCommand(new PersonContainsMembershipPredicate("SILVER")));
+                new ListMembersCommand(new PersonContainsMembershipPredicate(Membership.Tier.SILVER)));
 
         // valid input
         assertParseSuccess(parser, "",
-                new ListMembersCommand(new PersonContainsMembershipPredicate("ALL")));
+                new ListMembersCommand(new PersonContainsMembershipPredicate(Membership.Tier.ALL)));
     }
 
     @Test

@@ -13,16 +13,16 @@ public class PersonContainsMembershipPredicateTest {
     @Test
     public void equals() {
         PersonContainsMembershipPredicate firstPredicate =
-                new PersonContainsMembershipPredicate("gold");
+                new PersonContainsMembershipPredicate(Membership.Tier.GOLD);
         PersonContainsMembershipPredicate secondPredicate =
-                new PersonContainsMembershipPredicate("silver");
+                new PersonContainsMembershipPredicate(Membership.Tier.SILVER);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         PersonContainsMembershipPredicate firstPredicateCopy =
-                new PersonContainsMembershipPredicate("gold");
+                new PersonContainsMembershipPredicate(Membership.Tier.GOLD);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -39,22 +39,22 @@ public class PersonContainsMembershipPredicateTest {
     public void test_personContainsMembership_returnsTrue() {
         // Gold
         PersonContainsMembershipPredicate predicate =
-                new PersonContainsMembershipPredicate("GOLD");
+                new PersonContainsMembershipPredicate(Membership.Tier.GOLD);
         Person tempPerson = PersonUtil.AMY.addMembership(new Membership("GOLD"));
         assertTrue(predicate.test(tempPerson));
 
         //Silver
-        predicate = new PersonContainsMembershipPredicate("SILVER");
+        predicate = new PersonContainsMembershipPredicate(Membership.Tier.SILVER);
         tempPerson = PersonUtil.AMY.addMembership(new Membership("SILVER"));
         assertTrue(predicate.test(tempPerson));
 
         // Bronze
-        predicate = new PersonContainsMembershipPredicate("BRONZE");
+        predicate = new PersonContainsMembershipPredicate(Membership.Tier.BRONZE);
         tempPerson = PersonUtil.AMY.addMembership(new Membership("BRONZE"));
         assertTrue(predicate.test(tempPerson));
 
         // All
-        predicate = new PersonContainsMembershipPredicate("ALL");
+        predicate = new PersonContainsMembershipPredicate(Membership.Tier.ALL);
         tempPerson = PersonUtil.AMY.addMembership(new Membership("SILVER"));
         assertTrue(predicate.test(tempPerson));
     }
@@ -63,33 +63,23 @@ public class PersonContainsMembershipPredicateTest {
     public void test_nameDoesNotContainsMembership_returnsFalse() {
         // Gold
         PersonContainsMembershipPredicate predicate =
-                new PersonContainsMembershipPredicate("GOLD");
+                new PersonContainsMembershipPredicate(Membership.Tier.GOLD);
         Person tempPerson = PersonUtil.AMY.addMembership(new Membership("SILVER"));
         assertFalse(predicate.test(tempPerson));
 
         //Silver
-        predicate = new PersonContainsMembershipPredicate("SILVER");
+        predicate = new PersonContainsMembershipPredicate(Membership.Tier.SILVER);
         tempPerson = PersonUtil.AMY.addMembership(new Membership("BRONZE"));
         assertFalse(predicate.test(tempPerson));
 
         // Bronze
-        predicate = new PersonContainsMembershipPredicate("BRONZE");
+        predicate = new PersonContainsMembershipPredicate(Membership.Tier.BRONZE);
         tempPerson = PersonUtil.AMY.addMembership(new Membership("GOLD"));
         assertFalse(predicate.test(tempPerson));
 
         // All
-        predicate = new PersonContainsMembershipPredicate("ALL");
+        predicate = new PersonContainsMembershipPredicate(Membership.Tier.ALL);
         tempPerson = PersonUtil.AMY;
-        assertFalse(predicate.test(tempPerson));
-
-        // Random predicate
-        predicate = new PersonContainsMembershipPredicate("random");
-        tempPerson = PersonUtil.AMY.addMembership(new Membership("GOLD"));
-        assertFalse(predicate.test(tempPerson));
-
-        // No value
-        predicate = new PersonContainsMembershipPredicate("");
-        tempPerson = PersonUtil.AMY.addMembership(new Membership("GOLD"));
         assertFalse(predicate.test(tempPerson));
     }
 }

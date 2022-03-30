@@ -36,7 +36,7 @@ public class ListMembersCommandTest {
     @Test
     public void execute_noMembers_showsEmptyList() {
         String expectedMessage = Messages.MESSAGE_NO_PERSONS_FOUND_OVERVIEW;
-        PersonContainsMembershipPredicate predicate = new PersonContainsMembershipPredicate("ALL");
+        PersonContainsMembershipPredicate predicate = new PersonContainsMembershipPredicate(Membership.Tier.ALL);
 
         expectedModel.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList("NONESTUFF")));
 
@@ -58,14 +58,14 @@ public class ListMembersCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_PERSONS_FOUND_OVERVIEW, 1);
 
-        PersonContainsMembershipPredicate predicate = new PersonContainsMembershipPredicate("GOLD");
+        PersonContainsMembershipPredicate predicate = new PersonContainsMembershipPredicate(Membership.Tier.GOLD);
         assertCommandSuccess(new ListMembersCommand(predicate), model, expectedMessage, expectedModel);
     }
 
     @Test
     void equals() {
-        PersonContainsMembershipPredicate predicate1 = new PersonContainsMembershipPredicate("ALL");
-        PersonContainsMembershipPredicate predicate2 = new PersonContainsMembershipPredicate("GOLD");
+        PersonContainsMembershipPredicate predicate1 = new PersonContainsMembershipPredicate(Membership.Tier.ALL);
+        PersonContainsMembershipPredicate predicate2 = new PersonContainsMembershipPredicate(Membership.Tier.GOLD);
 
         ListMembersCommand command1 = new ListMembersCommand(predicate1);
         ListMembersCommand command2 = new ListMembersCommand(predicate1);

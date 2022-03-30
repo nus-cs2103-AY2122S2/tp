@@ -9,10 +9,10 @@ import seedu.address.model.person.Person;
  * Tests that a person has a membership based on the tier provided
  */
 public class PersonContainsMembershipPredicate implements Predicate<Person> {
-    private final String tier;
+    private final Membership.Tier tier;
 
-    public PersonContainsMembershipPredicate(String tier) {
-        this.tier = tier.toUpperCase();
+    public PersonContainsMembershipPredicate(Membership.Tier tier) {
+        this.tier = tier;
     }
 
     @Override
@@ -20,10 +20,10 @@ public class PersonContainsMembershipPredicate implements Predicate<Person> {
         if (!member.hasField(Membership.PREFIX)) {
             return false;
         }
-        if (tier == "ALL") {
+        if (tier == Membership.getTierFromString("ALL")) {
             return member.hasField(Membership.PREFIX);
         } else {
-            return member.getMembership().getValue().toUpperCase().equals(tier);
+            return member.getMembership().getTier().equals(tier);
         }
     }
 
