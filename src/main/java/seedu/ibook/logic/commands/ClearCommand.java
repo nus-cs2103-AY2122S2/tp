@@ -16,7 +16,10 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        model.prepareIBookForChanges();
         model.setIBook(new IBook());
+        model.saveIBookChanges();
 
         return new CommandResult(MESSAGE_SUCCESS);
     }

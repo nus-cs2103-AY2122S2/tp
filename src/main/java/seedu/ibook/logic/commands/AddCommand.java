@@ -51,7 +51,9 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
+        model.prepareIBookForChanges();
         model.addProduct(toAdd);
+        model.saveIBookChanges();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

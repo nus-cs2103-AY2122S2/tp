@@ -25,6 +25,8 @@ import seedu.ibook.logic.commands.ExpiredCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.OutOfStockCommand;
+import seedu.ibook.logic.commands.RedoCommand;
+import seedu.ibook.logic.commands.UndoCommand;
 import seedu.ibook.logic.commands.UpdateAllCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
@@ -102,6 +104,18 @@ public class IBookParserTest {
     public void parseCommand_outOfStock() throws Exception {
         assertTrue(parser.parseCommand(OutOfStockCommand.COMMAND_WORD) instanceof OutOfStockCommand);
         assertTrue(parser.parseCommand(OutOfStockCommand.COMMAND_WORD + " ") instanceof OutOfStockCommand);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD + " 5") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD + " 5") instanceof RedoCommand);
     }
 
     @Test

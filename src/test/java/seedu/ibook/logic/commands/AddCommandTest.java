@@ -181,6 +181,36 @@ public class AddCommandTest {
         public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void prepareIBookForChanges() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveIBookChanges() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -217,6 +247,16 @@ public class AddCommandTest {
         public void addProduct(Product product) {
             requireNonNull(product);
             productsAdded.add(product);
+        }
+
+        @Override
+        public void prepareIBookForChanges() {
+
+        }
+
+        @Override
+        public void saveIBookChanges() {
+
         }
 
         @Override

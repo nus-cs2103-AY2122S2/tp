@@ -70,11 +70,11 @@ public interface Model {
     void deleteProduct(Product target);
 
     /**
-     * Replaces the given product {@code target} with {@code editedProduct}.
-     * {@code target} must exist in the iBook.
-     * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
+     * Replaces the given product {@code target} with {@code updatedProduct}.
+     * {@code target} must exist in the Ibook.
+     * The product identity of {@code updatedProduct} must not be the same as another existing product in the book.
      */
-    void setProduct(Product target, Product editedProduct);
+    void setProduct(Product target, Product updatedProduct);
 
     /**
      * Adds the given item to {@code product}.
@@ -113,7 +113,7 @@ public interface Model {
     void removeProductFilter(AttributeFilter filter);
 
     /**
-     * Clear all filters.
+     * Clears all filters.
      */
     void clearProductFilters();
 
@@ -128,4 +128,34 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null
      */
     void updateFilteredItemListForProducts(Predicate<Item> predicate);
+
+    /**
+     * Prepares the iBook for changes.
+     */
+    void prepareIBookForChanges();
+
+    /**
+     * Saves changes made to IBook.
+     */
+    void saveIBookChanges();
+
+    /**
+     * Checks if the current state of iBook can be undone.
+     */
+    boolean canUndoIBook();
+
+    /**
+     * Checks if there is any undone state of iBook that can be redone.
+     */
+    boolean canRedoIBook();
+
+    /**
+     * Reverts the iBook to one state older.
+     */
+    void undoIBook();
+
+    /**
+     * Restores the iBook to one state newer.
+     */
+    void redoIBook();
 }

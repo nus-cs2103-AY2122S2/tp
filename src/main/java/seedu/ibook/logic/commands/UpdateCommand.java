@@ -71,8 +71,11 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
+        model.prepareIBookForChanges();
         model.setProduct(productToUpdate, updatedProduct);
+        model.saveIBookChanges();
         model.clearProductFilters();
+
         return new CommandResult(String.format(MESSAGE_UPDATE_PRODUCT_SUCCESS, updatedProduct));
     }
 

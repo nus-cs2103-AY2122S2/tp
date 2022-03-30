@@ -13,7 +13,7 @@ import seedu.ibook.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyIBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyIBook_success() {
         Model model = new ModelManager(getTypicalIBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalIBook(), new UserPrefs());
         expectedModel.setIBook(new IBook());

@@ -90,7 +90,7 @@ public class IBookTest {
     /**
      * A stub ReadOnlyIBook whose products list can violate interface constraints.
      */
-    private static class IBookStub implements ReadOnlyIBook {
+    public static class IBookStub implements ReadOnlyIBook {
         private final ObservableList<Product> products = FXCollections.observableArrayList();
 
         IBookStub(Collection<Product> products) {
