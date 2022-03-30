@@ -52,7 +52,7 @@ public class RemindCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getFilteredAndSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -66,12 +66,12 @@ public class RemindCommand extends Command {
             if (reminder.isEmpty()) {
                 reminderPersons.remove(personToRemind);
                 return new CommandResult(String.format(MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind), false,
-                        false, false, true, false);
+                        false, false, false, false, true, false);
             }
             // the RemindCommand contains a Reminder, edit the current Reminder to be this new one
             reminderPersons.add(personToRemind, reminder.get());
             return new CommandResult(String.format(MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind), false,
-                    false, false, true, false);
+                    false, false, false, false, true, false);
         }
 
         // a reminder is being added to this person for the first time
@@ -82,7 +82,7 @@ public class RemindCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind), false,
-                false, false, true, false);
+                false, false, false, false, true, false);
     }
 
     public Index getIndex() {

@@ -43,8 +43,8 @@ public class CommandResult {
         this.showMatch = showMatch;
         this.showImage = showImage;
         this.showFavourites = showFavourites;
-        this.showReminders = showReminders;
         this.showStatistics = showStatistics;
+        this.showReminders = showReminders;
         this.exit = exit;
     }
 
