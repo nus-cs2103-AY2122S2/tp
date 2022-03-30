@@ -211,7 +211,7 @@ Format: `sort s/ATTRIBUTE_FIELD`
 **:information_source: Notes about the edit format:**<br>
 
 `ATTRIBUTE_FIELD` can take on the following values
-`as`, `course`, `email`, `is`, `name`, `phone`, `yr`, `id`
+`appstatus`, `course`, `intstatus`, `name`, `seniority`, `studentid`
 
 </div>
 
@@ -220,7 +220,7 @@ Format: `sort s/ATTRIBUTE_FIELD`
   (i.e. A-Z, 0-9) with regard to the specified attribute field.
 
 Examples:
-Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `id`).
+Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `studentid`).
 1. (`Ben`, `A5588565L`)
 2. (`Alice`, `A2344567B`)
 3. (`Charlie`, `A0188565L`)
@@ -230,7 +230,7 @@ Let's reference a default sample list of unique candidates with attribute fields
 2. (`Ben`, `A5588565L`)
 3. (`Charlie`, `A0188565L`)
 
-`sort s/id` returns candidates sorted by name in the following order:
+`sort s/studentid` returns candidates sorted by name in the following order:
 1. (`Charlie`, `A0188565L`)
 2. (`Alice`, `A2344567B`)
 3. (`Ben`, `A5588565L`)
