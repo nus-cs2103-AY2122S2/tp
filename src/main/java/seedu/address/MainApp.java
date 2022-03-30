@@ -56,9 +56,12 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        // For checking the Path bug
+        Path addressbookPath = userPrefs.getAddressBookFilePath();
+        Path archivedAddressBookPath = userPrefs.getArchivedAddressBookFilePath();
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         AddressBookStorage archivedAddressBookStorage = new JsonAddressBookStorage(
-                                                                            userPrefs.getArchivedAddressBookFilePath());
+                userPrefs.getArchivedAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, archivedAddressBookStorage, userPrefsStorage);
 
         initLogging(config);

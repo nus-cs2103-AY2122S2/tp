@@ -206,9 +206,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleSwitch() throws CommandException, ParseException {
-        logger.info("Switch AddressBook!");
+    private void handleSwitchMenu() throws CommandException, ParseException {
+        logger.info("Switch Menu Item fired!!!");
         executeCommand("switch");
+    }
+
+    private void handleSwitch() {
+        logic = logic.switchAddressBook();
     }
 
     /**
@@ -254,6 +258,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowEdit()) {
                 handleEdit();
+            }
+
+            if (commandResult.isSwitchCommand()) {
+                handleSwitch();
             }
 
 
