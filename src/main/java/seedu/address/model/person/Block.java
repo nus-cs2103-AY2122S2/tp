@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Represents a Person's block in the address book.
+ * Represents a Person's block in Tracey.
  * Guarantees: immutable; is valid as declared in {@link #isValidBlock(String)}
  */
 public class Block {
@@ -41,7 +41,7 @@ public class Block {
      * Returns true if a given string is a valid block.
      *
      * @param test string to be tested to determine if valid block.
-     * @return Boolean result where it is true if a given string is a valid block, false otherwise.
+     * @return boolean where true if a given string is a valid block, false otherwise.
      */
     public static boolean isValidBlock(String test) {
         return Stream.of(HallBlock.values())
@@ -50,7 +50,7 @@ public class Block {
     }
 
     /**
-     * Returns the list enum values from the HallBlock enum class.
+     * Returns the list of enum values from the HallBlock enum class as a string.
      *
      * @return String of HallBlock enum values.
      */

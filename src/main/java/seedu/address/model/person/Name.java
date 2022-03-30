@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Person's name in Tracey.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
@@ -57,7 +57,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      *
      * @param test string to be tested to determine if valid name.
-     * @return Boolean result where it is true if a given string is a valid name, false otherwise.
+     * @return boolean where true if a given string is a valid name, false otherwise.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);

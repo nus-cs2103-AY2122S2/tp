@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.stream.Stream;
 
 /**
- * Represents a Person's covid status in the address book.
+ * Represents a Person's covid status in Tracey.
  * Guarantees: immutable; is valid as declared in {@link #isValidCovidStatus(String)}
  */
 public class CovidStatus {

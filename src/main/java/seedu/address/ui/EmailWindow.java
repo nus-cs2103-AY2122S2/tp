@@ -13,7 +13,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
-
+/**
+ * Controller for a email page
+ */
 public class EmailWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(EmailWindow.class);
@@ -48,7 +50,7 @@ public class EmailWindow extends UiPart<Stage> {
     }
 
     /**
-     * Iterate through the list of persons to obtain the email string of each Person.
+     * Iterate through the list of persons to generate an email string of all Persons.
      *
      * @param personList list of Person objects currently in the PersonList.
      */
@@ -107,7 +109,7 @@ public class EmailWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the emails in the string of emails to the clipboard.
+     * Copies the emails in the string of emails to the user's clipboard.
      */
     @FXML
     private void copyEmail() {
