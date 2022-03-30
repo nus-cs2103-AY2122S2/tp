@@ -176,6 +176,19 @@
      -fx-border-top-width: 1px;
 }
 
+.pane-with-lighter-border {
+     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-border-color: #707070;
+     -fx-border-width: 3px;
+     -fx-border-radius: 0 5 5 5;
+}
+
+.pane-without-border {
+     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-border-color: transparent;
+     -fx-border-top-width: 1px;
+}
+
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
@@ -416,15 +429,22 @@
 
 /* Adapted from https://community.oracle.com/tech/developers/discussion/3538389/styling-tabpane-css */
 .tab-pane {
-  -fx-tab-min-width:120px;
-  -fx-tab-max-width:120px;
-  -fx-tab-min-height:50px;
-  -fx-tab-max-height:50px;
+  -fx-tab-min-width:200px;
+  ifx-tab-min-height:50px;
+  -fx-tab-max-height:150px;
   -fx-background-color: #383838;
 }
 
+.tab-pane .tab {
+    -fx-background-color: #383838;
+    -fx-pref-width: 200;
+    -fx-pref-height: 60;
+}
+
 .tab-pane > .tab-header-area > .headers-region > .tab:top {
+    -fx-border-width: 3 3 3 3;
     -fx-border-radius: 5 5 0 0;
+    -fx-border-color: #707070;
     -fx-background-color: #383838;
 }
 
@@ -435,10 +455,16 @@
     -fx-font-size: 30;
 }
 
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+     -fx-border-style: segments(0.166667em, 0.166667em);
+     -fx-border-width: 1;
+     -fx-border-color: transparent;
+}
+
 .tab-pane > .tab-header-area > .headers-region > .tab:selected:top {
-    -fx-border-width: 5 1 1 1;
+    -fx-border-width: 3 3 3 3;
     -fx-border-radius: 5 5 0 0;
-    -fx-background-color: #383838;
+    -fx-background-color: #707070;
     -fx-background-insets: 0;
 }
 
@@ -447,7 +473,7 @@
     -fx-text-fill: #707070;
     -fx-font-weight: bold;
     -fx-font-size: 30;
-    -fx-pref-width: 450;
+    -fx-pref-width: 200;
 }
 
 .tab-pane > .tab-header-area > .tab-header-background {
