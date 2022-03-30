@@ -98,7 +98,7 @@ class JsonAdaptedPerson {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!Name.isValidLineupName(name)) {
+        if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
@@ -156,7 +156,7 @@ class JsonAdaptedPerson {
 
     @Override
     public String toString() {
-        return name + " " + email + " " + height + " " + weight +" " + jerseyNumber + " " + phone + " " + tagged
+        return name + " " + email + " " + height + " " + weight + " " + jerseyNumber + " " + phone + " " + tagged
                 + " " + lineups;
     }
 }

@@ -138,7 +138,8 @@ public class EditCommand extends Command {
      * @param targetLineupName The target LineupName to edit
      * @param editLineupName The new LineupName
      */
-    public EditCommand(seedu.address.model.lineup.LineupName targetLineupName, seedu.address.model.lineup.LineupName editLineupName) {
+    public EditCommand(seedu.address.model.lineup.LineupName targetLineupName,
+                       seedu.address.model.lineup.LineupName editLineupName) {
         requireNonNull(targetLineupName);
         requireNonNull(editLineupName);
 
@@ -254,7 +255,6 @@ public class EditCommand extends Command {
      * Creates and return a {@code Lineup} with the new Lineup name
      */
     public static Lineup createEditedLineup(Lineup lineupToEdit, seedu.address.model.lineup.LineupName editLineupName) {
-    //public static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
         assert lineupToEdit != null;
 
         seedu.address.model.lineup.LineupName updatedName = editLineupName;
@@ -413,8 +413,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null && tags.size() != 0) ?
-                    Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null && tags.size() != 0)
+                    ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override

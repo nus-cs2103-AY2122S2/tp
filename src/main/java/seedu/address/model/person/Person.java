@@ -115,7 +115,8 @@ public class Person {
      * @param oldName The old LineupName
      * @param newName The new LineupName
      */
-    public void replaceLineupName(seedu.address.model.lineup.LineupName oldName, seedu.address.model.lineup.LineupName newName) {
+    public void replaceLineupName(seedu.address.model.lineup.LineupName oldName,
+                                  seedu.address.model.lineup.LineupName newName) {
         this.lineups.remove(oldName);
         this.lineups.add(newName);
     }

@@ -1,15 +1,17 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ThemeCommand;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.ThemeCommand;
+
+
 public class ThemeCommandParserTest {
-    ThemeCommandParser parser = new ThemeCommandParser();
+    private ThemeCommandParser parser = new ThemeCommandParser();
 
     @Test
     public void parse_changeTheme_success() {

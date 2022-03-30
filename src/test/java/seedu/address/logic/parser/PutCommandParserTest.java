@@ -1,10 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.PutCommand;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
@@ -13,8 +8,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.LineupBuilder.DEFAULT_LINEUP_NAME;
 import static seedu.address.testutil.PersonBuilder.DEFAULT_NAME;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.PutCommand;
+import seedu.address.model.lineup.LineupName;
+import seedu.address.model.person.Name;
+
 public class PutCommandParserTest {
-    PutCommandParser parser = new PutCommandParser();
+    private PutCommandParser parser = new PutCommandParser();
 
     @Test
     public void parse_putIntoLineup_success() {

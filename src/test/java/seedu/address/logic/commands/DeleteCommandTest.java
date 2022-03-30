@@ -23,11 +23,13 @@ import seedu.address.testutil.TypicalPersons;
  */
 public class DeleteCommandTest {
     private static final Name INVALID_NAME = new Name("RAcHel");
-    private static final seedu.address.model.lineup.LineupName INVALID_LINEUP_NAME = new seedu.address.model.lineup.LineupName("Not a lineup");
+    private static final seedu.address.model.lineup.LineupName INVALID_LINEUP_NAME =
+            new seedu.address.model.lineup.LineupName("Not a lineup");
 
     private static final Person VALID_PERSON = TypicalPersons.BENSON;
     private static final Lineup VALID_LINEUP = new LineupBuilder().build();
-    private static final Lineup ANOTHER_VALID_LINEUP = new Lineup(new seedu.address.model.lineup.LineupName("Dummy Lineup"));
+    private static final Lineup ANOTHER_VALID_LINEUP =
+            new Lineup(new seedu.address.model.lineup.LineupName("Dummy Lineup"));
     private static final seedu.address.model.lineup.LineupName VALID_LINEUP_NAME = VALID_LINEUP.getLineupName();
     private Model model;
     private Model expectedModel;

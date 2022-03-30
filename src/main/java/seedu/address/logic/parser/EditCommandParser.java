@@ -62,7 +62,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                         MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_LINEUP));
             } else {
                 targetLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
-                seedu.address.model.lineup.LineupName editLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+                seedu.address.model.lineup.LineupName editLineupName = ParserUtil
+                        .parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
                 return new EditCommand(targetLineupName, editLineupName);
             }
         }

@@ -57,7 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_LINEUP));
             } else {
-                seedu.address.model.lineup.LineupName name = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+                seedu.address.model.lineup.LineupName name = ParserUtil
+                        .parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
                 Lineup lineup = new Lineup(name);
                 if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
                     // to be added later

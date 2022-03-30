@@ -77,6 +77,9 @@ public class Lineup {
         return this.lineupName.equals(otherLineupName);
     }
 
+    /**
+     * Checks two lineup are same
+     */
     public boolean isSameLineup(Lineup otherLineup) {
         if (otherLineup == this) {
             return true;
