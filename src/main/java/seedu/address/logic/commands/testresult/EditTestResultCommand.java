@@ -2,7 +2,6 @@ package seedu.address.logic.commands.testresult;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALTEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
 
@@ -11,6 +10,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -35,15 +35,17 @@ public class EditTestResultCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW TEST RESULT INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "
             + PREFIX_RESULT + "TEST_RESULT \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NRIC + "S1234567L "
             + PREFIX_RESULT + "Brain damage";
 
     public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Test Result Information: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_TEST_RESULT = "This test result already exists in MedBook.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
+            + "Create a new test result instead.";
 
     private final Index targetIndex;
     private final EditTestResultDescriptor editTestResultDescriptor;
@@ -54,7 +56,7 @@ public class EditTestResultCommand extends Command {
      */
     public EditTestResultCommand(Index targetIndex, EditTestResultDescriptor editTestResultDescriptor) {
         this.targetIndex = targetIndex;
-        this.editTestResultDescriptor = editTestResultDescriptor;
+        this.editTestResultDescriptor = new EditTestResultDescriptor(editTestResultDescriptor);
     }
 
     @Override
@@ -66,9 +68,14 @@ public class EditTestResultCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TEST_RESULT_INDEX);
         }
 
-        TestResult testResult = lastShownList.get(targetIndex.getZeroBased());
-        TestResult editedTestResult = createEditedTestResult(testResult, editTestResultDescriptor);
-        model.setTestResult(testResult, editedTestResult);
+        TestResult testResultToEdit = lastShownList.get(targetIndex.getZeroBased());
+        TestResult editedTestResult = createEditedTestResult(testResultToEdit, editTestResultDescriptor);
+
+        if (!editedTestResult.isSameTestResult(editedTestResult) && model.hasTestResult(editedTestResult)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TEST_RESULT);
+        }
+
+        model.setTestResult(testResultToEdit, editedTestResult);
 
         return new CommandResult(String.format(MESSAGE_EDIT_TEST_RESULT_SUCCESS, editedTestResult), COMMAND_TYPE);
     }
@@ -77,7 +84,7 @@ public class EditTestResultCommand extends Command {
                                                EditTestResultDescriptor editTestResultDescriptor) {
         assert testResult != null;
 
-        Nric updatedNric = editTestResultDescriptor.getNric().orElse(testResult.getPatientNric());
+        Nric updatedNric = testResult.getPatientNric();
         TestDate updatedTestDate = editTestResultDescriptor.getTestDate().orElse(testResult.getTestDate());
         MedicalTest updatedMedicalTest =
                 editTestResultDescriptor.getMedicalTest().orElse(testResult.getMedicalTest());
@@ -103,7 +110,6 @@ public class EditTestResultCommand extends Command {
      * corresponding field value of the test result information.
      */
     public static class EditTestResultDescriptor {
-        private Nric nric;
         private TestDate testDate;
         private MedicalTest medicalTest;
         private Result result;
@@ -115,18 +121,16 @@ public class EditTestResultCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditTestResultDescriptor(EditTestResultDescriptor toCopy) {
-            setNric(toCopy.nric);
             setTestDate(toCopy.testDate);
             setMedicalTest(toCopy.medicalTest);
             setResult(toCopy.result);
         }
 
-        public Optional<Nric> getNric() {
-            return Optional.ofNullable(nric);
-        }
-
-        public void setNric(Nric nric) {
-            this.nric = nric;
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(testDate, medicalTest, result);
         }
 
         public Optional<TestDate> getTestDate() {
@@ -168,8 +172,7 @@ public class EditTestResultCommand extends Command {
             // state check
             EditTestResultDescriptor e = (EditTestResultDescriptor) other;
 
-            return getNric().equals(e.getNric())
-                    && getTestDate().equals(e.getTestDate())
+            return getTestDate().equals(e.getTestDate())
                     && getMedicalTest().equals(e.getMedicalTest())
                     && getResult().equals(e.getResult());
         }
