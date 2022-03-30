@@ -60,12 +60,28 @@ public abstract class Person {
         return email;
     }
 
+    public abstract Person deletePhone();
+
+    public abstract Person deleteEmail();
+
+    public abstract Person deleteTag(String tag);
+
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Tag getTag(String tagName) {
+        for (Tag tag : tags) {
+            if (tag.tagName.equals(tagName)) {
+                return tag;
+            }
+        }
+        return null;
     }
 
 
@@ -101,6 +117,25 @@ public abstract class Person {
     }
 
     /**
+     * Returns true if this person object only has 1 module which has the same module code as
+     * the one provided
+     *
+     * @param moduleCode
+     * @return
+     */
+    public boolean onlyHasModule(ModuleCode moduleCode) {
+        if (modules.size() != 1) {
+            return false;
+        }
+        for (Module module : modules) {
+            if (module.hasModuleCode(moduleCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds this person to all the modules that they are associated with, into the
      * correct personnel list (professor/student) in module depending on the runtime type
      * of this person.
@@ -114,6 +149,15 @@ public abstract class Person {
             } else {
                 throw new PersonNoSubtypeException();
             }
+        }
+    }
+
+    /**
+     * Remove this person from Person List in all modules that this person is involved in
+     */
+    public void removePersonFromAllTheirModules() {
+        for (Module module : this.getModules()) {
+            module.removePerson(this);
         }
     }
 

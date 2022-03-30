@@ -3,6 +3,7 @@ package unibook.model;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -164,6 +165,18 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
+     * Returns true is the group exists in the module associated with the module code provided
+     *
+     * @param moduleCode
+     * @param group
+     * @return
+     */
+    public boolean hasModuleAndGroup(ModuleCode moduleCode, Group group) {
+        Module module = modules.getModuleByCode(moduleCode);
+        return module.hasGroup(group);
+    }
+
+    /**
      * Returns module with given code that is in unibook.
      *
      * @param moduleCode
@@ -221,10 +234,24 @@ public class UniBook implements ReadOnlyUniBook {
      */
     public void removeModule(Module key) {
         modules.remove(key);
+        removeModuleFromAllPersons(key.getModuleCode());
+        removeGroupFromAllStudents(key.getModuleCode());
     }
 
+    /**
+     * Remove module by matching the module code, also removes modules from all students and all groups from students
+     * relating to that module
+     *
+     * @param key
+     */
     public void removeByModuleCode(ModuleCode key) {
         modules.removeByModuleCode(key);
+        removeModuleFromAllPersons(key);
+        removeGroupFromAllStudents(key);
+    }
+
+    public void removeGroupFromAllStudents(ModuleCode moduleCode) {
+        persons.removeGroupFromAllStudents(moduleCode);
     }
 
     /**
@@ -259,7 +286,49 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
+     * Deletes the module associated with the module code provided, as well as all persons
+     * that are associated with the module, only if the only this module is the only module
+     * that they are associated with
+     * @param moduleCode
+     */
+    public void deleteModuleAndPersons(ModuleCode moduleCode) {
+        Module moduleToBeDeleted = modules.getModuleByCode(moduleCode);
+        List<Student> studentsAssociatedToModule = moduleToBeDeleted.getStudents();
+        List<Professor> profsAssociatedToModule = moduleToBeDeleted.getProfessors();
+        List<Student> studentsToBeDeleted = new ArrayList<>();
+        List<Professor> profsToBeDeleted = new ArrayList<>();
+        for (Student student : studentsAssociatedToModule) {
+            if (student.onlyHasModule(moduleCode)) {
+                studentsToBeDeleted.add(student);
+            }
+        }
+        for (Professor professor : profsAssociatedToModule) {
+            if (professor.onlyHasModule(moduleCode)) {
+                profsToBeDeleted.add(professor);
+            }
+        }
+        persons.deleteStudentsAndProfs(studentsToBeDeleted, profsToBeDeleted);
+        modules.removeByModuleCode(moduleCode);
+    }
+
+    /**
+     * Delete all professors associated to the module that matches with the module code provided
+     * @param moduleCode
+     */
+    public void deleteProfModule(ModuleCode moduleCode) {
+        Module moduleToBeDeleted = modules.getModuleByCode(moduleCode);
+        List<Professor> profsToBeDeleted = moduleToBeDeleted.getProfessors();
+        persons.deleteProfs(profsToBeDeleted);
+    }
+
+    public void deleteGroupFromAllPersons(ModuleCode moduleCode, Group group) {
+        persons.deleteGroupFromAllPersons(moduleCode, group);
+    }
+
+    /**
+     * Delete all groups that match the group name provided from all persons
      *
+     * @param groupName
      */
     public ObservableList<Group> getGroupsWithGroupName(String groupName) {
         requireNonNull(groupName);

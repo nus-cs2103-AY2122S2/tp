@@ -20,6 +20,7 @@ import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleName;
+import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Office;
@@ -247,6 +248,15 @@ public class ParserUtil {
     }
 
     /**
+     * * Parses {@code String groupName} into a {@code Group}.
+     */
+    public static Group parseGroup(String groupName)
+            throws ParseException {
+
+        return new Group(groupName);
+    }
+
+    /**
      * Parses a date string with YYYY-MM-DD into LocalDate object
      *
      * @param date
@@ -292,6 +302,7 @@ public class ParserUtil {
     }
 
     /**
+>>>>>>> 69f9bda5ca8dfb47b3a4168a9dba4176c85f29f7
      * Parses {@code String dateTime} into a {@code LocalDateTime}.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {

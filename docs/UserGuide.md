@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-UniBook is a **desktop app for students to manage their university contacts in smart organized manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
+UniBook is a **desktop app for students to manage their university contacts related to their studies in an organised manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
 * Table of Contents
 {:toc}
 
@@ -23,7 +23,7 @@ UniBook is a **desktop app for students to manage their university contacts in s
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all entries.
 
    * **`add`**`o/student n/John Doe p/98765432 e/johnd@example.com` : Adds a student named `John Doe` to UniBook.
 
@@ -64,6 +64,44 @@ UniBook is a **desktop app for students to manage their university contacts in s
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+### Core function of UniBook
+
+* To serve its purpose as useful desktop app for University students to manage their university contacts for their studies in an organised manner, UniBook supports the following types of entries:
+  * 2 types of people - Students and Professors
+    * All people contain 3 basic details - name, phone and email. Phone and Email details can be left blank.
+    * Professors can contain one additional detail - office, the office in the University they are located in. This can also be left blank.
+  * Modules
+    * A module represents a University module, storing 4 basic details - module name, module code, groups of the module and key events of the module. Key Events represent events such as exams or assignment due dates, storing the associated date.
+    * A module can have both Professors and Students associated with it. 
+      * Association with Professor implies that the professor is involved in the teaching of the module.
+      * Association with student implies student is taking the module.
+  * Groups
+    * A group can represent any kind of group related to a university module that a student is in - a study group, project grp etc. It stores meeting times for the group.
+    * A group can contain multiple students implying they are members of the group.
+    * A group is also associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed. 
+* UniGroup is thus an app that displays and stores the above entries for easy reference by users, with smart commands that help to manage entries of them.
+
+### User Interface
+
+* UniBook consists of 3 main pages that a user can navigate through - the _people page_, _modules page_ and _groups page_.
+  * The _people page_ displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names. (ref: `add` command)
+  ![Ui](images/Ui.png) 
+  * The _module page_ displays all modules stored in UniBook, and all their individual details.
+  ![ModulesPage](images/ModulesPage.png)
+  * The _groups page_ displays all the groups stored in UniBook, and all their individual details.
+  ![GroupsPage](images/GroupsPage.png)
+  
+* A User can navigate between pages with the `list` command.
+
+* Different variations of CLI commands can be run depending on the page user is currently on.
+
+* While UniBook is primarily optimized for the command-line interface (CLI), some basic intuitive navigation is available for quick navigation across pages to improve ease-of-use :
+  * On _people page_, a user can click on a module code to enter the _module page_ displaying all the details of the module with the given module code.
+  * On _people page_, a user can click on a group name to enter the _group page_ displaying all the details of the group with the given group name.
+
+* On _module page_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
+* On _group page_, showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
 
 ### Viewing help : `help`
 
@@ -271,52 +309,75 @@ Examples:
 Removes the specified modules, module subgroup, student or professor profile from the system.
 
 Format:
+(Note: Commands under the sub header Person page can only be used on person page, and likewise for other pages)
+
+On Person Page:
 
 `delete [INDEX]`
 * Deletes the person at that index
-* Only can be used on Person view
+* The GUI will display the index before the person
 
-`delete m/MODULECODE [o/OPTION]`
+`delete [INDEX] p/ e/ t/[TAG] of/`
+* p/, e/, t/[TAG], of/ can be entered in any combination, for example, to delete only phone and email, the user can put p/ and e/
+* At least 1 of the 4 tags must be entered, otherwise the command above will be executed instead
+* Only 0 or 1 of each tag must be provided
 
+On Module Page:
+
+`delete [INDEX]`
+* Deletes the module at that index
+* The GUI will display the index before the module
+
+For the following commands, if more than 1 of the following tags are provided, the priority will be in this order. For example, if `prof/1` and `stu/1` is both provided, `delete 1 prof/1` will be prioritised because `prof/` is higher than `stu/` on this list.
+
+`delete [INDEX] prof/[INDEX]`
+* Delete professor from module (The original person is not deleted, only removed from the module)
+* The first index represents the index for which module to remove a professor from
+* The second index (after prof/) represents the index for which professor to remove
+* For example, `delete 2 prof/1` would delete the professor at index 1 from the module at index 2
+
+`delete [INDEX] stu/[INDEX]`
+* Same as the above command, but index after stu/ represents the student list index to be deleted
+
+`delete [INDEX] g/[GROUPNAME]`
+* same as the above command, but group name has to be specified to delete the group with that name
+
+`delete [INDEX] ke/[INDEX]`
+* same as the above command, but index after ke/ represents the key event index to be deleted
+
+On Group page:
+
+`delete [INDEX]`
+* Deletes the group at that index
+* The GUI will display the index before the group
+
+For the following commands, if more than 1 of the following tags are provided, the priority will be in this order. For example, if `mt/1` and `stu/1` is both provided, `delete 1 stu/1` will be prioritised because `stu/` is higher than `mt/` on this list.
+
+`delete [INDEX] stu/[INDEX]`
+* Delete student from group
+* The first index represents the index for which group to remove the student from
+* The second index (after stu/) represents the index for which student to delete
+* For example, `delete 2 stu/1` would delete the student at index 1 for the group at index 2
+
+`delete [INDEX] mt/1`
+* Delete meeting time from group
+* The first index represents the index for which group to remove the meeting time for
+* The second index (after mt/) represents the index for which meeting time to delete
+* For example, `delete 2 mt/1` would delete the meeting time at index 1 for the group at index 2
+
+On Any Page:
+
+`delete o/module m/[MODULECODE]`
 * Deletes the module with the specified `MODULECODE`.
-* Only can be used on module view
 * The module must already exist in the system.
-* [NOT READY] Option is optional, and can take the following values: 
-  - `ALL` -> Delete everything associated with the module, including profiles.
-  - `MOD` -> Delete only the module
-  - `PROF` -> Delete the Professor associated with the module.
-* If the option field is left blank, the `MOD` setting is assumed.    
+* For example, `delete o/module m/CS2103` removes the module with module code CS2103
 
-Example:
-* `delete m/CS2107` removes the "CS2107" module only.
-
-[NOT READY] `delete m/MODULECODE g/GROUPCODE [o/OPTION]`
-* Deletes the subgroup specified by `GROUPCODE`, within the module specified by `MODULECODE`.
-* Option is optional, and can take the following values:
-    - `ALL` -> Delete everything associated with the group, including profiles.
-    - `GROUP` -> Delete only the relevant subgroup
-* If the option field is left blank, the `GROUP` setting is assumed.
+`delete o/group m/[MODULECODE] g/[GROUPNAME]`
+* Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
 * Both the module and the subgroup must already exist in the system.
-
-Example:
-* `delete m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
-
-[NOT READY] `delete n/STUDENTNAME`
-* Deletes the student profile specified by `STUDENTNAME`. If there are multiple matches,
-a prompt to specify which profile to delete will appear.
-  
-Example: `delete n/Alan Tan` will remove the profile associated with Alan Tan. If there are multiple
-profiles associated with this name, a list will appear prompting you to specify which profile to delete.
-
-[NOT READY] `delete n/PROFNAME`
-* Deletes the professor profile specified by `PROFNAME`. If there are multiple matches, a prompt
-to specify which profile to delete will appear.
-  
-Example: `delete n/Martin Henz` will remove the profile associated with Martin Henz. If there are multiple 
-profiles associated with this name, a list will appear prompting you to specify which profile to delete.
+* For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
 ### Clearing all entries : `clear`
-
 
 Clears all entries from UniBook.
 
@@ -341,8 +402,6 @@ If your changes to the data file makes its format invalid, UniBook will discard 
 </div>
 
 ### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
