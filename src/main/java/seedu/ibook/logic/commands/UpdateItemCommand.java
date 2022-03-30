@@ -26,7 +26,7 @@ public class UpdateItemCommand extends Command {
             + ": Updates the item identified by the index number used in the displayed list.\n"
             + "Parameters: INDEX (must be a positive integer pair separated by '"
             + CompoundIndex.SEPARATOR
-            + "')\n"
+            + "' at most " + Integer.MAX_VALUE + ")\n"
             + "Example: " + COMMAND_WORD + " 2" + CompoundIndex.SEPARATOR + "1";
 
     public static final String MESSAGE_UPDATE_ITEM_SUCCESS = "Updated Item in %1$s:\n%2$s";
@@ -73,12 +73,13 @@ public class UpdateItemCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
+        model.prepareIBookForChanges();
         model.updateItem(targetProduct, itemToUpdate, updatedItem);
+        model.saveIBookChanges();
         model.updateFilteredItemListForProducts(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(
                 String.format(MESSAGE_UPDATE_ITEM_SUCCESS, targetProduct.getName(), updatedItem));
     }
-
     /**
      * Creates and returns an {@code Item} with the details of {@code itemToUpdate}
      * updated with {@code updateItemDescriptor}.

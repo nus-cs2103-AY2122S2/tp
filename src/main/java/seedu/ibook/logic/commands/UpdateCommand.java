@@ -30,7 +30,8 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the product identified "
-            + "by the index number(a positive integer) used in the displayed product list. "
+            + "by the index number (a positive integer at most " + Integer.MAX_VALUE + ")"
+            + " used in the displayed product list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX [TAG:NEW_VALUE ...]\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -72,8 +73,11 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
+        model.prepareIBookForChanges();
         model.setProduct(productToUpdate, updatedProduct);
+        model.saveIBookChanges();
         model.clearProductFilters();
+
         return new CommandResult(String.format(MESSAGE_UPDATE_PRODUCT_SUCCESS, updatedProduct));
     }
 

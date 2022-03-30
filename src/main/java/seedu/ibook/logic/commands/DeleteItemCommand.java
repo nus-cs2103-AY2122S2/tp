@@ -22,7 +22,7 @@ public class DeleteItemCommand extends Command {
             + ": Deletes the item identified by the index number used in the displayed list.\n"
             + "Parameters: INDEX (must be a positive integer pair separated by '"
             + CompoundIndex.SEPARATOR
-            + "')\n"
+            + "' at most " + Integer.MAX_VALUE + ")\n"
             + "Example: " + COMMAND_WORD + " 1" + CompoundIndex.SEPARATOR + "1";
 
     public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Item: %1$s";
@@ -52,7 +52,10 @@ public class DeleteItemCommand extends Command {
 
         Item itemToDelete = targetItemList.get(targetIndex.getZeroBasedSecond());
 
+        model.prepareIBookForChanges();
         model.deleteItem(targetProduct, itemToDelete);
+        model.saveIBookChanges();
+
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, itemToDelete));
     }
 }

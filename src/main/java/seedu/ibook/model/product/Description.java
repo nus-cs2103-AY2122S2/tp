@@ -41,6 +41,13 @@ public class Description {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if the description contains the keyword.
+     */
+    public boolean contains(Description keyword) {
+        return fullDescription.contains(keyword.toString());
+    }
+
     @Override
     public String toString() {
         return fullDescription;

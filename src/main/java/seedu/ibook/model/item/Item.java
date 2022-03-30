@@ -62,12 +62,20 @@ public class Item extends ItemDescriptor implements Comparable<Item>, Distinguis
         return getQuantity().isEmpty();
     }
 
+    /**
+     * Checks if the item has expired.
+     * @return true if the item has expired
+     */
     public boolean isExpired() {
         return getExpiryDate().isPast();
     }
 
     public Price getDiscountedPrice() {
         return product.getDiscountedPrice(getExpiryDate());
+    }
+
+    public boolean expiresBefore(ExpiryDate toCheck) {
+        return expiryDate.within(toCheck);
     }
 
     /**
