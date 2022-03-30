@@ -119,18 +119,21 @@ Examples:
 
 Edits an existing person in HackNet.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
+Format: `edit INDEX [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing teams, the existing teams of the person will be removed i.e adding of teams is not cumulative.
-* You can remove all the person’s teams by typing `t/` without
-  specifying any teams after it. Same concept applies with the skill field with prefix `s/`
+* In default mode, editing teams appends the new team to the person.
+* -r option activates reset mode.
+* In reset mode, editing teams edits the teams of a person from scratch. i.e adding of teams is not cumulative. You can remove all the person’s teams by typing `t/` without
+  specifying any teams after it.
+* The concept of default and reset mode applies with the skill field with prefix `s/` as well.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
+* `edit 2 -r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
+* `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
 
 ### Batch editing multiple persons: `batchedit`
 
