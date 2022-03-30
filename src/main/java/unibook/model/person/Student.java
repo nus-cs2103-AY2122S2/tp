@@ -10,8 +10,8 @@ import unibook.logic.commands.EditCommand;
 import unibook.logic.commands.EditCommand.EditGroupDescriptor;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.module.Module;
-import unibook.model.module.exceptions.GroupNotFoundException;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.exceptions.GroupNotFoundException;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 

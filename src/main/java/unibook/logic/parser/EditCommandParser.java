@@ -172,7 +172,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editGroupDescriptor.setModuleCode(modCode);
 
                 if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
-                    editGroupDescriptor.setGroupName(ParserUtil.parseGroupString(argMultimap.getValue(PREFIX_GROUP).get()));
+                    editGroupDescriptor.setGroupName(ParserUtil.parseGroupString(argMultimap
+                            .getValue(PREFIX_GROUP).get()));
                 }
                 if (argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()) {
                     try {

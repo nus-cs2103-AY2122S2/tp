@@ -197,7 +197,16 @@ public class Group {
     }
 
     /**
-<<<<<<< HEAD
+     * Remove a meeting based on Index given
+     *
+     * @param index
+     */
+    public void removeMeetingTime(int index) {
+        requireNonNull(index);
+        meetingTimes.remove(index);
+    }
+
+    /**
      * Edit a meeting datetime from the group.
      *
      * @param idx index of the meeting time to edit
@@ -206,17 +215,6 @@ public class Group {
     public void editMeetingTime(int idx, LocalDateTime meetingTime) {
         requireNonNull(meetingTime);
         this.meetingTimes.set(idx, meetingTime);
-    }
-
-
-    /*
-     * Remove a meeting based on Index given
-     *
-     * @param index
-     */
-    public void removeMeetingTime(int index) {
-        requireNonNull(index);
-        meetingTimes.remove(index);
     }
 
     /**
