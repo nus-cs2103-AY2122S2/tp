@@ -32,9 +32,11 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
    
    * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
-   * **`tagTask 1 n/John Doe`** : Assigns the first task on the task list to an employee named John Doe. 
+   * **`tagTask 1 n/John Doe`** : Assigns the first task on the task list to an employee named John Doe.
 
    * **`exit`** : Exits the app.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -89,11 +91,30 @@ Shows a list of all employees in ManageEZPZ.
 
 Format: `listEmployee`
 
+### Finding Employees by multiple options : `findEmployee`
+
+Finds employee(s) based on multiple conditions provided.
+
+Note:
+* Parameters for finding employees can be entered together in any order.
+* You must enter at least one parameter.
+
+Format: `findEmployee n/NAMES p/PHONE_NUMBER e/EMAIL`
+* `findEmployee n/[LIST OF NAMES]` finds employees whose names contain any of the words in [LIST OF NAMES].
+* `findEmployee p/PHONE_NUMBER` finds employees with the exact phone number.
+* `findEmployee e/EMAIL` finds employees with the exact email.
+
+Examples:
+* `findEmployee n/Alex`
+* `findEmployee p/87438807`
+* `findEmployee e/alexyeoh@example.com`
+* `findEmployee n/Bernice Yu p/99272758 e/berniceyu@example.com`
+
 ### Editing an Employee : `editEmployee`
 
 Edits an existing employee in ManageEZPZ.
 
-Format: `editEmployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`
+Format: `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL`
 
 * Edits the employee at the specified INDEX.
 * The index refers to the index number shown in the displayed employee list.
@@ -118,25 +139,6 @@ Examples:
 * `deleteEmployee 2` deletes the 2nd employee in the displayed employee list.
 * `listEmployee` followed by `deleteEmployee 2` sets the displayed employee list to show all employees in ManageEZPZ and deletes the 2nd employee in ManageEZPZ.
 * `findEmployee n/Betsy` followed by `deleteEmployee 1` sets the displayed employee list with the results from the findEmployee command and deletes the 1st employee in the displayed employee list.
-
-### Finding Employees by multiple options : `findEmployee`
-
-Finds employee(s) based on multiple conditions provided.
-
-Note:
-* Parameters for finding employees can be entered together in any order.
-* You must enter at least one parameter.
-
-Format: `findEmployee [n/NAMES] [p/PHONE_NUMBER] [e/EMAIL]`
-* `findEmployee n/NAMES` finds employees whose names contain any of the words in [LIST OF NAMES].
-* `findEmployee p/PHONE_NUMBER` finds employees with the exact phone number.
-* `findEmployee e/EMAIL` finds employees with the exact email.
-
-Examples:
-* `findEmployee n/Alex`
-* `findEmployee p/87438807`
-* `findEmployee e/alexyeoh@example.com`
-* `findEmployee n/Bernice Yu p/99272758 e/berniceyu@example.com`
 
 ### Adding a Task : `addTodo`, `addEvent`, `addDeadline`
 
@@ -215,19 +217,19 @@ Example:
 
 Edits an existing task in ManageEZPZ.
 
-Possible formats:
-* `editTask INDEX [desc/NAME]`
-* `editTask INDEX [desc/NAME] [date/DATE]`
-* `editTask INDEX [desc/NAME] [date/DATE] [at/TIME]`
-* `editTask INDEX [date/DATE]`
-* `editTask INDEX [date/DATE] [at/TIME]`
-* `editTask INDEX [at/TIME]`
+Formats:
+* `editTask INDEX desc/NAME`
+* `editTask INDEX desc/NAME date/DATE`
+* `editTask INDEX desc/NAME date/DATE at/TIME`
+* `editTask INDEX date/DATE`
+* `editTask INDEX date/DATE at/TIME`
+* `editTask INDEX at/TIME`
 
 Editing tasks is flexible in ManageEZPZ. 
 For example, you can update just the task description or perhaps
 just the date and time of the task only. 
 However, you are not allowed to edit a task with no input supplied.
-Either `[desc/NAME]`, `[date/DATE]` or `[at/TIME]` must have a value.
+Either `desc/NAME`, `date/DATE` or `at/TIME` must have a value.
 
 <b>Note:</b> For an `Event` task, a start time and an end time separated with an empty space must be provided 
 instead of a single time value.
@@ -241,23 +243,15 @@ Given a task list as follows... <br/>
 2. Type: `Deadline`, Description: `Chemistry Homework`, Date: `2022-05-03`, Time: `1700`
 3. Type: `Event`, Description: `Final Exam`, Date: `2022-06-04`, Time: `1700 2000`
 
-* `editTask 1 desc/ Drink Water` edits the task description of a `Todo` task.
-* `editTask 2 date/ 2022-05-10 at/ 2000` edits the date and the time of a `Deadline` task.
-* `editTask 3 at/ 1800 2100` edits the time of an `Event` task.
+* `editTask 1 desc/Drink Water` edits the task description of a `Todo` task.
+* `editTask 2 date/2022-05-10 at/ 2000` edits the date and the time of a `Deadline` task.
+* `editTask 3 at/1800 2100` edits the time of an `Event` task.
 
 ### Marking a Task : `markTask`
 
 Marks the specified task in ManageEZPZ as done.
 
-<<<<<<< HEAD
-#### Note:
-* Arguments can be stacked together in any order. 
-* There must be at least one task type or options shown below. 
-* However, only one task type is allowed.
-* Any other invalid options not stated below will be ignored
-=======
 Format: `markTask INDEX`
->>>>>>> master
 
 * Marks the task at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed task list.
@@ -372,8 +366,6 @@ ManageEZPZ data are saved as a JSON file `[JAR file location]/data/ManageEZPZ.js
 If your changes to the data file makes its format invalid, ManageEZPZ will discard all data and start with an empty data file at the next run.
 
 </div>
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -28,6 +28,12 @@ public class DeleteEmployeeCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor to initialize an instance of DeleteEmployeeCommand class
+     * with the given targetIndex.
+     *
+     * @param targetIndex Index of the Employee to be deleted
+     */
     public DeleteEmployeeCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -35,20 +41,24 @@ public class DeleteEmployeeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         List<Task> lastShownTaskList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Person personToDelete = lastShownPersonList.get(targetIndex.getZeroBased());
-        List<Task> taskList = lastShownTaskList.stream()
-                .filter(task -> task.getAssignees().contains(personToDelete)).collect(Collectors.toList());
 
-        for (int j = 0; j < taskList.size(); j++) {
-            model.untagTask(taskList.get(j), personToDelete);
+        List<Task> affectedTaskList = lastShownTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToDelete))
+                .collect(Collectors.toList());
+
+        for (Task task : affectedTaskList) {
+            model.untagEmployeeFromTask(task, personToDelete);
         }
+
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }

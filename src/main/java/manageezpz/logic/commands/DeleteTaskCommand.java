@@ -12,11 +12,11 @@ import manageezpz.model.person.Person;
 import manageezpz.model.task.Task;
 
 /**
- * Deletes a task identified using it's displayed index from the address book.
+ * Deletes a task identified using its displayed index from the address book.
  */
 public class DeleteTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deleteTask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the displayed task list.\n"
@@ -27,6 +27,12 @@ public class DeleteTaskCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor to initialize an instance of DeleteTaskCommand class
+     * with the given targetIndex.
+     *
+     * @param targetIndex Index of the Task to be deleted
+     */
     public DeleteTaskCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -34,16 +40,23 @@ public class DeleteTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Task> lastShownTaskList = model.getFilteredTaskList();
+
+        if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
-        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Task taskToDelete = lastShownTaskList.get(targetIndex.getZeroBased());
         model.deleteTask(taskToDelete);
+
         List<Person> affectedPersonList = taskToDelete.getAssignees();
-        affectedPersonList.forEach(Person::decreaseTaskCount);
+
+        for (Person person : affectedPersonList) {
+            Person personToUpdate = lastShownPersonList.get(lastShownPersonList.indexOf(person));
+            model.decreaseNumOfTasks(personToUpdate);
+        }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }

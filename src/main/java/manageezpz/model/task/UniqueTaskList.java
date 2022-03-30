@@ -8,7 +8,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import manageezpz.model.person.Person;
 import manageezpz.model.task.exceptions.DuplicateTaskException;
+import manageezpz.model.task.exceptions.InvalidTaskTypeException;
 import manageezpz.model.task.exceptions.TaskNotFoundException;
 
 public class UniqueTaskList implements Iterable<Task> {
@@ -57,28 +59,90 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Marks a task in the list as done.
-     * The task must not already exist in the list.
+     * The task must already exist in the list.
      */
-    public void markTask(Task toMark) {
+    public Task markTask(Task toMark) {
         requireNonNull(toMark);
-        for (Task value : internalList) {
-            if (value.equals(toMark)) {
-                value.setTaskDone();
-            }
-        }
+
+        Task markedTask = duplicateTask(toMark);
+        markedTask.setTaskDone();
+
+        setTask(toMark, markedTask);
+
+        return markedTask;
     }
 
     /**
      * Unmarks a task in the list as not done yet.
-     * The task must not already exist in the list.
+     * The task must already exist in the list.
      */
-    public void unmarkTask(Task toUnmark) {
+    public Task unmarkTask(Task toUnmark) {
         requireNonNull(toUnmark);
 
-        for (Task value : internalList) {
-            if (value.equals(toUnmark)) {
-                value.setTaskNotDone();
-            }
+        Task unmarkedTask = duplicateTask(toUnmark);
+        unmarkedTask.setTaskNotDone();
+
+        setTask(toUnmark, unmarkedTask);
+
+        return unmarkedTask;
+    }
+
+    /**
+     * Tags a priority to the task.
+     */
+    public Task tagPriorityToTask(Task toTagPriority, Priority priority) {
+        requireNonNull(toTagPriority);
+        requireNonNull(priority);
+
+        Task taggedPriorityTask = duplicateTask(toTagPriority);
+        taggedPriorityTask.setPriority(priority);
+
+        setTask(toTagPriority, taggedPriorityTask);
+
+        return taggedPriorityTask;
+    }
+
+    /**
+     * Tags an employee to the task.
+     */
+    public Task tagEmployeeToTask(Task toTagEmployee, Person person) {
+        requireNonNull(toTagEmployee);
+        requireNonNull(person);
+
+        Task taggedEmployeeTask = duplicateTask(toTagEmployee);
+        taggedEmployeeTask.assignedTo(person);
+
+        setTask(toTagEmployee, taggedEmployeeTask);
+
+        return taggedEmployeeTask;
+    }
+
+    /**
+     * Untags an employee to the task.
+     */
+    public Task untagEmployeeFromTask(Task toUntagEmployee, Person person) {
+        requireNonNull(toUntagEmployee);
+        requireNonNull(person);
+
+        Task untaggedEmployeeTask = duplicateTask(toUntagEmployee);
+        untaggedEmployeeTask.removeAssigned(person);
+
+        setTask(toUntagEmployee, untaggedEmployeeTask);
+
+        return untaggedEmployeeTask;
+    }
+
+    private Task duplicateTask(Task task) {
+        if (task instanceof Todo) {
+            return new Todo((Todo) task);
+        } else if (task instanceof Deadline) {
+            return new Deadline((Deadline) task);
+        } else if (task instanceof Event) {
+            return new Event((Event) task);
+        } else {
+            // The else statement should not be reached since there are
+            // only three types of tasks, i.e., todo, deadline and event
+            throw new InvalidTaskTypeException();
         }
     }
 

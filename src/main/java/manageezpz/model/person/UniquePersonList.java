@@ -69,6 +69,32 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Increases the number of tasks by one.
+     */
+    public void increaseNumOfTasks(Person person) {
+        requireNonNull(person);
+
+        Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                person.getEmail(), person.getNumOfTasks());
+        updatedPerson.increaseTaskCount();
+
+        setPerson(person, updatedPerson);
+    }
+
+    /**
+     * Decreases the number of tasks by one.
+     */
+    public void decreaseNumOfTasks(Person person) {
+        requireNonNull(person);
+
+        Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                person.getEmail(), person.getNumOfTasks());
+        updatedPerson.decreaseTaskCount();
+
+        setPerson(person, updatedPerson);
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */

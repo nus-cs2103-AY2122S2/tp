@@ -2,6 +2,9 @@ package manageezpz.model.task;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class that represents an Event task.
+ */
 public class Event extends Task {
     protected String type;
     protected Description description;
@@ -10,16 +13,37 @@ public class Event extends Task {
     private Time endTime;
 
     /**
-     * Constructor for the Task class.
+     * Constructor to initialize an instance of Event class with task
+     * description, date, start time and end time.
      *
-     * @param taskDescription information about the task.
+     * @param taskDescription Description of the task
+     * @param date Date at which the Event task is taking place
+     * @param startTime Start time of the Event task
+     * @param endTime End time of the Event task
      */
     public Event(Description taskDescription, Date date, Time startTime, Time endTime) {
+        this.type = "event";
         this.description = taskDescription;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.type = "event";
+    }
+
+    /**
+     * Constructor to initialize an instance of Event class with an existing
+     * Event object.
+     *
+     * @param event Event task
+     */
+    public Event(Event event) {
+        this.type = event.getType();
+        this.description = event.getDescription();
+        this.date = event.getDate();
+        this.startTime = event.getStartTime();
+        this.endTime = event.getEndTime();
+        this.isDone = event.isDone();
+        this.priority = event.getPriority();
+        this.assignees = event.getAssignees();
     }
 
     public Date getDate() {
@@ -33,7 +57,6 @@ public class Event extends Task {
     public Time getEndTime() {
         return endTime;
     }
-
 
     @Override
     public String getType() {
@@ -53,9 +76,10 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of an event.
-     * @return a string representation of the event, consisting of its description, formatted date,
-     * starting time and ending time.
+     * Returns the string representation of an Event task.
+     *
+     * @return The string representation of the event, consisting of its
+     * description, formatted date and formatted start and end time
      */
     @Override
     public String toString() {

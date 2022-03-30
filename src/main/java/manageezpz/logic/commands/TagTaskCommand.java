@@ -5,67 +5,80 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
+import manageezpz.commons.core.Messages;
+import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Task;
 
-
 public class TagTaskCommand extends Command {
     public static final String COMMAND_WORD = "tagTask";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tag the Task to your specified Person. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "EMPLOYEE_NAME"
-            + "\r\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "1 "
-            + PREFIX_NAME + "Alex Yeoh";
-    public static final String MESSAGE_SUCCESS = "Task has been tagged! : %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This Task has already been assigned to the same person!";
 
-    private int index;
-    private String name;
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Tags the specified employee to the task identified by the "
+            + "index number used in the displayed task list.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_NAME + "EMPLOYEE_NAME\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Alex Yeoh";
+
+    public static final String MESSAGE_TAG_TASK_SUCCESS = "Employee %1$s is tagged to the task: ";
+
+    public static final String MESSAGE_NO_SUCH_PERSON = "There is no employee with the name %1$s!";
+
+    public static final String MESSAGE_PERSON_TAGGED_TO_TASK = "Employee %1$s is already tagged to the task: ";
+
+    private final Index targetIndex;
+    private final String name;
 
     /**
-     * Constructor for TagTaskCommand
-     * @param index index of the Task to be tagged.
-     * @param name Name of Employee to tag Task to.
+     * Constructor to initialize a TagTaskCommand class with the given
+     * targetIndex and name.
+     *
+     * @param targetIndex Index of the Task to tag the employee
+     * @param name Name of the Employee to tag the Task to
      */
-    public TagTaskCommand(int index, String name) {
-        this.index = index;
+    public TagTaskCommand(Index targetIndex, String name) {
+        this.targetIndex = targetIndex;
         this.name = name;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Task task;
-        try {
-            task = model.getFilteredTaskList().get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new CommandException("This Task Number is invalid. \r\n"
-                    + MESSAGE_USAGE);
+
+        List<Task> lastShownTaskList = model.getFilteredTaskList();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
-        List<Person> personList = model.getFilteredPersonList();
+        Task taskToTagEmployee = lastShownTaskList.get(targetIndex.getZeroBased());
+
         Person person = null;
-        for (int i = 0; i < personList.size(); i++) {
-            Person tempPerson = personList.get(i);
-            if (tempPerson.getName().toString().equals(name)) {
-                person = tempPerson;
+
+        for (Person p : lastShownPersonList) {
+            if (p.getName().toString().equals(name)) {
+                person = p;
                 break;
             }
         }
+
         if (person == null) {
-            throw new CommandException("Sorry, the person does not exist within our database. \r\n"
-                    + MESSAGE_USAGE);
-        } else if (model.isTagged(task, person)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_PERSON, name) + "\n" + MESSAGE_USAGE);
         }
 
-        model.tagTask(task, person);
-        person.increaseTaskCount();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task));
+        if (model.isTagged(taskToTagEmployee, person)) {
+            throw new CommandException(String.format(MESSAGE_PERSON_TAGGED_TO_TASK,
+                    person.getName().toString()) + taskToTagEmployee + "\n" + MESSAGE_USAGE);
+        }
+
+        Task taggedEmployeeTask = model.tagEmployeeToTask(taskToTagEmployee, person);
+        model.increaseNumOfTasks(person);
+
+        return new CommandResult(String.format(MESSAGE_TAG_TASK_SUCCESS,
+                person.getName().toString()) + taggedEmployeeTask);
     }
 
 }
