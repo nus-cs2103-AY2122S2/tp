@@ -224,6 +224,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateInterviewCandidate(Interview target, Interview editedInterview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
             throw new AssertionError("This method should not be called.");
         }
