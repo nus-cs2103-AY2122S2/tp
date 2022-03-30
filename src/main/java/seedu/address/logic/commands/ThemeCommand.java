@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
