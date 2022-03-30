@@ -22,7 +22,7 @@ public class DeleteConsultationCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the consultation on the filtered consultation list that "
             + "matches the filtered list index.\n"
-            + "Parameters: INDEX\n"
+            + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1 ";
     public static final String MESSAGE_CONSULTATION_DELETE_OVERVIEW = "Deleted consultation: %1$s";
     public static final String MESSAGE_INVALID_CONSULTATION_INDEX =
@@ -46,9 +46,7 @@ public class DeleteConsultationCommand extends Command {
         List<Consultation> lastShownList = model.getFilteredConsultationList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            return new CommandResult(
-                    String.format(
-                            MESSAGE_INVALID_CONSULTATION_INDEX, targetIndex),
+            return new CommandResult(String.format(MESSAGE_INVALID_CONSULTATION_INDEX, targetIndex),
                     COMMAND_TYPE);
         }
 
