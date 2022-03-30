@@ -175,13 +175,13 @@ Command word: `editlesson` / `el`
 
 Format: `editlesson <LESSON_ID> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`
 
-Example: `editlesson 2 -n Trial lesson -t 17:00 -h 2`
+Example: `editlesson 2 -n Bio Make Up Session -t 17:00 -h 2`
 
 Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit command will cause the changes shown below.
 
-| Before                                                                                                                                                             | After                                                                                                                                                       |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name: Biology group 1<br/>Subject: Biology<br/>Address: Blk 11 Ang Mo Kio Street 74, #11-04<br/>Date: 27 February 2022<br/>Start Time: 6pm<br/>Duration: 1h 50mins | Name: Trial Lesson<br/>Subject: Biology<br/>Address: Blk 11 Ang Mo Kio Street 74, # 11-04<br/>Date: 27 February 2022<br/>Start Time: 5pm<br/>Duration: 2hrs |
+| Before                                                                                                                                                             | After                                                                                                                                                              |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name: Biology group 1<br/>Subject: Biology<br/>Address: Blk 11 Ang Mo Kio Street 74, #11-04<br/>Date: 27 February 2022<br/>Start Time: 6pm<br/>Duration: 1h 50mins | Name: Bio Make Up Session<br/>Subject: Biology<br/>Address: Blk 11 Ang Mo Kio Street 74, # 11-04<br/>Date: 27 February 2022<br/>Start Time: 5pm<br/>Duration: 2hrs |
 
 **Note that:**
 
@@ -304,7 +304,7 @@ Opens a pop-up that gives you a link to the User guide.
 
 Format: `help`
 
-_Alternatively, you can press `F1` to open the pop-up._
+_Alternatively, you can press <kbd>F1</kbd> to open the pop-up._
 
 ---
 

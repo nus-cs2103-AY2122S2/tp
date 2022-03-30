@@ -57,7 +57,7 @@ public class AssignCommand extends Command {
         if (student.isEnrolledIn(lesson) || lesson.hasAlreadyAssigned(student)) {
             throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName()));
         }
-        model.setSelectedStudent(student);
+        model.setSelectedLesson(lesson);
         model.updateAssignment(student, lesson);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
