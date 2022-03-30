@@ -144,4 +144,6 @@ public interface Model {
     void updateInterviewCandidate(Interview target, Interview editedInterview);
 
     void deletePastInterviewsForInterviewList(LocalDateTime localDateTime);
+
+    void resetAllScheduledStatus();
 }

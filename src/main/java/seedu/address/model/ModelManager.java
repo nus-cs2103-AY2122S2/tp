@@ -136,6 +136,12 @@ public class ModelManager implements Model {
         addressBook.setCandidate(target, editedCandidate);
     }
 
+    @Override
+    public void resetAllScheduledStatus() {
+        addressBook.resetAllScheduledStatus();
+        updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+    }
+
     //=========== InterviewSchedule ================================================================================
 
     @Override

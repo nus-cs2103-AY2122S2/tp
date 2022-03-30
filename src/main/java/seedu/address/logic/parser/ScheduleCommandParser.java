@@ -5,6 +5,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.schedule.ClearScheduleCommand;
 import seedu.address.logic.commands.schedule.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
@@ -36,6 +38,8 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             return new EditScheduleCommandParser().parse(arguments);
         case "delete":
             return new DeleteScheduleCommandParser().parse(arguments);
+        case "clear":
+            return new ClearScheduleCommand();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
