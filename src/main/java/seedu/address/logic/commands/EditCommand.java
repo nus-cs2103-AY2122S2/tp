@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -58,8 +57,10 @@ public class EditCommand extends ByIndexByNameCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
+    private final FriendName nameOfPersonToEdit;
+    private final Index targetIndex;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final boolean isEditByIndex;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -69,25 +70,46 @@ public class EditCommand extends ByIndexByNameCommand {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.nameOfPersonToEdit = null;
+        this.targetIndex = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.isEditByIndex = true;
+    }
+
+    /**
+     * @param name of the friend in the person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public EditCommand(FriendName name, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(name);
+        requireNonNull(editPersonDescriptor);
+
+        this.nameOfPersonToEdit = name;
+        this.targetIndex = null;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.isEditByIndex = false;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Person personToEdit;
+        Person editedPerson;
+
+        if (isEditByIndex) { //edit by index
+            personToEdit = this.getPersonByFilteredIndex(model, targetIndex);
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        } else { //edit by name
+            personToEdit = this.getPersonByName(model, nameOfPersonToEdit);
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -126,7 +148,7 @@ public class EditCommand extends ByIndexByNameCommand {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
+        return targetIndex.equals(e.targetIndex)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
