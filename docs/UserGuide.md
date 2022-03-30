@@ -117,11 +117,11 @@ Example:
 
 **:x: Invalid Examples:**<br>
 
-* `add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 190, #01-23`
+* `add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 190, #01-23`<br>
 
 Not allowed as `n/` prefix is used more than once.
   
-* `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 190, #01-23`
+* `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 190, #01-23`<br>
 
 Not allowed as `PHONE_NUMBER` is blank. 
 </div>
@@ -213,15 +213,15 @@ Example:
 
 **:x: Invalid Examples:**<br>
 
-* `tag 1`
+* `tag 1`<br>
 
 Not allowed as no prefix provided.
   
-* `tag 1 i/ m/`
+* `tag 1 i/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
   
-* `tag 0 i/xyz company m/CS2103T`
+* `tag 0 i/xyz company m/CS2103T`<br>
 
 Not allowed as there `INDEX` 0 does not exist in the contact list.
 </div>
@@ -248,11 +248,11 @@ Removes the internship company tag and the 2 modules tags from the 1st person in
 
 **:x: Invalid Examples:**<br>
 
-* `removetag 1 i/ m/`
+* `removetag 1 i/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
 
-* `removetag 1 edu/computer` while person 1 has an education tag with `computer science`
+* `removetag 1 edu/computer` while person 1 has an education tag with `computer science`<br>
 
 Not allowed as it is not an exact match.
 </div>
@@ -287,11 +287,11 @@ Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
 
 **:x: Invalid Examples:**<br>
 
-* `find n/ m/`
+* `find n/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
   
-* `find n/Hans n/Chewbacca`
+* `find n/Hans n/Chewbacca`<br>
 
 Not allowed as the `n/` prefix is used more than once.
 </div>
@@ -325,11 +325,11 @@ Examples:
 
 **:x: Invalid Examples:**<br>
 
-* `find -s n/ m/`
+* `find -s n/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
 
-* `find -s n/Hans n/Solo`
+* `find -s n/Hans n/Solo`<br>
 
 Not allowed as the `n/` prefix is used more than once.
 </div>
@@ -384,11 +384,11 @@ Creates the Event and adds into NUSocials. (as shown below)
 
 **:x: Invalid Examples:**<br>
 
-* `event 1 2 name/ info/At Michael's d/2022-08-22 t/19:00`
+* `event 1 2 name/ info/At Michael's d/2022-08-22 t/19:00`<br>
 
 Not allowed as there is no input after a prefix is used.
   
-* `event 1 2 name/Dinner appointment name/Game night info/At Michael's d/2022-08-22 t/19:00`
+* `event 1 2 name/Dinner appointment name/Game night info/At Michael's d/2022-08-22 t/19:00`<br>
 
 Not allowed as the `name/` prefix is more than once.
 </div>
@@ -448,11 +448,11 @@ Example:
 
 **:x: Invalid Examples:**<br>
 
-* `find -e name/ info/`
+* `find -e name/ info/`<br>
 
 Not allowed as there is no input given after a prefix is used.
 
-* `find -e name/Dinner name/Lunch`
+* `find -e name/Dinner name/Lunch`<br>
 
 Not allowed as the `name/` prefix is used more than once.
 </div>
