@@ -1,14 +1,18 @@
-package seedu.address.model.person;
+package seedu.address.model.predicates;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
+
+    public static final String COMMAND_WORD = "name";
+
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
