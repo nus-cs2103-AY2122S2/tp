@@ -16,7 +16,7 @@ import seedu.address.commons.util.HelpWindowUtil;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL =
-            "https://ay2122s2-cs2103-f11-2.github.io/tp/UserGuide.html#command-summary";
+            "https://ay2122s2-cs2103-f11-2.github.io/tp/UserGuide.html";
     private static final String HELP_MESSAGE = "Available commands on this version";
     private static final String ADD_FIELD = "n/NAME id/STUDENT_ID c/COURSE avail/AVAILABILITY";
     private static final String FIELD_IS_INDEX = "INDEX";
