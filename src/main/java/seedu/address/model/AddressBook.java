@@ -16,6 +16,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
+    private UniquePersonList personsHistory;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        personsHistory = null;
     }
 
     public AddressBook() {}
@@ -91,6 +94,30 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Saves the current list of persons in the address book.
+     */
+    public void saveHistory() {
+        if (this.personsHistory == null) {
+            this.personsHistory = new UniquePersonList();
+        }
+        this.personsHistory.setPersons(this.persons);
+    }
+
+    /**
+     * Restores the previous list of persons in the address book.
+     */
+    public void restoreHistory() {
+        this.persons.setPersons(this.personsHistory);
+    }
+
+    /**
+     * Retrieves the previous list of persons in the address book.
+     */
+    public UniquePersonList getHistory() {
+        return this.personsHistory;
     }
 
     //// util methods

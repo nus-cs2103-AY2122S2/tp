@@ -98,8 +98,15 @@ public class TypicalPersons {
             .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
+            .withBlock("E")
+            .withFaculty("SOC")
+            .withPhone("8482424")
+            .withEmail("stefan@example.com")
+            .withAddress("little india")
+            .withMatriculationNumber("A0843245H")
+            .withCovidStatus("POSITIVE")
+            .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withMatriculationNumber("A5243627L").build();
 
