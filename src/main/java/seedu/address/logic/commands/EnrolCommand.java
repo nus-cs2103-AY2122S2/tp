@@ -26,14 +26,14 @@ public class EnrolCommand extends Command {
             + "the given class group.\n"
             + "\tParameters: " + PREFIX_CLASS_INDEX + "CLASS_GROUP_INDEX "
             + PREFIX_STUDENT + "all|STUDENT_INDEXES|STUDENT_IDS "
-            + "\n\tExample: "
-            + "\n\t1. " + COMMAND_WORD + " "
+            + "\n\tExamples: "
+            + "\n\t\t1. " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
             + PREFIX_STUDENT + "all "
-            + "\n2. " + COMMAND_WORD + " "
+            + "\n\t\t2. " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
             + PREFIX_STUDENT + "1,2,3 "
-            + "\n3. " + COMMAND_WORD + " "
+            + "\n\t\t3. " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
             + PREFIX_STUDENT + "e0123456,e0234567 \n";
     private Index classGroupIndex;
@@ -62,8 +62,8 @@ public class EnrolCommand extends Command {
 
         ClassGroup cgToEdit = cgList.get(classGroupIndex.getZeroBased());
         TaModule moduleToEdit = cgToEdit.getModule();
-        ClassGroup newCg = new ClassGroup(cgToEdit);
         TaModule newModule = new TaModule(moduleToEdit);
+        ClassGroup newCg = new ClassGroup(cgToEdit, newModule);
 
         for (Student s : students) {
             if (!newCg.hasStudent(s) && !newModule.hasStudent(s)) {

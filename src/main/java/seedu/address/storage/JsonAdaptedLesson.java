@@ -31,7 +31,7 @@ class JsonAdaptedLesson {
                              @JsonProperty("studentAttendanceList")
                                      List<JsonAdaptedStudentAttendance> studentAttendanceList) {
         this.weekId = weekId;
-        if (studentAttendanceList != null) {
+        if (!studentAttendanceList.isEmpty()) {
             this.studentAttendanceList.addAll(studentAttendanceList);
         }
     }

@@ -53,12 +53,22 @@ public class Assessment implements Entity {
         this.attempts = FXCollections.observableMap(attempts);
     }
 
+    /**
+     * Returns a new copy of the assessment specified.
+     */
+    public Assessment(Assessment toCopy) {
+        this(toCopy.getAssessmentName(), toCopy.getTaModule(), Optional.of(toCopy.getSimpleName()),
+                FXCollections.observableHashMap());
+        attempts.putAll(toCopy.getAttempts());
+    }
+
+
     public AssessmentName getAssessmentName() {
         return assessmentName;
     }
 
-    public Optional<SimpleName> getSimpleName() {
-        return simpleName;
+    public SimpleName getSimpleName() {
+        return simpleName.orElse(new SimpleName(assessmentName.value.replaceAll("\\s", "")));
     }
 
     public TaModule getTaModule() {
@@ -69,8 +79,25 @@ public class Assessment implements Entity {
         return FXCollections.unmodifiableObservableMap(attempts);
     }
 
-    public void addAttempt(Student student, Grade grade) {
-        attempts.put(student, grade);
+
+    /**
+     * Adds student attempt to the assessment with the optional grade.
+     * If grade is empty, it will increment the grade stored with the student.
+     * If the student does not exist, it will store a new attempt with Grade value 1.
+     *
+     * @param student A student to mark the attempt for
+     * @param optionalGrade An optional grade value, if empty, it will increment the previous grade.
+     */
+    public void addAttempt(Student student, Optional<Grade> optionalGrade) {
+        optionalGrade.ifPresentOrElse(
+            grade -> attempts.put(student, grade), () -> {
+                if (attempts.containsKey(student)) {
+                    attempts.put(student, attempts.get(student).increment());
+                } else {
+                    attempts.put(student, new Grade(1));
+                }
+            }
+        );
     }
 
     public Optional<Grade> getAttemptOfStudent(Student student) {
@@ -120,7 +147,7 @@ public class Assessment implements Entity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(assessmentName, simpleName, module);
+        return Objects.hash(assessmentName, simpleName, module, attempts);
     }
 
     @Override
@@ -129,10 +156,9 @@ public class Assessment implements Entity {
         builder.append("Assessment Name: ")
                 .append(getAssessmentName())
                 .append("; Module: ")
-                .append(getTaModule().toUniqueRepresentation());
-        getSimpleName().ifPresent(simpleName ->
-                builder.append("; Simple Name: ")
-                .append(simpleName));
+                .append(getTaModule().toUniqueRepresentation())
+                .append("; Simple Name: ")
+                .append(getSimpleName());
         return builder.toString();
     }
 

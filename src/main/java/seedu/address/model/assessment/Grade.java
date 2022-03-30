@@ -18,12 +18,28 @@ public class Grade {
     /**
      * Constructs a {@code Grade}.
      *
-     * @param grade A valid grade integer.
+     * @param grade A valid grade integer String.
      */
     public Grade(String grade) {
         requireNonNull(grade);
         checkArgument(isValidGrade(grade), MESSAGE_CONSTRAINTS);
         value = Integer.valueOf(grade);
+    }
+
+    /**
+     * Constructs a {@code Grade}.
+     *
+     * @param value A valid grade integer.
+     */
+    public Grade(int value) {
+        this.value = value;
+    }
+
+    /**
+     * Constructs a {@code Grade} with value 1.
+     */
+    public Grade() {
+        this(1);
     }
 
     /**
@@ -39,6 +55,13 @@ public class Grade {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns a new grade with value increased by 1.
+     */
+    public Grade increment() {
+        return new Grade(this.value + 1);
     }
 
     @Override

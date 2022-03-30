@@ -29,7 +29,7 @@ class JsonAdaptedClassGroup {
     private final String classGroupId;
     private final String classGroupType;
     private final JsonAdaptedTaModule module;
-    private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<JsonAdaptedStudent> classGroupStudents = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
@@ -39,15 +39,15 @@ class JsonAdaptedClassGroup {
     public JsonAdaptedClassGroup(@JsonProperty("classGroupId") String classGroupId,
             @JsonProperty("classGroupType") String classGroupType,
             @JsonProperty("module") JsonAdaptedTaModule module,
-            @JsonProperty("students") List<JsonAdaptedStudent> students,
+            @JsonProperty("classGroupStudents") List<JsonAdaptedStudent> classGroupStudents,
             @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
         this.module = module;
-        if (students != null) {
-            this.students.addAll(students);
+        if (!classGroupStudents.isEmpty()) {
+            this.classGroupStudents.addAll(classGroupStudents);
         }
-        if (lessons != null) {
+        if (!lessons.isEmpty()) {
             this.lessons.addAll(lessons);
         }
     }
@@ -59,7 +59,7 @@ class JsonAdaptedClassGroup {
         classGroupId = source.getClassGroupId().value;
         classGroupType = source.getClassGroupType().toString();
         module = new JsonAdaptedTaModule(source.getModule());
-        students.addAll(source.getStudents().stream()
+        classGroupStudents.addAll(source.getStudents().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
         lessons.addAll(source.getLessons().stream()
@@ -116,7 +116,7 @@ class JsonAdaptedClassGroup {
         }
 
         final UniqueStudentList modelStudents = new UniqueStudentList();
-        for (JsonAdaptedStudent s : students) {
+        for (JsonAdaptedStudent s : classGroupStudents) {
             Student sObj = s.toModelType();
             if (!studentList.contains(s)) {
                 throw new IllegalValueException(NONEXISTENT_STUDENT);

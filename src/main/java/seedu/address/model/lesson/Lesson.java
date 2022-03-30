@@ -30,7 +30,7 @@ public class Lesson {
     public Lesson(WeekId weekId) {
         this(weekId, new ArrayList<StudentAttendance>());
     }
-    
+
     /**
      * Constructs a {@code Lesson}.
      * {@code weekId} must be present and not null.
@@ -41,7 +41,8 @@ public class Lesson {
     public Lesson(WeekId weekId, List<StudentAttendance> studentAttendanceList) {
         requireAllNonNull(weekId);
         this.weekId = weekId;
-        this.studentAttendanceList = studentAttendanceList;
+        this.studentAttendanceList = new ArrayList<>();
+        studentAttendanceList.addAll(studentAttendanceList);
     }
 
     public WeekId getWeekId() {
