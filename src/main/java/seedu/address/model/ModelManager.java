@@ -136,6 +136,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isAcceptableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isAcceptableInterview(interview);
+    }
+
+    @Override
+    public boolean isRejectableInterview(Interview interview) {
+        requireAllNonNull(interview);
+        return addressBook.isRejectableInterview(interview);
+    }
+
+    @Override
     public void deleteInterview(Interview target) {
         addressBook.removeInterview(target);
     }

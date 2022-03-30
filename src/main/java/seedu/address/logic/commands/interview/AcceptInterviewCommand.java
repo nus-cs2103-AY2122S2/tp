@@ -11,7 +11,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 public class AcceptInterviewCommand extends Command {
     public static final String COMMAND_WORD = "accept";
@@ -38,8 +40,29 @@ public class AcceptInterviewCommand extends Command {
         }
 
         Interview interviewToAccept = lastShownList.get(targetIndex.getZeroBased());
-        //model.acceptInterview(interviewToAccept);
-        return new CommandResult(String.format(MESSAGE_ACCEPT_INTERVIEW_SUCCESS, interviewToAccept),
+
+        if (!model.isAcceptableInterview(interviewToAccept)) {
+            throw new CommandException(Messages.MESSAGE_INTERIVEW_CANNOT_BE_ACCEPTED);
+        }
+
+        // Should this be extracted out to a method
+        Position oldPosition = interviewToAccept.getPosition();
+        Position newPosition = interviewToAccept.getPosition().acceptOffer();
+
+        Applicant oldApplicant = interviewToAccept.getApplicant();
+        Applicant newApplicant = interviewToAccept.getApplicant().setStatus(oldApplicant, newPosition);
+
+        Interview acceptedInterview = new Interview(newApplicant, interviewToAccept.getDate(),
+                newPosition);
+
+        // Should I change the constructor (of interview) or leave as a method instead
+        acceptedInterview.markAsPassed();
+        acceptedInterview.markAsAccepted();
+        model.setInterview(interviewToAccept, acceptedInterview);
+        model.updatePosition(oldPosition, newPosition);
+        model.updateApplicant(oldApplicant, newApplicant);
+
+        return new CommandResult(String.format(MESSAGE_ACCEPT_INTERVIEW_SUCCESS, acceptedInterview),
                 getCommandDataType());
     }
 

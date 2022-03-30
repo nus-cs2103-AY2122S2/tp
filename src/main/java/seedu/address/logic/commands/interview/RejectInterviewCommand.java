@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 public class RejectInterviewCommand extends Command {
     public static final String COMMAND_WORD = "reject";
@@ -38,7 +39,23 @@ public class RejectInterviewCommand extends Command {
         }
 
         Interview interviewToReject = lastShownList.get(targetIndex.getZeroBased());
-        //model.rejectInterview(interviewToReject);
+
+        if (!model.isRejectableInterview(interviewToReject)) {
+            throw new CommandException(Messages.MESSAGE_INTERIVEW_CANNOT_BE_REJECTED);
+        }
+
+        // Should this be extracted out to a method
+        Position oldPosition = interviewToReject.getPosition();
+        Position newPosition = interviewToReject.getPosition().rejectOffer();
+
+        Interview rejectedInterview = new Interview(interviewToReject.getApplicant(), interviewToReject.getDate(),
+                newPosition);
+
+        rejectedInterview.markAsPassed();
+        rejectedInterview.markAsRejected();
+        model.setInterview(interviewToReject, rejectedInterview);
+        model.updatePosition(oldPosition, newPosition);
+
         return new CommandResult(String.format(MESSAGE_REJECT_INTERVIEW_SUCCESS, interviewToReject),
                 getCommandDataType());
     }

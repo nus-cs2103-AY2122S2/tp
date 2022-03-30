@@ -172,6 +172,16 @@ public class AddApplicantCommandTest {
         public boolean isPassableInterview(Interview interview) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean isAcceptableInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isRejectableInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
         //        @Override
         //        public void passInterview(Interview interview) {
         //            throw new AssertionError("This method should not be called.");

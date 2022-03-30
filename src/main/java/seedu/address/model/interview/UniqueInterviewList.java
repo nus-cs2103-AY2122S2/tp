@@ -50,6 +50,24 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
+     * Returns true if the interview is passable based off the current status of
+     * the interview.
+     */
+    public boolean isAcceptableInterview(Interview toAccept) {
+        requireNonNull(toAccept);
+        return toAccept.isAcceptableInterview();
+    }
+
+    /**
+     * Returns true if the interview can be rejected based off the current status of
+     * the interview.
+     */
+    public boolean isRejectableInterview(Interview toReject) {
+        requireNonNull(toReject);
+        return toReject.isRejectableInterview();
+    }
+
+    /**
      * Adds an interview to the list.
      * The interview must not already exist in the list.
      */

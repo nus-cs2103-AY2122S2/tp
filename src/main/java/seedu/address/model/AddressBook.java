@@ -150,6 +150,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an interview is acceptable based on the status of the interview.
+     */
+    public boolean isAcceptableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isAcceptableInterview(i);
+    }
+
+    /**
+     * Returns true if an interview is rejectable based on the status of the interview.
+     */
+    public boolean isRejectableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isRejectableInterview(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */

@@ -73,11 +73,27 @@ public class Interview {
     }
 
     /**
-     * Checks if the given interview can be passed based on the number of offers given for its position
+     * Checks if the given interview can be passed based on the number of offers given for its position.
      */
     public boolean isPassableInterview() {
         return this.position.canExtendOffer();
     }
+
+    /**
+     * Checks if the given interview can be passed based on the number of offers given for its position.
+     */
+    public boolean isAcceptableInterview() {
+        return this.position.canAcceptOffer();
+    }
+
+    /**
+     * Checks if the given interview can be rejected based on the number of offers.
+     */
+    public boolean isRejectableInterview() {
+        return this.position.canRejectOffer();
+    }
+
+
 
     /**
      * Marks an interview as passed and increments the position offering.
@@ -99,8 +115,6 @@ public class Interview {
      */
     public void markAsAccepted() {
         this.status.markAsAccepted();
-
-        // decrement position count and offering
     }
 
     /**
