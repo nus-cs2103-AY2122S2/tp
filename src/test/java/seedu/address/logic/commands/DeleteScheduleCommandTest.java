@@ -57,7 +57,7 @@ public class DeleteScheduleCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredList_success() throws CommandException {
         showInterviewAtIndex(model, TypicalIndexes.INDEX_FIRST_INTERVIEW);
         Interview interviewToDelete = model.getFilteredInterviewSchedule().get(INDEX_FIRST_INTERVIEW.getZeroBased());
         Candidate candidateToDelete = interviewToDelete.getCandidate();

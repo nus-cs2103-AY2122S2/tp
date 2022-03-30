@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 
@@ -130,7 +131,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setCandidate(Candidate target, Candidate editedCandidate) {
+    public void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException {
         requireAllNonNull(target, editedCandidate);
 
         addressBook.setCandidate(target, editedCandidate);
@@ -197,7 +198,7 @@ public class ModelManager implements Model {
      * @param localDateTime Current date time.
      */
     @Override
-    public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
+    public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException {
         requireNonNull(localDateTime);
         List<Interview> list = interviewSchedule.deletePastInterviews(localDateTime);
         int i = 0;

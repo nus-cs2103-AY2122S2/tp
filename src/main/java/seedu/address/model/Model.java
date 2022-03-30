@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 
@@ -106,7 +107,7 @@ public interface Model {
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate
      * in the address book.
      */
-    void setCandidate(Candidate target, Candidate editedCandidate);
+    void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException;
 
     boolean hasInterviewCandidate(Interview interview);
 
@@ -143,5 +144,5 @@ public interface Model {
 
     void updateInterviewCandidate(Interview target, Interview editedInterview);
 
-    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime);
+    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException;
 }

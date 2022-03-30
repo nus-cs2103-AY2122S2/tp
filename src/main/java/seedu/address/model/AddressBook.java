@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.UniqueCandidateList;
 
@@ -93,7 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the
      * address book.
      */
-    public void setCandidate(Candidate target, Candidate editedCandidate) {
+    public void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException {
         requireNonNull(editedCandidate);
 
         candidates.setCandidate(target, editedCandidate);

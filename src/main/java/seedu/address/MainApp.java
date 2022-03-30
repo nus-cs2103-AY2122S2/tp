@@ -16,6 +16,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
@@ -182,7 +183,7 @@ public class MainApp extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws CommandException {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         model.deletePastInterviewsForInterviewList(LocalDateTime.now());
         ui.start(primaryStage);
