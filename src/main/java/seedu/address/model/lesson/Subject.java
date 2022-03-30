@@ -8,27 +8,35 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
 public class Subject {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Subject should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the subject must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
+
+    public static final Subject EMPTY_SUBJECT = new Subject();
 
     public final String subjectName;
 
     /**
-     * Constructs a {@code LessonName}.
+     * Constructs a {@code Subject}.
      *
-     * @param name A valid name.
+     * @param name A valid subject name.
      */
     public Subject(String name) {
         requireNonNull(name);
         checkArgument(isValidSubject(name), MESSAGE_CONSTRAINTS);
         subjectName = name;
+    }
+
+    /**
+     * Constructs an empty {@code Subject}
+     */
+    public Subject() {
+        subjectName = "NO SUBJECT ASSIGNED";
     }
 
     /**

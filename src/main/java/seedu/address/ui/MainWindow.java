@@ -29,6 +29,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.ui.infopanel.InfoPanel;
 import seedu.address.ui.infopanel.LessonInfoPanel;
+import seedu.address.ui.infopanel.RecurringLessonInfoPanel;
 import seedu.address.ui.infopanel.StudentInfoPanel;
 import seedu.address.ui.listpanel.LessonListPanel;
 import seedu.address.ui.listpanel.ListPanel;
@@ -205,7 +206,8 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
+            updateAndPopulateLessonList();
+            updateAndPopulateStudentList();
             if (!commandResult.toggleTo().equals(ViewTab.NONE)) {
                 toggleTab(commandResult.toggleTo());
             }
@@ -265,7 +267,7 @@ public class MainWindow extends UiPart<Stage> {
      * Toggles to student tab.
      */
     public void toggleStudentTab() {
-        updateAndPopulateStudentList();
+        // updateAndPopulateStudentList();
         listPane.getSelectionModel().select(studentTab);
     }
 
@@ -273,7 +275,7 @@ public class MainWindow extends UiPart<Stage> {
      * Toggles to student tab.
      */
     public void toggleLessonTab() {
-        updateAndPopulateLessonList();
+        // updateAndPopulateLessonList();
         listPane.getSelectionModel().select(lessonTab);
     }
 
@@ -357,9 +359,18 @@ public class MainWindow extends UiPart<Stage> {
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
         requireNonNull(selectedLesson);
-        infoPanel = new LessonInfoPanel(selectedLesson);
-        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
-        populateInfoPanel(lessonInfoPanel);
+        if (selectedLesson.isRecurring()) {
+            infoPanel = new RecurringLessonInfoPanel(selectedLesson);
+            RecurringLessonInfoPanel lessonInfoPanel = (RecurringLessonInfoPanel) this.infoPanel;
+            populateInfoPanel(lessonInfoPanel);
+            return;
+        } else if (!selectedLesson.isRecurring()) {
+            infoPanel = new LessonInfoPanel(selectedLesson);
+            LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
+            populateInfoPanel(lessonInfoPanel);
+            return;
+        }
+        assert false;
     }
 
     private void populateInfoPanel(InfoPanel newInfoPanel) {

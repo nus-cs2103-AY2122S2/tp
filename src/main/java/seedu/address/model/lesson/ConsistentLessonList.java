@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,6 +48,24 @@ public class ConsistentLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Compares the editedLesson to find conflicting lessons in the list, excluding the lesson of the index provided.
+     * @param index of the lesson to be excluded from the comparison
+     * @param editedLesson lesson that is edited
+     * @return true if there are conflicting lessons and false otherwise
+     */
+    public boolean hasConflictingLessonExcluding(int index, Lesson editedLesson) {
+        requireAllNonNull(index, editedLesson);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (i != index) {
+                if (internalList.get(i).isConflictingWithLesson(editedLesson)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns some lesson in the list with timeslot that overlaps with the specified lesson, if exists.
      */
     public Lesson findLessonConflictingWith(Lesson toCheck) {
@@ -76,6 +95,11 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         return conflictingLessons;
     }
 
+    private void sortList() {
+        FXCollections.sort(internalList, Comparator.comparing(lesson ->
+                lesson.getDateTimeSlot().getDateOfLesson()));
+    }
+
     /**
      * Adds a lesson to the list.
      * The time slot of the lesson must not conflict with any of the existing lessons in the list.
@@ -86,6 +110,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             throw new ConflictsWithLessonsException(toAdd, findAllLessonsConflictingWith(toAdd));
         }
         internalList.add(toAdd);
+        sortList();
     }
 
     /**
@@ -125,11 +150,11 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             throw new LessonNotFoundException();
         }
 
-        if (hasConflictingLesson(editedLesson)) {
+        if (hasConflictingLessonExcluding(index, editedLesson)) {
             throw new ConflictsWithLessonsException(editedLesson, findAllLessonsConflictingWith(editedLesson));
         }
-
         internalList.set(index, editedLesson);
+        sortList();
     }
 
     /**
@@ -160,6 +185,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         }
 
         internalList.setAll(lessons);
+        sortList();
     }
 
     /**

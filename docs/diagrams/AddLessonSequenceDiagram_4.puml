@@ -6,7 +6,7 @@ mainframe **sd**  lesson conflicts with existing lesson(s)
 box Logic LOGIC_COLOR_T1
 
 participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":CommandException" as CommandException LOGIC_COLOR
 participant ":Lesson" as Lesson LOGIC_COLOR
 participant ":ConflictingLessonsPredicate" as ConflictingLessonsPredicate LOGIC_COLOR
 end box
@@ -26,11 +26,10 @@ deactivate ConflictingLessonsPredicate
 
 AddLessonCommand -> Model : updateFilteredLessonList(predicate)
 
-
-create CommandResult
-AddLessonCommand -> CommandResult
-activate CommandResult
-CommandResult --> AddLessonCommand : commandResultError
-deactivate CommandResult
+create CommandException
+AddLessonCommand -> CommandException
+activate CommandException
+AddLessonCommand <-- CommandException : exception
+deactivate CommandException
 
 @enduml
