@@ -71,8 +71,8 @@ public class PlayerStatisticsPanel extends UiPart<Region> {
             }
         }
 
-        for (Map.Entry<Tag, Integer> entry : positions.entrySet()) {
-            PieChart.Data tempData = new PieChart.Data(entry.getKey().tagName, entry.getValue());
+        for (Tag tag : positionTags) {
+            PieChart.Data tempData = new PieChart.Data(tag.tagName, positions.get(tag));
             playerStatisticsPieChart.layout();
             pieChartData.add(tempData);
         }
@@ -84,7 +84,7 @@ public class PlayerStatisticsPanel extends UiPart<Region> {
         pieChartData.forEach(data -> {System.out.println(data);});
 
         pieChartData.forEach(data -> data.nameProperty().bind(Bindings.concat(data.getName(),
-                String.format(" players: %d", (int) data.getPieValue()))));
+                String.format(" - %d", (int) data.getPieValue()))));
         playerStatisticsPieChart.setData(pieChartData);
 
     }

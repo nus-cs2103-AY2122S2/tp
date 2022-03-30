@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,21 +19,35 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE_PLAYER =
-            "To view player, parameters: " + PREFIX_PLAYER + "[PLAYER_NAME...]\n"
+    public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD
+            + ": To view player\n"
+            + "Parameters: "
+            + PREFIX_PLAYER + "[NAME...]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PLAYER + "Kevin Lebron"
             + " OR " + COMMAND_WORD + " " + PREFIX_PLAYER;
 
-    public static final String MESSAGE_USAGE_LINEUP =
-            "To view lineup, parameters: " + PREFIX_LINEUP + "[LINEUP_NAME]\n"
+    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD
+            + ": To view lineup\n"
+            + "Parameters: " + PREFIX_LINEUP + "[LINEUP NAME]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_LINEUP + "starting5"
             + " OR " + COMMAND_WORD + " " + PREFIX_LINEUP;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information of lineups and players.\n"
-            + MESSAGE_USAGE_PLAYER + "\n"
-            + MESSAGE_USAGE_LINEUP;
+    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD
+            + ": To view schedule\n"
+            + "Parameters: " + PREFIX_SCHEDULE + "[SCHEDULE NAME]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals";
 
-    private static String successMessage = "Listed all persons!";
+    public static final String MESSAGE_ACTIVE_SCHEDULE_USAGE = COMMAND_WORD
+            + ": To view all schedules\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "all\n"
+            + "To view archived schedules\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "archive\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information of players, lineups and schedules.\n"
+            + MESSAGE_USAGE_PLAYER + "\n"
+            + MESSAGE_USAGE_LINEUP + "\n"
+            + MESSAGE_USAGE_SCHEDULE;
+
+    private static String MESSAGE_VIEW_SUCCESS = "Listed all information!";
 
     private final Predicate<Person> predicate;
     private final Predicate<Schedule> predicateSchedule;
@@ -66,18 +82,18 @@ public class ViewCommand extends Command {
             model.updateFilteredScheduleList(predicateSchedule);
         }
         changeSuccessMessage(model);
-        return new CommandResult(successMessage);
+        return new CommandResult(MESSAGE_VIEW_SUCCESS);
     }
 
     private void changeSuccessMessage(Model model) {
         if (keywords.size() > 1 && (keywords.contains("L/") || keywords.contains("P/"))) {
-            successMessage = String.format(
+            MESSAGE_VIEW_SUCCESS = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
         } else if (keywords.contains("S/")) {
-            successMessage = String.format(
+            MESSAGE_VIEW_SUCCESS = String.format(
                     Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
         } else {
-            successMessage = "Listed all persons!";
+            MESSAGE_VIEW_SUCCESS = "Listed all persons!";
         }
     }
 

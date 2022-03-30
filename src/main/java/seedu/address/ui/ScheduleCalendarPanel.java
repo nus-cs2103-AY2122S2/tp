@@ -7,13 +7,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.tag.Tag;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -63,7 +66,7 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yyyy");
         DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MM");
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("DD");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd");
         DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEEE");
         System.out.println(dayFormatter.format(localDateTime));
         int initialColumn = DAYS.indexOf(dayFormatter.format(localDateTime));
@@ -74,9 +77,34 @@ public class ScheduleCalendarPanel extends UiPart<Region> {
         int row = 1;
         int col = initialColumn;
         for (int i = 0; i < numOfDays; i++) {
+            LocalDate currentDate = LocalDate.of(currYear, currMonth, i + 1);
+            boolean hasSchedule = false;
+            for (Schedule schedule : this.schedules) {
+                if (schedule.getScheduleDateTime().getScheduleDateTime().toLocalDate().equals(currentDate)) {
+                    hasSchedule = true;
+                    break;
+                }
+            }
+
+
             Text day = new Text();
-            day.setText(String.valueOf(i + 1));
-            calendar.add(day, col, row);
+            day.setFont(new Font(20));
+            if (!hasSchedule) {
+                day.setText(String.valueOf(i + 1) + "\n");
+                day.setFill(Color.WHITE);
+            } else {
+                day.setText(String.valueOf(i + 1) + "\n" + "○");
+                day.setFill(Color.RED);
+            }
+
+            StackPane cell = new StackPane(day);
+            if (i + 1 == currDate) {
+                cell.setBackground(new Background(new BackgroundFill(Paint.valueOf("#707070"), null, null)));
+            } else {
+                cell.setBackground(new Background(new BackgroundFill(Paint.valueOf("#252525"), null, null)));
+            }
+
+            calendar.add(cell, col, row);
             col++;
             if (col > 6) {
                 col = 0;

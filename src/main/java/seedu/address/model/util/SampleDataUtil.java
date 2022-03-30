@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -62,6 +63,14 @@ public class SampleDataUtil {
         };
     }
 
+    public static Lineup[] getSampleLineups() {
+        return new Lineup[] {
+            new Lineup(new LineupName("snake")),
+            new Lineup(new LineupName("all star")),
+            new Lineup(new LineupName("freak"))
+        };
+    }
+
     public static Schedule[] getSampleSchedules() {
         return new Schedule[] {
             new Schedule(new ScheduleName("Championship Match"),
@@ -78,16 +87,24 @@ public class SampleDataUtil {
                 new ScheduleDateTime("19/02/2020 1200")),
             new Schedule(new ScheduleName("Free throw practice"),
                 new ScheduleDescription("Dwight needs to improve free throws"),
-                new ScheduleDateTime("19/06/2020 1200"))
+                new ScheduleDateTime("19/06/2021 1200")),
+            new Schedule(new ScheduleName("An active schedule"),
+                    new ScheduleDescription("Dwight needs to improve free throws"),
+                    new ScheduleDateTime("19/06/2023 1200"))
+
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
+        for (Lineup sampleLineup : getSampleLineups()) {
+            sampleAb.addLineup(sampleLineup);
+        }
         for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+            sampleAb.initalizePerson(samplePerson);
         }
         for (Schedule sampleSchedule : getSampleSchedules()) {
+            System.out.println(sampleSchedule);
             sampleAb.addSchedule(sampleSchedule);
         }
         return sampleAb;

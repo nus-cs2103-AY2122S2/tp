@@ -57,6 +57,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setLineups(List<Lineup> lineups) {
+        this.lineups.setLineups(lineups);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -64,6 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
         setSchedules(newData.getScheduleList());
+        setLineups(newData.getLineupList());
     }
 
     //// person-level operations
@@ -199,6 +204,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         return schedules.contains(schedule);
     }
 
+
+    /**
+     * Add a person and update the respective lineups
+     * The person must not already exist in the address book and the lineups must exist.
+     */
+    public void initalizePerson(Person p) {
+        persons.add(p);
+
+        for (LineupName lineupName : p.getLineupNames()) {
+            Lineup lineup = lineups.getLineup(lineupName);
+            lineups.putPlayerToLineup(p, lineup);
+        }
+    }
+
     /**
      * Adds a schedule to MyGM.
      * The schedule must not already exist in MyGM.
@@ -240,25 +259,32 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public List<Lineup> getLineupList() {
+        return lineups.getList();
+    }
+
+    @Override
     public ObservableList<Schedule> getScheduleList() {
         return schedules.asUnmodifiableObservableList();
     }
 
     public void refresh() {
         persons.refresh();
+        schedules.refresh();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
+                || ((other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
                 && lineups.equals(((AddressBook) other).lineups)
-                && schedules.equals(((AddressBook) other).schedules);
+                && schedules.equals(((AddressBook) other).schedules));
     }
 
     @Override
     public int hashCode() {
         return persons.hashCode() + lineups.hashCode() + schedules.hashCode();
     }
+
 }

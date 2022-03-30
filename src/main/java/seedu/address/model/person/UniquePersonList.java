@@ -33,6 +33,7 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private final PersonComparator comparator = new PersonComparator();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -43,9 +44,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Return true if some person with {@code targetName}
-     * @param targetName
-     * @return
+     * Sort the internal list for display.
+     * Called when there is a change in person inside the list except for deleting.
+     */
+    private void sort() {
+        this.internalList.sort(comparator);
+    }
+
+    /**
+     * Return true if some person with {@code targetName}.
+     * @param targetName to check existence.
+     * @return true if the name exists.
      */
     public boolean containsName(Name targetName) {
         requireNonNull(targetName);
@@ -70,6 +79,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void refresh() {
         List<Person> playersCopy = new ArrayList<>(internalList);
         internalList.setAll(playersCopy);
+        sort();
     }
 
     /**
@@ -112,7 +122,7 @@ public class UniquePersonList implements Iterable<Person> {
         for (Person person : this.internalList) {
             if (person.isInLineup(lineup)) {
                 person.removeFromLineup(lineup);
-                System.out.printf("%s has been removed from lineup %s\n", person.getName(), lineup.getLineupName());
+                //System.out.printf("%s has been removed from lineup %s\n", person.getName(), lineup.getLineupName());
             }
         }
     }
@@ -164,12 +174,12 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Returns a string representation of a list of available Jersey Number.
-     * @return
+     * @return a string of available Jersey Number.
      */
     public String getAvailableJerseyNumber() {
         Stream<Integer> stream = IntStream.range(0, MAXIMUM_CAPACITY).boxed();
         List<Integer> ls = stream
-                .filter(x -> !this.containsJerseyNumber(new JerseyNumber(((Integer) x).toString())))
+                .filter(x -> !this.containsJerseyNumber(new JerseyNumber((x).toString())))
                 .collect(Collectors.toList());
         return ls.toString();
     }

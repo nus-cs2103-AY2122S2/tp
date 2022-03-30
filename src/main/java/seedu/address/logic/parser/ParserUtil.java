@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -208,9 +210,12 @@ public class ParserUtil {
     public static ScheduleDateTime parseScheduleDateTime(String scheduleDateTime) throws ParseException {
         requireNonNull(scheduleDateTime);
         String trimmedDateTime = scheduleDateTime.trim();
-        if (!ScheduleDateTime.isValidScheduleDateTime(trimmedDateTime)) {
+        try {
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm").parse(trimmedDateTime);
+        } catch (DateTimeParseException e) {
             throw new ParseException(ScheduleDateTime.MESSAGE_CONSTRAINTS);
         }
+
         return new ScheduleDateTime(trimmedDateTime);
     }
 

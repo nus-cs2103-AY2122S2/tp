@@ -36,15 +36,20 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Name person = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
             return new DeleteCommand(person);
         } else if (arePrefixesPresent(argMultimap, PREFIX_LINEUP)) {
-            LineupName lineup = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
-            return new DeleteCommand(lineup);
+            try {
+                LineupName lineup = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
+                return new DeleteCommand(lineup);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE_LINEUP), pe);
+            }
         } else if (arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
             try {
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SCHEDULE).get());
                 return new DeleteCommand(index);
             } catch (ParseException pe) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE_SCHEDULE), pe);
             }
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

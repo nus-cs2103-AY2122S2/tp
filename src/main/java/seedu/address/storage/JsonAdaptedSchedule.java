@@ -3,8 +3,9 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.format.DateTimeFormatter;
+
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Name;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleDateTime;
 import seedu.address.model.schedule.ScheduleDescription;
@@ -22,8 +23,8 @@ public class JsonAdaptedSchedule {
      */
     @JsonCreator
     public JsonAdaptedSchedule(@JsonProperty("name") String name,
-                               @JsonProperty("phone") String description,
-                               @JsonProperty("email") String dateTime) {
+                               @JsonProperty("description") String description,
+                               @JsonProperty("dateTime") String dateTime) {
         this.name = name;
         this.description = description;
         this.dateTime = dateTime;
@@ -33,9 +34,10 @@ public class JsonAdaptedSchedule {
      * Converts a given {@code Schedule} into this class for Jackson use.
      */
     public JsonAdaptedSchedule(Schedule source) {
-        name = source.getScheduleName().scheduleName;
-        description = source.getScheduleDescription().description;
-        dateTime = source.getScheduleDateTime().toString();
+        this.name = source.getScheduleName().scheduleName;
+        this.description = source.getScheduleDescription().description;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
+        this.dateTime = source.getScheduleDateTime().getScheduleDateTime().format(formatter);
     }
 
     /**
@@ -48,7 +50,7 @@ public class JsonAdaptedSchedule {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ScheduleName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
+        if (!ScheduleName.isValidScheduleName(name)) {
             throw new IllegalValueException(ScheduleName.MESSAGE_CONSTRAINTS);
         }
         final ScheduleName modelName = new ScheduleName(name);

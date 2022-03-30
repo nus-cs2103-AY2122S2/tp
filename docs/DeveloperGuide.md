@@ -178,7 +178,7 @@ The following sequence diagram shows how the undo operation works:
   * Pros: Easy to implement load data.
   * Cons: Troublesome to save all data.
 
-#### 1.3 Add schedule 
+#### 1.3 Add schedule
 #### Proposed implementation
 #### Design Consideration
 
@@ -186,7 +186,7 @@ The following sequence diagram shows how the undo operation works:
 
 #### 2.1 Delete player
 #### Proposed implementation
-The proposed delete player functionality will delete an existing player from `UniquePlayerList`, 
+The proposed delete player functionality will delete an existing player from `UniquePlayerList`,
 as well as from all lineups in `UniqueLineupList` that contains the player.
 
 #### Design Consideration
@@ -234,7 +234,7 @@ After checking that both input player and lineup are valid, the lineup's name wi
 
 #### 3.2 Edit lineup
 #### Proposed implementation
-The proposed edit lineup functionality will update the name of a lineup. 
+The proposed edit lineup functionality will update the name of a lineup.
 Meanwhile, the `lineups` attribute of each person should also be updated if the person is in the lineup.
 
 #### Design Consideration
@@ -256,9 +256,10 @@ Meanwhile, the `lineups` attribute of each person should also be updated if the 
 
 #### 4.1 View player
 #### Proposed implementation
-The proposed view player functionality queries players from the existing UniquePersonList. The players returned is 
-dependent on the keywords specified in the command. The proposed view mechanism is facilitated by ModelManger which keeps 
-a FilteredList of players. Note that this FilteredList of players is updated via a specified Predicate.
+The proposed view player functionality queries players from the existing UniquePersonList. The players returned is
+dependent on the keywords specified in the command. The proposed view mechanism is facilitated by ModelManger which
+keeps a FilteredList of players. Note that this FilteredList of players is updated via a specified Predicate.
+
 Additionally, it implements the following operations:
 - `ModelManager#updateFilteredPersonList(Predicate<Person>) - Filters internal storage via a Predicate<Person> specification`
 
@@ -268,13 +269,14 @@ Step 1. The user launches the application.
 
 Step 2. The user wants to view player name with james in its name.
 
-Step 3. The user executes `view P/james`. The view command will check if the inputs are valid, and then parsed 
-(similar to the other CRUD commands) before using these inputs to create conditional `Predicate<>` instances (eg. NameContainsKeywordsPredicate). 
+Step 3. The user executes `view P/james`. The view command will check if the inputs are valid, and then parsed
+(similar to the other CRUD commands) before using these inputs to create conditional `Predicate<>` instances (eg. NameContainsKeywordsPredicate).
 The predicates are then combined and used to filter the `FilteredList<Person>`. The GUI will then display the player items in the filtered list.
 
 The following sequence diagram shows how the find operation works:
 Sequence Diagram:
 __TO BE ADDED__
+
 #### Design Consideration
 For future development (v1.3b), may consider to enter more flags so that user can perform more specific view task.
 
@@ -284,7 +286,36 @@ For future development (v1.3b), may consider to enter more flags so that user ca
 
 #### 4.3 View schedule
 #### Proposed implementation
+The proposed implementation of view schedule has three variants, which differ in Step 2 and 3 of user scenarios.
+
+Step 1. The user launches the application.
+
+Step 2a. The user wants to view active schedules happening at future dates.
+
+Step 3a. The user executes `view S/`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ACTIVE_SCHEDULES`.
+
+Step 2b. The user wants to view all schedules added.
+
+Step 3b. The user executes `view S/ a/all`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ALL_SCHEDULES`.
+
+Step 2b. The user wants to view archived schedules only.
+
+Step 3b. The user executes `view S/ a/archive`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ARCHIVED_SCHEDULES`.
+
+The following sequence diagram shows how the find operation works:
+Sequence Diagram:
+__TO BE ADDED__
+
 #### Design Consideration
+**Aspect: How to set the default display of schedule to active schedules only:**
+
+* **Alternative 1 (current choice):** Set the predicate at initialization of `AddressBook`.
+    * Pros: Easy to implement.
+    * Cons: Risk breaking abstraction principle because `LogicManager` is implementing for `ModelManager`.
+
+* **Alternative 2:** Set the predicate inside `ModelManager`.
+  * Pros: `LogicManager` will not call functions other than `get...()` of `ModelManager`.
+  * Cons: Difficult to implement.
 
 ### 5. Put feature
 Puts a `Person` into a `Lineup`
@@ -294,6 +325,9 @@ Puts a `Person` into a `Lineup`
 Stores the `LineupName` in `Person`
 
 Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
+
+![put](images/Put.png)
+
 #### Design Consideration
 **Aspect: How to navigate from player to lineup:**
 
@@ -481,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | tag my players by 'fit to play'                                                                | know which are the available healthy players for competition                                       |
 | `*`      | new user       | key in the first few letters to see what commands starting with these letters are available    | know the potential commands that starts with these letters                                         |
 | `*`      | expert user    | send mass reminders to each players one day before the training date                           | automate the sending of announcements to my players                                                |
-
+| `*`      | user           | change the theme to light mode                                                                 | read the words more clearly in various environment                                                 |
 
 *{More to be added}*
 
@@ -552,15 +586,15 @@ Use case ends.
 
 1. Find a player (UC01)
 2. User input the new details of the player.
-3. MyGM displays the success message.   
+3. MyGM displays the success message.
    Use case ends.
 
 **Extensions**
 * 1a. User entered a player that does not exist.
-    * 1a1. MyGM displays the invalid player message.   
+    * 1a1. MyGM displays the invalid player message.
       Use case ends.
 * 3a. User entered an invalid input for any of the fields.
-    * 3a1. MyGM displays the invalid input message and the appropriate command.   
+    * 3a1. MyGM displays the invalid input message and the appropriate command.
       Use case ends.
 
 *{More to be added}*
@@ -568,7 +602,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage. 
+2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should have a _friendly user interface_.
 5. The system should respond within `2` seconds.

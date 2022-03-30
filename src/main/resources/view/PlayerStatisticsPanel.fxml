@@ -3,8 +3,8 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" minHeight="105" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" minHeight="50" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <PieChart styleClass="playerStatisticsPieChart" fx:id="playerStatisticsPieChart" title="Distribution of Players by Position" />
+      <PieChart styleClass="playerStatisticsPieChart" fx:id="playerStatisticsPieChart" />
    </children>
 </VBox>

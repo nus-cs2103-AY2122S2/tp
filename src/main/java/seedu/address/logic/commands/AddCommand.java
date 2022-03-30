@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
@@ -18,15 +20,20 @@ import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Adds a person to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": \nAdds a person to the MyGM. "
-            + "Parameters: "
+
+    public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD + ": Adds a player to MyGM. "
+            + "\nParameters: "
             + PREFIX_PLAYER + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -45,22 +52,30 @@ public class AddCommand extends Command {
             + PREFIX_WEIGHT + "80 "
             + PREFIX_TAG + "PG "
             + PREFIX_TAG + "SG";
-    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ":\nAdds a lineup to MyGM."
-            + "Parameters: "
+    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ": Adds a lineup to MyGM."
+            + "\nParameters: "
             + PREFIX_LINEUP + " "
             + PREFIX_NAME + "LINEUP NAME"
             + "[" + PREFIX_PLAYER + "PLAYER]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LINEUP + " "
             + PREFIX_NAME + "Starting 5";
-    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ":\nAdds a schedule to MyGM."
-            + "Parameters: "
+    public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ": Adds a schedule to MyGM."
+            + "\nParameters: "
             + PREFIX_SCHEDULE + " "
-            + PREFIX_NAME + "SCHEDULE NAME"
-            + "[" + PREFIX_PLAYER + "PLAYER]...\n"
+            + PREFIX_NAME + "SCHEDULE NAME "
+            + PREFIX_DESCRIPTION + "SCHEDULE DESCRIPTION "
+            + PREFIX_DATE + "DATE TIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SCHEDULE + " "
-            + PREFIX_NAME + "Starting 5";
+            + PREFIX_NAME + "finals "
+            + PREFIX_DESCRIPTION + "nba finals "
+            + PREFIX_DATE + "01/01/2022 2000";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a player, lineup, schedule to MyGM\n"
+            + MESSAGE_USAGE_PLAYER + "\n"
+            + MESSAGE_USAGE_LINEUP + "\n"
+            + MESSAGE_USAGE_SCHEDULE;
 
     public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s.";
     public static final String MESSAGE_ADD_LINEUP_SUCCESS = "New lineup added: %1$s.";
@@ -72,6 +87,7 @@ public class AddCommand extends Command {
             + "You may consider these available ones:\n%1$s";
     public static final String MESSAGE_FULL_CAPACITY_REACHED = "MyGM has reached its full capacity with 100 players.";
     // can consider adding in a list of available jersey number
+    public static final String MESSAGE_OUTDATED_DATE = "Date should be after %s.";
 
     private final Person toAddPerson;
     private final Lineup toAddLineup;
@@ -144,8 +160,13 @@ public class AddCommand extends Command {
             model.addLineup(toAddLineup);
             return new CommandResult(String.format(MESSAGE_ADD_LINEUP_SUCCESS, toAddLineup));
         } else {
+            LocalDateTime ldt = LocalDateTime.now();
+            if (toAddSchedule.getScheduleDateTime().getScheduleDateTime().isBefore(ldt)) {
+                throw new CommandException(String.format(MESSAGE_OUTDATED_DATE, ldt.format(FORMATTER)));
+            }
+
             if (model.hasSchedule(toAddSchedule)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
             }
 
             model.addSchedule(toAddSchedule);

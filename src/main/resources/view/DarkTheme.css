@@ -189,6 +189,18 @@
      -fx-border-top-width: 1px;
 }
 
+.dark-pane-with-border {
+    -fx-background-color: #252525;
+    -fx-border-color: #383838;
+    -fx-border-width: 0 0 5 0;
+}
+
+.dark-pane-without-border {
+     -fx-background-color: #252525;
+     -fx-border-width: 0;
+     -fx-border-radius: 0 0 0 0;
+}
+
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
@@ -429,30 +441,46 @@
 
 /* Adapted from https://community.oracle.com/tech/developers/discussion/3538389/styling-tabpane-css */
 .tab-pane {
-  -fx-tab-min-width:200px;
-  ifx-tab-min-height:50px;
-  -fx-tab-max-height:150px;
+  -fx-tab-min-width:10px;
+  -fx-tab-min-height:30px;
+  -fx-tab-max-height:120px;
   -fx-background-color: #383838;
 }
 
 .tab-pane .tab {
     -fx-background-color: #383838;
-    -fx-pref-width: 200;
-    -fx-pref-height: 60;
+    -fx-pref-width: 120;
+    -fx-pref-height: 30;
+}
+
+.tab-pane .tab .tab-label {
+    -fx-alignment:right;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #252525;
+    -fx-pref-width: 120;
+    -fx-pref-height: 30;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-alignment:right;
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab:top {
-    -fx-border-width: 3 3 3 3;
-    -fx-border-radius: 5 5 0 0;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-radius: 0 0 0 0;
     -fx-border-color: #707070;
     -fx-background-color: #383838;
+    -fx-text-alignment: center;
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 30;
+    -fx-font-size: 18;
+    -fx-text-alignment: center;
 }
 
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
@@ -462,9 +490,9 @@
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab:selected:top {
-    -fx-border-width: 3 3 3 3;
-    -fx-border-radius: 5 5 0 0;
-    -fx-background-color: #707070;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-color: #252525;
     -fx-background-insets: 0;
 }
 
@@ -472,13 +500,51 @@
     -fx-alignment: CENTER;
     -fx-text-fill: #707070;
     -fx-font-weight: bold;
-    -fx-font-size: 30;
-    -fx-pref-width: 200;
+    -fx-font-size: 18;
+    -fx-pref-width: 100;
+    -fx-text-alignment: center;
 }
 
 .tab-pane > .tab-header-area > .tab-header-background {
     -fx-background-color:#383838;
     -fx-border-color: #383838;
-    -fx-border-width: 0 0 1 0;
+    -fx-border-width: 0 0 0 0;
     -fx-background-insets: 0;
+}
+
+/* pie chart */
+.chart {
+    -fx-background-color: #252525;
+}
+
+.chart-title {
+    -fx-font-size: 18;
+}
+
+.chart-pie-label { /*this is what you need for labels*/
+    -fx-fill: white;
+    -fx-font-size: 12;
+}
+
+.chart-legend {
+   -fx-background-color:  transparent;
+   -fx-padding: 50px;
+}
+
+/* player suggestion */
+.player-suggestion {
+    -fx-background-color: #383838;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 12pt;
+    -fx-text-fill: white;
+    -fx-inner-background: #383838;
+    -fx-inner-border-radius: 0 0 0 0;
+}
+
+.player-suggestion .content {
+    -fx-background-radius: 0;
+}
+
+.player-suggestion .label {
+    -fx-text-fill: black !important;
 }
