@@ -41,7 +41,7 @@ The Features section will be split into 3 subsections for:
 * Seller: Seomeone who is seeking to sell their property.
 
 * Words in `UPPER_CASE` are inputs to be supplied by the user.<br>
-  e.g. In `addbuyer n/NAME`, `NAME` is an input such as `addbuyer n/Chok Hoe`.
+  e.g. In `add-b n/NAME`, `NAME` is an input such as `add-b n/Chok Hoe`.
 
 * Items in square brackets are optional inputs.<br>
   e.g In `n/NAME [t/TAG]`, the user can input `n/Chok Hoe t/funny` or simply `n/Chok Hoe`.
@@ -53,7 +53,7 @@ The Features section will be split into 3 subsections for:
   e.g. Even if the command specifies `n/NAME p/PHONE_NUMBER` in the documentation, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If an input is expected only once in the command, but you specified it multiple times, only the **last occurrence** of the parameter will be taken.<br>
-  e.g. If you specify `addbuyer n/Chok Hoe p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. If you specify `add-b n/Chok Hoe p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Additional input for single-word commands (such as `help`, `list-s`, `exit` and `clear-b`) will be ignored.<br>
   e.g. If the input specifies `help 123`, it will be interpreted as `help`.
@@ -70,7 +70,7 @@ The Features section will be split into 3 subsections for:
 
 ### `help`
 
-Show a message explaining how to access the help page.
+Function: Show a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -78,34 +78,50 @@ Format: `help`
 
 ### `exit`
 
-Exit the program.
+Function: Exit the program.
 
 Format: `exit`
+
+### `match`
+
+Function: Match the specified buyer's property to any sellers' property.
+
+Format: `match INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers who have properties that are matching the buyer's property requirements will be displayed.
+* A seller will match to the buyer if:
+  * They have the same location & house type.
+  * If a price within the buyer's price range is within the seller's price range.
+* E.g. If a buyer has house type `HDB`, location `Bishan` and price range `400000,500000`, a seller with house type `HDB`, location `Bishan` and price range `490000,600000` will match as the buyer's price range has an **overlap** with the seller's.
+
+Examples:
+* `match 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
 
 [back to start of section](#features)
 
 ### `list-b`
 
-Show the buyer list.
+Function: Show the buyer list.
 
 Format: `list-b`
 
-### `addbuyer`
+### `add-b`
 
-Add a buyer to the buyer list.
+Function: Add a buyer to the buyer list.
 
-Format: `addbuyer n/NAME p/PHONE_NUMBER [t/TAG]...`
+Format: `add-b n/NAME p/PHONE_NUMBER [t/TAG]...`
 
 * The order of inputs can be in any order.
 * The `NAME` and `PHONE_NUMBER` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
 
 Examples:
-* `addbuyer n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
-* `addbuyer n/Janald p/12345678 t/friend t/criminal` adds a new buyer with name `Janald`, phone number of `12345678`, and tags of `friend` and `criminal`
+* `add-b n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
+* `add-b n/Janald p/12345678 t/friend t/criminal` adds a new buyer with name `Janald`, phone number of `12345678`, and tags of `friend` and `criminal`
 
 ### `add-ptb`
 
-Add a new property for the specified buyer.
+Function: Add a new property for the specified buyer.
 
 Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 
@@ -131,7 +147,7 @@ Examples:
 
 ### `appt-b`
 
-Create an appointment with a certain buyer.
+Function: Create an appointment with a certain buyer.
 
 Format: `appt-b INDEX time/TIME`
 
@@ -144,7 +160,7 @@ Examples:
 
 ### `edit-b`
 
-Edit an existing buyer in the displayed buyer list.
+Function: Edit an existing buyer in the displayed buyer list.
 
 Format: `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]` 
 
@@ -161,7 +177,7 @@ Examples:
 
 ### `find-b`
 
-Find buyers whose selected **field** contain any of the given keywords.
+Function: Find buyers whose selected **field** contain any of the given keywords.
 
 
 Format: `find-b field/KEYWORD1 [MORE_KEYWORDS]`
@@ -181,7 +197,7 @@ Examples:
 
 ### `delete-b`
 
-Delete the specified buyer from the displayed buyer list.
+Function: Delete the specified buyer from the displayed buyer list.
 
 Format: `delete-b INDEX`
 
@@ -194,13 +210,13 @@ Examples:
 
 ### `clear-b`
 
-Clear all buyers from the buyer list.
+Function: Clear all buyers from the buyer list.
 
 Format: `clear-b`
 
 ### `sort-b`
 
-Sort all the buyers according to the orders specified.
+Function: Sort all the buyers according to the orders specified.
 
 Format: `sort-b [o/FIELDS]`
 
@@ -221,26 +237,26 @@ Examples:
 
 ### `list-s`
 
-Show the seller list.
+Function: Show the seller list.
 
 Format: `list-s`
 
-### `addseller`
+### `add-s`
 
-Add a seller to the seller list.
+Function: Add a seller to the seller list.
 
-Format: `addseller n/NAME p/PHONE_NUMBER [t/TAG]...`
+Format: `add-s n/NAME p/PHONE_NUMBER [t/TAG]...`
 
 * The order of inputs can be in any order.
 * The `NAME` and `PHONE_NUMBER` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
 
 Examples:
-* `addseller n/Yu Qi p/98765432` adds a new seller with name `Yu Qi` and phone number `98765432`
-* `addseller n/Janald p/12345678 t/friend t/criminal` adds a new seller with name `Janald`, phone number of `12345678`, and tags of `friend` and `criminal`
+* `add-s n/Yu Qi p/98765432` adds a new seller with name `Yu Qi` and phone number `98765432`
+* `add-s n/Janald p/12345678 t/friend t/criminal` adds a new seller with name `Janald`, phone number of `12345678`, and tags of `friend` and `criminal`
 
 ### `add-pts`
 
-Add a new property for the specified seller.
+Function: Add a new property for the specified seller.
 
 Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 
@@ -267,7 +283,7 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 
 ### `appt-s`
 
-Create an appointment with a certain seller.
+Function: Create an appointment with a certain seller.
 
 Format: `appt-s INDEX time/TIME`
 
@@ -280,7 +296,7 @@ Examples:
 
 ### `edit-s`
 
-Edit an existing seller in the displayed seller list.
+Function: Edit an existing seller in the displayed seller list.
 
 Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
 
@@ -298,7 +314,7 @@ Examples:
 
 ### `find-s`
 
-Find sellers whose selected **field** contain any of the given keywords.
+Function: Find sellers whose selected **field** contain any of the given keywords.
 
 
 Format: `find-s field/KEYWORD1 [MORE_KEYWORDS]`
@@ -318,7 +334,7 @@ Examples:
 
 ### `delete-s`
 
-Delete the specified seller from the displayed seller list.
+Function: Delete the specified seller from the displayed seller list.
 
 Format: `delete-s INDEX`
 
@@ -331,13 +347,13 @@ Examples:
 
 ### `clear-s`
 
-Clear all sellers from the saved seller list.
+Function: Clear all sellers from the seller list.
 
 Format: `clear-s`
 
 ### `sort-s`
 
-Sort all the sellers according to the orders specified.
+Function: Sort all the sellers according to the orders specified.
 
 Format: `sort-s [o/FIELDS]`
 
@@ -384,8 +400,9 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Exit** | `exit`
+**Match property** | `match INDEX` <br> e.g., `match 1`
 **List Buyers** | `list-b`
-**Add Buyer** | `addbuyer n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `addbuyer n/James Ho p/22224444`
+**Add Buyer** | `add-b n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-b n/James Ho p/22224444`
 **Add Buyer Property** | `add-ptb l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-ptb l/Bishan pr/100000,200000 h/hdb`
 **Make Appointment for Buyer** | `appt-b INDEX time/TIME` <br> e.g., `appt-b 1 time/2022-10-10-12-12`
 **Edit Buyer** | `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]`  <br> e.g., `edit-b 2 n/James Ho p/22224444 `
@@ -394,7 +411,7 @@ Action | Format, Examples
 **Clear Buyers** | `clear-b`
 **Sort Buyers** | `sort-b [o/FIELDS]` <br> e.g., `sort-b o/name`
 **List Sellers** | `list-s`
-**Add Seller** | `addseller n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `addseller n/James Ho p/22224444`
+**Add Seller** | `add-s n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-s n/James Ho p/22224444`
 **Add Seller Property** | `add-pts a/ADDRESS l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-pts a/Blk 343, Rika Ave 1 #09-1231 l/Bishan pr/100000,200000 h/hdb`
 **Make Appointment for Seller** | `appt-s INDEX time/TIME` <br> e.g., `appt-s 1 time/2022-10-10-12-12`
 **Edit Seller** | `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`  <br> e.g., `edit-s 2 n/James Ho p/22224444 `
