@@ -26,7 +26,7 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
         Optional<AttendanceEntry> secondAttendanceEntry = second.getAttendanceHashMap().getAttendance(today);
 
         if (firstAttendanceEntry.isPresent() && secondAttendanceEntry.isPresent()) {
-            return compareAttendanceEntries(firstAttendanceEntry, secondAttendanceEntry);
+            return compareAttendanceEntries(firstAttendanceEntry.get(), secondAttendanceEntry.get());
         } else if (firstAttendanceEntry.isPresent() && !secondAttendanceEntry.isPresent()) {
             return -1;
         } else if (!firstAttendanceEntry.isPresent() && secondAttendanceEntry.isPresent()) {
@@ -38,13 +38,12 @@ public class PetDropOffTimeComparator implements Comparator<Pet> {
 
     /**
      * Compares AttendanceEntries of pets based on their drop off time. Used in compare method.
-     * @param firstPet AttendanceEntry.
-     * @param secondPet AttendanceEntry.
+     * @param firstPetAttendanceEntry AttendanceEntry of first pet.
+     * @param secondPetAttendanceEntry AttendanceEntry of second pet.
      * @return Value signifying in the difference between the comparing attribute.
      */
-    private int compareAttendanceEntries(Optional<AttendanceEntry> firstPet, Optional<AttendanceEntry> secondPet) {
-        AttendanceEntry firstPetAttendanceEntry = firstPet.get();
-        AttendanceEntry secondPetAttendanceEntry = secondPet.get();
+    private int compareAttendanceEntries(AttendanceEntry firstPetAttendanceEntry,
+                                         AttendanceEntry secondPetAttendanceEntry) {
 
         boolean isFirstPetDropOffTimePresent = firstPetAttendanceEntry.hasTransportArrangement();
         boolean isSecondPetDropOffTimePresent = secondPetAttendanceEntry.hasTransportArrangement();
