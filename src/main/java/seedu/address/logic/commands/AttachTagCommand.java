@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Clears the address book.
+ * Attaches a tag to a profile
  */
 public class AttachTagCommand extends Command {
 
