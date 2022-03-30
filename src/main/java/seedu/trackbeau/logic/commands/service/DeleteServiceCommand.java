@@ -51,7 +51,7 @@ public class DeleteServiceCommand extends Command {
 
         for (Booking booking : lastShownBookingsList) {
             for (Index targetIndex : targetIndexes) {
-                if (booking.getService() == lastShownServicesList.get(targetIndex.getZeroBased())
+                if (booking.getService().equals(lastShownServicesList.get(targetIndex.getZeroBased()))
                         && booking.getBookingDateTime().value.isAfter(currentTime)) {
                     bookingsToDelete.add(booking);
                     break;

@@ -98,9 +98,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private Label scheduleLabel;
 
-    @FXML
-    private Label statisticsLabel;
-
     private ArrayList<Label> labels;
 
     /**
@@ -130,7 +127,6 @@ public class MainWindow extends UiPart<Stage> {
         this.labels.add(customersLabel);
         this.labels.add(servicesLabel);
         this.labels.add(bookingsLabel);
-        this.labels.add(statisticsLabel);
         this.labels.add(scheduleLabel);
 
         customersLabel.getStyleClass().add("selected");
@@ -171,10 +167,6 @@ public class MainWindow extends UiPart<Stage> {
         case "scheduleLabel":
             schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), LocalDate.now());
             detailsPanelPlaceholder.getChildren().add(schedulePanel.getRoot());
-            break;
-        case "statisticsLabel":
-            statisticsPanel = new StatisticsPanel();
-            detailsPanelPlaceholder.getChildren().add(statisticsPanel.getRoot());
             break;
         default:
             // nothing to add to details panel placeholder
