@@ -55,7 +55,9 @@ public class DeleteTagCommand extends Command {
                     currPerson.getCourse(), currPerson.getMatricCard(), currPerson.getTelegram());
             model.setPerson(currPerson, newPerson);
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete));
+
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete),
+                false, true, false, null);
     }
 
     @Override
