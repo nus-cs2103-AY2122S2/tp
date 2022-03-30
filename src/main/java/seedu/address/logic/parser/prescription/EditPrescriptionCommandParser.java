@@ -11,13 +11,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.prescription.EditPrescriptionCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditPrescriptionCommand object
  */
-public class EditPrescriptionCommandParser {
+public class EditPrescriptionCommandParser implements Parser<EditPrescriptionCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditPrescriptionCommand
@@ -29,10 +30,6 @@ public class EditPrescriptionCommandParser {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_DATE,
                 PREFIX_INSTRUCTION);
 
-        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            throw new ParseException(EditPrescriptionCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
-        }
-
         Index index;
 
         try {
@@ -40,6 +37,10 @@ public class EditPrescriptionCommandParser {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditPrescriptionCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            throw new ParseException(EditPrescriptionCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
         }
 
         EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor =
