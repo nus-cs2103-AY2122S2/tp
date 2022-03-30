@@ -19,7 +19,9 @@ public class SuggestCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Here is my suggestion";
 
-    public static final String MESSAGE_FAILURE = "There are no shows currently being listed!";
+    public static final String MESSAGE_FAILURE_NO_SHOWS = "There are no shows currently being listed!";
+
+    public static final String MESSAGE_FAILURE_ONE_SHOW = "There is only one show in the list";
 
     public static final String TAG_ERROR = "Tag parameter must only be a single word.\n"
             + "Example: " + COMMAND_WORD + " t/Action";
@@ -29,8 +31,12 @@ public class SuggestCommand extends Command {
         requireNonNull(model);
         List<Show> currList = model.getFilteredShowList();
         Integer sizeOfShowList = currList.size();
+
         if (sizeOfShowList <= 0) {
-            throw new CommandException(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_FAILURE_NO_SHOWS);
+        }
+        if (sizeOfShowList == 1) {
+            throw new CommandException(MESSAGE_FAILURE_ONE_SHOW);
         }
         Show randomShow = getRandomShow(model);
         SuggestPredicate suggestPredicate = new SuggestPredicate(randomShow);
