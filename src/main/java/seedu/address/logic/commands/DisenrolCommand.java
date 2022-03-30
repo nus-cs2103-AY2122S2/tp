@@ -66,15 +66,22 @@ public class DisenrolCommand extends Command {
         TaModule newModule = new TaModule(moduleToEdit);
 
         for (Student s : students) {
-            if (newCg.hasStudent(s) && newModule.hasStudent(s)) {
+            if (newCg.hasStudent(s)) {
                 newCg.removeStudent(s);
-                newModule.removeStudent(s);
             } else {
                 throw new CommandException(String.format(NONEXISTENT_STUDENT_CG, s.getName(), s.getStudentId()));
             }
         }
 
         model.setEntity(cgToEdit, newCg);
+
+        for (Student s : students) {
+            if (!model.getUnfilteredClassGroupList().stream().anyMatch(cg -> cg.hasStudent(s))) {
+                newModule.removeStudent(s);
+                model.removeStudentFromAssessments(s);
+            }
+        }
+
         model.setEntity(moduleToEdit, newModule);
         return new CommandResult(String.format(MESSAGE_DISENROL_SUCCESS,
                 newCg.getClassGroupId(), newCg.getClassGroupType()));

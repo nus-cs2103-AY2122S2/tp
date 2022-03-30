@@ -53,7 +53,7 @@ public class StudentAttendance {
      */
     public StudentAttendance unmarkAttendance(Student s) {
         if (this.student.isSameStudent(s)) {
-            return new StudentAttendance(student, new Attendance(true));
+            return new StudentAttendance(student, new Attendance(false));
         }
         return this;
     }

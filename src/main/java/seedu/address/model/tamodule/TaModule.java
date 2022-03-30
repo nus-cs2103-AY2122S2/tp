@@ -116,8 +116,8 @@ public class TaModule implements Entity {
     }
 
     /**
-     * Returns true if both modules have the same identity and data fields.
-     * This defines a stronger notion of equality between two modules.
+     * Returns true if both modules have the same identity, including module name.
+     * This defines a normal notion of equality between two modules.
      */
     @Override
     public boolean equals(Object other) {
@@ -132,8 +132,18 @@ public class TaModule implements Entity {
         TaModule otherTaModule = (TaModule) other;
         return otherTaModule.getModuleName().equals(getModuleName())
                 && otherTaModule.getAcademicYear().equals(getAcademicYear())
+                && otherTaModule.getModuleCode().equals(getModuleCode());
+    }
+
+    /**
+     * Returns true if both modules have the same identity and data fields.
+     * This defines the strongest notion of equality between two modules.
+     */
+    public boolean equals(TaModule otherTaModule) {
+        return otherTaModule.getModuleName().equals(getModuleName())
+                && otherTaModule.getAcademicYear().equals(getAcademicYear())
                 && otherTaModule.getModuleCode().equals(getModuleCode())
-                && otherTaModule.getStudents().equals(getStudents());
+                && otherTaModule.uniqueStudentList.equals(uniqueStudentList);
     }
 
 

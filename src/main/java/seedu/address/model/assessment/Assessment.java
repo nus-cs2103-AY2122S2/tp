@@ -62,6 +62,17 @@ public class Assessment implements Entity {
         attempts.putAll(toCopy.getAttempts());
     }
 
+    /**
+     * Returns a new copy of the assessment with an updated module.
+     * Every field must be present and not null.
+     * Used to initialize an assessment for grading.
+     */
+    public Assessment(Assessment toCopy, TaModule module) {
+        this(toCopy.getAssessmentName(), module, Optional.of(toCopy.getSimpleName()),
+                FXCollections.observableHashMap());
+        attempts.putAll(toCopy.getAttempts());
+    }
+
 
     public AssessmentName getAssessmentName() {
         return assessmentName;
@@ -99,6 +110,18 @@ public class Assessment implements Entity {
             }
         );
     }
+
+    /**
+     * Removes student from the assessment.
+     * @param student The student to remove.
+     */
+    public void removeStudent(Student student) {
+        attempts.remove(student);
+        if (module.hasStudent(student)) {
+            module.removeStudent(student);
+        }
+    }
+
 
     public Optional<Grade> getAttemptOfStudent(Student student) {
         return Optional.ofNullable(attempts.get(student));

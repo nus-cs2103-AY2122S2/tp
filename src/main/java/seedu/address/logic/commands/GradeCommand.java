@@ -41,8 +41,9 @@ public class GradeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         String result = "";
-        TaModule module = assessment.getTaModule();
-        Assessment assessmentToEdit = new Assessment(assessment);
+
+        TaModule module = model.getModule(assessment.getTaModule());
+        Assessment assessmentToEdit = new Assessment(assessment, module);
         List<Student> notInModule = new ArrayList<>();
         List<Student> toGrade = new ArrayList<>();
 
@@ -57,7 +58,7 @@ public class GradeCommand extends Command {
         toGrade.stream().forEach(student -> assessmentToEdit.addAttempt(student, grade));
         for (Student s : toGrade) {
             result += String.format(GRADED_STUDENTS,
-                    s.getName(), s.getStudentId(), assessmentToEdit.getAttemptOfStudent(s));
+                    s.getName(), s.getStudentId(), assessmentToEdit.getAttemptOfStudent(s).get().value);
         }
         if (!result.isEmpty()) {
             result += "\n";

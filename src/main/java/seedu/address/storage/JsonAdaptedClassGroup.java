@@ -105,7 +105,6 @@ class JsonAdaptedClassGroup {
         default:
             throw new IllegalValueException("Invalid value for ClassGroupType");
         }
-
         if (module == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
@@ -118,7 +117,7 @@ class JsonAdaptedClassGroup {
         final UniqueStudentList modelStudents = new UniqueStudentList();
         for (JsonAdaptedStudent s : classGroupStudents) {
             Student sObj = s.toModelType();
-            if (!studentList.contains(s)) {
+            if (!studentList.contains(sObj)) {
                 throw new IllegalValueException(NONEXISTENT_STUDENT);
             }
             modelStudents.add(sObj);

@@ -18,14 +18,14 @@ class JsonAdaptedStudentAttendance {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "StudentAttendance's %s field is missing!";
     public static final String NONEXISTENT_STUDENT = "Student does not exist!";
     private final JsonAdaptedStudent student;
-    private final boolean isPresent;
+    private final String isPresent;
 
     /**
      * Constructs a {@code JsonAdaptedStudentAttendance} with the given student attendance details.
      */
     @JsonCreator
     public JsonAdaptedStudentAttendance(@JsonProperty("student") JsonAdaptedStudent student,
-                                        @JsonProperty("isPresent") Boolean isPresent) {
+                                        @JsonProperty("isPresent") String isPresent) {
         this.student = student;
         this.isPresent = isPresent;
     }
@@ -35,7 +35,7 @@ class JsonAdaptedStudentAttendance {
      */
     public JsonAdaptedStudentAttendance(StudentAttendance source) {
         student = new JsonAdaptedStudent(source.getStudent());
-        isPresent = source.getAttendance().getValue();
+        isPresent = source.getAttendance().toString();
     }
 
     /**
@@ -54,7 +54,7 @@ class JsonAdaptedStudentAttendance {
             throw new IllegalValueException(NONEXISTENT_STUDENT);
         }
 
-        if (!Attendance.isValidAttendance(Boolean.toString(isPresent))) {
+        if (!Attendance.isValidAttendance(isPresent)) {
             throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
         }
         final Attendance modelAttendance = new Attendance(isPresent);

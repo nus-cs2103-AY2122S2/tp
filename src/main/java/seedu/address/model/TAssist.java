@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -256,6 +257,17 @@ public class TAssist implements ReadOnlyTAssist {
     public void removeAssessment(Assessment key) {
         assessments.remove(key);
     }
+
+    /**
+     * Removes the student from all the assessments.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromAssessments(Student student) {
+        List<Assessment> assessmentToModify = new ArrayList<>(assessments.asUnmodifiableObservableList());
+        assessmentToModify.stream().forEach(assessment -> assessment.removeStudent(student));
+        assessments.setAssessments(assessmentToModify);
+    }
+
 
     //// util methods
 

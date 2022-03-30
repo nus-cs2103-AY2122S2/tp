@@ -107,6 +107,11 @@ public interface Model {
     /** Returns an unmodifiable view of the unfiltered assessment list. */
     ObservableList<Assessment> getUnfilteredAssessmentList();
 
+    /** Returns the updated module in tassist. */
+    TaModule getModule(TaModule module);
+
+    /** Removes all instances of student from the assessment list. */
+    void removeStudentFromAssessments(Student student);
 
     /** Returns an unmodifiable view of the student list given by the list of indexes. */
     ObservableList<Student> getStudentListByIndexes(List<Index> indexes);

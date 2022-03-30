@@ -28,7 +28,7 @@ public class Lesson {
      * @param weekId A valid week ID.
      */
     public Lesson(WeekId weekId) {
-        this(weekId, new ArrayList<StudentAttendance>());
+        this(weekId, new ArrayList<>());
     }
 
     /**
@@ -41,8 +41,7 @@ public class Lesson {
     public Lesson(WeekId weekId, List<StudentAttendance> studentAttendanceList) {
         requireAllNonNull(weekId);
         this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<>();
-        studentAttendanceList.addAll(studentAttendanceList);
+        this.studentAttendanceList = studentAttendanceList;
     }
 
     public WeekId getWeekId() {
@@ -61,11 +60,9 @@ public class Lesson {
      * Removes a student from the lesson as well as all the related attendance information.
      */
     public void removeStudent(Student student) {
-        for (StudentAttendance sa : studentAttendanceList) {
-            if (sa.getStudent().equals(student)) {
-                studentAttendanceList.remove(sa);
-            }
-        }
+        StudentAttendance objToDelete = studentAttendanceList.stream().filter(sa -> sa.getStudent().equals(student))
+                .findFirst().get();
+        studentAttendanceList.remove(objToDelete);
     }
 
     //@@author EvaderFati
@@ -78,7 +75,7 @@ public class Lesson {
     public void markAttendance(List<Student> students) {
         for (Student s : students) {
             for (StudentAttendance sa : studentAttendanceList) {
-                if (sa.getStudent().equals(students)) {
+                if (sa.getStudent().isSameStudent(s)) {
                     studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.markAttendance(s));
                 }
             }
@@ -95,7 +92,7 @@ public class Lesson {
     public void unmarkAttendance(List<Student> students) {
         for (Student s : students) {
             for (StudentAttendance sa : studentAttendanceList) {
-                if (sa.getStudent().equals(students)) {
+                if (sa.getStudent().isSameStudent(s)) {
                     studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.unmarkAttendance(s));
                 }
             }
