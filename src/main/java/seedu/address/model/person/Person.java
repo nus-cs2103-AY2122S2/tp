@@ -77,11 +77,11 @@ public class Person {
     }
 
     /**
-     * Toggles the favourite status of Person
+     * Returns a copy of the Person with the favourite status toggled.
      */
-    public void toggleFavourite() {
+    public Person toggleFavourite() {
         boolean toggledStatus = !favourite.getStatus();
-        favourite.setStatus(toggledStatus);
+        return new Person(name, phone, email, new Favourite(toggledStatus), address, properties, preference, userType);
     }
 
     public Address getAddress() {
