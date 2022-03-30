@@ -235,7 +235,7 @@ public class Product implements Distinguishable<Product> {
 
     /**
      * Updates the filter of the filtered product list to filter by the given {@code predicate}.
-     * @param predicate The predicate.
+     * @param predicate The filter to apply on the item list.
      * @throws NullPointerException if {@code predicate} is null.
      */
     public void updateFilteredItemList (Predicate<Item> predicate) {
