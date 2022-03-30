@@ -576,6 +576,7 @@ public class MainWindow extends UiPart<Stage> {
         allergyChartWindow.hide();
         skinChartWindow.hide();
         hairChartWindow.hide();
+        monthlyCustomerChartWindow.hide();
         primaryStage.hide();
     }
 
