@@ -74,6 +74,7 @@ public class MainWindow extends UiPart<Stage> {
         matchWindow = new MatchWindow(logic);
         viewImageWindow = new ViewImageWindow(logic);
         favouriteWindow = new FavouriteWindow(logic);
+        statisticsWindow = new StatisticsWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -197,12 +198,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleStatistics() {
-        if (statisticsWindow != null) {
-            statisticsWindow.close();
-        }
-        statisticsWindow = new StatisticsWindow(logic);
         statisticsWindow.fillPieChart();
-        statisticsWindow.show();
+        if (!statisticsWindow.isShowing()) {
+            statisticsWindow.show();
+        } else {
+            statisticsWindow.focus();
+        }
     }
 
     void show() {
