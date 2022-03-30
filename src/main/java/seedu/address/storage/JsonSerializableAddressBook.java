@@ -2,12 +2,14 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -69,14 +71,6 @@ class JsonSerializableAddressBook {
             addressBook.addApplicant(applicant);
         }
 
-        for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
-            Interview interview = jsonAdaptedInterview.toModelType();
-            if (addressBook.hasInterview(interview)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
-            }
-            addressBook.addInterview(interview);
-        }
-
         for (JsonAdaptedPosition jsonAdaptedPosition : positions) {
             Position position = jsonAdaptedPosition.toModelType();
             if (addressBook.hasPosition(position)) {
@@ -84,6 +78,26 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPosition(position);
         }
+
+        for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
+            Interview interview = jsonAdaptedInterview.toModelType();
+            Applicant interviewApplicant = interview.getApplicant();
+            Position interviewPosition = interview.getPosition();
+
+            if (addressBook.hasApplicant(interviewApplicant)) {
+                interview.setApplicant(addressBook.getApplicantUsingStorage(interviewApplicant));
+            }
+
+            if (addressBook.hasPosition(interviewPosition)) {
+                interview.setPosition(addressBook.getPositionUsingStorage(interviewPosition));
+            }
+
+            if (addressBook.hasInterview(interview)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
+            }
+            addressBook.addInterview(interview);
+        }
+
         return addressBook;
     }
 

@@ -277,4 +277,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return applicants.hashCode();
     }
+
+    public Applicant getApplicantUsingStorage(Applicant interviewApplicant) {
+        return applicants.getApplicant(interviewApplicant);
+    }
+
+    public Position getPositionUsingStorage(Position interviewPosition) {
+        return positions.getPosition(interviewPosition);
+    }
 }
