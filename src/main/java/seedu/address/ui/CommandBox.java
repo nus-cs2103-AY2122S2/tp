@@ -47,6 +47,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.UP && commandIndex >= 0) {
             commandTextField.setText(previousCommands.get(commandIndex));
+            commandTextField.positionCaret(commandTextField.getText().length());
             if (commandIndex > 0) {
                 commandIndex--;
             }
@@ -56,6 +57,7 @@ public class CommandBox extends UiPart<Region> {
             } else {
                 commandIndex++;
                 commandTextField.setText(previousCommands.get(commandIndex));
+                commandTextField.positionCaret(commandTextField.getText().length());
             }
         }
     }
