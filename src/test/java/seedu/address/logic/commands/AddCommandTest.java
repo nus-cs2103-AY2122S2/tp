@@ -179,6 +179,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasInterview(Candidate editedCandidate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasInterviewCandidate(Interview interview) {
             throw new AssertionError("This method should not be called.");
         }
@@ -205,6 +210,11 @@ public class AddCommandTest {
 
         @Override
         public void setInterview(Interview target, Interview editedInterview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Interview getInterview(Candidate target) {
             throw new AssertionError("This method should not be called.");
         }
 
