@@ -41,6 +41,11 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' archived address book file path.
+     */
+    Path getArchivedAddressBookFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
