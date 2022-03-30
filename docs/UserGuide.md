@@ -13,17 +13,17 @@ Tracey can get your student health status management tasks done faster than trad
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * <a href='#viewing-help-help'>Help</a> 
-    * <a href='#adding-a-contact-add'>Adding a contact</a>
-    * <a href='#editing-an-existing-contact-edit'>Editing an exisiting contact</a>
-    * <a href='#deleting-a-contact-delete'>Deleting a contact</a>
-    * <a href='#finding-a-contact-find'>Finding a contact</a>
-    * <a href='#filtering-contacts-filter'>Filtering contacts</a>
-    * <a href='#listing-the-records-list'>Listing the records</a>
+    * <a href='#viewing-help'>Help</a> 
+    * <a href='#adding-a-contact'>Adding a contact</a>
+    * <a href='#editing-an-existing-contact'>Editing an exisiting contact</a>
+    * <a href='#deleting-a-contact'>Deleting a contact</a>
+    * <a href='#finding-a-contact'>Finding a contact</a>
+    * <a href='#filtering-contacts'>Filtering contacts</a>
+    * <a href='#listing-the-records'>Listing the records</a>
     * <a href='#copying-emails'>Copying Emails</a>
-    * <a href='#summarising-the-records-summarise'>Summarising the records</a>
-    * <a href='#archiving-tracey-archive'>Archiving Tracey</a>
-    * <a href='#clearing-all-records-clear'>Clearing all records</a>
+    * <a href='#summarising-the-records'>Summarising the records</a>
+    * <a href='#archiving-tracey'>Archiving Tracey</a>
+    * <a href='#clearing-all-records'>Clearing all records</a>
     * <a href='#saving'>Saving</a>
 * <a href='#faq'>FAQ</a>
 * <a href='#command-summary'>Command Summary</a>
@@ -57,7 +57,7 @@ Tracey can get your student health status management tasks done faster than trad
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-### Finding a contact: `find`
+### Finding a contact
 Find a particular contact in Tracey and retrieve their specific details.
 
 Format: `find NAME`
@@ -79,7 +79,7 @@ Scenario:
 
 As seen in the *figure 1*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
-### Adding a contact: `add`
+### Adding a contact
 Add a student with relevant details into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
@@ -122,7 +122,7 @@ In addition, the list of Pre-defined constants are also provided for `Faculty` a
 💡`Tips`:
 * You are able to add optional tags with no restrictions using the `t/` prefix.
 
-### Deleting a contact: `delete`
+### Deleting a contact
 Delete a contact at a specific index
 
 Format: `delete INDEX`
@@ -143,7 +143,7 @@ Examples of usage:
 * You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
 
-### Editing an existing contact: `edit`
+### Editing an existing contact
 * Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list.
   The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -162,7 +162,7 @@ Examples of usage:
 ⚠️`Warning:`
 * Once the tags of the student has been edited, the old tags cannot be recovered.
 
-### Clearing all records: `clear`
+### Clearing all records
 Clear all the data inside Tracey.
 
 Format:`clear`
@@ -170,7 +170,7 @@ Format:`clear`
 ⚠️`Warning:` 
 * Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
 
-### Summarising the records: `summarise`
+### Summarising the records
 Summarises the student records inside Tracey, providing an overview of the data, specific to the number of students who are `covid-positive`.
 
 Format:`summarise`
@@ -182,7 +182,7 @@ Example of usage:
 
 From Figure 4, when the user inputs the `Summarise` command, the result are multiple pie charts of the proportion of the student population categorised by `Covid Status`. These pie charts are separated into the student `Blocks` and the wider hall population.
 
-### Listing the records: `list`
+### Listing the records
 List the full record, which displays all the student's data that are logged into Tracey.
 
 Format: `list`
@@ -191,7 +191,7 @@ This is a sample screenshot of what you can expect from the `help` command.
 
 ![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
 
-### Viewing help: `help`
+### Viewing help
 Help users to search for all the commands that Tracey offers by opening a pop-up window.
 It includes a summary to briefly explain all the commands.
 
@@ -203,7 +203,7 @@ This is a sample screenshot of what you can expect from the `list` command.
 
 Format: `help`
 
-### Filtering contacts: `filter`
+### Filtering contacts
 Filter student based on health statuses and/or faculties.
 
 Format:`filter cs/HEALTH_STATUS f/FACULTY`
@@ -220,7 +220,7 @@ Examples of usage:
 * `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`. 
 * Please use the `find` command instead which will allow you to search via keywords.
 
-### Archiving Tracey: `archive`
+### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
   * `[ROOT]`: Root directory of Tracey.
   * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
