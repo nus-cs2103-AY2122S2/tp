@@ -13,9 +13,10 @@ Tracey can get your student health status management tasks done faster than trad
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * <a href='#viewing-help'>Help</a> 
+    * <a href='#viewing-help'>Help</a>
+    * <a href='#importing-excel-sheet'>Importing Excel data</a>
     * <a href='#adding-a-contact'>Adding a contact</a>
-    * <a href='#editing-an-existing-contact'>Editing an exisiting contact</a>
+    * <a href='#editing-an-existing-contact'>Editing an existing contact</a>
     * <a href='#deleting-a-contact'>Deleting a contact</a>
     * <a href='#finding-a-contact'>Finding a contact</a>
     * <a href='#filtering-contacts'>Filtering contacts</a>
@@ -24,6 +25,7 @@ Tracey can get your student health status management tasks done faster than trad
     * <a href='#summarising-the-records'>Summarising the records</a>
     * <a href='#archiving-tracey'>Archiving Tracey</a>
     * <a href='#clearing-all-records'>Clearing all records</a>
+    * <a href='#exiting-tracey'>Exiting Tracey</a>
     * <a href='#saving'>Saving</a>
 * <a href='#faq'>FAQ</a>
 * <a href='#command-summary'>Command Summary</a>
@@ -57,34 +59,27 @@ Tracey can get your student health status management tasks done faster than trad
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-### Finding a contact
-Find a particular contact in Tracey and retrieve their specific details.
+### Viewing help
+Help users to search for all the commands that Tracey offers by opening a pop-up window.
+It includes a summary to briefly explain all the commands.
 
-Format: `find NAME`
-* Returns the student(s) with their student specific **details**.
-* The **details** provided are the student's `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
-* A screenshot (Figure 1) is provided below to demonstrate what the find function returns to the user.
-* The search is case-insensitive. e.g `johnDoe` will match `Johndoe`
-* The search does not require full name. e.g. `jo` will match `Joe` and `John`
+The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide.
 
-Examples of usages:
+This is a sample screenshot of what you can expect from the `list` command.
 
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh` and`David Li`
-* `find J` returns `john` and`jay`
+![help](images/HelpScreenshot.png) *Figure 6: Screenshot of help command.*
 
-Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 1: Screenshot of result of the find command*
+Format: `help`
 
-
-As seen in the *figure 1*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+### Importing Excel sheet
+{to be added here}
 
 ### Adding a contact
 Add a student with relevant details into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
 * Add a student with the specific tags, the tags are optional and you can add as many tags as you like
-  * Duplicate tags will be displayed as a single tag 
+    * Duplicate tags will be displayed as a single tag
 * The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey
 * Phone Number, email and matriculation number must be **unique** to each student
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
@@ -117,35 +112,10 @@ Examples of usage:
 *Figure 3: Table showing list of possible tags and the Pre-defined constants*
 
 As described in Figure 3, these are the possible tags that can be used with Tracey. E.g `n/`, `cs/` etc.
-In addition, the list of Pre-defined constants are also provided for `Faculty` and `Covid Status`. 
+In addition, the list of Pre-defined constants are also provided for `Faculty` and `Covid Status`.
 
 💡`Tips`:
 * You are able to add optional tags with no restrictions using the `t/` prefix.
-
-### Deleting a contact
-Delete a contact at a specific index.
-
-Format: `delete INDEX`
-* Deletes an existing student in Tracey. The student is referred by an index, displayed alongside him in the student list.
-* To delete a student, you can use the command `delete` on the student's `INDEX`.
-  The index **must be a positive integer** 1, 2, 3, …
-* Deletes one student at a time.
-* You can only delete at an index where a student is assigned to it.
-
-How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
-
-Examples of usage:
-* `delete 2` removes the 2nd student on the list
-* `delete 10` removes the 10th student on the list
-
-⚠️`Warning:`
-* The deleted student cannot be recovered.
-
-💡`Tips:`
-* The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
-* You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
-* This can save you time scrolling down an entire list to get his/her `INDEX`!
 
 ### Editing an existing contact
 Edit a contact at a specific index.
@@ -172,46 +142,51 @@ Examples of usage:
 ⚠️`Warning:`
 * Once the tags of the student has been edited, the old tags cannot be recovered.
 
-### Clearing all records
-Clear all the data inside Tracey.
+### Deleting a contact
+Delete a contact at a specific index.
 
-Format:`clear`
+Format: `delete INDEX`
+* Deletes an existing student in Tracey. The student is referred by an index, displayed alongside him in the student list.
+* To delete a student, you can use the command `delete` on the student's `INDEX`.
+  The index **must be a positive integer** 1, 2, 3, …
+* Deletes one student at a time.
+* You can only delete at an index where a student is assigned to it.
 
-⚠️`Warning:` 
-* Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+How to identify `INDEX`:
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
 
-### Summarising the records
-Summarises the student records inside Tracey, providing an overview of the data, specific to the number of students who are `covid-positive`.
+Examples of usage:
+* `delete 2` removes the 2nd student on the list
+* `delete 10` removes the 10th student on the list
 
-Format:`summarise`
+⚠️`Warning:`
+* The deleted student cannot be recovered.
 
-Example of usage:
-* `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
+💡`Tips:`
+* The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
+* You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
+* This can save you time scrolling down an entire list to get his/her `INDEX`!
 
-![SummariseExample](images/SummariseExample.png) *Figure 4: Example response of Tracey in response to the `summarise` command*
+### Finding a contact
+Find a particular contact in Tracey and retrieve their specific details.
 
-From Figure 4, when the user inputs the `Summarise` command, the result are multiple pie charts of the proportion of the student population categorised by `Covid Status`. These pie charts are separated into the student `Blocks` and the wider hall population.
+Format: `find NAME`
+* Returns the student(s) with their student specific **details**.
+* The **details** provided are the student's `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+* A screenshot (Figure 1) is provided below to demonstrate what the find function returns to the user.
+* The search is case-insensitive. e.g `johnDoe` will match `Johndoe`
+* The search does not require full name. e.g. `jo` will match `Joe` and `John`
 
-### Listing the records
-List the full record, which displays all the student's data that are logged into Tracey.
+Examples of usages:
 
-Format: `list`
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh` and`David Li`
+* `find J` returns `john` and`jay`
 
-This is a sample screenshot of what you can expect from the `help` command.
+Scenario:
+![find](images/FindScreenshotForUG.png) *Figure 1: Screenshot of result of the find command*
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
-
-### Viewing help
-Help users to search for all the commands that Tracey offers by opening a pop-up window.
-It includes a summary to briefly explain all the commands.
-
-The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide.
-
-This is a sample screenshot of what you can expect from the `list` command.
-
-![help](images/HelpScreenshot.png) *Figure 6: Screenshot of help command.*
-
-Format: `help`
+As seen in the *figure 1*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Filtering contacts
 Filter student based on health statuses and/or faculties.
@@ -225,16 +200,43 @@ Examples of usage:
 * `filter cs/positive` returns all students that are tagged as covid-positive.
 * `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing).
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing).
-                 
+
 📓`Note:`
-* `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`. 
+* `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`.
 * Please use the `find` command instead which will allow you to search via keywords.
+
+### Listing the records
+List the full record, which displays all the student's data that are logged into Tracey.
+
+Format: `list`
+
+This is a sample screenshot of what you can expect from the `help` command.
+
+![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
+
+### Copying emails
+The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
+`Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
+![Email](images/CopyEmailScreenshot.png) *Figure 7: Screenshot of Copy Email function.*
+
+### Summarising the records
+Summarises the student records inside Tracey.
+
+Format:`summarise`
+* You can get an overview of the students in Tracey if you want to get an idea of the location where covid is more prevalent.
+
+Example of usage:
+* `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
+
+![SummariseExample](images/SummariseExample.png) *Figure 4: Example response of Tracey in response to the `summarise` command*
+
+From Figure 4, when the user inputs the `Summarise` command, the result are multiple pie charts of the proportion of the student population categorised by `Covid Status`. These pie charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
-  * `[ROOT]`: Root directory of Tracey.
-  * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
-  * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss.
+* `[ROOT]`: Root directory of Tracey.
+* `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
+* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss.
 
 Format: `archive`
 
@@ -248,14 +250,26 @@ Example:
 * You can rename the archived file in the file path manually for easier reference.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
+### Clearing all records
+Clear all the data inside Tracey.
+
+Format:`clear`
+
+⚠️`Warning:` 
+* Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+
+### Exiting Tracey
+Close the application.
+
+Format: `exit`
+* The application can shut down when you are done using it.
+
+Example of usage:
+* `exit` stops Tracey from running.
+
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to Tracey.
-
-### Copying emails
-The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
-`Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
-![Email](images/CopyEmailScreenshot.png) *Figure 7: Screenshot of Copy Email function.*
 
 ---------------------------------------------------------------------------------------------------------------
 
