@@ -44,14 +44,12 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Add, edit, delete students](#adding-a-student--add)
     - [List students](#listing-all-students--list)
     - [Find students](#locating-students-by-name--find)
-<<<<<<< HEAD
-    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-coming-soon)
-=======
     - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status)
->>>>>>> 02c3157a84d97d11ff14df5bfb6b9ad49a614977
+
 - [Manage labs](#lab-related-features)
     - [Add labs](#adding-a-lab--labadd)
-    - [Change status of labs](#setting-the-status-of-individual-labs--labstat-coming-soon)
+    - [Change status of labs](#setting-the-status-of-individual-labs--labstat)
+    - [Remove labs](#removing-a-lab-labrm)
 
 ### System-related features
 
@@ -70,13 +68,24 @@ TAddress Book data are saved in the hard disk automatically after any command th
 
 #### Editing the data file
 TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit that data file.
+We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`s.
+
+Please note the following defensive behavior related to the data JSON file:
+1) All `Student`s will have their `LabList` aligned with the `MasterLabList` when the data file is loaded in. This means that any `Lab`s that a `Student` is missing will be added in with the default `LabStatus` of `UNSUBMITTED`. 
+Any `Lab`s that the `Student` has that is not in the `MasterLabList` will be ignored.
+2) If a `Student` has a lab that has a missing or invalid `LabStatus`, it is loaded as an `UNSUBMITTED` lab or `GRADED` if `labMark` is present and valid. 
+3) If a `Student` has a lab with a missing or invalid `labMark` but has a `LabStatus` of `GRADED`,  it is loaded as an `UNSUBMITTED` lab with `Unknown` mark.
+
+If the TAddressBook starts up with blank data, but the user expects there to be data, it means that there are  formatting issues in the data JSON due to editing by the user.
+In which case, if the user wants to fix the data JSON, the user should exit the app without using any commands that can modify data.
+
 
 ### Student-related features
 
 #### Adding a student : `add`
 Adds a student to the address book with the necessary attributes.
 
-Format: `add n/NAME e/EMAIL g/GITHUB t/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...`
+Format: `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...`
 
 #### Listing all students : `list`
 Lists all the students
@@ -86,7 +95,7 @@ Format: `list`
 #### Editing a student : `edit`
 Edits an existing student in the TAddress book. At least one of the optional fields must be provided.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`
 
 #### Locating students by name : `find`
 Finds students whose names contain any of the given keywords. At least one keyword must be specified.
@@ -121,8 +130,8 @@ Format: `view INDEX`
 ### Lab-related features
 
 #### Adding a Lab : `labadd`
-Adds a Lab to every student. Shows up as a tag on each student’s entry. By default, the tag will be colored red for “unsubmitted”.
-The tags can subsequently be colored different colors to represent different statuses e.g. unsubmitted = red, submitted = yellow, graded = green.
+Adds a Lab to every student. Shows up as a `LabLabel` on each student’s entry. By default, the `LabLabel` will be colored red for “UNSUBMITTED”.
+The `LabLabel` can subsequently be colored differently to represent different statuses e.g. “UNSUBMITTED” = red, "SUBMITTED" = yellow, "GRADED" = green.
 LAB_NUMBER must be a positive integer.
 
 Format: `labadd l/LAB_NUMBER`
@@ -147,16 +156,17 @@ Format: `labrm l/LAB_NUMBER`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME e/EMAIL g/GITHUB t/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`
-**Filter** | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add lab** | `labadd l/LAB_NUMBER`
-**Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`
-**List** | `list`
-**Help** | `help`
-**Exit** | `exit`
+| Action              | Format, Examples                                                                                                                                        |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` |
+| **Clear**           | `clear`                                                                                                                                                 |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| **Edit**            | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`                       |
+| **Filter**          | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`                                                                                           |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                              |
+| **Add lab**         | `labadd l/LAB_NUMBER`                                                                                                                                   |
+| **Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`                                                                                                               |
+| **Remove lab**      | `labrm l/LAB_NUMBER`                                                                                                                                    |
+| **List**            | `list`                                                                                                                                                  |
+| **Help**            | `help`                                                                                                                                                  |
+| **Exit**            | `exit`                                                                                                                                                  |

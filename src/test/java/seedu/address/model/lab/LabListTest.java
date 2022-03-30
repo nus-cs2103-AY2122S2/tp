@@ -3,6 +3,7 @@ package seedu.address.model.lab;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -189,7 +190,7 @@ class LabListTest {
         List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));
         labs1.setLabs(labList);
         labs2.setLabs(labList);
-        assertTrue(labs1.equals(labs2));
+        assertEquals(labs1, labs2);
     }
 
     @Test
@@ -199,7 +200,7 @@ class LabListTest {
         List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));
         labs1.setLabs(labList);
         labs2.add(new Lab("1"));
-        assertFalse(labs1.equals(labs2));
+        assertNotEquals(labs1, labs2);
     }
 
     @Test
@@ -211,5 +212,32 @@ class LabListTest {
     public void isEmpty_nonEmptyList_success() {
         labs.add(new Lab("1"));
         assertFalse(labs.isEmpty());
+    }
+
+    @Test
+    public void alignLabs_nullLabList_throwNullPointerException() {
+        assertThrows(NullPointerException.class, () -> labs.alignLabs(null));
+    }
+
+    @Test
+    public void alignLabs_differentLabList_success() {
+        labs.add(new Lab("1").of(new LabMark("10")));
+        labs.add(new Lab("2").of("SUBMITTED"));
+        labs.add(new Lab("3"));
+        labs.add(new Lab("5"));
+        labs.add(new Lab("19"));
+
+        LabList toAlignLabList = new LabList();
+        toAlignLabList.add(new Lab("1").of("SUBMITTED"));
+        toAlignLabList.add(new Lab("2"));
+        toAlignLabList.add(new Lab("4"));
+
+        LabList expectedLabList = new LabList();
+        expectedLabList.add(new Lab("1").of(new LabMark("10")));
+        expectedLabList.add(new Lab("2").of("SUBMITTED"));
+        expectedLabList.add(new Lab("4"));
+
+        labs.alignLabs(toAlignLabList);
+        assertEquals(expectedLabList, labs);
     }
 }
