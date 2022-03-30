@@ -43,7 +43,7 @@
                        <Insets top="20.0" bottom="10.0"/>
                     </VBox.margin>
                     <Text fx:id="error" wrappingWidth="445" fill="#F84748" />
-                    <Button onMouseClicked="#handleDeleteProduct" alignment="CENTER_RIGHT"
+                    <Button onMouseClicked="#handleDeleteProduct"
                             mnemonicParsing="false" styleClass="delete-button" text="Delete">
                        <graphic>
                           <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true"

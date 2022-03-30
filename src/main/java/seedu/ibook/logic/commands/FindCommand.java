@@ -1,8 +1,10 @@
 package seedu.ibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_END_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_START_PRICE;
 
 import java.util.List;
 
@@ -11,7 +13,8 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.product.filters.AttributeFilter;
 
 /**
- * Finds and lists all persons in Ibook whose name contains any of the argument keywords.
+ * Represents a command that when executed finds and lists all products in the iBook
+ * whose details match the searching criteria.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -22,7 +25,8 @@ public class FindCommand extends Command {
             + ": Lists all products that matches with the key value pair "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: PREFIX: VALUE [MORE_PREFIX: VALUE]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + ": bottle " + PREFIX_PRICE + ": 3.00";
+            + "Example 1: " + COMMAND_WORD + " " + PREFIX_NAME + " bottle " + PREFIX_PRICE + " 3.00\n"
+            + "Example 2: " + COMMAND_WORD + " " + PREFIX_START_PRICE + " 3.00 " + PREFIX_END_PRICE + " 4.00";
 
     private final List<AttributeFilter> filterList;
 

@@ -7,11 +7,11 @@
 }
 
 @font-face {
-    src: url('../font/NotoSans-Medium.ttf');
+    src: url('../font/NotoSans-SemiBold.ttf');
 }
 
 @font-face {
-    src: url('../font/NotoSans-SemiBold.ttf');
+    src: url('../font/MonoLisa-Regular.otf');
 }
 
 .root {

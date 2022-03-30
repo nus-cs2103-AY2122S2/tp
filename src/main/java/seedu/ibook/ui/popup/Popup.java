@@ -23,7 +23,7 @@ public abstract class Popup extends UiComponent<Stage> {
      * @param filePath FXML filepath.
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    Popup(String filePath, MainWindow mainWindow) {
+    public Popup(String filePath, MainWindow mainWindow) {
         super(filePath, mainWindow, new Stage());
     }
 
@@ -82,7 +82,7 @@ public abstract class Popup extends UiComponent<Stage> {
      *
      * @param commandText The commandText.
      */
-    void execute(String commandText) {
+    public void execute(String commandText) {
         getMainWindow().executeCommand(commandText);
     }
 

@@ -79,7 +79,7 @@ public class Product implements Distinguishable<Product> {
     }
 
 
-    public Integer getTotalQuantity() {
+    public Quantity getTotalQuantity() {
         return items.getTotalQuantity();
     }
 

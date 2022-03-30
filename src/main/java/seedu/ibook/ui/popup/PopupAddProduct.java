@@ -10,9 +10,9 @@ import seedu.ibook.ui.MainWindow;
 /**
  * Popup responsible to add product.
  */
-public class PopupAdd extends Popup {
+public class PopupAddProduct extends Popup {
 
-    private static final String FXML = "popup/PopupAdd.fxml";
+    private static final String FXML = "popup/PopupAddProduct.fxml";
 
     @FXML
     private TextField name;
@@ -24,16 +24,28 @@ public class PopupAdd extends Popup {
     private TextArea description;
 
     /**
-     * Initializes a new {@code popupAdd} window.
+     * Initializes a new {@code PopupAdd} window.
      *
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    public PopupAdd(MainWindow mainWindow) {
+    public PopupAddProduct(MainWindow mainWindow) {
         super(FXML, mainWindow);
     }
 
+    /**
+     * Shows the popup window.
+     */
+    @Override
+    public void show() {
+        super.show();
+        name.setText("");
+        category.setText("");
+        price.setText("");
+        description.setText("");
+    }
+
     @FXML
-    private void handleCreateProduct() {
+    private void handleAddProduct() {
         String commandText = AddCommand.COMMAND_WORD
                 + " " + CliSyntax.PREFIX_NAME.getPrefix()
                 + name.getText()
