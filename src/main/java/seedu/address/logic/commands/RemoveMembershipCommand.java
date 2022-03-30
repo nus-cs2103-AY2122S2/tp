@@ -12,7 +12,7 @@ import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Removes a membership from a person in the address book.
  */
 public class RemoveMembershipCommand extends Command {
 

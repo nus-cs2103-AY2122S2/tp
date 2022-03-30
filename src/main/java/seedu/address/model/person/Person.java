@@ -244,7 +244,7 @@ public class Person implements Serializable {
      * Adds a membership to the person
      *
      * @param membership Membership to add
-     * @return A new person
+     * @return A copy of the person with added membership
      */
     public Person addMembership(Membership membership) {
         HashMap<Prefix, Field> newFields = new HashMap<>(this.fields);

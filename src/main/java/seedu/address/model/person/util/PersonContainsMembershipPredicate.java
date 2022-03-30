@@ -12,7 +12,7 @@ public class PersonContainsMembershipPredicate implements Predicate<Person> {
     private final String tier;
 
     public PersonContainsMembershipPredicate(String tier) {
-        this.tier = tier;
+        this.tier = tier.toUpperCase();
     }
 
     @Override
