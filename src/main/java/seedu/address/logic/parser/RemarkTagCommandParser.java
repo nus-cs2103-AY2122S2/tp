@@ -36,7 +36,6 @@ public class RemarkTagCommandParser implements Parser<RemarkTagCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)
                 || !argMultimap.getPreamble().isEmpty()) {
-            System.out.println("here");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemarkTagCommand.MESSAGE_USAGE));
         }

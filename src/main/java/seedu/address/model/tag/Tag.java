@@ -51,8 +51,8 @@ public class Tag {
                 && otherTag.getTagName().equals(getTagName());
     }
 
-    public String getRemark() {
-        return remark.toString();
+    public Remark getRemark() {
+        return remark;
     }
 
     public void changeRemark(Remark remark) {

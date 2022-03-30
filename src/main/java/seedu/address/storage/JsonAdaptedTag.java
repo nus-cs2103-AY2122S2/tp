@@ -28,7 +28,7 @@ class JsonAdaptedTag {
      */
     public JsonAdaptedTag(Tag source) {
         tagName = source.tagName;
-        tagRemark = source.getRemark();
+        tagRemark = source.getRemark().toString();
     }
 
     /**
