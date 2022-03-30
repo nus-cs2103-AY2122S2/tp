@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<fx:root resizable="false" title="Line Chart" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <LineChart fx:id="graph" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" prefWidth="725" maxHeight="Infinity" maxWidth="Infinity">
+                <xAxis>
+                    <CategoryAxis fx:id="xAxis" side="BOTTOM" tickLabelFill="white" maxWidth="Infinity" maxHeight="Infinity" prefWidth="Infinity"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="white" maxHeight="Infinity" maxWidth="Infinity" prefHeight="Infinity"/>
+                </yAxis>
+            </LineChart>
+        </Scene>
+    </scene>
+</fx:root>

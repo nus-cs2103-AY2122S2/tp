@@ -32,9 +32,9 @@ import seedu.trackbeau.model.tag.Tag;
  * Parses input arguments and creates a new AddCustomerCommand object
  */
 public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
-    protected static final String EMPTY_DATE = "01-01-1000"; //impossible date
-    protected static final String EMPTY_SKIN_TYPE = "Skin type data not available";
-    protected static final String EMPTY_HAIR_TYPE = "Hair type data not available";
+    public static final String EMPTY_HAIR_TYPE = "No data";
+    public static final String EMPTY_SKIN_TYPE = "No data";
+    public static final String EMPTY_DATE = "01-01-1000"; //impossible date
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCustomerCommand
