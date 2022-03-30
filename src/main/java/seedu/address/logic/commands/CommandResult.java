@@ -28,6 +28,10 @@ public class CommandResult {
 
     private final boolean switchTheme;
 
+    private final boolean showGrabResult;
+
+    private final String grabResult;
+
     private final Person person;
 
     private final Theme theme;
@@ -36,7 +40,8 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showProfile,
-                         boolean showTagList, boolean removeProfile, boolean switchTheme, Person person, Theme theme) {
+                         boolean showTagList, boolean removeProfile, boolean switchTheme, boolean showGrabResult,
+                         Person person, Theme theme, String grabResult) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -45,7 +50,9 @@ public class CommandResult {
         this.showTagList = showTagList;
         this.switchTheme = switchTheme;
         this.removeProfile = removeProfile;
+        this.showGrabResult = showGrabResult;
         this.theme = theme;
+        this.grabResult = grabResult;
     }
 
     /**
@@ -54,7 +61,8 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false,
-                false, false, false, null, null);
+                false, false, false,
+                false, null, null, null);
     }
 
     /**
@@ -63,19 +71,22 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this(feedbackToUser, showHelp, exit,
-                false, false, false, false, null, null);
+                false, false, false,
+                false, false, null, null, null);
 
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showProfile},
-     * {@code showTagList}, {@code removeProfile}, {@code person}, and other fields set to their default value.
-     * Only applicable to AddCommand, AttachTagCommand, DetachTagCommand, DeleteCommand, EditCommand and ProfileCommand.
+     * {@code showTagList}, {@code removeProfile}, {@code person}, and other fields
+     * set to their default value. Only applicable to AddCommand, AttachTagCommand, DetachTagCommand,
+     * DeleteCommand, EditCommand, ProfileCommand and RemarkCommand.
      */
     public CommandResult(String feedbackToUser,
                          boolean showProfile, boolean showTagList, boolean removeProfile, Person person) {
         this(feedbackToUser, false, false,
-                showProfile, showTagList, removeProfile, false, person, null);
+                showProfile, showTagList, removeProfile,
+                false, false, person, null, null);
     }
 
     /**
@@ -84,7 +95,18 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser, boolean switchTheme, Theme theme) {
         this(feedbackToUser, false, false,
-                false, false, false, switchTheme, null, theme);
+                false, false, false, switchTheme,
+                false, null, theme, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showGrabResult},
+     * {@code grabResult}, and other fields set to their default value.Only applicable to SwitchThemeCommand.
+     */
+    public CommandResult(String feedbackToUser, boolean showGrabResult, String grabResult) {
+        this(feedbackToUser, false, false,
+                false, false, false, false,
+                showGrabResult, null, null, grabResult);
     }
 
     public String getFeedbackToUser() {
@@ -97,6 +119,10 @@ public class CommandResult {
 
     public Theme getTheme() {
         return theme;
+    }
+
+    public String getGrabResult() {
+        return grabResult;
     }
 
     public boolean isShowHelp() {
@@ -121,6 +147,10 @@ public class CommandResult {
 
     public boolean isSwitchTheme() {
         return switchTheme;
+    }
+
+    public boolean isShowGrabResult() {
+        return showGrabResult;
     }
 
     @Override
